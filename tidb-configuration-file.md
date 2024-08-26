@@ -41,8 +41,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Type: Integer
 + Default value: `1000`
 + Minimum value: `1`
-+ Maximum Value (64-bit platforms): `18446744073709551615`
-+ Maximum Value (32-bit platforms): `4294967295`
++ Maximum value: `1048576`
 
 ### `temp-dir` <span class="version-mark">New in v6.3.0</span>
 
@@ -92,7 +91,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 + When [`enable-global-kill`](#enable-global-kill-new-in-v610) is `false`, `compatible-kill-query` controls whether you need to append the `TIDB` keyword when killing a query.
     - When `compatible-kill-query` is `false`, the behavior of `KILL xxx` in TiDB is different from that in MySQL. To kill a query in TiDB, you need to append the `TIDB` keyword, such as `KILL TIDB xxx`.
     - When `compatible-kill-query` is `true`, to kill a query in TiDB, there is no need to append the `TIDB` keyword. It is **STRONGLY NOT RECOMMENDED** to set `compatible-kill-query` to `true` in your configuration file UNLESS you are certain that clients will be always connected to the same TiDB instance. This is because pressing <kbd>Control</kbd>+<kbd>C</kbd> in the default MySQL client opens a new connection in which `KILL` is executed. If there is a proxy between the client and the TiDB cluster, the new connection might be routed to a different TiDB instance, which possibly kills a different session by mistake.
-+ When [`enable-global-kill`](#enable-global-kill-new-in-v610) is `true`, `KILL xxx` and `KILL TIDB xxx` have the same effect, but using <kbd>Control</kbd>+<kbd>C</kbd> to kill a query is not supported.
++ When [`enable-global-kill`](#enable-global-kill-new-in-v610) is `true`, `KILL xxx` and `KILL TIDB xxx` have the same effect.
 + For more information about the `KILL` statement, see [KILL [TIDB]](/sql-statements/sql-statement-kill.md).
 
 ### `check-mb4-value-in-utf8`
@@ -310,7 +309,7 @@ Configuration items related to log.
 - Outputs the threshold value of consumed time in the slow log.
 - Default value: `300`
 - Unit: Milliseconds
-- If the value in a query is larger than the default value, it is a slow query and is output to the slow log.
+- When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this parameter.
 - Since v6.1.0, the threshold value of consumed time in the slow log is specified by the TiDB configuration item [`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) or the system variable [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold). `slow-threshold` still takes effect. But if `slow-threshold` and `instance.tidb_slow_log_threshold` are set at the same time, the latter takes effect.
 
 ### `record-plan-in-slow-log`
@@ -506,7 +505,7 @@ Configuration items related to performance.
 - Default value: `5000`
 - If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retryable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
-### `txn-entry-size-limit` <span class="version-mark">New in v5.0</span>
+### `txn-entry-size-limit` <span class="version-mark">New in v4.0.10 and v5.0.0</span>
 
 - The size limit of a single row of data in TiDB.
 - Default value: `6291456` (in bytes)
@@ -592,8 +591,8 @@ Configuration items related to performance.
 ### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
 
 + The maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently.
-+ Default value: `5`
-+ Currently, the valid value range is `[1, 128]`.
++ Default value: `0`. Before v8.2.0, the default value is `5`.
++ Currently, the valid value range is `[0, 128]`. The value `0` means the automatic mode, which automatically adjusts concurrency based on the configuration of the server. Before v8.2.0, the minimum value is `1`.
 
 ### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
 
@@ -713,15 +712,29 @@ Configuration items related to opentracing.reporter.
 
 ### `grpc-compression-type`
 
-- Specifies the compression type used for data transfer between TiDB and TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
+- Specifies the compression type used for data transfer from TiDB nodes to TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
 - Default value: `"none"`
 - Value options: `"none"`, `"gzip"`
+
+> **Note:**
+>
+> The compression algorithm for response messages returned from TiKV nodes to TiDB nodes is controlled by the TiKV configuration item [`grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type).
 
 ### `commit-timeout`
 
 - The maximum timeout when executing a transaction commit.
 - Default value: `41s`
 - It is required to set this value larger than twice of the Raft election timeout.
+
+### `batch-policy` <span class="version-mark">New in v8.3.0</span>
+
+- Controls the batching strategy for requests from TiDB to TiKV. When sending requests to TiKV, TiDB always encapsulates the requests in the current waiting queue into a `BatchCommandsRequest` and sends it to TiKV as a packet. This is the basic batching strategy. When the TiKV load throughput is high, TiDB decides whether to wait for an additional period after the basic batching based on the value of `batch-policy`. This additional batching allows more requests to be encapsulated in a single `BatchCommandsRequest`.
+- Default value: `"standard"`
+- Value options:
+    - `"basic"`: the behavior is consistent with versions before v8.3.0, where TiDB performs additional batching only if [`tikv-client.max-batch-wait-time`](#max-batch-wait-time) is greater than 0 and the load of TiKV exceeds the value of [`tikv-client.overload-threshold`](#overload-threshold).
+    - `"standard"`: TiDB dynamically batches requests based on the arrival time intervals of recent requests, suitable for high-throughput scenarios.
+    - `"positive"`: TiDB always performs additional batching, suitable for high-throughput testing scenarios to achieve optimal performance. However, in low-load scenarios, this strategy might introduce unnecessary batching wait time, potentially reducing performance.
+    - `"custom{...}"`: allows customization of batching strategy parameters. This option is intended for the internal testing of TiDB and is **NOT recommended** for general use.
 
 ### `max-batch-size`
 
@@ -759,7 +772,7 @@ Configuration items related to opentracing.reporter.
 
 > **Warning:**
 >
-> This configuration parameter might be deprecated in future versions. **DO NOT** change the value of it.
+> Starting from v8.2.0, this configuration item is deprecated. The new version of the Region replica selector is used by default when sending RPC requests to TiKV.
 
 + Whether to use the new version of the Region replica selector when sending RPC requests to TiKV.
 + Default value: `true`
@@ -901,10 +914,11 @@ Configuration items related to read isolation.
 
 ### `tidb_slow_log_threshold`
 
-- This configuration is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+- Outputs the threshold value of the time consumed by the slow log.
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
+- When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this parameter.
 - Before v6.1.0, this configuration is set by `slow-threshold`.
 
 ### `in-mem-slow-query-topn-num` <span class="version-mark">New in v7.3.0</span>

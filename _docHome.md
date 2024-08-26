@@ -110,37 +110,37 @@ Experience the capabilities of TiDB WITHOUT registration.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
+<DocHomeCard href="https://www.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 
 Learn TiDB and TiDB Cloud through well-designed online courses and instructor-led training.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://discord.gg/DQZ2dy3cuc?utm_source=doc" icon="doc9" label="Community">
+<DocHomeCard href="https://ask.pingcap.com?utm_source=doc" icon="doc9" label="Community">
 
-Join us on Discord or become a contributor.
+Connect with other TiDB users on TiDB Community for sharing and learning.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/blog/" icon="doc10" label="Blog Posts">
+<DocHomeCard href="https://www.pingcap.com/blog/" icon="doc10" label="Blog Posts">
 
 Read great articles about TiDB and TiDB Cloud.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/videos/" icon="doc11" label="Videos">
+<DocHomeCard href="https://www.pingcap.com/videos/" icon="doc11" label="Videos">
 
 Watch a compilation of short videos describing TiDB and various use cases.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/event/" icon="events" label="Events">
+<DocHomeCard href="https://www.pingcap.com/event/" icon="events" label="Events">
 
 Learn about events hosted by PingCAP and the community.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
+<DocHomeCard href="https://www.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
 
 Download eBooks and papers.
 

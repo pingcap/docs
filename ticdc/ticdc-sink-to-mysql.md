@@ -53,7 +53,7 @@ The following are descriptions of sink URI parameters and parameter values that 
 
 | Parameter/Parameter value    | Description                                             |
 | :------------ | :------------------------------------------------ |
-| `root`        | The username of the downstream database.                              |
+| `root`        | The username of the downstream database. To replicate data to TiDB or other MySQL-compatible databases, make sure that the downstream database user has [certain permissions](#permissions-required-for-the-downstream-database-user).                             |
 | `123456`       | The password of the downstream database (can be encoded using Base64).                                      |
 | `127.0.0.1`    | The IP address of the downstream database.                               |
 | `3306`         | The port for the downstream data.                                 |
@@ -81,6 +81,24 @@ MTIzNDU2
 > **Note:**
 >
 > When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
+
+## Permissions required for the downstream database user
+
+To replicate data to TiDB or other MySQL-compatible databases, the downstream database user needs the following permissions:
+
+- `Select`
+- `Index`
+- `Insert`
+- `Update`
+- `Delete`
+- `Create`
+- `Drop`
+- `Alter`
+- `Create View`
+
+To replicate [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) to the downstream TiDB, the downstream database user also needs the `Super` permission.
+
+If the downstream TiDB cluster has [read-only mode](/system-variables.md#tidb_restricted_read_only-new-in-v520) enabled, the downstream database user also needs the `RESTRICTED_REPLICA_WRITER_ADMIN` permission.
 
 ## Eventually consistent replication in disaster scenarios
 

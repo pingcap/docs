@@ -14,7 +14,7 @@ TiDB Ansible version: 3.0.7
 
 ## TiDB
 
-- Fix the issue that the lock TTL’s value is too large because the TiDB server’s local time is behind PD’s timestamp [#13868](https://github.com/pingcap/tidb/pull/13868)
+- Fix the issue that the lock TTL's value is too large because the TiDB server's local time is behind PD's timestamp [#13868](https://github.com/pingcap/tidb/pull/13868)
 - Fix the issue that the timezone is incorrect after parsing the date from strings using `gotime.Local` [#13793](https://github.com/pingcap/tidb/pull/13793)
 - Fix the issue that the result might be incorrect because the `binSearch` function does not return an error in the implementation of `builtinIntervalRealSig` [#13767](https://github.com/pingcap/tidb/pull/13767)
 - Fix the issue that data is incorrect because the precision is lost when an integer is converted to an unsigned floating point or decimal type [#13755](https://github.com/pingcap/tidb/pull/13755)

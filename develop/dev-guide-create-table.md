@@ -409,3 +409,17 @@ This section provides guidelines you need to follow when creating a table.
 ## One more step
 
 Note that all the tables that have been created in this document do not contain secondary indexes. For a guide to add secondary indexes, refer to [Creating Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

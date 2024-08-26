@@ -31,6 +31,19 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 - `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
 
+## Supported Kafka versions
+
+The following table shows the minimum supported Kafka versions for each TiCDC version:
+
+| TiCDC version            | Minimum supported Kafka version |
+|:-------------------------|:--------------------------------|
+| TiCDC >= v8.1.0          | 2.1.0                           |
+| v7.6.0 <= TiCDC < v8.1.0 | 2.4.0                           |
+| v7.5.2 <= TiCDC < v8.0.0 | 2.1.0                           |
+| v7.5.0 <= TiCDC < v7.5.2 | 2.4.0                           |
+| v6.5.0 <= TiCDC < v7.5.0 | 2.1.0                           |
+| v6.1.0 <= TiCDC < v6.5.0 | 2.0.0                           |
+
 ## Configure sink URI for Kafka
 
 Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
@@ -60,14 +73,14 @@ The following are descriptions of sink URI parameters and values that can be con
 | `127.0.0.1`          | The IP address of the downstream Kafka services.                                 |
 | `9092`               | The port for the downstream Kafka.                                          |
 | `topic-name` | Variable. The name of the Kafka topic. |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `3.2.0`. This value needs to be consistent with the actual version of the downstream Kafka).                      |
+| `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default). This value must be greater than or equal to the value of [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) in Kafka. |
 | `required-acks` | A parameter used in the `Produce` request, which notifies the broker of the number of replica acknowledgements it needs to receive before responding. Value options are `0` (`NoResponse`: no response, only `TCP ACK` is provided), `1` (`WaitForLocal`: responds only after local commits are submitted successfully), and `-1` (`WaitForAll`: responds after all replicated replicas are committed successfully. You can configure the minimum number of replicated replicas using the [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) configuration item of the broker). (Optional, the default value is `-1`).    |
 | `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.|
-| `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `avro` and `maxwell`.   |
+| `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `avro`, `debezium`, and `simple`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
 | `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Kafka messages. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol` (optional, `16` by default). |
@@ -437,7 +450,7 @@ The message format with handle keys only is as follows:
     ],
     "old": null,
     "_tidb": {     // TiDB extension fields
-        "commitTs": 163963314122145239,
+        "commitTs": 429918007904436226,  // A TiDB TSO timestamp
         "onlyHandleKey": true
     }
 }
@@ -503,7 +516,7 @@ The Kafka consumer receives a message that contains the address of the large mes
     ],
     "old": null,
     "_tidb": {     // TiDB extension fields
-        "commitTs": 163963314122145239,
+        "commitTs": 429918007904436226,  // A TiDB TSO timestamp
         "claimCheckLocation": "s3:/claim-check-bucket/${uuid}.json"
     }
 }

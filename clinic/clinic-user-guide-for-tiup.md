@@ -174,6 +174,15 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
     - `-N/--node`: only collects data from a specified node. The format is `ip:port`.
     - `--include`: only collects specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To include two or more types, you can use `,` as a separator between the types.
     - `--exclude`: does not collect specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To exclude two or more types, you can use `,` as a separator between the types.
+    - `--metricsfilter`: only collects specified Prometheus metrics. You can specify metrics using a comma-separated list of metric prefixes. For example, `--metricsfilter=tidb,pd` collects metrics that start with `tidb` and metrics that start with `pd`.
+    
+        > **Tip:**
+        >
+        > To get available metric prefixes, you can query the TiDB monitoring API using the following command:
+        >
+        > ```bash
+        > curl -s 'http://${prometheus-host}:${prometheus-port}/api/v1/label/__name__/values' | jq -r '.data[]' | cut -d\_ -f1 | uniq -c | sort -rn
+        > ```
 
     After you run the command, Diag does not start collecting data immediately. Instead, Diag provides the estimated data size and the target data storage path in the output for you to confirm whether to continue. For example:
 
@@ -323,7 +332,7 @@ You can have a quick check on the cluster status locally using Diag. Even if you
     The following is the details of the abnormalities.
 
     ### Diagnostic result summary
-    The configuration rules are all derived from PingCAP’s OnCall Service.
+    The configuration rules are all derived from PingCAP's OnCall Service.
 
     If the results of the configuration rules are found to be abnormal, they may cause the cluster to fail.
 

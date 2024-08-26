@@ -143,17 +143,21 @@ For batch inserts, you can use the [`addBatch`/`executeBatch` API](https://www.t
 
 In most scenarios, to improve execution efficiency, JDBC obtains query results in advance and saves them in client memory by default. But when the query returns a super large result set, the client often wants the database server to reduce the number of records returned at a time and waits until the client's memory is ready and it requests for the next batch.
 
-Usually, there are two kinds of processing methods in JDBC:
+The following two processing methods are usually used in JDBC:
 
-- [Set **FetchSize** to `Integer.MIN_VALUE`](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet) to ensure that the client does not cache. The client will read the execution result from the network connection through `StreamingResult`.
+- The first method: [Set **FetchSize** to `Integer.MIN_VALUE`](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet) to ensure that the client does not cache. The client will read the execution result from the network connection through `StreamingResult`.
 
     When the client uses the streaming read method, it needs to finish reading or close `resultset` before continuing to use the statement to make a query. Otherwise, the error `No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.` is returned.
 
     To avoid such an error in queries before the client finishes reading or closes `resultset`, you can add the `clobberStreamingResults=true` parameter in the URL. Then, `resultset` is automatically closed but the result set to be read in the previous streaming query is lost.
 
-- To use Cursor Fetch, first [set `FetchSize`](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html) as a positive integer and configure `useCursorFetch=true` in the JDBC URL.
+- The second method: Use Cursor Fetch by first [setting `FetchSize`](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html) as a positive integer and then configuring `useCursorFetch = true` in the JDBC URL.
 
-TiDB supports both methods, but it is preferred that you use the first method, because it is a simpler implementation and has a better execution efficiency.
+TiDB supports both methods, but it is recommended that you use the first method that sets `FetchSize` to `Integer.MIN_VALUE`, because it is a simpler implementation and has better execution efficiency.
+
+For the second method, TiDB first loads all data to the TiDB node, and then returns data to the client according to the `FetchSize`. Therefore, it usually consumes more memory than the first method. If [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) is set to `ON`, TiDB might temporarily write the result to the hard disk.
+
+If the [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830) system variable is set to `ON`, TiDB tries to read part of the data only when the client fetches it, which uses less memory. For more details and limitations, read the [complete descriptions for the `tidb_enable_lazy_cursor_fetch` system variable](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830).
 
 ### MySQL JDBC parameters
 
@@ -276,3 +280,17 @@ TiDB provides two MySQL-compatible parameters to control the timeout: [`wait_tim
 The default value of [`wait_timeout`](/system-variables.md#wait_timeout) is relatively large. In scenarios where a transaction starts but is neither committed nor rolled back, you might need a finer-grained control and a shorter timeout to prevent prolonged lock holding. In this case, you can use [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) (introduced in TiDB v7.6.0) to control the idle timeout for transactions in a user session.
 
 However, in an actual production environment, idle connections and SQL statements with excessively long execution time negatively affect databases and applications. To avoid idle connections and SQL statements that are executed for too long, you can configure these two parameters in your application's connection string. For example, set `sessionVariables=wait_timeout=3600` (1 hour) and `sessionVariables=max_execution_time=300000` (5 minutes).
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

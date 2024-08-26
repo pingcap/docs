@@ -139,7 +139,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-compression-type`
 
-+ The compression algorithm for gRPC messages
++ The compression algorithm for gRPC messages, which affects gRPC messages between TiKV nodes and gRPC response messages sent from TiKV to TiDB
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 + Default value: `"none"`
 
@@ -163,7 +163,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-raft-conn-num`
 
-+ The maximum number of links among TiKV nodes for Raft communication
++ The maximum number of connections between TiKV nodes for Raft communication
 + Default value: `1`
 + Minimum value: `1`
 
@@ -465,9 +465,9 @@ Configuration items related to storage.
 > **Warning:**
 >
 > - Set `enable-ttl` to `true` or `false` **ONLY WHEN** deploying a new TiKV cluster. **DO NOT** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `enable-ttl` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats, which causes the "can't enable TTL on a non-ttl" error when you restart the TiKV cluster.
-> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters). Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
+> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters) unless `storage.api-version = 2` is configured. Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
 
-+ TTL is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
++ [TTL](/time-to-live.md) is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
 + Default value: `false`
 
 ### `ttl-check-poll-interval`
@@ -489,9 +489,9 @@ Configuration items related to storage.
 + Value options:
     + `1`: Uses API V1, does not encode the data passed from the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
     + `2`: Uses API V2:
-        + The data is stored in the Multi-Version Concurrency Control (MVCC) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
+        + The data is stored in the [Multi-Version Concurrency Control (MVCC)](/glossary.md#multi-version-concurrency-control-mvcc) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
         + Data is scoped according to different usage and API V2 supports co-existence of TiDB, Transactional KV, and RawKV applications in a single cluster.
-        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on `enable-ttl` explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
+        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on [`enable-ttl`](#enable-ttl) explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
         + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim obsolete data. This tidb-server instance can provide read and write services at the same time. To ensure high availability, you can deploy multiple tidb-server instances.
         + Client support is required for API V2. For details, see the corresponding instruction of the client for the API V2.
         + Since v6.2.0, Change Data Capture (CDC) for RawKV is supported. Refer to [RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc).
@@ -736,6 +736,16 @@ Configuration items related to Raftstore.
 
 + The maximum remaining time allowed for the log cache in memory
 + Default value: `"30s"`
++ Minimum value: `0`
+
+### `max-apply-unpersisted-log-limit` <span class="version-mark">New in v8.1.0</span>
+
++ The maximum number of committed but not persisted Raft logs that can be applied.
+
+    + Setting this configuration item to a value greater than `0` enables the TiKV node to apply committed but not persisted Raft logs in advance, effectively reducing long-tail latency caused by IO jitter on that node. However, it might also increase the memory usage of TiKV and the disk space occupied by Raft logs.
+    + Setting this configuration item to `0` disables this feature, meaning that TiKV must wait until Raft logs are both committed and persisted before applying them. This behavior is consistent with the behavior before v8.2.0.
+
++ Default value: `1024`
 + Minimum value: `0`
 
 ### `hibernate-regions`
@@ -1676,7 +1686,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 + The zstd dictionary compression size. The default value is `"0KiB"`, which means to disable the zstd dictionary compression. In this case, Titan compresses data based on single values, whereas RocksDB compresses data based on blocks (`32KiB` by default). When the average size of Titan values is less than `32KiB`, Titan's compression ratio is lower than that of RocksDB. Taking JSON as an example, the store size in Titan can be 30% to 50% larger than that of RocksDB. The actual compression ratio depends on whether the value content is suitable for compression and the similarity among different values. You can enable the zstd dictionary compression to increase the compression ratio by configuring `zstd-dict-size` (for example, set it to `16KiB`). The actual store size can be lower than that of RocksDB. But the zstd dictionary compression might lead to about 10% performance regression in specific workloads.
 + Default value: `"0KiB"`
-+ Unit: KiB|MiB|GiB 
++ Unit: KiB|MiB|GiB
 
 ### `blob-cache-size`
 
@@ -2031,8 +2041,12 @@ Configuration items related to security.
 
 ### `redact-info-log` <span class="version-mark">New in v4.0.8</span>
 
-+ This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
++ This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.3.0.
++ If the configuration item is set to `false` or `"off"`, log redaction is disabled.
++ If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
++ If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
 + Default value: `false`
++ For details on how to use it, see [Log redaction in TiKV side](/log-redaction.md#log-redaction-in-tikv-side).
 
 ## security.encryption
 

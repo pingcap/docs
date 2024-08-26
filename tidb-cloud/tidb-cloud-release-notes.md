@@ -836,7 +836,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **API changes**
 
-- Release several TiDB Cloud API endpoints for data import：
+- Release several TiDB Cloud API endpoints for data import:
 
     - List all import tasks
     - Get an import task

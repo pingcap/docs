@@ -37,12 +37,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
   </tr>
   <tr>
     <td>Enhance the stability of caching the schema information when there is a massive number of tables (experimental)</td>
-    <td>SaaS companies using TiDB as the system of record for their multi-tenant applications often need to store a substantial number of tables. In previous versions, handling table counts in the order of a million or more was feasible, but it had the potential to degrade the overall user experience. TiDB v8.0.0 improves the situation with the following enhancements:
-  <ul>
-    <li>Introduce a new <a href="https://docs.pingcap.com/tidb/v8.0/system-variables#tidb_schema_cache_size-new-in-v800">schema information caching system</a>, incorporating a lazy-loading Least Recently Used (LRU) cache for table metadata and more efficiently managing schema version changes.</li>
-    <li>Implement a <a href="https://docs.pingcap.com/tidb/v8.0/system-variables#tidb_enable_auto_analyze_priority_queue-new-in-v800">priority queue</a> for <code>auto analyze</code>, making the process less rigid and enhancing stability across a wider array of tables.</li>
-  </ul>
-    </td>
+    <td>SaaS companies using TiDB as the system of record for their multi-tenant applications often need to store a substantial number of tables. In previous versions, handling table counts in the order of a million or more was feasible, but it had the potential to degrade the overall user experience. TiDB v8.0.0 improves the situation by implementing a <a href="https://docs.pingcap.com/tidb/v8.0/system-variables#tidb_enable_auto_analyze_priority_queue-new-in-v800">priority queue</a> for <code>auto analyze</code>, making the process less rigid and enhancing stability across a wider array of tables.</td>
   </tr>
   <tr>
     <td rowspan="1">DB Operations and Observability</td>
@@ -110,7 +105,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800).
 
-* Introduce the priority queue for automatic statistics collection [#50132](https://github.com/pingcap/tidb/issues/50132) @[hi-rustin](https://github.com/hi-rustin)
+* Introduce the priority queue for automatic statistics collection [#50132](https://github.com/pingcap/tidb/issues/50132) @[hi-rustin](https://github.com/Rustin170506)
 
     Maintaining optimizer statistics up-to-date is the key to stabilizing database performance. Most users rely on the [automatic statistics collection](/statistics.md#automatic-update) provided by TiDB to collect the latest statistics. Automatic statistics collection checks the status of statistics for all objects, and adds unhealthy objects to a queue for sequential collections. In previous versions, the order is random, which could result in excessive waits for more worthy candidates to be updated, causing potential performance regressions.
 
@@ -145,16 +140,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
     Before v8.0.0, the TSO update interval of low-precision TSO feature is fixed and cannot be adjusted according to actual application requirements. In v8.0.0, TiDB introduces the system variable `tidb_low_resolution_tso_update_interval` to control the TSO update interval. This feature takes effect only when the low-precision TSO feature is enabled.
 
     For more information, see [documentation](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800).
-
-### Reliability
-
-* Support caching required schema information according to the LRU algorithm to reduce memory consumption on the TiDB server (experimental) [#50959](https://github.com/pingcap/tidb/issues/50959) @[gmhdbjd](https://github.com/gmhdbjd)
-
-    Before v8.0.0, each TiDB node caches the schema information of all tables. In scenarios with hundreds of thousands of tables, just caching these table schemas could consume a significant amount of memory.
-
-    Starting from v8.0.0, TiDB introduces the system variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800), which enables you to set an upper limit for caching schema information, thereby preventing excessive memory usage. When you enable this feature, TiDB uses the Least Recently Used (LRU) algorithm to cache the required tables, effectively reducing the memory consumed by the schema information.
-
-    For more information, see [documentation](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 
 ### Availability
 
@@ -306,6 +291,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 >
 > This section provides compatibility changes you need to know when you upgrade from v7.6.0 to the current version (v8.0.0). If you are upgrading from v7.5.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
 
+- Upgrade the default Prometheus version deployed by TiUP from 2.27.1 to 2.49.1.
+- Upgrade the default Grafana version deployed by TiUP from 7.5.11 to 7.5.17.
 - Remove witness-related schedulers that are not GA but are enabled by default [#7765](https://github.com/tikv/pd/pull/7765) @[rleungx](https://github.com/rleungx)
 
 ### Behavior changes
@@ -353,7 +340,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 | TiKV | [`rocksdb.defaultcf.titan.shared-blob-cache`](/tikv-configuration-file.md#shared-blob-cache-new-in-v800) | Newly added | Controls whether to enable the shared cache for Titan blob files and RocksDB block files. The default value is `true`. |
 | TiKV | [`security.encryption.master-key.gcp.credential-file-path`](/encryption-at-rest.md#specify-a-master-key-via-kms) | Newly added | Specifies the path to the Google Cloud authentication credentials file when `security.encryption.master-key.vendor` is `gcp`. |
 | TiDB Lightning  | [`tikv-importer.duplicate-resolution`](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)  | Deprecated | Controls whether to detect and resolve unique key conflicts in physical import mode. Starting from v8.0.0, it is replaced by [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). |
-| TiDB Lightning  | [`conflict.precheck-conflict-before-import`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)  | Newly added | Controls whether to enable preprocess conflict detection, which checks conflicts in data before importing it to TiDB. The default value of this parameter is `false`, which means that TiDB Lightning only checks conflicts after the data import. This parameter can be used only in the physical import mode (`tikv-importer.backend = "local"`).  |
+| TiDB Lightning  | [`conflict.precheck-conflict-before-import`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)  | Newly added | Controls whether to enable pre-import conflict detection, which checks conflicts in data before importing it to TiDB. The default value of this parameter is `false`, which means that TiDB Lightning only checks conflicts after the data import. This parameter can be used only in the physical import mode (`tikv-importer.backend = "local"`).  |
 | TiDB Lightning  | [`logical-import-batch-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) | Newly added | Controls the maximum number of rows inserted per transaction in the logical import mode. The default value is `65536` rows. |
 | TiDB Lightning  | [`logical-import-batch-size`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) | Newly added | Controls the maximum size of each SQL query executed on the downstream TiDB server in the logical import mode. The default value is `"96KiB"`. The unit can be KB, KiB, MB, or MiB. |
 | Data Migration  |  [`secret-key-path`](/dm/dm-master-configuration-file.md) | Newly added | Specifies the file path of the secret key, which is used to encrypt and decrypt upstream and downstream passwords. The file must contain a 64-character hexadecimal AES-256 secret key. |
@@ -459,11 +446,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
 
 + TiDB
 
-    - Fix the issue that `auto analyze` is triggered multiple times when there is no data change [#51775](https://github.com/pingcap/tidb/issues/51775) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that `auto analyze` is triggered multiple times when there is no data change [#51775](https://github.com/pingcap/tidb/issues/51775) @[hi-rustin](https://github.com/Rustin170506)
     - Fix the issue that the `auto analyze` concurrency is set incorrectly [#51749](https://github.com/pingcap/tidb/issues/51749) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue of index inconsistency caused by adding multiple indexes using a single SQL statement [#51746](https://github.com/pingcap/tidb/issues/51746) @[tangenta](https://github.com/tangenta)
     - Fix the `Column ... in from clause is ambiguous` error that might occur when a query uses `NATURAL JOIN` [#32044](https://github.com/pingcap/tidb/issues/32044) @[AilinKid](https://github.com/AilinKid)
-    - Fix the issue of wrong query results due to TiDB incorrectly eliminating constant values in `group by` [#38756](https://github.com/pingcap/tidb/issues/38756) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue of wrong query results due to TiDB incorrectly eliminating constant values in `group by` [#38756](https://github.com/pingcap/tidb/issues/38756) @[hi-rustin](https://github.com/Rustin170506)
     - Fix the issue that the `LEADING` hint does not take effect in `UNION ALL` statements [#50067](https://github.com/pingcap/tidb/issues/50067) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that `BIT` type columns might cause query errors due to decode failures when they are involved in calculations of some functions [#49566](https://github.com/pingcap/tidb/issues/49566) [#50850](https://github.com/pingcap/tidb/issues/50850) [#50855](https://github.com/pingcap/tidb/issues/50855) @[jiyfhust](https://github.com/jiyfhust)
     - Fix the issue that TiDB might panic when performing a rolling upgrade using `tiup cluster upgrade/start` due to an interaction issue with PD [#50152](https://github.com/pingcap/tidb/issues/50152) @[zimulala](https://github.com/zimulala)
@@ -475,13 +462,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.0/quick-start-with-
     - Fix the issue that when executing the `CREATE GLOBAL BINDING` statement, if the schema name is in uppercase, the binding does not take effect [#50646](https://github.com/pingcap/tidb/issues/50646) @[qw4990](https://github.com/qw4990)
     - Fix the issue that `Index Path` selects duplicated indexes [#50496](https://github.com/pingcap/tidb/issues/50496) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that `PLAN REPLAYER` fails to load bindings when the `CREATE GLOBAL BINDING` statement contains `IN()` [#43192](https://github.com/pingcap/tidb/issues/43192) @[King-Dylan](https://github.com/King-Dylan)
-    - Fix the issue that when multiple `analyze` tasks fail, the failure reasons are not recorded correctly [#50481](https://github.com/pingcap/tidb/issues/50481) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that when multiple `analyze` tasks fail, the failure reasons are not recorded correctly [#50481](https://github.com/pingcap/tidb/issues/50481) @[hi-rustin](https://github.com/Rustin170506)
     - Fix the issue that `tidb_stats_load_sync_wait` does not take effect [#50872](https://github.com/pingcap/tidb/issues/50872) @[jiyfhust](https://github.com/jiyfhust)
     - Fix the issue that `max_execute_time` settings at multiple levels interfere with each other [#50914](https://github.com/pingcap/tidb/issues/50914) @[jiyfhust](https://github.com/jiyfhust)
-    - Fix the issue of thread safety caused by concurrent updating of statistics [#50835](https://github.com/pingcap/tidb/issues/50835) @[hi-rustin](https://github.com/hi-rustin)
-    - Fix the issue that executing `auto analyze` on a partition table might cause TiDB to panic [#51187](https://github.com/pingcap/tidb/issues/51187) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue of thread safety caused by concurrent updating of statistics [#50835](https://github.com/pingcap/tidb/issues/50835) @[hi-rustin](https://github.com/Rustin170506)
+    - Fix the issue that executing `auto analyze` on a partition table might cause TiDB to panic [#51187](https://github.com/pingcap/tidb/issues/51187) @[hi-rustin](https://github.com/Rustin170506)
     - Fix the issue that SQL bindings might not work when `IN()` in a SQL statement contains a different number of values [#51222](https://github.com/pingcap/tidb/issues/51222) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that TiDB cannot correctly convert the type of a system variable in an expression [#43527](https://github.com/pingcap/tidb/issues/43527) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that TiDB cannot correctly convert the type of a system variable in an expression [#43527](https://github.com/pingcap/tidb/issues/43527) @[hi-rustin](https://github.com/Rustin170506)
     - Fix the issue that TiDB does not listen to the corresponding port when `force-init-stats` is configured [#51473](https://github.com/pingcap/tidb/issues/51473) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that in `determinate` mode (`tidb_opt_objective='determinate'`), if a query does not contain predicates, statistics might not be loaded [#48257](https://github.com/pingcap/tidb/issues/48257) @[time-and-fate](https://github.com/time-and-fate)
     - Fix the issue that the `init-stats` process might cause TiDB to panic and the `load stats` process to quit [#51581](https://github.com/pingcap/tidb/issues/51581) @[hawkingrei](https://github.com/hawkingrei)

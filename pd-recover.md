@@ -145,7 +145,7 @@ Before deploying a new PD cluster, you need to stop the existing PD cluster and 
 
 ### Step 4: Use pd-recover
 
-You only need to run `pd-recover` on one PD node.
+You only need to run `pd-recover` on one PD node. Note that to avoid reallocation, it is recommended to set the `-alloc-id` parameter to a value larger than the allocated ID. For example, if the maximum allocated ID obtained from monitoring or logs is `9000`, it is recommended to pass `10000` or a larger value to the `-alloc-id` parameter.
 
 {{< copyable "shell-regular" >}}
 

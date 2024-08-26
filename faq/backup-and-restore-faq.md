@@ -145,13 +145,13 @@ For example, you might encounter the `Code: 22(invalid argument)` error when bac
 
 This error might occur when the capacity of the cluster to restore is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
 
-To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restore, and enable the `RATE_LIMIT` option.
+To handle this issue, you can try to scale out the cluster resources, reduce the value of `tikv-max-restore-concurrency` for the restore, and enable the `ratelimit` option.
 
 ### What should I do if the restore fails with the error message `the entry too large, the max entry size is 6291456, the size of data is 7690800`?
 
 You can try to reduce the number of tables to be created in a batch by setting `--ddl-batch-size` to `128` or a smaller value.
 
-When using BR to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes BR to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
+When using BR to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes BR to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
 
 ### Where are the backed up files stored when I use `local` storage?
 

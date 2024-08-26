@@ -72,26 +72,26 @@ tikv_servers:
 # z1
   # machine-1 on z1
   - host: tikv-host-machine-1
-    port：20160
+    port: 20160
     config:
       server.labels:
         zone: z1
         host: tikv-host-machine-1
   - host: tikv-host-machine-1
-    port：20161
+    port: 20161
     config:
       server.labels:
         zone: z1
         host: tikv-host-machine-1
   # machine-2 on z1
   - host: tikv-host-machine-2
-    port：20160
+    port: 20160
     config:
       server.labels:
         zone: z1
         host: tikv-host-machine-2
   - host: tikv-host-machine-2
-    port：20161
+    port: 20161
     config:
       server.labels:
         zone: z1

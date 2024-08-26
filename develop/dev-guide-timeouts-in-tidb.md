@@ -30,7 +30,7 @@ Note that the system variable configuration takes effect globally and immediatel
 
 > **Tip:**
 >
-> Specifically, when Dumpling is exporting data from TiDB (less than 1 TB), if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
+> Specifically, when Dumpling is exporting data from TiDB (less than 1 TB), if the TiDB version is v4.0.0 or later and Dumpling can access the PD address and the [`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md) table of the TiDB cluster, Dumpling automatically adjusts the GC safe point to block GC without affecting the original cluster.
 >
 > However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
 >
@@ -88,3 +88,17 @@ However, in a real production environment, idle connections and indefinitely exe
 
 - `sessionVariables=wait_timeout=3600` (1 hour)
 - `sessionVariables=max_execution_time=300000` (5 minutes)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

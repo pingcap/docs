@@ -268,7 +268,7 @@ void main();
 If the connection is successful, the terminal will output the version of the TiDB cluster as follows:
 
 ```
-🔌 Connected to TiDB cluster! (TiDB version: 5.7.25-TiDB-v6.6.0-serverless)
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.3.0)
 🆕 Created a new player with ID 1.
 ℹ️ Got Player 1: Player { id: 1, coins: 100, goods: 100 }
 🔢 Added 50 coins and 50 goods to player 1, now player 1 has 150 coins and 150 goods.
@@ -372,12 +372,12 @@ To check [referential integrity](https://en.wikipedia.org/wiki/Referential_integ
 
 <CustomContent platform="tidb">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/support.md).
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
 
 </CustomContent>
