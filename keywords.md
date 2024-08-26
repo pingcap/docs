@@ -133,6 +133,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - CHECK (R)
 - CHECKPOINT
 - CHECKSUM
+- CHECKSUM_CONCURRENCY
 - CIPHER
 - CLEANUP
 - CLIENT
@@ -154,6 +155,8 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - COMPACT
 - COMPRESSED
 - COMPRESSION
+- COMPRESSION_LEVEL
+- COMPRESSION_TYPE
 - CONCURRENCY
 - CONFIG
 - CONNECTION
@@ -236,6 +239,8 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ENABLED
 - ENCLOSED (R)
 - ENCRYPTION
+- ENCRYPTION_KEYFILE
+- ENCRYPTION_METHOD
 - END
 - ENFORCED
 - ENGINE
@@ -317,6 +322,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - IDENTIFIED
 - IF (R)
 - IGNORE (R)
+- IGNORE_STATS
 - ILIKE (R)
 - IMPORT
 - IMPORTS
@@ -385,6 +391,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - LINES (R)
 - LIST
 - LOAD (R)
+- LOAD_STATS
 - LOCAL
 - LOCALTIME (R)
 - LOCALTIMESTAMP (R)
@@ -745,6 +752,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - VARCHARACTER (R)
 - VARIABLES
 - VARYING (R)
+- VECTOR
 - VIEW
 - VIRTUAL (R)
 - VISIBLE
@@ -752,6 +760,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 <a id="W" class="letter" href="#W">W</a>
 
 - WAIT
+- WAIT_TIFLASH_READY
 - WARNINGS
 - WEEK
 - WEIGHT_STRING
@@ -761,6 +770,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - WIDTH
 - WINDOW (R-Window)
 - WITH (R)
+- WITH_SYS_TABLE
 - WITHOUT
 - WORKLOAD
 - WRITE (R)
