@@ -41,10 +41,13 @@ TableFactor ::=
     TableName ( "PARTITION" "(" Identifier ("," Identifier)* ")" )? ("AS" TableAlias)? AsOfClause? TableSample?
 
 JoinTable ::=
-    ( TableRef ("INNER" | "CROSS")? "JOIN" ) TableRef JoinClause?
-    ( TableRef "STRAIGHT_JOIN" TableRef "ON" Expression
-    | TableRef ( ("LEFT" | "RIGHT") "OUTER"? "JOIN" ) TableRef JoinClause
-    | TableRef "NATURAL" ("LEFT" | "RIGHT") "OUTER"? "JOIN" )
+    TableRef
+    (
+        ("INNER" | "CROSS")? "JOIN" TableRef JoinClause?
+        | "STRAIGHT_JOIN" TableRef "ON" Expression
+        | ("LEFT" | "RIGHT") "OUTER"? "JOIN" TableRef JoinClause
+        | "NATURAL" ("LEFT" | "RIGHT") "OUTER"? "JOIN" TableFactor
+    )
 
 JoinClause ::=
     ("ON" Expression
