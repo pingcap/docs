@@ -3,13 +3,15 @@ title: Configure TiDB Serverless External Storage Access
 summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access, Google Cloud Storage (GCS) access and Azure Blob Storage access.
 ---
 
-# Configure TiDB Cloud Serverless external storage access
+# Configure External Storage Access for TiDB Serverless
 
-If you want import data from or export data to external storage in TiDB Cloud Serverless, you need to configure cross-account access. This document describes how to configure access to external storage, such as Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS) and Azure Blob Storage for TiDB Cloud Serverless.
+If you want import data from or export data to external storage in TiDB Serverless, you need to configure cross-account access. This document describes how to configure access to an external storage, including Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS) and Azure Blob Storage for TiDB Serverless.
+
+If you need to configure these external storages for TiDB Dedicated, see [Configure Amazon S3 Access and GCS Access for TiDB Dedicated](/tidb-cloud/config-s3-and-gcs-access.md).
 
 ## Configure Amazon S3 access
 
-To allow TiDB Cloud Serverless to access your Amazon S3 bucket, you need to configure the bucket access for TiDB Cloud Serverless. You can use either of the following methods to configure the bucket access:
+To allow TiDB Serverless to access your Amazon S3 bucket, you need to configure the bucket access for TiDB Serverless. You can use either of the following methods to configure the bucket access:
 
 - Use an AWS access key: use the access key of an IAM user to access your Amazon S3 bucket.
 - Use a Role ARN: use a Role ARN to access your Amazon S3 bucket.
@@ -39,15 +41,15 @@ Take the following steps to configure an access key:
 
 ## Configure GCS access
 
-To allow TiDB Cloud Serverless to access your GCS bucket, you need to configure the GCS access for the bucket. You can use service account key to configure the bucket access:
+To allow TiDB Serverless to access your GCS bucket, you need to configure the GCS access for the bucket. You can use service account key to configure the bucket access:
 
 Take the following steps to configure a service account key:
 
 1. Create a service account with needed permission in the Google Cloud [service account page](https://console.cloud.google.com/iam-admin/serviceaccounts). For more information, see [Creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
    1. Enter a service account name.
-   2. Optional: Enter a description of the service account. 
+   2. Enter a description of the service account (Optional). 
    3. Click **CREATE AND CONTINUE** to create the service account and continue the next step.
-   4. In the `Grant this service account access to project`, choose the [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with needed permission. For example, TiDB Cloud Serverless export needs a role with `storage.objects.create` permission.
+   4. In the `Grant this service account access to project`, choose the [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with needed permission. For example, TiDB Serverless export needs a role with `storage.objects.create` permission.
    5. Click **Continue** to the next step.
    6. Optional: In the `Grant users access to this service account`, choose members that need to [attach the service account to other resources](https://cloud.google.com/iam/docs/attach-service-accounts).
    7. Click **Done** to finish creating the service account.
@@ -62,17 +64,18 @@ Take the following steps to configure a service account key:
 
 4. Open the downloaded JSON file and encode the content with base64. For example, you can use the following command to encode the content in the macOS terminal:
 
-```bash
-base64 -i gcp-xxx.json
-```
+    ```bash
+    base64 -i gcp-xxx.json
+    ```
 
 ## Configure Azure Blob access
 
-To allow TiDB Cloud Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use service SAS token to configure the container access:
+To allow TiDB Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use service SAS token to configure the container access:
 
 Take the following steps to configure a service SAS token:
 
-1. Click your storage account where the container belong to in the [Azure storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page.
+1. Click your storage account where the container belongs to in the [Azure storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page.
+
 2. In your `storage account` page, click the **Security+network** and then click the **Shared access signature**.
 
     ![img.png](/media/tidb-cloud/serverless-external-storage/azure-sas.png)
@@ -80,7 +83,7 @@ Take the following steps to configure a service SAS token:
 3. In the `Shared access signature` page, create a service SAS token with needed permission. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
    1. Choose the `Blob` service under the `Allowed services` section.
    2. Choose the `Container` and `Object` under the `Allowed Resource types` section.
-   3. Choose the permission under the `Allowed permissions` section as you needed. For example: TiDB Cloud Serverless exports needs `Read` and `Write` permission.
+   3. Choose the permission under the `Allowed permissions` section as you needed. For example: TiDB Serverless exports needs `Read` and `Write` permission.
    4. Adjust the `Start and expiry date/time` as you needed.
    5. You can keep other settings as default.
 
