@@ -65,7 +65,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830).
 
-* Ignore unnecessary columns when collecting statistics [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/hi-rustin)
+* Ignore unnecessary columns when collecting statistics [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/Rustin170506)
 
     When the optimizer generates an execution plan, it only needs statistics for some columns, such as columns in the filter conditions, columns in the join keys, and columns used for aggregation. Starting from v8.3.0, TiDB continuously observes the historical records of the columns used in SQL statements. By default, TiDB only collects statistics for columns with indexes and columns that are observed to require statistics collection. This speeds up the collection of statistics and avoids unnecessary resource consumption.
 
@@ -260,7 +260,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - Support the `SELECT ... STRAIGHT_JOIN ... USING ( ... )` statement [#54162](https://github.com/pingcap/tidb/issues/54162) @[dveeden](https://github.com/dveeden)
     - Construct more precise index access ranges for filter conditions like `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))` [#54337](https://github.com/pingcap/tidb/issues/54337) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     - Use index order to avoid extra sorting operations for SQL queries like `WHERE idx_col_1 IS NULL ORDER BY idx_col_2` [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
-    - Display analyzed indexes in the `mysql.analyze_jobs` system table [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/hi-rustin)
+    - Display analyzed indexes in the `mysql.analyze_jobs` system table [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/Rustin170506)
     - Support applying the `tidb_redact_log` setting to the output of `EXPLAIN` statements [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
     - Support generating the `Selection` operator on `IndexRangeScan` for multi-valued indexes to improve query efficiency [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
     - Support killing automatic `ANALYZE` tasks that are running outside the set time window [#55283](https://github.com/pingcap/tidb/issues/55283) @[hawkingrei](https://github.com/hawkingrei)
@@ -309,7 +309,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
         - Optimize the backup feature, improving backup performance and stability during node restarts, cluster scaling-out, and network jitter when backing up large numbers of tables [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)
         - Automatically set the environment variable `GOMEMLIMIT` based on the available memory of the BR process to avoid OOM when using BR for backup and restore [#53777](https://github.com/pingcap/tidb/issues/53777) @[Leavrth](https://github.com/Leavrth)
         - Make incremental backups compatible with point-in-time recovery (PITR) [#54474](https://github.com/pingcap/tidb/issues/54474) @[3pointer](https://github.com/3pointer)
-        - Support backing up and restoring the `mysql.column_stats_usage` table [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/hi-rustin)
+        - Support backing up and restoring the `mysql.column_stats_usage` table [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/Rustin170506)
 
 ## Bug fixes
 
@@ -340,7 +340,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.3/quick-start-with-
     - Fix the issue that internal SQL queries cannot be displayed in the slow query log when `tidb_redact_log` is enabled [#54190](https://github.com/pingcap/tidb/issues/54190) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that the memory used by transactions might be tracked multiple times [#53984](https://github.com/pingcap/tidb/issues/53984) @[ekexium](https://github.com/ekexium)
     - Fix the issue that using `SHOW WARNINGS;` to obtain warnings might cause a panic [#48756](https://github.com/pingcap/tidb/issues/48756) @[xhebox](https://github.com/xhebox)
-    - Fix the issue that loading index statistics might cause memory leaks [#54022](https://github.com/pingcap/tidb/issues/54022) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the issue that loading index statistics might cause memory leaks [#54022](https://github.com/pingcap/tidb/issues/54022) @[hi-rustin](https://github.com/Rustin170506)
     - Fix the issue that the `LENGTH()` condition is unexpectedly removed when the collation is `utf8_bin` or `utf8mb4_bin` [#53730](https://github.com/pingcap/tidb/issues/53730) @[elsa0520](https://github.com/elsa0520)
     - Fix the issue that statistics collection does not update the `stats_history` table when encountering duplicate primary keys [#47539](https://github.com/pingcap/tidb/issues/47539) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that recursive CTE queries might result in invalid pointers [#54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
