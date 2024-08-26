@@ -1,5 +1,5 @@
 ---
-title: Configure TiDB Cloud Serverless external storage access
+title: Configure TiDB Serverless External Storage Access
 summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access, Google Cloud Storage (GCS) access and Azure Blob Storage access.
 ---
 
