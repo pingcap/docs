@@ -80,12 +80,12 @@ Take the following steps to configure a service SAS token:
 
     ![img.png](/media/tidb-cloud/serverless-external-storage/azure-sas.png)
 
-3. In the `Shared access signature` page, create a service SAS token with needed permission. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
-   1. Choose the `Blob` service under the `Allowed services` section.
-   2. Choose the `Container` and `Object` under the `Allowed Resource types` section.
-   3. Choose the permission under the `Allowed permissions` section as you needed. For example: TiDB Serverless exports needs `Read` and `Write` permission.
-   4. Adjust the `Start and expiry date/time` as you needed.
-   5. You can keep other settings as default.
+3. In the `Shared access signature` page, create a service SAS token with needed permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
+    1. Choose the `Blob` service under the `Allowed services` section.
+    2. Choose the `Container` and `Object` under the `Allowed Resource types` section.
+    3. Choose the permission under the `Allowed permissions` section as you needed. For example: TiDB Serverless exports needs `Read` and `Write` permission.
+    4. Adjust the `Start and expiry date/time` as you needed.
+    5. You can keep other settings as default.
 
    ![img.png](/media/tidb-cloud/serverless-external-storage/azure-create-sas.png)
 
