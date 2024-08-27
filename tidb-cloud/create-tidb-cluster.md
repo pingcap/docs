@@ -78,14 +78,13 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes.
 
-## Step 3. Configure secure settings
+## Step 3. Set root password
+After your cluster is created, take the following steps to configure the root password :
 
-After your cluster is created, take the following steps to configure the security settings:
+1. In the upper-right corner of your cluster overview page, click **...** and select **Password Settings**.
 
-1. In the upper-right corner of your cluster overview page, click **...** and select **Security Settings**.
-
-2. Set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+2. Set the root password to connect to your cluster, and then click **Save**. Make sure to copy your password and save it in a secure location. 
 
 ## What's next
 
-After your cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-via-standard-connection-serverless.md).
+After your cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster).
