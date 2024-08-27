@@ -5,7 +5,7 @@ summary: Learn how to export data from TiDB Serverless clusters.
 
 # Export Data from TiDB Serverless
 
-TiDB Serverless Export (Beta) is a service that enables you to export data from a TiDB Serverless cluster to local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Serverless Export (Beta) is a service that enables you to export data from a TiDB Serverless cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
 While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), TiDB Serverless Export offers a more convenient and efficient way to export data from a TiDB Serverless cluster. It brings the following benefits:
 
@@ -13,21 +13,21 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
-## Export location
+## Export locations
 
 You can export data to:
 
-- Local file 
-- External storage
+- A local file 
+- An external storage, including:
     - [Amazon S3](https://aws.amazon.com/s3/)
     - [Google Cloud Storage](https://cloud.google.com/storage)
     - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 
 > **Note:**
 >
-> If the size of the data to be exported is large (more than 100 GiB), it is recommended that you export it to external storage.
+> If the size of the data to be exported is large (more than 100 GiB), it is recommended that you export it to an external storage.
 
-### Local file
+### A local file
 
 Exporting data to a local file has the following limitations:
 
@@ -39,21 +39,21 @@ Exporting data to a local file has the following limitations:
 
 To export data to Amazon S3, you need to provide the following information:
 
-- uri: `s3://<bucket-name>/<file-path>`
+- URI: `s3://<bucket-name>/<file-path>`
 - one of the following access methods:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
     - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN has the `s3:PutObject` and `s3:ListBucket` permissions. 
 
-See [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) to learn how to configure the Amazon S3 access.
+For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
 ### Google Cloud Storage
 
 To export data to Google Cloud Storage, you need to provide the following information:
 
-- uri: `gs://<bucket-name>/<file-path>`
-- access method: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
+- URI: `gs://<bucket-name>/<file-path>`
+- Access method: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
 
-See [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access) to learn how to configure the Google Cloud Storage access.
+For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
 > **Note:**
 >
@@ -66,7 +66,7 @@ To export data to Azure Blob Storage, you need to provide the following informat
 - uri: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
 - access method: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
-See [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-access) to learn how to configure the Azure Blob Storage access.       
+For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-access).       
 
 > **Note:**
 >
@@ -77,7 +77,7 @@ See [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverle
 ### Data filtering
 
 - TiDB Cloud console supports exporting data with the selected databases and tables.
-- TiDB Cloud CLI supports exporting data with sql statements and [table filter](https://docs.pingcap.com/tidb/stable/table-filter).
+- TiDB Cloud CLI supports exporting data with SQL statements and [table filters](https://docs.pingcap.com/tidb/stable/table-filter).
 
 ### Data formats
 
@@ -198,16 +198,16 @@ You can compress the exported Parquet data using the following algorithms:
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter "database.table"
 ```
 
-- s3.uri: the Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
-- s3.access-key-id: the access key ID of the user who has the permission to access the bucket.
-- s3.secret-access-key: the access key secret of the user who has the permission to access the bucket.
+- `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
+- `s3.access-key-id`: the access key ID of the user who has the permission to access the bucket.
+- `s3.secret-access-key`: the access key secret of the user who has the permission to access the bucket.
 
 ```shell
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.role-arn <role-arn> --filter "database.table"
 ```
 
-- s3.uri: the URI of the Amazon S3 bucket with the `s3://<bucket-name>/<file-path>` format.
-- s3.role-arn: the ARN of the role that has the permission to access the bucket.
+- `s3.uri`: the URI of the Amazon S3 bucket with the `s3://<bucket-name>/<file-path>` format.
+- `s3.role-arn`: the ARN of the role that has the permission to access the bucket.
 
 </div>
 </SimpleTab>
@@ -220,8 +220,8 @@ You can only export data to Google Cloud Storage using the TiDB Cloud CLI now.
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
 ```
 
-- gcs.uri: the URI of the Google Cloud Storage bucket with the `gs://<bucket-name>/<file-path>` format.
-- gcs.service-account-key: the base64 encoded service account key.
+- `gcs.uri`: the URI of the Google Cloud Storage bucket with the `gs://<bucket-name>/<file-path>` format.
+- `gcs.service-account-key`: the base64 encoded service account key.
 
 ### Export data to Azure Blob Storage
 
@@ -231,8 +231,8 @@ You can only export data to Azure Blob Storage using the TiDB Cloud CLI now.
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
 ```
 
-- azblob.uri: the URI of the Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>` format.
-- azblob.sas-token: the account SAS token of the Azure Blob Storage.
+- `azblob.uri`: the URI of the Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>` format.
+- `azblob.sas-token`: the account SAS token of the Azure Blob Storage.
 
 ### Cancel an export task
 
