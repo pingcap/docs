@@ -64,7 +64,6 @@ The `TiDB-community-toolkit` package contains the following contents.
 | binlogctl | New in v6.0.0 |
 | sync_diff_inspector |  |
 | reparo |  |
-| arbiter |  |
 | server-{version}-linux-{arch}.tar.gz | New in v6.2.0 |
 | grafana-{version}-linux-{arch}.tar.gz | New in v6.2.0 |
 | alertmanager-{version}-linux-{arch}.tar.gz | New in v6.2.0 |

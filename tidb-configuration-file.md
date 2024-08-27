@@ -309,7 +309,7 @@ Configuration items related to log.
 - Outputs the threshold value of consumed time in the slow log.
 - Default value: `300`
 - Unit: Milliseconds
-- If the value in a query is larger than the default value, it is a slow query and is output to the slow log.
+- When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this parameter.
 - Since v6.1.0, the threshold value of consumed time in the slow log is specified by the TiDB configuration item [`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) or the system variable [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold). `slow-threshold` still takes effect. But if `slow-threshold` and `instance.tidb_slow_log_threshold` are set at the same time, the latter takes effect.
 
 ### `record-plan-in-slow-log`
@@ -505,7 +505,7 @@ Configuration items related to performance.
 - Default value: `5000`
 - If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retryable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
 
-### `txn-entry-size-limit` <span class="version-mark">New in v5.0</span>
+### `txn-entry-size-limit` <span class="version-mark">New in v4.0.10 and v5.0.0</span>
 
 - The size limit of a single row of data in TiDB.
 - Default value: `6291456` (in bytes)
@@ -519,7 +519,7 @@ Configuration items related to performance.
 
 - The size limit of a single transaction in TiDB.
 - Default value: `104857600` (in bytes)
-- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
+- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB). Note that if you have used the binlog to serve the downstream consumer Kafka, the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
 - In TiDB v6.5.0 and later versions, this configuration is no longer recommended. The memory size of a transaction will be accumulated into the memory usage of the session, and the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) variable will take effect when the session memory threshold is exceeded. To be compatible with previous versions, this configuration works as follows when you upgrade from an earlier version to TiDB v6.5.0 or later:
     - If this configuration is not set or is set to the default value (`104857600`), after an upgrade, the memory size of a transaction will be accumulated into the memory usage of the session, and the `tidb_mem_quota_query` variable will take effect.
     - If this configuration is not defaulted (`104857600`), it still takes effect and its behavior on controlling the size of a single transaction remains unchanged before and after the upgrade. This means that the memory size of the transaction is not controlled by the `tidb_mem_quota_query` variable.
@@ -900,10 +900,11 @@ Configuration items related to read isolation.
 
 ### `tidb_slow_log_threshold`
 
-- This configuration is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+- Outputs the threshold value of the time consumed by the slow log.
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
+- When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this parameter.
 - Before v6.1.0, this configuration is set by `slow-threshold`.
 
 ### `in-mem-slow-query-topn-num` <span class="version-mark">New in v7.3.0</span>

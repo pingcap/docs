@@ -1677,8 +1677,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Range: `[32, 10240]`
 - Unit: Rows
 - This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.
-    - If many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.
-    - If the transaction conflict does not exist, you can set the batch size to a large value (consider the worker count. See [Interaction Test on Online Workloads and `ADD INDEX` Operations](https://docs.pingcap.com/tidb/stable/online-workloads-and-add-index-operations) for reference). This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
+    - If `tidb_ddl_enable_fast_reorg` is set to `OFF`, `ADD INDEX` is executed as a transaction. If there are many update operations such as `UPDATE` and `REPLACE` in the target columns during the `ADD INDEX` execution, a larger batch size indicates a larger probability of transaction conflicts. In this case, it is recommended that you set the batch size to a smaller value. The minimum value is 32.
+    - If the transaction conflict does not exist, or if `tidb_ddl_enable_fast_reorg` is set to `ON`, you can set the batch size to a large value. This makes data backfilling faster but also increases the write pressure on TiKV. For a proper batch size, you also need to refer to the value of `tidb_ddl_reorg_worker_cnt`. See [Interaction Test on Online Workloads and `ADD INDEX` Operations](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations) for reference.
 
 ### tidb_ddl_reorg_priority
 
@@ -2406,7 +2406,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `ON`
+- Default value: `ON` for v8.1.0; `OFF` for v8.1.1 and later 8.1 patch versions
 - This variable controls whether TiDB supports disk spill for the parallel HashAgg algorithm. When it is `ON`, disk spill can be triggered for the parallel HashAgg algorithm. This variable will be deprecated after this feature is generally available in a future release.
 
 ### tidb_enable_pipelined_window_function
@@ -5258,7 +5258,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
-- This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+- This variable outputs the threshold value of the time consumed by the slow log, and is set to 300 milliseconds by default. When the time consumed by a query is larger than this value, this query is considered as a slow query and its log is output to the slow query log. Note that when the output level of [`log.level`](https://docs.pingcap.com/tidb/v8.1/tidb-configuration-file#level) is `"debug"`, all queries are recorded in the slow query log, regardless of the setting of this variable.
 
 ### tidb_slow_query_file
 
@@ -5908,13 +5908,13 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 <CustomContent platform="tidb">
 
-- This variable is used to dynamically modify the TiDB configuration item [`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50). It limits the size of a single row of data in TiDB, which is equivalent to the configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, `txn-entry-size-limit` is also set to the same value.
+- This variable is used to dynamically modify the TiDB configuration item [`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500). It limits the size of a single row of data in TiDB, which is equivalent to the configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, `txn-entry-size-limit` is also set to the same value.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to dynamically modify the TiDB configuration item [`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v50). It limits the size of a single row of data in TiDB, which is equivalent to the configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, `txn-entry-size-limit` is also set to the same value.
+- This variable is used to dynamically modify the TiDB configuration item [`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500). It limits the size of a single row of data in TiDB, which is equivalent to the configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When this variable is set to a non-zero value, `txn-entry-size-limit` is also set to the same value.
 
 </CustomContent>
 

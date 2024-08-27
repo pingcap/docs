@@ -89,7 +89,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The single Key-Value pair being written is too large. The largest single Key-Value pair supported in TiDB is 6 MB by default.
 
-    If a pair exceeds this limit, you need to properly adjust the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration value to relax the limit.
+    If a pair exceeds this limit, you need to properly adjust the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) configuration value to relax the limit.
 
 * Error Number: 8026
 
