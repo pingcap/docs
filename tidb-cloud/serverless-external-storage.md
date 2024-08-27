@@ -19,7 +19,139 @@ To allow TiDB Serverless to access your Amazon S3 bucket, you need to configure 
 <SimpleTab>
 <div label="Role ARN">
 
+It is recommended that you use AWS CloudFormation to create a role ARN.
+
+Take the following steps to create one:
+
+1. Open the **Import & Export** page for your target cluster.
+
+   1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+   2. Click the name of your target cluster to go to its overview page, and then click **Import & Export** in the left navigation pane.
+
+2. Open the `Add New ARN` pop-up window.
+
+   1. Click **Import from S3** or **Export to Amazon S3** according to your needs.
+
+   2. Fill in the `Folder URI` or `File URI` according to the instructions.
+
+   3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation** to open the `Add New ARN` pop-up window.
+   
+3. Create a role ARN with AWS CloudFormation Template.
+
+   1. Click **AWS Console with CloudFormation Template** in the `Add New ARN` pop-up window.
+   
+   2. Log in to the AWS and you will be redirected to the AWS CloudFormation Template page.
+
+   3. Fill in the `Role Name`.
+
+   4. Acknowledge to create a new role and click **Create stack** to create the role ARN.
+
+   5. After the CloudFormation stack is executed, you can find the Role ARN value in the `outputs` tab.
+   
+   ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
+
+
 </div>
+
+<div label="Role ARN(Manually)">
+
+If you have any trouble creating a role ARN with AWS CloudFormation, you can create one manually.
+
+Take the following steps to create one:
+
+1. In the `Add New ARN` pop-up window described in the previous section, click **Having trouble? Create Role ARN manually. You will get the `TiDB Cloud Account ID` and `TiDB Cloud External ID`.
+
+2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
+
+   1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/).
+   2. In the **Buckets** list, choose the name of your bucket with the source data, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
+
+      ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
+
+   3. Open the IAM console at [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/), click **Policies** in the navigation pane on the left, and then click **Create Policy**.
+
+      ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
+
+   4. On the **Create policy** page, click the **JSON** tab.
+   5. Copy the following access policy template and paste it to the policy text field.
+
+       ```json
+       {
+           "Version": "2012-10-17",
+           "Statement": [
+               {
+                   "Sid": "VisualEditor0",
+                   "Effect": "Allow",
+                   "Action": [
+                       "s3:GetObject",
+                       "s3:GetObjectVersion",
+                       "s3:PutObject"
+                   ],
+                   "Resource": "<Your S3 bucket ARN>/<Directory of your source data>/*"
+               },
+               {
+                   "Sid": "VisualEditor1",
+                   "Effect": "Allow",
+                   "Action": [
+                       "s3:ListBucket",
+                       "s3:GetBucketLocation"
+                   ],
+                   "Resource": "<Your S3 bucket ARN>"
+               }
+           ]
+       }
+       ```
+
+      In the policy text field, update the following configurations to your own values.
+
+      - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`
+
+        For example, if your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`. If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`. Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
+
+      - `"Resource": "<Your S3 bucket ARN>"`
+
+        For example, `"Resource": "arn:aws:s3:::tidb-cloud-source-data"`.
+
+      - If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure the following configuration is included in the policy. `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is a sample KMS key of the bucket.
+
+          ```
+          {
+              "Sid": "AllowKMSkey",
+              "Effect": "Allow",
+              "Action": [
+                  "kms:Decrypt"
+              ],
+              "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+          }
+          ```
+
+        If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
+
+   6. Click **Next: Tags**, add a tag of the policy (optional), and then click **Next:Review**.
+
+   7. Set a policy name, and then click **Create policy**.
+
+3. In the AWS Management Console, create an access role for TiDB Cloud and get the role ARN.
+
+   1. In the IAM console at [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/), click **Roles** in the navigation pane on the left, and then click **Create role**.
+
+      ![Create a role](/media/tidb-cloud/aws-create-role.png)
+
+   2. To create a role, fill in the following information:
+
+      - Under **Trusted entity type**, select **AWS account**.
+      - Under **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
+      - Under **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without "Require external ID", once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
+
+   3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
+   4. Under **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
+   5. In the list of roles, click the name of the role that you just created to go to its summary page, and then you can get the role ARN.
+
+      ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
+
+</div>
+
 <div label="Access Key">
 
 It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
