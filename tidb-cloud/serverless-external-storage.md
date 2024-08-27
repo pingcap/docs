@@ -35,36 +35,37 @@ Take the following steps to create one:
 
    2. Fill in the `Folder URI` or `File URI` according to the instructions.
 
-   3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation** to open the `Add New ARN` pop-up window.
+   3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation** to open the **Add New ARN** pop-up window.
    
 3. Create a role ARN with AWS CloudFormation Template.
 
-   1. Click **AWS Console with CloudFormation Template** in the `Add New ARN` pop-up window.
+   1. Click **AWS Console with CloudFormation Template** in the **Add New ARN** pop-up window.
    
    2. Log in to the AWS and you will be redirected to the AWS CloudFormation Template page.
 
-   3. Fill in the `Role Name`.
+   3. Fill in the **Role Name**.
 
    4. Acknowledge to create a new role and click **Create stack** to create the role ARN.
 
-   5. After the CloudFormation stack is executed, you can find the Role ARN value in the `outputs` tab.
+   5. After the CloudFormation stack is executed, you can find the Role ARN value in the **Outputs** tab.
    
    ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
 
 
 </div>
 
-<div label="Role ARN(Manually)">
+<div label="Role ARN (Manually)">
 
 If you have any trouble creating a role ARN with AWS CloudFormation, you can create one manually.
 
 Take the following steps to create one:
 
-1. In the `Add New ARN` pop-up window described in the previous section, click **Having trouble? Create Role ARN manually. You will get the `TiDB Cloud Account ID` and `TiDB Cloud External ID`.
+1. In the **Add New ARN** pop-up window described in the previous section, click **Having trouble? Create Role ARN manually**. You will get the **TiDB Cloud Account ID** and **TiDB Cloud External ID**.
 
 2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
 
    1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/).
+   
    2. In the **Buckets** list, choose the name of your bucket with the source data, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
 
       ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
@@ -74,6 +75,7 @@ Take the following steps to create one:
       ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
    4. On the **Create policy** page, click the **JSON** tab.
+   
    5. Copy the following access policy template and paste it to the policy text field.
 
        ```json
@@ -134,7 +136,7 @@ Take the following steps to create one:
 
 3. In the AWS Management Console, create an access role for TiDB Cloud and get the role ARN.
 
-   1. In the IAM console at [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/), click **Roles** in the navigation pane on the left, and then click **Create role**.
+   1. In the [IAM console](https://console.aws.amazon.com/iam/), click **Roles** in the navigation pane on the left, and then click **Create role**.
 
       ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
@@ -145,7 +147,9 @@ Take the following steps to create one:
       - Under **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without "Require external ID", once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
 
    3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
+   
    4. Under **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
+   
    5. In the list of roles, click the name of the role that you just created to go to its summary page, and then you can get the role ARN.
 
       ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
