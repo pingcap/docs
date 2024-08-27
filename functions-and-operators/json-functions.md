@@ -97,9 +97,9 @@ The subsequent content takes the following JSON document as an example to demons
         "license": "Apache-2.0 license",
         "versions": [
             {
-                "version": "v8.1.0",
+                "version": "v8.1.1",
                 "type": "lts",
-                "release_date": "2024-05-24" 
+                "release_date": "2024-08-27" 
             },
             {
                 "version": "v8.0.0",        
@@ -128,9 +128,9 @@ The subsequent content takes the following JSON document as an example to demons
 | `$.database.features[0]`              | The first database feature.             | `"distributed"`               |
 | `$.database.features[2]`              | The third database feature.             | `"relational"`                |
 | `$.database.versions[0].type`         | The type of the first database version. | `"lts"`                       |
-| `$.database.versions[*].release_date` | The release date for all versions.      | `["2024-05-24","2024-03-29"]` |
+| `$.database.versions[*].release_date` | The release date for all versions.      | `["2024-08-27","2024-03-29"]` |
 | `$.*.features`                        | Two array's of features                 | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]`                              |
-| `$**.version`                         | All versions, with path wildcard        | `["v8.1.0","v8.0.0"]`         |
+| `$**.version`                         | All versions, with path wildcard        | `["v8.1.1","v8.0.0"]`         |
 | `$.database.features[0 to 2]`         | Range of database features from the first to the third.             | `["scalable","relational"]`   |
 
 For more information, see [the IETF draft for JSONPath](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html).
