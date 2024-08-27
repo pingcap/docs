@@ -153,17 +153,17 @@ You can compress the exported Parquet data using the following algorithms:
 
 1. Create an export task. TiDB Cloud CLI will export the data to local file by default:
 
-   ```shell
-   ticloud serverless export create -c <cluster-id> --filter "database.table"
-   ```
+    ```shell
+    ticloud serverless export create -c <cluster-id> --filter "database.table"
+    ```
 
-   You will get an export ID from the output.
+    You will get an export ID from the output.
 
 2. After the export task is successful, download the exported data to your local file:
 
-   ```shell
-   ticloud serverless export download -c <cluster-id> -e <export-id>
-   ```
+    ```shell
+    ticloud serverless export download -c <cluster-id> -e <export-id>
+    ```
 
 </div>
 </SimpleTab>
