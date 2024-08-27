@@ -51,11 +51,6 @@ Take the following steps to create one:
    
     ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
 
-
-</div>
-
-<div label="Role ARN (Manually)">
-
 If you have any trouble creating a role ARN with AWS CloudFormation, you can create one manually.
 
 Take the following steps to create one:
