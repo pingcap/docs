@@ -133,10 +133,10 @@ The following metrics relate to requests sent to TiKV. Retry requests are counte
 - PD Client CMD OPS: the statistics of commands executed by PD Client per second
 - PD Client CMD Duration: the time it takes for PD Client to execute commands
 - PD Client CMD Fail OPS: the statistics of failed commands executed by PD Client per second
-- PD TSO OPS: the number of TSO that TiDB obtains from PD per second
+- PD TSO OPS: the number of gRPC requests per second that TiDB sends to PD (cmd) and the number of TSO requests (request); each gRPC request contains a batch of TSO requests
 - PD TSO Wait Duration: the time that TiDB waits for PD to return TSO
-- PD TSO RPC duration: the duration from the time that TiDB sends request to PD (to get TSO) to the time that TiDB receives TSO
-- Start TSO Wait Duration: the duration from the time that TiDB sends request to PD (to get `start TSO`) to the time that TiDB receives `start TSO`
+- PD TSO RPC duration: the duration from the time that TiDB sends gRPC requests to PD to get TSO to the time that TiDB receives the gRPC response from PD
+- Async TSO Duration: the duration from the time that TiDB prepares to get TSO to the time that TiDB actually starts to wait for PD to return TSO
 
 ### Schema Load
 
