@@ -69,11 +69,11 @@ Number of queries using plan cache per second in all TiDB instances
 ### KV/TSO Request OPS
 
 - kv request total: Total number of KV requests per second in all TiDB instances
-- kv request by type: Number of KV requests per second in all TiDB instances based on such types as `Get`, `Prewrite`, and `Commit`.
-- tso - cmd: Number of `tso cmd` requests per second in all TiDB instances
-- tso - request: Number of `tso request` requests per second in all TiDB instances
+- kv request by type: Number of KV requests per second in all TiDB instances based on such types as `Get`, `Prewrite`, and `Commit`
+- tso - cmd: Number of gRPC requests per second in all TiDB instances; each gRPC request contains a batch of TSO requests
+- tso - request: Number of TSO requests per second in all TiDB instances
 
-Generally, dividing `tso - cmd` by `tso - request` yields the average batch size of requests per second.
+Generally, `tso - request` divided by `tso - cmd` is the average size of the TSO request batch per second.
 
 ### Connection Count
 
