@@ -34,7 +34,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 > **Note:**
 >
 > - TiCDC only replicates incremental data. To initialize full data, use Dumpling/TiDB Lightning or BR.
-> - After the full data is initialized, you need to specify the `start-ts` as the TSO when the upstream backup is performed. For example, the `pos` value in the metadata file under the Dumpling directory, or the `backupTS` in the log output after the BR backup is completed.
+> - After the full data is initialized, you need to specify the `start-ts` as the TSO when the upstream backup is performed. For example, the `pos` value in the metadata file under the Dumpling directory, or the `backupTS` value in the log output after BR completes the backup.
 
 ## Configure sink URI for MySQL or TiDB
 
