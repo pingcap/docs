@@ -330,7 +330,5 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
     You can see the VPC information when the peering is **active**. If the peering status is still **system checking**, wait for about 5 minutes and open the dialog again.
 
-3. Click **Get Endpoint** and wait for a few minutes. Then the connection command is displayed in the dialog.
-
-4. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+3. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
