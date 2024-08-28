@@ -38,7 +38,7 @@ TiDB バージョン: 6.5.1
 
     -   TiDB クラスタの初期化時に実行される SQL スクリプトの指定をサポート[＃35624](https://github.com/pingcap/tidb/issues/35624) @ [モルゴ](https://github.com/morgo)
 
-        TiDB v6.5.1 では、新しい構成項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスターを初めて起動するときに、コマンドライン パラメータ`--initialize-sql-file`を構成することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を実行する必要がある場合に使用できます。詳細については、 [ドキュメンテーション](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)を参照してください。
+        TiDB v6.5.1 では、新しい構成項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスターを初めて起動するときに、コマンドライン パラメータ`--initialize-sql-file`を構成することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を実行する必要がある場合に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)を参照してください。
 
     -   メモリリークやパフォーマンスの低下を防ぐために、期限切れの領域キャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [スティクナーフ](https://github.com/sticnarf)
 
@@ -68,11 +68,11 @@ TiDB バージョン: 6.5.1
 
     -   ティCDC
 
-        -   プルベースのシンクを有効にしてシステムスループットを最適化[＃8232](https://github.com/pingcap/tiflow/issues/8232) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   プルベースのシンクを有効にしてシステムスループットを最適化[＃8232](https://github.com/pingcap/tiflow/issues/8232) @ [ハイラスティン](https://github.com/Rustin170506)
         -   GCS 互換または Azure 互換のオブジェクトstorageへの REDO ログの保存をサポート[＃7987](https://github.com/pingcap/tiflow/issues/7987) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   シンクのスループットを向上させるために、非同期モードでMQシンクとMySQLシンクを実装する[＃5928](https://github.com/pingcap/tiflow/issues/5928) @ [アミヤンフェイ](https://github.com/amyangfei) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -81,13 +81,13 @@ TiDB バージョン: 6.5.1
     -   `auto analyze`により正常なシャットダウンに長い時間がかかる問題を修正[＃40038](https://github.com/pingcap/tidb/issues/40038) @ [翻訳者](https://github.com/xuyifangreeneyes)
     -   DDL取り込み[＃40970](https://github.com/pingcap/tidb/issues/40970) @ [タンジェンタ](https://github.com/tangenta)中にデータ競合が発生する可能性がある問題を修正
     -   インデックスを[＃40879](https://github.com/pingcap/tidb/issues/40879) @ [タンジェンタ](https://github.com/tangenta)で追加するとデータ競合が発生する可能性がある問題を修正しました
-    -   テーブル[＃38436](https://github.com/pingcap/tidb/issues/38436) @ [タンジェンタ](https://github.com/tangenta)に多数のリージョンがある場合、無効なリージョンキャッシュが原因でインデックス追加操作が非効率になる問題を修正しました。
+    -   テーブル[＃38436](https://github.com/pingcap/tidb/issues/38436) @ [タンジェンタ](https://github.com/tangenta)に多くのリージョンがある場合、無効なリージョンキャッシュが原因でインデックス追加操作が非効率になる問題を修正しました。
     -   初期化中に TiDB がデッドロックする可能性がある問題を修正[＃40408](https://github.com/pingcap/tidb/issues/40408) @ [定義2014](https://github.com/Defined2014)
     -   TiDB がキー範囲[＃40158](https://github.com/pingcap/tidb/issues/40158) @ [天菜まお](https://github.com/tiancaiamao)を構築するときに`NULL`値を不適切に処理するため、予期しないデータが読み取られる問題を修正しました。
     -   メモリの再利用により、システム変数の値が誤って変更される場合がある問題を修正[＃40979](https://github.com/pingcap/tidb/issues/40979) @ [lcwangchao](https://github.com/lcwangchao)
     -   テーブルの主キーに`ENUM`列[＃40456](https://github.com/pingcap/tidb/issues/40456) @ [lcwangchao](https://github.com/lcwangchao)が含まれている場合にTTLタスクが失敗する問題を修正
     -   ユニークインデックス[＃40592](https://github.com/pingcap/tidb/issues/40592) @ [タンジェンタ](https://github.com/tangenta)を追加するときに TiDB がパニックになる問題を修正
-    -   同じテーブルを同時に切り捨てるときに、一部の切り捨て操作が MDL によってブロックされない問題を修正[＃40484](https://github.com/pingcap/tidb/issues/40484) @ [翻訳:](https://github.com/wjhuang2016)
+    -   同じテーブルを同時に切り捨てるときに、一部の切り捨て操作が MDL によってブロックできない問題を修正[＃40484](https://github.com/pingcap/tidb/issues/40484) @ [翻訳:](https://github.com/wjhuang2016)
     -   動的トリミングモード[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [イサール](https://github.com/Yisaer)でパーティションテーブルにグローバルバインディングが作成された後に TiDB が再起動できない問題を修正しました。
     -   「カーソル読み取り」メソッドを使用してデータを読み取ると、GC [＃39447](https://github.com/pingcap/tidb/issues/39447) @ [ジグアン](https://github.com/zyguan)が原因でエラーが返される可能性がある問題を修正しました。
     -   `SHOW PROCESSLIST` [＃41156](https://github.com/pingcap/tidb/issues/41156) @ [ヤンケオ](https://github.com/YangKeao)の結果で`EXECUTE`情報が null になる問題を修正しました
@@ -115,7 +115,7 @@ TiDB バージョン: 6.5.1
     -   パーティションテーブルにグローバルバインディングを作成すると、TiDB が[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [イサール](https://github.com/Yisaer)で起動に失敗する可能性がある問題を修正しました。
     -   スローログ[＃41458](https://github.com/pingcap/tidb/issues/41458) @ [時間と運命](https://github.com/time-and-fate)でクエリプラン演算子が欠落する可能性がある問題を修正しました
     -   仮想列を持つ TopN 演算子が誤って TiKV またはTiFlash [＃41355](https://github.com/pingcap/tidb/issues/41355) @ [ドゥージール9](https://github.com/Dousir9)にプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。
-    -   インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) [＃40464](https://github.com/pingcap/tidb/issues/40464) [＃40217](https://github.com/pingcap/tidb/issues/40217) @ [タンジェンタ](https://github.com/tangenta)を追加するときにデータの不整合が発生する問題を修正
+    -   インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) [＃40464](https://github.com/pingcap/tidb/issues/40464) [#40217](https://github.com/pingcap/tidb/issues/40217) @ [タンジェンタ](https://github.com/tangenta)を追加するときにデータの不整合が発生する問題を修正
     -   インデックス[＃41515](https://github.com/pingcap/tidb/issues/41515) @ [タンジェンタ](https://github.com/tangenta)を追加するときに`Pessimistic lock not found`エラーが発生する問題を修正しました
     -   一意のインデックス[＃41630](https://github.com/pingcap/tidb/issues/41630) @ [タンジェンタ](https://github.com/tangenta)を追加するときに誤って報告される重複キー エラーの問題を修正しました
     -   TiDB [＃40741](https://github.com/pingcap/tidb/issues/40741) @ [ソロッツ](https://github.com/solotzg)で`paging`使用するとパフォーマンスが低下する問題を修正
@@ -171,7 +171,7 @@ TiDB バージョン: 6.5.1
         -   TiCDC が過度に多くのテーブル[＃8004](https://github.com/pingcap/tiflow/issues/8004) @ [金星の上](https://github.com/overvenus)を複製するとチェックポイントが進まない問題を修正しました。
         -   レプリケーション遅延が過度に大きい場合に、REDO ログを適用すると OOM が発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   メタ[＃8074](https://github.com/pingcap/tiflow/issues/8074) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)への書き込みに REDO ログが有効になっている場合にパフォーマンスが低下する問題を修正しました。
-        -   TiCDC が大規模なトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正[＃7982](https://github.com/pingcap/tiflow/issues/7982) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   TiCDC が大規模なトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正[＃7982](https://github.com/pingcap/tiflow/issues/7982) @ [ハイラスティン](https://github.com/Rustin170506)
         -   PD が異常なときにチェンジフィードを一時停止すると、誤ったステータス[＃8330](https://github.com/pingcap/tiflow/issues/8330) @ [スドジ](https://github.com/sdojjy)になる問題を修正しました。
         -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [アズドンメン](https://github.com/asddongmen)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定されている場合に発生するデータの不整合を修正します。
         -   テーブル スケジューリングとブラックホール シンクのpanic問題を修正[＃8024](https://github.com/pingcap/tiflow/issues/8024) [＃8142](https://github.com/pingcap/tiflow/issues/8142) @ [ヒック](https://github.com/hicqu)

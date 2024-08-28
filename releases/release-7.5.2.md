@@ -16,7 +16,7 @@ TiDB バージョン: 7.5.2
 -   RocksDB 用の TiKV 構成項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659-v715-and-v752)を追加します。これにより、Write Ahead Log (WAL) [＃16549](https://github.com/tikv/tikv/issues/16549) @ [v01dスター](https://github.com/v01dstar)の破損の可能性を調査できます。
 -   TiDB Lightning `strict-format`または`SPLIT_FILE`を使用して CSV ファイルをインポートする場合は、行末文字を設定する必要があります[＃37338](https://github.com/pingcap/tidb/issues/37338) @ [ランス6716](https://github.com/lance6716)
 -   TiCDCオープンプロトコルの設定項目`sink.open.output-old-value`を追加して、更新前の値を下流[＃10916](https://github.com/pingcap/tiflow/issues/10916) @ [スドジ](https://github.com/sdojjy)に出力するかどうかを制御します。
--   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理するときに、 `UPDATE`イベントで主キーまたは非 NULL の一意のインデックス値が変更されると、TiCDC はこのイベントを`DELETE`のイベントと`INSERT`イベントに分割していました。v7.5.2 以降では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC が対応するテーブルをダウンストリームに複製し始めるときに PD から取得される現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`イベントを`DELETE`のイベントと`INSERT`のイベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が誤っている可能性があり、分割された`DELETE`と`INSERT`イベントの順序が誤っている可能性があるため、ダウンストリーム データの不整合の問題に対処できます。詳細については、 [ドキュメンテーション](https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#split-update-events-for-mysql-sinks)を参照してください[＃10918](https://github.com/pingcap/tiflow/issues/10918) @ [リデズ](https://github.com/lidezhu)
+-   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理するときに、 `UPDATE`イベントで主キーまたは非 NULL の一意のインデックス値が変更されると、TiCDC はこのイベントを`DELETE`のイベントと`INSERT`イベントに分割していました。v7.5.2 以降では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC が対応するテーブルをダウンストリームに複製し始めるときに PD から取得される現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`イベントを`DELETE`のイベントと`INSERT`のイベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が誤っている可能性があり、分割された`DELETE`と`INSERT`イベントの順序が誤っている可能性があるため、ダウンストリーム データの不整合の問題に対処できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#split-update-events-for-mysql-sinks)を参照してください[＃10918](https://github.com/pingcap/tiflow/issues/10918) @ [リデズ](https://github.com/lidezhu)
 
 ## 改善点 {#improvements}
 
@@ -24,7 +24,7 @@ TiDB バージョン: 7.5.2
 
     -   `ANALYZE`文がメタデータ ロック[＃47475](https://github.com/pingcap/tidb/issues/47475) @ [翻訳:](https://github.com/wjhuang2016)をブロックする問題を最適化します。
     -   `SHOW CREATE TABLE` [＃52939](https://github.com/pingcap/tidb/issues/52939) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)の出力に表示される式のデフォルト値の MySQL 互換性を改善しました
-    -   常に`false`である DNF 項目の処理を強化し、そのようなフィルター条件を直接無視することで、不要なテーブル全体のスキャンを回避します[＃40997](https://github.com/pingcap/tidb/issues/40997) @ [ハイラスティン](https://github.com/hi-rustin)
+    -   常に`false`である DNF 項目の処理を強化し、そのようなフィルター条件を直接無視することで、不要なテーブル全体のスキャンを回避します[＃40997](https://github.com/pingcap/tidb/issues/40997) @ [ハイラスティン](https://github.com/Rustin170506)
     -   `EXPLAIN ANALYZE` [＃51727](https://github.com/pingcap/tidb/issues/51727) @ [ジンヘリン](https://github.com/JinheLin)のTiFlash `TableScan`オペレータの実行プロセスの統計を最適化します
     -   MPP ロード バランシング中にリージョンのないストアを削除する[＃52313](https://github.com/pingcap/tidb/issues/52313) @ [翻訳者](https://github.com/xzhangxian1008)
     -   大規模なテーブルをクエリするときに、KV 範囲からリージョンへの変換プロセスを高速化するために、PD からリージョンをバッチでロードする機能をサポート[＃51326](https://github.com/pingcap/tidb/issues/51326) @ [シーライズ](https://github.com/SeaRise)
@@ -73,7 +73,7 @@ TiDB バージョン: 7.5.2
         -   レプリケーションタスクを非同期に初期化して、プロセッサと所有者の初期化時間を短縮します[＃10845](https://github.com/pingcap/tiflow/issues/10845) @ [スドジ](https://github.com/sdojjy)
         -   Kafka クラスターのバージョンを自動的に検出し、Kafka [＃10852](https://github.com/pingcap/tiflow/issues/10852) @ [989898 円](https://github.com/wk989898)との互換性を向上させます。
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -102,7 +102,7 @@ TiDB バージョン: 7.5.2
     -   `lite-init-stats`と`concurrently-init-stats` [＃52223](https://github.com/pingcap/tidb/issues/52223) @ [ホーキングレイ](https://github.com/hawkingrei)の両方を有効にした後に統計を初期化すると TiDB がpanicになる可能性がある問題を修正しました
     -   `NO_JOIN`ヒントが`CREATE BINDING` [＃52813](https://github.com/pingcap/tidb/issues/52813) @ [qw4990](https://github.com/qw4990)では機能しない問題を修正
     -   `ALL`関数に含まれるサブクエリが誤った結果を引き起こす可能性がある問題を修正[＃52755](https://github.com/pingcap/tidb/issues/52755) @ [ホーキングレイ](https://github.com/hawkingrei)
-    -   `VAR_SAMP()`ウィンドウ関数[＃52933](https://github.com/pingcap/tidb/issues/52933) @ [ハイラスティン](https://github.com/hi-rustin)として使用できない問題を修正
+    -   `VAR_SAMP()`ウィンドウ関数[＃52933](https://github.com/pingcap/tidb/issues/52933) @ [ハイラスティン](https://github.com/Rustin170506)として使用できない問題を修正
     -   スライスの浅いコピーを使用せずに列を整理すると TiDB がpanicを起こす可能性がある問題を修正[＃52768](https://github.com/pingcap/tidb/issues/52768) @ [ウィノロス](https://github.com/winoros)
     -   ユニークインデックスを追加すると TiDB がpanicを起こす可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [翻訳:](https://github.com/wjhuang2016)
     -   初期化が完了する前に TiDBサーバーが正常とマークされる問題を修正[＃51596](https://github.com/pingcap/tidb/issues/51596) @ [神奇徳宝子](https://github.com/shenqidebaozi)
@@ -110,7 +110,7 @@ TiDB バージョン: 7.5.2
     -   テーブルにクラスター化インデックス[＃51372](https://github.com/pingcap/tidb/issues/51372) @ [グオシャオゲ](https://github.com/guo-shaoge)がある場合に並列`Apply`で誤った結果が生成される可能性がある問題を修正しました。
     -   サブクエリの`HAVING`句に相関列[＃51107](https://github.com/pingcap/tidb/issues/51107) @ [ホーキングレイ](https://github.com/hawkingrei)が含まれている場合にクエリ結果が正しくない可能性がある問題を修正しました。
     -   `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブル[＃50810](https://github.com/pingcap/tidb/issues/50810) @ [定義2014](https://github.com/Defined2014)が返される可能性がある問題を修正しました。
-    -   統計の初期化が完了する前に自動統計収集がトリガーされる問題を修正[＃52346](https://github.com/pingcap/tidb/issues/52346) @ [ハイラスティン](https://github.com/hi-rustin)
+    -   統計の初期化が完了する前に自動統計収集がトリガーされる問題を修正[＃52346](https://github.com/pingcap/tidb/issues/52346) @ [ハイラスティン](https://github.com/Rustin170506)
     -   AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` [＃52600](https://github.com/pingcap/tidb/issues/52600) @ [天菜まお](https://github.com/tiancaiamao)の場合に自動増分列の値が減少する可能性がある問題を修正しました。
     -   共通テーブル式 (CTE) を使用して統計情報が欠落しているパーティション テーブルにアクセスすると、クエリ結果が正しくなくなる可能性がある問題を修正しました[＃51873](https://github.com/pingcap/tidb/issues/51873) @ [qw4990](https://github.com/qw4990)
     -   TiDBダッシュボード監視ページ[＃51889](https://github.com/pingcap/tidb/issues/51889) @ [ヤンケオ](https://github.com/YangKeao)での接続数（接続数）の計算と表示が誤っていた問題を修正
@@ -126,13 +126,13 @@ TiDB バージョン: 7.5.2
     -   特定の列の統計が完全にロードされていない場合に、 `EXPLAIN`ステートメントの結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @ [時間と運命](https://github.com/time-and-fate)
     -   照合の新しいフレームワークが無効になっている場合、異なる照合を含む式によってクエリがpanicになる可能性がある問題を修正[＃52772](https://github.com/pingcap/tidb/issues/52772) @ [翻訳:](https://github.com/wjhuang2016)
     -   複数値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラー[＃49438](https://github.com/pingcap/tidb/issues/49438) @ [qw4990](https://github.com/qw4990)が返される可能性がある問題を修正しました。
-    -   TiDB が式[＃43527](https://github.com/pingcap/tidb/issues/43527) @ [ハイラスティン](https://github.com/hi-rustin)内のシステム変数の型を正しく変換できない問題を修正
+    -   TiDB が式[＃43527](https://github.com/pingcap/tidb/issues/43527) @ [ハイラスティン](https://github.com/Rustin170506)内のシステム変数の型を正しく変換できない問題を修正
     -   `INSERT IGNORE`を実行すると、一意のインデックスとデータ[＃51784](https://github.com/pingcap/tidb/issues/51784) @ [翻訳:](https://github.com/wjhuang2016)の間に不整合が生じる可能性がある問題を修正
-    -   OOM エラーが発生した後に自動統計収集が停止する問題を修正[＃51993](https://github.com/pingcap/tidb/issues/51993) @ [ハイラスティン](https://github.com/hi-rustin)
+    -   OOM エラーが発生した後に自動統計収集が停止する問題を修正[＃51993](https://github.com/pingcap/tidb/issues/51993) @ [ハイラスティン](https://github.com/Rustin170506)
     -   `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが制限[＃52601](https://github.com/pingcap/tidb/issues/52601) @ [ホーキングレイ](https://github.com/hawkingrei)を超えると TiDB がクラッシュする可能性がある問題を修正しました
     -   複数のレベルの`max_execute_time`設定が互いに干渉する問題を修正[＃50914](https://github.com/pingcap/tidb/issues/50914) @ [ジフハウス](https://github.com/jiyfhust)
     -   1 つの SQL 文を使用して複数のインデックスを追加することによって発生するインデックスの不整合の問題を修正[＃51746](https://github.com/pingcap/tidb/issues/51746) @ [タンジェンタ](https://github.com/tangenta)
-    -   関連するサブクエリがある場合にウィンドウ関数がpanic可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @ [ハイラスティン](https://github.com/hi-rustin)
+    -   関連するサブクエリがある場合にウィンドウ関数がpanic可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @ [ハイラスティン](https://github.com/Rustin170506)
     -   `shuffleExec`予期せず終了すると TiDB がクラッシュする問題を修正[＃48230](https://github.com/pingcap/tidb/issues/48230) @ [うわー](https://github.com/wshwsh12)
     -   パーティション DDL タスク[＃51090](https://github.com/pingcap/tidb/issues/51090) @ [ジフハウス](https://github.com/jiyfhust)をロールバックするときにステータスが停止する問題を修正しました
     -   `BINARY`タイプの JSON をクエリすると、場合によってはエラーが発生する可能性がある問題を修正しました[＃51547](https://github.com/pingcap/tidb/issues/51547) @ [ヤンケオ](https://github.com/YangKeao)
@@ -145,7 +145,7 @@ TiDB バージョン: 7.5.2
     -   取り込みモードでインデックスを追加すると、一部のコーナーケースでデータインデックスの不整合が発生する可能性がある問題を修正[＃51954](https://github.com/pingcap/tidb/issues/51954) @ [ランス6716](https://github.com/lance6716)
     -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが[＃51581](https://github.com/pingcap/tidb/issues/51581) @ [ホーキングレイ](https://github.com/hawkingrei)で終了する可能性がある問題を修正しました。
     -   無効な設定項目[＃51399](https://github.com/pingcap/tidb/issues/51399) @ [定義2014](https://github.com/Defined2014)が含まれている場合に設定ファイルが有効にならない問題を修正しました
-    -   SQL ステートメントに`JOIN`含まれ、ステートメント内の`SELECT`リストに定数[＃50358](https://github.com/pingcap/tidb/issues/50358) @ [いいえ](https://github.com/yibin87)のみが含まれている場合に、MPP を使用してクエリを実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました。
+    -   SQL ステートメントに`JOIN`含まれ、ステートメント内の`SELECT`リストに定数[＃50358](https://github.com/pingcap/tidb/issues/50358) @ [いびん87](https://github.com/yibin87)のみが含まれている場合に、MPP を使用してクエリを実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました。
     -   `determinate`モード ( `tidb_opt_objective='determinate'` ) でクエリに述語が含まれていない場合、統計がロードされない可能性がある問題を修正しました[＃48257](https://github.com/pingcap/tidb/issues/48257) @ [時間と運命](https://github.com/time-and-fate)
     -   特定の条件下では`SURVIVAL_PREFERENCES`属性が`SHOW CREATE PLACEMENT POLICY`ステートメントの出力に表示されない可能性がある問題を修正[＃51699](https://github.com/pingcap/tidb/issues/51699) @ [lcwangchao](https://github.com/lcwangchao)
     -   IndexJoin が Left Outer Anti Semi 型[＃52902](https://github.com/pingcap/tidb/issues/52902) @ [いいえ](https://github.com/yibin87)のハッシュ値を計算するときに重複行を生成する問題を修正しました。
@@ -183,7 +183,7 @@ TiDB バージョン: 7.5.2
     -   `ALTER PLACEMENT POLICY`配置ポリシーを変更できない問題を修正[＃52257](https://github.com/pingcap/tidb/issues/52257) [＃51712](https://github.com/pingcap/tidb/issues/51712) @ [ジフハウス](https://github.com/jiyfhust)
     -   配置ルール[＃7808](https://github.com/tikv/pd/issues/7808) @ [rleungx](https://github.com/rleungx)を使用すると、ダウンしたピアが回復しない可能性がある問題を修正しました。
     -   PDリーダーを手動で転送すると失敗する可能性がある問題を修正[＃8225](https://github.com/tikv/pd/issues/8225) @ [ヒューシャープ](https://github.com/HuSharp)
-    -   書き込みホットスポットのスケジュール設定により配置ポリシーの制約が破られる可能性がある問題を修正[＃7848](https://github.com/tikv/pd/issues/7848) @ [翻訳者](https://github.com/lhy1024)
+    -   書き込みホットスポットのスケジュール設定により配置ポリシーの制約が破られる可能性がある問題を修正[＃7848](https://github.com/tikv/pd/issues/7848) @ [翻訳:](https://github.com/lhy1024)
     -   リソース グループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値[＃7346](https://github.com/tikv/pd/issues/7346) @ [グオシャオゲ](https://github.com/guo-shaoge)より少なくなる問題を修正しました。
     -   スケーリングの進行状況が正しく表示されない問題を修正[＃7726](https://github.com/tikv/pd/issues/7726) @ [キャビンフィーバーB](https://github.com/CabinfeverB)
     -   展開された 2 つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @ [トンスネークリン](https://github.com/TonsnakeLin)

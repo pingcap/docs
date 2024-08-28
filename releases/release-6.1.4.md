@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.4 Release Notes
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 6.1.4.
+summary: TiDB 6.1.4 の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 6.1.4 リリースノート {#tidb-6-1-4-release-notes}
@@ -34,7 +34,7 @@ TiDB バージョン: 6.1.4
 
         -   事前チェック項目`clusterResourceCheckItem`と`emptyRegionCheckItem`の重大度を`Critical`から`Warning` [＃37654](https://github.com/pingcap/tidb/issues/37654) @ [ニューベル](https://github.com/niubell)に変更します
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -80,15 +80,15 @@ TiDB バージョン: 6.1.4
         -   TiCDC が過度に多くのテーブル[＃8004](https://github.com/pingcap/tiflow/issues/8004) @ [アズドンメン](https://github.com/asddongmen)を複製するとチェックポイントが進まない問題を修正しました。
         -   `transaction_atomicity`と`protocol`構成ファイル[＃7935](https://github.com/pingcap/tiflow/issues/7935) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)経由で更新できない問題を修正
         -   TiFlashのバージョンがTiCDC [＃7744](https://github.com/pingcap/tiflow/issues/7744) @ [金星の上](https://github.com/overvenus)より新しい場合にTiCDCが誤ってエラーを報告する問題を修正しました
-        -   TiCDC が大規模なトランザクション[＃7913](https://github.com/pingcap/tiflow/issues/7913) @ [金星の上](https://github.com/overvenus)を複製するときに OOM が発生する問題を修正
-        -   TiCDC が大規模なトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正[＃7982](https://github.com/pingcap/tiflow/issues/7982) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   TiCDC が大規模なトランザクション[＃7913](https://github.com/pingcap/tiflow/issues/7913) @ [金星の上](https://github.com/overvenus)を複製するときに OOM が発生する問題を修正しました
+        -   TiCDC が大規模なトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正[＃7982](https://github.com/pingcap/tiflow/issues/7982) @ [ハイラスティン](https://github.com/Rustin170506)
         -   `changefeed query`の結果のうち`sasl-password`がマスクされていない問題を修正[＃7182](https://github.com/pingcap/tiflow/issues/7182) @ [ドヴェーデン](https://github.com/dveeden)
         -   ユーザーがレプリケーションタスクをすばやく削除し、同じタスク名で別のタスクを作成するとデータが失われる問題を修正[＃7657](https://github.com/pingcap/tiflow/issues/7657) @ [金星の上](https://github.com/overvenus)
 
     -   TiDB データ移行 (DM)
 
         -   `SHOW GRANTS`のダウンストリーム データベース名にワイルドカード (&quot;*&quot;) が含まれている場合に、DM が事前チェック中にエラーを発生させる可能性があるバグを修正しました[＃7645](https://github.com/pingcap/tiflow/issues/7645) @ [ランス6716](https://github.com/lance6716)
-        -   binlogログクエリイベント[＃7525](https://github.com/pingcap/tiflow/issues/7525) @ [りゅうめんぎゃ](https://github.com/liumengya94)の「COMMIT」によって DM がログを過剰に出力問題を修正しました
+        -   binlogログクエリイベント[＃7525](https://github.com/pingcap/tiflow/issues/7525) @ [りゅうめんぎゃ](https://github.com/liumengya94)の「COMMIT」によって DM がログを過剰に出力問題を修正しました。
         -   SSL [＃7941](https://github.com/pingcap/tiflow/issues/7941) @ [りゅうめんぎゃ](https://github.com/liumengya94)に`ssl-ca`しか設定されていない場合に DM タスクが起動しない問題を修正しました。
         -   1 つのテーブルに「更新」と「非更新」の両方のタイプの式フィルターが指定されている場合、すべての`UPDATE`ステートメントがスキップされるバグを修正しました[＃7831](https://github.com/pingcap/tiflow/issues/7831) @ [ランス6716](https://github.com/lance6716)
         -   テーブルに`update-old-value-expr`または`update-new-value-expr`のいずれか一方のみが設定されている場合に、フィルタ ルールが有効にならないか、DM が[＃7774](https://github.com/pingcap/tiflow/issues/7774) @ [ランス6716](https://github.com/lance6716)でパニックになるというバグを修正しました。
@@ -96,4 +96,4 @@ TiDB バージョン: 6.1.4
     -   TiDB Lightning
 
         -   TiDB Lightning が巨大なソース データ ファイル[＃39331](https://github.com/pingcap/tidb/issues/39331) @ [ダシュン](https://github.com/dsdashun)をインポートするときに発生するメモリリークの問題を修正しました
-        -   TiDB Lightning の事前チェックで、以前に失敗したインポートによって残されたダーティデータを見つけられない問題を修正[＃39477](https://github.com/pingcap/tidb/issues/39477) @ [ダシュン](https://github.com/dsdashun)
+        -   TiDB Lightning の事前チェックで、以前に失敗したインポートによって残されたダーティ データを見つけられない問題を修正[＃39477](https://github.com/pingcap/tidb/issues/39477) @ [ダシュン](https://github.com/dsdashun)

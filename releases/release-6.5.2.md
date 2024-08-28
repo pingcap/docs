@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.2 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.2.
+summary: TiDB 6.5.2 の互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 6.5.2 リリースノート {#tidb-6-5-2-release-notes}
@@ -17,16 +17,16 @@ TiDB バージョン: 6.5.2
 
     TiCDC クラスターを v6.5.2 またはそれ以降の v6.5.x バージョンにアップグレードする場合、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合は、アップグレード前に Confluent Schema Registry の互換性ポリシーを手動で`None`に調整して、changefeed がスキーマを正常に更新できるようにする必要があります。そうしないと、アップグレード後に changefeed がスキーマを更新できず、エラー状態になります。
 
--   パーティション化されたテーブルをstorageサービスにレプリケーションする際にデータ損失が発生する可能性がある問題を修正するため、TiCDC [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)構成項目のデフォルト値が`false`から`true`に変更されました。これは、テーブル内のパーティションがデフォルトで別のディレクトリに保存されることを意味します。データ損失の問題を回避するには、値を`true`のままにしておくことをお勧めします[＃8724](https://github.com/pingcap/tiflow/issues/8724) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+-   パーティション化されたテーブルをstorageサービスにレプリケーションする際にデータ損失が発生する可能性がある問題を修正するため、TiCDC [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)構成項目のデフォルト値が`false`から`true`に変更されました。これは、テーブル内のパーティションがデフォルトで別のディレクトリに保存されることを意味します。データ損失の問題を回避するために、値を`true`のままにしておくことをお勧めします[＃8724](https://github.com/pingcap/tiflow/issues/8724) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
 
 ## 改善点 {#improvements}
 
 -   ティビ
 
     -   プリペアドプランキャッシュ[＃42125](https://github.com/pingcap/tidb/issues/42125) @ [qw4990](https://github.com/qw4990)で`BatchPointGet`の実行プランのキャッシュをサポートします
-    -   インデックス結合[#40505](https://github.com/pingcap/tidb/issues/40505) @ [イサール](https://github.com/Yisaer)のより多くの SQL 形式をサポート
+    -   インデックス結合[#40505](https://github.com/pingcap/tidb/issues/40505) @ [イサール](https://github.com/Yisaer)の SQL 形式をさらにサポート
     -   一部のインデックスマージリーダーのログレベルを`"info"`から`"debug"` [＃41949](https://github.com/pingcap/tidb/issues/41949) @ [いいえ](https://github.com/yibin87)に変更します
-    -   クエリのレイテンシーを減らすために、制限付き範囲パーティションテーブルの`distsql_concurrency`設定を最適化します[＃41480](https://github.com/pingcap/tidb/issues/41480) @ [あなた06](https://github.com/you06)
+    -   範囲パーティション化されたテーブルと制限付きの`distsql_concurrency`設定を最適化して、クエリのレイテンシー[＃41480](https://github.com/pingcap/tidb/issues/41480) @ [あなた06](https://github.com/you06)を削減します。
 
 -   TiFlash
 
@@ -40,14 +40,14 @@ TiDB バージョン: 6.5.2
         -   TiCDC オープン API v2.0 [＃8743](https://github.com/pingcap/tiflow/issues/8743) @ [スドジ](https://github.com/sdojjy)をリリース
         -   TiCDC の OOM 問題を防ぐために`gomemlimit`導入する[＃8675](https://github.com/pingcap/tiflow/issues/8675) @ [アミヤンフェイ](https://github.com/amyangfei)
         -   マルチステートメントアプローチを使用して、 `UPDATE`のステートメント[＃8057](https://github.com/pingcap/tiflow/issues/8057) @ [アミヤンフェイ](https://github.com/amyangfei)のバッチ実行を伴うシナリオでレプリケーションのパフォーマンスを最適化します。
-        -   災害復旧シナリオでのスループットの向上とRTOの短縮のために、REDOアプライヤでのトランザクション分割をサポートする[＃8318](https://github.com/pingcap/tiflow/issues/8318)​​ @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+        -   災害復旧シナリオでのスループットの向上とRTOの短縮のために、REDOアプライヤでのトランザクション分割をサポートする[＃8318](https://github.com/pingcap/tiflow/issues/8318) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   REDOログ[＃8361](https://github.com/pingcap/tiflow/issues/8361) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)へのDDLイベントの適用をサポート
 
     -   TiDB Lightning
 
         -   BOM ヘッダー[＃40744](https://github.com/pingcap/tidb/issues/40744) @ [ダシュン](https://github.com/dsdashun)を含む CSV データ ファイルのインポートをサポート
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
     -   キャッシュ テーブルに新しい列が追加された後、列[＃42928](https://github.com/pingcap/tidb/issues/42928) @ [ルクス](https://github.com/lqs)のデフォルト値ではなく値が`NULL`なる問題を修正しました。
@@ -65,7 +65,7 @@ TiDB バージョン: 6.5.2
     -   準備済みプランキャッシュが有効になっている場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @ [ふーふー](https://github.com/fzzf678)
     -   準備プランキャッシュが有効になっている場合に IndexMerge が誤った結果を生成する可能性がある問題を修正[＃41828](https://github.com/pingcap/tidb/issues/41828) @ [qw4990](https://github.com/qw4990)
     -   `max_prepared_stmt_count`の設定が有効にならない問題を修正[＃39735](https://github.com/pingcap/tidb/issues/39735) @ [翻訳者](https://github.com/xuyifangreeneyes)
-    -   グローバルメモリ制御により、メモリ使用量が`tidb_server_memory_limit_sess_min_size` [＃42662](https://github.com/pingcap/tidb/issues/42662) @ [徐淮宇](https://github.com/XuHuaiyu)未満の SQL 文が誤って強制終了される可能性がある問題を修正しました。
+    -   グローバルメモリ制御により、メモリ使用量が`tidb_server_memory_limit_sess_min_size` [＃42662](https://github.com/pingcap/tidb/issues/42662) @ [徐淮宇](https://github.com/XuHuaiyu)未満の SQL ステートメントが誤って強制終了される可能性がある問題を修正しました。
     -   パーティションテーブル[＃40596](https://github.com/pingcap/tidb/issues/40596) @ [天菜まお](https://github.com/tiancaiamao)の動的トリミングモードでインデックス結合がpanicを引き起こす可能性がある問題を修正しました。
 
 -   ティクヴ
@@ -94,7 +94,7 @@ TiDB バージョン: 6.5.2
 
     -   ティCDC
 
-        -   TiCDC がデータをオブジェクトstorage[＃8581](https://github.com/pingcap/tiflow/issues/8581) @ [チャールズ・チュン96](https://github.com/CharlesCheung96) @ [ハイラスティン](https://github.com/hi-rustin)に複製するときにパーティション セパレーターが機能しない問題を修正しました
+        -   TiCDC がデータをオブジェクトstorage[＃8581](https://github.com/pingcap/tiflow/issues/8581) @ [チャールズ・チュン96](https://github.com/CharlesCheung96) @ [ハイラスティン](https://github.com/Rustin170506)に複製するときにパーティション セパレーターが機能しない問題を修正しました
         -   TiCDC がオブジェクトstorage[＃8256](https://github.com/pingcap/tiflow/issues/8256) @ [趙新宇](https://github.com/zhaoxinyu)にデータを複製するときにテーブル スケジューリングによってデータが失われる可能性がある問題を修正しました。
         -   非再入可能 DDL ステートメント[＃8662](https://github.com/pingcap/tiflow/issues/8662) @ [ヒック](https://github.com/hicqu)が原因でレプリケーションが停止する問題を修正しました
         -   TiCDC がオブジェクトstorage[＃8666](https://github.com/pingcap/tiflow/issues/8666) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)にデータを複製するときに、TiCDC スケーリングによってデータ損失が発生する可能性がある問題を修正しました。

@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.3.0 Release Notes
-summary: TiDB 6.3.0-DMR, released on September 30, 2022, introduces new features and improvements, including encryption at rest using the SM4 algorithm in TiKV, authentication using the SM3 algorithm in TiDB, and support for JSON data type and functions. It also provides execution time metrics at a finer granularity, enhances output for slow logs and `TRACE` statements, and supports deadlock history information in TiDB Dashboard. Additionally, TiDB v6.3.0 introduces new system variables and configuration file parameters, and fixes various bugs and issues. The release also includes improvements in TiKV, PD, TiFlash, Backup & Restore (BR), TiCDC, TiDB Binlog, TiDB Data Migration (DM), and TiDB Lightning.
+summary: 2022 年 9 月 30 日にリリースされた TiDB 6.3.0-DMR では、TiKV での SM4 アルゴリズムを使用した保存時の暗号化、TiDB での SM3 アルゴリズムを使用した認証、JSON データ型と関数のサポートなど、新機能と改善が導入されています。また、より細かい粒度で実行時間メトリックを提供し、スロー ログと TRACE` ステートメントの出力を強化し、TiDB ダッシュボードでデッドロック履歴情報をサポートします。さらに、TiDB v6.3.0 では、新しいシステム変数と構成ファイル パラメーターが導入され、さまざまなバグと問題が修正されています。このリリースには、TiKV、PD、 TiFlash、バックアップと復元 (BR)、TiCDC、TiDB Binlog、TiDB データ移行 (DM)、およびTiDB Lightningの改善も含まれています。
 ---
 
 # TiDB 6.3.0 リリースノート {#tidb-6-3-0-release-notes}
@@ -139,7 +139,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   統計が古くなったときに統計をロードするデフォルトのポリシーを変更する[＃27601](https://github.com/pingcap/tidb/issues/27601) @ [翻訳者](https://github.com/xuyifangreeneyes)
 
-    v5.3.0 では、TiDB は統計が古くなった場合にオプティマイザがどのように動作するかを制御するシステム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)を導入しました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。SQL ステートメントに関係するオブジェクトの統計が古くなった場合、オプティマイザは統計 (テーブルの合計行数以外) が信頼できないと見なし、代わりに疑似統計を使用します。実際のユーザー シナリオのテストと分析の結果、v6.3.0 以降ではデフォルト値`tidb_enable_pseudo_for_outdated_stats`が`OFF`に変更されました。統計が古くなっても、オプティマイザは引き続きテーブルの統計を使用するため、実行プランがより安定します。
+    v5.3.0 では、TiDB は統計が古くなった場合にオプティマイザがどのように動作するかを制御するシステム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)を導入しました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。SQL 文に関係するオブジェクトの統計が古くなった場合、オプティマイザは統計 (テーブルの合計行数以外) が信頼できないと見なし、代わりに疑似統計を使用します。実際のユーザー シナリオのテストと分析の結果、v6.3.0 以降ではデフォルト値`tidb_enable_pseudo_for_outdated_stats`が`OFF`に変更されました。統計が古くなっても、オプティマイザは引き続きテーブルの統計を使用するため、実行プランがより安定します。
 
 -   タイタンを無効にするとGA @ [タボキ](https://github.com/tabokie)になる
 
@@ -243,7 +243,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 | -------------- | ----------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ティビ            | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新しく追加された | TiDB が一時データを保存するために使用するファイル システムの場所を指定します。機能が TiDB ノードにローカルstorageを必要とする場合、TiDB は対応する一時データをこの場所に保存します。デフォルト値は`/tmp/tidb`です。                                                                                             |
 | ティクヴ           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新しく追加された | スレッド プールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在の CPU 使用率に基づいて UnifyReadPool スレッド プールのサイズを自動的に調整することで、TiKV の読み取りパフォーマンスが最適化されます。                                                                                               |
-| ティクヴ           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 修正済み     | 新しい値オプション`sm4-ctr`が導入されました。この構成項目を`sm4-ctr`に設定すると、データは保存される前に SM4 を使用して暗号化されます。                                                                                                                                         |
+| ティクヴ           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 修正済み     | 新しい値オプション`sm4-ctr`が導入されました。この構成項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                                                                     |
 | ティクヴ           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログ ファイルをリサイクルするかどうかを決定します。有効にすると、論理的に消去されたログ ファイルはリサイクル用に予約されます。これにより、書き込みワークロードのロングテールレイテンシーが削減されます。この構成項目は、 [フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630) &gt;= 2 の場合にのみ使用できます。 |
 | ティクヴ           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログ ファイルのバージョンを指定します。TiKV v6.3.0 より前のバージョンの場合、デフォルトのログ ファイルのバージョンは`1`です。ログ ファイルは TiKV &gt;= v6.1.0 で読み取ることができます。TiKV v6.3.0 以降の場合、デフォルトのログ ファイルのバージョンは`2`です。TiKV v6.3.0 以降では、ログ ファイルを読み取ることができます。            |
 | ティクヴ           | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)                                 | 修正済み     | v6.3.0 以降、デフォルト値は`false`から`true`に変更されます。                                                                                                                                                                                |
@@ -251,7 +251,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 | PD             | [診断を有効にする](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                   | 新しく追加された | 診断機能を有効にするかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                                  |
 | TiFlash        | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)   | 非推奨      | v6.3.0 以降、この構成項目は非推奨です。スレッド プールは、デフォルトでstorageエンジンからの読み取り要求を処理するために使用され、無効にすることはできません。                                                                                                                                  |
 | DM             | [`safe-mode-duration`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | 新しく追加された | 自動セーフ モードの期間を指定します。                                                                                                                                                                                                     |
-| ティCDC          | [`enable-sync-point`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)          | 新しく追加された | 同期ポイント機能を有効にするかどうかを指定します。                                                                                                                                                                                               |
+| ティCDC          | [`enable-sync-point`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)          | 新しく追加された | Syncpoint 機能を有効にするかどうかを指定します。                                                                                                                                                                                           |
 | ティCDC          | [`sync-point-interval`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)        | 新しく追加された | Syncpoint が上流スナップショットと下流スナップショットを揃える間隔を指定します。                                                                                                                                                                           |
 | ティCDC          | [`sync-point-retention`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)       | 新しく追加された | ダウンストリーム テーブルで同期ポイントによってデータが保持される期間を指定します。この期間を超えると、データはクリーンアップされます。                                                                                                                                                    |
 | ティCDC          | [`sink-uri.memory`](/ticdc/ticdc-changefeed-config.md#changefeed-cli-parameters)                      | 非推奨      | `memory`ソートは非推奨です。いかなる状況でも使用することはお勧めしません。                                                                                                                                                                               |
@@ -274,7 +274,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの設定をサポートしなくな�
 
     -   TiDB は、テーブルの存在を確認する際に、ターゲット テーブル名の大文字と小文字を区別しなくなりました[＃34610](https://github.com/pingcap/tidb/issues/34610) @ [天菜まお](https://github.com/tiancaiamao)
     -   `init_connect` [＃35324](https://github.com/pingcap/tidb/issues/35324) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)の値を設定するときに解析チェックを追加することで、MySQL の互換性が向上しました。
-    -   新しい接続[＃34964](https://github.com/pingcap/tidb/issues/34964) @ [翔吉偉](https://github.com/xiongjiwei)に対して生成されるログ警告を改善
+    -   新しい接続[＃34964](https://github.com/pingcap/tidb/issues/34964) @ [雄吉偉](https://github.com/xiongjiwei)に対して生成されるログ警告を改善
     -   DDL履歴ジョブを照会するためのHTTP APIを最適化し、 `start_job_id`パラメータ[＃35838](https://github.com/pingcap/tidb/issues/35838) @ [天菜まお](https://github.com/tiancaiamao)のサポートを追加します。
     -   JSON パスの構文が間違っている場合にエラーを報告する[＃22525](https://github.com/pingcap/tidb/issues/22525) [＃34959](https://github.com/pingcap/tidb/issues/34959) @ [雄吉偉](https://github.com/xiongjiwei)
     -   偽共有の問題を修正して結合操作のパフォーマンスを向上[＃37641](https://github.com/pingcap/tidb/issues/37641) @ [ゲンリキ](https://github.com/gengliqi)
@@ -282,7 +282,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの設定をサポートしなくな�
 
 -   ティクヴ
 
-    -   1 つのピアが到達不能になった後にRaftstore が大量のメッセージをブロードキャストするのを回避するための`unreachable_backoff`項目の設定をサポートします[＃13054](https://github.com/tikv/tikv/issues/13054) @ [5kbpsの](https://github.com/5kbpers)
+    -   1 つのピアが到達不能になった後にRaftstore が大量のメッセージをブロードキャストするのを回避するための`unreachable_backoff`項目の構成をサポートします[＃13054](https://github.com/tikv/tikv/issues/13054) @ [5kbpsの](https://github.com/5kbpers)
     -   TSOサービス[＃12794](https://github.com/tikv/tikv/issues/12794) @ [ピンギュ](https://github.com/pingyu)のフォールトトレランスを向上
     -   RocksDBで同時に実行されるサブコンパクション操作の数を動的に変更する機能をサポート ( `rocksdb.max-sub-compactions` ) [＃13145](https://github.com/tikv/tikv/issues/13145) @ [イーサフロー](https://github.com/ethercflow)
     -   空のリージョン[＃12421](https://github.com/tikv/tikv/issues/12421) @ [タボキ](https://github.com/tabokie)マージのパフォーマンスを最適化します
@@ -302,7 +302,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの設定をサポートしなくな�
     -   `HexIntArg/HexStrArg`機能をTiFlash [＃5107](https://github.com/pingcap/tiflash/issues/5107) @ [ヤンケオ](https://github.com/YangKeao)に押し下げるサポート
     -   TiFlash のインタープリタをリファクタリングし、新しいインタープリタ Planner [＃4739](https://github.com/pingcap/tiflash/issues/4739) @ [シーライズ](https://github.com/SeaRise)をサポートします
     -   TiFlash [＃5609](https://github.com/pingcap/tiflash/issues/5609) @ [ベストウッディ](https://github.com/bestwoody)のメモリトラッカーの精度を向上
-    -   `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN`照合順序[＃5294](https://github.com/pingcap/tiflash/issues/5294) @ [ソロッツ](https://github.com/solotzg)で文字列列のパフォーマンスを向上
+    -   `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN`照合[＃5294](https://github.com/pingcap/tiflash/issues/5294) @ [ソロッツ](https://github.com/solotzg)で文字列列のパフォーマンスを向上
     -   ReadLimiter [＃5401](https://github.com/pingcap/tiflash/issues/5401) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)でバックグラウンドでの I/O スループットを計算します[＃5091](https://github.com/pingcap/tiflash/issues/5091)
 
 -   ツール
@@ -315,22 +315,22 @@ v6.3.0 以降、TiCDC は Pulsar シンクの設定をサポートしなくな�
     -   ティCDC
 
         -   TiCDC とアップストリーム TiDB [＃6506](https://github.com/pingcap/tiflow/issues/6506) @ [ランス6716](https://github.com/lance6716)で導入された並行 DDL フレームワークとの互換性を向上
-        -   MySQLシンクがエラー[＃6460](https://github.com/pingcap/tiflow/issues/6460) @ [金星の上](https://github.com/overvenus)を取得したときにDMLステートメントの`start ts`ログ記録をサポートする
+        -   MySQLシンクがエラー[＃6460](https://github.com/pingcap/tiflow/issues/6460) @ [金星の上](https://github.com/overvenus)を取得したときにDMLステートメントの`start ts`ログ記録をサポート
         -   `api/v1/health` API を強化して、TiCDC クラスター[＃4757](https://github.com/pingcap/tiflow/issues/4757) @ [金星の上](https://github.com/overvenus)のより正確なヘルス状態を返すようにしました
-        -   シンクのスループットを向上させるために、非同期モードでMQシンクとMySQLシンクを実装する[＃5928](https://github.com/pingcap/tiflow/issues/5928) @ [ヒック](https://github.com/hicqu) @ [ハイラスティン](https://github.com/hi-rustin)
-        -   廃止予定のパルサーシンク[＃7087](https://github.com/pingcap/tiflow/issues/7087) @ [ハイラスティン](https://github.com/hi-rustin)を削除します
+        -   シンクのスループットを向上させるために、非同期モードでMQシンクとMySQLシンクを実装する[＃5928](https://github.com/pingcap/tiflow/issues/5928) @ [ヒック](https://github.com/hicqu) @ [ハイラスティン](https://github.com/Rustin170506)
+        -   廃止予定のパルサーシンク[＃7087](https://github.com/pingcap/tiflow/issues/7087) @ [ハイラスティン](https://github.com/Rustin170506)を削除します
         -   変更フィードに関係のない DDL ステートメントを破棄することでレプリケーションのパフォーマンスを向上します[＃6447](https://github.com/pingcap/tiflow/issues/6447) @ [アズドンメン](https://github.com/asddongmen)
 
     -   TiDB データ移行 (DM)
 
         -   データソース[＃6448](https://github.com/pingcap/tiflow/issues/6448) @ [ランス6716](https://github.com/lance6716)として MySQL 8.0 との互換性を向上
-        -   「無効な接続」に遭遇したときに DDL を非同期的に実行して DDL を最適化する[＃4689](https://github.com/pingcap/tiflow/issues/4689) @ [翻訳者](https://github.com/lyzx2001)
+        -   「無効な接続」に遭遇したときに DDL を非同期的に実行して DDL を最適化します[＃4689](https://github.com/pingcap/tiflow/issues/4689) @ [翻訳者](https://github.com/lyzx2001)
 
     -   TiDB Lightning
 
         -   特定のロール[＃36891](https://github.com/pingcap/tidb/issues/36891) @ [ダシュン](https://github.com/dsdashun)を引き受けて別のアカウントの S3 データにアクセスできるように、S3 外部storageURL のクエリ パラメータを追加します。
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -348,7 +348,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの設定をサポートしなくな�
     -   `FLASHBACK TABLE`正しく動作しない問題を修正[＃37386](https://github.com/pingcap/tidb/issues/37386) @ [天菜まお](https://github.com/tiancaiamao)
     -   一般的なMySQLプロトコル[＃36731](https://github.com/pingcap/tidb/issues/36731) @ [ドヴェーデン](https://github.com/dveeden)で`prepared`ステートメントフラグを処理できない問題を修正
     -   極端なケースで起動時に誤った TiDB ステータスが表示される問題を修正[＃36791](https://github.com/pingcap/tidb/issues/36791) @ [xhebox](https://github.com/xhebox)
-    -   `INFORMATION_SCHEMA.VARIABLES_INFO`セキュリティ強化モード (SEM) [＃37586](https://github.com/pingcap/tidb/issues/37586) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)に準拠していない問題を修正
+    -   `INFORMATION_SCHEMA.VARIABLES_INFO`セキュリティ強化モード（SEM） [＃37586](https://github.com/pingcap/tidb/issues/37586) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)に準拠していない問題を修正
     -   `UNION` [＃31678](https://github.com/pingcap/tidb/issues/31678) @ [cbcwestwolf](https://github.com/cbcwestwolf)のクエリで文字列を文字列にキャストするとエラーが発生する問題を修正しました
     -   TiFlash [＃37254](https://github.com/pingcap/tidb/issues/37254) @ [うわー](https://github.com/wshwsh12)のパーティション テーブルで動的モードを有効にしたときに発生する誤った結果を修正しました。
     -   TiDB のバイナリ文字列と JSON 間のキャストおよび比較が MySQL [＃31918](https://github.com/pingcap/tidb/issues/31918) [＃25053](https://github.com/pingcap/tidb/issues/25053) @ [ヤンケオ](https://github.com/YangKeao)と互換性がない問題を修正
@@ -359,9 +359,9 @@ v6.3.0 以降、TiCDC は Pulsar シンクの設定をサポートしなくな�
     -   `castRealAsTime`式の結果が MySQL [＃37462](https://github.com/pingcap/tidb/issues/37462) @ [メンシン9014](https://github.com/mengxin9014)と一致しない問題を修正
     -   悲観的DML操作が非一意のインデックスキー[＃36235](https://github.com/pingcap/tidb/issues/36235) @ [エキシウム](https://github.com/ekexium)をロックする問題を修正
     -   `auto-commit`の変更がトランザクションのコミット動作[＃36581](https://github.com/pingcap/tidb/issues/36581) @ [翻訳](https://github.com/cfzjywxk)に影響する問題を修正
-    -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[＃37373](https://github.com/pingcap/tidb/issues/37373) @ [翻訳](https://github.com/cfzjywxk)
+    -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正[＃37373](https://github.com/pingcap/tidb/issues/37373) @ [翻訳](https://github.com/cfzjywxk)
     -   UPDATE ステートメントが場合によっては投影を誤って削除し、 `Can't find column`エラー[＃37568](https://github.com/pingcap/tidb/issues/37568) @ [アイリンキッド](https://github.com/AilinKid)が発生する問題を修正しました。
-    -   結合したテーブルの再配置操作が誤って外部結合条件[＃37238](https://github.com/pingcap/tidb/issues/37238) @ [アイリンキッド](https://github.com/AilinKid)をプッシュダウンする問題を修正しました。
+    -   結合したテーブルの再配置操作で誤って外部結合条件[＃37238](https://github.com/pingcap/tidb/issues/37238) @ [アイリンキッド](https://github.com/AilinKid)がプッシュダウンされる問題を修正しました。
     -   一部のパターンの`IN`および`NOT IN`サブクエリが`Can't find column`エラー[＃37032](https://github.com/pingcap/tidb/issues/37032) @ [アイリンキッド](https://github.com/AilinKid)を報告する問題を修正しました
     -   `UPDATE`ステートメントに共通テーブル式 (CTE) [＃35758](https://github.com/pingcap/tidb/issues/35758) @ [アイリンキッド](https://github.com/AilinKid)が含まれている場合に`Can't find column`報告される問題を修正しました
     -   間違った`PromQL` [＃35856](https://github.com/pingcap/tidb/issues/35856) @ [定義2014](https://github.com/Defined2014)を修正
@@ -402,7 +402,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの設定をサポートしなくな�
         -   チェックポイントの情報が古くなる可能性がある問題を修正[＃36423](https://github.com/pingcap/tidb/issues/36423) @ [ユジュンセン](https://github.com/YuJuncen)
         -   復元中に同時実行数が大きすぎるために領域のバランスが取れない問題を修正[＃37549](https://github.com/pingcap/tidb/issues/37549) @ [3ポインター](https://github.com/3pointer)
         -   クラスター[＃37822](https://github.com/pingcap/tidb/issues/37822) @ [ユジュンセン](https://github.com/YuJuncen)に TiCDC が存在する場合にログ バックアップ チェックポイント TS がスタックする可能性がある問題を修正しました。
-        -   外部storageの認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正[＃37469](https://github.com/pingcap/tidb/issues/37469) @ [モクイシュル28](https://github.com/MoCuishle28)
+        -   外部storage[＃37469](https://github.com/pingcap/tidb/issues/37469) @ [モクイシュル28](https://github.com/MoCuishle28)の認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正
 
     -   ティCDC
 
@@ -419,7 +419,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの設定をサポートしなくな�
         -   DMが`Specified key was too long`エラー[＃5315](https://github.com/pingcap/tiflow/issues/5315) @ [ランス6716](https://github.com/lance6716)を報告する問題を修正
         -   リレーがエラー[＃6193](https://github.com/pingcap/tiflow/issues/6193) @ [ランス6716](https://github.com/lance6716)に遭遇したときの goroutine リークを修正
         -   `collation_compatible` `"strict"`に設定すると、DM が重複した照合順序[＃6832](https://github.com/pingcap/tiflow/issues/6832) @ [ランス6716](https://github.com/lance6716)を持つ SQL を生成する可能性がある問題を修正しました。
-        -   DM-worker ログ[＃6628](https://github.com/pingcap/tiflow/issues/6628) @ [翻訳者](https://github.com/lyzx2001)に「 binlog status_vars からタイムゾーンを取得するときにエラーが発生しました」という警告メッセージが表示されるのを減らします。
+        -   DM-worker ログ[＃6628](https://github.com/pingcap/tiflow/issues/6628) @ [翻訳者](https://github.com/lyzx2001)の警告メッセージ「 binlog status_vars からタイムゾーンを取得するときにエラーが発生しました」の表示を減らします。
         -   レプリケーション[＃7028](https://github.com/pingcap/tiflow/issues/7028) @ [ランス6716](https://github.com/lance6716)中に latin1 データが破損する可能性がある問題を修正しました
 
     -   TiDB Lightning

@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.1.3 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.1.3.
+summary: TiDB 7.1.3 の互換性の変更、改善、バグ修正について説明します。
 ---
 
 # TiDB 7.1.3 リリースノート {#tidb-7-1-3-release-notes}
@@ -17,7 +17,7 @@ TiDB バージョン: 7.1.3
 -   TiCDC Changefeed、次の新しい構成項目が導入されています。
     -   [`sql-mode`](/ticdc/ticdc-changefeed-config.md) : TiCDC がデータを複製するときに DDL ステートメントを解析するために使用する[SQL モード](/ticdc/ticdc-ddl.md#sql-mode)を設定できます[＃9876](https://github.com/pingcap/tiflow/issues/9876) @ [アズドンメン](https://github.com/asddongmen)
     -   [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールの異なる同時実行パラメータを設定できます[＃10048](https://github.com/pingcap/tiflow/issues/10048) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
-    -   [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を構成できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @ [スドジ](https://github.com/sdojjy)
+    -   [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @ [スドジ](https://github.com/sdojjy)
     -   [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトstorageにデータを複製するときに履歴データの自動クリーンアップを設定できます[＃10109](https://github.com/pingcap/tiflow/issues/10109) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
 
 ## 改善点 {#improvements}
@@ -51,7 +51,7 @@ TiDB バージョン: 7.1.3
 
         -   PDリーダーの変更による`GetTS`の失敗に対して再試行メカニズムを追加[＃45301](https://github.com/pingcap/tidb/issues/45301) @ [ランス6716](https://github.com/lance6716)
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -60,7 +60,7 @@ TiDB バージョン: 7.1.3
     -   CTE を含むクエリで、 `tidb_max_chunk_size`が小さい値[＃48808](https://github.com/pingcap/tidb/issues/48808) @ [グオシャオゲ](https://github.com/guo-shaoge)に設定されている場合に`runtime error: index out of range [32] with length 32`報告される問題を修正しました。
     -   `ENUM`型の列を結合キー[＃48991](https://github.com/pingcap/tidb/issues/48991) @ [ウィノロス](https://github.com/winoros)として使用するとクエリ結果が正しくなくなる問題を修正
     -   再帰 CTE [＃47711](https://github.com/pingcap/tidb/issues/47711) @ [エルサ0520](https://github.com/elsa0520)の集計関数またはウィンドウ関数によって発生する解析エラーを修正
-    -   `UPDATE`文が誤って PointGet [＃47445](https://github.com/pingcap/tidb/issues/47445) @ [ハイラスティン](https://github.com/hi-rustin)に変換される可能性がある問題を修正しました
+    -   `UPDATE`文が誤って PointGet [＃47445](https://github.com/pingcap/tidb/issues/47445) @ [ハイラスティン](https://github.com/Rustin170506)に変換される可能性がある問題を修正しました
     -   TiDBが`stats_history`テーブル[＃48431](https://github.com/pingcap/tidb/issues/48431) @ [ホーキングレイ](https://github.com/hawkingrei)でガベージコレクションを実行するときに発生する可能性のあるOOM問題を修正しました。
     -   同じクエリプランで`PLAN_DIGEST`値が[＃47634](https://github.com/pingcap/tidb/issues/47634) @ [キング・ディラン](https://github.com/King-Dylan)場合に異なる問題を修正
     -   `GenJSONTableFromStats`大量のメモリを消費すると強制終了できない問題を修正[＃47779](https://github.com/pingcap/tidb/issues/47779) @ [ホーキングレイ](https://github.com/hawkingrei)
@@ -82,10 +82,10 @@ TiDB バージョン: 7.1.3
     -   `INDEX_LOOKUP_HASH_JOIN` [＃47788](https://github.com/pingcap/tidb/issues/47788) @ [シーライズ](https://github.com/SeaRise)でのメモリ使用量の推定が不正確になる問題を修正
     -   PDリーダーの故障により1分間に`IMPORT INTO`タスクが失敗する問題を修正[＃48307](https://github.com/pingcap/tidb/issues/48307) @ [D3ハンター](https://github.com/D3Hunter)
     -   `batch-client` in `client-go` [＃47691](https://github.com/pingcap/tidb/issues/47691) @ [クレイジーcs520](https://github.com/crazycs520)のpanic問題を修正
-    -   特定の状況で列の整理によってpanicが発生する可能性がある問題を修正[＃47331](https://github.com/pingcap/tidb/issues/47331) @ [ハイラスティン](https://github.com/hi-rustin)
+    -   特定の状況で列の整理によってpanicが発生する可能性がある問題を修正[＃47331](https://github.com/pingcap/tidb/issues/47331) @ [ハイラスティン](https://github.com/Rustin170506)
     -   TiDB が`systemd` [＃47442](https://github.com/pingcap/tidb/issues/47442) @ [ホーキングレイ](https://github.com/hawkingrei)で起動したときに`cgroup`リソース制限を読み取らない問題を修正しました
     -   集計関数またはウィンドウ関数を含む共通テーブル式 (CTE) が他の再帰 CTE によって参照される場合に構文エラーが発生する可能性がある問題を修正しました[＃47603](https://github.com/pingcap/tidb/issues/47603) [＃47711](https://github.com/pingcap/tidb/issues/47711) @ [エルサ0520](https://github.com/elsa0520)
-    -   統計[＃35948](https://github.com/pingcap/tidb/issues/35948) @ [ハイラスティン](https://github.com/hi-rustin)の TopN 構造を構築するときに発生する可能性のあるpanic問題を修正しました。
+    -   統計[＃35948](https://github.com/pingcap/tidb/issues/35948) @ [ハイラスティン](https://github.com/Rustin170506)の TopN 構造を構築するときに発生する可能性のあるpanic問題を修正しました。
     -   MPP によって計算された`COUNT(INT)`の結果が正しくない可能性がある問題を修正[＃48643](https://github.com/pingcap/tidb/issues/48643) @ [アイリンキッド](https://github.com/AilinKid)
     -   HashJoin 演算子がプローブ[＃48082](https://github.com/pingcap/tidb/issues/48082) @ [うわー](https://github.com/wshwsh12)を実行するときにチャンクを再利用できない問題を修正しました。
 
@@ -96,7 +96,7 @@ TiDB バージョン: 7.1.3
     -   TiKV がラフトログ[＃15800](https://github.com/tikv/tikv/issues/15800) @ [トニー](https://github.com/tonyxuqqi)を追加できないため`ServerIsBusy`エラーを報告する問題を修正しました。
     -   BR がクラッシュしたときにスナップショットの復元が停止する可能性がある問題を修正[＃15684](https://github.com/tikv/tikv/issues/15684) @ [ユジュンセン](https://github.com/YuJuncen)
     -   大規模なトランザクションを追跡するときに、古い読み取りの解決済み TS によって TiKV OOM の問題が発生する可能性がある問題を修正[＃14864](https://github.com/tikv/tikv/issues/14864) @ [金星の上](https://github.com/overvenus)
-    -   破損した SST ファイルが他の TiKV ノード[＃15986](https://github.com/tikv/tikv/issues/15986) @ [コナー1996](https://github.com/Connor1996)に拡散する可能性がある問題を修正
+    -   破損したSSTファイルが他のTiKVノード[＃15986](https://github.com/tikv/tikv/issues/15986) @ [コナー1996](https://github.com/Connor1996)に広がる可能性がある問題を修正
     -   [＃15817](https://github.com/tikv/tikv/issues/15817) @ [コナー1996](https://github.com/Connor1996)にスケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました。
     -   クラウド環境の Grafana でスケジューラ コマンド変数が正しくない問題を修正[＃15832](https://github.com/tikv/tikv/issues/15832) @ [コナー1996](https://github.com/Connor1996)
     -   リージョン[＃15919](https://github.com/tikv/tikv/issues/15919)が[金星の上](https://github.com/overvenus)にマージされた後、古いピアが保持され、resolved-ts がブロックされる問題を修正しました。
@@ -116,7 +116,7 @@ TiDB バージョン: 7.1.3
     -   大規模クラスターに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正[＃7248](https://github.com/tikv/pd/issues/7248) @ [rleungx](https://github.com/rleungx)
     -   TiDBダッシュボードがPD `trace`データを正しく読み取れない問題を修正[＃7253](https://github.com/tikv/pd/issues/7253) @ [ノルーシュ](https://github.com/nolouch)
     -   Gin Web Framework のバージョンを v1.8.1 から v1.9.1 にアップグレードして、いくつかのセキュリティ問題を修正しました[＃7438](https://github.com/tikv/pd/issues/7438) @ [ニューベル](https://github.com/niubell)
-    -   ルールチェッカーが配置ルール[＃7185](https://github.com/tikv/pd/issues/7185) @ [ノルーシュ](https://github.com/nolouch)の設定に従って学習者を追加しない問題を修正しました。
+    -   ルールチェッカーが配置ルール[＃7185](https://github.com/tikv/pd/issues/7185) @ [ノルーシュ](https://github.com/nolouch)の設定に従って学習者を追加しない問題を修正しました
     -   TiKV ノードが利用できない場合に PD が通常のピアを削除する可能性がある問題を修正[＃7249](https://github.com/tikv/pd/issues/7249) @ [翻訳者](https://github.com/lhy1024)
     -   DR自動同期モード[＃6988](https://github.com/tikv/pd/issues/6988) @ [ヒューシャープ](https://github.com/HuSharp)でリーダーの切り替えに時間がかかる問題を修正
 
@@ -125,7 +125,7 @@ TiDB バージョン: 7.1.3
     -   `ALTER TABLE ... EXCHANGE PARTITION ...`文を実行するとpanic[＃8372](https://github.com/pingcap/tiflash/issues/8372) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)が発生する問題を修正
     -   クエリ[＃8447](https://github.com/pingcap/tiflash/issues/8447) @ [ジンヘリン](https://github.com/JinheLin)中にTiFlash がメモリ制限に遭遇した場合のメモリリークの問題を修正しました。
     -   `FLASHBACK DATABASE` [＃8450](https://github.com/pingcap/tiflash/issues/8450) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)を実行した後もTiFlashレプリカのデータがガベージ コレクションされる問題を修正しました。
-    -   Grafana [＃8076](https://github.com/pingcap/tiflash/issues/8076) @ [ジェイソン・ホアン](https://github.com/JaySon-Huang)の一部のパネルの最大パーセンタイル時間の誤った表示を修正
+    -   Grafana [＃8076](https://github.com/pingcap/tiflash/issues/8076) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)の一部のパネルの最大パーセンタイル時間の誤った表示を修正
     -   クエリが予期しないエラー メッセージ「FineGrainedShuffleWriter-V1 でブロック スキーマが一致しません」を返す問題を修正[＃8111](https://github.com/pingcap/tiflash/issues/8111) @ [シーライズ](https://github.com/SeaRise)
 
 -   ツール
@@ -141,7 +141,7 @@ TiDB バージョン: 7.1.3
     -   ティCDC
 
         -   特定のシナリオで`DELETE`ステートメントを複製するときに、 `WHERE`句が主キーを条件として使用しない問題を修正しました[＃9812](https://github.com/pingcap/tiflow/issues/9812) @ [アズドンメン](https://github.com/asddongmen)
-        -   オブジェクトstorageにデータを複製するときに、特定の特殊なシナリオでレプリケーションタスクが停止する問題を修正[＃10041](https://github.com/pingcap/tiflow/issues/10041) [＃10044](https://github.com/pingcap/tiflow/issues/10044) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
+        -   データをオブジェクトstorageに複製するときに、特定の特殊なシナリオで複製タスクが停止する問題を修正[＃10041](https://github.com/pingcap/tiflow/issues/10041) [＃10044](https://github.com/pingcap/tiflow/issues/10044) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   同期ポイントとREDOログ[＃10091](https://github.com/pingcap/tiflow/issues/10091) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)を有効にした後、特定の特別なシナリオでレプリケーションタスクが停止する問題を修正しました。
         -   特定の特殊なシナリオで TiCDC が TiKV との接続を誤って閉じる問題を修正[＃10239](https://github.com/pingcap/tiflow/issues/10239) @ [ヒック](https://github.com/hicqu)
         -   ターゲット テーブルが削除され、アップストリーム[＃10079](https://github.com/pingcap/tiflow/issues/10079) @ [アズドンメン](https://github.com/asddongmen)で再作成された場合、変更フィードが双方向レプリケーション モードで DML イベントをレプリケートできない問題を修正しました。

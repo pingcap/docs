@@ -13,7 +13,7 @@ TiDB バージョン: 7.2.0
 
 7.2.0 では、次の主要な機能と改善が導入されています。
 
-<table><thead><tr><th>カテゴリー</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">スケーラビリティとパフォーマンス</td><td>リソース グループは<a href="https://docs.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">、ランナウェイ クエリの管理を</a>サポートします (実験的)</td><td>クエリのタイムアウトをより細かく管理できるようになり、クエリの分類に基づいてさまざまな動作が可能になります。指定したしきい値を満たすクエリは、優先順位を下げたり終了したりできます。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model">パイプライン実行モデルを</a>サポートしています (実験的)</td><td> TiFlash は、スレッド リソース制御を最適化するためにパイプライン実行モデルをサポートしています。</td></tr><tr><td rowspan="1">構文</td><td>データインポート用の新しい SQL ステートメント<a href="https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into">IMPORT INTO</a>をサポートします (実験的)</td><td> TiDB Lightningの導入とメンテナンスを簡素化するために、TiDB では新しい SQL ステートメント<code>IMPORT INTO</code>が導入されました。このステートメントは、Amazon S3 または Google Cloud Storage (GCS) から TiDB への直接リモートインポートを含む、 TiDB Lightningの物理インポートモードを統合します。</td></tr><tr><td rowspan="2"> DB 操作と可観測性</td><td>DDL は<a href="https://docs.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">一時停止と再開の操作を</a>サポートします (実験的)</td><td>この新しい機能により、インデックス作成などのリソースを大量に消費する DDL 操作を一時的に停止して、リソースを節約し、オンライン トラフィックへの影響を最小限に抑えることができます。準備ができたら、キャンセルして再起動する必要なく、これらの操作をシームレスに再開できます。この機能により、リソースの使用率が向上し、ユーザー エクスペリエンスが向上し、スキーマの変更が効率化されます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">スケーラビリティとパフォーマンス</td><td>リソース グループは<a href="https://docs.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">、ランナウェイ クエリの管理を</a>サポートします (実験的)</td><td>クエリのタイムアウトをより細かく管理できるようになり、クエリの分類に基づいてさまざまな動作が可能になります。指定したしきい値を満たすクエリは、優先順位を下げたり終了したりできます。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model">パイプライン実行モデルを</a>サポートしています (実験的)</td><td> TiFlash は、スレッド リソース制御を最適化するためにパイプライン実行モデルをサポートしています。</td></tr><tr><td rowspan="1">構文</td><td>データインポート用の新しい SQL ステートメント<a href="https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into">IMPORT INTO</a>をサポートします (実験的)</td><td> TiDB Lightningの導入とメンテナンスを簡素化するために、TiDB では新しい SQL ステートメント<code>IMPORT INTO</code>が導入されました。このステートメントは、Amazon S3 または Google Cloud Storage (GCS) から TiDB への直接リモートインポートを含む、 TiDB Lightningの物理インポートモードを統合します。</td></tr><tr><td rowspan="2"> DB 操作と可観測性</td><td>DDL は<a href="https://docs.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">一時停止と再開の操作を</a>サポートします (実験的)</td><td>この新しい機能により、インデックス作成などのリソースを大量に消費する DDL 操作を一時的に停止して、リソースを節約し、オンライン トラフィックへの影響を最小限に抑えることができます。準備ができたら、キャンセルして再起動する必要なく、これらの操作をシームレスに再開できます。この機能により、リソースの使用率が向上し、ユーザー エクスペリエンスが向上し、スキーマの変更が効率化されます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -28,7 +28,7 @@ TiDB バージョン: 7.2.0
 
     v7.2.0 より前では、 TiFlashエンジンの各タスクは実行中に個別にスレッド リソースを要求する必要があります。TiFlashはタスクの数を制御してスレッド リソースの使用を制限し、過剰使用を防止しますが、この問題を完全に排除することはできませんでした。この問題に対処するために、v7.2.0 以降、 TiFlash はパイプライン実行モデルを導入しています。このモデルは、すべてのスレッド リソースを集中管理し、タスク実行を均一にスケジュールして、スレッド リソースの使用率を最大化しながらリソースの過剰使用を回避します。パイプライン実行モデルを有効または無効にするには、 [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-new-in-v720)システム変数を変更します。
 
-    詳細については[ドキュメンテーション](/tiflash/tiflash-pipeline-model.md)参照してください。
+    詳細については[ドキュメント](/tiflash/tiflash-pipeline-model.md)参照してください。
 
 -   TiFlashはスキーマレプリケーションのレイテンシーを短縮します[＃7630](https://github.com/pingcap/tiflash/issues/7630) @ [ホンユンヤン](https://github.com/hongyunyan)
 
@@ -42,7 +42,7 @@ TiDB バージョン: 7.2.0
 
     デフォルトでは、統計収集では`JSON` 、 `BLOB` 、 `MEDIUMBLOB` 、および`LONGBLOB`タイプの列がスキップされます。 [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)システム変数を設定することで、デフォルトの動作を変更できます。 TiDB は、 `JSON` 、 `BLOB` 、および`TEXT`タイプとそのサブタイプのスキップをサポートしています。
 
-    詳細については[ドキュメンテーション](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)参照してください。
 
 -   データとインデックスの一貫性チェックのパフォーマンスを向上[＃43693](https://github.com/pingcap/tidb/issues/43693) @ [翻訳:](https://github.com/wjhuang2016)
 
@@ -50,7 +50,7 @@ TiDB バージョン: 7.2.0
 
     最適化はデフォルトで有効（デフォルトでは[`tidb_enable_fast_table_check`](/system-variables.md#tidb_enable_fast_table_check-new-in-v720)または`ON` ）になっており、大規模なテーブルでのデータ整合性チェックに必要な時間を大幅に短縮し、運用効率を高めます。
 
-    詳細については[ドキュメンテーション](/system-variables.md#tidb_enable_fast_table_check-new-in-v720)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_enable_fast_table_check-new-in-v720)参照してください。
 
 ### 信頼性 {#reliability}
 
@@ -62,7 +62,7 @@ TiDB バージョン: 7.2.0
 
     予想よりも多くのリソースを消費するクエリを自動的に管理することで、予期しないクエリ パフォーマンスの問題に迅速に対応するための効果的な手段が提供されます。この機能により、問題がデータベース全体のパフォーマンスに与える影響を軽減し、データベースの安定性を向上させることができます。
 
-    詳細については[ドキュメンテーション](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)参照してください。
+    詳細については[ドキュメント](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)参照してください。
 
 -   履歴実行計画に従ってバインディングを作成する機能を強化する[＃39199](https://github.com/pingcap/tidb/issues/39199) @ [qw4990](https://github.com/qw4990)
 
@@ -73,7 +73,7 @@ TiDB バージョン: 7.2.0
     -   [`ORDER_INDEX`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-)
     -   [`NO_ORDER_INDEX()`](/optimizer-hints.md#no_order_indext1_name-idx1_name--idx2_name-)
 
-    詳細については[ドキュメンテーション](/sql-plan-management.md)参照してください。
+    詳細については[ドキュメント](/sql-plan-management.md)参照してください。
 
 -   オプティマイザの動作を細かく制御するためのオプティマイザ修正制御メカニズムを導入する[＃43169](https://github.com/pingcap/tidb/issues/43169) @ [時間と運命](https://github.com/time-and-fate)
 
@@ -83,7 +83,7 @@ TiDB バージョン: 7.2.0
 
     オプティマイザー修正制御メカニズムは、TiDB オプティマイザーを細かいレベルで制御するのに役立ちます。アップグレード プロセスによって発生するパフォーマンスの問題を修正する新しい手段を提供し、TiDB の安定性を向上させます。
 
-    詳細については[ドキュメンテーション](/optimizer-fix-controls.md)参照してください。
+    詳細については[ドキュメント](/optimizer-fix-controls.md)参照してください。
 
 -   軽量統計初期化が一般提供 (GA) [＃42160](https://github.com/pingcap/tidb/issues/42160) @ [翻訳者](https://github.com/xuyifangreeneyes)に開始
 
@@ -91,7 +91,7 @@ TiDB バージョン: 7.2.0
 
     v7.2.0 以降のバージョンの新しく作成されたクラスターの場合、TiDB はデフォルトで TiDB の起動時に軽量統計をロードし、ロードが完了するまで待ってからサービスを提供します。以前のバージョンからアップグレードされたクラスターの場合、この機能を有効にするには、TiDB 構成項目[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)および[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) ～ `true`を設定できます。
 
-    詳細については[ドキュメンテーション](/statistics.md#load-statistics)参照してください。
+    詳細については[ドキュメント](/statistics.md#load-statistics)参照してください。
 
 ### 構文 {#sql}
 
@@ -101,7 +101,7 @@ TiDB バージョン: 7.2.0
 
     この機能はデフォルトで無効になっています。有効にするには、 [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720)システム変数を`ON`に設定します。
 
-    詳細については[ドキュメンテーション](/constraints.md#check)参照してください。
+    詳細については[ドキュメント](/constraints.md#check)参照してください。
 
 ### DB操作 {#db-operations}
 
@@ -116,7 +116,7 @@ TiDB バージョン: 7.2.0
     ADMIN RESUME DDL JOBS 1,2;
     ```
 
-    詳細については[ドキュメンテーション](/ddl-introduction.md#ddl-related-commands)参照してください。
+    詳細については[ドキュメント](/ddl-introduction.md#ddl-related-commands)参照してください。
 
 ### データ移行 {#data-migration}
 
@@ -124,15 +124,15 @@ TiDB バージョン: 7.2.0
 
     `IMPORT INTO`ステートメントは、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)機能を統合します。このステートメントを使用すると、CSV、SQL、PARQUET などの形式のデータを TiDB の空のテーブルにすばやくインポートできます。このインポート方法により、 TiDB Lightningを個別に展開および管理する必要がなくなり、データ インポートの複雑さが軽減され、インポート効率が大幅に向上します。
 
-    Amazon S3 または GCS に保存されているデータ ファイルの場合、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)が有効になっていると、 `IMPORT INTO`データ インポート ジョブを複数のサブジョブに分割し、それらを複数の TiDB ノードにスケジュールして並列インポートすることもサポートするため、インポートのパフォーマンスがさらに向上します。
+    Amazon S3 または GCS に保存されているデータ ファイルの場合、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)が有効になっていると、 `IMPORT INTO`データ インポート ジョブを複数のサブジョブに分割し、それらを複数の TiDB ノードにスケジュールして並列インポートすることもサポートしており、これによりインポートのパフォーマンスがさらに向上します。
 
-    詳細については[ドキュメンテーション](/sql-statements/sql-statement-import-into.md)参照してください。
+    詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)参照してください。
 
 -   TiDB Lightningは、Latin-1文字セットのソースファイルをTiDB [＃44434](https://github.com/pingcap/tidb/issues/44434) @ [ランス6716](https://github.com/lance6716)にインポートすることをサポートします。
 
     この機能により、 TiDB Lightningを使用して Latin-1 文字セットを含むソース ファイルを TiDB に直接インポートできます。v7.2.0 より前では、このようなファイルをインポートするには追加の前処理または変換が必要でした。v7.2.0 以降では、 TiDB Lightningインポート タスクを構成するときに`character-set = "latin1"`指定するだけで済みます。その後、 TiDB Lightning はインポート プロセス中に文字セットの変換を自動的に処理し、データの整合性と正確性を確保します。
 
-    詳細については[ドキュメンテーション](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)参照してください。
+    詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)参照してください。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -142,7 +142,7 @@ TiDB バージョン: 7.2.0
 
 ### 行動の変化 {#behavior-changes}
 
--   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメンテーション](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
+-   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
 
 ### システム変数 {#system-variables}
 
@@ -210,7 +210,7 @@ TiDB バージョン: 7.2.0
     -   ティCDC
 
         -   オブジェクトstorageサービスへのレプリケーションのシナリオでDDL操作が発生したときにデータファイルが格納されるディレクトリの構造を最適化します[＃8891](https://github.com/pingcap/tiflow/issues/8891) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
-        -   Kafka [＃8865](https://github.com/pingcap/tiflow/issues/8865) @ [ハイラスティン](https://github.com/hi-rustin)へのレプリケーションのシナリオで OAUTHBEARER 認証をサポートする
+        -   Kafka [＃8865](https://github.com/pingcap/tiflow/issues/8865) @ [ハイラスティン](https://github.com/Rustin170506)へのレプリケーションのシナリオで OAUTHBEARER 認証をサポートする
         -   Kafka [＃9143](https://github.com/pingcap/tiflow/issues/9143) @ [3エースショーハンド](https://github.com/3AceShowHand)へのレプリケーションのシナリオで`DELETE`操作のハンドルキーのみを出力するオプションを追加します
 
     -   TiDB データ移行 (DM)
@@ -223,7 +223,7 @@ TiDB バージョン: 7.2.0
         -   インポート後にSQLでチェックサムを検証し、検証[＃41941](https://github.com/pingcap/tidb/issues/41941) @ [GMHDBJD](https://github.com/GMHDBJD)の安定性を向上
         -   ワイドテーブル[＃43853](https://github.com/pingcap/tidb/issues/43853) @ [D3ハンター](https://github.com/D3Hunter)をインポートする際のTiDB Lightning OOM の問題を最適化
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -274,10 +274,10 @@ TiDB バージョン: 7.2.0
 
         -   解決済みのTSが一部のケースで正しく進まない問題を修正[＃8963](https://github.com/pingcap/tiflow/issues/8963) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   Avro または CSV プロトコルが使用されている場合に`UPDATE`操作で古い値を出力できない問題を修正[＃9086](https://github.com/pingcap/tiflow/issues/9086) @ [3エースショーハンド](https://github.com/3AceShowHand)
-        -   Kafka [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/hi-rustin)にデータを複製するときに、ダウンストリーム メタデータを頻繁に読み取ることによって発生するダウンストリームの過度の負荷の問題を修正しました。
+        -   Kafka [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/Rustin170506)にデータを複製するときに、ダウンストリーム メタデータを頻繁に読み取ることによって発生するダウンストリームの過度の負荷の問題を修正しました。
         -   TiDB または MySQL [＃9180](https://github.com/pingcap/tiflow/issues/9180) @ [アズドンメン](https://github.com/asddongmen)にデータを複製するときに、下流の双方向レプリケーション関連の変数を頻繁に設定することによって発生する下流ログが多すぎる問題を修正しました。
         -   PDノードがクラッシュするとTiCDCノードが[＃8868](https://github.com/pingcap/tiflow/issues/8868) @ [アズドンメン](https://github.com/asddongmen)で再起動する問題を修正
-        -   TiCDC が下流の Kafka-on-Pulsar [＃8892](https://github.com/pingcap/tiflow/issues/8892) @ [ハイラスティン](https://github.com/hi-rustin)で変更フィードを作成できない問題を修正しました
+        -   TiCDC が下流の Kafka-on-Pulsar [＃8892](https://github.com/pingcap/tiflow/issues/8892) @ [ハイラスティン](https://github.com/Rustin170506)で変更フィードを作成できない問題を修正しました
 
     -   TiDB Lightning
 

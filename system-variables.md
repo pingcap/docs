@@ -335,7 +335,7 @@ mysql> SELECT * FROM t1;
 -   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `utf8mb4`
--   この変数は、使用中のデフォルト データベースの文字セットを示します。**この変数を設定することは推奨されません**。新しいデフォルト データベースが選択されると、サーバーは変数値を変更します。
+-   この変数は、使用中のデフォルト データベースの文字セットを示します。**この変数を設定することはお勧めしません**。新しいデフォルト データベースが選択されると、サーバーは変数値を変更します。
 
 ### 文字セットの結果 {#character-set-results}
 
@@ -441,7 +441,7 @@ mysql> SELECT * FROM t1;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
 -   デフォルト値: `mysql_native_password`
--   可能`authentication_ldap_simple`値: `mysql_native_password` `tidb_sm3_password` `tidb_auth_token` `authentication_ldap_sasl` `caching_sha2_password`
+-   可能`tidb_sm3_password`値: `mysql_native_password` `caching_sha2_password` `tidb_auth_token` `authentication_ldap_sasl` `authentication_ldap_simple`
 -   この変数は、サーバーとクライアントの接続が確立されるときにサーバーが通知する認証方法を設定します。
 -   `tidb_sm3_password`方法で認証するには、 [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)使用して TiDB に接続できます。
 
@@ -1005,7 +1005,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 -   デフォルト値: (システム依存)
 -   この変数は、TiDB が最初にブートストラップされたときのシステム タイム ゾーンを示します。1 [`time_zone`](#time_zone)参照してください。
 
-### tidb_adaptive_closest_read_threshold <span class="version-mark">v6.3.0 の新機能</span> {#tidb-adaptive-closest-read-threshold-span-class-version-mark-new-in-v6-3-0-span}
+### tidb_adaptive_closest_read_threshold <span class="version-mark">v6.3.0 の新</span>機能 {#tidb-adaptive-closest-read-threshold-span-class-version-mark-new-in-v6-3-0-span}
 
 -   範囲: セッション | グローバル
 -   クラスターに存続: はい
@@ -1038,7 +1038,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 -   この変数は、TiDB がコプロセッサ要求をTiFlashに送信する方法を制御するために使用されます。次の値があります。
 
     -   `0` : リクエストをバッチで送信しない
-    -   `1` :集計と参加のリクエストはバッチで送信されます
+    -   `1` :集計および参加リクエストはバッチで送信されます
     -   `2` : すべてのコプロセッサ要求はバッチで送信されます
 
 ### tidb_allow_fallback_to_tikv <span class="version-mark">v5.0 の新機能</span> {#tidb-allow-fallback-to-tikv-span-class-version-mark-new-in-v5-0-span}
@@ -1182,7 +1182,7 @@ MPP はTiFlashエンジンが提供する分散コンピューティング フ�
 -   この変数の値がパーティション数より小さい場合、TiDB はパーティションテーブルのすべてのパーティションを複数のバッチで自動的に分析します。この変数の値がパーティション数以上の場合、TiDB はパーティションテーブルのすべてのパーティションを同時に分析します。
 -   パーティションテーブルのパーティション数がこの変数値よりもはるかに多く、自動分析に時間がかかる場合は、この変数の値を増やして時間の消費を減らすことができます。
 
-### tidb_自動分析比率 {#tidb-auto-analyze-ratio}
+### tidb_auto_analyze_ratio {#tidb-auto-analyze-ratio}
 
 -   範囲: グローバル
 -   クラスターに存続: はい
@@ -1632,8 +1632,8 @@ MPP はTiFlashエンジンが提供する分散コンピューティング フ�
 -   範囲: `[32, 10240]`
 -   単位: 行
 -   この変数は、DDL 操作のフェーズ`re-organize`中にバッチ サイズを設定するために使用されます。たとえば、TiDB が`ADD INDEX`操作を実行する場合、インデックス データは`tidb_ddl_reorg_worker_cnt` (数) の同時ワーカーによってバックフィルされる必要があります。各ワーカーは、インデックス データをバッチでバックフィルします。
-    -   `ADD INDEX`操作中に`UPDATE`や`REPLACE`などの更新操作が多数存在する場合、バッチ サイズが大きいほどトランザクション競合の可能性が高くなります。この場合、バッチ サイズを小さい値に調整する必要があります。最小値は 32 です。
-    -   トランザクションの競合が存在しない場合は、バッチ サイズを大きな値に設定できます (ワーカー数を考慮してください。参考として[オンライン ワークロードと`ADD INDEX`操作のインタラクション テスト](https://docs.pingcap.com/tidb/stable/online-workloads-and-add-index-operations)を参照してください)。これにより、データのバックフィルの速度が向上しますが、TiKV への書き込み圧力も高くなります。
+    -   `tidb_ddl_enable_fast_reorg`を`OFF`に設定すると、 `ADD INDEX`トランザクションとして実行されます。 `ADD INDEX`実行中に対象列に`UPDATE`や`REPLACE`などの更新操作が多数ある場合、バッチ サイズが大きいほどトランザクション競合の可能性が高くなります。 この場合、バッチ サイズを小さい値に設定することをお勧めします。 最小値は 32 です。
+    -   トランザクションの競合が存在しない場合、または`tidb_ddl_enable_fast_reorg`が`ON`に設定されている場合、バッチ サイズを大きな値に設定できます。これにより、データのバックフィルが高速化されますが、TiKV への書き込み負荷も増加します。適切なバッチ サイズについては、 `tidb_ddl_reorg_worker_cnt`の値も参照する必要があります。参考として[オンライン ワークロードと`ADD INDEX`操作のインタラクション テスト](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations)を参照してください。
 
 ### tidb_ddl_reorg_priority {#tidb-ddl-reorg-priority}
 
@@ -2798,7 +2798,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 > **注記：**
 >
-> v6.6.0 以降、TiDB は[リソース管理](/tidb-resource-control.md)サポートします。この機能を使用すると、異なるリソース グループで異なる優先度の SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先度を構成することで、異なる優先度の SQL ステートメントのスケジュール制御を向上させることができます。リソース制御を有効にすると、ステートメントの優先度は適用されなくなります。異なる SQL ステートメントのリソース使用を管理するには、 [リソース管理](/tidb-resource-control.md)使用することをお勧めします。
+> v6.6.0 以降、TiDB は[リソース管理](/tidb-resource-control.md)サポートします。この機能を使用すると、異なるリソース グループで異なる優先度の SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先度を構成することで、異なる優先度の SQL ステートメントのスケジュール制御を向上させることができます。リソース制御を有効にすると、ステートメントの優先度は無効になります。異なる SQL ステートメントのリソース使用を管理するには、 [リソース管理](/tidb-resource-control.md)使用することをお勧めします。
 
 ### tidb_gc_concurrency <span class="version-mark">v5.0 の新</span>機能 {#tidb-gc-concurrency-span-class-version-mark-new-in-v5-0-span}
 
@@ -3317,7 +3317,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 </CustomContent>
 
-### 低解像度tso {#tidb-low-resolution-tso}
+### tidb_low_resolution_tso {#tidb-low-resolution-tso}
 
 -   スコープ: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
@@ -3360,7 +3360,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 > **注記：**
 >
-> -   TiDB クラスターに複数のTiFlashノードがある場合、集計は通常、複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノード上の集計演算子の最大メモリ使用量を制御します。
+> -   TiDB クラスターに複数のTiFlashノードがある場合、通常、集計は複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノード上の集計演算子の最大メモリ使用量を制御します。
 > -   この変数が`-1`に設定されている場合、 TiFlash は独自の構成項目`max_bytes_before_external_group_by`の値に基づいて集計演算子の最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3379,7 +3379,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 > **注記：**
 >
-> -   TiDB クラスターに複数のTiFlashノードがある場合、結合は通常、複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノードでの結合演算子の最大メモリ使用量を制御します。
+> -   TiDB クラスターに複数のTiFlashノードがある場合、結合は通常、複数のTiFlashノードで分散して実行されます。この変数は、単一のTiFlashノード上の結合演算子の最大メモリ使用量を制御します。
 > -   この変数が`-1`に設定されている場合、 TiFlash は独自の構成項目[`max_bytes_before_external_join`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて結合演算子の最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3765,7 +3765,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 -   範囲: `[0, 2]`
 -   ブロードキャスト カテシアン結合を許可するかどうかを示します。
 -   `0`ブロードキャスト カテシアン結合が許可されないことを意味します。 `1` [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50)に基づいて許可されることを意味します。 `2`テーブル サイズがしきい値を超えても常に許可されることを意味します。
--   この変数は TiDB で内部的に使用されるため、その値を変更することはお勧めし**ません**。
+-   この変数は TiDB 内で内部的に使用されるため、その値を変更することは推奨され**ません**。
 
 ### tidb_opt_concurrency_factor {#tidb-opt-concurrency-factor}
 
@@ -4023,7 +4023,7 @@ mysql> desc select count(distinct a) from test.t;
 -   デフォルト値: `0`
 -   範囲: `[0, 2147483647]`
 -   この変数は、TiDB 結合したテーブルの再配置アルゴリズムの選択を制御するために使用されます。Join 結合したテーブルの再配置に参加するノードの数がこのしきい値より大きい場合、TiDB は貪欲アルゴリズムを選択し、このしきい値より小さい場合、TiDB は動的プログラミング アルゴリズムを選択します。
--   現在、OLTP クエリの場合、デフォルト値を維持することをお勧めします。OLAP クエリの場合、OLAP シナリオでより適切な接続順序を得るために、変数値を 10 ～ 15 に設定することをお勧めします。
+-   現在、OLTP クエリの場合、デフォルト値を維持することが推奨されます。OLAP クエリの場合、OLAP シナリオでより適切な接続順序を得るために、変数値を 10 ～ 15 に設定することをお勧めします。
 
 ### tidb_opt_limit_push_down_threshold {#tidb-opt-limit-push-down-threshold}
 
@@ -4377,7 +4377,7 @@ SHOW WARNINGS;
 
 > **注記：**
 >
-> この変数を有効にしてクエリ パフォーマンスを最適化すると、 **TiFlashに対してのみ**効果があります。
+> この変数を有効にしてクエリ パフォーマンスを最適化すると**、 TiFlashに対してのみ**効果があります。
 
 -   範囲: セッション | グローバル
 -   クラスターに存続: はい
@@ -4485,7 +4485,7 @@ SHOW WARNINGS;
 -   タイプ: ブール値
 -   デフォルト値: `ON`
 -   この変数は、関連するテーブルの統計が更新されたときにプラン キャッシュを自動的に無効にするかどうかを制御します。
--   この変数を有効にすると、プラン キャッシュは統計をより十分に活用して実行プランを生成できます。例:
+-   この変数を有効にすると、プラン キャッシュは統計をより十分に活用して実行プランを生成できるようになります。例:
     -   統計が利用可能になる前に実行プランが生成された場合、統計が利用可能になるとプラン キャッシュは実行プランを再生成します。
     -   テーブルのデータ分布が変更され、以前は最適だった実行プランが最適でなくなった場合、統計が再収集された後、プラン キャッシュは実行プランを再生成します。
 -   この変数は、v7.1.0 より前のバージョンから v7.1.0 以降にアップグレードされた TiDB クラスターではデフォルトで無効になっています。
@@ -4603,7 +4603,7 @@ SHOW WARNINGS;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
--   この変数は、タイムスタンプの取得を最適化するために使用され、悲観的トランザクションの分離レベル`READ-COMMITTED`でポイント書き込みの競合が少ないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバル タイムスタンプを取得することによるレイテンシーとオーバーヘッドを回避できます。現在、この変数は`UPDATE` 、 `DELETE` 、および`SELECT ...... FOR UPDATE` 3 種類のポイント書き込みステートメントに適用できます。ポイント書き込みステートメントとは、主キーまたは一意キーをフィルター条件として使用し、最終実行演算子に`POINT-GET`含まれる書き込みステートメントを指します。
+-   この変数は、タイムスタンプの取得を最適化するために使用され、悲観的トランザクションの分離レベル`READ-COMMITTED`でポイント書き込みの競合が少ないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバル タイムスタンプを取得することによるレイテンシーとオーバーヘッドを回避できます。現在、この変数は`UPDATE` 、 `DELETE` 、および`SELECT ...... FOR UPDATE` 3 種類のポイント書き込みステートメントに適用できます。ポイント書き込みステートメントとは、主キーまたは一意のキーをフィルター条件として使用し、最終実行演算子に`POINT-GET`含まれる書き込みステートメントを指します。
 -   ポイント書き込みの競合が深刻な場合、この変数を有効にすると余分なオーバーヘッドとレイテンシーが増加し、パフォーマンスが低下します。詳細については、 [コミット読み取り分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)参照してください。
 
 ### tidb_read_consistency <span class="version-mark">v5.4.0 の新</span>機能 {#tidb-read-consistency-span-class-version-mark-new-in-v5-4-0-span}
@@ -5340,7 +5340,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   デフォルト値: `3`
 -   範囲: `[1, 10]`
 -   単位: 秒
--   この変数は、リース時間[キャッシュされたテーブル](/cached-tables.md)を制御するために使用されます。デフォルト値は`3`です。この変数の値は、キャッシュされたテーブルの変更に影響します。キャッシュされたテーブルに変更を加えた後、最長の待機時間は`tidb_table_cache_lease`秒になる可能性があります。テーブルが読み取り専用であるか、書き込みレイテンシーが長い場合は、この変数の値を増やして、キャッシュ テーブルの有効時間を増やし、リース更新の頻度を減らすことができます。
+-   この変数は、リース時間[キャッシュされたテーブル](/cached-tables.md)を制御するために使用されます。デフォルト値は`3`です。この変数の値は、キャッシュされたテーブルの変更に影響します。キャッシュされたテーブルに変更を加えた後、最長の待機時間は`tidb_table_cache_lease`秒になる可能性があります。テーブルが読み取り専用であるか、書き込みレイテンシーが長い場合は、この変数の値を増やして、テーブルのキャッシュの有効時間を長くし、リースの更新頻度を減らすことができます。
 
 ### tidb_tmp_table_max_size <span class="version-mark">v5.3.0 の新</span>機能 {#tidb-tmp-table-max-size-span-class-version-mark-new-in-v5-3-0-span}
 
@@ -5860,7 +5860,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   タイプ: 文字列
 -   この変数は、パスワードの複雑さのチェックにおけるチェック項目です。パスワードが辞書と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650)が`2` (STRONG) に設定されている場合にのみ有効になります。
 -   この変数は 1024 文字以下の文字列です。パスワードに存在できない単語のリストが含まれます。各単語はセミコロン ( `;` ) で区切られます。
--   この変数はデフォルトで空の文字列に設定されており、辞書チェックは実行されません。辞書チェックを実行するには、文字列に一致させる単語を含める必要があります。この変数が設定されている場合、パスワードを設定すると、TiDB はパスワードの各サブ文字列 (長さ 4 ～ 100 文字) を辞書内の単語と比較します。パスワードのいずれかのサブ文字列が辞書内の単語と一致すると、パスワードは拒否されます。比較では大文字と小文字は区別されません。
+-   この変数はデフォルトで空の文字列に設定されており、辞書チェックは実行されません。辞書チェックを実行するには、文字列に一致させる単語を含める必要があります。この変数が設定されている場合、パスワードを設定すると、TiDB はパスワードの各サブ文字列 (長さ 4 ～ 100 文字) を辞書内の単語と比較します。パスワードのサブ文字列のいずれかが辞書内の単語と一致すると、パスワードは拒否されます。比較では大文字と小文字は区別されません。
 
 ### validate_password.enable <span class="version-mark">v6.5.0 の新機能</span> {#validate-password-enable-span-class-version-mark-new-in-v6-5-0-span}
 

@@ -82,7 +82,7 @@ TiDB バージョン: 7.5.1
 
         -   多数の小さなテーブルをインポートする際の`ALTER TABLE`を向上[＃50105](https://github.com/pingcap/tidb/issues/50105) @ [D3ハンター](https://github.com/D3Hunter)
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -96,21 +96,21 @@ TiDB バージョン: 7.5.1
     -   TiFlash の遅延マテリアライゼーションが関連列[＃49241](https://github.com/pingcap/tidb/issues/49241) [＃51204](https://github.com/pingcap/tidb/issues/51204) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)を処理するときに間違った結果が返される可能性がある問題を修正しました
     -   TiDB が履歴統計[＃49076](https://github.com/pingcap/tidb/issues/49076) @ [ホーキングレイ](https://github.com/hawkingrei)を記録するときに TiDB のバックグラウンド ジョブ スレッドがpanicになる可能性がある問題を修正しました。
     -   TiDB がパーティション テーブル[＃49023](https://github.com/pingcap/tidb/issues/49023) @ [ホーキングレイ](https://github.com/hawkingrei)のグローバル統計のヒストグラムをマージするときに発生する可能性のあるエラーを修正しました。
-    -   パーティションが削除された後に`stats_meta`テーブルの履歴統計が更新されない問題を修正[＃49334](https://github.com/pingcap/tidb/issues/49334) @ [ハイラスティン](https://github.com/hi-rustin)
+    -   パーティションが削除された後に`stats_meta`テーブルの履歴統計が更新されない問題を修正[＃49334](https://github.com/pingcap/tidb/issues/49334) @ [ハイラスティン](https://github.com/Rustin170506)
     -   `Index Join`プローブ側[＃50382](https://github.com/pingcap/tidb/issues/50382) @ [アイリンキッド](https://github.com/AilinKid)として誤って選択された複数値インデックスによって発生する不正なクエリ結果の問題を修正しました。
     -   `USE_INDEX_MERGE`ヒントが複数値インデックス[＃50553](https://github.com/pingcap/tidb/issues/50553) @ [アイリンキッド](https://github.com/AilinKid)に反映されない問題を修正
-    -   `INFORMATION_SCHEMA.ANALYZE_STATUS`システム テーブル[＃48835](https://github.com/pingcap/tidb/issues/48835) @ [ハイラスティン](https://github.com/hi-rustin)をクエリするときにユーザーがエラーを受け取る可能性がある問題を修正しました
-    -   TiDB が`group by` [＃38756](https://github.com/pingcap/tidb/issues/38756) @ [ハイラスティン](https://github.com/hi-rustin)の定数値を誤って削除したために間違ったクエリ結果が発生する問題を修正しました。
+    -   `INFORMATION_SCHEMA.ANALYZE_STATUS`システム テーブル[＃48835](https://github.com/pingcap/tidb/issues/48835) @ [ハイラスティン](https://github.com/Rustin170506)をクエリするときにユーザーがエラーを受け取る可能性がある問題を修正しました
+    -   TiDB が`group by` [＃38756](https://github.com/pingcap/tidb/issues/38756) @ [ハイラスティン](https://github.com/Rustin170506)の定数値を誤って削除したために間違ったクエリ結果が発生する問題を修正しました。
     -   テーブル上の`ANALYZE`つのタスクのうち`processed_rows`が、そのテーブルの合計行数[＃50632](https://github.com/pingcap/tidb/issues/50632) @ [ホーキングレイ](https://github.com/hawkingrei)を超える可能性がある問題を修正しました。
     -   `tidb_enable_prepared_plan_cache`システム変数を有効にしてから無効にした後、 `EXECUTE`ステートメントを使用して`PREPARE STMT`を実行すると、TiDB がpanicになる可能性がある問題を修正しました[＃49344](https://github.com/pingcap/tidb/issues/49344) @ [qw4990](https://github.com/qw4990)
     -   クエリで`NATURAL JOIN` [＃32044](https://github.com/pingcap/tidb/issues/32044) @ [アイリンキッド](https://github.com/AilinKid)が使用される場合に発生する可能性のある`Column ... in from clause is ambiguous`エラーを修正します。
     -   複数値インデックスを使用して空の JSON 配列にアクセスすると、誤った結果が返される可能性がある問題を修正しました[＃50125](https://github.com/pingcap/tidb/issues/50125) @ [ヤンケオ](https://github.com/YangKeao)
     -   集計関数をグループ計算に使用した場合に発生する可能性のある`Can't find column ...`エラーを修正[＃50926](https://github.com/pingcap/tidb/issues/50926) @ [qw4990](https://github.com/qw4990)
-    -   文字列型の変数の`SET_VAR`の制御が無効になる可能性がある問題を修正[＃50507](https://github.com/pingcap/tidb/issues/50507) @ [qw4990](https://github.com/qw4990)
+    -   文字列型の変数に対する`SET_VAR`の制御が無効になる可能性がある問題を修正[＃50507](https://github.com/pingcap/tidb/issues/50507) @ [qw4990](https://github.com/qw4990)
     -   `tidb_server_memory_limit` [＃48741](https://github.com/pingcap/tidb/issues/48741) @ [徐淮宇](https://github.com/XuHuaiyu)による長期メモリ圧迫により TiDB の CPU 使用率が高くなる問題を修正
     -   依存関係のある 2 つの DDL タスクの完了時間が[＃49498](https://github.com/pingcap/tidb/issues/49498) @ [タンジェンタ](https://github.com/tangenta)と誤って順序付けられる問題を修正しました。
     -   不正なオプティマイザヒントによって有効なヒントが無効になる可能性がある問題を修正[＃49308](https://github.com/pingcap/tidb/issues/49308) @ [ホーキングレイ](https://github.com/hawkingrei)
-    -   `CHECK`制約を持つ DDL ステートメントが[＃47632](https://github.com/pingcap/tidb/issues/47632) @ [ジフハウス](https://github.com/jiyfhust)でスタックする問題を修正しました
+    -   `CHECK`制約の DDL ステートメントが[＃47632](https://github.com/pingcap/tidb/issues/47632) @ [ジフハウス](https://github.com/jiyfhust)でスタックする問題を修正しました
     -   `CHECK`制約の`ENFORCED`オプションの動作がMySQL 8.0 [＃47567](https://github.com/pingcap/tidb/issues/47567) [＃47631](https://github.com/pingcap/tidb/issues/47631) @ [ジフハウス](https://github.com/jiyfhust)と一致しない問題を修正
     -   CTEクエリが再試行プロセス[＃46522](https://github.com/pingcap/tidb/issues/46522) @ [天菜まお](https://github.com/tiancaiamao)中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正
     -   `tidb_multi_statement_mode`モードが有効になっている場合に、インデックス検索を使用する`DELETE`および`UPDATE`ステートメントでエラーが報告される可能性がある問題を修正しました[＃50012](https://github.com/pingcap/tidb/issues/50012) @ [タンジェンタ](https://github.com/tangenta)
@@ -166,7 +166,7 @@ TiDB バージョン: 7.5.1
     -   `DECIMAL`算術乗算切り捨て[＃16268](https://github.com/tikv/tikv/issues/16268) @ [ソロッツ](https://github.com/solotzg)を処理するときに TiDB と TiKV が矛盾した結果を生成する可能性がある問題を修正しました。
     -   `notLeader`または`regionNotFound` [＃15712](https://github.com/tikv/tikv/issues/15712) @ [ヒューシャープ](https://github.com/HuSharp)に遭遇するとフラッシュバックが停止する可能性がある問題を修正しました
     -   破損したSSTファイルが他のTiKVノード[＃15986](https://github.com/tikv/tikv/issues/15986) @ [コナー1996](https://github.com/Connor1996)に広がる可能性がある問題を修正
-    -   TiKV の実行速度が非常に遅い場合、リージョン[＃16111](https://github.com/tikv/tikv/issues/16111)と[金星の上](https://github.com/overvenus)のマージ後にpanicする可能性がある問題を修正しました。
+    -   TiKV の実行速度が非常に遅い場合、リージョン[＃16111](https://github.com/tikv/tikv/issues/16111)と[金星の上](https://github.com/overvenus)マージ後にpanicする可能性がある問題を修正しました。
     -   [＃15817](https://github.com/tikv/tikv/issues/15817) @ [コナー1996](https://github.com/Connor1996)にスケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました。
     -   解決済みのTSが2時間ブロックされる可能性がある問題を修正[＃11847](https://github.com/tikv/tikv/issues/11847) [＃15520](https://github.com/tikv/tikv/issues/15520) [＃39130](https://github.com/pingcap/tidb/issues/39130) @ [金星の上](https://github.com/overvenus)
     -   `cast_duration_as_time`誤った結果を返す可能性がある問題を修正[＃16211](https://github.com/tikv/tikv/issues/16211) @ [ゲンリキ](https://github.com/gengliqi)
@@ -188,7 +188,7 @@ TiDB バージョン: 7.5.1
 
     -   レプリカ移行中にPDとのネットワーク接続が不安定になり、 TiFlashがpanic可能性がある問題を修正[＃8323](https://github.com/pingcap/tiflash/issues/8323) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
     -   TiFlashレプリカを削除して再度追加すると、 TiFlash [＃8695](https://github.com/pingcap/tiflash/issues/8695) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)でデータが破損する可能性がある問題を修正しました。
-    -   `DROP TABLE`がデータ挿入[＃8395](https://github.com/pingcap/tiflash/issues/8395) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)の直後に実行されると、 `FLASHBACK TABLE`または`RECOVER TABLE`一部のTiFlashレプリカのデータを回復できない可能性がある潜在的な問題を修正しました。
+    -   `DROP TABLE`データ挿入[＃8395](https://github.com/pingcap/tiflash/issues/8395) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)の直後に実行されると、 `FLASHBACK TABLE`または`RECOVER TABLE`一部のTiFlashレプリカのデータを回復できない可能性がある潜在的な問題を修正しました。
     -   Grafana [＃8076](https://github.com/pingcap/tiflash/issues/8076) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)の一部のパネルの最大パーセンタイル時間の誤った表示を修正
     -   リモート読み取り[＃8685](https://github.com/pingcap/tiflash/issues/8685) @ [グオシャオゲ](https://github.com/guo-shaoge)中にTiFlash がクラッシュする可能性がある問題を修正
     -   `ENUM`値が 0 [＃8311](https://github.com/pingcap/tiflash/issues/8311) @ [ソロッツ](https://github.com/solotzg)の場合にTiFlash が`ENUM`誤って処理する問題を修正しました
@@ -201,7 +201,7 @@ TiDB バージョン: 7.5.1
     -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後にTiFlash がパニックを起こし、null 許容列が[＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)に非許容列に変更される問題を修正しました。
     -   `ColumnRef in (Literal, Func...)` [＃8631](https://github.com/pingcap/tiflash/issues/8631) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)のようなフィルタリング条件でクエリを実行したときにクエリ結果が正しくない問題を修正しました
     -   `FLASHBACK DATABASE` [＃8450](https://github.com/pingcap/tiflash/issues/8450) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)を実行した後もTiFlashレプリカのデータがガベージ コレクションされる問題を修正しました。
-    -   分散storageおよびコンピューティングアーキテクチャ[＃8519](https://github.com/pingcap/tiflash/issues/8519) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)でTiFlash がオブジェクトstorageデータの GC 所有者を選択できない可能性がある問題を修正しました
+    -   分散storageおよびコンピューティングアーキテクチャ[＃8519](https://github.com/pingcap/tiflash/issues/8519) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)でTiFlash がオブジェクトstorageデータの GC 所有者を選択できない可能性がある問題を修正しました。
     -   定数文字列パラメータ[＃8604](https://github.com/pingcap/tiflash/issues/8604) @ [風の話し手](https://github.com/windtalker)を含む`GREATEST`または`LEAST`関数で発生する可能性のあるランダムな無効なメモリアクセスの問題を修正しました。
     -   ポイントインタイムリカバリ（PITR）を実行した後、または`FLASHBACK CLUSTER TO`実行した後にTiFlashレプリカデータが誤って削除され、データ異常[＃8777](https://github.com/pingcap/tiflash/issues/8777) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)が発生する可能性がある問題を修正しました。
     -   結合に非等価条件[＃8791](https://github.com/pingcap/tiflash/issues/8791) @ [風の話し手](https://github.com/windtalker)が含まれている場合にTiFlash Anti Semi Join が誤った結果を返す可能性がある問題を修正しました

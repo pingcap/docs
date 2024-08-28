@@ -64,7 +64,7 @@ iperf Done.
 
 出力にネットワーク帯域幅が低く、帯域幅の変動が大きいことが示されている場合、各コンポーネントログに多数の再試行と EOF エラーが表示されることがあります。この場合、ネットワーク サービス プロバイダーに相談して、ネットワーク品質を改善する必要があります。
 
-各メトリックの出力が良好であれば、各コンポーネントを更新してみてください。更新後も問題が解決しない場合は、PingCAP またはコミュニティから[支持を得ます](/support.md)リクエストしてください。
+各メトリックの出力が良好であれば、各コンポーネントを更新してみてください。更新後も問題が解決しない場合は、PingCAP またはコミュニティから[サポートを受ける](/support.md)リクエストしてください。
 
 ### 誤ってMySQLユーザーテーブルをTiDBにインポートしてしまったり、パスワードを忘れてログインできなくなったりした場合、どのように対処すればよいでしょうか? {#if-i-accidentally-import-the-mysql-user-table-into-tidb-or-forget-the-password-and-cannot-log-in-how-to-deal-with-it}
 
@@ -90,7 +90,7 @@ DB2 または Oracle から TiDB にすべてのデータを移行するか、�
 
 ### エラー: java.sql.BatchUpdateException: Sqoop を使用して TiDB にデータを<code>batches</code>で書き込むときに、 <code>java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation</code> {#error-code-java-sql-batchupdateexception-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-code-batches-code}
 
-Sqoop では、 `--batch`各バッチで 100 個`statement`をコミットすることを意味しますが、デフォルトでは各`statement` 100 個の SQL ステートメントが含まれます。したがって、100 * 100 = 10000 個の SQL ステートメントとなり、単一の TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
+Sqoop では、 `--batch`各バッチで 100 個`statement`をコミットすることを意味しますが、デフォルトでは各`statement`に 100 個の SQL ステートメントが含まれます。したがって、100 * 100 = 10000 個の SQL ステートメントとなり、単一の TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
 
 2つの解決策:
 
@@ -140,7 +140,7 @@ Sqoop では、 `--batch`各バッチで 100 個`statement`をコミットする
 
 ### <code>transaction too large</code>エラーメッセージが表示されます {#the-error-message-code-transaction-too-large-code-is-displayed}
 
-基盤となるstorageエンジンの制限により、TiDB 内の各キー値エントリ (1 行) は 6 MB 以下にする必要があります。1 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)構成値を最大 120 MB まで調整できます。
+基盤となるstorageエンジンの制限により、TiDB 内の各キー値エントリ (1 行) は 6 MB 以下にする必要があります。1 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)構成値を最大 120 MB まで調整できます。
 
 分散トランザクションには 2 フェーズ コミットが必要で、最レイヤーでRaftレプリケーションが実行されます。トランザクションが非常に大きい場合、コミット プロセスは非常に遅くなり、書き込み競合が発生する可能性が高くなります。さらに、失敗したトランザクションのロールバックにより、不要なパフォーマンスの低下が発生します。これらの問題を回避するために、トランザクション内のキー値エントリの合計サイズをデフォルトで 100 MB 以下に制限しています。より大きなトランザクションが必要な場合は、TiDB 構成ファイルの値`txn-total-size-limit`を変更します。この構成項目の最大値は 10 G までです。実際の制限は、マシンの物理メモリによっても左右されます。
 

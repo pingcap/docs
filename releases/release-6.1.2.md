@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.2 Release Notes
-summary: TiDB 6.1.2 was released on October 24, 2022. The release includes improvements to TiDB, TiKV, Tools, PD, TiFlash, and bug fixes for various issues in each component. The improvements include setting placement rules and TiFlash replicas simultaneously, support for configuring various settings, and enhancing performance. Bug fixes address issues such as incorrect cleanup of privileges, incorrect output, query failures, and performance issues.
+summary: TiDB 6.1.2 は 2022 年 10 月 24 日にリリースされました。このリリースには、TiDB、TiKV、ツール、PD、 TiFlashの改善と、各コンポーネントのさまざまな問題に対するバグ修正が含まれています。改善には、配置ルールとTiFlashレプリカの同時設定、さまざまな設定の構成のサポート、パフォーマンスの向上が含まれます。バグ修正では、権限の誤ったクリーンアップ、誤った出力、クエリの失敗、パフォーマンスの問題などの問題に対処しています。
 ---
 
 # TiDB 6.1.2 リリースノート {#tidb-6-1-2-release-notes}
@@ -19,7 +19,7 @@ TiDB バージョン: 6.1.2
 
 -   ティクヴ
 
-    -   1 つのピアが到達不能になった後にRaftstore が大量のメッセージをブロードキャストするのを回避するための`unreachable_backoff`項目の設定をサポートします[＃13054](https://github.com/tikv/tikv/issues/13054) @ [5kbpsの](https://github.com/5kbpers)
+    -   1 つのピアが到達不能になった後にRaftstore が大量のメッセージをブロードキャストするのを回避するための`unreachable_backoff`項目の構成をサポートします[＃13054](https://github.com/tikv/tikv/issues/13054) @ [5kbpsの](https://github.com/5kbpers)
     -   RocksDB 書き込みストール設定をフロー制御しきい値[＃13467](https://github.com/tikv/tikv/issues/13467) @ [タボキ](https://github.com/tabokie)より小さい値に設定できるようになりました。
 
 -   ツール
@@ -32,7 +32,7 @@ TiDB バージョン: 6.1.2
 
         -   解決されたTSをバッチ[＃7078](https://github.com/pingcap/tiflow/issues/7078) @ [スドジ](https://github.com/sdojjy)で処理することでリージョンワーカーのパフォーマンスを向上
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -43,7 +43,7 @@ TiDB バージョン: 6.1.2
     -   TiFlash [＃37254](https://github.com/pingcap/tidb/issues/37254) @ [うわー](https://github.com/wshwsh12)のパーティション テーブルで動的モードを有効にしたときに発生する誤った結果を修正しました。
     -   リージョンが[＃37141](https://github.com/pingcap/tidb/issues/37141) @ [スティクナーフ](https://github.com/sticnarf)にマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正しました
     -   KVクライアントが不要なpingメッセージを送信する問題を修正[＃36861](https://github.com/pingcap/tidb/issues/36861) @ [ジャッキー](https://github.com/jackysp)
-    -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[＃37373](https://github.com/pingcap/tidb/issues/37373) @ [翻訳](https://github.com/cfzjywxk)
+    -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正[＃37373](https://github.com/pingcap/tidb/issues/37373) @ [翻訳](https://github.com/cfzjywxk)
     -   `ORDER BY`節に相関サブクエリ[＃18216](https://github.com/pingcap/tidb/issues/18216) @ [ウィノロス](https://github.com/winoros)が含まれている場合に`GROUP CONCAT` with `ORDER BY`が失敗する可能性がある問題を修正しました。
     -   `UPDATE`ステートメントに共通テーブル式 (CTE) [＃35758](https://github.com/pingcap/tidb/issues/35758) @ [アイリンキッド](https://github.com/AilinKid)が含まれている場合に`Can't find column`報告される問題を修正しました
     -   特定のシナリオで`EXECUTE`予期しないエラーをスローする可能性がある問題を修正[＃37187](https://github.com/pingcap/tidb/issues/37187) @ [思い出させる](https://github.com/Reminiscent)
@@ -86,12 +86,12 @@ TiDB バージョン: 6.1.2
     -   ティCDC
 
         -   CDCサーバーが完全に起動する前に HTTP 要求を受信すると CDCサーバーがpanic可能性がある問題を修正[＃6838](https://github.com/pingcap/tiflow/issues/6838) @ [アズドンメン](https://github.com/asddongmen)
-        -   アップグレード[＃7235](https://github.com/pingcap/tiflow/issues/7235) @ [ハイラスティン](https://github.com/hi-rustin)中のログ フラッディング問題を修正
-        -   changefeed の redo ログ ファイルが誤って削除される可能性がある問題を修正[＃6413](https://github.com/pingcap/tiflow/issues/6413) @ [ハイラスティン](https://github.com/hi-rustin)
-        -   etcd トランザクションでコミットされる操作が多すぎると TiCDC が利用できなくなる問題を修正[＃7131](https://github.com/pingcap/tiflow/issues/7131) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   アップグレード[＃7235](https://github.com/pingcap/tiflow/issues/7235) @ [ハイラスティン](https://github.com/Rustin170506)中のログ フラッディング問題を修正
+        -   changefeed の redo ログ ファイルが誤って削除される可能性がある問題を修正[＃6413](https://github.com/pingcap/tiflow/issues/6413) @ [ハイラスティン](https://github.com/Rustin170506)
+        -   etcd トランザクションでコミットされる操作が多すぎると TiCDC が利用できなくなる問題を修正[＃7131](https://github.com/pingcap/tiflow/issues/7131) @ [ハイラスティン](https://github.com/Rustin170506)
         -   REDOログ内の非再入可能DDL文が2回実行されるとデータの不整合が発生する可能性がある問題を修正[＃6927](https://github.com/pingcap/tiflow/issues/6927) @ [ヒック](https://github.com/hicqu)
 
     -   バックアップと復元 (BR)
 
         -   復元中に同時実行数が大きすぎるために領域のバランスが取れない問題を修正[＃37549](https://github.com/pingcap/tidb/issues/37549) @ [3ポインター](https://github.com/3pointer)
-        -   外部storageの認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正[＃37469](https://github.com/pingcap/tidb/issues/37469) @ [モクイシュル28](https://github.com/MoCuishle28)
+        -   外部storage[＃37469](https://github.com/pingcap/tidb/issues/37469) @ [モクイシュル28](https://github.com/MoCuishle28)の認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正

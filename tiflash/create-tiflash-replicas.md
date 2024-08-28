@@ -37,7 +37,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 ```
 
-**ノート：**
+**注:**
 
 -   上記の DDL ステートメントを通じてテーブル`t`がTiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
 
@@ -111,13 +111,13 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>';
 ```
 
-データベース内にTiFlashレプリカのないテーブルをチェックするには、次の SQL ステートメントを実行します。
+データベース内にTiFlashレプリカのないテーブルを確認するには、次の SQL ステートメントを実行します。
 
 ```sql
 SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
 ```
 
-## TiFlashレプリケーションの高速化 {#speed-up-tiflash-replication}
+## TiFlashレプリケーションを高速化 {#speed-up-tiflash-replication}
 
 <CustomContent platform="tidb-cloud">
 
@@ -134,7 +134,7 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスは完�
     ```sql
     -- The default value for both configurations are 100MiB, i.e. the maximum disk bandwidth used for writing snapshots is no more than 100MiB/s.
     SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '300MiB';
-    SET CONFIG tiflash `raftstore-proxy.server.snap-max-write-bytes-per-sec` = '300MiB';
+    SET CONFIG tiflash `raftstore-proxy.server.snap-io-max-bytes-per-sec` = '300MiB';
     ```
 
     これらの SQL 文を実行すると、クラスターを再起動せずに構成の変更がすぐに有効になります。ただし、レプリケーション速度は依然として PD 制限によってグローバルに制限されているため、現時点では高速化を確認することはできません。
@@ -173,7 +173,7 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスは完�
 
     ```sql
     SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '100MiB';
-    SET CONFIG tiflash `raftstore-proxy.server.snap-max-write-bytes-per-sec` = '100MiB';
+    SET CONFIG tiflash `raftstore-proxy.server.snap-io-max-bytes-per-sec` = '100MiB';
     ```
 
 ## 利用可能なゾーンを設定する {#set-available-zones}

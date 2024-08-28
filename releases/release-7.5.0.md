@@ -17,7 +17,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
 
 以前の LTS 7.1.0 と比較して、 7.5.0 には、 [7.2.0-DMR](/releases/release-7.2.0.md) 、 [7.3.0-DMR](/releases/release-7.3.0.md) 、 [7.4.0-DMR](/releases/release-7.4.0.md)でリリースされた新機能、改善、バグ修正が含まれています。 7.1.x から 7.5.0 にアップグレードする場合、 [TiDB リリースノート PDF](https://download.pingcap.org/tidb-v7.2-to-v7.5-en-release-notes.pdf)ダウンロードして、2 つの LTS バージョン間のすべてのリリース ノートを表示できます。 次の表に、 7.2.0 から 7.5.0 までのハイライトの一部を示します。
 
-<table><thead><tr><th>カテゴリー</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>スケーラビリティとパフォーマンス</td><td>複数の<code>ADD INDEX</code>ステートメントを並列実行することをサポート</td><td>この機能により、同時ジョブで 1 つのテーブルに複数のインデックスを追加できます。以前は、2 つの<code>ADD INDEX</code>ステートメント (X とY ) を同時に実行するには、X の時間とYの時間がかかっていました。この機能により、1 つの SQL で 2 つのインデックス X とYを追加する処理を同時に実行できるようになり、DDL の合計実行時間が大幅に短縮されます。特に、幅の広いテーブルを使用するシナリオでは、内部テスト データによると、パフォーマンスが最大 94% 向上することが示されています。</td></tr><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-global-sort" target="_blank">グローバルソートの</a>最適化 (実験的、v7.4.0 で導入)</td><td> TiDB v7.1.0 では <a href="https://docs.pingcap.com/tidb/v7.5/tidb-distributed-execution-framework" target="_blank">、分散実行フレームワーク (DXF)</a>が導入されました。このフレームワークを利用するタスクでは、v7.4 でグローバル ソートが導入され、データ再編成タスク中に一時的に順序が乱れたデータによって発生する不要な I/O、CPU、メモリのスパイクが排除されます。グローバル ソートでは、ジョブ中に中間ファイルを保存するために外部共有オブジェクトstorage(この最初のイテレーションでは Amazon S3) が活用され、柔軟性とコスト削減が向上します。ADD <code>ADD INDEX</code>や<code>IMPORT INTO</code>などの操作は、より高速で、より回復力があり、より安定し、より柔軟になり、実行コストも削減されます。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control#manage-background-tasks" target="_blank">バックグラウンド タスクのリソース制御</a>(実験的、v7.4.0 で導入)</td><td> v7.1.0 では、ワークロード間のリソースとstorageのアクセスの干渉を軽減するために、<a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control" target="_blank">リソース制御</a>機能が導入されました。TiDB v7.4.0 では、この制御がバックグラウンド タスクの優先度にも適用されました。v7.4.0 では、リソース制御によって、自動分析、バックアップと復元、 TiDB Lightningによる一括ロード、オンライン DDL などのバックグラウンド タスク実行の優先度が識別および管理されるようになりました。将来のリリースでは、この制御は最終的にすべてのバックグラウンド タスクに適用される予定です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">暴走クエリを管理する</a>ためのリソース制御 (実験的、v7.2.0 で導入)</td><td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control" target="_blank">リソース コントロールは</a>、リソース グループによってリソースを分離するワークロードのフレームワークですが、個々のクエリが各グループ内の作業にどのように影響するかについては考慮しません。TiDB v7.2.0 では、「ランナウェイ クエリ コントロール」が導入され、TiDB がリソース グループごとにこれらのクエリを識別して処理する方法を制御できるようになりました。必要に応じて、長時間実行されるクエリは終了または調整される可能性があり、クエリは正確な SQL テキスト、SQL ダイジェスト、またはそのプラン ダイジェストによって識別され、より一般化されます。v7.3.0 では、TiDB によって、データベース レベルの SQL ブロックリストと同様に、既知の不良クエリをプロアクティブに監視できます。</td></tr><tr><td>構文</td><td>MySQL 8.0 互換性 (v7.4.0 で導入)</td><td> MySQL 8.0 では、デフォルトの文字セットは utf8mb4 で、 utf8mb4 のデフォルトの照合順序は<code>utf8mb4_0900_ai_ci</code>です。TiDB v7.4.0 でこれに対するサポートが追加されたことで、MySQL 8.0 との互換性が向上し、デフォルトの照合順序順序を持つ MySQL 8.0 データベースからの移行とレプリケーションがよりスムーズになりました。</td></tr><tr><td rowspan="4"> DB 操作と可観測性</td><td>TiDB Lightning の物理インポート モードが<a href="https://docs.pingcap.com/tidb/v7.5/sql-statement-import-into"><code>IMPORT INTO</code></a> (GA) で TiDB に統合されました</td><td>v7.2.0 より前では、ファイル システムに基づいてデータをインポートするには、 <a href="https://docs.pingcap.com/tidb/v7.5/tidb-lightning-overview">TiDB Lightning を</a>インストールし、その物理インポート モードを使用する必要がありました。現在では、同じ機能が<code>IMPORT INTO</code>ステートメントに統合されているため、このステートメントを使用して、追加のツールをインストールせずにデータをすばやくインポートできます。このステートメントは、並列インポート用の<a href="https://docs.pingcap.com/tidb/v7.5/tidb-distributed-execution-framework" target="_blank">Distributed eXecution Framework (DXF)</a>もサポートしており、大規模なインポート時のインポート効率が向上します。</td></tr><tr><td> <code>ADD INDEX</code>および<code>IMPORT INTO</code> SQL ステートメントを実行するための<a href="https://docs.pingcap.com/tidb/v7.5/system-variables#tidb_service_scope-new-in-v740" target="_blank">それぞれの TiDB ノード</a>を指定します (GA)</td><td>既存の TiDB ノードまたは新しく追加された TiDB ノードの一部で<code>ADD INDEX</code>または<code>IMPORT INTO</code> SQL ステートメントを実行するかどうかを柔軟に指定できます。このアプローチにより、残りの TiDB ノードからのリソース分離が可能になり、ビジネス オペレーションへの影響を防ぎながら、前述の SQL ステートメントを実行するための最適なパフォーマンスを確保できます。v7.5.0 では、この機能が一般提供 (GA) されます。</td></tr><tr><td> DDL は<a href="https://docs.pingcap.com/tidb/v7.5/ddl-introduction#ddl-related-commands">一時停止と再開の操作を</a>サポートします (GA)</td><td>インデックスを追加すると、大量のリソースが消費され、オンライン トラフィックに影響を与える可能性があります。リソース グループで調整されている場合やラベル付きノードに分離されている場合でも、緊急時にはこれらのジョブを一時停止する必要がある可能性があります。v7.2.0 以降、TiDB は、これらのバックグラウンド ジョブを一度にいくつでも一時停止することをネイティブにサポートするようになりました。これにより、ジョブをキャンセルして再開する必要がなくなり、必要なリソースが解放されます。</td></tr><tr><td> TiDBダッシュボードはTiKVのヒーププロファイリングをサポート<a href="https://docs.pingcap.com/tidb/v7.5/dashboard-profiling" target="_blank"></a></td><td>以前は、TiKV OOM または高メモリ使用量の問題に対処するには、通常、インスタンス環境でヒープ プロファイルを生成するために<code>jeprof</code>を手動で実行する必要がありました。v7.5.0 以降、TiKV ではヒープ プロファイルのリモート処理が可能になります。ヒープ プロファイルのフレーム グラフとコール グラフに直接アクセスできるようになりました。この機能は、Go ヒープ プロファイリングと同じシンプルで使いやすいエクスペリエンスを提供します。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>スケーラビリティとパフォーマンス</td><td>複数の<code>ADD INDEX</code>ステートメントを並列実行することをサポート</td><td>この機能により、同時ジョブで 1 つのテーブルに複数のインデックスを追加できます。以前は、2 つの<code>ADD INDEX</code>ステートメント (X とY ) を同時に実行するには、X の時間とYの時間がかかっていました。この機能により、1 つの SQL で 2 つのインデックス X とYを追加する処理を同時に実行できるようになり、DDL の合計実行時間が大幅に短縮されます。特に、幅の広いテーブルを使用するシナリオでは、内部テスト データによると、パフォーマンスが最大 94% 向上することが示されています。</td></tr><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-global-sort" target="_blank">グローバルソートの</a>最適化 (実験的、v7.4.0 で導入)</td><td> TiDB v7.1.0 では <a href="https://docs.pingcap.com/tidb/v7.5/tidb-distributed-execution-framework" target="_blank">、分散実行フレームワーク (DXF)</a>が導入されました。このフレームワークを利用するタスクでは、v7.4 でグローバル ソートが導入され、データ再編成タスク中に一時的に順序が乱れたデータによって発生する不要な I/O、CPU、メモリのスパイクが排除されます。グローバル ソートでは、ジョブ中に中間ファイルを保存するために外部共有オブジェクトstorage(この最初のイテレーションでは Amazon S3) が活用され、柔軟性とコスト削減が向上します。ADD <code>ADD INDEX</code>や<code>IMPORT INTO</code>などの操作は、より高速で、より回復力があり、より安定し、より柔軟になり、実行コストも削減されます。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control#manage-background-tasks" target="_blank">バックグラウンド タスクのリソース制御</a>(実験的、v7.4.0 で導入)</td><td> v7.1.0 では、ワークロード間のリソースとstorageのアクセスの干渉を軽減するために、<a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control" target="_blank">リソース制御</a>機能が導入されました。TiDB v7.4.0 では、この制御がバックグラウンド タスクの優先度にも適用されました。v7.4.0 では、リソース制御によって、自動分析、バックアップと復元、 TiDB Lightningによる一括ロード、オンライン DDL などのバックグラウンド タスク実行の優先度が識別および管理されるようになりました。将来のリリースでは、この制御は最終的にすべてのバックグラウンド タスクに適用される予定です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">暴走クエリを管理する</a>ためのリソース制御 (実験的、v7.2.0 で導入)</td><td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control" target="_blank">リソース コントロールは</a>、リソース グループによってリソースを分離するワークロードのフレームワークですが、個々のクエリが各グループ内の作業にどのように影響するかについては考慮しません。TiDB v7.2.0 では、「ランナウェイ クエリ コントロール」が導入され、TiDB がリソース グループごとにこれらのクエリを識別して処理する方法を制御できるようになりました。必要に応じて、長時間実行されるクエリは終了または調整される可能性があり、クエリは正確な SQL テキスト、SQL ダイジェスト、またはそのプラン ダイジェストによって識別され、より一般化されます。v7.3.0 では、TiDB によって、データベース レベルの SQL ブロックリストと同様に、既知の不良クエリをプロアクティブに監視できます。</td></tr><tr><td>構文</td><td>MySQL 8.0 互換性 (v7.4.0 で導入)</td><td> MySQL 8.0 では、デフォルトの文字セットは utf8mb4 で、 utf8mb4 のデフォルトの照合順序は<code>utf8mb4_0900_ai_ci</code>です。TiDB v7.4.0 でこれに対するサポートが追加されたことで、MySQL 8.0 との互換性が向上し、デフォルトの照合順序順序を持つ MySQL 8.0 データベースからの移行とレプリケーションがよりスムーズになりました。</td></tr><tr><td rowspan="4"> DB 操作と可観測性</td><td>TiDB Lightning の物理インポート モードが<a href="https://docs.pingcap.com/tidb/v7.5/sql-statement-import-into"><code>IMPORT INTO</code></a> (GA) で TiDB に統合されました</td><td>v7.2.0 より前では、ファイル システムに基づいてデータをインポートするには、 <a href="https://docs.pingcap.com/tidb/v7.5/tidb-lightning-overview">TiDB Lightning を</a>インストールし、その物理インポート モードを使用する必要がありました。現在では、同じ機能が<code>IMPORT INTO</code>ステートメントに統合されているため、このステートメントを使用して、追加のツールをインストールせずにデータをすばやくインポートできます。このステートメントは、並列インポート用の<a href="https://docs.pingcap.com/tidb/v7.5/tidb-distributed-execution-framework" target="_blank">Distributed eXecution Framework (DXF)</a>もサポートしており、大規模なインポート時のインポート効率が向上します。</td></tr><tr><td> <code>ADD INDEX</code>および<code>IMPORT INTO</code> SQL ステートメントを実行するための<a href="https://docs.pingcap.com/tidb/v7.5/system-variables#tidb_service_scope-new-in-v740" target="_blank">それぞれの TiDB ノード</a>を指定します (GA)</td><td>既存の TiDB ノードまたは新しく追加された TiDB ノードの一部で<code>ADD INDEX</code>または<code>IMPORT INTO</code> SQL ステートメントを実行するかどうかを柔軟に指定できます。このアプローチにより、残りの TiDB ノードからのリソース分離が可能になり、ビジネス オペレーションへの影響を防ぎながら、前述の SQL ステートメントを実行するための最適なパフォーマンスを確保できます。v7.5.0 では、この機能が一般提供 (GA) されます。</td></tr><tr><td> DDL は<a href="https://docs.pingcap.com/tidb/v7.5/ddl-introduction#ddl-related-commands">一時停止と再開の操作を</a>サポートします (GA)</td><td>インデックスを追加すると、大量のリソースが消費され、オンライン トラフィックに影響を与える可能性があります。リソース グループで調整されている場合やラベル付きノードに分離されている場合でも、緊急時にはこれらのジョブを一時停止する必要がある可能性があります。v7.2.0 以降、TiDB は、これらのバックグラウンド ジョブを一度にいくつでも一時停止することをネイティブにサポートするようになりました。これにより、ジョブをキャンセルして再開する必要がなくなり、必要なリソースが解放されます。</td></tr><tr><td> TiDBダッシュボードはTiKVのヒーププロファイリングをサポート<a href="https://docs.pingcap.com/tidb/v7.5/dashboard-profiling" target="_blank"></a></td><td>以前は、TiKV OOM またはメモリ使用量が多い問題に対処するには、通常、 <code>jeprof</code>を手動で実行してインスタンス環境でヒープ プロファイルを生成する必要がありました。v7.5.0 以降、TiKV ではヒープ プロファイルのリモート処理が可能になります。ヒープ プロファイルのフレーム グラフとコール グラフに直接アクセスできるようになりました。この機能は、Go ヒープ プロファイリングと同じシンプルで使いやすいエクスペリエンスを提供します。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -27,7 +27,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
 
     リソースを大量に消費するクラスターで`ADD INDEX`または`IMPORT INTO`タスクを並行して実行すると、大量の TiDB ノード リソースが消費され、クラスターのパフォーマンスが低下する可能性があります。既存のサービスへのパフォーマンスへの影響を回避するために、v7.4.0 では、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)の下にある各 TiDB ノードのサービス スコープを制御するための実験的機能としてシステム変数[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)が導入されています。複数の既存の TiDB ノードを選択するか、新しい TiDB ノードの TiDB サービス スコープを設定すると、分散実行されるすべての`ADD INDEX`および`IMPORT INTO`タスクがこれらのノードでのみ実行されます。v7.5.0 では、この機能が一般提供 (GA) されます。
 
-    詳細については[ドキュメンテーション](/system-variables.md#tidb_service_scope-new-in-v740)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_service_scope-new-in-v740)参照してください。
 
 ### パフォーマンス {#performance}
 
@@ -41,7 +41,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
     SET GLOBAL tidb_enable_dist_task = ON;
     ```
 
-    詳細については[ドキュメンテーション](/tidb-global-sort.md)参照してください。
+    詳細については[ドキュメント](/tidb-global-sort.md)参照してください。
 
 -   単一のSQL文で複数のインデックスを追加するパフォーマンスを向上する[＃41602](https://github.com/pingcap/tidb/issues/41602) @ [タンジェンタ](https://github.com/tangenta)
 
@@ -60,21 +60,21 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
     ADMIN RESUME DDL JOBS 1,2;
     ```
 
-    詳細については[ドキュメンテーション](/ddl-introduction.md#ddl-related-commands)参照してください。
+    詳細については[ドキュメント](/ddl-introduction.md#ddl-related-commands)参照してください。
 
 -   BRは統計情報のバックアップと復元をサポートします[＃48008](https://github.com/pingcap/tidb/issues/48008) @ [リーヴルス](https://github.com/Leavrth)
 
     TiDB v7.5.0 以降、br コマンドライン ツールでは、データベース統計のバックアップと復元を行うための`--ignore-stats`パラメータが導入されています。このパラメータを`false`に設定すると、br コマンドライン ツールは、列、インデックス、およびテーブルの統計のバックアップと復元をサポートします。この場合、バックアップから復元された TiDB データベースの統計収集タスクを手動で実行したり、自動収集タスクの完了を待ったりする必要はありません。この機能により、データベースのメンテナンス作業が簡素化され、クエリのパフォーマンスが向上します。
 
-    詳細については[ドキュメンテーション](/br/br-snapshot-manual.md#back-up-statistics)参照してください。
+    詳細については[ドキュメント](/br/br-snapshot-manual.md#back-up-statistics)参照してください。
 
 ### 可観測性 {#observability}
 
 -   TiDBダッシュボードはTiKV [＃15927](https://github.com/tikv/tikv/issues/15927) @ [コナー1996](https://github.com/Connor1996)のヒーププロファイリングをサポートします
 
-    以前は、TiKV OOM または高メモリ使用量の問題に対処するには、通常、インスタンス環境でヒープ プロファイルを生成するために`jeprof`を手動で実行する必要がありました。v7.5.0 以降、TiKV ではヒープ プロファイルのリモート処理が可能になります。ヒープ プロファイルのフレーム グラフとコール グラフに直接アクセスできるようになりました。この機能は、Go ヒープ プロファイリングと同じシンプルで使いやすいエクスペリエンスを提供します。
+    以前は、TiKV OOM またはメモリ使用量が多い問題に対処するには、通常、インスタンス環境でヒープ プロファイルを生成するために`jeprof`を手動で実行する必要がありました。v7.5.0 以降、TiKV ではヒープ プロファイルのリモート処理が可能になります。ヒープ プロファイルのフレーム グラフとコール グラフに直接アクセスできるようになりました。この機能は、Go ヒープ プロファイリングと同じシンプルで使いやすいエクスペリエンスを提供します。
 
-    詳細については[ドキュメンテーション](/dashboard/dashboard-profiling.md)参照してください。
+    詳細については[ドキュメント](/dashboard/dashboard-profiling.md)参照してください。
 
 ### データ移行 {#data-migration}
 
@@ -82,7 +82,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
 
     v7.5.0 では、 `IMPORT INTO` SQL ステートメントが一般提供 (GA) されます。このステートメントは、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)機能を統合し、CSV、SQL、PARQUET などの形式のデータを TiDB の空のテーブルにすばやくインポートできるようにします。このインポート方法により、 TiDB Lightningを個別に展開および管理する必要がなくなり、データ インポートの複雑さが軽減され、インポートの効率が大幅に向上します。
 
-    詳細については[ドキュメンテーション](/sql-statements/sql-statement-import-into.md)参照してください。
+    詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)参照してください。
 
 -   データ移行 (DM) は、互換性のない (データの一貫性を損なう) DDL 変更のブロックをサポートします[＃9692](https://github.com/pingcap/tiflow/issues/9692) @ [GMHDBJD](https://github.com/GMHDBJD)
 
@@ -90,7 +90,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
 
     このような問題に対処するため、v7.5.0 では、サポートされる DDL イベントの粒度が改良され、 `MODIFY COLUMN`フィルタリング (列のデータ型の変更)、 `DROP COLUMN`などの、データ損失、データの切り捨て、精度の低下につながる細かい DDL イベントがサポートされるようになりました。必要に応じて構成できます。この機能では、互換性のない DDL 変更のブロックや、そのような変更のエラーの報告もサポートされているため、下流のアプリケーション データに影響を与えないように、適切なタイミングで手動で介入できます。
 
-    詳細については[ドキュメンテーション](/dm/dm-binlog-event-filter.md#parameter-descriptions)参照してください。
+    詳細については[ドキュメント](/dm/dm-binlog-event-filter.md#parameter-descriptions)参照してください。
 
 -   継続的なデータ検証のためのリアルタイムチェックポイント更新をサポート[＃8463](https://github.com/pingcap/tiflow/issues/8463) @ [リチュンジュ](https://github.com/lichunzhu)
 
@@ -98,7 +98,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
 
     継続的なデータ検証のためのチェックポイントのリアルタイム更新の導入により、上流データベースからbinlogの位置を提供できるようになりました。継続的な検証プログラムは、メモリ内でこのbinlogの位置を検出すると、数分ごとにチェックポイントを更新するのではなく、すぐにチェックポイントを更新します。したがって、すぐに更新されるこのチェックポイントに基づいて、カットオフ操作をすばやく実行できます。
 
-    詳細については[ドキュメンテーション](/dm/dm-continuous-data-validation.md#set-the-cutover-point-for-continuous-data-validation)参照してください。
+    詳細については[ドキュメント](/dm/dm-continuous-data-validation.md#set-the-cutover-point-for-continuous-data-validation)参照してください。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -110,7 +110,7 @@ TiDB 7.5.0 は長期サポートリリース (LTS) です。
 
 | 変数名                                                                                                               | タイプを変更   | 説明                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------- |
-| [`tidb_enable_fast_analyze`](/system-variables.md#tidb_enable_fast_analyze)                                       | 非推奨      | 統計`Fast Analyze`機能を有効にするかどうかを制御します。この機能は、v7.5.0 では非推奨です。                                     |
+| [`tidb_enable_fast_analyze`](/system-variables.md#tidb_enable_fast_analyze)                                       | 非推奨      | 統計`Fast Analyze`機能を有効にするかどうかを制御します。この機能はバージョン 7.5.0 では非推奨です。                                 |
 | [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency)                   | 修正済み     | さらにテストを行った後、デフォルト値を`1`から`2`に変更します。                                                           |
 | [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency)                               | 修正済み     | さらにテストを行った後、デフォルト値を`4`から`2`に変更します。                                                           |
 | [`tidb_merge_partition_stats_concurrency`](/system-variables.md#tidb_merge_partition_stats_concurrency)           | 修正済み     | このシステム変数は、v7.5.0 以降で有効になります。TiDB がパーティションテーブルを分析するときに、パーティションパーティションテーブルの統計をマージする同時実行を指定します。 |
@@ -182,10 +182,10 @@ v7.5.0 以降では、 `TiDB-community-toolkit` [バイナリパッケージ](/b
 
     -   バックアップと復元 (BR)
 
-        -   スナップショット バックアップ用の新しいテーブル間バックアップ パラメータ`table-concurrency`を追加します。このパラメータは、統計バックアップやデータ検証などのメタ情報のテーブル間同時実行を制御するために使用されます[＃48571](https://github.com/pingcap/tidb/issues/48571) @ [3ポインター](https://github.com/3pointer)
+        -   スナップショットバックアップ用の新しいテーブル間バックアップパラメータ`table-concurrency`を追加します。このパラメータは、統計バックアップやデータ検証などのメタ情報のテーブル間同時実行を制御するために使用されます[＃48571](https://github.com/pingcap/tidb/issues/48571) @ [3ポインター](https://github.com/3pointer)
         -   スナップショットバックアップの復元中に、 BR は特定のネットワークエラーが発生すると再試行します[＃48528](https://github.com/pingcap/tidb/issues/48528) @ [リーヴルス](https://github.com/Leavrth)
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -198,7 +198,7 @@ v7.5.0 以降では、 `TiDB-community-toolkit` [バイナリパッケージ](/b
     -   長期間オフラインだったTiFlashノードの再参加によって生じるワークロードの不均一性の問題を修正[＃35418](https://github.com/pingcap/tidb/issues/35418) @ [風の話し手](https://github.com/windtalker)
     -   HashJoin 演算子がプローブ[＃48082](https://github.com/pingcap/tidb/issues/48082) @ [うわー](https://github.com/wshwsh12)を実行するときにチャンクを再利用できない問題を修正しました。
     -   `COALESCE()`関数が`DATE`型パラメータ[＃46475](https://github.com/pingcap/tidb/issues/46475) @ [翻訳者](https://github.com/xzhangxian1008)に対して誤った結果型を返す問題を修正しました
-    -   サブクエリを含む`UPDATE`のステートメントが誤って PointGet [＃48171](https://github.com/pingcap/tidb/issues/48171) @ [ハイラスティン](https://github.com/hi-rustin)に変換される問題を修正しました
+    -   サブクエリを含む`UPDATE`のステートメントが誤って PointGet [＃48171](https://github.com/pingcap/tidb/issues/48171) @ [ハイラスティン](https://github.com/Rustin170506)に変換される問題を修正しました
     -   キャッシュされた実行プランに日付型と`unix_timestamp` [＃48165](https://github.com/pingcap/tidb/issues/48165) @ [qw4990](https://github.com/qw4990)の比較が含まれている場合に誤った結果が返される問題を修正しました。
     -   集計関数またはウィンドウ関数を含むデフォルトのインライン共通テーブル式 (CTE) が再帰 CTE [＃47881](https://github.com/pingcap/tidb/issues/47881) @ [エルサ0520](https://github.com/elsa0520)によって参照されるとエラーが報告される問題を修正しました
     -   ウィンドウ関数[＃46177](https://github.com/pingcap/tidb/issues/46177) @ [qw4990](https://github.com/qw4990)によって導入されたソートを減らすために、オプティマイザが誤って IndexFullScan を選択する問題を修正しました。
@@ -245,7 +245,7 @@ v7.5.0 以降では、 `TiDB-community-toolkit` [バイナリパッケージ](/b
         -   `kv-client.enable-multiplexing`有効にするとレプリケーション タスクが[＃9673](https://github.com/pingcap/tiflow/issues/9673) @ [ふびんず](https://github.com/fubinzh)で停止する問題を修正しました
         -   REDOログが有効になっている場合にNFS障害により所有者ノードが停止する問題を修正[＃9886](https://github.com/pingcap/tiflow/issues/9886) @ [3エースショーハンド](https://github.com/3AceShowHand)
 
-## 性能テスト {#performance-test}
+## パフォーマンステスト {#performance-test}
 
 TiDB v7.5.0 のパフォーマンスについては、TiDB 専用クラスターの[TPC-C パフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v7.5.0-performance-benchmarking-with-tpcc)と[Sysbench パフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v7.5.0-performance-benchmarking-with-sysbench)を参照してください。
 

@@ -17,7 +17,7 @@ TiDB バージョン: 7.1.1
 
 ### 行動の変化 {#behavior-changes}
 
--   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメンテーション](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
+-   更新イベントを処理する際、イベント内で主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
 
 ## 改善点 {#improvements}
 
@@ -37,7 +37,7 @@ TiDB バージョン: 7.1.1
     -   ティCDC
 
         -   TiCDC がオブジェクトstorageサービスにデータを複製するときにバイナリ フィールドのエンコード形式を最適化します[＃9373](https://github.com/pingcap/tiflow/issues/9373) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
-        -   Kafka [＃8865](https://github.com/pingcap/tiflow/issues/8865) @ [ハイラスティン](https://github.com/hi-rustin)へのレプリケーションのシナリオで OAUTHBEARER 認証をサポートする
+        -   Kafka [＃8865](https://github.com/pingcap/tiflow/issues/8865) @ [ハイラスティン](https://github.com/Rustin170506)へのレプリケーションのシナリオで OAUTHBEARER 認証をサポートする
 
     -   TiDB Lightning
 
@@ -52,7 +52,7 @@ TiDB バージョン: 7.1.1
 
         -   テーブル情報の取得方法を最適化し、 Drainer [＃1137](https://github.com/pingcap/tidb-binlog/issues/1137) @ [リチュンジュ](https://github.com/lichunzhu)の初期化時間とメモリ使用量を削減します。
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -95,7 +95,7 @@ TiDB バージョン: 7.1.1
     -   空の`processInfo` [＃43829](https://github.com/pingcap/tidb/issues/43829) @ [ジムララ](https://github.com/zimulala)によって発生するpanic問題を修正
     -   `ON UPDATE`文が主キー[＃44565](https://github.com/pingcap/tidb/issues/44565) @ [ジグアン](https://github.com/zyguan)を正しく更新しない場合にデータとインデックスが不整合になる問題を修正
     -   `tidb_opt_agg_push_down`が有効になっている場合にクエリが誤った結果を返す可能性がある問題を修正[＃44795](https://github.com/pingcap/tidb/issues/44795) @ [アイリンキッド](https://github.com/AilinKid)
-    -   CTEと相関サブクエリを同時に使用すると、クエリ結果が不正確になったりpanicが発生する可能性がある問題を修正[＃44649](https://github.com/pingcap/tidb/issues/44649) [＃38170](https://github.com/pingcap/tidb/issues/38170) [＃44774](https://github.com/pingcap/tidb/issues/44774) @ [ウィノロス](https://github.com/winoros) @ [グオシャオゲ](https://github.com/guo-shaoge)
+    -   CTEと相関サブクエリを同時に使用すると、クエリ結果が不正確になったりpanicが発生したりする可能性がある問題を修正[＃44649](https://github.com/pingcap/tidb/issues/44649) [＃38170](https://github.com/pingcap/tidb/issues/38170) [＃44774](https://github.com/pingcap/tidb/issues/44774) @ [ウィノロス](https://github.com/winoros) @ [グオシャオゲ](https://github.com/guo-shaoge)
     -   ロールバック状態で DDL タスクをキャンセルすると、関連するメタデータ[＃44143](https://github.com/pingcap/tidb/issues/44143) @ [翻訳:](https://github.com/wjhuang2016)にエラーが発生する問題を修正しました
     -   `UPDATE`文を実行すると外部キー制約[＃44848](https://github.com/pingcap/tidb/issues/44848) @ [クレイジーcs520](https://github.com/crazycs520)のチェックによりエラーが発生する問題を修正
 
@@ -123,8 +123,8 @@ TiDB バージョン: 7.1.1
         -   オブジェクトstorageサービス[＃8894](https://github.com/pingcap/tiflow/issues/8894) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)へのレプリケーション時にメモリが過剰に消費される問題を修正
         -   REDOログが有効で、下流に例外がある場合にレプリケーションタスクが停止する可能性がある問題を修正[＃9172](https://github.com/pingcap/tiflow/issues/9172) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   ダウンストリーム障害が発生したときに TiCDC が再試行を続け、再試行時間が長くなりすぎる問題を修正しました[＃9272](https://github.com/pingcap/tiflow/issues/9272) @ [アズドンメン](https://github.com/asddongmen)
-        -   Kafka [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/hi-rustin)にデータを複製するときに、ダウンストリーム メタデータを頻繁に読み取ることによって発生するダウンストリームの過度の負荷の問題を修正しました。
-        -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリしすぎて、ダウンストリームに過度の負荷がかかる問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/hi-rustin)
+        -   Kafka [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/Rustin170506)にデータを複製するときに、ダウンストリーム メタデータを頻繁に読み取ることによって発生するダウンストリームの過度の負荷の問題を修正しました。
+        -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリしすぎて、ダウンストリームに過度の負荷がかかる問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [ハイラスティン](https://github.com/Rustin170506)
         -   いくつかの特殊なシナリオでソートコンポーネントのメモリ使用量が過剰になることによって発生する OOM 問題を修正[＃8974](https://github.com/pingcap/tiflow/issues/8974) @ [ヒック](https://github.com/hicqu)
         -   Avro または CSV プロトコルが使用されている場合に`UPDATE`操作で古い値を出力できない問題を修正[＃9086](https://github.com/pingcap/tiflow/issues/9086) @ [3エースショーハンド](https://github.com/3AceShowHand)
         -   storageサービスにデータを複製するときに、ダウンストリーム DDL ステートメントに対応する JSON ファイルにテーブル フィールド[＃9066](https://github.com/pingcap/tiflow/issues/9066) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)のデフォルト値が記録されない問題を修正しました。
@@ -148,7 +148,7 @@ TiDB バージョン: 7.1.1
 
     -   Dumpling
 
-        -   クエリ結果セット`--sql`が空の場合にDumpling が異常終了する問題を修正[＃45200](https://github.com/pingcap/tidb/issues/45200) @ [D3ハンター](https://github.com/D3Hunter)
+        -   クエリ結果セット`--sql`が空の場合にDumpling が異常終了する問題を修正[#45200](https://github.com/pingcap/tidb/issues/45200) @ [D3ハンター](https://github.com/D3Hunter)
 
     -   TiDBBinlog
 

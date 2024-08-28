@@ -478,7 +478,7 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 -   デフォルト値: `5000`
 -   ステートメントの数が`stmt-count-limit`超えた後もトランザクションがロールバックまたはコミットしない場合、TiDB は`statement count 5001 exceeds the transaction limitation, autocommit = false`エラーを返します。この構成は、再試行可能な楽観的トランザクションで**のみ**有効です。悲観的トランザクションを使用する場合、またはトランザクションの再試行を無効にした場合、トランザクション内のステートメントの数は、この構成によって制限されません。
 
-### <code>txn-entry-size-limit</code> <span class="version-mark">v5.0 の新機能</span> {#code-txn-entry-size-limit-code-span-class-version-mark-new-in-v5-0-span}
+### <code>txn-entry-size-limit</code> <span class="version-mark">v4.0.10 および v5.0.0 の新機能</span> {#code-txn-entry-size-limit-code-span-class-version-mark-new-in-v4-0-10-and-v5-0-0-span}
 
 -   TiDB 内のデータの 1 行あたりのサイズ制限。
 -   デフォルト値: `6291456` (バイト単位)
@@ -663,7 +663,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 -   レポーターが jaeger エージェントにスパンを送信するアドレス。
 -   デフォルト値: `""`
 
-## tikv クライアント {#tikv-client}
+## tikvクライアント {#tikv-client}
 
 ### <code>grpc-connection-count</code> {#code-grpc-connection-count-code}
 

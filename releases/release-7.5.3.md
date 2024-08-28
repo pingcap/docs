@@ -41,11 +41,11 @@ TiDB バージョン: 7.5.3
 
         -   ダウンストリームがメッセージキュー（MQ）またはクラウドstorageの場合、生のイベントを直接出力することをサポートします[＃11211](https://github.com/pingcap/tiflow/issues/11211) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
-    -   インデックス統計の読み込み時にメモリリークが発生する可能性がある問題を修正[＃54022](https://github.com/pingcap/tidb/issues/54022) @ [ハイラスティン](https://github.com/hi-rustin)
+    -   インデックス統計の読み込み時にメモリリークが発生する可能性がある問題を修正[＃54022](https://github.com/pingcap/tidb/issues/54022) @ [ハイラスティン](https://github.com/Rustin170506)
     -   マルチテーブルシナリオで`UPDATE`操作が TiDB OOM を引き起こす可能性がある問題を修正[＃53742](https://github.com/pingcap/tidb/issues/53742) @ [ホーキングレイ](https://github.com/hawkingrei)
     -   `GROUP BY`ステートメント内の間接プレースホルダー`?`参照が列[＃53872](https://github.com/pingcap/tidb/issues/53872) @ [qw4990](https://github.com/qw4990)を見つけられない問題を修正しました
     -   照合順序が`utf8_bin`または`utf8mb4_bin` [＃53730](https://github.com/pingcap/tidb/issues/53730) @ [エルサ0520](https://github.com/elsa0520)の場合に`LENGTH()`条件が予期せず削除される問題を修正しました
@@ -76,7 +76,7 @@ TiDB バージョン: 7.5.3
     -   `auth_socket`認証プラグイン[＃54031](https://github.com/pingcap/tidb/issues/54031) @ [lcwangchao](https://github.com/lcwangchao)を使用する場合、TiDB が認証されていないユーザー接続を拒否できないことがある問題を修正しました。
     -   情報スキーマキャッシュミス[＃53428](https://github.com/pingcap/tidb/issues/53428) @ [クレイジーcs520](https://github.com/crazycs520)により、古い読み取りのクエリレイテンシーが増加する問題を修正しました。
     -   `STATE`のフィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`のテーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [翻訳](https://github.com/cfzjywxk)
-    -   自動統計収集中にシステム変数`tidb_enable_async_merge_global_stats`と`tidb_analyze_partition_concurrency`が有効にならない問題を修正[＃53972](https://github.com/pingcap/tidb/issues/53972) @ [ハイラスティン](https://github.com/hi-rustin)
+    -   自動統計収集中にシステム変数`tidb_enable_async_merge_global_stats`と`tidb_analyze_partition_concurrency`が有効にならない問題を修正[＃53972](https://github.com/pingcap/tidb/issues/53972) @ [ハイラスティン](https://github.com/Rustin170506)
     -   列のデフォルト値として`CURRENT_DATE()`使用するとクエリ結果が不正確になる問題を修正[＃53746](https://github.com/pingcap/tidb/issues/53746) @ [タンジェンタ](https://github.com/tangenta)
     -   `SELECT ... FOR UPDATE` [＃54652](https://github.com/pingcap/tidb/issues/54652) @ [qw4990](https://github.com/qw4990)の間違ったポイント取得プランを再利用する問題を修正
 

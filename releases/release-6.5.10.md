@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.10
 
 ## 互換性の変更 {#compatibility-changes}
 
--   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理するときに、 `UPDATE`イベントで主キーまたは非 NULL の一意のインデックス値が変更されると、TiCDC はこのイベントを`DELETE`のイベントと`INSERT`イベントに分割していました。v6.5.10 以降では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC が対応するテーブルをダウンストリームに複製し始めるときに PD から取得される現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`イベントを`DELETE`のイベントと`INSERT`のイベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が誤っている可能性があり、分割された`DELETE`と`INSERT`イベントの順序が誤っている可能性があるため、ダウンストリーム データの不整合の問題に対処できます。詳細については、 [ドキュメンテーション](https://docs.pingcap.com/tidb/v6.5/ticdc-split-update-behavior#split-update-events-for-mysql-sinks)を参照してください[＃10918](https://github.com/pingcap/tiflow/issues/10918) @ [リデズ](https://github.com/lidezhu)
+-   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理するときに、 `UPDATE`イベントで主キーまたは非 NULL の一意のインデックス値が変更されると、TiCDC はこのイベントを`DELETE`のイベントと`INSERT`イベントに分割していました。v6.5.10 以降では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC が対応するテーブルをダウンストリームに複製し始めるときに PD から取得される現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`イベントを`DELETE`のイベントと`INSERT`のイベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が誤っている可能性があり、分割された`DELETE`と`INSERT`イベントの順序が誤っている可能性があるため、ダウンストリーム データの不整合の問題に対処できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/ticdc-split-update-behavior#split-update-events-for-mysql-sinks)を参照してください[＃10918](https://github.com/pingcap/tiflow/issues/10918) @ [リデズ](https://github.com/lidezhu)
 -   TiDB Lightning `strict-format`を使用して CSV ファイルをインポートする場合は、行末文字を設定する必要があります[＃37338](https://github.com/pingcap/tidb/issues/37338) @ [ランス6716](https://github.com/lance6716)
 
 ## 改善点 {#improvements}
@@ -25,7 +25,7 @@ TiDB バージョン: 6.5.10
 
 -   ティクヴ
 
-    -   TiKV [＃16680](https://github.com/tikv/tikv/issues/16680) @ [ライクサッシネーター](https://github.com/LykxSassinator)のシャットダウン速度を加速する
+    -   TiKV [＃16680](https://github.com/tikv/tikv/issues/16680) @ [リクササシネーター](https://github.com/LykxSassinator)のシャットダウン速度を加速する
     -   下流の CDC イベントレイテンシー問題のトラブルシューティングを容易にするために、CDC イベントを処理するためのキュー時間の監視メトリックを追加します[＃16282](https://github.com/tikv/tikv/issues/16282) @ [ヒック](https://github.com/hicqu)
 
 -   ツール
@@ -42,7 +42,7 @@ TiDB バージョン: 6.5.10
         -   REDOログを使用してデータリカバリ中のメモリの安定性を向上させ、OOM [＃10900](https://github.com/pingcap/tiflow/issues/10900) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)の可能性を低減します。
         -   トランザクション競合シナリオでのデータレプリケーションの安定性が大幅に向上し、パフォーマンスが最大10倍向上します[＃10896](https://github.com/pingcap/tiflow/issues/10896) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
 
-## バグの修正 {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 -   ティビ
 
@@ -81,7 +81,7 @@ TiDB バージョン: 6.5.10
     -   AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` [＃52600](https://github.com/pingcap/tidb/issues/52600) @ [天菜まお](https://github.com/tiancaiamao)の場合に自動増分列の値が減少する可能性がある問題を修正しました。
     -   BIGINT 以外の符号なし整数を文字列/小数と比較すると誤った結果が生成される可能性がある問題を修正[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)
     -   `FLOAT`型から`UNSIGNED`型へのデータ変換で誤った結果が返される問題を修正[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [グオシャオゲ](https://github.com/guo-shaoge)
-    -   `VAR_SAMP()`ウィンドウ関数[＃52933](https://github.com/pingcap/tidb/issues/52933) @ [ハイラスティン](https://github.com/hi-rustin)として使用できない問題を修正
+    -   `VAR_SAMP()`ウィンドウ関数[＃52933](https://github.com/pingcap/tidb/issues/52933) @ [ハイラスティン](https://github.com/Rustin170506)として使用できない問題を修正
     -   間違った TableDual プランにより空のクエリ結果[＃50051](https://github.com/pingcap/tidb/issues/50051) @ [猫のみ](https://github.com/onlyacat)が発生する問題を修正
     -   TiDB の同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log [＃52657](https://github.com/pingcap/tidb/issues/52657) @ [ホーキングレイ](https://github.com/hawkingrei)を出力問題を修正しました。
     -   空の投影により TiDB がpanicになる問題を修正[＃49109](https://github.com/pingcap/tidb/issues/49109) @ [ウィノロス](https://github.com/winoros)
@@ -116,7 +116,7 @@ TiDB バージョン: 6.5.10
     -   バックアップと復元 (BR)
 
         -   テストケース`TestGetTSWithRetry`実行に時間がかかりすぎる問題を修正[＃52547](https://github.com/pingcap/tidb/issues/52547) @ [リーヴルス](https://github.com/Leavrth)
-        -   BRを使用してデータを復元する場合、または物理インポート モードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [#50501](https://github.com/pingcap/tidb/issues/50501) @ [リーヴルス](https://github.com/Leavrth)
+        -   BRを使用してデータを復元する場合、または物理インポート モードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @ [リーヴルス](https://github.com/Leavrth)
         -   PD 接続障害により、ログ バックアップ アドバンサ所有者が配置されている TiDB インスタンスがpanicになる可能性がある問題を修正しました[＃52597](https://github.com/pingcap/tidb/issues/52597) @ [ユジュンセン](https://github.com/YuJuncen)
         -   ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが[＃53047](https://github.com/pingcap/tidb/issues/53047) @ [リドリス](https://github.com/RidRisR)に進まない問題を修正しました。
         -   TiKVノード[＃50566](https://github.com/pingcap/tidb/issues/50566) @ [リーヴルス](https://github.com/Leavrth)にリーダーがいないためにデータの復元が遅くなる問題を修正

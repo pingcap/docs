@@ -35,7 +35,7 @@ TiDB バージョン: 7.4.0
 
 -   TiFlashは分散storageおよびコンピューティングアーキテクチャ（GA）をサポートします[＃6882](https://github.com/pingcap/tiflash/issues/6882) @ [ジェイソン・ファン](https://github.com/JaySon-Huang) @ [ジンヘリン](https://github.com/JinheLin) @ [そよ風のような](https://github.com/breezewish) @ [リデズ](https://github.com/lidezhu) @ [カルビンネオ](https://github.com/CalvinNeo) @ [ロイド・ポティガー](https://github.com/Lloyd-Pottiger)
 
-    v7.0.0 では、 TiFlash は分散storageおよびコンピューティングアーキテクチャを実験的機能として導入します。一連の改善により、 TiFlashの分散storageおよびコンピューティングアーキテクチャはv7.4.0 から GA になります。
+    v7.0.0 では、 TiFlash は分散storageおよびコンピューティングアーキテクチャを実験的機能として導入します。一連の改善により、 TiFlashの分散storageおよびコンピューティングアーキテクチャは、v7.4.0 から GA になります。
 
     このアーキテクチャでは、 TiFlashノードは 2 種類 (コンピューティング ノードと書き込みノード) に分かれており、S3 API と互換性のあるオブジェクトstorageをサポートします。両方の種類のノードは、コンピューティングまたはstorage容量を個別に拡張できます。分散storageおよびコンピューティングアーキテクチャでは、 TiFlashレプリカの作成、データのクエリ、オプティマイザー ヒントの指定など、結合storageおよびコンピューティングアーキテクチャと同じようにTiFlash を使用できます。
 
@@ -117,7 +117,7 @@ TiDB バージョン: 7.4.0
 
     v7.4.0 では、TiDB に新しいシステム変数[`tidb_opt_objective`](/system-variables.md#tidb_opt_objective-new-in-v740)が導入され、オプティマイザが使用する推定方法を制御しま す。デフォルト値`moderate` 、データの変更に基づいて推定を調整するために実行時統計を使用するという、オプティマイザの以前の動作を維持します。この変数を`determinate`に設定すると、オプティマイザは実行時修正を考慮せずに、統計のみに基づいて実行プランを生成します。
 
-    長期にわたって安定した OLTP アプリケーションの場合、または既存の実行プランに自信がある状況では、テスト後に`determinate`モードに切り替えることをお勧めします。これにより、潜在的なプラン変更が軽減されます。
+    長期にわたって安定した OLTP アプリケーションの場合、または既存の実行プランに自信がある場合は、テスト後に`determinate`モードに切り替えることをお勧めします。これにより、潜在的なプラン変更が軽減されます。
 
     詳細については[ドキュメント](/system-variables.md#tidb_opt_objective-new-in-v740)参照してください。
 
@@ -136,7 +136,7 @@ TiDB バージョン: 7.4.0
 
     詳細については[ドキュメント](/tidb-resource-control.md#manage-background-tasks)参照してください。
 
--   ロック統計が一般公開 (GA) される[＃46351](https://github.com/pingcap/tidb/issues/46351) @ [ハイラスティン](https://github.com/hi-rustin)
+-   ロック統計が一般公開 (GA) される[＃46351](https://github.com/pingcap/tidb/issues/46351) @ [ハイラスティン](https://github.com/Rustin170506)
 
     v7.4.0 では、 [ロック統計](/statistics.md#lock-statistics)一般提供されました。運用上のセキュリティを確保するために、統計のロックとロック解除には、統計の収集と同じ権限が必要です。さらに、TiDB は特定のパーティションの統計のロックとロック解除をサポートしており、柔軟性が向上しています。データベース内のクエリと実行プランに自信があり、変更が発生しないようにしたい場合は、統計をロックして安定性を高めることができます。
 
@@ -144,7 +144,7 @@ TiDB バージョン: 7.4.0
 
 -   テーブル[＃46695](https://github.com/pingcap/tidb/issues/46695) @ [コーダープレイ](https://github.com/coderplay)のハッシュ結合を選択するかどうかを制御するシステム変数を導入します。
 
-    MySQL 8.0 では、新しい機能としてテーブルのハッシュ結合が導入されています。この機能は主に、比較的大きな 2 つのテーブルと結果セットを結合するために使用されます。ただし、トランザクション ワークロードや、 MySQL 5.7で実行される一部のアプリケーションでは、テーブルのハッシュ結合によってパフォーマンス リスクが生じる可能性があります。MySQL では、ハッシュ結合をグローバル レベルとセッション レベルのどちらで選択するかを制御する[`optimizer_switch`](https://dev.mysql.com/doc/refman/8.0/en/switchable-optimizations.html#optflag_block-nested-loop)提供されています。
+    MySQL 8.0 では、新機能としてテーブルのハッシュ結合が導入されています。この機能は主に、比較的大きな 2 つのテーブルと結果セットを結合するために使用されます。ただし、トランザクション ワークロードや、 MySQL 5.7で実行される一部のアプリケーションでは、テーブルのハッシュ結合によってパフォーマンス リスクが生じる可能性があります。MySQL では、ハッシュ結合をグローバル レベルとセッション レベルのどちらで選択するかを制御する[`optimizer_switch`](https://dev.mysql.com/doc/refman/8.0/en/switchable-optimizations.html#optflag_block-nested-loop)提供されています。
 
     v7.4.0 以降、TiDB では、テーブルのハッシュ結合を制御するためのシステム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)が導入されています。これはデフォルトで有効になっています ( `ON` )。実行プランでテーブル間のハッシュ結合を選択する必要がないことが確実な場合は、変数を`OFF`に変更して、実行プランのロールバックの可能性を減らし、システムの安定性を向上させることができます。
 
@@ -182,7 +182,7 @@ TiDB バージョン: 7.4.0
 
     さらに、セッション レベルのシステム変数[`tidb_session_alias`](/system-variables.md#tidb_session_alias-new-in-v740)を設定することで、上記のログにカスタム識別子を追加できます。ログにアプリケーション識別情報を挿入するこの機能により、ログの内容とアプリケーションを関連付け、アプリケーションからログへのリンクを構築し、診断の難易度を軽減できます。
 
--   TiDBダッシュボードは、テーブルビューでの実行プランの表示をサポートします[＃1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @ [バウリン](https://github.com/baurine)
+-   TiDBダッシュボードは、テーブルビューでの実行プランの表示をサポートしています[＃1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @ [バウリン](https://github.com/baurine)
 
     v7.4.0 では、TiDB ダッシュボードは、診断エクスペリエンスを向上させるために、**スロー クエリ ページ**と**SQL ステートメント**ページで実行プランをテーブル ビューで表示することをサポートしています。
 
@@ -264,7 +264,7 @@ TiDB バージョン: 7.4.0
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                         | タイプを変更   | 説明                                                                                                                                                                        |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ティビ            | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                  | 修正済み     | デフォルト値は`false`から`true`に変更され、TiDB 統計のキャッシュのメモリ制限がデフォルトで有効になっていることを意味します。                                                                                                   |
-| ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720) | 修正済み     | デフォルト値が`"30d"`から`"0s"`に変更され、RocksDB の定期的な圧縮がデフォルトで無効になります。この変更により、TiDB のアップグレード後に大量の圧縮がトリガーされ、フロントエンドの読み取りおよび書き込みパフォーマンスに影響することがなくなります。                                   |
+| ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720) | 修正済み     | デフォルト値が`"30d"`から`"0s"`に変更され、デフォルトで RocksDB の定期的な圧縮が無効になります。この変更により、TiDB のアップグレード後に大量の圧縮がトリガーされ、フロントエンドの読み取りおよび書き込みパフォーマンスに影響することがなくなります。                                  |
 | ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].ttl`](/tikv-configuration-file.md#ttl-new-in-v720)                                                 | 修正済み     | デフォルト値が`"30d"`から`"0s"`に変更され、SST ファイルは TTL によりデフォルトで圧縮をトリガーしなくなり、フロントエンドの読み取りおよび書き込みパフォーマンスに影響を与えなくなります。                                                                   |
 | TiFlash        | [`flash.compact_log_min_gap`](/tiflash/tiflash-configuration.md)                                                                        | 新しく追加された | 現在のRaftステート マシンによって進められた`applied_index`と最後のディスク スピル時の`applied_index`との差が`compact_log_min_gap`を超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。                 |
 | TiFlash        | [`profiles.default.enable_resource_control`](/tiflash/tiflash-configuration.md)                                                         | 新しく追加された | TiFlashリソース制御機能を有効にするかどうかを制御します。                                                                                                                                          |
@@ -303,7 +303,7 @@ TiDB バージョン: 7.4.0
 
 -   PD
 
-    -   TSO トレース情報を最適化して、TSO 関連の問題の調査を容易にする[＃6856](https://github.com/tikv/pd/pull/6856) @ [天菜まお](https://github.com/tiancaiamao)
+    -   TSO 関連の問題の調査を容易にするために TSO トレース情報を最適化します[＃6856](https://github.com/tikv/pd/pull/6856) @ [天菜まお](https://github.com/tiancaiamao)
     -   メモリ使用量を削減するために HTTP クライアント接続の再利用をサポート[＃6913](https://github.com/tikv/pd/issues/6913) @ [ノルーシュ](https://github.com/nolouch)
     -   バックアップ クラスタが切断されたときに PD がクラスタ ステータスを自動的に更新する速度を向上[＃6883](https://github.com/tikv/pd/issues/6883) @ [ディスク](https://github.com/disksing)
     -   リソース制御クライアントの構成取得方法を強化し、最新の構成を動的に取得する[＃7043](https://github.com/tikv/pd/issues/7043) @ [ノルーシュ](https://github.com/nolouch)
