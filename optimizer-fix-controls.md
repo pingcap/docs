@@ -73,7 +73,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ### [`47400`](https://github.com/pingcap/tidb/issues/47400) <span class="version-mark">New in v8.4.0</span>
 
-- Default value: `OFF`
+- Default value: `ON`
 - Possible values: `ON`, `OFF`
 - This variable sets the minimum row estimate that the optimizer will allow. Due to challenges that all optimizers face in accuracy in estimating the number of qualified rows for each plan step in a query plan, it is common that an optimizer will set a lower limit. The default (`ON`) implemented in TiDB is the new behavior and is consistent with other databases.
 - `OFF` means disable this minimum value, which is the prior behavior (before this enhancement and fix-control).
