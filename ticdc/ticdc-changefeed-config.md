@@ -187,6 +187,10 @@ date-separator = 'day'
 # Note: This configuration item only takes effect if the downstream is a storage service.
 enable-partition-separator = true
 
+# Controls whether to disable the output of schema information. The default value is false, which means enabling the output of schema information.
+# Note: This parameter only takes effect when the sink type is MQ and the output protocol is Debezium.
+debezium-disable-schema = false
+
 # Since v6.5.0, TiCDC supports saving data changes to storage services in CSV format. Ignore the following configurations if you replicate data to MQ or MySQL sinks.
 # [sink.csv]
 # The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.
