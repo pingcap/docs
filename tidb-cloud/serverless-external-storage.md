@@ -11,7 +11,7 @@ If you need to configure these external storages for TiDB Dedicated, see [Config
 
 ## Configure Amazon S3 access
 
-To allow a iDB Serverless cluster to access your Amazon S3 bucket, you need to configure the bucket access for TiDB Serverless. You can use either of the following methods to configure the bucket access:
+To allow a TiDB Serverless cluster to access your Amazon S3 bucket, you need to configure the bucket access for TiDB Serverless. You can use either of the following methods to configure the bucket access:
 
 - Use a Role ARN: use a Role ARN to access your Amazon S3 bucket.
 - Use an AWS access key: use the access key of an IAM user to access your Amazon S3 bucket.
