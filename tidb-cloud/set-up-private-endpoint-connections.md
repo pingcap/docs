@@ -66,7 +66,8 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 
-1. Fill in the **Your VPC ID** and **Your Subnet IDs** fields. You can get the IDs from your [AWS Management Console](https://console.aws.amazon.com/).
+1. Fill in the **Your VPC ID** and **Your Subnet IDs** fields. You can get the IDs from your [AWS Management Console](https://console.aws.amazon.com/). If you have more than one subnets, multiple subnet IDs can be entered, separated by spaces.
+
 2. Click **Generate Command** to get the following endpoint creation command.
 
     ```bash
