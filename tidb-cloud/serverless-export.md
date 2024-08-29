@@ -89,7 +89,7 @@ You can export data in the following formats:
     - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
     - `header`: specify whether to include a header row in the exported data. The default value is `true`.
     - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
-- `Parquet`: export data in Parquet format. It is only supported in TiDB Cloud CLI now.
+- `Parquet`: export data in Parquet format. Currently it is only supported in TiDB Cloud CLI.
 
 The schema and data are exported according to the following naming conventions:
 
@@ -214,7 +214,7 @@ ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.role-arn <r
 
 ### Export data to Google Cloud Storage
 
-You can only export data to Google Cloud Storage using the TiDB Cloud CLI now.
+Currently, you can only export data to Google Cloud Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 ```shell
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
@@ -225,7 +225,7 @@ ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-a
 
 ### Export data to Azure Blob Storage
 
-You can only export data to Azure Blob Storage using the TiDB Cloud CLI now.
+Currently, you can only export data to Azure Blob Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 ```shell
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
