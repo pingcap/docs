@@ -31,7 +31,7 @@ You can export data to:
 
 Exporting data to a local file has the following limitations:
 
-- You can only download the exported data with the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md). Downloading in the TiDB Cloud console is not supported.
+- You can only download the exported data using the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md). Downloading using the TiDB Cloud console is not supported.
 - Exported data is saved in the stashing area and will expire after two days. You need to download the exported data in time.
 - If the storage space of stashing area is full, you will not be able to export data to the local file.
 
@@ -40,7 +40,7 @@ Exporting data to a local file has the following limitations:
 To export data to Amazon S3, you need to provide the following information:
 
 - URI: `s3://<bucket-name>/<file-path>`
-- one of the following access methods:
+- One of the following access credentials:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
     - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN has the `s3:PutObject` and `s3:ListBucket` permissions. 
 
@@ -51,26 +51,26 @@ For more information, see [Configure External Storage Access for TiDB Serverless
 To export data to Google Cloud Storage, you need to provide the following information:
 
 - URI: `gs://<bucket-name>/<file-path>`
-- Access method: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
+- Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
 > **Note:**
 >
-> You can only export to Google Cloud Storage with TiDB Cloud CLI now.
+> Currently, you can only export to Google Cloud Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 ### Azure Blob Storage
 
 To export data to Azure Blob Storage, you need to provide the following information:
 
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
-- Access method: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
+- Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).       
 
 > **Note:**
 >
-> You can only export to Azure Blob Storage with TiDB Cloud CLI now.
+> Currently, you can only export to Azure Blob Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 ## Export options
 
