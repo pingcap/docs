@@ -130,7 +130,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2. Run the connection string obtained in [Step 1](#step-1-create-a-tidb-serverless-cluster).
+2. Run the connection string obtained in [Step 1](#step-1-create-a-tidb-cloud-serverless-cluster).
 
     {{< copyable "shell-regular" >}}
 
