@@ -172,7 +172,7 @@ To allow TiDB Serverless to access your GCS bucket, you need to configure the GC
 
 Take the following steps to configure a service account key:
 
-1. Click **CREATE SERVICE ACCOUNT** to create a service account in the Google Cloud [service account page](https://console.cloud.google.com/iam-admin/serviceaccounts). For more information, see [Creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
+1. Click **CREATE SERVICE ACCOUNT** to create a service account on the Google Cloud [service account page](https://console.cloud.google.com/iam-admin/serviceaccounts). For more information, see [Creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
 
     1. Enter a service account name.
     2. Enter a description of the service account (Optional). 
@@ -184,7 +184,7 @@ Take the following steps to configure a service account key:
 
     ![img.png](/media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
 
-2. Click the service account and then click the **ADD KEY** button in the `KEYS` page to create a service account key. 
+2. Click the service account and then click the **ADD KEY** button on the `KEYS` page to create a service account key. 
 
     ![img.png](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
