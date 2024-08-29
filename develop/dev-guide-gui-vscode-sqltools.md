@@ -11,7 +11,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using Visual
 
 > **Note:**
 >
-> - This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> - This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Managed.
 > - This tutorial also works with Visual Studio Code Remote Development environments, such as [GitHub Codespaces](https://github.com/features/codespaces), [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl).
 
 ## Prerequisites
@@ -146,7 +146,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 7. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
 
@@ -157,10 +157,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Connection name**: give this connection a meaningful name.
     - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
     - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: enter the port number of your TiDB Self-Hosted cluster.
+    - **Server Address**: enter the IP address or domain name of your TiDB Self-Managed cluster.
+    - **Port**: enter the port number of your TiDB Self-Managed cluster.
     - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the username to use to connect to your TiDB Self-Hosted cluster.
+    - **Username**: enter the username to use to connect to your TiDB Self-Managed cluster.
     - **Password mode**:
 
         - If the password is empty, select **Use empty password**.
@@ -171,13 +171,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
         - **Authentication Protocol**: select **default**.
         - **SSL**: select **Disabled**.
 
-    ![VS Code SQLTools: configure connection settings for TiDB Self-Hosted](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Self-Managed](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
 
-3. Click **TEST CONNECTION** to validate the connection to the TiDB Self-Hosted cluster.
+3. Click **TEST CONNECTION** to validate the connection to the TiDB Self-Managed cluster.
 
-    If the password is not empty, click **Allow** in the pop-up window, and then enter the password of the TiDB Self-Hosted cluster.
+    If the password is not empty, click **Allow** in the pop-up window, and then enter the password of the TiDB Self-Managed cluster.
 
-    ![VS Code SQLTools: enter password to connect to TiDB Self-Hosted](/media/develop/vsc-sqltools-password.jpg)
+    ![VS Code SQLTools: enter password to connect to TiDB Self-Managed](/media/develop/vsc-sqltools-password.jpg)
 
 4. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
 

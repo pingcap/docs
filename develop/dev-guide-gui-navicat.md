@@ -16,7 +16,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using Navica
 
 > **Note:**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -125,7 +125,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 9. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1. Launch Navicat for MySQL, click **Connection** in the upper-left corner, and select **MySQL** from the drop-down list.
 
@@ -134,14 +134,14 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 2. In the **New Connection (MySQL)** dialog, configure the following connection parameters:
 
     - **Connection Name**: give this connection a meaningful name.
-    - **Host**: enter the IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: enter the port number of your TiDB Self-Hosted cluster.
+    - **Host**: enter the IP address or domain name of your TiDB Self-Managed cluster.
+    - **Port**: enter the port number of your TiDB Self-Managed cluster.
     - **User Name**: enter the username to use to connect to your TiDB.
     - **Password**: enter the password to use to connect to your TiDB.
 
     ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-connection-config-self-hosted-general.png)
 
-3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
+3. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
 
 4. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
 

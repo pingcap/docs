@@ -9,7 +9,7 @@ TiDB is a MySQL-compatible database, and [JetBrains DataGrip](https://www.jetbra
 
 > **Note:**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Managed.
 
 You can use DataGrip in two ways:
 
@@ -135,7 +135,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 10. Click **OK** to save the connection configuration.
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1. Launch DataGrip and create a project to manage your connections.
 
@@ -147,20 +147,20 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Configure the following connection parameters:
 
-    - **Host**: The IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: The port number of your TiDB Self-Hosted cluster.
-    - **User**: The username to use to connect to your TiDB Self-Hosted cluster.
+    - **Host**: The IP address or domain name of your TiDB Self-Managed cluster.
+    - **Port**: The port number of your TiDB Self-Managed cluster.
+    - **User**: The username to use to connect to your TiDB Self-Managed cluster.
     - **Password**: The password of the username.
 
     An example is as follows:
 
-    ![Configure the connection parameters for TiDB Self-Hosted](/media/develop/datagrip-self-hosted-connect.jpg)
+    ![Configure the connection parameters for TiDB Self-Managed](/media/develop/datagrip-self-hosted-connect.jpg)
 
     If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
 
-4. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
+4. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
 
-    ![Test the connection to a TiDB Self-Hosted cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
+    ![Test the connection to a TiDB Self-Managed cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
 
 5. Click **OK** to save the connection configuration.
 

@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in AWS Lambda Functio
 
 > **Note**
 >
-> This tutorial works with TiDB Serverless and TiDB Self-Hosted.
+> This tutorial works with TiDB Serverless and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -119,7 +119,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 </div>
 
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 Copy and paste the corresponding connection string into `env.json`. The following is an example:
 

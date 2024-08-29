@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB and Go-MySQL-Driver to accomplis
 
 > **Note:**
 >
-> This tutorial works with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> This tutorial works with TiDB Serverless, TiDB Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -140,7 +140,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 6. Save the `.env` file.
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1. Run the following command to copy `.env.example` and rename it to `.env`:
 

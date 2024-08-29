@@ -16,7 +16,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using MySQL 
 
 > **Note:**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -122,7 +122,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 7. If the connection test is successful, you can see the **Successfully made the MySQL connection** message. Click **OK** to save the connection configuration.
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1. Launch MySQL Workbench and click **+** near the **MySQL Connections** title.
 
@@ -131,18 +131,18 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 2. In the **Setup New Connection** dialog, configure the following connection parameters:
 
     - **Connection Name**: give this connection a meaningful name.
-    - **Hostname**: enter the IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: enter the port number of your TiDB Self-Hosted cluster.
+    - **Hostname**: enter the IP address or domain name of your TiDB Self-Managed cluster.
+    - **Port**: enter the port number of your TiDB Self-Managed cluster.
     - **Username**: enter the username to use to connect to your TiDB.
     - **Password**: click **Store in Keychain ...**, enter the password to use to connect to your TiDB cluster, and then click **OK** to store the password.
 
-        ![MySQL Workbench: store the password of TiDB Self-Hosted in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
+        ![MySQL Workbench: store the password of TiDB Self-Managed in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
 
     The following figure shows an example of the connection parameters:
 
-    ![MySQL Workbench: configure connection settings for TiDB Self-Hosted](/media/develop/mysql-workbench-connection-config-self-hosted-parameters.png)
+    ![MySQL Workbench: configure connection settings for TiDB Self-Managed](/media/develop/mysql-workbench-connection-config-self-hosted-parameters.png)
 
-3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
+3. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
 
 4. If the connection test is successful, you can see the **Successfully made the MySQL connection** message. Click **OK** to save the connection configuration.
 

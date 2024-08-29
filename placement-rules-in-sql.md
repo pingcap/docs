@@ -44,7 +44,7 @@ Placement policies rely on the configuration of labels on TiKV nodes. For exampl
 
 <CustomContent platform="tidb">
 
-When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method for a TiDB Self-Hosted cluster is as follows:
+When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method for a TiDB Self-Managed cluster is as follows:
 
 ```
 tikv-server --labels region=<region>,zone=<zone>,host=<host>

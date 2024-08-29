@@ -103,7 +103,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 
 > **Note:**
 >
-> Some of the following tables are only supported on TiDB Self-Hosted and not supported on TiDB Cloud. To get a full list of unsupported tables on TiDB Cloud, see [System tables](https://docs.pingcap.com/tidbcloud/limited-sql-features#system-tables).
+> Some of the following tables are only supported on TiDB Self-Managed and not supported on TiDB Cloud. To get a full list of unsupported tables on TiDB Cloud, see [System tables](https://docs.pingcap.com/tidbcloud/limited-sql-features#system-tables).
 
 | Table name                                                                              | Description |
 |-----------------------------------------------------------------------------------------|-------------|

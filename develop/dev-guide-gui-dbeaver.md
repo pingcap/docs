@@ -11,7 +11,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using DBeave
 
 > **Note:**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -124,7 +124,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 7. Click **Finish** to save the connection configuration.
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
@@ -132,16 +132,16 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 2. Configure the following connection parameters:
 
-    - **Server Host**: The IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: The port number of your TiDB Self-Hosted cluster.
-    - **Username**: The username to use to connect to your TiDB Self-Hosted cluster.
+    - **Server Host**: The IP address or domain name of your TiDB Self-Managed cluster.
+    - **Port**: The port number of your TiDB Self-Managed cluster.
+    - **Username**: The username to use to connect to your TiDB Self-Managed cluster.
     - **Password**: The password of the username.
 
     An example is as follows:
 
-    ![Configure connection settings for TiDB Self-Hosted](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
+    ![Configure connection settings for TiDB Self-Managed](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
 
-3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
+3. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
 
     If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
