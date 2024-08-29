@@ -23,11 +23,11 @@ It is recommended that you use AWS CloudFormation to create a role ARN.
 
 Take the following steps to create one:
 
-1. Open the **Import & Export** page for your target cluster.
+1. Open the **Import** page for your target cluster.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import & Export** in the left navigation pane.
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
 2. Open the **Add New ARN** pop-up window.
 

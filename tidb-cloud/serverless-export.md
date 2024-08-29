@@ -63,8 +63,8 @@ For more information, see [Configure External Storage Access for TiDB Serverless
 
 To export data to Azure Blob Storage, you need to provide the following information:
 
-- uri: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
-- access method: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
+- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
+- Access method: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-access).       
 
@@ -103,16 +103,16 @@ The schema and data are exported according to the following naming conventions:
 
 You can compress the exported CSV and SQL data using the following algorithms:
 
-- `gzip` (default): compress the exported data with gzip.
-- `snappy`: compress the exported data with snappy.
-- `zstd`: compress the exported data with zstd.
-- `none`: do not compress the exported data.
+- `gzip` (default): compress the exported data with `gzip`.
+- `snappy`: compress the exported data with `snappy`.
+- `zstd`: compress the exported data with `zstd`.
+- `none`: do not compress the exported `data`.
 
 You can compress the exported Parquet data using the following algorithms:
 
-- `zstd `(default): compress the Parquet file with zstd.
-- `gzip`: compress the Parquet file with gzip.
-- `snappy`: compress the Parquet file with snappy.
+- `zstd `(default): compress the Parquet file with `zstd`.
+- `gzip`: compress the Parquet file with `gzip`.
+- `snappy`: compress the Parquet file with `snappy`.
 - `none`: do not compress the Parquet file.
 
 ## Examples
@@ -128,13 +128,13 @@ You can compress the exported Parquet data using the following algorithms:
    >
    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import & Export** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-3. On the **Import & Export** page, click **Export Data to** in the upper-right corner, then choose **Local File** from the drop-down list. Fill in the following parameters:
+3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Local File** from the drop-down list. Fill in the following parameters:
 
     - **Task Name**: enter a name for the export task. The default is `SNAPSHOT_{snapshot_time}`.
-    - **Exported data**: choose the databases and tables you want to export.
-    - **Data format**: choose **SQL File** or **CSV**.
+    - **Exported Data**: choose the databases and tables you want to export.
+    - **Data Format**: choose **SQL File** or **CSV**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
 
 4. Click **Export**.
@@ -173,18 +173,18 @@ You can compress the exported Parquet data using the following algorithms:
        >
        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import & Export** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-3. Configure the export information. On the **Import & Export** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
+3. Configure the export information. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Exported data**: choose the databases and tables you want to export.
-    - **Data format**: choose **SQL File** or **CSV**.
+    - **Exported Data**: choose the databases and tables you want to export.
+    - **Data Format**: choose **SQL File** or **CSV**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
-    - **File URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<file-path>` format.
+    - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<file-path>` format.
     - **Bucket Access**
         - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket.
-        - **AWS Access Key ID**: enter the access key ID and access key secret that have the permission to access the bucket.
+        - **AWS Access Key**: enter the access key ID and access key secret that have the permission to access the bucket.
 
 4. Click **Export**.
 
@@ -239,15 +239,15 @@ ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas
 <SimpleTab>
 <div label="Console">
 
-1. Open the **Import & Export** page for your target cluster, log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Open the **Import** page for your target cluster, log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
    > **Tip:**
    >
    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import & Export** in the left navigation pane.
+2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-3. On the **Import & Export** page, click **Export** to view the export task list.
+3. On the **Import** page, click **Export** to view the export task list.
 
 4. Choose the export task you want to cancel, and then click **Action** button.
 
