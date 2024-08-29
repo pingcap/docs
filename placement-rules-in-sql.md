@@ -15,7 +15,7 @@ This feature can fulfill the following use cases:
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ## Overview
 
@@ -60,13 +60,13 @@ For detailed configuration methods, see the following examples:
 
 > **Note:**
 >
-> For TiDB Dedicated clusters, you can skip these label configuration steps because the labels on TiKV nodes in TiDB Dedicated clusters are configured automatically.
+> For TiDB Cloud Dedicated clusters, you can skip these label configuration steps because the labels on TiKV nodes in TiDB Cloud Dedicated clusters are configured automatically.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Dedicated clusters, labels on TiKV nodes are configured automatically.
+For TiDB Cloud Dedicated clusters, labels on TiKV nodes are configured automatically.
 
 </CustomContent>
 

@@ -16,7 +16,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using Navica
 
 > **Note:**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Managed.
+> This tutorial is compatible with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
@@ -38,7 +38,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
@@ -48,7 +48,7 @@ To complete this tutorial, you need:
 Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -77,20 +77,20 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Host**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
     - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the password of the TiDB Serverless cluster.
+    - **Password**: enter the password of the TiDB Cloud Serverless cluster.
 
-    ![Navicat: configure connection general panel for TiDB Serverless](/media/develop/navicat-connection-config-serverless-general.png)
+    ![Navicat: configure connection general panel for TiDB Cloud Serverless](/media/develop/navicat-connection-config-serverless-general.png)
 
 7. Click the **SSL** tab and select **Use SSL**, **Use authentication**, and **Verify server certificate against CA** checkboxes. Then, select the `CA` file from the TiDB Cloud connection dialog into the **CA Certificate** field.
 
-    ![Navicat: configure connection SSL panel for TiDB Serverless](/media/develop/navicat-connection-config-serverless-ssl.png)
+    ![Navicat: configure connection SSL panel for TiDB Cloud Serverless](/media/develop/navicat-connection-config-serverless-ssl.png)
 
-8. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
+8. Click **Test Connection** to validate the connection to the TiDB Cloud Serverless cluster.
 
 9. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -98,7 +98,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 3. Click **Allow Access from Anywhere**.
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    For more details about how to obtain the connection string, refer to [TiDB Cloud Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
 4. Click **Download CA cert** to download the CA file.
 
@@ -112,15 +112,15 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Host**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
     - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
     - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the password of the TiDB Dedicated cluster.
+    - **Password**: enter the password of the TiDB Cloud Dedicated cluster.
 
-    ![Navicat: configure connection general panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-general.png)
+    ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-connection-config-dedicated-general.png)
 
 7. Click the **SSL** tab and select **Use SSL**, **Use authentication**, and **Verify server certificate against CA** checkboxes. Then, select the CA file downloaded in step 4 into the **CA Certificate** field.
 
-    ![Navicat: configure connection SSL panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-ssl.jpg)
+    ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-connection-config-dedicated-ssl.jpg)
 
-8. **Test Connection** to validate the connection to the TiDB Dedicated cluster.
+8. **Test Connection** to validate the connection to the TiDB Cloud Dedicated cluster.
 
 9. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
 
