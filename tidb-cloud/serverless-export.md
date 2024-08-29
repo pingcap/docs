@@ -31,7 +31,7 @@ You can export data to:
 
 Exporting data to a local file has the following limitations:
 
-- You can only download the exported data with the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md). Downloading on the TiDB Cloud console is not supported.
+- You can only download the exported data with the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md). Downloading in the TiDB Cloud console is not supported.
 - Exported data is saved in the stashing area and will expire after two days. You need to download the exported data in time.
 - If the storage space of stashing area is full, you will not be able to export data to the local file.
 
