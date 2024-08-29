@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/ticloud-connect']
 
 # ticloud serverless shell
 
-Connect to a TiDB Serverless cluster:
+Connect to a TiDB Cloud Serverless cluster:
 
 ```shell
 ticloud serverless shell [flags]
@@ -14,25 +14,25 @@ ticloud serverless shell [flags]
 
 ## Examples
 
-Connect to a TiDB Serverless cluster in interactive mode:
+Connect to a TiDB Cloud Serverless cluster in interactive mode:
 
 ```shell
 ticloud serverless shell
 ```
 
-Connect to a TiDB Serverless cluster with the default user in non-interactive mode:
+Connect to a TiDB Cloud Serverless cluster with the default user in non-interactive mode:
 
 ```shell
 ticloud serverless shell -c <cluster-id>
 ```
 
-Connect to a TiDB Serverless cluster with the default user and password in non-interactive mode:
+Connect to a TiDB Cloud Serverless cluster with the default user and password in non-interactive mode:
 
 ```shell
 ticloud serverless shell -c <cluster-id> --password <password>
 ```
 
-Connect to a TiDB Serverless cluster with a specific user and password in non-interactive mode:
+Connect to a TiDB Cloud Serverless cluster with a specific user and password in non-interactive mode:
 
 ```shell
 ticloud connect -c <cluster-id> -u <user-name> --password <password>

@@ -9,12 +9,12 @@ You can learn how to manage a restore task with the `tidbcloud_restore` resource
 
 The features of the `tidbcloud_restore` resource include the following:
 
-- Create restore tasks for TiDB Dedicated clusters according to your backup.
+- Create restore tasks for TiDB Cloud Dedicated clusters according to your backup.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- The backup and restore feature is unavailable for TiDB Serverless clusters. To use restore resources, make sure that you have created a TiDB Dedicated cluster.
+- The backup and restore feature is unavailable for TiDB Cloud Serverless clusters. To use restore resources, make sure that you have created a TiDB Cloud Dedicated cluster.
 
 ## Create a restore task
 

@@ -1,21 +1,21 @@
 ---
-title: Export Data from TiDB Serverless
-summary: Learn how to export data from TiDB Serverless clusters.
+title: Export Data from TiDB Cloud Serverless
+summary: Learn how to export data from TiDB Cloud Serverless clusters.
 ---
 
-# Export Data from TiDB Serverless
+# Export Data from TiDB Cloud Serverless
 
-TiDB Serverless Export (Beta) is a service that enables you to export data from a TiDB Serverless cluster to local storage or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Cloud Serverless Export (Beta) is a service that enables you to export data from a TiDB Cloud Serverless cluster to local storage or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), TiDB Serverless Export offers a more convenient and efficient way to export data from a TiDB Serverless cluster. It brings the following benefits:
+While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), TiDB Cloud Serverless Export offers a more convenient and efficient way to export data from a TiDB Cloud Serverless cluster. It brings the following benefits:
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a TiDB Serverless cluster, eliminating the need for additional tools or resources.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a TiDB Cloud Serverless cluster, eliminating the need for additional tools or resources.
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
 ## Features
 
-This section describes the features of TiDB Serverless Export.
+This section describes the features of TiDB Cloud Serverless Export.
 
 ### Export location
 

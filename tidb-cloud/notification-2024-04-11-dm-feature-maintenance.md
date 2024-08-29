@@ -15,7 +15,7 @@ This notification describes the details that you need to know about the maintena
 
 ## Impact
 
-During the maintenance window, the DM feature for TiDB Dedicated clusters in the following regions will be affected:
+During the maintenance window, the DM feature for TiDB Cloud Dedicated clusters in the following regions will be affected:
 
 - Cloud provider: AWS, region: Oregon (us-west-2)
 - Cloud provider: AWS, region: N. Virginia (us-east-1)

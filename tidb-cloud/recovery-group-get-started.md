@@ -9,12 +9,12 @@ This document describes how to create a recovery group to protect your databases
 
 ## Prerequisites
 
-- A recovery group replicates your databases to another cluster to protect your databases from regional disasters. Before creating a recovery group, you need to have two TiDB Cloud Dedicated clusters. One cluster hosts the primary databases, and a second cluster hosts the replicas of the primary databases. If you have not done so already, follow the steps in [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create the necessary clusters.
+- A recovery group replicates your databases to another cluster to protect your databases from regional disasters. Before creating a recovery group, you need to have two TiDB Cloud Dedicated clusters. One cluster hosts the primary databases, and a second cluster hosts the replicas of the primary databases. If you have not done so already, follow the steps in [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create the necessary clusters.
 - To create a recovery group, you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
 
 > **Note**
 >
-> Currently, only TiDB Dedicated clusters hosted on AWS support recovery groups.
+> Currently, only TiDB Cloud Dedicated clusters hosted on AWS support recovery groups.
 
 ## Create a new recovery group
 
@@ -32,9 +32,9 @@ To create a recovery group, perform the following steps:
     >
     > Currently only one resiliency level is supported. For more information, see [About resiliency levels](#about-resiliency-levels).
 
-5. Select the TiDB Dedicated cluster that will be the primary cluster for this group.
+5. Select the TiDB Cloud Dedicated cluster that will be the primary cluster for this group.
 
-6. Select the TiDB Dedicated cluster that will be the secondary cluster where databases will be replicated for this group.
+6. Select the TiDB Cloud Dedicated cluster that will be the secondary cluster where databases will be replicated for this group.
 
 7. Select which databases you wish to replicate as part of this recovery group.
 

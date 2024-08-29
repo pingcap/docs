@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless branch delete`.
 
 # ticloud serverless branch delete
 
-Delete a branch from your TiDB Serverless cluster:
+Delete a branch from your TiDB Cloud Serverless cluster:
 
 ```shell
 ticloud serverless branch delete [flags]
@@ -19,13 +19,13 @@ ticloud serverless branch rm [flags]
 
 ## Examples
 
-Delete a TiDB Serverless branch in interactive mode:
+Delete a TiDB Cloud Serverless branch in interactive mode:
 
 ```shell
 ticloud serverless branch delete
 ```
 
-Delete a TiDB Serverless branch in non-interactive mode:
+Delete a TiDB Cloud Serverless branch in non-interactive mode:
 
 ```shell
 ticloud branch delete --branch-id <branch-id> --cluster-id <cluster-id>

@@ -9,7 +9,7 @@ A TiDB Cloud recovery group allows you to replicate your databases between TiDB 
 
 ## Architecture
 
-A recovery group consists of a set of replicated databases that can be failed over together between two TiDB Dedicated clusters. Each recovery group is assigned a primary cluster, and databases on this primary cluster are associated with the group and are then replicated to the secondary cluster.
+A recovery group consists of a set of replicated databases that can be failed over together between two TiDB Cloud Dedicated clusters. Each recovery group is assigned a primary cluster, and databases on this primary cluster are associated with the group and are then replicated to the secondary cluster.
 
 ![Recovery Group](/media/tidb-cloud/recovery-group/recovery-group-overview.png)
 
@@ -23,7 +23,7 @@ A recovery group consists of a set of replicated databases that can be failed ov
 
 ## Key features and limitations
 
-- Currently, only TiDB Dedicated clusters hosted on AWS support recovery groups.
+- Currently, only TiDB Cloud Dedicated clusters hosted on AWS support recovery groups.
 - Recovery groups are established between two clusters.
 - Bi-directional replication of a database is not supported with recovery groups.
 

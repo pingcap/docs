@@ -1,17 +1,17 @@
 ---
-title: Connect to TiDB Dedicated via Standard Connection
+title: Connect to TiDB Cloud Dedicated via Standard Connection
 summary: Learn how to connect to your TiDB Cloud cluster via standard connection.
 ---
 
-# Connect to TiDB Dedicated via Standard Connection
+# Connect to TiDB Cloud Dedicated via Standard Connection
 
-This document describes how to connect to your TiDB Dedicated cluster via standard connection. The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Dedicated cluster via a SQL client from your laptop.
+This document describes how to connect to your TiDB Cloud Dedicated cluster via standard connection. The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Cloud Dedicated cluster via a SQL client from your laptop.
 
 > **Tip:**
 >
-> To learn how to connect to a TiDB Serverless cluster via standard connection, see [Connect to TiDB Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
+> To learn how to connect to a TiDB Cloud Serverless cluster via standard connection, see [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
 
-To connect to a TiDB Dedicated cluster via standard connection, take the following steps:
+To connect to a TiDB Cloud Dedicated cluster via standard connection, take the following steps:
 
 1. Open the overview page of the target cluster.
 
@@ -42,7 +42,7 @@ To connect to a TiDB Dedicated cluster via standard connection, take the followi
 
     > **Note:**
     >
-    > - The CA cert is only available for TiDB Dedicated clusters.
+    > - The CA cert is only available for TiDB Cloud Dedicated clusters.
     > - Currently, TiDB Cloud only provides the connection strings and sample code for these connection methods: MySQL, MyCLI, JDBC, Python, Go, and Node.js.
 
 5. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.

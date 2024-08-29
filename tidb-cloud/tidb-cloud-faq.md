@@ -19,7 +19,7 @@ TiDB Cloud allows developers and DBAs with little or no training to handle once-
 
 ### What is the relationship between TiDB and TiDB Cloud?
 
-TiDB is an open-source database and is the best option for organizations who want to run TiDB Self-Hosted in their own data centers, in a self-managed cloud environment, or in a hybrid of the two.
+TiDB is an open-source database and is the best option for organizations who want to run TiDB Self-Managed in their own data centers, in a self-managed cloud environment, or in a hybrid of the two.
 
 TiDB Cloud is a fully managed cloud Database as a Service of TiDB. It has an easy-to-use web-based management console to let you manage TiDB clusters for mission-critical production environments.
 
@@ -41,8 +41,8 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-- Starting from August 6, 2024, the default TiDB version for new TiDB Dedicated clusters is v7.5.3.
-- Starting from February 21, 2024, the TiDB version for TiDB Serverless clusters is v7.1.3.
+- Starting from August 6, 2024, the default TiDB version for new TiDB Cloud Dedicated clusters is v7.5.3.
+- Starting from February 21, 2024, the TiDB version for TiDB Cloud Serverless clusters is v7.1.3.
 
 For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
 
@@ -60,7 +60,7 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 
 - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
-- [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
 
@@ -104,7 +104,7 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 ### Does TiDB Cloud support incremental backups?
 
-No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Dedicated cluster](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) or [Use PITR in a TiDB Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
+No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Cloud Dedicated cluster](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) or [Use PITR in a TiDB Cloud Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 ## HTAP FAQs
 
@@ -149,16 +149,16 @@ No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud 
 
 ### Is my TiDB cluster secure?
 
-In TiDB Cloud, you can use either a TiDB Dedicated cluster or a TiDB Serverless cluster according to your needs.
+In TiDB Cloud, you can use either a TiDB Cloud Dedicated cluster or a TiDB Cloud Serverless cluster according to your needs.
 
-For TiDB Dedicated clusters, TiDB Cloud ensures cluster security with the following measures:
+For TiDB Cloud Dedicated clusters, TiDB Cloud ensures cluster security with the following measures:
 
 - Creates independent sub-accounts and VPCs for each cluster.
 - Sets up firewall rules to isolate external connections.
 - Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
 - Provide IP access rules for each cluster to ensure that only allowed source IP addresses can access your cluster.
 
-For TiDB Serverless clusters, TiDB Cloud ensures cluster security with the following measures:
+For TiDB Cloud Serverless clusters, TiDB Cloud ensures cluster security with the following measures:
 
 - Creates independent sub-accounts for each cluster.
 - Sets up firewall rules to isolate external connections.
@@ -167,27 +167,27 @@ For TiDB Serverless clusters, TiDB Cloud ensures cluster security with the follo
 ### How do I connect to my database in a TiDB cluster?
 
 <SimpleTab>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
-For a TiDB Dedicated cluster, the steps to connect to your cluster are simplified as follows:
+For a TiDB Cloud Dedicated cluster, the steps to connect to your cluster are simplified as follows:
 
 1. Authorize your network.
 2. Set up your database users and login credentials.
 3. Download and configure TLS for your cluster server.
 4. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
 
-For more information, see [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 </div>
 
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
-For a TiDB Serverless cluster, the steps to connect to your cluster are simplified as follows:
+For a TiDB Cloud Serverless cluster, the steps to connect to your cluster are simplified as follows:
 
 1. Set a database user and login credential.
 2. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
 
-For more information, see [Connect to Your TiDB Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+For more information, see [Connect to Your TiDB Cloud Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
 </div>
 </SimpleTab>
