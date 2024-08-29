@@ -133,13 +133,13 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     2. To create a role, fill in the following information:
 
-        - Under **Trusted entity type**, select **AWS account**.
-        - Under **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
-        - Under **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without a Require external ID, once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
+        - In **Trusted entity type**, select **AWS account**.
+        - In **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
+        - In **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without a Require external ID, once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
 
     3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
    
-    4. Under **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
+    4. In **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
    
     5. In the list of roles, click the name of the role that you just created to go to its summary page, and then you can get the role ARN.
 
@@ -196,24 +196,24 @@ Take the following steps to configure a service account key:
     base64 -i gcp-xxx.json
     ```
 
-## Configure Azure Blob access
+## Configure Azure Blob Storage access
 
 To allow TiDB Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use service SAS token to configure the container access:
 
 Take the following steps to configure a service SAS token:
 
-1. Click your storage account where the container belongs to on the [Azure storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page.
+1. Click your storage account where the container belongs to on the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page.
 
-2. On your `storage account` page, click the **Security+network** and then click the **Shared access signature**.
+2. On your **Storage account** page, click the **Security+network** and then click the **Shared access signature**.
 
     ![img.png](/media/tidb-cloud/serverless-external-storage/azure-sas.png)
 
-3. On the `Shared access signature` page, create a service SAS token with needed permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
+3. On the **Shared access signature** page, create a service SAS token with needed permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
 
-    1. Choose the `Blob` service under the `Allowed services` section.
-    2. Choose the `Container` and `Object` under the `Allowed Resource types` section.
-    3. Choose the permission under the `Allowed permissions` section as you needed. For example: TiDB Serverless exports needs `Read` and `Write` permission.
-    4. Adjust the `Start and expiry date/time` as you needed.
+    1. In the **Allowed services** section, choose the **Blob** service.
+    2. In the **Allowed Resource types** section, choose the **Container** and **Object**.
+    3. In the **Allowed permissions** section, choose the permission as you needed. For example: TiDB Serverless exports needs **Read** and **Write** permission.
+    4. Adjust the **Start and expiry date/time** as you needed.
     5. You can keep other settings as default.
 
     ![img.png](/media/tidb-cloud/serverless-external-storage/azure-create-sas.png)
