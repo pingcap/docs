@@ -69,7 +69,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     4. On the **Create policy** page, click the **JSON** tab.
    
-    5. Copy the following access policy template and paste it to the policy text field.
+    5. Configure the policy in the policy text field according to your needs. Here is an example which can be used to export from and import to TiDB Serverless.
 
         ```json
         {
@@ -172,7 +172,7 @@ To allow TiDB Serverless to access your GCS bucket, you need to configure the GC
 
 Take the following steps to configure a service account key:
 
-1. Create a service account with needed permission in the Google Cloud [service account page](https://console.cloud.google.com/iam-admin/serviceaccounts). For more information, see [Creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
+1. Click **CREATE SERVICE ACCOUNT** to create a service account in the Google Cloud [service account page](https://console.cloud.google.com/iam-admin/serviceaccounts). For more information, see [Creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
 
     1. Enter a service account name.
     2. Enter a description of the service account (Optional). 
