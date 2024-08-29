@@ -16,7 +16,7 @@ This notification describes the details that you need to know about the [TiDB Cl
 
 > **Note:**
 >
-> - Currently, users cannot modify the maintenance timing for the TiDB Cloud console, so you need to plan accordingly in advance. 
+> - Currently, users cannot modify the maintenance timing for the TiDB Cloud console, so you need to plan accordingly in advance.
 > - During the next 3 months, some users might experience an additional 20-minute maintenance window. Affected users will receive an email notification in advance.
 
 ## Reason for maintenance
