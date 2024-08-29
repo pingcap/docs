@@ -3,7 +3,7 @@ title: 2024-09-15 TiDB Cloud Console Maintenance Notification
 summary: Learn about the details of the TiDB Cloud Console maintenance on September 15, 2024, such as the maintenance window, reason, and impact.
 ---
 
-# [2024-09-15] TiDB Cloud Console Maintenance Notification
+# [2024-09-15] TiDB Cloud console Maintenance Notification
 
 This notification describes the details that you need to know about the [TiDB Cloud console](https://tidbcloud.com/) maintenance on September 15, 2024.
 
@@ -16,7 +16,8 @@ This notification describes the details that you need to know about the [TiDB Cl
 
 > **Note:**
 >
-> Currently, users cannot modify the maintenance timing for the TiDB Cloud console, so you need to plan accordingly in advance. Additionally, over the next 3 months, some users may experience an extra 20-minute maintenance window. We will notify these specific users via email.
+> - Currently, users cannot modify the maintenance timing for the TiDB Cloud console, so you need to plan accordingly in advance. 
+> - During the next 3 months, some users might experience an additional 20-minute maintenance window. Affected users will receive an email notification in advance.
 
 ## Reason for maintenance
 
