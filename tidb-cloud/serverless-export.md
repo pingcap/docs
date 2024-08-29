@@ -66,7 +66,7 @@ To export data to Azure Blob Storage, you need to provide the following informat
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
 - Access method: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
-For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-access).       
+For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).       
 
 > **Note:**
 >
@@ -110,7 +110,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
 You can compress the exported Parquet data using the following algorithms:
 
-- `zstd `(default): compress the Parquet file with `zstd`.
+- `zstd` (default): compress the Parquet file with `zstd`.
 - `gzip`: compress the Parquet file with `gzip`.
 - `snappy`: compress the Parquet file with `snappy`.
 - `none`: do not compress the Parquet file.
@@ -169,9 +169,9 @@ You can compress the exported Parquet data using the following algorithms:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-       > **Tip:**
-       >
-       > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+   > **Tip:**
+   >
+   > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
