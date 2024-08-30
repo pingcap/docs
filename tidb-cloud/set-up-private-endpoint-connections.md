@@ -180,7 +180,10 @@ After you have accepted the private endpoint connection, you are redirected back
 
 ### Private endpoint status reference
 
-When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed on the [**Private Endpoint** page](#prerequisites).
+When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed on the following pages:
+
+- Cluster-level **Networking** page: click **Networking** in the left navigation pane of the cluster overview page.
+- Project-level **Network Access** page: click **Network Access** in the left navigation pane of the **Project Settings** page.
 
 The possible statuses of a private endpoint are explained as follows:
 
