@@ -55,7 +55,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`.
+    - **Connection Type** is set to `Public`.
     - **Branch** is set to `main`.
     - **Connect With** is set to `MySQL Workbench`.
     - **Operating System** matches your environment.
