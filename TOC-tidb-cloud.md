@@ -133,7 +133,7 @@
     - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
     - Connect to Your TiDB Dedicated Cluster
       - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
-      - [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md)
+      - [Connect via Public Connection](/tidb-cloud/connect-via-standard-connection.md)
       - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
       - [Connect via Private Endpoint (Private Service Connect) with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
