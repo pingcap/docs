@@ -2719,9 +2719,10 @@ Query OK, 0 rows affected (0.09 sec)
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2</span>
 
-> **Note:**
+> **Warning:**
 >
-> This TiDB variable is not applicable to TiDB Cloud.
+> Starting from v8.1, telemetry has been removed from TiDB Server, and this variable is no longer functional. It is retained solely for compatibility purposes.
+>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2731,13 +2732,13 @@ Query OK, 0 rows affected (0.09 sec)
 
 <CustomContent platform="tidb">
 
-- This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. In the current version, the telemetry is disabled by default. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
+- Starting from v8.1, telemetry has been removed from TiDB Server, and this variable is no longer functional.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to dynamically control whether the telemetry collection in TiDB is enabled.
+- Starting from v8.1, telemetry has been removed from TiDB Server, and this variable is no longer functional.
 
 </CustomContent>
 
