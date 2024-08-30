@@ -20,8 +20,6 @@ You can export data to:
 - A local file 
 - An external storage, including:
     - [Amazon S3](https://aws.amazon.com/s3/)
-    - [Google Cloud Storage](https://cloud.google.com/storage)
-    - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 
 > **Note:**
 >
@@ -46,38 +44,11 @@ To export data to Amazon S3, you need to provide the following information:
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
-### Google Cloud Storage
-
-To export data to Google Cloud Storage, you need to provide the following information:
-
-- URI: `gs://<bucket-name>/<file-path>`
-- Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
-
-For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
-
-> **Note:**
->
-> Currently, you can only export to Google Cloud Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
-
-### Azure Blob Storage
-
-To export data to Azure Blob Storage, you need to provide the following information:
-
-- URI: `https://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
-- Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
-
-For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).       
-
-> **Note:**
->
-> Currently, you can only export to Azure Blob Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
-
 ## Export options
 
 ### Data filtering
 
 - TiDB Cloud console supports exporting data with the selected databases and tables.
-- TiDB Cloud CLI supports exporting data with SQL statements and [table filters](/table-filter.md).
 
 ### Data formats
 
@@ -211,28 +182,6 @@ ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.role-arn <r
 
 </div>
 </SimpleTab>
-
-### Export data to Google Cloud Storage
-
-Currently, you can only export data to Google Cloud Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
-
-```shell
-ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
-```
-
-- `gcs.uri`: the URI of the Google Cloud Storage bucket with the `gs://<bucket-name>/<file-path>` format.
-- `gcs.service-account-key`: the base64 encoded service account key.
-
-### Export data to Azure Blob Storage
-
-Currently, you can only export data to Azure Blob Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
-
-```shell
-ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
-```
-
-- `azblob.uri`: the URI of the Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>` format.
-- `azblob.sas-token`: the account SAS token of the Azure Blob Storage.
 
 ### Cancel an export task
 
