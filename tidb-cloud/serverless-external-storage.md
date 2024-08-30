@@ -179,7 +179,7 @@ Take the following steps to configure a service account key:
     2. Enter a description of the service account (Optional). 
     3. Click **CREATE AND CONTINUE** to create the service account.
     4. In the `Grant this service account access to project`, choose the [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the needed permission. For example, exporting data to a TiDB Serverless cluster needs a role with `storage.objects.create` permission.
-    5. Click **Continue** to the next step.
+    5. Click **Continue** to go to the next step.
     6. Optional: In the `Grant users access to this service account`, choose members that need to [attach the service account to other resources](https://cloud.google.com/iam/docs/attach-service-accounts).
     7. Click **Done** to finish creating the service account.
 
