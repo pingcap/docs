@@ -63,7 +63,7 @@ For more information, see [Configure External Storage Access for TiDB Serverless
 
 To export data to Azure Blob Storage, you need to provide the following information:
 
-- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
+- URI: `https://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
 - Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).       

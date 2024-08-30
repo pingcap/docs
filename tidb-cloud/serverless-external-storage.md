@@ -87,8 +87,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
                     "Sid": "VisualEditor1",
                     "Effect": "Allow",
                     "Action": [
-                        "s3:ListBucket",
-                        "s3:GetBucketLocation"
+                        "s3:ListBucket"
                     ],
                     "Resource": "<Your S3 bucket ARN>"
                 }
@@ -191,12 +190,6 @@ Take the following steps to configure a service account key:
 
 3. Choose the default `JSON` key type and click the **CREATE** button to download the service account key.
 
-4. Open the downloaded JSON file and encode the content with base64. For example, you can use the following command to encode the content in the macOS terminal:
-
-    ```bash
-    base64 -i gcp-xxx.json
-    ```
-
 ## Configure Azure Blob Storage access
 
 To allow TiDB Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use a service SAS token to configure the container access:
@@ -220,5 +213,3 @@ Take the following steps to configure a service SAS token:
     ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
 4. Click the **Generate SAS and connection string** button to generate the SAS token. You will specify this token when you create an external stage.
-
-
