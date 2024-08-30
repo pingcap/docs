@@ -31,8 +31,8 @@ Currently, we maintain the following versions of TiDB documentation in different
 | [`release-8.3`](https://github.com/pingcap/docs/tree/release-8.3) | 8.3 Development Milestone Release |
 | [`release-8.2`](https://github.com/pingcap/docs/tree/release-8.2) | 8.2 Development Milestone Release |
 | [`release-8.1`](https://github.com/pingcap/docs/tree/release-8.1) | 8.1 LTS (Long-Term Support) |
-| [`release-8.0`](https://github.com/pingcap/docs/tree/release-8.0) | 8.0 Development Milestone Release |
-| [`release-7.6`](https://github.com/pingcap/docs/tree/release-7.6) | 7.6 Development Milestone Release |
+| [`release-8.0`](https://github.com/pingcap/docs/tree/release-8.0) | 8.0 Development Milestone Release (Archived documentation, no longer updated) |
+| [`release-7.6`](https://github.com/pingcap/docs/tree/release-7.6) | 7.6 Development Milestone Release (Archived documentation, no longer updated) |
 | [`release-7.5`](https://github.com/pingcap/docs/tree/release-7.5) | 7.5 LTS (Long-Term Support) |
 | [`release-7.4`](https://github.com/pingcap/docs/tree/release-7.4) | 7.4 Development Milestone Release (Archived documentation, no longer updated) |
 | [`release-7.3`](https://github.com/pingcap/docs/tree/release-7.3) | 7.3 Development Milestone Release (Archived documentation, no longer updated) |
@@ -48,8 +48,8 @@ Currently, we maintain the following versions of TiDB documentation in different
 | [`release-6.0`](https://github.com/pingcap/docs/tree/release-6.0) | 6.0 Development Milestone Release (Archived documentation, no longer updated) |
 | [`release-5.4`](https://github.com/pingcap/docs/tree/release-5.4) | 5.4 stable version |
 | [`release-5.3`](https://github.com/pingcap/docs/tree/release-5.3) | 5.3 stable version |
-| [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2 stable version |
-| [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 stable version |
+| [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2 stable version (Archived documentation, no longer updated) |
+| [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 stable version (Archived documentation, no longer updated) |
 | [`release-5.0`](https://github.com/pingcap/docs/tree/release-5.0) | 5.0 stable version (Archived documentation, no longer updated) |
 | [`release-4.0`](https://github.com/pingcap/docs/tree/release-4.0) | 4.0 stable version (Archived documentation, no longer updated) |
 | [`release-3.1`](https://github.com/pingcap/docs/tree/release-3.1) | 3.1 stable version (Archived documentation, no longer updated) |
