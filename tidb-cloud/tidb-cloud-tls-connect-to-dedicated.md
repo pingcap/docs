@@ -26,9 +26,9 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
-3. In the **Connection Type** drop-down list, select **Public**
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
 
- If you have not configured IP access list, you need to click **Configure IP Access List** to configure it before first connection. For more information, see [Configure an IP access list in standard connection](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection).
+    If you have not configured the IP access list, click **Configure IP Access List** to configure it before first connection. For more information, see [Configure an IP access list](/tidb-cloud/configure-ip-access-list.md).
 
 4. Click **CA cert** to download CA cert for TLS connection to TiDB clusters. The CA cert supports TLS 1.2 version by default.
 

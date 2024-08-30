@@ -61,10 +61,10 @@ This section describes how to set up VPC peering connections on AWS. For Google 
 
 ### Step 1. Add VPC peering requests
 
-Use either of the following two options to add VPC peering requests from TiDB Cloud console:
+You can add VPC peering requests on either the project-level **Network Access** page or the cluster-level **Networking** page in the TiDB Cloud console.
 
 <SimpleTab>
-<div label="VPC Peering setting on Project page">
+<div label="VPC peering setting on the project-level Network Access page">
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
@@ -88,7 +88,7 @@ Use either of the following two options to add VPC peering requests from TiDB Cl
 6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
 
 </div>
-<div label="VPC Peering setting on Cluster paged">
+<div label="VPC peering setting on the cluster-level Networking page">
 
 1. Open the overview page of the target cluster.
 
@@ -100,9 +100,9 @@ Use either of the following two options to add VPC peering requests from TiDB Cl
 
     2. Click the name of your target cluster to go to its overview page.
 
-3. On the **Networing** page of your cluster, click **Create VPC Peering**.
+2. In the left navigation pane, click **Networking**, and then click **Create VPC Peering**.
 
-4. Fill in the required information of your existing AWS VPC:
+3. Fill in the required information of your existing AWS VPC:
 
     - Your VPC Region
     - AWS Account ID
@@ -113,16 +113,16 @@ Use either of the following two options to add VPC peering requests from TiDB Cl
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
-5. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **VPC Peering** > **AWS** tab. The status of the newly created VPC peering is **System Checking**.
+4. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **Networking** > **AWS VPC Peering** section. The status of the newly created VPC peering is **System Checking**.
 
-6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **AWS VPC Peering Details** page is displayed.
+5. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **AWS VPC Peering Details** page is displayed.
 
 </div>
 </SimpleTab>
 
 ### Step 2. Approve and configure the VPC peering
 
-Use either of the following two options to approve and configure the VPC peering connection:
+You can approve and configure the VPC peering connection using AWS CLI or AWS dashboard.
 
 <SimpleTab>
 <div label="Use AWS CLI">
@@ -251,10 +251,10 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
 ### Step 1. Add VPC peering requests
 
-Use either of the following two options to add VPC peering requests from TiDB Cloud console:
+You can add VPC peering requests on either the project-level **Network Access** page or the cluster-level **Networking** page in the TiDB Cloud console.
 
 <SimpleTab>
-<div label="VPC Peering setting on Project page">
+<div label="VPC peering setting on the project-level Network Access page">
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
@@ -277,7 +277,7 @@ Use either of the following two options to add VPC peering requests from TiDB Cl
 6. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
 
 </div>
-<div label="VPC Peering setting on Cluster page">
+<div label="VPC peering setting on the cluster-level Networking page">
 
 1. Open the overview page of the target cluster.
 
@@ -289,7 +289,9 @@ Use either of the following two options to add VPC peering requests from TiDB Cl
 
     2. Click the name of your target cluster to go to its overview page.
 
-3. On the **Networing** page of your cluster, click **Create VPC Peering**，and then fill in the required information of your existing Google Cloud VPC:
+2. In the left navigation pane, click **Networking**, and then click **Create VPC Peering**.
+
+3. Fill in the required information of your existing Google Cloud VPC:
 
     > **Tip:**
     >
@@ -299,26 +301,26 @@ Use either of the following two options to add VPC peering requests from TiDB Cl
     - VPC Network Name
     - VPC CIDR
 
-4. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **Google Cloud VPC Peering** part. The status of the newly created VPC peering is **System Checking**.
+4. Click **Create** to send the VPC peering request, and then view the VPC peering information on the **Networking** > **Google Cloud VPC Peering** section. The status of the newly created VPC peering is **System Checking**.
 
-5. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **VPC Peering Details** page is displayed.
+5. To view detailed information about your newly created VPC peering, click **...** > **View** in the **Action** column. The **Google Cloud VPC Peering Details** page is displayed.
 
 </div>
 </SimpleTab>
 
 ### Step 2. Approve the VPC peering
 
-1. Execute the following command to finish the setup of VPC peerings:
+Execute the following command to finish the setup of VPC peering:
 
-    {{< copyable "shell-regular" >}}
+{{< copyable "shell-regular" >}}
 
-    ```bash
-    gcloud beta compute networks peerings create <your-peer-name> --project <your-project-id> --network <your-vpc-network-name> --peer-project <tidb-project-id> --peer-network <tidb-vpc-network-name>
-    ```
+```bash
+gcloud beta compute networks peerings create <your-peer-name> --project <your-project-id> --network <your-vpc-network-name> --peer-project <tidb-project-id> --peer-network <tidb-vpc-network-name>
+```
 
-    > **Note:**
-    >
-    > You can name `<your-peer-name>` as you like.
+> **Note:**
+>
+> You can name `<your-peer-name>` as you like.
 
 Now you have successfully set up the VPC peering connection. Next, [connect to the TiDB cluster via VPC peering](#connect-to-the-tidb-cluster).
 
@@ -326,9 +328,9 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
 
-2. Click **Connect** in the upper-right corner, and select `VPC Peering` in **Connection Type**. 
+2. Click **Connect** in the upper-right corner, and select **VPC Peering** from the **Connection Type** drop-down list.
 
-    You can see the VPC information when the peering is **active**. If the peering status is still **system checking**, wait for about 5 minutes and open the dialog again.
+    Wait for the VPC peering connection status to change from **system checking** to **active** (approximately 5 minutes).
 
-3. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
-
+3. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
+4. Connect to your cluster with the connection string.

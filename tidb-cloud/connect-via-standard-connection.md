@@ -1,6 +1,6 @@
 ---
-title: Connect to TiDB Dedicated via Standard Connection
-summary: Learn how to connect to your TiDB Cloud cluster via standard connection.
+title: Connect to TiDB Dedicated via Public Connection
+summary: Learn how to connect to your TiDB Cloud cluster via public connection.
 ---
 
 # Connect to TiDB Dedicated via Public Connection
@@ -13,20 +13,9 @@ This document describes how to connect to your TiDB Dedicated cluster via public
 
 ## Prerequisite: Configure IP access list
 
-For public connection, TiDB Cloud only allows client connections from addresses in the IP access list. If you have not configured IP access list,  take the following sub-steps to configure it before first connection.
+For public connections, TiDB Dedicated only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
 
-1. Navigate to the Networking page of a TiDB Dedicated cluster..
-
-2. Click **Add IP Address**, choose one of the following options.
-
-        - **Allow access from anywhere** : All IP addresses are allowed to access TiDB Cloud. This would expose your cluster to the internet completely, which is highly risky.
-        - **Use IP addresses**: Recommand, you can add a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
-
-3. Add IP addresses or CIDR range with an optional description. You can add up to 100 addresses.
-
-4. Click **Confirm** to confirm the changes.
-
-## Connect to the cluster:
+## Connect to the cluster
 
 To connect to a TiDB Dedicated cluster via public connection, take the following steps:
 
@@ -42,7 +31,9 @@ To connect to a TiDB Dedicated cluster via public connection, take the following
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Select `Public` in **Connection Type**. If you have not configured IP access list, you need to click **Configure IP Access List** to configure it before first connection.
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
 
 4. Click **CA cert** to download CA cert for TLS connection to TiDB clusters. The CA cert supports TLS 1.2 version by default.
 
