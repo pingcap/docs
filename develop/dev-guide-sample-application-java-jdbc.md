@@ -119,11 +119,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Choose `Public` in **Connection Type**. If you have not configured IP access list, you need to go to **Network Page** to configure it before first connection.
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
 
-4. Click **CA cert** to download the CA certificate.
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
 
-    Beside `Public` connection type, the `Private Endpoint` and `VPC Peering` connection types are also supported. For more details about how to obtain the connection string, refer to [Connect to Your TiDB Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+    In addition to the **Public** connection type, TiDB Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
 
 4. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
 
