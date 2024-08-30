@@ -111,7 +111,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 1. Create an export task. TiDB Cloud CLI exports the data to a local file by default:
 
     ```shell
-    ticloud serverless export create -c <cluster-id> --filter "database.table"
+    ticloud serverless export create -c <cluster-id>
     ```
 
     You will get an export ID from the output.
@@ -158,10 +158,10 @@ You can compress the exported CSV and SQL data using the following algorithms:
 <div label="CLI">
 
 ```shell
-ticloud serverless export create -c <cluster-id> --s3.bucket-uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter "database.table"
+ticloud serverless export create -c <cluster-id> --s3.bucket-uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key>
 ```
 
-- `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
+- `s3.bucket-uri`: the Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
 - `s3.access-key-id`: the access key ID of the user who has the permission to access the bucket.
 - `s3.secret-access-key`: the access key secret of the user who has the permission to access the bucket.
 
