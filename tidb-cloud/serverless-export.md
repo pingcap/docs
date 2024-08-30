@@ -15,11 +15,7 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 ## Export locations
 
-You can export data to:
-
-- A local file 
-- An external storage, including:
-    - [Amazon S3](https://aws.amazon.com/s3/)
+You can export data to a local file or [Amazon S3](https://aws.amazon.com/s3/).
 
 > **Note:**
 >
