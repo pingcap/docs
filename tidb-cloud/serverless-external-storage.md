@@ -5,13 +5,13 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 # Configure External Storage Access for TiDB Serverless
 
-If you want to import data from or export data to an external storage in TiDB Serverless, you need to configure cross-account access. This document describes how to configure access to an external storage, including Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS) and Azure Blob Storage for TiDB Serverless.
+If you want to import data from or export data to an external storage in a TiDB Serverless cluster, you need to configure cross-account access. This document describes how to configure access to an external storage, including Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS) and Azure Blob Storage for TiDB Serverless clusters.
 
-If you need to configure these external storages for TiDB Dedicated, see [Configure Amazon S3 Access and GCS Access for TiDB Dedicated](/tidb-cloud/config-s3-and-gcs-access.md).
+If you need to configure these external storages for a TiDB Dedicated cluster, see [Configure Amazon S3 Access and GCS Access for TiDB Dedicated](/tidb-cloud/config-s3-and-gcs-access.md).
 
 ## Configure Amazon S3 access
 
-To allow a TiDB Serverless cluster to access your Amazon S3 bucket, you need to configure the bucket access for TiDB Serverless. You can use either of the following methods to configure the bucket access:
+To allow a TiDB Serverless cluster to access your Amazon S3 bucket, you need to configure the bucket access for the cluster. You can use either of the following methods to configure the bucket access:
 
 - Use a Role ARN: use a Role ARN to access your Amazon S3 bucket.
 - Use an AWS access key: use the access key of an IAM user to access your Amazon S3 bucket.
@@ -19,9 +19,7 @@ To allow a TiDB Serverless cluster to access your Amazon S3 bucket, you need to 
 <SimpleTab>
 <div label="Role ARN">
 
-It is recommended that you use AWS CloudFormation to create a role ARN.
-
-Take the following steps to create one:
+It is recommended that you use AWS CloudFormation to create a role ARN. Take the following steps to create one:
 
 1. Open the **Import** page for your target cluster.
 
@@ -63,13 +61,13 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3. Open the [IAM console](https://console.aws.amazon.com/iam/), click **Policies** in the navigation pane on the left, and then click **Create Policy**.
+    3. Open the [IAM console](https://console.aws.amazon.com/iam/), click **Policies** in the left navigation pane, and then click **Create Policy**.
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
     4. On the **Create policy** page, click the **JSON** tab.
    
-    5. Configure the policy in the policy text field according to your needs. Here is an example which can be used to export from and import to TiDB Serverless.
+    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data to a TiDB Serverless cluster.
 
         ```json
         {
@@ -98,11 +96,14 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
         }
         ```
 
-        In the policy text field, update the following configurations to your own values.
+        In the policy text field, replace the following configurations with your own values.
 
-        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`
-
-            For example, if your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`. If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`. Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
+        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`. For example, 
+        
+            - If your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`. 
+            - If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`. 
+            
+          Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
 
         - `"Resource": "<Your S3 bucket ARN>"`, for example, `"Resource": "arn:aws:s3:::tidb-cloud-source-data"`.
 
@@ -127,7 +128,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
 3. In the AWS Management Console, create an access role for TiDB Cloud and get the role ARN.
 
-    1. In the [IAM console](https://console.aws.amazon.com/iam/), click **Roles** in the navigation pane on the left, and then click **Create role**.
+    1. In the [IAM console](https://console.aws.amazon.com/iam/), click **Roles** in the left navigation pane, and then click **Create role**.
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
@@ -168,7 +169,7 @@ Take the following steps to configure an access key:
 
 ## Configure GCS access
 
-To allow TiDB Serverless to access your GCS bucket, you need to configure the GCS access for the bucket. You can use service account key to configure the bucket access:
+To allow a TiDB Serverless cluster to access your GCS bucket, you need to configure the GCS access for the bucket. You can use service account key to configure the bucket access:
 
 Take the following steps to configure a service account key:
 
@@ -176,15 +177,15 @@ Take the following steps to configure a service account key:
 
     1. Enter a service account name.
     2. Enter a description of the service account (Optional). 
-    3. Click **CREATE AND CONTINUE** to create the service account and continue the next step.
-    4. In the `Grant this service account access to project`, choose the [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with needed permission. For example, TiDB Serverless export needs a role with `storage.objects.create` permission.
+    3. Click **CREATE AND CONTINUE** to create the service account.
+    4. In the `Grant this service account access to project`, choose the [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the needed permission. For example, exporting data to a TiDB Serverless cluster needs a role with `storage.objects.create` permission.
     5. Click **Continue** to the next step.
     6. Optional: In the `Grant users access to this service account`, choose members that need to [attach the service account to other resources](https://cloud.google.com/iam/docs/attach-service-accounts).
     7. Click **Done** to finish creating the service account.
 
     ![img.png](/media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
 
-2. Click the service account and then click the **ADD KEY** button on the `KEYS` page to create a service account key. 
+2. Click the service account and then click **ADD KEY** on the `KEYS` page to create a service account key. 
 
     ![img.png](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
@@ -198,7 +199,7 @@ Take the following steps to configure a service account key:
 
 ## Configure Azure Blob Storage access
 
-To allow TiDB Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use service SAS token to configure the container access:
+To allow TiDB Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use a service SAS token to configure the container access:
 
 Take the following steps to configure a service SAS token:
 
@@ -211,10 +212,10 @@ Take the following steps to configure a service SAS token:
 3. On the **Shared access signature** page, create a service SAS token with needed permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
 
     1. In the **Allowed services** section, choose the **Blob** service.
-    2. In the **Allowed Resource types** section, choose the **Container** and **Object**.
-    3. In the **Allowed permissions** section, choose the permission as you needed. For example: TiDB Serverless exports needs **Read** and **Write** permission.
-    4. Adjust the **Start and expiry date/time** as you needed.
-    5. You can keep other settings as default.
+    2. In the **Allowed Resource types** section, choose **Container** and **Object**.
+    3. In the **Allowed permissions** section, choose the permission as needed. For example, exporting data to a TiDB Serverless cluster needs the **Read** and **Write** permissions.
+    4. Adjust the **Start and expiry date/time** as needed.
+    5. You can keep the default values for other settings.
 
     ![img.png](/media/tidb-cloud/serverless-external-storage/azure-create-sas.png)
 

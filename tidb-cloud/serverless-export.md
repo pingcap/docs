@@ -77,7 +77,7 @@ For more information, see [Configure External Storage Access for TiDB Serverless
 ### Data filtering
 
 - TiDB Cloud console supports exporting data with the selected databases and tables.
-- TiDB Cloud CLI supports exporting data with SQL statements and [table filters](https://docs.pingcap.com/tidb/stable/table-filter).
+- TiDB Cloud CLI supports exporting data with SQL statements and [table filters](/table-filter.md).
 
 ### Data formats
 
@@ -132,20 +132,20 @@ You can compress the exported Parquet data using the following algorithms:
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Local File** from the drop-down list. Fill in the following parameters:
 
-    - **Task Name**: enter a name for the export task. The default is `SNAPSHOT_{snapshot_time}`.
+    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
     - **Data Format**: choose **SQL File** or **CSV**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
 
 4. Click **Export**.
 
-5. After the export task is successful, you can download the exported data to your local file with TiDB Cloud CLI.
+5. After the export task is successful, you can download the exported data to your local file using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 </div>
 
 <div label="CLI">
 
-1. Create an export task. TiDB Cloud CLI will export the data to local file by default:
+1. Create an export task. TiDB Cloud CLI exports the data to a local file by default:
 
     ```shell
     ticloud serverless export create -c <cluster-id> --filter "database.table"
@@ -239,7 +239,7 @@ ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas
 <SimpleTab>
 <div label="Console">
 
-1. Open the **Import** page for your target cluster, log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
    > **Tip:**
    >
@@ -249,7 +249,7 @@ ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas
 
 3. On the **Import** page, click **Export** to view the export task list.
 
-4. Choose the export task you want to cancel, and then click **Action** button.
+4. Choose the export task you want to cancel, and then click **Action**.
 
 5. Choose **Cancel** in the drop-down list. Note that you can only cancel the export task that is in the **Running** status.
 
