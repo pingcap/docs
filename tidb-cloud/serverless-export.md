@@ -60,15 +60,14 @@ You can export data in the following formats:
     - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
     - `header`: specify whether to include a header row in the exported data. The default value is `true`.
     - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
-- `Parquet`: export data in Parquet format. Currently it is only supported in TiDB Cloud CLI.
 
 The schema and data are exported according to the following naming conventions:
 
-| Item            | Not compressed                                        | Compressed                                                                                                           |
-|-----------------|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| Database schema | {database}-schema-create.sql                          | {database}-schema-create.sql.{compression-type}                                                                      |
-| Table schema    | {database}.{table}-schema.sql                         | {database}.{table}-schema.sql.{compression-type}                                                                     |
-| Data            | {database}.{table}.{0001}.{csv&#124;parquet&#124;sql} | {database}.{table}.{0001}.{csv&#124;sql}.{compression-type}<br/>{database}.{table}.{0001}.{compression-type}.parquet |
+| Item            | Not compressed                                       | Compressed                                                                                                          |
+|-----------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Database schema | {database}-schema-create.sql                         | {database}-schema-create.sql.{compression-type}                                                                     |
+| Table schema    | {database}.{table}-schema.sql                        | {database}.{table}-schema.sql.{compression-type}                                                                    |
+| Data            | {database}.{table}.{0001}.{csv&#124;sql} | {database}.{table}.{0001}.{csv&#124;sql}.{compression-type} |
 
 ### Data compression
 
@@ -78,13 +77,6 @@ You can compress the exported CSV and SQL data using the following algorithms:
 - `snappy`: compress the exported data with `snappy`.
 - `zstd`: compress the exported data with `zstd`.
 - `none`: do not compress the exported `data`.
-
-You can compress the exported Parquet data using the following algorithms:
-
-- `zstd` (default): compress the Parquet file with `zstd`.
-- `gzip`: compress the Parquet file with `gzip`.
-- `snappy`: compress the Parquet file with `snappy`.
-- `none`: do not compress the Parquet file.
 
 ## Examples
 
@@ -166,19 +158,12 @@ You can compress the exported Parquet data using the following algorithms:
 <div label="CLI">
 
 ```shell
-ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter "database.table"
+ticloud serverless export create -c <cluster-id> --s3.bucket-uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter "database.table"
 ```
 
 - `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
 - `s3.access-key-id`: the access key ID of the user who has the permission to access the bucket.
 - `s3.secret-access-key`: the access key secret of the user who has the permission to access the bucket.
-
-```shell
-ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.role-arn <role-arn> --filter "database.table"
-```
-
-- `s3.uri`: the URI of the Amazon S3 bucket with the `s3://<bucket-name>/<file-path>` format.
-- `s3.role-arn`: the ARN of the role that has the permission to access the bucket.
 
 </div>
 </SimpleTab>
