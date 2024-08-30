@@ -183,11 +183,11 @@ Take the following steps to configure a service account key:
     6. Optional: In the `Grant users access to this service account`, choose members that need to [attach the service account to other resources](https://cloud.google.com/iam/docs/attach-service-accounts).
     7. Click **Done** to finish creating the service account.
 
-    ![img.png](/media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
+    ![service-account](/media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
 
 2. Click the service account and then click **ADD KEY** on the `KEYS` page to create a service account key. 
 
-    ![img.png](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
+    ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
 3. Choose the default `JSON` key type and click the **CREATE** button to download the service account key.
 
@@ -207,7 +207,7 @@ Take the following steps to configure a service SAS token:
 
 2. On your **Storage account** page, click the **Security+network** and then click the **Shared access signature**.
 
-   ![img_2.png](../media/tidb-cloud/serverless-external-storage/sas_position.png)
+   ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
 
 3. On the **Shared access signature** page, create a service SAS token with needed permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
 
@@ -217,7 +217,7 @@ Take the following steps to configure a service SAS token:
     4. Adjust the **Start and expiry date/time** as needed.
     5. You can keep the default values for other settings.
 
-    ![img_1.png](../media/tidb-cloud/serverless-external-storage/sas_config.png)
+    ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
 4. Click the **Generate SAS and connection string** button to generate the SAS token. You will specify this token when you create an external stage.
 
