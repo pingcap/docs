@@ -63,7 +63,7 @@ from langchain_text_splitters import CharacterTextSplitter
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`.
+    - **Connection Type** is set to `Public`.
     - **Branch** is set to `main`.
     - **Connect With** is set to `SQLAlchemy`.
     - **Operating System** matches your environment.
