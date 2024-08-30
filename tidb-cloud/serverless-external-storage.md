@@ -207,7 +207,7 @@ Take the following steps to configure a service SAS token:
 
 2. On your **Storage account** page, click the **Security+network** and then click the **Shared access signature**.
 
-    ![img.png](/media/tidb-cloud/serverless-external-storage/azure-sas.png)
+   ![img_2.png](../media/tidb-cloud/serverless-external-storage/sas_position.png)
 
 3. On the **Shared access signature** page, create a service SAS token with needed permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
 
@@ -217,6 +217,8 @@ Take the following steps to configure a service SAS token:
     4. Adjust the **Start and expiry date/time** as needed.
     5. You can keep the default values for other settings.
 
-    ![img.png](/media/tidb-cloud/serverless-external-storage/azure-create-sas.png)
+    ![img_1.png](../media/tidb-cloud/serverless-external-storage/sas_config.png)
 
-4. Click the **Generate SAS and connection string** button to generate the SAS token.
+4. Click the **Generate SAS and connection string** button to generate the SAS token. You will specify this token when you create an external stage.
+
+
