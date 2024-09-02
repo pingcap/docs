@@ -16,7 +16,7 @@ To ensure data security, TiDB cluster CA for your TiDB Dedicated cluster is host
 
 - Set a password to access your cluster in secure settings.
 
-    To do so, you can navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your TiDB Dedicated cluster, and then select **Security Settings**. In security settings, you can click **Generate** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
+    To do so, you can navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your TiDB Dedicated cluster, and then select **Password Settings**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
 
 ## Secure connection to a TiDB Dedicated cluster
 

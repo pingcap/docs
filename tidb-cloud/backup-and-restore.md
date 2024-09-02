@@ -238,9 +238,9 @@ To restore your TiDB Dedicated cluster data from a backup to a new cluster, take
 
 7. Click **Restore**.
 
-   The cluster restore process starts and the **Security Settings** dialog box is displayed.
+   The cluster restore process starts and the **Password Settings** dialog box is displayed.
 
-8. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+8. In the **Password Settings** dialog box, set the root password to connect to your cluster, and then click **Save**.
 
 ### Restore a deleted cluster
 
@@ -261,6 +261,6 @@ To restore a deleted cluster from recycle bin, take the following steps:
 
 6. Click **Confirm**.
 
-   The cluster restore process starts and the **Security Settings** dialog box is displayed.
+   The cluster restore process starts and the **Password Settings** dialog box is displayed.
 
-7. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+7. In the **Password Settings** dialog box, set the root password to connect to your cluster, and then click **Save**.

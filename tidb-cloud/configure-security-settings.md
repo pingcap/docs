@@ -1,9 +1,9 @@
 ---
-title: Configure Cluster Security Settings
-summary: Learn how to configure the root password and allowed IP addresses to connect to your cluster.
+title: Configure Cluster Password Settings
+summary: Learn how to configure the root password to connect to your cluster.
 ---
 
-# Configure Cluster Security Settings
+# Configure Cluster Password Settings
 
 For TiDB Dedicated clusters, you can configure the root password and allowed IP addresses to connect to your cluster.
 
@@ -17,13 +17,11 @@ For TiDB Dedicated clusters, you can configure the root password and allowed IP 
     >
     > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-2. In the row of your target cluster, click **...** and select **Security Settings**.
-3. In the **Security Settings** dialog, configure the root password and allowed IP addresses.
+2. In the row of your target cluster, click **...** and select **Password Settings**.
+3. Set the root password to connect to your cluster, and then click **Save**.
 
-    To allow your cluster to be accessible by any IP addresses, click **Allow Access from Anywhere**.
-
-4. Click **Apply**.
+    You can click **Auto-generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location.
 
 > **Tip:**
 >
-> If you are viewing the overview page of your cluster, you can click the **...** in the upper-right corner of the page, select **Security Settings**, and configure these settings, too.
+> If you are viewing the overview page of your cluster, you can click the **...** in the upper-right corner of the page, select **Password Settings**, and configure these settings, too.
