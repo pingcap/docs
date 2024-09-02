@@ -279,11 +279,9 @@ To replicate incremental data, do the following:
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. Grant TiCDC to connect to TiDB Cloud. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), locate the cluster, and then go to **Overview** > **Connect** > **Standard Connection** > **Create traffic filter**. Click **Edit** > **Add Item**. Fill in the public IP address of the TiCDC component in the **IP Address** field, and click **Update Filter** to save it. Now TiCDC can access TiDB Cloud.
+2. Grant TiCDC to connect to TiDB Cloud. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), locate the cluster, and then go to the **Networking** page. Click **Add IP Address** > **Use IP addresses**. Fill in the public IP address of the TiCDC component in the **IP Address** field, and click **Confirm** to save it. Now TiCDC can access TiDB Cloud. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 
-    ![Update Filter](/media/tidb-cloud/edit_traffic_filter_rules.png)
-
-3. Get the connection information of the downstream TiDB Cloud cluster. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), go to **Overview** > **Connect** > **Standard Connection** > **Connect with a SQL Client**. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
+3. Get the connection information of the downstream TiDB Cloud cluster. In the [TiDB Cloud console](https://tidbcloud.com/console/clusters), go to **Overview** > **Connect**. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list. From the connection information, you can get the host IP address and port of the cluster. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 

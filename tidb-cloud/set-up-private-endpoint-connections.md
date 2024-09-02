@@ -146,11 +146,15 @@ To enable private DNS in your AWS Management Console:
 </div>
 <div label="Use AWS CLI">
 
-To enable private DNS using your AWS CLI, copy the command and run it in your AWS CLI.
+To enable private DNS using your AWS CLI:
 
-```bash
-aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
-```
+1. In the [TiDB Cloud console](https://tidbcloud.com), go to the **Networking** page of your cluster.
+2. On the **Networking** page, locate the private endpoint, and click **...*** > **Enable DNS** in the **Action** column.
+3. Copy the command and run it in your AWS CLI.
+
+    ```bash
+    aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
+    ```
 
 </div>
 </SimpleTab>
