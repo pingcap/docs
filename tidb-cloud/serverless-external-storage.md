@@ -51,6 +51,9 @@ It is recommended that you use AWS CloudFormation to create a role ARN. Take the
 
 If you have any trouble creating a role ARN with AWS CloudFormation, you can take the following steps to create one manually:
 
+<details>
+<summary>Click here to see details</summary>
+
 1. In the **Add New ARN** pop-up window described in the previous section, click **Having trouble? Create Role ARN manually**. You will get the **TiDB Cloud Account ID** and **TiDB Cloud External ID**.
 
 2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
@@ -144,6 +147,8 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
     5. In the list of roles, click the name of the role that you just created to go to its summary page, and then you can get the role ARN.
 
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
+
+</details>
 
 </div>
 
