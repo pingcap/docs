@@ -34,7 +34,7 @@ cd wordpress-tidb-docker
 
 ### Step 2: Install dependencies
 
-1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start WordPress. If you have them installed, you can skip this step. It is highly recommended to run your WordPress in a Linux environment (such as Ubuntu). Run the following command to install them:
+1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start WordPress. If you have them installed, you can skip this step. It is highly recommended to run your WordPress in a Linux environment (such as Ubuntu). Run the following command to install Docker and Docker Compose:
 
     ```shell
     sudo sh install.sh
@@ -59,6 +59,7 @@ Configure the WordPress database connection to TiDB Serverless.
     - **Endpoint Type** is set to `Public`.
     - **Connect With** is set to `WordPress`.
     - **Operating System** is set to `Debian/Ubuntu/Arch`.
+    - **Database** is set to the database you want to use—for example, `test`.
 
 4. Click **Generate Password** to create a random password.
 
@@ -95,6 +96,12 @@ Configure the WordPress database connection to TiDB Serverless.
     ```
 
 2. Set up your WordPress site by visiting [localhost](http://localhost/) if you start the container on your local machine or `http://<your_instance_ip>` if the WordPress is running on a remote machine.
+
+### Step 5: Confirm the database connection
+
+1. Close the connection dialog for your cluster on the TiDB Cloud console, and open the **SQL Editor** page.
+2. Under the **Schemas** tab on the left, click the database you connected to Wordpress.
+3. Confirm that you now see the Wordpress tables (such as `wp_posts` and `wp_comments`) in the list of tables for that database.
 
 ## Need help?
 

@@ -53,9 +53,33 @@ Request quotas are subject to rate limits as follows:
 
 - TiDB Cloud Data Service allows up to 100 requests per day for each Chat2Query Data App.
 
+## API key expiration
+
+By default, API keys never expire. However, for security considerations, you can specify an expiration time for your API key when you [create](#create-an-api-key) or [edit](#edit-an-api-key) the key. 
+
+- An API key is valid only before its expiration time. Once expired, all requests using that key will fail with a `401` error, and the response is similar as follows:
+
+    ```bash
+    HTTP/2 401
+    date: Mon, 05 Sep 2023 02:50:52 GMT
+    content-type: application/json
+    content-length: 420
+    x-debug-trace-id: 202309040250529dcdf2055e7b2ae5e9
+    x-kong-response-latency: 1
+    server: kong/2.8.1
+
+    {"data":{"result":{"start_ms":0,"end_ms":0,"latency":"","row_affect":0,"limit":0,"code":49900002,"message":"API Key is no longer valid","row_count":0},"columns":[],"rows":[]},"type":""}
+    ```
+
+- You can also expire API keys manually. For detailed steps, see [Expire an API key](#expire-an-api-key) and [Expire all API keys](#expire-all-api-keys). Once you manually expire an API key, the expiration takes effect immediately.
+
+- You can check the status and expiration time of your API keys in the **Authentication** area of your target Data App.
+
+- Once expired, an API key cannot be activated or edited again.
+
 ## Manage API keys
 
-The following sections describe how to create, edit, and delete an API key for a Data App.
+The following sections describe how to create, edit, delete, and expire API keys for a Data App.
 
 ### Create an API key
 
@@ -78,6 +102,10 @@ To create an API key for a Data App, perform the following steps:
 
        If your requests per minute exceed the rate limit, the API returns a `429` error. To get a quota of more than 1000 requests per minute (rpm) per API key, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 
+    4. (Optional) Set a desired expiration time for your API key.
+
+        By default, an API key never expires. If you prefer to specify an expiration time for the API key, click **Expires in**, select a time unit (`Minutes`, `Days`, or `Months`), and then fill in a desired number for the time unit. 
+
 5. Click **Next**. The public key and private key are displayed.
 
     Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
@@ -86,12 +114,16 @@ To create an API key for a Data App, perform the following steps:
 
 ### Edit an API key
 
+> **Note**:
+>
+> You cannot edit an expired key.
+
 To edit the description or rate limit of an API key, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the **API Key** area, locate the **Action** column, and then click **...** > **Edit** in the API key row that you want to change.
-4. Update the description, role, or rate limit of the API key.
+3. In the **Authentication** area, locate the **Action** column, and then click **...** > **Edit** in the API key row that you want to change.
+4. Update the description, role, rate limit, or expiration time of the API key.
 5. Click **Update**.
 
 ### Delete an API key
@@ -106,3 +138,25 @@ To delete an API key for a Data App, perform the following steps:
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **API Key** area, locate the **Action** column, and then click **...** > **Delete** in the API key row that you want to delete.
 4. In the displayed dialog box, confirm the deletion.
+
+### Expire an API key
+
+> **Note**:
+>
+> You cannot expire an expired key.
+
+To expire an API key for a Data App, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the **Authentication** area, locate the **Action** column, and then click **...** > **Expire Now** in the API key row that you want to expire.
+4. In the displayed dialog box, confirm the expiration.
+
+### Expire all API keys
+
+To expire all API keys for a Data App, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the **Authentication** area, click **Expire All**.
+4. In the displayed dialog box, confirm the expiration.
