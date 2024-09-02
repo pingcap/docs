@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Enhance the connection experience for TiDB Dedicated
+- Enhance the connection experience for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
 
     - Refine the Connect dialog interface to offer TiDB Dedicated users a smoother and more efficient connection experience.
     - TiDB Dedicated introduces "Networking page" in Cluster level to simplify the network configuration for your cluster.
@@ -22,7 +22,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Support exporting data from TiDB Serverless clusters in the TiDB Cloud console. 
+- Support exporting data from TiDB Serverless clusters using the [TiDB Cloud console](https://tidbcloud.com/). 
   
     Previously, TiDB Cloud only supported exporting data using the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md). Now, you can export data from TiDB Serverless clusters to local files and Amazon S3 in the [TiDB Cloud console](https://tidbcloud.com/). 
   
