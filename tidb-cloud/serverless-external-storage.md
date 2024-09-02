@@ -29,7 +29,6 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
 2. Open the **Add New ARN** dialog.
 
-
     - If you want to import data from Amazon S3, open the **Add New ARN** dialog as follows:
 
         1. Click **Import from S3**.
