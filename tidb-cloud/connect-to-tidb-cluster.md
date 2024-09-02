@@ -15,7 +15,7 @@ After your TiDB Dedicated cluster is created on TiDB Cloud, you can connect to i
 
 - Direct connections
 
-    Direct connections use the MySQL native connection system over TCP. You can connect to your TiDB Dedicated cluster using any tool that supports MySQL connections, such as the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). TiDB Cloud also provides [SQL Shell](/tidb-cloud/connect-via-sql-shell.md), which enables you to try TiDB SQL, test out TiDB's compatibility with MySQL quickly, and administer user privileges.
+    Direct connections use the MySQL native connection system over TCP. You can connect to your TiDB Dedicated cluster using any tool that supports MySQL connections, such as the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). TiDB Cloud also provides [SQL Shell](/tidb-cloud/connect-via-sql-shell.md), which enables you to try TiDB SQL, test out TiDB's compatibility with MySQL quickly, and manage user privileges.
 
     TiDB Dedicated provides three network connection types:
   
