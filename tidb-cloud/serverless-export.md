@@ -23,10 +23,12 @@ You can export data to a local file or [Amazon S3](https://aws.amazon.com/s3/).
 
 ### A local file
 
+To export data from a TiDB Serverless cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+
 Exporting data to a local file has the following limitations:
 
-- You can only download the exported data using the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md). Downloading using the TiDB Cloud console is not supported.
-- Exported data is saved in the stashing area and will expire after two days. You need to download the exported data in time.
+- Downloading exported data using the TiDB Cloud console is not supported.
+- Exported data is saved in the stashing area of TiDB Cloud and will expire after two days. You need to download the exported data in time.
 - If the storage space of stashing area is full, you will not be able to export data to the local file.
 
 ### Amazon S3
@@ -51,7 +53,7 @@ For more information, see [Configure External Storage Access for TiDB Serverless
 You can export data in the following formats:
 
 - `SQL`: export data in SQL format.
-- `CSV`: export data in CSV format, you can specify the following options:
+- `CSV`: export data in CSV format. You can specify the following options:
     - `delimiter`: specify the delimiter used in the exported data. The default delimiter is `"`.
     - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
     - `header`: specify whether to include a header row in the exported data. The default value is `true`.
@@ -98,13 +100,13 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
 4. Click **Export**.
 
-5. After the export task is successful, you can download the exported data to your local file using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+5. After the export task is successful, you can copy the download command displayed in the export task detail, and then download the exported data by running the command in the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 </div>
 
 <div label="CLI">
 
-1. Create an export task. TiDB Cloud CLI exports the data to a local file by default:
+1. Create an export task:
 
     ```shell
     ticloud serverless export create -c <cluster-id>
@@ -118,6 +120,8 @@ You can compress the exported CSV and SQL data using the following algorithms:
     ticloud serverless export download -c <cluster-id> -e <export-id>
     ```
 
+    For more information about the download command, see [ticloud serverless export download](/tidb-cloud/ticloud-serverless-export-download.md).
+ 
 </div>
 </SimpleTab>
 
@@ -134,20 +138,19 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
 2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-3. Configure the export information. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
+3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
     - **Data Format**: choose **SQL File** or **CSV**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
-    - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<file-path>` format.
-    - **Bucket Access**
-        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket.
-        - **AWS Access Key**: enter the access key ID and access key secret that have the permission to access the bucket.
+    - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
+    - **Bucket Access**：choose one of the following access credentials and then fill in the credential information. If you do not have such information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+        - **AWS Role ARN**: enter the role ARN that has the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
+        - **AWS Access Key**: enter the access key ID and access key secret that have the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
 
 4. Click **Export**.
 
-5. After the export task is successful, you can download the exported data to your local file with TiDB Cloud CLI.
 
 </div>
 
@@ -165,6 +168,7 @@ ticloud serverless export create -c <cluster-id> --s3.bucket-uri <uri> --s3.acce
 </SimpleTab>
 
 ### Cancel an export task
+To cancel an ongoing export task, take the following steps:
 
 <SimpleTab>
 <div label="Console">
