@@ -76,7 +76,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 - `zstd`: compress the exported data with `zstd`.
 - `none`: do not compress the exported `data`.
 
-## Examples
+## Steps
 
 ### Export data to a local file
 
@@ -97,6 +97,10 @@ You can compress the exported CSV and SQL data using the following algorithms:
     - **Exported Data**: choose the databases and tables you want to export.
     - **Data Format**: choose **SQL File** or **CSV**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
+
+   > **Tip:**
+   >
+   > If you have neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
 
 4. Click **Export**.
 
@@ -145,7 +149,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
     - **Data Format**: choose **SQL File** or **CSV**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
-    - **Bucket Access**：choose one of the following access credentials and then fill in the credential information. If you do not have such information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+    - **Bucket Access**: choose one of the following access credentials and then fill in the credential information. If you do not have such information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
         - **AWS Role ARN**: enter the role ARN that has the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
         - **AWS Access Key**: enter the access key ID and access key secret that have the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
 
