@@ -185,17 +185,23 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From S3**.
+2. Select **Import data from S3**.
 
-3. On the **Import from S3** page, fill in the following information:
+    If this is your first time importing data into this cluster, select **Import From Amazon S3**.
 
-    - **Data format**: select **CSV**.
-    - **Bucket URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
-    - **Role ARN**: enter the Role-ARN you obtained.
+3. On the **Import Data from Amazon S3** page, fill in the following information:
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    - **Import File Count**: select **Multiple files**.
+    - **Included Schema Files**: select **No**.
+   - **Data Format**: select **CSV**.
+   - **Folder URI** or **File URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
+   - **Bucket Access** > **AWS Role ARN**: enter the Role-ARN you obtained.
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+   If the location of the bucket is different from your cluster, confirm the compliance of cross region.
+
+   TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+
+<!--TODO: update step 4 and step 6-->
 
 4. Modify the file patterns and add the table filter rules if needed.
 
@@ -228,7 +234,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
 7. Click **Start Import**.
 
-8. When the import progress shows **Finished**, check the imported tables.
+8. When the import progress shows **Completed**, check the imported tables.
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added.
 
