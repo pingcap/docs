@@ -10,15 +10,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## September 3, 2024
 
-**General changes**
-
-- Enhance the connection experience for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
-
-    - Revise the **Connect** dialog interface to provide TiDB Dedicated users with a more streamlined and efficient connection experience.
-    - Introduce a new cluster-level **Networking** page to simplify network configuration for your cluster.
-    - Replace the **Security Settings** page with a new **Password Settings** page and move IP access list settings to the new **Networking** page.
-  
-  For more information, see [Connect to TiDB Dedicated](/tidb-cloud/connect-to-tidb-cluster.md).
 
 **Console changes**
 
