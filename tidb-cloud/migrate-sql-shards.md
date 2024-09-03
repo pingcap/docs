@@ -207,7 +207,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
 6. Edit the CSV configuration if needed.
 
-    You can also click **Edit CSV configuration** to update the CSV-specific configurations, including separator, delimiter, header, `backslash escape`, and `trim last separator`.
+    You can also click **Edit CSV configuration** to configure Backslash Escape, Separator, and Delimiter for more fine-grained control.
 
     > **Note:**
     >
