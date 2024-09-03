@@ -155,7 +155,6 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
 4. Click **Export**.
 
-
 </div>
 
 <div label="CLI">
@@ -172,6 +171,7 @@ ticloud serverless export create -c <cluster-id> --s3.bucket-uri <uri> --s3.acce
 </SimpleTab>
 
 ### Cancel an export task
+
 To cancel an ongoing export task, take the following steps:
 
 <SimpleTab>
