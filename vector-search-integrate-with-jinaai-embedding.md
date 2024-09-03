@@ -7,17 +7,32 @@ summary: Learn how to integrate TiDB Vector Search with Jina AI Embeddings API t
 
 This tutorial walks you through how to use [Jina AI](https://jina.ai/) to generate embeddings for text data, and then store the embeddings in TiDB Vector Storage and search similar texts based on embeddings.
 
+<CustomContent platform="tidb-cloud">
+
 > **Note**
 >
 > TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+
+</CustomContent>
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
+<CustomContent platform="tidb">
+
+- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
+- [Git](https://git-scm.com/downloads) installed.
+- A TiDB cluster. Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+
+</CustomContent>
 
 ## Run the sample app
 
@@ -242,5 +257,15 @@ with Session(engine) as session:
 
 ## See also
 
+<CustomContent platform="tidb">
+
+- [Vector Data Types](/vector-search-data-types.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
 - [Vector Data Types](/vector-search-data-types.md)
 - [Vector Search Index](/tidb-cloud/vector-search-index.md)
+
+</CustomContent>

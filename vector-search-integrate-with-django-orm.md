@@ -7,17 +7,32 @@ summary: Learn how to integrate TiDB Vector Search with Django ORM to store embe
 
 This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
 
+<CustomContent platform="tidb-cloud">
+
 > **Note**
 >
 > TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+
+</CustomContent>
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
+<CustomContent platform="tidb">
+
+- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
+- [Git](https://git-scm.com/downloads) installed.
+- A TiDB cluster. Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+
+</CustomContent>
 
 ## Run the sample app
 
@@ -182,7 +197,11 @@ class Document(models.Model):
 
 #### Define a vector column optimized with index
 
-Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
+> **Note**
+>
+> This code snippet is only applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
+Define a 3-dimensional vector column and optimize it with a [vector search index](https://docs.pingcap.com/tidbcloud/vector-search-index) (HNSW index).
 
 ```python
 class DocumentWithIndex(models.Model):

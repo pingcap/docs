@@ -7,19 +7,38 @@ summary: Learn how to integrate Vector Search in TiDB Cloud with LlamaIndex.
 
 This tutorial demonstrates how to integrate the [vector search](/vector-search-overview.md) feature in TiDB Cloud with [LlamaIndex](https://www.llamaindex.ai).
 
+<CustomContent platform="tidb-cloud">
+
 > **Note**
 >
-> - TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
-> - You can view the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
+> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+
+</CustomContent>
+
+> **Tip**
+>
+> You can view the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
+<CustomContent platform="tidb">
+
+- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
+- [Jupyter Notebook](https://jupyter.org/install) installed.
+- [Git](https://git-scm.com/downloads) installed.
+- A TiDB cluster. Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Jupyter Notebook](https://jupyter.org/install) installed.
 - [Git](https://git-scm.com/downloads) installed.
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+
+</CustomContent>
 
 ## Get started
 
@@ -260,5 +279,15 @@ Empty Response
 
 ## See also
 
+<CustomContent platform="tidb">
+
+- [Vector Data Types](/vector-search-data-types.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
 - [Vector Data Types](/vector-search-data-types.md)
 - [Vector Search Index](/tidb-cloud/vector-search-index.md)
+
+</CustomContent>

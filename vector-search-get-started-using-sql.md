@@ -14,16 +14,30 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 - Store vector embeddings.
 - Perform vector search queries.
 
+<CustomContent platform="tidb-cloud">
+
 > **Note**
 >
 > TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+
+</CustomContent>
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
+<CustomContent platform="tidb">
+
+- [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) (MySQL CLI) installed on your machine.
+- A TiDB cluster. Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
 - [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) (MySQL CLI) installed on your machine.
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+
+</CustomContent>
 
 ## Get started
 
@@ -144,5 +158,15 @@ From the output, the swimming animal is most likely a fish, or a dog with a gift
 
 ## See also
 
+<CustomContent platform="tidb">
+
+- [Vector Data Types](/vector-search-data-types.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
 - [Vector Data Types](/vector-search-data-types.md)
 - [Vector Search Index](/tidb-cloud/vector-search-index.md)
+
+</CustomContent>

@@ -7,9 +7,13 @@ summary: An overview of TiDB vector search integration, including supported AI f
 
 This document provides an overview of TiDB vector search integration, including supported AI frameworks, embedding models, and Object Relational Mapping (ORM) libraries.
 
+<CustomContent platform="tidb-cloud">
+
 > **Note**
 >
 > TiDB Vector Search is currently in beta and is only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+
+</CustomContent>
 
 ## AI frameworks
 

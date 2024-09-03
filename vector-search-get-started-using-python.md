@@ -9,17 +9,32 @@ This tutorial demonstrates how to develop a simple AI application that provides 
 
 Throughout this tutorial, you will develop this AI application using [TiDB Vector Search](/vector-search-overview.md), Python, [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python), and AI models.
 
+<CustomContent platform="tidb-cloud">
+
 > **Note**
 >
 > TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+
+</CustomContent>
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
+<CustomContent platform="tidb">
+
+- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
+- [Git](https://git-scm.com/downloads) installed.
+- A TiDB cluster. Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
 - A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+
+</CustomContent>
 
 ## Get started
 
@@ -191,5 +206,15 @@ This demonstration shows how vector search can efficiently locate the most relev
 
 ## See also
 
+<CustomContent platform="tidb">
+
+- [Vector Data Types](/vector-search-data-types.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
 - [Vector Data Types](/vector-search-data-types.md)
 - [Vector Search Index](/tidb-cloud/vector-search-index.md)
+
+</CustomContent>
