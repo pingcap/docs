@@ -115,10 +115,10 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 3. On the **Import Data from Amazon S3** page, provide the following information for the source Parquet files:
 
-    - **Import File Count**: select **One file** or **Multiple files**.
+    - **Import File Count**: select **One file** or **Multiple files** as needed.
     - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **Parquet**.
-    - **Folder URI** or **File URI**: enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledate/ingest/TableName.01.parquet`. You can also use wildcards to match the source files. For example:
+    - **Folder URI** or **File URI**: enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledata/ingest/TableName.01.parquet`. You can also use wildcards to match the source files. For example:
 
         - `s3://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` and one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
         - `s3://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
@@ -161,10 +161,10 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 3. On the **Import Data from GCS** page, provide the following information for the source Parquet files:
 
-    - **Import File Count**: select **One file** or **Multiple files**.
+    - **Import File Count**: select **One file** or **Multiple files** as needed.
     - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **Parquet**.
-    - **Folder URI** or **File URI**: enter the source file URI and name in the following format `gs://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `gs://sampledate/ingest/TableName.01.parquet`. You can also use wildcards to match the source files. For example:
+    - **Folder URI** or **File URI**: enter the source file URI and name in the following format `gs://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `gs://sampledata/ingest/TableName.01.parquet`. You can also use wildcards to match the source files. For example:
 
         - `gs://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` and one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
         - `gs://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
