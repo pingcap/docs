@@ -36,20 +36,18 @@ You can set the CIDR when creating the first TiDB Dedicated cluster. If you want
 
     > **Note:**
     >
-    > - To avoid any conflicts with the CIDR of the VPC where your application is located, you need to set a different project CIDR in this field. 
+    > - To avoid any conflicts with the CIDR of the VPC where your application is located, you need to set a different project CIDR in this field.
     > - For AWS Region, it is recommended to configure an IP range size between `/16` and `/23`. Supported network addresses include:
-    >     - 10.250.0.0 - 10.251.255.255 
+    >     - 10.250.0.0 - 10.251.255.255
     >     - 172.16.0.0 - 172.31.255.255
     >     - 192.168.0.0 - 192.168.255.255
-
     > - For Google Cloud Region, it is recommended to configure an IP range size between `/19` and `/20`. If you want to configure an IP range size between `/16` and `/18`, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). Supported network addresses include:
     >     - 10.250.0.0 - 10.251.255.255
     >     - 172.16.0.0 - 172.17.255.255
     >     - 172.30.0.0 - 172.31.255.255
-
     > - TiDB Cloud limits the number of TiDB Cloud nodes in a region of a project based on the CIDR block size of the region.
 
-5. View the CIDR of the cloud provider and the specific region. 
+5. View the CIDR of the cloud provider and the specific region.
 
     The CIDR is inactive by default. To activate the CIDR, you need to create a cluster in the target region. When the region CIDR is active, you can create VPC Peering for the region.
 
@@ -312,8 +310,6 @@ You can add VPC peering requests on either the project-level **Network Access** 
 
 Execute the following command to finish the setup of VPC peering:
 
-{{< copyable "shell-regular" >}}
-
 ```bash
 gcloud beta compute networks peerings create <your-peer-name> --project <your-project-id> --network <your-vpc-network-name> --peer-project <tidb-project-id> --peer-network <tidb-vpc-network-name>
 ```
@@ -333,4 +329,5 @@ Now you have successfully set up the VPC peering connection. Next, [connect to t
     Wait for the VPC peering connection status to change from **system checking** to **active** (approximately 5 minutes).
 
 3. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
+
 4. Connect to your cluster with the connection string.
