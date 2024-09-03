@@ -11,7 +11,7 @@ summary: Learn about functions and operators available for Vector Data Types.
 
 ## Vector functions
 
-The following functions are designed specifically for [Vector Data Types](/tidb-cloud/vector-search-data-types.md).
+The following functions are designed specifically for [Vector Data Types](/vector-search-data-types.md).
 
 **Vector Distance Functions:**
 
@@ -33,7 +33,7 @@ The following functions are designed specifically for [Vector Data Types](/tidb-
 
 ## Extended built-in functions and operators
 
-The following built-in functions and operators are extended, supporting operating on [Vector Data Types](/tidb-cloud/vector-search-data-types.md).
+The following built-in functions and operators are extended, supporting operating on [Vector Data Types](/vector-search-data-types.md).
 
 **Arithmetic operators:**
 
@@ -42,7 +42,7 @@ The following built-in functions and operators are extended, supporting operatin
 | [`+`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus)  | Vector element-wise addition operator    |
 | [`-`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus) | Vector element-wise subtraction operator |
 
-For more information about how vector arithmetic works, see [Vector Data Type | Arithmetic](/tidb-cloud/vector-search-data-types.md#arithmetic).
+For more information about how vector arithmetic works, see [Vector Data Type | Arithmetic](/vector-search-data-types.md#arithmetic).
 
 **Aggregate (GROUP BY) functions:**
 
@@ -74,7 +74,7 @@ For more information about how vector arithmetic works, see [Vector Data Type | 
 | [`!=`, `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)                  | Not equal operator                                    |
 | [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | Check whether a value is not within a set of values   |
 
-For more information about how vectors are compared, see [Vector Data Type | Comparison](/tidb-cloud/vector-search-data-types.md#comparison).
+For more information about how vectors are compared, see [Vector Data Type | Comparison](/vector-search-data-types.md#comparison).
 
 **Control flow functions:**
 
@@ -92,7 +92,7 @@ For more information about how vectors are compared, see [Vector Data Type | Com
 | [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)       | Cast a value as a certain type |
 | [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) | Cast a value as a certain type |
 
-For more information about how to use `CAST()`, see [Vector Data Type | Cast](/tidb-cloud/vector-search-data-types.md#cast).
+For more information about how to use `CAST()`, see [Vector Data Type | Cast](/vector-search-data-types.md#cast).
 
 ## Full references
 
@@ -279,4 +279,4 @@ The vector functions and the extended usage of built-in functions and operators 
 
 ## See also
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
+- [Vector Data Types](/vector-search-data-types.md)

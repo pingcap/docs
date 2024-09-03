@@ -7,7 +7,7 @@ summary: Learn how to build and use the vector search index to accelerate K-Near
 
 K-nearest neighbors (KNN) search is the problem of finding the K closest points for a given point in a vector space. The most straightforward approach to solving this problem is a brute force search, where the distance between all points in the vector space and the reference point is computed. This method guarantees perfect accuracy, but it is usually too slow for practical applications. Thus, nearest neighbors search problems are often solved with approximate algorithms.
 
-In TiDB, you can create and utilize vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/tidb-cloud/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
+In TiDB, you can create and utilize vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
 
 TiDB currently supports the following vector search index algorithms:
 
@@ -21,7 +21,7 @@ TiDB currently supports the following vector search index algorithms:
 
 [HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy (> 98% in typical cases).
 
-To create an HNSW vector index, specify the index definition in the comment of a column with a [vector data type](/tidb-cloud/vector-search-data-types.md) when creating the table:
+To create an HNSW vector index, specify the index definition in the comment of a column with a [vector data type](/vector-search-data-types.md) when creating the table:
 
 ```sql
 CREATE TABLE vector_table_with_index (
@@ -44,9 +44,9 @@ The vector index can only be created for fixed-dimensional vector columns like `
 If you are using programming language SDKs or ORMs, refer to the following documentation for creating vector indexes:
 
 - Python: [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python)
-- Python: [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
-- Python: [Peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
-- Python: [Django](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+- Python: [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
+- Python: [Peewee](/vector-search-integrate-with-peewee.md)
+- Python: [Django](/vector-search-integrate-with-django-orm.md)
 
 Be aware of the following limitations when creating the vector index. These limitations might be removed in future releases:
 
@@ -270,5 +270,5 @@ See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/
 
 ## See also
 
-- [Improve Vector Search Performance](/tidb-cloud/vector-search-improve-performance.md)
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
+- [Improve Vector Search Performance](/vector-search-improve-performance.md)
+- [Vector Data Types](/vector-search-data-types.md)

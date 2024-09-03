@@ -5,7 +5,7 @@ summary: Learn how to integrate Vector Search in TiDB Cloud with LangChain.
 
 # Integrate Vector Search with LangChain
 
-This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vector-search-overview.md) feature in TiDB Cloud with [LangChain](https://python.langchain.com/).
+This tutorial demonstrates how to integrate the [vector search](/vector-search-overview.md) feature in TiDB Cloud with [LangChain](https://python.langchain.com/).
 
 > **Note**
 >
@@ -581,5 +581,5 @@ The expected output is as follows:
 
 ## See also
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
+- [Vector Data Types](/vector-search-data-types.md)
 - [Vector Search Index](/tidb-cloud/vector-search-index.md)

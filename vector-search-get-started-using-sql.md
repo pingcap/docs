@@ -5,7 +5,7 @@ summary: Learn how to quickly get started with Vector Search in TiDB Cloud using
 
 # Get Started with Vector Search via SQL
 
-TiDB extends MySQL syntax to support [Vector Search](/tidb-cloud/vector-search-overview.md) and introduce new [Vector data types](/tidb-cloud/vector-search-data-types.md) and several [vector functions](/tidb-cloud/vector-search-functions-and-operators.md).
+TiDB extends MySQL syntax to support [Vector Search](/vector-search-overview.md) and introduce new [Vector data types](/vector-search-data-types.md) and several [vector functions](/vector-search-functions-and-operators.md).
 
 This tutorial demonstrates how to get started with TiDB Vector Search just using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to:
 
@@ -45,7 +45,7 @@ To complete this tutorial, you need:
 
 ### Step 2. Create a vector table
 
-With vector search support, you can use the `VECTOR` type column to store [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) in TiDB.
+With vector search support, you can use the `VECTOR` type column to store [vector embeddings](/vector-search-overview.md#vector-embedding) in TiDB.
 
 To create a table with a three-dimensional `VECTOR` column, execute the following SQL statements using your MySQL CLI:
 
@@ -68,7 +68,7 @@ Query OK, 0 rows affected (0.27 sec)
 
 ### Step 3. Store the vector embeddings
 
-Insert three documents with their [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) into the `embedded_documents` table:
+Insert three documents with their [vector embeddings](/vector-search-overview.md#vector-embedding) into the `embedded_documents` table:
 
 ```sql
 INSERT INTO embedded_documents
@@ -89,7 +89,7 @@ Records: 3  Duplicates: 0  Warnings: 0
 >
 > This example simplifies the dimensions of the vector embeddings and uses only 3-dimensional vectors for demonstration purposes.
 >
-> In real-world applications, [embedding models](/tidb-cloud/vector-search-overview.md#embedding-model) often produce vector embeddings with hundreds or thousands of dimensions.
+> In real-world applications, [embedding models](/vector-search-overview.md#embedding-model) often produce vector embeddings with hundreds or thousands of dimensions.
 
 ### Step 4. Query the vector table
 
@@ -144,5 +144,5 @@ From the output, the swimming animal is most likely a fish, or a dog with a gift
 
 ## See also
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
+- [Vector Data Types](/vector-search-data-types.md)
 - [Vector Search Index](/tidb-cloud/vector-search-index.md)

@@ -9,7 +9,7 @@ This document describes the known limitations of TiDB Vector Search. We are cont
 
 - TiDB Vector Search is only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters. It is not available for TiDB Dedicated or TiDB Self-Hosted.
 
-- Each [vector](/tidb-cloud/vector-search-data-types.md) supports up to 16,000 dimensions.
+- Each [vector](/vector-search-data-types.md) supports up to 16,000 dimensions.
 
 - Vector data supports only single-precision floating-point numbers (Float32).
 

@@ -57,7 +57,7 @@ As dimension 3 is enforced for the `embedding` column in the preceding example, 
 ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 ```
 
-See [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md) for available functions and operators over the Vector data type.
+See [Vector Functions and Operators](/vector-search-functions-and-operators.md) for available functions and operators over the Vector data type.
 
 See [Vector Search Index](/tidb-cloud/vector-search-index.md) for building and using a vector search index.
 
@@ -79,7 +79,7 @@ However you cannot build a [Vector Search Index](/tidb-cloud/vector-search-index
 
 ## Comparison
 
-You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
+You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector Functions and Operators](/vector-search-functions-and-operators.md).
 
 Vector data types are compared element-wise numerically. Examples:
 
@@ -228,7 +228,7 @@ To cast vector into its string representation explicitly, use the `VEC_AS_TEXT()
 1 row in set (0.01 sec)
 ```
 
-For additional cast functions, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
+For additional cast functions, see [Vector Functions and Operators](/vector-search-functions-and-operators.md).
 
 ### Cast between Vector ⇔ other data types
 
@@ -240,7 +240,7 @@ It is currently not possible to cast between Vector and other data types (like `
 - You cannot store `NaN`, `Infinity`, or `-Infinity` values in the vector data type.
 - Currently Vector data types cannot store double-precision floating numbers. This will be supported in future release.
 
-For other limitations, see [Vector Search Limitations](/tidb-cloud/vector-search-limitations.md).
+For other limitations, see [Vector Search Limitations](/vector-search-limitations.md).
 
 ## MySQL compatibility
 
@@ -248,6 +248,6 @@ Vector data types are TiDB specific, and are not supported in MySQL.
 
 ## See also
 
-- [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
+- [Vector Functions and Operators](/vector-search-functions-and-operators.md)
 - [Vector Search Index](/tidb-cloud/vector-search-index.md)
-- [Improve Vector Search Performance](/tidb-cloud/vector-search-improve-performance.md)
+- [Improve Vector Search Performance](/vector-search-improve-performance.md)
