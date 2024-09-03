@@ -193,40 +193,21 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
     - **Import File Count**: select **Multiple files**.
     - **Included Schema Files**: select **No**.
-   - **Data Format**: select **CSV**.
-   - **Folder URI** or **File URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
-   - **Bucket Access** > **AWS Role ARN**: enter the Role-ARN you obtained.
+    - **Data Format**: select **CSV**.
+    - **Folder URI** or **File URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
+    - **Bucket Access** > **AWS Role ARN**: enter the Role-ARN you obtained.
 
-   If the location of the bucket is different from your cluster, confirm the compliance of cross region.
+    If the location of the bucket is different from your cluster, confirm the compliance of cross region.
 
-   TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
-<!--TODO: update step 4 and step 6-->
+4. Click **Connect**.
 
-4. Modify the file patterns and add the table filter rules if needed.
+5. In the **Destination** section, select the target database and table.
 
-    - **File Pattern**: modify the file pattern if you want to import CSV files whose filenames match a certain pattern to a single target table.
+6. Edit the CSV configuration if needed.
 
-        > **Note:**
-        >
-        > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
-
-        To modify the file pattern, click **Modify**, specify a custom mapping rule between CSV files and a single target table in the following fields, and then click **Scan**.
-
-        - **Source file name**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, enter the file name here directly. Note that the names of the CSV files must include the suffix ".csv".
-
-            For example:
-
-            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
-            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
-
-        - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
-
-    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more [table filter](/table-filter.md#syntax) rules in this area.
-
-5. Click **Next**.
-
-6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, `backslash escape`, and `trim last separator`.
+   You can also click **Edit CSV configuration** to update the CSV-specific configurations, including separator, delimiter, header, `backslash escape`, and `trim last separator`.
 
     > **Note:**
     >
