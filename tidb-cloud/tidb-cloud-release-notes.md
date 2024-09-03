@@ -14,9 +14,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Enhance the connection experience for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
 
-    - Refine the Connect dialog interface to offer TiDB Dedicated users a smoother and more efficient connection experience.
-    - TiDB Dedicated introduces "Networking page" in Cluster level to simplify the network configuration for your cluster.
-    - Remove the previous "Security Settings" page, and add a new "Password Setting" page. The IP access list settings move from "Security Settings" page to new "Networking" page.
+- Revise the **Connect** dialog interface to provide TiDB Dedicated users with a more streamlined and efficient connection experience.
+- Introduce a new **Networking** page at the cluster level in TiDB Dedicated to simplify network configuration for your cluster.
+- Replace the **Security Settings** page with a new **Password Setting** page. The IP access list settings have been moved from the **Security Settings** page to the new **Networking** page.
   
   For more information, see [Connect to TiDB Dedicated](/tidb-cloud/connect-to-tidb-cluster.md).
 
@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support exporting data from TiDB Serverless clusters using the [TiDB Cloud console](https://tidbcloud.com/). 
   
-    Previously, TiDB Cloud only supported exporting data using the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md). Now, you can export data from TiDB Serverless clusters to local files and Amazon S3 in the [TiDB Cloud console](https://tidbcloud.com/). 
+    Previously, TiDB Cloud only supported exporting data using the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md). Now, you can easily export data from TiDB Serverless clusters to local files and Amazon S3 in the [TiDB Cloud console](https://tidbcloud.com/). 
   
     For more information, see [Export Data from TiDB Serverless](/tidb-cloud/serverless-export.md) and [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md).
 
