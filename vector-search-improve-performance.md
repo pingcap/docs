@@ -11,7 +11,7 @@ TiDB Vector Search allows you to perform ANN queries that search for results sim
 
 > **Note**
 >
-> This practice is only applicable to [TiDB Serverless](/https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This practice is only applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 The [vector search index](https://docs.pingcap.com/tidbcloud/vector-search-index) dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
 
