@@ -10,7 +10,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## September 3, 2024
 
-
 **Console changes**
 
 - Support exporting data from TiDB Serverless clusters using the [TiDB Cloud console](https://tidbcloud.com/). 
