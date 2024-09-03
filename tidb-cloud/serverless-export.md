@@ -100,7 +100,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
    > **Tip:**
    >
-   > If you have neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
+   > If your cluster has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
 
 4. Click **Export**.
 

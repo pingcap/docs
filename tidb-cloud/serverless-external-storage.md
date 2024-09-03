@@ -37,7 +37,7 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
         
     - If you want to export data to Amazon S3, open the **Add New ARN** dialog as follows:
 
-        1. Click **Click here to export data to**  > **Amazon S3**.
+        1. Click **Export data to...**  > **Amazon S3**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Amazon S3** at the bottom of the page.
         2. Fill in the **Folder URI** field.
         3. Choose **AWS Role ARN** and click **Click here to create new one with AWS CloudFormation**.       
    
