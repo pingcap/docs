@@ -26,6 +26,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   
   For more information, see [Connect to TiDB Dedicated](/tidb-cloud/connect-to-tidb-cluster.md).
 
+- Enhance the data import experience for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) and [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters:
+
+    - Refine the layout of the **Import** page with a clearer layout.
+    - Unify the import steps for TiDB Serverless and TiDB Dedicated clusters.
+    - Simplify the AWS Role ARN creation process for easier connection setup.
+
+  For more information, see [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
+
 ## August 20, 2024
 
 **Console changes**
