@@ -31,6 +31,11 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 - `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
 
+> **Note:**
+>
+> - TiCDC only replicates incremental data. To initialize full data, use Dumpling/TiDB Lightning or BR.
+> - After the full data is initialized, you need to specify the `start-ts` as the TSO when the upstream backup is performed. For example, the `pos` value in the metadata file under the Dumpling directory, or the `backupTS` value in the log output after BR completes the backup.
+
 ## Configure sink URI for MySQL or TiDB
 
 Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:

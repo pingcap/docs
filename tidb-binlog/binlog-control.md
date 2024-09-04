@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tidb-binlog/binlog-control/']
 
 # binlogctl
 
-[Binlog Control](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) (`binlogctl` for short) is a command line tool for TiDB Binlog. You can use `binlogctl` to manage TiDB Binlog clusters.
+[Binlog Control](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) (`binlogctl` for short) is a command line tool for [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) (deprecated). You can use `binlogctl` to manage TiDB Binlog clusters.
 
 You can use `binlogctl` to:
 

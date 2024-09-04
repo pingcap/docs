@@ -15,8 +15,9 @@ max-connections = 100
 [api]
 addr = "0.0.0.0:3080"
 
-[log]
-level = "info"
+[ha]
+virtual-ip = "10.0.1.10/24"
+interface = "eth0"
 
 [security]
 [security.cluster-tls]
@@ -117,6 +118,28 @@ Configurations for the load balancing policy of TiProxy.
 + Support hot-reload: yes
 + Possible values: `resource`, `location`, `connection`
 + Specifies the load balancing policy. For the meaning of each possible value, see [TiProxy load balancing policies](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies).
+
+### ha
+
+High availability configurations for TiProxy.
+
+#### `virtual-ip`
+
++ Default value: `""`
++ Support hot-reload: no
++ Specifies the virtual IP address in the CIDR format, such as `"10.0.1.10/24"`. In a cluster with multiple TiProxy instances, only one instance binds to the virtual IP. If this instance goes offline, another TiProxy instance will automatically bind to the IP, ensuring clients can always connect to an available TiProxy through the virtual IP.
+
+> **Note:**
+>
+> - Virtual IP is only supported on Linux operating systems.
+> - The Linux user running TiProxy must have permission to bind IP addresses.
+> - The virtual IP and the IPs of all TiProxy instances must be within the same CIDR range.
+
+#### `interface`
+
++ Default value: `""`
++ Support hot-reload: no
++ Specifies the network interface to bind the virtual IP to, such as `"eth0"`. The virtual IP will be bound to a TiProxy instance only when both [`ha.virtual-ip`](#virtual-ip) and `ha.interface` are set.
 
 ### `labels`
 

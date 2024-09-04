@@ -80,7 +80,7 @@ For feature comparison between TiDB Serverless and TiDB Dedicated, see [TiDB: An
 
 - TiDB VPC (Virtual Private Cloud)
 
-    For each TiDB Cloud cluster, all TiDB nodes and auxiliary nodes, including TiDB Operator nodes and logging nodes, are deployed in an independent VPC.
+    For each TiDB Cloud cluster, all TiDB nodes and auxiliary nodes, including TiDB Operator nodes and logging nodes, are deployed in the same VPC.
 
 - TiDB Cloud Central Services
 

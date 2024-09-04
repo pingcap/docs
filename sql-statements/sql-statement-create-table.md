@@ -45,8 +45,8 @@ ColumnOptionList ::=
 ColumnOption ::=
     'NOT'? 'NULL'
 |   'AUTO_INCREMENT'
-|   PrimaryOpt 'KEY'
-|   'UNIQUE' 'KEY'?
+|   PrimaryOpt 'KEY' ( 'GLOBAL' | 'LOCAL' )?
+|   'UNIQUE' 'KEY'? ( 'GLOBAL' | 'LOCAL' )?
 |   'DEFAULT' DefaultValueExpr
 |   'SERIAL' 'DEFAULT' 'VALUE'
 |   'ON' 'UPDATE' NowSymOptionFraction
@@ -77,6 +77,7 @@ IndexOption ::=
     'COMMENT' String
 |   ( 'VISIBLE' | 'INVISIBLE' )
 |   ('USING' | 'TYPE') ('BTREE' | 'RTREE' | 'HASH')
+|   ( 'GLOBAL' | 'LOCAL' )
 
 ForeignKeyDef
          ::= ( 'CONSTRAINT' Identifier )? 'FOREIGN' 'KEY'
@@ -242,6 +243,7 @@ mysql> DESC t1;
 * All of the data types except spatial types are supported.
 * TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
 * TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
+* Setting a `PRIMARY KEY` or `UNIQUE INDEX` as a [global index](/partitioned-table.md#global-indexes) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
 
 <CustomContent platform="tidb">
 

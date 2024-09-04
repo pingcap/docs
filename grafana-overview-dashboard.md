@@ -42,7 +42,7 @@ To understand the key metrics displayed on the Overview dashboard, check the fol
 | TiDB | Transaction Duration | The execution time of a transaction |
 | TiDB | KV Cmd OPS | The number of executed KV commands. |
 | TiDB | KV Cmd Duration 99 | The execution time of the KV command. |
-| TiDB | PD TSO OPS | The number of TSO that TiDB obtains from PD per second. |
+| TiDB | PD TSO OPS | The number of gRPC requests per second that TiDB sends to PD (cmd) and the number of TSO requests (request); each gRPC request contains a batch of TSO requests. |
 | TiDB | PD TSO Wait Duration | The duration that TiDB waits for PD to return TSO. |
 | TiDB | TiClient Region Error OPS | The number of Region related errors returned by TiKV. |
 | TiDB | Lock Resolve OPS | The number of TiDB operations that resolve locks. When TiDB's read or write request encounters a lock, it tries to resolve the lock. |

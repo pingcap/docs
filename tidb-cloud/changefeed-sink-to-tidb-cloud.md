@@ -1,6 +1,6 @@
 ---
 title: Sink to TiDB Cloud
-Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated cluster to a TiDB Serverless cluster.
+summary: This document explains how to stream data from a TiDB Dedicated cluster to a TiDB Serverless cluster. There are restrictions on the number of changefeeds and regions available for the feature. Prerequisites include extending tidb_gc_life_time, backing up data, and obtaining the start position of TiDB Cloud sink. To create a TiDB Cloud sink, navigate to the cluster overview page, establish the connection, customize table and event filters, fill in the start replication position, specify the changefeed specification, review the configuration, and create the sink. Finally, restore tidb_gc_life_time to its original value.
 ---
 
 # Sink to TiDB Cloud

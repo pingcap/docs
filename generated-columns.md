@@ -153,5 +153,6 @@ The current limitations of JSON and generated columns are as follows:
 - You cannot add a stored generated column through `ALTER TABLE`.
 - You can neither convert a stored generated column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a stored generated column.
 - You cannot modify the expression of a stored generated column through the `ALTER TABLE` statement.
-- Not all [JSON functions](/functions-and-operators/json-functions.md) are supported;
+- Not all [JSON functions](/functions-and-operators/json-functions.md) are supported.
+- The [`NULLIF()` function](/functions-and-operators/control-flow-functions.md#nullif) is not supported. You can use the [`CASE` function](/functions-and-operators/control-flow-functions.md#case) instead.
 - Currently, the generated column index replacement rule is valid only when the generated column is a virtual generated column. It is not valid on the stored generated column, but the index can still be used by directly using the generated column itself.

@@ -40,7 +40,7 @@ When a TiDB server performs scaling in or scaling out, if you use a common load 
 
 ### Quick deployment
 
-TiProxy is integrated into [TiUP](https://github.com/pingcap/tiup), [TiDB Operator](https://github.com/pingcap/tidb-operator), [TiDB Dashboard](/dashboard/dashboard-intro.md), and [Grafana](/tiproxy/tiproxy-grafana.md), which reduces the deployment, operation, and management costs.
+TiProxy is integrated into [TiUP](https://github.com/pingcap/tiup), [TiDB Operator](https://github.com/pingcap/tidb-operator), [TiDB Dashboard](/dashboard/dashboard-intro.md), and [Grafana](/tiproxy/tiproxy-grafana.md), and supports built-in virtual IP management, reducing the deployment, operation, and management costs.
 
 ## User scenarios
 
@@ -91,7 +91,7 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
 3. Configure the TiProxy instances.
 
-    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances. You can use hardware load balancers to distribute traffic to each TiProxy instance, or configure virtual IP to route the traffic to the available TiProxy instance.
+    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances and configure a virtual IP by setting [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) and [`ha.interface`](/tiproxy/tiproxy-configuration.md#interface) to route the traffic to the available TiProxy instance.
 
     When selecting the model and number of TiProxy instances, consider the following factors:
 
@@ -106,12 +106,14 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
     ```yaml
     component_versions:
-      tiproxy: "v1.0.0"
+      tiproxy: "v1.2.0"
     server_configs:
       tiproxy:
         security.server-tls.ca: "/var/ssl/ca.pem"
         security.server-tls.cert: "/var/ssl/cert.pem"
         security.server-tls.key: "/var/ssl/key.pem"
+        ha.virtual-ip: "10.0.1.10/24"
+        ha.interface: "eth0"
     ```
 
 4. Start the cluster.

@@ -5,6 +5,12 @@ global:
   ssh_port: 22
   deploy_dir: "/tidb-deploy"
   data_dir: "/tidb-data"
+component_versions:
+  tiproxy: "v1.2.0"
+server_configs:
+  tiproxy:
+    ha.virtual-ip: "10.0.1.10/24"
+    ha.interface: "eth0"
 
 pd_servers:
   - host: 10.0.1.1
@@ -23,6 +29,7 @@ tikv_servers:
 
 tiproxy_servers:
   - host: 10.0.1.11
+  - host: 10.0.1.12
 
 monitoring_servers:
   - host: 10.0.1.13

@@ -43,6 +43,8 @@ IndexOption
            | 'COMMENT' stringLit
            | 'VISIBLE'
            | 'INVISIBLE'
+           | 'GLOBAL'
+           | 'LOCAL'
 
 IndexType
          ::= 'BTREE'
@@ -90,6 +92,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+* Setting a `PRIMARY KEY` or `UNIQUE INDEX` as a [global index](/partitioned-table.md#global-indexes) with the `GLOBAL` index option is a TiDB extension for [partitioned tables](/partitioned-table.md) and is not compatible with MySQL.
 
 ## See also
 
