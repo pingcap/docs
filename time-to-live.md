@@ -257,7 +257,11 @@ Currently, the TTL feature has the following limitations:
 * The TTL attribute cannot be set on temporary tables, including local temporary tables and global temporary tables.
 * A table with the TTL attribute does not support being referenced by other tables as the primary table in a foreign key constraint.
 * It is not guaranteed that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup job.
-* For tables that use [clustered indexes](/clustered-indexes.md), if the primary key is neither an integer nor a binary string type, the TTL job cannot be split into multiple tasks. This will cause the TTL job to be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow.
+* For tables that use [clustered indexes](/clustered-indexes.md), if the primary key is neither an integer nor a binary string type, the TTL job cannot be split into multiple tasks, which means that the scanning phase uses the [TableFullScan operator](/explain-overview.md#operator-overview) (if it can into multiple tasks, the scanning phase uses the TableRangeScan operator). This will cause the TTL job to be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow. The binary string types mainly refer to the following:
+    - `CHAR(N) CHARACTER SET BINARY`
+    - `VARCHAR(N) CHARACTER SET BINARY`
+    - `BINARY(N)`
+    - `VARBINARY(N)`
 
 ## FAQs
 
