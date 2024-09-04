@@ -39,7 +39,7 @@ To complete this tutorial, you need the following:
    npm install kysely @tidbcloud/kysely @tidbcloud/serverless
    ```
 
-3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `type: "module"` to the file:
+3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `"type": "module"` to the file:
 
    ```json
    {
@@ -89,7 +89,7 @@ To complete this tutorial, you need the following:
 
 1. Create a table in your TiDB Serverless cluster and insert some data. 
 
-    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+    You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -102,7 +102,7 @@ To complete this tutorial, you need the following:
    insert into test.person values (1,'pingcap','male')
    ```
 
-2. In the root directory of your project, create a file named `hello-word.ts` and add the following code:
+2. In the root directory of your project, create a file named `hello-world.ts` and add the following code:
 
    ```ts
    import { Kysely,GeneratedAlways,Selectable } from 'kysely'
@@ -201,7 +201,7 @@ mysql://[username]:[password]@[host]/[database]
 
 1. Create a table in your TiDB Serverless cluster and insert some data.
 
-    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
+    You can use [SQL Editor in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
    ```sql
    CREATE TABLE `test`.`person`  (

@@ -49,7 +49,7 @@ If you are using a GUI client, such as DBeaver, which does not accept a certific
 
 ### Root certificate default path
 
-In different operating systems, the default storage paths of the root certificate are as follows:
+In different operating systems, the default storage paths of the root certificate are as follows：
 
 **MacOS**
 

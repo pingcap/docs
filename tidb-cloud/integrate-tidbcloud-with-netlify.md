@@ -141,7 +141,7 @@ For a TiDB Dedicated cluster, you can get the connection string only from the Ti
     ```shell
     Adding local .netlify folder to .gitignore file...
     ? What would you like to do? +  Create & configure a new site
-    ? Team: your_username's team
+    ? Team: your_username’s team
     ? Site name (leave blank for a random name; you can change it later):
 
     Site Created

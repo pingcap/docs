@@ -1,6 +1,6 @@
 ---
 title: Sink to Cloud Storage
-Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated cluster to cloud storage, such as Amazon S3 and GCS.
+summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Amazon S3 or GCS. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
 ---
 
 # Sink to Cloud Storage
@@ -45,8 +45,8 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
-    3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created. 
-    4. Click **Add permissions**. Add the following read-only permissions to the role, and then click **Add**.
+    3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created.
+    4. Click **Add permissions**. Add the following permissions to the role, and then click **Add**.
 
         - storage.buckets.get
         - storage.objects.create
