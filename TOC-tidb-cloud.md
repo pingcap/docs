@@ -134,7 +134,7 @@
         -   [TiDB専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
         -   TiDB専用クラスタに接続する
             -   [接続方法の概要](/tidb-cloud/connect-to-tidb-cluster.md)
-            -   [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md)
+            -   [パブリック接続経由で接続](/tidb-cloud/connect-via-standard-connection.md)
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
             -   [プライベートエンドポイント（プライベートサービス接続）経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
             -   [VPCピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
@@ -205,7 +205,7 @@
                 -   [準備されていない実行プランのキャッシュ](/sql-non-prepared-plan-cache.md)
             -   制御実行計画
                 -   [概要](/control-execution-plan.md)
-                -   [オプティマイザーのヒント](/optimizer-hints.md)
+                -   [オプティマイザのヒント](/optimizer-hints.md)
                 -   [SQL プラン管理](/sql-plan-management.md)
                 -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
                 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
@@ -233,7 +233,8 @@
         -   [Amazon S3 または GCS から Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
         -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli.md)
     -   参照
-        -   [Amazon S3 アクセスと GCS アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)
+        -   [TiDB専用外部ストレージアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)
+        -   [TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データをインポートするための CSV 構成](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -261,7 +262,7 @@
         -   [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)
         -   [ベクトル関数と演算子](/tidb-cloud/vector-search-functions-and-operators.md)
         -   [ベクトルインデックス](/tidb-cloud/vector-search-index.md)
-    -   [性能を上げる](/tidb-cloud/vector-search-improve-performance.md)
+    -   [パフォーマンスの向上](/tidb-cloud/vector-search-improve-performance.md)
     -   [制限事項](/tidb-cloud/vector-search-limitations.md)
     -   [変更履歴](/tidb-cloud/vector-search-changelogs.md)
 -   データ サービス (ベータ版)
@@ -287,7 +288,7 @@
     -   [カフカシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
     -   [TiDB Cloudシンクへ](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
     -   [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
--   災害からの回復
+-   災害復旧
     -   [リカバリーグループの概要](/tidb-cloud/recovery-group-overview.md)
     -   [始める](/tidb-cloud/recovery-group-get-started.md)
     -   [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)
@@ -312,13 +313,13 @@
     -   データアクセス制御
         -   [顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
     -   データベースアクセス制御
-        -   [クラスタのSecurity設定を構成する](/tidb-cloud/configure-security-settings.md)
+        -   [クラスタパスワード設定を構成する](/tidb-cloud/configure-security-settings.md)
     -   監査管理
         -   [データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)
         -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
 -   請求する
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
-    -   [支払明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+    -   [請求の詳細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
     -   [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
     -   [請求プロファイル](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
     -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
@@ -331,7 +332,7 @@
 -   マネージド サービス プロバイダー プログラム
     -   [マネージドサービスプロバイダー](/tidb-cloud/managed-service-provider.md)
     -   [MSP 顧客](/tidb-cloud/managed-service-provider-customer.md)
--   翻訳
+-   API
     -   [APIの概要](/tidb-cloud/api-overview.md)
     -   APIリファレンス
         -   v1ベータ1
@@ -392,7 +393,7 @@
         -   [TiDB で SQL を探索する](/basic-sql-operations.md)
         -   SQL 言語の構造と構文
             -   属性
-                -   [自動増加](/auto-increment.md)
+                -   [自動インクリメント](/auto-increment.md)
                 -   [自動ランダム](/auto-random.md)
                 -   [シャード行IDビット](/shard-row-id-bits.md)
             -   [リテラル値](/literal-values.md)
@@ -731,6 +732,7 @@
     -   [2021](/tidb-cloud/release-notes-2021.md)
     -   [2020](/tidb-cloud/release-notes-2020.md)
 -   メンテナンス通知
+    -   [[2024-09-15] TiDB Cloudコンソールメンテナンス通知](/tidb-cloud/notification-2024-09-15-console-maintenance.md)
     -   [[2024-04-18] TiDB Cloudデータ移行 (DM) 機能メンテナンス通知](/tidb-cloud/notification-2024-04-18-dm-feature-maintenance.md)
     -   [[2024-04-16] TiDB Cloud監視機能メンテナンス通知](/tidb-cloud/notification-2024-04-16-monitoring-features-maintenance.md)
     -   [[2024-04-11] TiDB Cloudデータ移行 (DM) 機能メンテナンス通知](/tidb-cloud/notification-2024-04-11-dm-feature-maintenance.md)

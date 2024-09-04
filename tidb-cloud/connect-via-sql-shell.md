@@ -1,15 +1,15 @@
 ---
 title: Connect via SQL Shell
-summary: TiDB Cloud SQL Shellを使用すると、TiDB SQLを試し、TiDBとMySQLの互換性をテストし、データベースユーザー権限を管理できます。TiDBクラスターに接続する手順は次のとおりです。1. TiDB Cloudコンソールにログインし、プロジェクトのクラスターページに移動します。2. ターゲットクラスターの名前をクリックしてクラスターの概要ページに移動し、右上隅の接続をクリックします。3. ダイアログで、「Web SQL Shell」タブを選択し、「Open SQL Shell」をクリックします。4. パスワードの入力行に、現在のクラスターのrootパスワードを入力します。これで、アプリケーションがTiDBクラスターに接続されます。
+summary: SQL Shell 経由で TiDB クラスターに接続する方法を学習します。
 ---
 
 # SQL シェル経由で接続する {#connect-via-sql-shell}
 
-TiDB Cloud SQL Shell では、 TiDB SQL を試し、TiDB と MySQL の互換性をすばやくテストし、データベース ユーザー権限を管理できます。
+TiDB Cloud SQL Shell では、 TiDB SQL を試したり、TiDB と MySQL の互換性を素早くテストしたり、データベース ユーザー権限を管理したりできます。
 
 > **注記：**
 >
-> SQL Shell を使用して[TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)に接続することはできません。 TiDB サーバーレス クラスターに接続するには、 [TiDB サーバーレスクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
+> SQL Shell を使用して[TiDB サーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)に接続することはできません。TiDB Serverless クラスターに接続するには、 [TiDB サーバーレス クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
 
 SQL シェルを使用して TiDB クラスターに接続するには、次の手順を実行します。
 
@@ -17,10 +17,10 @@ SQL シェルを使用して TiDB クラスターに接続するには、次の�
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2.  ターゲット クラスターの名前をクリックしてクラスターの概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログが表示されます。
+2.  ターゲット クラスターの名前をクリックしてクラスターの概要ページに移動し、左側のナビゲーション ペインで**[ネットワーク] を**クリックします。
 
-3.  ダイアログで、 **「Web SQL Shell」**タブを選択し、 **「Open SQL Shell」**をクリックします。
+3.  **[ネットワーク]**ページで、右上隅にある**[Web SQL Shell]**をクリックします。
 
-4.  プロンプトが表示される**「パスワードの入力**」行に、現在のクラスターの root パスワードを入力します。これで、アプリケーションが TiDB クラスターに接続されます。
+4.  プロンプトの**「パスワードの入力」**行に、現在のクラスターのルート パスワードを入力します。これで、アプリケーションが TiDB クラスターに接続されます。

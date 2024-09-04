@@ -5,7 +5,7 @@ summary: node-mysql2 を使用して TiDB に接続する方法を学びます�
 
 # node-mysql2 で TiDB に接続する {#connect-to-tidb-with-node-mysql2}
 
-TiDB は MySQL 互換のデータベースであり、 [ノード-mysql2](https://github.com/sidorares/node-mysql2) Node.js 用の高速な[mysqljs/mysql](https://github.com/mysqljs/mysql)互換 MySQL ドライバーです。
+TiDB は MySQL 互換のデータベースであり、 [ノード-mysql2](https://github.com/sidorares/node-mysql2) Node.js 用の高速な[mysqljs/mysql](https://github.com/mysqljs/mysql)互換の MySQL ドライバーです。
 
 このチュートリアルでは、TiDB と node-mysql2 を使用して次のタスクを実行する方法を学習します。
 
@@ -84,7 +84,7 @@ npm install mysql2 dotenv --save
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイント タイプは**`Public`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
     -   **ブランチ**は`main`に設定されています。
     -   **Connect With は**`General`に設定されています。
     -   **オペレーティング システムは**、アプリケーションを実行するオペレーティング システムと一致します。
@@ -121,9 +121,11 @@ npm install mysql2 dotenv --save
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3.  **「どこからでもアクセスを許可」**をクリックし、 **「CA 証明書のダウンロード」**をクリックして CA 証明書をダウンロードします。
+3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+
+    TiDB Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -304,7 +306,7 @@ console.log(rsh.affectedRows);
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
 -   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 

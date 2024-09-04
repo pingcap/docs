@@ -132,7 +132,7 @@ TiDB では、システム変数[`tidb_enable_ordered_result_mode`](/system-vari
 
 ## TiDB のコーデックは、UTF-8 文字列がメモリ比較可能であることを保証できますか? キーが UTF-8 をサポートする必要がある場合、コーディングに関する提案はありますか? {#can-the-codec-of-tidb-guarantee-that-the-utf-8-string-is-memcomparable-is-there-any-coding-suggestion-if-our-key-needs-to-support-utf-8}
 
-TiDB はデフォルトで UTF-8 文字セットを使用し、現在は UTF-8 のみをサポートしています。TiDB の文字列は memcomparable 形式を使用します。
+TiDB のデフォルトの文字セットは`utf8mb4`です。文字列は memcomparable 形式です。TiDB の文字セットの詳細については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 
 ## トランザクション内のステートメントの最大数はいくつですか? {#what-is-the-maximum-number-of-statements-in-a-transaction}
 
@@ -186,7 +186,7 @@ Sqoop では、 `--batch`各バッチで 100 個のステートメントをコ�
 
 ## データを削除した後、storageスペースの回復に時間がかかる場合はどうすればいいですか? {#what-should-i-do-if-it-is-slow-to-reclaim-storage-space-after-deleting-data}
 
-TiDB はマルチバージョン同時実行制御 (MVCC) を使用するため、古いデータが新しいデータで上書きされると、古いデータは置き換えられず、新しいデータとともに保持されます。タイムスタンプは、データのバージョンを識別するために使用されます。データを削除しても、すぐにスペースが再利用されるわけではありません。同時トランザクションが行の以前のバージョンを参照できるように、ガベージ コレクションは遅延されます。これは、 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) システム変数を使用して構成できます。
+TiDB はマルチバージョン同時実行制御 (MVCC) を使用するため、古いデータが新しいデータで上書きされても、古いデータは置き換えられず、新しいデータとともに保持されます。データのバージョンを識別するためにタイムスタンプが使用されます。データを削除しても、すぐにスペースが再利用されるわけではありません。同時トランザクションが行の以前のバージョンを参照できるように、ガベージ コレクションは遅延されます。これは、 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) システム変数を使用して構成できます。
 
 ## <code>SHOW PROCESSLIST</code>システム プロセス ID を表示しますか? {#does-code-show-processlist-code-display-the-system-process-id}
 
@@ -247,7 +247,7 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 DDL 操作がブロックされておらず、各 TiDBサーバーがスキーマ バージョンを正常に更新でき、DDL 所有者ノードが正常に実行されていると仮定します。この場合、さまざまな DDL 操作の推定時間は次のようになります。
 
-| DDL操作タイプ                                                                                                                                                                   | 予定時刻                              |
+| DDL操作タイプ                                                                                                                                                                   | 推定所要時間                            |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------- |
 | 再編成DDL、例`MODIFY COLUMN` `ADD INDEX` （再編成タイプのデータ変更）                                                                                                                         | データ量、システム負荷、DDL パラメータ設定によって異なります。 |
 | 一般的なDDL `DROP INDEX` `DROP DATABASE`以外のDDLタイプ`ALTER TABLE DROP` `TRUNCATE TABLE`例えば`CREATE DATABASE` （ `CREATE TABLE`データのみ`ALTER TABLE ADD` `DROP TABLE` 、 `MODIFY COLUMN` | 約1秒                               |
@@ -403,7 +403,7 @@ ADMIN SHOW DDL;
 
 ### ホットスポットの問題を回避し、負荷分散を実現するにはどうすればよいでしょうか? TiDB ではホット パーティションまたは範囲が問題になりますか? {#how-to-avoid-hotspot-issues-and-achieve-load-balancing-is-hot-partition-or-range-an-issue-in-tidb}
 
-ホットスポットの原因となるシナリオについては、 [一般的な鍋](/troubleshoot-hot-spot-issues.md#common-hotspots)を参照してください。次の TiDB 機能は、ホットスポットの問題を解決するために設計されています。
+ホットスポットの原因となるシナリオについては、 [一般的な鍋料理](/troubleshoot-hot-spot-issues.md#common-hotspots)を参照してください。次の TiDB 機能は、ホットスポットの問題を解決するために設計されています。
 
 -   [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)属性。この属性を設定すると、行 ID が分散されて複数の領域に書き込まれるため、書き込みホットスポットの問題が軽減されます。
 -   [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)属性は、自動インクリメント主キーによってもたらされるホットスポットを解決するのに役立ちます。

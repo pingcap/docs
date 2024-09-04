@@ -17,7 +17,7 @@ summary: TiDB Vector Search を peewee と統合して埋め込みを保存し�
 
 -   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
 -   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB サーバーレス クラスター。TiDB クラウド クラスターがない場合は、 [TiDB サーバーレス クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成します。
+-   TiDB サーバーレス クラスター。TiDB Cloud クラスターがない場合は、 [TiDB サーバーレス クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
 ## サンプルアプリを実行する {#run-the-sample-app}
 
@@ -63,7 +63,7 @@ pip install peewee pymysql python-dotenv tidb-vector
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイント タイプは**`Public`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
 
     -   **ブランチ**は`main`に設定されています。
 

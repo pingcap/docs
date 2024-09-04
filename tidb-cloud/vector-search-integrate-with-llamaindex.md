@@ -19,7 +19,7 @@ summary: TiDB Cloudの Vector Search を LlamaIndex と統合する方法を学�
 -   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
 -   [ジュピターノートブック](https://jupyter.org/install)インストールされました。
 -   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB サーバーレス クラスター。TiDB Cloud クラスターがない場合は、 [TiDB サーバーレス クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   TiDB サーバーレス クラスター。TiDB クラウド クラスターがない場合は、 [TiDB サーバーレス クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成します。
 
 ## 始める {#get-started}
 
@@ -62,7 +62,7 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイント タイプは**`Public`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
     -   **ブランチ**は`main`に設定されています。
     -   **Connect With は**`SQLAlchemy`に設定されています。
     -   **オペレーティング システムは**環境に適合します。

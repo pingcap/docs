@@ -63,7 +63,7 @@ from langchain_text_splitters import CharacterTextSplitter
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイント タイプは**`Public`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
     -   **ブランチ**は`main`に設定されています。
     -   **Connect With は**`SQLAlchemy`に設定されています。
     -   **オペレーティング システムは**環境に適合します。

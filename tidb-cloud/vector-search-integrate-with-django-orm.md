@@ -61,7 +61,7 @@ mysqlclient のインストールで問題が発生した場合は、mysqlclient
 
 `django-tidb`は、Django ORM を拡張して TiDB 固有の機能 (たとえば、Vector Search) をサポートし、TiDB と Django 間の互換性の問題を解決する、Django 用の TiDB 方言です。
 
-`django-tidb`をインストールするには、Django のバージョンと一致するバージョンを選択します。たとえば、 `django==4.2.*`使用している場合は`django-tidb==4.2.*`をインストールします。マイナー バージョンは同じである必要はありません。最新のマイナー バージョンを使用することをお勧めします。
+`django-tidb`をインストールするには、Django のバージョンと一致するバージョンを選択します。たとえば、 `django==4.2.*`を使用している場合は`django-tidb==4.2.*`をインストールします。マイナー バージョンは同じである必要はありません。最新のマイナー バージョンを使用することをお勧めします。
 
 詳細については[django-tidb リポジトリ](https://github.com/pingcap/django-tidb)を参照してください。
 
@@ -73,7 +73,7 @@ mysqlclient のインストールで問題が発生した場合は、mysqlclient
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイントタイプは**`Public`に設定されています
+    -   **接続タイプは**`Public`に設定されています
 
     -   **ブランチ**は`main`に設定されています
 
@@ -137,7 +137,7 @@ python manage.py runserver
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-### TiDBクラスターに接続する {#connect-to-the-tidb-cluster}
+### TiDBクラスタに接続する {#connect-to-the-tidb-cluster}
 
 ファイル`sample_project/settings.py`に次の設定を追加します。
 

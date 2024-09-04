@@ -8,6 +8,32 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年9月3日 {#september-3-2024}
+
+**コンソールの変更**
+
+-   [TiDB Cloudコンソール](https://tidbcloud.com/)を使用して TiDB Serverless クラスターからデータをエクスポートすることをサポートします。
+
+    これまで、 TiDB Cloud[TiDB CloudCLI](/tidb-cloud/cli-reference.md)使用したデータのエクスポートのみがサポートされていました。現在では、 [TiDB Cloudコンソール](https://tidbcloud.com/)を使用して TiDB Serverless クラスターからローカル ファイルや Amazon S3 にデータを簡単にエクスポートできます。
+
+    詳細については[TiDB Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)を参照してください。
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの接続エクスペリエンスを強化します。
+
+    -   **接続**ダイアログ インターフェイスを改訂し、TiDB 専用ユーザーに、より合理化され効率的な接続エクスペリエンスを提供します。
+    -   クラスターのネットワーク構成を簡素化するために、新しいクラスター レベルの**ネットワーク**ページを導入しました。
+    -   **Security設定**ページを新しい**パスワード設定**ページに置き換え、IP アクセス リスト設定を新しい**ネットワーク**ページに移動します。
+
+    詳細については[TiDB専用に接続](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
+
+-   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)および[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデータ インポート エクスペリエンスを強化します。
+
+    -   **インポート**ページのレイアウトをより明確なレイアウトに改良します。
+    -   TiDB Serverless クラスターと TiDB Dedicated クラスターのインポート手順を統一します。
+    -   AWS ロール ARN 作成プロセスを簡素化し、接続のセットアップを容易にします。
+
+    詳細については[ファイルからTiDB Cloudにデータをインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)参照してください。
+
 ## 2024年8月20日 {#august-20-2024}
 
 **コンソールの変更**

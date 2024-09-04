@@ -37,7 +37,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   SQL ステートメントを使用して、テーブル内の指定されたパーティションのTiFlashレプリカをすぐに圧縮する機能をサポート[＃5315](https://github.com/pingcap/tiflash/issues/5315) @ [ヘヘチェン](https://github.com/hehechen)
 
-    v6.2.0 以降、TiDB はTiFlashのフルテーブルレプリカで[物理データを即座に圧縮する](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)の機能をサポートしています。適切なタイミングで SQL 文を手動で実行してTiFlash内の物理データを即時に圧縮できるため、storageスペースの削減とクエリパフォーマンスの向上に役立ちます。v6.4.0 では、圧縮するTiFlashレプリカデータの粒度を細かく調整し、テーブル内の指定されたパーティションのTiFlashレプリカを即時に圧縮することをサポートします。
+    v6.2.0 以降、TiDB はTiFlashのフルテーブルレプリカで[物理データを即座に圧縮する](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)の機能をサポートしています。適切なタイミングで SQL 文を手動で実行してTiFlash内の物理データを即時に圧縮できるため、storageスペースの削減とクエリパフォーマンスの向上に役立ちます。v6.4.0 では、圧縮するTiFlashレプリカデータの粒度を改良し、テーブル内の指定されたパーティションのTiFlashレプリカを即時に圧縮することをサポートします。
 
     SQL ステートメント`ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]`を実行すると、テーブル内の指定されたパーティションのTiFlashレプリカをすぐに圧縮できます。
 
@@ -47,7 +47,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
     `FLASHBACK CLUSTER TO TIMESTAMP`構文を使用すると、ガベージ コレクション (GC) の有効期間内にクラスターを特定の時点にすばやく復元できます。この機能を使用すると、DML の誤った操作を簡単かつ迅速に元に戻すことができます。たとえば、この構文を使用すると、誤って`WHERE`句なしで`DELETE`を実行した後、数分で元のクラスターを復元できます。この機能はデータベース バックアップに依存せず、データが変更された正確な時間を特定するために、さまざまな時点でデータをロールバックすることをサポートします`FLASHBACK CLUSTER TO TIMESTAMP`データベース バックアップを置き換えることはできないことに注意してください。
 
-    `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiCDC などのツールで実行されている PITR およびレプリケーション タスクを一時停止し、 `FLASHBACK`完了後に再起動する必要があります。そうしないと、レプリケーション タスクが失敗する可能性があります。
+    `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiCDC などのツールで実行されている PITR およびレプリケーション タスクを一時停止し、 `FLASHBACK`の完了後に再起動する必要があります。そうしないと、レプリケーション タスクが失敗する可能性があります。
 
     詳細については[ユーザードキュメント](/sql-statements/sql-statement-flashback-cluster.md)参照してください。
 
@@ -278,6 +278,7 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 
 | 変数名                                                                                                                                 | タイプを変更   | 説明                                                                                                                                                                                                                                    |
 | ----------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`max_execution_time`](/system-variables.md#max_execution_time)                                                                     | 修正済み     | v6.4.0 より前では、この変数はすべてのタイプのステートメントに適用されます。v6.4.0 以降では、この変数は読み取り専用ステートメントの最大実行時間のみを制御します。                                                                                                                                               |
 | [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)         | 修正済み     | GLOBAL スコープを削除し、 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)構成項目を使用してデフォルト値を変更できるようにします。この変数は、TiDB が悲観的トランザクションで一意の制約をチェックするタイミングを制御します。 |
 | [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                                 | 修正済み     | v6.4.0 から有効になり、 [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)の同時実行を制御します。デフォルト値は`64`です。                                                                                                      |
 | [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)                                        | 修正済み     | デフォルト値を`INT_ONLY`から`ON`に変更します。これは、主キーがデフォルトでクラスター化インデックスとして作成されることを意味します。                                                                                                                                                             |

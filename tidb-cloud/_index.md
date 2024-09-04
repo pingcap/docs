@@ -26,7 +26,7 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 
 [HTAPを試してみる](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
 
-[コンセプトの証明](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
+[概念実証](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
 
 </LearningPath>
 
@@ -114,7 +114,7 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 
 [プロジェクトアクセスの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
 
-[Security設定を構成する](https://docs.pingcap.com/tidbcloud/configure-security-settings)
+[パスワード設定を構成する](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
 </LearningPath>
 

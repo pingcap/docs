@@ -54,7 +54,7 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイント タイプは**`Public`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
 
     -   **ブランチ**は`main`に設定されています。
 

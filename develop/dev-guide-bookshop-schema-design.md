@@ -1,6 +1,6 @@
 ---
 title: Bookshop Example Application
-summary: Bookshop は、書籍を購入して評価するためのオンライン書店アプリです。テーブル構造とデータは、 TiUPまたはTiDB Cloud経由でインポートできます。方法 1 では、 TiUPを使用してサンプルデータをすばやく生成してインポートし、方法 2 では、AWS S3 からTiDB Cloudにデータをインポートします。データベース テーブルには、書籍、著者、ユーザー、評価、書籍の著者、注文が含まれます。データベース初期化スクリプト dbinit.sql` は、Bookshop アプリケーションのテーブル構造を作成します。
+summary: Bookshop は、書籍を購入して評価するためのオンライン書店アプリです。テーブル構造とデータは、 TiUPまたはTiDB Cloud経由でインポートできます。方法 1 では、 TiUPを使用してサンプル データをすばやく生成してインポートし、方法 2 では、Amazon S3 からTiDB Cloudにデータをインポートします。データベース テーブルには、書籍、著者、ユーザー、評価、書籍の著者、注文が含まれます。データベース初期化スクリプト dbinit.sql` は、Bookshop アプリケーションのテーブル構造を作成します。
 ---
 
 # 書店のサンプルアプリケーション {#bookshop-example-application}
@@ -89,23 +89,28 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 ### 方法2: TiDB Cloudインポート経由 {#method-2-via-tidb-cloud-import}
 
-TiDB Cloudのクラスター詳細ページで、**インポート**領域の**「データのインポート」**をクリックして、**データのインポート**ページに入ります。このページで、次の手順を実行して、Bookshop サンプル データを AWS S3 からTiDB Cloudにインポートします。
+1.  ターゲット クラスターの**インポート**ページを開きます。
 
-1.  **データ形式**として**SQLファイル**を選択します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-2.  次の**バケット URI**と**ロール ARN**を対応する入力ボックスにコピーします。
+        > **ヒント：**
+        >
+        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-    **バケットURI** :
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート] を**クリックします。
 
-        s3://developer.pingcap.com/bookshop/
+2.  **S3 からデータをインポートを**選択します。
 
-    **ロール ARN** :
+    TiDB Cloud Import を初めて使用する場合は、 **「Amazon S3 からのインポート」**を選択します。
 
-        arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
+3.  **「Amazon S3 からのデータのインポート**」ページで、次のソース データ情報を設定します。
 
-3.  **「次へ」**をクリックして**「ファイルとフィルター」**の手順に進み、インポートするファイルの情報を確認します。
-
-4.  もう一度**「次へ」**をクリックして**「プレビュー」**手順に進み、インポートするデータのプレビューを確認します。
+    -   **インポートファイル数**:**複数のファイル**を選択します。
+    -   **含まれるスキーマ ファイル**: **[はい]**を選択します。
+    -   **データ形式**: **SQL**を選択します。
+    -   **フォルダーURI** : `s3://developer.pingcap.com/bookshop/`を入力します。
+    -   **バケットアクセス**: **AWS ロール ARN**を選択します。
+    -   **ロール ARN** : `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`と入力します。
 
     この例では、次のデータが事前に生成されます。
 
@@ -115,7 +120,7 @@ TiDB Cloudのクラスター詳細ページで、**インポート**領域の**�
     -   1,000,000行の評価記録
     -   1,000,000行の注文記録
 
-5.  **「インポートの開始」**をクリックしてインポート プロセスを開始し、 TiDB Cloud がインポートを完了するまで待ちます。
+4.  **[接続]** &gt; **[インポートの開始]**をクリックしてインポート プロセスを開始し、 TiDB Cloud がインポートを完了するまで待ちます。
 
 TiDB Cloudにデータをインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
 
@@ -164,7 +169,7 @@ WHERE table_schema LIKE 'bookshop';
 | タイプ    | 列挙型          | 本の種類（雑誌、アニメーション、教材など） |
 | ストック   | ビッグイント(20)   | ストック                  |
 | 価格     | 小数点(15,2)    | 価格                    |
-| 公開日時   | 日付時刻         | 公開日                   |
+| 公開日時   | 日時           | 公開日                   |
 
 ### <code>authors</code>表 {#code-authors-code-table}
 
@@ -175,7 +180,7 @@ WHERE table_schema LIKE 'bookshop';
 | id     | ビッグイント(20)   | 著者の一意のID                     |
 | 名前     | varchar(100) | 著者名                          |
 | 性別     | タイニーイント(1)   | 生物学的性別（0: 女性、1: 男性、NULL: 不明） |
-| 生年     | 小さい整数(6)     | 生年                           |
+| 生年月日   | 小さい整数(6)     | 生年                           |
 | 死亡年    | 小さい整数(6)     | 死亡年                          |
 
 ### <code>users</code>テーブル {#code-users-code-table}
@@ -197,7 +202,7 @@ WHERE table_schema LIKE 'bookshop';
 | 書籍ID   | ビッグイント | 書籍の一意の ID ( [本](#books-table)にリンク)     |
 | ユーザーID | ビッグイント | ユーザーの一意の識別子（ [ユーザー](#users-table)にリンク） |
 | スコア    | ちっちゃい  | ユーザー評価 (1-5)                           |
-| 評価     | 日付時刻   | 評価時間                                   |
+| 評価     | 日時     | 評価時間                                   |
 
 ### <code>book_authors</code>テーブル {#code-book-authors-code-table}
 
@@ -218,7 +223,7 @@ WHERE table_schema LIKE 'bookshop';
 | 書籍ID   | ビッグイント(20) | 書籍の一意の ID ( [本](#books-table)にリンク)          |
 | ユーザーID | ビッグイント(20) | ユーザー固有の識別子（ [ユーザー](#users-table)に関連付けられている） |
 | 量      | タイニーイント(4) | 購入数量                                        |
-| 注文日時   | 日付時刻       | 購入時間                                        |
+| 注文日時   | 日時         | 購入時間                                        |
 
 ## データベース初期化スクリプト<code>dbinit.sql</code> {#database-initialization-script-code-dbinit-sql-code}
 
@@ -286,6 +291,6 @@ CREATE TABLE `bookshop`.`orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 [TiDB コミュニティ](https://ask.pingcap.com/)について質問します。

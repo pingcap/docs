@@ -56,7 +56,7 @@ WordPress データベース接続を TiDB Serverless に構成します。
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイント タイプは**`Public`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
     -   **Connect With は**`WordPress`に設定されています。
     -   **オペレーティング システム**は`Debian/Ubuntu/Arch`に設定されています。
     -   **データベースは**、使用するデータベース（例： `test` ）に設定されます。
@@ -103,6 +103,6 @@ WordPress データベース接続を TiDB Serverless に構成します。
 2.  左側の**「スキーマ」**タブで、Wordpress に接続したデータベースをクリックします。
 3.  そのデータベースのテーブルのリストに、Wordpress テーブル ( `wp_posts`や`wp_comments`など) が表示されていることを確認します。
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 [TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。

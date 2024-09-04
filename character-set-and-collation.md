@@ -1,6 +1,6 @@
 ---
 title: Character Set and Collation
-summary: Learn about the supported character sets and collations in TiDB.
+summary: TiDB でサポートされている文字セットと照合順序について学習します。
 ---
 
 # 文字セットと照合順序 {#character-set-and-collation}
@@ -9,9 +9,9 @@ summary: Learn about the supported character sets and collations in TiDB.
 
 ## コンセプト {#concepts}
 
-文字セットは、シンボルとエンコーディングのセットです。TiDB のデフォルトの文字セットは utf8mb4 で、これは MySQL 8.0 以降のデフォルトと一致します。
+文字セットは、シンボルとエンコーディングのセットです。TiDB のデフォルトの文字セットは`utf8mb4`で、これは MySQL 8.0 以降のデフォルトの文字セットと一致します。
 
-照合順序順序は、文字セット内の文字を比較するための一連の規則と、文字の並べ替え順序です。たとえば、バイナリ照合順序では、 `A`と`a`等しいとは見なされません。
+照合順序とは、文字セット内の文字を比較するための一連の規則と、文字の並べ替え順序です。たとえば、バイナリ照合順序では、 `A`と`a`等しいとは見なされません。
 
 ```sql
 SET NAMES utf8mb4 COLLATE utf8mb4_bin;
@@ -404,7 +404,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ## 文字の有効性チェック {#validity-check-of-characters}
 
-指定された文字セットが`utf8`または`utf8mb4`場合、TiDB は有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDB は`incorrect utf8 value`エラーを報告します。TiDB のこの文字の有効性チェックは、MySQL 8.0 と互換性がありますが、 MySQL 5.7以前のバージョンとは互換性がありません。
+指定された文字セットが`utf8`または`utf8mb4`場合、TiDB は有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDB は`incorrect utf8 value`エラーを報告します。TiDB のこの文字の有効性チェックは MySQL 8.0 と互換性がありますが、 MySQL 5.7以前のバージョンとは互換性がありません。
 
 このエラー報告を無効にするには、 `set @@tidb_skip_utf8_check=1;`使用して文字チェックをスキップします。
 

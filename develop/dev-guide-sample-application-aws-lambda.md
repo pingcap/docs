@@ -87,7 +87,7 @@ npm install
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **エンドポイントタイプは**`Public`に設定されています
+    -   **接続タイプは**`Public`に設定されています
 
     -   **ブランチ**は`main`に設定されています
 
@@ -364,11 +364,11 @@ console.log(rsh.affectedRows);
 
 -   AWS Lambda 関数で TiDB を使用する方法の詳細については、 [TiDB-Lambda-integration/aws-lambda-bookstore デモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)を参照してください。また、AWS API Gateway を使用して、アプリケーション用の RESTful API を構築することもできます。
 -   [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)から`mysql2`の使用法について詳しく学びます。
--   [`Lambda`のAWS開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)から AWS Lambda の使用方法を詳しく学びます。
+-   [`Lambda`のAWS開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)から AWS Lambda の使用方法について詳しく学びます。
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
 -   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
