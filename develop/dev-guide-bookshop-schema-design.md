@@ -1,6 +1,6 @@
 ---
 title: Bookshop Example Application
-summary: Bookshop is an online bookstore app for buying and rating books. You can import table structures and data via TiUP or TiDB Cloud. Method 1 uses TiUP to quickly generate and import sample data, while Method 2 imports data from AWS S3 to TiDB Cloud. The database tables include books, authors, users, ratings, book_authors, and orders. The database initialization script `dbinit.sql` creates the table structures for the Bookshop application.
+summary: Bookshop is an online bookstore app for buying and rating books. You can import table structures and data via TiUP or TiDB Cloud. Method 1 uses TiUP to quickly generate and import sample data, while Method 2 imports data from Amazon S3 to TiDB Cloud. The database tables include books, authors, users, ratings, book_authors, and orders. The database initialization script `dbinit.sql` creates the table structures for the Bookshop application.
 ---
 
 # Bookshop Example Application
@@ -89,26 +89,28 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 ### Method 2: Via TiDB Cloud Import
 
-On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import** area to enter the **Data Import** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
+1. Open the **Import** page for your target cluster.
 
-1. Select **SQL File** for **Data Format**.
-2. Copy the following **Bucket URI** and **Role ARN** to the corresponding input boxes:
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-    **Bucket URI**:
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-    ```
-    s3://developer.pingcap.com/bookshop/
-    ```
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-   **Role ARN**:
+2. Select **Import data from S3**.
 
-    ```
-    arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
-    ```
+    If this is your first time using TiDB Cloud Import, select **Import From Amazon S3**.
 
-3. Click **Next** to go to the **File and filter** step to confirm the information of the files to be imported.
+3. On the **Import Data from Amazon S3** page, configure the following source data information:
 
-4. Click **Next** again to go to the **Preview** step to confirm the preview of the data to be imported.
+    - **Import File Count**: select **Multiple files**.
+    - **Included Schema Files**: select **Yes**.
+    - **Data Format**: select **SQL**.
+    - **Folder URI**: enter `s3://developer.pingcap.com/bookshop/`.
+    - **Bucket Access**: select **AWS Role ARN**.
+    - **Role ARN**: enter `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`.
 
     In this example, the following data is generated in advance:
 
@@ -118,7 +120,7 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
     - 1,000,000 rows of rating records
     - 1,000,000 rows of order records
 
-5. Click **Start Import** to start the import process and wait for TiDB Cloud to complete the import.
+4. Click **Connect** > **Start Import** to start the import process and wait for TiDB Cloud to complete the import.
 
 For more information about how to import or migrate data to TiDB Cloud, see [TiDB Cloud Migration Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview).
 
