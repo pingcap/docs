@@ -36,9 +36,9 @@ In most scenarios, you are recommended to use private endpoint connection over V
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
-## Set up a private endpoint with AWS
+## Set up a private endpoint connection and connect to your cluster
 
-To connect to your TiDB Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
+To connect to your TiDB Dedicated cluster via a private endpoint, complete the follow these steps:
 
 1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -48,16 +48,15 @@ To connect to your TiDB Dedicated cluster via a private endpoint, complete the [
 
 If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
 
-### Prerequisites
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **Private Endpoint** > **AWS** tab to view the AWS private endpoints.
-4. In the upper-right corner, click **Create Private Endpoint Connection**.
-
 ### Step 1. Select a TiDB cluster
 
-In the **Cluster** list, select the TiDB Dedicated cluster that you want to establish a private endpoint connection.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target TiDB cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection**.
+
+> **Note:**
+>
+> If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page in the left navigation pane.
 
 ### Step 2. Create an AWS interface endpoint
 
@@ -67,7 +66,7 @@ In the **Cluster** list, select the TiDB Dedicated cluster that you want to esta
 
 If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 
-1. On the **Create AWS Private Endpoint Connection** page, fill in the **Your VPC ID** and **Your Subnet IDs** fields. You can get the IDs from your [AWS Management Console](https://console.aws.amazon.com/).
+1. Fill in the **Your VPC ID** and **Your Subnet IDs** fields. You can find these IDs from your [AWS Management Console](https://console.aws.amazon.com/). For multiple subnets, enter the IDs separated by spaces.
 2. Click **Generate Command** to get the following endpoint creation command.
 
     ```bash
@@ -147,11 +146,13 @@ To enable private DNS in your AWS Management Console:
 </div>
 <div label="Use AWS CLI">
 
-To enable private DNS using your AWS CLI, copy the command and run it in your AWS CLI.
+To enable private DNS using your AWS CLI, copy the following `aws ec2 modify-vpc-endpoint` command from the **Create Private Endpoint Connection** page and run it in your AWS CLI.
 
 ```bash
 aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
 ```
+
+Alternatively, you can find the command on the **Networking** page of your cluster. Locate the private endpoint and click **...*** > **Enable DNS** in the **Action** column.
 
 </div>
 </SimpleTab>
@@ -160,14 +161,20 @@ Click **Create Private Endpoint Connection** in the TiDB Cloud console to finali
 
 Then you can connect to your TiDB cluster.
 
+> **Tip:**
+>
+> You can view and manage private endpoint connections on two pages:
+>
+> - Cluster-level **Networking** page: click **Networking** in the left navigation pane of the cluster overview page.
+> - Project-level **Network Access** page: click **Network Access** in the left navigation pane of the **Project Settings** page.
+
 ### Step 5. Connect to your TiDB cluster
 
-After you have enabled the private DNS, go back to the TiDB Cloud console and take the following steps:
+After you have accepted the private endpoint connection, you are redirected back to the connection dialog.
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **...** in the **Action** column.
-2. Click **Connect**. A connection dialog is displayed.
-3. Select the **Private Endpoint** tab. The private endpoint you just created is displayed under **Step 1: Create Private Endpoint**.
-4. Under **Step 2: Connect your connection**, click **Connect**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+1. Wait for the private endpoint connection status to change from **System Checking** to **Active** (approximately 5 minutes).
+2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
+3. Connect to your cluster with the connection string.
 
 > **Tip:**
 >
@@ -175,7 +182,10 @@ After you have enabled the private DNS, go back to the TiDB Cloud console and ta
 
 ### Private endpoint status reference
 
-When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed on the [**Private Endpoint** page](#prerequisites).
+When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed on the following pages:
+
+- Cluster-level **Networking** page: click **Networking** in the left navigation pane of the cluster overview page.
+- Project-level **Network Access** page: click **Network Access** in the left navigation pane of the **Project Settings** page.
 
 The possible statuses of a private endpoint are explained as follows:
 

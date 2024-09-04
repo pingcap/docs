@@ -46,7 +46,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 3. Click **Allow Access from Anywhere**.
 
-    For more details about how to obtain the connection string, see [Connect to TiDB Dedicated via Standard Connection](/tidb-cloud/connect-via-standard-connection.md).
+    For more details about how to obtain the connection string, see [Connect to TiDB Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
 </div>
 </SimpleTab>

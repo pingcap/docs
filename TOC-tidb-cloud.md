@@ -133,7 +133,7 @@
     - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
     - Connect to Your TiDB Dedicated Cluster
       - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
-      - [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md)
+      - [Connect via Public Connection](/tidb-cloud/connect-via-standard-connection.md)
       - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
       - [Connect via Private Endpoint (Private Service Connect) with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
@@ -312,7 +312,7 @@
   - Data Access Control
       - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
   - Database Access Control
-    - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
+    - [Configure Cluster Password Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
     - [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)

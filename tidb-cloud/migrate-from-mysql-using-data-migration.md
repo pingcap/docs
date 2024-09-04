@@ -106,7 +106,7 @@ To quickly test a migration job, you can use the `root` account of the TiDB Clou
 
 Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
-- If you use public IP (this is, standard connection) for network connection, make sure that the upstream database can be connected through the public network.
+- If you use public IP (this is, public connection) for network connection, make sure that the upstream database can be connected through the public network.
 
 - If you use AWS VPC Peering or Google Cloud VPC Network Peering, see the following instructions to configure the network.
 

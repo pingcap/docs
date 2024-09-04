@@ -70,23 +70,22 @@ Before you begin to create an endpoint:
         - [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin)
         - [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor)
 
-Perform the following steps to go to the **Google Cloud Private Endpoint** page:
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **Private Endpoint** > **Google Cloud** tab to view the Google Cloud private endpoints.
-4. In the upper-right corner, click **Create Private Endpoint Connection**.
-
 ### Step 1. Select a TiDB cluster
 
-In the **Cluster** list, select the TiDB Dedicated cluster that you want to establish a private endpoint connection.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target TiDB cluster to go to its overview page. You can select a cluster with any of the following statuses:
 
-You can select a cluster with any of the following statuses:
+    - **Available**
+    - **Restoring**
+    - **Modifying**
+    - **Importing**
 
-- **Available**
-- **Restoring**
-- **Modifying**
-- **Importing**
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection**.
+
+    > **Note:**
+    >
+    > If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page in the left navigation pane.
 
 ### Step 2. Create a Google Cloud private endpoint
 
@@ -107,11 +106,11 @@ If you see an error `not received connection request from endpoint`, make sure t
 
 ### Step 4. Connect to your TiDB cluster
 
-After you have accepted the endpoint connection, take the following steps to connect to your TiDB cluster:
+After you have accepted the private endpoint connection, you are redirected back to the connection dialog.
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **...** in the **Action** column.
-2. Click **Connect**. A connection dialog is displayed.
-3. Select the **Private Endpoint** tab. The private endpoint you just created is displayed. Copy the command to connect to the TiDB cluster.
+1. Wait for the private endpoint connection status to change from **System Checking** to **Active** (approximately 5 minutes).
+2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
+3. Connect to your cluster with the connection string.
 
 ### Private endpoint status reference
 
