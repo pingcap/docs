@@ -121,7 +121,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
     1. In the TiDB Cloud console, choose a project and a cluster deployed on Google Cloud Platform.
     2. Select **Settings** > **Audit Settings**. The **Audit Logging** dialog box is displayed.
-    3. Click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
+    3. Click **Show Google Cloud Server Account ID**, and then copy the Service Account ID for later use.
 
 2. In the Google Cloud console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions of the storage container exists.
 
