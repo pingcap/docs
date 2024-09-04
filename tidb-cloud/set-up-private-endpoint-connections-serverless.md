@@ -42,7 +42,7 @@ To connect to your TiDB Serverless cluster via a private endpoint, follow these 
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target TiDB Serverless cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the **Endpoint Type** drop-down list, select **Private**.
+3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
 
     > **Note:**
@@ -103,7 +103,7 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the **Endpoint Type** drop-down list, select **Private**.
+3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
 5. Connect to your cluster with the connection string.
 
