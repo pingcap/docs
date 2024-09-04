@@ -33,7 +33,7 @@ To complete this tutorial, you need:
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. In the connection dialog, select **MySQL CLI** from the **Connect With** drop-down list and keep the default setting of the **Endpoint Type** as **Public**.
+3. In the connection dialog, select **MySQL CLI** from the **Connect With** drop-down list and keep the default setting of the **Connection Type** as **Public**.
 
 4. If you have not set a password yet, click **Generate Password** to generate a random password.
 
