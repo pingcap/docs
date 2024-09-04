@@ -16,6 +16,8 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `RESOURCE_GROUP` column to show the resource group name.
 * A `SESSION_ALIAS` column to show the alias of the current session.
 * A `ROWS_AFFECTED` column to show the number of rows currently affected by the statement.
+* A `TIDB_CPU` column to show the `TIDB` server CPU time in seconds used by the statement.
+* A `TIKV_CPU` column to show the `TIKV` server CPU time in seconds used by the statement.
 
 ```sql
 USE information_schema;
@@ -41,6 +43,8 @@ DESC processlist;
 | RESOURCE_GROUP | varchar(32)         | NO   |      |         |       |
 | SESSION_ALIAS  | varchar(64)         | NO   |      |         |       |
 | ROWS_AFFECTED  | bigint(21) unsigned | YES  |      | NULL    |       |
+| TIDB_CPU       | double              | NO   |      | 0       |       |
+| TIKV_CPU       | double              | NO   |      | 0       |       |
 +----------------+---------------------+------+------+---------+-------+
 ```
 
@@ -65,6 +69,8 @@ SELECT * FROM information_schema.processlist\G
 RESOURCE_GROUP: default
  SESSION_ALIAS:
  ROWS_AFFECTED: 0
+      TIDB_CPU: 0
+      TIKV_CPU: 0
 ```
 
 Fields in the `PROCESSLIST` table are described as follows:
@@ -84,6 +90,8 @@ Fields in the `PROCESSLIST` table are described as follows:
 * `RESOURCE_GROUP`: The resource group name.
 * `SESSION_ALIAS`: The alias of the current session.
 * `ROWS_AFFECTED`: The number of rows currently affected by the statement.
+* `TIDB_CPU`: The `TIDB` server CPU time in seconds used by the statement.
+* `TIKV_CPU`: The `TIKV` server CPU time in seconds used by the statement.
 
 ## CLUSTER_PROCESSLIST
 
@@ -94,9 +102,9 @@ SELECT * FROM information_schema.cluster_processlist;
 ```
 
 ```sql
-+-----------------+------------+------+-----------------+------+---------+------+------------+------------------------------------------------------+------------------------------------------------------------------+------+------+----------------------------------------+----------------+---------------+---------------+
-| INSTANCE        | ID         | USER | HOST            | DB   | COMMAND | TIME | STATE      | INFO                                                 | DIGEST                                                           | MEM  | DISK | TxnStart                               | RESOURCE_GROUP | SESSION_ALIAS | ROWS_AFFECTED |
-+-----------------+------------+------+-----------------+------+---------+------+------------+------------------------------------------------------+------------------------------------------------------------------+------+------+----------------------------------------+----------------+---------------+---------------+
-| 127.0.0.1:10080 | 1268776964 | root | 127.0.0.1:59922 | NULL | Query   |    0 | autocommit | SELECT * FROM information_schema.cluster_processlist | b1e38e59fbbc3e2b35546db5c8053040db989a497ac6cd71ff8dd4394395701a |    0 |    0 | 07-29 12:39:24.282(451471727468740609) | default        |               |             0 |
-+-----------------+------------+------+-----------------+------+---------+------+------------+------------------------------------------------------+------------------------------------------------------------------+------+------+----------------------------------------+----------------+---------------+---------------+
++-----------------+------------+------+-----------------+------+---------+------+------------+------------------------------------------------------+------------------------------------------------------------------+------+------+----------------------------------------+----------------+---------------+---------------+----------+----------+
+| INSTANCE        | ID         | USER | HOST            | DB   | COMMAND | TIME | STATE      | INFO                                                 | DIGEST                                                           | MEM  | DISK | TxnStart                               | RESOURCE_GROUP | SESSION_ALIAS | ROWS_AFFECTED | TIDB_CPU | TIKV_CPU |
++-----------------+------------+------+-----------------+------+---------+------+------------+------------------------------------------------------+------------------------------------------------------------------+------+------+----------------------------------------+----------------+---------------+---------------+----------+----------+
+| 127.0.0.1:10080 | 1268776964 | root | 127.0.0.1:59922 | NULL | Query   |    0 | autocommit | SELECT * FROM information_schema.cluster_processlist | b1e38e59fbbc3e2b35546db5c8053040db989a497ac6cd71ff8dd4394395701a |    0 |    0 | 07-29 12:39:24.282(451471727468740609) | default        |               |             0 |        0 |        0 |
++-----------------+------------+------+-----------------+------+---------+------+------------+------------------------------------------------------+------------------------------------------------------------------+------+------+----------------------------------------+----------------+---------------+---------------+----------+----------+
 ```
