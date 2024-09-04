@@ -83,7 +83,7 @@ Name the CSV files as follows:
 
 > **Note:**
 >
-> If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Patterns** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
+> If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
 
 To export data to Amazon S3, do the following:
 
@@ -194,7 +194,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
     - **Import File Count**: select **Multiple files**.
     - **Included Schema Files**: select **No**.
     - **Data Format**: select **CSV**.
-    - **Folder URI** or **File URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
+    - **Folder URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
     - **Bucket Access** > **AWS Role ARN**: enter the Role-ARN you obtained.
 
     If the location of the bucket is different from your cluster, confirm the compliance of cross region.
@@ -204,6 +204,22 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 4. Click **Connect**.
 
 5. In the **Destination** section, select the target database and table.
+
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+
+    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
+
+    You can also use wildcards to match the source files. For example:
+
+    - `s3://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
+
+    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
+
+    Note that only `?` and `*` are supported.
+
+    > **Note:**
+    >
+    > The URI must contain the data source folder.
 
 6. Edit the CSV configuration if needed.
 
