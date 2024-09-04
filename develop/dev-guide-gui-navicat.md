@@ -96,11 +96,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Click **Allow Access from Anywhere**.
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
 
-4. Click **Download CA cert** to download the CA file.
+    In addition to the **Public** connection type, TiDB Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+
+4. Click **CA cert** to download the CA certificate.
 
 5. Launch Navicat for MySQL, click **Connection** in the upper-left corner, and select **MySQL** from the drop-down list.
 
