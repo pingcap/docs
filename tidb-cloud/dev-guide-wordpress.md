@@ -56,7 +56,7 @@ Configure the WordPress database connection to TiDB Serverless.
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`.
+    - **Connection Type** is set to `Public`.
     - **Connect With** is set to `WordPress`.
     - **Operating System** is set to `Debian/Ubuntu/Arch`.
     - **Database** is set to the database you want to use—for example, `test`.
