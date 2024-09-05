@@ -3,20 +3,18 @@ title: AWS Channel Partner Private Offer Customer
 summary: Learn how to become an AWS Channel Partner Private Offer (CPPO) customer.
 ---
 
-# AWS Channel Partner Private Offer Customer
+# AWS Channel Partner Private Offer (CPPO) Customer
 
-An AWS Channel Partner Private Offer (CPPO) customer is a customer who subscribles the TiDB Cloud services in AWS Marketplace directly from Channel Partner. 
+An AWS Channel Partner Private Offer (CPPO) customer subscribes to TiDB Cloud services through a Channel Partner in the AWS Marketplace.
 
-Compared to the direct TiDB Cloud customer, the AWS CPPO customer pays invoices through AWS Marketplace, instead of paying directly to PingCAP.
+Unlike direct TiDB Cloud customers, AWS CPPO customers pay invoices via the AWS Marketplace rather than directly to PingCAP. However, all other daily operations in the TiDB Cloud console remain the same for both AWS CPPO and direct TiDB Cloud customers.
 
-Other daily operations in the TiDB Cloud console are the same for both direct TiDB Cloud customers and AWS CPPO customers.
+This document outlines how to check both future and historical bills.
 
-This document describes how to check future and history bills.
+## View your future bills
 
-## Check your future bills
+As an AWS CPPO customer, your invoices will be processed and paid through the AWS Marketplace.
 
-Once you successfully become an AWS CPPO customer, you will pay invoices through AWS Marketplace. 
+## View your history bills
 
-## Check your history bills
-
-If you have migrated from a direct TiDB Cloud account to an AWS CPPO customer account, you can view your history bills prior to the migration by visiting **Billing** > **Bills** > **History** in the TiDB Cloud console.
+If you have migrated from a direct TiDB Cloud account to an AWS CPPO account, you can still access your billing history before the migration. To do so, go to **Billing** > **Bills** > **History** in the TiDB Cloud console.
