@@ -14,7 +14,7 @@ There are two types of TiDB Cloud partners:
 
 ## AWS Channel Partner Private Offer (CPPO)
 
-[AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers) enables customers to purchase TiDB Cloud in AWS Marketplace, directly from channel partners, helping customers to leverage a channel partner who has knowledge of their business, localized support, and expertise, and receive the same fast and friction-free purchase experience that they are accustomed to in AWS Marketplace.
+[AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers) allows customers to purchase TiDB Cloud through the AWS Marketplace directly from channel partners. This enables customers to benefit from the partner's business knowledge, localized support, and expertise, while still enjoying the fast and seamless purchasing experience they expect from AWS Marketplace.
 
 ### Become an AWS CPPO partner of PingCAP
 
@@ -25,7 +25,7 @@ If you are interested in the CPPO program and would like to join as a partner, [
 As an AWS CPPO partner, there are two methods for you to manage your daily management tasks:
 
 - [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
-- Partner Management API. You can find the Open API documentation in the Support page of the TiDB Cloud Partner console. 
+- Partner Management API. You can find the open API documentation on the **Support** page of the TiDB Cloud Partner console. 
 
 ## Managed Service Provider (MSP)
 
