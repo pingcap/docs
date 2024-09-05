@@ -3,7 +3,7 @@
 
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB Cloud
-  - [What is TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
+  - [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
