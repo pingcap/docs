@@ -18,7 +18,7 @@ There are two types of TiDB Cloud partners:
 
 ### Become an AWS CPPO partner of PingCAP
 
-If you are interested in the CPPO program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll.
+If you are interested in the AWS CPPO program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll.
 
 ### Manage daily tasks for AWS CPPO customers
 
