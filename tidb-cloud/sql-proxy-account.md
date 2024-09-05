@@ -5,7 +5,7 @@ summary: Learn about the SQL proxy account in TiDB Cloud.
 
 # SQL Proxy Account
 
-A SQL proxy account is a SQL user account that is automatically created by TiDB Cloud for each <!--to be confirmed --> TiDB Cloud user. For example, `testuser@pingcap.com` is a TiDB Cloud user account, while `3jhEcSimm7keKP8.testuser._41mqK6H4` is its corresponding SQL proxy account.
+A SQL proxy account is a SQL user account that is automatically created by TiDB Cloud to access the database by SQL Editor and Data Service on behalf of a TiDB Cloud user. For example, `testuser@pingcap.com` is a TiDB Cloud user account, while `3jhEcSimm7keKP8.testuser._41mqK6H4` is its corresponding SQL proxy account.
 
 SQL proxy accounts are needed for the SQL Editor or Data Service to access the database on behalf of a TiDB Cloud user.
 
