@@ -11,7 +11,7 @@ Compared to the direct TiDB Cloud customer, the AWS CPPO customer pays invoices 
 
 Other daily operations in the TiDB Cloud console are the same for both direct TiDB Cloud customers and AWS CPPO customers.
 
-This document describes how to check history and future bills.
+This document describes how to check future and history bills.
 
 ## Check your future bills
 
