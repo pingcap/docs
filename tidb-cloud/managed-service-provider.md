@@ -31,7 +31,7 @@ We will carefully evaluate your request and get back to you soon.
 
 ## Manage daily tasks for MSP customers
 
-As a TiDB Cloud Managed Service Provider partner or an AWS CPPO (Channel Partner Private Offer) Partner, you have two methods to manage your daily management tasks:
+As a PingCAP MSP partner or an AWS CPPO (Channel Partner Private Offer) Partner, you have two methods to manage your daily management tasks:
 
 - [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
 - Open API
