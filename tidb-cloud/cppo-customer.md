@@ -9,7 +9,7 @@ An AWS Channel Partner Private Offer (CPPO) customer is a customer who subscribl
 
 Compared to the direct TiDB Cloud customer, the AWS CPPO customer pays invoices through AWS Marketplace, instead of paying directly to PingCAP.
 
-Other daily operations on the TiDB Cloud console are the same for both direct TiDB Cloud customers and AWS CPPO customers.
+Other daily operations in the TiDB Cloud console are the same for both direct TiDB Cloud customers and AWS CPPO customers.
 
 This document describes how to check history and future bills.
 
