@@ -1,5 +1,5 @@
 ---
-title: AWS Channel Partner Private Offer Customer
+title: AWS Channel Partner Private Offer (CPPO) Customer
 summary: Learn how to become an AWS Channel Partner Private Offer (CPPO) customer.
 ---
 
