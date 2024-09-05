@@ -24,7 +24,6 @@ If you are interested in the CPPO program and would like to join as a partner, [
 
 As an AWS CPPO partner, you can manage your daily management tasks in the [TiDB Cloud Partner console](https://partner-console.tidbcloud.com). 
 
-
 ## Managed Service Provider (MSP)
 
 An MSP is a partner who resells TiDB Cloud and provides value-added services, including but not limited to TiDB Cloud organization management, billing services, and technical support.
