@@ -22,7 +22,10 @@ If you are interested in the CPPO program and would like to join as a partner, [
 
 ### Manage daily tasks for AWS CPPO customers
 
-As an AWS CPPO partner, you can manage your daily management tasks in the [TiDB Cloud Partner console](https://partner-console.tidbcloud.com). 
+As an AWS CPPO partner, there are two methods for you to manage your daily management tasks:
+
+- [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
+- Partner Management API. You can find the Open API documentation in the Support page of the TiDB Cloud Partner console. 
 
 ## Managed Service Provider (MSP)
 
