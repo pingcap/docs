@@ -31,7 +31,12 @@ We will carefully evaluate your request and get back to you soon.
 
 ## Manage daily tasks for MSP customers
 
-Once you are approved as a PingCAP MSP, you will receive an API key for the [MSP Management API](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp). 
+As a TiDB Cloud Managed Service Provider partner or an AWS CPPO (Channel Partner Private Offer) Partner, you have two methods to manage your daily management tasks:
+
+- [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
+- Open API
+
+After your complete the registration as a TiDB Cloud parnter, you will receive an email notification to activate the account in the TiDB Cloud Partner console and receive an API key for the [MSP Management API](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp). 
 
 You can use the MSP management API to manage daily tasks:
 
