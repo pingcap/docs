@@ -11,6 +11,18 @@ Unlike direct TiDB Cloud customers, AWS CPPO customers pay invoices via the AWS 
 
 This document outlines how to check both future and historical bills.
 
+## Migrate from a direct TiDB Cloud account to an AWS CPPO customer account
+
+> **Tip:**
+>
+> Direct customers are the end customers who purchase TiDB Cloud and pay invoices directly from PingCAP.
+
+If you are currently a direct customer with a TiDB Cloud account, you can ask your AWS CPPO to migrate your account to an AWS CPPO customer account.
+
+The migration will take effect on the 1st of a future month. Discuss with your AWS CPPO partner to determine the specific effective date.
+
+On the effective day of migration, you will receive an email notification.
+
 ## View your future bills
 
 As an AWS CPPO customer, your invoices will be processed and paid through the AWS Marketplace.
