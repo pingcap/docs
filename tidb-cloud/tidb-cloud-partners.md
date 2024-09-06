@@ -20,7 +20,7 @@ There are two types of TiDB Cloud partners:
 
 If you are interested in the AWS CPPO program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll.
 
-### Manage daily tasks for AWS CPPO customers
+### Manage daily tasks for an AWS CPPO
 
 As an AWS CPPO partner, you have two ways to manage your daily management tasks:
 
@@ -51,7 +51,7 @@ The information above will be used to generate an exclusive sign-up URL and page
 
 We will carefully evaluate your request and get back to you soon.
 
-### Manage daily tasks for MSP customers
+### Manage daily tasks for an MSP
 
 As a TiDB Cloud MSP partner, there are two methods for you to manage your daily management tasks:
 
