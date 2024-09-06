@@ -258,10 +258,15 @@ Currently, the TTL feature has the following limitations:
 * A table with the TTL attribute does not support being referenced by other tables as the primary table in a foreign key constraint.
 * It is not guaranteed that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup job.
 * For tables that use [clustered indexes](/clustered-indexes.md), TTL tasks are split into multiple subtasks only in the following scenarios:
-    - The first column of the primary key or composite primary key is of integer or binary string type.
+    - The first column of the primary key or composite primary key is of integer or binary string types. The binary string types mainly refer to the following:
+        - `CHAR(N) CHARACTER SET BINARY`
+        - `VARCHAR(N) CHARACTER SET BINARY`
+        - `BINARY(N)`
+        - `VARBINARY(N)`
+        - `BIT(N)`
     - The character set of the first column of the primary key or composite primary key is `utf8` or `utf8mb4` and the collate is `utf8_bin`, `utf8mb4_bin` or `utf8mb4_0900_bin`.
     - For tables that do not support splitting TTL job to multiple subtasks, the TTL job will be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow.
-    - For tables where the primary key column type is `utf8` or `utf8mb4`, subtasks are split only based on the range of visible ASCII characters. If there are many primary key values have the same ASCII prefix, it may cause uneven task splitting.
+    - For tables where the primary key column type is `utf8` or `utf8mb4`, subtasks are split only based on the range of visible ASCII characters. If many primary key values have the same ASCII prefix, it might cause uneven task splitting.
 
 ## FAQs
 
