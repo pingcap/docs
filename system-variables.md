@@ -3439,7 +3439,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `104857600` (which is 100 MiB)
-- TiDB uses a background worker to evict plans from the Instance Plan Cache periodically, and this variable controls the target memory size of the cache, which means TiDB tries to evict the plan cache to this memory size each time.
+- TiDB evict plans from the Instance Plan Cache periodically in the background, and this variable controls the target memory size of the cache, which means TiDB tries to evict the plan cache to this memory size each time.
 
 ### tidb_instance_plan_cache_max_mem_size <span class="version-mark">New in v8.4</span>
 
@@ -3452,7 +3452,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `125829120` (which is 120 MiB)
-- The maximum memory size the Instance Plan Cache can use. This variable must be larger than `tidb_instance_plan_cache_target_mem_size`.
+- This variable controls the maximum memory size the Instance Plan Cache can use. This variable must be larger than `tidb_instance_plan_cache_target_mem_size`.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
