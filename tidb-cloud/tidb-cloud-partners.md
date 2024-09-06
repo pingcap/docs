@@ -15,7 +15,7 @@ There are two types of TiDB Cloud partners:
 
 ## Reseller through AWS Channel Partner Private Offer (CPPO)
 
-Reseller through [AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers) allows customers to purchase TiDB Cloud through the AWS Marketplace directly from channel partners. This enables customers to benefit from the partner's business knowledge, localized support, and expertise, while still enjoying the fast and seamless purchasing experience they expect from AWS Marketplace.
+Reseller through [AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers) allows customers to purchase TiDB Cloud through the AWS Marketplace directly from a reseller. This enables customers to benefit from the partner's business knowledge, localized support, and expertise, while still enjoying the fast and seamless purchasing experience they expect from AWS Marketplace.
 
 ### Become a reseller of PingCAP
 

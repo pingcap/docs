@@ -5,7 +5,7 @@ summary: Learn how to become a reseller's customer.
 
 # Reseller's Customer
 
-A reseller's customer subscribes to TiDB Cloud services through a Channel Partner in the AWS Marketplace.
+A reseller's customer subscribes to TiDB Cloud services through a reseller in the AWS Marketplace.
 
 Unlike direct TiDB Cloud customers, a reseller's customers pay invoices via the AWS Marketplace rather than directly to PingCAP. However, all other daily operations in the TiDB Cloud console remain the same for both AWS CPPO and direct TiDB Cloud customers.
 
