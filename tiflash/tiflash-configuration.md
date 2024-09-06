@@ -208,7 +208,8 @@ delta_index_cache_size = 0
     ## see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
     # dt_enable_logical_split = false
 
-    ## `max_threads`: The default value is 0 and when it is set to 0,
+    ## `max_threads`: The internal execute concurrency when TiFlash execute a MPP task.
+    ## The default value is 0 and when it is set to 0,
     ## TiFlash will use the number of cpu cores as the execute concurrency.
     ## This parameter only takes effect
     ## when the system variable `tidb_max_tiflash_threads` is set to -1.
