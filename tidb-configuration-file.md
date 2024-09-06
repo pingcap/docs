@@ -512,7 +512,7 @@ Configuration items related to performance.
 
 > **Note:**
 >
-> When creating a cluster, do not set `cross-join` to false. Otherwise the cluster will fail to start up.
+> When creating a cluster, **DO NOT** set `cross-join` to false. Otherwise, the cluster will fail to start up.
 
 ### `stats-lease`
 
