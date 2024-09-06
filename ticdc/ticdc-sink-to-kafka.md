@@ -220,7 +220,7 @@ You can use topic = "xxx" to specify a Topic dispatcher and use topic expression
 The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
 
 - `prefix`: optional. Indicates the prefix of the Topic Name.
-- `[{schema}]`: required. Used to match the schema name. Starting from v7.1.4, this parameter is optional.
+- `{schema}`: required. Used to match the schema name. Starting from v7.1.4, this parameter is optional.
 - `middle`: optional. Indicates the delimiter between schema name and table name.
 - `{table}`: optional. Used to match the table name.
 - `suffix`: optional. Indicates the suffix of the Topic Name.
