@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud Partners
 summary: Learn how to become an AWS Channel Partner Private Offer (CPPO) partner and Managed Service Provider (MSP) partner.
+aliases: ['/tidbcloud/managed-service-provider']
 ---
 
 # TiDB Cloud Partners
