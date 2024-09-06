@@ -217,7 +217,7 @@ dispatchers = [
 
 You can use topic = "xxx" to specify a Topic dispatcher and use topic expressions to implement flexible topic dispatching policies. It is recommended that the total number of topics be less than 1000.
 
-The format of the Topic expression is `[prefix][{schema}][middle][{table}][suffix]`.
+The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
 
 - `prefix`: optional. Indicates the prefix of the Topic Name.
 - `[{schema}]`: required. Used to match the schema name. Starting from v7.1.4, this parameter is optional.
