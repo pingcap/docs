@@ -19,7 +19,7 @@ This document outlines how to check both future and historical bills.
 
 If you are currently a direct customer with a TiDB Cloud account, you can ask your AWS CPPO to migrate your account to an AWS CPPO customer account.
 
-The migration will take effect on the 1st of a future month. Discuss with your AWS CPPO partner to determine the specific effective date.
+The migration will take effect on the first of a future month. Discuss with your AWS CPPO partner to determine the specific effective date.
 
 On the effective day of migration, you will receive an email notification.
 
