@@ -1,29 +1,29 @@
 ---
-title: TiDB Cloud Partners
-summary: Learn how to become an AWS Channel Partner Private Offer (CPPO) partner and Managed Service Provider (MSP) partner.
+title: TiDB Cloud Partner Web Console
+summary: Learn how to use the TiDB Cloud Partner web console as a reseller and Managed Service Provider (MSP).
 aliases: ['/tidbcloud/managed-service-provider']
 ---
 
-# TiDB Cloud Partners
+# TiDB Cloud Partner Web Console
 
-The TiDB Cloud Partner programs aim to establish and foster a strong partnership between PingCAP and our partners to benefit our customers. 
+TiDB Cloud Partner Web Console is designed for partners focused on SaaS solutions, with the goal of building and nurturing a strong partnership between PingCAP and our partners to better serve our customers.
 
 There are two types of TiDB Cloud partners:
 
-- AWS Channel Partner Private Offer (CPPO)
+- Reseller: Resell TiDB Cloud through AWS Marketplace Channel Partner Private Offer (CPPO)
 - Managed Service Provider (MSP)
 
-## AWS Channel Partner Private Offer (CPPO)
+## Reseller through AWS Channel Partner Private Offer (CPPO)
 
-[AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers) allows customers to purchase TiDB Cloud through the AWS Marketplace directly from channel partners. This enables customers to benefit from the partner's business knowledge, localized support, and expertise, while still enjoying the fast and seamless purchasing experience they expect from AWS Marketplace.
+Reseller through [AWS CPPO](https://aws.amazon.com/marketplace/features/cpprivateoffers) allows customers to purchase TiDB Cloud through the AWS Marketplace directly from channel partners. This enables customers to benefit from the partner's business knowledge, localized support, and expertise, while still enjoying the fast and seamless purchasing experience they expect from AWS Marketplace.
 
-### Become an AWS CPPO partner of PingCAP
+### Become a reseller of PingCAP
 
-If you are interested in the AWS CPPO program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll.
+If you are interested in the reseller program and would like to join as a partner, [contact sales](https://www.pingcap.com/partners/become-a-partner/) to enroll.
 
-### Manage daily tasks for an AWS CPPO
+### Manage daily tasks for a reseller
 
-As an AWS CPPO partner, you have two ways to manage your daily management tasks:
+As a reseller, you have two ways to manage your daily management tasks:
 
 - [TiDB Cloud Partner console](https://partner-console.tidbcloud.com)
 - Partner Management API. You can find the open API documentation on the **Support** page of the TiDB Cloud Partner console. 
