@@ -510,6 +510,10 @@ Configuration items related to performance.
 - Default value: `true`
 - TiDB supports executing the `JOIN` statement without any condition (the `WHERE` field) of both sides tables by default; if you set the value to `false`, the server refuses to execute when such a `JOIN` statement appears.
 
+> **Note:**
+>
+> When creating a cluster, **DO NOT** set `cross-join` to false. Otherwise, the cluster will fail to start up.
+
 ### `stats-lease`
 
 - The time interval of reloading statistics, updating the number of table rows, checking whether it is needed to perform the automatic analysis, using feedback to update statistics and loading statistics of columns.
