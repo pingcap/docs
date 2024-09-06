@@ -2424,6 +2424,19 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `OFF`
 - This variable controls whether Index Join is supported when the inner table has `Selection` or `Projection` operators on it. The default value `OFF` means that Index Join is not supported in this scenario.
 
+### tidb_enable_instance_plan_cache <span class="version-mark">New in v8.4.0</span>
+
+> **Warning:**
+>
+> Currently, the Instance Plan Cache is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the Instance Plan Cache feature.
+
 ### tidb_enable_ordered_result_mode
 
 - Scope: SESSION | GLOBAL
@@ -3414,6 +3427,30 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[1, 32]`
 - Unit: Rows
 - This variable is used to set the number of rows for the initial chunk during the execution process. The number of rows for a chunk directly affects the amount of memory required for a single query. You can roughly estimate the memory needed for a single chunk by considering the total width of all columns in the query and the number of rows for the chunk. Combining this with the concurrency of the executor, you can make a rough estimation of the total memory required for a single query. It is recommended that the total memory for a single chunk does not exceed 16 MiB.
+
+### tidb_instance_plan_cache_target_mem_size <span class="version-mark">New in v8.4</span>
+
+> **Warning:**
+>
+> Currently, the Instance Plan Cache is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `104857600` (which is 100 MiB)
+- TiDB uses a background worker to evict plans from the Instance Plan Cache periodically, and this variable controls the target memory size of the cache, which means TiDB tries to evict the plan cache to this memory size each time.
+
+### tidb_instance_plan_cache_max_mem_size <span class="version-mark">New in v8.4</span>
+
+> **Warning:**
+>
+> Currently, the Instance Plan Cache is an experimental feature. It is not recommended that you use it in production environments.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `125829120` (which is 120 MiB)
+- The maximum memory size the Instance Plan Cache can use. This variable must be larger than `tidb_instance_plan_cache_target_mem_size`.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
