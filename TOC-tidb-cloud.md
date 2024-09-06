@@ -328,9 +328,10 @@
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
   - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
   - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
-- Managed Service Provider Program
-  - [Managed Service Provider](/tidb-cloud/managed-service-provider.md)
+- TiDB Cloud Partner Web Console
+  - [TiDB Cloud Partners](/tidb-cloud/tidb-cloud-partners.md)
   - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
+  - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - API Reference
