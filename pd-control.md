@@ -762,6 +762,7 @@ Usage:
 >> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
 >> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
+<<<<<<< HEAD
 >> scheduler add shuffle-leader-scheduler                  // Randomly exchange the leader on different stores
 >> scheduler add shuffle-region-scheduler                  // Randomly schedule the Regions on different stores
 >> scheduler add evict-slow-store-scheduler       // When there is one and only one slow store, evict all Region leaders of that store
@@ -771,6 +772,16 @@ Usage:
 >> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
 >> scheduler resume all                           // Continue to run all schedulers
 >> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
+=======
+>> scheduler add evict-slow-store-scheduler                // When there is one and only one slow store, evict all Region leaders of that store
+>> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
+>> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
+>> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
+>> scheduler resume balance-region-scheduler               // Continue to run the balance-region scheduler
+>> scheduler resume all                                    // Continue to run all schedulers
+>> scheduler config balance-hot-region-scheduler           // Display the configuration of the balance-hot-region scheduler
+>> scheduler describe balance-region-scheduler             // Display the running state and related diagnostic information of the balance-region scheduler
+>>>>>>> 10774858b8 (pd: remove shuffle schedulers (#18760))
 ```
 
 ### `scheduler config balance-leader-scheduler`
