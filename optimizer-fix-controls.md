@@ -75,8 +75,9 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `ON`
 - Possible values: `ON`, `OFF`
-- This variable sets the minimum row estimate that the optimizer will allow. Due to challenges that all optimizers face in accuracy in estimating the number of qualified rows for each plan step in a query plan, it is common that an optimizer will set a lower limit. The default (`ON`) implemented in TiDB is the new behavior and is consistent with other databases.
-- `OFF` means disable this minimum value, which is the prior behavior (before this enhancement and fix-control).
+- Due to challenges in accurately estimating the number of qualified rows for each plan step in a query plan, the optimizer often sets a smaller value for `estRows`. This variable controls whether to limit this minimum value.
+- `ON`: sets the minimum value of `estRows` to 1, which is the new behavior introduced in v8.4.0 and is consistent with other databases.
+- `OFF`: disables the minimum row estimate limit, which maintains the behavior consistent with versions before v8.4.0. In this case, `estRows` might be zero.
 
 ### [`52869`](https://github.com/pingcap/tidb/issues/52869) <span class="version-mark">New in v8.1.0</span>
 
