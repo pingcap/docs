@@ -1129,7 +1129,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
 - Range: `[1, 128]`. Before v8.4.0, the value range is `[1, ]`.
-- This variable specifies the concurrency for writing collected statistics for a partitioned table when TiDB analyzes it.
+- This variable specifies the concurrency for writing collected statistics when TiDB analyzes a partitioned table.
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
