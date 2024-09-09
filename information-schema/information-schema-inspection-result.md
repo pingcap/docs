@@ -264,7 +264,7 @@ In `critical-error` diagnostic rule, the following two diagnostic rules are exec
     |  ----  | ----  |  ----  |  ----  |
     | TiDB | panic-count | tidb_panic_count_total_count | Panic occurs in TiDB. |
     | TiDB | binlog-error | tidb_binlog_error_total_count | An error occurs when TiDB writes binlog. |
-    | TiKV | critical-error | tikv_critical_error_total_coun | The critical error of TiKV. |
+    | TiKV | critical-error | tikv_critical_error_total_count | The critical error of TiKV. |
     | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | The TiKV scheduler is too busy, which makes TiKV temporarily unavailable. |
     | TiKV | coprocessor-is-busy | tikv_coprocessor_is_busy_total_count | The TiKV Coprocessor is too busy. |
     | TiKV | channel-is-full | tikv_channel_full_total_count | The "channel full" error occurs in TiKV. |
