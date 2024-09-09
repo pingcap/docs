@@ -1,9 +1,9 @@
 ---
-title: SQL Proxy Account
-summary: Learn about the SQL proxy account in TiDB Cloud.
+title: SQL Proxy Accounts
+summary: Learn about SQL proxy accounts in TiDB Cloud.
 ---
 
-# SQL Proxy Account
+# SQL Proxy Accounts
 
 A SQL proxy account is a SQL user account that is automatically created by TiDB Cloud to access the database by SQL Editor and Data Service on behalf of a TiDB Cloud user. For example, `testuser@pingcap.com` is a TiDB Cloud user account, while `3jhEcSimm7keKP8.testuser._41mqK6H4` is its corresponding SQL proxy account.
 
@@ -26,11 +26,11 @@ If you want to identify whether a specific SQL account is a SQL proxy account, t
     SHOW GRANTS for 'username';
     ```
 
-## SQL proxy account creation
+## How SQL proxy accounts are created
 
-The SQL proxy account is created during TiDB Cloud cluster initialization for the TiDB Cloud user who is granted a role with permissions in the cluster.
+The SQL proxy account is automatically created during TiDB Cloud cluster initialization for the TiDB Cloud user who is granted a role with permissions in the cluster.
 
-## SQL proxy account deletion
+## How SQL proxy accounts are deleted
 
 When a user is removed from [an organization](/tidb-cloud/manage-user-access.md#remove-an-organization-member) or [a project](/tidb-cloud/manage-user-access.md#remove-a-project-member), or their role changes to one that does not have access to the cluster, the SQL proxy account is automatically deleted.
 
@@ -40,15 +40,12 @@ Note that if a SQL proxy account is manually deleted, it will be automatically r
 
 In some cases, the SQL proxy account username is exactly the same as the TiDB Cloud username, but in other cases it is not exactly the same. The SQL proxy account username is determined by the length of the TiDB Cloud user's email address. The rules are as follows:
 
-- TiDB Cloud Dedicated:
-
-    - If the length of the TiDB Cloud Dedicated user's email address is less than 32 characters, the SQL proxy account name is the email address. <!--to be confirmed; give an example-->
-    - If the length of the TiDB Cloud Dedicated user's email address is equal to or more than 32 characters, the SQL proxy account is `prefix($email, 23)_prefix(base58(sha1($email)), 8)`.
-
-- TiDB Cloud Serverless:
-
-    - If the TiDB Cloud Serverless user's email address is less than 15 characters, the SQL proxy account is `serverless_unique_prefix + "." + email`. <!--to be confirmed; give an example-->
-    - If the TiDB Cloud Serverless user's email address is equal to or more than 15 characters, the SQL proxy account is `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)`.
+| Environment | Email length | Username format |
+| ----------- | ------------ | --------------- |
+| TiDB Cloud Dedicated | < 32 characters | Full email address |
+| TiDB Cloud Dedicated | >= 32 characters | `prefix($email, 23)_prefix(base58(sha1($email)), 8)` |
+| TiDB Cloud Serverless | < 15 characters | `serverless_unique_prefix + "." + email` |
+| TiDB Cloud Serverless | >= 15 characters | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
 
 ## SQL proxy account password
 
