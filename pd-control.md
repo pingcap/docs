@@ -806,8 +806,6 @@ Usage:
 >> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
 >> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
->> scheduler add shuffle-leader-scheduler                  // Randomly exchange the leader on different stores
->> scheduler add shuffle-region-scheduler                  // Randomly schedule the Regions on different stores
 >> scheduler add evict-slow-store-scheduler                // When there is one and only one slow store, evict all Region leaders of that store
 >> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
