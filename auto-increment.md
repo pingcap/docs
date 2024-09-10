@@ -358,7 +358,7 @@ In some scenarios, you might need to clear the auto-increment ID cache to ensure
 - In the scenario of incremental replication using [Data Migration (DM)](/dm/dm-overview.md), once the replication is complete, data writing to the downstream TiDB switches from DM to your application's writing operations. Meanwhile, the ID writing mode of the auto-increment column usually switches from explicit insertion to implicit allocation.
 - When your application involves both explicit ID insertion and implicit ID allocation, you need to clear the auto-increment ID cache to avoid conflicts between future implicitly allocated IDs and previously explicitly inserted IDs, which could result in primary key conflict errors. For more information, see [Uniqueness](/auto-increment.md#uniqueness).
 
-You can execute the `ALTER TABLE` statement with `AUTO_INCREMENT = 0` to clear the auto-increment ID cache on all TiDB nodes in the cluster. For example:
+To clear the auto-increment ID cache on all TiDB nodes in the cluster, you can execute the `ALTER TABLE` statement with `AUTO_INCREMENT = 0`. For example:
 
 ```sql
 CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
