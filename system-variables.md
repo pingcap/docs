@@ -4390,12 +4390,16 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
+> **Note:**
+>
+> Starting from v8.4.0, the default for this variable was changed from `OFF` to `ON`.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
-- Default value: `OFF`
-- After you set the value of this variable to `ON`, the optimizer always prefers range scans over full table scans.
+- Default value: `ON`
+- After you set the value of this variable to `ON`, the optimizer will prefer range scans over full table scans for tables without statistics (pseudo statistics) or if the table is empty (zero statistics).
 - In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan. After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index range scan.
 
 ```sql
