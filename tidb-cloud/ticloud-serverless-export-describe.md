@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export describe`.
 
 # ticloud serverless export describe
 
-Get the export information of a TiDB Serverless cluster:
+Get the export information of a TiDB Cloud Serverless cluster:
 
 ```shell
 ticloud serverless export describe [flags]

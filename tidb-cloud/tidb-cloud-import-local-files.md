@@ -12,7 +12,7 @@ Currently, this method supports importing one CSV file for one task into either 
 ## Limitations
 
 - Currently, TiDB Cloud only supports importing a local file in CSV format within 50 MiB for one task.
-- Importing local files is supported only for TiDB Serverless clusters, not for TiDB Dedicated clusters.
+- Importing local files is supported only for TiDB Cloud Serverless clusters, not for TiDB Cloud Dedicated clusters.
 - You cannot run more than one import task at the same time.
 - When you import a CSV file into an existing table in TiDB Cloud and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
     - If the extra columns are not the primary keys or the unique keys, no error will be reported. Instead, these extra columns will be populated with their [default values](/data-type-default-values.md).

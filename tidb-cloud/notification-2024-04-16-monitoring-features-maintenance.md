@@ -19,11 +19,11 @@ This notification describes the details that you need to know about the TiDB Clo
 
 During the maintenance window, the monitoring features in the following regions will be affected:
 
-- TiDB Dedicated clusters：
+- TiDB Cloud Dedicated clusters：
     - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
     - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
 
-- TiDB Serverless clusters：
+- TiDB Cloud Serverless clusters：
     - Cloud Provider: AWS, Region: Tokyo (ap-northeast-1)
     - Cloud Provider: AWS, Region: N. Virginia (us-east-1)
 

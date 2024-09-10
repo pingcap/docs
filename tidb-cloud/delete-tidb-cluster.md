@@ -22,15 +22,15 @@ You can delete a cluster at any time by performing the following steps:
     - If you have at least one manual or automatic backup, you can see the number of backups and the charging policy for backups. Click **Continue** and enter `<organization name>/<project name>/<cluster name>`.
     - If you do not have any backups, just enter `<organization name>/<project name>/<cluster name>`.
 
-    If you want to restore the cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up TiDB Dedicated clusters, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
+    If you want to restore the cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up TiDB Cloud Dedicated clusters, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
     > **Note:**
     >
-    > [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless) only support [in-place restoring from backups](/tidb-cloud/backup-and-restore-serverless.md#restore) and do not support restoring data after the deletion. If you want to delete a TiDB Serverless cluster and restore its data in the future, you can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+    > [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) only support [in-place restoring from backups](/tidb-cloud/backup-and-restore-serverless.md#restore) and do not support restoring data after the deletion. If you want to delete a TiDB Cloud Serverless cluster and restore its data in the future, you can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 
 5. Click **I understand, delete it**.
 
-    Once a backed up TiDB Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
+    Once a backed up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
 
     - Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
     - Manual backups will be kept in the Recycle Bin until manually deleted.
@@ -39,4 +39,4 @@ You can delete a cluster at any time by performing the following steps:
     >
     > Please be aware that backups will continue to incur charges until deleted.
 
-    If you want to restore a TiDB Dedicated cluster from recycle bin, see [Restore a deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster).
+    If you want to restore a TiDB Cloud Dedicated cluster from recycle bin, see [Restore a deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster).

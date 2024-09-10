@@ -9,7 +9,7 @@ In TiDB Cloud SQL Shell, you can try TiDB SQL, test out TiDB's compatibility wit
 
 > **Note:**
 >
-> You cannot connect to [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless) using SQL Shell. To connect to your TiDB Serverless cluster, see [Connect to TiDB Serverless clusters](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+> You cannot connect to [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) using SQL Shell. To connect to your TiDB Cloud Serverless cluster, see [Connect to TiDB Cloud Serverless clusters](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
 To connect to your TiDB cluster using SQL shell, perform the following steps:
 

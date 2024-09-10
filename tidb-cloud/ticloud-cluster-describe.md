@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless describe`.
 
 # ticloud serverless describe
 
-Get information about a TiDB Serverless cluster (such as the cluster configurations and cluster status):
+Get information about a TiDB Cloud Serverless cluster (such as the cluster configurations and cluster status):
 
 ```shell
 ticloud serverless describe [flags]
@@ -19,13 +19,13 @@ ticloud serverless get [flags]
 
 ## Examples
 
-Get information about a TiDB Serverless cluster in interactive mode:
+Get information about a TiDB Cloud Serverless cluster in interactive mode:
 
 ```shell
 ticloud serverless describe
 ```
 
-Get information about a TiDB Serverless cluster in non-interactive mode:
+Get information about a TiDB Cloud Serverless cluster in non-interactive mode:
 
 ```shell
 ticloud serverless describe --cluster-id <cluster-id>

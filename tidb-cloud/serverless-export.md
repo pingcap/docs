@@ -1,15 +1,19 @@
 ---
-title: Export Data from TiDB Serverless
-summary: Learn how to export data from TiDB Serverless clusters.
+title: Export Data from TiDB Cloud Serverless
+summary: Learn how to export data from TiDB Cloud Serverless clusters.
 ---
 
-# Export Data from TiDB Serverless
+# Export Data from TiDB Cloud Serverless
 
+<<<<<<< HEAD
 TiDB Serverless Export (Beta) is a service that enables you to export data from a TiDB Serverless cluster to local storage or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+=======
+TiDB Cloud Serverless Export (Beta) is a service that enables you to export data from a TiDB Cloud Serverless cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+>>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), TiDB Serverless Export offers a more convenient and efficient way to export data from a TiDB Serverless cluster. It brings the following benefits:
+While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), TiDB Cloud Serverless Export offers a more convenient and efficient way to export data from a TiDB Cloud Serverless cluster. It brings the following benefits:
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a TiDB Serverless cluster, eliminating the need for additional tools or resources.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a TiDB Cloud Serverless cluster, eliminating the need for additional tools or resources.
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
@@ -27,7 +31,11 @@ You can export data to local storage or [Amazon S3](https://aws.amazon.com/s3/).
 
 **Local storage**
 
+<<<<<<< HEAD
 Exporting data to local storage has the following limitations:
+=======
+To export data from a TiDB Cloud Serverless cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+>>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 
 - Exporting multiple databases to local storage at the same time is not supported.
 - Exported data is saved in the stashing area and will expire after two days. You need to download the exported data in time.
@@ -35,7 +43,22 @@ Exporting data to local storage has the following limitations:
 
 **Amazon S3**
 
+<<<<<<< HEAD
 To export data to Amazon S3, you need to provide an [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for your S3 bucket. Make sure the access key has read and write access for your S3 bucket, including at least these permissions: `s3:PutObject` and `s3:ListBucket`.
+=======
+### Amazon S3
+
+To export data to Amazon S3, you need to provide the following information:
+
+- URI: `s3://<bucket-name>/<file-path>`
+- One of the following access credentials:
+    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
+    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN has the `s3:PutObject` and `s3:ListBucket` permissions. 
+
+For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+
+## Export options
+>>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 
 ### Data filtering
 
@@ -95,6 +118,37 @@ Currently, you can manage export tasks using [TiDB Cloud CLI](/tidb-cloud/cli-re
 
 ### Export data to Amazon S3
 
+<<<<<<< HEAD
+=======
+<SimpleTab>
+<div label="Console">
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+   > **Tip:**
+   >
+   > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
+
+    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
+    - **Exported Data**: choose the databases and tables you want to export.
+    - **Data Format**: choose **SQL File** or **CSV**.
+    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
+    - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
+    - **Bucket Access**: choose one of the following access credentials and then fill in the credential information. If you do not have such information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+        - **AWS Role ARN**: enter the role ARN that has the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
+        - **AWS Access Key**: enter the access key ID and access key secret that have the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
+
+4. Click **Export**.
+
+</div>
+
+<div label="CLI">
+
+>>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 ```shell
 ticloud serverless export create -c <cluster-id> --bucket-uri <bucket-uri> --access-key-id <access-key-id> --secret-access-key <secret-access-key>
 ```

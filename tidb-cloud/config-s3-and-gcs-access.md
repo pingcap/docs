@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: Configure Amazon S3 Access and GCS Access
 summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access and Google Cloud Storage (GCS) access.
 ---
@@ -6,6 +7,17 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 # Configure Amazon S3 Access and GCS Access
 
 If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure cross-account access to the buckets. This document describes how to do this.
+=======
+title: Configure External Storage Access for TiDB Cloud Dedicated
+summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access and Google Cloud Storage (GCS) access.
+---
+
+# Configure External Storage Access for TiDB Cloud Dedicated
+
+If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure cross-account access to the buckets. This document describes how to do this for TiDB Cloud Dedicated clusters.
+
+If you need to configure these external storages for TiDB Cloud Serverless clusters, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md).
+>>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 
 ## Configure Amazon S3 access
 
