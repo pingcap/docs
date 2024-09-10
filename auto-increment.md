@@ -315,9 +315,20 @@ mysql> SELECT * FROM t;
 | 1 |
 +---+
 1 row in set (0.01 sec)
+
+SHOW CREATE TABLE t;
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                             |
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| t     | CREATE TABLE `t` (
+  `a` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`a`) /*T![clustered_index] CLUSTERED */
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin AUTO_INCREMENT=101 /*T![auto_id_cache] AUTO_ID_CACHE=100 */ |
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
 ```
 
-At this time, if you invalidate the auto-increment cache of this column and redo the implicit insertion, the result is as follows:
+At this time, if TiDB is restarted, the auto-increment ID cache will be lost, and new insert operations will allocate IDs starting from a higher value beyond the previously cached range.
 
 ```sql
 mysql> DELETE FROM t;
@@ -333,14 +344,70 @@ mysql> SELECT * FROM t;
 +-----+
 | a   |
 +-----+
+|   1 |
 | 101 |
 +-----+
-1 row in set (0.00 sec)
+2 rows in set (0.01 sec)
 ```
 
 The re-assigned value is `101`. This shows that the size of cache for allocating the auto-increment ID is `100`.
 
 In addition, when the length of consecutive IDs in a batch `INSERT` statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can be inserted properly.
+
+### Clear the auto-increment ID cache
+
+In some scenarios, you might need to clear the auto-increment ID cache to ensure data consistency. For example:
+
+- In the scenario of incremental replication using [Data Migration (DM)](/dm/dm-overview.md), once the replication is complete, data writing to the downstream TiDB switches from DM to your application's writing operations. Meanwhile, the ID writing mode of the auto-increment column usually switches from explicit insertion to implicit allocation.
+- When your application involves both explicit ID insertion and implicit ID allocation, you need to clear the auto-increment ID cache to avoid conflicts between future implicitly allocated IDs and previously explicitly inserted IDs, which could result in primary key conflict errors. For more information, see [Uniqueness](/auto-increment.md#uniqueness).
+
+You can execute the `ALTER TABLE` statement with `AUTO_INCREMENT = 0` to clear the auto-increment ID cache on all TiDB nodes in the cluster. For example:
+
+```sql
+CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
+Query OK, 0 rows affected (0.02 sec)
+
+INSERT INTO t VALUES();
+Query OK, 1 row affected (0.02 sec)
+
+INSERT INTO t VALUES(50);
+Query OK, 1 row affected (0.00 sec)
+
+SELECT * FROM t;
++----+
+| a  |
++----+
+|  1 |
+| 50 |
++----+
+2 rows in set (0.01 sec)
+```
+
+```sql
+ALTER TABLE t AUTO_INCREMENT = 0;
+Query OK, 0 rows affected, 1 warning (0.07 sec)
+
+SHOW WARNINGS;
++---------+------+-------------------------------------------------------------------------+
+| Level   | Code | Message                                                                 |
++---------+------+-------------------------------------------------------------------------+
+| Warning | 1105 | Can't reset AUTO_INCREMENT to 0 without FORCE option, using 101 instead |
++---------+------+-------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+
+INSERT INTO t VALUES();
+Query OK, 1 row affected (0.02 sec)
+
+SELECT * FROM t;
++-----+
+| a   |
++-----+
+|   1 |
+|  50 |
+| 101 |
++-----+
+3 rows in set (0.01 sec)
+```
 
 ### Auto-increment step size and offset
 
