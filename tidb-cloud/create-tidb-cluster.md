@@ -27,9 +27,7 @@ If you are an organization owner, you can rename the default project or create a
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner.
 
-2. Click **Organization Settings**.
-
-    The **Projects** tab is displayed by default.
+2. Click **Organization Settings**, and click the **Projects** tab in the left navigation pane. The **Projects** tab is displayed.
 
 3. Do one of the following:
 
@@ -61,11 +59,12 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     2. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively.
     3. Update the default cluster name and port number if necessary.
-    4. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR. If you do not see the **Project CIDR** field, it means that CIDR has already been configured for this project.
+    4. If CIDR has not been configured for this region, you need to set the CIDR. If you do not see the **Project CIDR** field, it means that CIDR has already been configured for this region.
 
         > **Note:**
         >
-        > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
+        > - TiDB Cloud will create a VPC with this CIDR when the first cluster in this region is created. All the subsequent clusters of the same project in this region will use this VPC.
+        > - When setting the CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your CIDR once the VPC is created.
 
 4. Confirm the cluster and billing information on the right side.
 
