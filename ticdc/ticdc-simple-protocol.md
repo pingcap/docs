@@ -243,7 +243,7 @@ The fields in the preceding JSON data are explained as follows:
 
 #### INSERT
 
-TiCEC encodes an `INSERT` event in the following JSON format:
+TiCDC encodes an `INSERT` event in the following JSON format:
 
 ```json
 {
