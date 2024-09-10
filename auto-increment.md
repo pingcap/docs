@@ -334,16 +334,10 @@ SHOW CREATE TABLE t;
 At this time, if TiDB is restarted, the auto-increment ID cache will be lost, and new insert operations will allocate IDs starting from a higher value beyond the previously cached range.
 
 ```sql
-mysql> DELETE FROM t;
-Query OK, 1 row affected (0.01 sec)
-
-mysql> RENAME TABLE t to t1;
-Query OK, 0 rows affected (0.01 sec)
-
-mysql> INSERT INTO t1 values()
+INSERT INTO t VALUES();
 Query OK, 1 row affected (0.00 sec)
 
-mysql> SELECT * FROM t;
+SELECT * FROM t;
 +-----+
 | a   |
 +-----+
