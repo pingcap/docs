@@ -93,12 +93,11 @@ The username you use for the downstream TiDB Cloud cluster must have the followi
 | `ALTER`  | Tables |
 | `DROP`   | Databases, Tables |
 | `INDEX`  | Tables |
-| `TRUNCATE`  | Tables |
 
 For example, you can execute the following `GRANT` statement to grant corresponding privileges:
 
 ```sql
-GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
+GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
 To quickly test a migration job, you can use the `root` account of the TiDB Cloud cluster.
@@ -120,7 +119,7 @@ If your MySQL service is in an AWS VPC, take the following steps:
 
 2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
 
 3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service.
 
@@ -140,7 +139,7 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
 
 </details>
 
@@ -201,7 +200,7 @@ In the **Choose the objects to be migrated** step, you can choose existing data 
 
 To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
-You can use **physical mode** or **logical mode** to migrate **existing data**.
+You can use **physical mode** or **logical mode** to migrate **existing data** and **incremental data**.
 
 - The default mode is **logical mode**. This mode exports data from upstream databases as SQL statements, and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty. But the performance is slower than physical mode.
 
@@ -227,7 +226,7 @@ Physical mode exports the upstream data as fast as possible, so [different speci
 
 To migrate only existing data of the source database to TiDB Cloud, choose **Existing data migration**.
 
-You can choose to use physical mode or logical mode to migrate existing data. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
+You can only use logical mode to migrate existing data. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
 
 ### Migrate only incremental data
 

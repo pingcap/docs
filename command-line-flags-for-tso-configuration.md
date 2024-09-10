@@ -57,6 +57,12 @@ The TSO node is used for providing the `tso` microservice for PD. You can config
 - Default: `""`
 - If this flag is not set, logs are output to "stderr". If this flag is set, logs are output to the corresponding file.
 
+## `--name` <span class="version-mark">New in v8.3.0</span>
+
++ The name of the current TSO node.
++ Default: `"tso-${hostname}"`
++ If you need to start multiple TSO nodes, it is recommended to configure different names for different nodes for easier identification.
+
 ## `-L`
 
 - The log level.

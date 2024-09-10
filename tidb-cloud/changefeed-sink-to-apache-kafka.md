@@ -1,6 +1,6 @@
 ---
 title: Sink to Apache Kafka
-Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
+summary: This document explains how to create a changefeed to stream data from TiDB Cloud to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed specification.
 ---
 
 # Sink to Apache Kafka
@@ -137,8 +137,8 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 8. In the **Topic Configuration** area, configure the following numbers. The changefeed will automatically create the Kafka topics according to the numbers.
 
-   - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to.
-   - **Partition Number**: controls how many partitions exist in a topic.
+    - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to. The valid value ranges from [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) to the number of Kafka brokers.
+    - **Partition Number**: controls how many partitions exist in a topic. The valid value range is `[1, 10 * the number of Kafka brokers]`.
 
 9. Click **Next**.
 
