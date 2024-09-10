@@ -224,11 +224,11 @@ The following TiKV configuration items can be modified dynamically:
 | `server.raft-msg-max-batch-size` | Sets the maximum number of Raft messages that are contained in a single gRPC message |
 | `server.simplify-metrics`        | Controls whether to simplify the sampling monitoring metrics                   |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
-| storage.flow-control.enable | Determines whether to enable the flow control mechanism. |
-| storage.flow-control.memtables-threshold | The threshold of kvDB memtable numbers that triggers flow control. |
-| storage.flow-control.l0-files-threshold | The threshold of kvDB L0 file numbers that triggers flow control. |
-| storage.flow-control.soft-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control. |
-| storage.flow-control.hard-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject all write requests and reports the `ServerIsBusy` error. |
+| storage.flow-control.enable | Determines whether to enable the flow control mechanism |
+| storage.flow-control.memtables-threshold | The threshold of kvDB memtable numbers that triggers flow control |
+| storage.flow-control.l0-files-threshold | The threshold of kvDB L0 file numbers that triggers flow control |
+| storage.flow-control.soft-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control |
+| storage.flow-control.hard-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject all write requests and report the `ServerIsBusy` error |
 | `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
 | `import.num-threads` | The number of threads to process restore or import RPC requests (dynamic modification is supported starting from v8.1.2) |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
