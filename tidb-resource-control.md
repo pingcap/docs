@@ -7,7 +7,7 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 As a cluster administrator, you can use the resource control feature to create resource groups, set quotas for resource groups, and bind users to those groups.
 
@@ -96,7 +96,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
 > **Note:**
 >
 > - Each write operation is eventually replicated to all replicas (by default, TiKV has 3 replicas). Each replication operation is considered a different write operation.
-> - The preceding table lists only the resources involved in RU calculation for TiDB Self-Hosted clusters, excluding the network and storage consumption. For TiDB Serverless RUs, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
+> - The preceding table lists only the resources involved in RU calculation for TiDB Self-Managed clusters, excluding the network and storage consumption. For TiDB Cloud Serverless RUs, see [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
 > - Currently, TiFlash resource control only considers SQL CPU, which is the CPU time consumed by the execution of pipeline tasks for queries, and read request payload.
 
 ## Parameters for resource control
@@ -114,8 +114,8 @@ The resource control feature introduces the following system variables or parame
 
 <CustomContent platform="tidb-cloud">
 
-* TiKV: For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification.
-* TiFlash: For TiDB Self-Hosted, you can use the `tidb_enable_resource_control` system variable and the `enable_resource_control` configuration item (introduced in v7.4.0) to control whether to enable TiFlash resource control.
+* TiKV: For TiDB Self-Managed, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification.
+* TiFlash: For TiDB Self-Managed, you can use the `tidb_enable_resource_control` system variable and the `enable_resource_control` configuration item (introduced in v7.4.0) to control whether to enable TiFlash resource control.
 
 </CustomContent>
 
@@ -159,7 +159,7 @@ You can view the [Resource Manager page](/dashboard/dashboard-resource-manager.m
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Self-Hosted, you can use the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource) statement to estimate the cluster capacity.
+For TiDB Self-Managed, you can use the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource) statement to estimate the cluster capacity.
 
 For TiDB Cloud, the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource) statement is inapplicable.
 
@@ -512,9 +512,9 @@ By default, the task types that are marked as background tasks are `""`, and the
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2. For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+2. For TiDB Self-Managed, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-3. For TiDB Self-Hosted, you can use the `enable_resource_control` configuration item to control whether to enable TiFlash resource control. For TiDB Cloud, the value of the `enable_resource_control` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+3. For TiDB Self-Managed, you can use the `enable_resource_control` configuration item to control whether to enable TiFlash resource control. For TiDB Cloud, the value of the `enable_resource_control` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -603,7 +603,7 @@ You can view the data of resource groups in the current [`RESOURCE_GROUPS`](/inf
 
 > **Note:**
 >
-> This section is only applicable to TiDB Self-Hosted. Currently, TiDB Cloud does not provide resource control metrics.
+> This section is only applicable to TiDB Self-Managed. Currently, TiDB Cloud does not provide resource control metrics.
 
 TiDB regularly collects runtime information about resource control and provides visual charts of the metrics in Grafana's **TiDB** > **Resource Control** dashboard.
 

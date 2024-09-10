@@ -505,6 +505,7 @@ This statement returns the state of `ANALYZE`. You can use `ShowLikeOrWhere` to 
 
 Currently, the `SHOW ANALYZE STATUS` statement returns the following 11 columns:
 
+<<<<<<< HEAD
 | Column name | Description            |
 | :-------- | :------------- |
 | table_schema  |  The database name    |
@@ -517,6 +518,65 @@ Currently, the `SHOW ANALYZE STATUS` statement returns the following 11 columns:
 | fail_reason | The reason why the task fails. If the execution is successful, the value is `NULL`. |
 | instance | The TiDB instance that executes the task |
 | process_id | The process ID that executes the task |
+=======
+- For TiDB Self-Managed, the default value of this variable changes from `1` to `2` starting from v5.3.0.
+- For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
+- If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
+
+Version 2 is preferred, and will continue to be enhanced to ultimately replace Version 1 completely. Compared to Version 1, Version 2 improves the accuracy of many of the statistics collected for larger data volumes. Version 2 also improves collection performance by removing the need to collect Count-Min sketch statistics for predicate selectivity estimation, and also supporting automated collection only on selected columns (see [Collecting statistics on some columns](#collect-statistics-on-some-columns)).
+
+The following table lists the information collected by each version for usage in the optimizer estimates:
+
+| Information | Version 1 | Version 2|
+| --- | --- | ---|
+| The total number of rows in the table | ⎷ | ⎷ |
+| Equal/IN predicate estimation | ⎷ (Column/Index Top-N & Count-Min Sketch) | ⎷ (Column/Index Top-N & Histogram) |
+| Range predicate estimation | ⎷ (Column/Index Top-N & Histogram) | ⎷ (Column/Index Top-N & Histogram) |
+| `NULL` predicate estimation | ⎷ | ⎷ |
+| The average length of columns | ⎷ | ⎷ |
+| The average length of indexes | ⎷ | ⎷ |
+
+### Switch between statistics versions
+
+It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however, it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions might take a period of time when no statistics are available until all tables have been analyzed with the new version, which might negatively affect the optimizer plan choices if statistics are not available.
+
+Examples of justifications to switch might include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting Count-Min sketch statistics. Solutions are listed in the [Count-Min Sketch](#count-min-sketch) section. Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. In the early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to set `tidb_analyze_version = 1` and rerun `ANALYZE` on all objects.
+
+To prepare `ANALYZE` for switching between versions:
+
+- If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
+
+    ```sql
+    SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';'))
+    FROM information_schema.tables JOIN mysql.stats_histograms
+    ON table_id = tidb_table_id
+    WHERE stats_ver = 2;
+    ```
+
+- If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement:
+
+    ```sql
+    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';'))
+    FROM information_schema.tables ON mysql.stats_histograms
+    ON table_id = tidb_table_id
+    WHERE stats_ver = 2;
+    ```
+
+- If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
+
+    ```sql
+    SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
+    mysql -h ${TiDB_IP} -u user -P ${TIDB_PORT} ... < '/tmp/sql.txt'
+    ```
+
+## View statistics
+
+You can view the `ANALYZE` status and statistics information using the following statements.
+
+### `ANALYZE` state
+
+When executing the `ANALYZE` statement, you can view the current state of `ANALYZE` using [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md).
+>>>>>>> 194c64936f (*: update TiDB product names for non-cloud-console content (#18744))
 
 Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this statement. Before TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement can only show instance-level tasks, and task records are cleared after a TiDB restart.
 
@@ -712,7 +772,7 @@ The preceding statement only deletes GlobalStats generated in dynamic pruning mo
 
 > **Note:**
 >
-> Loading statistics is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> Loading statistics is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
 

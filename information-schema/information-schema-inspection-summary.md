@@ -9,7 +9,7 @@ In some scenarios, you might need to pay attention only to the monitoring summar
 
 > **Note:**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 The structure of the `information_schema.inspection_summary` inspection summary table is as follows:
 

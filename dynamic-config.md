@@ -11,7 +11,7 @@ You can dynamically update the configuration of components (including TiDB, TiKV
 
 > **Note:**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/). For TiDB Cloud, you need to contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to modify the configurations.
+> This feature is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/). For TiDB Cloud, you need to contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to modify the configurations.
 
 ## Common Operations
 

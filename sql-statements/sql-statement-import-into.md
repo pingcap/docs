@@ -29,10 +29,27 @@ For TiDB Self-Hosted, `IMPORT INTO` supports importing data from files stored in
 - `IMPORT INTO` does not support working simultaneously with features such as [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview), [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture).
 - Only one `IMPORT INTO` job can run on a cluster at a time. Although `IMPORT INTO` performs a precheck for running jobs, it is not a hard limit. Starting multiple import jobs might work when multiple clients execute `IMPORT INTO` simultaneously, but you need to avoid that because it might result in data inconsistency or import failures.
 - During the data import process, do not perform DDL or DML operations on the target table, and do not execute [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) for the target database. These operations can lead to import failures or data inconsistencies. In addition, it is **NOT** recommended to perform read operations during the import process, as the data being read might be inconsistent. Perform read and write operations only after the import is completed.
+<<<<<<< HEAD
 - The import process consumes system resources significantly. For TiDB Self-Hosted, to get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) during import, so it is recommended to configure high-performance storage media for TiDB Self-Hosted, such as flash memory. For more information, see [Physical Import Mode limitations](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions).
 - For TiDB Self-Hosted, the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space. It is recommended to allocate storage space that is equal to or greater than the volume of data to be imported.
 - One import job supports importing data into one target table only. To import data into multiple target tables, after the import for a target table is completed, you need to create a new job for the next target table.
 - `IMPORT INTO` is not supported during TiDB cluster upgrades.
+=======
+- The import process consumes system resources significantly. For TiDB Self-Managed, to get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) during import, so it is recommended to configure high-performance storage media for TiDB Self-Managed, such as flash memory. For more information, see [Physical Import Mode limitations](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions).
+- For TiDB Self-Managed, the TiDB [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space. It is recommended to allocate storage space that is equal to or greater than the volume of data to be imported.
+- One import job supports importing data into one target table only.
+- `IMPORT INTO` is not supported during TiDB cluster upgrades.
+- Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
+- Known issue: the `IMPORT INTO` task might fail if the PD address in the TiDB node configuration file is inconsistent with the current PD topology of the cluster. This inconsistency can arise in situations such as that PD was scaled in previously, but the TiDB configuration file was not updated accordingly or the TiDB node was not restarted after the configuration file update.
+
+### `IMPORT INTO ... FROM FILE` restrictions
+
+- For TiDB Self-Managed, each `IMPORT INTO` task supports importing data within 10 TiB. If you enable the [Global Sort](/tidb-global-sort.md) feature, each `IMPORT INTO` task supports importing data within 40 TiB.
+- For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), if your data to be imported exceeds 500 GiB, it is recommended to use TiDB nodes with at least 16 cores and enable the [Global Sort](/tidb-global-sort.md) feature, then each `IMPORT INTO` task supports importing data within 40 TiB. If your data to be imported is within 500 GiB or if the cores of your TiDB nodes are less than 16, it is not recommended to enable the [Global Sort](/tidb-global-sort.md) feature.
+- The execution of `IMPORT INTO ... FROM FILE` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
+- Up to 16 `IMPORT INTO` tasks can run simultaneously on each cluster (see [TiDB Distributed eXecution Framework (DXF) usage limitations](/tidb-distributed-execution-framework.md#limitation)). When a cluster lacks sufficient resources or reaches the maximum number of tasks, newly submitted import tasks are queued for execution.
+- When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the value of the `THREAD` option must be at least `8`.
+>>>>>>> 194c64936f (*: update TiDB product names for non-cloud-console content (#18744))
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding must not exceed 32 MiB.
 - When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need to delete the residual data manually to avoid increasing S3 storage costs.
 - Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
@@ -45,7 +62,11 @@ Before using `IMPORT INTO` to import data, make sure the following requirements 
 
 - The target table to be imported is already created in TiDB and it is empty.
 - The target cluster has sufficient space to store the data to be imported.
+<<<<<<< HEAD
 - For TiDB Self-Hosted, the [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) of the TiDB node connected to the current session has at least 90 GiB of available space. If [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled, also make sure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
+=======
+- For TiDB Self-Managed, the [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) of the TiDB node connected to the current session has at least 90 GiB of available space. If [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled and the data for import is from S3 or GCS, also make sure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
+>>>>>>> 194c64936f (*: update TiDB product names for non-cloud-console content (#18744))
 
 ## Required privileges
 
@@ -141,7 +162,26 @@ The supported options are described as follows:
 
 ## Compressed files
 
+<<<<<<< HEAD
 `IMPORT INTO` supports importing compressed `CSV` and `SQL` files. It can automatically determine whether a file is compressed and the compression format based on the file extension:
+=======
+> **Note:**
+>
+> `IMPORT INTO ... FROM FILE` is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
+For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS.
+
+- For data files stored in Amazon S3 or GCS, `IMPORT INTO ... FROM FILE` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
+
+    - When the DXF is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
+    - When the DXF is disabled, `IMPORT INTO ... FROM FILE` only supports running on the TiDB node where the current user is connected.
+
+- For data files stored locally in TiDB, `IMPORT INTO ... FROM FILE` only supports running on the TiDB node where the current user is connected. Therefore, the data files need to be placed on the TiDB node where the current user is connected. If you access TiDB through a proxy or load balancer, you cannot import data files stored locally in TiDB.
+
+### Compressed files
+
+`IMPORT INTO ... FROM FILE` supports importing compressed `CSV` and `SQL` files. It can automatically determine whether a file is compressed and the compression format based on the file extension:
+>>>>>>> 194c64936f (*: update TiDB product names for non-cloud-console content (#18744))
 
 | Extension | Compression format |
 |:---|:---|

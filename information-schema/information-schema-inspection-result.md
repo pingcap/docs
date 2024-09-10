@@ -11,7 +11,7 @@ The `INSPECTION_RESULT` diagnostic table can help you quickly find problems and 
 
 > **Note:**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 The structure of the `information_schema.inspection_result` diagnostic result table `information_schema.inspection_result` is as follows:
 
