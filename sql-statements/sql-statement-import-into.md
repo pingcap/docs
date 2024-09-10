@@ -21,6 +21,7 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 ## Restrictions
 
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
+- `IMPORT INTO` does not support importing data into a [temporary table](/temporary-tables.md) or a [cached table](/cached-tables.md).
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
 - `IMPORT INTO` does not support working simultaneously with features such as [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview), [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture). For more compatibility information, see [Compatibility of TiDB Lightning and `IMPORT INTO` with TiCDC and Log Backup](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios).
 - During the data import process, do not perform DDL or DML operations on the target table, and do not execute [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) for the target database. These operations can lead to import failures or data inconsistencies. In addition, it is **NOT** recommended to perform read operations during the import process, as the data being read might be inconsistent. Perform read and write operations only after the import is completed.
@@ -30,7 +31,6 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 - `IMPORT INTO` is not supported during TiDB cluster upgrades.
 - Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
 - Known issue: the `IMPORT INTO` task might fail if the PD address in the TiDB node configuration file is inconsistent with the current PD topology of the cluster. This inconsistency can arise in situations such as that PD was scaled in previously, but the TiDB configuration file was not updated accordingly or the TiDB node was not restarted after the configuration file update.
-- `IMPORT INTO` does not support importing data into a [temporary table](/temporary-tables.md) or a [cached table](/cached-tables.md).
 
 ### `IMPORT INTO ... FROM FILE` restrictions
 
