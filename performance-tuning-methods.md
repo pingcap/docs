@@ -237,7 +237,7 @@ Obviously, TiKV consumes more CPU, which is expected because TPC-C is a write-he
 
 #### Data traffic
 
-The read and write panels offer insights into traffic patterns within your TiDB cluster, allowing you to monitor data flow from clients to the database and between internal components comprehensively.
+The read and write traffic panels offer insights into traffic patterns within your TiDB cluster, allowing you to monitor data flow from clients to the database and between internal components comprehensively.
 
 - Read traffic
 
