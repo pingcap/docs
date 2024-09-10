@@ -86,7 +86,7 @@ Generally, `tso - request` divided by `tso - cmd` is the average size of TSO req
 - `CPU-Avg`: Average CPU utilization across all TiDB instances
 - `CPU-Delta`: Maximum CPU utilization of all TiDB instances minus minimum CPU utilization of all TiDB instances
 - `CPU-Max`: Maximum CPU utilization across all TiDB instances
-- `CPU-Quota`: TiDB CPU quota
+- `CPU-Quota`: Number of CPU cores that can be used by TiDB
 - `Mem-Max`: Maximum memory utilization across all TiDB instances
 
 ### TiKV CPU/Memory
@@ -94,13 +94,13 @@ Generally, `tso - request` divided by `tso - cmd` is the average size of TSO req
 - `CPU-Avg`: Average CPU utilization across all TiKV instances
 - `CPU-Delta`: Maximum CPU utilization of all TiKV instances minus minimum CPU utilization of all TiKV instances
 - `CPU-Max`: Maximum CPU utilization across all TiKV instances
-- `CPU-Quota`: TiKV CPU quota
+- `CPU-Quota`: Number of CPU cores that can be used by TiKV
 - `Mem-Max`: Maximum memory utilization across all TiKV instances
 
 ### PD CPU/Memory
 
 - `CPU-Max`: Maximum CPU utilization across all PD instances
-- `CPU-Quota`: PD CPU quota
+- `CPU-Quota`: Number of CPU cores that can be used by PD
 - `Mem-Max`: Maximum memory utilization across all PD instances
 
 ### Read Traffic
