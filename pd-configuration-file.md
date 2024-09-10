@@ -363,7 +363,7 @@ Configuration items related to replicas
 
 ## `label-property` (deprecated)
 
-Configuration items related to labels, which only supports the `reject-leader` type.
+Configuration items related to labels, which only support the `reject-leader` type.
 
 > **Note:**
 >
