@@ -38,6 +38,7 @@ For TiDB Self-Hosted, `IMPORT INTO` supports importing data from files stored in
 - Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
 - If an `IMPORT INTO` task scheduled by the Distributed eXecution Framework (DXF) is already running, it cannot be scheduled to a new TiDB node. If the TiDB node that executes the data import task is restarted, it will no longer execute the data import task, but transfers the task to another TiDB node to continue executing. However, if the imported data is from a local file, the task will not be transferred to another TiDB node to continue executing.
 - Known issue: the `IMPORT INTO` task might fail if the PD address in the TiDB node configuration file is inconsistent with the current PD topology of the cluster. This inconsistency can arise in situations such as that PD was scaled in previously, but the TiDB configuration file was not updated accordingly or the TiDB node was not restarted after the configuration file update.
+- `IMPORT INTO` does not support import into a [Temporary Table](/temporary-tables.md) or [Cached Table](/cached-tables.md).
 
 ## Prerequisites for import
 
