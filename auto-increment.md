@@ -301,14 +301,14 @@ After the value `2030000` is inserted, the next value is `2060001`. This jump in
 In earlier versions of TiDB, the cache size of the auto-increment ID was transparent to users. Starting from v3.0.14, v3.1.2, and v4.0.rc-2, TiDB has introduced the `AUTO_ID_CACHE` table option to allow users to set the cache size for allocating the auto-increment ID.
 
 ```sql
-mysql> CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
+CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
 Query OK, 0 rows affected (0.02 sec)
 
-mysql> INSERT INTO t values();
+INSERT INTO t values();
 Query OK, 1 row affected (0.00 sec)
 Records: 1  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM t;
+SELECT * FROM t;
 +---+
 | a |
 +---+
