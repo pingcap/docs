@@ -2,15 +2,9 @@
 <!-- markdownlint-disable MD041 -->
 
 - [Docs Home](https://docs.pingcap.com/)
-<<<<<<< HEAD
-- About TiDB
-  - [TiDB Introduction](/overview.md)
-  - [TiDB 7.5 Release Notes](/releases/release-7.5.0.md)
-=======
 - About TiDB Self-Managed
   - [What is TiDB Self-Managed](/overview.md)
-  - [TiDB 8.3 Release Notes](/releases/release-8.3.0.md)
->>>>>>> 194c64936f (*: update TiDB product names for non-cloud-console content (#18744))
+  - [TiDB 7.5 Release Notes](/releases/release-7.5.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
