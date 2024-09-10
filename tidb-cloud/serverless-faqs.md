@@ -139,7 +139,7 @@ Therefore, while there might be an initial cost due to the extra replica, the re
 
 ### Is my TiDB Cloud Serverless shared or dedicated?
 
-The serverless technology is designed for multi-tenancy and the resources used by all clusters are shared. To get managed TiDB service with isolated infrastructure and resources, you can upgrade it to [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated).
+The serverless technology is designed for multi-tenancy and the resources used by all clusters are shared. To get managed TiDB service with isolated infrastructure and resources, you can upgrade it to [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
 ### How does TiDB Cloud Serverless ensure security?
 

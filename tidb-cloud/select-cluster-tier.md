@@ -10,8 +10,8 @@ The cluster tier determines the throughput and performance of your cluster.
 
 TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
 
-- [TiDB Cloud Serverless](#tidb-serverless)
-- [TiDB Cloud Dedicated](#tidb-dedicated)
+- [TiDB Cloud Serverless](#tidb-cloud-serverless)
+- [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
 ## TiDB Cloud Serverless
 

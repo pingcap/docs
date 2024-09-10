@@ -9,7 +9,7 @@ The Index Insight (beta) feature in TiDB Cloud provides powerful capabilities to
 
 > **Note:**
 >
-> Index Insight is currently in beta and only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+> Index Insight is currently in beta and only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Introduction
 

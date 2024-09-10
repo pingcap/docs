@@ -1,17 +1,17 @@
 ---
-title: Configure TiDB Serverless External Storage Access
+title: Configure TiDB Cloud Serverless External Storage Access
 summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access.
 ---
 
-# Configure External Storage Access for TiDB Serverless
+# Configure External Storage Access for TiDB Cloud Serverless
 
-If you want to import data from or export data to an external storage in a TiDB Serverless cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for TiDB Serverless clusters.
+If you want to import data from or export data to an external storage in a TiDB Cloud Serverless cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for TiDB Cloud Serverless clusters.
 
-If you need to configure these external storages for a TiDB Dedicated cluster, see [Configure External Storage Access for TiDB Dedicated](/tidb-cloud/config-s3-and-gcs-access.md).
+If you need to configure these external storages for a TiDB Cloud Dedicated cluster, see [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/config-s3-and-gcs-access.md).
 
 ## Configure Amazon S3 access
 
-To allow a TiDB Serverless cluster to access your Amazon S3 bucket, you need to configure the bucket access for the cluster. You can use either of the following methods to configure the bucket access:
+To allow a TiDB Cloud Serverless cluster to access your Amazon S3 bucket, you need to configure the bucket access for the cluster. You can use either of the following methods to configure the bucket access:
 
 - Use a Role ARN: use a Role ARN to access your Amazon S3 bucket.
 - Use an AWS access key: use the access key of an IAM user to access your Amazon S3 bucket.
@@ -76,7 +76,7 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     4. On the **Create policy** page, click the **JSON** tab.
    
-    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data to a TiDB Serverless cluster.
+    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data to a TiDB Cloud Serverless cluster.
 
         ```json
         {

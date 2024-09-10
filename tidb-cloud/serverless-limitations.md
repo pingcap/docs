@@ -10,7 +10,7 @@ aliases: ['/tidbcloud/serverless-tier-limitations']
 
 TiDB Cloud Serverless works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed or TiDB Cloud Dedicated clusters and TiDB Cloud Serverless clusters. This document describes the limitations of TiDB Cloud Serverless.
 
-We are constantly filling in the feature gaps between TiDB Cloud Serverless and TiDB Cloud Dedicated. If you require these features or capabilities in the gap, use [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
+We are constantly filling in the feature gaps between TiDB Cloud Serverless and TiDB Cloud Dedicated. If you require these features or capabilities in the gap, use [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
 ## Limitations
 

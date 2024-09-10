@@ -9,7 +9,7 @@ For each TiDB Cloud Dedicated cluster in TiDB Cloud, you can configure an IP acc
 
 > **Note:**
 >
-> Configuring the IP access list is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+> Configuring the IP access list is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 To configure an IP access list, take the following steps in the [TiDB Cloud console](https://tidbcloud.com/console/clusters):
 
@@ -20,5 +20,5 @@ To configure an IP access list, take the following steps in the [TiDB Cloud cons
     - **Allow access from anywhere**: allows all IP addresses to access TiDB Cloud. This option exposes your cluster to the internet completely and is highly risky.
     - **Use IP addresses** (recommended): you can add a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 
-4. If you choose **Use IP addresses**, add IP addresses or CIDR range with an optional description. For each TiDB Dedicated cluster, you can add up to 100 IP addresses.
+4. If you choose **Use IP addresses**, add IP addresses or CIDR range with an optional description. For each TiDB Cloud Dedicated cluster, you can add up to 100 IP addresses.
 5. Click **Confirm** to save your changes.

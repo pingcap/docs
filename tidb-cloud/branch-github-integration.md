@@ -124,7 +124,7 @@ One of the best practices for using branches is to create a branching CI workflo
 
 Here are the main steps to create the workflow:
 
-1. [Integrate TiDB Cloud Serverless branching with your GitHub repository](#integrate-tidb-serverless-branching-with-your-github-repository).
+1. [Integrate TiDB Cloud Serverless branching with your GitHub repository](#integrate-tidb-cloud-serverless-branching-with-your-github-repository).
 
 2. Get the branch connection information.
 

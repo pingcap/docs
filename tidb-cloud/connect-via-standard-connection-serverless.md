@@ -11,7 +11,7 @@ This document describes how to connect to your TiDB Cloud Serverless cluster via
 
 > **Tip:**
 >
-> To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+> To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
 To connect to a TiDB Cloud Serverless cluster via public endpoint, take the following steps:
 
@@ -23,8 +23,8 @@ To connect to a TiDB Cloud Serverless cluster via public endpoint, take the foll
 
     > **Note:**
     >
-    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-    > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 4. TiDB Cloud Serverless lets you create [branches](/tidb-cloud/branch-overview.md) for your cluster. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the cluster itself.
 
