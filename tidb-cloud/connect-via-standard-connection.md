@@ -1,23 +1,23 @@
 ---
-title: Connect to TiDB Dedicated via Public Connection
+title: Connect to TiDB Cloud Dedicated via Public Connection
 summary: Learn how to connect to your TiDB Cloud cluster via public connection.
 ---
 
-# Connect to TiDB Dedicated via Public Connection
+# Connect to TiDB Cloud Dedicated via Public Connection
 
-This document describes how to connect to your TiDB Dedicated cluster via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Dedicated cluster via a SQL client from your laptop.
+This document describes how to connect to your TiDB Cloud Dedicated cluster via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Cloud Dedicated cluster via a SQL client from your laptop.
 
 > **Tip:**
 >
-> To learn how to connect to a TiDB Serverless cluster via public connection, see [Connect to TiDB Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
+> To learn how to connect to a TiDB Cloud Serverless cluster via public connection, see [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
 
 ## Prerequisite: Configure IP access list
 
-For public connections, TiDB Dedicated only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
+For public connections, TiDB Cloud Dedicated only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
 
 ## Connect to the cluster
 
-To connect to a TiDB Dedicated cluster via public connection, take the following steps:
+To connect to a TiDB Cloud Dedicated cluster via public connection, take the following steps:
 
 1. Open the overview page of the target cluster.
 

@@ -16,7 +16,7 @@ If you want to migrate incremental data only, see [Migrate Incremental Data from
 
 ### Availability
 
-- The Data Migration feature is available only for **TiDB Dedicated** clusters.
+- The Data Migration feature is available only for **TiDB Cloud Dedicated** clusters.
 
 - The Data Migration feature is only available to clusters that are created in [certain regions](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost) after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
@@ -104,7 +104,7 @@ To quickly test a migration job, you can use the `root` account of the TiDB Clou
 
 ### Set up network connection
 
-Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 - If you use public IP (this is, public connection) for network connection, make sure that the upstream database can be connected through the public network.
 

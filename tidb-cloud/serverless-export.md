@@ -1,15 +1,15 @@
 ---
-title: Export Data from TiDB Serverless
-summary: Learn how to export data from TiDB Serverless clusters.
+title: Export Data from TiDB Cloud Serverless
+summary: Learn how to export data from TiDB Cloud Serverless clusters.
 ---
 
-# Export Data from TiDB Serverless
+# Export Data from TiDB Cloud Serverless
 
-TiDB Serverless Export (Beta) is a service that enables you to export data from a TiDB Serverless cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Cloud Serverless Export (Beta) is a service that enables you to export data from a TiDB Cloud Serverless cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), TiDB Serverless Export offers a more convenient and efficient way to export data from a TiDB Serverless cluster. It brings the following benefits:
+While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), TiDB Cloud Serverless Export offers a more convenient and efficient way to export data from a TiDB Cloud Serverless cluster. It brings the following benefits:
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a TiDB Serverless cluster, eliminating the need for additional tools or resources.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a TiDB Cloud Serverless cluster, eliminating the need for additional tools or resources.
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
@@ -23,7 +23,7 @@ You can export data to a local file or [Amazon S3](https://aws.amazon.com/s3/).
 
 ### A local file
 
-To export data from a TiDB Serverless cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+To export data from a TiDB Cloud Serverless cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
 
 Exporting data to a local file has the following limitations:
 
@@ -40,7 +40,7 @@ To export data to Amazon S3, you need to provide the following information:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
     - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN has the `s3:PutObject` and `s3:ListBucket` permissions. 
 
-For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
 ## Export options
 
@@ -149,7 +149,7 @@ You can compress the exported CSV and SQL data using the following algorithms:
     - **Data Format**: choose **SQL File** or **CSV**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
-    - **Bucket Access**: choose one of the following access credentials and then fill in the credential information. If you do not have such information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+    - **Bucket Access**: choose one of the following access credentials and then fill in the credential information. If you do not have such information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
         - **AWS Role ARN**: enter the role ARN that has the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
         - **AWS Access Key**: enter the access key ID and access key secret that have the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
 

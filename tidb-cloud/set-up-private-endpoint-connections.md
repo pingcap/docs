@@ -1,16 +1,16 @@
 ---
-title: Connect to a TiDB Dedicated Cluster via Private Endpoint with AWS
+title: Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS
 summary: Learn how to connect to your TiDB Cloud cluster via private endpoint with AWS.
 ---
 
-# Connect to a TiDB Dedicated Cluster via Private Endpoint with AWS
+# Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS
 
-This document describes how to connect to your TiDB Dedicated cluster via private endpoint with AWS.
+This document describes how to connect to your TiDB Cloud Dedicated cluster via private endpoint with AWS.
 
 > **Tip:**
 >
-> To learn how to connect to a TiDB Serverless cluster via private endpoint, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
-> To learn how to connect to a TiDB Dedicated cluster via private endpoint with Google Cloud, see [Connect to TiDB Dedicated via Private Service Connect with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+> To learn how to connect to a TiDB Cloud Serverless cluster via private endpoint, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+> To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Google Cloud, see [Connect to TiDB Cloud Dedicated via Private Service Connect with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
 TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
@@ -38,7 +38,7 @@ In most scenarios, you are recommended to use private endpoint connection over V
 
 ## Set up a private endpoint connection and connect to your cluster
 
-To connect to your TiDB Dedicated cluster via a private endpoint, complete the follow these steps:
+To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the follow these steps:
 
 1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -62,7 +62,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 > **Note:**
 >
-> For each TiDB Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
+> For each TiDB Cloud Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
 If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 

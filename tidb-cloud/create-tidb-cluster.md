@@ -1,15 +1,15 @@
 ---
-title: Create a TiDB Dedicated Cluster
-summary: Learn how to create your TiDB Dedicated cluster.
+title: Create a TiDB Cloud Dedicated Cluster
+summary: Learn how to create your TiDB Cloud Dedicated cluster.
 ---
 
-# Create a TiDB Dedicated Cluster
+# Create a TiDB Cloud Dedicated Cluster
 
-This tutorial guides you through signing up and creating a TiDB Dedicated cluster.
+This tutorial guides you through signing up and creating a TiDB Cloud Dedicated cluster.
 
 > **Tip:**
 >
-> To learn how to create a TiDB Serverless cluster, see [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+> To learn how to create a TiDB Cloud Serverless cluster, see [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Before you begin
 
@@ -36,9 +36,9 @@ If you are an organization owner, you can rename the default project or create a
 
 4. To return to the cluster page, click the TiDB Cloud logo in the upper-left corner of the window.
 
-## Step 2. Create a TiDB Dedicated cluster
+## Step 2. Create a TiDB Cloud Dedicated cluster
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Dedicated cluster as follows:
+If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud Dedicated cluster as follows:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
@@ -90,4 +90,4 @@ After your cluster is created, take the following steps to set the root password
 
 ## What's next
 
-After your cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+After your cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).

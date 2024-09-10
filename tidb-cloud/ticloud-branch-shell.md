@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/ticloud-connect']
 
 # ticloud serverless branch shell
 
-Connect to a branch of a TiDB Serverless cluster:
+Connect to a branch of a TiDB Cloud Serverless cluster:
 
 ```shell
 ticloud serverless branch shell [flags]
@@ -14,25 +14,25 @@ ticloud serverless branch shell [flags]
 
 ## Examples
 
-Connect to a TiDB Serverless branch in interactive mode:
+Connect to a TiDB Cloud Serverless branch in interactive mode:
 
 ```shell
 ticloud serverless branch shell
 ```
 
-Connect to a TiDB Serverless branch with the default user in non-interactive mode:
+Connect to a TiDB Cloud Serverless branch with the default user in non-interactive mode:
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id>
 ```
 
-Connect to a TiDB Serverless branch with the default user and password in non-interactive mode:
+Connect to a TiDB Cloud Serverless branch with the default user and password in non-interactive mode:
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id> --password <password>
 ```
 
-Connect to a TiDB Serverless branch with a specific user and password in non-interactive mode:
+Connect to a TiDB Cloud Serverless branch with a specific user and password in non-interactive mode:
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id> -u <user-name> --password <password>

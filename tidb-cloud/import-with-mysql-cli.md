@@ -11,7 +11,7 @@ This document describes how to import data into TiDB Cloud via the [MySQL Comman
 
 Before you can import data via MySQL CLI to TiDB Cloud, you need the following prerequisites:
 
-- You have access to your TiDB Cloud cluster. If you do not have a TiDB cluster, create one following the instructions in [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- You have access to your TiDB Cloud cluster. If you do not have a TiDB cluster, create one following the instructions in [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Install MySQL CLI on your local computer.
 
 ## Step 1. Connect to your TiDB Cloud cluster
@@ -19,7 +19,7 @@ Before you can import data via MySQL CLI to TiDB Cloud, you need the following p
 Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -38,7 +38,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     > If you have created a password before, either use the original password or click **Reset Password** to generate a new one.
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -46,7 +46,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 3. Click **Allow Access from Anywhere**.
 
-    For more details about how to obtain the connection string, see [Connect to TiDB Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+    For more details about how to obtain the connection string, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
 </div>
 </SimpleTab>

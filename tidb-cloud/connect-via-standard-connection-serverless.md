@@ -1,19 +1,19 @@
 ---
-title: Connect to TiDB Serverless via Public Endpoint
-summary: Learn how to connect to your TiDB Serverless cluster via public endpoint.
+title: Connect to TiDB Cloud Serverless via Public Endpoint
+summary: Learn how to connect to your TiDB Cloud Serverless cluster via public endpoint.
 ---
 
-# Connect to TiDB Serverless via Public Endpoint
+# Connect to TiDB Cloud Serverless via Public Endpoint
 
-This document describes how to connect to your TiDB Serverless cluster via a public endpoint, using a SQL client from your computer, as well as how to disable a public endpoint.
+This document describes how to connect to your TiDB Cloud Serverless cluster via a public endpoint, using a SQL client from your computer, as well as how to disable a public endpoint.
 
 ## Connect via a public endpoint
 
 > **Tip:**
 >
-> To learn how to connect to a TiDB Dedicated cluster via public endpoint, see [Connect to TiDB Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+> To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
-To connect to a TiDB Serverless cluster via public endpoint, take the following steps:
+To connect to a TiDB Cloud Serverless cluster via public endpoint, take the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -23,10 +23,10 @@ To connect to a TiDB Serverless cluster via public endpoint, take the following 
 
     > **Note:**
     >
-    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-    > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+    > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    > - If you choose **Private Endpoint** in the **Connection Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
-4. TiDB Serverless lets you create [branches](/tidb-cloud/branch-overview.md) for your cluster. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the cluster itself.
+4. TiDB Cloud Serverless lets you create [branches](/tidb-cloud/branch-overview.md) for your cluster. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the cluster itself.
 
 5. If you have not set a password yet, click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location.
 
@@ -34,11 +34,11 @@ To connect to a TiDB Serverless cluster via public endpoint, take the following 
 
     > **Note:**
     >
-    > When you connect to a TiDB Serverless cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > When you connect to a TiDB Cloud Serverless cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
 ## Disable a public endpoint
 
-If you do not need to use a public endpoint of a TiDB Serverless cluster, you can disable it to prevent connections from the internet:
+If you do not need to use a public endpoint of a TiDB Cloud Serverless cluster, you can disable it to prevent connections from the internet:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 

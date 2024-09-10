@@ -3,7 +3,7 @@
 
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB Cloud
-  - [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
+  - [What is TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
@@ -17,7 +17,7 @@
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Serverless Cluster in TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Connect to TiDB Cloud
     - GUI Database Tools
@@ -116,9 +116,9 @@
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
-  - Manage TiDB Serverless Clusters
-    - [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - Connect to Your TiDB Serverless Cluster
+  - Manage TiDB Cloud Serverless Clusters
+    - [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - Connect to Your TiDB Cloud Serverless Cluster
       - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
@@ -127,20 +127,20 @@
       - [Manage Branches](/tidb-cloud/branch-manage.md)
       - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
     - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
-    - [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
-    - [Export Data from TiDB Serverless](/tidb-cloud/serverless-export.md)
-  - Manage TiDB Dedicated Clusters
-    - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
-    - Connect to Your TiDB Dedicated Cluster
+    - [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
+    - [Export Data from TiDB Cloud Serverless](/tidb-cloud/serverless-export.md)
+  - Manage TiDB Cloud Dedicated Clusters
+    - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
+    - Connect to Your TiDB Cloud Dedicated Cluster
       - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
       - [Connect via Public Connection](/tidb-cloud/connect-via-standard-connection.md)
       - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
       - [Connect via Private Endpoint (Private Service Connect) with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
       - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
-    - [Scale a TiDB Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
-    - [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md)
-    - [Pause or Resume a TiDB Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
+    - [Scale a TiDB Cloud Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
+    - [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)
+    - [Pause or Resume a TiDB Cloud Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
     - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
@@ -300,15 +300,15 @@
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
-    - TiDB Serverless
+    - TiDB Cloud Serverless
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-    - TiDB Dedicated
+      - [TLS Connections to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - TiDB Cloud Dedicated
       - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
       - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
       - [Connect via Private Endpoint (Private Service Connect) with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-      - [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+      - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
       - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
   - Database Access Control
@@ -369,8 +369,8 @@
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
     - [TSO](/tso.md)
-  - [TiDB Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md)
+  - [TiDB Cloud Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [TiDB Cloud Serverless Limitations](/tidb-cloud/serverless-limitations.md)
   - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - TiDB Distributed eXecution Framework (DXF)
@@ -724,7 +724,7 @@
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
-  - [TiDB Serverless FAQs](/tidb-cloud/serverless-faqs.md)
+  - [TiDB Cloud Serverless FAQs](/tidb-cloud/serverless-faqs.md)
 - Release Notes
   - [2024](/tidb-cloud/tidb-cloud-release-notes.md)
   - [2023](/tidb-cloud/release-notes-2023.md)
@@ -737,6 +737,6 @@
   - [[2024-04-16] TiDB Cloud Monitoring Features Maintenance Notification](/tidb-cloud/notification-2024-04-16-monitoring-features-maintenance.md)
   - [[2024-04-11] TiDB Cloud Data Migration (DM) Feature Maintenance Notification](/tidb-cloud/notification-2024-04-11-dm-feature-maintenance.md)
   - [[2024-04-09] TiDB Cloud Monitoring Features Maintenance Notification](/tidb-cloud/notification-2024-04-09-monitoring-features-maintenance.md)
-  - [[2023-11-14] TiDB Dedicated Scale Feature Maintenance Notification](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
+  - [[2023-11-14] TiDB Cloud Dedicated Scale Feature Maintenance Notification](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
   - [[2023-09-26] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
   - [[2023-08-31] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-08-31-console-maintenance.md)

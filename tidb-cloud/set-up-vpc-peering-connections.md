@@ -1,13 +1,13 @@
 ---
-title: Connect to TiDB Dedicated via VPC Peering
-summary: Learn how to connect to TiDB Dedicated via VPC peering.
+title: Connect to TiDB Cloud Dedicated via VPC Peering
+summary: Learn how to connect to TiDB Cloud Dedicated via VPC peering.
 ---
 
-# Connect to TiDB Dedicated via VPC Peering
+# Connect to TiDB Cloud Dedicated via VPC Peering
 
 > **Note:**
 >
-> VPC peering connection is only available for TiDB Dedicated clusters. You cannot connect to [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless) using VPC peering.
+> VPC peering connection is only available for TiDB Cloud Dedicated clusters. You cannot connect to [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) using VPC peering.
 
 To connect your application to TiDB Cloud via VPC peering, you need to set up [VPC peering](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering) with TiDB Cloud. This document walks you through setting up VPC peering connections [on AWS](#set-up-vpc-peering-on-aws) and [on Google Cloud](#set-up-vpc-peering-on-google-cloud) and connecting to TiDB Cloud via a VPC peering.
 
@@ -21,11 +21,11 @@ Currently, TiDB clusters of the same project in the same region are created in t
 
 ## Prerequisite: Set a CIDR for a region
 
-CIDR (Classless Inter-Domain Routing) is the CIDR block used for creating VPC for TiDB Dedicated clusters.
+CIDR (Classless Inter-Domain Routing) is the CIDR block used for creating VPC for TiDB Cloud Dedicated clusters.
 
-Before adding VPC Peering requests to a region, you must set a CIDR for that region and create an initial TiDB Dedicated cluster in that region. Once the first Dedicated cluster is created, TiDB Cloud will create the VPC of the cluster, allowing you to establish a peering link to your application's VPC.
+Before adding VPC Peering requests to a region, you must set a CIDR for that region and create an initial TiDB Cloud Dedicated cluster in that region. Once the first Dedicated cluster is created, TiDB Cloud will create the VPC of the cluster, allowing you to establish a peering link to your application's VPC.
 
-You can set the CIDR when creating the first TiDB Dedicated cluster. If you want to set the CIDR before creating the cluster, perform the following operations:
+You can set the CIDR when creating the first TiDB Cloud Dedicated cluster. If you want to set the CIDR before creating the cluster, perform the following operations:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.

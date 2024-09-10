@@ -10,8 +10,8 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 > **Note:**
 >
 > - TiDB Cloud only supports importing Parquet files into empty tables. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
-> - If there is a changefeed in a TiDB Dedicated cluster, you cannot import data to the cluster (the **Import Data** button will be disabled), because the current import data feature uses the [physical import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). In this mode, the imported data does not generate change logs, so the changefeed cannot detect the imported data.
-> - Only TiDB Dedicated clusters support importing Parquet files from GCS.
+> - If there is a changefeed in a TiDB Cloud Dedicated cluster, you cannot import data to the cluster (the **Import Data** button will be disabled), because the current import data feature uses the [physical import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). In this mode, the imported data does not generate change logs, so the changefeed cannot detect the imported data.
+> - Only TiDB Cloud Dedicated clusters support importing Parquet files from GCS.
 > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 
 ## Step 1. Prepare the Parquet files

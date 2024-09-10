@@ -9,14 +9,14 @@ You can learn how to import data to a TiDB Cloud cluster with the `tidbcloud_imp
 
 The features of the `tidbcloud_import` resource include the following:
 
-- Create import tasks for TiDB Serverless and TiDB Dedicated clusters.
+- Create import tasks for TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
 - Import data either from local disks or from Amazon S3 buckets.
 - Cancel ongoing import tasks.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Create and run an import task
 
@@ -26,7 +26,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
 
 > **Note:**
 >
-> Importing local files is supported only for TiDB Serverless clusters, not for TiDB Dedicated clusters.
+> Importing local files is supported only for TiDB Cloud Serverless clusters, not for TiDB Cloud Dedicated clusters.
 
 1. Create a CSV file for import. For example:
 

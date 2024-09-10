@@ -1,28 +1,28 @@
 ---
-title: TLS Connections to TiDB Dedicated
-summary: Introduce TLS connections in TiDB Dedicated.
+title: TLS Connections to TiDB Cloud Dedicated
+summary: Introduce TLS connections in TiDB Cloud Dedicated.
 aliases: ['/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
 ---
 
-# TLS Connections to TiDB Dedicated
+# TLS Connections to TiDB Cloud Dedicated
 
-On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to TiDB Dedicated clusters. You can configure multiple TLS connections from your client, application, and development tools to your TiDB Dedicated cluster to protect data transmission security. For security reasons, TiDB Dedicated only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
+On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to TiDB Cloud Dedicated clusters. You can configure multiple TLS connections from your client, application, and development tools to your TiDB Cloud Dedicated cluster to protect data transmission security. For security reasons, TiDB Cloud Dedicated only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
 
-To ensure data security, TiDB cluster CA for your TiDB Dedicated cluster is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/), and TiDB cluster private keys are stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+To ensure data security, TiDB cluster CA for your TiDB Cloud Dedicated cluster is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/), and TiDB cluster private keys are stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## Prerequisites
 
-- Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md), and then [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md), and then [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
 - Set a password to access your cluster in secure settings.
 
-    To do so, you can navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your TiDB Dedicated cluster, and then select **Password Settings**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
+    To do so, you can navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your TiDB Cloud Dedicated cluster, and then select **Password Settings**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
 
-## Secure connection to a TiDB Dedicated cluster
+## Secure connection to a TiDB Cloud Dedicated cluster
 
-In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your TiDB Dedicated cluster as follows:
+In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your TiDB Cloud Dedicated cluster as follows:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your TiDB Dedicated cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your TiDB Cloud Dedicated cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
@@ -35,7 +35,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
     > **Note:**
     >
     > - You can store the downloaded CA cert in the default storage path of your operating system, or specify another storage path. You need to replace the CA cert path in the code example with your own CA cert path in the subsequent steps.
-   > - TiDB Dedicated does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on TiDB Dedicated.
+    > - TiDB Cloud Dedicated does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on TiDB Cloud Dedicated.
 
 5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
@@ -44,7 +44,7 @@ The following examples show the connection strings in MySQL, MyCLI, JDBC, Python
 <SimpleTab>
 <div label="MySQL CLI">
 
-MySQL CLI client attempts to establish a TLS connection by default. When you connect to TiDB Dedicated clusters, you need to set `ssl-mode` and `ssl-ca`.
+MySQL CLI client attempts to establish a TLS connection by default. When you connect to TiDB Cloud Dedicated clusters, you need to set `ssl-mode` and `ssl-ca`.
 
 ```shell
 mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-version="TLSv1.2" -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test -p
@@ -52,7 +52,7 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 
 Parameter description：
 
-- With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Dedicated clusters.
+- With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Cloud Dedicated clusters.
 - Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB cluster `ca.pem`.
 - Use `--tls-version=TLSv1.2` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
 
@@ -60,7 +60,7 @@ Parameter description：
 
 <div label="MyCLI">
 
-[MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Dedicated clusters, you need to set `ssl-ca` and `ssl-verify-server-cert`.
+[MyCLI](https://www.mycli.net/) automatically enables TLS when using TLS related parameters. When you connect to TiDB Cloud Dedicated clusters, you need to set `ssl-ca` and `ssl-verify-server-cert`.
 
 ```shell
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test
@@ -69,7 +69,7 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 Parameter descriptions：
 
 - Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB cluster `ca.pem`.
-- With `--ssl-verify-server-cert` to validate TiDB Dedicated clusters.
+- With `--ssl-verify-server-cert` to validate TiDB Cloud Dedicated clusters.
 
 </div>
 
@@ -114,7 +114,7 @@ class Main {
 
 Parameter description：
 
-- Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Dedicated clusters.
+- Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Cloud Dedicated clusters.
 - Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
 - Set `trustCertificateKeyStoreUrl` to your custom truststore path.
 - Set `trustCertificateKeyStorePassword` to your truststore password.
@@ -145,7 +145,7 @@ with connection:
 
 Parameter descriptions：
 
-- Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Dedicated clusters.
+- Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Cloud Dedicated clusters.
 - Use `ssl={"ca": "<CA_path>"}` to specify your local path of the downloaded TiDB cluster `ca.pem`.
 
 </div>
@@ -217,9 +217,9 @@ func main() {
 
 Parameter descriptions：
 
-- Register `tls.Config` in the TLS connection configuration to enable TLS and validate TiDB Dedicated clusters.
+- Register `tls.Config` in the TLS connection configuration to enable TLS and validate TiDB Cloud Dedicated clusters.
 - Set `MinVersion: tls.VersionTLS12` to restrict the versions of TLS protocol.
-- Set `ServerName: "<host>"` to verify TiDB Dedicated's hostname.
+- Set `ServerName: "<host>"` to verify TiDB Cloud Dedicated's hostname.
 - If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
 
 </div>
@@ -282,18 +282,18 @@ Parameter descriptions：
 </div>
 </SimpleTab>
 
-## Manage root certificates for TiDB Dedicated
+## Manage root certificates for TiDB Cloud Dedicated
 
-TiDB Dedicated uses certificates from [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Dedicated clusters. Usually, the root certificates of ACM are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
+TiDB Cloud Dedicated uses certificates from [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Cloud Dedicated clusters. Usually, the root certificates of ACM are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## FAQs
 
-### Which TLS versions are supported to connect to my TiDB Dedicated cluster?
+### Which TLS versions are supported to connect to my TiDB Cloud Dedicated cluster?
 
-For security reasons, TiDB Dedicated only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
+For security reasons, TiDB Cloud Dedicated only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions. See IETF [Deprecating TLS 1.0 and TLS 1.1](https://datatracker.ietf.org/doc/rfc8996/) for details.
 
-### Is two-way TLS authentication between my client and TiDB Dedicated supported?
+### Is two-way TLS authentication between my client and TiDB Cloud Dedicated supported?
 
 No.
 
-TiDB Dedicated only supports one-way TLS authentication, and does not support two-way TLS authentication currently. If you need two-way TLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+TiDB Cloud Dedicated only supports one-way TLS authentication, and does not support two-way TLS authentication currently. If you need two-way TLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
