@@ -330,7 +330,7 @@ SHOW CREATE TABLE t;
 1 row in set (0.00 sec)
 ```
 
-At this time, if TiDB is restarted, the auto-increment ID cache will be lost, and new insert operations will allocate IDs starting from a higher value beyond the previously cached range.
+At this time, if you restart TiDB, the auto-increment ID cache will be lost, and new insert operations will allocate IDs starting from a higher value beyond the previously cached range.
 
 ```sql
 INSERT INTO t VALUES();
