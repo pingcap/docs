@@ -9,7 +9,7 @@ The `ADMIN SHOW TELEMETRY` statement shows the information that will be reported
 
 > **Note:**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This feature is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 ## Synopsis
 
