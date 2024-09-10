@@ -114,7 +114,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Manage project access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
 
-[Configure Security Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
+[Configure Password Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
 </LearningPath>
 

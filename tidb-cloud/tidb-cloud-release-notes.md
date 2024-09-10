@@ -8,6 +8,32 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## September 3, 2024
+
+**Console changes**
+
+- Support exporting data from TiDB Serverless clusters using the [TiDB Cloud console](https://tidbcloud.com/). 
+  
+    Previously, TiDB Cloud only supported exporting data using the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md). Now, you can easily export data from TiDB Serverless clusters to local files and Amazon S3 in the [TiDB Cloud console](https://tidbcloud.com/). 
+  
+    For more information, see [Export Data from TiDB Serverless](/tidb-cloud/serverless-export.md) and [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md).
+
+- Enhance the connection experience for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+
+    - Revise the **Connect** dialog interface to provide TiDB Dedicated users with a more streamlined and efficient connection experience.
+    - Introduce a new cluster-level **Networking** page to simplify network configuration for your cluster.
+    - Replace the **Security Settings** page with a new **Password Settings** page and move IP access list settings to the new **Networking** page.
+  
+  For more information, see [Connect to TiDB Dedicated](/tidb-cloud/connect-to-tidb-cluster.md).
+
+- Enhance the data import experience for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) and [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters:
+
+    - Refine the layout of the **Import** page with a clearer layout.
+    - Unify the import steps for TiDB Serverless and TiDB Dedicated clusters.
+    - Simplify the AWS Role ARN creation process for easier connection setup.
+
+  For more information, see [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
+
 ## August 20, 2024
 
 **Console changes**
