@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and Prisma to accomplish the fol
 
 > **Note:**
 >
-> This tutorial works with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -29,13 +29,13 @@ To complete this tutorial, you need:
 
 <CustomContent platform="tidb">
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
@@ -77,7 +77,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -106,7 +106,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     > **Note**
     >
-    > For TiDB Serverless, you **MUST** enable TLS connection by setting `sslaccept=strict` when using public endpoint.
+    > For TiDB Cloud Serverless, you **MUST** enable TLS connection by setting `sslaccept=strict` when using public endpoint.
 
 7. Save the `.env` file.
 8. In the `prisma/schema.prisma`, set up `mysql` as the connection provider and `env("DATABASE_URL")` as the connection URL:
@@ -119,7 +119,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     ```
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -145,7 +145,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     > **Note**
     >
-    > For TiDB Serverless, It is **RECOMMENDED** to enable TLS connection by setting `sslaccept=strict` when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.
+    > For TiDB Cloud Serverless, It is **RECOMMENDED** to enable TLS connection by setting `sslaccept=strict` when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.
 
 6. Save the `.env` file.
 7. In the `prisma/schema.prisma`, set up `mysql` as the connection provider and `env("DATABASE_URL")` as the connection URL:
@@ -158,7 +158,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     ```
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1. Run the following command to copy `.env.example` and rename it to `.env`:
 

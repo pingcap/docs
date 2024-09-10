@@ -10,7 +10,7 @@ The `CHANGE PUMP` statement modifies the status information for Pump in the clus
 
 > **Note:**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This feature is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 > **Tip:**
 >

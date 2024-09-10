@@ -2,8 +2,8 @@
 <!-- markdownlint-disable MD041 -->
 
 - [Docs Home](https://docs.pingcap.com/)
-- About TiDB
-  - [TiDB Introduction](/overview.md)
+- About TiDB Self-Managed
+  - [What is TiDB Self-Managed](/overview.md)
   - [TiDB 8.3 Release Notes](/releases/release-8.3.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
@@ -19,7 +19,7 @@
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Example Applications
     - Java

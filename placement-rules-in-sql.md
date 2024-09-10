@@ -15,7 +15,7 @@ This feature can fulfill the following use cases:
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Overview
 
@@ -44,7 +44,7 @@ Placement policies rely on the configuration of labels on TiKV nodes. For exampl
 
 <CustomContent platform="tidb">
 
-When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method for a TiDB Self-Hosted cluster is as follows:
+When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method for a TiDB Self-Managed cluster is as follows:
 
 ```
 tikv-server --labels region=<region>,zone=<zone>,host=<host>
@@ -60,13 +60,13 @@ For detailed configuration methods, see the following examples:
 
 > **Note:**
 >
-> For TiDB Dedicated clusters, you can skip these label configuration steps because the labels on TiKV nodes in TiDB Dedicated clusters are configured automatically.
+> For TiDB Cloud Dedicated clusters, you can skip these label configuration steps because the labels on TiKV nodes in TiDB Cloud Dedicated clusters are configured automatically.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Dedicated clusters, labels on TiKV nodes are configured automatically.
+For TiDB Cloud Dedicated clusters, labels on TiKV nodes are configured automatically.
 
 </CustomContent>
 

@@ -11,7 +11,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using Visual
 
 > **Note:**
 >
-> - This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> - This tutorial is compatible with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
 > - This tutorial also works with Visual Studio Code Remote Development environments, such as [GitHub Codespaces](https://github.com/features/codespaces), [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl).
 
 ## Prerequisites
@@ -29,7 +29,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
@@ -37,7 +37,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
@@ -47,7 +47,7 @@ To complete this tutorial, you need:
 Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -87,25 +87,25 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - In the **MySQL driver specific options** area, configure the following parameters:
 
         - **Authentication Protocol**: select **default**.
-        - **SSL**: select **Enabled**. TiDB Serverless requires a secure connection. In the **SSL Options (node.TLSSocket)** area, configure the **Certificate Authority (CA) Certificate File** field as the `CA` parameter from the TiDB Cloud connection dialog.
+        - **SSL**: select **Enabled**. TiDB Cloud Serverless requires a secure connection. In the **SSL Options (node.TLSSocket)** area, configure the **Certificate Authority (CA) Certificate File** field as the `CA` parameter from the TiDB Cloud connection dialog.
 
             > **Note:**
             >
-            > If you are running on Windows or GitHub Codespaces, you can leave **SSL** blank. By default SQLTools trusts well-known CAs curated by Let's Encrypt. For more information, see [TiDB Serverless root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
+            > If you are running on Windows or GitHub Codespaces, you can leave **SSL** blank. By default SQLTools trusts well-known CAs curated by Let's Encrypt. For more information, see [TiDB Cloud Serverless root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
 
-    ![VS Code SQLTools: configure connection settings for TiDB Serverless](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Cloud Serverless](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
-7. Click **TEST CONNECTION** to validate the connection to the TiDB Serverless cluster.
+7. Click **TEST CONNECTION** to validate the connection to the TiDB Cloud Serverless cluster.
 
     1. In the pop-up window, click **Allow**.
     2. In the **SQLTools Driver Credentials** dialog, enter the password you created in step 4.
 
-        ![VS Code SQLTools: enter password to connect to TiDB Serverless](/media/develop/vsc-sqltools-password.jpg)
+        ![VS Code SQLTools: enter password to connect to TiDB Cloud Serverless](/media/develop/vsc-sqltools-password.jpg)
 
 8. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -136,19 +136,19 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
         - **Authentication Protocol**: select **default**.
         - **SSL**: select **Disabled**.
 
-    ![VS Code SQLTools: configure connection settings for TiDB Dedicated](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Cloud Dedicated](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
 
-6. Click **TEST CONNECTION** to validate the connection to the TiDB Dedicated cluster.
+6. Click **TEST CONNECTION** to validate the connection to the TiDB Cloud Dedicated cluster.
 
     1. In the pop-up window, click **Allow**.
-    2. In the **SQLTools Driver Credentials** dialog, enter the password of the TiDB Dedicated cluster.
+    2. In the **SQLTools Driver Credentials** dialog, enter the password of the TiDB Cloud Dedicated cluster.
 
-    ![VS Code SQLTools: enter password to connect to TiDB Dedicated](/media/develop/vsc-sqltools-password.jpg)
+    ![VS Code SQLTools: enter password to connect to TiDB Cloud Dedicated](/media/develop/vsc-sqltools-password.jpg)
 
 7. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
 
@@ -159,10 +159,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Connection name**: give this connection a meaningful name.
     - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
     - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: enter the port number of your TiDB Self-Hosted cluster.
+    - **Server Address**: enter the IP address or domain name of your TiDB Self-Managed cluster.
+    - **Port**: enter the port number of your TiDB Self-Managed cluster.
     - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the username to use to connect to your TiDB Self-Hosted cluster.
+    - **Username**: enter the username to use to connect to your TiDB Self-Managed cluster.
     - **Password mode**:
 
         - If the password is empty, select **Use empty password**.
@@ -173,13 +173,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
         - **Authentication Protocol**: select **default**.
         - **SSL**: select **Disabled**.
 
-    ![VS Code SQLTools: configure connection settings for TiDB Self-Hosted](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Self-Managed](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
 
-3. Click **TEST CONNECTION** to validate the connection to the TiDB Self-Hosted cluster.
+3. Click **TEST CONNECTION** to validate the connection to the TiDB Self-Managed cluster.
 
-    If the password is not empty, click **Allow** in the pop-up window, and then enter the password of the TiDB Self-Hosted cluster.
+    If the password is not empty, click **Allow** in the pop-up window, and then enter the password of the TiDB Self-Managed cluster.
 
-    ![VS Code SQLTools: enter password to connect to TiDB Self-Hosted](/media/develop/vsc-sqltools-password.jpg)
+    ![VS Code SQLTools: enter password to connect to TiDB Self-Managed](/media/develop/vsc-sqltools-password.jpg)
 
 4. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
 

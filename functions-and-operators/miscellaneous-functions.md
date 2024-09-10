@@ -26,7 +26,7 @@ TiDB supports most of the [miscellaneous functions](https://dev.mysql.com/doc/re
 | [`IS_IPV6()`](#is_ipv6)                  | Whether argument is an IPv6 address               |
 | [`IS_UUID()`](#is_uuid)                  | Whether argument is an UUID                       |
 | [`NAME_CONST()`](#name_const)            | Can be used to rename a column name               |
-| [`SLEEP()`](#sleep)                      | Sleep for a number of seconds. Note that for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters, the `SLEEP()` function has a limitation wherein it can only support a maximum sleep time of 300 seconds.       |
+| [`SLEEP()`](#sleep)                      | Sleep for a number of seconds. Note that for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, the `SLEEP()` function has a limitation wherein it can only support a maximum sleep time of 300 seconds.       |
 | [`UUID()`](#uuid)                        | Return a Universal Unique Identifier (UUID)       |
 | [`UUID_TO_BIN()`](#uuid_to_bin)          | Convert UUID from text format to binary format    |
 | [`VALUES()`](#values)                    | Defines the values to be used during an INSERT    |
