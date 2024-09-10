@@ -377,16 +377,20 @@ Configuration items related to replicas
 + Default value: `true`
 + See [Placement Rules](/configure-placement-rules.md).
 
-## `label-property`
+## `label-property` (deprecated)
 
-Configuration items related to labels
+Configuration items related to labels, which only support the `reject-leader` type.
 
-### `key`
+> **Note:**
+>
+> Starting from v5.2, the configuration items related to labels are deprecated. It is recommended to use [Placement Rules](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center) to configure the replica policy.
+
+### `key` (deprecated)
 
 + The label key for the store that rejected the Leader
 + Default value: `""`
 
-### `value`
+### `value` (deprecated)
 
 + The label value for the store that rejected the Leader
 + Default value: `""`
