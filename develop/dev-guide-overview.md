@@ -144,7 +144,7 @@ In addition to these guides, PingCAP works with the community to [support the th
 
 ## Use MySQL client software
 
-As TiDB is a MySQL-compatible database, you can use many client software tools to connect to TiDB Cloud and manage the databases just like you did before. Or, use our [command line tool](/tidb-cloud/get-started-with-cli.md) to connect and manage your databases.
+As TiDB is a MySQL-compatible database, you can use many client software tools to connect to TiDB Cloud and manage the databases just like you did before. Or, use our [command line tool](https://docs.pingcap.com/tidbcloud/get-started-with-cli) to connect and manage your databases.
 
 <DevToolGroup>
 <DevToolCard title="MySQL Workbench" logo="mysql-1" docLink="/tidbcloud/dev-guide-gui-mysql-workbench">
@@ -173,8 +173,8 @@ Connect and manage TiDB Cloud databases with DataGrip by JetBrains.
 
 Learn other topics about developing with TiDB Cloud.
 
-- Use [TiDB Cloud CLI](/tidbcloud/get-started-with-cli.md) to develop, manage and deploy your applications.
-- Explore popular [services integrations](/tidbcloud/integrate-tidbcloud-with-airbyte.md) with TiDB Cloud.
+- Use [TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli) to develop, manage and deploy your applications.
+- Explore popular [services integrations](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte) with TiDB Cloud.
 - Use [TiDB database development reference](/develop/dev-guide-schema-design-overview.md) to design, interact, optimize and troubleshoot with your data and schema.
 - Follow the free online course [Introduction to TiDB](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide).
 
