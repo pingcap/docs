@@ -24,6 +24,7 @@ For TiDB Self-Hosted, `IMPORT INTO` supports importing data from files stored in
 
 - For TiDB Self-Hosted, `IMPORT INTO` supports importing data within 10 TiB. For [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `IMPORT INTO` supports importing data within 50 GiB.
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
+- `IMPORT INTO` does not support importing data into a [temporary table](/temporary-tables.md) or a [cached table](/cached-tables.md).
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
 - The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
 - `IMPORT INTO` does not support working simultaneously with features such as [Backup & Restore](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview), [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture).
