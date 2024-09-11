@@ -1,15 +1,15 @@
 ---
 title: TIDB_HOT_REGIONS
-summary: TIDB_HOT_REGIONSテーブルは、現在のホットなリージョンに関する情報を提供します。履歴ホットリージョンについては、TIDB_HOT_REGIONS_HISTORYを参照してください。このテーブルはTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。テーブルの列の説明は次のとおりです。TABLE_ID、INDEX_ID、DB_NAME、TABLE_NAME、INDEX_NAME、REGION_ID、TYPE、MAX_HOT_DEGREE、REGION_COUNT、FLOW_BYTES。
+summary: TIDB_HOT_REGIONS` information_schema テーブルについて学習します。
 ---
 
-# TIDB_HOT_REGIONS {#tidb-hot-regions}
+# TIDB_ホットリージョン {#tidb-hot-regions}
 
-`TIDB_HOT_REGIONS`表は、現在ホットなリージョンに関する情報を提供します。履歴ホット リージョンについては、 `[TIDB_HOT_REGIONS_HISTORY](/information-schema/information-schema-tidb-hot-regions-history.md)`を参照してください。
+`TIDB_HOT_REGIONS`表には、現在のホット リージョンに関する情報が示されています。過去のホット リージョンの詳細については、 `[TIDB_HOT_REGIONS_HISTORY](/information-schema/information-schema-tidb-hot-regions-history.md)`を参照してください。
 
 > **注記：**
 >
-> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+> この表は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 ```sql
 USE information_schema;
@@ -32,15 +32,15 @@ DESC tidb_hot_regions;
     +----------------+-------------+------+------+---------+-------+
     10 rows in set (0.00 sec)
 
-`TIDB_HOT_REGIONS`のテーブルの列の説明は次のとおりです。
+`TIDB_HOT_REGIONS`表の列の説明は次のとおりです。
 
 -   `TABLE_ID` : ホットリージョンが配置されているテーブルの ID。
 -   `INDEX_ID` : ホットリージョンが配置されているインデックスの ID。
--   `DB_NAME` : ホットリージョンが存在するオブジェクトのデータベース名。
+-   `DB_NAME` : ホットリージョンが配置されているオブジェクトのデータベース名。
 -   `TABLE_NAME` : ホットリージョンが配置されているテーブルの名前。
 -   `INDEX_NAME` : ホットリージョンが配置されているインデックスの名前。
 -   `REGION_ID` : ホットリージョンの ID。
 -   `TYPE` : ホットリージョンのタイプ。
--   `MAX_HOT_DEGREE` :リージョンの最大ホット度。
--   `REGION_COUNT` : インスタンス内のホット リージョンの数。
--   `FLOW_BYTES` :リージョン内で読み書きされるバイト数。
+-   `MAX_HOT_DEGREE` :リージョンの最大暑さ度。
+-   `REGION_COUNT` : インスタンス内のホット領域の数。
+-   `FLOW_BYTES` :リージョン内で書き込まれたバイト数と読み取られたバイト数。

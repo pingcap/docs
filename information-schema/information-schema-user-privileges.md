@@ -1,18 +1,18 @@
 ---
 title: USER_PRIVILEGES
-summary: USER_PRIVILEGESテーブルは、グローバル権限に関する情報を示します。この情報はmysql.userシステムテーブルから取得されます。テーブルのフィールドは、GRANTEE（許可されたユーザーの名前）、TABLE_CATALOG（テーブルが属するカタログの名前）、PRIVILEGE_TYPE（付与される権限のタイプ）、IS_GRANTABLE（GRANT OPTION権限がある場合はYES、それ以外の場合はNO）です。
+summary: USER_PRIVILEGES` information_schema テーブルについて学習します。
 ---
 
-# USER_PRIVILEGES {#user-privileges}
+# ユーザー権限 {#user-privileges}
 
-表`USER_PRIVILEGES`は、グローバル権限に関する情報を示します。この情報は`mysql.user`システム テーブルから取得されます。
+`USER_PRIVILEGES`テーブルはグローバル権限に関する情報を提供します。この情報は`mysql.user`システム テーブルから取得されます。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC USER_PRIVILEGES;
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 +----------------+--------------+------+------+---------+-------+
@@ -26,13 +26,13 @@ DESC USER_PRIVILEGES;
 4 rows in set (0.00 sec)
 ```
 
-`USER_PRIVILEGES`の表の情報をビュー。
+`USER_PRIVILEGES`表の情報をビュー。
 
 ```sql
 SELECT * FROM USER_PRIVILEGES;
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 <CustomContent platform="tidb">
 
@@ -79,7 +79,7 @@ SELECT * FROM USER_PRIVILEGES;
 
 <CustomContent platform="tidb-cloud">
 
-<!--Compared with TiDB Self-Hosted, the root user in TiDB Cloud does not have the SHUTDOWN and CONFIG privileges.-->
+<!--Compared with TiDB Self-Managed, the root user in TiDB Cloud does not have the SHUTDOWN and CONFIG privileges.-->
 
 ```sql
 +------------+---------------+-------------------------+--------------+
@@ -120,9 +120,9 @@ SELECT * FROM USER_PRIVILEGES;
 
 </CustomContent>
 
-`USER_PRIVILEGES`テーブルのフィールドは次のように説明されています。
+`USER_PRIVILEGES`テーブル内のフィールドは次のように説明されます。
 
 -   `GRANTEE` : 許可されたユーザーの名前。形式は`'user_name'@'host_name'`です。
 -   `TABLE_CATALOG` : テーブルが属するカタログの名前。この値は常に`def`です。
--   `PRIVILEGE_TYPE` : 付与される権限のタイプ。各行には 1 つの権限タイプのみが表示されます。
--   `IS_GRANTABLE` : `GRANT OPTION`権限がある場合、値は`YES`です。それ以外の場合、値は`NO`です。
+-   `PRIVILEGE_TYPE` : 付与する権限の種類。各行には 1 つの権限の種類のみが表示されます。
+-   `IS_GRANTABLE` : `GRANT OPTION`権限がある場合、値は`YES`になります。それ以外の場合、値は`NO`になります。

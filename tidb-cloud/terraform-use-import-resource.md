@@ -1,22 +1,22 @@
 ---
 title: Use Import Resource
-summary: このドキュメントは、TiDB Cloudクラスターにデータをインポートする方法を学習できます。tidbcloud_importリソースを使用して、インポートタスクを作成し、ローカルディスクまたはAmazon S3バケットからデータをインポートします。インポートタスクのステータスを確認し、完了したらMySQL CLIでインポートされたデータを確認します。インポートタスクは更新できず、キャンセルできるのはIMPORTINGステータスのタスクのみです。詳細な構成については、設定ドキュメントを参照してください。
+summary: インポート リソースを使用してインポート タスクを管理する方法を学習します。
 ---
 
-# インポートリソースを使用する {#use-import-resource}
+# インポートリソースの使用 {#use-import-resource}
 
-このドキュメントの`tidbcloud_import`リソースを使用してTiDB Cloudクラスターにデータをインポートする方法を学習できます。
+このドキュメントの`tidbcloud_import`リソースを使用して、 TiDB Cloudクラスターにデータをインポートする方法を学習できます。
 
-`tidbcloud_import`リソースの特徴は次のとおりです。
+`tidbcloud_import`リソースの機能は次のとおりです。
 
--   TiDB サーバーレス クラスターおよび TiDB 専用クラスターのインポート タスクを作成します。
--   ローカル ディスクまたは Amazon S3 バケットからデータをインポートします。
--   進行中のインポートタスクをキャンセルします。
+-   TiDB Cloud Serverless およびTiDB Cloud Dedicated クラスターのインポート タスクを作成します。
+-   ローカルディスクまたは Amazon S3 バケットからデータをインポートします。
+-   進行中のインポート タスクをキャンセルします。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   [TiDB サーバーレスクラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB 専用クラスターの作成](/tidb-cloud/create-tidb-cluster.md) 。
+-   [TiDB Cloud Terraform プロバイダーを入手](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
@@ -26,15 +26,15 @@ summary: このドキュメントは、TiDB Cloudクラスターにデータを�
 
 > **注記：**
 >
-> ローカル ファイルのインポートは、TiDB サーバーレス クラスターでのみサポートされており、TiDB 専用クラスターではサポートされていません。
+> ローカル ファイルのインポートは、 TiDB Cloud Serverless クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
 
-1.  インポート用のCSVファイルを作成します。例えば：
+1.  インポート用の CSV ファイルを作成します。例:
 
         id;name;age
         1;Alice;20
         2;Bob;30
 
-2.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例えば：
+2.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例:
 
         terraform {
          required_providers {
@@ -64,9 +64,9 @@ summary: このドキュメントは、TiDB Cloudクラスターにデータを�
           file_name = "your_csv_path"
         }
 
-    ファイル内のリソース値 (プロジェクト ID、クラスター ID、CSV パスなど) を独自の値に置き換えます。そしてその[設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format) `csv_format`の詳細。
+    ファイル内のリソース値 (プロジェクト ID、クラスター ID、CSV パスなど) を独自のものに置き換えます。 `csv_format`の詳細は[設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
 
-3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
+3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`と入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
@@ -81,7 +81,7 @@ summary: このドキュメントは、TiDB Cloudクラスターにデータを�
         tidbcloud_import.example_local: Creating...
         tidbcloud_import.example_local: Creation complete after 6s [id=781074]
 
-4.  インポート タスクのステータスを確認するには、 `terraform state show tidbcloud_import.${resource-name}`を使用します。
+4.  `terraform state show tidbcloud_import.${resource-name}`使用してインポート タスクのステータスを確認します。
 
         $ terraform state show tidbcloud_import.example_local
         # tidbcloud_import.example_local:
@@ -120,7 +120,7 @@ summary: このドキュメントは、TiDB Cloudクラスターにデータを�
             type                          = "LOCAL"
         }
 
-5.  数分後にステータスを更新するには、 `terraform refresh`を使用します。
+5.  数分後にステータスを更新するには`terraform refresh`使用します。
 
         $ terraform refresh && terraform state show tidbcloud_import.example_local
         tidbcloud_import.example_local: Refreshing state... [id=781074]
@@ -173,13 +173,13 @@ summary: このドキュメントは、TiDB Cloudクラスターにデータを�
         +------+-------+------+
         2 rows in set (0.24 sec)
 
-### Amazon S3 インポート タスクを作成して実行する {#create-and-run-an-amazon-s3-import-task}
+### Amazon S3 インポートタスクを作成して実行する {#create-and-run-an-amazon-s3-import-task}
 
 > **注記：**
 >
-> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を行う必要があります。
+> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)実行する必要があります。
 
-1.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例えば：
+1.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例:
 
         terraform {
           required_providers {
@@ -212,7 +212,7 @@ summary: このドキュメントは、TiDB Cloudクラスターにデータを�
           source_url   = "your_url"
         }
 
-2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
+2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`と入力して作成を確認し、インポートを開始します。
 
         $ terraform apply
         ...
@@ -233,13 +233,13 @@ summary: このドキュメントは、TiDB Cloudクラスターにデータを�
 
 ## インポートタスクを更新する {#update-an-import-task}
 
-インポートタスクは更新できません。
+インポート タスクを更新できません。
 
 ## インポートタスクを削除する {#delete-an-import-task}
 
-Terraform の場合、インポート タスクの削除は、対応するインポート リソースをキャンセルすることを意味します。
+Terraform の場合、インポート タスクを削除すると、対応するインポート リソースがキャンセルされます。
 
-`COMPLETED`インポート タスクはキャンセルできません。それ以外の場合は、次の例のように`Delete Error`が返されます。
+`COMPLETED`インポート タスクをキャンセルすることはできません。キャンセルすると、次の例のように`Delete Error`取得されます。
 
     $ terraform destroy
     ...
@@ -259,7 +259,7 @@ Terraform の場合、インポート タスクの削除は、対応するイン
     │ import}
     ╵
 
-ステータスが`IMPORTING`のインポートタスクはキャンセルできます。例えば：
+ステータスが`IMPORTING`インポート タスクをキャンセルできます。例:
 
     $ terraform destroy
     ...
@@ -278,4 +278,4 @@ Terraform の場合、インポート タスクの削除は、対応するイン
 
 ## 構成 {#configurations}
 
-インポート リソースで使用可能なすべての構成を取得するには、 [設定ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)を参照してください。
+インポート リソースで使用可能なすべての構成を取得するには、 [構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)参照してください。

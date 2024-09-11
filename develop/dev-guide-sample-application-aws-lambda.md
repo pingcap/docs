@@ -16,7 +16,7 @@ TiDB は MySQL 互換のデータベース、 [AWS Lambda 関数](https://aws.am
 
 > **注記**
 >
-> このチュートリアルは、TiDB Serverless と TiDB Self-Hosted で動作します。
+> このチュートリアルは、 TiDB Cloud Serverless および TiDB Self-Managed で機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -33,7 +33,7 @@ TiDB は MySQL 互換のデータベース、 [AWS Lambda 関数](https://aws.am
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -41,7 +41,7 @@ TiDB は MySQL 互換のデータベース、 [AWS Lambda 関数](https://aws.am
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -79,7 +79,7 @@ npm install
 
 <SimpleTab>
 
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -122,7 +122,7 @@ npm install
 
 </div>
 
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 対応する接続文字列をコピーして`env.json`に貼り付けます。次に例を示します。
 
@@ -358,13 +358,13 @@ console.log(rsh.affectedRows);
 -   SQL インジェクションを回避するには、 [準備されたステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)使用することをお勧めします。
 -   複雑な SQL ステートメントがあまり含まれないシナリオでは、 [続編](https://sequelize.org/) 、 [タイプORM](https://typeorm.io/) 、 [プリズマ](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
 -   アプリケーション用の RESTful API を構築するには、 [API GatewayでAWS Lambdaを使用する](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html)をお勧めします。
--   TiDB Serverless と AWS Lambda を使用して高性能アプリケーションを設計する場合は、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
+-   TiDB Cloud Serverless と AWS Lambda を使用して高性能アプリケーションを設計するには、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
 
 ## 次のステップ {#next-steps}
 
 -   AWS Lambda 関数で TiDB を使用する方法の詳細については、 [TiDB-Lambda-integration/aws-lambda-bookstore デモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)を参照してください。また、AWS API Gateway を使用して、アプリケーション用の RESTful API を構築することもできます。
 -   [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)から`mysql2`の使用法について詳しく学びます。
--   [`Lambda`のAWS開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)から AWS Lambda の使用方法について詳しく学びます。
+-   [`Lambda`のAWS開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)から AWS Lambda の使用方法を詳しく学びます。
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
 -   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 

@@ -15,7 +15,7 @@ TiDB は MySQL 互換のデータベースであり、 [SQLアルケミー](http
 
 > **注記：**
 >
-> このチュートリアルは、TiDB Serverless、TiDB Dedicated、および TiDB Self-Hosted クラスターで機能します。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed クラスターで機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -29,7 +29,7 @@ TiDB は MySQL 互換のデータベースであり、 [SQLアルケミー](http
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -37,7 +37,7 @@ TiDB は MySQL 互換のデータベースであり、 [SQLアルケミー](http
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -74,11 +74,11 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 > **注記：**
 >
-> 現在、TiDB Serverless クラスターには制限があります。5 分間アクティブな接続がない場合、クラスターはシャットダウンし、すべての接続が閉じられます。そのため、TiDB Serverless クラスターで SQLAlchemy を使用すると、プールされた接続で`Lost connection to MySQL server during query`や`MySQL Connection not available`などの`OperationalError`発生する可能性があります。このエラーを回避するには、 `pool_recycle`パラメータを`300`に設定できます。詳細については、SQLAlchemy ドキュメントの[切断への対処](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)を参照してください。
+> 現在、 TiDB Cloud Serverless クラスターには制限があります。5 分間アクティブな接続がない場合、クラスターはシャットダウンし、すべての接続が閉じられます。そのため、 TiDB Cloud Serverless クラスターで SQLAlchemy を使用すると、プールされた接続で`Lost connection to MySQL server during query`や`MySQL Connection not available`などの`OperationalError`発生する可能性があります。このエラーを回避するには、 `pool_recycle`パラメータを`300`に設定できます。詳細については、SQLAlchemy ドキュメントの[切断への対処](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)を参照してください。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -86,7 +86,7 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています
+    -   **接続タイプ**は`Public`に設定されています
 
     -   **ブランチ**は`main`に設定されています
 
@@ -126,7 +126,7 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
 7.  `.env`ファイルを保存します。
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -160,7 +160,7 @@ SQLAlchemy は、複数のデータベースで動作する ORM ライブラリ�
 6.  `.env`ファイルを保存します。
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 

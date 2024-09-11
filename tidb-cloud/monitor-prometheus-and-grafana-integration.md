@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Prometheus and Grafana (Beta)
-summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
+summary: Prometheus と Grafana の統合を使用して TiDB クラスターを監視する方法を学習します。
 ---
 
 # TiDB Cloud をPrometheus および Grafana と統合する (ベータ版) {#integrate-tidb-cloud-with-prometheus-and-grafana-beta}
@@ -17,7 +17,7 @@ TiDB Cloud は[プロメテウス](https://prometheus.io/) API エンドポイ�
 
 ## 制限 {#limitation}
 
--   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでは Prometheus と Grafana の統合は使用できません。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでは Prometheus と Grafana の統合は使用できません。
 
 -   クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING の**場合、Prometheus と Grafana の統合は使用できません。
 

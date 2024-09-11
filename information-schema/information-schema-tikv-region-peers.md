@@ -1,22 +1,22 @@
 ---
 title: TIKV_REGION_PEERS
-summary: TIKV_REGION_PEERSテーブルには、TiKVの単一リージョンノードの詳細情報が表示されます。このテーブルはTiDBサーバーレスクラスターでは使用できません。フィールドにはREGION_ID、PEER_ID、STORE_ID、IS_LEARNER、IS_LEADER、STATUS、DOWN_SECONDSが含まれます。例えば、最大値WRITTEN_BYTESで上位3つのリージョンの特定のTiKVアドレスをクエリできます。また、STATUSフィールドには保留中、下、NORMALのステータスがあります。
+summary: TIKV_REGION_PEERS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # TIKV_REGION_PEERS {#tikv-region-peers}
 
-`TIKV_REGION_PEERS`表には、TiKV の単一リージョンノードの詳細情報 (学習者かリーダーかなど) が表示されます。
+`TIKV_REGION_PEERS`表には、TiKV 内の単一のリージョンノードの詳細情報 (学習者であるかリーダーであるかなど) が表示されます。
 
 > **注記：**
 >
-> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIKV_REGION_PEERS;
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 +--------------+-------------+------+------+---------+-------+
@@ -33,7 +33,7 @@ DESC TIKV_REGION_PEERS;
 7 rows in set (0.01 sec)
 ```
 
-たとえば、次の SQL ステートメントを使用して、最大値`WRITTEN_BYTES`で上位 3 つのリージョンの特定の TiKV アドレスをクエリできます。
+たとえば、次の SQL ステートメントを使用して、最大値が`WRITTEN_BYTES`である上位 3 つのリージョンの特定の TiKV アドレスを照会できます。
 
 ```sql
 SELECT
@@ -50,15 +50,15 @@ WHERE
   AND peer.store_id = tikv.store_id;
 ```
 
-`TIKV_REGION_PEERS`テーブルのフィールドは次のように説明されています。
+`TIKV_REGION_PEERS`テーブル内のフィールドは次のように説明されます。
 
 -   REGION_ID:リージョンID。
 -   PEER_ID:リージョンピアの ID。
 -   STORE_ID:リージョンが配置されている TiKV ストアの ID。
--   IS_LEARNER: ピアが学習者かどうか。
+-   IS_LEARNER: ピアが学習者であるかどうか。
 -   IS_LEADER: ピアがリーダーであるかどうか。
--   STATUS: ピアのステータス:
+-   ステータス: ピアのステータス:
     -   保留中: 一時的に利用できません。
-    -   下: オフラインで変換されました。このピアはサービスを提供しなくなりました。
-    -   NORMAL：正常に動作しています。
--   DOWN_SECONDS: オフラインの継続時間 (秒単位)。
+    -   DOWN: オフラインで変換されました。このピアはサービスを提供しなくなりました。
+    -   正常: 正常に動作しています。
+-   DOWN_SECONDS: オフラインの継続時間（秒単位）。

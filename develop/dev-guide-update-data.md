@@ -14,7 +14,7 @@ summary: データの更新方法とデータの一括更新方法について�
 
 このドキュメントを読む前に、次のものを準備する必要があります。
 
--   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) [データベースを作成する](/develop/dev-guide-create-database.md)読ん[セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md) [テーブルを作成する](/develop/dev-guide-create-table.md) 。
 -   `UPDATE`データが必要な場合は、まず[データを挿入する](/develop/dev-guide-insert-data.md)データが必要です。
 
@@ -447,7 +447,7 @@ public class BatchUpdateExample {
 
 </SimpleTab>
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 

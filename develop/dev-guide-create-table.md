@@ -11,7 +11,7 @@ summary: テーブル作成における定義、ルール、ガイドライン�
 
 このドキュメントを読む前に、次のタスクが完了していることを確認してください。
 
--   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) 。
 
@@ -54,7 +54,7 @@ CREATE TABLE `bookshop`.`users` (
 **パラメータの説明**
 
 -   `{column_name}` : 列名。
--   `{data_type}` : 列[データ・タイプ](/data-type-overview.md) 。
+-   `{data_type}` : 列[データ型](/data-type-overview.md) 。
 -   `{column_qualification}` :**列レベルの制約**や[生成された列](/generated-columns.md)句などのカラム修飾。
 
 `users`テーブルに、一意の識別子`id` 、 `balance` 、 `nickname`などの列を追加できます。
@@ -91,7 +91,7 @@ CREATE TABLE `bookshop`.`books` (
 このテーブルには、 `users`テーブルよりも多くのデータ型が含まれています。
 
 -   [整数](/data-type-numeric.md#integer-types) : ディスクの使用量が増えたり、パフォーマンスに影響したり (型の範囲が大きすぎる)、データ オーバーフロー (データ型の範囲が小さすぎる) したりしないように、適切なサイズの型を使用することをお勧めします。
--   [日付時刻](/data-type-date-and-time.md) : **datetime**型は時刻値の保存に使用できます。
+-   [日時](/data-type-date-and-time.md) : **datetime**型は時刻値の保存に使用できます。
 -   [列挙型](/data-type-string.md#enum-type) : 列挙型は、限られた値の選択を格納するために使用できます。
 
 ## 主キーを選択 {#select-primary-key}
@@ -181,7 +181,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-さらに、データの更新時に現在の時刻もデフォルトで入力される場合は、次のステートメントを使用できます (ただし、 `ON UPDATE`後には[現在の時間に関する発言](https://pingcap.github.io/sqlgram/#NowSymOptionFraction)のみが入力でき、 `DEFAULT`の後には[より多くのオプション](https://pingcap.github.io/sqlgram/#DefaultValueExpr)がサポートされます)。
+さらに、データの更新時に現在の時刻もデフォルトで入力される場合は、次のステートメントを使用できます (ただし、 `ON UPDATE`後には[現在の時間に関する発言](https://pingcap.github.io/sqlgram/#NowSymOptionFraction)のみが入力でき、 `DEFAULT`の後には[その他のオプション](https://pingcap.github.io/sqlgram/#DefaultValueExpr)がサポートされます)。
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -251,7 +251,7 @@ CREATE TABLE `bookshop`.`users` (
 
 <CustomContent platform="tidb">
 
-現在、TiDB は**TiFlash**と**TiSpark**という 2 つのデータ分析エンジンをサポートしています。大規模データ シナリオ (100 T) の場合、HTAP のプライマリ ソリューションとして**TiFlash MPP**を推奨し、補完ソリューションとして**TiSpark を**推奨します。
+現在、TiDB は**TiFlash**と**TiSpark の**2 つのデータ分析エンジンをサポートしています。大規模データ シナリオ (100 T) の場合、HTAP のプライマリ ソリューションとして**TiFlash MPP**を推奨し、補完ソリューションとして**TiSpark を**推奨します。
 
 TiDB HTAP機能の詳細については、次のドキュメントを参照してください: [TiDB HTAPクイック スタート ガイド](/quick-start-with-htap.md)および[HTAPを探索する](/explore-htap.md) 。
 
@@ -288,7 +288,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **注記：**
 >
-> クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラーを報告します: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を使用して、 **TiFlash**を含む TiDB Serverless クラスターを作成できます。
+> クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラーを報告します: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster)を使用して、 **TiFlash**を含むTiDB Cloud Serverless クラスターを作成できます。
 
 次に、次のクエリを実行します。
 
@@ -406,7 +406,7 @@ SHOW TABLES IN `bookshop`;
 
 このドキュメントで作成されたすべてのテーブルにはセカンダリ インデックスが含まれていないことに注意してください。セカンダリ インデックスを追加するガイドについては、 [セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を参照してください。
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 

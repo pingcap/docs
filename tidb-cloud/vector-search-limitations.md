@@ -7,7 +7,7 @@ summary: TiDB ベクトル検索の制限について学習します。
 
 このドキュメントでは、TiDB Vector Search の既知の制限について説明します。当社は、より多くの機能を追加することで、お客様のエクスペリエンスを向上させるために継続的に取り組んでいます。
 
--   TiDB Vector Search は[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでのみ使用できます。TiDB Dedicated または TiDB Self-Hosted では使用できません。
+-   TiDB Vector Search は[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。TiDB TiDB Cloud Dedicated または TiDB Self-Managed では使用できません。
 
 -   [ベクター](/tidb-cloud/vector-search-data-types.md)最大 16,000 次元をサポートします。
 

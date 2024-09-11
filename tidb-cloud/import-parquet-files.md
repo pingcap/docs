@@ -10,8 +10,8 @@ TiDB Cloudには、非圧縮データ ファイルと Snappy 圧縮[アパッチ
 > **注記：**
 >
 > -   TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。すでにデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従ってTiDB Cloudを使用して一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータを対象の既存のテーブルにコピーします。
-> -   TiDB 専用クラスターに変更フィードがある場合、現在のデータ インポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用するため、クラスターにデータをインポートできません ( **[データのインポート]**ボタンは無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードはインポートされたデータを検出できません。
-> -   TiDB 専用クラスターのみが、GCS からの Parquet ファイルのインポートをサポートします。
+> -   TiDB Cloud Dedicated クラスターに変更フィードがある場合、現在のデータ インポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用するため、クラスターにデータをインポートできません ( **[データのインポート]**ボタンは無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードはインポートされたデータを検出できません。
+> -   TiDB Cloud Dedicated クラスターのみが、GCS からの Parquet ファイルのインポートをサポートしています。
 > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。Snappy 圧縮の他のバリエーションはサポートされていません。
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}

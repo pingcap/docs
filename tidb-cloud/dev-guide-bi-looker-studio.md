@@ -1,47 +1,47 @@
 ---
-title: Connect to TiDB Serverless with Looker Studio
-summary: Looker Studio を使用して TiDB Serverless に接続する方法を学習します。
+title: Connect to TiDB Cloud Serverless with Looker Studio
+summary: Looker Studio を使用してTiDB Cloud Serverless に接続する方法を学習します。
 ---
 
-# Looker Studio で TiDB Serverless に接続する {#connect-to-tidb-serverless-with-looker-studio}
+# Looker Studio でTiDB Cloud Serverless に接続する {#connect-to-tidb-cloud-serverless-with-looker-studio}
 
-TiDB は MySQL 互換のデータベース、TiDB Serverless は完全に管理された TiDB サービス、 [ルッカースタジオ](https://lookerstudio.google.com/)さまざまなソースからのデータを視覚化できる無料の Web ベースの BI ツールです。
+TiDB は MySQL 互換のデータベース、 TiDB Cloud Serverless は完全に管理された TiDB サービス、 [ルッカースタジオ](https://lookerstudio.google.com/)さまざまなソースからのデータを視覚化できる無料の Web ベースの BI ツールです。
 
-このチュートリアルでは、Looker Studio を使用して TiDB Serverless クラスターに接続する方法を学習します。
+このチュートリアルでは、Looker Studio を使用してTiDB Cloud Serverless クラスターに接続する方法を学習します。
 
 > **注記：**
 >
-> このチュートリアルのほとんどの手順は、TiDB Dedicated でも同様に機能します。ただし、TiDB Dedicated の場合は、次の点に注意する必要があります。
+> このチュートリアルのほとんどの手順は、 TiDB Cloud Dedicated でも同様に機能します。ただし、 TiDB Cloud Dedicated の場合は、次の点に注意する必要があります。
 >
 > -   [ファイルからTiDB Cloudにデータをインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)に従ってデータセットをインポートします。
-> -   [TiDB専用に接続](/tidb-cloud/connect-via-standard-connection.md)に従ってクラスタの接続情報を取得します。TiDB Dedicated に接続する場合は、 `142.251.74.0/23`からのアクセスを許可する必要があります。Looker Studio からの接続の詳細については、 [Looker Studio ドキュメント](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article)を参照してください。
+> -   [TiDB Cloud専用に接続](/tidb-cloud/connect-via-standard-connection.md)に従ってクラスタの接続情報を取得します。TiDB TiDB Cloud Dedicated に接続する場合は、 `142.251.74.0/23`からのアクセスを許可する必要があります。Looker Studio からの接続の詳細については、 [Looker Studio ドキュメント](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article)を参照してください。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
 -   Googleアカウント
--   TiDB サーバーレス クラスター
+-   TiDB Cloudサーバーレスクラスター
 
-**TiDB Serverless クラスターがない場合は、次のように作成できます。**
+**TiDB Cloud Serverless クラスターがない場合は、次のように作成できます。**
 
--   [TiDB サーバーレス クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)
+-   [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster)
 
 ## ステップ1.データセットをインポートする {#step-1-import-a-dataset}
 
-TiDB Serverless のインタラクティブ チュートリアルで提供されている S&amp;P 500 データセットをインポートできます。
+TiDB Cloud Serverless のインタラクティブ チュートリアルで提供されている S&amp;P 500 データセットをインポートできます。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、右下隅の**[?]**をクリックします。**ヘルプ**ダイアログが表示されます。
 
 2.  ダイアログで、 **[インタラクティブ チュートリアル]**をクリックし、 **[S&amp;P 500 分析] を**クリックします。
 
-3.  TiDB Serverless クラスターを選択し、 **「データセットのインポート」**をクリックして S&amp;P 500 データセットをクラスターにインポートします。
+3.  TiDB Cloud Serverless クラスターを選択し、 **「データセットのインポート」**をクリックして S&amp;P 500 データセットをクラスターにインポートします。
 
 4.  インポート ステータスが**IMPORTED**に変わったら、 **[チュートリアルを終了]**をクリックしてこのダイアログを閉じます。
 
 インポート中に問題が発生した場合は、次の手順でこのインポート タスクをキャンセルできます。
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、TiDB Serverless クラスターの名前をクリックして、概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、 TiDB Cloud Serverless クラスターの名前をクリックして、概要ページに移動します。
 2.  左側のナビゲーション ペインで、 **[インポート] を**クリックします。
 3.  **sp500-insight**という名前のインポート タスクを見つけて、 **[アクション]**列の**[...]**をクリックし、 **[キャンセル]**をクリックします。
 
@@ -61,7 +61,7 @@ TiDB Serverless のインタラクティブ チュートリアルで提供され
 
     > **ヒント：**
     >
-    > TiDB Serverless では、クライアントとクラスター間の安全な TLS 接続が必要なので、Looker Studio の接続設定にはこの CA 証明書が必要です。
+    > TiDB Cloud Serverless では、クライアントとクラスター間の安全な TLS 接続が必要なので、Looker Studio の接続設定にはこの CA 証明書が必要です。
 
 ## ステップ3. Looker Studioを使用してTiDBクラスタに接続する {#step-3-connect-to-your-tidb-cluster-with-looker-studio}
 
@@ -71,14 +71,14 @@ TiDB Serverless のインタラクティブ チュートリアルで提供され
 
 3.  **基本**設定ペインで、接続パラメータを構成します。
 
-    -   **ホスト名または IP** : TiDB Serverless 接続ダイアログから`HOST`パラメータを入力します。
-    -   **ポート (オプション)** : TiDB Serverless 接続ダイアログから`PORT`パラメータを入力します。
+    -   **ホスト名または IP** : TiDB Cloud Serverless 接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート (オプション)** : TiDB Cloud Serverless 接続ダイアログから`PORT`パラメータを入力します。
     -   **データベース**: 接続するデータベースを入力します。このチュートリアルでは、 `sp500insight`と入力します。
-    -   **ユーザー名**: TiDB Serverless 接続ダイアログから`USERNAME`パラメータを入力します。
-    -   **パスワード**: TiDB Serverless 接続ダイアログから`PASSWORD`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud Serverless 接続ダイアログから`USERNAME`パラメータを入力します。
+    -   **パスワード**: TiDB Cloud Serverless 接続ダイアログから`PASSWORD`パラメータを入力します。
     -   **SSL を有効にする**: このオプションを選択し、 **MySQL SSL クライアントコンフィグレーションファイル**の右側にあるアップロード アイコンをクリックして、 [ステップ2](#step-2-get-the-connection-information-for-your-cluster)からダウンロードした CA ファイルをアップロードします。
 
-    ![Looker Studio: configure connection settings for TiDB Serverless](/media/tidb-cloud/looker-studio-configure-connection.png)
+    ![Looker Studio: configure connection settings for TiDB Cloud Serverless](/media/tidb-cloud/looker-studio-configure-connection.png)
 
 4.  **[認証]**をクリックします。
 
@@ -132,6 +132,6 @@ TiDB Serverless のインタラクティブ チュートリアルで提供され
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
 -   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 [TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。

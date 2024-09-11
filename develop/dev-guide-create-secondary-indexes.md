@@ -5,13 +5,13 @@ summary: セカンダリ インデックスを作成する手順、ルール、�
 
 # セカンダリインデックスを作成する {#create-a-secondary-index}
 
-このドキュメントでは、SQL とさまざまなプログラミング言語を使用してセカンダリ インデックスを作成する方法を説明し、インデックス作成のルールを示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例に、セカンダリ インデックスの作成手順を説明します。
+このドキュメントでは、SQL とさまざまなプログラミング言語を使用してセカンダリ インデックスを作成する方法について説明し、インデックス作成のルールを示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例に、セカンダリ インデックスの作成手順を説明します。
 
 ## 始める前に {#before-you-start}
 
 セカンダリ インデックスを作成する前に、次の操作を実行します。
 
--   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) 。
 -   [テーブルを作成する](/develop/dev-guide-create-table.md) 。
@@ -78,7 +78,7 @@ KEY `{index_name}` (`{column_names}`)
 | タイプ    | 列挙型          | 書籍の種類（雑誌、アニメーション、教材など） |
 | ストック   | ビッグイント(20)   | ストック                   |
 | 価格     | 小数点(15,2)    | 価格                     |
-| 公開日時   | 日付時刻         | 発行日                    |
+| 公開日時   | 日時           | 発行日                    |
 
 `books`テーブルは、次の SQL ステートメントを使用して作成されます。
 
@@ -178,7 +178,7 @@ SHOW INDEXES FROM `bookshop`.`books`;
 
 データベースを作成し、テーブルとセカンダリ インデックスを追加したら、アプリケーションにデータ[書く](/develop/dev-guide-insert-data.md)と[読む](/develop/dev-guide-get-data-from-single-table.md)機能を追加し始めることができます。
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 

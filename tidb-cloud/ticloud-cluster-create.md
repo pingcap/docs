@@ -1,11 +1,11 @@
 ---
 title: ticloud serverless create
-summary: The reference of `ticloud serverless create`.
+summary: ticloud serverless create` のリファレンス。
 ---
 
 # ticloud サーバーレス作成 {#ticloud-serverless-create}
 
-TiDB Serverless クラスターを作成します。
+TiDB Cloud Serverless クラスターを作成します。
 
 ```shell
 ticloud serverless create [flags]
@@ -13,13 +13,13 @@ ticloud serverless create [flags]
 
 ## 例 {#examples}
 
-インタラクティブ モードで TiDB Serverless クラスターを作成します。
+インタラクティブ モードでTiDB Cloud Serverless クラスターを作成します。
 
 ```shell
 ticloud serverless create
 ```
 
-非対話型モードで TiDB Serverless クラスターを作成します。
+非対話型モードでTiDB Cloud Serverless クラスターを作成します。
 
 ```shell
 ticloud serverless create --project-id <project-id> --display-name <display-name> --region <region>
@@ -27,7 +27,7 @@ ticloud serverless create --project-id <project-id> --display-name <display-name
 
 ## 旗 {#flags}
 
-非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
 | フラグ                | 説明                                                       | 必須  | 注記                                |
 | ------------------ | -------------------------------------------------------- | --- | --------------------------------- |
@@ -39,11 +39,11 @@ ticloud serverless create --project-id <project-id> --display-name <display-name
 
 ## 継承されたフラグ {#inherited-flags}
 
-| フラグ               | 説明                                                                             | 必須  | 注記                                                             |
-| ----------------- | ------------------------------------------------------------------------------ | --- | -------------------------------------------------------------- |
-| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
-| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                           |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------------ |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                     |
+| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                     |
 
 ## フィードバック {#feedback}
 

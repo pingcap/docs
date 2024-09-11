@@ -1,17 +1,21 @@
 ---
 title: QUERY WATCH
-summary: QUERY WATCHステートメントは、リソースグループ内の暴走クエリの監視リストを手動で管理するために使用されます。この機能は実験的であり、本番環境での使用はお勧めできません。バグを見つけた場合は、GitHubで問題を報告できます。MySQLの互換性があり、TiDBの拡張機能です。QUERY WATCHパラメータを参照してください。暴走クエリの管理についても参照してください。
+summary: TiDB データベースの QUERY WATCH の使用法の概要。
 ---
 
 # クエリウォッチ {#query-watch}
 
-`QUERY WATCH`ステートメントは、リソース グループ内の暴走クエリの監視リストを手動で管理するために使用されます。
+`QUERY WATCH`ステートメントは、リソース グループ内のランナウェイ クエリの監視リストを手動で管理するために使用されます。
 
 > **警告：**
 >
-> この機能は実験的です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
+> この機能は実験的ものです。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告できます。
 
-## あらすじ {#synopsis}
+> **注記：**
+>
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AddQueryWatchStmt ::=
@@ -42,14 +46,14 @@ DropQueryWatchStmt ::=
     "QUERY" "WATCH" "REMOVE" NUM
 ```
 
-## パラメーター {#parameters}
+## パラメータ {#parameters}
 
-[`QUERY WATCH`パラメータ](/tidb-resource-control.md#query-watch-parameters)を参照してください。
+[`QUERY WATCH`パラメータ](/tidb-resource-control.md#query-watch-parameters)参照。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
--   [暴走クエリ](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)
+-   [ランナウェイクエリ](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries)

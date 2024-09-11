@@ -1,15 +1,15 @@
 ---
 title: CLUSTER_SYSTEMINFO
-summary: CLUSTER_SYSTEMINFOカーネルパラメータテーブルを使用して、クラスタ内のすべてのサーバーのカーネル構成情報を照会できます。現在、sysctlのシステム情報を取得できます。このテーブルはTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。フィールドにはTYPE、INSTANCE、SYSTEM_TYPE、SYSTEM_NAME、NAME、VALUEがあります。次の例は、CLUSTER_SYSTEMINFOシステム情報テーブルを使用してクラスター内のすべてのサーバーのカーネルバージョンをクエリする方法を示しています。
+summary: CLUSTER_SYSTEMINFO` カーネル パラメータ テーブルについて学習します。
 ---
 
-# CLUSTER_SYSTEMINFO {#cluster-systeminfo}
+# クラスターシステム情報 {#cluster-systeminfo}
 
-`CLUSTER_SYSTEMINFO`カーネル パラメータ テーブルを使用して、クラスタのすべてのインスタンスが配置されているサーバーのカーネル構成情報をクエリできます。現在、 `sysctl`のシステムの情報を照会できます。
+`CLUSTER_SYSTEMINFO`カーネル パラメータ テーブルを使用して、クラスターのすべてのインスタンスが配置されているサーバーのカーネル構成情報を照会できます。現在、 `sysctl`システムの情報を照会できます。
 
 > **注記：**
 >
-> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+> この表は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 ```sql
 USE information_schema;
@@ -33,13 +33,13 @@ DESC cluster_systeminfo;
 フィールドの説明:
 
 -   `TYPE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
--   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
--   `SYSTEM_TYPE` : システムのタイプ。現在、 `system`システム タイプをクエリできます。
+-   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`番目のフィールドに対応します。
+-   `SYSTEM_TYPE` : システム タイプ。現在、 `system`システム タイプを照会できます。
 -   `SYSTEM_NAME` : システム名。現在、 `sysctl`システム名を照会できます。
 -   `NAME` : `sysctl`に対応する構成名。
--   `VALUE` ： `sysctl`に対応する設定項目の値。
+-   `VALUE` : `sysctl`に対応する構成項目の値。
 
-次の例は、 `CLUSTER_SYSTEMINFO`システム情報テーブルを使用してクラスター内のすべてのサーバーのカーネル バージョンをクエリする方法を示しています。
+次の例は、 `CLUSTER_SYSTEMINFO`システム情報テーブルを使用して、クラスター内のすべてのサーバーのカーネル バージョンを照会する方法を示しています。
 
 ```sql
 SELECT * FROM cluster_systeminfo WHERE name LIKE '%kernel.osrelease%'

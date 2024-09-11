@@ -1,17 +1,17 @@
 ---
 title: Modify Configuration Dynamically
-summary: Learn how to dynamically modify the cluster configuration.
+summary: クラスター構成を動的に変更する方法を学習します。
 ---
 
 # コンフィグレーションを動的に変更する {#modify-configuration-dynamically}
 
 このドキュメントでは、クラスター構成を動的に変更する方法について説明します。
 
-クラスター コンポーネントを再起動せずに、SQL ステートメントを使用してコンポーネント (TiDB、TiKV、PD を含む) の構成を動的に更新できます。現在、TiDB インスタンスの構成を変更する方法は、他のコンポーネント (TiKV や PD など) の構成を変更する方法とは異なります。
+クラスター コンポーネントを再起動せずに、SQL ステートメントを使用してコンポーネント (TiDB、TiKV、PD を含む) の構成を動的に更新できます。現在、TiDB インスタンス構成を変更する方法は、他のコンポーネント (TiKV や PD など) の構成を変更する方法とは異なります。
 
 > **注記：**
 >
-> この機能は TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。 TiDB Cloudの場合、設定を変更するには[TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡する必要があります。
+> この機能は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。 TiDB Cloudの場合、設定を変更するには[TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡する必要があります。
 
 ## 共通操作 {#common-operations}
 
@@ -117,7 +117,7 @@ show warnings;
 | `raftstore.raft-max-inflight-msgs`                        | 確認するRaftログの数。この数を超えると、 Raftステート マシンはログの送信速度を低下させます。                                                                                                      |
 | `raftstore.raft-log-gc-tick-interval`                     | Raftログを削除するポーリングタスクがスケジュールされる時間間隔                                                                                                                        |
 | `raftstore.raft-log-gc-threshold`                         | 残存Raftの最大許容数に関するソフト制限                                                                                                                                    |
-| `raftstore.raft-log-gc-count-limit`                       | 許容される残存Raft数のハード制限                                                                                                                                       |
+| `raftstore.raft-log-gc-count-limit`                       | 許容される残存Raftログ数のハード制限                                                                                                                                     |
 | `raftstore.raft-log-gc-size-limit`                        | 残余Raftの許容サイズに関するハード制限                                                                                                                                    |
 | `raftstore.raft-max-size-per-msg`                         | 生成可能な単一メッセージパケットのサイズのソフト制限                                                                                                                               |
 | `raftstore.raft-entry-max-size`                           | 単一のRaftログの最大サイズに対するハード制限                                                                                                                                 |
@@ -146,7 +146,7 @@ show warnings;
 | `raftstore.local-read-batch-size`                         | 1バッチで処理される読み取り要求の最大数                                                                                                                                     |
 | `raftstore.apply-yield-write-size`                        | 適用スレッドが各ラウンドで1つのFSM（有限状態マシン）に書き込むことができる最大バイト数                                                                                                            |
 | `raftstore.hibernate-timeout`                             | 起動時に休止状態に入るまでの最短待機時間。この期間中、TiKV は休止状態になりません (解放されません)。                                                                                                   |
-| `raftstore.apply-pool-size`                               | データをディスクにフラッシュするプール内のスレッドの数。これは適用スレッドプールのサイズです。                                                                                                          |
+| `raftstore.apply-pool-size`                               | データをディスクにフラッシュするプール内のスレッドの数。これは適用スレッド プールのサイズです。                                                                                                         |
 | `raftstore.store-pool-size`                               | Raftを処理するプール内のスレッド数。これはRaftstoreスレッドプールのサイズです。                                                                                                           |
 | `raftstore.apply-max-batch-size`                          | Raftステート マシンは、BatchSystem によってデータ書き込み要求をバッチで処理します。この構成項目は、1 つのバッチで要求を実行できるRaftステート マシンの最大数を指定します。                                                        |
 | `raftstore.store-max-batch-size`                          | Raftステート マシンは、BatchSystem によってログをディスクにフラッシュする要求をバッチで処理します。この構成項目は、1 つのバッチで要求を処理できるRaftステート マシンの最大数を指定します。                                                |
@@ -214,7 +214,7 @@ show warnings;
 | `split.split-balance-score`                               | `load-base-split`のパラメータは、2 つの分割されたリージョンの負荷が可能な限り均等になるようにします。値が小さいほど、負荷は均等になります。ただし、設定が小さすぎると、分割が失敗する可能性があります。                                            |
 | `split.split-contained-score`                             | パラメータは`load-base-split`です。値が小さいほど、リージョン分割後の地域間訪問が少なくなります。                                                                                                |
 | `cdc.min-ts-interval`                                     | 解決されたTSが転送される時間間隔                                                                                                                                        |
-| `cdc.old-value-cache-memory-quota`                        | TiCDC 古い値エントリが占有するメモリの上限                                                                                                                                 |
+| `cdc.old-value-cache-memory-quota`                        | TiCDC 古い値のエントリが占有するメモリの上限                                                                                                                                |
 | `cdc.sink-memory-quota`                                   | TiCDCデータ変更イベントが占有するメモリの上限                                                                                                                                |
 | `cdc.incremental-scan-speed-limit`                        | 履歴データの増分スキャンの速度の上限                                                                                                                                       |
 | `cdc.incremental-scan-concurrency`                        | 履歴データの同時増分スキャンタスクの最大数                                                                                                                                    |
@@ -250,7 +250,7 @@ Query OK, 0 rows affected (0.01 sec)
 | :----------------------------------------- | :----------------------------------------------- |
 | `log.level`                                | ログレベル                                            |
 | `cluster-version`                          | クラスターバージョン                                       |
-| `schedule.max-merge-region-size`           | `Region Merge` （MiB単位）のサイズ制限を制御します               |
+| `schedule.max-merge-region-size`           | `Region Merge` （MiB）のサイズ制限を制御します                 |
 | `schedule.max-merge-region-keys`           | `Region Merge`キーの最大数を指定します                       |
 | `schedule.patrol-region-interval`          | `replicaChecker`のヘルス状態をチェックする頻度を決定します            |
 | `schedule.split-merge-interval`            | 同じリージョンで分割および結合操作を実行する時間間隔を決定します                 |
@@ -293,7 +293,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 次の例は、 `tidb_slow_log_threshold`変数を使用して`slow-threshold`動的に変更する方法を示しています。
 
-デフォルト値`slow-threshold`は 300 ミリ秒です。 `tidb_slow_log_threshold`使用すると 200 ミリ秒に設定できます。
+`slow-threshold`のデフォルト値は 300 ミリ秒です。 `tidb_slow_log_threshold`を使用すると 200 ミリ秒に設定できます。
 
 ```sql
 set tidb_slow_log_threshold = 200;

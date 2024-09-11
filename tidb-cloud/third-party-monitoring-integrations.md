@@ -1,6 +1,6 @@
 ---
 title: Third-Party Metrics Integrations（Beta）
-summary: Learn how to use third-party metrics integrations.
+summary: サードパーティのメトリクス統合の使用方法を学びます。
 ---
 
 # サードパーティメトリクス統合（ベータ版） {#third-party-metrics-integrations-beta}
@@ -21,7 +21,7 @@ TiDB Cloudをサードパーティのメトリクス サービスと統合して
 
 ## 制限 {#limitation}
 
--   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの場合、サードパーティのメトリック統合はサポートされていません。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの場合、サードパーティのメトリック統合はサポートされていません。
 
 -   クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING の**場合、サードパーティのメトリクス統合は使用できません。
 

@@ -13,7 +13,7 @@ summary: データを挿入する方法について学習します。
 
 このドキュメントを読む前に、次のものを準備する必要があります。
 
--   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) [データベースを作成する](/develop/dev-guide-create-database.md) [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md) [テーブルを作成する](/develop/dev-guide-create-table.md)
 
 ## 行を挿入 {#insert-rows}
@@ -291,7 +291,7 @@ INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'n
 
 TiDB では、HTAP 機能により、データを挿入するときに追加の操作を実行する必要がなくなります。追加の挿入ロジックはありません。TiDB はデータの一貫性を自動的に保証します。テーブルを作成した後、列指向のレプリカを使用してクエリを直接高速化する[列指向レプリカ同期をオンにする](/develop/dev-guide-create-table.md#use-htap-capabilities)で済みます。
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 

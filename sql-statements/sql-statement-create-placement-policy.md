@@ -1,6 +1,6 @@
 ---
 title: CREATE PLACEMENT POLICY
-summary: CREATE PLACEMENT POLICY は、テーブル、パーティション、またはデータベース スキーマに割り当てる名前付き配置ポリシーを作成するために使用されます。この機能は TiDB サーバーレス クラスターでは使用できません。MySQL 構文に対する TiDB 拡張機能です。
+summary: TiDB での CREATE PLACEMENT POLICY の使用法。
 ---
 
 # 配置ポリシーの作成 {#create-placement-policy}
@@ -9,9 +9,9 @@ summary: CREATE PLACEMENT POLICY は、テーブル、パーティション、�
 
 > **注記：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CreatePolicyStmt ::=
@@ -51,9 +51,9 @@ AdvancedPlacementOption ::=
 
 > **注記：**
 >
-> クラスター内でどのリージョンが使用できるかを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
+> クラスターで使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)参照してください。
 >
-> 利用可能なリージョンが表示されない場合は、TiKV インストールにラベルが正しく設定されていない可能性があります。
+> 利用可能なリージョンが表示されない場合は、TiKV インストールでラベルが正しく設定されていない可能性があります。
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
@@ -72,13 +72,13 @@ SHOW CREATE PLACEMENT POLICY p1;
     +--------+---------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [SQL の配置ルール](/placement-rules-in-sql.md)
--   [配置を表示](/sql-statements/sql-statement-show-placement.md)
+-   [表示配置](/sql-statements/sql-statement-show-placement.md)
 -   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)
 -   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

@@ -1,11 +1,11 @@
 ---
 title: ticloud serverless export create
-summary: The reference of `ticloud serverless export create`.
+summary: ticloud serverless export create` のリファレンス。
 ---
 
 # ticloud サーバーレス エクスポート 作成 {#ticloud-serverless-export-create}
 
-TiDB Serverless クラスターからデータをエクスポートします。
+TiDB Cloud Serverless クラスターからデータをエクスポートします。
 
 ```shell
 ticloud serverless export create [flags]
@@ -13,19 +13,19 @@ ticloud serverless export create [flags]
 
 ## 例 {#examples}
 
-インタラクティブ モードで TiDB Serverless クラスターからデータをエクスポートします。
+インタラクティブ モードでTiDB Cloud Serverless クラスターからデータをエクスポートします。
 
 ```shell
 ticloud serverless export create
 ```
 
-非対話モードで TiDB Serverless クラスターからローカルstorageにデータをエクスポートします。
+非対話モードでTiDB Cloud Serverless クラスターからローカルstorageにデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --database <database>
 ```
 
-非インタラクティブモードで TiDB Serverless クラスターから Amazon S3 にデータをエクスポートします。
+非対話モードでTiDB Cloud Serverless クラスターから Amazon S3 にデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --s3.bucket-uri <bucket-uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key>

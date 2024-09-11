@@ -3,8 +3,8 @@
 <!-- markdownlint-disable MD041 -->
 
 -   [ドキュメントホーム](https://docs.pingcap.com/)
--   TiDBについて
-    -   [TiDB の紹介](/overview.md)
+-   TiDBセルフマネージドについて
+    -   [TiDBセルフマネージドとは](/overview.md)
     -   [TiDB 7.5 リリースノート](/releases/release-7.5.0.md)
     -   [特徴](/basic-features.md)
     -   [MySQL 互換性](/mysql-compatibility.md)
@@ -20,7 +20,7 @@
 -   開発する
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
-        -   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
     -   アプリケーション例
         -   Java
@@ -595,7 +595,7 @@
         -   [クイックスタート](/tidb-binlog/get-started-with-tidb-binlog.md)
         -   [デプロイ](/tidb-binlog/deploy-tidb-binlog.md)
         -   [管理](/tidb-binlog/maintain-tidb-binlog-cluster.md)
-        -   [構成、設定](/tidb-binlog/tidb-binlog-configuration-file.md)
+        -   [設定](/tidb-binlog/tidb-binlog-configuration-file.md)
             -   [Pump](/tidb-binlog/tidb-binlog-configuration-file.md#pump)
             -   [Drainer](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)
         -   [アップグレード](/tidb-binlog/upgrade-tidb-binlog.md)
@@ -696,7 +696,7 @@
     -   構文
         -   SQL 言語の構造と構文
             -   属性
-                -   [自動増加](/auto-increment.md)
+                -   [自動インクリメント](/auto-increment.md)
                 -   [自動ランダム](/auto-random.md)
                 -   [シャード行IDビット](/shard-row-id-bits.md)
             -   [リテラル値](/literal-values.md)
@@ -1030,7 +1030,7 @@
     -   [リリースタイムライン](/releases/release-timeline.md)
     -   [TiDB バージョン管理](/releases/versioning.md)
     -   [TiDB インストール パッケージ](/binary-package.md)
-    -   v7.5
+    -   バージョン7.5
         -   [7.5.3](/releases/release-7.5.3.md)
         -   [7.5.2](/releases/release-7.5.2.md)
         -   [7.5.1](/releases/release-7.5.1.md)
@@ -1138,7 +1138,7 @@
         -   [4.0.0-ベータ.2](/releases/release-4.0.0-beta.2.md)
         -   [4.0.0-ベータ.1](/releases/release-4.0.0-beta.1.md)
         -   [4.0.0-ベータ](/releases/release-4.0.0-beta.md)
-    -   バージョン3.1
+    -   v3.1
         -   [3.1.2](/releases/release-3.1.2.md)
         -   [3.1.1](/releases/release-3.1.1.md)
         -   [3.1.0 正式版](/releases/release-3.1.0-ga.md)

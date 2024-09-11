@@ -1,15 +1,15 @@
 ---
-title: Connect to TiDB Serverless via Private Endpoint
+title: Connect to TiDB Cloud Serverless via Private Endpoint
 summary: プライベート エンドポイント経由でTiDB Cloudクラスターに接続する方法を学習します。
 ---
 
-# プライベートエンドポイント経由で TiDB Serverless に接続する {#connect-to-tidb-serverless-via-private-endpoint}
+# プライベートエンドポイント経由でTiDB Cloud Serverless に接続する {#connect-to-tidb-cloud-serverless-via-private-endpoint}
 
-このドキュメントでは、プライベート エンドポイント経由で TiDB Serverless クラスターに接続する方法について説明します。
+このドキュメントでは、プライベート エンドポイント経由でTiDB Cloud Serverless クラスターに接続する方法について説明します。
 
 > **ヒント：**
 >
-> AWS のプライベート エンドポイント経由で TiDB 専用クラスタに接続する方法については、 [AWS のプライベートエンドポイント経由で TiDB Dedicated に接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。Google Cloud のプライベート エンドポイント経由で TiDB 専用クラスタに接続する方法については、 [プライベートサービス経由でTiDB Dedicatedに接続 Google Cloudに接続](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+> AWS のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [AWS のプライベートエンドポイント経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。Google Cloud のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [プライベートサービス経由でTiDB Cloud Dedicatedに接続する Google Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
 TiDB Cloud は、 [AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&#x26;privatelink-blogs.sort-order=desc)を介して AWS VPC でホストされているTiDB Cloudサービスへの、非常に安全な一方向アクセスをサポートします。これは、サービスが自分の VPC 内にある場合と同じです。プライベート エンドポイントが VPC で公開され、アクセス許可を持つエンドポイントを介してTiDB Cloudサービスへの接続を作成できます。
 
@@ -26,12 +26,12 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 
 ## 制限 {#restrictions}
 
--   現在、 TiDB Cloud は、エンドポイント サービスが AWS でホストされている場合にのみ、TiDB Serverless へのプライベート エンドポイント接続をサポートしています。サービスが Google Cloud でホストされている場合、プライベート エンドポイントは適用されません。
+-   現在、 TiDB Cloud は、エンドポイント サービスが AWS でホストされている場合にのみ、 TiDB Cloud Serverless へのプライベート エンドポイント接続をサポートしています。サービスが Google Cloud でホストされている場合、プライベート エンドポイントは適用されません。
 -   リージョン間のプライベート エンドポイント接続はサポートされていません。
 
 ## AWSでプライベートエンドポイントを設定する {#set-up-a-private-endpoint-with-aws}
 
-プライベート エンドポイント経由で TiDB Serverless クラスターに接続するには、次の手順に従います。
+プライベート エンドポイント経由でTiDB Cloud Serverless クラスターに接続するには、次の手順に従います。
 
 1.  [TiDBクラスタを選択する](#step-1-choose-a-tidb-cluster)
 2.  [AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint)
@@ -39,14 +39,14 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 
 ### ステップ1. TiDBクラスターを選択する {#step-1-choose-a-tidb-cluster}
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、ターゲットの TiDB Serverless クラスターの名前をクリックして、概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、概要ページに移動します。
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 3.  **[接続タイプ]**ドロップダウン リストで、 **[プライベート エンドポイント]**を選択します。
 4.  **サービス名**、**アベイラビリティーゾーン ID** 、**リージョンID**をメモします。
 
     > **注記：**
     >
-    > AWS リージョンごとにプライベートエンドポイントを 1 つ作成するだけで、同じリージョンにあるすべての TiDB Serverless クラスターで共有できます。
+    > AWS リージョンごとにプライベートエンドポイントを 1 つ作成するだけで、同じリージョンにあるすべてのTiDB Cloud Serverless クラスターで共有できます。
 
 ### ステップ2. AWSインターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 

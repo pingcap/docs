@@ -1,25 +1,25 @@
 ---
 title: Use Backup Resource
-summary: このドキュメントでは、TiDB Cloudクラスターのバックアップを作成する方法について学習できます。バックアップリソースを使用すると、TiDB専用クラスターのバックアップを作成および削除できます。バックアップを作成するには、バックアップ用のディレクトリを作成し、backup.tfファイルを作成してterraform applyコマンドを実行します。バックアップのステータスを確認するにはterraform state show tidbcloud_backup.${resource-name}を使用します。バックアップを削除するには、対応するbackup.tfファイルが存在するバックアップディレクトリに移動し、terraform destroyコマンドを実行します。
+summary: バックアップ リソースを使用してTiDB Cloudクラスターのバックアップを作成する方法を学習します。
 ---
 
-# バックアップリソースの使用 {#use-backup-resource}
+# バックアップリソースを使用する {#use-backup-resource}
 
 このドキュメントでは、 `tidbcloud_backup`リソースを使用してTiDB Cloudクラスターのバックアップを作成する方法を学習できます。
 
-`tidbcloud_backup`リソースの特徴は次のとおりです。
+`tidbcloud_backup`リソースの機能は次のとおりです。
 
--   TiDB 専用クラスターのバックアップを作成します。
--   TiDB 専用クラスターのバックアップを削除します。
+-   TiDB Cloud Dedicated クラスターのバックアップを作成します。
+-   TiDB Cloud Dedicated クラスターのバックアップを削除します。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   バックアップおよび復元機能は、TiDB サーバーレス クラスターでは使用できません。バックアップ リソースを使用するには、TiDB 専用クラスターを作成していることを確認してください。
+-   [TiDB Cloud Terraform プロバイダーを入手](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   バックアップと復元機能は、 TiDB Cloud Serverless クラスターでは使用できません。バックアップ リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成していることを確認してください。
 
-## バックアップ リソースを使用してバックアップを作成する {#create-a-backup-with-the-backup-resource}
+## バックアップリソースを使用してバックアップを作成する {#create-a-backup-with-the-backup-resource}
 
-1.  バックアップ用のディレクトリを作成して入力します。
+1.  バックアップ用のディレクトリを作成してそこに入ります。
 
 2.  `backup.tf`ファイルを作成します。
 
@@ -44,9 +44,9 @@ summary: このドキュメントでは、TiDB Cloudクラスターのバック�
           description = "create by terraform"
         }
 
-    ファイル内のリソース値 (プロジェクト ID やクラスター ID など) を独自の値に置き換える必要があります。
+    ファイル内のリソース値 (プロジェクト ID やクラスター ID など) を独自のものに置き換える必要があります。
 
-    Terraform を使用してクラスター リソース (たとえば、 `example_cluster` ) を保守している場合は、実際のプロジェクト ID とクラスター ID を指定せずに、次のようにバックアップ リソースを構成することもできます。
+    Terraform を使用してクラスター リソース (たとえば、 `example_cluster` ) を管理している場合は、実際のプロジェクト ID とクラスター ID を指定せずに、次のようにバックアップ リソースを構成することもできます。
 
         resource "tidbcloud_backup" "example_backup" {
           project_id  = tidbcloud_cluster.example_cluster.project_id
@@ -87,7 +87,7 @@ summary: このドキュメントでは、TiDB Cloudクラスターのバック�
 
           Enter a value:
 
-4.  `yes`を入力してバックアップを作成します。
+4.  バックアップを作成するには`yes`と入力します。
 
     ```
       Enter a value: yes
@@ -99,7 +99,7 @@ summary: このドキュメントでは、TiDB Cloudクラスターのバック�
 
     ```
 
-5.  バックアップのステータスを確認するには`terraform state show tidbcloud_backup.${resource-name}`を使用します。
+5.  `terraform state show tidbcloud_backup.${resource-name}`使用してバックアップのステータスを確認します。
 
         $ terraform state show tidbcloud_backup.example_backup
 
@@ -116,7 +116,7 @@ summary: このドキュメントでは、TiDB Cloudクラスターのバック�
             type             = "MANUAL"
         }
 
-6.  数分間待ちます。次に、 `terraform refersh`を使用してステータスを更新します。
+6.  数分間お待ちください。その後、 `terraform refersh`使用してステータスを更新します。
 
         $ terraform refresh
         tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
@@ -135,17 +135,17 @@ summary: このドキュメントでは、TiDB Cloudクラスターのバック�
             type             = "MANUAL"
         }
 
-ステータスが`SUCCESS`に変わると、クラスターのバックアップが作成されたことを示します。バックアップ作成後は更新できないので注意してください。
+ステータスが`SUCCESS`に変わると、クラスターのバックアップが作成されたことを示します。作成後はバックアップを更新できないことに注意してください。
 
-これで、クラスターのバックアップが作成されました。バックアップを使用してクラスターを復元する場合は、 [復元リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)ことができます。
+これで、クラスターのバックアップが作成されました。バックアップを使用してクラスターを復元する場合は、 [復元リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)実行します。
 
 ## バックアップを更新する {#update-a-backup}
 
-バックアップは更新できません。
+バックアップを更新できません。
 
 ## バックアップを削除する {#delete-a-backup}
 
-バックアップを削除するには、対応する`backup.tf`ファイルが存在するバックアップ ディレクトリに移動し、 `terraform destroy`コマンドを実行してバックアップ リソースを破棄します。
+バックアップを削除するには、対応する`backup.tf`ファイルが配置されているバックアップ ディレクトリに移動し、 `terraform destroy`コマンドを実行してバックアップ リソースを破棄します。
 
     $ terraform destroy
 
@@ -157,6 +157,6 @@ summary: このドキュメントでは、TiDB Cloudクラスターのバック�
 
     Enter a value: yes
 
-ここで`terraform show`コマンドを実行しても、リソースがクリアされているため、何も得られません。
+ここで、 `terraform show`コマンドを実行すると、リソースがクリアされているため何も表示されません。
 
     $ terraform show

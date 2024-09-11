@@ -10,9 +10,9 @@ aliases: ['/tidbcloud/use-htap-cluster']
 
 このチュートリアルでは、 TiDB Cloudのハイブリッド トランザクションおよび分析処理 (HTAP) 機能を簡単に体験する方法を説明します。内容には、テーブルをTiFlashに複製する方法、 TiFlashを使用してクエリを実行する方法、パフォーマンスの向上を体験する方法などが含まれます。
 
-## あなたが始める前に {#before-you-begin}
+## 始める前に {#before-you-begin}
 
-HTAP 機能を体験する前に、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md)に従って TiDB Serverless クラスターを作成し、 **Steam Game Stats**サンプル データセットをクラスターにインポートします。
+HTAP 機能を体験する前に、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md)に従ってTiDB Cloud Serverless クラスターを作成し、 **Steam Game Stats**サンプル データセットをクラスターにインポートします。
 
 ## 手順 {#steps}
 

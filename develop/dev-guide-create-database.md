@@ -11,7 +11,7 @@ summary: データベースを作成するための手順、ルール、およ�
 
 データベースを作成する前に、次の操作を実行します。
 
--   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)読んでください。
 
 ## データベースとは {#what-is-database}
@@ -79,7 +79,7 @@ mysql
 
 データベースを作成したら、そこに**テーブル**を追加できます。詳細については、 [テーブルを作成する](/develop/dev-guide-create-table.md)を参照してください。
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 

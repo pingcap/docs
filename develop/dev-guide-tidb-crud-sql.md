@@ -9,7 +9,7 @@ summary: TiDB の CURD SQL の簡単な紹介。
 
 ## 始める前に {#before-you-start}
 
-TiDB クラスターに接続していることを確認してください。接続していない場合は、 [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照して TiDB Serverless クラスターを作成してください。
+TiDB クラスターに接続していることを確認してください。接続していない場合は、 [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster)を参照してTiDB Cloud Serverless クラスターを作成してください。
 
 ## TiDB で SQL を探索する {#explore-sql-with-tidb}
 
@@ -23,7 +23,7 @@ SQL を試して、MySQL クエリと TiDB の互換性をテストするには�
 
 このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。TiDB ステートメントの完全なリストについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
 
-## カテゴリー {#category}
+## カテゴリ {#category}
 
 SQL は関数に応じて次の 4 つのタイプに分けられます。
 
@@ -100,7 +100,7 @@ SELECT name FROM person;
 SELECT * FROM person WHERE id < 5;
 ```
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 

@@ -1,23 +1,23 @@
 ---
 title: SHOW [BACKUPS|RESTORES] | TiDB SQL Statement Reference
-summary: TiDBインスタンス上で実行されたバックアップおよび復元タスクのリストを表示するステートメントは、SUPER権限が必要です。バックアップタスクをクエリするにはSHOW BACKUPSを使用し、復元タスクをクエリするにはSHOW RESTORESを使用します。バックアップの状態や進捗状況を確認することができます。また、宛先URLをフィルタリングするためにLIKE句やWHERE句を使用することも可能です。MySQLの構文に対するTiDBの拡張機能として利用できます。
+summary: TiDB データベースに対する SHOW [BACKUPS|RESTORES] の使用法の概要。
 ---
 
 # [バックアップ|復元]を表示 {#show-backups-restores}
 
-これらのステートメントは、TiDB インスタンス上で実行された、キューに入れられ、実行中、および最近終了したすべてのタスク[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)リストを表示します。
+これらのステートメントは、TiDB インスタンスで実行されたキューに入れられたタスク、実行中のタスク、最近完了したタスク[`BACKUP`](/sql-statements/sql-statement-backup.md)と[`RESTORE`](/sql-statements/sql-statement-restore.md)のリストを表示します。
 
-どちらのステートメントも実行するには`SUPER`権限が必要です。
+どちらのステートメントも、実行には`SUPER`権限が必要です。
 
-`BACKUP`タスクをクエリするには`SHOW BACKUPS`使用し、 `RESTORE`タスクをクエリするには`SHOW RESTORES`使用します。
+`SHOW BACKUPS`使用して`BACKUP`のタスクを照会し、 `SHOW RESTORES`を使用して`RESTORE`タスクを照会します。
 
 > **注記：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 `br`コマンドライン ツールで開始されたバックアップと復元は表示されません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowBRIEStmt ::=
@@ -36,7 +36,7 @@ ShowLikeOrWhere ::=
 BACKUP DATABASE `test` TO 's3://example-bucket/backup-01';
 ```
 
-バックアップが完了する前に、新しい接続で`SHOW BACKUPS`を実行します。
+バックアップが完了する前に、新しい接続で`SHOW BACKUPS`実行します。
 
 ```sql
 SHOW BACKUPS;
@@ -53,26 +53,26 @@ SHOW BACKUPS;
 
 上記の結果の最初の行は次のように説明されます。
 
-| カラム              | 説明                                                              |
-| :--------------- | :-------------------------------------------------------------- |
-| `Destination`    | 宛先 URL (秘密キーの漏洩を避けるためにすべてのパラメータが削除されています)                       |
-| `State`          | タスクの状態                                                          |
-| `Progress`       | 現在の状態の推定進捗状況 (パーセンテージ)                                          |
-| `Queue_time`     | タスクがキューに入れられたとき                                                 |
-| `Execution_time` | タスクが開始されたとき。タスクをキューに入れる場合、値は`0000-00-00 00:00:00`です。            |
-| `Finish_time`    | タスクが終了したときのタイムスタンプ。タスクをキューに入れて実行する場合、値は`0000-00-00 00:00:00`です。 |
-| `Connection`     | このタスクを実行する接続 ID                                                 |
-| `Message`        | 詳細を含むメッセージ                                                      |
+| カラム              | 説明                                                                  |
+| :--------------- | :------------------------------------------------------------------ |
+| `Destination`    | 宛先 URL (秘密鍵の漏洩を防ぐため、すべてのパラメータを削除)                                   |
+| `State`          | タスクの状態                                                              |
+| `Progress`       | 現在の状態の進捗状況の推定値（パーセンテージ）                                             |
+| `Queue_time`     | タスクがキューに入れられたとき                                                     |
+| `Execution_time` | タスクが開始されたとき。キューイングタスクの場合は値は`0000-00-00 00:00:00`です。                 |
+| `Finish_time`    | タスクが終了したときのタイムスタンプ。キューイングおよび実行中のタスクの場合、値は`0000-00-00 00:00:00`なります。 |
+| `Connection`     | このタスクを実行している接続ID                                                    |
+| `Message`        | 詳細を記載したメッセージ                                                        |
 
 考えられる状態は次のとおりです。
 
 | 州      | 説明          |
 | :----- | :---------- |
 | バックアップ | バックアップの作成   |
-| 待って    | 実行を待っています   |
+| 待って    | 実行待ち        |
 | チェックサム | チェックサム操作の実行 |
 
-接続 ID を使用して、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメント経由でバックアップ/復元タスクをキャンセルできます。
+接続 ID は、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを介してバックアップ/復元タスクをキャンセルするために使用できます。
 
 ```sql
 KILL TIDB QUERY 4;
@@ -84,23 +84,23 @@ Query OK, 0 rows affected (0.00 sec)
 
 ### フィルタリング {#filtering}
 
-`LIKE`句を使用して、宛先 URL をワイルドカード式と照合してタスクを除外します。
+`LIKE`句を使用して、宛先 URL をワイルドカード式と照合し、タスクをフィルター処理します。
 
 ```sql
 SHOW BACKUPS LIKE 's3://%';
 ```
 
-`WHERE`句を使用して列でフィルタリングします。
+列でフィルタリングするには、 `WHERE`句を使用します。
 
 ```sql
 SHOW BACKUPS WHERE `Progress` < 25.0;
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [バックアップ](/sql-statements/sql-statement-backup.md)
 -   [復元する](/sql-statements/sql-statement-restore.md)

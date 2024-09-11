@@ -1,23 +1,23 @@
 ---
 title: SHOW PLACEMENT
-summary: SHOW PLACEMENTは、配置ポリシーからのすべての配置オプションを要約し、正規形式で表示します。この機能はTiDBサーバーレスクラスターでは使用できません。ステートメントは、配置Driver(PD)による配置スケジュールの現在の進行状況を示すScheduling_Stateフィールドを含む結果セットを返します。PENDINGはPDが配置のスケジュールをまだ開始していないことを示し、INPROGRESSはPDが現在配置をスケジュールしていることを示し、SCHEDULEDはPDが配置を正常にスケジュールしたことを示します。MySQLの互換性に対するTiDBの拡張機能です。
+summary: TiDB での SHOW PLACEMENT の使用法。
 ---
 
-# 配置を表示 {#show-placement}
+# 表示配置 {#show-placement}
 
-`SHOW PLACEMENT`配置ポリシーからのすべての配置オプションを要約し、正規形式で表示します。
+`SHOW PLACEMENT`配置ポリシーからのすべての配置オプションを要約し、標準形式で提示します。
 
 > **注記：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
-このステートメントは、配置Driver(PD) による配置スケジュールの現在の進行状況を示す`Scheduling_State`フィールドを含む結果セットを返します。
+このステートメントは、配置Driver(PD) が配置のスケジュールで行った現在の進行状況を示す`Scheduling_State`フィールドを含む結果セットを返します。
 
--   `PENDING` : PD は配置のスケジュールをまだ開始していません。これは、配置ルールが意味的に正しいものの、現在クラスターが満たすことができないことを示している可能性があります。たとえば、 `FOLLOWERS=4`である場合、フォロワーの候補となる TiKV ストアは 3 つしかありません。
--   `INPROGRESS` : PD は現在配置をスケジュールしています。
+-   `PENDING` : PD はまだ配置のスケジュールを開始していません。これは、配置ルールが意味的には正しいが、現在クラスターによって満たされていないことを示している可能性があります。たとえば、 `FOLLOWERS=4`場合、フォロワーの候補となる TiKV ストアは 3 つしかありません。
+-   `INPROGRESS` : PD が現在配置をスケジュール中です。
 -   `SCHEDULED` : PD は配置を正常にスケジュールしました。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStmt ::=
@@ -45,12 +45,12 @@ SHOW PLACEMENT;
     +---------------+----------------------------------------------------------------------+------------------+
     4 rows in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [SQL の配置ルール](/placement-rules-in-sql.md)
--   [のプレースメントを表示](/sql-statements/sql-statement-show-placement-for.md)
+-   [表示配置](/sql-statements/sql-statement-show-placement-for.md)
 -   [配置ポリシーの作成](/sql-statements/sql-statement-create-placement-policy.md)

@@ -1,15 +1,15 @@
 ---
-title: Create a TiDB Dedicated Cluster
-summary: TiDB 専用クラスターを作成する方法を学習します。
+title: Create a TiDB Cloud Dedicated Cluster
+summary: TiDB Cloud Dedicated クラスターを作成する方法を学習します。
 ---
 
-# TiDB専用クラスタを作成する {#create-a-tidb-dedicated-cluster}
+# TiDB Cloud専用クラスタを作成する {#create-a-tidb-cloud-dedicated-cluster}
 
-このチュートリアルでは、TiDB 専用クラスターのサインアップと作成について説明します。
+このチュートリアルでは、 TiDB Cloud Dedicated クラスターのサインアップと作成について説明します。
 
 > **ヒント：**
 >
-> TiDB Serverless クラスターを作成する方法については、 [TiDB サーバーレスクラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)参照してください。
+> TiDB Cloud Serverless クラスターを作成する方法については、 [TiDB Cloudサーバーレスクラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)参照してください。
 
 ## 始める前に {#before-you-begin}
 
@@ -36,9 +36,9 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
 4.  クラスター ページに戻るには、ウィンドウの左上隅にあるTiDB Cloudロゴをクリックします。
 
-## ステップ2. TiDB専用クラスターを作成する {#step-2-create-a-tidb-dedicated-cluster}
+## ステップ2. TiDB Cloud Dedicatedクラスタを作成する {#step-2-create-a-tidb-cloud-dedicated-cluster}
 
-ロール`Organization Owner`または`Project Owner`の場合は、次のように TiDB 専用クラスターを作成できます。
+ロール`Organization Owner`または`Project Owner`の場合は、次のようにしてTiDB Cloud Dedicated クラスターを作成できます。
 
 1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
@@ -46,7 +46,7 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
     >
     > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2.  **「クラスタの作成」を**クリックします。
+2.  **クラスタの作成を**クリックします。
 
 3.  **[クラスタの作成]**ページで**[専用]**を選択し、クラスター情報を次のように構成します。
 
@@ -92,4 +92,4 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
 ## 次は何か {#what-s-next}
 
-TiDB Cloud上にクラスターを作成したら、 [TiDB専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)で説明した方法でクラスターに接続できます。
+TiDB Cloud上にクラスターを作成したら、 [TiDB Cloud専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)で説明した方法でクラスターに接続できます。

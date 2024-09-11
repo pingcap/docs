@@ -1,6 +1,6 @@
 ---
 title: SLOW_QUERY
-summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
+summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
 # 遅いクエリ {#slow-query}
@@ -9,7 +9,7 @@ summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 
 > **注記：**
 >
-> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
@@ -117,7 +117,7 @@ DESC SLOW_QUERY;
 
 > **注記：**
 >
-> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
@@ -219,7 +219,7 @@ DESC CLUSTER_SLOW_QUERY;
 80 rows in set (0.00 sec)
 ```
 
-クラスター システム テーブルを照会すると、TiDB はすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行プランは次のようになります。
+クラスタ システム テーブルをクエリすると、TiDB はすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行プランは次のようになります。
 
 ```sql
 DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';

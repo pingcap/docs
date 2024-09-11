@@ -5,124 +5,124 @@ summary: TiDB Cloudの制限された SQL 機能について説明します。
 
 # TiDB Cloudの SQL 機能が制限されている {#limited-sql-features-on-tidb-cloud}
 
-TiDB Cloud は、 TiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB セルフホストと TiDB 専用/サーバーレスには機能上の違いがいくつかあります。このドキュメントでは、 TiDB Cloudの SQL 機能の制限について説明します。TiDB セルフホストと TiDB 専用/サーバーレス間の機能ギャップは、常に埋められています。ギャップを埋めるためにこれらの機能や機能が必要な場合は、機能リクエスト[お問い合わせ](/tidb-cloud/tidb-cloud-support.md)送信してください。
+TiDB Cloud は、 TiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed とTiDB Cloud Dedicated/Serverless には機能上の違いがいくつかあります。このドキュメントでは、 TiDB Cloudの SQL 機能の制限について説明します。TiDB Self-Managed とTiDB Cloud Dedicated/Serverless 間の機能ギャップは、常に埋められています。ギャップを埋めるためにこれらの機能や機能が必要な場合は、機能リクエスト[お問い合わせ](/tidb-cloud/tidb-cloud-support.md)送信してください。
 
 ## 声明 {#statements}
 
 ### 配置と範囲管理 {#placement-and-range-management}
 
-| 声明                             | TiDB専用 | TiDB サーバーレス     |
-| :----------------------------- | :----- | :-------------- |
-| `ALTER PLACEMENT POLICY`       | サポート   | サポートされていません[^1] |
-| `CREATE PLACEMENT POLICY`      | サポート   | サポートされていません[^1] |
-| `DROP PLACEMENT POLICY`        | サポート   | サポートされていません[^1] |
-| `SHOW CREATE PLACEMENT POLICY` | サポート   | サポートされていません[^1] |
-| `SHOW PLACEMENT`               | サポート   | サポートされていません[^1] |
-| `SHOW PLACEMENT FOR`           | サポート   | サポートされていません[^1] |
-| `SHOW PLACEMENT LABELS`        | サポート   | サポートされていません[^1] |
-| `SHOW TABLE REGIONS`           | サポート   | サポートされていません[^1] |
-| `SPLIT REGION`                 | サポート   | サポートされていません[^1] |
+| 声明                             | TiDB Cloud専用 | TiDB Cloudサーバーレス |
+| :----------------------------- | :----------- | :--------------- |
+| `ALTER PLACEMENT POLICY`       | サポート         | サポートされていません[^1]  |
+| `CREATE PLACEMENT POLICY`      | サポート         | サポートされていません[^1]  |
+| `DROP PLACEMENT POLICY`        | サポート         | サポートされていません[^1]  |
+| `SHOW CREATE PLACEMENT POLICY` | サポート         | サポートされていません[^1]  |
+| `SHOW PLACEMENT`               | サポート         | サポートされていません[^1]  |
+| `SHOW PLACEMENT FOR`           | サポート         | サポートされていません[^1]  |
+| `SHOW PLACEMENT LABELS`        | サポート         | サポートされていません[^1]  |
+| `SHOW TABLE REGIONS`           | サポート         | サポートされていません[^1]  |
+| `SPLIT REGION`                 | サポート         | サポートされていません[^1]  |
 
 ### リソース グループ {#resource-groups}
 
-| 声明                           | TiDB専用      | TiDB サーバーレス     |
-| :--------------------------- | :---------- | :-------------- |
-| `ALTER RESOURCE GROUP`       | サポート        | サポートされていません[^2] |
-| `CALIBRATE RESOURCE`         | サポートされていません | サポートされていません[^2] |
-| `CREATE RESOURCE GROUP`      | サポート        | サポートされていません[^2] |
-| `DROP RESOURCE GROUP`        | サポート        | サポートされていません[^2] |
-| `SET RESOURCE GROUP`         | サポート        | サポートされていません[^2] |
-| `SHOW CREATE RESOURCE GROUP` | サポート        | サポートされていません[^2] |
+| 声明                           | TiDB Cloud専用 | TiDB Cloudサーバーレス |
+| :--------------------------- | :----------- | :--------------- |
+| `ALTER RESOURCE GROUP`       | サポート         | サポートされていません[^2]  |
+| `CALIBRATE RESOURCE`         | サポートされていません  | サポートされていません[^2]  |
+| `CREATE RESOURCE GROUP`      | サポート         | サポートされていません[^2]  |
+| `DROP RESOURCE GROUP`        | サポート         | サポートされていません[^2]  |
+| `SET RESOURCE GROUP`         | サポート         | サポートされていません[^2]  |
+| `SHOW CREATE RESOURCE GROUP` | サポート         | サポートされていません[^2]  |
 
 ### その他 {#others}
 
-| 声明                          | TiDB専用                         | TiDB サーバーレス                           |
-| :-------------------------- | :----------------------------- | :------------------------------------ |
-| `BACKUP`                    | サポート                           | サポートされていません[^3]                       |
-| `SHOW BACKUPS`              | サポート                           | サポートされていません[^3]                       |
-| `RESTORE`                   | サポート                           | サポートされていません[^3]                       |
-| `SHOW RESTORES`             | サポート                           | サポートされていません[^3]                       |
-| `ADMIN RESET TELEMETRY_ID`  | サポート                           | テレメトリは TiDB Serverless ではサポートされていません。 |
-| `ADMIN SHOW TELEMETRY`      | サポートされていません[^4]                | サポートされていません[^4]                       |
-| `ADMIN SHOW SLOW`           | サポート                           | サポートされていません[^5]                       |
-| `ADMIN PLUGINS ENABLE`      | サポート                           | サポートされていません[^8]                       |
-| `ADMIN PLUGINS DISABLE`     | サポート                           | サポートされていません[^8]                       |
-| `ALTER INSTANCE RELOAD TLS` | サポート                           | TiDB Serverless は TLS 証明書を自動的に更新します。  |
-| `LOAD DATA INFILE`          | `LOAD DATA LOCAL INFILE`のみサポート | `LOAD DATA LOCAL INFILE`のみサポート        |
-| `CHANGE DRAINER`            | サポートされていません[^7]                | サポートされていません[^7]                       |
-| `CHANGE PUMP`               | サポートされていません[^7]                | サポートされていません[^7]                       |
-| `FLASHBACK CLUSTER`         | サポート                           | サポートされていません[^3]                       |
-| `LOAD STATS`                | サポート                           | サポートされていません                           |
-| `SELECT ... INTO OUTFILE`   | サポートされていません[^4]                | サポートされていません[^4]                       |
-| `SET CONFIG`                | サポートされていません[^4]                | サポートされていません[^4]                       |
-| `SHOW CONFIG`               | サポートされていません[^4]                | サポートされていません[^4]                       |
-| `SHOW DRAINER STATUS`       | サポートされていません[^7]                | サポートされていません[^7]                       |
-| `SHOW PLUGINS`              | サポート                           | サポートされていません[^8]                       |
-| `SHOW PUMP STATUS`          | サポートされていません[^7]                | サポートされていません[^7]                       |
-| `SHUTDOWN`                  | サポートされていません[^4]                | サポートされていません[^4]                       |
-| `PLAN REPLAYER`             | サポート                           | 別の方法でサポート[^11]                        |
+| 声明                          | TiDB Cloud専用                   | TiDB Cloudサーバーレス                           |
+| :-------------------------- | :----------------------------- | :----------------------------------------- |
+| `BACKUP`                    | サポート                           | サポートされていません[^3]                            |
+| `SHOW BACKUPS`              | サポート                           | サポートされていません[^3]                            |
+| `RESTORE`                   | サポート                           | サポートされていません[^3]                            |
+| `SHOW RESTORES`             | サポート                           | サポートされていません[^3]                            |
+| `ADMIN RESET TELEMETRY_ID`  | サポート                           | テレメトリはTiDB Cloud Serverless ではサポートされていません。 |
+| `ADMIN SHOW TELEMETRY`      | サポートされていません[^4]                | サポートされていません[^4]                            |
+| `ADMIN SHOW SLOW`           | サポート                           | サポートされていません[^5]                            |
+| `ADMIN PLUGINS ENABLE`      | サポート                           | サポートされていません[^8]                            |
+| `ADMIN PLUGINS DISABLE`     | サポート                           | サポートされていません[^8]                            |
+| `ALTER INSTANCE RELOAD TLS` | サポート                           | TiDB Cloud Serverless は TLS 証明書を自動的に更新します。 |
+| `LOAD DATA INFILE`          | `LOAD DATA LOCAL INFILE`のみサポート | `LOAD DATA LOCAL INFILE`のみサポート             |
+| `CHANGE DRAINER`            | サポートされていません[^7]                | サポートされていません[^7]                            |
+| `CHANGE PUMP`               | サポートされていません[^7]                | サポートされていません[^7]                            |
+| `FLASHBACK CLUSTER`         | サポート                           | サポートされていません[^3]                            |
+| `LOAD STATS`                | サポート                           | サポートされていません                                |
+| `SELECT ... INTO OUTFILE`   | サポートされていません[^4]                | サポートされていません[^4]                            |
+| `SET CONFIG`                | サポートされていません[^4]                | サポートされていません[^4]                            |
+| `SHOW CONFIG`               | サポートされていません[^4]                | サポートされていません[^4]                            |
+| `SHOW DRAINER STATUS`       | サポートされていません[^7]                | サポートされていません[^7]                            |
+| `SHOW PLUGINS`              | サポート                           | サポートされていません[^8]                            |
+| `SHOW PUMP STATUS`          | サポートされていません[^7]                | サポートされていません[^7]                            |
+| `SHUTDOWN`                  | サポートされていません[^4]                | サポートされていません[^4]                            |
+| `PLAN REPLAYER`             | サポート                           | 別の方法でサポート[^11]                             |
 
 ## 関数と演算子 {#functions-and-operators}
 
-| 関数と演算子  | TiDB専用 | TiDB サーバーレス                                                                                                   |
-| :------ | :----- | :------------------------------------------------------------------------------------------------------------ |
-| `SLEEP` | 制限なし   | [`SLEEP()`関数](https://docs.pingcap.com/tidbcloud/miscellaneous-functions)最大 300 秒のスリープ時間しかサポートできないという制限があります。 |
+| 関数と演算子  | TiDB Cloud専用 | TiDB Cloudサーバーレス                                                                                              |
+| :------ | :----------- | :------------------------------------------------------------------------------------------------------------ |
+| `SLEEP` | 制限なし         | [`SLEEP()`関数](https://docs.pingcap.com/tidbcloud/miscellaneous-functions)最大 300 秒のスリープ時間しかサポートできないという制限があります。 |
 
 ## システムテーブル {#system-tables}
 
-| データベース               | テーブル                                 | TiDB専用          | TiDB サーバーレス     |
-| :------------------- | :----------------------------------- | :-------------- | :-------------- |
-| `information_schema` | `ATTRIBUTES`                         | サポート            | サポートされていません[^1] |
-| `information_schema` | `CLUSTER_CONFIG`                     | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `CLUSTER_HARDWARE`                   | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `CLUSTER_INFO`                       | サポート            | サポートされていません[^1] |
-| `information_schema` | `CLUSTER_LOAD`                       | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `CLUSTER_LOG`                        | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `CLUSTER_SLOW_QUERY`                 | サポート            | サポートされていません[^5] |
-| `information_schema` | `CLUSTER_STATEMENTS_SUMMARY`         | サポート            | サポートされていません[^6] |
-| `information_schema` | `CLUSTER_STATEMENTS_SUMMARY_EVICTED` | サポート            | サポートされていません[^6] |
-| `information_schema` | `CLUSTER_STATEMENTS_SUMMARY_HISTORY` | サポート            | サポートされていません[^6] |
-| `information_schema` | `CLUSTER_SYSTEMINFO`                 | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `INSPECTION_RESULT`                  | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `INSPECTION_RULES`                   | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `INSPECTION_SUMMARY`                 | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `METRICS_SUMMARY`                    | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `METRICS_SUMMARY_BY_LABEL`           | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `METRICS_TABLES`                     | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `PLACEMENT_POLICIES`                 | サポート            | サポートされていません[^1] |
-| `information_schema` | `RESOURCE_GROUPS`                    | サポート            | サポートされていません[^2] |
-| `information_schema` | `SLOW_QUERY`                         | サポート            | サポートされていません[^5] |
-| `information_schema` | `STATEMENTS_SUMMARY`                 | サポート            | サポートされていません[^6] |
-| `information_schema` | `STATEMENTS_SUMMARY_EVICTED`         | サポート            | サポートされていません[^6] |
-| `information_schema` | `STATEMENTS_SUMMARY_HISTORY`         | サポート            | サポートされていません[^6] |
-| `information_schema` | `TIDB_HOT_REGIONS`                   | サポートされていません[^4] | サポートされていません[^4] |
-| `information_schema` | `TIDB_HOT_REGIONS_HISTORY`           | サポート            | サポートされていません[^1] |
-| `information_schema` | `TIDB_SERVERS_INFO`                  | サポート            | サポートされていません[^1] |
-| `information_schema` | `TIKV_REGION_PEERS`                  | サポート            | サポートされていません[^1] |
-| `information_schema` | `TIKV_REGION_STATUS`                 | サポート            | サポートされていません[^1] |
-| `information_schema` | `TIKV_STORE_STATUS`                  | サポート            | サポートされていません[^1] |
-| `performance_schema` | `pd_profile_allocs`                  | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `pd_profile_block`                   | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `pd_profile_cpu`                     | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `pd_profile_goroutines`              | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `pd_profile_memory`                  | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `pd_profile_mutex`                   | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `tidb_profile_allocs`                | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `tidb_profile_block`                 | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `tidb_profile_cpu`                   | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `tidb_profile_goroutines`            | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `tidb_profile_memory`                | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `tidb_profile_mutex`                 | サポートされていません[^4] | サポートされていません[^4] |
-| `performance_schema` | `tikv_profile_cpu`                   | サポートされていません[^4] | サポートされていません[^4] |
-| `mysql`              | `expr_pushdown_blacklist`            | サポートされていません[^4] | サポートされていません[^4] |
-| `mysql`              | `gc_delete_range`                    | サポートされていません[^4] | サポートされていません[^4] |
-| `mysql`              | `gc_delete_range_done`               | サポートされていません[^4] | サポートされていません[^4] |
-| `mysql`              | `opt_rule_blacklist`                 | サポートされていません[^4] | サポートされていません[^4] |
-| `mysql`              | `tidb`                               | サポートされていません[^4] | サポートされていません[^4] |
+| データベース               | テーブル                                 | TiDB Cloud専用    | TiDB Cloudサーバーレス |
+| :------------------- | :----------------------------------- | :-------------- | :--------------- |
+| `information_schema` | `ATTRIBUTES`                         | サポート            | サポートされていません[^1]  |
+| `information_schema` | `CLUSTER_CONFIG`                     | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `CLUSTER_HARDWARE`                   | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `CLUSTER_INFO`                       | サポート            | サポートされていません[^1]  |
+| `information_schema` | `CLUSTER_LOAD`                       | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `CLUSTER_LOG`                        | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `CLUSTER_SLOW_QUERY`                 | サポート            | サポートされていません[^5]  |
+| `information_schema` | `CLUSTER_STATEMENTS_SUMMARY`         | サポート            | サポートされていません[^6]  |
+| `information_schema` | `CLUSTER_STATEMENTS_SUMMARY_EVICTED` | サポート            | サポートされていません[^6]  |
+| `information_schema` | `CLUSTER_STATEMENTS_SUMMARY_HISTORY` | サポート            | サポートされていません[^6]  |
+| `information_schema` | `CLUSTER_SYSTEMINFO`                 | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `INSPECTION_RESULT`                  | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `INSPECTION_RULES`                   | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `INSPECTION_SUMMARY`                 | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `METRICS_SUMMARY`                    | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `METRICS_SUMMARY_BY_LABEL`           | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `METRICS_TABLES`                     | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `PLACEMENT_POLICIES`                 | サポート            | サポートされていません[^1]  |
+| `information_schema` | `RESOURCE_GROUPS`                    | サポート            | サポートされていません[^2]  |
+| `information_schema` | `SLOW_QUERY`                         | サポート            | サポートされていません[^5]  |
+| `information_schema` | `STATEMENTS_SUMMARY`                 | サポート            | サポートされていません[^6]  |
+| `information_schema` | `STATEMENTS_SUMMARY_EVICTED`         | サポート            | サポートされていません[^6]  |
+| `information_schema` | `STATEMENTS_SUMMARY_HISTORY`         | サポート            | サポートされていません[^6]  |
+| `information_schema` | `TIDB_HOT_REGIONS`                   | サポートされていません[^4] | サポートされていません[^4]  |
+| `information_schema` | `TIDB_HOT_REGIONS_HISTORY`           | サポート            | サポートされていません[^1]  |
+| `information_schema` | `TIDB_SERVERS_INFO`                  | サポート            | サポートされていません[^1]  |
+| `information_schema` | `TIKV_REGION_PEERS`                  | サポート            | サポートされていません[^1]  |
+| `information_schema` | `TIKV_REGION_STATUS`                 | サポート            | サポートされていません[^1]  |
+| `information_schema` | `TIKV_STORE_STATUS`                  | サポート            | サポートされていません[^1]  |
+| `performance_schema` | `pd_profile_allocs`                  | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `pd_profile_block`                   | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `pd_profile_cpu`                     | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `pd_profile_goroutines`              | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `pd_profile_memory`                  | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `pd_profile_mutex`                   | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `tidb_profile_allocs`                | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `tidb_profile_block`                 | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `tidb_profile_cpu`                   | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `tidb_profile_goroutines`            | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `tidb_profile_memory`                | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `tidb_profile_mutex`                 | サポートされていません[^4] | サポートされていません[^4]  |
+| `performance_schema` | `tikv_profile_cpu`                   | サポートされていません[^4] | サポートされていません[^4]  |
+| `mysql`              | `expr_pushdown_blacklist`            | サポートされていません[^4] | サポートされていません[^4]  |
+| `mysql`              | `gc_delete_range`                    | サポートされていません[^4] | サポートされていません[^4]  |
+| `mysql`              | `gc_delete_range_done`               | サポートされていません[^4] | サポートされていません[^4]  |
+| `mysql`              | `opt_rule_blacklist`                 | サポートされていません[^4] | サポートされていません[^4]  |
+| `mysql`              | `tidb`                               | サポートされていません[^4] | サポートされていません[^4]  |
 
 ## システム変数 {#system-variables}
 
-| 変数                                        | TiDB専用           | TiDB サーバーレス                |
+| 変数                                        | TiDB Cloud専用     | TiDB Cloudサーバーレス           |
 | :---------------------------------------- | :--------------- | :------------------------- |
 | `datadir`                                 | 制限なし             | サポートされていません[^1]            |
 | `interactive_timeout`                     | 制限なし             | 読み取り専用[^10]                |
@@ -218,26 +218,26 @@ TiDB Cloud は、 TiDB がサポートするほぼすべてのワークロード
 | `validate_password.special_char_count`    | 制限なし             | 少なくとも`1` [^9]              |
 | `wait_timeout`                            | 制限なし             | 読み取り専用[^10]                |
 
-[^1]: TiDB Serverless ではデータ配置の構成はサポートされていません。
+[^1]: TiDB Cloud Serverless ではデータ配置の構成はサポートされていません。
 
-[^2]: TiDB Serverless ではリソース グループの構成はサポートされていません。
+[^2]: TiDB Cloud Serverless ではリソース グループの構成はサポートされていません。
 
-[^3]: TiDB Serverless で[バックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)操作を実行するには、代わりにTiDB Cloudコンソールを使用できます。
+[^3]: TiDB Cloud Serverless で[バックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)操作を実行するには、代わりにTiDB Cloudコンソールを使用できます。
 
 [^4]: この機能は[Security強化モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)では利用できません。
 
-[^5]: TiDB Serverless で[遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)追跡するには、代わりにTiDB Cloudコンソールを使用できます。
+[^5]: TiDB Cloud Serverless で[遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)追跡するには、代わりにTiDB Cloudコンソールを使用できます。
 
-[^6]: TiDB Serverless で[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)実行するには、代わりにTiDB Cloudコンソールを使用できます。
+[^6]: TiDB Cloud Serverless で[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)実行するには、代わりにTiDB Cloudコンソールを使用できます。
 
 [^7]: DrainerとPump はTiDB Cloudではサポートされていません。
 
-[^8]: プラグインは TiDB Serverless ではサポートされていません。
+[^8]: プラグインはTiDB Cloud Serverless ではサポートされていません。
 
-[^9]: TiDB Serverless は強力なパスワード ポリシーを適用します。
+[^9]: TiDB Cloud Serverless は強力なパスワード ポリシーを適用します。
 
-[^10]: 変数は TiDB Serverless では読み取り専用です。
+[^10]: 変数はTiDB Cloud Serverless では読み取り専用です。
 
-[^11]: TiDB Serverless は、 [例](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information)のように`PLAN REPLAYER`から`${tidb-server-status-port}`でエクスポートされたファイルのダウンロードをサポートしていません。代わりに、TiDB Serverless はファイルをダウンロードするための[署名済みURL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)を生成します。この URL は生成後 10 時間有効であることに注意してください。
+[^11]: TiDB Cloud Serverless は、 [例](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information)のように`PLAN REPLAYER`から`${tidb-server-status-port}`でエクスポートされたファイルのダウンロードをサポートしていません。代わりに、 TiDB Cloud Serverless はファイルをダウンロードするための[署名済みURL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)生成します。この URL は生成後 10 時間有効であることに注意してください。
 
-[^12]: サポートされていません。TiDB 専用クラスターで`require_secure_transport`有効にすると、SQL クライアント接続が失敗します。
+[^12]: サポートされていません。TiDB TiDB Cloud Dedicated クラスターで`require_secure_transport`有効にすると、SQL クライアント接続が失敗します。

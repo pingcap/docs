@@ -15,7 +15,7 @@ TiDB は MySQL 互換のデータベース、 [レール](https://github.com/rai
 
 > **注記：**
 >
-> このチュートリアルは、TiDB Serverless、TiDB Dedicated、および TiDB Self-Hosted で機能します。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -30,13 +30,13 @@ TiDB は MySQL 互換のデータベース、 [レール](https://github.com/rai
 
 <CustomContent platform="tidb">
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -77,7 +77,7 @@ bundle add mysql2 dotenv
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -101,12 +101,12 @@ bundle add mysql2 dotenv
 
     > **注記**
     >
-    > TiDB Serverless の場合、パブリック エンドポイントを使用する場合は、 `ssl_mode=verify_identity`クエリ パラメータを使用して TLS 接続を有効にする**必要があります**。
+    > TiDB Cloud Serverless の場合、パブリック エンドポイントを使用する場合は、 `ssl_mode=verify_identity`クエリ パラメータを使用して TLS 接続を有効にする**必要があります**。
 
 7.  `.env`ファイルを保存します。
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -132,14 +132,14 @@ bundle add mysql2 dotenv
 
     > **注記**
     >
-    > パブリック エンドポイントを使用して TiDB Dedicated に接続する場合は、TLS 接続を有効にすることをお勧めします。
+    > パブリック エンドポイントを使用してTiDB Cloud Dedicated に接続する場合は、TLS 接続を有効にすることをお勧めします。
     >
     > TLS 接続を有効にするには、クエリ パラメータ`ssl_mode`の値を`verify_identity`に変更し、値`sslca`接続ダイアログからダウンロードした CA 証明書のファイル パスに変更します。
 
 6.  `.env`ファイルを保存します。
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -222,7 +222,7 @@ production:
 
 > **注記**
 >
-> TiDB Serverless の場合、パブリック エンドポイントを使用するときは、 `DATABASE_URL`で`ssl_mode`クエリ パラメータを`verify_identity`に設定して TLS 接続を有効にする**必要があります**が、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_URL`で SSL CA 証明書を指定する必要は**ありません**。
+> TiDB Cloud Serverless の場合、パブリック エンドポイントを使用する場合は、 `DATABASE_URL`で`ssl_mode`クエリ パラメータを`verify_identity`に設定して TLS 接続を有効にする**必要があります**が、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_URL`で SSL CA 証明書を指定する必要は**ありません**。
 
 ### データを挿入 {#insert-data}
 

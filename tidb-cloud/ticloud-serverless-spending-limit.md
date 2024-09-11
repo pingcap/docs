@@ -1,11 +1,11 @@
 ---
 title: ticloud serverless spending-limit
-summary: The reference of `ticloud serverless spending-limit`.
+summary: ticloud serverless spend-limit` のリファレンス。
 ---
 
 # ticloud サーバーレス支出制限 {#ticloud-serverless-spending-limit}
 
-TiDB Serverless クラスターの月間最大[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を設定します。
+TiDB Cloud Serverless クラスターの月間最大[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を設定します。
 
 ```shell
 ticloud serverless spending-limit [flags]
@@ -13,13 +13,13 @@ ticloud serverless spending-limit [flags]
 
 ## 例 {#examples}
 
-インタラクティブ モードで TiDB Serverless クラスターの使用制限を設定します。
+インタラクティブ モードでTiDB Cloud Serverless クラスターの使用制限を設定します。
 
 ```shell
 ticloud serverless spending-limit
 ```
 
-非対話型モードで TiDB Serverless クラスターの使用制限を設定します。
+非対話モードでTiDB Cloud Serverless クラスターの使用制限を設定します。
 
 ```shell
 ticloud serverless spending-limit -c <cluster-id> --monthly <spending-limit-monthly>
@@ -27,7 +27,7 @@ ticloud serverless spending-limit -c <cluster-id> --monthly <spending-limit-mont
 
 ## 旗 {#flags}
 
-非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
 | フラグ                  | 説明                          | 必須  | 注記                       |
 | -------------------- | --------------------------- | --- | ------------------------ |
@@ -37,11 +37,11 @@ ticloud serverless spending-limit -c <cluster-id> --monthly <spending-limit-mont
 
 ## 継承されたフラグ {#inherited-flags}
 
-| フラグ               | 説明                                                                             | 必須  | 注記                                                             |
-| ----------------- | ------------------------------------------------------------------------------ | --- | -------------------------------------------------------------- |
-| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
-| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                           |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------------ |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                     |
+| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                     |
 
 ## フィードバック {#feedback}
 

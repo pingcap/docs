@@ -1,15 +1,15 @@
 ---
-title: Export Data from TiDB Serverless
-summary: TiDB Serverless クラスターからデータをエクスポートする方法を学習します。
+title: Export Data from TiDB Cloud Serverless
+summary: TiDB Cloud Serverless クラスターからデータをエクスポートする方法を学びます。
 ---
 
-# TiDB Serverless からデータをエクスポート {#export-data-from-tidb-serverless}
+# TiDB Cloud Serverless からデータをエクスポート {#export-data-from-tidb-cloud-serverless}
 
-TiDB Serverless Export (ベータ版) は、TiDB Serverless クラスターからローカル ファイルまたは外部storageサービスにデータをエクスポートできるサービスです。エクスポートされたデータは、バックアップ、移行、データ分析などの目的で使用できます。
+TiDB Cloud Serverless Export (ベータ版) は、 TiDB Cloud Serverless クラスターからローカル ファイルまたは外部storageサービスにデータをエクスポートできるサービスです。エクスポートされたデータは、バックアップ、移行、データ分析などの目的で使用できます。
 
-[mysqlダンプ](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)や TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)などのツールを使用してデータをエクスポートすることもできますが、TiDB Serverless Export を使用すると、TiDB Serverless クラスターからデータをエクスポートするより便利で効率的な方法が提供されます。これには次の利点があります。
+[mysqlダンプ](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)や TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)などのツールを使用してデータをエクスポートすることもできますが、 TiDB Cloud Serverless Export を使用すると、 TiDB Cloud Serverless クラスターからデータをエクスポートするより便利で効率的な方法が提供されます。これには次の利点があります。
 
--   利便性: エクスポート サービスは、TiDB Serverless クラスターからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
+-   利便性: エクスポート サービスは、 TiDB Cloud Serverless クラスターからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
 -   分離: エクスポート サービスは個別のコンピューティング リソースを使用するため、オンライン サービスで使用されるリソースからの分離が保証されます。
 -   一貫性: エクスポート サービスは、ロックを発生させることなくエクスポートされたデータの一貫性を確保するため、オンライン サービスには影響しません。
 
@@ -23,7 +23,7 @@ TiDB Serverless Export (ベータ版) は、TiDB Serverless クラスターか�
 
 ### ローカルファイル {#a-local-file}
 
-TiDB Serverless クラスターからローカル ファイルにデータをエクスポートするには、データ[TiDB Cloudコンソールを使用する](#export-data-to-a-local-file)または[TiDB CloudCLIを使用する](/tidb-cloud/ticloud-serverless-export-create.md)をエクスポートし、 TiDB Cloud CLI を使用してエクスポートしたデータをダウンロードする必要があります。
+TiDB Cloud Serverless クラスターからローカル ファイルにデータをエクスポートするには、データ[TiDB Cloudコンソールを使用する](#export-data-to-a-local-file)または[TiDB CloudCLIを使用する](/tidb-cloud/ticloud-serverless-export-create.md)エクスポートし、 TiDB Cloud CLI を使用してエクスポートしたデータをダウンロードする必要があります。
 
 データをローカル ファイルにエクスポートする場合、次の制限があります。
 
@@ -40,7 +40,7 @@ TiDB Serverless クラスターからローカル ファイルにデータをエ
     -   [アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) : アクセス キーに`s3:PutObject`および`s3:ListBucket`権限があることを確認します。
     -   [ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) : ロール ARN に`s3:PutObject`および`s3:ListBucket`権限があることを確認します。
 
-詳細については[TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
+詳細については[TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
 
 ## エクスポートオプション {#export-options}
 
@@ -152,7 +152,7 @@ TiDB Serverless クラスターからローカル ファイルにデータをエ
     -   **データ形式**: **SQL ファイル**または**CSV を**選択します。
     -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、また**はなしを**選択します。
     -   **フォルダー URI** : `s3://<bucket-name>/<folder-path>/`形式で Amazon S3 の URI を入力します。
-    -   **バケット アクセス**: 次のアクセス資格情報のいずれかを選択し、資格情報を入力します。資格情報がない場合は、 [TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)を参照してください。
+    -   **バケット アクセス**: 次のアクセス資格情報のいずれかを選択し、資格情報を入力します。資格情報がない場合は、 [TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)を参照してください。
         -   **AWS ロール ARN** : バケットにアクセスするための`s3:PutObject`および`s3:ListBucket`権限を持つロール ARN を入力します。
         -   **AWS アクセスキー**: バケットにアクセスするための`s3:PutObject`と`s3:ListBucket`の権限を持つアクセスキー ID とアクセスキーシークレットを入力します。
 

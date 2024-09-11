@@ -1,19 +1,19 @@
 ---
 title: SET RESOURCE GROUP
-summary: SET RESOURCE GROUPは、現在のセッションのリソース グループを設定するために使用されます。この機能はTiDB サーバーレスクラスターでは使用できません。MySQLもリソースグループの設定をサポートしますが、受け入れられるパラメータはTiDBとは異なります。
+summary: TiDB データベースでの SET RESOURCE GROUP の使用法の概要。
 ---
 
 # リソースグループの設定 {#set-resource-group}
 
-`SET RESOURCE GROUP`は、現在のセッションのリソース グループを設定するために使用されます。
+`SET RESOURCE GROUP` 、現在のセッションのリソース グループを設定するために使用されます。
 
 > **注記：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
-**SetResourceGroupStmt:**
+**リソースグループステートメントの設定:**
 
 ```ebnf+diagram
 SetResourceGroupStmt ::=
@@ -26,7 +26,7 @@ ResourceGroupName ::=
 
 ## 例 {#examples}
 
-ユーザー`user1`を作成し、2 つのリソース グループ`rg1`と`rg2`を作成し、ユーザー`user1`をリソース グループ`rg1`にバインドします。
+ユーザー`user1`を作成し、 2 つのリソース グループ`rg1`と`rg2`を作成し、ユーザー`user1`をリソース グループ`rg1`にバインドします。
 
 ```sql
 CREATE USER 'user1';
@@ -61,7 +61,7 @@ SELECT CURRENT_RESOURCE_GROUP();
     +--------------------------+
     1 row in set (0.00 sec)
 
-`SET RESOURCE GROUP`を実行して、デフォルトのリソース グループを使用する現在のセッションを指定します。
+`SET RESOURCE GROUP`を実行して、現在のセッションがデフォルトのリソース グループを使用するように指定します。
 
 ```sql
 SET RESOURCE GROUP `default`;
@@ -77,13 +77,13 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-MySQL は[リソースグループの設定](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)もサポートします。ただし、受け入れられるパラメータは TiDB とは異なります。互換性がありません。
+MySQL も[リソースグループの設定](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)サポートしています。ただし、受け入れられるパラメータは TiDB のものと異なります。互換性がありません。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
 -   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)
 -   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソース制御](/tidb-resource-control.md)
+-   [リソース管理](/tidb-resource-control.md)

@@ -1,6 +1,6 @@
 ---
 title: Security Compatibility with MySQL
-summary: Learn TiDB's security compatibilities with MySQL.
+summary: TiDB と MySQL のセキュリティ互換性について学習します。
 ---
 
 # MySQL とのSecurity互換性 {#security-compatibility-with-mysql}
@@ -11,7 +11,7 @@ TiDB はMySQL 5.7と同様のセキュリティ機能をサポートし、MySQL 
 
 -   カラムレベルの権限。
 -   これらの権限属性: `max_questions` 、 `max_updated` 、および`max_user_connections` 。
--   パスワード検証ポリシー。パスワードを変更するときに、現在のパスワードを検証する必要があります。
+-   パスワード検証ポリシー。パスワードを変更するときに現在のパスワードを検証する必要があります。
 -   二重パスワードポリシー。
 -   ランダムなパスワード生成。
 -   多要素認証。
@@ -35,7 +35,7 @@ TiDB の有効期限メカニズムは、次の点で MySQL と異なります�
 TiDB と MySQL のパスワード複雑性ポリシーには、次の違いがあります。
 
 -   MySQL v5.7 は、 `validate_password`プラグインを使用してパスワードの複雑さのポリシーを実装します。
--   MySQL v8.0 では、 `validate_password`コンポーネントを使用してパスワードの複雑さのポリシーを再実装します。
+-   MySQL v8.0 では、 `validate_password`コンポーネントを使用してパスワードの複雑さのポリシーが再実装されています。
 -   TiDB では、v6.5.0 以降、組み込みのパスワード複雑さ管理機能が導入されています。
 
 機能の実装には次の違いがあります。
@@ -68,7 +68,7 @@ TiDB と MySQL のパスワード失敗追跡ポリシーには、次の違い�
 
         -   サーバーを再起動すると、すべてのアカウントの失敗した試行回数がリセットされます。
         -   `FLUSH PRIVILEGES`を実行すると、すべてのアカウントの失敗した試行回数がリセットされます。
-        -   `ALTER USER ... ACCOUNT UNLOCK`実行してアカウントのロックを解除すると、カウントがリセットされます。
+        -   `ALTER USER ... ACCOUNT UNLOCK`を実行してアカウントのロックを解除すると、カウントがリセットされます。
         -   アカウントが正常にログインすると、カウントはリセットされます。
 
     -   ティDB:
@@ -109,7 +109,7 @@ TiDB と MySQL の実装メカニズムは一貫しています。どちらも`m
 
 TiDB は複数の認証方法をサポートしています。これらの方法は、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)と[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用してユーザーごとに指定できます。これらの方法は、同じ名前の MySQL の認証方法と互換性があります。
 
-次の表に示すサポートされている認証方法のいずれかを使用できます。クライアントとサーバー間の接続を確立するときにサーバーが通知するデフォルトの方法を指定するには、 [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)変数を設定します。 `tidb_sm3_password` 、TiDB でのみサポートされている SM3 認証方法です。したがって、この方法を使用して認証するには、 [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)使用して TiDB に接続する必要があります。 `tidb_auth_token` 、 TiDB Cloudで使用される JSON Web Token (JWT) ベースの認証方法で、TiDB Self-Hosted で使用するように構成することもできます。
+次の表に示すサポートされている認証方法のいずれかを使用できます。クライアントとサーバー間の接続を確立するときにサーバーが通知するデフォルトの方法を指定するには、 [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)変数を設定します。 `tidb_sm3_password` 、TiDB でのみサポートされている SM3 認証方法です。したがって、この方法を使用して認証するには、 [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)使用して TiDB に接続する必要があります。 `tidb_auth_token` 、 TiDB Cloudで使用される JSON Web Token (JWT) ベースの認証方法で、TiDB Self-Managed で使用するように構成することもできます。
 
 <CustomContent platform="tidb">
 
@@ -142,7 +142,7 @@ TLS 認証のサポートは異なる構成になっています。詳細につ�
 
 ### <code>tidb_auth_token</code> {#code-tidb-auth-token-code}
 
-`tidb_auth_token`は[JSON ウェブトークン (JWT)](https://datatracker.ietf.org/doc/html/rfc7519)をベースにしたパスワードレス認証方式です。v6.4.0 では、 `tidb_auth_token` TiDB Cloudのユーザー認証にのみ使用されます。v6.5.0 以降では、 `tidb_auth_token` TiDB Self-Hosted のユーザー認証方式として設定することもできます。 `mysql_native_password`や`caching_sha2_password`などのパスワードベースの認証方式とは異なり、 `tidb_auth_token`使用してユーザーを作成する場合、カスタムパスワードを設定したり保存したりする必要はありません。TiDB にログインするには、ユーザーはパスワードの代わりに署名付きトークンを使用するだけでよいため、認証プロセスが簡素化され、セキュリティが向上します。
+`tidb_auth_token`は[JSON ウェブトークン (JWT)](https://datatracker.ietf.org/doc/html/rfc7519)をベースにしたパスワードレス認証方式です。v6.4.0 では、 `tidb_auth_token` TiDB Cloudのユーザー認証にのみ使用されます。v6.5.0 以降では、 `tidb_auth_token` TiDB Self-Managed のユーザー認証方式として設定することもできます。 `mysql_native_password`や`caching_sha2_password`などのパスワードベースの認証方式とは異なり、 `tidb_auth_token`を使用してユーザーを作成する場合、カスタムパスワードを設定したり保存したりする必要はありません。TiDB にログインするには、ユーザーはパスワードの代わりに署名付きトークンを使用するだけでよいため、認証プロセスが簡素化され、セキュリティが向上します。
 
 #### JWT {#jwt}
 
@@ -151,7 +151,7 @@ JWTは、ヘッダー、ペイロード、署名の3つの部分で構成され�
 ヘッダーは、3 つのパラメータを含む JWT のメタデータを記述します。
 
 -   `alg` : 署名のアルゴリズム。デフォルトは`RS256`です。
--   `typ` : トークンのタイプ、つまり`JWT`です。
+-   `typ` : トークンのタイプ、つまり`JWT` 。
 -   `kid` : トークン署名を生成するためのキー ID。
 
 ヘッダーの例を次に示します。
@@ -170,7 +170,7 @@ JWTは、ヘッダー、ペイロード、署名の3つの部分で構成され�
 -   `sub` : このクレームは、認証されるユーザー名と同じである必要があります。
 -   `iat` : `issued at`を意味し、トークンが発行されたときのタイムスタンプです。TiDB では、この値は認証時間より遅くてはならず、認証の 15 分前より早くてはなりません。
 -   `exp` : トークンの有効期限が切れるタイムスタンプ。認証時刻より早い場合、認証は失敗します。
--   `email` : ユーザーを作成するときに`ATTRIBUTE '{"email": "xxxx@pingcap.com"}`で電子メールを指定できます。ユーザーの作成時に電子メールが指定されていない場合、このクレームは空の文字列として設定する必要があります。それ以外の場合、このクレームはユーザーの作成時に指定された値と同じである必要があります。
+-   `email` : ユーザーの作成時に`ATTRIBUTE '{"email": "xxxx@pingcap.com"}`で電子メールを指定できます。ユーザーの作成時に電子メールが指定されていない場合、このクレームは空の文字列として設定する必要があります。それ以外の場合、このクレームはユーザーの作成時に指定された値と同じである必要があります。
 
 ペイロードの例を次に示します。
 
@@ -193,7 +193,7 @@ JWTは、ヘッダー、ペイロード、署名の3つの部分で構成され�
 
 #### 使用法 {#usage}
 
-TiDB セルフホスト ユーザーの認証方法として`tidb_auth_token`設定して使用するには、次の手順を実行します。
+TiDB Self-Managed ユーザーの認証方法として`tidb_auth_token`設定して使用するには、次の手順を実行します。
 
 1.  TiDB 構成ファイルで[`auth-token-jwks`](/tidb-configuration-file.md#auth-token-jwks-new-in-v640)と[`auth-token-refresh-interval`](/tidb-configuration-file.md#auth-token-refresh-interval-new-in-v640)を構成します。
 

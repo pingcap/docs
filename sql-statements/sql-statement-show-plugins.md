@@ -1,6 +1,6 @@
 ---
 title: SHOW PLUGINS
-summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
+summary: TiDB データベースの SHOW PLUGINS の使用法の概要。
 ---
 
 # プラグインを表示 {#show-plugins}
@@ -9,7 +9,7 @@ summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
 
 > **注記：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ## 概要 {#synopsis}
 
@@ -44,7 +44,7 @@ SHOW PLUGINS LIKE 'a%';
 
 ## MySQL 互換性 {#mysql-compatibility}
 
-TiDB の`SHOW PLUGINS`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) 。
+TiDB の`SHOW PLUGINS`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support) 。
 
 ## 参照 {#see-also}
 

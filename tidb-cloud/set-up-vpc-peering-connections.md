@@ -1,13 +1,13 @@
 ---
-title: Connect to TiDB Dedicated via VPC Peering
-summary: VPC ピアリング経由で TiDB Dedicated に接続する方法を学習します。
+title: Connect to TiDB Cloud Dedicated via VPC Peering
+summary: VPC ピアリング経由でTiDB Cloud Dedicated に接続する方法を学習します。
 ---
 
-# VPC ピアリング経由で TiDB Dedicated に接続する {#connect-to-tidb-dedicated-via-vpc-peering}
+# VPC ピアリング経由でTiDB Cloud Dedicated に接続する {#connect-to-tidb-cloud-dedicated-via-vpc-peering}
 
 > **注記：**
 >
-> VPC ピアリング接続は TiDB 専用クラスターでのみ使用できます。VPC ピアリングを使用して[TiDB サーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)に接続することはできません。
+> VPC ピアリング接続は、 TiDB Cloud Dedicated クラスターでのみ使用できます。VPC ピアリングを使用して[TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)に接続することはできません。
 
 VPC ピアリング経由でアプリケーションをTiDB Cloudに接続するには、 TiDB Cloudで[VPC ピアリング](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)設定する必要があります。このドキュメントでは、VPC ピアリング接続[AWSで](#set-up-vpc-peering-on-aws)と[Google Cloudで](#set-up-vpc-peering-on-google-cloud)を設定し、VPC ピアリング経由でTiDB Cloudに接続する手順を説明します。
 
@@ -21,11 +21,11 @@ VPC ピアリング接続は、2 つの VPC 間のネットワーク接続であ
 
 ## 前提条件: リージョンのCIDRを設定する {#prerequisite-set-a-cidr-for-a-region}
 
-CIDR (Classless Inter-Domain Routing) は、TiDB 専用クラスターの VPC を作成するために使用される CIDR ブロックです。
+CIDR (Classless Inter-Domain Routing) は、 TiDB Cloud Dedicated クラスターの VPC を作成するために使用される CIDR ブロックです。
 
-VPC ピアリング リクエストをリージョンに追加する前に、そのリージョンの CIDR を設定し、そのリージョンに最初の TiDB 専用クラスターを作成する必要があります。最初の専用クラスターが作成されると、 TiDB Cloudによってクラスターの VPC が作成され、アプリケーションの VPC へのピアリング リンクを確立できるようになります。
+VPC ピアリング リクエストをリージョンに追加する前に、そのリージョンの CIDR を設定し、そのリージョンに最初のTiDB Cloud専用クラスターを作成する必要があります。最初の専用クラスターが作成されると、 TiDB Cloudによってクラスターの VPC が作成され、アプリケーションの VPC へのピアリング リンクを確立できるようになります。
 
-最初の TiDB 専用クラスターを作成するときに CIDR を設定できます。クラスターを作成する前に CIDR を設定する場合は、次の操作を実行します。
+最初のTiDB Cloud Dedicated クラスターを作成するときに CIDR を設定できます。クラスターを作成する前に CIDR を設定する場合は、次の操作を実行します。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 

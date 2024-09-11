@@ -9,7 +9,7 @@ summary: TiDB データベースの CALIBRATE RESOURCE の使用法の概要。
 
 > **注記：**
 >
-> この機能は TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> この機能は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 ## 概要 {#synopsis}
 

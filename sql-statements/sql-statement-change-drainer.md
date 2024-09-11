@@ -1,19 +1,19 @@
 ---
 title: CHANGE DRAINER
-summary: CHANGE DRAINERステートメントは、クラスター内のDrainerのステータス情報を変更します。この機能はTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。Drainerの状態が自動的にPDに報告され、異常な状況にある場合にのみ使用できます。MySQLの互換性もあります。
+summary: TiDB データベースの CHANGE DRAINER の使用法の概要。
 ---
 
-# チェンジドレイナー {#change-drainer}
+# ドレイナーの変更 {#change-drainer}
 
 `CHANGE DRAINER`ステートメントは、クラスター内のDrainerのステータス情報を変更します。
 
 > **注記：**
 >
-> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+> この機能は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 > **ヒント：**
 >
-> 実行中、Drainer の状態が自動的に PD に報告されます。 Drainerが異常な状況にあり、その状態が PD に格納されている状態情報と一致しない場合にのみ、 `CHANGE DRAINER`ステートメントを使用して PD に格納されている状態情報を変更できます。
+> Drainer の状態は実行中に自動的に PD に報告されます。Drainerが異常な状況にあり、その状態が PD に保存されている状態情報と一致しない場合にのみ、 `CHANGE DRAINER`ステートメントを使用して PD に保存されている状態情報を変更できます。
 
 ## 例 {#examples}
 
@@ -32,7 +32,7 @@ SHOW DRAINER STATUS;
 2 rows in set (0.00 sec)
 ```
 
-Drainer1 の状態が 1 日以上更新されていないことがわかります。Drainerは異常な状態にありますが、 `State`は`Online`のままです。 `CHANGE DRAINER`使用した後、Drainer の`State` 「一時停止」に変更されます。
+ドレイナー 1 の状態は 1 日以上更新されていないことがわかります。Drainerは異常な状態ですが、 `State` `Online`ままです。 `CHANGE DRAINER`を使用した後、ドレイナーの`State` 「一時停止」に変更されます。
 
 ```sql
 CHANGE DRAINER TO NODE_STATE ='paused' FOR NODE_ID 'drainer1';
@@ -57,12 +57,12 @@ SHOW DRAINER STATUS;
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
--   [ポンプのステータスを表示](/sql-statements/sql-statement-show-pump-status.md)
--   [ドレイナーのステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
+-   [ポンプの状態を表示](/sql-statements/sql-statement-show-pump-status.md)
+-   [ドレイナーステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
 -   [ポンプステータスの変更](/sql-statements/sql-statement-change-pump.md)

@@ -1,17 +1,17 @@
 ---
-title: Migrate from TiDB Self-Hosted to TiDB Cloud
-summary: TiDB Self-Hosted からTiDB Cloudにデータを移行する方法を学びます。
+title: Migrate from TiDB Self-Managed to TiDB Cloud
+summary: TiDB Self-Managed からTiDB Cloudにデータを移行する方法を学びます。
 ---
 
-# TiDB セルフホストからTiDB Cloudへの移行 {#migrate-from-tidb-self-hosted-to-tidb-cloud}
+# TiDBセルフマネージドからTiDB Cloudへの移行 {#migrate-from-tidb-self-managed-to-tidb-cloud}
 
-このドキュメントでは、 Dumplingと TiCDC を介して TiDB セルフホスト クラスターからTiDB Cloud (AWS) にデータを移行する方法について説明します。
+このドキュメントでは、 Dumplingと TiCDC を介して TiDB セルフマネージド クラスターからTiDB Cloud (AWS) にデータを移行する方法について説明します。
 
 全体的な手順は次のとおりです。
 
 1.  環境を構築し、ツールを準備します。
 2.  完全なデータを移行します。プロセスは次のとおりです。
-    1.  Dumplingを使用して、TiDB Self-Hosted から Amazon S3 にデータをエクスポートします。
+    1.  Dumplingを使用して、TiDB Self-Managed から Amazon S3 にデータをエクスポートします。
     2.  Amazon S3 からTiDB Cloudにデータをインポートします。
 3.  TiCDC を使用して増分データを複製します。
 4.  移行したデータを確認します。
@@ -35,7 +35,7 @@ S3 バケットとTiDB Cloudクラスターを同じリージョンに配置す�
 
 ### Dumpling {#dumpling}
 
-[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview) 、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。Dumplingを使用すると、TiDB Self-Hosted から完全なデータをエクスポートできます。
+[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview) 、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。Dumplingを使用すると、TiDB Self-Managed から完全なデータをエクスポートできます。
 
 Dumpling をデプロイする前に、次の点に注意してください。
 
@@ -102,18 +102,18 @@ tiup update --self && tiup update dumpling
 
 ## 全データを移行 {#migrate-full-data}
 
-TiDB セルフホスト クラスターからTiDB Cloudにデータを移行するには、次のようにして完全なデータ移行を実行します。
+TiDB Self-Managed クラスターからTiDB Cloudにデータを移行するには、次のようにして完全なデータ移行を実行します。
 
-1.  TiDB セルフホスト クラスターから Amazon S3 にデータを移行します。
+1.  TiDB セルフマネージド クラスターから Amazon S3 にデータを移行します。
 2.  Amazon S3 からTiDB Cloudにデータを移行します。
 
-### TiDB セルフホスト クラスターから Amazon S3 にデータを移行する {#migrate-data-from-the-tidb-self-hosted-cluster-to-amazon-s3}
+### TiDB セルフマネージド クラスターから Amazon S3 にデータを移行する {#migrate-data-from-the-tidb-self-managed-cluster-to-amazon-s3}
 
-Dumplingを使用して、TiDB セルフホスト クラスターから Amazon S3 にデータを移行する必要があります。
+Dumplingを使用して、TiDB セルフマネージド クラスターから Amazon S3 にデータを移行する必要があります。
 
 TiDB クラスターがローカル IDC 内にある場合、またはDumplingサーバーと Amazon S3 間のネットワークが接続されていない場合は、最初にファイルをローカルstorageにエクスポートし、後で Amazon S3 にアップロードすることができます。
 
-#### ステップ1.上流のTiDBセルフホストクラスタのGCメカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-hosted-cluster-temporarily}
+#### ステップ1.上流のTiDBセルフマネージドクラスタのGCメカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-managed-cluster-temporarily}
 
 増分移行中に新しく書き込まれたデータが失われないようにするには、移行を開始する前にアップストリーム クラスターのガベージコレクション(GC) メカニズムを無効にして、システムが履歴データをクリーンアップしないようにする必要があります。
 
@@ -143,7 +143,7 @@ AWS コンソールでアクセスキーを作成します。詳細は[アクセ
 
 2.  右上のナビゲーション バーでユーザー名を選択し、 **[Security資格情報]**をクリックします。
 
-3.  アクセス キーを作成するには、 **[アクセス キーの作成] を**クリックします。次に、 **[.csv ファイルのダウンロード]**を選択して、アクセス キー ID とシークレット アクセス キーをコンピューター上の CSV ファイルに保存します。ファイルは安全な場所に保存してください。このダイアログ ボックスを閉じると、シークレット アクセス キーに再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **[閉じる]**を選択します。アクセス キーを作成すると、キー ペアはデフォルトでアクティブになり、すぐに使用できます。
+3.  アクセス キーを作成するには、 **[アクセス キーの作成] を**クリックします。次に、 **[.csv ファイルのダウンロード]**を選択して、アクセス キー ID とシークレット アクセス キーをコンピューター上の CSV ファイルに保存します。ファイルは安全な場所に保存してください。このダイアログ ボックスを閉じると、シークレット アクセス キーに再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **[閉じる]**を選択します。アクセス キーを作成すると、キー ペアは既定でアクティブになり、すぐに使用できます。
 
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
@@ -160,7 +160,7 @@ Dumplingを使用してアップストリーム TiDB クラスターから Amazo
     export AWS_SECRET_ACCESS_KEY=${SecretKey}
     ```
 
-2.  AWS コンソールから S3 バケット URI とリージョン情報を取得します。詳細については[バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
+2.  AWS コンソールから S3 バケット URI とリージョン情報を取得します。詳細については[バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)参照してください。
 
     次のスクリーンショットは、S3 バケット URI 情報を取得する方法を示しています。
 
@@ -199,7 +199,7 @@ Dumplingを使用してアップストリーム TiDB クラスターから Amazo
 
 ### Amazon S3 からTiDB Cloudにデータを移行する {#migrate-data-from-amazon-s3-to-tidb-cloud}
 
-TiDB セルフホスト クラスターから Amazon S3 にデータをエクスポートした後、そのデータをTiDB Cloudに移行する必要があります。
+TiDB セルフマネージド クラスターから Amazon S3 にデータをエクスポートした後、そのデータをTiDB Cloudに移行する必要があります。
 
 1.  TiDB Cloudコンソールでクラスターのアカウント ID と外部 ID を取得します。詳細については、 [ステップ2. Amazon S3アクセスを構成する](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access)を参照してください。
 

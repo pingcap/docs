@@ -1,6 +1,6 @@
 ---
 title: SHOW CREATE PLACEMENT POLICY
-summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
+summary: TiDB での SHOW CREATE PLACEMENT POLICY の使用法。
 ---
 
 # 配置ポリシーの作成を表示 {#show-create-placement-policy}
@@ -9,7 +9,7 @@ summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
 
 > **注記：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ## 概要 {#synopsis}
 

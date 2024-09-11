@@ -1,15 +1,15 @@
 ---
 title: CLUSTER_CONFIG
-summary: CLUSTER_CONFIGテーブルを使用すると、TiDBクラスター内のすべてのサーバーコンポーネントの現在の構成を取得できます。このテーブルを使用すると、各インスタンスのHTTP APIエンドポイントにアクセスする必要がなくなります。ただし、このテーブルはTiDBセルフホスト型にのみ適用され、TiDB Cloudでは使用できません。また、フィールドにはインスタンスのタイプ、サービスアドレス、設定項目名、設定項目の値が含まれます。例えば、TiKVインスタンスのcoprocessor構成をクエリする場合、次のようにします。
+summary: CLUSTER_CONFIG` information_schema テーブルについて学習します。
 ---
 
 # クラスター構成 {#cluster-config}
 
-`CLUSTER_CONFIG`クラスター構成テーブルを使用して、クラスター内のすべてのサーバーコンポーネントの現在の構成を取得できます。これにより、同様の情報を取得するには各インスタンスの HTTP API エンドポイントにアクセスする必要があった TiDB の以前のリリースよりも使用法が簡素化されます。
+`CLUSTER_CONFIG`クラスター構成テーブルを使用して、クラスター内のすべてのサーバーコンポーネントの現在の構成を取得できます。これにより、同様の情報を取得するには各インスタンスの HTTP API エンドポイントにアクセスする必要があった以前のリリースの TiDB よりも使用が簡単になります。
 
 > **注記：**
 >
-> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> この表は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 ```sql
 USE information_schema;
@@ -29,10 +29,10 @@ DESC cluster_config;
 
 フィールドの説明:
 
--   `TYPE` : インスタンスのタイプ。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
--   `INSTANCE` : インスタンスのサービスアドレス。
--   `KEY` : 設定項目名。
--   `VALUE` : 設定項目の値。
+-   `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
+-   `INSTANCE` : インスタンスのサービス アドレス。
+-   `KEY` : 構成項目名。
+-   `VALUE` : 構成項目の値。
 
 次の例は、 `CLUSTER_CONFIG`テーブルを使用して TiKV インスタンスの`coprocessor`構成をクエリする方法を示しています。
 

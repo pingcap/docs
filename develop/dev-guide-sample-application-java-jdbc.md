@@ -16,7 +16,7 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 
 > **注記：**
 >
-> このチュートリアルは、TiDB Serverless、TiDB Dedicated、および TiDB Self-Hosted で機能します。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -31,7 +31,7 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -39,11 +39,11 @@ TiDB は MySQL 互換のデータベースであり、JDBC (Java Database Connec
 
 > **注記：**
 >
-> セキュリティ上の理由から、インターネット経由で接続する場合は、 `VERIFY_IDENTITY`使用して TiDB クラスターへの TLS 接続を確立することをお勧めします。TiDB Serverless と TiDB Dedicated はどちらもサブジェクト別名 (SAN) 証明書を使用するため、MySQL Connector/J バージョンは[8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/news-8-0-22.html)以上である必要があります。
+> セキュリティ上の理由から、インターネット経由で接続する場合は、 `VERIFY_IDENTITY`使用して TiDB クラスターへの TLS 接続を確立することをお勧めします。TiDB TiDB Cloud Serverless とTiDB Cloud Dedicated はどちらもサブジェクト別名 (SAN) 証明書を使用するため、MySQL Connector/J バージョンは[8.0.22](https://dev.mysql.com/doc/relnotes/connector-j/en/news-8-0-22.html)以上である必要があります。
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -66,7 +66,7 @@ cd tidb-java-jdbc-quickstart
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -111,12 +111,12 @@ cd tidb-java-jdbc-quickstart
 
     プレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに必ず置き換えてください。
 
-    TiDB Serverless では安全な接続が必要です。そのため、 `USE_SSL`の値を`true`に設定する必要があります。
+    TiDB Cloud Serverless では安全な接続が必要です。そのため、 `USE_SSL`の値を`true`に設定する必要があります。
 
 7.  `env.sh`ファイルを保存します。
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -150,7 +150,7 @@ cd tidb-java-jdbc-quickstart
 6.  `env.sh`ファイルを保存します。
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1.  次のコマンドを実行して`env.sh.example`コピーし、名前を`env.sh`に変更します。
 

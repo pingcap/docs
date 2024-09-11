@@ -8,28 +8,38 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年9月10日 {#september-10-2024}
+
+**一般的な変更**
+
+-   TiDB Cloudパートナー Web コンソールとオープン API を起動して、 TiDB Cloudパートナーのリソースと課金の管理を強化します。
+
+    マネージドサービスプロバイダー (MSP) と AWS Marketplace チャネルパートナープライベートオファー (CPPO) を介した再販業者は、 [TiDB Cloudパートナー Web コンソール](https://partner-console.tidbcloud.com/)とオープン API を活用して日常業務を効率化できるようになりました。
+
+    詳細については[TiDB Cloudパートナー Web コンソール](/tidb-cloud/tidb-cloud-partners.md)参照してください。
+
 ## 2024年9月3日 {#september-3-2024}
 
 **コンソールの変更**
 
--   [TiDB Cloudコンソール](https://tidbcloud.com/)を使用して TiDB Serverless クラスターからデータをエクスポートすることをサポートします。
+-   [TiDB Cloudコンソール](https://tidbcloud.com/)を使用してTiDB Cloud Serverless クラスターからデータをエクスポートすることをサポートします。
 
-    これまで、 TiDB Cloud[TiDB CloudCLI](/tidb-cloud/cli-reference.md)使用したデータのエクスポートのみがサポートされていました。現在では、 [TiDB Cloudコンソール](https://tidbcloud.com/)を使用して TiDB Serverless クラスターからローカル ファイルや Amazon S3 にデータを簡単にエクスポートできます。
+    これまで、 TiDB Cloud[TiDB CloudCLI](/tidb-cloud/cli-reference.md)使用したデータのエクスポートのみがサポートされていました。現在では、 [TiDB Cloudコンソール](https://tidbcloud.com/)を使用して、 TiDB Cloud Serverless クラスターからローカル ファイルや Amazon S3 にデータを簡単にエクスポートできます。
 
-    詳細については[TiDB Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)を参照してください。
+    詳細については[TiDB Cloud Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)を参照してください。
 
--   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの接続エクスペリエンスを強化します。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの接続エクスペリエンスを強化します。
 
-    -   **接続**ダイアログ インターフェイスを改訂し、TiDB 専用ユーザーに、より合理化され効率的な接続エクスペリエンスを提供します。
+    -   **接続**ダイアログ インターフェイスを改訂し、 TiDB Cloud Dedicated ユーザーに、より合理化され効率的な接続エクスペリエンスを提供します。
     -   クラスターのネットワーク構成を簡素化するために、新しいクラスター レベルの**ネットワーク**ページを導入しました。
     -   **Security設定**ページを新しい**パスワード設定**ページに置き換え、IP アクセス リスト設定を新しい**ネットワーク**ページに移動します。
 
-    詳細については[TiDB専用に接続](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
+    詳細については[TiDB Cloud専用に接続](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
 
--   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)および[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデータ インポート エクスペリエンスを強化します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)および[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータ インポート エクスペリエンスを強化します。
 
     -   **インポート**ページのレイアウトをより明確なレイアウトに改良します。
-    -   TiDB Serverless クラスターと TiDB Dedicated クラスターのインポート手順を統一します。
+    -   TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターのインポート手順を統一します。
     -   AWS ロール ARN 作成プロセスを簡素化し、接続のセットアップを容易にします。
 
     詳細については[ファイルからTiDB Cloudにデータをインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)参照してください。
@@ -38,27 +48,27 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   **プライベート エンドポイント接続の作成**ページのレイアウトを調整し、 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで新しいプライベート エンドポイント接続を作成する際のユーザー エクスペリエンスを向上させます。
+-   **プライベート エンドポイント接続の作成**ページのレイアウトを調整し、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベート エンドポイント接続を作成する際のユーザー エクスペリエンスを向上させます。
 
-    詳細については[AWS のプライベートエンドポイント経由で TiDB 専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect 経由で TiDB 専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+    詳細については[AWS のプライベートエンドポイント経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
 ## 2024年8月6日 {#august-6-2024}
 
 **一般的な変更**
 
--   AWS での負荷分散に対する請求の変更はあり[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) 。
+-   AWS での負荷分散に対する請求の変更はあり[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 。
 
-    2024 年 8 月 1 日より、TiDB 専用料金には、 [AWS の料金変更は 2024 年 2 月 1 日より有効になります](https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/)に合わせたパブリック IPv4 アドレスの新しい AWS 料金が含まれます。パブリック IPv4 アドレスごとの料金は 1 時間あたり 0.005 ドルで、AWS でホストされる TiDB 専用クラスターごとに月額約 10 ドルになります。
+    2024 年 8 月 1 日より、 TiDB Cloud Dedicated の請求書には、 [AWS の料金変更は 2024 年 2 月 1 日より有効になります](https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/)に合わせたパブリック IPv4 アドレスの新しい AWS 料金が含まれます。パブリック IPv4 アドレスごとの料金は 1 時間あたり 0.005 ドルで、AWS でホストされるTiDB Cloud Dedicated クラスターごとに月額約 10 ドルになります。
 
-    この料金は、 [請求の詳細](/tidb-cloud/tidb-cloud-billing.md#billing-details)の既存の**TiDB 専用データ転送負荷分散**サービスの下に表示されます。
+    この料金は、 [請求の詳細](/tidb-cloud/tidb-cloud-billing.md#billing-details)の既存の**TiDB Cloud Dedicated - Data Transfer - Load Balancing**サービスの下に表示されます。
 
--   新しい[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2)から[バージョン7.5.3](https://docs.pingcap.com/tidb/v7.5/release-7.5.3)にアップグレードします。
+-   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2)から[バージョン7.5.3](https://docs.pingcap.com/tidb/v7.5/release-7.5.3)にアップグレードします。
 
 **コンソールの変更**
 
--   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)のクラスター サイズ構成エクスペリエンスを強化します。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスター サイズ構成エクスペリエンスを強化します。
 
-    TiDB 専用クラスターの[**クラスタの作成**](/tidb-cloud/create-tidb-cluster.md)ページ目と[**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページ目の**クラスタサイズ**セクションのレイアウトを改良しました。さらに、**クラスタサイズ**セクションには、適切なクラスター サイズを選択するのに役立つノード サイズの推奨ドキュメントへのリンクが含まれるようになりました。
+    TiDB Cloud Dedicated クラスターの[**クラスタの作成**](/tidb-cloud/create-tidb-cluster.md)ページ目と[**クラスタの変更**](/tidb-cloud/scale-tidb-cluster.md)ページ目の**クラスタサイズ**セクションのレイアウトを改良しました。さらに、**クラスタサイズ**セクションには、適切なクラスター サイズを選択するのに役立つノード サイズの推奨ドキュメントへのリンクが含まれるようになりました。
 
 ## 2024年7月23日 {#july-23-2024}
 
@@ -68,7 +78,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     テーブルに[ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)含まれている場合は、選択した距離関数に基づいてベクトル距離を計算するベクトル検索エンドポイントを自動的に生成できます。
 
-    この機能により、 [ディファイ](https://docs.dify.ai/guides/tools)や[GPT](https://openai.com/blog/introducing-gpts)などの AI プラットフォームとのシームレスな統合が可能になり、高度な自然言語処理と AI 機能によってアプリケーションが強化され、より複雑なタスクやインテリジェントなソリューションが実現します。
+    この機能により、 [ディファイ](https://docs.dify.ai/guides/tools)や[GPT は](https://openai.com/blog/introducing-gpts)などの AI プラットフォームとのシームレスな統合が可能になり、高度な自然言語処理と AI 機能によってアプリケーションが強化され、より複雑なタスクやインテリジェントなソリューションが実現します。
 
     詳細については[エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)を参照してください。
 
@@ -88,7 +98,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   **VPC ピアリング**ページのレイアウトを調整して、 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのうち[VPC ピアリング接続の作成](/tidb-cloud/set-up-vpc-peering-connections.md)のクラスターのユーザー エクスペリエンスを向上させます。
+-   **VPC ピアリング**ページのレイアウトを調整して、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[VPC ピアリング接続の作成](/tidb-cloud/set-up-vpc-peering-connections.md)のクラスターのユーザー エクスペリエンスを向上させます。
 
 ## 2024年7月2日 {#july-2-2024}
 
@@ -108,7 +118,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)ベクトル検索をサポートします (ベータ版)。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)ベクトル検索をサポートします (ベータ版)。
 
     ベクター検索 (ベータ) 機能は、ドキュメント、画像、音声、ビデオなど、さまざまなデータ タイプにわたって意味的類似性検索を実行するための高度な検索ソリューションを提供します。この機能により、開発者は使い慣れた MySQL スキルを使用して、生成型人工知能 (AI) 機能を備えたスケーラブルなアプリケーションを簡単に構築できます。主な機能は次のとおりです。
 
@@ -119,7 +129,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については[ベクトル検索（ベータ版）の概要](/tidb-cloud/vector-search-overview.md)参照してください。
 
--   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)では、組織の所有者向けに毎週の電子メールレポートが提供されるようになりました。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)では、組織の所有者向けに毎週の電子メールレポートが提供されるようになりました。
 
     これらのレポートは、クラスターのパフォーマンスとアクティビティに関する洞察を提供します。毎週の自動更新を受信することで、クラスターに関する情報を常に把握し、データに基づいた意思決定を行ってクラスターを最適化できます。
 
@@ -144,31 +154,31 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの 16 vCPU TiFlashと 32 vCPU TiFlashの最大ノードstorageを2048 GiB から 4096 GiB に増加します。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの 16 vCPU TiFlashと 32 vCPU TiFlashの最大ノードstorageを2048 GiB から 4096 GiB に増加します。
 
-    この機能強化により、TiDB 専用クラスターの分析データstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
+    この機能強化により、 TiDB Cloud Dedicated クラスターの分析データstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
 
     詳細については[TiFlashノードstorage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)参照してください。
 
--   新しい[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.1](https://docs.pingcap.com/tidb/v7.5/release-7.5.1)から[バージョン7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2)にアップグレードします。
+-   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.1](https://docs.pingcap.com/tidb/v7.5/release-7.5.1)から[バージョン7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2)にアップグレードします。
 
 ## 2024年6月4日 {#june-4-2024}
 
 **一般的な変更**
 
--   AWS にデプロイされた[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの災害復旧のためのリカバリ グループ機能 (ベータ版) を導入します。
+-   AWS にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの災害復旧のためのリカバリ グループ機能 (ベータ版) を導入します。
 
-    この機能により、TiDB 専用クラスター間でデータベースを複製して、地域災害が発生した場合に迅速な復旧を実現できます。 `Project Owner`ロールの場合は、新しい復旧グループを作成し、そのグループにデータベースを割り当てることで、この機能を有効にできます。 復旧グループを使用してデータベースを複製することで、災害への備えを強化し、より厳格な可用性 SLA を満たし、より積極的な復旧ポイント目標 (RPO) と復旧時間目標 (RTO) を達成できます。
+    この機能により、 TiDB Cloud Dedicated クラスター間でデータベースを複製し、地域災害が発生した場合に迅速な復旧を実現できます。 `Project Owner`ロールの場合は、新しい復旧グループを作成し、そのグループにデータベースを割り当てることで、この機能を有効にできます。 復旧グループを使用してデータベースを複製することで、災害への備えを強化し、より厳格な可用性 SLA を満たし、より積極的な復旧ポイント目標 (RPO) と復旧時間目標 (RTO) を達成できます。
 
     詳細については[回復グループを始める](/tidb-cloud/recovery-group-get-started.md)参照してください。
 
--   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)列storage[TiFlash](/tiflash/tiflash-overview.md)の課金と計測 (ベータ版) を導入します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)列storage[TiFlash](/tiflash/tiflash-overview.md)の課金と計測 (ベータ版) を導入します。
 
-    2024 年 6 月 30 日まで、TiDB Serverless クラスターの列指向storageは100% 割引で無料のままです。この日以降、各 TiDB Serverless クラスターには、列指向storage用の 5 GiB の無料割り当てが含まれます。無料割り当てを超えた使用には料金が発生します。
+    2024 年 6 月 30 日まで、 TiDB Cloud Serverless クラスターの列指向storageは100% 割引で無料のままです。この日以降、各TiDB Cloud Serverless クラスターには、列指向storage用に 5 GiB の無料割り当てが含まれます。無料割り当てを超えた使用には料金が発生します。
 
-    詳細については[TiDB Serverless の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/#storage)参照してください。
+    詳細については[TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/#storage)参照してください。
 
--   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless) [存続時間 (TTL)](/time-to-live.md)サポートします。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) [存続時間 (TTL)](/time-to-live.md)サポートします。
 
 ## 2024年5月28日 {#may-28-2024}
 
@@ -176,9 +186,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   Google Cloud `Taiwan (asia-east1)`リージョンは[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能をサポートしています。
 
-    Google Cloud `Taiwan (asia-east1)`リージョンでホストされている[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスタが、データ移行（DM）機能をサポートするようになりました。アップストリーム データがこのリージョン内またはその付近に保存されている場合は、Google Cloud からTiDB Cloudへのより高速で信頼性の高いデータ移行を利用できるようになります。
+    Google Cloud `Taiwan (asia-east1)`リージョンでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタが、データ移行（DM）機能をサポートするようになりました。アップストリーム データがこのリージョン内またはその付近に保存されている場合は、Google Cloud からTiDB Cloudへのより高速で信頼性の高いデータ移行を利用できるようになります。
 
--   AWSとGoogle Cloudでホストされる[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を新たに提供: `16 vCPU, 64 GiB`
+-   AWSとGoogle Cloudでホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を新たに提供: `16 vCPU, 64 GiB`
 
 **APIの変更**
 
@@ -198,7 +208,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   Google Cloud でホストされている[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスタのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を新たに提供: `8 vCPU, 16 GiB`
+-   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を新たに提供: `8 vCPU, 16 GiB`
 
 ## 2024年5月14日 {#may-14-2024}
 
@@ -220,8 +230,8 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   新しい[TiDB CloudAPI](/tidb-cloud/api-overview.md)をベースに構築された[TiDB CloudCLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli)導入します。新しい CLI には、次の新機能が追加されています。
 
-    -   [TiDB Serverless クラスターからデータをエクスポートする](/tidb-cloud/serverless-export.md)
-    -   [ローカルstorageから TiDB Serverless クラスターにデータをインポートする](/tidb-cloud/ticloud-import-start.md)
+    -   [TiDB Cloud Serverless クラスターからデータをエクスポートする](/tidb-cloud/serverless-export.md)
+    -   [ローカルstorageからTiDB Cloud Serverlessクラスターにデータをインポートする](/tidb-cloud/ticloud-import-start.md)
     -   [OAuth による認証](/tidb-cloud/ticloud-auth-login.md)
     -   [TiDBボット経由で質問する](/tidb-cloud/ticloud-ai.md)
 
@@ -231,19 +241,19 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   AWS でホストされている[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターに対して新しい[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を提供します: `8 vCPU, 32 GiB` 。
+-   AWS でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して新しい[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を提供します: `8 vCPU, 32 GiB` 。
 
 ## 2024年4月2日 {#april-2-2024}
 
 **一般的な変更**
 
--   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターに対して、**無料**と**スケーラブル**の 2 つのサービス プランを導入します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに対して、**無料**と**スケーラブル**の 2 つのサービス プランを導入します。
 
-    さまざまなユーザー要件を満たすために、TiDB Serverless は無料かつスケーラブルなサービス プランを提供しています。始めたばかりの場合でも、増大するアプリケーション需要に対応するために拡張する場合でも、これらのプランは必要な柔軟性と機能を提供します。
+    さまざまなユーザー要件を満たすために、 TiDB Cloud Serverless は無料かつスケーラブルなサービス プランを提供しています。始めたばかりの場合でも、増大するアプリケーション需要に対応するために拡張する場合でも、これらのプランは必要な柔軟性と機能を提供します。
 
     詳細については[クラスタ計画](/tidb-cloud/select-cluster-tier.md#cluster-plans)参照してください。
 
--   使用量の割り当てに達したときの TiDB Serverless クラスターのスロットル動作を変更します。これで、クラスターが使用量の割り当てに達すると、新しい接続の試行が直ちに拒否され、既存の操作に対するサービスが中断されなくなります。
+-   使用量の割り当てに達したときのTiDB Cloud Serverless クラスターのスロットル動作を変更します。クラスターが使用量の割り当てに達すると、新しい接続の試行が直ちに拒否されるようになり、既存の操作に対するサービスが中断されなくなります。
 
     詳細については[使用量制限](/tidb-cloud/serverless-limitations.md#usage-quota)参照してください。
 
@@ -251,7 +261,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   新しい[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.0](https://docs.pingcap.com/tidb/v7.5/release-7.5.0)から[バージョン7.5.1](https://docs.pingcap.com/tidb/v7.5/release-7.5.1)にアップグレードします。
+-   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.0](https://docs.pingcap.com/tidb/v7.5/release-7.5.0)から[バージョン7.5.1](https://docs.pingcap.com/tidb/v7.5/release-7.5.1)にアップグレードします。
 
 **コンソールの変更**
 
@@ -261,19 +271,19 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については[コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)参照してください。
 
--   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) [ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)の**制限**ラベルを表示します。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) [ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)の**制限**ラベルを表示します。
 
     **制限**ラベルには、クラスター内の各コンポーネントの CPU、メモリ、storageなどのリソースの最大使用量が表示されます。この機能強化により、クラスターのリソース使用率を監視するプロセスが簡素化されます。
 
     これらのメトリック制限にアクセスするには、クラスターの**[監視]**ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認します。
 
-    詳細については[TiDB専用クラスタのメトリクス](/tidb-cloud/built-in-monitoring.md#server)参照してください。
+    詳細については[TiDB Cloud Dedicated クラスタのメトリクス](/tidb-cloud/built-in-monitoring.md#server)参照してください。
 
 ## 2024年2月21日 {#february-21-2024}
 
 **一般的な変更**
 
--   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの TiDB バージョンを[バージョン6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0)から[バージョン7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3)にアップグレードします。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの TiDB バージョンを[バージョン6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0)から[バージョン7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3)にアップグレードします。
 
 ## 2024年2月20日 {#february-20-2024}
 
@@ -310,7 +320,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については[リージョンのCIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)参照してください。
 
--   TiDB Serverless ユーザーは、クラスターのパブリック エンドポイントを無効にできるようになりました。
+-   TiDB Cloud Serverless ユーザーは、クラスターのパブリック エンドポイントを無効にすることができるようになりました。
 
     詳細については[パブリックエンドポイントを無効にする](/tidb-cloud/connect-via-standard-connection-serverless.md#disable-a-public-endpoint)参照してください。
 
@@ -330,9 +340,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については[組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)参照してください。
 
--   新しい[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1)から[バージョン7.5.0](https://docs.pingcap.com/tidb/v7.5/release-7.5.0)にアップグレードします。
+-   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1)から[バージョン7.5.0](https://docs.pingcap.com/tidb/v7.5/release-7.5.0)にアップグレードします。
 
--   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)のデュアル リージョン バックアップ機能が一般提供 (GA) になりました。
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のデュアル リージョン バックアップ機能が一般提供 (GA) になりました。
 
     この機能を使用すると、AWS または Google Cloud 内の地理的リージョン間でバックアップを複製できます。この機能により、データ保護と災害復旧機能の追加レイヤーが提供されます。
 

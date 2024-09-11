@@ -1,13 +1,13 @@
 ---
-title: Configure External Storage Access for TiDB Dedicated
+title: Configure External Storage Access for TiDB Cloud Dedicated
 summary: Amazon Simple Storage Service (Amazon S3) アクセスと Google Cloud Storage (GCS) アクセスを構成する方法について説明します。
 ---
 
-# TiDB専用外部ストレージアクセスを構成する {#configure-external-storage-access-for-tidb-dedicated}
+# TiDB Cloud Dedicatedの外部ストレージアクセスを構成する {#configure-external-storage-access-for-tidb-cloud-dedicated}
 
-ソースデータが Amazon S3 または Google Cloud Storage (GCS) バケットに保存されている場合は、データをTiDB Cloudにインポートまたは移行する前に、バケットへのクロスアカウントアクセスを構成する必要があります。このドキュメントでは、TiDB Dedicated クラスターでこれを行う方法について説明します。
+ソースデータが Amazon S3 または Google Cloud Storage (GCS) バケットに保存されている場合は、データをTiDB Cloudにインポートまたは移行する前に、バケットへのクロスアカウントアクセスを構成する必要があります。このドキュメントでは、 TiDB Cloud Dedicated クラスターでこれを行う方法について説明します。
 
-TiDB Serverless クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)参照してください。
+TiDB Cloud Serverless クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)参照してください。
 
 ## Amazon S3 アクセスを構成する {#configure-amazon-s3-access}
 

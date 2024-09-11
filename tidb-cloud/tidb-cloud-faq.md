@@ -19,7 +19,7 @@ TiDB Cloudすると、ほとんどトレーニングを受けていない開発�
 
 ### TiDB とTiDB Cloudの関係は何ですか? {#what-is-the-relationship-between-tidb-and-tidb-cloud}
 
-TiDB はオープンソース データベースであり、独自のデータ センター、自己管理型クラウド環境、またはその 2 つのハイブリッドで TiDB Self-Hosted を実行したい組織にとって最適なオプションです。
+TiDB はオープンソース データベースであり、独自のデータ センター、自己管理型クラウド環境、またはその 2 つのハイブリッドで TiDB Self-Managed を実行したい組織にとって最適なオプションです。
 
 TiDB Cloud は、TiDB の完全に管理されたクラウド データベース サービスです。使いやすい Web ベースの管理コンソールを備えており、ミッション クリティカルな本番環境向けの TiDB クラスターを管理できます。
 
@@ -41,8 +41,8 @@ TiDB Cloud は現在、Amazon Web Services と Google Cloud で利用できま�
 
 ### TiDB Cloudではどのバージョンの TiDB がサポートされていますか? {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
--   2024 年 8 月 6 日以降、新しい TiDB 専用クラスターのデフォルトの TiDB バージョンは v7.5.3 になります。
--   2024 年 2 月 21 日以降、TiDB Serverless クラスターの TiDB バージョンは v7.1.3 になります。
+-   2024 年 8 月 6 日以降、新しいTiDB Cloud Dedicated クラスターのデフォルトの TiDB バージョンは v7.5.3 になります。
+-   2024 年 2 月 21 日より、 TiDB Cloud Serverless クラスターの TiDB バージョンは v7.1.3 になります。
 
 詳細については[TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)参照してください。
 
@@ -60,7 +60,7 @@ TiDB Cloudについて学ぶ最良の方法は、ステップバイステップ�
 
 -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
 -   [始める](/tidb-cloud/tidb-cloud-quickstart.md)
--   [TiDB サーバーレスクラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+-   [TiDB Cloudサーバーレスクラスタを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ### クラスターを削除するときに、 <code>XXX&#39;s Org/default project/Cluster0</code>何を参照しますか? {#what-does-code-xxx-s-org-default-project-cluster0-code-refer-to-when-deleting-a-cluster}
 
@@ -104,7 +104,7 @@ TiDB は MySQL と高い互換性があります。自社ホストの MySQL イ�
 
 ### TiDB Cloud は増分バックアップをサポートしていますか? {#does-tidb-cloud-support-incremental-backups}
 
-いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、PITR (ポイントインタイムリカバリ) を使用できます。詳細については、 [TiDB専用クラスタでPITRを使用する](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)または[TiDB サーバーレス クラスターで PITR を使用する](/tidb-cloud/backup-and-restore-serverless.md#restore)を参照してください。
+いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、PITR (ポイントインタイムリカバリ) を使用できます。詳細については、 [TiDB Cloud Dedicated クラスタで PITR を使用する](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)または[TiDB Cloud Serverless クラスターで PITR を使用する](/tidb-cloud/backup-and-restore-serverless.md#restore)を参照してください。
 
 ## HTAP に関するよくある質問 {#htap-faqs}
 
@@ -149,16 +149,16 @@ TiDB Cloud はTLS 1.2 または TLS 1.3 をサポートしています。
 
 ### TiDB クラスターは安全ですか? {#is-my-tidb-cluster-secure}
 
-TiDB Cloudでは、ニーズに応じて TiDB 専用クラスターまたは TiDB サーバーレス クラスターのいずれかを使用できます。
+TiDB Cloudでは、ニーズに応じてTiDB Cloud Dedicated クラスターまたはTiDB Cloud Serverless クラスターのいずれかを使用できます。
 
-TiDB 専用クラスターの場合、 TiDB Cloud は次の対策でクラスターのセキュリティを確保します。
+TiDB Cloud Dedicated クラスターの場合、 TiDB Cloud は次の対策でクラスターのセキュリティを確保します。
 
 -   各クラスターに独立したサブアカウントと VPC を作成します。
 -   外部接続を分離するためのファイアウォール ルールを設定します。
 -   転送中のクラスター データを暗号化するために、各クラスターに対してサーバー側の TLS 証明書とコンポーネント レベルの TLS 証明書を作成します。
 -   許可された送信元 IP アドレスのみがクラスターにアクセスできるように、各クラスターに IP アクセス ルールを指定します。
 
-TiDB Serverless クラスターの場合、 TiDB Cloud は次の対策でクラスターのセキュリティを確保します。
+TiDB Cloud Serverless クラスターの場合、 TiDB Cloud は次の対策でクラスターのセキュリティを確保します。
 
 -   各クラスターに独立したサブアカウントを作成します。
 -   外部接続を分離するためのファイアウォール ルールを設定します。
@@ -167,27 +167,27 @@ TiDB Serverless クラスターの場合、 TiDB Cloud は次の対策でクラ�
 ### TiDB クラスター内のデータベースに接続するにはどうすればよいですか? {#how-do-i-connect-to-my-database-in-a-tidb-cluster}
 
 <SimpleTab>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
-TiDB 専用クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+TiDB Cloud Dedicated クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
 
 1.  ネットワークを承認します。
 2.  データベース ユーザーとログイン資格情報を設定します。
 3.  クラスターサーバー用の TLS をダウンロードして構成します。
 4.  SQL クライアントを選択し、 TiDB Cloud UI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
 
-詳細については[TiDB専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
+詳細については[TiDB Cloud専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
 
 </div>
 
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
-TiDB Serverless クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+TiDB Cloud Serverless クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
 
 1.  データベース ユーザーとログイン資格情報を設定します。
 2.  SQL クライアントを選択し、 TiDB Cloud UI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
 
-詳細については[TiDB サーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
+詳細については[TiDB Cloudサーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
 
 </div>
 </SimpleTab>

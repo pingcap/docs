@@ -1,25 +1,25 @@
 ---
 title: Use an HTAP Cluster
-summary: HTAPクラスターは、TiDB Cloudのトランザクション処理用に設計されたTiKVと、分析処理用に設計されたTiFlashで構成されます。TiDB Cloudを使用すると、HTAPクラスターを簡単に作成できます。TiKVデータはデフォルトではTiFlashにレプリケートされませんが、SQLステートメントを使用してレプリケートするテーブルを選択できます。TiFlashレプリカを読み取る方法には、賢い選択、エンジンの隔離、手動ヒントの3つの方法があります。TiFlashの詳細については、ドキュメントを参照してください。
+summary: TiDB Cloudで HTAP クラスターを使用する方法を学習します。
 ---
 
 # HTAPクラスタを使用する {#use-an-htap-cluster}
 
-[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)ハイブリッド トランザクション/分析処理を意味します。 TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースのstorageエンジン[TiKV](https://tikv.org)と、分析処理用に設計されたカラム型storage[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されます。アプリケーション データは最初に TiKV に保存され、次にRaftコンセンサス アルゴリズムを介してTiFlashにレプリケートされます。つまり、行ストアから列ストアへのリアルタイム レプリケーションです。
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)ハイブリッド トランザクション/分析処理を意味します。TiDB TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースのstorageエンジン[ティクヴ](https://tikv.org)と、分析処理用に設計された列指向storage[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されています。アプリケーション データは最初に TiKV に保存され、次にRaftコンセンサス アルゴリズムを介してTiFlashに複製されます。つまり、行ストアから列指向ストアへのリアルタイムのレプリケーションです。
 
-TiDB Cloudを使用すると、HTAP ワークロードに応じて 1 つ以上のTiFlashノードを指定することで、HTAP クラスターを簡単に作成できます。クラスターの作成時にTiFlashノード数が指定されていない場合、またはTiFlashノードをさらに追加したい場合は、ノード数を[クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
+TiDB Cloudを使用すると、HTAP ワークロードに応じて 1 つ以上のTiFlashノードを指定して、HTAP クラスターを簡単に作成できます。クラスターの作成時にTiFlashノード数が指定されていない場合、またはTiFlashノードをさらに追加したい場合は、ノード数を[クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
 
 > **注記：**
 >
-> TiFlash は、 TiDB サーバーレス クラスターに対して常に有効になっています。無効にすることはできません。
+> TiFlash は、 TiDB Cloud Serverless クラスターでは常に有効になっています。無効にすることはできません。
 
-TiKV データは、デフォルトではTiFlashにレプリケートされません。次の SQL ステートメントを使用して、 TiFlashにレプリケートするテーブルを選択できます。
+TiKV データはデフォルトではTiFlashに複製されません。次の SQL ステートメントを使用して、 TiFlashに複製するテーブルを選択できます。
 
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA 1;
 ```
 
-レプリカの数は、 TiFlashノードの数を超えてはなりません。レプリカの数を`0`に設定することは、 TiFlash内のレプリカを削除することを意味します。
+レプリカの数は、 TiFlashノードの数以下にする必要があります。レプリカの数を`0`に設定すると、 TiFlash内のレプリカが削除されます。
 
 レプリケーションの進行状況を確認するには、次のコマンドを使用します。
 
@@ -27,13 +27,13 @@ ALTER TABLE table_name SET TIFLASH REPLICA 1;
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
 ```
 
-## TiDB を使用してTiFlashレプリカを読み取る {#use-tidb-to-read-tiflash-replicas}
+## TiDBを使用してTiFlashレプリカを読み取る {#use-tidb-to-read-tiflash-replicas}
 
-データがTiFlashにレプリケートされた後、次の 3 つの方法のいずれかを使用してTiFlashレプリカを読み取り、分析コンピューティングを高速化できます。
+データがTiFlashに複製された後、次の 3 つの方法のいずれかを使用してTiFlashレプリカを読み取り、分析コンピューティングを高速化できます。
 
-### 賢い選択 {#smart-selection}
+### スマートな選択 {#smart-selection}
 
-TiFlashレプリカを含むテーブルの場合、TiDB オプティマイザーはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。例えば：
+TiFlashレプリカを持つテーブルの場合、TiDB オプティマイザーはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。例:
 
 ```sql
 explain analyze select count(*) from test.t;
@@ -49,19 +49,19 @@ explain analyze select count(*) from test.t;
 +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
 ```
 
-`cop[tiflash]` 、タスクが処理のためにTiFlashに送信されることを意味します。クエリでTiFlashレプリカが選択されていない場合は、 `analyze table`ステートメントを使用して統計を更新し、 `explain analyze`ステートメントを使用して結果を確認してください。
+`cop[tiflash]` 、タスクが処理のためにTiFlashに送信されることを意味します。クエリでTiFlashレプリカが選択されていない場合は、 `analyze table`ステートメントを使用して統計を更新し、 `explain analyze`番目のステートメントを使用して結果を確認してください。
 
-### エンジンの隔離 {#engine-isolation}
+### エンジン分離 {#engine-isolation}
 
-エンジンの分離では、変数`tidb_isolation_read_engines`を構成して、すべてのクエリが指定されたエンジンのレプリカを使用するように指定します。オプションのエンジンは、「tikv」、「tidb」（一部の TiDB システム テーブルを保存し、ユーザーが積極的に使用できない TiDB の内部メモリテーブル領域を示します）、および「tiflash」です。
+エンジン分離とは、 `tidb_isolation_read_engines`変数を設定することで、すべてのクエリが指定されたエンジンのレプリカを使用するように指定することです。オプションのエンジンは、「tikv」、「tidb」(TiDB の内部メモリテーブル領域を示します。一部の TiDB システム テーブルが格納され、ユーザーがアクティブに使用することはできません)、および「tiflash」です。
 
 ```sql
 set @@session.tidb_isolation_read_engines = "engine list separated by commas";
 ```
 
-### 手動ヒント {#manual-hint}
+### マニュアルのヒント {#manual-hint}
 
-手動ヒントでは、エンジン分離を満たすことを前提として、TiDB が 1 つ以上の特定のテーブルに対して指定されたレプリカを使用するように強制できます。手動ヒントの使用例を次に示します。
+手動ヒントを使用すると、エンジンの分離が満たされていることを前提として、TiDB が 1 つ以上の特定のテーブルに対して指定されたレプリカを使用するように強制できます。手動ヒントの使用例を次に示します。
 
 ```sql
 select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;

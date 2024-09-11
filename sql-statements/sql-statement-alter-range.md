@@ -1,13 +1,17 @@
 ---
 title: ALTER RANGE
-summary: ALTER RANGEステートメントは、TiDBの配置ポリシーの範囲を変更するために使用されます。ALTER RANGEはglobalとmetaの2つのパラメータをサポートし、それぞれクラスター内のすべてのデータの範囲とTiDBに格納される内部メタデータの範囲を示します。例えば、配置ポリシーを作成し、それらを特定の範囲に適用することができます。
+summary: TiDB の ALTER RANGE の使用法の概要。
 ---
 
-# 範囲を変更する {#alter-range}
+# 範囲の変更 {#alter-range}
 
-現在、 `ALTER RANGE`ステートメントは、TiDB の特定の配置ポリシーの範囲を変更するためにのみ使用できます。
+現在、 `ALTER RANGE`ステートメントは、TiDB 内の特定の配置ポリシーの範囲を変更するためにのみ使用できます。
 
-## あらすじ {#synopsis}
+> **注記：**
+>
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterRangeStmt ::=
@@ -17,7 +21,7 @@ AlterRangeStmt ::=
 `ALTER RANGE`次の 2 つのパラメータをサポートします。
 
 -   `global` : クラスター内のすべてのデータの範囲を示します。
--   `meta` : TiDB に格納される内部メタデータの範囲を示します。
+-   `meta` : TiDB に保存されている内部メタデータの範囲を示します。
 
 ## 例 {#examples}
 
@@ -29,4 +33,4 @@ ALTER RANGE global PLACEMENT POLICY = "deploy111";
 ALTER RANGE meta PLACEMENT POLICY = "five_replicas";
 ```
 
-前の例では、2 つの配置ポリシー ( `deploy111`および`five_replicas` ) を作成し、さまざまなリージョンの制約を指定してから、 `deploy111`配置ポリシーをクラスター範囲内のすべてのデータに適用し、 `five_replicas`配置ポリシーをメタデータ範囲に適用します。
+上記の例では、2 つの配置ポリシー ( `deploy111`と`five_replicas` ) を作成し、異なるリージョンの制約を指定してから、配置ポリシー`deploy111`をクラスター範囲内のすべてのデータに適用し、配置ポリシー`five_replicas`をメタデータ範囲に適用します。

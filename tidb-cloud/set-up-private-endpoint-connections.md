@@ -1,15 +1,15 @@
 ---
-title: Connect to a TiDB Dedicated Cluster via Private Endpoint with AWS
+title: Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS
 summary: AWS を使用してプライベートエンドポイント経由でTiDB Cloudクラスターに接続する方法を学習します。
 ---
 
-# AWS のプライベートエンドポイント経由で TiDB 専用クラスタに接続する {#connect-to-a-tidb-dedicated-cluster-via-private-endpoint-with-aws}
+# AWS のプライベートエンドポイント経由でTiDB Cloud専用クラスタに接続する {#connect-to-a-tidb-cloud-dedicated-cluster-via-private-endpoint-with-aws}
 
-このドキュメントでは、AWS のプライベートエンドポイント経由で TiDB 専用クラスターに接続する方法について説明します。
+このドキュメントでは、AWS のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法について説明します。
 
 > **ヒント：**
 >
-> プライベート エンドポイント経由で TiDB サーバーレス クラスタに接続する方法については、 [プライベートエンドポイント経由で TiDB Serverless に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)ご覧ください。Google Cloud でプライベート エンドポイント経由で TiDB 専用クラスタに接続する方法については、 [プライベートサービス経由でTiDB Dedicatedに接続 Google Cloudに接続](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)をご覧ください。
+> プライベート エンドポイント経由でTiDB Cloud Serverless クラスタに接続する方法については、 [プライベートエンドポイント経由でTiDB Cloud Serverless に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)ご覧ください。Google Cloud でプライベート エンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [プライベートサービス経由でTiDB Cloud Dedicatedに接続する Google Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)をご覧ください。
 
 TiDB Cloud は、 [AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&#x26;privatelink-blogs.sort-order=desc)を介して AWS VPC でホストされているTiDB Cloudサービスへの、非常に安全な一方向アクセスをサポートします。これは、サービスが自分の VPC 内にある場合と同じです。プライベート エンドポイントが VPC で公開され、アクセス許可を持つエンドポイントを介してTiDB Cloudサービスへの接続を作成できます。
 
@@ -37,7 +37,7 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 
 ## プライベートエンドポイント接続を設定し、クラスターに接続する {#set-up-a-private-endpoint-connection-and-connect-to-your-cluster}
 
-プライベート エンドポイント経由で TiDB 専用クラスターに接続するには、次の手順を実行します。
+プライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続するには、次の手順を実行します。
 
 1.  [TiDBクラスタを選択](#step-1-select-a-tidb-cluster)
 2.  [AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint)
@@ -61,7 +61,7 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 
 > **注記：**
 >
-> 2023 年 3 月 28 日以降に作成された TiDB 専用クラスターごとに、クラスターの作成後 3 ～ 4 分後に対応するエンドポイント サービスが自動的に作成されます。
+> 2023 年 3 月 28 日以降に作成されたTiDB Cloud Dedicated クラスターごとに、クラスターの作成後 3 ～ 4 分後に対応するエンドポイント サービスが自動的に作成されます。
 
 `TiDB Private Link Service is ready`メッセージが表示された場合、対応するエンドポイント サービスは準備ができています。エンドポイントを作成するには、次の情報を指定できます。
 

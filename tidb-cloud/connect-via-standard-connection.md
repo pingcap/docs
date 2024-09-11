@@ -1,23 +1,23 @@
 ---
-title: Connect to TiDB Dedicated via Public Connection
+title: Connect to TiDB Cloud Dedicated via Public Connection
 summary: パブリック接続を介してTiDB Cloudクラスターに接続する方法を学習します。
 ---
 
-# パブリック接続経由で TiDB Dedicated に接続する {#connect-to-tidb-dedicated-via-public-connection}
+# パブリック接続経由​​でTiDB Cloud Dedicatedに接続する {#connect-to-tidb-cloud-dedicated-via-public-connection}
 
-このドキュメントでは、パブリック接続を介して TiDB 専用クラスターに接続する方法について説明します。パブリック接続はトラフィック フィルター付きのパブリック エンドポイントを公開するため、ラップトップから SQL クライアントを介して TiDB 専用クラスターに接続できます。
+このドキュメントでは、パブリック接続を介してTiDB Cloud Dedicated クラスターに接続する方法について説明します。パブリック接続はトラフィック フィルター付きのパブリック エンドポイントを公開するため、ラップトップから SQL クライアントを介してTiDB Cloud Dedicated クラスターに接続できます。
 
 > **ヒント：**
 >
-> パブリック接続を介して TiDB Serverless クラスターに接続する方法については、 [パブリックエンドポイント経由でTiDB Serverlessに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
+> パブリック接続を介してTiDB Cloud Serverless クラスターに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud Serverlessに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
 
 ## 前提条件: IPアクセスリストを構成する {#prerequisite-configure-ip-access-list}
 
-パブリック接続の場合、TiDB Dedicated は IP アクセス リスト内のアドレスからのクライアント接続のみを許可します。IP アクセス リストを設定していない場合は、最初の接続の前に[IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)手順に従って設定してください。
+パブリック接続の場合、 TiDB Cloud Dedicated は IP アクセス リスト内のアドレスからのクライアント接続のみを許可します。IP アクセス リストを設定していない場合は、最初の接続の前に[IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)手順に従って設定してください。
 
 ## クラスターに接続する {#connect-to-the-cluster}
 
-パブリック接続を介して TiDB 専用クラスターに接続するには、次の手順を実行します。
+パブリック接続を介してTiDB Cloud Dedicated クラスターに接続するには、次の手順を実行します。
 
 1.  ターゲット クラスターの概要ページを開きます。
 

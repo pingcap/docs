@@ -1,20 +1,20 @@
 ---
 title: METRICS_SUMMARY
-summary: TiDB 4.0 では、information_schema.metrics_summaryとinformation_schema.metrics_summary_by_labelテーブルが導入され、異常な監視メトリックを簡単に検出できます。これにより、TiDBクラスター内の監視データを効率的に確認できます。また、時間範囲を指定して特定の監視項目をクエリすることも可能です。監視集計テーブルを使用すると、ボトルネックを素早く特定できます。
+summary: METRICS_SUMMARY システム テーブルについて学習します。
 ---
 
-# メトリクス_サマリー {#metrics-summary}
+# メトリクス_概要 {#metrics-summary}
 
-TiDB クラスターには多くの監視メトリックがあります。異常な監視メトリックを簡単に検出できるように、TiDB 4.0 では次の 2 つの監視概要テーブルが導入されています。
+TiDB クラスターには多くの監視メトリックがあります。異常な監視メトリックを簡単に検出できるように、TiDB 4.0 では次の 2 つの監視サマリー テーブルが導入されています。
 
 -   `information_schema.metrics_summary`
 -   `information_schema.metrics_summary_by_label`
 
 > **注記：**
 >
-> 前述の 2 つの監視概要テーブルは、TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> 上記の 2 つの監視概要テーブルは、TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-2 つの表には、各監視メトリックを効率的に確認できるように、すべての監視データがまとめられています。 `information_schema.metrics_summary`と比較して、 `information_schema.metrics_summary_by_label`テーブルには追加の`label`列があり、さまざまなラベルに従って差別化された統計を実行します。
+2 つのテーブルには、すべての監視データがまとめられており、各監視メトリックを効率的に確認できます。 `information_schema.metrics_summary`と比較すると、 `information_schema.metrics_summary_by_label`テーブルには`label`列が追加され、異なるラベルに従って差別化された統計が実行されます。
 
 ```sql
 USE information_schema;
@@ -39,15 +39,15 @@ DESC metrics_summary;
 フィールドの説明:
 
 -   `METRICS_NAME` : 監視テーブル名。
--   `QUANTILE` : パーセンタイル。 `QUANTILE` SQL文で指定できます。例えば：
+-   `QUANTILE` : パーセンタイル。SQL ステートメントを使用して`QUANTILE`指定できます。例:
     -   `select * from metrics_summary where quantile=0.99` 0.99 パーセンタイルのデータを表示することを指定します。
-    -   `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` 0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
--   `SUM_VALUE` `AVG_VALUE`それぞれ合計、平均値`MIN_VALUE`最小`MAX_VALUE` 、最大値を意味します。
+    -   `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` 、0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
+-   `SUM_VALUE` 、 `AVG_VALUE` 、 `MIN_VALUE` 、 `MAX_VALUE`それぞれ合計、平均値、最小値、最大値を意味します。
 -   `COMMENT` : 対応する監視テーブルのコメント。
 
 例えば：
 
-時間範囲`'2020-03-08 13:23:00', '2020-03-08 13: 33: 00'`内で TiDB クラスター内で平均消費時間が最も長い監視項目の 3 つのグループをクエリするには、 `information_schema.metrics_summary`テーブルを直接クエリし、 `/*+ time_range() */`ヒントを使用して時間範囲を指定します。 SQL ステートメントは次のとおりです。
+`'2020-03-08 13:23:00', '2020-03-08 13: 33: 00'`の時間範囲内で TiDB クラスター内で平均時間消費が最も長い 3 つの監視項目グループを照会するには、 `information_schema.metrics_summary`テーブルを直接照会し、 `/*+ time_range() */`ヒントを使用して時間範囲を指定します。SQL ステートメントは次のようになります。
 
 ```sql
 SELECT /*+ time_range('2020-03-08 13:23:00','2020-03-08 13:33:00') */ *
@@ -86,7 +86,7 @@ MAX_VALUE    | 0.013
 COMMENT      | The quantile of kv requests durations by store
 ```
 
-同様に、次の例では`metrics_summary_by_label`監視概要テーブルをクエリします。
+同様に、次の例では、 `metrics_summary_by_label`監視サマリー テーブルをクエリします。
 
 ```sql
 SELECT /*+ time_range('2020-03-08 13:23:00','2020-03-08 13:33:00') */ *
@@ -133,12 +133,12 @@ COMMENT      | The quantile of TiDB query durations(second)
 
 上記のクエリ結果の 2 行目と 3 行目は、 `tidb_query_duration`の`Select`と`Rollback`ステートメントの平均実行時間が長いことを示しています。
 
-上記の例に加えて、監視集計テーブルを使用すると、2 つの時間帯の全リンク監視項目を比較することにより、監視データから最も変化が大きいモジュールを素早く見つけ、ボトルネックを迅速に特定できます。次の例では、2 つの期間 (t1 がベースライン) のすべての監視項目を比較し、最大の差に従ってこれらの項目を並べ替えます。
+上記の例に加えて、監視サマリー テーブルを使用して、2 つの期間のフル リンク監視項目を比較することで、監視データから最大の変化があるモジュールをすばやく見つけ、ボトルネックをすばやく特定できます。次の例では、2 つの期間 (t1 がベースライン) のすべての監視項目を比較し、これらの項目を最大の違いに従って並べ替えます。
 
--   期間 t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
--   期間 t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
+-   期間t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
+-   期間t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
 
-2 つの時間帯の監視項目を`METRICS_NAME`に従って結合し、差分値に従ってソートします。 `TIME_RANGE`はクエリ時間を指定するヒントです。
+2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差分値に従ってソートされます。3 `TIME_RANGE`クエリ時間を指定するヒントです。
 
 ```sql
 SELECT GREATEST(t1.avg_value,t2.avg_value)/LEAST(t1.avg_value,
@@ -176,11 +176,11 @@ ORDER BY ratio DESC LIMIT 10;
 
 上記のクエリ結果から、次の情報を取得できます。
 
--   期間 t2 の`tib_slow_query_cop_process_total_time` (TiDB スロー クエリの消費時間`cop process` ) は、期間 t1 の 5,865 倍です。
--   期間 t2 の`tidb_distsql_partial_scan_key_total_num` (TiDB `distsql`によって要求されたスキャンするキーの数) は、期間 t1 の 3,648 倍です。期間`tidb_slow_query_cop_wait_total_time` (TiDB スロー クエリでキューアップを要求するコプロセッサーの待ち時間) は、期間 t1 の 267 倍になります。
--   期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサー要求結果のサイズ) は、期間 t1 の 192 倍です。
--   期間 t2 (TiKVコプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details` 、期間 t1 の 0 の 105 倍です。
+-   期間 t2 の`tib_slow_query_cop_process_total_time` (TiDB の遅いクエリでの時間消費量`cop process` ) は、期間 t1 の 5,865 倍になります。
+-   期間 t2 の`tidb_distsql_partial_scan_key_total_num` (TiDB の`distsql`によって要求されたスキャンするキーの数) は、期間 t1 の 3,648 倍になります。期間 t2 中、 `tidb_slow_query_cop_wait_total_time` (TiDB の低速クエリでキューイングを要求するコプロセッサーの待機時間) は、期間 t1 の 267 倍になります。
+-   期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサー要求結果のサイズ) は、期間 t1 の 192 倍になります。
+-   期間 t2 (TiKVコプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details` 、期間 t1 の 0 の 105 倍になります。
 
-上記の結果から、期間 t2 のコプロセッサーリクエストが期間 t1 のリクエストよりもはるかに多いことがわかります。これにより、TiKVコプロセッサーが過負荷になり、 `cop task`待機する必要があります。期間 t2 に、より多くの負荷をもたらす大規模なクエリがいくつか出現する可能性があります。
+上記の結果から、期間 t2 のコプロセッサー要求が期間 t1 の要求よりもはるかに多いことがわかります。これにより、TiKVコプロセッサーが過負荷になり、 `cop task`する必要があります。期間 t2 にいくつかの大きなクエリが発生し、負荷がさらに増加し​​ている可能性があります。
 
-実際、t1 から t2 までの全期間中、 `go-ycsb`圧力テストが実行されています。次に、期間 t2 中に 20 `tpch`クエリが実行されます。したがって、多くのコプロセッサーリクエストを引き起こすのは`tpch`クエリです。
+実際、t1 から t2 までの全期間を通じて、 `go-ycsb`圧力テストが実行されています。その後、期間 t2 中に 20 個の`tpch`クエリが実行されています。したがって、多くのコプロセッサー要求を引き起こすのは`tpch`クエリです。

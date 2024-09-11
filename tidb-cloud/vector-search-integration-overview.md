@@ -9,7 +9,7 @@ summary: サポートされている AI フレームワーク、埋め込みモ�
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
 
 ## AIフレームワーク {#ai-frameworks}
 
@@ -40,4 +40,4 @@ TiDB Vector Search を ORM ライブラリと統合して、TiDB データベー
 
 次の表に、サポートされている ORM ライブラリと対応する統合チュートリアルを示します。
 
-<table><tr><th>言語</th><th>ORM/クライアント</th><th>インストールする方法</th><th>チュートリアル</th></tr><tr><td rowspan="4">パイソン</td><td>TiDB ベクター クライアント</td><td><code>pip install tidb-vector[client]</code></td><td> <a href="/tidbcloud/vector-search-get-started-using-python">Python を使用したベクトル検索の開始</a></td></tr><tr><td>SQLアルケミー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidbcloud/vector-search-integrate-with-sqlalchemy">TiDB ベクトル検索を SQLAlchemy と統合する</a></td></tr><tr><td>ピーウィー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidbcloud/vector-search-integrate-with-peewee">TiDB Vector Search を peewee と統合する</a></td></tr><tr><td>ジャンゴ</td><td><code>pip install django-tidb[vector]</code></td><td> <a href="/tidbcloud/vector-search-integrate-with-django-orm">TiDB ベクトル検索を Django と統合する</a></td></tr></table>
+<table><tr><th>言語</th><th>ORM/クライアント</th><th>インストール方法</th><th>チュートリアル</th></tr><tr><td rowspan="4">パイソン</td><td>TiDB ベクター クライアント</td><td><code>pip install tidb-vector[client]</code></td><td> <a href="/tidbcloud/vector-search-get-started-using-python">Python を使用したベクトル検索の開始</a></td></tr><tr><td>SQLアルケミー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidbcloud/vector-search-integrate-with-sqlalchemy">TiDB ベクトル検索を SQLAlchemy と統合する</a></td></tr><tr><td>ピーウィー</td><td><code>pip install tidb-vector</code></td><td> <a href="/tidbcloud/vector-search-integrate-with-peewee">TiDB Vector Search を peewee と統合する</a></td></tr><tr><td>ジャンゴ</td><td><code>pip install django-tidb[vector]</code></td><td> <a href="/tidbcloud/vector-search-integrate-with-django-orm">TiDB ベクトル検索を Django と統合する</a></td></tr></table>

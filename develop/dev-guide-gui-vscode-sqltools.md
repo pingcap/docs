@@ -11,8 +11,8 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
 > **注記：**
 >
-> -   このチュートリアルは、TiDB Serverless、TiDB Dedicated、および TiDB Self-Hosted と互換性があります。
-> -   このチュートリアルは、 [GitHub コードスペース](https://github.com/features/codespaces) 、 [Visual Studio Code 開発コンテナ](https://code.visualstudio.com/docs/devcontainers/containers) 、 [ビジュアルスタジオコードWSL](https://code.visualstudio.com/docs/remote/wsl)などの Visual Studio Code リモート開発環境でも機能します。
+> -   このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
+> -   このチュートリアルは、 [GitHub コードスペース](https://github.com/features/codespaces) 、 [Visual Studio Code 開発コンテナ](https://code.visualstudio.com/docs/devcontainers/containers) 、 [ビジュアルスタジオコード WSL](https://code.visualstudio.com/docs/remote/wsl)などの Visual Studio Code リモート開発環境でも機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -29,7 +29,7 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -37,7 +37,7 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -47,7 +47,7 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -90,25 +90,25 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
     -   **MySQL ドライバー固有のオプション**領域で、次のパラメータを設定します。
 
         -   **認証プロトコル**:**デフォルト**を選択します。
-        -   **SSL** : **「有効」**を選択します。TiDB Serverless には安全な接続が必要です。 **「SSL オプション (node.TLSSocket)」**領域で、 **「証明機関 (CA) 証明書ファイル」**フィールドをTiDB Cloud接続ダイアログの`CA`番目のパラメータとして設定します。
+        -   **SSL** : **「有効」**を選択します。TiDB TiDB Cloud Serverless には安全な接続が必要です。 **「SSL オプション (node.TLSSocket)」**領域で、 TiDB Cloud接続ダイアログの`CA`のパラメータとして**「証明機関 (CA) 証明書ファイル」**フィールドを設定します。
 
             > **注記：**
             >
-            > Windows または GitHub Codespaces で実行している場合は、 **SSL を**空白のままにすることができます。デフォルトでは、SQLTools は Let&#39;s Encrypt によってキュレートされた既知の CA を信頼します。詳細については、 [TiDB サーバーレスルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)を参照してください。
+            > Windows または GitHub Codespaces で実行している場合は、 **SSL を**空白のままにすることができます。デフォルトでは、SQLTools は Let&#39;s Encrypt によってキュレートされた既知の CA を信頼します。詳細については、 [TiDB Cloudサーバーレスルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)を参照してください。
 
-    ![VS Code SQLTools: configure connection settings for TiDB Serverless](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Cloud Serverless](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
-7.  **「テスト接続」**をクリックして、TiDB Serverless クラスターへの接続を検証します。
+7.  **「テスト接続」**をクリックして、 TiDB Cloud Serverless クラスターへの接続を検証します。
 
     1.  ポップアップウィンドウで、 **[許可]**をクリックします。
     2.  **SQLToolsDriver資格情報**ダイアログで、手順 4 で作成したパスワードを入力します。
 
-        ![VS Code SQLTools: enter password to connect to TiDB Serverless](/media/develop/vsc-sqltools-password.jpg)
+        ![VS Code SQLTools: enter password to connect to TiDB Cloud Serverless](/media/develop/vsc-sqltools-password.jpg)
 
 8.  接続テストが成功すると、 **「正常に接続されました」という**メッセージが表示されます。 **「接続を保存」**をクリックして接続構成を保存します。
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -139,19 +139,19 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
         -   **認証プロトコル**:**デフォルト**を選択します。
         -   **SSL** : **「無効」**を選択します。
 
-    ![VS Code SQLTools: configure connection settings for TiDB Dedicated](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Cloud Dedicated](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
 
-6.  **「テスト接続」**をクリックして、TiDB 専用クラスターへの接続を検証します。
+6.  **「テスト接続」**をクリックして、 TiDB Cloud Dedicated クラスターへの接続を検証します。
 
     1.  ポップアップウィンドウで、 **[許可]**をクリックします。
-    2.  **SQLToolsDriver資格情報**ダイアログで、TiDB 専用クラスターのパスワードを入力します。
+    2.  **SQLToolsDriver資格情報**ダイアログで、 TiDB Cloud Dedicated クラスターのパスワードを入力します。
 
-    ![VS Code SQLTools: enter password to connect to TiDB Dedicated](/media/develop/vsc-sqltools-password.jpg)
+    ![VS Code SQLTools: enter password to connect to TiDB Cloud Dedicated](/media/develop/vsc-sqltools-password.jpg)
 
 7.  接続テストが成功すると、 **「正常に接続されました」という**メッセージが表示されます。 **「接続を保存」**をクリックして接続構成を保存します。
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1.  VS Code を起動し、ナビゲーション ペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで、 **[新しい接続の追加]**をクリックし、データベース ドライバーとして**TiDB**を選択します。
 
@@ -165,13 +165,13 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
     -   **接続方法**:**サーバーとポートを**選択します。
 
-    -   **サーバー アドレス**: TiDB セルフホスト クラスターの IP アドレスまたはドメイン名を入力します。
+    -   **サーバー アドレス**: TiDB セルフマネージド クラスターの IP アドレスまたはドメイン名を入力します。
 
-    -   **ポート**: TiDB セルフホスト クラスターのポート番号を入力します。
+    -   **ポート**: TiDB セルフマネージド クラスターのポート番号を入力します。
 
     -   **データベース**: 接続するデータベースを入力します。
 
-    -   **ユーザー名**: TiDB セルフホスト クラスターに接続するために使用するユーザー名を入力します。
+    -   **ユーザー名**: TiDB セルフマネージド クラスターに接続するために使用するユーザー名を入力します。
 
     -   **パスワードモード**:
 
@@ -183,13 +183,13 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
         -   **認証プロトコル**:**デフォルト**を選択します。
         -   **SSL** : **「無効」**を選択します。
 
-    ![VS Code SQLTools: configure connection settings for TiDB Self-Hosted](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Self-Managed](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
 
-3.  **「テスト接続」**をクリックして、TiDB セルフホスト クラスターへの接続を検証します。
+3.  **「テスト接続」**をクリックして、TiDB セルフマネージド クラスターへの接続を検証します。
 
-    パスワードが空でない場合は、ポップアップ ウィンドウで**[許可] を**クリックし、TiDB セルフホスト クラスターのパスワードを入力します。
+    パスワードが空でない場合は、ポップアップ ウィンドウで**[許可] を**クリックし、TiDB セルフマネージド クラスターのパスワードを入力します。
 
-    ![VS Code SQLTools: enter password to connect to TiDB Self-Hosted](/media/develop/vsc-sqltools-password.jpg)
+    ![VS Code SQLTools: enter password to connect to TiDB Self-Managed](/media/develop/vsc-sqltools-password.jpg)
 
 4.  接続テストが成功すると、 **「正常に接続されました」という**メッセージが表示されます。 **「接続を保存」**をクリックして接続構成を保存します。
 

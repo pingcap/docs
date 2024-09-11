@@ -21,7 +21,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 > **注記：**
 >
-> [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターの場合、 TiFlashレプリカの`count` `2`までしか設定できません。 `1`に設定すると、実行時に自動的に`2`に調整されます。 2 より大きい数値に設定すると、レプリカ数に関するエラーが発生します。
+> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、 TiFlashレプリカの`count` `2`までしか設定できません。 `1`に設定すると、実行時に自動的に`2`に調整されます。 2 より大きい数値に設定すると、レプリカ数に関するエラーが発生します。
 
 同じテーブルに対して複数の DDL ステートメントを実行する場合、最後のステートメントのみが有効になります。次の例では、テーブル`tpch50`に対して 2 つの DDL ステートメントが実行されていますが、2 番目のステートメント (レプリカを削除する) のみが有効になります。
 

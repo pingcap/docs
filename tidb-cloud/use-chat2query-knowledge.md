@@ -11,9 +11,9 @@ v3 以降では、Chat2Query API を使用すると、Chat2Query データ ア�
 
 > **注記：**
 >
-> ナレッジ ベース関連のエンドポイントは、デフォルトで[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターで使用できます。ナレッジ ベース関連のエンドポイントを[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+> ナレッジ ベース関連のエンドポイントは、デフォルトで[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターで使用できます。ナレッジ ベース関連のエンドポイントを[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-## あなたが始める前に {#before-you-begin}
+## 始める前に {#before-you-begin}
 
 データベースのナレッジ ベースを作成する前に、次のものを用意してください。
 

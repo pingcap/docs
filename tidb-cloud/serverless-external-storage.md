@@ -1,17 +1,17 @@
 ---
-title: Configure TiDB Serverless External Storage Access
+title: Configure TiDB Cloud Serverless External Storage Access
 summary: Amazon Simple Storage Service (Amazon S3) アクセスを構成する方法を学習します。
 ---
 
-# TiDB Serverless の外部ストレージ アクセスを構成する {#configure-external-storage-access-for-tidb-serverless}
+# TiDB Cloud Serverless の外部ストレージ アクセスを構成する {#configure-external-storage-access-for-tidb-cloud-serverless}
 
-TiDB Serverless クラスターの外部ストレージからデータをインポートしたり、外部storageにデータをエクスポートしたりする場合は、クロスアカウント アクセスを構成する必要があります。このドキュメントでは、TiDB Serverless クラスターの外部storageへのアクセスを構成する方法について説明します。
+TiDB Cloud Serverless クラスターの外部ストレージからデータをインポートしたり、外部storageにデータをエクスポートしたりする場合は、クロスアカウント アクセスを構成する必要があります。このドキュメントでは、 TiDB Cloud Serverless クラスターの外部storageへのアクセスを構成する方法について説明します。
 
-TiDB 専用クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB専用外部ストレージアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)参照してください。
+TiDB Cloud Dedicated クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)参照してください。
 
 ## Amazon S3 アクセスを構成する {#configure-amazon-s3-access}
 
-TiDB Serverless クラスターが Amazon S3 バケットにアクセスできるようにするには、クラスターのバケットアクセスを設定する必要があります。バケットアクセスを設定するには、次のいずれかの方法を使用できます。
+TiDB Cloud Serverless クラスターが Amazon S3 バケットにアクセスできるようにするには、クラスターのバケット アクセスを設定する必要があります。バケット アクセスを設定するには、次のいずれかの方法を使用できます。
 
 -   ロール ARN を使用する: ロール ARN を使用して Amazon S3 バケットにアクセスします。
 -   AWS アクセスキーを使用する: IAMユーザーのアクセスキーを使用して Amazon S3 バケットにアクセスします。
@@ -74,7 +74,7 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
     4.  **[ポリシーの作成]**ページで、 **[JSON]**タブをクリックします。
 
-    5.  必要に応じて、ポリシー テキスト フィールドでポリシーを構成します。以下は、TiDB Serverless クラスターからデータをエクスポートしたり、TiDB Serverless クラスターにデータをインポートしたりするために使用できる例です。
+    5.  必要に応じて、ポリシー テキスト フィールドでポリシーを構成します。以下は、 TiDB Cloud Serverless クラスターからデータをエクスポートしたり、TiDB Cloud Serverless クラスターにデータをインポートしたりするために使用できる例です。
 
         ```json
         {

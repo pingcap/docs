@@ -1,15 +1,15 @@
 ---
 title: CLUSTER_INFO
-summary: CLUSTER_INFOクラスター トポロジー テーブルは、クラスターの現在のトポロジー情報、各インスタンスのバージョン情報、インスタンスのバージョンに対応する Git ハッシュ、各インスタンスの開始時刻、および各インスタンスの実行時間を提供します。このテーブルはTiDB サーバーレスクラスターでは使用できません。フィールドの。インスタンスのタイプ、インスタンスアドレス、HTTP APIのサービスアドレス、対応するインスタンスのセマンティックバージョン番号、インスタンスのバージョンをコンパイルするときのGitコミットハッシュ、対応するインスタンスの開始時刻、対応するインスタンスの稼働時間、対応するインスタンスのサーバーID。
+summary: CLUSTER_INFO` クラスター トポロジ情報テーブルについて学習します。
 ---
 
 # クラスター情報 {#cluster-info}
 
-`CLUSTER_INFO`クラスター トポロジー テーブルは、クラスターの現在のトポロジー情報、各インスタンスのバージョン情報、インスタンスのバージョンに対応する Git ハッシュ、各インスタンスの開始時刻、および各インスタンスの実行時間を提供します。
+`CLUSTER_INFO`クラスター トポロジ テーブルには、クラスターの現在のトポロジ情報、各インスタンスのバージョン情報、インスタンス バージョンに対応する Git ハッシュ、各インスタンスの開始時刻、および各インスタンスの実行時刻が示されます。
 
 > **注記：**
 >
-> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -34,11 +34,11 @@ desc cluster_info;
 
 フィールドの説明:
 
--   `TYPE` : インスタンスのタイプ。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
--   `INSTANCE` : インスタンス アドレス。 `IP:PORT`の形式の文字列です。
--   `STATUS_ADDRESS` : HTTP APIのサービスアドレス。 tikv-ctl、pd-ctl、または tidb-ctl の一部のコマンドは、この API とこのアドレスを使用する場合があります。このアドレスからさらに多くのクラスター情報を取得することもできます。詳細は[TiDB HTTP API ドキュメント](https://github.com/pingcap/tidb/blob/release-7.5/docs/tidb_http_api.md)を参照してください。
--   `VERSION` : 対応するインスタンスのセマンティック バージョン番号。 MySQL バージョン番号との互換性を保つために、TiDB バージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。
--   `GIT_HASH` : インスタンスのバージョンをコンパイルするときの Git コミット ハッシュ。2 つのインスタンスが完全に一貫したバージョンであるかどうかを識別するために使用されます。
+-   `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
+-   `INSTANCE` : インスタンス アドレス。2 `IP:PORT`形式の文字列です。
+-   `STATUS_ADDRESS` : HTTP API のサービス アドレス。tikv-ctl、pd-ctl、または tidb-ctl の一部のコマンドでは、この API とこのアドレスが使用される場合があります。このアドレスを介して、より多くのクラスター情報を取得することもできます。詳細については、 [TiDB HTTP API ドキュメント](https://github.com/pingcap/tidb/blob/release-7.5/docs/tidb_http_api.md)を参照してください。
+-   `VERSION` : 対応するインスタンスのセマンティックバージョン番号。MySQL バージョン番号との互換性を保つために、TiDB バージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。
+-   `GIT_HASH` : インスタンス バージョンをコンパイルするときの Git コミット ハッシュ。2 つのインスタンスが完全に一貫したバージョンであるかどうかを識別するために使用されます。
 -   `START_TIME` : 対応するインスタンスの開始時刻。
 -   `UPTIME` : 対応するインスタンスの稼働時間。
 -   `SERVER_ID` : 対応するインスタンスのサーバーID。

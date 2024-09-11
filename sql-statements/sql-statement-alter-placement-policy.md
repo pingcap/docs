@@ -1,6 +1,6 @@
 ---
 title: ALTER PLACEMENT POLICY
-summary: The usage of ALTER PLACEMENT POLICY in TiDB.
+summary: TiDB での ALTER PLACEMENT POLICY の使用法。
 ---
 
 # 配置ポリシーの変更 {#alter-placement-policy}
@@ -9,7 +9,7 @@ summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 
 > **注記：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 `ALTER PLACEMENT POLICY` 、以前のポリシーを新しい定義に*置き換えます*。古いポリシーを新しいポリシーと*マージ*しません。次の例では、 `ALTER PLACEMENT POLICY`が実行されると`FOLLOWERS=4`は失われます。
 

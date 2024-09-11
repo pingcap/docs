@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud CLI Quick Start
-summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
+summary: TiDB Cloud CLI を使用してTiDB Cloudリソースを管理する方法を学習します。
 ---
 
 # TiDB CloudCLI クイック スタート {#tidb-cloud-cli-quick-start}
 
-TiDB Cloud は、数行のコマンドで端末からTiDB Cloudを操作できるコマンドライン インターフェイス (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)を提供します。たとえば、 `ticloud`を使用して次の操作を簡単に実行できます。
+TiDB Cloud は、数行のコマンドで端末からTiDB Cloudと対話するためのコマンドライン インターフェイス (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)を提供します。たとえば、 `ticloud`を使用して次の操作を簡単に実行できます。
 
 -   クラスターを作成、削除、および一覧表示します。
 -   クラスターにデータをインポートします。
@@ -15,7 +15,7 @@ TiDB Cloud は、数行のコマンドで端末からTiDB Cloudを操作でき�
 >
 > TiDB Cloud CLI はベータ版です。
 
-## あなたが始める前に {#before-you-begin}
+## 始める前に {#before-you-begin}
 
 -   TiDB Cloudアカウントをお持ちであること。お持ちでない場合は、 [無料トライアルにサインアップ](https://tidbcloud.com/free-trial) 。
 
@@ -60,7 +60,7 @@ MySQL コマンドライン クライアントがない場合はインストー�
     sudo yum install mysql
     ```
 
--   マックOS：
+-   macOS:
 
     ```shell
     brew install mysql-client
@@ -87,7 +87,7 @@ MySQL コマンドライン クライアントがインストールされてい�
 
 ## クイックスタート {#quick-start}
 
-[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless) TiDB Cloudを使い始めるのに最適な方法です。このセクションでは、 TiDB Cloud CLI を使用して TiDB Serverless クラスターを作成する方法を学習します。
+[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) TiDB Cloudを使い始めるのに最適な方法です。このセクションでは、 TiDB Cloud CLI を使用してTiDB Cloud Serverless クラスターを作成する方法を学習します。
 
 ### ユーザープロファイルを作成するか、 TiDB Cloudにログインします {#create-a-user-profile-or-log-into-tidb-cloud}
 
@@ -115,9 +115,9 @@ TiDB Cloud CLI を使用してクラスターを作成する前に、ユーザ�
 >
 > 前述の 2 つの方法では、 TiDB Cloud API キーが OAuth トークンよりも優先されます。両方が利用可能な場合は、API キーが使用されます。
 
-### TiDB サーバーレス クラスターを作成する {#create-a-tidb-serverless-cluster}
+### TiDB Cloud Serverless クラスターを作成する {#create-a-tidb-cloud-serverless-cluster}
 
-TiDB Serverless クラスターを作成するには、次のコマンドを入力し、CLI プロンプトに従って必要な情報を入力します。
+TiDB Cloud Serverless クラスターを作成するには、次のコマンドを入力し、CLI プロンプトに従って必要な情報を入力します。
 
 ```shell
 ticloud serverless create
@@ -165,7 +165,7 @@ TiUPによる最新バージョンへのアップデート:
 tiup update cloud
 ```
 
-## 次は何ですか {#what-s-next}
+## 次は何か {#what-s-next}
 
 TiDB Cloud CLI のその他の機能については、 [CLI リファレンス](/tidb-cloud/cli-reference.md)ご覧ください。
 

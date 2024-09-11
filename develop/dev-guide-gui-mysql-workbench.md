@@ -16,7 +16,7 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 
 > **注記：**
 >
-> このチュートリアルは、TiDB Serverless、TiDB Dedicated、および TiDB Self-Hosted と互換性があります。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -29,7 +29,7 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -37,7 +37,7 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -47,7 +47,7 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -76,20 +76,20 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
     -   **ホスト名**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
     -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
     -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
-    -   **パスワード**: **「キーチェーンに保存...」**または**「ボールトに保存」を**クリックし、TiDB Serverless クラスターのパスワードを入力してから、 **「OK」**をクリックしてパスワードを保存します。
+    -   **パスワード**: **「キーチェーンに保存...」**または**「ボールトに保存」を**クリックし、 TiDB Cloud Serverless クラスターのパスワードを入力してから、 **「OK」**をクリックしてパスワードを保存します。
 
-        ![MySQL Workbench: store the password of TiDB Serverless in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
+        ![MySQL Workbench: store the password of TiDB Cloud Serverless in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
     次の図は、接続パラメータの例を示しています。
 
-    ![MySQL Workbench: configure connection settings for TiDB Serverless](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
+    ![MySQL Workbench: configure connection settings for TiDB Cloud Serverless](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
 
-7.  **「テスト接続」**をクリックして、TiDB Serverless クラスターへの接続を検証します。
+7.  **「テスト接続」**をクリックして、 TiDB Cloud Serverless クラスターへの接続を検証します。
 
 8.  接続テストが成功すると、 **「MySQL 接続に成功しました」という**メッセージが表示されます。 **[OK]**をクリックして接続構成を保存します。
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -111,20 +111,20 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
     -   **ホスト名**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
     -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
     -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
-    -   **パスワード**: **「キーチェーンに保存...」**をクリックし、TiDB 専用クラスターのパスワードを入力して、 **「OK」**をクリックしてパスワードを保存します。
+    -   **パスワード**: **「キーチェーンに保存...」**をクリックし、 TiDB Cloud Dedicated クラスターのパスワードを入力して、 **「OK」**をクリックしてパスワードを保存します。
 
-        ![MySQL Workbench: store the password of TiDB Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
+        ![MySQL Workbench: store the password of TiDB Cloud Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
 
     次の図は、接続パラメータの例を示しています。
 
-    ![MySQL Workbench: configure connection settings for TiDB Dedicated](/media/develop/mysql-workbench-connection-config-dedicated-parameters.png)
+    ![MySQL Workbench: configure connection settings for TiDB Cloud Dedicated](/media/develop/mysql-workbench-connection-config-dedicated-parameters.png)
 
-6.  **「テスト接続」**をクリックして、TiDB 専用クラスターへの接続を検証します。
+6.  **「テスト接続」**をクリックして、 TiDB Cloud Dedicated クラスターへの接続を検証します。
 
 7.  接続テストが成功すると、 **「MySQL 接続に成功しました」という**メッセージが表示されます。 **[OK]**をクリックして接続構成を保存します。
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1.  MySQL Workbench を起動し、 **MySQL 接続**タイトルの近くにある**+**をクリックします。
 
@@ -133,18 +133,18 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 2.  **[新しい接続のセットアップ]**ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
-    -   **ホスト名**: TiDB セルフホスト クラスターの IP アドレスまたはドメイン名を入力します。
-    -   **ポート**: TiDB セルフホスト クラスターのポート番号を入力します。
+    -   **ホスト名**: TiDB セルフマネージド クラスターの IP アドレスまたはドメイン名を入力します。
+    -   **ポート**: TiDB セルフマネージド クラスターのポート番号を入力します。
     -   **ユーザー名**: TiDB に接続するために使用するユーザー名を入力します。
     -   **パスワード**: **「キーチェーンに保存...」**をクリックし、TiDB クラスターに接続するために使用するパスワードを入力して、 **「OK」**をクリックしてパスワードを保存します。
 
-        ![MySQL Workbench: store the password of TiDB Self-Hosted in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
+        ![MySQL Workbench: store the password of TiDB Self-Managed in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
 
     次の図は、接続パラメータの例を示しています。
 
-    ![MySQL Workbench: configure connection settings for TiDB Self-Hosted](/media/develop/mysql-workbench-connection-config-self-hosted-parameters.png)
+    ![MySQL Workbench: configure connection settings for TiDB Self-Managed](/media/develop/mysql-workbench-connection-config-self-hosted-parameters.png)
 
-3.  **「テスト接続」**をクリックして、TiDB セルフホスト クラスターへの接続を検証します。
+3.  **「接続のテスト」**をクリックして、TiDB セルフマネージド クラスターへの接続を検証します。
 
 4.  接続テストが成功すると、 **「MySQL 接続に成功しました」という**メッセージが表示されます。 **[OK]**をクリックして接続構成を保存します。
 
@@ -162,7 +162,7 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 
     ![MySQL Workbench: adjust timeout option in SQL Editor settings](/media/develop/mysql-workbench-adjust-sqleditor-read-timeout.jpg)
 
-詳細については[MySQL Workbench よくある質問](https://dev.mysql.com/doc/workbench/en/workbench-faq.html)参照してください。
+詳細については[MySQL Workbench のよくある質問](https://dev.mysql.com/doc/workbench/en/workbench-faq.html)参照してください。
 
 ## 次のステップ {#next-steps}
 

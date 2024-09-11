@@ -14,7 +14,7 @@ category: quick start
 
 ## ステップ1: TiDBクラスターを作成する {#step-1-create-a-tidb-cluster}
 
-[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless) TiDB Cloudを使い始めるのに最適な方法です。TiDB Serverless クラスターを作成するには、次の手順に従います。
+[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) TiDB Cloudを使い始めるのに最適な方法です。TiDB TiDB Cloud Serverless クラスターを作成するには、次の手順に従います。
 
 1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)クリックしてサインアップしてください。
 
@@ -24,13 +24,13 @@ category: quick start
 
     デフォルトでは[**クラスター**](https://tidbcloud.com/console/clusters)ページ目が表示されます。
 
-3.  新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`という名前のデフォルトの TiDB Serverless クラスターを自動的に作成します。
+3.  新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`という名前のデフォルトのTiDB Cloud Serverless クラスターを自動的に作成します。
 
     -   このデフォルト クラスターでTiDB Cloud機能をすぐに試すには、 [ステップ2: AI支援SQLエディターを試す](#step-2-try-ai-assisted-sql-editor)に進みます。
-    -   独自に新しい TiDB Serverless クラスターを作成するには、次の手順に従います。
+    -   新しいTiDB Cloud Serverless クラスターを独自に作成するには、次の手順に従います。
 
         1.  **クラスタの作成を**クリックします。
-        2.  **[クラスタの作成]**ページでは、デフォルトで**Serverless**が選択されています。クラスターのターゲット リージョンを選択し、必要に応じてデフォルトのクラスター名を更新し、 [クラスタープラン](/tidb-cloud/select-cluster-tier.md#cluster-plans)を選択して、 **[作成]**をクリックします。TiDB Serverless クラスターは約 30 秒で作成されます。
+        2.  **[クラスタの作成]**ページでは、デフォルトで**Serverless**が選択されています。クラスターのターゲット リージョンを選択し、必要に応じてデフォルトのクラスター名を更新し、 [クラスタープラン](/tidb-cloud/select-cluster-tier.md#cluster-plans)を選択して、 **[作成]**をクリックします。TiDB TiDB Cloud Serverless クラスターは約 30 秒で作成されます。
 
 ## ステップ2: AI支援SQLエディターを試す {#step-2-try-ai-assisted-sql-editor}
 
@@ -111,12 +111,12 @@ TiDB Cloud、 TiDB Cloudをすぐに使い始められるように、慎重に�
 
 1.  コンソールの右下隅にある**[?]**アイコンをクリックし、 **[インタラクティブ チュートリアル]**を選択します。
 2.  チュートリアル リストで、 **Steam ゲーム統計**などの開始するチュートリアル カードを選択します。
-3.  チュートリアルで使用する TiDB Serverless クラスターを選択し、 **「Import Dataset」**をクリックします。インポート プロセスには約 1 分かかる場合があります。
+3.  チュートリアルで使用するTiDB Cloud Serverless クラスターを選択し、 **「Import Dataset」**をクリックします。インポート プロセスには約 1 分かかる場合があります。
 4.  サンプル データをインポートしたら、画面の指示に従ってチュートリアルを完了します。
 
-## 次は何ですか {#what-s-next}
+## 次は何か {#what-s-next}
 
--   さまざまな方法を使用してクラスターに接続する方法については、 [TiDB サーバーレス クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
+-   さまざまな方法を使用してクラスターに接続する方法については、 [TiDB Cloud Serverless クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
 -   SQL エディターと Chat2Query を使用してデータを探索する方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)参照してください。
 -   TiDB SQL の使用法については、 [TiDB で SQL を探索する](/basic-sql-operations.md)参照してください。
--   ゾーン間の高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番での使用については、 [TiDB専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
+-   ゾーン間の高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番での使用については、 [TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。

@@ -1,15 +1,15 @@
 ---
 title: PLACEMENT_POLICIES
-summary: PLACEMENT_POLICIES表は、すべての配置ポリシーに関する情報を提供します。TiDBサーバーレスクラスターでは使用できません。12行の情報が含まれており、配置ポリシーのみが表示されます。代わりにSHOW PLACEMENTステートメントを使用すると、正規バージョンの配置ルールが表示されます。また、テーブルt3を含むすべての情報を表示することもできます。
+summary: PLACEMENT_POLICIES` information_schema テーブルについて学習します。
 ---
 
-# PLACEMENT_POLICIES {#placement-policies}
+# 配置ポリシー {#placement-policies}
 
-`PLACEMENT_POLICIES`表は、すべての配置ポリシーに関する情報を提供します。詳細は[SQL の配置ルール](/placement-rules-in-sql.md)を参照してください。
+`PLACEMENT_POLICIES`表には、すべての配置ポリシーに関する情報が記載されています。詳細については、 [SQL の配置ルール](/placement-rules-in-sql.md)を参照してください。
 
 > **注記：**
 >
-> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -38,7 +38,7 @@ DESC placement_policies;
 
 ## 例 {#examples}
 
-`PLACEMENT_POLICIES`表には、すべての配置ポリシーのみが表示されます。正規バージョンの配置ルール (すべての配置ポリシーおよび配置ポリシーが割り当てられたオブジェクトを含む) を表示するには、代わりにステートメント`SHOW PLACEMENT`を使用します。
+`PLACEMENT_POLICIES`テーブルには、すべての配置ポリシーのみが表示されます。配置ルールの標準バージョン (すべての配置ポリシーと配置ポリシーが割り当てられたオブジェクトを含む) を表示するには、代わりにステートメント`SHOW PLACEMENT`を使用します。
 
 ```sql
 CREATE TABLE t1 (a INT); 

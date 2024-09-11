@@ -9,7 +9,7 @@ summary: TiDB Vector Search を Django ORM と統合して埋め込みを保存�
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
 
 ## 前提条件 {#prerequisites}
 
@@ -17,7 +17,7 @@ summary: TiDB Vector Search を Django ORM と統合して埋め込みを保存�
 
 -   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
 -   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB サーバーレス クラスター。TiDB Cloud クラスターがない場合は、 [TiDB サーバーレス クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
 ## サンプルアプリを実行する {#run-the-sample-app}
 
@@ -61,7 +61,7 @@ mysqlclient のインストールで問題が発生した場合は、mysqlclient
 
 `django-tidb`は、Django ORM を拡張して TiDB 固有の機能 (たとえば、Vector Search) をサポートし、TiDB と Django 間の互換性の問題を解決する、Django 用の TiDB 方言です。
 
-`django-tidb`をインストールするには、Django のバージョンと一致するバージョンを選択します。たとえば、 `django==4.2.*`を使用している場合は`django-tidb==4.2.*`をインストールします。マイナー バージョンは同じである必要はありません。最新のマイナー バージョンを使用することをお勧めします。
+`django-tidb`をインストールするには、Django のバージョンと一致するバージョンを選択します。たとえば、 `django==4.2.*`使用している場合は`django-tidb==4.2.*`をインストールします。マイナー バージョンは同じである必要はありません。最新のマイナー バージョンを使用することをお勧めします。
 
 詳細については[django-tidb リポジトリ](https://github.com/pingcap/django-tidb)を参照してください。
 
@@ -137,7 +137,7 @@ python manage.py runserver
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了することができます。
 
-### TiDBクラスタに接続する {#connect-to-the-tidb-cluster}
+### TiDBクラスターに接続する {#connect-to-the-tidb-cluster}
 
 ファイル`sample_project/settings.py`に次の設定を追加します。
 

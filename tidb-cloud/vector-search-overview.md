@@ -9,7 +9,7 @@ TiDB Vector Search (ベータ版) は、ドキュメント、画像、音声、�
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
 
 ## コンセプト {#concepts}
 
@@ -19,7 +19,7 @@ TiDB Vector Search (ベータ版) は、ドキュメント、画像、音声、�
 
 ### ベクトル埋め込み {#vector-embedding}
 
-ベクトル埋め込みは、埋め込みとも呼ばれ、高次元空間内の現実世界のオブジェクトを表す一連の数字です。ドキュメント、画像、音声、ビデオなどの非構造化データの意味とコンテキストをキャプチャします。
+ベクトル埋め込みは、埋め込みとも呼ばれ、高次元空間内の現実世界のオブジェクトを表す数値のシーケンスです。ドキュメント、画像、音声、ビデオなどの非構造化データの意味とコンテキストをキャプチャします。
 
 ベクトル埋め込みは機械学習に不可欠であり、意味的類似性検索の基盤として機能します。
 

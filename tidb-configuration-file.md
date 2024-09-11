@@ -138,7 +138,7 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 
 -   `repair-table-list` 、 [`repair-mode`](#repair-mode)が`true`に設定されている場合にのみ有効です。 `repair-table-list` 、インスタンスで修復する必要がある不良テーブルのリストです。 リストの例: [&quot;db.table1&quot;,&quot;db.table2&quot;...]。
 -   デフォルト値: []
--   リストはデフォルトでは空です。つまり、修復が必要な不良テーブルは存在しないということです。
+-   デフォルトではリストは空です。これは、修復する必要がある不良テーブルがないことを意味します。
 
 ### <code>new_collations_enabled_on_first_bootstrap</code> {#code-new-collations-enabled-on-first-bootstrap-code}
 
@@ -511,6 +511,10 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 -   デフォルト値: `true`
 -   TiDB は、デフォルトで両側のテーブルの条件なしの`JOIN`ステートメント ( `WHERE`フィールド) の実行をサポートしています。値を`false`に設定すると、サーバーはそのような`JOIN`ステートメントが出現したときに実行を拒否します。
 
+> **注記：**
+>
+> クラスターを作成するときは、 `cross-join` false に設定**しないでください**。そうしないと、クラスターの起動に失敗します。
+
 ### <code>stats-lease</code> {#code-stats-lease-code}
 
 -   統計の再読み込み、テーブル行数の更新、自動分析を実行する必要があるかどうかの確認、フィードバックを使用した統計の更新、列の統計の読み込みの時間間隔。
@@ -663,7 +667,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 -   レポーターが jaeger エージェントにスパンを送信するアドレス。
 -   デフォルト値: `""`
 
-## tikvクライアント {#tikv-client}
+## tikv クライアント {#tikv-client}
 
 ### <code>grpc-connection-count</code> {#code-grpc-connection-count-code}
 

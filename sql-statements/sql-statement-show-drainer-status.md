@@ -1,15 +1,15 @@
 ---
 title: SHOW DRAINER STATUS
-summary: SHOW DRAINER STATUSステートメントは、クラスター内のすべてのDrainerノードのステータス情報を表示します。この機能はTiDBセルフホスト型にのみ適用され、TiDB Cloudでは利用できません。MySQLの互換性もあります。関連情報として、ポンプのステータスを表示、ポンプステータスの変更、ドレイナーステータスの変更があります。
+summary: TiDB データベースの SHOW DRAINER STATUS の使用法の概要。
 ---
 
-# ドレイナーのステータスを表示 {#show-drainer-status}
+# ドレイナーステータスを表示 {#show-drainer-status}
 
 `SHOW DRAINER STATUS`ステートメントは、クラスター内のすべてのDrainerノードのステータス情報を表示します。
 
 > **注記：**
 >
-> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+> この機能は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 ## 例 {#examples}
 
@@ -28,12 +28,12 @@ SHOW DRAINER STATUS;
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
--   [ポンプのステータスを表示](/sql-statements/sql-statement-show-pump-status.md)
+-   [ポンプの状態を表示](/sql-statements/sql-statement-show-pump-status.md)
 -   [ポンプステータスの変更](/sql-statements/sql-statement-change-pump.md)
 -   [ドレイナーステータスの変更](/sql-statements/sql-statement-change-drainer.md)

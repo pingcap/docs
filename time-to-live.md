@@ -167,7 +167,7 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 
 > **注記：**
 >
-> このセクションは、TiDB セルフホストにのみ適用されます。現在、 TiDB Cloud はTTL メトリックを提供していません。
+> このセクションは、TiDB Self-Managed にのみ適用されます。現在、 TiDB Cloud はTTL メトリックを提供していません。
 
 </CustomContent>
 
@@ -207,7 +207,7 @@ TiDB は定期的に TTL に関する実行時情報を収集し、Grafana で�
         current_job_status_update_time: NULL
         1 row in set (0.040 sec)
 
-    列`table_id`はパーティションテーブルの ID であり、列`parent_table_id`はテーブルの ID で、列[`information_schema.tables`](/information-schema/information-schema-tables.md)の ID に対応します。テーブルがパーティションテーブルでない場合、2 つの ID は同じになります。
+    列`table_id`はパーティションテーブルの ID であり、列`parent_table_id`テーブルの ID で、列[`information_schema.tables`](/information-schema/information-schema-tables.md)の ID に対応します。テーブルがパーティションテーブルでない場合、2 つの ID は同じになります。
 
     列`{last, current}_job_{start_time, finish_time, ttl_expire}`は、それぞれ、前回または現在の実行の TTL ジョブで使用された開始時刻、終了時刻、有効期限を示します。列`last_job_summary`は、行の合計数、成功した行の数、失敗した行の数など、最後の TTL タスクの実行ステータスを示します。
 
@@ -249,11 +249,11 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 ## SQLとの互換性 {#compatibility-with-sql}
 
-| 機能名                                                                         | 説明                                                                                                                                                                            |
-| :-------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `FLASHBACK TABLE` 、テーブルの`TTL_ENABLE`属性を`OFF`に設定します。これにより、フラッシュバック後に TiDB が期限切れのデータをすぐに削除することがなくなります。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                    |
-| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE`はテーブルの`TTL_ENABLE`属性を`OFF`に設定し、 `TTL_ENABLE`属性は変更されません。これにより、TiDB はフラッシュバック後に期限切れのデータをすぐに削除しなくなります。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
-| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)   | `FLASHBACK CLUSTER`はシステム変数[`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)を`OFF`に設定し、属性`TTL_ENABLE`の値は変更しません。                                    |
+| 機能名                                                                         | 説明                                                                                                                                                                                 |
+| :-------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `FLASHBACK TABLE` 、テーブルの`TTL_ENABLE`属性を`OFF`に設定します。これにより、フラッシュバック後に TiDB が期限切れのデータをすぐに削除することがなくなります。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                         |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE`はテーブルの`TTL_ENABLE`属性を`OFF`に設定し、 `TTL_ENABLE`属性は変更されません。これにより、フラッシュバック後に TiDB が期限切れのデータをすぐに削除することがなくなります。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)   | `FLASHBACK CLUSTER`はシステム変数[`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)を`OFF`に設定し、属性`TTL_ENABLE`の値は変更しません。                                         |
 
 ## 制限事項 {#limitations}
 
@@ -270,7 +270,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 -   削除がデータ サイズを比較的安定させるのに十分な速さであるかどうかをどのように判断すればよいでしょうか?
 
-    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)では、パネル`TTL Insert Rows Per Hour`は過去 1 時間に挿入された行の合計数を記録します。対応する`TTL Delete Rows Per Hour`は、過去 1 時間に TTL タスクによって削除された行の合計数を記録します。7 `TTL Insert Rows Per Hour`長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合は、挿入率が削除率よりも高く、データの合計量が増加することを意味します。例:
+    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)では、パネル`TTL Insert Rows Per Hour` 、過去 1 時間に挿入された行の合計数を記録します。対応する`TTL Delete Rows Per Hour` 、過去 1 時間に TTL タスクによって削除された行の合計数を記録します。7 `TTL Insert Rows Per Hour`長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合は、挿入率が削除率よりも高く、データの合計量が増加することを意味します。例:
 
     ![insert fast example](/media/ttl/insert-fast.png)
 

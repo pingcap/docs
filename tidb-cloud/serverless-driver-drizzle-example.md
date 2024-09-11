@@ -5,7 +5,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 # TiDB CloudレスDriverDrizzle チュートリアル {#tidb-cloud-serverless-driver-drizzle-tutorial}
 
-[霧雨ORM](https://orm.drizzle.team/)は、開発者のエクスペリエンスを考慮した軽量でパフォーマンスの高い TypeScript ORM です。 `drizzle-orm@0.31.2`から始まり、 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)をサポートし、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)で Drizzle を HTTPS 経由で使用できるようになります。
+[霧雨ORM](https://orm.drizzle.team/)は、開発者エクスペリエンスを念頭に置いた軽量で高性能な TypeScript ORM です。 `drizzle-orm@0.31.2`から始まり、 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)をサポートし、 [TiDB Cloudサーバーレス ドライバー](/tidb-cloud/serverless-driver.md)で Drizzle を HTTPS 経由で使用できるようになります。
 
 このチュートリアルでは、Node.js 環境とエッジ環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
@@ -13,13 +13,13 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 このセクションでは、Node.js 環境で Drizzle とTiDB Cloudサーバーレス ドライバーを使用する方法について説明します。
 
-### あなたが始める前に {#before-you-begin}
+### 始める前に {#before-you-begin}
 
 このチュートリアルを完了するには、次のものが必要です。
 
 -   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 -   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB サーバーレス クラスター。ない場合は、 [TiDBサーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
+-   TiDB Cloud Serverless クラスター。ない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -69,7 +69,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットの TiDB Serverless クラスターの名前をクリックして概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
 
 2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続先]**ドロップダウン ボックスで`Serverless Driver`を選択して、 **[パスワードの生成] を**クリックし、ランダムなパスワードを作成します。
 
@@ -89,7 +89,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ3. Drizzleを使用してデータをクエリする {#step-3-use-drizzle-to-query-data}
 
-1.  TiDB Serverless クラスターにテーブルを作成します。
+1.  TiDB Cloud Serverless クラスターにテーブルを作成します。
 
     [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用して SQL ステートメントを実行できます。次に例を示します。
 
@@ -147,13 +147,13 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 このセクションでは、Vercel Edge Function を例に説明します。
 
-### あなたが始める前に {#before-you-begin}
+### 始める前に {#before-you-begin}
 
 このチュートリアルを完了するには、次のものが必要です。
 
 -   エッジ環境を提供する[ヴェルセル](https://vercel.com/docs)アカウント。
 -   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB サーバーレス クラスター。ない場合は、 [TiDBサーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
+-   TiDB Cloud Serverless クラスター。ない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -183,7 +183,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットの TiDB Serverless クラスターの名前をクリックして概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
 
 2.  概要ページで、右上隅の**[接続]**をクリックし、 **[接続先]**ドロップダウン ボックスで`Serverless Driver`を選択して、 **[パスワードの生成] を**クリックし、ランダムなパスワードを作成します。
 
@@ -197,7 +197,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 ### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
 
-1.  TiDB Serverless クラスターにテーブルを作成します。
+1.  TiDB Cloud Serverless クラスターにテーブルを作成します。
 
     [TiDB Cloudコンソールの SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用して SQL ステートメントを実行できます。次に例を示します。
 
@@ -262,7 +262,7 @@ summary: Drizzle でTiDB Cloudサーバーレス ドライバーを使用する�
 
 2.  ルートからの応答を取得するには、 `${Your-URL}/api/edge-function-example`ページに移動します。
 
-## 次は何ですか {#what-s-next}
+## 次は何か {#what-s-next}
 
 -   [霧雨](https://orm.drizzle.team/docs/overview)と[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)について詳しく学びます。
 -   [TiDB CloudとVercelを統合する](/tidb-cloud/integrate-tidbcloud-with-vercel.md)の方法を学びます。

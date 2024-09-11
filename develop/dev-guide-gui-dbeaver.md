@@ -11,7 +11,7 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 
 > **注記：**
 >
-> このチュートリアルは、TiDB Serverless、TiDB Dedicated、および TiDB Self-Hosted と互換性があります。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -24,7 +24,7 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -32,7 +32,7 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 
 **TiDB クラスターがない場合は、次のように作成できます。**
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -42,7 +42,7 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -50,7 +50,7 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています
+    -   **接続タイプ**は`Public`に設定されています
     -   **ブランチ**は`main`に設定されています
     -   **接続先は**`DBeaver`に設定されています
     -   **オペレーティング システムは**環境に適合します。
@@ -69,9 +69,9 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 
 7.  **認証 (データベース ネイティブ)**セクションで、**ユーザー名**と**パスワード**を入力します。例は次のとおりです。
 
-    ![Configure connection settings for TiDB Serverless](/media/develop/dbeaver-connection-settings-serverless.jpg)
+    ![Configure connection settings for TiDB Cloud Serverless](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8.  **「テスト接続」**をクリックして、TiDB Serverless クラスターへの接続を検証します。
+8.  **「テスト接続」**をクリックして、 TiDB Cloud Serverless クラスターへの接続を検証します。
 
     **「ドライバー ファイルのダウンロード」**ダイアログが表示されたら、 **「ダウンロード」**をクリックしてドライバー ファイルを取得します。
 
@@ -84,7 +84,7 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 9.  **「完了」**をクリックして接続構成を保存します。
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -100,20 +100,20 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-5.  適切な接続文字列をコピーして DBeaver 接続パネルに貼り付けます。DBeaver フィールドと TiDB 専用接続文字列間のマッピングは次のとおりです。
+5.  適切な接続文字列をコピーして、DBeaver 接続パネルに貼り付けます。DBeaver フィールドとTiDB Cloud Dedicated 接続文字列間のマッピングは次のとおりです。
 
-    | DBeaverフィールド | TiDB専用接続文字列  |
-    | ------------ | ------------ |
-    | サーバーホスト      | `{host}`     |
-    | ポート          | `{port}`     |
-    | ユーザー名        | `{user}`     |
-    | パスワード        | `{password}` |
+    | DBeaverフィールド | TiDB Cloud専用接続文字列 |
+    | ------------ | ----------------- |
+    | サーバーホスト      | `{host}`          |
+    | ポート          | `{port}`          |
+    | ユーザー名        | `{user}`          |
+    | パスワード        | `{password}`      |
 
     例は以下のとおりです。
 
-    ![Configure connection settings for TiDB Dedicated](/media/develop/dbeaver-connection-settings-dedicated.jpg)
+    ![Configure connection settings for TiDB Cloud Dedicated](/media/develop/dbeaver-connection-settings-dedicated.jpg)
 
-6.  **「テスト接続」**をクリックして、TiDB 専用クラスターへの接続を検証します。
+6.  **「テスト接続」**をクリックして、 TiDB Cloud Dedicated クラスターへの接続を検証します。
 
     **「ドライバー ファイルのダウンロード」**ダイアログが表示されたら、 **「ダウンロード」**をクリックしてドライバー ファイルを取得します。
 
@@ -126,7 +126,7 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 7.  **「完了」**をクリックして接続構成を保存します。
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続**] ダイアログで、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
 
@@ -134,16 +134,16 @@ TiDB は MySQL 互換のデータベースであり、開発者、データベ�
 
 2.  次の接続パラメータを構成します。
 
-    -   **サーバー ホスト**: TiDB セルフホスト クラスターの IP アドレスまたはドメイン名。
-    -   **ポート**: TiDB セルフホスト クラスターのポート番号。
-    -   **ユーザー名**: TiDB セルフホスト クラスターに接続するために使用するユーザー名。
+    -   **サーバー ホスト**: TiDB セルフマネージド クラスターの IP アドレスまたはドメイン名。
+    -   **ポート**: TiDB セルフマネージド クラスターのポート番号。
+    -   **ユーザー名**: TiDB セルフマネージド クラスターに接続するために使用するユーザー名。
     -   **パスワード**: ユーザー名のパスワード。
 
     例は以下のとおりです。
 
-    ![Configure connection settings for TiDB Self-Hosted](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
+    ![Configure connection settings for TiDB Self-Managed](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
 
-3.  **「テスト接続」**をクリックして、TiDB セルフホスト クラスターへの接続を検証します。
+3.  **「接続のテスト」**をクリックして、TiDB セルフマネージド クラスターへの接続を検証します。
 
     **「ドライバー ファイルのダウンロード」**ダイアログが表示されたら、 **「ダウンロード」**をクリックしてドライバー ファイルを取得します。
 

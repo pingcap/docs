@@ -11,9 +11,9 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 `tidbcloud_cluster`リソースの機能は次のとおりです。
 
--   TiDB Serverless クラスターと TiDB Dedicated クラスターを作成します。
--   TiDB 専用クラスターを変更します。
--   TiDB Serverless および TiDB Dedicated クラスターを削除します。
+-   TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターを作成します。
+-   TiDB Cloud Dedicated クラスターを変更します。
+-   TiDB Cloud Serverless クラスターとTiDB Cloud Dedicated クラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
@@ -264,7 +264,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 `tidbcloud_cluster`リソースを使用してクラスターを作成できます。
 
-次の例は、TiDB 専用クラスターを作成する方法を示しています。
+次の例は、 TiDB Cloud Dedicated クラスターを作成する方法を示しています。
 
 1.  クラスターのディレクトリを作成してそこに入ります。
 
@@ -459,9 +459,9 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 ステータスが`AVAILABLE`場合、TiDB クラスターが作成され、使用できる状態であることを示します。
 
-## TiDB専用クラスタを変更する {#modify-a-tidb-dedicated-cluster}
+## TiDB Cloud Dedicated クラスターを変更する {#modify-a-tidb-cloud-dedicated-cluster}
 
-TiDB 専用クラスターの場合、Terraform を使用して次のようにクラスター リソースを管理できます。
+TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次のようにクラスター リソースを管理できます。
 
 -   クラスターにTiFlashコンポーネントを追加します。
 -   クラスターをスケールします。
@@ -797,7 +797,7 @@ TiDB 専用クラスターの場合、Terraform を使用して次のように�
 
 6.  しばらく待ってから、 `terraform refersh`コマンドを使用して状態を更新します。最終的にステータスは`AVAILABLE`に変更されます。
 
-これで、Terraform を使用して TiDB 専用クラスターを作成し、管理することができました。次に、 [バックアップリソース](/tidb-cloud/terraform-use-backup-resource.md)を使用してクラスターのバックアップを作成してみてください。
+これで、Terraform を使用してTiDB Cloud Dedicated クラスターを作成し、管理することができました。次に、 [バックアップリソース](/tidb-cloud/terraform-use-backup-resource.md)を使用してクラスターのバックアップを作成してみてください。
 
 ## クラスターをインポートする {#import-a-cluster}
 

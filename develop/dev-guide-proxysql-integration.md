@@ -21,7 +21,7 @@ ProxySQL は、高速、効率的、そして使いやすいように徹底的�
 
 ## ProxySQL 統合の理由は何ですか? {#why-proxysql-integration}
 
--   ProxySQL は、TiDB とのやり取り時のレイテンシーを削減することで、アプリケーションのパフォーマンスを向上させることができます。構築するものが何であっても、つまり、ワークロードが非決定的で急増する可能性のある Lambda などのサーバーレス関数を使用するスケーラブルなアプリケーションであっても、大量のデータを読み込むクエリを実行するアプリケーションを構築している場合でも、ProxySQL の[接続プーリング](https://proxysql.com/documentation/detailed-answers-on-faq/)や[頻繁に使用されるクエリのキャッシュ](https://proxysql.com/documentation/query-cache/)などの強力な機能を活用することで、アプリケーションはすぐにメリットを得ることができます。
+-   ProxySQL は、TiDB とのやり取り時のレイテンシーを削減することで、アプリケーションのパフォーマンスを向上させることができます。構築するものが何であっても、つまり、ワークロードが非決定的で急増する可能性のある Lambda などのサーバーレス関数を使用するスケーラブルなアプリケーションであっても、大量のデータを読み込むクエリを実行するアプリケーションを構築している場合でも、ProxySQL の[接続プーリング](https://proxysql.com/documentation/detailed-answers-on-faq/)や[頻繁に使用されるクエリをキャッシュする](https://proxysql.com/documentation/query-cache/)などの強力な機能を活用することで、アプリケーションはすぐにメリットを得ることができます。
 -   ProxySQL は、ProxySQL で利用できる簡単に構成できる機能である[クエリルール](#query-rules)の助けを借りて、SQL インジェクションなどの SQL 脆弱性に対するアプリケーション セキュリティ保護の追加レイヤーとして機能します。
 -   [プロキシSQL](https://github.com/sysown/proxysql)と[ティビ](https://github.com/pingcap/tidb)どちらもオープンソース プロジェクトなので、ベンダー ロックインがゼロになるというメリットが得られます。
 
@@ -119,11 +119,11 @@ systemctl start docker
 
 ### オプション 1: TiDB Cloudを ProxySQL と統合する {#option-1-integrate-tidb-cloud-with-proxysql}
 
-この統合では、 [ProxySQL Docker イメージ](https://hub.docker.com/r/proxysql/proxysql) TiDB Serverless クラスターとともに使用します。次の手順では、ポート`16033`に ProxySQL を設定するので、このポートが使用可能であることを確認してください。
+この統合では、 [ProxySQL Docker イメージ](https://hub.docker.com/r/proxysql/proxysql) TiDB Cloud Serverless クラスターとともに使用します。次の手順では、ポート`16033`に ProxySQL を設定するので、このポートが使用可能であることを確認してください。
 
-#### ステップ1. TiDBサーバーレスクラスターを作成する {#step-1-create-a-tidb-serverless-cluster}
+#### ステップ1. TiDB Cloud Serverlessクラスターを作成する {#step-1-create-a-tidb-cloud-serverless-cluster}
 
-1.  [無料のTiDBサーバーレスクラスターを作成する](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) 。クラスターに設定したルートパスワードを覚えておいてください。
+1.  [無料のTiDB Cloud Serverlessクラスターを作成する](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) 。クラスターに設定したルートパスワードを覚えておいてください。
 2.  後で使用するために、クラスターのホスト名、ポート、およびユーザー名を取得します。
 
     1.  [クラスター](https://tidbcloud.com/console/clusters)ページで、クラスター名をクリックしてクラスターの概要ページに移動します。
@@ -191,7 +191,7 @@ systemctl start docker
 
     </SimpleTab>
 
-3.  `proxysql-config.py`実行して ProxySQL 構成ファイルを生成します。
+3.  `proxysql-config.py`を実行して ProxySQL 構成ファイルを生成します。
 
     <SimpleTab groupId="os">
 
@@ -325,12 +325,12 @@ systemctl start docker
     >
     > 1.  クラスターのユーザー名とパスワードを使用してユーザーを追加します。
     > 2.  ユーザーを監視アカウントに割り当てます。
-    > 3.  TiDB Serverless クラスターをホストのリストに追加します。
-    > 4.  ProxySQL と TiDB Serverless クラスター間の安全な接続を有効にします。
+    > 3.  TiDB Cloud Serverless クラスターをホストのリストに追加します。
+    > 4.  ProxySQL とTiDB Cloud Serverless クラスター間の安全な接続を有効にします。
     >
     > より深く理解するために、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。ProxySQL 構成の詳細については、 [ProxySQL ドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
 
-    以下は出力例です。出力にクラスターのホスト名が表示されています。これは、ProxySQL と TiDB Serverless クラスター間の接続が確立されていることを意味します。
+    以下は出力例です。出力にクラスターのホスト名が表示されています。これは、ProxySQL とTiDB Cloud Serverless クラスター間の接続が確立されていることを意味します。
 
         *************************** 1. row ***************************
             hostgroup_id: 0
@@ -384,7 +384,7 @@ systemctl start docker
     SELECT VERSION();
     ```
 
-    TiDB のバージョンが表示されている場合は、ProxySQL を介して TiDB Serverless クラスターに正常に接続されています。MySQL クライアントをいつでも終了するには、 `quit`入力して<kbd>Enter キー</kbd>を押します。
+    TiDB のバージョンが表示されている場合は、ProxySQL を介してTiDB Cloud Serverless クラスターに正常に接続されています。MySQL クライアントをいつでも終了するには、 `quit`入力して<kbd>Enter キー</kbd>を押します。
 
     > **注記：**
     >
@@ -618,9 +618,9 @@ systemctl start docker
 
     </SimpleTab>
 
-## 本番環境 {#production-environment}
+## 生産環境 {#production-environment}
 
-本番環境では、完全に管理されたエクスペリエンスを実現するために[TiDB専用](https://www.pingcap.com/tidb-dedicated/)直接使用することをお勧めします。
+本番環境では、完全に管理されたエクスペリエンスを実現するために[TiDB Cloud専用](https://www.pingcap.com/tidb-dedicated/)直接使用することをお勧めします。
 
 ### 前提条件 {#prerequisite}
 
@@ -632,7 +632,7 @@ ProxySQL はさまざまなプラットフォームにインストールでき�
 
 サポートされているプラットフォームと対応するバージョン要件の完全なリストについては、 [ProxySQL ドキュメント](https://proxysql.com/documentation/installing-proxysql/)参照してください。
 
-#### ステップ1. TiDB専用クラスターを作成する {#step-1-create-a-tidb-dedicated-cluster}
+#### ステップ1. TiDB Cloud Dedicatedクラスタを作成する {#step-1-create-a-tidb-cloud-dedicated-cluster}
 
 詳細な手順については[TiDBクラスタを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)参照してください。
 
@@ -682,7 +682,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     上記の手順を実行すると、ProxySQL 管理者プロンプトが表示されます。
 
-2.  使用する TiDB クラスターを構成します。ここでは、1 つまたは複数の TiDB クラスターを ProxySQL に追加できます。次のステートメントは、たとえば`<tidb cloud dedicated cluster host>`つの TiDB 専用クラスターを追加します。1 と`<tidb cloud dedicated cluster port>` TiDB Cloudエンドポイントとポートに置き換える必要があります (デフォルトのポートは`4000`です)。
+2.  使用する TiDB クラスターを構成します。ここでは、1 つまたは複数の TiDB クラスターを ProxySQL に追加できます。次のステートメントは、たとえば`<tidb cloud dedicated cluster host>`つのTiDB Cloud Dedicated クラスターを追加します。1 と`<tidb cloud dedicated cluster port>` TiDB Cloudエンドポイントとポートに置き換える必要があります (デフォルトのポートは`4000`です)。
 
     ```sql
     INSERT INTO mysql_servers(hostgroup_id, hostname, port) 
@@ -1119,7 +1119,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
     </SimpleTab>
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 

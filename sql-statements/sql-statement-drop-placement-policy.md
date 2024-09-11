@@ -1,17 +1,17 @@
 ---
 title: DROP PLACEMENT POLICY
-summary: DROP PLACEMENT POLICYは以前の配置ポリシーを削除するために使用されます。配置ポリシーはテーブルやパーティションによって参照されていない場合にのみ削除できます。このステートメントはMySQL構文に対するTiDBの拡張機能です。
+summary: TiDB での ALTER PLACEMENT POLICY の使用法。
 ---
 
 # ドロップ配置ポリシー {#drop-placement-policy}
 
-`DROP PLACEMENT POLICY`は、以前に作成された配置ポリシーを削除するために使用されます。
+`DROP PLACEMENT POLICY` 、以前に作成された配置ポリシーを削除するために使用されます。
 
 > **注記：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 DropPolicyStmt ::=
@@ -23,7 +23,7 @@ PolicyName ::=
 
 ## 例 {#examples}
 
-配置ポリシーは、テーブルまたはパーティションによって参照されていない場合にのみ削除できます。
+配置ポリシーは、どのテーブルまたはパーティションからも参照されていない場合にのみ削除できます。
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
@@ -59,13 +59,13 @@ Query OK, 0 rows affected (0.08 sec)
 Query OK, 0 rows affected (0.21 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [SQL の配置ルール](/placement-rules-in-sql.md)
--   [配置を表示](/sql-statements/sql-statement-show-placement.md)
+-   [表示配置](/sql-statements/sql-statement-show-placement.md)
 -   [配置ポリシーの作成](/sql-statements/sql-statement-create-placement-policy.md)
 -   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)

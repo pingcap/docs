@@ -9,7 +9,7 @@ summary: TiDB Cloudの Vector Search を LlamaIndex と統合する方法を学�
 
 > **注記**
 >
-> -   TiDB Vector Search は現在ベータ版であり、 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでのみ使用できます。
+> -   TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
 > -   完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) Jupyter Notebook で表示したり、サンプル コードを[コラボ](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行したりできます。
 
 ## 前提条件 {#prerequisites}
@@ -19,7 +19,7 @@ summary: TiDB Cloudの Vector Search を LlamaIndex と統合する方法を学�
 -   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
 -   [ジュピターノートブック](https://jupyter.org/install)インストールされました。
 -   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB サーバーレス クラスター。TiDB クラウド クラスターがない場合は、 [TiDB サーバーレス クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成します。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
 ## 始める {#get-started}
 

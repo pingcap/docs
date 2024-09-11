@@ -64,13 +64,13 @@ TiDB は統計を使用して[どのインデックスを選択するか](/choos
 
 ![Equal-depth Histogram Example](/media/statistics-1.png)
 
-ヒストグラムのバケット数の上限を決定するパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。バケット数が多いほどヒストグラムの精度は高くなりますが、精度が高くなるとメモリリソースの使用量が増大します。実際のシナリオに応じて、この数値を適切に調整してください。
+ヒストグラムのバケット数の上限を決定するパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。バケット数が多いほどヒストグラムの精度は高くなりますが、精度が高くなるとメモリリソースの使用量が増大します。実際のシナリオに応じて、この数値を適切に調整できます。
 
 ## カウントミニマムスケッチ {#count-min-sketch}
 
 Count-Min Sketch はハッシュ構造です。等価クエリに`a = 1`または`IN`クエリ (たとえば`a in (1, 2, 3)` ) が含まれる場合、TiDB はこのデータ構造を使用して推定を行います。
 
-Count-Min Sketch `EXPLAIN`ハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。1 文で、等価クエリの推定値が実際の値と大きく異なる場合、大きい値と小さい値が一緒にハッシュされていると考えられます。この場合、ハッシュ衝突を回避するには、次のいずれかの方法を実行します。
+Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。 `EXPLAIN`文で、等価クエリの推定値が実際の値と大きく異なる場合、大きい値と小さい値が一緒にハッシュされていると考えられます。 この場合、ハッシュ衝突を回避するには、次のいずれかの方法を実行できます。
 
 -   `WITH NUM TOPN`パラメータを変更します。TiDB は高頻度 (上位 x) データを別々に保存し、その他のデータは Count-Min Sketch に保存します。したがって、大きい値と小さい値が一緒にハッシュされるのを防ぐには、 `WITH NUM TOPN`の値を増やすことができます。TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
 -   2 つのパラメータ`WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`を変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメータの値を適切に増やすと、ハッシュ衝突の確率を下げることができますが、統計のメモリ使用量が高くなります。TiDB では、デフォルト値`WITH NUM CMSKETCH DEPTH`は 5、デフォルト値`WITH NUM CMSKETCH WIDTH`は 2048 です。2 つのパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
@@ -152,7 +152,7 @@ v5.3.0 より前の TiDB では、統計を収集するためにリザーバ サ
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-    構文では、 `ColumnNameList`ターゲット列の名前リストを指定します。複数の列を指定する必要がある場合は、列名をコンマ`,`で区切ります。たとえば、 `ANALYZE table t columns a, b` 。この構文では、特定のテーブルの特定の列の統計を収集するだけでなく、インデックス付き列とそのテーブルのすべてのインデックスの統計も同時に収集します。
+    構文では、 `ColumnNameList`ターゲット列の名前リストを指定します。複数の列を指定する必要がある場合は、カンマ`,`を使用して列名を区切ります。たとえば、 `ANALYZE table t columns a, b` 。この構文では、特定のテーブルの特定の列の統計を収集するだけでなく、インデックス付き列とそのテーブルのすべてのインデックスの統計も同時に収集します。
 
     > **注記：**
     >
@@ -677,7 +677,7 @@ DROP STATS TableName GLOBAL;
 
 > **注記：**
 >
-> [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは読み込み統計は利用できません。
+> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは読み込み統計は利用できません。
 
 デフォルトでは、列統計のサイズに応じて、TiDB は次のように異なる方法で統計をロードします。
 
@@ -824,7 +824,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-さらに、 `LOCK STATS`使用してパーティションの統計をロックすることもできます。例:
+さらに、 `LOCK STATS`使用してパーティションの統計をロックすることもできます。次に例を示します。
 
 パーティション テーブル`t`を作成し、そこにデータを挿入します。パーティション`p1`の統計がロックされていない場合、 `ANALYZE`ステートメントは正常に実行できます。
 

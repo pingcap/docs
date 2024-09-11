@@ -15,7 +15,7 @@ TiDB は MySQL 互換のデータベースであり、 [タイプORM](https://gi
 
 > **注記**
 >
-> このチュートリアルは、TiDB Serverless、TiDB Dedicated、および TiDB Self-Hosted で機能します。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed で機能します。
 
 ## 前提条件 {#prerequisites}
 
@@ -29,13 +29,13 @@ TiDB は MySQL 互換のデータベースであり、 [タイプORM](https://gi
 
 <CustomContent platform="tidb">
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
--   (推奨) [TiDB サーバーレス クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   (推奨) [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
 -   [ローカルテストTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番のTiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
@@ -84,7 +84,7 @@ npm install @types/node ts-node typescript --save-dev
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -118,12 +118,12 @@ npm install @types/node ts-node typescript --save-dev
 
     > **注記**
     >
-    > TiDB Serverless の場合、パブリック エンドポイントを使用するときは、 `TIDB_ENABLE_SSL`経由で TLS 接続を有効にする**必要があります**。
+    > TiDB Cloud Serverless の場合、パブリック エンドポイントを使用するときは、 `TIDB_ENABLE_SSL`経由の TLS 接続を有効にする**必要があります**。
 
 7.  `.env`ファイルを保存します。
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -155,12 +155,12 @@ npm install @types/node ts-node typescript --save-dev
 
     > **注記**
     >
-    > TiDB Dedicated の場合、パブリックエンドポイントを使用する場合は、 `TIDB_ENABLE_SSL`経由で TLS 接続を有効にすることを**お勧めします**。 `TIDB_ENABLE_SSL=true`を設定する場合は、 `TIDB_CA_PATH=/path/to/ca.pem`経由で接続ダイアログからダウンロードした CA 証明書のパスを指定する**必要があります**。
+    > TiDB Cloud Dedicated の場合、パブリックエンドポイントを使用する場合は、 `TIDB_ENABLE_SSL`経由で TLS 接続を有効にすることを**お勧めします**。 `TIDB_ENABLE_SSL=true`を設定する場合は、 `TIDB_CA_PATH=/path/to/ca.pem`経由で接続ダイアログからダウンロードした CA 証明書のパスを指定する**必要があります**。
 
 6.  `.env`ファイルを保存します。
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -272,9 +272,9 @@ export const AppDataSource = new DataSource({
 
 > **注記**
 >
-> TiDB Serverless の場合、パブリックエンドポイントを使用するときは TLS 接続を有効にする必要があります。このサンプルコードでは、 `.env`ファイルの環境変数`TIDB_ENABLE_SSL`を`true`に設定してください。
+> TiDB Cloud Serverless の場合、パブリックエンドポイントを使用するときは TLS 接続を有効にする必要があります。このサンプルコードでは、 `.env`ファイルの環境変数`TIDB_ENABLE_SSL`を`true`に設定してください。
 >
-> ただし、Node.js はデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用し、これは TiDB Serverless によって信頼されているため、 `TIDB_CA_PATH`で SSL CA 証明書を指定する必要は**ありません**。
+> ただし、Node.js はデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用し、これはTiDB Cloud Serverless によって信頼されているため、 `TIDB_CA_PATH`で SSL CA 証明書を指定する必要は**ありません**。
 
 ### データを挿入 {#insert-data}
 

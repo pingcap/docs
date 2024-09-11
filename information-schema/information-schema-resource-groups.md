@@ -1,15 +1,15 @@
 ---
 title: RESOURCE_GROUPS
-summary: リソースグループ表には、すべてのリソースグループに関する情報が表示されます。TiDBサーバーレスクラスターでは使用できません。リソースグループの名前、バックフィル速度、優先度、および過剰なシステムリソースの使用を許可するかどうかが表示されます。TiDBは初期化中にデフォルトのリソースグループを自動的に作成します。
+summary: RESOURCE_GROUPS` information_schema テーブルについて学習します。
 ---
 
-# リソース_グループ {#resource-groups}
+# リソースグループ {#resource-groups}
 
 `RESOURCE_GROUPS`表には、すべてのリソース グループに関する情報が表示されます。詳細については、 [リソース制御を使用してリソースの分離を実現する](/tidb-resource-control.md)を参照してください。
 
 > **注記：**
 >
-> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -78,11 +78,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 
 `RESOURCE_GROUPS`の表の列の説明は次のとおりです。
 
--   `NAME` : リソースグループの名前。
--   `RU_PER_SEC` : リソース グループのバックフィル速度。単位は RU/秒で、RU は[リクエストユニット](/tidb-resource-control.md#what-is-request-unit-ru)を意味します。
--   `PRIORITY` : TiKV 上で処理されるタスクの絶対優先度。 `PRIORITY`設定に従って、さまざまなリソースがスケジュールされます。高`PRIORITY`のタスクが最初にスケジュールされます。同じ`PRIORITY`を持つリソース グループの場合、タスクは`RU_PER_SEC`構成に従って比例的にスケジュールされます。 `PRIORITY`が指定されていない場合、デフォルトの優先順位は`MEDIUM`です。
+-   `NAME` : リソース グループの名前。
+-   `RU_PER_SEC` : リソース グループのバックフィル速度。単位は RU/秒で、RU は[リクエストユニット](/tidb-resource-control.md#what-is-request-unit-ru)意味します。
+-   `PRIORITY` : TiKV で処理されるタスクの絶対的な優先度。 `PRIORITY`設定に従って、さまざまなリソースがスケジュールされます。 `PRIORITY`が高いタスクが最初にスケジュールされます。 `PRIORITY`が同じリソース グループの場合、タスクは`RU_PER_SEC`の構成に従って比例してスケジュールされます。 `PRIORITY`が指定されていない場合、デフォルトの優先度は`MEDIUM`です。
 -   `BURSTABLE` : リソース グループが利用可能なシステム リソースを過剰に使用することを許可するかどうか。
 
 > **注記：**
 >
-> TiDB は、クラスターの初期化中に`default`リソース グループを自動的に作成します。このリソース グループのデフォルト値`RU_PER_SEC`は`UNLIMITED` ( `INT`タイプの最大値、つまり`2147483647`に相当) で、 `BURSTABLE`モードです。どのリソース グループにもバインドされていないすべてのリクエストは、この`default`のリソース グループに自動的にバインドされます。別のリソース グループの新しい構成を作成する場合は、必要に応じて`default`リソース グループ構成を変更することをお勧めします。
+> TiDB は、クラスターの初期化中に`default`リソース グループを自動的に作成します。このリソース グループの場合、デフォルト値は`RU_PER_SEC`で、 `UNLIMITED` ( `INT`タイプの最大値である`2147483647`に相当) であり、 `BURSTABLE`モードです。どのリソース グループにもバインドされていないすべてのリクエストは、この`default`リソース グループに自動的にバインドされます。別のリソース グループに新しい構成を作成する場合は、必要に応じて`default`リソース グループの構成を変更することをお勧めします。

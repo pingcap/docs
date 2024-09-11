@@ -57,7 +57,7 @@ summary: TiDB システム テーブルについて学習します。
 
 > **注記：**
 >
-> GC ワーカー システム テーブルは TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> GC ワーカー システム テーブルは TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 -   `gc_delete_range` : 削除するKV範囲
 -   `gc_delete_range_done` : 削除されたKV範囲
@@ -103,7 +103,7 @@ summary: TiDB システム テーブルについて学習します。
 
 > **注記：**
 >
-> `tidb` 、 `expr_pushdown_blacklist` 、 `opt_rule_blacklist` 、 `table_cache_meta` 、 `tidb_import_jobs` 、および`tidb_timers`システム テーブルは TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> `tidb` 、 `expr_pushdown_blacklist` 、 `opt_rule_blacklist` 、 `table_cache_meta` 、 `tidb_import_jobs` 、および`tidb_timers`システム テーブルは TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 -   `GLOBAL_VARIABLES` : グローバルシステム変数テーブル
 -   `expr_pushdown_blacklist` : 式プッシュダウンのブロックリスト

@@ -11,15 +11,15 @@ summary: MySQL CLI 経由でTiDB Cloudにデータをインポートする方法
 
 MySQL CLI 経由でTiDB Cloudにデータをインポートするには、次の前提条件を満たす必要があります。
 
--   TiDB Cloudクラスターにアクセスできます。TiDB クラスターがない場合は、 [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)手順に従って作成してください。
+-   TiDB Cloudクラスターにアクセスできます。TiDB クラスターがない場合は、 [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)手順に従って作成してください。
 -   ローカル コンピュータに MySQL CLI をインストールします。
 
-## ステップ1. TiDB Cloudクラスタに接続する {#step-1-connect-to-your-tidb-cloud-cluster}
+## ステップ1. TiDB Cloudクラスターに接続する {#step-1-connect-to-your-tidb-cloud-cluster}
 
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -38,7 +38,7 @@ MySQL CLI 経由でTiDB Cloudにデータをインポートするには、次の
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成します。
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -46,7 +46,7 @@ MySQL CLI 経由でTiDB Cloudにデータをインポートするには、次の
 
 3.  **[どこからでもアクセスを許可] を**クリックします。
 
-    接続文字列を取得する方法の詳細については、 [パブリック接続経由で TiDB Dedicated に接続する](/tidb-cloud/connect-via-standard-connection.md)参照してください。
+    接続文字列を取得する方法の詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続する](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
 </div>
 </SimpleTab>

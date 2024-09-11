@@ -1,22 +1,22 @@
 ---
 title: METRICS_TABLES
-summary: METRICS_TABLESテーブルは、METRICS_SCHEMAデータベース内の各ビューのPromQL定義を提供します。このテーブルはTiDBセルフホスト型にのみ適用され、TiDB Cloudでは使用できません。テーブル名、PromQL、ラベル、パーセンタイル、コメントのフィールドが含まれます。これにより、監視テーブルの動作原理が説明されます。監視テーブルのデータをクエリすると、クエリ条件を使用してクエリ式が生成されます。5つのテーブルが示され、それぞれのテーブルにはTABLE_NAME、PROMQL、LABELS、QUANTILE、COMMENTの情報が含まれます。
+summary: METRICS_TABLES` システム テーブルについて学習します。
 ---
 
-# METRICS_TABLES {#metrics-tables}
+# メトリクス_テーブル {#metrics-tables}
 
-`METRICS_TABLES`テーブルは、 [`METRICS_SCHEMA`](/metrics-schema.md)データベース内の各ビューの PromQL (Prometheus Query Language) 定義を提供します。
+`METRICS_TABLES`テーブルは、 [`METRICS_SCHEMA`](/metrics-schema.md)データベース内の各ビューの PromQL (Prometheus クエリ言語) 定義を提供します。
 
 > **注記：**
 >
-> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> この表は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC METRICS_TABLES;
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 +------------+--------------+------+------+---------+-------+
@@ -32,17 +32,17 @@ DESC METRICS_TABLES;
 
 フィールドの説明:
 
--   `TABLE_NAME` ： `METRICS_SCHEMA`のテーブル名に対応します。
--   `PROMQL` : 監視テーブルの動作原理は、SQL ステートメントを`PromQL`にマップし、Prometheus の結果を SQL クエリの結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレート内の変数が書き換えられ、最終的なクエリ式が生成されます。
--   `LABELS` : 監視項目のラベル。各ラベルは監視テーブルの列に対応します。 SQL ステートメントに対応する列のフィルターが含まれている場合、対応する`PromQL`それに応じて変更されます。
--   `QUANTILE` : パーセンタイル。ヒストグラム タイプの監視データの場合、デフォルトのパーセンタイルが指定されます。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目がヒストグラムではないことを意味します。
+-   `TABLE_NAME` : `METRICS_SCHEMA`のテーブル名に対応します。
+-   `PROMQL` : 監視テーブルの動作原理は、SQL ステートメントを`PromQL`にマッピングし、Prometheus の結果を SQL クエリ結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレートの変数が書き換えられ、最終的なクエリ式が生成されます。
+-   `LABELS` : 監視項目のラベル。各ラベルは監視テーブル内の列に対応します。SQL 文に対応する列のフィルターが含まれている場合、対応する`PromQL`もそれに応じて変化します。
+-   `QUANTILE` : パーセンタイル。ヒストグラムタイプの監視データの場合、デフォルトのパーセンタイルが指定されます。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目はヒストグラムではないことを意味します。
 -   `COMMENT` : 監視テーブルに関するコメント。
 
 ```sql
 SELECT * FROM metrics_tables LIMIT 5\G
 ```
 
-出力は次のとおりです。
+出力は次のようになります。
 
 ```sql
 *************************** 1. row ***************************

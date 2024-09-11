@@ -21,7 +21,7 @@ SQL エディターの推奨される使用例は次のとおりです。
 
 -   AI によって生成された SQL クエリは 100% 正確ではない可能性があり、それを改良する必要がある場合があります。
 -   SQL エディターは、AWS でホストされている v6.5.0 以降の TiDB クラスターでのみサポートされます。
--   SQL エディターは、デフォルトで[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターで使用できます。SQL エディターと Chat2Query を[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+-   SQL エディターは、デフォルトで[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターで使用できます。SQL エディターと Chat2Query を[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
 ## SQL エディターにアクセスする {#access-sql-editor}
 
@@ -37,9 +37,9 @@ SQL エディターの推奨される使用例は次のとおりです。
     >
     > 次の場合、 **SQL エディターの**エントリは灰色で表示され、クリックできません。
     >
-    > -   TiDB 専用クラスターは v6.5.0 より前のバージョンです。SQL エディターを使用するには、契約[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)結んでクラスターをアップグレードする必要があります。
-    > -   TiDB 専用クラスターが作成されたばかりで、SQL エディターの実行環境はまだ準備中です。この場合は、数分待つと Chat2Query が利用可能になります。
-    > -   TiDB 専用クラスターは[一時停止](/tidb-cloud/pause-or-resume-tidb-cluster.md)です。
+    > -   TiDB Cloud Dedicated クラスターは v6.5.0 より前のバージョンです。SQL エディターを使用するには、契約[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)結んでクラスターをアップグレードする必要があります。
+    > -   TiDB Cloud Dedicated クラスターが作成されたばかりで、SQL エディターの実行環境はまだ準備中です。この場合は、数分待つと Chat2Query が利用可能になります。
+    > -   TiDB Cloud Dedicated クラスターは[一時停止](/tidb-cloud/pause-or-resume-tidb-cluster.md)です。
 
 ## AI による SQL クエリの生成を有効または無効にする {#enable-or-disable-ai-to-generate-sql-queries}
 

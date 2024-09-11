@@ -7,7 +7,7 @@ summary: ベクトル データ型で使用できる関数と演算子につい�
 
 > **注記：**
 >
-> ベクトル データ型とこれらのベクトル関数は、 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでのみ使用できます。
+> ベクトル データ型とこれらのベクトル関数は、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
 
 ## ベクトル関数 {#vector-functions}
 
@@ -57,7 +57,7 @@ summary: ベクトル データ型で使用できる関数と演算子につい�
 
 | 名前                                                                                                                  | 説明                  |
 | ------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| [`BETWEEN ... AND ...`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_between)         | 値が範囲内にあるかどうかを確認します  |
+| [`BETWEEN ... AND ...`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_between)         | 値が範囲内にあるかどうかを確認する   |
 | [`COALESCE()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)                 | 最初のNULL以外の引数を返す     |
 | [`=`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal)                             | 等号演算子               |
 | [`&#x3C;=>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal-to)                   | NULL セーフな等号演算子      |

@@ -9,7 +9,7 @@ summary: TiDB Vector Search を peewee と統合して埋め込みを保存し�
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
 
 ## 前提条件 {#prerequisites}
 
@@ -17,7 +17,7 @@ summary: TiDB Vector Search を peewee と統合して埋め込みを保存し�
 
 -   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
 -   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB サーバーレス クラスター。TiDB Cloud クラスターがない場合は、 [TiDB サーバーレス クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
 ## サンプルアプリを実行する {#run-the-sample-app}
 

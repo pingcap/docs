@@ -1,6 +1,6 @@
 ---
 title: PD Configuration File
-summary: Learn the PD configuration file.
+summary: PD 構成ファイルについて学習します。
 ---
 
 # PDコンフィグレーションファイル {#pd-configuration-file}
@@ -56,7 +56,7 @@ PD 構成ファイルは、コマンドライン パラメータよりも多く�
 
 -   ブートストラップのための初期クラスタ構成
 -   デフォルト値: `"{name}=http://{advertise-peer-url}"`
--   たとえば、 `name` 「pd」で、 `advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`になります。
+-   たとえば、 `name`が「pd」、 `advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`になります。
 -   3 つの PD サーバーを起動する必要がある場合、 `initial-cluster`は次のようになります。
 
         pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
@@ -153,7 +153,7 @@ pd-serverに関連するコンフィグレーション項目
 -   最小値: `0`
 -   最大値: `0.9`
 
-### <code>flow-round-by-digit</code> <span class="version-mark">TiDB 5.1 の新</span>機能 {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
+### <code>flow-round-by-digit</code> <span class="version-mark">TiDB 5.1 の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
 
 -   デフォルト値: 3
 -   PD はフロー番号の最下位桁を丸め、リージョンフロー情報の変更によって発生する統計の更新を減らします。この設定項目は、リージョンフロー情報の丸める最下位桁の数を指定するために使用されます。たとえば、フロー`100512`デフォルト値が`3`であるため`101000`に丸められます。この設定は`trace-region-flow`を置き​​換えます。
@@ -293,7 +293,7 @@ pd-serverに関連するコンフィグレーション項目
 
 ### <code>max-store-preparing-time</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-max-store-preparing-time-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   ストアがオンラインになるまでの最大待機時間を制御します。ストアのオンライン段階では、PD はストアのオンライン進行状況を照会できます。指定された時間を超えると、PD はストアがオンラインになったと想定し、ストアのオンライン進行状況を再度照会できなくなります。ただし、これによってリージョンが新しいオンライン ストアに転送されることが防止されるわけではありません。ほとんどのシナリオでは、このパラメータを調整する必要はありません。
+-   ストアがオンラインになるまでの最大待機時間を制御します。ストアのオンライン段階では、PD はストアのオンライン進行状況を照会できます。指定された時間を超えると、PD はストアがオンラインになったと想定し、ストアのオンライン進行状況を再度照会できなくなります。ただし、これによってリージョンが新しいオンライン ストアに転送されることが妨げられることはありません。ほとんどのシナリオでは、このパラメータを調整する必要はありません。
 -   デフォルト値: `48h`
 
 ### <code>leader-schedule-limit</code> {#code-leader-schedule-limit-code}
@@ -323,7 +323,7 @@ pd-serverに関連するコンフィグレーション項目
 
 ### <code>replica-schedule-limit</code> {#code-replica-schedule-limit-code}
 
--   同時に実行されるレプリカスケジュールタスクの数
+-   同時に実行されるレプリカ スケジューリング タスクの数
 -   デフォルト値: `64`
 
 ### <code>merge-schedule-limit</code> {#code-merge-schedule-limit-code}
@@ -429,16 +429,20 @@ pd-serverに関連するコンフィグレーション項目
 -   デフォルト値: `true`
 -   [配置ルール](/configure-placement-rules.md)参照。
 
-## <code>label-property</code> {#code-label-property-code}
+## <code>label-property</code> (非推奨) {#code-label-property-code-deprecated}
 
-ラベルに関するコンフィグレーション項目
+ラベルに関連するコンフィグレーション項目。1 種類のみ`reject-leader`サポートします。
 
-### <code>key</code> {#code-key-code}
+> **注記：**
+>
+> v5.2 以降では、ラベルに関連する設定項目は非推奨になりました。レプリカ ポリシーを設定するには、 [配置ルール](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center)を使用することをお勧めします。
+
+### <code>key</code> （非推奨） {#code-key-code-deprecated}
 
 -   Leaderを拒否したストアのラベルキー
 -   デフォルト値: `""`
 
-### <code>value</code> {#code-value-code}
+### <code>value</code> (非推奨) {#code-value-code-deprecated}
 
 -   Leaderを拒否した店舗のラベル値
 -   デフォルト値: `""`

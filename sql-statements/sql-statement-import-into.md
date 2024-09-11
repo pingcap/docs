@@ -24,9 +24,10 @@ TiDB Self-Hosted の場合、 `IMPORT INTO` Amazon S3、GCS、および TiDB ロ
 
 -   TiDB Self-Hosted の場合、 `IMPORT INTO` 10 TiB 以内のデータのインポートをサポートします。3 [TiDB専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated)場合、 `IMPORT INTO` 50 GiB 以内のデータのインポートをサポートします。
 -   `IMPORT INTO` 、データベース内の既存の空のテーブルへのデータのインポートのみをサポートします。
+-   `IMPORT INTO` [一時テーブル](/temporary-tables.md)または[キャッシュされたテーブル](/cached-tables.md)へのデータのインポートをサポートしていません。
 -   `IMPORT INTO`トランザクションやロールバックをサポートしていません。明示的なトランザクション ( `BEGIN` / `END` ) 内で`IMPORT INTO`を実行すると、エラーが返されます。
 -   `IMPORT INTO`を実行すると、インポートが完了するまで現在の接続がブロックされます。ステートメントを非同期で実行するには、 `DETACHED`オプションを追加できます。
--   `IMPORT INTO` 、 [復元する](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 、 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 、 [インデックス追加の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 、 TiDB Lightningを使用したデータのインポート、 TiCDC を使用したデータのレプリケーション、 [ポイントインタイムリカバリ (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture)などの機能と同時に動作することはサポートされていません。
+-   `IMPORT INTO` 、 [バックアップと復元](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 、 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 、 [インデックス追加の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 、 TiDB Lightningを使用したデータのインポート、 TiCDC を使用したデータのレプリケーション、 [ポイントインタイムリカバリ (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture)などの機能と同時に動作することはサポートされていません。
 -   一度にクラスターで実行できるジョブは`IMPORT INTO`つだけです。 `IMPORT INTO`実行中のジョブの事前チェックを実行しますが、これは厳密な制限ではありません。複数のクライアントが同時に`IMPORT INTO`実行する場合は、複数のインポート ジョブを開始できる可能性がありますが、データの不整合やインポートの失敗が発生する可能性があるため、これを避ける必要があります。
 -   データのインポート プロセス中は、ターゲット テーブルに対して DDL または DML 操作を実行しないでください。また、ターゲット データベースに対して[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)実行しないでください。これらの操作は、インポートの失敗やデータの不整合につながる可能性があります。また、読み取られるデータに不整合がある可能性があるため、インポート プロセス中に読み取り操作を実行することは推奨され**ません**。読み取りおよび書き込み操作は、インポートが完了した後にのみ実行してください。
 -   インポート プロセスはシステム リソースを大量に消費します。TiDB Self-Hosted の場合、パフォーマンスを向上させるには、少なくとも 32 個のコアと 64 GiB のメモリを備えた TiDB ノードを使用することをお勧めします。TiDB はインポート中にソートされたデータを TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)に書き込むため、フラッシュメモリなどの高性能なstorageメディアを TiDB Self-Hosted 用に構成することをお勧めします。詳細については、 [物理インポートモードの制限](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions)を参照してください。
@@ -36,7 +37,7 @@ TiDB Self-Hosted の場合、 `IMPORT INTO` Amazon S3、GCS、および TiDB ロ
 -   [グローバルソート](/tidb-global-sort.md)機能をデータのインポートに使用する場合、エンコード後の 1 行のデータ サイズは 32 MiB を超えてはなりません。
 -   データのインポートにグローバルソート機能を使用する場合、インポートタスクが完了する前にターゲット TiDB クラスターが削除されると、グローバルソートに使用された一時データが Amazon S3 に残る可能性があります。この場合、S3storageコストの増加を避けるために、残りのデータを手動で削除する必要があります。
 -   インポートするデータに、主キーまたは null 以外の一意のインデックスの競合があるレコードが含まれていないことを確認してください。そうでない場合、競合によりインポート タスクが失敗する可能性があります。
--   Distributed eXecution Framework (DXF) によってスケジュールされた`IMPORT INTO`タスクがすでに実行されている場合、新しい TiDB ノードにスケジュールすることはできません。データ インポート タスクを実行する TiDB ノードが再起動されると、データ インポート タスクは実行されなくなり、別の TiDB ノードにタスクが転送されて実行が継続されます。ただし、インポートされたデータがローカル ファイルからのものである場合、タスクは別の TiDB ノードに転送されて実行が継続されることはありません。
+-   Distributed eXecution Framework (DXF) によってスケジュールされた`IMPORT INTO`タスクがすでに実行中の場合、新しい TiDB ノードにスケジュールすることはできません。データ インポート タスクを実行する TiDB ノードが再起動されると、データ インポート タスクは実行されなくなり、別の TiDB ノードにタスクが転送されて実行が継続されます。ただし、インポートされたデータがローカル ファイルからのものである場合、タスクは別の TiDB ノードに転送されて実行が継続されることはありません。
 -   既知の問題: TiDB ノード構成ファイル内の PD アドレスがクラスターの現在の PD トポロジと一致しない場合、タスク`IMPORT INTO`が失敗する可能性があります。この不一致は、PD が以前にスケールインされたが、TiDB 構成ファイルがそれに応じて更新されなかった場合や、構成ファイルの更新後に TiDB ノードが再起動されなかった場合などに発生する可能性があります。
 
 ## インポートの前提条件 {#prerequisites-for-import}
@@ -45,7 +46,7 @@ TiDB Self-Hosted の場合、 `IMPORT INTO` Amazon S3、GCS、および TiDB ロ
 
 -   インポート対象のテーブルは TiDB にすでに作成されており、空です。
 -   ターゲット クラスターには、インポートするデータを保存するのに十分なスペースがあります。
--   TiDB セルフホストの場合、現在のセッションに接続されている TiDB ノードの[一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)少なくとも 90 GiB の使用可能な領域があります。3 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)有効になっている場合は、クラスター内の各 TiDB ノードの一時ディレクトリに十分なディスク領域があることも確認してください。
+-   TiDB Self-Managed の場合、現在のセッションに接続されている TiDB ノードの[一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) 、少なくとも 90 GiB の使用可能な領域があります。3 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)有効になっている場合は、クラスター内の各 TiDB ノードの一時ディレクトリに十分なディスク領域があることも確認してください。
 
 ## 必要な権限 {#required-privileges}
 
@@ -111,7 +112,7 @@ OptionItem ::=
 -   指定されたパス内のプレフィックスが`foo`であるすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*`
 -   指定されたパスにあるプレフィックス`foo`とサフィックス`.csv`を持つすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*.csv`
 
-### フォーマット {#format}
+### 形式 {#format}
 
 `IMPORT INTO`ステートメントは、 `CSV` 、 `SQL` 、 `PARQUET` 3 つのデータ ファイル形式をサポートします。指定しない場合は、デフォルトの形式は`CSV`になります。
 

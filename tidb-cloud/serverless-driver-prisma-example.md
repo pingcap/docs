@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Serverless Driver Prisma Tutorial
-summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
+summary: Prisma ORM でTiDB Cloudサーバーレス ドライバーを使用する方法を学習します。
 ---
 
 # TiDB CloudレスDriverPrisma チュートリアル {#tidb-cloud-serverless-driver-prisma-tutorial}
@@ -60,13 +60,13 @@ const prisma = new PrismaClient({ adapter });
 
 このセクションでは、Node.js 環境で`@tidbcloud/prisma-adapter`使用する方法の例を示します。
 
-### あなたが始める前に {#before-you-begin}
+### 始める前に {#before-you-begin}
 
 このチュートリアルを完了するには、次のものが必要です。
 
 -   [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 -   [ネプ](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)またはお好みのパッケージ マネージャーを使用します。
--   TiDB サーバーレス クラスター。ない場合は、 [TiDBサーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
+-   TiDB Cloud Serverless クラスター。ない場合は、 [TiDB Cloud Serverless クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)使用できます。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -101,7 +101,7 @@ const prisma = new PrismaClient({ adapter });
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  TiDB Serverless クラスターの概要ページで、右上隅の**[接続]**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1.  TiDB Cloud Serverless クラスターの概要ページで、右上隅の**[接続]**をクリックし、表示されるダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
         mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
 
@@ -154,11 +154,11 @@ const prisma = new PrismaClient({ adapter });
           name  String? @db.VarChar(255)
         }
 
-3.  データベースを Prisma スキーマと同期します。TiDB Serverless クラスターにデータベース テーブルを手動で作成することも、次のように Prisma CLI を使用して自動的に作成することもできます。
+3.  データベースを Prisma スキーマと同期します。TiDB TiDB Cloud Serverless クラスターにデータベース テーブルを手動で作成することも、次のように Prisma CLI を使用して自動的に作成することもできます。
 
         npx prisma db push
 
-    このコマンドは、 `@tidbcloud/prisma-adapter`を使用した HTTPS 接続ではなく、従来の TCP 接続を介して TiDB Serverless クラスターに`user`テーブルを作成します。これは、Prisma Migrate と同じエンジンを使用するためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成する](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
+    このコマンドは、 `@tidbcloud/prisma-adapter`を使用した HTTPS 接続ではなく、従来の TCP 接続を介してTiDB Cloud Serverless クラスターに`user`テーブルを作成します。これは、Prisma Migrate と同じエンジンを使用するためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成する](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
 
 4.  Prisma クライアントを生成します:
 

@@ -1,31 +1,31 @@
 ---
-title: Manage TiDB Serverless Branches
-summary: TiDB Cloudコンソールを使用してTiDBサーバーレスブランチを管理する方法について説明します。必要なアクセスは、組織の役割に属している必要があります。ブランチを作成するには、TiDB Cloudコンソールでプロジェクトのクラスターページに移動し、ブランチを作成します。ブランチを表示するには、クラスターのブランチを表示します。ブランチに接続するには、接続情報を使用してブランチに接続します。ブランチを削除するには、削除するターゲットブランチの行で削除をクリックします。
+title: Manage TiDB Cloud Serverless Branches
+summary: TiDB Cloud Serverless ブランチを管理する方法を学習します。
 ---
 
-# TiDB サーバーレス ブランチの管理 {#manage-tidb-serverless-branches}
+# TiDB Cloudサーバーレス ブランチの管理 {#manage-tidb-cloud-serverless-branches}
 
-このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com)を使用して TiDB サーバーレス ブランチを管理する方法について説明します。 TiDB Cloud CLI を使用して管理するには、 [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md)を参照してください。
+このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com)使用してTiDB Cloud Serverless ブランチを管理する方法について説明します。TiDB TiDB Cloud CLI を使用して管理するには、 [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md)を参照してください。
 
 ## 必要なアクセス {#required-access}
 
--   [ブランチを作成する](#create-a-branch)または[ブランチに接続する](#connect-to-a-branch)を行うには、組織の`Organization Owner`役割、または対象プロジェクトの`Project Owner`役割に属している必要があります。
--   プロジェクト内のクラスターの[ブランチを表示する](#create-a-branch)は、そのプロジェクトに属している必要があります。
+-   [ブランチを作成する](#create-a-branch)または[ブランチに接続する](#connect-to-a-branch)実行するには、組織の`Organization Owner`のロールまたは対象プロジェクトの`Project Owner`のロールに所属している必要があります。
+-   プロジェクト内のクラスターを[ブランチを表示](#create-a-branch)作成するには、そのプロジェクトに属している必要があります。
 
-権限の詳細については、 [ユーザーの役割](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
+権限の詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)参照してください。
 
 ## ブランチを作成する {#create-a-branch}
 
 > **注記：**
 >
-> 2023 年 7 月 5 日以降に作成された TiDB サーバーレス クラスターのブランチのみを作成できます。その他の制限事項については、 [制限と割り当て](/tidb-cloud/branch-overview.md#limitations-and-quotas)を参照してください。
+> 2023 年 7 月 5 日以降に作成されたTiDB Cloud Serverless クラスターに対してのみブランチを作成できます。その他の制限については[制限と割り当て](/tidb-cloud/branch-overview.md#limitations-and-quotas)参照してください。
 
 ブランチを作成するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット TiDB サーバーレス クラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーション ペインで**[ブランチ]**をクリックします。
-3.  右上隅にある**「ブランチの作成」**をクリックします。
-4.  ブランチ名を入力し、 **[作成]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
+2.  左側のナビゲーション ペインで**[ブランチ] を**クリックします。
+3.  右上隅の**「ブランチの作成」を**クリックします。
+4.  ブランチ名を入力し、 **「作成」を**クリックします。
 
 クラスター内のデータ サイズに応じて、ブランチの作成は数分で完了します。
 
@@ -33,36 +33,40 @@ summary: TiDB Cloudコンソールを使用してTiDBサーバーレスブラン
 
 クラスターのブランチを表示するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット TiDB サーバーレス クラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーション ペインで**[ブランチ]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
+2.  左側のナビゲーション ペインで**[ブランチ] を**クリックします。
 
-    クラスターのブランチリストが右側のペインに表示されます。
+    クラスターのブランチ リストが右側のペインに表示されます。
 
 ## ブランチに接続する {#connect-to-a-branch}
 
 ブランチに接続するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット TiDB サーバーレス クラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーション ペインで**[ブランチ]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
+2.  左側のナビゲーション ペインで**[ブランチ] を**クリックします。
 3.  接続するターゲット ブランチの行で、 **[アクション]**列の**[...]**をクリックします。
-4.  ドロップダウン リストで**[接続]**をクリックします。接続情報のダイアログが表示されます。
-5.  **「パスワードの作成」**または**「パスワードのリセット」**をクリックして、root パスワードを作成またはリセットします。
+4.  ドロップダウン リストで**[接続] を**クリックします。接続情報のダイアログが表示されます。
+5.  ルート パスワードを作成またはリセットするには、 **「パスワードの生成」**または**「パスワードのリセット」**をクリックします。
 6.  接続情報を使用してブランチに接続します。
 
-> **注記：**
->
-> 現在、ブランチは[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)をサポートしていません。
+あるいは、クラスターの概要ページから接続文字列を取得することもできます。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
+2.  右上隅の**「接続」を**クリックします。
+3.  `Branch`ドロップダウン リストから接続するブランチを選択します。
+4.  ルート パスワードを作成またはリセットするには、 **「パスワードの生成」**または**「パスワードのリセット」**をクリックします。
+5.  接続情報を使用してブランチに接続します。
 
 ## ブランチを削除する {#delete-a-branch}
 
 ブランチを削除するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット TiDB サーバーレス クラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーション ペインで**[ブランチ]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、その概要ページに移動します。
+2.  左側のナビゲーション ペインで**[ブランチ] を**クリックします。
 3.  削除するターゲット ブランチの行で、 **[アクション]**列の**[...]**をクリックします。
-4.  ドロップダウン リストで**[削除]**をクリックします。
+4.  ドロップダウンリストで**「削除」を**クリックします。
 5.  削除を確認します。
 
-## 次は何ですか {#what-s-next}
+## 次は何か {#what-s-next}
 
--   [TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合](/tidb-cloud/branch-github-integration.md)
+-   [TiDB Cloud Serverless ブランチを GitHub CI/CD パイプラインに統合する](/tidb-cloud/branch-github-integration.md)

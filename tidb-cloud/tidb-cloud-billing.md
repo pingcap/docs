@@ -7,12 +7,12 @@ summary: TiDB Cloud の課金について学びます。
 
 > **注記：**
 >
-> 2023年5月31日までは[TiDB サーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)が無料、100%割引となります。それ以降は[無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)を超えた分は有料となります。
+> 2023年5月31日までは[TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)が無料、100%割引となります。それ以降は[無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)を超えた分は有料となります。
 
 TiDB Cloud は、消費したリソースに応じて料金を請求します。料金の詳細については、次のページをご覧ください。
 
--   [TiDB サーバーレスの価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/)
--   [TiDB 専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)
+-   [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/)
+-   [TiDB Cloud専用料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)
 
 ## 請求書 {#invoices}
 
@@ -30,7 +30,7 @@ TiDB Cloud は、消費したリソースに応じて料金を請求します。
 
 毎月の請求書ごとに:
 
--   TiDB Cloud は毎月 9 日に請求書を発行します。1 日から 9 日までは前月のコストの詳細を表示できませんが、課金コンソールから今月のクラスター使用状況情報を取得できます。
+-   TiDB Cloud は毎月 9 日に請求書を発行します。1 日から 9 日までは前月のコストの詳細を表示できませんが、課金コンソールから今月のクラスターの使用状況情報を取得できます。
 -   請求書の支払いのデフォルトの方法は、クレジットカードによる引き落としです。他の支払い方法をご希望の場合は、チケットリクエストを送信してお知らせください。
 -   当月と前月の料金の概要と詳細をご覧いただけます。
 
@@ -50,7 +50,7 @@ TiDB Cloud は、消費したリソースに応じて料金を請求します。
 
 3.  **「請求書」**タブをクリックします。請求書ページが表示されます。
 
-## 支払明細 {#billing-details}
+## 請求の詳細 {#billing-details}
 
 組織で`Organization Owner`または`Organization Billing Admin`ロールを担っている場合は、 TiDB Cloudの課金の詳細を表示およびエクスポートできます。それ以外の場合は、このセクションをスキップしてください。
 
@@ -78,7 +78,7 @@ TiDB Cloud は、消費したリソースに応じて料金を請求します。
 >
 > 精度の違いにより、月額請求書の合計金額が毎日の使用量の詳細と異なる場合があります。
 >
-> -   毎月の請求金額の合計額は小数点第2位まで切り捨てられます。
+> -   毎月の請求書の合計金額は小数点第2位まで切り捨てられます。
 > -   1日あたりの使用量明細の合計金額は小数点第6位まで正確です。
 
 ## コストエクスプローラー {#cost-explorer}

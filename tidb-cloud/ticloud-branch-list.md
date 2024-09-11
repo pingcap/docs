@@ -1,11 +1,11 @@
 ---
 title: ticloud serverless branch list
-summary: The reference of `ticloud serverless branch list`.
+summary: ticloud serverless branch list` のリファレンス。
 ---
 
 # ticloud サーバーレス ブランチ リスト {#ticloud-serverless-branch-list}
 
-TiDB Serverless クラスターのすべてのブランチを一覧表示します。
+TiDB Cloud Serverless クラスターのすべてのブランチを一覧表示します。
 
 ```shell
 ticloud serverless branch list <cluster-id> [flags]
@@ -19,19 +19,19 @@ ticloud serverless branch ls <cluster-id> [flags]
 
 ## 例 {#examples}
 
-対話モードで TiDB Serverless クラスターのすべてのブランチを一覧表示します。
+インタラクティブ モードでTiDB Cloud Serverless クラスターのすべてのブランチを一覧表示します。
 
 ```shell
 ticloud serverless branch list
 ```
 
-非対話モードで特定の TiDB Serverless クラスターのすべてのブランチを一覧表示します。
+非対話モードで特定のTiDB Cloud Serverless クラスターのすべてのブランチを一覧表示します。
 
 ```shell
 ticloud serverless branch list -c <cluster-id>
 ```
 
-特定の TiDB Serverless クラスターのすべてのブランチを JSON 形式で一覧表示します。
+特定のTiDB Cloud Serverless クラスターのすべてのブランチを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless branch list <cluster-id> -o json
@@ -39,7 +39,7 @@ ticloud serverless branch list <cluster-id> -o json
 
 ## 旗 {#flags}
 
-非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
 | フラグ                  | 説明                                                                              | 必須  | 注記                       |
 | -------------------- | ------------------------------------------------------------------------------- | --- | ------------------------ |
@@ -49,11 +49,11 @@ ticloud serverless branch list <cluster-id> -o json
 
 ## 継承されたフラグ {#inherited-flags}
 
-| フラグ               | 説明                                                                             | 必須  | 注記                                                             |
-| ----------------- | ------------------------------------------------------------------------------ | --- | -------------------------------------------------------------- |
-| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
-| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                           |
+| ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------------ |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                     |
+| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                     |
 
 ## フィードバック {#feedback}
 

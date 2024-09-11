@@ -1,21 +1,21 @@
 ---
-title: Manage Spending Limit for TiDB Serverless Scalable Clusters
-summary: TiDB サーバーレス スケーラブル クラスターの支出制限を管理する方法を学びます。
+title: Manage Spending Limit for TiDB Cloud Serverless Scalable Clusters
+summary: TiDB Cloud Serverless スケーラブル クラスターの支出制限を管理する方法を学びます。
 ---
 
-# TiDB サーバーレス スケーラブル クラスターの支出制限を管理する {#manage-spending-limit-for-tidb-serverless-scalable-clusters}
+# TiDB Cloudサーバーレス スケーラブル クラスターの支出制限を管理する {#manage-spending-limit-for-tidb-cloud-serverless-scalable-clusters}
 
 > **注記：**
 >
-> 使用制限は TiDB Serverless [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)にのみ適用されます。
+> 使用制限はTiDB Cloud Serverless [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)にのみ適用されます。
 
-支出限度額とは、特定のワークロードに 1 か月に費やすことができる最大金額を指します。これは、TiDB Serverless スケーラブル クラスターの予算を設定できるコスト管理メカニズムです。
+支出限度額とは、1 か月に特定のワークロードに費やせる最大金額を指します。これは、 TiDB Cloud Serverless スケーラブル クラスターの予算を設定できるコスト管理メカニズムです。
 
-TiDB Cloudの各組織では、デフォルトで最大[フリークラスター](/tidb-cloud/select-cluster-tier.md#free-cluster-plan)つのクラスターを作成できます。TiDB Serverless クラスターをさらに作成するには、クレジットカードを追加し、使用に合わせてスケーラブルなクラスターを作成する必要があります。ただし、クラスターをさらに作成する前に以前のクラスターの一部を削除すれば、クレジットカードがなくても新しいクラスターを作成できます。
+TiDB Cloudの各組織では、デフォルトで最大[フリークラスター](/tidb-cloud/select-cluster-tier.md#free-cluster-plan)つのクラスターを作成できます。TiDB TiDB Cloud Serverless クラスターをさらに作成するには、クレジットカードを追加し、使用に合わせてスケーラブルなクラスターを作成する必要があります。ただし、クラスターをさらに作成する前に以前のクラスターの一部を削除すれば、クレジットカードがなくても新しいクラスターを作成できます。
 
 ## 使用量制限 {#usage-quota}
 
-組織内の最初の 5 つの TiDB Serverless クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud はそれぞれに対して次のように無料使用量割り当てを提供します。
+組織内の最初の 5 つのTiDB Cloud Serverless クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud はそれぞれに対して次のように無料使用量割り当てを提供します。
 
 -   行ベースのstorage: 5 GiB
 -   列型storage: 5 GiB
@@ -23,15 +23,15 @@ TiDB Cloudの各組織では、デフォルトで最大[フリークラスター
 
 クラスターが使用量の割り当てに達すると、新しい月の開始時に使用量がリセットされるか、 [割り当てを増やす](#update-spending-limit)なるまで、クラスターは新しい接続試行を直ちに拒否します。割り当てに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。たとえば、クラスターの行ベースのstorageが空きクラスターに対して 5 GiB を超えると、クラスターは新しい接続試行を自動的に制限します。
 
-さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB サーバーレスの価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
 
-追加のクォータを持つ TiDB Serverless クラスターを作成する場合は、クラスター作成ページで使用制限を編集できます。詳細については、 [TiDB サーバーレス クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)参照してください。
+追加のクォータを持つTiDB Cloud Serverless クラスターを作成する場合は、クラスター作成ページで使用制限を編集できます。詳細については、 [TiDB Cloud Serverless クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)参照してください。
 
 ## 支出限度額の更新 {#update-spending-limit}
 
-TiDB Serverless の無料クラスターの場合、スケーラブル クラスターにアップグレードすることで使用量の割り当てを増やすことができます。既存のスケーラブル クラスターの場合は、月間使用制限を直接調整できます。
+TiDB Cloud Serverless の無料クラスターの場合、スケーラブル クラスターにアップグレードすることで使用量クォータを増やすことができます。既存のスケーラブル クラスターの場合は、月間使用制限を直接調整できます。
 
-TiDB Serverless クラスターの使用制限を更新するには、次の手順を実行します。
+TiDB Cloud Serverless クラスターの使用制限を更新するには、次の手順を実行します。
 
 1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
 
