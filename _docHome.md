@@ -40,7 +40,7 @@ Explore native support of Vector Search in TiDB Cloud Serverless to build your A
 
 <DocHomeCard href="/tidbcloud/tidb-cloud-roadmap" label="TiDB Cloud Roadmap" icon="cloud-roadmap-mauve">
 
-Planned features and release dates for TiDB Cloud.
+Planned features and releases for TiDB Cloud.
 
 </DocHomeCard>
 
@@ -108,31 +108,31 @@ The open-source TiDB platform is released under the Apache 2.0 license and is su
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://en.pingcap.com/education/" label="Learning Center" icon="global-tidb-education">
+<DocHomeCard href="https://www.pingcap.com/education/" label="Learning Center" icon="global-tidb-education">
 
 Learn TiDB Cloud and TiDB Self-Managed through well-designed online courses and instructor-led training.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/blog/" label="Blog" icon="global-tidb-blog">
+<DocHomeCard href="https://www.pingcap.com/blog/" label="Blog" icon="global-tidb-blog">
 
 Read great articles about TiDB Cloud and TiDB Self-Managed.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/event/" label="Events" icon="global-tidb-events">
+<DocHomeCard href="https://www.pingcap.com/event/" label="Events" icon="global-tidb-events">
 
 Learn about events hosted by PingCAP and the community.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/ebook-whitepaper/" label="eBooks & Papers" icon="global-tidb-ebook">
+<DocHomeCard href="https://www.pingcap.com/ebook-whitepaper/" label="eBooks & Papers" icon="global-tidb-ebook">
 
 Download eBooks and papers.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/videos/" label="Videos" icon="global-tidb-video">
+<DocHomeCard href="https://www.pingcap.com/videos/" label="Videos" icon="global-tidb-video">
 
 Watch a compilation of short videos describing TiDB and various use cases.
 
