@@ -1,5 +1,5 @@
 ---
-title: TiDB Cloud Documentation
+title: TiDB Cloud 
 aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
