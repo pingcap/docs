@@ -1,6 +1,6 @@
 ---
 title: Developer Guide Overview
-summary: Introduce the overview of the developer guide.
+summary: Introduce the overview of the developer guide for TiDB Cloud and TiDB Self-Managed.
 ---
 
 # Developer Guide Overview
