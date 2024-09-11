@@ -4392,7 +4392,7 @@ mysql> desc select count(distinct a) from test.t;
 
 > **Note:**
 >
-> Starting from v8.4.0, the default for this variable was changed from `OFF` to `ON`.
+> Starting from v8.4.0, the default value of this variable is changed from `OFF` to `ON`.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
