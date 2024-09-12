@@ -106,7 +106,7 @@ A [primary key](/constraints.md#primary-key) is a column or a set of columns in 
 >
 > - In **InnoDB**: A **primary key** is unique, not null, and **index clustered**.
 >
-> - In TiDB: A **primary key** is unique and is not null. But the primary key is not guaranteed to be a **clustered index**. Instead, another set of keywords `CLUSTERED` / `NONCLUSTERED` additionally controls whether the **primary key** is a **clustered index**. If the keyword is not specified, it is controlled by the system variable `@@global.tidb_enable_clustered_index`, as described in [clustered indexes](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes).
+> - In TiDB: A **primary key** is unique and is not null. But the primary key is not guaranteed to be a **clustered index**. Instead, another set of keywords `CLUSTERED` / `NONCLUSTERED` additionally controls whether the **primary key** is a **clustered index**. If the keyword is not specified, it is controlled by the system variable `@@global.tidb_enable_clustered_index`, as described in [clustered indexes](https://docs.pingcap.com/tidb/stable/clustered-indexes).
 
 The **primary key** is defined in the `CREATE TABLE` statement. The [primary key constraint](/constraints.md#primary-key) requires that all constrained columns contain only non-NULL values.
 

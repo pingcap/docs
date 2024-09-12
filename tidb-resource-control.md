@@ -159,9 +159,9 @@ You can view the [Resource Manager page](/dashboard/dashboard-resource-manager.m
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Self-Managed, you can use the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource) statement to estimate the cluster capacity.
+For TiDB Self-Managed, you can use the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource) statement to estimate the cluster capacity.
 
-For TiDB Cloud, the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource) statement is inapplicable.
+For TiDB Cloud, the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource) statement is inapplicable.
 
 </CustomContent>
 
