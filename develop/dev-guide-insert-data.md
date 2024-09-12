@@ -290,7 +290,7 @@ There are two solutions to handle this error:
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
-- If you are sure that you **_must_** specify this column, then you can use the [`SET` statement](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable) to allow the column of `AUTO_RANDOM` to be specified during insertion time by changing the user variable.
+- If you are sure that you **_must_** specify this column, then you can use the [`SET` statement](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable) to allow the column of `AUTO_RANDOM` to be specified during insertion time by changing the user variable.
 
     {{< copyable "sql" >}}
 
