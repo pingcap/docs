@@ -3250,6 +3250,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_hash_join_use_impl_v2 <span class="version-mark">New v8.4.0</span>
 
+> **Warning:**
+>
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -3257,9 +3261,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `OFF`
 - This variable is used to control whether use hash join implementation v2 in TiDB. The value is `OFF` by default. If it is set to `ON`, TiDB will use hash join implementaion v2 to execute hash join, which is expected to have better performance.
 - Currently only inner join and outer join support hash join implementation v2, so for other joins, even if `tidb_hash_join_use_impl_v2` is set to `ON`, it will still use the original implementation.
-> **Warning:**
->
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ### tidb_hashagg_final_concurrency
 
