@@ -50,6 +50,8 @@ The allow list of DDL statements supported by TiCDC is as follows:
 
 When the downstream is TiDB, TiCDC executes `ADD INDEX` and `CREATE INDEX` DDL operations asynchronously to minimize the impact on changefeed replication latency. This means that, after replicating `ADD INDEX` and `CREATE INDEX` DDLs to the downstream TiDB for execution, TiCDC returns immediately without waiting for the completion of the DDL execution. This avoids blocking subsequent DML executions.
 
+When the 'ADD INDEX' or 'CREATE INDEX' DDL is being executed in downstream and TiCDC executes the next DDL of the same table, this DDL may be blocked in the `queueing` state for a long time, causing it to be executed repeatedly by TiCDC. And the changefeed may also fail because retries take too long. Since v8.4.0, if TiCDC has the 'SUPER' permission of the downstream database, it will periodically run 'ADMIN SHOW DDL JOBS' to query the status of DDL tasks that are executed asynchronously, and wait until the index is created before continuing to synchronize. During this time, the changefeed latency will increase, but it will prevent the synchronization task from failing.
+
 > **Note:**
 >
 > - If the execution of certain downstream DMLs relies on indexes that have not completed replication, these DMLs might be executed slowly, thereby affecting TiCDC replication latency.
