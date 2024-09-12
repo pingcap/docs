@@ -281,7 +281,7 @@ name: task-test               # The name of the task. Should be globally unique.
 task-mode: incremental        # The mode of the task. "incremental" means full data migration is skipped and only incremental replication is performed.
 # Required for incremental replication from sharded tables. By default, the "pessimistic" mode is used.
 # If you have a deep understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
-# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/zh/tidb/dev/feature-shard-merge/).
+# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb/dev/feature-shard-merge/).
 
 shard-mode: "pessimistic"
 
