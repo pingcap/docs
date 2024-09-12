@@ -2428,7 +2428,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> Currently, the Instance Plan Cache is an experimental feature. It is not recommended that you use it in production environments.
+> Currently, Instance Plan Cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3428,11 +3428,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Unit: Rows
 - This variable is used to set the number of rows for the initial chunk during the execution process. The number of rows for a chunk directly affects the amount of memory required for a single query. You can roughly estimate the memory needed for a single chunk by considering the total width of all columns in the query and the number of rows for the chunk. Combining this with the concurrency of the executor, you can make a rough estimation of the total memory required for a single query. It is recommended that the total memory for a single chunk does not exceed 16 MiB.
 
-### tidb_instance_plan_cache_target_mem_size <span class="version-mark">New in v8.4</span>
+### tidb_instance_plan_cache_target_mem_size <span class="version-mark">New in v8.4.0</span>
 
 > **Warning:**
 >
-> Currently, the Instance Plan Cache is an experimental feature. It is not recommended that you use it in production environments.
+> Currently, Instance Plan Cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3441,11 +3441,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `104857600` (which is 100 MiB)
 - TiDB clean the Instance Plan Cache periodically in the background, and this variable controls the target memory size of the cache, which means TiDB tries to clean the plan cache to this memory size each time.
 
-### tidb_instance_plan_cache_max_mem_size <span class="version-mark">New in v8.4</span>
+### tidb_instance_plan_cache_max_mem_size <span class="version-mark">New in v8.4.0</span>
 
 > **Warning:**
 >
-> Currently, the Instance Plan Cache is an experimental feature. It is not recommended that you use it in production environments.
+> Currently, Instance Plan Cache is an experimental feature. is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
