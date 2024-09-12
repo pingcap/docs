@@ -17,11 +17,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Learn" icon="cloud1">
 
-<<<<<<< HEAD
-[What is TiDB](https://docs.pingcap.com/tidb/v7.5/overview)
-=======
-[What is TiDB Self-Managed](https://docs.pingcap.com/tidb/dev/overview)
->>>>>>> 760e8b0dc5 (refactor(doc): redesign the global home doc (#18880))
+[What is TiDB Self-Managed](https://docs.pingcap.com/tidb/v7.5/overview)
 
 [Features](https://docs.pingcap.com/tidb/v7.5/basic-features)
 
@@ -31,11 +27,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Try" icon="cloud5">
 
-<<<<<<< HEAD
-[Try Out TiDB](https://docs.pingcap.com/tidb/v7.5/quick-start-with-tidb)
-=======
-[Try Out TiDB Self-Managed](https://docs.pingcap.com/tidb/dev/quick-start-with-tidb)
->>>>>>> 760e8b0dc5 (refactor(doc): redesign the global home doc (#18880))
+[Try Out TiDB Self-Managed](https://docs.pingcap.com/tidb/v7.5/quick-start-with-tidb)
 
 [Try Out HTAP](https://docs.pingcap.com/tidb/v7.5/quick-start-with-htap)
 

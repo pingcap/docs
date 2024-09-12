@@ -3,17 +3,10 @@ title: PingCAP Documentation
 hide_sidebar: true
 hide_commit: true
 hide_leftNav: true
-<<<<<<< HEAD
-summary: PingCAP Documentation provides how-to guides and references for using TiDB Cloud and TiDB, including data migration and application building. TiDB Cloud is a fully-managed Database-as-a-Service, offering easy access to the power of a cloud-native, distributed SQL database. TiDB is an open-source distributed SQL database with MySQL compatibility, horizontal scalability, and high availability. Developers can access documentation for application development and explore additional resources such as TiDB Playground, PingCAP Education, and community engagement opportunities.
----
-
-<DocHomeContainer title="PingCAP Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">
-=======
 summary: TiDB Documentation provides how-to guides and references for using TiDB Cloud and TiDB Self-Managed, including data migration and application building. TiDB Cloud is a fully-managed Database-as-a-Service, offering easy access to the power of a cloud-native, distributed SQL database. TiDB is an open-source distributed SQL database with MySQL compatibility, horizontal scalability, and high availability. Developers can access documentation for application development and explore additional resources such as TiDB Playground, PingCAP Education, and community engagement opportunities.
 ---
 
 <DocHomeContainer title="TiDB Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud Serverless, TiDB Cloud Dedicated and TiDB Self-Managed, migrate data, and build your applications on the database." ctaLabel="Start TiDB Cloud Serverless for Free" ctaLink="https://tidbcloud.com/free-trial">
->>>>>>> 760e8b0dc5 (refactor(doc): redesign the global home doc (#18880))
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
@@ -89,23 +82,7 @@ Learn how to deploy TiDB locally in a production environment.
 
 <DocHomeCard href="/tidb/stable/dev-guide-overview" label="Developer Guide" icon="oss-developer-blue">
 
-<<<<<<< HEAD
-The open-source TiDB platform is released under the Apache 2.0 license and is supported by the community.
-
-<a href="https://en.pingcap.com/download/" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Download</a>
-
-</DocHomeSection>
-
-<DocHomeSection label="Developers" anchor="developers" id="developers">
-
-<DocHomeCardContainer>
-
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Guide">
-
-Documentation for TiDB application developers.
-=======
 For application developers using TiDB Self-Managed.
->>>>>>> 760e8b0dc5 (refactor(doc): redesign the global home doc (#18880))
 
 </DocHomeCard>
 
