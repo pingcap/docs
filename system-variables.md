@@ -3441,18 +3441,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `104857600` (which is 100 MiB)
 - This variable sets the target memory size for Instance Plan Cache. TiDB periodically cleans up the Instance Plan Cache in the background to ensure its memory usage does not exceed the value of this variable.
 
-### tidb_instance_plan_cache_max_mem_size <span class="version-mark">New in v8.4.0</span>
-
+### tidb_instance_plan_cache_max_size <span class="version-mark">New in v8.4.0</span>
 > **Warning:**
 >
 > Currently, Instance Plan Cache is an experimental feature. is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `125829120` (which is 120 MiB)
-- This variable sets the maximum memory usage for Instance Plan Cache. This value must be greater than [`tidb_instance_plan_cache_target_mem_size`](#tidb_instance_plan_cache_target_mem_size-new-in-v840).
+- This variable sets the maximum memory usage for Instance Plan Cache.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
