@@ -5156,7 +5156,7 @@ SHOW WARNINGS;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: ``
-- Possible values: ``, `TABLE`, `GLOBAL'
+- Possible values: ``, `TABLE`, `GLOBAL`
 - By default, Regions are split for a new table when it is being created in TiDB. You can use this variable to control the table scattering strategy. TiDB will scatter the Region based on the chosen scattering strategy. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable. Possible values are:
     - ``: indicates that the table Region is not scattered.
     - `TABLE`: indicates that TiDB scatters the table data according to its distribution.
