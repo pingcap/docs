@@ -3428,7 +3428,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Unit: Rows
 - This variable is used to set the number of rows for the initial chunk during the execution process. The number of rows for a chunk directly affects the amount of memory required for a single query. You can roughly estimate the memory needed for a single chunk by considering the total width of all columns in the query and the number of rows for the chunk. Combining this with the concurrency of the executor, you can make a rough estimation of the total memory required for a single query. It is recommended that the total memory for a single chunk does not exceed 16 MiB.
 
-### tidb_instance_plan_cache_target_mem_size <span class="version-mark">New in v8.4.0</span>
+### tidb_instance_plan_cache_reserved_percentage <span class="version-mark">New in v8.4.0</span>
 
 > **Warning:**
 >
@@ -3437,9 +3437,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `104857600` (which is 100 MiB)
-- This variable sets the target memory size for Instance Plan Cache. TiDB periodically cleans up the Instance Plan Cache in the background to ensure its memory usage does not exceed the value of this variable.
+- Type: Float
+- Default value: `0.1`
+- Range: `[0, 1]`
+- This variable controls the amount of memory reserved for each eviction. TiDB starts eviction when the Plan Cache is full, which means its memory usage reaches `tidb_instance_plan_cache_max_size`. Each time TiDB evicts `tidb_instance_plan_cache_max_size * tidb_instance_plan_cache_reserved_percentage` bytes.
 
 ### tidb_instance_plan_cache_max_size <span class="version-mark">New in v8.4.0</span>
 > **Warning:**
