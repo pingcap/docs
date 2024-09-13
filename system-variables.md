@@ -3439,7 +3439,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `104857600` (which is 100 MiB)
-- TiDB clean the Instance Plan Cache periodically in the background, and this variable controls the target memory size of the cache, which means TiDB tries to clean the plan cache to this memory size each time.
+- This variable sets the target memory size for Instance Plan Cache. TiDB periodically cleans up the Instance Plan Cache in the background to ensure its memory usage does not exceed the value of this variable.
 
 ### tidb_instance_plan_cache_max_mem_size <span class="version-mark">New in v8.4.0</span>
 
