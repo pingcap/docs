@@ -463,8 +463,8 @@ Usage example:
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
 --crypter.method aes128-ctr
 --crypter.key 0123456789abcdef0123456789abcdef
 --log.crypter.method aes128-ctr
@@ -473,8 +473,8 @@ tiup br restore point --pd="${PD_IP}:2379"
 or if you are using master key encryption for log backup
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
 --crypter.method aes128-ctr
 --crypter.key 0123456789abcdef0123456789abcdef
 --master-key-crypter-method aes128-ctr
