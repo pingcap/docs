@@ -531,4 +531,21 @@ If the message contains the `claimCheckLocation` field, the Kafka consumer reads
 }
 ```
 
-The `key` and `value` fields contain the encoded large message, which should have been sent to the corresponding field in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message.
+The `key` and `value` fields corresponds to the same fields in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message, by encoding the `key` and `value` into one JSON object to deliver a complete message. Only Open-protocol encode the `key` field, it's empty for other protocols.
+
+#### Only send the value to external storage
+
+Starting from version v8.4.0, the `claim-check-raw-value` parameter is supported, and it defaults to false. It can be set to true if not using Open-protocol, otherwise error occurs.
+
+An example configuration is as follows:
+
+```toml
+protocol = "simple"
+
+[sink.kafka-config.large-message-handle]
+large-message-handle-option = "claim-check"
+claim-check-storage-uri = "s3://claim-check-bucket"
+claim-check-raw-value = true
+```
+
+When this parameter is set to true, the changefeed directly sends the Value portion of Kafka messages to external storage, on the consumer side, data can be read directly from external storage and consumed. This reduce CPU overhead introduced by the JSON serialization and deserialization.
