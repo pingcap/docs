@@ -7,7 +7,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a **Distributed eXecution Framework (DXF)** to further leverage the resource advantages of the distributed architecture. The goal of the DXF is to implement unified scheduling and distributed execution of tasks, and to provide unified resource management capabilities for both overall and individual tasks, which better meets users' expectations for resource usage.
 
@@ -91,7 +91,7 @@ Adjust the following system variables related to Fast Online DDL:
 
 ## Task scheduling
 
-By default, the DXF schedules all TiDB nodes to execute distributed tasks. Starting from v7.4.0, for TiDB Self-Hosted clusters, you can control which TiDB nodes can be scheduled by the DXF to execute distributed tasks by configuring [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740).
+By default, the DXF schedules all TiDB nodes to execute distributed tasks. Starting from v7.4.0, for TiDB Self-Managed clusters, you can control which TiDB nodes can be scheduled by the DXF to execute distributed tasks by configuring [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740).
 
 - For versions from v7.4.0 to v8.0.0, the optional values of [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) are `''` or `background`. If the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules tasks to these nodes for execution. If the current cluster does not have TiDB nodes with `tidb_service_scope = 'background'`, whether due to faults or normal scaling in, the DXF schedules tasks to nodes with `tidb_service_scope = ''` for execution.
 

@@ -359,7 +359,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
 
-- For TiDB Self-Hosted, the default value of this variable changes from `1` to `2` starting from v5.3.0.
+- For TiDB Self-Managed, the default value of this variable changes from `1` to `2` starting from v5.3.0.
 - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
 - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
 
@@ -462,7 +462,7 @@ You can run the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) stat
 
 > **Note:**
 >
-> Loading statistics is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> Loading statistics is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
 

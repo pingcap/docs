@@ -343,7 +343,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 ## Performance test
 
-To learn about the performance of TiDB v8.1.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc) and [Sysbench performance test report](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench) of the TiDB Dedicated cluster.
+To learn about the performance of TiDB v8.1.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc) and [Sysbench performance test report](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench) of the TiDB Cloud Dedicated cluster.
 
 ## Contributors
 
