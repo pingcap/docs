@@ -73,7 +73,6 @@ After a restore failure, you can use the same command to restore again, and `br`
 
 After a restore failure, if you try to restore the same cluster using another backup data, `br` will report an error, indicating that the upstream cluster ID of the current backup data is different from that recorded in the checkpoint, or the BackupTS of the current backup data is different from that recorded in the checkpoint. If you are sure that the cluster has been cleaned up, you can manually drop the database `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` and try to restore the cluster using another backup data again.
 
-
 ### PITR restore
 
 PITR restore is divided into two parts: snapshot restore and log restore.
