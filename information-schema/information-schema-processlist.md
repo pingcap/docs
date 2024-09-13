@@ -16,7 +16,7 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `RESOURCE_GROUP` column to show the resource group name.
 * A `SESSION_ALIAS` column to show the alias of the current session.
 * A `ROWS_AFFECTED` column to show the number of rows currently affected by the statement.
-* A `TIDB_CPU` column to show the CPU time (in nanoseconds) consumed by the TiDB server for the statement. This column shows meaningful data only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
+* A `TIDB_CPU` column to show the CPU time (in nanoseconds) consumed by the TiDB server for the statement. This column shows meaningful data only when the [`Top SQL`](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
 * A `TIKV_CPU` column to show the CPU time (in nanoseconds) consumed by the TiKV server for the statement.
 
 ```sql
