@@ -60,3 +60,26 @@ When `br` retries a restore, some data that has been restored might need to be r
 ### Avoid modifying cluster data during the restore
 
 After a restore failure, avoid writing, deleting, or creating tables in the cluster. This is because the backup data might contain DDL operations for renaming tables. If you modify the cluster data, the checkpoint restore cannot decide whether the deleted or existing table are resulted from external operations, which affects the accuracy of the next restore retry.
+
+## Operation details
+
+The operation details of checkpoint restore is divided into two parts: snapshot restore and PITR restore.
+
+### Snapshot restore
+
+When performing restore at the first time, `br` will create a database named `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` in the restore cluster to store the checkpoint data. `br` also records the upstream cluster ID and BackupTS of backup data.
+
+After a restore failure, you can use the same command to restore again, and `br` will automatically continue the last restore based on the checkpoint from the database `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint`.
+
+After a restore failure, if you try to restore the same cluster using another backup data, `br` will report an error, indicating that the upstream cluster ID of the current backup data is different from that recorded in the checkpoint, or the BackupTS of the current backup data is different from that recorded in the checkpoint. If you are sure that the cluster has been cleaned up, you can manually drop the database `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` and try to restore the cluster using another backup data again.
+
+
+### PITR restore
+
+PITR restore is divided into two parts: snapshot restore and log restore.
+
+When performing restore at the first time, `br` will first enter the snapshot restore stage, which is the same as the snapshot restore operation mentioned above. When `br` enters the snapshot restore stage, the upstream cluster ID of the backup data and the BackupTS of the backup data (equal to the start time point `start-ts` of log restore) have been recorded in the checkpoint. This means that when the restore fails in the snapshot restore stage, the full backup storage (equal to the start time point `start-ts` of log restore) cannot be adjusted when retry the PITR restore with checkpoint.
+
+When performing restore at the first time and `br` enters the log restore stage, `br` will create a database named `__TiDB_BR_Temporary_Log_Restore_Checkpoint` in the restore cluster to store the checkpoint data. `br` also records the upstream cluster ID of the backup data and restore time range (`start-ts` and `restored-ts`). This means that when the restore fails in the log restore stage, you need to specify the same full backup storage path and parameter `restored-ts` as that recorded in the checkpoint when retry the PITR restore with checkponit. Otherwise, `br` will report an error, indicating that the restore time range specified for the current restore is different from that recorded in the checkpoint, or that the upstream cluster ID of the backup data of the current restore is different from that recorded in the checkpoint. If you are sure that the cluster has been cleaned up, you can manually drop the database `__TiDB_BR_Temporary_Log_Restore_Checkpoint` and try to restore the cluster using another backup data again.
+
+When performing restore at the first time and before `br` restore schema meta in the log restore stage, `br` will generate a mapping from the upstream cluster database/table/partition ID to the downstream cluster database/table/partition ID at the time point `restored-ts` and persist it to the system table `mysql.tidb_pitr_id_map` to avoid duplicate allocation of database/table/partition IDs when retry the PITR restore with checkpoint.
