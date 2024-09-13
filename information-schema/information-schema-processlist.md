@@ -16,8 +16,8 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `RESOURCE_GROUP` column to show the resource group name.
 * A `SESSION_ALIAS` column to show the alias of the current session.
 * A `ROWS_AFFECTED` column to show the number of rows currently affected by the statement.
-* A `TIDB_CPU` column to show the CPU time (in seconds) consumed by the TiDB server for the statement. For example, if a query uses 4 TiDB server CPUs for 1 second each, the value will be `4`. This column shows meaningful data only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
-* A `TIKV_CPU` column to show the CPU time (in seconds) consumed by the TiKV server for the statement.
+* A `TIDB_CPU` column to show the CPU time (in nanoseconds) consumed by the TiDB server for the statement. This column shows meaningful data only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
+* A `TIKV_CPU` column to show the CPU time (in nanoseconds) consumed by the TiKV server for the statement.
 
 ```sql
 USE information_schema;
@@ -43,8 +43,8 @@ DESC processlist;
 | RESOURCE_GROUP | varchar(32)         | NO   |      |         |       |
 | SESSION_ALIAS  | varchar(64)         | NO   |      |         |       |
 | ROWS_AFFECTED  | bigint(21) unsigned | YES  |      | NULL    |       |
-| TIDB_CPU       | double              | NO   |      | 0       |       |
-| TIKV_CPU       | double              | NO   |      | 0       |       |
+| TIDB_CPU       | bigint(21)          | NO   |      | 0       |       |
+| TIKV_CPU       | bigint(21)          | NO   |      | 0       |       |
 +----------------+---------------------+------+------+---------+-------+
 ```
 
@@ -90,8 +90,8 @@ Fields in the `PROCESSLIST` table are described as follows:
 * `RESOURCE_GROUP`: The resource group name.
 * `SESSION_ALIAS`: The alias of the current session.
 * `ROWS_AFFECTED`: The number of rows currently affected by the statement.
-* `TIDB_CPU`: The CPU time (in seconds) consumed by the TiDB server for the statement.
-* `TIKV_CPU`: The CPU time (in seconds) consumed by the TiKV server for the statement.
+* `TIDB_CPU`: The CPU time (in nanoseconds) consumed by the TiDB server for the statement.
+* `TIKV_CPU`: The CPU time (in nanoseconds) consumed by the TiKV server for the statement.
 
 ## CLUSTER_PROCESSLIST
 
