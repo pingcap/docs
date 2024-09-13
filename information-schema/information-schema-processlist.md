@@ -9,6 +9,8 @@ summary: Learn the `PROCESSLIST` information_schema table.
 
 The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`:
 
+<CustomContent platform="tidb">
+
 * A `DIGEST` column to show the digest of the SQL statement.
 * A `MEM` column to show the memory used by the request that is being processed, in bytes.
 * A `DISK` column to show the disk usage in bytes.
@@ -18,6 +20,22 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `ROWS_AFFECTED` column to show the number of rows currently affected by the statement.
 * A `TIDB_CPU` column to show the CPU time (in nanoseconds) consumed by the TiDB server for the statement. This column shows meaningful data only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
 * A `TIKV_CPU` column to show the CPU time (in nanoseconds) consumed by the TiKV server for the statement.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* A `DIGEST` column to show the digest of the SQL statement.
+* A `MEM` column to show the memory used by the request that is being processed, in bytes.
+* A `DISK` column to show the disk usage in bytes.
+* A `TxnStart` column to show the start time of the transaction.
+* A `RESOURCE_GROUP` column to show the resource group name.
+* A `SESSION_ALIAS` column to show the alias of the current session.
+* A `ROWS_AFFECTED` column to show the number of rows currently affected by the statement.
+* A `TIDB_CPU` column to show the CPU time (in nanoseconds) consumed by the TiDB server for the statement. This column shows meaningful data only when the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature is enabled. Otherwise the value will be `0`.
+* A `TIKV_CPU` column to show the CPU time (in nanoseconds) consumed by the TiKV server for the statement.
+
+</CustomContent>
 
 ```sql
 USE information_schema;
