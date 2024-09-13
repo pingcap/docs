@@ -8,7 +8,7 @@ aliases: ['/docs/dev/alert-rules/','/docs/dev/reference/alert-rules/']
 
 # TiDB Cluster Alert Rules
 
-This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiFlash, TiDB Binlog, TiCDC, Node_exporter and Blackbox_exporter.
+This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiFlash, TiCDC, Node_exporter and Blackbox_exporter.
 
 According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level, and warning-level. This division of severity levels applies to all alert items of each component below.
 
@@ -123,12 +123,11 @@ This section gives the alert rules for the TiDB component.
     The number of events that happen in the TiDB service. An alert is triggered when the following events happen:
 
     1. start: The TiDB service starts.
-    2. hang: When a critical-level event (currently there is only one scenario: TiDB cannot write binlog) happens, TiDB enters the `hang` mode and waits to be killed manually.
+    2. hang: When a critical-level event happens, TiDB enters the `hang` mode and waits to be killed manually.
 
 * Solution:
 
-    * Restart TiDB to recover the service.
-    * Check whether the TiDB Binlog service is normal.
+    Restart TiDB to recover the service.
 
 #### `TiDB_tikvclient_backoff_seconds_count`
 
@@ -773,10 +772,6 @@ This section gives the alert rules for the TiKV component.
 ## TiFlash alert rules
 
 For the detailed descriptions of TiFlash alert rules, see [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md).
-
-## TiDB Binlog alert rules
-
-For the detailed descriptions of TiDB Binlog alert rules, see [TiDB Binlog monitoring document](/tidb-binlog/monitor-tidb-binlog-cluster.md#alert-rules).
 
 ## TiCDC Alert rules
 

@@ -36,9 +36,6 @@ Flags:
       --db.binpath string            Specify the TiDB instance binary path (optional, for debugging)
       --db.config string             Specify the TiDB instance configuration file (optional, for debugging)
       --db.timeout int               Specify TiDB maximum wait time in seconds for starting. 0 means no limit
-      --drainer int                  Specify Drainer data of the cluster
-      --drainer.binpath string       Specify the location of the Drainer binary files (optional, for debugging)
-      --drainer.config string        Specify the Drainer configuration file
   -h, --help                         Display help information for TiUP
       --host string                  Specify the listening address of each component (default: `127.0.0.1`). Set it to `0.0.0.0` if provided for access of other machines
       --kv int                       Specify the number of TiKV instances (default: 1)
@@ -50,9 +47,6 @@ Flags:
       --pd.binpath string            Specify the PD instance binary path (optional, for debugging)
       --pd.config string             Specify the PD instance configuration file (optional, for debugging)
       --pd.mode string               Specify the PD working mode. The optional value is 'ms'. Specifying this flag means enabling PD microservice mode.
-      --pump int                     Specify the number of Pump instances. If the value is not `0`, TiDB Binlog is enabled.
-      --pump.binpath string          Specify the location of the Pump binary files (optional, for debugging)
-      --pump.config string           Specify the Pump configuration file (optional, for debugging)
       --scheduling int               Specify the number of Scheduling instances (default: 1)，which can be set only when `pd.mode` is 'ms'
       --scheduling.host host         Specify the listening address of the Scheduling instance
       --scheduling.binpath string    Specify the Scheduling instance binary path (optional, for debugging)

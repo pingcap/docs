@@ -53,7 +53,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
 - Panic And Critical Error: the number of panics and critical errors occurred in TiDB
 - Time Jump Back OPS: the number of times that the operating system rewinds every second on each TiDB instance
 - Get Token Duration: the time cost of getting Token on each connection
-- Skip Binlog Count: the number of binlog write failures in TiDB
+- Skip Binlog Count: the number of binlog write failures in TiDB; starting from v8.4.0, TiDB Binlog is removed, and this metric has no value
 - Client Data Traffic: data traffic statistics of TiDB and the client
 
 ### Transaction

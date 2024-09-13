@@ -147,15 +147,6 @@ Currently, there are several different types of limitations for the clustered in
     - Downgrading tables with clustered indexes is not supported. If you need to downgrade such tables, use logical backup tools to migrate data instead.
 - Situations that are not supported yet but in the support plan:
     - Adding, dropping, and altering clustered indexes using `ALTER TABLE` statements are not supported.
-- Limitations for specific versions:    
-    - In v5.0, using the clustered index feature together with TiDB Binlog is not supported. After TiDB Binlog is enabled, TiDB only allows creating a single integer column as the clustered index of a primary key. TiDB Binlog does not replicate data changes (such as insertion, deletion, and update) on existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes to the downstream, upgrade your cluster to v5.1 or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) for replication instead.
-
-After TiDB Binlog is enabled, if the clustered index you create is not a single integer primary key, TiDB returns the following error:
-
-```sql
-mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED);
-ERROR 8200 (HY000): Cannot create clustered index table when the binlog is ON
-```
 
 If you use clustered indexes together with the attribute `SHARD_ROW_ID_BITS`, TiDB reports the following error:
 
