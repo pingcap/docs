@@ -2435,7 +2435,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the Instance Plan Cache feature.
+- This variable controls whether to enable the Instance Plan Cache feature. This feature implements instance-level execution plan cache, which allows  all sessions within the same TiDB instance to share the execution plan cache, thereby improving memory utilization.
 
 ### tidb_enable_ordered_result_mode
 
