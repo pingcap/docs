@@ -5157,10 +5157,10 @@ SHOW WARNINGS;
 - Type: Enumeration
 - Default value: ``
 - Possible values: ``, `TABLE`, `GLOBAL'
-- By default, Regions are split for a new table when it is being created in TiDB. You can use this variable to control the table scattering strategy. TiDB will scatter the Region based on the chosen scattering strategy. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable. Possible values are:
-    - ``: indicates that the table Region is not scattered.
-    - `TABLE`: indicates that TiDB scatters the table data according to its distribution.
-    - `GLOBAL`: indicates that TiDB scatters the data according to the overall distribution of the cluster. The split Region is scattered synchronously when the statement for creating the table is executed.
+- By default, Regions are split for a new table when it is being created in TiDB. This variable controls the table Region scattering strategy, determining how TiDB scatters Regions after splitting. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable. Possible values are:
+    - ``: No scattering of table Regions.
+    - `TABLE`: TiDB scatters table data based on its distribution.
+    - `GLOBAL`: TiDB scatters data according to the cluster's overall distribution. The split Regions are scattered synchronously during table creation.
 - Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation.
 
 ### tidb_schema_cache_size <span class="version-mark">New in v8.0.0</span>
