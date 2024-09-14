@@ -9,15 +9,15 @@ aliases: ['/tidb/dev/br-log-command-line/']
 This document describes the commands used in TiDB log backup and point-in-time recovery (PITR).
 
 - [Perform log backup](#perform-log-backup)
-  - [Start a log backup task](#start-a-log-backup-task)
-  - [Encrypt the log backup data](#encrypt-the-log-backup-data)
-  - [Query the log backup status](#query-the-log-backup-status)
-  - [Pause and resume a log backup task](#pause-and-resume-a-log-backup-task)
-  - [Stop and restart a log backup task](#stop-and-restart-a-log-backup-task)
-  - [Clean up log backup data](#clean-up-log-backup-data)
-  - [View the log backup metadata](#view-the-log-backup-metadata)
+    - [Start a log backup task](#start-a-log-backup-task)
+    - [Encrypt the log backup data](#encrypt-the-log-backup-data)
+    - [Query the log backup status](#query-the-log-backup-status)
+    - [Pause and resume a log backup task](#pause-and-resume-a-log-backup-task)
+    - [Stop and restart a log backup task](#stop-and-restart-a-log-backup-task)
+    - [Clean up log backup data](#clean-up-log-backup-data)
+    - [View the log backup metadata](#view-the-log-backup-metadata)
 - [Restore to a specified point in time (PITR)](#restore-to-a-specified-point-in-time-pitr)
-  - [Restore encrypted log backup data](#restore-encrypted-log-backup-data)
+    - [Restore encrypted log backup data](#restore-encrypted-log-backup-data)
 
 For more information about log backup and PITR, refer to:
 
