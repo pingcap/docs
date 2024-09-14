@@ -644,14 +644,6 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Default value: `Apache License 2.0`
 - This variable indicates the license of your TiDB server installation.
 
-### log_bin
-
-- Scope: NONE
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- This variable indicates whether [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is used. Starting from v8.4.0, TiDB Binlog is removed, and this variable is invalid.
-
 ### max_allowed_packet <span class="version-mark">New in v6.1.0</span>
 
 > **Note:**
@@ -911,23 +903,6 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The local unix socket file that the `tidb-server` is listening on when speaking the MySQL protocol.
-
-### sql_log_bin
-
-> **Note:**
->
-> This variable is read-only for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- Indicates whether to write changes to [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) or not. Starting from v8.4.0, TiDB Binlog is removed, and this variable is invalid.
-
-> **Note:**
->
-> It is not recommended to set `sql_log_bin` as a global variable because the future versions of TiDB might only allow setting this as a session variable.
 
 ### sql_mode
 

@@ -9,7 +9,7 @@ The `tiup cluster scale-in` command is used to scale in the cluster, which takes
 
 ## Particular handling of components' offline process
 
-Because the TiKV and TiFlash components are taken offline asynchronously (which requires TiUP to remove the node through API first) and the stopping process takes a long time (which requires TiUP to continuously check whether the node is successfully taken offline), the TiKV, TiFlash, and TiDB Binlog components are handled particularly as follows:
+Because the TiKV and TiFlash components are taken offline asynchronously (which requires TiUP to remove the node through API first) and the stopping process takes a long time (which requires TiUP to continuously check whether the node is successfully taken offline), the TiKV and TiFlash components are handled particularly as follows:
 
 - For TiKV and TiFlash components:
 
