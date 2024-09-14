@@ -264,7 +264,7 @@ Currently, the TTL feature has the following limitations:
         - `BINARY(N)`
         - `VARBINARY(N)`
         - `BIT(N)`
-    - The character set of the first column of the primary key or composite primary key is `utf8` or `utf8mb4` and the collate is `utf8_bin`, `utf8mb4_bin` or `utf8mb4_0900_bin`.
+    - The character set of the first column of the primary key or composite primary key is `utf8` or `utf8mb4`, and the collation is `utf8_bin`, `utf8mb4_bin`, or `utf8mb4_0900_bin`.
     - For tables where the primary key column type is `utf8` or `utf8mb4`, subtasks are split only based on the range of visible ASCII characters. If many primary key values have the same ASCII prefix, it might cause uneven task splitting.
     - For tables that do not support splitting a TTL job into multiple subtasks, the TTL job will be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow.
 
