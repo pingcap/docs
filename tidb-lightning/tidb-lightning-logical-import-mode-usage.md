@@ -52,9 +52,15 @@ Conflicting data refers to two or more records with the same data in the PK or U
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
 | `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
+<<<<<<< HEAD
 | `"ignore"` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
 | `"error"` | Pausing the import and reporting an error. | `INSERT INTO ...` |
 |  `""`  | TiDB Lightning does not detect or handle conflicting data. If data with primary and unique key conflicts exists, the subsequent step reports an error. |  None   |
+=======
+| `"ignore"` | Keeping existing data and ignoring new data. | If `conflict.threshold` is greater than 0, `INSERT INTO` is used; if `conflict.threshold` is `0`, `INSERT IGNORE INTO ...` is used |
+| `"error"` | Terminating the import when conflicting data is detected. | `INSERT INTO ...` |
+|  `""`  | Converted to `"error"`, which means terminating the import when conflicting data is detected.  |  None   |
+>>>>>>> 3a6cb735bd (change lightning conflict resolution ignore (#18911))
 
 When the strategy is `"error"`, errors caused by conflicting data directly terminates the import task. When the strategy is `"replace"` or `"ignore"`, you can control the maximum tolerant conflicts by configuring [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). The default value is `9223372036854775807`, which means that almost all errors are tolerant.
 
