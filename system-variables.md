@@ -3167,7 +3167,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 15]`
-- This variable is used to set the default row split shards number for newly created tables. When this variable is set to a non-zero value, TiDB will automatically set it when executing CREATE TABLE statements, allowing use of pre_split_regions on such tables (e.g., NONCLUSTERED tables). See [pre_split_regions](/sql-statement-split-region.md) for details. This variable is typically used in conjunction with `tidb_shard_row_id_bits` to shard new tables and split the regions of new tables.
+- This variable is used to set the default row split shards number for newly created tables. When this variable is set to a non-zero value, TiDB will automatically set it when executing CREATE TABLE statements, allowing use of pre_split_regions on such tables (for example NONCLUSTERED tables). See [pre_split_regions](/sql-statements/sql-statement-split-region.md) for details. This variable is typically used in conjunction with `tidb_shard_row_id_bits` to shard new tables and split the regions of new tables.
 
 ### tidb_generate_binary_plan <span class="version-mark">New in v6.2.0</span>
 
