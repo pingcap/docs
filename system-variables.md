@@ -4399,7 +4399,7 @@ mysql> desc select count(distinct a) from test.t;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
-- After you set the value of this variable to `ON`, the optimizer will prefer range scans over full table scans for tables without statistics (pseudo statistics) or if the table is empty (zero statistics).
+- When the value of this variable is `ON`, the optimizer prefers range scans over full table scans for tables without statistics (pseudo statistics) or empty tables (zero statistics).
 - In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan. After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index range scan.
 
 ```sql
