@@ -28,7 +28,7 @@ Before running the `tiup cluster patch` command, you need to pack the binary pac
 1. Determine the following variables:
 
     - `${component}`: the name of the component to be replaced (such as `tidb`, `tikv`, or `pd`).
-    - `${version}`: the version of the component (such as `v6.5.10`).
+    - `${version}`: the version of the component (such as `v6.5.11`).
     - `${os}`: the operating system (`linux`).
     - `${arch}`: the platform on which the component runs (`amd64`, `arm64`).
 
