@@ -18,6 +18,7 @@ This document describes the commands used in TiDB log backup and point-in-time r
   - [View the log backup metadata](#view-the-log-backup-metadata)
 - [Restore to a specified point in time (PITR)](#restore-to-a-specified-point-in-time-pitr)
   - [Restore encrypted log backup data](#restore-encrypted-log-backup-data)
+
 For more information about log backup and PITR, refer to:
 
 - [Log Backup and PITR Guide](/br/br-pitr-guide.md)
@@ -122,7 +123,7 @@ tiup br log start \
     --log.crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-However, in a more serious encryption scenario, you might not want to pass in the fixed encryption key in the command line. Instead, you can use a master key based encryption system to manage encryption keys.
+However, in a more serious encryption scenario, you might not want to pass in the fixed encryption key in the command line. Instead, you can use a master key based encryption system to manage encryption keys. Master key based encryption uses different data key to encrypt different log backup files, and it supports master key rotation.
 
 - `--master-key-crypter-method`: Encryption algorithm to encrypt log backup files, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`.
 - `--master-key`: Master key configuration. It can be local disk based master key or cloud kms based master key.
@@ -135,16 +136,26 @@ tiup br log start \
     --master-key-crypter-method aes128-ctr \
     --master-key "local:///path/to/master.key"
 ```
+
 or
+
 ```shell
 ...
     --master-key "aws-kms:///${AWS_KMS_KEY_ID}?AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}&AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}&REGION=${AWS_REGION}"
 ```
+
 or
+
 ```shell
 ...
     --master-key "gcp-kms:///projects/$GCP_PROJECT_ID/locations/$GCP_LOCATION/keyRings/$GCP_KEY_RING/cryptoKeys/$GCP_KEY_NAME?AUTH=specified&CREDENTIALS=$GCP_CREDENTIALS_PATH"
+
 ```
+
+> **Note:**
+>
+> - If the key is lost, the log backup data cannot be restored to the cluster.
+> - The encryption feature needs to be used on `br` and TiDB clusters v8.4.0 or later versions. The encrypted log backup data cannot be restored on clusters earlier than v8.4.0.
 
 ### Query the log backup status
 
@@ -478,7 +489,9 @@ tiup br restore point --pd="${PD_IP}:2379"
 --log.crypter.method aes128-ctr
 --log.crypter.key 0123456789abcdef0123456789abcdef
 ```
+
 or if you are using master key encryption for log backup
+
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
 --storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
