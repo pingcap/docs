@@ -382,19 +382,29 @@ You can get more information about runaway queries from the following system tab
     ```sql
     MySQL [(none)]> SELECT * FROM mysql.tidb_runaway_queries LIMIT 1\G
     *************************** 1. row ***************************
-    resource_group_name: rg1
-                   time: 2023-06-16 17:40:22
-             match_type: identify
-                 action: kill
-           original_sql: select * from sbtest.sbtest1
-            plan_digest: 5b7d445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
-            tidb_server: 127.0.0.1:4000
+    resource_group_name: default
+         start_time: 2024-09-09 17:43:42
+            repeats: 2
+         match_type: watch
+             action: kill
+         sample_sql: select sleep(2) from t
+         sql_digest: 4adbc838b86c573265d4b39a3979d0a362b5f0336c91c26930c83ab187701a55
+        plan_digest: 5d094f78efbce44b2923733b74e1d09233cb446318293492901c5e5d92e27dbc
+        tidb_server: 127.0.0.1:4000
     ```
 
     In the preceding output,`match_type` indicates how the runaway query is identified. The value can be one of the following:
 
     - `identify` means that it matches the condition of the runaway query.
     - `watch` means that it matches the quick identification rule in the watch list.
+
+    Field description:
+
+    - `match_type` indicates how the runaway query is identified. The value can be one of the following:
+        - `identify` means that it matches the condition of the runaway query.
+        - `watch` means that it matches the quick identification rule in the watch list.
+    - `start_time` indicates the time when the runaway query is identified.
+    - `repeats` indicates the number of times the runaway query has been identified since `start_time`.
 
 + The `information_schema.runaway_watches` table contains records of quick identification rules for runaway queries. For more information, see [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md).
 
