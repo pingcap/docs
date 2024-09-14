@@ -52,7 +52,7 @@ Conflicting data refers to two or more records with the same data in the PK or U
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
 | `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
-| `"ignore"` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
+| `"ignore"` | Keeping existing data and ignoring new data. | If `conflict.max-record-rows` is greater than 0, `INSERT INTO` is used; if `conflict.max-record-rows` is `0`, `INSERT IGNORE INTO ...` is used |
 | `"error"` | Pausing the import and reporting an error. | `INSERT INTO ...` |
 |  `""`  | TiDB Lightning does not detect or handle conflicting data. If data with primary and unique key conflicts exists, the subsequent step reports an error. |  None   |
 
