@@ -3248,7 +3248,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the concurrency of the `hash join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
-### tidb_hash_join_use_impl_v2 <span class="version-mark">New v8.4.0</span>
+### tidb_hash_join_version <span class="version-mark">New v8.4.0</span>
 
 > **Warning:**
 >
@@ -3257,10 +3257,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether use hash join implementation v2 in TiDB. The value is `OFF` by default. If it is set to `ON`, TiDB will use hash join implementaion v2 to execute hash join, which is expected to have better performance.
-- Currently only inner join and outer join support hash join implementation v2, so for other joins, even if `tidb_hash_join_use_impl_v2` is set to `ON`, it will still use the original implementation.
+- Type: Enumeration
+- Default value: `legacy`
+- Possible values: `legacy`, `optimized`
+- This variable is used to control whether use optimized hash join in TiDB. The value is `legacy` by default. If it is set to `optimized`, TiDB will use optimized hash join to execute hash join, which is expected to have better performance.
+- Currently optimized hash join only support inner join and outer join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, it will still use the legacy hash join.
 
 ### tidb_hashagg_final_concurrency
 
