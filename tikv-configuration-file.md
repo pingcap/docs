@@ -2307,6 +2307,18 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Default value: `true`
 + Note that `in-memory` takes effect only when the value of `pipelined` is `true`.
 
+### `in-memory-peer-size-limit` <span class="version-mark">New in v8.4.0</span>
+
++ Control the memory size limit of pessimistic locks for one region. The pessimistic locks would be written persistently if the memory size exceeds the limit.
++ Default value: `512KiB`
++ Unit: KiB|MiB|GiB
+
+### `in-memory` <span class="version-mark">New in v8.4.0</span>
+
++ Control the memory size limit of pessimistic locks for one TiKV instance. The pessimistic locks would be written persistently if the memory size exceeds the limit.
++ Default value: `100MiB`
++ Unit: KiB|MiB|GiB
+
 ## quota
 
 Configuration items related to Quota Limiter.
