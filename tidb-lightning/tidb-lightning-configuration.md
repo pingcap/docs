@@ -258,7 +258,7 @@ strategy = ""
 # You can decrease this value to reduce the stress on the cluster due to large transactions.
 # logical-import-batch-rows = 65536
 
-# In Logical Import Mode, this parameter controls whether to use prepared statements and statement cache to improve the performance.
+# In Logical Import Mode, this parameter controls whether to use prepared statements and statement cache to improve performance.
 # logical-import-prep-stmt = false
 
 [mydumper]
