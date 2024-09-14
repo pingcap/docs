@@ -393,11 +393,6 @@ You can get more information about runaway queries from the following system tab
         tidb_server: 127.0.0.1:4000
     ```
 
-    In the preceding output,`match_type` indicates how the runaway query is identified. The value can be one of the following:
-
-    - `identify` means that it matches the condition of the runaway query.
-    - `watch` means that it matches the quick identification rule in the watch list.
-
     Field description:
 
     - `match_type` indicates how the runaway query is identified. The value can be one of the following:
