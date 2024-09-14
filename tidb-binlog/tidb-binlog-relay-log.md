@@ -1,6 +1,7 @@
 ---
 title: TiDB Binlog Relay Log
 summary: Learn how to use relay log to maintain data consistency in extreme cases.
+aliases: ['/tidb/dev/tidb-binlog-relay-log/','/docs/dev/tidb-binlog/tidb-binlog-relay-log/','/docs/dev/reference/tidb-binlog/relay-log/']
 ---
 
 # TiDB Binlog Relay Log
