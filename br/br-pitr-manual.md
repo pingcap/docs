@@ -101,6 +101,10 @@ tiup br log start \
 
 ### Encrypt the log backup data
 
+> **Warning:**
+>
+> This is an experimental feature. It is not recommended that you use it in the production environment.
+
 BR supports encrypting log backup data before uploading to the backup storage.
 
 Since TiDB v8.4.0, you can encrypt log backup data by directly passing in the data key configuration parameters similair to [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data):
@@ -456,6 +460,10 @@ Restore KV Files <--------------------------------------------------------------
 > - When you restore log data of different time periods in multiple batches, ensure that the log data is restored in consecutive order. If you restore the log backup data of `[t1, t2)`, `[t2, t3)`, and `[t3, t4)` in consecutive order, the restored data is consistent. However, if you restore `[t1, t2)` and then skip `[t2, t3)` to restore `[t3, t4)`, the restored data might be inconsistent.
 
 ### Restore encrypted log backup data
+
+> **Warning:**
+>
+> This is an experimental feature. It is not recommended that you use it in the production environment.
 
 BR supports restoring encrypted log backup data. You need to specify the decryption parameters to restore the data. Ensure that the decryption key is the same as the one used for encryption. Otherwise, the data fails to be restored.
 
