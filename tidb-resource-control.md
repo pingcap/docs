@@ -273,7 +273,7 @@ If a query exceeds any of the following limits, it is identified as a runaway qu
 
 - `EXEC_ELAPSED`: checks whether the query execution time exceeds the limit.
 - `PROCESSED_KEYS`: checks whether the number of keys processed by the Coprocessor exceeds the limit.
-- `REQUEST_UNIT`: checks whether the total number of read and write RUs consumed by the statement exceeds the limit.
+- `RU`: checks whether the total number of read and write RUs consumed by the statement exceeds the limit.
 
 Supported operations (`ACTION`):
 
@@ -299,7 +299,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 |---------------|--------------|--------------------------------------|
 | `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
 | `PROCESSED_KEYS` | When the number of keys processed by the Coprocessor exceeds this value, the query is identified as a runaway query | `PROCESSED_KEYS = 1000` means the query is identified as a runaway query if the number of keys processed by the Coprocessor exceeds 1000. |
-| `REQUEST_UNIT`  | When the total number of read and write RUs consumed by the query exceeds this value, this query is identified as a runaway query | `REQUEST_UNIT = 1000` means the query is identified as a runaway query if the total number of read and write RUs consumed by the query exceeds 1000. |
+| `RU`  | When the total number of read and write RUs consumed by the query exceeds this value, this query is identified as a runaway query | `RU = 1000` means the query is identified as a runaway query if the total number of read and write RUs consumed by the query exceeds 1000. |
 | `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, and `KILL`. |
 | `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time, the corresponding action is performed immediately. | Optional. For example, `WATCH=SIMILAR DURATION '60s'`, `WATCH=EXACT DURATION '1m'`, and `WATCH=PLAN`. |
 
