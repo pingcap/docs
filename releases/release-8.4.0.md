@@ -57,6 +57,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 ### DB operations
 
+* PITR adds client-side log backup data encryption support (experimental) [#issue-number](issue-link) @[Tristan1900](https://github.com/Tristan1900)
+
+    Previously only the data from a snapshot based backup could be encrypted (on the client side) with a data key provided by the user. With this feature, log backups may now also be encrypted, ensuring that the confidentiality of information within the backup data is secured.
+
+    For more information, see [documentation](doc-link).
+
+* BR reduces requires storage permissions for restores [#55870](https://github.com/pingcap/tidb/issues/55870) @[Leavrth](https://github.com/Leavrth)
+
+    Previously, when BR was restoring data, checkpoint information about the progress of the restore was recorded in the location hosting the backup data. These restore checkpoints enabled restoration to be quickly resumed if it was interrupted. With this feature, the restore checkpoints are now stored in the target TiDB cluster. This means that BR only requires read access to the backup dataset location for restores.
+
+    For more information, see [documentation](doc-link).
+  
 * Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
 
     Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
@@ -72,6 +84,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     For more information, see [documentation](doc-link).
 
 ### Security
+
+* TiDB BR Supports AWS IMDSv2 [#16443](https://github.com/tikv/tikv/issues/16443) @[pingyu](https://github.com/pingyu)
+
+    TiDB BR now supports AWS's Instance Metadata Service Version 2 (IMDSv2) when deployed on AWS EC2. This enables users to configure the newer session-oriented method on their EC2 instances, and for BR to be able to successfully use the IAM Role associated with the instance to access AWS S3 with the appropriate privileges.
+
+    For more information, see [documentation](/backup-and-restore-storages#authentication).
 
 * Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
 
