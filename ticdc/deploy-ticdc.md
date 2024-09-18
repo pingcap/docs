@@ -128,6 +128,8 @@ This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-co
       pd: {}
       tiflash: {}
       tiflash-learner: {}
+      pump: {}
+      drainer: {}
       cdc:
         gc-ttl: 172800
     ```
