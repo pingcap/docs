@@ -962,38 +962,6 @@ This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP
     * Check whether the TiFlash process exists.
     * Check whether the network between the monitoring machine and the TiFlash machine is normal.
 
-#### `Pump_server_is_down`
-
-* Alert rule:
-
-    `probe_success{group="pump"} == 0`
-
-* Description:
-
-    Failure to probe the pump service port.
-
-* Solution:
-
-    * Check whether the machine that provides the pump service is down.
-    * Check whether the pump process exists.
-    * Check whether the network between the monitoring machine and the pump machine is normal.
-
-#### `Drainer_server_is_down`
-
-* Alert rule:
-
-    `probe_success{group="drainer"} == 0`
-
-* Description:
-
-    Failure to probe the Drainer service port.
-
-* Solution:
-
-    * Check whether the machine that provides the Drainer service is down.
-    * Check whether the Drainer process exists.
-    * Check whether the network between the monitoring machine and the Drainer machine is normal.
-
 #### `TiKV_server_is_down`
 
 * Alert rule:
