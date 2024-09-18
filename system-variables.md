@@ -3440,7 +3440,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Default value: `0.1`
 - Range: `[0, 1]`
-- This variable controls the amount of memory reserved for each eviction. TiDB starts eviction when the Plan Cache is full, which means its memory usage reaches `tidb_instance_plan_cache_max_size`. Each time TiDB evicts `tidb_instance_plan_cache_max_size * tidb_instance_plan_cache_reserved_percentage` bytes.
+- This variable controls the amount of free memory reserved after eviction takes place. TiDB starts evicting execution plans when the total memory used by plan cache reaches `tidb_instance_plan_cache_max_size`. The eviction stops in case the percentage of free memory is larger than the value defined by `tidb_instance_plan_cache_reserved_percentage`. 
 
 ### tidb_instance_plan_cache_max_size <span class="version-mark">New in v8.4.0</span>
 > **Warning:**
