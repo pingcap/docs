@@ -111,6 +111,10 @@ Before backup, configure the following privileges to access the backup directory
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
+> **Note：**
+>
+> In 2024, AWS changed the default behavior, and newly created instances now only support IMDSv2 by default. For more details, please refer to Set IMDSv2 as the default for all new instance launches in your account. Therefore, starting from v8.4.0, BR supports obtaining IAM role permissions on AWS EC2 instances with only IMDSv2 required. When using earlier versions of BR, you need to configure the instance to support both IMDSv1 and IMDSv2.
+
 It is recommended that you configure access to S3 using either of the following ways:
 
 - Method 1: Specify the access key
