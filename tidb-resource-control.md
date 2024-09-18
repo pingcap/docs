@@ -395,11 +395,11 @@ You can get more information about runaway queries from the following system tab
 
     Field description:
 
+    - `start_time` indicates the time when the runaway query is identified.
+    - `repeats` indicates the number of times the runaway query has been identified since `start_time`.
     - `match_type` indicates how the runaway query is identified. The value can be one of the following:
         - `identify` means that it matches the condition of the runaway query.
         - `watch` means that it matches the quick identification rule in the watch list.
-    - `start_time` indicates the time when the runaway query is identified.
-    - `repeats` indicates the number of times the runaway query has been identified since `start_time`.
 
 + The `information_schema.runaway_watches` table contains records of quick identification rules for runaway queries. For more information, see [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md).
 
