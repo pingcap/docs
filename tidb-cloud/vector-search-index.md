@@ -69,7 +69,7 @@ You must use the same distance metric as you have defined when creating the vect
 
 ## Use the vector index with filters
 
-Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize the vector index because they are not querying for K-Nearest neighborss according to the SQL semantics. For example:
+Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize the vector index because they are not querying for K-Nearest neighbors according to the SQL semantics. For example:
 
 ```sql
 -- Filter is performed before kNN, so Vector Index cannot be used:
