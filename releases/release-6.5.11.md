@@ -126,4 +126,4 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
         - (dup): release-8.3.0.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that transaction conflicts occur during data import using TiDB Lightning [#49826](https://github.com/pingcap/tidb/issues/49826) @[lance6716](https://github.com/lance6716)
         - Fix the issue that TiKV data might be corrupted when importing data after disabling the import mode of TiDB Lightning [#15003](https://github.com/tikv/tikv/issues/15003) [#47694](https://github.com/pingcap/tidb/issues/47694) @[lance6716](https://github.com/lance6716)
-        - Fix the issue that during importing data using TiDB Lightning, an error is reported when restarting TiKV [#15912](https://github.com/tikv/tikv/issues/15912) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that during importing data using TiDB Lightning, an error occurs when restarting TiKV [#15912](https://github.com/tikv/tikv/issues/15912) @[lance6716](https://github.com/lance6716)
