@@ -9,7 +9,7 @@ The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request 
 
 > **Note:**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This feature is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 ## Synopsis
 

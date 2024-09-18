@@ -309,7 +309,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 > **Note:**
 >
-> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) are tools for replicating TiDB data to the upstream for TiDB Self-Hosted. Most SQL statements for TiCDC and TiDB Binlog are not applicable to TiDB Cloud. For TiDB Cloud, you can use the [Changefeed](/tidb-cloud/changefeed-overview.md) feature in the [TiDB Cloud console](https://tidbcloud.com) instead to stream data. 
+> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) are tools for replicating TiDB data to the upstream for TiDB Self-Managed. Most SQL statements for TiCDC and TiDB Binlog are not applicable to TiDB Cloud. For TiDB Cloud, you can use the [Changefeed](/tidb-cloud/changefeed-overview.md) feature in the [TiDB Cloud console](https://tidbcloud.com) instead to stream data. 
 
 | SQL Statement | Description |
 |---------------|-------------|
