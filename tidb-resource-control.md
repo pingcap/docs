@@ -278,6 +278,7 @@ Supported operations (`ACTION`):
 - `DRYRUN`: no action is taken. The records are appended for the runaway queries. This is mainly used to observe whether the condition setting is reasonable.
 - `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
 - `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
+- `SWITCH_GROUP`: switches the identified query to the specified resource group for continued execution. This option is introduced in v8.4.0.
 
 To avoid too many concurrent runaway queries that exhaust system resources, the resource control feature introduces a quick identification mechanism, which can quickly identify and isolate runaway queries. You can use this feature through the `WATCH` clause. When a query is identified as a runaway query, this mechanism extracts the matching feature (defined by the parameter after `WATCH`) of the query. In the next period of time (defined by `DURATION`), the matching feature of the runaway query is added to the watch list, and the TiDB instance matches queries with the watch list. The matching queries are directly marked as runaway queries and isolated according to the corresponding action, instead of waiting for them to be identified by conditions. The `KILL` operation terminates the query and reports an error `Quarantined and interrupted because of being in runaway watch list`.
 
@@ -296,19 +297,20 @@ The parameters of `QUERY_LIMIT` are as follows:
 | Parameter          | Description            | Note                                  |
 |---------------|--------------|--------------------------------------|
 | `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
-| `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, and `KILL`. |
+| `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, `KILL`, and `SWITCH_GROUP`. |
 | `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time, the corresponding action is performed immediately. | Optional. For example, `WATCH=SIMILAR DURATION '60s'`, `WATCH=EXACT DURATION '1m'`, and `WATCH=PLAN`. |
+
+> **Note:**
+>
+> It is recommended to use the `SWITCH_GROUP` statement together with the [`QUERY WATCH`](/tidb-resource-control.md#query-watch-parameters) statement. Because `QUERY_LIMIT` only triggers the corresponding `ACTION` operation when the query execution time exceeds the configured `EXEC_ELAPSED`, `SWITCH_GROUP` might not be able to switch the query to the target resource group in a timely manner in such scenarios.
 
 #### Examples
 
 1. Create a resource group `rg1` with a quota of 500 RUs per second, and define a runaway query as one that exceeds 60 seconds, and lower the priority of the runaway query.
-
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=COOLDOWN);
     ```
-
 2. Change the `rg1` resource group to terminate the runaway queries, and mark the queries with the same pattern as runaway queries immediately in the next 10 minutes.
-
     ```sql
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=SIMILAR DURATION='10m');
     ```
@@ -344,7 +346,13 @@ The parameters are as follows:
     QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
-- Add a matching feature to the runaway query watch list for the `rg1` resource group using `PLAN DIGEST`.
+- Add a matching feature to the runaway query watch list for the `rg1` resource group by parsing the SQL into SQL Digest, and specify `ACTION` as `SWITCH_GROUP(rg2)`.
+
+    ```sql
+    QUERY WATCH ADD RESOURCE GROUP rg1 ACTION SWITCH_GROUP(rg2) SQL TEXT SIMILAR TO 'select * from test.t2';
+    ```
+
+- Add a matching feature to the runaway query watch list for the `rg1` resource group using `PLAN DIGEST`, and specify `ACTION` as `KILL`.
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';

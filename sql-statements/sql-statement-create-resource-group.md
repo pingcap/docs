@@ -68,6 +68,7 @@ ResourceGroupRunawayActionOption ::=
     DRYRUN
 |   COOLDOWN
 |   KILL
+| "SWITCH_GROUP" '(' ResourceGroupName ')'
 ```
 
 The resource group name parameter (`ResourceGroupName`) must be globally unique.
