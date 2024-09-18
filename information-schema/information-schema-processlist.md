@@ -108,7 +108,7 @@ Fields in the `PROCESSLIST` table are described as follows:
 * `RESOURCE_GROUP`: The resource group name.
 * `SESSION_ALIAS`: The alias of the current session.
 * `ROWS_AFFECTED`: The number of rows currently affected by the statement.
-* `TIDB_CPU`: The CPU time (in nanoseconds) consumed by the TiDB server for the statement.
+* `TIDB_CPU`: The CPU time (in nanoseconds) consumed by the TiDB server for the statement. This column shows meaningful data only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
 * `TIKV_CPU`: The CPU time (in nanoseconds) consumed by the TiKV server for the statement.
 
 ## CLUSTER_PROCESSLIST
