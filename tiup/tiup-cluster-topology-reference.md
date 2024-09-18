@@ -183,8 +183,6 @@ Make sure you only configure it when you need to use a specific version of a com
 - `tiflash`: The version of the TiFlash component
 - `pd`: The version of the PD component
 - `tidb_dashboard`: The version of the standalone TiDB Dashboard component
-- `pump`: The version of the Pump component
-- `drainer`: The version of the Drainer component
 - `cdc`: The version of the CDC component
 - `kvcdc`: The version of the TiKV-CDC component
 - `tiproxy`: The version of the TiProxy component
