@@ -24,13 +24,13 @@ SQL の配置ルール機能を使用すると、次のように、粗い粒度�
 | レベル     | 説明                                                                                                                                                                      |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | クラスタ    | デフォルトでは、TiDB はクラスターに対して 3 つのレプリカのポリシーを構成します。クラスターのグローバル配置ポリシーを構成することができます。詳細については、 [クラスタ全体のレプリカ数を指定する](#specify-the-number-of-replicas-globally-for-a-cluster)参照してください。 |
-| データベース  | 特定のデータベースの配置ポリシーを構成できます。詳細については、 [データベースのデフォルトの配置ポリシーを指定する](#specify-a-default-placement-policy-for-a-database)を参照してください。                                               |
-| テーブル    | 特定のテーブルに対して配置ポリシーを設定できます。詳細については、 [テーブルの配置ポリシーを指定する](#specify-a-placement-policy-for-a-table)を参照してください。                                                                 |
+| データベース  | 特定のデータベースの配置ポリシーを構成できます。詳細については、 [データベースのデフォルトの配置ポリシーを指定する](#specify-a-default-placement-policy-for-a-database)参照してください。                                                |
+| テーブル    | 特定のテーブルに対して配置ポリシーを設定できます。詳細については、 [テーブルの配置ポリシーを指定する](#specify-a-placement-policy-for-a-table)参照してください。                                                                  |
 | パーティション | テーブル内の異なる行にパーティションを作成し、パーティションの配置ポリシーを個別に構成できます。詳細については、 [パーティションテーブルの配置ポリシーを指定する](#specify-a-placement-policy-for-a-partitioned-table)参照してください。                        |
 
 > **ヒント：**
 >
-> *SQL での配置ルール*の実装は、PD の*配置ルール機能*に依存します。詳細については、 [配置ルールを構成する](https://docs.pingcap.com/zh/tidb/stable/configure-placement-rules)を参照してください。SQL での配置ルールのコンテキストでは、*配置ルールは、*他のオブジェクトに添付された*配置ポリシー*、または TiDB から PD に送信されるルールを指す場合があります。
+> *SQL での配置ルール*の実装は、PD の*配置ルール機能*に依存します。詳細については、 [配置ルールを構成する](https://docs.pingcap.com/tidb/stable/configure-placement-rules)を参照してください。SQL での配置ルールのコンテキストでは、*配置ルールは、*他のオブジェクトに添付された*配置ポリシー*、または TiDB から PD に送信されるルールを指す場合があります。
 
 ## 制限事項 {#limitations}
 
@@ -68,7 +68,7 @@ TiDB Cloud Dedicated クラスターの場合、TiKV ノードのラベルは自
 
 </CustomContent>
 
-現在の TiKV クラスターで使用可能なすべてのラベルを表示するには、次[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)ステートメントを使用します。
+現在の TiKV クラスターで使用可能なすべてのラベルを表示するには、次の[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)ステートメントを使用します。
 
 ```sql
 SHOW PLACEMENT LABELS;
@@ -88,7 +88,7 @@ SHOW PLACEMENT LABELS;
 
 ### 配置ポリシーを作成して添付する {#create-and-attach-placement-policies}
 
-1.  配置ポリシーを作成するには、次[`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)ステートメントを使用します。
+1.  配置ポリシーを作成するには、 [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)ステートメントを使用します。
 
     ```sql
     CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
@@ -99,7 +99,7 @@ SHOW PLACEMENT LABELS;
     -   `PRIMARY_REGION="us-east-1"`オプションは、 `region`ラベルのノードにRaft Leaders を`us-east-1`として配置することを意味します。
     -   `REGIONS="us-east-1,us-west-1"`オプションは、 `region`ラベルのノードに`us-east-1`として、 `region`ラベルのノードに`us-west-1`としてRaft Followers を配置することを意味します。
 
-    構成可能な配置オプションとその意味の詳細については、 [配置オプション](#placement-option-reference)参照してください。
+    構成可能な配置オプションとその意味の詳細については、 [配置オプション](#placement-option-reference)を参照してください。
 
 2.  テーブルまたはパーティションテーブルに配置ポリシーをアタッチするには、 `CREATE TABLE`または`ALTER TABLE`ステートメントを使用して、そのテーブルまたはパーティションテーブルの配置ポリシーを指定します。
 
@@ -109,11 +109,11 @@ SHOW PLACEMENT LABELS;
     ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
     ```
 
-    `PLACEMENT POLICY`どのデータベース スキーマにも関連付けられておらず、グローバル スコープでアタッチできます。したがって、 `CREATE TABLE`を使用して配置ポリシーを指定する場合、追加の権限は必要ありません。
+    `PLACEMENT POLICY`どのデータベース スキーマにも関連付けられておらず、グローバル スコープでアタッチできます。したがって、 `CREATE TABLE`使用して配置ポリシーを指定する場合、追加の権限は必要ありません。
 
 ### 配置ポリシーをビュー {#view-placement-policies}
 
--   既存の配置ポリシーを表示するには、次[`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)ステートメントを使用します。
+-   既存の配置ポリシーを表示するには、次の[`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)ステートメントを使用します。
 
     ```sql
     SHOW CREATE PLACEMENT POLICY myplacementpolicy\G
@@ -123,7 +123,7 @@ SHOW PLACEMENT LABELS;
     1 row in set (0.00 sec)
     ```
 
--   特定のテーブルにアタッチされている配置ポリシーを表示するには、次[`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)ステートメントを使用します。
+-   特定のテーブルにアタッチされている配置ポリシーを表示するには、次の[`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)ステートメントを使用します。
 
     ```sql
     SHOW CREATE TABLE t1\G
@@ -155,7 +155,7 @@ SHOW PLACEMENT LABELS;
     1 row in set
     ```
 
--   クラスター内の配置ポリシーに関連付けられているすべてのテーブルを表示するには、 `information_schema.tables`システム テーブルの`tidb_placement_policy_name`列目をクエリします。
+-   クラスター内の配置ポリシーに関連付けられているすべてのテーブルを表示するには、 `information_schema.tables`のシステム テーブルの`tidb_placement_policy_name`列目をクエリします。
 
     ```sql
     SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT NULL;
@@ -167,7 +167,7 @@ SHOW PLACEMENT LABELS;
     SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS NOT NULL;
     ```
 
--   すべてのオブジェクトに添付された配置ポリシーは*非同期的に*適用されます。配置ポリシーのスケジュールの進行状況を確認するには、次[`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)ステートメントを使用できます。
+-   すべてのオブジェクトに添付された配置ポリシーは*非同期的に*適用されます。配置ポリシーのスケジュールの進行状況を確認するには、 [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)ステートメントを使用できます。
 
     ```sql
     SHOW PLACEMENT;
@@ -181,11 +181,11 @@ SHOW PLACEMENT LABELS;
 ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=4;
 ```
 
-このステートメントでは、 `FOLLOWERS=4`オプションは、 4 つのフォロワーと 1 つのLeaderを含む、データの 5 つのレプリカを構成することを意味します。 構成可能な配置オプションとその意味の詳細については、 [配置オプションリファレンス](#placement-option-reference)を参照してください。
+このステートメントでは、 `FOLLOWERS=4`オプションは、 4 つのフォロワーと 1 つのLeaderを含む、データの 5 つのレプリカを構成することを意味します。 構成可能な配置オプションとその意味の詳細については、 [配置オプションリファレンス](#placement-option-reference)参照してください。
 
 ### ドロップ配置ポリシー {#drop-placement-policies}
 
-どのテーブルまたはパーティションにもアタッチされていないポリシーを削除するには、次[`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)ステートメントを使用します。
+どのテーブルまたはパーティションにもアタッチされていないポリシーを削除するには、次の[`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)ステートメントを使用します。
 
 ```sql
 DROP PLACEMENT POLICY myplacementpolicy;
@@ -203,12 +203,12 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 通常の配置オプションは、データ配置の基本要件を満たすことができます。
 
-| オプション名           | 説明                                                                                |
-| ---------------- | --------------------------------------------------------------------------------- |
-| `PRIMARY_REGION` | このオプションの値と一致する`region`ラベルを持つノードにRaftリーダーを配置することを指定します。                            |
-| `REGIONS`        | このオプションの値に一致する`region`ラベルを持つノードにRaft Follower を配置することを指定します。                      |
-| `SCHEDULE`       | フォロワーの配置をスケジュールするための戦略を指定します。値のオプションは`EVEN` (デフォルト) または`MAJORITY_IN_PRIMARY`です。   |
-| `FOLLOWERS`      | フォロワーの数を指定します。たとえば、 `FOLLOWERS=2`データのレプリカが 3 つあることを意味します (フォロワーが 2 つ、Leaderが1 つ)。 |
+| オプション名           | 説明                                                                                 |
+| ---------------- | ---------------------------------------------------------------------------------- |
+| `PRIMARY_REGION` | このオプションの値と一致する`region`ラベルを持つノードにRaftリーダーを配置することを指定します。                             |
+| `REGIONS`        | このオプションの値に一致する`region`ラベルを持つノードにRaft Follower を配置することを指定します。                       |
+| `SCHEDULE`       | フォロワーの配置をスケジュールするための戦略を指定します。値のオプションは`EVEN` (デフォルト) または`MAJORITY_IN_PRIMARY`です。    |
+| `FOLLOWERS`      | フォロワーの数を指定します。たとえば、 `FOLLOWERS=2`データのレプリカが 3 つあることを意味します (フォロワーが 2 つ、Leaderが 1 つ)。 |
 
 ### 高度な配置オプション {#advanced-placement-options}
 
@@ -225,23 +225,23 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ### 制約フォーマット {#constraints-formats}
 
-次のいずれかの形式を使用して、 `CONSTRAINTS` 、 `FOLLOWER_CONSTRAINTS` 、および`LEARNER_CONSTRAINTS`の配置オプションを設定できます。
+次のいずれかの形式を使用して、 `CONSTRAINTS` 、 `FOLLOWER_CONSTRAINTS` 、および`LEARNER_CONSTRAINTS`配置オプションを設定できます。
 
-| CONSTRAINTS 形式 | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| リスト形式          | 指定する制約がすべてのレプリカに適用される場合、キーと値のリスト形式を使用できます。各キーは`+`または`-`で始まります。例:<br/><ul><li> `[+region=us-east-1]` 、 `region`ラベルを持つノードにデータを`us-east-1`として配置することを意味します。</li><li> `[+region=us-east-1,-type=fault]` 、 `region`ラベルが`us-east-1`であるが、 `type`ラベルが`fault`ではないノードにデータを配置することを意味します。</li></ul><br/>                                                                                                                                                                                                                                                                                                                                                                                                              |
-| 辞書形式           | 異なる制約に対して異なるレプリカ数を指定する必要がある場合は、辞書形式を使用できます。例:<br/><ul><li> `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` 、 `us-east-1`にFollowerを1 人、 `us-east-2`にFollowerを1 人、 `us-west-1`にFollowerを1 人配置することを意味します。</li><li> `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` 、 `us-east-1`領域にあり、 `type`ラベルが`scale-node`であるノードに 1 つのFollowerを配置し、 `us-west-1`に 1 つのFollowerすることを意味します。</li></ul>辞書形式は、 `+`または`-`で始まる各キーをサポートし、特別な`#evict-leader`属性を構成できます。たとえば、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}'` 、 `us-west-1`で選出されたリーダーが災害復旧中に可能な限り排除されることを意味します。 |
+| CONSTRAINTS 形式 | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| リスト形式          | 指定する制約がすべてのレプリカに適用される場合、キーと値のリスト形式を使用できます。各キーは`+`または`-`で始まります。例:<br/><ul><li> `[+region=us-east-1]` `region`ラベルを持つノードにデータを`us-east-1`として配置することを意味します。</li><li> `[+region=us-east-1,-type=fault]` `region`ラベルが`us-east-1`であるが、 `type`ラベルが`fault`ではないノードにデータを配置することを意味します。</li></ul><br/>                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 辞書形式           | 異なる制約に対して異なるレプリカ数を指定する必要がある場合は、辞書形式を使用できます。例:<br/><ul><li> `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` 、 `us-east-1`にFollowerを 1 人、 `us-east-2`にFollowerを 1 人、 `us-west-1`にFollowerを 1 人配置することを意味します。</li><li> `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` 、 `us-east-1`領域にあり、 `type`ラベルが`scale-node`であるノードに 1 つのFollowerを配置し、 `us-west-1`に 1 つのFollowerを配置することを意味します。</li></ul>辞書形式は、 `+`または`-`で始まる各キーをサポートし、特別な`#evict-leader`属性を構成できます。たとえば、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}'` 、 `us-west-1`で選出されたリーダーが災害復旧中に可能な限り排除されることを意味します。 |
 
 > **注記：**
 >
 > -   `LEADER_CONSTRAINTS`配置オプションはリスト形式のみをサポートします。
-> -   リスト形式と辞書形式はどちらも YAML パーサーに基づいていますが、場合によっては YAML 構文が誤って解析されることがあります。たとえば、 `"{+region=east:1,+region=west:2}"` ( `:`の後にスペースがない) は`'{"+region=east:1": null, "+region=west:2": null}'`と誤って解析される可能性があり、これは予期しません。ただし、 `"{+region=east: 1,+region=west: 2}"` ( `:`後にスペースがある) は`'{"+region=east": 1, "+region=west": 2}'`と正しく解析されます。したがって、 `:`の後にスペースを追加することをお勧めします。
+> -   リスト形式と辞書形式はどちらも YAML パーサーに基づいていますが、場合によっては YAML 構文が誤って解析されることがあります。たとえば、 `"{+region=east:1,+region=west:2}"` ( `:`後にスペースがない) は`'{"+region=east:1": null, "+region=west:2": null}'`と誤って解析される可能性があり、これは予期しません。ただし、 `"{+region=east: 1,+region=west: 2}"` ( `:`の後にスペースがある) は`'{"+region=east": 1, "+region=west": 2}'`と正しく解析されます。したがって、 `:`の後にスペースを追加することをお勧めします。
 
 ## 基本的な例 {#basic-examples}
 
 ### クラスタ全体のレプリカ数を指定する {#specify-the-number-of-replicas-globally-for-a-cluster}
 
-クラスターが初期化された後、デフォルトのレプリカ数は`3`です。クラスターにさらに多くのレプリカが必要な場合は、配置ポリシーを構成してこの数を増やし、 [`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)を使用してクラスター レベルでポリシーを適用できます。例:
+クラスターが初期化された後、デフォルトのレプリカ数は`3`です。クラスターにさらに多くのレプリカが必要な場合は、配置ポリシーを構成してこの数を増やし、 [`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)使用してクラスター レベルでポリシーを適用できます。例:
 
 ```sql
 CREATE PLACEMENT POLICY five_replicas FOLLOWERS=4;
@@ -314,7 +314,7 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 -   `p0`パーティションには`storageforhisotrydata`ポリシーが適用されます。
 -   `p4`パーティションには`storagefornewdata`ポリシーが適用されます。
--   `p1` 、および`p2`パーティションには`p3`表`t1`から継承された`companystandardpolicy`配置ポリシーが適用されます。
+-   `p1` 、および`p3`パーティションには`p2`表`t1`から継承された`companystandardpolicy`配置ポリシーが適用されます。
 -   テーブル`t1`に配置ポリシーが指定されていない場合、 `p1` 、 `p2` 、および`p3`パーティションはデータベースのデフォルト ポリシーまたはグローバル デフォルト ポリシーを継承します。
 
 これらのパーティションに配置ポリシーをアタッチした後、次の例のように特定のパーティションの配置ポリシーを変更できます。
@@ -358,14 +358,14 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 
 配置ポリシーを作成したら、必要に応じて対応するテーブルに添付できます。
 
--   `multiaz`配置ポリシーが関連付けられているテーブルの場合、データは異なるリージョンの 3 つのレプリカに配置され、データ分離のクロスリージョン存続目標、次にクロスゾーン存続目標、最後にクロスホスト存続目標を満たすことが優先されます。
--   `singleaz`の配置ポリシーがアタッチされたテーブルの場合、データは最初に`us-east-1`のリージョンの 3 つのレプリカに配置され、その後、データ分離のゾーン間存続目標が満たされます。
+-   `multiaz`の配置ポリシーが関連付けられているテーブルの場合、データは異なるリージョンの 3 つのレプリカに配置され、データ分離のクロスリージョン存続目標、次にクロスゾーン存続目標、最後にクロスホスト存続目標を満たすことが優先されます。
+-   `singleaz`の配置ポリシーがアタッチされたテーブルの場合、データは最初に`us-east-1`リージョンの 3 つのレプリカに配置され、その後、データ分離のゾーン間存続目標が満たされます。
 
 <CustomContent platform="tidb">
 
 > **注記：**
 >
-> `SURVIVAL_PREFERENCES` PDでは`location-labels`に相当します。詳細については[トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
+> `SURVIVAL_PREFERENCES`はPDでは`location-labels`に相当します。詳細については[トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)参照してください。
 
 </CustomContent>
 
@@ -373,13 +373,13 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 
 > **注記：**
 >
-> `SURVIVAL_PREFERENCES` PDでは`location-labels`に相当します。詳細については[トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)を参照してください。
+> `SURVIVAL_PREFERENCES`はPDでは`location-labels`に相当します。詳細については[トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)参照してください。
 
 </CustomContent>
 
 ### 複数のデータセンターに2:2:1で分散された5つのレプリカを持つクラスターを指定します。 {#specify-a-cluster-with-5-replicas-distributed-2-2-1-across-multiple-data-centers}
 
-2:2:1 の比率で 5 つのレプリカを分散するなど、特定のデータ分散が必要な場合は、次の[辞書の形式](#constraints-formats)つの`CONSTRAINTS`を構成することで、さまざまな制約に対して異なる数のレプリカを指定できます。
+2:2:1 の比率で 5 つのレプリカを分散するなど、特定のデータ分散が必要な場合は、次の[辞書の形式](#constraints-formats)の`CONSTRAINTS`構成することで、さまざまな制約に対して異なる数のレプリカを指定できます。
 
 ```sql
 CREATE PLACEMENT POLICY `deploy221` CONSTRAINTS='{"+region=us-east-1":2, "+region=us-east-2": 2, "+region=us-west-1": 1}';
@@ -417,7 +417,7 @@ CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-
 CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}';
 ```
 
-#### <code>PRIMARY_REGION</code>を使用する {#use-code-primary-region-code}
+#### <code>PRIMARY_REGION</code>使用する {#use-code-primary-region-code}
 
 クラスター トポロジで`region`ラベルが設定されている場合は、 `PRIMARY_REGION`および`REGIONS`オプションを使用してフォロワーの配置ポリシーを指定することもできます。
 
@@ -454,19 +454,19 @@ PLACEMENT POLICY=app_list
 
 -   一時テーブルは配置ポリシーをサポートしていません。
 -   配置ポリシーは、保存中のデータが正しい TiKV ノードに存在することを保証するだけで、転送中のデータ (ユーザー クエリまたは内部操作経由) が特定のリージョンでのみ発生することを保証するものではありません。
--   データのTiFlashレプリカを構成するには、配置ポリシーを使用するのではなく、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)を実行する必要があります。
--   構文糖衣規則は設定`PRIMARY_REGION`と`REGIONS`に許可されています。将来的には`PRIMARY_RACK` 、 `PRIMARY_ZONE` 、 `PRIMARY_HOST`にも多様性を追加する予定です。 [問題 #18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
+-   データのTiFlashレプリカを構成するには、配置ポリシーを使用するのではなく、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)実行する必要があります。
+-   構文糖衣規則は設定`PRIMARY_REGION`と`REGIONS`に許可されています。将来的には`PRIMARY_RACK` 、 `PRIMARY_ZONE` 、 `PRIMARY_HOST`にも多様性を追加する予定です。 [問題 #18030](https://github.com/pingcap/tidb/issues/18030)参照してください。
 
 ## ツールとの互換性 {#compatibility-with-tools}
 
 <CustomContent platform="tidb">
 
-| ツール名           | サポートされる最小バージョン | 説明                                                                                                                                                                                                  |
-| -------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| バックアップと復元 (BR) | 6.0            | v6.0 より前のBR、配置ポリシーのバックアップと復元はサポートされていません。詳細については、 [配置ルールをクラスターに復元するとエラーが発生するのはなぜですか?](/faq/backup-and-restore-faq.md#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster)を参照してください。 |
-| TiDB Lightning | まだ互換性がありません    | TiDB Lightningが配置ポリシーを含むバックアップデータをインポートするとエラーが報告される                                                                                                                                                 |
-| ティCDC          | 6.0            | 配置ポリシーを無視し、下流にポリシーを複製しません。                                                                                                                                                                          |
-| TiDBBinlog     | 6.0            | 配置ポリシーを無視し、下流にポリシーを複製しません。                                                                                                                                                                          |
+| ツール名           | サポートされる最小バージョン | 説明                                                                                                                                                                                                   |
+| -------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| バックアップと復元 (BR) | 6.0            | v6.0 より前のBRでは、配置ポリシーのバックアップと復元はサポートされていません。詳細については、 [配置ルールをクラスターに復元するとエラーが発生するのはなぜですか?](/faq/backup-and-restore-faq.md#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster)参照してください。 |
+| TiDB Lightning | まだ互換性がありません    | TiDB Lightningが配置ポリシーを含むバックアップデータをインポートするとエラーが報告される                                                                                                                                                  |
+| ティCDC          | 6.0            | 配置ポリシーを無視し、下流にポリシーを複製しません。                                                                                                                                                                           |
+| TiDBBinlog     | 6.0            | 配置ポリシーを無視し、下流にポリシーを複製しません。                                                                                                                                                                           |
 
 </CustomContent>
 

@@ -2,10 +2,10 @@
 title: TiDB Introduction
 hide_sidebar: true
 hide_commit: true
-summary: TiDBはオープンソースの分散型SQLデータベースで、HTAPワークロードをサポートしています。TiDBを使用するためのガイド、サンプル、および参照を見つけることができます。TiDBの特徴やTiFlashについて学ぶことができます。また、TiDBを試してみたり、開発したり、デプロイしたり、移行したり、維持したり、モニタリングしたり、チューニングしたり、さまざまなツールを使用したりする方法も学ぶことができます。さらに、TiDBのロードマップやコンフィグレーションファイル、コマンドラインフラグ、コントロール、システム変数、リリースノート、FAQについても参照できます。
+summary: TiDB は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープン ソースの分散 SQL データベースです。このガイドでは、機能、 TiFlash、開発、展開、移行、保守、監視、チューニング、ツール、リファレンスに関する情報を提供します。クイック スタートから TiDB の高度な構成やツールまで、すべてを網羅しています。
 ---
 
-<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
+<LearningPathContainer platform="tidb" title="TiDBセルフマネージド" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
 
 <!-- Localization note for TiDB:
 
@@ -17,7 +17,7 @@ summary: TiDBはオープンソースの分散型SQLデータベースで、HTAP
 
 <LearningPath label="Learn" icon="cloud1">
 
-[TiDBとは](https://docs.pingcap.com/tidb/v7.5/overview)
+[TiDBセルフマネージドとは](https://docs.pingcap.com/tidb/v7.5/overview)
 
 [特徴](https://docs.pingcap.com/tidb/v7.5/basic-features)
 
@@ -27,9 +27,9 @@ summary: TiDBはオープンソースの分散型SQLデータベースで、HTAP
 
 <LearningPath label="Try" icon="cloud5">
 
-[TiDB を試してみる](https://docs.pingcap.com/tidb/v7.5/quick-start-with-tidb)
+[TiDBセルフマネージドを試してみる](https://docs.pingcap.com/tidb/v7.5/quick-start-with-tidb)
 
-[HTAP を試してみる](https://docs.pingcap.com/tidb/v7.5/quick-start-with-htap)
+[HTAPを試してみる](https://docs.pingcap.com/tidb/v7.5/quick-start-with-htap)
 
 [サンプルデータベースのインポート](https://docs.pingcap.com/tidb/v7.5/import-example-data)
 
@@ -41,17 +41,17 @@ summary: TiDBはオープンソースの分散型SQLデータベースで、HTAP
 
 [クイックスタート](https://docs.pingcap.com/tidb/v7.5/dev-guide-build-cluster-in-cloud)
 
-[応用例](https://docs.pingcap.com/tidb/v7.5/dev-guide-sample-application-java-spring-boot)
+[アプリケーション例](https://docs.pingcap.com/tidb/v7.5/dev-guide-sample-application-java-spring-boot)
 
 </LearningPath>
 
 <LearningPath label="Deploy" icon="deploy">
 
-[ソフトウェアとハ​​ードウェアの要件](https://docs.pingcap.com/tidb/v7.5/hardware-and-software-requirements)
+[ソフトウェアおよびハードウェアの要件](https://docs.pingcap.com/tidb/v7.5/hardware-and-software-requirements)
 
-[TiUPを使用した TiDBクラスタのデプロイ](https://docs.pingcap.com/tidb/v7.5/production-deployment-using-tiup)
+[TiUP を使用して TiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/v7.5/production-deployment-using-tiup)
 
-[TiDBクラスタをKubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+[Kubernetes に TiDBクラスタをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
 </LearningPath>
 
@@ -67,23 +67,23 @@ summary: TiDBはオープンソースの分散型SQLデータベースで、HTAP
 
 <LearningPath label="Maintain" icon="maintain">
 
-[クラスタをアップグレードする](https://docs.pingcap.com/tidb/v7.5/upgrade-tidb-using-tiup)
+[クラスタのアップグレード](https://docs.pingcap.com/tidb/v7.5/upgrade-tidb-using-tiup)
 
-[クラスタをスケールする](https://docs.pingcap.com/tidb/v7.5/scale-tidb-using-tiup)
+[クラスタのスケール](https://docs.pingcap.com/tidb/v7.5/scale-tidb-using-tiup)
 
 [クラスタデータのバックアップと復元](https://docs.pingcap.com/tidb/v7.5/backup-and-restore-overview)
 
 [毎日のチェック](https://docs.pingcap.com/tidb/v7.5/daily-check)
 
-[TiUPを使用して TiDBを管理](https://docs.pingcap.com/tidb/v7.5/maintain-tidb-using-tiup)
+[TiUP を使用して TiDB を管理](https://docs.pingcap.com/tidb/v7.5/maintain-tidb-using-tiup)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[プロメテウスとグラファナを使用する](https://docs.pingcap.com/tidb/v7.5/tidb-monitoring-framework)
+[PrometheusとGrafanaを使用する](https://docs.pingcap.com/tidb/v7.5/tidb-monitoring-framework)
 
-[モニタリングAPI](https://docs.pingcap.com/tidb/v7.5/tidb-monitoring-api)
+[監視API](https://docs.pingcap.com/tidb/v7.5/tidb-monitoring-api)
 
 [アラートルール](https://docs.pingcap.com/tidb/v7.5/alert-rules)
 
@@ -95,13 +95,13 @@ summary: TiDBはオープンソースの分散型SQLデータベースで、HTAP
 
 [チューニング方法](https://docs.pingcap.com/tidb/v7.5/performance-tuning-methods)
 
-[OLTP パフォーマンスを調整する](https://docs.pingcap.com/tidb/v7.5/performance-tuning-practices)
+[OLTPパフォーマンスの調整](https://docs.pingcap.com/tidb/v7.5/performance-tuning-practices)
 
-[オペレーティング システムを調整する](https://docs.pingcap.com/tidb/v7.5/tune-operating-system)
+[オペレーティングシステムの調整](https://docs.pingcap.com/tidb/v7.5/tune-operating-system)
 
-[構成を調整する](https://docs.pingcap.com/tidb/v7.5/configure-memory-usage)
+[構成の調整](https://docs.pingcap.com/tidb/v7.5/configure-memory-usage)
 
-[SQL パフォーマンスの調整](https://docs.pingcap.com/tidb/v7.5/sql-tuning-overview)
+[SQLパフォーマンスのチューニング](https://docs.pingcap.com/tidb/v7.5/sql-tuning-overview)
 
 </LearningPath>
 
@@ -117,7 +117,7 @@ summary: TiDBはオープンソースの分散型SQLデータベースで、HTAP
 
 [Dumpling](https://docs.pingcap.com/tidb/v7.5/dumpling-overview)
 
-[TiCDC](https://docs.pingcap.com/tidb/v7.5/ticdc-overview)
+[ティCDC](https://docs.pingcap.com/tidb/v7.5/ticdc-overview)
 
 [バックアップと復元 (BR)](https://docs.pingcap.com/tidb/v7.5/backup-and-restore-overview)
 
@@ -131,7 +131,7 @@ summary: TiDBはオープンソースの分散型SQLデータベースで、HTAP
 
 [TiDBコンフィグレーションファイルのパラメータ](https://docs.pingcap.com/tidb/v7.5/tidb-configuration-file)
 
-[TiDB コマンドライン フラグ](https://docs.pingcap.com/tidb/v7.5/command-line-flags-for-tidb-configuration)
+[TiDB コマンドラインフラグ](https://docs.pingcap.com/tidb/v7.5/command-line-flags-for-tidb-configuration)
 
 [TiDB コントロール](https://docs.pingcap.com/tidb/v7.5/tidb-control)
 

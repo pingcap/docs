@@ -15,21 +15,21 @@ TiDB リソース制御機能は、TiDBレイヤーでのフロー制御機能�
 
 -   TiDB フロー制御: TiDB フロー制御では[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します。バケットに十分なトークンがなく、リソース グループで`BURSTABLE`オプションが指定されていない場合、リソース グループへの要求はトークン バケットがトークンをバックフィルするまで待機し、再試行します。再試行はタイムアウトにより失敗する可能性があります。
 
--   TiKV スケジューリング: 必要に応じて絶対優先度[（ `PRIORITY` ）](/information-schema/information-schema-resource-groups.md#examples)を設定できます。3 `PRIORITY`設定に応じて、さまざまなリソースがスケジュールされます。5 `PRIORITY`高いタスクが最初にスケジュールされます。絶対優先度を設定しない場合、TiKV は各リソース グループの`RU_PER_SEC`の値を使用して、各リソース グループの読み取りおよび書き込み要求の優先度を決定します。優先度に基づいて、storageレイヤーは優先度キューを使用して要求をスケジュールおよび処理します。
+-   TiKV スケジューリング: 必要に応じて絶対優先度[（ `PRIORITY` ）](/information-schema/information-schema-resource-groups.md#examples)を設定できます。3 `PRIORITY`設定に応じて、さまざまなリソースがスケジュールされます`PRIORITY`の高いタスクが最初にスケジュールされます。絶対優先度を設定しない場合、TiKV は各リソース グループの`RU_PER_SEC`の値を使用して、各リソース グループの読み取りおよび書き込み要求の優先度を決定します。優先度に基づいて、storageレイヤーは優先度キューを使用して要求をスケジュールおよび処理します。
 
 v7.4.0 以降、リソース制御機能はTiFlashリソースの制御をサポートします。その原理は、TiDB フロー制御や TiKV スケジューリングの原理に似ています。
 
 <CustomContent platform="tidb">
 
--   TiFlashフロー制御: [TiFlashパイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット (RU)](#what-is-request-unit-ru)に変換して控除することができます。トラフィック制御は、トークン バケット アルゴリズムを使用して実装されます。
--   TiFlashスケジューリング: システム リソースが不足している場合、 TiFlash は、優先順位に基づいて複数のリソース グループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソース グループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。結果として、 `rg1`と`rg2` `PRIORITY`は同じですが、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
+-   TiFlashフロー制御: [TiFlashパイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット (RU)](#what-is-request-unit-ru)に変換して控除することができます。トラフィック制御は、トークン バケット アルゴリズムを使用して実装されます。
+-   TiFlashスケジューリング: システム リソースが不足している場合、 TiFlash は、優先順位に基づいて複数のリソース グループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソース グループの`PRIORITY`評価し、次に CPU 使用率と`RU_PER_SEC`考慮します。結果として、 `rg1`と`rg2`の`PRIORITY`は同じですが、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   TiFlashフロー制御: [TiFlashパイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット (RU)](#what-is-request-unit-ru)に変換して控除することができます。トラフィック制御は、トークン バケット アルゴリズムを使用して実装されます。
--   TiFlashスケジューリング: システム リソースが不足している場合、 TiFlash は、優先順位に基づいて複数のリソース グループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソース グループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。結果として、 `rg1`と`rg2` `PRIORITY`は同じですが、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
+-   TiFlashフロー制御: [TiFlashパイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット (RU)](#what-is-request-unit-ru)に変換して控除することができます。トラフィック制御は、トークン バケット アルゴリズムを使用して実装されます。
+-   TiFlashスケジューリング: システム リソースが不足している場合、 TiFlash は、優先順位に基づいて複数のリソース グループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソース グループの`PRIORITY`評価し、次に CPU 使用率と`RU_PER_SEC`考慮します。結果として、 `rg1`と`rg2`の`PRIORITY`は同じですが、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
 
 </CustomContent>
 
@@ -95,17 +95,17 @@ TiDB v7.0.0 以降では、 `tidb_enable_resource_control`と`resource-control.e
 
 <CustomContent platform="tidb">
 
-v7.4.0 以降、 TiFlash構成項目`enable_resource_control`はデフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlashリソース制御機能を制御します。TiFlash リソース制御は、 `enable_resource_control`と`tidb_enable_resource_control`両方が有効な場合にのみ、フロー制御と優先度スケジューリングを実行します。また、 `enable_resource_control`が有効な場合、 TiFlash は[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)使用します。
+v7.4.0 以降、 TiFlash構成項目`enable_resource_control`デフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlashリソース制御機能を制御します。TiFlashTiFlash制御は、 `enable_resource_control`と`tidb_enable_resource_control`両方が有効な場合にのみ、フロー制御と優先度スケジューリングを実行します。また、 `enable_resource_control`が有効な場合、 TiFlash は[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)使用します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-v7.4.0 以降、 TiFlash構成項目`enable_resource_control`はデフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlashリソース制御機能を制御します。TiFlash リソース制御は、 `enable_resource_control`と`tidb_enable_resource_control`両方が有効な場合にのみ、フロー制御と優先度スケジューリングを実行します。また、 `enable_resource_control`が有効な場合、 TiFlash は[パイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)使用します。
+v7.4.0 以降、 TiFlash構成項目`enable_resource_control`デフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlashリソース制御機能を制御します。TiFlashTiFlash制御は、 `enable_resource_control`と`tidb_enable_resource_control`両方が有効な場合にのみ、フロー制御と優先度スケジューリングを実行します。また、 `enable_resource_control`が有効な場合、 TiFlash は[パイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)使用します。
 
 </CustomContent>
 
-リソース制御メカニズムとパラメータの詳細については、 [RFC: TiDB におけるグローバル リソース制御](https://github.com/pingcap/tidb/blob/release-7.5/docs/design/2022-11-25-global-resource-control.md)および[TiFlashリソース制御](https://github.com/pingcap/tiflash/blob/release-7.5/docs/design/2023-09-21-tiflash-resource-control.md)を参照してください。
+リソース制御メカニズムとパラメータの詳細については、 [RFC: TiDB におけるグローバル リソース制御](https://github.com/pingcap/tidb/blob/release-7.5/docs/design/2022-11-25-global-resource-control.md)および[TiFlashリソース制御](https://github.com/pingcap/tiflash/blob/release-7.5/docs/design/2023-09-21-tiflash-resource-control.md)参照してください。
 
 ## リソース制御の使用方法 {#how-to-use-resource-control}
 
@@ -120,27 +120,27 @@ v7.4.0 以降、 TiFlash構成項目`enable_resource_control`はデフォルト�
 -   [実際の作業負荷に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 -   [ハードウェアの展開に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-[リソース マネージャー ページ](/dashboard/dashboard-resource-manager.md) TiDB ダッシュボードで確認できます。詳細については[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
+[リソース マネージャー ページ](/dashboard/dashboard-resource-manager.md) TiDB ダッシュボードで確認できます。詳細については[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Self-Managed の場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource)ステートメントを使用してクラスターの容量を見積もることができます。
+TiDB Self-Managed の場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource)ステートメントを使用してクラスターの容量を見積もることができます。
 
-TiDB Cloudの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource)ステートメントは適用されません。
+TiDB Cloudの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource)ステートメントは適用されません。
 
 </CustomContent>
 
 ### リソース グループを管理する {#manage-resource-groups}
 
-リソース グループを作成、変更、または削除するには、権限`SUPER`または`RESOURCE_GROUP_ADMIN`必要です。
+リソース グループを作成、変更、または削除するには、権限`SUPER`または`RESOURCE_GROUP_ADMIN`が必要です。
 
-[`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)を使用してクラスターのリソース グループを作成できます。
+[`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)使用してクラスターのリソース グループを作成できます。
 
-既存のリソース グループの場合、 [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)を使用して、リソース グループの`RU_PER_SEC`オプション (1 秒あたりの RU バックフィルの速度) を変更できます。リソース グループへの変更はすぐに有効になります。
+既存のリソース グループの場合、 [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)使用して、リソース グループの`RU_PER_SEC`オプション (1 秒あたりの RU バックフィルの速度) を変更できます。リソース グループへの変更はすぐに有効になります。
 
-[`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)を使用してリソース グループを削除できます。
+[`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)使用してリソース グループを削除できます。
 
 ### リソースグループを作成する {#create-a-resource-group}
 
@@ -168,19 +168,19 @@ TiDB Cloudの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/s
 
 TiDB は、次の 3 つのレベルのリソース グループ設定をサポートしています。
 
--   ユーザー レベル。1 または[`CREATE USER`](/sql-statements/sql-statement-create-user.md) [`ALTER USER`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)ステートメントを使用して、ユーザーを特定のリソース グループにバインドします。ユーザーがリソース グループにバインドされると、ユーザーによって作成されたセッションは、対応するリソース グループに自動的にバインドされます。
+-   ユーザー レベル[`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)ステートメントを使用して、ユーザーを特定のリソース グループにバインドします。ユーザーがリソース グループにバインドされると、ユーザーによって作成されたセッションは、対応するリソース グループに自動的にバインドされます。
 -   セッション レベル。 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を介して現在のセッションのリソース グループを設定します。
--   ステートメント レベル。1 [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザー ヒントを使用して、現在のステートメントのリソース グループを設定します。
+-   ステートメント レベル。1 [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)のオプティマイザー ヒントを使用して、現在のステートメントのリソース グループを設定します。
 
 #### ユーザーをリソースグループにバインドする {#bind-users-to-a-resource-group}
 
-次の例では、ユーザー`usr1`を作成し、そのユーザーをリソース グループ`rg1`にバインドします。5 `rg1` 、 [リソース グループの作成](#create-a-resource-group)の例で作成されたリソース グループです。
+次の例では、ユーザー`usr1`を作成し、そのユーザーをリソース グループ`rg1`にバインドします。5 は[リソース グループの作成](#create-a-resource-group) `rg1`例で作成されたリソース グループです。
 
 ```sql
 CREATE USER 'usr1'@'%' IDENTIFIED BY '123' RESOURCE GROUP rg1;
 ```
 
-次の例では、 `ALTER USER`使用してユーザー`usr2`をリソース グループ`rg2`にバインドします。 `rg2`は、 [リソース グループの作成](#create-a-resource-group)の例で作成されたリソース グループです。
+次の例では、 `ALTER USER`使用してユーザー`usr2`リソース グループ`rg2`にバインドします。 `rg2` [リソース グループの作成](#create-a-resource-group)の例で作成されたリソース グループです。
 
 ```sql
 ALTER USER usr2 RESOURCE GROUP rg2;
@@ -192,7 +192,7 @@ ALTER USER usr2 RESOURCE GROUP rg2;
 
 > **注記：**
 >
-> -   `CREATE USER`または`ALTER USER`を使用してユーザーをリソース グループにバインドすると、そのバインドはユーザーの既存のセッションには適用されず、ユーザーの新しいセッションにのみ適用されます。
+> -   `CREATE USER`または`ALTER USER`使用してユーザーをリソース グループにバインドすると、そのバインドはユーザーの既存のセッションには適用されず、ユーザーの新しいセッションにのみ適用されます。
 > -   TiDB は、クラスターの初期化中に`default`リソース グループを自動的に作成します。このリソース グループの場合、デフォルト値`RU_PER_SEC`は`UNLIMITED` ( `INT`タイプの最大値である`2147483647`に相当) で、 `BURSTABLE`モードです。リソース グループにバインドされていないステートメントは、このリソース グループに自動的にバインドされます。このリソース グループは削除をサポートしていませんが、RU の構成を変更することはできます。
 
 リソース グループからユーザーをバインド解除するには、次のようにしてユーザーを`default`グループに再度バインドするだけです。
@@ -227,7 +227,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 > **警告：**
 >
-> この機能は実験的ものです。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告できます。
+> この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
 ランナウェイ クエリとは、予想よりも多くの時間やリソースを消費するクエリ ( `SELECT`ステートメントのみ) です。以下では、ランナウェイ クエリの管理機能を説明するために、**ランナウェイ クエリ**という用語を使用します。
 
@@ -244,26 +244,26 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 -   `DRYRUN` : アクションは実行されません。ランナウェイ クエリのレコードが追加されます。これは主に、条件設定が妥当かどうかを観察するために使用されます。
 -   `COOLDOWN` : クエリの実行優先度が最低レベルに下げられます。クエリは最低優先度で実行を継続し、他の操作のリソースを占有しません。
--   `KILL` : 識別されたクエリは自動的に終了し、エラー`Query execution was interrupted, identified as runaway query`を報告します。
+-   `KILL` : 識別されたクエリは自動的に終了し、エラー`Query execution was interrupted, identified as runaway query`報告します。
 
-システム リソースを使い果たす大量の同時実行クエリを回避するために、リソース制御機能では、ランナウェイ クエリを迅速に識別して分離できるクイック識別メカニズムが導入されています。 `WATCH`句を通じてこの機能を使用できます。クエリがランナウェイ クエリとして識別されると、このメカニズムはクエリの一致する特徴 ( `WATCH`後のパラメータで定義) を抽出します。次の期間 ( `DURATION`で定義) に、ランナウェイ クエリの一致する特徴が監視リストに追加され、TiDB インスタンスはクエリを監視リストと照合します。一致するクエリは、条件によって識別されるのを待つのではなく、直接ランナウェイ クエリとしてマークされ、対応するアクションに従って分離されます。 `KILL`操作はクエリを終了し、エラー`Quarantined and interrupted because of being in runaway watch list`を報告します。
+システム リソースを使い果たす大量の同時実行クエリを回避するために、リソース制御機能では、ランナウェイ クエリを迅速に識別して分離できるクイック識別メカニズムが導入されています。 `WATCH`句を通じてこの機能を使用できます。クエリがランナウェイ クエリとして識別されると、このメカニズムはクエリの一致する特徴 ( `WATCH`の後のパラメータで定義) を抽出します。次の期間 ( `DURATION`で定義) に、ランナウェイ クエリの一致する特徴が監視リストに追加され、TiDB インスタンスはクエリを監視リストと照合します。一致するクエリは、条件によって識別されるのを待つのではなく、直接ランナウェイ クエリとしてマークされ、対応するアクションに従って分離されます。 `KILL`操作はクエリを終了し、エラー`Quarantined and interrupted because of being in runaway watch list`を報告します。
 
 `WATCH`すばやく識別するために一致させる方法は 3 つあります。
 
 -   `EXACT` 、まったく同じ SQL テキストを持つ SQL ステートメントのみが迅速に識別されることを示します。
--   `SIMILAR` 、同じパターンを持つすべての SQL ステートメントがプラン ダイジェストに一致し、リテラル値が無視されることを示します。
--   `PLAN` 、同じパターンを持つすべての SQL ステートメントがプラン ダイジェストに一致することを示します。
+-   `SIMILAR`同じパターンを持つすべての SQL ステートメントがプラン ダイジェストに一致し、リテラル値が無視されることを示します。
+-   `PLAN`同じパターンを持つすべての SQL ステートメントがプラン ダイジェストに一致することを示します。
 
 `WATCH`の`DURATION`オプションは識別項目の有効期間を示し、デフォルトでは無期限です。
 
-監視項目が追加された後は、 `QUERY_LIMIT`構成が変更または削除されても、一致する機能も`ACTION`変更または削除されません。監視項目を削除するには、 `QUERY WATCH REMOVE`使用できます。
+監視項目が追加された後は、 `QUERY_LIMIT`構成が変更または削除されても、一致する機能も`ACTION`も変更または削除されません。監視項目を削除するには、 `QUERY WATCH REMOVE`使用できます。
 
 `QUERY_LIMIT`のパラメータは次のとおりです。
 
 | パラメータ          | 説明                                                                      | 注記                                                                                           |
 | -------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `EXEC_ELAPSED` | クエリ実行時間がこの値を超えると、ランナウェイクエリとして識別されます。                                    | EXEC_ELAPSED = `60s` 、実行に 60 秒以上かかる場合にクエリがランナウェイ クエリとして識別されることを意味します。                        |
-| `ACTION`       | 暴走クエリが特定された場合に実行されるアクション                                                | オプションの値は`DRYRUN` 、 `COOLDOWN` 、 `KILL`です。                                                    |
+| `EXEC_ELAPSED` | クエリ実行時間がこの値を超えると、ランナウェイクエリとして識別されます。                                    | EXEC_ELAPSED = `60s`は、実行に 60 秒以上かかる場合にクエリがランナウェイ クエリとして識別されることを意味します。                        |
+| `ACTION`       | 暴走クエリが特定された場合のアクション                                                     | オプションの値は`DRYRUN` 、 `COOLDOWN` 、 `KILL`です。                                                    |
 | `WATCH`        | 特定されたランナウェイクエリを迅速に照合します。一定期間内に同じまたは類似のクエリが再度発生した場合、対応するアクションが直ちに実行されます。 | オプション。たとえば、 `WATCH=SIMILAR DURATION '60s'` 、 `WATCH=EXACT DURATION '1m'` 、 `WATCH=PLAN`などです。 |
 
 #### 例 {#examples}
@@ -288,17 +288,17 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 #### <code>QUERY WATCH</code>パラメータ {#code-query-watch-code-parameters}
 
-`QUERY WATCH`のあらすじについては[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)を参照してください。
+`QUERY WATCH`のあらすじについては[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)参照してください。
 
 パラメータは次のとおりです。
 
--   `RESOURCE GROUP`リソース グループを指定します。このステートメントによって追加されたランナウェイ クエリの一致する機能は、リソース グループの監視リストに追加されます。このパラメータは省略できます。省略した場合は、 `default`リソース グループに適用されます。
+-   `RESOURCE GROUP`はリソース グループを指定します。このステートメントによって追加されたランナウェイ クエリの一致する機能は、リソース グループの監視リストに追加されます。このパラメータは省略できます。省略した場合は、 `default`リソース グループに適用されます。
 
--   `ACTION`の意味は`QUERY LIMIT`と同じです。このパラメータは省略できます。省略した場合、識別後の対応するアクションはリソースグループ内の`QUERY LIMIT`で設定された`ACTION`を採用し、アクションは`QUERY LIMIT`設定によって変更されません。リソースグループ内に`ACTION`設定されていない場合は、エラーが報告されます。
+-   `ACTION`の意味は`QUERY LIMIT`と同じです。このパラメータは省略できます。省略した場合、識別後の対応するアクションはリソースグループ内の`QUERY LIMIT`で設定された`ACTION`採用し、アクションは`QUERY LIMIT`設定によって変更されません。リソースグループ内に`ACTION`が設定されていない場合は、エラーが報告されます。
 
 -   `QueryWatchTextOption`パラメータには、 `SQL DIGEST` 、 `PLAN DIGEST` 、 `SQL TEXT` 3 つのオプションがあります。
-    -   `SQL DIGEST`は`SIMILAR`と同じです。次のパラメータは、文字列、ユーザー定義変数、または文字列の結果を生成するその他の式を受け入れます。文字列の長さは 64 でなければなりません。これは、TiDB のダイジェスト定義と同じです。
-    -   `PLAN DIGEST`は`PLAN`と同じです。次のパラメータはダイジェスト文字列です。
+    -   `SQL DIGEST` `SIMILAR`と同じです。次のパラメータは、文字列、ユーザー定義変数、または文字列の結果を生成するその他の式を受け入れます。文字列の長さは 64 でなければなりません。これは、TiDB のダイジェスト定義と同じです。
+    -   `PLAN DIGEST` `PLAN`と同じです。次のパラメータはダイジェスト文字列です。
     -   `SQL TEXT`入力SQLを生の文字列（ `EXACT` ）として一致させるか、次のパラメータに応じてそれを解析して`SQL DIGEST` （ `SIMILAR` ）または`PLAN DIGEST` （ `PLAN` ）にコンパイルします。
 
 -   デフォルトのリソース グループのランナウェイ クエリ監視リストに一致する機能を追加します (事前にデフォルトのリソース グループに`QUERY LIMIT`設定する必要があります)。
@@ -307,19 +307,19 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
     QUERY WATCH ADD ACTION KILL SQL TEXT EXACT TO 'select * from test.t2';
     ```
 
--   SQL を SQL ダイジェストに解析して、 `rg1`リソース グループのランナウェイ クエリ監視リストに一致する機能を追加します。3 `ACTION`指定されていない場合は、 `rg1`リソース グループに既に構成されている`ACTION`オプションが使用されます。
+-   SQL を SQL ダイジェストに解析して、 `rg1`リソース グループのランナウェイ クエリ監視リストに一致する機能を追加します`ACTION`が指定されていない場合は、 `rg1`リソース グループに既に構成されている`ACTION`オプションが使用されます。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
--   `PLAN DIGEST`を使用して、 `rg1`リソース グループのランナウェイ クエリ監視リストに一致する機能を追加します。
+-   `PLAN DIGEST`使用して、 `rg1`リソース グループのランナウェイ クエリ監視リストに一致する機能を追加します。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
     ```
 
--   `INFORMATION_SCHEMA.RUNAWAY_WATCHES`をクエリしてウォッチ アイテム ID を取得し、ウォッチ アイテムを削除します。
+-   `INFORMATION_SCHEMA.RUNAWAY_WATCHES`クエリしてウォッチ アイテム ID を取得し、ウォッチ アイテムを削除します。
 
     ```sql
     SELECT * from information_schema.runaway_watches ORDER BY id;
@@ -363,17 +363,17 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
     上記の出力では、 `match_type`ランナウェイ クエリの識別方法を示しています。値は次のいずれかになります。
 
     -   `identify`ランナウェイクエリの条件に一致することを意味します。
-    -   `watch` 、ウォッチ リスト内のクイック識別ルールに一致することを意味します。
+    -   `watch`ウォッチ リスト内のクイック識別ルールに一致することを意味します。
 
--   `information_schema.runaway_watches`テーブルには、ランナウェイ クエリのクイック識別ルールのレコードが含まれています。詳細については、 [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md)を参照してください。
+-   `information_schema.runaway_watches`テーブルには、ランナウェイ クエリのクイック識別ルールのレコードが含まれています。詳細については、 [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md)参照してください。
 
 ### バックグラウンドタスクを管理する {#manage-background-tasks}
 
 > **警告：**
 >
-> この機能は実験的ものです。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://docs.pingcap.com/tidb/stable/support)報告できます。
+> この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://docs.pingcap.com/tidb/stable/support)を報告できます。
 >
-> リソース制御におけるバックグラウンド タスク管理は、CPU/IO 使用率に対する TiKV のリソース クォータの動的調整に基づいています。そのため、各インスタンスの使用可能なリソース クォータに依存します。複数のコンポーネントまたはインスタンスが単一のサーバーに展開されている場合は、 `cgroup`を通じてTiUPインスタンスに適切なリソース クォータを設定する必要があります。TiUP Playground のような共有リソースでの展開では、期待される効果を達成することは困難です。
+> リソース制御におけるバックグラウンド タスク管理は、CPU/IO 使用率に対する TiKV のリソース クォータの動的調整に基づいています。そのため、各インスタンスの使用可能なリソース クォータに依存します。複数のコンポーネントまたはインスタンスが単一のサーバーに展開されている場合は、 `cgroup`を通じて各インスタンスに適切なリソース クォータを設定する必要があります。TiUP Playground のようなTiUPリソースでの展開では、期待される効果を達成することは困難です。
 
 データのバックアップや自動統計収集などのバックグラウンド タスクは、優先度は低いですが、多くのリソースを消費します。これらのタスクは通常、定期的または不定期にトリガーされます。実行中は多くのリソースを消費するため、オンラインの高優先度タスクのパフォーマンスに影響します。
 
@@ -387,8 +387,8 @@ TiDB は次の種類のバックグラウンド タスクをサポートしま�
 
 <CustomContent platform="tidb">
 
--   `lightning` : [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してインポート タスクを実行します。TiDB TiDB Lightningの物理インポート モードと論理インポート モードの両方がサポートされています。
--   `br` : [BR](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
+-   `lightning` : [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用してインポート タスクを実行します。TiDB TiDB Lightningの物理インポート モードと論理インポート モードの両方がサポートされています。
+-   `br` : [BR](/br/backup-and-restore-overview.md)使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
 -   `ddl` : 再編成 DDL のバッチ データ書き戻しフェーズ中のリソース使用量を制御します。
 -   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
 -   `background` : 予約済みのタスク タイプ。 [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)システム変数を使用して、現在のセッションのタスク タイプを`background`として指定できます。
@@ -397,8 +397,8 @@ TiDB は次の種類のバックグラウンド タスクをサポートしま�
 
 <CustomContent platform="tidb-cloud">
 
--   `lightning` : [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を使用してインポート タスクを実行します。TiDB TiDB Lightningの物理インポート モードと論理インポート モードの両方がサポートされています。
--   `br` : [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)を使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
+-   `lightning` : [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)使用してインポート タスクを実行します。TiDB TiDB Lightningの物理インポート モードと論理インポート モードの両方がサポートされています。
+-   `br` : [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)使用してバックアップおよび復元タスクを実行します。PITR はサポートされていません。
 -   `ddl` : 再編成 DDL のバッチ データ書き戻しフェーズ中のリソース使用量を制御します。
 -   `stats` : 手動で実行されるか、TiDB によって自動的にトリガーされる[統計を収集する](/statistics.md#collect-statistics)タスク。
 -   `background` : 予約済みのタスク タイプ。 [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)システム変数を使用して、現在のセッションのタスク タイプを`background`として指定できます。
@@ -409,7 +409,7 @@ TiDB は次の種類のバックグラウンド タスクをサポートしま�
 
 > **注記：**
 >
-> 現在、すべてのリソース グループのバックグラウンド タスクは、 `default`リソース グループにバインドされています。 `default`を通じてバックグラウンド タスクの種類をグローバルに管理できます。 バックグラウンド タスクを他のリソース グループにバインドすることは、現在サポートされていません。
+> 現在、すべてのリソース グループのバックグラウンド タスクは、 `default`リソース グループにバインドされています。 `default`を通じてバックグラウンド タスクの種類をグローバルに管理できます。 他のリソース グループへのバックグラウンド タスクのバインドは現在サポートされていません。
 
 #### 例 {#examples}
 
@@ -479,9 +479,9 @@ TiDB は次の種類のバックグラウンド タスクをサポートしま�
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2.  TiDB Self-Managed の場合、 `resource-control.enabled`パラメータを使用して、リソース グループのクォータに基づいて要求のスケジュールを使用するかどうかを制御できます。 TiDB Cloudの場合、 `resource-control.enabled`パラメータの値はデフォルトで`true`であり、動的な変更はサポートされていません。 TiDB Cloud Dedicated クラスターでこれを無効にする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+2.  TiDB Self-Managed の場合、 `resource-control.enabled`パラメータを使用して、リソース グループのクォータに基づいて要求のスケジュールを使用するかどうかを制御できます。 TiDB Cloudの場合、 `resource-control.enabled`パラメータの値はデフォルトで`true`であり、動的な変更はサポートされていません。 TiDB Cloud Dedicated クラスターでこれを無効にする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-3.  TiDB Self-Managed の場合、 `enable_resource_control`構成項目を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。TiDB TiDB Cloudの場合、 `enable_resource_control`パラメータの値はデフォルトで`true`であり、動的な変更はサポートされていません。TiDB TiDB Cloud Dedicated クラスターで無効にする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+3.  TiDB Self-Managed の場合、 `enable_resource_control`構成項目を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。TiDB TiDB Cloudの場合、 `enable_resource_control`パラメータの値はデフォルトで`true`であり、動的な変更はサポートされていません。TiDB TiDB Cloud Dedicated クラスターで無効にする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
 </CustomContent>
 
@@ -489,7 +489,7 @@ TiDB は次の種類のバックグラウンド タスクをサポートしま�
 
 RU 消費量に関する情報を表示できます。
 
-### SQLによるRU消費量をビュー {#view-the-ru-consumption-by-sql}
+### SQL による RU 消費量をビュー {#view-the-ru-consumption-by-sql}
 
 SQL ステートメントの RU 消費量は、次の方法で確認できます。
 
@@ -498,13 +498,13 @@ SQL ステートメントの RU 消費量は、次の方法で確認できます
 -   遅いクエリとそれに対応するシステムテーブル
 -   `statements_summary`
 
-#### システム変数<code>tidb_last_query_info</code>をクエリして、最後の SQL 実行で消費された RUをビュー。 {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-code-tidb-last-query-info-code}
+#### システム変数<code>tidb_last_query_info</code>をクエリして、最後の SQL 実行で消費された RU をビュー。 {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-code-tidb-last-query-info-code}
 
 TiDB はシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)を提供します。このシステム変数は、SQL 実行によって消費された RU を含む、最後に実行された DML ステートメントの情報を記録します。
 
 例：
 
-1.  `UPDATE`番目のステートメントを実行します。
+1.  `UPDATE`ステートメントを実行します。
 
     ```sql
     UPDATE sbtest.sbtest1 SET k = k + 1 WHERE id = 1;
@@ -528,7 +528,7 @@ TiDB はシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_las
 
     結果では、この SQL ステートメントの実行によって消費される RU は`ru_consumption`です。
 
-#### <code>EXPLAIN ANALYZE</code>による SQL 実行中に消費された RUをビュー {#view-rus-consumed-during-sql-execution-by-code-explain-analyze-code}
+#### <code>EXPLAIN ANALYZE</code>による SQL 実行中に消費された RU をビュー {#view-rus-consumed-during-sql-execution-by-code-explain-analyze-code}
 
 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)ステートメントを使用すると、SQL 実行中に消費された RU の量を取得できます。RU の量はキャッシュの影響を受けることに注意してください (例: [コプロセッサキャッシュ](/coprocessor-cache.md) )。同じ SQL が複数回実行されると、各実行で消費される RU の量は異なる場合があります。RU 値は各実行の正確な値を表すものではありませんが、推定の参照として使用できます。
 
@@ -546,9 +546,9 @@ TiDB はシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_las
 
 </CustomContent>
 
-#### RU 統計を<code>statements_summary</code>別にビュー_summary {#view-ru-statistics-by-code-statements-summary-code}
+#### RU 統計を<code>statements_summary</code>別にビュー {#view-ru-statistics-by-code-statements-summary-code}
 
-TiDB のシステム テーブル[`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary)には、SQL ステートメントの正規化および集計された統計が格納されます。システム テーブルを使用して、SQL ステートメントの実行パフォーマンスを表示および分析できます。また、リソース グループ名、RU 消費量、使用可能な RU を待機する時間など、リソース制御に関する統計も含まれています。詳細については、 [`statements_summary`フィールドの説明](/statement-summary-tables.md#statements_summary-fields-description)を参照してください。
+TiDB のシステム テーブル[`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary)には、SQL ステートメントの正規化および集計された統計が格納されます。システム テーブルを使用して、SQL ステートメントの実行パフォーマンスを表示および分析できます。また、リソース グループ名、RU 消費量、使用可能な RU を待機する時間など、リソース制御に関する統計も含まれています。詳細については、 [`statements_summary`フィールドの説明](/statement-summary-tables.md#statements_summary-fields-description)参照してください。
 
 ## メトリックとグラフの監視 {#monitoring-metrics-and-charts}
 
@@ -558,7 +558,7 @@ TiDB は、リソース制御に関する実行時情報を定期的に収集し
 
 TiKV は、さまざまなリソース グループからの要求 QPS も記録します。詳細については、 [TiKV モニタリング メトリックの詳細](/grafana-tikv-dashboard.md#grpc)参照してください。
 
-TiDB ダッシュボードの現在の[`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)テーブルにあるリソース グループのデータは表示できます。詳細については、 [リソース マネージャー ページ](/dashboard/dashboard-resource-manager.md)を参照してください。
+TiDB ダッシュボードの現在の[`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)テーブルにあるリソース グループのデータは表示できます。詳細については、 [リソース マネージャー ページ](/dashboard/dashboard-resource-manager.md)参照してください。
 
 </CustomContent>
 
@@ -576,7 +576,7 @@ TiKV は、Grafana の**TiKV**ダッシュボードにさまざまなリソー�
 
 ## ツールの互換性 {#tool-compatibility}
 
-リソース制御機能は、データのインポート、エクスポート、およびその他のレプリケーション ツールの通常の使用には影響しませBR。BR、 TiDB Lightning、および TiCDC は現在、リソース制御に関連する DDL 操作の処理をサポートしておらず、それらのリソース消費はリソース制御によって制限されません。
+リソース制御機能は、データのインポート、エクスポート、およびその他のレプリケーション ツールの通常の使用には影響しませんBR、 TiDB Lightning、および TiCDC は現在、リソース制御に関連する DDL 操作の処理をサポートしておらず、それらのリソース消費はリソース制御によって制限されません。
 
 ## FAQ {#faq}
 
@@ -586,7 +586,7 @@ TiKV は、Grafana の**TiKV**ダッシュボードにさまざまなリソー�
 
 2.  データベース ユーザーを複数のリソース グループにバインドできますか?
 
-    いいえ。データベース ユーザーは 1 つのリソース グループにのみバインドできます。ただし、セッション実行時に[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)使用して、現在のセッションで使用されるリソース グループを設定できます。また、オプティマイザ ヒント[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を使用して、実行中のステートメントのリソース グループを設定することもできます。
+    いいえ。データベース ユーザーは 1 つのリソース グループにのみバインドできます。ただし、セッション実行時に[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)使用して、現在のセッションで使用されるリソース グループを設定できます。また、オプティマイザ ヒント[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)使用して、実行中のステートメントのリソース グループを設定することもできます。
 
 3.  すべてのリソースグループの合計リソース割り当て（ `RU_PER_SEC` ）がシステム容量を超えるとどうなりますか？
 

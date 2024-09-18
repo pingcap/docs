@@ -9,7 +9,7 @@ summary: Gitpod は、完全かつ自動化され、事前構成されたクラ�
 
 [ギットポッド](https://www.gitpod.io/)使用すると、ボタンやリンクをクリックするだけでブラウザ内で完全な開発環境が得られ、すぐにコードを記述できます。
 
-Gitpod は、コードに直接アクセスする開発環境向けのオープンソースの Kubernetes アプリケーション (GitHub リポジトリ アドレス: [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ) で、クラウド内で各タスクの新しい自動開発環境を数秒で立ち上げます。開発環境をコードとして記述し、ブラウザまたはデスクトップ IDE から直接、リモートおよびクラウドベースの開発環境を即座に開始できます。
+Gitpod は、コードに直接アクセスする開発環境向けのオープンソースの Kubernetes アプリケーション (GitHub リポジトリ アドレス: [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ) で、クラウド内で各タスクの新しい自動開発環境を数秒で立ち上げます。開発環境をコードとして記述し、ブラウザまたはデスクトップ IDE から直接、リモートのクラウドベースの開発環境を即座に開始できます。
 
 ## クイックスタート {#quick-start}
 
@@ -33,7 +33,7 @@ Gitpod は、コードに直接アクセスする開発環境向けのオープ�
 
 ![playground gitpod workspace init](/media/develop/playground-gitpod-workspace-init.png)
 
-このページのシナリオでは、 [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview)使用して TiDB Playground を構築します。ターミナル領域の左側で進行状況を確認できます。
+このページのシナリオでは、 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用して TiDB Playground を構築します。ターミナル領域の左側で進行状況を確認できます。
 
 TiDB Playground の準備が完了すると、さらに`Spring JPA Hibernate`タスクが実行されます。ターミナル領域の右側で進行状況を確認できます。
 
@@ -97,7 +97,7 @@ ports:
 
 パブリック Docker イメージまたは Dockerfile を使用したり、プロジェクトに必要な依存関係をインストールしたりすることもできます。
 
-たとえば、次のように Dockerfile ( [`.gitpod.Dockerfile`例](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)も参照) を使用できます。
+たとえば、次のように Dockerfile ( [`.gitpod.Dockerfile`の例](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)も参照) を使用できます。
 
 ```dockerfile
 FROM gitpod/workspace-java-17
@@ -155,9 +155,9 @@ ports:
 
 ### 変更を適用する {#apply-changes}
 
-`.gitpod.yml`ファイルの設定が完了したら、対応する GitHub リポジトリで最新のコードが利用可能であることを確認します。
+`.gitpod.yml`のファイルの設定が完了したら、対応する GitHub リポジトリで最新のコードが利用可能であることを確認します。
 
-`https://gitpod.io/#<YOUR_REPO_URL>`にアクセスして、最新のコードが適用された新しい Gitpod ワークスペースを作成します。
+`https://gitpod.io/#<YOUR_REPO_URL>`アクセスして、最新のコードが適用された新しい Gitpod ワークスペースを作成します。
 
 確立されたすべてのワークスペースについては、 `https://gitpod.io/workspaces`参照してください。
 
@@ -167,7 +167,7 @@ Gitpod は、完全かつ自動化され、事前構成されたクラウドネ�
 
 ![playground gitpod summary](/media/develop/playground-gitpod-summary.png)
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 

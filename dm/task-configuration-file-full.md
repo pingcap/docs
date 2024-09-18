@@ -1,19 +1,19 @@
 ---
 title: DM Advanced Task Configuration File
-summary: このドキュメントは、データ移行 (DM) の高度なタスク構成ファイルについて紹介しています。グローバル構成とインスタンス構成の2つの部分が含まれており、それぞれ基本構成や機能構成セットが設定されています。グローバル構成では、タスクモードやルーティングマッピングルールなどが設定されており、インスタンス構成ではデータ移行のサブタスクが定義されています。設定順序は、グローバル構成を編集した後にインスタンス構成を編集することです。
+summary: このドキュメントでは、グローバル構成とインスタンス構成をカバーする、データ移行 (DM) の高度なタスク構成ファイルを紹介します。グローバル構成には基本設定と機能設定が含まれ、インスタンス構成では、上流の 1 つまたは複数の MySQL インスタンスから下流の同じインスタンスへのデータ移行のサブタスクを定義します。
 ---
 
-# DM 拡張タスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
+# DM 高度なタスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
 
-このドキュメントでは、データ移行 (DM) の高度なタスク構成ファイル ( [グローバル構成](#global-configuration)と[インスタンス構成](#instance-configuration)を含む) を紹介します。
+このドキュメントでは、 [グローバル構成](#global-configuration)と[インスタンス構成](#instance-configuration)を含む、データ移行 (DM) の高度なタスク構成ファイルについて説明します。
 
 ## 重要な概念 {#important-concepts}
 
-`source-id`および DM ワーカー ID を含む重要な概念の説明については、 [重要な概念](/dm/dm-config-overview.md#important-concepts)を参照してください。
+`source-id`および DM ワーカー ID を含む重要な概念の説明については、 [重要な概念](/dm/dm-config-overview.md#important-concepts)参照してください。
 
-## タスク構成ファイルのテンプレート (詳細) {#task-configuration-file-template-advanced}
+## タスク構成ファイル テンプレート (上級) {#task-configuration-file-template-advanced}
 
-以下は、**高度な**データ移行タスクを実行できるようにするタスク構成ファイルのテンプレートです。
+以下は、**高度な**データ移行タスクを実行できるタスク構成ファイル テンプレートです。
 
 ```yaml
 ---
@@ -125,7 +125,7 @@ loaders:
 
     # The import mode during the full import phase. The following modes are supported:
     # - "logical" (default). Uses TiDB Lightning's logical import mode to import data. Document: https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode
-    # - "physical". Uses TiDB Lightning's physical import mode to import data. Document: https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-physical-import-mode
+    # - "physical". Uses TiDB Lightning's physical import mode to import data. Document: https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode
     #   The "physical" mode is still an experimental feature and is not recommended in production.
     import-mode: "logical"
     #  Methods to resolve conflicts in logical import.
@@ -239,45 +239,45 @@ mysql-instances:
     syncer-thread: 16                               # The number of threads that the sync processing unit uses for replicating incremental data. `syncer-thread` corresponds to the `worker-count` configuration item of the syncers configuration. `syncer-thread` has overriding priority when the two items are both configured. When multiple instances are migrating data to TiDB at the same time, reduce the value according to the load.
 ```
 
-## コンフィグレーションの順序 {#configuration-order}
+## コンフィグレーション順序 {#configuration-order}
 
-サンプル構成ファイルから、構成ファイルには`Global configuration`と`Instance configuration` 2 つの部分が含まれており、 `Global configuration`には`Basic configuration`と`Feature configuration set`が含まれていることがわかります。設定順序は次のとおりです。
+サンプル構成ファイルを見ると、構成ファイルには`Global configuration`と`Instance configuration` 2 つの部分が含まれており、 `Global configuration`には`Basic configuration`と`Feature configuration set`含まれていることがわかります。構成の順序は次のとおりです。
 
-1.  [グローバル構成](#global-configuration)を編集します。
+1.  [グローバル構成](#global-configuration)編集します。
 2.  グローバル設定に基づいて[インスタンス構成](#instance-configuration)を編集します。
 
 ## グローバル構成 {#global-configuration}
 
 ### 基本構成 {#basic-configuration}
 
-詳細については、 [テンプレート](#task-configuration-file-template-advanced)のコメントを参照してください。 `task-mode`についての詳しい説明は以下の通りです。
+詳細は[テンプレート](#task-configuration-file-template-advanced)のコメントを参照してください。3 `task-mode`詳しい説明は次のとおりです。
 
 -   説明: 実行するデータ移行タスクを指定するために使用できるタスク モード。
 -   値: 文字列 ( `full` 、 `incremental` 、または`all` )。
-    -   `full` 、アップストリーム データベースの完全バックアップのみを作成し、その後、完全なデータをダウンストリーム データベースにインポートします。
-    -   `incremental` : binlogを使用して、アップストリーム データベースの増分データのみをダウンストリーム データベースにレプリケートします。インスタンス構成の`meta`設定項目で、増分レプリケーションの開始位置を指定できます。
-    -   `all` : `full` + `incremental` 。アップストリーム データベースの完全バックアップを作成し、ダウンストリーム データベースに完全なデータをインポートしてから、binlogを使用して、完全バックアップ プロセス中にエクスポートされた位置 (binlog位置) から開始してダウンストリーム データベースへの増分レプリケーションを作成します。
+    -   `full` 、上流データベースの完全バックアップのみを作成し、その後、完全なデータを下流データベースにインポートします。
+    -   `incremental` : binlog を使用して上流データベースの増分データのみを下流データベースに複製します。インスタンス構成の`meta`の構成項目を設定することで、増分レプリケーションの開始位置を指定できます。
+    -   `all` : `full` + `incremental` 。上流データベースの完全バックアップを作成し、その完全データを下流データベースにインポートし、その後、binlogを使用して、完全バックアップ プロセス中にエクスポートされた位置 (binlogの位置) から下流データベースへの増分レプリケーションを実行します。
 
 ### 機能構成セット {#feature-configuration-set}
 
-各機能構成セットの引数は、 [テンプレート](#task-configuration-file-template-advanced)のコメントで説明されています。
+各機能構成セットの引数については、 [テンプレート](#task-configuration-file-template-advanced)のコメントで説明されています。
 
-| パラメータ              | 説明                                                                                                                                                                                                                                                    |
-| :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `routes`           | 上流テーブルと下流テーブルの間に設定されるルーティング マッピング ルール。上流と下流のスキーマ名とテーブル名が同じ場合は、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [テーブルルーティング](/dm/dm-table-routing.md)を参照してください。                                                                                                   |
-| `filters`          | アップストリーム データベース インスタンスの一致するテーブルのbinlogイベント フィルター ルール セット。 binlogフィルタリングが必要ない場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を参照してください。                                                                       |
-| `block-allow-list` | 上流のデータベース インスタンスの一致するテーブルのブロック許可リストのフィルター ルール セット。この項目で移行する必要があるスキーマとテーブルを指定することをお勧めします。指定しないと、すべてのスキーマとテーブルが移行されます。使用シナリオとサンプル構成については、 [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)と[ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)を参照してください。 |
-| `mydumpers`        | ダンプ処理ユニットのコンフィグレーション引数。デフォルト設定でニーズを十分に満たす場合は、この項目を設定する必要はありません。または、 `mydumper-thread`を使用して`thread`のみを構成することもできます。                                                                                                                                     |
-| `loaders`          | ロード処理ユニットのコンフィグレーション引数。デフォルト設定でニーズを十分に満たす場合は、この項目を設定する必要はありません。または、 `loader-thread`を使用して`pool-size`のみを構成することもできます。                                                                                                                                    |
-| `syncers`          | 同期処理ユニットのコンフィグレーション引数。デフォルト設定でニーズを十分に満たす場合は、この項目を設定する必要はありません。または、 `syncer-thread`を使用して`worker-count`のみを構成することもできます。                                                                                                                                  |
+| パラメータ              | 説明                                                                                                                                                                                                                                                             |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `routes`           | アップストリーム テーブルとダウンストリーム テーブル間のルーティング マッピング ルール セット。アップストリームとダウンストリームのスキーマとテーブルの名前が同じ場合は、この項目を構成する必要はありません。使用シナリオとサンプル構成については、 [テーブルルーティング](/dm/dm-table-routing.md)参照してください。                                                                                    |
+| `filters`          | アップストリーム データベース インスタンスの一致したテーブルのbinlogイベント フィルター ルール セット。binlog フィルタリングが不要な場合は、この項目を構成する必要はありません。使用シナリオとサンプル構成については、 [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)参照binlogてください。                                                                            |
+| `block-allow-list` | アップストリーム データベース インスタンスの一致テーブルのブロック許可リストのフィルター ルール セット。この項目を使用して移行する必要があるスキーマとテーブルを指定することをお勧めします。指定しない場合は、すべてのスキーマとテーブルが移行されます。使用シナリオとサンプル構成については、 [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)と[ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)参照してください。 |
+| `mydumpers`        | ダンプ処理ユニットのコンフィグレーション引数。デフォルト構成で十分な場合は、この項目を構成する必要はありません。または、 `mydumper-thread`使用して`thread`のみを構成することもできます。                                                                                                                                                      |
+| `loaders`          | 負荷処理ユニットのコンフィグレーション引数。デフォルト構成で十分な場合は、この項目を構成する必要はありません。または、 `loader-thread`使用して`pool-size`のみを構成することもできます。                                                                                                                                                      |
+| `syncers`          | 同期処理ユニットのコンフィグレーション引数。デフォルト構成で十分な場合は、この項目を構成する必要はありません。または、 `syncer-thread`使用して`worker-count`のみを構成することもできます。                                                                                                                                                   |
 
 ## インスタンス構成 {#instance-configuration}
 
-この部分では、データ移行のサブタスクを定義します。 DM は、アップストリームの 1 つまたは複数の MySQL インスタンスからダウンストリームの同じインスタンスへのデータの移行をサポートします。
+この部分では、データ移行のサブタスクを定義します。DM は、アップストリームの 1 つまたは複数の MySQL インスタンスからダウンストリームの同じインスタンスへのデータ移行をサポートします。
 
-上記のオプションの設定の詳細については、次の表に示すように、 [機能構成セット](#feature-configuration-set)の対応する部分を参照してください。
+上記オプションの設定詳細については、次の表に示すように、 [機能構成セット](#feature-configuration-set)の対応する部分を参照してください。
 
-| オプション                  | 対応箇所               |
+| オプション                  | 該当部分               |
 | :--------------------- | :----------------- |
 | `route-rules`          | `routes`           |
 | `filter-rules`         | `filters`          |
