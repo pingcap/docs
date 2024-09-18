@@ -104,9 +104,9 @@ Region merge refers to the process of merging adjacent small regions. It serves 
 
 Specifically, when a newly split Region exists for more than the value of [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (`1h` by default), if the following conditions occur at the same time, this Region triggers the Region merge scheduling:
 
-- The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) (Change to 54 MiB by default since v8.3.0, automatically applied only for newly created clusters).
+- The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) (Change to 54 MiB by default since v8.4.0, automatically applied only for newly created clusters).
 
-- The number of keys in this Region is smaller than the value of [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) (Change to 540,000 by default since v8.3.0, automatically applied only for newly created clusters).
+- The number of keys in this Region is smaller than the value of [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) (Change to 540,000 by default since v8.4.0, automatically applied only for newly created clusters).
 
 ## Query scheduling status
 

@@ -2147,7 +2147,7 @@ Configuration items related to BR backup.
 
 + The threshold of the backup SST file size. If the size of a backup file in a TiKV Region exceeds this threshold, the file is backed up to several files with the TiKV Region split into multiple Region ranges. Each of the files in the split Regions is the same size as `sst-max-size` (or slightly larger).
 + For example, when the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
-+ Default value: `"384MiB"`
++ Default value: `"384MiB"`. The default value is `"144MiB"` in versions earlier than v8.4.0.
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
 

@@ -142,7 +142,7 @@ The default size of a Region is 256 MiB, and you can reduce the number of Region
 
 > **Note:**
 >
-> The default size of Region is enlarged to 256 MiB since TiDB v8.3.0.
+> The default size of Region is enlarged to 256 MiB since TiDB v8.4.0.
 
 > **Warning:**
 >
