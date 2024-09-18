@@ -11,7 +11,7 @@ To specify the data source for TiDB Lightning, use the following configuration:
 
 ```toml
 [mydumper]
-# Local source data directory or the URI of the external storage such as S3. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
+# Local source data directory or the URI of the external storage such as S3. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v8.3/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 ```
 
