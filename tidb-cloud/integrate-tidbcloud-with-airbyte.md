@@ -62,7 +62,7 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
     >
     > - TiDB Cloud supports TLS connection. You can choose your TLS protocols in **TLSv1.2** and **TLSv1.3**, for example, `enabledTLSProtocols=TLSv1.2`.
     > - If you want to disable TLS connection to TiDB Cloud via JDBC, you need to set useSSL to `false` in JDBC URL Params specifically and close SSL connection, for example, `useSSL=false`.
-    > - TiDB Serverless only supports TLS connections.
+    > - TiDB Cloud Serverless only supports TLS connections.
 
 4. Click **Set up source** or **destination** to complete creating the connector. The following screenshot shows the configuration of TiDB as the source.
 

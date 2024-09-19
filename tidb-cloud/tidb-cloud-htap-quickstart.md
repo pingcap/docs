@@ -12,7 +12,7 @@ This tutorial guides you through an easy way to experience the Hybrid Transactio
 
 ## Before you begin
 
-Before experiencing the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a TiDB Serverless cluster and import the **Steam Game Stats** sample dataset to the cluster.
+Before experiencing the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a TiDB Cloud Serverless cluster and import the **Steam Game Stats** sample dataset to the cluster.
 
 ## Steps
 

@@ -1,5 +1,5 @@
 ---
-title: TiDB Cloud 
+title: TiDB Cloud
 aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
@@ -114,7 +114,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Manage project access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
 
-[Configure Security Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
+[Configure Password Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
 </LearningPath>
 

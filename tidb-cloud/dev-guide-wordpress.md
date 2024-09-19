@@ -1,27 +1,27 @@
 ---
-title: Connect to TiDB Serverless with WordPress
-summary: Learn how to use TiDB Serverless to run WordPress. This tutorial gives step-by-step guidance to run WordPress + TiDB Serverless in a few minutes.
+title: Connect to TiDB Cloud Serverless with WordPress
+summary: Learn how to use TiDB Cloud Serverless to run WordPress. This tutorial gives step-by-step guidance to run WordPress + TiDB Cloud Serverless in a few minutes.
 ---
 
-# Connect to TiDB Serverless with WordPress
+# Connect to TiDB Cloud Serverless with WordPress
 
-TiDB is a MySQL-compatible database, TiDB Serverless is a fully managed TiDB offering, and [WordPress](https://github.com/WordPress) is a free, open-source content management system (CMS) that lets users create and manage websites. WordPress is written in PHP and uses a MySQL database.
+TiDB is a MySQL-compatible database, TiDB Cloud Serverless is a fully managed TiDB offering, and [WordPress](https://github.com/WordPress) is a free, open-source content management system (CMS) that lets users create and manage websites. WordPress is written in PHP and uses a MySQL database.
 
-In this tutorial, you can learn how to use TiDB Serverless to run WordPress for free.
+In this tutorial, you can learn how to use TiDB Cloud Serverless to run WordPress for free.
 
 > **Note:**
 >
-> In addition to TiDB Serverless, this tutorial works with TiDB Dedicated and TiDB Self-Hosted clusters as well. However, it is highly recommended to run WordPress with TiDB Serverless for cost efficiency.
+> In addition to TiDB Cloud Serverless, this tutorial works with TiDB Cloud Dedicated and TiDB Self-Managed clusters as well. However, it is highly recommended to run WordPress with TiDB Cloud Serverless for cost efficiency.
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
-- A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster if you don't have one.
 
-## Run WordPress with TiDB Serverless
+## Run WordPress with TiDB Cloud Serverless
 
-This section demonstrates how to run WordPress with TiDB Serverless.
+This section demonstrates how to run WordPress with TiDB Cloud Serverless.
 
 ### Step 1: Clone the WordPress sample repository
 
@@ -48,7 +48,7 @@ cd wordpress-tidb-docker
 
 ### Step 3: Configure connection information
 
-Configure the WordPress database connection to TiDB Serverless.
+Configure the WordPress database connection to TiDB Cloud Serverless.
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -83,11 +83,11 @@ Configure the WordPress database connection to TiDB Serverless.
     TIDB_DB_NAME='test'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog. By default, your TiDB Serverless comes with a `test` database. If you have already created another database in your TiDB Serverless cluster, you can replace `test` with your database name.
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog. By default, your TiDB Cloud Serverless comes with a `test` database. If you have already created another database in your TiDB Cloud Serverless cluster, you can replace `test` with your database name.
 
 7. Save the `.env` file.
 
-### Step 4: Start WordPress with TiDB Serverless
+### Step 4: Start WordPress with TiDB Cloud Serverless
 
 1. Execute the following command to run WordPress as a Docker container:
 
