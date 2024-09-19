@@ -1785,7 +1785,7 @@ ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCA
 - The `GLOBAL` and `LOCAL` keywords only apply to partitioned tables and do not affect non-partitioned tables. In other words, there is no difference between a global index and a local index in non-partitioned tables.
 - DDL operations such as `ADD PARTITION`, `DROP PARTITION`, `TRUNCATE PARTITION`, `REORGANIZE PARTITION`, `SPLIT PARTITION`, and `EXCHANGE PARTITION` also trigger updates to global indexes. The results of these DDL operations will only be returned after the global indexes of the corresponding tables are fully updated. This can delay operations that usually require quick DDL completion, such as data archiving operations (`EXCHANGE PARTITION`, `TRUNCATE PARTITION`, and `DROP PARTITION`). In contrast, when global indexes are not involved, these DDL operations can be completed immediately.
 - By default, the primary key of a partitioned table is a clustered index and must include the partition key. If you require the primary key to exclude the partition key, you can explicitly specify the primary key as a non-clustered global index when creating the table, for example, `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`.
-- If a global index is added to an expression column, or a global index is also a prefix index (for example `UNIQUE KEY idx_email_prefix (email(10)) GLOBAL)`), you need to collect statistics manually for that global index.
+- If a global index is added to an expression column, or a global index is also a prefix index (for example `UNIQUE KEY idx_id_prefix (id(10)) GLOBAL`), you need to collect statistics manually for that global index.
 
 ### Partitioning limitations relating to functions
 
