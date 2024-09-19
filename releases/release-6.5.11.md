@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.5.11 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.5.11.
+summary: Learn about the improvements and bug fixes in TiDB 6.5.11.
 ---
 
 # TiDB 6.5.11 Release Notes
