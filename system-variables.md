@@ -2435,7 +2435,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the Instance Plan Cache feature. This feature implements instance-level execution plan cache, which allows  all sessions within the same TiDB instance to share the execution plan cache, thereby improving memory utilization. It's highly recommended to disable instance at session level before activating this feature.  Please refer to [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) and [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md) for details. 
+- This variable controls whether to enable the Instance Plan Cache feature. This feature implements instance-level execution plan cache, which allows all sessions within the same TiDB instance to share the execution plan cache, thereby improving memory utilization. Before enabling Instance Plan Cache, it is recommended to disable session-level [Prepared execution plan cache](/sql-prepared-plan-cache.md) and [Non-prepared execution plan cache](/sql-non-prepared-plan-cache.md).
 
 ### tidb_enable_ordered_result_mode
 
@@ -3440,18 +3440,21 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Default value: `0.1`
 - Range: `[0, 1]`
-- This variable controls the amount of free memory reserved after eviction takes place. TiDB starts evicting execution plans when the total memory used by plan cache reaches `tidb_instance_plan_cache_max_size`. The eviction stops in case the percentage of free memory is larger than the value defined by `tidb_instance_plan_cache_reserved_percentage`. 
+- This variable controls the percentage of idle memory for Instance Plan Cache after memory eviction. When the memory used by Instance Plan Cache reaches the limit set by [`tidb_instance_plan_cache_max_size`](#tidb_instance_plan_cache_max_size-new-in-v840), TiDB starts evicting execution plans from memory using the Least Recently Used (LRU) algorithm until the idle memory percentage exceeds the value set by [`tidb_instance_plan_cache_reserved_percentage`](#tidb_instance_plan_cache_reserved_percentage-new-in-v840).
 
 ### tidb_instance_plan_cache_max_size <span class="version-mark">New in v8.4.0</span>
+
 > **Warning:**
 >
 > Currently, Instance Plan Cache is an experimental feature. is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `125829120` (which is 120 MiB)
-- This variable sets the maximum memory usage in bytes for Instance Plan Cache.
+- Unit: Bytes
+- This variable sets the maximum memory usage for Instance Plan Cache.
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
