@@ -259,7 +259,7 @@
   - Reference
     - [Vector Data Types](/vector-search-data-types.md)
     - [Vector Functions and Operators](/vector-search-functions-and-operators.md)
-    - [Vector Index](/tidb-cloud/vector-search-index.md)
+    - [Vector Index](/vector-search-index.md)
   - [Improve Performance](/vector-search-improve-performance.md)
   - [Limitations](/vector-search-limitations.md)
   - [Changelogs](/tidb-cloud/vector-search-changelogs.md)

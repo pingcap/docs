@@ -14,23 +14,13 @@ The following Vector data type is currently available:
 
 The Vector data type provides these advantages over storing in a `JSON` column:
 
-<CustomContent platform="tidb">
-
-- Dimension enforcement. A dimension can be specified to forbid inserting vectors with different dimensions.
-- Optimized storage format. Vector data types are stored even more space-efficient than `JSON` data type.
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-- Vector Index support. A [Vector Search Index](/tidb-cloud/vector-search-index.md) can be built to speed up vector searching.
+- Vector Index support. A [Vector Search Index](/vector-search-index.md) can be built to speed up vector searching.
 - Dimension enforcement. A dimension can be specified to forbid inserting vectors with different dimensions.
 - Optimized storage format. Vector data types are stored even more space-efficient than `JSON` data type.
 
 > **Note:**
 >
-> Vector data types are only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
-
-</CustomContent>
+> Vector data types are only available for TiDB Self-Managed clusters [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 ## Value syntax
 
@@ -69,11 +59,7 @@ ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 
 See [Vector Functions and Operators](/vector-search-functions-and-operators.md) for available functions and operators over the Vector data type.
 
-<CustomContent platform="tidb-cloud">
-
-See [Vector Search Index](/tidb-cloud/vector-search-index.md) for building and using a vector search index.
-
-</CustomContent>
+See [Vector Search Index](/vector-search-index.md) for building and using a vector search index.
 
 ## Vectors with different dimensions
 
@@ -89,11 +75,7 @@ INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]'); -- 3 dimensions vector,
 INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector, OK
 ```
 
-<CustomContent platform="tidb-cloud">
-
-However you cannot build a [Vector Search Index](/tidb-cloud/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
-
-</CustomContent>
+However you cannot build a [Vector Search Index](/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
 
 ## Comparison
 
@@ -266,17 +248,6 @@ Vector data types are TiDB specific, and are not supported in MySQL.
 
 ## See also
 
-<CustomContent platform="tidb-cloud">
-
 - [Vector Functions and Operators](/vector-search-functions-and-operators.md)
+- [Vector Search Index](/vector-search-index.md)
 - [Improve Vector Search Performance](/vector-search-improve-performance.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- [Vector Functions and Operators](/vector-search-functions-and-operators.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
-- [Improve Vector Search Performance](/vector-search-improve-performance.md)
-
-</CustomContent>

@@ -158,15 +158,5 @@ From the output, the swimming animal is most likely a fish, or a dog with a gift
 
 ## See also
 
-<CustomContent platform="tidb">
-
 - [Vector Data Types](/vector-search-data-types.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- [Vector Data Types](/vector-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
-
-</CustomContent>
+- [Vector Search Index](/vector-search-index.md)

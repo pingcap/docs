@@ -242,15 +242,5 @@ results = Document.select(Document, distance).where(distance_expression < 0.2).o
 
 ## See also
 
-<CustomContent platform="tidb">
-
 - [Vector Data Types](/vector-search-data-types.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- [Vector Data Types](/vector-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
-
-</CustomContent>
+- [Vector Search Index](/vector-search-index.md)

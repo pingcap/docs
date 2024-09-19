@@ -122,7 +122,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     The vector search (beta) feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills. Key features include:
 
-    - [Vector data types](/vector-search-data-types.md), [vector index](/tidb-cloud/vector-search-index.md), and [vector functions and operators](/vector-search-functions-and-operators.md).
+    - [Vector data types](/vector-search-data-types.md), [vector index](/vector-search-index.md), and [vector functions and operators](/vector-search-functions-and-operators.md).
     - Ecosystem integrations with [LangChain](/vector-search-integrate-with-langchain.md), [LlamaIndex](/vector-search-integrate-with-llamaindex.md), and [JinaAI](/vector-search-integrate-with-jinaai-embedding.md).
     - Programming language support for Python: [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md), [Peewee](/vector-search-integrate-with-peewee.md), and [Django ORM](/vector-search-integrate-with-django-orm.md).
     - Sample applications and tutorials: perform semantic searches for documents using [Python](/vector-search-get-started-using-python.md) or [SQL](/vector-search-get-started-using-sql.md).
