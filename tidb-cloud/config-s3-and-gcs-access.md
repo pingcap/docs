@@ -31,9 +31,13 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-    3. On the **Import** page, click **Import Data** in the upper-right corner and select **From S3**.
+    3. On the **Import** page, select **Import data from S3**.
 
-    4. On the **Import from S3** page, click **Guide for getting the required Role ARN** to get the TiDB Cloud Account ID and TiDB Cloud External ID. Take a note of these IDs for later use.
+        If this is your first time importing data into this cluster, select **Import From Amazon S3**.
+
+    4. On the **Import Data from Amazon S3** page, click the link under **Role ARN**. The **Add New Role ARN** dialog is displayed.
+
+    5. Expand **Create Role ARN manually** to get the TiDB Cloud Account ID and TiDB Cloud External ID. Take a note of these IDs for later use.
 
 2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
 
@@ -100,9 +104,8 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
             If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
 
-    6. Click **Next: Tags**, add a tag of the policy (optional), and then click **Next:Review**.
-
-    7. Set a policy name, and then click **Create policy**.
+    6. Click **Next**.
+    7. Set a policy name, add a tag of the policy (optional), and then click **Create policy**.
 
 3. In the AWS Management Console, create an access role for TiDB Cloud and get the role ARN.
 
@@ -165,7 +168,11 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-    3. Click **Import Data** in the upper-right corner, click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
+    3. Click **Import Data** in the upper-right corner.
+
+        If this is your first time importing data into this cluster, select **Import From GCS**.
+
+    4. Click **Show Google Cloud Server Account ID**, and then copy the Service Account ID for later use.
 
 2. In the Google Cloud console, create an IAM role for your GCS bucket.
 

@@ -31,29 +31,13 @@ To connect to a TiDB Cloud Dedicated cluster via public connection, take the fol
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Create a traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
 
-    If the traffic filter is already set, skip the following sub-steps. If the traffic filter is empty, take the following sub-steps to add one.
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
 
-    1. Click one of the buttons to add some rules quickly.
+4. Click **CA cert** to download CA cert for TLS connection to TiDB clusters. The CA cert supports TLS 1.2 version by default.
 
-        - **Add My Current IP Address**
-        - **Allow Access from Anywhere**
-
-    2. Provide an optional description for the newly added IP address or CIDR range.
-
-    3. Click **Create Filter** to confirm the changes.
-
-4. Under **Step 2: Download CA cert** in the dialog, click **Download CA cert** for TLS connection to TiDB clusters. The CA cert supports TLS 1.2 version by default.
-
-    > **Note:**
-    >
-    > - The CA cert is only available for TiDB Dedicated clusters.
-    > - Currently, TiDB Cloud only provides the connection strings and sample code for these connection methods: MySQL, MyCLI, JDBC, Python, Go, and Node.js.
-
-5. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
-
-    Note that you need to use the path of the downloaded CA file as the argument of the `--ssl-ca` option in the connection string.
+5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
 ## What's next
 
