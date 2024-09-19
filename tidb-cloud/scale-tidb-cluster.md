@@ -7,7 +7,7 @@ summary: Learn how to scale your TiDB Cloud cluster.
 
 > **Note:**
 >
-> - [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) scales automatically based on your application's workload changes. However, you cannot manually scale a TiDB Serverless cluster.
+> - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) scales automatically based on your application's workload changes. However, you cannot manually scale a TiDB Cloud Serverless cluster.
 > - When a cluster is in the **MODIFYING** status, you cannot perform any new scaling operations on it.
 
 You can scale a TiDB cluster in the following dimensions:
@@ -47,7 +47,7 @@ To change the number of TiDB, TiKV, or TiFlash nodes, take the following steps:
 4. On the **Modify Cluster** page, change the number of TiDB, TiKV, or TiFlash nodes.
 5. Review the cluster size in the right pane, and then click **Confirm**.
 
-You can also change the number of TiDB, TiKV, or TiFlash nodes using TiDB Cloud API through the [Modify a TiDB Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+You can also change the number of TiDB, TiKV, or TiFlash nodes using TiDB Cloud API through the [Modify a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 ## Change vCPU and RAM
 
@@ -73,7 +73,7 @@ To change the vCPU and RAM of TiDB, TiKV, or TiFlash nodes, take the following s
 4. On the **Modify Cluster** page, change the vCPU and RAM of TiDB, TiKV, or TiFlash nodes.
 5. Review the cluster size in the right pane, and then click **Confirm**.
 
-You can also change the vCPU and RAM of a TiDB, TiKV, or TiFlash node using TiDB Cloud API through the [Modify a TiDB Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+You can also change the vCPU and RAM of a TiDB, TiKV, or TiFlash node using TiDB Cloud API through the [Modify a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 ## Change storage
 
@@ -97,4 +97,4 @@ To change the storage of TiKV or TiFlash, take the following steps:
 4. On the **Modify Cluster** page, change the storage of each TiKV or TiFlash node.
 5. Review the cluster size in the right pane, and then click **Confirm**.
 
-You can also change the storage of a TiKV or TiFlash node using TiDB Cloud API through the [Modify a TiDB Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+You can also change the storage of a TiKV or TiFlash node using TiDB Cloud API through the [Modify a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).

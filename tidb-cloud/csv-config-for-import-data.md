@@ -33,12 +33,6 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: `"`
 
-## With header
-
-- Definition: whether *all* CSV files contain a header row. If **With header** is `True`, the first row is used as the column names. If **With header** is `False`, the first row is treated as an ordinary data row.
-
-- Default: `True`
-
 ## Backslash escape
 
 - Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is `True`, the following sequences are recognized and converted:

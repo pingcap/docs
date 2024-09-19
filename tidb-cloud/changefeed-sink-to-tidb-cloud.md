@@ -1,22 +1,22 @@
 ---
 title: Sink to TiDB Cloud
-summary: This document explains how to stream data from a TiDB Dedicated cluster to a TiDB Serverless cluster. There are restrictions on the number of changefeeds and regions available for the feature. Prerequisites include extending tidb_gc_life_time, backing up data, and obtaining the start position of TiDB Cloud sink. To create a TiDB Cloud sink, navigate to the cluster overview page, establish the connection, customize table and event filters, fill in the start replication position, specify the changefeed specification, review the configuration, and create the sink. Finally, restore tidb_gc_life_time to its original value.
+summary: This document explains how to stream data from a TiDB Cloud Dedicated cluster to a TiDB Cloud Serverless cluster. There are restrictions on the number of changefeeds and regions available for the feature. Prerequisites include extending tidb_gc_life_time, backing up data, and obtaining the start position of TiDB Cloud sink. To create a TiDB Cloud sink, navigate to the cluster overview page, establish the connection, customize table and event filters, fill in the start replication position, specify the changefeed specification, review the configuration, and create the sink. Finally, restore tidb_gc_life_time to its original value.
 ---
 
 # Sink to TiDB Cloud
 
-This document describes how to stream data from a TiDB Dedicated cluster to a TiDB Serverless cluster.
+This document describes how to stream data from a TiDB Cloud Dedicated cluster to a TiDB Cloud Serverless cluster.
 
 > **Note:**
 >
-> To use the Changefeed feature, make sure that your TiDB Dedicated cluster version is v6.1.3 or later.
+> To use the Changefeed feature, make sure that your TiDB Cloud Dedicated cluster version is v6.1.3 or later.
 
 ## Restrictions
 
 - For each TiDB Cloud cluster, you can create up to 100 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
-- The **Sink to TiDB Cloud** feature is only available to TiDB Dedicated clusters that are in the following AWS regions and created after November 9, 2022:
+- The **Sink to TiDB Cloud** feature is only available to TiDB Cloud Dedicated clusters that are in the following AWS regions and created after November 9, 2022:
 
     - AWS Oregon (us-west-2)
     - AWS Frankfurt (eu-central-1)
@@ -24,14 +24,14 @@ This document describes how to stream data from a TiDB Dedicated cluster to a Ti
     - AWS Tokyo (ap-northeast-1)
     - AWS São Paulo (sa-east-1)
 
-- The source TiDB Dedicated cluster and the destination TiDB Serverless cluster must be in the same project and the same region.
-- The **Sink to TiDB Cloud** feature only supports network connection via private endpoints. When you create a changefeed to stream data from a TiDB Dedicated cluster to a TiDB Serverless cluster, TiDB Cloud will automatically set up the private endpoint connection between the two clusters.
+- The source TiDB Cloud Dedicated cluster and the destination TiDB Cloud Serverless cluster must be in the same project and the same region.
+- The **Sink to TiDB Cloud** feature only supports network connection via private endpoints. When you create a changefeed to stream data from a TiDB Cloud Dedicated cluster to a TiDB Cloud Serverless cluster, TiDB Cloud will automatically set up the private endpoint connection between the two clusters.
 
 ## Prerequisites
 
-The **Sink to TiDB Cloud** connector can only sink incremental data from a TiDB Dedicated cluster to a TiDB Serverless cluster after a certain [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso).
+The **Sink to TiDB Cloud** connector can only sink incremental data from a TiDB Cloud Dedicated cluster to a TiDB Cloud Serverless cluster after a certain [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso).
 
-Before creating a changefeed, you need to export existing data from the source TiDB Dedicated cluster and load the data to the destination TiDB Serverless cluster.
+Before creating a changefeed, you need to export existing data from the source TiDB Cloud Dedicated cluster and load the data to the destination TiDB Cloud Serverless cluster.
 
 1. Extend the [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to be longer than the total time of the following two operations, so that historical data during the time is not garbage collected by TiDB.
 
@@ -44,7 +44,7 @@ Before creating a changefeed, you need to export existing data from the source T
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. [Back up data](/tidb-cloud/backup-and-restore.md#backup) from your TiDB Dedicated cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the destination TiDB Serverless cluster.
+2. [Back up data](/tidb-cloud/backup-and-restore.md#backup) from your TiDB Cloud Dedicated cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the destination TiDB Cloud Serverless cluster.
 
 3. From the [exported files of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files), get the start position of TiDB Cloud sink from the metadata file:
 
@@ -60,13 +60,13 @@ Before creating a changefeed, you need to export existing data from the source T
 
 ## Create a TiDB Cloud sink
 
-After completing the prerequisites, you can sink your data to the destination TiDB Serverless cluster.
+After completing the prerequisites, you can sink your data to the destination TiDB Cloud Serverless cluster.
 
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 
 2. Click **Create Changefeed**, and select **TiDB Cloud** as the destination.
 
-3. In the **TiDB Cloud Connection** area, select the destination TiDB Serverless cluster, and then fill in the user name and password of the destination cluster.
+3. In the **TiDB Cloud Connection** area, select the destination TiDB Cloud Serverless cluster, and then fill in the user name and password of the destination cluster.
 
 4. Click **Next** to establish the connection between the two TiDB clusters and test whether the changefeed can connect them successfully:
 

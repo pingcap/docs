@@ -14,7 +14,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 ## Step 1: Create a TiDB cluster
 
-[TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) is the best way to get started with TiDB Cloud. To create a TiDB Serverless cluster, follow these steps:
+[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) is the best way to get started with TiDB Cloud. To create a TiDB Cloud Serverless cluster, follow these steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up.
 
@@ -24,13 +24,13 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
     The [**Clusters**](https://tidbcloud.com/console/clusters) page is displayed by default.
 
-3. For new sign-up users, TiDB Cloud automatically creates a default TiDB Serverless cluster named `Cluster0` for you.
+3. For new sign-up users, TiDB Cloud automatically creates a default TiDB Cloud Serverless cluster named `Cluster0` for you.
 
     - To instantly try out TiDB Cloud features with this default cluster, proceed to [Step 2: Try AI-assisted SQL Editor](#step-2-try-ai-assisted-sql-editor).
-    - To create a new TiDB Serverless cluster on your own, follow these steps:
+    - To create a new TiDB Cloud Serverless cluster on your own, follow these steps:
 
         1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Serverless** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans), and then click **Create**. Your TiDB Serverless cluster will be created in approximately 30 seconds.
+        2. On the **Create Cluster** page, **Serverless** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans), and then click **Create**. Your TiDB Cloud Serverless cluster will be created in approximately 30 seconds.
 
 ## Step 2: Try AI-assisted SQL Editor
 
@@ -111,12 +111,12 @@ TiDB Cloud offers interactive tutorials with carefully crafted sample datasets t
 
 1. Click on the **?** icon in the lower-right corner of the console and select **Interactive Tutorials**.
 2. In the tutorials list, select a tutorial card to start, such as **Steam Game Stats**.
-3. Choose a TiDB Serverless cluster that you want to use for the tutorial, and click **Import Dataset**. The import process might take approximately one minute.
+3. Choose a TiDB Cloud Serverless cluster that you want to use for the tutorial, and click **Import Dataset**. The import process might take approximately one minute.
 4. Once the sample data is imported, follow the on-screen instructions to complete the tutorial.
 
 ## What's next
 
-- To learn how to connect to your cluster using different methods, see [Connect to a TiDB Serverless cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+- To learn how to connect to your cluster using different methods, see [Connect to a TiDB Cloud Serverless cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 - For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
-- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
