@@ -2426,6 +2426,16 @@ Configuration items related to resource control of the TiKV storage layer.
 + Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
 + Default value: `true`, which means scheduling based on the RU of the resource group is enabled.
 
+### `priority-ctl-strategy` <span class="version-mark">从 v8.4.0 版本开始引入</span>
+
+Configure the control strategy for low priority tasks. TiKV ensures the priority execution of higher priority tasks by applying dynamic quota limit to low-priority tasks. This control strategy is used to calculates the quota for low priority tasks.
+
++ Value Options:
+    + `aggressive`: using this strategy, the flow control policy will prioritize the performance of high-priority tasks, ensuring that the throughput and latency of high-priority tasks are basically unaffected, but low-priority tasks will run slower.
+    + `moderate`: using this strategy, TiKV will impose a balanced flow control limit on low-priority tasks, ensuring that low-priority tasks can use more system available resources while causing little impact on high-priority tasks.
+    + `conservative`: using this strategy, the flow control policy will prioritize ensuring that system resources are fully utilized, and low-priority tasks will try to use available system resources as much as possible, resulting in a greater impact on the performance of high-priority tasks.
++ Default value: `moderate`.
+
 ## split
 
 Configuration items related to [Load Base Split](/configure-load-base-split.md).

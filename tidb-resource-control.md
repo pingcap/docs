@@ -401,8 +401,6 @@ You can get more information about runaway queries from the following system tab
 ### Manage background tasks
 
 > **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://docs.pingcap.com/tidb/stable/support) on GitHub.
 > 
 > The background task management in resource control is based on TiKV's dynamic adjustment of resource quotas for CPU/IO utilization. Therefore, it relies on the available resource quota of each instance. If multiple components or instances are deployed on a single server, it is mandatory to set the appropriate resource quota for each instance through `cgroup`. It is difficult to achieve the expected effect in deployment with shared resources like TiUP Playground.
 
@@ -412,7 +410,9 @@ Starting from v7.4.0, the TiDB resource control feature supports managing backgr
 
 #### `BACKGROUND` parameters
 
-`TASK_TYPES`: specifies the task types that need to be managed as background tasks. Use commas (`,`) to separate multiple task types.
+- `TASK_TYPES`: specifies the task types that need to be managed as background tasks. Use commas (`,`) to separate multiple task types.
+- `UTILIZATION_LIMIT`: specifies the maximum resource percentage(0-100) of each TiKV instance that background tasks can consume. By default, 
+the resource granted for background tasks are calculated based on the total resource quota and current foreground workload dynamically, if `UTILIZATION_LIMIT` is configured, the resource granted for background tasks will not exceed this limit.
 
 TiDB supports the following types of background tasks:
 
@@ -444,10 +444,10 @@ By default, the task types that are marked as background tasks are `""`, and the
 
 #### Examples
 
-1. Modify the `default` resource group and mark `br` and `ddl` as background tasks.
+1. Modify the `default` resource group and mark `br` and `ddl` as background tasks and set background tasks resource limit to 30%.
 
     ```sql
-    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl');
+    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30);
     ```
 
 2. Change the `default` resource group to revert the background task type to its default value.
@@ -471,11 +471,11 @@ By default, the task types that are marked as background tasks are `""`, and the
     The output is as follows:
 
     ```
-    +---------+------------+----------+-----------+-------------+---------------------+
-    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND          |
-    +---------+------------+----------+-----------+-------------+---------------------+
-    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl' |
-    +---------+------------+----------+-----------+-------------+---------------------+
+    +---------+------------+----------+-----------+-------------+-------------------------------------------+
+    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND                                |
+    +---------+------------+----------+-----------+-------------+-------------------------------------------+
+    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
+    +---------+------------+----------+-----------+-------------+-------------------------------------------+
     ```
 
 5. To explicitly mark tasks in the current session as the background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:
