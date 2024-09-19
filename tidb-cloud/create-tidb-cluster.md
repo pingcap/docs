@@ -88,8 +88,4 @@ After your cluster is created, take the following steps to configure the securit
 
 ## What's next
 
-<<<<<<< HEAD
-After your cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-via-standard-connection-serverless.md).
-=======
 After your cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
->>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))

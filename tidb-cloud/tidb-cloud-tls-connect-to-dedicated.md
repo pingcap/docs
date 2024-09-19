@@ -16,11 +16,7 @@ To ensure data security, TiDB cluster CA for your TiDB Cloud Dedicated cluster i
 
 - Set a password to access your cluster in secure settings.
 
-<<<<<<< HEAD
-    To do so, you can navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your TiDB Dedicated cluster, and then select **Security Settings**. In security settings, you can click **Generate** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
-=======
     To do so, you can navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your TiDB Cloud Dedicated cluster, and then select **Password Settings**. In password settings, you can click **Auto-generate Password** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters.
->>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 
 ## Secure connection to a TiDB Cloud Dedicated cluster
 
@@ -41,13 +37,8 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
     > **Note:**
     >
-<<<<<<< HEAD
-    > - You can store the downloaded CA cert in the default storage path of your operating system, or specify another storage path. You need to replace the CA cert path in the code example with your own CA cert path in the subsequent steps.  
-   > - TiDB Dedicated does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on TiDB Dedicated.
-=======
     > - You can store the downloaded CA cert in the default storage path of your operating system, or specify another storage path. You need to replace the CA cert path in the code example with your own CA cert path in the subsequent steps.
     > - TiDB Cloud Dedicated does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on TiDB Cloud Dedicated.
->>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 
 6. Under **Step 3: Connect with an SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 

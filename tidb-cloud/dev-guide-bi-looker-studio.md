@@ -25,11 +25,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB Cloud Serverless cluster, you can create one as follows:**
 
-<<<<<<< HEAD
-- [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster)
-=======
 - [Create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)
->>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 
 ## Step 1. Import a dataset
 

@@ -38,11 +38,7 @@ In most scenarios, you are recommended to use private endpoint connection over V
 
 ## Set up a private endpoint with AWS
 
-<<<<<<< HEAD
-To connect to your TiDB Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
-=======
 To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the follow these steps:
->>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 
 1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)

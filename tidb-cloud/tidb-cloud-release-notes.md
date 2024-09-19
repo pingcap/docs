@@ -8,8 +8,6 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
-<<<<<<< HEAD
-=======
 ## September 3, 2024
 
 **Console changes**
@@ -36,7 +34,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information, see [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
 
->>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 ## August 20, 2024
 
 **Console changes**

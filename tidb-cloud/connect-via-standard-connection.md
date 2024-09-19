@@ -1,19 +1,4 @@
 ---
-<<<<<<< HEAD
-title: Connect to TiDB Dedicated via Standard Connection
-summary: Learn how to connect to your TiDB Cloud cluster via standard connection.
----
-
-# Connect to TiDB Dedicated via Standard Connection
-
-This document describes how to connect to your TiDB Dedicated cluster via standard connection. The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Dedicated cluster via a SQL client from your laptop.
-
-> **Tip:**
->
-> To learn how to connect to a TiDB Serverless cluster via standard connection, see [Connect to TiDB Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
-
-To connect to a TiDB Dedicated cluster via standard connection, take the following steps:
-=======
 title: Connect to TiDB Cloud Dedicated via Public Connection
 summary: Learn how to connect to your TiDB Cloud cluster via public connection.
 ---
@@ -33,7 +18,6 @@ For public connections, TiDB Cloud Dedicated only allows client connections from
 ## Connect to the cluster
 
 To connect to a TiDB Cloud Dedicated cluster via public connection, take the following steps:
->>>>>>> fc17a0e8ea (*: update TiDB product names for cloud-console content (#18752))
 
 1. Open the overview page of the target cluster.
 
