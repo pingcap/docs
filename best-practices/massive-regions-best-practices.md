@@ -142,7 +142,7 @@ The default size of a Region is 256 MiB, and you can reduce the number of Region
 
 > **Note:**
 >
-> Starting from v8.4.0, the default size of Region is changed to 256 MiB.
+> Starting from v8.4.0, the default Region size has been increased to 256 MiB. When upgrading a cluster to v8.4.0 or later, if the Region size has not been changed manually, the TiKV cluster's default Region size will automatically update to 256 MiB.
 
 > **Warning:**
 >
