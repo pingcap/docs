@@ -93,6 +93,8 @@ RESOURCE_GROUP: default
 
 Fields in the `PROCESSLIST` table are described as follows:
 
+<CustomContent platform="tidb">
+
 * `ID`: The ID of the user connection.
 * `USER`: The name of the user who is executing `PROCESS`.
 * `HOST`: The address that the user is connecting to.
@@ -110,6 +112,30 @@ Fields in the `PROCESSLIST` table are described as follows:
 * `ROWS_AFFECTED`: The number of rows currently affected by the statement.
 * `TIDB_CPU`: The amount of time in nanoseconds that the statement consumes the TiDB server CPU. This column shows meaningful value only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
 * `TIKV_CPU`: The amount of time in nanoseconds that the statement consumes the TiKV server CPU.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* `ID`: The ID of the user connection.
+* `USER`: The name of the user who is executing `PROCESS`.
+* `HOST`: The address that the user is connecting to.
+* `DB`: The name of the currently connected default database.
+* `COMMAND`: The command type that `PROCESS` is executing.
+* `TIME`: The current execution duration of `PROCESS`, in seconds.
+* `STATE`: The current connection state.
+* `INFO`: The requested statement that is being processed.
+* `DIGEST`: The digest of the SQL statement.
+* `MEM`: The memory used by the request that is being processed, in bytes.
+* `DISK`: The disk usage in bytes.
+* `TxnStart`: The start time of the transaction.
+* `RESOURCE_GROUP`: The resource group name.
+* `SESSION_ALIAS`: The alias of the current session.
+* `ROWS_AFFECTED`: The number of rows currently affected by the statement.
+* `TIDB_CPU`: The amount of time in nanoseconds that the statement consumes the TiDB server CPU. This column shows meaningful value only when the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature is enabled. Otherwise the value will be `0`.
+* `TIKV_CPU`: The amount of time in nanoseconds that the statement consumes the TiKV server CPU.
+
+</CustomContent>
 
 ## CLUSTER_PROCESSLIST
 
