@@ -18,8 +18,8 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `RESOURCE_GROUP` column to show the resource group name.
 * A `SESSION_ALIAS` column to show the alias of the current session.
 * A `ROWS_AFFECTED` column to show the number of rows currently affected by the statement.
-* A `TIDB_CPU` column to show the CPU time (in nanoseconds) consumed by the TiDB server for the statement. This column shows meaningful data only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
-* A `TIKV_CPU` column to show the CPU time (in nanoseconds) consumed by the TiKV server for the statement.
+* A `TIDB_CPU` column to show the amount of time in nanoseconds that the statement consumes the TiDB server CPU. This column shows meaningful value only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
+* A `TIKV_CPU` column to show the amount of time in nanoseconds that the statement consumes the TiKV server CPU.
 
 </CustomContent>
 
@@ -32,8 +32,8 @@ The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`
 * A `RESOURCE_GROUP` column to show the resource group name.
 * A `SESSION_ALIAS` column to show the alias of the current session.
 * A `ROWS_AFFECTED` column to show the number of rows currently affected by the statement.
-* A `TIDB_CPU` column to show the CPU time (in nanoseconds) consumed by the TiDB server for the statement. This column shows meaningful data only when the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature is enabled. Otherwise the value will be `0`.
-* A `TIKV_CPU` column to show the CPU time (in nanoseconds) consumed by the TiKV server for the statement.
+* A `TIDB_CPU` column to show the amount of time in nanoseconds that the statement consumes the TiDB server CPU. This column shows meaningful value only when the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature is enabled. Otherwise the value will be `0`.
+* A `TIKV_CPU` column to show the amount of time in nanoseconds that the statement consumes the TiKV server CPU.
 
 </CustomContent>
 
@@ -108,8 +108,8 @@ Fields in the `PROCESSLIST` table are described as follows:
 * `RESOURCE_GROUP`: The resource group name.
 * `SESSION_ALIAS`: The alias of the current session.
 * `ROWS_AFFECTED`: The number of rows currently affected by the statement.
-* `TIDB_CPU`: The CPU time (in nanoseconds) consumed by the TiDB server for the statement. This column shows meaningful data only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
-* `TIKV_CPU`: The CPU time (in nanoseconds) consumed by the TiKV server for the statement.
+* `TIDB_CPU`: The amount of time in nanoseconds that the statement consumes the TiDB server CPU. This column shows meaningful value only when the [Top SQL](/dashboard/top-sql.md) feature is enabled. Otherwise the value will be `0`.
+* `TIKV_CPU`: The amount of time in nanoseconds that the statement consumes the TiKV server CPU.
 
 ## CLUSTER_PROCESSLIST
 
