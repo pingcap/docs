@@ -33,7 +33,7 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 | completion            | bash, fish, powershell, zsh                                           | Generate completion script for specified shell |
 | config                | create, delete, describe, edit, list, set, use                        | Configure user profiles                        |
 | project               | list                                                                  | Manage projects                                |
-| update                | -                                                                     | Update the CLI to the latest version           |
+| upgrade                | -                                                                     | Update the CLI to the latest version           |
 | help                  | cluster, completion, config, help, import, project, update            | View help for any command                      |
 
 ## Command modes
