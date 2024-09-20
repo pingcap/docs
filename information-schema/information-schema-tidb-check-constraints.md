@@ -5,7 +5,7 @@ summary: Learn the `TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA table.
 
 # TIDB\_CHECK\_CONSTRAINTS
 
-The `TIDB_CHECK_CONSTRAINTS` table provides information about [`CHECK` constraints](/constraints.md#check) on tables. Besides the columns in [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md), `TIDB_CHECK_CONSTRAINTS` provides the table name and table ID that define the `CHECK` constraint.
+The `TIDB_CHECK_CONSTRAINTS` table provides information about [`CHECK` constraints](/constraints.md#check) on tables. In addition to the columns in [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md), `TIDB_CHECK_CONSTRAINTS` provides the name and ID of the table that defines the `CHECK` constraint.
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -55,5 +55,5 @@ Fields in the `TIDB_CHECK_CONSTRAINTS` table are described as follows:
 * `CONSTRAINT_SCHEMA`: The schema of the constraint.
 * `CONSTRAINT_NAME`: The name of the constraint.
 * `CHECK_CLAUSE`: The clause of the check constraint.
-* `TABLE_NAME`: The table name of the constraint.
-* `TABLE_ID`: The table id of the constraint.
+* `TABLE_NAME`: The name of the table where the constraint is located.
+* `TABLE_ID`: The ID of the table where the constraint is located.
