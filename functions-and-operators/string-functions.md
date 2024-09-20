@@ -1447,7 +1447,7 @@ SELECT MAKE_SET(b'111','foo','bar','baz');
 
 The `MID(str, pos[, len])` function returns a substring starting from the specified `pos` position with the `len` length.
 
-Starting from v8.4.0, TiDB supports the two-argument variant `MID(str, pos)`. If `len` is omitted, this function returns all remaining characters from the specified `pos` position to the end of the string.
+Starting from v8.4.0, TiDB supports the two-argument variant `MID(str, pos)`. If `len` is not specified, this function returns all remaining characters from the specified `pos` position to the end of the string.
 
 If any of the arguments are `NULL`, the function returns `NULL`.
 
