@@ -2229,7 +2229,11 @@ Configuration items related to TiCDC.
 ### `min-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
-+ Default value: `"200ms"`
++ Default value: `"1s"`.
+
+> **Note:**
+>
+> In v6.5.0, the default value of `min-ts-interval` is changed from `"1s"` to `"200ms"` to reduce CDC latency. Starting from v6.5.1, this default value is changed back to `"1s"` to reduce network traffic.
 
 ### `old-value-cache-memory-quota`
 
