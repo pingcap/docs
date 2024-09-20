@@ -94,7 +94,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | --csv.trim-last-separator        | Specifies whether to treat the separator as the line terminator and trim all trailing separators in a CSV file.            | No       | Only works in non-interactive mode.                  |
 | --csv.not-null                   | Specifies whether a CSV file can contain any NULL values.                                                                  | No       | Only works in non-interactive mode.                  |
 | --csv.null-value string          | The representation of NULL values in the CSV file. (default "\\N")                                                         | No       | Only works in non-interactive mode.                  |
-| -h, --help                       | Shows help information for this command.                                                                                   | No       | Works in both non-interactive and interactive modes. |tion for this command.                                                                            | No       | Works in both non-interactive and interactive modes. |
+| -h, --help                       | Shows help information for this command.                                                                                   | No       | Works in both non-interactive and interactive modes. |                                                                           | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
