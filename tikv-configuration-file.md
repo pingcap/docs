@@ -1936,7 +1936,7 @@ Configuration items related to Raft Engine.
 ### `spill-dir` <span class="version-mark">New in v8.4.0</span>
 
 + The auxiliary directory for storing raft log files. When the disk where the `dir` specified is full, new raft logs will be stored under this directory. If this directory does not exist after configuration, it will be created when TiKV is started.
-+ If this configuration is not set, it means that the directory does not exist.
++ If this configuration is not set, it means that the auxiliary directory is disabled.
 
 > **Note:**
 >
