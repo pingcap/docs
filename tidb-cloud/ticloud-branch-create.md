@@ -25,15 +25,23 @@ Create a branch for a TiDB Cloud Serverless cluster in non-interactive mode:
 ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name>
 ```
 
+Create a branch from another branch with specified timestamp in non-interactive mode:
+
+```shell
+ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name> --parent-id <parent-branch-id> --parent-timestamp <parent-timestamp>
+```
+
 ## Flags
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                      | Description                                                | Required | Note                                                |
-|---------------------------|------------------------------------------------------------|----------|-----------------------------------------------------|
-| -c, --cluster-id string   | Specifies the ID of the cluster, in which the branch will be created. | Yes      | Only works in non-interactive mode.                 |
-| -n, --display-name string | Specifies the name of the branch to be created.               | Yes      | Only works in non-interactive mode.                 |
-| -h, --help                | Shows help information for this command.                     | No       | Works in both non-interactive and interactive modes |
+| Flag                      | Description                                                                                               | Required | Note                                                |
+|---------------------------|-----------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------|
+| -c, --cluster-id string   | Specifies the ID of the cluster, in which the branch will be created.                                     | Yes      | Only works in non-interactive mode.                 |
+| -n, --display-name string | Specifies the name of the branch to be created.                                                           | Yes      | Only works in non-interactive mode.                 |
+| --parent-id string        | The ID of the branch parent, default is cluster id.                                                       | No       | Only works in non-interactive mode.                 |
+| --parent-timestamp string | The timestamp of the parent branch, default is current time. (RFC3339 format, e.g., 2024-01-01T00:00:00Z) | No       | Only works in non-interactive mode.                 |
+| -h, --help                | Shows help information for this command.                                                                  | No       | Works in both non-interactive and interactive modes |
 
 ## Inherited flags
 
