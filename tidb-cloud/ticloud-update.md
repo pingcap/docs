@@ -1,22 +1,22 @@
 ---
-title: ticloud update
-summary: The reference of `ticloud update`.
+title: ticloud upgrade
+summary: The reference of `ticloud upgrade`.
 ---
 
 # ticloud update
 
-Update the TiDB Cloud CLI to the latest version:
+Upgrade the TiDB Cloud CLI to the latest version:
 
 ```shell
-ticloud update [flags]
+ticloud upgrade [flags]
 ```
 
 ## Examples
 
-Update the TiDB Cloud CLI to the latest version:
+Upgrade the TiDB Cloud CLI to the latest version:
 
 ```shell
-ticloud update
+ticloud upgrade
 ```
 
 ## Flags

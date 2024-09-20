@@ -719,7 +719,7 @@
       - [use](/tidb-cloud/ticloud-config-use.md)
     - project
       - [list](/tidb-cloud/ticloud-project-list.md)
-    - [update](/tidb-cloud/ticloud-update.md)
+    - [upgrade](/tidb-cloud/ticloud-update.md)
     - [help](/tidb-cloud/ticloud-help.md)
   - [Table Filter](/table-filter.md)
   - [Resource Control](/tidb-resource-control.md)
