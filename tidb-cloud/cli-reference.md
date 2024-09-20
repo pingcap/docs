@@ -34,7 +34,7 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 | config                | create, delete, describe, edit, list, set, use                        | Configure user profiles                        |
 | project               | list                                                                  | Manage projects                                |
 | upgrade                | -                                                                     | Update the CLI to the latest version           |
-| help                  | cluster, completion, config, help, import, project, update            | View help for any command                      |
+| help                  | auth, config, serverless, ai, project, upgrade, help, completion            | View help for any command                      |
 
 ## Command modes
 
