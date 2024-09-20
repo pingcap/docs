@@ -702,6 +702,11 @@
         - [list](/tidb-cloud/ticloud-serverless-export-list.md)
         - [cancel](/tidb-cloud/ticloud-serverless-export-cancel.md)
         - [download](/tidb-cloud/ticloud-serverless-export-download.md)
+      - sql-user
+        - [create](/tidb-cloud/ticloud-serverless-sql-user-create.md)
+        - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
+        - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
+        - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
     - [ai](/tidb-cloud/ticloud-ai.md)
     - [completion](/tidb-cloud/ticloud-completion.md)
     - config
