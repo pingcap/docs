@@ -3440,7 +3440,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Default value: `0.1`
 - Range: `[0, 1]`
-- This variable controls the percentage of idle memory for Instance Plan Cache after memory eviction. When the memory used by Instance Plan Cache reaches the limit set by [`tidb_instance_plan_cache_max_size`](#tidb_instance_plan_cache_max_size-new-in-v840), TiDB starts evicting execution plans from memory using the Least Recently Used (LRU) algorithm until the idle memory percentage exceeds the value set by [`tidb_instance_plan_cache_reserved_percentage`](#tidb_instance_plan_cache_reserved_percentage-new-in-v840).
+- This variable controls the percentage of idle memory for [Instance Plan Cache](#tidb_enable_instance_plan_cache-new-in-v840) after memory eviction. When the memory used by Instance Plan Cache reaches the limit set by [`tidb_instance_plan_cache_max_size`](#tidb_instance_plan_cache_max_size-new-in-v840), TiDB starts evicting execution plans from memory using the Least Recently Used (LRU) algorithm until the idle memory percentage exceeds the value set by [`tidb_instance_plan_cache_reserved_percentage`](#tidb_instance_plan_cache_reserved_percentage-new-in-v840).
 
 ### tidb_instance_plan_cache_max_size <span class="version-mark">New in v8.4.0</span>
 
@@ -3454,7 +3454,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Integer
 - Default value: `125829120` (which is 120 MiB)
 - Unit: Bytes
-- This variable sets the maximum memory usage for Instance Plan Cache.
+- This variable sets the maximum memory usage for [Instance Plan Cache](#tidb_enable_instance_plan_cache-new-in-v840).
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
