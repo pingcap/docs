@@ -2147,17 +2147,14 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_global_index <span class="version-mark">New in v7.6.0</span>
 
-> **Warning:**
->
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
-- Possible values: `OFF`, `ON`
+- Default value: `ON`
 - This variable controls whether to support creating [global indexes](/partitioned-table.md#global-indexes) for partitioned tables. When this variable is enabled, TiDB allows you to create unique indexes that **do not include all the columns used in the partition expressions** by specifying `GLOBAL` in the index definition.
+- This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [global indexes](/partitioned-table.md#global-indexes) is enabled by default.
+
 
 ### tidb_enable_lazy_cursor_fetch <span class="version-mark">New in v8.3.0</span>
 
@@ -2306,6 +2303,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
+- This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [LIST Partitioning](/partitioned-table#list-partitioning) is enabled by default.
 
 ### tidb_enable_local_txn
 
@@ -2711,11 +2709,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `ON`
-- Possible values: `OFF`, `ON`, `AUTO`
-- This variable is used to set whether to enable the `TABLE PARTITION` feature:
-    - `ON` indicates enabling Range partitioning, Hash partitioning, and Range column partitioning with one single column.
-    - `AUTO` functions the same way as `ON` does.
-    - `OFF` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
+- This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table) is enabled by default.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2</span>
 
