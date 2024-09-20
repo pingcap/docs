@@ -28,7 +28,7 @@ ticloud serverless export create -c <cluster-id> --filter <database.table>
 Export data from a TiDB Cloud Serverless cluster to Amazon S3 in non-interactive mode:
 
 ```shell
-ticloud serverless export create -c <cluster-id> --s3.uri <bucket-uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter <database.table>
+ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter <database.table>
 ```
 
 Export data from a TiDB Cloud Serverless cluster to Google Cloud Storage in non-interactive mode:
@@ -64,13 +64,13 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | -c, --cluster-id string          | Specifies the ID of the cluster, from which you want to export data.                                                                                        | Yes      | Only works in non-interactive mode.                  |
 | --file-type string               | Specifies the format of the exported file. The supported formats include `CSV` and `SQL`. The default value is `SQL`.                                       | No       | Only works in non-interactive mode.                  |
 | --target-type string             | Specifies the exported location. The supported location includes `LOCAL` and `S3`. The default value is `LOCAL`.                                            | No       | Only works in non-interactive mode.                  |
-| --s3.uri string                  | Specifies the URI of the S3. This flag is required when you export data to Amazon S3.                                                                       | No       | Only works in non-interactive mode.                  |
+| --s3.uri string                  | The S3 URI in `s3://<bucket>/<file-path>` format. Required when target type is S3.                                                                          | No       | Only works in non-interactive mode.                  |
 | --s3.access-key-id string        | Specifies the access key ID of the S3 bucket. This flag is required when you export data to Amazon S3.                                                      | NO       | Only works in non-interactive mode.                  |
 | --s3.secret-access-key string    | Specifies the secret access key of the S3 bucket. This flag is required when you export data to Amazon S3.                                                  | No       | Only works in non-interactive mode.                  |
 | --s3.role-arn string             | The role arn of the S3. You only need to set one of the s3.role-arn and [s3.access-key-id, s3.secret-access-key].                                           | No       | Only works in non-interactive mode.                  |
-| --gcs.uri string                 | The GCS URI in gcs://<bucket>/<file-path> format. Required when target type is GCS.                                                                         | No       | Only works in non-interactive mode.                  |
+| --gcs.uri string                 | The GCS URI in `gcs://<bucket>/<file-path>` format. Required when target type is GCS.                                                                       | No       | Only works in non-interactive mode.                  |
 | --gcs.service-account-key string | The base64 encoded service account key of GCS.                                                                                                              | No       | Only works in non-interactive mode.                  |
-| --azblob.uri string              | The Azure Blob URI in azure://<account>.blob.core.windows.net/<container>/<file-path> format. Required when target type is AZURE_BLOB.                      | No       | Only works in non-interactive mode.                  |
+| --azblob.uri string              | The Azure Blob URI in `azure://<account>.blob.core.windows.net/<container>/<file-path>` format. Required when target type is AZURE_BLOB.                    | No       | Only works in non-interactive mode.                  |
 | --azblob.sas-token string        | The SAS token of Azure Blob.                                                                                                                                | No       | Only works in non-interactive mode.                  |
 | --csv.delimiter string           | Delimiter of string type variables in CSV files. (default "\"")                                                                                             | No       | Only works in non-interactive mode.                  |
 | --csv.null-value string          | Representation of null values in CSV files. (default "\\N")                                                                                                 | No       | Only works in non-interactive mode.                  |
