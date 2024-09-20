@@ -675,6 +675,7 @@
     - auth
       - [login](/tidb-cloud/ticloud-auth-login.md)
       - [logout](/tidb-cloud/ticloud-auth-logout.md)
+      - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
     - serverless
       - [create](/tidb-cloud/ticloud-cluster-create.md)
       - [delete](/tidb-cloud/ticloud-cluster-delete.md)
