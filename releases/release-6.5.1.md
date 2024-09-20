@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.1
 
 ## 互換性の変更 {#compatibility-changes}
 
--   2023 年 2 月 20 日以降、v6.5.1 を含む TiDB および TiDB Dashboard の新しいバージョンでは[テレメトリ機能](/telemetry.md)デフォルトで無効になっており、使用状況情報は収集されず、PingCAP と共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ構成を使用している場合、アップグレード後にテレメトリ機能が無効になります。特定のバージョンについては[TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
+-   2023 年 2 月 20 日以降、v6.5.1 を含む TiDB および TiDB Dashboard の新しいバージョンでは[テレメトリ機能](/telemetry.md)がデフォルトで無効になっており、使用状況情報は収集されず、PingCAP と共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ構成を使用している場合、アップグレード後にテレメトリ機能が無効になります。特定のバージョンについては[TiDB リリース タイムライン](/releases/release-timeline.md)参照してください。
 
     -   [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
     -   TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目のデフォルト値が`true`から`false`に変更されます。
@@ -21,9 +21,11 @@ TiDB バージョン: 6.5.1
 
 -   v1.11.3 以降、新しく導入されたTiUPではテレメトリ機能がデフォルトで無効になっており、使用状況情報は収集されません。v1.11.3 より前のバージョンのTiUPから v1.11.3 以降のバージョンにアップグレードした場合、テレメトリ機能はアップグレード前と同じ状態を維持します。
 
--   潜在的な正確性の問題のため、パーティション化されたテーブルでの列タイプの変更はサポートされなくなりました[＃40620](https://github.com/pingcap/tidb/issues/40620) @ [ミョンス](https://github.com/mjonss)
+-   潜在的な正確性の問題のため、パーティション化されたテーブルでの列タイプの変更はサポートされなくなりました[#40620](https://github.com/pingcap/tidb/issues/40620) @ [ミョンス](https://github.com/mjonss)
 
--   TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)構成項目のデフォルト値が`1s`から`20s`に変更されました。この構成項目を変更して、レイテンシーを減らし、ステイル読み取りデータの適時性を向上させることができます。詳細については、 [ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)を参照してください。
+-   TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)構成項目のデフォルト値が`1s`から`20s`に変更されました。この構成項目を変更して、レイテンシーを減らし、ステイル読み取りデータの適時性を向上させることができます。詳細については、 [ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)参照してください。
+
+-   ネットワーク トラフィックを削減するために、TiKV [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)構成項目の既定値が`"200ms"`から`"1s"`に変更されました。
 
 ## 改善点 {#improvements}
 
@@ -38,7 +40,7 @@ TiDB バージョン: 6.5.1
 
     -   TiDB クラスタの初期化時に実行される SQL スクリプトの指定をサポート[＃35624](https://github.com/pingcap/tidb/issues/35624) @ [モルゴ](https://github.com/morgo)
 
-        TiDB v6.5.1 では、新しい構成項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスターを初めて起動するときに、コマンドライン パラメータ`--initialize-sql-file`を構成することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を実行する必要がある場合に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)を参照してください。
+        TiDB v6.5.1 では、新しい構成項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスターを初めて起動するときに、コマンドライン パラメータ`--initialize-sql-file`を構成することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を実行する必要がある場合に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)参照してください。
 
     -   メモリリークやパフォーマンスの低下を防ぐために、期限切れの領域キャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [スティクナーフ](https://github.com/sticnarf)
 
@@ -89,10 +91,10 @@ TiDB バージョン: 6.5.1
     -   ユニークインデックス[＃40592](https://github.com/pingcap/tidb/issues/40592) @ [タンジェンタ](https://github.com/tangenta)を追加するときに TiDB がパニックになる問題を修正
     -   同じテーブルを同時に切り捨てるときに、一部の切り捨て操作が MDL によってブロックできない問題を修正[＃40484](https://github.com/pingcap/tidb/issues/40484) @ [翻訳:](https://github.com/wjhuang2016)
     -   動的トリミングモード[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [イサール](https://github.com/Yisaer)でパーティションテーブルにグローバルバインディングが作成された後に TiDB が再起動できない問題を修正しました。
-    -   「カーソル読み取り」メソッドを使用してデータを読み取ると、GC [＃39447](https://github.com/pingcap/tidb/issues/39447) @ [ジグアン](https://github.com/zyguan)が原因でエラーが返される可能性がある問題を修正しました。
+    -   「カーソル読み取り」メソッドを使用してデータを読み取ると、GC [＃39447](https://github.com/pingcap/tidb/issues/39447) @ [ジグアン](https://github.com/zyguan)原因でエラーが返される可能性がある問題を修正しました。
     -   `SHOW PROCESSLIST` [＃41156](https://github.com/pingcap/tidb/issues/41156) @ [ヤンケオ](https://github.com/YangKeao)の結果で`EXECUTE`情報が null になる問題を修正しました
     -   `globalMemoryControl`クエリを強制終了しているときに、 `KILL`操作が[＃41057](https://github.com/pingcap/tidb/issues/41057) @ [うわー](https://github.com/wshwsh12)で終了しない可能性がある問題を修正しました。
-    -   `indexMerge`でエラーが発生した後に TiDB がpanicになる可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @ [グオシャオゲ](https://github.com/guo-shaoge) @ [風の話し手](https://github.com/windtalker)
+    -   `indexMerge`エラーが発生した後に TiDB がpanicになる可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @ [グオシャオゲ](https://github.com/guo-shaoge) @ [風の話し手](https://github.com/windtalker)
     -   `ANALYZE`文が`KILL` [＃41825](https://github.com/pingcap/tidb/issues/41825) @ [徐淮宇](https://github.com/XuHuaiyu)で終了する可能性がある問題を修正しました
     -   `indexMerge` [＃41545](https://github.com/pingcap/tidb/issues/41545) [＃41605](https://github.com/pingcap/tidb/issues/41605) @ [グオシャオゲ](https://github.com/guo-shaoge)で goroutine リークが発生する可能性がある問題を修正
     -   符号なし`TINYINT` / `SMALLINT` / `INT`値を`0` [＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)より小さい`DECIMAL` / `FLOAT` / `DOUBLE`の値と比較するときに誤った結果になる可能性がある問題を修正しました。
@@ -100,13 +102,13 @@ TiDB バージョン: 6.5.1
     -   タイムゾーンでのデータ競合によりデータインデックスの不整合が発生する可能性がある問題を修正[＃40710](https://github.com/pingcap/tidb/issues/40710) @ [翻訳:](https://github.com/wjhuang2016)
     -   `batch cop`実行中のスキャン詳細情報が不正確になる可能性がある問題を修正[＃41582](https://github.com/pingcap/tidb/issues/41582) @ [あなた06](https://github.com/you06)
     -   `cop`の上限同時実行数が[＃41134](https://github.com/pingcap/tidb/issues/41134) @ [あなた06](https://github.com/you06)に制限されない問題を修正
-    -   `cursor read`の`statement context`が誤って[＃39998](https://github.com/pingcap/tidb/issues/39998) @ [ジグアン](https://github.com/zyguan)にキャッシュされる問題を修正
+    -   `cursor read`の`statement context`が誤って[＃39998](https://github.com/pingcap/tidb/issues/39998) @ [ジグアン](https://github.com/zyguan)キャッシュされる問題を修正
     -   メモリリークとパフォーマンスの低下を防ぐために、古くなったリージョンキャッシュを定期的にクリーンアップします[＃40355](https://github.com/pingcap/tidb/issues/40355) @ [スティクナーフ](https://github.com/sticnarf)
-    -   `year <cmp> const`を含むクエリでプラン キャッシュを使用すると間違った結果[＃41626](https://github.com/pingcap/tidb/issues/41626) @ [qw4990](https://github.com/qw4990)が返される可能性がある問題を修正しました。
+    -   `year <cmp> const`含むクエリでプラン キャッシュを使用すると間違った結果[＃41626](https://github.com/pingcap/tidb/issues/41626) @ [qw4990](https://github.com/qw4990)返される可能性がある問題を修正しました。
     -   大きな範囲と大量のデータ変更を伴うクエリを実行すると、推定誤差が大きくなる問題を修正[＃39593](https://github.com/pingcap/tidb/issues/39593) @ [時間と運命](https://github.com/time-and-fate)
-    -   Plan Cache [＃40093](https://github.com/pingcap/tidb/issues/40093) [＃38205](https://github.com/pingcap/tidb/issues/38205) @ [qw4990](https://github.com/qw4990)の使用時に、一部の条件が Join 演算子を通じてプッシュダウンできない問題を修正しました。
+    -   Plan Cache [＃40093](https://github.com/pingcap/tidb/issues/40093) [＃38205](https://github.com/pingcap/tidb/issues/38205) @ [qw4990](https://github.com/qw4990)使用時に、一部の条件が Join 演算子を通じてプッシュダウンできない問題を修正しました。
     -   IndexMerge プランが SET 型列[＃41273](https://github.com/pingcap/tidb/issues/41273) [＃41293](https://github.com/pingcap/tidb/issues/41293) @ [時間と運命](https://github.com/time-and-fate)に誤った範囲を生成する可能性がある問題を修正しました
-    -   `int_col <cmp> decimal`条件[＃40679](https://github.com/pingcap/tidb/issues/40679) [＃41032](https://github.com/pingcap/tidb/issues/41032) @ [qw4990](https://github.com/qw4990)を処理するときにプラン キャッシュが FullScan プランをキャッシュする可能性がある問題を修正しました
+    -   `int_col <cmp> decimal`条件[＃40679](https://github.com/pingcap/tidb/issues/40679) [＃41032](https://github.com/pingcap/tidb/issues/41032) @ [qw4990](https://github.com/qw4990)処理するときにプラン キャッシュが FullScan プランをキャッシュする可能性がある問題を修正しました
     -   `int_col in (decimal...)`条件[#40224](https://github.com/pingcap/tidb/issues/40224) @ [qw4990](https://github.com/qw4990)を処理するときにプラン キャッシュが FullScan プランをキャッシュする可能性がある問題を修正しました
     -   `ignore_plan_cache`ヒントが`INSERT`ステートメント[＃40079](https://github.com/pingcap/tidb/issues/40079) [＃39717](https://github.com/pingcap/tidb/issues/39717) @ [qw4990](https://github.com/qw4990)で機能しない可能性がある問題を修正しました
     -   自動分析により TiDB が[＃40038](https://github.com/pingcap/tidb/issues/40038) @ [翻訳者](https://github.com/xuyifangreeneyes)で終了できなくなる問題を修正
@@ -115,7 +117,7 @@ TiDB バージョン: 6.5.1
     -   パーティションテーブルにグローバルバインディングを作成すると、TiDB が[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [イサール](https://github.com/Yisaer)で起動に失敗する可能性がある問題を修正しました。
     -   スローログ[＃41458](https://github.com/pingcap/tidb/issues/41458) @ [時間と運命](https://github.com/time-and-fate)でクエリプラン演算子が欠落する可能性がある問題を修正しました
     -   仮想列を持つ TopN 演算子が誤って TiKV またはTiFlash [＃41355](https://github.com/pingcap/tidb/issues/41355) @ [ドゥージール9](https://github.com/Dousir9)にプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。
-    -   インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) [＃40464](https://github.com/pingcap/tidb/issues/40464) [#40217](https://github.com/pingcap/tidb/issues/40217) @ [タンジェンタ](https://github.com/tangenta)を追加するときにデータの不整合が発生する問題を修正
+    -   インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) [＃40464](https://github.com/pingcap/tidb/issues/40464) [＃40217](https://github.com/pingcap/tidb/issues/40217) @ [タンジェンタ](https://github.com/tangenta)を追加するときにデータの不整合が発生する問題を修正
     -   インデックス[＃41515](https://github.com/pingcap/tidb/issues/41515) @ [タンジェンタ](https://github.com/tangenta)を追加するときに`Pessimistic lock not found`エラーが発生する問題を修正しました
     -   一意のインデックス[＃41630](https://github.com/pingcap/tidb/issues/41630) @ [タンジェンタ](https://github.com/tangenta)を追加するときに誤って報告される重複キー エラーの問題を修正しました
     -   TiDB [＃40741](https://github.com/pingcap/tidb/issues/40741) @ [ソロッツ](https://github.com/solotzg)で`paging`使用するとパフォーマンスが低下する問題を修正
@@ -131,7 +133,7 @@ TiDB バージョン: 6.5.1
 
 -   PD
 
-    -   特定の条件下で実行`replace-down-peer`遅くなる問題を修正[＃5788](https://github.com/tikv/pd/issues/5788) @ [フンドゥンDM](https://github.com/HunDunDM)
+    -   特定の条件下で実行`replace-down-peer`が遅くなる問題を修正[＃5788](https://github.com/tikv/pd/issues/5788) @ [フンドゥンDM](https://github.com/HunDunDM)
     -   PD が予期せず複数の学習者をリージョン[＃5786](https://github.com/tikv/pd/issues/5786) @ [ハンダンDM](https://github.com/HunDunDM)に追加する可能性がある問題を修正しました。
     -   リージョンスキャッタータスクが予期せず冗長レプリカを生成する問題を修正[＃5909](https://github.com/tikv/pd/issues/5909) @ [フンドゥンDM](https://github.com/HunDunDM)
     -   `ReportMinResolvedTS`の呼び出しが頻繁すぎる場合に発生する PD OOM 問題を修正[＃5965](https://github.com/tikv/pd/issues/5965) @ [フンドゥンDM](https://github.com/HunDunDM)
@@ -164,7 +166,7 @@ TiDB バージョン: 6.5.1
 
     -   ティCDC
 
-        -   TiKV または TiCDC ノード[＃8174](https://github.com/pingcap/tiflow/issues/8174) @ [ヒック](https://github.com/hicqu)のスケールインまたはスケールアウトなどの特殊なシナリオで、changefeed がスタックする可能性がある問題を修正しました。
+        -   TiKV または TiCDC ノード[＃8174](https://github.com/pingcap/tiflow/issues/8174) @ [ヒック](https://github.com/hicqu)スケールインまたはスケールアウトなどの特殊なシナリオで、changefeed がスタックする可能性がある問題を修正しました。
         -   REDOログ[＃6335](https://github.com/pingcap/tiflow/issues/6335) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)のstorageパスで事前チェ​​ックが実行されない問題を修正
         -   S3storage障害[＃8089](https://github.com/pingcap/tiflow/issues/8089) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)に対して REDO ログが許容できる期間が不十分である問題を修正
         -   `transaction_atomicity`と`protocol`構成ファイル[＃7935](https://github.com/pingcap/tiflow/issues/7935) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)経由で更新できない問題を修正
@@ -173,7 +175,7 @@ TiDB バージョン: 6.5.1
         -   メタ[＃8074](https://github.com/pingcap/tiflow/issues/8074) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)への書き込みに REDO ログが有効になっている場合にパフォーマンスが低下する問題を修正しました。
         -   TiCDC が大規模なトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正[＃7982](https://github.com/pingcap/tiflow/issues/7982) @ [ハイラスティン](https://github.com/Rustin170506)
         -   PD が異常なときにチェンジフィードを一時停止すると、誤ったステータス[＃8330](https://github.com/pingcap/tiflow/issues/8330) @ [スドジ](https://github.com/sdojjy)になる問題を修正しました。
-        -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [アズドンメン](https://github.com/asddongmen)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定されている場合に発生するデータの不整合を修正します。
+        -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [アズドンメン](https://github.com/asddongmen)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`が指定されている場合に発生するデータの不整合を修正します。
         -   テーブル スケジューリングとブラックホール シンクのpanic問題を修正[＃8024](https://github.com/pingcap/tiflow/issues/8024) [＃8142](https://github.com/pingcap/tiflow/issues/8142) @ [ヒック](https://github.com/hicqu)
 
     -   TiDB データ移行 (DM)

@@ -7,7 +7,7 @@ summary: ベクトル検索インデックスを構築して使用し、TiDB で
 
 K 近傍法 (KNN) 検索は、ベクトル空間内の特定の点に対して K 個の最も近い点を見つける問題です。この問題を解決する最も直接的な方法は、ベクトル空間内のすべての点と参照点の間の距離を計算する総当たり検索です。この方法は完全な精度を保証しますが、実用的に使用するには通常は遅すぎます。そのため、近傍法検索の問題は、多くの場合、近似アルゴリズムで解決されます。
 
-TiDB では、 [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)列に対するこのような近似最近傍 (ANN) 検索にベクトル検索インデックスを作成して利用できます。ベクトル検索インデックスを使用すると、ベクトル検索クエリを数ミリ秒で完了できます。
+TiDB では、 [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)の列に対する近似最近傍 (ANN) 検索にベクトル検索インデックスを作成して利用できます。ベクトル検索インデックスを使用すると、ベクトル検索クエリを数ミリ秒で完了できます。
 
 TiDB は現在、次のベクトル検索インデックス アルゴリズムをサポートしています。
 
@@ -39,7 +39,7 @@ CREATE TABLE vector_table_with_index (
 -   コサイン距離: `COMMENT "hnsw(distance=cosine)"`
 -   L2距離: `COMMENT "hnsw(distance=l2)"`
 
-ベクトル インデックスは、 `VECTOR(3)`ような固定次元のベクトル列に対してのみ作成できます。ベクトル距離は同じ次元のベクトル間でのみ計算できるため、 `VECTOR`ような混合次元のベクトル列に対しては作成できません。
+ベクトル インデックスは、 `VECTOR(3)`のような固定次元のベクトル列に対してのみ作成できます。ベクトル距離は同じ次元のベクトル間でのみ計算できるため、 `VECTOR`のような混合次元のベクトル列に対しては作成できません。
 
 プログラミング言語 SDK または ORM を使用している場合は、ベクター インデックスの作成について次のドキュメントを参照してください。
 
@@ -56,7 +56,7 @@ CREATE TABLE vector_table_with_index (
 
 ## ベクトルインデックスを使用する {#use-the-vector-index}
 
-ベクトル検索インデックスは、次のような`ORDER BY ... LIMIT`形式を使用して、K 近傍検索クエリで使用できます。
+ベクトル検索インデックスは、次のような`ORDER BY ... LIMIT`の形式を使用して、K 近傍検索クエリで使用できます。
 
 ```sql
 SELECT *
@@ -165,7 +165,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 
 ## ベクトルインデックスが使用されているかどうかを確認する {#check-whether-the-vector-index-is-used}
 
-[`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用して、このクエリがベクトル インデックスを使用しているかどうかを確認します。9 `TableFullScan`エグゼキュータの`operator info`列に`annIndex:`表示されている場合は、このテーブル スキャンがベクトル インデックスを使用していることを意味します。
+[`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用して、このクエリがベクトル インデックスを使用しているかどうかを確認します。9 `TableFullScan`エグゼキュータの`operator info`列に`annIndex:`が表示されている場合は、このテーブル スキャンがベクトル インデックスを利用していることを意味します。
 
 **例: ベクトルインデックスが使用される**
 
@@ -266,7 +266,7 @@ LIMIT 10;
 -   `vector_index.search.total` : インデックスの検索にかかる合計時間。レイテンシーが大きいということは、通常、インデックスがコールド状態 (以前に一度もアクセスされていないか、かなり前にアクセスされている) であるため、インデックスを検索するときに IO が大量に発生することを意味します。複数のベクター インデックスが並行して検索される可能性があるため、このフィールドは実際のクエリ時間よりも長くなる可能性があります。
 -   `vector_index.search.discarded_nodes` : 検索中に訪問されたが破棄されたベクター行の数。これらの破棄されたベクターは検索結果では考慮されません。通常、値が大きい場合は、UPDATE または DELETE ステートメントによって古い行が多数あることを示します。
 
-出力の解釈については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 、 [EXPLAIN コマンド](/explain-walkthrough.md)を参照してください。
+出力の解釈については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 、 [EXPLAIN コマンド](/explain-walkthrough.md)参照してください。
 
 ## 参照 {#see-also}
 

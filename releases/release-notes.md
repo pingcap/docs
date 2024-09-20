@@ -45,6 +45,7 @@ summary: TiDB は、7.5.1、7.5.0、7.4.0-DMR、7.3.0-DMR、7.2.0-DMR、7.1.4、
 
 ## 6.5 {#6-5}
 
+-   [6.5.11](/releases/release-6.5.11.md) : 2024-09-20
 -   [6.5.10](/releases/release-6.5.10.md) : 2024-06-20
 -   [6.5.9](/releases/release-6.5.9.md) : 2024-04-12
 -   [6.5.8](/releases/release-6.5.8.md) : 2024-02-02

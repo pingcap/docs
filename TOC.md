@@ -85,7 +85,7 @@
     -   トランザクション
         -   [概要](/develop/dev-guide-transaction-overview.md)
         -   [楽観的取引と悲観的取引](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
-        -   [取引トランザクション](/develop/dev-guide-transaction-restraints.md)
+        -   [トランザクション制限](/develop/dev-guide-transaction-restraints.md)
         -   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
     -   最適化する
         -   [概要](/develop/dev-guide-optimize-sql-overview.md)
@@ -187,7 +187,7 @@
                 -   [バッチテーブル作成](/br/br-batch-create-table.md)
                 -   [チェックポイントバックアップ](/br/br-checkpoint-backup.md)
                 -   [チェックポイントの復元](/br/br-checkpoint-restore.md)
-            -   [DumplingとTiDB Lightningを使用してデータをバックアップおよび復元する](/backup-and-restore-using-dumpling-lightning.md)
+            -   [DumplingとTiDB Lightning を使用してデータをバックアップおよび復元する](/backup-and-restore-using-dumpling-lightning.md)
             -   [RawKV のバックアップと復元](/br/rawkv-backup-and-restore.md)
             -   [増分バックアップと復元](/br/br-incremental-guide.md)
     -   クラスタ災害復旧 (DR)
@@ -199,7 +199,7 @@
     -   [タイムゾーンの設定](/configure-time-zone.md)
     -   [毎日のチェックリスト](/daily-check.md)
     -   [TiFlashの管理](/tiflash/maintain-tiflash.md)
-    -   [TiUPを使用して TiDB を管理](/maintain-tidb-using-tiup.md)
+    -   [TiUP を使用して TiDB を管理](/maintain-tidb-using-tiup.md)
     -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
     -   [オンラインの安全でない回復](/online-unsafe-recovery.md)
     -   [プライマリクラスタとセカンダリクラスタ間でデータを複製する](/replicate-between-primary-and-secondary-clusters.md)
@@ -309,8 +309,8 @@
         -   ステイル読み取りを使用する (推奨)
             -   [ステイル読み取りの使用シナリオ](/stale-read.md)
             -   [`As OF TIMESTAMP`使用してステイル読み取りを実行する](/as-of-timestamp.md)
-            -   [`tidb_read_staleness`を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
-            -   [`tidb_external_ts`を使用してステイル読み取りを実行する](/tidb-external-ts.md)
+            -   [`tidb_read_staleness`使用してステイル読み取りを実行する](/tidb-read-staleness.md)
+            -   [`tidb_external_ts`使用してステイル読み取りを実行する](/tidb-external-ts.md)
         -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
     -   ベストプラクティス
         -   [TiDBを使用する](/best-practices/tidb-best-practices.md)
@@ -520,7 +520,7 @@
     -   TiDB Lightning
         -   [概要](/tidb-lightning/tidb-lightning-overview.md)
         -   [始める](/get-started-with-tidb-lightning.md)
-        -   [TiDB Lightning をデプロイ](/tidb-lightning/deploy-tidb-lightning.md)
+        -   [TiDB Lightningをデプロイ](/tidb-lightning/deploy-tidb-lightning.md)
         -   [ターゲットデータベースの要件](/tidb-lightning/tidb-lightning-requirements.md)
         -   データソース
             -   [データ一致ルール](/tidb-lightning/tidb-lightning-data-source.md)
@@ -613,7 +613,7 @@
     -   PingCAPクリニック診断サービス
         -   [概要](/clinic/clinic-introduction.md)
         -   [クイックスタート](/clinic/quick-start-with-clinic.md)
-        -   [PingCAPクリニックを使用してクラスターをトラブルシューティングする](/clinic/clinic-user-guide-for-tiup.md)
+        -   [PingCAPクリニック を使用してクラスターをトラブルシューティングする](/clinic/clinic-user-guide-for-tiup.md)
         -   [PingCAPクリニック診断データ](/clinic/clinic-data-instruction-for-tiup.md)
     -   ティスパーク
         -   [ユーザーガイド](/tispark-overview.md)
@@ -1053,6 +1053,7 @@
     -   バージョン6.6
         -   [6.6.0-DMR](/releases/release-6.6.0.md)
     -   バージョン6.5
+        -   [6.5.11](/releases/release-6.5.11.md)
         -   [6.5.10](/releases/release-6.5.10.md)
         -   [6.5.9](/releases/release-6.5.9.md)
         -   [6.5.8](/releases/release-6.5.8.md)
