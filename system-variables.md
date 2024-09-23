@@ -2303,7 +2303,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
-- This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [LIST Partitioning](/partitioned-table#list-partitioning) is enabled by default.
+- This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [List partitioning](/partitioned-table.md#list-partitioning) is enabled by default.
 
 ### tidb_enable_local_txn
 
@@ -2709,7 +2709,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `ON`
-- This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table) is enabled by default.
+- This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table.md) is enabled by default.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2</span>
 
