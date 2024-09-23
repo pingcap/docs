@@ -531,11 +531,17 @@ If the message contains the `claimCheckLocation` field, the Kafka consumer reads
 }
 ```
 
-The `key` and `value` fields corresponds to the same fields in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message, by encoding the `key` and `value` into one JSON object to deliver a complete message. Only Open-protocol encode the `key` field, it's empty for other protocols.
+The `key` and `value` fields correspond to the same-named fields in the Kafka message. Consumers can reconstruct large message content by parsing the data in these two fields. Only Kafka messages encoded with the Open Protocol contain the `key` field. TiCDC encodes both `key` and `value` into a single JSON object to deliver the complete message at once. For other protocols, the `key` field is always empty.
 
-#### Only send the value to external storage
+#### Send the `value` field to external storage only
 
-Starting from version v8.4.0, the `claim-check-raw-value` parameter is supported, and it defaults to false. It can be set to true if not using Open-protocol, otherwise error occurs.
+Starting from v8.4.0, TiCDC supports sending only the `value` field of Kafka messages to external storage. This feature is only applicable to non-Open Protocol protocols. You can control this feature by setting the `claim-check-raw-value` parameter, which defaults to `false`.
+
+> **Note:**
+>
+> When using the Open Protocol, if you set `claim-check-raw-value` to `true`, an error will occur.
+
+When `claim-check-raw-value` is set to `true`, the changefeed sends the `value` field of Kafka messages directly to external storage without additional JSON serialization of `key` and `value`. This reduces CPU overhead. Additionally, consumers can read directly consumable data from external storage, reducing deserialization overhead.
 
 An example configuration is as follows:
 
@@ -547,5 +553,3 @@ large-message-handle-option = "claim-check"
 claim-check-storage-uri = "s3://claim-check-bucket"
 claim-check-raw-value = true
 ```
-
-When this parameter is set to true, the changefeed directly sends the Value portion of Kafka messages to external storage, on the consumer side, data can be read directly from external storage and consumed. This reduce CPU overhead introduced by the JSON serialization and deserialization.
