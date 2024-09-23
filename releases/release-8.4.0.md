@@ -76,13 +76,23 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     TiDB resource control can identify and lower the priority of background tasks. In certain scenarios, you might want to limit the resource consumption of these tasks, even when resources are available. Starting from v8.4.0, you can use the `UTILIZATION_LIMIT` parameter to set a maximum percentage of resources that a background task can consume. Each node will ensure that the resource usage of all background tasks stays within this limit. This feature enables precise control over resource consumption for background tasks, enhancing cluster stability.
 
     For more information, see [documentation](/tidb-resource-control.md#manage-background-tasks).
+
 ### Availability
 
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
+* TiProxy supports traffic replay (experimental) [#642](https://github.com/pingcap/tiproxy/issues/642) @[djshow832](https://github.com/djshow832) **tw@Oreoxmt** <!--1942-->
 
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
+    Starting from TiProxy v1.3.0, you can use TiProxy to capture access traffic in a TiDB production cluster and replay it in a test cluster at a specified rate. This feature enables you to reproduce actual workloads from the production cluster in a test environment, verifying SQL statement execution results and performance.
 
-    For more information, see [documentation](doc-link).
+    Traffic replay is suitable for the following scenarios:
+
+    - Validate TiDB version upgrades
+    - Assess change impact
+    - Validate performance before TiDB scaling
+    - Test performance limits
+
+    You can use `tiproxyctrl` to connect to the TiProxy instance and perform traffic capture and replay.
+
+    For more information, see [documentation](/tiproxy/tiproxy-traffic-replay.md).
 
 ### SQL
 
