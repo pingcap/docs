@@ -3,7 +3,7 @@ title: ticloud upgrade
 summary: The reference of `ticloud upgrade`.
 ---
 
-# ticloud update
+# ticloud upgrade
 
 Upgrade the TiDB Cloud CLI to the latest version:
 
