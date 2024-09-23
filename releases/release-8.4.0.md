@@ -13,6 +13,83 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 8.4.0 introduces the following key features and improvements:
 
+<table>
+<thead>
+  <tr>
+    <th>Category</th>
+    <th>Feature/Enhancement</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="5">Scalability and Performance</td>
+    <td> 执行计划缓存在实例内共享（实验特性）<!-- tw@Oreoxmt 1569 --></td>
+    <td> 实例级执行计划缓存支持在内存中缓存更多的执行计划，消除 SQL 编译时所消耗的时间，从而减少 SQL 的运行时间，提升 OLTP 系统的性能和吞吐。同时，也能更好的控制内存占用，提升数据库稳定性。</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/partitioned-table#global-indexes">Global indexes for partitioned tables (GA)</a><!-- tw@hfxsd 1961 --></td>
+    <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned columns, and remove the restriction that a unique key must contain the partition key. This feature extends the usage scenarios of TiDB partitioned tables and avoids some of the application modification work that might be required for data migration.</td>
+  </tr>
+  <tr>
+    <td> TiDB 并行获取 TSO<!-- tw@qiancai 1893 --></td>
+    <td>在高并发场景下，并行获取 TSO 能够有效降低等待获取 TSO 的时间，提升集群的吞吐。</td>
+  </tr>
+  <tr>
+    <td> Improve the execution efficiency of administrative SQL statements<!-- tw@hfxsd 1941 --></td>
+    <td>In some SaaS systems, there is a need to create users in batch and rotate passwords regularly. TiDB enhances the performance of creating and modifying database users, ensuring these operations can be completed within the desired time window.</td>
+  </tr>
+  <tr>
+    <td> Improve query performance for cached tables<!-- tw@hfxsd 1965 --></td>
+    <td>Improve query performance for index scanning on cached tables, with improvements of up to 5.4 times in some scenarios. For high-speed queries on small tables, cached tables can significantly enhance overall performance.</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Reliability and Availability</td>
+    <td> Support more triggers for runaway queries and provide the ability to switch resource groups<!-- tw@hfxsd 1832 --><!-- tw@lilin90 1800 --></td>
+    <td>Runaway Queries offer an effective way to mitigate the impact of unexpected SQL performance issues on systems. The new version introduces <CODE>PROCESSED_KEYS</CODE> and <CODE>RU</CODE> as identifying conditions, allowing identified queries to be placed into a specified resource group for more precise identification and control of runaway queries.</td>
+  </tr>
+  <tr>
+    <td> Support setting resource usage caps for background tasks for resource control <!-- tw@hfxsd 1909 --></td>
+    <td>By setting a percentage cap on background tasks of resource control, you can manage their resource consumption based on the needs of different business systems. This ensures background tasks consume minimal resources, maintaining the service quality of online operations.</td>
+  </tr>
+  <tr>
+    <td> TiProxy 流量捕捉和回放<!-- tw@Oreoxmt 1942 --></td>
+    <td>在做集群升级、迁移、部署变化等重要变更之前，通过捕捉真实负载来验证目标集群的性能，确保变更的成功。</td>
+  </tr>
+  <tr>
+    <td> 统计信息收集自适应并发度<!-- tw@Oreoxmt 1739 --></td>
+    <td>自动统计信息收集会根据节点规模和硬件规格自动决定采集并发度，提升统计信息收集效率，减少手工调优，保证集群性能稳定。</td>
+  </tr>
+  <tr>
+    <td rowspan="2">SQL</td>
+    <td> 外键成为正式功能<!-- tw@lilin90 1894 --></td>
+    <td>支持 MySQL 兼容的外键约束，维护数据一致性，进一步提升了 TiDB 对 MySQL 的兼容能力。</td>
+  </tr>
+  <tr>
+    <td> 向量搜索功能（实验特性）<!-- tw@qiancai 1898 --></td>
+    <td>加速向量搜索的性能，适用于检索增强生成（RAG）、语义搜索、推荐系统等应用类型。把 TiDB 应用场景扩展到 AI 和 大语言模型（LLM）领域。</td>
+  </tr>
+  <tr>
+    <td rowspan="3">数据库管理和可观测性</td>
+    <td> 持久化内存表到 Workload Repository（实验特性）<!-- tw@lilin90 1823 --></td>
+    <td> 持久化内存表中的运行指标和状态信息，是观测性的重要增强，能极大提升过往问题诊断和追溯的效率，并为未来的自动化运维，提供了数据集支持。 围绕 Workload Repository 构建报告、诊断、推荐一体化的能力，会成为未来提升 TiDB 易用性的重要组成。</td>
+  </tr>
+  <tr>
+    <td> Display TiKV and TiDB CPU times in memory tables<!-- tw@hfxsd 1877 --></td>
+    <td>CPU times are now integrated into a system table and displayed alongside other session or SQL metrics, allowing for easier observation of operations with high CPU consumption from multiple perspectives, improving diagnostic efficiency. This is particularly useful for diagnosing instances with CPU spikes or read/write hotspots in the cluster.</td>
+  </tr>
+  <tr>
+    <td> Support backing up TiKV instances with IMDSv2 service enabled<!-- tw@hfxsd 1945 --></td>
+    <td><a href="https://aws.amazon.com/cn/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/">AWS EC2 now uses IMDSv2 as the default metadata service</a>. TiDB supports data backups from TiKV instances with IMDSv2 enabled, enhancing your ability to run TiDB clusters in public cloud environments.</td>
+  </tr>
+  <tr>
+    <td rowspan="1">安全</td>
+    <td> 备份数据加密成为正式功能<!-- tw@qiancai 1920 --></td>
+    <td> 加密数据库备份是一种增强数据安全性的重要措施，既可以保护数据备份中敏感信息，又有助于合规，确保数据在存储和传输中的安全。</td>
+  </tr>
+</tbody>
+</table>
+
 ## Feature details
 
 ### Scalability
