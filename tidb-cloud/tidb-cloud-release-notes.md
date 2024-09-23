@@ -8,6 +8,12 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## September 24, 2024
+
+**General changes**
+
+- Provide a new [TiFlash vCPU and RAM](/tidb-cloud/size-your-cluster.md#tiflash-vcpu-and-ram) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS: `32 vCPU, 128 GiB`
+
 ## September 10, 2024
 
 **General changes**
