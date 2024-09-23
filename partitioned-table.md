@@ -1475,7 +1475,7 @@ This section discusses the relationship of partitioning keys with primary keys a
 
 > **Note:**
 > 
-> This rule can be ignored by using [global indexes](#global-indexes).
+> You can ignore this rule when using [global indexes](#global-indexes).
 
 For example, the following table creation statements are invalid:
 
