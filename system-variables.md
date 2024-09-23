@@ -5234,7 +5234,7 @@ SHOW WARNINGS;
 > This TiDB variable is not applicable to TiDB Cloud.
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
