@@ -41,7 +41,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     Starting with v8.3.0, the global index feature is released as an experimental feature. You can explicitly create a global index for a partitioned table with the keyword `Global` to remove the restriction that the unique key must use every column in the table's partitioning expression, to meet flexible business needs. Global indexes also enhance the performance of queries that do not include partition keys.
 
-    In v8.4.0, this feature becomes generally available (GA).
+    In v8.4.0, this feature becomes generally available (GA). You can directly use the keyword `GLOBAL` to create a global index, instead of setting the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) to enable the global index feature.
 
     For more information, see [documentation](/partitioned-table.md#global-indexes).
 
@@ -202,8 +202,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 + TiDB
 
-+ TiKV
+- Optimize MEMDB implementation to reduce write latency in transactions and TiDB CPU usage [#55287](https://github.com/pingcap/tidb/issues/55287) @[you06](https://github.com/you06) **tw@hfxsd** <!--1892-->
 
++ TiKV
+- Increase the default value of Region from 96 MiB to 256 MiB to avoid the extra overhead caused by too many Regions [#17309](https://github.com/tikv/tikv/issues/17309) [LykxSassinator](https://github.com/LykxSassinator) **tw@hfxsd** <!--1925-->
+- Introduce a new `spill-dir` configuration in Raft Engine to support multi-disk storage for Raft logs. When the disk containing the home directory (`dir`) runs out of space, Raft Engine automatically writes new logs to `spill-dir`, ensuring continuous operation. [LykxSassinator](https://github.com/LykxSassinator) **tw@hfxsd** <!--1970-->
 + PD
 
 + TiFlash
