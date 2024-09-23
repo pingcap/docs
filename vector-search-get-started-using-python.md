@@ -5,40 +5,50 @@ summary: Learn how to quickly develop an AI application that performs semantic s
 
 # Get Started with TiDB + AI via Python
 
-This tutorial demonstrates how to develop a simple AI application that provides **semantic search** features. Unlike traditional keyword search, semantic search intelligently understands the meaning behind your query. For example, if you have documents titled "dog", "fish", and "tree", and you search for "a swimming animal", the application would identify "fish" as the most relevant result.
+This tutorial demonstrates how to develop a simple AI application that provides **semantic search** features. Unlike traditional keyword search, semantic search intelligently understands the meaning behind your query and returns the most relevant result. For example, if you have documents titled "dog", "fish", and "tree", and you search for "a swimming animal", the application would identify "fish" as the most relevant result.
 
 Throughout this tutorial, you will develop this AI application using [TiDB Vector Search](/vector-search-overview.md), Python, [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python), and AI models.
 
-<CustomContent platform="tidb-cloud">
+<CustomContent platform="tidb">
 
-> **Note**
+> **Warning:**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 </CustomContent>
+
+> **Note:**
+>
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
-<CustomContent platform="tidb">
-
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB cluster. Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- A TiDB cluster.
+
+<CustomContent platform="tidb">
+
+**If you don't have a TiDB cluster, you can create one as follows:**
+
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+**If you don't have a TiDB cluster, you can create one as follows:**
+
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
 
 ## Get started
 
-To run the demo directly, check out the sample code in the [pingcap/tidb-vector-python](https://github.com/pingcap/tidb-vector-python/blob/main/examples/python-client-quickstart) repository.
+The following steps show how to develop the application from scratch. To run the demo directly, you can check out the sample code in the [pingcap/tidb-vector-python](https://github.com/pingcap/tidb-vector-python/blob/main/examples/python-client-quickstart) repository.
 
 ### Step 1. Create a new Python project
 
@@ -58,10 +68,17 @@ In your project directory, run the following command to install the required pac
 pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 ```
 
-- `tidb-vector`: the Python client for interacting with Vector Search in TiDB Cloud.
+- `tidb-vector`: the Python client for interacting with TiDB vector search.
 - [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/vector-search-overview.md#vector-embedding) from text.
 
 ### Step 3. Configure the connection string to the TiDB cluster
+
+Configure the cluster connection string depending on the TiDB deployment option you've selected.
+
+<SimpleTab>
+<div label="TiDB Cloud Serverless">
+
+For a TiDB Cloud Serverless cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -92,6 +109,30 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
     TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
     ```
 
+</div>
+<div label="TiDB Self-Managed">
+
+For a TiDB Self-Managed cluster, create a `.env` file in the root directory of your Python project. Copy the following content into the `.env` file, and modify the environment variable values according to the connection parameters of your TiDB cluster:
+
+```dotenv
+TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
+# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
+```
+
+If you are running TiDB on your local machine, the `HOST` is `127.0.0.1` by default. The initial `PASSWORD` is empty, so if you are starting the cluster for the first time, you can omit this field.
+
+The following are descriptions for each parameter:
+
+- `<HOST>`: The host of the TiDB cluster.
+- `<PORT>`: The port of the TiDB cluster.
+- `<USER>`: The username to connect to the TiDB cluster.
+- `<PASSWORD>`: The password to connect to the TiDB cluster.
+- `<DATABASE>`: The name of the database you want to connect to.
+
+</div>
+
+</SimpleTab>
+
 ### Step 4. Initialize the embedding model
 
 An [embedding model](/vector-search-overview.md#embedding-model) transforms data into [vector embeddings](/vector-search-overview.md#vector-embedding). This example uses the pre-trained model [**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5) for text embedding. This lightweight model, provided by the `sentence-transformers` library, transforms text data into 384-dimensional vector embeddings.
@@ -113,11 +154,11 @@ def text_to_embedding(text):
 
 ### Step 5. Connect to the TiDB cluster
 
-Use the `TiDBVectorClient` class to connect to your TiDB cluster and create a table `embedded_documents` with a vector column to serve as the vector store.
+Use the `TiDBVectorClient` class to connect to your TiDB cluster and create a table `embedded_documents` with a vector column.
 
 > **Note**
 >
-> Ensure the dimension of your vector column matches the dimension of the vectors produced by your embedding model. For example, the **msmarco-MiniLM-L12-cos-v5** model generates vectors with 384 dimensions.
+> Make sure the dimension of your vector column in the table matches the dimension of the vectors generated by your embedding model. For example, the **msmarco-MiniLM-L12-cos-v5** model generates vectors with 384 dimensions, so the dimension of your vector columns in `embedded_documents` should be 384 as well.
 
 ```python
 import os
@@ -128,13 +169,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 vector_store = TiDBVectorClient(
-   # The table which will store the vector data.
+   # The 'embedded_documents' table will store the vector data.
    table_name='embedded_documents',
    # The connection string to the TiDB cluster.
    connection_string=os.environ.get('TIDB_DATABASE_URL'),
    # The dimension of the vector generated by the embedding model.
    vector_dimension=embed_model_dims,
-   # Determine whether to recreate the table if it already exists.
+   # Recreate the table if it already exists.
    drop_existing_table=True,
 )
 ```
@@ -200,9 +241,9 @@ Search result ("a swimming animal"):
 - text: "tree", distance: 0.798545178640937
 ```
 
-From the output, the swimming animal is most likely a fish, or a dog with a gift for swimming.
+The three terms in the search results are sorted by their respective distance from the queried vector: the smaller the distance, the more relevant the corresponding `document`.
 
-This demonstration shows how vector search can efficiently locate the most relevant documents, with search results organized by the proximity of the vectors: the smaller the distance, the more relevant the document.
+Therefore, according to the output, the swimming animal is most likely a fish, or a dog with a gift for swimming.
 
 ## See also
 
