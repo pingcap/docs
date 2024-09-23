@@ -23,9 +23,10 @@ Top SQL is suitable for analyzing performance issues. The following are some typ
 * The CPU usage of the cluster has drastically changed and you want to know the major cause.
 * Analyze the most resource-intensive SQL statements in the cluster and optimize them to reduce hardware costs.
 
-Top SQL cannot be used to pinpoint non-performance issues, such as incorrect data or abnormal crashes.
+Top SQL cannot be used in the following scenarios:
 
-Top SQL does not support analyzing database performance issues that are not caused by high CPU load, such as transaction lock conflicts.
+- Top SQL cannot be used to pinpoint non-performance issues, such as incorrect data or abnormal crashes.
+- Top SQL does not support analyzing database performance issues that are not caused by high CPU load, such as transaction lock conflicts.
 
 ## Access the page
 
