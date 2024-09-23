@@ -5,7 +5,7 @@ summary: Introduce the implementation principle and usage of the TiCDC data inte
 
 # TiCDC Data Integrity Validation for Single-Row Data
 
-Starting from v7.1.0, TiCDC introduces the data integrity validation feature, which uses a [checksum algorithm](#checksum-algorithm) to validate the integrity of single-row data. This feature helps verify whether any error occurs in the process of writing data from TiDB, replicating it through TiCDC, and then writing it to a Kafka cluster. The data integrity validation feature only supports changefeeds that use Kafka as the downstream and currently supports the simple and Avro protocol. For more information about the algorithm of the checksum, see [Algorithm for checksum calculation](#algorithm-for-checksum-calculation).
+Starting from v7.1.0, TiCDC introduces the data integrity validation feature, which uses a [checksum algorithm](#checksum-algorithms) to validate the integrity of single-row data. This feature helps verify whether any error occurs in the process of writing data from TiDB, replicating it through TiCDC, and then writing it to a Kafka cluster. The data integrity validation feature only supports changefeeds that use Kafka as the downstream and currently supports the simple and Avro protocol. For more information about the algorithm of the checksum, see [Algorithm for checksum calculation](#algorithm-for-checksum-calculation).
 
 ## Enable the feature
 
