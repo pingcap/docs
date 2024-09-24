@@ -56,15 +56,15 @@ Since SQL proxy accounts are JWT token-based, it is not necessary to manage pass
 The SQL proxy account's role depends on the TiDB Cloud user's IAM role:
 
 - Organization Level:
-  - Organization Owner: role_admin
-  - Organization Billing Admin: No Proxy account
-  - Organization Member: No Proxy account
-  - Organization Console Audit admin: No Proxy account
+    - Organization Owner: role_admin
+    - Organization Billing Admin: No Proxy account
+    - Organization Member: No Proxy account
+    - Organization Console Audit admin: No Proxy account
 
 - Project Level:
-  - Project Owner: role_admin
-  - Project Data Access Read-Write: role_readwrite
-  - Project Data Access Read-Only: role_readonly
+    - Project Owner: role_admin
+    - Project Data Access Read-Write: role_readwrite
+    - Project Data Access Read-Only: role_readonly
 
 ## SQL proxy account access control
 
