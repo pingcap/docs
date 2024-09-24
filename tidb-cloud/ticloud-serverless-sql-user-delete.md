@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless sql-user delete`.
 
 # ticloud serverless sql-user delete
 
-Delete a TiDB Cloud Serverless SQL user
+Delete a TiDB Cloud Serverless SQL user:
 
 ```shell
 ticloud serverless sql-user delete [flags]
@@ -16,7 +16,7 @@ ticloud serverless sql-user delete [flags]
 Delete a TiDB Cloud Serverless SQL user in interactive mode:
 
 ```shell
- Delete a SQL user in non-interactive mode:
+ticloud serverless sql-user delete
 ```
 
 Delete a TiDB Cloud Serverless SQL user in non-interactive mode:
@@ -32,7 +32,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                    | Description                              | Required | Note                                                 |
 |-------------------------|------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Specifies the ID of the cluster.         | Yes      | Only works in non-interactive mode.                  |
-| --force                 | Delete a SQL user without confirmation.  | No       | Only works in non-interactive mode.                  |
+| --force                 | Deletes a SQL user without confirmation.  | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags

@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless sql-user create`.
 
 # ticloud serverless sql-user create
 
-Create a TiDB Cloud Serverless SQL user
+Create a TiDB Cloud Serverless SQL user:
 
 ```shell
 ticloud serverless sql-user create [flags]
@@ -31,9 +31,9 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                              | Required | Note                                                 |
 |-------------------------|------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster.         | Yes      | Only works in non-interactive mode.                  |
+| -c, --cluster-id string | The ID of the cluster.         | Yes      | Only works in non-interactive mode.                  |
 | --password string       | The password of the SQL user.            | No       | Only works in non-interactive mode.                  |
-| --role strings          | The role(s) of the SQL user.             | No       | Only works in non-interactive mode.                  |
+| --role strings          | The roles of the SQL user.             | No       | Only works in non-interactive mode.                  |
 | -u, --user string       | The name of the SQL user.                | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 

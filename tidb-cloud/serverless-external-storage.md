@@ -223,4 +223,4 @@ Take the following steps to configure a service SAS token:
 
    ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
-4. Click the **Generate SAS and connection string** button to generate the SAS token. You will specify this token when you create an external stage.
+4. Click **Generate SAS and connection string** to generate the SAS token. You will specify this token when you create an external stage.

@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless sql-user list`.
 
 # ticloud serverless sql-user list
 
-List TiDB Cloud Serverless SQL users
+List TiDB Cloud Serverless SQL users:
 
 ```shell
 ticloud serverless sql-user list [flags]
