@@ -106,8 +106,8 @@ The following steps describe how to clean up backup data that exceeds the backup
 
 ### Capabilities
 
-- On each TiKV node, PITR can restore snapshot data `br restore full` at a speed of 280 GB/h and log data `br restore point` 30 GB/h.
-- BR deletes outdated log backup data `br log truncate` at a speed of 600 GB/h.
+- On each TiKV node, PITR can restore snapshot data (Full Restore) at a speed of 280 GB/h and log data (Restore Meta Files and Restore KV Files) 30 GB/h.
+- BR deletes outdated log backup data `tiup br log truncate` at a speed of 600 GB/h.
 
 > **Note:**
 >
