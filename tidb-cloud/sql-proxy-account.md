@@ -1,6 +1,6 @@
 ---
 title: SQL Proxy Account
-summary: Learn about SQL proxy accounts in TiDB Cloud.
+summary: Learn about the SQL proxy account in TiDB Cloud.
 ---
 
 # SQL Proxy Account
