@@ -1990,7 +1990,7 @@ Configuration items related to Raft Engine.
 > 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
 
 + Specifies the version of log files in Raft Engine.
-+ Value Options:
++ Value options:
     + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
     + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
 + Default value:
@@ -2430,7 +2430,7 @@ Configuration items related to resource control of the TiKV storage layer.
 
 Configure the control strategy for low priority tasks. TiKV ensures the priority execution of higher priority tasks by applying dynamic quota limit to low-priority tasks. This control strategy is used to calculates the quota for low priority tasks.
 
-+ Value Options:
++ Value options:
     + `aggressive`: using this strategy, the flow control policy will prioritize the performance of high-priority tasks, ensuring that the throughput and latency of high-priority tasks are basically unaffected, but low-priority tasks will run slower.
     + `moderate`: using this strategy, TiKV will impose a balanced flow control limit on low-priority tasks, ensuring that low-priority tasks can use more system available resources while causing little impact on high-priority tasks.
     + `conservative`: using this strategy, the flow control policy will prioritize ensuring that system resources are fully utilized, and low-priority tasks will try to use available system resources as much as possible, resulting in a greater impact on the performance of high-priority tasks.
