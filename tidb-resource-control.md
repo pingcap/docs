@@ -401,6 +401,8 @@ You can get more information about runaway queries from the following system tab
 ### Manage background tasks
 
 > **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://docs.pingcap.com/tidb/stable/support) on GitHub.
 > 
 > The background task management in resource control is based on TiKV's dynamic adjustment of resource quotas for CPU/IO utilization. Therefore, it relies on the available resource quota of each instance. If multiple components or instances are deployed on a single server, it is mandatory to set the appropriate resource quota for each instance through `cgroup`. It is difficult to achieve the expected effect in deployment with shared resources like TiUP Playground.
 
