@@ -2315,7 +2315,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 ### `in-memory-instance-size-limit` <span class="version-mark">New in v8.4.0</span>
 
-+ Control the memory size limit of pessimistic locks for one TiKV instance. The pessimistic locks would be written persistently if the memory usage exceeds the limit.
++ Controls the memory usage limit for [in-memory pessimistic locks](/pessimistic-transaction.md#in-memory-pessimistic-lock) in a TiKV instance. When this limit is exceeded, TiKV writes pessimistic locks persistently.
 + Default value: `100MiB`
 + Unit: KiB|MiB|GiB
 
