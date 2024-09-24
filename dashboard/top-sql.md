@@ -92,7 +92,7 @@ The following are the common steps to use Top SQL.
 
     ![Refresh](/media/dashboard/top-sql-usage-refresh.png)
 
-6. View the CPU resource usage of TiKV by table or database level to quickly identify resource usage at a higher level.
+6. View the CPU resource usage by table or database level to quickly identify resource usage at a higher level. Currently, only TiKV instances are supported.
 
     Select a TiKV instance, and then select **By TABLE** or **By DB**:
 
