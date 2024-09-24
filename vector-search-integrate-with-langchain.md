@@ -47,6 +47,8 @@ To complete this tutorial, you need:
 - (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
+</CustomContent>
+
 ## Get started
 
 This section provides step-by-step instructions for integrating TiDB Vector Search with LangChain to perform semantic searches.
@@ -145,18 +147,18 @@ Taking macOS as an example, the cluster connection string is as follows:
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>"
-# 例如：TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
+# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
 You need to modify the values of the connection parameters according to your TiDB cluster. If you are running TiDB on your local machine, `HOST` is `127.0.0.1` by default. The initial `PASSWORD` is empty, so if you are starting the cluster for the first time, you can omit this field.
 
 The following are descriptions for each parameter:
 
-- `HOST`: The host of the TiDB cluster.
-- `PORT`: The port of the TiDB cluster.
-- `USER`: The username to connect to the TiDB cluster.
-- `PASSWORD`: The password to connect to the TiDB cluster.
-- `DATABASE`: The name of the database you want to connect to.
+- `<HOST>`: The host of the TiDB cluster.
+- `<PORT>`: The port of the TiDB cluster.
+- `<USER>`: The username to connect to the TiDB cluster.
+- `<PASSWORD>`: The password to connect to the TiDB cluster.
+- `<DATABASE>`: The name of the database you want to connect to.
 
 </div>
 
