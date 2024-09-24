@@ -15,10 +15,11 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 ## Export locations
 
-You can export data to 
+You can export data to:
 
 - A local file
 - An external storage, including:
+
   - [Amazon S3](https://aws.amazon.com/s3/)
   - [Google Cloud Storage](https://cloud.google.com/storage)
   - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
