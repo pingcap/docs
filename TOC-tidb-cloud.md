@@ -240,6 +240,7 @@
       - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
   - [Chat2Query (Beta) in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
+  - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
 - Vector Search (Beta)
   - [Overview](/tidb-cloud/vector-search-overview.md)
   - Get Started
@@ -387,7 +388,6 @@
     - TiDB v6.5
       - [TPC-C Performance Test Report](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
       - [Sysbench Performance Test Report](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
-  - [SQL Proxy Accounts](/tidb-cloud/sql-proxy-account.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax
