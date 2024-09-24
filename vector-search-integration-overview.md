@@ -32,7 +32,7 @@ Moreover, you can also use TiDB for various purposes, such as document storage a
 
 ## Embedding models and services
 
-TiDB Vector Search supports storing vectors of up to 16,000 dimensions, which accommodates most embedding models.
+TiDB Vector Search supports storing vectors of up to 16383 dimensions, which accommodates most embedding models.
 
 You can either use self-deployed open-source embedding models or third-party embedding APIs provided by third-party embedding providers to generate vectors.
 
