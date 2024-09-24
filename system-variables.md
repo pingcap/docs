@@ -1205,7 +1205,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `2`
+- Default value: `1`
 - Range: `[1, 2147483647]`
 - This variable is used to set the concurrency of executing the automatic update of statistics.
 
