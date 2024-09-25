@@ -24,7 +24,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="5">Scalability and Performance</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_enable_instance_plan_cache-new-in-v840>Instance-level execution plan cache</a> (experimental)<!-- tw@Oreoxmt 1569 --></td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_enable_instance_plan_cache-new-in-v840">Instance-level execution plan cache</a> (experimental)<!-- tw@Oreoxmt 1569 --></td>
     <td>Instance-level execution plan cache allows all sessions within the same TiDB instance to share the execution plan cache. It stores more execution plans in memory, eliminating SQL compilation time. This reduces SQL execution time, improves OLTP system performance and throughput, and provides better control over memory usage, enhancing database stability.</td>
   </tr>
   <tr>
