@@ -31,10 +31,10 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                              | Required | Note                                                 |
 |-------------------------|------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | The ID of the cluster.         | Yes      | Only works in non-interactive mode.                  |
-| --password string       | The password of the SQL user.            | No       | Only works in non-interactive mode.                  |
-| --role strings          | The roles of the SQL user.             | No       | Only works in non-interactive mode.                  |
-| -u, --user string       | The name of the SQL user.                | No       | Only works in non-interactive mode.                  |
+| -c, --cluster-id string | Specifies the ID of the cluster.         | Yes      | Only works in non-interactive mode.                  |
+| --password string       | Specifies the password of the SQL user.            | No       | Only works in non-interactive mode.                  |
+| --role strings          | Specifies the roles of the SQL user.             | No       | Only works in non-interactive mode.                  |
+| -u, --user string       | Specifies the name of the SQL user.                | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags

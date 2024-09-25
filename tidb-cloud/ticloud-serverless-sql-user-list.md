@@ -32,7 +32,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                    | Description                                                                                                 | Required | Note                                                 |
 |-------------------------|-------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Specifies the ID of the cluster.                                                                            | Yes      | Only works in non-interactive mode.                  |
-| -o, --output string     | Output format, one of ["human" "json"]. For the complete result, please use json format. (default "human"). | No       | Only works in non-interactive mode.                  |
+| -o, --output string     | Specifies the output format, one of ["human" "json"]. To get a complete result, use "json" format. (default "human"). | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command.                                                                    | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags

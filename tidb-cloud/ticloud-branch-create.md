@@ -25,7 +25,7 @@ Create a branch for a TiDB Cloud Serverless cluster in non-interactive mode:
 ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name>
 ```
 
-Create a branch from another branch with specified timestamp in non-interactive mode:
+Create a branch from another branch with a specified timestamp in non-interactive mode:
 
 ```shell
 ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name> --parent-id <parent-branch-id> --parent-timestamp <parent-timestamp>
@@ -39,8 +39,8 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |---------------------------|-----------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------|
 | -c, --cluster-id string   | Specifies the ID of the cluster, in which the branch will be created.                                     | Yes      | Only works in non-interactive mode.                 |
 | -n, --display-name string | Specifies the name of the branch to be created.                                                           | Yes      | Only works in non-interactive mode.                 |
-| --parent-id string        | The ID of the branch parent. The default value is the cluster ID.                                                       | No       | Only works in non-interactive mode.                 |
-| --parent-timestamp string | The timestamp of the parent branch. The default value is the current time. (RFC3339 format, for example, 2024-01-01T00:00:00Z) | No       | Only works in non-interactive mode.                 |
+| --parent-id string        | Specifies the ID of the branch parent. The default value is the cluster ID.                                                       | No       | Only works in non-interactive mode.                 |
+| --parent-timestamp string | Specifies the timestamp of the parent branch in RFC3339 format, such as `2024-01-01T00:00:00Z`. The default value is the current time.  | No       | Only works in non-interactive mode.                 |
 | -h, --help                | Shows help information for this command.                                                                  | No       | Works in both non-interactive and interactive modes |
 
 ## Inherited flags

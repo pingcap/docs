@@ -120,7 +120,7 @@ You can compress the exported Parquet data using the following algorithms:
 
 ### Data conversion
 
-When exporting data to Parquet format, The data conversion between TiDB Cloud Serverless and Parquet are as follows:
+When exporting data to the Parquet format, the data conversion between TiDB Cloud Serverless and Parquet is as follows:
 
 | TiDB Cloud Serverless Type | Parquest primitive type | Parquet logical type                         |
 |----------------------------|-------------------------|----------------------------------------------|
@@ -264,7 +264,7 @@ Currently, you can only export data to Google Cloud Storage using [TiDB Cloud CL
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
 ```
 
-- `gcs.uri`: the URI of the Google Cloud Storage bucket with the `gs://<bucket-name>/<file-path>` format.
+- `gcs.uri`: the URI of the Google Cloud Storage bucket in the `gs://<bucket-name>/<file-path>` format.
 - `gcs.service-account-key`: the base64 encoded service account key.
 
 ### Export data to Azure Blob Storage
@@ -275,7 +275,7 @@ Currently, you can only export data to Azure Blob Storage using [TiDB Cloud CLI]
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
 ```
 
-- `azblob.uri`: the URI of the Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>` format.
+- `azblob.uri`: the URI of the Azure Blob Storage in the `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>` format.
 - `azblob.sas-token`: the account SAS token of the Azure Blob Storage.
 
 ### Cancel an export task
