@@ -22,13 +22,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     TiDB Cloud CLI provides the following new features:
 
     - Support SQL user management for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters via [`ticloud serverless sql-user`](/tidb-cloud/ticloud-serverless-sql-user-create.md).
-    - Allow disabling the public endpoint for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters in `ticloud serverless create` and `ticloud serverless update`.
+    - Allow disabling the public endpoint for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters in [`ticloud serverless create`](/tidb-cloud/ticloud-cluster-create.md) and [`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md).
     - Add the [`ticloud auth whoami`](/tidb-cloud/ticloud-auth-whoami.md) command to get information about the current user when using OAuth authentication.
-    - Support `--sql`, `--where`, and `--filter` flags in `ticloud serverless export create` to choose source tables flexibly.
+    - Support `--sql`, `--where`, and `--filter` flags in [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md) to choose source tables flexibly.
     - Support exporting data to CSV and Parquet files.
     - Support exporting data to Amazon S3 using role ARN as credentials, to GCS and Azure Blob Storage.
     - Support importing data from Amazon S3, GCS, and Azure Blob Storage.
-    - Support creating a branch from a branch and specific timestamp.
+    - Support creating a branch from a branch and a specific timestamp.
 
   TiDB Cloud CLI enhances the following features:
 
@@ -37,9 +37,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   TiDB Cloud CLI replaces or removes the following features:
 
-    - The `--s3.bucket-uri` flag is replaced by `--s3.uri` in `ticloud serverless export create`.
-    - The `--database` and `--table` flags are removed in `ticloud serverless export create`. Instead, you can use `--sql`, `--where`, and `--filter` flags.
-    - `ticloud serverless update` cannot update the annotations field anymore.
+    - The `--s3.bucket-uri` flag is replaced by `--s3.uri` in [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md).
+    - The `--database` and `--table` flags are removed in [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md). Instead, you can use `--sql`, `--where`, and `--filter` flags.
+    - [`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md) cannot update the annotations field anymore.
 
 ## September 10, 2024
 
