@@ -104,6 +104,25 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     For more information, see [documentation](doc-link).
 
+* 增加获取 TSO 的 RPC 模式，降低获取 TSO 的延迟 [#54960](https://github.com/pingcap/tidb/issues/54960) @[MyonKeminta](https://github.com/MyonKeminta) **tw@qiancai** <!--1893-->
+
+    TiDB 在向 PD 请求 TSO 时，会将一段时间内的请求汇总起来并以同步的方式进行批处理，以减少 RPC (Remote Procedure Call) 请求数量从而降低 PD 负载。对于延迟敏感的场景，这种模式的性能并不理想。在 v8.4.0 中，TiDB 新增 TSO 请求的异步批处理模式，并提供不同的并发能力。异步模式可以降低获取 TSO 的延迟，但可能会增加 PD 的负载。你可以通过 [tidb_tso_client_rpc_mode](/system-variables.md#tidb_tso_client_rpc_mode-从-v840-版本开始引入) 变量设定获取 TSO 的 RPC 模式。
+
+    更多信息，请参考[用户文档](/system-variables.md#tidb_tso_client_rpc_mode-从-v840-版本开始引入)。
+
+* 优化 TiDB Hash Join 算子的执行效率（实验特性） [#55153](https://github.com/pingcap/tidb/issues/55153) [#53127](https://github.com/pingcap/tidb/issues/53127) @[windtalker](https://github.com/windtalker) @[xzhangxian1008](https://github.com/xzhangxian1008) @[XuHuaiyu](https://github.com/XuHuaiyu) @[wshwsh12](https://github.com/wshwsh12) **tw@qiancai** <!--1633-->
+
+    在 v8.4.0 中，TiDB 对 Hash Join 算子的实现方法进行了优化，以提升其执行效率。目前，优化后的 Hash Join 实现方法为实验特性，仅对 Inner Join 和 Outer Join 类型的 Hash Join 生效，且默认关闭。你可以将变量 [tidb_hash_join_version](/system-variables.md#tidb_hash_join_version-从-v840-版本开始引入) 设置为 `optimized` 开启该优化实现方法。开启后，TiDB 在执行 Inner Join 和 Outer Join 类型的 Hash Join 时，将使用优化后的实现方法。
+
+    更多信息，请参考[用户文档](/system-variables.md#tidb_hash_join_version-从-v840-版本开始引入)。
+
+* 支持下推以下字符串函数到 TiKV [#17529](https://github.com/tikv/tikv/issues/17529) @[gengliqi](https://github.com/gengliqi) **tw@qiancai** <!--1716-->
+
+    * `DATE_ADD()`
+    * `DATE_SUB()`
+
+  更多信息，请参考[用户文档](/functions-and-operators/expressions-pushed-down.md)。
+
 * The performance of batch user creation and password changes has been improved by hundreds of times [#55604](https://github.com/pingcap/tidb/pull/55604) @[wjhuang2016](https://github.com/wjhuang2016) **tw@hfxsd** <!--1941-->
 
     In SaaS scenarios, you might need to batch-create a large number of users, rotate passwords periodically, and complete these tasks within a specific time window. Starting from v8.4.0, the performance of batch user creation and password rotation has been significantly improved. Additionally, you can further enhance performance by increasing concurrency through a higher number of session connections, which greatly reduces execution time for these operations.
@@ -208,6 +227,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
 
     For more information, see [documentation](doc-link).
+
+* 支持向量搜索功能（实验特性） [#54245](https://github.com/pingcap/tidb/issues/54245) [#9032](https://github.com/pingcap/tiflash/issues/9032) @[breezewish](https://github.com/breezewish) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) @[EricZequan](https://github.com/EricZequan) @[zimulala](https://github.com/zimulala) @[JaySon-Huang](https://github.com/JaySon-Huang) **tw@qiancai** <!--1898-->
+
+    向量搜索是一种基于数据语义的搜索方法，可以提供更相关的搜索结果。作为 AI 和大语言模型（LLM）的核心功能之一，向量搜索可用于检索增强生成（Retrieval-Augmented Generation, RAG）、语义搜索、推荐系统等多种场景。
+
+    从 v8.4.0 开始，TiDB 支持[向量数据类型](vector-search-data-types.md)和[向量搜索索引](vector-search-index.md)，具备强大的向量搜索能力。TiDB 的向量数据类型最多可支持 16383 维度，并支持多种[距离函数](/vector-search-functions-and-operators.md#向量函数)，包括 L2 距离（欧式距离）、余弦距离、负内积和 L1 距离（曼哈顿距离）。
+
+    在使用时，你只需要创建包含向量数据类型的表，并插入向量数据，即可执行向量搜索查询，也可进行向量数据与传统关系数据的混合查询。此外，你可以创建并利用向量搜索索引来提升向量搜索的性能。
+
+    需要注意的是，TiDB 的向量搜索索引依赖于 TiFlash。因此，在使用向量搜索索引之前，需要确保 TiDB 集群中已部署 TiFlash 节点。
+
+    更多信息，请参考[用户文档](/vector-search-overview.md)。
 
 * TiDB 外键约束检查功能成为正式功能 (GA) [#55861](https://github.com/pingcap/tidb/issues/55861) @[YangKeao](https://github.com/YangKeao) **tw@lilin90** <!--1894-->
 
@@ -348,6 +379,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 + TiDB
 
   - Optimize MEMDB implementation to reduce write latency in transactions and TiDB CPU usage [#55287](https://github.com/pingcap/tidb/issues/55287) @[you06](https://github.com/you06) **tw@hfxsd** <!--1892-->
+   - 优化系统变量 `tidb_dml_type` 为 `"bulk"` 时 DML 语句的执行性能 [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium) **tw@qiancai** <!--1860-->
   - 为日志表 [`mysql.tidb_runaway_queries`](/mysql-schema/mysql-schema.md#runaway-queries-相关系统表) 增加写入控制，降低大量并发写入引发的开销 [#54434](https://github.com/pingcap/tidb/issues/54434) @[HuSharp](https://github.com/HuSharp) <!--1908--> **tw@lilin90**
 
 + TiKV
@@ -357,6 +389,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 + PD
 
+  -  在 TiDB Lightning 数据导入过程中，允许 PD 进行 `evict-leader` 调度，避免阻断 TiKV 节点的 offline 进程 [#issue号](链接) @[okJiang](https://github.com/okJiang) **tw@qiancai**  <!--1852-->  
+  
 + TiFlash
 
 + Tools
