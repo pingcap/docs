@@ -15,7 +15,14 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 ## Export locations
 
-You can export data to a local file or [Amazon S3](https://aws.amazon.com/s3/).
+You can export data to the following locations:
+
+- A local file
+- An external storage, including:
+
+    - [Amazon S3](https://aws.amazon.com/s3/)
+    - [Google Cloud Storage](https://cloud.google.com/storage)
+    - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 
 > **Note:**
 >
@@ -42,11 +49,38 @@ To export data to Amazon S3, you need to provide the following information:
 
 For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
+### Google Cloud Storage
+
+To export data to Google Cloud Storage, you need to provide the following information:
+
+- URI: `gs://<bucket-name>/<file-path>`
+- Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
+
+For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+
+> **Note:**
+>
+> Currently, you can only export to Google Cloud Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+
+### Azure Blob Storage
+
+To export data to Azure Blob Storage, you need to provide the following information:
+
+- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
+- Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
+
+For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+
+> **Note:**
+>
+> Currently, you can only export to Azure Blob Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+
 ## Export options
 
 ### Data filtering
 
 - TiDB Cloud console supports exporting data with the selected databases and tables.
+- TiDB Cloud CLI supports exporting data with SQL statements and [table filters](/table-filter.md).
 
 ### Data formats
 
@@ -58,14 +92,15 @@ You can export data in the following formats:
     - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
     - `header`: specify whether to include a header row in the exported data. The default value is `true`.
     - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
+- `Parquet`: export data in Parquet format. Currently, it is only supported in TiDB Cloud CLI.
 
 The schema and data are exported according to the following naming conventions:
 
-| Item            | Not compressed                                       | Compressed                                                                                                          |
-|-----------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Database schema | {database}-schema-create.sql                         | {database}-schema-create.sql.{compression-type}                                                                     |
-| Table schema    | {database}.{table}-schema.sql                        | {database}.{table}-schema.sql.{compression-type}                                                                    |
-| Data            | {database}.{table}.{0001}.{csv&#124;sql} | {database}.{table}.{0001}.{csv&#124;sql}.{compression-type} |
+| Item            | Not compressed                                        | Compressed                                                                                                          |
+|-----------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Database schema | {database}-schema-create.sql                          | {database}-schema-create.sql.{compression-type}                                                                     |
+| Table schema    | {database}.{table}-schema.sql                         | {database}.{table}-schema.sql.{compression-type}                                                                    |
+| Data            | {database}.{table}.{0001}.{csv&#124;parquet&#124;sql} | {database}.{table}.{0001}.{csv&#124;sql}.{compression-type}<br/>{database}.{table}.{0001}.{compression-type}.parquet |
 
 ### Data compression
 
@@ -76,7 +111,58 @@ You can compress the exported CSV and SQL data using the following algorithms:
 - `zstd`: compress the exported data with `zstd`.
 - `none`: do not compress the exported `data`.
 
-## Steps
+You can compress the exported Parquet data using the following algorithms:
+
+- `zstd` (default): compress the Parquet file with `zstd`.
+- `gzip`: compress the Parquet file with `gzip`.
+- `snappy`: compress the Parquet file with `snappy`.
+- `none`: do not compress the Parquet file.
+
+### Data conversion
+
+When exporting data to the Parquet format, the data conversion between TiDB Cloud Serverless and Parquet is as follows:
+
+| TiDB Cloud Serverless Type | Parquest primitive type | Parquet logical type                         |
+|----------------------------|-------------------------|----------------------------------------------|
+| VARCHAR                    | BYTE_ARRAY              | String(UTF8)                                 |
+| TIME                       | BYTE_ARRAY              | String(UTF8)                                 |
+| TINYTEXT                   | BYTE_ARRAY              | String(UTF8)                                 |
+| MEDIUMTEXT                 | BYTE_ARRAY              | String(UTF8)                                 |
+| TEXT                       | BYTE_ARRAY              | String(UTF8)                                 |
+| LONGTEXT                   | BYTE_ARRAY              | String(UTF8)                                 |
+| SET                        | BYTE_ARRAY              | String(UTF8)                                 |
+| JSON                       | BYTE_ARRAY              | String(UTF8)                                 |
+| DATE                       | BYTE_ARRAY              | String(UTF8)                                 |
+| CHAR                       | BYTE_ARRAY              | String(UTF8)                                 |
+| VECTOR                     | BYTE_ARRAY              | String(UTF8)                                 |
+| DECIMAL(1<=p<=9)           | INT32                   | DECIMAL(p,s)                                 |
+| DECIMAL(10<=p<=18)         | INT64                   | DECIMAL(p,s)                                 |
+| DECIMAL(p>=19)             | BYTE_ARRAY              | String(UTF8)                                 |
+| ENUM                       | BYTE_ARRAY              | String(UTF8)                                 |
+| TIMESTAMP                  | INT64                   | TIMESTAMP(unit=MICROS,isAdjustedToUTC=false) |
+| DATETIME                   | INT64                   | TIMESTAMP(unit=MICROS,isAdjustedToUTC=false) |
+| YEAR                       | INT32                   | /                                            |
+| TINYINT                    | INT32                   | /                                            |
+| UNSIGNED TINYINT           | INT32                   | /                                            |
+| SMALLINT                   | INT32                   | /                                            |
+| UNSIGNED SMALLINT          | INT32                   | /                                            |
+| MEDIUMINT                  | INT32                   | /                                            |
+| UNSIGNED MEDIUMINT         | INT32                   | /                                            |
+| INT                        | INT32                   | /                                            |
+| UNSIGNED INT               | FIXED_LEN_BYTE_ARRAY(9) | DECIMAL(20,0)                                |
+| BIGINT                     | FIXED_LEN_BYTE_ARRAY(9) | DECIMAL(20,0)                                |
+| UNSIGNED BIGINT            | BYTE_ARRAY              | String(UTF8)                                 |
+| FLOAT                      | FLOAT                   | /                                            |
+| DOUBLE                     | DOUBLE                  | /                                            |
+| BLOB                       | BYTE_ARRAY              | /                                            |
+| TINYBLOB                   | BYTE_ARRAY              | /                                            |
+| MEDIUMBLOB                 | BYTE_ARRAY              | /                                            |
+| LONGBLOB                   | BYTE_ARRAY              | /                                            |
+| BINARY                     | BYTE_ARRAY              | /                                            |
+| VARBINARY                  | BYTE_ARRAY              | /                                            |
+| BIT                        | BYTE_ARRAY              | /                                            |
+
+## Examples
 
 ### Export data to a local file
 
@@ -160,15 +246,37 @@ You can compress the exported CSV and SQL data using the following algorithms:
 <div label="CLI">
 
 ```shell
-ticloud serverless export create -c <cluster-id> --s3.bucket-uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key>
+ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter "database.table"
 ```
 
-- `s3.bucket-uri`: the Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
+- `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
 - `s3.access-key-id`: the access key ID of the user who has the permission to access the bucket.
 - `s3.secret-access-key`: the access key secret of the user who has the permission to access the bucket.
 
 </div>
 </SimpleTab>
+
+### Export data to Google Cloud Storage
+
+Currently, you can only export data to Google Cloud Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+
+```shell
+ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
+```
+
+- `gcs.uri`: the URI of the Google Cloud Storage bucket in the `gs://<bucket-name>/<file-path>` format.
+- `gcs.service-account-key`: the base64 encoded service account key.
+
+### Export data to Azure Blob Storage
+
+Currently, you can only export data to Azure Blob Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+
+```shell
+ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
+```
+
+- `azblob.uri`: the URI of the Azure Blob Storage in the `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>` format.
+- `azblob.sas-token`: the account SAS token of the Azure Blob Storage.
 
 ### Cancel an export task
 

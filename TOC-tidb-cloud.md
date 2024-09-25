@@ -675,6 +675,7 @@
     - auth
       - [login](/tidb-cloud/ticloud-auth-login.md)
       - [logout](/tidb-cloud/ticloud-auth-logout.md)
+      - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
     - serverless
       - [create](/tidb-cloud/ticloud-cluster-create.md)
       - [delete](/tidb-cloud/ticloud-cluster-delete.md)
@@ -701,6 +702,11 @@
         - [list](/tidb-cloud/ticloud-serverless-export-list.md)
         - [cancel](/tidb-cloud/ticloud-serverless-export-cancel.md)
         - [download](/tidb-cloud/ticloud-serverless-export-download.md)
+      - sql-user
+        - [create](/tidb-cloud/ticloud-serverless-sql-user-create.md)
+        - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
+        - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
+        - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
     - [ai](/tidb-cloud/ticloud-ai.md)
     - [completion](/tidb-cloud/ticloud-completion.md)
     - config
@@ -713,7 +719,7 @@
       - [use](/tidb-cloud/ticloud-config-use.md)
     - project
       - [list](/tidb-cloud/ticloud-project-list.md)
-    - [update](/tidb-cloud/ticloud-update.md)
+    - [upgrade](/tidb-cloud/ticloud-upgrade.md)
     - [help](/tidb-cloud/ticloud-help.md)
   - [Table Filter](/table-filter.md)
   - [Resource Control](/tidb-resource-control.md)
