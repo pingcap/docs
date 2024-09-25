@@ -15,7 +15,7 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 ## Export locations
 
-You can export data to:
+You can export data to the following locations:
 
 - A local file
 - An external storage, including:
