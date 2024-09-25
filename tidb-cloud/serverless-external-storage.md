@@ -221,4 +221,4 @@ To allow TiDB Serverless to access your Azure Blob container, you need to config
 
    ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
-4. Click **Generate SAS and connection string** to generate the SAS token. You will specify this token when you create an external stage.
+4. Click **Generate SAS and connection string** to generate the SAS token.
