@@ -14,6 +14,33 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Provide a new [TiFlash vCPU and RAM size](/tidb-cloud/size-your-cluster.md#tiflash-vcpu-and-ram) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS: `32 vCPU, 128 GiB`
 
+
+**CLI changes**
+
+- Release [TiDB Cloud CLI v1.0.0-beta.2](https://github.com/tidbcloud/tidbcloud-cli/releases/tag/v1.0.0-beta.2).
+
+    TiDB Cloud CLI provides the following new features:
+
+    - Support SQL user management for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters via [`ticloud serverless sql-user`](/tidb-cloud/ticloud-serverless-sql-user-create.md).
+    - Allow disabling the public endpoint for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters in `ticloud serverless create` and `ticloud serverless update`.
+    - Add the [`ticloud auth whoami`](/tidb-cloud/ticloud-auth-whoami.md) command to get information about the current user when using OAuth authentication.
+    - Support `--sql`, `--where`, and `--filter` flags in `ticloud serverless export create` to choose source tables flexibly.
+    - Support exporting data to CSV and Parquet files.
+    - Support exporting data to Amazon S3 using role ARN as credentials, to GCS and Azure Blob Storage.
+    - Support importing data from Amazon S3, GCS, and Azure Blob Storage.
+    - Support creating a branch from a branch and specific timestamp.
+
+  TiDB Cloud CLI enhances the following features:
+
+    - Improve debug logging. Now it can log credentials and user-agent.
+    - Speed up local export file downloads from tens of KiB per second to tens of MiB per second.
+
+  TiDB Cloud CLI replaces or removes the following features:
+
+    - The `--s3.bucket-uri` flag is replaced by `-s3.uri` in `ticloud serverless export create`.
+    - `--database` and `--table` flags are removed in ticloud serverless export create. Instead, you can use `--sql`, `--where`, and `--filter` flags.
+    - `ticloud serverless update` cannot update the annotations field anymore.
+
 ## September 10, 2024
 
 **General changes**
