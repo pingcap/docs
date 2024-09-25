@@ -531,7 +531,7 @@ If the message contains the `claimCheckLocation` field, the Kafka consumer reads
 }
 ```
 
-The `key` and `value` fields correspond to the same-named fields in the Kafka message. Consumers can reconstruct large message content by parsing the data in these two fields. Only Kafka messages encoded with the Open Protocol contain the `key` field. TiCDC encodes both `key` and `value` into a single JSON object to deliver the complete message at once. For other protocols, the `key` field is always empty.
+The `key` and `value` fields correspond to the same-named fields in the Kafka message. Consumers can reconstruct large message content by parsing the data in these two fields. Only Kafka messages encoded with the Open Protocol contain valid content in the `key` field. TiCDC encodes both `key` and `value` into a single JSON object to deliver the complete message at once. For other protocols, the `key` field is always empty.
 
 #### Send the `value` field to external storage only
 
