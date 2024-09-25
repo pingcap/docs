@@ -1,7 +1,7 @@
 ---
 title: ticloud serverless import start
 summary: The reference of `ticloud serverless import start`.
-aliases: ['/tidbcloud/ticloud-import-start-local','/tidbcloud/ticloud-import-start-gcs','/tidbcloud/ticloud-import-start-s3','/tidbcloud/ticloud-import-start-azure-blob']
+aliases: ['/tidbcloud/ticloud-import-start-local','/tidbcloud/ticloud-import-start-mysql','/tidbcloud/ticloud-import-start-s3']
 ---
 
 # ticloud serverless import start
