@@ -45,8 +45,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td rowspan="4">Reliability and Availability</td>
-    <td> Support more triggers for runaway queries and provide the ability to switch resource groups<!-- tw@hfxsd 1832 --><!-- tw@lilin90 1800 --></td>
-    <td>Runaway Queries offer an effective way to mitigate the impact of unexpected SQL performance issues on systems. The new version introduces <CODE>PROCESSED_KEYS</CODE> and <CODE>RU</CODE> as identifying conditions, allowing identified queries to be placed into a specified resource group for more precise identification and control of runaway queries.</td>
+    <td> Support more triggers for runaway queries, and support switching resource groups<!-- tw@hfxsd 1832 --><!-- tw@lilin90 1800 --></td>
+    <td>Runaway Queries offer an effective way to mitigate the impact of unexpected SQL performance issues on systems. TiDB v8.4.0 introduces the number of keys processed by the Coprocessor (<CODE>PROCESSED_KEYS</CODE>) and request units (<CODE>RU</CODE>) as identifying conditions, and puts identified queries into the specified resource group for more precise identification and control of runaway queries.</td>
   </tr>
   <tr>
     <td> Support setting resource usage caps for background tasks for resource control <!-- tw@hfxsd 1909 --></td>
@@ -62,19 +62,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td rowspan="2">SQL</td>
-    <td> 外键成为正式功能<!-- tw@lilin90 1894 --></td>
-    <td>支持 MySQL 兼容的外键约束，维护数据一致性，进一步提升了 TiDB 对 MySQL 的兼容能力。</td>
+    <td>Foreign keys (GA)<!-- tw@lilin90 1894 --></td>
+    <td>Support MySQL-compatible foreign key constraints to maintain data consistency and further enhance TiDB's compatibility with MySQL.</td>
   </tr>
   <tr>
     <td> 向量搜索功能（实验特性）<!-- tw@qiancai 1898 --></td>
     <td>加速向量搜索的性能，适用于检索增强生成（RAG）、语义搜索、推荐系统等应用类型。把 TiDB 应用场景扩展到 AI 和 大语言模型（LLM）领域。</td>
   </tr>
   <tr>
-    <td rowspan="3">数据库管理和可观测性</td>
-    <td> 持久化内存表到 Workload Repository（实验特性）<!-- tw@lilin90 1823 --></td>
-    <td> 持久化内存表中的运行指标和状态信息，是观测性的重要增强，能极大提升过往问题诊断和追溯的效率，并为未来的自动化运维，提供了数据集支持。 围绕 Workload Repository 构建报告、诊断、推荐一体化的能力，会成为未来提升 TiDB 易用性的重要组成。</td>
-  </tr>
-  <tr>
+    <td rowspan="2">DB Operations and Observability</td>
     <td> Display TiKV and TiDB CPU times in memory tables<!-- tw@hfxsd 1877 --></td>
     <td>CPU times are now integrated into a system table and displayed alongside other session or SQL metrics, allowing for easier observation of operations with high CPU consumption from multiple perspectives, improving diagnostic efficiency. This is particularly useful for diagnosing instances with CPU spikes or read/write hotspots in the cluster.</td>
   </tr>
