@@ -27,7 +27,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Support `--sql`, `--where`, and `--filter` flags in [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md) to choose source tables flexibly.
     - Support exporting data to CSV and Parquet files.
     - Support exporting data to Amazon S3 using role ARN as credentials, to Google Cloud Storage and Azure Blob Storage.
-    - Support importing data from Amazon S3, GCS, and Azure Blob Storage.
+    - Support importing data from Amazon S3, Google Cloud Storage, and Azure Blob Storage.
     - Support creating a branch from a branch and a specific timestamp.
 
   TiDB Cloud CLI enhances the following features:
