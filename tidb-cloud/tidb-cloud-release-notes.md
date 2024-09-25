@@ -38,7 +38,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   TiDB Cloud CLI replaces or removes the following features:
 
     - The `--s3.bucket-uri` flag is replaced by `--s3.uri` in `ticloud serverless export create`.
-    - `--database` and `--table` flags are removed in ticloud serverless export create. Instead, you can use `--sql`, `--where`, and `--filter` flags.
+    - `--database` and `--table` flags are removed in `ticloud serverless export create`. Instead, you can use `--sql`, `--where`, and `--filter` flags.
     - `ticloud serverless update` cannot update the annotations field anymore.
 
 ## September 10, 2024
