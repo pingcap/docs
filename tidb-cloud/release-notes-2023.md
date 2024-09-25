@@ -863,7 +863,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Add a new command `ticloud cluster connect-info` for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
-    `ticloud cluster connect-info` is a command that allows you to get the connection string of a cluster. To use this command, [update `ticloud`](/tidb-cloud/ticloud-update.md) to v0.3.2 or a later version.
+    `ticloud cluster connect-info` is a command that allows you to get the connection string of a cluster. To use this command, [update `ticloud`](/tidb-cloud/ticloud-upgrade.md) to v0.3.2 or a later version.
 
 ## February 21, 2023
 

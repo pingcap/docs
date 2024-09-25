@@ -1,29 +1,31 @@
 ---
-title: ticloud update
-summary: The reference of `ticloud update`.
+title: ticloud auth whoami
+summary: The reference of `ticloud auth whoami`.
 ---
 
-# ticloud update
+# ticloud auth whoami
 
-Update the TiDB Cloud CLI to the latest version:
+Display information about the current user:
 
 ```shell
-ticloud update [flags]
+ticloud auth whoami [flags]
 ```
 
 ## Examples
 
-Update the TiDB Cloud CLI to the latest version:
+To display information about the current user:
 
 ```shell
-ticloud update
+ticloud auth whoami
 ```
 
 ## Flags
 
-| Flag       | Description                       |
-|------------|-----------------------------------|
- | -h, --help | Shows help information for this command. |
+In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+
+| Flag       | Description                              | Required | Note                                                 |
+|------------|------------------------------------------|----------|------------------------------------------------------|
+| -h, --help | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
@@ -31,7 +33,7 @@ ticloud update
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                  | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 
