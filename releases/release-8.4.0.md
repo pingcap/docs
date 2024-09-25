@@ -24,8 +24,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="5">Scalability and Performance</td>
-    <td> 执行计划缓存在实例内共享（实验特性）<!-- tw@Oreoxmt 1569 --></td>
-    <td> 实例级执行计划缓存支持在内存中缓存更多的执行计划，消除 SQL 编译时所消耗的时间，从而减少 SQL 的运行时间，提升 OLTP 系统的性能和吞吐。同时，也能更好的控制内存占用，提升数据库稳定性。</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_enable_instance_plan_cache-new-in-v840>Instance-level execution plan cache</a> (experimental)<!-- tw@Oreoxmt 1569 --></td>
+    <td>Instance-level execution plan cache allows all sessions within the same TiDB instance to share the execution plan cache. It stores more execution plans in memory, eliminating SQL compilation time. This reduces SQL execution time, improves OLTP system performance and throughput, and provides better control over memory usage, enhancing database stability.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.4/partitioned-table#global-indexes">Global indexes for partitioned tables (GA)</a><!-- tw@hfxsd 1961 --></td>
@@ -53,12 +53,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td>By setting a percentage cap on background tasks of resource control, you can manage their resource consumption based on the needs of different business systems. This ensures background tasks consume minimal resources, maintaining the service quality of online operations.</td>
   </tr>
   <tr>
-    <td> TiProxy 流量捕捉和回放<!-- tw@Oreoxmt 1942 --></td>
-    <td>在做集群升级、迁移、部署变化等重要变更之前，通过捕捉真实负载来验证目标集群的性能，确保变更的成功。</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/tiproxy-traffic-replay>TiProxy supports traffic capture and replay</a> (experimental)<!-- tw@Oreoxmt 1942 --></td>
+    <td>Use TiProxy to capture real workloads from TiDB production clusters before major operations like cluster upgrades, migrations, or deployment changes. Replay these workloads on target test clusters to validate performance and ensure successful changes.</td>
   </tr>
   <tr>
-    <td> 统计信息收集自适应并发度<!-- tw@Oreoxmt 1739 --></td>
-    <td>自动统计信息收集会根据节点规模和硬件规格自动决定采集并发度，提升统计信息收集效率，减少手工调优，保证集群性能稳定。</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_auto_analyze_concurrency-new-in-v840">Adaptive concurrency for statistics collection</a><!-- tw@Oreoxmt 1739 --></td>
+    <td>Automatic statistics collection determines the collection concurrency based on node scale and hardware specifications. This improves statistics collection efficiency, reduces manual tuning, and ensures stable cluster performance.</td>
   </tr>
   <tr>
     <td rowspan="2">SQL</td>
@@ -380,11 +380,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
   - Optimize MEMDB implementation to reduce write latency in transactions and TiDB CPU usage [#55287](https://github.com/pingcap/tidb/issues/55287) @[you06](https://github.com/you06) **tw@hfxsd** <!--1892-->
    - 优化系统变量 `tidb_dml_type` 为 `"bulk"` 时 DML 语句的执行性能 [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium) **tw@qiancai** <!--1860-->
+  - Support using [Optimizer Fix Control 47400](/optimizer-fix-controls.md#47400-new-in-v840) to control whether the optimizer limits the minimum value estimated for `estRows` to `1`, which is consistent with databases such as Oracle and DB2 [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell) **tw@Oreoxmt** <!--1929-->
   - 为日志表 [`mysql.tidb_runaway_queries`](/mysql-schema/mysql-schema.md#runaway-queries-相关系统表) 增加写入控制，降低大量并发写入引发的开销 [#54434](https://github.com/pingcap/tidb/issues/54434) @[HuSharp](https://github.com/HuSharp) <!--1908--> **tw@lilin90**
+  - Spport Index Join by default when the inner table has `Selection` or `Projection` operators on it [#issue号](链接) @[winoros](https://github.com/winoros) **tw@Oreoxmt** <!--1709-->
+  - Reduce the number of column details fetched from TiKV for `DELETE` operations in certain scenarios, lowering the resource overhead of these operations [#38911](https://github.com/pingcap/tidb/issues/38911) @[winoros](https://github.com/winoros) **tw@Oreoxmt** <!--1798-->
+  - Improve the efficiency of the priority queue for automatic statistics collection tasks [#49972](https://github.com/pingcap/tidb/issues/49972) @[Rustin170506](https://github.com/Rustin170506) **tw@Oreoxmt** <!--1935-->
+  - Improve automatic statistics collection by determining the collection concurrency based on node scale and hardware specifications [#issue号](链接) @[hawkingrei](https://github.com/hawkingrei) **tw@Oreoxmt** <!--1739-->
 
 + TiKV
 
   - Increase the default value of Region from 96 MiB to 256 MiB to avoid the extra overhead caused by too many Regions [#17309](https://github.com/tikv/tikv/issues/17309) [LykxSassinator](https://github.com/LykxSassinator) **tw@hfxsd** <!--1925-->
+  - Support setting memory usage limits for in-memory pessimistic locks in a Region or TiKV instance. To prevent CPU/IO overhead caused by pessimistic locks spilling to disk during write hotspots, you can increase the memory limit by modifying the configuration items [#17542](https://github.com/tikv/tikv/issues/17542) @[cfzjywxk](https://github.com/cfzjywxk) **tw@Oreoxmt** <!--1967-->
   - Introduce a new `spill-dir` configuration in Raft Engine to support multi-disk storage for Raft logs. When the disk containing the home directory (`dir`) runs out of space, Raft Engine automatically writes new logs to `spill-dir`, ensuring continuous operation. [LykxSassinator](https://github.com/LykxSassinator) **tw@hfxsd** <!--1970-->
 
 + PD
@@ -396,6 +402,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 + Tools
 
     + Backup & Restore (BR)
+
+      - Disable full data restoration to a non-empty cluster using the `RESTORE` SQL statement by default [#55087](https://github.com/pingcap/tidb/issues/55087) @[BornChanger](https://github.com/BornChanger) **tw@Oreoxmt** <!--1711-->
 
     + TiCDC
 
