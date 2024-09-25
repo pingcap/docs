@@ -119,6 +119,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
 
+* TiDB Lightning 的逻辑导入支持 prepare 接口 [#54850](https://github.com/pingcap/tidb/issues/54850) @[dbsid](https://github.com/dbsid) @[qw4990](https://github.com/qw4990) **tw@lilin90** <!--1922-->
+
+    通过开启配置项 `logical-import-prep-stmt`，TiDB Lightning 逻辑导入产生的 SQL 语句将通过 prepare 接口执行，可提升 SQL 执行效率，并有更大机会命中执行计划缓存，提升逻辑导入的速度。
+
+    更多信息，请参考[用户文档](tidb-lightning/tidb-lightning-configuration.md)。
+
 * Partitioned tables support global indexes (GA) [#45133](https://github.com/pingcap/tidb/issues/45133) @[mjonss](https://github.com/mjonss) @[Defined2014](https://github.com/Defined2014) @[jiyfhust](https://github.com/jiyfhust) @[L-maple](https://github.com/L-maple) **tw@hfxsd** <!--1961-->
 
     In previous versions of partitioned tables, some limitations exist because global indexes are not supported. For example, the unique key must use every column in the table's partitioning expression. If the query condition does not use the partitioning key, the query will scan all partitions, resulting in poor performance. Starting from v7.6.0, the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) is introduced to enable the global index feature. But this feature was under development at that time and it is not recommended to enable it.
@@ -141,6 +147,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     For more information, see [documentation](doc-link).
 
+* 超出预期的查询 (Runaway Queries) 新增处理行数 和 RU 作为阈值 [#54434](https://github.com/pingcap/tidb/issues/54434) @[HuSharp](https://github.com/HuSharp) **tw@lilin90** <!--1800-->
+
+    从 v8.4.0 开始， TiDB 可以依据处理行数 (`PROCESSED_KEYS`) 和 Request Unit (`RU`) 定义超出预期的查询。和执行时间 (`EXEC_ELAPSED`) 相比，新增阈值能够更准确地定义查询的资源消耗，避免整体性能下降时发生识别偏差。
+
+    支持同时设置多个条件，满足任意条件即识别为 `Runaway Queries`。
+
+    可以观测 [Statement Summary Tables](/statement-summary-tables.md) 中的几个对应字段 (`RESOURCE_GROUP`、`MAX_REQUEST_UNIT_WRITE`、`MAX_REQUEST_UNIT_READ`、`MAX_PROCESSED_KEYS`)，根据历史执行情况决定条件值的大小。
+
+    更多信息，请参考[用户文档](/tidb-resource-control.md#管理资源消耗超出预期的查询-runaway-queries)。
+
 * Support runaway queries to switch resource groups [#54434](https://github.com/pingcap/tidb/issues/54434) @[JmPotato](https://github.com/JmPotato) **tw@hfxsd** <!--1832-->
 
     In TiDB v8.4.0, you can redirect runaway queries to a specific resource group. If the `COOLDOWN` mechanism fails to lower resource consumption, you can create a [resource group](/tidb-resource-control.md#create-a-resource-group) and set the `SWITCH_GROUP` parameter to move identified runaway queries to this group. Meanwhile, subsequent queries within the same session will continue to execute in the original resource group. By switching resource groups, you can more precisely manage resource usage and better control the impact of runaway queries.
@@ -160,6 +176,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     TiDB resource control can identify and lower the priority of background tasks. In certain scenarios, you might want to limit the resource consumption of these tasks, even when resources are available. Starting from v8.4.0, you can use the `UTILIZATION_LIMIT` parameter to set a maximum percentage of resources that a background task can consume. Each node will ensure that the resource usage of all background tasks stays within this limit. This feature enables precise control over resource consumption for background tasks, enhancing cluster stability.
 
     For more information, see [documentation](/tidb-resource-control.md#manage-background-tasks).
+
+* 优化资源组资源分配策略 [#50831](https://github.com/pingcap/tidb/issues/50831) @[nolouch](https://github.com/nolouch) **tw@lilin90** <!--1833-->
+
+    TiDB 在 v8.4.0 部分调整了资源分配策略，更好地满足用户对资源管控的预期。
+
+    - 控制大查询在运行时的资源分配，避免超出资源组限额。配合 Runaway Queries 的 `COOLDOWN` 动作，识别并降低大查询并发度，降低瞬时资源消耗。
+    - 调整默认的优先级调度策略。当不同优先级的任务同时运行时，高优先级的任务获得更多资源。
 
 ### Availability
 
@@ -185,6 +208,22 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
 
     For more information, see [documentation](doc-link).
+
+* TiDB 外键约束检查功能成为正式功能 (GA) [#55861](https://github.com/pingcap/tidb/issues/55861) @[GitHub ID-TBD]() **tw@lilin90** <!--1894-->
+
+    从 v6.6.0 开始，TiDB 支持通过系统变量 [`foreign_key_checks`](/system-variables.md#foreign_key_checks) 做外键约束检查，但一直为实验特性。v8.4.0 对外键特性在更多场景做了覆盖测试，提升了稳定性和性能，因此从 v8.4.0 开始，外键功能成为正式功能 (GA)。
+
+    更多信息，请参考[用户文档](/foreign-key.md)。
+
+* 支持字符集 `gb18030` 和排序规则 `gb18030_bin` 和 `gb18030_chinese_ci` [#17470](https://github.com/tikv/tikv/issues/17470) [#55791](https://github.com/pingcap/tidb/issues/55791) @[cbcwestwolf](https://github.com/cbcwestwolf) **tw@lilin90** <!--1962-->
+
+    从 v8.4.0 开始，TiDB 支持 `gb18030` 字符集，以确保 TiDB 能够更好地处理中文相关的数据存储和查询需求。该字符集是一个广泛用于中文字符编码的标准。
+
+    从 v8.4.0 开始，TiDB 支持 `gb18030_bin` 和 `gb18030_chinese_ci` 排序规则。`gb18030_bin` 提供了基于二进制的精准排序，而 `gb18030_chinese_ci` 则支持大小写不敏感的通用排序规则。这两种排序规则使得对 `gb18030` 编码文本的排序和比较更加灵活高效。
+
+    通过支持 `gb18030` 字符集及其排序规则，TiDB v8.4.0 增强了与中文应用场景的兼容性，特别是在涉及多种语言和字符编码的场景下，可以更方便地进行字符集的选择和操作，提升了数据库的使用体验。
+
+    更多信息，请参考[用户文档](/character-set-gb18030.md)。
 
 ### DB operations
 
