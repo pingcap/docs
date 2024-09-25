@@ -206,10 +206,10 @@ Configuration items related to scheduling
 
 > **Note:**
 >
-> To modify these PD configuration items related to scheduling, choose one of the following methods based on your cluster status:
+> To modify these PD configuration items related to `schedule`, choose one of the following methods based on your cluster status:
 >
 > - For clusters to be newly deployed, you can modify the PD configuration file directly.
-> - For existing clusters, use the command-line tool [PD Control](/pd-control.md) to make changes instead. Direct modifications to these PD configuration items related to scheduling in the configuration file do not take effect on existing clusters.
+> - For existing clusters, use the command-line tool [PD Control](/pd-control.md) to make changes instead. Direct modifications to these PD configuration items related to `schedule` in the configuration file do not take effect on existing clusters.
 
 ### `max-merge-region-size`
 
