@@ -233,17 +233,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     For more information, see [documentation](doc-link).
 
-* BR reduces requires storage permissions for restores [#55870](https://github.com/pingcap/tidb/issues/55870) @[Leavrth](https://github.com/Leavrth) **tw@Oreoxmt** <!--1943-->
+* BR reduces privileges when restoring backup data in a cloud storage system [#55870](https://github.com/pingcap/tidb/issues/55870) @[Leavrth](https://github.com/Leavrth) **tw@Oreoxmt** <!--1943-->
 
-    Previously, when BR was restoring data, checkpoint information about the progress of the restore was recorded in the location hosting the backup data. These restore checkpoints enabled restoration to be quickly resumed if it was interrupted. With this feature, the restore checkpoints are now stored in the target TiDB cluster. This means that BR only requires read access to the backup dataset location for restores.
+    Before v8.4.0, BR stores checkpoint information about restore progress in the backup data location during restore. These checkpoints enable quick resumption of interrupted restores. Starting from v8.4.0, BR stores restore checkpoint information in the target TiDB cluster. This means that BR only requires read access to the backup directories.
 
-    For more information, see [documentation](doc-link).
-  
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
-
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
-
-    For more information, see [documentation](doc-link).
+    For more information, see [documentation](/br/backup-and-restore-storages.md#authentication).
 
 ### Observability
 
@@ -281,23 +275,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 ### Data migration
 
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
+* TiCDC Claim-Check supports sending only the `value` field of Kafka messages to external storage [#11396](https://github.com/pingcap/tiflow/issues/11396) @[3AceShowHand](https://github.com/3AceShowHand) **tw@Oreoxmt** <!--1919-->
 
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
+    Before v8.4.0, when using the Claim-Check feature to handle large messages (by setting `large-message-handle-option` to `claim-check`), TiCDC encodes and stores both the `key` and `value` fields in the external storage system.
 
-    For more information, see [documentation](doc-link).
+    Starting from v8.4.0, TiCDC supports sending only the `value` field of Kafka messages to external storage. This feature is only applicable to non-Open Protocol protocols. You can control this feature by setting the `claim-check-raw-value` parameter.
 
-* TiCDC claim check nows supports raw value format [#11396](https://github.com/pingcap/tiflow/issues/11396) @[3AceShowHand](https://github.com/3AceShowHand) **tw@Oreoxmt** <!--1919-->
+    For more information, see [documentation](/ticdc/ticdc-sink-to-kafka.md#send-the-value-field-to-external-storage-only).
 
-    When TiCDC used the claim check capability to handle large messages it included both the Key and the Value are encoded and stored in the external storage system. With the new raw value option, TiCDC can now be configured to store the value format only in the external storage system, using the protocol encoding.
-
-    For more information, see [documentation](ticdc-sink-to-kafka.md#send-large-messages-to-external-storage).
-
-* TiCDC introduces new row checksum to verify old values after Add and Drop Column operations [#10969](https://github.com/pingcap/tiflow/issues/10969) @[3AceShowHand](https://github.com/3AceShowHand) **tw@Oreoxmt** <!--1917-->
+* TiCDC introduces Checksum V2 to verify old values after Add Column or Drop Column operations [#10969](https://github.com/pingcap/tiflow/issues/10969) @[3AceShowHand](https://github.com/3AceShowHand) **tw@Oreoxmt** <!--1917-->
 
     Starting from v8.4.0, TiDB and TiCDC introduce Checksum V2 to address issues with Checksum V1 in verifying old values in Update or Delete events after Add Column or Drop Column operations. For new clusters created in v8.4.0 or later, or clusters upgraded to v8.4.0, TiDB uses Checksum V2 by default when single-row data checksum verification is enabled. TiCDC supports handling both Checksum V1 and V2. This change only affects TiDB and TiCDC internal implementation and does not impact checksum calculation methods for downstream Kafka consumers.
   
-    For more information, see [documentation](/ticdc-integrity-check.md).
+    For more information, see [documentation](/ticdc/ticdc-integrity-check.md).
 
 ## Compatibility changes
 
