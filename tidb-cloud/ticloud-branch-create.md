@@ -5,7 +5,7 @@ summary: ticloud serverless branch create` のリファレンス。
 
 # ticloud サーバーレス ブランチ作成 {#ticloud-serverless-branch-create}
 
-TiDB Cloud Serverless クラスターの[支店](/tidb-cloud/branch-overview.md)を作成します。
+TiDB Cloud Serverless クラスターの[支店](/tidb-cloud/branch-overview.md)作成します。
 
 ```shell
 ticloud serverless branch create [flags]
@@ -25,15 +25,23 @@ ticloud serverless branch create
 ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name>
 ```
 
+非対話モードで、指定されたタイムスタンプを持つ別のブランチからブランチを作成します。
+
+```shell
+ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name> --parent-id <parent-branch-id> --parent-timestamp <parent-timestamp>
+```
+
 ## 旗 {#flags}
 
 非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
-| フラグ                    | 説明                          | 必須  | 注記                                |
-| ---------------------- | --------------------------- | --- | --------------------------------- |
-| -c, --cluster-id 文字列   | ブランチが作成されるクラスターの ID を指定します。 | はい  | 非対話型モードでのみ動作します。                  |
-| -n, --display-name 文字列 | 作成するブランチの名前を指定します。          | はい  | 非対話型モードでのみ動作します。                  |
-| -h, --help             | このコマンドのヘルプ情報を表示します。         | いいえ | 非インタラクティブモードとインタラクティブモードの両方で動作します |
+| フラグ                    | 説明                                                                          | 必須  | 注記                                |
+| ---------------------- | --------------------------------------------------------------------------- | --- | --------------------------------- |
+| -c, --cluster-id 文字列   | ブランチが作成されるクラスターの ID を指定します。                                                 | はい  | 非対話型モードでのみ動作します。                  |
+| -n, --display-name 文字列 | 作成するブランチの名前を指定します。                                                          | はい  | 非対話型モードでのみ動作します。                  |
+| --親ID文字列               | ブランチの親の ID を指定します。デフォルト値はクラスター ID です。                                       | いいえ | 非対話型モードでのみ動作します。                  |
+| --親タイムスタンプ文字列          | 親ブランチのタイムスタンプを RFC3339 形式で指定します (例: `2024-01-01T00:00:00Z` 。デフォルト値は現在の時刻です。 | いいえ | 非対話型モードでのみ動作します。                  |
+| -h, --help             | このコマンドのヘルプ情報を表示します。                                                         | いいえ | 非インタラクティブモードとインタラクティブモードの両方で動作します |
 
 ## 継承されたフラグ {#inherited-flags}
 

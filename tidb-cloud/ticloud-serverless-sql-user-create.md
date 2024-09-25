@@ -1,47 +1,41 @@
 ---
-title: ticloud serverless update
-summary: ticloud serverless update` のリファレンス。
+title: ticloud serverless sql-user create
+summary: ticloud serverless sql-user create` のリファレンス。
 ---
 
-# ticloud サーバーレスアップデート {#ticloud-serverless-update}
+# ticloud サーバーレス SQL ユーザー作成 {#ticloud-serverless-sql-user-create}
 
-TiDB Cloud Serverless クラスターを更新します。
+TiDB Cloud Serverless SQL ユーザーを作成します。
 
 ```shell
-ticloud serverless update [flags]
+ticloud serverless sql-user create [flags]
 ```
 
 ## 例 {#examples}
 
-インタラクティブ モードでTiDB Cloud Serverless クラスターを更新します。
+対話モードでTiDB Cloud Serverless SQL ユーザーを作成します。
 
 ```shell
-ticloud serverless update
+ticloud serverless sql-user create
 ```
 
-非対話モードでTiDB Cloud Serverless クラスターの名前を更新します。
+非対話型モードでTiDB Cloud Serverless SQL ユーザーを作成します。
 
 ```shell
-ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
-```
-
-非対話モードでTiDB Cloud Serverless クラスターのラベルを更新する
-
-```shell
-ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
+ticloud serverless sql-user create --user <user-name> --password <password> --role <role> --cluster-id <cluster-id>
 ```
 
 ## 旗 {#flags}
 
 非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
-| フラグ                  | 説明                          | 必須  | 注記                       |   |
-| -------------------- | --------------------------- | --- | ------------------------ | - |
-| -c, --cluster-id 文字列 | クラスターの ID を指定します。           | はい  | 非対話型モードでのみ動作します。         |   |
-| -n --表示名文字列          | クラスターの新しい名前を指定します。          | いいえ | 非対話型モードでのみ動作します。         | 。 |
-| --labels 文字列         | クラスターの新しいラベルを指定します。         | いいえ | 非対話型モードでのみ動作します。         |   |
-| --パブリックエンドポイントを無効にする | クラスターのパブリック エンドポイントを無効にします。 | いいえ | 非対話型モードでのみ動作します。         |   |
-| -h, --help           | このコマンドのヘルプ情報を表示します。         | いいえ | 非対話型モードと対話型モードの両方で動作します。 |   |
+| フラグ                  | 説明                    | 必須  | 注記                       |
+| -------------------- | --------------------- | --- | ------------------------ |
+| -c, --cluster-id 文字列 | クラスターの ID を指定します。     | はい  | 非対話型モードでのみ動作します。         |
+| --パスワード文字列           | SQL ユーザーのパスワードを指定します。 | いいえ | 非対話型モードでのみ動作します。         |
+| --role 文字列           | SQL ユーザーのロールを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
+| -u, --user 文字列       | SQL ユーザーの名前を指定します。    | いいえ | 非対話型モードでのみ動作します。         |
+| -h, --help           | このコマンドのヘルプ情報を表示します。   | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 

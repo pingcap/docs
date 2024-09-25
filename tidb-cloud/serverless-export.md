@@ -15,7 +15,14 @@ TiDB Cloud Serverless Export (ベータ版) は、 TiDB Cloud Serverless クラ�
 
 ## エクスポート場所 {#export-locations}
 
-データをローカル ファイルまたは[アマゾンS3](https://aws.amazon.com/s3/)にエクスポートできます。
+次の場所にデータをエクスポートできます。
+
+-   ローカルファイル
+-   外部storageには以下が含まれます:
+
+    -   [アマゾンS3](https://aws.amazon.com/s3/)
+    -   [Google クラウド ストレージ](https://cloud.google.com/storage)
+    -   [Azure BLOB ストレージ](https://azure.microsoft.com/en-us/services/storage/blobs/)
 
 > **注記：**
 >
@@ -42,11 +49,38 @@ TiDB Cloud Serverless クラスターからローカル ファイルにデータ
 
 詳細については[TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
 
+### Google クラウド ストレージ {#google-cloud-storage}
+
+データを Google Cloud Storage にエクスポートするには、次の情報を提供する必要があります。
+
+-   URI: `gs://<bucket-name>/<file-path>`
+-   アクセス認証情報: バケットの**base64 エンコードされた**[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)サービス アカウント キーに`storage.objects.create`権限があることを確認してください。
+
+詳細については[TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)参照してください。
+
+> **注記：**
+>
+> 現在、Google Cloud Storage にエクスポートできるのは[TiDB CloudCLI](/tidb-cloud/cli-reference.md)のみです。
+
+### Azure BLOB ストレージ {#azure-blob-storage}
+
+Azure Blob Storage にデータをエクスポートするには、次の情報を提供する必要があります。
+
+-   URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
+-   アクセス資格情報: Azure Blob Storage コンテナーの場合は[共有アクセス署名 (SAS) トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)トークンに、 `Container`および`Object`リソースに対する`Read`および`Write`アクセス許可があることを確認します。
+
+詳細については[TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)参照してください。
+
+> **注記：**
+>
+> 現在、Azure Blob Storage にエクスポートできるのは[TiDB CloudCLI](/tidb-cloud/cli-reference.md)のみです。
+
 ## エクスポートオプション {#export-options}
 
 ### データのフィルタリング {#data-filtering}
 
 -   TiDB Cloudコンソールは、選択したデータベースとテーブルを含むデータのエクスポートをサポートしています。
+-   TiDB Cloud CLI は、SQL ステートメントと[テーブルフィルター](/table-filter.md)使用したデータのエクスポートをサポートしています。
 
 ### データ形式 {#data-formats}
 
@@ -58,14 +92,15 @@ TiDB Cloud Serverless クラスターからローカル ファイルにデータ
     -   `separator` : エクスポートされたデータ内のフィールドを区切るために使用される文字を指定します。デフォルトの区切り文字は`,`です。
     -   `header` : エクスポートされたデータにヘッダー行を含めるかどうかを指定します。デフォルト値は`true`です。
     -   `null-value` : エクスポートされたデータ内の NULL 値を表す文字列を指定します。デフォルト値は`\N`です。
+-   `Parquet` : Parquet 形式でデータをエクスポートします。現在は、 TiDB Cloud CLI でのみサポートされています。
 
 スキーマとデータは、次の命名規則に従ってエクスポートされます。
 
-| アイテム       | 圧縮されていない                         | 圧縮                                       |
-| ---------- | -------------------------------- | ---------------------------------------- |
-| データベーススキーマ | {データベース}-スキーマ作成.sql              | {データベース}-schema-create.sql.{圧縮タイプ}       |
-| テーブルスキーマ   | {データベース}.{テーブル}-schema.sql       | {データベース}.{テーブル}-schema.sql.{圧縮タイプ}       |
-| データ        | {データベース}.{テーブル}.{0001}.{csv|sql} | {データベース}.{テーブル}.{0001}.{csv|sql}.{圧縮タイプ} |
+| アイテム       | 圧縮されていない                                 | 圧縮                                                                                   |
+| ---------- | ---------------------------------------- | ------------------------------------------------------------------------------------ |
+| データベーススキーマ | {データベース}-スキーマ作成.sql                      | {データベース}-schema-create.sql.{圧縮タイプ}                                                   |
+| テーブルスキーマ   | {データベース}.{テーブル}-schema.sql               | {データベース}.{テーブル}-schema.sql.{圧縮タイプ}                                                   |
+| データ        | {データベース}.{テーブル}.{0001}.{csv|parquet|sql} | {データベース}.{テーブル}.{0001}.{csv|sql}.{圧縮タイプ}<br/> {データベース}.{テーブル}.{0001}.{圧縮タイプ}.parquet |
 
 ### データ圧縮 {#data-compression}
 
@@ -76,7 +111,58 @@ TiDB Cloud Serverless クラスターからローカル ファイルにデータ
 -   `zstd` : エクスポートされたデータを`zstd`で圧縮します。
 -   `none` : エクスポートした`data`圧縮しません。
 
-## 手順 {#steps}
+次のアルゴリズムを使用して、エクスポートされた Parquet データを圧縮できます。
+
+-   `zstd` (デフォルト): Parquet ファイルを`zstd`で圧縮します。
+-   `gzip` : Parquet ファイルを`gzip`で圧縮します。
+-   `snappy` : Parquet ファイルを`snappy`で圧縮します。
+-   `none` : Parquet ファイルを圧縮しません。
+
+### データ変換 {#data-conversion}
+
+データを Parquet 形式にエクスポートする場合、 TiDB Cloud Serverless と Parquet 間のデータ変換は次のようになります。
+
+| TiDB Cloudサーバーレスタイプ  | Parquest プリミティブ型 | Parquet 論理型                                |
+| -------------------- | ---------------- | ------------------------------------------ |
+| バルチャー                | バイト配列            | 文字列(UTF8)                                  |
+| 時間                   | バイト配列            | 文字列(UTF8)                                  |
+| 小さなテキスト              | バイト配列            | 文字列(UTF8)                                  |
+| 中テキスト                | バイト配列            | 文字列(UTF8)                                  |
+| TEXT                 | バイト配列            | 文字列(UTF8)                                  |
+| 長文                   | バイト配列            | 文字列(UTF8)                                  |
+| セット                  | バイト配列            | 文字列(UTF8)                                  |
+| 翻訳                   | バイト配列            | 文字列(UTF8)                                  |
+| 日付                   | バイト配列            | 文字列(UTF8)                                  |
+| 文字                   | バイト配列            | 文字列(UTF8)                                  |
+| ベクター                 | バイト配列            | 文字列(UTF8)                                  |
+| 小数点(1&lt;=p&lt;=9)   | INT32            | 10進数(p,s)                                  |
+| 小数点(10&lt;=p&lt;=18) | INT64            | 10進数(p,s)                                  |
+| 小数点(p&gt;=19)        | バイト配列            | 文字列(UTF8)                                  |
+| 列挙                   | バイト配列            | 文字列(UTF8)                                  |
+| タイムスタンプ              | INT64            | TIMESTAMP(単位=MICROS、isAdjustedToUTC=false) |
+| 日時                   | INT64            | TIMESTAMP(単位=MICROS、isAdjustedToUTC=false) |
+| 年                    | INT32            | /                                          |
+| 小さな                  | INT32            | /                                          |
+| 符号なし TINYINT         | INT32            | /                                          |
+| スモールイント              | INT32            | /                                          |
+| 符号なし小整数              | INT32            | /                                          |
+| ミディアムミント             | INT32            | /                                          |
+| 未署名のメディアミント          | INT32            | /                                          |
+| 内部                   | INT32            | /                                          |
+| 符号なし整数               | 固定長バイト配列(9)      | 10進数(20,0)                                 |
+| ビッグイント               | 固定長バイト配列(9)      | 10進数(20,0)                                 |
+| 符号なしBIGINT           | バイト配列            | 文字列(UTF8)                                  |
+| フロート                 | フロート             | /                                          |
+| ダブル                  | ダブル              | /                                          |
+| ブロブ                  | バイト配列            | /                                          |
+| タイニーブロブ              | バイト配列            | /                                          |
+| ミディアムブロブ             | バイト配列            | /                                          |
+| ロングロブ                | バイト配列            | /                                          |
+| バイナリ                 | バイト配列            | /                                          |
+| バイナリ                 | バイト配列            | /                                          |
+| 少し                   | バイト配列            | /                                          |
+
+## 例 {#examples}
 
 ### データをローカルファイルにエクスポートする {#export-data-to-a-local-file}
 
@@ -89,9 +175,9 @@ TiDB Cloud Serverless クラスターからローカル ファイルにデータ
     >
     > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート] を**クリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-3.  **インポート**ページで、右上隅の**[データのエクスポート先] を**クリックし、ドロップダウン リストから**[ローカル ファイル]**を選択します。次のパラメータを入力します。
+3.  **インポート**ページで、右上隅の**[データのエクスポート先]**をクリックし、ドロップダウン リストから**[ローカル ファイル]**を選択します。次のパラメータを入力します。
 
     -   **タスク名**: エクスポート タスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
 
@@ -99,11 +185,11 @@ TiDB Cloud Serverless クラスターからローカル ファイルにデータ
 
     -   **データ形式**: **SQL ファイル**または**CSV を**選択します。
 
-    -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、また**はなしを**選択します。
+    -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、また**はなし**を選択します。
 
     > **ヒント：**
     >
-    > クラスターでこれまでにデータをインポートまたはエクスポートしたことがない場合は、ページの下部にある**[データをエクスポートするには、ここをクリックします...] をクリックしてデータをエクスポートする**必要があります。
+    > クラスターでこれまでにデータをインポートまたはエクスポートしたことがない場合は、ページの下部にある [データをエクスポートするには**、ここをクリックします...]**をクリックしてデータをエクスポートする必要があります。
 
 4.  **[エクスポート]を**クリックします。
 
@@ -143,16 +229,16 @@ TiDB Cloud Serverless クラスターからローカル ファイルにデータ
     >
     > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート] を**クリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-3.  **インポート**ページで、右上隅の**[データのエクスポート先] を**クリックし、ドロップダウン リストから**[Amazon S3]**を選択します。次のパラメータを入力します。
+3.  **インポート**ページで、右上隅の**[データのエクスポート先]**をクリックし、ドロップダウン リストから [ **Amazon S3]**を選択します。次のパラメータを入力します。
 
     -   **タスク名**: エクスポート タスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
     -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
     -   **データ形式**: **SQL ファイル**または**CSV を**選択します。
-    -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、また**はなしを**選択します。
+    -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、また**はなし**を選択します。
     -   **フォルダー URI** : `s3://<bucket-name>/<folder-path>/`形式で Amazon S3 の URI を入力します。
-    -   **バケット アクセス**: 次のアクセス資格情報のいずれかを選択し、資格情報を入力します。資格情報がない場合は、 [TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)を参照してください。
+    -   **バケット アクセス**: 次のアクセス資格情報のいずれかを選択し、資格情報を入力します。資格情報がない場合は、 [TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
         -   **AWS ロール ARN** : バケットにアクセスするための`s3:PutObject`および`s3:ListBucket`権限を持つロール ARN を入力します。
         -   **AWS アクセスキー**: バケットにアクセスするための`s3:PutObject`と`s3:ListBucket`の権限を持つアクセスキー ID とアクセスキーシークレットを入力します。
 
@@ -163,15 +249,37 @@ TiDB Cloud Serverless クラスターからローカル ファイルにデータ
 <div label="CLI">
 
 ```shell
-ticloud serverless export create -c <cluster-id> --s3.bucket-uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key>
+ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter "database.table"
 ```
 
--   `s3.bucket-uri` : `s3://<bucket-name>/<file-path>`形式の Amazon S3 URI。
+-   `s3.uri` : `s3://<bucket-name>/<file-path>`形式の Amazon S3 URI。
 -   `s3.access-key-id` : バケットにアクセスする権限を持つユーザーのアクセスキー ID。
 -   `s3.secret-access-key` : バケットにアクセスする権限を持つユーザーのアクセスキーシークレット。
 
 </div>
 </SimpleTab>
+
+### Google Cloud Storage にデータをエクスポートする {#export-data-to-google-cloud-storage}
+
+現在、Google Cloud Storage にデータをエクスポートできるのは[TiDB CloudCLI](/tidb-cloud/cli-reference.md)のみです。
+
+```shell
+ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
+```
+
+-   `gcs.uri` : `gs://<bucket-name>/<file-path>`形式の Google Cloud Storage バケットの URI。
+-   `gcs.service-account-key` : base64 でエンコードされたサービス アカウント キー。
+
+### Azure Blob Storage にデータをエクスポートする {#export-data-to-azure-blob-storage}
+
+現在、 [TiDB CloudCLI](/tidb-cloud/cli-reference.md)使用してのみ Azure Blob Storage にデータをエクスポートできます。
+
+```shell
+ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
+```
+
+-   `azblob.uri` : `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`形式の Azure Blob Storage の URI。
+-   `azblob.sas-token` : Azure Blob Storage のアカウント SAS トークン。
 
 ### エクスポートタスクをキャンセルする {#cancel-an-export-task}
 
@@ -186,7 +294,7 @@ ticloud serverless export create -c <cluster-id> --s3.bucket-uri <uri> --s3.acce
     >
     > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート] を**クリックします。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
 3.  **[インポート]**ページで**[エクスポート]**をクリックして、エクスポート タスク リストを表示します。
 

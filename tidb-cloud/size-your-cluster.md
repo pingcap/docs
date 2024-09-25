@@ -5,7 +5,7 @@ summary: TiDB Cloudクラスターのサイズを決定する方法について�
 
 # TiDBのサイズを決定する {#determine-your-tidb-size}
 
-このドキュメントでは、TiDB Cloud Dedicated クラスターのサイズを決定する方法について説明します。
+このドキュメントでは、 TiDB Cloud Dedicated クラスターのサイズを決定する方法について説明します。
 
 > **注記：**
 >
@@ -114,7 +114,7 @@ TiDB Cloud は、耐久性と高可用性を実現するために、選択した
 >
 > TiDB クラスターをスケールすると、3 つのアベイラビリティーゾーンのノードが同時に増加または減少します。ニーズに応じて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)参照してください。
 
-TiKV は主にデータstorageに使用されますが、TiKV ノードのパフォーマンスはワークロードによって異なります。したがって、TiKV ノードの数を計画するときは、 [**データ量**](#estimate-tikv-node-number-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-number-according-to-expected-performance)の両方に応じて見積もり、2 つの見積もりの​​うち大きい方を推奨ノード数とする必要があります。
+TiKV は主にデータstorageに使用されますが、TiKV ノードのパフォーマンスはワークロードによっても異なります。したがって、TiKV ノードの数を計画するときは、 [**データ量**](#estimate-tikv-node-number-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-number-according-to-expected-performance)両方に応じて見積もり、2 つの見積もりの​​うち大きい方を推奨ノード数とする必要があります。
 
 #### データ量に応じてTiKVノード数を推定する {#estimate-tikv-node-number-according-to-data-volume}
 
@@ -175,7 +175,7 @@ TiKV ノードの数が 8 未満の場合、パフォーマンス偏差係数は
 | :-------: | :----------: | :----------: | :--------------: |
 |  4 仮想CPU  |   200ギガバイト   |   2048ギガバイト  |     500ギガバイト     |
 |  8 仮想CPU  |   200ギガバイト   |    4096ギバ    |     500ギガバイト     |
-|  16 仮想CPU |   200ギガバイト   |   6144ギガバイト  |     500ギガバイト     |
+|  16 仮想CPU |   200ギガバイト   |    6144ギバ    |     500ギガバイト     |
 |  32 仮想CPU |   200ギガバイト   |    6144ギバ    |     500ギガバイト     |
 
 > **注記：**
@@ -184,7 +184,7 @@ TiKV ノードの数が 8 未満の場合、パフォーマンス偏差係数は
 
 ## サイズTiFlash {#size-tiflash}
 
-TiFlash は、TiKV からのデータをリアルタイムで同期し、すぐにリアルタイム分析ワークロードをサポートします。水平方向に拡張可能です。
+TiFlash は、 TiKV からのデータをリアルタイムで同期し、すぐにリアルタイム分析ワークロードをサポートします。水平方向に拡張可能です。
 
 TiFlashのノード数、vCPU と RAM、storageを構成できます。
 
@@ -194,9 +194,10 @@ TiFlashのノード数、vCPU と RAM、storageを構成できます。
 
 -   8 vCPU、64 GiB
 -   16 vCPU、128 GiB
+-   32 vCPU、128 GiB
 -   32 vCPU、256 GiB
 
-TiDB または TiKV の vCPU と RAM サイズが**4 vCPU、16 GiB**に設定されている場合、 TiFlash は使用できないことに注意してください。
+TiDB または TiKV の vCPU と RAM サイズが**4 vCPU、16 GiB**に設定されている場合、 TiFlashは使用できないことに注意してください。
 
 ### TiFlashノード番号 {#tiflash-node-number}
 
@@ -206,7 +207,7 @@ TiFlashノードの最小数は、特定のテーブルのTiFlashレプリカ数
 
 TiFlashノードの最小数: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-たとえば、AWS 上の各TiFlashノードのノードstorageを 1024 GiB に設定し、テーブル A に 2 つのレプリカ (圧縮サイズは 800 GiB)、テーブル B に 1 つのレプリカ (圧縮サイズは 100 GiB) を設定する場合、必要なTiFlashノードの数は次のようになります。
+たとえば、AWS 上の各TiFlashノードのノードstorageを1024 GiB に設定し、テーブル A に 2 つのレプリカ (圧縮サイズは 800 GiB)、テーブル B に 1 つのレプリカ (圧縮サイズは 100 GiB) を設定する場合、必要なTiFlashノードの数は次のようになります。
 
 TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2, 1)) ≈ 2`
 

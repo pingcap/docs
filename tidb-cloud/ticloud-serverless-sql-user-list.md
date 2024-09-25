@@ -1,47 +1,39 @@
 ---
-title: ticloud serverless update
-summary: ticloud serverless update` のリファレンス。
+title: ticloud serverless sql-user list
+summary: ticloud serverless sql-user list` のリファレンス。
 ---
 
-# ticloud サーバーレスアップデート {#ticloud-serverless-update}
+# ticloud サーバーレス SQL ユーザー リスト {#ticloud-serverless-sql-user-list}
 
-TiDB Cloud Serverless クラスターを更新します。
+TiDB Cloud Serverless SQL ユーザーを一覧表示します。
 
 ```shell
-ticloud serverless update [flags]
+ticloud serverless sql-user list [flags]
 ```
 
 ## 例 {#examples}
 
-インタラクティブ モードでTiDB Cloud Serverless クラスターを更新します。
+インタラクティブ モードでTiDB Cloud Serverless SQL ユーザーを一覧表示します。
 
 ```shell
-ticloud serverless update
+ticloud serverless sql-user list
 ```
 
-非対話モードでTiDB Cloud Serverless クラスターの名前を更新します。
+非対話モードでTiDB Cloud Serverless SQL ユーザーを一覧表示します。
 
 ```shell
-ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
-```
-
-非対話モードでTiDB Cloud Serverless クラスターのラベルを更新する
-
-```shell
-ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
+ticloud serverless sql-user list -c <cluster-id>
 ```
 
 ## 旗 {#flags}
 
 非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
-| フラグ                  | 説明                          | 必須  | 注記                       |   |
-| -------------------- | --------------------------- | --- | ------------------------ | - |
-| -c, --cluster-id 文字列 | クラスターの ID を指定します。           | はい  | 非対話型モードでのみ動作します。         |   |
-| -n --表示名文字列          | クラスターの新しい名前を指定します。          | いいえ | 非対話型モードでのみ動作します。         | 。 |
-| --labels 文字列         | クラスターの新しいラベルを指定します。         | いいえ | 非対話型モードでのみ動作します。         |   |
-| --パブリックエンドポイントを無効にする | クラスターのパブリック エンドポイントを無効にします。 | いいえ | 非対話型モードでのみ動作します。         |   |
-| -h, --help           | このコマンドのヘルプ情報を表示します。         | いいえ | 非対話型モードと対話型モードの両方で動作します。 |   |
+| フラグ                  | 説明                                                                                                                      | 必須  | 注記                       |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------- | --- | ------------------------ |
+| -c, --cluster-id 文字列 | クラスターの ID を指定します。                                                                                                       | はい  | 非対話型モードでのみ動作します。         |
+| -o, --出力文字列          | 出力形式を [&quot;human&quot; &quot;json&quot;] のいずれかで指定します。完全な結果を得るには、&quot;json&quot; 形式を使用します。(デフォルトは &quot;human&quot;)。 | いいえ | 非対話型モードでのみ動作します。         |
+| -h, --help           | このコマンドのヘルプ情報を表示します。                                                                                                     | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 

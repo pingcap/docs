@@ -94,7 +94,7 @@
         -   トランザクション
             -   [概要](/develop/dev-guide-transaction-overview.md)
             -   [楽観的取引と悲観的取引](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
-            -   [取引トランザクション](/develop/dev-guide-transaction-restraints.md)
+            -   [トランザクション制限](/develop/dev-guide-transaction-restraints.md)
             -   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
         -   最適化する
             -   [概要](/develop/dev-guide-optimize-sql-overview.md)
@@ -205,7 +205,7 @@
                 -   [準備されていない実行プランのキャッシュ](/sql-non-prepared-plan-cache.md)
             -   制御実行計画
                 -   [概要](/control-execution-plan.md)
-                -   [オプティマイザのヒント](/optimizer-hints.md)
+                -   [オプティマイザーのヒント](/optimizer-hints.md)
                 -   [SQL プラン管理](/sql-plan-management.md)
                 -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
                 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
@@ -333,7 +333,7 @@
     -   [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
     -   [MSP 顧客](/tidb-cloud/managed-service-provider-customer.md)
     -   [再販業者の顧客](/tidb-cloud/cppo-customer.md)
--   翻訳
+-   API
     -   [APIの概要](/tidb-cloud/api-overview.md)
     -   APIリファレンス
         -   v1ベータ1
@@ -554,7 +554,7 @@
             -   [概要](/data-type-overview.md)
             -   [デフォルト値](/data-type-default-values.md)
             -   [数値型](/data-type-numeric.md)
-            -   [日付と時刻の型](/data-type-date-and-time.md)
+            -   [日付と時刻の種類](/data-type-date-and-time.md)
             -   [文字列型](/data-type-string.md)
             -   [JSON型](/data-type-json.md)
         -   関数と演算子
@@ -603,8 +603,8 @@
             -   ステイル読み取りを使用する (推奨)
                 -   [ステイル読み取りの使用シナリオ](/stale-read.md)
                 -   [`As OF TIMESTAMP`使用してステイル読み取りを実行する](/as-of-timestamp.md)
-                -   [`tidb_read_staleness`を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
-                -   [`tidb_external_ts`を使用してステイル読み取りを実行する](/tidb-external-ts.md)
+                -   [`tidb_read_staleness`使用してステイル読み取りを実行する](/tidb-read-staleness.md)
+                -   [`tidb_external_ts`使用してステイル読み取りを実行する](/tidb-external-ts.md)
             -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
         -   [SQL の配置ルール](/placement-rules-in-sql.md)
         -   システムテーブル
@@ -676,6 +676,7 @@
         -   認証
             -   [ログイン](/tidb-cloud/ticloud-auth-login.md)
             -   [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
+            -   [だれだ](/tidb-cloud/ticloud-auth-whoami.md)
         -   サーバーレス
             -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
             -   [消去](/tidb-cloud/ticloud-cluster-delete.md)
@@ -702,6 +703,11 @@
                 -   [リスト](/tidb-cloud/ticloud-serverless-export-list.md)
                 -   [キャンセル](/tidb-cloud/ticloud-serverless-export-cancel.md)
                 -   [ダウンロード](/tidb-cloud/ticloud-serverless-export-download.md)
+            -   SQL ユーザー
+                -   [作成する](/tidb-cloud/ticloud-serverless-sql-user-create.md)
+                -   [消去](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
+                -   [リスト](/tidb-cloud/ticloud-serverless-sql-user-list.md)
+                -   [アップデート](/tidb-cloud/ticloud-serverless-sql-user-update.md)
         -   [あい](/tidb-cloud/ticloud-ai.md)
         -   [完了](/tidb-cloud/ticloud-completion.md)
         -   設定
@@ -714,7 +720,7 @@
             -   [使用](/tidb-cloud/ticloud-config-use.md)
         -   プロジェクト
             -   [リスト](/tidb-cloud/ticloud-project-list.md)
-        -   [アップデート](/tidb-cloud/ticloud-update.md)
+        -   [アップグレード](/tidb-cloud/ticloud-upgrade.md)
         -   [ヘルプ](/tidb-cloud/ticloud-help.md)
     -   [テーブルフィルター](/table-filter.md)
     -   [リソース管理](/tidb-resource-control.md)
@@ -724,7 +730,7 @@
     -   [サポート](/tidb-cloud/tidb-cloud-support.md)
     -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
 -   よくある質問
-    -   [TiDB Cloudに関するよくある質問](/tidb-cloud/tidb-cloud-faq.md)
+    -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
     -   [TiDB Cloudサーバーレスに関するよくある質問](/tidb-cloud/serverless-faqs.md)
 -   リリースノート
     -   [2024](/tidb-cloud/tidb-cloud-release-notes.md)

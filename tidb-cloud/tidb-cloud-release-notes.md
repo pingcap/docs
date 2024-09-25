@@ -8,6 +8,38 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年9月24日 {#september-24-2024}
+
+**一般的な変更**
+
+-   AWSでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[TiFlash vCPU と RAM サイズ](/tidb-cloud/size-your-cluster.md#tiflash-vcpu-and-ram)新規に提供: `32 vCPU, 128 GiB`
+
+**CLIの変更**
+
+-   リリース[TiDB CloudCLI v1.0.0-beta.2](https://github.com/tidbcloud/tidbcloud-cli/releases/tag/v1.0.0-beta.2) 。
+
+    TiDB Cloud CLI は、次の新機能を提供します。
+
+    -   [`ticloud serverless sql-user`](/tidb-cloud/ticloud-serverless-sql-user-create.md)経由で[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの SQL ユーザー管理をサポートします。
+    -   [`ticloud serverless create`](/tidb-cloud/ticloud-cluster-create.md)および[`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)の[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)のクラスターのパブリック エンドポイントを無効にすることを許可します。
+    -   OAuth 認証を使用するときに現在のユーザーに関する情報を取得するには、 [`ticloud auth whoami`](/tidb-cloud/ticloud-auth-whoami.md)コマンドを追加します。
+    -   ソース テーブルを柔軟に選択するために`--where` [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)の`--sql` 、および`--filter`フラグをサポートします。
+    -   CSV および Parquet ファイルへのデータのエクスポートをサポートします。
+    -   ロール ARN を認証情報として使用して Amazon S3 にデータをエクスポートする機能をサポートし、Google Cloud Storage および Azure Blob Storage へのエクスポートもサポートします。
+    -   Amazon S3、Google Cloud Storage、Azure Blob Storage からのデータのインポートをサポートします。
+    -   ブランチと特定のタイムスタンプからブランチを作成する機能をサポートします。
+
+    TiDB Cloud CLI では、次の機能が強化されています。
+
+    -   デバッグ ログを改善しました。資格情報とユーザー エージェントをログに記録できるようになりました。
+    -   ローカルエクスポートファイルのダウンロードを毎秒数十 KiB から毎秒数十 MiB に高速化します。
+
+    TiDB Cloud CLI では、次の機能が置き換えられたり、削除されます。
+
+    -   [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)では、 `--s3.bucket-uri`フラグが`--s3.uri`に置き換えられます。
+    -   [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)では、フラグ`--database`と`--table`削除されています。代わりに、フラグ`--sql` 、 `--where` 、および`--filter`使用できます。
+    -   [`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)注釈フィールドを更新できなくなりました。
+
 ## 2024年9月10日 {#september-10-2024}
 
 **一般的な変更**
@@ -22,11 +54,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   [TiDB Cloudコンソール](https://tidbcloud.com/)を使用してTiDB Cloud Serverless クラスターからデータをエクスポートすることをサポートします。
+-   [TiDB Cloudコンソール](https://tidbcloud.com/)使用してTiDB Cloud Serverless クラスターからデータをエクスポートすることをサポートします。
 
-    これまで、 TiDB Cloud[TiDB CloudCLI](/tidb-cloud/cli-reference.md)使用したデータのエクスポートのみがサポートされていました。現在では、 [TiDB Cloudコンソール](https://tidbcloud.com/)を使用して、 TiDB Cloud Serverless クラスターからローカル ファイルや Amazon S3 にデータを簡単にエクスポートできます。
+    これまで、 TiDB Cloud[TiDB CloudCLI](/tidb-cloud/cli-reference.md)使用したデータのエクスポートのみがサポートされていました。現在では、 [TiDB Cloudコンソール](https://tidbcloud.com/)使用して、 TiDB Cloud Serverless クラスターからローカル ファイルや Amazon S3 にデータを簡単にエクスポートできます。
 
-    詳細については[TiDB Cloud Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)を参照してください。
+    詳細については[TiDB Cloud Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)参照してください。
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの接続エクスペリエンスを強化します。
 
@@ -50,13 +82,13 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   **プライベート エンドポイント接続の作成**ページのレイアウトを調整し、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベート エンドポイント接続を作成する際のユーザー エクスペリエンスを向上させます。
 
-    詳細については[AWS のプライベートエンドポイント経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+    詳細については[AWS のプライベートエンドポイント経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
 
 ## 2024年8月6日 {#august-6-2024}
 
 **一般的な変更**
 
--   AWS での負荷分散に対する請求の変更はあり[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 。
+-   AWS での負荷分散に対する請求の変更は[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 。
 
     2024 年 8 月 1 日より、 TiDB Cloud Dedicated の請求書には、 [AWS の料金変更は 2024 年 2 月 1 日より有効になります](https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/)に合わせたパブリック IPv4 アドレスの新しい AWS 料金が含まれます。パブリック IPv4 アドレスごとの料金は 1 時間あたり 0.005 ドルで、AWS でホストされるTiDB Cloud Dedicated クラスターごとに月額約 10 ドルになります。
 
@@ -74,13 +106,13 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   [データ サービス (ベータ版)](https://tidbcloud.com/console/data-service) 、ベクター検索エンドポイントの自動生成をサポートします。
+-   [データ サービス (ベータ版)](https://tidbcloud.com/console/data-service)ベクター検索エンドポイントの自動生成をサポートします。
 
     テーブルに[ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)含まれている場合は、選択した距離関数に基づいてベクトル距離を計算するベクトル検索エンドポイントを自動的に生成できます。
 
-    この機能により、 [ディファイ](https://docs.dify.ai/guides/tools)や[GPT は](https://openai.com/blog/introducing-gpts)などの AI プラットフォームとのシームレスな統合が可能になり、高度な自然言語処理と AI 機能によってアプリケーションが強化され、より複雑なタスクやインテリジェントなソリューションが実現します。
+    この機能により、 [ディファイ](https://docs.dify.ai/guides/tools)や[GPT](https://openai.com/blog/introducing-gpts)などの AI プラットフォームとのシームレスな統合が可能になり、高度な自然言語処理と AI 機能によってアプリケーションが強化され、より複雑なタスクやインテリジェントなソリューションが実現します。
 
-    詳細については[エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)を参照してください。
+    詳細については[エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)参照してください。
 
 -   予算機能を導入すると、計画された費用に対する実際のTiDB Cloudコストを追跡し、予期しないコストを防ぐことができます。
 
@@ -94,11 +126,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [システムステータス](https://status.tidbcloud.com/)ページを拡張して、 TiDB Cloudシステムの健全性とパフォーマンスに関するより詳細な情報を提供します。
 
-    アクセスするには、 [https://status.tidbcloud.com/](https://status.tidbcloud.com/)直接アクセスするか、右下隅の**[?]**をクリックして**[システム ステータス]**を選択し、 [TiDB Cloudコンソール](https://tidbcloud.com)を経由して移動します。
+    アクセスするには、 [https://status.tidbcloud.com/](https://status.tidbcloud.com/)直接アクセスするか、右下隅の [ **?]**をクリックして**[システム ステータス]**を選択し、 [TiDB Cloudコンソール](https://tidbcloud.com)を経由して移動します。
 
 **コンソールの変更**
 
--   **VPC ピアリング**ページのレイアウトを調整して、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[VPC ピアリング接続の作成](/tidb-cloud/set-up-vpc-peering-connections.md)のクラスターのユーザー エクスペリエンスを向上させます。
+-   **VPC ピアリング**ページのレイアウトを調整して、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[VPC ピアリング接続の作成](/tidb-cloud/set-up-vpc-peering-connections.md)クラスターのユーザー エクスペリエンスを向上させます。
 
 ## 2024年7月2日 {#july-2-2024}
 
@@ -123,9 +155,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
     ベクター検索 (ベータ) 機能は、ドキュメント、画像、音声、ビデオなど、さまざまなデータ タイプにわたって意味的類似性検索を実行するための高度な検索ソリューションを提供します。この機能により、開発者は使い慣れた MySQL スキルを使用して、生成型人工知能 (AI) 機能を備えたスケーラブルなアプリケーションを簡単に構築できます。主な機能は次のとおりです。
 
     -   [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md) 、 [ベクトルインデックス](/tidb-cloud/vector-search-index.md) 、および[ベクトル関数と演算子](/tidb-cloud/vector-search-functions-and-operators.md) 。
-    -   [ランチェーン](/tidb-cloud/vector-search-integrate-with-langchain.md) [ジナAI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)の[ラマインデックス](/tidb-cloud/vector-search-integrate-with-llamaindex.md)システム統合。
-    -   Python のプログラミング言語サポート: [SQLアルケミー](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md) [ピーウィー](/tidb-cloud/vector-search-integrate-with-peewee.md)および[Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md) 。
-    -   サンプルアプリケーションとチュートリアル: [パイソン](/tidb-cloud/vector-search-get-started-using-python.md)または[構文](/tidb-cloud/vector-search-get-started-using-sql.md)を使用してドキュメントのセマンティック検索を実行します。
+    -   [ランチェーン](/tidb-cloud/vector-search-integrate-with-langchain.md) [ラマインデックス](/tidb-cloud/vector-search-integrate-with-llamaindex.md) [ジナAI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)エコシステム統合。
+    -   Python [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)プログラミング言語サポート: [SQLアルケミー](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md) 、および[ピーウィー](/tidb-cloud/vector-search-integrate-with-peewee.md) 。
+    -   サンプルアプリケーションとチュートリアル: [パイソン](/tidb-cloud/vector-search-get-started-using-python.md)または[構文](/tidb-cloud/vector-search-get-started-using-sql.md)使用してドキュメントのセマンティック検索を実行します。
 
     詳細については[ベクトル検索（ベータ版）の概要](/tidb-cloud/vector-search-overview.md)参照してください。
 
@@ -178,7 +210,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については[TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/#storage)参照してください。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) [存続時間 (TTL)](/time-to-live.md)サポートします。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) [存続時間 (TTL)](/time-to-live.md)をサポートします。
 
 ## 2024年5月28日 {#may-28-2024}
 
@@ -188,7 +220,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     Google Cloud `Taiwan (asia-east1)`リージョンでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタが、データ移行（DM）機能をサポートするようになりました。アップストリーム データがこのリージョン内またはその付近に保存されている場合は、Google Cloud からTiDB Cloudへのより高速で信頼性の高いデータ移行を利用できるようになります。
 
--   AWSとGoogle Cloudでホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を新たに提供: `16 vCPU, 64 GiB`
+-   AWSとGoogle Cloudでホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)新たに提供: `16 vCPU, 64 GiB`
 
 **APIの変更**
 
@@ -208,7 +240,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を新たに提供: `8 vCPU, 16 GiB`
+-   Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)新たに提供: `8 vCPU, 16 GiB`
 
 ## 2024年5月14日 {#may-14-2024}
 
@@ -228,14 +260,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **CLIの変更**
 
--   新しい[TiDB CloudAPI](/tidb-cloud/api-overview.md)をベースに構築された[TiDB CloudCLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli)導入します。新しい CLI には、次の新機能が追加されています。
+-   新しい[TiDB CloudAPI](/tidb-cloud/api-overview.md)ベースに構築された[TiDB CloudCLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli)導入します。新しい CLI には、次の新機能が追加されています。
 
     -   [TiDB Cloud Serverless クラスターからデータをエクスポートする](/tidb-cloud/serverless-export.md)
     -   [ローカルstorageからTiDB Cloud Serverlessクラスターにデータをインポートする](/tidb-cloud/ticloud-import-start.md)
     -   [OAuth による認証](/tidb-cloud/ticloud-auth-login.md)
     -   [TiDBボット経由で質問する](/tidb-cloud/ticloud-ai.md)
 
-    TiDB Cloud CLI をアップグレードする前に、この新しい CLI は以前のバージョンと互換性がないことに注意してください。たとえば、CLI コマンドの`ticloud cluster` `ticloud serverless`に更新されました。詳細については、 [TiDB Cloud CLI リファレンス](/tidb-cloud/cli-reference.md)を参照してください。
+    TiDB Cloud CLI をアップグレードする前に、この新しい CLI は以前のバージョンと互換性がないことに注意してください。たとえば、CLI コマンドの`ticloud cluster` `ticloud serverless`に更新されました。詳細については、 [TiDB Cloud CLI リファレンス](/tidb-cloud/cli-reference.md)参照してください。
 
 ## 2024年4月9日 {#april-9-2024}
 
@@ -247,7 +279,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに対して、**無料**と**スケーラブル**の 2 つのサービス プランを導入します。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに対して、**無料**と**スケーラブルの**2 つのサービス プランを導入します。
 
     さまざまなユーザー要件を満たすために、 TiDB Cloud Serverless は無料かつスケーラブルなサービス プランを提供しています。始めたばかりの場合でも、増大するアプリケーション需要に対応するために拡張する場合でも、これらのプランは必要な柔軟性と機能を提供します。
 
@@ -300,7 +332,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TiDB、TiKV、 TiFlashのノード サイズ オプションとして 32 vCPU を追加します。
 
-    1 つ`32 vCPU, 128 GiB` TiKV ノードごとに、ノードstorageの範囲は 200 GiB から 6144 GiB になります。
+    `32 vCPU, 128 GiB` TiKV ノードごとに、ノードstorageの範囲は 200 GiB から 6144 GiB になります。
 
     次のシナリオでは、このようなノードを使用することをお勧めします。
 
@@ -324,7 +356,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については[パブリックエンドポイントを無効にする](/tidb-cloud/connect-via-standard-connection-serverless.md#disable-a-public-endpoint)参照してください。
 
--   [データ サービス (ベータ版)](https://tidbcloud.com/console/data-service)では、データ アプリ内のエンドポイントにアクセスするためのカスタム ドメインの構成がサポートされています。
+-   [データ サービス (ベータ版)](https://tidbcloud.com/console/data-service)データ アプリ内のエンドポイントにアクセスするためのカスタム ドメインの構成がサポートされています。
 
     デフォルトでは、 TiDB Cloud Data Service は各データ アプリのエンドポイントにアクセスするためのドメイン`<region>.data.tidbcloud.com`を提供します。パーソナライズと柔軟性を高めるために、デフォルトのドメインを使用する代わりに、データ アプリのカスタム ドメインを構成できるようになりました。この機能により、データベース サービスにブランド化された URL を使用でき、セキュリティが強化されます。
 
