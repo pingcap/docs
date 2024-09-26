@@ -26,6 +26,15 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ## Optimizer Fix Controls reference
 
+### [`52592`](https://github.com/pingcap/tidb/issues/52592) <span class="version-mark">New in v8.4.0</span>
+
+- Default value: `OFF`
+- Possible values: `ON`, `OFF`
+- This variable controls whether to allow fast path plan. If it is set to `ON`, the optimizer will fallback to coprocessor, neither Get nor BatchGet will be enabled. It should be only set to `ON` when fast path is more expensive than coprocessor. Fast path does not support column projection, here are the common cases that column projection is required and fast path is disabled:
+	- Wide tables with many columns, where applications only query a smallsubset of columns.
+	- Tables containing JSON columns with large JSON values, where queries either do not retrieve the JSON columns or only extract small portions of the JSON content.
+	 
+
 ### [`33031`](https://github.com/pingcap/tidb/issues/33031) <span class="version-mark">New in v8.0.0</span>
 
 - Default value: `OFF`
