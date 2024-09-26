@@ -36,10 +36,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td>In high-concurrency scenarios, you can use this feature to reduce the wait time for obtaining TSO and improve the cluster throughput.</td>
   </tr>
   <tr>
-    <td>Improve the execution efficiency of administrative SQL statements**tw@hfxsd 1941**</td>
-    <td>In some SaaS systems, there is a need to create users in batch and rotate passwords regularly. TiDB enhances the performance of creating and modifying database users, ensuring these operations can be completed within the desired time window.</td>
-  </tr>
-  <tr>
     <td>Improve query performance for cached tables**tw@hfxsd 1965**</td>
     <td>Improve query performance for index scanning on cached tables, with improvements of up to 5.4 times in some scenarios. For high-speed queries on small tables, cached tables can significantly enhance overall performance.</td>
   </tr>
@@ -120,10 +116,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     * `DATE_SUB()`
 
   For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
-
-* The performance of batch user creation and password changes has been improved by hundreds of times [#55604](https://github.com/pingcap/tidb/pull/55604) @[wjhuang2016](https://github.com/wjhuang2016) **tw@hfxsd** <!--1941-->
-
-    In SaaS scenarios, you might need to batch-create a large number of users, rotate passwords periodically, and complete these tasks within a specific time window. Starting from v8.4.0, the performance of batch user creation and password rotation has been significantly improved. Additionally, you can further enhance performance by increasing concurrency through a higher number of session connections, which greatly reduces execution time for these operations.
 
 * Instance-level execution plan cache (experimental) [#54057](https://github.com/pingcap/tidb/issues/54057) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1569-->
 
