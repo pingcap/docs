@@ -32,8 +32,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned columns, and remove the restriction that a unique key must contain the partition key. This feature extends the usage scenarios of TiDB partitioned tables and avoids some of the application modification work that might be required for data migration.</td>
   </tr>
   <tr>
-    <td>TiDB 并行获取 TSO**tw@qiancai 1893**</td>
-    <td>在高并发场景下，并行获取 TSO 能够有效降低等待获取 TSO 的时间，提升集群的吞吐。</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">Concurrent TSO retrieval for TiDB</a>**tw@qiancai 1893**</td>
+    <td>In high-concurrency scenarios, you can use this feature to reduce the wait time for obtaining TSO and improve the cluster throughput.</td>
   </tr>
   <tr>
     <td>Improve the execution efficiency of administrative SQL statements**tw@hfxsd 1941**</td>
@@ -66,8 +66,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td>Support MySQL-compatible foreign key constraints to maintain data consistency and further enhance TiDB's compatibility with MySQL.</td>
   </tr>
   <tr>
-    <td>向量搜索功能（实验特性）**tw@qiancai 1898**</td>
-    <td>加速向量搜索的性能，适用于检索增强生成（RAG）、语义搜索、推荐系统等应用类型。把 TiDB 应用场景扩展到 AI 和 大语言模型（LLM）领域。</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/vector-search-overview">Vector search (experimental)</a>**tw@qiancai 1898**</td>
+    <td>Vector search is a search method based on data semantics, which provides more relevant search results. As one of the core functions of AI and large language models (LLMs), vector search can be used in various scenarios such as Retrieval-Augmented Generation (RAG), semantic search, and recommendation systems.</td>
   </tr>
   <tr>
     <td rowspan="2">DB Operations and Observability</td>
@@ -79,9 +79,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td><a href="https://aws.amazon.com/cn/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/">AWS EC2 now uses IMDSv2 as the default metadata service</a>. TiDB supports data backups from TiKV instances with IMDSv2 enabled, enhancing your ability to run TiDB clusters in public cloud environments.</td>
   </tr>
   <tr>
-    <td rowspan="1">安全</td>
-    <td>备份数据加密成为正式功能**tw@qiancai 1920**</td>
-    <td>加密数据库备份是一种增强数据安全性的重要措施，既可以保护数据备份中敏感信息，又有助于合规，确保数据在存储和传输中的安全。</td>
+    <td rowspan="1">Security</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/br-pitr-manual#encrypt-log-backup-data">Client-side encryption of log backups</a>**tw@qiancai 1920**</td>
+    <td>Before uploading a log backup to your backup storage, you can encrypt the backup data to ensure its security during storage and transmission.</td>
   </tr>
 </tbody>
 </table>
@@ -254,11 +254,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 ### DB operations
 
-* PITR adds client-side log backup data encryption support (experimental) [55834](https://github.com/pingcap/tidb/issues/55834) @[Tristan1900](https://github.com/Tristan1900) **tw@qiancai** <!--1920-->
+* BR supports client-side encryption of log backups (experimental) [55834](https://github.com/pingcap/tidb/issues/55834) @[Tristan1900](https://github.com/Tristan1900) **tw@qiancai** <!--1920-->
 
-    Previously only the data from a snapshot based backup could be encrypted (on the client side) with a data key provided by the user. With this feature, log backups may now also be encrypted, ensuring that the confidentiality of information within the backup data is secured.
+     In earlier TiDB versions, only snapshot backups can be encrypted on the client side. Starting from v8.4.0, log backups can also be encrypted on the client side. Before uploading a log backup to your backup storage, you can encrypt the backup data to ensure its security via one of the following methods:
 
-    For more information, see [documentation](doc-link).
+    - Encrypt using a custom fixed key
+    - Encrypt using the main key from the local disk
+    - Encrypt using the main key from a Key Management Service (KMS)
+
+  For more information, see [documentation](/br/br-pitr-manual.md#encrypt-log-backup-data).
 
 * BR reduces privileges when restoring backup data in a cloud storage system [#55870](https://github.com/pingcap/tidb/issues/55870) @[Leavrth](https://github.com/Leavrth) **tw@Oreoxmt** <!--1943-->
 
