@@ -1020,6 +1020,7 @@
         - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
     - [Metadata Lock](/metadata-lock.md)
     - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
+    - [schema cache](/schema-cache.md)
   - UI
     - TiDB Dashboard
       - [Overview](/dashboard/dashboard-intro.md)
