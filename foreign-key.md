@@ -9,7 +9,7 @@ Starting from v6.6.0, TiDB supports the foreign key feature, which allows cross-
 
 > **Warning:**
 >
-> - The foreign key feature is typically employed to enforce [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) constraint checks. It might cause performance degradation, so it is recommended to conduct thorough testing before using it in performance-sensitive scenarios.
+> The foreign key feature is typically employed to enforce [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) constraint checks. It might cause performance degradation, so it is recommended to conduct thorough testing before using it in performance-sensitive scenarios.
 
 The foreign key is defined in the child table. The syntax is as follows:
 
