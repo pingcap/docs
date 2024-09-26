@@ -61,11 +61,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td>Automatic statistics collection determines the collection concurrency based on node scale and hardware specifications. This improves statistics collection efficiency, reduces manual tuning, and ensures stable cluster performance.</td>
   </tr>
   <tr>
-    <td rowspan="2">SQL</td>
-    <td>Foreign keys (GA)**tw@lilin90 1894**</td>
-    <td>Support MySQL-compatible foreign key constraints to maintain data consistency and further enhance TiDB's compatibility with MySQL.</td>
-  </tr>
-  <tr>
+    <td rowspan="1">SQL</td>
     <td><a href="https://docs.pingcap.com/tidb/v8.4/vector-search-overview">Vector search (experimental)</a>**tw@qiancai 1898**</td>
     <td>Vector search is a search method based on data semantics, which provides more relevant search results. As one of the core functions of AI and large language models (LLMs), vector search can be used in various scenarios such as Retrieval-Augmented Generation (RAG), semantic search, and recommendation systems.</td>
   </tr>
@@ -235,12 +231,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     To enhance the performance of vector search, you can create and use [vector search indexes](vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Therefore, before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
 
     For more information, see [documentation](/vector-search-overview.md).
-
-* The TiDB foreign key feature becomes generally available (GA) [#55861](https://github.com/pingcap/tidb/issues/55861) @[YangKeao](https://github.com/YangKeao) **tw@lilin90** <!--1894-->
-
-    Starting from v6.6.0, TiDB supports foreign key constraints using the system variable [`foreign_key_checks`](/system-variables.md#foreign_key_checks), but it has been an experimental feature. In v8.4.0, the foreign key feature has been extensively tested in more scenarios to improve stability and performance. Therefore, starting from v8.4.0, the foreign key feature becomes generally available (GA).
-
-    For more information, see [documentation](/foreign-key.md).
 
 * Support the `gb18030` character set and the `gb18030_bin` and `gb18030_chinese_ci` collations [#17470](https://github.com/tikv/tikv/issues/17470) [#55791](https://github.com/pingcap/tidb/issues/55791) @[cbcwestwolf](https://github.com/cbcwestwolf) **tw@lilin90** <!--1962-->
 
