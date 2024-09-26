@@ -1082,7 +1082,7 @@ Configuration items related to Coprocessor.
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `"256MiB"`. Before v8.4.0, the default value is `‘96MiB’`.
++ Default value: `"256MiB"`. Before v8.4.0, the default value is `"96MiB"`.
 + Unit: KiB|MiB|GiB
 
 ### `region-max-keys`
@@ -1093,7 +1093,7 @@ Configuration items related to Coprocessor.
 ### `region-split-keys`
 
 + The number of keys in the newly split Region. This value is an estimate.
-+ Default value: `2560000`. Before v8.4.0, the default value is `960000’`.
++ Default value: `2560000`. Before v8.4.0, the default value is `960000`.
 
 ### `consistency-check-method`
 
