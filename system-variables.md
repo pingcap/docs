@@ -5155,10 +5155,10 @@ SHOW WARNINGS;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
-- Default value: ``
-- Possible values: ``, `TABLE`, `GLOBAL`
+- Default value: `""`
+- Possible values: `""`, `TABLE`, `GLOBAL`
 - By default, Regions are split for a new table when it is being created in TiDB. This variable controls the table Region scattering strategy, determining how TiDB scatters Regions after splitting. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable. Possible values are:
-    - ``: No scattering of table Regions.
+    - `""`: indicates TiDB does not scatter table Regions.
     - `TABLE`: indicates that if you set `PRE_SPLIT_REGIONS` or `SHARD_ROW_ID_BITS` when you create a table, in the scenario of pre-splitting multiple Regions, the Regions of these tables will be scattered according to the granularity of the tables. However, if you don't set the aforementioned attributes when you create a table, in the scenario of creating a large number of tables quickly, it will cause the Regions of these tables to be concentrated on a few TiKV nodes, resulting in an uneven distribution of the Regions.
     - `GLOBAL`: indicates that TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Particularly when you create a large number of tables quickly, using the `GLOBAL` option, you can effectively avoid over-concentration of Regions on a few TiKV nodes, and ensure an even distribution of Regions.
 - Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation.
