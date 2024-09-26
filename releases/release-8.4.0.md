@@ -76,8 +76,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td rowspan="1">Security</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/br-pitr-manual#encrypt-log-backup-data">Client-side encryption of log backups</a>**tw@qiancai 1920**</td>
-    <td>Before uploading a log backup to your backup storage, you can encrypt the backup data to ensure its security during storage and transmission.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/br-pitr-manual#encrypt-log-backup-data">Client-side encryption of log backup data</a>**tw@qiancai 1920**</td>
+    <td>Before uploading log backup data to your backup storage, you can encrypt the backup data to ensure its security during storage and transmission.</td>
   </tr>
 </tbody>
 </table>
@@ -110,7 +110,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 * Optimize the execution efficiency of the hash join operator for TiDB (experimental) [#55153](https://github.com/pingcap/tidb/issues/55153) [#53127](https://github.com/pingcap/tidb/issues/53127) @[windtalker](https://github.com/windtalker) @[xzhangxian1008](https://github.com/xzhangxian1008) @[XuHuaiyu](https://github.com/XuHuaiyu) @[wshwsh12](https://github.com/wshwsh12) **tw@qiancai** <!--1633-->
 
-    In v8.4.0, TiDB introduces an optimized implementation of the hash join operator to improve its execution efficiency. Currently, this optimized implementation is experimental, disabled by default, and applies only to inner join and outer join operations. To enable this optimized method, configure the [tidb_hash_join_version](/system-variables.md#tidb_hash_join_version-new-in-v840) system variable to `optimized`.
+    In v8.4.0, TiDB introduces an optimized implementation of the hash join operator to improve its execution efficiency. Currently, this optimized implementation of hash join applies only to inner join and outer join operations and is disabled by default. To enable this optimized implementation, configure the [tidb_hash_join_version](/system-variables.md#tidb_hash_join_version-new-in-v840) system variable to `optimized`.
 
     For more information, see [documentation](/system-variables.md#tidb_hash_join_version-new-in-v840).
 
@@ -244,13 +244,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 ### DB operations
 
-* BR supports client-side encryption of log backups (experimental) [55834](https://github.com/pingcap/tidb/issues/55834) @[Tristan1900](https://github.com/Tristan1900) **tw@qiancai** <!--1920-->
+* BR supports client-side encryption of log backup data (experimental) [55834](https://github.com/pingcap/tidb/issues/55834) @[Tristan1900](https://github.com/Tristan1900) **tw@qiancai** <!--1920-->
 
-     In earlier TiDB versions, only snapshot backups can be encrypted on the client side. Starting from v8.4.0, log backups can also be encrypted on the client side. Before uploading a log backup to your backup storage, you can encrypt the backup data to ensure its security via one of the following methods:
+     In earlier TiDB versions, only snapshot backup data can be encrypted on the client side. Starting from v8.4.0, log backup data can also be encrypted on the client side. Before uploading log backup data to your backup storage, you can encrypt the backup data to ensure its security via one of the following methods:
 
     - Encrypt using a custom fixed key
-    - Encrypt using the main key from the local disk
-    - Encrypt using the main key from a Key Management Service (KMS)
+    - Encrypt using a master key stored on a local disk
+    - Encrypt using a master key managed by a Key Management Service (KMS)
 
   For more information, see [documentation](/br/br-pitr-manual.md#encrypt-log-backup-data).
 
