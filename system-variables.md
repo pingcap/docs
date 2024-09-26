@@ -3261,7 +3261,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `legacy`
 - Possible values: `legacy`, `optimized`
 - This variable is used to control whether use optimized hash join in TiDB. The value is `legacy` by default. If it is set to `optimized`, TiDB will use optimized hash join to execute hash join, which is expected to have better performance.
-- Currently optimized hash join only support inner join and outer join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, it will still use the legacy hash join.
+
+> **Note:**
+>
+> - Currently optimized hash join only support inner join and outer join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, it will still use the legacy hash join.
+> - Currently optimized hash join does not support spill to disk when memory is out of quota.
+
 
 ### tidb_hashagg_final_concurrency
 
