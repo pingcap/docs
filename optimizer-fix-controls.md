@@ -30,7 +30,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
-- This variable controls whether to allow FastPlan. If it is set to `ON`, the optimizer will fallback to coprocessor, neither Get nor BatchGet will be enabled. It should be only set to `ON` when fast path is more expensive than coprocessor. Fast path does not support column projection, here are the common cases that column projection is required and fast path is disabled:
+- Controls whether to allow data retrieval via Get or BatchGet. If set to `ON`, the optimizer will force the selection of Coprocessor, while both Get and BatchGet will be disabled. Get and BatchGet do not support column projection, and in some scenarios, their execution cost is higher than Coprocessor requests, setting this to `ON` will result in better performance. The following are common cases where forcing Coprocessor selection is recommended:
 	- Wide tables with many columns, where applications only query a smallsubset of columns.
 	- Tables containing JSON columns with large JSON values, where queries either do not retrieve the JSON columns or only extract small portions of the JSON content.
 	 
