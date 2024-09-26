@@ -1207,7 +1207,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 2147483647]`
-- This variable is used to set the concurrency of executing the automatic update of statistics.
+- This variable is used to set the concurrency within a signle automatic statistics collection task. Before v8.4.0, the concurrecncy for each automatic statistics collection task is fixed at `1`. You can increase this concurrency to speed up statistics collection tasks based on your cluster's available resources.
 
 ### tidb_auto_analyze_end_time
 
