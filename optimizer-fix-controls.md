@@ -26,15 +26,6 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ## Optimizer Fix Controls reference
 
-### [`52592`](https://github.com/pingcap/tidb/issues/52592) <span class="version-mark">New in v8.4.0</span>
-
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- Controls whether to allow data retrieval via Get or BatchGet. If set to `ON`, the optimizer will force the selection of Coprocessor, while both Get and BatchGet will be disabled. Get and BatchGet do not support column projection, and in some scenarios, their execution cost is higher than Coprocessor requests, setting this to `ON` will result in better performance. The following are common cases where forcing Coprocessor selection is recommended:
-	- Wide tables with many columns, where applications only query a smallsubset of columns.
-	- Tables containing JSON columns with large JSON values, where queries either do not retrieve the JSON columns or only extract small portions of the JSON content.
-	 
-
 ### [`33031`](https://github.com/pingcap/tidb/issues/33031) <span class="version-mark">New in v8.0.0</span>
 
 - Default value: `OFF`
@@ -80,6 +71,14 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - This variable sets the threshold for the optimizer's heuristic strategy to select access paths. If the estimated rows for an access path (such as `Index_A`) is much smaller than that of other access paths (default `1000` times), the optimizer skips the cost comparison and directly selects `Index_A`.
 - `0` means to disable this heuristic strategy.
 
+### [`52592`](https://github.com/pingcap/tidb/issues/52592) <span class="version-mark">New in v8.4.0</span>
+
+- Default value: `OFF`
+- Possible values: `ON`, `OFF`
+- Controls whether to allow data retrieval via Get or BatchGet. If set to `ON`, the optimizer will force the selection of Coprocessor, while both Get and BatchGet will be disabled. Get and BatchGet do not support column projection, and in some scenarios, their execution cost is higher than Coprocessor requests, setting this to `ON` will result in better performance. The following are common cases where forcing Coprocessor selection is recommended:
+	- Wide tables with many columns, where applications only query a smallsubset of columns.
+	- Tables containing JSON columns with large JSON values, where queries either do not retrieve the JSON columns or only extract small portions of the JSON content.
+	 
 ### [`52869`](https://github.com/pingcap/tidb/issues/52869) <span class="version-mark">New in v8.1.0</span>
 
 - Default value: `OFF`
