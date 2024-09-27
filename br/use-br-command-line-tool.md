@@ -78,7 +78,7 @@ To back up cluster data, run the `tiup br backup` command. You can add the `full
 To start log backup and manage log backup tasks, run the `tiup br log` command.
 
 - [Start a log backup task](/br/br-pitr-manual.md#start-a-log-backup-task)
-- [Query the backup status](/br/br-pitr-manual.md#query-the-log-backup-status)
+- [Query the log backup status](/br/br-pitr-manual.md#query-the-log-backup-status)
 - [Pause and resume a log backup task](/br/br-pitr-manual.md#pause-and-resume-a-log-backup-task)
 - [Stop and restart a log backup task](/br/br-pitr-manual.md#stop-and-restart-a-log-backup-task)
 - [Clean up the backup data](/br/br-pitr-manual.md#clean-up-log-backup-data)

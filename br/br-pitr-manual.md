@@ -93,15 +93,17 @@ tiup br log start \
 
 > **Warning:**
 >
-> This is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, this feature is experimental. It is not recommended that you use it in production environments. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-BR supports encrypting log backup data before uploading to the backup storage.
+BR enables you to encrypt log backup data before uploading it to your backup storage.
 
-Since TiDB v8.4.0, you can encrypt log backup data by directly passing in the data key configuration parameters similair to [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data):
+Starting from TiDB v8.4.0, you can encrypt log backup data by passing the following parameters in the log backup command, which is similar to [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data):
 
 - `--log.crypter.method`: Encryption algorithm, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
 - `--log.crypter.key`: Encryption key in hexadecimal string format. It is a 128-bit (16 bytes) key for the algorithm `aes128-ctr`, a 24-byte key for the algorithm `aes192-ctr`, and a 32-byte key for the algorithm `aes256-ctr`.
 - `--log.crypter.key-file`: The key file. You can directly pass in the file path where the key is stored as a parameter without passing in the `crypter.key`.
+
+The following is an example:
 
 ```shell
 tiup br log start \
@@ -112,10 +114,12 @@ tiup br log start \
     --log.crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-However, in a more serious encryption scenario, you might not want to pass in the fixed encryption key in the command line. Instead, you can use a master key based encryption system to manage encryption keys. Master key based encryption uses different data key to encrypt different log backup files, and it supports master key rotation.
+However, in scenarios with higher security requirements, you might not want to pass a fixed encryption key directly in the command line. To further enhance security, you can use a master key based encryption system to manage encryption keys. This system generates different data keys to encrypt different log backup files and supports master key rotation.
 
-- `--master-key-crypter-method`: Encryption algorithm to encrypt log backup files, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`.
-- `--master-key`: Master key configuration. It can be local disk based master key or cloud kms based master key.
+- `--master-key-crypter-method`: Encryption algorithm, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
+- `--master-key`: Master key configuration. It can be a master key stored on a local disk or a master key managed by a cloud Key Management Service (KMS).
+
+Encrypt using a master key stored on a local disk:
 
 ```shell
 tiup br log start \
@@ -126,14 +130,12 @@ tiup br log start \
     --master-key "local:///path/to/master.key"
 ```
 
-or
+Encrypt using a master key managed by a cloud KMS:
 
 ```shell
 ...
     --master-key "aws-kms:///${AWS_KMS_KEY_ID}?AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}&AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}&REGION=${AWS_REGION}"
 ```
-
-or
 
 ```shell
 ...
@@ -463,11 +465,11 @@ Restore KV Files <--------------------------------------------------------------
 
 > **Warning:**
 >
-> This is an experimental feature. It is not recommended that you use it in the production environment.
+> Currently, this feature is experimental. It is not recommended that you use it in production environments. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-BR supports restoring encrypted log backup data. You need to specify the decryption parameters to restore the data. Ensure that the decryption key is the same as the one used for encryption. Otherwise, the data fails to be restored.
+To restore encrypted log backup data, you need to pass the corresponding decryption parameters in the restore command. Make sure that the decryption parameters are correct. If the decryption algorithm or key is incorrect, the data cannot be restored.
 
-Usage example:
+The following is an example:
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
@@ -479,7 +481,7 @@ tiup br restore point --pd="${PD_IP}:2379"
 --log.crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-or if you are using master key encryption for log backup
+If a log backup is encrypted using a master key, you can decrypt and restore the backup data using the following command:
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
