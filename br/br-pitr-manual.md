@@ -116,7 +116,7 @@ tiup br log start \
 
 However, in scenarios with higher security requirements, you might not want to pass a fixed encryption key directly in the command line. To further enhance security, you can use a master key based encryption system to manage encryption keys. This system generates different data keys to encrypt different log backup files and supports master key rotation.
 
-- `--master-key-crypter-method`: Encryption algorithm, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
+- `--master-key-crypter-method`: Encryption algorithm based on the master key, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
 - `--master-key`: Master key configuration. It can be a master key stored on a local disk or a master key managed by a cloud Key Management Service (KMS).
 
 Encrypt using a master key stored on a local disk:
