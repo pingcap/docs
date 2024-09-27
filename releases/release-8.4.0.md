@@ -62,9 +62,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td>Vector search is a search method based on data semantics, which provides more relevant search results. As one of the core functions of AI and large language models (LLMs), vector search can be used in various scenarios such as Retrieval-Augmented Generation (RAG), semantic search, and recommendation systems.</td>
   </tr>
   <tr>
-    <td rowspan="2">DB Operations and Observability</td>
+    <td rowspan="3">DB Operations and Observability</td>
     <td>Display TiKV and TiDB CPU times in memory tables**tw@hfxsd 1877**</td>
     <td>The CPU time is now integrated into a system table, displayed alongside other metrics for sessions or SQL, letting you observe high CPU consumption operations from multiple perspectives, and improves diagnostic efficiency. This is especially useful for diagnosing scenarios such as CPU spikes in instances or read/write hotspots in clusters.</td>
+  </tr>
+  <tr>
+    <td>Support viewing aggregated TiKV CPU time by table or database **tw@lilin90 1878**</td>
+    <td>When hotspot issues are not caused by individual SQL statements, using the aggregated CPU time by table or database level in <a href="https://docs.pingcap.com/zh/tidb/v8.4/top-sql">TOP SQL</a> can help you quickly identify the tables or applications responsible for the hotspots, significantly improving the efficiency of diagnosing hotspot and CPU consumption issues.</td>
   </tr>
   <tr>
     <td>Support backing up TiKV instances with IMDSv2 service enabled**tw@hfxsd 1945**</td>
