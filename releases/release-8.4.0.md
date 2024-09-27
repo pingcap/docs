@@ -29,7 +29,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.4/partitioned-table#global-indexes">Global indexes for partitioned tables (GA)</a>**tw@hfxsd 1961**</td>
-    <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned columns, and remove the restriction that a unique key must contain the partition key. This feature extends the usage scenarios of TiDB partitioned tables and avoids some of the application modification work that might be required for data migration.</td>
+    <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned columns, and remove the restriction that a unique key must contain the partition key. This feature extends the usage scenarios of TiDB partitioned tables, and avoids some of the application modification work required for data migration.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">Concurrent TSO retrieval for TiDB</a>**tw@qiancai 1893**</td>
@@ -37,7 +37,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td>Improve query performance for cached tables**tw@hfxsd 1965**</td>
-    <td>Improve query performance for index scanning on cached tables, with improvements of up to 5.4 times in some scenarios. For high-speed queries on small tables, cached tables can significantly enhance overall performance.</td>
+    <td>Improve query performance for index scanning on cached tables, with improvements of up to 5.4 times in some scenarios. For high-speed queries on small tables, using cached tables can significantly enhance overall performance.</td>
   </tr>
   <tr>
     <td rowspan="4">Reliability and Availability</td>
@@ -45,8 +45,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td>Runaway Queries offer an effective way to mitigate the impact of unexpected SQL performance issues on systems. TiDB v8.4.0 introduces the number of keys processed by the Coprocessor (<code>PROCESSED_KEYS</code>) and request units (<code>RU</code>) as identifying conditions, and puts identified queries into the specified resource group for more precise identification and control of runaway queries.</td>
   </tr>
   <tr>
-    <td>Support setting resource usage caps for background tasks for resource control **tw@hfxsd 1909**</td>
-    <td>By setting a percentage cap on background tasks of resource control, you can manage their resource consumption based on the needs of different business systems. This ensures background tasks consume minimal resources, maintaining the service quality of online operations.</td>
+    <td>Support setting the maximum limit on resource usage for background tasks of resource control **tw@hfxsd 1909**</td>
+    <td>By setting a maximum percentage limit on background tasks of resource control, you can control their resource consumption based on the needs of different application systems. This keeps background task consumption at a low level and ensures the quality of online services.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.4/tiproxy-traffic-replay">TiProxy supports traffic capture and replay</a> (experimental)**tw@Oreoxmt 1942**</td>
@@ -64,11 +64,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   <tr>
     <td rowspan="2">DB Operations and Observability</td>
     <td>Display TiKV and TiDB CPU times in memory tables**tw@hfxsd 1877**</td>
-    <td>CPU times are now integrated into a system table and displayed alongside other session or SQL metrics, allowing for easier observation of operations with high CPU consumption from multiple perspectives, improving diagnostic efficiency. This is particularly useful for diagnosing instances with CPU spikes or read/write hotspots in the cluster.</td>
+    <td>The CPU time is now integrated into a system table, displayed alongside other metrics for sessions or SQL, letting you observe high CPU consumption operations from multiple perspectives, and improves diagnostic efficiency. This is especially useful for diagnosing scenarios such as CPU spikes in instances or read/write hotspots in clusters.</td>
   </tr>
   <tr>
     <td>Support backing up TiKV instances with IMDSv2 service enabled**tw@hfxsd 1945**</td>
-    <td><a href="https://aws.amazon.com/cn/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/">AWS EC2 now uses IMDSv2 as the default metadata service</a>. TiDB supports data backups from TiKV instances with IMDSv2 enabled, enhancing your ability to run TiDB clusters in public cloud environments.</td>
+    <td><a href="https://aws.amazon.com/cn/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/">AWS EC2 now uses IMDSv2 as the default metadata service</a>. TiDB supports backing up data from TiKV instances that have IMDSv2 enabled, helping you run TiDB clusters more effectively in public cloud services.</td>
   </tr>
   <tr>
     <td rowspan="1">Security</td>
