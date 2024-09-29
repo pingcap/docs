@@ -64,7 +64,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) | Y | Y | Y | Y | Y | Y | N | N | N | N | N | N |
 | [Foreign key](/constraints.md#foreign-key) | E | E | E | E | E | E | N | N | N | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | Y | Y | Y | Y | Y | N | N | N | N | N | N |
-| [Global index](/partitioned-table.md#global-indexes) | E | E |  N |  N | N  | N | N | N | N | N | N | N |
+| [Global index](/partitioned-table.md#global-indexes) | Y | E |  N |  N | N  | N | N | N | N | N | N | N |
 
 ## SQL statements
 
