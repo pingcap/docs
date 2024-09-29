@@ -200,7 +200,7 @@ If the application logic relies on the locking or lock waiting mechanisms, or if
 
 In v6.0.0, TiKV introduces the feature of in-memory pessimistic lock. When this feature is enabled, pessimistic locks are usually stored in the memory of the Region leader only, and are not persisted to disk or replicated through Raft to other replicas. This feature can greatly reduce the overhead of acquiring pessimistic locks and improve the throughput of pessimistic transactions.
 
-When the memory usage of in-memory pessimistic locks exceeds the memory threshold of the Region or the TiKV node, the acquisition of pessimistic locks turns to the [pipelined locking process](#pipelined-locking-process). When the Region is merged or the leader is transferred, to avoid the loss of the pessimistic lock, TiKV writes the in-memory pessimistic lock to disk and replicates it to other replicas.
+When the memory usage of in-memory pessimistic locks exceeds the memory threshold of the [Region](/tikv-configuration-file.md#in-memory-peer-size-limit-span-classversion-marknew-in-v840span) or the [TiKV](/tikv-configuration-file.md#in-memory-instance-size-limit-span-classversion-marknew-in-v840span) node, the acquisition of pessimistic locks turns to the [pipelined locking process](#pipelined-locking-process). When the Region is merged or the leader is transferred, to avoid the loss of the pessimistic lock, TiKV writes the in-memory pessimistic lock to disk and replicates it to other replicas.
 
 The in-memory pessimistic lock performs similarly to the pipelined locking process, which does not affect the lock acquisition when the cluster is healthy. However, when network isolation occurs in TiKV or a TiKV node is down, the acquired pessimistic lock might be lost.
 
@@ -219,4 +219,22 @@ To dynamically disable this feature, modify the TiKV configuration dynamically:
 
 ```sql
 set config tikv pessimistic-txn.in-memory='false';
+```
+
+Since v8.4.0, the region memory size limit and instance size limit of in-memory pessimistic locks could be configured
+by the configuration file of TiKV:
+
+```toml
+[pessimistic-txn]
+in-memory-peer-size-limit = "512KiB"
+in-memory-instance-size-limit = "100MiB"
+```
+
+These configurations could also be changed dynamically by:
+
+{{< copyable "sql" >}}
+
+```sql
+set config tikv `pessimistic-txn.in-memory-peer-size-limit`="512KiB";
+set config tikv `pessimistic-txn.in-memory-instance-size-limit`="100MiB";
 ```
