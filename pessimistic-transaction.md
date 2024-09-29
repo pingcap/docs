@@ -221,8 +221,7 @@ To dynamically disable this feature, modify the TiKV configuration dynamically:
 set config tikv pessimistic-txn.in-memory='false';
 ```
 
-Since v8.4.0, the region memory size limit and instance size limit of in-memory pessimistic locks could be configured
-by the configuration file of TiKV:
+Since v8.4.0, the region memory size limit and instance size limit of in-memory pessimistic locks could be configured by the configuration file of TiKV:
 
 ```toml
 [pessimistic-txn]
