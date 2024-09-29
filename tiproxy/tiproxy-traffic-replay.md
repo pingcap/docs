@@ -70,7 +70,7 @@ Traffic replay is not suitable for the following scenarios:
     tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --password="123456" --input="/tmp/traffic"
     ```
 
-    Since all traffic runs under user `u1`, ensure `u1` can access all databases and tables. If no such user exists, create one.
+    Because all traffic runs under user `u1`, ensure `u1` can access all databases and tables. If no such user exists, create one.
 
     For more information, see [`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay).
 
