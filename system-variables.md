@@ -2421,10 +2421,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: `ON`. The default value is `OFF` for v8.3.0 and earlier versions.
 - This variable controls whether Index Join is supported when the inner table has `Selection`, `Aggregation`, or `Projection` operators on it. The default value `OFF` means that Index Join is not supported in this scenario.
-    - The default value of this variable changes from `OFF` to `ON` starting from v8.4.0.
-    - If your cluster is upgraded from an earlier version smaller than v7.0.0, the default value of `tidb_enable_inl_join_inner_multi_pattern` will be `OFF`.
+- If you upgrade your TiDB cluster from a version earlier than v7.0.0 to v8.4.0 or later, this variable is set to `OFF` by default, indicating that Index Join is not supported in this scenario.
 
 ### tidb_enable_ordered_result_mode
 
