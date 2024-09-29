@@ -58,7 +58,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td rowspan="1">SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/vector-search-overview">Vector search (experimental)</a>**tw@qiancai 1898**</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/vector-search-overview">Vector search</a> (experimental) **tw@qiancai 1898**</td>
     <td>Vector search is a search method based on data semantics, which provides more relevant search results. As one of the core functions of AI and large language models (LLMs), vector search can be used in various scenarios such as Retrieval-Augmented Generation (RAG), semantic search, and recommendation systems.</td>
   </tr>
   <tr>
@@ -76,7 +76,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td rowspan="1">Security</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/br-pitr-manual#encrypt-log-backup-data">Client-side encryption of log backup data</a>**tw@qiancai 1920**</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/br-pitr-manual#encrypt-log-backup-data">Client-side encryption of log backup data</a> (experimental) **tw@qiancai 1920**</td>
     <td>Before uploading log backup data to your backup storage, you can encrypt the backup data to ensure its security during storage and transmission.</td>
   </tr>
 </tbody>
@@ -110,14 +110,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 * Optimize the execution efficiency of the hash join operator for TiDB (experimental) [#55153](https://github.com/pingcap/tidb/issues/55153) [#53127](https://github.com/pingcap/tidb/issues/53127) @[windtalker](https://github.com/windtalker) @[xzhangxian1008](https://github.com/xzhangxian1008) @[XuHuaiyu](https://github.com/XuHuaiyu) @[wshwsh12](https://github.com/wshwsh12) **tw@qiancai** <!--1633-->
 
-    In v8.4.0, TiDB introduces an optimized version of the hash join operator to improve its execution efficiency. Currently, the optimized version of the hash join applies only to inner join and outer join operations and is disabled by default. To enable this optimized version, configure the [tidb_hash_join_version](/system-variables.md#tidb_hash_join_version-new-in-v840) system variable to `optimized`.
+    In v8.4.0, TiDB introduces an optimized version of the hash join operator to improve its execution efficiency. Currently, the optimized version of the hash join applies only to inner join and outer join operations and is disabled by default. To enable this optimized version, configure the [`tidb_hash_join_version`](/system-variables.md#tidb_hash_join_version-new-in-v840) system variable to `optimized`.
 
     For more information, see [documentation](/system-variables.md#tidb_hash_join_version-new-in-v840).
 
-* Support pushing down the following string functions to TiKV [#17529](https://github.com/tikv/tikv/issues/17529) @[gengliqi](https://github.com/gengliqi) **tw@qiancai** <!--1716-->
+* Support pushing down the following date functions to TiKV [#17529](https://github.com/tikv/tikv/issues/17529) @[gengliqi](https://github.com/gengliqi) **tw@qiancai** <!--1716-->
 
     * `DATE_ADD()`
     * `DATE_SUB()`
+    * `ADDDATE()`
+    * `SUBDATE()`
 
   For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
 
@@ -222,7 +224,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     To start vector search, you only need to create a table with vector data types, insert vector data, and then perform a query of vector data. You can also perform mixed queries of vector data and traditional relational data.
 
-    To enhance the performance of vector search, you can create and use [vector search indexes](vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Therefore, before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
+    To enhance the performance of vector search, you can create and use [vector search indexes](vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
 
     For more information, see [documentation](/vector-search-overview.md).
 
