@@ -17,15 +17,15 @@ Starting from TiProxy v1.3.0, you can use TiProxy to capture access traffic in a
 
 Traffic replay is suitable for the following scenarios:
 
-- **Validate TiDB version upgrades**: Replay production traffic on a test cluster with the new version to verify if the new TiDB version can successfully execute all SQL statements.
-- **Assess change impact**: Simulate production traffic on a test cluster to validate the impact of changes on the cluster. For example, verify the effects before changing configuration items or system variables, altering table structures, or enabling new TiDB features.
-- **Validate performance before TiDB scaling**: Replay traffic at corresponding rates on a test cluster with the new scale to verify if the performance meets requirements. For example, to plan a 50% cluster downscale for cost savings, replay traffic at half speed to verify if SQL latency meets requirements after scaling.
+- **Validate TiDB version upgrades**: Replay production traffic on a test cluster with a new TiDB version to verify if the new TiDB version can successfully execute all SQL statements.
+- **Assess change impact**: Simulate production traffic on a test cluster to validate the impact of changes on the cluster. For example, verify the effects before modifying configuration items or system variables, altering table schemas, or enabling new TiDB features.
+- **Validate performance before TiDB scaling**: Replay traffic at corresponding rates on a test cluster with a new scale to verify if the performance meets requirements. For example, to plan a 50% cluster downscale for cost savings, replay traffic at half speed to verify if SQL latency meets requirements after scaling.
 - **Test performance limits**: Replay traffic multiple times on a test cluster of the same scale, increasing the replay rate each time to test the throughput limit of that scale and assess whether performance meets future business growth needs.
 
 Traffic replay is not suitable for the following scenarios:
 
 - Verify SQL compatibility between TiDB and MySQL: TiProxy only supports reading traffic files it generates and cannot capture traffic from MySQL for replay on TiDB.
-- Compare SQL execution results between TiDB versions: TiProxy only verifies if SQL statements execute successfully and does not compare results.
+- Compare SQL execution results between TiDB versions: TiProxy only verifies if SQL statements execute successfully but does not compare results.
 
 ## Usage
 
@@ -62,7 +62,7 @@ Traffic replay is not suitable for the following scenarios:
 3. Copy the traffic file directory to the test cluster's TiProxy instance.
 4. Use [`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay) to connect to the test cluster's TiProxy instance and start replaying traffic.
 
-    By default, SQL statements are executed at the same rate as in the production cluster, and database connections correspond one-to-one with the production cluster to simulate the production load and ensure consistent transaction execution order.
+    By default, SQL statements are executed at the same rate as in the production cluster, and each database connection corresponds to a connection in the production cluster to simulate the production load and ensure consistent transaction execution order.
 
     For example, the following command connects to the TiProxy instance at `10.0.1.10:3080` using username `u1` and password `123456`, reads traffic files from the `/tmp/traffic` directory on the TiProxy instance, and replays the traffic:
 
@@ -80,7 +80,7 @@ Traffic replay is not suitable for the following scenarios:
 
     The `fail` table stores failed SQL statements, with the following fields:
 
-    - `cmd_type`: the type of failed SQL statement, such as `Query` (execute an ordinary statement), `Prepare` (prepare a statement), and `Execute` (execute a prepared statement).
+    - `cmd_type`: the type of a failed SQL statement, such as `Query` (execute an ordinary statement), `Prepare` (prepare a statement), and `Execute` (execute a prepared statement).
     - `digest`: the digest of the failed SQL statement.
     - `sample_stmt`: the SQL text when the statement first failed.
     - `sample_err_msg`: the error message when the SQL statement failed.
@@ -91,20 +91,20 @@ Traffic replay is not suitable for the following scenarios:
 
     The `other_errors` table stores unexpected errors, such as network errors or database connection errors, with the following fields:
 
-    - `err_type`: the type of error, represented by a brief error message. For example, `i/o timeout`.
+    - `err_type`: the type of error, presented as a brief error message. For example, `i/o timeout`.
     - `sample_err_msg`: the complete error message when the error first occurred.
     - `sample_replay_time`: the time when the error occurred during replay. You can use this to view error information in the TiDB log file.
     - `count`: the number of occurrences for this error.
 
     > **Note:**
     >
-    > The table structure of `tiproxy_traffic_report` might change in future versions. It is not recommended to directly read data from `tiproxy_traffic_report` in your application or tool development.
+    > The table schema of `tiproxy_traffic_report` might change in future versions. It is not recommended to directly read data from `tiproxy_traffic_report` in your application or tool development.
 
 ## Test throughput
 
 To test cluster throughput, use the `--speed` option to adjust the replay rate.
 
-For example, `--speed=2` executes SQL statements at twice the rate, halving the total replay time:
+For example, `--speed=2` executes SQL statements at twice the rate, reducing the total replay time by half:
 
 ```shell
 tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --password="123456" --input="/tmp/traffic" --speed=2
@@ -114,7 +114,7 @@ Increasing the replay rate only reduces idle time between SQL statements and doe
 
 ## View and manage tasks
 
-During capture and replay, tasks automatically stop if unknown errors occur. To view current task progress or error information from the last task, use the [`tiproxyctl traffic show`](/tiproxy/tiproxy-command-line-flags.md#traffic-show) command:
+During capture and replay, tasks automatically stop if unknown errors occur. To view the current task progress or error information from the last task, use the [`tiproxyctl traffic show`](/tiproxy/tiproxy-command-line-flags.md#traffic-show) command:
 
 ```shell
 tiproxyctl traffic show --host 10.0.1.10 --port 3080
@@ -147,7 +147,7 @@ For more information, see [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command
 
 ## Limitations
 
-- TiProxy only supports replaying traffic files captured by TiProxy and does not support other file formats. Therefore, the production cluster must first use TiProxy to capture traffic.
+- TiProxy only supports replaying traffic files captured by TiProxy and does not support other file formats. Therefore, make sure to capture traffic from the production cluster using TiProxy first.
 - TiProxy traffic replay does not support filtering SQL types and DML and DDL statements are replayed. Therefore, you need to restore the cluster data to its pre-replay state before replaying.
 - TiProxy traffic replay does not support testing [Resource Control](/tidb-resource-control.md) and [privilege management](/privilege-management.md) because TiProxy uses the same username to replay traffic.
 - TiProxy does not support replaying [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statements.

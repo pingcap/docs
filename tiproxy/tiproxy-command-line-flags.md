@@ -54,7 +54,7 @@ ls `tiup --binary tiproxy`ctl
 
 Compilation environment requirement: [Go](https://golang.org/) 1.21 or later
 
-Compilation procedures: Go to the root directory of the [TiProxy project](https://github.com/pingcap/tiproxy), use the `make` command to compile, and generate `tiproxyctl`.
+Compilation procedures: Go to the root directory of the [TiProxy project](https://github.com/pingcap/tiproxy), use the `make` command to compile and generate `tiproxyctl`.
 
 ```shell
 git clone https://github.com/pingcap/tiproxy.git
@@ -183,11 +183,11 @@ Options:
 - `--username`: (required) specifies the database username for replay.
 - `--password`: (optional) specifies the password for the username. The default value is an empty string `""`.
 - `--input`: (required) specifies the directory containing traffic files.
-- `--speed`: (optional) specifies the replay speed multiplier. The range is `[0.1, 10]`. The default value of 1 indicates replay at original speed.
+- `--speed`: (optional) specifies the replay speed multiplier. The range is `[0.1, 10]`. The default value is `1`, indicating replay at the original speed.
 
 Example:
 
-The following command connects to the TiProxy instance at `10.0.1.10:3080` using username `u1` and password `123456`, reads traffic files from the `/tmp/traffic` directory on the TiProxy instance, and replays traffic at twice the original speed:
+The following command connects to the TiProxy instance at `10.0.1.10:3080` using username `u1` and password `123456`, reads traffic files from the `/tmp/traffic` directory on the TiProxy instance, and replays the traffic at twice the original speed:
 
 ```shell
 tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --password="123456" --input="/tmp/traffic" --speed=2
@@ -203,9 +203,9 @@ The `tiproxyctl traffic show` command is used to display historical capture and 
 
 The `status` field in the output indicates the task status, with the following possible values:
 
-- `done`: task completed normally.
-- `canceled`: task was canceled. You can check the `error` field for the reason.
-- `running`: task is running. You can check the `progress` field for  completion percentage.
+- `done`: the task completed normally.
+- `canceled`: the task was canceled. You can check the `error` field for the reason.
+- `running`: the task is running. You can check the `progress` field for the completion percentage.
 
 Example output:
 
