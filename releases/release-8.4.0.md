@@ -110,7 +110,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 * Optimize the execution efficiency of the hash join operator for TiDB (experimental) [#55153](https://github.com/pingcap/tidb/issues/55153) [#53127](https://github.com/pingcap/tidb/issues/53127) @[windtalker](https://github.com/windtalker) @[xzhangxian1008](https://github.com/xzhangxian1008) @[XuHuaiyu](https://github.com/XuHuaiyu) @[wshwsh12](https://github.com/wshwsh12) **tw@qiancai** <!--1633-->
 
-    In v8.4.0, TiDB introduces an optimized implementation of the hash join operator to improve its execution efficiency. Currently, this optimized implementation of hash join applies only to inner join and outer join operations and is disabled by default. To enable this optimized implementation, configure the [tidb_hash_join_version](/system-variables.md#tidb_hash_join_version-new-in-v840) system variable to `optimized`.
+    In v8.4.0, TiDB introduces an optimized version of the hash join operator to improve its execution efficiency. Currently, the optimized version of the hash join applies only to inner join and outer join operations and is disabled by default. To enable this optimized version, configure the [tidb_hash_join_version](/system-variables.md#tidb_hash_join_version-new-in-v840) system variable to `optimized`.
 
     For more information, see [documentation](/system-variables.md#tidb_hash_join_version-new-in-v840).
 
