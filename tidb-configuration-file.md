@@ -519,7 +519,7 @@ Configuration items related to performance.
 
 - The size limit of a single transaction in TiDB.
 - Default value: `104857600` (in bytes)
-- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
+- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB).
 - In TiDB v6.5.0 and later versions, this configuration is no longer recommended. The memory size of a transaction will be accumulated into the memory usage of the session, and the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) variable will take effect when the session memory threshold is exceeded. To be compatible with previous versions, this configuration works as follows when you upgrade from an earlier version to TiDB v6.5.0 or later:
     - If this configuration is not set or is set to the default value (`104857600`), after an upgrade, the memory size of a transaction will be accumulated into the memory usage of the session, and the `tidb_mem_quota_query` variable will take effect.
     - If this configuration is not defaulted (`104857600`), it still takes effect and its behavior on controlling the size of a single transaction remains unchanged before and after the upgrade. This means that the memory size of the transaction is not controlled by the `tidb_mem_quota_query` variable.
@@ -805,37 +805,6 @@ Configuration items related to the transaction latch. These configuration items 
 
 - The number of slots corresponding to Hash, which automatically adjusts upward to an exponential multiple of 2. Each slot occupies 32 Bytes of memory. If set too small, it might result in slower running speed and poor performance in the scenario where data writing covers a relatively large range (such as importing data).
 - Default value: `2048000`
-
-## binlog
-
-Configurations related to TiDB Binlog.
-
-### `enable`
-
-- Enables or disables binlog.
-- Default value: `false`
-
-### `write-timeout`
-
-- The timeout of writing binlog into Pump. It is not recommended to modify this value.
-- Default: `15s`
-- unit: second
-
-### `ignore-error`
-
-- Determines whether to ignore errors occurred in the process of writing binlog into Pump. It is not recommended to modify this value.
-- Default value: `false`
-- When the value is set to `true` and an error occurs, TiDB stops writing binlog and add `1` to the count of the `tidb_server_critical_error_total` monitoring item. When the value is set to `false`, the binlog writing fails and the entire TiDB service is stopped.
-
-### `binlog-socket`
-
-- The network address to which binlog is exported.
-- Default value: ""
-
-### `strategy`
-
-- The strategy of Pump selection when binlog is exported. Currently, only the `hash` and `range` methods are supported.
-- Default value: `range`
 
 ## status
 
