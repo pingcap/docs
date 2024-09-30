@@ -413,7 +413,7 @@ Starting from v7.4.0, the TiDB resource control feature supports managing backgr
 #### `BACKGROUND` parameters
 
 - `TASK_TYPES`: specifies the task types that need to be managed as background tasks. Use commas (`,`) to separate multiple task types.
-- `UTILIZATION_LIMIT`: specifies the maximum resource percentage (0-100) of each TiKV instance that background tasks can consume. By default, the resource granted for background tasks are calculated based on the total resource quota and the current foreground workload dynamically. If `UTILIZATION_LIMIT` is configured, the resource granted for background tasks will not exceed this limit.
+- `UTILIZATION_LIMIT`: limits the maximum percentage  (0-100) of resources that background tasks can consume on each TiKV node. By default, TiKV calculates the available resources for background tasks based on the total resources of the node and the resources currently occupied by the foreground tasks. If `UTILIZATION_LIMIT` is configured, the resource allocated to background tasks will not exceed this limit.
 
 TiDB supports the following types of background tasks:
 
@@ -445,7 +445,7 @@ By default, the task types that are marked as background tasks are `""`, and the
 
 #### Examples
 
-1. Modify the `default` resource group and mark `br` and `ddl` as background tasks, and set background tasks resource limit to 30%.
+1. Modify the `default` resource group by marking `br` and `ddl` as background tasks and setting the resource limit of background tasks to 30%.
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30);

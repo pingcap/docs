@@ -2428,12 +2428,12 @@ Configuration items related to resource control of the TiKV storage layer.
 
 ### `priority-ctl-strategy` <span class="version-mark">New in v8.4.0</span>
 
-Configure the control strategy for low priority tasks. TiKV ensures the priority execution of higher priority tasks by applying dynamic quota limit to low-priority tasks. This control strategy is used to calculates the quota for low priority tasks.
+Specifies the flow control strategy for low-priority tasks. TiKV ensures that higher priority tasks are prioritized for execution by applying flow control to low-priority tasks.
 
 + Value options:
-    + `aggressive`: using this strategy, the flow control policy will prioritize the performance of high-priority tasks, ensuring that the throughput and latency of high-priority tasks are basically unaffected, but low-priority tasks will run slower.
-    + `moderate`: using this strategy, TiKV will impose a balanced flow control limit on low-priority tasks, ensuring that low-priority tasks can use more system available resources while causing little impact on high-priority tasks.
-    + `conservative`: using this strategy, the flow control policy will prioritize ensuring that system resources are fully utilized, and low-priority tasks will try to use available system resources as much as possible, resulting in a greater impact on the performance of high-priority tasks.
+    + `aggressive`: this policy prioritizes the performance of high-priority tasks, ensuring that the throughput and latency of high-priority tasks are largely unaffected, but low-priority tasks will run slower.
+    + `moderate`: this policy imposes a balanced flow control on low-priority tasks and has a lower impact on high-priority tasks.
+    + `conservative`: this policy prioritizes ensuring that system resources are fully utilized, allowing low-priority tasks to fully utilize system available resources as needed, and therefore has a greater performance impact on high-priority tasks.
 + Default value: `moderate`.
 
 ## split
