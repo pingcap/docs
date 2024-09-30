@@ -1,0 +1,182 @@
+---
+title: TiDB Performance Tips
+summary: Learn how to make TiDB run faster by adjusting settings and handling edege cases
+
+---
+
+# TiDB Performance Tips
+
+This guide shows you how to make TiDB run as fast as possible. We'll cover:
+- How to set up TiDB's settings
+- Best practices for common workloads
+- Ways to handle tricky performance issues
+
+These tips are great for when you're first trying out TiDB (what we call a Proof of Concept or PoC).
+
+> **Important Note:**
+>
+> To get the best speed in a PoC, we'll use some settings and features that aren't the default. These aren't meant for real production use.
+
+# Why This Matters
+
+Making TiDB run its best takes a lot of tweaking. In fact, more than half the time spent on PoCs is usually about improving performance.
+
+When testing TiDB, we usually try to stick to the default settings for stability. But to get really good performance, we often need to change some settings and use experimental features.
+
+To make PoCs faster and easier, we've put together some "out of the box" settings. These are more aggressive than our defaults, based on what we've learned from many PoCs and real-world systems. This guide explains these non-default settings and their pros and cons.
+
+# General Tips
+
+These suggested settings are safe to use when setting up a PoC cluster. They cover the most common tweaks needed during a PoC, including:
+- Caching query plans
+- Adjusting how TiDB figures out the best way to run queries
+- Using TiKV's Titan storage engine more aggressively
+
+## system variables
+
+```SQL 
+set global tidb_enable_instance_plan_cache=on;
+set global tidb_instance_plan_cache_max_size=2GiB;
+set global tidb_enable_non_prepared_plan_cache=on;
+set global tidb_ignore_prepared_cache_close_stmt=on;
+set global tidb_enable_inl_join_inner_multi_pattern=on;
+set global tidb_opt_derive_topn=on;
+set global tidb_runtime_filter_mode=LOCAL;
+set global tidb_opt_enable_mpp_shared_cte_execution=on;
+set global tidb_rc_read_check_ts=on;
+set global tidb_guarantee_linearizability=off;
+set global pd_enable_follower_handle_region=on;
+set global tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:ON,52869:ON';
+```
+
+### Justifications
+
+| variables| Pro | Cons | 
+| ---------| ---- | ----|
+| tidb_enable_instance_plan_cache tidb_instance_plan_cache_max_size| Instance Plan Cache is to replace the old session-level plan cache. The instance plan cache allows effective use of the plan cache in scenarios with many prepared statements or many connections | The feature is experimental | 
+| tidb_enable_non_prepared_plan_cache| Turn on none prepared plan cache for application not using prepared statement to reduce the compile cost | - | 
+| tidb_ignore_prepared_cache_close_stmt| Cache plan for application using prepared statements but close the plan after every single execution| - | 
+| tidb_enable_inl_join_inner_multi_pattern| Index Join is supported when the inner table has Selection or Projection operators on it | - | 
+| tidb_opt_derive_topn| enable the optimization rule of Deriving TopN or Limit from window functions | Only limited to ROW_NUMBER() window function | 
+| tidb_runtime_filter_mode| By default enabling runtime filter | The variable is added to v7.2.0, and for safety, it's disabled by default | 
+| tidb_opt_enable_mpp_shared_cte_execution| the non-recursive Common Table Expressions (CTE) can be executed on TiFlash MPP | The feature is experimental  | 
+| tidb_rc_read_check_ts| for read-committed isolation level, Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency. | This feature is incompatible with replica-read. | 
+| tidb_guarantee_linearizability| the process of fetching TS for commit TS from the PD server is skipped | with the cost that only causal consistency is guaranteed but not linearizability.  | 
+| pd_enable_follower_handle_region| enable the Active PD Follower feature, TiDB evenly distributes requests for Region information to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader| The feature is experimental | 
+
+#### fix control explanation
+Use aggressive optimizer controls to enable more possible optimizations.
+
+- 44262:ON: Allow the use of Dynamic pruning mode to access the partitioned table when the GlobalStats are missing.
+- 44389:ON: For filters such as c = 10 and (a = 'xx' or (a = 'kk' and b = 1)), this variable enable to try to build more comprehensive scan ranges for IndexRangeScan.
+- 44823:10000: To save memory, Plan Cache does not cache queries with parameters exceeding the specified number of this variable. Increased from from 200 to 10000 to make plan cache availabe for query with long in-list;
+- 44830:ON: Plan Cache is allowed to cache execution plans with the PointGet operator generated during physical optimization.
+- 44855:ON: Enable IndexJoin when the Probe side of an IndexJoin operator contains a Selection operator.
+- 52869:ON: Enable indexmerge if the optimizer can choose the single index scan method (other than full table scan) for a query plan
+
+## TiDB Configurations
+
+```toml
+[performance]
+concurrently-init-stats: true
+force-init-stats: true
+lite-init-stats: false
+
+[tikv-client]
+region-cache-ttl = 1200
+```
+
+### Justifications
+
+| configurations | Pro | Cons | 
+| ---------| ---- | ----|
+| concurrently-init-stats force-init-stats lite-init-stats| make sure the statistics is full loaded and ready during TiDB startup | need to wait more time during TiDB startup and more memory usage | 
+| region-cache-ttl| Increase from 10m to 20m, to reduce the GetRegion request to pd server | Higher possibility for leaders/region miss backoff if the data are changed and moved frequently | 
+
+## TiKV Configurations
+
+```toml
+[server]
+concurrent-send-snap-limit = 64
+concurrent-recv-snap-limit = 64
+snap-io-max-bytes-per-sec = "400MB"
+
+[rocksdb.titan]
+enabled = true
+[rocksdb.defaultcf.titan]
+min-blob-size = "1KB"
+blob-file-compression = "zstd"
+
+[storage.flow-control]
+l0-files-threshold = 60
+```
+
+### Justifications
+
+| configurations | Pro | Cons | 
+| ---------| ---- | ----|
+| concurrent-send-snap-limit concurrent-recv-snap-limit snap-io-max-bytes-per-sec | Increase the bandwidth to speed up tikv scale in/out operations, improve snapshot speed, scale-in/out is frequent operation during PoC| more impact on online traffic during scale operation | 
+| rocksdb.titan rocksdb.defaultcf.titan | RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.  To alleviate the bottleneck caused by limited disk throughput, you can improve performance by enabling Titan. | When Titan is enabled, there might be a slight performance degradation for range scans on the primary key. For more information, see Impact of min-blob-size on performance. | 
+| l0-files-threshold | increase the thrshhold to avoid unneccessary flow control | - | 
+
+## TiFlash Congiurations
+
+```toml
+[raftstore-proxy.server]
+snap-io-max-write-bytes-per-sec = "300MiB"
+```
+
+### Justifications
+
+| configurations | Pro | Cons | 
+| ---------| ---- | ----|
+| snap-io-max-write-bytes-per-sec | Increase the bandwidth to speed up data replication to TiFlash Nodes | more impact on online traffic during scale operation | 
+
+
+# Edge Cases
+
+These need to be identified and adjusted individually. The proposed solution works only for specific cases.
+
+## Avoid tso wait for small query with KV Cop request
+If the application allows stale reads, to avoid the wait time associated with TSO (Timestamp Oracle), you can use the tidb_low_resolution_tso setting in TiDB.
+
+```SQL
+set global tidb_low_resolution_tso=on;
+```
+
+### Justifications
+
+| configurations | Pro | Cons | 
+| ---------| ---- | ----|
+| tidb_low_resolution_tso| Enable stale read to avoid tso wait to improve the query latency | Application can accept stale read | 
+
+## Choose the proper mak chunk size for different workloads
+The tidb_max_chunk_size parameter in TiDB controls the maximum number of rows that can be processed in a single chunk during query execution. Adjusting this parameter based on the type of workload can optimize performance. Lower the default value for Pure OLTP  Workloads, increase the default value for Analytical Workloads.
+
+```SQL
+set global tidb_max_chunk_size=128;
+```
+
+### Justifications
+
+| configurations | Pro | Cons | 
+| ---------| ---- | ----|
+| tidb_max_chunk_size | Reduce from default 1024 to 128, reduce the memory allocation overhead, make the limit pushdown more efficient | Application can accept stale read | 
+
+## Too many MVCC versions
+If too many MVCC versions are observed during the PoC, either due to hot read/write spots or issues with garbage collection and compaction, you can mitigate this problem by enabling the in-memory engine. This feature is available as a hotfix. To enable the in-memory engine in TiKV by adding the following configuration to your TiKV configuration file. 
+
+> **Note:**
+>
+> The in-memory engine can help reduce the impact of excessive MVCC versions, but it may increase memory usage. Monitor your system closely after enabling this feature.
+
+   ```toml
+   [in-memory-engine]
+   enabled = true
+   gc-interval = "2m"
+   hard-limit-threshold = "8GB"
+   soft-limit-threshold = "7GB"
+   stop-limit-threshold = "5GB"
+   mvcc-amplification = 100
+   load-evict-interval = "4m"
+   ```
