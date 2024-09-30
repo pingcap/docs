@@ -80,7 +80,7 @@ Currently, the `help_topic` is NULL.
 ## System tables related to DDL statements
 
 * `tidb_ddl_history`: the history records of DDL statements
-* `tidb_ddl_jobs`: the metadata of DDL statements that are currently being executed by TiDB
+* `tidb_ddl_job`: the metadata of DDL statements that are currently being executed by TiDB
 * `tidb_ddl_reorg`: the metadata of physical DDL statements (such as adding indexes) that are currently being executed by TiDB
 
 ## Miscellaneous system tables
