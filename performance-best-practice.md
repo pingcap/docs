@@ -161,7 +161,33 @@ set global tidb_max_chunk_size=128;
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
-| tidb_max_chunk_size | Reduce from default 1024 to 128, reduce the memory allocation overhead, make the limit pushdown more efficient | Application can accept stale read | 
+| tidb_max_chunk_size | Reduce from default 1024 to 128, reduce the memory allocation overhead, make the limit pushdown more efficient | For the analytical workloads on TiKV, By adjusting tidb_max_chunk_size from 1024 to 128, the performance degradation is between 3.3% and 10.9% | 
+
+## tidb_txn_mode and tidb_dml_type
+
+Here is the guideline how to choose txn mode and dml type
+
+### Justifications
+
+| Type | Variable | Use case | 
+| ---------| ---- | ----|
+| Pipeline DML | session tidb_dml_type="bulk";  | "bulk" indicates the bulk DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB. 1) "bulk" mode is only suitable for scenarios where a large amount of data is written without conflicts. 2) "bulk" mode only takes effect on statements with auto-commit enabled, and requires the pessimistic-auto-commit configuration item to be set to false. | 
+| Optimistic mode | Set session tidb_txn_mode="optimistic"; | - begin .. insert..insert..insert...end; - No or a few write conflict - Use optimistic mode | 
+| pessimistic mode (by default) | Set session tidb_txn_mode="pessimistic"; | Use pessimistic and  standard for other cases | 
+
+## Group by and distinct pushdown to TiKV
+
+```SQL
+set global tidb_opt_agg_push_down=on;
+set global tidb_opt_distinct_agg_push_down=on;
+```
+
+
+| variables | Pro | Cons | 
+| ---------| ---- | ----|
+| tidb_opt_agg_push_down tidb_opt_distinct_agg_push_down| Low NDV (right scenario) | High NDV (bad scenario) | 
+
+
 
 ## Too many MVCC versions
 If too many MVCC versions are observed during the PoC, either due to hot read/write spots or issues with garbage collection and compaction, you can mitigate this problem by enabling the in-memory engine. This feature is available as a hotfix. To enable the in-memory engine in TiKV by adding the following configuration to your TiKV configuration file. 
@@ -180,3 +206,9 @@ If too many MVCC versions are observed during the PoC, either due to hot read/wr
    mvcc-amplification = 100
    load-evict-interval = "4m"
    ```
+
+## Disable auto analyze job during batch processing
+During batch processing, and manually gathering statistics when it's needed. It's advised to disable auto analyze, to avoid the frequent analyze jobs consuming too much resource
+```SQL
+set global tidb_enable_auto_analyze = off;
+```
