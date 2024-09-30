@@ -114,7 +114,7 @@ tiup br log start \
     --log.crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-However, in scenarios with higher security requirements, you might not want to pass a fixed encryption key directly in the command line. To further enhance security, you can use a master key based encryption system to manage encryption keys. This system generates different data keys to encrypt different log backup files and supports master key rotation.
+However, in scenarios with higher security requirements, you might not want to pass a fixed encryption key directly in the command line. To further enhance security, you can use a master key based encryption system to manage encryption keys. This system generates different data keys to encrypt different log backup files and supports master key rotation. You can configure it using the following parameters:
 
 - `--master-key-crypter-method`: Encryption algorithm based on the master key, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
 - `--master-key`: Master key configuration. It can be a master key stored on a local disk or a master key managed by a cloud Key Management Service (KMS).
@@ -130,12 +130,14 @@ tiup br log start \
     --master-key "local:///path/to/master.key"
 ```
 
-Encrypt using a master key managed by a cloud KMS:
+Encrypt using a master key managed by AWS KMS:
 
 ```shell
 ...
     --master-key "aws-kms:///${AWS_KMS_KEY_ID}?AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}&AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}&REGION=${AWS_REGION}"
 ```
+
+Encrypt using a master key managed by Google Cloud KMS:
 
 ```shell
 ...
