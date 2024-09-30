@@ -1,6 +1,6 @@
 ---
 title: tiup cluster scale-in
-summary: The `tiup cluster scale-in` command is used to scale in the cluster by taking specified nodes offline, removing them from the cluster, and deleting remaining files. Components like TiKV, TiFlash, and TiDB Binlog are handled asynchronously and require additional steps to check and clean up. The command also includes options for node specification, forceful removal, transfer timeout, and help information.
+summary: The `tiup cluster scale-in` command is used to scale in the cluster by taking specified nodes offline, removing them from the cluster, and deleting remaining files. Components like TiKV and TiFlash are handled asynchronously and require additional steps to check and clean up. The command also includes options for node specification, forceful removal, transfer timeout, and help information.
 ---
 
 # tiup cluster scale-in
@@ -9,9 +9,9 @@ The `tiup cluster scale-in` command is used to scale in the cluster, which takes
 
 ## Particular handling of components' offline process
 
-Because the TiKV, TiFlash, and TiDB Binlog components are taken offline asynchronously (which requires TiUP to remove the node through API first) and the stopping process takes a long time (which requires TiUP to continuously check whether the node is successfully taken offline), the TiKV, TiFlash, and TiDB Binlog components are handled particularly as follows:
+Because the TiKV and TiFlash components are taken offline asynchronously (which requires TiUP to remove the node through API first) and the stopping process takes a long time (which requires TiUP to continuously check whether the node is successfully taken offline), the TiKV and TiFlash components are handled particularly as follows:
 
-- For TiKV, TiFlash, and TiDB Binlog components:
+- For TiKV and TiFlash components:
 
     1. TiUP Cluster takes the node offline through API and directly exits without waiting for the process to be completed.
     2. To check the status of the nodes being scaled in, you need to execute the `tiup cluster display` command and wait for the status to become `Tombstone`.

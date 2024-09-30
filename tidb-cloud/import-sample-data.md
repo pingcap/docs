@@ -8,7 +8,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 This document describes how to import the sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
 <SimpleTab>
-<div label="AWS">
+<div label="Amazon S3">
 
 1. Open the **Import** page for your target cluster.
 
@@ -20,27 +20,25 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Configure the source data information. On the **Import** page:
+2. Select **Import data from S3**.
 
-    - For a TiDB Dedicated cluster, click **Import Data** in the upper-right corner.
-    - For a TiDB Serverless cluster, click the **import data from S3** link above the upload area.
+    If this is your first time importing data into this cluster, select **Import From Amazon S3**.
 
-    Fill in the following parameters:
+3. On the **Import Data from Amazon S3** page, configure the following source data information:
 
-    - **Data format**: select **SQL File**. TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.${suffix}.sql.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.sql.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.sql.gz`. Note that you only need to compress the data files, not the database or table schema files. The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-    - **Bucket URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`
+    - **Import File Count**: for the sample data, select **Multiple files**.
+    - **Included Schema Files**: for the sample data, select **Yes**.
+        - To import schema and data from the source, select **Yes**. This option imports SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
+        - To import into pre-created tables, select **No**. This enables you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+    - **Data Format**: select **SQL**. TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.${suffix}.sql.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.sql.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.sql.gz`. Note that you only need to compress the data files, not the database or table schema files. The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+    - **Folder URI** or **File URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
     - **Bucket Access**: for the sample data, you can only use a Role ARN to access its bucket. For your own data, you can use either an AWS access key or a Role ARN to access your bucket.
-        - **AWS Access Keys**: skip this option for the sample data.
-        - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`
+        - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`.
+        - **AWS Access Key**: skip this option for the sample data.
 
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region.
 
-3. You can choose to import into pre-created tables, or import schema and data from the source. When you import sample data, choose **Import schema and data from S3**.
-
-    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). 
-    - **Import schema and data from S3** allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
-
-4. Click **Start Import**.
+4. Click **Connect** > **Start Import**.
 
 </div>
 <div label="Google Cloud">
@@ -55,20 +53,23 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Click **Import Data** in the upper-right corner, and then fill in the following parameters:
+2. Click **Import Data** in the upper-right corner.
 
-    - **Data Format**: select **SQL File**. TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.${suffix}.sql.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.sql.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.sql.gz`. Note that you only need to compress the data files, not the database or table schema files. Note that you only need to compress the data files, not the database or table schema files. The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-    - **Bucket gsutil URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
+    If this is your first time importing data into this cluster, select **Import From GCS**.
+
+3. On the **Import Data from GCS** page, configure the following source data information:
+
+    - **Import File Count**: for the sample data, select **Multiple files**.
+    - **Included Schema Files**: for the sample data, select **Yes**.
+        - To import schema and data from the source, select **Yes**. This option imports SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
+        - To import into pre-created tables, select **No**. This enables you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+    - **Data Format**: select **SQL**. TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.${suffix}.sql.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.sql.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.sql.gz`. Note that you only need to compress the data files, not the database or table schema files. Note that you only need to compress the data files, not the database or table schema files. The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+    - **Folder URI** or **File URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
     - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
 
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region.
 
-3. You can choose to import into pre-created tables, or import schema and data from the source. When you import sample data, choose **Import schema and data from GCS**.
-
-    - **Import into pre-created tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore Your Data with AI-Assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md). 
-    - **Import schema and data from GCS** allows you to import SQL scripts that create a table along with its corresponding data stored in GCS directly into TiDB.
-
-4. Click **Start Import**.
+4. Click **Connect** > **Start Import**.
 
 </div>
 </SimpleTab>

@@ -25,6 +25,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 - The default value of the TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval) configuration item is changed from `1s` to `20s`. You can modify this configuration item to reduce the latency and improve the timeliness of the Stale Read data. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
 
+- The default value of the TiKV [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval) configuration item is changed from `"200ms"` to `"1s"` to reduce network traffic.
+
 ## Improvements
 
 + TiDB

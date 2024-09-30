@@ -11,35 +11,35 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) enables you to resume a failed changefeed, which saves your effort to recreate a new one.
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) enables you to resume a failed changefeed, which saves your effort to recreate a new one.
 
     For more information, see [Changefeed states](/tidb-cloud/changefeed-overview.md#changefeed-states).
 
 **Console changes**
 
-- Enhance the connection experience for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless).
+- Enhance the connection experience for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
 
-    Refine the **Connect** dialog interface to offer TiDB Serverless users a smoother and more efficient connection experience. In addition, TiDB Serverless introduces more client types and allows you to select the desired branch for connection.
+    Refine the **Connect** dialog interface to offer TiDB Cloud Serverless users a smoother and more efficient connection experience. In addition, TiDB Cloud Serverless introduces more client types and allows you to select the desired branch for connection.
 
-    For more information, see [Connect to TiDB Serverless](/tidb-cloud/connect-via-standard-connection-serverless.md).
+    For more information, see [Connect to TiDB Cloud Serverless](/tidb-cloud/connect-via-standard-connection-serverless.md).
 
 ## November 28, 2023
 
 **General changes**
 
-- [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) supports restoring SQL bindings from backups.
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) supports restoring SQL bindings from backups.
 
-    TiDB Dedicated now restores user accounts and SQL bindings by default when restoring from a backup. This enhancement is available for clusters of v6.2.0 or later versions, streamlining the data restoration process. The restoration of SQL bindings ensures the smooth reintegration of query-related configurations and optimizations, providing you with a more comprehensive and efficient recovery experience.
+    TiDB Cloud Dedicated now restores user accounts and SQL bindings by default when restoring from a backup. This enhancement is available for clusters of v6.2.0 or later versions, streamlining the data restoration process. The restoration of SQL bindings ensures the smooth reintegration of query-related configurations and optimizations, providing you with a more comprehensive and efficient recovery experience.
 
-    For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md).
+    For more information, see [Back up and restore TiDB Cloud Dedicated data](/tidb-cloud/backup-and-restore.md).
 
 **Console changes**
 
-- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) supports monitoring SQL statement RU costs.
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) supports monitoring SQL statement RU costs.
 
-    TiDB Serverless now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
+    TiDB Cloud Serverless now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
 
-    To check your SQL statement RU details, navigate to the **Diagnosis** page of [your TiDB Serverless cluster](https://tidbcloud.com/console/clusters) and then click the **SQL Statement** tab.
+    To check your SQL statement RU details, navigate to the **Diagnosis** page of [your TiDB Cloud Serverless cluster](https://tidbcloud.com/console/clusters) and then click the **SQL Statement** tab.
 
 ## November 21, 2023
 
@@ -55,9 +55,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- When you restore data from TiDB Dedicated clusters, the default behavior is now modified from restoring without user accounts to restoring with all user accounts.
+- When you restore data from TiDB Cloud Dedicated clusters, the default behavior is now modified from restoring without user accounts to restoring with all user accounts.
 
-    For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
+    For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
 - Introduce event filters for changefeeds.
 
@@ -90,11 +90,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) supports dual region backup (beta) on Google Cloud.
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) supports dual region backup (beta) on Google Cloud.
 
-    TiDB Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to the [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr) feature of Google Cloud Storage, the pair of regions that you use for the dual-region in TiDB Dedicated must be within the same multi-region. For example, Tokyo and Osaka are in the same multi-region `ASIA` so they can be used together for dual-region storage.
+    TiDB Cloud Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to the [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr) feature of Google Cloud Storage, the pair of regions that you use for the dual-region in TiDB Cloud Dedicated must be within the same multi-region. For example, Tokyo and Osaka are in the same multi-region `ASIA` so they can be used together for dual-region storage.
 
-    For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup).
+    For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup).
 
 - The feature of [streaming data change logs to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) is now in General Availability (GA).
 
@@ -106,11 +106,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support [dual region backup (beta)](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters deployed on AWS.
+- Support [dual region backup (beta)](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on AWS.
 
     You can now replicate backups across geographic regions within your cloud provider. This feature provides an additional layer of data protection and disaster recovery capabilities.
 
-    For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md).
+    For more information, see [Back up and restore TiDB Cloud Dedicated data](/tidb-cloud/backup-and-restore.md).
 
 - Data Migration now supports both physical mode and logical mode for migrating existing data.
 
@@ -122,9 +122,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support using TiDB Serverless branches in [Vercel Preview Deployments](https://vercel.com/docs/deployments/preview-deployments), with TiDB Cloud Vercel integration.
+- Support using TiDB Cloud Serverless branches in [Vercel Preview Deployments](https://vercel.com/docs/deployments/preview-deployments), with TiDB Cloud Vercel integration.
 
-    For more information, see [Connect with TiDB Serverless branching](/tidb-cloud/integrate-tidbcloud-with-vercel.md#connect-with-tidb-serverless-branching).
+    For more information, see [Connect with TiDB Cloud Serverless branching](/tidb-cloud/integrate-tidbcloud-with-vercel.md#connect-with-tidb-cloud-serverless-branching).
 
 ## September 28, 2023
 
@@ -138,19 +138,19 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Remove 2 vCPU TiDB and TiKV nodes from [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+- Remove 2 vCPU TiDB and TiKV nodes from [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
     The 2 vCPU option is no longer available on the **Create Cluster** page or the **Modify Cluster** page.
 
 - Release [TiDB Cloud serverless driver (beta)](/tidb-cloud/serverless-driver.md) for JavaScript.
 
-    TiDB Cloud serverless driver for JavaScript allows you to connect to your [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Function](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
+    TiDB Cloud serverless driver for JavaScript allows you to connect to your [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Function](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
 
     For more information, see [TiDB Cloud serverless driver (beta)](/tidb-cloud/serverless-driver.md).
 
 **Console changes**
 
-- For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, you can get an estimation of cost in the **Usage This Month** panel or while setting up the spending limit.
+- For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, you can get an estimation of cost in the **Usage This Month** panel or while setting up the spending limit.
 
 ## September 5, 2023
 
@@ -162,15 +162,15 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Rate limiting](/tidb-cloud/data-service-api-key.md#rate-limiting).
 
-- Support a new AWS region for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters: São Paulo (sa-east-1).
+- Support a new AWS region for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: São Paulo (sa-east-1).
 
-- Support adding up to 100 IP addresses to the IP access list for each [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster.
+- Support adding up to 100 IP addresses to the IP access list for each [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
 
     For more information, see [Configure an IP access list](/tidb-cloud/configure-ip-access-list.md).
 
 **Console changes**
 
-- Introduce the **Events** page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, which provides the records of main changes to your cluster.
+- Introduce the **Events** page for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, which provides the records of main changes to your cluster.
 
     On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action.
 
@@ -178,7 +178,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **API changes**
 
-- Release several TiDB Cloud API endpoints for managing the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc) or [Google Cloud Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters:
+- Release several TiDB Cloud API endpoints for managing the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc) or [Google Cloud Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters:
 
     - Create a private endpoint service for a cluster
     - Retrieve the private endpoint service information of a cluster
@@ -193,9 +193,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support Google Cloud [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+- Support Google Cloud [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
-    You can now create a private endpoint and establish a secure connection to a TiDB Dedicated cluster hosted on Google Cloud.
+    You can now create a private endpoint and establish a secure connection to a TiDB Cloud Dedicated cluster hosted on Google Cloud.
 
     Key benefits:
 
@@ -205,7 +205,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information, see [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
-- Support using a changefeed to stream data from a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster to [Google Cloud Storage (GCS)](https://cloud.google.com/storage).
+- Support using a changefeed to stream data from a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster to [Google Cloud Storage (GCS)](https://cloud.google.com/storage).
 
     You can now stream data from TiDB Cloud to GCS by using your own account's bucket and providing precisely tailored permissions. After replicating data to GCS, you can analyze the changes in your data as you wish.
 
@@ -236,7 +236,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Advanced properties](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties).
 
-- Disable the load balancing improvement for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters that are hosted on AWS and created after August 15, 2023, including:
+- Disable the load balancing improvement for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters that are hosted on AWS and created after August 15, 2023, including:
 
     - Disable automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes hosted on AWS.
     - Disable automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes hosted on AWS.
@@ -271,13 +271,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
-- Introduce a new **Pausing** status for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, allowing cost-effective pauses with no charges during this period.
+- Introduce a new **Pausing** status for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, allowing cost-effective pauses with no charges during this period.
 
-    When you click **Pause** for a TiDB Dedicated cluster, the cluster will enter the **Pausing** status first. Once the pause operation is completed, the cluster status will transition to **Paused**.
+    When you click **Pause** for a TiDB Cloud Dedicated cluster, the cluster will enter the **Pausing** status first. Once the pause operation is completed, the cluster status will transition to **Paused**.
 
     A cluster can only be resumed after its status transitions to **Paused**, which resolves the abnormal resumption issue caused by rapid clicks of **Pause** and **Resume**.
 
-    For more information, see [Pause or resume a TiDB Dedicated cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md).
+    For more information, see [Pause or resume a TiDB Cloud Dedicated cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md).
 
 ## July 26, 2023
 
@@ -306,7 +306,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Upgrade the default TiDB version of new [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3) to [v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1).
+- Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3) to [v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1).
 
 **Console changes**
 
@@ -329,7 +329,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information about permissions of different roles, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
-- Support the Customer-Managed Encryption Key (CMEK) feature (beta) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted on AWS.
+- Support the Customer-Managed Encryption Key (CMEK) feature (beta) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
 
     You can create CMEK based on AWS KMS to encrypt data stored in EBS and S3 directly from the TiDB Cloud console. This ensures that customer data is encrypted with a key managed by the customer, which enhances security.
 
@@ -337,7 +337,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Optimize the Import feature in TiDB Cloud, aimed at enhancing the data import experience. The following improvements have been made:
 
-    - Unified Import entry for TiDB Serverless: consolidate the entries for importing data, allowing you to seamlessly switch between importing local files and importing files from Amazon S3.
+    - Unified Import entry for TiDB Cloud Serverless: consolidate the entries for importing data, allowing you to seamlessly switch between importing local files and importing files from Amazon S3.
     - Streamlined configuration: importing data from Amazon S3 now only requires a single step, saving time and effort.
     - Enhanced CSV configuration: the CSV configuration settings are now located under the file type option, making it easier for you to quickly configure the necessary parameters.
     - Enhanced target table selection: support choosing the desired target tables for data import by clicking checkboxes. This improvement eliminates the need for complex expressions and simplifies the target table selection.
@@ -348,7 +348,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) now is Generally Available.
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) now is Generally Available.
 
 - Introduce TiDB Bot (beta), an OpenAI-powered chatbot that offers multi-language support, 24/7 real-time response, and integrated documentation access.
 
@@ -360,29 +360,29 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   To use TiDB Bot, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and select **Ask TiDB Bot** to start a chat.
 
-- Support [the branching feature (beta)](/tidb-cloud/branch-overview.md) for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Support [the branching feature (beta)](/tidb-cloud/branch-overview.md) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-    TiDB Cloud lets you create branches for TiDB Serverless clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to connect to it and experiment freely without worrying about affecting the original cluster.
+    TiDB Cloud lets you create branches for TiDB Cloud Serverless clusters. A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to connect to it and experiment freely without worrying about affecting the original cluster.
 
-    You can create branches for TiDB Serverless clusters created after July 5, 2023 by using either [TiDB Cloud console](/tidb-cloud/branch-manage.md) or [TiDB Cloud CLI](/tidb-cloud/ticloud-branch-create.md).
+    You can create branches for TiDB Cloud Serverless clusters created after July 5, 2023 by using either [TiDB Cloud console](/tidb-cloud/branch-manage.md) or [TiDB Cloud CLI](/tidb-cloud/ticloud-branch-create.md).
 
-    If you use GitHub for application development, you can integrate TiDB Serverless branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database. For more information, see [Integrate TiDB Serverless Branching (Beta) with GitHub](/tidb-cloud/branch-github-integration.md).
+    If you use GitHub for application development, you can integrate TiDB Cloud Serverless branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database. For more information, see [Integrate TiDB Cloud Serverless Branching (Beta) with GitHub](/tidb-cloud/branch-github-integration.md).
 
-- Support weekly backup for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters. For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
+- Support weekly backup for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. For more information, see [Back up and restore TiDB Cloud Dedicated data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
 
 ## July 4, 2023
 
 **General changes**
 
-- Support point-in-time recovery (PITR) (beta) for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Support point-in-time recovery (PITR) (beta) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-    You can now restore your TiDB Serverless cluster to any point in time within the last 90 days. This feature enhances the data recovery capability of TiDB Serverless clusters. For example, you can use PITR when data write errors occur and you want to restore the data to an earlier state.
+    You can now restore your TiDB Cloud Serverless cluster to any point in time within the last 90 days. This feature enhances the data recovery capability of TiDB Cloud Serverless clusters. For example, you can use PITR when data write errors occur and you want to restore the data to an earlier state.
 
-    For more information, see [Back up and restore TiDB Serverless data](/tidb-cloud/backup-and-restore-serverless.md#restore).
+    For more information, see [Back up and restore TiDB Cloud Serverless data](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 **Console changes**
 
-- Enhance the **Usage This Month** panel on the cluster overview page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters to provide a clearer view of your current resource usage.
+- Enhance the **Usage This Month** panel on the cluster overview page for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters to provide a clearer view of your current resource usage.
 
 - Enhance the overall navigation experience by making the following changes:
 
@@ -396,13 +396,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Remove the pre-built sample dataset for newly created [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Remove the pre-built sample dataset for newly created [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 ## June 20, 2023
 
 **General changes**
 
-- Upgrade the default TiDB version of new [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2) to [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3).
+- Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2) to [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3).
 
 ## June 13, 2023
 
@@ -410,23 +410,23 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support using changefeeds to stream data to Amazon S3.
 
-    This enables seamless integration between TiDB Cloud and Amazon S3. It allows real-time data capture and replication from [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters to Amazon S3, ensuring that downstream applications and analytics have access to up-to-date data.
+    This enables seamless integration between TiDB Cloud and Amazon S3. It allows real-time data capture and replication from [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters to Amazon S3, ensuring that downstream applications and analytics have access to up-to-date data.
 
     For more information, see [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
 
-- Increase the maximum node storage of 16 vCPU TiKV for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from 4 TiB to 6 TiB.
+- Increase the maximum node storage of 16 vCPU TiKV for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from 4 TiB to 6 TiB.
 
-    This enhancement increases the data storage capacity of your TiDB Dedicated cluster, improves workload scaling efficiency, and accommodates growing data requirements.
+    This enhancement increases the data storage capacity of your TiDB Cloud Dedicated cluster, improves workload scaling efficiency, and accommodates growing data requirements.
 
     For more information, see [Size your cluster](/tidb-cloud/size-your-cluster.md).
 
-- Extend the [monitoring metrics retention period](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters from 3 days to 7 days.
+- Extend the [monitoring metrics retention period](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from 3 days to 7 days.
 
     By extending the metrics retention period, now you have access to more historical data. This helps you identify trends and patterns of the cluster for better decision-making and faster troubleshooting.
 
 **Console changes**
 
-- Release a new native web infrastructure for the [**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer) page of [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+- Release a new native web infrastructure for the [**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer) page of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
     With the new infrastructure, you can easily navigate through the **Key Visualizer** page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the SQL diagnosis process more user-friendly.
 
@@ -434,7 +434,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Introduce [Index Insight (beta)](/tidb-cloud/index-insight.md) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, which optimizes query performance by providing index recommendations for slow queries.
+- Introduce [Index Insight (beta)](/tidb-cloud/index-insight.md) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, which optimizes query performance by providing index recommendations for slow queries.
 
     With Index Insight, you can improve the overall application performance and efficiency of your database operations in the following ways:
 
@@ -443,7 +443,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Simplified optimization process: Index Insight simplifies the identification and implementation of index improvements, eliminating the need for manual analysis and guesswork. As a result, you can save time and effort with accurate index recommendations.
     - Improved application efficiency: By using Index Insight to optimize database performance, applications running on TiDB Cloud can handle larger workloads and serve more users concurrently, which makes scaling operations of applications more efficient.
 
-  To use Index Insight, navigate to the **Diagnosis** page of your TiDB Dedicated cluster and click the **Index Insight BETA** tab.
+  To use Index Insight, navigate to the **Diagnosis** page of your TiDB Cloud Dedicated cluster and click the **Index Insight BETA** tab.
 
     For more information, see [Use Index Insight (beta)](/tidb-cloud/index-insight.md).
 
@@ -480,9 +480,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - In our pursuit to simplify and clarify, we have updated the names of our products:
 
-    - "TiDB Cloud Serverless Tier" is now called "TiDB Serverless".
-    - "TiDB Cloud Dedicated Tier" is now called "TiDB Dedicated".
-    - "TiDB On-Premises" is now called "TiDB Self-Hosted".
+    - "TiDB Cloud Serverless Tier" is now called "TiDB Cloud Serverless".
+    - "TiDB Cloud Dedicated Tier" is now called "TiDB Cloud Dedicated".
+    - "TiDB On-Premises" is now called "TiDB Self-Managed".
 
     Enjoy the same great performance under these refreshed names. Your experience is our priority.
 
@@ -539,7 +539,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md) and [Import Sample Data](/tidb-cloud/import-sample-data.md).
 
-- Support AWS PrivateLink-powered endpoint connection as a new network access management option for TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Support AWS PrivateLink-powered endpoint connection as a new network access management option for TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
     The private endpoint connection does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
 
@@ -547,11 +547,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Add new event types to the [**Event**](/tidb-cloud/tidb-cloud-events.md) page to record backup, restore, and changefeed actions for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+- Add new event types to the [**Event**](/tidb-cloud/tidb-cloud-events.md) page to record backup, restore, and changefeed actions for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
     To get a full list of the events that can be recorded, see [Logged events](/tidb-cloud/tidb-cloud-events.md#logged-events).
 
-- Introduce the **SQL Statement** tab on the [**SQL Diagnosis**](/tidb-cloud/tune-performance.md) page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Introduce the **SQL Statement** tab on the [**SQL Diagnosis**](/tidb-cloud/tune-performance.md) page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
     The **SQL Statement** tab provides the following:
 
@@ -565,7 +565,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support directly accessing the [Data Service endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) in the region where a TiDB [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster is located.
+- Support directly accessing the [Data Service endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) in the region where a TiDB [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster is located.
 
     For newly created Serverless Tier clusters, the endpoint URL now includes the cluster region information. By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
 
@@ -577,24 +577,24 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- For the first five [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+- For the first five [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
     - Row storage: 5 GiB
     - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
   Until May 31, 2023, Serverless Tier clusters are still free, with a 100% discount off. After that, usage beyond the free quota will be charged.
 
-    You can easily [monitor your cluster usage or increase your usage quota](/tidb-cloud/manage-serverless-spend-limit.md#manage-spending-limit-for-tidb-serverless-scalable-clusters) in the **Usage This Month** area of your cluster **Overview** page. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you increase the quota or the usage is reset upon the start of a new month.
+    You can easily [monitor your cluster usage or increase your usage quota](/tidb-cloud/manage-serverless-spend-limit.md#manage-spending-limit-for-tidb-cloud-serverless-scalable-clusters) in the **Usage This Month** area of your cluster **Overview** page. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you increase the quota or the usage is reset upon the start of a new month.
 
     For more information about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
-- Support backup and restore for TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Support backup and restore for TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
      For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore-serverless.md).
 
-- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v6.5.1](https://docs.pingcap.com/tidb/v6.5/release-6.5.1) to [v6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2).
+- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.5.1](https://docs.pingcap.com/tidb/v6.5/release-6.5.1) to [v6.5.2](https://docs.pingcap.com/tidb/v6.5/release-6.5.2).
 
-- Provide a maintenance window feature to enable you to easily schedule and manage planned maintenance activities for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+- Provide a maintenance window feature to enable you to easily schedule and manage planned maintenance activities for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
     A maintenance window is a designated timeframe during which planned maintenance activities, such as operating system updates, security patches, and infrastructure upgrades, are performed automatically to ensure the reliability, security, and performance of the TiDB Cloud service.
 
@@ -607,7 +607,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information, see [Configure maintenance window](/tidb-cloud/configure-maintenance-window.md).
 
-- Improve load balancing of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters that are hosted on AWS and created after April 25, 2023.
+- Improve load balancing of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters that are hosted on AWS and created after April 25, 2023.
 
     - Support automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes.
     - Support automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes.
@@ -616,7 +616,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Release a new native web infrastructure for the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+- Release a new native web infrastructure for the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
     With the new infrastructure, you can easily navigate through the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the monitoring process more user-friendly.
 
@@ -624,7 +624,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support scaling up or down [Data Migration job specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+- Support scaling up or down [Data Migration job specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
     With this feature, you can improve migration performance by scaling up specifications or reduce costs by scaling down specifications.
 
@@ -646,14 +646,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Improve the load balance of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted on AWS.
+- Improve the load balance of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
 
     - Support automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes.
     - Support automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes.
 
   Currently, this feature is only provided for Dedicated Tier clusters that are hosted on the AWS `Oregon (us-west-2)` region.
 
-- Support the [New Relic](https://newrelic.com/) integration for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+- Support the [New Relic](https://newrelic.com/) integration for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
     With the New Relic integration, you can configure TiDB Cloud to send metric data of your TiDB clusters to [New Relic](https://newrelic.com/). Then, you can monitor and analyze both your application performance and your TiDB database performance on [New Relic](https://newrelic.com/). This feature can help you quickly identify and troubleshoot potential issues and reduce the resolution time.
 
@@ -668,7 +668,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters to use [node-level resource metrics](/tidb-cloud/built-in-monitoring.md#server).
+- Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters to use [node-level resource metrics](/tidb-cloud/built-in-monitoring.md#server).
 
     With node-level resource metrics, you can see a more accurate representation of resource consumption to better understand the actual usage of purchased services.
 
@@ -687,7 +687,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Introduce the [Alerts](/tidb-cloud/monitor-built-in-alerting.md) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, which lists both active and closed alerts for each Dedicated Tier cluster.
+- Introduce the [Alerts](/tidb-cloud/monitor-built-in-alerting.md) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, which lists both active and closed alerts for each Dedicated Tier cluster.
 
     The **Alerts** page provides the following:
 
@@ -731,11 +731,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Scale a changefeed](/tidb-cloud/changefeed-overview.md#scale-a-changefeed).
 
-- Support replicating incremental data in real-time from a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster in AWS to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster in the same project and same region.
+- Support replicating incremental data in real-time from a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in AWS to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster in the same project and same region.
 
     For more information, see [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md).
 
-- Support two new GCP regions for the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters: `Singapore (asia-southeast1)` and `Oregon (us-west1)`.
+- Support two new GCP regions for the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `Singapore (asia-southeast1)` and `Oregon (us-west1)`.
 
     With these new regions, you have more options for migrating your data to TiDB Cloud. If your upstream data is stored in or near these regions, you can now take advantage of faster and more reliable data migration from GCP to TiDB Cloud.
 
@@ -743,7 +743,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Release a new native web infrastructure for the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Release a new native web infrastructure for the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
     With this new infrastructure, you can easily navigate through the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the SQL diagnosis process more user-friendly.
 
@@ -751,7 +751,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Introduce [Data Service (beta)](https://tidbcloud.com/console/data-service) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, which enables you to access data via an HTTPS request using a custom API endpoint.
+- Introduce [Data Service (beta)](https://tidbcloud.com/console/data-service) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, which enables you to access data via an HTTPS request using a custom API endpoint.
 
     With Data Service, you can seamlessly integrate TiDB Cloud with any application or service that is compatible with HTTPS. The following are some common scenarios:
 
@@ -768,11 +768,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - [Get Started with Data Service](/tidb-cloud/data-service-get-started.md)
     - [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
 
-- Support decreasing the size of TiDB, TiKV, and TiFlash nodes to scale in a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster that is hosted on AWS and created after December 31, 2022.
+- Support decreasing the size of TiDB, TiKV, and TiFlash nodes to scale in a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster that is hosted on AWS and created after December 31, 2022.
 
     You can decrease the node size [via the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram) or [via the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
 
-- Support a new GCP region for the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters: `Tokyo (asia-northeast1)`.
+- Support a new GCP region for the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `Tokyo (asia-northeast1)`.
 
     The feature can help you migrate data from MySQL-compatible databases in Google Cloud Platform (GCP) to your TiDB cluster easily and efficiently.
 
@@ -780,13 +780,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Introduce the **Events** page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, which provides the records of main changes to your cluster.
+- Introduce the **Events** page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, which provides the records of main changes to your cluster.
 
     On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action. For example, you can view events such as when a cluster was paused or who modified the cluster size.
 
     For more information, see [TiDB Cloud cluster events](/tidb-cloud/tidb-cloud-events.md).
 
-- Add the **Database Status** tab to the **Monitoring** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, which displays the following database-level metrics:
+- Add the **Database Status** tab to the **Monitoring** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, which displays the following database-level metrics:
 
     - QPS Per DB
     - Average Query Duration Per DB
@@ -800,11 +800,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v6.5.0](https://docs.pingcap.com/tidb/v6.5/release-6.5.0) to [v6.5.1](https://docs.pingcap.com/tidb/v6.5/release-6.5.1).
+- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.5.0](https://docs.pingcap.com/tidb/v6.5/release-6.5.0) to [v6.5.1](https://docs.pingcap.com/tidb/v6.5/release-6.5.1).
 
 - Support modifying column names of the target table to be created by TiDB Cloud when uploading a local CSV file with a header row.
 
-    When importing a local CSV file with a header row to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster, if you need TiDB Cloud to create the target table and the column names in the header row do not follow the TiDB Cloud column naming conventions, you will see a warning icon next to the corresponding column name. To resolve the warning, you can move the cursor over the icon and follow the message to edit the existing column names or enter new column names.
+    When importing a local CSV file with a header row to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster, if you need TiDB Cloud to create the target table and the column names in the header row do not follow the TiDB Cloud column naming conventions, you will see a warning icon next to the corresponding column name. To resolve the warning, you can move the cursor over the icon and follow the message to edit the existing column names or enter new column names.
 
     For information about column naming conventions, see [Import local files](/tidb-cloud/tidb-cloud-import-local-files.md#import-local-files).
 
@@ -812,13 +812,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters from [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) to [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0).
+- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) to [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0).
 
 ## February 28, 2023
 
 **General changes**
 
-- Add the [SQL Diagnosis](/tidb-cloud/tune-performance.md) feature for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Add the [SQL Diagnosis](/tidb-cloud/tune-performance.md) feature for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
     With SQL Diagnosis, you can gain deep insights into SQL-related runtime status, which makes the SQL performance tuning more efficient. Currently, the SQL Diagnosis feature for Serverless Tier only provides slow query data.
 
@@ -882,7 +882,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Release a new native web infrastructure on the Monitoring page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Release a new native web infrastructure on the Monitoring page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
     With the new infrastructure, you can easily navigate through the Monitoring page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the monitoring process a lot more user-friendly.
 
@@ -898,13 +898,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support decreasing the number of TiKV and TiFlash nodes to scale in a TiDB [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster.
+- Support decreasing the number of TiKV and TiFlash nodes to scale in a TiDB [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
 
     You can decrease the node number [via the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-node-number) or [via the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
 
 **Console changes**
 
-- Introduce the **Monitoring** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Introduce the **Monitoring** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
     The **Monitoring** page provides a range of metrics and data, such as the number of SQL statements executed per second, the average duration of queries, and the number of failed queries, which helps you better understand the overall performance of SQL statements in your Serverless Tier cluster.
 
@@ -930,11 +930,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3) to [v6.5.0](https://docs.pingcap.com/tidb/stable/release-6.5.0).
+- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3) to [v6.5.0](https://docs.pingcap.com/tidb/stable/release-6.5.0).
 
-- For new sign-up users, TiDB Cloud will automatically create a free [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster so that you can quickly start a data exploration journey with TiDB Cloud.
+- For new sign-up users, TiDB Cloud will automatically create a free [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster so that you can quickly start a data exploration journey with TiDB Cloud.
 
-- Support a new AWS region for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters: `Seoul (ap-northeast-2)`.
+- Support a new AWS region for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `Seoul (ap-northeast-2)`.
 
     The following features are enabled for this region:
 
@@ -946,7 +946,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Optimize the feature of importing data from local CSV files to TiDB to improve the user experience for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Optimize the feature of importing data from local CSV files to TiDB to improve the user experience for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
     - To upload a CSV file, now you can simply drag and drop it to the upload area on the **Import** page.
     - When creating an import task, if your target database or table does not exist, you can enter a name to let TiDB Cloud create it for you automatically. For the target table to be created, you can specify a primary key or select multiple fields to form a composite primary key.
@@ -967,7 +967,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Rename SQL Editor (beta) to Chat2Query (beta) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters and support generating SQL queries using AI.
+- Rename SQL Editor (beta) to Chat2Query (beta) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters and support generating SQL queries using AI.
 
   In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.
 
@@ -977,7 +977,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support scaling up TiDB, TiKV, and TiFlash nodes by increasing the **Node Size(vCPU + RAM)** for TiDB Dedicated clusters hosted on AWS and created after December 31, 2022.
+- Support scaling up TiDB, TiKV, and TiFlash nodes by increasing the **Node Size(vCPU + RAM)** for TiDB Cloud Dedicated clusters hosted on AWS and created after December 31, 2022.
 
     You can increase the node size [using the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram) or [using the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
 
@@ -993,7 +993,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Use Grafana GUI dashboards to visualize the metrics](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics).
 
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0). The cold start issue after upgrading the default TiDB version of Serverless Tier clusters to v6.4.0 has been resolved.
+- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0). The cold start issue after upgrading the default TiDB version of Serverless Tier clusters to v6.4.0 has been resolved.
 
 **Console changes**
 
