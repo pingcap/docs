@@ -11,7 +11,7 @@ The `EXPLAIN` statement shows the execution plan for a query without executing i
 >
 > Certain subqueries are pre-executed during the optimization phase to generate optimal execution plans, even in the `EXPLAIN` statement. For more information on this behavior and how to disable it, see [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) and [Disable the early execution of subqueries](/explain-walkthrough.md#disable-the-early-execution-of-subqueries).
 
-The statements `DESC` and `DESCRIBE` are aliases of the `EXPLAIN` statement. The alternative usage of `EXPLAIN <tableName>` is documented under [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md).
+The statements `DESC` and `DESCRIBE` are aliases of the `EXPLAIN` statement. The alternative usage of `EXPLAIN <tableName>` is documented in [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md).
 
 TiDB supports the `EXPLAIN [options] FOR CONNECTION connection_id` statement. However, this statement is different from the `EXPLAIN FOR` statement in MySQL. For more details, see [`EXPLAIN FOR CONNECTION`](#explain-for-connection).
 
