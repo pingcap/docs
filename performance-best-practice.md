@@ -15,7 +15,7 @@ These tips are great for when you're first trying out TiDB (what we call a Proof
 
 > **Important Note:**
 >
-> To get the best speed in a PoC, we'll use some settings and features that aren't the default. These aren't meant for real production use.
+> To get the best speed in a PoC, we'll use some settings and features that aren't the default. These aren't meant for stable production use.
 
 # Why This Matters
 
