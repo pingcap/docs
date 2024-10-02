@@ -32,7 +32,7 @@ summary: TiDB システム テーブルについて学習します。
 
 ## サーバー側ヘルプシステムテーブル {#server-side-help-system-tables}
 
-現在、 `help_topic` NULL です。
+現在、 `help_topic`は NULL です。
 
 ## 統計システムテーブル {#statistics-system-tables}
 
@@ -43,7 +43,7 @@ summary: TiDB システム テーブルについて学習します。
 -   `stats_extended` : 列間の順序相関などの拡張統計
 -   `stats_feedback` : 統計のクエリフィードバック
 -   `stats_fm_sketch` : 統計列のヒストグラムのFMSketch分布
--   `analyze_options` : 各テーブルのデフォルト`analyze`オプション
+-   `analyze_options` : 各テーブルのデフォルトの`analyze`オプション
 -   `column_stats_usage` : 列統計の使用
 -   `schema_index_usage` : インデックスの使用
 -   `analyze_jobs` : 進行中の統計収集タスクと過去 7 日間の履歴タスク レコード
@@ -86,7 +86,7 @@ summary: TiDB システム テーブルについて学習します。
 ## DDL ステートメントに関連するシステム テーブル {#system-tables-related-to-ddl-statements}
 
 -   `tidb_ddl_history` : DDL文の履歴レコード
--   `tidb_ddl_jobs` : 現在 TiDB によって実行されている DDL ステートメントのメタデータ
+-   `tidb_ddl_job` : 現在 TiDB によって実行されている DDL ステートメントのメタデータ
 -   `tidb_ddl_reorg` : 現在 TiDB によって実行されている物理 DDL ステートメント (インデックスの追加など) のメタデータ
 
 ## TiDB 分散実行フレームワーク (DXF) に関連するシステム テーブル {#system-tables-related-to-tidb-distributed-execution-framework-dxf}
