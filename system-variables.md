@@ -3221,6 +3221,25 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the concurrency of the `hash join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### tidb_hash_join_version <span class="version-mark">New v8.4.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Enumeration
+- Default value: `legacy`
+- Possible values: `legacy`, `optimized`
+- This variable is used to control whether TiDB uses an optimized version of hash join. The value is `legacy` by default, which means the optimized version is not used. If it is set to `optimized`, TiDB uses the optimized version to execute hash join for better performance.
+
+> **Note:**
+>
+> - Currently, the optimized hash join only supports inner join and outer join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the legacy hash join.
+> - Currently, the optimized hash join does not support spilling to disk when the memory is out of quota.
+
 ### tidb_hashagg_final_concurrency
 
 > **Warning:**
