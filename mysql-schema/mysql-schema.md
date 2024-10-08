@@ -49,7 +49,6 @@ Currently, the `help_topic` is NULL.
 - `stats_fm_sketch`: the FMSketch distribution of the histogram of the statistics column
 - `analyze_options`: the default `analyze` options for each table
 - `column_stats_usage`: the usage of column statistics
-- `schema_index_usage`: the usage of indexes
 - `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
 
 ## Execution plan-related system tables
