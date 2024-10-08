@@ -335,7 +335,7 @@ This error occurs when the `WHERE` clause concatenated in a query involves table
 ```sql
 BATCH ON test.t2.id LIMIT 1 
 INSERT INTO t 
-SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+SELECT t2.id, t2.v, t3.id FROM t2, t3 WHERE t2.id = t3.id
 ```
 
 ```sql
@@ -347,7 +347,7 @@ If the error occurs, you can print the query statement for confirmation by using
 ```sql
 BATCH ON test.t2.id LIMIT 1 
 DRY RUN QUERY INSERT INTO t 
-SELECT t2.id, t2.v, t3. FROM t2, t3 WHERE t2.id = t3.id
+SELECT t2.id, t2.v, t3.id FROM t2, t3 WHERE t2.id = t3.id
 ```
 
 To avoid the error, you can move the condition related to other tables in the `WHERE` clause to the `ON` condition in the `JOIN` clause. For example:
@@ -355,7 +355,7 @@ To avoid the error, you can move the condition related to other tables in the `W
 ```sql
 BATCH ON test.t2.id LIMIT 1 
 INSERT INTO t 
-SELECT t2.id, t2.v, t3. FROM t2 JOIN t3 ON t2.id=t3.id
+SELECT t2.id, t2.v, t3.id FROM t2 JOIN t3 ON t2.id = t3.id
 ```
 
 ```
