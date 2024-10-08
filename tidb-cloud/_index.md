@@ -6,11 +6,11 @@ hide_commit: true
 summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提供する、完全に管理された Database-as-a-Service (DBaaS) です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供します。
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDBクラウド" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
 
 <LearningPath label="Learn" icon="cloud1">
 
-[TiDB Cloud理由](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
+[TiDB Cloudとは](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
 
 [アーキテクチャ](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
 
