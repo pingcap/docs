@@ -1935,15 +1935,15 @@ Configuration items related to Raft Engine.
 
 ### `spill-dir` <span class="version-mark">New in v8.4.0</span>
 
-+ The auxiliary directory for storing raft log files. When the disk where the `dir` specified is full, new raft logs will be stored under this directory. If this directory does not exist after configuration, it will be created when TiKV is started.
-+ If this configuration is not set, it means that the auxiliary directory is disabled.
++ The auxiliary directory for storing Raft log files. When the disk for the `dir` directory is full, new Raft logs will be stored under this directory. If this auxiliary directory does not exist after configuration, it will be automatically created when TiKV is started.
++ If this configuration is not set, the auxiliary directory is not enabled.
 
 > **Note:**
 >
-> - This configuration is only valid when the `dir` and `spill-dir` of the Raft Engine are specified as different disk drives.
-> - After enabling this feature, if you want to disable it, you need to perform the following operations before restarting TiKV. Otherwise, TiKV cannot start.
->     1. Shut down TiKV.
->     2. Copy all the Raft Logs in the `spill-dir` directory to the [`dir`](/tikv-configuration-file.md#dir) directory.
+> - This configuration only takes effect when the `dir` and `spill-dir` of the Raft Engine are set to different disk drives.
+> - After enabling this feature, if you want to disable it, you need to perform the following operations before restarting TiKV. Otherwise, TiKV will fail to start.
+>     1. Stop TiKV.
+>     2. Copy all the Raft Logs from the `spill-dir` directory to the [`dir`](/tikv-configuration-file.md#dir) directory.
 >     3. Remove this configuration from the TiKV configuration file.
 >     4. Restart TiKV.
 
