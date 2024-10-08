@@ -1940,7 +1940,7 @@ Configuration items related to Raft Engine.
 
 > **Note:**
 >
-> - This configuration only takes effect when the `dir` and `spill-dir` of the Raft Engine are set to different disk drives.
+> - This configuration takes effect only when the `dir` and `spill-dir` of the Raft Engine are set to different disk drives.
 > - After enabling this feature, if you want to disable it, you need to perform the following operations before restarting TiKV. Otherwise, TiKV will fail to start.
 >     1. Stop TiKV.
 >     2. Copy all the Raft Logs from the `spill-dir` directory to the [`dir`](/tikv-configuration-file.md#dir) directory.
