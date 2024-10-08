@@ -3167,7 +3167,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 15]`
-- This variable is used to set the default row split shards number for newly created tables. When this variable is set to a non-zero value, TiDB will automatically set it when executing `CREATE TABLE` statements, allowing use of `PRE_SPLIT_REGIONS` on such tables (for example NONCLUSTERED tables). For more information, see [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions). This variable is typically used in conjunction with [`tidb_shard_row_id_bits`](/system-variables.md#tidb_shard_row_id_bits-new-in-v840) to shard new tables and split the Regions of new tables.
+- This variable is used to set the default number of row split shards for newly created tables. When this variable is set to a non-zero value, TiDB will automatically apply this attribute to tables that allow the use of `PRE_SPLIT_REGIONS` (for example, `NONCLUSTERED` tables) when executing `CREATE TABLE` statements. For more information, see [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions). This variable is typically used in conjunction with [`tidb_shard_row_id_bits`](/system-variables.md#tidb_shard_row_id_bits-new-in-v840) to shard new tables and pre-split the Regions of new tables.
 
 ### tidb_generate_binary_plan <span class="version-mark">New in v6.2.0</span>
 
@@ -5289,7 +5289,7 @@ SHOW WARNINGS;
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 15]`
-- This variable is used to set the shard bits for the default row ID of a new table. When this variable has a non-zero value, TiDB will automatically set this property when executing `CREATE TABLE` statements on tables that allow using `SHARD_ROW_ID_BITS` (such as NONCLUSTERED tables). For more information, see [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md).
+- This variable is used to set the default number of row ID shards for newly created tables. When this variable is set to a non-zero value, TiDB will automatically apply this attribute to tables that allow the use of `SHARD_ROW_ID_BITS` (for example, `NONCLUSTERED` tables) when executing `CREATE TABLE` statements. For more information, see [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md).
 
 ### tidb_simplified_metrics
 
