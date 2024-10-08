@@ -28,8 +28,9 @@ DESC RUNAWAY_WATCHES;
 | WATCH_TEXT          | text         | NO   |      | NULL    |       |
 | SOURCE              | varchar(128) | NO   |      | NULL    |       |
 | ACTION              | varchar(12)  | NO   |      | NULL    |       |
+| RULE                | varchar(128) | NO   |      | NULL    |       |
 +---------------------+--------------+------+------+---------+-------+
-8 rows in set (0.00 sec)
+9 rows in set (0.00 sec)
 ```
 
 ## Examples
@@ -37,31 +38,43 @@ DESC RUNAWAY_WATCHES;
 Query the watch list of runaway queries:
 
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES ORDER BY id\G
 ```
 
 The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
-                 ID: 20003
-RESOURCE_GROUP_NAME: rg2
-         START_TIME: 2023-07-28 13:06:08
-           END_TIME: UNLIMITED
-              WATCH: Similar
-         WATCH_TEXT: 5b7fd445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+                 ID: 1
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:20:48
+           END_TIME: 2024-09-11 07:30:48
+              WATCH: Exact
+         WATCH_TEXT: select count(*) from `tpch1`.`supplier`
              SOURCE: 127.0.0.1:4000
              ACTION: Kill
+               RULE: ProcessedKeys = 10000(100)
 *************************** 2. row ***************************
-                 ID: 16004
-RESOURCE_GROUP_NAME: rg2
-         START_TIME: 2023-07-28 01:45:30
-           END_TIME: UNLIMITED
-              WATCH: Similar
-         WATCH_TEXT: 3d48fca401d8cbb31a9f29adc9c0f9d4be967ca80a34f59c15f73af94e000c84
+                 ID: 2
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:20:51
+           END_TIME: 2024-09-11 07:30:51
+              WATCH: Exact
+         WATCH_TEXT: select count(*) from `tpch1`.`partsupp`
              SOURCE: 127.0.0.1:4000
              ACTION: Kill
-2 rows in set (0.00 sec)
+               RULE: RequestUnit = RRU:143.369959, WRU:0.000000, WaitDuration:0s(10)
+*************************** 3. row ***************************
+                 ID: 3
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:21:16
+           END_TIME: 2024-09-11 07:31:16
+              WATCH: Exact
+         WATCH_TEXT: select sleep(2) from t
+             SOURCE: 127.0.0.1:4000
+             ACTION: Kill
+               RULE: ElapsedTime = 2024-09-11T15:21:16+08:00(2024-09-11T15:21:16+08:00)
+3 rows in set (0.00 sec)
 ```
 
 Add a watch item into list to the resource group `rg1`:
@@ -80,32 +93,45 @@ The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
-                 ID: 20003
-RESOURCE_GROUP_NAME: rg2
-         START_TIME: 2023-07-28 13:06:08
-           END_TIME: UNLIMITED
-              WATCH: Similar
-         WATCH_TEXT: 5b7fd445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+                 ID: 1
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:20:48
+           END_TIME: 2024-09-11 07:30:48
+              WATCH: Exact
+         WATCH_TEXT: select count(*) from `tpch1`.`supplier`
              SOURCE: 127.0.0.1:4000
              ACTION: Kill
+               RULE: ProcessedKeys = 10000(100)
 *************************** 2. row ***************************
-                 ID: 16004
-RESOURCE_GROUP_NAME: rg2
-         START_TIME: 2023-07-28 01:45:30
-           END_TIME: UNLIMITED
-              WATCH: Similar
-         WATCH_TEXT: 3d48fca401d8cbb31a9f29adc9c0f9d4be967ca80a34f59c15f73af94e000c84
+                 ID: 2
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:20:51
+           END_TIME: 2024-09-11 07:30:51
+              WATCH: Exact
+         WATCH_TEXT: select count(*) from `tpch1`.`partsupp`
              SOURCE: 127.0.0.1:4000
              ACTION: Kill
+               RULE: RequestUnit = RRU:143.369959, WRU:0.000000, WaitDuration:0s(10)
 *************************** 3. row ***************************
-                 ID: 20004
-RESOURCE_GROUP_NAME: rg1
-         START_TIME: 2023-07-28 14:23:04
+                 ID: 3
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:21:16
+           END_TIME: 2024-09-11 07:31:16
+              WATCH: Exact
+         WATCH_TEXT: select sleep(2) from t
+             SOURCE: 127.0.0.1:4000
+             ACTION: Kill
+               RULE: ElapsedTime = 2024-09-11T15:21:16+08:00(2024-09-11T15:21:16+08:00)
+*************************** 4. row ***************************
+                 ID: 4
+RESOURCE_GROUP_NAME: default
+         START_TIME: 2024-09-11 07:23:10
            END_TIME: UNLIMITED
               WATCH: Exact
          WATCH_TEXT: select * from sbtest.sbtest1
              SOURCE: manual
-             ACTION: NoneAction
+             ACTION: Kill
+               RULE: None
 3 row in set (0.00 sec)
 ```
 
@@ -121,3 +147,4 @@ The meaning of each column field in the `RUNAWAY_WATCHES` table is as follows:
     - `Exact` indicates that the SQL text is matched. In this case, the `WATCH_TEXT` column shows the SQL text.
 - `SOURCE`: the source of the watch item. If it is identified by the `QUERY_LIMIT` rule, the identified TiDB IP address is displayed. If it is manually added, `manual` is displayed.
 - `ACTION`: the corresponding operation after the identification.
+- `RULE`: the identification rule. The current three rules are `ElapsedTime`, `ProcessedKeys`, and `RequestUnit`. The format is `ProcessedKeys = 666(10)`, where `666` is the actual value and `10` is the threshold.
