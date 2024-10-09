@@ -75,9 +75,11 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
-- Controls whether to allow data retrieval via Get or BatchGet. If set to `ON`, the optimizer will force the selection of Coprocessor, while both Get and BatchGet will be disabled. Get and BatchGet do not support column projection, and in some scenarios, their execution cost is higher than Coprocessor requests, setting this to `ON` will result in better performance. The following are common cases where forcing Coprocessor selection is recommended:
-	- Wide tables with many columns, where applications only query a smallsubset of columns.
-	- Tables containing JSON columns with large JSON values, where queries either do not retrieve the JSON columns or only extract small portions of the JSON content.
+- This variable controls whether to disable the `Point Get` and `Batch Point Get` operators for query execution. The default value `OFF` means that `Point Get` and `Batch Point Get` can be used for query execution. If set to `ON`, the optimizer disables `Point Get` and `Batch Point Get`, forcing the selection of Coprocessor for query execution.
+- `Point Get` and `Batch Point Get` do not support column projection (that is, they cannot return only a subset of the columns), so in some scenarios, their execution efficiency might be lower than that of the Coprocessor, and setting this variable to `ON` can improve query performance. The following are recommended scenarios for setting this variable to `ON`:
+
+    - Wide tables with many columns, where only a few columns are queried.
+    - Tables with large JSON values, where the JSON column is not queried, or only a small portion of the JSON column is queried.
 	 
 ### [`52869`](https://github.com/pingcap/tidb/issues/52869) <span class="version-mark">New in v8.1.0</span>
 
