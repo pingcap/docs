@@ -269,13 +269,13 @@ Configuration items related to scheduling
 ### `max-merge-region-size`
 
 + Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
-+ Default value: `20`
++ Default value: `54`. Before v8.4.0, the default value is `20`. Starting from v8.4.0, the default value is `54`.
 + Unit: MiB
 
 ### `max-merge-region-keys`
 
 + Specifies the upper limit of the `Region Merge` key. When the Region key is greater than the specified value, the PD does not merge the Region with its adjacent Regions.
-+ Default value: `200000`
++ Default value: `540000`. Before v8.4.0, the default value is `200000`. Starting from v8.4.0, the default value is `540000`.
 
 ### `patrol-region-interval`
 
