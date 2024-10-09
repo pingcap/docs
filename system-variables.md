@@ -5163,7 +5163,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> The feature controlled by this variable is not GA yet in the current TiDB version. Evaluate it carefully at your own risk.
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
