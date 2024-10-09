@@ -2769,7 +2769,8 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **Note:**
 >
-> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+> - Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+> - This feature is incompatble with [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840). If this feature is enabled, [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840) won't take effect.
 
 ### tidb_enable_unsafe_substitute <span class="version-mark">New in v6.3.0</span>
 
@@ -5805,7 +5806,36 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 >
-> Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+> - Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, increasing the value of `tidb_tso_client_batch_max_wait_time` might increase the execution latency in TiDB and affect the QPS performance of the cluster.
+> - This feature is incompatble with [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840). If this variable is set to non-zero value, [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840) won't take effect.
+
+### `tidb_tso_client_rpc_mode` <span class="version-mark">New in v8.4.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Enumeration
+- Default value: `DEFAULT`
+- Value options: `DEFAULT`, `PARALLEL`, `PARALLEL-FAST`
+- This variable is used to configure the mode in which TiDB sends TSO RPC requests to PD. The mode will determine whether TSO RPC requests can be processed in parallel. In this way, the time spent on batch-waiting of each TS retrieval operation can be adjusted, making it possible to reduce the duration to wait for TS to be ready during the execution of queries in some scenarios.
+
+    - `DEFAULT`: TiDB collects TS retrieval operations during a specific period into a single TSO RPC request, and send it to PD to get timestamps in a batch, so that the duration of each TS retrieval operation consists of the time spent on waiting to be batched and the time spent on performing the RPC. In the `DEFAULT` mode, different TSO RPC requests are performed serially, and the average duration of each TS retrieval operation is about 1.5 times the actually time cost of a TSO RPC request.
+    - `PARALLEL`: In this mode, TiDB will attempt to reduce the duration for collecting each batch to 1/2 of that in `DEFAULT` mode, and try to keep two TSO RPC requests working simultaneously. In this way, the average duration of each TS retrieval operation can theoretically be reduced to about 1.25 times the TSO RPC duration, which is about 83% of the time cost in `DEFAULT` mode. However, the effect of batching will be reduced, and the number of TSO RPC requests will increase to about twice that in `DEFAULT` mode.
+    - `PARALLEL-FAST`: Similar to `PARALLEL` mode, in this mode, TiDB will attempt to reduce the duration for collecting each batch to 1/4 of that in `DEFAULT` mode, and try to keep 4 TSO RPC requests working simultaneously. In this way, the average duration of each TS retrieval operation can theoretically be reduced to about 1.125 times the TSO RPC duration, which is about 75% of the time cost in `DEFAULT` mode. However, the effect of batching will be further reduced, and the number of TSO RPC requests will increase to about 4 times that in `DEFAULT` mode.
+
+- When the following precondition is satisfied, you can consider to switch this variable to `PARALLEL` or `PARALLEL-FAST` to gain some performance improvement:
+
+    - TSO waiting time constitutes a significant portion of the total execution time of SQL queries.
+    - The TSO allocation in PD doesn't reach the bottleneck.
+    - PD and TiDB nodes have sufficient CPU.
+    - The network latency between TiDB and PD is significantly higher than the time cost of PD processing TSO allocation, i.e., the network latency is the majority part of the duration of TSO RPC.
+        - The duration of TSO RPC requests can be observed in the **PD TSO RPC Duration** panel which can be found in the "PD Client" secion of "TiDB" Grafana dashboard; the duration of PD's TSO allocation can be observed in the **PD server TSO handle duration** panel which can be found in the "TiDB" section of "PD" Grafana dashboard.
+    - The additional network traffic is acceptable if the TSO RPC requests between TiDB and PD increases to twice (for `PARALLEL` mode) or 4 times (for `PARALLEL-FAST` mode) of before.
+
+> **Note:**
+>
+> - `PARALLEL` mode and `PARALLEL-FAST` mode are incompatible to [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) 和 [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530). If either [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) is set to no-zero value or [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530) is enabled, configuring `tidb_tso_client_rpc_mode` won't take effect, and TiDB will always work in `DEFAULT` mode.
+> - `PARALLEL` mode and `PARALLEL-FAST` mode are designed to reduce the average time cost of retrieving TS in TiDB. For situations with significant latency fluctuations, such as long-tail and latency spike issues, these two modes may not provide any remarkable performance improvement.
 
 ### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
 
