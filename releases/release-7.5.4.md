@@ -20,15 +20,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 + TiDB 
 
     - (dup): release-8.1.1.md > 改进提升> TiDB - `EXPLAIN` 语句支持应用 `tidb_redact_log`，并进一步优化了日志记录的处理逻辑 [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
-    - 优化了 TiDB slow query 查询的速度 [#54630](https://github.com/pingcap/tidb/pull/54630) @[yibin87](https://github.com/yibin87)
+    - Optimize the query speed of TiDB slow queries [#54630](https://github.com/pingcap/tidb/pull/54630) @[yibin87](https://github.com/yibin87)
 
 + TiKV
 
     - (dup): release-6.5.11.md > 改进提升> TiKV - 优化存在大量 DELETE 版本时 RocksDB 的 compaction 触发机制，以加快磁盘空间回收 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - (dup): release-8.3.0.md > 改进提升> TiKV - 减少 peer message channel 的内存使用 [#16229](https://github.com/tikv/tikv/issues/16229) @[Connor1996](https://github.com/Connor1996)
-    - 修复了当大量事务在等待某个 key 上的锁、而该 key 被频繁更新时，有时可能因死锁检测压力过大而导致 TiKV OOM 的问题 [#17394](https://github.com/tikv/tikv/issues/17394) @[MyonKeminta](https://github.com/MyonKeminta)
-    - 优化了 TiKV 重启时由于需要等待 apply 之前的 log 而造成访问延时抖动的情况，以提升 TiKV 的稳定性 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
-    - 修复了 TiKV 的 `DiskFull` 检测与 RaftEngine 的配置项 `spill-dir` 不兼容的问题，以保证该特性能够稳定运行 [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Optimize the jittery access delay when restarting TiKV due to waiting for the log to be applied, to improve the stability of TiKV [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Optimize TiKV's `DiskFull` detection to make it compatible with RaftEngine's `spill-dir` configuration, ensuring that this feature works consistently [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
 
 + TiFlash
 
@@ -81,6 +80,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-8.3.0.md > 错误修复> TiKV - 修复早期版本（早于 v7.1）和之后的版本的 bloom filter 无法兼容的问题 [#17272](https://github.com/tikv/tikv/issues/17272) @[v01dstar](https://github.com/v01dstar)
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复当主密钥存储于 KMS (Key Management Service) 时无法轮换主密钥的问题 [#17410](https://github.com/tikv/tikv/issues/17410) @[hhwyt](https://github.com/hhwyt)
     - 修复 TiKV 侧的 metrics 监控面板中 async write 耗时的统计异常的问题 [#17579](https://github.com/tikv/tikv/issues/17579) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that when a large number of transactions are waiting for a lock of a key and the key is updated frequently, excessive pressure on deadlock detection might cause TiKV OOM issues [#17394](https://github.com/tikv/tikv/issues/17394) @[MyonKeminta](https://github.com/MyonKeminta)
 
 + PD **tw@lilin90 3**
 
