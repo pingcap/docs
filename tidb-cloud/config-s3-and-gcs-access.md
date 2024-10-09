@@ -21,7 +21,7 @@ TiDB Cloud がAmazon S3 バケット内のソースデータにアクセスで�
 
 次のように、 TiDB Cloudのバケット アクセスを設定し、ロール ARN を取得します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、ターゲット TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、対象の TiDB クラスターの対応するTiDB Cloudアカウント ID と外部 ID を取得します。
 
     1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
@@ -29,7 +29,7 @@ TiDB Cloud がAmazon S3 バケット内のソースデータにアクセスで�
         >
         > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート] を**クリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
     3.  **[インポート]**ページで、 **[S3 からデータをインポート]**を選択します。
 
@@ -43,11 +43,11 @@ TiDB Cloud がAmazon S3 バケット内のソースデータにアクセスで�
 
     1.  AWS マネジメントコンソールにサインインし、 [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/)で Amazon S3 コンソールを開きます。
 
-    2.  **[バケット**] リストで、ソース データを含むバケットの名前を選択し、 **[ARN のコピー]**をクリックして S3 バケット ARN (例: `arn:aws:s3:::tidb-cloud-source-data` ) を取得します。後で使用するために、バケット ARN をメモしておきます。
+    2.  **[バケット]**リストで、ソース データを含むバケットの名前を選択し、 **[ARN のコピー]**をクリックして S3 バケット ARN (例: `arn:aws:s3:::tidb-cloud-source-data` ) を取得します。後で使用するために、バケット ARN をメモしておきます。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーション ペインで**[ポリシー]**をクリックして、 **[ポリシーの作成] を**クリックします。
+    3.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーション ペインで**[ポリシー]**をクリックして、 **[ポリシーの作成]**をクリックします。
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
@@ -85,7 +85,7 @@ TiDB Cloud がAmazon S3 バケット内のソースデータにアクセスで�
 
         -   `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`
 
-            たとえば、ソース データが`tidb-cloud-source-data`バケットのルート ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`を使用します。ソース データがバケットの`mydata`ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`使用します。TiDB TiDB Cloud がこのディレクトリ内のすべてのファイルにアクセスできるように、ディレクトリの末尾に`/*`が追加されていることを確認してください。
+            たとえば、ソース データが`tidb-cloud-source-data`バケットのルート ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`使用します。ソース データがバケットの`mydata`ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`使用します。TiDB TiDB Cloud がこのディレクトリ内のすべてのファイルにアクセスできるように、ディレクトリの末尾に`/*`が追加されていることを確認してください。
 
         -   `"Resource": "<Your S3 bucket ARN>"`
 
@@ -102,7 +102,7 @@ TiDB Cloud がAmazon S3 バケット内のソースデータにアクセスで�
                     "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
                 }
 
-            バケット内のオブジェクトが別の暗号化されたバケットからコピーされた場合、KMS キー値には両方のバケットのキーを含める必要があります。たとえば、 `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]` 。
+            バケット内のオブジェクトが別の暗号化されたバケットからコピーされた場合、KMS キー値には両方のバケットのキーを含める必要があります。たとえば、 `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`です。
 
     6.  **「次へ」**をクリックします。
 
@@ -110,17 +110,17 @@ TiDB Cloud がAmazon S3 バケット内のソースデータにアクセスで�
 
 3.  AWS マネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロール ARN を取得します。
 
-    1.  IAMコンソールの[https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)で、左側のナビゲーション ペインの**[ロール]**をクリックし、 **[ロールの作成] を**クリックします。
+    1.  IAMコンソールの[https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)で、左側のナビゲーション ペインの**[ロール]**をクリックし、 **[ロールの作成]**をクリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
     2.  ロールを作成するには、次の情報を入力します。
 
-        -   **信頼されたエンティティタイプ**で、 **AWS アカウント**を選択します。
+        -   **信頼されたエンティティタイプ**で、 **AWS アカウントを**選択します。
         -   **[AWS アカウント]**の下で**[別の AWS アカウント]**を選択し、 TiDB Cloudアカウント ID を**[アカウント ID]**フィールドに貼り付けます。
-        -   **オプション**で、**外部 ID が必要 (サードパーティがこのロールを引き受ける場合のベストプラクティス)**をクリックし、 TiDB Cloud外部 ID を**外部 ID**フィールドに貼り付けます。ロールが「外部 ID が必要」なしで作成された場合、プロジェクト内の 1 つの TiDB クラスターの設定が完了すると、そのプロジェクト内のすべての TiDB クラスターが同じロール ARN を使用して Amazon S3 バケットにアクセスできます。ロールがアカウント ID と外部 ID を使用して作成された場合、対応する TiDB クラスターのみがバケットにアクセスできます。
+        -   **オプション**で、 [混乱した副官の問題](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)を回避するために**外部 ID が必要 を**クリックし、 TiDB Cloud外部 ID を**外部 ID**フィールドに貼り付けます。ロールが「外部 ID が必要」なしで作成された場合、S3 バケット URI とIAMロール ARN を持つすべてのユーザーが Amazon S3 バケットにアクセスできる可能性があります。ロールがアカウント ID と外部 ID の両方で作成された場合、同じプロジェクトと同じリージョンで実行されている TiDB クラスターのみがバケットにアクセスできます。
 
-    3.  [**次へ]**をクリックしてポリシー リストを開き、作成したポリシーを選択して、 **[次へ]**をクリックします。
+    3.  **[次へ]**をクリックしてポリシー リストを開き、作成したポリシーを選択して、 **[次へ]**をクリックします。
 
     4.  **[ロールの詳細]**でロールの名前を設定し、右下隅の**[ロールの作成]**をクリックします。ロールが作成されると、ロールのリストが表示されます。
 
@@ -148,7 +148,7 @@ TiDB Cloud がAmazon S3 バケット内のソースデータにアクセスで�
 
 2.  AWS アカウント ID またはアカウントエイリアスと、 IAMユーザー名とパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam)にサインインします。
 
-3.  アクセスキーを作成します。詳細については、 [IAMユーザーのアクセスキーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
+3.  アクセスキーを作成します。詳細については、 [IAMユーザーのアクセスキーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)参照してください。
 
 > **注記：**
 >
@@ -169,9 +169,9 @@ TiDB Cloud がGCS バケット内のソース データにアクセスできる�
         >
         > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート] を**クリックします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-    3.  右上隅の**「データのインポート」**をクリックします。
+    3.  右上隅の**「データのインポート」を**クリックします。
 
         このクラスタにデータを初めてインポートする場合は、 **「GCS からのインポート」**を選択します。
 
@@ -181,7 +181,7 @@ TiDB Cloud がGCS バケット内のソース データにアクセスできる�
 
     1.  [Google Cloud コンソール](https://console.cloud.google.com/)にサインインします。
 
-    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、 **[ロールの作成] を**クリックします。
+    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、 **[ロールの作成]**をクリックします。
 
         ![Create a role](/media/tidb-cloud/gcp-create-role.png)
 
@@ -195,11 +195,11 @@ TiDB Cloud がGCS バケット内のソース データにアクセスできる�
         -   storage.objects.get
         -   storage.objects.list
 
-        権限名をフィルター クエリとして**[プロパティ名または値の入力**] フィールドにコピーし、フィルター結果で名前を選択できます。3 つの権限を追加するには、権限名の間に**OR**を使用できます。
+        権限名をフィルター クエリとして**[プロパティ名または値の入力]**フィールドにコピーし、フィルター結果で名前を選択できます。3 つの権限を追加するには、権限名の間に**OR**を使用できます。
 
         ![Add permissions](/media/tidb-cloud/gcp-add-permissions.png)
 
-3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB Cloudがアクセスする GCS バケットの名前をクリックします。
+3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB Cloud がアクセスする GCS バケットの名前をクリックします。
 
 4.  **バケットの詳細**ページで、 **「権限」**タブをクリックし、 **「アクセスの許可」**をクリックします。
 
@@ -221,9 +221,9 @@ TiDB Cloud がGCS バケット内のソース データにアクセスできる�
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
 
-    フォルダの gsutil URI を使用する場合は、フォルダを開き、フォルダ名の後の [コピー] ボタンをクリックしてフォルダ名をコピーします。その後、フォルダの正しい URI を取得するには、名前の先頭に`gs://` 、末尾に`/`追加する必要があります。
+    フォルダの gsutil URI を使用する場合は、フォルダを開き、フォルダ名の後の [コピー] ボタンをクリックしてフォルダ名をコピーします。その後、フォルダの正しい URI を取得するには、名前の先頭に`gs://` 、末尾に`/`を追加する必要があります。
 
-    たとえば、フォルダー名が`tidb-cloud-source-data`の場合、URI として`gs://tidb-cloud-source-data/`を使用する必要があります。
+    たとえば、フォルダー名が`tidb-cloud-source-data`場合、URI として`gs://tidb-cloud-source-data/`使用する必要があります。
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
 
