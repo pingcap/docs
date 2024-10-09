@@ -21,18 +21,17 @@ In TiDB, you can create and use vector search indexes for such approximate neare
 >
 > The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-TiDB currently supports the following vector search index algorithm:
-
-- HNSW
+TiDB currently supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
 
 ## Restrictions
 
 - TiFlash nodes must be deployed in your cluster in advance.
 - Vector search indexes cannot be used as primary keys or unique indexes.
 - Vector search indexes can only be created on a single vector column and cannot be combined with other columns (such as integers or strings) to form composite indexes.
-- A distance function must be specified when creating and using vector search indexes (currently, only cosine distance `VEC_COSINE_DISTANCE()` and L2 distance `VEC_L2_DISTANCE()` functions are supported).
+- A distance function must be specified when creating and using vector search indexes. Currently, only cosine distance `VEC_COSINE_DISTANCE()` and L2 distance `VEC_L2_DISTANCE()` functions are supported.
 - For the same column, creating multiple vector search indexes using the same distance function is not supported.
 - Deleting columns with vector search indexes is not supported. Creating multiple indexes in the same statement is not supported.
+- Modifying the type of a column with a vector index is not supported (lossy change, that is, column data is modified).
 - Setting vector search indexes as [invisible](/sql-statements/sql-statement-alter-index.md) is not supported.
 
 ## Create the HNSW vector index
@@ -49,7 +48,6 @@ In TiDB, you can create an HNSW index for a column with a [vector data type](/ve
     CREATE TABLE foo (
         id       INT PRIMARY KEY,
         data     VECTOR(5),
-        data64   VECTOR64(10),
         VECTOR INDEX idx_data USING HNSW ((VEC_COSINE_DISTANCE(data)))
     );
     ```
@@ -61,10 +59,6 @@ In TiDB, you can create an HNSW index for a column with a [vector data type](/ve
 
     ALTER TABLE foo ADD VECTOR INDEX idx_name ((VEC_COSINE_DISTANCE(data))) USING HNSW;
     ```
-
-> **Note:**
->
-> The vector index is experimental. The syntax might change before GA.
 
 When creating an HNSW vector index, you need to specify the distance function for the vector:
 
@@ -156,7 +150,7 @@ SELECT * FROM
 ) t
 WHERE category = "document";
 
--- Note that this query might return less than 5 results if some are filtered out.
+-- Note that this query might return fewer than 5 results if some are filtered out.
 ```
 
 **Use table partitioning**: Queries within a table [partition](/partitioned-table.md) can fully utilize the vector index. This can be useful if you want to perform equality filters, as equality filters can be turned into accessing specified partitions.
@@ -251,7 +245,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 
     For more information, see [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md).
 
-In addition, you can monitor the execution progress of the DDL job by executing `ADMIN SHOW DDL JOBS;` and checking the `row count`. However, this method is not fully accurate, because the `row count` value is obtained from the `rows_stable_indexed` field in `TIFLASH_INDEXES`. This approach can used as a reference for tracking the progress of indexing.
+In addition, you can monitor the execution progress of the DDL job by executing `ADMIN SHOW DDL JOBS;` and checking the `row count`. However, this method is not fully accurate, because the `row count` value is obtained from the `rows_stable_indexed` field in `TIFLASH_INDEXES`. You can use this approach as a reference for tracking the progress of indexing.
 
 ## Check whether the vector index is used
 
