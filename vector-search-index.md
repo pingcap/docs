@@ -55,18 +55,18 @@ In TiDB, you can create an HNSW index for a column with a [vector data type](/ve
 - For an existing table that already contains a vector column, use the following syntax to create an HNSW index for the vector column:
 
     ```sql
-    CREATE VECTOR INDEX idx_name ON foo ((VEC_COSINE_DISTANCE(data))) USING HNSW;
-    ALTER TABLE foo ADD VECTOR INDEX idx_name ((VEC_COSINE_DISTANCE(data))) USING HNSW;
+    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
+    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
 
     -- You can also explicitly specify "USING HNSW" to build the vector search index.
-    CREATE VECTOR INDEX idx_name ON foo ((VEC_COSINE_DISTANCE(data))) USING HNSW;
-    ALTER TABLE foo ADD VECTOR INDEX idx_name ((VEC_COSINE_DISTANCE(data))) USING HNSW;
+    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
+    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
     ```
 
 When creating an HNSW vector index, you need to specify the distance function for the vector:
 
-- Cosine Distance: `((VEC_COSINE_DISTANCE(cols_name)))`
-- L2 Distance: `((VEC_L2_DISTANCE(cols_name)))`
+- Cosine Distance: `((VEC_COSINE_DISTANCE(embedding)))`
+- L2 Distance: `((VEC_L2_DISTANCE(embedding)))`
 
 The vector index can only be created for fixed-dimensional vector columns like `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns like `VECTOR` because vector distances can only be calculated between vectors with the same dimensions.
 
@@ -116,8 +116,8 @@ The vector search index can be used in K-nearest neighbor search queries by usin
 
 ```sql
 SELECT *
-FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+FROM foo
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10
 ```
 
@@ -134,7 +134,7 @@ Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize the 
 
 SELECT * FROM vec_table
 WHERE category = "document"
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
@@ -148,7 +148,7 @@ To use the vector index with filters, consider the following workarounds:
 SELECT * FROM
 (
   SELECT * FROM vec_table
-  ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+  ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
   LIMIT 5
 ) t
 WHERE category = "document";
@@ -164,7 +164,7 @@ For example, suppose you want to find the closest documentation for a specific p
 -- For the following query, the `WHERE` filter is performed before KNN, so the vector index cannot be used:
 SELECT * FROM docs
 WHERE ver = "v2.0"
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
@@ -188,7 +188,7 @@ CREATE TABLE docs (
 
 SELECT * FROM docs
 PARTITION (p_v2_0)
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
@@ -210,7 +210,7 @@ CREATE TABLE docs (
 
 SELECT * FROM docs
 PARTITION (p_v2_0)
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
@@ -258,7 +258,7 @@ Use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALY
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
 +-----+-------------------------------------------------------------------------------------+
 | ... | operator info                                                                       |
@@ -280,7 +280,7 @@ LIMIT 10;
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-     -> ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]');
+     -> ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]');
 +--------------------------------+-----+--------------------------------------------------+
 | id                             | ... | operator info                                    |
 +--------------------------------+-----+--------------------------------------------------+
@@ -299,7 +299,7 @@ When the vector index cannot be used, a warning occurs in some cases to help you
 ```sql
 -- Using a wrong distance function:
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-ORDER BY Vec_l2_Distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_L2_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
 
 [tidb]> SHOW WARNINGS;
@@ -307,7 +307,7 @@ ANN index not used: not ordering by COSINE distance
 
 -- Using a wrong order:
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]') DESC
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]') DESC
 LIMIT 10;
 
 [tidb]> SHOW WARNINGS;
@@ -320,7 +320,7 @@ To learn detailed information about how a vector index is used, you can execute 
 
 ```sql
 [tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
 +-----+--------------------------------------------------------+-----+
 |     | execution info                                         |     |
