@@ -64,6 +64,7 @@ ResourceGroupRunawayActionOption ::=
     DRYRUN
 |   COOLDOWN
 |   KILL
+| "SWITCH_GROUP" '(' ResourceGroupName ')'
 
 BackgroundOptionList ::=
     DirectBackgroundOption
