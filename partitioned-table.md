@@ -316,11 +316,6 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 
 ### List partitioning
 
-Before creating a List partitioned table, make sure the following system variables are set to their default values of `ON`:
-
-- [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)
-- [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition)
-
 List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
 
 Suppose that you want to create a personnel record table. You can create a table as follows:
@@ -1480,7 +1475,7 @@ This section discusses the relationship of partitioning keys with primary keys a
 
 > **Note:**
 > 
-> This rule only applies to the scenarios where the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) system variable is not enabled. When it is enabled, unique keys in partitioned tables are not required to include all the columns used in the partition expressions. For more information, see [global indexes](#global-indexes).
+> You can ignore this rule when using [global indexes](#global-indexes).
 
 For example, the following table creation statements are invalid:
 
@@ -1560,7 +1555,7 @@ PARTITIONS 4;
 ```
 
 ```
-ERROR 1491 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
+ERROR 8264 (HY000): Global Index is needed for index 'col1', since the unique index is not including all partitioning columns, and GLOBAL is not given as IndexOption
 ```
 
 The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table. After the following modifications, the `CREATE TABLE` statement becomes valid:
@@ -1686,7 +1681,7 @@ CREATE TABLE t (a varchar(20), b blob,
 ```
 
 ```sql
-ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's partitioning function
+ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index is not including all partitioning columns, and GLOBAL is not given as IndexOption
 ```
 
 #### Global indexes
@@ -1699,15 +1694,13 @@ To address these issues, TiDB introduces the global indexes feature in v8.3.0. A
 >
 > The global indexes feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-To create a global index for a primary key or unique key that **does not include all the columns used in the partition expressions**, you can enable the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) system variable and add the `GLOBAL` keyword in the index definition. 
+To create a global index for a primary key or unique key that **does not include all the columns used in the partition expressions**, add the `GLOBAL` keyword in the index definition. 
 
 > **Note:**
 >
 > Global indexes affect partition management. `DROP`, `TRUNCATE`, and `REORGANIZE PARTITION` operations also trigger updates to table-level global indexes, meaning that these DDL operations will only return results after the global indexes of the corresponding tables are fully updated.
 
 ```sql
-SET tidb_enable_global_index = ON;
-
 CREATE TABLE t1 (
     col1 INT NOT NULL,
     col2 DATE NOT NULL,
@@ -1725,8 +1718,6 @@ In the preceding example, the unique index `uidx12` is a global index, while `ui
 Note that a **clustered index** cannot be a global index, as shown in the following example:
 
 ```sql
-SET tidb_enable_global_index = ON;
-
 CREATE TABLE t2 (
     col1 INT NOT NULL,
     col2 DATE NOT NULL,
@@ -1919,10 +1910,6 @@ select * from t;
 +------|------+
 5 rows in set (0.00 sec)
 ```
-
-The `tidb_enable_list_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `OFF`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
-
-This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_list_partition-new-in-v50).
 
 ### Dynamic pruning mode
 
