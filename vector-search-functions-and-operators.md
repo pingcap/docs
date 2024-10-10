@@ -27,19 +27,19 @@ The following functions are designed specifically for [Vector data types](/vecto
 
 | Function Name                                             | Description                                                      |
 | --------------------------------------------------------- | ---------------------------------------------------------------- |
-| [VEC_L2_DISTANCE](#vec_l2_distance)                       | Calculates L2 distance (Euclidean distance) between two vectors  |
-| [VEC_COSINE_DISTANCE](#vec_cosine_distance)               | Calculates the cosine distance between two vectors               |
-| [VEC_NEGATIVE_INNER_PRODUCT](#vec_negative_inner_product) | Calculates the negative of the inner product between two vectors |
-| [VEC_L1_DISTANCE](#vec_l1_distance)                       | Calculates L1 distance (Manhattan distance) between two vectors  |
+| [`VEC_L2_DISTANCE`](#vec_l2_distance)                       | Calculates L2 distance (Euclidean distance) between two vectors  |
+| [`VEC_COSINE_DISTANCE`](#vec_cosine_distance)               | Calculates the cosine distance between two vectors               |
+| [`VEC_NEGATIVE_INNER_PRODUCT`](#vec_negative_inner_product) | Calculates the negative of the inner product between two vectors |
+| [`VEC_L1_DISTANCE`](#vec_l1_distance)                       | Calculates L1 distance (Manhattan distance) between two vectors  |
 
 **Other vector functions:**
 
 | Function Name                   | Description                                         |
 | ------------------------------- | --------------------------------------------------- |
-| [VEC_DIMS](#vec_dims)           | Returns the dimension of a vector                   |
-| [VEC_L2_NORM](#vec_l2_norm)     | Calculates the L2 norm (Euclidean norm) of a vector |
-| [VEC_FROM_TEXT](#vec_from_text) | Converts a string into a vector                     |
-| [VEC_AS_TEXT](#vec_as_text)     | Converts a vector into a string                     |
+| [`VEC_DIMS`](#vec_dims)           | Returns the dimension of a vector                   |
+| [`VEC_L2_NORM`](#vec_l2_norm)     | Calculates the L2 norm (Euclidean norm) of a vector |
+| [`VEC_FROM_TEXT`](#vec_from_text) | Converts a string into a vector                     |
+| [`VEC_AS_TEXT`](#vec_as_text)     | Converts a vector into a string                     |
 
 ## Extended built-in functions and operators
 
@@ -56,8 +56,8 @@ For more information about how vector arithmetic works, see [Vector Data Type | 
 
 **Aggregate (GROUP BY) functions:**
 
-| Name                                                                                                          | Description                                      |
-| :------------------------------------------------------------------------------------------------------------ | :----------------------------------------------- |
+| Name                              | Description                                      |
+| :----------------------- | :----------------------------------------------- |
 | [`COUNT()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count)                  | Return a count of the number of rows returned    |
 | [`COUNT(DISTINCT)`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_count-distinct) | Return the count of a number of different values |
 | [`MAX()`](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_max)                      | Return the maximum value                         |
@@ -65,8 +65,8 @@ For more information about how vector arithmetic works, see [Vector Data Type | 
 
 **Comparison functions and operators:**
 
-| Name                                                                                                                | Description                                           |
-| ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Name                                  | Description                                           |
+| ---------------------------------------- | ----------------------------------------------------- |
 | [`BETWEEN ... AND ...`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_between)         | Check whether a value is within a range of values     |
 | [`COALESCE()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)                 | Return the first non-NULL argument                    |
 | [`=`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal)                             | Equal operator                                        |
