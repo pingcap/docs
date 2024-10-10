@@ -47,8 +47,8 @@ In TiDB, you can create an HNSW index for a column with a [vector data type](/ve
     ```sql
     CREATE TABLE foo (
         id       INT PRIMARY KEY,
-        data     VECTOR(5),
-        VECTOR INDEX idx_data USING HNSW ((VEC_COSINE_DISTANCE(data)))
+        embedding     VECTOR(5),
+        VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)))
     );
     ```
 
@@ -56,14 +56,17 @@ In TiDB, you can create an HNSW index for a column with a [vector data type](/ve
 
     ```sql
     CREATE VECTOR INDEX idx_name ON foo ((VEC_COSINE_DISTANCE(data))) USING HNSW;
+    ALTER TABLE foo ADD VECTOR INDEX idx_name ((VEC_COSINE_DISTANCE(data))) USING HNSW;
 
+    -- You can also explicitly specify "USING HNSW" to build the vector search index.
+    CREATE VECTOR INDEX idx_name ON foo ((VEC_COSINE_DISTANCE(data))) USING HNSW;
     ALTER TABLE foo ADD VECTOR INDEX idx_name ((VEC_COSINE_DISTANCE(data))) USING HNSW;
     ```
 
 When creating an HNSW vector index, you need to specify the distance function for the vector:
 
-- Cosine Distance: `((VEC_COSINE_DISTANCE(cols_name))) USING HNSW`
-- L2 Distance: `((VEC_L2_DISTANCE(cols_name))) USING HNSW`
+- Cosine Distance: `((VEC_COSINE_DISTANCE(cols_name)))`
+- L2 Distance: `((VEC_L2_DISTANCE(cols_name)))`
 
 The vector index can only be created for fixed-dimensional vector columns like `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns like `VECTOR` because vector distances can only be calculated between vectors with the same dimensions.
 
