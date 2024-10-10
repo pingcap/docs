@@ -5,7 +5,7 @@ summary: Learn the limitations of the TiDB Vector Search.
 
 # Vector Search Limitations
 
-This document describes the known limitations of TiDB Vector Search. We are continuously working to enhance your experience by adding more features.
+This document describes the known limitations of TiDB Vector Search.
 
 <CustomContent platform="tidb">
 
