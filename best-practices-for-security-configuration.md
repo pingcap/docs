@@ -109,7 +109,7 @@ sudo iptables -A INPUT -s internal IP address range -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 4000 -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 9000 -j ACCEPT
 
-# Default deny all other traffic
+# Deny all other traffic by default
 sudo iptables -P INPUT DROP
 ```
 
