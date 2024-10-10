@@ -100,11 +100,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     For more information, see [documentation](doc-link).
 
-* Add RPC mode for obtaining TSO, reducing TSO retrieval latency [#54960](https://github.com/pingcap/tidb/issues/54960) @[MyonKeminta](https://github.com/MyonKeminta) **tw@qiancai** <!--1893-->
+* Add concurrent RPC modes for obtaining TSO, reducing TSO retrieval latency [#54960](https://github.com/pingcap/tidb/issues/54960) @[MyonKeminta](https://github.com/MyonKeminta) **tw@qiancai** <!--1893-->
 
-    When TiDB requests TSO from PD, it consolidates multiple requests over a period of time and processes them in synchronous batches to decrease the number of RPC (Remote Procedure Call) requests and reduce PD workload. However, the performance of this synchronous batching mode is not ideal in latency-sensitive scenarios.
+    When TiDB requests TSO from PD, it collects multiple requests over a period of time and processes them in batches serially to decrease the number of Remote Procedure Call (RPC) requests and reduce PD workload. In latency-sensitive scenarios, however, the performance of this serial batching mode is not ideal.
 
-    In v8.4.0, TiDB introduces an asynchronous batching mode for TSO requests,  which provides various levels of concurrency. This asynchronous mode can reduce the latency for obtaining a TSO but might increase PD workload. To set the RPC mode for obtaining TSO, you can configure the [tidb_tso_client_rpc_mode](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840) system variable.
+    In v8.4.0, TiDB introduces concurrent batching modes for TSO requests with different concurrency capabilities. Concurrent modes reduce TSO retrieval latency but might increase the PD workload. To set a concurrent RPC mode for obtaining TSO, configure the [tidb_tso_client_rpc_mode](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840) system variable.
 
     For more information, see [documentation](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840).
 
