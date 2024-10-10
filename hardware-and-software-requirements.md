@@ -105,7 +105,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.21 or later |
+|   Golang  |  1.23 or later |
 |   Rust    |   nightly-2023-12-28 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  17.0 or later  |
