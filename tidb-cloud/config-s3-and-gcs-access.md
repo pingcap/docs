@@ -221,3 +221,33 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
 
 7. In the TiDB Cloud console, go to the **Data Import** page where you get the Google Cloud Service Account ID, and then paste the GCS bucket gsutil URI to the **Bucket gsutil URI** field. For example, paste `gs://tidb-cloud-source-data/`.
+
+## Configure Azure Blob Storage access
+
+To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use a service SAS token to configure the container access:
+
+1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
+
+2. On your **Storage account** page, click **Security+network** in the left navigation pane, and then click **Shared access signature**.
+
+   ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
+
+3. On the **Shared access signature** page, create a service SAS token with the necessary permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
+
+    1. In the **Allowed services** section, choose the **Blob** service.
+    2. In the **Allowed Resource types** section, choose **Container** and **Object**.
+    3. In the **Allowed permissions** section, choose the permissions as needed. For example, importing data to a TiDB Cloud Dedicated cluster needs the **Read** and **List** permissions.
+    4. Adjust **Start and expiry date/time** as needed. For security reasons, it's recommended to set an expiration date that aligns with your data import timeline.
+    5. You can keep the default values for other settings.
+
+   ![sas-create](/media/tidb-cloud/dedicated-external-storage/azure-sas-create.png)
+
+4. Click **Generate SAS and connection string** to generate the SAS token.
+
+5. Copy the generated **SAS Token**. You will need this token string when configuring the data import in TiDB Cloud.
+
+> **Note:**
+>
+> TiDB Cloud does not store your SAS token. It is recommended that you revoke or delete the SAS token after the import is complete to ensure the security of your Azure Blob Storage.
+
+Remember to test the connection and permissions before starting your data import to ensure TiDB Cloud Dedicated can access the specified Azure Blob container and files.
