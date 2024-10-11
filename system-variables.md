@@ -1119,7 +1119,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
-- This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
+- Range: `[1, 128]`. Before v8.4.0, the value range is `[1, 18446744073709551615]`.
+- This variable specifies the concurrency for writing collected statistics when TiDB analyzes a partitioned table.
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
@@ -5012,7 +5013,7 @@ SHOW WARNINGS;
 - Type: Boolean
 - Default value: Before v7.2.0, the default value is `OFF`. Starting from v7.2.0, the default value is `ON`.
 - Specifies whether to remove `ORDER BY` clause in a subquery.
-- In the ISO/IEC SQL standard, `ORDER BY` is mainly used to sort the results of top-level queries. For subqueries, the standard does not require that the results be sorted by `ORDER BY`. 
+- In the ISO/IEC SQL standard, `ORDER BY` is mainly used to sort the results of top-level queries. For subqueries, the standard does not require that the results be sorted by `ORDER BY`.
 - To sort subquery results, you can usually handle it in the outer query, such as using the window function or using `ORDER BY` again in the outer query. Doing so ensures the order of the final result set.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
