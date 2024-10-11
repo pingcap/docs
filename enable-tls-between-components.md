@@ -156,11 +156,12 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
 The Common Name is used for caller verification. In general, the callee needs to verify the caller's identity, in addition to verifying the key, the certificates, and the CA provided by the caller. For example, TiKV can only be accessed by TiDB, and other visitors are blocked even though they have legitimate certificates.
 
-To verify component caller's identity, you need to mark the certificate user identity using `Common Name` when generating the certificate, and to check the caller's identity by configuring the `Common Name` list for the callee.
+To verify component caller's identity, you need to mark the certificate user identity using `Common Name` when generating the certificate, and to check the caller's identity by configuring the `cluster-verify-cn` (for the TiDB component) or `cert-allowed-cn` (for other components) for the callee.
 
 > **Note:**
 >
-> Currently the `cert-allowed-cn` configuration item of the PD can only be set to one value. Therefore, the `commonName` of all authentication objects must be set to the same value.
+> After version 8.4, PD supports multiple `Common Name`. You can configure them in the cert-allowed-cn setting for each component as needed. It’s important to note that TiUP uses a distinct identifier when querying component statuses. For example, if the cluster name is `test`, it will use `test-client` as the Common Name.
+> For versions 8.3 and earlier, the `cert-allowed-cn` configuration item of the PD can only be set to one value. Therefore, the `Common Name` of all authentication objects must be set to the same value. Please refer to the v8.3.0 documentation.
 
 - TiDB
 
@@ -168,7 +169,7 @@ To verify component caller's identity, you need to mark the certificate user ide
 
     ```toml
     [security]
-    cluster-verify-cn = ["TiDB"]
+    cluster-verify-cn = ["tidb", "test-client", "prometheus"]
     ```
 
 - TiKV
@@ -177,7 +178,7 @@ To verify component caller's identity, you need to mark the certificate user ide
 
     ```toml
     [security]
-    cert-allowed-cn = ["TiDB"]
+    cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "prometheus"]
     ```
 
 - PD
@@ -186,7 +187,7 @@ To verify component caller's identity, you need to mark the certificate user ide
 
     ```toml
     [security]
-    cert-allowed-cn = ["TiDB"]
+    cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "test-client", "prometheus"]
     ```
 
 - TiFlash (New in v4.0.5)
@@ -195,14 +196,14 @@ To verify component caller's identity, you need to mark the certificate user ide
 
     ```toml
     [security]
-    cert_allowed_cn = ["TiDB"]
+    cert_allowed_cn = ["tidb", "tikv", "prometheus"]
     ```
 
     Configure in the `tiflash-learner.toml` file:
 
     ```toml
     [security]
-    cert-allowed-cn = ["TiDB"]
+    cert-allowed-cn = ["tidb", "tikv", "tiflash", "prometheus"]
     ```
 
 ## Reload certificates
