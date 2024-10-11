@@ -276,7 +276,7 @@ You can use `topic = "xxx"` to specify a topic dispatcher and use topic expressi
 
 The format of a topic expression is `[tenant_and_namespace][prefix]{schema}[middle][{table}][suffix]`. The following are the meanings of each part:
 
-- `tenant_and_namespace`：Optional. Represents the tenant and namespace of the topic, such as `persistent://abc/def/`. If not configured, it means that the topic is in the default namespace `default` which is under the default tenant `public` of Pulsar.
+- `tenant_and_namespace`：Optional. Represents the tenant and namespace of the topic, such as `persistent://abc/def/`. If not configured, it means that the topic is in the default namespace `default` under the default tenant `public` of Pulsar.
 - `prefix`: Optional. Represents the prefix of the topic name.
 - `{schema}`: Optional. Represents the database name.
 - `middle`: Optional. Represents the separator between a database name and a table name.
