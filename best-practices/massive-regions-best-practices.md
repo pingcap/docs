@@ -141,11 +141,7 @@ The default size of a Region is 96 MiB, and you can reduce the number of Regions
 
 > **Warning:**
 >
-> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are as follows:
->
-> + Performance jitter might be caused.
-> + The query performance, especially for queries that deal with a large range of data, might decrease.
-> + The Region scheduling slows down.
+> Customized Region size is an experimental feature before TiDB v6.5.0. If you need to resize the Region size, it is recommended that you upgrade to v6.5.0 or a later version.
 
 ### Method 7: Increase the maximum number of connections for Raft communication
 
