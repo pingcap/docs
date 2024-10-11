@@ -350,6 +350,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 ## Offline package changes
 
+Starting from v8.4.0, the following contents are removed from the `TiDB-community-toolkit` [binary package](/binary-package.md):
+
+- `pump-{version}-linux-{arch}.tar.gz`
+- `drainer-{version}-linux-{arch}.tar.gz`
+- `binlogctl`
+- `arbiter`
+
 ## Removed features
 
 * The following features are removed starting from v8.4.0:
