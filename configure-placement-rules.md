@@ -188,7 +188,9 @@ cat > rules.json <<EOF
     }
 ]
 EOF
-pd-ctl config placement save --in=rules.json
+
+» ./pd-ctl -u 127.0.0.1:2379 config placement-rules save --in=rules.json
+Success!
 ```
 
 The above operation writes `rule1` and `rule2` to PD. If a rule with the same `GroupID` + `ID` already exists in the system, this rule is overwritten.
@@ -206,7 +208,9 @@ cat > rules.json <<EOF
     }
 ]
 EOF
-pd-ctl config placement save --in=rules.json
+
+» ./pd-ctl -u 127.0.0.1:2379 config placement-rules save --in=rules.json
+Success!
 ```
 
 ### Use pd-ctl to configure rule groups
