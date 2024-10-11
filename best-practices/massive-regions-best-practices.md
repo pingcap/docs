@@ -140,7 +140,7 @@ If Region followers have not received the heartbeat from the leader within the `
 
 The default size of a Region is 96 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
 
-> **Warning:**
+> **Note:**
 >
 > Customized Region size is an experimental feature before TiDB v6.5.0. If you need to resize the Region size, it is recommended that you upgrade to v6.5.0 or a later version.
 
