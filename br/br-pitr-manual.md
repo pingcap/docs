@@ -133,16 +133,23 @@ tiup br log start \
 Encrypt using a master key managed by AWS KMS:
 
 ```shell
-...
+tiup br log start \
+    --task-name=pitr-with-encryption \
+    --pd ${PD_IP}:2379 \
+    --storage "s3://${BACKUP_COLLECTION_ADDR}/snapshot-${DATE}?access-key=${AWS_ACCESS_KEY}&secret-access-key=${AWS_SECRET_ACCESS_KEY}" \
+    --master-key-crypter-method aes128-ctr \
     --master-key "aws-kms:///${AWS_KMS_KEY_ID}?AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}&AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}&REGION=${AWS_REGION}"
 ```
 
 Encrypt using a master key managed by Google Cloud KMS:
 
 ```shell
-...
+tiup br log start \
+    --task-name=pitr-with-encryption \
+    --pd ${PD_IP}:2379 \
+    --storage "s3://${BACKUP_COLLECTION_ADDR}/snapshot-${DATE}?access-key=${AWS_ACCESS_KEY}&secret-access-key=${AWS_SECRET_ACCESS_KEY}" \
+    --master-key-crypter-method aes128-ctr \
     --master-key "gcp-kms:///projects/$GCP_PROJECT_ID/locations/$GCP_LOCATION/keyRings/$GCP_KEY_RING/cryptoKeys/$GCP_KEY_NAME?AUTH=specified&CREDENTIALS=$GCP_CREDENTIALS_PATH"
-
 ```
 
 > **Note:**
