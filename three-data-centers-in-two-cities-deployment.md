@@ -56,8 +56,6 @@ In the rac1 of AZ1, one server is deployed with TiDB and PD services, and the ot
 
 The TiDB server, the control machine, and the monitoring server are on rac3. The TiDB server is deployed for regular maintenance and backup. Prometheus, Grafana, and the restore tools are deployed on the control machine and monitoring machine.
 
-Another backup server can be added to deploy Drainer. Drainer saves binlog data to a specified location by outputting files, to achieve incremental backup.
-
 ## Configuration
 
 ### Example
