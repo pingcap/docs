@@ -5831,12 +5831,12 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     - The network latency between TiDB and PD is significantly higher than the time PD takes to allocate TSO (that is, network latency accounts for the majority of TSO RPC duration)
         - To get the duration of TSO RPC requests, check the **PD TSO RPC Duration** panel in the PD Client section of the Grafana TiDB dashboard.
         - To get the duration of PD TSO allocation, check the **PD server TSO handle duration** panel in the TiDB section of the Grafana PD dashboard.
-    - The additional network traffic is acceptable if the TSO RPC requests between TiDB and PD increases to twice (for `PARALLEL` mode) or 4 times (for `PARALLEL-FAST` mode) of before.
+    - The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for `PARALLEL` or 4 times for `PARALLEL-FAST`) is acceptable.
 
 > **Note:**
 >
-> - `PARALLEL` mode and `PARALLEL-FAST` mode are incompatible to [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) 和 [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530). If either [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) is set to no-zero value or [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530) is enabled, configuring `tidb_tso_client_rpc_mode` won't take effect, and TiDB will always work in `DEFAULT` mode.
-> - `PARALLEL` mode and `PARALLEL-FAST` mode are designed to reduce the average time cost of retrieving TS in TiDB. For situations with significant latency fluctuations, such as long-tail and latency spike issues, these two modes may not provide any remarkable performance improvement.
+> - `PARALLEL` and `PARALLEL-FAST` modes are incompatible with [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) and [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530). If either [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) is set to a non-zero value or [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530) is enabled, configuring `tidb_tso_client_rpc_mode` does not take effect, and TiDB always works in `DEFAULT` mode.
+> - `PARALLEL` and `PARALLEL-FAST` modes are designed to reduce the average time for retrieving TS in TiDB. In cases of situations with significant latency fluctuations, such as long-tail latency or latency spikes, these two modes might not provide any remarkable performance improvements.
 
 ### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
 
