@@ -1,13 +1,13 @@
 ---
 title: Best Practices for TiDB Security Configuration
-summary: Introduces best practices for TiDB security configuration to help mitigate potential security risks.
+summary: Learn the best practices for TiDB security configuration to help mitigate potential security risks.
 ---
 
 # Best Practices for TiDB Security Configuration
 
 The security of TiDB is crucial for protecting data integrity and confidentiality. This document provides guidelines for configuring TiDB clusters securely during deployment. By following these best practices, you can effectively reduce potential security risks, prevent data breaches, and ensure the continuous, stable, and reliable operation of your TiDB database system.
 
-> **Note：**
+> **Note:**
 >
 > This document offers general recommendations on TiDB security configurations. PingCAP does not guarantee the completeness or accuracy of the information, and it assumes no responsibility for any issues arising from the use of this guide. Users should assess these recommendations based on their specific needs and consult professionals for tailored advice.
 
@@ -28,17 +28,17 @@ To ensure that database users create strong passwords, it is recommended to conf
 
 ## Change the default Grafana password
 
-TiDB installation includes the Grafana component by default, and the default username and password are typically `admin/admin`. If the password is not changed promptly, attackers could exploit this to gain control of the system.
+TiDB installation includes the Grafana component by default, and the default username and password are typically `admin`/`admin`. If the password is not changed promptly, attackers could exploit this to gain control of the system.
 
 It is recommended to immediately change the Grafana password to a strong one during the TiDB deployment, and regularly update the password to ensure system security. Here are the steps to change the Grafana password:
 
 - Upon first login to Grafana, follow the prompts to change the password.
 
-  ![Grafana Password Reset Guide](/media/grafana-password-reset1.png)
+    ![Grafana Password Reset Guide](/media/grafana-password-reset1.png)
 
 - Access the Grafana personal configuration center to change the password.
 
-  ![Grafana Password Reset Guide](/media/grafana-password-reset2.png)
+    ![Grafana Password Reset Guide](/media/grafana-password-reset2.png)
 
 ## Enhance TiDB Dashboard security
 
@@ -50,18 +50,19 @@ To enhance security, it is recommended to create a [least-privilege SQL user](/d
 
 ### Restrict access control
 
-By default, TiDB Dashboard is designed for trusted users. The default port includes additional API interfaces besides TiDB Dashboard. If you intend to allow access to TiDB Dashboard from external networks or untrusted users, take the following measures to avoid security vulnerabilities:
+By default, TiDB Dashboard is designed for trusted users. The default port includes additional API interfaces besides TiDB Dashboard. If you want to allow access to TiDB Dashboard from external networks or untrusted users, take the following measures to avoid security vulnerabilities:
 
 - Use a firewall or other mechanisms to restrict the default `2379` port to trusted domains, preventing access by external users.
 
-  > **Note:**
-  >
-  > TiDB, TiKV, and other components need to communicate with the PD component via the PD client port. Do not block internal network access between components, which will make the cluster unavailable.
+    > **Note:**
+    >
+    > TiDB, TiKV, and other components need to communicate with the PD component via the PD client port. Do not block internal network access between components, which will make the cluster unavailable.
+
 - [Configure a reverse proxy](/dashboard/dashboard-ops-reverse-proxy.md#use-tidb-dashboard-behind-a-reverse-proxy) to securely provide TiDB Dashboard services to external users on a different port.
 
 ## Protect internal ports
 
-By default, TiDB installation includes several privileged interfaces for inter-component communication. These ports typically do not need to be accessible to users, as they are primarily for internal communication. Exposing these ports on public networks increases the attack surface, violates the principle of least privilege, and raises the risk of security vulnerabilities. The following table lists the default listening ports in a TiDB cluster:
+By default, TiDB installation includes several privileged interfaces for inter-component communication. These ports typically do not need to be accessible to users, because they are primarily for internal communication. Exposing these ports on public networks increases the attack surface, violates the principle of least privilege, and raises the risk of security vulnerabilities. The following table lists the default listening ports in a TiDB cluster:
 
 | Component                | Default port | Protocol       |
 |-------------------|-------------|------------|
