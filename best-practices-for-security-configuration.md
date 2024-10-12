@@ -17,7 +17,7 @@ By default, the root user in a newly created TiDB cluster has no password, which
 
 To avoid this risk, it is recommended to set a root password during deployment:
 
-- For deployments using TiUP, refer to [Deploy TiDB Cluster Using TiUP](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster) to generate a random password for the root user.
+- For deployments using TiUP, refer to [Deploy TiDB Cluster Using TiUP](/production-deployment-using-tiup.md#step-7-start-the-tidb-cluster) to generate a random password for the root user.
 - For deployments using TiDB Operator, refer to [Set initial account and password](https://docs.pingcap.com/tidb-in-kubernetes/stable/initialize-a-cluster#set-initial-account-and-password) to set the root password.
 
 ## Change the default Grafana password
