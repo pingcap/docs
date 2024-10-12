@@ -1,6 +1,7 @@
 ---
 title: Configure External Storage Access for TiDB Cloud Dedicated
 summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access and Google Cloud Storage (GCS) access.
+aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 ---
 
 # Configure External Storage Access for TiDB Cloud Dedicated
