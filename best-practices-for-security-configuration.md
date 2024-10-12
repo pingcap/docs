@@ -20,12 +20,6 @@ To avoid this risk, it is recommended to set a root password during deployment:
 - For deployments using TiUP, refer to [Deploy TiDB Cluster Using TiUP](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster) to generate a random password for the root user.
 - For deployments using TiDB Operator, refer to [Set initial account and password](https://docs.pingcap.com/tidb-in-kubernetes/stable/initialize-a-cluster#set-initial-account-and-password) to set the root password.
 
-## Enable password complexity checks
-
-By default, TiDB does not enforce password complexity policies, which might lead to the use of weak or empty passwords, increasing security risks.
-
-To ensure that database users create strong passwords, it is recommended to configure a reasonable [password complexity policy](/password-management.md#password-complexity-policy). For example, configure a policy that requires passwords to include a combination of uppercase letters, lowercase letters, numbers, and special characters. By enforcing password complexity checks, you can improve database security, prevent brute force attacks, reduce internal threats, ensure compliance with regulations, and lower the risk of data breaches, thus enhancing overall security.
-
 ## Change the default Grafana password
 
 TiDB installation includes the Grafana component by default, and the default username and password are typically `admin`/`admin`. If the password is not changed promptly, attackers could exploit this to gain control of the system.
