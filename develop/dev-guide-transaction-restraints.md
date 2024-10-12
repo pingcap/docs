@@ -716,8 +716,8 @@ The basic principle is to limit the size of the transaction. At the KV level, Ti
 
 - The maximum single transaction size supported is 1 TiB. 
 
-    - For TiDB v4.0 and later versions, You can configure it by [`performance.txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit). The value is `100 MB` for earlier versions.
-    - For TiDB v6.5.0 and later versions, this configuration is no longer recommended. For more information, see [`performance.txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit).
+    - For TiDB v4.0 and later versions, You can configure it by [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)). The value is `100 MB` for earlier versions.
+    - For TiDB v6.5.0 and later versions, this configuration is no longer recommended. For more information, see [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)).
 
 Note that for both the size restrictions and row restrictions, you should also consider the overhead of encoding and additional keys for the transaction during the transaction execution. To achieve optimal performance, it is recommended to write one transaction every 100 ~ 500 rows.
 
