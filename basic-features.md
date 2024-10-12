@@ -142,12 +142,13 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Async commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [1PC](/system-variables.md#tidb_enable_1pc-new-in-v50) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Large transactions (10GB)](/transaction-overview.md#transaction-size-limit) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Large transactions (1 TiB)](/transaction-overview.md#transaction-size-limit) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Pessimistic transactions](/pessimistic-transaction.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Optimistic transactions](/optimistic-transaction.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Repeatable-read isolation (snapshot isolation)](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Read-committed isolation](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Automatically terminating long-running idle transactions](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) | Y | Y | Y | N | N | N | N | N | N | N | N |
+| [Bulk DML execution mode (`tidb_dml_type = "bulk"`)](/system-variables.md#tidb_dml_type-new-in-v800) | E |  E | E |  N | N | N | N | N | N | N | N |
 
 ## Partitioning
 
