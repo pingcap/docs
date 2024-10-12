@@ -712,7 +712,7 @@ The basic principle is to limit the size of the transaction. At the KV level, Ti
 - The maximum single row record size is 120 MiB.
 
     - You can adjust it by using the [`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) configuration parameter of tidb-server for TiDB v4.0.10 and later v4.0.x versions, TiDB v5.0.0 and later versions. The value is `6 MB` for versions earlier than v4.0.10.
-    - Starting from v7.6.0, you can use the [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-introduced-from-v760-version) system variable to dynamically modify the value of this configuration item.
+    - Starting from v7.6.0, you can use the [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) system variable to dynamically modify the value of this configuration item.
 
 - The maximum single transaction size supported is 1 TiB. 
 
