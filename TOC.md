@@ -50,6 +50,14 @@
   - [Migrate from SQL Files](/migrate-from-mysql-dumpling-files.md)
   - [Replicate Incremental Data between TiDB Clusters in Real Time](/incremental-replication-between-clusters.md)
 - Maintain
+  - Security
+    - [Best Practices for TiDB Security Configuration](/best-practices-for-security-configuration.md)
+    - [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
+    - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
+    - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
+    - [Encryption at Rest](/encryption-at-rest.md)
+    - [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
+    - [Log Redaction](/log-redaction.md)
   - Upgrade
     - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
@@ -282,6 +290,7 @@
     - [TiKV](/grafana-tikv-dashboard.md)
     - [TiFlash](/tiflash/monitor-tiflash.md)
     - [TiCDC](/ticdc/monitor-ticdc.md)
+<<<<<<< HEAD
   - Secure
     - [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
@@ -289,6 +298,9 @@
     - [Encryption at Rest](/encryption-at-rest.md)
     - [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
     - [Log Redaction](/log-redaction.md)
+=======
+    - [Resource Control](/grafana-resource-control-dashboard.md)
+>>>>>>> fcaa5e3831 (Add security configuration documentation and migrate security docs di… (#18996))
   - Privileges
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [Privilege Management](/privilege-management.md)
