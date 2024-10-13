@@ -133,12 +133,32 @@ snap-io-max-write-bytes-per-sec = "300MiB"
 | snap-io-max-write-bytes-per-sec | Increase the bandwidth to speed up data replication to TiFlash Nodes | more impact on online traffic during scale operation | 
 
 
-# Edge Cases
 
-These need to be identified and adjusted individually. The proposed solution works only for specific cases.
+# Edge Cases and Specific Optimizations
 
-## Avoid tso wait for small query with KV Cop request
-If the application allows stale reads, to avoid the wait time associated with TSO (Timestamp Oracle), you can use the tidb_low_resolution_tso setting in TiDB.
+While the general configurations provided earlier offer a good starting point for performance tuning, certain scenarios require more targeted optimizations. This section covers specific cases that may need individual attention and fine-tuning.
+
+## Identifying Edge Cases
+
+1. Analyze query patterns and workload characteristics
+2. Monitor system metrics and performance bottlenecks
+3. Gather feedback from application teams on specific pain points
+
+## Common Edge Cases and Solutions
+
+1. High TSO wait for High-frequency small queries
+2. Choose the proper mak chunk size for different workloads
+3. Choose proper tidb_txn_mode and tidb_dml_type for different workloads
+4. Optimize Group By and Distinct Operations with TiKV Pushdown
+5. Mitigate Too many MVCC versions by in-memory engine
+6. Disable auto analyze job during batch processing
+
+Each of these cases may require adjustments to different parameters or usage of specific features in TiDB. The following sections provide more details on how to address these scenarios.
+
+Remember that these optimizations should be applied cautiously and with thorough testing, as their effectiveness can vary depending on your specific use case and data patterns.
+
+## High TSO wait for High-frequency small queries
+If the TSO (Timestamp Oracle) wait contributes significantly to the execution plan time, and if the application can tolerate stale reads, you can use the `tidb_low_resolution_tso` setting in TiDB to avoid the TSO wait time and improve query latency. Here's how to enable it:
 
 ```SQL
 set global tidb_low_resolution_tso=on;
@@ -150,8 +170,17 @@ set global tidb_low_resolution_tso=on;
 | ---------| ---- | ----|
 | tidb_low_resolution_tso| Enable stale read to avoid tso wait to improve the query latency | Application can accept stale read | 
 
+### How to Troubleshooting
+Identified by [SQL Execute Time Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-methods#tune-by-color) in the grafana dashboard [performance overview](https://docs.pingcap.com/tidb/stable/grafana-performance-overview-dashboard).
+
 ## Choose the proper mak chunk size for different workloads
-The tidb_max_chunk_size parameter in TiDB controls the maximum number of rows that can be processed in a single chunk during query execution. Adjusting this parameter based on the type of workload can optimize performance. Lower the default value for Pure OLTP  Workloads, increase the default value for Analytical Workloads.
+The tidb_max_chunk_size parameter in TiDB controls the maximum number of rows that can be processed in a single chunk during query execution. Adjusting this parameter based on the workload type can optimize performance:
+
+- For pure OLTP workloads: Lower the default value (e.g., from 1024 to 128) to reduce memory allocation overhead and make limit pushdown more efficient.
+
+- For analytical workloads: Increase the default value to improve processing efficiency for large result sets.
+
+It's important to test different values and monitor performance, as the optimal setting depends on your specific workload characteristics.
 
 ```SQL
 set global tidb_max_chunk_size=128;
@@ -163,7 +192,7 @@ set global tidb_max_chunk_size=128;
 | ---------| ---- | ----|
 | tidb_max_chunk_size | Reduce from default 1024 to 128, reduce the memory allocation overhead, make the limit pushdown more efficient | For the analytical workloads on TiKV, By adjusting tidb_max_chunk_size from 1024 to 128, the performance degradation is between 3.3% and 10.9% | 
 
-## tidb_txn_mode and tidb_dml_type
+## Choose proper tidb_txn_mode and tidb_dml_type for different workloads
 
 Here is the guideline how to choose txn mode and dml type
 
@@ -175,7 +204,14 @@ Here is the guideline how to choose txn mode and dml type
 | Optimistic mode | Set session tidb_txn_mode="optimistic"; | - begin .. insert..insert..insert...end; - No or a few write conflict - Use optimistic mode | 
 | pessimistic mode (by default) | Set session tidb_txn_mode="pessimistic"; | Use pessimistic and  standard for other cases | 
 
-## Group by and distinct pushdown to TiKV
+## Optimize Group By and Distinct Operations with TiKV Pushdown
+
+Group by and distinct pushdown can significantly improve query performance by offloading aggregation operations to TiKV, reducing data transfer and processing load on TiDB. However, the effectiveness of this optimization depends on the data characteristics:
+
+- Beneficial for: Columns with low number of distinct values (NDV) and high cardinality (many repeated values)
+- May not improve or could slow down: Columns with high NDV and low cardinality (mostly unique values)
+
+To enable these optimizations:
 
 ```SQL
 set global tidb_opt_agg_push_down=on;
@@ -207,8 +243,32 @@ If too many MVCC versions are observed during the PoC, either due to hot read/wr
    load-evict-interval = "4m"
    ```
 
-## Disable auto analyze job during batch processing
-During batch processing, and manually gathering statistics when it's needed. It's advised to disable auto analyze, to avoid the frequent analyze jobs consuming too much resource
+### How to Troubleshoot Too Many MVCC Versions
+
+There are two common ways to identify if the system is suffering from too many MVCC versions:
+
+1. From the [execution plan](https://docs.pingcap.com/tidb/stable/identify-slow-queries#fields-description):
+   In the TiKV Coprocessor Task fields of the execution plan, compare `Total_keys` and `Process_keys`:
+   - `Total_keys`: The number of keys that Coprocessor has scanned.
+   - `Process_keys`: The number of keys that Coprocessor has processed.
+   A significant difference between `Process_keys` and `Total_keys` indicates the presence of many old versions, as `Process_keys` does not include the old versions of MVCC.
+
+2. From Grafana Metrics [coprocessor-detail](https://docs.pingcap.com/tidb/stable/grafana-tikv-dashboard#coprocessor-detail):
+   In the "Total Ops Details (Table Scan)" and "Total Ops Details (Index Scan)" panels, a large difference between `next + prev` and `processed_keys` indicates the existence of many old versions.
+
+Other common symptoms associated with too many MVCC versions include:
+1. High TiKV CPU usage on the unified thread pool
+2. High number of running tasks on the unified thread pool
+
+To mitigate these issues, consider enabling the in-memory engine as described in the previous section, and monitor your system closely after making any changes.
+
+
+
+## Disable Auto Analyze During Batch Processing
+
+During batch processing operations, it's recommended to disable automatic statistics collection and manually gather statistics when needed. This prevents frequent analyze jobs from consuming excessive resources during critical batch operations.
+
+To disable auto analyze:
 ```SQL
 set global tidb_enable_auto_analyze = off;
 ```
