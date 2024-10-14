@@ -5,11 +5,11 @@ summary: TiDB adopts an LRU-based (Least Recently Used) caching mechanism for sc
 
 # Schema Cache
 
-In some multi-tenant scenarios, there might be tens of thousands or even millions of databases and tables. Loading all the schema information of these databases and tables into memory can consume a large amount of memory and degrade access performance. To address this issue, TiDB introduces a schema caching mechanism similar to LRU (Least Recently Used). Only the schema information of the most recently accessed databases and tables is cached in memory.
+In some multi-tenant scenarios, there might be hundreds of thousands or even millions of databases and tables. Loading the schema information of all these databases and tables into memory would not only consume a large amount of memory but also degrade access performance. To address this issue, TiDB introduces a schema caching mechanism similar to LRU (Least Recently Used). Only the schema information of the most recently accessed databases and tables is cached in memory.
 
 > **Warning:**
 >
-> This feature is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> This feature is currently an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Configure schema cache
 
@@ -17,11 +17,11 @@ You can enable the schema caching feature by configuring the system variable [`t
 
 ## Best practices
 
-- In scenarios with a large number of databases and tables (for example, more than 100,000 databases and tables) or when the number of databases and tables is large enough to impact system performance, it is recommended to enable the schema caching feature.
+- In scenarios with a large number of databases and tables (for example, more than 100,000 databases and tables) or when the number of databases and tables is large enough to affect system performance, it is recommended to enable the schema caching feature.
 - You can monitor the hit rate of the schema cache by observing the subpanel **Infoschema v2 Cache Operation** under the **Schema load** section in TiDB Dashboard. If the hit rate is low, you can increase the value of [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 - You can monitor the current size of the schema cache being used by observing the subpanel **Infoschema v2 Cache Size** under the **Schema load** section in TiDB Dashboard.
 - It is recommended to disable [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) to reduce TiDB startup time.
-- If you need to create a large number of tables (for example, more than 100,000 tables), it is recommended to set this parameter [`split-table`](/tidb-configuration-file.md#split-table) to `false` to reduce the number of regions and thus decrease TiKV's memory usage.
+- If you need to create a large number of tables (for example, more than 100,000 tables), it is recommended to set the [`split-table`](/tidb-configuration-file.md#split-table) parameter to `false` to reduce the number of Regions and thus decrease TiKV's memory usage.
 
 ## Known limitations
 
