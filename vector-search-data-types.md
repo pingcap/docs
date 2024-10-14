@@ -17,18 +17,18 @@ A vector is a sequence of floating-point numbers, such as `[0.3, 0.5, -0.1, ...]
 
 > **Note:**
 >
-> Vector data types are only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> Vector data types are only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 The following Vector data types are currently available:
 
 - `VECTOR`: A sequence of single-precision floating-point numbers with any dimension.
 - `VECTOR(D)`: A sequence of single-precision floating-point numbers with a fixed dimension `D`.
 
-Using vector data types provide the following advantages over using the [`JSON`](/data-type-json.md) type:
+Using vector data types provides the following advantages over using the [`JSON`](/data-type-json.md) type:
 
-- Vector Index support. A [vector search index](/vector-search-index.md) can be built to speed up vector searching.
-- Dimension enforcement. A dimension can be specified to forbid inserting vectors with different dimensions.
-- Optimized storage format. Vector data types are optimized for handling vector data, offering better space efficiency and performance compared to `JSON` types.
+- Vector index support: You can build a [vector search index](/vector-search-index.md) to speed up vector searching.
+- Dimension enforcement: You can specify a dimension to forbid inserting vectors with different dimensions.
+- Optimized storage format: Vector data types are optimized for handling vector data, offering better space efficiency and performance compared to `JSON` types.
 
 ## Syntax
 
@@ -65,9 +65,9 @@ In the following example, because dimension `3` is enforced for the `embedding` 
 ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 ```
 
-See [Vector Functions and Operators](/vector-search-functions-and-operators.md) for available functions and operators over the Vector data types.
+For available functions and operators over the vector data types, see [Vector Functions and Operators](/vector-search-functions-and-operators.md).
 
-See [Vector Search Index](/vector-search-index.md) for building and using a vector search index.
+For more information about building and using a vector search index, see [Vector Search Index](/vector-search-index.md).
 
 ## Store vectors with different dimensions
 
@@ -165,7 +165,7 @@ To cast between Vector and String, use the following functions:
 - `VEC_FROM_TEXT`: String ⇒ Vector
 - `VEC_AS_TEXT`: Vector ⇒ String
 
-For ease of use, if you are calling a function that only supports vector data types (such as a vector correlation distance function), you can also just pass in a format-compliant string, because TiDB will perform an implicit cast in this case:
+To improve usability, if you call a function that only supports vector data types, such as a vector correlation distance function, you can also just pass in a format-compliant string. TiDB automatically performs an implicit cast in this case.
 
 ```sql
 -- The VEC_DIMS function only accepts VECTOR arguments, so you can directly pass in a string for an implicit cast.
@@ -196,7 +196,7 @@ For ease of use, if you are calling a function that only supports vector data ty
 1 row in set (0.01 sec)
 ```
 
-When using an operator or function that accept multiple data types, you need to explicitly cast the string type to the vector type before passing the string to that operator or function, because TiDB does not perform implicit casts in this case. For example, before performing comparison operations, you need to explicitly cast strings to vectors; otherwise, TiDB will compare them as string values rather than as vector numeric values:
+When using an operator or function that accepts multiple data types, you need to explicitly cast the string type to the vector type before passing the string to that operator or function, because TiDB does not perform implicit casts in this case. For example, before performing comparison operations, you need to explicitly cast strings to vectors; otherwise, TiDB compares them as string values rather than as vector numeric values:
 
 ```sql
 -- Because string is given, TiDB is comparing strings:
@@ -221,7 +221,7 @@ When using an operator or function that accept multiple data types, you need to 
 You can also explicitly cast a vector to its string representation. Take using the `VEC_AS_TEXT()` function as an example:
 
 ```sql
--- The string is first implicitly casted to a vector, and then the vector is explicitly casted to a string, thus returning a string in the normalized format:
+-- The string is first implicitly cast to a vector, and then the vector is explicitly cast to a string, thus returning a string in the normalized format:
 [tidb]> SELECT VEC_AS_TEXT('[0.3,     0.5,  -0.1]');
 +--------------------------------------+
 | VEC_AS_TEXT('[0.3,     0.5,  -0.1]') |
@@ -235,7 +235,7 @@ For additional cast functions, see [Vector Functions and Operators](/vector-sear
 
 ### Cast between Vector ⇔ other data types
 
-Currently, direct casting between Vector and other data types (such as `JSON`) is not supported, but you can use String as an intermediate data type for casting.
+Currently, direct casting between Vector and other data types (such as `JSON`) is not supported. To work around this limitation, use String as an intermediate data type for casting.
 
 ## Restrictions
 

@@ -17,7 +17,7 @@ This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/
 
 > **Note:**
 >
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Prerequisites
 
@@ -243,7 +243,7 @@ class Document(Model):
 >
 > This section is only applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
-Define a 3-dimensional vector column and optimize it with a [vector search index](https://docs.pingcap.com/tidbcloud/vector-search-index) (HNSW index).
+Define a 3-dimensional vector column and optimize it with a [vector search index](/vector-search-index.md) (HNSW index).
 
 ```python
 class DocumentWithIndex(Model):

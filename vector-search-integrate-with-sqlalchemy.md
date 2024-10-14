@@ -128,14 +128,14 @@ TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
 # For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-If you are running TiDB on your local machine, `HOST` is `127.0.0.1` by default. The initial `PASSWORD` is empty, so if you are starting the cluster for the first time, you can omit this field.
+If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
 
-The following are descriptions for each parameter:
+The following are descriptions for each placeholder:
 
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
 - `<USER>`: The username to connect to the TiDB cluster.
 - `<PASSWORD>`: The password to connect to the TiDB cluster.
+- `<HOST>`: The host of the TiDB cluster.
+- `<PORT>`: The port of the TiDB cluster.
 - `<DATABASE>`: The name of the database you want to connect to.
 
 </div>
@@ -207,7 +207,7 @@ class Document(Base):
 >
 > This section is only applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
-Define a 3-dimensional vector column and optimize it with a [vector search index](https://docs.pingcap.com/tidbcloud/vector-search-index) (HNSW index).
+Define a 3-dimensional vector column and optimize it with a [vector search index](/vector-search-index.md) (HNSW index).
 
 ```python
 class DocumentWithIndex(Base):

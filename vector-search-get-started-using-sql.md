@@ -24,7 +24,7 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 
 > **Note:**
 >
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Prerequisites
 
@@ -78,10 +78,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 After your TiDB Self-Managed cluster is started, execute your cluster connection command in the terminal.
 
-The following is an example connection command for MacOS:
+The following is an example connection command for macOS:
 
 ```bash
- mysql --comments --host 127.0.0.1 --port 4000 -u root
+mysql --comments --host 127.0.0.1 --port 4000 -u root
 ```
 
 </div>

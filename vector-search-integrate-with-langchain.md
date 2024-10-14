@@ -156,7 +156,7 @@ The following are descriptions for each parameter:
 
 - `<HOST>`: The host of the TiDB cluster.
 - `<PORT>`: The port of the TiDB cluster.
-- `<USER>`: The username to connect to the TiDB cluster.
+- `<USERNAME>`: The username to connect to the TiDB cluster.
 - `<PASSWORD>`: The password to connect to the TiDB cluster.
 - `<DATABASE>`: The name of the database you want to connect to.
 
