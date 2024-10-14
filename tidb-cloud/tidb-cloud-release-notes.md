@@ -8,6 +8,12 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## October 15, 2024
+
+**API changes**
+
+* [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp) is deprecated as of October 15, 2024, and will be removed in the future. If you are currently using the MSP API, migrate to the Partner Management API in [TiDB Cloud Partner](https://partner-console.tidbcloud.com/signin).
+
 ## September 24, 2024
 
 **General changes**

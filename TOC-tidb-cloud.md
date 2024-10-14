@@ -339,7 +339,7 @@
       - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
       - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
       - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-      - [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+      - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
