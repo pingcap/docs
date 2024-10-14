@@ -11,7 +11,7 @@ TiDB Vector Search enables you to perform Approximate Nearest Neighbor (ANN) que
 
 > **Warning:**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 </CustomContent>
 
