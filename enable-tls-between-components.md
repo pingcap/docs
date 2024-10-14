@@ -160,8 +160,8 @@ To verify component caller's identity, you need to mark the certificate user ide
 
 > **Note:**
 >
-> After version 8.4, PD supports multiple `Common Name`. You can configure them in the cert-allowed-cn setting for each component as needed. It’s important to note that TiUP uses a distinct identifier when querying component statuses. For example, if the cluster name is `test`, it will use `test-client` as the Common Name.
-> For versions 8.3 and earlier, the `cert-allowed-cn` configuration item of the PD can only be set to one value. Therefore, the `Common Name` of all authentication objects must be set to the same value. Please refer to the v8.3.0 documentation.
+> - Starting from v8.4.0, the PD configuration item `cert-allowed-cn` supports multiple values. You can configure multiple `Common Name` in the  `cluster-verify-cn` configuration item for TiDB and in the `cert-allowed-cn` configuration item for other components as needed. Note that TiUP uses a separate identifier when querying component status. For example, if the cluster name is `test`, TiUP uses `test-client` as the `Common Name`.
+> - For v8.3.0 and earlier versions, the PD configuration item `cert-allowed-cn` can only be set to a single value. Therefore, the `Common Name` of all authentication objects must be set to the same value. For related configuration examples, see [v8.3.0 documentation](https://docs.pingcap.com/tidb/v8.3/enable-tls-between-components).
 
 - TiDB
 
