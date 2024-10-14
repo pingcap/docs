@@ -1,6 +1,5 @@
 ---
 title: Schema Cache
-aliases: ['/docs-cn/dev/information-schema-cache']
 summary: TiDB adopts an LRU-based (Least Recently Used) caching mechanism for schema information, which significantly reduces memory usage and improves performance in scenarios with a large number of databases and tables.
 ---
 
