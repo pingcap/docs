@@ -73,18 +73,15 @@ By implementing these strategies, you can ensure that your TiDB cluster efficien
 The most efficient way to identify Resource-Intensive SQL is using TiDB Dashboard, There are other tools like views and logs available as well.
 
 ## Monitoring SQL Statements by Using TiDB Dashboard
-### SQL Statements Panel Default Display
+### SQL Statements Panel 
 In TiDB Dashboard, navigate to SQL Statements panel, which helps us identify the following:
 
 1. The SQL statement with the highest total latency is the one that takes the longest time to execute out of multiple executions of the same SQL statement. 
 2. It can also display the number of times each SQL statement has been executed cumulatively, allowing us to find the SQL statement with the highest execution frequency.
 3. Clicking on each SQL statement allows us to delve deeper into the EXPLAIN ANALYZE results.
 
-
-
-SQL statements with the highest total and mean latency
-SQL statements with the highest execution frequency
-SQL statements are normalized as templates, literals and bind variables are replaced by ?
+SQL statements are normalized as templates, where literals and bind variables are replaced by '?'. This normalization and sorting process allows you to quickly pinpoint the most resource-intensive queries that may require optimization.
+![sql-statements-default](/media/sql-tuning/sql-statements-default.png)
 
 
 ### Slow Queries Panel Default Display
@@ -96,12 +93,17 @@ On Slow Queries panel, we can find:
 2. The SQL query that reads the most data from TiKV.
 3. The EXPLAIN ANALYZE output from drilling down the SQL statement by clicking it.
 4. Please note that on the Slow Queries panel, we cannot get the frequency of the SQL statement execution. Once the execution elapsed time exceeds tidb_slow_log_threshold for single instance, the query is then listed on the Slow Queries panel.
+![slow-query-default](/media/sql-tuning/slow-query-default.png)
 
-## other tools for identify top sql
+## Other Tools for Identifying Top SQL
+
+In addition to TiDB Dashboard, there are several other tools available to identify resource-intensive SQL queries:
+
+Each tool offers unique insights and can be valuable for different analysis scenarios. Using a combination of these tools allows for comprehensive SQL performance monitoring and optimization.
 - [slow query log](https://docs.pingcap.com/tidb/stable/identify-slow-queries)
 - [statements_summary view](https://docs.pingcap.com/tidb/stable/statement-summary-tables#statements_summary)
 - [top sql feature](https://docs.pingcap.com/tidb/stable/top-sql)
-- [tidb log](https://docs.pingcap.com/tidb/stable/identify-expensive-queries)
+- [expensive queries in tidb log](https://docs.pingcap.com/tidb/stable/identify-expensive-queries)
 - [cluster_processlist view](https://docs.pingcap.com/tidb/stable/information-schema-processlist#cluster_processlist)
 
 
@@ -118,7 +120,7 @@ This guide focuses on providing actionable advice for beginners looking to optim
   - Partition table: local index vs global index
   - Index Full Scan is fater than Table Full Scan
 
-# 1. Query Processing Workflow
+## Query Processing Workflow
 the client sends a SQL statement to the protocol layer of TiDB server. The protocol layer is responsible for handling the connection between TiDB Server and the client, receiving SQL statement from the client, and returning data to the client.
 
 To the right of the protocol layer is the Optimizer layer of TiDB Server, which is responsible for processing SQL statements. The process is as follows:
@@ -133,7 +135,7 @@ To the right of the protocol layer is the Optimizer layer of TiDB Server, which 
 
 ![workflow](/media/sql-tuning/workflow.png)
 
-# 1. Optimizer Fundamentals
+## Optimizer Fundamentals
 
 TiDB uses a cost-based optimizer (CBO) to determine the most efficient execution plan for a SQL statement. This optimizer evaluates different execution strategies and chooses the one with the lowest estimated cost. The cost is influenced by factors such as:
 
@@ -149,14 +151,65 @@ Based on the input, The cost model will produce the execution plan, which includ
 - Join Method
 - Join Order
 
-Best Practice: The optimizer is as good as the information it receives. Therefore, ensuring up-to-date statistics and well-designed indexes is critical.
+The optimizer is as good as the information it receives. Therefore, ensuring up-to-date statistics and well-designed indexes is critical.
 
-# How TiDB build A Execution Plan
+## Statistics Management
+
+[Statistics](https://docs.pingcap.com/tidb/stable/statistics) are essential to the TiDB optimizer. TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement.
+
+statistics is generally divided into two levels: table level and column level. 
+- For table-level statistics, it includes the total number of rows in the table and the number of rows that have been modified since the last collection of statistics. 
+- The column-level statistics information is more abundant, including histograms, Count-Min Sketch, Top-N (values or indexes with the highest occurrences), distribution and quantity of different values, and the number of null values, and so on.
+
+To ensure the statistics are healthy and representative, you can use the following commands:
+
+1. `SHOW STATS_META`: This command provides metadata about table statistics.
+2. `SHOW STATS_HEALTHY`: This command shows the health status of table statistics.
+
+For example, you can use:
+
+```SQL
+tidb> SHOW STATS_META WHERE table_name='T2'\G;
+*************************** 1. row ***************************
+ Db_name: test
+ Table_name: T2
+Partition_name:
+ Update_time: 2023-05-11 02:16:50
+ Modify_count: 20000
+ Row_count: 20000
+1 row in set (0.03 sec)
+
+tidb> SHOW STATS_HEALTHY WHERE table_name='T2'\G;
+*************************** 1. row ***************************
+    Db_name: test
+  Table_name: T2
+Partition_name:
+    Healthy: 0
+1 row in set (0.00 sec)
+
+```
+
+In TiDB database, there are two ways to collect statistics: automatic collection and manual collection. In most case, the auto collection job works fine. Automatic collection is actually triggered when certain conditions are met for a table, and TiDB will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
+tidb_auto_analyze_ratio: The healthiness trigger
+tidb_auto_analyze_start_time and tidb_auto_analyze_end_time: The allowed job window
+```SQL
+mysql> show variables like '%auto_analyze%';
++-----------------------------------------+-------------+
+| Variable_name                           | Value       |
++-----------------------------------------+-------------+
+| tidb_auto_analyze_ratio                 | 0.5         |
+| tidb_auto_analyze_start_time            | 00:00 +0000 |
+| tidb_auto_analyze_end_time              | 23:59 +0000 |
++-----------------------------------------+-------------+
+```
+
+
+Let's start with automatic collection. Automatic collection is actually triggered when certain conditions are met for a table, and our TiDB database will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
+
+
+
+## How TiDB build A Execution Plan
 ## 
-
-# 2. Statistics Management
-
-Statistics are essential to the TiDB optimizer. They include information about table data, such as the number of rows and distribution of values in columns. If statistics are outdated or inaccurate, the optimizer might generate suboptimal execution plans.
 
 # 3. Understanding Execution Plans
 The execution plan represents the steps TiDB will follow to execute a SQL query. An effective execution plan ensures performance optimization.
