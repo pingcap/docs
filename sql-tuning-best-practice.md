@@ -165,7 +165,7 @@ The optimizer is as good as the information it receives. Therefore, ensuring up-
 
 ## Statistics Management
 
-[Statistics](https://docs.pingcap.com/tidb/stable/statistics) are essential to the TiDB optimizer. TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement.
+Statistics are essential to the TiDB optimizer. TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement.
 
 statistics is generally divided into two levels: table level and column level. 
 - For table-level statistics, it includes the total number of rows in the table and the number of rows that have been modified since the last collection of statistics. 
@@ -228,8 +228,39 @@ Another common scenario is locking table statistics. This is useful when:
 
 To lock the statistics for a table, you can use the following command `LOCK STATS table_name`.
 
+for more detail about statistics, please refer to [statistics](https://docs.pingcap.com/tidb/stable/statistics).
+
 ## How TiDB build A Execution Plan
-## 
+An SQL statement undergoes optimization primarily in the optimizer through three stages:
+- Pre-Processing
+- Logical Transformation
+- Cost-based Optimization
+
+### Pre-Processing
+The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using Point_Get or Batch_Point_Get.
+
+Point_Get or Batch_Point_Get is to get 1 or 0 or many row only by using the TiKV key, the explicit or implicit (_tidb_rowid) primary key. For example, when id column is the primary key of a clustered index table, Point_Get is used to get the particular row. If a plan is identified as Point_Get, optimizer will skip the logical transformation and cost-based optimization.
+
+```SQL
+SELECT id, name FROM emp WHERE id = 901; 
+```
+
+### Logical Transformation
+
+The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules include column pruning，partition pruning，eliminate Max/Min, eliminate outer join, join reorder, predicates push-down，subquery rewrite，derive TopN from window functions，and de-correlation of correlated Subquery. Since this step is fully automated by the query optimizer, it usually does not require manual adjustments.
+
+More Detail for Logical Transformation: https://docs.pingcap.com/tidb/stable/sql-logical-optimization.
+
+### Cost-Based Optimization
+
+TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement. The Cost-Based Optimization estimates the cost of each available plan choice, including index accesses and the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
+
+
+The below figure illustrates the various data access paths and row set operations that cost-based optimization can consider to develop the optimal execution plan. Furthermore, during the logical transformation stage, the query has already been rewritten for predicate push-down. In the cost-based optimization stage, TiKV expression push-down is further implemented when possible at TiKV layer. 
+
+Furthermore, confirming the algorithm for certain SQL operations, such as aggregation, join, and sorting, is essential. For instance, the aggregation operator may utilize either HASH_AGG or STREAM_AGG, while the join operator can select from HASH JOIN, MERGE JOIN, or INDEX JOIN. Likewise, various options are available for the sorting operator.
+
+![cost-based-optimization](/media/sql-tuning/cost-based-optimization.png)
 
 # 3. Understanding Execution Plans
 The execution plan represents the steps TiDB will follow to execute a SQL query. An effective execution plan ensures performance optimization.
