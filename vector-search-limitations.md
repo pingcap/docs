@@ -17,7 +17,7 @@ This document describes the known limitations of TiDB Vector Search.
 
 > **Note:**
 >
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 - Each [vector](/vector-search-data-types.md) supports up to 16383 dimensions.
 - You cannot store `NaN`, `Infinity`, or `-Infinity` values in the vector data type.

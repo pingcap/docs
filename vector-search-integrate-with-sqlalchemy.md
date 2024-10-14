@@ -17,7 +17,7 @@ This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.o
 
 > **Note:**
 >
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Prerequisites
 
@@ -130,7 +130,7 @@ TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
 
 If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
 
-The following are descriptions for each placeholder:
+The following are descriptions for each parameter:
 
 - `<USER>`: The username to connect to the TiDB cluster.
 - `<PASSWORD>`: The password to connect to the TiDB cluster.

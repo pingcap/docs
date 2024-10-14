@@ -17,7 +17,7 @@ This tutorial walks you through how to use [Jina AI](https://jina.ai/) to genera
 
 > **Note:**
 >
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Prerequisites
 
@@ -128,14 +128,14 @@ export TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<D
 # For example: export TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-You need to replace parameters in the preceding command according to your TiDB cluster. If you are running TiDB on your local machine, `HOST` is `127.0.0.1` by default. The initial `PASSWORD` is empty, so if you are starting the cluster for the first time, you can omit this field.
+You need to replace parameters in the preceding command according to your TiDB cluster. If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
 
 The following are descriptions for each parameter:
 
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
 - `<USERNAME>`: The username to connect to the TiDB cluster.
 - `<PASSWORD>`: The password to connect to the TiDB cluster.
+- `<HOST>`: The host of the TiDB cluster.
+- `<PORT>`: The port of the TiDB cluster.
 - `<DATABASE>`: The name of the database you want to connect to.
 
 </div>

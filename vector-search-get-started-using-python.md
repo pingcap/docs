@@ -121,7 +121,7 @@ TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
 
 If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
 
-The following are descriptions for each placeholder:
+The following are descriptions for each parameter:
 
 - `<USER>`: The username to connect to the TiDB cluster.
 - `<PASSWORD>`: The password to connect to the TiDB cluster.

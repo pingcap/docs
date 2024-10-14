@@ -19,7 +19,7 @@ In TiDB, you can create and use vector search indexes for such approximate neare
 
 > **Note:**
 >
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 TiDB currently supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
 
