@@ -156,7 +156,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
 In general, the callee needs to verify the caller's identity using `Common Name`, in addition to verifying the key, the certificates, and the CA provided by the caller. For example, TiKV can only be accessed by TiDB, and other visitors are blocked even though they have legitimate certificates.
 
-To verify component caller's identity, you need to mark the certificate user identity using `Common Name` when generating the certificate, and to check the caller's identity by configuring the `cluster-verify-cn` (for the TiDB component) or `cert-allowed-cn` (for other components) for the callee.
+To verify the caller's identity for a component, you need to mark the certificate user identity using `Common Name` when generating the certificate, and check the caller's identity by configuring `cluster-verify-cn` (in TiDB) or `cert-allowed-cn` (in other components) for the callee.
 
 > **Note:**
 >
