@@ -107,6 +107,16 @@ Each tool offers unique insights and can be valuable for different analysis scen
 - [cluster_processlist view](https://docs.pingcap.com/tidb/stable/information-schema-processlist#cluster_processlist)
 
 
+## Gathering Data on the SQL Identified
+
+For the top SQL statements identified, you can use [PLAN REPLAYER](https://docs.pingcap.com/tidb/stable/sql-plan-replayer) to capture and save the on-site information of a TiDB cluster. This tool allows you to recreate the execution environment for further analysis. The syntax for exporting SQL information is as follows:
+
+```SQL
+PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
+```
+
+Use EXPLAIN ANALYZE whenever possible, as it captures actual execution information in addition to the execution plan. This provides more accurate insights into query performance.
+
 # SQL Tuning Guide
 
 This guide focuses on providing actionable advice for beginners looking to optimize their SQL queries in TiDB. By following these best practices, you can ensure better query performance and SQL Tuning. We'll cover below topic:
@@ -203,10 +213,20 @@ mysql> show variables like '%auto_analyze%';
 +-----------------------------------------+-------------+
 ```
 
+In cases where automatic collection doesn't meet your needs, you can manually collect statistics using the `ANALYZE TABLE table_name` statement. This allows you to:
 
-Let's start with automatic collection. Automatic collection is actually triggered when certain conditions are met for a table, and our TiDB database will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
+1. Adjust the sample rate for more accurate or faster analysis
+2. Increase the number of top-N values collected
+3. Gather statistics for specific columns only
 
+It's important to note that after manual collection, subsequent automatic gathering jobs will inherit the new parameters. This means that any customizations you've made during manual collection will be carried forward in future automatic analyses.
 
+Another common scenario is locking table statistics. This is useful when:
+1. The statistics on the table are already representative of the data.
+2. The table is very large and statistics collection is time-consuming.
+3. You want to maintain statistics only during specific time windows.
+
+To lock the statistics for a table, you can use the following command `LOCK STATS table_name`.
 
 ## How TiDB build A Execution Plan
 ## 
