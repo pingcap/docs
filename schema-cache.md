@@ -27,7 +27,7 @@ You can enable the schema caching feature by configuring the system variable [`t
 
 In scenarios with a large number of databases and tables, the following known issues exist:
 
-- When the tables that need to be accessed are irregularly accessed, such as one set of tables accessed at time1 and another set accessed at time2, and the value of `tidb_schema_cache_size` is small, the schema information might be frequently evicted and cached, leading to performance fluctuations. This feature is more suitable for scenarios where frequently accessed databases and tables are relatively fixed.
+- When the tables are irregularly accessed, such as one set of tables are accessed at time1 while another set are accessed at time2, and the value of `tidb_schema_cache_size` is small, the schema information might be frequently evicted and cached, leading to performance fluctuations. This feature is more suitable for scenarios where frequently accessed databases and tables are relatively fixed.
 - Statistics information might not be collected in a timely manner.
 - Access to some metadata information might become slower.
 - Switching the schema cache on or off requires a waiting period.
