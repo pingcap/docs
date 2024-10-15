@@ -343,7 +343,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 | TiKV | [`raft-engine.spill-dir`](/tikv-configuration-file.md#spill-dir-new-in-v840) | Newly added | Controls the secondary directory where TiKV instances store Raft log files for supporting multi-disk storage of Raft log files. |
 | TiKV | [`resource-control.priority-ctl-strategy`](/tikv-configuration-file.md#priority-ctl-strategy-new-in-v840) | Newly added | Controls the management policies for low priority tasks. TiKV ensures that higher priority tasks are executed first by adding flow control to low priority tasks. |
 | PD | [`cert-allowed-cn`](/enable-tls-between-components.md#verify-component-callers-identity) | Modified | Starting from v8.4.0, configuring multiple `Common Names` is supported. Before v8.4.0, only one `Common Name` can be set. |
-| PD | [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) | Modified | Changes the default value from `200000` to `540000`. 
+| PD | [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) | Modified | Changes the default value from `200000` to `540000`. |
 | PD | [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) | Modified | Changes the default value from `20` to `54`. |
 | TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md) | Modified | Changes the default TiFlash storage format version from `5` to `7` to support vector index creation and storage. Due to this format change, TiFlash clusters upgraded to v8.4.0 or a later version do not support in-place downgrading to earlier versions. |
 | TiDB Lightning | [`logical-import-prep-stmt`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | In Logical Import Mode, this parameter controls whether to use prepared statements and statement cache to improve performance. The default value is `false`. |
@@ -390,7 +390,7 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
     * In v8.0.0, TiDB introduces the [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800) system variable to control whether TiDB supports disk spill for the concurrent HashAgg algorithm. In future versions, the [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800) system variable will be deprecated.
     * The TiDB Lightning parameter [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is planned for deprecation in a future release and will be subsequently removed. This parameter will be replaced by [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task), which means that the maximum number of conflicting records is consistent with the maximum number of conflicting records that can be tolerated in a single import task.
    * Starting from v6.3.0, partitioned tables use [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) by default. Compared with static pruning mode, dynamic pruning mode supports features such as IndexJoin and plan cache with better performance. Therefore, static pruning mode will be deprecated.
-   
+
 ## Improvements
 
 + TiDB <!--tw@Oreoxmt: 11 notes-->
