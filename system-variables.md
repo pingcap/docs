@@ -2395,6 +2395,19 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `OFF`
 - This variable controls whether Index Join is supported when the inner table has `Selection` or `Projection` operators on it. The default value `OFF` means that Index Join is not supported in this scenario.
 
+### tidb_enable_instance_plan_cache <span class="version-mark">New in v8.4.0</span>
+
+> **Warning:**
+>
+> Currently, Instance Plan Cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the Instance Plan Cache feature. This feature implements instance-level execution plan cache, which allows all sessions within the same TiDB instance to share the execution plan cache, thereby improving memory utilization. Before enabling Instance Plan Cache, it is recommended to disable session-level [Prepared execution plan cache](/sql-prepared-plan-cache.md) and [Non-prepared execution plan cache](/sql-non-prepared-plan-cache.md).
+
 ### tidb_enable_ordered_result_mode
 
 - Scope: SESSION | GLOBAL
@@ -3410,6 +3423,34 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[1, 32]`
 - Unit: Rows
 - This variable is used to set the number of rows for the initial chunk during the execution process. The number of rows for a chunk directly affects the amount of memory required for a single query. You can roughly estimate the memory needed for a single chunk by considering the total width of all columns in the query and the number of rows for the chunk. Combining this with the concurrency of the executor, you can make a rough estimation of the total memory required for a single query. It is recommended that the total memory for a single chunk does not exceed 16 MiB.
+
+### tidb_instance_plan_cache_reserved_percentage <span class="version-mark">New in v8.4.0</span>
+
+> **Warning:**
+>
+> Currently, Instance Plan Cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Float
+- Default value: `0.1`
+- Range: `[0, 1]`
+- This variable controls the percentage of idle memory reserved for [Instance Plan Cache](#tidb_enable_instance_plan_cache-new-in-v840) after memory eviction. When the memory used by Instance Plan Cache reaches the limit set by [`tidb_instance_plan_cache_max_size`](#tidb_instance_plan_cache_max_size-new-in-v840), TiDB starts evicting execution plans from memory using the Least Recently Used (LRU) algorithm until the idle memory percentage exceeds the value set by [`tidb_instance_plan_cache_reserved_percentage`](#tidb_instance_plan_cache_reserved_percentage-new-in-v840).
+
+### tidb_instance_plan_cache_max_size <span class="version-mark">New in v8.4.0</span>
+
+> **Warning:**
+>
+> Currently, Instance Plan Cache is an experimental feature. is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `125829120` (which is 120 MiB)
+- Unit: Bytes
+- This variable sets the maximum memory usage for [Instance Plan Cache](#tidb_enable_instance_plan_cache-new-in-v840).
 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
