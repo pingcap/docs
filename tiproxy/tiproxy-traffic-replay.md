@@ -17,9 +17,9 @@ Starting from TiProxy v1.3.0, you can use TiProxy to capture access traffic in a
 
 Traffic replay is suitable for the following scenarios:
 
-- **Validate TiDB version upgrades**: Replay production traffic on a test cluster with a new TiDB version to verify if the new TiDB version can successfully execute all SQL statements.
-- **Assess change impact**: Simulate production traffic on a test cluster to validate the impact of changes on the cluster. For example, verify the effects before modifying configuration items or system variables, altering table schemas, or enabling new TiDB features.
-- **Validate performance before TiDB scaling**: Replay traffic at corresponding rates on a test cluster with a new scale to verify if the performance meets requirements. For example, to plan a 50% cluster downscale for cost savings, replay traffic at half speed to verify if SQL latency meets requirements after scaling.
+- **Verify TiDB version upgrades**: Replay production traffic on a test cluster with a new TiDB version to verify that the new TiDB version can successfully execute all SQL statements.
+- **Assess change impact**: Simulate production traffic on a test cluster to verify the impact of changes on the cluster. For example, verify the effects before modifying configuration items or system variables, altering table schemas, or enabling new TiDB features.
+- **Validate performance before TiDB scaling**: Replay traffic at corresponding rates on a test cluster with a new scale to validate whether the performance meets requirements. For example, to plan a 50% cluster downscale for cost savings, replay traffic at half speed to validate if SQL latency meets requirements after scaling.
 - **Test performance limits**: Replay traffic multiple times on a test cluster of the same scale, increasing the replay rate each time to test the throughput limit of that scale and assess whether performance meets future business growth needs.
 
 Traffic replay is not suitable for the following scenarios:
