@@ -484,7 +484,7 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
     - Fix the issue that the operator that follows the TopN operator can not trigger the fallback action when the memory limit is exceeded [#56185](https://github.com/pingcap/tidb/issues/56185) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Fix the issue that the `ORDER BY` column in the Sort operator is stuck if it contains a constant [#55344](https://github.com/pingcap/tidb/issues/55344) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Fix the issue that when adding an index, the `8223 (HY000)` error occurs after killing the PD leader and the data in the table is inconsistent [#55488](https://github.com/pingcap/tidb/issues/55488) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that too many DDL history tasks lead to OOM when you request information about history DDL tasks [#55711](https://github.com/pingcap/tidb/issues/55711) @[joccau](https://github.com/joccau)
+    - Fix the issue that too many DDL history tasks cause OOM when you request information about history DDL tasks [#55711](https://github.com/pingcap/tidb/issues/55711) @[joccau](https://github.com/joccau)
     - Fix the issue that executing `IMPORT INTO` is stuck when Global Sort is enabled and the Region size exceeds 96 MiB [#55374](https://github.com/pingcap/tidb/issues/55374) @[lance6716](https://github.com/lance6716)
     - Fix the issue that executing `IMPORT INTO` on a temporary table causes TiDB to crash [#55970](https://github.com/pingcap/tidb/issues/55970) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that adding a unique index causes the `duplicate entry` error [#56161](https://github.com/pingcap/tidb/issues/56161) @[tangenta](https://github.com/tangenta)
@@ -492,7 +492,7 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
     - Fix the issue that the `CREATE TABLE LIKE` statement can not be used for cached tables [#56134](https://github.com/pingcap/tidb/issues/56134) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the confusing warning message for `FORMAT()` expressions in CTE [#56198](https://github.com/pingcap/tidb/pull/56198) @[dveeden](https://github.com/dveeden)
     - Fix the issue that column type restrictions are inconsistent between `CREATE TABLE` and `ALTER TABLE` when creating a partitioned table [#56094](https://github.com/pingcap/tidb/issues/56094) @[mjonss](https://github.com/mjonss)
-    - Fix incorrect time type in `INFORMATION_SCHEMA.RUNAWAY_WATCHES` table [#54770](https://github.com/pingcap/tidb/issues/54770) @[HuSharp](https://github.com/HuSharp)
+    - Fix the incorrect time type in `INFORMATION_SCHEMA.RUNAWAY_WATCHES` table [#54770](https://github.com/pingcap/tidb/issues/54770) @[HuSharp](https://github.com/HuSharp)
 
 + TiKV
 
