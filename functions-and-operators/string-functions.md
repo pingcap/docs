@@ -637,7 +637,11 @@ The `HEX()` function is used to convert the given argument into a string represe
 - If the argument is a number, `HEX(n)` returns a hexadecimal string representation of `n`. The function treats the argument `n` as a `BIGINT` number, equivalent to using `CONV(n, 10, 16)`.
 - If the argument is `NULL`, the function returns `NULL`.
 
-Examples:
+> **Note:**
+>
+> In the MySQL client, the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, causing the client to display data with an unknown character set as a [hexadecimal literal](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html). You can use the `--skip-binary-as-hex` option to disable this behavior.
+
+Examples (with `mysql --skip-binary-as-hex`):
 
 ```sql
 SELECT X'616263', HEX('abc'), UNHEX(HEX('abc')), 0x616263;
@@ -805,7 +809,7 @@ SELECT INSTR(0123, "12");
 
 ### [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)
 
-The `LCASE(str)` function is a synonym for [`LOWER(str)`](#lower), which returns the lowercase of the given argument. 
+The `LCASE(str)` function is a synonym for [`LOWER(str)`](#lower), which returns the lowercase of the given argument.
 
 ### [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)
 
@@ -817,10 +821,10 @@ Syntax:
 LEFT(`str`, `len`)
 ```
 
-- `str`: the original string to extract characters. If `str` contains a multibyte character, the function counts it as a single code point. 
-- `len`: the length of characters to be returned. 
+- `str`: the original string to extract characters. If `str` contains a multibyte character, the function counts it as a single code point.
+- `len`: the length of characters to be returned.
     - If `len` is equal to or less than 0, the function returns an empty string.
-    - If `len` is equal to or greater than the length of `str`, the function returns the original `str`. 
+    - If `len` is equal to or greater than the length of `str`, the function returns the original `str`.
 - If any argument is `NULL`, the function returns `NULL`.
 
 Examples:
@@ -1597,7 +1601,7 @@ SELECT CHAR(97), CHAR(65);
 1 row in set (0.01 sec)
 ```
 
-The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character. 
+The following example shows how `ORD()` handles multibyte characters. Here, both `101` and `0x65` are the UTF-8 encoded values for the `e` character, but in different formats. And both `50091` and `0xC3AB` represent the same values, but for the `ë` character.
 
 ```sql
 SELECT ORD('e'), ORD('ë'), HEX('e'), HEX('ë');
@@ -1651,7 +1655,7 @@ In this example a number of strings are matched against two regular expressions.
 
 ```sql
 WITH vals AS (
-    SELECT 'TiDB' AS v 
+    SELECT 'TiDB' AS v
     UNION ALL
     SELECT 'Titanium'
     UNION ALL
@@ -1659,7 +1663,7 @@ WITH vals AS (
     UNION ALL
     SELECT 'Rust'
 )
-SELECT 
+SELECT
     v,
     v REGEXP '^Ti' AS 'starts with "Ti"',
     v REGEXP '^.{4}$' AS 'Length is 4 characters'
@@ -2017,8 +2021,8 @@ The following example generates a sequence of numbers from 1 to 20 using a [recu
 
 ```sql
 WITH RECURSIVE nr(n) AS (
-    SELECT 1 AS n 
-    UNION ALL 
+    SELECT 1 AS n
+    UNION ALL
     SELECT n+1 FROM nr WHERE n<20
 )
 SELECT n, REPEAT('x',n) FROM nr;
@@ -2239,7 +2243,8 @@ The `UNHEX()` function performs the reverse operation of the `HEX()` function. I
 
 > **Note:**
 >
-> The argument must be a valid hexadecimal value that contains `0`–`9`, `A`–`F`, or `a`–`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
+> - The argument must be a valid hexadecimal value that contains `0`–`9`, `A`–`F`, or `a`–`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
+> - In the MySQL client, the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, causing the client to display data with an unknown character set as a [hexadecimal literal](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html). You can use the `--skip-binary-as-hex` option to disable this behavior.
 
 Example:
 
