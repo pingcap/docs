@@ -235,15 +235,13 @@ For additional cast functions, see [Vector Functions and Operators](/vector-sear
 
 ### Cast between Vector ⇔ other data types
 
-Currently, direct casting between Vector and other data types (such as `JSON`) is not supported. To work around this limitation, use String as an intermediate data type for casting.
+Currently, direct casting between Vector and other data types (such as `JSON`) is not supported. To work around this limitation, use String as an intermediate data type for casting in your SQL statement.
+
+Note that vector data type columns stored in a table cannot be converted to other data types using `ALTER TABLE ... MODIFY COLUMN ...`.
 
 ## Restrictions
 
-- The maximum supported Vector dimension is 16000.
-- You cannot store `NaN`, `Infinity`, or `-Infinity` values in the vector data type.
-- Currently, Vector data types cannot store double-precision floating-point numbers. This is planned to be supported in a future release. In the meantime, if you import double-precision floating-point numbers for Vector data types, they are converted to single-precision numbers.
-
-For other limitations, see [Vector Search Limitations](/vector-search-limitations.md).
+For restrictions on vector data types, see [Vector search limitations](/vector-search-limitations.md) and [Vector index restrictions](/vector-search-index.md#restrictions).
 
 ## MySQL compatibility
 

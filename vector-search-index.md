@@ -21,7 +21,7 @@ In TiDB, you can create and use vector search indexes for such approximate neare
 >
 > The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
-TiDB currently supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
+Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
 
 ## Restrictions
 
@@ -30,9 +30,10 @@ TiDB currently supports the [HNSW (Hierarchical Navigable Small World)](https://
 - Vector search indexes can only be created on a single vector column and cannot be combined with other columns (such as integers or strings) to form composite indexes.
 - A distance function must be specified when creating and using vector search indexes. Currently, only cosine distance `VEC_COSINE_DISTANCE()` and L2 distance `VEC_L2_DISTANCE()` functions are supported.
 - For the same column, creating multiple vector search indexes using the same distance function is not supported.
-- Deleting columns with vector search indexes is not supported. Creating multiple indexes in the same statement is not supported.
-- Modifying the type of a column with a vector index is not supported (lossy change, that is, column data is modified).
+- Directly dropping columns with vector search indexes is not supported. You can drop such a column by first dropping the vector search index on that column and then dropping the column itself.
+- Modifying the type of a column with a vector index is not supported.
 - Setting vector search indexes as [invisible](/sql-statements/sql-statement-alter-index.md) is not supported.
+- Building vector search indexes on TiFlash nodes with [encryption at rest](https://docs.pingcap.com/tidb/stable/encryption-at-rest) enabled is not supported.
 
 ## Create the HNSW vector index
 
@@ -68,7 +69,7 @@ When creating an HNSW vector index, you need to specify the distance function fo
 - Cosine Distance: `((VEC_COSINE_DISTANCE(embedding)))`
 - L2 Distance: `((VEC_L2_DISTANCE(embedding)))`
 
-The vector index can only be created for fixed-dimensional vector columns like `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns like `VECTOR` because vector distances can only be calculated between vectors with the same dimensions.
+The vector index can only be created for fixed-dimensional vector columns, such as a column defined as `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns (such as a column defined as `VECTOR`) because vector distances can only be calculated between vectors with the same dimensions.
 
 For restrictions and limitations of vector search indexes, see [Restrictions](#restrictions).
 
@@ -117,7 +118,7 @@ The vector search index can be used in K-nearest neighbor search queries by usin
 ```sql
 SELECT *
 FROM foo
-ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3, 4, 5]')
 LIMIT 10
 ```
 
