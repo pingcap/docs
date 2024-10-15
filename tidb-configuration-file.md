@@ -707,12 +707,14 @@ Configuration items related to opentracing.reporter.
 
 - The `keepalive` time interval of the RPC connection between TiDB and TiKV nodes. If there is no network packet within the specified time interval, the gRPC client executes `ping` command to TiKV to see if it is alive.
 - Default: `10`
+- Minimum value: `1`
 - Unit: second
 
 ### `grpc-keepalive-timeout`
 
 - The timeout of the RPC `keepalive` check between TiDB and TiKV nodes.
 - Default value: `3`
+- Minimum value: `0.05`
 - Unit: second
 
 ### `grpc-compression-type`
