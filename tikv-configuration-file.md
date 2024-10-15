@@ -1990,7 +1990,7 @@ Configuration items related to Raft Engine.
 > 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
 
 + Specifies the version of log files in Raft Engine.
-+ Value Options:
++ Value options:
     + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
     + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
 + Default value:
@@ -2429,6 +2429,16 @@ Configuration items related to resource control of the TiKV storage layer.
 + Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
 + Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
 + Default value: `true`, which means scheduling based on the RU of the resource group is enabled.
+
+### `priority-ctl-strategy` <span class="version-mark">New in v8.4.0</span>
+
+Specifies the flow control strategy for low-priority tasks. TiKV ensures that higher priority tasks are prioritized for execution by applying flow control to low-priority tasks.
+
++ Value options:
+    + `aggressive`: this policy prioritizes the performance of high-priority tasks, ensuring that the throughput and latency of high-priority tasks are largely unaffected, but low-priority tasks will run slower.
+    + `moderate`: this policy imposes a balanced flow control on low-priority tasks and has a lower impact on high-priority tasks.
+    + `conservative`: this policy prioritizes ensuring that system resources are fully utilized, allowing low-priority tasks to fully utilize system available resources as needed, and therefore has a greater performance impact on high-priority tasks.
++ Default value: `moderate`.
 
 ## split
 
