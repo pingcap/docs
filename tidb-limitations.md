@@ -10,7 +10,7 @@ This document describes the common usage limitations of TiDB, including the maxi
 
 > **Note:**
 >
-> TiDB offers high compatibility with the MySQL protocol and syntax, including many MySQL limitations. For example, a multicolumn index in TiDB also supports a maximum of 16 columns. For more information, see [MySQL Compatibility](/mysql-compatibility.md) and the official MySQL documentation.
+> TiDB offers high compatibility with the MySQL protocol and syntax, including many MySQL limitations. For example, a single index can include a maximum of 16 columns. For more information, see [MySQL Compatibility](/mysql-compatibility.md) and the official MySQL documentation.
 
 ## Limitations on identifier length
 
