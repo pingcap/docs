@@ -1,47 +1,47 @@
 ---
-title: Connect to TiDB Serverless with Looker Studio
-summary: Learn how to connect to TiDB Serverless using Looker Studio.
+title: Connect to TiDB Cloud Serverless with Looker Studio
+summary: Learn how to connect to TiDB Cloud Serverless using Looker Studio.
 ---
 
-# Connect to TiDB Serverless with Looker Studio
+# Connect to TiDB Cloud Serverless with Looker Studio
 
-TiDB is a MySQL-compatible database, TiDB Serverless is a fully managed TiDB offering, and [Looker Studio](https://lookerstudio.google.com/) is a free web-based BI tool that can visualize data from various sources.
+TiDB is a MySQL-compatible database, TiDB Cloud Serverless is a fully managed TiDB offering, and [Looker Studio](https://lookerstudio.google.com/) is a free web-based BI tool that can visualize data from various sources.
 
-In this tutorial, you can learn how to connect to your TiDB Serverless cluster with Looker Studio.
+In this tutorial, you can learn how to connect to your TiDB Cloud Serverless cluster with Looker Studio.
 
 > **Note:**
 >
-> Most steps in this tutorial work with TiDB Dedicated as well. However, for TiDB Dedicated, you need to note the following:
+> Most steps in this tutorial work with TiDB Cloud Dedicated as well. However, for TiDB Cloud Dedicated, you need to note the following:
 > 
 > - Import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
-> - Get the connection information for your cluster following [Connect to TiDB Dedicated](/tidb-cloud/connect-via-standard-connection.md). When connecting to TiDB Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connections from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
+> - Get the connection information for your cluster following [Connect to TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md). When connecting to TiDB Cloud Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connections from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
 - A Google account
-- A TiDB Serverless cluster
+- A TiDB Cloud Serverless cluster
 
-**If you don't have a TiDB Serverless cluster, you can create one as follows:**
+**If you don't have a TiDB Cloud Serverless cluster, you can create one as follows:**
 
-- [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster)
+- [Create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster)
 
 ## Step 1. Import a dataset
 
-You can import the S&P 500 dataset provided in the interactive tutorial of TiDB Serverless.
+You can import the S&P 500 dataset provided in the interactive tutorial of TiDB Cloud Serverless.
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and click **?** in the lower-right corner. A **Help** dialog is displayed.
 
 2. In the dialog, click **Interactive Tutorials**, and then click **S&P 500 Analysis**.
 
-3. Select your TiDB Serverless cluster, and then click **Import Dataset** to import the S&P 500 dataset to your cluster.
+3. Select your TiDB Cloud Serverless cluster, and then click **Import Dataset** to import the S&P 500 dataset to your cluster.
 
 4. After the import status changes to **IMPORTED**, click **Exit Tutorial** to close this dialog.
 
 If you encounter any issues during import, you can cancel this import task as follows:
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your TiDB Serverless cluster to go to its overview page.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your TiDB Cloud Serverless cluster to go to its overview page.
 2. In the left navigation pane, click **Import**. 
 3. Find the import task named **sp500-insight**, click **...** in the **Action** column, and then click **Cancel**.
 
@@ -61,7 +61,7 @@ If you encounter any issues during import, you can cancel this import task as fo
 
     > **Tip:**
     >
-    > TiDB Serverless requires a secure TLS connection between the client and the cluster, so you need this CA cert for connection settings in Looker Studio.
+    > TiDB Cloud Serverless requires a secure TLS connection between the client and the cluster, so you need this CA cert for connection settings in Looker Studio.
 
 ## Step 3. Connect to your TiDB cluster with Looker Studio
 
@@ -71,14 +71,14 @@ If you encounter any issues during import, you can cancel this import task as fo
 
 3. In the **BASIC** setting pane, configure the connection parameters.
 
-    - **Host Name or IP**: enter the `HOST` parameter from the TiDB Serverless connection dialog.
-    - **Port(Optional)**: enter the `PORT` parameter from the TiDB Serverless connection dialog.
+    - **Host Name or IP**: enter the `HOST` parameter from the TiDB Cloud Serverless connection dialog.
+    - **Port(Optional)**: enter the `PORT` parameter from the TiDB Cloud Serverless connection dialog.
     - **Database**: enter the database you want to connect to. For this tutorial, enter `sp500insight`.
-    - **Username**: enter the `USERNAME` parameter from the TiDB Serverless connection dialog.
-    - **Password**: enter the `PASSWORD` parameter from the TiDB Serverless connection dialog.
+    - **Username**: enter the `USERNAME` parameter from the TiDB Cloud Serverless connection dialog.
+    - **Password**: enter the `PASSWORD` parameter from the TiDB Cloud Serverless connection dialog.
     - **Enable SSL**: select this option, and then click the upload icon to the right of **MySQL SSL Client Configuration Files** to upload the CA file downloaded from [Step 2](#step-2-get-the-connection-information-for-your-cluster).
 
-    ![Looker Studio: configure connection settings for TiDB Serverless](/media/tidb-cloud/looker-studio-configure-connection.png)
+    ![Looker Studio: configure connection settings for TiDB Cloud Serverless](/media/tidb-cloud/looker-studio-configure-connection.png)
 
 4. Click **AUTHENTICATE**.
 

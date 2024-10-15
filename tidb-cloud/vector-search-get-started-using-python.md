@@ -11,7 +11,7 @@ Throughout this tutorial, you will develop this AI application using [TiDB Vecto
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ To complete this tutorial, you need:
 
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Get started
 

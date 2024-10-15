@@ -1,12 +1,12 @@
 ---
-title: TiDB Introduction
-aliases: ["/docs/dev/", "/docs/dev/adopters/", "/tidb/dev/adopters"]
+title: TiDB Self-Managed
+aliases: ['/docs/dev/', '/docs/dev/adopters/', '/tidb/dev/adopters']
 hide_sidebar: true
 hide_commit: true
 summary: TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. The guide provides information on features, TiFlash, development, deployment, migration, maintenance, monitoring, tuning, tools, and references. It covers everything from quick start to advanced configurations and tools for TiDB.
 ---
 
-<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
+<LearningPathContainer platform="tidb" title="TiDB Self-Managed" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
 
 <!-- Localization note for TiDB:
 
@@ -18,7 +18,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Learn" icon="cloud1">
 
-[What is TiDB](https://docs.pingcap.com/tidb/dev/overview)
+[What is TiDB Self-Managed](https://docs.pingcap.com/tidb/dev/overview)
 
 [Features](https://docs.pingcap.com/tidb/dev/basic-features)
 
@@ -28,7 +28,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB](https://docs.pingcap.com/tidb/dev/quick-start-with-tidb)
+[Try Out TiDB Self-Managed](https://docs.pingcap.com/tidb/dev/quick-start-with-tidb)
 
 [Try Out HTAP](https://docs.pingcap.com/tidb/dev/quick-start-with-htap)
 

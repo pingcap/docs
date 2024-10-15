@@ -147,12 +147,12 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | BindSupportPlan                | Bind a support plan                                                              |
 | CancelSupportPlan              | Cancel a support plan                                                            |
 | UpdateOrganizationName         | Update the organization name                                                     |
-| SetSpendLimit                  | Edit the spending limit of a TiDB Serverless scalable cluster                    |
+| SetSpendLimit                  | Edit the spending limit of a TiDB Cloud Serverless scalable cluster                    |
 | UpdateMaintenanceWindow        | Modify maintenance window start time                                             |
 | DeferMaintenanceTask           | Defer a maintenance task                                                         |
-| CreateBranch                   | Create a TiDB Serverless branch                                                  |
-| DeleteBranch                   | Delete a TiDB Serverless branch                                                  |
-| SetBranchRootPassword          | Set root password for a TiDB Serverless branch                                   |
+| CreateBranch                   | Create a TiDB Cloud Serverless branch                                                  |
+| DeleteBranch                   | Delete a TiDB Cloud Serverless branch                                                  |
+| SetBranchRootPassword          | Set root password for a TiDB Cloud Serverless branch                                   |
 | ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
 | DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
 

@@ -27,7 +27,7 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 
-In addition, TiDB Cloud provides a Chat2Query API for TiDB Serverless clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+In addition, TiDB Cloud provides a Chat2Query API for TiDB Cloud Serverless clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 ### Credit
 
@@ -111,7 +111,7 @@ Project members are users who are invited to join one or more projects of the or
 
 ### Recycle Bin
 
-The place where the data of deleted clusters with valid backups is stored. Once a backed-up TiDB Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Settings**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
+The place where the data of deleted clusters with valid backups is stored. Once a backed-up TiDB Cloud Dedicated cluster is deleted, the existing backup files of the cluster are moved to the recycle bin. For backup files from automatic backups, the recycle bin will retain them for a specified period. You can configure the backup retention in **Backup Settings**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new cluster in time. Note that if a cluster **has no backup**, the deleted cluster will not be displayed here.
 
 ### region
 
@@ -133,13 +133,13 @@ The replication of changefeed is charged according to the computing resources, w
 
 ### Request Unit
 
-A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. For more information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. For more information, see [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
 ## S
 
 ### Spending limit
 
-Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your TiDB Serverless clusters. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), the spending limit must be set to a minimum of $0.01. Also, the scalable cluster can have a free quota if it meets the qualifications. The scalable cluster with a free quota will consume the free quota first.
+Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that enables you to set a budget for your TiDB Cloud Serverless clusters. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), the spending limit must be set to a minimum of $0.01. Also, the scalable cluster can have a free quota if it meets the qualifications. The scalable cluster with a free quota will consume the free quota first.
 
 ## T
 

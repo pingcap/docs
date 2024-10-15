@@ -11,9 +11,9 @@ In addition, you will also learn how to get the necessary information with the `
 
 The features of the `tidbcloud_cluster` resource include the following:
 
-- Create TiDB Serverless and TiDB Dedicated clusters.
-- Modify TiDB Dedicated clusters.
-- Delete TiDB Serverless and TiDB Dedicated clusters.
+- Create TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
+- Modify TiDB Cloud Dedicated clusters.
+- Delete TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
 
 ## Prerequisites
 
@@ -273,7 +273,7 @@ In the results:
 
 You can create a cluster using the `tidbcloud_cluster` resource.
 
-The following example shows how to create a TiDB Dedicated cluster.
+The following example shows how to create a TiDB Cloud Dedicated cluster.
 
 1. Create a directory for the cluster and enter it.
 
@@ -472,9 +472,9 @@ The following example shows how to create a TiDB Dedicated cluster.
 
 When the status is `AVAILABLE`, it indicates that your TiDB cluster is created and ready for use.
 
-## Modify a TiDB Dedicated cluster
+## Modify a TiDB Cloud Dedicated cluster
 
-For a TiDB Dedicated cluster, you can use Terraform to manage cluster resources as follows:
+For a TiDB Cloud Dedicated cluster, you can use Terraform to manage cluster resources as follows:
 
 - Add a TiFlash component to the cluster.
 - Scale the cluster.
@@ -830,7 +830,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 
 6. Wait for a moment, then use the `terraform refersh` command to update the state. The status will be changed to `AVAILABLE` finally.
 
-Now, you have created and managed a TiDB Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
+Now, you have created and managed a TiDB Cloud Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
 
 ## Import a cluster
 

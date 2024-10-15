@@ -74,7 +74,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
     + TiCDC
 
         - Fix the issue that the checkpoint cannot advance when TiCDC replicates an excessively large number of tables [#8004](https://github.com/pingcap/tiflow/issues/8004) @[asddongmen](https://github.com/asddongmen)
-        - Fix the issue that `transaction_atomicity` and `protocol` cannot be updated via the configuration file [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that `transaction-atomicity` and `protocol` cannot be updated via the configuration file [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that TiCDC mistakenly reports an error when the version of TiFlash is later than that of TiCDC [#7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
         - Fix the issue that OOM occurs when TiCDC replicates large transactions [#7913](https://github.com/pingcap/tiflow/issues/7913) @[overvenus](https://github.com/overvenus)
         - Fix a bug that the context deadline is exceeded when TiCDC replicates data without splitting large transactions [#7982](https://github.com/pingcap/tiflow/issues/7982) @[hi-rustin](https://github.com/Rustin170506)

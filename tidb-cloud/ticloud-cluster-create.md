@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless create`.
 
 # ticloud serverless create
 
-Create a TiDB Serverless cluster:
+Create a TiDB Cloud Serverless cluster:
 
 ```shell
 ticloud serverless create [flags]
@@ -13,13 +13,13 @@ ticloud serverless create [flags]
 
 ## Examples
 
-Create a TiDB Serverless cluster in interactive mode:
+Create a TiDB Cloud Serverless cluster in interactive mode:
 
 ```shell
 ticloud serverless create
 ```
 
-Create a TiDB Serverless cluster in non-interactive mode:
+Create a TiDB Cloud Serverless cluster in non-interactive mode:
 
 ```shell
 ticloud serverless create --project-id <project-id> --display-name <display-name> --region <region>

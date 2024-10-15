@@ -27,7 +27,7 @@ If the resources are adequate, it is recommended to use RAID 10 for SSD. If the 
 
 ### What's the recommended configuration of TiDB components?
 
-- TiDB has a high requirement on CPU and memory. If you need to enable TiDB Binlog (deprecated), the local disk space should be increased based on the service volume estimation and the time requirement for the GC operation. But the SSD disk is not a must.
+- TiDB has a high requirement on CPU and memory.
 - PD stores the cluster metadata and has frequent Read and Write requests. It demands a high I/O disk. A disk of low performance will affect the performance of the whole cluster. It is recommended to use SSD disks. In addition, a larger number of Regions has a higher requirement on CPU and memory.
 - TiKV has a high requirement on CPU, memory and disk. It is required to use SSD.
 
@@ -70,8 +70,6 @@ Check the time difference between the machine time of the monitor and the time w
 | `enable_ntpd` | to monitor the NTP service of the managed node, True by default; do not close it |
 | `machine_benchmark` | to monitor the disk IOPS of the managed node, True by default; do not close it |
 | `set_hostname` | to edit the hostname of the managed node based on the IP, False by default |
-| `enable_binlog` | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
-| `zookeeper_addrs` | the ZooKeeper address of the binlog Kafka cluster |
 | `enable_slow_query_log` | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
 | `deploy_without_tidb` | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 

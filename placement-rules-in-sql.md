@@ -30,7 +30,7 @@ With the Placement Rules in SQL feature, you can [create placement policies](#cr
 
 > **Tip:**
 >
-> The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](https://docs.pingcap.com/zh/tidb/stable/configure-placement-rules). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
+> The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](https://docs.pingcap.com/tidb/stable/configure-placement-rules). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
 
 ## Limitations
 
@@ -471,7 +471,6 @@ After executing the statements in the example, TiDB will place the `app_order` d
 | Backup & Restore (BR) | 6.0 | Before v6.0, BR does not support backing up and restoring placement policies. For more information, see [Why does an error occur when I restore placement rules to a cluster](/faq/backup-and-restore-faq.md#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster). |
 | TiDB Lightning | Not compatible yet | An error is reported when TiDB Lightning imports backup data that contains placement policies  |
 | TiCDC | 6.0 | Ignores placement policies, and does not replicate the policies to the downstream |
-| TiDB Binlog | 6.0 | Ignores placement policies, and does not replicate the policies to the downstream |
 
 </CustomContent>
 
