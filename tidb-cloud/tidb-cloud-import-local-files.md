@@ -12,7 +12,7 @@ Currently, this method supports importing one CSV file for one task into either 
 ## Limitations
 
 - Currently, TiDB Cloud only supports importing a local file in CSV format within 50 MiB for one task.
-- Importing local files is supported only for TiDB Serverless clusters, not for TiDB Dedicated clusters.
+- Importing local files is supported only for TiDB Cloud Serverless clusters, not for TiDB Cloud Dedicated clusters.
 - You cannot run more than one import task at the same time.
 - When you import a CSV file into an existing table in TiDB Cloud and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
     - If the extra columns are not the primary keys or the unique keys, no error will be reported. Instead, these extra columns will be populated with their [default values](/data-type-default-values.md).
@@ -33,9 +33,9 @@ Currently, this method supports importing one CSV file for one task into either 
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click the upload area to select and upload the target local file. Note that you can upload only one CSV file of less than 50 MiB for one task. If your local file is larger than 50 MiB, see [How to import a local file larger than 50 MiB?](#how-to-import-a-local-file-larger-than-50-mib).
+2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click **Upload a local file** to select and upload the target local file. Note that you can upload only one CSV file of less than 50 MiB for one task. If your local file is larger than 50 MiB, see [How to import a local file larger than 50 MiB?](#how-to-import-a-local-file-larger-than-50-mib).
 
-3. In the **Target** area, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. Click **Preview**.
+3. In the **Destination** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. Click **Define Table**, the **Table Definition** section is displayed.
 
 4. Check the table.
 
@@ -72,13 +72,13 @@ Currently, this method supports importing one CSV file for one task into either 
 
    You can also click **Edit CSV configuration** to configure Backslash Escape, Separator, and Delimiter for more fine-grained control. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
 
-8. On the **Preview** page, you can have a preview of the data. Click **Start Import**.
+8. Click **Start Import**.
 
     You can view the import progress on the **Import Task Detail** page. If there are warnings or failed tasks, you can check to view the details and solve them.
 
-9. After the import task is completed, you can click **Explore your data in SQL Editor** to query your imported data. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+9. After the import task is completed, you can click **Explore your data by SQL Editor** to query your imported data. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 
-10. On the **Import** page, you can click **View** in the **Action** column to check the import task detail.
+10. On the **Import** page, you can click **...** > **View** in the **Action** column to check the import task detail.
 
 ## FAQ
 

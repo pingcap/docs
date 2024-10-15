@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/ticloud-serverless-regions']
 
 # ticloud serverless region
 
-List all available regions for TiDB Serverless:
+List all available regions for TiDB Cloud Serverless:
 
 ```shell
 ticloud serverless region [flags]
@@ -14,13 +14,13 @@ ticloud serverless region [flags]
 
 ## Examples
 
-List all available regions for TiDB Serverless:
+List all available regions for TiDB Cloud Serverless:
 
 ```shell
 ticloud serverless region
 ```
 
-List all available regions for TiDB Serverless clusters in the JSON format:
+List all available regions for TiDB Cloud Serverless clusters in the JSON format:
 
 ```shell
 ticloud serverless region -o json

@@ -1082,7 +1082,7 @@ Configuration items related to Coprocessor.
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `"96MiB"`
++ Default value: `"256MiB"`. Before v8.4.0, the default value is `"96MiB"`.
 + Unit: KiB|MiB|GiB
 
 ### `region-max-keys`
@@ -1093,7 +1093,7 @@ Configuration items related to Coprocessor.
 ### `region-split-keys`
 
 + The number of keys in the newly split Region. This value is an estimate.
-+ Default value: `960000`
++ Default value: `2560000`. Before v8.4.0, the default value is `960000`.
 
 ### `consistency-check-method`
 
@@ -1990,7 +1990,7 @@ Configuration items related to Raft Engine.
 > 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
 
 + Specifies the version of log files in Raft Engine.
-+ Value Options:
++ Value options:
     + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
     + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
 + Default value:
@@ -2151,7 +2151,7 @@ Configuration items related to BR backup.
 
 + The threshold of the backup SST file size. If the size of a backup file in a TiKV Region exceeds this threshold, the file is backed up to several files with the TiKV Region split into multiple Region ranges. Each of the files in the split Regions is the same size as `sst-max-size` (or slightly larger).
 + For example, when the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
-+ Default value: `"144MiB"`
++ Default value: `"384MiB"`. Before v8.4.0, the default value is `"144MiB"`.
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
 
@@ -2230,7 +2230,11 @@ Configuration items related to TiCDC.
 ### `min-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
-+ Default value: `"200ms"`
++ Default value: `"1s"`.
+
+> **Note:**
+>
+> In v6.5.0, the default value of `min-ts-interval` is changed from `"1s"` to `"200ms"` to reduce CDC latency. Starting from v6.5.1, this default value is changed back to `"1s"` to reduce network traffic.
 
 ### `old-value-cache-memory-quota`
 
@@ -2425,6 +2429,16 @@ Configuration items related to resource control of the TiKV storage layer.
 + Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
 + Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
 + Default value: `true`, which means scheduling based on the RU of the resource group is enabled.
+
+### `priority-ctl-strategy` <span class="version-mark">New in v8.4.0</span>
+
+Specifies the flow control strategy for low-priority tasks. TiKV ensures that higher priority tasks are prioritized for execution by applying flow control to low-priority tasks.
+
++ Value options:
+    + `aggressive`: this policy prioritizes the performance of high-priority tasks, ensuring that the throughput and latency of high-priority tasks are largely unaffected, but low-priority tasks will run slower.
+    + `moderate`: this policy imposes a balanced flow control on low-priority tasks and has a lower impact on high-priority tasks.
+    + `conservative`: this policy prioritizes ensuring that system resources are fully utilized, allowing low-priority tasks to fully utilize system available resources as needed, and therefore has a greater performance impact on high-priority tasks.
++ Default value: `moderate`.
 
 ## split
 

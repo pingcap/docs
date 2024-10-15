@@ -301,8 +301,6 @@ CREATE PLACEMENT POLICY storageforhistorydata CONSTRAINTS="[+node=history]";
 CREATE PLACEMENT POLICY storagefornewdata CONSTRAINTS="[+node=new]";
 CREATE PLACEMENT POLICY companystandardpolicy CONSTRAINTS="";
 
-SET tidb_enable_global_index = ON;
-
 CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE, UNIQUE INDEX idx(id) GLOBAL)
 PLACEMENT POLICY=companystandardpolicy
 PARTITION BY RANGE( YEAR(purchased) ) (
@@ -471,7 +469,6 @@ After executing the statements in the example, TiDB will place the `app_order` d
 | Backup & Restore (BR) | 6.0 | Before v6.0, BR does not support backing up and restoring placement policies. For more information, see [Why does an error occur when I restore placement rules to a cluster](/faq/backup-and-restore-faq.md#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster). |
 | TiDB Lightning | Not compatible yet | An error is reported when TiDB Lightning imports backup data that contains placement policies  |
 | TiCDC | 6.0 | Ignores placement policies, and does not replicate the policies to the downstream |
-| TiDB Binlog | 6.0 | Ignores placement policies, and does not replicate the policies to the downstream |
 
 </CustomContent>
 
