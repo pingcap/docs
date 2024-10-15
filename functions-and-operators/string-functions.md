@@ -640,7 +640,7 @@ The `HEX()` function is used to convert the given argument into a string represe
 
 > **Note:**
 >
-> In the MySQL Client the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, this causes the client to display data for which is doesn't know the character set as [`hexadecimal literal`](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html) instead. You can use the `--skip-binary-as-hex` option to disable this behavior.
+> In the MySQL client, the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, causing the client to display data with an unknown character set as a [hexadecimal literal](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html). You can use the `--skip-binary-as-hex` option to disable this behavior.
 
 Examples (with `mysql --skip-binary-as-hex`):
 
@@ -2245,7 +2245,7 @@ The `UNHEX()` function performs the reverse operation of the `HEX()` function. I
 > **Note:**
 >
 > - The argument must be a valid hexadecimal value that contains `0`–`9`, `A`–`F`, or `a`–`f`. If the argument is `NULL` or falls outside this range, the function returns `NULL`.
-> - In the MySQL Client the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, this causes the client to display data for which is doesn't know the character set as [`hexadecimal literal`](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html) instead. You can use the `--skip-binary-as-hex` option to disable this behavior.
+> - In the MySQL client, the [`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex) option is enabled by default in interactive mode, causing the client to display data with an unknown character set as a [hexadecimal literal](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html). You can use the `--skip-binary-as-hex` option to disable this behavior.
 
 Example:
 
