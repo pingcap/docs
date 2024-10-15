@@ -1449,11 +1449,11 @@ SELECT MAKE_SET(b'111','foo','bar','baz');
 
 ### [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)
 
-The `MID(str, pos, len)` function returns a substring starting from the specified `pos` position with the `len` length.
+The `MID(str, pos[, len])` function returns a substring starting from the specified `pos` position with the `len` length.
+
+Starting from v8.4.0, TiDB supports the two-argument variant `MID(str, pos)`. If `len` is not specified, this function returns all remaining characters from the specified `pos` position to the end of the string.
 
 If any of the arguments are `NULL`, the function returns `NULL`.
-
-TiDB does not support the two-argument variant of this function. For more information, see [#52420](https://github.com/pingcap/tidb/issues/52420).
 
 Examples:
 
@@ -1468,6 +1468,21 @@ SELECT MID('abcdef',2,3);
 | MID('abcdef',2,3) |
 +-------------------+
 | bcd               |
++-------------------+
+1 row in set (0.00 sec)
+```
+
+In the following example, `MID()` returns the substring of the input string starting from the second character (`b`) to the end of the string.
+
+```sql
+SELECT MID('abcdef',2);
+```
+
+```
++-------------------+
+| MID('abcdef',2)   |
++-------------------+
+| bcdef             |
 +-------------------+
 1 row in set (0.00 sec)
 ```
