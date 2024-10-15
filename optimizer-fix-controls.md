@@ -80,6 +80,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
     - Wide tables with many columns, where only a few columns are queried.
     - Tables with large JSON values, where the JSON column is not queried, or only a small portion of the JSON column is queried.
+
 ### [`52869`](https://github.com/pingcap/tidb/issues/52869) <span class="version-mark">New in v8.1.0</span>
 
 - Default value: `OFF`
