@@ -80,7 +80,7 @@ Traffic replay is not suitable for the following scenarios:
 
     The `fail` table stores failed SQL statements, with the following fields:
 
-    - `cmd_type`: the type of a failed SQL statement, such as `Query` (execute an ordinary statement), `Prepare` (prepare a statement), and `Execute` (execute a prepared statement).
+    - `cmd_type`: the type of a failed command, such as `Query` (execute an ordinary statement), `Prepare` (prepare a statement), and `Execute` (execute a prepared statement).
     - `digest`: the digest of the failed SQL statement.
     - `sample_stmt`: the SQL text when the statement first failed.
     - `sample_err_msg`: the error message when the SQL statement failed.
@@ -148,6 +148,6 @@ For more information, see [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command
 ## Limitations
 
 - TiProxy only supports replaying traffic files captured by TiProxy and does not support other file formats. Therefore, make sure to capture traffic from the production cluster using TiProxy first.
-- TiProxy traffic replay does not support filtering SQL types and DML and DDL statements are replayed. Therefore, you need to restore the cluster data to its pre-replay state before replaying.
+- TiProxy traffic replay does not support filtering SQL types and DML and DDL statements are replayed. Therefore, you need to restore the cluster data to its pre-replay state before replaying again.
 - TiProxy traffic replay does not support testing [Resource Control](/tidb-resource-control.md) and [privilege management](/privilege-management.md) because TiProxy uses the same username to replay traffic.
 - TiProxy does not support replaying [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statements.
