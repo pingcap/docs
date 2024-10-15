@@ -123,6 +123,7 @@ This guide focuses on providing actionable advice for beginners looking to optim
 - Query Processing Workflow
 - Optimizer Fundamentals
 - Statistics Management
+- How TiDB build A Execution Plan
 - Understand Execution Plan
 - Real-World Use Case
   - Bad Plan Debug
@@ -253,8 +254,7 @@ More Detail for Logical Transformation: https://docs.pingcap.com/tidb/stable/sql
 
 ### Cost-Based Optimization
 
-TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement. The Cost-Based Optimization estimates the cost of each available plan choice, including index accesses and the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
-
+TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement, and associates a cost with each plan step. The Cost-Based Optimization estimates the cost of each available plan choice, including index accesses and the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
 
 The below figure illustrates the various data access paths and row set operations that cost-based optimization can consider to develop the optimal execution plan. Furthermore, during the logical transformation stage, the query has already been rewritten for predicate push-down. In the cost-based optimization stage, TiKV expression push-down is further implemented when possible at TiKV layer. 
 
@@ -262,9 +262,146 @@ Furthermore, confirming the algorithm for certain SQL operations, such as aggreg
 
 ![cost-based-optimization](/media/sql-tuning/cost-based-optimization.png)
 
-# 3. Understanding Execution Plans
-The execution plan represents the steps TiDB will follow to execute a SQL query. An effective execution plan ensures performance optimization.
+## Understanding Execution Plans
 
+The execution plan represents the steps TiDB will follow to execute a SQL query. In this section, we will learn how to display and read the execution plan.
+
+### Generating and Displaying Execution Plans
+
+Beside access the execution plan information through TiDB Dashboard, TiDB provides a `EXPLAIN` statement to display the execution plan for a SQL query. Here's an example of using `EXPLAIN`:
+- id: Operator name and the step unique identifier
+- estRows: Estimated number of rows from the particular step
+- task: The executor of the step
+- access object: The object where the row sources are located
+- operator info: Extended information about the operator regarding the step
+
+```SQL
+tidb> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
+
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+| id                       | estRows     | task         | access object     | operator info                                                                                      |
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+| StreamAgg_20             | 1.00        | root         |                   | funcs:count(Column#13)->Column#11                                                                  |
+| └─TableReader_21         | 1.00        | root         |                   | data:StreamAgg_9                                                                                   |
+|   └─StreamAgg_9          | 1.00        | cop[tikv]    |                   | funcs:count(1)->Column#13                                                                          |
+|     └─Selection_19       | 250.00      | cop[tikv]    |                   | ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000) |
+|       └─TableFullScan_18 | 10000.00    | cop[tikv]    | table:trips       | keep order:false, stats:pseudo                                                                     |
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+```
+
+Additional Information in EXPLAIN ANALYZE Output
+Different from EXPLAIN, EXPLAIN ANALYZE executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. There runtime information is crucial for debugging query execution.
+
+Description
+- actRows: Number of rows output by the operator.
+- execution info: Detailed execution information of the operator. time represents the total wall time from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator then the time refers to the accumulated time. loops is the number of times the current operator is called by the parent operator.
+- memory: Memory used by the operator.
+- disk: Disk space used by the operator.
+
+Note: Some attributes and explain table columns are omitted for improved formatting
+```SQL
+tidb:db1> EXPLAIN ANALYZE SELECT SUM(pm.m_count)/COUNT(*) FROM
+    -> (SELECT COUNT(m.name) m_count
+    ->  FROM universe.moons m
+    ->  RIGHT JOIN
+    ->  (SELECT p.id, p.name
+    ->   FROM universe.planet_categories c
+    ->   JOIN universe.planets p
+    ->   ON c.id = p.category_id AND c.name = 'Jovian') pc
+    ->  ON m.planet_id = pc.id
+    ->  GROUP BY pc.name) pm;
++-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+| id                                      |.| actRows | task      | access object             | execution info                                                 |.| memory    | disk    |
++-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+| Projection_14                           |.| 1       | root      |                           | time:1.39ms, loops:2, RU:1.561975, Concurrency:OFF             |.| 9.64 KB   | N/A     |
+| └─StreamAgg_16                          |.| 1       | root      |                           | time:1.39ms, loops:2                                           |.| 1.46 KB   | N/A     |
+|   └─Projection_40                       |.| 4       | root      |                           | time:1.38ms, loops:4, Concurrency:OFF                          |.| 8.24 KB   | N/A     |
+|     └─HashAgg_17                        |.| 4       | root      |                           | time:1.36ms, loops:4, partial_worker:{...}, final_worker:{...} |.| 82.1 KB   | N/A     |
+|       └─HashJoin_19                     |.| 25      | root      |                           | time:1.29ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 2.25 KB   | 0 Bytes |
+|         ├─HashJoin_35(Build)            |.| 4       | root      |                           | time:1.08ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 25.7 KB   | 0 Bytes |
+|         │ ├─IndexReader_39(Build)       |.| 1       | root      |                           | time:888.5µs, loops:2, cop_task: {...}                         |.| 286 Bytes | N/A     |
+|         │ │ └─IndexRangeScan_38         |.| 1       | cop[tikv] | table:c, index:name(name) | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
+|         │ └─TableReader_37(Probe)       |.| 10      | root      |                           | time:543.7µs, loops:2, cop_task: {...}                         |.| 577 Bytes | N/A     |
+|         │   └─TableFullScan_36          |.| 10      | cop[tikv] | table:p                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
+|         └─TableReader_22(Probe)         |.| 28      | root      |                           | time:671.7µs, loops:2, cop_task: {...}                         |.| 876 Bytes | N/A     |
+|           └─TableFullScan_21            |.| 28      | cop[tikv] | table:m                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
++-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+```
+
+
+### Reading Execution Plans: First Child First
+
+To understand why SQL queries run slowly, it's very important to know how to read Execution Plans. The main rule for reading an execution plan is "first child first – go down step by step".
+Each operator of the plan produces rows of data. When we talk about how a plan runs, we really mean the order in which each operator produces its rows. The "first child first" rule means that to produce its rows, each operator of the plan asks its child operators to produce their rows first. Then it combines these rows in some way. The order in which it asks its child parts is the same as the order they appear in the plan.
+
+There are two important details to add to this.
+
+First, although a parent operator will call its child operators in turn, the parent may cycle through the child operators multiple times. The obvious example of this is the index lookup or nested loop join, where the parent will fetch a row from its first child then fetch (zero or more) rows from its second child, then fetch the next row from its first child then call its second child again, and repeat until is has consumed the entire resultset from the first child.
+Secondly, an operation may be blocking or non-blocking, and it’s worth remembering this when thinking about whether you want to tune a query for latency (time to first row(s) returned) or throughput (time to last row returned). Some operations will have to create their entire resultset before they pass anything up to their parent (blocking); some operations will create and pass their rowsource piece by piece on demand.
+
+
+
+Let's apply the "first child first – recursive descent" rule to the first plan. When reading an execution plan, you should start from the top and work your down bottom. In the below example begin by looking at the `TableFullScan_18` (or the first child of the tree). In this case the access operator for table trips are implemented using full table scan. The rows produced by the tables scans will be consumed by the `Selection_19` operator. The `Selection_19` operator is to filter the data by `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`. Next the group-by operator `StreamAgg_9` is to implemented the aggregation `count(*)`. Be noted that the 3 operators `TableFullScan_18`, `Selection_19`, `StreamAgg_9` are pushdown to TiKV, which is marked as `cop[tikv]`, so that early filter and aggregation can be done in TiKV, to minize the data transfer between TiKV and TiDB. Finally the `TableReader_21` is to read the data from the `StreamAgg_9` operator, then finally the `StreamAgg_20` is to implemented the aggregation `count(*)`.
+
+
+```SQL
+tidb> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
+
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+| id                       | estRows     | task         | access object     | operator info                                                                                      |
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+| StreamAgg_20             | 1.00        | root         |                   | funcs:count(Column#13)->Column#11                                                                  |
+| └─TableReader_21         | 1.00        | root         |                   | data:StreamAgg_9                                                                                   |
+|   └─StreamAgg_9          | 1.00        | cop[tikv]    |                   | funcs:count(1)->Column#13                                                                          |
+|     └─Selection_19       | 250.00      | cop[tikv]    |                   | ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000) |
+|       └─TableFullScan_18 | 10000.00    | cop[tikv]    | table:trips       | keep order:false, stats:pseudo                                                                     |
++--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+```
+
+Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin by looking at the `IndexRangeScan_38` (the first child of the tree). For the table `planet_categories`, the optimizer ony need to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `planet_categories`, the root reader is `IndexReader_39`, rather than a `TableReader`.
+The join method between `planet_categories` and `planets` is a hash join, which is marked as `HashJoin_35`. The data access method on `planets` is a `TableFullScan_36`. The join method between `HashJoin_35` and table `moons` is a `HashJoin_19`. The data access method on `moons` is a `TableFullScan_21`. After the join, the `HashAgg_17` is to implemented the aggregation `SUM(pm.m_count)/COUNT(*)`.
+
+When reading the execution plan, it's crucial to compare the `actRows` (actual rows) with the `estRows` (estimated rows) to assess the accuracy of the optimizer's estimations. A significant discrepancy between these values may indicate that the optimizer's statistics are outdated or inaccurate, potentially leading to suboptimal query plans.
+
+To identify the bottleneck in a poorly performing query:
+
+1. Scan the `execution info` section from top to bottom, looking for operators that consume a significant amount of time.
+2. For the first operator with significant time consumption, analyze the following:
+   - `actRows`: Compare with `estRows` to check for estimation accuracy.
+   - Detailed measurements in `execution info`: Look for high values in time, loops, or other metrics.
+   - `memory` and `disk` usage: High values may indicate suboptimal plan or resource constraints.
+3. Correlate these factors to determine the root cause of the performance issue. For example, if you see a `TableFullScan` operation with a high `actRows` count and significant time in `execution info`, it might suggest the need for an index. Alternatively, if a `HashJoin` operation shows high memory usage and time, you might need to optimize the join or consider alternative join methods.
+
+```SQL
+tidb:db1> EXPLAIN ANALYZE SELECT SUM(pm.m_count)/COUNT(*) FROM
+    -> (SELECT COUNT(m.name) m_count
+    ->  FROM universe.moons m
+    ->  RIGHT JOIN
+    ->  (SELECT p.id, p.name
+    ->   FROM universe.planet_categories c
+    ->   JOIN universe.planets p
+    ->   ON c.id = p.category_id AND c.name = 'Jovian') pc
+    ->  ON m.planet_id = pc.id
+    ->  GROUP BY pc.name) pm;
++-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+| id                                      |.| actRows | task      | access object             | execution info                                                 |.| memory    | disk    |
++-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+| Projection_14                           |.| 1       | root      |                           | time:1.39ms, loops:2, RU:1.561975, Concurrency:OFF             |.| 9.64 KB   | N/A     |
+| └─StreamAgg_16                          |.| 1       | root      |                           | time:1.39ms, loops:2                                           |.| 1.46 KB   | N/A     |
+|   └─Projection_40                       |.| 4       | root      |                           | time:1.38ms, loops:4, Concurrency:OFF                          |.| 8.24 KB   | N/A     |
+|     └─HashAgg_17                        |.| 4       | root      |                           | time:1.36ms, loops:4, partial_worker:{...}, final_worker:{...} |.| 82.1 KB   | N/A     |
+|       └─HashJoin_19                     |.| 25      | root      |                           | time:1.29ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 2.25 KB   | 0 Bytes |
+|         ├─HashJoin_35(Build)            |.| 4       | root      |                           | time:1.08ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 25.7 KB   | 0 Bytes |
+|         │ ├─IndexReader_39(Build)       |.| 1       | root      |                           | time:888.5µs, loops:2, cop_task: {...}                         |.| 286 Bytes | N/A     |
+|         │ │ └─IndexRangeScan_38         |.| 1       | cop[tikv] | table:c, index:name(name) | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
+|         │ └─TableReader_37(Probe)       |.| 10      | root      |                           | time:543.7µs, loops:2, cop_task: {...}                         |.| 577 Bytes | N/A     |
+|         │   └─TableFullScan_36          |.| 10      | cop[tikv] | table:p                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
+|         └─TableReader_22(Probe)         |.| 28      | root      |                           | time:671.7µs, loops:2, cop_task: {...}                         |.| 876 Bytes | N/A     |
+|           └─TableFullScan_21            |.| 28      | cop[tikv] | table:m                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
++-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
+```
 
 # 4. Real-World Use Cases
 
