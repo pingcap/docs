@@ -418,8 +418,8 @@ The following table lists the performance of seven different scenarios.
 
 In these scenarios, Scenario 2 is a common scenario where applications use the Query interface, and Scenario 5 is an ideal scenario where applications use the Prepared Statement interface.
 
-- Comparing Scenario 2 with Scenario 5, you can see that by using best practices for Java application development and caching Prepared Statement objects on the client side, each SQL statement requires only one command and database interaction to hit the execution plan cache, which results in a 38% drop in query latency and a 28% increase in QPS, while the average TiDB CPU utilization drops from 936% to 577%.
-- Comparing Scenario 3 with Scenario 7, you can see that with the latest TiDB optimization features such as RC Read and small table cache on top of Scenario 5, latency is reduced by 41% and QPS is increased by 108%, while the average TiDB CPU utilization drops from 936% to 478%.
+- Comparing Scenario 5 with Scenario 2, you can see that by using best practices for Java application development and caching Prepared Statement objects on the client side, each SQL statement requires only one command and database interaction to hit the execution plan cache, which results in a 38% drop in query latency and a 28% increase in QPS, while the average TiDB CPU utilization drops from 936% to 577%.
+- Comparing Scenario 7 with Scenario 3, you can see that with the latest TiDB optimization features such as RC Read and small table cache on top of Scenario 5, latency is reduced by 41% and QPS is increased by 108%, while the average TiDB CPU utilization drops from 936% to 478%.
 
 By comparing the performance of each scenario, we can draw the following conclusions:
 
