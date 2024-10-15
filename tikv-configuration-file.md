@@ -1082,7 +1082,7 @@ Configuration items related to Coprocessor.
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `"96MiB"`
++ Default value: `"256MiB"`. Before v8.4.0, the default value is `"96MiB"`.
 + Unit: KiB|MiB|GiB
 
 ### `region-max-keys`
@@ -1093,7 +1093,7 @@ Configuration items related to Coprocessor.
 ### `region-split-keys`
 
 + The number of keys in the newly split Region. This value is an estimate.
-+ Default value: `960000`
++ Default value: `2560000`. Before v8.4.0, the default value is `960000`.
 
 ### `consistency-check-method`
 
@@ -2151,7 +2151,7 @@ Configuration items related to BR backup.
 
 + The threshold of the backup SST file size. If the size of a backup file in a TiKV Region exceeds this threshold, the file is backed up to several files with the TiKV Region split into multiple Region ranges. Each of the files in the split Regions is the same size as `sst-max-size` (or slightly larger).
 + For example, when the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
-+ Default value: `"144MiB"`
++ Default value: `"384MiB"`. Before v8.4.0, the default value is `"144MiB"`.
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
 
