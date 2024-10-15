@@ -1983,7 +1983,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Possible values: `OFF`, `ON`
-- This variable controls whether the corresponding TiDB instance can become a stats owner or not. If there is only one TiDB instance in the current TiDB cluster, you cannot prevent it from becoming a stats owner, which means you cannot set it to `OFF`.
+- This variable controls whether the corresponding TiDB instance is able to run [automatic update of optimizer statistics](/statistics.md#automatic-update). If there is only one TiDB instance in the current TiDB cluster, you cannot prevent it from running automatic update of optimizer statistics , which means you cannot set it to `OFF`.
 
 ### tidb_enable_collect_execution_info
 
