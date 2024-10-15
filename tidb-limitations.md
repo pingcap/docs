@@ -7,6 +7,10 @@ summary: Learn the usage limitations of TiDB.
 
 This document describes the common usage limitations of TiDB, including the maximum identifier length and the maximum number of supported databases, tables, indexes, partitioned tables, and sequences.
 
+> **Note:**
+>
+> TiDB offers high compatibility with the MySQL protocol and syntax, including many MySQL limitations. For example, a single index can include a maximum of 16 columns. For more information, see [MySQL Compatibility](/mysql-compatibility.md) and the official MySQL documentation.
+
 ## Limitations on identifier length
 
 | Identifier type | Maximum length (number of characters allowed) |
