@@ -39,8 +39,6 @@ Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https:/
 
 [HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy (> 98% in typical cases).
 
-<CustomContent platform="tidb">
-
 In TiDB, you can create an HNSW index for a column with a [vector data type](/vector-search-data-types.md) in either of the following ways:
 
 - When creating a table, use the following syntax to specify the vector column for the HNSW index:
@@ -72,44 +70,6 @@ When creating an HNSW vector index, you need to specify the distance function fo
 The vector index can only be created for fixed-dimensional vector columns, such as a column defined as `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns (such as a column defined as `VECTOR`) because vector distances can only be calculated between vectors with the same dimensions.
 
 For restrictions and limitations of vector search indexes, see [Restrictions](#restrictions).
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-To create an HNSW vector index, specify the index definition in the comment of a column with a [vector data type](/vector-search-data-types.md) when creating the table:
-
-```sql
-CREATE TABLE vector_table_with_index (
-    id INT PRIMARY KEY, doc TEXT,
-    embedding VECTOR(3) COMMENT "hnsw(distance=cosine)"
-);
-```
-
-> **Note:**
->
-> The syntax to create a vector index might change in future releases.
-
-You must specify the distance metric via the `distance=<metric>` configuration when creating the vector index:
-
-- Cosine Distance: `COMMENT "hnsw(distance=cosine)"`
-- L2 Distance: `COMMENT "hnsw(distance=l2)"`
-
-The vector index can only be created for fixed-dimensional vector columns like `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns like `VECTOR` because vector distances can only be calculated between vectors with the same dimensions.
-
-If you are using programming language SDKs or ORMs, refer to the following documentation for creating vector indexes:
-
-- Python: [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python)
-- Python: [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
-- Python: [Peewee](/vector-search-integrate-with-peewee.md)
-- Python: [Django](/vector-search-integrate-with-django-orm.md)
-
-Be aware of the following limitations when creating the vector index. These limitations might be removed in future releases:
-
-- L1 distance and inner product are not supported for the vector index yet.
-
-- You can only define and create a vector index when the table is created. You cannot create the vector index on demand using DDL statements after the table is created. You cannot drop the vector index using DDL statements as well.
-
-</CustomContent>
 
 ## Use the vector index
 
@@ -171,8 +131,6 @@ LIMIT 5;
 
 Instead of writing a query using the `WHERE` clause, you can partition the table and then query within the partition using the [`PARTITION` keyword](/partitioned-table.md#partition-selection):
 
-<CustomContent platform="tidb">
-
 ```sql
 CREATE TABLE docs (
     id INT,
@@ -192,30 +150,6 @@ PARTITION (p_v2_0)
 ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-```sql
-CREATE TABLE docs (
-    id INT,
-    ver VARCHAR(10),
-    doc TEXT,
-    embedding VECTOR(3) COMMENT "hnsw(distance=cosine)"
-) PARTITION BY LIST COLUMNS (ver) (
-    PARTITION p_v1_0 VALUES IN ('v1.0'),
-    PARTITION p_v1_1 VALUES IN ('v1.1'),
-    PARTITION p_v1_2 VALUES IN ('v1.2'),
-    PARTITION p_v2_0 VALUES IN ('v2.0')
-);
-
-SELECT * FROM docs
-PARTITION (p_v2_0)
-ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
-LIMIT 5;
-```
-
-</CustomContent>
 
 For more information, see [Table Partitioning](/partitioned-table.md).
 
