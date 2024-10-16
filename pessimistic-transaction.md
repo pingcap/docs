@@ -236,3 +236,5 @@ To dynamically modify these limits, [modify TiKV configuration dynamically](/dyn
 SET CONFIG tikv `pessimistic-txn.in-memory-peer-size-limit`="512KiB";
 SET CONFIG tikv `pessimistic-txn.in-memory-instance-size-limit`="100MiB";
 ```
+</CustomContent>
+
