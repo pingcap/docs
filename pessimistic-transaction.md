@@ -200,7 +200,18 @@ If the application logic relies on the locking or lock waiting mechanisms, or if
 
 In v6.0.0, TiKV introduces the feature of in-memory pessimistic lock. When this feature is enabled, pessimistic locks are usually stored in the memory of the Region leader only, and are not persisted to disk or replicated through Raft to other replicas. This feature can greatly reduce the overhead of acquiring pessimistic locks and improve the throughput of pessimistic transactions.
 
+<CustomContent platform="tidb">
+
 When the memory usage of in-memory pessimistic locks exceeds the memory threshold of the [Region](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) or the [TiKV node](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840), the acquisition of pessimistic locks turns to the [pipelined locking process](#pipelined-locking-process). When the Region is merged or the leader is transferred, to avoid the loss of the pessimistic lock, TiKV writes the in-memory pessimistic lock to disk and replicates it to other replicas.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+When the memory usage of in-memory pessimistic locks exceeds the memory threshold of the [Region](https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-peer-size-limit-new-in-v840) or the [TiKV node](https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-instance-size-limit-new-in-v840), the acquisition of pessimistic locks turns to the [pipelined locking process](#pipelined-locking-process). When the Region is merged or the leader is transferred, to avoid the loss of the pessimistic lock, TiKV writes the in-memory pessimistic lock to disk and replicates it to other replicas.
+
+</CustomContent>
+
 
 The in-memory pessimistic lock performs similarly to the pipelined locking process, which does not affect the lock acquisition when the cluster is healthy. However, when network isolation occurs in TiKV or a TiKV node is down, the acquired pessimistic lock might be lost.
 
