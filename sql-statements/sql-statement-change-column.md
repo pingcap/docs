@@ -1,19 +1,19 @@
 ---
 title: CHANGE COLUMN | TiDB SQL Statement Reference
-summary: ALTER TABLE.. CHANGE COLUMNステートメントは、既存のテーブルの列を変更します。変更には、列の名前変更とデータ型の互換性のある型への変更の両方が含まれる場合があります。TiDBは、v5.1.0以降、Reorgデータ型の変更をサポートしています。MySQLの互換性に関して、いくつかの制限があります。
+summary: TiDB データベースの CHANGE COLUMN の使用法の概要。
 ---
 
 # 列の変更 {#change-column}
 
-`ALTER TABLE.. CHANGE COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、列の名前変更とデータ型の互換性のある型への変更の両方が含まれる場合があります。
+`ALTER TABLE.. CHANGE COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、列の名前の変更と、互換性のある型へのデータ型の変更の両方が含まれます。
 
-v5.1.0 以降、TiDB は、以下を含む (ただしこれらに限定されない) Reorg データ型の変更をサポートしています。
+v5.1.0 以降、TiDB は Reorg データ型の変更をサポートしています。これには以下が含まれますが、これらに限定されません。
 
--   `VARCHAR`を`BIGINT`に変更する
--   `DECIMAL`精度を変更する
--   `VARCHAR(10)` ～ `VARCHAR(5)`の長さを圧縮する
+-   `VARCHAR` `BIGINT`に変更
+-   `DECIMAL`精度の変更
+-   `VARCHAR(10)`の長さを`VARCHAR(5)`に圧縮する
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -110,17 +110,17 @@ ALTER TABLE t CHANGE COLUMN a a DATETIME;
 
     ERROR 8200 (HY000): Unsupported modify column: change from original type decimal(13,7) to datetime is currently unsupported yet
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
--   主キー列の[データの再編成](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
--   パーティション化されたテーブルの列タイプの変更はサポートされていません。
+-   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
+-   パーティション化されたテーブル上の列タイプの変更はサポートされていません。
 -   生成された列の列タイプの変更はサポートされていません。
--   一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、および JSON 型) の変更は、TiDB と MySQL の間の`CAST`の動作の互換性の問題によりサポートされません。
+-   TiDB と MySQL 間の`CAST`の関数の動作の互換性の問題により、一部のデータ型 (TIME、BIT、SET、ENUM、JSON 型など) から他の型への変更はサポートされていません。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
--   [列の追加](/sql-statements/sql-statement-add-column.md)
--   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
+-   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+-   [列を追加](/sql-statements/sql-statement-add-column.md)
+-   [ドロップコラム](/sql-statements/sql-statement-drop-column.md)
 -   [列の変更](/sql-statements/sql-statement-modify-column.md)

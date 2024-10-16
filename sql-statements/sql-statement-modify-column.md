@@ -1,6 +1,6 @@
 ---
 title: MODIFY COLUMN | TiDB SQL Statement Reference
-summary: An overview of the usage of MODIFY COLUMN for the TiDB database.
+summary: TiDB データベースの MODIFY COLUMN の使用法の概要。
 ---
 
 # 列の変更 {#modify-column}
@@ -9,7 +9,7 @@ summary: An overview of the usage of MODIFY COLUMN for the TiDB database.
 
 v5.1.0 以降、TiDB は Reorg データのデータ型の変更をサポートしています。これには以下が含まれますが、これらに限定されません。
 
--   `VARCHAR`を`BIGINT`に変更
+-   `VARCHAR` `BIGINT`に変更
 -   `DECIMAL`精度の変更
 -   `VARCHAR(10)`の長さを`VARCHAR(5)`に圧縮する
 
@@ -130,7 +130,7 @@ CREATE TABLE `t1` (
 >         alter table t1 modify column col1 varchar(4);
 >         ERROR 1406 (22001): Data Too Long, field len 4, data len 5
 >
-> -   非同期コミット機能との互換性のため、DDL ステートメントは、再編成データへの処理を開始する前に一定時間 (約 2.5 秒) 待機します。
+> -   非同期コミット機能との互換性のため、DDL ステートメントは、再編成データへの処理を開始する前に一定期間 (約 2.5 秒) 待機します。
 >
 >         Query OK, 0 rows affected (2.52 sec)
 
@@ -172,7 +172,7 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: table is partition table
     ```
 
--   一部のデータ型 (たとえば、一部の TIME 型、Bit、Set、Enum、JSON) の変更は、TiDB と MySQL 間の`cast`の関数の動作に関する互換性の問題によりサポートされていません。
+-   TiDB と MySQL 間の`cast`の関数の動作に関する互換性の問題により、一部のデータ型 (一部の TIME 型、BIT、SET、ENUM、JSON など) から他の型への変更はサポートされていません。
 
     ```sql
     CREATE TABLE t (a DECIMAL(13, 7));

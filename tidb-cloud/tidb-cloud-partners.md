@@ -10,7 +10,7 @@ TiDB Cloudパートナー Web コンソールは、SaaS ソリューションに
 
 TiDB Cloudパートナーには 2 つの種類があります。
 
--   再販業者: AWS Marketplace チャネルパートナープライベートオファー (CPPO) を通じてTiDB Cloudを再販します。
+-   再販業者: AWS Marketplace チャネルパートナープライベートオファー (CPPO) を通じてTiDB Cloud を再販します。
 -   マネージドサービスプロバイダー（MSP）： TiDB Cloudを再販し、付加価値サービスを提供する
 
 ## AWS チャネルパートナープライベートオファー (CPPO) を通じた再販業者 {#reseller-through-aws-channel-partner-private-offer-cppo}
@@ -23,14 +23,14 @@ TiDB Cloudパートナーには 2 つの種類があります。
 
 ### 再販業者の日常業務を管理する {#manage-daily-tasks-for-a-reseller}
 
-再販業者には、日常の管理タスクを管理する方法が 2 つあります。
+再販業者には、日常の管理タスクを管理する 2 つの方法があります。
 
 -   [TiDB Cloudパートナー コンソール](https://partner-console.tidbcloud.com)
--   パートナー管理 API。オープン API ドキュメントは、TiDB Cloudパートナー コンソールの**サポート**ページで参照できます。
+-   パートナー管理 API。オープン API ドキュメントは、 TiDB Cloudパートナー コンソールの**サポート**ページで参照できます。
 
 ## マネージド サービス プロバイダー (MSP) {#managed-service-provider-msp}
 
-MSP は、 TiDB Cloudを再販し、 TiDB Cloud組織管理、課金サービス、技術サポートなどを含む付加価値サービスを提供するパートナーです。
+MSP は、 TiDB Cloud を再販し、 TiDB Cloud組織管理、課金サービス、技術サポートなどを含む付加価値サービスを提供するパートナーです。
 
 マネージド サービス プロバイダーになるメリットは次のとおりです。
 
@@ -41,7 +41,7 @@ MSP は、 TiDB Cloudを再販し、 TiDB Cloud組織管理、課金サービス
 
 ### PingCAPのMSPになる {#become-an-msp-of-pingcap}
 
-MSP プログラムにご興味があり、パートナーとして参加したい場合は、登録するには、 [営業担当に問い合わせる](https://www.pingcap.com/partners/become-a-partner/)の情報を提供してください。
+MSP プログラムにご興味があり、パートナーとして参加したい場合は[営業担当に問い合わせる](https://www.pingcap.com/partners/become-a-partner/)登録するには、次の情報を提供してください。
 
 -   会社名
 -   会社の連絡先メールアドレス
@@ -57,7 +57,7 @@ MSP プログラムにご興味があり、パートナーとして参加した�
 TiDB Cloud MSP パートナーとして、日常の管理タスクを管理するには 2 つの方法があります。
 
 -   [TiDB Cloudパートナー コンソール](https://partner-console.tidbcloud.com)
--   [MSP 管理 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+-   [MSP 管理 API (非推奨)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
 
 TiDB Cloudパートナーとしての登録が完了すると、 TiDB Cloudパートナー コンソールでアカウントをアクティブ化するための電子メール通知が届き、MSP 管理 API の API キーが送信されます。
 

@@ -1,25 +1,25 @@
 ---
 title: Placement Rules
-summary: v5.0で導入された配置ルールは、PDがさまざまなデータに対応するスケジュールを生成するシステムです。ルールを組み合わせることで、レプリカの数やストレージの場所などを制御できます。配置ルールを有効にするには、PD構成ファイルを変更します。また、ルールを設定するためにpd-ctlを使用することもできます。これにより、システムの高可用性や耐災害性を向上させることができます。
+summary: 配置ルールを構成する方法を学習します。
 ---
 
 # 配置ルール {#placement-rules}
 
 > **注記：**
 >
-> このドキュメントでは、Placement Driver (PD) で配置ルールを手動で指定する方法を紹介します。現在は[SQL の配置ルール](/placement-rules-in-sql.md)を使用することをお勧めします。これにより、テーブルとパーティションの配置を構成するためのより便利な方法が提供されます。
+> このドキュメントでは、Placement Driver (PD) で配置ルールを手動で指定する方法を紹介します。現在は[SQL の配置ルール](/placement-rules-in-sql.md)使用が推奨されています。これにより、テーブルとパーティションの配置をより便利に構成できます。
 
-v5.0 で導入された配置ルールは、PD がさまざまなタイプのデータに対応するスケジュールを生成するようにガイドするレプリカ ルール システムです。さまざまなスケジューリング ルールを組み合わせることで、レプリカの数、storageの場所、ホストの種類、 Raft の選出に参加するかどうか、 Raftリーダーとして機能するかどうかなど、連続データ範囲の属性を細かく制御できます。
+v5.0 で導入された配置ルールは、PD がさまざまなタイプのデータに対応するスケジュールを生成するようにガイドするレプリカ ルール システムです。さまざまなスケジューリング ルールを組み合わせることで、レプリカの数、storage場所、ホストの種類、 Raft選出に参加するかどうか、 Raftリーダーとして機能するかどうかなど、任意の連続データ範囲の属性を細かく制御できます。
 
-TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。
+配置ルール機能は、TiDB の v5.0 以降のバージョンではデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。
 
 ## ルールシステム {#rule-system}
 
-ルールシステム全体の構成は複数のルールから構成されます。各ルールでは、レプリカの数、 Raft の役割、配置場所、このルールが有効になるキー範囲などの属性を指定できます。 PD がスケジュールを実行するとき、まず、リージョンのキー範囲に従ってルール システム内のリージョンに対応するルールを見つけ、次に、リージョンレプリカの配布をルールに準拠させるために対応するスケジュールを生成します。
+ルール システム全体の構成は、複数のルールで構成されます。各ルールでは、レプリカの数、 Raftの役割、配置場所、このルールが適用されるキー範囲などの属性を指定できます。PD がスケジュールを実行するときは、まず、リージョンのキー範囲に従ってルール システム内のリージョンに対応するルールを見つけ、次に、リージョンのレプリカの配布がルールに準拠するように対応するスケジュールを生成します。
 
-複数のルールのキー範囲には重複部分がある場合があります。つまり、リージョンは複数のルールに一致する可能性があります。この場合、PD はルールの属性に応じてルールを上書きするか、同時に発効するかを決定します。複数のルールが同時に有効になる場合、PD はルール照合のルールの積み重ね順序に従って順番にスケジュールを生成します。
+複数のルールのキー範囲には重複部分がある場合があり、これはリージョンが複数のルールに一致する可能性があることを意味します。この場合、PD はルールの属性に従って、ルールが互いに上書きされるか、同時に有効になるかを決定します。複数のルールが同時に有効になる場合、PD はルールの一致のためにルールの積み重ね順序に従って順番にスケジュールを生成します。
 
-さらに、異なるソースからのルールを相互に分離するという要件を満たすために、これらのルールをより柔軟な方法で編成できます。そこで「グループ」という概念が導入される。一般に、ユーザーはさまざまなソースに従ってルールをさまざまなグループに配置できます。
+さらに、異なるソースからのルールを互いに分離するという要件を満たすために、これらのルールをより柔軟な方法で編成できます。そのため、「グループ」の概念が導入されました。通常、ユーザーは異なるソースに応じてルールを異なるグループに配置できます。
 
 ![Placement rules overview](/media/placement-rules-1.png)
 
@@ -27,55 +27,55 @@ TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォ
 
 次の表は、ルール内の各フィールドの意味を示しています。
 
-| フィールド名            | 種類と制限事項           | 説明                                  |
-| :---------------- | :---------------- | :---------------------------------- |
-| `GroupID`         | `string`          | ルールのソースをマークするグループ ID。               |
-| `ID`              | `string`          | グループ内のルールの一意の ID。                   |
-| `Index`           | `int`             | グループ内のルールの積み重ねシーケンス。                |
-| `Override`        | `true` / `false`  | (グループ内の) より小さいインデックスでルールを上書きするかどうか。 |
-| `StartKey`        | `string` 、16 進数形式 | 範囲の開始キーに適用されます。                     |
-| `EndKey`          | `string` 、16 進数形式 | 範囲の終了キーに適用されます。                     |
-| `Role`            | `string`          | 投票者/リーダー/フォロワー/学習者などのレプリカの役割。       |
-| `Count`           | `int` 、正の整数       | レプリカの数。                             |
-| `LabelConstraint` | `[]Constraint`    | ラベルに基づいてノードをフィルタリングします。             |
-| `LocationLabels`  | `[]string`        | 物理的な隔離に使用されます。                      |
-| `IsolationLevel`  | `string`          | 最小の物理的分離レベルを設定するために使用されます           |
+| フィールド名            | タイプと制限           | 説明                                   |
+| :---------------- | :--------------- | :----------------------------------- |
+| `GroupID`         | `string`         | ルールのソースを示すグループ ID。                   |
+| `ID`              | `string`         | グループ内のルールの一意の ID。                    |
+| `Index`           | `int`            | グループ内のルールの積み重ね順序。                    |
+| `Override`        | `true` / `false` | より小さいインデックスを持つルールを（グループ内で）上書きするかどうか。 |
+| `StartKey`        | `string` 、16進数形式 | 範囲の開始キーに適用されます。                      |
+| `EndKey`          | `string` 、16進数形式 | 範囲の終了キーに適用されます。                      |
+| `Role`            | `string`         | 投票者/リーダー/フォロワー/学習者などのレプリカロール。        |
+| `Count`           | `int` 、正の整数      | レプリカの数。                              |
+| `LabelConstraint` | `[]Constraint`   | ラベルに基づいてノードをフィルタリングします。              |
+| `LocationLabels`  | `[]string`       | 物理的な分離に使用されます。                       |
+| `IsolationLevel`  | `string`         | 最小物理的分離レベルを設定するために使用                 |
 
-`LabelConstraint` 4 つのプリミティブ ( `in` 、 `notIn` 、 `exists` 、および`notExists` ) に基づいてラベルをフィルタリングする Kubernetes の関数に似ています。これら 4 つのプリミティブの意味は次のとおりです。
+`LabelConstraint` 、 `in` 、 `notIn` 、 `exists` 、 `notExists`の 4 つのプリミティブに基づいてラベルをフィルタリングする Kubernetes の機能に似ています。これら 4 つのプリミティブの意味は次のとおりです。
 
 -   `in` : 指定されたキーのラベル値が指定されたリストに含まれます。
--   `notIn` : 指定されたキーのラベル値は指定されたリストに含まれません。
--   `exists` : 指定されたラベルキーが含まれます。
--   `notExists` : 指定されたラベルキーは含まれません。
+-   `notIn` : 指定されたキーのラベル値は指定されたリストに含まれていません。
+-   `exists` : 指定されたラベル キーが含まれます。
+-   `notExists` : 指定されたラベル キーは含まれません。
 
-`LocationLabels`の意味と機能は v4.0 以前と同様です。たとえば、3 層トポロジを定義する`[zone,rack,host]`展開した場合、クラスターには複数のゾーン (アベイラビリティーゾーン) があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行するとき、PD はまずリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合 (レプリカが 3 つあるのにゾーンが合計 2 つしかない場合など)、PD はこれらのレプリカを別のラックに配置することを保証します。ラックの数が分離を保証するのに十分でない場合、PD はホストレベルの分離を試みます。
+`LocationLabels`の意味と機能は、v4.0 より前のバージョンと同じです。たとえば、 `[zone,rack,host]`デプロイして 3 層トポロジを定義した場合、クラスターには複数のゾーン (アベイラビリティーゾーン) があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行すると、PD は最初にリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合 (レプリカが 3 つあるがゾーンが合計で 2 つしかない場合など)、PD はこれらのレプリカを異なるラックに配置することを保証します。ラックの数が分離を保証するのに十分でない場合、PD はホストレベルの分離を試みます。
 
-`IsolationLevel`の意味と機能については[クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)で詳しく説明します。たとえば、 `LocationLabels`で 3 層トポロジを定義する`[zone,rack,host]`展開し、 `IsolationLevel`を`zone`に設定した場合、PD は、スケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるようにします。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合 (たとえば、3 つのレプリカが構成されているが、合計でデータ ゾーンが 2 つしかない場合)、PD はこの制限を満たすために補おうとしません。デフォルト値の`IsolationLevel`空の文字列で、無効であることを意味します。
+`IsolationLevel`の意味と機能については、 [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)で詳しく説明します。たとえば、 `LocationLabels`で 3 層トポロジを定義する`[zone,rack,host]`デプロイし、 `IsolationLevel` `zone`に設定した場合、PD は、スケジュール時に各リージョンのすべてのピアが異なるゾーンに配置されるように保証します。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合 (たとえば、3 つのレプリカが構成されているが、合計で 2 つのデータ ゾーンしかない場合)、PD はこの制限を満たすために補おうとしません。デフォルト値`IsolationLevel`は空の文字列で、無効であることを意味します。
 
 ### ルールグループのフィールド {#fields-of-the-rule-group}
 
-次の表に、ルール グループの各フィールドの説明を示します。
+次の表は、ルール グループ内の各フィールドの説明を示しています。
 
-| フィールド名     | 種類と制限事項          | 説明                                |
+| フィールド名     | タイプと制限           | 説明                                |
 | :--------- | :--------------- | :-------------------------------- |
-| `ID`       | `string`         | ルールのソースをマークするグループ ID。             |
-| `Index`    | `int`            | 異なるグループの積み重ねシーケンス。                |
+| `ID`       | `string`         | ルールのソースを示すグループ ID。                |
+| `Index`    | `int`            | 異なるグループの積み重ね順序。                   |
 | `Override` | `true` / `false` | より小さいインデックスを持つグループをオーバーライドするかどうか。 |
 
-## ルールを構成する {#configure-rules}
+## ルールを設定する {#configure-rules}
 
-このセクションの操作は[PD-CTL](/pd-control.md)に基づいており、操作に含まれるコマンドは HTTP API を介した呼び出しもサポートしています。
+このセクションの操作は[pd-ctl](/pd-control.md)に基づいており、操作に関連するコマンドは HTTP API 経由の呼び出しもサポートしています。
 
 ### 配置ルールを有効にする {#enable-placement-rules}
 
-TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。この機能を無効にした後に有効にするには、クラスターを初期化する前に次のように PD 構成ファイルを変更します。
+配置ルール機能は、TiDB の v5.0 以降のバージョンではデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。無効にした後でこの機能を有効にするには、クラスターを初期化する前に PD 構成ファイルを次のように変更します。
 
 ```toml
 [replication]
 enable-placement-rules = true
 ```
 
-このように、クラスターが正常にブートストラップされた後、PD はこの機能を有効にし、 [`max-replicas`](/pd-configuration-file.md#max-replicas) 、 [`location-labels`](/pd-configuration-file.md#location-labels) 、および[`isolation-level`](/pd-configuration-file.md#isolation-level)の構成に従って対応するルールを生成します。
+このように、PD はクラスターが正常にブートストラップされた後にこの機能を有効にし、 [`max-replicas`](/pd-configuration-file.md#max-replicas) 、 [`location-labels`](/pd-configuration-file.md#location-labels) 、および[`isolation-level`](/pd-configuration-file.md#isolation-level)構成に従って対応するルールを生成します。
 
 ```json
 {
@@ -90,22 +90,22 @@ enable-placement-rules = true
 }
 ```
 
-ブートストラップされたクラスターの場合、pd-ctl を通じて配置ルールを動的に有効にすることもできます。
+ブートストラップされたクラスターの場合、pd-ctl を使用して配置ルールを動的に有効にすることもできます。
 
 ```bash
 pd-ctl config placement-rules enable
 ```
 
-PD は、 `max-replicas` 、 `location-labels` 、および`isolation-level`の構成に基づいてデフォルトのルールも生成します。
+PD は、 `max-replicas` 、 `location-labels` 、および`isolation-level`構成に基づいてデフォルトのルールも生成します。
 
 > **注記：**
 >
-> -   配置ルールが有効で、複数のルールが存在する場合、以前に構成された`max-replicas` 、 `location-labels` 、および`isolation-level`無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
-> -   配置ルールが有効で、デフォルト ルールが 1 つだけ存在する場合、 `max-replicas` 、 `location-labels` 、または`isolation-level`構成が変更されると、TiDB はこのデフォルト ルールを自動的に更新します。
+> -   配置ルールが有効になっていて、複数のルールが存在する場合、以前に構成された`max-replicas` 、 `location-labels` 、および`isolation-level`有効になりません。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
+> -   配置ルールが有効になってい`location-labels` `max-replicas`または`isolation-level`構成が変更されると、TiDB はこのデフォルト ルールを自動的に更新します。
 
 ### 配置ルールを無効にする {#disable-placement-rules}
 
-pd-ctl を使用すると、配置ルール機能を無効にし、以前のスケジュール戦略に切り替えることができます。
+pd-ctl を使用して配置ルール機能を無効にし、以前のスケジュール戦略に切り替えることができます。
 
 ```bash
 pd-ctl config placement-rules disable
@@ -113,15 +113,15 @@ pd-ctl config placement-rules disable
 
 > **注記：**
 >
-> 配置ルールを無効にした後、PD は元の`max-replicas` 、 `location-labels` 、および`isolation-level`構成を使用します。ルールを変更しても (配置ルールが有効な場合)、これら 3 つの構成はリアルタイムでは更新されません。さらに、設定されているすべてのルールは PD に残り、次回配置ルールを有効にするときに使用されます。
+> 配置ルールを無効にすると、PD は元の`max-replicas` 、 `location-labels` 、および`isolation-level`構成を使用します。ルールを変更しても (配置ルールが有効になっている場合)、これら 3 つの構成はリアルタイムで更新されません。また、設定されているすべてのルールは PD に残り、次に配置ルールを有効にしたときに使用されます。
 
-### pd-ctl を使用してルールを設定する {#set-rules-using-pd-ctl}
+### pd-ctlを使用してルールを設定する {#set-rules-using-pd-ctl}
 
 > **注記：**
 >
-> ルールの変更はリアルタイムで PD スケジューリングに影響します。ルール設定が不適切であると、レプリカの数が減り、システムの高可用性に影響を与える可能性があります。
+> ルールの変更は、PD のスケジュールにリアルタイムで影響します。ルールの設定が不適切だと、レプリカの数が少なくなり、システムの高可用性に影響する可能性があります。
 
-pd-ctl は、システム内のルールを表示する次のメソッドの使用をサポートしており、出力は JSON 形式のルールまたはルール リストです。
+pd-ctl は、システム内のルールを表示するために次のメソッドの使用をサポートしており、出力は JSON 形式のルールまたはルール リストです。
 
 -   すべてのルールのリストを表示するには:
 
@@ -129,7 +129,7 @@ pd-ctl は、システム内のルールを表示する次のメソッドの使�
     pd-ctl config placement-rules show
     ```
 
--   PD グループ内のすべてのルールのリストを表示するには、次の手順を実行します。
+-   PD グループ内のすべてのルールのリストを表示するには:
 
     ```bash
     pd-ctl config placement-rules show --group=pd
@@ -141,13 +141,13 @@ pd-ctl は、システム内のルールを表示する次のメソッドの使�
     pd-ctl config placement-rules show --group=pd --id=default
     ```
 
--   リージョンに一致するルールのリストを表示するには:
+-   リージョンに一致するルール リストを表示するには:
 
     ```bash
     pd-ctl config placement-rules show --region=2
     ```
 
-    上の例では、 `2`がリージョンID です。
+    上記の例では、 `2`リージョンID です。
 
 ルールの追加と編集は似ています。対応するルールをファイルに書き込み、 `save`コマンドを使用してルールを PD に保存する必要があります。
 
@@ -170,12 +170,14 @@ cat > rules.json <<EOF
     }
 ]
 EOF
-pd-ctl config placement save --in=rules.json
+
+» ./pd-ctl -u 127.0.0.1:2379 config placement-rules save --in=rules.json
+Success!
 ```
 
-上記の操作により、PD に`rule1`と`rule2`が書き込まれます。同じ`GroupID` + `ID`のルールがシステムにすでに存在する場合、このルールは上書きされます。
+上記の操作により、 `rule1`と`rule2` PD に書き込まれます。同じ`GroupID` + `ID`を持つルールがすでにシステム内に存在する場合、このルールは上書きされます。
 
-ルールを削除するには、ルールの`count`を`0`に設定するだけで、同じ`GroupID` + `ID`を持つルールが削除されます。次のコマンドは`pd / rule2`ルールを削除します。
+ルールを削除するには、ルールの`count`を`0`に設定するだけで、同じ`GroupID` + `ID`を持つルールが削除されます。次のコマンドは、 `pd / rule2`ルールを削除します。
 
 ```bash
 cat > rules.json <<EOF
@@ -186,12 +188,14 @@ cat > rules.json <<EOF
     }
 ]
 EOF
-pd-ctl config placement save --in=rules.json
+
+» ./pd-ctl -u 127.0.0.1:2379 config placement-rules save --in=rules.json
+Success!
 ```
 
-### pd-ctl を使用してルール グループを構成する {#use-pd-ctl-to-configure-rule-groups}
+### pd-ctlを使用してルールグループを構成する {#use-pd-ctl-to-configure-rule-groups}
 
--   すべてのルール グループのリストを表示するには、次の手順を実行します。
+-   すべてのルール グループのリストを表示するには:
 
     ```bash
     pd-ctl config placement-rules rule-group show
@@ -203,29 +207,29 @@ pd-ctl config placement save --in=rules.json
     pd-ctl config placement-rules rule-group show pd
     ```
 
--   ルール グループの`index`属性と`override`属性を設定するには、次の手順を実行します。
+-   ルール グループの`index`と`override`属性を設定するには:
 
     ```bash
     pd-ctl config placement-rules rule-group set pd 100 true
     ```
 
--   ルール グループの設定を削除するには (グループ内にルールがある場合は、デフォルトのグループ設定を使用します):
+-   ルール グループの構成を削除するには (グループ内にルールがある場合は、デフォルトのグループ構成を使用します)。
 
     ```bash
     pd-ctl config placement-rules rule-group delete pd
     ```
 
-### pd-ctl を使用してグループとグループ内のルールをバッチ更新する {#use-pd-ctl-to-batch-update-groups-and-rules-in-groups}
+### pd-ctl を使用してグループとグループ内のルールを一括更新する {#use-pd-ctl-to-batch-update-groups-and-rules-in-groups}
 
-ルール グループとグループ内のすべてのルールを同時に表示および変更するには、 `rule-bundle`サブコマンドを実行します。
+ルール グループとグループ内のすべてのルールを同時に表示および変更するには、サブコマンド`rule-bundle`を実行します。
 
-このサブコマンドでは、 `get {group_id}`を使用してグループをクエリし、出力結果にはルール グループとそのグループのルールがネストされた形式で表示されます。
+このサブコマンドでは、 `get {group_id}`使用してグループを照会し、出力結果にはルール グループとグループのルールがネストされた形式で表示されます。
 
 ```bash
 pd-ctl config placement-rules rule-bundle get pd
 ```
 
-上記のコマンドの出力は次のとおりです。
+上記のコマンドの出力:
 
 ```json
 {
@@ -245,21 +249,21 @@ pd-ctl config placement-rules rule-bundle get pd
 }
 ```
 
-出力をファイルに書き込むには、 `--out`引数を`rule-bundle get`サブコマンドに追加します。これは、後で変更して保存する場合に便利です。
+出力をファイルに書き込むには、 `rule-bundle get`サブコマンドに`--out`引数を追加します。これは、後続の変更や保存に便利です。
 
 ```bash
 pd-ctl config placement-rules rule-bundle get pd --out="group.json"
 ```
 
-変更が完了したら、 `rule-bundle set`サブコマンドを使用して、ファイル内の構成を PDサーバーに保存できます。 [pd-ctl を使用してルールを設定する](#set-rules-using-pd-ctl)で説明した`save`コマンドとは異なり、このコマンドはサーバー側でこのグループのすべてのルールを置き換えます。
+変更が完了したら、 `rule-bundle set`サブコマンドを使用して、ファイル内の設定を PDサーバーに保存できます。 [pd-ctlを使用してルールを設定する](#set-rules-using-pd-ctl)で説明した`save`コマンドとは異なり、このコマンドはサーバー側でこのグループのすべてのルールを置き換えます。
 
 ```bash
 pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 ```
 
-### pd-ctl を使用してすべての構成を表示および変更する {#use-pd-ctl-to-view-and-modify-all-configurations}
+### pd-ctlを使用してすべての設定を表示および変更します {#use-pd-ctl-to-view-and-modify-all-configurations}
 
-pd-ctl を使用してすべての構成を表示および変更することもできます。これを行うには、すべての設定をファイルに保存し、設定ファイルを編集してから、そのファイルを PDサーバーに保存して、以前の設定を上書きします。この操作でも`rule-bundle`サブコマンドを使用します。
+pd-ctl を使用してすべての設定を表示および変更することもできます。そのためには、すべての設定をファイルに保存し、設定ファイルを編集してから、そのファイルを PDサーバーに保存して以前の設定を上書きします。この操作でも`rule-bundle`サブコマンドが使用されます。
 
 たとえば、すべての設定を`rules.json`ファイルに保存するには、次のコマンドを実行します。
 
@@ -267,15 +271,15 @@ pd-ctl を使用してすべての構成を表示および変更することも�
 pd-ctl config placement-rules rule-bundle load --out="rules.json"
 ```
 
-ファイルを編集した後、次のコマンドを実行して構成を PDサーバーに保存します。
+ファイルを編集した後、次のコマンドを実行して設定を PDサーバーに保存します。
 
 ```bash
 pd-ctl config placement-rules rule-bundle save --in="rules.json"
 ```
 
-### tidb-ctl を使用してテーブル関連のキー範囲をクエリする {#use-tidb-ctl-to-query-the-table-related-key-range}
+### tidb-ctlを使用してテーブル関連のキー範囲を照会する {#use-tidb-ctl-to-query-the-table-related-key-range}
 
-メタデータまたは特定のテーブルに特別な構成が必要な場合は、 [`keyrange`コマンド](https://github.com/pingcap/tidb-ctl/blob/master/doc/tidb-ctl_keyrange.md) / [tidb-ctl](https://github.com/pingcap/tidb-ctl)を実行して関連キーをクエリできます。コマンドの最後に`--encode`を忘れずに追加してください。
+メタデータまたは特定のテーブルに特別な構成が必要な場合は、 [`keyrange`コマンド](https://github.com/pingcap/tidb-ctl/blob/master/doc/tidb-ctl_keyrange.md) in [tidb-ctl](https://github.com/pingcap/tidb-ctl)を実行して関連キーをクエリできます。コマンドの最後に`--encode`を追加することを忘れないでください。
 
 ```bash
 tidb-ctl keyrange --database test --table ttt --encode
@@ -296,15 +300,15 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 > **注記：**
 >
-> DDL およびその他の操作によりテーブル ID が変更される可能性があるため、対応するルールを同時に更新する必要があります。
+> DDL やその他の操作によってテーブル ID が変更される可能性があるため、対応するルールも同時に更新する必要があります。
 
 ## 一般的な使用シナリオ {#typical-usage-scenarios}
 
 このセクションでは、配置ルールの一般的な使用シナリオを紹介します。
 
-### シナリオ 1: 通常のテーブルに 3 つのレプリカを使用し、メタデータに 5 つのレプリカを使用して、クラスターの耐災害性を向上させる {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
+### シナリオ 1: 通常のテーブルに 3 つのレプリカを使用し、メタデータに 5 つのレプリカを使用して、クラスタの耐障害性を向上させる {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
 
-必要なのは、キー範囲をメタデータの範囲に制限するルールを追加し、値`count` ～ `5`を設定することだけです。このルールの例を次に示します。
+キー範囲をメタデータの範囲に制限するルールを追加し、 `count`の値を`5`に設定するだけです。このルールの例を次に示します。
 
 ```json
 {
@@ -320,9 +324,9 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 }
 ```
 
-### シナリオ 2: 5 つのレプリカを 2:2:1 の比率で 3 つのデータ センターに配置します。Leaderは3 番目のデータ センターにあるべきではありません。 {#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-2-2-1-and-the-leader-should-not-be-in-the-third-data-center}
+### シナリオ2: 3つのデータセンターに5つのレプリカを2:2:1の割合で配置し、Leaderは3番目のデータセンターに配置しない {#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-2-2-1-and-the-leader-should-not-be-in-the-third-data-center}
 
-3 つのルールを作成します。レプリカの数をそれぞれ`2` 、 `2` 、および`1`に設定します。各ルールで、レプリカを対応するデータ センターに`label_constraints`までに制限します。さらに、Leaderを必要としないデータセンターの場合は、 `role`を`follower`に変更します。
+3 つのルールを作成します。レプリカの数をそれぞれ`2` 、 `2` 、 `1`に設定します。各ルールで、レプリカを対応するデータセンター`label_constraints`に制限します。さらに、Leaderを必要としないデータセンターの`role`を`follower`に変更します。
 
 ```json
 [
@@ -365,9 +369,9 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 ]
 ```
 
-### シナリオ 3: テーブルに 2 つのTiFlashレプリカを追加する {#scenario-3-add-two-tiflash-replicas-for-a-table}
+### シナリオ3: テーブルに2つのTiFlashレプリカを追加する {#scenario-3-add-two-tiflash-replicas-for-a-table}
 
-テーブルの行キーに別のルールを追加し、 `count` ～ `2`に制限します。 `engine = tiflash`のノード上でレプリカが生成されるようにするには、 `label_constraints`使用します。ここでは、このルールがシステム内の他のソースからのルールと重複したり競合したりしないようにするために、別の`group_id`が使用されていることに注意してください。
+テーブルの行キーに別のルールを追加し、 `count` `2`に制限します。 `label_constraints`使用して、レプリカが`engine = tiflash`のノードで生成されるようにします。 このルールがシステム内の他のソースのルールと重複または競合しないようにするために、ここでは別の`group_id`が使用されていることに注意してください。
 
 ```json
 {
@@ -384,9 +388,9 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 }
 ```
 
-### シナリオ 4: 高性能ディスクを備えた北京ノードのテーブルに 2 つのフォロワー レプリカを追加する {#scenario-4-add-two-follower-replicas-for-a-table-in-the-beijing-node-with-high-performance-disks}
+### シナリオ4: 高性能ディスクを備えた北京ノードのテーブルに2つのフォロワーレプリカを追加する {#scenario-4-add-two-follower-replicas-for-a-table-in-the-beijing-node-with-high-performance-disks}
 
-次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`マシン ルームに配置され、ディスク タイプは`nvme`である必要があります。
+次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`マシン ルームに配置する必要があり、ディスク タイプは`nvme`である必要があります。
 
 ```json
 {
@@ -404,11 +408,11 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 }
 ```
 
-### シナリオ 5: SSD ディスクを備えたノードにテーブルを移行する {#scenario-5-migrate-a-table-to-the-nodes-with-ssd-disks}
+### シナリオ5: SSDディスクを備えたノードにテーブルを移行する {#scenario-5-migrate-a-table-to-the-nodes-with-ssd-disks}
 
-シナリオ 3 とは異なり、このシナリオは既存の構成に基づいて新しいレプリカを追加するのではなく、データ範囲の他の構成を強制的にオーバーライドします。したがって、既存のルールをオーバーライドするには、十分な大きさの値`index`を指定し、ルール グループ設定で`override` ～ `true`を設定する必要があります。
+シナリオ 3 とは異なり、このシナリオは既存の構成に基づいて新しいレプリカを追加するのではなく、データ範囲の他の構成を強制的に上書きします。したがって、既存のルールを上書きするには、十分に大きい`index`値を指定し、ルール グループ構成で`override`から`true`に設定する必要があります。
 
-ルール：
+ルール:
 
 ```json
 {
@@ -425,7 +429,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 }
 ```
 
-ルールグループ:
+ルール グループ:
 
 ```json
 {

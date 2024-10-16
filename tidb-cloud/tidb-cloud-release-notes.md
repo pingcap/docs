@@ -8,11 +8,17 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年10月15日 {#october-15-2024}
+
+**APIの変更**
+
+-   [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)は 2024 年 10 月 15 日をもって廃止となり、今後削除される予定です。現在 MSP API をご利用の場合は、 [TiDB Cloudパートナー](https://partner-console.tidbcloud.com/signin)のパートナー管理 API に移行してください。
+
 ## 2024年9月24日 {#september-24-2024}
 
 **一般的な変更**
 
--   AWSでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[TiFlash vCPU と RAM サイズ](/tidb-cloud/size-your-cluster.md#tiflash-vcpu-and-ram)新規に提供: `32 vCPU, 128 GiB`
+-   AWSでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[TiFlash vCPU と RAM サイズ](/tidb-cloud/size-your-cluster.md#tiflash-vcpu-and-ram)新規に提供します: `32 vCPU, 128 GiB`
 
 **CLIの変更**
 
@@ -110,7 +116,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     テーブルに[ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)含まれている場合は、選択した距離関数に基づいてベクトル距離を計算するベクトル検索エンドポイントを自動的に生成できます。
 
-    この機能により、 [ディファイ](https://docs.dify.ai/guides/tools)や[GPT](https://openai.com/blog/introducing-gpts)などの AI プラットフォームとのシームレスな統合が可能になり、高度な自然言語処理と AI 機能によってアプリケーションが強化され、より複雑なタスクやインテリジェントなソリューションが実現します。
+    この機能により、 [ディファイ](https://docs.dify.ai/guides/tools)や[GPT は](https://openai.com/blog/introducing-gpts)などの AI プラットフォームとのシームレスな統合が可能になり、高度な自然言語処理と AI 機能によってアプリケーションが強化され、より複雑なタスクやインテリジェントなソリューションが実現します。
 
     詳細については[エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)参照してください。
 
@@ -206,7 +212,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)列storage[TiFlash](/tiflash/tiflash-overview.md)の課金と計測 (ベータ版) を導入します。
 
-    2024 年 6 月 30 日まで、 TiDB Cloud Serverless クラスターの列指向storageは100% 割引で無料のままです。この日以降、各TiDB Cloud Serverless クラスターには、列指向storage用に 5 GiB の無料割り当てが含まれます。無料割り当てを超えた使用には料金が発生します。
+    2024 年 6 月 30 日まで、 TiDB Cloud Serverless クラスターの列指向storageは100% 割引で無料のままです。この日以降、各TiDB Cloud Serverless クラスターには、列指向storage用の 5 GiB の無料割り当てが含まれます。無料割り当てを超えた使用には料金が発生します。
 
     詳細については[TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/#storage)参照してください。
 
@@ -220,7 +226,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     Google Cloud `Taiwan (asia-east1)`リージョンでホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタが、データ移行（DM）機能をサポートするようになりました。アップストリーム データがこのリージョン内またはその付近に保存されている場合は、Google Cloud からTiDB Cloudへのより高速で信頼性の高いデータ移行を利用できるようになります。
 
--   AWSとGoogle Cloudでホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)新たに提供: `16 vCPU, 64 GiB`
+-   AWSとGoogle Cloudでホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタのうち[TiDB ノード サイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)新たに提供: `16 vCPU, 64 GiB`
 
 **APIの変更**
 

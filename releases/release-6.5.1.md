@@ -84,7 +84,7 @@ TiDB バージョン: 6.5.1
     -   DDL取り込み[＃40970](https://github.com/pingcap/tidb/issues/40970) @ [タンジェンタ](https://github.com/tangenta)中にデータ競合が発生する可能性がある問題を修正
     -   インデックスを[＃40879](https://github.com/pingcap/tidb/issues/40879) @ [タンジェンタ](https://github.com/tangenta)で追加するとデータ競合が発生する可能性がある問題を修正しました
     -   テーブル[＃38436](https://github.com/pingcap/tidb/issues/38436) @ [タンジェンタ](https://github.com/tangenta)に多くのリージョンがある場合、無効なリージョンキャッシュが原因でインデックス追加操作が非効率になる問題を修正しました。
-    -   初期化中に TiDB がデッドロックする可能性がある問題を修正[＃40408](https://github.com/pingcap/tidb/issues/40408) @ [定義2014](https://github.com/Defined2014)
+    -   初期化中に TiDB がデッドロックする可能性がある問題を修正[#40408](https://github.com/pingcap/tidb/issues/40408) @ [定義2014](https://github.com/Defined2014)
     -   TiDB がキー範囲[＃40158](https://github.com/pingcap/tidb/issues/40158) @ [天菜まお](https://github.com/tiancaiamao)を構築するときに`NULL`値を不適切に処理するため、予期しないデータが読み取られる問題を修正しました。
     -   メモリの再利用により、システム変数の値が誤って変更される場合がある問題を修正[＃40979](https://github.com/pingcap/tidb/issues/40979) @ [lcwangchao](https://github.com/lcwangchao)
     -   テーブルの主キーに`ENUM`列[＃40456](https://github.com/pingcap/tidb/issues/40456) @ [lcwangchao](https://github.com/lcwangchao)が含まれている場合にTTLタスクが失敗する問題を修正
@@ -95,7 +95,7 @@ TiDB バージョン: 6.5.1
     -   `SHOW PROCESSLIST` [＃41156](https://github.com/pingcap/tidb/issues/41156) @ [ヤンケオ](https://github.com/YangKeao)の結果で`EXECUTE`情報が null になる問題を修正しました
     -   `globalMemoryControl`クエリを強制終了しているときに、 `KILL`操作が[＃41057](https://github.com/pingcap/tidb/issues/41057) @ [うわー](https://github.com/wshwsh12)で終了しない可能性がある問題を修正しました。
     -   `indexMerge`エラーが発生した後に TiDB がpanicになる可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @ [グオシャオゲ](https://github.com/guo-shaoge) @ [風の話し手](https://github.com/windtalker)
-    -   `ANALYZE`文が`KILL` [＃41825](https://github.com/pingcap/tidb/issues/41825) @ [徐淮宇](https://github.com/XuHuaiyu)で終了する可能性がある問題を修正しました
+    -   `ANALYZE`文が`KILL` [＃41825](https://github.com/pingcap/tidb/issues/41825) @ [徐懐玉](https://github.com/XuHuaiyu)で終了する可能性がある問題を修正しました
     -   `indexMerge` [＃41545](https://github.com/pingcap/tidb/issues/41545) [＃41605](https://github.com/pingcap/tidb/issues/41605) @ [グオシャオゲ](https://github.com/guo-shaoge)で goroutine リークが発生する可能性がある問題を修正
     -   符号なし`TINYINT` / `SMALLINT` / `INT`値を`0` [＃41736](https://github.com/pingcap/tidb/issues/41736) @ [リトルフォール](https://github.com/LittleFall)より小さい`DECIMAL` / `FLOAT` / `DOUBLE`の値と比較するときに誤った結果になる可能性がある問題を修正しました。
     -   `tidb_enable_reuse_chunk`有効にするとメモリリーク[＃40987](https://github.com/pingcap/tidb/issues/40987) @ [グオシャオゲ](https://github.com/guo-shaoge)が発生する可能性がある問題を修正
@@ -114,7 +114,7 @@ TiDB バージョン: 6.5.1
     -   自動分析により TiDB が[＃40038](https://github.com/pingcap/tidb/issues/40038) @ [翻訳者](https://github.com/xuyifangreeneyes)で終了できなくなる問題を修正
     -   パーティションテーブル[#40309](https://github.com/pingcap/tidb/issues/40309) @ [ウィノロス](https://github.com/winoros)の符号なし主キーに不正なアクセス間隔が構築される可能性がある問題を修正しました。
     -   プラン キャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[＃38335](https://github.com/pingcap/tidb/issues/38335) @ [qw4990](https://github.com/qw4990)
-    -   パーティションテーブルにグローバルバインディングを作成すると、TiDB が[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [イサール](https://github.com/Yisaer)で起動に失敗する可能性がある問題を修正しました。
+    -   パーティション化されたテーブルにグローバルバインディングを作成すると、TiDB が[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [イサール](https://github.com/Yisaer)で起動に失敗する可能性がある問題を修正しました。
     -   スローログ[＃41458](https://github.com/pingcap/tidb/issues/41458) @ [時間と運命](https://github.com/time-and-fate)でクエリプラン演算子が欠落する可能性がある問題を修正しました
     -   仮想列を持つ TopN 演算子が誤って TiKV またはTiFlash [＃41355](https://github.com/pingcap/tidb/issues/41355) @ [ドゥージール9](https://github.com/Dousir9)にプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。
     -   インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) [＃40464](https://github.com/pingcap/tidb/issues/40464) [＃40217](https://github.com/pingcap/tidb/issues/40217) @ [タンジェンタ](https://github.com/tangenta)を追加するときにデータの不整合が発生する問題を修正
@@ -125,19 +125,19 @@ TiDB バージョン: 6.5.1
 -   ティクヴ
 
     -   解決されたTSによりネットワークトラフィックが増加する問題を修正[＃14092](https://github.com/tikv/tikv/issues/14092) @ [金星の上](https://github.com/overvenus)
-    -   悲観的DML [＃14038](https://github.com/tikv/tikv/issues/14038) @ [ミョンケミンタ](https://github.com/MyonKeminta)が失敗した後の DML 実行中に TiDB と TiKV 間のネットワーク障害によって発生するデータ不整合の問題を修正しました。
+    -   悲観的DML [＃14038](https://github.com/tikv/tikv/issues/14038) @ [ミョンケミンタ](https://github.com/MyonKeminta)が失敗した後の DML 実行中に TiDB と TiKV 間のネットワーク障害によって発生するデータの不整合の問題を修正しました。
     -   `const Enum`型を他の型[＃14156](https://github.com/tikv/tikv/issues/14156) @ [うわー](https://github.com/wshwsh12)にキャストするときに発生するエラーを修正
     -   警官タスクのページングが不正確になる問題を修正[＃14254](https://github.com/tikv/tikv/issues/14254) @ [あなた06](https://github.com/you06)
     -   `batch_cop`モード[＃14109](https://github.com/tikv/tikv/issues/14109) @ [あなた06](https://github.com/you06)で`scan_detail`フィールドが不正確になる問題を修正
-    -   Raft Engineの潜在的なエラーを修正しました。このエラーにより、TiKV がRaftデータの破損を検出し、 [＃14338](https://github.com/tikv/tikv/issues/14338) @ [トニー](https://github.com/tonyxuqqi)の再起動に失敗する可能性があります。
+    -   TiKV がRaftデータの破損を検出し、 [＃14338](https://github.com/tikv/tikv/issues/14338) @ [トニー](https://github.com/tonyxuqqi)の再起動に失敗する可能性があるRaft Engineの潜在的なエラーを修正しました。
 
 -   PD
 
     -   特定の条件下で実行`replace-down-peer`が遅くなる問題を修正[＃5788](https://github.com/tikv/pd/issues/5788) @ [フンドゥンDM](https://github.com/HunDunDM)
-    -   PD が予期せず複数の学習者をリージョン[＃5786](https://github.com/tikv/pd/issues/5786) @ [ハンダンDM](https://github.com/HunDunDM)に追加する可能性がある問題を修正しました。
+    -   PD が予期せずリージョン[＃5786](https://github.com/tikv/pd/issues/5786) @ [ハンダンDM](https://github.com/HunDunDM)に複数の学習者を追加する可能性がある問題を修正しました。
     -   リージョンスキャッタータスクが予期せず冗長レプリカを生成する問題を修正[＃5909](https://github.com/tikv/pd/issues/5909) @ [フンドゥンDM](https://github.com/HunDunDM)
     -   `ReportMinResolvedTS`の呼び出しが頻繁すぎる場合に発生する PD OOM 問題を修正[＃5965](https://github.com/tikv/pd/issues/5965) @ [フンドゥンDM](https://github.com/HunDunDM)
-    -   リージョン散布によりリーダー[＃6017](https://github.com/tikv/pd/issues/6017) @ [ハンダンDM](https://github.com/HunDunDM)の分布が不均一になる可能性がある問題を修正しました。
+    -   リージョンスキャッタによりリーダー[＃6017](https://github.com/tikv/pd/issues/6017) @ [ハンダンDM](https://github.com/HunDunDM)の分布が不均一になる可能性がある問題を修正しました。
 
 -   TiFlash
 
@@ -169,13 +169,13 @@ TiDB バージョン: 6.5.1
         -   TiKV または TiCDC ノード[＃8174](https://github.com/pingcap/tiflow/issues/8174) @ [ヒック](https://github.com/hicqu)スケールインまたはスケールアウトなどの特殊なシナリオで、changefeed がスタックする可能性がある問題を修正しました。
         -   REDOログ[＃6335](https://github.com/pingcap/tiflow/issues/6335) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)のstorageパスで事前チェ​​ックが実行されない問題を修正
         -   S3storage障害[＃8089](https://github.com/pingcap/tiflow/issues/8089) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)に対して REDO ログが許容できる期間が不十分である問題を修正
-        -   `transaction_atomicity`と`protocol`構成ファイル[＃7935](https://github.com/pingcap/tiflow/issues/7935) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)経由で更新できない問題を修正
+        -   `transaction-atomicity`と`protocol`構成ファイル[＃7935](https://github.com/pingcap/tiflow/issues/7935) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)経由で更新できない問題を修正
         -   TiCDC が過度に多くのテーブル[＃8004](https://github.com/pingcap/tiflow/issues/8004) @ [金星の上](https://github.com/overvenus)を複製するとチェックポイントが進まない問題を修正しました。
         -   レプリケーション遅延が過度に大きい場合に、REDO ログを適用すると OOM が発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
         -   メタ[＃8074](https://github.com/pingcap/tiflow/issues/8074) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)への書き込みに REDO ログが有効になっている場合にパフォーマンスが低下する問題を修正しました。
-        -   TiCDC が大規模なトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正[＃7982](https://github.com/pingcap/tiflow/issues/7982) @ [ハイラスティン](https://github.com/Rustin170506)
+        -   TiCDC が大きなトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正[＃7982](https://github.com/pingcap/tiflow/issues/7982) @ [ハイラスティン](https://github.com/Rustin170506)
         -   PD が異常なときにチェンジフィードを一時停止すると、誤ったステータス[＃8330](https://github.com/pingcap/tiflow/issues/8330) @ [スドジ](https://github.com/sdojjy)になる問題を修正しました。
-        -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [アズドンメン](https://github.com/asddongmen)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`が指定されている場合に発生するデータの不整合を修正します。
+        -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [アズドンメン](https://github.com/asddongmen)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`が指定されている場合に発生するデータの不整合を修正しました。
         -   テーブル スケジューリングとブラックホール シンクのpanic問題を修正[＃8024](https://github.com/pingcap/tiflow/issues/8024) [＃8142](https://github.com/pingcap/tiflow/issues/8142) @ [ヒック](https://github.com/hicqu)
 
     -   TiDB データ移行 (DM)
@@ -190,4 +190,4 @@ TiDB バージョン: 6.5.1
         -   TiDB Lightningが分割領域フェーズ[＃40934](https://github.com/pingcap/tidb/issues/40934) @ [ランス6716](https://github.com/lance6716)でパニックになる問題を修正
         -   競合解決ロジック（ `duplicate-resolution` ）によりチェックサム[＃40657](https://github.com/pingcap/tidb/issues/40657) @ [眠いモグラ](https://github.com/sleepymole)の不一致が発生する可能性がある問題を修正
         -   並列インポート中に最後のTiDB Lightningインスタンスを除くすべてのインスタンスでローカル重複レコードが検出された場合、 TiDB Lightning が競合解決を誤ってスキップする可能性がある問題を修正[＃40923](https://github.com/pingcap/tidb/issues/40923) @ [リチュンジュ](https://github.com/lichunzhu)
-        -   ローカル バックエンド モードでデータをインポートするときに、インポートされたターゲット テーブルの複合プライマリ キーに`auto_random`列があり、ソース データ[＃41454](https://github.com/pingcap/tidb/issues/41454) @ [D3ハンター](https://github.com/D3Hunter)でその列の値が指定されていない場合、ターゲット列が自動的にデータを生成しない問題を修正しました。
+        -   ローカル バックエンド モードでデータをインポートするときに、インポートされたターゲット テーブルの複合プライマリ キーに`auto_random`列があり、ソース データ[＃41454](https://github.com/pingcap/tidb/issues/41454) @ [D3ハンター](https://github.com/D3Hunter)でその列の値が指定されていない場合、ターゲット列でデータが自動的に生成されない問題を修正しました。

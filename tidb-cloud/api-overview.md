@@ -15,7 +15,7 @@ API には次の機能があります。
 
 -   **JSON エンティティ。**すべてのエンティティは JSON で表現されます。
 -   **HTTPS のみ。API**には HTTPS 経由でのみアクセスでき、ネットワーク経由で送信されるすべてのデータは TLS で暗号化されます。
--   **キーベースのアクセスとダイジェスト認証。TiDB** TiDB Cloud API にアクセスする前に、API キーを生成する必要があります ( [APIキー管理](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-key-management)を参照)。すべてのリクエストは[HTTP ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)を通じて認証され、API キーがネットワーク経由で送信されることはありません。
+-   **キーベースのアクセスとダイジェスト認証。TiDB** TiDB Cloud API にアクセスする前に、API キーを生成する必要があります[APIキー管理](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-key-management)を参照)。すべてのリクエストは[HTTP ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)を通じて認証され、API キーがネットワーク経由で送信されることはありません。
 
 TiDB Cloud API の使用を開始するには、 TiDB Cloud API ドキュメントの次のリソースを参照してください。
 
@@ -27,6 +27,6 @@ TiDB Cloud API の使用を開始するには、 TiDB Cloud API ドキュメン�
         -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
         -   [データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
         -   [IAMは](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-        -   [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+        -   [MSP (非推奨)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
     -   [v1ベータ](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
 -   [変更履歴](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)

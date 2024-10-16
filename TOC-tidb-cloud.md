@@ -333,14 +333,14 @@
     -   [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
     -   [MSP 顧客](/tidb-cloud/managed-service-provider-customer.md)
     -   [再販業者の顧客](/tidb-cloud/cppo-customer.md)
--   API
+-   翻訳
     -   [APIの概要](/tidb-cloud/api-overview.md)
     -   APIリファレンス
         -   v1ベータ1
             -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
             -   [データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
             -   [IAMは](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-            -   [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+            -   [MSP (非推奨)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
         -   [v1ベータ](https://docs.pingcap.com/tidbcloud/api/v1beta)
 -   統合
     -   [エアバイト](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)

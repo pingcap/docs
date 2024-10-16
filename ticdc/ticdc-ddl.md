@@ -1,6 +1,6 @@
 ---
 title: Changefeed DDL Replication
-summary: Learn about the DDL statements supported by TiCDC and some special cases.
+summary: TiCDC でサポートされている DDL ステートメントといくつかの特殊なケースについて学習します。
 ---
 
 # チェンジフィード DDL レプリケーション {#changefeed-ddl-replication}
@@ -50,6 +50,8 @@ TiCDC でサポートされている DDL ステートメントの許可リスト
 
 ダウンストリームが TiDB の場合、TiCDC は`ADD INDEX`および`CREATE INDEX` DDL 操作を非同期で実行し、変更フィード レプリケーションの待機レイテンシーへの影響を最小限に抑えます。つまり、 `ADD INDEX`および`CREATE INDEX` DDL をダウンストリーム TiDB に複製して実行した後、TiCDC は DDL 実行の完了を待たずにすぐに戻ります。これにより、後続の DML 実行がブロックされることが回避されます。
 
+ダウンストリームで`ADD INDEX`または`CREATE INDEX` DDL 操作を実行中に、TiCDC が同じテーブルの次の DDL 操作を実行すると、この DDL 操作が`queueing`状態で長時間ブロックされる可能性があります。これにより、TiCDC がこの DDL 操作を繰り返し実行することになり、再試行に時間がかかりすぎると、レプリケーション タスクが失敗する可能性があります。v7.5.4 以降では、TiCDC がダウンストリーム データベースの`SUPER`権限を持っている場合、定期的に`ADMIN SHOW DDL JOBS`実行して、非同期で実行された DDL タスクのステータスを確認します。TiCDC は、レプリケーションを続行する前に、インデックス作成が完了するまで待機します。これにより、レプリケーションのレイテンシーが長くなる可能性がありますが、レプリケーション タスクの失敗を回避できます。
+
 > **注記：**
 >
 > -   特定のダウンストリーム DML の実行がレプリケーションが完了していないインデックスに依存している場合、これらの DML の実行が遅くなり、TiCDC レプリケーションのレイテンシーに影響する可能性があります。
@@ -82,7 +84,7 @@ TiCDC はこのタイプの DDL を次のように処理します。
 
 #### DDL ステートメントで複数のテーブルの名前を変更する {#rename-multiple-tables-in-a-ddl-statement}
 
-DDL ステートメントで複数のテーブルの名前を変更する場合、TiCDC は、古いデータベース名、古いテーブル名、および新しいデータベース名がすべてフィルター ルールと一致する場合にのみ、DDL ステートメントを複製します。
+DDL ステートメントで複数のテーブルの名前を変更する場合、TiCDC は、古いデータベース名、古いテーブル名、および新しいデータベース名がすべてフィルター ルールに一致する場合にのみ、DDL ステートメントを複製します。
 
 また、TiCDC はテーブル名を入れ替える`RENAME TABLE` DDL をサポートしていません。以下は例です。
 
@@ -97,14 +99,14 @@ TiCDC はこのタイプの DDL を次のように処理します。
 
 | DDL                                                                        | 複製するかどうか | 取り扱い理由                                                                                                                  |
 | -------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `RENAME TABLE test.t1 TO test.t2, test.t3 TO test.t4`                      | 複製する     | すべてのデータベース名とテーブル名がフィルター ルールに一致します。                                                                                      |
+| `RENAME TABLE test.t1 TO test.t2, test.t3 TO test.t4`                      | 複製する     | すべてのデータベース名とテーブル名はフィルター ルールと一致します。                                                                                      |
 | `RENAME TABLE test.t1 TO test.ignore1, test.t3 TO test.ignore2`            | 複製する     | 古いデータベース名、古いテーブル名、および新しいデータベース名は、フィルター ルールと一致します。                                                                       |
-| `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`                  | エラーを報告する | 新しいデータベース名`ignore`はフィルター ルールと一致しません。                                                                                    |
-| `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | エラーを報告する | `RENAME TABLE` DDL は 1 つの DDL ステートメント内で`test.t1`と`test.t3`の名前を入れ替えますが、TiCDC はこれを正しく処理できません。この場合、エラー メッセージを参照して対処してください。 |
+| `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`                  | エラーを報告する | 新しいデータベース名`ignore`フィルター ルールと一致しません。                                                                                     |
+| `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | エラーを報告する | `RENAME TABLE` DDL は 1 つの DDL ステートメント内で`test.t1`と`test.t3`の名前を入れ替えますが、TiCDC はこれを正しく処理できません。この場合、エラー メッセージを参照して処理してください。 |
 
 ### DDL ステートメントの考慮事項 {#ddl-statement-considerations}
 
-アップストリームでクロスデータベース DDL ステートメント ( `CREATE TABLE db1.t1 LIKE t2`など) を実行する場合は、関連するすべてのデータベース名を DDL ステートメント ( `CREATE TABLE db1.t1 LIKE db2.t2`など) で明示的に指定することをお勧めします。そうしないと、データベース名情報が不足しているため、クロスデータベース DDL ステートメントがダウンストリームで正しく実行されない可能性があります。
+アップストリームでクロスデータベース DDL ステートメント ( `CREATE TABLE db1.t1 LIKE t2`など) を実行する場合は、関連するすべてのデータベース名を DDL ステートメント ( `CREATE TABLE db1.t1 LIKE db2.t2`など) で明示的に指定することをお勧めします。そうしないと、データベース名情報が不足しているため、ダウンストリームでクロスデータベース DDL ステートメントが正しく実行されない可能性があります。
 
 ### SQL モード {#sql-mode}
 
