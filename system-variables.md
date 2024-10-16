@@ -1191,6 +1191,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 1 row in set (0.00 sec)
 ```
 
+### tidb_auto_analyze_concurrency <span class="version-mark">New in v8.4.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `1`
+- Range: `[1, 2147483647]`
+- This variable is used to set the concurrency within a single automatic statistics collection task. Before v8.4.0, this concurrency is fixed at `1`. To speed up statistics collection tasks, you can increase this concurrency based on your cluster's available resources.
+
 ### tidb_auto_analyze_end_time
 
 - Scope: GLOBAL
