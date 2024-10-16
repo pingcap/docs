@@ -20,7 +20,7 @@ The Vector data type provides these advantages over storing in a `JSON` column:
 
 > **Note:**
 >
-> Vector data types are only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> Vector data types are only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 ## Value syntax
 
@@ -238,7 +238,7 @@ It is currently not possible to cast between Vector and other data types (like `
 
 - The maximum supported Vector dimension is 16000.
 - You cannot store `NaN`, `Infinity`, or `-Infinity` values in the vector data type.
-- Currently Vector data types cannot store double-precision floating numbers. This will be supported in future release.
+- Currently, Vector data types cannot store double-precision floating point numbers. This is planned to be supported in a future release. In the meantime, if you import double-precision floating point numbers for Vector data types, they are converted to single-precision numbers.
 
 For other limitations, see [Vector Search Limitations](/tidb-cloud/vector-search-limitations.md).
 

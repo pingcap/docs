@@ -298,7 +298,7 @@ In the preceding causes, only Cause 1 is related to tables. Cause 1 and Cause 2 
 
 ### What are the causes of the "Information schema is out of date" error?
 
-Before TiDB v6.5.0, when executing a DML statement, if TiDB fails to load the latest schema within a DDL lease (45s by default), the `Information schema is out of date` error might occur. Possible causes are:
+When executing a DML statement, if TiDB fails to load the latest schema within a DDL lease (45s by default), the `Information schema is out of date` error might occur. Possible causes are as follows:
 
 - The TiDB instance that executed this DML was killed, and the transaction execution corresponding to this DML statement took longer than a DDL lease. When the transaction was committed, the error occurred.
 - TiDB failed to connect to PD or TiKV while executing this DML statement. As a result, TiDB failed to load schema within a DDL lease or disconnected from PD due to the keepalive setting.

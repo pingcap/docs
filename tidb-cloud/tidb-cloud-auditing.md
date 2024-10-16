@@ -21,7 +21,7 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 ## Prerequisites
 
-- You are using a TiDB Dedicated cluster. Audit logging is not available for TiDB Serverless clusters.
+- You are using a TiDB Cloud Dedicated cluster. Audit logging is not available for TiDB Cloud Serverless clusters.
 - You are in the `Organization Owner` or `Project Owner` role of your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
 ## Enable audit logging for AWS or Google Cloud
@@ -121,7 +121,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
     1. In the TiDB Cloud console, choose a project and a cluster deployed on Google Cloud Platform.
     2. Select **Settings** > **Audit Settings**. The **Audit Logging** dialog box is displayed.
-    3. Click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
+    3. Click **Show Google Cloud Server Account ID**, and then copy the Service Account ID for later use.
 
 2. In the Google Cloud console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions of the storage container exists.
 

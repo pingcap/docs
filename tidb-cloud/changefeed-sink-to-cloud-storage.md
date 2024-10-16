@@ -9,8 +9,8 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 > **Note:**
 >
-> - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-> - For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, the changefeed feature is unavailable.
+> - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Cloud Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> - For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, the changefeed feature is unavailable.
 
 ## Restrictions
 
@@ -87,7 +87,7 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 </div>
 </SimpleTab>
 
-Click **Next** to establish the connection from the TiDB Dedicated cluster to Amazon S3 or GCS. TiDB Cloud will automatically test and verify if the connection is successful.
+Click **Next** to establish the connection from the TiDB Cloud Dedicated cluster to Amazon S3 or GCS. TiDB Cloud will automatically test and verify if the connection is successful.
 
 - If yes, you are directed to the next step of configuration.
 - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.

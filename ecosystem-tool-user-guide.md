@@ -123,21 +123,6 @@ The following are the basics of TiCDC:
 - Target: TiDB clusters, MySQL, Kafka, and Confluent
 - Supported TiDB versions: v4.0.6 and later versions
 
-### Incremental log replication - TiDB Binlog
-
-[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides nearly real-time data replication and backup. You can use it for incremental data replication between TiDB clusters, such as making a TiDB cluster the secondary cluster of the primary TiDB cluster.
-
-> **Warning:**
->
-> Starting from v7.5.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md).
-
-The following are the basics of TiDB Binlog:
-
-- Source: TiDB clusters
-- Target: TiDB clusters, MySQL, Kafka, or incremental backup files
-- Supported TiDB versions: v2.1 and later versions
-- Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog) and [TiDB Binlog Drainer Configurations on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer) for details.
-
 ### sync-diff-inspector
 
 [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) is a tool that compares data stored in the MySQL or TiDB databases. In addition, you can also use sync-diff-inspector to repair data in the scenario where a small amount of data is inconsistent.

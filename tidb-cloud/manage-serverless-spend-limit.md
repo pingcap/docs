@@ -1,21 +1,21 @@
 ---
-title: Manage Spending Limit for TiDB Serverless Scalable Clusters
-summary: Learn how to manage spending limit for your TiDB Serverless scalable clusters.
+title: Manage Spending Limit for TiDB Cloud Serverless Scalable Clusters
+summary: Learn how to manage spending limit for your TiDB Cloud Serverless scalable clusters.
 ---
 
-# Manage Spending Limit for TiDB Serverless Scalable Clusters
+# Manage Spending Limit for TiDB Cloud Serverless Scalable Clusters
 
 > **Note:**
 >
-> The spending limit is only applicable to TiDB Serverless [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan).
+> The spending limit is only applicable to TiDB Cloud Serverless [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan).
 
-Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your TiDB Serverless scalable clusters.
+Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your TiDB Cloud Serverless scalable clusters.
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Serverless clusters, you need to add a credit card and create scalable clusters for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
+For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Serverless clusters, you need to add a credit card and create scalable clusters for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
 
 ## Usage quota
 
-For the first five TiDB Serverless clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
+For the first five TiDB Cloud Serverless clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
@@ -23,15 +23,15 @@ For the first five TiDB Serverless clusters in your organization, whether they a
 
 Once a cluster reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For example, when the row-based storage of a cluster exceeds 5 GiB for a free cluster, the cluster automatically restricts any new connection attempts.
 
-To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
-If you want to create a TiDB Serverless cluster with an additional quota, you can edit the spending limit on the cluster creation page. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+If you want to create a TiDB Cloud Serverless cluster with an additional quota, you can edit the spending limit on the cluster creation page. For more information, see [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Update spending limit
 
-For a TiDB Serverless free cluster, you can increase the usage quota by upgrading it to a scalable cluster. For an existing scalable cluster, you can adjust the monthly spending limit directly.
+For a TiDB Cloud Serverless free cluster, you can increase the usage quota by upgrading it to a scalable cluster. For an existing scalable cluster, you can adjust the monthly spending limit directly.
 
-To update the spending limit for a TiDB Serverless cluster, perform the following steps:
+To update the spending limit for a TiDB Cloud Serverless cluster, perform the following steps:
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page.
 

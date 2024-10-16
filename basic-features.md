@@ -143,12 +143,13 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Async commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [1PC](/system-variables.md#tidb_enable_1pc-new-in-v50) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Large transactions (10GB)](/transaction-overview.md#transaction-size-limit) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Large transactions (1 TiB)](/transaction-overview.md#transaction-size-limit) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Pessimistic transactions](/pessimistic-transaction.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Optimistic transactions](/optimistic-transaction.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Repeatable-read isolation (snapshot isolation)](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Read-committed isolation](/transaction-isolation-levels.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Automatically terminating long-running idle transactions](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) | Y | Y | Y | N | N | N | N | N | N | N | N |
+| [Bulk DML execution mode (`tidb_dml_type = "bulk"`)](/system-variables.md#tidb_dml_type-new-in-v800) | E |  E | E |  N | N | N | N | N | N | N | N |
 
 ## Partitioning
 
@@ -215,7 +216,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Dumpling logical dumper](/dumpling-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) [^5] | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Database migration toolkit (DM)](/migration-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) [^6] | Deprecated | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) [^6] | Deprecated | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Stream data to Amazon S3, GCS, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Y | Y | Y | Y | Y | E | N | N | N | N | N |
 | [TiCDC supports bidirectional replication between two TiDB clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | Y | Y | Y | Y | Y | N | N | N | N | N |
@@ -274,4 +275,4 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 [^5]: Starting from [TiDB v7.0.0](/releases/release-7.0.0.md), the new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS are experimental features. Starting from [v7.6.0](/releases/release-7.6.0.md), TiDB processes `LOAD DATA` in transactions in the same way as MySQL. The `LOAD DATA` statement in a transaction no longer automatically commits the current transaction or starts a new transaction. Moreover, you can explicitly commit or roll back the `LOAD DATA` statement in a transaction. Additionally, the `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction).
 
-[^6]: Starting from v7.5.0, [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md).
+[^6]: Starting from v7.5.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated. Starting from v8.4.0, TiDB Binlog is removed. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md).

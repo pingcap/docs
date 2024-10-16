@@ -112,6 +112,8 @@ The output is as follows:
 | Request_unit_read             | double              | YES  |      | NULL    |       |
 | Request_unit_write            | double              | YES  |      | NULL    |       |
 | Time_queued_by_rc             | double              | YES  |      | NULL    |       |
+| Tidb_cpu_time                 | double              | YES  |      | NULL    |       |
+| Tikv_cpu_time                 | double              | YES  |      | NULL    |       |
 | Plan                          | longtext            | YES  |      | NULL    |       |
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
@@ -222,6 +224,8 @@ The output is as follows:
 | Request_unit_read             | double              | YES  |      | NULL    |       |
 | Request_unit_write            | double              | YES  |      | NULL    |       |
 | Time_queued_by_rc             | double              | YES  |      | NULL    |       |
+| Tidb_cpu_time                 | double              | YES  |      | NULL    |       |
+| Tikv_cpu_time                 | double              | YES  |      | NULL    |       |
 | Plan                          | longtext            | YES  |      | NULL    |       |
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |

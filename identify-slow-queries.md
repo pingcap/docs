@@ -101,7 +101,7 @@ The following fields are related to transaction execution:
 * `Write_keys`: The count of keys that the transaction writes to the Write CF in TiKV.
 * `Write_size`: The total size of the keys or values to be written when the transaction commits.
 * `Prewrite_region`: The number of TiKV Regions involved in the first phase (prewrite) of the two-phase transaction commit. Each Region triggers a remote procedure call.
-* `Wait_prewrite_binlog_time`: The time used to write binlogs when a transaction is committed.
+* `Wait_prewrite_binlog_time`: The time used to write binlogs when a transaction is committed. Starting from v8.4.0, TiDB Binlog is removed, and this field has no value.
 * `Resolve_lock_time`: The time to resolve or wait for the lock to be expired after a lock is encountered during a transaction commit.
 
 Memory usage fields:
