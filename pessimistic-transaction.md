@@ -229,7 +229,7 @@ in-memory-peer-size-limit = "512KiB"
 in-memory-instance-size-limit = "100MiB"
 ```
 
-To dynamically modify these limits, modify the TiKV configuration dynamically:
+To dynamically modify these limits, [modify TiKV configuration dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically) as follows:
 
 ```sql
 SET CONFIG tikv `pessimistic-txn.in-memory-peer-size-limit`="512KiB";
