@@ -463,7 +463,7 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
 + TiDB <!--tw@lilin90: the following 13 notes-->
 
     - Fix the issue that a deadlock might occur when the `tidb_restricted_read_only` variable is set to `true` [#53822](https://github.com/pingcap/tidb/issues/53822) [#55373](https://github.com/pingcap/tidb/issues/55373) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue that TiDB does not wait for auto-commit transactions to complete when shutting down gracefully [#55464](https://github.com/pingcap/tidb/issues/55464) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that TiDB does not wait for auto-commit transactions to complete during graceful shutdown [#55464](https://github.com/pingcap/tidb/issues/55464) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that reducing the value of `tidb_ttl_delete_worker_count` during TTL job execution makes the job fail to complete [#55561](https://github.com/pingcap/tidb/issues/55561) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that if the index of a table contains generated columns, an `Unknown column 'column_name' in 'expression'` error might occur when collecting statistics for the table via the `ANALYZE` statement [#55438](https://github.com/pingcap/tidb/issues/55438) @[hawkingrei](https://github.com/hawkingrei)
     - Deprecate unnecessary configurations related to statistics to reduce redundant code [#55043](https://github.com/pingcap/tidb/issues/55043) @[Rustin170506](https://github.com/Rustin170506)
