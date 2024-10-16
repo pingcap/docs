@@ -113,7 +113,7 @@ Therefore, TiCDC splits these two events into four events, that is, deleting rec
 Starting from v6.5.10 and v7.1.6, when using a non-MySQL sink, TiCDC supports controlling whether to split primary or unique key `UPDATE` events via the `output-raw-change-event` parameter, as described in the GitHub issue [#11211]( https://github.com/pingcap/tiflow/issues/11211). The specific behavior of this parameter is as follows:
 
 - When you set `output-raw-change-event = false`, if the primary key or non-null unique index value is modified in an `UPDATE` event, TiCDC splits the event into `DELETE` and `INSERT` events and ensures that all events follow the sequence of `DELETE` events preceding `INSERT` events.
-- When you set `output-raw-change-event = true`, TiCDC does not split `UPDATE` events. Note that when the primary key of a table is a clustered index, updates to the primary key are still split into `DELETE` and `INSERT` events in TiDB, and such behavior is not affected by the `output-raw-change-event` parameter.
+- When you set `output-raw-change-event = true`, TiCDC does not split `UPDATE` events, and the consumer side is responsible for dealing with the problems described in [Split primary or unique key `UPDATE` events for non-MySQL sinks](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks). Otherwise there might be a risk of data inconsistency. Note that when the primary key of a table is a clustered index, updates to the primary key are still split into `DELETE` and `INSERT` events in TiDB, and such behavior is not affected by the `output-raw-change-event` parameter.
 
 > **Note**
 >
