@@ -220,6 +220,7 @@ To dynamically disable this feature, modify the TiKV configuration dynamically:
 ```sql
 set config tikv pessimistic-txn.in-memory='false';
 ```
+
 <CustomContent platform="tidb">
 
 Starting from v8.4.0, you can configure the memory usage limit for in-memory pessimistic locks in a Region or a TiKV instance using [`pessimistic-txn.in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) or [`pessimistic-txn.in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840):
