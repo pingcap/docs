@@ -269,9 +269,11 @@ A runaway query is a query (`SELECT` statement only) that consumes more time or 
 
 #### `QUERY_LIMIT` parameters
 
-Supported condition setting:
+If a query exceeds any of the following limits, it is identified as a runaway query:
 
-- `EXEC_ELAPSED`: a query is identified as a runaway query when the query execution time exceeds this limit.
+- `EXEC_ELAPSED`: checks whether the query execution time exceeds the limit.
+- `PROCESSED_KEYS`: checks whether the number of keys processed by the Coprocessor exceeds the limit.
+- `RU`: checks whether the total number of read and write RUs consumed by the statement exceeds the limit.
 
 Supported operations (`ACTION`):
 
@@ -297,6 +299,8 @@ The parameters of `QUERY_LIMIT` are as follows:
 | Parameter          | Description            | Note                                  |
 |---------------|--------------|--------------------------------------|
 | `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
+| `PROCESSED_KEYS` | When the number of keys processed by the Coprocessor exceeds this value, the query is identified as a runaway query | `PROCESSED_KEYS = 1000` means the query is identified as a runaway query if the number of keys processed by the Coprocessor exceeds 1000. |
+| `RU`  | When the total number of read and write RUs consumed by the query exceeds this value, this query is identified as a runaway query | `RU = 1000` means the query is identified as a runaway query if the total number of read and write RUs consumed by the query exceeds 1000. |
 | `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, `KILL`, and `SWITCH_GROUP`. |
 | `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time, the corresponding action is performed immediately. | Optional. For example, `WATCH=SIMILAR DURATION '60s'`, `WATCH=EXACT DURATION '1m'`, and `WATCH=PLAN`. |
 
@@ -364,24 +368,25 @@ The parameters are as follows:
 - Get the watch item ID by querying `INFORMATION_SCHEMA.RUNAWAY_WATCHES` and delete the watch item.
 
     ```sql
-    SELECT * from information_schema.runaway_watches ORDER BY id;
+    SELECT * from information_schema.runaway_watches ORDER BY id\G
     ```
 
     ```sql
     *************************** 1. row ***************************
-                    ID: 20003
-    RESOURCE_GROUP_NAME: rg2
-            START_TIME: 2023-07-28 13:06:08
-            END_TIME: UNLIMITED
-                WATCH: Similar
-            WATCH_TEXT: 5b7fd445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
-                SOURCE: 127.0.0.1:4000
+                     ID: 1
+    RESOURCE_GROUP_NAME: default
+             START_TIME: 2024-09-09 03:35:31
+               END_TIME: 2024-09-09 03:45:31
+                  WATCH: Exact
+            WATCH_TEXT: SELECT variable_name, variable_value FROM mysql.global_variables
+                 SOURCE: 127.0.0.1:4000
                 ACTION: Kill
+                RULE: ProcessedKeys = 666(10)
     1 row in set (0.00 sec)
     ```
 
     ```sql
-    QUERY WATCH REMOVE 20003;
+    QUERY WATCH REMOVE 1;
     ```
 
 #### Observability
@@ -393,13 +398,14 @@ You can get more information about runaway queries from the following system tab
     ```sql
     MySQL [(none)]> SELECT * FROM mysql.tidb_runaway_queries LIMIT 1\G
     *************************** 1. row ***************************
-    resource_group_name: rg1
-                   time: 2023-06-16 17:40:22
+    resource_group_name: default
+                   time: 2024-09-06 17:43:09
              match_type: identify
                  action: kill
            original_sql: select * from sbtest.sbtest1
-            plan_digest: 5b7d445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+            plan_digest: cef718bcf4137307a8167e595941a92a260deb7dd9e1c9735bfba3ce3542de0f
             tidb_server: 127.0.0.1:4000
+                   rule: RequestUnit = RRU:10.838106, WRU:0.000000, WaitDuration:0s(10)
     ```
 
     In the preceding output,`match_type` indicates how the runaway query is identified. The value can be one of the following:
