@@ -27,6 +27,6 @@ To start using TiDB Cloud API, refer to the following resources in TiDB Cloud AP
         - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
         - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
         - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-        - [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+        - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
 - [Changelog](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)
