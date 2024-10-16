@@ -62,6 +62,13 @@ In TiDB, you can create an HNSW index for a column with a [vector data type](/ve
     ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
     ```
 
+> **Note:**
+>
+> The vector search index feature relies on TiFlash replicas for tables.
+>
+> - If a vector search index is defined when a table is created, TiDB automatically creates a TiFlash replica for the table.
+> - If no vector search index is defined when a table is created, and the table currently does not have a TiFlash replica, you need to manually create a TiFlash replica before adding a vector search index to the table. For example: `ALTER TABLE 'table_name' SET TIFLASH REPLICA 1;`.
+
 When creating an HNSW vector index, you need to specify the distance function for the vector:
 
 - Cosine Distance: `((VEC_COSINE_DISTANCE(embedding)))`
@@ -155,25 +162,25 @@ For more information, see [Table Partitioning](/partitioned-table.md).
 
 ## View index build progress
 
-Unlike other indexes, vector search indexes are built asynchronously. This means that after bulk data insertion, the vector index might not be immediately available for querying, but it does not affect the accuracy and consistency of the data. You can still perform vector searches at any time and get complete results. However, performance will be suboptimal until vector indexes are fully built.
+After you insert a large volume of data, some of it might not be instantly persisted to TiFlash. For vector data that has already been persisted, the vector search index is built synchronously. For data that has not yet been persisted, the index will be built once the data is persisted. This process does not affect the accuracy and consistency of the data. You can still perform vector searches at any time and get complete results. However, performance will be suboptimal until vector indexes are fully built.
 
 To view the index build progress, you can query the `INFORMATION_SCHEMA.TIFLASH_INDEXES` table as follows:
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
-+---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
-| TIDB_DATABASE | TIDB_TABLE | TIDB_PARTITION | TABLE_ID | BELONGING_TABLE_ID | COLUMN_NAME | COLUMN_ID | INDEX_KIND | ROWS_STABLE_INDEXED | ROWS_STABLE_NOT_INDEXED | ROWS_DELTA_INDEXED | ROWS_DELTA_NOT_INDEXED | TIFLASH_INSTANCE |
-+---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
-| test          | sample     | NULL           |      106 |                 -1 | vec         |         2 | HNSW       |                   0 |                   13000 |                  0 |                   2000 | store-6ba728d2   |
-| test          | sample     | NULL           |      106 |                 -1 | vec         |         2 | HNSW       |               10500 |                       0 |                  0 |                   4500 | store-7000164f   |
-+---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
++---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
+| TIDB_DATABASE | TIDB_TABLE | TABLE_ID | COLUMN_NAME | INDEX_NAME    | COLUMN_ID | INDEX_ID | INDEX_KIND | ROWS_STABLE_INDEXED | ROWS_STABLE_NOT_INDEXED | ROWS_DELTA_INDEXED | ROWS_DELTA_NOT_INDEXED | ERROR_MESSAGE | TIFLASH_INSTANCE |
++---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
+| test          | tcff1d827  |      219 | col1fff     | 0a452311      |         7 |        1 | HNSW       |               29646 |                       0 |                  0 |                      0 |               | 127.0.0.1:3930   |
+| test          | foo        |      717 | embedding   | idx_embedding |         2 |        1 | HNSW       |                   0 |                       0 |                  0 |                      3 |               | 127.0.0.1:3930   |
++---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
 ```
 
 - You can check the `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns for the index build progress. When `ROWS_STABLE_NOT_INDEXED` becomes 0, the index build is complete.
 
     As a reference, indexing a 500 MiB vector dataset might take up to 20 minutes. The indexer can run in parallel for multiple tables. Currently, adjusting the indexer priority or speed is not supported.
 
-- You can check the `ROWS_DELTA_NOT_INDEXED` column for the number of rows in the Delta layer. The Delta layer stores recently inserted or updated rows and is periodically merged into the Stable layer according to the write workload. This merge process is called Compaction.
+- You can check the `ROWS_DELTA_NOT_INDEXED` column for the number of rows in the Delta layer. Data in the storage layer of TiFlash is stored in two layers: Delta layer and Stable layer. The Delta layer stores recently inserted or updated rows and is periodically merged into the Stable layer according to the write workload. This merge process is called Compaction.
 
     The Delta layer is always not indexed. To achieve optimal performance, you can force the merge of the Delta layer into the Stable layer so that all data can be indexed:
 
