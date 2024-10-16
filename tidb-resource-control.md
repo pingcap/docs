@@ -7,7 +7,7 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 As a cluster administrator, you can use the resource control feature to create resource groups, set quotas for resource groups, and bind users to those groups.
 
@@ -96,7 +96,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
 > **Note:**
 >
 > - Each write operation is eventually replicated to all replicas (by default, TiKV has 3 replicas). Each replication operation is considered a different write operation.
-> - The preceding table lists only the resources involved in RU calculation for TiDB Self-Hosted clusters, excluding the network and storage consumption. For TiDB Serverless RUs, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
+> - The preceding table lists only the resources involved in RU calculation for TiDB Self-Managed clusters, excluding the network and storage consumption. For TiDB Cloud Serverless RUs, see [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
 > - Currently, TiFlash resource control only considers SQL CPU, which is the CPU time consumed by the execution of pipeline tasks for queries, and read request payload.
 
 ## Parameters for resource control
@@ -114,8 +114,8 @@ The resource control feature introduces the following system variables or parame
 
 <CustomContent platform="tidb-cloud">
 
-* TiKV: For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification.
-* TiFlash: For TiDB Self-Hosted, you can use the `tidb_enable_resource_control` system variable and the `enable_resource_control` configuration item (introduced in v7.4.0) to control whether to enable TiFlash resource control.
+* TiKV: For TiDB Self-Managed, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification.
+* TiFlash: For TiDB Self-Managed, you can use the `tidb_enable_resource_control` system variable and the `enable_resource_control` configuration item (introduced in v7.4.0) to control whether to enable TiFlash resource control.
 
 </CustomContent>
 
@@ -159,9 +159,9 @@ You can view the [Resource Manager page](/dashboard/dashboard-resource-manager.m
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Self-Hosted, you can use the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource) statement to estimate the cluster capacity.
+For TiDB Self-Managed, you can use the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource) statement to estimate the cluster capacity.
 
-For TiDB Cloud, the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource) statement is inapplicable.
+For TiDB Cloud, the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource) statement is inapplicable.
 
 </CustomContent>
 
@@ -280,6 +280,7 @@ Supported operations (`ACTION`):
 - `DRYRUN`: no action is taken. The records are appended for the runaway queries. This is mainly used to observe whether the condition setting is reasonable.
 - `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
 - `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
+- `SWITCH_GROUP`: introduced in v8.4.0, this parameter switches the identified query to the specified resource group for continued execution. After this query completes, subsequent SQL statements are executed in the original resource group. If the specified resource group does not exist, the query remains in the original resource group.
 
 To avoid too many concurrent runaway queries that exhaust system resources, the resource control feature introduces a quick identification mechanism, which can quickly identify and isolate runaway queries. You can use this feature through the `WATCH` clause. When a query is identified as a runaway query, this mechanism extracts the matching feature (defined by the parameter after `WATCH`) of the query. In the next period of time (defined by `DURATION`), the matching feature of the runaway query is added to the watch list, and the TiDB instance matches queries with the watch list. The matching queries are directly marked as runaway queries and isolated according to the corresponding action, instead of waiting for them to be identified by conditions. The `KILL` operation terminates the query and reports an error `Quarantined and interrupted because of being in runaway watch list`.
 
@@ -300,8 +301,12 @@ The parameters of `QUERY_LIMIT` are as follows:
 | `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
 | `PROCESSED_KEYS` | When the number of keys processed by the Coprocessor exceeds this value, the query is identified as a runaway query | `PROCESSED_KEYS = 1000` means the query is identified as a runaway query if the number of keys processed by the Coprocessor exceeds 1000. |
 | `RU`  | When the total number of read and write RUs consumed by the query exceeds this value, this query is identified as a runaway query | `RU = 1000` means the query is identified as a runaway query if the total number of read and write RUs consumed by the query exceeds 1000. |
-| `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, and `KILL`. |
+| `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, `KILL`, and `SWITCH_GROUP`. |
 | `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time, the corresponding action is performed immediately. | Optional. For example, `WATCH=SIMILAR DURATION '60s'`, `WATCH=EXACT DURATION '1m'`, and `WATCH=PLAN`. |
+
+> **Note:**
+>
+> If you want to strictly limit runaway queries to a specific resource group, it is recommended to use `SWITCH_GROUP` together with the [`QUERY WATCH`](/tidb-resource-control.md#query-watch-parameters) statement. Because `QUERY_LIMIT` only triggers the corresponding `ACTION` operation when the query meets the criteria, `SWITCH_GROUP` might not be able to switch the query to the target resource group in a timely manner in such scenarios.
 
 #### Examples
 
@@ -348,7 +353,13 @@ The parameters are as follows:
     QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
-- Add a matching feature to the runaway query watch list for the `rg1` resource group using `PLAN DIGEST`.
+- Add a matching feature to the runaway query watch list for the `rg1` resource group by parsing the SQL into SQL Digest, and specify `ACTION` as `SWITCH_GROUP(rg2)`.
+
+    ```sql
+    QUERY WATCH ADD RESOURCE GROUP rg1 ACTION SWITCH_GROUP(rg2) SQL TEXT SIMILAR TO 'select * from test.t2';
+    ```
+
+- Add a matching feature to the runaway query watch list for the `rg1` resource group using `PLAN DIGEST`, and specify `ACTION` as `KILL`.
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
@@ -418,7 +429,8 @@ Starting from v7.4.0, the TiDB resource control feature supports managing backgr
 
 #### `BACKGROUND` parameters
 
-`TASK_TYPES`: specifies the task types that need to be managed as background tasks. Use commas (`,`) to separate multiple task types.
+- `TASK_TYPES`: specifies the task types that need to be managed as background tasks. Use commas (`,`) to separate multiple task types.
+- `UTILIZATION_LIMIT`: limits the maximum percentage (0-100) of resources that background tasks can consume on each TiKV node. By default, TiKV calculates the available resources for background tasks based on the total resources of the node and the resources currently occupied by the foreground tasks. If `UTILIZATION_LIMIT` is configured, the resource allocated to background tasks will not exceed this limit.
 
 TiDB supports the following types of background tasks:
 
@@ -450,10 +462,10 @@ By default, the task types that are marked as background tasks are `""`, and the
 
 #### Examples
 
-1. Modify the `default` resource group and mark `br` and `ddl` as background tasks.
+1. Modify the `default` resource group by marking `br` and `ddl` as background tasks and setting the resource limit of background tasks to 30%.
 
     ```sql
-    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl');
+    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30);
     ```
 
 2. Change the `default` resource group to revert the background task type to its default value.
@@ -477,11 +489,11 @@ By default, the task types that are marked as background tasks are `""`, and the
     The output is as follows:
 
     ```
-    +---------+------------+----------+-----------+-------------+---------------------+
-    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND          |
-    +---------+------------+----------+-----------+-------------+---------------------+
-    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl' |
-    +---------+------------+----------+-----------+-------------+---------------------+
+    +---------+------------+----------+-----------+-------------+-------------------------------------------+
+    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND                                |
+    +---------+------------+----------+-----------+-------------+-------------------------------------------+
+    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl', UTILIZATION_LIMIT=30 |
+    +---------+------------+----------+-----------+-------------+-------------------------------------------+
     ```
 
 5. To explicitly mark tasks in the current session as the background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:
@@ -518,9 +530,9 @@ By default, the task types that are marked as background tasks are `""`, and the
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2. For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+2. For TiDB Self-Managed, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-3. For TiDB Self-Hosted, you can use the `enable_resource_control` configuration item to control whether to enable TiFlash resource control. For TiDB Cloud, the value of the `enable_resource_control` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+3. For TiDB Self-Managed, you can use the `enable_resource_control` configuration item to control whether to enable TiFlash resource control. For TiDB Cloud, the value of the `enable_resource_control` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Cloud Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -636,7 +648,7 @@ You can view the data of resource groups in the current [`RESOURCE_GROUPS`](/inf
 
 > **Note:**
 >
-> This section is only applicable to TiDB Self-Hosted. Currently, TiDB Cloud does not provide resource control metrics.
+> This section is only applicable to TiDB Self-Managed. Currently, TiDB Cloud does not provide resource control metrics.
 
 TiDB regularly collects runtime information about resource control and provides visual charts of the metrics in Grafana's **TiDB** > **Resource Control** dashboard.
 

@@ -1,15 +1,15 @@
 ---
-title: Build a TiDB Serverless Cluster
-summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect to it.
+title: Build a TiDB Cloud Serverless Cluster
+summary: Learn how to build a TiDB Cloud Serverless cluster in TiDB Cloud and connect to it.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Build a TiDB Serverless Cluster
+# Build a TiDB Cloud Serverless Cluster
 
 <CustomContent platform="tidb">
 
-This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a TiDB Serverless cluster, connect to it, and run a sample application on it.
+This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://www.pingcap.com/tidb-cloud) to create a TiDB Cloud Serverless cluster, connect to it, and run a sample application on it.
 
 If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
 
@@ -21,7 +21,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 </CustomContent>
 
-## Step 1. Create a TiDB Serverless cluster
+## Step 1. Create a TiDB Cloud Serverless cluster
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
@@ -31,7 +31,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 4. On the **Create Cluster** page, **Serverless** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
-5. Click **Create** to create a TiDB Serverless cluster.
+5. Click **Create** to create a TiDB Cloud Serverless cluster.
 
     Your TiDB Cloud cluster will be created in approximately 30 seconds.
 
@@ -45,7 +45,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 > **Note:**
 >
-> For [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
+> For [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
 
 </CustomContent>
 
@@ -53,7 +53,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 > **Note:**
 >
-> For [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+> For [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters, when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
 </CustomContent>
 
@@ -130,7 +130,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2. Run the connection string obtained in [Step 1](#step-1-create-a-tidb-serverless-cluster).
+2. Run the connection string obtained in [Step 1](#step-1-create-a-tidb-cloud-serverless-cluster).
 
     {{< copyable "shell-regular" >}}
 
@@ -142,8 +142,8 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 > **Note:**
 >
-> - When you connect to a TiDB Serverless cluster, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters).
-> - If you encounter problems when connecting to a TiDB Serverless cluster, you can read [Secure Connections to TiDB Serverless Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
+> - When you connect to a TiDB Cloud Serverless cluster, you must [use the TLS connection](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters).
+> - If you encounter problems when connecting to a TiDB Cloud Serverless cluster, you can read [Secure Connections to TiDB Cloud Serverless Clusters](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) for more information.
 
 </CustomContent>
 
@@ -151,8 +151,8 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 > **Note:**
 >
-> - When you connect to a TiDB Serverless cluster, you must [use the TLS connection](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-> - If you encounter problems when connecting to a TiDB Serverless cluster, you can read [Secure Connections to TiDB Serverless Clusters](/tidb-cloud/secure-connections-to-serverless-clusters.md) for more information.
+> - When you connect to a TiDB Cloud Serverless cluster, you must [use the TLS connection](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+> - If you encounter problems when connecting to a TiDB Cloud Serverless cluster, you can read [Secure Connections to TiDB Cloud Serverless Clusters](/tidb-cloud/secure-connections-to-serverless-clusters.md) for more information.
 
 </CustomContent>
 

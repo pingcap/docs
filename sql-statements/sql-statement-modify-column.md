@@ -205,7 +205,7 @@ CREATE TABLE `t1` (
     ERROR 8200 (HY000): Unsupported modify column: table is partition table
     ```
 
-* Does not support modifying some data types (for example, some TIME types, Bit, Set, Enum, JSON) are not supported due to some compatibility issues of the `cast` function's behavior between TiDB and MySQL.
+* Does not support modifying from some data types (for example, some TIME types, BIT, SET, ENUM, JSON) to some other types due to some compatibility issues of the `cast` function's behavior between TiDB and MySQL.
 
     ```sql
     CREATE TABLE t (a DECIMAL(13, 7));

@@ -15,7 +15,7 @@ This notification describes the details that you need to know about the maintena
 
 ## Impact
 
-During the maintenance window, the DM feature for TiDB Dedicated clusters in the following region will be upgraded:
+During the maintenance window, the DM feature for TiDB Cloud Dedicated clusters in the following region will be upgraded:
 
 - Cloud provider: AWS, region: Tokyo (ap-northeast-1)
 

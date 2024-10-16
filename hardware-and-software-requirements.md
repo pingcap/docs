@@ -105,7 +105,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.21 or later |
+|   Golang  |  1.23 or later |
 |   Rust    |   nightly-2023-12-28 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  17.0 or later  |
@@ -213,8 +213,6 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | TiFlash | 20170 |the TiFlash Proxy service port |
 | TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
 | TiFlash | 8234 | the port for Prometheus to pull TiFlash metrics |
-| Pump | 8250 | the Pump communication port |
-| Drainer | 8249 | the Drainer communication port |
 | TiCDC | 8300 | the TiCDC communication port |
 | Monitoring | 9090 | the communication port for the Prometheus service|
 | Monitoring | 12020 | the communication port for the NgMonitoring service|

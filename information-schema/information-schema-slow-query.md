@@ -19,7 +19,7 @@ The `SLOW_QUERY` table provides the slow query information of the current node, 
 
 > **Note:**
 >
-> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This table is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 <CustomContent platform="tidb">
 
@@ -112,6 +112,8 @@ The output is as follows:
 | Request_unit_read             | double              | YES  |      | NULL    |       |
 | Request_unit_write            | double              | YES  |      | NULL    |       |
 | Time_queued_by_rc             | double              | YES  |      | NULL    |       |
+| Tidb_cpu_time                 | double              | YES  |      | NULL    |       |
+| Tikv_cpu_time                 | double              | YES  |      | NULL    |       |
 | Plan                          | longtext            | YES  |      | NULL    |       |
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
@@ -129,7 +131,7 @@ The `CLUSTER_SLOW_QUERY` table provides the slow query information of all nodes 
 
 > **Note:**
 >
-> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This table is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 <CustomContent platform="tidb">
 
@@ -222,6 +224,8 @@ The output is as follows:
 | Request_unit_read             | double              | YES  |      | NULL    |       |
 | Request_unit_write            | double              | YES  |      | NULL    |       |
 | Time_queued_by_rc             | double              | YES  |      | NULL    |       |
+| Tidb_cpu_time                 | double              | YES  |      | NULL    |       |
+| Tikv_cpu_time                 | double              | YES  |      | NULL    |       |
 | Plan                          | longtext            | YES  |      | NULL    |       |
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |

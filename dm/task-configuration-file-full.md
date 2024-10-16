@@ -126,7 +126,7 @@ loaders:
 
     # The import mode during the full import phase. The following modes are supported:
     # - "logical" (default). Uses TiDB Lightning's logical import mode to import data. Document: https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode
-    # - "physical". Uses TiDB Lightning's physical import mode to import data. Document: https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-physical-import-mode
+    # - "physical". Uses TiDB Lightning's physical import mode to import data. Document: https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode
     #   The "physical" mode is still an experimental feature and is not recommended in production.
     import-mode: "logical"
     #  Methods to resolve conflicts in logical import.

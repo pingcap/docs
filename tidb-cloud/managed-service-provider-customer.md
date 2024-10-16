@@ -28,7 +28,7 @@ To create a new MSP customer account, visit the MSP dedicated sign-up page. Each
 
 If you are currently a direct customer with a TiDB Cloud account, you can ask your MSP to migrate your account to an MSP customer account.
 
-The migration will take effect on the 1st of a future month. Discuss with your MSP to determine the specific effective date.
+The migration will take effect on the first day of a future month. Discuss with your MSP to determine the specific effective date.
 
 On the effective day of migration, you will receive an email notification.
 

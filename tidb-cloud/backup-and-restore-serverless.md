@@ -1,33 +1,33 @@
 ---
-title: Back Up and Restore TiDB Serverless Data
-summary: Learn how to back up and restore your TiDB Serverless cluster.
+title: Back Up and Restore TiDB Cloud Serverless Data
+summary: Learn how to back up and restore your TiDB Cloud Serverless cluster.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore TiDB Serverless Data
+# Back Up and Restore TiDB Cloud Serverless Data
 
-This document describes how to back up and restore your TiDB Serverless cluster data on TiDB Cloud.
+This document describes how to back up and restore your TiDB Cloud Serverless cluster data on TiDB Cloud.
 
 > **Tip:**
 >
-> To learn how to back up and restore TiDB Dedicated cluster data, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
+> To learn how to back up and restore TiDB Cloud Dedicated cluster data, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
 ## Limitations
 
-- It is important to note that TiDB Serverless clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
+- It is important to note that TiDB Cloud Serverless clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
 - Manual backup is not yet supported.
 - The cluster will be unavailable during the restore process, and existing connections will be terminated. You can establish new connections once the restore is complete.
 - If any TiFlash replica is enabled, the replica will be unavailable for a while after the restore because data needs to be rebuilt in TiFlash.
 
 ## Backup
 
-Automatic backups are scheduled for your TiDB Serverless clusters according to the backup setting, which can reduce your loss in extreme disaster situations.
+Automatic backups are scheduled for your TiDB Cloud Serverless clusters according to the backup setting, which can reduce your loss in extreme disaster situations.
 
 ### Automatic backup
 
-By the automatic backup, you can back up the TiDB Serverless cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
+By the automatic backup, you can back up the TiDB Cloud Serverless cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
 
-1. Navigate to the **Backup** page of a TiDB Serverless cluster.
+1. Navigate to the **Backup** page of a TiDB Cloud Serverless cluster.
 
 2. Click **Backup Settings**. This will open the **Backup Settings** window, where you can configure the automatic backup settings according to your requirements.
 
@@ -51,7 +51,7 @@ To delete an existing backup file, perform the following steps:
 
 ## Restore
 
-TiDB Serverless only supports in-place restoration. To restore your TiDB Serverless cluster from a backup, follow these steps:
+TiDB Cloud Serverless only supports in-place restoration. To restore your TiDB Cloud Serverless cluster from a backup, follow these steps:
 
 1. Navigate to the **Backup** page of a cluster.
 
