@@ -212,7 +212,6 @@ When the memory usage of in-memory pessimistic locks exceeds the memory threshol
 
 </CustomContent>
 
-
 The in-memory pessimistic lock performs similarly to the pipelined locking process, which does not affect the lock acquisition when the cluster is healthy. However, when network isolation occurs in TiKV or a TiKV node is down, the acquired pessimistic lock might be lost.
 
 If the application logic relies on the lock acquiring or lock waiting mechanism, or if you want to guarantee as much as possible the success rate of transaction commits even when the cluster is in an abnormal state, you need to **disable** the in-memory pessimistic lock feature.
@@ -248,4 +247,5 @@ To dynamically modify these limits, [modify TiKV configuration dynamically](/dyn
 SET CONFIG tikv `pessimistic-txn.in-memory-peer-size-limit`="512KiB";
 SET CONFIG tikv `pessimistic-txn.in-memory-instance-size-limit`="100MiB";
 ```
+
 </CustomContent>
