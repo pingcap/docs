@@ -180,6 +180,8 @@ The following TiKV configuration items can be modified dynamically:
 | `pessimistic-txn.wake-up-delay-duration` | The duration after which a pessimistic transaction is woken up |
 | `pessimistic-txn.pipelined` | Determines whether to enable the pipelined pessimistic locking process |
 | `pessimistic-txn.in-memory` | Determines whether to enable the in-memory pessimistic lock |
+| `pessimistic-txn.in-memory-peer-size-limit`               | Controls the memory usage limit for in-memory pessimistic locks in a Region                                                                                                                                                                                  |
+| `pessimistic-txn.in-memory-instance-size-limit`           | Controls the memory usage limit for in-memory pessimistic locks in a TiKV instance                                                                                                                                                                           |
 | `quota.foreground-cpu-time` | The soft limit on the CPU resources used by TiKV foreground to process read and write requests |
 | `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
 | `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
