@@ -74,18 +74,18 @@ In addition, This SQL statement has an inner join executed, and the `ON` conditi
 ### Case 4: predicates that are not supported by storage layers cannot be pushed down
 
 ```sql
-create table t(id int primary key, a varchar(10) not null);
-desc select * from t where truncate(a, " ") = '1';
-+-------------------------+----------+-----------+---------------+---------------------------------------------------+
-| id                      | estRows  | task      | access object | operator info                                     |
-+-------------------------+----------+-----------+---------------+---------------------------------------------------+
-| Selection_5             | 8000.00  | root      |               | eq(truncate(cast(test.t.a, double BINARY), 0), 1) |
-| └─TableReader_7         | 10000.00 | root      |               | data:TableFullScan_6                              |
-|   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo                    |
-+-------------------------+----------+-----------+---------------+---------------------------------------------------+
+create table t(id int primary key, a decimal(10, 2) not null);
+desc select * from t where truncate(a, 0) = 1;
++-------------------------+----------+-----------+---------------+--------------------------------+
+| id                      | estRows  | task      | access object | operator info                  |
++-------------------------+----------+-----------+---------------+--------------------------------+
+| Selection_5             | 8000.00  | root      |               | eq(truncate(test.t.a, 0), 1)   |
+| └─TableReader_7         | 10000.00 | root      |               | data:TableFullScan_6           |
+|   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo |
++-------------------------+----------+-----------+---------------+--------------------------------+
 ```
 
-In this query, there is a predicate `truncate(a, " ") = '1'`.
+In this query, there is a predicate `truncate(a, 0) = 1`.
 
 From the `explain` results, you can see that the predicate is not pushed down to TiKV for calculation. This is because the TiKV coprocessor does not support the built-in function `truncate`.
 
