@@ -262,3 +262,60 @@ Currently, because statistics of the system tables are not collected, sometimes 
 ```sql
 SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 ```
+
+# Statistics
+
+When running a [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) query against the `SLOW_QUERY` table it will contain information about how the database fetched the slow query information. This data is not available when running `EXPLAIN ANALYZE` against the `CLUSTER_SLOW_QUERY` table.
+
+Example:
+
+```sql
+EXPLAIN ANALYZE SELECT * FROM information_schema.slow_query LIMIT 1\G
+```
+
+```
+*************************** 1. row ***************************
+            id: Limit_7
+       estRows: 1.00
+       actRows: 1
+          task: root
+ access object: 
+execution info: time:3.46ms, loops:2, RU:0.000000
+ operator info: offset:0, count:1
+        memory: N/A
+          disk: N/A
+*************************** 2. row ***************************
+            id: └─MemTableScan_10
+       estRows: 10000.00
+       actRows: 64
+          task: root
+ access object: table:SLOW_QUERY
+execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, parse_log: {time:4.11ms, concurrency:15}, total_file: 1, read_file: 1, read_size: 4.06 MB
+ operator info: only search in the current 'tidb-slow.log' file
+        memory: 1.26 MB
+          disk: N/A
+2 rows in set (0.01 sec)
+```
+
+The extra information here is this (formatted for readability):
+```
+initialize: 55.5µs,
+read_file: 1.21ms,
+parse_log: {
+  time:4.11ms,
+  concurrency:15
+},
+total_file: 1,
+read_file: 1,
+read_size: 4.06 MB
+```
+
+| Field | Description |
+|---|---|
+| `initialize` | Time it took to initialize |
+| `read_file` | Time spend reading file(s) |
+| `parse_log.time` | Time spend parsing the log |
+| `parse_log.concurrency` | Concurrency for parsing the log (set by [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) ) |
+| `total_file` | Number of files read |
+| `read_file` | Number of the file that was read |
+| `read_size` | Bytes read from the log files |
