@@ -154,13 +154,14 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
 ### Verify component caller's identity
 
-The Common Name is used for caller verification. In general, the callee needs to verify the caller's identity, in addition to verifying the key, the certificates, and the CA provided by the caller. For example, TiKV can only be accessed by TiDB, and other visitors are blocked even though they have legitimate certificates.
+In general, the callee needs to verify the caller's identity using `Common Name`, in addition to verifying the key, the certificates, and the CA provided by the caller. For example, TiKV can only be accessed by TiDB, and other visitors are blocked even though they have legitimate certificates.
 
-To verify component caller's identity, you need to mark the certificate user identity using `Common Name` when generating the certificate, and to check the caller's identity by configuring the `Common Name` list for the callee.
+To verify the caller's identity for a component, you need to mark the certificate user identity using `Common Name` when generating the certificate, and check the caller's identity by configuring `cluster-verify-cn` (in TiDB) or `cert-allowed-cn` (in other components) for the callee.
 
 > **Note:**
 >
-> Currently the `cert-allowed-cn` configuration item of the PD can only be set to one value. Therefore, the `commonName` of all authentication objects must be set to the same value.
+> - Starting from v8.4.0, the PD configuration item `cert-allowed-cn` supports multiple values. You can configure multiple `Common Name` in the `cluster-verify-cn` configuration item for TiDB and in the `cert-allowed-cn` configuration item for other components as needed. Note that TiUP uses a separate identifier when querying component status. For example, if the cluster name is `test`, TiUP uses `test-client` as the `Common Name`.
+> - For v8.3.0 and earlier versions, the PD configuration item `cert-allowed-cn` can only be set to a single value. Therefore, the `Common Name` of all authentication objects must be set to the same value. For related configuration examples, see [v8.3.0 documentation](https://docs.pingcap.com/tidb/v8.3/enable-tls-between-components).
 
 - TiDB
 
@@ -168,7 +169,7 @@ To verify component caller's identity, you need to mark the certificate user ide
 
     ```toml
     [security]
-    cluster-verify-cn = ["TiDB"]
+    cluster-verify-cn = ["tidb", "test-client", "prometheus"]
     ```
 
 - TiKV
@@ -177,7 +178,7 @@ To verify component caller's identity, you need to mark the certificate user ide
 
     ```toml
     [security]
-    cert-allowed-cn = ["TiDB"]
+    cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "prometheus"]
     ```
 
 - PD
@@ -186,7 +187,7 @@ To verify component caller's identity, you need to mark the certificate user ide
 
     ```toml
     [security]
-    cert-allowed-cn = ["TiDB"]
+    cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "test-client", "prometheus"]
     ```
 
 - TiFlash (New in v4.0.5)
@@ -195,14 +196,14 @@ To verify component caller's identity, you need to mark the certificate user ide
 
     ```toml
     [security]
-    cert_allowed_cn = ["TiDB"]
+    cert_allowed_cn = ["tidb", "tikv", "prometheus"]
     ```
 
     Configure in the `tiflash-learner.toml` file:
 
     ```toml
     [security]
-    cert-allowed-cn = ["TiDB"]
+    cert-allowed-cn = ["tidb", "tikv", "tiflash", "prometheus"]
     ```
 
 ## Reload certificates
