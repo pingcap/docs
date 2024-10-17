@@ -82,7 +82,6 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
 ### Step 3. Configure environment variables
 
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
