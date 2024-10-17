@@ -5817,7 +5817,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Enumeration
 - Default value: `DEFAULT`
 - Value options: `DEFAULT`, `PARALLEL`, `PARALLEL-FAST`
-- This variable switches the mode in which TiDB sends TSO RPC requests to PD. The mode determines whether TSO RPC requests can be processed in parallel and affects the time spent on batch-waiting for each TS retrieval operation, thereby helping reduce the wait time for retrieving TS during the execution of queries in certain scenarios.
+- This variable switches the mode in which TiDB sends TSO RPC requests to PD. The mode determines whether TSO RPC requests are processed in parallel and affects the time spent on batch-waiting for each TS retrieval operation, thereby helping reduce the wait time for retrieving TS during query execution in certain scenarios.
 
     - `DEFAULT`: TiDB collects TS retrieval operations during a specific period into a single TSO RPC request and sends it to PD to get timestamps in a batch. Therefore, the duration of each TS retrieval operation consists of the time spent waiting to be batched and the time spent performing the RPC. In `DEFAULT` mode, different TSO RPC requests are performed serially, and the average duration of each TS retrieval operation is about 1.5 times the actual time cost of a TSO RPC request.
     - `PARALLEL`: In this mode, TiDB attempts to reduce the duration for collecting each batch to 1/2 of that in `DEFAULT` mode and tries to keep two TSO RPC requests running simultaneously. In this way, the average duration of each TS retrieval operation can theoretically be reduced to about 1.25 times the TSO RPC duration, which is about 83% of the time cost in `DEFAULT` mode. However, the effect of batching will be reduced, and the number of TSO RPC requests will increase to roughly double that in `DEFAULT` mode.
@@ -5831,7 +5831,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     - The network latency between TiDB and PD is significantly higher than the time PD takes to allocate TSO (that is, network latency accounts for the majority of TSO RPC duration).
         - To get the duration of TSO RPC requests, check the **PD TSO RPC Duration** panel in the PD Client section of the Grafana TiDB dashboard.
         - To get the duration of PD TSO allocation, check the **PD server TSO handle duration** panel in the TiDB section of the Grafana PD dashboard.
-    - The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for `PARALLEL` or 4 times for `PARALLEL-FAST`) is acceptable.
+    - The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for `PARALLEL` or four times for `PARALLEL-FAST`) is acceptable.
 
 > **Note:**
 >
