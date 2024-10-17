@@ -28,7 +28,21 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 ### Network
 
-Make sure that your TiDB cluster can connect to the Apache Kafka service.
+Make sure that your TiDB cluster can connect to the Apache Kafka service. There are 3 kinds of network connection methods can be used to connect to Kafka.
+1. Private Connect
+2. VPC Peering
+3. Public IP
+
+If you want a quick try, you can choose **Public IP**. If you want cost-effective, you can choose **VPC Peering**, trade off VPC CIDR conflict and security. If you want to get rid of VPC CIDR conflict and satisfy security compliance, **Private Connect** is the choice, but it will introduce extra [Private Data Link Cost](/tidbcloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)
+
+#### Private Connect
+Private Connect leverages Private Link or Private Service Connect technologies which provided by cloud vendors, that allow the resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly in your VPC. 
+
+Currently, we only support Private Connect to self-hosted Kafka.
+1. If your Apache Kafka service already or will be setup in AWS, please follow [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to make sure the network connection is set up properly.
+2. If your Apache Kafka service already or will be setup in GCP, please follow [Setup Self Hosted Kafka Private Service Connect in GCP](/tidb-cloud/setup-self-hosted-kafka-psc.md) to make sure the network connection is set up properly.
+
+#### VPC Peering
 
 If your Apache Kafka service is in an AWS VPC that has no internet access, take the following steps:
 
@@ -39,7 +53,7 @@ If your Apache Kafka service is in an AWS VPC that has no internet access, take 
 
 3. If the Apache Kafka URL contains hostnames, you need to allow TiDB Cloud to be able to resolve the DNS hostnames of the Apache Kafka brokers.
 
-    1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
+    1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-dns.html).
     2. Enable the **Accepter DNS resolution** option.
 
 If your Apache Kafka service is in a Google Cloud VPC that has no internet access, take the following steps:
@@ -48,6 +62,10 @@ If your Apache Kafka service is in a Google Cloud VPC that has no internet acces
 2. Modify the ingress firewall rules of the VPC where Apache Kafka is located.
 
     You must add the CIDR of the region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
+
+#### Public IP
+
+If you want to provide Public IP access to your Apache Kafka service, you need to assign Public IPs to all you Kafka brokers. It is not recommend to use Public IP in production environment for security consideration. 
 
 ### Kafka ACL authorization
 
@@ -65,14 +83,28 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 ## Step 2. Configure the changefeed target
 
-1. Under **Brokers Configuration**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
-2. Select an authentication option according to your Kafka authentication configuration.
-
+TODO:
+1. For **Kafka Provider**, we only provide **Self-hosted Kafka** option, we will support more later. 
+> **Note:**
+> Currently, we treat all the Apache Kafka Services as self-hosted since we didn't make any special integration to different Kafka Providers, such as Amazon MSK, Confluent ... It doesn't mean that we can not connect to Amazon MSK or Confluent Kafka. If the Kafka Provider can provide standard network connection methods, just like VPC Peering, Public IP, Private Link and Private Service Connect, we definitely can connect to them. You may have question "Can you connect to Amazon MSK by multi VPC which is powered by Private Link technology?" Sorry, we haven't supported it yet since it's not a standard Private Link, but may be later.
+2. Select **Connectivity Method** by your Apache Kafka Service setup.
+   1. If you select **VPC Peering** or **Public IP**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
+   2. If you select **Private Link**
+      1. Make sure you select the same **Kafka Type**, **Suggested Kafka Endpoint Service AZ** and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in **Network** section.
+      2. Double-check the **Kafka Advertised Listener Pattern** by clicking the button **Check usage and generate**, which will show message to help you validate the unique ID.
+      3. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md)
+      4. Fill the **Boostrap Ports**, suggest at least one port for one AZ. You can use commas `,` to separate multiple ports.
+   3. If you select **Private Service Connect**
+      1. Make sure you fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Service Connect in GCP](/tidb-cloud/setup-self-hosted-kafka-psc.md) in **Network** section.
+      2. Double-check the **Kafka Advertised Listener Pattern** by clicking the button **Check usage and generate**, which will show message to help you validate the unique ID.
+      3. Fill the **Service Attachment** which is configured in [Setup Self Hosted Kafka Private Service Connect in GCP](/tidb-cloud/setup-self-hosted-kafka-psc.md)
+      4. Fill the **Boostrap Ports**, suggest provide more than one ports. You can use commas `,` to separate multiple ports.
+2. Select an **Authentication** option according to your Kafka authentication configuration.
     - If your Kafka does not require authentication, keep the default option **Disable**.
-    - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the user name and password of your Kafka account for authentication.
+    - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
 
-3. Select your Kafka version. If you do not know that, use Kafka V2.
-4. Select a desired compression type for the data in this changefeed.
+3. Select your **Kafka Version**. If you do not know that, use Kafka V2.
+4. Select a desired **Compression** type for the data in this changefeed.
 5. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 6. Click **Next** to check the configurations you set and go to the next page.
 
