@@ -499,3 +499,7 @@ Also replace the old CA certificate with the combined certificate so that the cl
     ```
 
 3. Configure the TiDB server to use the new server key and certificate. See [Configure TiDB server](#configure-tidb-and-the-client-to-use-certificates) for details.
+
+## Policy-based access control for certificates
+
+TiDB supports policy-based access control (PBAC) for certificates, leveraging policies defined by the underlying key management server. This enables fine-grained control over access based on various criteria, such as time-based policies (for example, certificates only valid during specific hours), location-based policies (for example, restricting access to certain geographic locations), and other customizable conditions, ensuring enhanced security and flexibility in certificate management.
