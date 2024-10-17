@@ -106,9 +106,7 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-To use the vector index with filters, consider the following workarounds:
-
-**Post-filter after vector search:** Query for the K-Nearest neighbors first, then filter out unwanted results:
+To use the vector index with filters, query for the K-Nearest neighbors first using vector search, and then filter out unwanted results:
 
 ```sql
 -- For the following query, the `WHERE` filter is performed after KNN, so the vector index cannot be used:
@@ -123,42 +121,6 @@ WHERE category = "document";
 
 -- Note that this query might return fewer than 5 results if some are filtered out.
 ```
-
-**Use table partitioning**: Queries within a table [partition](/partitioned-table.md) can fully utilize the vector index. This can be useful if you want to perform equality filters, as equality filters can be turned into accessing specified partitions.
-
-For example, suppose you want to find the closest documentation for a specific product version:
-
-```sql
--- For the following query, the `WHERE` filter is performed before KNN, so the vector index cannot be used:
-SELECT * FROM docs
-WHERE ver = "v2.0"
-ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
-LIMIT 5;
-```
-
-Instead of writing a query using the `WHERE` clause, you can partition the table and then query within the partition using the [`PARTITION` keyword](/partitioned-table.md#partition-selection):
-
-```sql
-CREATE TABLE docs (
-    id INT,
-    ver VARCHAR(10),
-    doc TEXT,
-    embedding VECTOR(3),
-    VECTOR INDEX idx_embedding USING HNSW ((VEC_COSINE_DISTANCE(embedding)))
-) PARTITION BY LIST COLUMNS (ver) (
-    PARTITION p_v1_0 VALUES IN ('v1.0'),
-    PARTITION p_v1_1 VALUES IN ('v1.1'),
-    PARTITION p_v1_2 VALUES IN ('v1.2'),
-    PARTITION p_v2_0 VALUES IN ('v2.0')
-);
-
-SELECT * FROM docs
-PARTITION (p_v2_0)
-ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
-LIMIT 5;
-```
-
-For more information, see [Table Partitioning](/partitioned-table.md).
 
 ## View index build progress
 
