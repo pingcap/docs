@@ -73,6 +73,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ANALYZE (R)
 - AND (R)
 - ANY
+- APPLY
 - ARRAY (R)
 - AS (R)
 - ASC (R)
@@ -541,6 +542,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - READ (R)
 - REAL (R)
 - REBUILD
+- RECOMMEND
 - RECOVER
 - RECURSIVE (R)
 - REDUNDANT
@@ -694,7 +696,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - THAN
 - THEN (R)
 - TIDB
-- TiDB_CURRENT_TSO (R)
+- TIDB_CURRENT_TSO (R)
 - TIFLASH
 - TIKV_IMPORTER
 - TIME
