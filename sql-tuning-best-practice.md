@@ -332,13 +332,17 @@ tidb:db1> EXPLAIN ANALYZE SELECT SUM(pm.m_count)/COUNT(*) FROM
 
 ### Reading Execution Plans: First Child First
 
-To understand why SQL queries run slowly, it's very important to know how to read Execution Plans. The main rule for reading an execution plan is "first child first – go down step by step".
+To understand why SQL queries run slowly, it's very important to know how to read Execution Plans. The main rule for reading an execution plan is "first child first – recursive descent".
 Each operator of the plan produces rows of data. When we talk about how a plan runs, we really mean the order in which each operator produces its rows. The "first child first" rule means that to produce its rows, each operator of the plan asks its child operators to produce their rows first. Then it combines these rows in some way. The order in which it asks its child parts is the same as the order they appear in the plan.
 
-There are two important details to add to this.
+There are three important details to add to this:
 
-First, although a parent operator will call its child operators in turn, the parent may cycle through the child operators multiple times. The obvious example of this is the index lookup or nested loop join, where the parent will fetch a row from its first child then fetch (zero or more) rows from its second child, then fetch the next row from its first child then call its second child again, and repeat until is has consumed the entire resultset from the first child.
-Secondly, an operator may be blocking or non-blocking. Some operators will have to create their entire resultset before they pass anything up to their parent (blocking), such as `TopN` and `HashAgg` ; some operations will create and pass their rowsource piece by piece on demand, such as `IndexLookup` and `IndexJoin`.
+1. Parent-Child Interaction: Although a parent operator calls its child operators in sequence, it may cycle through them multiple times. For example, in an index lookup or nested loop join, the parent fetches a batch of rows from the first child, then (zero or more) rows from the second child, repeating this process until it consumes the entire result set from the first child.
+
+2. Blocking vs. Non-blocking Operators: Operators can be either blocking or non-blocking. Blocking operators, such as `TopN` and `HashAgg`, must create their entire result set before passing anything to their parent. Non-blocking operators, like `IndexLookup` and `IndexJoin`, create and pass their row source piece by piece on demand.
+
+3. Concurrent vs. Serial Execution: Child operators can be executed concurrently or serially. For instance, the child operators of an `IndexLookup` operator are executed serially, while those of a `HashJoin` operator can be executed concurrently.
+
 
 
 Let's apply the "first child first – recursive descent" rule to the first plan. When reading an execution plan, you should start from the top and work your down bottom. In the below example begin by looking at the `TableFullScan_18` (or the first child of the tree). In this case the access operator for table trips are implemented using full table scan. The rows produced by the tables scans will be consumed by the `Selection_19` operator. The `Selection_19` operator is to filter the data by `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`. Next the group-by operator `StreamAgg_9` is to implemented the aggregation `count(*)`. Be noted that the 3 operators `TableFullScan_18`, `Selection_19`, `StreamAgg_9` are pushdown to TiKV, which is marked as `cop[tikv]`, so that early filter and aggregation can be done in TiKV, to minize the data transfer between TiKV and TiDB. Finally the `TableReader_21` is to read the data from the `StreamAgg_9` operator, then finally the `StreamAgg_20` is to implemented the aggregation `count(*)`.
@@ -358,48 +362,125 @@ tidb> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00
 +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
 5 rows in set (0.00 sec)
 ```
+Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first child of the tree). For the table `stars`, the optimizer ony need to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`.
+The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` is to implemented the two order by and limit corespondingly. The final operator `Projection_16` is to implemented the column projection for `t5.name`.
 
-Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin by looking at the `IndexRangeScan_38` (the first child of the tree). For the table `planet_categories`, the optimizer ony need to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `planet_categories`, the root reader is `IndexReader_39`, rather than a `TableReader`.
-The join method between `planet_categories` and `planets` is a hash join, which is marked as `HashJoin_35`. The data access method on `planets` is a `TableFullScan_36`. The join method between `HashJoin_35` and table `moons` is a `HashJoin_19`. The data access method on `moons` is a `TableFullScan_21`. After the join, the `HashAgg_17` is to implemented the aggregation `SUM(pm.m_count)/COUNT(*)`.
+
+```SQL
+tidb> EXPLAIN SELECT t5.name FROM
+    -> (SELECT p.name, p.gravity, p.distance_from_sun FROM universe.planets p JOIN universe.stars s
+    ->  ON s.id = p.sun_id AND s.name = 'Sun'
+    ->  ORDER BY p.distance_from_sun ASC LIMIT 5) t5
+    -> ORDER BY t5.gravity DESC LIMIT 3;
++-----------------------------------+----------+-----------+---------------------------+
+| id                                | estRows  | task      | access object             |
++-----------------------------------+----------+-----------+---------------------------+
+| Projection_16                     | 3.00     | root      |                           |
+| └─TopN_19                         | 3.00     | root      |                           |
+|   └─TopN_26                       | 5.00     | root      |                           |
+|     └─HashJoin_44                 | 5.00     | root      |                           |
+|       ├─IndexReader_48(Build)     | 1.00     | root      |                           |
+|       │ └─IndexRangeScan_47       | 1.00     | cop[tikv] | table:s, index:name(name) |
+|       └─TableReader_46(Probe)     | 10.00    | root      |                           |
+|         └─TableFullScan_45        | 10.00    | cop[tikv] | table:p                   |
++-----------------------------------+----------+-----------+---------------------------+
+```
+
+Here is a figure illustrating the plan tree for the second execution plan:
+
+![execution-plan-traverse](/media/sql-tuning/execution-plan-traverse.png)
+
+The traversal of the execution plan follows a top-to-bottom, first-child-first approach. This traversal pattern corresponds to a postorder (Left, Right, Root) traversal of the plan tree.
+
+To read this plan:
+
+1. Start at the top with Projection_16
+2. Move to its child, TopN_19
+3. Continue to TopN_26
+4. Proceed to HashJoin_44
+5. For HashJoin_44, first process its left (Build) child:
+   - IndexReader_48
+   - IndexRangeScan_47
+6. Then process its right (Probe) child:
+   - TableReader_46
+   - TableFullScan_45
+
+This traversal ensures that each operator's inputs are processed before the operator itself, allowing for efficient execution of the query plan.
+
+### Identifying and Understanding Bottlenecks in Execution Plans
 
 When reading the execution plan, it's crucial to compare the `actRows` (actual rows) with the `estRows` (estimated rows) to assess the accuracy of the optimizer's estimations. A significant discrepancy between these values may indicate that the optimizer's statistics are outdated or inaccurate, potentially leading to suboptimal query plans.
 
 To identify the bottleneck in a poorly performing query:
 
 1. Scan the `execution info` section from top to bottom, looking for operators that consume a significant amount of time.
-2. For the first operator with significant time consumption, analyze the following:
+2. For the first child operator with significant time consumption, analyze the following:
    - `actRows`: Compare with `estRows` to check for estimation accuracy.
    - Detailed measurements in `execution info`: Look for high values in time, loops, or other metrics.
    - `memory` and `disk` usage: High values may indicate suboptimal plan or resource constraints.
 3. Correlate these factors to determine the root cause of the performance issue. For example, if you see a `TableFullScan` operation with a high `actRows` count and significant time in `execution info`, it might suggest the need for an index. Alternatively, if a `HashJoin` operation shows high memory usage and time, you might need to optimize the join or consider alternative join methods.
 
+In the execution plan below, the query ran for 5 minutes and 51 seconds before being canceled. Let's analyze the key issues:
+
+1. Severe underestimation: The first child operator `IndexReader_76` reads data from the index `index_cargos_on_refund_id(refund_id)`. The actual number of rows (`actRows`) is 256,811,189, which is drastically higher than the estimated 1 row (`estRows`).
+
+2. Memory overflow: Due to this underestimation, the hash join operator `HashJoin_69` attempts to build a hash table with far more data than anticipated. This results in excessive memory usage (22.6GB) and disk usage (7.65GB).
+
+3. Query termination: The `actRows` is 0 for `HashJoin_69` and subsequent operators, indicating that the hash join consumed too much memory, likely causing the query to be terminated by memory control mechanisms.
+
+4. Incorrect join order: The root cause of this inefficient plan is the severe underestimation of `estRows` for `IndexRangeScan_75`, which led to an incorrect join order decision by the optimizer.
+
+To address these issues, need to ensure that table statistics are up-to-date, especially for the `cargos` table and the `index_cargos_on_refund_id` index.
+
 ```SQL
-tidb:db1> EXPLAIN ANALYZE SELECT SUM(pm.m_count)/COUNT(*) FROM
-    -> (SELECT COUNT(m.name) m_count
-    ->  FROM universe.moons m
-    ->  RIGHT JOIN
-    ->  (SELECT p.id, p.name
-    ->   FROM universe.planet_categories c
-    ->   JOIN universe.planets p
-    ->   ON c.id = p.category_id AND c.name = 'Jovian') pc
-    ->  ON m.planet_id = pc.id
-    ->  GROUP BY pc.name) pm;
-+-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
-| id                                      |.| actRows | task      | access object             | execution info                                                 |.| memory    | disk    |
-+-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
-| Projection_14                           |.| 1       | root      |                           | time:1.39ms, loops:2, RU:1.561975, Concurrency:OFF             |.| 9.64 KB   | N/A     |
-| └─StreamAgg_16                          |.| 1       | root      |                           | time:1.39ms, loops:2                                           |.| 1.46 KB   | N/A     |
-|   └─Projection_40                       |.| 4       | root      |                           | time:1.38ms, loops:4, Concurrency:OFF                          |.| 8.24 KB   | N/A     |
-|     └─HashAgg_17                        |.| 4       | root      |                           | time:1.36ms, loops:4, partial_worker:{...}, final_worker:{...} |.| 82.1 KB   | N/A     |
-|       └─HashJoin_19                     |.| 25      | root      |                           | time:1.29ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 2.25 KB   | 0 Bytes |
-|         ├─HashJoin_35(Build)            |.| 4       | root      |                           | time:1.08ms, loops:2, build_hash_table:{...}, probe:{...}      |.| 25.7 KB   | 0 Bytes |
-|         │ ├─IndexReader_39(Build)       |.| 1       | root      |                           | time:888.5µs, loops:2, cop_task: {...}                         |.| 286 Bytes | N/A     |
-|         │ │ └─IndexRangeScan_38         |.| 1       | cop[tikv] | table:c, index:name(name) | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
-|         │ └─TableReader_37(Probe)       |.| 10      | root      |                           | time:543.7µs, loops:2, cop_task: {...}                         |.| 577 Bytes | N/A     |
-|         │   └─TableFullScan_36          |.| 10      | cop[tikv] | table:p                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
-|         └─TableReader_22(Probe)         |.| 28      | root      |                           | time:671.7µs, loops:2, cop_task: {...}                         |.| 876 Bytes | N/A     |
-|           └─TableFullScan_21            |.| 28      | cop[tikv] | table:m                   | tikv_task:{time:0s, loops:1}, scan_detail: {...}               |.| N/A       | N/A     |
-+-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
+| id                                 | estRows   | estCost      | actRows   | task      | access object                                                                          | execution info ...| memory   | disk     |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
+| TopN_19                            | 1.01      | 461374372.63 | 0         | root      |                                                                                        | time:5m51.1s, l...| 0 Bytes  | 0 Bytes  |
+| └─IndexJoin_32                     | 1.01      | 460915067.45 | 0         | root      |                                                                                        | time:5m51.1s, l...| 0 Bytes  | N/A      |
+|   ├─HashJoin_69(Build)             | 1.01      | 460913065.41 | 0         | root      |                                                                                        | time:5m51.1s, l...| 21.6 GB  | 7.65 GB  |
+|   │ ├─IndexReader_76(Build)        | 1.00      | 18.80        | 256805045 | root      |                                                                                        | time:1m4.1s, lo...| 12.4 MB  | N/A      |
+|   │ │ └─IndexRangeScan_75          | 1.00      | 186.74       | 256811189 | cop[tikv] | table:cargos, index:index_cargos_on_refund_id(refund_id)                               | tikv_task:{proc...| N/A      | N/A      |
+|   │ └─Projection_74(Probe)         | 30652.93  | 460299612.60 | 1024      | root      |                                                                                        | time:1.08s, loo...| 413.4 KB | N/A      |
+|   │   └─IndexLookUp_73             | 30652.93  | 460287375.95 | 6144      | root      | partition:all                                                                          | time:1.08s, loo...| 107.8 MB | N/A      |
+|   │     ├─IndexRangeScan_70(Build) | 234759.64 | 53362737.50  | 390699    | cop[tikv] | table:rates, index:index_rates_on_label_id(label_id)                                   | time:29.6ms, lo...| N/A      | N/A      |
+|   │     └─Selection_72(Probe)      | 30652.93  | 110373973.91 | 187070    | cop[tikv] |                                                                                        | time:36.8s, loo...| N/A      | N/A      |
+|   │       └─TableRowIDScan_71      | 234759.64 | 86944962.10  | 390699    | cop[tikv] | table:rates                                                                            | tikv_task:{proc...| N/A      | N/A      |
+|   └─TableReader_28(Probe)          | 0.00      | 43.64        | 0         | root      |                                                                                        |                ...| N/A      | N/A      |
+|     └─Selection_27                 | 0.00      | 653.96       | 0         | cop[tikv] |                                                                                        |                ...| N/A      | N/A      |
+|       └─TableRangeScan_26          | 1.01      | 454.36       | 0         | cop[tikv] | table:labels                                                                           |                ...| N/A      | N/A      |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
+```
+
+Here is the expected execution plan after fixing the incorrect estimation on the `cargos` table. The query now takes 1.96 seconds to run, which is a significant improvement from the previous 5 minutes and 51 seconds:
+
+1. Accurate estimation: The `estRows` values are now much closer to the `actRows`, indicating that the statistics have been updated and are more accurate.
+2. Efficient join order: The query now starts with a `TableReader` on the `labels` table, followed by an `IndexJoin` with the `rates` table, and finally another `IndexJoin` with the `cargos` table. This join order is more efficient given the actual data distribution.
+3. No memory overflow: Unlike the previous plan, there are no signs of excessive memory or disk usage, indicating that the query executes within expected resource limits.
+4. Complete execution: All operators show non-zero `actRows`, confirming that the query completes successfully without being terminated due to resource constraints.
+
+This optimized plan demonstrates the importance of accurate statistics and proper join order in query performance. The dramatic reduction in execution time (from 351 seconds to 1.96 seconds) highlights the potential impact of addressing estimation errors and choosing appropriate execution strategies.
+
+```SQL
++---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
+| id                                    | estRows  | actRows | task      | access object                                                                          | execution info...| memory   | disk |
++---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
+| Limit_24                              | 1000.00  | 1000    | root      |                                                                                        | time:1.96s, lo...| N/A      | N/A  |
+| └─IndexJoin_88                        | 1000.00  | 1000    | root      |                                                                                        | time:1.96s, lo...| 1.32 MB  | N/A  |
+|   ├─IndexJoin_99(Build)               | 1000.00  | 2458    | root      |                                                                                        | time:1.96s, lo...| 77.7 MB  | N/A  |
+|   │ ├─TableReader_109(Build)          | 6505.62  | 158728  | root      |                                                                                        | time:1.26s, lo...| 297.0 MB | N/A  |
+|   │ │ └─Selection_108                 | 6505.62  | 171583  | cop[tikv] |                                                                                        | tikv_task:{pro...| N/A      | N/A  |
+|   │ │   └─TableRangeScan_107          | 80396.43 | 179616  | cop[tikv] | table:labels                                                                           | tikv_task:{pro...| N/A      | N/A  |
+|   │ └─Projection_98(Probe)            | 1000.00  | 2458    | root      |                                                                                        | time:2.13s, lo...| 59.2 KB  | N/A  |
+|   │   └─IndexLookUp_97                | 1000.00  | 2458    | root      | partition:all                                                                          | time:2.13s, lo...| 1.20 MB  | N/A  |
+|   │     ├─Selection_95(Build)         | 6517.14  | 6481    | cop[tikv] |                                                                                        | time:798.6ms, ...| N/A      | N/A  |
+|   │     │ └─IndexRangeScan_93         | 6517.14  | 6481    | cop[tikv] | table:rates, index:index_rates_on_label_id(label_id)                                   | tikv_task:{pro...| N/A      | N/A  |
+|   │     └─Selection_96(Probe)         | 1000.00  | 2458    | cop[tikv] |                                                                                        | time:444.4ms, ...| N/A      | N/A  |
+|   │       └─TableRowIDScan_94         | 6517.14  | 6481    | cop[tikv] | table:rates                                                                            | tikv_task:{pro...| N/A      | N/A  |
+|   └─TableReader_84(Probe)             | 984.56   | 1998    | root      |                                                                                        | time:207.6ms, ...| N/A      | N/A  |
+|     └─Selection_83                    | 984.56   | 1998    | cop[tikv] |                                                                                        | tikv_task:{pro...| N/A      | N/A  |
+|       └─TableRangeScan_82             | 1000.00  | 2048    | cop[tikv] | table:cargos                                                                           | tikv_task:{pro...| N/A      | N/A  |
++---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
 ```
 
 # 4. Real-World Use Cases
