@@ -1986,6 +1986,15 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Possible values: `OFF`, `ON`
 - This variable controls whether the corresponding TiDB instance can become a DDL owner or not. If there is only one TiDB instance in the current TiDB cluster, you cannot prevent it from becoming a DDL owner, which means you cannot set it to `OFF`.
 
+### tidb_enable_stats_owner <span class="version-mark">New in v8.4.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `ON`
+- Possible values: `OFF`, `ON`
+- This variable controls whether the corresponding TiDB instance is able to run [automatic update of optimizer statistics](/statistics.md#automatic-update). If there is only one TiDB instance in the current TiDB cluster, you cannot prevent it from running automatic update of optimizer statistics , which means you cannot set it to `OFF`.
+
 ### tidb_enable_collect_execution_info
 
 > **Note:**
