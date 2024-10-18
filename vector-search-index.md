@@ -37,7 +37,7 @@ Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https:/
 
 ## Create the HNSW vector index
 
-[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy (> 98% in typical cases).
+[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy, up to 98% in specific cases.
 
 In TiDB, you can create an HNSW index for a column with a [vector data type](/vector-search-data-types.md) in either of the following ways:
 
@@ -74,7 +74,7 @@ When creating an HNSW vector index, you need to specify the distance function fo
 - Cosine Distance: `((VEC_COSINE_DISTANCE(embedding)))`
 - L2 Distance: `((VEC_L2_DISTANCE(embedding)))`
 
-The vector index can only be created for fixed-dimensional vector columns, such as a column defined as `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns (such as a column defined as `VECTOR`) because vector distances can only be calculated between vectors with the same dimensions.
+The vector index can only be created for fixed-dimensional vector columns, such as a column defined as `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns (such as a column defined as `VECTOR`) because vector distances can only be calculated between vectors with the same dimension.
 
 For restrictions and limitations of vector search indexes, see [Restrictions](#restrictions).
 
@@ -89,7 +89,6 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3, 4, 5]')
 LIMIT 10
 ```
 
-You must use the same distance metric as you have defined when creating the vector index if you want to utilize the index in vector search.
 
 To use an index in a vector search, make sure that the `ORDER BY ... LIMIT` clause uses the same distance function as the one specified when creating the vector index.
 
@@ -250,11 +249,11 @@ LIMIT 10;
 
 Explanation of some important fields:
 
-- `vector_index.load.total`: The total duration of loading index. This field could be larger than actual query time because multiple vector indexes may be loaded in parallel.
+- `vector_index.load.total`: The total duration of loading index. This field might be larger than the actual query time because multiple vector indexes might be loaded in parallel.
 - `vector_index.load.from_s3`: Number of indexes loaded from S3.
 - `vector_index.load.from_disk`: Number of indexes loaded from disk. The index was already downloaded from S3 previously.
 - `vector_index.load.from_cache`: Number of indexes loaded from cache. The index was already downloaded from S3 previously.
-- `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there are heavy I/O operations when searching through the index. This field could be larger than actual query time because multiple vector indexes might be searched in parallel.
+- `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there are heavy I/O operations when searching through the index. This field might be larger than the actual query time because multiple vector indexes might be searched in parallel.
 - `vector_index.search.discarded_nodes`: Number of vector rows visited but discarded during the search. These discarded vectors are not considered in the search result. Large values usually indicate that there are many stale rows caused by `UPDATE` or `DELETE` statements.
 
 See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md), and [EXPLAIN Walkthrough](/explain-walkthrough.md) for interpreting the output.

@@ -96,7 +96,7 @@
       - ORM Libraries
         - [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
         - [peewee](/vector-search-integrate-with-peewee.md)
-        - [Django ORM](/vector-search-integrate-with-django-orm.md)
+        - [Django](/vector-search-integrate-with-django-orm.md)
     - [Improve Performance](/vector-search-improve-performance.md)
     - [Limitations](/vector-search-limitations.md)
   - Transaction
