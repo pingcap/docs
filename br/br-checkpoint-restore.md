@@ -13,9 +13,9 @@ Starting from TiDB v7.1.0, Backup & Restore (BR) introduces the checkpoint resto
 
 If your TiDB cluster is large and cannot afford to restore again after a failure, you can use the checkpoint restore feature. The br command-line tool (hereinafter referred to as `br`) periodically records the shards that have been restored. In this way, the next restore retry can use a recovery progress point close to the abnormal exit.
 
-## Implementation details
+## Implementation principles
 
-The implementation of checkpoint restore is divided into two parts: snapshot restore and log restore.
+The implementation of checkpoint restore is divided into two parts: snapshot restore and log restore. For more information, see [Implementation details](#implementation-details).
 
 ### Snapshot restore
 
@@ -60,3 +60,25 @@ When `br` retries a restore, some data that has been restored might need to be r
 ### Avoid modifying cluster data during the restore
 
 After a restore failure, avoid writing, deleting, or creating tables in the cluster. This is because the backup data might contain DDL operations for renaming tables. If you modify the cluster data, the checkpoint restore cannot decide whether the deleted or existing table are resulted from external operations, which affects the accuracy of the next restore retry.
+
+## Implementation details
+
+Checkpoint restore operations are divided into two parts: snapshot restore and PITR restore.
+
+### Snapshot restore
+
+During the initial restore, `br` creates a `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` database in the target cluster. This database records checkpoint data, the upstream cluster ID, and the BackupTS of the backup data.
+
+If the restore fails, you can retry it using the same command, and `br` will automatically read the checkpoint information from the `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` database and resume from the last restore point.
+
+If the restore fails and you try to restore backup data with different checkpoint information to the same cluster, `br` reports an error. It indicates that the current upstream cluster ID or BackupTS is different from the checkpoint record. If the restore cluster has been cleaned, you can manually delete the `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` database and retry with a different backup.
+
+### PITR restore
+
+[PITR (Point-in-time recovery)](/br/br-pitr-guide.md) consists of snapshot restore and log restore phases.
+
+During the initial restore, `br` first enters the snapshot restore phase. This phase follows the same process as the preceding [snapshot restore](#snapshot-restore-1): BR records the checkpoint data, the upstream cluster ID, and BackupTS of the backup data (that is, the start time point `start-ts` of log restore) in the `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` database. If restore fails during this phase, you cannot adjust the `start-ts` of log restore when resuming checkpoint restore.
+
+When entering the log restore phase during the initial restore, `br` creates a `__TiDB_BR_Temporary_Log_Restore_Checkpoint` database in the target cluster. This database records checkpoint data, the upstream cluster ID, and the restore time range (`start-ts` and `restored-ts`). If restore fails during this phase, you need to specify the same `start-ts` and `restored-ts` as recorded in the checkpoint database when retrying. Otherwise, `br` will report an error and prompt that the current specified restore time range or upstream cluster ID is different from the checkpoint record. If the restore cluster has been cleaned, you can manually delete the `__TiDB_BR_Temporary_Log_Restore_Checkpoint` database and retry with a different backup.
+
+Before entering the log restore phase during the initial restore, `br` constructs a mapping of upstream and downstream cluster database and table IDs at the `restored-ts` time point. This mapping is persisted in the system table `mysql.tidb_pitr_id_map` to prevent duplicate allocation of database and table IDs. Deleting data from `mysql.tidb_pitr_id_map` might lead to inconsistent PITR restore data.
