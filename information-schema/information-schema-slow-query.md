@@ -298,6 +298,7 @@ execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, pa
 ```
 
 In the output, check the following fields (formatted for readability) in the `execution info` section:
+
 ```
 initialize: 55.5µs,
 read_file: 1.21ms,
