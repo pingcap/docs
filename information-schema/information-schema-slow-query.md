@@ -270,7 +270,7 @@ By running an [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.
 Example:
 
 ```sql
-EXPLAIN ANALYZE SELECT * FROM information_schema.slow_query LIMIT 1\G
+EXPLAIN ANALYZE SELECT * FROM INFORMATION_SCHEMA.SLOW_QUERY LIMIT 1\G
 ```
 
 ```
