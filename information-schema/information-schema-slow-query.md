@@ -263,7 +263,7 @@ Currently, because statistics of the system tables are not collected, sometimes 
 SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 ```
 
-# Statistics
+# View execution information
 
 By running an [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) query on the `SLOW_QUERY` table, you can get detailed information about how the database fetches the slow query information. However, this information is **not** available when you run `EXPLAIN ANALYZE` on the `CLUSTER_SLOW_QUERY` table.
 
