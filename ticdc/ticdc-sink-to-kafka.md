@@ -80,7 +80,7 @@ The following are descriptions of sink URI parameters and values that can be con
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default). This value must be greater than or equal to the value of [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) in Kafka. |
 | `required-acks` | A parameter used in the `Produce` request, which notifies the broker of the number of replica acknowledgements it needs to receive before responding. Value options are `0` (`NoResponse`: no response, only `TCP ACK` is provided), `1` (`WaitForLocal`: responds only after local commits are submitted successfully), and `-1` (`WaitForAll`: responds after all replicated replicas are committed successfully. You can configure the minimum number of replicated replicas using the [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) configuration item of the broker). (Optional, the default value is `-1`).    |
 | `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.|
-| `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `avro`, `debezium`, and `simple`.   |
+| `protocol` | The protocol with which messages are output to Kafka. The value options are [`canal-json`](/ticdc/ticdc-canal-json.md)、[`open-protocol`](/ticdc/ticdc-open-protocol.md)、[`avro`](/ticdc/ticdc-avro-protocol.md)、[`debezium`](/ticdc/ticdc-debezium.md) and [`simple`](/ticdc/ticdc-simple-protocol.md).   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
 | `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Kafka messages. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol` (optional, `16` by default). |
@@ -114,7 +114,13 @@ The following are descriptions of sink URI parameters and values that can be con
 
 > **Note:**
 >
-> When `protocol` is `open-protocol`, TiCDC tries to avoid generating messages that exceed `max-message-bytes` in length. However, if a row is so large that a single change alone exceeds `max-message-bytes` in length, to avoid silent failure, TiCDC tries to output this message and prints a warning in the log.
+> When `protocol` is `open-protocol`, TiCDC tries to batch multiple encoded messages into one Kafka message, avoid generating messages that exceed `max-message-bytes` in length. 
+> If the encoding result of a single row changed event is larger than the `max-message-bytes` in length, changefeed report error, and print logs.
+
+> **注意：**
+>
+> 当 `protocol` 为 `open-protocol` 时，TiCDC 会将多个事件编码到同一个 Kafka 消息中，此过程中尽量避免产生长度超过 `max-message-bytes` 的消息。
+> 如果单条数据变更编码得到的消息大小超过了 `max-message-bytes` 个字节，changefeed 会报错，打印错误日志。
 
 ### TiCDC uses the authentication and authorization of Kafka
 
@@ -161,7 +167,7 @@ The following are examples when using Kafka SASL authentication:
 
 ### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
-To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you need to use the `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `schema-registry`.
+To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you need to use the [`avro` protocol](/ticdc/ticdc-avro-protocol.md) and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `schema-registry`.
 
 Sample configuration:
 
@@ -180,7 +186,7 @@ For detailed integration guide, see [Quick Start Guide on Integrating TiDB with 
 
 ### Integrate TiCDC with AWS Glue Schema Registry
 
-Starting from v7.4.0, TiCDC supports using the [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html) as the Schema Registry when users choose the Avro protocol for data replication. The configuration example is as follows:
+Starting from v7.4.0, TiCDC supports using the [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html) as the Schema Registry when users choose the [Avro protocol](/ticdc/ticdc-avro-protocol.md) for data replication. The configuration example is as follows:
 
 ```shell
 ./cdc cli changefeed create --server=127.0.0.1:8300 --changefeed-id="kafka-glue-test" --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --config changefeed_glue.toml
