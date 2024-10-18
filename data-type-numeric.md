@@ -14,6 +14,10 @@ TiDB supports all the MySQL numeric types, including:
 
 ## Integer types
 
+> **Warning:**
+>
+> Note that specifying an integer display width is not recommended.
+
 TiDB supports all the MySQL integer types, including `INTEGER`/`INT`, `TINYINT`, `SMALLINT`, `MEDIUMINT`, and `BIGINT`. For more information, see [Integer Data Type Syntax in MySQL](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html).
 
 The following table summarizes field descriptions:
