@@ -7,9 +7,17 @@ summary: An overview of TiDB vector search integration, including supported AI f
 
 This document provides an overview of TiDB vector search integration, including supported AI frameworks, embedding models, and Object Relational Mapping (ORM) libraries.
 
-> **Note**
+<CustomContent platform="tidb">
+
+> **Warning:**
 >
-> TiDB Vector Search is currently in beta and is only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+</CustomContent>
+
+> **Note:**
+>
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## AI frameworks
 
@@ -17,14 +25,14 @@ TiDB provides official support for the following AI frameworks, enabling you to 
 
 | AI frameworks | Tutorial                                                                                          |
 |---------------|---------------------------------------------------------------------------------------------------|
-| Langchain     | [Integrate Vector Search with LangChain](/tidb-cloud/vector-search-integrate-with-langchain.md)   |
-| LlamaIndex    | [Integrate Vector Search with LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md) |
+| Langchain     | [Integrate Vector Search with LangChain](/vector-search-integrate-with-langchain.md)   |
+| LlamaIndex    | [Integrate Vector Search with LlamaIndex](/vector-search-integrate-with-llamaindex.md) |
 
 Moreover, you can also use TiDB for various purposes, such as document storage and knowledge graph storage for AI applications.
 
 ## Embedding models and services
 
-TiDB Vector Search supports storing vectors of up to 16,000 dimensions, which accommodates most embedding models.
+TiDB Vector Search supports storing vectors of up to 16383 dimensions, which accommodates most embedding models.
 
 You can either use self-deployed open-source embedding models or third-party embedding APIs provided by third-party embedding providers to generate vectors.
 
@@ -32,7 +40,7 @@ The following table lists some mainstream embedding service providers and the co
 
 | Embedding service providers | Tutorial                                                                                                            |
 |-----------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Jina AI                     | [Integrate Vector Search with Jina AI Embeddings API](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md) |
+| Jina AI                     | [Integrate Vector Search with Jina AI Embeddings API](/vector-search-integrate-with-jinaai-embedding.md) |
 
 ## Object Relational Mapping (ORM) libraries
 

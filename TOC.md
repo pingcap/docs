@@ -81,6 +81,24 @@
       - [Follower Read](/develop/dev-guide-use-follower-read.md)
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
+  - Vector Search
+    - [Overview](/vector-search-overview.md)
+    - Get Started
+      - [Get Started with SQL](/vector-search-get-started-using-sql.md)
+      - [Get Started with Python](/vector-search-get-started-using-python.md)
+    - Integrations
+      - [Overview](/vector-search-integration-overview.md)
+      - AI Frameworks
+        - [LlamaIndex](/vector-search-integrate-with-llamaindex.md)
+        - [Langchain](/vector-search-integrate-with-langchain.md)
+      - Embedding Models/Services
+        - [Jina AI](/vector-search-integrate-with-jinaai-embedding.md)
+      - ORM Libraries
+        - [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
+        - [peewee](/vector-search-integrate-with-peewee.md)
+        - [Django](/vector-search-integrate-with-django-orm.md)
+    - [Improve Performance](/vector-search-improve-performance.md)
+    - [Limitations](/vector-search-limitations.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -871,6 +889,7 @@
       - [Date and Time Types](/data-type-date-and-time.md)
       - [String Types](/data-type-string.md)
       - [JSON Type](/data-type-json.md)
+      - [Vector Types](/vector-search-data-types.md)
     - Functions and Operators
       - [Overview](/functions-and-operators/functions-and-operators-overview.md)
       - [Type Conversion in Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md)
@@ -884,6 +903,7 @@
       - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
       - [Locking Functions](/functions-and-operators/locking-functions.md)
       - [Information Functions](/functions-and-operators/information-functions.md)
+      - [Vector Functions and Operators](/vector-search-functions-and-operators.md)
       - JSON Functions
         - [Overview](/functions-and-operators/json-functions.md)
         - [Functions That Create JSON](/functions-and-operators/json-functions/json-functions-create.md)
@@ -904,6 +924,7 @@
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
       - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
+    - [Vector Index](/vector-search-index.md)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)
     - [SQL Mode](/sql-mode.md)
