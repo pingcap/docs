@@ -237,26 +237,6 @@ class Document(Model):
     embedding = VectorField(3)
 ```
 
-#### Define a vector column optimized with index
-
-> **Note**
->
-> This section is only applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
-
-Define a 3-dimensional vector column and optimize it with a [vector search index](/vector-search-index.md) (HNSW index).
-
-```python
-class DocumentWithIndex(Model):
-    class Meta:
-        database = db
-        table_name = 'peewee_demo_documents_with_index'
-
-    content = TextField()
-    embedding = VectorField(3, constraints=[SQL("COMMENT 'hnsw(distance=cosine)'")])
-```
-
-TiDB will use this index to accelerate vector search queries based on the cosine distance function.
-
 ### Store documents with embeddings
 
 ```python

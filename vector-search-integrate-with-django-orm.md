@@ -239,26 +239,6 @@ class Document(models.Model):
    embedding = VectorField(dimensions=3)
 ```
 
-#### Define a vector column optimized with index
-
-> **Note**
->
-> This section is only applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
-
-Define a 3-dimensional vector column and optimize it with a [vector search index](/vector-search-index.md) (HNSW index).
-
-```python
-class DocumentWithIndex(models.Model):
-   content = models.TextField()
-   # Note:
-   #   - Using comment to add hnsw index is a temporary solution. In the future it will use `CREATE INDEX` syntax.
-   #   - Currently the HNSW index cannot be changed after the table has been created.
-   #   - Only Django >= 4.2 supports `db_comment`.
-   embedding = VectorField(dimensions=3, db_comment="hnsw(distance=cosine)")
-```
-
-TiDB will use this index to speed up vector search queries based on the cosine distance function.
-
 ### Store documents with embeddings
 
 ```python
