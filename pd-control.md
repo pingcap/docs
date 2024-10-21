@@ -471,6 +471,20 @@ Success!
 ......
 ```
 
+Specify the priority of PD leader:
+
+```bash
+member leader_priority  pd-1 4
+member leader_priority  pd-2 3
+member leader_priority  pd-3 2
+member leader_priority  pd-4 1
+member leader_priority  pd-5 0
+```
+
+> **Note:**
+>
+> In all available PD nodes, the node with the highest priority number becomes the leader.
+
 ### `operator [check | show | add | remove]`
 
 Use this command to view and control the scheduling operation.
