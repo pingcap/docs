@@ -114,13 +114,8 @@ The following are descriptions of sink URI parameters and values that can be con
 
 > **Note:**
 >
-> When `protocol` is `open-protocol`, TiCDC tries to batch multiple encoded messages into one Kafka message, avoid generating messages that exceed `max-message-bytes` in length. 
-> If the encoding result of a single row changed event is larger than the `max-message-bytes` in length, changefeed report error, and print logs.
-
-> **注意：**
->
-> 当 `protocol` 为 `open-protocol` 时，TiCDC 会将多个事件编码到同一个 Kafka 消息中，此过程中尽量避免产生长度超过 `max-message-bytes` 的消息。
-> 如果单条数据变更编码得到的消息大小超过了 `max-message-bytes` 个字节，changefeed 会报错，打印错误日志。
+> When `protocol` is `open-protocol`, TiCDC encodes multiple events into one Kafka message. Avoid generating messages that exceed the length specified by `max-message-bytes`. 
+> If the encoded result of a single row change event exceeds the value of `max-message-bytes`, the changefeed reports an error, and prints logs.
 
 ### TiCDC uses the authentication and authorization of Kafka
 

@@ -7,7 +7,7 @@ summary: Learn the concept of TiCDC Avro Protocol and how to use it.
 
 TiCDC Avro protocol is a third part implementation of the [Confluent Avro](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html) data exchange protocol which is defined by [Confluent Platform](https://docs.confluent.io/platform/current/platform.html). Avro is a data format defined by [Apache Avro™](https://avro.apache.org/)
 
-This document describes how the TiCDC implement the Confluent Avro protocol, and the interaction between Avro and [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
+This document describes how TiCDC implements the Confluent Avro protocol, and the interaction between Avro and [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
 
 > **Warning:**
 >
@@ -34,7 +34,7 @@ The value of `--schema-registry` supports the `https` protocol and `username:pas
 
 > **Note：**
 > 
-> When using the Avro protocol, One Kafka Topic must only have data for one table, should configure the [Topic dispatcher](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers) in the config file. 
+> When using the Avro protocol, one Kafka Topic can only have data for one table. You need to configure the [Topic dispatcher](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers) in the configuration file. 
 
 ## Definition of the data format
 
@@ -76,8 +76,12 @@ The `fields` in the key contains only primary key columns or unique index column
 
 The data format of Value is the same as that of Key, by default. However, `fields` in the Value contains all columns, not just the primary key columns.
 
-> **Note**
-> Avro protocol only encode the Key when encoding the Delete event. For the Insert event, encoding all column data into Value. For Update event, only encoding all columns data after change.
+> **Note:**
+>
+> The Avro protocol encodes DML events as follows: 
+> - For Delete events, only encodes the Key part. The Value part is empty. 
+> - For Insert events, encodes all column data to the Value part. 
+> - For Update events, encodes only all column data that is updated.
 
 ## TiDB extension fields
 
@@ -88,8 +92,6 @@ By default, Avro only collects data of changed rows in DML events and does not c
 - `_tidb_commit_physical_time`: The physical timestamp in a transaction identifier.
 
 The following is a configuration example:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-enable-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
@@ -166,7 +168,7 @@ If one column can be NULL, the Column data format can be:
 
 - `{{ColumnName}}` indicates the column name.
 - `{{TIDB_TYPE}}` indicates the type in TiDB, which is not a one-to-one mapping with the SQL type.
-- `{{AVRO_TYPE}}` indicates the type in [avro spec](https://avro.apache.org/docs/++version++/specification).
+- `{{AVRO_TYPE}}` indicates the type in the [Avro Specification](https://avro.apache.org/docs/++version++/specification).
 
 | SQL TYPE   | TIDB_TYPE | AVRO_TYPE | Description                                                                                                               |
 |------------|-----------|-----------|---------------------------------------------------------------------------------------------------------------------------|
@@ -279,9 +281,9 @@ DECIMAL(10, 4)
 
 ## DDL events and schema changes
 
-Avro does not send DDL events and Watermark event to downstream. It checks whether a schema changes each time a DML event occurs. If a schema changes, Avro generates a new schema and registers it with the Schema Registry. If the schema change does not pass the compatibility check, the registration fails. TiCDC does not resolve any schema compatibility issues.
+Avro does not send DDL events and Watermark events to downstream. It checks whether a schema changes each time a DML event occurs. If a schema changes, Avro generates a new schema and registers it with the Schema Registry. If the schema change does not pass the compatibility check, the registration fails. TiCDC does not resolve any schema compatibility issues.
 
-For example, the default [compatibility policy](https://docs.confluent.io/platform/current/schema-registry/fundamentals/schema-evolution.html#compatibility-types) of Confluent Schema Registry is `BACKWARD`. Add a non-empty column to the source table, in this situation, Avro generates a new schema but fails to register it with Schema Registry due to compatibility issues. At this time, the changefeed enters an error state.
+For example, the default [compatibility policy](https://docs.confluent.io/platform/current/schema-registry/fundamentals/schema-evolution.html#compatibility-types) of Confluent Schema Registry is `BACKWARD`, and you add a non-empty column to the source table. In this situation, Avro generates a new schema but fails to register it with Schema Registry due to compatibility issues. At this time, the changefeed enters an error state.
 
 Note that, even if a schema change passes the compatibility check and a new version is registered, the data producers and consumers still need to acquire the schema to support data encoding and decoding.
 
@@ -289,16 +291,16 @@ For more information about schemas, refer to [Schema Registry related documents]
 
 ## Consumer implementation
 
-TiCDC Avro protocol support decoding by the [`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer).
+The TiCDC Avro protocol can be deserialized by [`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer).
 
-The consumer program can acquire the schema by using [Schema Registry API](https://docs.confluent.io/platform/current/schema-registry/develop/api.html), which can be used to deserialize the TiCDC avro protocol encoded data.
+The consumer program can acquire the schema by using [Schema Registry API](https://docs.confluent.io/platform/current/schema-registry/develop/api.html), and then uses it to deserialize the data encoded by the TiCDC Avro protocol.
 
-### Distinguish event type
+### Distinguish event types
 
-Consumer can distinguish DML event type by the following rule:
+The consumer program can distinguish DML event types by the following rules:
 
-* If only have Key part, it is a Delete event.
-* If have both Key and Value part, it is a Insert or Update event. If enable the [TiDB extension fields](#tidb-extension-fields), use the `_tidb_op` field to know whether it is Insert or Update, else cannot distinguish these two.
+* If there is only the Key part, then it is a Delete event.
+* If there are both Key and Value parts, then it is either an Insert or an Update event. If the [TiDB extension fields](#tidb-extension-fields) are enabled, you can use the `_tidb_op` field to identify if it is an Insert or Update event. If the TiDB extension fields are not enabled, you cannot distinguish them.
 
 ## Topic distribution
 
