@@ -22,6 +22,11 @@ The following is a configuration example using Avro:
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
+The value of `--schema-registry` supports the `https` protocol and `username:password` authentication, for example, `--schema-registry=https://username:password@schema-registry-uri.com`. The username and password must be URL-encoded.
+
+> **Note：**
+> 
+> When using the Avro protocol, one Kafka Topic can only have data for one table. You need to configure the [Topic dispatcher](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers) in the configuration file. 
 
 ```shell
 [sink]
@@ -29,12 +34,6 @@ dispatchers = [
  {matcher = ['*.*'], topic = "tidb_{schema}_{table}"},
 ]
 ```
-
-The value of `--schema-registry` supports the `https` protocol and `username:password` authentication, for example, `--schema-registry=https://username:password@schema-registry-uri.com`. The username and password must be URL-encoded.
-
-> **Note：**
-> 
-> When using the Avro protocol, one Kafka Topic can only have data for one table. You need to configure the [Topic dispatcher](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers) in the configuration file. 
 
 ## Definition of the data format
 
