@@ -93,6 +93,10 @@
         - [Langchain](/vector-search-integrate-with-langchain.md)
       - Embedding Models/Services
         - [Jina AI](/vector-search-integrate-with-jinaai-embedding.md)
+      - ORM Libraries
+        - [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
+        - [peewee](/vector-search-integrate-with-peewee.md)
+        - [Django](/vector-search-integrate-with-django-orm.md)
     - [Improve Performance](/vector-search-improve-performance.md)
     - [Limitations](/vector-search-limitations.md)
   - Transaction
