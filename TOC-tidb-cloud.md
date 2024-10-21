@@ -252,6 +252,10 @@
       - [Langchain](/vector-search-integrate-with-langchain.md)
     - Embedding Models/Services
       - [Jina AI](/vector-search-integrate-with-jinaai-embedding.md)
+    - ORM Libraries
+      - [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
+      - [peewee](/vector-search-integrate-with-peewee.md)
+      - [Django ORM](/vector-search-integrate-with-django-orm.md)
   - Reference
     - [Vector Data Types](/vector-search-data-types.md)
     - [Vector Functions and Operators](/vector-search-functions-and-operators.md)
