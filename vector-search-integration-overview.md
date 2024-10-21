@@ -1,11 +1,11 @@
 ---
 title: Vector Search Integration Overview
-summary: An overview of TiDB vector search integration, including supported AI frameworks, embedding models, and ORM libraries.
+summary: An overview of TiDB vector search integration, including supported AI frameworks and embedding models.
 ---
 
 # Vector Search Integration Overview
 
-This document provides an overview of TiDB vector search integration, including supported AI frameworks, embedding models, and Object Relational Mapping (ORM) libraries.
+This document provides an overview of TiDB vector search integration, including supported AI frameworks and embedding models.
 
 <CustomContent platform="tidb">
 
@@ -41,39 +41,3 @@ The following table lists some mainstream embedding service providers and the co
 | Embedding service providers | Tutorial                                                                                                            |
 |-----------------------------|---------------------------------------------------------------------------------------------------------------------|
 | Jina AI                     | [Integrate Vector Search with Jina AI Embeddings API](/vector-search-integrate-with-jinaai-embedding.md) |
-
-## Object Relational Mapping (ORM) libraries
-
-You can integrate TiDB Vector Search with your ORM library to interact with the TiDB database.
-
-The following table lists the supported ORM libraries and the corresponding integration tutorials:
-
-<table>
-  <tr>
-    <th>Language</th>
-    <th>ORM/Client</th>
-    <th>How to install</th>
-    <th>Tutorial</th>
-  </tr>
-  <tr>
-    <td rowspan="4">Python</td>
-    <td>TiDB Vector Client</td>
-    <td><code>pip install tidb-vector[client]</code></td>
-    <td><a href="/tidbcloud/vector-search-get-started-using-python">Get Started with Vector Search Using Python</a></td>
-  </tr>
-  <tr>
-    <td>SQLAlchemy</td>
-    <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidbcloud/vector-search-integrate-with-sqlalchemy">Integrate TiDB Vector Search with SQLAlchemy</a></td>
-  </tr>
-  <tr>
-    <td>peewee</td>
-    <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidbcloud/vector-search-integrate-with-peewee">Integrate TiDB Vector Search with peewee</a></td>
-  </tr>
-  <tr>
-    <td>Django</td>
-    <td><code>pip install django-tidb[vector]</code></td>
-    <td><a href="/tidbcloud/vector-search-integrate-with-django-orm">Integrate TiDB Vector Search with Django</a></td>
-  </tr>
-</table>

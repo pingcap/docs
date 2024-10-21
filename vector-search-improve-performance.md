@@ -25,11 +25,7 @@ The [vector search index](/vector-search-index.md) dramatically improves the per
 
 ## Ensure vector indexes are fully built
 
-> **Note**
->
-> This practice is only applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
-
-Vector indexes are built asynchronously. Until all vector data is indexed, vector search performance is suboptimal. To check the index build progress, see [View index build progress](https://docs.pingcap.com/tidbcloud/vector-search-index#view-index-build-progress).
+After you insert a large volume of vector data, some of it might be in the Delta layer waiting for persistence. The vector index for such data will be built after the data is persisted. Until all vector data is indexed, vector search performance is suboptimal. To check the index build progress, see [View index build progress](/vector-search-index.md#view-index-build-progress).
 
 ## Reduce vector dimensions or shorten embeddings
 
