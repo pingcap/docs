@@ -27,11 +27,11 @@ This section describes how to use drivers and ORM frameworks in Java.
 
 Support level: **Full**
 
-You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/en/) to download and configure a Java JDBC driver. It is recommended to use the latest GA version of MySQL Connector/J with TiDB v6.3.0 and newer.
+You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/en/) to download and configure a Java JDBC driver. It is recommended to use the latest GA version of MySQL Connector/J with TiDB v6.3.0 or later.
 
 > **Warning:**
 >
-> There is a [bug](https://bugs.mysql.com/bug.php?id=106252) in the MySQL Connector/J 8.0 versions before 8.0.32, which might cause threads to hang when using TiDB versions earlier than v6.3.0. To avoid this issue, please do **NOT** use the 8.0.32 or a previous version of MySQL Connector/J.
+> There is a [bug](https://bugs.mysql.com/bug.php?id=106252) in the MySQL Connector/J 8.0 versions before 8.0.32, which might cause threads to hang when using TiDB versions earlier than v6.3.0. To avoid this issue, do **NOT** use MySQL Connector/J 8.0.32 or an earlier version.
 
 For an example of how to build a complete application, see [Build a simple CRUD app with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md).
 
