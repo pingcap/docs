@@ -67,8 +67,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td>The CPU time is now integrated into a system table, displayed alongside other metrics for sessions or SQL, letting you observe high CPU consumption operations from multiple perspectives, and improves diagnostic efficiency. This is especially useful for diagnosing scenarios such as CPU spikes in instances or read/write hotspots in clusters.</td>
   </tr>
   <tr>
-    <td>Support viewing aggregated TiKV CPU time by table or database **tw@lilin90 1878**</td>
-    <td>When hotspot issues are not caused by individual SQL statements, using the aggregated CPU time by table or database level in <a href="https://docs.pingcap.com/zh/tidb/v8.4/top-sql">TOP SQL</a> can help you quickly identify the tables or applications responsible for the hotspots, significantly improving the efficiency of diagnosing hotspot and CPU consumption issues.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/top-sql#use-top-sql">Support viewing aggregated TiKV CPU time by table or database</a>**tw@lilin90 1878**</td>
+    <td>When hotspot issues are not caused by individual SQL statements, using the aggregated CPU time by table or database level in TOP SQL can help you quickly identify the tables or applications responsible for the hotspots, significantly improving the efficiency of diagnosing hotspot and CPU consumption issues.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.4/backup-and-restore-storages#authentication">Support backing up TiKV instances with IMDSv2 service enabled</a>**tw@hfxsd 1945**</td>
@@ -264,7 +264,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     Before v8.4.0, [Top SQL](/dashboard/top-sql.md) aggregates CPU time by SQL. If CPU time is not consumed by a few SQL statements, aggregation by SQL cannot effectively identify issues. Starting from v8.4.0, you can choose to aggregate CPU time **By TABLE** or **By DB**. In scenarios with multiple systems, the new aggregation method can more effectively identify load changes from a specific system, improving diagnostic efficiency.
 
-    For more information, see [documentation](/dashboard/top-sql.md).
+    For more information, see [documentation](/dashboard/top-sql.md#use-top-sql).
 
 ### Security
 
