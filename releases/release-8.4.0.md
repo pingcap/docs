@@ -84,21 +84,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 ## Feature details
 
-### Scalability
-
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
-
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
-
-    For more information, see [documentation](doc-link).
-
 ### Performance
-
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
-
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
-
-    For more information, see [documentation](doc-link).
 
 * Introduce parallel batching modes for TSO requests, reducing TSO retrieval latency [#54960](https://github.com/pingcap/tidb/issues/54960) @[MyonKeminta](https://github.com/MyonKeminta) **tw@qiancai** <!--1893-->
 
@@ -155,12 +141,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     In v8.4.0, TiDB improves the query performance of cached tables by up to 5.4 times when executing `SELECT ... LIMIT 1` with `IndexLookup`. In addition, TiDB improves the performance of `IndexLookupReader` in full table scan and primary key query scenarios.
 
 ### Reliability
-
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
-
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
-
-    For more information, see [documentation](doc-link).
 
 * Runaway queries support the number of processed keys and request units as thresholds [#54434](https://github.com/pingcap/tidb/issues/54434) @[HuSharp](https://github.com/HuSharp) **tw@lilin90** <!--1800-->
 
@@ -273,12 +253,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     When deploying TiDB on Amazon EC2, BR supports AWS Instance Metadata Service Version 2 (IMDSv2). You can configure your EC2 instance to allow BR to use the IAM role associated with the instance for appropriate permissions to access Amazon S3.
 
     For more information, see [documentation](/backup-and-restore-storages#authentication).
-
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
-
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
-
-    For more information, see [documentation](doc-link).
 
 ### Data migration
 
@@ -446,18 +420,6 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
         - Disable splitting Regions by table to improve restore speed when restoring data to a cluster where the `split-table` and `split-region-on-table` configuration items are `false` (default value) [#53532](https://github.com/pingcap/tidb/issues/53532) @[Leavrth](https://github.com/Leavrth) **tw@qiancai** <!--1914-->
         - Disable full data restoration to a non-empty cluster using the `RESTORE` SQL statement by default [#55087](https://github.com/pingcap/tidb/issues/55087) @[BornChanger](https://github.com/BornChanger) **tw@Oreoxmt** <!--1711-->
 
-    + TiCDC
-
-    + TiDB Data Migration (DM)
-
-    + TiDB Lightning
-
-    + Dumpling
-
-    + TiUP
-
-    + TiDB Binlog
-
 ## Bug fixes
 
 + TiDB <!--tw@lilin90: the following 13 notes-->
@@ -495,7 +457,6 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
 
 + TiKV
 
-    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复当主密钥存储于 KMS (Key Management Service) 时无法轮换主密钥的问题 [#17410](https://github.com/tikv/tikv/issues/17410) @[hhwyt](https://github.com/hhwyt)
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复删除大表或分区后可能导致的流量控制问题 [#17304](https://github.com/tikv/tikv/issues/17304) @[Connor1996](https://github.com/Connor1996)
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复过期副本处理 Raft 快照时，由于分裂操作过慢并且随后立即删除新副本，可能导致 TiKV panic 的问题 [#17469](https://github.com/tikv/tikv/issues/17469) @[hbisheng](https://github.com/hbisheng)
@@ -504,7 +465,6 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
 
 + TiFlash <!--tw@qiancai: 2 notes-->
 
-    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - (dup): release-7.5.4.md > 错误修复 > TiFlash - 修复当表里含 Bit 类型列并且带有表示非法字符的默认值时 TiFlash 无法解析表 schema 的问题 [#9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - Fix the issue that TiFlash might panic due to spurious Region overlap check failures that occur when multiple Regions are concurrently applying snapshots [#9329](https://github.com/pingcap/tiflash/issues/9329) @[CalvinNeo](https://github.com/CalvinNeo)
     - Fix the issue that some JSON functions unsupported by TiFlash are pushed down to TiFlash [#9444](https://github.com/pingcap/tiflash/issues/9444) @[windtalker](https://github.com/windtalker)
@@ -518,10 +478,6 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
         - (dup): release-6.5.11.md > 错误修复> Tools> Backup & Restore (BR) - 修复开启日志备份时，BR 日志可能打印权限凭证敏感信息的问题 [#55273](https://github.com/pingcap/tidb/issues/55273) @[RidRisR](https://github.com/RidRisR)
         - (dup): release-6.5.11.md > 错误修复> Tools> Backup & Restore (BR) - 修复当 PITR 日志备份任务失败时，用户停止了该任务后，PD 中与该任务相关的 safepoint 未被正确清除的问题 [#17316](https://github.com/tikv/tikv/issues/17316) @[Leavrth](https://github.com/Leavrth)
 
-    + TiCDC
-
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-
     + TiDB Data Migration (DM)
 
         - (dup): release-7.5.4.md > 错误修复 > TiDB Data Migration (DM) - 修复多个 dm-master 同时成为 Leader 的问题 [#11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
@@ -530,14 +486,6 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
     + TiDB Lightning <!--tw@Oreoxmt: 1 note-->
 
         - Fix the issue that TiDB Lightning reports a `verify allocator base failed` error when two instances simultaneously start parallel import tasks and are assigned the same task ID [#55384](https://github.com/pingcap/tidb/issues/55384) @[ei-sugimoto](https://github.com/ei-sugimoto)
-
-    + Dumpling
-
-        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-
-    + TiUP
-
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
 
 ## Contributors
 
