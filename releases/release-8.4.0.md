@@ -41,11 +41,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td rowspan="4">Reliability and Availability</td>
-    <td>Support more triggers for runaway queries, and support switching resource groups**tw@hfxsd 1832 tw@lilin90 1800**</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/tidb-resource-control#query_limit-parameters">Support more triggers for runaway queries, and support switching resource groups</a>**tw@hfxsd 1832 tw@lilin90 1800**</td>
     <td>Runaway Queries offer an effective way to mitigate the impact of unexpected SQL performance issues on systems. TiDB v8.4.0 introduces the number of keys processed by the Coprocessor (<code>PROCESSED_KEYS</code>) and request units (<code>RU</code>) as identifying conditions, and puts identified queries into the specified resource group for more precise identification and control of runaway queries.</td>
   </tr>
   <tr>
-    <td>Support setting the maximum limit on resource usage for background tasks of resource control **tw@hfxsd 1909**</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/tidb-resource-control#background-parameters">Support setting the maximum limit on resource usage for background tasks of resource control</a> **tw@hfxsd 1909**</td>
     <td>By setting a maximum percentage limit on background tasks of resource control, you can control their resource consumption based on the needs of different application systems. This keeps background task consumption at a low level and ensures the quality of online services.</td>
   </tr>
   <tr>
@@ -63,7 +63,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td rowspan="3">DB Operations and Observability</td>
-    <td>Display TiKV and TiDB CPU times in memory tables**tw@hfxsd 1877**</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/information-schema-processlist">Display TiKV and TiDB CPU times in memory tables</a>**tw@hfxsd 1877**</td>
     <td>The CPU time is now integrated into a system table, displayed alongside other metrics for sessions or SQL, letting you observe high CPU consumption operations from multiple perspectives, and improves diagnostic efficiency. This is especially useful for diagnosing scenarios such as CPU spikes in instances or read/write hotspots in clusters.</td>
   </tr>
   <tr>
@@ -71,7 +71,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     <td>When hotspot issues are not caused by individual SQL statements, using the aggregated CPU time by table or database level in <a href="https://docs.pingcap.com/zh/tidb/v8.4/top-sql">TOP SQL</a> can help you quickly identify the tables or applications responsible for the hotspots, significantly improving the efficiency of diagnosing hotspot and CPU consumption issues.</td>
   </tr>
   <tr>
-    <td>Support backing up TiKV instances with IMDSv2 service enabled**tw@hfxsd 1945**</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.4/backup-and-restore-storages#authentication">Support backing up TiKV instances with IMDSv2 service enabled</a>**tw@hfxsd 1945**</td>
     <td><a href="https://aws.amazon.com/cn/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/">AWS EC2 now uses IMDSv2 as the default metadata service</a>. TiDB supports backing up data from TiKV instances that have IMDSv2 enabled, helping you run TiDB clusters more effectively in public cloud services.</td>
   </tr>
   <tr>
