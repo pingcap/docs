@@ -83,7 +83,7 @@ Name the CSV files as follows:
 
 > **Note:**
 >
-> If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Patterns** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
+> If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
 
 To export data to Amazon S3, do the following:
 
@@ -185,42 +185,45 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From S3**.
+2. Select **Import data from S3**.
 
-3. On the **Import from S3** page, fill in the following information:
+    If this is your first time importing data into this cluster, select **Import From Amazon S3**.
 
-    - **Data format**: select **CSV**.
-    - **Bucket URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
-    - **Role ARN**: enter the Role-ARN you obtained.
+3. On the **Import Data from Amazon S3** page, fill in the following information:
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    - **Import File Count**: select **Multiple files**.
+    - **Included Schema Files**: select **No**.
+    - **Data Format**: select **CSV**.
+    - **Folder URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
+    - **Bucket Access** > **AWS Role ARN**: enter the Role-ARN you obtained.
+
+    If the location of the bucket is different from your cluster, confirm the compliance of cross region.
 
     TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
-4. Modify the file patterns and add the table filter rules if needed.
+4. Click **Connect**.
 
-    - **File Pattern**: modify the file pattern if you want to import CSV files whose filenames match a certain pattern to a single target table.
+5. In the **Destination** section, select the target database and table.
 
-        > **Note:**
-        >
-        > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
-        To modify the file pattern, click **Modify**, specify a custom mapping rule between CSV files and a single target table in the following fields, and then click **Scan**.
+    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
 
-        - **Source file name**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, enter the file name here directly. Note that the names of the CSV files must include the suffix ".csv".
+    You can also use wildcards to match the source files. For example:
 
-            For example:
+    - `s3://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
 
-            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
-            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
 
-        - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+    Note that only `?` and `*` are supported.
 
-    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more [table filter](/table-filter.md#syntax) rules in this area.
+    > **Note:**
+    >
+    > The URI must contain the data source folder.
 
-5. Click **Next**.
+6. Edit the CSV configuration if needed.
 
-6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, `backslash escape`, and `trim last separator`.
+    You can also click **Edit CSV configuration** to configure Backslash Escape, Separator, and Delimiter for more fine-grained control.
 
     > **Note:**
     >
@@ -228,7 +231,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
 7. Click **Start Import**.
 
-8. When the import progress shows **Finished**, check the imported tables.
+8. When the import progress shows **Completed**, check the imported tables.
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added.
 

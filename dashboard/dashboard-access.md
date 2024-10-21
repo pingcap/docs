@@ -34,12 +34,11 @@ You can use TiDB Dashboard in the following common desktop browsers of a relativ
 
 ## Sign in
 
-After accessing TiDB Dashboard, you will be directed to the user login interface, as shown in the image below.
+After accessing TiDB Dashboard, you will be directed to the user login interface.
 
 - You can sign in to TiDB Dashboard using the TiDB `root` account.
+- You can also sign in to TiDB Dashboard via Single Sign-On (SSO). For more information, see [Configure SSO for TiDB Dashboard](/dashboard/dashboard-session-sso.md).
 - If you have created a [User-defined SQL User](/dashboard/dashboard-user.md), you can sign in using this account and the corresponding password.
-
-![Login interface](/media/dashboard/dashboard-access-login.png)
 
 If one of the following situations exists, the login might fail:
 

@@ -35,11 +35,6 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Specifies the `Access-Control-Allow-Origin` value for Cross-Origin Request Sharing (CORS) request of the TiDB HTTP status service
 - Default: `""`
 
-## `--enable-binlog`
-
-+ Enables or disables TiDB binlog generation
-+ Default: `false`
-
 ## `--host`
 
 - The host address that the TiDB server monitors

@@ -33,7 +33,7 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) 1.21 or later is required because the Go modules are used.
+1. [Go](https://golang.org/) 1.23 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -146,8 +146,8 @@ Usage:
     "leader-schedule-limit": 4,
     "leader-schedule-policy": "count",
     "low-space-ratio": 0.8,
-    "max-merge-region-keys": 200000,
-    "max-merge-region-size": 20,
+    "max-merge-region-keys": 540000,
+    "max-merge-region-size": 54,
     "max-pending-peer-count": 64,
     "max-snapshot-count": 64,
     "max-store-down-time": "30m0s",
@@ -470,6 +470,20 @@ Success!
 >> member leader transfer pd3 // Migrate leader to a specified member
 ......
 ```
+
+Specify the priority of PD leader:
+
+```bash
+member leader_priority  pd-1 4
+member leader_priority  pd-2 3
+member leader_priority  pd-3 2
+member leader_priority  pd-4 1
+member leader_priority  pd-5 0
+```
+
+> **Note:**
+>
+> In all available PD nodes, the node with the highest priority number becomes the leader.
 
 ### `operator [check | show | add | remove]`
 
@@ -806,8 +820,6 @@ Usage:
 >> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
 >> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
->> scheduler add shuffle-leader-scheduler                  // Randomly exchange the leader on different stores
->> scheduler add shuffle-region-scheduler                  // Randomly schedule the Regions on different stores
 >> scheduler add evict-slow-store-scheduler                // When there is one and only one slow store, evict all Region leaders of that store
 >> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds

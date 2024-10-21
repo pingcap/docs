@@ -1,11 +1,11 @@
 ---
-title: TiDB Dedicated Limitations and Quotas
+title: TiDB Cloud Dedicated Limitations and Quotas
 summary: Learn the limitations and quotas in TiDB Cloud.
 ---
 
-# TiDB Dedicated Limitations and Quotas
+# TiDB Cloud Dedicated Limitations and Quotas
 
-TiDB Cloud limits how many of each kind of component you can create in a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster, and the common usage limitations of TiDB. In addition, there are some organization-level quotas to limit the amount of resources created by users to prevent from creating more resources than you actually need. These tables outline limits and quotas.
+TiDB Cloud limits how many of each kind of component you can create in a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster, and the common usage limitations of TiDB. In addition, there are some organization-level quotas to limit the amount of resources created by users to prevent from creating more resources than you actually need. These tables outline limits and quotas.
 
 > **Note:**
 >
@@ -15,7 +15,7 @@ TiDB Cloud limits how many of each kind of component you can create in a [TiDB D
 
 | Component | Limit |
 |:-|:-|
-| Number of data replicas | 3 |
+| Number of copies for each [data region](/tidb-cloud/tidb-cloud-glossary.md#region) | 3 |
 | Number of Availability Zones for a cross-zone deployment | 3 |
 
 > **Note:**
@@ -29,3 +29,7 @@ TiDB Cloud limits how many of each kind of component you can create in a [TiDB D
 | Maximum number of total TiDB nodes for all clusters in your organization | 10 |
 | Maximum number of total TiKV nodes for all clusters in your organization | 15 |
 | Maximum number of total TiFlash nodes for all clusters in your organization | 5 |
+
+> **Note:**
+>
+> If any of these limits or quotas present a problem for your organization, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).

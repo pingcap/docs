@@ -132,7 +132,7 @@ For details, see [description of the `SELECT` syntax elements](/sql-statements/s
 
 ## Can the codec of TiDB guarantee that the UTF-8 string is memcomparable? Is there any coding suggestion if our key needs to support UTF-8?
 
-TiDB uses the UTF-8 character set by default and currently only supports UTF-8. The string of TiDB uses the memcomparable format.
+The default character set in TiDB is `utf8mb4`. The strings are in memcomparable format. For more information about the character set in TiDB, see [Character Set and Collation](/character-set-and-collation.md).
 
 ## What is the maximum number of statements in a transaction?
 
@@ -298,7 +298,7 @@ In the preceding causes, only Cause 1 is related to tables. Cause 1 and Cause 2 
 
 ### What are the causes of the "Information schema is out of date" error?
 
-Before TiDB v6.5.0, when executing a DML statement, if TiDB fails to load the latest schema within a DDL lease (45s by default), the `Information schema is out of date` error might occur. Possible causes are:
+When executing a DML statement, if TiDB fails to load the latest schema within a DDL lease (45s by default), the `Information schema is out of date` error might occur. Possible causes are as follows:
 
 - The TiDB instance that executed this DML was killed, and the transaction execution corresponding to this DML statement took longer than a DDL lease. When the transaction was committed, the error occurred.
 - TiDB failed to connect to PD or TiKV while executing this DML statement. As a result, TiDB failed to load schema within a DDL lease or disconnected from PD due to the keepalive setting.

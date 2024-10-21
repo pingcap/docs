@@ -1,12 +1,12 @@
 ---
-title: PingCAP Documentation
+title: Home
 hide_sidebar: true
 hide_commit: true
 hide_leftNav: true
-summary: PingCAP Documentation provides how-to guides and references for using TiDB Cloud and TiDB, including data migration and application building. TiDB Cloud is a fully-managed Database-as-a-Service, offering easy access to the power of a cloud-native, distributed SQL database. TiDB is an open-source distributed SQL database with MySQL compatibility, horizontal scalability, and high availability. Developers can access documentation for application development and explore additional resources such as TiDB Playground, PingCAP Education, and community engagement opportunities.
+summary: TiDB Documentation provides how-to guides and references for using TiDB Cloud and TiDB Self-Managed, including data migration and application building. TiDB Cloud is a fully-managed Database-as-a-Service, offering easy access to the power of a cloud-native, distributed SQL database. TiDB is an open-source distributed SQL database with MySQL compatibility, horizontal scalability, and high availability. Developers can access documentation for application development and explore additional resources such as TiDB Playground, PingCAP Education, and community engagement opportunities.
 ---
 
-<DocHomeContainer title="PingCAP Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">
+<DocHomeContainer title="TiDB Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud Serverless, TiDB Cloud Dedicated and TiDB Self-Managed, migrate data, and build your applications on the database." ctaLabel="Start TiDB Cloud Serverless for Free" ctaLink="https://tidbcloud.com/free-trial">
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
@@ -14,33 +14,41 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://docs.pingcap.com/tidbcloud" icon="doc2" label="TiDB Cloud Docs">
+<DocHomeCard href="/tidbcloud/tidb-cloud-intro" label="What is TiDB Cloud" icon="cloud-product-mauve">
 
-View the documentation for TiDB Cloud.
+Learn what TiDB Cloud is as an easy-to-use database and its key features.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart" icon="cloud5" label="Get Started with TiDB Cloud">
+<DocHomeCard href="/tidbcloud/tidb-cloud-quickstart" label="Get started with TiDB Cloud Serverless" icon="cloud-getstarted-mauve">
 
 Guide for an easy way to get started with TiDB Cloud.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-poc" icon="cloud3" label="Perform a PoC with TiDB Cloud">
+<DocHomeCard href="/tidbcloud/dev-guide-overview" label="Developer Guide" icon="cloud-developer-mauve">
 
-Helps you quickly complete a Proof of Concept (PoC) with TiDB Cloud.
+Connect your application with the languages and frameworks you prefer.
+
+</DocHomeCard>
+
+<DocHomeCard href="/tidbcloud/vector-search-overview" label="Vector Search in TiDB Cloud Serverless (Beta)" icon="cloud-vector-mauve">
+
+Explore native support of Vector Search in TiDB Cloud Serverless to build your AI application.
+
+</DocHomeCard>
+
+<DocHomeCard href="/tidbcloud/tidb-cloud-roadmap" label="TiDB Cloud Roadmap" icon="cloud-roadmap-mauve">
+
+Planned features and releases for TiDB Cloud.
 
 </DocHomeCard>
 
 </DocHomeCardContainer>
 
-Get the power of a cloud-native, distributed SQL database built for real-time analytics in a fully-managed service.
-
-<a href="https://tidbcloud.com/free-trial" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Try Free</a>
-
 </DocHomeSection>
 
-<DocHomeSection label="TiDB" anchor="tidb" id="tidb">
+<DocHomeSection label="TiDB Self-Managed" anchor="tidb-self-managed" id="tidb-self-managed">
 
 <!-- Localization note for TiDB:
 
@@ -50,111 +58,101 @@ Get the power of a cloud-native, distributed SQL database built for real-time an
 
 -->
 
-TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB in a self-hosted environment or in the cloud.
+TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB in a self-hosted environment or on the cloud.
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable" icon="doc1" label="TiDB Docs">
+<DocHomeCard href="/tidb/stable/overview" label="What is TiDB Self-Managed" icon="oss-product-blue">
 
-View the documentation for TiDB.
-
-</DocHomeCard>
-
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/quick-start-with-tidb" icon="doc5" label="Get Started with TiDB">
-
-Walks you through the quickest way to get started with TiDB.
+Learn what is TiDB Self-Managed and its key features.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup" icon="cloud7" label="Deploy a Local TiDB Cluster">
+<DocHomeCard href="/tidb/stable/quick-start-with-tidb" label="Get started with TiDB Self-Managed" icon="oss-getstarted-blue">
+
+Walks you through the quickest way to get started with TiDB Self-Managed.
+
+</DocHomeCard>
+
+<DocHomeCard href="/tidb/stable/production-deployment-using-tiup" label="Deploy a Local TiDB Cluster" icon="oss-deploy-blue">
 
 Learn how to deploy TiDB locally in a production environment.
 
 </DocHomeCard>
 
-</DocHomeCardContainer>
+<DocHomeCard href="/tidb/stable/dev-guide-overview" label="Developer Guide" icon="oss-developer-blue">
 
-The open-source TiDB platform is released under the Apache 2.0 license and is supported by the community.
-
-<a href="https://github.com/pingcap/tidb" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">View on GitHub</a>
-
-</DocHomeSection>
-
-<DocHomeSection label="Developers" anchor="developers" id="developers">
-
-<DocHomeCardContainer>
-
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Guide">
-
-Documentation for TiDB application developers.
+For application developers using TiDB Self-Managed.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidbcloud/dev-guide-overview" icon="cloud-dev" label="Developer Guide">
+<DocHomeCard href="/tidb/stable/mysql-compatibility" label="MySQL Compatibility" icon="oss-mysql-blue">
 
-Documentation for TiDB Cloud application developers.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0.
+
+</DocHomeCard>
+
+<DocHomeCard href="/tidb/dev/tidb-roadmap" label="TiDB Self-Managed Roadmap" icon="oss-roadmap-blue">
+
+Planned features and release dates for TiDB Self-Managed.
 
 </DocHomeCard>
 
 </DocHomeCardContainer>
 
+The open-source TiDB platform is released under the Apache 2.0 license and is supported by the community. [View on GitHub](https://github.com/pingcap/tidb)
+
 </DocHomeSection>
 
-<DocHomeSection label="More resources" anchor="resources" id="resources">
+<DocHomeSection label="More Resources" anchor="resources" id="resources">
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://play.tidbcloud.com/?utm_source=docs&utm_medium=home_more_resources" icon="playground" label="TiDB Playground">
+<DocHomeCard href="https://www.pingcap.com/education/" label="Learning Center" icon="global-tidb-education">
 
-Experience the capabilities of TiDB WITHOUT registration.
-
-</DocHomeCard>
-
-<DocHomeCard href="https://www.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
-
-Learn TiDB and TiDB Cloud through well-designed online courses and instructor-led training.
+Learn TiDB Cloud and TiDB Self-Managed through well-designed online courses and instructor-led training.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://ask.pingcap.com?utm_source=doc" icon="doc9" label="Community">
+<DocHomeCard href="https://www.pingcap.com/blog/" label="Blog" icon="global-tidb-blog">
 
-Connect with other TiDB users on TiDB Community for sharing and learning.
-
-</DocHomeCard>
-
-<DocHomeCard href="https://www.pingcap.com/blog/" icon="doc10" label="Blog Posts">
-
-Read great articles about TiDB and TiDB Cloud.
+Read great articles about TiDB Cloud and TiDB Self-Managed.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://www.pingcap.com/videos/" icon="doc11" label="Videos">
-
-Watch a compilation of short videos describing TiDB and various use cases.
-
-</DocHomeCard>
-
-<DocHomeCard href="https://www.pingcap.com/event/" icon="events" label="Events">
+<DocHomeCard href="https://www.pingcap.com/event/" label="Events" icon="global-tidb-events">
 
 Learn about events hosted by PingCAP and the community.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://www.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
+<DocHomeCard href="https://www.pingcap.com/ebook-whitepaper/" label="eBooks & Papers" icon="global-tidb-ebook">
 
 Download eBooks and papers.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://ossinsight.io/" icon="ossinsight" label="OSS Insight">
+<DocHomeCard href="https://www.pingcap.com/videos/" label="Videos" icon="global-tidb-video">
 
-A powerful insight tool that analyzes any GitHub repository in depth, powered by TiDB Cloud.
+Watch a compilation of short videos describing TiDB and various use cases.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md" icon="contributor" label="Contribute">
+<DocHomeCard href="https://ossinsight.io/" label="OSS Insight" icon="global-tidb-ossinsight">
 
-Let's work together to improve the documentation!
+A powerful insight tool that provides in-depth analysis of any GitHub repository, powered by TiDB Cloud.
+
+</DocHomeCard>
+
+<DocHomeCard href="https://play.tidbcloud.com/?utm_source=docs&utm_medium=home_more_resources" label="Playground" icon="global-tidb-playground">
+
+Experience the capabilities of TiDB without registration.
+
+</DocHomeCard>
+
+<DocHomeCard href="https://discord.gg/DQZ2dy3cuc?utm_source=doc" label="Join our community on Discord" icon="global-tidb-discord" colspan="2" actionBtnLabel="Join Community" ctaGraphic="global-iso-hand">
+
+Join us on Discord or become a contributor.
 
 </DocHomeCard>
 

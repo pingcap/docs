@@ -3,20 +3,21 @@
 
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB Cloud
-  - [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
+  - [What is TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Serverless Cluster in TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Connect to TiDB Cloud
     - GUI Database Tools
@@ -61,6 +62,7 @@
       - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
       - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
       - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)
+      - [Drizzle Example](/tidb-cloud/serverless-driver-drizzle-example.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
@@ -114,9 +116,9 @@
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
-  - Manage TiDB Serverless Clusters
-    - [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - Connect to Your TiDB Serverless Cluster
+  - Manage TiDB Cloud Serverless Clusters
+    - [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - Connect to Your TiDB Cloud Serverless Cluster
       - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
@@ -125,19 +127,20 @@
       - [Manage Branches](/tidb-cloud/branch-manage.md)
       - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
     - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
-    - [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
-  - Manage TiDB Dedicated Clusters
-    - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
-    - Connect to Your TiDB Dedicated Cluster
+    - [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
+    - [Export Data from TiDB Cloud Serverless](/tidb-cloud/serverless-export.md)
+  - Manage TiDB Cloud Dedicated Clusters
+    - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
+    - Connect to Your TiDB Cloud Dedicated Cluster
       - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
       - [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md)
       - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
       - [Connect via Private Endpoint (Private Service Connect) with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
       - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
-    - [Scale a TiDB Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
-    - [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md)
-    - [Pause or Resume a TiDB Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
+    - [Scale a TiDB Cloud Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
+    - [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md)
+    - [Pause or Resume a TiDB Cloud Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
     - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
@@ -236,14 +239,42 @@
       - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
       - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
-  - [Chat2Query (Beta)](/tidb-cloud/explore-data-with-chat2query.md)
+  - [Chat2Query (Beta) in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
+- Vector Search (Beta)
+  - [Overview](/tidb-cloud/vector-search-overview.md)
+  - Get Started
+    - [Get Started with SQL](/tidb-cloud/vector-search-get-started-using-sql.md)
+    - [Get Started with Python](/tidb-cloud/vector-search-get-started-using-python.md)
+  - Integrations
+    - [Overview](/tidb-cloud/vector-search-integration-overview.md)
+    - AI Frameworks
+      - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
+      - [Langchain](/tidb-cloud/vector-search-integrate-with-langchain.md)
+    - Embedding Models/Services
+      - [Jina AI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
+    - ORM Libraries
+      - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
+      - [peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
+      - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+  - Reference
+    - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
+    - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
+    - [Vector Index](/tidb-cloud/vector-search-index.md)
+  - [Improve Performance](/tidb-cloud/vector-search-improve-performance.md)
+  - [Limitations](/tidb-cloud/vector-search-limitations.md)
+  - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Data Service (Beta)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)
-  - [Try Out Chat2Query API](/tidb-cloud/use-chat2query-api.md)
+  - Chat2Query API
+    - [Get Started](/tidb-cloud/use-chat2query-api.md)
+    - [Start Multi-round Chat2Query](/tidb-cloud/use-chat2query-sessions.md)
+    - [Use Knowledge Bases](/tidb-cloud/use-chat2query-knowledge.md)
   - [Manage Data App](/tidb-cloud/data-service-manage-data-app.md)
   - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
   - [API Key](/tidb-cloud/data-service-api-key.md)
+  - [Custom Domain](/tidb-cloud/data-service-custom-domain.md)
+  - [Integrations](/tidb-cloud/data-service-integrations.md)
   - [Run in Postman](/tidb-cloud/data-service-postman-integration.md)
   - [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md)
   - [Use OpenAPI Specification with Next.js](/tidb-cloud/data-service-oas-with-nextjs.md)
@@ -266,15 +297,17 @@
     - [Basic SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
+    - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
-    - TiDB Serverless
+    - TiDB Cloud Serverless
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-    - TiDB Dedicated
+      - [TLS Connections to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - TiDB Cloud Dedicated
       - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
-      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
+      - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
+      - [Connect via Private Endpoint (Private Service Connect) with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-      - [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+      - [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Data Access Control
       - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
   - Database Access Control
@@ -285,20 +318,27 @@
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+  - [Cost Explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
+  - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
   - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
   - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
-- API
+  - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
+- TiDB Cloud Partner Web Console
+  - [TiDB Cloud Partners](/tidb-cloud/tidb-cloud-partners.md)
+  - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
+  - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
   - API Reference
     - v1beta1
       - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
-      - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/apikey)
-      - [MSP](https://docs.pingcap.com/tidbcloud/api/msp/v1beta1)
+      - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
+      - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
+      - [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
     - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
@@ -328,20 +368,26 @@
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
     - [TSO](/tso.md)
-  - [TiDB Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md)
+  - [TiDB Cloud Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [TiDB Cloud Serverless Limitations](/tidb-cloud/serverless-limitations.md)
   - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - TiDB Distributed eXecution Framework (DXF)
     - [Introduction](/tidb-distributed-execution-framework.md)
     - [TiDB Global Sort](/tidb-global-sort.md)
   - Benchmarks
+    - TiDB v8.1
+      - [TPC-C Performance Test Report](/tidb-cloud/v8.1-performance-benchmarking-with-tpcc.md)
+      - [Sysbench Performance Test Report](/tidb-cloud/v8.1-performance-benchmarking-with-sysbench.md)
     - TiDB v7.5
-      - [TPC-C Performance Test Report](/tidb-cloud/v7.5.0-performance-benchmarking-with-tpcc.md)
-      - [Sysbench Performance Test Report](/tidb-cloud/v7.5.0-performance-benchmarking-with-sysbench.md)
+      - [TPC-C Performance Test Report](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
+      - [Sysbench Performance Test Report](/tidb-cloud/v7.5-performance-benchmarking-with-sysbench.md)
     - TiDB v7.1
-      - [TPC-C Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
-      - [Sysbench Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-sysbench.md)
+      - [TPC-C Performance Test Report](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
+      - [Sysbench Performance Test Report](/tidb-cloud/v7.1-performance-benchmarking-with-sysbench.md)
+    - TiDB v6.5
+      - [TPC-C Performance Test Report](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
+      - [Sysbench Performance Test Report](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax
@@ -609,6 +655,7 @@
         - [`TABLES`](/information-schema/information-schema-tables.md)
         - [`TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
         - [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)
+        - [`TIDB_CHECK_CONSTRAINTS`](/information-schema/information-schema-tidb-check-constraints.md)
         - [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md)
         - [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)
         - [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
@@ -644,18 +691,37 @@
       - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
   - CLI
     - [Overview](/tidb-cloud/cli-reference.md)
-    - cluster
+    - auth
+      - [login](/tidb-cloud/ticloud-auth-login.md)
+      - [logout](/tidb-cloud/ticloud-auth-logout.md)
+    - serverless
       - [create](/tidb-cloud/ticloud-cluster-create.md)
       - [delete](/tidb-cloud/ticloud-cluster-delete.md)
       - [describe](/tidb-cloud/ticloud-cluster-describe.md)
       - [list](/tidb-cloud/ticloud-cluster-list.md)
-      - [connect-info](/tidb-cloud/ticloud-cluster-connect-info.md)
-    - branch
-      - [create](/tidb-cloud/ticloud-branch-create.md)
-      - [delete](/tidb-cloud/ticloud-branch-delete.md)
-      - [describe](/tidb-cloud/ticloud-branch-describe.md)
-      - [list](/tidb-cloud/ticloud-branch-list.md)
-      - [connect-info](/tidb-cloud/ticloud-branch-connect-info.md)
+      - [update](/tidb-cloud/ticloud-serverless-update.md)
+      - [spending-limit](/tidb-cloud/ticloud-serverless-spending-limit.md)
+      - [region](/tidb-cloud/ticloud-serverless-region.md)
+      - [shell](/tidb-cloud/ticloud-serverless-shell.md)
+      - branch
+        - [create](/tidb-cloud/ticloud-branch-create.md)
+        - [delete](/tidb-cloud/ticloud-branch-delete.md)
+        - [describe](/tidb-cloud/ticloud-branch-describe.md)
+        - [list](/tidb-cloud/ticloud-branch-list.md)
+        - [shell](/tidb-cloud/ticloud-branch-shell.md)
+      - import
+        - [cancel](/tidb-cloud/ticloud-import-cancel.md)
+        - [describe](/tidb-cloud/ticloud-import-describe.md)
+        - [list](/tidb-cloud/ticloud-import-list.md)
+        - [start](/tidb-cloud/ticloud-import-start.md)
+      - export
+        - [create](/tidb-cloud/ticloud-serverless-export-create.md)
+        - [describe](/tidb-cloud/ticloud-serverless-export-describe.md)
+        - [list](/tidb-cloud/ticloud-serverless-export-list.md)
+        - [cancel](/tidb-cloud/ticloud-serverless-export-cancel.md)
+        - [download](/tidb-cloud/ticloud-serverless-export-download.md)
+    - [ai](/tidb-cloud/ticloud-ai.md)
+    - [completion](/tidb-cloud/ticloud-completion.md)
     - config
       - [create](/tidb-cloud/ticloud-config-create.md)
       - [delete](/tidb-cloud/ticloud-config-delete.md)
@@ -664,18 +730,10 @@
       - [list](/tidb-cloud/ticloud-config-list.md)
       - [set](/tidb-cloud/ticloud-config-set.md)
       - [use](/tidb-cloud/ticloud-config-use.md)
-    - [connect](/tidb-cloud/ticloud-connect.md)
-    - import
-      - [cancel](/tidb-cloud/ticloud-import-cancel.md)
-      - [describe](/tidb-cloud/ticloud-import-describe.md)
-      - [list](/tidb-cloud/ticloud-import-list.md)
-      - start
-        - [local](/tidb-cloud/ticloud-import-start-local.md)
-        - [s3](/tidb-cloud/ticloud-import-start-s3.md)
-        - [mysql](/tidb-cloud/ticloud-import-start-mysql.md)
     - project
       - [list](/tidb-cloud/ticloud-project-list.md)
     - [update](/tidb-cloud/ticloud-update.md)
+    - [help](/tidb-cloud/ticloud-help.md)
   - [Table Filter](/table-filter.md)
   - [Resource Control](/tidb-resource-control.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
@@ -685,13 +743,19 @@
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
-  - [TiDB Serverless FAQs](/tidb-cloud/serverless-faqs.md)
+  - [TiDB Cloud Serverless FAQs](/tidb-cloud/serverless-faqs.md)
 - Release Notes
-  - [2023](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2024](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2023](/tidb-cloud/release-notes-2023.md)
   - [2022](/tidb-cloud/release-notes-2022.md)
   - [2021](/tidb-cloud/release-notes-2021.md)
   - [2020](/tidb-cloud/release-notes-2020.md)
 - Maintenance Notification
-  - [[2023-11-14] TiDB Dedicated Scale Feature Maintenance Notification](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
+  - [[2024-09-15] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2024-09-15-console-maintenance.md)
+  - [[2024-04-18] TiDB Cloud Data Migration (DM) Feature Maintenance Notification](/tidb-cloud/notification-2024-04-18-dm-feature-maintenance.md)
+  - [[2024-04-16] TiDB Cloud Monitoring Features Maintenance Notification](/tidb-cloud/notification-2024-04-16-monitoring-features-maintenance.md)
+  - [[2024-04-11] TiDB Cloud Data Migration (DM) Feature Maintenance Notification](/tidb-cloud/notification-2024-04-11-dm-feature-maintenance.md)
+  - [[2024-04-09] TiDB Cloud Monitoring Features Maintenance Notification](/tidb-cloud/notification-2024-04-09-monitoring-features-maintenance.md)
+  - [[2023-11-14] TiDB Cloud Dedicated Scale Feature Maintenance Notification](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
   - [[2023-09-26] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
   - [[2023-08-31] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-08-31-console-maintenance.md)

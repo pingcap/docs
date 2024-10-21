@@ -43,8 +43,8 @@ CREATE [GLOBAL | SESSION] BINDING [FOR BindableStmt] USING BindableStmt;
 This statement binds SQL execution plans at the GLOBAL or SESSION level. Currently, supported bindable SQL statements (BindableStmt) in TiDB include `SELECT`, `DELETE`, `UPDATE`, and `INSERT` / `REPLACE` with `SELECT` subqueries. The following is an example:
 
 ```sql
-CREATE GLOBAL BINDING USING SELECT * /*+ use_index(t1, a) */ FROM t1;
-CREATE GLOBAL BINDING FOR SELECT * FROM t1 USING SELECT * /*+ use_index(t1, a) */ FROM t1;
+CREATE GLOBAL BINDING USING SELECT /*+ use_index(t1, idx_a) */ * FROM t1;
+CREATE GLOBAL BINDING FOR SELECT * FROM t1 USING SELECT /*+ use_index(t1, idx_a) */ * FROM t1;
 ```
 
 > **Note:**
@@ -100,13 +100,13 @@ Here are two examples:
 CREATE GLOBAL BINDING for
     INSERT INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1
 using
-    INSERT INTO t1 SELECT /*+ use_index(@sel_1 t2, a) */ * FROM t2 WHERE a > 1 AND b = 1;
+    INSERT INTO t1 SELECT /*+ use_index(@sel_1 t2, idx_a) */ * FROM t2 WHERE a > 1 AND b = 1;
 
 -- The hint cannot take effect in the following statement.
 CREATE GLOBAL BINDING for
     INSERT INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1
 using
-    INSERT /*+ use_index(@sel_1 t2, a) */ INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1;
+    INSERT /*+ use_index(@sel_1 t2, idx_a) */ INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1;
 ```
 
 If you do not specify the scope when creating an execution plan binding, the default scope is SESSION. The TiDB optimizer normalizes bound SQL statements and stores them in the system table. When processing SQL queries, if a normalized statement matches one of the bound SQL statements in the system table and the system variable `tidb_use_plan_baselines` is set to `on` (the default value is `on`), TiDB then uses the corresponding optimizer hint for this statement. If there are multiple matchable execution plans, the optimizer chooses the least costly one to bind.
@@ -139,7 +139,7 @@ SELECT * FROM test . t WHERE a > ?
 >
 > ```sql
 > CREATE TABLE t (a INT, KEY(a));
-> CREATE BINDING FOR SELECT * FROM t WHERE a IN (?) USING SELECT /*+ use_index(t, a) */ * FROM t WHERE a in (?);
+> CREATE BINDING FOR SELECT * FROM t WHERE a IN (?) USING SELECT /*+ use_index(t, idx_a) */ * FROM t WHERE a in (?);
 > 
 > SELECT * FROM t WHERE a IN (1);
 > SELECT @@LAST_PLAN_FROM_BINDING;
@@ -164,21 +164,21 @@ SELECT * FROM test . t WHERE a > ?
 >
 > ```sql
 > -- Create a binding on v7.3.0
-> mysql> CREATE GLOBAL BINDING FOR SELECT * FROM t WHERE a IN (1) USING SELECT /*+ use_index(t, a) */ * FROM t WHERE a IN (1);
+> mysql> CREATE GLOBAL BINDING FOR SELECT * FROM t WHERE a IN (1) USING SELECT /*+ use_index(t, idx_a) */ * FROM t WHERE a IN (1);
 > mysql> SHOW GLOBAL BINDINGS;
-> +-----------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
-> | Original_sql                                  | Bind_sql                                                           | Default_db | Status  | Create_time             | Update_time             | Charset | Collation       | Source | Sql_digest                                                       | Plan_digest |
-> +-----------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
-> | select * from `test` . `t` where `a` in ( ? ) | SELECT /*+ use_index(`t` `a`)*/ * FROM `test`.`t` WHERE `a` IN (1) | test       | enabled | 2023-10-20 14:28:10.093 | 2023-10-20 14:28:10.093 | utf8    | utf8_general_ci | manual | 8b9c4e6ab8fad5ba29b034311dcbfc8a8ce57dde2e2d5d5b65313b90ebcdebf7 |             |
-> +-----------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
+> +-----------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | Original_sql                                  | Bind_sql                                                               | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
+> +-----------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | select * from `test` . `t` where `a` in ( ? ) | SELECT /*+ use_index(`t` `idx_a`)*/ * FROM `test`.`t` WHERE `a` IN (1) | test       | enabled | 2024-09-03 15:39:02.695 | 2024-09-03 15:39:02.695 | utf8mb4 | utf8mb4_general_ci | manual | 8b9c4e6ab8fad5ba29b034311dcbfc8a8ce57dde2e2d5d5b65313b90ebcdebf7 |             |
+> +-----------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
 >
 > -- After the upgrade to v7.4.0 or a later version
 > mysql> SHOW GLOBAL BINDINGS;
-> +-------------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
-> | Original_sql                                    | Bind_sql                                                           | Default_db | Status  | Create_time             | Update_time             | Charset | Collation       | Source | Sql_digest                                                       | Plan_digest |
-> +-------------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
-> | select * from `test` . `t` where `a` in ( ... ) | SELECT /*+ use_index(`t` `a`)*/ * FROM `test`.`t` WHERE `a` IN (1) | test       | enabled | 2023-10-20 14:28:10.093 | 2023-10-20 14:28:10.093 | utf8    | utf8_general_ci | manual | 8b9c4e6ab8fad5ba29b034311dcbfc8a8ce57dde2e2d5d5b65313b90ebcdebf7 |             |
-> +-------------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
+> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | Original_sql                                    | Bind_sql                                                               | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
+> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | select * from `test` . `t` where `a` in ( ... ) | SELECT /*+ use_index(`t` `idx_a`)*/ * FROM `test`.`t` WHERE `a` IN (1) | test       | enabled | 2024-09-03 15:35:59.861 | 2024-09-03 15:35:59.861 | utf8mb4 | utf8mb4_general_ci | manual | da38bf216db4a53e1a1e01c79ffa42306419442ad7238480bb7ac510723c8bdf |             |
+> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
 > ```
 
 When a SQL statement has bound execution plans in both GLOBAL and SESSION scopes, because the optimizer ignores the bound execution plan in the GLOBAL scope when it encounters the SESSION binding, the bound execution plan of this statement in the SESSION scope shields the execution plan in the GLOBAL scope.
@@ -254,9 +254,9 @@ To use this binding method, you need to first get the Plan Digest corresponding 
     For example:
 
     ```sql
-    CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY(a));
-    SELECT /*+ IGNORE_INDEX(t, a) */ * FROM t WHERE a = 1;
-    SELECT * FROM INFORMATION_SCHEMA.STATEMENTS_SUMMARY WHERE QUERY_SAMPLE_TEXT = 'SELECT /*+ IGNORE_INDEX(t, a) */ * FROM t WHERE a = 1'\G
+    CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY idx_a(a));
+    SELECT /*+ IGNORE_INDEX(t, idx_a) */ * FROM t WHERE a = 1;
+    SELECT * FROM INFORMATION_SCHEMA.STATEMENTS_SUMMARY WHERE QUERY_SAMPLE_TEXT = 'SELECT /*+ IGNORE_INDEX(t, idx_a) */ * FROM t WHERE a = 1'\G
     ```
 
     The following is a part of the example query result of `statements_summary`:
@@ -291,7 +291,7 @@ SHOW BINDINGS\G
 ```
 *************************** 1. row ***************************
 Original_sql: select * from `test` . `t` where `a` = ?
-    Bind_sql: SELECT /*+ use_index(@`sel_1` `test`.`t` ) ignore_index(`t` `a`)*/ * FROM `test`.`t` WHERE `a` = 1
+    Bind_sql: SELECT /*+ use_index(@`sel_1` `test`.`t` ) ignore_index(`t` `idx_a`)*/ * FROM `test`.`t` WHERE `a` = 1
        ...........
   Sql_digest: 6909a1bbce5f64ade0a532d7058dd77b6ad5d5068aee22a531304280de48349f
  Plan_digest:
@@ -544,8 +544,8 @@ In these scenarios, cross-database binding can effectively mitigate SQL performa
 To create a cross-database binding, you only need to use `*` to represent the database name when creating a binding. For example:
 
 ```sql
-CREATE GLOBAL BINDING USING SELECT /*+ use_index(t, a) */ * FROM t; -- Create a GLOBAL scope standard binding.
-CREATE GLOBAL BINDING USING SELECT /*+ use_index(t, a) */ * FROM *.t; -- Create a GLOBAL scope cross-database binding.
+CREATE GLOBAL BINDING USING SELECT /*+ use_index(t, idx_a) */ * FROM t; -- Create a GLOBAL scope standard binding.
+CREATE GLOBAL BINDING USING SELECT /*+ use_index(t, idx_a) */ * FROM *.t; -- Create a GLOBAL scope cross-database binding.
 SHOW GLOBAL BINDINGS;
 ```
 
@@ -555,8 +555,8 @@ The output is as follows:
 +----------------------------+---------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
 | Original_sql               | Bind_sql                                          | Default_db | Status  | Create_time             | Update_time             | Charset | Collation       | Source | Sql_digest                                                       | Plan_digest |
 +----------------------------+---------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
-| select * from `test` . `t` | SELECT /*+ use_index(`t` `a`)*/ * FROM `test`.`t` | test       | enabled | 2023-12-29 14:19:01.332 | 2023-12-29 14:19:01.332 | utf8    | utf8_general_ci | manual | 8b193b00413fdb910d39073e0d494c96ebf24d1e30b131ecdd553883d0e29b42 |             |
-| select * from `*` . `t`    | SELECT /*+ use_index(`t` `a`)*/ * FROM `*`.`t`    |            | enabled | 2023-12-29 14:19:02.232 | 2023-12-29 14:19:02.232 | utf8    | utf8_general_ci | manual | 8b193b00413fdb910d39073e0d494c96ebf24d1e30b131ecdd553883d0e29b42 |             |
+| select * from `test` . `t` | SELECT /*+ use_index(`t` `idx_a`)*/ * FROM `test`.`t` | test       | enabled | 2023-12-29 14:19:01.332 | 2023-12-29 14:19:01.332 | utf8    | utf8_general_ci | manual | 8b193b00413fdb910d39073e0d494c96ebf24d1e30b131ecdd553883d0e29b42 |             |
+| select * from `*` . `t`    | SELECT /*+ use_index(`t` `idx_a`)*/ * FROM `*`.`t`    |            | enabled | 2023-12-29 14:19:02.232 | 2023-12-29 14:19:02.232 | utf8    | utf8_general_ci | manual | 8b193b00413fdb910d39073e0d494c96ebf24d1e30b131ecdd553883d0e29b42 |             |
 +----------------------------+---------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
 ```
 
@@ -586,7 +586,7 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
 3. Create a cross-database binding:
 
     ```sql
-    CREATE GLOBAL BINDING USING SELECT /*+ use_index(t1, a), use_index(t2, a) */ * FROM *.t1, *.t2;
+    CREATE GLOBAL BINDING USING SELECT /*+ use_index(t1, idx_a), use_index(t2, idx_a) */ * FROM *.t1, *.t2;
     ```
 
 4. Execute queries and verify whether the binding is used:
@@ -633,7 +633,7 @@ Apart from the creation syntax, cross-database bindings share the same deletion 
     +----------------------------------------------+------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
     | Original_sql                                 | Bind_sql                                                                                 | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
     +----------------------------------------------+------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
-    | select * from ( `*` . `t1` ) join `*` . `t2` | SELECT /*+ use_index(`t1` `a`) use_index(`t2` `a`)*/ * FROM (`*` . `t1`) JOIN `*` . `t2` |            | enabled | 2023-12-29 14:22:28.144 | 2023-12-29 14:22:28.144 | utf8    | utf8_general_ci    | manual | ea8720583e80644b58877663eafb3579700e5f918a748be222c5b741a696daf4 |             |
+    | select * from ( `*` . `t1` ) join `*` . `t2` | SELECT /*+ use_index(`t1` `idx_a`) use_index(`t2` `idx_a`)*/ * FROM (`*` . `t1`) JOIN `*` . `t2` |            | enabled | 2023-12-29 14:22:28.144 | 2023-12-29 14:22:28.144 | utf8    | utf8_general_ci    | manual | ea8720583e80644b58877663eafb3579700e5f918a748be222c5b741a696daf4 |             |
     +----------------------------------------------+------------------------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
     ```
 
