@@ -348,7 +348,7 @@ SELECT * FROM t;
 
 The newly allocated value is `101`. This shows that the size of cache for allocating auto-increment IDs is `100`.
 
-In addition, when the length of consecutive IDs in a batch `INSERT` statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can be inserted properly.
+In addition, when the length of consecutive IDs in a batch `INSERT` statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can insert data properly.
 
 ### Clear the auto-increment ID cache
 
