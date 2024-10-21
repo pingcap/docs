@@ -9,25 +9,35 @@ The `QUERY WATCH` statement is used to manually manage the watch list of runaway
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Synopsis
 
 ```ebnf+diagram
 AddQueryWatchStmt ::=
     "QUERY" "WATCH" "ADD" QueryWatchOptionList
+
 QueryWatchOptionList ::=
     QueryWatchOption
 |   QueryWatchOptionList QueryWatchOption
 |   QueryWatchOptionList ',' QueryWatchOption
+
 QueryWatchOption ::=
     "RESOURCE" "GROUP" ResourceGroupName
 |   "RESOURCE" "GROUP" UserVariable
 |   "ACTION" EqOpt ResourceGroupRunawayActionOption
 |   QueryWatchTextOption
+
 ResourceGroupName ::=
     Identifier
 |   "DEFAULT"
+
+ResourceGroupRunawayActionOption ::=
+    DRYRUN
+|   COOLDOWN
+|   KILL
+|   "SWITCH_GROUP" '(' ResourceGroupName ')'
+
 QueryWatchTextOption ::=
     "SQL" "DIGEST" SimpleExpr
 |   "PLAN" "DIGEST" SimpleExpr

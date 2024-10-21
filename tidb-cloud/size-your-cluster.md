@@ -5,11 +5,11 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 # Determine Your TiDB Size
 
-This document describes how to determine the size of a TiDB Dedicated cluster.
+This document describes how to determine the size of a TiDB Cloud Dedicated cluster.
 
 > **Note:**
 >
-> You cannot change the size of a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster.
+> You cannot change the size of a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster.
 
 ## Size TiDB
 

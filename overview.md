@@ -1,10 +1,10 @@
 ---
-title: TiDB Introduction
+title: What is TiDB Self-Managed
 summary: Learn about the key features and usage scenarios of TiDB.
 aliases: ['/docs/dev/key-features/','/tidb/dev/key-features','/docs/dev/overview/']
 ---
 
-# TiDB Introduction
+# What is TiDB Self-Managed
 
 <!-- Localization note for TiDB:
 
@@ -15,6 +15,8 @@ aliases: ['/docs/dev/key-features/','/tidb/dev/key-features','/docs/dev/overview
 -->
 
 [TiDB](https://github.com/pingcap/tidb) (/'taɪdiːbi:/, "Ti" stands for Titanium) is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
+
+TiDB Self-Managed is a product option of TiDB, where users or organizations can deploy and manage TiDB on their own infrastructure with complete flexibility. With TiDB Self-Managed, you can enjoy the power of open source, distributed SQL while retaining full control over your environment.
 
 The following video introduces key features of TiDB.
 

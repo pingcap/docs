@@ -7,7 +7,7 @@ summary: Learn about functions and operators available for Vector Data Types.
 
 > **Note:**
 >
-> Vector data types and these vector functions are only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> Vector data types and these vector functions are only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 ## Vector functions
 

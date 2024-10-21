@@ -29,7 +29,6 @@ Grafana is an open source project for analyzing and visualizing metrics. TiDB us
 ![Grafana monitored_groups](/media/grafana-monitored-groups.png)
 
 - {TiDB_Cluster_name}-Backup-Restore: Monitoring metrics related to backup and restore.
-- {TiDB_Cluster_name}-Binlog: Monitoring metrics related to TiDB Binlog.
 - {TiDB_Cluster_name}-Blackbox_exporter: Monitoring metrics related to network probe.
 - {TiDB_Cluster_name}-Disk-Performance: Monitoring metrics related to disk performance.
 - {TiDB_Cluster_name}-Kafka-Overview: Monitoring metrics related to Kafka.

@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
-summary: Learn how to connect to TiDB Serverless from serverless and edge environments.
+summary: Learn how to connect to TiDB Cloud Serverless from serverless and edge environments.
 aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
@@ -10,7 +10,7 @@ aliases: ['/tidbcloud/serverless-driver-config']
 
 Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to TiDB Serverless clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
+[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Cloud Serverless cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to TiDB Cloud Serverless clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
 
 > **Note:**
 >
@@ -26,11 +26,11 @@ npm install @tidbcloud/serverless
 
 ## Use the serverless driver
 
-You can use the serverless driver to query data of a TiDB Serverless cluster or perform interactive transactions.
+You can use the serverless driver to query data of a TiDB Cloud Serverless cluster or perform interactive transactions.
 
 ### Query
 
-To query data from a TiDB Serverless cluster, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
+To query data from a TiDB Cloud Serverless cluster, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -154,10 +154,10 @@ At the connection level, you can make the following configurations:
 
 | Name         | Type     | Default value | Description                                                                                                                                                                                                                                                                                                                                                  |
 |--------------|----------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`   | string   | N/A           | Username of TiDB Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `password`   | string   | N/A           | Password of TiDB Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `host`       | string   | N/A           | Hostname of TiDB Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `database`   | string   | `test`        | Database of TiDB Serverless                                                                                                                                                                                                                                                                                                                                  |
+| `username`   | string   | N/A           | Username of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
+| `password`   | string   | N/A           | Password of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
+| `host`       | string   | N/A           | Hostname of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
+| `database`   | string   | `test`        | Database of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
 | `url`        | string   | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database.                                                                                                                                                                                 |
 | `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                                                                                                                                               |
 | `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                         |
@@ -267,9 +267,9 @@ DDL is supported and the following SQL statements are supported:  `SELECT`, `SHO
 
 ### Data type mapping
 
-The type mapping between TiDB Serverless and Javascript is as follows:
+The type mapping between TiDB Cloud Serverless and Javascript is as follows:
 
-| TiDB Serverless type | Javascript type |
+| TiDB Cloud Serverless type | Javascript type |
 |----------------------|-----------------|
 | TINYINT              | number          |
 | UNSIGNED TINYINT     | number          |
@@ -310,7 +310,7 @@ The type mapping between TiDB Serverless and Javascript is as follows:
 
 > **Note:**
 >
-> Make sure to use the default `utf8mb4` character set in TiDB Serverless for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the UTF-8 encoding to decode them to strings. 
+> Make sure to use the default `utf8mb4` character set in TiDB Cloud Serverless for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the UTF-8 encoding to decode them to strings. 
 
 > **Note:**
 >
@@ -327,7 +327,7 @@ TiDB Cloud serverless driver has been integrated with the following ORMs:
 
 ## Pricing
 
-The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
+The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [TiDB Cloud Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
 
 ## Limitations
 

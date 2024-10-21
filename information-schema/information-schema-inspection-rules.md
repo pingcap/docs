@@ -9,7 +9,7 @@ The `INSPECTION_RULES` table provides information about which diagnostic tests a
 
 > **Note:**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 {{< copyable "sql" >}}
 

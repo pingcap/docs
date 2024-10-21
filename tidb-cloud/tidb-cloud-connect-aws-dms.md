@@ -18,10 +18,10 @@ You are expected to have an AWS account with enough access to manage DMS-related
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have a TiDB Cloud account and a TiDB Serverless or TiDB Dedicated cluster. If not, refer to the following documents to create one:
+You are expected to have a TiDB Cloud account and a TiDB Cloud Serverless or TiDB Cloud Dedicated cluster. If not, refer to the following documents to create one:
 
-- [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-- [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
+- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
 ## Configure network
 
@@ -29,33 +29,33 @@ Before creating DMS resources, you need to configure network properly to ensure 
 
 <SimpleTab>
 
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
-For TiDB Serverless, your clients can connect to clusters via public endpoint or private endpoint.
+For TiDB Cloud Serverless, your clients can connect to clusters via public endpoint or private endpoint.
 
-- To [connect to a TiDB Serverless cluster via public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md), do one of the following to make sure that the DMS replication instance can access the internet.
+- To [connect to a TiDB Cloud Serverless cluster via public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md), do one of the following to make sure that the DMS replication instance can access the internet.
 
     - Deploy the replication instance in public subnets and enable **Public accessible**. For more information, see [Configuration for internet access](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access).
 
     - Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
 
-- To connect to a TiDB Serverless cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) first and deploy the replication instance in private subnets.
+- To connect to a TiDB Cloud Serverless cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) first and deploy the replication instance in private subnets.
 
 </div>
 
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
-For TiDB Dedicated, your clients can connect to clusters via public endpoint, private endpoint, or VPC peering.
+For TiDB Cloud Dedicated, your clients can connect to clusters via public endpoint, private endpoint, or VPC peering.
 
-- To [connect to a TiDB Dedicated cluster via public endpoint](/tidb-cloud/connect-via-standard-connection.md), do one of the following to make sure that the DMS replication instance can access the internet. In addition, you need to add the public IP address of the replication instance or NAT gateway to the cluster's [IP access list](/tidb-cloud/configure-ip-access-list.md).
+- To [connect to a TiDB Cloud Dedicated cluster via public endpoint](/tidb-cloud/connect-via-standard-connection.md), do one of the following to make sure that the DMS replication instance can access the internet. In addition, you need to add the public IP address of the replication instance or NAT gateway to the cluster's [IP access list](/tidb-cloud/configure-ip-access-list.md).
 
     - Deploy the replication instance in public subnets and enable **Public accessible**. For more information, see [Configuration for internet access](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access).
 
     - Deploy the replication instance in private subnets and route traffic in the private subnets to public subnets. In this case, you need at least three subnets, two private subnets, and one public subnet. The two private subnets form a subnet group where the replication instance lives. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway. For more information, see [Access the internet from a private subnet](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access).
 
-- To connect to a TiDB Dedicated cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) first and deploy the replication instance in private subnets.
+- To connect to a TiDB Cloud Dedicated cluster via private endpoint, [set up a private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) first and deploy the replication instance in private subnets.
 
-- To connect to a TiDB Dedicated cluster via VPC peering, [set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) first and deploy the replication instance in private subnets.
+- To connect to a TiDB Cloud Dedicated cluster via VPC peering, [set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) first and deploy the replication instance in private subnets.
 
 </div>
 </SimpleTab>
@@ -110,25 +110,25 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
 
     <SimpleTab>
 
-    <div label="TiDB Serverless">
+    <div label="TiDB Cloud Serverless">
 
-    - **Server name**: `HOST` of TiDB Serverless cluster.
-    - **Port**: `PORT` of TiDB Serverless cluster.
-    - **User name**: User of TiDB Serverless cluster for migration. Make sure it meets DMS requirements.
-    - **Password**: Password of the TiDB Serverless cluster user.
+    - **Server name**: `HOST` of TiDB Cloud Serverless cluster.
+    - **Port**: `PORT` of TiDB Cloud Serverless cluster.
+    - **User name**: User of TiDB Cloud Serverless cluster for migration. Make sure it meets DMS requirements.
+    - **Password**: Password of the TiDB Cloud Serverless cluster user.
     - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set the mode to **none**.
-    - (Optional) **CA certificate**: Use the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). For more information, see [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    - (Optional) **CA certificate**: Use the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). For more information, see [TLS Connections to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
 
     </div>
 
-    <div label="TiDB Dedicated">
+    <div label="TiDB Cloud Dedicated">
 
-    - **Server name**: `HOST` of TiDB Dedicated cluster.
-    - **Port**: `PORT` of TiDB Dedicated cluster.
-    - **User name**: User of TiDB Dedicated cluster for migration. Make sure it meets DMS requirements.
-    - **Password**: Password of TiDB Dedicated cluster user.
+    - **Server name**: `HOST` of TiDB Cloud Dedicated cluster.
+    - **Port**: `PORT` of TiDB Cloud Dedicated cluster.
+    - **User name**: User of TiDB Cloud Dedicated cluster for migration. Make sure it meets DMS requirements.
+    - **Password**: Password of TiDB Cloud Dedicated cluster user.
     - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set it to **none**.
-    - (Optional) **CA certificate**: Get the CA certificate according to [TLS connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md).
+    - (Optional) **CA certificate**: Get the CA certificate according to [TLS connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md).
 
     </div>
     </SimpleTab>
