@@ -1,21 +1,20 @@
 ---
-title: TiDB Performance Tips
-summary: Learn how to make TiDB run faster by adjusting settings and handling edege cases
+title: Optimizing TiDB: Key Settings for Maximum Performance
+summary: Learn how to optimize TiDB performance by configuring key settings and addressing edge cases
 
 ---
 
-# TiDB Performance Tips
+# Optimizing TiDB: Key Settings for Maximum Performance
 
-This guide shows you how to make TiDB run as fast as possible. We'll cover:
-- How to set up TiDB's settings
-- Best practices for common workloads
-- Ways to handle tricky performance issues
+This guide provides essential information on optimizing TiDB for peak performance. We'll explore:
+- Performance best practices for common workloads
+- Strategies for addressing challenging performance scenarios
 
-These tips are great for when you're first trying out TiDB (what we call a Proof of Concept or PoC).
+These optimization techniques are particularly valuable when conducting initial TiDB evaluations, commonly referred to as Proof of Concept (PoC) deployments.
 
 > **Important Note:**
 >
-> To get the best speed in a PoC, we'll use some settings and features that aren't the default. These aren't meant for stable production use.
+> To get the best speed in a PoC, we'll use some features that are experimental. These aren't meant for stable production use.
 
 # Why This Matters
 
@@ -25,11 +24,11 @@ When testing TiDB, we usually try to stick to the default settings for stability
 
 To make PoCs faster and easier, we've put together some "out of the box" settings. These are more aggressive than our defaults, based on what we've learned from many PoCs and real-world systems. This guide explains these non-default settings and their pros and cons.
 
-# General Tips
+# Key Settings for common workloads
 
 These suggested settings are safe to use when setting up a PoC cluster. They cover the most common tweaks needed during a PoC, including:
 - Caching query plans
-- Adjusting how TiDB figures out the best way to run queries
+- Adjusting optimizer settings how TiDB figures out the best way to run queries
 - Using TiKV's Titan storage engine more aggressively
 
 ## system variables
@@ -132,6 +131,48 @@ snap-io-max-write-bytes-per-sec = "300MiB"
 | ---------| ---- | ----|
 | snap-io-max-write-bytes-per-sec | Increase the bandwidth to speed up data replication to TiFlash Nodes | more impact on online traffic during scale operation | 
 
+# Benchmark 
+
+## YCSB workloads on Large record value
+
+### Environment
+Environment: Cluster specification: 3 tidb (16c64g) + 3 tikv (16c64g)
+TiDB Version: v8.4.0
+Workload : [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
+
+### Throughput Comparison between Baseline and Key Settings
+Below result show the throughput improvement of Key Settings comparing to the baseline as OPS(operation per second).
+
+Baseline: the default settings
+Key Settings: the settings of variables and configurations in this guide
+
+| Item | Baseline(OPS) | Key Settings(OPS) | diff(%) |
+| ---------| ---- | ----| ----|
+| load data| 2858.5 | 5074.3 | 77.59% |
+| workloada | 2243.0 | 12804.3 | 470.86% |
+
+### Performance Analysis
+
+The default min-blob-size of Titan in TiDB v8.4.0 is 32KB. For the baseline configuration, we use a record size of 31KB to ensure data is stored in RocksDB. In contrast, for the key settings configuration, we set min-blob-size to 1KB, causing data to be stored in Titan.
+
+The performance improvement observed in the Key Settings can be primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the figures below:
+
+- Baseline: The total throughput of RocksDB compaction exceeds 1GB/s, with peaks over 3GB/s.
+- Key Settings: The peak throughput of RocksDB compaction remains below 100MB/s.
+
+This significant reduction in compaction overhead contributes to the overall throughput improvement seen in the Key Settings configuration.
+![titan-rocksdb-compactions](/media/key-settings/titan-rocksdb-compactions.png)
+
+
+### Workload Commands
+load data
+```
+go-ycsb load mysql -P /ycsb/workloads/workloada -p mysql.host=benchbot-gcp-ycsb-tps-7525162-1-147--tiup -p mysql.port=3390 -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -p requestdistribution=uniform -pfieldcount=31 -p fieldlength=1024
+```
+run workload
+```
+go-ycsb run mysql -P /ycsb/workloads/workloada -p mysql.host=benchbot-gcp-ycsb-tps-7525162-1-147--tiup -p mysql.port=3390 -p mysql.db=test -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -prequestdistribution=uniform -p fieldcount=31 -p fieldlength=1024
+```
 
 
 # Edge Cases and Specific Optimizations
