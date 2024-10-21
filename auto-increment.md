@@ -309,7 +309,6 @@ Query OK, 0 rows affected (0.02 sec)
 
 INSERT INTO t values();
 Query OK, 1 row affected (0.00 sec)
-Records: 1  Duplicates: 0  Warnings: 0
 
 SELECT * FROM t;
 +---+
