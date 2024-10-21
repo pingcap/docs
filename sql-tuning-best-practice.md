@@ -21,7 +21,7 @@ SQL tuning is a critical aspect of optimizing database system performance. It in
    - This may include rewriting queries, adding or modifying indexes, updating statistics, or adjusting database parameters.
 
 These steps are iteratively repeated until:
-- The system performance meets the desired targets, or
+- The system performance meets the desired targets
 - No further improvements can be made to the remaining statements.
 
 It's important to note that SQL tuning is an ongoing process. As your data volumes grow and query patterns evolve, you should:
@@ -483,15 +483,60 @@ This optimized plan demonstrates the importance of accurate statistics and prope
 +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
 ```
 
-# 4. Real-World Use Cases
-
-## Debugging a Bad Plan
-When a SQL query performs poorly, it’s usually due to an inefficient execution plan. Key steps to debug:
-
-Compare estimated rows and actual rows from the execution plan. Large discrepancies indicate a problem with the statistics or index selection.
-Ensure appropriate indexes are being used. If the query scans large portions of data, it may require better indexing or statistics updates.
-
 ## Index Strategy in TiDB
+
+TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) requests that need to be processed.
+
+In TiDB, leveraging indexes effectively is crucial for performance tuning, as it can significantly reduce the number of KV RPC (Remote Procedure Call) requests. By minimizing these requests, you can greatly improve query performance and overall system efficiency. Here are some key strategies:
+
+- Avoiding full table scans
+- Avoiding sorting
+- Skipping row lookups when possible
+
+
+1. Create appropriate indexes: Design indexes that cover the columns frequently used in WHERE, JOIN, and ORDER BY clauses.
+
+2. Use covering indexes: When possible, create indexes that include all the columns needed for a query, allowing TiDB to satisfy the query using only the index (Index-Only Scan).
+
+3. Optimize query patterns: Structure your queries to take advantage of existing indexes and avoid operations that might prevent index usage.
+
+4. Consider composite indexes: For queries that filter or sort on multiple columns, a well-designed composite index can be more efficient than multiple single-column indexes.
+
+5. Use prefix indexes: For string columns, consider indexing only the first few characters if that's sufficient for most queries.
+
+6. Regularly analyze tables: Keep statistics up-to-date to help the query optimizer make better decisions about index usage.
+
+By focusing on these index optimization strategies, you can significantly reduce the number of KV RPC requests, leading to improved query performance in TiDB.
+
+
+### SQL Tuning Strategy - Reducing the Required I/O
+
+Minimize the number of columns in the SELECT statement
+Use a WHERE clause to filter irrelevant results
+Use a LIMIT clause to minimize the size of the result set
+Carefully create indexes on relevant columns for fast lookup
+Push down predicates and functions to TiKV layer when possible
+Create indexes that can hold all required data for small, frequent queries to enable IndexReader 
+
+
+Indexing for Query Performance
+
+A good indexing strategy enables TiDB reduces I/O by
+Avoiding full table scans
+Avoiding sorting
+Skipping row lookups when possible
+
+The Cost of Indexing
+
+
+Do NOT create unnecessary indexes in TiDB
+Data modifications are slower in tables that have many indexes
+Affected indexes must be updated in cascade
+Negatively impacts the write-intensive workloads significantly
+Indexes consume disk space
+
+
+
 Indexes play a critical role in query performance. A well-designed index can drastically reduce query execution time.
 
 Make sure to follow the composite index strategy
