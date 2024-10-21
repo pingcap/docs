@@ -9,26 +9,28 @@ This guide provides essential information on optimizing TiDB for peak performanc
 - Performance best practices for common workloads
 - Strategies for addressing challenging performance scenarios
 
-These optimization techniques are particularly valuable when conducting initial TiDB evaluations, commonly referred to as Proof of Concept (PoC) deployments.
-
 > **Important Note:**
 >
-> To get the best speed in a PoC, we'll use some features that are experimental. These aren't meant for stable production use.
+> These optimization techniques are particularly valuable when pursuing extreme performance in TiDB. However, it's important to note that performance tuning often involves trade-offs between multiple factors, and there is no single "silver bullet" solution. Some of the techniques described here may use experimental features, which are specifically called out. While these optimizations can yield significant performance gains, they may not be suitable for stable production environments and should be used with caution.
+
 
 # Why This Matters
 
-Making TiDB run its best takes a lot of tweaking. In fact, more than half the time spent on PoCs is usually about improving performance.
+Optimizing TiDB for peak performance requires careful tuning of various settings. In many cases, achieving optimal performance involves adjusting configurations beyond their default values.
 
-When testing TiDB, we usually try to stick to the default settings for stability. But to get really good performance, we often need to change some settings and use experimental features.
+While default settings are chosen for stability, maximizing performance often requires more aggressive configurations and sometimes the use of experimental features. This approach is based on insights gained from numerous real-world deployments and performance optimization efforts.
 
-To make PoCs faster and easier, we've put together some "out of the box" settings. These are more aggressive than our defaults, based on what we've learned from many PoCs and real-world systems. This guide explains these non-default settings and their pros and cons.
+This guide explains these non-default settings, detailing their benefits and potential trade-offs. It's designed to help you make informed decisions when fine-tuning TiDB for your specific workload requirements.
 
-# Key Settings for common workloads
+# Key Settings for Common Workloads
 
-These suggested settings are safe to use when setting up a PoC cluster. They cover the most common tweaks needed during a PoC, including:
-- Caching query plans
-- Adjusting optimizer settings how TiDB figures out the best way to run queries
-- Using TiKV's Titan storage engine more aggressively
+The following suggested settings cover the most common optimizations for improving TiDB performance:
+
+- Enhancing query plan caching
+- Optimizing the query optimizer's behavior
+- More aggressive use of TiKV's Titan storage engine
+
+These settings can significantly boost performance for many common workloads, but as with any optimization, it's important to test thoroughly in your specific environment.
 
 ## system variables
 
@@ -113,8 +115,8 @@ l0-files-threshold = 60
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
-| concurrent-send-snap-limit concurrent-recv-snap-limit snap-io-max-bytes-per-sec | Increase the bandwidth to speed up tikv scale in/out operations, improve snapshot speed, scale-in/out is frequent operation during PoC| more impact on online traffic during scale operation | 
-| rocksdb.titan rocksdb.defaultcf.titan | RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.  To alleviate the bottleneck caused by limited disk throughput, you can improve performance by enabling Titan. | When Titan is enabled, there might be a slight performance degradation for range scans on the primary key. For more information, see Impact of min-blob-size on performance. | 
+| concurrent-send-snap-limit concurrent-recv-snap-limit snap-io-max-bytes-per-sec | Increase the bandwidth to speed up tikv scale in/out operations, improve snapshot speed, scale-in/out is frequent operation during performance tuning | more impact on online traffic during scale operation | 
+| rocksdb.titan rocksdb.defaultcf.titan | RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.  To alleviate the bottleneck caused by limited disk throughput, you can improve performance by enabling Titan. | When Titan is enabled, there might be a slight performance degradation for range scans on the primary key, and the space amplification is higher than RocksDB, at worse case, the space usage is 2x of the original data. For more information, see Impact of min-blob-size on performance. | 
 | l0-files-threshold | increase the thrshhold to avoid unneccessary flow control | - | 
 
 ## TiFlash Congiurations
@@ -152,7 +154,7 @@ Key Settings: the settings of variables and configurations in this guide
 
 ### Performance Analysis
 
-The default min-blob-size of Titan in TiDB v8.4.0 is 32KB. For the baseline configuration, we use a record size of 31KB to ensure data is stored in RocksDB. In contrast, for the key settings configuration, we set min-blob-size to 1KB, causing data to be stored in Titan.
+Titan is enabled by default since v7.6.0 and the default min-blob-size of Titan in TiDB v8.4.0 is 32KB. For the baseline configuration, we use a record size of 31KB to ensure data is stored in RocksDB. In contrast, for the key settings configuration, we set min-blob-size to 1KB, causing data to be stored in Titan.
 
 The performance improvement observed in the Key Settings can be primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the figures below:
 
@@ -301,8 +303,6 @@ Other common symptoms associated with too many MVCC versions include:
 2. High number of running tasks on the unified thread pool
 
 To mitigate these issues, consider enabling the in-memory engine as described in the previous section, and monitor your system closely after making any changes.
-
-
 
 ## Disable Auto Analyze During Batch Processing
 
