@@ -276,10 +276,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 >
 > This section provides compatibility changes you need to know when you upgrade from v8.3.0 to the current version (v8.4.0). If you are upgrading from v8.2.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
 
-### Behavior changes
-
-* Behavior change
-
 ### System variables
 
 | Variable name | Change type | Description |
@@ -351,10 +347,6 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
     * Starting from v8.0.0, TiDB Lightning deprecates the [old version of conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800) strategy for the physical import mode, and enables you to control the conflict detection strategy for both logical and physical import modes via the [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) parameter. The [`duplicate-resolution`](/tidb-lightning/tidb-lightning-configuration.md) parameter for the old version of conflict detection will be removed in a future release.
 
 ## Deprecated features
-
-* The following features are deprecated starting from v8.4.0:
-
-    * Deprecated feature
 
 * The following features are planned for deprecation in future versions:
 
