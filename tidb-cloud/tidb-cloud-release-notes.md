@@ -124,6 +124,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - [Vector data types](/vector-search-data-types.md), [vector index](/vector-search-index.md), and [vector functions and operators](/vector-search-functions-and-operators.md).
     - Ecosystem integrations with [LangChain](/vector-search-integrate-with-langchain.md), [LlamaIndex](/vector-search-integrate-with-llamaindex.md), and [JinaAI](/vector-search-integrate-with-jinaai-embedding.md).
+    - Programming language support for Python: [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md), [Peewee](/vector-search-integrate-with-peewee.md), and [Django ORM](/vector-search-integrate-with-django-orm.md).
     - Sample applications and tutorials: perform semantic searches for documents using [Python](/vector-search-get-started-using-python.md) or [SQL](/vector-search-get-started-using-sql.md).
 
   For more information, see [Vector search (beta) overview](/vector-search-overview.md).
