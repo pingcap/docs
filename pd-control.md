@@ -473,12 +473,12 @@ Success!
 
 Specify the priority of PD leader:
 
-```shell
-tiup ctl:v6.4.0 pd member leader_priority  pd-1 4
-tiup ctl:v6.4.0 pd member leader_priority  pd-2 3
-tiup ctl:v6.4.0 pd member leader_priority  pd-3 2
-tiup ctl:v6.4.0 pd member leader_priority  pd-4 1
-tiup ctl:v6.4.0 pd member leader_priority  pd-5 0
+```bash
+member leader_priority  pd-1 4
+member leader_priority  pd-2 3
+member leader_priority  pd-3 2
+member leader_priority  pd-4 1
+member leader_priority  pd-5 0
 ```
 
 > **Note:**
