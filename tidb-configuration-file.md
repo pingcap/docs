@@ -177,7 +177,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 >
 > Starting from v8.1.0, the telemetry feature in TiDB is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions.
 
-- Before v8.1.0, this configuration item controls whether to enable telemetry collection in a TiDB instance
+- Before v8.1.0, this configuration item controls whether to enable telemetry collection in a TiDB instance.
 - Default value: `false`
 
 ### `deprecate-integer-display-length`
