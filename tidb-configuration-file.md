@@ -171,7 +171,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `64`
 - Currently, the valid value range is `[64, 512]`.
 
-### `enable-telemetry` <span class="version-mark">New in v4.0.2, Deprecated in v8.1.0</span>
+### `enable-telemetry` <span class="version-mark">New in v4.0.2 and deprecated in v8.1.0</span>
 
 > **Warning:**
 >

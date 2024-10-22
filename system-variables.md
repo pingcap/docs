@@ -2708,7 +2708,7 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table.md) is enabled by default.
 
-### tidb_enable_telemetry <span class="version-mark">New in v4.0.2, Deprecated in v8.1.0</span>
+### tidb_enable_telemetry <span class="version-mark">New in v4.0.2 and deprecated in v8.1.0</span>
 
 > **Warning:**
 >
