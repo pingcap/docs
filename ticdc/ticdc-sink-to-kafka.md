@@ -151,6 +151,17 @@ The following are examples when using Kafka SASL authentication:
     - The `Create`, `Write`, and `Describe` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
     - The `DescribeConfigs` permission for the Cluster resource type.
 
+  The usage scenarios for each permission are as follows:
+
+    | Resource type | Type of operation      |  Scenario                           |
+    | :-------------| :------------- | :--------------------------------|
+    | Cluster       | `DescribeConfig`| Gets the cluster metadata while the changefeed is running |
+    | Topic         | `Describe`      | Topic  When the changefeed starts, it tries to create a topic |                
+    | Topic         | `Create`        | Topic  When the changefeed starts, it tries to create a topic  |
+    | Topic         | `Write`         | Sends data to the topic                   | 
+
+    When creating or starting a changefeed, you can disable the `Describe` and `Create` permissions if the specified Kafka topic already exists.
+
 ### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
 To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you need to use the `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `schema-registry`.
