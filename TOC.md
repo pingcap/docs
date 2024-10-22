@@ -157,6 +157,14 @@
     - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
 - Maintain
+  - Security
+    - [Best Practices for TiDB Security Configuration](/best-practices-for-security-configuration.md)
+    - [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
+    - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
+    - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
+    - [Encryption at Rest](/encryption-at-rest.md)
+    - [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
+    - [Log Redaction](/log-redaction.md)
   - Upgrade
     - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
@@ -618,6 +626,7 @@
   - TiProxy
     - [Overview](/tiproxy/tiproxy-overview.md)
     - [Load Balancing Policies](/tiproxy/tiproxy-load-balance.md)
+    - [Traffic Replay](/tiproxy/tiproxy-traffic-replay.md)
     - [Configuration](/tiproxy/tiproxy-configuration.md)
     - [Command Line Parameters](/tiproxy/tiproxy-command-line-flags.md)
     - [Monitoring Metrics](/tiproxy/tiproxy-grafana.md)
@@ -681,13 +690,6 @@
     - [TiFlash](/tiflash/monitor-tiflash.md)
     - [TiCDC](/ticdc/monitor-ticdc.md)
     - [Resource Control](/grafana-resource-control-dashboard.md)
-  - Security
-    - [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
-    - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
-    - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
-    - [Encryption at Rest](/encryption-at-rest.md)
-    - [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
-    - [Log Redaction](/log-redaction.md)
   - Privileges
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
     - [Privilege Management](/privilege-management.md)
@@ -995,6 +997,7 @@
         - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
     - [Metadata Lock](/metadata-lock.md)
     - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
+    - [Schema Cache](/schema-cache.md)
   - UI
     - TiDB Dashboard
       - [Overview](/dashboard/dashboard-intro.md)
@@ -1061,6 +1064,7 @@
   - v7.6
     - [7.6.0-DMR](/releases/release-7.6.0.md)
   - v7.5
+    - [7.5.4](/releases/release-7.5.4.md)
     - [7.5.3](/releases/release-7.5.3.md)
     - [7.5.2](/releases/release-7.5.2.md)
     - [7.5.1](/releases/release-7.5.1.md)
