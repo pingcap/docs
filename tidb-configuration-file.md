@@ -171,11 +171,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `64`
 - Currently, the valid value range is `[64, 512]`.
 
-### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>(deprecated)
+### `enable-telemetry` <span class="version-mark">New in v4.0.2, Deprecated in v8.1.0</span>
 
-- Enables or disables the telemetry collection in TiDB.
+> **Warning:**
+>
+> Starting from v8.1.0, the telemetry feature in TiDB is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions.
+
+- Before v8.1.0, this configuration item controls whether to enable telemetry collection in a TiDB instance
 - Default value: `false`
-- Starting from v8.1, telemetry has been removed from TiDB Server, and this variable is no longer functional. It is retained solely for compatibility purposes.
 
 ### `deprecate-integer-display-length`
 

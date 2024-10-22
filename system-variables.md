@@ -2708,12 +2708,11 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is deprecated since v8.4.0. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table.md) is enabled by default.
 
-### tidb_enable_telemetry <span class="version-mark">New in v4.0.2</span>
+### tidb_enable_telemetry <span class="version-mark">New in v4.0.2, Deprecated in v8.1.0</span>
 
 > **Warning:**
 >
-> Starting from v8.1, telemetry has been removed from TiDB Server, and this variable is no longer functional. It is retained solely for compatibility purposes.
->
+> Starting from v8.1.0, the telemetry feature in TiDB is removed, and this variable is no longer functional. It is retained solely for compatibility with earlier versions.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2723,13 +2722,13 @@ Query OK, 0 rows affected (0.09 sec)
 
 <CustomContent platform="tidb">
 
-- Starting from v8.1, telemetry has been removed from TiDB Server, and this variable is no longer functional.
+- Before v8.1.0, this variable controls whether to enable the telemetry collection in TiDB.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Starting from v8.1, telemetry has been removed from TiDB Server, and this variable is no longer functional.
+- This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
