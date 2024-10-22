@@ -27,12 +27,15 @@ This section describes how to use drivers and ORM frameworks in Java.
 
 Support level: **Full**
 
-You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/en/) to download and configure a Java JDBC driver. It is recommended to use MySQL Connector/J 8.0.33 or later with TiDB v6.3.0 and newer.
+You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/en/) to download and configure a Java JDBC driver. It is recommended to use the latest GA version of MySQL Connector/J with TiDB v6.3.0 or later.
+
+> **Warning:**
+>
+> There is a [bug](https://bugs.mysql.com/bug.php?id=106252) in the MySQL Connector/J 8.0 versions before 8.0.31 (see [MySQL JDBC bugs](/develop/dev-guide-third-party-tools-compatibility.md#mysql-jdbc-bugs) for details), which might cause threads to hang when using TiDB versions earlier than v6.3.0. To avoid this issue, do **NOT** use MySQL Connector/J 8.0.31 or an earlier version.
 
 > **Note:**
 >
-> - There is a [bug](https://bugs.mysql.com/bug.php?id=106252) in the Connector/J 8.0 versions before 8.0.32, which might cause threads to hang when using TiDB versions earlier than v6.3.0. To avoid this issue, it is recommended that you use either MySQL Connector/J 8.0.32 or a later version, or the TiDB JDBC (see the *TiDB-JDBC* tab).
-> - When you are using MySQL Connector/J 8.0 with TiDB v7.5.2 or earlier versions, it is recommended to set the TiDB configuration item [`server-version`](https://docs.pingcap.com/tidb/v7.5/tidb-configuration-file#server-version) to `"5.7.25-TiDB-v7.5.x"`. MySQL Connector/J attempts to access the [`information_schema.KEYWORDS`](/information-schema/information-schema-keywords.md) table if the TiDB server reports a version of MySQL 8.0.11 or later. However, this table is introduced starting from v7.5.3 and is not present in earlier versions. 
+> When you are using MySQL Connector/J 8.0 with TiDB v7.5.2 or earlier versions, it is recommended to set the TiDB configuration item [`server-version`](https://docs.pingcap.com/tidb/v7.5/tidb-configuration-file#server-version) to `"5.7.25-TiDB-v7.5.x"`. MySQL Connector/J attempts to access the [`information_schema.KEYWORDS`](/information-schema/information-schema-keywords.md) table if the TiDB server reports a version of MySQL 8.0.11 or later. However, this table is introduced starting from v7.5.3 and does not exist in earlier versions.
 
 For an example of how to build a complete application, see [Build a simple CRUD app with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md).
 
