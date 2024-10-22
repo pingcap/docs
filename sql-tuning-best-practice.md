@@ -422,7 +422,7 @@ To identify the bottleneck in a poorly performing query:
 
 In the execution plan below, the query ran for 5 minutes and 51 seconds before being canceled. Let's analyze the key issues:
 
-1. Severe underestimation: The first child operator `IndexReader_76` reads data from the index `index_cargos_on_refund_id(refund_id)`. The actual number of rows (`actRows`) is 256,811,189, which is drastically higher than the estimated 1 row (`estRows`).
+1. Severe underestimation: The first child operator `IndexReader_76` reads data from the index `index_orders_on_adjustment_id(adjustment_id)`. The actual number of rows (`actRows`) is 256,811,189, which is drastically higher than the estimated 1 row (`estRows`).
 
 2. Memory overflow: Due to this underestimation, the hash join operator `HashJoin_69` attempts to build a hash table with far more data than anticipated. This results in excessive memory usage (22.6GB) and disk usage (7.65GB).
 
@@ -430,7 +430,7 @@ In the execution plan below, the query ran for 5 minutes and 51 seconds before b
 
 4. Incorrect join order: The root cause of this inefficient plan is the severe underestimation of `estRows` for `IndexRangeScan_75`, which led to an incorrect join order decision by the optimizer.
 
-To address these issues, need to ensure that table statistics are up-to-date, especially for the `cargos` table and the `index_cargos_on_refund_id` index.
+To address these issues, need to ensure that table statistics are up-to-date, especially for the `orders` table and the `index_orders_on_adjustment_id` index.
 
 ```SQL
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
@@ -440,7 +440,7 @@ To address these issues, need to ensure that table statistics are up-to-date, es
 | └─IndexJoin_32                     | 1.01      | 460915067.45 | 0         | root      |                                                                                        | time:5m51.1s, l...| 0 Bytes  | N/A      |
 |   ├─HashJoin_69(Build)             | 1.01      | 460913065.41 | 0         | root      |                                                                                        | time:5m51.1s, l...| 21.6 GB  | 7.65 GB  |
 |   │ ├─IndexReader_76(Build)        | 1.00      | 18.80        | 256805045 | root      |                                                                                        | time:1m4.1s, lo...| 12.4 MB  | N/A      |
-|   │ │ └─IndexRangeScan_75          | 1.00      | 186.74       | 256811189 | cop[tikv] | table:cargos, index:index_cargos_on_refund_id(refund_id)                               | tikv_task:{proc...| N/A      | N/A      |
+|   │ │ └─IndexRangeScan_75          | 1.00      | 186.74       | 256811189 | cop[tikv] | table:orders, index:index_orders_on_adjustment_id(adjustment_id)                       | tikv_task:{proc...| N/A      | N/A      |
 |   │ └─Projection_74(Probe)         | 30652.93  | 460299612.60 | 1024      | root      |                                                                                        | time:1.08s, loo...| 413.4 KB | N/A      |
 |   │   └─IndexLookUp_73             | 30652.93  | 460287375.95 | 6144      | root      | partition:all                                                                          | time:1.08s, loo...| 107.8 MB | N/A      |
 |   │     ├─IndexRangeScan_70(Build) | 234759.64 | 53362737.50  | 390699    | cop[tikv] | table:rates, index:index_rates_on_label_id(label_id)                                   | time:29.6ms, lo...| N/A      | N/A      |
@@ -452,10 +452,10 @@ To address these issues, need to ensure that table statistics are up-to-date, es
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
 ```
 
-Here is the expected execution plan after fixing the incorrect estimation on the `cargos` table. The query now takes 1.96 seconds to run, which is a significant improvement from the previous 5 minutes and 51 seconds:
+Here is the expected execution plan after fixing the incorrect estimation on the `orders` table. The query now takes 1.96 seconds to run, which is a significant improvement from the previous 5 minutes and 51 seconds:
 
 1. Accurate estimation: The `estRows` values are now much closer to the `actRows`, indicating that the statistics have been updated and are more accurate.
-2. Efficient join order: The query now starts with a `TableReader` on the `labels` table, followed by an `IndexJoin` with the `rates` table, and finally another `IndexJoin` with the `cargos` table. This join order is more efficient given the actual data distribution.
+2. Efficient join order: The query now starts with a `TableReader` on the `labels` table, followed by an `IndexJoin` with the `rates` table, and finally another `IndexJoin` with the `orders` table. This join order is more efficient given the actual data distribution.
 3. No memory overflow: Unlike the previous plan, there are no signs of excessive memory or disk usage, indicating that the query executes within expected resource limits.
 4. Complete execution: All operators show non-zero `actRows`, confirming that the query completes successfully without being terminated due to resource constraints.
 
@@ -479,7 +479,7 @@ This optimized plan demonstrates the importance of accurate statistics and prope
 |   │       └─TableRowIDScan_94         | 6517.14  | 6481    | cop[tikv] | table:rates                                                                            | tikv_task:{pro...| N/A      | N/A  |
 |   └─TableReader_84(Probe)             | 984.56   | 1998    | root      |                                                                                        | time:207.6ms, ...| N/A      | N/A  |
 |     └─Selection_83                    | 984.56   | 1998    | cop[tikv] |                                                                                        | tikv_task:{pro...| N/A      | N/A  |
-|       └─TableRangeScan_82             | 1000.00  | 2048    | cop[tikv] | table:cargos                                                                           | tikv_task:{pro...| N/A      | N/A  |
+|       └─TableRangeScan_82             | 1000.00  | 2048    | cop[tikv] | table:orders                                                                           | tikv_task:{pro...| N/A      | N/A  |
 +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
 ```
 
@@ -492,6 +492,78 @@ In TiDB, leveraging indexes effectively is crucial for performance tuning, as it
 - Avoiding full table scans
 - Avoiding sorting
 - Skipping row lookups when possible
+
+### Improving Query Speed with a Custom Index
+
+The original query took 11 minutes and 9 seconds to complete, which is an extremely long execution time for a query that only needs to return 101 rows. This poor performance can be attributed to several factors:
+
+1. Inefficient index usage: The optimizer chose the index on created_at, which resulted in scanning 25,147,450 rows.
+2. Large intermediate result set: After applying the date range filter, 12,082,311 rows still needed to be processed.
+3. Late filtering: The most selective predicates (mode, user_id, and label_id) were applied after accessing the table, resulting in 16,604 rows.
+4. Sorting overhead: The final sort operation on 16,604 rows added additional processing time.
+
+Performance Improvement with the New Index:
+
+After creating the new index (new_idx on orders(user_id, mode, id, created_at, label_id)), the query performance improved dramatically. The execution time reduced from 11 minutes and 9 seconds to just 5.3 milliseconds, which is a staggering improvement of over 126,000 times faster. This massive improvement can be explained by:
+
+1. Efficient index usage: The new index allows for an index range scan on user_id, mode, and id, which are the most selective predicates. This drastically reduces the number of rows scanned from millions to just 224.
+2. Covering index: The new index includes all columns needed for the query, eliminating the need for table lookups.
+3. Index-only sort: The 'keep order:true' in the plan indicates that the index structure is used for sorting, avoiding a separate sort operation.
+4. Early filtering: The most selective predicates are applied first, quickly reducing the result set to 224 rows before further filtering.
+5. Limit push-down: The LIMIT clause is pushed down to the index scan, allowing early termination of the scan once 101 rows are found.
+
+This case demonstrates the profound impact that a well-designed index can have on query performance. By aligning the index structure with the query's predicates, sort order, and required columns, we achieved a performance improvement of over five orders of magnitude.
+
+Here is the query pattern
+```SQL
+SELECT `orders`.*
+FROM `orders`
+WHERE `orders`.`mode` = 'production'
+AND `orders`.`user_id` = 11111
+AND (orders.label_id IS NOT NULL)
+AND (orders.created_at >= '2024-04-07 18:07:52')
+AND (orders.created_at <= '2024-05-11 18:07:52')
+AND (id >= 1000000000)
+AND (id <= 2000000000)
+AND (orders.id < 1500000000) 
+ORDER BY orders.id DESC LIMIT 101;
+```
+
+```SQL
+PRIMARY KEY (`id`),
+UNIQUE KEY `index_orders_on_adjustment_id` (`adjustment_id`),
+KEY `index_orders_on_user_id` (`user_id`),
+KEY `index_orders_on_label_id` (`label_id`),
+KEY `index_orders_on_created_at` (`created_at`)
+```
+
+
+original plan
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+| id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+| TopN_10                        | 101.00    | 101     | root      |                                                                                | time:11m9.8s, loops:2                               | orders.id:desc, offset:0, count:101                                                                                  | 271 KB   | N/A  |
+| └─IndexLookUp_39               | 173.83    | 16604   | root      |                                                                                | time:11m9.8s, loops:19, index_task: {total_time:...}|                                                                                                                      | 20.4 MB  | N/A  |
+|   ├─Selection_37(Build)        | 8296.70   | 12082311| cop[tikv] |                                                                                | time:26.4ms, loops:11834, cop_task: {num: 294, m...}| ge(orders.id, 1000000000), le(orders.id, 2000000000), lt(orders.id, 1500000000)                                      | N/A      | N/A  |
+|   │ └─IndexRangeScan_35        | 6934161.90| 25147450| cop[tikv] | table:orders, index:index_orders_on_created_at(created_at)                     | tikv_task:{proc max:2.15s, min:0s, avg: 58.9ms, ...}| range:[2024-04-07 18:07:52,2024-05-11 18:07:52), keep order:false                                                    | N/A      | N/A  |
+|   └─Selection_38(Probe)        | 173.83    | 16604   | cop[tikv] |                                                                                | time:54m46.2s, loops:651, cop_task: {num: 1076, ...}| eq(orders.mode, "production"), eq(orders.user_id, 11111), not(isnull(orders.label_id))                               | N/A      | N/A  |
+|     └─TableRowIDScan_36        | 8296.70   | 12082311| cop[tikv] | table:orders                                                                   | tikv_task:{proc max:44.8s, min:0s, avg: 3.33s, p...}| keep order:false                                                                                                     | N/A      | N/A  |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+
+
+plan with new index (user_id, mode, id, created_at, label_id) 
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+| id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+| IndexLookUp_32                 | 101.00    | 101     | root      |                                                                                | time:5.3ms, loops:2, RU:3.435006, index_task: {t...}| limit embedded(offset:0, count:101)                                                                                  | 128.5 KB | N/A  |
+| ├─Limit_31(Build)              | 101.00    | 101     | cop[tikv] |                                                                                | time:1.35ms, loops:1, cop_task: {num: 1, max: 1....}| offset:0, count:101                                                                                                  | N/A      | N/A  |
+| │ └─Selection_30               | 535.77    | 224     | cop[tikv] |                                                                                | tikv_task:{time:0s, loops:3}                        | ge(orders.created_at, 2024-04-07 18:07:52), le(orders.created_at, 2024-05-11 18:07:52), not(isnull(orders.label_id)) | N/A      | N/A  |
+| │   └─IndexRangeScan_28        | 503893.42 | 224     | cop[tikv] | table:orders, index:index_orders_new(user_id, mode, id, created_at, label_id)  | tikv_task:{time:0s, loops:3}                        | range:[11111 "production" 1000000000,11111 "production" 1500000000), keep order:true, desc                           | N/A      | N/A  |
+| └─TableRowIDScan_29(Probe)     | 101.00    | 101     | cop[tikv] | table:orders                                                                   | time:2.9ms, loops:2, cop_task: {num: 3, max: 2.7...}| keep order:false                                                                                                     | N/A      | N/A  |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+
+
+
 
 
 1. Create appropriate indexes: Design indexes that cover the columns frequently used in WHERE, JOIN, and ORDER BY clauses.
