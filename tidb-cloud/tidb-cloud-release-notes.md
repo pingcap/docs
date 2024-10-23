@@ -10,6 +10,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## October 22, 2024
 
+**General changes**
+
 - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v7.5.3](https://docs.pingcap.com/tidb/v7.5/release-7.5.3) to [v7.5.4](https://docs.pingcap.com/tidb/v7.5/release-7.5.4).
 
 ## October 15, 2024
