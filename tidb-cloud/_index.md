@@ -1,6 +1,5 @@
 ---
 title: TiDB Cloud
-aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
 summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. It offers guides, samples, and references for learning, trying, developing, maintaining, migrating, monitoring, tuning, securing, billing, integrating, and referencing.
