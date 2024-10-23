@@ -97,7 +97,7 @@ In this example, no matter how you adjust the value of the time zone, the value 
 > - For data migration, you need to pay special attention to the time zone setting of the primary database and the secondary database.
 > - To get correct timestamps it is strongly recommended to setup a reliable clock with NTP or PTP. See [system configuration check: NTP](/check-before-deployment.md#check-and-install-the-ntp-service) for how to check this.
 > - When using a timezone that observes daylight saving this might lead to ambigious timestamps and/or nonexistent timestamps, especially if calculations are done with the timestamp.
-> - MySQL uses `mysql_tzinfo_to_sql` to convert the timezone database of the OS to tables in the database. This isn't used or needed with TiDB as TiDB relies on timezone data that's part of the Go programming language.
+> - MySQL uses `mysql_tzinfo_to_sql` to convert the timezone database of the OS to tables in the database. This isn't used or needed with TiDB as TiDB relies on timezone functions that directly read the data files from the OS timezone database that are part of the Go programming language.
 
 ## See also
 
