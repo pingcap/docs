@@ -238,7 +238,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
   By default, the CPU time consumed by TiKV is displayed. Collecting the CPU time consumed by TiDB brings additional overhead (about 8%), so the CPU time consumed by TiDB only shows the actual value when [Top SQL](/dashboard/top-sql.md) is enabled; otherwise, it always show as `0`.
 
-    For more information, see [documentation](/information-schema/information-schema-processlist.md) and [documentation](information-schema/information-schema-slow-query.md).
+    For more information, see [documentation](/information-schema/information-schema-processlist.md) and [documentation](/information-schema/information-schema-slow-query.md).
 
 * Top SQL supports viewing aggregated CPU time results by table or database [#55540](https://github.com/pingcap/tidb/issues/55540) @[nolouch](https://github.com/nolouch) **tw@lilin90** <!--1878-->
 
@@ -252,7 +252,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     When deploying TiDB on Amazon EC2, BR supports AWS Instance Metadata Service Version 2 (IMDSv2). You can configure your EC2 instance to allow BR to use the IAM role associated with the instance for appropriate permissions to access Amazon S3.
 
-    For more information, see [documentation](/backup-and-restore-storages#authentication).
+    For more information, see [documentation](/br/backup-and-restore-storages.md#authentication).
 
 ### Data migration
 
@@ -303,7 +303,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| TiDB | [`grpc-keepalive-time`](/tidb-configuration-file.md#grpc-keepalive-time) | Modified | Adds the minimum value of `1'. |
+| TiDB | [`grpc-keepalive-time`](/tidb-configuration-file.md#grpc-keepalive-time) | Modified | Adds the minimum value of `1`. |
 | TiDB | [`grpc-keepalive-timeout`](/tidb-configuration-file.md#grpc-keepalive-timeout) | Modified | Before v8.4.0, the data type of this parameter is INT, and the minimum value is `1`. Starting from v8.4.0, the data type is changed to FLOAT64, and the minimum value becomes `0.05`. In scenarios where network jitter occurs frequently, you can reduce the impact of network jitter on performance by setting a smaller value to shorten the retry interval. |
 | TiKV | [`region-split-keys`](/tikv-configuration-file.md#region-split-keys) | Modified | Changes the default value from `"960000"` to `"2560000"`. |
 | TiKV | [`region-split-size`](/tikv-configuration-file.md#region-split-size) | Modified | Changes the default value from `"96MiB"` to `"256MiB"`. |
@@ -340,7 +340,7 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
 
 * The following features are removed starting from v8.4.0:
 
-    * In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR. **tw@lilin90** <!--1946-->
+    * In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR. **tw@lilin90** <!--1946-->
 
 * The following features are planned for removal in future versions:
 
