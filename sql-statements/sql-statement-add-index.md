@@ -9,7 +9,7 @@ The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This
 
 > **Note:**
 >
-> "For TiDB Dedicated clusters with 4 vCPU specifications, it is recommended to manually disable ['tidb_ddl_enable_fast_reorg'](/system-variables#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability when adding indexes. Once disabled, indexes will be created using transactions, reducing the impact on the cluster."
+> For TiDB Dedicated clusters with 4 vCPU specifications, it is recommended to manually disable [tidb_ddl_enable_fast_reorg](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability during index creation. Disabling this setting allows indexes to be created using transactions, which reduces the overall impact on the cluster.
 
 <CustomContent platform="tidb">
 
