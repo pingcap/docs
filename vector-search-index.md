@@ -54,8 +54,8 @@ In TiDB, you can create an HNSW index for a column with a [vector data type](/ve
 - For an existing table that already contains a vector column, use the following syntax to create an HNSW index for the vector column:
 
     ```sql
-    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
-    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
+    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding)));
+    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)));
 
     -- You can also explicitly specify "USING HNSW" to build the vector search index.
     CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
