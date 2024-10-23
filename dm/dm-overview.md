@@ -63,17 +63,6 @@ Before using the DM tool, note the following restrictions:
 
     - DM does not support migrating `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
 
-<<<<<<< HEAD
-=======
-+ Binlog compatibility
-
-    - DM does not support the MySQL 8.0 new feature binlog [Transaction_payload_event](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html). Using binlog Transaction_payload_event might result in data inconsistency between upstream and downstream.
-
-+ Vector data type replication
-
-    - DM does not support migrating or replicating MySQL 9.0 vector data types to TiDB.
-
->>>>>>> 3add5b552b (update vector search docs (#18779))
 ## Contributing
 
 You are welcome to participate in the DM open sourcing project. Your contribution would be highly appreciated. For more details, see [CONTRIBUTING.md](https://github.com/pingcap/tiflow/blob/release-7.5/dm/CONTRIBUTING.md).
