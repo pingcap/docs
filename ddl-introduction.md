@@ -76,6 +76,36 @@ absent -> delete only -> write only -> write reorg -> public
 
 For users, the newly created index is unavailable before the `public` state.
 
+<SimpleTab>
+<div label="Online DDL asynchronous change before TiDB v6.2.0">
+
+Before v6.2.0, the process of handling asynchronous schema changes in the TiDB SQL layer is as follows:
+
+1. MySQL Client sends a DDL request to a TiDB server.
+
+2. After receiving the request, a TiDB server parses and optimizes the request at the MySQL Protocol layer, and then sends it to the TiDB SQL layer for execution.
+
+    Once the SQL layer of TiDB receives the DDL request, it starts the `start job` module to encapsulate the request into a specific DDL job (that is, a DDL task), and then stores this job in the corresponding DDL job queue in the KV layer based on the statement type. The corresponding worker is notified of the job that requires processing.
+
+3. When receiving the notification to process the job, the worker determines whether it has the role of the DDL Owner. If it does, it directly processes the job. Otherwise, it exits without any processing.
+
+    If a TiDB server is not the Owner role, then another node must be the Owner. The worker of the node in the Owner role periodically checks whether there is an available job that can be executed. If such a job is identified, the worker will process the job.
+
+4. After the worker processes the Job, it removes the job from the job queue in the KV layer and places it in the `job history queue`. The `start job` module that encapsulated the job periodically checks the ID of the job in the `job history queue` to see whether it has been processed. If so, the entire DDL operation corresponding to the job ends.
+
+5. TiDB server returns the DDL processing result to the MySQL Client.
+
+Before TiDB v6.2.0, the DDL execution framework had the following limitations:
+
+- The TiKV cluster only has two queues: `general job queue` and `add index job queue`, which handle logical DDL and physical DDL, respectively.
+- The DDL Owner always processes DDL jobs in a first-in-first-out way.
+- The DDL Owner can only execute one DDL task of the same type (either logical or physical) at a time, which is relatively strict, and affects the user experience.
+
+These limitations might lead to some "unintended" DDL blocking behavior. For more details, see [SQL FAQ - DDL Execution](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution).
+
+</div>
+<div label="Parallel DDL framework starting from v6.2.0">
+
 Before TiDB v6.2.0, because the Owner can only execute one DDL task of the same type (either logical or physical) at a time, which is relatively strict, and affects the user experience.
 
 If there is no dependency between DDL tasks, parallel execution does not affect data correctness and consistency. For example, user A adds an index to the `T1` table, while user B deletes a column from the `T2` table. These two DDL statements can be executed in parallel.
@@ -97,6 +127,9 @@ Specifically, TiDB 6.2.0 has enhanced the DDL execution framework in the followi
     Because all DDL tasks in TiDB are implemented using an online change approach, TiDB can determine the relevance of new DDL jobs through the Owner, and schedule DDL tasks based on this information. This approach enables the distributed database to achieve the same level of DDL concurrency as traditional databases.
 
 The concurrent DDL framework enhances the execution capability of DDL statements in TiDB, making it more compatible with the usage patterns of commercial databases.
+
+</div>
+</SimpleTab>
 
 ## Best practices
 
