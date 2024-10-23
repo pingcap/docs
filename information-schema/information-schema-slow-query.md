@@ -316,7 +316,7 @@ read_size: 4.06 MB
 | `initialize` | Time spent initializing |
 | `read_file` | Time spent reading the slow log file |
 | `parse_log.time` | Time spent parsing the slow log file |
-| `parse_log.concurrency` | Concurrency for parsing the slow log file (set by [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) ) |
+| `parse_log.concurrency` | Concurrency for parsing the slow log file (set by [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)) |
 | `total_file` | Total number of slow log files |
 | `read_file` | Number of slow log files that are read |
 | `read_size` | Bytes read from the log file |
