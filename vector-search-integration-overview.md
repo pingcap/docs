@@ -59,21 +59,21 @@ The following table lists the supported ORM libraries and the corresponding inte
     <td rowspan="4">Python</td>
     <td>TiDB Vector Client</td>
     <td><code>pip install tidb-vector[client]</code></td>
-    <td><a href="/tidb/dev/vector-search-get-started-using-python">Get Started with Vector Search Using Python</a></td>
+    <td><a href="/tidb/v8.4/vector-search-get-started-using-python">Get Started with Vector Search Using Python</a></td>
   </tr>
   <tr>
     <td>SQLAlchemy</td>
     <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidb/dev/vector-search-integrate-with-sqlalchemy">Integrate TiDB Vector Search with SQLAlchemy</a></td>
+    <td><a href="/tidb/v8.4/vector-search-integrate-with-sqlalchemy">Integrate TiDB Vector Search with SQLAlchemy</a></td>
   </tr>
   <tr>
     <td>peewee</td>
     <td><code>pip install tidb-vector</code></td>
-    <td><a href="/tidb/dev/vector-search-integrate-with-peewee">Integrate TiDB Vector Search with peewee</a></td>
+    <td><a href="/tidb/v8.4/vector-search-integrate-with-peewee">Integrate TiDB Vector Search with peewee</a></td>
   </tr>
   <tr>
     <td>Django</td>
     <td><code>pip install django-tidb[vector]</code></td>
-    <td><a href="/tidb/dev/vector-search-integrate-with-django-orm">Integrate TiDB Vector Search with Django</a></td>
+    <td><a href="/tidb/v8.4/vector-search-integrate-with-django-orm">Integrate TiDB Vector Search with Django</a></td>
   </tr>
 </table>
