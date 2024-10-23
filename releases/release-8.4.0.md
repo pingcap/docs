@@ -482,3 +482,14 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
 ## Contributors
 
 We would like to thank the following contributors from the TiDB community:
+
+- [ei-sugimoto](https://github.com/ei-sugimoto)
+- [eltociear](https://github.com/eltociear)
+- [guoshouyan](https://github.com/guoshouyan) (First-time contributor)
+- [JackL9u](https://github.com/JackL9u)
+- [kafka1991](https://github.com/kafka1991) (First-time contributor)
+- [qingfeng777](https://github.com/qingfeng777)
+- [samba-rgb](https://github.com/samba-rgb) (First-time contributor)
+- [SeaRise](https://github.com/SeaRise)
+- [tuziemon](https://github.com/tuziemon) (First-time contributor)
+- [xyproto](https://github.com/xyproto) (First-time contributor)
