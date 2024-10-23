@@ -1,15 +1,15 @@
 ---
 title: COMMIT | TiDB SQL Statement Reference
-summary: TiDBサーバー内でトランザクションをコミットするためのステートメントは、COMMITです。デフォルトの動作では、すべてのステートメントが独自のトランザクションとなり、自動コミットされます。MySQLとの互換性が保証されています。また、TiDBは構文を解析しますが、ROLLBACK AND [NO] RELEASEおよびROLLBACK AND [NO] CHAINを無視します。TiDB 3.0.8以降のバージョンでは悲観的ロックを使用し、オプティミスティック ロックが有効な場合は、UNIQUEとPRIMARY KEYの制約チェックが延期されます。
+summary: TiDB データベースの COMMIT の使用法の概要。
 ---
 
 # 専念 {#commit}
 
 このステートメントは、TIDBサーバー内でトランザクションをコミットします。
 
-`BEGIN`または`START TRANSACTION`ステートメントがない場合、TiDB のデフォルトの動作では、すべてのステートメントが独自のトランザクションとなり自動コミットされます。この動作により、MySQL との互換性が保証されます。
+`BEGIN`または`START TRANSACTION`ステートメントがない場合、TiDB のデフォルトの動作では、すべてのステートメントが独自のトランザクションと自動コミットになります。この動作により、MySQL との互換性が確保されます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CommitStmt ::=
@@ -36,17 +36,17 @@ mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
--   現在、TiDB はメタデータ ロック (MDL) を使用して、デフォルトで DDL ステートメントがトランザクションで使用されるテーブルを変更するのを防ぎます。メタデータ ロックの動作は、TiDB と MySQL で異なります。詳細については、 [メタデータロック](/metadata-lock.md)を参照してください。
--   デフォルトでは、TiDB 3.0.8 以降のバージョンは[悲観的ロック](/pessimistic-transaction.md)を使用します。 [楽観的ロック](/optimistic-transaction.md)を使用する場合は、行が別のトランザクションによって変更されているため、 `COMMIT`ステートメントが失敗する可能性があることを考慮することが重要です。
--   オプティミスティック ロックが有効な場合、 `UNIQUE`と`PRIMARY KEY`の制約チェックはステートメントがコミットされるまで延期されます。これにより、aa `COMMIT`ステートメントが失敗する可能性がある追加の状況が発生します。この動作は`tidb_constraint_check_in_place=ON`を設定することで変更できます。
--   TiDB は構文を解析しますが無視します`ROLLBACK AND [NO] RELEASE` 。この機能は、トランザクションをコミットした直後にクライアント セッションを切断するために MySQL で使用されます。 TiDB では、代わりにクライアント ドライバーの`mysql_close()`機能を使用することをお勧めします。
--   TiDB は構文を解析しますが無視します`ROLLBACK AND [NO] CHAIN` 。この機能は MySQL で使用され、現在のトランザクションがコミットされている間に、同じ分離レベルで新しいトランザクションを即座に開始します。 TiDB では、代わりに新しいトランザクションを開始することをお勧めします。
+-   現在、TiDB はメタデータ ロック (MDL) を使用して、デフォルトでトランザクションで使用されるテーブルが DDL ステートメントによって変更されるのを防ぎます。メタデータ ロックの動作は、TiDB と MySQL で異なります。詳細については、 [メタデータロック](/metadata-lock.md)参照してください。
+-   デフォルトでは、 TiDB 3.0.8 以降のバージョンでは[悲観的ロック](/pessimistic-transaction.md)使用されます。 [楽観的ロック](/optimistic-transaction.md)使用する場合は、別のトランザクションによって行が変更されているために`COMMIT`ステートメントが失敗する可能性があることを考慮することが重要です。
+-   オプティミスティック ロックが有効になっている場合、 `UNIQUE`および`PRIMARY KEY`制約チェックはステートメントがコミットされるまで延期されます。これにより、 `COMMIT`ステートメントが失敗する可能性がある状況が追加されます。この動作は`tidb_constraint_check_in_place=ON`設定することで変更できます。
+-   TiDB は構文`ROLLBACK AND [NO] RELEASE`を解析しますが無視します。この機能は、MySQL でトランザクションをコミットした直後にクライアント セッションを切断するために使用されます。TiDB では、代わりにクライアント ドライバーの`mysql_close()`機能を使用することをお勧めします。
+-   TiDB は構文`ROLLBACK AND [NO] CHAIN`を解析しますが無視します。この機能は、現在のトランザクションがコミットされている間に、同じ分離レベルで新しいトランザクションをすぐに開始するために MySQL で使用されます。TiDB では、代わりに新しいトランザクションを開始することをお勧めします。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
--   [取引を開始する](/sql-statements/sql-statement-start-transaction.md)
+-   [取引を開始](/sql-statements/sql-statement-start-transaction.md)
 -   [ロールバック](/sql-statements/sql-statement-rollback.md)
 -   [始める](/sql-statements/sql-statement-begin.md)
 -   [制約の遅延チェック](/transaction-overview.md#lazy-check-of-constraints)

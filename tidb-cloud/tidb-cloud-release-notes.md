@@ -8,6 +8,12 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年10月22日 {#october-22-2024}
+
+**一般的な変更**
+
+-   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン7.5.3](https://docs.pingcap.com/tidb/v7.5/release-7.5.3)から[バージョン7.5.4](https://docs.pingcap.com/tidb/v7.5/release-7.5.4)にアップグレードします。
+
 ## 2024年10月15日 {#october-15-2024}
 
 **APIの変更**

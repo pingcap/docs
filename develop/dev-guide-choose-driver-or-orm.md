@@ -27,12 +27,15 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 サポートレベル:**フル**
 
-[MySQL ドキュメント](https://dev.mysql.com/doc/connector-j/en/)に従って、 Java JDBC ドライバーをダウンロードして構成できます。TiDB v6.3.0 以降では、MySQL Connector/J 8.0.33 以降を使用することをお勧めします。
+[MySQL ドキュメント](https://dev.mysql.com/doc/connector-j/en/)に従って、 Java JDBC ドライバーをダウンロードして構成できます。TiDB v6.3.0 以降では、MySQL Connector/J の最新の GA バージョンを使用することをお勧めします。
+
+> **警告：**
+>
+> MySQL Connector/J 8.0 の 8.0.31 より前のバージョンには[バグ](https://bugs.mysql.com/bug.php?id=106252)があり (詳細は[MySQL JDBC のバグ](/develop/dev-guide-third-party-tools-compatibility.md#mysql-jdbc-bugs)を参照)、v6.3.0 より前のバージョンの TiDB を使用するとスレッドがハングする可能性があります。この問題を回避するには、MySQL Connector/J 8.0.31 以前のバージョンを使用し**ないで**ください。
 
 > **注記：**
 >
-> -   8.0.32 より前の Connector/J 8.0 バージョンには[バグ](https://bugs.mysql.com/bug.php?id=106252)があり、v6.3.0 より前の TiDB バージョンを使用するとスレッドがハングする可能性があります。この問題を回避するには、MySQL Connector/J 8.0.32 以降のバージョン、または TiDB JDBC ( *TiDB-JDBC*タブを参照) のいずれかを使用することをお勧めします。
-> -   MySQL Connector/J 8.0 を TiDB v7.5.2 以前のバージョンで使用する場合は、 TiDB 構成項目[`server-version`](https://docs.pingcap.com/tidb/v7.5/tidb-configuration-file#server-version)を`"5.7.25-TiDB-v7.5.x"`に設定することをお勧めします。MySQL Connector/J は、 TiDBサーバーがMySQL 8.0.11 以降のバージョンを報告すると、 [`information_schema.KEYWORDS`](/information-schema/information-schema-keywords.md)テーブルにアクセスしようとします。ただし、このテーブルは v7.5.3 から導入され、それ以前のバージョンには存在しません。
+> MySQL Connector/J 8.0 を TiDB v7.5.2 以前のバージョンで使用する場合は、 TiDB 構成項目[`server-version`](https://docs.pingcap.com/tidb/v7.5/tidb-configuration-file#server-version)を`"5.7.25-TiDB-v7.5.x"`に設定することをお勧めします。MySQL Connector/J は、 TiDBサーバーがMySQL 8.0.11 以降のバージョンを報告すると、 [`information_schema.KEYWORDS`](/information-schema/information-schema-keywords.md)テーブルにアクセスしようとします。ただし、このテーブルは v7.5.3 から導入されたもので、それ以前のバージョンには存在しません。
 
 完全なアプリケーションを構築する方法の例については、 [TiDB と JDBC を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-jdbc.md)参照してください。
 
@@ -41,7 +44,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 サポートレベル:**フル**
 
-[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29 をベースにカスタマイズされたJavaドライバーです。MySQL 公式バージョン 8.0.29 をベースにコンパイルされた TiDB-JDBC は、元の JDBC の準備モードでのマルチパラメータおよびマルチフィールド EOF のバグを修正し、自動 TiCDC スナップショット メンテナンスや SM3 認証プラグインなどの機能を追加します。
+[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) 、MySQL 8.0.29 をベースにカスタマイズされたJavaドライバーです。MySQL 公式バージョン 8.0.29 をベースにコンパイルされた TiDB-JDBC は、元の JDBC の準備モードでのマルチパラメータおよびマルチフィールド EOF のバグを修正し、自動 TiCDC スナップショット メンテナンスや SM3 認証プラグインなどの機能を追加します。
 
 SM3 ベースの認証は、TiDB の TiDB-JDBC でのみサポートされます。
 
@@ -95,11 +98,11 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 >
 > -   現在、Hibernate は[ネストされたトランザクションをサポートしない](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)実行します。
 >
-> -   v6.2.0 以降、 TiDB は[セーブポイント](/sql-statements/sql-statement-savepoint.md)サポートします。 `@Transactional`の`Propagation.NESTED`トランザクション伝播オプションを使用するには、つまり`@Transactional(propagation = Propagation.NESTED)`を設定するには、 TiDB が v6.2.0 以降であることを確認してください。
+> -   v6.2.0 以降、 TiDB は[セーブポイント](/sql-statements/sql-statement-savepoint.md)サポートしています。 `@Transactional`の`Propagation.NESTED`トランザクション伝播オプションを使用するには、つまり`@Transactional(propagation = Propagation.NESTED)`を設定するには、 TiDB が v6.2.0 以降であることを確認してください。
 
 サポートレベル:**フル**
 
-アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)を使用して、間接的なものも含め、アプリケーションのすべての依存関係を取得できます。TiDB 方言をサポートしているのは Hibernate `6.0.0.Beta2`以上のみであることに注意してください。
+アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)使用して、間接的なものも含め、アプリケーションのすべての依存関係を取得できます。TiDB 方言をサポートしているのは Hibernate `6.0.0.Beta2`以上のみであることに注意してください。
 
 **Maven を**使用している場合は、 `<dependencies></dependencies>`に以下を追加します。
 
@@ -131,7 +134,7 @@ implementation 'mysql:mysql-connector-java:8.0.33'
 
 > **注記：**
 >
-> `Hibernate`バージョンをアップグレードできない場合は、代わりにMySQL 5.7方言`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定では予期しない結果が生じたり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などの一部の TiDB 固有の機能が使用できなくなる可能性があります。
+> `Hibernate`バージョンをアップグレードできない場合は、代わりにMySQL 5.7方言`org.hibernate.dialect.MySQL57Dialect`使用してください。ただし、この設定では予期しない結果が生じたり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などの一部の TiDB 固有の機能が使用できなくなる可能性があります。
 
 </div>
 
@@ -139,7 +142,7 @@ implementation 'mysql:mysql-connector-java:8.0.33'
 
 サポートレベル:**フル**
 
-アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)を使用して、間接的な依存関係も含め、アプリケーションのすべての依存関係を取得できます。
+アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)使用して、間接的な依存関係も含め、アプリケーションのすべての依存関係を取得できます。
 
 Maven を使用している場合は、 `<dependencies></dependencies>`に以下を追加します。
 
@@ -271,14 +274,14 @@ MySQL Connector/Python を使用して TiDB アプリケーションを構築す
 </div>
 </SimpleTab>
 
-### Python ORM フレームワーク {#python-orm-frameworks}
+### Python ORMフレームワーク {#python-orm-frameworks}
 
 <SimpleTab>
 <div label="Django">
 
 サポートレベル:**フル**
 
-[ジャンゴ](https://docs.djangoproject.com/)は人気の Python Web フレームワークです。TiDB と Django 間の互換性の問題を解決するために、PingCAP は TiDB 方言`django-tidb`を提供しています。これをインストールするには、 [`django-tidb`ドキュメント](https://github.com/pingcap/django-tidb#installation-guide)参照してください。
+[ジャンゴ](https://docs.djangoproject.com/)は人気の Python Web フレームワークです。TiDB と Django 間の互換性の問題を解決するために、PingCAP は TiDB 方言`django-tidb`を提供しています。これをインストールするには、 [`django-tidb`ドキュメント](https://github.com/pingcap/django-tidb#installation-guide)を参照してください。
 
 Django を使用して TiDB アプリケーションを構築する例については、 [Django で TiDB に接続する](/develop/dev-guide-sample-application-python-django.md)参照してください。
 
@@ -309,7 +312,7 @@ peewee を使用して TiDB アプリケーションを構築する例につい�
 
 </CustomContent>
 
-## 助けが必要？ {#need-help}
+## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
