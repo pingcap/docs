@@ -198,7 +198,7 @@ Compared with the previous LTS 7.5.0, 8.1.0 includes new features, improvements,
 
 * Starting from v8.1.0, the telemetry feature in TiDB and TiDB Dashboard is removed:
 
-    * The system variable [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-and-deprecated-in-v810) , the TiDB configuration item [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402-and-deprecated-in-v810), and the PD configuration item [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) are deprecated and no longer functional.
+    * The system variable [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-and-deprecated-in-v810), the TiDB configuration item [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402-and-deprecated-in-v810), and the PD configuration item [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) are deprecated and no longer functional.
     * The `ADMIN SHOW TELEMETRY` syntax is removed.
     * The `TELEMETRY` and `TELEMETRY_ID` keywords are removed.
 
