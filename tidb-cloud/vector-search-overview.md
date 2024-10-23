@@ -43,7 +43,7 @@ A vector embedding, also known as an embedding, is a sequence of numbers that re
 
 Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
 
-TiDB introduces [Vector data types](/vector-search-data-types.md) and [Vector search index](/vector-search-index.md) designed to optimize the storage and retrieval of vector embeddings, enhancing their use in AI applications. You can store vector embeddings in TiDB and perform vector search queries to find the most relevant data using these data types.
+TiDB introduces [Vector data types](/tidb-cloud/vector-search-search-data-types.md) and [Vector search index](/tidb-cloud/vector-search-search-index.md) designed to optimize the storage and retrieval of vector embeddings, enhancing their use in AI applications. You can store vector embeddings in TiDB and perform vector search queries to find the most relevant data using these data types.
 
 ### Embedding model
 
@@ -57,7 +57,7 @@ To learn how to generate vector embeddings for your specific data types, refer t
 
 After converting raw data into vector embeddings and storing them in TiDB, your application can execute vector search queries to find the data most semantically or contextually relevant to a user's query.
 
-TiDB vector search identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the given vector in the query represent the most similar data in meaning.
+TiDB vector search identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the given vector in the query represent the most similar data in meaning.
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
@@ -84,5 +84,5 @@ A recommendation engine is a system that proactively suggests content, products,
 
 To get started with TiDB Vector Search, see the following documents:
 
-- [Get started with vector search using Python](/vector-search-get-started-using-python.md)
-- [Get started with vector search using SQL](/vector-search-get-started-using-sql.md)
+- [Get started with vector search using Python](/tidb-cloud/vector-search-search-get-started-using-python.md)
+- [Get started with vector search using SQL](/tidb-cloud/vector-search-search-get-started-using-sql.md)
