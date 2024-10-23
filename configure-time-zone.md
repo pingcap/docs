@@ -15,15 +15,15 @@ The time zone in TiDB is decided by the global [`time_zone`](/system-variables.m
 You can use the following statement to set the global server `time_zone` value at runtime:
 
 ```sql
-SET GLOBAL time_zone = timezone;
+SET GLOBAL time_zone = 'UTC';
 ```
 
-Examples values are named zones like `Africa/Nairobi` and `Asia/Jakarta` and UTC offsets like `+02:00` and `-05:00`.
+Examples values are named zones like `UTC`, `Africa/Nairobi`, `Asia/Jakarta` and UTC offsets like `+02:00` and `-05:00`.
 
 Each client has its own time zone setting, given by the session `time_zone` variable. Initially, the session variable takes its value from the global `time_zone` variable, but the client can change its own time zone with this statement:
 
 ```sql
-SET time_zone = timezone;
+SET time_zone = 'US/Pacific';
 ```
 
 You can use the following statement to view the current values of the global, client-specific and system time zones:
@@ -38,7 +38,7 @@ To set the format of the value of the `time_zone`:
 - The value can be given as a string indicating an offset from UTC, such as '+10:00' or '-6:00'.
 - The value can be given as a named time zone, such as 'Europe/Helsinki', 'US/Eastern', or 'MET'.
 
-The current session time zone setting affects the display and storage of time values that are zone-sensitive. This includes the values displayed by functions such as [`NOW()`](/functions-and-operators/date-and-time-functions.md) or `CURTIME()`. The `UTC_TIMESTAMP()` function can be used to get a timestamp based on UTC, which can be useful to avoid time zone specific issues. The `CONVERT_TZ()` function can be used to convert between timezones.
+The current session time zone setting affects the display and interpretation of time values that are zone-sensitive. This includes the values displayed by functions such as [`NOW()`](/functions-and-operators/date-and-time-functions.md) or `CURTIME()`. The `UTC_TIMESTAMP()` function can be used to get a timestamp based on UTC, which can be useful to avoid time zone specific issues. The `CONVERT_TZ()` function can be used to convert between timezones.
 
 > **Note:**
 >
