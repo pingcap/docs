@@ -5,11 +5,19 @@ summary: Learn how to integrate TiDB Vector Search with Django ORM to store embe
 
 # Integrate TiDB Vector Search with Django ORM
 
-This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the [TiDB Vector Search](/vector-search-overview.md), store embeddings, and perform vector search queries.
 
-> **Note**
+<CustomContent platform="tidb">
+
+> **Warning:**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+</CustomContent>
+
+> **Note:**
+>
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Prerequisites
 
@@ -17,7 +25,24 @@ To complete this tutorial, you need:
 
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB cluster.
+
+<CustomContent platform="tidb">
+
+**If you don't have a TiDB cluster, you can create one as follows:**
+
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+**If you don't have a TiDB cluster, you can create one as follows:**
+
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
+
+</CustomContent>
 
 ## Run the sample app
 
@@ -49,7 +74,7 @@ Install the required dependencies for the demo project:
 pip install -r requirements.txt
 ```
 
-For your existing project, you can install the following packages:
+Alternatively, you can install the following packages for your project:
 
 ```bash
 pip install Django django-tidb mysqlclient numpy python-dotenv
@@ -59,13 +84,20 @@ If you encounter installation issues with mysqlclient, refer to the mysqlclient 
 
 #### What is `django-tidb`
 
-`django-tidb` is a TiDB dialect for Django that enhances the Django ORM to support TiDB-specific features (For example, Vector Search) and resolves compatibility issues between TiDB and Django.
+`django-tidb` is a TiDB dialect for Django, which enhances the Django ORM to support TiDB-specific features (for example, Vector Search) and resolves compatibility issues between TiDB and Django.
 
 To install `django-tidb`, choose a version that matches your Django version. For example, if you are using `django==4.2.*`, install `django-tidb==4.2.*`. The minor version does not need to be the same. It is recommended to use the latest minor version.
 
 For more information, refer to [django-tidb repository](https://github.com/pingcap/django-tidb).
 
 ### Step 4. Configure the environment variables
+
+Configure the environment variables depending on the TiDB deployment option you've selected.
+
+<SimpleTab>
+<div label="TiDB Cloud Serverless">
+
+For a TiDB Cloud Serverless cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -107,6 +139,33 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
     TIDB_DATABASE=test
     TIDB_CA_PATH=/etc/ssl/cert.pem
     ```
+
+</div>
+<div label="TiDB Self-Managed">
+
+For a TiDB Self-Managed cluster, create a `.env` file in the root directory of your Python project. Copy the following content into the `.env` file, and modify the environment variable values according to the connection parameters of your TiDB cluster:
+
+```dotenv
+TIDB_HOST=127.0.0.1
+TIDB_PORT=4000
+TIDB_USERNAME=root
+TIDB_PASSWORD=
+TIDB_DATABASE=test
+```
+
+If you are running TiDB on your local machine, `TIDB_HOST` is `127.0.0.1` by default. The initial `TIDB_PASSWORD` is empty, so if you are starting the cluster for the first time, you can omit this field.
+
+The following are descriptions for each parameter:
+
+- `TIDB_HOST`: The host of the TiDB cluster.
+- `TIDB_PORT`: The port of the TiDB cluster.
+- `TIDB_USERNAME`: The username to connect to the TiDB cluster.
+- `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
+- `TIDB_DATABASE`: The name of the database you want to connect to.
+
+</div>
+
+</SimpleTab>
 
 ### Step 5. Run the demo
 
@@ -180,22 +239,6 @@ class Document(models.Model):
    embedding = VectorField(dimensions=3)
 ```
 
-#### Define a vector column optimized with index
-
-Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
-
-```python
-class DocumentWithIndex(models.Model):
-   content = models.TextField()
-   # Note:
-   #   - Using comment to add hnsw index is a temporary solution. In the future it will use `CREATE INDEX` syntax.
-   #   - Currently the HNSW index cannot be changed after the table has been created.
-   #   - Only Django >= 4.2 supports `db_comment`.
-   embedding = VectorField(dimensions=3, db_comment="hnsw(distance=cosine)")
-```
-
-TiDB will use this index to speed up vector search queries based on the cosine distance function.
-
 ### Store documents with embeddings
 
 ```python
@@ -206,7 +249,7 @@ Document.objects.create(content="tree", embedding=[1, 0, 0])
 
 ### Search the nearest neighbor documents
 
-TiDB Vector support below distance functions:
+TiDB Vector support the following distance functions:
 
 - `L1Distance`
 - `L2Distance`
@@ -233,5 +276,5 @@ results = Document.objects.annotate(
 
 ## See also
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
+- [Vector Data Types](/vector-search-data-types.md)
+- [Vector Search Index](/vector-search-index.md)
