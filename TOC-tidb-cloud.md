@@ -10,7 +10,7 @@
   - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
+  - [Try Out TiDB + AI](/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
@@ -241,27 +241,27 @@
 - Explore Data
   - [Chat2Query (Beta) in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
 - Vector Search (Beta)
-  - [Overview](/tidb-cloud/vector-search-overview.md)
+  - [Overview](/vector-search-overview.md)
   - Get Started
-    - [Get Started with SQL](/tidb-cloud/vector-search-get-started-using-sql.md)
-    - [Get Started with Python](/tidb-cloud/vector-search-get-started-using-python.md)
+    - [Get Started with SQL](/vector-search-get-started-using-sql.md)
+    - [Get Started with Python](/vector-search-get-started-using-python.md)
   - Integrations
-    - [Overview](/tidb-cloud/vector-search-integration-overview.md)
+    - [Overview](/vector-search-integration-overview.md)
     - AI Frameworks
-      - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
-      - [Langchain](/tidb-cloud/vector-search-integrate-with-langchain.md)
+      - [LlamaIndex](/vector-search-integrate-with-llamaindex.md)
+      - [Langchain](/vector-search-integrate-with-langchain.md)
     - Embedding Models/Services
-      - [Jina AI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
+      - [Jina AI](/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
-      - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
-      - [peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
-      - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+      - [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
+      - [peewee](/vector-search-integrate-with-peewee.md)
+      - [Django ORM](/vector-search-integrate-with-django-orm.md)
   - Reference
-    - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-    - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
-    - [Vector Index](/tidb-cloud/vector-search-index.md)
-  - [Improve Performance](/tidb-cloud/vector-search-improve-performance.md)
-  - [Limitations](/tidb-cloud/vector-search-limitations.md)
+    - [Vector Data Types](/vector-search-data-types.md)
+    - [Vector Functions and Operators](/vector-search-functions-and-operators.md)
+    - [Vector Index](/vector-search-index.md)
+  - [Improve Performance](/vector-search-improve-performance.md)
+  - [Limitations](/vector-search-limitations.md)
   - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Data Service (Beta)
   - [Overview](/tidb-cloud/data-service-overview.md)
