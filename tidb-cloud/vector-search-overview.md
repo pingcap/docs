@@ -1,31 +1,15 @@
 ---
-title: Vector Search Overview
+title: Vector Search (Beta) Overview
 summary: Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
 ---
 
-# Vector Search Overview
+# Vector Search (Beta) Overview
 
-TiDB Vector Search provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
-
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
+TiDB Vector Search (beta) provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
 
 > **Warning:**
 >
 > The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Concepts
 

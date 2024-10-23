@@ -7,18 +7,6 @@ summary: Learn about the Vector data types in TiDB.
 
 A vector is a sequence of floating-point numbers, such as `[0.3, 0.5, -0.1, ...]`. TiDB offers Vector data types, specifically optimized for efficiently storing and querying vector embeddings widely used in AI applications.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> Vector data types are only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
 The following Vector data types are currently available:
 
 - `VECTOR`: A sequence of single-precision floating-point numbers with any dimension.

@@ -14,18 +14,6 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 - Store vector embeddings.
 - Perform vector search queries.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
 ## Prerequisites
 
 To complete this tutorial, you need:
@@ -54,11 +42,6 @@ To complete this tutorial, you need:
 
 ### Step 1. Connect to the TiDB cluster
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
-
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -72,21 +55,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     ```bash
     mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
     ```
-
-</div>
-<div label="TiDB Self-Managed">
-
-After your TiDB Self-Managed cluster is started, execute your cluster connection command in the terminal.
-
-The following is an example connection command for macOS:
-
-```bash
-mysql --comments --host 127.0.0.1 --port 4000 -u root
-```
-
-</div>
-
-</SimpleTab>
 
 ### Step 2. Create a vector table
 

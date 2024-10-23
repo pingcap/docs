@@ -7,18 +7,6 @@ summary: Learn about functions and operators available for Vector data types.
 
 This document lists the functions and operators available for Vector data types.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> Vector data types and these vector functions are only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
 ## Vector functions
 
 The following functions are designed specifically for [Vector data types](/tidb-cloud/vector-search-data-types.md).

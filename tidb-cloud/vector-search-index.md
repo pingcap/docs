@@ -9,18 +9,6 @@ K-nearest neighbors (KNN) search is the method for finding the K closest points 
 
 In TiDB, you can create and use vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/tidb-cloud/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
 Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
 
 ## Restrictions

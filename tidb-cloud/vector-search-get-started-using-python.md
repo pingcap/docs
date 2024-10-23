@@ -9,18 +9,6 @@ This tutorial demonstrates how to develop a simple AI application that provides 
 
 Throughout this tutorial, you will develop this AI application using [TiDB Vector Search](/tidb-cloud/vector-search-overview.md), Python, [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python), and AI models.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
 ## Prerequisites
 
 To complete this tutorial, you need:
@@ -73,11 +61,6 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 
 ### Step 3. Configure the connection string to the TiDB cluster
 
-Configure the cluster connection string depending on the TiDB deployment option you've selected.
-
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
-
 For a TiDB Cloud Serverless cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
@@ -108,30 +91,6 @@ For a TiDB Cloud Serverless cluster, take the following steps to obtain the clus
     ```dotenv
     TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
     ```
-
-</div>
-<div label="TiDB Self-Managed">
-
-For a TiDB Self-Managed cluster, create a `.env` file in the root directory of your Python project. Copy the following content into the `.env` file, and modify the environment variable values according to the connection parameters of your TiDB cluster:
-
-```dotenv
-TIDB_DATABASE_URL="mysql+pymysql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
-# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
-```
-
-If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
-
-The following are descriptions for each parameter:
-
-- `<USER>`: The username to connect to the TiDB cluster.
-- `<PASSWORD>`: The password to connect to the TiDB cluster.
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
-
-</div>
-
-</SimpleTab>
 
 ### Step 4. Initialize the embedding model
 

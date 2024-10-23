@@ -7,18 +7,6 @@ summary: Learn how to integrate Vector Search in TiDB Cloud with LangChain.
 
 This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vector-search-overview.md) feature in TiDB Cloud with [LangChain](https://python.langchain.com/).
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
 > **Tip**
 >
 > You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
@@ -83,11 +71,6 @@ from langchain_text_splitters import CharacterTextSplitter
 
 ### Step 3. Set up your environment
 
-Configure the environment variables depending on the TiDB deployment option you've selected.
-
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
-
 For a TiDB Cloud Serverless cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
@@ -123,44 +106,6 @@ For a TiDB Cloud Serverless cluster, take the following steps to obtain the clus
     tidb_connection_string = getpass.getpass("TiDB Connection String:")
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
     ```
-
-</div>
-<div label="TiDB Self-Managed">
-
-This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
-
-To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
-
-```python
-# Use getpass to securely prompt for environment variables in your terminal.
-import getpass
-import os
-
-# Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-tidb_connection_string = getpass.getpass("TiDB Connection String:")
-os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-```
-
-Taking macOS as an example, the cluster connection string is as follows:
-
-```dotenv
-TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>"
-# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
-```
-
-You need to modify the values of the connection parameters according to your TiDB cluster. If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
-
-The following are descriptions for each parameter:
-
-- `<USERNAME>`: The username to connect to the TiDB cluster.
-- `<PASSWORD>`: The password to connect to the TiDB cluster.
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
-
-</div>
-
-</SimpleTab>
 
 ### Step 4. Load the sample document
 

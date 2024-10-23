@@ -7,18 +7,6 @@ summary: Learn how to integrate TiDB Vector Search with Jina AI Embeddings API t
 
 This tutorial walks you through how to use [Jina AI](https://jina.ai/) to generate embeddings for text data, and then store the embeddings in TiDB vector storage and search similar texts based on embeddings.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
 ## Prerequisites
 
 To complete this tutorial, you need:
@@ -78,9 +66,6 @@ pip install -r requirements.txt
 
 Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page, and then configure the environment variables depending on the TiDB deployment option you've selected.
 
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
-
 For a TiDB Cloud Serverless cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
@@ -116,31 +101,6 @@ For a TiDB Cloud Serverless cluster, take the following steps to obtain the clus
     ```dotenv
     TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
     ```
-
-</div>
-<div label="TiDB Self-Managed">
-
-For a TiDB Self-Managed cluster, set the environment variables for connecting to your TiDB cluster in your terminal as follows:
-
-```shell
-export JINA_API_KEY="****"
-export TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
-# For example: export TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
-```
-
-You need to replace parameters in the preceding command according to your TiDB cluster. If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
-
-The following are descriptions for each parameter:
-
-- `<USERNAME>`: The username to connect to the TiDB cluster.
-- `<PASSWORD>`: The password to connect to the TiDB cluster.
-- `<HOST>`: The host of the TiDB cluster.
-- `<PORT>`: The port of the TiDB cluster.
-- `<DATABASE>`: The name of the database you want to connect to.
-
-</div>
-
-</SimpleTab>
 
 ### Step 5. Run the demo
 

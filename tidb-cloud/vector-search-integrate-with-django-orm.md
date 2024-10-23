@@ -7,18 +7,6 @@ summary: Learn how to integrate TiDB Vector Search with Django ORM to store embe
 
 This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the [TiDB Vector Search](/tidb-cloud/vector-search-overview.md), store embeddings, and perform vector search queries.
 
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-</CustomContent>
-
-> **Note:**
->
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
 ## Prerequisites
 
 To complete this tutorial, you need:
@@ -92,11 +80,6 @@ For more information, refer to [django-tidb repository](https://github.com/pingc
 
 ### Step 4. Configure the environment variables
 
-Configure the environment variables depending on the TiDB deployment option you've selected.
-
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
-
 For a TiDB Cloud Serverless cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
@@ -139,33 +122,6 @@ For a TiDB Cloud Serverless cluster, take the following steps to obtain the clus
     TIDB_DATABASE=test
     TIDB_CA_PATH=/etc/ssl/cert.pem
     ```
-
-</div>
-<div label="TiDB Self-Managed">
-
-For a TiDB Self-Managed cluster, create a `.env` file in the root directory of your Python project. Copy the following content into the `.env` file, and modify the environment variable values according to the connection parameters of your TiDB cluster:
-
-```dotenv
-TIDB_HOST=127.0.0.1
-TIDB_PORT=4000
-TIDB_USERNAME=root
-TIDB_PASSWORD=
-TIDB_DATABASE=test
-```
-
-If you are running TiDB on your local machine, `TIDB_HOST` is `127.0.0.1` by default. The initial `TIDB_PASSWORD` is empty, so if you are starting the cluster for the first time, you can omit this field.
-
-The following are descriptions for each parameter:
-
-- `TIDB_HOST`: The host of the TiDB cluster.
-- `TIDB_PORT`: The port of the TiDB cluster.
-- `TIDB_USERNAME`: The username to connect to the TiDB cluster.
-- `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
-- `TIDB_DATABASE`: The name of the database you want to connect to.
-
-</div>
-
-</SimpleTab>
 
 ### Step 5. Run the demo
 
