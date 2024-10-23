@@ -5,7 +5,7 @@ summary: Learn how to integrate TiDB Vector Search with peewee to store embeddin
 
 # Integrate TiDB Vector Search with peewee
 
-This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with the [TiDB Vector Search](/tidb-cloud/vector-search-search-overview.md), store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with the [TiDB Vector Search](/tidb-cloud/vector-search-search-search-overview.md), store embeddings, and perform vector search queries.
 
 <CustomContent platform="tidb">
 
@@ -266,5 +266,5 @@ results = Document.select(Document, distance).where(distance_expression < 0.2).o
 
 ## See also
 
-- [Vector Data Types](/tidb-cloud/vector-search-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-search-index.md)
+- [Vector Data Types](/tidb-cloud/vector-search-search-search-data-types.md)
+- [Vector Search Index](/tidb-cloud/vector-search-search-search-index.md)
