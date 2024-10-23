@@ -7,6 +7,10 @@ summary: Learn how to integrate TiDB Vector Search with Jina AI Embeddings API t
 
 This tutorial walks you through how to use [Jina AI](https://jina.ai/) to generate embeddings for text data, and then store the embeddings in TiDB vector storage and search similar texts based on embeddings.
 
+> **Note**
+>
+> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
 ## Prerequisites
 
 To complete this tutorial, you need:
@@ -47,9 +51,7 @@ pip install -r requirements.txt
 
 ### Step 4. Configure the environment variables
 
-Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page, and then configure the environment variables depending on the TiDB deployment option you've selected.
-
-For a TiDB Cloud Serverless cluster, take the following steps to obtain the cluster connection string and configure environment variables:
+Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page. Then, obtain the cluster connection string and configure environment variables as follows:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 

@@ -7,6 +7,10 @@ summary: Learn about functions and operators available for Vector data types.
 
 This document lists the functions and operators available for Vector data types.
 
+> **Note**
+>
+> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
 ## Vector functions
 
 The following functions are designed specifically for [Vector data types](/tidb-cloud/vector-search-data-types.md).

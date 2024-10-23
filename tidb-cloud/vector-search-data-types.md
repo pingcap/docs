@@ -18,6 +18,10 @@ Using vector data types provides the following advantages over using the [`JSON`
 - Dimension enforcement: You can specify a dimension to forbid inserting vectors with different dimensions.
 - Optimized storage format: Vector data types are optimized for handling vector data, offering better space efficiency and performance compared to `JSON` types.
 
+> **Note**
+>
+> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
 ## Syntax
 
 You can use a string in the following syntax to represent a Vector value:

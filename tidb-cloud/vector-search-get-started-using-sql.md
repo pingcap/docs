@@ -14,6 +14,10 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 - Store vector embeddings.
 - Perform vector search queries.
 
+> **Note**
+>
+> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
 ## Prerequisites
 
 To complete this tutorial, you need:
