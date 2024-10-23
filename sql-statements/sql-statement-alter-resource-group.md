@@ -53,6 +53,8 @@ ResourceGroupRunawayOptionList ::=
 
 DirectResourceGroupRunawayOption ::=
     "EXEC_ELAPSED" EqOpt stringLit
+|   "PROCESSED_KEYS" EqOpt intLit
+|   "RU" EqOpt intLit
 |   "ACTION" EqOpt ResourceGroupRunawayActionOption
 |   "WATCH" EqOpt ResourceGroupRunawayWatchOption "DURATION" EqOpt stringLit
 
@@ -64,6 +66,7 @@ ResourceGroupRunawayActionOption ::=
     DRYRUN
 |   COOLDOWN
 |   KILL
+| "SWITCH_GROUP" '(' ResourceGroupName ')'
 
 BackgroundOptionList ::=
     DirectBackgroundOption

@@ -1933,6 +1933,20 @@ Configuration items related to Raft Engine.
 + If there are multiple disks on your machine, it is recommended to store the data of Raft Engine on a different disk to improve TiKV performance.
 + Default value: `""`
 
+### `spill-dir` <span class="version-mark">New in v8.4.0</span>
+
++ The auxiliary directory for storing Raft log files. When the disk for the `dir` directory is full, new Raft logs will be stored under this directory. If this auxiliary directory does not exist after configuration, it will be automatically created when TiKV is started.
++ If this configuration is not set, the auxiliary directory is not enabled.
+
+> **Note:**
+>
+> - This configuration takes effect only when the `dir` and `spill-dir` of the Raft Engine are set to different disk drives.
+> - After enabling this feature, if you want to disable it, you need to perform the following operations before restarting TiKV. Otherwise, TiKV will fail to start.
+>     1. Stop TiKV.
+>     2. Copy all the Raft Logs from the `spill-dir` directory to the [`dir`](/tikv-configuration-file.md#dir) directory.
+>     3. Remove this configuration from the TiKV configuration file.
+>     4. Restart TiKV.
+
 ### `batch-compression-threshold`
 
 + Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
@@ -2306,6 +2320,18 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Enables the in-memory pessimistic lock feature. With this feature enabled, pessimistic transactions try to store their locks in memory, instead of writing the locks to disk or replicating the locks to other replicas. This improves the performance of pessimistic transactions. However, there is a still low probability that the pessimistic lock gets lost and causes the pessimistic transaction commits to fail.
 + Default value: `true`
 + Note that `in-memory` takes effect only when the value of `pipelined` is `true`.
+
+### `in-memory-peer-size-limit` <span class="version-mark">New in v8.4.0</span>
+
++ Controls the memory usage limit for [in-memory pessimistic locks](/pessimistic-transaction.md#in-memory-pessimistic-lock) in a Region. When this limit is exceeded, TiKV writes pessimistic locks persistently.
++ Default value: `512KiB`
++ Unit: KiB|MiB|GiB
+
+### `in-memory-instance-size-limit` <span class="version-mark">New in v8.4.0</span>
+
++ Controls the memory usage limit for [in-memory pessimistic locks](/pessimistic-transaction.md#in-memory-pessimistic-lock) in a TiKV instance. When this limit is exceeded, TiKV writes pessimistic locks persistently.
++ Default value: `100MiB`
++ Unit: KiB|MiB|GiB
 
 ## quota
 

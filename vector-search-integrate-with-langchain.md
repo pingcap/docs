@@ -5,12 +5,23 @@ summary: Learn how to integrate Vector Search in TiDB Cloud with LangChain.
 
 # Integrate Vector Search with LangChain
 
-This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vector-search-overview.md) feature in TiDB Cloud with [LangChain](https://python.langchain.com/).
+This tutorial demonstrates how to integrate the [vector search](/vector-search-overview.md) feature in TiDB Cloud with [LangChain](https://python.langchain.com/).
 
-> **Note**
+<CustomContent platform="tidb">
+
+> **Warning:**
 >
-> - TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
-> - You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
+> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+</CustomContent>
+
+> **Note:**
+>
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
+> **Tip**
+>
+> You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
 
 ## Prerequisites
 
@@ -19,7 +30,24 @@ To complete this tutorial, you need:
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Jupyter Notebook](https://jupyter.org/install) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB cluster.
+
+<CustomContent platform="tidb">
+
+**If you don't have a TiDB cluster, you can create one as follows:**
+
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+**If you don't have a TiDB cluster, you can create one as follows:**
+
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
+
+</CustomContent>
 
 ## Get started
 
@@ -44,7 +72,7 @@ In your project directory, run the following command to install the required pac
 !pip install tidb-vector
 ```
 
-Open the `integrate_with_langchain.ipynb` file in Jupyter Notebook and add the following code to import the required packages:
+Open the `integrate_with_langchain.ipynb` file in Jupyter Notebook, and then add the following code to import the required packages:
 
 ```python
 from langchain_community.document_loaders import TextLoader
@@ -55,7 +83,12 @@ from langchain_text_splitters import CharacterTextSplitter
 
 ### Step 3. Set up your environment
 
-#### Step 3.1 Obtain the connection string to the TiDB cluster
+Configure the environment variables depending on the TiDB deployment option you've selected.
+
+<SimpleTab>
+<div label="TiDB Cloud Serverless">
+
+For a TiDB Cloud Serverless cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -74,11 +107,27 @@ from langchain_text_splitters import CharacterTextSplitter
     >
     > If you have not set a password yet, click **Generate Password** to generate a random password.
 
-#### Step 3.2 Configure environment variables
+5. Configure environment variables.
 
-To establish a secure and efficient database connection, use the standard connection method provided by TiDB Cloud.
+    This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
 
-This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from step 3.1 and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+    To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
+
+    ```python
+    # Use getpass to securely prompt for environment variables in your terminal.
+    import getpass
+    import os
+
+    # Copy your connection string from the TiDB Cloud console.
+    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    tidb_connection_string = getpass.getpass("TiDB Connection String:")
+    os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
+    ```
+
+</div>
+<div label="TiDB Self-Managed">
+
+This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
 
 To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
 
@@ -87,11 +136,31 @@ To configure the environment variables, run the following code. You will be prom
 import getpass
 import os
 
-# Copy your connection string from the TiDB Cloud console.
 # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
 tidb_connection_string = getpass.getpass("TiDB Connection String:")
 os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
+
+Taking macOS as an example, the cluster connection string is as follows:
+
+```dotenv
+TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>"
+# For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
+```
+
+You need to modify the values of the connection parameters according to your TiDB cluster. If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
+
+The following are descriptions for each parameter:
+
+- `<USERNAME>`: The username to connect to the TiDB cluster.
+- `<PASSWORD>`: The password to connect to the TiDB cluster.
+- `<HOST>`: The host of the TiDB cluster.
+- `<PORT>`: The port of the TiDB cluster.
+- `<DATABASE>`: The name of the database you want to connect to.
+
+</div>
+
+</SimpleTab>
 
 ### Step 4. Load the sample document
 
@@ -362,7 +431,7 @@ The following metadata filters can match this document:
 }
 ```
 
-Each key-value pair in the metadata filters is treated as a separate filter clause, and these clauses are combined using the `AND` logical operator.
+In a metadata filter, TiDB treats each key-value pair as a separate filter clause and combines these clauses using the `AND` logical operator.
 
 ### Example
 
@@ -412,19 +481,19 @@ TiDB Vector offers advanced, high-speed vector processing capabilities, enhancin
 
 ## Advanced usage example: travel agent
 
-This section demonstrates an advanced use case of integrating vector search with Langchain for a travel agent. The goal is to create personalized travel reports for clients seeking airports with specific amenities, such as clean lounges and vegetarian options.
+This section demonstrates a use case of integrating vector search with Langchain for a travel agent. The goal is to create personalized travel reports for clients, helping them find airports with specific amenities, such as clean lounges and vegetarian options.
 
 The process involves two main steps:
 
 1. Perform a semantic search across airport reviews to identify airport codes that match the desired amenities.
-2. Execute an SQL query to merge these codes with route information, highlighting airlines and destinations that align with user's preferences.
+2. Execute a SQL query to merge these codes with route information, highlighting airlines and destinations that align with user's preferences.
 
 ### Prepare data
 
 First, create a table to store airport route data:
 
 ```python
-# Create table to store airplan data.
+# Create a table to store flight plan data.
 vector_store.tidb_vector_client.execute(
     """CREATE TABLE airplan_routes (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -565,7 +634,7 @@ The expected output is as follows:
  (0.19840519342700513, 3, 'EFGH', 'UA', 'SEA', 'Daily flights from SFO to SEA.', datetime.timedelta(seconds=9000), 7, 'Boeing 737', Decimal('129.99'), 'None', 'Small airport with basic facilities.')]
 ```
 
-### Clean up
+### Clean up data
 
 Finally, clean up the resources by dropping the created table:
 
@@ -581,5 +650,5 @@ The expected output is as follows:
 
 ## See also
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
+- [Vector Data Types](/vector-search-data-types.md)
+- [Vector Search Index](/vector-search-index.md)

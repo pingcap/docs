@@ -180,6 +180,8 @@ The following TiKV configuration items can be modified dynamically:
 | `pessimistic-txn.wake-up-delay-duration` | The duration after which a pessimistic transaction is woken up |
 | `pessimistic-txn.pipelined` | Determines whether to enable the pipelined pessimistic locking process |
 | `pessimistic-txn.in-memory` | Determines whether to enable the in-memory pessimistic lock |
+| `pessimistic-txn.in-memory-peer-size-limit`               | Controls the memory usage limit for in-memory pessimistic locks in a Region                                                                                                                                                                                  |
+| `pessimistic-txn.in-memory-instance-size-limit`           | Controls the memory usage limit for in-memory pessimistic locks in a TiKV instance                                                                                                                                                                           |
 | `quota.foreground-cpu-time` | The soft limit on the CPU resources used by TiKV foreground to process read and write requests |
 | `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
 | `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
@@ -226,6 +228,11 @@ The following TiKV configuration items can be modified dynamically:
 | `server.raft-msg-max-batch-size` | Sets the maximum number of Raft messages that are contained in a single gRPC message |
 | `server.simplify-metrics`        | Controls whether to simplify the sampling monitoring metrics                   |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
+| storage.flow-control.enable | Determines whether to enable the flow control mechanism |
+| storage.flow-control.memtables-threshold | The maximum number of kvDB memtables that trigger flow control |
+| storage.flow-control.l0-files-threshold | The maximum number of kvDB L0 files that trigger flow control |
+| storage.flow-control.soft-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject some write requests |
+| storage.flow-control.hard-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject all write requests |
 | `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
 | `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for 10 consecutive seconds, this Region should be split.|

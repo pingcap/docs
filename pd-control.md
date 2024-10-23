@@ -33,7 +33,7 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) 1.21 or later is required because the Go modules are used.
+1. [Go](https://golang.org/) 1.23 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -470,6 +470,20 @@ Success!
 >> member leader transfer pd3 // Migrate leader to a specified member
 ......
 ```
+
+Specify the priority of PD leader:
+
+```bash
+member leader_priority  pd-1 4
+member leader_priority  pd-2 3
+member leader_priority  pd-3 2
+member leader_priority  pd-4 1
+member leader_priority  pd-5 0
+```
+
+> **Note:**
+>
+> In all available PD nodes, the node with the highest priority number becomes the leader.
 
 ### `operator [check | show | add | remove]`
 
