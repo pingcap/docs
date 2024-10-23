@@ -9,7 +9,7 @@ This statement adds a new index to an existing table. It is an alternative synta
 
 > **Note:**
 >
-> For TiDB Dedicated clusters with 4 vCPU specifications, it is recommended to manually disable [tidb_ddl_enable_fast_reorg](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability during index creation. Disabling this setting allows indexes to be created using transactions, which reduces the overall impact on the cluster.
+> For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters with 4 vCPU specifications, it is recommended to manually disable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability during index creation. Disabling this setting allows indexes to be created using transactions, which reduces the overall impact on the cluster.
 
 ## Synopsis
 
