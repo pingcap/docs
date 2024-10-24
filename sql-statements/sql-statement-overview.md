@@ -93,7 +93,6 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md) | Pauses DDL operations. |
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
-| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md) | Shows telemetry data. |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Modifies a system variable or user variable. |
