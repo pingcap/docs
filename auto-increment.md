@@ -297,46 +297,116 @@ After the value `2030000` is inserted, the next value is `2060001`. This jump in
 In earlier versions of TiDB, the cache size of the auto-increment ID was transparent to users. Starting from v3.0.14, v3.1.2, and v4.0.rc-2, TiDB has introduced the `AUTO_ID_CACHE` table option to allow users to set the cache size for allocating the auto-increment ID.
 
 ```sql
-mysql> CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
+CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
 Query OK, 0 rows affected (0.02 sec)
 
-mysql> INSERT INTO t values();
+INSERT INTO t values();
 Query OK, 1 row affected (0.00 sec)
-Records: 1  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM t;
+SELECT * FROM t;
 +---+
 | a |
 +---+
 | 1 |
 +---+
 1 row in set (0.01 sec)
-```
 
-At this time, if you invalidate the auto-increment cache of this column and redo the implicit insertion, the result is as follows:
-
-```sql
-mysql> DELETE FROM t;
-Query OK, 1 row affected (0.01 sec)
-
-mysql> RENAME TABLE t to t1;
-Query OK, 0 rows affected (0.01 sec)
-
-mysql> INSERT INTO t1 values()
-Query OK, 1 row affected (0.00 sec)
-
-mysql> SELECT * FROM t;
-+-----+
-| a   |
-+-----+
-| 101 |
-+-----+
+SHOW CREATE TABLE t;
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                             |
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| t     | CREATE TABLE `t` (
+  `a` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`a`) /*T![clustered_index] CLUSTERED */
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin AUTO_INCREMENT=101 /*T![auto_id_cache] AUTO_ID_CACHE=100 */ |
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
 
-The re-assigned value is `101`. This shows that the size of cache for allocating the auto-increment ID is `100`.
+At this time, if you restart TiDB, the auto-increment ID cache will be lost, and new insert operations will allocate IDs starting from a higher value beyond the previously cached range.
 
-In addition, when the length of consecutive IDs in a batch `INSERT` statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can be inserted properly.
+```sql
+INSERT INTO t VALUES();
+Query OK, 1 row affected (0.00 sec)
+
+SELECT * FROM t;
++-----+
+| a   |
++-----+
+|   1 |
+| 101 |
++-----+
+2 rows in set (0.01 sec)
+```
+
+The newly allocated value is `101`. This shows that the size of cache for allocating auto-increment IDs is `100`.
+
+In addition, when the length of consecutive IDs in a batch `INSERT` statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can insert data properly.
+
+### Clear the auto-increment ID cache
+
+In some scenarios, you might need to clear the auto-increment ID cache to ensure data consistency. For example:
+
+<CustomContent platform="tidb">
+
+- In the scenario of incremental replication using [Data Migration (DM)](/dm/dm-overview.md), once the replication is complete, data writing to the downstream TiDB switches from DM to your application's write operations. Meanwhile, the ID writing mode of the auto-increment column usually switches from explicit insertion to implicit allocation.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+- In the scenario of incremental replication using the [Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md) feature, once the replication is complete, data writing to the downstream TiDB switches from DM to your application's write operations. Meanwhile, the ID writing mode of the auto-increment column usually switches from explicit insertion to implicit allocation.
+
+</CustomContent>
+
+- When your application involves both explicit ID insertion and implicit ID allocation, you need to clear the auto-increment ID cache to avoid conflicts between future implicitly allocated IDs and previously explicitly inserted IDs, which could result in primary key conflict errors. For more information, see [Uniqueness](/auto-increment.md#uniqueness).
+
+To clear the auto-increment ID cache on all TiDB nodes in the cluster, you can execute the `ALTER TABLE` statement with `AUTO_INCREMENT = 0`. For example:
+
+```sql
+CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
+Query OK, 0 rows affected (0.02 sec)
+
+INSERT INTO t VALUES();
+Query OK, 1 row affected (0.02 sec)
+
+INSERT INTO t VALUES(50);
+Query OK, 1 row affected (0.00 sec)
+
+SELECT * FROM t;
++----+
+| a  |
++----+
+|  1 |
+| 50 |
++----+
+2 rows in set (0.01 sec)
+```
+
+```sql
+ALTER TABLE t AUTO_INCREMENT = 0;
+Query OK, 0 rows affected, 1 warning (0.07 sec)
+
+SHOW WARNINGS;
++---------+------+-------------------------------------------------------------------------+
+| Level   | Code | Message                                                                 |
++---------+------+-------------------------------------------------------------------------+
+| Warning | 1105 | Can't reset AUTO_INCREMENT to 0 without FORCE option, using 101 instead |
++---------+------+-------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+
+INSERT INTO t VALUES();
+Query OK, 1 row affected (0.02 sec)
+
+SELECT * FROM t;
++-----+
+| a   |
++-----+
+|   1 |
+|  50 |
+| 101 |
++-----+
+3 rows in set (0.01 sec)
+```
 
 ### Auto-increment step size and offset
 
