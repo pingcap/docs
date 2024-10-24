@@ -7,6 +7,14 @@ summary: An overview of the usage of CREATE INDEX for the TiDB database.
 
 This statement adds a new index to an existing table. It is an alternative syntax to `ALTER TABLE .. ADD INDEX`, and included for MySQL compatibility.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters with 4 vCPU, it is recommended to manually disable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability during index creation. Disabling this setting allows indexes to be created using transactions, which reduces the overall impact on the cluster.
+
+</CustomContent>
+
 ## Synopsis
 
 ```ebnf+diagram
