@@ -1,19 +1,33 @@
 ---
 title: Vector Search Limitations
-summary: Learn the limitations of the TiDB Vector Search.
+summary: Learn the limitations of the TiDB vector search.
 ---
 
 # Vector Search Limitations
 
-This document describes the known limitations of TiDB Vector Search. We are continuously working to enhance your experience by adding more features.
+This document describes the known limitations of TiDB vector search.
 
-- TiDB Vector Search is only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters. It is not available for TiDB Cloud Dedicated or TiDB Self-Managed.
+> **Note**
+>
+> TiDB Vector Search is only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters. It is not available for TiDB Cloud Dedicated.
 
-- Each [vector](/tidb-cloud/vector-search-data-types.md) supports up to 16,000 dimensions.
+## Vector data type limitations
 
-- Vector data supports only single-precision floating-point numbers (Float32).
+- Each [vector](/tidb-cloud/vector-search-data-types.md) supports up to 16383 dimensions.
+- Vector data types cannot store `NaN`, `Infinity`, or `-Infinity` values.
+- Vector data types cannot store double-precision floating-point numbers. If you insert or store double-precision floating-point numbers in vector columns, TiDB converts them to single-precision floating-point numbers.
+- Vector columns cannot be used as primary keys or as part of a primary key.
+- Vector columns cannot be used as unique indexes or as part of a unique index.
+- Vector columns cannot be used as partition keys or as part of a partition key.
+- Currently, TiDB does not support modifying a vector column to other data types (such as `JSON` and `VARCHAR`).
 
-- Only cosine distance and L2 distance are supported when you create a [vector search index](/tidb-cloud/vector-search-index.md).
+## Vector index limitations
+
+See [Vector search restrictions](/tidb-cloud/vector-search-index.md#restrictions).
+
+## Compatibility with TiDB tools
+
+- The Data Migration feature in the TiDB Cloud console does not support migrating or replicating MySQL 9.0 vector data types to TiDB Cloud.
 
 ## Feedback
 

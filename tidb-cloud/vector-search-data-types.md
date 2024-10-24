@@ -5,26 +5,26 @@ summary: Learn about the Vector data types in TiDB.
 
 # Vector Data Types
 
-TiDB provides Vector data type specifically optimized for AI Vector Embedding use cases. By using the Vector data type, you can store and query a sequence of floating numbers efficiently, such as `[0.3, 0.5, -0.1, ...]`.
+A vector is a sequence of floating-point numbers, such as `[0.3, 0.5, -0.1, ...]`. TiDB offers Vector data types, specifically optimized for efficiently storing and querying vector embeddings widely used in AI applications.
 
-The following Vector data type is currently available:
+The following Vector data types are currently available:
 
-- `VECTOR`: A sequence of single-precision floating numbers. The dimensions can be different for each row.
-- `VECTOR(D)`: A sequence of single-precision floating numbers with a fixed dimension `D`.
+- `VECTOR`: A sequence of single-precision floating-point numbers with any dimension.
+- `VECTOR(D)`: A sequence of single-precision floating-point numbers with a fixed dimension `D`.
 
-The Vector data type provides these advantages over storing in a `JSON` column:
+Using vector data types provides the following advantages over using the [`JSON`](/data-type-json.md) type:
 
-- Vector Index support. A [Vector Search Index](/tidb-cloud/vector-search-index.md) can be built to speed up vector searching.
-- Dimension enforcement. A dimension can be specified to forbid inserting vectors with different dimensions.
-- Optimized storage format. Vector data types are stored even more space-efficient than `JSON` data type.
+- Vector index support: You can build a [vector search index](/tidb-cloud/vector-search-index.md) to speed up vector searching.
+- Dimension enforcement: You can specify a dimension to forbid inserting vectors with different dimensions.
+- Optimized storage format: Vector data types are optimized for handling vector data, offering better space efficiency and performance compared to `JSON` types.
 
 > **Note:**
 >
 > Vector data types are only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-## Value syntax
+## Syntax
 
-A Vector value contains an arbitrary number of floating numbers. You can use a string in the following syntax to represent a Vector value:
+You can use a string in the following syntax to represent a Vector value:
 
 ```sql
 '[<float>, <float>, ...]'
@@ -50,18 +50,18 @@ Inserting vector values with invalid syntax will result in an error:
 ERROR 1105 (HY000): Invalid vector text: [5, ]
 ```
 
-As dimension 3 is enforced for the `embedding` column in the preceding example, inserting a vector with a different dimension will result in an error:
+In the following example, because dimension `3` is enforced for the `embedding` column when the table is created, inserting a vector with a different dimension will result in an error:
 
 ```sql
 [tidb]> INSERT INTO vector_table VALUES (4, '[0.3, 0.5]');
 ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 ```
 
-See [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md) for available functions and operators over the Vector data type.
+For available functions and operators over the vector data types, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
 
-See [Vector Search Index](/tidb-cloud/vector-search-index.md) for building and using a vector search index.
+For more information about building and using a vector search index, see [Vector Search Index](/tidb-cloud/vector-search-index.md).
 
-## Vectors with different dimensions
+## Store vectors with different dimensions
 
 You can store vectors with different dimensions in the same column by omitting the dimension parameter in the `VECTOR` type:
 
@@ -75,32 +75,27 @@ INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]'); -- 3 dimensions vector,
 INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector, OK
 ```
 
-However you cannot build a [Vector Search Index](/tidb-cloud/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
+However, note that you cannot build a [vector search index](/tidb-cloud/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
 
 ## Comparison
 
 You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
 
-Vector data types are compared element-wise numerically. Examples:
+Vector data types are compared element-wise numerically. For example:
 
 - `[1] < [12]`
 - `[1,2,3] < [1,2,5]`
 - `[1,2,3] = [1,2,3]`
 - `[2,2,3] > [1,2,3]`
 
-Vectors with different dimensions are compared using lexicographical comparison, with the following properties:
+Two vectors with different dimensions are compared using lexicographical comparison, with the following rules:
 
-- Two vectors are compared element by element, and each element is compared numerically.
+- Two vectors are compared element by element from the start, and each element is compared numerically.
 - The first mismatching element determines which vector is lexicographically _less_ or _greater_ than the other.
-- If one vector is a prefix of another, the shorter vector is lexicographically _less_ than the other.
+- If one vector is a prefix of another, the shorter vector is lexicographically _less_ than the other. For example, `[1,2,3] < [1,2,3,0]`.
 - Vectors of the same length with identical elements are lexicographically _equal_.
-- An empty vector is lexicographically _less_ than any non-empty vector.
+- An empty vector is lexicographically _less_ than any non-empty vector. For example, `[] < [1]`.
 - Two empty vectors are lexicographically _equal_.
-
-Examples:
-
-- `[] < [1]`
-- `[1,2,3] < [1,2,3,0]`
 
 When comparing vector constants, consider performing an [explicit cast](#cast) from string to vector to avoid comparisons based on string values:
 
@@ -126,7 +121,7 @@ When comparing vector constants, consider performing an [explicit cast](#cast) f
 
 ## Arithmetic
 
-Vector data types support element-wise arithmetic operations `+` (addition) and `-` (subtraction). However, performing arithmetic operations between vectors with different dimensions results in an error.
+Vector data types support arithmetic operations `+` (addition) and `-` (subtraction). However, arithmetic operations between vectors with different dimensions are not supported and will result in an error.
 
 Examples:
 
@@ -139,7 +134,7 @@ Examples:
 +---------------------------------------------+
 1 row in set (0.01 sec)
 
-mysql> SELECT VEC_FROM_TEXT('[2,3,4]') - VEC_FROM_TEXT('[1,2,3]');
+[tidb]> SELECT VEC_FROM_TEXT('[2,3,4]') - VEC_FROM_TEXT('[1,2,3]');
 +-----------------------------------------------------+
 | VEC_FROM_TEXT('[2,3,4]') - VEC_FROM_TEXT('[1,2,3]') |
 +-----------------------------------------------------+
@@ -162,10 +157,10 @@ To cast between Vector and String, use the following functions:
 - `VEC_FROM_TEXT`: String ⇒ Vector
 - `VEC_AS_TEXT`: Vector ⇒ String
 
-There are implicit casts when calling functions receiving vector data types:
+To improve usability, if you call a function that only supports vector data types, such as a vector correlation distance function, you can also just pass in a format-compliant string. TiDB automatically performs an implicit cast in this case.
 
 ```sql
--- There is an implicit cast here, since VEC_DIMS only accepts VECTOR arguments:
+-- The VEC_DIMS function only accepts VECTOR arguments, so you can directly pass in a string for an implicit cast.
 [tidb]> SELECT VEC_DIMS('[0.3, 0.5, -0.1]');
 +------------------------------+
 | VEC_DIMS('[0.3, 0.5, -0.1]') |
@@ -174,7 +169,7 @@ There are implicit casts when calling functions receiving vector data types:
 +------------------------------+
 1 row in set (0.01 sec)
 
--- Cast explicitly using VEC_FROM_TEXT:
+-- You can also explicitly cast a string to a vector using VEC_FROM_TEXT and then pass the vector to the VEC_DIMS function.
 [tidb]> SELECT VEC_DIMS(VEC_FROM_TEXT('[0.3, 0.5, -0.1]'));
 +---------------------------------------------+
 | VEC_DIMS(VEC_FROM_TEXT('[0.3, 0.5, -0.1]')) |
@@ -183,7 +178,7 @@ There are implicit casts when calling functions receiving vector data types:
 +---------------------------------------------+
 1 row in set (0.01 sec)
 
--- Cast explicitly using CAST(... AS VECTOR):
+-- You can also cast explicitly using CAST(... AS VECTOR):
 [tidb]> SELECT VEC_DIMS(CAST('[0.3, 0.5, -0.1]' AS VECTOR));
 +----------------------------------------------+
 | VEC_DIMS(CAST('[0.3, 0.5, -0.1]' AS VECTOR)) |
@@ -193,7 +188,7 @@ There are implicit casts when calling functions receiving vector data types:
 1 row in set (0.01 sec)
 ```
 
-Use explicit casts when operators or functions accept multiple data types. For example, in comparisons, use explicit casts to compare vector numeric values instead of string values:
+When using an operator or function that accepts multiple data types, you need to explicitly cast the string type to the vector type before passing the string to that operator or function, because TiDB does not perform implicit casts in this case. For example, before performing comparison operations, you need to explicitly cast strings to vectors; otherwise, TiDB compares them as string values rather than as vector numeric values:
 
 ```sql
 -- Because string is given, TiDB is comparing strings:
@@ -215,10 +210,10 @@ Use explicit casts when operators or functions accept multiple data types. For e
 1 row in set (0.01 sec)
 ```
 
-To cast vector into its string representation explicitly, use the `VEC_AS_TEXT()` function:
+You can also explicitly cast a vector to its string representation. Take using the `VEC_AS_TEXT()` function as an example:
 
 ```sql
--- String representation is normalized:
+-- The string is first implicitly cast to a vector, and then the vector is explicitly cast to a string, thus returning a string in the normalized format:
 [tidb]> SELECT VEC_AS_TEXT('[0.3,     0.5,  -0.1]');
 +--------------------------------------+
 | VEC_AS_TEXT('[0.3,     0.5,  -0.1]') |
@@ -232,15 +227,13 @@ For additional cast functions, see [Vector Functions and Operators](/tidb-cloud/
 
 ### Cast between Vector ⇔ other data types
 
-It is currently not possible to cast between Vector and other data types (like `JSON`) directly. You need to use String as an intermediate type.
+Currently, direct casting between Vector and other data types (such as `JSON`) is not supported. To work around this limitation, use String as an intermediate data type for casting in your SQL statement.
+
+Note that vector data type columns stored in a table cannot be converted to other data types using `ALTER TABLE ... MODIFY COLUMN ...`.
 
 ## Restrictions
 
-- The maximum supported Vector dimension is 16000.
-- You cannot store `NaN`, `Infinity`, or `-Infinity` values in the vector data type.
-- Currently, Vector data types cannot store double-precision floating point numbers. This is planned to be supported in a future release. In the meantime, if you import double-precision floating point numbers for Vector data types, they are converted to single-precision numbers.
-
-For other limitations, see [Vector Search Limitations](/tidb-cloud/vector-search-limitations.md).
+For restrictions on vector data types, see [Vector search limitations](/tidb-cloud/vector-search-limitations.md) and [Vector index restrictions](/tidb-cloud/vector-search-index.md#restrictions).
 
 ## MySQL compatibility
 

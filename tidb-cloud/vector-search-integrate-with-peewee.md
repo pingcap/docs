@@ -49,7 +49,7 @@ Install the required dependencies for the demo project:
 pip install -r requirements.txt
 ```
 
-For your existing project, you can install the following packages:
+Alternatively, you can install the following packages for your project:
 
 ```bash
 pip install peewee pymysql python-dotenv tidb-vector
@@ -177,22 +177,6 @@ class Document(Model):
     content = TextField()
     embedding = VectorField(3)
 ```
-
-#### Define a vector column optimized with index
-
-Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
-
-```python
-class DocumentWithIndex(Model):
-    class Meta:
-        database = db
-        table_name = 'peewee_demo_documents_with_index'
-
-    content = TextField()
-    embedding = VectorField(3, constraints=[SQL("COMMENT 'hnsw(distance=cosine)'")])
-```
-
-TiDB will use this index to accelerate vector search queries based on the cosine distance function.
 
 ### Store documents with embeddings
 

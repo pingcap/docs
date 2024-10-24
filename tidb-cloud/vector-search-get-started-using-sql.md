@@ -1,13 +1,13 @@
 ---
 title: Get Started with Vector Search via SQL
-summary: Learn how to quickly get started with Vector Search in TiDB Cloud using SQL statements and power the generative AI application.
+summary: Learn how to quickly get started with Vector Search in TiDB using SQL statements to power your generative AI applications.
 ---
 
 # Get Started with Vector Search via SQL
 
 TiDB extends MySQL syntax to support [Vector Search](/tidb-cloud/vector-search-overview.md) and introduce new [Vector data types](/tidb-cloud/vector-search-data-types.md) and several [vector functions](/tidb-cloud/vector-search-functions-and-operators.md).
 
-This tutorial demonstrates how to get started with TiDB Vector Search just using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to:
+This tutorial demonstrates how to get started with TiDB Vector Search just using SQL statements. You will learn how to use the [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) to complete the following operations:
 
 - Connect to your TiDB cluster.
 - Create a vector table.
@@ -45,9 +45,9 @@ To complete this tutorial, you need:
 
 ### Step 2. Create a vector table
 
-With vector search support, you can use the `VECTOR` type column to store [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) in TiDB.
+When creating a table, you can define a column as a [vector](/tidb-cloud/vector-search-overview.md#vector-embedding) column by specifying the `VECTOR` data type.
 
-To create a table with a three-dimensional `VECTOR` column, execute the following SQL statements using your MySQL CLI:
+For example, to create a table `embedded_documents` with a three-dimensional `VECTOR` column, execute the following SQL statements using your MySQL CLI:
 
 ```sql
 USE test;
@@ -66,7 +66,7 @@ The expected output is as follows:
 Query OK, 0 rows affected (0.27 sec)
 ```
 
-### Step 3. Store the vector embeddings
+### Step 3. Insert vector embeddings to the table
 
 Insert three documents with their [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) into the `embedded_documents` table:
 
@@ -116,9 +116,9 @@ The expected output is as follows:
 
 Similar to full-text search, users provide search terms to the application when using vector search.
 
-In this example, the search term is "a swimming animal", and its corresponding vector embedding is `[1,2,3]`. In practical applications, you need to use an embedding model to convert the user's search term into a vector embedding.
+In this example, the search term is "a swimming animal", and its corresponding vector embedding is assumed to be `[1,2,3]`. In practical applications, you need to use an embedding model to convert the user's search term into a vector embedding.
 
-Execute the following SQL statement and TiDB will identify the top three documents closest to the search term by calculating and sorting the cosine distances (`vec_cosine_distance`) between the vector embeddings.
+Execute the following SQL statement, and TiDB will identify the top three documents closest to `[1,2,3]` by calculating and sorting the cosine distances (`vec_cosine_distance`) between the vector embeddings in the table.
 
 ```sql
 SELECT id, document, vec_cosine_distance(embedding, '[1,2,3]') AS distance
@@ -140,7 +140,9 @@ The expected output is as follows:
 3 rows in set (0.15 sec)
 ```
 
-From the output, the swimming animal is most likely a fish, or a dog with a gift for swimming.
+The three terms in the search results are sorted by their respective distance from the queried vector: the smaller the distance, the more relevant the corresponding `document`.
+
+Therefore, according to the output, the swimming animal is most likely a fish, or a dog with a gift for swimming.
 
 ## See also
 

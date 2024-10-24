@@ -5,7 +5,7 @@ summary: Learn how to integrate TiDB Vector Search with Django ORM to store embe
 
 # Integrate TiDB Vector Search with Django ORM
 
-This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the TiDB Vector Search, store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the [TiDB Vector Search](/tidb-cloud/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 > **Note**
 >
@@ -49,7 +49,7 @@ Install the required dependencies for the demo project:
 pip install -r requirements.txt
 ```
 
-For your existing project, you can install the following packages:
+Alternatively, you can install the following packages for your project:
 
 ```bash
 pip install Django django-tidb mysqlclient numpy python-dotenv
@@ -59,7 +59,7 @@ If you encounter installation issues with mysqlclient, refer to the mysqlclient 
 
 #### What is `django-tidb`
 
-`django-tidb` is a TiDB dialect for Django that enhances the Django ORM to support TiDB-specific features (For example, Vector Search) and resolves compatibility issues between TiDB and Django.
+`django-tidb` is a TiDB dialect for Django, which enhances the Django ORM to support TiDB-specific features (for example, Vector Search) and resolves compatibility issues between TiDB and Django.
 
 To install `django-tidb`, choose a version that matches your Django version. For example, if you are using `django==4.2.*`, install `django-tidb==4.2.*`. The minor version does not need to be the same. It is recommended to use the latest minor version.
 
@@ -180,22 +180,6 @@ class Document(models.Model):
    embedding = VectorField(dimensions=3)
 ```
 
-#### Define a vector column optimized with index
-
-Define a 3-dimensional vector column and optimize it with a [vector search index](/tidb-cloud/vector-search-index.md) (HNSW index).
-
-```python
-class DocumentWithIndex(models.Model):
-   content = models.TextField()
-   # Note:
-   #   - Using comment to add hnsw index is a temporary solution. In the future it will use `CREATE INDEX` syntax.
-   #   - Currently the HNSW index cannot be changed after the table has been created.
-   #   - Only Django >= 4.2 supports `db_comment`.
-   embedding = VectorField(dimensions=3, db_comment="hnsw(distance=cosine)")
-```
-
-TiDB will use this index to speed up vector search queries based on the cosine distance function.
-
 ### Store documents with embeddings
 
 ```python
@@ -206,7 +190,7 @@ Document.objects.create(content="tree", embedding=[1, 0, 0])
 
 ### Search the nearest neighbor documents
 
-TiDB Vector support below distance functions:
+TiDB Vector support the following distance functions:
 
 - `L1Distance`
 - `L2Distance`

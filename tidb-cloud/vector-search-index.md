@@ -5,155 +5,130 @@ summary: Learn how to build and use the vector search index to accelerate K-Near
 
 # Vector Search Index
 
-K-nearest neighbors (KNN) search is the problem of finding the K closest points for a given point in a vector space. The most straightforward approach to solving this problem is a brute force search, where the distance between all points in the vector space and the reference point is computed. This method guarantees perfect accuracy, but it is usually too slow for practical applications. Thus, nearest neighbors search problems are often solved with approximate algorithms.
+K-nearest neighbors (KNN) search is the method for finding the K closest points to a given point in a vector space. The most straightforward approach to perform KNN search is a brute force search, which calculates the distance between the given vector and all other vectors in the space. This approach guarantees perfect accuracy, but it is usually too slow for real-world use. Therefore, approximate algorithms are commonly used in KNN search to enhance speed and efficiency.
 
-In TiDB, you can create and utilize vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/tidb-cloud/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
+In TiDB, you can create and use vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/tidb-cloud/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
 
-TiDB currently supports the following vector search index algorithms:
+Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
 
-- HNSW
+## Restrictions
 
-> **Note:**
->
-> Vector search index is only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+- TiFlash nodes must be deployed in your cluster in advance.
+- Vector search indexes cannot be used as primary keys or unique indexes.
+- Vector search indexes can only be created on a single vector column and cannot be combined with other columns (such as integers or strings) to form composite indexes.
+- A distance function must be specified when creating and using vector search indexes. Currently, only cosine distance `VEC_COSINE_DISTANCE()` and L2 distance `VEC_L2_DISTANCE()` functions are supported.
+- For the same column, creating multiple vector search indexes using the same distance function is not supported.
+- Directly dropping columns with vector search indexes is not supported. You can drop such a column by first dropping the vector search index on that column and then dropping the column itself.
+- Modifying the type of a column with a vector index is not supported.
+- Setting vector search indexes as [invisible](/sql-statements/sql-statement-alter-index.md) is not supported.
+- Building vector search indexes on TiFlash nodes with [encryption at rest](https://docs.pingcap.com/tidb/stable/encryption-at-rest) enabled is not supported.
 
 ## Create the HNSW vector index
 
-[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy (> 98% in typical cases).
+[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy, up to 98% in specific cases.
 
-To create an HNSW vector index, specify the index definition in the comment of a column with a [vector data type](/tidb-cloud/vector-search-data-types.md) when creating the table:
+In TiDB, you can create an HNSW index for a column with a [vector data type](/tidb-cloud/vector-search-data-types.md) in either of the following ways:
 
-```sql
-CREATE TABLE vector_table_with_index (
-    id INT PRIMARY KEY, doc TEXT,
-    embedding VECTOR(3) COMMENT "hnsw(distance=cosine)"
-);
-```
+- When creating a table, use the following syntax to specify the vector column for the HNSW index:
+
+    ```sql
+    CREATE TABLE foo (
+        id       INT PRIMARY KEY,
+        embedding     VECTOR(5),
+        VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)))
+    );
+    ```
+
+- For an existing table that already contains a vector column, use the following syntax to create an HNSW index for the vector column:
+
+    ```sql
+    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding)));
+    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)));
+
+    -- You can also explicitly specify "USING HNSW" to build the vector search index.
+    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
+    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
+    ```
 
 > **Note:**
 >
-> The syntax to create a vector index might change in future releases.
+> The vector search index feature relies on TiFlash replicas for tables.
+>
+> - If a vector search index is defined when a table is created, TiDB automatically creates a TiFlash replica for the table.
+> - If no vector search index is defined when a table is created, and the table currently does not have a TiFlash replica, you need to manually create a TiFlash replica before adding a vector search index to the table. For example: `ALTER TABLE 'table_name' SET TIFLASH REPLICA 1;`.
 
-You must specify the distance metric via the `distance=<metric>` configuration when creating the vector index:
+When creating an HNSW vector index, you need to specify the distance function for the vector:
 
-- Cosine Distance: `COMMENT "hnsw(distance=cosine)"`
-- L2 Distance: `COMMENT "hnsw(distance=l2)"`
+- Cosine Distance: `((VEC_COSINE_DISTANCE(embedding)))`
+- L2 Distance: `((VEC_L2_DISTANCE(embedding)))`
 
-The vector index can only be created for fixed-dimensional vector columns like `VECTOR(3)`. It cannot be created for mixed-dimensional vector columns like `VECTOR` because vector distances can only be calculated between vectors with the same dimensions.
+The vector index can only be created for fixed-dimensional vector columns, such as a column defined as `VECTOR(3)`. It cannot be created for non-fixed-dimensional vector columns (such as a column defined as `VECTOR`) because vector distances can only be calculated between vectors with the same dimension.
 
-If you are using programming language SDKs or ORMs, refer to the following documentation for creating vector indexes:
-
-- Python: [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python)
-- Python: [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
-- Python: [Peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
-- Python: [Django](/tidb-cloud/vector-search-integrate-with-django-orm.md)
-
-Be aware of the following limitations when creating the vector index. These limitations might be removed in future releases:
-
-- L1 distance and inner product are not supported for the vector index yet.
-
-- You can only define and create a vector index when the table is created. You cannot create the vector index on demand using DDL statements after the table is created. You cannot drop the vector index using DDL statements as well.
+For restrictions and limitations of vector search indexes, see [Restrictions](#restrictions).
 
 ## Use the vector index
 
-The vector search index can be used in K-nearest neighbor search queries by using the `ORDER BY ... LIMIT` form like below:
+The vector search index can be used in K-nearest neighbor search queries by using the `ORDER BY ... LIMIT` clause as follows:
 
 ```sql
 SELECT *
-FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+FROM foo
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3, 4, 5]')
 LIMIT 10
 ```
 
-You must use the same distance metric as you have defined when creating the vector index if you want to utilize the index in vector search.
+To use an index in a vector search, make sure that the `ORDER BY ... LIMIT` clause uses the same distance function as the one specified when creating the vector index.
 
 ## Use the vector index with filters
 
 Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize the vector index because they are not querying for K-Nearest neighbors according to the SQL semantics. For example:
 
 ```sql
--- Filter is performed before kNN, so Vector Index cannot be used:
+-- For the following query, the `WHERE` filter is performed before KNN, so the vector index cannot be used:
 
 SELECT * FROM vec_table
 WHERE category = "document"
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-Several workarounds are as follows:
-
-**Post-Filter after Vector Search:** Query for the K-Nearest neighbors first, then filter out unwanted results:
+To use the vector index with filters, query for the K-Nearest neighbors first using vector search, and then filter out unwanted results:
 
 ```sql
--- The filter is performed after kNN for these queries, so Vector Index can be used:
+-- For the following query, the `WHERE` filter is performed after KNN, so the vector index cannot be used:
 
 SELECT * FROM
 (
   SELECT * FROM vec_table
-  ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+  ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
   LIMIT 5
 ) t
 WHERE category = "document";
 
--- Note that this query may return less than 5 results if some are filtered out.
+-- Note that this query might return fewer than 5 results if some are filtered out.
 ```
-
-**Use Table Partitioning**: Queries within the [table partition](/partitioned-table.md) can fully utilize the vector index. This can be useful if you want to perform equality filters, as equality filters can be turned into accessing specified partitions.
-
-Example: Suppose you want to find the closest documentation for a specific product version.
-
-```sql
--- Filter is performed before kNN, so Vector Index cannot be used:
-SELECT * FROM docs
-WHERE ver = "v2.0"
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
-LIMIT 5;
-```
-
-Instead of writing a query using the `WHERE` clause, you can partition the table and then query within the partition using the [`PARTITION` keyword](/partitioned-table.md#partition-selection):
-
-```sql
-CREATE TABLE docs (
-    id INT,
-    ver VARCHAR(10),
-    doc TEXT,
-    embedding VECTOR(3) COMMENT "hnsw(distance=cosine)"
-) PARTITION BY LIST COLUMNS (ver) (
-    PARTITION p_v1_0 VALUES IN ('v1.0'),
-    PARTITION p_v1_1 VALUES IN ('v1.1'),
-    PARTITION p_v1_2 VALUES IN ('v1.2'),
-    PARTITION p_v2_0 VALUES IN ('v2.0')
-);
-
-SELECT * FROM docs
-PARTITION (p_v2_0)
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
-LIMIT 5;
-```
-
-See [Table Partitioning](/partitioned-table.md) for more information.
 
 ## View index build progress
 
-Unlike other indexes, vector indexes are built asynchronously. Therefore, vector indexes might not be immediately available after bulk data insertion. This does not affect data correctness or consistency, and you can perform vector searches at any time and get complete results. However, performance will be suboptimal until vector indexes are fully built. 
+After you insert a large volume of data, some of it might not be instantly persisted to TiFlash. For vector data that has already been persisted, the vector search index is built synchronously. For data that has not yet been persisted, the index will be built once the data is persisted. This process does not affect the accuracy and consistency of the data. You can still perform vector searches at any time and get complete results. However, performance will be suboptimal until vector indexes are fully built.
 
 To view the index build progress, you can query the `INFORMATION_SCHEMA.TIFLASH_INDEXES` table as follows:
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
-+---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
-| TIDB_DATABASE | TIDB_TABLE | TIDB_PARTITION | TABLE_ID | BELONGING_TABLE_ID | COLUMN_NAME | COLUMN_ID | INDEX_KIND | ROWS_STABLE_INDEXED | ROWS_STABLE_NOT_INDEXED | ROWS_DELTA_INDEXED | ROWS_DELTA_NOT_INDEXED | TIFLASH_INSTANCE |
-+---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
-| test          | sample     | NULL           |      106 |                 -1 | vec         |         2 | HNSW       |                   0 |                   13000 |                  0 |                   2000 | store-6ba728d2   |
-| test          | sample     | NULL           |      106 |                 -1 | vec         |         2 | HNSW       |               10500 |                       0 |                  0 |                   4500 | store-7000164f   |
-+---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
++---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
+| TIDB_DATABASE | TIDB_TABLE | TABLE_ID | COLUMN_NAME | INDEX_NAME    | COLUMN_ID | INDEX_ID | INDEX_KIND | ROWS_STABLE_INDEXED | ROWS_STABLE_NOT_INDEXED | ROWS_DELTA_INDEXED | ROWS_DELTA_NOT_INDEXED | ERROR_MESSAGE | TIFLASH_INSTANCE |
++---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
+| test          | tcff1d827  |      219 | col1fff     | 0a452311      |         7 |        1 | HNSW       |               29646 |                       0 |                  0 |                      0 |               | 127.0.0.1:3930   |
+| test          | foo        |      717 | embedding   | idx_embedding |         2 |        1 | HNSW       |                   0 |                       0 |                  0 |                      3 |               | 127.0.0.1:3930   |
++---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
 ```
 
-- The `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns show the index build progress. When `ROWS_STABLE_NOT_INDEXED` becomes 0, the index build is complete.
+- You can check the `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns for the index build progress. When `ROWS_STABLE_NOT_INDEXED` becomes 0, the index build is complete.
 
-    As a reference, indexing a 500 MiB vector dataset might take up to 20 minutes. The indexer can run in parallel for multiple tables. Currently, adjusting the indexer priority or speed is not supported.
+    As a reference, indexing a 500 MiB vector dataset with 768 dimensions might take up to 20 minutes. The indexer can run in parallel for multiple tables. Currently, adjusting the indexer priority or speed is not supported.
 
-- The `ROWS_DELTA_NOT_INDEXED` column shows the number of rows in the Delta layer. The Delta layer stores _recently_ inserted or updated rows and is periodically merged into the Stable layer according to the write workload. This merge process is called Compaction.
+- You can check the `ROWS_DELTA_NOT_INDEXED` column for the number of rows in the Delta layer. Data in the storage layer of TiFlash is stored in two layers: Delta layer and Stable layer. The Delta layer stores recently inserted or updated rows and is periodically merged into the Stable layer according to the write workload. This merge process is called Compaction.
 
     The Delta layer is always not indexed. To achieve optimal performance, you can force the merge of the Delta layer into the Stable layer so that all data can be indexed:
 
@@ -163,15 +138,17 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 
     For more information, see [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md).
 
+In addition, you can monitor the execution progress of the DDL job by executing `ADMIN SHOW DDL JOBS;` and checking the `row count`. However, this method is not fully accurate, because the `row count` value is obtained from the `rows_stable_indexed` field in `TIFLASH_INDEXES`. You can use this approach as a reference for tracking the progress of indexing.
+
 ## Check whether the vector index is used
 
-Use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to check whether this query is using the vector index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this table scan is utilizing the vector index.
+Use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to check whether a query is using the vector index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this table scan is utilizing the vector index.
 
 **Example: the vector index is used**
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
 +-----+-------------------------------------------------------------------------------------+
 | ... | operator info                                                                       |
@@ -193,7 +170,7 @@ LIMIT 10;
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-     -> ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]');
+     -> ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]');
 +--------------------------------+-----+--------------------------------------------------+
 | id                             | ... | operator info                                    |
 +--------------------------------+-----+--------------------------------------------------+
@@ -210,9 +187,9 @@ LIMIT 10;
 When the vector index cannot be used, a warning occurs in some cases to help you learn the cause:
 
 ```sql
--- Using a wrong distance metric:
+-- Using a wrong distance function:
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-ORDER BY Vec_l2_Distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_L2_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
 
 [tidb]> SHOW WARNINGS;
@@ -220,7 +197,7 @@ ANN index not used: not ordering by COSINE distance
 
 -- Using a wrong order:
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]') DESC
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]') DESC
 LIMIT 10;
 
 [tidb]> SHOW WARNINGS;
@@ -229,11 +206,11 @@ ANN index not used: index can be used only when ordering by vec_cosine_distance(
 
 ## Analyze vector search performance
 
-The [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement contains detailed information about how the vector index is used in the `execution info` column:
+To learn detailed information about how a vector index is used, you can execute the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement and check the `execution info` column in the output:
 
 ```sql
 [tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
 +-----+--------------------------------------------------------+-----+
 |     | execution info                                         |     |
@@ -259,12 +236,12 @@ LIMIT 10;
 
 Explanation of some important fields:
 
-- `vector_index.load.total`: The total duration of loading index. This field could be larger than actual query time because multiple vector indexes may be loaded in parallel.
+- `vector_index.load.total`: The total duration of loading index. This field might be larger than the actual query time because multiple vector indexes might be loaded in parallel.
 - `vector_index.load.from_s3`: Number of indexes loaded from S3.
 - `vector_index.load.from_disk`: Number of indexes loaded from disk. The index was already downloaded from S3 previously.
 - `vector_index.load.from_cache`: Number of indexes loaded from cache. The index was already downloaded from S3 previously.
-- `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there is heavy IO when searching through the index. This field could be larger than actual query time because multiple vector indexes may be searched in parallel.
-- `vector_index.search.discarded_nodes`: Number of vector rows visited but discarded during the search. These discarded vectors are not considered in the search result. Large values usually indicate that there are many stale rows caused by UPDATE or DELETE statements.
+- `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there are heavy I/O operations when searching through the index. This field might be larger than the actual query time because multiple vector indexes might be searched in parallel.
+- `vector_index.search.discarded_nodes`: Number of vector rows visited but discarded during the search. These discarded vectors are not considered in the search result. Large values usually indicate that there are many stale rows caused by `UPDATE` or `DELETE` statements.
 
 See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md), and [EXPLAIN Walkthrough](/explain-walkthrough.md) for interpreting the output.
 

@@ -1,6 +1,6 @@
 ---
 title: Vector Search (Beta) Overview
-summary: Learn about Vector Search in TiDB Cloud. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+summary: Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
 ---
 
 # Vector Search (Beta) Overview
@@ -13,9 +13,13 @@ TiDB Vector Search (beta) provides an advanced search solution for performing se
 
 ## Concepts
 
-Vector search is a search method that prioritizes the meaning of your data to deliver relevant results. This differs from traditional full-text search, which relies primarily on exact keyword matches and word frequency.
+Vector search is a search method that prioritizes the meaning of your data to deliver relevant results.
 
-For example, a full-text search for "a swimming animal" only returns results with those exact keywords. In contrast, vector search can return results for other swimming animals, such as fish or ducks, even if the exact keywords are not present.
+Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent.
+
+Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
+
+For example, a full-text search for "a swimming animal" only returns results containing these exact keywords. In contrast, vector search can return results for other swimming animals, such as fish or ducks, even if these results do not contain the exact keywords.
 
 ### Vector embedding
 
@@ -23,25 +27,28 @@ A vector embedding, also known as an embedding, is a sequence of numbers that re
 
 Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
 
-TiDB introduces [Vector data types](/tidb-cloud/vector-search-data-types.md) designed to optimize the storage and retrieval of vector embeddings, enhancing their use in AI applications. You can store vector embeddings in TiDB and perform vector search queries to find the most relevant data using these data types.
+TiDB introduces [Vector data types](/tidb-cloud/vector-search-data-types.md) and [Vector search index](/tidb-cloud/vector-search-index.md) designed to optimize the storage and retrieval of vector embeddings, enhancing their use in AI applications. You can store vector embeddings in TiDB and perform vector search queries to find the most relevant data using these data types.
 
 ### Embedding model
 
 Embedding models are algorithms that transform data into [vector embeddings](#vector-embedding).
 
-Selecting an appropriate embedding model is crucial for ensuring the accuracy and relevance of semantic search results. For unstructured text data, you can find top-performing text embedding models on the [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
+Choosing an appropriate embedding model is crucial for ensuring the accuracy and relevance of semantic search results. For unstructured text data, you can find top-performing text embedding models on the [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
 
-To learn how to generate vector embeddings for your specific data types, refer to the embedding provider integration tutorials or examples.
+To learn how to generate vector embeddings for your specific data types, refer to integration tutorials or examples of embedding models.
 
 ## How vector search works
 
 After converting raw data into vector embeddings and storing them in TiDB, your application can execute vector search queries to find the data most semantically or contextually relevant to a user's query.
 
-Vector Search in TiDB Cloud identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the query represent the most similar data in meaning.
+TiDB vector search identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the given vector in the query represent the most similar data in meaning.
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
-As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector embeddings together in one database. You can store them in the same table using different columns, or separate them into different tables and combine them using `JOIN` queries when retrieving.
+As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector representations (that is, vector embeddings) together in one database. You can choose any of the following ways for storage:
+
+- Store data and their corresponding vector representations in different columns of the same table.
+- Store data and their corresponding vector representation in different tables. In this way, you need to use `JOIN` queries to combine the tables when retrieving data.
 
 ## Use cases
 
