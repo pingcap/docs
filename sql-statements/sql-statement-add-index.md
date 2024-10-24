@@ -8,9 +8,19 @@ aliases: ['/docs/dev/sql-statements/sql-statement-add-index/','/docs/dev/referen
 
 The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding an index.
 
+<<<<<<< HEAD
 > **Tip:**
 >
 > The [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) can be used to speed up the operation of this statement.
+=======
+<CustomContent platform="tidb-cloud">
+         
+> **Note:**
+>
+> For [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters with 4 vCPU, it is recommended to manually disable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability during index creation. Disabling this setting allows indexes to be created using transactions, which reduces the overall impact on the cluster.
+
+</CustomContent>
+>>>>>>> e938881703 (Add limitations for add/create index (#19193))
 
 <CustomContent platform="tidb">
 
