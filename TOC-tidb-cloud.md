@@ -289,7 +289,7 @@
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - Reference
     - [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md)
-    - [Setup Self Hosted Kafka Private Service Connect in GCP](/tidb-cloud/setup-self-hosted-kafka-psc.md)
+    - [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md)
 - Disaster Recovery
   - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
   - [Get Started](/tidb-cloud/recovery-group-get-started.md)
