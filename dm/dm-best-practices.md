@@ -41,7 +41,7 @@ To distribute the workload evenly on multiple nodes, the design for the distribu
 
 `AUTO_INCREMENT` in TiDB is compatible with `AUTO_INCREMENT` in MySQL. However, as a distributed database, TiDB usually has multiple computing nodes (entries for the client end). When the application data is written, the workload is evenly distributed. This leads to the result that when there is an `AUTO_INCREMENT` column in the table, the auto-increment IDs of the column might be inconsecutive. For more details, see [AUTO_INCREMENT](/auto-increment.md#implementation-principles).
 
-If your business has a strong dependence on auto-increment IDs, consider using the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function).
+If your business has a strong dependence on auto-increment IDs, consider using the [MySQL-compatible `AUTO_INCREMENT` mode](/auto-increment.md#mysql-compatibility-mode) or the [`SEQUENCE` function](/sql-statements/sql-statement-create-sequence.md#sequence-function).
 
 #### Usage of clustered indexes
 
