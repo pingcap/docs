@@ -86,7 +86,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 ### Performance
 
-* Introduce parallel batching modes for TSO requests, reducing TSO retrieval latency [#54960](https://github.com/pingcap/tidb/issues/54960) @[MyonKeminta](https://github.com/MyonKeminta) **tw@qiancai** <!--1893-->
+* Introduce parallel batching modes for TSO requests, reducing TSO retrieval latency [#54960](https://github.com/pingcap/tidb/issues/54960) [#8432](https://github.com/tikv/pd/issues/8432) @[MyonKeminta](https://github.com/MyonKeminta) **tw@qiancai** <!--1893-->
 
     Before v8.4.0, when requesting [TSO](/tso.md) from PD, TiDB collects multiple TSO requests during a specific period and processes them in batches serially to decrease the number of Remote Procedure Call (RPC) requests and reduce PD workload. In latency-sensitive scenarios, however, the performance of this serial batching mode is not ideal.
 
@@ -280,8 +280,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-| [`log_bin`](/system-variables.md#log_bin) | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether TiDB Binlog is used, and is deleted starting from v8.4.0. |
-| [`sql_log_bin`](/system-variables.md#sql_log_bin) | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether to write changes to TiDB Binlog or not, and is deleted starting from v8.4.0. |
+| `log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether TiDB Binlog is used, and is deleted starting from v8.4.0. |
+| `sql_log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether to write changes to TiDB Binlog or not, and is deleted starting from v8.4.0. |
 | [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [global index](/partitioned-table.md#global-indexes) is enabled by default. You only need to add the keyword `GLOBAL` to the corresponding column when executing `CREATE TABLE` or `ALTER TABLE` to create a global index. |
 | [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [list partitioning](/partitioned-table.md#list-partitioning) is enabled by default. |
 | [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table.md) is enabled by default. |
@@ -292,6 +292,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) | Modified | Changes the default value from `0` to `536870912` (512 MiB), indicating that this feature is enabled by default. The minimum value allowed is set to `67108864` (64 MiB). |
 | [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840)| Newly added | Sets the concurrency within a single automatic statistics collection task. Before v8.4.0, this concurrency is fixed at `1`. To speed up statistics collection tasks, you can increase this concurrency based on your cluster's available resources. |
 | [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)| Newly added | Controls whether to enable the Instance Plan Cache feature. |
+| [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840)| Newly added | Controls whether the corresponding TiDB instance can run automatic statistics update tasks. |
 | [`tidb_hash_join_version`](/system-variables.md#tidb_hash_join_version-new-in-v840) | Newly added | Controls whether TiDB uses an optimized version of the Hash Join operator. The default value of `legacy` means that the optimized version is not used. If you set it to `optimized`, TiDB uses the optimized version of the Hash Join operator when executing it to improve Hash Join performance. |
 | [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840) | Newly added | Sets the maximum memory usage for Instance Plan Cache. |
 | [`tidb_instance_plan_cache_reserved_percentage`](/system-variables.md#tidb_instance_plan_cache_reserved_percentage-new-in-v840) | Newly added | Controls the percentage of idle memory reserved for Instance Plan Cache after memory eviction. |
@@ -305,6 +306,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 | -------- | -------- | -------- | -------- |
 | TiDB | [`grpc-keepalive-time`](/tidb-configuration-file.md#grpc-keepalive-time) | Modified | Adds the minimum value of `1`. |
 | TiDB | [`grpc-keepalive-timeout`](/tidb-configuration-file.md#grpc-keepalive-timeout) | Modified | Before v8.4.0, the data type of this parameter is INT, and the minimum value is `1`. Starting from v8.4.0, the data type is changed to FLOAT64, and the minimum value becomes `0.05`. In scenarios where network jitter occurs frequently, you can reduce the impact of network jitter on performance by setting a smaller value to shorten the retry interval. |
+| TiDB | [`tidb_enable_stats_owner`](/tidb-configuration-file.md#tidb_enable_stats_owner-new-in-v840) | Newly added | Controls whether the corresponding TiDB instance can run automatic statistics update tasks. |
 | TiKV | [`region-split-keys`](/tikv-configuration-file.md#region-split-keys) | Modified | Changes the default value from `"960000"` to `"2560000"`. |
 | TiKV | [`region-split-size`](/tikv-configuration-file.md#region-split-size) | Modified | Changes the default value from `"96MiB"` to `"256MiB"`. |
 | TiKV | [`sst-max-size`](/tikv-configuration-file.md#sst-max-size) | Modified | Changes the default value from `"144MiB"` to `"384MiB"`. |
@@ -395,7 +397,6 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
     - Support graceful offline of TiKV nodes during data import by TiDB Lightning [#7853](https://github.com/tikv/pd/issues/7853) @[okJiang](https://github.com/okJiang) **tw@qiancai**  <!--1852-->
     - Rename `scatter-range` to `scatter-range-scheduler` in `pd-ctl` commands [#8379](https://github.com/tikv/pd/issues/8379) @[okJiang](https://github.com/okJiang)
     - Add conflict detection for `grant-hot-leader-scheduler` [#4903](https://github.com/tikv/pd/issues/4903) @[lhy1024](https://github.com/lhy1024)
-    - The TSO client supports sending and receiving multiple TSO gRPC requests in parallel [#8432](https://github.com/tikv/pd/issues/8432) @[MyonKeminta](https://github.com/MyonKeminta)
 
 + TiFlash <!--tw@qiancai: 2 notes-->
 
