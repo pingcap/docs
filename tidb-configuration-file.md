@@ -953,10 +953,10 @@ Configuration items related to read isolation.
 
 ### `tidb_enable_stats_owner` <span class="version-mark">New in v8.4.0</span>
 
-- This configuration controls whether the corresponding TiDB instance whether the corresponding TiDB instance can run [automatic statistics update](/statistics.md#automatic-update) tasks.
+- This configuration controls whether the corresponding TiDB instance can run [automatic statistics update](/statistics.md#automatic-update) tasks.
 - Default value: `true`
 - Possible values: `true`, `false`
-- The value of this configuration will initialize the value of the system variable [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840)
+- The value of this configuration will initialize the value of the system variable [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840).
 
 ### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
 
