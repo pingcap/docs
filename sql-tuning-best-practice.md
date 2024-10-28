@@ -502,17 +502,6 @@ The original query took 11 minutes and 9 seconds to complete, which is an extrem
 3. Late filtering: The most selective predicates (mode, user_id, and label_id) were applied after accessing the table, resulting in 16,604 rows.
 4. Sorting overhead: The final sort operation on 16,604 rows added additional processing time.
 
-Performance Improvement with the New Index:
-
-After creating the new index (new_idx on orders(user_id, mode, id, created_at, label_id)), the query performance improved dramatically. The execution time reduced from 11 minutes and 9 seconds to just 5.3 milliseconds, which is a staggering improvement of over 126,000 times faster. This massive improvement can be explained by:
-
-1. Efficient index usage: The new index allows for an index range scan on user_id, mode, and id, which are the most selective predicates. This drastically reduces the number of rows scanned from millions to just 224.
-2. Covering index: The new index includes all columns needed for the query, eliminating the need for table lookups.
-3. Index-only sort: The 'keep order:true' in the plan indicates that the index structure is used for sorting, avoiding a separate sort operation.
-4. Early filtering: The most selective predicates are applied first, quickly reducing the result set to 224 rows before further filtering.
-5. Limit push-down: The LIMIT clause is pushed down to the index scan, allowing early termination of the scan once 101 rows are found.
-
-This case demonstrates the profound impact that a well-designed index can have on query performance. By aligning the index structure with the query's predicates, sort order, and required columns, we achieved a performance improvement of over five orders of magnitude.
 
 Here is the query pattern
 ```SQL
@@ -537,7 +526,6 @@ KEY `index_orders_on_label_id` (`label_id`),
 KEY `index_orders_on_created_at` (`created_at`)
 ```
 
-
 original plan
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 | id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
@@ -550,6 +538,17 @@ original plan
 |     └─TableRowIDScan_36        | 8296.70   | 12082311| cop[tikv] | table:orders                                                                   | tikv_task:{proc max:44.8s, min:0s, avg: 3.33s, p...}| keep order:false                                                                                                     | N/A      | N/A  |
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 
+
+Performance Improvement with the New Index:
+
+After creating the new index (new_idx on orders(user_id, mode, id, created_at, label_id)), the query performance improved dramatically. The execution time reduced from 11 minutes and 9 seconds to just 5.3 milliseconds, which is a staggering improvement of over 126,000 times faster. This massive improvement can be explained by:
+
+1. Efficient index usage: The new index allows for an index range scan on user_id, mode, and id, which are the most selective predicates. This drastically reduces the number of rows scanned from millions to just 224.
+2. Index-only sort: The 'keep order:true' in the plan indicates that the index structure is used for sorting, avoiding a separate sort operation.
+3. Early filtering: The most selective predicates are applied first, quickly reducing the result set to 224 rows before further filtering.
+4. Limit push-down: The LIMIT clause is pushed down to the index scan, allowing early termination of the scan once 101 rows are found.
+
+This case demonstrates the profound impact that a well-designed index can have on query performance. By aligning the index structure with the query's predicates, sort order, and required columns, we achieved a performance improvement of over five orders of magnitude.
 
 plan with new index (user_id, mode, id, created_at, label_id) 
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
