@@ -9,8 +9,11 @@ This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vect
 
 > **Note**
 >
-> - TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
-> - You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
+> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
+> **Tip**
+>
+> You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
 
 ## Prerequisites
 
@@ -44,7 +47,7 @@ In your project directory, run the following command to install the required pac
 !pip install tidb-vector
 ```
 
-Open the `integrate_with_langchain.ipynb` file in Jupyter Notebook and add the following code to import the required packages:
+Open the `integrate_with_langchain.ipynb` file in Jupyter Notebook, and then add the following code to import the required packages:
 
 ```python
 from langchain_community.document_loaders import TextLoader
@@ -55,7 +58,7 @@ from langchain_text_splitters import CharacterTextSplitter
 
 ### Step 3. Set up your environment
 
-#### Step 3.1 Obtain the connection string to the TiDB cluster
+Take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -74,24 +77,22 @@ from langchain_text_splitters import CharacterTextSplitter
     >
     > If you have not set a password yet, click **Generate Password** to generate a random password.
 
-#### Step 3.2 Configure environment variables
+5. Configure environment variables.
 
-To establish a secure and efficient database connection, use the standard connection method provided by TiDB Cloud.
+    This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
 
-This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from step 3.1 and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+    To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
 
-To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
+    ```python
+    # Use getpass to securely prompt for environment variables in your terminal.
+    import getpass
+    import os
 
-```python
-# Use getpass to securely prompt for environment variables in your terminal.
-import getpass
-import os
-
-# Copy your connection string from the TiDB Cloud console.
-# Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-tidb_connection_string = getpass.getpass("TiDB Connection String:")
-os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-```
+    # Copy your connection string from the TiDB Cloud console.
+    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    tidb_connection_string = getpass.getpass("TiDB Connection String:")
+    os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
+    ```
 
 ### Step 4. Load the sample document
 
@@ -362,7 +363,7 @@ The following metadata filters can match this document:
 }
 ```
 
-Each key-value pair in the metadata filters is treated as a separate filter clause, and these clauses are combined using the `AND` logical operator.
+In a metadata filter, TiDB treats each key-value pair as a separate filter clause and combines these clauses using the `AND` logical operator.
 
 ### Example
 
@@ -412,19 +413,19 @@ TiDB Vector offers advanced, high-speed vector processing capabilities, enhancin
 
 ## Advanced usage example: travel agent
 
-This section demonstrates an advanced use case of integrating vector search with Langchain for a travel agent. The goal is to create personalized travel reports for clients seeking airports with specific amenities, such as clean lounges and vegetarian options.
+This section demonstrates a use case of integrating vector search with Langchain for a travel agent. The goal is to create personalized travel reports for clients, helping them find airports with specific amenities, such as clean lounges and vegetarian options.
 
 The process involves two main steps:
 
 1. Perform a semantic search across airport reviews to identify airport codes that match the desired amenities.
-2. Execute an SQL query to merge these codes with route information, highlighting airlines and destinations that align with user's preferences.
+2. Execute a SQL query to merge these codes with route information, highlighting airlines and destinations that align with user's preferences.
 
 ### Prepare data
 
 First, create a table to store airport route data:
 
 ```python
-# Create table to store airplan data.
+# Create a table to store flight plan data.
 vector_store.tidb_vector_client.execute(
     """CREATE TABLE airplan_routes (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -565,7 +566,7 @@ The expected output is as follows:
  (0.19840519342700513, 3, 'EFGH', 'UA', 'SEA', 'Daily flights from SFO to SEA.', datetime.timedelta(seconds=9000), 7, 'Boeing 737', Decimal('129.99'), 'None', 'Small airport with basic facilities.')]
 ```
 
-### Clean up
+### Clean up data
 
 Finally, clean up the resources by dropping the created table:
 

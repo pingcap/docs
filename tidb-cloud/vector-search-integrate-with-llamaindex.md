@@ -1,16 +1,19 @@
 ---
 title: Integrate Vector Search with LlamaIndex
-summary: Learn how to integrate Vector Search in TiDB Cloud with LlamaIndex.
+summary: Learn how to integrate TiDB Vector Search with LlamaIndex.
 ---
 
 # Integrate Vector Search with LlamaIndex
 
-This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vector-search-overview.md) feature in TiDB Cloud with [LlamaIndex](https://www.llamaindex.ai).
+This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vector-search-overview.md) feature of TiDB with [LlamaIndex](https://www.llamaindex.ai).
 
 > **Note**
 >
-> - TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
-> - You can view the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
+> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
+> **Tip**
+>
+> You can view the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
 
 ## Prerequisites
 
@@ -27,7 +30,7 @@ This section provides step-by-step instructions for integrating TiDB Vector Sear
 
 ### Step 1. Create a new Jupyter Notebook file
 
-In your preferred directory, create a new Jupyter Notebook file named `integrate_with_llamaindex.ipynb`:
+In the root directory, create a new Jupyter Notebook file named `integrate_with_llamaindex.ipynb`:
 
 ```shell
 touch integrate_with_llamaindex.ipynb
@@ -52,9 +55,9 @@ from llama_index.core import VectorStoreIndex
 from llama_index.vector_stores.tidbvector import TiDBVectorStore
 ```
 
-### Step 3. Set up your environment
+### Step 3. Configure environment variables
 
-#### Step 3.1 Obtain the connection string to the TiDB cluster
+Take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -73,23 +76,22 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
     >
     > If you have not set a password yet, click **Generate Password** to generate a random password.
 
-#### Step 3.2 Configure environment variables
+5. Configure environment variables.
 
-To establish a secure and efficient database connection, use the standard connection method provided by TiDB Cloud.
+    This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
 
-This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from step 3.1 and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+    To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
 
-To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
+    ```python
+    # Use getpass to securely prompt for environment variables in your terminal.
+    import getpass
+    import os
 
-```python
-import getpass
-import os
-
-tidb_connection_url = getpass.getpass(
-   "TiDB connection URL (format - mysql+pymysql://root@127.0.0.1:4000/test): "
-)
-os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-```
+    # Copy your connection string from the TiDB Cloud console.
+    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    tidb_connection_string = getpass.getpass("TiDB Connection String:")
+    os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
+    ```
 
 ### Step 4. Load the sample document
 
