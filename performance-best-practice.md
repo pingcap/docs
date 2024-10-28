@@ -101,6 +101,10 @@ concurrent-send-snap-limit = 64
 concurrent-recv-snap-limit = 64
 snap-io-max-bytes-per-sec = "400MB"
 
+[pessimistic-txn]
+in-memory-peer-size-limit = "32MiB"
+in-memory-instance-size-limit = "512MiB"
+
 [rocksdb.titan]
 enabled = true
 [rocksdb.defaultcf.titan]
@@ -116,6 +120,7 @@ l0-files-threshold = 60
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
 | concurrent-send-snap-limit concurrent-recv-snap-limit snap-io-max-bytes-per-sec | Increase the bandwidth to speed up tikv scale in/out operations, improve snapshot speed, scale-in/out is frequent operation during performance tuning | more impact on online traffic during scale operation | 
+| in-memory-peer-size-limit in-memory-instance-size-limit | Increases the memory limit for caching pessimistic locks in memory, which improves transaction performance by avoiding lock information being written to disk | Higher memory usage since lock information is cached in memory rather than written to disk. Monitor memory usage carefully when increasing these limits | 
 | rocksdb.titan rocksdb.defaultcf.titan | RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.  To alleviate the bottleneck caused by limited disk throughput, you can improve performance by enabling Titan. | When Titan is enabled, there might be a slight performance degradation for range scans on the primary key, and the space amplification is higher than RocksDB, at worse case, the space usage is 2x of the original data. For more information, see Impact of min-blob-size on performance. | 
 | l0-files-threshold | increase the thrshhold to avoid unneccessary flow control | - | 
 
