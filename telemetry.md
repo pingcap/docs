@@ -1,10 +1,7 @@
 ---
 title: Telemetry
 summary: Learn the telemetry feature, how to disable the feature and view its status.
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/telemetry/','/tidb/dev/sql-statement-admin-show-telemetry']
->>>>>>> 8e43cf791c (*: remove most of Telemetry related contents (#18759))
+aliases: ['/tidb/stable/sql-statement-admin-show-telemetry','/tidb/v8.1/sql-statement-admin-show-telemetry']
 ---
 
 # Telemetry
