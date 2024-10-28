@@ -5,7 +5,7 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 8.4.0 Release Notes
 
-Release date: xx xx, 2024
+Release date: October 30, 2024
 
 TiDB version: 8.4.0
 
@@ -90,7 +90,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     Before v8.4.0, when requesting [TSO](/tso.md) from PD, TiDB collects multiple TSO requests during a specific period and processes them in batches serially to decrease the number of Remote Procedure Call (RPC) requests and reduce PD workload. In latency-sensitive scenarios, however, the performance of this serial batching mode is not ideal.
 
-    In v8.4.0, TiDB introduces parallel batching modes for TSO requests with different concurrency capabilities. Parallel modes reduce TSO retrieval latency but might increase the PD workload. To set a parallel RPC mode for retrieving TSO, configure the [tidb_tso_client_rpc_mode](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840) system variable.
+    In v8.4.0, TiDB introduces parallel batching modes for TSO requests with different concurrency capabilities. Parallel modes reduce TSO retrieval latency but might increase the PD workload. To set a parallel RPC mode for retrieving TSO, configure the [`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840) system variable.
 
     For more information, see [documentation](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840).
 
@@ -116,7 +116,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     - Eliminates redundancy, caching more execution plans with the same memory consumption.
     - Allocates a fixed-size memory on the instance, limiting memory usage more effectively.
 
-    In v8.4.0, instance-level execution plan cache only supports caching query execution plans and is disabled by default. You can enable this feature using [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) and set its maximum memory usage using [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840). Before enabling this feature, disable [Prepared execution plan cache](/sql-prepared-plan-cache.md) and [Non-prepared execution plan cache](/sql-non-prepared-plan-cache.md).
+  In v8.4.0, instance-level execution plan cache only supports caching query execution plans and is disabled by default. You can enable this feature using [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) and set its maximum memory usage using [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840). Before enabling this feature, disable [Prepared execution plan cache](/sql-prepared-plan-cache.md) and [Non-prepared execution plan cache](/sql-non-prepared-plan-cache.md).
 
     For more information, see [documentation](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
 
@@ -187,12 +187,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     Traffic replay is useful in the following scenarios:
 
-    - Validate TiDB version upgrades
+    - Verify TiDB version upgrades
     - Assess change impact
     - Validate performance before scaling TiDB
     - Test performance limits
 
-    For more information, see [documentation](/tiproxy/tiproxy-traffic-replay.md).
+  For more information, see [documentation](/tiproxy/tiproxy-traffic-replay.md).
 
 ### SQL
 
@@ -218,7 +218,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     - Encrypt using a master key stored on a local disk
     - Encrypt using a master key managed by a Key Management Service (KMS)
 
-  For more information, see [documentation](/br/br-pitr-manual.md#encrypt-log-backup-data).
+  For more information, see [documentation](/br/br-pitr-manual.md#encrypt-the-log-backup-data).
 
 * BR requires fewer privileges when restoring backup data in a cloud storage system [#55870](https://github.com/pingcap/tidb/issues/55870) @[Leavrth](https://github.com/Leavrth) **tw@Oreoxmt** <!--1943-->
 
@@ -236,7 +236,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
     - The [INFORMATION_SCHEMA.PROCESSLIST](/information-schema/information-schema-processlist.md) table adds `TIDB_CPU` and `TIKV_CPU`, showing the cumulative CPU consumption of the SQL statements currently being executed in a session.
     - The [slow query Log](/analyze-slow-queries.md) adds the `Tidb_cpu_time` and `Tikv_cpu_time` fields, showing the CPU time of captured SQL statements.
 
-  By default, the CPU time consumed by TiKV is displayed. Collecting the CPU time consumed by TiDB brings additional overhead (about 8%), so the CPU time consumed by TiDB only shows the actual value when [Top SQL](/dashboard/top-sql.md) is enabled; otherwise, it always show as `0`.
+  By default, the CPU time consumed by TiKV is displayed. Collecting the CPU time consumed by TiDB brings additional overhead (about 8%), so the CPU time consumed by TiDB only shows the actual value when [Top SQL](/dashboard/top-sql.md) is enabled; otherwise, it always shows as `0`.
 
     For more information, see [documentation](/information-schema/information-schema-processlist.md) and [documentation](/information-schema/information-schema-slow-query.md).
 
@@ -327,8 +327,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 | BR | [`--master-key`](/br/br-pitr-manual.md#encrypt-the-log-backup-data) | Newly added | Specifies the master key for log backup data. It can be a master key stored on a local disk or a master key managed by a cloud Key Management Service (KMS). |
 | BR | [`--master-key-crypter-method`](/br/br-pitr-manual.md#encrypt-the-log-backup-data) | Newly added | Specifies the encryption algorithm based on the master key for log backup data, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted. |
 
-### System tables
-
 ## Offline package changes
 
 Starting from v8.4.0, the following contents are removed from the `TiDB-community-toolkit` [binary package](/binary-package.md):
@@ -386,7 +384,7 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
 
     - Increase the default value of Region from 96 MiB to 256 MiB to avoid the extra overhead caused by too many Regions [#17309](https://github.com/tikv/tikv/issues/17309) [LykxSassinator](https://github.com/LykxSassinator) **tw@hfxsd** <!--1925-->
     - Support setting memory usage limits for in-memory pessimistic locks in a Region or TiKV instance. When hot write scenarios cause a large number of pessimistic locks, you can increase the memory limits via configuration. This helps avoid CPU and I/O overhead caused by pessimistic locks being written to disk. [#17542](https://github.com/tikv/tikv/issues/17542) @[cfzjywxk](https://github.com/cfzjywxk) **tw@Oreoxmt** <!--1967-->
-    - Introduce a new `spill-dir` configuration item in Raft Engine, supporting multi-disk storage for Raft logs; when the disk where the home directory (`dir`) is located runs out of space, the Raft Engine automatically writes new logs to `spill-dir`, ensuring continuous operation of the system [#17356](https://github.com/tikv/tikv/issues/17356) [LykxSassinator](https://github.com/LykxSassinator) **tw@hfxsd** <!--1970-->
+    - Introduce a new `spill-dir` configuration item in Raft Engine, supporting multi-disk storage for Raft logs; when the disk where the home directory (`dir`) is located runs out of space, the Raft Engine automatically writes new logs to `spill-dir`, ensuring continuous operation of the system [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator) **tw@hfxsd** <!--1970-->
     - (dup): release-6.5.11.md > Improvements> TiKV - - Optimize the compaction trigger mechanism of RocksDB to accelerate disk space reclamation when handling a large number of DELETE versions [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - Support dynamically modifying flow-control configurations for write operations [#17395](https://github.com/tikv/tikv/issues/17395) @[glorv](https://github.com/glorv)
     - Improve the speed of Region Merge in scenarios with empty tables and small Regions [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
