@@ -677,8 +677,6 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - TABLESAMPLE (R)
 - TABLESPACE
 - TABLE_CHECKSUM
-- TELEMETRY
-- TELEMETRY_ID
 - TEMPORARY
 - TEMPTABLE
 - TERMINATED (R)
