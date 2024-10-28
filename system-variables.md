@@ -3253,7 +3253,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the concurrency of the `hash join` algorithm.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
-### tidb_hash_join_version <span class="version-mark">New v8.4.0</span>
+### tidb_hash_join_version <span class="version-mark">New in v8.4.0</span>
 
 > **Warning:**
 >
