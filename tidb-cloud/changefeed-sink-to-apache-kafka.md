@@ -18,6 +18,11 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 - Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
+- If you select **Private Link** or **Private Service Connect** as network connectivity method, please make sure version of TiDB cluster satisfy following conditions.
+  - For 6.5.x, require >= 6.5.9 
+  - For 7.1.x, require >= 7.1.4 
+  - For 7.5.x, require >= 7.5.1 
+  - Support all versions of 8.1.x and later
 
 ## Prerequisites
 
@@ -36,11 +41,11 @@ Make sure that your TiDB cluster can connect to the Apache Kafka service. There 
 If you want a quick try, you can choose **Public IP**. If you want cost-effective, you can choose **VPC Peering**, trade off VPC CIDR conflict and security. If you want to get rid of VPC CIDR conflict and satisfy security compliance, **Private Connect** is the choice, but it will introduce extra [Private Data Link Cost](/tidbcloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)
 
 #### Private Connect
-Private Connect leverages Private Link or Private Service Connect technologies which provided by cloud vendors, that allow the resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly in your VPC. 
+Private Connect leverages **Private Link** or **Private Service Connect** technologies which provided by cloud vendors, that allow the resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly in your VPC. 
 
 Currently, we only support Private Connect to self-hosted Kafka.
 1. If your Apache Kafka service already or will be setup in AWS, please follow [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to make sure the network connection is set up properly.
-2. If your Apache Kafka service already or will be setup in GCP, please follow [Setup Self Hosted Kafka Private Service Connect in GCP](/tidb-cloud/setup-self-hosted-kafka-psc.md) to make sure the network connection is set up properly.
+2. If your Apache Kafka service already or will be setup in Google Cloud, please follow [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to make sure the network connection is set up properly.
 
 #### VPC Peering
 
@@ -83,21 +88,21 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 ## Step 2. Configure the changefeed target
 
-TODO:
 1. For **Kafka Provider**, we only provide **Self-hosted Kafka** option, we will support more later. 
 > **Note:**
 > Currently, we treat all the Apache Kafka Services as self-hosted since we didn't make any special integration to different Kafka Providers, such as Amazon MSK, Confluent ... It doesn't mean that we can not connect to Amazon MSK or Confluent Kafka. If the Kafka Provider can provide standard network connection methods, just like VPC Peering, Public IP, Private Link and Private Service Connect, we definitely can connect to them. You may have question "Can you connect to Amazon MSK by multi VPC which is powered by Private Link technology?" Sorry, we haven't supported it yet since it's not a standard Private Link, but may be later.
 2. Select **Connectivity Method** by your Apache Kafka Service setup.
    1. If you select **VPC Peering** or **Public IP**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
    2. If you select **Private Link**
-      1. Make sure you select the same **Kafka Type**, **Suggested Kafka Endpoint Service AZ** and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in **Network** section.
-      2. Double-check the **Kafka Advertised Listener Pattern** by clicking the button **Check usage and generate**, which will show message to help you validate the unique ID.
-      3. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md)
-      4. Fill the **Boostrap Ports**, suggest at least one port for one AZ. You can use commas `,` to separate multiple ports.
+      1. Please authorize AWS Account of TiDB Cloud, make sure it can create endpoint for your endpoint service. You can find AWS Account of TiDB Cloud in the tip of the web page.
+      2. Make sure you select the same **Kafka Type**, **Suggested Kafka Endpoint Service AZ** and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in **Network** section.
+      3. Double-check the **Kafka Advertised Listener Pattern** by clicking the button **Check usage and generate**, which will show message to help you validate the unique ID.
+      4. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md)
+      5. Fill the **Boostrap Ports**, suggest at least one port for one AZ. You can use commas `,` to separate multiple ports.
    3. If you select **Private Service Connect**
-      1. Make sure you fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Service Connect in GCP](/tidb-cloud/setup-self-hosted-kafka-psc.md) in **Network** section.
+      1. Make sure you fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) in **Network** section.
       2. Double-check the **Kafka Advertised Listener Pattern** by clicking the button **Check usage and generate**, which will show message to help you validate the unique ID.
-      3. Fill the **Service Attachment** which is configured in [Setup Self Hosted Kafka Private Service Connect in GCP](/tidb-cloud/setup-self-hosted-kafka-psc.md)
+      3. Fill the **Service Attachment** which is configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md)
       4. Fill the **Boostrap Ports**, suggest provide more than one ports. You can use commas `,` to separate multiple ports.
 2. Select an **Authentication** option according to your Kafka authentication configuration.
     - If your Kafka does not require authentication, keep the default option **Disable**.
@@ -106,8 +111,12 @@ TODO:
 3. Select your **Kafka Version**. If you do not know that, use Kafka V2.
 4. Select a desired **Compression** type for the data in this changefeed.
 5. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
-6. Click **Next** to check the configurations you set and go to the next page.
-
+6. Click **Validate Connection and Next** to test the network connection, if all is well it will go to the next page.
+> **Note:**
+>  If you select **Private Link** or **Private Service Connect** as network connectivity method. There will be extra steps compare to **Public IP** and **VPC Peering**.
+> 1. After you click the button, we will try to create endpoint in TiDB Cloud side for **Private Link** or **Private Service Connect**. It may take several minutes.
+> 2. After endpoint creation, you need to accept the connection request in cloud vendor console with you account login.
+> 3. Then go back you TiDB Cloud console to confirm you have already accepted the connection request, then it will navigate to next page.
 ## Step 3. Set the changefeed
 
 1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
