@@ -42,8 +42,11 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `SHOW BACKUPS` | Supported | Not supported [^3] |
 | `RESTORE` | Supported | Not supported [^3] |
 | `SHOW RESTORES` | Supported | Not supported [^3] |
+<<<<<<< HEAD
 | `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on TiDB Serverless. |
 | `ADMIN SHOW TELEMETRY` | Not supported [^4] | Not supported [^4] |
+=======
+>>>>>>> 8e43cf791c (*: remove most of Telemetry related contents (#18759))
 | `ADMIN SHOW SLOW` | Supported | Not supported [^5] |
 | `ADMIN PLUGINS ENABLE` | Supported | Not supported [^8] |
 | `ADMIN PLUGINS DISABLE` | Supported | Not supported [^8] |
@@ -154,10 +157,16 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_enable_local_txn` | No limitation | Read-only [^11] |
 | `tidb_enable_resource_control` | No limitation | Read-only [^11] |
 | `tidb_enable_slow_log` | Not supported [^4] | Not supported [^4] |
+<<<<<<< HEAD
 | `tidb_enable_stmt_summary` | No limitation | Read-only [^11] |
 | `tidb_enable_telemetry` | Not supported [^4] | Not supported [^4] |
 | `tidb_enable_top_sql` | No limitation | Read-only [^11] |
 | `tidb_enable_tso_follower_proxy` | No limitation | Read-only [^11] |
+=======
+| `tidb_enable_stmt_summary` | No limitation | Read-only [^10] |
+| `tidb_enable_top_sql` | No limitation | Read-only [^10] |
+| `tidb_enable_tso_follower_proxy` | No limitation | Read-only [^10] |
+>>>>>>> 8e43cf791c (*: remove most of Telemetry related contents (#18759))
 | `tidb_expensive_query_time_threshold` | Not supported [^4] | Not supported [^4] |
 | `tidb_force_priority` | Not supported [^4] | Not supported [^4] |
 | `tidb_gc_concurrency` | No limitation | Read-only [^11] |
