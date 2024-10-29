@@ -477,11 +477,11 @@ tiproxy_servers:
 
 - `data-dir`: Specifies the directory that TiKV-CDC uses to store temporary files for sorting. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB (optional).
 
-- `gc-ttl`: The TTL (Time To Live, in seconds) of the service level GC safepoint in PD set by TiKV-CDC (optional). It’s the duration that replication tasks can suspend, defaults to 86400, i.e. 24 hours. Note that suspending of replication task will affect the progress of TiKV garbage collection. The longer of gc-ttl, the longer a changefeed can be paused, but at the same time more obsolete data will be kept and larger space will be occupied. Vice versa.
+- `gc-ttl`: The TTL (Time To Live, in seconds) of the service level GC safepoint in PD set by TiKV-CDC (optional). It's the duration that replication tasks can suspend, defaults to 86400, that is 24 hours. Note that suspending of replication task will affect the progress of TiKV garbage collection. The longer of gc-ttl, the longer a changefeed can be paused, but at the same time more obsolete data will be kept and larger space will be occupied. Vice versa.
 
 - `log-file`: The path to which logs are output when the TiKV-CDC process is running (optional). If this parameter is not specified, logs are written to the standard output (stdout).
 
-- `log-level`: The log level when the TiKV-CDC process is running (optional). The default value is “info”.
+- `log-level`: The log level when the TiKV-CDC process is running (optional). The default value is "info".
 
 - `ca`: The path of the CA certificate file in PEM format for TLS connection (optional).
 
@@ -489,7 +489,7 @@ tiproxy_servers:
 
 - `key`: The path of the private key file in PEM format for TLS connection (optional).
 
-- `cert-allowed-cn`: Specifies to verify caller’s identity (certificate Common Name, optional). Use comma to separate multiple CN.
+- `cert-allowed-cn`: Specifies to verify caller's identity (certificate Common Name, optional). Use comma to separate multiple CN.
 
 Among the above fields, you cannot modify the following configured fields after the deployment:
 
