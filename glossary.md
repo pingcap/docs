@@ -64,7 +64,7 @@ A Common Table Expression (CTE) is part of the SQL standard and uses [`WITH`](/s
 
 ### DDL
 
-Data Definition Language (DDL) is the part of the SQL standard that deals with creating, modifying and deleting tables and other objects.
+Data Definition Language (DDL) is the part of the SQL standard that deals with creating, modifying and deleting tables, indexes, columns and other objects.
 
 ### DM
 
@@ -114,7 +114,7 @@ Global Transactions ID's (GTIDs) are used by recent MySQL versions to indicate w
 
 ### HTAP
 
-Hybrid Transactional Analytical Process (HTAP) is a database feature that allows both OLTP and OLAP workloads on the same database. For TiDB the HTAP feature is provided by using both TiKV for row storage and TiFlash for columnar storeage. See [the definition of HTAP on the Gartner website](https://www.gartner.com/en/information-technology/glossary/htap-enabling-memory-computing-technologies) for more information.
+Hybrid Transactional Analytical Process (HTAP) is a database feature that allows both OLTP and OLAP workloads on the same database. For TiDB the HTAP feature is provided by using both TiKV for row storage and TiFlash for columnar storage. See [the definition of HTAP on the Gartner website](https://www.gartner.com/en/information-technology/glossary/htap-enabling-memory-computing-technologies) for more information.
 
 ## I
 
