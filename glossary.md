@@ -138,7 +138,7 @@ Key Management Service (KMS) allows the storage and retrieval of secret keys in 
 
 ### KV
 
-Key-Value (KV) is a way storing information that allows easy retrieval by specifiying the key. Multiple values can be stored under a single key by encoding them. TiKV is implementing this.
+Key-Value (KV) is a way storing information that allows easy store and retrieval by specifying the key. Multiple values can be stored under a single key by encoding them. TiKV is implementing this by TiDB mapping tables and indexes into Key-Value entries.
 
 ## L
 
@@ -148,7 +148,7 @@ Lightweight Directory Access Protocol (LDAP) is a standardized way of accessing 
 
 ### LTS
 
-Long Term Support (LTS) are software versions that are considered stable and are supported for a long term. See [TiDB Versioning](/releases/versioning.md) for more details.
+Long Term Support (LTS) are software versions that are well tested, production ready and are supported for a long term. See [TiDB Versioning](/releases/versioning.md) for more details.
 
 ### leader/follower/learner
 
@@ -176,7 +176,7 @@ The "original value" in the incremental change log output by TiCDC. You can spec
 
 ### OLTP
 
-OnLine Transaction Processing (OLTP) are describing database workloads that mostly deal with transactioonal workloads like inserting, updating and deleting small sets of records.
+OnLine Transaction Processing (OLTP) are describing database workloads that mostly deal with transactional workloads like selecting, inserting, updating and deleting small sets of records.
 
 ## OOM
 
@@ -263,7 +263,7 @@ Restore is the reverse of the backup operation. It is the process of bringing ba
 
 ### RPC
 
-Remote Procedure Call (RPC) is a way for software components to communicate. In a TiDB cluster gRPC standard is used for communication between TiKV and TiDB.
+Remote Procedure Call (RPC) is a way for software components to communicate. In a TiDB cluster gRPC standard is used for communication between different components such as TiDB, TiKV and TiFlash.
 
 ### RU
 
