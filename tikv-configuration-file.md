@@ -1960,7 +1960,7 @@ Configuration items related to Raft Engine.
 
 + Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
 + If you set this configuration item to `0`, incremental sync is disabled.
-+ Default value: `NULL` for v6.5.0 and later releases. Before v6.5.0, it is `"4MiB"`.
++ Default value: `NULL`. Before v6.5.0, it is `"4MiB"`.
 
 ### `target-file-size`
 
