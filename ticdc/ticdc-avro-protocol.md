@@ -78,6 +78,7 @@ The data format of Value is the same as that of Key, by default. However, `field
 > **Note:**
 >
 > The Avro protocol encodes DML events as follows: 
+> 
 > - For Delete events, only encodes the Key part. The Value part is empty. 
 > - For Insert events, encodes all column data to the Value part. 
 > - For Update events, encodes only all column data that is updated.
