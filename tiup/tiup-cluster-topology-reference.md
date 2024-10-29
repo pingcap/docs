@@ -469,7 +469,7 @@ tiproxy_servers:
 
 - `addr`: The listening address of TiKV-CDC, the HTTP API address, and the Prometheus address of the TiKV-CDC service. The default value is `127.0.0.1:8600`.
 
-- `advertise-addr`: The advertised address via which clients access TiKV-CDC. If unspecified, the value is the same as addr.
+- `advertise-addr`: The advertised address via which clients access TiKV-CDC. If not specified, the value is the same as that of `addr`.
 
 - `pd`: A comma-separated list of PD endpoints.
 
