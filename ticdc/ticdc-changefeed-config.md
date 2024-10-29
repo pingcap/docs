@@ -76,7 +76,7 @@ changefeed-error-stuck-duration = "30m"
 
 # The default value is false, indicating that bi-directional replication (BDR) mode is not enabled.
 # To set up BDR clusters using TiCDC, modify this parameter to `true` and set the TiDB clusters to BDR mode.
-# For more information, see https://docs.pingcap.com/zh/tidb/stable/ticdc-bidirectional-replication.
+# For more information, see https://docs.pingcap.com/tidb/stable/ticdc-bidirectional-replication.
 # bdr-mode = false
 
 [mounter]
