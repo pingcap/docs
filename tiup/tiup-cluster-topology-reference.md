@@ -467,7 +467,7 @@ tiproxy_servers:
 
 `kvcdc_servers` specifies the machines to which the [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/) services are deployed. It also specifies the service configuration on each machine. `kvcdc_servers` is an array. Each array element contains the following fields:
 
-- `addr`: The listening address of TiKV-CDC, the HTTP API address, and the Prometheus address of the TiKV-CDC service. The default value is 127.0.0.1:8600.
+- `addr`: The listening address of TiKV-CDC, the HTTP API address, and the Prometheus address of the TiKV-CDC service. The default value is `127.0.0.1:8600`.
 
 - `advertise-addr`: The advertised address via which clients access TiKV-CDC. If unspecified, the value is the same as addr.
 
