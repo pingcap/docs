@@ -24,6 +24,7 @@ A topology configuration file for TiDB deployment using TiUP might contain the f
 - [tikv_servers](#tikv_servers): The configuration of the TiKV instance. This configuration specifies the machines to which the TiKV component is deployed.
 - [tiflash_servers](#tiflash_servers): The configuration of the TiFlash instance. This configuration specifies the machines to which the TiFlash component is deployed.
 - [tiproxy_servers](#tiproxy_servers): The configuration of the TiProxy instance. This configuration specifies the machines to which the TiProxy component is deployed.
+- [kvcdc_servers](#kvcdc_servers): The configuration of the [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/) instance. This configuration specifies the machines to which the TiKV-CDC component is deployed.
 - [cdc_servers](#cdc_servers): The configuration of the TiCDC instance. This configuration specifies the machines to which the TiCDC component is deployed.
 - [tispark_masters](#tispark_masters): The configuration of the TiSpark master instance. This configuration specifies the machines to which the TiSpark master component is deployed. Only one node of TiSpark master can be deployed.
 - [tispark_workers](#tispark_workers): The configuration of the TiSpark worker instance. This configuration specifies the machines to which the TiSpark worker component is deployed.
