@@ -463,6 +463,50 @@ tiproxy_servers:
   - host: 10.0.1.22
 ```
 
+### `kvcdc_servers`
+
+`kvcdc_servers` specifies the machines to which the TiKV-CDC services are deployed. It also specifies the service configuration on each machine. `kvcdc_servers` is an array. Each array element contains the following fields:
+
+- `addr`: The listening address of TiKV-CDC, the HTTP API address, and the Prometheus address of the TiKV-CDC service. The default value is 127.0.0.1:8600.
+
+- `advertise-addr`: The advertised address via which clients access TiKV-CDC. If unspecified, the value is the same as addr.
+
+- `pd`: A comma-separated list of PD endpoints.
+
+- `config`: The address of the configuration file that TiKV-CDC uses (optional).
+
+- `data-dir`: Specifies the directory that TiKV-CDC uses to store temporary files for sorting. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB (optional).
+
+- `gc-ttl`: The TTL (Time To Live, in seconds) of the service level GC safepoint in PD set by TiKV-CDC (optional). It’s the duration that replication tasks can suspend, defaults to 86400, i.e. 24 hours. Note that suspending of replication task will affect the progress of TiKV garbage collection. The longer of gc-ttl, the longer a changefeed can be paused, but at the same time more obsolete data will be kept and larger space will be occupied. Vice versa.
+
+- `log-file`: The path to which logs are output when the TiKV-CDC process is running (optional). If this parameter is not specified, logs are written to the standard output (stdout).
+
+- `log-level`: The log level when the TiKV-CDC process is running (optional). The default value is “info”.
+
+- `ca`: The path of the CA certificate file in PEM format for TLS connection (optional).
+
+- `cert`: The path of the certificate file in PEM format for TLS connection (optional).
+
+- `key`: The path of the private key file in PEM format for TLS connection (optional).
+
+- `cert-allowed-cn`: Specifies to verify caller’s identity (certificate Common Name, optional). Use comma to separate multiple CN.
+
+Among the above fields, you cannot modify the following configured fields after the deployment:
+
+- `host`
+- `port`
+- `deploy_dir`
+- `data_dir`
+- `log_dir`
+
+A `kvcdc_servers` configuration example is as follows:
+
+```yaml
+kvcdc_servers:
+  - host: 10.0.1.21
+  - host: 10.0.1.22
+```
+
 ### `cdc_servers`
 
 `cdc_servers` specifies the machines to which the TiCDC services are deployed. It also specifies the service configuration on each machine. `cdc_servers` is an array. Each array element contains the following fields:
