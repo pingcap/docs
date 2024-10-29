@@ -562,80 +562,48 @@ plan with new index (user_id, mode, id, created_at, label_id)
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 
 
+### general rules for composite index strategy
+
+Make sure to follow the composite index strategy, there is the recommended order for the columns in the index:
+
+1. Equal predicates for index prefix (columns accessed directly):
+   - Equal conditions 
+   - IS NULL conditions
+
+2. Columns after index prefix for sorting:
+   - Leverage index to preprocess sorting
+   - Ensure sort and limit pushdown to TiKV
+   - Maintain sorted order
+
+3. Additional filtering columns:
+   - Non-equal predicates (!=, <>, IS NOT NULL, etc)
+   - Time range conditions on datetime columns
+   - Helps reduce row lookups
+
+4. columns in index postfix for select list or aggregate function:
+   - Leverage IndexReader
+   - Avoid IndexLookup operations
 
 
+### The Cost of Indexing
 
-1. Create appropriate indexes: Design indexes that cover the columns frequently used in WHERE, JOIN, and ORDER BY clauses.
+While indexes can significantly improve query performance, they also come with costs that should be carefully considered:
 
-2. Use covering indexes: When possible, create indexes that include all the columns needed for a query, allowing TiDB to satisfy the query using only the index (Index-Only Scan).
+1. Performance Impact on Writes:
+   - Each additional index slows down write operations (INSERT, UPDATE, DELETE)
+   - When data is modified, all affected indexes must be updated
+   - This overhead increases with each additional index
 
-3. Optimize query patterns: Structure your queries to take advantage of existing indexes and avoid operations that might prevent index usage.
+2. Resource Consumption:
+   - Indexes require additional disk space
+   - More memory is needed to cache frequently accessed indexes
+   - Backup and recovery operations take longer
 
-4. Consider composite indexes: For queries that filter or sort on multiple columns, a well-designed composite index can be more efficient than multiple single-column indexes.
-
-5. Use prefix indexes: For string columns, consider indexing only the first few characters if that's sufficient for most queries.
-
-6. Regularly analyze tables: Keep statistics up-to-date to help the query optimizer make better decisions about index usage.
-
-By focusing on these index optimization strategies, you can significantly reduce the number of KV RPC requests, leading to improved query performance in TiDB.
-
-
-### SQL Tuning Strategy - Reducing the Required I/O
-
-Minimize the number of columns in the SELECT statement
-Use a WHERE clause to filter irrelevant results
-Use a LIMIT clause to minimize the size of the result set
-Carefully create indexes on relevant columns for fast lookup
-Push down predicates and functions to TiKV layer when possible
-Create indexes that can hold all required data for small, frequent queries to enable IndexReader 
-
-
-Indexing for Query Performance
-
-A good indexing strategy enables TiDB reduces I/O by
-Avoiding full table scans
-Avoiding sorting
-Skipping row lookups when possible
-
-The Cost of Indexing
-
-
-Do NOT create unnecessary indexes in TiDB
-Data modifications are slower in tables that have many indexes
-Affected indexes must be updated in cascade
-Negatively impacts the write-intensive workloads significantly
-Indexes consume disk space
-
-
-
-Indexes play a critical role in query performance. A well-designed index can drastically reduce query execution time.
-
-Make sure to follow the composite index strategy
-- Key predicates for index prefix columns, predicates on columns that data can be accessed directly: 
-- Columns After Index Prefix, leverage index to preprocess the sorting
-- Additional Columns for Filtering, to reduce row lookups
-
-## Partition Tables: Local vs Global Indexes
-Partitioning large tables can improve query performance, but the choice between local and global indexes is crucial.
-
-- Local Index: Indexed data is limited to a partition, leading to efficient access within that partition.
-- Global Index: Spanning across partitions, global indexes help avoid partition lookups.
-Best Practice: Use global indexes for queries accessing multiple partitions to reduce lookup overhead.
-
-## Index Full Scan vs Table Full Scan
-In most cases, Index Full Scans are much faster than Table Full Scans because indexes are smaller and ordered. Use index full scans to minimize data access time.
+3. Write Hotspot Risk:
+   - Secondary indexes can create write hotspots, for example, a datetime monotonically increasing index will cause the hotspots on the write of the table
+   - Performance can degrade significantly if hotspots occur
 
 Best Practice:
-
-Ensure that queries make use of index scans whenever possible. A full table scan should only happen when absolutely necessary.
-
-
-# Key Takeaways
-- The quality of the execution plan is dependent on the quality of the inputs. Ensure statistics are up to date and reflect the data accurately.
-- Compare estimated rows and actual rows to verify that the optimizer has accurate statistics.
-- Follow the composite index strategy:
-  - Use key predicates for index prefix columns.
-  - Leverage columns after the index prefix to support sorting and filtering.
- . - Add extra columns to reduce row lookups.
-- Choose between global and local indexes for partitioned tables based on the query access pattern. Use global indexes to avoid lookup overhead across partitions.
-
+- Only create indexes that provide clear performance benefits
+- Regularly review index usage statistics via [TIDB_INDEX_USAGE](https://docs.pingcap.com/tidb/dev/information-schema-tidb-index-usage)
+- Consider the write/read ratio of your workload when designing indexes
