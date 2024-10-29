@@ -481,7 +481,7 @@ tiproxy_servers:
 
 - `log-file`: The path to which logs are output when the TiKV-CDC process is running (optional). If not specified, logs are written to the standard output (stdout).
 
-- `log-level`: The log level when the TiKV-CDC process is running (optional). The default value is "info".
+- `log-level`: The log level when the TiKV-CDC process is running (optional). The default value is `"info"`.
 
 - `ca`: The path of the CA certificate file in PEM format for TLS connection (optional).
 
