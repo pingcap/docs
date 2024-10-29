@@ -282,7 +282,7 @@ Schedulers are components in PD that generate scheduling tasks. Each scheduler i
 
 ### SST
 
-Static Sorted Table is the  store format of RocksDB.
+Static Sorted Table, Sorted String Table or Sorted Sequence Table (SST) is the file storage format of RocksDB.
 
 ### Store
 
