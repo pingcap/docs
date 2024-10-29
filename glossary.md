@@ -108,7 +108,7 @@ Garbage Collection (GC) is the process to cleanup unused resources. See [GC](/ga
 
 ### GTID
 
-Global Transactions ID's (GTIDs) are used by recent MySQL versions to indicate what transactions have been replicated and which have not. This information can be used by DM.
+Global Transactions ID's (GTIDs) are used by recent MySQL versions binary log to indicate what transactions have been replicated and which have not. This information can be used by DM.
 
 ## H
 
