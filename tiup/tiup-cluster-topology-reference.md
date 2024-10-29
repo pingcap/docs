@@ -491,7 +491,7 @@ tiproxy_servers:
 
 - `cert-allowed-cn`: Controls whether to verify the caller's identity (certificate Common Name, optional). Use commas to separate multiple CNs.
 
-Among the above fields, you cannot modify the following configured fields after the deployment:
+For the above fields, you cannot modify these configured fields after the deployment:
 
 - `host`
 - `port`
