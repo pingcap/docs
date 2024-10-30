@@ -476,9 +476,9 @@ tiproxy_servers:
 
 - `config`: The address of the configuration file that TiKV-CDC uses (optional).
 
-- `data-dir`: The directory that TiKV-CDC uses to store temporary files for sorting. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB (optional).
+- `data-dir`: The directory that TiKV-CDC uses to store temporary files primarily for sorting. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB (optional).
 
-- `gc-ttl`: The TTL (Time to Live, in seconds) of the service-level GC safepoint in PD set by TiKV-CDC (optional). It is the duration that replication tasks can be suspended, defaulting to `86400`, which is 24 hours. Note that suspending replication tasks affects the progress of TiKV garbage collection. The longer the `gc-ttl`, the longer changefeeds can be paused, but at the same time, more obsolete data will be kept and occupy more space. Vice versa.
+- `gc-ttl`: The TTL (Time to Live, in seconds) of the service-level GC safepoint in PD set by TiKV-CDC (optional). It is the duration that replication tasks can be suspended, defaulting to `86400`, which is 24 hours. Note that suspending replication tasks affect the progress of TiKV garbage collection safepoint. The longer the `gc-ttl`, the longer changefeeds can be suspended, but at the same time, more obsolete data will be kept and occupy more space. Vice versa.
 
 - `log-file`: The path to which logs are output when the TiKV-CDC process is running (optional). If not specified, logs are written to the standard output (stdout).
 
