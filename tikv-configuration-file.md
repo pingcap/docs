@@ -1953,9 +1953,13 @@ Configuration items related to Raft Engine.
 
 ### `bytes-per-sync`
 
+> **Warning:**
+>
+> Starting from v6.5.0, Raft Engine writes logs to disk directly without buffering. Therefore, this configuration item is deprecated and no longer functional.
+
 + Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
 + If you set this configuration item to `0`, incremental sync is disabled.
-+ Default value: `"4MiB"`
++ Before v6.5.0, the default value is `"4MiB"`.
 
 ### `target-file-size`
 
