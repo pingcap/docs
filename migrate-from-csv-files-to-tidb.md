@@ -7,7 +7,7 @@ summary: CSV ファイルから TiDB にデータを移行する方法を学び�
 
 このドキュメントでは、CSV ファイルから TiDB にデータを移行する方法について説明します。
 
-TiDB Lightning は、 CSV ファイルやタブ区切り値 (TSV) などの他の区切り形式からデータを読み取ることができます。その他のフラット ファイル データ ソースについては、このドキュメントを参照してデータを TiDB に移行することもできます。
+TiDB Lightning は、CSV ファイルやタブ区切り値 (TSV) などの他の区切り形式からデータを読み取ることができます。他のフラット ファイル データ ソースについては、このドキュメントを参照してデータを TiDB に移行することもできます。
 
 ## 前提条件 {#prerequisites}
 
@@ -19,7 +19,9 @@ TiDB Lightning は、 CSV ファイルやタブ区切り値 (TSV) などの他�
 すべての CSV ファイルを同じディレクトリに配置します。TiDB TiDB Lightning ですべての CSV ファイルを認識する必要がある場合は、ファイル名が次の要件を満たしている必要があります。
 
 -   CSV ファイルにテーブル全体のデータが含まれている場合は、ファイルに`${db_name}.${table_name}.csv`名前を付けます。
--   1 つのテーブルのデータが複数の CSV ファイルに分割されている場合は、これらの CSV ファイルに数値サフィックスを追加します。たとえば、 `${db_name}.${table_name}.003.csv` 。数値サフィックスは連続していなくてもかまいませんが、昇順である必要があります。また、すべてのサフィックスが同じ長さになるように、数字の前にゼロを追加する必要があります。
+-   1 つのテーブルのデータが複数の CSV ファイルに分割されている場合は、これらの CSV ファイルに数値サフィックスを追加します。たとえば、 `${db_name}.${table_name}.003.csv`です。数値サフィックスは連続していなくてもかまいませんが、昇順である必要があります。また、すべてのサフィックスが同じ長さになるように、数字の前にゼロを追加する必要があります。
+
+TiDB Lightning は、このディレクトリとそのサブディレクトリ内のすべての`.csv`ファイルを再帰的に検索します。
 
 ## ステップ2. ターゲットテーブルスキーマを作成する {#step-2-create-the-target-table-schema}
 
@@ -103,9 +105,9 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 厳密な形式の CSV ファイルでは、各フィールドは 1 行のみを占めます。次の要件を満たす必要があります。
 
 -   区切り文字が空です。
--   各フィールドにはCR（ `\r` ）またはLF（ `\n` ）が含まれません。
+-   各フィールドにはCR（ `\r` ）またはLF（ `\n` ）は含まれません。
 
-`strict-format` CSV ファイルの場合は、行末文字`terminator`を明示的に指定する必要があります。
+`strict-format` CSV ファイルの場合は、行末文字`terminator`明示的に指定する必要があります。
 
 CSV ファイルが上記の要件を満たしている場合は、次のように`strict-format`モードを有効にすることでインポートを高速化できます。
 
@@ -128,11 +130,11 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)の進捗状況を確認します。
 -   [TiDB Lightningウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)の進捗状況を確認します。
 
-TiDB Lightning はインポートを完了すると、自動的に終了します。最後の行の`tidb-lightning.log`に`the whole procedure completed`が含まれているかどうかを確認します。含まれている場合は、インポートは成功です。含まれていない場合は、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処してください。
+TiDB Lightning はインポートを完了すると、自動的に終了します。最後の行の`tidb-lightning.log`に`the whole procedure completed`含まれているかどうかを確認します。含まれている場合は、インポートは成功です。含まれていない場合は、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処してください。
 
 > **注記：**
 >
-> インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
+> インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
 
 インポートに失敗した場合は、トラブルシューティングについては[TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
@@ -180,6 +182,6 @@ backslash-escape = false
 trim-last-separator = true
 ```
 
-## 次は何ですか {#what-s-next}
+## 次は何か {#what-s-next}
 
 -   [CSV のサポートと制限](/tidb-lightning/tidb-lightning-data-source.md#csv) 。

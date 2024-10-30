@@ -85,7 +85,7 @@ TiKV 構成ファイルは、コマンドライン パラメータよりも多�
 
 ### <code>max-size</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-max-size-code-span-class-version-mark-new-in-v5-4-0-span}
 
--   1 つのログ ファイルの最大サイズ。ファイル サイズがこの設定項目で設定された値より大きい場合、システムは 1 つのファイルを自動的に複数のファイルに分割します。
+-   1 つのログ ファイルの最大サイズ。ファイル サイズがこの設定項目で設定された値より大きい場合、システムは自動的に 1 つのファイルを複数のファイルに分割します。
 -   デフォルト値: `300`
 -   最大値: `4096`
 -   単位: MiB
@@ -189,7 +189,7 @@ TiKV 構成ファイルは、コマンドライン パラメータよりも多�
 
 ### <code>grpc-keepalive-timeout</code> {#code-grpc-keepalive-timeout-code}
 
--   gRPC ストリームのタイムアウトを無効にします
+-   gRPC ストリームのタイムアウトを無効にする
 -   デフォルト値: `"3s"`
 -   最小値: `"1s"`
 
@@ -257,7 +257,7 @@ TiKV 構成ファイルは、コマンドライン パラメータよりも多�
 
 ### <code>forward-max-connections-per-address</code><span class="version-mark">バージョン 5.0.0 の新機能</span> {#code-forward-max-connections-per-address-code-span-class-version-mark-new-in-v5-0-0-span}
 
--   サービスとサーバーへのリクエスト転送用の接続プールのサイズを設定します。値を小さくしすぎると、リクエストのレイテンシーと負荷分散に影響します。
+-   サービスとサーバーへのリクエスト転送用の接続プールのサイズを設定します。値が小さすぎると、リクエストのレイテンシーと負荷分散に影響します。
 -   デフォルト値: `4`
 
 ## 読み取りプール統合 {#readpool-unified}
@@ -360,7 +360,7 @@ storageスレッド プールに関連するコンフィグレーション項目
 ### <code>use-unified-pool</code> {#code-use-unified-pool-code}
 
 -   コプロセッサ要求に統合スレッドプール（ [`readpool.unified`](#readpoolunified)で設定）を使用するかどうかを決定します。このパラメータの値が`false`場合、このセクションの残りのパラメータ（ `readpool.coprocessor` ）を通じて設定される別のスレッドプールが使用されます。
--   デフォルト値: このセクション( `readpool.coprocessor` )のパラメータが設定されていない場合、デフォルト値は`true`です。それ以外の場合、下位互換性のためにデフォルト値は`false`です。このパラメータを有効にする前に、 [`readpool.unified`](#readpoolunified)の設定項目を調整してください。
+-   デフォルト値: このセクション( `readpool.coprocessor` )のパラメータが設定されていない場合、デフォルト値は`true`になります。それ以外の場合、下位互換性のためにデフォルト値は`false`になります。このパラメータを有効にする前に、 [`readpool.unified`](#readpoolunified)の設定項目を調整してください。
 
 ### <code>high-concurrency</code> {#code-high-concurrency-code}
 
@@ -400,7 +400,7 @@ storageスレッド プールに関連するコンフィグレーション項目
 
 ### <code>stack-size</code> {#code-stack-size-code}
 
--   コプロセッサースレッドプール内のスレッドのスタックサイズ
+-   コプロセッサースレッド プール内のスレッドのスタック サイズ
 -   タイプ: 整数 + 単位
 -   デフォルト値: `"10MiB"`
 -   単位: KiB|MiB|GiB
@@ -494,7 +494,7 @@ storageに関するコンフィグレーション項目。
         -   API V2 を使用する場合は、同時に`storage.enable-ttl = true`設定する必要があります。API V2 は TTL 機能をサポートしているため、 [`enable-ttl`](#enable-ttl)明示的にオンにする必要があります。そうしないと、 `storage.enable-ttl`デフォルトで`false`になるため、競合が発生します。
         -   API V2 が有効になっている場合、古いデータを再利用するには、少なくとも 1 つの tidb-server インスタンスをデプロイする必要があります。この tidb-server インスタンスは、読み取りサービスと書き込みサービスを同時に提供できます。高可用性を確保するために、複数の tidb-server インスタンスをデプロイできます。
         -   API V2 にはクライアントのサポートが必要です。詳細については、API V2 のクライアントの対応する手順を参照してください。
-        -   v6.2.0 以降では、RawKV の変更データ キャプチャ (CDC) がサポートされています[生のKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
+        -   v6.2.0 以降では、RawKV の変更データ キャプチャ (CDC) がサポートされています[生KV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
 -   デフォルト値: `1`
 
 > **警告：**
@@ -712,7 +712,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-log-gc-count-limit</code> {#code-raft-log-gc-count-limit-code}
 
--   許容される残存Raftログ数のハード制限
+-   許容される残存Raft数のハード制限
 -   デフォルト値: 3/4リージョンサイズに収容できるログ数 (ログごとに 1MiB として計算)
 -   最小値: `0`
 
@@ -876,7 +876,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>abnormal-leader-missing-duration</code> {#code-abnormal-leader-missing-duration-code}
 
--   Raftグループにリーダーがいない状態でピアが存在できる最長時間。この値を超えると、ピアは異常とみなされ、メトリックとログにマークされます。
+-   ピアがRaftグループにリーダーがいない状態を維持できる最長時間。この値を超えると、ピアは異常とみなされ、メトリックとログにマークされます。
 -   デフォルト値: `"10m"`
 -   最小値: `peer-stale-state-check-interval`より大きい
 
@@ -888,7 +888,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>leader-transfer-max-log-lag</code> {#code-leader-transfer-max-log-lag-code}
 
--   Raftリーダー転送中に転送先に許可される失われたログの最大数
+-   Raftリーダー転送中に転送先に許可される欠落ログの最大数
 -   デフォルト値: `128`
 -   最小値: `10`
 
@@ -911,7 +911,7 @@ Raftstoreに関連するコンフィグレーション項目。
 >
 > 一貫性チェックはクラスターのパフォーマンスに影響し、TiDB のガベージコレクションと互換性がないため、本番環境では有効にし**ない**ことをお勧めします。
 
--   一貫性チェックがトリガーされる時間間隔`0`は、この機能が無効であることを意味します。
+-   整合性チェックがトリガーされる時間間隔`0`は、この機能が無効であることを意味します。
 -   デフォルト値: `"0s"`
 -   最小値: `0`
 
@@ -934,7 +934,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>merge-check-tick-interval</code> {#code-merge-check-tick-interval-code}
 
--   TiKVがリージョンのマージが必要かどうかをチェックする時間間隔
+-   TiKVがリージョンのマージが必要かどうかを確認する時間間隔
 -   デフォルト値: `"2s"`
 -   最小値: `0`より大きい
 
@@ -957,7 +957,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>apply-yield-write-size</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-apply-yield-write-size-code-span-class-version-mark-new-in-v6-4-0-span}
 
--   1 回のポーリングで、適用スレッドが 1 つの FSM (有限状態マシン) に書き込むことができる最大バイト数。これはソフト制限です。
+-   適用スレッドが 1 回のポーリングで 1 つの FSM (有限状態マシン) に書き込むことができる最大バイト数。これはソフト制限です。
 -   デフォルト値: `"32KiB"`
 -   最小値: `0`より大きい
 -   単位: KiB|MiB|GiB
@@ -1210,7 +1210,7 @@ RocksDBに関連するコンフィグレーション項目
 
 ### <code>use-direct-io-for-flush-and-compaction</code> {#code-use-direct-io-for-flush-and-compaction-code}
 
--   バックグラウンドのフラッシュと圧縮で読み取りと書き込みの両方に`O_DIRECT`使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`有効にすると、OS バッファ キャッシュのバイパスと汚染が防止されますが、後続のファイル読み取りでは、バッファ キャッシュへの内容の再読み取りが必要になります。
+-   バックグラウンドのフラッシュと圧縮で、読み取りと書き込みの両方に`O_DIRECT`使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`有効にすると、OS バッファ キャッシュのバイパスと汚染が防止されますが、後続のファイル読み取りでは、バッファ キャッシュへのコンテンツの再読み取りが必要になります。
 -   デフォルト値: `false`
 
 ### <code>rate-bytes-per-sec</code> {#code-rate-bytes-per-sec-code}
@@ -1576,7 +1576,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### <code>enable-compaction-guard</code> {#code-enable-compaction-guard-code}
 
--   圧縮ガード (TiKVリージョン境界で SST ファイルを分割するための最適化) を有効または無効にします。この最適化により、圧縮 I/O を削減し、TiKV がより大きな SST ファイル サイズ (したがって、全体的な SST ファイルが少なくなる) を使用できるようになります。また、リージョンを移行するときに、古いデータを効率的にクリーンアップできるようになります。
+-   圧縮ガード (TiKVリージョン境界で SST ファイルを分割するための最適化) を有効または無効にします。この最適化により、圧縮 I/O を削減し、TiKV がより大きな SST ファイル サイズ (したがって、全体的な SST ファイルが少なくなる) を使用できるようになります。また、リージョンを移行するときに、古いデータを効率的にクリーンアップできます。
 -   `defaultcf`と`writecf`のデフォルト値: `true`
 -   `lockcf`のデフォルト値: `false`
 
@@ -1738,7 +1738,7 @@ Titanに関連するコンフィグレーション項目。
 ### <code>wal-dir</code> {#code-wal-dir-code}
 
 -   Raft RocksDB WAL ファイルが保存されるディレクトリ。これは WAL の絶対ディレクトリ パスです。この構成項目を[`rocksdb.wal-dir`](#wal-dir)と同じ値に設定し**ないでください**。
--   この設定項目が設定されていない場合、ログ ファイルはデータと同じディレクトリに保存されます。
+-   この構成項目が設定されていない場合、ログ ファイルはデータと同じディレクトリに保存されます。
 -   マシンに 2 つのディスクがある場合、RocksDB データと WAL ログを別のディスクに保存するとパフォーマンスが向上します。
 -   デフォルト値: `""`
 
@@ -1780,7 +1780,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### <code>use-direct-io-for-flush-and-compaction</code> {#code-use-direct-io-for-flush-and-compaction-code}
 
--   バックグラウンドのフラッシュと圧縮で読み取りと書き込みの両方に`O_DIRECT`使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`有効にすると、OS バッファ キャッシュのバイパスと汚染が防止されますが、後続のファイル読み取りでは、バッファ キャッシュへの内容の再読み取りが必要になります。
+-   バックグラウンドのフラッシュと圧縮で、読み取りと書き込みの両方に`O_DIRECT`使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`有効にすると、OS バッファ キャッシュのバイパスと汚染が防止されますが、後続のファイル読み取りでは、バッファ キャッシュへのコンテンツの再読み取りが必要になります。
 -   デフォルト値: `false`
 
 ### <code>enable-pipelined-write</code> {#code-enable-pipelined-write-code}
@@ -1879,9 +1879,13 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### <code>bytes-per-sync</code> {#code-bytes-per-sync-code}
 
+> **警告：**
+>
+> v6.5.0 以降、 Raft Engineはバッファリングせずにログを直接ディスクに書き込みます。そのため、この構成項目は非推奨となり、機能しなくなりました。
+
 -   バッファリングされた書き込みの最大累積サイズを指定します。この構成値を超えると、バッファリングされた書き込みはディスクにフラッシュされます。
 -   この構成項目を`0`に設定すると、増分同期は無効になります。
--   デフォルト値: `"4MiB"`
+-   v6.5.0 より前では、デフォルト値は`"4MiB"`です。
 
 ### <code>target-file-size</code> {#code-target-file-size-code}
 
@@ -2048,7 +2052,7 @@ TiDB Lightning のインポートとBR の復元に関連するコンフィグ�
 ### <code>max-write-bytes-per-sec</code> {#code-max-write-bytes-per-sec-code}
 
 -   GC ワーカーが 1 秒間に RocksDB に書き込むことができる最大バイト数。
--   値が`0`に設定されている場合、制限はありません。
+-   値を`0`に設定すると、制限はありません。
 -   デフォルト値: `"0"`
 
 ### <code>enable-compaction-filter</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-compaction-filter-code-span-class-version-mark-new-in-v5-0-span}
@@ -2268,7 +2272,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 -   トランザクションがデータを書き込む帯域幅のソフト制限。
 -   デフォルト値: `0KiB` (制限なしを意味します)
--   推奨設定: `foreground-cpu-time`設定では書き込み帯域幅を制限するのに十分でない限り、ほとんどの場合はデフォルト値`0`を使用します。このような例外の場合、コア数が 4 以下のインスタンスでは`50MiB`より小さい値を設定することをお勧めします。
+-   推奨設定: `foreground-cpu-time`設定では書き込み帯域幅を制限するのに十分でない限り、ほとんどの場合はデフォルト値`0`を使用します。このような例外の場合、コア数が 4 以下のインスタンスでは`50MiB`未満の値を設定することをお勧めします。
 
 #### <code>foreground-read-bandwidth</code><span class="version-mark">幅 v6.0.0 の新機能</span> {#code-foreground-read-bandwidth-code-span-class-version-mark-new-in-v6-0-0-span}
 
@@ -2361,7 +2365,7 @@ TiKVstorageレイヤーのリソース制御に関連するコンフィグレー
 ### <code>enabled</code> <span class="version-mark">v6.6.0 の新</span>機能 {#code-enabled-code-span-class-version-mark-new-in-v6-6-0-span}
 
 -   対応するリソース グループの[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)に従って、ユーザーのフォアグラウンド読み取り/書き込み要求のスケジュールを有効にするかどうかを制御します。TiDB リソース グループとリソース制御の詳細については、 [TiDB リソース制御](/tidb-resource-control.md)参照してください。
--   この構成項目を有効にすると、TiDB で[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効になっている場合にのみ機能します。この構成項目を有効にすると、TiKV は優先キューを使用して、フォアグラウンド ユーザーからのキューに入れられた読み取り/書き込み要求をスケジュールします。要求のスケジュール優先度は、この要求を受信するリソース グループによってすでに消費されているリソースの量に反比例し、対応するリソース グループのクォータに正比例します。
+-   この構成項目を有効にすると、TiDB で[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効になっている場合にのみ機能します。この構成項目を有効にすると、TiKV は優先キューを使用して、フォアグラウンド ユーザーからのキューに入れられた読み取り/書き込み要求をスケジュールします。要求のスケジュール優先度は、この要求を受信するリソース グループによってすでに消費されているリソースの量と反比例し、対応するリソース グループのクォータと正比例します。
 -   デフォルト値: `true` 。これは、リソース グループの RU に基づくスケジュールが有効であることを意味します。
 
 ## スプリット {#split}
@@ -2394,7 +2398,7 @@ TiKVstorageレイヤーのリソース制御に関連するコンフィグレー
 
 ## メモリ<span class="version-mark">v7.5.0 の新機能</span> {#memory-span-class-version-mark-new-in-v7-5-0-span}
 
-### <code>enable-heap-profiling</code> <span class="version-mark">v7.5.0 の新</span>機能 {#code-enable-heap-profiling-code-span-class-version-mark-new-in-v7-5-0-span}
+### <code>enable-heap-profiling</code> <span class="version-mark">v7.5.0 の新機能</span> {#code-enable-heap-profiling-code-span-class-version-mark-new-in-v7-5-0-span}
 
 -   TiKV のメモリ使用量を追跡するためにヒープ プロファイリングを有効にするかどうかを制御します。
 -   デフォルト値: `true`

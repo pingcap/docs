@@ -17,7 +17,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 > **ヒント：**
 >
-> 以前の LTS 6.1.0 と比較して、 TiDB 6.5.0 には、 [6.2.0-DMR](/releases/release-6.2.0.md) 、 [6.3.0-DMR](/releases/release-6.3.0.md) 、 [6.4.0-DMR](/releases/release-6.4.0.md)でリリースされた新機能、改善点、バグ修正も含まれています。
+> 以前の LTS 6.1.0 と比較して、 TiDB 6.5.0 には、 [6.2.0-DMR](/releases/release-6.2.0.md) 、 [6.3.0-DMR](/releases/release-6.3.0.md) 、 [6.4.0-DMR](/releases/release-6.4.0.md)でリリースされた新機能、改善、バグ修正も含まれています。
 >
 > -   6.1.0 LTS バージョンと 6.5.0 LTS バージョン間の変更点の完全なリストを取得するには、このリリース ノートに加えて、 [6.2.0-DMR リリースノート](/releases/release-6.2.0.md) 、 [6.3.0-DMR リリースノート](/releases/release-6.3.0.md) 、および[6.4.0-DMR リリースノート](/releases/release-6.4.0.md)も参照してください。
 > -   6.1.0 LTS バージョンと 6.5.0 LTS バージョンの主な機能を簡単に比較するには、 [TiDBの機能](/basic-features.md)の`v6.1`と`v6.5`列目を確認してください。
@@ -29,11 +29,11 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 -   より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)一般に公開し、 `AND`で接続された[インデックスマージ](/explain-index-merge.md)式をサポートすることで、 TiDB オプティマイザーを強化します。
 -   `JSON_EXTRACT()`機能をTiFlashにプッシュダウンすることをサポートします。
 -   パスワード コンプライアンス監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
--   TiDB LightningとDumpling は、 [インポート](/tidb-lightning/tidb-lightning-data-source.md)および[輸出](/dumpling-overview.md#improve-export-efficiency-through-concurrency)圧縮された SQL ファイルと CSV ファイルをサポートします。
+-   TiDB LightningとDumpling は、 [輸入](/tidb-lightning/tidb-lightning-data-source.md)および[輸出](/dumpling-overview.md#improve-export-efficiency-through-concurrency)圧縮された SQL ファイルと CSV ファイルをサポートします。
 -   TiDB データ移行 (DM) [継続的なデータ検証](/dm/dm-continuous-data-validation.md) GA になります。
 -   TiDB バックアップ &amp; リストアは、スナップショット チェックポイント バックアップをサポートし、 [ピトル](/br/br-pitr-guide.md#run-pitr)のリカバリ パフォーマンスを 50% 向上させ、一般的なシナリオでの RPO を 5 分まで短縮します。
 -   [Kafka へのデータの複製](/replicate-data-to-kafka.md)の TiCDC スループットを 4000 行/秒から 35000 行/秒に向上し、レプリケーションのレイテンシーを2 秒に短縮します。
--   データライフサイクルを管理するために行レベル[存続時間 (TTL)](/time-to-live.md)を提供します (実験的)。
+-   データのライフサイクルを管理するために行レベル[存続時間 (TTL)](/time-to-live.md)を提供します (実験的)。
 -   TiCDC は、Amazon S3、Azure Blob Storage、NFS (実験的) など[変更されたログをオブジェクトstorageに複製する](/ticdc/ticdc-sink-to-cloud-storage.md)をサポートしています。
 
 ## 新機能 {#new-features}
@@ -62,7 +62,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については[非トランザクションDMLステートメント](/non-transactional-dml.md)および[`BATCH`構文](/sql-statements/sql-statement-batch.md)参照してください。
 
--   TTL (time to live) のサポート (実験的) [＃39262](https://github.com/pingcap/tidb/issues/39262) @ [lcwangchao](https://github.com/lcwangchao)
+-   存続時間 (TTL) のサポート (実験的) [＃39262](https://github.com/pingcap/tidb/issues/39262) @ [lcwangchao](https://github.com/lcwangchao)
 
     TTL は、行レベルのデータ有効期間管理を提供します。TiDB では、TTL 属性を持つテーブルは、データ有効期間を自動的にチェックし、行レベルで期限切れのデータを削除します。TTL は、オンラインの読み取りおよび書き込みワークロードに影響を与えることなく、不要なデータを定期的かつタイムリーにクリーンアップできるように設計されています。
 
@@ -86,7 +86,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 -   バインディング履歴実行プランのサポート (実験的) [＃39199](https://github.com/pingcap/tidb/issues/39199) @ [ふーふー](https://github.com/fzzf678)
 
-    SQL ステートメントの場合、実行中のさまざまな要因により、オプティマイザが以前の最適な実行プランではなく新しい実行プランを選択することがあり、SQL パフォーマンスに影響を及ぼします。この場合、最適な実行プランがまだクリアされていない場合は、SQL 実行履歴にまだ存在します。
+    SQL ステートメントの場合、実行中のさまざまな要因により、オプティマイザが以前の最適な実行プランではなく新しい実行プランを選択することがあり、SQL パフォーマンスに影響します。この場合、最適な実行プランがまだクリアされていない場合は、SQL 実行履歴にまだ存在します。
 
     v6.5.0 では、TiDB は[`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)ステートメントのバインディング オブジェクトを拡張することで、履歴実行プランのバインディングをサポートします。SQL ステートメントの実行プランが変更された場合、元の実行プランが SQL 実行履歴メモリテーブルに残っている限り (たとえば、 `statements_summary` )、 `CREATE [GLOBAL | SESSION] BINDING`ステートメントで`plan_digest`指定して元の実行プランをバインドし、SQL パフォーマンスを迅速に回復できます。この機能により、実行プランの変更の問題を処理するプロセスが簡素化され、メンテナンスの効率が向上します。
 
@@ -104,7 +104,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 -   パスワード有効期限ポリシー[＃38936](https://github.com/pingcap/tidb/issues/38936) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)をサポート
 
-    TiDB は、手動による有効期限、グローバル レベルの自動有効期限、アカウント レベルの自動有効期限など、パスワード有効期限ポリシーの構成をサポートしています。このポリシーを有効にした後は、パスワードを定期的に変更する必要があります。これにより、長期使用によるパスワード漏洩のリスクが軽減され、パスワードのセキュリティが向上します。
+    TiDB は、手動による有効期限、グローバル レベルの自動有効期限、アカウント レベルの自動有効期限など、パスワード有効期限ポリシーの構成をサポートしています。このポリシーを有効にすると、パスワードを定期的に変更する必要があります。これにより、長期使用によるパスワード漏洩のリスクが軽減され、パスワードのセキュリティが向上します。
 
     詳細については[ドキュメント](/password-management.md#password-expiration-policy)参照してください。
 
@@ -116,7 +116,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 -   ログイン失敗の追跡と一時的なアカウントロックポリシー[＃38938](https://github.com/pingcap/tidb/issues/38938) @ [最後の切歯](https://github.com/lastincisor)をサポート
 
-    このポリシーを有効にすると、TiDB に連続して複数回間違ったパスワードでログインすると、アカウントが一時的にロックされます。ロック時間が終了すると、アカウントは自動的にロック解除されます。
+    このポリシーを有効にすると、TiDB に連続して間違ったパスワードでログインすると、アカウントが一時的にロックされます。ロック時間が終了すると、アカウントは自動的にロック解除されます。
 
     詳細については[ドキュメント](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy)参照してください。
 
@@ -153,7 +153,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     インデックスマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)と[インデックスのマージの説明](/explain-index-merge.md)参照してください。
 
--   以下のJSON関数をTiFlash [＃39458](https://github.com/pingcap/tidb/issues/39458) @ [いいえ](https://github.com/yibin87)にプッシュダウンするサポート
+-   以下のJSON関数をTiFlash [＃39458](https://github.com/pingcap/tidb/issues/39458) @ [宜ビン87](https://github.com/yibin87)にプッシュダウンするサポート
 
     -   `->`
     -   `->>`
@@ -195,7 +195,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     v6.4.0 以降、TiDB は実験的機能としてグローバルメモリ制御を導入しました。v6.5.0 では GA となり、メインメモリの消費量を追跡できるようになりました。グローバルメモリの消費量が[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)で定義されたしきい値に達すると、TiDB は GC または SQL 操作のキャンセルによってメモリ使用量を制限し、安定性を確保しようとします。
 
-    セッション内のトランザクションによって消費されるメモリ(最大値は以前は構成項目[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)によって設定されていました) は、メモリ管理モジュールによって追跡されるようになりました。単一セッションのメモリ消費がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)によって定義されたしきい値に達すると、システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)によって定義された動作がトリガーされます (デフォルトは`CANCEL` 、つまり操作のキャンセルです)。前方互換性を確保するために、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)がデフォルト以外の値として構成されている場合でも、TiDB はトランザクションが`txn-total-size-limit`によって設定されたメモリを使用できるようにします。
+    セッション内のトランザクションによって消費されるメモリ(最大値は以前は構成項目[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)によって設定されていました) は、メモリ管理モジュールによって追跡されるようになりました。単一セッションのメモリ消費量がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)によって定義されたしきい値に達すると、システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)によって定義された動作がトリガーされます (デフォルトは`CANCEL` 、つまり操作のキャンセルです)。前方互換性を確保するために、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)がデフォルト以外の値として構成されている場合でも、TiDB はトランザクションが`txn-total-size-limit`によって設定されたメモリを使用できるようにします。
 
     TiDB v6.5.0 以降を使用している場合は、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)削除し、トランザクションのメモリ使用量に個別の制限を設定しないことを推奨します。代わりに、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)と[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)使用してグローバルメモリを管理し、メモリ使用の効率を向上させることができます。
 
@@ -209,7 +209,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については[ドキュメント](/sql-statements/sql-statement-explain-analyze.md)参照してください。
 
--   JSON形式での実行プランの出力をサポート[＃39261](https://github.com/pingcap/tidb/issues/39261) @ [ふーふー](https://github.com/fzzf678)
+-   実行プランのJSON形式[＃39261](https://github.com/pingcap/tidb/issues/39261) @ [ふーふー](https://github.com/fzzf678)での出力をサポート
 
     v6.5.0 では、TiDB は実行プランの出力形式を拡張しました。3 `EXPLAIN`で`FORMAT = "tidb_json"`指定することで、SQL 実行プランを JSON 形式で出力できます。この機能により、SQL デバッグ ツールや診断ツールは実行プランをより便利かつ正確に読み取ることができるため、SQL 診断やチューニングの使いやすさが向上します。
 
@@ -269,7 +269,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 -   TiCDCは2つのクラスター間の双方向レプリケーションをサポートします[＃38587](https://github.com/pingcap/tidb/issues/38587) @ [雄吉偉](https://github.com/xiongjiwei) @ [アズドンメン](https://github.com/asddongmen)
 
-    TiCDC は、2 つの TiDB クラスター間の双方向レプリケーションをサポートします。アプリケーション用に地理的に分散された複数のアクティブなデータ センターを構築する必要がある場合は、この機能をソリューションとして使用できます。1 つの TiDB クラスターから別の TiDB クラスターへの TiCDC 変更フィードに`bdr-mode = true`パラメータを構成することで、2 つの TiDB クラスター間の双方向データ レプリケーションを実現できます。
+    TiCDC は、2 つの TiDB クラスター間の双方向レプリケーションをサポートします。アプリケーション用に地理的に分散された複数のアクティブなデータ センターを構築する必要がある場合は、この機能をソリューションとして使用できます。1 つの TiDB クラスターから別の TiDB クラスターへの TiCDC 変更フィードに`bdr-mode = true`パラメータを構成すると、2 つの TiDB クラスター間の双方向データ レプリケーションを実現できます。
 
     詳細については[ドキュメント](/ticdc/ticdc-bidirectional-replication.md)参照してください。
 
@@ -287,7 +287,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 -   TiDB バックアップ &amp; リストアはスナップショット チェックポイント バックアップ[＃38647](https://github.com/pingcap/tidb/issues/38647) @ [リーヴルス](https://github.com/Leavrth)をサポートします
 
-    TiDB スナップショット バックアップは、チェックポイントからのバックアップの再開をサポートします。バックアップと復元 (BR) で回復可能なエラーが発生すると、バックアップが再試行されます。ただし、再試行が複数回失敗すると、 BR は終了します。チェックポイント バックアップ機能により、数十分のネットワーク障害など、回復可能な障害の再試行が長くなります。
+    TiDB スナップショット バックアップは、チェックポイントからのバックアップの再開をサポートしています。バックアップと復元 (BR) で回復可能なエラーが発生すると、バックアップが再試行されます。ただし、再試行が複数回失敗すると、 BR は終了します。チェックポイント バックアップ機能を使用すると、数十分のネットワーク障害など、回復可能な障害が長時間続く場合に再試行できます。
 
     BR終了後 1 時間以内にシステムを障害から回復しない場合、バックアップ対象のスナップショット データが GC メカニズムによってリサイクルされ、バックアップが失敗する可能性があることに注意してください。詳細については、 [ドキュメント](/br/br-checkpoint-backup.md#backup-retry-must-be-prior-to-gc)参照してください。
 
@@ -338,7 +338,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | [`validate_password.check_user_name`](/system-variables.md#validate_passwordcheck_user_name-new-in-v650)                  | 新しく追加された | パスワードの複雑さのチェックにおけるチェック項目。パスワードがユーザー名と一致するかどうかをチェックします。この変数は[`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効になっている場合にのみ有効になります。デフォルト値は`ON`です。                                                                                                                                                                |
 | [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650)                            | 新しく追加された | パスワードの複雑さチェックのチェック項目。パスワードが辞書内のいずれかの単語と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) `2` (STRONG) に設定されている場合にのみ有効になります。デフォルト値は`""`です。                                                   |
 | [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)                                    | 新しく追加された | この変数は、パスワードの複雑さのチェックを実行するかどうかを制御します。この変数を`ON`に設定すると、パスワードを設定するときに TiDB はパスワードの複雑さのチェックを実行します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                         |
-| [`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650)                                    | 新しく追加された | パスワードの複雑さのチェックにおけるチェック項目。パスワードの長さが十分かどうかをチェックします。デフォルトでは、パスワードの最小長は`8`です。この変数は[`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効になっている場合にのみ有効になります。                                                                                                                                                           |
+| [`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650)                                    | 新しく追加された | パスワードの複雑さのチェック項目。パスワードの長さが十分かどうかをチェックします。デフォルトでは、パスワードの最小長は`8`です。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効な場合にのみ有効になります。                                                                                                                                                                      |
 | [`validate_password.mixed_case_count`](/system-variables.md#validate_passwordmixed_case_count-new-in-v650)                | 新しく追加された | パスワードの複雑さチェックのチェック項目。パスワードに十分な大文字と小文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) `1` (MEDIUM) 以上に設定されている場合にのみ有効になります。デフォルト値は`1`です。                                                 |
 | [`validate_password.number_count`](/system-variables.md#validate_passwordnumber_count-new-in-v650)                        | 新しく追加された | パスワードの複雑さチェックのチェック項目。パスワードに十分な数字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) `1` (MEDIUM) 以上に設定されている場合にのみ有効になります。デフォルト値は`1`です。                                                      |
 | [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)                                    | 新しく追加された | この変数は、パスワードの複雑さのチェックのポリシーを制御します。値は`0` 、 `1` 、または`2` (LOW、MEDIUM、または STRONG に対応) です。この変数は、 [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650)が有効な場合にのみ有効になります。デフォルト値は`1`です。                                                                                                                                       |
@@ -351,8 +351,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | ティビ            | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)                       | 非推奨      | v6.5.0 以降では、この構成項目は非推奨です。代わりに、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)使用してメモリをグローバルに管理します。 |
 | ティビ            | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | 新しく追加された | パスワードの有効期限が切れたときに TiDB がクライアント接続を切断するかどうかを決定します。デフォルト値は`true`で、パスワードの有効期限が切れるとクライアント接続が切断されることを意味します。                                           |
 | ティクヴ           | `raw-min-ts-outlier-threshold`                                                                             | 削除されました  | この構成項目はバージョン 6.4.0 で非推奨となり、バージョン 6.5.0 で削除されました。                                                                                                |
+| ティクヴ           | [`raft-engine.bytes-per-sync`](/tikv-configuration-file.md#bytes-per-sync-2)                               | 非推奨      | v6.5.0 以降、 Raft Engineはバッファリングせずにログを直接ディスクに書き込みます。そのため、この構成項目は非推奨となり、機能しなくなりました。                                                                |
 | ティクヴ           | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)                                       | 修正済み     | CDCレイテンシーを削減するために、デフォルト値が`"1s"`から`"200ms"`に変更されます。                                                                                              |
-| ティクヴ           | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-new-in-v650)                             | 新しく追加された | PITR ログ リカバリにおける使用可能なメモリとシステムメモリの合計の比率を示します。                                                                                                    |
+| ティクヴ           | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-new-in-v650)                             | 新しく追加された | PITR ログリカバリにおける使用可能なメモリとシステムメモリの合計の比率を示します。                                                                                                     |
 | ティCDC          | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                 | 新しく追加された | 2 つのデータ変更イベントを区切るために使用される行ターミネータを示します。デフォルトでは値は空で、 `\r\n`使用されることを意味します。                                                                         |
 | ティCDC          | [`sink.date-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)             | 新しく追加された | ファイル ディレクトリの日付区切り文字の種類を示します。値のオプションは`none` 、 `year` 、 `month` 、および`day`です。 `none`デフォルト値であり、日付が区切られないことを意味します。                                   |
 | ティCDC          | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | 新しく追加された | パーティションを分離文字列として使用するかどうかを指定します。デフォルト値は`false`で、テーブル内のパーティションが個別のディレクトリに保存されないことを意味します。                                                          |
@@ -442,7 +443,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     -   パーティションテーブル[＃38932](https://github.com/pingcap/tidb/issues/38932) @ [ミョンス](https://github.com/mjonss)のパーティション列の名前を変更する操作で NULL ポインター エラーが発生する問題を修正しました。
     -   パーティションテーブルのパーティション列を変更すると DDL がハングする問題を修正[＃38530](https://github.com/pingcap/tidb/issues/38530) @ [ミョンス](https://github.com/mjonss)
     -   v4.0.16からv6.4.0 [＃38980](https://github.com/pingcap/tidb/issues/38980) @ [タンジェンタ](https://github.com/tangenta)にアップグレードした後に`ADMIN SHOW JOB`操作がパニックになる問題を修正
-    -   `tidb_decode_key`関数がパーティション化されたテーブル[＃39304](https://github.com/pingcap/tidb/issues/39304) @ [定義2014](https://github.com/Defined2014)のエンコーディングを正しく解析できない問題を修正
+    -   `tidb_decode_key`関数がパーティションテーブル[＃39304](https://github.com/pingcap/tidb/issues/39304) @ [定義2014](https://github.com/Defined2014)のエンコーディングを正しく解析できない問題を修正
     -   ログローテーション中に gRPC エラーログが正しいログファイルにリダイレクトされない問題を修正[＃38941](https://github.com/pingcap/tidb/issues/38941) @ [xhebox](https://github.com/xhebox)
     -   TiKV が読み取りエンジンとして構成されていない場合に、TiDB が`BEGIN; SELECT... FOR UPDATE;`ポイント クエリに対して予期しない実行プランを生成する問題を修正[＃39344](https://github.com/pingcap/tidb/issues/39344) @ [イサール](https://github.com/Yisaer)
     -   誤って`StreamAgg` TiFlashに押し下げると、間違った結果[＃39266](https://github.com/pingcap/tidb/issues/39266) @ [修正DB](https://github.com/fixdb)発生する問題を修正しました。
@@ -491,7 +492,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     -   TiDB Lightning
 
         -   TiDB Lightning が巨大なソース データ ファイル[＃39331](https://github.com/pingcap/tidb/issues/39331) @ [ダシュン](https://github.com/dsdashun)をインポートするときに発生するメモリリークの問題を修正しました
-        -   TiDB Lightning が並列[＃39476](https://github.com/pingcap/tidb/issues/39476) @ [ダシュン](https://github.com/dsdashun)でデータをインポートするときに競合を正しく検出できない問題を修正しました
+        -   TiDB Lightning が並列[＃39476](https://github.com/pingcap/tidb/issues/39476) @ [ダシュン](https://github.com/dsdashun)でデータをインポートするときに競合を正しく検出できない問題を修正
 
 ## 寄稿者 {#contributors}
 

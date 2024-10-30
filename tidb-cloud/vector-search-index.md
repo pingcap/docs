@@ -5,155 +5,130 @@ summary: ベクトル検索インデックスを構築して使用し、TiDB で
 
 # ベクター検索インデックス {#vector-search-index}
 
-K 近傍法 (KNN) 検索は、ベクトル空間内の特定の点に対して K 個の最も近い点を見つける問題です。この問題を解決する最も直接的な方法は、ベクトル空間内のすべての点と参照点の間の距離を計算する総当たり検索です。この方法は完全な精度を保証しますが、実用的に使用するには通常は遅すぎます。そのため、近傍法検索の問題は、多くの場合、近似アルゴリズムで解決されます。
+K 近傍法 (KNN) 検索は、ベクトル空間内の特定の点に最も近い K 個の点を検索する方法です。KNN 検索を実行する最も簡単な方法は、特定のベクトルと空間内の他のすべてのベクトル間の距離を計算する総当たり検索です。この方法では完全な精度が保証されますが、実用的に使用するには通常は遅すぎます。そのため、KNN 検索では速度と効率を高めるために、近似アルゴリズムが一般的に使用されます。
 
-TiDB では、 [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)の列に対する近似最近傍 (ANN) 検索にベクトル検索インデックスを作成して利用できます。ベクトル検索インデックスを使用すると、ベクトル検索クエリを数ミリ秒で完了できます。
+TiDB では、 [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)の列に対する近似最近傍 (ANN) 検索にベクトル検索インデックスを作成して使用できます。ベクトル検索インデックスを使用すると、ベクトル検索クエリを数ミリ秒で完了できます。
 
-TiDB は現在、次のベクトル検索インデックス アルゴリズムをサポートしています。
+現在、TiDB は[HNSW (階層的にナビゲート可能なスモールワールド)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)ベクトル検索インデックス アルゴリズムをサポートしています。
 
--   HNSW
+## 制限 {#restrictions}
 
-> **注記：**
->
-> ベクトル検索インデックスは[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターに対してのみ使用できます。
+-   事前にTiFlashノードをクラスターにデプロイする必要があります。
+-   ベクトル検索インデックスは、主キーまたは一意のインデックスとして使用することはできません。
+-   ベクトル検索インデックスは単一のベクトル列にのみ作成でき、他の列 (整数や文字列など) と組み合わせて複合インデックスを形成することはできません。
+-   ベクトル検索インデックスを作成して使用する場合、距離関数を指定する必要があります。現在、コサイン距離`VEC_COSINE_DISTANCE()`関数と L2 距離`VEC_L2_DISTANCE()`関数のみがサポートされています。
+-   同じ列に対して、同じ距離関数を使用して複数のベクトル検索インデックスを作成することはサポートされていません。
+-   ベクトル検索インデックスを持つ列を直接削除することはサポートされていません。このような列を削除するには、まずその列のベクトル検索インデックスを削除し、次に列自体を削除します。
+-   ベクトル インデックスを持つ列の型の変更はサポートされていません。
+-   ベクトル検索インデックスを[見えない](/sql-statements/sql-statement-alter-index.md)に設定することはサポートされていません。
+-   [保存時の暗号化](https://docs.pingcap.com/tidb/stable/encryption-at-rest)が有効になっているTiFlashノード上でベクトル検索インデックスを構築することはサポートされていません。
 
 ## HNSWベクトルインデックスを作成する {#create-the-hnsw-vector-index}
 
-[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)は、最も人気のあるベクトル インデックス アルゴリズムの 1 つです。HNSW インデックスは、比較的高い精度 (一般的なケースでは 98% 以上) で優れたパフォーマンスを提供します。
+[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)は、最も人気のあるベクトル インデックス アルゴリズムの 1 つです。HNSW インデックスは、特定のケースでは最大 98% という比較的高い精度で優れたパフォーマンスを提供します。
 
-HNSW ベクトル インデックスを作成するには、テーブルの作成時に、列のコメントに[ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)インデックス定義を指定します。
+TiDB では、次のいずれかの方法で、 [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)列に対して HNSW インデックスを作成できます。
 
-```sql
-CREATE TABLE vector_table_with_index (
-    id INT PRIMARY KEY, doc TEXT,
-    embedding VECTOR(3) COMMENT "hnsw(distance=cosine)"
-);
-```
+-   テーブルを作成するときは、次の構文を使用して HNSW インデックスのベクトル列を指定します。
+
+    ```sql
+    CREATE TABLE foo (
+        id       INT PRIMARY KEY,
+        embedding     VECTOR(5),
+        VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)))
+    );
+    ```
+
+-   ベクター列がすでに含まれている既存のテーブルの場合は、次の構文を使用してベクター列の HNSW インデックスを作成します。
+
+    ```sql
+    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding)));
+    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)));
+
+    -- You can also explicitly specify "USING HNSW" to build the vector search index.
+    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
+    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
+    ```
 
 > **注記：**
 >
-> ベクトル インデックスを作成するための構文は、将来のリリースで変更される可能性があります。
+> ベクター検索インデックス機能は、テーブルのTiFlashレプリカに依存します。
+>
+> -   テーブルの作成時にベクトル検索インデックスが定義されている場合、TiDB はテーブルのTiFlashレプリカを自動的に作成します。
+> -   テーブルの作成時にベクトル検索インデックスが定義されておらず、テーブルに現在TiFlashレプリカがない場合は、テーブルにベクトル検索インデックスを追加する前に、手動でTiFlashレプリカを作成する必要があります。例: `ALTER TABLE 'table_name' SET TIFLASH REPLICA 1;` 。
 
-ベクトル インデックスを作成するときは、 `distance=<metric>`構成で距離メトリックを指定する必要があります。
+HNSW ベクトル インデックスを作成するときは、ベクトルの距離関数を指定する必要があります。
 
--   コサイン距離: `COMMENT "hnsw(distance=cosine)"`
--   L2距離: `COMMENT "hnsw(distance=l2)"`
+-   コサイン距離: `((VEC_COSINE_DISTANCE(embedding)))`
+-   L2距離: `((VEC_L2_DISTANCE(embedding)))`
 
-ベクトル インデックスは、 `VECTOR(3)`のような固定次元のベクトル列に対してのみ作成できます。ベクトル距離は同じ次元のベクトル間でのみ計算できるため、 `VECTOR`のような混合次元のベクトル列に対しては作成できません。
+ベクトル インデックスは、 `VECTOR(3)`として定義された列などの固定次元のベクトル列に対してのみ作成できます。ベクトル距離は同じ次元のベクトル間でのみ計算できるため、固定次元でないベクトル列 ( `VECTOR`として定義された列など) に対しては作成できません。
 
-プログラミング言語 SDK または ORM を使用している場合は、ベクター インデックスの作成について次のドキュメントを参照してください。
-
--   パイソン: [Python 用 TiDB ベクター SDK](https://github.com/pingcap/tidb-vector-python)
--   パイソン: [SQLアルケミー](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
--   パイソン: [ピーウィー](/tidb-cloud/vector-search-integrate-with-peewee.md)
--   パイソン: [ジャンゴ](/tidb-cloud/vector-search-integrate-with-django-orm.md)
-
-ベクトル インデックスを作成するときは、次の制限に注意してください。これらの制限は、将来のリリースで削除される可能性があります。
-
--   L1 距離と内積は、ベクトル インデックスではまだサポートされていません。
-
--   ベクトル インデックスは、テーブルの作成時にのみ定義および作成できます。テーブルの作成後に、DDL ステートメントを使用してオンデマンドでベクトル インデックスを作成することはできません。また、DDL ステートメントを使用してベクトル インデックスを削除することもできません。
+ベクトル検索インデックスの制限と制約については[制限](#restrictions)参照してください。
 
 ## ベクトルインデックスを使用する {#use-the-vector-index}
 
-ベクトル検索インデックスは、次のような`ORDER BY ... LIMIT`の形式を使用して、K 近傍検索クエリで使用できます。
+ベクトル検索インデックスは、次のように`ORDER BY ... LIMIT`句を使用して K 近傍検索クエリで使用できます。
 
 ```sql
 SELECT *
-FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+FROM foo
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3, 4, 5]')
 LIMIT 10
 ```
 
-ベクトル検索でインデックスを利用する場合は、ベクトル インデックスの作成時に定義したのと同じ距離メトリックを使用する必要があります。
+ベクトル検索でインデックスを使用するには、 `ORDER BY ... LIMIT`句がベクトル インデックスの作成時に指定したものと同じ距離関数を使用していることを確認します。
 
 ## フィルター付きベクトルインデックスを使用する {#use-the-vector-index-with-filters}
 
 プレフィルター ( `WHERE`句を使用) を含むクエリは、SQL セマンティクスに従って K 近傍をクエリしていないため、ベクトル インデックスを利用できません。例:
 
 ```sql
--- Filter is performed before kNN, so Vector Index cannot be used:
+-- For the following query, the `WHERE` filter is performed before KNN, so the vector index cannot be used:
 
 SELECT * FROM vec_table
 WHERE category = "document"
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-いくつかの回避策は次のとおりです。
-
-**ベクトル検索後のポストフィルタ:**最初に K 近傍をクエリし、次に不要な結果をフィルタリングします。
+フィルター付きのベクター インデックスを使用するには、まずベクター検索を使用して K 近傍を照会し、次に不要な結果をフィルター処理します。
 
 ```sql
--- The filter is performed after kNN for these queries, so Vector Index can be used:
+-- For the following query, the `WHERE` filter is performed after KNN, so the vector index cannot be used:
 
 SELECT * FROM
 (
   SELECT * FROM vec_table
-  ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
+  ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
   LIMIT 5
 ) t
 WHERE category = "document";
 
--- Note that this query may return less than 5 results if some are filtered out.
+-- Note that this query might return fewer than 5 results if some are filtered out.
 ```
-
-**テーブル パーティションの使用**: [テーブルパーティション](/partitioned-table.md)内のクエリはベクトル インデックスを完全に利用できます。等価フィルターを指定されたパーティションへのアクセスに変えることができるため、等価フィルターを実行する場合に役立ちます。
-
-例: 特定の製品バージョンに最も近いドキュメントを見つけたいとします。
-
-```sql
--- Filter is performed before kNN, so Vector Index cannot be used:
-SELECT * FROM docs
-WHERE ver = "v2.0"
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
-LIMIT 5;
-```
-
-`WHERE`句を使用してクエリを記述する代わりに、テーブルをパーティション分割し、 [`PARTITION`キーワード](/partitioned-table.md#partition-selection)使用してパーティション内でクエリを実行できます。
-
-```sql
-CREATE TABLE docs (
-    id INT,
-    ver VARCHAR(10),
-    doc TEXT,
-    embedding VECTOR(3) COMMENT "hnsw(distance=cosine)"
-) PARTITION BY LIST COLUMNS (ver) (
-    PARTITION p_v1_0 VALUES IN ('v1.0'),
-    PARTITION p_v1_1 VALUES IN ('v1.1'),
-    PARTITION p_v1_2 VALUES IN ('v1.2'),
-    PARTITION p_v2_0 VALUES IN ('v2.0')
-);
-
-SELECT * FROM docs
-PARTITION (p_v2_0)
-ORDER BY Vec_Cosine_distance(embedding, '[1, 2, 3]')
-LIMIT 5;
-```
-
-詳細については[テーブルパーティション](/partitioned-table.md)参照してください。
 
 ## インデックス構築の進行状況をビュー {#view-index-build-progress}
 
-他のインデックスとは異なり、ベクター インデックスは非同期的に構築されます。したがって、ベクター インデックスは、一括データ挿入後すぐには利用できない場合があります。これはデータの正確性や一貫性には影響せず、いつでもベクター検索を実行して完全な結果を得ることができます。ただし、ベクター インデックスが完全に構築されるまで、パフォーマンスは最適ではありません。
+大量のデータを挿入した後、その一部がTiFlashに即座に保存されない場合があります。すでに保存されているベクター データの場合、ベクター検索インデックスは同期的に構築されます。まだ保存されていないデータの場合、データが保存されるとインデックスが構築されます。このプロセスは、データの精度と一貫性に影響しません。ベクター検索はいつでも実行でき、完全な結果を得ることができます。ただし、ベクター インデックスが完全に構築されるまで、パフォーマンスは最適ではありません。
 
 インデックス構築の進行状況を表示するには、次のように`INFORMATION_SCHEMA.TIFLASH_INDEXES`テーブルをクエリします。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
-+---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
-| TIDB_DATABASE | TIDB_TABLE | TIDB_PARTITION | TABLE_ID | BELONGING_TABLE_ID | COLUMN_NAME | COLUMN_ID | INDEX_KIND | ROWS_STABLE_INDEXED | ROWS_STABLE_NOT_INDEXED | ROWS_DELTA_INDEXED | ROWS_DELTA_NOT_INDEXED | TIFLASH_INSTANCE |
-+---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
-| test          | sample     | NULL           |      106 |                 -1 | vec         |         2 | HNSW       |                   0 |                   13000 |                  0 |                   2000 | store-6ba728d2   |
-| test          | sample     | NULL           |      106 |                 -1 | vec         |         2 | HNSW       |               10500 |                       0 |                  0 |                   4500 | store-7000164f   |
-+---------------+------------+----------------+----------+--------------------+-------------+-----------+------------+---------------------+-------------------------+--------------------+------------------------+------------------+
++---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
+| TIDB_DATABASE | TIDB_TABLE | TABLE_ID | COLUMN_NAME | INDEX_NAME    | COLUMN_ID | INDEX_ID | INDEX_KIND | ROWS_STABLE_INDEXED | ROWS_STABLE_NOT_INDEXED | ROWS_DELTA_INDEXED | ROWS_DELTA_NOT_INDEXED | ERROR_MESSAGE | TIFLASH_INSTANCE |
++---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
+| test          | tcff1d827  |      219 | col1fff     | 0a452311      |         7 |        1 | HNSW       |               29646 |                       0 |                  0 |                      0 |               | 127.0.0.1:3930   |
+| test          | foo        |      717 | embedding   | idx_embedding |         2 |        1 | HNSW       |                   0 |                       0 |                  0 |                      3 |               | 127.0.0.1:3930   |
++---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
 ```
 
--   `ROWS_STABLE_INDEXED`列と`ROWS_STABLE_NOT_INDEXED`列はインデックス構築の進行状況を示します。5 が`ROWS_STABLE_NOT_INDEXED`になると、インデックス構築が完了します。
+-   インデックス構築の進行状況は、 `ROWS_STABLE_INDEXED`列と`ROWS_STABLE_NOT_INDEXED`列で確認できます。5 が`ROWS_STABLE_NOT_INDEXED`になると、インデックス構築が完了します。
 
-    参考までに、500 MiB のベクター データセットのインデックス作成には最大 20 分かかる場合があります。インデクサーは複数のテーブルに対して並列実行できます。現在、インデクサーの優先度や速度の調整はサポートされていません。
+    参考までに、768 次元の 500 MiB ベクター データセットのインデックス作成には最大 20 分かかる場合があります。インデクサーは複数のテーブルに対して並列実行できます。現在、インデクサーの優先度や速度の調整はサポートされていません。
 
--   `ROWS_DELTA_NOT_INDEXED`列目は、デルタレイヤーの行数を示します。デルタレイヤーには*最近*挿入または更新された行が格納され、書き込みワークロードに応じて定期的に安定レイヤーにマージされます。このマージ プロセスは、圧縮と呼ばれます。
+-   デルタレイヤーの行数は`ROWS_DELTA_NOT_INDEXED`列で確認できます。TiFlash のstorageレイヤーのデータは、デルタレイヤーと安定レイヤーの2 つのレイヤーに保存されます。デルタレイヤーには最近挿入または更新された行が保存され、書き込みワークロードに応じて定期的に安定レイヤーにマージされます。このマージ プロセスは、コンパクションと呼ばれます。
 
     デルタレイヤーは常にインデックス化されません。最適なパフォーマンスを実現するには、デルタレイヤーを安定レイヤーに強制的にマージして、すべてのデータをインデックス化できるようにします。
 
@@ -163,15 +138,17 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 
     詳細については[`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)参照してください。
 
+さらに、 `ADMIN SHOW DDL JOBS;`実行して`row count`を確認することで、 DDL ジョブの実行進行状況を監視できます。ただし、 `row count`値は`TIFLASH_INDEXES`の`rows_stable_indexed`フィールドから取得されるため、この方法は完全に正確ではありません。このアプローチは、インデックス作成の進行状況を追跡するための参照として使用できます。
+
 ## ベクトルインデックスが使用されているかどうかを確認する {#check-whether-the-vector-index-is-used}
 
-[`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用して、このクエリがベクトル インデックスを使用しているかどうかを確認します。9 `TableFullScan`エグゼキュータの`operator info`列に`annIndex:`が表示されている場合は、このテーブル スキャンがベクトル インデックスを利用していることを意味します。
+クエリがベクトル インデックスを使用しているかどうかを確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用します。9 `TableFullScan`キュータの`operator info`列に`annIndex:`表示されている場合は、このテーブル スキャンがベクトル インデックスを使用していることを意味します。
 
 **例: ベクトルインデックスが使用される**
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
 +-----+-------------------------------------------------------------------------------------+
 | ... | operator info                                                                       |
@@ -193,7 +170,7 @@ LIMIT 10;
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-     -> ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]');
+     -> ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]');
 +--------------------------------+-----+--------------------------------------------------+
 | id                             | ... | operator info                                    |
 +--------------------------------+-----+--------------------------------------------------+
@@ -210,9 +187,9 @@ LIMIT 10;
 ベクトル インデックスが使用できない場合、原因の調査に役立つ警告が表示される場合があります。
 
 ```sql
--- Using a wrong distance metric:
+-- Using a wrong distance function:
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-ORDER BY Vec_l2_Distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_L2_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
 
 [tidb]> SHOW WARNINGS;
@@ -220,7 +197,7 @@ ANN index not used: not ordering by COSINE distance
 
 -- Using a wrong order:
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]') DESC
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]') DESC
 LIMIT 10;
 
 [tidb]> SHOW WARNINGS;
@@ -229,11 +206,11 @@ ANN index not used: index can be used only when ordering by vec_cosine_distance(
 
 ## ベクトル検索のパフォーマンスを分析する {#analyze-vector-search-performance}
 
-[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)文には、 `execution info`列でベクトル インデックスがどのように使用されるかについての詳細情報が含まれています。
+ベクトル インデックスの使用方法に関する詳細情報を確認するには、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを実行し、出力の`execution info`列を確認します。
 
 ```sql
 [tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index
-ORDER BY Vec_Cosine_Distance(embedding, '[1, 2, 3]')
+ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 10;
 +-----+--------------------------------------------------------+-----+
 |     | execution info                                         |     |
@@ -259,12 +236,12 @@ LIMIT 10;
 
 いくつかの重要なフィールドの説明:
 
--   `vector_index.load.total` : インデックスのロードにかかる合計時間。複数のベクトル インデックスが並行してロードされる可能性があるため、このフィールドは実際のクエリ時間よりも長くなる可能性があります。
+-   `vector_index.load.total` : インデックスのロードにかかる合計時間。複数のベクター インデックスが並行してロードされる可能性があるため、このフィールドは実際のクエリ時間よりも長くなる可能性があります。
 -   `vector_index.load.from_s3` : S3 からロードされたインデックスの数。
 -   `vector_index.load.from_disk` : ディスクからロードされたインデックスの数。インデックスは以前に S3 からすでにダウンロードされています。
--   `vector_index.load.from_cache` : キャッシュからロードされたインデックスの数。インデックスは以前に S3 からすでにダウンロードされています。
--   `vector_index.search.total` : インデックスの検索にかかる合計時間。レイテンシーが大きいということは、通常、インデックスがコールド状態 (以前に一度もアクセスされていないか、かなり前にアクセスされている) であるため、インデックスを検索するときに IO が大量に発生することを意味します。複数のベクター インデックスが並行して検索される可能性があるため、このフィールドは実際のクエリ時間よりも長くなる可能性があります。
--   `vector_index.search.discarded_nodes` : 検索中に訪問されたが破棄されたベクター行の数。これらの破棄されたベクターは検索結果では考慮されません。通常、値が大きい場合は、UPDATE または DELETE ステートメントによって古い行が多数あることを示します。
+-   `vector_index.load.from_cache` : キャッシュからロードされたインデックスの数。インデックスは以前に S3 からダウンロード済みです。
+-   `vector_index.search.total` : インデックスの検索にかかる合計時間。通常、レイテンシーが長いということは、インデックスがコールド状態 (以前に一度もアクセスされていないか、かなり前にアクセスされている) であるため、インデックスを検索するときに I/O 操作が大量に発生することを意味します。複数のベクター インデックスが並行して検索される可能性があるため、このフィールドは実際のクエリ時間よりも長くなる場合があります。
+-   `vector_index.search.discarded_nodes` : 検索中に訪問されたが破棄されたベクトル行の数。これらの破棄されたベクトルは検索結果では考慮されません。通常、値が大きい場合は、 `UPDATE`または`DELETE`ステートメントによって古い行が多数あることを示します。
 
 出力の解釈については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 、 [EXPLAIN コマンド](/explain-walkthrough.md)参照してください。
 

@@ -5,12 +5,15 @@ summary: TiDB Cloudの Vector Search を LangChain と統合する方法を学�
 
 # ベクトル検索をLangChainと統合する {#integrate-vector-search-with-langchain}
 
-このチュートリアルでは、TiDB Cloudの[ベクトル検索](/tidb-cloud/vector-search-overview.md)機能を[ランチェーン](https://python.langchain.com/)と統合する方法を説明します。
+このチュートリアルでは、 TiDB Cloudの[ベクトル検索](/tidb-cloud/vector-search-overview.md)機能を[ランチェーン](https://python.langchain.com/)と統合する方法を説明します。
 
 > **注記**
 >
-> -   TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
-> -   完全な[サンプルコード](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) Jupyter Notebook で表示したり、サンプル コードを[コラボ](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)オンライン環境で直接実行したりできます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
+
+> **ヒント**
+>
+> 完全な[サンプルコード](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) Jupyter Notebook で表示したり、サンプル コードを[コラボ](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)オンライン環境で直接実行したりできます。
 
 ## 前提条件 {#prerequisites}
 
@@ -23,7 +26,7 @@ summary: TiDB Cloudの Vector Search を LangChain と統合する方法を学�
 
 ## 始める {#get-started}
 
-このセクションでは、TiDB Vector Search を LangChain と統合してセマンティック検索を実行する手順を段階的に説明します。
+このセクションでは、TiDB Vector Search を LangChain と統合してセマンティック検索を実行するための手順を段階的に説明します。
 
 ### ステップ1. 新しいJupyter Notebookファイルを作成する {#step-1-create-a-new-jupyter-notebook-file}
 
@@ -55,7 +58,7 @@ from langchain_text_splitters import CharacterTextSplitter
 
 ### ステップ3. 環境を設定する {#step-3-set-up-your-environment}
 
-#### ステップ3.1 TiDBクラスタへの接続文字列を取得する {#step-3-1-obtain-the-connection-string-to-the-tidb-cluster}
+クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -63,8 +66,8 @@ from langchain_text_splitters import CharacterTextSplitter
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプ**は`Public`に設定されています。
-    -   **ブランチ**は`main`に設定されています。
+    -   **接続タイプは**`Public`に設定されています。
+    -   **ブランチは**`main`に設定されています。
     -   **Connect With は**`SQLAlchemy`に設定されています。
     -   **オペレーティング システムは**環境に適合します。
 
@@ -72,32 +75,30 @@ from langchain_text_splitters import CharacterTextSplitter
 
     > **ヒント：**
     >
-    > まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
-#### ステップ3.2 環境変数を設定する {#step-3-2-configure-environment-variables}
+5.  環境変数を設定します。
 
-安全で効率的なデータベース接続を確立するには、 TiDB Cloudが提供する標準の接続方法を使用します。
+    このドキュメントでは、埋め込みモデル プロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、前の手順で取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)指定する必要があります。
 
-このドキュメントでは、埋め込みモデル プロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、手順 3.1 から取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)を指定する必要があります。
+    環境変数を設定するには、次のコードを実行します。接続文字列と OpenAI API キーを入力するよう求められます。
 
-環境変数を設定するには、次のコードを実行します。接続文字列と OpenAI API キーを入力するよう求められます。
+    ```python
+    # Use getpass to securely prompt for environment variables in your terminal.
+    import getpass
+    import os
 
-```python
-# Use getpass to securely prompt for environment variables in your terminal.
-import getpass
-import os
+    # Copy your connection string from the TiDB Cloud console.
+    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    tidb_connection_string = getpass.getpass("TiDB Connection String:")
+    os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
+    ```
 
-# Copy your connection string from the TiDB Cloud console.
-# Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-tidb_connection_string = getpass.getpass("TiDB Connection String:")
-os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-```
-
-### ステップ4. サンプル文書を読み込む {#step-4-load-the-sample-document}
+### ステップ4. サンプルドキュメントを読み込む {#step-4-load-the-sample-document}
 
 #### ステップ4.1 サンプルドキュメントをダウンロードする {#step-4-1-download-the-sample-document}
 
-プロジェクト ディレクトリに`data/how_to/`という名前のディレクトリを作成し、 [langchain-ai/langchain](https://github.com/langchain-ai/langchain) GitHub リポジトリからサンプル ドキュメント[`state_of_the_union.txt`](https://github.com/langchain-ai/langchain/blob/master/docs/docs/how_to/state_of_the_union.txt)をダウンロードします。
+プロジェクト ディレクトリに`data/how_to/`という名前のディレクトリを作成し、 [langchain-ai/langchain](https://github.com/langchain-ai/langchain) GitHub リポジトリからサンプル ドキュメント[`state_of_the_union.txt`](https://github.com/langchain-ai/langchain/blob/master/docs/docs/how_to/state_of_the_union.txt)ダウンロードします。
 
 ```shell
 !mkdir -p 'data/how_to/'
@@ -106,7 +107,7 @@ os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 
 #### ステップ4.2 ドキュメントを読み込み、分割する {#step-4-2-load-and-split-the-document}
 
-サンプル ドキュメントを`data/how_to/state_of_the_union.txt`から読み込み、 `CharacterTextSplitter`を使用して約 1,000 文字のチャンクに分割します。
+サンプル ドキュメントを`data/how_to/state_of_the_union.txt`から読み込み、 `CharacterTextSplitter`使用して約 1,000 文字のチャンクに分割します。
 
 ```python
 loader = TextLoader("data/how_to/state_of_the_union.txt")
@@ -144,7 +145,7 @@ query = "What did the president say about Ketanji Brown Jackson"
 
 #### オプション 1: <code>similarity_search_with_score()</code>を使用する {#option-1-use-code-similarity-search-with-score-code}
 
-`similarity_search_with_score()`メソッドは、ドキュメントとクエリ間のベクトル空間距離を計算します。この距離は、選択された`distance_strategy`によって決定される類似度スコアとして機能します。このメソッドは、スコアが最も低い上位`k`ドキュメントを返します。スコアが低いほど、ドキュメントとクエリ間の類似性が高いことを示します。
+`similarity_search_with_score()`メソッドは、ドキュメントとクエリ間のベクトル空間距離を計算します。この距離は、選択された`distance_strategy`によって決定される類似度スコアとして機能します。このメソッドは、スコアが最も低い上位`k`のドキュメントを返します。スコアが低いほど、ドキュメントとクエリ間の類似性が高いことを示します。
 
 ```python
 docs_with_score = vector_store.similarity_search_with_score(query, k=3)
@@ -358,7 +359,7 @@ TiDB ベクトル ストア内の各ドキュメントは、JSON オブジェク
 }
 ```
 
-メタデータ フィルター内の各キーと値のペアは個別のフィルター句として扱われ、これらの句は`AND`論理演算子を使用して結合されます。
+メタデータ フィルターでは、TiDB は各キーと値のペアを個別のフィルター句として扱い、 `AND`論理演算子を使用してこれらの句を結合します。
 
 ### 例 {#example}
 
@@ -408,19 +409,19 @@ TiDB Vector offers advanced, high-speed vector processing capabilities, enhancin
 
 ## 高度な使用例: 旅行代理店 {#advanced-usage-example-travel-agent}
 
-このセクションでは、旅行代理店向けにベクトル検索と Langchain を統合する高度なユースケースを紹介します。目標は、清潔なラウンジやベジタリアン向けのオプションなど、特定のアメニティを備えた空港を探している顧客向けに、パーソナライズされた旅行レポートを作成することです。
+このセクションでは、旅行代理店向けにベクトル検索と Langchain を統合するユースケースを紹介します。目標は、顧客向けにパーソナライズされた旅行レポートを作成し、清潔なラウンジやベジタリアン向けのオプションなど、特定のアメニティを備えた空港を見つけやすくすることです。
 
 このプロセスには主に 2 つのステップが含まれます。
 
 1.  空港レビュー全体でセマンティック検索を実行し、希望する設備に一致する空港コードを特定します。
-2.  SQL クエリを実行してこれらのコードをルート情報とマージし、ユーザーの好みに一致する航空会社と目的地を強調表示します。
+2.  SQL クエリを実行してこれらのコードをルート情報と結合し、ユーザーの好みに一致する航空会社と目的地を強調表示します。
 
 ### データを準備する {#prepare-data}
 
 まず、空港ルートデータを保存するテーブルを作成します。
 
 ```python
-# Create table to store airplan data.
+# Create a table to store flight plan data.
 vector_store.tidb_vector_client.execute(
     """CREATE TABLE airplan_routes (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -561,7 +562,7 @@ airport_details.get("result")
  (0.19840519342700513, 3, 'EFGH', 'UA', 'SEA', 'Daily flights from SFO to SEA.', datetime.timedelta(seconds=9000), 7, 'Boeing 737', Decimal('129.99'), 'None', 'Small airport with basic facilities.')]
 ```
 
-### 掃除 {#clean-up}
+### データをクリーンアップする {#clean-up-data}
 
 最後に、作成したテーブルを削除してリソースをクリーンアップします。
 

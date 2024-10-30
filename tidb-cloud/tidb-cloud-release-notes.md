@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年10月29日 {#october-29-2024}
+
+**一般的な変更**
+
+-   新しいメトリック: Prometheus 統合に`tidbcloud_changefeed_checkpoint_ts`を追加します。
+
+    このメトリックは、変更フィードのチェックポイント タイムスタンプを追跡し、ダウンストリームに正常に書き込まれた最大の TSO (Timestamp Oracle) を表します。使用可能なメトリックの詳細については、 [TiDB Cloud をPrometheus および Grafana と統合する (ベータ版)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus)参照してください。
+
 ## 2024年10月22日 {#october-22-2024}
 
 **一般的な変更**
@@ -122,7 +130,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     テーブルに[ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)含まれている場合は、選択した距離関数に基づいてベクトル距離を計算するベクトル検索エンドポイントを自動的に生成できます。
 
-    この機能により、 [ディファイ](https://docs.dify.ai/guides/tools)や[GPT は](https://openai.com/blog/introducing-gpts)などの AI プラットフォームとのシームレスな統合が可能になり、高度な自然言語処理と AI 機能によってアプリケーションが強化され、より複雑なタスクやインテリジェントなソリューションが実現します。
+    この機能により、 [ディファイ](https://docs.dify.ai/guides/tools)や[GPT](https://openai.com/blog/introducing-gpts)などの AI プラットフォームとのシームレスな統合が可能になり、高度な自然言語処理と AI 機能によってアプリケーションが強化され、より複雑なタスクやインテリジェントなソリューションが実現します。
 
     詳細については[エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)参照してください。
 

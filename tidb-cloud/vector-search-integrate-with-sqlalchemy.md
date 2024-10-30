@@ -49,7 +49,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-既存のプロジェクトの場合は、次のパッケージをインストールできます。
+あるいは、プロジェクトに次のパッケージをインストールすることもできます。
 
 ```bash
 pip install pymysql python-dotenv sqlalchemy tidb-vector
@@ -63,9 +63,9 @@ pip install pymysql python-dotenv sqlalchemy tidb-vector
 
 3.  接続ダイアログの構成が環境と一致していることを確認します。
 
-    -   **接続タイプ**は`Public`に設定されています。
+    -   **接続タイプは**`Public`に設定されています。
 
-    -   **ブランチ**は`main`に設定されています。
+    -   **ブランチは**`main`に設定されています。
 
     -   **Connect With は**`SQLAlchemy`に設定されています。
 
@@ -79,7 +79,7 @@ pip install pymysql python-dotenv sqlalchemy tidb-vector
 
     > **ヒント：**
     >
-    > まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
 5.  Python プロジェクトのルート ディレクトリに`.env`ファイルを作成し、その中に接続文字列を貼り付けます。
 
@@ -147,20 +147,6 @@ class Document(Base):
     content = Column(Text)
     embedding = Column(VectorType(3))
 ```
-
-#### インデックスで最適化されたベクトル列を定義する {#define-a-vector-column-optimized-with-index}
-
-3 次元ベクトル列を定義し、 [ベクトル検索インデックス](/tidb-cloud/vector-search-index.md) (HNSW インデックス) で最適化します。
-
-```python
-class DocumentWithIndex(Base):
-    __tablename__ = 'sqlalchemy_demo_documents_with_index'
-    id = Column(Integer, primary_key=True)
-    content = Column(Text)
-    embedding = Column(VectorType(3), comment="hnsw(distance=cosine)")
-```
-
-TiDB はこのインデックスを使用して、コサイン距離関数に基づくベクトル検索クエリを高速化します。
 
 ### 埋め込み付きドキュメントを保存する {#store-documents-with-embeddings}
 

@@ -5,7 +5,7 @@ summary: TiDB Vector Search を Jina AI Embeddings API と統合して埋め込�
 
 # TiDB ベクトル検索を Jina AI 埋め込み API と統合する {#integrate-tidb-vector-search-with-jina-ai-embeddings-api}
 
-このチュートリアルでは、 [ジナ・アイ](https://jina.ai/)使用してテキスト データの埋め込みを生成し、その埋め込みを TiDB Vector Storage に保存して、埋め込みに基づいて類似のテキストを検索する方法について説明します。
+このチュートリアルでは、 [ジナ・アイ](https://jina.ai/)使用してテキスト データの埋め込みを生成し、その埋め込みを TiDB ベクトルstorageに保存して、埋め込みに基づいて類似のテキストを検索する方法について説明します。
 
 > **注記**
 >
@@ -51,11 +51,7 @@ pip install -r requirements.txt
 
 ### ステップ4. 環境変数を設定する {#step-4-configure-the-environment-variables}
 
-#### 4.1 Jina AI APIキーを取得する {#4-1-get-the-jina-ai-api-key}
-
-[Jina AI 埋め込み API](https://jina.ai/embeddings/)ページ目から Jina AI API キーを取得します。
-
-#### 4.2 TiDB接続パラメータを取得する {#4-2-get-the-tidb-connection-parameters}
+[Jina AI 埋め込み API](https://jina.ai/embeddings/)ページから Jina AI API キーを取得します。次に、クラスター接続文字列を取得し、次のように環境変数を設定します。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -63,9 +59,9 @@ pip install -r requirements.txt
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています
+    -   **接続タイプ**は`Public`に設定されています
 
-    -   **ブランチ**は`main`に設定されています
+    -   **ブランチは**`main`に設定されています
 
     -   **接続先は**`SQLAlchemy`に設定されています
 
@@ -81,20 +77,18 @@ pip install -r requirements.txt
     >
     > まだパスワードを設定していない場合は、 **「パスワードの作成」**をクリックしてランダムなパスワードを生成します。
 
-#### 4.3 環境変数を設定する {#4-3-set-the-environment-variables}
+5.  ターミナルで Jina AI API キーと TiDB 接続文字列を環境変数として設定するか、次の環境変数を含む`.env`ファイルを作成します。
 
-ターミナルで環境変数を設定するか、上記の環境変数を含む`.env`ファイルを作成します。
+    ```dotenv
+    JINAAI_API_KEY="****"
+    TIDB_DATABASE_URL="{tidb_connection_string}"
+    ```
 
-```dotenv
-JINAAI_API_KEY="****"
-TIDB_DATABASE_URL="{tidb_connection_string}"
-```
+    以下は macOS の接続文字列の例です。
 
-たとえば、macOS 上の接続文字列は次のようになります。
-
-```dotenv
-TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-```
+    ```dotenv
+    TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    ```
 
 ### ステップ5.デモを実行する {#step-5-run-the-demo}
 
@@ -122,7 +116,7 @@ python jina-ai-embeddings-demo.py
 
 ### Jina AIから埋め込みを取得する {#get-embeddings-from-jina-ai}
 
-Jina AI 埋め込み API を呼び出すための`generate_embeddings`ヘルパー関数を定義します。
+Jina AI 埋め込み API を呼び出す`generate_embeddings`ヘルパー関数を定義します。
 
 ```python
 import os
@@ -147,9 +141,9 @@ def generate_embeddings(text: str):
     return response.json()['data'][0]['embedding']
 ```
 
-### TiDB Cloud Serverlessに接続する {#connect-to-tidb-cloud-serverless}
+### TiDBクラスターに接続する {#connect-to-the-tidb-cluster}
 
-SQLAlchemy を介してTiDB Cloud Serverless に接続します。
+SQLAlchemy を介して TiDB クラスターに接続します。
 
 ```python
 import os
@@ -192,7 +186,7 @@ class Document(Base):
 > -   ベクトル列の次元は、埋め込みモデルによって生成された埋め込みの次元と一致する必要があります。
 > -   この例では、 `jina-embeddings-v2-base-en`モデルによって生成される埋め込みの次元は`768`です。
 
-### Jina AI 埋め込みと TiDB を使用して埋め込みを作成する {#create-embeddings-with-jina-ai-embeddings-and-tidb}
+### Jina AIで埋め込みを作成し、TiDBに保存する {#create-embeddings-with-jina-ai-and-store-in-tidb}
 
 Jina AI Embeddings API を使用して、各テキストの埋め込みを生成し、その埋め込みを TiDB に保存します。
 
@@ -222,13 +216,13 @@ with Session(engine) as session:
    session.commit()
 ```
 
-### Jina AI 埋め込みと TiDB を使用してセマンティック検索を実行する {#perform-semantic-search-with-jina-ai-embeddings-and-tidb}
+### TiDB で Jina AI 埋め込みを使用してセマンティック検索を実行する {#perform-semantic-search-with-jina-ai-embeddings-in-tidb}
 
-Jina AI 埋め込み API を使用してクエリ テキストの埋め込みを生成し、クエリ埋め込みとドキュメント埋め込み間のコサイン距離に基づいて最も関連性の高いドキュメントを検索します。
+Jina AI 埋め込み API を使用してクエリ テキストの埋め込みを生成し、**クエリ テキストの埋め込み**と**ベクトル テーブル内の各埋め込み**間のコサイン距離に基づいて最も関連性の高いドキュメントを検索します。
 
 ```python
 query = 'What is TiDB?'
-# Generate embeddings for the query via Jina AI API.
+# Generate the embedding for the query via Jina AI API.
 query_embedding = generate_embeddings(query)
 
 with Session(engine) as session:

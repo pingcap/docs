@@ -1,25 +1,33 @@
 ---
 title: ADD INDEX | TiDB SQL Statement Reference
-summary: ALTER TABLE.. ADD INDEXステートメントは、既存のテーブルにインデックスを追加します。この操作はTiDBでオンラインで行われ、テーブルへの読み取りも書き込みもブロックされません。DDLステートメントがクラスター内で実行されているときは、TiDBクラスターをアップグレードしないでください。TiDBをv7.1.0から以降のバージョンにアップグレードする場合は、前述の制限を無視できます。
+summary: TiDB データベースの ADD INDEX の使用法の概要。
 ---
 
-# インデックスの追加 {#add-index}
+# インデックスを追加 {#add-index}
 
-`ALTER TABLE.. ADD INDEX`ステートメントは、既存のテーブルにインデックスを追加します。この操作は TiDB でオンラインです。つまり、インデックスの追加によってテーブルへの読み取りも書き込みもブロックされません。
+`ALTER TABLE.. ADD INDEX`文は既存のテーブルにインデックスを追加します。この操作は TiDB ではオンラインで行われるため、インデックスを追加してもテーブルへの読み取りや書き込みはブロックされません。
+
+<CustomContent platform="tidb-cloud">
+
+> **注記：**
+>
+> 4 つの vCPU を備えた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスターの場合、インデックス作成中にリソース制限がクラスターの安定性に影響するのを防ぐために、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすると、トランザクションを使用してインデックスを作成できるようになり、クラスターへの全体的な影響が軽減されます。
+
+</CustomContent>
 
 <CustomContent platform="tidb">
 
 > **警告：**
 >
-> -   DDL ステートメントがクラスター内で実行されているときは、TiDB クラスターをアップグレードし**ないでください**(通常は、 `ADD INDEX`や列タイプの変更など、時間のかかる DDL ステートメントの場合)。
-> -   アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、クラスターをアップグレードする前に[`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルします。
+> -   クラスター内で DDL ステートメントが実行されているときは、TiDB クラスターをアップグレードし**ないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。
+> -   アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに実行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合は、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてからクラスターをアップグレードします。
 > -   また、クラスターのアップグレード中は、DDL ステートメントを実行し**ないでください**。そうしないと、未定義の動作の問題が発生する可能性があります。
 >
-> TiDB を v7.1.0 から以降のバージョンにアップグレードする場合は、前述の制限を無視できます。詳細は[TiDB スムーズ アップグレードの制限](/smooth-upgrade-tidb.md)を参照してください。
+> TiDB を v7.1.0 からそれ以降のバージョンにアップグレードする場合、前述の制限は無視できます。詳細については、 [TiDBスムーズアップグレードの制限](/smooth-upgrade-tidb.md)参照してください。
 
 </CustomContent>
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -78,20 +86,20 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL 互換性 {#mysql-compatibility}
 
--   `FULLTEXT` `HASH`および`SPATIAL`インデックスはサポートされていません。
+-   `FULLTEXT` `HASH`インデックスはサポートされて`SPATIAL`ません。
 -   降順インデックスはサポートされていません ( MySQL 5.7と同様)。
--   `CLUSTERED`タイプの主キーのテーブルへの追加はサポートされていません。 `CLUSTERED`種類の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+-   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-## こちらも参照 {#see-also}
+## 参照 {#see-also}
 
 -   [インデックスの選択](/choose-index.md)
 -   [インデックス問題の解決方法](/wrong-index-solution.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
--   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
--   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
+-   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
 -   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
--   [列の追加](/sql-statements/sql-statement-add-column.md)
+-   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)

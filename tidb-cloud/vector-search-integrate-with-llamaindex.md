@@ -1,16 +1,19 @@
 ---
 title: Integrate Vector Search with LlamaIndex
-summary: TiDB Cloudの Vector Search を LlamaIndex と統合する方法を学びます。
+summary: TiDB Vector Search を LlamaIndex と統合する方法を学びます。
 ---
 
 # ベクトル検索をLlamaIndexと統合する {#integrate-vector-search-with-llamaindex}
 
-このチュートリアルでは、TiDB Cloudの[ベクトル検索](/tidb-cloud/vector-search-overview.md)機能を[ラマインデックス](https://www.llamaindex.ai)と統合する方法を説明します。
+このチュートリアルでは、TiDB の[ベクトル検索](/tidb-cloud/vector-search-overview.md)機能を[ラマインデックス](https://www.llamaindex.ai)と統合する方法を説明します。
 
 > **注記**
 >
-> -   TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
-> -   完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) Jupyter Notebook で表示したり、サンプル コードを[コラボ](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行したりできます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
+
+> **ヒント**
+>
+> 完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) Jupyter Notebook で表示したり、サンプル コードを[コラボ](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行したりできます。
 
 ## 前提条件 {#prerequisites}
 
@@ -27,7 +30,7 @@ summary: TiDB Cloudの Vector Search を LlamaIndex と統合する方法を学�
 
 ### ステップ1. 新しいJupyter Notebookファイルを作成する {#step-1-create-a-new-jupyter-notebook-file}
 
-任意のディレクトリに、 `integrate_with_llamaindex.ipynb`という名前の新しい Jupyter Notebook ファイルを作成します。
+ルート ディレクトリに、 `integrate_with_llamaindex.ipynb`という名前の新しい Jupyter Notebook ファイルを作成します。
 
 ```shell
 touch integrate_with_llamaindex.ipynb
@@ -52,9 +55,9 @@ from llama_index.core import VectorStoreIndex
 from llama_index.vector_stores.tidbvector import TiDBVectorStore
 ```
 
-### ステップ3. 環境を設定する {#step-3-set-up-your-environment}
+### ステップ3. 環境変数を設定する {#step-3-configure-environment-variables}
 
-#### ステップ3.1 TiDBクラスタへの接続文字列を取得する {#step-3-1-obtain-the-connection-string-to-the-tidb-cluster}
+クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
@@ -62,8 +65,8 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプ**は`Public`に設定されています。
-    -   **ブランチ**は`main`に設定されています。
+    -   **接続タイプは**`Public`に設定されています。
+    -   **ブランチは**`main`に設定されています。
     -   **Connect With は**`SQLAlchemy`に設定されています。
     -   **オペレーティング システムは**環境に適合します。
 
@@ -71,31 +74,30 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
     > **ヒント：**
     >
-    > まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
-#### ステップ3.2 環境変数を設定する {#step-3-2-configure-environment-variables}
+5.  環境変数を設定します。
 
-安全で効率的なデータベース接続を確立するには、 TiDB Cloudが提供する標準の接続方法を使用します。
+    このドキュメントでは、埋め込みモデル プロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、前の手順で取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)指定する必要があります。
 
-このドキュメントでは、埋め込みモデル プロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、手順 3.1 から取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)を指定する必要があります。
+    環境変数を設定するには、次のコードを実行します。接続文字列と OpenAI API キーを入力するよう求められます。
 
-環境変数を設定するには、次のコードを実行します。接続文字列と OpenAI API キーを入力するよう求められます。
+    ```python
+    # Use getpass to securely prompt for environment variables in your terminal.
+    import getpass
+    import os
 
-```python
-import getpass
-import os
-
-tidb_connection_url = getpass.getpass(
-   "TiDB connection URL (format - mysql+pymysql://root@127.0.0.1:4000/test): "
-)
-os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-```
+    # Copy your connection string from the TiDB Cloud console.
+    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    tidb_connection_string = getpass.getpass("TiDB Connection String:")
+    os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
+    ```
 
 ### ステップ4. サンプル文書を読み込む {#step-4-load-the-sample-document}
 
 #### ステップ4.1 サンプルドキュメントをダウンロードする {#step-4-1-download-the-sample-document}
 
-プロジェクト ディレクトリに`data/paul_graham/`という名前のディレクトリを作成し、 [ランラマ/llama_index](https://github.com/run-llama/llama_index) GitHub リポジトリからサンプル ドキュメント[`paul_graham_essay.txt`](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt)をダウンロードします。
+プロジェクト ディレクトリに`data/paul_graham/`という名前のディレクトリを作成し、 [ランラマ/llama_index](https://github.com/run-llama/llama_index) GitHub リポジトリからサンプル ドキュメント[`paul_graham_essay.txt`](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt)ダウンロードします。
 
 ```shell
 !mkdir -p 'data/paul_graham/'
@@ -206,7 +208,7 @@ Empty Response
 
 #### <code>book == &quot;paul_graham&quot;</code>フィルターを使用したクエリ {#query-with-code-book-paul-graham-code-filter}
 
-次の例では、 `book`メタデータ フィールドが`"paul_graham"`であるドキュメントのみが含まれるように結果をフィルタリングします。
+次の例では、 `book`メタデータ フィールドが`"paul_graham"`あるドキュメントのみが含まれるように結果をフィルタリングします。
 
 ```python
 from llama_index.core.vector_stores.types import (
