@@ -1842,11 +1842,7 @@ Configuration items related to Raft Engine.
 
 + Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
 + If you set this configuration item to `0`, incremental sync is disabled.
-<<<<<<< HEAD
-+ Default value: `"4MB"`
-=======
 + Before v6.5.0, the default value is `"4MiB"`.
->>>>>>> 6ede09d1b0 (tikv-configuration: mark raft-engine.bytes-per-sync as deprecated (#19228))
 
 ### `target-file-size`
 
