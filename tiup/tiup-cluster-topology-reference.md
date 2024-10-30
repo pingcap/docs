@@ -490,7 +490,7 @@ tiproxy_servers:
 
 - `key`: The path of the private key file in PEM format for TLS connection (optional).
 
-- `cert-allowed-cn`: Controls whether to verify the caller's identity (certificate Common Name, optional). Use commas to separate multiple CNs.
+- `cert-allowed-cn`: The allowed caller identities (certificate Common Name, optional). Use commas to separate multiple CNs.
 
 For the above fields, you cannot modify these configured fields after the deployment:
 
