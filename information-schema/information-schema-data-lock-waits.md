@@ -7,14 +7,12 @@ summary: Learn the `DATA_LOCK_WAITS` information_schema table.
 
 The `DATA_LOCK_WAITS` table shows the ongoing lock-wait information on all TiKV nodes in a cluster, including the lock-wait information of pessimistic transactions and the information of optimistic transactions being blocked.
 
-{{< copyable "sql" >}}
-
 ```sql
 USE information_schema;
 DESC data_lock_waits;
 ```
 
-```sql
+```
 +------------------------+---------------------+------+------+---------+-------+
 | Field                  | Type                | Null | Key  | Default | Extra |
 +------------------------+---------------------+------+------+---------+-------+
@@ -71,13 +69,11 @@ In the above fields, if the information of a field is not applicable or currentl
 
 ## Example
 
-{{< copyable "sql" >}}
-
 ```sql
 select * from information_schema.data_lock_waits\G
 ```
 
-```sql
+```
 *************************** 1. row ***************************
                    KEY: 7480000000000000355F728000000000000001
               KEY_INFO: {"db_id":1,"db_name":"test","table_id":53,"table_name":"t","handle_type":"int","handle_value":"1"}
@@ -92,4 +88,14 @@ The above query result shows that the transaction of the ID `426790594290122753`
 
 ### See also
 
+<CustomContent platform="tidb">
+
 - [Troubleshooting lock conflicts](/troubleshoot-lock-conflicts.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
+
+</CustomContent>
