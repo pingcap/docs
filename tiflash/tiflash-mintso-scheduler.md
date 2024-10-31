@@ -1,6 +1,6 @@
 ---
 title: TiFlash MinTSO Scheduler
-summary: Understand the implementation principles of the TiFlash MinTSO Scheduler.
+summary: Learn the implementation principles of the TiFlash MinTSO Scheduler.
 ---
 
 # TiFlash MinTSO Scheduler
