@@ -36,16 +36,12 @@ This section introduces the replication features of TiCDC.
 
 Currently, the TiCDC sink component supports replicating data to the following downstream platforms:
 
-<<<<<<< HEAD
 - Databases compatible with MySQL protocol. The sink component provides the final consistency support.
 - Kafka based on the TiCDC Open Protocol. The sink component ensures the row-level order, final consistency or strict transactional consistency.
 - `cdclog` (experimental): Files written on the local filesystem or on the Amazon S3-compatible storage.
 - Apache Pulsar (experimental)
 
 ### Ensure replication order and consistency
-=======
-## Implementation of processing data changes
->>>>>>> 8b429d5e6e (cdc: remove mention about force-replicate (#19249))
 
 #### Replication order
 
