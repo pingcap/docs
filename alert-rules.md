@@ -560,11 +560,13 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance, name) > 1.6`
+    `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance) > 1.6`
 
 * Description:
 
-    The pressure on the Raftstore thread is too high.
+    This rule monitors CPU usage by Raftstore. If the value is high, it indicates pressure on Raftstore threads is heavy.
+
+    The alert threshold is 80% of the [`raftstore.store-pool-size`](/tikv-configuration-file.md#store-pool-size) value. `raftstore.store-pool-size` is 2 by default, so the alert threshold is 1.6.
 
 * Solution:
 
