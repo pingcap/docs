@@ -468,29 +468,29 @@ tiproxy_servers:
 
 `kvcdc_servers` specifies the machines to which the [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/) services are deployed. It also specifies the service configuration on each machine. `kvcdc_servers` is an array. Each array element contains the following fields:
 
-- `addr`: The listening address of TiKV-CDC, used to provide HTTP API and Prometheus queries. The default value is `127.0.0.1:8600`.
+- `host`: Specifies the machine to which the TiKV-CDC services are deployed. The field value is an IP address and is mandatory.
 
-- `advertise-addr`: The advertised address via which clients access TiKV-CDC. If not specified, the value is the same as that of `addr`.
+- `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
-- `pd`: A comma-separated list of PD endpoints.
+- `port`: The listening port of the TiKV-CDC services. The default value is `8600`.
 
-- `config`: The address of the configuration file that TiKV-CDC uses (optional).
+- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 
 - `data-dir`: The directory that TiKV-CDC uses to store temporary files primarily for sorting. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB (optional).
 
 - `gc-ttl`: The TTL (Time to Live, in seconds) of the service-level GC safepoint in PD set by TiKV-CDC (optional). It is the duration that replication tasks can be suspended, defaulting to `86400`, which is 24 hours. Note that suspending replication tasks affect the progress of TiKV garbage collection safepoint. The longer the `gc-ttl`, the longer changefeeds can be suspended, but at the same time, more obsolete data will be kept and occupy more space. Vice versa.
 
-- `log-file`: The path to which logs are output when the TiKV-CDC process is running (optional). If not specified, logs are written to the standard output (stdout).
+- `tz`: The time zone that the TiKV-CDC services use. TiKV-CDC uses this time zone when internally converting time data types such as timestamp and when replicating data to the downstream. The default value is the local time zone where the process runs.
 
-- `log-level`: The log level when the TiKV-CDC process is running (optional). The default value is `"info"`.
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
-- `ca`: The path of the CA certificate file in PEM format for TLS connection (optional).
+- `config`: The address of the configuration file that TiKV-CDC uses (optional).
 
-- `cert`: The path of the certificate file in PEM format for TLS connection (optional).
+- `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
-- `key`: The path of the private key file in PEM format for TLS connection (optional).
+- `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
-- `cert-allowed-cn`: The allowed caller identities (certificate Common Name, optional). Use commas to separate multiple CNs.
+- `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
 
 For the above fields, you cannot modify these configured fields after the deployment:
 
@@ -499,6 +499,8 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `deploy_dir`
 - `data_dir`
 - `log_dir`
+- `arch`
+- `os`
 
 A `kvcdc_servers` configuration example is as follows:
 
