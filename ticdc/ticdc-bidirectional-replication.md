@@ -101,6 +101,20 @@ When no BDR role is set, you can execute any DDL. But after you set `bdr_mode=tr
 ### Replication scenarios of replicable DDLs
 
 1. Choose a TiDB cluster and execute `ADMIN SET BDR ROLE PRIMARY` to set it as the primary cluster.
+
+    ```sql
+    ADMIN SET BDR ROLE PRIMARY;
+    Query OK, 0 rows affected
+    Time: 0.003s
+
+    ADMIN SHOW BDR ROLE;
+    +----------+
+    | BDR_ROLE |
+    +----------+
+    | primary  |
+    +----------+
+    ```
+
 2. On other TiDB clusters, execute `ADMIN SET BDR ROLE SECONDARY` to set them as the secondary clusters.
 3. Execute **replicable DDLs** on the primary cluster. The successfully executed DDLs will be replicated to the secondary clusters by TiCDC.
 

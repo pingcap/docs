@@ -74,6 +74,11 @@ case-sensitive = false
 # The format of this parameter is "h m s", for example, "1h30m30s".
 changefeed-error-stuck-duration = "30m"
 
+# The default value is false, indicating that bi-directional replication (BDR) mode is not enabled.
+# To set up BDR clusters using TiCDC, modify this parameter to `true` and set the TiDB clusters to BDR mode.
+# For more information, see https://docs.pingcap.com/tidb/stable/ticdc-bidirectional-replication.
+# bdr-mode = false
+
 [mounter]
 # The number of threads with which the mounter decodes KV data. The default value is 16.
 # worker-num = 16
