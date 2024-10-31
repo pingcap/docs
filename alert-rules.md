@@ -561,7 +561,7 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-   `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance) > 1.6`
+    `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance) > 1.6`
 
 * Description:
 
