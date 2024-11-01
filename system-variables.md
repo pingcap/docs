@@ -444,8 +444,8 @@ mysql> SELECT * FROM t1;
 - Default value: `mysql_native_password`
 - Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
 - This variable sets the default authentication method and affects the following:
-    - When creating users with [`CREATE USER`](/sql-statements/sql-statement-create-user.md), if no authentication method is specified, the method defined by this variable is applied.
-    - It determines the authentication method advertised by the server when establishing a server-client connection.
+    - When you create users with [`CREATE USER`](/sql-statements/sql-statement-create-user.md), if no authentication method is specified, the method defined by this variable is applied.
+    - This variable determines the authentication method advertised by the server when establishing a server-client connection.
 
 <CustomContent platform="tidb">
 
