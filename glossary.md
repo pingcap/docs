@@ -32,7 +32,7 @@ Baseline Capturing captures queries that meet capturing conditions and create bi
 
 ### BR
 
-BR is the Backup and Restore tool for TiDB. See [BR Overview](/br/backup-and-restore-overview.md) for more information.
+BR is the Backup and Restore tool for TiDB. For more information, see [BR Overview](/br/backup-and-restore-overview.md).
 
 ### Bucket
 
@@ -46,7 +46,7 @@ With the cached table feature, TiDB loads the data of an entire table into the m
 
 ### CF
 
-CF is short for Column Family as used by RocksDB / TiKV.
+In RocksDB and TiKV, a Column Family (CF) represents a logical grouping of key-value pairs within a database.
 
 ### Coalesce Partition
 
@@ -58,33 +58,33 @@ Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource over
 
 ### CTE
 
-A Common Table Expression (CTE) is part of the SQL standard and uses [`WITH`](/sql-statements/sql-statement-with.md) statements.
+A Common Table Expression (CTE) enables you to define a temporary result set that can be referred multiple times within a SQL statement using the [`WITH`](/sql-statements/sql-statement-with.md) clause. For more information, see [Common Table Expression](/develop/dev-guide-use-common-table-expression.md).
 
 ## D
 
 ### DDL
 
-Data Definition Language (DDL) is the part of the SQL standard that deals with creating, modifying and deleting tables, indexes, columns and other objects.
+Data Definition Language (DDL) statements enables you to create, modify, and drop tables, indexes, columns, and other database objects.
 
 ### DM
 
-Data Migration is the tool that allows MySQL to TiDB migration by reading data from a source instance and applying it to a target MySQL instance. See [DM Overview](/dm/dm-overview.md) for more information.
+Data Migration (DM) is a tool for migrating data from MySQL-compatible databases into TiDB. It reads data from an instance of MySQL-compatible database and applies it to a TiDB target instance. For more information, see [DM Overview](/dm/dm-overview.md).
 
 ### DML
 
-Data Modification Language (DML) is the part of the SQL standard that deals with inserting, updating and deleting rows in tables.
+Data Modification Language (DML) statements enables you to with insert, update, and delete rows in tables.
 
 ### DMR
 
-Development Milestone Release (DMR) is a version of TiDB that provides users with the latest features but doesn't provide long term support. See [TiDB Versioning](/releases/versioning.md) for more information.
+Development Milestone Release (DMR) is a TiDB version that introduces the latest features but does not offer long-term support. For more information, see [TiDB Versioning](/releases/versioning.md).
 
 ### DR
 
-Disaster Recovery (DR) describes solutions that can be used to recover from a disaster in the future. This includes things like backups and standby clusters.
+Disaster Recovery (DR) includes solutions that can be used to recover data from a disaster in the future. These solutions typically involve backups and standby clusters. For more information, see [Overview of TiDB Disaster Recovery Solutions](dr-solution-introduction).
 
 ### DXF
 
-Distributed eXecution Framework (DXF) is the framework used by TiDB to speedup index creation and data import by distributing tasks over all available resources. See [DXF Introduction](/tidb-distributed-execution-framework.md) for more details
+Distributed eXecution Framework (DXF) is the framework used by TiDB for accelerating index creation and data import by distributing tasks over all available resources. For more information, see [DXF Introduction](/tidb-distributed-execution-framework.md).
 
 ### Dynamic Pruning
 
@@ -94,33 +94,33 @@ Dynamic pruning mode is one of the modes that TiDB accesses partitioned tables. 
 
 ### EC2
 
-Elastic Compute Cloud (EC2) is an AWS service that provides compute resources. This can be used with TiUP to run a TiDB Cluster.
+[Elastic Compute Cloud (EC2)](https://aws.amazon.com/pm/ec2/) is an AWS service that provides scalable compute resources. It can be used with TiUP to deploy and manage a TiDB cluster.
 
 ## G
 
 ### GA
 
-General Available (GA) is the first non-beta version of a software product.
+If a feature is General Available (GA), it indicates it is fully tested and can be used in production environments. Note that even if a feature is GA in a [DMR](#dmr) version, it is recommended to use the feature in production environments in a later [LTS](#lts) version.
 
 ### GC
 
-Garbage Collection (GC) is the process to cleanup unused resources. See [GC](/garbage-collection-overview.md) for the GC process of TiKV.
+Garbage Collection (GC) is a process that clears obsolete data to free up resources. For information on TiKV GC process, see [Garbage Collection overview](/garbage-collection-overview.md).
 
 ### GTID
 
-Global Transactions ID's (GTIDs) are used by recent MySQL versions binary log to indicate what transactions have been replicated and which have not. This information can be used by DM.
+Global Transaction Identifiers (GTIDs) are unique transaction IDs used in MySQL binary logs to track which transactions have been replicated. [Data Migration (DM)](/dm/dm-overview.md) uses these IDs to ensure consistent replication.
 
 ## H
 
 ### HTAP
 
-Hybrid Transactional Analytical Process (HTAP) is a database feature that allows both OLTP and OLAP workloads on the same database. For TiDB the HTAP feature is provided by using both TiKV for row storage and TiFlash for columnar storage. See [the definition of HTAP on the Gartner website](https://www.gartner.com/en/information-technology/glossary/htap-enabling-memory-computing-technologies) for more information.
+Hybrid Transactional and Analytical Processing (HTAP) is a database feature that enables both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads within the same database. For TiDB, the HTAP feature is provided by using TiKV for row storage and TiFlash for columnar storage. For more information, see [the definition of HTAP on the Gartner website](https://www.gartner.com/en/information-technology/glossary/htap-enabling-memory-computing-technologies).
 
 ## I
 
 ### IMDS
 
-Instance Metadata Service (IMDS) is a AWS service that can be used to manage EC2 instances. See [Instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) for more information.
+Instance Metadata Service (IMDS) is an AWS service designed to manage and retrieve metadata for [EC2](#ec2) instances. For more information, see [Instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
 
 ### Index Merge
 
@@ -134,21 +134,21 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 
 ### KMS
 
-Key Management Service (KMS) allows the storage and retrieval of secret keys in a secure way. Examples of this are the AWS KMS, GCP KMS and HashiCorp Vault. Various TiDB components can use this to manage the keys that are used for storage encryption and related services.
+Key Management Service (KMS) enables the storage and retrieval of secret keys in a secure way. Examples include AWS KMS, GCP KMS, and HashiCorp Vault. Various TiDB components can use KMS to manage keys for storage encryption and related services.
 
 ### KV
 
-Key-Value (KV) is a way storing information that allows easy store and retrieval by specifying the key. Multiple values can be stored under a single key by encoding them. TiKV is implementing this by TiDB mapping tables and indexes into Key-Value entries.
+Key-Value (KV) is a way of storing information by associating values with unique keys, allowing quick data retrieval. TiDB uses TiKV to map tables and indexes into key-value pairs, enabling efficient data storage and access across the database.
 
 ## L
 
 ### LDAP
 
-Lightweight Directory Access Protocol (LDAP) is a standardized way of accessing a directory with information. This is often used to store information on accounts. This is used in TiDB by [LDAP authentication plugins](/security-compatibility-with-mysql.md#authentication-plugin-status).
+Lightweight Directory Access Protocol (LDAP) is a standardized way of accessing a directory with information. It is commonly used for account and user data management. TiDB supports LDAP via [LDAP authentication plugins](/security-compatibility-with-mysql.md#authentication-plugin-status).
 
 ### LTS
 
-Long Term Support (LTS) are software versions that are well tested, production ready and are supported for a long term. See [TiDB Versioning](/releases/versioning.md) for more details.
+Long Term Support (LTS) refers to software versions that are extensively tested and maintained for extended periods. For more information, see [TiDB Versioning](/releases/versioning.md).
 
 ### leader/follower/learner
 
@@ -168,7 +168,7 @@ Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architec
 
 ### OLAP
 
-OnLine Analytical Processing (OLAP) are describing database workloads that mostly deal with analytical workloads like reporting. The characteristics of this is read heavy queries that process many rows.
+Online Analytical Processing (OLAP) refers to database workloads focused on analytical tasks, such as data reporting and complex queries. OLAP is characterized by read-heavy queries that process large volumes of data across many rows.
 
 ### Old value
 
@@ -176,11 +176,11 @@ The "original value" in the incremental change log output by TiCDC. You can spec
 
 ### OLTP
 
-OnLine Transaction Processing (OLTP) are describing database workloads that mostly deal with transactional workloads like selecting, inserting, updating and deleting small sets of records.
+Online Transaction Processing (OLTP) refers to database workloads focused on transactional tasks, such as selecting, inserting, updating, and deleting small sets of records.
 
 ## OOM
 
-Out of Memory (OOM) is a situation where a system fails due to a a lack of available memory. See [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md) for more details.
+Out of Memory (OOM) is a situation where a system fails due to insufficient memory. For more information, see [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md).
 
 ### Operator
 
@@ -209,15 +209,15 @@ Currently, available steps generated by PD include:
 
 ### PD
 
-Placement Driver (PD) is an important component of the [TiDB Architecture](/tidb-architecture.md#placement-driver-pd-server) that is responsible to store metadata and run the [TSO](/tso.md) that hands out timestamps that are used for transactions. It also orchestrates the data placement on TiKV and runs the [TiDB Dashboard](/dashboard/dashboard-overview.md).
+Placement Driver (PD) is a core component in the [TiDB Architecture](/tidb-architecture.md#placement-driver-pd-server) responsible for storing metadata, assigning [Timestamp Oracle (TSO)](/tso.md) for transaction timestamps, orchestrating data placement on TiKV, and running [TiDB Dashboard](/dashboard/dashboard-overview.md). For more information, see [TiDB Scheduling](/tidb-scheduling.md).
 
 ### pending/down
 
 "Pending" and "down" are two special states of a peer. Pending indicates that the Raft log of followers or learners is vastly different from that of leader. Followers in pending cannot be elected as leader. "Down" refers to a state that a peer ceases to respond to leader for a long time, which usually means the corresponding node is down or isolated from the network.
 
-### PiTR
+### PITR
 
-Point in Time Recovery (PiTR) is a database feature that allows the user to restore to a specific point in time (for example just before an accidental `DELETE` statement). See [TiDB Log Backup and PITR Architecture](/br/br-log-architecture.md) for more details.
+Point in Time Recovery (PITR) enables you to restore data to a specific point in time (for example, just before an unintended `DELETE` statement). For more information, see [TiDB Log Backup and PITR Architecture](/br/br-log-architecture.md).
 
 ### Point Get
 
@@ -231,7 +231,7 @@ In most cases, when executing SQL statements, the optimizer only uses statistics
 
 ### QPS
 
-Queries Per Second (QPS) is a performance metric of a database service.
+Queries Per Second (QPS) is the number of queries a database service handles per second, serving as a key performance metric for database throughput.
 
 ### Quota Limiter
 
@@ -245,7 +245,7 @@ Raft Engine is an embedded persistent storage engine with a log-structured desig
 
 ### RAG
 
-Retrieval-Augmented Generation (RAG). See [Vector Search Overview](/vector-search-overview.md#use-cases) for more details.
+Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). For more information, See [Vector Search Overview](/vector-search-overview.md#use-cases).
 
 ### Region/peer/Raft group
 
@@ -263,11 +263,11 @@ Restore is the reverse of the backup operation. It is the process of bringing ba
 
 ### RPC
 
-Remote Procedure Call (RPC) is a way for software components to communicate. In a TiDB cluster gRPC standard is used for communication between different components such as TiDB, TiKV and TiFlash.
+Remote Procedure Call (RPC) is a communication way between software components. In a TiDB cluster, the gRPC standard is used for communication between different components such as TiDB, TiKV, and TiFlash.
 
 ### RU
 
-Request Unit (RU) is used in TiDB to describe the unit for the resource usage. This is used with [Resource Control](/tidb-resource-control.md) to manage resource usage.
+Request Unit (RU) is a unified abstraction unit for the resource usage in TiDB. It is used with [Resource Control](/tidb-resource-control.md) to manage resource usage.
 
 ## S
 
@@ -282,7 +282,7 @@ Schedulers are components in PD that generate scheduling tasks. Each scheduler i
 
 ### SST
 
-Static Sorted Table, Sorted String Table or Sorted Sequence Table (SST) is the file storage format of RocksDB.
+Static Sorted Table, Sorted String Table, or Sorted Sequence Table (SST) is a file storage format used in RocksDB.
 
 ### Store
 
@@ -296,7 +296,7 @@ Top SQL helps locate SQL queries that contribute to a high load of a TiDB or TiK
 
 ### TPS
 
-Transactions Per Second (TPS) is a performance metric of a database.
+Transactions Per Second (TPS) is the number of transactions a database processes per second, serving as a key metric for measuring database performance and throughput.
 
 ### TSO
 
@@ -306,8 +306,8 @@ Because TiKV is a distributed storage system, it requires a global timing servic
 
 ### URI
 
-Uniform Resource Identifier (URI) is a uniform way of describing a resource. See [Uniform Resource Identifier](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) on Wikipedia for more information.
+Uniform Resource Identifier (URI) is a standardized format for identifying a resource. For more information, see [Uniform Resource Identifier](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) on Wikipedia.
 
 ### UUID
 
-Universally Unique Identifier (UUID) is a 128-bit (16 byte) generated ID that can be used to identify records in a database. See [UUID](/best-practices/uuid.md) for more information on how UUID's are used in TiDB.
+Universally Unique Identifier (UUID) is a 128-bit (16-byte) generated ID used to uniquely identify records in a database. For more information, see [UUID](/best-practices/uuid.md).
