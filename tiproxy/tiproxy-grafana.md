@@ -16,7 +16,7 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - **TiProxy-Server**: instance information.
 - **TiProxy-Query-Summary**: SQL query metrics like CPS. 
 - **TiProxy-Backend**: information on TiDB nodes that TiProxy might connect to.
-- **TiProxy-Balance**: loadbalance mertrics.
+- **TiProxy-Balance**: load balancing metrics.
 
 ## Server
 
@@ -59,6 +59,7 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - Session Migration Duration: average, P95, P99 session migration duration.
 - Session Migration Reasons: the number of session migrations that happened every minute and the reason for them. The reasons include the following:
     - `status`: TiProxy performed [status-based load balancing](/tiproxy/tiproxy-load-balance.md#status-based-load-balancing).
+    - `label`: TiProxy performed [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
     - `health`: TiProxy performed [health-based load balancing](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing).
     - `memory`: TiProxy performed [memory-based load balancing](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing).
     - `cpu`: TiProxy performed [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing).
