@@ -5,7 +5,7 @@ summary: Learn the concept of TiCDC Avro Protocol and how to use it.
 
 # TiCDC Avro Protocol
 
-TiCDC Avro protocol is a third part implementation of the [Confluent Avro](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html) data exchange protocol which is defined by [Confluent Platform](https://docs.confluent.io/platform/current/platform.html). Avro is a data format defined by [Apache Avro™](https://avro.apache.org/)
+TiCDC Avro protocol is a third-party implementation of the [Confluent Avro](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html) data exchange protocol defined by [Confluent Platform](https://docs.confluent.io/platform/current/platform.html). Avro is a data format defined by [Apache Avro™](https://avro.apache.org/)
 
 This document describes how TiCDC implements the Confluent Avro protocol, and the interaction between Avro and [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
 
@@ -22,11 +22,11 @@ The following is a configuration example using Avro:
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
-The value of `--schema-registry` supports the `https` protocol and `username:password` authentication, for example, `--schema-registry=https://username:password@schema-registry-uri.com`. The username and password must be URL-encoded.
+The value of `--schema-registry` supports the `https` protocol and `username:password` authentication. The username and password must be URL-encoded. For example, `--schema-registry=https://username:password@schema-registry-uri.com`.
 
 > **Note：**
 > 
-> When using the Avro protocol, one Kafka Topic can only have data for one table. You need to configure the [Topic dispatcher](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers) in the configuration file. 
+> When using the Avro protocol, one Kafka topic can only contain data for one table. You need to configure the [Topic dispatcher](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers) in the configuration file. 
 
 ```shell
 [sink]
@@ -73,15 +73,15 @@ The `fields` in the key contains only primary key columns or unique index column
 }
 ```
 
-The data format of Value is the same as that of Key, by default. However, `fields` in the Value contains all columns, not just the primary key columns.
+The data format of Value is the same as that of Key, by default. However, `fields` in the Value contains all columns.
 
 > **Note:**
 >
 > The Avro protocol encodes DML events as follows: 
 > 
-> - For Delete events, only encodes the Key part. The Value part is empty. 
-> - For Insert events, encodes all column data to the Value part. 
-> - For Update events, encodes only all column data that is updated.
+> - For Delete events, Avro only encodes the Key part. The Value part is empty. 
+> - For Insert events, Avro encodes all column data to the Value part. 
+> - For Update events, Avro encodes only all column data that is updated to the Value part.
 
 ## TiDB extension fields
 
@@ -285,7 +285,7 @@ Avro does not send DDL events and Watermark events to downstream. It checks whet
 
 For example, the default [compatibility policy](https://docs.confluent.io/platform/current/schema-registry/fundamentals/schema-evolution.html#compatibility-types) of Confluent Schema Registry is `BACKWARD`, and you add a non-empty column to the source table. In this situation, Avro generates a new schema but fails to register it with Schema Registry due to compatibility issues. At this time, the changefeed enters an error state.
 
-Note that, even if a schema change passes the compatibility check and a new version is registered, the data producers and consumers still need to acquire the schema to support data encoding and decoding.
+Note that, even if a schema change passes the compatibility check and a new version is registered, the data producers and consumers still need to acquire the new schema for data encoding and decoding.
 
 For more information about schemas, refer to [Schema Registry related documents](https://docs.confluent.io/platform/current/schema-registry/avro.html).
 
@@ -293,14 +293,14 @@ For more information about schemas, refer to [Schema Registry related documents]
 
 The TiCDC Avro protocol can be deserialized by [`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer).
 
-The consumer program can acquire the schema by using [Schema Registry API](https://docs.confluent.io/platform/current/schema-registry/develop/api.html), and then uses it to deserialize the data encoded by the TiCDC Avro protocol.
+The consumer program can acquire the latest schema via [Schema Registry API](https://docs.confluent.io/platform/current/schema-registry/develop/api.html), and then use the schema to deserialize the data encoded by the TiCDC Avro protocol.
 
 ### Distinguish event types
 
 The consumer program can distinguish DML event types by the following rules:
 
-* If there is only the Key part, then it is a Delete event.
-* If there are both Key and Value parts, then it is either an Insert or an Update event. If the [TiDB extension fields](#tidb-extension-fields) are enabled, you can use the `_tidb_op` field to identify if it is an Insert or Update event. If the TiDB extension fields are not enabled, you cannot distinguish them.
+* If there is only the Key part, it is a Delete event.
+* If there are both Key and Value parts, it is either an Insert or an Update event. If the [TiDB extension fields](#tidb-extension-fields) are enabled, you can use the `_tidb_op` field to identify if it is an Insert or Update event. If the TiDB extension fields are not enabled, you cannot distinguish them.
 
 ## Topic distribution
 
