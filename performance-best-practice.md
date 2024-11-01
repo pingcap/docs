@@ -193,18 +193,25 @@ While the general configurations provided earlier offer a good starting point fo
 
 ## Common Edge Cases and Solutions
 
+Here are the common edge cases and solutions:
+
 1. High TSO wait for High-frequency small queries
 2. Choose the proper mak chunk size for different workloads
-3. Choose proper tidb_txn_mode and tidb_dml_type for different workloads
-4. Optimize Group By and Distinct Operations with TiKV Pushdown
-5. Mitigate Too many MVCC versions by in-memory engine
-6. Disable auto analyze job during batch processing
+3. Tune coprocessor cache for read-heavy workloads
+4. Choose proper tidb_txn_mode and tidb_dml_type for different workloads
+5. Optimize Group By and Distinct Operations with TiKV Pushdown
+6. Mitigate Too many MVCC versions by in-memory engine
+7. Disable auto analyze job during batch processing
 
 Each of these cases may require adjustments to different parameters or usage of specific features in TiDB. The following sections provide more details on how to address these scenarios.
 
 Remember that these optimizations should be applied cautiously and with thorough testing, as their effectiveness can vary depending on your specific use case and data patterns.
 
 ## High TSO wait for High-frequency small queries
+### How to Troubleshooting
+When TSO (Timestamp Oracle) waiting time takes up a large percentage of total SQL execution time, it indicates a potential performance bottleneck. This can happen with high-frequency small queries that require frequent TSO requests. It can be Identified by [SQL Execute Time Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-methods#tune-by-color) in the grafana dashboard [performance overview](https://docs.pingcap.com/tidb/stable/grafana-performance-overview-dashboard).
+
+### Solution 1 `tidb_low_resolution_tso`
 If the TSO (Timestamp Oracle) wait contributes significantly to the execution plan time, and if the application can tolerate stale reads, you can use the `tidb_low_resolution_tso` setting in TiDB to avoid the TSO wait time and improve query latency. Here's how to enable it:
 
 ```SQL
@@ -215,10 +222,36 @@ set global tidb_low_resolution_tso=on;
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
-| tidb_low_resolution_tso| Enable stale read to avoid tso wait to improve the query latency | Application can accept stale read | 
+| tidb_low_resolution_tso| Enables stale reads to avoid TSO wait time, improving query latency | Only suitable for applications that can tolerate reading stale data. Not recommended for scenarios requiring strict data consistency | 
 
-### How to Troubleshooting
-Identified by [SQL Execute Time Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-methods#tune-by-color) in the grafana dashboard [performance overview](https://docs.pingcap.com/tidb/stable/grafana-performance-overview-dashboard).
+### Solution 2 `tidb_tso_client_rpc_mode`
+The default value of `tidb_tso_client_rpc_mode` is `DEFAULT`. When the following conditions are met, you can consider switching `tidb_tso_client_rpc_mode` to `PARALLEL` or `PARALLEL-FAST` for potential performance improvements:
+
+- TSO waiting time constitutes a significant portion of the total execution time of SQL queries.
+- The TSO allocation in PD has not reached its bottleneck.
+- PD and TiDB nodes have sufficient CPU resources.
+- The network latency between TiDB and PD is significantly higher than the time PD takes to allocate TSO (that is, network latency accounts for the majority of TSO RPC duration).
+  - To get the duration of TSO RPC requests, check the PD TSO RPC Duration panel in the PD Client section of the Grafana TiDB dashboard.
+  - To get the duration of PD TSO allocation, check the PD server TSO handle duration panel in the TiDB section of the Grafana PD dashboard.
+- The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for PARALLEL or four times for PARALLEL-FAST) is acceptable.
+
+```SQL
+set global tidb_tso_client_rpc_mode=PARALLEL;
+```
+
+## Tune coprocessor cache for read-heavy workloads
+
+If the workload is read-heavy, you can increase the coprocessor cache size, lower the cache threshold, to coprocess cache hit ratio. Here is the detail document to check the hit ratiofor [coprocessor cache](https://docs.pingcap.com/tidb/stable/coprocessor-cache).
+
+Here are the recommended settings to increase the coprocessor cache size to 4GB and drease the coprocessor cache admission min process time to 0ms:
+
+```toml
+[tikv-client.copr-cache]
+capacity-mb = 4096
+admission-max-ranges = 5000
+admission-max-result-mb = 10
+admission-min-process-ms = 0
+```
 
 ## Choose the proper mak chunk size for different workloads
 The tidb_max_chunk_size parameter in TiDB controls the maximum number of rows that can be processed in a single chunk during query execution. Adjusting this parameter based on the workload type can optimize performance:
