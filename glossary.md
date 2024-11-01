@@ -134,7 +134,7 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 
 ### KMS
 
-Key Management Service (KMS) enables the storage and retrieval of secret keys in a secure way. Examples include AWS KMS, GCP KMS, and HashiCorp Vault. Various TiDB components can use KMS to manage keys for storage encryption and related services.
+Key Management Service (KMS) enables the storage and retrieval of secret keys in a secure way. Examples include AWS KMS, Google Cloud KMS, and HashiCorp Vault. Various TiDB components can use KMS to manage keys for storage encryption and related services.
 
 ### KV
 
