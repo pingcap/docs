@@ -164,8 +164,8 @@ The following are examples when using Kafka SASL authentication:
     | Resource type | Type of operation      |  Scenario                           |
     | :-------------| :------------- | :--------------------------------|
     | Cluster       | `DescribeConfig`| Gets the cluster metadata while the changefeed is running |
-    | Topic         | `Describe`      | Topic  When the changefeed starts, it tries to create a topic |                
-    | Topic         | `Create`        | Topic  When the changefeed starts, it tries to create a topic  |
+    | Topic         | `Describe`      | Tries to create a topic when the changefeed starts |                
+    | Topic         | `Create`        | Tries to create a topic when the changefeed starts  |
     | Topic         | `Write`         | Sends data to the topic                   | 
 
     When creating or starting a changefeed, you can disable the `Describe` and `Create` permissions if the specified Kafka topic already exists.
