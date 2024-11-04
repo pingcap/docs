@@ -46,7 +46,7 @@ EXPLAIN SELECT count(*) FROM t0 a JOIN t0 b ON a.id = b.id;
 +--------------------------------------------+----------+--------------+---------------+----------------------------------------------------------+
 ```
 
-For example, the preceding query generates 2 MPP tasks on each TiFlash node, where the MPP Task containing `ExchangeSender_45` depends on the MPP Task containing `ExchangeSender_21`. In high concurrency scenarios, if the scheduler schedules the MPP Task containing `ExchangeSender_45` for each query, the system will enter a deadlock state.
+For example, the preceding query generates 2 MPP tasks on each TiFlash node, where the MPP task containing the `ExchangeSender_45` executor depends on the MPP task containing the `ExchangeSender_21` executor. In high concurrency scenarios, if the scheduler schedules the MPP task containing `ExchangeSender_45` for each query, the system will enter a deadlock state.
 
 To avoid deadlock, TiFlash introduces the following two levels of thread limits:
 
