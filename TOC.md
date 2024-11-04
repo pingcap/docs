@@ -649,6 +649,7 @@
     - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
     - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
     - [Data Validation](/tiflash/tiflash-data-validation.md)
+    - [MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [System Variables](/system-variables.md)
   - Configuration File Parameters
