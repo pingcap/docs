@@ -567,6 +567,7 @@
     - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
     - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
     - [Data Validation](/tiflash/tiflash-data-validation.md)
+    - [MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [System Variables](/system-variables.md)
   - Configuration File Parameters
