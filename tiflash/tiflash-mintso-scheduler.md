@@ -9,7 +9,7 @@ The TiFlash MinTSO scheduler is a distributed scheduler for [MPP](/glossary.md#m
 
 ## Background
 
-When processing an MPP query, TiDB splits the query into one or more MPP tasks and sends these MPP tasks to the corresponding TiFlash nodes for compilation and execution. Before TiFlash uses the [pipeline execution model](/tiflash/tiflash-pipeline-model.md), TiFlash needs to use several threads to execute each MPP task, with the specific number of threads depending on the complexity of the MPP task and the concurrency parameters set in TiFlash.
+When processing an MPP query, TiDB splits the query into one or more MPP tasks and sends these MPP tasks to the corresponding TiFlash nodes for compilation and execution. TiFlash needs to use several threads to execute each MPP task, with the specific number of threads depending on the complexity of the MPP task and the concurrency parameters set in TiFlash.
 
 In high concurrency scenarios, TiFlash nodes receive multiple MPP tasks simultaneously. If the execution of MPP tasks is not controlled, the number of threads that TiFlash needs to request from the system will increase linearly along with the increasing number of MPP tasks. Too many threads can affect the execution efficiency of TiFlash, and because the operating system itself supports a limited number of threads, TiFlash will encounter errors when it requests more threads than the operating system can provide.
 
