@@ -149,7 +149,18 @@ The following are examples when using Kafka SASL authentication:
     The minimum set of permissions required for TiCDC to function properly is as follows.
 
     - The `Create`, `Write`, and `Describe` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
-    - The `DescribeConfigs` permission for the Cluster resource type.
+    - The `DescribeConfig` permission for the Cluster resource type.
+
+  The usage scenarios for each permission are as follows:
+
+    | Resource type | Type of operation      |  Scenario                           |
+    | :-------------| :------------- | :--------------------------------|
+    | Cluster       | `DescribeConfig`| Gets the cluster metadata while the changefeed is running |
+    | Topic         | `Describe`      | Tries to create a topic when the changefeed starts |                
+    | Topic         | `Create`        | Tries to create a topic when the changefeed starts  |
+    | Topic         | `Write`         | Sends data to the topic                   | 
+
+    When creating or starting a changefeed, you can disable the `Describe` and `Create` permissions if the specified Kafka topic already exists.
 
 ### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
