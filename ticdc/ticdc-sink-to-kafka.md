@@ -157,7 +157,7 @@ The following are examples when using Kafka SASL authentication:
     The minimum set of permissions required for TiCDC to function properly is as follows.
 
     - The `Create`, `Write`, and `Describe` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
-    - The `DescribeConfigs` permission for the Cluster resource type.
+    - The `DescribeConfig` permission for the Cluster resource type.
 
   The usage scenarios for each permission are as follows:
 
