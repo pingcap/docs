@@ -6,7 +6,7 @@ aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-t
 
 # Upgrade TiDB Using TiUP
 
-This document applies to upgrading to TiDB 8.4.0 from the following: v6.1.x, v6.5.x, v7.1.x, v7.5.x, v8.1.x, v8.2.0, v8.3.0
+This document applies to upgrading to TiDB v8.4.0 from the following versions: v6.1.x, v6.5.x, v7.1.x, v7.5.x, v8.1.x, v8.2.0, and v8.3.0
 
 
 > **Warning:**
