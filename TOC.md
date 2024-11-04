@@ -634,6 +634,7 @@
     - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
     - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
     - [Data Validation](/tiflash/tiflash-data-validation.md)
+    - [MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [System Variables](/system-variables.md)
   - Configuration File Parameters
