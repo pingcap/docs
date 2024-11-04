@@ -5,13 +5,8 @@ summary: Learn how to upgrade TiDB using TiUP.
 
 # Upgrade TiDB Using TiUP
 
-This document is targeted for the following upgrade paths:
+This document applies to upgrading to TiDB 8.4.0 from the following: v6.1.x, v6.5.x, v7.1.x, v7.5.x, v8.1.x, v8.2.0, v8.3.0
 
-- Upgrade from TiDB 4.0 versions to TiDB 8.4.
-- Upgrade from TiDB 5.0-5.4 versions to TiDB 8.4.
-- Upgrade from TiDB 6.0-6.6 to TiDB 8.4.
-- Upgrade from TiDB 7.0-7.6 to TiDB 8.4.
-- Upgrade from TiDB 8.0-8.3 to TiDB 8.4.
 
 > **Warning:**
 >
@@ -23,7 +18,6 @@ This document is targeted for the following upgrade paths:
 
 > **Note:**
 >
-> - If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v8.4.0 is not supported. You need to upgrade your cluster first to v4.0 and then to v8.4.0.
 > - If your cluster to be upgraded is earlier than v6.2, the upgrade might get stuck when you upgrade the cluster to v6.2 or later versions in some scenarios. You can refer to [How to fix the issue](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions).
 > - TiDB nodes use the value of the [`server-version`](/tidb-configuration-file.md#server-version) configuration item to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
 > - Setting the [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) configuration item to `ON` prolongs the TiDB startup time, which might cause startup timeouts and upgrade failures. To avoid this issue, it is recommended to set a longer waiting timeout for TiUP.
@@ -56,11 +50,6 @@ This document is targeted for the following upgrade paths:
 
 - TiDB currently does not support version downgrade or rolling back to an earlier version after the upgrade.
 - For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v8.4.0 according to this document.
-- To update versions earlier than v3.0 to v8.4.0:
-    1. Update this version to 3.0 using [TiDB Ansible](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible).
-    2. Use TiUP (`tiup cluster`) to import the TiDB Ansible configuration.
-    3. Update the 3.0 version to 4.0 according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup).
-    4. Upgrade the cluster to v8.4.0 according to this document.
 - Support upgrading the versions of TiCDC, TiFlash, and other components.
 - When upgrading TiFlash from versions earlier than v6.3.0 to v6.3.0 and later versions, note that the CPU must support the AVX2 instruction set under the Linux AMD64 architecture and the ARMv8 instruction set architecture under the Linux ARM64 architecture. For details, see the description in [v6.3.0 Release Notes](/releases/release-6.3.0.md#others).
 - For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according to the "Compatibility Changes" section of the corresponding release notes.
@@ -161,9 +150,6 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 
 3. After the modification, enter <kbd>:</kbd> + <kbd>w</kbd> + <kbd>q</kbd> to save the change and exit the editing mode. Enter <kbd>Y</kbd> to confirm the change.
 
-> **Note:**
->
-> Before you upgrade the cluster to v6.6.0, make sure that the parameters you have modified in v4.0 are compatible in v8.4.0. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
 
 ### Step 4: Check the DDL and backup status of the cluster
 
