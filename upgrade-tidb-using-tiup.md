@@ -7,7 +7,6 @@ summary: Learn how to upgrade TiDB using TiUP.
 
 This document applies to upgrading to TiDB v8.4.0 from the following versions: v6.1.x, v6.5.x, v7.1.x, v7.5.x, v8.1.x, v8.2.0, and v8.3.0
 
-
 > **Warning:**
 >
 > 1. You cannot upgrade TiFlash online from versions earlier than 5.3 to 5.3 or later. Instead, you must first stop all the TiFlash instances of the early version, and then upgrade the cluster offline. If other components (such as TiDB and TiKV) do not support an online upgrade, follow the instructions in warnings in [Online upgrade](#online-upgrade).
@@ -148,7 +147,6 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 2. Refer to the format of [topology](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) configuration template and fill the parameters you want to modify in the `server_configs` section of the topology file.
 
 3. After the modification, enter <kbd>:</kbd> + <kbd>w</kbd> + <kbd>q</kbd> to save the change and exit the editing mode. Enter <kbd>Y</kbd> to confirm the change.
-
 
 ### Step 4: Check the DDL and backup status of the cluster
 
