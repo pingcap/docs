@@ -90,7 +90,7 @@ The above query result shows that the transaction of the ID `426790594290122753`
 
 <CustomContent platform="tidb">
 
-- [Troubleshooting lock conflicts](/troubleshoot-lock-conflicts.md)
+- [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
 
 </CustomContent>
 
