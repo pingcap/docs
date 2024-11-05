@@ -663,10 +663,6 @@ Configuration items related to Raftstore.
 
 ### `raft-max-size-per-msg`
 
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
-
 + The soft limit on the size of a single message packet
 + Default value: `"1MiB"`
 + Minimum value: greater than `0`
@@ -674,10 +670,6 @@ Configuration items related to Raftstore.
 + Unit: KiB|MiB|GiB
 
 ### `raft-max-inflight-msgs`
-
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
 + Default value: `256`
