@@ -478,6 +478,8 @@ tiproxy_servers:
 
 - `data-dir`: The directory that TiKV-CDC uses to store temporary files primarily for sorting. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB (optional).
 
+- `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
+
 - `gc-ttl`: The TTL (Time to Live, in seconds) of the service-level GC safepoint in PD set by TiKV-CDC (optional). It is the duration that replication tasks can be suspended, defaulting to `86400`, which is 24 hours. Note that suspending replication tasks affect the progress of TiKV garbage collection safepoint. The longer the `gc-ttl`, the longer changefeeds can be suspended, but at the same time, more obsolete data will be kept and occupy more space. Vice versa.
 
 - `tz`: The time zone that the TiKV-CDC services use. TiKV-CDC uses this time zone when internally converting time data types such as timestamp and when replicating data to the downstream. The default value is the local time zone where the process runs.
