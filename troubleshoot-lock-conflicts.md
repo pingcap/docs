@@ -161,7 +161,7 @@ If the `start_ts` of the current transaction is unknown, you can try to find it 
 
 ### Metadata locks
 
-When a session is waiting on a schema change, this can be because of a metadata lock.
+If a session is waiting on a schema change, this can be because of a metadata lock.
 
 See [Metadata Lock](/metadata-lock.md) for more information.
 
