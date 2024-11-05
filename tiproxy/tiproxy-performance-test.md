@@ -14,6 +14,7 @@ The results are as follows:
 - The row number of the query result set has a significant impact on the QPS of TiProxy, and the impact is the same as that of HAProxy.
 - The performance of TiProxy increases almost linearly with the number of vCPUs. Therefore, increasing the number of vCPUs can effectively improve the QPS upper limit.
 - The number of long connections and the frequency of creating short connections have minimal impact on the QPS of TiProxy.
+- The higher the CPU usage of TiProxy, the greater the impact of enabling the [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on QPS. When TiProxy's CPU usage is about 70%, enabling traffic capture causes the average QPS to drop by about 3% and the minimum QPS to drop by about 7%. The latter drop is due to the periodic drop in QPS caused by compressing the traffic files.
 
 ## Test environment
 
@@ -312,3 +313,35 @@ sysbench oltp_point_select \
 | 100                        | 95597  | 0.52             | 0.65             | 330%              | 1800%                  |
 | 200                        | 94692  | 0.53             | 0.67             | 330%              | 1800%                  |
 | 300                        | 94102  | 0.53             | 0.68             | 330%              | 1900%                  |
+
+## Traffic capture test
+
+### Test plan
+
+The test aims to test the impact of [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on TiProxy performance. This test uses TiProxy v1.3.0. Before executing `sysbench`, traffic capture is turned off and on respectively, and concurrency is adjusted to compare QPS and TiProxy's CPU usage. Since periodic compression of traffic files can cause QPS fluctuations, this test compares both the average QPS and the minimum QPS.
+
+Use the following command to perform the test:
+
+```bash
+sysbench oltp_read_write \
+    --threads=$threads \
+    --time=1200 \
+    --report-interval=5 \
+    --rand-type=uniform \
+    --db-driver=mysql \
+    --mysql-db=sbtest \
+    --mysql-host=$host \
+    --mysql-port=$port \
+    run --tables=32 --table-size=1000000
+```
+
+### Test results
+
+| Connection count | Traffic capture | Avg QPS | Min QPS | Avg latency (ms) | P95 latency (ms) | TiProxy CPU usage |
+| - |-----| --- | --- |-----------|-------------|-----------------|
+| 20 | Disabled | 27653 | 26999 | 14.46     | 16.12       | 140% |
+| 20 | Enabled | 27519 | 26922 | 14.53     | 16.41       | 170% |
+| 50 | Disabled | 58014 | 56416 | 17.23     | 20.74       | 270% |
+| 50 | Enabled | 56211 | 52236 | 17.79     | 21.89       | 280% |
+| 100 | Disabled | 85107 | 84369 | 23.48     | 30.26       | 370% |
+| 100 | Enabled | 79819 | 69503 | 25.04     | 31.94       | 380% |
