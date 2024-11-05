@@ -436,7 +436,7 @@ Processed a total of 10 messages
 Make sure you kafka cluster is deployed in same region as the TiDB cluster. Make sure the AZs are also the same, if not please move brokers not in same AZ to the right one.
 
 #### 1. Configure EXTERNAL listener for brokers
-The follwoing configuration is for Kafka KRaft cluster, Zookeeper mode is similar.
+The follwoing configuration is for Kafka KRaft cluster, ZK mode is similar.
 1. Planning configuration changes
    1. Configure a EXTERNAL **listener** for every broker for external access from TiDB Cloud. Pick a unique port as EXTERNAL port, for example ```39092```.
    2. Configure a EXTERNAL **advertised listener** based on **Kafka Advertised Listener Pattern** we get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listener helps Kafka client from TiDB Cloud side route request the right broker.
@@ -616,3 +616,15 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
    - Bootstrap Ports: 9092. PS: only one port is fine since we configure a special bootstrap target group behind this port.
 3. Continue follow the guideline in [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 4. If everything go fine, you will successfully finish the job.
+
+## FAQ
+
+### How to connect to the same Kafka private link service from two different TiDB Cloud projects?
+1. Let's say you have already follwoing the above document successfully setup the connection from the first project.
+2. You want to setup the second connection from the second project.
+3. Go back to the head of this document proceed from begining. When you proceed to the "First, Setup Kafka Cluster" section. Follow the "Reconfigure a Running Kafka Cluster" section, create another group of EXTERNAL listener and advertised listener, you can name it as EXTERNAL2. Please notice that the port range of EXTERNAL2 can not overlap with the EXTERNAL.
+4. After brokers reconfigured, you add another group of target groups in LB, including bootstrap and brokers target groups.
+5. Proceed TiDB Cloud connection with 
+   - New Bootstrap port
+   - New Kafka Advertised Listener Group
+   - The same Endpoint Service
