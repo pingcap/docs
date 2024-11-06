@@ -118,7 +118,7 @@ Hybrid Transactional and Analytical Processing (HTAP) is a database feature that
 
 ## I
 
-### IMDS
+### Instance Metadata Service (IMDS)
 
 Instance Metadata Service (IMDS) is an AWS service designed to manage and retrieve metadata for [EC2](#ec2) instances. For more information, see [Instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
 
@@ -156,7 +156,7 @@ Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#r
 
 ## M
 
-### MPP
+### Massively Parallel Processing (MPP)
 
 Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the Exchange operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation. For more information, see [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
 
@@ -229,7 +229,7 @@ In most cases, when executing SQL statements, the optimizer only uses statistics
 
 ## Q
 
-### QPS
+### Queries Per Second (QPS)
 
 Queries Per Second (QPS) is the number of queries a database service handles per second, serving as a key performance metric for database throughput.
 
@@ -243,7 +243,7 @@ Quota Limiter is an experimental feature introduced in TiDB v6.0.0. If the machi
 
 Raft Engine is an embedded persistent storage engine with a log-structured design. It is built for TiKV to store multi-Raft logs. Since v5.4, TiDB supports using Raft Engine as the log storage engine. For details, see [Raft Engine](/tikv-configuration-file.md#raft-engine).
 
-### RAG
+### Retrieval-Augmented Generation (RAG)
 
 Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). For more information, See [Vector Search Overview](/vector-search-overview.md#use-cases).
 
