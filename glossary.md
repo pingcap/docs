@@ -9,6 +9,7 @@ aliases: ['/docs/dev/glossary/']
 This is the general glossary describing terms related to the TiDB platform.
 
 Other available glossaries:
+
 - [DM Glossary](/dm/dm-glossary.md)
 - [TiCDC Glossary](/ticdc/ticdc-glossary.md)
 - [TiDB Lightning Glossary](/tidb-lightning/tidb-lightning-glossary.md)
