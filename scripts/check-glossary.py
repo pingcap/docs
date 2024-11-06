@@ -25,7 +25,10 @@ with open("glossary.md") as fh:
     print("result: differences found, see diff for details")
     # diff itemsA and itemsB
     diff = unified_diff(
-        itemsA.splitlines(keepends=True), itemsB.splitlines(keepends=True), fromfile="before", tofile="after"
+        itemsA.splitlines(keepends=True),
+        itemsB.splitlines(keepends=True),
+        fromfile="before",
+        tofile="after",
     )
     sys.stdout.writelines(diff)
     sys.exit(1)
