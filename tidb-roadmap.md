@@ -9,320 +9,50 @@ This roadmap provides a look into the proposed future. This will be continually 
 
 In the course of development, this roadmap is subject to change based on user needs and feedback. **DO NOT** schedule your release plans according to the content of the roadmap. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
 
+> **Note:**
+> If not marked as GA, these features are experimental.
+
 ## Rolling roadmap highlights
 
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>End of CY24 LTS release</th>
-      <th>Mid of CY25 LTS release</th>
-      <th>Future releases</th>
-    </tr>
-  </thead>
-  <tbody valign="top">
-    <tr>
-      <td>
-        <b>Scalability and Performance</b><br /><i>Enhance horsepower</i>
-      </td>
-      <td>
-        <ul>
-           <li>
-             <b>TiKV in-memory data cache</b><br />
-            TiKV maintains recent versions of data in memory to reduce redundant MVCC scans, thus improving performance.
-          </li>
-          <br />
-          <li>
-             <b>Global indexing for partitioned tables</b><br />
-          </li>
-          <br />
-          <li>
-             <b>Adaptive concurrency for statistics collection</b><br />
-            TiDB automatically adjusts the parallelism and scan concurrency of statistics collection tasks based on the number of deployed nodes and hardware specifications, improving the speed of statistics collection.
-          </li>
-          <br />
-          <li>
-             <b>Rapid database recovery</b><br />
-            Reduce the time required for full database recovery and point-in-time recovery (PITR).
-          </li>
-          <br />
-          <li>
-             <b>Unlimited-size transactions</b><br />
-            The volume of data processed by uncommitted transactions is no longer limited by the available memory of TiDB nodes, thus improving the success rate of transactions and batch tasks.
-          </li>
-          <br />
-          <li>
-             <b>Load-based traffic routing by TiProxy</b><br />
-            TiProxy forwards traffic based on the workload of the target TiDB node, maximizing hardware resource utilization.
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Microservice for PD heartbeat</b><br />
-            Heartbeat services in PD can be independently deployed and scaled, preventing PD from becoming a bottleneck for the cluster's resources.
-          </li>
-          <br />
-          <li>
-            <b>Less I/O consumption for statistics collection</b><br />
-            Users can choose to scan only a portion of the data samples on TiKV during statistics collection, reducing time and resource consumption.
-          </li>
-          <br />
-          <li>
-            <b>Remove the limitation for pushing down Limit operator to TiKV</b><br />
-          </li>
-          <br />
-          <li>
-            <b>Cascades optimizer framework</b><br />
-            Introduce a more mature and powerful optimizer framework to expand the capabilities of the current optimizer.
-          </li>
-          <br />
-          <li>
-            <b>Single DM task reaches 150 MiB/s during full data migration</b><br />
-          </li>
-          <br />
-          <li>
-            <b>Enhanced DDL execution framework</b><br />
-            Provide a scalable parallel DDL execution framework to improve the performance and stability of DDL operations.
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Table-level load balancing</b><br />
-            PD determines data scheduling strategies based on the workload of each Region on every table.
-          </li>
-          <li>
-            <b>Improve performance of handling system tables with large data volumes</b><br />
-            Enhance query performance and reduce query overhead for system tables with large data volumes.
-          </li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <b>Reliability and Availability</b>
-        <br /><i>Enhance dependability</i>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Limit memory consumption for backup tasks</b><br />
-          </li>
-          <br />
-          <li>
-            <b>Limit memory consumption for statistics collection</b><br />
-          </li>
-          <br />
-          <li>
-            <b>Manage massive SQL bindings</b><br />
-              Improve the user experience of SQL binding, making it convenient for users to create and manage a large number of execution plans to stabilize database performance.
-          </li>
-          <br />
-          <li>
-            <b>Enhance resource group control over complex SQL</b><br />
-              Regularly assess the Request Unit (RU) consumption of complex SQL before completion of SQL execution to prevent excessively large impacts on the entire system during execution.
-          </li>
-          <br />
-          <li>
-            <b>Automatically switch resource groups for runaway queries</b><br />
-              When a query is identified as a runaway query, users can choose to switch it to a specific resource group and set an upper limit on resource consumption.
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Limit memory consumption of schema metadata</b><br />
-            Enhance the stability of large-scale clusters.
-          </li>
-          <br />
-          <li>
-            <b>Distributed statistics collection</b><br />
-            Statistics collection supports parallel execution across multiple TiDB nodes to improve collection efficiency.
-          </li>
-          <br />
-          <li>
-            <b>Multi-version statistics</b><br />
-            After statistics are updated, users can view the historical versions and choose to restore them to an earlier version.
-          </li>
-          <br />
-          <li>
-            <b>Reliable data backup</b><br />
-            Reduce potential issues like insufficient memory during data backup and ensure the availability of backup data.
-          </li>
-          <br />
-          <li>
-            <b>Common operators support spilling to disk</b><br />
-            Common operators such as HashAgg, Sort, TopN, HashJoin, WindowFunction, IndexJoin, and IndexHashJoin support spilling to disk, reducing the risk of out-of-memory (OOM).
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Adaptive resource group</b><br />
-            Resource groups automatically adjust their Request Unit (RU) settings based on past execution patterns.
-          </li>
-          <br />
-          <li>
-            <b>Enhanced memory protection</b><br />
-            TiDB actively monitors the memory usage of all components and prevents memory operations that might impact system stability.
-          </li>
-          <br />
-          <li>
-            <b>Instance-level execution plan cache</b><br />
-            All sessions within the same TiDB instance can share the execution plan cache, improving memory utilization.
-          </li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <b>Database Operations and Observability</b>
-        <br /><i>Enhance DB manageability and its ecosystem</i>
-      </td>
-      <td>
-        <ul>
-           <li>
-            <b>Reliable query termination</b><br />
-            Running SQL statements can be immediately terminated, and the corresponding resources are released from TiDB and TiKV.
-          </li>
-          <br />
-          <li>
-            <b>Permission control for switching resource groups</b>
-            <br />Only users with specific permissions can switch their resource groups, thus preventing resource abuse.
-          </li>
-          <br />
-          <li>
-            <b>Mapping tables or SQL with hot Regions</b>
-          </li>
-          <br />
-          <li>
-            <b>Logical data import mode with <code>IMPORT INTO</code></b>
-          </li>
-          <br />
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Fine-grained customization of statistics collection</b>
-            <br />Users can modify the statistics collection strategy for specific tables, such as healthiness and parallelism.
-          </li>
-          <br />
-          <li>
-            <b>Workload Repository</b>
-            <br />TiDB persists workload information in memory to permanent volume, including cumulative and real-time statistic data, which aids in troubleshooting and analysis.
-          </li>
-          <br />
-          <li>
-            <b>Automatic index advisor</b>
-            <br />TiDB automatically analyzes SQL statements that can be optimized and recommends creating or dropping indexes.
-          </li>
-          <br />
-          <li>
-            <b>Support modifying column types for partitioned tables</b>
-            <br />Users can modify the data type of columns in partitioned tables, regardless of whether a column is a partitioning key.
-          </li>
-          <br />
-          <li>
-            <b>Conflict strategy for <code>IMPORT INTO</code></b>
-            <br />Users can set the conflict resolution strategy when importing data, such as exiting with an error, ignoring, or replacing in case of conflicts.
-          </li>
-          <br />
-          <li>
-            <b>End-to-End monitoring</b>
-            <br />Track the time consumption of individual SQL statements throughout their entire lifecycle, including consumption on TiDB, TiKV, PD, and TiFlash components.
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Workload analysis</b>
-            <br />Analyze historical workload data from the Workload Repository and provide optimization recommendations, such as SQL tuning and statistics collection.
-          </li>
-          <br />
-          <li>
-            <b>Revisable primary key</b>
-          </li>
-          <br />
-          <li>
-            <b>Export data as SQL statements</b>
-          </li>
-          <br />
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <b>Security</b>
-        <br /><i>Enhance data safety and privacy</i>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Google Cloud KMS</b>
-            <br />Enhance the key management mechanism for static encryption based on Google Cloud KMS, making it generally available (GA).
-          </li>
-          <br />
-          <li>
-            <b>Improved dynamic privilege</b>
-            <br />Improve the dynamic privilege design and limit the implementation of Super privilege.
-          </li>
-          <br />
-          <li>
-            <b>Marker-based log desensitization</b>
-            <br />Support marking sensitive information in the cluster log. Then, you can determine whether to desensitize it according to the usage scenario.
-          </li>
-          <br />
-          <li>
-            <b>FIPS</b>
-            <br />Encryption scenarios comply with FIPS.
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-           <li>
-            <b>IAM authentication for AWS</b>
-            <br />TiDB as AWS third-party ARN for AWS IAM access.
-          </li>
-          <br />
-          <li>
-            <b>Kerberos</b>
-            <br />Support Kerberos-based authentication.
-          </li>
-          <li>
-            <b>MFA</b>
-            <br />Support the multi-factor authentication mechanism.
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Label-based access control</b>
-            <br />Support data access control by configuring labels.
-          </li>
-          <br />
-          <li>
-            <b>Enhanced client-side encryption</b>
-            <br />Support client-side encryption of key fields to enhance data security.
-          </li>
-          <br />
-          <li>
-            <b>Dynamic desensitization of business data</b>
-            <br />Support desensitizing data based on different data application scenarios to ensure data security in important fields.
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<table><thead>
+  <tr>
+    <th>Category</th>
+    <th>End of CY24 release</th>
+    <th>Mid of CY25 release</th>
+    <th>Future releases</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td>Unmatched Scalability and Peak Performance<br>Deliver massive scalability and faster performance to support larger workloads, optimize resource utilization, and ensure superior responsiveness<br></td>
+    <td>In-memory caching in TiKV<br>TiKV maintains recent versions of data in memory to reduce redundant MVCC scans, thus improving performance.<br>Adaptive Parallelism for Stats Collection (GA)<br>Dynamically adjusts parallelism and concurrency based on hardware and node count, accelerating statistics collection.<br>Faster Database Restores<br>Reduces recovery time for full database and point-in-time restores (PITR).<br>Unlimited Transaction Size<br>Removes memory limits on uncommitted transactions, improving batch task success rates.<br>Load-Based Traffic Rebalancing in TiProxy(GA)<br>Routes traffic based on TiDB node workloads to optimize resource utilization.<br></td>
+    <td>PD Microservice Router Service<br>Enables independent deployment, stateless(no Strong Leader) and easy scaling of Router Service(region meta query/updates) in PD, preventing PD from becoming a bottleneck for cluster resources.<br>Reduced I/O for Statistics Collection  (GA)<br>Allows users to scan only a portion of data samples on TiKV, reducing time and resource consumption for statistics collection.<br>Limit Operator Pushdown<br>Removes limitations on pushing down the Limit operator from TiDB to TiKV, enabling more efficient query processing directly at the storage layer.<br>Cascades Optimizer Framework<br>Introduces a mature, advanced optimizer framework, expanding the capabilities of the existing optimizer.<br>Scalable DDL Execution Framework<br>Provides a parallel DDL execution framework to improve the performance and stability of DDL operations.<br>Increased TiCDC Scalability<br>Updated TiCDC architecture delivers increased scalability and performance for change data capture use cases.<br></td>
+    <td>Table-Level Load Balancing<br>Optimizes data scheduling in PD based on workload distribution across Regions for each table.<br>System Table Performance Optimization<br>Enhances query speed and reduces overhead for system tables with large data volumes.<br>Enhance the Scability of Region Meta Storage<br>Migrate region meta storage from PD to TiKV, the storage layer can scale infinitely ans easily.<br></td>
+  </tr>
+  <tr>
+    <td>Advanced SQL Features and Flexibility<br>Cutting-edge SQL capabilities, improving compatibility, flexibility, and ease of use for complex queries and modern applications<br></td>
+    <td>Vector Search Support<br>Enables vector data types, indexing, and high-performance vector search, with support for mixed queries involving vector and relational data.<br>Foreign Keys(GA)<br>Providing robust relational integrity.<br>Global indexing on partitioned tables(GA)<br>Removes the unique key restriction on partition keys, boosting query performance for non-partitioned columns.</td>
+    <td>Modifiable Column Types in Partitioned Tables<br>Allows users to change column data types in partitioned tables, even if the column is a partitioning key.<br></td>
+    <td>Materialized Views Support<br>Enables materialized views to improve pre-computation, boost computational efficiency, and enhance data analysis performance.<br></td>
+  </tr>
+  <tr>
+    <td>Unbreakable Reliability and Always-On Availability <br>Near-zero downtime and enhanced fault tolerance to maintain uninterrupted operations and deliver a rock-solid user experience<br></td>
+    <td>Limit Memory for Backups<br>Limit Memory for Statistics Collection (GA)<br>Enhanced SQL Binding Management (GA)<br>Simplifies creating and managing large numbers of execution plans to stabilize performance.<br>Improved Resource Group Control for Complex SQL (GA)<br>Monitors RU usage of complex queries mid-execution to minimize system impact.<br>Automatic Resource Group Switching for Runaway Queries (GA)<br>Detects runaway queries and redirects them to designated resource groups with set limits. <br>Limit Memory Usage for Schema Metadata（GA）<br>Enhances stability in large-scale clusters by capping memory consumption for schema metadata.<br></td>
+    <td>Robust and Resilient Backup <br>Reduces memory-related issues during backup processes, ensuring dependable data protection and availability.<br>Optimized Memory Management with Disk Spilling<br>Allows operators like HashAgg, Sort, and Join to spill to disk, reducing memory load and preventing out-of-memory (OOM) issues.<br>Sharing Plan Cache across Sessions (GA)<br>Shares execution plan cache across sessions in the same TiDB instance, optimizing memory usage.<br>Resource Group Quota Management (GA)<br>Dynamically adjusts resource limits for Burstable resource groups, fully utilizing available resources without impacting other quotas.<br></td>
+    <td>Adaptive Resource Group<br>Automatically adjusts Request Unit (RU) settings in resource groups based on past execution patterns.<br>Enhanced Memory Protection<br>Monitors memory usage across all components to prevent operations that could impact system stability.<br>Automatic SQL Binding<br>Analyzes SQL performance metrics to automatically create bindings, stabilizing execution plans for transactional processing.<br>Multi-Versioned Statistics<br>Allows users to view and restore previous statistics versions after updates.<br>Distributed Statistics Collection<br>Enables parallel statistics collection across multiple TiDB nodes to boost efficiency.<br></td>
+  </tr>
+  <tr>
+    <td>Effortless Operations and Intelligent Observability<br>Simplify management with proactive monitoring and insights to optimize performance and ensure smooth operations<br></td>
+    <td>Reliable Query Termination（GA）<br>Instantly terminates running SQL statements and frees resources in TiDB and TiKV.<br>Permissioned Resource Group Switching (GA)<br>Restricts resource group switching to authorized users, preventing resource misuse.<br>CPU Time Observation for TiDB and TiKV (GA)<br>Adds CPU time metrics to logs, enabling quick identification of statements causing CPU spikes.<br></td>
+    <td>Customizable Statistics Collection (GA)<br>Allows tailored statistics strategies for specific tables, adjusting parameters like health and parallelism.<br>Workload Repository (GA)<br>Stores workload stats and real-time data for improved troubleshooting and analysis.<br>Automated Index Advisor (GA)<br>Automatically analyzes SQL statements to recommend index optimizations, including suggestions for creating or dropping indexes.<br>Standardized Time Model (GA)<br>Establishes a unified SQL execution time model to help identify database load sources through logs and cluster metrics, pinpointing problematic nodes and statements.<br>TiFlash CPU Time Monitoring (GA)<br>Adds TiFlash CPU time metrics to logs, enabling quick identification of statements that cause CPU spikes in TiFlash.</td>
+    <td>Workload Analysis<br>Analyzes historical data from the Workload Repository to provide optimization recommendations, including SQL tuning and statistics collection.<br>End-to-End SQL Monitoring<br>Tracks the entire lifecycle of SQL statements, measuring time spent across TiDB, TiKV, PD, and TiFlash for detailed performance insights.<br></td>
+  </tr>
+  <tr>
+    <td>Comprehensive Data Security and Privacy <br>Robust security measures to safeguard sensitive data, ensuring top-tier protection, encryption, and compliance with evolving privacy regulations</td>
+    <td>Google Cloud KMS(GA)<br>General availability for encryption-at-rest key management with Google Cloud KMS.<br>Azure Key Vault<br>Enhanced encryption-at-rest key management with Azure Key Vault integration.<br>Marker-Based Log Desensitization<br>Marks and selectively desensitizes sensitive data in cluster logs based on use case.<br>Column-Level Permission Management(GA)<br>Adds MySQL-compatible permissions at the column level for fine-grained access control.</td>
+    <td>AWS IAM Authentication<br>Supports AWS IAM third-party ARN integration for secure access control in TiDB.<br>Kerberos Authentication(GA)<br>Enables authentication using Kerberos for added security.<br>Multi-Factor Authentication (MFA)<br>Adds support for multi-factor authentication to enhance user verification the multi-factor authentication mechanism.<br>Enhanced TLS Security(GA)<br>Ensures encrypted connections between all components within the TiDB cluster.<br>Refined Dynamic Privileges<br>Improves dynamic privilege management, including limitations on Super privilege.<br>FIPS Compliance(GA)<br>Ensures encryption methods comply with FIPS standards for secure data handling.<br></td>
+    <td>Label-Based Access Control<br>Enables data access control through configurable labels.<br>Enhanced Client-Side Encryption<br>Supports encryption of key fields on the client side to strengthen data security.<br>Dynamic Data Desensitization<br>Allows data desensitization based on application scenarios, protecting sensitive business fields.<br></td>
+  </tr>
+</tbody></table>
 
 > **Note:**
 >
