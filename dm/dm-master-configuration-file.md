@@ -59,4 +59,4 @@ This section introduces the configuration parameters of DM-master.
 | `ssl-cert` | The path of the file that contains X509 certificate in PEM format for DM-master to connect with other components. |
 | `ssl-key` | The path of the file that contains X509 key in PEM format for DM-master to connect with other components. |
 | `cert-allowed-cn` | Common Name list. |
-| `secret-key-path` | The file path of the secret key, which is used to encrypt and decrypt upstream and downstream passwords. The file must contain a 64-character hexadecimal AES-256 secret key. |
+| `secret-key-path` | The file path of the secret key, which is used to encrypt and decrypt upstream and downstream passwords. The file must contain a 64-character hexadecimal AES-256 secret key. One way to generate this key is by calculating SHA256 checksum of random data, such as <code>head -n 256 /dev/urandom \| sha256sum</code>. For more information, see [Customize a secret key for DM encryption and decryption](/dm/dm-customized-secret-key.md). |
