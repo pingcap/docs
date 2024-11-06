@@ -43,7 +43,7 @@ If you want a quick try, you can choose **Public IP**. If you want cost-effectiv
 #### Private Connect
 Private Connect leverages **Private Link** or **Private Service Connect** technologies which provided by cloud vendors, that allow the resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly in your VPC. 
 
-Currently, we only support Private Connect to self-hosted Kafka.
+Currently, we only support Private Connect to generic Kafka. No special integration with MSK and Confluent Kafka, or any others.
 1. If your Apache Kafka service already or will be setup in AWS, please follow [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to make sure the network connection is set up properly. After set up done, you will get following information back to TiDB Cloud console to create changefeed:
    - AZs of Kafka Endpoint Service
    - ID in Kafka Advertised Listener Pattern
@@ -95,14 +95,11 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 ## Step 2. Configure the changefeed target
 
-1. For **Kafka Provider**, we only provide **Self-hosted Kafka** option, we will support more later. 
-> **Note:**
-> Currently, we treat all the Apache Kafka Services as self-hosted since we didn't make any special integration to different Kafka Providers, such as Amazon MSK, Confluent ... It doesn't mean that we can not connect to Amazon MSK or Confluent Kafka. If the Kafka Provider can provide standard network connection methods, just like VPC Peering, Public IP, Private Link and Private Service Connect, we definitely can connect to them. You may have question "Can you connect to Amazon MSK by multi VPC which is powered by Private Link technology?" Sorry, we haven't supported it yet since it's not a standard Private Link, but may be later.
-2. Select **Connectivity Method** by your Apache Kafka Service setup.
+1. Select **Connectivity Method** by your Apache Kafka Service setup.
    1. If you select **VPC Peering** or **Public IP**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
    2. If you select **Private Link**
       1. Please authorize AWS Account of TiDB Cloud, make sure it can create endpoint for your endpoint service. You can find AWS Account of TiDB Cloud in the tip of the web page.
-      2. Make sure you select the same **Kafka Type**, **Suggested Kafka Endpoint Service AZ** and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in **Network** section.
+      2. Make sure you select the same **Number of AZs**, **Suggested Kafka Endpoint Service AZs** and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in **Network** section.
       3. Double-check the **Kafka Advertised Listener Pattern** by clicking the button **Check usage and generate**, which will show message to help you validate the unique ID.
       4. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md)
       5. Fill the **Boostrap Ports**, suggest at least one port for one AZ. You can use commas `,` to separate multiple ports.
