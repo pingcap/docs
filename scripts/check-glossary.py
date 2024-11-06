@@ -14,7 +14,7 @@ with open("glossary.md") as fh:
 
     # Extract the lines that start with ### into itemsB (sorted)
     itemsB = ""
-    for line in sorted(fh.readlines()):
+    for line in sorted(fh.readlines(), key=str.casefold):
         if line.startswith("###"):
             itemsB += line
 
