@@ -44,8 +44,15 @@ If you want a quick try, you can choose **Public IP**. If you want cost-effectiv
 Private Connect leverages **Private Link** or **Private Service Connect** technologies which provided by cloud vendors, that allow the resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly in your VPC. 
 
 Currently, we only support Private Connect to self-hosted Kafka.
-1. If your Apache Kafka service already or will be setup in AWS, please follow [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to make sure the network connection is set up properly.
-2. If your Apache Kafka service already or will be setup in Google Cloud, please follow [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to make sure the network connection is set up properly.
+1. If your Apache Kafka service already or will be setup in AWS, please follow [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to make sure the network connection is set up properly. After set up done, you will get following information back to TiDB Cloud console to create changefeed:
+   - AZs of Kafka Endpoint Service
+   - ID in Kafka Advertised Listener Pattern
+   - Endpoint Service Name
+   - Bootstrap Ports
+2. If your Apache Kafka service already or will be setup in Google Cloud, please follow [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to make sure the network connection is set up properly. After set up done, you will get following information back to TiDB Cloud console to create changefeed:
+   - ID in Kafka Advertised Listener Pattern
+   - Service Attachment
+   - Bootstrap Ports
 
 #### VPC Peering
 
