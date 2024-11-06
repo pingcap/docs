@@ -22,17 +22,17 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 ## B
 
-### Batch Create Table
+### Backup and Restore (BR)
 
-Batch Create Table is a feature introduced in TiDB v6.0.0. This feature is enabled default. When restoring data with a large number of tables (nearly 50000) using BR (Backup & Restore), the feature can greatly speed up the restore process by creating tables in batches. For details, see [Batch Create Table](/br/br-batch-create-table.md).
+BR is the Backup and Restore tool for TiDB. For more information, see [BR Overview](/br/backup-and-restore-overview.md).
 
 ### Baseline Capturing
 
 Baseline Capturing captures queries that meet capturing conditions and create bindings for them. It is used for [preventing regression of execution plans during an upgrade](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade).
 
-### Backup and Restore (BR)
+### Batch Create Table
 
-BR is the Backup and Restore tool for TiDB. For more information, see [BR Overview](/br/backup-and-restore-overview.md).
+Batch Create Table is a feature introduced in TiDB v6.0.0. This feature is enabled default. When restoring data with a large number of tables (nearly 50000) using BR (Backup & Restore), the feature can greatly speed up the restore process by creating tables in batches. For details, see [Batch Create Table](/br/br-batch-create-table.md).
 
 ### Bucket
 
@@ -44,21 +44,21 @@ A [Region](#regionpeerraft-group) is logically divided into several small ranges
 
 With the cached table feature, TiDB loads the data of an entire table into the memory of the TiDB server, and TiDB directly gets the table data from the memory without accessing TiKV, which improves the read performance.
 
-### Column Family (CF)
-
-In RocksDB and TiKV, a Column Family (CF) represents a logical grouping of key-value pairs within a database.
-
 ### Coalesce Partition
 
 Coalesce Partition is a way of decreasing the number of partitions in a Hash or Key partitioned table. For more information, see [Manage Hash and Key partitions](/partitioned-table.md#manage-hash-and-key-partitions).
 
-### Continuous Profiling
+### Column Family (CF)
 
-Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For details, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
+In RocksDB and TiKV, a Column Family (CF) represents a logical grouping of key-value pairs within a database.
 
 ### Common Table Expression (CTE)
 
 A Common Table Expression (CTE) enables you to define a temporary result set that can be referred to multiple times within a SQL statement using the [`WITH`](/sql-statements/sql-statement-with.md) clause. For more information, see [Common Table Expression](/develop/dev-guide-use-common-table-expression.md).
+
+### Continuous Profiling
+
+Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For details, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
 
 ## D
 
@@ -98,13 +98,13 @@ Dynamic pruning mode is one of the modes that TiDB accesses partitioned tables. 
 
 ## G
 
-### General Availability (GA)
-
-General Availability (GA) of a feature is when it is, fully tested and is Generally Available for use in production environments. TiDB features may be released as Generally Available in both [DMR](#development-milestone-release-dmr) and [LTS](#long-term-support-lts) releases. However, as TiDB does not provide patch releases based on DMR it is generally recommended to use the LTS product release for production use.
-
 ### Garbage Collection (GC)
 
 Garbage Collection (GC) is a process that clears obsolete data to free up resources. For information on TiKV GC process, see [Garbage Collection overview](/garbage-collection-overview.md).
+
+### General Availability (GA)
+
+General Availability (GA) of a feature is when it is, fully tested and is Generally Available for use in production environments. TiDB features may be released as Generally Available in both [DMR](#development-milestone-release-dmr) and [LTS](#long-term-support-lts) releases. However, as TiDB does not provide patch releases based on DMR it is generally recommended to use the LTS product release for production use.
 
 ### Global Transaction Identifiers (GTIDs)
 
@@ -118,17 +118,17 @@ Hybrid Transactional and Analytical Processing (HTAP) is a database feature that
 
 ## I
 
-### Instance Metadata Service (IMDS)
+### In-Memory Pessimistic Lock
 
-Instance Metadata Service (IMDS) is an AWS service designed to manage and retrieve metadata for [EC2](#ec2) instances. For more information, see [Instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
+The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When this feature is enabled, pessimistic locks are usually stored in the memory of the Region leader only, and are not persisted to disk or replicated through Raft to other replicas. This feature can greatly reduce the overhead of acquiring pessimistic locks and improve the throughput of pessimistic transactions.
 
 ### Index Merge
 
 Index Merge is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans. Since v5.4, Index Merge has become a GA feature.
 
-### In-Memory Pessimistic Lock
+### Instance Metadata Service (IMDS)
 
-The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When this feature is enabled, pessimistic locks are usually stored in the memory of the Region leader only, and are not persisted to disk or replicated through Raft to other replicas. This feature can greatly reduce the overhead of acquiring pessimistic locks and improve the throughput of pessimistic transactions.
+Instance Metadata Service (IMDS) is an AWS service designed to manage and retrieve metadata for [EC2](#ec2) instances. For more information, see [Instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
 
 ## K
 
@@ -142,6 +142,10 @@ Key-Value (KV) is a way of storing information by associating values with unique
 
 ## L
 
+### Leader/Follower/Learner
+
+Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#regionpeerraft-group). The leader services all client requests and replicates data to the followers. If the group leader fails, one of the followers will be elected as the new leader. Learners are non-voting followers that only serves in the process of replica addition.
+
 ### Lightweight Directory Access Protocol (LDAP)
 
 Lightweight Directory Access Protocol (LDAP) is a standardized way of accessing a directory with information. It is commonly used for account and user data management. TiDB supports LDAP via [LDAP authentication plugins](/security-compatibility-with-mysql.md#authentication-plugin-status).
@@ -149,10 +153,6 @@ Lightweight Directory Access Protocol (LDAP) is a standardized way of accessing 
 ### Long Term Support (LTS)
 
 Long Term Support (LTS) refers to software versions that are extensively tested and maintained for extended periods. For more information, see [TiDB Versioning](/releases/versioning.md).
-
-### Leader/Follower/Learner
-
-Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#regionpeerraft-group). The leader services all client requests and replicates data to the followers. If the group leader fails, one of the followers will be elected as the new leader. Learners are non-voting followers that only serves in the process of replica addition.
 
 ## M
 
@@ -166,13 +166,13 @@ Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architec
 
 ## O
 
-### Online Analytical Processing (OLAP)
-
-Online Analytical Processing (OLAP) refers to database workloads focused on analytical tasks, such as data reporting and complex queries. OLAP is characterized by read-heavy queries that process large volumes of data across many rows.
-
 ### Old value
 
 The "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
+
+### Online Analytical Processing (OLAP)
+
+Online Analytical Processing (OLAP) refers to database workloads focused on analytical tasks, such as data reporting and complex queries. OLAP is characterized by read-heavy queries that process large volumes of data across many rows.
 
 ### Online Transaction Processing (OLTP)
 
@@ -207,21 +207,21 @@ Currently, available steps generated by PD include:
 
 [Partitioning](/partitioned-table.md) refers to physically dividing a table into smaller table partitions, which can be done by partition methods such as RANGE, LIST, HASH, and KEY partitioning.
 
+### Pending/Down
+
+"Pending" and "down" are two special states of a peer. Pending indicates that the Raft log of followers or learners is vastly different from that of leader. Followers in pending cannot be elected as leader. "Down" refers to a state that a peer ceases to respond to leader for a long time, which usually means the corresponding node is down or isolated from the network.
+
 ### Placement Driver (PD)
 
 Placement Driver (PD) is a core component in the [TiDB Architecture](/tidb-architecture.md#placement-driver-pd-server) responsible for storing metadata, assigning [Timestamp Oracle (TSO)](/tso.md) for transaction timestamps, orchestrating data placement on TiKV, and running [TiDB Dashboard](/dashboard/dashboard-overview.md). For more information, see [TiDB Scheduling](/tidb-scheduling.md).
 
-### pending/down
+### Point Get
 
-"Pending" and "down" are two special states of a peer. Pending indicates that the Raft log of followers or learners is vastly different from that of leader. Followers in pending cannot be elected as leader. "Down" refers to a state that a peer ceases to respond to leader for a long time, which usually means the corresponding node is down or isolated from the network.
+Point get means reading a single row of data by a unique index or primary index, the returned resultset is up to one row.
 
 ### Point in Time Recovery (PITR)
 
 Point in Time Recovery (PITR) enables you to restore data to a specific point in time (for example, just before an unintended `DELETE` statement). For more information, see [TiDB Log Backup and PITR Architecture](/br/br-log-architecture.md).
-
-### Point Get
-
-Point get means reading a single row of data by a unique index or primary index, the returned resultset is up to one row.
 
 ### Predicate columns
 
@@ -243,13 +243,6 @@ Quota Limiter is an experimental feature introduced in TiDB v6.0.0. If the machi
 
 Raft Engine is an embedded persistent storage engine with a log-structured design. It is built for TiKV to store multi-Raft logs. Since v5.4, TiDB supports using Raft Engine as the log storage engine. For details, see [Raft Engine](/tikv-configuration-file.md#raft-engine).
 
-### Retrieval-Augmented Generation (RAG)
-
-Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). For more information, See [Vector Search Overview](/vector-search-overview.md#use-cases).
-
-### Region/peer/Raft group
-
-Region is the minimal piece of data storage in TiKV, each representing a range of data (256 MiB by default). Each Region has three replicas by default. A replica of a Region is called a peer. Multiple peers of the same Region replicate data via the Raft consensus algorithm, so peers are also members of a Raft instance. TiKV uses Multi-Raft to manage data. That is, for each Region, there is a corresponding, isolated Raft group.
 
 ### Region split
 
@@ -257,9 +250,9 @@ Regions are generated as data writes increase. The process of splitting is calle
 
 The mechanism of Region split is to use one initial Region to cover the entire key space, and generate new Regions through splitting existing ones every time the size of the Region or the number of keys has reached a threshold.
 
-### Restore
+### Region/peer/Raft group
 
-Restore is the reverse of the backup operation. It is the process of bringing back the system to an earlier state by retrieving data from a prepared backup.
+Region is the minimal piece of data storage in TiKV, each representing a range of data (256 MiB by default). Each Region has three replicas by default. A replica of a Region is called a peer. Multiple peers of the same Region replicate data via the Raft consensus algorithm, so peers are also members of a Raft instance. TiKV uses Multi-Raft to manage data. That is, for each Region, there is a corresponding, isolated Raft group.
 
 ### Remote Procedure Call (RPC)
 
@@ -269,9 +262,13 @@ Remote Procedure Call (RPC) is a communication way between software components. 
 
 Request Unit (RU) is a unified abstraction unit for the resource usage in TiDB. It is used with [Resource Control](/tidb-resource-control.md) to manage resource usage.
 
+### Restore
+
+Restore is the reverse of the backup operation. It is the process of bringing back the system to an earlier state by retrieving data from a prepared backup.
+
 ## S
 
-### scheduler
+### Scheduler
 
 Schedulers are components in PD that generate scheduling tasks. Each scheduler in PD runs independently and serves different purposes. The commonly used schedulers are:
 
@@ -290,6 +287,10 @@ A store refers to the storage node in the TiKV cluster (an instance of `tikv-ser
 
 ## T
 
+### Timestamp Oracle (TSO)
+
+Because TiKV is a distributed storage system, it requires a global timing service, Timestamp Oracle (TSO), to assign a monotonically increasing timestamp. In TiKV, such a feature is provided by PD, and in Google [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), this feature is provided by multiple atomic clocks and GPS. For details, see [TSO](/tso.md).
+
 ### Top SQL
 
 Top SQL helps locate SQL queries that contribute to a high load of a TiDB or TiKV node in a specified time range. For details, see [Top SQL user document](/dashboard/top-sql.md).
@@ -297,10 +298,6 @@ Top SQL helps locate SQL queries that contribute to a high load of a TiDB or TiK
 ### Transactions Per Second (TPS)
 
 Transactions Per Second (TPS) is the number of transactions a database processes per second, serving as a key metric for measuring database performance and throughput.
-
-### Timestamp Oracle (TSO)
-
-Because TiKV is a distributed storage system, it requires a global timing service, Timestamp Oracle (TSO), to assign a monotonically increasing timestamp. In TiKV, such a feature is provided by PD, and in Google [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), this feature is provided by multiple atomic clocks and GPS. For details, see [TSO](/tso.md).
 
 ## U
 
