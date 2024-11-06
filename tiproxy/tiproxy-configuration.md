@@ -112,6 +112,13 @@ Configurations for HTTP gateway.
 
 Configurations for the load balancing policy of TiProxy.
 
+#### `label-name`
+
++ Default value: `""`
++ Support hot-reload: yes
++ Specifies the label name used for [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing). TiProxy matches the label values of TiDB servers based on this label name and prioritizes routing requests to TiDB servers with the same label value as itself.
++ The default value of `label-name` is an empty string, indicating that label-based load balancing is not used. To enable this load balancing policy, you need to set this configuration item to a non-empty string and configure both [`labels`](#labels) in TiProxy and [`labels`](/tidb-configuration-file.md#labels) in TiDB. For more information, see [Label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
+
 #### `policy`
 
 + Default value: `resource`
