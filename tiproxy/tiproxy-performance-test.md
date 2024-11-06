@@ -14,7 +14,7 @@ The results are as follows:
 - The row number of the query result set has a significant impact on the QPS of TiProxy, and the impact is the same as that of HAProxy.
 - The performance of TiProxy increases almost linearly with the number of vCPUs. Therefore, increasing the number of vCPUs can effectively improve the QPS upper limit.
 - The number of long connections and the frequency of creating short connections have minimal impact on the QPS of TiProxy.
-- The higher the CPU usage of TiProxy, the greater the impact of enabling the [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on QPS. When TiProxy's CPU usage is about 70%, enabling traffic capture causes the average QPS to drop by about 3% and the minimum QPS to drop by about 7%. The latter drop is due to the periodic drop in QPS caused by compressing the traffic files.
+- The higher the CPU usage of TiProxy, the greater the impact of enabling the [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on QPS. When the CPU usage of TiProxy is about 70%, enabling traffic capture leads to approximately 3% decrease in average QPS and 7% decrease in minimum QPS. The latter decrease is caused by periodic QPS drops during traffic file compression.
 
 ## Test environment
 
@@ -318,7 +318,7 @@ sysbench oltp_point_select \
 
 ### Test plan
 
-The test aims to test the impact of [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on TiProxy performance. This test uses TiProxy v1.3.0. Before executing `sysbench`, traffic capture is turned off and on respectively, and concurrency is adjusted to compare QPS and TiProxy's CPU usage. Since periodic compression of traffic files can cause QPS fluctuations, this test compares both the average QPS and the minimum QPS.
+This test aims to evaluate the performance impact of [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on TiProxy. It uses TiProxy v1.3.0 and compares QPS and TiProxy CPU usage with traffic capture enabled and disabled before executing `sysbench` with different concurrency. Due to periodic QPS fluctuations caused by traffic file compression, the test compares both the average and minimum QPS.
 
 Use the following command to perform the test:
 
