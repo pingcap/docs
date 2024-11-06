@@ -58,7 +58,7 @@ Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource over
 
 ### Common Table Expression (CTE)
 
-A Common Table Expression (CTE) enables you to define a temporary result set that can be referred multiple times within a SQL statement using the [`WITH`](/sql-statements/sql-statement-with.md) clause. For more information, see [Common Table Expression](/develop/dev-guide-use-common-table-expression.md).
+A Common Table Expression (CTE) enables you to define a temporary result set that can be referred to multiple times within a SQL statement using the [`WITH`](/sql-statements/sql-statement-with.md) clause. For more information, see [Common Table Expression](/develop/dev-guide-use-common-table-expression.md).
 
 ## D
 
