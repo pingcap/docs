@@ -476,7 +476,7 @@ tiproxy_servers:
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 
-- `data-dir`: The directory that TiKV-CDC uses to store temporary files primarily for sorting. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB (optional).
+- `data-dir`: Specifies the directory that TiKV-CDC uses to store temporary files primarily for sorting (optional). The free disk space for this directory is recommended to be greater than or equal to 500 GiB.
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
