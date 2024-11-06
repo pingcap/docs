@@ -19,9 +19,9 @@ ID: simple-replication-task
 Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-08-05T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v7.5.3"}
 ```
 
--   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
+-   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`の正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
 
--   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。次の形式に従って`--sink-uri`設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
+-   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。次の形式に従って`--sink-uri`設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`サポートしています。
 
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
@@ -105,7 +105,7 @@ rules = ['*.*', '!test.*']
 
 # The second event filter rule.
 # matcher = ["test.fruit"] # matcher is an allow list, which means this rule only applies to the fruit table in the test database.
-# ignore-event = ["drop table", "delete"] # Ignore the `drop table` DDL events and the `delete` DML events.
+# ignore-event = ["drop table", "delete"] # Ignore the `drop table` DDL events and the `delete` DML events. Note that when a value in the clustered index column is updated in TiDB, TiCDC splits an `UPDATE` event into `DELETE` and `INSERT` events. TiCDC cannot identify such events as `UPDATE` events and thus cannot correctly filter out such events.
 # ignore-sql = ["^drop table", "alter table"] # Ignore DDL statements that start with `drop table` or contain `alter table`.
 # ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
 

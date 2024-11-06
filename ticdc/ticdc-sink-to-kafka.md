@@ -25,11 +25,11 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 ```
 
 -   `--server` : TiCDC クラスター内の任意の TiCDCサーバーのアドレス。
--   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
--   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。詳細については、 [`kafka`でシンク URI を設定する](#configure-sink-uri-for-kafka)を参照してください。
+-   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`の正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
+-   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。詳細については、 [`kafka`でシンク URI を設定する](#configure-sink-uri-for-kafka)参照してください。
 -   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 -   `--target-ts` : 変更フィード終了 TSO を指定します。この TSO まで、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。つまり、TiCDC はデータのプルを自動的に停止しません。
--   `--config` : changefeed設定ファイルを指定します。詳細については[TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `--config` : changefeed設定ファイルを指定します。詳細については[TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)参照してください。
 
 ## サポートされている Kafka バージョン {#supported-kafka-versions}
 
@@ -74,8 +74,8 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 | `compression`                        | メッセージを送信するときに使用する圧縮アルゴリズム (値のオプションは`none` 、 `lz4` 、 `gzip` 、 `snappy` 、 `zstd`で、デフォルトは`none`です)。Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。Snappy 圧縮の他のバリアントはサポートされていません。                                                                                                                                                                                                              |
 | `protocol`                           | メッセージが Kafka に出力されるプロトコル。値のオプションは`canal-json` 、 `open-protocol` 、 `avro`です。                                                                                                                                                                                                                                                                                                                                            |
 | `auto-create-topic`                  | 渡された`topic-name` Kafka クラスターに存在しない場合に、TiCDC がトピックを自動的に作成するかどうかを決定します (オプション、デフォルトは`true` )。                                                                                                                                                                                                                                                                                                                            |
-| `enable-tidb-extension`              | オプション。デフォルトは`false` 。出力プロトコルが`canal-json`の場合、値が`true`であれば、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)を送信し、 [TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を Kafka メッセージに追加します。v6.1.0 以降では、このパラメータは`avro`プロトコルにも適用されます。値が`true`の場合、TiCDC は[3つのTiDB拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) Kafka メッセージに追加します。                                                 |
-| `max-batch-size`                     | v4.0.9 の新機能。メッセージ プロトコルが 1 つの Kafka メッセージに複数のデータ変更を出力することをサポートしている場合、このパラメーターは 1 つの Kafka メッセージ内のデータ変更の最大数を指定します。現在、Kafka の`protocol`が`open-protocol` (オプション、デフォルトは`16` ) の場合にのみ有効になります。                                                                                                                                                                                                                               |
+| `enable-tidb-extension`              | オプション。デフォルトは`false`です。出力プロトコルが`canal-json`場合、値が`true`であれば、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)を送信し、 [TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field) Kafka メッセージに追加します。v6.1.0 以降では、このパラメータは`avro`プロトコルにも適用されます。値が`true`の場合、TiCDC は[3つのTiDB拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) Kafka メッセージに追加します。                                                  |
+| `max-batch-size`                     | v4.0.9 の新機能。メッセージ プロトコルが 1 つの Kafka メッセージに複数のデータ変更を出力することをサポートしている場合、このパラメーターは 1 つの Kafka メッセージ内のデータ変更の最大数を指定します。現在、Kafka の`protocol`が`open-protocol` (オプション、デフォルトは`16` ) の場合にのみ有効です。                                                                                                                                                                                                                                  |
 | `enable-tls`                         | ダウンストリーム Kafka インスタンスに接続するために TLS を使用するかどうか (オプション、デフォルトは`false` )。                                                                                                                                                                                                                                                                                                                                                    |
 | `ca`                                 | ダウンストリーム Kafka インスタンスに接続するために必要な CA 証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                                                |
 | `cert`                               | ダウンストリーム Kafka インスタンスに接続するために必要な証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                                                    |
@@ -106,7 +106,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 
 > **注記：**
 >
-> `protocol`が`open-protocol`の場合、TiCDC は長さが`max-message-bytes`超えるメッセージを生成しないようにします。ただし、行が非常に大きく、単一の変更だけで長さが`max-message-bytes`を超える場合は、サイレント エラーを回避するために、TiCDC はこのメッセージを出力し、ログに警告を出力。
+> `protocol`が`open-protocol`場合、TiCDC は長さが`max-message-bytes`超えるメッセージを生成しないようにします。ただし、行が非常に大きく、単一の変更だけで長さが`max-message-bytes`超える場合は、サイレント エラーを回避するために、TiCDC はこのメッセージを出力し、ログに警告を出力。
 
 ### TiCDCはKafkaの認証と認可を使用します {#ticdc-uses-the-authentication-and-authorization-of-kafka}
 
@@ -142,18 +142,29 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 
 -   TLS/SSL暗号化
 
-    Kafka ブローカーで TLS/SSL 暗号化が有効になっている場合は、 `--sink-uri`に`-enable-tls=true`パラメータを追加する必要があります。自己署名証明書を使用する場合は、 `--sink-uri`に`ca` 、 `cert` 、 `key`指定する必要があります。
+    Kafka ブローカーで TLS/SSL 暗号化が有効になっている場合は、 `--sink-uri`に`-enable-tls=true`パラメータを追加する必要があります。自己署名証明書を使用する場合は、 `--sink-uri`に`ca` 、 `cert` 、 `key`も指定する必要があります。
 
 -   ACL 認証
 
     TiCDC が適切に機能するために必要な最小限の権限セットは次のとおりです。
 
     -   トピック[リソースタイプ](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)の`Create` 、 `Write` 、および`Describe`権限。
-    -   クラスタリソース タイプに対する`DescribeConfigs`権限。
+    -   クラスタリソース タイプに対する`DescribeConfig`の権限。
+
+    各権限の使用シナリオは次のとおりです。
+
+    | リソースタイプ | 操作の種類            | シナリオ                         |
+    | :------ | :--------------- | :--------------------------- |
+    | クラスタ    | `DescribeConfig` | 変更フィードの実行中にクラスターのメタデータを取得します |
+    | トピック    | `Describe`       | チェンジフィードの開始時にトピックを作成しようとします  |
+    | トピック    | `Create`         | チェンジフィードの開始時にトピックを作成しようとします  |
+    | トピック    | `Write`          | トピックにデータを送信する                |
+
+    変更フィードを作成または開始するときに、指定された Kafka トピックがすでに存在する場合は、 `Describe`および`Create`権限を無効にすることができます。
 
 ### TiCDC を Kafka Connect (Confluent Platform) と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 
-Confluent が提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してリレーショナル データベースまたは非リレーショナル データベースにデータをストリーミングするには、 `avro`プロトコルを使用し、 `schema-registry`で[Confluent スキーマ レジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/)の URL を指定する必要があります。
+Confluent が提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)使用してリレーショナル データベースまたは非リレーショナル データベースにデータをストリーミングするには、 `avro`プロトコルを使用し、 `schema-registry`で[Confluent スキーマ レジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/)の URL を指定する必要があります。
 
 サンプル構成:
 
@@ -172,7 +183,7 @@ dispatchers = [
 
 ### TiCDC を AWS Glue スキーマレジストリと統合する {#integrate-ticdc-with-aws-glue-schema-registry}
 
-v7.4.0 以降、TiCDC は、ユーザーがデータ レプリケーションに Avro プロトコルを選択した場合に、スキーマ レジストリとして[AWS Glue スキーマレジストリ](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html)を使用することをサポートします。構成例は次のとおりです。
+v7.4.0 以降、TiCDC は、ユーザーがデータ レプリケーションに Avro プロトコルを選択した場合に、スキーマ レジストリとして[AWS Glue スキーマレジストリ](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html)使用することをサポートします。構成例は次のとおりです。
 
 ```shell
 ./cdc cli changefeed create --server=127.0.0.1:8300 --changefeed-id="kafka-glue-test" --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --config changefeed_glue.toml
@@ -208,8 +219,8 @@ dispatchers = [
 ]
 ```
 
--   マッチャー ルールに一致するテーブルについては、対応するトピック式で指定されたポリシーに従ってディスパッチされます。たとえば、テーブル`test3.aa`は「トピック式 2」に従ってディスパッチされ、テーブル`test5.aa`は「トピック式 3」に従ってディスパッチされます。
--   複数のマッチャールールに一致するテーブルの場合、最初に一致するトピック式に従ってディスパッチされます。たとえば、 `test1.aa`テーブルは「トピック式 1」に従ってディスパッチされます。
+-   マッチャールールに一致するテーブルについては、対応するトピック式で指定されたポリシーに従ってディスパッチされます。たとえば、テーブル`test3.aa`は「トピック式 2」に従ってディスパッチされ、テーブル`test5.aa`は「トピック式 3」に従ってディスパッチされます。
+-   複数のマッチャールールに一致するテーブルの場合、最初に一致するトピック式に従ってディスパッチされます。たとえば、 `test1.aa`テーブルは「トピック式 1」に従って配布されます。
 -   どのマッチャールールにも一致しないテーブルの場合、対応するデータ変更イベントは`--sink-uri`で指定されたデフォルトのトピックに送信されます。たとえば、 `test10.aa`テーブルはデフォルトのトピックに送信されます。
 -   マッチャー ルールに一致するがトピック ディスパッチャーを指定していないテーブルの場合、対応するデータ変更は`--sink-uri`で指定されたデフォルト トピックに送信されます。たとえば、 `test6.aa`テーブルはデフォルト トピックに送信されます。
 
@@ -217,7 +228,7 @@ dispatchers = [
 
 topic = &quot;xxx&quot; を使用してトピック ディスパッチャーを指定し、トピック式を使用して柔軟なトピック ディスパッチ ポリシーを実装できます。トピックの合計数は 1000 未満にすることをお勧めします。
 
-Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
+トピック式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 -   `prefix` : オプション。トピック名のプレフィックスを示します。
 -   `{schema}` : 必須。スキーマ名を一致させるために使用されます。v7.1.4 以降では、このパラメーターはオプションです。
@@ -225,7 +236,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 -   `{table}` : オプション。テーブル名を一致させるために使用されます。
 -   `suffix` : オプション。トピック名の接尾辞を示します。
 
-`prefix` 、 `middle` 、 `suffix`は、 `a-z` 、 `A-Z` 、 `0-9` 、 `.` 、 `_` 、 `-`の文字のみを含めることができます。 `{schema}`と`{table}`両方とも小文字です。 `{Schema}`や`{TABLE}`などのプレースホルダーは無効です。
+`prefix` 、 `middle` 、 `suffix` 、 `a-z` 、 `A-Z` 、 `0-9` 、 `.` 、 `_` 、 `-`の文字のみを含めることができます。 `{schema}`と`{table}`両方とも小文字です。 `{Schema}`や`{TABLE}`などのプレースホルダーは無効です。
 
 例:
 
@@ -236,7 +247,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
     -   `test3`内のすべてのテーブルに対応するデータ変更イベントは、 `hello_test3_world`という名前のトピックに送信されます。
     -   `test4`内のすべてのテーブルに対応するデータ変更イベントは、 `hello_test4_world`という名前のトピックに送信されます。
 -   `matcher = ['test5.*, 'test6.*'], topic = "hard_code_topic_name"`
-    -   `test5`と`test6`のすべてのテーブルに対応するデータ変更イベントは、 `hard_code_topic_name`名前のトピックに送信されます。トピック名を直接指定できます。
+    -   `test5`と`test6`のすべてのテーブルに対応するデータ変更イベントは、 `hard_code_topic_name`という名前のトピックに送信されます。トピック名を直接指定できます。
 -   `matcher = ['*.*'], topic = "{schema}_{table}"`
     -   TiCDC がリッスンするすべてのテーブルは、「schema_table」ルールに従って個別のトピックにディスパッチされます。たとえば、 `test.account`テーブルの場合、TiCDC はデータ変更ログを`test_account`という名前のトピックにディスパッチします。
 
@@ -253,14 +264,14 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 たとえば、 `matcher = ['test.*'], topic = {schema}_{table}`ようなディスパッチャーの場合、DDL イベントは次のようにディスパッチされます。
 
 -   DDL イベントに 1 つのテーブルが関係している場合、DDL イベントはそのまま対応するトピックに送信されます。たとえば、DDL イベント`drop table test.table1`の場合、イベントは`test_table1`という名前のトピックに送信されます。
--   DDL イベントに複数のテーブルが関係する場合 ( `rename table` / `drop table` / `drop view`には複数のテーブルが関係する可能性があります)、DDL イベントは複数のイベントに分割され、対応するトピックに送信されます。たとえば、DDL イベント`rename table test.table1 to test.table10, test.table2 to test.table20`の場合、イベント`rename table test.table1 to test.table10`はトピック`test_table1`に送信され、イベント`rename table test.table2 to test.table20`はトピック`test.table2`に送信されます。
+-   DDL イベントに複数のテーブルが関係する場合 ( `rename table` / `drop table` / `drop view`は複数のテーブルが関係する可能性があります)、DDL イベントは複数のイベントに分割され、対応するトピックに送信されます。たとえば、DDL イベント`rename table test.table1 to test.table10, test.table2 to test.table20`の場合、イベント`rename table test.table1 to test.table10`トピック`test_table1`に送信され、イベント`rename table test.table2 to test.table20`はトピック`test.table2`に送信されます。
 
 ### パーティションディスパッチャ {#partition-dispatchers}
 
-`partition = "xxx"`使用してパーティション ディスパッチャーを指定できます。 `default` 、 `index-value` 、 `columns` 、 `table` 、および`ts` 5 つのディスパッチャーがサポートされています。ディスパッチャーのルールは次のとおりです。
+`partition = "xxx"`使用してパーティション ディスパッチャーを指定できます。 `default` 、 `index-value` 、 `columns` 、 `table` 、および`ts`の 5 つのディスパッチャーがサポートされています。ディスパッチャーのルールは次のとおりです。
 
 -   `default` : デフォルトで`table`ディスパッチャ ルールを使用します。スキーマ名とテーブル名を使用してパーティション番号を計算し、テーブルのデータが同じパーティションに送信されるようにします。その結果、1 つのテーブルのデータは 1 つのパーティションにのみ存在し、順序付けが保証されます。ただし、このディスパッチャ ルールは送信スループットを制限し、コンシューマーを追加しても消費速度を向上させることはできません。
--   `index-value` : 主キー、一意のインデックス、または`index`で明示的に指定されたインデックスのいずれかを使用してパーティション番号を計算し、テーブル データを複数のパーティションに分散します。1 つのテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。
+-   `index-value` : 主キー、一意のインデックス、または`index`で明示的に指定されたインデックスを使用してパーティション番号を計算し、テーブル データを複数のパーティションに分散します。1 つのテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。
 -   `columns` : 明示的に指定された列の値を使用してパーティション番号を計算し、テーブル データを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。
 -   `table` : スキーマ名とテーブル名を使用してパーティション番号を計算します。
 -   `ts` : 行変更の commitTs を使用してパーティション番号を計算し、テーブル データを複数のパーティションに分散します。単一のテーブルからのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。ただし、データ項目の複数の変更が異なるパーティションに送信され、異なるコンシューマーのコンシューマーの進行状況が異なる場合があり、データの不整合が発生する可能性があります。したがって、コンシューマーは、消費する前に、複数のパーティションからのデータを commitTs で並べ替える必要があります。
@@ -316,7 +327,7 @@ column-selectors = [
 ```
 
 -   表`test.t1`の場合、列`a`と`b`のみが送信されます。
--   `test`データベース内のテーブル ( `t1`テーブルを除く) の場合、 `b`列を除くすべての列が送信されます。
+-   `test`データベース内のテーブル ( `t1`テーブルを除く) の場合、 `b`を除くすべての列が送信されます。
 -   表`test1.t1`の場合、 `column1`を除く`column`で始まるすべての列が送信されます。
 -   表`test3.t`の場合、 `column1`を除く、 `column`で始まる 7 文字の列が送信されます。
 -   どのルールにも一致しないテーブルの場合、すべての列が送信されます。
@@ -440,7 +451,7 @@ large-message-handle-option = "claim-check"
 }
 ```
 
-Kafka コンシューマーがメッセージを受信すると、まず`onlyHandleKey`フィールドをチェックします。このフィールドが存在し、 `true`である場合、メッセージには完全なデータのハンドル キーのみが含まれていることを意味します。この場合、完全なデータを取得するには、上流の TiDB をクエリして[履歴データを読み取るための`tidb_snapshot`](/read-historical-data.md)を使用する必要があります。
+Kafka コンシューマーがメッセージを受信すると、まず`onlyHandleKey`フィールドをチェックします。このフィールドが存在し、 `true`である場合、メッセージには完全なデータのハンドル キーのみが含まれていることを意味します。この場合、完全なデータを取得するには、上流の TiDB をクエリして[履歴データを読み取るための`tidb_snapshot`](/read-historical-data.md)使用する必要があります。
 
 > **警告：**
 >
@@ -462,7 +473,7 @@ large-message-handle-option = "claim-check"
 claim-check-storage-uri = "s3://claim-check-bucket"
 ```
 
-`large-message-handle-option` `"claim-check"`に設定する場合、 `claim-check-storage-uri`有効な外部storageアドレスに設定する必要があります。そうしないと、変更フィードの作成は失敗します。
+`large-message-handle-option` `"claim-check"`に設定する場合、 `claim-check-storage-uri`有効な外部storageアドレスに設定する必要があります。そうしないと、変更フィードの作成が失敗します。
 
 > **ヒント**
 >

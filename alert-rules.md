@@ -7,9 +7,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 # TiDBクラスタアラートルール {#tidb-cluster-alert-rules}
 
-このドキュメントでは、TiDB クラスター内のさまざまなコンポーネントのアラート ルールについて説明します。これには、TiDB、TiKV、PD、 TiFlash、TiDB Binlog、TiCDC、Node_exporter、Blackbox_exporter のアラート項目のルールの説明と解決策が含まれます。
+このドキュメントでは、TiDB、TiKV、PD、 TiFlash、TiDB Binlog、TiCDC、Node_exporter、Blackbox_exporter のアラート項目のルールの説明と解決策を含む、TiDB クラスター内のさまざまなコンポーネントのアラート ルールについて説明します。
 
-重大度に応じて、アラート ルールは、緊急レベル、重大レベル、警告レベルの 3 つのカテゴリ (高から低) に分類されます。この重大度の区分は、以下の各コンポーネントのすべてのアラート項目に適用されます。
+重大度に応じて、アラート ルールは、緊急レベル、重大レベル、警告レベルの 3 つのカテゴリ (高から低の順) に分類されます。この重大度の区分は、以下の各コンポーネントのすべてのアラート項目に適用されます。
 
 | 重大度レベル    | 説明                                                                                    |
 | :-------- | :------------------------------------------------------------------------------------ |
@@ -35,7 +35,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    これは、多くの場合、利用できないリージョンまたは TiKV タイムアウトによって発生します。TiKV 監視項目を確認して問題を特定する必要があります。
+    これは、利用できないリージョンまたは TiKV タイムアウトによって発生することがよくあります。TiKV 監視項目を確認して問題を特定する必要があります。
 
 #### <code>TiDB_tikvclient_region_err_total</code> {#code-tidb-tikvclient-region-err-total-code}
 
@@ -49,7 +49,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    リーダーのバランスが取れているかどうかを確認するには、ビュー[**TiKV-詳細**&gt;**クラスタ**ダッシュボード](/grafana-tikv-dashboard.md#cluster)参照してください。
+    リーダーのバランスが取れているかどうかを確認するには、ビュー[**TiKV-詳細**&gt;**クラスタ**ダッシュボード](/grafana-tikv-dashboard.md#cluster)ビュー。
 
 #### <code>TiDB_domain_load_schema_total</code> {#code-tidb-domain-load-schema-total-code}
 
@@ -169,7 +169,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    `admin show ddl`を実行して、時間のかかる`add index`操作が実行されているかどうかを確認します。
+    `admin show ddl`実行して、時間のかかる`add index`操作が実行されているかどうかを確認します。
 
 ## PDアラートルール {#pd-alert-rules}
 
@@ -223,7 +223,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 -   解決：
 
     -   ダウンしている、またはオフラインになっている TiKV マシンがあるかどうかを確認して、問題の原因を見つけます。
-    -   リージョンのヘルスパネルを監視し、 `miss-peer-region-count`継続的に減少しているかどうかを確認します。
+    -   リージョンのヘルスパネルを監視し、 `miss-peer-region-count`が継続的に減少しているかどうかを確認します。
 
 ### 警告レベルのアラート {#warning-level-alerts}
 
@@ -235,7 +235,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   説明：
 
-    PD は 20 秒以内に TiKV/ TiFlashハートビートを受信しません。通常、TiKV/ TiFlashハートビートは10 秒ごとに受信されます。
+    PD は 20 秒以内に TiKV/ TiFlashハートビートを受信しません。通常、TiKV/ TiFlashハートビートは 10 秒ごとに受信されます。
 
 -   解決：
 
@@ -321,7 +321,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 -   解決：
 
     -   ダウンしている TiKV、再起動したばかりの TiKV、またはビジー状態の TiKV があるかどうかを確認します。
-    -   リージョンのヘルスパネルを監視し、 `down_peer_region_count`継続的に減少しているかどうかを確認します。
+    -   リージョンのヘルスパネルを監視し、 `down_peer_region_count`が継続的に減少しているかどうかを確認します。
     -   TiKV サーバー間のネットワークを確認します。
 
 #### <code>PD_pending_peer_region_count</code> {#code-pd-pending-peer-region-count-code}
@@ -336,8 +336,8 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    -   リージョンのヘルスパネルを監視し、 `pending_peer_region_count`継続的に減少しているかどうかを確認します。
-    -   TiKV サーバー間のネットワーク、特に帯域幅が十分かどうかを確認します。
+    -   リージョンのヘルスパネルを監視し、 `pending_peer_region_count`が継続的に減少しているかどうかを確認します。
+    -   TiKV サーバー間のネットワーク、特に十分な帯域幅があるかどうかを確認します。
 
 #### <code>PD_leader_change</code> {#code-pd-leader-change-code}
 
@@ -392,7 +392,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   説明：
 
-    追加のレプリカに適したストアがありません。
+    追加のレプリカを保存する適切なストアがありません。
 
 -   解決：
 
@@ -407,14 +407,14 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   説明：
 
-    遅い TiKV ノードがあります。1 `raftstore.inspect-interval` 、遅い TiKV ノードの検出を制御します。詳細については、 [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)を参照してください。
+    遅い TiKV ノードがあります`raftstore.inspect-interval`は、遅い TiKV ノードの検出を制御します。詳細については、 [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)参照してください。
 
 -   解決：
 
-    -   [**TiKV詳細**&gt; **PD**ダッシュボード](/grafana-tikv-dashboard.md#pd)監視し、Store Slow Score メトリックを確認します。メトリック値が 80 を超えるノードを特定します。このノードは低速ノードとして検出されます。
-    -   [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)監視して、レイテンシーが増加するかどうかを確認します。レイテンシーが高い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
+    -   [**TiKV詳細**&gt; **PD**ダッシュボード](/grafana-tikv-dashboard.md#pd)を監視し、Store Slow Score メトリックを確認します。メトリック値が 80 を超えるノードを特定します。このノードは低速ノードとして検出されます。
+    -   [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を監視して、レイテンシーが増加するかどうかを確認します。レイテンシーが高い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
     -   レイテンシーのタイムアウト制限を増やすには、 [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)構成項目をより大きな値に設定します。
-    -   アラートされた TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
+    -   アラートされた TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)参照してください。
 
 ## TiKVアラートルール {#tikv-alert-rules}
 
@@ -434,7 +434,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    `rocksdb.defaultcf`と`rocksdb.writecf`の両方の`block-cache-size`値を調整します。
+    `rocksdb.defaultcf`と`rocksdb.writecf`両方の`block-cache-size`値を調整します。
 
 #### <code>TiKV_GC_can_not_work</code> {#code-tikv-gc-can-not-work-code}
 
@@ -450,7 +450,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     1.  `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"`実行して、GC リーダーに対応する`tidb-server`見つけます。
     2.  `tidb-server`のログをビュー、grep gc_worker tidb.log;
-    3.  この間に GC ワーカーがロックを解決していた (最後のログは「start resolve locks」) か、範囲を削除していた (最後のログは「start delete {number} ranges」) ことがわかった場合、GC プロセスは正常に実行されていることを意味します。それ以外の場合は、PingCAP またはコミュニティから[支持を得ます](/support.md)返されます。
+    3.  この間に GC ワーカーがロックを解決していた (最後のログは「start resolve locks」) か、範囲を削除していた (最後のログは「start delete {number} ranges」) ことがわかった場合、GC プロセスは正常に実行されていることを意味します。それ以外の場合は、PingCAP またはコミュニティから[サポートを受ける](/support.md)返されます。
 
 ### 重大レベルのアラート {#critical-level-alerts}
 
@@ -482,9 +482,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    1.  [**TiKV-詳細**&gt; **Raft Propose**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)見て、アラートされた TiKV ノードのRaft提案が他の TiKV ノードよりもはるかに高いかどうかを確認します。そうである場合、この TiKV に 1 つ以上のホット スポットがあることを意味します。ホット スポットのスケジューリングが適切に機能するかどうかを確認する必要があります。
-    2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)見て、レイテンシーが増加するかどうかを確認します。レイテンシーが高い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
-    3.  [**TiKV-詳細**&gt;**Raftプロセス**ダッシュボード](/grafana-tikv-dashboard.md#raft-process)見て、 `tick duration`が高いかどうかを確認します。高い場合は、 [`raftstore.raft-base-tick-interval`](/tikv-configuration-file.md#raft-base-tick-interval)を`"2s"`に設定する必要があります。
+    1.  [**TiKV-詳細**&gt; **Raft Propose**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)を見て、アラートされた TiKV ノードのRaft提案が他の TiKV ノードよりもはるかに高いかどうかを確認します。そうである場合、この TiKV に 1 つ以上のホット スポットがあることを意味します。ホット スポットのスケジューリングが適切に機能するかどうかを確認する必要があります。
+    2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を見て、レイテンシーが増加するかどうかを確認します。レイテンシーが高い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
+    3.  [**TiKV-詳細**&gt;**Raftプロセス**ダッシュボード](/grafana-tikv-dashboard.md#raft-process)を見て、 `tick duration`が高いかどうかを確認します。高い場合は、 [`raftstore.raft-base-tick-interval`](/tikv-configuration-file.md#raft-base-tick-interval) `"2s"`に設定する必要があります。
 
 #### <code>TiKV_write_stall</code> {#code-tikv-write-stall-code}
 
@@ -510,7 +510,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   説明：
 
-    この値が比較的大きい場合、 Follower がLeaderより大幅に遅れており、 Raftを正常に複製できないことを意味します。Followerが配置されている TiKV マシンがスタックしているかダウンしている可能性があります。
+    この値が比較的大きい場合、 Follower がLeaderより大幅に遅れており、 Raft を正常に複製できないことを意味します。Followerが配置されている TiKV マシンがスタックしているかダウンしている可能性があります。
 
 #### <code>TiKV_async_request_snapshot_duration_seconds</code> {#code-tikv-async-request-snapshot-duration-seconds-code}
 
@@ -538,9 +538,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    1.  [**TiKV-詳細**&gt; **Raft提案**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)監視し、アラートされた TiKV ノードの**サーバーあたりの 99% 提案待機期間**メトリックが他の TiKV ノードよりも大幅に高いかどうかを確認します。そうである場合、この TiKV ノードにホットスポットが存在することを示し、ホットスポットのスケジュールが適切に機能しているかどうかを確認する必要があります。
-    2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)監視して、レイテンシーが増加するかどうかを確認します。レイテンシーが高い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
-    3.  アラートされた TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
+    1.  [**TiKV-詳細**&gt; **Raft提案**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)を監視し、アラートされた TiKV ノードの**サーバーあたりの 99% 提案待機期間**メトリックが他の TiKV ノードよりも大幅に高いかどうかを確認します。そうである場合、この TiKV ノードにホットスポットが存在することを示し、ホットスポットのスケジュールが適切に機能しているかどうかを確認する必要があります。
+    2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を監視して、レイテンシーが増加するかどうかを確認します。レイテンシーが高い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
+    3.  アラートされた TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)参照してください。
 
 #### <code>TiKV_coprocessor_request_wait_seconds</code> {#code-tikv-coprocessor-request-wait-seconds-code}
 
@@ -554,19 +554,21 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    1.  TiDB ログからスロー クエリ ログをビュー、クエリでインデックスまたはフル テーブル スキャンが使用されているかどうか、または分析に必要かどうかを確認します。
+    1.  TiDB ログからスロー クエリ ログをビュー、クエリでインデックスまたは完全なテーブル スキャンが使用されているかどうか、または分析に必要かどうかを確認します。
     2.  ホットスポットがあるかどうかを確認します。
-    3.  コプロセッサーモニターをビュー、 `coprocessor table/index scan`の`total`と`process`一致するかどうかを確認します。大きく異なる場合は、無効なクエリが多すぎることを示します。7 `over seek bound`あるかどうかを確認できます。そうであれば、GC が時間内に処理できないバージョンが多すぎます。その場合は、並列 GC スレッドの数を増やす必要があります。
+    3.  コプロセッサーモニターをビュー、 `coprocessor table/index scan`の`total`と`process`一致するかどうかを確認します。大きく異なる場合は、無効なクエリが多すぎることを示しています。7 `over seek bound`あるかどうかを確認できます。そうであれば、GC が時間内に処理できないバージョンが多すぎます。その場合は、並列 GC スレッドの数を増やす必要があります。
 
 #### <code>TiKV_raftstore_thread_cpu_seconds_total</code> {#code-tikv-raftstore-thread-cpu-seconds-total-code}
 
 -   アラートルール:
 
-    `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance, name) > 1.6`
+    `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance) > 1.6`
 
 -   説明：
 
-    Raftstoreスレッドの圧力が高すぎます。
+    このルールは、Raftstoreによる CPU 使用率を監視します。値が高い場合、 Raftstoreスレッドへの負荷が大きいことを示します。
+
+    アラートしきい値は[`raftstore.store-pool-size`](/tikv-configuration-file.md#store-pool-size)値の 80% です。3 `raftstore.store-pool-size`デフォルトで 2 なので、アラートしきい値は 1.6 になります。
 
 -   解決：
 
@@ -580,7 +582,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   説明：
 
-    Raftログの追加にかかる時間コストを示します。この値が高い場合、通常は I/O が忙しすぎることを意味します。
+    Raftログの追加にかかる時間コストを示します。この値が高い場合、通常は I/O がビジー状態であることを意味します。
 
 #### <code>TiKV_raft_apply_log_duration_secs</code> {#code-tikv-raft-apply-log-duration-secs-code}
 
@@ -590,7 +592,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   説明：
 
-    Raftログの適用にかかる時間コストを示します。この値が高い場合、通常は I/O が忙しすぎることを意味します。
+    Raftログの適用にかかる時間コストを示します。この値が高い場合、通常は I/O がビジー状態であることを意味します。
 
 #### <code>TiKV_scheduler_latch_wait_duration_seconds</code> {#code-tikv-scheduler-latch-wait-duration-seconds-code}
 
@@ -605,7 +607,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 -   解決：
 
     1.  Scheduler-All モニターでスケジューラ コマンドの実行時間をビュー、どのコマンドが最も時間がかかっているかを確認します。
-    2.  Scheduler-All モニターでスケジューラ スキャンの詳細をビュー、 `total`と`process`が一致するかどうかを確認します。大きく異なる場合は、無効なスキャンが多数あります。 `over seek bound`があるかどうかも確認できます。多すぎる場合は、GC が時間どおりに動作していないことを示します。
+    2.  Scheduler-All モニターでスケジューラ スキャンの詳細をビュー、 `total`と`process`一致するかどうかを確認します。大きく異なる場合は、無効なスキャンが多数あります。 `over seek bound`があるかどうかも確認できます。多すぎる場合は、GC が時間どおりに動作していないことを示します。
     3.  ストレージ モニターでstorageの非同期スナップショット/書き込み期間をビュー、 Raft操作が時間内に実行されているかどうかを確認します。
 
 #### <code>TiKV_thread_apply_worker_cpu_seconds</code> {#code-tikv-thread-apply-worker-cpu-seconds-code}
@@ -616,7 +618,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   説明：
 
-    適用Raftログ スレッドに大きな負荷がかかっており、制限に近づいているか、制限を超えています。これは多くの場合、書き込みのバーストによって発生します。
+    適用Raftログ スレッドに大きな負荷がかかっており、制限に近づいているか、制限を超えています。これは、書き込みのバーストによって発生することがよくあります。
 
 ### 警告レベルのアラート {#warning-level-alerts}
 
@@ -847,7 +849,7 @@ TiCDCアラートルールの詳細な説明については、 [TiCDCアラー�
 -   解決：
 
     -   Grafana Node Exporter ダッシュボードでホストのメモリ パネルをビュー、使用済みメモリが高すぎるかどうか、使用可能なメモリが低すぎるかどうかを確認します。
-    -   マシンにログインし、コマンド`free -m`を実行してメモリ使用量を表示します。コマンド`top`を実行すると、メモリ使用量が過度に高い異常なプロセスがあるかどうかを確認できます。
+    -   マシンにログインし、コマンド`free -m`を実行してメモリ使用量を表示します。コマンド`top`実行すると、メモリ使用量が過度に高い異常なプロセスがあるかどうかを確認できます。
 
 ### 警告レベルのアラート {#warning-level-alerts}
 
@@ -894,7 +896,7 @@ TiCDCアラートルールの詳細な説明については、 [TiCDCアラー�
 -   解決：
 
     -   マシンにログインし、 `ss -s`実行して、現在のシステムで「estab」ステータスにある TCP リンクの数を確認します。
-    -   `netstat`実行して異常なリンクがないか確認します。
+    -   `netstat`実行して、異常なリンクがないか確認します。
 
 #### <code>NODE_disk_read_latency_more_than_32ms</code> {#code-node-disk-read-latency-more-than-32ms-code}
 
@@ -904,7 +906,7 @@ TiCDCアラートルールの詳細な説明については、 [TiCDCアラー�
 
 -   説明：
 
-    ディスクの読み取りレイテンシーが32 ミリ秒を超えています。
+    ディスクの読み取りレイテンシーが 32 ミリ秒を超えています。
 
 -   解決：
 
@@ -920,7 +922,7 @@ TiCDCアラートルールの詳細な説明については、 [TiCDCアラー�
 
 -   説明：
 
-    ディスクの書き込みレイテンシーが16 ミリ秒を超えています。
+    ディスクの書き込みレイテンシーが 16 ミリ秒を超えています。
 
 -   解決：
 
@@ -1136,7 +1138,7 @@ TiCDCアラートルールの詳細な説明については、 [TiCDCアラー�
 
 -   説明：
 
-    ping のレイテンシーが 1 秒を超えています。
+    ping のレイテンシーが1 秒を超えています。
 
 -   解決：
 

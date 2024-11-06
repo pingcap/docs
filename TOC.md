@@ -92,7 +92,7 @@
         -   [SQL性能チューニング](/develop/dev-guide-optimize-sql.md)
         -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
         -   [インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)
-        -   その他の最適化手法
+        -   その他の最適化方法
             -   [暗黙的な型変換を避ける](/develop/dev-guide-implicit-type-conversion.md)
             -   [ユニークなシリアル番号の生成](/develop/dev-guide-unique-serial-number-generation.md)
     -   トラブルシューティング
@@ -329,7 +329,7 @@
         -   [PDスケジュール](/best-practices/pd-scheduling-best-practices.md)
         -   [大規模リージョンによる TiKV性能チューニング](/best-practices/massive-regions-best-practices.md)
         -   [3ノードのハイブリッド展開](/best-practices/three-nodes-hybrid-deployment.md)
-        -   [3 つのデータ センター展開でのローカル読み取り](/best-practices/three-dc-local-read.md)
+        -   [3 つのデータセンター展開におけるローカル読み取り](/best-practices/three-dc-local-read.md)
         -   [UUIDを使用する](/best-practices/uuid.md)
         -   [読み取り専用ストレージノード](/best-practices/readonly-nodes.md)
     -   [配置ルールを使用する](/configure-placement-rules.md)
@@ -485,7 +485,7 @@
             -   データソースの管理
                 -   [移行するMySQLインスタンスを切り替える](/dm/usage-scenario-master-slave-switch.md)
             -   タスクの管理
-                -   [失敗したDDLステートメントの処理](/dm/handle-failed-ddl-statements.md)
+                -   [失敗したDDL文の処理](/dm/handle-failed-ddl-statements.md)
                 -   [移行するテーブルのスキーマを管理する](/dm/dm-manage-schema.md)
             -   [クラスターのデータソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)
             -   [アラートを処理する](/dm/dm-handle-alerts.md)
@@ -656,6 +656,7 @@
         -   [TiFlash後期実体化](/tiflash/tiflash-late-materialization.md)
         -   [ディスクへのスピル](/tiflash/tiflash-spill-disk.md)
         -   [データ検証](/tiflash/tiflash-data-validation.md)
+        -   [MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
         -   [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
     -   TiDB 分散実行フレームワーク (DXF)
