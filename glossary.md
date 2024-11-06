@@ -30,7 +30,7 @@ Batch Create Table is a feature introduced in TiDB v6.0.0. This feature is enabl
 
 Baseline Capturing captures queries that meet capturing conditions and create bindings for them. It is used for [preventing regression of execution plans during an upgrade](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade).
 
-### BR
+### Backup and Restore (BR)
 
 BR is the Backup and Restore tool for TiDB. For more information, see [BR Overview](/br/backup-and-restore-overview.md).
 
@@ -44,7 +44,7 @@ A [Region](#regionpeerraft-group) is logically divided into several small ranges
 
 With the cached table feature, TiDB loads the data of an entire table into the memory of the TiDB server, and TiDB directly gets the table data from the memory without accessing TiKV, which improves the read performance.
 
-### CF
+### Column Family (CF)
 
 In RocksDB and TiKV, a Column Family (CF) represents a logical grouping of key-value pairs within a database.
 
@@ -56,35 +56,35 @@ Coalesce Partition is a way of decreasing the number of partitions in a Hash or 
 
 Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For details, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
 
-### CTE
+### Common Table Expression (CTE)
 
 A Common Table Expression (CTE) enables you to define a temporary result set that can be referred multiple times within a SQL statement using the [`WITH`](/sql-statements/sql-statement-with.md) clause. For more information, see [Common Table Expression](/develop/dev-guide-use-common-table-expression.md).
 
 ## D
 
-### DDL
+### Data Definition Language (DDL)
 
-Data Definition Language (DDL) statements enables you to create, modify, and drop tables, indexes, columns, and other database objects.
+Data Definition Language (DDL) is the part of the SQL standard that deals with creating, modifying and deleting tables and other objects. For details, see [DDL Introduction](/ddl-introduction.md).
 
-### DM
+### Data Migration (DM)
 
-Data Migration (DM) is a tool for migrating data from MySQL-compatible databases into TiDB. It reads data from an instance of MySQL-compatible database and applies it to a TiDB target instance. For more information, see [DM Overview](/dm/dm-overview.md).
+Data Migration (DM) is a tool for  migrating data from MySQL-compatible databases into TiDB. DM reads data from a MySQL-compatible database instance and applies it to a TiDB target instance. For more information, see [DM Overview](/dm/dm-overview.md).
 
-### DML
+### Data Modification Language (DML)
 
-Data Modification Language (DML) statements enables you to with insert, update, and delete rows in tables.
+Data Modification Language (DML) is the part of the SQL standard that describes statements which enable you to insert, update, and delete rows in tables.
 
-### DMR
+### Development Milestone Release (DMR)
 
-Development Milestone Release (DMR) is a TiDB version that introduces the latest features but does not offer long-term support. For more information, see [TiDB Versioning](/releases/versioning.md).
+Development Milestone Releases (DMR) are TiDB releases that introduce the latest features but do not offer long-term support. For more information, see [TiDB Versioning](/releases/versioning.md).
 
-### DR
+### Disaster Recovery (DR)
 
-Disaster Recovery (DR) includes solutions that can be used to recover data from a disaster in the future. These solutions typically involve backups and standby clusters. For more information, see [Overview of TiDB Disaster Recovery Solutions](dr-solution-introduction).
+Disaster Recovery (DR) includes solutions that can be used to recover data and services from a disaster in the future. TiDB offers a variety of solutions for delivering Disaster Recovery including backups and replication to standby clusters. For more information, see [Overview of TiDB Disaster Recovery Solutions](/dr-solution-introduction.md).
 
-### DXF
+### Distributed eXecution Framework (DXF)
 
-Distributed eXecution Framework (DXF) is the framework used by TiDB for accelerating index creation and data import by distributing tasks over all available resources. For more information, see [DXF Introduction](/tidb-distributed-execution-framework.md).
+Distributed eXecution Framework (DXF) is the framework used by TiDB to distribute tasks across the TiDB cluster. DXF is designed to efficiently use the cluster resources to execute tasks (like index creation or data import) while controlling the resource usage and impact on core business transactions. For more information, see [DXF Introduction](/tidb-distributed-execution-framework.md).
 
 ### Dynamic Pruning
 
@@ -98,21 +98,21 @@ Dynamic pruning mode is one of the modes that TiDB accesses partitioned tables. 
 
 ## G
 
-### GA
+### General Availability (GA)
 
-If a feature is General Available (GA), it indicates it is fully tested and can be used in production environments. Note that even if a feature is GA in a [DMR](#dmr) version, it is recommended to use the feature in production environments in a later [LTS](#lts) version.
+General Availability (GA) of a feature is when it is, fully tested and is Generally Available for use in production environments. TiDB features may be released as Generally Available in both [DMR](#development-milestone-release-dmr) and [LTS](#long-term-support-lts) releases. However, as TiDB does not provide patch releases based on DMR it is generally recommended to use the LTS product release for production use.
 
-### GC
+### Garbage Collection (GC)
 
 Garbage Collection (GC) is a process that clears obsolete data to free up resources. For information on TiKV GC process, see [Garbage Collection overview](/garbage-collection-overview.md).
 
-### GTID
+### Global Transaction Identifiers (GTIDs)
 
 Global Transaction Identifiers (GTIDs) are unique transaction IDs used in MySQL binary logs to track which transactions have been replicated. [Data Migration (DM)](/dm/dm-overview.md) uses these IDs to ensure consistent replication.
 
 ## H
 
-### HTAP
+### Hybrid Transactional and Analytical Processing (HTAP)
 
 Hybrid Transactional and Analytical Processing (HTAP) is a database feature that enables both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads within the same database. For TiDB, the HTAP feature is provided by using TiKV for row storage and TiFlash for columnar storage. For more information, see [the definition of HTAP on the Gartner website](https://www.gartner.com/en/information-technology/glossary/htap-enabling-memory-computing-technologies).
 
@@ -132,25 +132,25 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 
 ## K
 
-### KMS
+### Key Management Service (KMS)
 
 Key Management Service (KMS) enables the storage and retrieval of secret keys in a secure way. Examples include AWS KMS, Google Cloud KMS, and HashiCorp Vault. Various TiDB components can use KMS to manage keys for storage encryption and related services.
 
-### KV
+### Key-Value (KV)
 
 Key-Value (KV) is a way of storing information by associating values with unique keys, allowing quick data retrieval. TiDB uses TiKV to map tables and indexes into key-value pairs, enabling efficient data storage and access across the database.
 
 ## L
 
-### LDAP
+### Lightweight Directory Access Protocol (LDAP)
 
 Lightweight Directory Access Protocol (LDAP) is a standardized way of accessing a directory with information. It is commonly used for account and user data management. TiDB supports LDAP via [LDAP authentication plugins](/security-compatibility-with-mysql.md#authentication-plugin-status).
 
-### LTS
+### Long Term Support (LTS)
 
 Long Term Support (LTS) refers to software versions that are extensively tested and maintained for extended periods. For more information, see [TiDB Versioning](/releases/versioning.md).
 
-### leader/follower/learner
+### Leader/Follower/Learner
 
 Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#regionpeerraft-group). The leader services all client requests and replicates data to the followers. If the group leader fails, one of the followers will be elected as the new leader. Learners are non-voting followers that only serves in the process of replica addition.
 
@@ -166,7 +166,7 @@ Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architec
 
 ## O
 
-### OLAP
+### Online Analytical Processing (OLAP)
 
 Online Analytical Processing (OLAP) refers to database workloads focused on analytical tasks, such as data reporting and complex queries. OLAP is characterized by read-heavy queries that process large volumes of data across many rows.
 
@@ -174,11 +174,11 @@ Online Analytical Processing (OLAP) refers to database workloads focused on anal
 
 The "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
 
-### OLTP
+### Online Transaction Processing (OLTP)
 
 Online Transaction Processing (OLTP) refers to database workloads focused on transactional tasks, such as selecting, inserting, updating, and deleting small sets of records.
 
-## OOM
+## Out of Memory (OOM)
 
 Out of Memory (OOM) is a situation where a system fails due to insufficient memory. For more information, see [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md).
 
@@ -207,7 +207,7 @@ Currently, available steps generated by PD include:
 
 [Partitioning](/partitioned-table.md) refers to physically dividing a table into smaller table partitions, which can be done by partition methods such as RANGE, LIST, HASH, and KEY partitioning.
 
-### PD
+### Placement Driver (PD)
 
 Placement Driver (PD) is a core component in the [TiDB Architecture](/tidb-architecture.md#placement-driver-pd-server) responsible for storing metadata, assigning [Timestamp Oracle (TSO)](/tso.md) for transaction timestamps, orchestrating data placement on TiKV, and running [TiDB Dashboard](/dashboard/dashboard-overview.md). For more information, see [TiDB Scheduling](/tidb-scheduling.md).
 
@@ -215,7 +215,7 @@ Placement Driver (PD) is a core component in the [TiDB Architecture](/tidb-archi
 
 "Pending" and "down" are two special states of a peer. Pending indicates that the Raft log of followers or learners is vastly different from that of leader. Followers in pending cannot be elected as leader. "Down" refers to a state that a peer ceases to respond to leader for a long time, which usually means the corresponding node is down or isolated from the network.
 
-### PITR
+### Point in Time Recovery (PITR)
 
 Point in Time Recovery (PITR) enables you to restore data to a specific point in time (for example, just before an unintended `DELETE` statement). For more information, see [TiDB Log Backup and PITR Architecture](/br/br-log-architecture.md).
 
@@ -261,11 +261,11 @@ The mechanism of Region split is to use one initial Region to cover the entire k
 
 Restore is the reverse of the backup operation. It is the process of bringing back the system to an earlier state by retrieving data from a prepared backup.
 
-### RPC
+### Remote Procedure Call (RPC)
 
 Remote Procedure Call (RPC) is a communication way between software components. In a TiDB cluster, the gRPC standard is used for communication between different components such as TiDB, TiKV, and TiFlash.
 
-### RU
+### Request Unit (RU)
 
 Request Unit (RU) is a unified abstraction unit for the resource usage in TiDB. It is used with [Resource Control](/tidb-resource-control.md) to manage resource usage.
 
@@ -280,9 +280,9 @@ Schedulers are components in PD that generate scheduling tasks. Each scheduler i
 - `hot-region-scheduler`: Balances the distribution of hot Regions
 - `evict-leader-{store-id}`: Evicts all leaders of a node (often used for rolling upgrades)
 
-### SST
+### Static Sorted Table / Sorted String Table (SST)
 
-Static Sorted Table, Sorted String Table, or Sorted Sequence Table (SST) is a file storage format used in RocksDB.
+Static Sorted Table or Sorted String Table is a file storage format used in RocksDB (a component used by the [TiKV Storage Engine](/tikv-overview.md)).
 
 ### Store
 
@@ -294,20 +294,20 @@ A store refers to the storage node in the TiKV cluster (an instance of `tikv-ser
 
 Top SQL helps locate SQL queries that contribute to a high load of a TiDB or TiKV node in a specified time range. For details, see [Top SQL user document](/dashboard/top-sql.md).
 
-### TPS
+### Transactions Per Second (TPS)
 
 Transactions Per Second (TPS) is the number of transactions a database processes per second, serving as a key metric for measuring database performance and throughput.
 
-### TSO
+### Timestamp Oracle (TSO)
 
 Because TiKV is a distributed storage system, it requires a global timing service, Timestamp Oracle (TSO), to assign a monotonically increasing timestamp. In TiKV, such a feature is provided by PD, and in Google [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), this feature is provided by multiple atomic clocks and GPS. For details, see [TSO](/tso.md).
 
 ## U
 
-### URI
+### Uniform Resource Identifier (URI)
 
 Uniform Resource Identifier (URI) is a standardized format for identifying a resource. For more information, see [Uniform Resource Identifier](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) on Wikipedia.
 
-### UUID
+### Universally Unique Identifier (UUID)
 
 Universally Unique Identifier (UUID) is a 128-bit (16-byte) generated ID used to uniquely identify records in a database. For more information, see [UUID](/best-practices/uuid.md).
