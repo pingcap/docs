@@ -21,13 +21,12 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 - You cannot pause your cluster when a data import task is going on. You can either wait for the import task to be completed or cancel the import task.
 - You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
 - You cannot pause your cluster if it has any [changefeeds](/tidb-cloud/changefeed-overview.md). You need to [delete the existing changefeeds](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) before pausing the cluster.
+- TiDB Cloud supports cluster pause for up to 7 days. Exceptionally, some organizations are currently using the compatibile pause feature, which allows for a longer pause, and we will gradually transition them to the standard pause with 7 days limit.
 
 ## Pause a TiDB cluster
 
 <SimpleTab>
 <div label="Standard Pause behavior">
-
-TiDB Cloud supports cluster pause for up to 7 days. If you don't manually resume the cluster within 7 days, TiDB Cloud will automatically resume it for you. 
 
 When a cluster is paused, note the following:
 
@@ -40,6 +39,7 @@ When a cluster is paused, note the following:
     - Data Backup Cost
 
 - TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
+- If you don't manually resume the cluster within 7 days, TiDB Cloud will automatically resume it for you. 
 - You can view the auto-resume schedule from cluster overview page. TiDB Cloud will send a notification email to project owner and organization owner 24 hours before the auto-resume. 
 
 To pause a cluster, take the following steps:
