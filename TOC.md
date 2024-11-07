@@ -140,7 +140,7 @@
     - [TiSpark Topology](/tispark-deployment-topology.md)
     - [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     - [Hybrid Topology](/hybrid-deployment-topology.md)
-  - [Deploy a TiDB Cluster Locally](/production-deployment-using-tiup.md)
+  - [Deploy a TiDB Cluster Locally Using TiUP](/production-deployment-using-tiup.md)
   - [Deploy a TiDB Cluster on Kubernetes](/tidb-in-kubernetes.md)
   - [Verify Cluster Status](/post-installation-check.md)
   - Test Cluster Performance
