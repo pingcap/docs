@@ -1,10 +1,10 @@
 ---
-title: Deploy a TiDB Cluster Using TiUP
-summary: Learn how to easily deploy a TiDB cluster using TiUP.
+title: Deploy a Local TiDB Cluster Using TiUP
+summary: Learn how to easily deploy a local TiDB cluster using TiUP.
 aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/','/tidb/dev/deploy-tidb-from-dbdeployer/','/docs/dev/deploy-tidb-from-dbdeployer/','/docs/dev/how-to/get-started/deploy-tidb-from-dbdeployer/','/tidb/dev/deploy-tidb-from-homebrew/','/docs/dev/deploy-tidb-from-homebrew/','/docs/dev/how-to/get-started/deploy-tidb-from-homebrew/','/tidb/dev/production-offline-deployment-using-tiup','/docs/dev/production-offline-deployment-using-tiup/','/tidb/dev/deploy-tidb-from-binary','/tidb/dev/production-deployment-from-binary-tarball','/tidb/dev/test-deployment-from-binary-tarball','/tidb/dev/deploy-test-cluster-using-docker-compose','/tidb/dev/test-deployment-using-docker']
 ---
 
-# Deploy a TiDB Cluster Using TiUP
+# Deploy a Local TiDB Cluster Using TiUP
 
 [TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/components/cluster), a cluster management component written in Golang. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster, and manage TiDB cluster parameters.
 

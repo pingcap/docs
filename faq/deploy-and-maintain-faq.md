@@ -35,7 +35,7 @@ For details, see [Software and Hardware Recommendations](/hardware-and-software-
 
 ## Installation and deployment
 
-For the production environment, it is recommended to use [TiUP](/tiup/tiup-overview.md) to deploy your TiDB cluster. See [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+For the production environment, it is recommended to use [TiUP](/tiup/tiup-overview.md) to deploy your TiDB cluster. See [Deploy a Local TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
 ### Why the modified `toml` configuration for TiKV/PD does not take effect?
 
