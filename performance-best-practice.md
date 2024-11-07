@@ -195,19 +195,20 @@ While the general configurations provided earlier offer a good starting point fo
 
 Here are the common edge cases and solutions:
 
-1. High TSO wait for High-frequency small queries
+1. High TSO wait for high-frequency small queries
 2. Choose the proper mak chunk size for different workloads
 3. Tune coprocessor cache for read-heavy workloads
 4. Choose proper tidb_txn_mode and tidb_dml_type for different workloads
-5. Optimize Group By and Distinct Operations with TiKV Pushdown
-6. Mitigate Too many MVCC versions by in-memory engine
+5. Optimize group by and distinct operations with TiKV pushdown
+6. Mitigate too many MVCC versions by in-memory engine
 7. Disable auto analyze job during batch processing
+8. Adjust thread pool size for large TiKV instance types
 
 Each of these cases may require adjustments to different parameters or usage of specific features in TiDB. The following sections provide more details on how to address these scenarios.
 
 Remember that these optimizations should be applied cautiously and with thorough testing, as their effectiveness can vary depending on your specific use case and data patterns.
 
-## High TSO wait for High-frequency small queries
+## High TSO wait for high-frequency small queries
 ### How to Troubleshooting
 When TSO (Timestamp Oracle) waiting time takes up a large percentage of total SQL execution time, it indicates a potential performance bottleneck. This can happen with high-frequency small queries that require frequent TSO requests. It can be Identified by [SQL Execute Time Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-methods#tune-by-color) in the grafana dashboard [performance overview](https://docs.pingcap.com/tidb/stable/grafana-performance-overview-dashboard).
 
@@ -284,7 +285,7 @@ Here is the guideline how to choose txn mode and dml type
 | Optimistic mode | Set session tidb_txn_mode="optimistic"; | - begin .. insert..insert..insert...end; - No or a few write conflict - Use optimistic mode | 
 | pessimistic mode (by default) | Set session tidb_txn_mode="pessimistic"; | Use pessimistic and  standard for other cases | 
 
-## Optimize Group By and Distinct Operations with TiKV Pushdown
+## Optimize group by and distinct operations with TiKV pushdown
 
 Group by and distinct pushdown can significantly improve query performance by offloading aggregation operations to TiKV, reducing data transfer and processing load on TiDB. However, the effectiveness of this optimization depends on the data characteristics:
 
@@ -305,7 +306,7 @@ set global tidb_opt_distinct_agg_push_down=on;
 
 
 
-## Too many MVCC versions
+## Mitigate too many MVCC versions by in-memory engine
 If too many MVCC versions are observed during the PoC, either due to hot read/write spots or issues with garbage collection and compaction, you can mitigate this problem by enabling the in-memory engine. This feature is available as a hotfix. To enable the in-memory engine in TiKV by adding the following configuration to your TiKV configuration file. 
 
 > **Note:**
@@ -342,11 +343,24 @@ Other common symptoms associated with too many MVCC versions include:
 
 To mitigate these issues, consider enabling the in-memory engine as described in the previous section, and monitor your system closely after making any changes.
 
-## Disable Auto Analyze During Batch Processing
+## Disable auto analyze job during batch processing
 
 During batch processing operations, it's recommended to disable automatic statistics collection and manually gather statistics when needed. This prevents frequent analyze jobs from consuming excessive resources during critical batch operations.
 
 To disable auto analyze:
 ```SQL
 set global tidb_enable_auto_analyze = off;
+```
+
+## Adjust thread pool size for large TiKV instance types
+The default TiKV pool size is usually sufficient for 8c and 16c instance types. However, for larger instance types like 32c, it is recommended to increase the thread pool size to fully utilize the CPU resources. This is especially important for the grpc and raftstore pool size. Here are the settings proposed for 32c instance types.
+
+```toml
+[server]
+grpc-concurrency = 10
+
+[raftstore]
+apply-pool-size=4
+store-pool-size=4
+store-io-pool-size=2
 ```
