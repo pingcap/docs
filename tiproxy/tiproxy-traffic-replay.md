@@ -43,6 +43,8 @@ Traffic replay is not suitable for the following scenarios:
     > - TiProxy captures traffic on all connections, including existing and newly created ones.
     > - In TiProxy primary-secondary mode, connect to the primary TiProxy instance.
     > - If TiProxy is configured with a virtual IP, it is recommended to connect to the virtual IP address.
+    > - The higher the CPU usage of TiProxy, the greater the impact of traffic capture on QPS. To reduce the impact on the production cluster, it is recommended to reserve at least 30% of CPU capacity, which results in an approximately 3% decrease in average QPS. For detailed performance data, see [Traffic capture test](/tiproxy/tiproxy-performance-test.md#traffic-capture-test).
+    > - TiProxy does not automatically delete previous capture files when capturing traffic again. You need to manually delete them.
 
     For example, the following command connects to the TiProxy instance at `10.0.1.10:3080`, captures traffic for one hour, and saves it to the `/tmp/traffic` directory on the TiProxy instance:
 
@@ -76,7 +78,7 @@ Traffic replay is not suitable for the following scenarios:
 
 5. View the replay report.
 
-    After replay completion, the report is stored in the `tiproxy_traffic_report` database on the test cluster. This database contains two tables: `fail` and `other_errors`.
+    After replay completion, the report is stored in the `tiproxy_traffic_replay` database on the test cluster. This database contains two tables: `fail` and `other_errors`.
 
     The `fail` table stores failed SQL statements, with the following fields:
 
@@ -89,6 +91,24 @@ Traffic replay is not suitable for the following scenarios:
     - `sample_replay_time`: the time when the SQL statement failed during replay. You can use this to view error information in the TiDB log file.
     - `count`: the number of times the SQL statement failed.
 
+    The following is an example output of the `fail` table:
+
+    ```sql
+    SELECT * FROM tiproxy_traffic_replay.fail LIMIT 1\G
+    ```
+
+    ```
+    *************************** 1. row ***************************
+               cmd_type: StmtExecute
+                 digest: 89c5c505772b8b7e8d5d1eb49f4d47ed914daa2663ed24a85f762daa3cdff43c
+            sample_stmt: INSERT INTO new_order (no_o_id, no_d_id, no_w_id) VALUES (?, ?, ?) params=[3077 6 1]
+         sample_err_msg: ERROR 1062 (23000): Duplicate entry '1-6-3077' for key 'new_order.PRIMARY'
+         sample_conn_id: 1356
+    sample_capture_time: 2024-10-17 12:59:15
+     sample_replay_time: 2024-10-17 13:05:05
+                  count: 4
+    ```
+
     The `other_errors` table stores unexpected errors, such as network errors or database connection errors, with the following fields:
 
     - `err_type`: the type of error, presented as a brief error message. For example, `i/o timeout`.
@@ -96,9 +116,25 @@ Traffic replay is not suitable for the following scenarios:
     - `sample_replay_time`: the time when the error occurred during replay. You can use this to view error information in the TiDB log file.
     - `count`: the number of occurrences for this error.
 
+    The following is an example output of the `other_errors` table:
+
+    ```sql
+    SELECT * FROM tiproxy_traffic_replay.other_errors LIMIT 1\G
+    ```
+
+    ```
+    *************************** 1. row ***************************
+              err_type: failed to read the connection: EOF
+        sample_err_msg: this is an error from the backend connection: failed to read the connection: EOF
+    sample_replay_time: 2024-10-17 12:57:39
+                 count: 1
+    ```
+
     > **Note:**
     >
-    > The table schema of `tiproxy_traffic_report` might change in future versions. It is not recommended to directly read data from `tiproxy_traffic_report` in your application or tool development.
+    > - The table schema of `tiproxy_traffic_replay` might change in future versions. It is not recommended to directly read data from `tiproxy_traffic_replay` in your application or tool development.
+    > - Replay does not guarantee that the transaction execution order between connections exactly matches the capture sequence. This might lead to incorrect error reports.
+    > - TiProxy does not automatically delete the previous replay report when replaying traffic. You need to manually delete it.
 
 ## Test throughput
 
@@ -151,3 +187,7 @@ For more information, see [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command
 - TiProxy traffic replay does not support filtering SQL types and DML and DDL statements are replayed. Therefore, you need to restore the cluster data to its pre-replay state before replaying again.
 - TiProxy traffic replay does not support testing [Resource Control](/tidb-resource-control.md) and [privilege management](/privilege-management.md) because TiProxy uses the same username to replay traffic.
 - TiProxy does not support replaying [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statements.
+
+## More resources
+
+For more information about the traffic replay of TiProxy, see the [design document](https://github.com/pingcap/tiproxy/blob/main/docs/design/2024-08-27-traffic-replay.md).
