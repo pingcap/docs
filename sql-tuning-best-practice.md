@@ -1,4 +1,4 @@
----
+****---
 title: SQL Tuning Best Practice
 summary: Learn how to do SQL tuning in TiDB
 
@@ -493,7 +493,117 @@ In TiDB, leveraging indexes effectively is crucial for performance tuning, as it
 - Avoiding sorting
 - Skipping row lookups when possible
 
-### Improving Query Speed with a Custom Index
+In this section, we will present three real-world cases to demonstrate common indexing strategies in TiDB.
+
+### SQL Tuning with a Covered Index
+
+A covered index is designed to include all columns referenced in the filter and select clauses. The query below requires an index lookup of 2597411 rows, taking 46.4 seconds to execute.
+TiDB needs to dispatch 67 cop tasks for the index range scan on logs_idx, identified as `IndexRangeScan_11`, and 301 cop tasks for table access via `TableRowIDScan_12`.
+By utilizing a covered index, the index lookup can be avoided, leading to improved performance.
+
+```SQL
+SELECT
+  SUM(`logs`.`amount`)
+FROM
+  `logs`
+WHERE
+  `logs`.`user_id` = 1111
+  AND `logs`.`snapshot_id` IS NULL
+  AND `logs`.`status` IN ('complete', 'failure')
+  AND `logs`.`source_type` != 'online'
+  AND (
+    `logs`.`source_type` IN ('user', 'payment')
+    OR `logs`.`source_type` IN (
+      'bank_account',
+    )
+    AND `logs`.`target_type` IN ('bank_account')
+  );
+```
+
+```SQL
++-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
+| id                            | estRows    | actRows | task      | access object                                                            | execution info                                             | 
++-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
+| HashAgg_18                   | 1.00       | 2571625.22 | 1       | root      |                                                              | time:46.4s, loops:2, partial_worker:{wall_time:46.37,   ...|
+| └─IndexLookUp_19             | 1.00       | 2570096.68 | 301     | root      |                                                              | time:46.4s, loops:2, index_task: {total_time: 45.8s,    ...|
+|   ├─IndexRangeScan_11(Build) | 1309.50    | 317033.98  | 2597411 | cop[tikv] | table:logs, index:logs_idx(snapshot_id, user_id, status)     | time:228ms, loops:2547, cop_task: {num: 67, max: 2.17s, ...|
+|   └─HashAgg_7(Probe)         | 1.00       | 588434.48  | 301     | cop[tikv] |                                                              | time:3m46.7s, loops:260, cop_task: {num: 301,           ...|
+|     └─Selection_13           | 1271.37    | 561549.27  | 2566562 | cop[tikv] |                                                              | tikv_task:{proc max:10s, min:0s, avg: 915.3ms,          ...|
+|       └─TableRowIDScan_12    | 1309.50    | 430861.31  | 2597411 | cop[tikv] | table:logs                                                   | tikv_task:{proc max:10s, min:0s, avg: 908.7ms,          ...|
++-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
+```
+
+After creating the covered index below, which includes the additional columns source_type, target_type, and amount, the query execution time improved to 90ms, and TiDB only needed to send a single cop task to TiKV for data scanning.
+
+```SQL
+Create index logs_covered on logs(snapshot_id, user_id, status, source_type, target_type, amount); 
+```
+
+```SQL
++-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
+| id                            | estRows    | actRows | task      | access object                                                                                                                   | execution info                              |
++-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
+| HashAgg_13                    | 1.00       | 1       | root      |                                                                                                                                 | time:90ms, loops:2, RU:158.885311,       ...|
+| └─IndexReader_14              | 1.00       | 1       | root      |                                                                                                                                 | time:89.8ms, loops:2, cop_task: {num: 1, ...|
+|   └─HashAgg_6                 | 1.00       | 1       | cop[tikv] |                                                                                                                                 | tikv_task:{time:88ms, loops:52},         ...|
+|     └─Selection_12            | 5245632.33 | 52863   | cop[tikv] |                                                                                                                                 | tikv_task:{time:80ms, loops:52}          ...|
+|       └─IndexRangeScan_11     | 5245632.33 | 52863   | cop[tikv] | table:logs, index:logs_covered(snapshot_id, user_id, status, source_type, target_type, amount)                                  | tikv_task:{time:60ms, loops:52}          ...|
++-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
+```
+
+### SQL Tuning with a Composite Index for Efficient Filtering and Sorting
+When optimizing SQL queries, especially those that include an `ORDER BY` clause, it is beneficial to create a composite index that encompasses both the filtering and sorting columns. This approach allows the database engine to efficiently access the required data while maintaining the desired order.
+
+For instance, consider the following query that retrieves logs based on specific conditions. The execution plan shows a duration of 170ms. TiDB employs the `logs_index` to perform an `IndexRangeScan_20` with the filter `snapshot_id = 459840`. Subsequently, it retrieves all columns from the table, resulting in 5715 rows being streamed back to TiDB after the `IndexLookUp_23`, which then sorts the dataset and returns 1000 rows.
+Note that the `id` column is the primary key, which means it is implicitly included in the `logs_idx` index. However, for `IndexRangeScan_20`, the order is not guaranteed because, after the index prefix column `snapshot_id`, there are two additional columns: `user_id` and `status`. Therefore, the ordering of `id` cannot be assured.
+
+```SQL
+explain analyze SELECT  
+logs.*
+FROM
+  logs
+WHERE
+  logs.snapshot_id = 459840
+  AND logs.id > 998464
+ORDER BY
+  logs.id ASC
+LIMIT
+  1000
+```
+
+Original Plan
+```SQL
++------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
+| id                           | estRows | actRows | task      | access object                                            | execution info                                | operator info                              | 
++------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
+| id                           | estRows | actRows | task      | access object                                            | execution info                             ...| logs.id, offset:0, count:1000              | 
+| TopN_10                      | 19.98   | 1000    | root      |                                                          | time:170.6ms, loops:2                      ...|                                            |
+| └─IndexLookUp_23             | 19.98   | 5715    | root      |                                                          | time:166.6ms, loops:7                      ...|                                            | 
+|   ├─Selection_22(Build)      | 19.98   | 5715    | cop[tikv] |                                                          | time:18.6ms, loops:9, cop_task: {num: 3,   ...| gt(logs.id, 998464)                        | 
+|   │ └─IndexRangeScan_20      | 433.47  | 7715    | cop[tikv] | table:logs, index:logs_idx(snapshot_id, user_id, status) | tikv_task:{proc max:4ms, min:4ms, avg: 4ms ...| range:[459840,459840], keep order:false    |
+|   └─TableRowIDScan_21(Probe) | 19.98   | 5715    | cop[tikv] | table:logs                                               | time:301.6ms, loops:10, cop_task: {num: 3, ...| keep order:false                           | 
++------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
+```
+
+To optimize the query, we can create a new index on (snapshot_id, id) to ensure that for each snapshot_id value, the id is sorted in the index. By utilizing this new index, the query execution time is reduced to 96ms. Note that the keep order is true for `IndexRangeScan_33`, and the `TopN` is replaced with `Limit`. For the `IndexLookUp_35`, only 1000 rows are returned to TiDB, eliminating the need for additional sorting operations.
+
+```SQL
+create index logs_new on logs(snapshot_id, id);
+```
+
+New Plan
+```SQL
++----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
+| id                               | estRows | actRows | task      | access object                                | execution info                               | operator info                                      |
++----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
+| Limit_14                         | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:2, RU:92.300155           | offset:0, count:1000                               |
+| └─IndexLookUp_35                 | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:1, index_task:         ...|                                                    |
+|   ├─IndexRangeScan_33(Build)     | 17.59   | 5715    | cop[tikv] | table:logs, index:logs_new(snapshot_id, id)  | time:7.25ms, loops:8, cop_task: {num: 3,  ...| range:(459840 998464,459840 +inf], keep order:true |
+|   └─TableRowIDScan_34(Probe)     | 17.59   | 5715    | cop[tikv] | table:logs                                   | time:232.9ms, loops:9, cop_task: {num: 3, ...| keep order:false                                   |
++----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
+```
+
+### SQL Tuning with a Custom Index
 
 The original query took 11 minutes and 9 seconds to complete, which is an extremely long execution time for a query that only needs to return 101 rows. This poor performance can be attributed to several factors:
 
@@ -526,7 +636,7 @@ KEY `index_orders_on_label_id` (`label_id`),
 KEY `index_orders_on_created_at` (`created_at`)
 ```
 
-original plan
+Original plan
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 | id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
@@ -550,7 +660,7 @@ After creating the new index (new_idx on orders(user_id, mode, id, created_at, l
 
 This case demonstrates the profound impact that a well-designed index can have on query performance. By aligning the index structure with the query's predicates, sort order, and required columns, we achieved a performance improvement of over five orders of magnitude.
 
-plan with new index (user_id, mode, id, created_at, label_id) 
+Plan with new index (user_id, mode, id, created_at, label_id) 
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 | id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
