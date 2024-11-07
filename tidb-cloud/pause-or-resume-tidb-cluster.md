@@ -21,7 +21,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 - You cannot pause your cluster when a data import task is going on. You can either wait for the import task to be completed or cancel the import task.
 - You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
 - You cannot pause your cluster if it has any [changefeeds](/tidb-cloud/changefeed-overview.md). You need to [delete the existing changefeeds](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) before pausing the cluster.
-- TiDB Cloud supports cluster pause for up to 7 days. Exceptionally, some organizations are currently using the compatibile pause feature, which allows for a longer pause, and we will gradually transition them to the standard pause with 7 days limit.
+- TiDB Cloud supports cluster pause for up to 7 days. Exceptionally, some organizations are currently using the compatible pause feature, which allows for a longer pause, and we will gradually transition them to the standard pause with 7 days limit.
 
 ## Pause a TiDB cluster
 
@@ -101,9 +101,7 @@ To pause a cluster, take the following steps:
 You can also pause a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 </div>
-<SimpleTab>
-
-
+</SimpleTab>
 
 ## Resume a TiDB cluster
 
