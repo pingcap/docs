@@ -27,15 +27,14 @@ Let's show how to connect to a three AZ Kafka private link service in AWS by exa
     - Manage Load Balancer
     - Manage Endpoint Service
     - Connect to EC2 Nodes to configure Kafka nodes
-2. Make sure that you create a TiDB Cloud Dedicated cluster first. Align Kafka deployment info with TiDB Cluster.
+2. Make sure that you create a TiDB Cloud Dedicated cluster in AWS first. Align Kafka deployment info with TiDB Cluster.
    1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
    2. In the overview page, you can find the region of TiDB Cluster, make sure your Kafka cluster will be deployed to the same region.
    3. Click **Create Changefeed**
       1. Select **Kafka** as **Target Type**.
-      2. Select **Self-hosted Kafka** as **Kafka Provider**
-      3. Select **Private Link** as **Connectivity Method**
-   4. Take note the AWS account arn in **Reminders before proceeding** information, which your will use it to authorize TiDB Cloud to create endpoint for the Kafka private link service.
-   5. Select **Kafka Type**, confirm you will deploy Kafka cluster to **Single AZ** or **3 AZ**. Here we select **3 AZ**. Take note of the AZ IDs you want to deploy your Kafka cluster. If you don't know the relationship between your AZ names and AZ IDs, please refer to [AWS document](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html) to find it.
+      2. Select **Private Link** as **Connectivity Method**
+   4. Take note the principal of TiDB Cloud AWS account in **Reminders before proceeding** information, which your will use it to authorize TiDB Cloud to create endpoint for the Kafka private link service.
+   5. Select **Number of AZs**, confirm you will deploy Kafka cluster to **Single AZ** or **3 AZ**. Here we select **3 AZ**. Take note of the AZ IDs you want to deploy your Kafka cluster. If you don't know the relationship between your AZ names and AZ IDs, please refer to [AWS document](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html) to find it.
    6. Pick a unique **Kafka Advertised Listener Pattern** for your Kafka Private Link service
       1. Input a unique random string can only include numbers or lowercase letters, which will be used to generate **Kafka Advertised Listener Pattern** later.
       2. Click **Check usage and generate** button to check if the random string is unique and generate **Kafka Advertised Listener Pattern** which will be used to assemble EXTERNAL advertised listener for kafka brokers. 
@@ -166,7 +165,7 @@ Go to [EC2 Listing Page](https://console.aws.amazon.com/ec2/home#Instances:), cr
      - Security Group: create a new security group allow all TCP from Kafka VPC. PS: you may narrow the rule for safety in production environment.
        - Protocol: TCP
        - Port range: 0 - 65535
-       - Source: 10.0.0.0/163. 
+       - Source: 10.0.0.0/16
 ##### 2.3. Prepare kafka runtime binaries
 1. Go to detail page of bastion node, get the "Public IPv4 address", ssh login to the node with previous download "kafka-vpc-key-pair.pem".
 ```shell
@@ -331,8 +330,8 @@ export JAVA_HOME=/home/ec2-user/jdk-22.0.2
 # bootstrap from EXTERNAL listener
 ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
 # expected output(last 3 lines), order may be different.
-# the differences of output from "bootstrap from INTERNAL listener" is that there are exceptions or errors since the listener can not be resolved in Kafka VPC.
-# we will make it resolvable in TiDB Cloud side and make it route to the right broker. 
+# the differences of output from "bootstrap from INTERNAL listener" is that there are exceptions or errors since advertised listeners can not be resolved in Kafka VPC.
+# we will make them resolvable in TiDB Cloud side and make it route to the right broker. 
 b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -506,8 +505,8 @@ export JAVA_HOME=/home/ec2-user/jdk-22.0.2
 ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
 
 # expected output(last 3 lines), order may be different.
-# there will be some exceptions or errors since the listener can not be resolved in your Kafka network. 
-# we will make it resolvable in TiDB Cloud side and make it route to the right broker. 
+# there will be some exceptions or errors since advertised listeners can not be resolved in your Kafka network. 
+# we will make them resolvable in TiDB Cloud side and make it route to the right broker. 
 b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -610,7 +609,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 1. Go back to TiDB Cloud console to create changefeed for the cluster to connect to Kafka cluster by **Private Link**. For the detail, you can refer to [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 2. After you proceed to the "Configure the changefeed target->Connectivity Method->Private Link", you just fill the following fields with corresponding values and others fields as needed
-   - Kafka Type: 3 AZ. PS: please 
+   - Kafka Type: 3 AZs. PS: make sure your Kafka is deployed in same 3 AZs 
    - Kafka Advertised Listener Pattern: abc. PS: same as the unique random string we used to generate "Kafka Advertised Listener Pattern" in "Setup Self-hosted Kafka Private Link Service in AWS" section
    - Endpoint Service Name: <the kafka service name> 
    - Bootstrap Ports: 9092. PS: only one port is fine since we configure a special bootstrap target group behind this port.
@@ -620,9 +619,9 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 ## FAQ
 
 ### How to connect to the same Kafka private link service from two different TiDB Cloud projects?
-1. Let's say you have already follwoing the above document successfully setup the connection from the first project.
+1. Let's say you have already following the above document successfully setup the connection from the first project.
 2. You want to setup the second connection from the second project.
-3. Go back to the head of this document proceed from begining. When you proceed to the "First, Setup Kafka Cluster" section. Follow the "Reconfigure a Running Kafka Cluster" section, create another group of EXTERNAL listener and advertised listener, you can name it as EXTERNAL2. Please notice that the port range of EXTERNAL2 can not overlap with the EXTERNAL.
+3. Go back to the head of this document proceed from beginning. When you proceed to the "First, Setup Kafka Cluster" section. Follow the "Reconfigure a Running Kafka Cluster" section, create another group of EXTERNAL listener and advertised listener, you can name it as EXTERNAL2. Please notice that the port range of EXTERNAL2 can not overlap with the EXTERNAL.
 4. After brokers reconfigured, you add another group of target groups in LB, including bootstrap and brokers target groups.
 5. Proceed TiDB Cloud connection with 
    - New Bootstrap port
