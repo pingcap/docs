@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tiup/tiup-cluster/','/docs/dev/reference/tools/tiup/cluster
 
 # Deploy and Maintain an Online TiDB Cluster Using TiUP
 
-This document focuses on how to use the TiUP cluster component. For the complete steps of online deployment, refer to [Deploy a Local TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+This document focuses on how to use the TiUP cluster component. For the complete steps of online deployment, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
 Similar to [the TiUP playground component](/tiup/tiup-playground.md) used for a local test deployment, the TiUP cluster component quickly deploys TiDB for production environment. Compared with playground, the cluster component provides more powerful production cluster management features, including upgrading, scaling, and even operation and auditing.
 

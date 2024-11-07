@@ -31,7 +31,7 @@ Traffic replay is not suitable for the following scenarios:
 
 1. Prepare the test environment:
 
-    1. Create a test cluster. For more information, see [Deploy a Local TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+    1. Create a test cluster. For more information, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
     2. Install `tiproxyctl` and ensure the host with `tiproxyctl` can connect to TiProxy instances in both production and test clusters. For more information, see [Install TiProxy Control](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control).
     3. Replicate data from the production cluster to the test cluster. For more information, see [Data Migration Overview](/migration-overview.md).
     4. Run the [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) statement in the test cluster to update statistics.

@@ -21,7 +21,7 @@ TiUP provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/compone
 The following are the basics of TiUP:
 
 - [Terminology and Concepts](/tiup/tiup-terminology-and-concepts.md)
-- [Deploy a Local TiDB Cluster Using TiUP](/production-deployment-using-tiup.md)
+- [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md)
 - [Manage TiUP Components with TiUP Commands](/tiup/tiup-component-management.md)
 - Applicable TiDB versions: v4.0 and later versions
 

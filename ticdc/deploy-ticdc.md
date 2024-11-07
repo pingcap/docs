@@ -40,7 +40,7 @@ More references:
 
 - For detailed operations, see [Edit the initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file).
 - For detailed configurable fields, see [Configure `cdc_servers` using TiUP](/tiup/tiup-cluster-topology-reference.md#cdc_servers).
-- For detailed steps to deploy a TiDB cluster, see [Deploy a Local TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+- For detailed steps to deploy a TiDB cluster, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
 > **Note:**
 >

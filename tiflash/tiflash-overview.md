@@ -118,7 +118,7 @@ To experience the whole process from importing data to querying in a TPC-H datas
 
 <CustomContent platform="tidb">
 
-- To deploy a new cluster with TiFlash nodes, see [Deploy a Local TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 - To add a TiFlash node in a deployed cluster, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
 - [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
 - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md).
