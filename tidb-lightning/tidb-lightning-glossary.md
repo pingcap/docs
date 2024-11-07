@@ -8,7 +8,7 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-glossary/','/docs/dev/referen
 
 This page explains the special terms used in TiDB Lightning's logs, monitoring, configurations, and documentation.
 
-For TiDB-related terms and definitions, refer to [TiDB glossary](/glossary.md).
+For TiDB-related terms and definitions, see [TiDB glossary](/glossary.md).
 
 <!-- A -->
 

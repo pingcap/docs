@@ -6,7 +6,7 @@ aliases: ['/docs/dev/glossary/']
 
 # Glossary
 
-This is the general glossary describing terms related to the TiDB platform.
+This glossary provides definitions for key terms related to the TiDB platform.
 
 Other available glossaries:
 
@@ -72,15 +72,15 @@ Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource over
 
 ### Data Definition Language (DDL)
 
-Data Definition Language (DDL) is the part of the SQL standard that deals with creating, modifying and deleting tables and other objects. For details, see [DDL Introduction](/ddl-introduction.md).
+Data Definition Language (DDL) is a part of the SQL standard that deals with creating, modifying, and dropping tables and other objects. For more information, see [DDL Introduction](/ddl-introduction.md).
 
 ### Data Migration (DM)
 
-Data Migration (DM) is a tool for  migrating data from MySQL-compatible databases into TiDB. DM reads data from a MySQL-compatible database instance and applies it to a TiDB target instance. For more information, see [DM Overview](/dm/dm-overview.md).
+Data Migration (DM) is a tool for migrating data from MySQL-compatible databases into TiDB. DM reads data from a MySQL-compatible database instance and applies it to a TiDB target instance. For more information, see [DM Overview](/dm/dm-overview.md).
 
 ### Data Modification Language (DML)
 
-Data Modification Language (DML) is the part of the SQL standard that describes statements which enable you to insert, update, and delete rows in tables.
+Data Modification Language (DML) is a part of the SQL standard that deals with inserting, updating, and dropping rows in tables.
 
 ### Development Milestone Release (DMR)
 
@@ -88,11 +88,11 @@ Development Milestone Releases (DMR) are TiDB releases that introduce the latest
 
 ### Disaster Recovery (DR)
 
-Disaster Recovery (DR) includes solutions that can be used to recover data and services from a disaster in the future. TiDB offers a variety of solutions for delivering Disaster Recovery including backups and replication to standby clusters. For more information, see [Overview of TiDB Disaster Recovery Solutions](/dr-solution-introduction.md).
+Disaster Recovery (DR) includes solutions that can be used to recover data and services from a disaster in the future. TiDB offers various Disaster Recovery solutions such as backups and replication to standby clusters. For more information, see [Overview of TiDB Disaster Recovery Solutions](/dr-solution-introduction.md).
 
 ### Distributed eXecution Framework (DXF)
 
-Distributed eXecution Framework (DXF) is the framework used by TiDB to distribute tasks across the TiDB cluster. DXF is designed to efficiently use the cluster resources to execute tasks (like index creation or data import) while controlling the resource usage and impact on core business transactions. For more information, see [DXF Introduction](/tidb-distributed-execution-framework.md).
+Distributed eXecution Framework (DXF) is the framework used by TiDB to distribute tasks across a TiDB cluster. DXF is designed to efficiently use cluster resources to execute tasks (such as index creation or data import) while controlling the resource usage and impact on core business transactions. For more information, see [DXF Introduction](/tidb-distributed-execution-framework.md).
 
 ### Dynamic Pruning
 
@@ -112,7 +112,7 @@ Garbage Collection (GC) is a process that clears obsolete data to free up resour
 
 ### General Availability (GA)
 
-General Availability (GA) of a feature is when it is, fully tested and is Generally Available for use in production environments. TiDB features may be released as Generally Available in both [DMR](#development-milestone-release-dmr) and [LTS](#long-term-support-lts) releases. However, as TiDB does not provide patch releases based on DMR it is generally recommended to use the LTS product release for production use.
+General Availability (GA) of a feature means the feature is fully tested and is Generally Available for use in production environments. TiDB features can be released as GA in both [DMR](#development-milestone-release-dmr) and [LTS](#long-term-support-lts) releases. However, as TiDB does not provide patch releases for DMR it is generally recommended to use the LTS release for production use.
 
 ### Global Transaction Identifiers (GTIDs)
 
@@ -286,7 +286,7 @@ Schedulers are components in PD that generate scheduling tasks. Each scheduler i
 
 ### Static Sorted Table / Sorted String Table (SST)
 
-Static Sorted Table or Sorted String Table is a file storage format used in RocksDB (a component used by the [TiKV Storage Engine](/storage-engine/rocksdb-overview.md).
+Static Sorted Table or Sorted String Table is a file storage format used in RocksDB (a component used by the [TiKV Storage Engine](/storage-engine/rocksdb-overview.md)).
 
 ### Store
 

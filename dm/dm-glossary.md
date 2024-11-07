@@ -8,7 +8,7 @@ aliases: ['/docs/tidb-data-migration/dev/glossary/']
 
 This document lists the terms used in the logs, monitoring, configurations, and documentation of TiDB Data Migration (DM).
 
-For TiDB-related terms and definitions, refer to [TiDB glossary](/glossary.md).
+For TiDB-related terms and definitions, see [TiDB glossary](/glossary.md).
 
 ## B
 
