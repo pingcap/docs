@@ -133,7 +133,7 @@ Traffic replay is not suitable for the following scenarios:
     > **Note:**
     >
     > - The table schema of `tiproxy_traffic_replay` might change in future versions. It is not recommended to directly read data from `tiproxy_traffic_replay` in your application or tool development.
-    > - Replay does not guarantee that the transaction execution order between connections will exactly match the capture sequence. This might lead to incorrect error reports.
+    > - Replay does not guarantee that the transaction execution order between connections exactly matches the capture sequence. This might lead to incorrect error reports.
     > - TiProxy does not automatically delete the previous replay report when replaying traffic. You need to manually delete it.
 
 ## Test throughput

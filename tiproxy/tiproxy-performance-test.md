@@ -14,7 +14,7 @@ The results are as follows:
 - The row number of the query result set has a significant impact on the QPS of TiProxy, and the impact is the same as that of HAProxy.
 - The performance of TiProxy increases almost linearly with the number of vCPUs. Therefore, increasing the number of vCPUs can effectively improve the QPS upper limit.
 - The number of long connections and the frequency of creating short connections have minimal impact on the QPS of TiProxy.
-- The higher the CPU usage of TiProxy, the greater the impact of enabling the [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on QPS. When the CPU usage of TiProxy is about 70%, enabling traffic capture leads to approximately 3% decrease in average QPS and 7% decrease in minimum QPS. The latter decrease is caused by periodic QPS drops during traffic file compression.
+- The higher the CPU usage of TiProxy, the greater the impact of enabling [traffic capture](/tiproxy/tiproxy-traffic-replay.md) on QPS. When the CPU usage of TiProxy is about 70%, enabling traffic capture leads to approximately 3% decrease in average QPS and 7% decrease in minimum QPS. The latter decrease is caused by periodic QPS drops during traffic file compression.
 
 ## Test environment
 
