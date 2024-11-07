@@ -119,8 +119,8 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 > **Note:**
 >  If you select **Private Link** or **Private Service Connect** as network connectivity method. There will be extra steps compare to **Public IP** and **VPC Peering**.
 > 1. After you click the button, we will try to create endpoint in TiDB Cloud side for **Private Link** or **Private Service Connect**. It may take several minutes.
-> 2. After endpoint creation, you need to accept the connection request in cloud vendor console with you account login.
-> 3. Then go back you TiDB Cloud console to confirm you have already accepted the connection request, then it will navigate to next page.
+> 2. After endpoint creation done, you need to accept the connection request in cloud vendor console with you account login.
+> 3. Then go back you TiDB Cloud console to confirm you have already accepted the connection request, then it will test connection and navigate to next page if everything OK.
 ## Step 3. Set the changefeed
 
 1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
