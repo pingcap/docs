@@ -79,11 +79,15 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Security
 
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
+* BR supports client-side encryption of log backup data (GA) [#56433](https://github.com/pingcap/tidb/issues/56433) @[Tristan1900](https://github.com/Tristan1900) tw@qiancai <!--1998-->
 
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    TiDB v8.4.0 introduced an experimental feature to encrypt, on the client side, log backup data. Starting from v8.5.0, this feature is now Generally Avaialble. Before uploading log backup data to your backup storage, you can encrypt the backup data to ensure its security via one of the following methods:
 
-    For more information, see [Documentation](link).
+    - Encrypt using a custom fixed key
+    - Encrypt using a master key stored on a local disk
+    - Encrypt using a master key managed by a Key Management Service (KMS)
+
+  For more information, see [documentation](/br/br-pitr-manual.md#encrypt-the-log-backup-data).
 
 ### Data migration
 
