@@ -200,7 +200,7 @@ To reduce the number of Regions and alleviate the heartbeat overhead on the syst
   region-split-size = "300MB"
 ```
 
-## After tuning
+### After tuning
 
 After the tuning, the following effects can be observed:
 
