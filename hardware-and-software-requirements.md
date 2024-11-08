@@ -200,7 +200,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - In the production environment, the TiDB and PD instances can be deployed on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
 > - It is strongly recommended to configure TiDB, TiKV, and TiFlash with at least 8 CPU cores each in the production environment. To get better performance, a higher configuration is recommended.
 > - It is recommended to keep the size of TiKV hard disk within 4 TB if you are using PCIe SSDs or within 1.5 TB if you are using regular SSDs.
-> - If you deploy your TiDB cluster on a cloud provider, such as AWS, Google Cloud, or Azure, TiKV nodes must use cloud disks. Data on local disks will be lost if the instance crashes in the cloud environment.
+> - If you deploy your TiKV on a cloud provider, such as AWS, Google Cloud, or Azure, TiKV nodes must use cloud disks. Data on local disks will be lost if the instance crashes in the cloud environment.
 
 Before you deploy TiFlash, note the following items:
 
