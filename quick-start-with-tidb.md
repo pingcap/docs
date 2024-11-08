@@ -1,6 +1,6 @@
 ---
 title: Quick Start with TiDB Self-Managed Using TiUP Playground
-summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
+summary: Learn how to quickly get started with TiDB Self-Managed using TiUP playground and see if TiDB is the right choice for you.
 aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-docker/']
 ---
 
