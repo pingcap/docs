@@ -196,7 +196,7 @@
     - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
   - Reference
-    - [Architecture](/ticdc/ticdc-architecture.md)
+    - [TiCDC Architecture](/ticdc/ticdc-architecture.md)
     - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
     - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
     - Output Protocols
