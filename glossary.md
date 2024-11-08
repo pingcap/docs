@@ -98,12 +98,6 @@ Distributed eXecution Framework (DXF) is the framework used by TiDB to distribut
 
 Dynamic pruning mode is one of the modes that TiDB accesses partitioned tables. In dynamic pruning mode, each operator supports direct access to multiple partitions. Therefore, TiDB no longer uses Union. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution.
 
-## E
-
-### EC2
-
-[Elastic Compute Cloud (EC2)](https://aws.amazon.com/pm/ec2/) is an AWS service that provides scalable compute resources. It can be used with TiUP to deploy and manage a TiDB cluster.
-
 ## G
 
 ### Garbage Collection (GC)
@@ -133,10 +127,6 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 ### Index Merge
 
 Index Merge is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans. Since v5.4, Index Merge has become a GA feature.
-
-### Instance Metadata Service (IMDS)
-
-Instance Metadata Service (IMDS) is an AWS service designed to manage and retrieve metadata for [EC2](#ec2) instances. For more information, see [Instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
 
 ## K
 
