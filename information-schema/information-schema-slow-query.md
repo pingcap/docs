@@ -262,3 +262,61 @@ Currently, because statistics of the system tables are not collected, sometimes 
 ```sql
 SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 ```
+
+## View execution information
+
+By running an [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) query on the `SLOW_QUERY` table, you can get detailed information about how the database fetches the slow query information. However, this information is **not** available when you run `EXPLAIN ANALYZE` on the `CLUSTER_SLOW_QUERY` table.
+
+Example:
+
+```sql
+EXPLAIN ANALYZE SELECT * FROM INFORMATION_SCHEMA.SLOW_QUERY LIMIT 1\G
+```
+
+```
+*************************** 1. row ***************************
+            id: Limit_7
+       estRows: 1.00
+       actRows: 1
+          task: root
+ access object: 
+execution info: time:3.46ms, loops:2, RU:0.000000
+ operator info: offset:0, count:1
+        memory: N/A
+          disk: N/A
+*************************** 2. row ***************************
+            id: └─MemTableScan_10
+       estRows: 10000.00
+       actRows: 64
+          task: root
+ access object: table:SLOW_QUERY
+execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, parse_log: {time:4.11ms, concurrency:15}, total_file: 1, read_file: 1, read_size: 4.06 MB
+ operator info: only search in the current 'tidb-slow.log' file
+        memory: 1.26 MB
+          disk: N/A
+2 rows in set (0.01 sec)
+```
+
+In the output, check the following fields (formatted for readability) in the `execution info` section:
+
+```
+initialize: 55.5µs,
+read_file: 1.21ms,
+parse_log: {
+  time:4.11ms,
+  concurrency:15
+},
+total_file: 1,
+read_file: 1,
+read_size: 4.06 MB
+```
+
+| Field | Description |
+|---|---|
+| `initialize` | Time spent initializing |
+| `read_file` | Time spent reading the slow log file |
+| `parse_log.time` | Time spent parsing the slow log file |
+| `parse_log.concurrency` | Concurrency for parsing the slow log file (set by [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)) |
+| `total_file` | Total number of slow log files |
+| `read_file` | Number of slow log files that are read |
+| `read_size` | Bytes read from the log file |

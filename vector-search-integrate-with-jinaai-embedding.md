@@ -5,11 +5,19 @@ summary: Learn how to integrate TiDB Vector Search with Jina AI Embeddings API t
 
 # Integrate TiDB Vector Search with Jina AI Embeddings API
 
-This tutorial walks you through how to use [Jina AI](https://jina.ai/) to generate embeddings for text data, and then store the embeddings in TiDB Vector Storage and search similar texts based on embeddings.
+This tutorial walks you through how to use [Jina AI](https://jina.ai/) to generate embeddings for text data, and then store the embeddings in TiDB vector storage and search similar texts based on embeddings.
 
-> **Note**
+<CustomContent platform="tidb">
+
+> **Warning:**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+</CustomContent>
+
+> **Note:**
+>
+> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Prerequisites
 
@@ -17,7 +25,24 @@ To complete this tutorial, you need:
 
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB cluster.
+
+<CustomContent platform="tidb">
+
+**If you don't have a TiDB cluster, you can create one as follows:**
+
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+**If you don't have a TiDB cluster, you can create one as follows:**
+
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster of v8.4.0 or a later version.
+
+</CustomContent>
 
 ## Run the sample app
 
@@ -51,11 +76,12 @@ pip install -r requirements.txt
 
 ### Step 4. Configure the environment variables
 
-#### 4.1 Get the Jina AI API key
+Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page, and then configure the environment variables depending on the TiDB deployment option you've selected.
 
-Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page.
+<SimpleTab>
+<div label="TiDB Cloud Serverless">
 
-#### 4.2 Get the TiDB connection parameters
+For a TiDB Cloud Serverless cluster, take the following steps to obtain the cluster connection string and configure environment variables:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -78,20 +104,43 @@ Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embedd
     >
     > If you have not set a password yet, click **Create password** to generate a random password.
 
-#### 4.3 Set the environment variables
+5. Set the Jina AI API key and the TiDB connection string as environment variables in your terminal, or create a `.env` file with the following environment variables:
 
-Set the environment variables in your terminal, or create a `.env` file with the above environment variables.
+    ```dotenv
+    JINAAI_API_KEY="****"
+    TIDB_DATABASE_URL="{tidb_connection_string}"
+    ```
 
-```dotenv
-JINAAI_API_KEY="****"
-TIDB_DATABASE_URL="{tidb_connection_string}"
+    The following is an example connection string for macOS:
+
+    ```dotenv
+    TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    ```
+
+</div>
+<div label="TiDB Self-Managed">
+
+For a TiDB Self-Managed cluster, set the environment variables for connecting to your TiDB cluster in your terminal as follows:
+
+```shell
+export JINA_API_KEY="****"
+export TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
+# For example: export TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-For example, the connection string on macOS looks like:
+You need to replace parameters in the preceding command according to your TiDB cluster. If you are running TiDB on your local machine, `<HOST>` is `127.0.0.1` by default. The initial `<PASSWORD>` is empty, so if you are starting the cluster for the first time, you can omit this field.
 
-```dotenv
-TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-```
+The following are descriptions for each parameter:
+
+- `<USERNAME>`: The username to connect to the TiDB cluster.
+- `<PASSWORD>`: The password to connect to the TiDB cluster.
+- `<HOST>`: The host of the TiDB cluster.
+- `<PORT>`: The port of the TiDB cluster.
+- `<DATABASE>`: The name of the database you want to connect to.
+
+</div>
+
+</SimpleTab>
 
 ### Step 5. Run the demo
 
@@ -117,7 +166,7 @@ Example output:
 
 ## Sample code snippets
 
-### Get Embeddings from Jina AI
+### Get embeddings from Jina AI
 
 Define a `generate_embeddings` helper function to call Jina AI embeddings API:
 
@@ -144,9 +193,9 @@ def generate_embeddings(text: str):
     return response.json()['data'][0]['embedding']
 ```
 
-### Connect to TiDB Cloud Serverless
+### Connect to the TiDB cluster
 
-Connect to TiDB Cloud Serverless through SQLAlchemy:
+Connect to the TiDB cluster through SQLAlchemy:
 
 ```python
 import os
@@ -189,7 +238,7 @@ class Document(Base):
 > - The dimension of the vector column must match the dimension of the embeddings generated by the embedding model.
 > - In this example, the dimension of embeddings generated by the `jina-embeddings-v2-base-en` model is `768`.
 
-### Create embeddings with Jina AI embeddings and TiDB
+### Create embeddings with Jina AI and store in TiDB
 
 Use the Jina AI Embeddings API to generate embeddings for each piece of text and store the embeddings in TiDB:
 
@@ -219,13 +268,13 @@ with Session(engine) as session:
    session.commit()
 ```
 
-### Perform semantic search with Jina AI embeddings and TiDB
+### Perform semantic search with Jina AI embeddings in TiDB
 
-Generate embeddings for the query text via Jina AI embeddings API, and then search for the most relevant document based on the cosine distance between the query embedding and the document embeddings:
+Generate the embedding for the query text via Jina AI embeddings API, and then search for the most relevant document based on the cosine distance between **the embedding of the query text** and **each embedding in the vector table**:
 
 ```python
 query = 'What is TiDB?'
-# Generate embeddings for the query via Jina AI API.
+# Generate the embedding for the query via Jina AI API.
 query_embedding = generate_embeddings(query)
 
 with Session(engine) as session:
@@ -242,5 +291,5 @@ with Session(engine) as session:
 
 ## See also
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
+- [Vector Data Types](/vector-search-data-types.md)
+- [Vector Search Index](/vector-search-index.md)
