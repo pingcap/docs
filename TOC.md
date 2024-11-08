@@ -628,7 +628,6 @@
       - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
       - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - [Dumpling](/dumpling-overview.md)
-  - [TiCDC](/ticdc-overview.md)
   - PingCAP Clinic Diagnostic Service
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
