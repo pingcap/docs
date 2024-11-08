@@ -197,7 +197,7 @@ To reduce the number of Regions and alleviate the heartbeat overhead on the syst
 
 ```
 [coprocessor]
-  region-split-size = "300MB"
+  region-split-size = "288MiB"
 ```
 
 ### After tuning
