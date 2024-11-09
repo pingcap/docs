@@ -91,10 +91,6 @@ tiup br log start \
 
 ### Encrypt the log backup data
 
-> **Warning:**
->
-> Currently, this feature is experimental. It is not recommended that you use it in production environments. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 BR enables you to encrypt log backup data before uploading it to your backup storage.
 
 Starting from TiDB v8.4.0, you can encrypt log backup data by passing the following parameters in the log backup command, which is similar to [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data):

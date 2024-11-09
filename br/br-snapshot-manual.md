@@ -135,10 +135,6 @@ When the backup and restore feature backs up data, it stores statistics in JSON 
 
 ## Encrypt the backup data
 
-> **Warning:**
->
-> This is an experimental feature. It is not recommended that you use it in the production environment.
-
 BR supports encrypting backup data at the backup side and [at the storage side when backing up to Amazon S3](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption). You can choose either encryption method as required.
 
 Since TiDB v5.3.0, you can encrypt backup data by configuring the following parameters:
