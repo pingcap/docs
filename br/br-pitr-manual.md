@@ -468,10 +468,6 @@ Restore KV Files <--------------------------------------------------------------
 
 ### Restore encrypted log backup data
 
-> **Warning:**
->
-> Currently, this feature is experimental. It is not recommended that you use it in production environments. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 To restore encrypted log backup data, you need to pass the corresponding decryption parameters in the restore command. Make sure that the decryption parameters are the same as those used for encryption. If the decryption algorithm or key is incorrect, the data cannot be restored.
 
 The following is an example:

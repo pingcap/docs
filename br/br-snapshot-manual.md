@@ -275,10 +275,6 @@ ADMIN RELOAD BINDINGS;
 
 ## Restore encrypted snapshots
 
-> **Warning:**
->
-> This is an experimental feature. It is not recommended that you use it in the production environment.
-
 After encrypting the backup data, you need to pass in the corresponding decryption parameters to restore the data. Ensure that the decryption algorithm and key are correct. If the decryption algorithm or key is incorrect, the data cannot be restored. The following is an example:
 
 ```shell
