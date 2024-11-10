@@ -125,11 +125,12 @@ This guide focuses on providing actionable advice for beginners looking to optim
 - Statistics Management
 - How TiDB build A Execution Plan
 - Understand Execution Plan
-- Real-World Use Case
-  - Bad Plan Debug
-  - Index Strategy in TiDB
-  - Partition table: local index vs global index
-  - Index Full Scan is fater than Table Full Scan
+- Index Strategy in TiDB
+  - SQL Tuning with a Covered Index
+  - SQL Tuning with a Composite Index Involing Sorting
+  - SQL Tuning with a Composite Index for Efficient Filtering and Sorting
+  - Composite Index Strategy Guidelines
+  - The Cost of Indexing
 
 ## Query Processing Workflow
 the client sends a SQL statement to the protocol layer of TiDB server. The protocol layer is responsible for handling the connection between TiDB Server and the client, receiving SQL statement from the client, and returning data to the client.
@@ -493,7 +494,7 @@ In TiDB, leveraging indexes effectively is crucial for performance tuning, as it
 - Avoiding sorting
 - Skipping row lookups when possible
 
-In this section, we will present three real-world cases to demonstrate common indexing strategies in TiDB.
+This section showcases three practical examples that illustrate effective indexing strategies in TiDB, focusing on the use of composite and covered indexes for both filtering and sorting operations.
 
 ### SQL Tuning with a Covered Index
 
@@ -551,7 +552,7 @@ Create index logs_covered on logs(snapshot_id, user_id, status, source_type, tar
 +-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 ```
 
-### SQL Tuning with a Composite Index for Efficient Filtering and Sorting
+### SQL Tuning with a Composite Index Involing Sorting
 When optimizing SQL queries, especially those that include an `ORDER BY` clause, it is beneficial to create a composite index that encompasses both the filtering and sorting columns. This approach allows the database engine to efficiently access the required data while maintaining the desired order.
 
 For instance, consider the following query that retrieves logs based on specific conditions. The execution plan shows a duration of 170ms. TiDB employs the `logs_index` to perform an `IndexRangeScan_20` with the filter `snapshot_id = 459840`. Subsequently, it retrieves all columns from the table, resulting in 5715 rows being streamed back to TiDB after the `IndexLookUp_23`, which then sorts the dataset and returns 1000 rows.
@@ -603,7 +604,7 @@ New Plan
 +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
 ```
 
-### SQL Tuning with a Custom Index
+### SQL Tuning with Composite Indexes for Efficient Filtering and Sorting
 
 The original query took 11 minutes and 9 seconds to complete, which is an extremely long execution time for a query that only needs to return 101 rows. This poor performance can be attributed to several factors:
 
@@ -672,9 +673,10 @@ Plan with new index (user_id, mode, id, created_at, label_id)
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 
 
-### general rules for composite index strategy
+### Composite Index Strategy Guidelines
 
-Make sure to follow the composite index strategy, there is the recommended order for the columns in the index:
+When creating a composite index, it's essential to follow a specific order for the columns to ensure optimal performance. This order is crucial because it directly impacts how efficiently the index can filter and sort data.
+Here is the recommended order for the columns in the index:
 
 1. Equal predicates for index prefix (columns accessed directly):
    - Equal conditions 
