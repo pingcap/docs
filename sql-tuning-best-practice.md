@@ -60,14 +60,7 @@ Examples:
 
 ## Balance Workload Distribution
 
-In TiDB's distributed architecture, ensuring even workload distribution across multiple TiKV nodes is crucial for optimal performance:
-
-- Prevent hotspots: Design schemas and queries to avoid concentrated read or write operations on specific nodes
-- Utilize parallel processing:
-   - Design queries to take advantage of TiDB's distributed execution capabilities
-   - Enable and tune parallel execution settings for resource-intensive operations
-
-By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
+In a distributed architecture like TiDB, it's essential to maintain a balanced workload across multiple TiKV nodes. This is crucial for achieving optimal performance. For guidance on identifying and resolving read and write hotspots, please refer to the [document](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#optimization-of-small-table-hotspots). By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
 
 # Identifying High-Load SQL
 The most efficient way to identify Resource-Intensive SQL is using TiDB Dashboard, There are other tools like views and logs available as well.
