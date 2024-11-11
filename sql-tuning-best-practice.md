@@ -67,11 +67,11 @@ The most efficient way to identify Resource-Intensive SQL is using TiDB Dashboar
 
 ## Monitoring SQL Statements by Using TiDB Dashboard
 ### SQL Statements Panel 
-In TiDB Dashboard, navigate to SQL Statements panel, which helps us identify the following:
+In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to SQL Statements panel, which helps us identify the following:
 
 1. The SQL statement with the highest total latency is the one that takes the longest time to execute out of multiple executions of the same SQL statement. 
 2. It can also display the number of times each SQL statement has been executed cumulatively, allowing us to find the SQL statement with the highest execution frequency.
-3. Clicking on each SQL statement allows us to delve deeper into the EXPLAIN ANALYZE results.
+3. Clicking on each SQL statement allows us to delve deeper into the `EXPLAIN ANALYZE` results.
 
 SQL statements are normalized as templates, where literals and bind variables are replaced by '?'. This normalization and sorting process allows you to quickly pinpoint the most resource-intensive queries that may require optimization.
 ![sql-statements-default](/media/sql-tuning/sql-statements-default.png)
@@ -84,7 +84,7 @@ On Slow Queries panel, we can find:
 
 1. The slowest SQL queries.
 2. The SQL query that reads the most data from TiKV.
-3. The EXPLAIN ANALYZE output from drilling down the SQL statement by clicking it.
+3. The `EXPLAIN ANALYZE` output from drilling down the SQL statement by clicking it.
 4. Please note that on the Slow Queries panel, we cannot get the frequency of the SQL statement execution. Once the execution elapsed time exceeds tidb_slow_log_threshold for single instance, the query is then listed on the Slow Queries panel.
 ![slow-query-default](/media/sql-tuning/slow-query-default.png)
 
@@ -102,17 +102,18 @@ Each tool offers unique insights and can be valuable for different analysis scen
 
 ## Gathering Data on the SQL Identified
 
-For the top SQL statements identified, you can use [PLAN REPLAYER](https://docs.pingcap.com/tidb/stable/sql-plan-replayer) to capture and save the on-site information of a TiDB cluster. This tool allows you to recreate the execution environment for further analysis. The syntax for exporting SQL information is as follows:
+For the top SQL statements identified, you can use [PLAN REPLAYER](/sql-plan-replayer.md) to capture and save the on-site information of a TiDB cluster. This tool allows you to recreate the execution environment for further analysis. The syntax for exporting SQL information is as follows:
 
-```SQL
+```sql
 PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
 ```
 
-Use EXPLAIN ANALYZE whenever possible, as it captures actual execution information in addition to the execution plan. This provides more accurate insights into query performance.
+Use `EXPLAIN ANALYZE` whenever possible, as it captures actual execution information in addition to the execution plan. This provides more accurate insights into query performance.
 
 # SQL Tuning Guide
 
 This guide focuses on providing actionable advice for beginners looking to optimize their SQL queries in TiDB. By following these best practices, you can ensure better query performance and SQL Tuning. We'll cover below topic:
+
 - Query Processing Workflow
 - Optimizer Fundamentals
 - Statistics Management
@@ -126,7 +127,8 @@ This guide focuses on providing actionable advice for beginners looking to optim
   - The Cost of Indexing
 
 ## Query Processing Workflow
-the client sends a SQL statement to the protocol layer of TiDB server. The protocol layer is responsible for handling the connection between TiDB Server and the client, receiving SQL statement from the client, and returning data to the client.
+
+The client sends a SQL statement to the protocol layer of TiDB server. The protocol layer is responsible for handling the connection between TiDB Server and the client, receiving SQL statement from the client, and returning data to the client.
 
 To the right of the protocol layer is the Optimizer layer of TiDB Server, which is responsible for processing SQL statements. The process is as follows:
 
@@ -168,13 +170,16 @@ statistics is generally divided into two levels: table level and column level.
 
 To ensure the statistics are healthy and representative, you can use the following commands:
 
-1. `SHOW STATS_META`: This command provides metadata about table statistics.
-2. `SHOW STATS_HEALTHY`: This command shows the health status of table statistics.
+1. [`SHOW STATS_META`](sql-statements/sql-statement-show-stats-meta.md): This command provides metadata about table statistics.
+2. [`SHOW STATS_HEALTHY`](sql-statements/sql-statement-show-stats-healthy.md): This command shows the health status of table statistics.
 
 For example, you can use:
 
-```SQL
-tidb> SHOW STATS_META WHERE table_name='T2'\G;
+```sql
+SHOW STATS_META WHERE table_name='T2'\G;
+```
+
+```
 *************************** 1. row ***************************
  Db_name: test
  Table_name: T2
@@ -183,22 +188,27 @@ Partition_name:
  Modify_count: 20000
  Row_count: 20000
 1 row in set (0.03 sec)
+```
 
-tidb> SHOW STATS_HEALTHY WHERE table_name='T2'\G;
+```sql
+SHOW STATS_HEALTHY WHERE table_name='T2'\G;
+```
+
+```
 *************************** 1. row ***************************
     Db_name: test
   Table_name: T2
 Partition_name:
     Healthy: 0
 1 row in set (0.00 sec)
-
 ```
 
 In TiDB database, there are two ways to collect statistics: automatic collection and manual collection. In most case, the auto collection job works fine. Automatic collection is actually triggered when certain conditions are met for a table, and TiDB will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
 tidb_auto_analyze_ratio: The healthiness trigger
-tidb_auto_analyze_start_time and tidb_auto_analyze_end_time: The allowed job window
-```SQL
-mysql> show variables like '%auto_analyze%';
+[`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) and tidb_auto_analyze_end_time: The allowed job window
+
+```sql
+SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
 +-----------------------------------------+-------------+
 | Variable_name                           | Value       |
 +-----------------------------------------+-------------+
@@ -221,22 +231,24 @@ Another common scenario is locking table statistics. This is useful when:
 2. The table is very large and statistics collection is time-consuming.
 3. You want to maintain statistics only during specific time windows.
 
-To lock the statistics for a table, you can use the following command `LOCK STATS table_name`.
+To lock the statistics for a table, you can use the following statement [`LOCK STATS table_name`](/sql-statements/sql-statement-lock-stats.md).
 
 for more detail about statistics, please refer to [statistics](https://docs.pingcap.com/tidb/stable/statistics).
 
 ## How TiDB build A Execution Plan
 An SQL statement undergoes optimization primarily in the optimizer through three stages:
+
 - Pre-Processing
 - Logical Transformation
 - Cost-based Optimization
 
 ### Pre-Processing
+
 The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using Point_Get or Batch_Point_Get.
 
-Point_Get or Batch_Point_Get is to get 1 or 0 or many row only by using the TiKV key, the explicit or implicit (_tidb_rowid) primary key. For example, when id column is the primary key of a clustered index table, Point_Get is used to get the particular row. If a plan is identified as Point_Get, optimizer will skip the logical transformation and cost-based optimization.
+Point_Get or Batch_Point_Get is to get 1 or 0 or many row only by using the TiKV key, the explicit or implicit (`_tidb_rowid`) primary key. For example, when id column is the primary key of a clustered index table, Point_Get is used to get the particular row. If a plan is identified as Point_Get, optimizer will skip the logical transformation and cost-based optimization.
 
-```SQL
+```sql
 SELECT id, name FROM emp WHERE id = 901; 
 ```
 
@@ -252,7 +264,7 @@ TiDB uses statistics as input to the optimizer to estimate the number of rows pr
 
 The below figure illustrates the various data access paths and row set operations that cost-based optimization can consider to develop the optimal execution plan. Furthermore, during the logical transformation stage, the query has already been rewritten for predicate push-down. In the cost-based optimization stage, TiKV expression push-down is further implemented when possible at TiKV layer. 
 
-Furthermore, confirming the algorithm for certain SQL operations, such as aggregation, join, and sorting, is essential. For instance, the aggregation operator may utilize either HASH_AGG or STREAM_AGG, while the join operator can select from HASH JOIN, MERGE JOIN, or INDEX JOIN. Likewise, various options are available for the sorting operator.
+Furthermore, confirming the algorithm for certain SQL operations, such as aggregation, join, and sorting, is essential. For instance, the aggregation operator may utilize either `HASH_AGG` or `STREAM_AGG`, while the join operator can select from `HASH JOIN`, `MERGE JOIN`, or `INDEX JOIN`. Likewise, various options are available for the sorting operator.
 
 ![cost-based-optimization](/media/sql-tuning/cost-based-optimization.png)
 
@@ -270,7 +282,7 @@ Beside access the execution plan information through TiDB Dashboard, TiDB provid
 - operator info: Extended information about the operator regarding the step
 
 ```SQL
-tidb> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
+EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
 
 +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
 | id                       | estRows     | task         | access object     | operator info                                                                                      |
@@ -284,8 +296,8 @@ tidb> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00
 5 rows in set (0.00 sec)
 ```
 
-Additional Information in EXPLAIN ANALYZE Output
-Different from EXPLAIN, EXPLAIN ANALYZE executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. There runtime information is crucial for debugging query execution.
+Additional Information in [EXPLAIN ANALYZE](sql-statements/sql-statement-explain-analyze.md) Output
+Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. There runtime information is crucial for debugging query execution.
 
 Description
 - actRows: Number of rows output by the operator.
@@ -294,17 +306,18 @@ Description
 - disk: Disk space used by the operator.
 
 Note: Some attributes and explain table columns are omitted for improved formatting
-```SQL
-tidb:db1> EXPLAIN ANALYZE SELECT SUM(pm.m_count)/COUNT(*) FROM
-    -> (SELECT COUNT(m.name) m_count
-    ->  FROM universe.moons m
-    ->  RIGHT JOIN
-    ->  (SELECT p.id, p.name
-    ->   FROM universe.planet_categories c
-    ->   JOIN universe.planets p
-    ->   ON c.id = p.category_id AND c.name = 'Jovian') pc
-    ->  ON m.planet_id = pc.id
-    ->  GROUP BY pc.name) pm;
+```sql
+EXPLAIN ANALYZE
+SELECT SUM(pm.m_count)/COUNT(*) FROM
+(SELECT COUNT(m.name) m_count
+FROM universe.moons m
+RIGHT JOIN
+(SELECT p.id, p.name
+FROM universe.planet_categories c
+JOIN universe.planets p
+ON c.id = p.category_id AND c.name = 'Jovian') pc
+ON m.planet_id = pc.id
+GROUP BY pc.name) pm;
 +-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
 | id                                      |.| actRows | task      | access object             | execution info                                                 |.| memory    | disk    |
 +-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
@@ -343,7 +356,7 @@ Let's apply the "first child first – recursive descent" rule to the first plan
 
 
 ```SQL
-tidb> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
+EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
 
 +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
 | id                       | estRows     | task         | access object     | operator info                                                                                      |
@@ -356,6 +369,7 @@ tidb> EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00
 +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
 5 rows in set (0.00 sec)
 ```
+
 Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first child of the tree). For the table `stars`, the optimizer ony need to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`.
 The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` is to implemented the two order by and limit corespondingly. The final operator `Projection_16` is to implemented the column projection for `t5.name`.
 
@@ -481,7 +495,7 @@ This optimized plan demonstrates the importance of accurate statistics and prope
 
 TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) requests that need to be processed.
 
-In TiDB, leveraging indexes effectively is crucial for performance tuning, as it can significantly reduce the number of KV RPC (Remote Procedure Call) requests. By minimizing these requests, you can greatly improve query performance and overall system efficiency. Here are some key strategies:
+In TiDB, leveraging indexes effectively is crucial for performance tuning, as it can significantly reduce the number of KV [RPC](/glossary.md#remote-procedure-call-rpc) requests. By minimizing these requests, you can greatly improve query performance and overall system efficiency. Here are some key strategies:
 
 - Avoiding full table scans
 - Avoiding sorting
@@ -529,8 +543,8 @@ WHERE
 
 After creating the covered index below, which includes the additional columns source_type, target_type, and amount, the query execution time improved to 90ms, and TiDB only needed to send a single cop task to TiKV for data scanning.
 
-```SQL
-Create index logs_covered on logs(snapshot_id, user_id, status, source_type, target_type, amount); 
+```sql
+CREATE INDEX logs_covered ON logs(snapshot_id, user_id, status, source_type, target_type, amount); 
 ```
 
 ```SQL
@@ -546,13 +560,14 @@ Create index logs_covered on logs(snapshot_id, user_id, status, source_type, tar
 ```
 
 ### SQL Tuning with a Composite Index Involing Sorting
+
 When optimizing SQL queries, especially those that include an `ORDER BY` clause, it is beneficial to create a composite index that encompasses both the filtering and sorting columns. This approach allows the database engine to efficiently access the required data while maintaining the desired order.
 
 For instance, consider the following query that retrieves logs based on specific conditions. The execution plan shows a duration of 170ms. TiDB employs the `logs_index` to perform an `IndexRangeScan_20` with the filter `snapshot_id = 459840`. Subsequently, it retrieves all columns from the table, resulting in 5715 rows being streamed back to TiDB after the `IndexLookUp_23`, which then sorts the dataset and returns 1000 rows.
 Note that the `id` column is the primary key, which means it is implicitly included in the `logs_idx` index. However, for `IndexRangeScan_20`, the order is not guaranteed because, after the index prefix column `snapshot_id`, there are two additional columns: `user_id` and `status`. Therefore, the ordering of `id` cannot be assured.
 
-```SQL
-explain analyze SELECT  
+```sql
+EXPLAIN ANALYZE SELECT  
 logs.*
 FROM
   logs
@@ -566,7 +581,8 @@ LIMIT
 ```
 
 Original Plan
-```SQL
+
+```
 +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
 | id                           | estRows | actRows | task      | access object                                            | execution info                                | operator info                              | 
 +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
@@ -581,12 +597,13 @@ Original Plan
 
 To optimize the query, we can create a new index on (snapshot_id, id) to ensure that for each snapshot_id value, the id is sorted in the index. By utilizing this new index, the query execution time is reduced to 96ms. Note that the keep order is true for `IndexRangeScan_33`, and the `TopN` is replaced with `Limit`. For the `IndexLookUp_35`, only 1000 rows are returned to TiDB, eliminating the need for additional sorting operations.
 
-```SQL
-create index logs_new on logs(snapshot_id, id);
+```sql
+CREATE INDEX logs_new ON logs(snapshot_id, id);
 ```
 
 New Plan
-```SQL
+
+```
 +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
 | id                               | estRows | actRows | task      | access object                                | execution info                               | operator info                                      |
 +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
@@ -608,7 +625,8 @@ The original query took 11 minutes and 9 seconds to complete, which is an extrem
 
 
 Here is the query pattern
-```SQL
+
+```sql
 SELECT `orders`.*
 FROM `orders`
 WHERE `orders`.`mode` = 'production'
@@ -622,7 +640,7 @@ AND (orders.id < 1500000000)
 ORDER BY orders.id DESC LIMIT 101;
 ```
 
-```SQL
+```sql
 PRIMARY KEY (`id`),
 UNIQUE KEY `index_orders_on_adjustment_id` (`adjustment_id`),
 KEY `index_orders_on_user_id` (`user_id`),
@@ -631,6 +649,8 @@ KEY `index_orders_on_created_at` (`created_at`)
 ```
 
 Original plan
+
+```
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 | id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
@@ -641,6 +661,7 @@ Original plan
 |   └─Selection_38(Probe)        | 173.83    | 16604   | cop[tikv] |                                                                                | time:54m46.2s, loops:651, cop_task: {num: 1076, ...}| eq(orders.mode, "production"), eq(orders.user_id, 11111), not(isnull(orders.label_id))                               | N/A      | N/A  |
 |     └─TableRowIDScan_36        | 8296.70   | 12082311| cop[tikv] | table:orders                                                                   | tikv_task:{proc max:44.8s, min:0s, avg: 3.33s, p...}| keep order:false                                                                                                     | N/A      | N/A  |
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+```
 
 
 Performance Improvement with the New Index:
@@ -655,6 +676,8 @@ After creating the new index (new_idx on orders(user_id, mode, id, created_at, l
 This case demonstrates the profound impact that a well-designed index can have on query performance. By aligning the index structure with the query's predicates, sort order, and required columns, we achieved a performance improvement of over five orders of magnitude.
 
 Plan with new index (user_id, mode, id, created_at, label_id) 
+
+```
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 | id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
@@ -664,6 +687,7 @@ Plan with new index (user_id, mode, id, created_at, label_id)
 | │   └─IndexRangeScan_28        | 503893.42 | 224     | cop[tikv] | table:orders, index:index_orders_new(user_id, mode, id, created_at, label_id)  | tikv_task:{time:0s, loops:3}                        | range:[11111 "production" 1000000000,11111 "production" 1500000000), keep order:true, desc                           | N/A      | N/A  |
 | └─TableRowIDScan_29(Probe)     | 101.00    | 101     | cop[tikv] | table:orders                                                                   | time:2.9ms, loops:2, cop_task: {num: 3, max: 2.7...}| keep order:false                                                                                                     | N/A      | N/A  |
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
+```
 
 
 ### Composite Index Strategy Guidelines
