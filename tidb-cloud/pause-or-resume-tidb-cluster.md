@@ -58,7 +58,7 @@ When a cluster is paused, note the following:
 - TiDB Cloud stops collecting monitoring information of the cluster.
 - You cannot read data from or write data to the cluster.
 - You cannot import or back up data.
-- TiDB Cloud will not auto resume the paused cluster. 
+- TiDB Cloud does not automatically resume the paused cluster.
 - Only the following costs will be charged:
 
     - Node Storage Cost
