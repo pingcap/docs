@@ -1,11 +1,11 @@
 ---
 title: Set up Self-hosted Kafka Private Link Service in AWS
-summary: This document explains how to set up private link service for self-hosted Kafka in AWS and how to make it work with TiDB Cloud.
+summary: This document explains how to set up Private Link service for self-hosted Kafka in AWS and how to make it work with TiDB Cloud.
 ---
 
 # Set up Self-hosted Kafka Private Link Service in AWS
 
-This document explains how to set up private link service for self-hosted Kafka in AWS and how to make it work with TiDB Cloud.
+This document explains how to set up Private Link service for self-hosted Kafka in AWS and how to make it work with TiDB Cloud.
 
 The main idea:
 1. TiDB Cloud VPC connects to Kafka VPC through limit private endpoints.
@@ -13,13 +13,13 @@ The main idea:
 3. Therefore, we need to map every Kafka brokers to different ports to make every broker is unique in TiDB Cloud VPC.
 4. We will leverage Kafka bootstrap mechanism and AWS cloud resources to achieve the mapping.
 
-Let's show how to connect to a three AZ Kafka private link service in AWS by example. It's not the only way to set up private link service for self-hosted Kafka. There may be other ways base on the similar port mapping mechanism. This document only used to show fundamental of Kafka private link service. If you want to set up Kafka private link service in production, you may need to build a more resilient Kafka private link service with better operational maintainability and observability.
+Let's show how to connect to a three AZ Kafka Private Link service in AWS by example. It's not the only way to set up Private Link service for self-hosted Kafka. There may be other ways base on the similar port mapping mechanism. This document only used to show fundamental of Kafka Private Link service. If you want to set up Kafka Private Link service in production, you may need to build a more resilient Kafka Private Link service with better operational maintainability and observability.
 
 ![main idea](/media/tidb-cloud/changefeed/connect-to-aws-self-hosted-kafka-privatelink-service.png)
 
 ## Prerequisites
 
-1. Make sure you have authorization to set up Kafka private link service in your own AWS account. 
+1. Make sure you have authorization to set up Kafka Private Link service in your own AWS account. 
     - Manage EC2 Nodes
     - Manage VPC
     - Manage Subnet
@@ -33,13 +33,13 @@ Let's show how to connect to a three AZ Kafka private link service in AWS by exa
    3. Click **Create Changefeed**
       1. Select **Kafka** as **Target Type**.
       2. Select **Private Link** as **Connectivity Method**
-   4. Take note the principal of TiDB Cloud AWS account in **Reminders before proceeding** information, which your will use it to authorize TiDB Cloud to create endpoint for the Kafka private link service.
+   4. Take note the principal of TiDB Cloud AWS account in **Reminders before proceeding** information, which your will use it to authorize TiDB Cloud to create endpoint for the Kafka Private Link service.
    5. Select **Number of AZs**, confirm you will deploy Kafka cluster to **Single AZ** or **3 AZ**. Here we select **3 AZ**. Take note of the AZ IDs you want to deploy your Kafka cluster. If you don't know the relationship between your AZ names and AZ IDs, please refer to [AWS document](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html) to find it.
    6. Pick a unique **Kafka Advertised Listener Pattern** for your Kafka Private Link service
       1. Input a unique random string can only include numbers or lowercase letters, which will be used to generate **Kafka Advertised Listener Pattern** later.
       2. Click **Check usage and generate** button to check if the random string is unique and generate **Kafka Advertised Listener Pattern** which will be used to assemble EXTERNAL advertised listener for kafka brokers. 
 
-Please take note of all this deployment information, use them to configure your Kafka private link service.
+Please take note of all this deployment information, use them to configure your Kafka Private Link service.
 Example of deployment information.
 
 | Information                         | Value                                                                                                                                                                                                                                                                                                                                                                                   | Reminder                                                                                                                                                                                                                                                                                                                                                                                                                                     | 
@@ -595,7 +595,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 ```
 ### 2. Set up Private Link Service
 
-1. Go to [Endpoint service](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:), click button "Create endpoint service" to create a private link service for the Kafka LB.
+1. Go to [Endpoint service](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:), click button "Create endpoint service" to create a Private Link service for the Kafka LB.
    - Name: kafka-pl-service
    - Load balancer type: Network
    - Load balancers: kafka-lb
@@ -618,7 +618,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ## FAQ
 
-### How to connect to the same Kafka private link service from two different TiDB Cloud projects?
+### How to connect to the same Kafka Private Link service from two different TiDB Cloud projects?
 1. Let's say you have already following the above document successfully set up the connection from the first project.
 2. You want to set up the second connection from the second project.
 3. Go back to the head of this document proceed from beginning. When you proceed to the "First, Set up Kafka Cluster" section. Follow the "Reconfigure a Running Kafka Cluster" section, create another group of EXTERNAL listener and advertised listener, you can name it as EXTERNAL2. Please notice that the port range of EXTERNAL2 can not overlap with the EXTERNAL.
