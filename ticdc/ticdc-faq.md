@@ -332,3 +332,7 @@ This is because the default port number of the TiCDC cluster deployed by TiDB Op
   }
 ]
 ```
+
+## What happens to generated columns in DML when TiCDC replicates data to Kafka or storage services?
+
+Generated columns include stored generated columns and virtual generated columns. TiCDC will ignore virtual generated columns and only replicate stored generated columns to downstream. When stored generated columns replicate to downstream, such as Kafka or storage services, and then write back to MySQL, an error will occur: Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed.
