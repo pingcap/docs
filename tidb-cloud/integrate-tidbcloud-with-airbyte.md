@@ -102,7 +102,7 @@ The following steps use TiDB as both a source and a destination. Other connector
 
 ## Limitations
 
-- The TiDB connector can not utilize the Change Data Capture (CDC) feature which TiCDC provides. The incremental sync is cursor based underneath.
+- The TiDB connector cannot use the Change Data Capture (CDC) feature provided by TiCDC. The incremental sync is performed based on a cursor mechanism.
 - TiDB destination converts the `timestamp` type to the `varchar` type in default normalization mode. It happens because Airbyte converts the timestamp type to string during transmission, and TiDB does not support `cast ('2020-07-28 14:50:15+1:00' as timestamp)`.
 - For some large ELT missions, you need to increase the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
 
