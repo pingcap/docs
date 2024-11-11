@@ -280,9 +280,11 @@ Beside access the execution plan information through TiDB Dashboard, TiDB provid
 - access object: The object where the row sources are located
 - operator info: Extended information about the operator regarding the step
 
-```SQL
+```sql
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
+```
 
+```
 +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
 | id                       | estRows     | task         | access object     | operator info                                                                                      |
 +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
@@ -356,7 +358,7 @@ There are three important details to add to this:
 Let's apply the "first child first – recursive descent" rule to the first plan. When reading an execution plan, you should start from the top and work your down bottom. In the below example begin by looking at the `TableFullScan_18` (or the first child of the tree). In this case the access operator for table trips are implemented using full table scan. The rows produced by the tables scans will be consumed by the `Selection_19` operator. The `Selection_19` operator is to filter the data by `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`. Next the group-by operator `StreamAgg_9` is to implemented the aggregation `count(*)`. Be noted that the 3 operators `TableFullScan_18`, `Selection_19`, `StreamAgg_9` are pushdown to TiKV, which is marked as `cop[tikv]`, so that early filter and aggregation can be done in TiKV, to minize the data transfer between TiKV and TiDB. Finally the `TableReader_21` is to read the data from the `StreamAgg_9` operator, then finally the `StreamAgg_20` is to implemented the aggregation `count(*)`.
 
 
-```SQL
+```sql
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
 ```
 
@@ -446,7 +448,7 @@ In the execution plan below, the query ran for 5 minutes and 51 seconds before b
 
 To address these issues, need to ensure that table statistics are up-to-date, especially for the `orders` table and the `index_orders_on_adjustment_id` index.
 
-```SQL
+```
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
 | id                                 | estRows   | estCost      | actRows   | task      | access object                                                                          | execution info ...| memory   | disk     |
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...----------------------+
@@ -475,7 +477,7 @@ Here is the expected execution plan after fixing the incorrect estimation on the
 
 This optimized plan demonstrates the importance of accurate statistics and proper join order in query performance. The dramatic reduction in execution time (from 351 seconds to 1.96 seconds) highlights the potential impact of addressing estimation errors and choosing appropriate execution strategies.
 
-```SQL
+```
 +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
 | id                                    | estRows  | actRows | task      | access object                                                                          | execution info...| memory   | disk |
 +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
