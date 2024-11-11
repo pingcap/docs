@@ -1,11 +1,11 @@
 ---
-title: Setup Self Hosted Kafka Private Service Connect in Google Cloud
-summary: This document explains how to set up private service connect for self-hosted Kafka in Google Cloud and how to make it work with TiDB Cloud.
+title: Set up Self Hosted Kafka Private Service Connect Service in Google Cloud
+summary: This document explains how to set up Private Service Connect service for self-hosted Kafka in Google Cloud and how to make it work with TiDB Cloud.
 ---
 
-# Set up Self-hosted Kafka Private Service Connect in Google Cloud
+# Set up Self-hosted Kafka Private Service Connect Service in Google Cloud
 
-This document explains how to set up private service connect for self-hosted Kafka in Google Cloud and how to make it work with TiDB Cloud.
+This document explains how to set up Private Service Connect service for self-hosted Kafka in Google Cloud and how to make it work with TiDB Cloud.
 
 The main idea is the same as we do in AWS:
 1. TiDB Cloud VPC connects to Kafka VPC through limit private endpoints.
@@ -13,15 +13,15 @@ The main idea is the same as we do in AWS:
 3. Therefore, we need to map every Kafka brokers to different ports to make every broker is unique in TiDB Cloud VPC.
 4. We will leverage Kafka bootstrap mechanism and Google Cloud resources to achieve the mapping.
 
-There are two ways to set up private service connect for self-hosted Kafka in Google Cloud:
+There are two ways to set up Private Service Connect service for self-hosted Kafka in Google Cloud:
 1. Using PSC port mapping mechanism, which requires static port-broker mapping configuration. Require to reconfigure existing Kafka cluster to add a group of EXTERNAL listener and advertised listener. 
 2. Using [Kafka-proxy](https://github.com/grepplabs/kafka-proxy), which introduces a extra running process as proxy between Kafka clients and Kafka brokers, the proxy will dynamic configure port-broker mapping and forward requests. No need to reconfigure existing Kafka cluster.
 
-Let's show how to connect to a three AZ Kafka private service connect in Google Cloud by example. It's not the only way to set up private service connect for self-hosted Kafka. There may be other ways base on the similar port mapping mechanism. This document only used to show fundamental of Kafka private service connect. If you want to set up Kafka private service connect in production, you may need to build a more resilient Kafka private service connect with better operational maintainability and observability.
+Let's show how to connect to a three AZ Kafka Private Service Connect service in Google Cloud by example. It's not the only way to set up Private Service Connect service for self-hosted Kafka. There may be other ways base on the similar port mapping mechanism. This document only used to show fundamental of Kafka Private Service Connect. If you want to set up Kafka Private Service Connect in production, you may need to build a more resilient Kafka Private Service Connect with better operational maintainability and observability.
 
 
 ## Prerequisites
-1. Make sure you have authorization to set up Kafka private service connect in your own Google Cloud account. 
+1. Make sure you have authorization to set up Kafka Private Service Connect service in your own Google Cloud account. 
     - Manage VM Nodes
     - Manage VPC
     - Manage Subnet
@@ -36,11 +36,11 @@ Let's show how to connect to a three AZ Kafka private service connect in Google 
       2. Select **Private Service Connect** as **Connectivity Method**
    4. Take note the Google Cloud project in **Reminders before proceeding** information, which your can use it to authorize auto-accept endpoint creation request from TiDB Cloud.
    5. Take note of the **Suggested Kafka Zones**. Here are the Zones where the TiDB Cluster is deployed. It is recommended that Kafka to be deployed in these Zones as well to reduce cross-zone traffic.
-   6. Pick a unique **Kafka Advertised Listener Pattern** for your Kafka private service connect
+   6. Pick a unique **Kafka Advertised Listener Pattern** for your Kafka Private Service Connect service
       1. Input a unique random string can only include numbers or lowercase letters, which will be used to generate **Kafka Advertised Listener Pattern** later.
       2. Click **Check usage and generate** button to check if the random string is unique and generate **Kafka Advertised Listener Pattern** which will be used to assemble EXTERNAL advertised listener for kafka brokers, or configure Kafka-proxy. 
 
-Please take note of all this deployment information, use them to configure your Kafka private service connect.
+Please take note of all this deployment information, use them to configure your Kafka Private Service Connect service.
 Example of deployment information.
 
 | Information                        | Value                                                                                                                        |
@@ -52,7 +52,7 @@ Example of deployment information.
 
 
 
-## Set up Self-hosted Kafka Private Service Connect by PSC Port Mapping
+## Set up Self-hosted Kafka Private Service Connect Service by PSC Port Mapping
 
 We will expose every kafka broker to TiDB Cloud VPC with unique port by using PSC port mapping mechanism. It will work as following graph.
 
@@ -414,7 +414,7 @@ b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.
 b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 ```
 
-### Second, Expose Kafka Cluster as Private Service Connect
+### Second, Expose Kafka Cluster as Private Service Connect Service
 1. Go to [Network endpoint group](https://console.cloud.google.com/compute/networkendpointgroups/list) page, create a network endpoint group
    - Name: kafka-neg
    - Network endpoint group type: Port Mapping NEG(Regional)
@@ -478,7 +478,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 3. Continue follow the guideline in [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 4. If everything go fine, you will successfully finish the job.
 
-## Set up Self-hosted Kafka Private Service Connect by Kafka-proxy
+## Set up Self-hosted Kafka Private Service Connect Service by Kafka-proxy
 
 We will expose every kafka broker to TiDB Cloud VPC with unique port by using Kafka-proxy dynamic port mapping mechanism. It will work as following graph.
 
@@ -550,7 +550,7 @@ brokers.abc.us-west1.gcp.3199745.tidbcloud.com:9096 (id: 5 rack: null) -> ERROR:
 ...
 ```
 
-### Second, Expose Kafka-proxy as Private Service Connect
+### Second, Expose Kafka-proxy as Private Service Connect Service
 
 1. Go to [Load balancing](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers) page, create a LB
    - Type of load balancer: Network Load Balancer
@@ -603,7 +603,7 @@ brokers.abc.us-west1.gcp.3199745.tidbcloud.com:9096 (id: 5 rack: null) -> ERROR:
 
 ## FAQ
 
-### How to connect to the same Kafka Private Service Connect from two different TiDB Cloud projects?
+### How to connect to the same Kafka Private Service Connect service from two different TiDB Cloud projects?
 1. Let's say you have already following the above document successfully set up the connection from the first project.
 2. You want to set up the second connection from the second project.
 3. If you set up Kafka PSC by PSC Port Mapping
