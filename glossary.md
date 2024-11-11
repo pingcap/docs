@@ -176,7 +176,7 @@ Online Analytical Processing (OLAP) refers to database workloads focused on anal
 
 Online Transaction Processing (OLTP) refers to database workloads focused on transactional tasks, such as selecting, inserting, updating, and deleting small sets of records.
 
-## Out of Memory (OOM)
+### Out of Memory (OOM)
 
 Out of Memory (OOM) is a situation where a system fails due to insufficient memory. For more information, see [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md).
 
