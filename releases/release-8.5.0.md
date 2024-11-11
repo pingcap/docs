@@ -79,7 +79,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [Documentation](link).
 
-* Introduction of ADMIN ALTER DDL JOBS syntax to support online modification of DDL job variables [#57229](hhttps://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
+* Introduction of ADMIN ALTER DDL JOBS syntax to support online modification of DDL job variables [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
 
     Starting from v8.3, it is now possible to set the variables [tidb_ddl_reorg_batch_size](/system-variables#tidb_ddl_reorg_batch_size)  and [tidb_ddl_reorg_worker_cnt](/system-variables#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, the DDL job must first be canceled, the variables adjusted, and then resubmit the job.
 
