@@ -28,11 +28,13 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
 
     For more information, see [Documentation](link).
-* - The Schema cache memory limit feature is now Generally Available (GA), reducing memory usage in large-scale data scenarios.  [#50959](https://github.com/pingcap/tidb/issues/50959) @[tiancaiamao](https://github.com/tiancaiamao) @[wjhuang2016](https://github.com/wjhuang2016) @[gmhdbjd](https://github.com/gmhdbjd) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--1976-->
+
+* The Schema cache memory limit feature is now Generally Available (GA), reducing memory usage in large-scale data scenarios.  [#50959](https://github.com/pingcap/tidb/issues/50959) @[tiancaiamao](https://github.com/tiancaiamao) @[wjhuang2016](https://github.com/wjhuang2016) @[gmhdbjd](https://github.com/gmhdbjd) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--1976-->
 
     In some SaaS scenarios, when the number of tables reaches hundreds of thousands or even millions, the schema meta can consume significant memory. Enabling this feature allows the system to use the LRU algorithm to cache and evict the corresponding schema meta information, effectively reducing memory usage. Starting from v8.4, this feature is enabled by default with a default value of 512MiB, and users can adjust it as needed through the variable [tidb_schema_cache_size](/system-variables#tidb_schema_cache_size-new-in-v800).
 
     For more information, see [Documentation](link).
+
 ### Performance
 
 * Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
@@ -40,11 +42,13 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
 
     For more information, see [Documentation](link).
-* The database and table creation acceleration feature is now Generally Available (GA), significantly reducing the time required for data migration and cluster initialization. [#50052](https://github.com/pingcap/tidb/issues/50052) @[D3Hunter](https://github.com/D3Hunter) @[gmhdbjd](https://github.com/gmhdbjd) tw@Oreoxmt <!--1977--> 
+
+* The database and table creation acceleration feature is now Generally Available (GA), significantly reducing the time required for data migration and cluster initialization. [#50052](https://github.com/pingcap/tidb/issues/50052) @[D3Hunter](https://github.com/D3Hunter) @[gmhdbjd](https://github.com/gmhdbjd) tw@Oreoxmt <!--1977-->
 
     In v8.0.0, the system variable [tidb_enable_fast_create_table](/system-variables#tidb_enable_fast_create_table-new-in-v800) was introduced to improve the performance of batch database and table creation. During data migration and cluster initialization, it enables the rapid creation of tables at the million-scale level, significantly reducing the time required.
 
     For more information, see [Documentation](link).
+
 ### Reliability
 
 * Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
@@ -68,21 +72,25 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
 
     For more information, see [Documentation](link).
-*The Foreign Key feature is now Generally Available (GA) [#36982](https://github.com/pingcap/tidb/issues/36982) @[YangKeao](https://github.com/YangKeao) @[crazycs520](https://github.com/crazycs520) tw@lilin90 <!--1894-->
 
-  The Foreign Key feature is now GA, enabling the use of foreign key constraints to enhance data consistency and integrity. Users can easily create foreign key constraints between tables, with support for cascading updates and deletions, making data management more convenient. This feature provides better support for applications with complex data constraints.
+* The Foreign Key feature is now Generally Available (GA) [#36982](https://github.com/pingcap/tidb/issues/36982) @[YangKeao](https://github.com/YangKeao) @[crazycs520](https://github.com/crazycs520) tw@lilin90 <!--1894-->
+
+    The Foreign Key feature is now GA, enabling the use of foreign key constraints to enhance data consistency and integrity. Users can easily create foreign key constraints between tables, with support for cascading updates and deletions, making data management more convenient. This feature provides better support for applications with complex data constraints.
+
+    For more information, see [Documentation](link).
+
+* Introduction of ADMIN ALTER DDL JOBS syntax to support online modification of DDL job variables [#57229](hhttps://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
+
+    Starting from v8.3, it is now possible to set the variables [tidb_ddl_reorg_batch_size](/system-variables#tidb_ddl_reorg_batch_size)  and [tidb_ddl_reorg_worker_cnt](/system-variables#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, the DDL job must first be canceled, the variables adjusted, and then resubmit the job.
+
+    Since v8.5, the ADMIN ALTER DDL JOBS syntax has been introduced, allowing online adjustment of variable values for specific DDL jobs. This enables flexible balancing of resource consumption and performance, with changes limited to an individual job, making the impact more controllable. For example:
+
+    - `ADMIN ALTER DDL JOBS job_id THREAD = 8;` — Adjusts the `tidb_ddl_reorg_worker_cnt` for the specified DDL task.
+    - `ADMIN ALTER DDL JOBS job_id BATCH_SIZE = 256;` — Adjusts the `tidb_ddl_reorg_batch_size` for the specified DDL task.
+    - `ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB';` — Adjusts the write traffic size for index data on each TiKV node.
 
   For more information, see [Documentation](link).
 
-*Introduction of ADMIN ALTER DDL JOBS syntax to support online modification of DDL job variables  [# ](https://github.com/pingcap/tidb/issues/ ) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
-
-  Starting from v8.3, it is now possible to set the variables [tidb_ddl_reorg_batch_size](/system-variables#tidb_ddl_reorg_batch_size)  and [tidb_ddl_reorg_worker_cnt](/system-variables#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, the DDL job must first be canceled, the variables adjusted, and then resubmit the job.
-  Since v8.5, the ADMIN ALTER DDL JOBS syntax has been introduced, allowing online adjustment of variable values for specific DDL jobs. This enables flexible balancing of resource consumption and performance, with changes limited to an individual job, making the impact more controllable. For example:
-- ADMIN ALTER DDL JOBS job_id THREAD = 8; — Adjusts the tidb_ddl_reorg_worker_cnt for the specified DDL task.
-- ADMIN ALTER DDL JOBS job_id BATCH_SIZE = 256; — Adjusts the tidb_ddl_reorg_batch_size for the specified DDL task.
-- ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB'; — Adjusts the write traffic size for index data on each TiKV node.
-
-  For more information, see [Documentation](link).
 ### DB operations
 
 * Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
@@ -155,14 +163,14 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ## Deprecated features
 
-* The following features are planned for deprecation in future versions:
+The following features are planned for deprecation in future versions:
 
-    * TiDB introduces the system variable [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800), which controls whether priority queues are enabled to optimize the ordering of tasks that automatically collect statistics. In future releases, the priority queue will be the only way to order tasks for automatically collecting statistics, so this system variable will be deprecated.
-    * TiDB introduces the system variable [`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750) in v7.5.0. You can use it to set TiDB to use asynchronous merging of partition statistics to avoid OOM issues. In future releases, partition statistics will be merged asynchronously, so this system variable will be deprecated.
-    * It is planned to redesign [the automatic evolution of execution plan bindings](/sql-plan-management.md#baseline-evolution) in subsequent releases, and the related variables and behavior will change.
-    * In v8.0.0, TiDB introduces the [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800) system variable to control whether TiDB supports disk spill for the concurrent HashAgg algorithm. In future versions, the [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800) system variable will be deprecated.
-    * The TiDB Lightning parameter [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is planned for deprecation in a future release and will be subsequently removed. This parameter will be replaced by [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task), which means that the maximum number of conflicting records is consistent with the maximum number of conflicting records that can be tolerated in a single import task.
-    * Starting from v6.3.0, partitioned tables use [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) by default. Compared with static pruning mode, dynamic pruning mode supports features such as IndexJoin and plan cache with better performance. Therefore, static pruning mode will be deprecated.
+* TiDB introduces the system variable [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800), which controls whether priority queues are enabled to optimize the ordering of tasks that automatically collect statistics. In future releases, the priority queue will be the only way to order tasks for automatically collecting statistics, so this system variable will be deprecated.
+* TiDB introduces the system variable [`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750) in v7.5.0. You can use it to set TiDB to use asynchronous merging of partition statistics to avoid OOM issues. In future releases, partition statistics will be merged asynchronously, so this system variable will be deprecated.
+* It is planned to redesign [the automatic evolution of execution plan bindings](/sql-plan-management.md#baseline-evolution) in subsequent releases, and the related variables and behavior will change.
+* In v8.0.0, TiDB introduces the [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800) system variable to control whether TiDB supports disk spill for the concurrent HashAgg algorithm. In future versions, the [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800) system variable will be deprecated.
+* The TiDB Lightning parameter [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is planned for deprecation in a future release and will be subsequently removed. This parameter will be replaced by [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task), which means that the maximum number of conflicting records is consistent with the maximum number of conflicting records that can be tolerated in a single import task.
+* Starting from v6.3.0, partitioned tables use [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) by default. Compared with static pruning mode, dynamic pruning mode supports features such as IndexJoin and plan cache with better performance. Therefore, static pruning mode will be deprecated.
 
 ## Improvements
 
