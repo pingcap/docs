@@ -27,7 +27,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 The pause duration and behavior depend on your organization's creation date:
 
 - Organizations created after November 12, 2024 follow the standard pause behavior with a maximum pause duration of 7 days.
-- Organizations created before November 12, 2024 follow the compatible pause behavior, which allows a longer pause duration. These organizations will gradually transition to the standard 7-day limit.
+- Organizations created on or before November 12, 2024 follow the compatible pause behavior, which allows a longer pause duration. These organizations will gradually transition to the standard 7-day limit.
 
 <SimpleTab>
 <div label="Standard pause behavior">
