@@ -1,7 +1,6 @@
-****---
+---
 title: SQL Tuning Best Practice
 summary: Learn how to do SQL tuning in TiDB
-
 ---
 
 # Introduction to SQL Tuning
@@ -300,12 +299,14 @@ Additional Information in [EXPLAIN ANALYZE](sql-statements/sql-statement-explain
 Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. There runtime information is crucial for debugging query execution.
 
 Description
+
 - actRows: Number of rows output by the operator.
 - execution info: Detailed execution information of the operator. time represents the total wall time from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator then the time refers to the accumulated time. loops is the number of times the current operator is called by the parent operator.
 - memory: Memory used by the operator.
 - disk: Disk space used by the operator.
 
 Note: Some attributes and explain table columns are omitted for improved formatting
+
 ```sql
 EXPLAIN ANALYZE
 SELECT SUM(pm.m_count)/COUNT(*) FROM
@@ -357,7 +358,9 @@ Let's apply the "first child first – recursive descent" rule to the first plan
 
 ```SQL
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
+```
 
+```
 +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
 | id                       | estRows     | task         | access object     | operator info                                                                                      |
 +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
@@ -374,12 +377,15 @@ Let's apply the "first child first – recursive descent" rule to the second pla
 The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` is to implemented the two order by and limit corespondingly. The final operator `Projection_16` is to implemented the column projection for `t5.name`.
 
 
-```SQL
-tidb> EXPLAIN SELECT t5.name FROM
-    -> (SELECT p.name, p.gravity, p.distance_from_sun FROM universe.planets p JOIN universe.stars s
-    ->  ON s.id = p.sun_id AND s.name = 'Sun'
-    ->  ORDER BY p.distance_from_sun ASC LIMIT 5) t5
-    -> ORDER BY t5.gravity DESC LIMIT 3;
+```sql
+EXPLAIN SELECT t5.name FROM
+(SELECT p.name, p.gravity, p.distance_from_sun FROM universe.planets p JOIN universe.stars s
+ON s.id = p.sun_id AND s.name = 'Sun'
+ORDER BY p.distance_from_sun ASC LIMIT 5) t5
+ORDER BY t5.gravity DESC LIMIT 3;
+```
+
+```
 +-----------------------------------+----------+-----------+---------------------------+
 | id                                | estRows  | task      | access object             |
 +-----------------------------------+----------+-----------+---------------------------+
@@ -509,7 +515,7 @@ A covered index is designed to include all columns referenced in the filter and 
 TiDB needs to dispatch 67 cop tasks for the index range scan on logs_idx, identified as `IndexRangeScan_11`, and 301 cop tasks for table access via `TableRowIDScan_12`.
 By utilizing a covered index, the index lookup can be avoided, leading to improved performance.
 
-```SQL
+```sql
 SELECT
   SUM(`logs`.`amount`)
 FROM
@@ -528,7 +534,7 @@ WHERE
   );
 ```
 
-```SQL
+```
 +-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
 | id                            | estRows    | actRows | task      | access object                                                            | execution info                                             | 
 +-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
@@ -547,7 +553,7 @@ After creating the covered index below, which includes the additional columns so
 CREATE INDEX logs_covered ON logs(snapshot_id, user_id, status, source_type, target_type, amount); 
 ```
 
-```SQL
+```
 +-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 | id                            | estRows    | actRows | task      | access object                                                                                                                   | execution info                              |
 +-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
