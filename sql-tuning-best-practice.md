@@ -203,11 +203,14 @@ Partition_name:
 ```
 
 In TiDB database, there are two ways to collect statistics: automatic collection and manual collection. In most case, the auto collection job works fine. Automatic collection is actually triggered when certain conditions are met for a table, and TiDB will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
-tidb_auto_analyze_ratio: The healthiness trigger
-[`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) and tidb_auto_analyze_end_time: The allowed job window
+- tidb_auto_analyze_ratio: The healthiness trigger
+- [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) and [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time): The allowed job window
 
 ```sql
 SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
+```
+
+```
 +-----------------------------------------+-------------+
 | Variable_name                           | Value       |
 +-----------------------------------------+-------------+
