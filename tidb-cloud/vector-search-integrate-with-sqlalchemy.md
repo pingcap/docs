@@ -9,10 +9,7 @@ This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.o
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and only available for the following deployment options:
->
-> - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters
-> - TiDB Self-Managed clusters of v8.4.0 or a later version
+> TiDB Vector Search is currently in beta and is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Prerequisites
 
