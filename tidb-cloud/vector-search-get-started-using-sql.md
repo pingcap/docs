@@ -16,7 +16,10 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> TiDB Vector Search is currently in beta and only available for the following deployment options:
+>
+> - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters
+> - TiDB Self-Managed clusters of v8.4.0 or a later version
 
 ## Prerequisites
 
