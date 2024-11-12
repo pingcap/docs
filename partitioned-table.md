@@ -1704,7 +1704,7 @@ ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index
 
 Before the introduction of global indexes, TiDB created a local index for each partition, leading to [a limitation](#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure data uniqueness. Additionally, when querying data across multiple partitions, TiDB needed to scan the data of each partition to return results.
 
-To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access data across multiple partitions in a single operation, significantly improving query performance for non-partitioned keys.
+To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation, significantly improving query performance for non-partitioned keys instead of looking up in one local index for each partition.
 
 To create a global index for a primary key or unique key, you can add the `GLOBAL` keyword in the index definition.
 
