@@ -53,9 +53,11 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Reliability
 
-* Enabling rate limiter can protect PD from being crash under a large number of sudden requests and improve the stability of PD (General Availability) [#5739](https://github.com/tikv/pd/issues/5739) @[rleungx](https://github.com/rleungx)
+* Enabling rate limiter can protect PD from being crash under a large number of sudden requests and improve the stability of PD [#5739](https://github.com/tikv/pd/issues/5739) @[rleungx](https://github.com/rleungx)
 
-    You can adjust the rate limiter configuration through pd-ctl, for more information, see [PD Control User Guide | TiDB Docs](/stable/pd-control.md).
+    You can adjust the rate limiter configuration through pd-ctl. 
+    
+    For more information, see [Documentation](/stable/pd-control.md).
 
 ### Availability
 
