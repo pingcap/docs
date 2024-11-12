@@ -89,7 +89,7 @@ Adjust the following system variables related to Fast Online DDL:
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
-3. Starting from v7.4.0, for TiDB Self-Hosted, you can adjust the number of TiDB nodes that perform the DXF tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute the DXF tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute the DXF tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute tasks by default.
+3. Starting from v7.4.0, for TiDB Self-Managed, you can adjust the number of TiDB nodes that perform the DXF tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute the DXF tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute the DXF tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute tasks by default.
 
     > **Note:**
     >
