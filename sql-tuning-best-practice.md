@@ -70,6 +70,7 @@ The most efficient way to identify Resource-Intensive SQL is using TiDB Dashboar
 ## Monitoring SQL Statements by Using TiDB Dashboard
 
 ### SQL Statements Panel 
+
 In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to SQL Statements panel, which helps us identify the following:
 
 1. The SQL statement with the highest total latency is the one that takes the longest time to execute out of multiple executions of the same SQL statement. 
@@ -78,7 +79,6 @@ In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to SQL Statements
 
 SQL statements are normalized as templates, where literals and bind variables are replaced by '?'. This normalization and sorting process allows you to quickly pinpoint the most resource-intensive queries that may require optimization.
 ![sql-statements-default](/media/sql-tuning/sql-statements-default.png)
-
 
 ### Slow Queries Panel Default Display
 
@@ -158,6 +158,7 @@ TiDB uses a cost-based optimizer (CBO) to determine the most efficient execution
   - Column
 
 Based on the input, The cost model will produce the execution plan, which includes the details how the system execute the sql, including 
+
 - Access Method
 - Join Method
 - Join Order
@@ -169,6 +170,7 @@ The optimizer is as good as the information it receives. Therefore, ensuring up-
 Statistics are essential to the TiDB optimizer. TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement.
 
 statistics is generally divided into two levels: table level and column level. 
+
 - For table-level statistics, it includes the total number of rows in the table and the number of rows that have been modified since the last collection of statistics. 
 - The column-level statistics information is more abundant, including histograms, Count-Min Sketch, Top-N (values or indexes with the highest occurrences), distribution and quantity of different values, and the number of null values, and so on.
 
@@ -208,6 +210,7 @@ Partition_name:
 ```
 
 In TiDB database, there are two ways to collect statistics: automatic collection and manual collection. In most case, the auto collection job works fine. Automatic collection is actually triggered when certain conditions are met for a table, and TiDB will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
+
 - tidb_auto_analyze_ratio: The healthiness trigger
 - [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) and [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time): The allowed job window
 
@@ -234,6 +237,7 @@ In cases where automatic collection doesn't meet your needs, you can manually co
 It's important to note that after manual collection, subsequent automatic gathering jobs will inherit the new parameters. This means that any customizations you've made during manual collection will be carried forward in future automatic analyses.
 
 Another common scenario is locking table statistics. This is useful when:
+
 1. The statistics on the table are already representative of the data.
 2. The table is very large and statistics collection is time-consuming.
 3. You want to maintain statistics only during specific time windows.
@@ -243,6 +247,7 @@ To lock the statistics for a table, you can use the following statement [`LOCK S
 for more detail about statistics, please refer to [statistics](https://docs.pingcap.com/tidb/stable/statistics).
 
 ## How TiDB build A Execution Plan
+
 An SQL statement undergoes optimization primarily in the optimizer through three stages:
 
 - Pre-Processing
@@ -263,7 +268,7 @@ SELECT id, name FROM emp WHERE id = 901;
 
 The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules include column pruning，partition pruning，eliminate Max/Min, eliminate outer join, join reorder, predicates push-down，subquery rewrite，derive TopN from window functions，and de-correlation of correlated Subquery. Since this step is fully automated by the query optimizer, it usually does not require manual adjustments.
 
-More Detail for Logical Transformation: https://docs.pingcap.com/tidb/stable/sql-logical-optimization.
+More Detail for Logical Transformation: [SQL Logical Optimization](/sql-logical-optimization.md).
 
 ### Cost-Based Optimization
 
@@ -282,6 +287,7 @@ The execution plan represents the steps TiDB will follow to execute a SQL query.
 ### Generating and Displaying Execution Plans
 
 Beside access the execution plan information through TiDB Dashboard, TiDB provides a `EXPLAIN` statement to display the execution plan for a SQL query. Here's an example of using `EXPLAIN`:
+
 - id: Operator name and the step unique identifier
 - estRows: Estimated number of rows from the particular step
 - task: The executor of the step
@@ -359,7 +365,6 @@ There are three important details to add to this:
 2. Blocking vs. Non-blocking Operators: Operators can be either blocking or non-blocking. Blocking operators, such as `TopN` and `HashAgg`, must create their entire result set before passing anything to their parent. Non-blocking operators, like `IndexLookup` and `IndexJoin`, create and pass their row source piece by piece on demand.
 
 3. Concurrent vs. Serial Execution: Child operators can be executed concurrently or serially. For instance, the child operators of an `IndexLookup` operator are executed serially, while those of a `HashJoin` operator can be executed concurrently.
-
 
 Let's apply the "first child first – recursive descent" rule to the first plan. When reading an execution plan, you should start from the top and work your down bottom. In the below example begin by looking at the `TableFullScan_18` (or the first child of the tree). In this case the access operator for table trips are implemented using full table scan. The rows produced by the tables scans will be consumed by the `Selection_19` operator. The `Selection_19` operator is to filter the data by `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`. Next the group-by operator `StreamAgg_9` is to implemented the aggregation `count(*)`. Be noted that the 3 operators `TableFullScan_18`, `Selection_19`, `StreamAgg_9` are pushdown to TiKV, which is marked as `cop[tikv]`, so that early filter and aggregation can be done in TiKV, to minize the data transfer between TiKV and TiDB. Finally the `TableReader_21` is to read the data from the `StreamAgg_9` operator, then finally the `StreamAgg_20` is to implemented the aggregation `count(*)`.
 
@@ -675,7 +680,6 @@ Original plan
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 ```
 
-
 Performance Improvement with the New Index:
 
 After creating the new index (new_idx on orders(user_id, mode, id, created_at, label_id)), the query performance improved dramatically. The execution time reduced from 11 minutes and 9 seconds to just 5.3 milliseconds, which is a staggering improvement of over 126,000 times faster. This massive improvement can be explained by:
@@ -701,7 +705,6 @@ Plan with new index (user_id, mode, id, created_at, label_id)
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 ```
 
-
 ### Composite Index Strategy Guidelines
 
 When creating a composite index, it's essential to follow a specific order for the columns to ensure optimal performance. This order is crucial because it directly impacts how efficiently the index can filter and sort data.
@@ -724,7 +727,6 @@ Here is the recommended order for the columns in the index:
 4. columns in index postfix for select list or aggregate function:
    - Leverage IndexReader
    - Avoid IndexLookup operations
-
 
 ### The Cost of Indexing
 
