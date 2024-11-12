@@ -142,9 +142,9 @@ To the right of the protocol layer is the Optimizer layer of TiDB Server, which 
 4. The AST that has gone through Logical Transformation will undergo Cost-Based Optimization.
 5. During Cost-Based Optimization, the optimizer considers statistics to determine how to select specific operators and finally generates a physically executable physical execution plan.
 6. The generated physical execution plan is sent to the SQL Executor of the TiDB database for execution.
-7. Unlike traditional databases, TiDB databases need to push down the execution plan to different TiKV for reading and writing data.
+7. Unlike traditional databases, TiDB databases need to push down the execution plan to different TiKV or TiFlash for reading and writing data.
 
-![workflow](/media/sql-tuning/workflow.png)
+![workflow](/media/sql-tuning/workflow-tiflash.png)
 
 ## Optimizer Fundamentals
 
@@ -266,7 +266,7 @@ SELECT id, name FROM emp WHERE id = 901;
 
 ### Logical Transformation
 
-The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules include column pruning，partition pruning，eliminate Max/Min, eliminate outer join, join reorder, predicates push-down，subquery rewrite，derive TopN from window functions，and de-correlation of correlated Subquery. Since this step is fully automated by the query optimizer, it usually does not require manual adjustments.
+The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules include column pruning，partition pruning，eliminate Max/Min, eliminate outer join, join reorder, predicates push-down，subquery rewrite，derive TopN from window functions，and de-correlation of correlated Subquery. Since this step is rule-based and fully automated by the query optimizer, it usually does not require manual adjustments.
 
 More Detail for Logical Transformation: [SQL Logical Optimization](/sql-logical-optimization.md).
 
@@ -274,9 +274,16 @@ More Detail for Logical Transformation: [SQL Logical Optimization](/sql-logical-
 
 TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement, and associates a cost with each plan step. The Cost-Based Optimization estimates the cost of each available plan choice, including index accesses and the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
 
-The below figure illustrates the various data access paths and row set operations that cost-based optimization can consider to develop the optimal execution plan. Furthermore, during the logical transformation stage, the query has already been rewritten for predicate push-down. In the cost-based optimization stage, TiKV expression push-down is further implemented when possible at TiKV layer. 
+The following figure illustrates the various data access paths and row set operations that cost-based optimization can consider when developing the optimal execution plan. For data access paths, the optimizer determines the most efficient method to retrieve data, whether through an index scan or a table scan, and whether to retrieve the data from row-based TiKV or columnar-based TiFlash storage.
 
-Furthermore, confirming the algorithm for certain SQL operations, such as aggregation, join, and sorting, is essential. For instance, the aggregation operator may utilize either `HASH_AGG` or `STREAM_AGG`, while the join operator can select from `HASH JOIN`, `MERGE JOIN`, or `INDEX JOIN`. Likewise, various options are available for the sorting operator.
+Also, the optimizer need to evaluate operations that manipulate row sets, such as aggregation, join, and sorting. For instance, the aggregation operator may utilize either `HASH_AGG` or `STREAM_AGG`, while the join operator can select from `HASH JOIN`, `MERGE JOIN`, or `INDEX JOIN`. 
+
+Furthermore, expression and operator push-down to the physical storage engines is part of the physical optimization phase. The physical plan is partitioned and distributed to different components based on the underlying storage engines:
+- Root Task runs at the TiDB layer
+- Cop (Coprocessor) Task runs at the TiKV or TiFlash layer
+- MPP (Massively Parallel Processing) Task runs at the TiFlash layer
+
+This distribution of the physical plan allows the different components to collaborate and execute the query efficiently.
 
 ![cost-based-optimization](/media/sql-tuning/cost-based-optimization.png)
 
@@ -290,7 +297,7 @@ Beside access the execution plan information through TiDB Dashboard, TiDB provid
 
 - id: Operator name and the step unique identifier
 - estRows: Estimated number of rows from the particular step
-- task: The executor of the step
+- task: Indicates the layer where the operator is executed. For instance, `root` indicates execution at the TiDB layer, whereas `cop[tikv]` indicates execution at the TiKV layer. 
 - access object: The object where the row sources are located
 - operator info: Extended information about the operator regarding the step
 
