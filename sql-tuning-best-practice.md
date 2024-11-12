@@ -61,7 +61,7 @@ Examples:
 
 ## Balance Workload Distribution
 
-In a distributed architecture like TiDB, it's essential to maintain a balanced workload across multiple TiKV nodes. This is crucial for achieving optimal performance. For guidance on identifying and resolving read and write hotspots, please refer to the [document](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#optimization-of-small-table-hotspots). By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
+In a distributed architecture like TiDB, it's essential to maintain a balanced workload across multiple TiKV nodes. This is crucial for achieving optimal performance. For guidance on identifying and resolving read and write hotspots, please refer to the [document](/troubleshoot-hot-spot-issues.md#optimization-of-small-table-hotspots). By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
 
 # Identifying High-Load SQL
 
@@ -98,11 +98,11 @@ In addition to TiDB Dashboard, there are several other tools available to identi
 
 Each tool offers unique insights and can be valuable for different analysis scenarios. Using a combination of these tools allows for comprehensive SQL performance monitoring and optimization.
 
-- [slow query log](https://docs.pingcap.com/tidb/stable/identify-slow-queries)
-- [statements_summary view](https://docs.pingcap.com/tidb/stable/statement-summary-tables#statements_summary)
-- [top sql feature](https://docs.pingcap.com/tidb/stable/top-sql)
-- [expensive queries in tidb log](https://docs.pingcap.com/tidb/stable/identify-expensive-queries)
-- [cluster_processlist view](https://docs.pingcap.com/tidb/stable/information-schema-processlist#cluster_processlist)
+- [slow query log](/identify-slow-queries.md)
+- [statements_summary view](/statement-summary-tables.md#statements_summary)
+- [Top SQL feature](/dashboard/top-sql.md)
+- [expensive queries in TiDB log](/identify-expensive-queries.md)
+- [cluster_processlist view](/information-schema/information-schema-processlist.md#cluster_processlist)
 
 ## Gathering Data on the SQL Identified
 
@@ -244,7 +244,7 @@ Another common scenario is locking table statistics. This is useful when:
 
 To lock the statistics for a table, you can use the following statement [`LOCK STATS table_name`](/sql-statements/sql-statement-lock-stats.md).
 
-for more detail about statistics, please refer to [statistics](https://docs.pingcap.com/tidb/stable/statistics).
+for more detail about statistics, please refer to [statistics](/statistics.md).
 
 ## How TiDB build A Execution Plan
 
@@ -311,8 +311,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-Additional Information in [EXPLAIN ANALYZE](sql-statements/sql-statement-explain-analyze.md) Output
-Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. There runtime information is crucial for debugging query execution.
+Additional Information in [EXPLAIN ANALYZE](sql-statements/sql-statement-explain-analyze.md) Output. Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. There runtime information is crucial for debugging query execution.
 
 Description
 
@@ -335,6 +334,9 @@ JOIN universe.planets p
 ON c.id = p.category_id AND c.name = 'Jovian') pc
 ON m.planet_id = pc.id
 GROUP BY pc.name) pm;
+```
+
+```
 +-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
 | id                                      |.| actRows | task      | access object             | execution info                                                 |.| memory    | disk    |
 +-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
@@ -355,8 +357,7 @@ GROUP BY pc.name) pm;
 
 ### Reading Execution Plans: First Child First
 
-To understand why SQL queries run slowly, it's very important to know how to read Execution Plans. The main rule for reading an execution plan is "first child first – recursive descent".
-Each operator of the plan produces rows of data. When we talk about how a plan runs, we really mean the order in which each operator produces its rows. The "first child first" rule means that to produce its rows, each operator of the plan asks its child operators to produce their rows first. Then it combines these rows in some way. The order in which it asks its child parts is the same as the order they appear in the plan.
+To understand why SQL queries run slowly, it's very important to know how to read Execution Plans. The main rule for reading an execution plan is "first child first – recursive descent". Each operator of the plan produces rows of data. When we talk about how a plan runs, we really mean the order in which each operator produces its rows. The "first child first" rule means that to produce its rows, each operator of the plan asks its child operators to produce their rows first. Then it combines these rows in some way. The order in which it asks its child parts is the same as the order they appear in the plan.
 
 There are three important details to add to this:
 
@@ -385,8 +386,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first child of the tree). For the table `stars`, the optimizer ony need to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`.
-The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` is to implemented the two order by and limit corespondingly. The final operator `Projection_16` is to implemented the column projection for `t5.name`.
+Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first child of the tree). For the table `stars`, the optimizer ony need to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`. The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` is to implemented the two order by and limit corespondingly. The final operator `Projection_16` is to implemented the column projection for `t5.name`.
 
 ```sql
 EXPLAIN SELECT t5.name FROM
@@ -522,9 +522,7 @@ This section showcases three practical examples that illustrate effective indexi
 
 ### SQL Tuning with a Covered Index
 
-A covered index is designed to include all columns referenced in the filter and select clauses. The query below requires an index lookup of 2597411 rows, taking 46.4 seconds to execute.
-TiDB needs to dispatch 67 cop tasks for the index range scan on logs_idx, identified as `IndexRangeScan_11`, and 301 cop tasks for table access via `TableRowIDScan_12`.
-By utilizing a covered index, the index lookup can be avoided, leading to improved performance.
+A covered index is designed to include all columns referenced in the filter and select clauses. The query below requires an index lookup of 2597411 rows, taking 46.4 seconds to execute. TiDB needs to dispatch 67 cop tasks for the index range scan on logs_idx, identified as `IndexRangeScan_11`, and 301 cop tasks for table access via `TableRowIDScan_12`. By utilizing a covered index, the index lookup can be avoided, leading to improved performance.
 
 ```sql
 SELECT
@@ -580,8 +578,7 @@ CREATE INDEX logs_covered ON logs(snapshot_id, user_id, status, source_type, tar
 
 When optimizing SQL queries, especially those that include an `ORDER BY` clause, it is beneficial to create a composite index that encompasses both the filtering and sorting columns. This approach allows the database engine to efficiently access the required data while maintaining the desired order.
 
-For instance, consider the following query that retrieves logs based on specific conditions. The execution plan shows a duration of 170ms. TiDB employs the `logs_index` to perform an `IndexRangeScan_20` with the filter `snapshot_id = 459840`. Subsequently, it retrieves all columns from the table, resulting in 5715 rows being streamed back to TiDB after the `IndexLookUp_23`, which then sorts the dataset and returns 1000 rows.
-Note that the `id` column is the primary key, which means it is implicitly included in the `logs_idx` index. However, for `IndexRangeScan_20`, the order is not guaranteed because, after the index prefix column `snapshot_id`, there are two additional columns: `user_id` and `status`. Therefore, the ordering of `id` cannot be assured.
+For instance, consider the following query that retrieves logs based on specific conditions. The execution plan shows a duration of 170ms. TiDB employs the `logs_index` to perform an `IndexRangeScan_20` with the filter `snapshot_id = 459840`. Subsequently, it retrieves all columns from the table, resulting in 5715 rows being streamed back to TiDB after the `IndexLookUp_23`, which then sorts the dataset and returns 1000 rows. Note that the `id` column is the primary key, which means it is implicitly included in the `logs_idx` index. However, for `IndexRangeScan_20`, the order is not guaranteed because, after the index prefix column `snapshot_id`, there are two additional columns: `user_id` and `status`. Therefore, the ordering of `id` cannot be assured.
 
 ```sql
 EXPLAIN ANALYZE SELECT  
@@ -639,7 +636,6 @@ The original query took 11 minutes and 9 seconds to complete, which is an extrem
 2. Large intermediate result set: After applying the date range filter, 12,082,311 rows still needed to be processed.
 3. Late filtering: The most selective predicates (mode, user_id, and label_id) were applied after accessing the table, resulting in 16,604 rows.
 4. Sorting overhead: The final sort operation on 16,604 rows added additional processing time.
-
 
 Here is the query pattern
 
@@ -708,6 +704,7 @@ Plan with new index (user_id, mode, id, created_at, label_id)
 ### Composite Index Strategy Guidelines
 
 When creating a composite index, it's essential to follow a specific order for the columns to ensure optimal performance. This order is crucial because it directly impacts how efficiently the index can filter and sort data.
+
 Here is the recommended order for the columns in the index:
 
 1. Equal predicates for index prefix (columns accessed directly):
@@ -749,5 +746,5 @@ While indexes can significantly improve query performance, they also come with c
 Best Practice:
 
 - Only create indexes that provide clear performance benefits
-- Regularly review index usage statistics via [TIDB_INDEX_USAGE](https://docs.pingcap.com/tidb/dev/information-schema-tidb-index-usage)
+- Regularly review index usage statistics via [TIDB_INDEX_USAGE](/information-schema/information-schema-tidb-index-usage.md)
 - Consider the write/read ratio of your workload when designing indexes
