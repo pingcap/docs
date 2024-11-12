@@ -1176,7 +1176,7 @@ ALTER TABLE members REMOVE PARTITIONING
 To partition an existing non-partitioned table or modify the partition type of an existing partitioned table, you can use the following statement, which copies all rows and recreates the indexes online according to the new partition definitions:
 
 ```sql
-ALTER TABLE <table_name> PARTITION BY <new partition type and definitions>
+ALTER TABLE <table_name> PARTITION BY <new partition type and definitions> [update indexes (<indexes defintitions>)]
 ```
 
 Examples:
@@ -1195,6 +1195,21 @@ ALTER TABLE member_level PARTITION BY RANGE(level)
  PARTITION pMid VALUES LESS THAN (3),
  PARTITION pHigh VALUES LESS THAN (7)
  PARTITION pMax VALUES LESS THAN (MAXVALUE));
+```
+
+When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global or local as needed:
+
+```sql
+CREATE TABLE t1 (
+    col1 INT NOT NULL,
+    col2 DATE NOT NULL,
+    col3 INT NOT NULL,
+    col4 INT NOT NULL,
+    UNIQUE KEY uidx12(col1, col2),
+    UNIQUE KEY uidx3(col3)
+);
+
+ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
 ```
 
 ## Partition pruning
@@ -1472,10 +1487,10 @@ This section introduces some restrictions and limitations on partitioned tables 
 
 ### Partitioning keys, primary keys and unique keys
 
-This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship can be expressed as follows: **Every unique key on the table must use every column in the table's partitioning expression**. This also includes the table's primary key, because it is by definition a unique key. 
+This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship can be expressed as follows: **Every unique key on the table must use every column in the table's partitioning expression**. This also includes the table's primary key, because it is by definition a unique key.
 
 > **Note:**
-> 
+>
 > You can ignore this rule when using [global indexes](#global-indexes).
 
 For example, the following table creation statements are invalid:
@@ -1691,7 +1706,7 @@ Before the introduction of global indexes, TiDB created a local index for each p
 
 To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access data across multiple partitions in a single operation, significantly improving query performance for non-partitioned keys.
 
-To create a global index for a primary key or unique key that **does not include all the columns used in the partition expressions**, you can enable the [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) system variable and add the `GLOBAL` keyword in the index definition. 
+To create a global index for a primary key or unique key, you can add the `GLOBAL` keyword in the index definition.
 
 > **Note:**
 >
