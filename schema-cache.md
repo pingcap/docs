@@ -36,3 +36,8 @@ In scenarios with a large number of databases and tables, the following known is
     - `SHOW FULL TABLES`
     - `FLASHBACK`
     - `ALTER TABLE ... SET TIFLASH MODE ...`
+- When you use tables with the [`AUTO_INCREMENT`](/auto-increment.md) or [`AUTO_RANDOM`](/auto-random.md) attribute, a small schema cache size might cause these tables to frequently enter and leave the cache. You can monitor it through the schema cache hit rate and size on the monitoring panel. This can result in the allocated ID range becoming invalid before being fully used, leading to ID jumps. In write-intensive scenarios, this might even exhaust the ID range. To minimize abnormal ID allocation behavior and improve system stability, it is recommended to take the following measures:
+
+    - Increase the schema cache size to reduce frequent evictions.
+    - Set [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) to `1` to prevent ID jumps.
+    - Properly configure the shard bits and reserved bits of `AUTO_RANDOM` to avoid a too small ID range.
