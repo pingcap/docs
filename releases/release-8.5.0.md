@@ -141,7 +141,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-|  |  |  |
+|tidb_ddl_reorg_max_write_speed  | Newly added |Used to control the speed at which TiDB writes index data to a single TiKV node. For example, setting the value to 200 MiB limits the maximum write speed to 200 MiB/s.  |
 |  |  |  |
 |  |  |  |
 
