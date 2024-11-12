@@ -40,4 +40,4 @@ In scenarios with a large number of databases and tables, the following known is
 
     - Increase the schema cache size to reduce frequent evictions.
     - Set [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) to `1` to prevent ID jumps.
-    - Properly configure the sharding bits and reserved bits for AUTO_RANDOM to avoid having a limited ID range.
+    - Properly configure the sharding bits and reserved bits for `AUTO_RANDOM` to avoid having a limited ID range.
