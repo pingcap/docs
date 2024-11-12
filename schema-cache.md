@@ -36,4 +36,8 @@ In scenarios with a large number of databases and tables, the following known is
     - `SHOW FULL TABLES`
     - `FLASHBACK`
     - `ALTER TABLE ... SET TIFLASH MODE ...`
-- For tables that use "AUTO_INCREMENT" or "AUTO_RANDOM," if the Schema cache is set too small, these tables may frequently enter and exit the cache (which can be monitored by observing the Schema cache hit rate and size in TiDB Dashboard). This situation may cause allocated ID segments to expire before they are fully used, resulting in ID jumps. In scenarios with high write volumes, it may even lead to ID segment exhaustion. Therefore, it is recommended to increase the Schema cache size to avoid frequent cache evictions, or set AUTO_ID_CACHE=1 to prevent ID jumps. Additionally, it is recommended to properly configure the AUTO_RANDOM sharding bits and reserved bits to avoid an overly small range of assignable IDs.
+- When using tables with `AUTO_INCREMENT` or `AUTO_RANDOM`, a small schema cache size might cause these tables to frequently enter and leave the cache (which can be monitored through the schema cache hit rate and size on the monitoring panel). This can result in the allocated ID range becoming invalid before being fully used, leading to ID jumps. In high-write scenarios, this might even exhaust the ID range. To minimize abnormal ID allocation behavior and improve system stability, consider the following measures:
+
+    - Increase the schema cache size to reduce frequent evictions.
+    - Set [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) to `1` to prevent ID jumps.
+    - Properly configure the sharding bits and reserved bits for AUTO_RANDOM to avoid having a limited ID range.
