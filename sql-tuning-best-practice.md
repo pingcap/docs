@@ -124,11 +124,11 @@ This guide focuses on providing actionable advice for beginners looking to optim
 - How TiDB build A Execution Plan
 - Understand Execution Plan
 - Index Strategy in TiDB
-  - SQL Tuning with a Covered Index
-  - SQL Tuning with a Composite Index Involing Sorting
-  - SQL Tuning with a Composite Index for Efficient Filtering and Sorting
-  - Composite Index Strategy Guidelines
-  - The Cost of Indexing
+    - SQL Tuning with a Covered Index
+    - SQL Tuning with a Composite Index Involing Sorting
+    - SQL Tuning with a Composite Index for Efficient Filtering and Sorting
+    - Composite Index Strategy Guidelines
+    - The Cost of Indexing
 
 ## Query Processing Workflow
 
@@ -153,9 +153,9 @@ TiDB uses a cost-based optimizer (CBO) to determine the most efficient execution
 - SQL
 - Schema Design
 - Statistics
-  - Table
-  - Index
-  - Column
+    - Table
+    - Index
+    - Column
 
 Based on the input, The cost model will produce the execution plan, which includes the details how the system execute the sql, including 
 
