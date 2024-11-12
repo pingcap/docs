@@ -19,7 +19,7 @@ TiDB also supports execution plan caching for some non-`PREPARE` statements, sim
 In the current version of TiDB, if a `Prepare` statement meets any of the following conditions, the query or the plan is not cached:
 
 - The query contains SQL statements other than `SELECT`, `UPDATE`, `INSERT`, `DELETE`, `Union`, `Intersect`, and `Except`.
-- The query accesses temporary tables, or a table that contains generated columns.
+- The query accesses temporary tables, or a table that contains generated columns, or uses static mode (that is, [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) is set to `static`) to access partitioning tables.
 - The query contains non-correlated sub-queries, such as `SELECT * FROM t1 WHERE t1.a > (SELECT 1 FROM t2 WHERE t2.b < 1)`.
 - The query contains correlated sub-queries with `PhysicalApply` operators in the execution plan, such as `SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`.
 - The query contains the `ignore_plan_cache` or `set_var` hint, such as `SELECT /*+ ignore_plan_cache() */ * FROM t` or `SELECT /*+ set_var(max_execution_time=1) */ * FROM t`.
