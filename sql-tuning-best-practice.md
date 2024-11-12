@@ -717,7 +717,7 @@ Here is the recommended order for the columns in the index:
    - Maintain sorted order
 
 3. Additional filtering columns:
-   - Non-equal predicates (!=, <>, IS NOT NULL, etc)
+   - Non-equal predicates (`!=`, `<>`, `IS NOT NULL`, etc)
    - Time range conditions on datetime columns
    - Helps reduce row lookups
 
