@@ -1176,7 +1176,7 @@ ALTER TABLE members REMOVE PARTITIONING
 To partition an existing non-partitioned table or modify the partition type of an existing partitioned table, you can use the following statement, which copies all rows and recreates the indexes online according to the new partition definitions:
 
 ```sql
-ALTER TABLE <table_name> PARTITION BY <new partition type and definitions> [update indexes (<indexes defintitions>)]
+ALTER TABLE <table_name> PARTITION BY <new partition type and definitions> [UPDATE INDEXES (<index name> {GLOBAL|LOCAL}[ , <index name> {GLOBAL|LOCAL}...])]
 ```
 
 Examples:
