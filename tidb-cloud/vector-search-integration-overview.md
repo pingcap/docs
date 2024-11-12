@@ -1,11 +1,11 @@
 ---
 title: Vector Search Integration Overview
-summary: An overview of TiDB vector search integration, including supported AI frameworks, embedding models, and ORM libraries.
+summary: An overview of TiDB Vector Search integration, including supported AI frameworks, embedding models, and ORM libraries.
 ---
 
 # Vector Search Integration Overview
 
-This document provides an overview of TiDB vector search integration, including supported AI frameworks, embedding models, and Object Relational Mapping (ORM) libraries.
+This document provides an overview of TiDB Vector Search integration, including supported AI frameworks, embedding models, and Object Relational Mapping (ORM) libraries.
 
 > **Note**
 >

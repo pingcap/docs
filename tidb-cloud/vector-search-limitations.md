@@ -1,11 +1,11 @@
 ---
 title: Vector Search Limitations
-summary: Learn the limitations of the TiDB vector search.
+summary: Learn the limitations of the TiDB Vector Search.
 ---
 
 # Vector Search Limitations
 
-This document describes the known limitations of TiDB vector search.
+This document describes the known limitations of TiDB Vector Search.
 
 > **Note**
 >
