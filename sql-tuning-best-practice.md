@@ -20,10 +20,12 @@ SQL tuning is a critical aspect of optimizing database system performance. It in
    - This may include rewriting queries, adding or modifying indexes, updating statistics, or adjusting database parameters.
 
 These steps are iteratively repeated until:
+
 - The system performance meets the desired targets
 - No further improvements can be made to the remaining statements.
 
 It's important to note that SQL tuning is an ongoing process. As your data volumes grow and query patterns evolve, you should:
+
 - Regularly monitor query performance
 - Re-evaluate your optimization strategies
 - Adapt your approach to address new performance challenges
@@ -62,9 +64,11 @@ Examples:
 In a distributed architecture like TiDB, it's essential to maintain a balanced workload across multiple TiKV nodes. This is crucial for achieving optimal performance. For guidance on identifying and resolving read and write hotspots, please refer to the [document](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#optimization-of-small-table-hotspots). By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
 
 # Identifying High-Load SQL
+
 The most efficient way to identify Resource-Intensive SQL is using TiDB Dashboard, There are other tools like views and logs available as well.
 
 ## Monitoring SQL Statements by Using TiDB Dashboard
+
 ### SQL Statements Panel 
 In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to SQL Statements panel, which helps us identify the following:
 
@@ -77,6 +81,7 @@ SQL statements are normalized as templates, where literals and bind variables ar
 
 
 ### Slow Queries Panel Default Display
+
 In the TiDB Dashboard, we can find the Slow Query panel, which displays all SQL statements whose execution time exceeds the time threshold set by the system variable tidb_slow_log_threshold (default 300 milliseconds). 
 
 On Slow Queries panel, we can find:
@@ -92,12 +97,12 @@ On Slow Queries panel, we can find:
 In addition to TiDB Dashboard, there are several other tools available to identify resource-intensive SQL queries:
 
 Each tool offers unique insights and can be valuable for different analysis scenarios. Using a combination of these tools allows for comprehensive SQL performance monitoring and optimization.
+
 - [slow query log](https://docs.pingcap.com/tidb/stable/identify-slow-queries)
 - [statements_summary view](https://docs.pingcap.com/tidb/stable/statement-summary-tables#statements_summary)
 - [top sql feature](https://docs.pingcap.com/tidb/stable/top-sql)
 - [expensive queries in tidb log](https://docs.pingcap.com/tidb/stable/identify-expensive-queries)
 - [cluster_processlist view](https://docs.pingcap.com/tidb/stable/information-schema-processlist#cluster_processlist)
-
 
 ## Gathering Data on the SQL Identified
 
@@ -342,7 +347,6 @@ GROUP BY pc.name) pm;
 +-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
 ```
 
-
 ### Reading Execution Plans: First Child First
 
 To understand why SQL queries run slowly, it's very important to know how to read Execution Plans. The main rule for reading an execution plan is "first child first – recursive descent".
@@ -357,9 +361,7 @@ There are three important details to add to this:
 3. Concurrent vs. Serial Execution: Child operators can be executed concurrently or serially. For instance, the child operators of an `IndexLookup` operator are executed serially, while those of a `HashJoin` operator can be executed concurrently.
 
 
-
 Let's apply the "first child first – recursive descent" rule to the first plan. When reading an execution plan, you should start from the top and work your down bottom. In the below example begin by looking at the `TableFullScan_18` (or the first child of the tree). In this case the access operator for table trips are implemented using full table scan. The rows produced by the tables scans will be consumed by the `Selection_19` operator. The `Selection_19` operator is to filter the data by `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`. Next the group-by operator `StreamAgg_9` is to implemented the aggregation `count(*)`. Be noted that the 3 operators `TableFullScan_18`, `Selection_19`, `StreamAgg_9` are pushdown to TiKV, which is marked as `cop[tikv]`, so that early filter and aggregation can be done in TiKV, to minize the data transfer between TiKV and TiDB. Finally the `TableReader_21` is to read the data from the `StreamAgg_9` operator, then finally the `StreamAgg_20` is to implemented the aggregation `count(*)`.
-
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -380,7 +382,6 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 
 Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first child of the tree). For the table `stars`, the optimizer ony need to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`.
 The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` is to implemented the two order by and limit corespondingly. The final operator `Projection_16` is to implemented the column projection for `t5.name`.
-
 
 ```sql
 EXPLAIN SELECT t5.name FROM
@@ -744,6 +745,7 @@ While indexes can significantly improve query performance, they also come with c
    - Performance can degrade significantly if hotspots occur
 
 Best Practice:
+
 - Only create indexes that provide clear performance benefits
 - Regularly review index usage statistics via [TIDB_INDEX_USAGE](https://docs.pingcap.com/tidb/dev/information-schema-tidb-index-usage)
 - Consider the write/read ratio of your workload when designing indexes
