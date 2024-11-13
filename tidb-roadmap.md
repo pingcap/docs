@@ -64,7 +64,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <li>
             <b>Reduced I/O for Statistics Collection (GA)</b>
-            <br />Allows users to scan only a portion of data samples on TiKV, reducing time and resource consumption for statistics collection.
+            <br />Allows you to scan only a portion of data samples on TiKV, reducing time and resource consumption for statistics collection.
           </li>
           <li>
             <b>Limit Operator Pushdown</b>
@@ -198,7 +198,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <li>
             <b>Enhanced Memory Protection</b>
-            <br />Monitors memory usage across all components to prevent operations that could impact system stability.
+            <br />Monitors memory usage across all components to prevent operations that might impact system stability.
           </li>
           <li>
             <b>Automatic SQL Binding</b>
@@ -206,7 +206,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <li>
             <b>Multi-Versioned Statistics</b>
-            <br />Allows users to view and restore previous statistics versions after updates.
+            <br />Allows you to view and restore previous statistics versions after updates.
           </li>
           <li>
             <b>Distributed Statistics Collection</b>
