@@ -30,9 +30,11 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 ## B
 
-### Backup and Restore (BR)
+### Backup & Restore (BR)
 
-BR is the Backup and Restore tool for TiDB. For more information, see [BR Overview](/br/backup-and-restore-overview.md).
+BR is the backup and restore tool for TiDB. For more information, see [BR Overview](/br/backup-and-restore-overview.md).
+
+`br` is the [br command line tool](/br/use-br-command-line-tool.md) used for backups or restores in TiDB.
 
 ### Baseline Capturing
 
