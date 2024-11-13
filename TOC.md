@@ -172,7 +172,7 @@
 - Stream Data
   - [TiCDC Overview](/ticdc/ticdc-overview.md)
   - [Deploy and Maintain](/ticdc/deploy-ticdc.md)
-  - Changefeeds
+  - Changefeed
     - [Overview](/ticdc/ticdc-changefeed-overview.md)
     - Create Changefeeds
       - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
