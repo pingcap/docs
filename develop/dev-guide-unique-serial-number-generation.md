@@ -43,8 +43,8 @@ The number allocation solution can be understood as bulk acquisition of auto-inc
 | Field Name | Field Type | Field Description |
 | -------- | ------------ | ---------------------------- |
 | `SEQ_NAME` | varchar(128) | The name of the sequence, used to distinguish different applications. |
-| `MAX_ID` | bigint(20) | The maximum value of the current sequence that has been allocated. |
-| `STEP` | int(11) | The step, which indicates the length of each assigned segment. |
+| `MAX_ID` | bigint | The maximum value of the current sequence that has been allocated. |
+| `STEP` | int | The step, which indicates the length of each assigned segment. |
 
 Every time, the application gets a segment of sequence numbers at the configured step. It updates the database at the same time to persist the maximum value of the current sequence that has been allocated. The processing and allocation of sequence numbers are completed in the application's memory. After a segment of sequence numbers is used up, the application gets a new segment of sequence numbers, which effectively alleviates the pressure on the database write. In practice, you can also adjust the step to control the frequency of database updates.
 

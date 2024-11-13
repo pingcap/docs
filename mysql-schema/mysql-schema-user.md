@@ -56,13 +56,13 @@ The output is as follows:
 | FILE_priv              | enum('N','Y')        | NO   |      | N                 |       |
 | Config_priv            | enum('N','Y')        | NO   |      | N                 |       |
 | Create_Tablespace_Priv | enum('N','Y')        | NO   |      | N                 |       |
-| Password_reuse_history | smallint(5) unsigned | YES  |      | NULL              |       |
-| Password_reuse_time    | smallint(5) unsigned | YES  |      | NULL              |       |
+| Password_reuse_history | smallint unsigned | YES  |      | NULL              |       |
+| Password_reuse_time    | smallint unsigned | YES  |      | NULL              |       |
 | User_attributes        | json                 | YES  |      | NULL              |       |
 | Token_issuer           | varchar(255)         | YES  |      | NULL              |       |
 | Password_expired       | enum('N','Y')        | NO   |      | N                 |       |
 | Password_last_changed  | timestamp            | YES  |      | CURRENT_TIMESTAMP |       |
-| Password_lifetime      | smallint(5) unsigned | YES  |      | NULL              |       |
+| Password_lifetime      | smallint unsigned | YES  |      | NULL              |       |
 +------------------------+----------------------+------+------+-------------------+-------+
 44 rows in set (0.00 sec)
 ```

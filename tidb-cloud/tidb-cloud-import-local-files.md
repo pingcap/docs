@@ -90,7 +90,7 @@ To import only some specified columns, you can use the MySQL client to connect y
 
 ```sql
 CREATE TABLE `import_test` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `address` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)

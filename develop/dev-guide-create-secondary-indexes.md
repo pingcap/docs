@@ -73,10 +73,10 @@ The fields in the `books` table are as follows:
 
 | Field name   | Type          | Field description                                                          |
 |--------------|---------------|------------------------------------------------------------------|
-| id           | bigint(20)    | Unique ID of the book                                            |
+| id           | bigint    | Unique ID of the book                                            |
 | title        | varchar(100)  | Book title                                                       |
 | type         | enum          | Types of books (for example, magazines, animations, and teaching aids) |
-| stock        | bigint(20)    | Stock                                                            |
+| stock        | bigint    | Stock                                                            |
 | price        | decimal(15,2) | Price                                                            |
 | published_at | datetime      | Date of publishing                                                  |
 
@@ -84,11 +84,11 @@ The `books` table is created using the following SQL statement:
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
-  `id` bigint(20) AUTO_RANDOM NOT NULL,
+  `id` bigint AUTO_RANDOM NOT NULL,
   `title` varchar(100) NOT NULL,
   `type` enum('Magazine', 'Novel', 'Life', 'Arts', 'Comics', 'Education & Reference', 'Humanities & Social Sciences', 'Science & Technology', 'Kids', 'Sports') NOT NULL,
   `published_at` datetime NOT NULL,
-  `stock` int(11) DEFAULT '0',
+  `stock` int DEFAULT '0',
   `price` decimal(15,2) DEFAULT '0.0',
   PRIMARY KEY (`id`) CLUSTERED
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
