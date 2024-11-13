@@ -24,6 +24,14 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 ## Pause a TiDB cluster
 
+The pause duration and behavior depend on your organization's creation date:
+
+- Organizations created after November 12, 2024 follow the standard pause behavior with a maximum pause duration of 7 days.
+- Organizations created on or before November 12, 2024 follow the compatible pause behavior, which allows a longer pause duration. These organizations will gradually transition to the standard 7-day limit.
+
+<SimpleTab>
+<div label="Standard pause behavior">
+
 When a cluster is paused, note the following:
 
 - TiDB Cloud stops collecting monitoring information of the cluster.
@@ -35,6 +43,31 @@ When a cluster is paused, note the following:
     - Data Backup Cost
 
 - TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
+- The maximum pause duration is 7 days. If you do not manually resume the cluster within 7 days, TiDB Cloud will automatically resume it.
+- You can view the auto-resume schedule from the cluster overview page. TiDB Cloud will send a notification email to the organization owner and project owner 24 hours before the cluster is automatically resumed.
+
+</div>
+<div label="Compatible pause behavior">
+
+> **Note:**
+>
+> If your organization was created before November 12, 2024, your cluster still follows the compatible pause behavior. TiDB Cloud will notify you before transitioning to the new standard pause behavior.
+
+When a cluster is paused, note the following:
+
+- TiDB Cloud stops collecting monitoring information of the cluster.
+- You cannot read data from or write data to the cluster.
+- You cannot import or back up data.
+- TiDB Cloud does not automatically resume the paused cluster.
+- Only the following costs will be charged:
+
+    - Node Storage Cost
+    - Data Backup Cost
+
+- TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
+
+</div>
+</SimpleTab>
 
 To pause a cluster, take the following steps:
 
