@@ -126,7 +126,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Modifiable Column Types in Partitioned Tables</b>
-            <br />Allows users to change column data types in partitioned tables, even if the column is a partitioning key.
+            <br />Allows you to change column data types in partitioned tables, even if the column is a partitioning key.
           </li>
         </ul>
       </td>
