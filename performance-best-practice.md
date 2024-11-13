@@ -139,6 +139,59 @@ snap-io-max-write-bytes-per-sec = "300MiB"
 
 # Benchmark 
 
+## Sysbench workloads on 1000 tables
+### Environment
+Environment: Cluster specification: 3 tidb (16c64g) + 3 tikv (16c64g)
+
+TiDB Version: v8.4.0
+
+Workload : [sysbench oltp_read_only](https://github.com/akopytov/sysbench/blob/master/src/lua/oltp_read_only.lua)
+
+### Throughput Comparison between Baseline and Key Settings
+The following results illustrate the throughput enhancements achieved with the Key Settings in comparison to the baseline, measured in operations per second (OPS), latency, and plan cache hit ratio.
+
+Baseline: the default settings
+Key Settings: the settings of variables and configurations in this guide
+
+| Item | Baseline | Key Settings | Diff(%) |
+| ---------| ---- | ----| ----|
+| QPS | 89100.26 | 100128.6 | 12.38% |
+| Avg Latency（ms）|35.87 | 31.92 | -11.01% |
+| P95 Latency（ms）| 58.92 | 51.02 | -13.41% |
+| Plan cache hit ratio (%) | 56.89% | 87.51% | 53.82% |
+
+### Performance Analysis
+
+The performance improvement observed in the Key Settings is primarily attributed to the ability of instance plan cache. As shown in the figures below:
+
+- Baseline: The plan cache hit ratio is 58.89%.
+- Key Settings: The plan cache hit ratio is 87.51%.
+
+The 53.82% improvement in the hit ratio significantly reduces the overhead associated with query compilation. By enabling the instance plan cache, all plans for SELECT statements are stored in memory, while misses in the cache occur primarily for the `BEGIN` and `COMMIT` statements. The instance plan cache can effectively store plans for up to 5,000 SELECT statements across 1,000 tables. The cached plans ared sharedacross all the 200 connections on the same TiDB instance.
+
+> **Important Note:**
+> Our benchmark tests used simple queries (sysbench oltp_read_only) where each query plan only required 14KB of memory. However, in real-world environments, instance plan cache has shown much more impressive results. Up to 20x latency improvement in complex query scenarios is observed, as instance plan cache is able to cache much more plans while using less memory.
+> The benefits of instance plan cache are particularly significant when your system has:
+>- Large, complex tables (such as those with thousands of columns)
+Complex SQL queries (beyond simple SELECT statements)
+>- Many concurrent user connections
+>- A wide variety of different query patterns
+>- Frequent use of prepared statements
+
+![instance-plan-cache](/media/key-settings/instance-plan-cache.png)
+
+
+### Workload Commands
+Load data
+```
+sysbench oltp_read_only prepare --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=100 --time=900 --report-interval=10 --tables=1000 --table-size=10000
+```
+
+Run workload
+```
+sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=200 --time=900 --report-interval=10 --tables=1000 --table-size=10000
+```
+
 ## YCSB workloads on Large record value
 
 ### Environment
@@ -152,7 +205,7 @@ Below result show the throughput improvement of Key Settings comparing to the ba
 Baseline: the default settings
 Key Settings: the settings of variables and configurations in this guide
 
-| Item | Baseline(OPS) | Key Settings(OPS) | diff(%) |
+| Item | Baseline(OPS) | Key Settings(OPS) | Diff(%) |
 | ---------| ---- | ----| ----|
 | load data| 2858.5 | 5074.3 | 77.59% |
 | workloada | 2243.0 | 12804.3 | 470.86% |
@@ -161,7 +214,7 @@ Key Settings: the settings of variables and configurations in this guide
 
 Titan is enabled by default since v7.6.0 and the default min-blob-size of Titan in TiDB v8.4.0 is 32KB. For the baseline configuration, we use a record size of 31KB to ensure data is stored in RocksDB. In contrast, for the key settings configuration, we set min-blob-size to 1KB, causing data to be stored in Titan.
 
-The performance improvement observed in the Key Settings can be primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the figures below:
+The performance improvement observed in the Key Settings is primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the figures below:
 
 - Baseline: The total throughput of RocksDB compaction exceeds 1GB/s, with peaks over 3GB/s.
 - Key Settings: The peak throughput of RocksDB compaction remains below 100MB/s.
@@ -171,13 +224,15 @@ This significant reduction in compaction overhead contributes to the overall thr
 
 
 ### Workload Commands
-load data
+Load data
+
 ```
-go-ycsb load mysql -P /ycsb/workloads/workloada -p mysql.host=benchbot-gcp-ycsb-tps-7525162-1-147--tiup -p mysql.port=3390 -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -p requestdistribution=uniform -pfieldcount=31 -p fieldlength=1024
+go-ycsb load mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -p requestdistribution=uniform -pfieldcount=31 -p fieldlength=1024
 ```
-run workload
+
+Run workload
 ```
-go-ycsb run mysql -P /ycsb/workloads/workloada -p mysql.host=benchbot-gcp-ycsb-tps-7525162-1-147--tiup -p mysql.port=3390 -p mysql.db=test -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -prequestdistribution=uniform -p fieldcount=31 -p fieldlength=1024
+go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p mysql.db=test -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -prequestdistribution=uniform -p fieldcount=31 -p fieldlength=1024
 ```
 
 
