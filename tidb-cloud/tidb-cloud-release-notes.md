@@ -8,6 +8,24 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## November 12, 2024
+
+**General changes**
+
+- Add the pause duration limit for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+    TiDB Cloud Dedicated now limits the maximum pause duration to 7 days. If you do not manually resume the cluster within 7 days, TiDB Cloud will automatically resume it.
+
+    This change applies only to **organizations created after November 12, 2024**. Organizations created on or before this date will gradually transition to the new pause behavior with prior notification.
+
+    For more information, see [Pause or Resume a TiDB Cloud Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md).
+
+- [Datadog integration (beta)](/tidb-cloud/monitor-datadog-integration.md) adds support for a new region: `AP1` (Japan).
+
+- Support a new AWS region for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `Mumbai (ap-south-1)`.
+
+- Remove support for the AWS `São Paulo (sa-east-1)` region for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
 ## October 29, 2024
 
 **General changes**
