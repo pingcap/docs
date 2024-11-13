@@ -276,7 +276,7 @@ Schedulers are components in PD that generate scheduling tasks. Each scheduler i
 
 ### Static Sorted Table / Sorted String Table (SST)
 
-Static Sorted Table or Sorted String Table is a file storage format used in RocksDB (a component used by the [TiKV Storage Engine](/storage-engine/rocksdb-overview.md)).
+Static Sorted Table or Sorted String Table is a file storage format used in RocksDB (a storage engine used by [TiKV](/storage-engine/rocksdb-overview.md)).
 
 ### Store
 
