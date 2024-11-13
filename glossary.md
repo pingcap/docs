@@ -42,7 +42,7 @@ Baseline Capturing captures queries that meet capturing conditions and create bi
 
 ### Batch Create Table
 
-Batch Create Table is a feature introduced in TiDB v6.0.0. This feature is enabled default. When restoring data with a large number of tables (nearly 50000) using BR (Backup & Restore), the feature can greatly speed up the restore process by creating tables in batches. For details, see [Batch Create Table](/br/br-batch-create-table.md).
+Batch Create Table is a feature introduced in TiDB v6.0.0. This feature is enabled by default. When restoring data with a large number of tables (nearly 50000) using BR (Backup & Restore), the feature can greatly speed up the restore process by creating tables in batches. For details, see [Batch Create Table](/br/br-batch-create-table.md).
 
 ### Bucket
 
