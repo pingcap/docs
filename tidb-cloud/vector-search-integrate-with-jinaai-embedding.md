@@ -9,7 +9,7 @@ summary: TiDB Vector Search を Jina AI Embeddings API と統合して埋め込�
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでは使用できません。
 
 ## 前提条件 {#prerequisites}
 

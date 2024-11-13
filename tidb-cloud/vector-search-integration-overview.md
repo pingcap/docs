@@ -1,15 +1,15 @@
 ---
 title: Vector Search Integration Overview
-summary: サポートされている AI フレームワーク、埋め込みモデル、ORM ライブラリを含む、TiDB ベクトル検索統合の概要。
+summary: サポートされている AI フレームワーク、埋め込みモデル、ORM ライブラリを含む、TiDB Vector Search 統合の概要。
 ---
 
 # ベクトル検索統合の概要 {#vector-search-integration-overview}
 
-このドキュメントでは、サポートされている AI フレームワーク、埋め込みモデル、オブジェクト リレーショナル マッピング (ORM) ライブラリなど、TiDB ベクトル検索統合の概要を説明します。
+このドキュメントでは、サポートされている AI フレームワーク、埋め込みモデル、オブジェクト リレーショナル マッピング (ORM) ライブラリなど、TiDB Vector Search 統合の概要を説明します。
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでは使用できません。
 
 ## AIフレームワーク {#ai-frameworks}
 

@@ -9,7 +9,7 @@ summary: TiDB Cloudの Vector Search を LangChain と統合する方法を学�
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでは使用できません。
 
 > **ヒント**
 >

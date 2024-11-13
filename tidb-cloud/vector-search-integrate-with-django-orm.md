@@ -9,7 +9,7 @@ summary: TiDB Vector Search を Django ORM と統合して埋め込みを保存�
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでは使用できません。
 
 ## 前提条件 {#prerequisites}
 
@@ -59,7 +59,7 @@ mysqlclient のインストールで問題が発生した場合は、mysqlclient
 
 #### <code>django-tidb</code>とは何か {#what-is-code-django-tidb-code}
 
-`django-tidb`は Django 用の TiDB 方言であり、Django ORM を拡張して TiDB 固有の機能 (Vector Search など) をサポートし、TiDB と Django 間の互換性の問題を解決します。
+`django-tidb`は Django 用の TiDB 方言であり、Django ORM を拡張して TiDB 固有の機能 (TiDB Vector Search など) をサポートし、TiDB と Django 間の互換性の問題を解決します。
 
 `django-tidb`インストールするには、Django のバージョンと一致するバージョンを選択します。たとえば、 `django==4.2.*`使用している場合は`django-tidb==4.2.*`インストールします。マイナー バージョンは同じである必要はありません。最新のマイナー バージョンを使用することをお勧めします。
 

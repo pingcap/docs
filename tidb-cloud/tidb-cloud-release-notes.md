@@ -8,6 +8,24 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年11月12日 {#november-12-2024}
+
+**一般的な変更**
+
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの一時停止期間制限を追加します。
+
+    TiDB Cloud Dedicated では、最大一時停止期間が 7 日間に制限されるようになりました。7 日以内にクラスターを手動で再開しない場合は、 TiDB Cloud自動的に再開されます。
+
+    この変更は**、2024 年 11 月 12 日以降に作成された組織**にのみ適用されます。この日付以前に作成された組織は、事前に通知して、新しい一時停止動作に段階的に移行します。
+
+    詳細については[TiDB Cloud専用クラスタを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)参照してください。
+
+-   [Datadog 統合 (ベータ版)](/tidb-cloud/monitor-datadog-integration.md) 、新しい地域`AP1` (日本) のサポートが追加されました。
+
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して新しい AWS リージョンをサポートします: `Mumbai (ap-south-1)` 。
+
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対する AWS `São Paulo (sa-east-1)`リージョンのサポートを削除します。
+
 ## 2024年10月29日 {#october-29-2024}
 
 **一般的な変更**

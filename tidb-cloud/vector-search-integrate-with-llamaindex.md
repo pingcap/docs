@@ -9,7 +9,7 @@ summary: TiDB Vector Search を LlamaIndex と統合する方法を学びます�
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでは使用できません。
 
 > **ヒント**
 >
@@ -93,7 +93,7 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
     ```
 
-### ステップ4. サンプル文書を読み込む {#step-4-load-the-sample-document}
+### ステップ4. サンプルドキュメントを読み込む {#step-4-load-the-sample-document}
 
 #### ステップ4.1 サンプルドキュメントをダウンロードする {#step-4-1-download-the-sample-document}
 

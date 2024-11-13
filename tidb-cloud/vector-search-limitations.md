@@ -5,7 +5,7 @@ summary: TiDB ベクトル検索の制限について学習します。
 
 # ベクトル検索の制限 {#vector-search-limitations}
 
-このドキュメントでは、TiDB ベクトル検索の既知の制限について説明します。
+このドキュメントでは、TiDB Vector Search の既知の制限について説明します。
 
 > **注記**
 >

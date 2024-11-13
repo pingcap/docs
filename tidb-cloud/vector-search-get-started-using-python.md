@@ -11,7 +11,7 @@ summary: Python と TiDB Vector Search を使用してセマンティック検�
 
 > **注記**
 >
-> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターでのみ使用できます。
+> TiDB Vector Search は現在ベータ版であり、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでは使用できません。
 
 ## 前提条件 {#prerequisites}
 
@@ -43,7 +43,7 @@ touch example.py
 pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 ```
 
--   `tidb-vector` : TiDB ベクトル検索と対話するための Python クライアント。
+-   `tidb-vector` : TiDB Vector Search と対話するための Python クライアント。
 -   [`sentence-transformers`](https://sbert.net) : テキストから[ベクトル埋め込み](/tidb-cloud/vector-search-overview.md#vector-embedding)生成するための事前トレーニング済みモデルを提供する Python ライブラリ。
 
 ### ステップ3. TiDBクラスターへの接続文字列を構成する {#step-3-configure-the-connection-string-to-the-tidb-cluster}
