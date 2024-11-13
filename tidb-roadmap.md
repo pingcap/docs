@@ -38,22 +38,27 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>In-memory caching in TiKV</b>
             <br />TiKV maintains recent versions of data in memory to reduce redundant MVCC scans, thus improving performance.
           </li>
+          <br />
           <li>
             <b>Adaptive Parallelism for Stats Collection (GA)</b>
             <br />Dynamically adjusts parallelism and concurrency based on hardware and node count, accelerating statistics collection.
           </li>
+          <br />
           <li>
             <b>Faster Database Restores</b>
             <br />Reduces recovery time for full database and point-in-time restores (PITR).
           </li>
+          <br />
           <li>
             <b>Unlimited Transaction Size</b>
             <br />Removes memory limits on uncommitted transactions, improving batch task success rates.
           </li>
+          <br />
           <li>
             <b>Load-Based Traffic Rebalancing in TiProxy (GA)</b>
             <br />Routes traffic based on TiDB node workloads to optimize resource utilization.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -62,26 +67,32 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>PD Microservice Router Service</b>
             <br />Enables independent deployment, stateless (no Strong Leader) and easy scaling of Router Service (region meta query/updates) in PD, preventing PD from becoming a bottleneck for cluster resources.
           </li>
+          <br />
           <li>
             <b>Reduced I/O for Statistics Collection (GA)</b>
             <br />Allows you to scan only a portion of data samples on TiKV, reducing time and resource consumption for statistics collection.
           </li>
+          <br />
           <li>
             <b>Limit Operator Pushdown</b>
             <br />Removes limitations on pushing down the Limit operator from TiDB to TiKV, enabling more efficient query processing directly at the storage layer.
           </li>
+          <br />
           <li>
             <b>Cascades Optimizer Framework</b>
             <br />Introduces a mature, advanced optimizer framework, expanding the capabilities of the existing optimizer.
           </li>
+          <br />
           <li>
             <b>Scalable DDL Execution Framework</b>
             <br />Provides a parallel DDL execution framework to improve the performance and stability of DDL operations.
           </li>
+          <br />
           <li>
             <b>Increased TiCDC Scalability</b>
             <br />Updated TiCDC architecture delivers increased scalability and performance for change data capture use cases.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -90,14 +101,17 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Table-Level Load Balancing</b>
             <br />Optimizes data scheduling in PD based on workload distribution across Regions for each table.
           </li>
+          <br />
           <li>
             <b>System Table Performance Optimization</b>
             <br />Enhances query speed and reduces overhead for system tables with large data volumes.
           </li>
+          <br />
           <li>
             <b>Enhance the Scalability of Region Meta Storage</b>
             <br />Migrate region meta storage from PD to TiKV, allowing the storage layer to scale infinitely and easily.
           </li>
+          <br />
         </ul>
       </td>
     </tr>
@@ -112,14 +126,17 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Vector Search Support</b>
             <br />Enables vector data types, indexing, and high-performance vector search, with support for mixed queries involving vector and relational data.
           </li>
+          <br />
           <li>
             <b>Foreign Keys (GA)</b>
             <br />Now generally available, providing robust relational integrity.
           </li>
+          <br />
           <li>
             <b>Global indexing on partitioned tables (GA)</b>
             <br />Removes the unique key restriction on partition keys, boosting query performance for non-partitioned columns.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -128,6 +145,7 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Modifiable Column Types in Partitioned Tables</b>
             <br />Allows you to change column data types in partitioned tables, even if the column is a partitioning key.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -136,6 +154,7 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Materialized Views Support</b>
             <br />Enables materialized views to improve pre-computation, boost computational efficiency, and enhance data analysis performance.
           </li>
+          <br />
         </ul>
       </td>
     </tr>
@@ -149,25 +168,31 @@ In the course of development, this roadmap is subject to change based on user ne
           <li>
             <b>Limit Memory for Backups</b>
           </li>
+          <br />
           <li>
             <b>Limit Memory for Statistics Collection (GA)</b>
           </li>
+          <br />
           <li>
             <b>Enhanced SQL Binding Management (GA)</b>
             <br />Simplifies creating and managing large numbers of execution plans to stabilize performance.
           </li>
+          <br />
           <li>
             <b>Improved Resource Group Control for Complex SQL (GA)</b>
             <br />Monitors RU usage of complex queries mid-execution to minimize system impact.
           </li>
+          <br />
           <li>
             <b>Automatic Resource Group Switching for Runaway Queries (GA)</b>
             <br />Detects runaway queries and redirects them to designated resource groups with set limits.
           </li>
+          <br />
           <li>
             <b>Limit Memory Usage for Schema Metadata (GA)</b>
             <br />Enhances stability in large-scale clusters by capping memory consumption for schema metadata.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -176,18 +201,22 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Robust and Resilient Backup</b>
             <br />Reduces memory-related issues during backup processes, ensuring dependable data protection and availability.
           </li>
+          <br />
           <li>
             <b>Optimized Memory Management with Disk Spilling</b>
             <br />Allows operators like HashAgg, Sort, and Join to spill to disk, reducing memory load and preventing out-of-memory (OOM) issues.
           </li>
+          <br />
           <li>
             <b>Sharing Plan Cache across Sessions (GA)</b>
             <br />Shares execution plan cache across sessions in the same TiDB instance, optimizing memory usage.
           </li>
+          <br />
           <li>
             <b>Resource Group Quota Management (GA)</b>
             <br />Dynamically adjusts resource limits for Burstable resource groups, fully utilizing available resources without impacting other quotas.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -196,22 +225,27 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Adaptive Resource Group</b>
             <br />Automatically adjusts Request Unit (RU) settings in resource groups based on past execution patterns.
           </li>
+          <br />
           <li>
             <b>Enhanced Memory Protection</b>
             <br />Monitors memory usage across all components to prevent operations that might impact system stability.
           </li>
+          <br />
           <li>
             <b>Automatic SQL Binding</b>
             <br />Analyzes SQL performance metrics to automatically create bindings, stabilizing execution plans for transactional processing.
           </li>
+          <br />
           <li>
             <b>Multi-Versioned Statistics</b>
             <br />Allows you to view and restore previous statistics versions after updates.
           </li>
+          <br />
           <li>
             <b>Distributed Statistics Collection</b>
             <br />Enables parallel statistics collection across multiple TiDB nodes to boost efficiency.
           </li>
+          <br />
         </ul>
       </td>
     </tr>
@@ -226,14 +260,17 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Reliable Query Termination (GA)</b>
             <br />Instantly terminates running SQL statements and frees resources in TiDB and TiKV.
           </li>
+          <br />
           <li>
             <b>Permissioned Resource Group Switching (GA)</b>
             <br />Restricts resource group switching to authorized users, preventing resource misuse.
           </li>
+          <br />
           <li>
             <b>CPU Time Observation for TiDB and TiKV (GA)</b>
             <br />Adds CPU time metrics to logs, enabling quick identification of statements causing CPU spikes.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -242,22 +279,27 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Customizable Statistics Collection (GA)</b>
             <br />Allows tailored statistics strategies for specific tables, adjusting parameters like health and parallelism.
           </li>
+          <br />
           <li>
             <b>Workload Repository (GA)</b>
             <br />Stores workload stats and real-time data for improved troubleshooting and analysis.
           </li>
+          <br />
           <li>
             <b>Automated Index Advisor (GA)</b>
             <br />Automatically analyzes SQL statements to recommend index optimizations, including suggestions for creating or dropping indexes.
           </li>
+          <br />
           <li>
             <b>Standardized Time Model (GA)</b>
             <br />Establishes a unified SQL execution time model to help identify database load sources through logs and cluster metrics, pinpointing problematic nodes and statements.
           </li>
+          <br />
           <li>
             <b>TiFlash CPU Time Monitoring (GA)</b>
             <br />Adds TiFlash CPU time metrics to logs, enabling quick identification of statements that cause CPU spikes in TiFlash.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -266,10 +308,12 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Workload Analysis</b>
             <br />Analyzes historical data from the Workload Repository to provide optimization recommendations, including SQL tuning and statistics collection.
           </li>
+          <br />
           <li>
             <b>End-to-End SQL Monitoring</b>
             <br />Tracks the entire lifecycle of SQL statements, measuring time spent across TiDB, TiKV, PD, and TiFlash for detailed performance insights.
           </li>
+          <br />
         </ul>
       </td>
     </tr>
@@ -284,18 +328,22 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Google Cloud KMS (GA)</b>
             <br />General availability for encryption-at-rest key management with Google Cloud KMS.
           </li>
+          <br />
           <li>
             <b>Azure Key Vault</b>
             <br />Enhanced encryption-at-rest key management with Azure Key Vault integration.
           </li>
+          <br />
           <li>
             <b>Marker-Based Log Desensitization</b>
             <br />Marks and selectively desensitizes sensitive data in cluster logs based on use case.
           </li>
+          <br />
           <li>
             <b>Column-Level Permission Management (GA)</b>
             <br />Adds MySQL-compatible permissions at the column level for fine-grained access control.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -304,26 +352,32 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>AWS IAM Authentication</b>
             <br />Supports AWS IAM third-party ARN integration for secure access control in TiDB.
           </li>
+          <br />
           <li>
             <b>Kerberos Authentication (GA)</b>
             <br />Enables authentication using Kerberos for added security.
           </li>
+          <br />
           <li>
             <b>Multi-Factor Authentication (MFA)</b>
             <br />Adds support for multi-factor authentication to enhance user verification.
           </li>
+          <br />
           <li>
             <b>Enhanced TLS Security (GA)</b>
             <br />Ensures encrypted connections between all components within the TiDB cluster.
           </li>
+          <br />
           <li>
             <b>Refined Dynamic Privileges</b>
             <br />Improves dynamic privilege management, including limitations on Super privilege.
           </li>
+          <br />
           <li>
             <b>FIPS Compliance (GA)</b>
             <br />Ensures encryption methods comply with FIPS standards for secure data handling.
           </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -332,14 +386,17 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Label-Based Access Control</b>
             <br />Enables data access control through configurable labels.
           </li>
+          <br />
           <li>
             <b>Enhanced Client-Side Encryption</b>
             <br />Supports encryption of key fields on the client side to strengthen data security.
           </li>
+          <br />
           <li>
             <b>Dynamic Data Desensitization</b>
             <br />Allows data desensitization based on application scenarios, protecting sensitive business fields.
           </li>
+          <br />
         </ul>
       </td>
     </tr>
