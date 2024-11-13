@@ -9,7 +9,7 @@ TiDB Vector Search (beta) provides an advanced search solution for performing se
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> TiDB Vector Search is currently in beta and is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Concepts
 
@@ -41,7 +41,7 @@ To learn how to generate vector embeddings for your specific data types, refer t
 
 After converting raw data into vector embeddings and storing them in TiDB, your application can execute vector search queries to find the data most semantically or contextually relevant to a user's query.
 
-TiDB vector search identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the given vector in the query represent the most similar data in meaning.
+TiDB Vector Search identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the given vector in the query represent the most similar data in meaning.
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 

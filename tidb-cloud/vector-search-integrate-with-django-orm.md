@@ -9,7 +9,7 @@ This tutorial walks you through how to use [Django](https://www.djangoproject.co
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> TiDB Vector Search is currently in beta and is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Prerequisites
 
@@ -59,7 +59,7 @@ If you encounter installation issues with mysqlclient, refer to the mysqlclient 
 
 #### What is `django-tidb`
 
-`django-tidb` is a TiDB dialect for Django, which enhances the Django ORM to support TiDB-specific features (for example, Vector Search) and resolves compatibility issues between TiDB and Django.
+`django-tidb` is a TiDB dialect for Django, which enhances the Django ORM to support TiDB-specific features (for example, TiDB Vector Search) and resolves compatibility issues between TiDB and Django.
 
 To install `django-tidb`, choose a version that matches your Django version. For example, if you are using `django==4.2.*`, install `django-tidb==4.2.*`. The minor version does not need to be the same. It is recommended to use the latest minor version.
 

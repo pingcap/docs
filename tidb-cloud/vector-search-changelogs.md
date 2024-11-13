@@ -1,6 +1,6 @@
 ---
 title: Vector Search Changelogs
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB vector search feature.
+summary: Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB Vector Search feature.
 ---
 
 # Vector Search Changelogs

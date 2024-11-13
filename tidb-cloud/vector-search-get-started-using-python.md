@@ -11,7 +11,7 @@ Throughout this tutorial, you will develop this AI application using [TiDB Vecto
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> TiDB Vector Search is currently in beta and is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ In your project directory, run the following command to install the required pac
 pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 ```
 
-- `tidb-vector`: the Python client for interacting with TiDB vector search.
+- `tidb-vector`: the Python client for interacting with TiDB Vector Search.
 - [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/tidb-cloud/vector-search-overview.md#vector-embedding) from text.
 
 ### Step 3. Configure the connection string to the TiDB cluster
