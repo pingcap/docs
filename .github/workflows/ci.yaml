@@ -59,14 +59,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Vale Linter
-        uses: errata-ai/vale-action@v2.0.1
+        uses: errata-ai/vale-action@reviewdog
         with:
           # Optional
           # Specify file path to lint
           #files: .
 
           # Optional
-          onlyAnnotateModifiedLines: true
+          filter_mode: added
         env:
           # Required, set by GitHub actions automatically:
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret

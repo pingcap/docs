@@ -29,18 +29,18 @@ Assume that the TiDB cluster topology is as follows:
 
 ```bash
 # Downloads the package.
-wget https://download.pingcap.org/prometheus-2.27.1.linux-amd64.tar.gz
+wget https://github.com/prometheus/prometheus/releases/download/v2.49.1/prometheus-2.49.1.linux-amd64.tar.gz
 wget https://download.pingcap.org/node_exporter-v1.3.1-linux-amd64.tar.gz
-wget https://download.pingcap.org/grafana-7.5.11.linux-amd64.tar.gz
+wget https://download.pingcap.org/grafana-7.5.17.linux-amd64.tar.gz
 ```
 
 {{< copyable "shell-regular" >}}
 
 ```bash
 # Extracts the package.
-tar -xzf prometheus-2.27.1.linux-amd64.tar.gz
+tar -xzf prometheus-2.49.1.linux-amd64.tar.gz
 tar -xzf node_exporter-v1.3.1-linux-amd64.tar.gz
-tar -xzf grafana-7.5.11.linux-amd64.tar.gz
+tar -xzf grafana-7.5.17.linux-amd64.tar.gz
 ```
 
 ### Step 2: Start `node_exporter` on Node1, Node2, Node3, and Node4
@@ -62,7 +62,7 @@ Edit the Prometheus configuration file:
 {{< copyable "shell-regular" >}}
 
 ```bash
-cd prometheus-2.27.1.linux-amd64 &&
+cd prometheus-2.49.1.linux-amd64 &&
 vi prometheus.yml
 ```
 
@@ -112,7 +112,25 @@ scrape_configs:
       - '192.168.199.118:20180'
 
 ...
+```
 
+To enable alarm rules for components such as TiDB, PD, and TiKV, download the alarm rule files of the corresponding components separately, and then add the configurations of alarm rule files to the Prometheus configuration file.
+
+- TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/master/pkg/metrics/alertmanager/tidb.rules.yml)
+- PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/master/metrics/alertmanager/pd.rules.yml)
+- TiKV: [`tikv.rules.yml`](https://github.com/tikv/tikv/blob/master/metrics/alertmanager/tikv.rules.yml)
+- TiFlash: [`tiflash.rules.yml`](https://github.com/pingcap/tiflash/blob/master/metrics/alertmanager/tiflash.rules.yml)
+- TiCDC: [`ticdc.rules.yml`](https://github.com/pingcap/tiflow/blob/master/metrics/alertmanager/ticdc.rules.yml)
+- TiDB Lightning: [`lightning.rules.yml`](https://github.com/pingcap/tidb/blob/master/br/metrics/alertmanager/lightning.rules.yml)
+
+```ini
+rule_files:
+  - 'tidb.rules.yml'
+  - 'pd.rules.yml'
+  - 'tikv.rules.yml'
+  - 'tiflash.rules.yml'
+  - 'ticdc.rules.yml'
+  - 'lightning.rules.yml'
 ```
 
 Start the Prometheus service:
@@ -135,7 +153,7 @@ Edit the Grafana configuration file:
 {{< copyable "shell-regular" >}}
 
 ```ini
-cd grafana-7.5.11 &&
+cd grafana-7.5.17 &&
 vi conf/grafana.ini
 
 ...

@@ -79,7 +79,7 @@ The output is as follows:
 
 <CustomContent platform="tidb-cloud">
 
-<!--Compared with TiDB Self-Hosted, the root user in TiDB Cloud does not have the SHUTDOWN and CONFIG privileges.-->
+<!--Compared with TiDB Self-Managed, the root user in TiDB Cloud does not have the SHUTDOWN and CONFIG privileges.-->
 
 ```sql
 +------------+---------------+-------------------------+--------------+
@@ -126,3 +126,7 @@ Fields in the `USER_PRIVILEGES` table are described as follows:
 * `TABLE_CATALOG`: The name of the catalog to which the table belongs. This value is always `def`.
 * `PRIVILEGE_TYPE`: The privilege type to be granted. Only one privilege type is shown in each row.
 * `IS_GRANTABLE`: If you have the `GRANT OPTION` privilege, the value is `YES`; otherwise, the value is `NO`.
+
+## See also
+
+- [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)

@@ -64,7 +64,7 @@ The following describes the output of the `EXPLAIN` statement above:
 > Before v6.4.0, `estRows` means the number of estimated rows to be processed by the probe side operators for each row from the build side operators. Since v6.4.0, `estRows` means the **total number** of estimated rows to be processed by the probe side operators. The actual number of rows displayed (indicated by the `actRows` column) in the result of `EXPLAIN ANALYZE` means the total row count, so since v6.4.0 the meanings of `estRows` and `actRows` for the probe side child nodes of `IndexJoin` and `Apply` operators are consistent.
 >
 >
-> For example：
+> For example:
 >
 > ```sql
 > CREATE TABLE t1(a INT, b INT);

@@ -139,7 +139,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-compression-type`
 
-+ The compression algorithm for gRPC messages
++ The compression algorithm for gRPC messages, which affects gRPC messages between TiKV nodes and gRPC response messages sent from TiKV to TiDB
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 + Default value: `"none"`
 
@@ -163,7 +163,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-raft-conn-num`
 
-+ The maximum number of links among TiKV nodes for Raft communication
++ The maximum number of connections between TiKV nodes for Raft communication
 + Default value: `1`
 + Minimum value: `1`
 
@@ -465,9 +465,9 @@ Configuration items related to storage.
 > **Warning:**
 >
 > - Set `enable-ttl` to `true` or `false` **ONLY WHEN** deploying a new TiKV cluster. **DO NOT** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `enable-ttl` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats, which causes the "can't enable TTL on a non-ttl" error when you restart the TiKV cluster.
-> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters). Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
+> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters) unless `storage.api-version = 2` is configured. Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
 
-+ TTL is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
++ [TTL](/time-to-live.md) is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
 + Default value: `false`
 
 ### `ttl-check-poll-interval`
@@ -489,9 +489,9 @@ Configuration items related to storage.
 + Value options:
     + `1`: Uses API V1, does not encode the data passed from the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
     + `2`: Uses API V2:
-        + The data is stored in the Multi-Version Concurrency Control (MVCC) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
+        + The data is stored in the [Multi-Version Concurrency Control (MVCC)](/glossary.md#multi-version-concurrency-control-mvcc) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
         + Data is scoped according to different usage and API V2 supports co-existence of TiDB, Transactional KV, and RawKV applications in a single cluster.
-        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on `enable-ttl` explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
+        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on [`enable-ttl`](#enable-ttl) explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
         + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim obsolete data. This tidb-server instance can provide read and write services at the same time. To ensure high availability, you can deploy multiple tidb-server instances.
         + Client support is required for API V2. For details, see the corresponding instruction of the client for the API V2.
         + Since v6.2.0, Change Data Capture (CDC) for RawKV is supported. Refer to [RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc).
@@ -663,10 +663,6 @@ Configuration items related to Raftstore.
 
 ### `raft-max-size-per-msg`
 
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
-
 + The soft limit on the size of a single message packet
 + Default value: `"1MiB"`
 + Minimum value: greater than `0`
@@ -674,10 +670,6 @@ Configuration items related to Raftstore.
 + Unit: KiB|MiB|GiB
 
 ### `raft-max-inflight-msgs`
-
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
 + Default value: `256`
@@ -736,6 +728,16 @@ Configuration items related to Raftstore.
 
 + The maximum remaining time allowed for the log cache in memory
 + Default value: `"30s"`
++ Minimum value: `0`
+
+### `max-apply-unpersisted-log-limit` <span class="version-mark">New in v8.1.0</span>
+
++ The maximum number of committed but not persisted Raft logs that can be applied.
+
+    + Setting this configuration item to a value greater than `0` enables the TiKV node to apply committed but not persisted Raft logs in advance, effectively reducing long-tail latency caused by IO jitter on that node. However, it might also increase the memory usage of TiKV and the disk space occupied by Raft logs.
+    + Setting this configuration item to `0` disables this feature, meaning that TiKV must wait until Raft logs are both committed and persisted before applying them. This behavior is consistent with the behavior before v8.2.0.
+
++ Default value: `1024`
 + Minimum value: `0`
 
 ### `hibernate-regions`
@@ -1008,7 +1010,7 @@ Configuration items related to Raftstore.
 
 + At a certain interval, TiKV inspects the latency of the Raftstore component. This parameter specifies the interval of the inspection. If the latency exceeds this value, this inspection is marked as timeout.
 + Judges whether the TiKV node is slow based on the ratio of timeout inspection.
-+ Default value: `"500ms"`
++ Default value: `"100ms"`
 + Minimum value: `"1ms"`
 
 ### `raft-write-size-limit` <span class="version-mark">New in v5.3.0</span>
@@ -1039,7 +1041,8 @@ Configuration items related to Raftstore.
 
 + Set the specific times that TiKV initiates periodic full compaction. You can specify multiple time schedules in an array. For example:
     + `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM, based on the local time zone of the TiKV node.
-    + `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC time.
+    + `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC timezone.
+    + `periodic-full-compact-start-times = ["03:00 +0800", "23:00 +0800"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC+08:00 timezone.
 + Default value: `[]`, which means periodic full compaction is disabled by default.
 
 ### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in v7.6.0</span>
@@ -1071,7 +1074,7 @@ Configuration items related to Coprocessor.
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `"96MiB"`
++ Default value: `"256MiB"`. Before v8.4.0, the default value is `"96MiB"`.
 + Unit: KiB|MiB|GiB
 
 ### `region-max-keys`
@@ -1082,7 +1085,7 @@ Configuration items related to Coprocessor.
 ### `region-split-keys`
 
 + The number of keys in the newly split Region. This value is an estimate.
-+ Default value: `960000`
++ Default value: `2560000`. Before v8.4.0, the default value is `960000`.
 
 ### `consistency-check-method`
 
@@ -1272,6 +1275,10 @@ Configuration items related to RocksDB
 
 ### `info-log-max-size`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
 + The maximum size of Info log
 + Default value: `"1GiB"`
 + Minimum value: `0`
@@ -1279,10 +1286,18 @@ Configuration items related to RocksDB
 
 ### `info-log-roll-time`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
 + The time interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
 + Default value: `"0s"`
 
 ### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
 
 + The maximum number of kept log files
 + Default value: `10`
@@ -1294,6 +1309,10 @@ Configuration items related to RocksDB
 + Default value: `""`
 
 ### `info-log-level`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
 
 + Log levels of RocksDB
 + Default value: `"info"`
@@ -1325,7 +1344,7 @@ Configuration items related to RocksDB
 
 + Unit: KiB|MiB|GiB
 
-### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9, v7.1.5, and v8.0.0</span>
+### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9, v7.1.5, v7.5.2, and v8.0.0</span>
 
 + Controls whether to record information about Write Ahead Log (WAL) files in the RocksDB MANIFEST file and whether to verify the integrity of WAL files during startup. For more information, see RocksDB [Track WAL in MANIFEST](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST).
 + Default value: `true`
@@ -1659,7 +1678,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 
 + The zstd dictionary compression size. The default value is `"0KiB"`, which means to disable the zstd dictionary compression. In this case, Titan compresses data based on single values, whereas RocksDB compresses data based on blocks (`32KiB` by default). When the average size of Titan values is less than `32KiB`, Titan's compression ratio is lower than that of RocksDB. Taking JSON as an example, the store size in Titan can be 30% to 50% larger than that of RocksDB. The actual compression ratio depends on whether the value content is suitable for compression and the similarity among different values. You can enable the zstd dictionary compression to increase the compression ratio by configuring `zstd-dict-size` (for example, set it to `16KiB`). The actual store size can be lower than that of RocksDB. But the zstd dictionary compression might lead to about 10% performance regression in specific workloads.
 + Default value: `"0KiB"`
-+ Unit: KiB|MiB|GiB 
++ Unit: KiB|MiB|GiB
 
 ### `blob-cache-size`
 
@@ -1843,6 +1862,10 @@ Configuration items related to `raftdb`
 
 ### `info-log-max-size`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
 + The maximum size of Info logs
 + Default value: `"1GiB"`
 + Minimum value: `0`
@@ -1850,10 +1873,18 @@ Configuration items related to `raftdb`
 
 ### `info-log-roll-time`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
 + The interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
 + Default value: `"0s"` (which means logs are not truncated)
 
 ### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
 
 + The maximum number of Info log files kept in RaftDB
 + Default value: `10`
@@ -1865,6 +1896,10 @@ Configuration items related to `raftdb`
 + Default value: `""`
 
 ### `info-log-level`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
 
 + Log levels of RaftDB
 + Default value: `"info"`
@@ -1890,6 +1925,20 @@ Configuration items related to Raft Engine.
 + If there are multiple disks on your machine, it is recommended to store the data of Raft Engine on a different disk to improve TiKV performance.
 + Default value: `""`
 
+### `spill-dir` <span class="version-mark">New in v8.4.0</span>
+
++ The auxiliary directory for storing Raft log files. When the disk for the `dir` directory is full, new Raft logs will be stored under this directory. If this auxiliary directory does not exist after configuration, it will be automatically created when TiKV is started.
++ If this configuration is not set, the auxiliary directory is not enabled.
+
+> **Note:**
+>
+> - This configuration takes effect only when the `dir` and `spill-dir` of the Raft Engine are set to different disk drives.
+> - After enabling this feature, if you want to disable it, you need to perform the following operations before restarting TiKV. Otherwise, TiKV will fail to start.
+>     1. Stop TiKV.
+>     2. Copy all the Raft Logs from the `spill-dir` directory to the [`dir`](/tikv-configuration-file.md#dir) directory.
+>     3. Remove this configuration from the TiKV configuration file.
+>     4. Restart TiKV.
+
 ### `batch-compression-threshold`
 
 + Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
@@ -1897,9 +1946,13 @@ Configuration items related to Raft Engine.
 
 ### `bytes-per-sync`
 
+> **Warning:**
+>
+> Starting from v6.5.0, Raft Engine writes logs to disk directly without buffering. Therefore, this configuration item is deprecated and no longer functional.
+
 + Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
 + If you set this configuration item to `0`, incremental sync is disabled.
-+ Default value: `"4MiB"`
++ Before v6.5.0, the default value is `"4MiB"`.
 
 ### `target-file-size`
 
@@ -1947,7 +2000,7 @@ Configuration items related to Raft Engine.
 > 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
 
 + Specifies the version of log files in Raft Engine.
-+ Value Options:
++ Value options:
     + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
     + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
 + Default value:
@@ -1998,8 +2051,12 @@ Configuration items related to security.
 
 ### `redact-info-log` <span class="version-mark">New in v4.0.8</span>
 
-+ This configuration item enables or disables log redaction. If the configuration value is set to `true`, all user data in the log will be replaced by `?`.
++ This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.3.0.
++ If the configuration item is set to `false` or `"off"`, log redaction is disabled.
++ If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
++ If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
 + Default value: `false`
++ For details on how to use it, see [Log redaction in TiKV side](/log-redaction.md#log-redaction-in-tikv-side).
 
 ## security.encryption
 
@@ -2104,7 +2161,7 @@ Configuration items related to BR backup.
 
 + The threshold of the backup SST file size. If the size of a backup file in a TiKV Region exceeds this threshold, the file is backed up to several files with the TiKV Region split into multiple Region ranges. Each of the files in the split Regions is the same size as `sst-max-size` (or slightly larger).
 + For example, when the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
-+ Default value: `"144MiB"`
++ Default value: `"384MiB"`. Before v8.4.0, the default value is `"144MiB"`.
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
 
@@ -2183,7 +2240,11 @@ Configuration items related to TiCDC.
 ### `min-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
-+ Default value: `"200ms"`
++ Default value: `"1s"`.
+
+> **Note:**
+>
+> In v6.5.0, the default value of `min-ts-interval` is changed from `"1s"` to `"200ms"` to reduce CDC latency. Starting from v6.5.1, this default value is changed back to `"1s"` to reduce network traffic.
 
 ### `old-value-cache-memory-quota`
 
@@ -2255,6 +2316,18 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Enables the in-memory pessimistic lock feature. With this feature enabled, pessimistic transactions try to store their locks in memory, instead of writing the locks to disk or replicating the locks to other replicas. This improves the performance of pessimistic transactions. However, there is a still low probability that the pessimistic lock gets lost and causes the pessimistic transaction commits to fail.
 + Default value: `true`
 + Note that `in-memory` takes effect only when the value of `pipelined` is `true`.
+
+### `in-memory-peer-size-limit` <span class="version-mark">New in v8.4.0</span>
+
++ Controls the memory usage limit for [in-memory pessimistic locks](/pessimistic-transaction.md#in-memory-pessimistic-lock) in a Region. When this limit is exceeded, TiKV writes pessimistic locks persistently.
++ Default value: `512KiB`
++ Unit: KiB|MiB|GiB
+
+### `in-memory-instance-size-limit` <span class="version-mark">New in v8.4.0</span>
+
++ Controls the memory usage limit for [in-memory pessimistic locks](/pessimistic-transaction.md#in-memory-pessimistic-lock) in a TiKV instance. When this limit is exceeded, TiKV writes pessimistic locks persistently.
++ Default value: `100MiB`
++ Unit: KiB|MiB|GiB
 
 ## quota
 
@@ -2378,6 +2451,16 @@ Configuration items related to resource control of the TiKV storage layer.
 + Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
 + Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
 + Default value: `true`, which means scheduling based on the RU of the resource group is enabled.
+
+### `priority-ctl-strategy` <span class="version-mark">New in v8.4.0</span>
+
+Specifies the flow control strategy for low-priority tasks. TiKV ensures that higher priority tasks are prioritized for execution by applying flow control to low-priority tasks.
+
++ Value options:
+    + `aggressive`: this policy prioritizes the performance of high-priority tasks, ensuring that the throughput and latency of high-priority tasks are largely unaffected, but low-priority tasks will run slower.
+    + `moderate`: this policy imposes a balanced flow control on low-priority tasks and has a lower impact on high-priority tasks.
+    + `conservative`: this policy prioritizes ensuring that system resources are fully utilized, allowing low-priority tasks to fully utilize system available resources as needed, and therefore has a greater performance impact on high-priority tasks.
++ Default value: `moderate`.
 
 ## split
 

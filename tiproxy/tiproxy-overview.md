@@ -11,11 +11,11 @@ TiProxy is an optional component. You can also use a third-party proxy component
 
 The following figure shows the architecture of TiProxy:
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy architecture" width="500"></img>
+<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy architecture" width="500" />
 
 ## Main features
 
-TiProxy provides connection migration, service discovery, and quick deployment.
+TiProxy provides connection migration, failover, service discovery, and quick deployment.
 
 ### Connection migration
 
@@ -23,12 +23,16 @@ TiProxy can migrate connections from one TiDB server to another without breaking
 
 As shown in the following figure, the client originally connects to TiDB 1 through TiProxy. After the connection migration, the client actually connects to TiDB 2. When TiDB 1 is about to be offline or the ratio of connections on TiDB 1 to connections on TiDB 2 exceeds the set threshold, the connection migration is triggered. The client is unaware of the connection migration.
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy connection migration" width="400"></img>
+<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy connection migration" width="400" />
 
 Connection migration usually occurs in the following scenarios:
 
 - When a TiDB server performs scaling in, rolling upgrade, or rolling restart, TiProxy can migrate connections from the TiDB server that is about to be offline to other TiDB servers to keep the client connection alive.
 - When a TiDB server performs scaling out, TiProxy can migrate existing connections to the new TiDB server to achieve real-time load balancing without resetting the client connection pool.
+
+### Failover
+
+When a TiDB server is at risk of running out of memory (OOM) or fails to connect to PD or TiKV, TiProxy detects the issue automatically and migrates the connections to another TiDB server, thus ensuring continuous client connectivity.
 
 ### Service discovery
 
@@ -36,7 +40,7 @@ When a TiDB server performs scaling in or scaling out, if you use a common load 
 
 ### Quick deployment
 
-TiProxy is integrated into [TiUP](https://github.com/pingcap/tiup), [TiDB Operator](https://github.com/pingcap/tidb-operator), [TiDB Dashboard](/dashboard/dashboard-intro.md), and [Grafana](/tiproxy/tiproxy-grafana.md), which reduces the deployment, operation, and management costs.
+TiProxy is integrated into [TiUP](https://github.com/pingcap/tiup), [TiDB Operator](https://github.com/pingcap/tidb-operator), [TiDB Dashboard](/dashboard/dashboard-intro.md), and [Grafana](/tiproxy/tiproxy-grafana.md), and supports built-in virtual IP management, reducing the deployment, operation, and management costs.
 
 ## User scenarios
 
@@ -44,12 +48,14 @@ TiProxy is suitable for the following scenarios:
 
 - Connection persistence: When a TiDB server performs scaling in, rolling upgrade, or rolling restart, the client connection is broken, resulting in an error. If the client does not have an idempotent error retry mechanism, you need to manually check and fix the error, which greatly increases the labor cost. TiProxy can keep the client connection, so that the client does not report an error.
 - Frequent scaling in and scaling out: The workload of an application might change periodically. To save costs, you can deploy TiDB on the cloud and automatically scale in and scale out TiDB servers according to the workload. However, scaling in might cause the client to disconnect, and scaling out might result in unbalanced load. TiProxy can keep the client connection and achieve load balancing.
+- CPU load imbalance: When background tasks consume a significant amount of CPU resources or workloads across connections vary significantly, leading to an imbalanced CPU load, TiProxy can migrate connections based on CPU usage to achieve load balancing. For more details, see [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing).
+- TiDB server OOM: When a runaway query causes a TiDB server to run out of memory, TiProxy can proactively detect the OOM risk and migrate other healthy connections to a different TiDB server, thus ensuring continuous client connectivity. For more details, see [Memory-based load balancing](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing).
 
 TiProxy is not suitable for the following scenarios:
 
 - Sensitive to performance: The performance of TiProxy is lower than that of HAProxy and other load balancers, so using TiProxy will reduce the QPS. For details, refer to [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
 - Sensitive to cost: If the TiDB cluster uses hardware load balancers, virtual IP, or the load balancer provided by Kubernetes, adding TiProxy will increase the cost. In addition, if you deploy the TiDB cluster across availability zones on the cloud, adding TiProxy will also increase the traffic cost across availability zones.
-- TiDB server failover: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
+- Failover for unexpected TiDB server downtime: TiProxy can keep the client connection only when the TiDB server is offline or restarted as planned. If the TiDB server is offline unexpectedly, the connection is still broken.
 
 It is recommended that you use TiProxy for the scenarios that TiProxy is suitable for and use HAProxy or other proxies when your application is sensitive to performance.
 
@@ -85,7 +91,7 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
 3. Configure the TiProxy instances.
 
-    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances. You can use hardware load balancers to distribute traffic to each TiProxy instance, or configure virtual IP to route the traffic to the available TiProxy instance.
+    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances and configure a virtual IP by setting [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) and [`ha.interface`](/tiproxy/tiproxy-configuration.md#interface) to route the traffic to the available TiProxy instance.
 
     When selecting the model and number of TiProxy instances, consider the following factors:
 
@@ -100,12 +106,14 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
     ```yaml
     component_versions:
-      tiproxy: "v1.0.0"
+      tiproxy: "v1.2.0"
     server_configs:
       tiproxy:
         security.server-tls.ca: "/var/ssl/ca.pem"
         security.server-tls.cert: "/var/ssl/cert.pem"
         security.server-tls.key: "/var/ssl/key.pem"
+        ha.virtual-ip: "10.0.1.10/24"
+        ha.interface: "eth0"
     ```
 
 4. Start the cluster.
@@ -206,4 +214,4 @@ Note that some connectors call the common library to connect to the database, an
 ## TiProxy resources
 
 - [TiProxy Release Notes](https://github.com/pingcap/tiproxy/releases)
-- [TiProxy Issues](https://github.com/pingcap/tiup/issues): Lists TiProxy GitHub issues
+- [TiProxy Issues](https://github.com/pingcap/tiproxy/issues): Lists TiProxy GitHub issues

@@ -33,7 +33,7 @@ After that, you will see a page similar to the following:
 
 ![playground gitpod workspace init](/media/develop/playground-gitpod-workspace-init.png)
 
-This scenario in the page uses [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview) to build a TiDB Playground. You can check the progress on the left side of the terminal area.
+This scenario in the page uses [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview) to build a TiDB Playground. You can check the progress on the left side of the terminal area.
 
 Once the TiDB Playground is ready, another `Spring JPA Hibernate` task will run. You can check the progress on the right side of the terminal area.
 
@@ -166,3 +166,17 @@ Visit `https://gitpod.io/workspaces` for all established workspaces.
 Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
 
 ![playground gitpod summary](/media/develop/playground-gitpod-summary.png)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

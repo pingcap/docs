@@ -248,7 +248,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 * [DBeaver](https://dbeaver.io/) v23.0.1 supports TiDB by default [#17396](https://github.com/dbeaver/dbeaver/issues/17396) @[Icemap](https://github.com/Icemap)
 
     - Provides an independent TiDB module, icon, and logo.
-    - The default configuration supports [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless), making it easier to connect to TiDB Serverless.
+    - The default configuration supports [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), making it easier to connect to TiDB Cloud Serverless.
     - Supports identifying TiDB versions to display or hide foreign key tabs.
     - Supports visualizing SQL execution plans in `EXPLAIN` results.
     - Supports highlighting TiDB keywords such as `PESSIMISTIC`, `OPTIMISTIC`, `AUTO_RANDOM`, `PLACEMENT`, `POLICY`, `REORGANIZE`, `EXCHANGE`, `CACHE`, `NONCLUSTERED`, and `CLUSTERED`.
@@ -268,7 +268,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
   For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
-* TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV (GA) [#41163](https://github.com/pingcap/tidb/issues/41163) @[gozssky](https://github.com/gozssky)
+* TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV (GA) [#41163](https://github.com/pingcap/tidb/issues/41163) @[sleepymole](https://github.com/sleepymole)
 
     Starting from v6.6.0, TiDB Lightning supports compressing locally encoded and sorted key-value pairs for network transfer when sending them to TiKV, thus reducing the amount of data transferred over the network and lowering the network bandwidth overhead. In the earlier TiDB versions before this feature is supported, TiDB Lightning requires relatively high network bandwidth and incurs high traffic charges in case of large data volumes.
 
@@ -411,15 +411,15 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
         - Support splitting transactions in the redo applier to improve its throughput and reduce RTO in disaster recovery scenarios [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Improve the table scheduling to split a single table more evenly across various TiCDC nodes [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
-        - Add the Large Row monitoring metrics in MQ sink [#8286](https://github.com/pingcap/tiflow/issues/8286) @[hi-rustin](https://github.com/hi-rustin)
+        - Add the Large Row monitoring metrics in MQ sink [#8286](https://github.com/pingcap/tiflow/issues/8286) @[hi-rustin](https://github.com/Rustin170506)
         - Reduce network traffic between TiKV and TiCDC nodes in scenarios where a Region contains data of multiple tables [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
-        - Move the P99 metrics panel of Checkpoint TS and Resolved TS to the Lag analyze panel [#8524](https://github.com/pingcap/tiflow/issues/8524) @[hi-rustin](https://github.com/hi-rustin)
+        - Move the P99 metrics panel of Checkpoint TS and Resolved TS to the Lag analyze panel [#8524](https://github.com/pingcap/tiflow/issues/8524) @[hi-rustin](https://github.com/Rustin170506)
         - Support applying DDL events in redo logs [#8361](https://github.com/pingcap/tiflow/issues/8361) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Support splitting and scheduling tables to TiCDC nodes based on upstream write throughput [#7720](https://github.com/pingcap/tiflow/issues/7720) @[overvenus](https://github.com/overvenus)
 
     + TiDB Lightning
 
-        - TiDB Lightning Physical Import Mode supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[gozssky](https://github.com/gozssky)
+        - TiDB Lightning Physical Import Mode supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
 
            Add the `add-index-by-sql` parameter. The default value is `false`, which means that TiDB Lightning encodes both row data and index data into KV pairs and import them into TiKV together. If you set it to `true`, it means that TiDB Lightning adds indexes via the `ADD INDEX` SQL statement after importing the row data to improve import speed and stability.
 
@@ -504,7 +504,7 @@ We would like to thank the following contributors from the TiDB community:
 - [BornChanger](https://github.com/BornChanger)
 - [Dousir9](https://github.com/Dousir9)
 - [erwadba](https://github.com/erwadba)
-- [HappyUncle](https://github.com/HappyUncle)
+- [happy-v587](https://github.com/happy-v587)
 - [jiyfhust](https://github.com/jiyfhust)
 - [L-maple](https://github.com/L-maple)
 - [liumengya94](https://github.com/liumengya94)

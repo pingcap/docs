@@ -10,9 +10,11 @@ TiDB uses statistics as input to the optimizer to estimate the number of rows pr
 
 ## Collect statistics
 
+This section describes two ways of collecting statistics: automatic update and manual collection.
+
 ### Automatic update
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows in statistics.
+For the [`INSERT`](/sql-statements/sql-statement-insert.md), [`DELETE`](/sql-statements/sql-statement-delete.md), or [`UPDATE`](/sql-statements/sql-statement-update.md) statements, TiDB automatically updates the number of rows and modified rows in statistics.
 
 <CustomContent platform="tidb">
 
@@ -26,15 +28,15 @@ TiDB persists the update information every 60 seconds.
 
 </CustomContent>
 
-Based upon the number of changes to a table, TiDB will automatically schedule [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and the following `tidb_auto_analyze%` variables.
+Based upon the number of changes to a table, TiDB will automatically schedule [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and the following `tidb_auto_analyze%` variables.
 
 |  System Variable | Default Value | Description |
 |---|---|---|
-| [`tidb_enable_auto_anlyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | true | Controls whether TiDB automatically executes ANALYZE. |
-| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | 0.5 | The threshold value of automatic update |
-| [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) | `00:00 +0000` | The start time in a day when TiDB can perform automatic update |
-| [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)   | `23:59 +0000` | The end time in a day when TiDB can perform automatic update |
-| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | `128` | The number of partitions that TiDB automatically analyzes when analyzing a partitioned table (that is, when automatically updating statistics on a partitioned table) |
+| [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | `ON` | Controls whether TiDB automatically executes `ANALYZE`. |
+| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | `0.5` | The threshold value of automatic update. |
+| [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) | `00:00 +0000` | The start time in a day when TiDB can perform automatic update. |
+| [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)   | `23:59 +0000` | The end time in a day when TiDB can perform automatic update. |
+| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | `128` | The number of partitions that TiDB automatically analyzes when analyzing a partitioned table (that is, when automatically updating statistics on a partitioned table). |
 | [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800) | `ON` | Controls whether to enable the priority queue to schedule the tasks of automatically collecting statistics. When this variable is enabled, TiDB prioritizes collecting statistics for tables that are more valuable to collect, such as newly created indexes and partitioned tables with partition changes. Additionally, TiDB prioritizes tables with lower health scores, placing them at the front of the queue. |
 
 When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics on this table.
@@ -43,11 +45,11 @@ To avoid the situation that modifying data on a small table frequently triggers 
 
 > **Note:**
 >
-> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
+> Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the [`WITH`](/sql-statements/sql-statement-analyze-table.md) syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
 
 ### Manual collection
 
-Currently, TiDB collects statistical information as a full collection. You can execute the `ANALYZE TABLE` statement to collect statistics.
+Currently, TiDB collects statistics as a full collection. You can execute the `ANALYZE TABLE` statement to collect statistics.
 
 You can perform full collection using the following syntax.
 
@@ -66,11 +68,13 @@ You can perform full collection using the following syntax.
 
 `WITH NUM SAMPLES` and `WITH FLOAT_NUM SAMPLERATE` correspond to two different algorithms of collecting samples.
 
-See [Histograms](#histogram), [Top-N](#top-n-values) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improve collection performance](#improve-collection-performance).
+See [Histograms](#histogram), [Top-N](#top-n) and [CMSketch](#count-min-sketch) (Count-Min Sketch) for detailed explanations. For `SAMPLES`/`SAMPLERATE`, see [Improve collection performance](#improve-collection-performance).
 
-For information on persisting the options for easier reuse, see [Persist ANALYZE configurations](#persist-analyze-configurations).
+For information on persisting the options for easier reuse, see [Persist `ANALYZE` configurations](#persist-analyze-configurations).
 
 ## Types of statistics
+
+This section describes three types of statistics: histogram, Count-Min Sketch, and Top-N.
 
 ### Histogram
 
@@ -88,22 +92,24 @@ For details about the parameter that determines the upper limit to the number of
 
 > **Note:**
 >
-> Count-Min Sketch is used in statistics Version 1 only for equal/IN predicate selectivity estimation. In Version 2, other statistics are used due to challenges in managing Count-Min sketch to avoid collisions as discussed below.
+> Count-Min Sketch is used in statistics Version 1 only for equal/IN predicate selectivity estimation. In Version 2, Histogram statistics are used instead due to challenges in managing Count-Min sketch to avoid collisions as discussed below.
 
-Count-Min Sketch is a hash structure. When an equivalence query contains `a = 1` or `IN` query (for example, `a IN (1, 2, 3)`), TiDB uses this data structure for estimation.
+Count-Min Sketch is a hash structure. When processing an equivalence query such as `a = 1` or an `IN` query (for example, `a IN (1, 2, 3)`), TiDB uses this data structure for estimation.
 
 A hash collision might occur since Count-Min Sketch is a hash structure. In the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement, if the estimate of the equivalent query deviates greatly from the actual value, it can be considered that a larger value and a smaller value have been hashed together. In this case, you can take one of the following ways to avoid the hash collision:
 
 - Modify the `WITH NUM TOPN` parameter. TiDB stores the high-frequency (top x) data separately, with the other data stored in Count-Min Sketch. Therefore, to prevent a larger value and a smaller value from being hashed together, you can increase the value of `WITH NUM TOPN`. In TiDB, its default value is 20. The maximum value is 1024. For more information about this parameter, see [Manual collection](#manual-collection).
 - Modify two parameters `WITH NUM CMSKETCH DEPTH` and `WITH NUM CMSKETCH WIDTH`. Both affect the number of hash buckets and the collision probability. You can increase the values of the two parameters appropriately according to the actual scenario to reduce the probability of hash collision, but at the cost of higher memory usage of statistics. In TiDB, the default value of `WITH NUM CMSKETCH DEPTH` is 5, and the default value of `WITH NUM CMSKETCH WIDTH` is 2048. For more information about the two parameters, see [Manual collection](#manual-collection).
 
-### Top-N values
+### Top-N
 
 Top-N values are values with the top N occurrences in a column or index. Top-N statistics are often referred to as frequency statistics or data skew.
 
-TiDB records the values and occurrences of Top-N values. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter that determines the number of values collected, see [Manual collection](#manual-collection).
+TiDB records the values and occurrences of Top-N values. Here `N` is controlled by the `WITH NUM TOPN` parameter. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter, see [Manual collection](#manual-collection).
 
 ## Selective statistics collection
+
+This section describes how to collect statistics selectively.
 
 ### Collect statistics on indexes
 
@@ -117,13 +123,13 @@ When `IndexNameList` is empty, this syntax collects statistics on all indexes in
 
 > **Note:**
 >
-> To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version` is `2`, this syntax collects statistics on the entire table (including all columns and indexes), instead of only on indexes.
+> To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version` is `2`, this syntax collects statistics on the indexed columns and all indexes.
 
 ### Collect statistics on some columns
 
-In most cases, the optimizer only uses statistics on columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements. These columns can be referred to as `PREDICATE COLUMNS`.
+When TiDB executes SQL statements, the optimizer uses statistics for only a subset of columns in most cases. For example, columns that appear in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` clauses. These columns are referred to as predicate columns.
 
-If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics on only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, see [Persist column configurations](#persist-column-configurations).
+If a table has many columns, collecting statistics on all the columns can cause a large overhead. To reduce the overhead, you can collect statistics for only specific columns (that you choose) or `PREDICATE COLUMNS` to be used by the optimizer. To persist the column list of any subset of columns for reuse in future, see [Persist column configurations](#persist-column-configurations).
 
 > **Note:**
 >
@@ -132,52 +138,38 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 - To collect statistics on specific columns, use the following syntax:
 
-    {{< copyable "sql" >}}
-
     ```sql
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
     In the syntax, `ColumnNameList` specifies the name list of the target columns. If you need to specify more than one column, use comma `,` to separate the column names. For example, `ANALYZE table t columns a, b`. Besides collecting statistics on the specific columns in a specific table, this syntax collects statistics on the indexed columns and all indexes in that table at the same time.
 
-- To collect statistics on `PREDICATE COLUMNS`, do the following:
+- To collect statistics on `PREDICATE COLUMNS`, use the following syntax:
 
-    > **Warning:**
+    ```sql
+    ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
+    ```
+
+    <CustomContent platform="tidb">
+
+    TiDB always writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
+
+    </CustomContent>
+
+    <CustomContent platform="tidb-cloud">
+
+    TiDB always writes the `PREDICATE COLUMNS` information to the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table every 300 seconds.
+
+    </CustomContent>
+
+    In addition to collecting statistics on `PREDICATE COLUMNS` in a specific table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
+
+    > **Note:**
     >
-    > Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
-
-    1. Set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
-
-        <CustomContent platform="tidb">
-
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
-
-        </CustomContent>
-
-        <CustomContent platform="tidb-cloud">
-
-        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 300 seconds.
-
-        </CustomContent>
-
-    2. After the query pattern of your business is relatively stable, collect statistics on `PREDICATE COLUMNS` by using the following syntax:
-
-        {{< copyable "sql" >}}
-
-        ```sql
-        ANALYZE TABLE TableName PREDICATE COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
-        ```
-
-        Besides collecting statistics on `PREDICATE COLUMNS` in a specific table, this syntax collects statistics on indexed columns and all indexes in that table at the same time.
-
-        > **Note:**
-        >
-        > - If the `mysql.column_stats_usage` system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on all columns and all indexes in that table.
-        > - Any columns excluded from collection (either by manually listing columns or using `PREDICATE COLUMNS`) will not have their statistics overwritten. When executing a new type of SQL query, the optimizer will use the old statistics for such columns if it exists or pseudo column statistics if columns never had statistics collected. The next ANALYZE using `PREDICATE COLUMNS` will collect the statistics on those columns.
+    > - If the [`mysql.column_stats_usage`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table does not contain any `PREDICATE COLUMNS` recorded for that table, the preceding syntax collects statistics on indexed columns and all indexes in that table.
+    > - Any columns excluded from collection (either by manually listing columns or using `PREDICATE COLUMNS`) will not have their statistics overwritten. When executing a new type of SQL query, the optimizer will use the old statistics for such columns if it exists, or pseudo column statistics if columns never had statistics collected. The next ANALYZE using `PREDICATE COLUMNS` will collect the statistics on those columns.
 
 - To collect statistics on all columns and indexes, use the following syntax:
-
-    {{< copyable "sql" >}}
 
     ```sql
     ANALYZE TABLE TableName ALL COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -187,15 +179,11 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 - To collect statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
 
-    {{< copyable "sql" >}}
-
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
 - To collect index statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
-
-    {{< copyable "sql" >}}
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -207,17 +195,15 @@ If a table has many columns, collecting statistics on all the columns can cause 
     >
     > Currently, collecting statistics on `PREDICATE COLUMNS` is an experimental feature. It is not recommended that you use it in production environments.
 
-    {{< copyable "sql" >}}
-
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList [COLUMNS ColumnNameList|PREDICATE COLUMNS|ALL COLUMNS] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
 #### Collect statistics of partitioned tables in dynamic pruning mode
 
-When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) (which is the default since v6.3.0), TiDB collects table-level statistics, which is called GlobalStats. Currently, GlobalStats is aggregated from statistics of all partitions. In dynamic pruning mode, a statistics update of any partitioned table can trigger the GlobalStats to be updated.
+When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) (which is the default since v6.3.0), TiDB collects table-level statistics, which is called GlobalStats. Currently, GlobalStats is aggregated from statistics of all partitions. In dynamic pruning mode, a statistics update in any partition of a table can trigger the GlobalStats of that table to be updated.
 
-If partitions are empty, or columns for some partitions are missing, then the collection behavior is controlled by the [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) variable:
+If statistics of some partitions are empty, or statistics of some columns are missing in some partitions, then the collection behavior is controlled by the [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) variable:
 
 - When GlobalStats update is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `OFF`:
 
@@ -229,7 +215,7 @@ If partitions are empty, or columns for some partitions are missing, then the co
 
     - If statistics of all or some columns are missing for some partitions, TiDB skips these missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
 
-In dynamic pruning mode, the Analyze configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
+In dynamic pruning mode, the `ANALYZE` configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
 
 ## Improve collection performance
 
@@ -251,23 +237,11 @@ Sampling is available via two separate options of the `ANALYZE` statement - with
 
 Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Since v5.3.0, the TiDB Version 2 statistics uses the Bernoulli sampling method to collect statistics by default. To re-use the reservoir sampling method, you can use the `WITH NUM SAMPLES` statement.
 
-The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the `TABLE_KEYS` column in the [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md) table as another reference to calculate the sampling rate.
-
-<CustomContent platform="tidb">
+The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the sum of all the values in the `APPROXIMATE_KEYS` column in the results of [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) of the table as another reference to calculate the sampling rate.
 
 > **Note:**
 >
-> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through TiDB Cloud console (see [Import Sample Data](/tidb-cloud/import-sample-data.md)), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
-
-</CustomContent>
+> Normally, `STATS_META` is more credible than `APPROXIMATE_KEYS`. However, when the result of `STATS_META` is much smaller than the result of `APPROXIMATE_KEYS`, it is recommended that you use `APPROXIMATE_KEYS` to calculate the sampling rate.
 
 ### The memory quota for collecting statistics
 
@@ -282,9 +256,9 @@ To set a proper value of `tidb_mem_quota_analyze`, consider the data size of the
 > **Note:**
 >
 > The following suggestions are for reference only. You need to configure the values based on the real scenario.
->
-> - Minimum value: should be greater than the maximum memory usage when TiDB collects statistics from the table with the most columns. An approximate reference: when TiDB collects statistics from a table with 20 columns using the default configuration, the maximum memory usage is about 800 MiB; when TiDB collects statistics from a table with 160 columns using the default configuration, the maximum memory usage is about 5 GiB.
-> - Maximum value: should be less than the available memory when TiDB is not collecting statistics.
+
+- Minimum value: should be greater than the maximum memory usage when TiDB collects statistics from the table with the most columns. An approximate reference: when TiDB collects statistics from a table with 20 columns using the default configuration, the maximum memory usage is about 800 MiB; when TiDB collects statistics from a table with 160 columns using the default configuration, the maximum memory usage is about 5 GiB.
+- Maximum value: should be less than the available memory when TiDB is not collecting statistics.
 
 ## Persist ANALYZE configurations
 
@@ -294,10 +268,10 @@ The following are the `ANALYZE` configurations that support persistence:
 
 | Configurations | Corresponding ANALYZE syntax |
 | --- | --- |
-| The number of histogram buckets | WITH NUM BUCKETS |
-| The number of Top-N  | WITH NUM TOPN |
-| The number of samples | WITH NUM SAMPLES |
-| The sampling rate | WITH FLOATNUM SAMPLERATE |
+| The number of histogram buckets | `WITH NUM BUCKETS` |
+| The number of Top-N  | `WITH NUM TOPN` |
+| The number of samples | `WITH NUM SAMPLES` |
+| The sampling rate | `WITH FLOATNUM SAMPLERATE` |
 | The `ANALYZE` column type | AnalyzeColumnOption ::= ( 'ALL COLUMNS' \| 'PREDICATE COLUMNS' \| 'COLUMNS' ColumnNameList ) |
 | The `ANALYZE` column | ColumnNameList ::= Identifier ( ',' Identifier )* |
 
@@ -342,29 +316,11 @@ If you want to persist the column configuration in the `ANALYZE` statement (incl
 - When TiDB collects statistics automatically or when you manually collect statistics by executing the `ANALYZE` statement without specifying the column configuration, TiDB continues using the previously persisted configuration for statistics collection.
 - When you manually execute the `ANALYZE` statement multiple times with column configuration specified, TiDB overwrites the previously recorded persistent configuration using the new configuration specified by the latest `ANALYZE` statement.
 
-To locate `PREDICATE COLUMNS` and columns on which statistics have been collected, use the following syntax:
-
-```sql
-SHOW COLUMN_STATS_USAGE [ShowLikeOrWhere];
-```
-
-The `SHOW COLUMN_STATS_USAGE` statement returns the following 6 columns:
-
-| Column name | Description            |
-| -------- | ------------- |
-| `Db_name`  |  The database name    |
-| `Table_name` | The table name |
-| `Partition_name` | The partition name |
-| `Column_name` | The column name |
-| `Last_used_at` | The last time when the column statistics were used in the query optimization |
-| `Last_analyzed_at` | The last time when the column statistics were collected |
+To locate `PREDICATE COLUMNS` and columns on which statistics have been collected, use the [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) statement.
 
 In the following example, after executing `ANALYZE TABLE t PREDICATE COLUMNS;`, TiDB collects statistics on columns `b`, `c`, and `d`, where column `b` is a `PREDICATE COLUMN` and columns `c` and `d` are index columns.
 
 ```sql
-SET GLOBAL tidb_enable_column_tracking = ON;
-Query OK, 0 rows affected (0.00 sec)
-
 CREATE TABLE t (a INT, b INT, c INT, d INT, INDEX idx_c_d(c, d));
 Query OK, 0 rows affected (0.00 sec)
 
@@ -401,9 +357,9 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 ## Versions of statistics
 
-The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
+The [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510) variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
 
-- For TiDB Self-Hosted, the default value of this variable changes from `1` to `2` starting from v5.3.0.
+- For TiDB Self-Managed, the default value of this variable changes from `1` to `2` starting from v5.3.0.
 - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
 - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
 
@@ -413,18 +369,18 @@ The following table lists the information collected by each version for usage in
 
 | Information | Version 1 | Version 2|
 | --- | --- | ---|
-| The total number of rows in the table | √ | √ |
-| Equal/IN predicate estimation | √ (Column/Index Top-N & Count-Min Sketch) | √ (Column/Index Top-N & Histogram) |
-| Range predicate estimation | √ (Column/Index Top-N & Histogram) | √ (Column/Index Top-N & Histogram) |
-| `NULL` predicate estimation | √ | √ |
-| The average length of columns | √ | √ |
-| The average length of indexes | √ | √ |
+| The total number of rows in the table | ⎷ | ⎷ |
+| Equal/IN predicate estimation | ⎷ (Column/Index Top-N & Count-Min Sketch) | ⎷ (Column/Index Top-N & Histogram) |
+| Range predicate estimation | ⎷ (Column/Index Top-N & Histogram) | ⎷ (Column/Index Top-N & Histogram) |
+| `NULL` predicate estimation | ⎷ | ⎷ |
+| The average length of columns | ⎷ | ⎷ |
+| The average length of indexes | ⎷ | ⎷ |
 
 ### Switch between statistics versions
 
 It is recommended to ensure that all tables/indexes (and partitions) utilize statistics collection from the same version. Version 2 is recommended, however, it is not recommended to switch from one version to another without a justifiable reason such as an issue experienced with the version in use. A switch between versions might take a period of time when no statistics are available until all tables have been analyzed with the new version, which might negatively affect the optimizer plan choices if statistics are not available.
 
-Examples of justifications to switch might include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting Count-Min sketch statistics. Solutions are listed in the [Count-Min Sketch](#count-min-sketch) section. Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. In the early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to `set tidb_analyze_version = 1` and rerun `ANALYZE` on all objects.
+Examples of justifications to switch might include - with Version 1, there could be inaccuracies in equal/IN predicate estimation due to hash collisions when collecting Count-Min sketch statistics. Solutions are listed in the [Count-Min Sketch](#count-min-sketch) section. Alternatively, setting `tidb_analyze_version = 2` and rerunning `ANALYZE` on all objects is also a solution. In the early release of Version 2, there was a risk of memory overflow after `ANALYZE`. This issue is resolved, but initially, one solution was to set `tidb_analyze_version = 1` and rerun `ANALYZE` on all objects.
 
 To prepare `ANALYZE` for switching between versions:
 
@@ -459,30 +415,7 @@ You can view the `ANALYZE` status and statistics information using the following
 
 ### `ANALYZE` state
 
-When executing the `ANALYZE` statement, you can view the current state of `ANALYZE` using the following SQL statement:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW ANALYZE STATUS [ShowLikeOrWhere]
-```
-
-This statement returns the state of `ANALYZE`. You can use `ShowLikeOrWhere` to filter the information you need.
-
-Currently, the `SHOW ANALYZE STATUS` statement returns the following 11 columns:
-
-| Column name | Description            |
-| :-------- | :------------- |
-| table_schema  |  The database name    |
-| table_name | The table name |
-| partition_name| The partition name |
-| job_info | The task information. If an index is analyzed, this information will include the index name. When `tidb_analyze_version =2`, this information will include configuration items such as sample rate. |
-| processed_rows | The number of rows that have been analyzed |
-| start_time | The time at which the task starts |
-| state | The state of a task, including `pending`, `running`, `finished`, and `failed` |
-| fail_reason | The reason why the task fails. If the execution is successful, the value is `NULL`. |
-| instance | The TiDB instance that executes the task |
-| process_id | The process ID that executes the task |
+When executing the `ANALYZE` statement, you can view the current state of `ANALYZE` using [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md).
 
 Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this statement. Before TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement can only show instance-level tasks, and task records are cleared after a TiDB restart.
 
@@ -503,178 +436,33 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 
 ### Metadata of tables
 
-You can use the `SHOW STATS_META` statement to view the total number of rows and the number of updated rows.
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_META [ShowLikeOrWhere];
-```
-
-The syntax of `ShowLikeOrWhereOpt` is as follows:
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
-
-Currently, the `SHOW STATS_META` statement returns the following 6 columns:
-
-| Column name | Description  |
-| :-------- | :------------- |
-| `db_name`  |  The database name    |
-| `table_name` | The table name |
-| `partition_name`| The partition name |
-| `update_time` | The time of the update |
-| `modify_count` | The number of modified rows |
-| `row_count` | The total number of rows |
-
-> **Note:**
->
-> When TiDB automatically updates the total number of rows and the number of modified rows according to DML statements, `update_time` is also updated. Therefore, `update_time` does not necessarily indicate the last time when the `ANALYZE` statement is executed.
+You can use the [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) statement to view the total number of rows and the number of updated rows.
 
 ### Health state of tables
 
-You can use the `SHOW STATS_HEALTHY` statement to check the health state of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health state is 0; when `modify_count` < `row_count`, the health state is (1 - `modify_count`/`row_count`) * 100.
-
-The syntax is as follows:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_HEALTHY [ShowLikeOrWhere];
-```
-
-The synopsis of `SHOW STATS_HEALTHY` is:
-
-![ShowStatsHealthy](/media/sqlgram/ShowStatsHealthy.png)
-
-Currently, the `SHOW STATS_HEALTHY` statement returns the following 4 columns:
-
-| Column name | Description  |
-| :-------- | :------------- |
-| `db_name`  | The database name    |
-| `table_name` | The table name |
-| `partition_name` | The partition name |
-| `healthy` | The health state of tables |
+You can use the [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) statement to check the health state of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health state is 0; when `modify_count` < `row_count`, the health state is (1 - `modify_count`/`row_count`) * 100.
 
 ### Metadata of columns
 
-You can use the `SHOW STATS_HISTOGRAMS` statement to view the number of different values and the number of `NULL` in all the columns.
-
-Syntax as follows:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_HISTOGRAMS [ShowLikeOrWhere]
-```
-
-This statement returns the number of different values and the number of `NULL` in all the columns. You can use `ShowLikeOrWhere` to filter the information you need.
-
-Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following 10 columns:
-
-| Column name | Description    |
-| :-------- | :------------- |
-| `db_name`  |  The database name    |
-| `table_name` | The table name |
-| `partition_name` | The partition name |
-| `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
-| `is_index` | Whether it is an index column or not |
-| `update_time` | The time of the update |
-| `distinct_count` | The number of different values |
-| `null_count` | The number of `NULL` |
-| `avg_col_size` | The average length of columns |
-| correlation | The Pearson correlation coefficient of the column and the integer primary key, which indicates the degree of association between the two columns|
+You can use the [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md) statement to view the number of different values and the number of `NULL` in all the columns.
 
 ### Buckets of histogram
 
-You can use the `SHOW STATS_BUCKETS` statement to view each bucket of the histogram.
-
-The syntax is as follows:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_BUCKETS [ShowLikeOrWhere]
-```
-
-The diagram is as follows:
-
-![SHOW STATS_BUCKETS](/media/sqlgram/SHOW_STATS_BUCKETS.png)
-
-This statement returns information about all the buckets. You can use `ShowLikeOrWhere` to filter the information you need.
-
-Currently, the `SHOW STATS_BUCKETS` statement returns the following 11 columns:
-
-| Column name | Description   |
-| :-------- | :------------- |
-| `db_name`  |  The database name    |
-| `table_name` | The table name |
-| `partition_name` | The partition name |
-| `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
-| `is_index` | Whether it is an index column or not |
-| `bucket_id` | The ID of a bucket |
-| `count` | The number of all the values that falls on the bucket and the previous buckets |
-| `repeats` | The occurrence number of the maximum value |
-| `lower_bound` | The minimum value |
-| `upper_bound` | The maximum value |
-| `ndv` | The number of different values in the bucket. When `tidb_analyze_version` = `1`, `ndv` is always `0`, which has no actual meaning. |
+You can use the [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md) statement to view each bucket of the histogram.
 
 ### Top-N information
 
-You can use the `SHOW STATS_TOPN` statement to view the Top-N information currently collected by TiDB.
-
-The syntax is as follows:
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW STATS_TOPN [ShowLikeOrWhere];
-```
-
-Currently, the `SHOW STATS_TOPN` statement returns the following 7 columns:
-
-| Column name | Description |
-| ---- | ----|
-| `db_name` | The database name |
-| `table_name` | The table name |
-| `partition_name` | The partition name |
-| `column_name` | The column name (when `is_index` is `0`) or the index name (when `is_index` is `1`) |
-| `is_index` | Whether it is an index column or not |
-| `value` | The value of this column |
-| `count` | How many times the value appears |
+You can use the [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md) statement to view the Top-N information currently collected by TiDB.
 
 ## Delete statistics
 
-You can run the `DROP STATS` statement to delete statistics.
-
-{{< copyable "sql" >}}
-
-```sql
-DROP STATS TableName
-```
-
-The preceding statement deletes all statistics of `TableName`. If a partitioned table is specified, this statement will delete statistics of all partitions in this table as well as GlobalStats generated in dynamic pruning mode.
-
-{{< copyable "sql" >}}
-
-```sql
-DROP STATS TableName PARTITION PartitionNameList;
-```
-
-This preceding statement only deletes statistics of the specified partitions in `PartitionNameList`.
-
-{{< copyable "sql" >}}
-
-```sql
-DROP STATS TableName GLOBAL;
-```
-
-The preceding statement only deletes GlobalStats generated in dynamic pruning mode of the specified table.
+You can run the [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) statement to delete statistics.
 
 ## Load statistics
 
 > **Note:**
 >
-> Loading statistics is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> Loading statistics is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
 
@@ -710,7 +498,9 @@ After enabling the synchronously loading statistics feature, you can control how
 
 </CustomContent>
 
-## Import and export statistics
+## Export and import statistics
+
+This section describes how to export and import statistics.
 
 <CustomContent platform="tidb-cloud">
 
@@ -726,23 +516,17 @@ The interface to export statistics is as follows:
 
 + To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database:
 
-    {{< copyable "" >}}
-
     ```
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
     ```
 
     For example:
 
-    {{< copyable "" >}}
-
-    ```
+    ```shell
     curl -s http://127.0.0.1:10080/stats/dump/test/t1 -o /tmp/t1.json
     ```
 
 + To obtain the JSON format statistics of the `${table_name}` table in the `${db_name}` database at specific time:
-
-    {{< copyable "" >}}
 
     ```
     http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
@@ -756,12 +540,12 @@ The interface to export statistics is as follows:
 
 Generally, the imported statistics refer to the JSON file obtained using the export interface.
 
-Syntax:
+Loading statistics can be done with the [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) statement.
 
-{{< copyable "sql" >}}
+For example:
 
-```
-LOAD STATS 'file_name'
+```sql
+LOAD STATS 'file_name';
 ```
 
 `file_name` is the file name of the statistics to be imported.
@@ -837,7 +621,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-In addition, you can also lock the statistics of a partition using `LOCK STATS`. For example:
+In addition, you can also lock the statistics of a partition using [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md). For example:
 
 Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
 
@@ -925,6 +709,8 @@ The following table describes the behaviors of locking statistics:
 | A partitioned table and only some partitions are locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | The deleted partition lock information is cleared | The deleted partition lock information is cleared | The lock information is transferred to the exchanged table |
 
 ## Manage `ANALYZE` tasks and concurrency
+
+This section describes how to terminate background `ANALYZE` tasks and control the `ANALYZE` concurrency.
 
 ### Terminate background `ANALYZE` tasks
 

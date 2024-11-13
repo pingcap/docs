@@ -90,7 +90,7 @@ The diagrams of database time breakdown and execution time overview present both
 
     > **Note:**
     >
-    > It is normal that the total KV request time is greater than the execute time. Because the TiDB executor may send KV requests to multiple TiKVs concurrently, causing the total KV request wait time to be greater than the execute time. In the preceding TPC-C workload, TiDB sends `Prewrite` and `Commit` requests concurrently to multiple TiKVs when a transaction is committed. Therefore, the total time for `Prewrite`, `Commit`, and `PessimisticsLock` requests in this example is obviously longer than the execute time.
+    > It is normal that the total KV request time is greater than the execute time. Because the TiDB executor may send KV requests to multiple TiKVs concurrently, causing the total KV request wait time to be greater than the execute time. In the preceding TPC-C workload, TiDB sends `Prewrite` and `Commit` requests concurrently to multiple TiKVs when a transaction is committed. Therefore, the total time for `Prewrite`, `Commit`, and `PessimisticLock` requests in this example is obviously longer than the execute time.
     >
     > - The `execute` time may also be significantly greater than the total time of the KV request plus the `tso_wait` time. This means that the SQL execution time is spent mostly inside the TiDB executor. Here are two common examples:
     >
@@ -170,10 +170,10 @@ In this workload, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application 
 
 **Example 3: Prepared plan cache unavailable with prepared statement enabled for OLTP workload**
 
-`StmtPreare` times = `StmtExecute` times = `StmtClose` times ~= `StmtFetch` times. The application uses the prepare > execute > fetch > close loop. To prevent prepared statement object leak, many application frameworks call `close` after the `execute` phase. This creates two problems.
+`StmtPrepare` times = `StmtExecute` times = `StmtClose` times ~= `StmtFetch` times. The application uses the prepare > execute > fetch > close loop. To prevent prepared statement object leak, many application frameworks call `close` after the `execute` phase. This creates two problems.
 
 - A SQL execution requires four commands and four network round trips.
-- Queries Using Plan Cache OPS is 0, indicating zero hit of prepared plan cache. The `StmtClose` command clears cached execution plans by default and the next `StmtPreare` command needs to generate the execution plan again.
+- Queries Using Plan Cache OPS is 0, indicating zero hit of prepared plan cache. The `StmtClose` command clears cached execution plans by default and the next `StmtPrepare` command needs to generate the execution plan again.
 
 > **Note:**
 >
@@ -204,7 +204,7 @@ The number of `StmtPrepare` commands per second is much greater than that of `St
 
 In this TPC-C workload:
 
-- The total number of KV requests per second is 79,700. The top request types are `Prewrite`, `Commit`, `PessimisticsLock`, and `BatchGet` in order of number of requests.
+- The total number of KV requests per second is 79,700. The top request types are `Prewrite`, `Commit`, `PessimisticLock`, and `BatchGet` in order of number of requests.
 - Most of the KV processing time is spent on `Commit-external_Commit` and `Prewrite-external_Commit`, which indicates that the most time-consuming KV requests are `Commit` and `Prewrite` from external commit statements.
 
 **Example 2: Analyze workload**
@@ -216,34 +216,92 @@ In this workload, only `ANALYZE` statements are running in the cluster:
 - The total number of KV requests per second is 35.5 and the number of Cop requests per second is 9.3.
 - Most of the KV processing time is spent on `Cop-internal_stats`, which indicates that the most time-consuming KV request is `Cop` from internal `ANALYZE` operations.
 
-#### TiDB CPU, TiKV CPU, and IO usage
+#### CPU and memory usage
 
-In the TiDB CPU and TiKV CPU/IO MBps panels, you can observe the logical CPU usage and IO throughput of TiDB and TiKV, including average, maximum, and delta (maximum CPU usage minus minimum CPU usage), based on which you can determine the overall CPU usage of TiDB and TiKV.
+In the CPU/Memory panels of TiDB, TiKV, and PD, you can monitor their respective logical CPU usage and memory consumption, such as average CPU, maximum CPU, delta CPU (maximum CPU usage minus minimum CPU usage), CPU quota, and maximum memory usage. Based on these metrics, you can determine the overall resource usage of TiDB, TiKV, and PD.
 
-- Based on the `delta` value, you can determine if CPU usage in TiDB is unbalanced (usually accompanied by unbalanced application connections) and if there are read/write hot spots among the cluster.
-- With an overview of TiDB and TiKV resource usage, you can quickly determine if there are resource bottlenecks in your cluster and whether TiKV or TiDB needs scale-out.
+- Based on the `delta` value, you can determine if CPU usage in TiDB or TiKV is unbalanced. For TiDB, a high `delta` usually means unbalanced application connections among the TiDB instances; For TiKV, a high `delta` usually means there are read/write hot spots in the cluster.
+- With an overview of TiDB, TiKV, and PD resource usage, you can quickly determine if there are resource bottlenecks in your cluster and whether TiKV, TiDB, or PD needs scale-out or scale-up.
 
-**Example 1: High TiDB resource usage**
+**Example 1: High TiKV resource usage**
 
-In this workload, each TiDB and TiKV is configured with 8 CPUs.
+In the following TPC-C workload, each TiDB and TiKV is configured with 16 CPUs. PD is configured with 4 CPUs.
 
-![TPC-C](/media/performance/tidb_high_cpu.png)
+![TPC-C](/media/performance/tpcc_cpu_memory.png)
 
-- The average, maximum, and delta CPU usage of TiDB are 575%, 643%, and 136%, respectively.
-- The average, maximum, and delta CPU usage of TiKV are 146%, 215%, and 118%, respectively. The average, maximum, and delta I/O throughput of TiKV are 9.06 MB/s, 19.7 MB/s, and 17.1 MB/s, respectively.
+- The average, maximum, and delta CPU usage of TiDB are 761%, 934%, and 322%, respectively. The maximum memory usage is 6.86 GiB.
+- The average, maximum, and delta CPU usage of TiKV are 1343%, 1505%, and 283%, respectively. The maximum memory usage is 27.1 GiB.
+- The maximum CPU usage of PD is 59.1%. The maximum memory usage is 221 MiB.
 
-Obviously, TiDB consumes more CPU, which is near the bottleneck threshold of 8 CPUs. It is recommended that you scale out the TiDB.
+Obviously, TiKV consumes more CPU, which is expected because TPC-C is a write-heavy scenario. To improve performance, it is recommended to scale out TiKV.
 
-**Example 2: High TiKV resource usage**
+#### Data traffic
 
-In the TPC-C workload below, each TiDB and TiKV is configured with 16 CPUs.
+The read and write traffic panels offer insights into traffic patterns within your TiDB cluster, allowing you to monitor data flow from clients to the database and between internal components comprehensively.
 
-![TPC-C](/media/performance/tpcc_cpu_io.png)
+- Read traffic
 
-- The average, maximum, and delta CPU usage of TiDB are 883%, 962%, and 153%, respectively.
-- The average, maximum, and delta CPU usage of TiKV are 1288%, 1360%, and 126%, respectively. The average, maximum, and delta I/O throughput of TiKV are 130 MB/s, 153 MB/s, and 53.7 MB/s, respectively.
+    - `TiDB -> Client`: the outbound traffic statistics from TiDB to the client
+    - `Rocksdb -> TiKV`: the data flow that TiKV retrieves from RocksDB during read operations within the storage layer
 
-Obviously, TiKV consumes more CPU, which is expected because TPC-C is a write-heavy scenario. It is recommended that you scale out the TiKV to improve performance.
+- Write traffic
+
+    - `Client -> TiDB`: the inbound traffic statistics from the client to TiDB
+    - `TiDB -> TiKV: general`: the rate at which foreground transactions are written from TiDB to TiKV
+    - `TiDB -> TiKV: internal`: the rate at which internal transactions are written from TiDB to TiKV
+    - `TiKV -> Rocksdb`: the flow of write operations from TiKV to RocksDB
+    - `RocksDB Compaction`: the total read and write I/O flow generated by RocksDB compaction operations. If `RocksDB Compaction` is significantly higher than `TiKV -> Rocksdb`, and your average row size is larger than 512 bytes, you can enable Titan to reduce the compaction I/O flow as follows, with min-blob-size set to `"512B"` or `"1KB"` and blob-file-compression set to `"zstd"`.
+
+        ```toml
+        [rocksdb.titan]
+        enabled = true
+        [rocksdb.defaultcf.titan]
+        min-blob-size = "1KB"
+        blob-file-compression = "zstd"
+        ```
+
+**Example 1: Read and write traffic in the TPC-C workload**
+
+The following is an example of read and write traffic in the TPC-C workload.
+
+- Read traffic
+
+    - `TiDB -> Client`: 14.2 MB/s
+    - `Rocksdb -> TiKV`: 469 MB/s. Note that both read operations (`SELECT` statements) and write operations (`INSERT`, `UPDATE`, and `DELETE` statements) require reading data from RocksDB into TiKV before committing a transaction.
+
+- Write traffic
+
+    - `Client -> TiDB`: 5.05 MB/s
+    - `TiDB -> TiKV: general`: 13.1 MB/s
+    - `TiDB -> TiKV`: internal: 5.07 KB/s
+    - `TiKV -> Rocksdb`: 109 MB/s
+    - `RocksDB Compaction`: 567 MB/s
+
+![TPC-C](/media/performance/tpcc_read_write_traffic.png)
+
+**Example 2: Write traffic before and after Titan is enabled**
+
+ The following example shows the performance changes before and after Titan is enabled. For an insert workload with 6 KB records, Titan significantly reduces write traffic and compaction I/O, enhancing overall performance and resource utilization of TiKV.
+
+- Write traffic before Titan is enabled
+
+    - `Client -> TiDB`: 510 MB/s
+    - `TiDB -> TiKV: general`: 187 MB/s
+    - `TiDB -> TiKV: internal`: 3.2 KB/s
+    - `TiKV -> Rocksdb`: 753 MB/s
+    - `RocksDB Compaction`: 10.6 GB/s
+
+    ![Titan Disable](/media/performance/titan_disable.png)
+
+- Write traffic after Titan is enabled
+
+    - `Client -> TiDB`: 586 MB/s
+    - `TiDB -> TiKV: general`: 295 MB/s
+    - `TiDB -> TiKV: internal`: 3.66 KB/s
+    - `TiKV -> Rocksdb`: 1.21 GB/s
+    - `RocksDB Compaction`: 4.68 MB/s
+
+    ![Titan Enable](/media/performance/titan_enable.png)
 
 ### Query latency breakdown and key latency metrics
 
@@ -279,7 +337,7 @@ In this workload:
 
 - The average latency and P99 latency of all SQL statements are 10.8 ms and 84.1 ms, respectively.
 - The average connection idle time in transactions `avg-in-txn` is 9.4 ms.
-- The total number of connections to the cluster is 3,700, and the number of connections to each TiDB node is 1,800. The average number of active connections is 40.3, which indicates that most of the connections are idle. The average number of `disonnnection/s` is 55.8, which indicates that the application is connecting and disconnecting frequently. The behavior of short connections will have a certain impact on TiDB resources and response time.
+- The total number of connections to the cluster is 3,700, and the number of connections to each TiDB node is 1,800. The average number of active connections is 40.3, which indicates that most of the connections are idle. The average number of `disconnection/s` is 55.8, which indicates that the application is connecting and disconnecting frequently. The behavior of short connections will have a certain impact on TiDB resources and response time.
 
 **Example 2: TiDB is the bottleneck of user response time**
 
@@ -393,7 +451,7 @@ TiKV processes a write request in the following procedure:
     Raftstore consists of a `Store` thread and an `Apply` thread:
 
     - The `Store` thread processes Raft messages and new `proposals`. When a new `proposals` is received, the `Store` thread of the leader node writes to the local Raft DB and copies the message to multiple follower nodes. When this `proposals` is successfully persisted in most instances, the `proposals` is successfully committed.
-    - The `Apply` thread writes the committed `proposals` to the KV DB. When the content is successfully written to the KV DB, the `Apply` thread notifies externally that the write request has completed.
+    - The `Apply` thread writes the committed `proposals` to the KV DB. When the data is successfully written to the KV DB, the `Apply` thread notifies externally that the write request has completed.
 
 ![TiKV Write](/media/performance/store_apply.png)
 

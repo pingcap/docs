@@ -14,7 +14,7 @@ You can set default values for all data types. Typically, default values must be
 - For integer types, you can use the `NEXT VALUE FOR` function to set the next value of a sequence as the default value for a column, and use the [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md) function to generate a random floating-point value as the default value for a column.
 - For string types, you can use the [`UUID()`](/functions-and-operators/miscellaneous-functions.md) function to generate a [universally unique identifier (UUID)](/best-practices/uuid.md) as the default value for a column.
 - For binary types, you can use the [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md) function to convert a UUID to the binary format and set the converted value as the default value for a column.
-- Starting from v8.0.0, TiDB additionally supports [specifying the default values](#specify-expressions-as-default-values) for [`BLOB`](/data-type-string.md#blob-type), [`TEXT`](/data-type-string.md#text-type), and [`JSON`](/data-type-json.md#json-type) data types, but you can only use expressions to set the [default values](#default-values) for them.
+- Starting from v8.0.0, TiDB additionally supports [specifying the default values](#specify-expressions-as-default-values) for [`BLOB`](/data-type-string.md#blob-type), [`TEXT`](/data-type-string.md#text-type), and [`JSON`](/data-type-json.md#json-data-type) data types, but you can only use expressions to set the [default values](#default-values) for them.
 
 If a column definition includes no explicit `DEFAULT` value, TiDB determines the default value as follows:
 

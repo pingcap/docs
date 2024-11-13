@@ -11,7 +11,7 @@ This document describes how to use the [DELETE](/sql-statements/sql-statement-de
 
 Before reading this document, you need to prepare the following:
 
-- [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 - [Insert Data](/develop/dev-guide-insert-data.md)
 
@@ -411,3 +411,17 @@ In the same scenario as the [Bulk-delete example](#bulk-delete-example), the fol
 ```sql
 BATCH ON `rated_at` LIMIT 1000 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
 ```
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

@@ -79,6 +79,26 @@ After you specify the `--skip-restart` option, it only refreshes the configurati
 - Data type: `BOOLEAN`
 - Default: false
 
+### --pre-restart-script
+
+> **Warning:**
+>
+> This option is experimental and is not recommended for production deployments.
+
+- Runs a script before the reload.
+- Data type: `STRINGS`
+- This option specifies the path of a script to be run on the node that is to be reloaded. It does not take effect when `--skip-restart` is set to `true`.
+
+### --post-restart-script
+
+> **Warning:**
+>
+> This option is experimental and is not recommended for production deployments.
+
+- Runs a script after the reload.
+- Data type: `STRINGS`
+- This option specifies the path of a script to be run after the reload of a node. It does not take effect when `--skip-restart` is set to `true`.
+
 ## Output
 
 The execution log of the tiup-cluster.

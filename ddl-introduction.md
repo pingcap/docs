@@ -77,6 +77,31 @@ absent -> delete only -> write only -> write reorg -> public
 For users, the newly created index is unavailable before the `public` state.
 
 <SimpleTab>
+<div label="Parallel DDL framework starting from v6.2.0">
+
+Before TiDB v6.2.0, because the Owner can only execute one DDL task of the same type (either logical or physical) at a time, which is relatively strict, and affects the user experience.
+
+If there is no dependency between DDL tasks, parallel execution does not affect data correctness and consistency. For example, user A adds an index to the `T1` table, while user B deletes a column from the `T2` table. These two DDL statements can be executed in parallel.
+
+To improve the user experience of DDL execution, starting from v6.2.0, TiDB enables the Owner to determine the relevance of DDL tasks. The logic is as follows:
+
++ DDL statements to be performed on the same table are mutually blocked.
++ `DROP DATABASE` and DDL statements that affect all objects in the database are mutually blocked.
++ Adding indexes and column type changes on different tables can be executed concurrently.
++ A logical DDL statement must wait for the previous logical DDL statement to be executed before it can be executed.
++ In other cases, DDL can be executed based on the level of availability for concurrent DDL execution.
+
+Specifically, TiDB 6.2.0 has enhanced the DDL execution framework in the following aspects:
+
++ The DDL Owner can execute DDL tasks in parallel based on the preceding logic.
++ The first-in-first-out issue in the DDL Job queue has been addressed. The DDL Owner no longer selects the first job in the queue, but instead selects the job that can be executed at the current time.
++ The number of workers that handle physical DDL statements has been increased, enabling multiple physical DDL statements to be executed in parallel.
+
+    Because all DDL tasks in TiDB are implemented using an online change approach, TiDB can determine the relevance of new DDL jobs through the Owner, and schedule DDL tasks based on this information. This approach enables the distributed database to achieve the same level of DDL concurrency as traditional databases.
+
+The concurrent DDL framework enhances the execution capability of DDL statements in TiDB, making it more compatible with the usage patterns of commercial databases.
+
+</div>
 <div label="Online DDL asynchronous change before TiDB v6.2.0">
 
 Before v6.2.0, the process of handling asynchronous schema changes in the TiDB SQL layer is as follows:
@@ -102,31 +127,6 @@ Before TiDB v6.2.0, the DDL execution framework had the following limitations:
 - The DDL Owner can only execute one DDL task of the same type (either logical or physical) at a time, which is relatively strict, and affects the user experience.
 
 These limitations might lead to some "unintended" DDL blocking behavior. For more details, see [SQL FAQ - DDL Execution](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution).
-
-</div>
-<div label="Parallel DDL framework starting from v6.2.0">
-
-Before TiDB v6.2.0, because the Owner can only execute one DDL task of the same type (either logical or physical) at a time, which is relatively strict, and affects the user experience.
-
-If there is no dependency between DDL tasks, parallel execution does not affect data correctness and consistency. For example, user A adds an index to the `T1` table, while user B deletes a column from the `T2` table. These two DDL statements can be executed in parallel.
-
-To improve the user experience of DDL execution, starting from v6.2.0, TiDB enables the Owner to determine the relevance of DDL tasks. The logic is as follows:
-
-+ DDL statements to be performed on the same table are mutually blocked.
-+ `DROP DATABASE` and DDL statements that affect all objects in the database are mutually blocked.
-+ Adding indexes and column type changes on different tables can be executed concurrently.
-+ A logical DDL statement must wait for the previous logical DDL statement to be executed before it can be executed.
-+ In other cases, DDL can be executed based on the level of availability for concurrent DDL execution.
-
-In specific, TiDB has upgraded the DDL execution framework in v6.2.0 in the following aspects:
-
-+ The DDL Owner can execute DDL tasks in parallel based on the preceding logic.
-+ The first-in-first-out issue in the DDL Job queue has been addressed. The DDL Owner no longer selects the first job in the queue, but instead selects the job that can be executed at the current time.
-+ The number of workers that handle physical DDL statements has been increased, enabling multiple physical DDL statements to be executed in parallel.
-
-    Because all DDL tasks in TiDB are implemented using an online change approach, TiDB can determine the relevance of new DDL jobs through the Owner, and schedule DDL tasks based on this information. This approach enables the distributed database to achieve the same level of DDL concurrency as traditional databases.
-
-The concurrent DDL framework enhances the execution capability of DDL statements in TiDB, making it more compatible with the usage patterns of commercial databases.
 
 </div>
 </SimpleTab>

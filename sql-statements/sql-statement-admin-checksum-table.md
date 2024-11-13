@@ -6,13 +6,29 @@ category: reference
 
 # ADMIN CHECKSUM TABLE
 
-The `ADMIN CHECKSUM TABLE` statement calculates a CRC64 checksum for the data and indexes of a table. This statement is used by programs such as TiDB Lightning to ensure that import operations have completed successfully.
+The `ADMIN CHECKSUM TABLE` statement calculates a CRC64 checksum for the data and indexes of a table.
+
+<CustomContent platform="tidb">
+
+The [checksum](/tidb-lightning/tidb-lightning-glossary.md#checksum) is calculated based on table data and properties such as `table_id`. This means that two tables with the same data but different `table_id` values will get different checksums.
+
+After importing a table using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), [TiDB Data Migration](/dm/dm-overview.md), or [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), `ADMIN CHECKSUM TABLE <table>` is executed by default to validate data integrity.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The [checksum](https://docs.pingcap.com/tidb/stable/tidb-lightning-glossary#checksum) is calculated over the table data and properties like the `table_id`. This means that two tables with the same data but different `table_id` values will get different checksums.
+
+After importing a table using [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), `ADMIN CHECKSUM TABLE <table>` is executed by default to validate data integrity.
+
+</CustomContent>
 
 ## Synopsis
 
 ```ebnf+diagram
-AdminStmt ::=
-    'ADMIN' ( 'SHOW' ( 'DDL' ( 'JOBS' Int64Num? WhereClauseOptional | 'JOB' 'QUERIES' NumList )? | TableName 'NEXT_ROW_ID' | 'SLOW' AdminShowSlow ) | 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? ) | 'RECOVER' 'INDEX' TableName Identifier | 'CLEANUP' ( 'INDEX' TableName Identifier | 'TABLE' 'LOCK' TableNameList ) | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList | 'RELOAD' ( 'EXPR_PUSHDOWN_BLACKLIST' | 'OPT_RULE_BLACKLIST' | 'BINDINGS' ) | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList | 'REPAIR' 'TABLE' TableName CreateTableStmt | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS' )
+AdminChecksumTableStmt ::=
+    'ADMIN' 'CHECKSUM' 'TABLE' TableNameList
 
 TableNameList ::=
     TableName ( ',' TableName )*

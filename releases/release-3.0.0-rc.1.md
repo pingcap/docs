@@ -65,7 +65,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
 + Upgrade ETCD [#1452](https://github.com/pingcap/pd/pull/1452)
     - Unify the log format of etcd and PD server
     - Fix the issue of failing to elect Leader by PreVote
-    - Support fast dropping the “propose” and “read” requests that are to fail to avoid blocking the subsequent requests
+    - Support fast dropping the "propose" and "read" requests that are to fail to avoid blocking the subsequent requests
     - Fix the deadlock issue of Lease
 + Fix the issue that a hot store makes incorrect statistics of keys [#1487](https://github.com/pingcap/pd/pull/1487)
 + Support forcibly rebuilding a PD cluster from a single PD node [#1485](https://github.com/pingcap/pd/pull/1485)
@@ -123,7 +123,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
     - Fix the bug in Importer that import success may still be returned even if part of the SST failed to be imported [#4566](https://github.com/tikv/tikv/pull/4566)
     - Support speed limit in Importer when uploading SST to TiKV [#4412](https://github.com/tikv/tikv/pull/4412)
     - Support importing tables by size to reduce impacts on the cluster brought by Checksum and Analyze for big tables, and improve the success rate for Checksum and Analyze [#156](https://github.com/pingcap/tidb-lightning/pull/156)
-    - Improve Lightning’s SQL encoding performance by 50% by directly parsing data source file as types.Datum of TiDB and saving extra parsing overhead from the KV encoder [#145](https://github.com/pingcap/tidb-lightning/pull/145)
+    - Improve Lightning's SQL encoding performance by 50% by directly parsing data source file as types.Datum of TiDB and saving extra parsing overhead from the KV encoder [#145](https://github.com/pingcap/tidb-lightning/pull/145)
     - Change log format to [Unified Log Format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) [#162](https://github.com/pingcap/tidb-lightning/pull/162)
     - Add some command line options for use when the configuration file is missing [#157](https://github.com/pingcap/tidb-lightning/pull/157)
 

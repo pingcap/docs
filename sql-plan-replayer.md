@@ -235,7 +235,7 @@ PLAN REPLAYER CAPTURE 'sql_digest' '*';
 You can view the ongoing capture tasks of `PLAN REPLAYER CAPTURE` in the TiDB cluster using the following statement:
 
 ```sql
-mysql> PLAN PLAYER CAPTURE 'example_sql' 'example_plan';
+mysql> PLAN REPLAYER CAPTURE 'example_sql' 'example_plan';
 Query OK, 1 row affected (0.01 sec)
 
 mysql> SELECT * FROM mysql.plan_replayer_task;
@@ -268,6 +268,29 @@ The method of downloading the file of `PLAN REPLAYER CAPTURE` is the same as tha
 > **Note:**
 >
 > The result file of `PLAN REPLAYER CAPTURE` is kept in the TiDB cluster for up to one week. After one week, TiDB deletes the file.
+
+### Remove the capture tasks
+
+If a capture task is no longer needed, you can remove it using the `PLAN REPLAYER CAPTURE REMOVE` statement. For example:
+
+```sql
+mysql> PLAN REPLAYER CAPTURE '077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0' '4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM mysql.plan_replayer_task;
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+| sql_digest                                                       | plan_digest                                                      | update_time         |
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+| 077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0 | 4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce | 2024-05-21 11:26:10 |
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+1 row in set (0.01 sec)
+
+mysql> PLAN REPLAYER CAPTURE REMOVE '077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0' '4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM mysql.plan_replayer_task;
+Empty set (0.01 sec)
+```
 
 ## Use `PLAN REPLAYER CONTINUOUS CAPTURE`
 

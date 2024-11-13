@@ -29,11 +29,11 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v8.0.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v8.0.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v8.3.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v8.3.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) 1.21 or later is required because the Go modules are used.
+1. [Go](https://golang.org/) 1.23 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -146,8 +146,8 @@ Usage:
     "leader-schedule-limit": 4,
     "leader-schedule-policy": "count",
     "low-space-ratio": 0.8,
-    "max-merge-region-keys": 200000,
-    "max-merge-region-size": 20,
+    "max-merge-region-keys": 540000,
+    "max-merge-region-size": 54,
     "max-pending-peer-count": 64,
     "max-snapshot-count": 64,
     "max-store-down-time": "30m0s",
@@ -470,6 +470,20 @@ Success!
 >> member leader transfer pd3 // Migrate leader to a specified member
 ......
 ```
+
+Specify the priority of PD leader:
+
+```bash
+member leader_priority  pd-1 4
+member leader_priority  pd-2 3
+member leader_priority  pd-3 2
+member leader_priority  pd-4 1
+member leader_priority  pd-5 0
+```
+
+> **Note:**
+>
+> In all available PD nodes, the node with the highest priority number becomes the leader.
 
 ### `operator [check | show | add | remove]`
 
@@ -800,20 +814,20 @@ Use this command to view and control the scheduling policy.
 Usage:
 
 ```bash
->> scheduler show                                 // Display all created schedulers
->> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the Regions on store 1 to store 1
->> scheduler add evict-leader-scheduler 1         // Move all the Region leaders on store 1 out
->> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
->> scheduler add shuffle-leader-scheduler         // Randomly exchange the leader on different stores
->> scheduler add shuffle-region-scheduler         // Randomly scheduling the Regions on different stores
->> scheduler add evict-slow-store-scheduler       // When there is one and only one slow store, evict all Region leaders of that store
->> scheduler remove grant-leader-scheduler-1      // Remove the corresponding scheduler, and `-1` corresponds to the store ID
->> scheduler pause balance-region-scheduler 10    // Pause the balance-region scheduler for 10 seconds
->> scheduler pause all 10                         // Pause all schedulers for 10 seconds
->> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
->> scheduler resume all                           // Continue to run all schedulers
->> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
->> scheduler describe balance-region-scheduler    // Display the running state and related diagnostic information of the balance-region scheduler
+>> scheduler show                                          // Display all created schedulers
+>> scheduler add grant-leader-scheduler 1                  // Schedule all the leaders of the Regions on store 1 to store 1
+>> scheduler add evict-leader-scheduler 1                  // Move all the Region leaders on store 1 out
+>> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
+>> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
+>> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
+>> scheduler add evict-slow-store-scheduler                // When there is one and only one slow store, evict all Region leaders of that store
+>> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
+>> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
+>> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
+>> scheduler resume balance-region-scheduler               // Continue to run the balance-region scheduler
+>> scheduler resume all                                    // Continue to run all schedulers
+>> scheduler config balance-hot-region-scheduler           // Display the configuration of the balance-hot-region scheduler
+>> scheduler describe balance-region-scheduler             // Display the running state and related diagnostic information of the balance-region scheduler
 ```
 
 ### `scheduler describe balance-region-scheduler`
@@ -957,6 +971,30 @@ Usage:
 
     ```bash
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true
+    ```
+
+### `scheduler config evict-leader-scheduler`
+
+Use this command to view and manage the configuration of the `evict-leader-scheduler`.
+
+- When an `evict-leader-scheduler` already exists, use the `add-store` subcommand to add leader eviction scheduling for the specified store:
+
+    ```bash
+    scheduler config evict-leader-scheduler add-store 2       // Add leader eviction scheduling for store 2
+    ```
+
+- When an `evict-leader-scheduler` already exists, use the `delete-store` subcommand to remove leader eviction scheduling for the specified store:
+
+    ```bash
+    scheduler config evict-leader-scheduler delete-store 2    // Remove leader eviction scheduling for store 2
+    ```
+
+    If all store configurations of an `evict-leader-scheduler` are removed, the scheduler itself is automatically removed.
+
+- When an `evict-leader-scheduler` already exists, use the `set batch` subcommand to modify the `batch` value. `batch` controls the number of Operators generated during a single scheduling process. The default value is `3`, and the range is `[1, 10]`. The larger the `batch` value, the faster the scheduling speed.
+
+    ```bash
+    scheduler config evict-leader-scheduler set batch 10 // Set the batch value to 10
     ```
 
 ### `service-gc-safepoint`

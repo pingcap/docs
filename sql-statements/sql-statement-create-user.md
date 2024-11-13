@@ -21,8 +21,8 @@ UserSpecList ::=
     UserSpec ( ',' UserSpec )*
 
 RequireClauseOpt ::=
-    ( 'REQUIRE' 'NONE' | 'REQUIRE' 'SSL' | 'REQUIRE' 'X509' | 'REQUIRE' RequireList )?  
-    
+    ( 'REQUIRE' 'NONE' | 'REQUIRE' 'SSL' | 'REQUIRE' 'X509' | 'REQUIRE' RequireList )?
+
 RequireList ::=
     ( "ISSUER" stringLit | "SUBJECT" stringLit | "CIPHER" stringLit | "SAN" stringLit | "TOKEN_ISSUER" stringLit )*
 
@@ -36,7 +36,12 @@ StringName ::=
     stringLit
 |   Identifier
 
-PasswordOption ::= ( 'PASSWORD' 'EXPIRE' ( 'DEFAULT' | 'NEVER' | 'INTERVAL' N 'DAY' )? | 'PASSWORD' 'HISTORY' ( 'DEFAULT' | N ) | 'PASSWORD' 'REUSE' 'INTERVAL' ( 'DEFAULT' | N 'DAY' ) | 'FAILED_LOGIN_ATTEMPTS' N | 'PASSWORD_LOCK_TIME' ( N | 'UNBOUNDED' ) )*
+PasswordOption ::= ( 'PASSWORD' 'EXPIRE' ( 'DEFAULT' | 'NEVER' | 'INTERVAL' N 'DAY' )?
+| 'PASSWORD' 'HISTORY' ( 'DEFAULT' | N )
+| 'PASSWORD' 'REUSE' 'INTERVAL' ( 'DEFAULT' | N 'DAY' )
+| 'PASSWORD' 'REQUIRE' 'CURRENT' 'DEFAULT'
+| 'FAILED_LOGIN_ATTEMPTS' N
+| 'PASSWORD_LOCK_TIME' ( N | 'UNBOUNDED' ) )*
 
 LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
 
@@ -161,8 +166,15 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 
 The following `CREATE USER` options are not yet supported by TiDB, and will be parsed but ignored:
 
-* TiDB does not support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, and `WITH MAX_USER_CONNECTIONS` options.
-* TiDB does not support the `DEFAULT ROLE` option.
+* `PASSWORD REQUIRE CURRENT DEFAULT`
+* `WITH MAX_QUERIES_PER_HOUR`
+* `WITH MAX_UPDATES_PER_HOUR`
+* `WITH MAX_USER_CONNECTIONS`
+
+The following `CREATE USER` options are not supported by TiDB either, and are *not* accepted by the parser:
+
+* `DEFAULT ROLE`
+* `PASSWORD REQUIRE CURRENT OPTIONAL`
 
 ## See also
 

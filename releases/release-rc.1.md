@@ -20,7 +20,7 @@ On December 23, 2016, TiDB RC1 is released. See the following updates in this re
 
 + The scheduling strategy framework is optimized and now the strategy is more flexible and reasonable.
 + The support for `label` is added to support Cross Data Center scheduling.
-+ PD Controller is provided to operate the PD cluster more easily.
++ PD Control is provided to operate the PD cluster more easily.
 
 ## TiDB
 

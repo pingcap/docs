@@ -17,3 +17,4 @@ This chapter introduces the following key rewrites:
 - [Partition Pruning](/partition-pruning.md)
 - [TopN and Limit Operator Push Down](/topn-limit-push-down.md)
 - [Join Reorder](/join-reorder.md)
+- [Derive TopN or Limit from Window Functions](/derive-topn-from-window.md)

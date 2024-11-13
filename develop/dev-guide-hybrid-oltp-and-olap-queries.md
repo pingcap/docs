@@ -261,3 +261,17 @@ For more information about how TiDB chooses to use TiFlash, see [Use TiDB to rea
 
 - [Window Functions](/functions-and-operators/window-functions.md)
 - [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

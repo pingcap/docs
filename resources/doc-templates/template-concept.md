@@ -29,7 +29,7 @@ Write a more detailed description below the image. Use unordered lists (`*`/`+`/
 
 You can also describe the basic working principles here, or integrate the principles into the component introduction above.
 
-### L3 heading (optional, e.g. “xxx component”)
+### L3 heading (optional, e.g. "xxx component")
 
 If the component is complicated, you can elaborate it in a separate section like this one.
 

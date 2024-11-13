@@ -15,7 +15,7 @@ TiDB Ansible version: 3.0.2
 ## TiDB
 
 + SQL Optimizer
-    - Fix the issue that the “Can’t find column in schema” message is reported when the same table occurs multiple times in a query and logically the query result is always empty [#11247](https://github.com/pingcap/tidb/pull/11247)
+    - Fix the issue that the "Can't find column in schema" message is reported when the same table occurs multiple times in a query and logically the query result is always empty [#11247](https://github.com/pingcap/tidb/pull/11247)
     - Fix the issue that the query plan does not meet the expectation caused by the `TIDB_INLJ` hint not working correctly in some cases (like `explain select /*+ TIDB_INLJ(t1) */ t1.b, t2.a from t t1, t t2 where t1.b = t2.a`) [#11362](https://github.com/pingcap/tidb/pull/11362)
     - Fix the issue that the column name in the query result is wrong in some cases (like `SELECT IF(1,c,c) FROM t`) [#11379](https://github.com/pingcap/tidb/pull/11379)
     - Fix the issue that some queries like `SELECT 0 LIKE 'a string'` return `TRUE` because the `LIKE` expression is implicitly converted to 0 in some cases [#11411](https://github.com/pingcap/tidb/pull/11411)
@@ -51,14 +51,14 @@ TiDB Ansible version: 3.0.2
     - Fix the issue that the result might be wrong caused by incorrect type conversion when the `DATE_ADD` function receives `FLOAT`, `DOUBLE` and `DECIMAL` column parameters [#11527](https://github.com/pingcap/tidb/pull/11527)
     - Fix the wrong result caused by incorrectly processing the sign of the INTERVAL fraction in the `DATE_ADD` function [#11615](https://github.com/pingcap/tidb/pull/11615)
     - Fix the incorrect query result when Index Lookup Join contains the prefix index caused by `Ranger` not correctly handling the prefix index [#11565](https://github.com/pingcap/tidb/pull/11565)
-    - Fix the issue that the “Incorrect arguments to NAME_CONST” message is reported if the `NAME_CONST` function is executed when the second parameter of `NAME_CONST` is a negative number [#11268](https://github.com/pingcap/tidb/pull/11268)
+    - Fix the issue that the "Incorrect arguments to NAME_CONST" message is reported if the `NAME_CONST` function is executed when the second parameter of `NAME_CONST` is a negative number [#11268](https://github.com/pingcap/tidb/pull/11268)
     - Fix the issue that the result is incompatible with MySQL when an SQL statement involves computing the current time and the value is fetched multiple times; use the same value when fetching the current time for the same SQL statement [#11394](https://github.com/pingcap/tidb/pull/11394)
     - Fix the issue that `Close` is not called for `ChildExecutor` when the `Close` of `baseExecutor` reports an error. This issue might lead to Goroutine leaks when the `KILL` statements do not take effect and `ChildExecutor` is not closed [#11576](https://github.com/pingcap/tidb/pull/11576)
 + Server
     - Fix the issue that the auto-added value is 0 instead of the current timestamp when `LOAD DATA` processes the missing `TIMESTAMP` field in the CSV file [#11250](https://github.com/pingcap/tidb/pull/11250)
     - Fix issues that the `SHOW CREATE USER` statement does not correctly check related privileges, and `USER` and `HOST` returned by `SHOW CREATE USER CURRENT_USER()` might be wrong [#11229](https://github.com/pingcap/tidb/pull/11229)
     - Fix the issue that the returned result might be wrong when `executeBatch` is used in JDBC [#11290](https://github.com/pingcap/tidb/pull/11290)
-    - Reduce printing the log information of the streaming client when changing the TiKV server’s port [#11370](https://github.com/pingcap/tidb/pull/11370)
+    - Reduce printing the log information of the streaming client when changing the TiKV server's port [#11370](https://github.com/pingcap/tidb/pull/11370)
     - Optimize the logic of reconnecting the streaming client to the TiKV server so that the streaming client will not be blocked for a long time [#11372](https://github.com/pingcap/tidb/pull/11372)
     - Add `REGION_ID` in `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [#11350](https://github.com/pingcap/tidb/pull/11350)
     - Cancel the timeout duration of obtaining Region information from the PD API to ensure that obtaining Region information will not end in a failure when TiDB API `http://{TiDBIP}:10080/regions/hot` is called due to PD timeout when the number of Regions is large [#11383](https://github.com/pingcap/tidb/pull/11383)
@@ -136,7 +136,7 @@ TiDB Lightning
 - Add descriptions for each monitoring item on the TiDB Dashboard [#854](https://github.com/pingcap/tidb-ansible/pull/854)
 - Add the TiDB Summary Dashboard to better view the cluster status and troubleshoot issues [#855](https://github.com/pingcap/tidb-ansible/pull/855)
 - Update the Allocator Stats monitoring item on the TiKV Dashboard [#857](https://github.com/pingcap/tidb-ansible/pull/857)
-- Fix the unit error in the Node Exporter’s alerting expression [#860](https://github.com/pingcap/tidb-ansible/pull/860)
+- Fix the unit error in the Node Exporter's alerting expression [#860](https://github.com/pingcap/tidb-ansible/pull/860)
 - Upgrade the TiSpark jar package to v2.1.2 [#862](https://github.com/pingcap/tidb-ansible/pull/862)
 - Update the descriptions of the Ansible Task feature [#867](https://github.com/pingcap/tidb-ansible/pull/867)
 - Update the expression of the local reader requests monitoring item on the TiDB Dashboard [#874](https://github.com/pingcap/tidb-ansible/pull/874)

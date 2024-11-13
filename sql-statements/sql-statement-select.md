@@ -31,7 +31,27 @@ SelectStmtOpts ::=
     SelectStmtStraightJoin
 
 TableRefsClause ::=
-    TableRef AsOfClause? ( ',' TableRef AsOfClause? )*
+    TableRef ( ',' TableRef )*
+
+TableRef ::=
+    TableFactor
+|   JoinTable
+
+TableFactor ::=
+    TableName ( "PARTITION" "(" Identifier ("," Identifier)* ")" )? ("AS" TableAlias)? AsOfClause? TableSample?
+
+JoinTable ::=
+    TableRef
+    (
+        ("INNER" | "CROSS")? "JOIN" TableRef JoinClause?
+        | "STRAIGHT_JOIN" TableRef "ON" Expression
+        | ("LEFT" | "RIGHT") "OUTER"? "JOIN" TableRef JoinClause
+        | "NATURAL" ("LEFT" | "RIGHT") "OUTER"? "JOIN" TableFactor
+    )
+
+JoinClause ::=
+    ("ON" Expression
+    | "USING" "(" ColumnNameList ")" )
 
 AsOfClause ::=
     'AS' 'OF' 'TIMESTAMP' Expression
@@ -47,10 +67,19 @@ SelectLockOpt ::=
 TableList ::=
     TableName ( ',' TableName )*
 
+WhereClause ::=
+    "WHERE" Expression
+
+GroupByClause ::=
+    "GROUP" "BY" Expression
+
+OrderBy ::=
+    "ORDER" "BY" Expression
+
 WindowClause ::=
     "WINDOW" WindowDefinition ("," WindowDefinition)*
 
-TableSampleOpt ::=
+TableSample ::=
     'TABLESAMPLE' 'REGIONS' '(' ')'
 ```
 
@@ -127,7 +156,7 @@ The `SELECT ... INTO OUTFILE` statement is used to write the result of a query t
 
 > **Note:**
 >
-> - This statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> - This statement is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 > - This statement does not support writing query results to any [external storages](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) such as Amazon S3 or GCS.
 
 In the statement, you can specify the format of the output file by using the following clauses:

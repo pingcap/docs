@@ -32,12 +32,22 @@ A `tiup br` command consists of multiple layers of sub-commands. Currently, br c
 * `tiup br backup`: used to back up the data of the TiDB cluster.
 * `tiup br log`: used to start and manage log backup tasks.
 * `tiup br restore`: used to restore backup data of the TiDB cluster.
+* `tiup br debug`: used to parse backup metadata, check backup data, and so on.
 
 `tiup br backup` and `tiup br restore` include the following sub-commands:
 
 * `full`: used to back up or restore all the cluster data.
 * `db`: used to back up or restore a specified database of the cluster.
 * `table`: used to back up or restore a single table in the specified database of the cluster.
+
+`tiup br debug` includes the following sub-commands:
+
+* `checksum`: (hidden parameter) used to offline check the integrity of backup data to ensure that all backup files match the CRC64 checksum results calculated by [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md).
+* `backupmeta`: used to check whether an intersection exists among backup data files. In normal cases, backup data files do not intersect.
+* `decode`: used to parse the `backupmeta` metadata file of a full backup into JSON format. In addition, you can parse specific fields using the `--field` parameter.
+* `encode`: used to encode the `backupmeta.json` metadata file of a full backup into the protobuf format that is used during data restore.
+* `reset-pd-config-as-default`: (deprecated) used to restore the PD configurations that were changed during the data recovery process to default configurations.
+* `search-log-backup`: used to search for specific key information in log backup data.
 
 ### Common options
 
@@ -47,9 +57,11 @@ A `tiup br` command consists of multiple layers of sub-commands. Currently, br c
 * `--cert`: specifies the path to the SSL certificate in the PEM format.
 * `--key`: specifies the path to the SSL certificate key in the PEM format.
 * `--status-addr`: specifies the listening address through which `br` provides statistics to Prometheus.
-* `--concurrency`: the number of concurrent tasks during the backup or restore.
-* `--compression`：determines the compression algorithm used for generating backup files. It supports `lz4`, `snappy`, and `zstd`, with the default being `zstd` (usually no need to modify). For guidance on choosing different compression algorithms, refer to [this document](https://github.com/EighteenZi/rocksdb_wiki/blob/master/Compression.md).
-* `--compression-level`：sets the compression level corresponding to the chosen compression algorithm for backup. The default compression level for `zstd` is 3. In most cases there is no need to set this option.
+* `--concurrency`: the number of concurrent tasks during the backup.
+* `--pitr-concurrency`: the number of concurrent tasks during log restore.
+* `--tikv-max-restore-concurrency`: the maximum number of concurrent tasks per TiKV node during snapshot restore.
+* `--compression`: determines the compression algorithm used for generating backup files. It supports `lz4`, `snappy`, and `zstd`, with the default being `zstd` (usually no need to modify). For guidance on choosing different compression algorithms, refer to [this document](https://github.com/EighteenZi/rocksdb_wiki/blob/master/Compression.md).
+* `--compression-level`: sets the compression level corresponding to the chosen compression algorithm for backup. The default compression level for `zstd` is 3. In most cases there is no need to set this option.
 
 ## Commands of full backup
 
@@ -65,12 +77,12 @@ To back up cluster data, run the `tiup br backup` command. You can add the `full
 
 To start log backup and manage log backup tasks, run the `tiup br log` command.
 
-- [Start a log backup task](/br/br-pitr-manual.md#start-a-backup-task)
-- [Query the backup status](/br/br-pitr-manual.md#query-the-backup-status)
-- [Pause and resume a log backup task](/br/br-pitr-manual.md#pause-and-resume-a-backup-task)
-- [Stop and restart a log backup task](/br/br-pitr-manual.md#stop-and-restart-a-backup-task)
-- [Clean up the backup data](/br/br-pitr-manual.md#clean-up-backup-data)
-- [View the backup metadata](/br/br-pitr-manual.md#view-the-backup-metadata)
+- [Start a log backup task](/br/br-pitr-manual.md#start-a-log-backup-task)
+- [Query the log backup status](/br/br-pitr-manual.md#query-the-log-backup-status)
+- [Pause and resume a log backup task](/br/br-pitr-manual.md#pause-and-resume-a-log-backup-task)
+- [Stop and restart a log backup task](/br/br-pitr-manual.md#stop-and-restart-a-log-backup-task)
+- [Clean up the backup data](/br/br-pitr-manual.md#clean-up-log-backup-data)
+- [View the backup metadata](/br/br-pitr-manual.md#view-the-log-backup-metadata)
 
 ## Commands of restoring backup data
 

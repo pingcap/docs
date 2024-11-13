@@ -16,7 +16,7 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - **TiProxy-Server**: instance information.
 - **TiProxy-Query-Summary**: SQL query metrics like CPS. 
 - **TiProxy-Backend**: information on TiDB nodes that TiProxy might connect to.
-- **TiProxy-Balance**: loadbalance mertrics.
+- **TiProxy-Balance**: load balancing metrics.
 
 ## Server
 
@@ -38,6 +38,9 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
     - backend network break: fails to read from or write to the TiDB. This may be caused by a network problem or the TiDB server shutting down
     - backend handshake fail: TiProxy fails to handshake with the TiDB server
 - Goroutine Count: the number of Goroutines on each TiProxy instance
+- Owner: the TiProxy instance that executes various tasks. For example, `10.24.31.1:3080 - vip` indicates that the TiProxy instance at `10.24.31.1:3080` is bound to a virtual IP. The tasks include the following:
+    - vip: binds a virtual IP
+    - metric_reader: reads monitoring data from TiDB servers
 
 ## Query-Summary
 
@@ -54,6 +57,14 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - Backend Connections: connection counts between each TiDB instance and each TiProxy instance. For example, `10.24.31.1:6000 | 10.24.31.2:4000` indicates the connections between TiProxy instance `10.24.31.1:6000` and TiDB instance `10.24.31.2:4000`
 - Session Migration OPM: the number of session migrations that happened every minute, recording sessions on which TiDB instance migrated to the other. For example, `succeed: 10.24.31.2:4000 => 10.24.31.3:4000` indicates the number of sessions that are successfully migrated from TiDB instance `10.24.31.2:4000` to TiDB instance `10.24.31.3:4000`
 - Session Migration Duration: average, P95, P99 session migration duration.
+- Session Migration Reasons: the number of session migrations that happened every minute and the reason for them. The reasons include the following:
+    - `status`: TiProxy performed [status-based load balancing](/tiproxy/tiproxy-load-balance.md#status-based-load-balancing).
+    - `label`: TiProxy performed [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
+    - `health`: TiProxy performed [health-based load balancing](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing).
+    - `memory`: TiProxy performed [memory-based load balancing](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing).
+    - `cpu`: TiProxy performed [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing).
+    - `location`: TiProxy performed [location-based load balancing](/tiproxy/tiproxy-load-balance.md#location-based-load-balancing).
+    - `conn`: TiProxy performed [connection count-based load balancing](/tiproxy/tiproxy-load-balance.md#connection-count-based-load-balancing).
 
 ## Backend
 
@@ -67,3 +78,4 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 - Packets/Second from Backends: the number of MySQL packets sent from each TiDB instance to each TiProxy instance per second.
 - Bytes/Second to Backends: the amount of data, in bytes, sent from each TiProxy instance to each TiDB instance per second.
 - Packets/Second to Backends: the number of MySQL packets sent from each TiProxy instance to each TiDB instance per second.
+- Cross Location Bytes/Second: the amount of data, in bytes, sent from each TiProxy instance to TiDB instances in different locations per second.

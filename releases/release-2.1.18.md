@@ -36,7 +36,7 @@ TiDB Ansible version: 2.1.18
     - Fix the issue that no error is reported when `AUTO_INCREMENT` incorrectly allocates `MAX int64` and `MAX uint64` [#12210](https://github.com/pingcap/tidb/pull/12210)
     - Fix the issue that the slow query logs are not recorded when the log level is `ERROR` [#12373](https://github.com/pingcap/tidb/pull/12373)
     - Adjust the number of times that TiDB caches schema changes and corresponding changed table information from 100 to 1024, and support modification by using the `tidb_max_delta_schema_count` system variable [#12515](https://github.com/pingcap/tidb/pull/12515)
-    - Change the query start time from the point of "starting to execute" to “starting to compile” to make SQL statistics more accurate [#12638](https://github.com/pingcap/tidb/pull/12638)
+    - Change the query start time from the point of "starting to execute" to "starting to compile" to make SQL statistics more accurate [#12638](https://github.com/pingcap/tidb/pull/12638)
     - Add the record of `set session autocommit` in TiDB logs [#12568](https://github.com/pingcap/tidb/pull/12568)
     - Record SQL query start time in `SessionVars` to prevent it from being reset during plan execution [#12676](https://github.com/pingcap/tidb/pull/12676)
     - Support `?` placeholder in `ORDER BY`, `GROUP BY` and `LIMIT OFFSET` [#12514](https://github.com/pingcap/tidb/pull/12514)
@@ -70,7 +70,7 @@ TiDB Ansible version: 2.1.18
 
 ## TiDB Ansible
 
-- Add two monitoring items "queue size" and “query histogram” for TiDB Binlog [#952](https://github.com/pingcap/tidb-ansible/pull/952)
+- Add two monitoring items "queue size" and "query histogram" for TiDB Binlog [#952](https://github.com/pingcap/tidb-ansible/pull/952)
 - Update TiDB alerting rules [#961](https://github.com/pingcap/tidb-ansible/pull/961)
 - Check the configuration file before the deployment and upgrade [#973](https://github.com/pingcap/tidb-ansible/pull/973)
 - Add a new metric to monitor index speed in TiDB [#987](https://github.com/pingcap/tidb-ansible/pull/987)

@@ -1,11 +1,11 @@
 ---
-title: Manage TiDB Serverless Branches
-summary: Learn How to manage TiDB Serverless branches.
+title: Manage TiDB Cloud Serverless Branches
+summary: Learn How to manage TiDB Cloud Serverless branches.
 ---
 
-# Manage TiDB Serverless Branches
+# Manage TiDB Cloud Serverless Branches
 
-This document describes how to manage TiDB Serverless branches using the [TiDB Cloud console](https://tidbcloud.com). To manage it using the TiDB Cloud CLI, see [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md).
+This document describes how to manage TiDB Cloud Serverless branches using the [TiDB Cloud console](https://tidbcloud.com). To manage it using the TiDB Cloud CLI, see [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md).
 
 ## Required access
 
@@ -18,11 +18,11 @@ For more information about permissions, see [User roles](/tidb-cloud/manage-user
 
 > **Note:**
 >
-> You can only create branches for TiDB Serverless clusters that are created after July 5, 2023. See [Limitations and quotas](/tidb-cloud/branch-overview.md#limitations-and-quotas) for more limitations.
+> You can only create branches for TiDB Cloud Serverless clusters that are created after July 5, 2023. See [Limitations and quotas](/tidb-cloud/branch-overview.md#limitations-and-quotas) for more limitations.
 
 To create a branch, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
 2. Click **Branches** in the left navigation pane.
 3. Click **Create Branch** in the upper-right corner.
 4. Enter the branch name, and then click **Create**.
@@ -33,7 +33,7 @@ Depending on the data size in your cluster, the branch creation will be complete
 
 To view branches for your cluster, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
 2. Click **Branches** in the left navigation pane.
 
     The branch list of the cluster is displayed in the right pane.
@@ -42,7 +42,7 @@ To view branches for your cluster, perform the following steps:
 
 To connect to a branch, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
 2. Click **Branches** in the left navigation pane.
 3. In the row of your target branch to be connected, click **...** in the **Action** column.
 4. Click **Connect** in the drop-down list. The dialog for the connection information is displayed.
@@ -51,7 +51,7 @@ To connect to a branch, perform the following steps:
 
 Alternatively, you can get the connection string from the cluster overview page:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner.
 3. Select the branch you want to connect to in the `Branch` drop-down list.
 4. Click **Generate Password** or **Reset Password** to create or reset the root password.
@@ -61,7 +61,7 @@ Alternatively, you can get the connection string from the cluster overview page:
 
 To delete a branch, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
 2. Click **Branches** in the left navigation pane.
 3. In the row of your target branch to be deleted, click **...** in the **Action** column.
 4. Click **Delete** in the drop-down list.
@@ -69,4 +69,4 @@ To delete a branch, perform the following steps:
 
 ## What's next
 
-- [Integrate TiDB Serverless branching into your GitHub CI/CD pipeline](/tidb-cloud/branch-github-integration.md)
+- [Integrate TiDB Cloud Serverless branching into your GitHub CI/CD pipeline](/tidb-cloud/branch-github-integration.md)

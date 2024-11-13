@@ -15,8 +15,9 @@ max-connections = 100
 [api]
 addr = "0.0.0.0:3080"
 
-[log]
-level = "info"
+[ha]
+virtual-ip = "10.0.1.10/24"
+interface = "eth0"
 
 [security]
 [security.cluster-tls]
@@ -43,6 +44,12 @@ Configuration for SQL port.
 + Default value: `0.0.0.0:6000`
 + Support hot-reload: no
 + SQL gateway address. The format is `<ip>:<port>`.
+
+#### `advertise-addr`
+
++ Default value: `""`
++ Support hot-reload: no
++ Specifies the address that clients use to connect to this TiProxy instance. This configuration item is automatically set when you deploy TiProxy using TiUP or TiDB Operator. If not set, the external IP address of the TiProxy instance is used.
 
 #### `graceful-wait-before-shutdown`
 
@@ -79,10 +86,10 @@ Configuration for SQL port.
 
 #### `proxy-protocol`
 
-+ Default value: ``
++ Default value: `""`
 + Support hot-reload: yes, but only for new connections
-+ Possible values: ``, `v2`
-+ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. By enabling the PROXY protocol, TiProxy can pass the real client IP address to TiDB. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol. If the PROXY protocol is enabled on TiProxy, you need to also enable the [PROXY protocol](/tidb-configuration-file.md#proxy-protocol) on the TiDB server.
++ Possible values: `""`, `"v2"`
++ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. By enabling the PROXY protocol, TiProxy can pass the real client IP address to TiDB. `"v2"` indicates using the PROXY protocol version 2, and `""` indicates disabling the PROXY protocol. If the PROXY protocol is enabled on TiProxy, you need to also enable the [PROXY protocol](/tidb-configuration-file.md#proxy-protocol) on the TiDB server.
 
 ### api
 
@@ -90,16 +97,62 @@ Configurations for HTTP gateway.
 
 #### `addr`
 
-+ Default value: `0.0.0.0:3090`
++ Default value: `0.0.0.0:3080`
 + Support hot-reload: no
 + API gateway address. You can specify `ip:port`.
 
 #### `proxy-protocol`
 
-+ Default value: ``
++ Default value: `""`
 + Support hot-reload: no
-+ Possible values: ``, `v2`
-+ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. `v2` indicates using the PROXY protocol version 2, and `` indicates disabling the PROXY protocol.
++ Possible values: `""`, `"v2"`
++ Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. `"v2"` indicates using the PROXY protocol version 2, and `""` indicates disabling the PROXY protocol.
+
+### balance
+
+Configurations for the load balancing policy of TiProxy.
+
+#### `label-name`
+
++ Default value: `""`
++ Support hot-reload: yes
++ Specifies the label name used for [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing). TiProxy matches the label values of TiDB servers based on this label name and prioritizes routing requests to TiDB servers with the same label value as itself.
++ The default value of `label-name` is an empty string, indicating that label-based load balancing is not used. To enable this load balancing policy, you need to set this configuration item to a non-empty string and configure both [`labels`](#labels) in TiProxy and [`labels`](/tidb-configuration-file.md#labels) in TiDB. For more information, see [Label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
+
+#### `policy`
+
++ Default value: `resource`
++ Support hot-reload: yes
++ Possible values: `resource`, `location`, `connection`
++ Specifies the load balancing policy. For the meaning of each possible value, see [TiProxy load balancing policies](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies).
+
+### ha
+
+High availability configurations for TiProxy.
+
+#### `virtual-ip`
+
++ Default value: `""`
++ Support hot-reload: no
++ Specifies the virtual IP address in the CIDR format, such as `"10.0.1.10/24"`. In a cluster with multiple TiProxy instances, only one instance binds to the virtual IP. If this instance goes offline, another TiProxy instance will automatically bind to the IP, ensuring clients can always connect to an available TiProxy through the virtual IP.
+
+> **Note:**
+>
+> - Virtual IP is only supported on Linux operating systems.
+> - The Linux user running TiProxy must have permission to bind IP addresses.
+> - The virtual IP and the IPs of all TiProxy instances must be within the same CIDR range.
+
+#### `interface`
+
++ Default value: `""`
++ Support hot-reload: no
++ Specifies the network interface to bind the virtual IP to, such as `"eth0"`. The virtual IP will be bound to a TiProxy instance only when both [`ha.virtual-ip`](#virtual-ip) and `ha.interface` are set.
+
+### `labels`
+
++ Default value: `{}`
++ Support hot-reload: yes
++ Specifies server labels. For example, `{ zone = "us-west-1", dc = "dc1" }`.
 
 ### log
 
@@ -123,7 +176,7 @@ Configurations for HTTP gateway.
 
 #### `filename`
 
-+ Default value: ``
++ Default value: `""`
 + Support hot-reload: yes
 + Log file path. Non empty value will enable logging to file. When TiProxy is deployed with TiUP, the filename is set automatically.
 

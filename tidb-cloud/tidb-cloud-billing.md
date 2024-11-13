@@ -7,12 +7,12 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
+> [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
 
 TiDB Cloud charges according to the resources that you consume. You can visit the following pages to get more information about the pricing.
 
-- [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)
-- [TiDB Dedicated Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/)
+- [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/)
+- [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/)
 
 ## Invoices
 
@@ -46,7 +46,9 @@ To view the list of invoices, perform the following steps:
     >
     > If you are in multiple organizations, switch to your target organization by clicking its name.
 
-2. Click **Billing**. The invoices page is displayed.
+2. In the left navigation pane, click the **Billing** tab.
+
+3. Click the **Invoices** tab. The invoices page is displayed.
 
 ## Billing details
 
@@ -77,6 +79,48 @@ The billing details page shows the billing summary by project and by service. Yo
 >
 > - The total amount in the monthly bill is rounded off to the 2nd decimal place.
 > - The total amount in the daily usage details is accurate to the 6th decimal place.
+
+## Cost explorer
+
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view and analyze the usage costs of TiDB Cloud. Otherwise, skip this section.
+
+To analyze and customize your cost reports of your organization, perform the following steps:
+
+1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
+
+2. On the **Billing** page, click the **Cost Explorer** tab.
+3. On the **Cost Explorer** page, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
+
+    - **Cost Graph**: visualizes the cost trends over the selected time range. You can switch between **Monthly**, **Daily**, and **Total** views.
+    - **Cost Breakdown**: displays a detailed breakdown of your costs according to the selected grouping option. For further analysis, you can download the data in CSV format.
+
+## Billing profile
+
+Paid organizations can create a billing profile. Information in this profile will be used to determine the tax calculation.
+
+To view or update the billing profile of your organization, click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner and then click **Billing** > **Billing Profile**.
+
+There are four fields in the billing profile.
+
+### Company name (optional)
+
+If this field is specified, this name will appear on invoices instead of your organization name.
+
+### Billing email (optional)
+
+If this field is specified, invoices and other billing-related notifications will be sent to this email address.
+
+### Primary business address
+
+This is the address of the company that purchases TiDB Cloud services. It is used to calculate any applicable taxes.
+
+### Business tax ID (optional)
+
+If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By providing this information, we will exempt you from charging VAT/GST if applicable. This is important for businesses operating in regions where VAT/GST registration allows for certain tax exemptions or refunds.
 
 ## Credits
 
@@ -136,8 +180,6 @@ If you are in the `Organization Owner` or `Organization Billing Admin` role of y
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
-### Add a credit card
-
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
 - When you are creating a cluster:
@@ -156,7 +198,9 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
     2. Click **Billing**.
     3. Under the **Payment Method** tab, click **Add a New Card**.
-    4. Fill in the billing address and card information, and then click **Save**.
+    4. Fill in the credit card information and credit card address, and then click **Save Card**.
+
+        If you do not specify a primary business address in [**Billing profile**](#billing-profile), the credit card address will be used as your primary business address for tax calculation. You can update your primary business address in **Billing profile** anytime.
 
 > **Note:**
 >
@@ -175,22 +219,6 @@ To set the default credit card, perform the following steps:
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and click **Set as default**.
-
-### Edit billing profile information
-
-The billing profile information includes the business legal address and tax registration information. By providing your tax registration number, certain taxes might be exempted from your invoice.
-
-To edit the billing profile information, perform the following steps:
-
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
-
-2. Click **Billing**.
-3. Click the **Payment Method** tab.
-4. Edit the billing profile information, and then click **Save**.
 
 ## Contract
 

@@ -12,34 +12,59 @@ The `DROP STATS` statement is used to delete the statistics of the selected tabl
 
 ```ebnf+diagram
 DropStatsStmt ::=
-    'DROP' 'STATS' TableNameList 
-
-TableNameList ::=
-    TableName ( ',' TableName )*
+    'DROP' 'STATS' TableName  ("PARTITION" partition | "GLOBAL")? ( ',' TableName )*
 
 TableName ::=
     Identifier ('.' Identifier)?
 ```
 
-## Examples
+## Usage
 
-{{< copyable "sql" >}}
+The following statement deletes all statistics of `TableName`. If a partitioned table is specified, this statement deletes statistics of all partitions in this table as well as [GlobalStats generated in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+
+```sql
+DROP STATS TableName
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+The following statement only deletes statistics of the specified partitions in `PartitionNameList`.
+
+```sql
+DROP STATS TableName PARTITION PartitionNameList;
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+The following statement only deletes GlobalStats generated in dynamic pruning mode of the specified table.
+
+```sql
+DROP STATS TableName GLOBAL;
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+## Examples
 
 ```sql
 CREATE TABLE t(a INT);
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.01 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 
-```sql
+```
 +---------+------------+----------------+---------------------+--------------+-----------+
 | Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
 +---------+------------+----------------+---------------------+--------------+-----------+
@@ -48,23 +73,19 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 DROP STATS t;
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
 ```
 
-```sql
+```
 Empty set (0.00 sec)
 ```
 

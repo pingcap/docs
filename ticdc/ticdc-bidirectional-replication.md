@@ -89,18 +89,30 @@ Non-replicable DDLs include:
 
 To solve the problem of replicable DDLs and non-replicable DDLs, TiDB introduces the following BDR roles:
 
-- `PRIMARY`: you can execute replicable DDLs, but cannot execute non-replicable DDLs. Replicable DDLs will be replicated to the downstream by TiCDC.
-- `SECONDARY`: you cannot execute replicable DDLs or non-replicable DDLs, but can execute the DDLs replicated by TiCDC.
+- `PRIMARY`: You can execute replicable DDLs, but not non-replicable DDLs. Replicable DDLs executed in a PRIMARY cluster will be replicated to the downstream by TiCDC.
+- `SECONDARY`: You cannot execute replicable DDLs or non-replicable DDLs. However, DDLs executed in a PRIMARY cluster can be replicated to a SECONDARY cluster by TiCDC.
 
-When no BDR role is set, you can execute any DDL. But after you set `bdr_mode=true` on TiCDC, the executed DDL will not be replicated by TiCDC.
+When no BDR role is set, you can execute any DDL. However, the changefeed in BDR mode does not replicate any DDL on that cluster.
 
-> **Warning:**
->
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+In short, in BDR mode, TiCDC only replicates replicable DDLs in the PRIMARY cluster to the downstream.
 
 ### Replication scenarios of replicable DDLs
 
 1. Choose a TiDB cluster and execute `ADMIN SET BDR ROLE PRIMARY` to set it as the primary cluster.
+
+    ```sql
+    ADMIN SET BDR ROLE PRIMARY;
+    Query OK, 0 rows affected
+    Time: 0.003s
+
+    ADMIN SHOW BDR ROLE;
+    +----------+
+    | BDR_ROLE |
+    +----------+
+    | primary  |
+    +----------+
+    ```
+
 2. On other TiDB clusters, execute `ADMIN SET BDR ROLE SECONDARY` to set them as the secondary clusters.
 3. Execute **replicable DDLs** on the primary cluster. The successfully executed DDLs will be replicated to the secondary clusters by TiCDC.
 

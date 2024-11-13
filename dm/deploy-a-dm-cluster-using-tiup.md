@@ -16,9 +16,11 @@ TiUP supports deploying DM v2.0 or later DM versions. This document introduces h
 
 ## Prerequisites
 
-When DM performs a full data replication task, the DM-worker is bound with only one upstream database. The DM-worker first exports the full amount of data locally, and then imports the data into the downstream database. Therefore, the worker's host space must be large enough to store all upstream tables to be exported. The storage path is specified later when you create the task.
+- When DM performs a full data replication task, the DM-worker is bound with only one upstream database. The DM-worker first exports the full amount of data locally, and then imports the data into the downstream database. Therefore, the worker's host space must be large enough to store all upstream tables to be exported. The storage path is specified later when you create the task.
 
-In addition, you need to meet the [hardware and software requirements](/dm/dm-hardware-and-software-requirements.md) when deploying a DM cluster.
+- You need to meet the [hardware and software requirements](/dm/dm-hardware-and-software-requirements.md) when deploying a DM cluster.
+
+- Starting from v8.0.0, if you need to [encrypt database passwords](/dm/dm-manage-source.md#encrypt-the-database-password), you must store [a key file used for encrypting and decrypting database passwords](/dm/dm-customized-secret-key.md) in the DM-master in advance, and configure [`secret-key-path`](/dm/dm-master-configuration-file.md) for DM-master before using the `dmctl encrypt` command.
 
 ## Step 1: Install TiUP on the control machine
 
@@ -230,3 +232,7 @@ If the `Status` is `Up` in the output, the cluster status is normal.
 dmctl is a command-line tool used to control DM clusters. You are recommended to [use dmctl via TiUP](/dm/maintain-dm-using-tiup.md#dmctl).
 
 dmctl supports both the command mode and the interactive mode. For details, see [Maintain DM Clusters Using dmctl](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl).
+
+## Step 9: Encrypt the database password
+
+After deployment, you can configure DM tasks to encrypt the database password. For more information, see [Encrypt the database password](/dm/dm-manage-source.md#encrypt-the-database-password).

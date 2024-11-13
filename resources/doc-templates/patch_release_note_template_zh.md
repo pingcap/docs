@@ -5,7 +5,7 @@ summary: 了解 TiDB x.y.z 版本的兼容性变更、改进提升，以及错�
 
 # TiDB x.y.z Release Notes
 
-发版日期：2023 年 x 月 x 日
+发版日期：2024 年 x 月 x 日
 
 TiDB 版本：x.y.z
 
@@ -80,12 +80,6 @@ TiDB 版本：x.y.z
         - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
-    + TiDB Binlog
-
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
-
 ## 错误修复
 
 + TiDB
@@ -148,12 +142,6 @@ TiDB 版本：x.y.z
 
         - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - placeholder
-
-    + TiDB Binlog
-
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
 ## Other dup notes

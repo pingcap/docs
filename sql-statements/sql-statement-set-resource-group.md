@@ -9,7 +9,7 @@ summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Synopsis
 
@@ -23,6 +23,13 @@ ResourceGroupName ::=
     Identifier
 |   "DEFAULT"
 ```
+
+## Privilege
+
+Executing this statement requires the following configuration and privilege:
+
+1. The system variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
+2. When the system variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) is set to `ON`, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` or `RESOURCE_GROUP_USER` privilege; when it is set to `OFF`, none of these privileges are required.
 
 ## Examples
 

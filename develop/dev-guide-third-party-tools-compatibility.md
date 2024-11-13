@@ -231,3 +231,17 @@ To allow the removal of the `AUTO_INCREMENT` attribute, set `@@tidb_allow_remove
 **Description**
 
 `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

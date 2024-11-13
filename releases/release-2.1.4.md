@@ -18,7 +18,7 @@ On February 15, 2019, TiDB 2.1.4 is released. The corresponding TiDB Ansible 2.1
     - Fix the issue that the `VALUES` function does not handle the ENUM type correctly [#9280](https://github.com/pingcap/tidb/pull/9280)
     - Fix the wrong result issue of `DATE_ADD`/`DATE_SUB` in some cases [#9284](https://github.com/pingcap/tidb/pull/9284)
 + Server
-    - Optimize the “reload privilege success” log and change it to the DEBUG level [#9274](https://github.com/pingcap/tidb/pull/9274)
+    - Optimize the "reload privilege success" log and change it to the DEBUG level [#9274](https://github.com/pingcap/tidb/pull/9274)
 + DDL
     - Change `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to global variables [#9134](https://github.com/pingcap/tidb/pull/9134)
     - Fix the bug caused by adding an index to a generated column in some abnormal conditions [#9289](https://github.com/pingcap/tidb/pull/9289)

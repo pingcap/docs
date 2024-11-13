@@ -497,3 +497,17 @@ public static class StaleReadHelper{
 - [Usage Scenarios of Stale Read](/stale-read.md)
 - [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md)
 - [Read Historical Data Using the `tidb_read_staleness` System Variable](/tidb-read-staleness.md)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

@@ -73,7 +73,7 @@ mysql> SHOW WARNINGS;
 
 ### Skyline-pruning
 
-Skyline-pruning is a heuristic filtering rule for indexes, which can reduce the probability of wrong index selection caused by wrong estimation. To judge an index, the following three dimensions are needed:
+Skyline-pruning is a heuristic filtering rule for indexes, which can reduce the probability of wrong index selection caused by wrong estimation. To judge an index, the following dimensions are needed:
 
 - How many access conditions are covered by the indexed columns. An "access condition" is a where condition that can be converted to a column range. And the more access conditions an indexed column set covers, the better it is in this dimension.
 
@@ -81,7 +81,9 @@ Skyline-pruning is a heuristic filtering rule for indexes, which can reduce the 
 
 - Select whether the index satisfies a certain order. Because index reading can guarantee the order of certain column sets, indexes that satisfy the query order are superior to indexes that do not satisfy on this dimension.
 
-For these three dimensions above, if the index `idx_a` performs no worse than the index `idx_b` in all three dimensions and performs better than `idx_b` in one dimension, then `idx_a` is preferred. When executing the `EXPLAIN FORMAT = 'verbose' ...` statement, if skyline-pruning excludes some indexes, TiDB outputs a NOTE-level warning listing the remaining indexes after the skyline-pruning exclusion.
+- Whether the index is a [global index](/partitioned-table.md#global-indexes). In partitioned tables, global indexes can effectively reduce the number of cop tasks for a SQL compared to normal indexes, thus improving overall performance.
+
+For these preceding dimensions, if the index `idx_a` performs no worse than the index `idx_b` in all three dimensions and performs better than `idx_b` in one dimension, then `idx_a` is preferred. When executing the `EXPLAIN FORMAT = 'verbose' ...` statement, if skyline-pruning excludes some indexes, TiDB outputs a NOTE-level warning listing the remaining indexes after the skyline-pruning exclusion.
 
 In the following example, the indexes `idx_b` and `idx_e` are both inferior to `idx_b_c`, so they are excluded by skyline-pruning. The returned result of `SHOW WARNING` displays the remaining indexes after skyline-pruning.
 
@@ -123,15 +125,15 @@ According to these factors and the cost model, the optimizer selects an index wi
 
 1. The estimated number of rows is not accurate?
 
-    This is usually due to stale or inaccurate statistics. You can re-execute the `analyze table` statement or modify the parameters of the `analyze table` statement.
+    This is usually due to stale or inaccurate statistics. You can re-execute the `ANALYZE TABLE` statement or modify the parameters of the `ANALYZE TABLE` statement.
 
 2. Statistics are accurate, and reading from TiFlash is faster, but why does the optimizer choose to read from TiKV?
 
-    At present, the cost model of distinguishing TiFlash from TiKV is still rough. You can decrease the value of `tidb_opt_seek_factor` parameter, then the optimizer prefers to choose TiFlash.
+    At present, the cost model of distinguishing TiFlash from TiKV is still rough. You can decrease the value of [`tidb_opt_seek_factor`](/system-variables.md#tidb_opt_seek_factor) parameter, then the optimizer prefers to choose TiFlash.
 
 3. The statistics are accurate. Index A needs to retrieve rows from tables, but it actually executes faster than Index B that does not retrieve rows from tables. Why does the optimizer choose Index B?
 
-    In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of `tidb_opt_network_factor` parameter to reduce the cost of retrieving rows from tables.
+    In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of [`tidb_opt_network_factor`](/system-variables.md#tidb_opt_network_factor) parameter to reduce the cost of retrieving rows from tables.
 
 ## Control index selection
 
@@ -143,7 +145,7 @@ The index selection can be controlled by a single query through [Optimizer Hints
 
 ## Use multi-valued indexes
 
-[Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) are different from normal indexes. TiDB currently only uses [IndexMerge](/explain-index-merge.md) to access multi-valued indexes. Therefore, to use multi-valued indexes for data access, make sure that the value of the system variable `tidb_enable_index_merge` is set to `ON`.
+[Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) are different from normal indexes. TiDB currently only uses [IndexMerge](/explain-index-merge.md) to access multi-valued indexes. Therefore, to use multi-valued indexes for data access, make sure that the value of the system variable [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40) is set to `ON`.
 
 For the limitations of multi-valued indexes, refer to [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md#limitations).
 

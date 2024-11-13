@@ -1,6 +1,6 @@
 ---
 title: TiDB Backup and Restore Use Cases
-summary: TiDB provides snapshot and log backup solutions for specific use cases, such as timely data recovery and business audits. To use point-in-time recovery (PITR), deploy a TiDB cluster >= v6.2.0 and update BR to v8.0.0. Configure backup storage on Amazon S3 and set a backup policy to meet data loss and recovery requirements. Run log and snapshot backups, and use PITR to restore data to a specific time point. Clean up outdated data regularly. For detailed steps, refer to TiDB documentation.
+summary: TiDB provides snapshot and log backup solutions for specific use cases, such as timely data recovery and business audits. To use point-in-time recovery (PITR), deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. Configure backup storage on Amazon S3 and set a backup policy to meet data loss and recovery requirements. Run log and snapshot backups, and use PITR to restore data to a specific time point. Clean up outdated data regularly. For detailed steps, refer to TiDB documentation.
 aliases: ['/docs/dev/br/backup-and-restore-use-cases/','/docs/dev/reference/tools/br/use-cases/','/tidb/dev/backup-and-restore-use-cases-for-maintain/']
 ---
 
@@ -17,7 +17,7 @@ With PITR, you can satisfy the preceding requirements.
 
 ## Deploy the TiDB cluster and BR
 
-To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v8.0.0 as an example.
+To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v8.3.0 as an example.
 
 The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
 
@@ -44,13 +44,13 @@ Install or upgrade BR using TiUP:
 - Install:
 
     ```shell
-    tiup install br:v8.0.0
+    tiup install br:v8.3.0
     ```
 
 - Upgrade:
 
     ```shell
-    tiup update br:v8.0.0
+    tiup update br:v8.3.0
     ```
 
 ## Configure backup storage (Amazon S3)
@@ -71,7 +71,7 @@ The detailed steps are as follows:
 2. Configure permissions for BR and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation: Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
 
     - TiKV and BR in the backup cluster need `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
-    - TiKV and BR in the restore cluster need `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, and `s3:PutObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
+    - TiKV and BR in the restore cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
 
 3. Plan the directory structure that stores the backup data, including the snapshot (full) backup and the log backup.
 
@@ -122,7 +122,7 @@ The following are two snapshot backup examples:
     ```shell
     tiup br backup full --pd="${PD_IP}:2379" \
     --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220514000000' \
-    --backupts='2022/05/14 00:00:00'
+    --backupts='2022/05/14 00:00:00 +08:00'
     ```
 
 - Run a snapshot backup at 2022/05/16 00:00:00
@@ -130,7 +130,7 @@ The following are two snapshot backup examples:
     ```shell
     tiup br backup full --pd="${PD_IP}:2379" \
     --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220516000000' \
-    --backupts='2022/05/16 00:00:00'
+    --backupts='2022/05/16 00:00:00 +08:00'
     ```
 
 ## Run PITR

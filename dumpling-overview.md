@@ -55,7 +55,7 @@ Dumpling has the following advantages:
 - Support exporting data to Amazon S3 cloud storage.
 - More optimizations are made for TiDB:
     - Support configuring the memory limit of a single TiDB SQL statement.
-    - If Dumpling can connect directly to PD, Dumpling supports automatic adjustment of TiDB GC time for TiDB v4.0.0 and later versions.
+    - If Dumpling can access the PD address and the [`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md) table of the TiDB cluster, Dumpling supports automatically adjusting the [GC](/garbage-collection-overview.md) safe point time to block GC for TiDB v4.0.0 and later versions.
     - Use TiDB's hidden column `_tidb_rowid` to optimize the performance of concurrent data export from a single table.
     - For TiDB, you can set the value of [`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the time point of the data backup. This ensures the consistency of the backup, instead of using `FLUSH TABLES WITH READ LOCK` to ensure the consistency.
 
@@ -345,7 +345,7 @@ When Dumpling is exporting a large single table from TiDB, Out of Memory (OOM) m
 
 ### Manually set the TiDB GC time
 
-When exporting data from TiDB (less than 1 TB), if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
+When exporting data from TiDB (less than 1 TB), if the TiDB version is v4.0.0 or later and Dumpling can access the PD address and the [`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md) table of the TiDB cluster, Dumpling automatically adjusts the GC safe point to block GC without affecting the original cluster.
 
 However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
 

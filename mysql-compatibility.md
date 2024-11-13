@@ -56,7 +56,6 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 + `SPATIAL` (also known as `GIS`/`GEOMETRY`) functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
 + Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, and `gbk`.
-+ SYS schema
 + Optimizer trace
 + XML Functions
 + X-Protocol [#1109](https://github.com/pingcap/tidb/issues/1109)
@@ -158,9 +157,7 @@ For more information, refer to [Understand the Query Execution Plan](/explain-ov
 
 ### Built-in functions
 
-TiDB supports most of the built-in functions in MySQL, but not all. You can use the statement `SHOW BUILTINS` to get a list of the available functions.
-
-For more information, refer to the [TiDB SQL Grammar](https://pingcap.github.io/sqlgram/#functioncallkeyword).
+TiDB supports most of the built-in functions in MySQL, but not all. You can use the statement [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md) to get a list of the available functions.
 
 ### DDL operations
 
@@ -240,16 +237,16 @@ TiDB supports most [SQL modes](/sql-mode.md):
 TiDB has default differences when compared with MySQL 5.7 and MySQL 8.0:
 
 - Default character set:
-    - TiDB’s default value is `utf8mb4`.
-    - MySQL 5.7’s default value is `latin1`.
-    - MySQL 8.0’s default value is `utf8mb4`.
+    - TiDB's default value is `utf8mb4`.
+    - MySQL 5.7's default value is `latin1`.
+    - MySQL 8.0's default value is `utf8mb4`.
 - Default collation:
-    - TiDB’s default collation is `utf8mb4_bin`.
-    - MySQL 5.7’s default collation is `utf8mb4_general_ci`.
-    - MySQL 8.0’s default collation is `utf8mb4_0900_ai_ci`.
+    - TiDB's default collation is `utf8mb4_bin`.
+    - MySQL 5.7's default collation is `utf8mb4_general_ci`.
+    - MySQL 8.0's default collation is `utf8mb4_0900_ai_ci`.
 - Default SQL mode:
-    - TiDB’s default SQL mode includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
-    - MySQL’s default SQL mode:
+    - TiDB's default SQL mode includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
+    - MySQL's default SQL mode:
         - The default SQL mode in MySQL 5.7 is the same as TiDB.
         - The default SQL mode in MySQL 8.0 includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION`.
 - Default value of `lower_case_table_names`:

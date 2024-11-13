@@ -9,6 +9,15 @@ The `SHOW STATS_HEALTHY` statement shows an estimation of how accurate statistic
 
 The health of a table can be improved by running the [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) statement. `ANALYZE` runs automatically when the health drops below the [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) threshold.
 
+Currently, the `SHOW STATS_HEALTHY` statement returns the following columns:
+
+| Column name | Description            |
+| -------- | ------------- |
+| `Db_name` | The database name |
+| `Table_name` | The table name |
+| `Partition_name` | The partition name |
+| `Healthy` | The healthy percentage between 0 and 100 |
+
 ## Synopsis
 
 ```ebnf+diagram

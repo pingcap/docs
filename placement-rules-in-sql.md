@@ -15,7 +15,7 @@ This feature can fulfill the following use cases:
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Overview
 
@@ -30,7 +30,7 @@ With the Placement Rules in SQL feature, you can [create placement policies](#cr
 
 > **Tip:**
 >
-> The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](https://docs.pingcap.com/zh/tidb/stable/configure-placement-rules). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
+> The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](https://docs.pingcap.com/tidb/stable/configure-placement-rules). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
 
 ## Limitations
 
@@ -44,7 +44,7 @@ Placement policies rely on the configuration of labels on TiKV nodes. For exampl
 
 <CustomContent platform="tidb">
 
-When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method for a TiDB Self-Hosted cluster is as follows:
+When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method for a TiDB Self-Managed cluster is as follows:
 
 ```
 tikv-server --labels region=<region>,zone=<zone>,host=<host>
@@ -56,17 +56,17 @@ For detailed configuration methods, see the following examples:
 | --- | --- |
 | Manual deployment | [Schedule replicas by topology labels](/schedule-replicas-by-topology-labels.md) |
 | Deployment with TiUP | [Geo-distributed deployment topology](/geo-distributed-deployment-topology.md) |
-| Deployment with TiDB Operator | [Configure a TiDB cluster in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-data-high-availability) |
+| Deployment with TiDB Operator | [Configure a TiDB cluster in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data) |
 
 > **Note:**
 >
-> For TiDB Dedicated clusters, you can skip these label configuration steps because the labels on TiKV nodes in TiDB Dedicated clusters are configured automatically.
+> For TiDB Cloud Dedicated clusters, you can skip these label configuration steps because the labels on TiKV nodes in TiDB Cloud Dedicated clusters are configured automatically.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Dedicated clusters, labels on TiKV nodes are configured automatically.
+For TiDB Cloud Dedicated clusters, labels on TiKV nodes are configured automatically.
 
 </CustomContent>
 
@@ -297,14 +297,14 @@ ALTER TABLE t PLACEMENT POLICY=default; -- Removes the placement policy 'five_re
 You can also specify a placement policy for a partitioned table or a partition. For example:
 
 ```sql
-CREATE PLACEMENT POLICY storageforhisotrydata CONSTRAINTS="[+node=history]";
+CREATE PLACEMENT POLICY storageforhistorydata CONSTRAINTS="[+node=history]";
 CREATE PLACEMENT POLICY storagefornewdata CONSTRAINTS="[+node=new]";
 CREATE PLACEMENT POLICY companystandardpolicy CONSTRAINTS="";
 
-CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE)
+CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE, UNIQUE INDEX idx(id) GLOBAL)
 PLACEMENT POLICY=companystandardpolicy
 PARTITION BY RANGE( YEAR(purchased) ) (
-  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storageforhisotrydata,
+  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storageforhistorydata,
   PARTITION p1 VALUES LESS THAN (2005),
   PARTITION p2 VALUES LESS THAN (2010),
   PARTITION p3 VALUES LESS THAN (2015),
@@ -312,17 +312,18 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 );
 ```
 
-If no placement policy is specified for a partition in a table, the partition attempts to inherit the policy (if any) from the table. In the preceding example:
+If no placement policy is specified for a partition in a table, the partition attempts to inherit the policy (if any) from the table. If the table has a [global index](/partitioned-table.md#global-indexes), the index will apply the same placement policy as the table. In the preceding example:
 
-- The `p0` partition will apply the `storageforhisotrydata` policy.
+- The `p0` partition will apply the `storageforhistorydata` policy.
 - The `p4` partition will apply the `storagefornewdata` policy.
 - The `p1`, `p2`, and `p3` partitions will apply the `companystandardpolicy` placement policy inherited from the table `t1`.
-- If no placement policy is specified for the table `t1`, the `p1`, `p2`, and `p3` partitions will inherit the database default policy or the global default policy.
+- The global index `idx` will apply the same `companystandardpolicy` placement policy as the table `t1`.
+- If no placement policy is specified for the table `t1`, then the `p1`, `p2`, and `p3` partitions and the global index `idx` will inherit the database default policy or the global default policy.
 
 After placement policies are attached to these partitions, you can change the placement policy for a specific partition as in the following example:
 
 ```sql
-ALTER TABLE t1 PARTITION p1 PLACEMENT POLICY=storageforhisotrydata;
+ALTER TABLE t1 PARTITION p1 PLACEMENT POLICY=storageforhistorydata;
 ```
 
 ## High availability examples
@@ -408,7 +409,7 @@ You can specify a specific distribution of Leaders and Followers using constrain
 If you have specific requirements for the distribution of Raft Leaders among nodes, you can specify the placement policy using the following statement:
 
 ```sql
-CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1: 1}';
+CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1": 1}';
 ```
 
 After this placement policy is created and attached to the desired data, the Raft Leader replicas of the data will be placed in the `us-east-1` region specified by the `LEADER_CONSTRAINTS` option, while other replicas of the data will be placed in regions specified by the `FOLLOWER_CONSTRAINTS` option. Note that if the cluster fails, such as a node outage in the `us-east-1` region, a new Leader will still be elected from other regions, even if these regions are specified in `FOLLOWER_CONSTRAINTS`. In other words, ensuring service availability takes the highest priority.
@@ -468,7 +469,6 @@ After executing the statements in the example, TiDB will place the `app_order` d
 | Backup & Restore (BR) | 6.0 | Before v6.0, BR does not support backing up and restoring placement policies. For more information, see [Why does an error occur when I restore placement rules to a cluster](/faq/backup-and-restore-faq.md#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster). |
 | TiDB Lightning | Not compatible yet | An error is reported when TiDB Lightning imports backup data that contains placement policies  |
 | TiCDC | 6.0 | Ignores placement policies, and does not replicate the policies to the downstream |
-| TiDB Binlog | 6.0 | Ignores placement policies, and does not replicate the policies to the downstream |
 
 </CustomContent>
 

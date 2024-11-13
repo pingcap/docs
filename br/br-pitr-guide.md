@@ -105,8 +105,8 @@ The following steps describe how to clean up backup data that exceeds the backup
 
 ## Performance capabilities of PITR
 
-- On each TiKV node, PITR can restore snapshot data at a speed of 280 GB/h and log data 30 GB/h.
-- BR deletes outdated log backup data at a speed of 600 GB/h.
+- On each TiKV node, PITR can restore snapshot data (full restore) at a speed of 280 GB/h and log data (including meta files and KV files) at a speed of 30 GB/h.
+- BR deletes outdated log backup data (`tiup br log truncate`) at a speed of 600 GB/h.
 
 > **Note:**
 >
@@ -117,28 +117,35 @@ The following steps describe how to clean up backup data that exceeds the backup
 >
 > The snapshot data size refers to the logical size of all KVs in a single replica, not the actual amount of restored data. BR restores all replicas according to the number of replicas configured for the cluster. The more replicas there are, the more data can be actually restored.
 > The default replica number for all clusters in the test is 3.
-> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`concurrency`](/br/use-br-command-line-tool.md#common-options) option in the BR command.
+> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`pitr-concurrency`](/br/use-br-command-line-tool.md#common-options) option in the BR command.
 
 Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)) is as follows:
 
 - The number of TiKV nodes (8 core, 16 GB memory): 21
 - TiKV configuration item `import.num-threads`: 8
-- BR command option `concurrency`: 128
+- BR command option `pitr-concurrency`: 128
 - The number of Regions: 183,000
 - New log data created in the cluster: 10 GB/h
 - Write (INSERT/UPDATE/DELETE) QPS: 10,000
 
-Testing scenario 2 (on TiDB Self-Hosted) is as follows:
+Testing scenario 2 (on TiDB Self-Managed) is as follows:
 
 - The number of TiKV nodes (8 core, 64 GB memory): 6
 - TiKV configuration item `import.num-threads`: 8
-- BR command option `concurrency`: 128
+- BR command option `pitr-concurrency`: 128
 - The number of Regions: 50,000
 - New log data created in the cluster: 10 GB/h
 - Write (INSERT/UPDATE/DELETE) QPS: 10,000
+
+## Monitoring and alert
+
+After log backup tasks are distributed, each TiKV node continuously writes data to external storage. You can view the monitoring data for this process in the **TiKV-Details > Backup Log** dashboard.
+
+To receive notifications metrics deviate from normal ranges, see [Log backup alerts](/br/br-monitoring-and-alert.md#log-backup-alerts) to configure alert rules.
 
 ## See also
 
 * [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
 * [br Command-line Manual](/br/use-br-command-line-tool.md)
 * [Log Backup and PITR Architecture](/br/br-log-architecture.md)
+* [Monitoring and Alert for Backup and Restore](/br/br-monitoring-and-alert.md)

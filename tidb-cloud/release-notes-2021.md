@@ -40,7 +40,7 @@ Bug fixes:
 
 ## November 8, 2021
 
-* Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless), which offers you a one-year free trial of TiDB Cloud
+* Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless), which offers you a one-year free trial of TiDB Cloud
 
     Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
 
@@ -91,7 +91,7 @@ Bug fixes:
 
 ## June 25, 2021
 
-* Fix the **Select Region** not working issue on the [TiDB Cloud Pricing](https://en.pingcap.com/products/tidbcloud/pricing/) page
+* Fix the **Select Region** not working issue on the [TiDB Cloud Pricing](https://www.pingcap.com/pricing/) page
 
 ## June 24, 2021
 

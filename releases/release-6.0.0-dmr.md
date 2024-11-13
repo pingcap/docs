@@ -271,7 +271,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     TiEM not only provides full lifecycle visual management for TiDB clusters, but also provides one-stop services: parameter management, version upgrades, cluster clone, active-standby cluster switching, data import and export, data replication, and data backup and restore services. TiEM can improve the efficiency of DevOps on TiDB and reduce the DevOps cost for enterprises.
 
-    Currently, TiEM is provided in the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) edition only. To get TiEM, contact us via the [TiDB Enterprise](https://en.pingcap.com/tidb-enterprise/) page.
+    Currently, TiEM is provided in the [TiDB Enterprise](https://www.pingcap.com/tidb-enterprise/) edition only. To get TiEM, contact us via the [TiDB Enterprise](https://www.pingcap.com/tidb-enterprise/) page.
 
 - Support customizing configurations of the monitoring components
 

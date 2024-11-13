@@ -30,9 +30,13 @@ You can troubleshoot the issue by following these steps:
 
 ## Unbalanced CPU usage on TiDB server
 
-Check if the number of connections on TiDB server is balanced. If not, troubleshoot by following the [TiProxy does not migrate connections](#tiproxy-does-not-migrate-connections) section.
+You can troubleshoot the issue by following these steps:
 
-If the number of connections is balanced, it might be that some connections occupy a high CPU usage while other connections are relatively idle. TiProxy balances connections based on the number of connections on the TiDB server, not the actual load.
+1. Check if there is a significant difference in CPU usage among TiDB servers. TiProxy does not guarantee identical CPU usage across TiDB servers. It only performs [load balancing](/tiproxy/tiproxy-load-balance.md) when the CPU usage difference is large enough to affect query latency.
+2. If the connection count of a TiDB server gradually drops to zero, it might be affected by other load balancing policies. You can check the [`Session Migration Reasons`](/tiproxy/tiproxy-grafana.md#balance) metric in Grafana to see if there are migrations based on other policies.
+3. Check if the TiProxy configuration item [`policy`](/tiproxy/tiproxy-configuration.md#policy) is set to `location`. If location-based prioritization is enabled, TiProxy does not balance CPU usage across different locations.
+4. Check the version of TiProxy. Only v1.1.0 and later versions support CPU-based load balancing. Earlier versions use a load balancing policy based on minimum connection count.
+5. If none of the preceding situations apply, the connection migration might have failed. To troubleshoot further, see [TiProxy does not migrate connections](#tiproxy-does-not-migrate-connections).
 
 ## Latency is significantly increased
 

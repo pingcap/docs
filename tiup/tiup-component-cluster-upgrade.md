@@ -14,7 +14,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
 - `<cluster-name>`: the cluster name to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
-- `<version>`: the target version to upgrade to, such as `v8.0.0`. Currently, it is only allowed to upgrade to a version higher than the current cluster, that is, no downgrade is allowed. It is also not allowed to upgrade to the nightly version.
+- `<version>`: the target version to upgrade to, such as `v8.3.0`. Currently, it is only allowed to upgrade to a version higher than the current cluster, that is, no downgrade is allowed. It is also not allowed to upgrade to the nightly version.
 
 ## Options
 
@@ -121,6 +121,26 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - Prints the help information.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+
+### ---pre-upgrade-script
+
+> **Warning:**
+>
+> This option is experimental and is not recommended for production deployments.
+
+- Runs a script before the upgrade.
+- Data type: `STRINGS`
+- This option specifies the path of a script to be run on the node that is to be upgraded.
+
+### ---post-upgrade-script
+
+> **Warning:**
+>
+> This option is experimental and is not recommended for production deployments.
+
+- Runs a script after the upgrade.
+- Data type: `STRINGS`
+- This option specifies the path of a script to be run after the upgrade of a node. This script will be executed on the upgraded node itself.
 
 ## Output
 

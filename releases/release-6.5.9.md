@@ -47,7 +47,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiDB
 
-    - Fix the issue that after a large number of tables are created, the newly created tables might lack the `stats_meta` information, causing subsequent query estimation to fail to get accurate row count information [#36004](https://github.com/pingcap/tidb/issues/36004) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Fix the issue that dropped tables are still counted by the Grafana `Stats Healthy Distribution` panel [#39349](https://github.com/pingcap/tidb/issues/39349) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Fix the issue that TiDB does not handle the `WHERE <column_name>` filtering condition in a SQL statement when the query of that statement involves the `MemTableScan` operator [#40937](https://github.com/pingcap/tidb/issues/40937) @[zhongzc](https://github.com/zhongzc)
     - Fix the issue that query results might be incorrect when the `HAVING` clause in a subquery contains correlated columns [#51107](https://github.com/pingcap/tidb/issues/51107) @[hawkingrei](https://github.com/hawkingrei)
