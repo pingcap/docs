@@ -44,7 +44,7 @@ BIT[(M)]
 
 ### `BOOLEAN` type
 
-The `BOOLEAN` type and its alias `BOOL` are equivalent to  tinyint`. If the value is `0`, it is considered as `False`; otherwise, it is considered `True`. As in MySQL, `True` is `1` and `False` is `0`:
+The `BOOLEAN` type and its alias `BOOL` are equivalent to `TINYINT(1)`. If the value is `0`, it is considered as `False`; otherwise, it is considered `True`. As in MySQL, `True` is `1` and `False` is `0`:
 
 ```sql
 BOOLEAN
