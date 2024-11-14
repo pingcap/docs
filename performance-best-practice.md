@@ -1,9 +1,9 @@
 ---
-title: Optimizing TiDB: Key Settings for Maximum Performance
+title: Optimizing TiDB Settings for Maximum Performance
 summary: Learn how to optimize TiDB performance by configuring key settings and addressing edge cases
 ---
 
-# Optimizing TiDB: Key Settings for Maximum Performance
+# Optimizing TiDB Settings for Maximum Performance
 
 This guide provides essential information on optimizing TiDB for maximum performance. We'll explore:
 - Performance best practices for common workloads
