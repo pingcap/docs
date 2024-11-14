@@ -123,7 +123,7 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Vector Search Support</b>
+            <b>Vector Search</b>
             <br />Enables vector data types, indexing, and high-performance vector search, with support for mixed queries involving vector and relational data.
           </li>
           <br />
@@ -151,7 +151,7 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Materialized Views Support</b>
+            <b>Materialized Views</b>
             <br />Enables materialized views to improve pre-computation, boost computational efficiency, and enhance data analysis performance.
           </li>
           <br />
@@ -268,7 +268,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>CPU Time Observation for TiDB and TiKV (GA)</b>
-            <br />Adds CPU time metrics to logs, enabling quick identification of statements causing CPU spikes.
+            <br />Adds TiDB and TiKV CPU time metrics to statements and slow logs, enabling quick identification of statements causing TiDB or TiKV CPU spikes.
           </li>
           <br />
         </ul>
@@ -297,7 +297,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>TiFlash CPU Time Monitoring (GA)</b>
-            <br />Adds TiFlash CPU time metrics to logs, enabling quick identification of statements that cause CPU spikes in TiFlash.
+            <br />Adds TiFlash CPU time metrics to statements and slow logs, enabling quick identification of statements that cause CPU spikes in TiFlash.
           </li>
           <br />
         </ul>
