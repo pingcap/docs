@@ -94,7 +94,7 @@ Disaster Recovery (DR) includes solutions that can be used to recover data and s
 
 ### Distributed eXecution Framework (DXF)
 
-Distributed eXecution Framework (DXF) is the framework used by TiDB to distribute tasks across a TiDB cluster. DXF is designed to efficiently use cluster resources to execute tasks (such as index creation or data import) while controlling the resource usage and impact on core business transactions. For more information, see [DXF Introduction](/tidb-distributed-execution-framework.md).
+Distributed eXecution Framework (DXF) is the framework used by TiDB to centrally schedule certain tasks (such as creating indexes or importing data) and execute them in a distributed manner. DXF is designed to efficiently use cluster resources while controlling resource usage and reducing the impact on core business transactions. For more information, see [DXF Introduction](/tidb-distributed-execution-framework.md).
 
 ### Dynamic Pruning
 
@@ -104,7 +104,7 @@ Dynamic pruning mode is one of the modes that TiDB accesses partitioned tables. 
 
 ### Garbage Collection (GC)
 
-Garbage Collection (GC) is a process that clears obsolete data to free up resources. For information on TiKV GC process, see [Garbage Collection overview](/garbage-collection-overview.md).
+Garbage Collection (GC) is a process that clears obsolete data to free up resources. For information on TiKV GC process, see [GC Overview](/garbage-collection-overview.md).
 
 ### General Availability (GA)
 
@@ -243,13 +243,13 @@ Quota Limiter is an experimental feature introduced in TiDB v6.0.0. If the machi
 
 Raft Engine is an embedded persistent storage engine with a log-structured design. It is built for TiKV to store multi-Raft logs. Since v5.4, TiDB supports using Raft Engine as the log storage engine. For details, see [Raft Engine](/tikv-configuration-file.md#raft-engine).
 
-### Region split
+### Region Split
 
-Regions are generated as data writes increase. The process of splitting is called Region split.
+A region in a TiKV cluster is not divided at the beginning, but is gradually split as data is written to it. The process is called Region split.
 
 The mechanism of Region split is to use one initial Region to cover the entire key space, and generate new Regions through splitting existing ones every time the size of the Region or the number of keys has reached a threshold.
 
-### Region/peer/Raft group
+### Region/Peer/Raft Group
 
 Region is the minimal piece of data storage in TiKV, each representing a range of data (256 MiB by default). Each Region has three replicas by default. A replica of a Region is called a peer. Multiple peers of the same Region replicate data via the Raft consensus algorithm, so peers are also members of a Raft instance. TiKV uses Multi-Raft to manage data. That is, for each Region, there is a corresponding, isolated Raft group.
 
