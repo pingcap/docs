@@ -7,10 +7,6 @@ summary: TiDB adopts an LRU-based (Least Recently Used) caching mechanism for sc
 
 In some multi-tenant scenarios, there might be hundreds of thousands or even millions of databases and tables. Loading the schema information of all these databases and tables into memory would not only consume a large amount of memory but also degrade access performance. To address this issue, TiDB introduces a schema caching mechanism similar to LRU (Least Recently Used). Only the schema information of the most recently accessed databases and tables is cached in memory.
 
-> **Warning:**
->
-> This feature is currently an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 ## Configure schema cache
 
 You can enable the schema caching feature by configuring the system variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
