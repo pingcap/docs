@@ -89,7 +89,7 @@ On Slow Queries panel, we can find:
 1. The slowest SQL queries.
 2. The SQL query that reads the most data from TiKV.
 3. The `EXPLAIN ANALYZE` output from drilling down the SQL statement by clicking it.
-4. Please note that on the Slow Queries panel, we cannot get the frequency of the SQL statement execution. Once the execution elapsed time exceeds tidb_slow_log_threshold for single instance, the query is then listed on the Slow Queries panel.
+4. Please note that on the Slow Queries panel, we cannot get the frequency of the SQL statement execution. Once the execution elapsed time exceeds [`tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) for single instance, the query is then listed on the Slow Queries panel.
 ![slow-query-default](/media/sql-tuning/slow-query-default.png)
 
 ## Other Tools for Identifying Top SQL
@@ -259,7 +259,7 @@ An SQL statement undergoes optimization primarily in the optimizer through three
 
 The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using Point_Get or Batch_Point_Get.
 
-Point_Get or Batch_Point_Get is to get 1 or 0 or many row only by using the TiKV key, the explicit or implicit (`_tidb_rowid`) primary key. For example, when id column is the primary key of a clustered index table, Point_Get is used to get the particular row. If a plan is identified as Point_Get, optimizer will skip the logical transformation and cost-based optimization.
+Point_Get or Batch_Point_Get is to get 1 or 0 or many row only by using the TiKV key, the explicit or implicit (`_tidb_rowid`) primary key. For example, when id column is the primary key of a [clustered index](/clustered-indexes.md) table, Point_Get is used to get the particular row. If a plan is identified as Point_Get, optimizer will skip the logical transformation and cost-based optimization.
 
 ```sql
 SELECT id, name FROM emp WHERE id = 901; 
