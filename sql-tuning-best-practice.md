@@ -121,7 +121,7 @@ This guide focuses on providing actionable advice for beginners looking to optim
 - Query Processing Workflow
 - Optimizer Fundamentals
 - Statistics Management
-- How TiDB build A Execution Plan
+- How TiDB Builds A Execution Plan
 - Understand Execution Plan
 - Index Strategy in TiDB
     - SQL Tuning with a Covered Index
@@ -129,6 +129,7 @@ This guide focuses on providing actionable advice for beginners looking to optim
     - SQL Tuning with a Composite Index for Efficient Filtering and Sorting
     - Composite Index Strategy Guidelines
     - The Cost of Indexing
+- When to Use TiFlash: A Simple Guide
 
 ## Query Processing Workflow
 
@@ -246,7 +247,7 @@ To lock the statistics for a table, you can use the following statement [`LOCK S
 
 for more detail about statistics, please refer to [statistics](/statistics.md).
 
-## How TiDB build A Execution Plan
+## How TiDB Builds A Execution Plan
 
 An SQL statement undergoes optimization primarily in the optimizer through three stages:
 
@@ -279,6 +280,7 @@ The following figure illustrates the various data access paths and row set opera
 Also, the optimizer need to evaluate operations that manipulate row sets, such as aggregation, join, and sorting. For instance, the aggregation operator may utilize either `HASH_AGG` or `STREAM_AGG`, while the join operator can select from `HASH JOIN`, `MERGE JOIN`, or `INDEX JOIN`. 
 
 Furthermore, expression and operator push-down to the physical storage engines is part of the physical optimization phase. The physical plan is partitioned and distributed to different components based on the underlying storage engines:
+
 - Root Task runs at the TiDB layer
 - Cop (Coprocessor) Task runs at the TiKV or TiFlash layer
 - MPP (Massively Parallel Processing) Task runs at the TiFlash layer
@@ -755,3 +757,164 @@ Best Practice:
 - Only create indexes that provide clear performance benefits
 - Regularly review index usage statistics via [TIDB_INDEX_USAGE](/information-schema/information-schema-tidb-index-usage.md)
 - Consider the write/read ratio of your workload when designing indexes
+
+## When to Use TiFlash: A Simple Guide
+
+This section explains the best scenarios for using TiFlash in TiDB. TiFlash is optimized for analytical queries that involve complex calculations, aggregations, and large dataset scans, thanks to its columnar storage format. Here’s when to consider TiFlash:
+
+- Large-Scale Data Analysis: For queries involving extensive data scans, such as OLAP workloads, TiFlash can deliver faster performance compared to TiKV due to its columnar storage and MPP capability.
+- Complex Scans, Aggregations and Joins: TiFlash is ideal for queries with heavy aggregations and joins, as it can process these operations more efficiently by only reading necessary columns.
+- Mixed Workloads: In hybrid environments where both transactional (OLTP) and analytical (OLAP) workloads run simultaneously, TiFlash can handle analytical queries without impacting TiKV’s performance for transactional queries.
+- SaaS Arbitrary Filtering Workloads: In SaaS workloads, there is often a need for arbitrary filtering across many columns. Indexing all columns is impractical, especially when the primary key includes a tenant ID and all queries include this ID. TiFlash is an ideal solution here: because data in TiFlash is sorted and clustered by primary key, it enables efficient table range scans. This allows TiFlash to provide fast performance without the overhead of maintaining multiple indexes.
+
+Using TiFlash strategically can enhance query performance and optimize resource usage in TiDB for data-intensive, analytical queries. Here are two use case of TiFlash
+
+### Analytical Query
+The original query requires joining the order_line and item tables. The plan for executing this query on the TiKV storage engine takes 21.1 seconds.
+In the TiKV plan:
+
+- TiDB needs to fetch 3,864,397 rows from the lineitem table and 10 million rows from the part table.
+- The hash join operation (HashJoin_21) is performed at the TiDB layer, along with the subsequent projection (Projection_38) and aggregation (HashAgg_9) operations.
+
+The plan for executing the same query on the TiFlash MPP (Massively Parallel Processing) takes only 1.41 seconds, which is 15 times faster than the TiKV plan.
+In the TiFlash MPP plan:
+
+- The optimizer recognizes that both the order_line and item tables have TiFlash replicas available.
+- As a result, the optimizer is able to push down the entire query execution, including the table scans, hash join, column projection, and aggregation, to the TiFlash MPP layer.
+- Performing the entire query execution on the TiFlash MPP layer, which is optimized for analytical workloads, leads to the significant performance improvement compared to the TiKV plan.
+
+The key difference between the two plans is that the TiFlash MPP plan can leverage the distributed processing capabilities of the TiFlash MPP layer to execute the entire query more efficiently, while the TiKV plan requires more coordination between the TiDB and TiKV components.
+
+```sql
+select
+    100.00 * sum(case when i_data like 'PR%' then ol_amount else 0 end) / (1+sum(ol_amount)) as promo_revenue
+from	order_line, item
+where	ol_i_id = i_id and ol_delivery_d >= '2007-01-02 00:00:00.000000'
+    and ol_delivery_d < '2030-01-02 00:00:00.000000';
+```
+
+TiKV Plan
+```
++-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
+| ID                            | ESTROWS      | ACTROWS   | TASK      | ACCESS OBJECT  | EXECUTION INFO                               |
++-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
+| Projection_8                  | 1.00         | 1         | root      |                | time:21.1s, loops:2, RU:1023225.707561, ...  |
+| └─HashAgg_9                   | 1.00         | 1         | root      |                | time:21.1s, loops:2, partial_worker:{ ...    |
+|   └─Projection_38             | 3839984.46   | 3864397   | root      |                | time:21.1s, loops:3776, Concurrency:5        |
+|     └─HashJoin_21             | 3839984.46   | 3864397   | root      |                | time:21.1s, loops:3776, build_hash_table:... |
+|       ├─TableReader_24(Build) | 3826762.62   | 3864397   | root      |                | time:18.4s, loops:3764, cop_task: ...        |
+|       │ └─Selection_23        | 3826762.62   | 3864397   | cop[tikv] |                | tikv_task:{proc max:717ms, min:265ms, ...    |
+|       │   └─TableFullScan_22  | 300005811.00 | 300005811 | cop[tikv] | table:lineitem | tikv_task:{proc max:685ms, min:252ms, ...    |
+|       └─TableReader_26(Probe) | 10000000.00  | 10000000  | root      |                | time:1.29s, loops:9780, cop_task: ...        |
+|         └─TableFullScan_25    | 10000000.00  | 10000000  | cop[tikv] | table:part     | tikv_task:{proc max:922ms, min:468ms, ...    |
++-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
+```
+
+TiFlash MPP Plan
+```
++--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
+| ID                                         | ESTROWS     | ACTROWS  | TASK         | ACCESS OBJECT  | EXECUTION INFO                       |
++--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
+| Projection_8                               | 1.00        | 1        | root         |                | time:1.41s, loops:2, RU:45879.127909 |
+| └─HashAgg_52                               | 1.00        | 1        | root         |                | time:1.41s, loops:2, ...             |
+|   └─TableReader_54                         | 1.00        | 1        | root         |                | time:1.41s, loops:2, ...             |
+|     └─ExchangeSender_53                    | 1.00        | 1        | mpp[tiflash] |                | tiflash_task:{time:1.41s, ...        |
+|       └─HashAgg_13                         | 1.00        | 1        | mpp[tiflash] |                | tiflash_task:{time:1.41s, ...        |
+|         └─Projection_74                    | 3813443.11  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.4s, ...         |
+|           └─Projection_51                  | 3813443.11  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.39s, ...        |
+|             └─HashJoin_50                  | 3813443.11  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.39s, ...        |
+|               ├─ExchangeReceiver_31(Build) | 3800312.67  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.05s, ...        |
+|               │ └─ExchangeSender_30        | 3800312.67  | 3864397  | mpp[tiflash] |                | tiflash_task:{time:1.2s, ...         |
+|               │   └─TableFullScan_28       | 3800312.67  | 3864397  | mpp[tiflash] | table:lineitem | tiflash_task:{time:1.15s, ...        |
+|               └─ExchangeReceiver_34(Probe) | 10000000.00 | 10000000 | mpp[tiflash] |                | tiflash_task:{time:1.24s, ...        |
+|                 └─ExchangeSender_33        | 10000000.00 | 10000000 | mpp[tiflash] |                | tiflash_task:{time:1.4s, ...         |
+|                   └─TableFullScan_32       | 10000000.00 | 10000000 | mpp[tiflash] | table:part     | tiflash_task:{time:59.2ms, ...       |
++--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
+```
+
+### SaaS Arbitrary Filtering Workloads
+
+#### Overview
+In SaaS applications, it's common to structure tables with composite primary keys that include tenant identification. Let's look at a typical example where TiFlash can significantly improve query performance.
+
+#### Case Study: Multi-tenant Data Access
+
+Consider a table design with a composite primary key: (tenantId, objectTypeId, objectId). A common query pattern is to:
+
+- Fetch the first N records for a specific tenant and object type, and applying random filters across hundreds or thousands of other columns, Making it impractical to create indexes for every possible filter combination. There is a potential sort operator after the filter as well.
+- Get the total count of records matching these criterias
+
+#### Performance Comparison
+
+- TiKV Plan: When executing this query on TiKV storage engine, it takes 2 minutes 38.6 seconds as it requires a table range scan operation, and cannot utilize indexes effectively for dynamic filtering conditions across hundreds of columns.
+- TiFlash Plan: The same query on TiFlash MPP engine takes only 3.44 seconds - almost 46 times faster. Since data in TiFlash is sorted by primary key, queries filtered by the primary key's prefix will also use a TableRangeScan instead of a full table scan.
+```sql
+ITH `results` AS (
+  SELECT field1, field2, field3, field4
+  FROM usertable
+  where tenantId = 1234 and objectTypeId = 6789
+),
+`limited_results` AS (
+  SELECT field1, field2, field3, field4
+  FROM `results` LIMIT 100
+)
+SELECT field1, field2, field3, field4
+FROM
+  (
+    SELECT 100 `__total__`, field1, field2, field3, field4
+    FROM `limited_results`
+    UNION ALL
+    SELECT count(*) `__total__`, field1, field2, field3, field4
+    FROM `results`
+  ) `result_and_count`;
+```
+
+TiKV Plan
+
+```
++--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
+| id                             | estRows   | actRows | task      | access object         | execution info                                      |
++--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
+| Union_18                       | 101.00    | 101     | root      |                       | time:2m38.6s, loops:3, RU:8662189.451027            |
+| ├─Limit_20                     | 100.00    | 100     | root      |                       | time:23ms, loops:2                                  |
+| │ └─TableReader_25             | 100.00    | 100     | root      |                       | time:23ms, loops:1, cop_task: {num: 1, max: 22.8...}|
+| │   └─Limit_24                 | 100.00    | 100     | cop[tikv] |                       | tikv_task:{time:21ms, loops:3}, scan_detail: {...}  |
+| │     └─TableRangeScan_22      | 100.00    | 100     | cop[tikv] | table:usertable       | tikv_task:{time:21ms, loops:3}                      |
+| └─Projection_26                | 1.00      | 1       | root      |                       | time:2m38.6s, loops:2, Concurrency:OFF              |
+|   └─HashAgg_34                 | 1.00      | 1       | root      |                       | time:2m38.6s, loops:2, partial_worker:{...}, fin.. .|
+|     └─TableReader_35           | 1.00      | 5121    | root      |                       | time:2m38.6s, loops:7, cop_task: {num: 5121, max:...|
+|       └─HashAgg_27             | 1.00      | 5121    | cop[tikv] |                       | tikv_task:{proc max:0s, min:0s, avg: 462.8ms, p...} |
+|         └─TableRangeScan_32    | 10000000  | 10000000| cop[tikv] | table:usertable       | tikv_task:{proc max:0s, min:0s, avg: 460.5ms, p...} |
++--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
+```
+
+TiFlash Plan
+
+```
++--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
+| id                             | estRows   | actRows | task         | access object      | execution info                                      |
++--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
+| Union_18                       | 101.00    | 101     | root         |                    | time:3.44s, loops:3, RU:0.000000                    |
+| ├─Limit_22                     | 100.00    | 100     | root         |                    | time:146.7ms, loops:2                               |
+| │ └─TableReader_30             | 100.00    | 100     | root         |                    | time:146.7ms, loops:1, cop_task: {num: 1, max: 0...}|
+| │   └─ExchangeSender_29        | 100.00    | 0       | mpp[tiflash] |                    |                                                     |
+| │     └─Limit_28               | 100.00    | 0       | mpp[tiflash] |                    |                                                     |
+| │       └─TableRangeScan_27    | 100.00    | 0       | mpp[tiflash] | table:usertable    |                                                     |
+| └─Projection_31                | 1.00      | 1       | root         |                    | time:3.42s, loops:2, Concurrency:OFF                |
+|   └─HashAgg_49                 | 1.00      | 1       | root         |                    | time:3.42s, loops:2, partial_worker:{...}, fin...   |
+|     └─TableReader_51           | 1.00      | 2       | root         |                    | time:3.42s, loops:2, cop_task: {num: 4, max: 0...}  |
+|       └─ExchangeSender_50      | 1.00      | 2       | mpp[tiflash] |                    | tiflash_task:{proc max:3.4s, min:3.15s, avg: 3...}  |
+|         └─HashAgg_36           | 1.00      | 2       | mpp[tiflash] |                    | tiflash_task:{proc max:3.4s, min:3.15s, avg: 3...}  |
+|           └─TableRangeScan_48 | 10000000   | 10000000| mpp[tiflash] | table:usertable    | tiflash_task:{proc max:3.4s, min:3.15s, avg: 3...}  |
++--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
+```
+
+#### Intelligent Query Routing
+
+After enabling TiFlash replicas for tables with large amounts of multi-tenant data, the optimizer can make choices to serve the query on TiKV or TiFlash storage engine based on the row count:
+
+- Small Tenants: TiKV is preferred for tenants with small data size, as it provides high concurrency for small queries with table range scan.
+- Large Tenants: For tenants with large datasets (like 10M rows in this case), TiFlash is more efficient as it:
+    - Handles dynamic filtering conditions without requiring specific indexes
+    - Pushes down count, sort and limit operations to TiFlash MPP layer
+    - Leverages columnar storage to scan only the required columns
