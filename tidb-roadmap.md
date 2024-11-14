@@ -118,7 +118,7 @@ In the course of development, this roadmap is subject to change based on user ne
     <tr>
       <td>
         <b>Advanced SQL Features and Flexibility</b>
-        <em>Cutting-edge SQL capabilities, improving compatibility, flexibility, and ease of use for complex queries and modern applications</em>
+        <br />Cutting-edge SQL capabilities, improving compatibility, flexibility, and ease of use for complex queries and modern applications
       </td>
       <td>
         <ul>
@@ -161,7 +161,7 @@ In the course of development, this roadmap is subject to change based on user ne
     <tr>
       <td>
         <b>Unbreakable Reliability and Always-On Availability</b>
-        <em>Near-zero downtime and enhanced fault tolerance to maintain uninterrupted operations and deliver a rock-solid user experience</em>
+        <br />Near-zero downtime and enhanced fault tolerance to maintain uninterrupted operations and deliver a rock-solid user experience
       </td>
       <td>
         <ul>
@@ -252,7 +252,7 @@ In the course of development, this roadmap is subject to change based on user ne
     <tr>
       <td>
         <b>Effortless Operations and Intelligent Observability</b>
-        <em>Simplify management with proactive monitoring and insights to optimize performance and ensure smooth operations</em>
+        <br />Simplify management with proactive monitoring and insights to optimize performance and ensure smooth operations
       </td>
       <td>
         <ul>
@@ -320,7 +320,7 @@ In the course of development, this roadmap is subject to change based on user ne
     <tr>
       <td>
         <b>Comprehensive Data Security and Privacy</b>
-        <em>Robust security measures to safeguard sensitive data, ensuring top-tier protection, encryption, and compliance with evolving privacy regulations</em>
+        <br />Robust security measures to safeguard sensitive data, ensuring top-tier protection, encryption, and compliance with evolving privacy regulations
       </td>
       <td>
         <ul>
