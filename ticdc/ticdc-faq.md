@@ -63,7 +63,7 @@ After the upstream TiDB cluster stops updating, you can verify if replication is
 
     > **Note:**
     >
-    > Use the [`TIDB_CURRENT_TSO()`](/functions-and-operators/tidb-functions.md#tidb_current_tso) function to get the current TSO, instead of using functions like `NOW()` that return the current time.
+    > Use the `TIDB_CURRENT_TSO()` function to get the current TSO, instead of using functions like `NOW()` that return the current time.
 
     The following example uses [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso) to convert the TSO to a readable time format for further comparison:
 
