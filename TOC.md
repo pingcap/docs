@@ -197,7 +197,7 @@
     - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
     - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
     - [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
-    - [Data Consistency Validation for TiDB Upstream and Downstream Clusters](/ticdc/ticdc-upstream-downstream-check.md)
+    - [Data Consistency Validation for Upstream and Downstream TiDB Clusters](/ticdc/ticdc-upstream-downstream-check.md)
     - [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md)
     - Output Protocols
       - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
