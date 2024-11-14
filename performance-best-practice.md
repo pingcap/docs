@@ -147,7 +147,7 @@ TiDB Version: v8.4.0
 
 Workload : [sysbench oltp_read_only](https://github.com/akopytov/sysbench/blob/master/src/lua/oltp_read_only.lua)
 
-### Throughput Comparison between Baseline and Key Settings
+### Performance Comparison
 The following results illustrate the throughput enhancements achieved with the Key Settings in comparison to the baseline, measured in operations per second (OPS), latency, and plan cache hit ratio.
 
 Baseline: the default settings
@@ -155,28 +155,52 @@ Key Settings: the settings of variables and configurations in this guide
 
 | Item | Baseline | Key Settings | Diff(%) |
 | ---------| ---- | ----| ----|
-| QPS | 89100.26 | 100128.6 | 12.38% |
+| QPS | 89,100 | 100,128 | 12.38% |
 | Avg Latency（ms）|35.87 | 31.92 | -11.01% |
 | P95 Latency（ms）| 58.92 | 51.02 | -13.41% |
-| Plan cache hit ratio (%) | 56.89% | 87.51% | 53.82% |
+| Plan Cache Hit Ratio (%) | 56.89% | 87.51% | 53.82% |
+| Plan cache Memory Usage (MiB) | 95.3 | 70.2 | -26.34% |
 
-### Performance Analysis
+### Key Benefits
 
-The performance improvement observed in the Key Settings is primarily attributed to the ability of instance plan cache. As shown in the figures below:
+The instance plan cache demonstrates significant performance improvements over the baseline configuration:
 
-- Baseline: The plan cache hit ratio is 58.89%.
-- Key Settings: The plan cache hit ratio is 87.51%.
+- Higher Hit Ratio: Increased from 56.89% to 87.51% (+53.82%)
+- Lower Memory Usage: Reduced from 95.3 MiB to 70.2 MiB (-26.3%)
+- Better Performance:
+    - QPS increased by 12.38%
+    - Average latency reduced by 11.01%
+    - P95 latency reduced by 13.41%
+### How It Works
 
-The 53.82% improvement in the hit ratio significantly reduces the overhead associated with query compilation. By enabling the instance plan cache, all plans for SELECT statements are stored in memory, while misses in the cache occur primarily for the `BEGIN` and `COMMIT` statements. The instance plan cache can effectively store plans for up to 5,000 SELECT statements across 1,000 tables. The cached plans ared sharedacross all the 200 connections on the same TiDB instance.
+- Caches execution plans for SELECT statements in memory
+- Shares cached plans across all connections (up to 200) on the same TiDB instance
+- Can effectively store plans for up to 5,000 SELECT statements across 1,000 tables
+- Cache misses primarily occur only for BEGIN and COMMIT statements
 
-> **Important Note:**
-> Our benchmark tests used simple queries (sysbench oltp_read_only) where each query plan only required 14KB of memory. However, in real-world environments, instance plan cache has shown much more impressive results. Up to 20x latency improvement in complex query scenarios is observed, as instance plan cache is able to cache much more plans while using less memory.
-> The benefits of instance plan cache are particularly significant when your system has:
->- Large, complex tables (such as those with thousands of columns)
-Complex SQL queries (beyond simple SELECT statements)
->- Many concurrent user connections
->- A wide variety of different query patterns
->- Frequent use of prepared statements
+### Real-World Impact
+
+While our benchmark using simple sysbench oltp_read_only queries (14KB per plan) showed modest improvements, real-world applications often see much more dramatic benefits:
+
+- Up to 20x latency improvement for complex queries
+- Significantly better memory efficiency compared to session-level plan cache
+
+Instance plan cache is particularly effective when your system has:
+
+- Large tables with many columns
+- Complex SQL queries
+- High concurrent connections
+- Diverse query patterns
+
+### Memory Efficiency
+
+Instance plan cache provides better memory efficiency than session-level plan cache because:
+
+- Plans are shared across all connections
+- No need to duplicate plans for each session
+- More efficient memory utilization while maintaining higher hit ratios
+
+In scenarios with multiple connections and complex queries, session-level plan cache would require significantly more memory to achieve similar hit ratios, making instance plan cache the more efficient choice.
 
 ![instance-plan-cache](/media/key-settings/instance-plan-cache.png)
 
@@ -195,11 +219,13 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 ## YCSB workloads on Large record value
 
 ### Environment
+
 Environment: Cluster specification: 3 tidb (16c64g) + 3 tikv (16c64g)
 TiDB Version: v8.4.0
 Workload : [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
 
-### Throughput Comparison between Baseline and Key Settings
+### Performance Comparison
+
 Below result show the throughput improvement of Key Settings comparing to the baseline as OPS(operation per second).
 
 Baseline: the default settings
