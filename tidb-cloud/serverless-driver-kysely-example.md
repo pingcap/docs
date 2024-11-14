@@ -93,7 +93,7 @@ To complete this tutorial, you need the following:
 
    ```sql
    CREATE TABLE `test`.`person`  (
-     `id` int NOT NULL AUTO_INCREMENT,
+     `id` int(11) NOT NULL AUTO_INCREMENT,
      `name` varchar(255) NULL DEFAULT NULL,
      `gender` enum('male','female') NULL DEFAULT NULL,
      PRIMARY KEY (`id`) USING BTREE
@@ -205,7 +205,7 @@ mysql://[username]:[password]@[host]/[database]
 
    ```sql
    CREATE TABLE `test`.`person`  (
-     `id` int NOT NULL AUTO_INCREMENT,
+     `id` int(11) NOT NULL AUTO_INCREMENT,
      `name` varchar(255) NULL DEFAULT NULL,
      `gender` enum('male','female') NULL DEFAULT NULL,
      PRIMARY KEY (`id`) USING BTREE

@@ -28,7 +28,7 @@ The environment information of the upstream cluster is as follows:
 
   ```sql
   CREATE TABLE sale_01 (
-  id bigint NOT NULL auto_increment,
+  id bigint(20) NOT NULL auto_increment,
   uid varchar(40) NOT NULL,
   sale_num bigint DEFAULT NULL,
   PRIMARY KEY (id),
@@ -125,7 +125,7 @@ In this example, the column IDs of the upstream tables `sale_01` and `sale_02` a
 
 ```sql
 mysql> CREATE TABLE `sales` (
-         `id` bigint NOT NULL ,
+         `id` bigint(20) NOT NULL ,
          `uid` varchar(40) NOT NULL,
          `sale_num` bigint DEFAULT NULL,
          INDEX (`id`),
