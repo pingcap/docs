@@ -198,12 +198,12 @@ SHOW STATS_META WHERE table_name='T2'\G;
 
 ```
 *************************** 1. row ***************************
- Db_name: test
- Table_name: T2
-Partition_name:
- Update_time: 2023-05-11 02:16:50
- Modify_count: 20000
- Row_count: 20000
+          Db_name: test
+       Table_name: T2
+   Partition_name:
+      Update_time: 2023-05-11 02:16:50
+     Modify_count: 20000
+        Row_count: 20000
 1 row in set (0.03 sec)
 ```
 
@@ -213,10 +213,10 @@ SHOW STATS_HEALTHY WHERE table_name='T2'\G;
 
 ```
 *************************** 1. row ***************************
-    Db_name: test
-  Table_name: T2
+       Db_name: test
+    Table_name: T2
 Partition_name:
-    Healthy: 0
+       Healthy: 0
 1 row in set (0.00 sec)
 ```
 
