@@ -46,7 +46,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Faster Database Restores</b>
-            <br />Reduces recovery time for full database and point-in-time restores (PITR).
+            <br />Reduces recovery time for full database and Point in Time Recovery (PITR).
           </li>
           <br />
           <li>
