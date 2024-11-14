@@ -128,8 +128,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>Foreign Keys (GA)</b>
-            <br />Now generally available, providing robust relational integrity.
+            <b>Foreign Keys is generally available (GA)</b>
           </li>
           <br />
           <li>
