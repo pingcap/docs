@@ -245,7 +245,7 @@ Raft Engine is an embedded persistent storage engine with a log-structured desig
 
 ### Region Split
 
-A region in a TiKV cluster is not divided at the beginning, but is gradually split as data is written to it. The process is called Region split.
+A region in a TiKV cluster is not divided at the beginning but is gradually split as data is written to it. The process is called Region split.
 
 The mechanism of Region split is to use one initial Region to cover the entire key space, and generate new Regions through splitting existing ones every time the size of the Region or the number of keys has reached a threshold.
 
