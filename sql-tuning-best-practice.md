@@ -1,7 +1,17 @@
 ---
-title: SQL Tuning Best Practice
+title: The Practical Guide For SQL Tuning
 summary: Learn how to do SQL tuning in TiDB
 ---
+
+# Document Purpose and Objectives
+
+This guide is designed for TiDB SQL tuning beginners, with emphasis on:
+
+- Low Entry Barrier: Introducing tuning concepts and methods progressively
+- Practice-Oriented: Each optimization tip comes with specific steps and examples
+- Quick Start: Prioritizing the most common and effective optimization methods
+- Gentle Learning Curve: Focusing on practicality over theoretical complexity
+- Scenario-Based: Incorporating real business cases to demonstrate optimization effects
 
 # Introduction to SQL Tuning
 
@@ -233,7 +243,7 @@ In cases where automatic collection doesn't meet your needs, you can manually co
 
 1. Adjust the sample rate for more accurate or faster analysis
 2. Increase the number of top-N values collected
-3. Gather statistics for specific columns only
+3. Gather statistics for specific columns only or for all columns
 
 It's important to note that after manual collection, subsequent automatic gathering jobs will inherit the new parameters. This means that any customizations you've made during manual collection will be carried forward in future automatic analyses.
 
@@ -288,6 +298,8 @@ Furthermore, expression and operator push-down to the physical storage engines i
 This distribution of the physical plan allows the different components to collaborate and execute the query efficiently.
 
 ![cost-based-optimization](/media/sql-tuning/cost-based-optimization.png)
+
+More Detail for Cost-Based Optimization: [SQL Physical Optimization](/sql-physical-optimization.md).
 
 ## Understanding Execution Plans
 
@@ -516,6 +528,8 @@ This optimized plan demonstrates the importance of accurate statistics and prope
 |       └─TableRangeScan_82             | 1000.00  | 2048    | cop[tikv] | table:orders                                                                           | tikv_task:{pro...| N/A      | N/A  |
 +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
 ```
+
+More Detail for understanding execution plans : [TiDB Query Execution Plan Overview](/explain-overview.md) and [EXPLAIN Walkthrough](/explain-walkthrough.md).
 
 ## Index Strategy in TiDB
 
@@ -770,6 +784,7 @@ This section explains the best scenarios for using TiFlash in TiDB. TiFlash is o
 Using TiFlash strategically can enhance query performance and optimize resource usage in TiDB for data-intensive, analytical queries. Here are two use case of TiFlash
 
 ### Analytical Query
+
 The original query requires joining the order_line and item tables. The plan for executing this query on the TiKV storage engine takes 21.1 seconds.
 In the TiKV plan:
 
