@@ -57,7 +57,7 @@ The expected output is as follows:
 
 ## How to verify if TiCDC has replicated all updates after upstream stops updating?
 
-After the upstream TiDB cluster stops updating, you can verify if replication is complete by comparing the latest [TSO](/glossary.md#tso) timestamp of the upstream TiDB cluster with the replication progress in TiCDC. If the TiCDC replication progress timestamp  is greater than or equal to the upstream TiDB cluster's TSO, all updates have been replicated. To verify replication completeness, perform the following steps:
+After the upstream TiDB cluster stops updating, you can verify if replication is complete by comparing the latest [TSO](/glossary.md#tso) timestamp of the upstream TiDB cluster with the replication progress in TiCDC. If the TiCDC replication progress timestamp is greater than or equal to the upstream TiDB cluster's TSO, then all updates have been replicated. To verify replication completeness, perform the following steps:
 
 1. Get the latest TSO timestamp from the upstream TiDB cluster.
 
@@ -112,7 +112,7 @@ After the upstream TiDB cluster stops updating, you can verify if replication is
         ]
         ```
 
-        In the output, `"checkpoint": "2024-11-12 20:36:01.447"` indicates that TiCDC has replicated all upstream TiDB changes before this time. If this timestamp is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, all updates have been replicated downstream.
+        In the output, `"checkpoint": "2024-11-12 20:36:01.447"` indicates that TiCDC has replicated all upstream TiDB changes before this time. If this timestamp is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, then all updates have been replicated downstream.
 
     * **Method 2**: query Syncpoint from the downstream TiDB.
 
@@ -158,7 +158,7 @@ After the upstream TiDB cluster stops updating, you can verify if replication is
         +------------------------------------+
         ```
 
-        If the time corresponding to the latest `primary_ts` is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, TiCDC has replicated all updates downstream.
+        If the time corresponding to the latest `primary_ts` is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, then TiCDC has replicated all updates downstream.
 
 ## What is `gc-ttl` in TiCDC?
 
