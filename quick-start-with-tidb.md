@@ -9,6 +9,7 @@ aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-do
 This guide walks you through setting up a local TiDB cluster for development and testing using TiUP.
 
 TiDB is a distributed SQL database built for both transactional and analytical workloads. Key features:
+
 - MySQL compatible
 - Horizontally scalable
 - Real-time HTAP (Hybrid Transactional and Analytical Processing)
@@ -16,15 +17,14 @@ TiDB is a distributed SQL database built for both transactional and analytical w
 
 > **Note:**
 >
-> This deployment method is for development and testing only. 
-> For the fastest way to get started, try [TiDB Cloud Serverless](https://tidbcloud.com/free-trial) - our fully managed service with a free tier. 
-> For production deployments, see [Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) or [Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb/stable/tidb-in-kubernetes).
+> - This deployment method is for development and testing only.
+> - For the fastest way to get started, try [TiDB Cloud Serverless](https://tidbcloud.com/free-trial) - our fully managed service with a free tier.
+> - For production deployments, see [Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) or [Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb/stable/tidb-in-kubernetes).
 
 ## Set up your environment
 
 First, install TiUP, the package manager for TiDB:
 
-{{< copyable "shell-regular" >}}
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
 ```
@@ -44,7 +44,7 @@ source ~/.zshrc
 <div label="Linux">
 
 For Linux:
-{{< copyable "shell-regular" >}}
+
 ```shell
 source ~/.bash_profile
 ```
@@ -55,7 +55,6 @@ source ~/.bash_profile
 
 Launch a local TiDB cluster with one command:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup playground
 ```
@@ -78,14 +77,12 @@ You can connect to TiDB using either the built-in TiUP client or any MySQL-compa
 
 The TiUP client gives you a convenient way to interact with TiDB via the command line.
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup client
 ```
 
 Select the endpoint to connect, and try your first commands:
 
-{{< copyable "sql" >}}
 ```sql
 CREATE DATABASE hello;
 USE hello;
@@ -95,14 +92,15 @@ CREATE TABLE hello_tidb (
      name VARCHAR(50)
   );
 
-INSERT INTO hello_tidb VALUES 
+INSERT INTO hello_tidb VALUES
     (1, 'Hello World');
 
-SELECT * FROM hello_tidb; 
+SELECT * FROM hello_tidb;
 ```
 
 You should see this output:
-```log
+
+```
 SELECT * FROM hello_tidb;
 +----+-------------+
 | id | name        |
@@ -132,20 +130,20 @@ brew install mysql-client
 <div label="Linux">
 
 Linux (Debian/Ubuntu):
-{{< copyable "sql-regular" >}}
+
 ```shell
 sudo apt install mysql-client
 ```
 
 Linux (RHEL/CentOS):
-{{< copyable "sql-regular" >}}
+
 ```shell
 sudo yum install mysql
 ```
 </div>
 
 Check if the MySQL client is installed:
-{{< copyable "sql-regular" >}}
+
 ```shell
 mysql --version
 ```
@@ -154,7 +152,7 @@ You should see an output indicating the MySQL client version number.
 
 If you already have the MySQL client installed, you can connect to TiDB with:
 
-{{< copyable "shell-regular" >}}
+
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root
 ```
@@ -176,7 +174,6 @@ Additionally, `tiup playground` installed optional components:
 
 You can verify your running database cluster components with:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup playground display
 ```
@@ -189,7 +186,6 @@ The previous steps gave you an ephemeral environment - perfect for first experim
 
 Create a tagged playground that persists data between restarts:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup playground --tag dev-env
 ```
@@ -198,7 +194,6 @@ The `--tag` flag preserves your data after the playground environment restarts, 
 
 Tags also makes cleanup explicit with:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup clean dev-env
 ```
@@ -207,7 +202,6 @@ tiup clean dev-env
 
 You can also use playground options to specify different TiDB versions, or components that better meet your development and testing goals. For example, to start a local environment with version 8.1.0, 2 TiDB servers, 3 TiKV, 1 PD, and no TiFlash with:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup playground v8.1.0 --tag sample-app-env --db 2 --kv 3 --pd 1 --tiflash 0
 ```
@@ -218,12 +212,12 @@ TiUP will download the necessary binaries for the specified version and start th
 
 You can list all your playground environments with:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup status
 ```
 
 You will see an output similar to this:
+
 ```log
 Name            Component  PID    Status  ... Args
 sample-app-env  playground 30661  RUNNING ... tiup-playground v8.1.0 --tag sample-app-env --db 2 --kv 3 --pd 1 --tiflash 0
@@ -231,16 +225,17 @@ sample-app-env  playground 30661  RUNNING ... tiup-playground v8.1.0 --tag sampl
 
 If you stop a tagged playground cluster by pressing <kbd>Ctrl+C</kbd> in the terminal where you started it, you can start it again without losing data.
 
-To restart the environment, you can run `tiup playground` with the same arguments as in the `tiup status` output, as seen in the output above, or you can change them. This means that you have the flexibility to add and remove cluster components. 
+To restart the environment, you can run `tiup playground` with the same arguments as in the `tiup status` output, as seen in the output above, or you can change them. This means that you have the flexibility to add and remove cluster components.
 
 To add a TiProxy instance as a load balancer to your existing `sample-app-env` environment with:
 
-{{< copyable "shell-regular" >}}
+
 ```shell
 tiup playground v8.1.0 --tag sample-app-env --db 2 --kv 3 --pd 1 --tiflash 0 --tiproxy 1
 ```
 
 You should see the cluster starting normally, with an output like this:
+
 ```log
 TiDB Playground Cluster is started, enjoy!
 Connect TiDB: mysql --host 127.0.0.1 --port 4001 -u root
@@ -250,24 +245,27 @@ Connect TiProxy: mysql --host 127.0.0.1 --port 6000 -u root
 
 Now you can connect through TiProxy:
 
-{{< copyable "shell-regular" >}}
+
 ```shell
 mysql --host 127.0.0.1 --port 6000 -u root
 ```
 
 See all TiUP playground options with:
 
-{{< copyable "shell-regular" >}}
+
 ```shell
 tiup playground --help
 ```
 
 Common options:
+
 - `--*.host`: Bind to specific network interface
 - `--*.port`: Change default ports
 - `--without-monitor`: Start without monitoring stack
 
-> **Tip:** Create different tagged environments for different projects or testing scenarios.
+> **Tip:**
+>
+> Create different tagged environments for different projects or testing scenarios.
 
 ## Sample scalable database application
 
@@ -275,7 +273,6 @@ Let's create a simple weather monitoring system that stores data from weather st
 
 ### Create the schema
 
-{{< copyable "sql" >}}
 ```sql
 -- Create the schema/database for the weather monitoring app
 CREATE DATABASE sample_weather;
@@ -303,7 +300,6 @@ CREATE TABLE readings (
 
 Generate sample data using the following script:
 
-{{< copyable "sql" >}}
 ```sql
 -- Insert some weather stations from different cities
 INSERT INTO stations (name, location, latitude, longitude) VALUES
@@ -324,9 +320,9 @@ INSERT INTO stations (name, location, latitude, longitude) VALUES
 Open two new terminal windows to generate write and read workloads through TiProxy.
 
 Terminal 1: Write Workload
+
 Run this command to continuously insert weather readings:
 
-{{< copyable "shell-regular" >}}
 ```shell
 while true; do
     mysql -h 127.0.0.1 -P 6000 -u root -D sample_weather -vv -e "INSERT INTO readings
@@ -337,9 +333,9 @@ done
 ```
 
 Terminal 2: Read Workload
+
 Run this command to continuously query the data:
 
-{{< copyable "shell-regular" >}}
 ```shell
 while true; do
     mysql -h 127.0.0.1 -P 6000 -u root -D sample_weather -e "SELECT s.name, s.location,
@@ -363,26 +359,32 @@ Now that you have a running application with active read and write workloads, le
 Access TiDB Dashboard by checking its URL on the terminal you are running TiUP playground (typically http://127.0.0.1:2379/dashboard - user: `root`, no password) to:
 
 1. View your running queries:
-   - Go to "SQL Statements" to see your weather data queries
-   - Check execution times, and additional optional columns, and click on the statement for more execution details
-   - Go to "Slow Queries" to identify queries that might need optimization
+
+    - Go to "SQL Statements" to see your weather data queries
+    - Check execution times, and additional optional columns, and click on the statement for more execution details
+    - Go to "Slow Queries" to identify queries that might need optimization
 
 2. Monitor instance status:
-   - Check "Overview" and "Cluster Info" for general topology, and resource usage
-   - Check "Monitoring" to see the database load and other relevant metrics
-   - Check "Search Logs" for any query errors
+
+    - Check "Overview" and "Cluster Info" for general topology, and resource usage
+    - Check "Monitoring" to see the database load and other relevant metrics
+    - Check "Search Logs" for any query errors
 
 ### Grafana: system performance
 
 Access Grafana by checking its URL on the terminal you are running TiUP playground (typically http://127.0.0.1:3000 - user: `admin`, password: `admin`). Change the password or Skip. You can visualize the built-in dashboards by clicking on the Search icon and the folder "Test-Cluster":
 
 1. Detailed TiDB metrics:
-   - Search for "Overview", for general cluster health status
+
+    Search for "Overview", for general cluster health status
 
 2. TiProxy Load Balancing:
-   - Search for "TiProxy", and check the "Balance" row
 
-> **Tip:** Keep these monitoring pages open while experimenting with different data volumes or query patterns to understand how your application behaves under load.
+    Search for "TiProxy", and check the "Balance" row
+
+> **Tip:**
+>
+> Keep these monitoring pages open while experimenting with different data volumes or query patterns to understand how your application behaves under load.
 
 ## Scaling your cluster
 
@@ -393,23 +395,25 @@ As your weather monitoring system grows, you'll need to handle more stations, re
 Before scaling, set up these monitoring views to watch the scaling process:
 
 1. Open TiDB Dashboard (typically http://127.0.0.1:2379/dashboard):
-   - Go to "Cluster Info", "Store Topology"
+
+    Go to "Cluster Info", "Store Topology"
 
 2. Open Grafana (typically http://127.0.0.1:3000):
-   - Find "TiKV-Summary" dashboard
-   - Look for the "Cluster" panel:
-     - Store, Available, and Capacity size charts
+
+    - Find "TiKV-Summary" dashboard
+    - Look for the "Cluster" panel:
+        - Store, Available, and Capacity size charts
 
 ### Add storage capacity (TiKV)
 
 With monitoring in place, let's add two additional TiKV nodes (scale-out). Open a new terminal and run:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup playground scale-out --kv 2
 ```
 
 Watch the expansion:
+
 - In TiDB Dashboard, refresh the "Cluster Info", "Store Topology". You should see the new TiKV nodes in the topology
 - In Grafana, watch TiKV size increase
 - In your application terminals, verify continuous data ingestion without any disruption
@@ -418,7 +422,6 @@ Watch the expansion:
 
 Let's remove one TiKV node. For these scale-in operations, we specify the exact node we want to remove using its PID. First, in your available terminal, check the TiKV nodes PIDs:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup playground display
 ```
@@ -433,7 +436,6 @@ Pid     Role    Uptime
 
 You can scale-in your cluster by removing one TiKV node of your choice using its PID. For example, run the following replacing the `--pid` value with your `tikv` PID:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup playground scale-in --pid 51464
 ```
@@ -442,12 +444,12 @@ tiup playground scale-in --pid 51464
 
 Now that storage is expanded, let's add TiDB nodes while watching query distribution:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup playground scale-out --db 1
 ```
 
 Watch the query layer scaling:
+
 - TiDB Dashboard, "Cluster Info", "Instances". Check the new TiDB instance
 - Grafana, search for "TiProxy-Summary", and expand the "Query Summary" or "Traffic". You should see a new instance in the backend and the traffic is being balanced across them
 
@@ -456,25 +458,25 @@ Watch the query layer scaling:
 TiDB supports real-time analytics through its columnar storage engine, TiFlash. Let's add it to our playground cluster:
 
 1. Add TiFlash node:
-{{< copyable "shell-regular" >}}
-```shell
-tiup playground scale-out --tiflash 1
-```
+
+    ```shell
+    tiup playground scale-out --tiflash 1
+    ```
 
 2. Enable TiFlash replica for our weather data in the table `readings`. Using the MySQL client or `tiup client` run:
-{{< copyable "sql" >}}
-```sql
-USE sample_weather;
-ALTER TABLE readings SET TIFLASH REPLICA 1;
-```
+
+    ```sql
+    USE sample_weather;
+    ALTER TABLE readings SET TIFLASH REPLICA 1;
+    ```
 
 3. Check replication progress:
-{{< copyable "sql" >}}
-```sql
-SELECT table_schema, table_name, 
-       replica_count, available, progress
-FROM information_schema.tiflash_replica;
-```
+
+    ```sql
+    SELECT table_schema, table_name,
+        replica_count, available, progress
+    FROM information_schema.tiflash_replica;
+    ```
 
 Once the replica is ready (progress=1.0), you can run analytical queries that will automatically use TiFlash when beneficial. Check the in the TiDB Dashboard, SQL Statements, "#Plans" columns. If there is a new plan, you can inspect the execution details to see if there is a task performed by `mpp[tiflash]`.
 
@@ -488,14 +490,12 @@ If you want to clean up after experimenting:
 2. Stop the playground cluster (<kbd>Ctrl+C</kbd> in the playground terminal)
 3. Clean up the environment:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup clean sample-app-env
 ```
 
 If you want to clean everything, all environments and components, run:
 
-{{< copyable "shell-regular" >}}
 ```shell
 tiup clean --all
 ```
@@ -503,6 +503,7 @@ tiup clean --all
 ## What's next
 
 You've successfully:
+
 - Set up a distributed SQL database
 - Built a sample weather monitoring application
 - Explored monitoring and scaling
@@ -511,10 +512,12 @@ You've successfully:
 Continue your learning journey!
 
 ### For Developers
+
 - [Developer Guide](https://docs.pingcap.com/tidb/stable/dev-guide-overview) - guides by popular languages, frameworks, and tools
 - [TiDB Developer Courses](https://www.pingcap.com/education/#developer-courses) - free self-paced courses
 
 ### For Operations
+
 - [Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)
 - [Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb/stable/tidb-in-kubernetes)
 - [Migrate from MySQL-compatible databases to TiDB](https://docs.pingcap.com/tidb/stable/quick-start-with-dm)
@@ -523,9 +526,11 @@ Continue your learning journey!
 - [Database Operations Courses](https://www.pingcap.com/education/#database-operation-courses) - deep dive into operations and get certified
 
 ### For Data Analytics
+
 - [Use TiFlash for HTAP](https://docs.pingcap.com/tidb/stable/quick-start-with-htap)
 
 ### Community Resources
+
 - [Join TiDB Community](https://tidb.io/community)
 - [TiDB Blog](https://pingcap.com/blog)
 - [GitHub](https://github.com/pingcap/tidb)
