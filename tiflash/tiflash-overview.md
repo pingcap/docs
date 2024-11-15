@@ -110,7 +110,7 @@ You can use TiDB to read TiFlash replicas for analytical processing. See the fol
 
 <CustomContent platform="tidb">
 
-To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick start with TiDB HTAP](/quick-start-with-htap.md).
+To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start with TiDB HTAP](/quick-start-with-htap.md).
 
 </CustomContent>
 

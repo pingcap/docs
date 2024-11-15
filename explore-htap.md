@@ -9,7 +9,7 @@ This guide describes how to explore and use the features of TiDB Hybrid Transact
 
 > **Note:**
 >
-> If you are new to TiDB HTAP and want to start using it quickly, see [Quick start with TiDB HTAP](/quick-start-with-htap.md).
+> If you are new to TiDB HTAP and want to start using it quickly, see [Quick Start with TiDB HTAP](/quick-start-with-htap.md).
 
 ## Use cases
 

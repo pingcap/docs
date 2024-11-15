@@ -1,9 +1,9 @@
 ---
-title: Quick start with TiDB HTAP
+title: Quick Start with TiDB HTAP
 summary: Learn how to quickly get started with the TiDB HTAP.
 ---
 
-# Quick start with TiDB HTAP
+# Quick Start with TiDB HTAP
 
 This guide walks you through the quickest way to get started with TiDB's one-stop solution of Hybrid Transactional and Analytical Processing (HTAP).
 

@@ -12,7 +12,7 @@
   - [Roadmap](/tidb-roadmap.md)
 - Get Started
   - [Quick Start with TiDB](/quick-start-with-tidb.md)
-  - [Quick start with HTAP](/quick-start-with-htap.md)
+  - [Quick Start with HTAP](/quick-start-with-htap.md)
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
