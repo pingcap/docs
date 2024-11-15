@@ -42,7 +42,7 @@ tiup br backup full \
 
 In the preceding command:
 
-- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2024-06-28 13:30:00 +08:00`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--backupts`: The time point of the snapshot. The format can be [TSO](/tso.md) or timestamp, such as `400036290571534337` or `2024-06-28 13:30:00 +08:00`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 - `--log-file`: The target file where `br` log is written.
 
