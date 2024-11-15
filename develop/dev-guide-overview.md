@@ -12,7 +12,7 @@ This guide is written for application developers, but if you are interested in t
 
 This tutorial shows how to quickly build an application using TiDB, the possible use cases of TiDB and how to handle common problems.
 
-Before reading this page, it is recommended that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md).
+Before reading this page, it is recommended that you read the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md).
 
 </CustomContent>
 
