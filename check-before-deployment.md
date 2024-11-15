@@ -386,8 +386,6 @@ Take the following steps to check the current operating system configuration and
     > If `noop [deadline] cfq` is output, the I/O Scheduler for the disk is in the `deadline` mode. You need to change it to `noop`.
 
     If your data directory uses an NVMe device, run the following command to check the I/O Scheduler:
-   
-    {{< copyable "shell-regular" >}}
 
     ```bash
     cat /sys/block/nvme[01]*/queue/scheduler
@@ -417,7 +415,7 @@ Take the following steps to check the current operating system configuration and
 
     > **Note:**
     >
-    > - If multiple disks are allocated with data directories, you need to execute the above command several times to record the `ID_SERIAL` of each disk.
+    > - If multiple disks are allocated with data directories, you need to execute the above command for each disk to record the `ID_SERIAL` of each disk.
     > - If your device uses the `noop` or `none` Scheduler, you do not need to record the `ID_SERIAL` or configure udev rules or the tuned profile.
 
 4. Execute the following command to see the power policy of the cpufreq module:
