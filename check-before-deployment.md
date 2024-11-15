@@ -41,6 +41,13 @@ Take the `/dev/nvme0n1` data disk as an example:
     parted -s -a optimal /dev/nvme0n1 mklabel gpt -- mkpart primary ext4 1 -1
     ```
 
+    For large NVMe devices, you can create multiple partitions:
+
+    ```bash
+    parted -s -a optimal /dev/nvme0n1 mklabel gpt -- mkpart primary ext4 1 2000GB
+    parted -s -a optimal /dev/nvme0n1 -- mkpart primary ext4 2000GB -1
+    ```
+
     > **Note:**
     >
     > Use the `lsblk` command to view the device number of the partition: for a NVMe disk, the generated device number is usually `nvme0n1p1`; for a regular disk (for example, `/dev/sdb`), the generated device number is usually `sdb1`.
@@ -92,6 +99,7 @@ Take the `/dev/nvme0n1` data disk as an example:
 
     ```bash
     mkdir /data1 && \
+    systemctl daemon-reload && \
     mount -a
     ```
 
@@ -137,25 +145,25 @@ Some operations in TiDB require writing temporary files to the server, so it is 
 
 - `Fast Online DDL` work area
 
-    When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is enabled, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the user that runs TiDB has read and write permissions for that directory of the operating system. Taking the default directory `/tmp/tidb` as an example:
+    When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is enabled, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the user that runs TiDB has read and write permissions for that directory of the operating system. The default directory `/tmp/tidb` uses tmpfs (temporary file system). It is recommended to explicitly specify a  disk directory. The following uses `/data/tidb-deploy/tempdir` as an example:
 
     > **Note:**
     > 
     > If DDL operations on large objects exist in your application, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
 
     ```shell
-    sudo mkdir /tmp/tidb
+    sudo mkdir -p /data/tidb-deploy/tempdir
     ```
 
-    If the `/tmp/tidb` directory already exists, make sure the write permission is granted.
+    If the `/data/tidb-deploy/tempdir` directory already exists, make sure the write permission is granted.
 
     ```shell
-    sudo chmod -R 777 /tmp/tidb
+    sudo chmod -R 777 /data/tidb-deploy/tempdir
     ```
 
     > **Note:**
     >
-    > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions for that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues during runtime.
+    > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions for that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) will be disabled during runtime.
 
 ## Check and stop the firewall service of target machines
 
@@ -335,7 +343,11 @@ sudo systemctl enable ntpd.service
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
 1. Disable THP (Transparent Huge Pages). The memory access pattern of databases tends to be sparse rather than consecutive. If the high-level memory fragmentation is serious, higher latency will occur when THP pages are allocated.
-2. Set the I/O Scheduler of the storage media to `noop`. For the high-speed SSD storage media, the kernel's I/O scheduling operations can cause performance loss. After the Scheduler is set to `noop`, the performance is better because the kernel directly sends I/O requests to the hardware without other operations. Also, the noop Scheduler is better applicable.
+2. Set the I/O Scheduler of the storage media.
+
+    - For the high-speed SSD storage, the kernel's default I/O scheduling operations might cause performance loss. It is recommended to set the I/O Scheduler to `noop`, which allows the kernel to pass I/O requests directly to hardware without scheduling, thus improving performance.
+    - For NVMe storage, the default I/O Scheduler is `none`, so no adjustment is needed.
+
 3. Choose the `performance` mode for the cpufrequ module which controls the CPU frequency. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
 Take the following steps to check the current operating system configuration and configure optimal parameters:
@@ -356,9 +368,9 @@ Take the following steps to check the current operating system configuration and
     >
     > If `[always] madvise never` is output, THP is enabled. You need to disable it.
 
-2. Execute the following command to see the I/O Scheduler of the disk where the data directory is located. Assume that you create data directories on both sdb and sdc disks:
+2. Execute the following command to see the I/O Scheduler of the disk where the data directory is located.
 
-    {{< copyable "shell-regular" >}}
+    If your data directory uses an SD or VD device, run the following command to check the I/O Scheduler:
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -372,6 +384,23 @@ Take the following steps to check the current operating system configuration and
     > **Note:**
     >
     > If `noop [deadline] cfq` is output, the I/O Scheduler for the disk is in the `deadline` mode. You need to change it to `noop`.
+
+    If your data directory uses an NVMe device, run the following command to check the I/O Scheduler:
+   
+    {{< copyable "shell-regular" >}}
+
+    ```bash
+    cat /sys/block/nvme[01]*/queue/scheduler
+    ```
+
+    ```
+    [none] mq-deadline kyber bfq
+    [none] mq-deadline kyber bfq
+    ```
+    
+    > **Note:**
+    >
+    > `[none] mq-deadline kyber bfq` indicates that the NVMe device uses the `none` I/O Scheduler, and no changes are needed.
 
 3. Execute the following command to see the `ID_SERIAL` of the disk:
 
@@ -388,7 +417,8 @@ Take the following steps to check the current operating system configuration and
 
     > **Note:**
     >
-    > If multiple disks are allocated with data directories, you need to execute the above command several times to record the `ID_SERIAL` of each disk.
+    > - If multiple disks are allocated with data directories, you need to execute the above command several times to record the `ID_SERIAL` of each disk.
+    > - If your device uses the `noop` or `none` Scheduler, you do not need to record the `ID_SERIAL` or configure udev rules or the tuned profile.
 
 4. Execute the following command to see the power policy of the cpufreq module:
 
@@ -465,6 +495,10 @@ Take the following steps to check the current operating system configuration and
 
         3. Apply the new tuned profile:
 
+            > **Note:**
+            >
+            > If your device uses the `noop` or `none` I/O Scheduler, skip this step. No Scheduler configuration is needed in the tuned profile.
+
             {{< copyable "shell-regular" >}}
 
             ```bash
@@ -494,12 +528,12 @@ Take the following steps to check the current operating system configuration and
             {{< copyable "shell-regular" >}}
 
             ```bash
-            grubby --args="transparent_hugepage=never" --update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64
+            grubby --args="transparent_hugepage=never" --update-kernel `grubby --default-kernel`
             ```
 
             > **Note:**
             >
-            > `--update-kernel` is followed by the actual default kernel version.
+            > You can also specify the actual version number after `--update-kernel`, for example, `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64`.
 
         3. Execute `grubby --info` to see the modified default kernel configuration:
 
@@ -546,6 +580,10 @@ Take the following steps to check the current operating system configuration and
             ```
 
         6. Apply the udev script:
+
+            > **Note:**
+            >
+            > If your device uses the `noop` or `none` I/O Scheduler, skip this step. No udev rules configuration is needed.
 
             {{< copyable "shell-regular" >}}
 
@@ -639,6 +677,7 @@ Take the following steps to check the current operating system configuration and
     > - The setting of `vm.min_free_kbytes` affects the memory reclaim mechanism. Setting it too large reduces the available memory, while setting it too small might cause memory request speeds to exceed background reclaim speeds, leading to memory reclamation and consequent delays in memory allocation.
     > - It is recommended to set `vm.min_free_kbytes` to `1048576` KiB (1 GiB) at least. If [NUMA is installed](/check-before-deployment.md#install-the-numactl-tool), it is recommended to set it to `number of NUMA nodes * 1048576` KiB.
     > - For servers with memory sizes less than 16 GiB, it is recommended to keep the default value of `vm.min_free_kbytes` unchanged.
+    > - `tcp_tw_recycle` is removed in Linux kernel 4.12. Skip this setting if you are using a later kernel version.
 
 10. Execute the following command to configure the user's `limits.conf` file:
 
