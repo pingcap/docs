@@ -7,7 +7,14 @@ summary: Learn about the tools to migrate data from Vitess to TiDB.
 
 This document describes the tools that you can use to migrate data from [Vitess](https://vitess.io/) to TiDB. 
 
-As the backend of Vitess is based on MySQL, when migrating data from Vitess to TiDB, you can use the same migration tools that apply to MySQL, such as [Dumpling](/dumpling-overview.md), [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), and [TiDB Data Migration (DM)](/dm/dm-overview.md). Note that these tools should be set up for each shard in Vitess for data migration. Generally, it is recommended to use DM with `task-mode` set to `all` and `import-mode` set to `physical`. If your data size exceeds 10 TiB, it is recommended to do the import in two steps, with Dumpling and TiDB Lightning as the first step to import existing data and DM as the second step to import incremental data.
+Because the backend of Vitess is based on MySQL, when migrating data from Vitess to TiDB, you can use the same migration tools that apply to MySQL, such as [Dumpling](/dumpling-overview.md), [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), and [TiDB Data Migration (DM)](/dm/dm-overview.md). Note that these tools should be set up for each shard in Vitess for data migration. 
+
+Generally, before data migration, it is recommended to configure the DM task to set `task-mode` to `all` and `import-mode` to `physical`. For more information, see [Task configuration file template (advanced)](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced). 
+
+If your data size exceeds 10 TiB, it is recommended to do the import in two steps:
+
+1. Use Dumpling and TiDB Lightning to import existing data.
+2. Use DM to import incremental data.
 
 In addition to these tools, you can also use [Debezium connector for Vitess](https://debezium.io/documentation/reference/connectors/vitess.html). This connector enables you to use [Kafka Connect](https://kafka.apache.org/documentation/#connect) or [Apache Flink](https://nightlies.apache.org/flink/flink-docs-stable/) to stream changes from Vitess to TiDB.
 
