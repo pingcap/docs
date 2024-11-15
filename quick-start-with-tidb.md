@@ -35,12 +35,12 @@ The install script added `tiup` to your shell path. Open a new terminal or reloa
 <div label="macOS">
 
 For macOS:
+
 ```shell
 source ~/.zshrc
 ```
 
 </div>
-
 <div label="Linux">
 
 For Linux:
@@ -50,6 +50,7 @@ source ~/.bash_profile
 ```
 
 </div>
+</SimpleTab>
 
 ## Start your database
 
@@ -126,7 +127,6 @@ brew install mysql-client
 ```
 
 </div>
-
 <div label="Linux">
 
 Linux (Debian/Ubuntu):
@@ -141,6 +141,7 @@ Linux (RHEL/CentOS):
 sudo yum install mysql
 ```
 </div>
+</SimpleTab>
 
 Check if the MySQL client is installed:
 
