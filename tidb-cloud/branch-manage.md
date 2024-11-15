@@ -25,9 +25,9 @@ To create a branch, perform the following steps:
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
 2. Click **Branches** in the left navigation pane.
 3. Click on **Create Branch** in the top right corner or click on **Create Branch** in the **...** in the **Action** column in the row of your target parent branch
-4. Enter the branch name.
-5. Select the parent branch; `main` represents the current cluster.
-6. Select the Include data up to. 
+4. Enter the branch **Name**.
+5. Select the **Parent branch**; `main` represents the current cluster.
+6. Select the **Include data up to**. 
 
 Depending on the data size in your cluster, the branch creation will be completed in a few minutes.
 
@@ -70,7 +70,8 @@ To delete a branch, perform the following steps:
 5. Confirm the deletion.
 
 ## Reset a branch
-Reset will sync your branch with the latest data from its parent. This operation is irreversible.
+
+Reset will synchronize your branch with the latest data from its parent. This operation is irreversible.
 To reset a branch, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
