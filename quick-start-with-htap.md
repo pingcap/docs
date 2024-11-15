@@ -1,9 +1,9 @@
 ---
-title: Use TiFlash for TiDB HTAP
+title: Quick start with TiDB HTAP
 summary: Learn how to quickly get started with the TiDB HTAP.
 ---
 
-# Use TiFlash for TiDB HTAP
+# Quick start with TiDB HTAP
 
 This guide walks you through the quickest way to get started with TiDB's one-stop solution of Hybrid Transactional and Analytical Processing (HTAP).
 

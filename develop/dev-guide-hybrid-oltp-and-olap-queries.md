@@ -248,7 +248,7 @@ For more information about how TiDB chooses to use TiFlash, see [Use TiDB to rea
 
 <CustomContent platform="tidb">
 
-- [Use TiFlash for TiDB HTAP](/quick-start-with-htap.md)
+- [Quick start with HTAP](/quick-start-with-htap.md)
 - [Explore HTAP](/explore-htap.md)
 
 </CustomContent>
