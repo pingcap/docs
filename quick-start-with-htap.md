@@ -26,7 +26,7 @@ In this document, you can experience the convenience and high performance of TiD
 
 ### Step 1. Deploy a local test environment
 
-Before using TiDB HTAP, follow the steps in the [Quick Start with TiDB Self-Managed Using TiUP Playground](/quick-start-with-tidb.md) to prepare a local test environment, and run the following command to deploy a TiDB cluster:
+Before using TiDB HTAP, follow the steps in the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md) to prepare a local test environment, and run the following command to deploy a TiDB cluster:
 
 {{< copyable "shell-regular" >}}
 
