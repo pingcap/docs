@@ -40,10 +40,6 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
 #### Step 2. Configure Amazon S3 access
 
-> **Note:**
->
-> Once the Amazon S3 access configuration is performed for one cluster in a project, you can use the same bucket as a destination for audit logs from all clusters in the same project.
-
 1. Get the TiDB Cloud account ID and the External ID of the TiDB cluster that you want to enable audit logging.
 
     1. In the TiDB Cloud console, choose a project and a cluster deployed on AWS.
