@@ -11,7 +11,7 @@
   - [Credits](/credits.md)
   - [Roadmap](/tidb-roadmap.md)
 - Get Started
-  - [Quick Start Using TiUP Playground](/quick-start-with-tidb.md)
+  - [Quick Start with TiDB](/quick-start-with-tidb.md)
   - [Quick Start with HTAP](/quick-start-with-htap.md)
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
