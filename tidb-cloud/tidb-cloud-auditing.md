@@ -113,10 +113,6 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
 #### Step 2. Configure GCS access
 
-> **Note:**
->
-> Once the GCS access configuration is performed for one cluster in a project, you can use the same bucket as a destination for audit logs from all clusters in the same project.
-
 1. Get the Google Cloud Service Account ID of the TiDB cluster that you want to enable audit logging.
 
     1. In the TiDB Cloud console, choose a project and a cluster deployed on Google Cloud Platform.
