@@ -787,11 +787,13 @@ Using TiFlash strategically can enhance query performance and optimize resource 
 
 The original query requires joining the order_line and item tables. The plan for executing this query on the TiKV storage engine takes 21.1 seconds.
 In the TiKV plan:
+
 - TiDB needs to fetch 3,864,397 rows from the lineitem table and 10 million rows from the part table.
 - The hash join operation (HashJoin_21) is performed at the TiDB layer, along with the subsequent projection (Projection_38) and aggregation (HashAgg_9) operations.
 
 The plan for executing the same query on the TiFlash MPP (Massively Parallel Processing) takes only 1.41 seconds, which is 15 times faster than the TiKV plan.
 In the TiFlash MPP plan:
+
 - The optimizer recognizes that both the order_line and item tables have TiFlash replicas available.
 - As a result, the optimizer is able to push down the entire query execution, including the table scans, hash join, column projection, and aggregation, to the TiFlash MPP layer.
 - Performing the entire query execution on the TiFlash MPP layer, which is optimized for analytical workloads, leads to the significant performance improvement compared to the TiKV plan.
@@ -799,11 +801,9 @@ In the TiFlash MPP plan:
 The key difference between the two plans is that the TiFlash MPP plan can leverage the distributed processing capabilities of the TiFlash MPP layer to execute the entire query more efficiently, while the TiKV plan requires more coordination between the TiDB and TiKV components.
 
 ```sql
-select
-    100.00 * sum(case when i_data like 'PR%' then ol_amount else 0 end) / (1+sum(ol_amount)) as promo_revenue
+select 100.00 * sum(case when i_data like 'PR%' then ol_amount else 0 end) / (1+sum(ol_amount)) as promo_revenue
 from	order_line, item
-where	ol_i_id = i_id and ol_delivery_d >= '2007-01-02 00:00:00.000000'
-    and ol_delivery_d < '2030-01-02 00:00:00.000000';
+where	ol_i_id = i_id and ol_delivery_d >= '2007-01-02 00:00:00.000000' and ol_delivery_d < '2030-01-02 00:00:00.000000';
 ```
 
 TiKV Plan
@@ -846,10 +846,13 @@ TiFlash MPP Plan
 |                   └─TableFullScan_32       | 10000000.00 | 10000000 | mpp[tiflash] | table:part     | tiflash_task:{time:59.2ms, ...       |
 +--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
 ```
+
 ### SaaS Arbitrary Filtering Workloads
 
 #### Overview
+
 In SaaS applications, it's common to structure tables with composite primary keys that include tenant identification. Let's look at a typical example where TiFlash can significantly improve query performance.
+
 #### Case Study: Multi-tenant Data Access
 
 Consider a table design with a composite primary key: (tenantId, objectTypeId, objectId). A common query pattern is to:
@@ -861,8 +864,9 @@ Consider a table design with a composite primary key: (tenantId, objectTypeId, o
 
 - TiKV Plan: When executing this query on TiKV storage engine, it takes 2 minutes 38.6 seconds as it requires a table range scan operation, and cannot utilize indexes effectively for dynamic filtering conditions across hundreds of columns.
 - TiFlash Plan: The same query on TiFlash MPP engine takes only 3.44 seconds - almost 46 times faster. Since data in TiFlash is sorted by primary key, queries filtered by the primary key's prefix will also use a TableRangeScan instead of a full table scan.
+
 ```sql
-ITH `results` AS (
+WITH `results` AS (
   SELECT field1, field2, field3, field4
   FROM usertable
   where tenantId = 1234 and objectTypeId = 6789
@@ -881,6 +885,7 @@ FROM
     FROM `results`
   ) `result_and_count`;
 ```
+
 TiKV Plan
 
 ```
