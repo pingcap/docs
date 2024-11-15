@@ -11,7 +11,7 @@ With TiDB Cloud Serverless branches, developers can work in parallel, iterate ra
 
 ## Implementations
 
-When a branch for a cluster is created, the data in the branch diverges from the original cluster or the parent branch at a specific time point. This means that subsequent changes made in either the parent or the branch will not be synchronized with each other.
+When a branch for a cluster is created, the data in the branch diverges from the original cluster or the parent branch including data from a specific time. This means that subsequent changes made in either the parent or the branch will not be synchronized with each other.
 
 To ensure fast and seamless branch creation, TiDB Cloud Serverless uses a copy-on-write technique for sharing data between the original cluster and its branches. This process usually completes within a few minutes and is imperceptible to users, ensuring that it does not affect the performance of your original cluster.
 
