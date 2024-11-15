@@ -248,7 +248,7 @@
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
-    - [The Practical Guide For SQL Tuning](/sql-tuning-best-practice.md)
+    - [A Practical Guide For SQL Tuning](/sql-tuning-best-practice.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
     - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)

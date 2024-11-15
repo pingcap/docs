@@ -1,5 +1,5 @@
 ---
-title: The Practical Guide For SQL Tuning
+title: A Practical Guide For SQL Tuning
 summary: Learn how to do SQL tuning in TiDB
 ---
 
