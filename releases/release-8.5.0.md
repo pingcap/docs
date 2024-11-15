@@ -23,11 +23,13 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Scalability
 
-* The Schema cache memory limit feature is now Generally Available (GA), reducing memory usage in large-scale data scenarios.  [#50959](https://github.com/pingcap/tidb/issues/50959) @[tiancaiamao](https://github.com/tiancaiamao) @[wjhuang2016](https://github.com/wjhuang2016) @[gmhdbjd](https://github.com/gmhdbjd) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--1976-->
+* The schema cache memory limit feature is now generally available (GA), reducing memory usage in scenarios with hundreds of thousands or even millions of databases or tables. [#50959](https://github.com/pingcap/tidb/issues/50959) @[tiancaiamao](https://github.com/tiancaiamao) @[wjhuang2016](https://github.com/wjhuang2016) @[gmhdbjd](https://github.com/gmhdbjd) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--1976-->
 
-    In some SaaS scenarios, when the number of tables reaches hundreds of thousands or even millions, the schema meta can consume significant memory. Enabling this feature allows the system to use the LRU algorithm to cache and evict the corresponding schema meta information, effectively reducing memory usage. Starting from v8.4, this feature is enabled by default with a default value of 512MiB, and users can adjust it as needed through the variable [tidb_schema_cache_size](/system-variables#tidb_schema_cache_size-new-in-v800).
+    In some SaaS scenarios, when the number of tables reaches hundreds of thousands or even millions, the schema meta can consume significant memory. Enabling this feature allows TiDB to use the LRU algorithm to cache and evict the corresponding schema meta information, effectively reducing memory usage. 
+    
+    Starting from v8.4.0, this feature is enabled by default with a default value of `536870912` (that is, 512MiB). You can adjust it as needed through the variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 
-    For more information, see [Documentation](link).
+    For more information, see [Documentation](/schema-cache.md).
 
 * Use the Active PD Follower feature to enhance the scalability of PD's Region information query service (General Availability) [#7431](https://github.com/tikv/pd/issues/7431) @[okJiang](https://github.com/okJiang)
 
@@ -81,17 +83,17 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [Documentation](link).
 
-* Introduction of ADMIN ALTER DDL JOBS syntax to support online modification of DDL job variables [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
+* Introduce the `ADMIN ALTER DDL JOBS` statement to support modifying the DDL jobs online [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
 
-    Starting from v8.3, it is now possible to set the variables [tidb_ddl_reorg_batch_size](/system-variables#tidb_ddl_reorg_batch_size)  and [tidb_ddl_reorg_worker_cnt](/system-variables#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, the DDL job must first be canceled, the variables adjusted, and then resubmit the job.
+    Starting from v8.3.0, you can set the variables [`tidb_ddl_reorg_batch_size`](/system-variables#tidb_ddl_reorg_batch_size)  and [`tidb_ddl_reorg_worker_cnt`](/system-variables#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, you need to cancel the DDL job first, adjust the variables, and then resubmit the job.
 
-    Since v8.5, the ADMIN ALTER DDL JOBS syntax has been introduced, allowing online adjustment of variable values for specific DDL jobs. This enables flexible balancing of resource consumption and performance, with changes limited to an individual job, making the impact more controllable. For example:
+    TiDB v8.5.0 introduces the `ADMIN ALTER DDL JOBS` statement, allowing online adjustment of variable values for specific DDL jobs. This enables flexible balancing of resource consumption and performance, with changes limited to an individual job, making the impact more controllable. For example:
 
-    - `ADMIN ALTER DDL JOBS job_id THREAD = 8;` — Adjusts the `tidb_ddl_reorg_worker_cnt` for the specified DDL task.
-    - `ADMIN ALTER DDL JOBS job_id BATCH_SIZE = 256;` — Adjusts the `tidb_ddl_reorg_batch_size` for the specified DDL task.
-    - `ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB';` — Adjusts the write traffic size for index data on each TiKV node.
+    - `ADMIN ALTER DDL JOBS job_id THREAD = 8;`: adjusts the `tidb_ddl_reorg_worker_cnt` for the specified DDL task.
+    - `ADMIN ALTER DDL JOBS job_id BATCH_SIZE = 256;`: adjusts the `tidb_ddl_reorg_batch_size` for the specified DDL task.
+    - `ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB';`: adjusts the write traffic size for index data on each TiKV node.
 
-  For more information, see [Documentation](link).
+  For more information, see [Documentation](/sql-statements/sql-statement-admin-alter-ddl.md).
 
 ### DB operations
 
