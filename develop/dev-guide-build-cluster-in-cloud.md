@@ -108,10 +108,10 @@ mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
 
 <div label="Linux">
 
-For Linux, the following takes CentOS 7 as an example:
+For Linux, the following takes Ubuntu as an example:
 
 ```shell
-yum install mysql
+apt-get install mysql-client
 ```
 
 Then, verify that the MySQL client is installed successfully:

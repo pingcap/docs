@@ -9,12 +9,7 @@ This document describes how to deploy and maintain a TiCDC cluster, including th
 
 ## Software and hardware recommendations
 
-In production environments, the recommendations of software and hardware for TiCDC are as follows:
-
-| Linux OS       | Version         |
-| :----------------------- | :----------: |
-| Red Hat Enterprise Linux | 7.3 or later versions   |
-| CentOS                   | 7.3 or later versions   |
+In production environments, the recommendations of hardware for TiCDC are as follows:
 
 | CPU | Memory | Disk | Network | Number of TiCDC cluster instances (minimum requirements for production environment) |
 | :--- | :--- | :--- | :--- | :--- |
