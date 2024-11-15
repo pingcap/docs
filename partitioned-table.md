@@ -1958,7 +1958,7 @@ show stats_meta where table_name like "t";
 3 rows in set (0.01 sec)
 ```
 
-To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain GlobalStats.
+To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain global statistics.
 
 {{< copyable "sql" >}}
 
