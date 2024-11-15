@@ -99,6 +99,7 @@ github:
 **Type:** string. **Default:** `reset`.
 
 If it is set to `reset`, the TiDB Cloud Branching app will reset the previous branch to synchronize the data to the latest.
+
 If it is set to `reserve`, the TiDB Cloud Branching app will create a new branch for your latest commit.
 
 ```yaml
