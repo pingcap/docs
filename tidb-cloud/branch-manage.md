@@ -71,8 +71,7 @@ To delete a branch, perform the following steps:
 
 ## Reset a branch
 
-Reset will synchronize your branch with the latest data from its parent. This operation is irreversible.
-To reset a branch, perform the following steps:
+Reset will synchronize your branch with the latest data from its parent. This operation is irreversible. To reset a branch, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
 2. Click **Branches** in the left navigation pane.
