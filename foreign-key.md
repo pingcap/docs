@@ -304,7 +304,6 @@ Create Table | CREATE TABLE `child` (
 
 <CustomContent platform="tidb">
 
-- [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) does not support foreign keys.
 - [DM](/dm/dm-overview.md) does not support foreign keys. DM disables the [`foreign_key_checks`](/system-variables.md#foreign_key_checks) of the downstream TiDB when replicating data to TiDB. Therefore, the cascading operations caused by foreign keys are not replicated from the upstream to the downstream, which might cause data inconsistency.
 - [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of TiCDC might report an error when replicating tables with foreign keys. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster when using a TiCDC version earlier than v6.6.0.
 - [BR](/br/backup-and-restore-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of BR might report an error when restoring tables with foreign keys to a v6.6.0 or later cluster. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before restoring the cluster when using a BR earlier than v6.6.0.

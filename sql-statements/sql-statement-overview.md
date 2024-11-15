@@ -93,7 +93,6 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md) | Pauses DDL operations. |
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md) | Resumes DDL operations. |
 | [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md) | Shows DDL jobs or job queries. |
-| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md) | Shows telemetry data. |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md) | Performs various administrative tasks. |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Modifies a system variable or user variable. |
@@ -290,18 +289,14 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md) | Shows privileges associated with a user. |
 | [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md) | Shows available privileges. |
 
-## TiCDC & TiDB Binlog
+## TiCDC
 
 <CustomContent platform="tidb">
 
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ADMIN [SET\|SHOW\|UNSET] BDR ROLE`](/sql-statements/sql-statement-admin-bdr-role.md) | Manages BDR roles. |
-| [`CHANGE DRAINER`](/sql-statements/sql-statement-change-drainer.md) | Modifies the status information for Drainer in the cluster. |
-| [`CHANGE PUMP`](/sql-statements/sql-statement-change-pump.md) | Modifies the status information for Pump in the cluster. |
-| [`SHOW DRAINER STATUS`](/sql-statements/sql-statement-show-drainer-status.md) | Shows the status for all Drainer nodes in the cluster. |
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md) | Shows the latest TSO in the cluster. |
-| [`SHOW PUMP STATUS`](/sql-statements/sql-statement-show-pump-status.md) | Shows the status information for all Pump nodes in the cluster. |
 
 </CustomContent>
 
@@ -309,7 +304,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 > **Note:**
 >
-> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) are tools for replicating TiDB data to the upstream for TiDB Self-Hosted. Most SQL statements for TiCDC and TiDB Binlog are not applicable to TiDB Cloud. For TiDB Cloud, you can use the [Changefeed](/tidb-cloud/changefeed-overview.md) feature in the [TiDB Cloud console](https://tidbcloud.com) instead to stream data. 
+> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) are tools for replicating TiDB data to the upstream for TiDB Self-Managed. Most SQL statements for TiCDC and TiDB Binlog are not applicable to TiDB Cloud. For TiDB Cloud, you can use the [Changefeed](/tidb-cloud/changefeed-overview.md) feature in the [TiDB Cloud console](https://tidbcloud.com) instead to stream data.
 
 | SQL Statement | Description |
 |---------------|-------------|

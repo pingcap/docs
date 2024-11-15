@@ -105,7 +105,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.21 or later |
+|   Golang  |  1.23 or later |
 |   Rust    |   nightly-2023-12-28 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  17.0 or later  |
@@ -178,6 +178,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - In the production environment, the TiDB and PD instances can be deployed on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
 > - It is strongly recommended to configure TiDB, TiKV, and TiFlash with at least 8 CPU cores each in the production environment. To get better performance, a higher configuration is recommended.
 > - It is recommended to keep the size of TiKV hard disk within 4 TB if you are using PCIe SSDs or within 1.5 TB if you are using regular SSDs.
+> - If you deploy TiKV on a cloud provider, such as AWS, Google Cloud, or Azure, it is recommended to use cloud disks for TiKV nodes. Data on local disks might be lost if the TiKV instance crashes in the cloud environment.
 
 Before you deploy TiFlash, note the following items:
 
@@ -213,8 +214,6 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | TiFlash | 20170 |the TiFlash Proxy service port |
 | TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
 | TiFlash | 8234 | the port for Prometheus to pull TiFlash metrics |
-| Pump | 8250 | the Pump communication port |
-| Drainer | 8249 | the Drainer communication port |
 | TiCDC | 8300 | the TiCDC communication port |
 | Monitoring | 9090 | the communication port for the Prometheus service|
 | Monitoring | 12020 | the communication port for the NgMonitoring service|

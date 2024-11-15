@@ -7,15 +7,26 @@ summary: Learn about compatibility issues of TiCDC and how to handle them.
 
 This section describes compatibility issues related to TiCDC and how to handle them.
 
-<!--
-## component compatibility matrix
+## Compatibility with TiDB Lightning
 
-TODO
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) provides two data import modes: [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) and [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md). This section describes the compatibility of these modes with TiCDC and the steps to use TiDB Lightning and TiCDC together in a cluster.
 
-## feature compatibility matrix
+In the logical import mode, TiDB Lightning imports data by executing SQL statements. This mode is compatible with TiCDC. To use TiDB Lightning's logical import mode with TiCDC for data replication, perform the following steps:
 
-TODO
--->
+1. Create a changefeed. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
+2. Start TiDB Lightning and import data using the logical import mode. For more information, see [Use logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md).
+
+In the physical import mode, TiDB Lightning imports data by inserting SST files into TiKV. TiCDC is not compatible with this mode and does not support replicating data imported through physical import mode. If you need to use both TiDB Lightning's physical import mode and TiCDC, choose one of the following solutions based on your downstream system:
+
+- If the downstream is a TiDB cluster, perform the following steps:
+
+    1. Use TiDB Lightning to import data into both the upstream and downstream TiDB clusters to ensure data consistency.
+    2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
+
+- If the downstream is not a TiDB cluster, perform the following steps:
+
+    1. Use the offline import tool provided by your downstream system to import TiDB Lightning's input files.
+    2. Create a changefeed to replicate subsequent incremental data written through SQL. For more information, see [Create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task).
 
 ## CLI and configuration file compatibility
 
@@ -64,3 +75,11 @@ The `sort-dir` configuration is used to specify the temporary file directory for
 Since v5.3.0, TiCDC supports [global temporary tables](/temporary-tables.md#global-temporary-tables). Replicating global temporary tables to the downstream using TiCDC of a version earlier than v5.3.0 causes table definition error.
 
 If the upstream cluster contains a global temporary table, the downstream TiDB cluster is expected to be v5.3.0 or a later version. Otherwise, an error occurs during the replication process.
+
+### Compatibility with vector data types
+
+Starting from v8.4.0, TiCDC supports replicating tables with [vector data types](/vector-search-data-types.md) to downstream (experimental).
+
+When the downstream is Kafka or a storage service (such as Amazon S3, GCS, Azure Blob Storage, or NFS), TiCDC converts vector data types into string types before writing to the downstream.
+
+When the downstream is a MySQL-compatible database that does not support vector data types, TiCDC fails to write DDL events involving vector types to the downstream. In this case, add the `has-vector-type=true` parameter to `sink-url`, which allows TiCDC to convert vector data types into the `LONGTEXT` type before writing.

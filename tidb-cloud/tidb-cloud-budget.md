@@ -11,7 +11,7 @@ When your monthly actual costs exceed the percentage thresholds of your specifie
 
 TiDB Cloud provides two types of budgets to help you track your spending:
 
-- **Serverless Spending Limit** budget: for each TiDB Serverless scalable cluster, TiDB Cloud automatically creates a **Serverless Spending Limit** budget. This budget helps you track the actual cost against the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) configured on that cluster. It includes three threshold rules: 75%, 90%, and 100% of the budget, which are not editable.
+- **Serverless Spending Limit** budget: for each TiDB Cloud Serverless scalable cluster, TiDB Cloud automatically creates a **Serverless Spending Limit** budget. This budget helps you track the actual cost against the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) configured on that cluster. It includes three threshold rules: 75%, 90%, and 100% of the budget, which are not editable.
 
 - **Custom** budget: you can create custom budgets to track actual costs for an entire organization or specific projects. For each budget, you can specify a budget scope, set a target spending amount, and configure alert thresholds. After creating a custom budget, you can compare your monthly actual costs with your planned costs to ensure you stay within budget.
 
@@ -71,7 +71,7 @@ To create a custom budget to monitor the spending of your organization or specif
 
 > **Note:**
 >
-> The **Serverless Spending Limit** budget cannot be edited because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
+> The **Serverless Spending Limit** budget cannot be edited because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Cloud Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
 To edit a custom budget, take the following steps:
 
@@ -98,7 +98,7 @@ To edit a custom budget, take the following steps:
 > **Note:**
 >
 > - Once a custom budget is deleted, you will no longer receive any alert emails related to it.
-> - The **Serverless Spending Limit** budget cannot be deleted because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
+> - The **Serverless Spending Limit** budget cannot be deleted because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Cloud Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
 To delete a custom budget, take the following steps:
 

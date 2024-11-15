@@ -122,7 +122,11 @@ After upgrading TiFlash to v7.3 and configuring TiFlash to use V3 DTFiles, if yo
 
 ## From v6.x or v7.x to v7.4 or a later version
 
-Starting from v7.4, to reduce the read and write amplification generated during data compaction, TiFlash optimizes the data compaction logic of PageStorage V3, which leads to changes to some of the underlying storage file names. Therefore, after the upgrade to v7.4 or a later version, in-place downgrading to the original version is not supported.
+Starting from v7.4, to reduce the read and write amplification generated during data compaction, TiFlash optimizes the data compaction logic of PageStorage V3, which leads to changes to some of the underlying storage file names. Therefore, after TiFlash is upgraded to v7.4 or a later version, in-place downgrading to the original version is not supported.
+
+## From v7.x to v8.4 or a later version
+
+Starting from v8.4, the underlying storage format of TiFlash is updated to support [vector search](/vector-search-overview.md). Therefore, after TiFlash is upgraded to v8.4 or a later version, in-place downgrading to the original version is not supported.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 

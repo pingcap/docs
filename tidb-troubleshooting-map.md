@@ -398,101 +398,31 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ## 6. Ecosystem tools
 
-### 6.1 TiDB Binlog
+### 6.1 Data Migration
 
-- 6.1.1 [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) (deprecated) is a tool that collects changes from TiDB and provides backup and replication to downstream TiDB or MySQL platforms. For details, see [TiDB Binlog on GitHub](https://github.com/pingcap/tidb-binlog).
+- 6.1.1 TiDB Data Migration (DM) is a migration tool that supports data migration from MySQL/MariaDB into TiDB. For details, see [DM overview](/dm/dm-overview.md).
 
-- 6.1.2 The `Update Time` in Pump/Drainer Status is updated normally, and no anomaly shows in the log, but no data is written to the downstream.
-
-    - Binlog is not enabled in the TiDB configuration. Modify the `[binlog]` configuration in TiDB.
-
-- 6.1.3 `sarama` in Drainer reports the `EOF` error.
-
-    - The Kafka client version in Drainer is inconsistent with the version of Kafka. You need to modify the `[syncer.to] kafka-version` configuration.
-
-- 6.1.4 Drainer fails to write to Kafka and panics, and Kafka reports the `Message was too large` error.
-
-    - The binlog data is too large, so the single message written to Kafka is too large. You need to modify the following configuration of Kafka:
-
-        ```properties
-        message.max.bytes=1073741824
-        replica.fetch.max.bytes=1073741824
-        fetch.message.max.bytes=1073741824
-        ```
-
-        For details, see [case-789](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case789.md) in Chinese.
-
-- 6.1.5 Inconsistent data in upstream and downstream
-
-    - Some TiDB nodes do not enable binlog. For v3.0.6 or later versions, you can check the binlog status of all the nodes by accessing the <http://127.0.0.1:10080/info/all> interface. For versions earlier than v3.0.6, you can check the binlog status by viewing the configuration file.
-
-    - Some TiDB nodes go into the `ignore binlog` status. For v3.0.6 or later versions, you can check the binlog status of all the nodes by accessing the <http://127.0.0.1:10080/info/all> interface. For versions earlier than v3.0.6, check the TiDB log to see whether it contains the `ignore binlog` keyword.
-
-    - The value of the timestamp column is inconsistent in upstream and downstream.
-
-        - This is caused by different time zones. You need to ensure that Drainer is in the same time zone as the upstream and downstream databases. Drainer obtains its time zone from `/etc/localtime` and does not support the `TZ` environment variable. See [case-826](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case826.md) in Chinese.
-
-        - In TiDB, the default value of timestamp is `null`, but the same default value in MySQL 5.7 (not including MySQL 8) is the current time. Therefore, when the timestamp in upstream TiDB is `null` and the downstream is MySQL 5.7, the data in the timestamp column is inconsistent. You need to run `set @@global.explicit_defaults_for_timestamp=on;` in the upstream before enabling binlog.
-
-    - For other situations, [report a bug](https://github.com/pingcap/tidb-binlog/issues/new?labels=bug&template=bug-report.md).
-
-- 6.1.6 Slow replication
-
-    - The downstream is TiDB/MySQL, and the upstream performs frequent DDL operations. See [case-1023](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1023.md) in Chinese.
-
-    - The downstream is TiDB/MySQL, and the table to be replicated has no primary key and no unique index, which causes reduced performance in binlog. It is recommended to add the primary key or unique index.
-
-    - If the downstream outputs to files, check whether the output disk or network disk is slow.
-
-    - For other situations, [report a bug](https://github.com/pingcap/tidb-binlog/issues/new?labels=bug&template=bug-report.md).
-
-- 6.1.7 Pump cannot write binlog and reports the `no space left on device` error.
-
-    - The local disk space is insufficient for Pump to write binlog data normally. You need to clean up the disk space and then restart Pump.
-
-- 6.1.8 Pump reports the `fail to notify all living drainer` error when it is started.
-
-    - Cause: When Pump is started, it notifies all Drainer nodes that are in the `online` state. If it fails to notify Drainer, this error log is printed.
-
-    - Solution: Use the binlogctl tool to check whether each Drainer node is normal or not. This is to ensure that all Drainer nodes in the `online` state are working normally. If the state of a Drainer node is not consistent with its actual working status, use the binlogctl tool to change its state and then restart Pump. See the case [fail-to-notify-all-living-drainer](/tidb-binlog/handle-tidb-binlog-errors.md#fail-to-notify-all-living-drainer-is-returned-when-pump-is-started).
-
-- 6.1.9 Drainer reports the `gen update sqls failed: table xxx: row data is corruption []` error.
-
-    - Trigger: The upstream performs DML operations on this table while performing `DROP COLUMN` DDL. This issue has been fixed in v3.0.6. See [case-820](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case820.md) in Chinese.
-
-- 6.1.10 Drainer replication is hung. The process remains active but the checkpoint is not updated.
-
-    - This issues has been fixed in v3.0.4. See [case-741](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case741.md) in Chinese.
-
-- 6.1.11 Any component panics.
-
-    - [Report a bug](https://github.com/pingcap/tidb-binlog/issues/new?labels=bug&template=bug-report.md).
-
-### 6.2 Data Migration
-
-- 6.2.1 TiDB Data Migration (DM) is a migration tool that supports data migration from MySQL/MariaDB into TiDB. For details, see [DM overview](/dm/dm-overview.md).
-
-- 6.2.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` shows when you run `query status` or check the log.
+- 6.1.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` shows when you run `query status` or check the log.
 
     - The database related passwords in all the DM configuration files should be encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt the password. Cleartext passwords can be used since v1.0.6.
     - During DM operation, the user of the upstream and downstream databases must have the corresponding read and write privileges. Data Migration also [prechecks the corresponding privileges](/dm/dm-precheck.md) automatically while starting the data replication task.
     - To deploy different versions of DM-worker/DM-master/dmctl in a DM cluster, see the [case study on AskTUG](https://asktug.com/t/dm1-0-0-ga-access-denied-for-user/1049/5) in Chinese.
 
-- 6.2.3 A replication task is interrupted with the `driver: bad connection` error returned.
+- 6.1.3 A replication task is interrupted with the `driver: bad connection` error returned.
 
     - The `driver: bad connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure and TiDB restart), and that the data of the current request has not yet been sent to TiDB.
 
         - For versions earlier than DM 1.0.0 GA, stop the task by running `stop-task` and then restart the task by running `start-task`.
         - For DM 1.0.0 GA or later versions, an automatic retry mechanism for this type of error is added. See [#265](https://github.com/pingcap/dm/pull/265).
 
-- 6.2.4 A replication task is interrupted with the `invalid connection` error.
+- 6.1.4 A replication task is interrupted with the `invalid connection` error.
 
     - The `invalid connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, and TiKV busy), and that a part of the data for the current request has been sent to TiDB. Because DM has the feature of concurrently replicating data to the downstream in replication tasks, several errors might occur when a task is interrupted. You can check these errors by running `query-status` or `query-error`.
 
         - If only the `invalid connection` error occurs during the incremental replication process, DM retries the task automatically.
         - If DM does not retry or fails to retry automatically because of version problems (automatic retry is introduced in v1.0.0-rc.1), use `stop-task` to stop the task and then use `start-task` to restart the task.
 
-- 6.2.5 The relay unit reports the error `event from * in * diff from passed-in event *`, or a replication task is interrupted with an error that fails to get or parse binlog, such as `get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`
+- 6.1.5 The relay unit reports the error `event from * in * diff from passed-in event *`, or a replication task is interrupted with an error that fails to get or parse binlog, such as `get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`
 
     - During the process that DM pulls relay log or the incremental replication, this two errors might occur if the size of the upstream binlog file exceeds 4 GB.
 
@@ -503,7 +433,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
         - For relay processing units, [manually recover replication](https://pingcap.com/docs/tidb-data-migration/dev/error-handling/#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-replication-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned).
         - For binlog replication processing units, [manually recover replication](https://pingcap.com/docs/tidb-data-migration/dev/error-handling/#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-replication-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned).
 
-- 6.2.6 The DM replication is interrupted, and the log returns `ERROR 1236 (HY000) The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`
+- 6.1.6 The DM replication is interrupted, and the log returns `ERROR 1236 (HY000) The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`
 
     - Check whether the master binlog is purged.
     - Check the position information recorded in `relay.meta`.
@@ -512,15 +442,15 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
         - The binlog event recorded in `relay.meta` triggers the incomplete recover process and records the wrong GTID information. This issue is fixed in v1.0.2, and might occur in earlier versions. <!--See [case-764](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case764.md).-->
 
-- 6.2.7 The DM replication process returns an error `Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`.
+- 6.1.7 The DM replication process returns an error `Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`.
 
     - This value cannot be successfully written into MySQL 8.0 or TiDB, but can be written into MySQL 5.7. You can skip the data format check by enabling the `tidb_skip_utf8_check` parameter.
 
-### 6.3 TiDB Lightning
+### 6.2 TiDB Lightning
 
-- 6.3.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/lightning).
+- 6.2.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/lightning).
 
-- 6.3.2 Import speed is too slow.
+- 6.2.2 Import speed is too slow.
 
     - `region-concurrency` is set too high, which causes thread contention and reduces performance. Three ways to troubleshoot:
 
@@ -531,7 +461,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
     - Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the [Dumpling](/dumpling-overview.md) output. If the indices are negligible, you may first remove them from the schema, and add them back via `CREATE INDEX` after the import is complete.
     - The version of TiDB Lightning is old. Try the latest version, which might improve the import speed.
 
-- 6.3.3 `checksum failed: checksum mismatched remote vs local`.
+- 6.2.3 `checksum failed: checksum mismatched remote vs local`.
 
     - Cause 1: The table might already have data. These old data can affect the final checksum.
 
@@ -544,19 +474,19 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local).
 
-- 6.3.4 `Checkpoint for … has invalid status:(error code)`
+- 6.2.4 `Checkpoint for … has invalid status:(error code)`
 
     - Cause: Checkpoint is enabled, and Lightning/Importer has previously abnormally exited. To prevent accidental data corruption, TiDB Lightning will not start until the error is addressed. The error code is an integer less than 25, with possible values as `0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21`. The integer indicates the step where the unexpected exit occurs in the import process. The larger the integer is, the later the exit occurs.
 
     - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#checkpoint-for--has-invalid-status-error-code).
 
-- 6.3.5 `cannot guess encoding for input file, please convert to UTF-8 manually`
+- 6.2.5 `cannot guess encoding for input file, please convert to UTF-8 manually`
 
     - Cause: TiDB Lightning only supports the UTF-8 and GB-18030 encodings. This error means the file is not in any of these encodings. It is also possible that the file has mixed encoding, such as containing a string in UTF-8 and another string in GB-18030, due to historical ALTER TABLE executions.
 
     - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually).
 
-- 6.3.6 `[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 0 45 0 0}'`
+- 6.2.6 `[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 0 45 0 0}'`
 
     - Cause: A timestamp type entry has a time value that does not exist. This is either because of DST changes or because the time value has exceeded the supported range (from Jan 1, 1970 to Jan 19, 2038).
 

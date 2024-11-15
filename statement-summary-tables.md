@@ -18,7 +18,7 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 
 > **Note:**
 >
-> The preceding tables are not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> The preceding tables are not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
@@ -210,7 +210,7 @@ To address this issue, TiDB v6.6.0 experimentally introduces the [statement summ
 
 <CustomContent platform="tidb-cloud">
 
-This section is only applicable to TiDB Self-Hosted. For TiDB Cloud, the value of the `tidb_stmt_summary_enable_persistent` parameter is `false` by default and does not support dynamic modification.
+This section is only applicable to TiDB Self-Managed. For TiDB Cloud, the value of the `tidb_stmt_summary_enable_persistent` parameter is `false` by default and does not support dynamic modification.
 
 </CustomContent>
 

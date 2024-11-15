@@ -22,7 +22,7 @@ This command actually performs the following operations:
 
 - Because this command does not specify the version of the playground component, TiUP first checks the latest version of the installed playground component. Assume that the latest version is v1.12.3, then this command works the same as `tiup playground:v1.12.3`.
 - If you have not used TiUP playground to install the TiDB, TiKV, and PD components, the playground component installs the latest stable version of these components, and then start these instances.
-- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v8.3.0, then this command works the same as `tiup playground:v1.12.3 v8.3.0`.
+- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v8.4.0, then this command works the same as `tiup playground:v1.12.3 v8.4.0`.
 - Because this command does not specify the number of each component, TiUP playground, by default, starts a smallest cluster that consists of one TiDB instance, one TiKV instance, one PD instance, and one TiFlash instance.
 - After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the [TiDB Dashboard](/dashboard/dashboard-intro.md).
 
@@ -36,9 +36,6 @@ Flags:
       --db.binpath string            Specify the TiDB instance binary path (optional, for debugging)
       --db.config string             Specify the TiDB instance configuration file (optional, for debugging)
       --db.timeout int               Specify TiDB maximum wait time in seconds for starting. 0 means no limit
-      --drainer int                  Specify Drainer data of the cluster
-      --drainer.binpath string       Specify the location of the Drainer binary files (optional, for debugging)
-      --drainer.config string        Specify the Drainer configuration file
   -h, --help                         Display help information for TiUP
       --host string                  Specify the listening address of each component (default: `127.0.0.1`). Set it to `0.0.0.0` if provided for access of other machines
       --kv int                       Specify the number of TiKV instances (default: 1)
@@ -50,9 +47,6 @@ Flags:
       --pd.binpath string            Specify the PD instance binary path (optional, for debugging)
       --pd.config string             Specify the PD instance configuration file (optional, for debugging)
       --pd.mode string               Specify the PD working mode. The optional value is 'ms'. Specifying this flag means enabling PD microservice mode.
-      --pump int                     Specify the number of Pump instances. If the value is not `0`, TiDB Binlog is enabled.
-      --pump.binpath string          Specify the location of the Pump binary files (optional, for debugging)
-      --pump.config string           Specify the Pump configuration file (optional, for debugging)
       --scheduling int               Specify the number of Scheduling instances (default: 1)，which can be set only when `pd.mode` is 'ms'
       --scheduling.host host         Specify the listening address of the Scheduling instance
       --scheduling.binpath string    Specify the Scheduling instance binary path (optional, for debugging)
@@ -160,10 +154,8 @@ Pid    Role     Uptime
 ---    ----     ------
 84518  pd       35m22.929404512s
 84519  tikv     35m22.927757153s
-84520  pump     35m22.92618275s
 86189  tidb     exited
 86526  tidb     34m28.293148663s
-86190  drainer  35m19.91349249s
 ```
 
 ## Scale out a cluster
@@ -187,7 +179,7 @@ tiup playground scale-in --pid 86526
 Starting from v8.2.0, [PD microservice mode](/pd-microservices.md) (experimental) can be deployed using TiUP. You can deploy the `tso` microservice and `scheduling` microservice for your cluster using TiUP Playground as follows:
 
 ```shell
-tiup playground v8.3.0 --pd.mode ms --pd 3 --tso 2 --scheduling 2
+tiup playground v8.4.0 --pd.mode ms --pd 3 --tso 2 --scheduling 2
 ```
 
 - `--pd.mode`: setting it to `ms` means enabling the microservice mode for PD.

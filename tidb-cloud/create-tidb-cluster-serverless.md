@@ -1,15 +1,15 @@
 ---
-title: Create a TiDB Serverless Cluster
-summary: Learn how to create your TiDB Serverless cluster.
+title: Create a TiDB Cloud Serverless Cluster
+summary: Learn how to create your TiDB Cloud Serverless cluster.
 ---
 
-# Create a TiDB Serverless Cluster
+# Create a TiDB Cloud Serverless Cluster
 
-This document describes how to create a TiDB Serverless cluster in the [TiDB Cloud console](https://tidbcloud.com/).
+This document describes how to create a TiDB Cloud Serverless cluster in the [TiDB Cloud console](https://tidbcloud.com/).
 
 > **Tip:**
 >
-> To learn how to create a TiDB Dedicated cluster, see [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
+> To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Before you begin
 
@@ -21,7 +21,7 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 ## Steps
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Serverless cluster as follows:
+If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud Serverless cluster as follows:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
@@ -29,15 +29,15 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 3. On the **Create Cluster** page, **Serverless** is selected by default.
 
-4. The cloud provider of TiDB Serverless is AWS. You can select an AWS region where you want to host your cluster.
+4. The cloud provider of TiDB Cloud Serverless is AWS. You can select an AWS region where you want to host your cluster.
 
 5. Update the default cluster name if necessary.
 
-6. Select a cluster plan. TiDB Serverless provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Free Cluster** and **Scalable Cluster**. You can start with a free cluster and later upgrade to a scalable cluster as your needs grow. To create a scalable cluster, you need to specify a **Monthly Spending Limit** and add a credit card.
+6. Select a cluster plan. TiDB Cloud Serverless provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Free Cluster** and **Scalable Cluster**. You can start with a free cluster and later upgrade to a scalable cluster as your needs grow. To create a scalable cluster, you need to specify a **Monthly Spending Limit** and add a credit card.
 
     > **Note:**
     >
-    > For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Serverless clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+    > For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Serverless clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
 
 7. Click **Create**.
 
@@ -45,7 +45,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 ## What's next
 
-After your cluster is created, follow the instructions in [Connect to TiDB Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
+After your cluster is created, follow the instructions in [Connect to TiDB Cloud Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
 
 > **Note:**
 >

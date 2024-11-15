@@ -77,8 +77,11 @@ delta_index_cache_size = 0
     ## * format_version = 2, the default format for versions < v6.0.0.
     ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
     ## * format_version = 4, the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption
-    ## * format_version = 5, the default format for v7.4.0 and later versions (introduced in v7.3.0), which reduces the number of physical files by merging smaller files. 
+    ## * format_version = 5, introduced in v7.3.0, the default format for versions from v7.4.0 to v8.3.0, which reduces the number of physical files by merging smaller files.
     # format_version = 5
+    ## * format_version = 6, introduced in v8.4.0, which partially supports the building and storage of vector indexes.
+    ## * format_version = 7, introduced in v7.3.0, the default format for v8.4.0 and later versions, which supports the build and storage of vector indexes
+    # format_version = 7
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -208,6 +211,13 @@ delta_index_cache_size = 0
     ## see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
     # dt_enable_logical_split = false
 
+    ## `max_threads` indicates the internal thread concurrency when TiFlash executes an MPP task.
+    ## The default value is 0. When it is set to 0,
+    ## TiFlash uses the number of CPU cores as the execution concurrency.
+    ## This parameter only takes effect
+    ## when the system variable `tidb_max_tiflash_threads` is set to -1.
+    max_threads = 0
+    
     ## The memory usage limit for the generated intermediate data in a single query.
     ## When the value is an integer, the unit is byte. For example, 34359738368 means 32 GiB of memory limit, and 0 means no limit.
     ## When the value is a floating-point number in the range of [0.0, 1.0), it means the ratio of the allowed memory usage to the total memory of the node. For example, 0.8 means 80% of the total memory, and 0.0 means no limit.

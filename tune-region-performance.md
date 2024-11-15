@@ -11,7 +11,13 @@ This document introduces how to tune Region performance by adjusting the Region 
 
 TiKV automatically [shards bottom-layered data](/best-practices/tidb-best-practices.md#data-sharding). Data is split into multiple Regions based on the key ranges. When the size of a Region exceeds a threshold, TiKV splits it into two or more Regions.
 
-In scenarios involving large datasets, if the Region size is relatively small, TiKV might have too many Regions, which causes more resource consumption and [performance regression](/best-practices/massive-regions-best-practices.md#performance-problem). Since v6.1.0, TiDB supports customizing Region size. The default size of a Region is 96 MiB. To reduce the number of Regions, you can adjust Regions to a larger size.
+In scenarios involving large datasets, if the Region size is relatively small, TiKV might have too many Regions, which causes more resource consumption and [performance regression](/best-practices/massive-regions-best-practices.md#performance-problem). 
+
+> **Note:**
+>
+> - In v6.1.0, TiDB supports customizing Region size as an experimental feature.
+> - Starting from v6.5.0, this feature becomes generally available (GA).
+> - Starting from v8.4.0, the default size of the Region is resized from 96 MiB to 256 MiB. Increasing the Region size can reduce the number of Regions.
 
 To reduce the performance overhead of many Regions, you can also enable [Hibernate Region](/best-practices/massive-regions-best-practices.md#method-4-increase-the-number-of-tikv-instances) or [`Region Merge`](/best-practices/massive-regions-best-practices.md#method-5-adjust-raft-base-tick-interval).
 

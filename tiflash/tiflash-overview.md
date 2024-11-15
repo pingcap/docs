@@ -110,7 +110,7 @@ You can use TiDB to read TiFlash replicas for analytical processing. See the fol
 
 <CustomContent platform="tidb">
 
-To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md).
+To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start with TiDB HTAP](/quick-start-with-htap.md).
 
 </CustomContent>
 
@@ -118,7 +118,7 @@ To experience the whole process from importing data to querying in a TPC-H datas
 
 <CustomContent platform="tidb">
 
-- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
+- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 - To add a TiFlash node in a deployed cluster, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
 - [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
 - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md).
