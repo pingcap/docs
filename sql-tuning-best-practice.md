@@ -786,12 +786,14 @@ Using TiFlash strategically can enhance query performance and optimize resource 
 ### Analytical Query
 
 The original query requires joining the order_line and item tables. The plan for executing this query on the TiKV storage engine takes 21.1 seconds.
+
 In the TiKV plan:
 
 - TiDB needs to fetch 3,864,397 rows from the lineitem table and 10 million rows from the part table.
 - The hash join operation (HashJoin_21) is performed at the TiDB layer, along with the subsequent projection (Projection_38) and aggregation (HashAgg_9) operations.
 
 The plan for executing the same query on the TiFlash MPP (Massively Parallel Processing) takes only 1.41 seconds, which is 15 times faster than the TiKV plan.
+
 In the TiFlash MPP plan:
 
 - The optimizer recognizes that both the order_line and item tables have TiFlash replicas available.
