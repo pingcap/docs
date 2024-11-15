@@ -17,6 +17,8 @@ This document describes TiDB Lightning and [`IMPORT INTO`](/sql-statements/sql-s
 
 - TiDB Lightning [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) is not compatible with log backup and TiCDC. The reason is that physical import mode directly ingests encoded KV pairs of the source data to TiKV, causing TiKV not to generate corresponding change logs during this process. Without such change logs, the relevant data cannot be backed up via log backup and cannot be replicated by TiCDC.
 
+- To use TiDB Lightning and TiCDC together in a cluster, see [Compatibility with TiDB Lightning](/ticdc/ticdc-compatibility.md#compatibility-with-tidb-lightning).
+
 - `IMPORT INTO` is not compatible with log backup and TiCDC. The reason is that `IMPORT INTO` also ingests encoded KV pairs of the source data directly to TiKV.
 
 ## Scenarios for TiDB Lightning logical import mode

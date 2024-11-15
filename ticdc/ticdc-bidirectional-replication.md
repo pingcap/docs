@@ -99,6 +99,20 @@ In short, in BDR mode, TiCDC only replicates replicable DDLs in the PRIMARY clus
 ### Replication scenarios of replicable DDLs
 
 1. Choose a TiDB cluster and execute `ADMIN SET BDR ROLE PRIMARY` to set it as the primary cluster.
+
+    ```sql
+    ADMIN SET BDR ROLE PRIMARY;
+    Query OK, 0 rows affected
+    Time: 0.003s
+
+    ADMIN SHOW BDR ROLE;
+    +----------+
+    | BDR_ROLE |
+    +----------+
+    | primary  |
+    +----------+
+    ```
+
 2. On other TiDB clusters, execute `ADMIN SET BDR ROLE SECONDARY` to set them as the secondary clusters.
 3. Execute **replicable DDLs** on the primary cluster. The successfully executed DDLs will be replicated to the secondary clusters by TiCDC.
 

@@ -269,13 +269,13 @@ Configuration items related to scheduling
 ### `max-merge-region-size`
 
 + Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
-+ Default value: `20`
++ Default value: `54`. Before v8.4.0, the default value is `20`. Starting from v8.4.0, the default value is `54`.
 + Unit: MiB
 
 ### `max-merge-region-keys`
 
 + Specifies the upper limit of the `Region Merge` key. When the Region key is greater than the specified value, the PD does not merge the Region with its adjacent Regions.
-+ Default value: `200000`
++ Default value: `540000`. Before v8.4.0, the default value is `200000`. Starting from v8.4.0, the default value is `540000`.
 
 ### `patrol-region-interval`
 
@@ -485,9 +485,12 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 ### `enable-telemetry`
 
-+ Determines whether to enable the telemetry collection feature in TiDB Dashboard.
+> **Warning:**
+>
+> Starting from v8.1.0, the telemetry feature in TiDB Dashboard is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions.
+
++ Before v8.1.0, this configuration item controls whether to enable telemetry collection in TiDB Dashboard.
 + Default value: `false`
-+ See [Telemetry](/telemetry.md) for details.
 
 ## `replication-mode`
 
