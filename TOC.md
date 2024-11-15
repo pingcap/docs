@@ -4,15 +4,15 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB Self-Managed
   - [What is TiDB Self-Managed](/overview.md)
-  - [TiDB 8.3 Release Notes](/releases/release-8.3.0.md)
+  - [TiDB 8.4 Release Notes](/releases/release-8.4.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
   - [Roadmap](/tidb-roadmap.md)
-- Quick Start
-  - [Try Out TiDB](/quick-start-with-tidb.md)
-  - [Try Out HTAP](/quick-start-with-htap.md)
+- Get Started
+  - [Quick Start with TiDB](/quick-start-with-tidb.md)
+  - [Quick Start with HTAP](/quick-start-with-htap.md)
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
@@ -140,9 +140,8 @@
     - [TiSpark Topology](/tispark-deployment-topology.md)
     - [Cross-DC Topology](/geo-distributed-deployment-topology.md)
     - [Hybrid Topology](/hybrid-deployment-topology.md)
-  - Install and Start
-    - [Use TiUP](/production-deployment-using-tiup.md)
-    - [Deploy on Kubernetes](/tidb-in-kubernetes.md)
+  - [Deploy Using TiUP](/production-deployment-using-tiup.md)
+  - [Deploy on Kubernetes](/tidb-in-kubernetes.md)
   - [Verify Cluster Status](/post-installation-check.md)
   - Test Cluster Performance
     - [Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
@@ -1073,6 +1072,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v8.4
+    - [8.4.0-DMR](/releases/release-8.4.0.md)
   - v8.3
     - [8.3.0-DMR](/releases/release-8.3.0.md)
   - v8.2

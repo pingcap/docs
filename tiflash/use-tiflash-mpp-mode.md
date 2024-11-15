@@ -7,7 +7,7 @@ summary: Learn the MPP mode of TiFlash and how to use it.
 
 <CustomContent platform="tidb">
 
-This document introduces the [Massively Parallel Processing (MPP)](/glossary.md#mpp) mode of TiFlash and how to use it.
+This document introduces the [Massively Parallel Processing (MPP)](/glossary.md#massively-parallel-processing-mpp) mode of TiFlash and how to use it.
 
 </CustomContent>
 

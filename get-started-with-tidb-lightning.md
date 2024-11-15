@@ -47,7 +47,7 @@ First, you can use [dumpling](/dumpling-overview.md) to export data from MySQL.
 
 Before starting the data import, you need to deploy a TiDB cluster for the import. If you already have a TiDB cluster, you can skip this step.
 
-For the steps on deploying a TiDB cluster, refer to the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md).
+For the steps on deploying a TiDB cluster, refer to the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md).
 
 ## Step 3: Install TiDB Lightning
 
