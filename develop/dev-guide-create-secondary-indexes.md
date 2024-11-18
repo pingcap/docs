@@ -183,3 +183,17 @@ The following is an example output:
 ## Next step
 
 After creating a database and adding tables and secondary indexes to it, you can start adding the data [write](/develop/dev-guide-insert-data.md) and [read](/develop/dev-guide-get-data-from-single-table.md) features to your application.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

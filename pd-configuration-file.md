@@ -257,6 +257,13 @@ Configuration items related to monitoring
 
 Configuration items related to scheduling
 
+> **Note:**
+>
+> To modify these PD configuration items related to `schedule`, choose one of the following methods based on your cluster status:
+>
+> - For clusters to be newly deployed, you can modify the PD configuration file directly.
+> - For existing clusters, use the command-line tool [PD Control](/pd-control.md) to make changes instead. Direct modifications to these PD configuration items related to `schedule` in the configuration file do not take effect on existing clusters.
+
 ### `max-merge-region-size`
 
 + Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
@@ -431,16 +438,20 @@ Configuration items related to replicas
 + Default value: `true`
 + See [Placement Rules](/configure-placement-rules.md).
 
-## `label-property`
+## `label-property` (deprecated)
 
-Configuration items related to labels
+Configuration items related to labels, which only support the `reject-leader` type.
 
-### `key`
+> **Note:**
+>
+> Starting from v5.2, the configuration items related to labels are deprecated. It is recommended to use [Placement Rules](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center) to configure the replica policy.
+
+### `key` (deprecated)
 
 + The label key for the store that rejected the Leader
 + Default value: `""`
 
-### `value`
+### `value` (deprecated)
 
 + The label value for the store that rejected the Leader
 + Default value: `""`

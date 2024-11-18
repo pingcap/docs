@@ -67,11 +67,11 @@ Number of commands processed by all TiDB instances per second based on type
 ### KV/TSO Request OPS
 
 - kv request total: Total number of KV requests per second in all TiDB instances
-- kv request by type: Number of KV requests per second in all TiDB instances based on such types as `Get`, `Prewrite`, and `Commit`.
-- tso - cmd: Number of `tso cmd` requests per second in all TiDB instances
-- tso - request: Number of `tso request` requests per second in all TiDB instances
+- kv request by type: Number of KV requests per second in all TiDB instances based on such types as `Get`, `Prewrite`, and `Commit`
+- tso - cmd: Number of gRPC requests per second that TiDB sends to PD in all TiDB instances; each gRPC request contains a batch of TSO requests
+- tso - request: Number of TSO requests per second in all TiDB instances
 
-Generally, dividing `tso - cmd` by `tso - request` yields the average batch size of requests per second.
+Generally, `tso - request` divided by `tso - cmd` is the average size of TSO request batches per second.
 
 ### KV Request Time By Source
 
@@ -138,10 +138,10 @@ Average time consumed in executing gRPC requests in all TiKV instances based on 
 
 ### PD TSO Wait/RPC Duration
 
-- wait - avg: Average time in waiting for PD to return TSO in all TiDB instances
-- rpc - avg: Average time from sending TSO requests to PD to receiving TSO in all TiDB instances
-- wait - 99: P99 time in waiting for PD to return TSO in all TiDB instances
-- rpc - 99: P99 time from sending TSO requests to PD to receiving TSO in all TiDB instances
+- wait - avg: Average duration of waiting for PD to return TSO in all TiDB instances
+- rpc - avg: Average duration from the time that TiDB sends gRPC requests to PD to get TSO to the time that TiDB receives TSO in all TiDB instances
+- wait - 99: P99 duration of waiting for PD to return TSO in all TiDB instances
+- rpc - 99: P99 duration from the time that TiDB sends gRPC requests to PD to get TSO to the time that TiDB receives TSO in all TiDB instances
 
 ### Storage Async Write Duration, Store Duration, and Apply Duration
 

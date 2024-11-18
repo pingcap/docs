@@ -44,3 +44,17 @@ It is recommended to differentiate database names by business, product, or other
 - Unique index: `uk_{table_name_abbreviation}_{field_name_abbreviation}`
 - Common index: `idx_{table_name_abbreviation}_{field_name_abbreviation}`
 - Column name with multiple words: use meaningful abbreviations
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

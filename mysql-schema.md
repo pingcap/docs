@@ -64,13 +64,9 @@ Currently, the `help_topic` is NULL.
 
 ## System tables related to cached tables
 
-- `table_cache_meta` stores the metadata of cached tables.
+- `table_cache_meta`: stores the metadata of cached tables
 
 ## TTL related system tables
-
-> **Note:**
->
-> The TTL related system tables are not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 * `mysql.tidb_ttl_table_status` the previously executed TTL job and ongoing TTL job for all TTL tables
 * `mysql.tidb_ttl_task` the current ongoing TTL subtasks
@@ -80,6 +76,12 @@ Currently, the `help_topic` is NULL.
 
 * `tidb_mdl_view`：a view of metadata locks. You can use it to view information about the currently blocked DDL statements
 * `tidb_mdl_info`：used internally by TiDB to synchronize metadata locks across nodes
+
+## System tables related to DDL statements
+
+* `tidb_ddl_history`: the history records of DDL statements
+* `tidb_ddl_job`: the metadata of DDL statements that are currently being executed by TiDB
+* `tidb_ddl_reorg`: the metadata of physical DDL statements (such as adding indexes) that are currently being executed by TiDB
 
 ## Miscellaneous system tables
 

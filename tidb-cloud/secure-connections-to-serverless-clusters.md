@@ -21,7 +21,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
-3. In the dialog, keep the default setting of the endpoint type as `Public`, and select your preferred connection method and operating system.
+3. In the dialog, keep the default setting of the connection type as `Public`, and select your preferred connection method and operating system.
 
 4. If you have not set a password yet, click **Generate Password** to generate a random password for your TiDB Serverless cluster. The password will be automatically embedded in the sample connection string for connecting to your cluster easily.
 

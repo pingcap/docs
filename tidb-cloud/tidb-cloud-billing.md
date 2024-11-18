@@ -11,8 +11,8 @@ summary: Learn about TiDB Cloud billing.
 
 TiDB Cloud charges according to the resources that you consume. You can visit the following pages to get more information about the pricing.
 
-- [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)
-- [TiDB Dedicated Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/)
+- [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/)
+- [TiDB Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/)
 
 ## Invoices
 

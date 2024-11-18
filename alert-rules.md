@@ -65,21 +65,6 @@ This section gives the alert rules for the TiDB component.
 
     Same as [`TiDB_schema_error`](#tidb_schema_error).
 
-#### `TiDB_monitor_keep_alive`
-
-* Alert rule:
-
-    `increase(tidb_monitor_keep_alive_total[10m]) < 100`
-
-* Description:
-
-    Indicates whether the TiDB process still exists. If the number of times for `tidb_monitor_keep_alive_total` increases less than 100 in 10 minutes, the TiDB process might already exit and an alert is triggered.
-
-* Solution:
-
-    * Check whether the TiDB process is out of memory.
-    * Check whether the machine has restarted.
-
 ### Critical-level alerts
 
 #### `TiDB_server_panic_total`
@@ -120,7 +105,7 @@ This section gives the alert rules for the TiDB component.
 
 * Description:
 
-    The latency of handling a request in TiDB. If the ninety-ninth percentile latency exceeds 1 second, an alert is triggered.
+    The latency of handling a request in TiDB. The response time for 99% of requests should be within 1 second; otherwise, an alert is triggered.
 
 * Solution:
 
@@ -577,11 +562,13 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance, name) > 1.6`
+    `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance) > 1.6`
 
 * Description:
 
-    The pressure on the Raftstore thread is too high.
+    This rule monitors CPU usage by Raftstore. If the value is high, it indicates pressure on Raftstore threads is heavy.
+
+    The alert threshold is 80% of the [`raftstore.store-pool-size`](/tikv-configuration-file.md#store-pool-size) value. `raftstore.store-pool-size` is 2 by default, so the alert threshold is 1.6.
 
 * Solution:
 

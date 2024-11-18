@@ -19,15 +19,13 @@ To reduce the performance overhead of many Regions, you can also enable [Hiberna
 
 > **Note:**
 >
-> The recommended range for the Region size is [48MiB, 258MiB]. Commonly used sizes include 96 MiB, 128 MiB, and 256 MiB. It is NOT recommended to set the Region size beyond 1 GiB. Avoid setting the size to more than 10 GiB. An excessively large Region size might result in the following side effects:
+> The recommended range for the Region size is [48 MiB, 256 MiB]. Commonly used sizes include 96 MiB, 128 MiB, and 256 MiB. It is NOT recommended to set the Region size beyond 1 GiB. Avoid setting the size to more than 10 GiB. An excessively large Region size might result in the following side effects:
 >
 > + Performance jitters
 > + Decreased query performance, especially for queries that deal with a large range of data
 > + Slower Region scheduling
 
-To adjust the Region size, you can use the [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) configuration item. When TiFlash is used, the Region size should not exceed 256 MiB.
-
-When the Dumpling tool is used, the Region size should not exceed 1 GiB. In this case, you need to reduce the concurrency after increasing the Region size; otherwise, TiDB might run out of memory.
+To adjust the Region size, you can use the [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) configuration item. When TiFlash or the Dumpling tool is used, the Region size should not exceed 1 GiB. After increasing the Region size, you need to reduce the concurrency if the Dumpling tool is used; otherwise, TiDB might run out of memory.
 
 ## Use bucket to increase concurrency
 

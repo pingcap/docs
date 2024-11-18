@@ -13,7 +13,7 @@ To reduce the impact of backup tasks on the cluster, TiDB v5.4.0 introduces the 
 
 If you want to reduce the impact of backup tasks on the cluster, you can enable the auto-tune feature. With this feature enabled, TiDB performs backup tasks as fast as possible without excessively affecting the cluster.
 
-Alternatively, you can limit the backup speed by using the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) or using the parameter `--ratelimit`.
+Alternatively, you can limit the backup speed by using the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) or using the parameter `--ratelimit`. When `--ratelimit` is set, to avoid too many tasks causing the speed limit to fail, the `concurrency` parameter of br is automatically adjusted to `1`.
 
 ## Use auto-tune
 

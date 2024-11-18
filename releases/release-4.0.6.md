@@ -26,8 +26,6 @@ TiDB version: 4.0.6
 
     + TiCDC (GA since v4.0.6)
 
-        - Support outputting data in the `maxwell` format [#869](https://github.com/pingcap/tiflow/pull/869)
-
 ## Improvements
 
 + TiDB

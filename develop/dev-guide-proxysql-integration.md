@@ -624,7 +624,7 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
 
 ## Production environment
 
-For a production environment, it is recommended that you use [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) directly for a fully-managed experience.
+For a production environment, it is recommended that you use [TiDB Dedicated](https://www.pingcap.com/tidb-dedicated/) directly for a fully-managed experience.
 
 ### Prerequisite
 
@@ -1125,3 +1125,17 @@ Databases can be overloaded by high traffic, faulty code, or malicious spam. Wit
     </div>
 
     </SimpleTab>
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

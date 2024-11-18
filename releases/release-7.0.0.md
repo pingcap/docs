@@ -411,9 +411,9 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
         - Support splitting transactions in the redo applier to improve its throughput and reduce RTO in disaster recovery scenarios [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Improve the table scheduling to split a single table more evenly across various TiCDC nodes [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
-        - Add the Large Row monitoring metrics in MQ sink [#8286](https://github.com/pingcap/tiflow/issues/8286) @[hi-rustin](https://github.com/hi-rustin)
+        - Add the Large Row monitoring metrics in MQ sink [#8286](https://github.com/pingcap/tiflow/issues/8286) @[hi-rustin](https://github.com/Rustin170506)
         - Reduce network traffic between TiKV and TiCDC nodes in scenarios where a Region contains data of multiple tables [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
-        - Move the P99 metrics panel of Checkpoint TS and Resolved TS to the Lag analyze panel [#8524](https://github.com/pingcap/tiflow/issues/8524) @[hi-rustin](https://github.com/hi-rustin)
+        - Move the P99 metrics panel of Checkpoint TS and Resolved TS to the Lag analyze panel [#8524](https://github.com/pingcap/tiflow/issues/8524) @[hi-rustin](https://github.com/Rustin170506)
         - Support applying DDL events in redo logs [#8361](https://github.com/pingcap/tiflow/issues/8361) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Support splitting and scheduling tables to TiCDC nodes based on upstream write throughput [#7720](https://github.com/pingcap/tiflow/issues/7720) @[overvenus](https://github.com/overvenus)
 
