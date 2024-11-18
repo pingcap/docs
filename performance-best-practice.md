@@ -277,7 +277,7 @@ While the general configurations provided earlier offer a good starting point fo
 Here are the common edge cases and solutions:
 
 1. High TSO wait for high-frequency small queries
-2. Choose the proper mak chunk size for different workloads
+2. Choose the proper max chunk size for different workloads
 3. Tune coprocessor cache for read-heavy workloads
 4. Choose proper tidb_txn_mode and tidb_dml_type for different workloads
 5. Optimize group by and distinct operations with TiKV pushdown
@@ -335,7 +335,7 @@ admission-max-result-mb = 10
 admission-min-process-ms = 0
 ```
 
-## Choose the proper mak chunk size for different workloads
+## Choose the proper max chunk size for different workloads
 The tidb_max_chunk_size parameter in TiDB controls the maximum number of rows that can be processed in a single chunk during query execution. Adjusting this parameter based on the workload type can optimize performance:
 
 - For pure OLTP workloads: Lower the default value (e.g., from 1024 to 128) to reduce memory allocation overhead and make limit pushdown more efficient.
