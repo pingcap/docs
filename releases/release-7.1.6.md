@@ -175,13 +175,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + TiKV <!--tw@qiancai: 6 notes-->
 
-    - 新增 RawKvMaxTimestampNotSynced 报错，并在发生该错误时在 `errorpb.Error.max_ts_not_synced` 中记录详细的错误信息。针对 `must_raw_put` 操作，在遇到该错误时增加了重试机制 [#16789](https://github.com/tikv/tikv/issues/16789) @[pingyu](https://github.com/pingyu)
+    - Add the `RawKvMaxTimestampNotSynced` error, log detailed error information in `errorpb.Error.max_ts_not_synced`, and add a retry mechanism for the `must_raw_put` operation when this error occurs [#16789](https://github.com/tikv/tikv/issues/16789) @[pingyu](https://github.com/pingyu)
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复删除大表或分区后可能导致的流量控制问题 [#17304](https://github.com/tikv/tikv/issues/17304) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - 修复读线程在从 Raft Engine 中的 MemTable 读取过时索引时出现的 panic 问题 [#17383](https://github.com/tikv/tikv/issues/17383) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the panic issue that occurs when read threads access outdated indexes in the MemTable of the Raft Engine [#17383](https://github.com/tikv/tikv/issues/17383) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复 `advance-ts-interval` 配置未被用于限制 CDC 和 log-backup 模块中 `check_leader` 操作的 timeout，导致在某些情况下 TiKV 正常重启时 `resolved_ts` lag 过大的问题 [#17107](https://github.com/tikv/tikv/issues/17107) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - 修复重启 TiKV 后由 TiDB Lightning 导入的 SST 文件丢失的问题 [#15912](https://github.com/tikv/tikv/issues/15912) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that SST files imported by TiDB Lightning are lost after TiKV is restarted [#15912](https://github.com/tikv/tikv/issues/15912) @[lance6716](https://github.com/lance6716)
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复 ingest 已被删除的 sst_importer SST 文件导致 TiKV panic 的问题 [#15053](https://github.com/tikv/tikv/issues/15053) @[lance6716](https://github.com/lance6716)
-    - 修复当 TiKV 实例中有大量 Region 时，数据导入过程中可能出现 OOM 的问题
+    - Fix the issue that when there are a large number of Regions in a TiKV instance, TiKV might OOM during data import [#16229](https://github.com/tikv/tikv/issues/16229) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - (dup): release-7.5.4.md > 错误修复> TiKV - 修复早期版本（早于 v7.1）和之后的版本的 bloom filter 无法兼容的问题 [#17272](https://github.com/tikv/tikv/issues/17272) @[v01dstar](https://github.com/v01dstar)
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复设置 gRPC 消息的压缩算法 (`grpc-compression-type`) 对 TiKV 发送到 TiDB 的消息不起作用的问题 [#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
     - (dup): release-6.5.10.md > 错误修复> TiKV - 修复测试用例不稳定的问题，确保每次测试都使用独立的临时目录，从而避免在线配置更改影响其他测试用例 [#16871](https://github.com/tikv/tikv/issues/16871) @[glorv](https://github.com/glorv)
@@ -238,9 +238,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - (dup): release-6.5.10.md > 错误修复> TiFlash - 修复函数 `SUBSTRING_INDEX()` 可能导致 TiFlash Crash 的问题 [#9116](https://github.com/pingcap/tiflash/issues/9116) @[wshwsh12](https://github.com/wshwsh12)
     - (dup): release-6.5.11.md > 错误修复> TiFlash - 修复当集群中长时间频繁执行 `EXCHANGE PARTITION` 和 `DROP TABLE` 操作时，可能导致 TiFlash 表元信息同步缓慢以及查询性能下降的问题 [#9227](https://github.com/pingcap/tiflash/issues/9227) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-6.5.10.md > 错误修复> TiFlash - 修复 key range 为空的查询导致 TiFlash 上没有正确生成读取任务，从而可能阻塞 TiFlash 查询的问题 [#9108](https://github.com/pingcap/tiflash/issues/9108) @[JinheLin](https://github.com/JinheLin)
-    - 修复在特定情况下 `CAST AS DECIMAL` 函数的返回结果存在正负号错误的问题 [#9301](https://github.com/pingcap/tiflash/issues/9301) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 修复 `SUBSTRING` 函数不支持部分整数类型的 `POS` 和 `LENGTH` 参数导致查询报错的问题 [#9473](https://github.com/pingcap/tiflash/issues/9473) @[gengliqi](https://github.com/gengliqi)
-    - 修复对大表执行 `DROP TABLE` 可能导致 TiFlash OOM 的问题 [#9437](https://github.com/pingcap/tiflash/issues/9437) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that the sign in the result of the `CAST AS DECIMAL` function is incorrect in certain cases [#9301](https://github.com/pingcap/tiflash/issues/9301) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that the `SUBSTRING` function does not support the `POS` and `LENGTH` arguments for certain integer types, causing query errors [#9473](https://github.com/pingcap/tiflash/issues/9473) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue that executing `DROP TABLE` on large tables might cause TiFlash OOM [#9437](https://github.com/pingcap/tiflash/issues/9437) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 + Tools
 
@@ -282,7 +282,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiDB Lightning <!--tw@qiancai: 2 notes-->
 
-        - 修复 TiDB Lightning 因 TiKV 发送的消息过大而接收失败的问题 [#56114](https://github.com/pingcap/tidb/issues/56114) @[fishiu](https://github.com/fishiu)
+        - Fix the issue that TiDB Lightning fails to receive oversized messages sent from TiKV [#56114](https://github.com/pingcap/tidb/issues/56114) @[fishiu](https://github.com/fishiu)
         - (dup): release-6.5.11.md > 错误修复> Tools> TiDB Lightning - 修复在关闭 TiDB Lightning 的导入模式后进行数据导入时，TiKV 数据可能损坏的问题 [#15003](https://github.com/tikv/tikv/issues/15003) [#47694](https://github.com/pingcap/tidb/issues/47694) @[lance6716](https://github.com/lance6716)
         - (dup): release-6.5.11.md > 错误修复> Tools> TiDB Lightning - 修复使用 TiDB Lightning 导入数据时报事务冲突的问题 [#49826](https://github.com/pingcap/tidb/issues/49826) @[lance6716](https://github.com/lance6716)
         - (dup): release-6.5.8.md > 错误修复> Tools> TiDB Lightning - 修复 EBS BR 运行时 TiDB Lightning 可能导入失败的问题 [#49517](https://github.com/pingcap/tidb/issues/49517) @[mittalrishabh](https://github.com/mittalrishabh)
