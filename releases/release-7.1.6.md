@@ -159,20 +159,20 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - Fix the issue that the `AUTO_INCREMENT` field is not correctly set after importing data using the `IMPORT INTO` statement [#56476](https://github.com/pingcap/tidb/issues/56476) @[D3Hunter](https://github.com/D3Hunter) <!--tw@hfxsd: the following 15 notes-->
     - Fix the issue that TiDB does not check for the existence of local files before restoring from a checkpoint [#53009](https://github.com/pingcap/tidb/issues/53009) @[lance6716](https://github.com/lance6716)
     - Fix the issue that the DM schema tracker cannot create indexes longer than the default length [#55138](https://github.com/pingcap/tidb/issues/55138) @[lance6716](https://github.com/lance6716)
-    - Fix the issue that `ALTER TABLE` does not handle `AUTO_INCREMENT` field correctly [#47899](https://github.com/pingcap/tidb/issues/47899) @[D3Hunter](https://github.com/D3Hunter)
-    - Fix the issue that unfreed session resources might lead to memory leaks [#56271](https://github.com/pingcap/tidb/issues/56271) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that `ALTER TABLE` does not handle the `AUTO_INCREMENT` field correctly [#47899](https://github.com/pingcap/tidb/issues/47899) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that unreleased session resources might lead to memory leaks [#56271](https://github.com/pingcap/tidb/issues/56271) @[lance6716](https://github.com/lance6716)
     - Fix the issue that float or integer overflow affects the plan cache [#46538](https://github.com/pingcap/tidb/issues/46538) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that part of the memory of the `IndexLookUp` operator is not tracked [#56440](https://github.com/pingcap/tidb/issues/56440) @[wshwsh12](https://github.com/wshwsh12)
-    - Fix the issue that stale read does not strictly check the ts of the read operation, resulting in a small probability of affecting the consistency of the transaction when there is an offset between the TSO and the real physical time [#56809](https://github.com/pingcap/tidb/issues/56809) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue that stale read does not strictly verify the timestamp of the read operation, resulting in a small probability of affecting the consistency of the transaction when an offset exists between the TSO and the real physical time [#56809](https://github.com/pingcap/tidb/issues/56809) @[MyonKeminta](https://github.com/MyonKeminta)
     - Fix the issue that TTL might fail if TiKV is not selected as the storage engine [#56402](https://github.com/pingcap/tidb/issues/56402) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that TTL tasks might not be canceled when there is a write conflict [#56422](https://github.com/pingcap/tidb/issues/56422) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that TTL tasks cannot be canceled when there is a write conflict [#56422](https://github.com/pingcap/tidb/issues/56422) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that inserting oversized numbers in scientific notation causes an error `ERROR 1264 (22003)`, to make the behavior consistent with MySQL [#47787](https://github.com/pingcap/tidb/issues/47787) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that when canceling a TTL task, the corresponding SQL is not forced to be killed [#56511](https://github.com/pingcap/tidb/issues/56511) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that `INSERT ... ON DUPLICATE KEY` statement is not compatible with `mysql_insert_id` [#55965](https://github.com/pingcap/tidb/issues/55965) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that when canceling a TTL task, the corresponding SQL is not killed forcibly [#56511](https://github.com/pingcap/tidb/issues/56511) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that the `INSERT ... ON DUPLICATE KEY` statement is not compatible with `mysql_insert_id` [#55965](https://github.com/pingcap/tidb/issues/55965) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that audit log filtering does not take effect when SQL cannot build an execution plan [#50988](https://github.com/pingcap/tidb/issues/50988) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Fix the issue that existing TTL tasks are executed unexpectedly frequently in a cluster that is upgraded from v6.5 to v7.5 or later [#56539](https://github.com/pingcap/tidb/issues/56539) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that the `CAST` function does not support explicitly setting the character set [#55677](https://github.com/pingcap/tidb/issues/55677) @[Defined2014](https://github.com/Defined2014)
-
+    - Fix the issue that TiDB does not check the index length limitation when executing `ADD INDEX` [#56930](https://github.com/pingcap/tidb/issues/56930) @[fzzf678](https://github.com/fzzf678)
 + TiKV <!--tw@qiancai: 6 notes-->
 
     - Add the `RawKvMaxTimestampNotSynced` error, log detailed error information in `errorpb.Error.max_ts_not_synced`, and add a retry mechanism for the `must_raw_put` operation when this error occurs [#16789](https://github.com/tikv/tikv/issues/16789) @[pingyu](https://github.com/pingyu)
