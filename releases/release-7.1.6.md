@@ -181,7 +181,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复 `advance-ts-interval` 配置未被用于限制 CDC 和 log-backup 模块中 `check_leader` 操作的 timeout，导致在某些情况下 TiKV 正常重启时 `resolved_ts` lag 过大的问题 [#17107](https://github.com/tikv/tikv/issues/17107) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - Fix the issue that SST files imported by TiDB Lightning are lost after TiKV is restarted [#15912](https://github.com/tikv/tikv/issues/15912) @[lance6716](https://github.com/lance6716)
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复 ingest 已被删除的 sst_importer SST 文件导致 TiKV panic 的问题 [#15053](https://github.com/tikv/tikv/issues/15053) @[lance6716](https://github.com/lance6716)
-    - Fix the issue that when there are a large number of Regions in a TiKV instance, TiKV might OOM during data import [#16229](https://github.com/tikv/tikv/issues/16229) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - Fix the issue that when there are a large number of Regions in a TiKV instance, TiKV might be OOM during data import [#16229](https://github.com/tikv/tikv/issues/16229) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - (dup): release-7.5.4.md > 错误修复> TiKV - 修复早期版本（早于 v7.1）和之后的版本的 bloom filter 无法兼容的问题 [#17272](https://github.com/tikv/tikv/issues/17272) @[v01dstar](https://github.com/v01dstar)
     - (dup): release-6.5.11.md > 错误修复> TiKV - 修复设置 gRPC 消息的压缩算法 (`grpc-compression-type`) 对 TiKV 发送到 TiDB 的消息不起作用的问题 [#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
     - (dup): release-6.5.10.md > 错误修复> TiKV - 修复测试用例不稳定的问题，确保每次测试都使用独立的临时目录，从而避免在线配置更改影响其他测试用例 [#16871](https://github.com/tikv/tikv/issues/16871) @[glorv](https://github.com/glorv)
