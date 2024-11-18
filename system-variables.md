@@ -4861,6 +4861,10 @@ SHOW WARNINGS;
 
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
+> **Warning:**
+>
+> Starting from v8.5.0, setting this variable to `static` or `static-only` returns a warning. This variable will be deprecated in a future release.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
