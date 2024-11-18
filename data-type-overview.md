@@ -15,7 +15,7 @@ The definitions used for datatypes are specified as `T(M[, D])`. Where by:
 
     > **Warning:**
     >
-    > Starting from v8.5.0, integer display width is deprecated ([`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) is true by default). Specifying display width for integer types is NOT recommended.
+    > Starting from v8.5.0, integer display width is deprecated ([`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) is `true` by default). Specifying display width for integer types is NOT recommended.
 
 - `D` applies to floating-point and fixed-point types and indicates the number of digits following the decimal point (the scale).
 - `fsp` applies to the `TIME`, `DATETIME`, and `TIMESTAMP` types and represents the fractional seconds precision. The `fsp` value, if given, must be in the range 0 to 6. A value of 0 signifies that there is no fractional part. If omitted, the default precision is 0.

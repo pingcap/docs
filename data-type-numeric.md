@@ -20,7 +20,7 @@ The following table summarizes field descriptions:
 
 > **Warning:**
 >
-> Starting from v8.5.0, integer display width is deprecated ([`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) is true by default). Specifying display width for integer types is NOT recommended.
+> Starting from v8.5.0, integer display width is deprecated ([`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) is `true` by default). Specifying display width for integer types is NOT recommended.
 
 | Syntax Element | Description |
 | -------- | ------------------------------- |
