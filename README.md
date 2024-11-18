@@ -63,6 +63,13 @@ Currently, we maintain the following versions of TiDB documentation in different
 
 See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓
 
+<a href="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors?repo_id=63995402&limit=30" target="_blank" style="display: block;" align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?repo_id=63995402&limit=30&image_size=auto&color_scheme=dark" width="655" height="auto" />
+    <img alt="Active Contributors of pingcap/docs - Last 28 days" src="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?repo_id=63995402&limit=30&image_size=auto&color_scheme=light" width="655" height="auto" />
+  </picture>
+</a>
+
 ## License
 
 All documentation starting from TiDB v7.0 is available under the terms of [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
