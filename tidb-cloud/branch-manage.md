@@ -80,7 +80,6 @@ To delete a branch, perform the following steps:
 
 ## Reset a branch
 
-
 Resetting a branch synchronizes it with the latest data from its parent.
 
 > **Note:**
