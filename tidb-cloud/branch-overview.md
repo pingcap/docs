@@ -41,7 +41,10 @@ Currently, TiDB Cloud Serverless branches are in beta and free of charge.
 
 - For each branch of a free cluster, 10 GiB storage is allowed. For each branch of a scalable cluster, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
-- For each branch of a free cluster, you can only select `Include data up to` within 1 day. For each branch of a scalable cluster, you can select `Include data up to` within 14 days.
+- When [creating a branch](/tidb-cloud/branch-manage.md#create-a-branch) from a specific point in time:
+
+    - For branches of a free cluster, you can select any time within the last 24 hours.
+    - For branches of a scalable cluster, you can select any time within the last 14 days.
 
 If you need more quotas, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
