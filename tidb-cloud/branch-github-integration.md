@@ -58,8 +58,8 @@ After you connect your TiDB Cloud Serverless cluster to your GitHub repository, 
 
 | Pull request changes               | TiDB Cloud Branching app behaviors                                                                                                                                                                                                                                                                                                                                        |
 |------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Create a pull request              | When you create a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for your TiDB Cloud Serverless cluster. When the mode is `reset` the branch name is in the `${github_branch_name}_${pr_id}` format; when the mode is `reserve` branch name is in the `${github_branch_name}_${pr_id}_${commit_sha}` format. Note that the number of branches has a [limit](/tidb-cloud/branch-overview.md#limitations-and-quotas). |
-| Push new commits to a pull request | In the mode `reset`, every time you push a new commit to a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app resets the TiDB Cloud Serverless branch. While in the mode `reserve`, the app creates a new branch for the latest commit.                                                                                                                            |
+| Create a pull request              | When you create a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for your TiDB Cloud Serverless cluster. When `branch.mode` is set to `reset`, the branch name follows the `${github_branch_name}_${pr_id}` format. When `branch.mode` is set to `reserve`, the branch name follows the `${github_branch_name}_${pr_id}_${commit_sha}` format. Note that the number of branches has a [limit](/tidb-cloud/branch-overview.md#limitations-and-quotas). |
+| Push new commits to a pull request | When `branch.mode` is set to `reset`, every time you push a new commit to a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app resets the TiDB Cloud Serverless branch. When `branch.mode` is set to `reserve`, the app creates a new branch for the latest commit.                                                                                                                            |
 | Close or merge a pull request      | When you close or merge a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the branch for this pull request.                                                                                                                                                                                                            |
 | Reopen a pull request              | When you reopen a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for the lasted commit of the pull request.                                                                                                                                                                                                  |
 
@@ -98,9 +98,10 @@ github:
 
 **Type:** string. **Default:** `reset`.
 
-If it is set to `reset`, the TiDB Cloud Branching app will reset the previous branch to synchronize the data to the latest.
+Specify how the TiDB Cloud Branching app handles branch updates:
 
-If it is set to `reserve`, the TiDB Cloud Branching app will create a new branch for your latest commit.
+- If it is set to `reset`, the TiDB Cloud Branching app will update the existing branch with the latest data.
+- If it is set to `reserve`, the TiDB Cloud Branching app will create a new branch for your latest commit.
 
 ```yaml
 github:
