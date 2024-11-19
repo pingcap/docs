@@ -42,8 +42,16 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
 1. Get the Account ID and the External ID of the TiDB cluster that you want to enable audit logging.
 
-    1. On the DB Audit Logging page, click the **Enable** button to enter the audit configuration page.
-    2. On the right side of the configuration page, you can get the **AWS IAM Popicy Settings**. Please record the TiDB Cloud Account ID and the External ID for later use.
+
+    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+    2. Click the name of your target cluster to go to its overview page, and then click **DB Audit Logging** in the left navigation pane.
+    3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
+    4. In the **Enable Database Audit Logging** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
 
 2. In the AWS Management Console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is a storage bucket policy with the `s3:PutObject` write-only permission.
 
