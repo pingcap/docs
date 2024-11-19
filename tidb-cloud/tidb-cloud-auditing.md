@@ -100,8 +100,8 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 
 > **Note:**
 >
-> - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Test Connection** to re-verify TiDB Cloud's access configuration to the bucket, and then click **Enable** for the changes to take effect.
-> - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this cluster in your Amazon S3.
+> - After enabling audit logging, if you make any new changes to the bucket URL, location, or ARN, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
+> - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this cluster in the AWS Management Console.
 
 ### Enable audit logging for Google Cloud
 
