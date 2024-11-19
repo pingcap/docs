@@ -28,6 +28,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - (dup): release-7.5.2.md > Improvements> TiDB - Improve sync load performance to reduce latency in loading statistics [#52994](https://github.com/pingcap/tidb/issues/52294) [hawkingrei](https://github.com/hawkingrei)
 
 + TiKV
+
     - (dup): release-6.5.9.md > Improvements> TiKV - Add slow logs for peer and store messages [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
     - (dup): release-6.5.11.md > Improvements> TiKV - Optimize the compaction trigger mechanism of RocksDB to accelerate disk space reclamation when handling a large number of DELETE versions [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - (dup): release-7.5.4.md > Improvements> TiKV - Optimize the jittery access delay when restarting TiKV due to waiting for the log to be applied, improving the stability of TiKV [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -173,6 +174,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - Fix the issue that existing TTL tasks are executed unexpectedly frequently in a cluster that is upgraded from v6.5 to v7.5 or later [#56539](https://github.com/pingcap/tidb/issues/56539) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that the `CAST` function does not support explicitly setting the character set [#55677](https://github.com/pingcap/tidb/issues/55677) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that TiDB does not check the index length limitation when executing `ADD INDEX` [#56930](https://github.com/pingcap/tidb/issues/56930) @[fzzf678](https://github.com/fzzf678)
+
 + TiKV <!--tw@qiancai: 6 notes-->
 
     - Add the `RawKvMaxTimestampNotSynced` error, log detailed error information in `errorpb.Error.max_ts_not_synced`, and add a retry mechanism for the `must_raw_put` operation when this error occurs [#16789](https://github.com/tikv/tikv/issues/16789) @[pingyu](https://github.com/pingyu)
