@@ -40,7 +40,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
 #### Step 2. Configure Amazon S3 access
 
-1. Get the TiDB Cloud account ID and the External ID of the TiDB cluster that you want to enable audit logging.
+1. Get the Account ID and the External ID of the TiDB cluster that you want to enable audit logging.
 
     1. On the DB Audit Logging page, click the **Enable** button to enter the audit configuration page.
     2. On the right side of the configuration page, you can get the **AWS IAM Popicy Settings**. Please record the TiDB Cloud Account ID and the External ID for later use.
