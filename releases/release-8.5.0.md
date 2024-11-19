@@ -47,11 +47,13 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [Documentation](link).
 
-* The database and table creation acceleration feature is now Generally Available (GA), significantly reducing the time required for data migration and cluster initialization. [#50052](https://github.com/pingcap/tidb/issues/50052) @[D3Hunter](https://github.com/D3Hunter) @[gmhdbjd](https://github.com/gmhdbjd) tw@Oreoxmt <!--1977-->
+* TiDB accelerated table creation becomes generally available (GA), significantly reducing data migration and cluster initialization time [#50052](https://github.com/pingcap/tidb/issues/50052) @[D3Hunter](https://github.com/D3Hunter) @[gmhdbjd](https://github.com/gmhdbjd) tw@Oreoxmt <!--1977-->
 
-    In v8.0.0, the system variable [tidb_enable_fast_create_table](/system-variables#tidb_enable_fast_create_table-new-in-v800) was introduced to improve the performance of batch database and table creation. During data migration and cluster initialization, it enables the rapid creation of tables at the million-scale level, significantly reducing the time required.
+    TiDB v7.6.0 introduces accelerated table creation as an experimental feature, controlled by the system variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760). Staring from v8.0.0, this system variable is renamed to [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
 
-    For more information, see [Documentation](link).
+    In v8.5.0, TiDB accelerated table creation becomes generally available (GA) and is enabled by default. During data migration and cluster initialization, this feature supports rapid creation of millions of tables, significantly reducing operation time.
+
+    For more information, see [Documentation](/accelerated-table-creation.md).
 
 ### Reliability
 
