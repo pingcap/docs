@@ -220,6 +220,15 @@ delta_index_cache_size = 0
     dt_page_gc_threshold = 0.5
 
 
+    ## New in v6.0.0. This item is used for [MinTSO scheduler](/tiflash/tiflash-mintso-scheduler.md) and specifies the max number of threads that one resource group could use. The default value is 5000.
+    task_scheduler_thread_soft_limit = 5000
+
+    ## New in v6.0.0. This item is used for [MinTSO scheduler](/tiflash/tiflash-mintso-scheduler.md) and specifies the max number of threads in global scope. The default value is 10000.
+    task_scheduler_thread_hard_limit = 10000
+
+    ## New in v6.4.0. This item is used for [MinTSO scheduler](/tiflash/tiflash-mintso-scheduler.md) and specifies the max number of running queries in a TiFlash instance. The default value is 0 which means two times the vcpu.
+    task_scheduler_active_set_soft_limit = 0
+
 ## Security settings take effect starting from v4.0.5.
 [security]
     ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
