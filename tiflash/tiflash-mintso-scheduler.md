@@ -65,4 +65,4 @@ By introducing soft limit and hard limit, the MinTSO scheduler effectively avoid
 
 # See also
 
-- [TiFlash Configuration](/tiflash/tiflash-configuration.md): learn how to configure the MinTSO scheduler.
+- [Configure TiFlash](/tiflash/tiflash-configuration.md): learn how to configure the MinTSO scheduler.
