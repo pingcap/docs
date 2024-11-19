@@ -42,7 +42,6 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
 1. Get the Account ID and the External ID of the TiDB cluster that you want to enable audit logging.
 
-
     1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
         > **Tip:**
