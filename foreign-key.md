@@ -5,7 +5,7 @@ summary: An overview of the usage of FOREIGN KEY constraints for the TiDB databa
 
 # FOREIGN KEY Constraints
 
-Starting from v6.6.0, TiDB supports the foreign key feature, which allows cross-table referencing of related data, and foreign key constraints to maintain data consistency.
+Foreign keys allow cross-table references of related data, while foreign key constraints ensure the consistency of related data. Starting from v6.6.0, TiDB supports foreign keys and foreign key constraints. Starting from v8.5.0, this feature becomes generally available.
 
 > **Warning:**
 >
