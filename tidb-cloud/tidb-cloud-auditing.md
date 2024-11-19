@@ -164,8 +164,8 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 
 > **Note:**
 >
-> - After enabling audit logging, if you make any new changes to bucket URI or location, you must click **Test Connection** to re-verify TiDB Cloud's access configuration to the bucket, and then click **Enable** for the changes to take effect.
-> - To remove TiDB Cloud's access to your GCS bucket, simply delete the trust policy granted to this cluster in your GCS bucket.
+> - After enabling audit logging, if you make any new changes to the bucket URL or location, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
+> - To remove TiDB Cloud's access to your GCS bucket, delete the trust policy granted to this cluster in the Google Cloud console.
 
 ## Specify auditing filter rules
 
