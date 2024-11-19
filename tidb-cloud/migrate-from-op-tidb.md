@@ -337,3 +337,62 @@ To replicate incremental data, do the following:
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
     - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream TiDB Cloud cluster.
+
+7. Set the same timezone for the upstream and downstream clusters. By default, TiDB Cloud will set the timezone to UTC. If the timezone is different between the upstream and downstream clusters, you need to set the same timezone for both clusters.
+
+    - In the upstream cluster, run the following command to check the timezone:
+
+        ```sql
+        SELECT @@global.time_zone;
+        ```
+
+    - In the downstream cluster, run the following command to set the timezone:
+
+        ```sql
+        SET GLOBAL time_zone = '+08:00';
+        ```
+
+    - Check the timezone again to verify the setting.
+
+        ```sql
+        SELECT @@global.time_zone;
+        ```
+
+8. Backup the query bindings in upstream cluster and restore them in the downstream cluster. You can use the following query to backup the query bindings:
+
+    ```sql
+    SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING for ', original_sql,' USING ', bind_sql,';')) from mysql.bind_info where status='enabled';
+    ```
+
+    After you get the query bindings, you can run them in the downstream cluster to restore the query bindings.
+
+9. Backup the user and privilege information in the upstream cluster and restore them in the downstream cluster. You can use the following script to backup the user and privilege information (Don't forget to replace the placeholders with the actual values):
+
+    ```shell
+    #!/bin/bash
+
+    HOST={tidb_op_host}
+    PORT={tidb_op_port}
+    USER=root
+    PSWD={root_password}
+    MYSQL="mysql -u${USER} -p${PSWD} -h${HOST} -P${PORT} --default-character-set=utf8mb4"
+    
+    function backup_user_priv(){
+        ret=0
+        sql="select concat(user,':',host,':',authentication_string) from mysql.user where user not in ('root')"
+        for usr in `$MYSQL -se "$sql"`;do
+            u=`echo $usr | awk -F ":" '{print $1}'`
+            h=`echo $usr | awk -F ":" '{print $2}'`
+            p=`echo $usr | awk -F ":" '{print $3}'`
+            echo "-- Grants for '${u}'@'${h}';"
+            [[ ! -z "${p}" ]] && echo "CREATE USER IF NOT EXISTS '${u}'@'${h}' IDENTIFIED WITH 'mysql_native_password' AS '${p}' ;"
+            $MYSQL -se "show grants for '${u}'@'${h}';" | sed 's/$/;/g'
+            [ $? -ne 0 ] && ret=1 && break
+        done
+        return $ret
+    }
+    
+    backup_user_priv
+    ```
+    
+    After you get the user and privilege information, you can run them in the downstream cluster to restore the user and privilege information.
