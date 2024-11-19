@@ -169,11 +169,52 @@
     - [Migrate to a Downstream Table with More Columns](/migrate-with-more-columns-downstream.md)
     - [Filter Binlog Events](/filter-binlog-event.md)
     - [Filter DML Events Using SQL Expressions](/filter-dml-event.md)
-- Integrate
-  - [Overview](/integration-overview.md)
+- Stream Data
+  - [TiCDC Overview](/ticdc/ticdc-overview.md)
+  - [Deploy and Maintain](/ticdc/deploy-ticdc.md)
+  - Changefeed
+    - [Overview](/ticdc/ticdc-changefeed-overview.md)
+    - Create Changefeeds
+      - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
+      - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
+      - [Replicate Data to Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
+      - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
+    - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
+    - [Log Filter](/ticdc/ticdc-filter.md)
+    - [DDL Replication](/ticdc/ticdc-ddl.md)
+    - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+  - Monitor and Alert
+    - [Monitoring Metrics Summary](/ticdc/ticdc-summary-monitor.md)
+    - [Monitoring Metrics Details](/ticdc/monitor-ticdc.md)
+    - [Alert Rules](/ticdc/ticdc-alert-rules.md)
   - Integration Scenarios
+    - [Overview](/integration-overview.md)
     - [Integrate with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
+  - Reference
+    - [TiCDC Architecture](/ticdc/ticdc-architecture.md)
+    - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
+    - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
+    - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
+    - [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
+    - [Data Consistency Validation for Upstream and Downstream TiDB Clusters](/ticdc/ticdc-upstream-downstream-check.md)
+    - [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md)
+    - Output Protocols
+      - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
+      - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
+      - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
+      - [TiCDC Debezium Protocol](/ticdc/ticdc-debezium.md)
+      - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+      - [TiCDC Simple Protocol](/ticdc/ticdc-simple-protocol.md)
+    - [TiCDC Open API v2](/ticdc/ticdc-open-api-v2.md)
+    - [TiCDC Open API v1](/ticdc/ticdc-open-api.md)
+    - TiCDC Data Consumption
+      - [TiCDC Row Data Checksum Verification Based on Avro](/ticdc/ticdc-avro-checksum-verification.md)
+      - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
+    - [TiCDC Compatibility](/ticdc/ticdc-compatibility.md)
+  - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
+  - [FAQs](/ticdc/ticdc-faq.md)
+  - [Glossary](/ticdc/ticdc-glossary.md)
 - Maintain
   - Security
     - [Best Practices for TiDB Security Configuration](/best-practices-for-security-configuration.md)
@@ -587,48 +628,6 @@
       - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
       - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - [Dumpling](/dumpling-overview.md)
-  - TiCDC
-    - [Overview](/ticdc/ticdc-overview.md)
-    - [Deploy and Maintain](/ticdc/deploy-ticdc.md)
-    - Changefeed
-      - [Overview](/ticdc/ticdc-changefeed-overview.md)
-      - Create Changefeeds
-        - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
-        - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
-        - [Replicate Data to Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
-        - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
-      - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
-      - [TiCDC Client Authentication](/ticdc/ticdc-client-authentication.md)
-      - [Log Filter](/ticdc/ticdc-filter.md)
-      - [DDL Replication](/ticdc/ticdc-ddl.md)
-      - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
-      - [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
-      - [Data Consistency Validation for TiDB Upstream/Downstream Clusters](/ticdc/ticdc-upstream-downstream-check.md)
-      - [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md)
-    - Monitor and Alert
-      - [Monitoring Metrics Summary](/ticdc/ticdc-summary-monitor.md)
-      - [Monitoring Metrics Details](/ticdc/monitor-ticdc.md)
-      - [Alert Rules](/ticdc/ticdc-alert-rules.md)
-    - Reference
-      - [Architecture](/ticdc/ticdc-architecture.md)
-      - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
-      - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
-      - Output Protocols
-        - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
-        - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-        - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
-        - [TiCDC Debezium Protocol](/ticdc/ticdc-debezium.md)
-        - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
-        - [TiCDC Simple Protocol](/ticdc/ticdc-simple-protocol.md)
-      - [TiCDC Open API v2](/ticdc/ticdc-open-api-v2.md)
-      - [TiCDC Open API v1](/ticdc/ticdc-open-api.md)
-      - TiCDC Data Consumption
-        - [TiCDC Row Data Checksum Verification Based on Avro](/ticdc/ticdc-avro-checksum-verification.md)
-        - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
-      - [Compatibility](/ticdc/ticdc-compatibility.md)
-    - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
-    - [FAQs](/ticdc/ticdc-faq.md)
-    - [Glossary](/ticdc/ticdc-glossary.md)
   - PingCAP Clinic Diagnostic Service
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
