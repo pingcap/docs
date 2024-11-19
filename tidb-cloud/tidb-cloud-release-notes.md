@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## November 19, 2024
+
+**General changes**
+
+- [TiDB Cloud Serverless branching (beta)](/tidb-cloud/branch-overview.md) introduces the following improvements to branch management:
+
+    - **Flexible branch creation**: When creating a branch, you can select a specific cluster or branch as the parent and specify a precise point in time to use from the parent. This gives you precise control over the data in your branch.
+
+    - **Branch reset**: You can reset a branch to synchronize it with the latest state of its parent.
+
+    - **Improved GitHub integration**: The [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub App introduces the [`branch.mode`](/tidb-cloud/branch-github-integration.md#branchmode) parameter, which controls the behavior during pull request synchronization. In the default mode `reset`, the app resets the branch to match the latest changes in the pull request.
+
+  For more information, see [Manage TiDB Cloud Serverless Branches](/tidb-cloud/branch-manage.md) and [Integrate TiDB Cloud Serverless Branching (Beta) with GitHub](/tidb-cloud/branch-github-integration.md).
+
 ## November 12, 2024
 
 **General changes**
