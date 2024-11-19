@@ -28,16 +28,6 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 TiDB Cloud supports recording the audit logs of a TiDB Cloud Dedicated cluster to your cloud storage service. Before enabling database audit logging, configure your cloud storage service on the cloud provider where the cluster is located.
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
-
-    > **Tip:**
-    >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
-
-2. Click the name of your target cluster to go to its overview page, and then click **DB audit logging** in the left navigation pane.
-
-3. Database audit logging is related to cloud service providers. Therefore, the operation guide for enabling the audit logging is different for clusters deployed on different cloud service providers.
-
 ### Enable audit logging for AWS
 
 To enable audit logging for AWS, take the following steps:
