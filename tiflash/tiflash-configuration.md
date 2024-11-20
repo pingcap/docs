@@ -214,6 +214,33 @@ delta_index_cache_size = 0
     ## It is recommended that you set this value to 9 if dt_compression_method is LZ4HC.
     dt_compression_level = 1
 
+<<<<<<< HEAD
+=======
+    ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
+    dt_page_gc_threshold = 0.5
+
+    ## New in v7.0.0. This item specifies the maximum memory available for the HashAggregation operator with group by key before a disk spill is triggered. When the memory usage exceeds the threshold, HashAggregation reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashAggregation.
+    max_bytes_before_external_group_by = 0
+
+    ## New in v7.0.0. This item specifies the maximum memory available for the sort or topN operator before a disk spill is triggered. When the memory usage exceeds the threshold, the sort or topN operator reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for sort or topN.
+    max_bytes_before_external_sort = 0
+
+    ## New in v7.0.0. This item specifies the maximum memory available for the HashJoin operator with EquiJoin before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashJoin with EquiJoin.
+    max_bytes_before_external_join = 0
+
+    ## New in v7.4.0. This item controls whether to enable the TiFlash resource control feature. When it is set to true, TiFlash uses the pipeline execution model.
+    enable_resource_control = true
+
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads that one resource group can use. The default value is 5000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
+    task_scheduler_thread_soft_limit = 5000
+
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads in the global scope. The default value is 10000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
+    task_scheduler_thread_hard_limit = 10000
+
+    ## New in v6.4.0. This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. The default value is 0, which means twice the number of vCPUs. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
+    task_scheduler_active_set_soft_limit = 0
+
+>>>>>>> 397721daf7 (Add mintso config parameters (#19452))
 ## Security settings take effect starting from v4.0.5.
 [security]
     ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
