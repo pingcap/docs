@@ -349,6 +349,83 @@ Usage:
     config set flow-round-by-digit 4
     ```
 
+#### `config [show | set service-middleware <option> <value>]`
+
+`service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as auditing and request rate limiting. Starting from v8.5.0, you can control the rate and concurrency of the following gRPC API requests through `service-middleware`:
+
+- `GetRegion`: Get information of a specified Region
+- `GetStore`: Get information of a specified Store
+- `GetMembers`: Get information of PD cluster members
+
+Display the related config information of `service-middleware`:
+
+```bash
+config show service-middleware
+```
+
+```bash
+{
+  "audit": {
+    "enable-audit": "true"
+  },
+  "rate-limit": {
+    "enable-rate-limit": "true",
+    "limiter-config": {}
+  },
+  "grpc-rate-limit": {
+    "enable-grpc-rate-limit": "true",
+    "grpc-limiter-config": {}
+  }
+}
+```
+
+Control the rate of a specific gRPC API request, using the `GetRegion` API request as an example:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion qps 100
+```
+
+Control the concurrency of a specific gRPC API request, using the `GetRegion` API request as an example:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion concurrency 10
+```
+
+View the modified configuration:
+
+```bash
+config show service-middleware
+```
+
+```bash
+{
+  "audit": {
+    "enable-audit": "true"
+  },
+  "rate-limit": {
+    "enable-rate-limit": "true",
+    "limiter-config": {}
+  },
+  "grpc-rate-limit": {
+    "enable-grpc-rate-limit": "true",
+    "grpc-limiter-config": {
+      "GetRegion": {
+        "QPS": 100,
+        "QPSBurst": 100,
+        "ConcurrencyLimit": 10
+      }
+    }
+  }
+}
+```
+
+Reset the above settings:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion qps 0
+config set service-middleware grpc-rate-limit GetRegion concurrency 0
+```
+
 #### `config placement-rules [disable | enable | load | save | show | rule-group]`
 
 For the usage of `config placement-rules [disable | enable | load | save | show | rule-group]`, see [Configure placement rules](/configure-placement-rules.md#configure-rules).
