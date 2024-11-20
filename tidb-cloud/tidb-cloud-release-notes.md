@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年11月19日 {#november-19-2024}
+
+**一般的な変更**
+
+-   [TiDB Cloudサーバーレス ブランチング (ベータ版)](/tidb-cloud/branch-overview.md)ブランチ管理に次の改善が導入されています。
+
+    -   **柔軟なブランチ作成**: ブランチを作成するときに、特定のクラスターまたはブランチを親として選択し、親から使用する正確な時点を指定できます。これにより、ブランチ内のデータを正確に制御できます。
+
+    -   **ブランチのリセット**: ブランチをリセットして、親の最新の状態と同期することができます。
+
+    -   **GitHub 統合の改善**: [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching) GitHub アプリでは、プル リクエストの同期中の動作を制御する[`branch.mode`](/tidb-cloud/branch-github-integration.md#branchmode)パラメーターが導入されています。デフォルト モード`reset`では、アプリはプル リクエストの最新の変更に合わせてブランチをリセットします。
+
+    詳細については[TiDB Cloudサーバーレス ブランチの管理](/tidb-cloud/branch-manage.md)および[TiDB Cloud Serverless Branching (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)参照してください。
+
 ## 2024年11月12日 {#november-12-2024}
 
 **一般的な変更**

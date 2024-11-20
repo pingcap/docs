@@ -1,6 +1,6 @@
 ---
 title: TiDB Environment and System Configuration Check
-summary: Learn the environment check operations before deploying TiDB.
+summary: TiDB をデプロイする前に、環境チェック操作について学習します。
 ---
 
 # TiDB 環境とシステムコンフィグレーションのチェック {#tidb-environment-and-system-configuration-check}
@@ -9,11 +9,11 @@ summary: Learn the environment check operations before deploying TiDB.
 
 ## TiKVを展開するターゲットマシンにオプション付きでデータディスクのext4ファイルシステムをマウントする {#mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv}
 
-本番稼働環境では、TiKV データの保存に EXT4 ファイルシステムの NVMe SSD を使用することをお勧めします。この構成はベスト プラクティスであり、その信頼性、セキュリティ、安定性は多数のオンライン シナリオで実証されています。
+本番環境では、TiKV データの保存に EXT4 ファイルシステムの NVMe SSD を使用することをお勧めします。この構成はベスト プラクティスであり、その信頼性、セキュリティ、安定性は多数のオンライン シナリオで実証されています。
 
 `root`ユーザー アカウントを使用してターゲット マシンにログインします。
 
-データ ディスクを ext4 ファイルシステムにフォーマットし、ファイルシステムに`nodelalloc`および`noatime` `nodelalloc`オプションを追加します。5 オプションを追加する必要があります。そうしないと、 TiUPデプロイメントは事前チェックに合格できません。7 `noatime`はオプションです。
+データ ディスクを ext4 ファイルシステムにフォーマットし、ファイルシステムに`nodelalloc`および`noatime`マウント オプションを追加します`nodelalloc`オプションを追加する必要があります。そうしないと、 TiUPデプロイメントは事前チェックに合格できません`noatime`オプションはオプションです。
 
 > **注記：**
 >
@@ -35,6 +35,13 @@ summary: Learn the environment check operations before deploying TiDB.
     parted -s -a optimal /dev/nvme0n1 mklabel gpt -- mkpart primary ext4 1 -1
     ```
 
+    大規模な NVMe デバイスの場合は、複数のパーティションを作成できます。
+
+    ```bash
+    parted -s -a optimal /dev/nvme0n1 mklabel gpt -- mkpart primary ext4 1 2000GB
+    parted -s -a optimal /dev/nvme0n1 -- mkpart primary ext4 2000GB -1
+    ```
+
     > **注記：**
     >
     > パーティションのデバイス番号を表示するには、 `lsblk`コマンドを使用します。NVMe ディスクの場合、生成されるデバイス番号は通常`nvme0n1p1`です。通常のディスク (たとえば、 `/dev/sdb` ) の場合、生成されるデバイス番号は通常`sdb1`です。
@@ -45,7 +52,7 @@ summary: Learn the environment check operations before deploying TiDB.
     mkfs.ext4 /dev/nvme0n1p1
     ```
 
-4.  データ ディスクのパーティション UUIDをビュー。
+4.  データ ディスクのパーティション UUID をビュー。
 
     この例では、nvme0n1p1 の UUID は`c51eb23b-195c-4061-92a9-3fad812cc12f`です。
 
@@ -74,6 +81,7 @@ summary: Learn the environment check operations before deploying TiDB.
 
     ```bash
     mkdir /data1 && \
+    systemctl daemon-reload && \
     mount -a
     ```
 
@@ -85,7 +93,7 @@ summary: Learn the environment check operations before deploying TiDB.
 
         /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
 
-    ファイルシステムが ext4 であり、マウント オプションに`nodelalloc`含まれている場合、ターゲット マシンにオプションを使用してデータ ディスク ext4 ファイルシステムを正常にマウントしています。
+    ファイルシステムが ext4 であり、マウント オプションに`nodelalloc`が含まれている場合、ターゲット マシンにオプションを使用してデータ ディスク ext4 ファイルシステムを正常にマウントしています。
 
 ## システムスワップをチェックして無効にする {#check-and-disable-system-swap}
 
@@ -99,13 +107,13 @@ sysctl -p
 
 > **注記：**
 >
-> -   `swapoff -a`を実行してから`swapon -a`実行すると、データをメモリにダンプし、スワップをクリーンアップしてスワップを更新します。swappiness の変更を削除して`swapoff -a`のみを実行すると、システムを再起動した後にスワップが再び有効になります。
+> -   `swapoff -a`実行してから`swapon -a`実行すると、データをメモリにダンプし、スワップをクリーンアップしてスワップを更新します。swappiness の変更を削除して`swapoff -a`のみを実行すると、システムを再起動した後にスワップが再び有効になります。
 >
-> -   `sysctl -p` 、システムを再起動せずに設定を有効にします。
+> -   `sysctl -p`は、システムを再起動せずに設定を有効にします。
 
 ## TiDBインスタンスの一時スペースを設定する（推奨） {#set-temporary-spaces-for-tidb-instances-recommended}
 
-TiDB の一部の操作では、 `root`ファイルをサーバーに書き込む必要があるため、TiDB を実行するオペレーティング システム ユーザーに、ターゲット ディレクトリの読み取りと書き込みを行うための十分な権限があることを確認する必要があります。1 権限で TiDB インスタンスを起動しない場合は、ディレクトリの権限を確認し、正しく設定する必要があります。
+TiDB の一部の操作では、一時ファイルをサーバーに書き込む必要があるため、TiDB を実行するオペレーティング システム ユーザーに、ターゲット ディレクトリの読み取りと書き込みを行うための十分な権限があることを確認する必要があります。1 `root`で TiDB インスタンスを起動しない場合は、ディレクトリの権限を確認し、正しく設定する必要があります。
 
 -   TiDB 作業領域
 
@@ -113,29 +121,29 @@ TiDB の一部の操作では、 `root`ファイルをサーバーに書き込�
 
 -   `Fast Online DDL`作業エリア
 
-    変数[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が`ON` (v6.5.0 以降のバージョンではデフォルト値) に設定されている場合、 `Fast Online DDL`が有効になり、一部の DDL 操作ではファイルシステム内の一時ファイルの読み取りと書き込みが必要になります。場所は構成項目[`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)によって定義されます。TiDB を実行するユーザーには、オペレーティング システムのそのディレクトリに対する読み取りおよび書き込み権限があることを確認する必要があります。デフォルトのディレクトリ`/tmp/tidb`を例に挙げます。
+    変数[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が`ON` (v6.5.0 以降のバージョンではデフォルト値) に設定されている場合、 `Fast Online DDL`が有効になり、一部の DDL 操作ではファイルシステム内の一時ファイルの読み取りと書き込みが必要になります。場所は、構成項目[`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)によって定義されます。TiDB を実行するユーザーには、オペレーティング システムのそのディレクトリに対する読み取りおよび書き込み権限があることを確認する必要があります。デフォルトのディレクトリ`/tmp/tidb`は、tmpfs (一時ファイル システム) を使用します。ディスク ディレクトリを明示的に指定することをお勧めします。次の例では、 `/data/tidb-deploy/tempdir`使用しています。
 
     > **注記：**
     >
     > アプリケーション内に大きなオブジェクトに対する DDL 操作が存在する場合は、 [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)用に独立した大きなファイル システムを構成することを強くお勧めします。
 
     ```shell
-    sudo mkdir /tmp/tidb
+    sudo mkdir -p /data/tidb-deploy/tempdir
     ```
 
-    `/tmp/tidb`ディレクトリがすでに存在する場合は、書き込み権限が付与されていることを確認してください。
+    `/data/tidb-deploy/tempdir`ディレクトリがすでに存在する場合は、書き込み権限が付与されていることを確認してください。
 
     ```shell
-    sudo chmod -R 777 /tmp/tidb
+    sudo chmod -R 777 /data/tidb-deploy/tempdir
     ```
 
     > **注記：**
     >
-    > ディレクトリが存在しない場合は、TiDB は起動時に自動的に作成します。ディレクトリの作成に失敗した場合、または TiDB にそのディレクトリの読み取りおよび書き込み権限がない場合は、実行時に予期しない問題[`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)発生する可能性があります。
+    > ディレクトリが存在しない場合は、TiDB は起動時に自動的に作成します。ディレクトリの作成に失敗した場合、または TiDB にそのディレクトリの読み取りおよび書き込み権限がない場合は、実行時に[`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)無効になります。
 
 ## 対象マシンのファイアウォールサービスをチェックして停止する {#check-and-stop-the-firewall-service-of-target-machines}
 
-TiDB クラスターでは、読み取りおよび書き込み要求やデータ ハートビートなどの情報の送信を確実にするために、ノード間のアクセス ポートが開いている必要があります。一般的なオンライン シナリオでは、データベースとアプリケーション サービス間、およびデータベース ノード間のデータ インタラクションはすべて、安全なネットワーク内で行われます。したがって、特別なセキュリティ要件がない場合は、ターゲット マシンのファイアウォールを停止することをお勧めします。それ以外の場合は、 [ポートの使用](/hardware-and-software-requirements.md#network-requirements)を参照して、必要なポート情報をファイアウォール サービスの許可リストに追加します。
+TiDB クラスターでは、読み取りおよび書き込み要求やデータ ハートビートなどの情報の伝送を確実にするために、ノード間のアクセス ポートが開いている必要があります。一般的なオンライン シナリオでは、データベースとアプリケーション サービス間、およびデータベース ノード間のデータ インタラクションはすべて、安全なネットワーク内で行われます。したがって、特別なセキュリティ要件がない場合は、ターゲット マシンのファイアウォールを停止することをお勧めします。それ以外の場合は、 [ポートの使用](/hardware-and-software-requirements.md#network-requirements)を参照して、必要なポート情報をファイアウォール サービスの許可リストに追加します。
 
 このセクションの残りの部分では、ターゲット マシンのファイアウォール サービスを停止する方法について説明します。
 
@@ -192,7 +200,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
             Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
             Active: active (running) since Mon 2021-04-05 09:55:29 EDT; 3 days ago
 
-        結果に`chronyd`も`ntpd`設定されていないと表示された場合は、どちらもシステムにインストールされていないことを意味します。まず`chronyd`または`ntpd`をインストールし、自動的に起動できることを確認してください。デフォルトでは`ntpd`が使用されます。
+        結果に`chronyd`も`ntpd`も設定されていないと表示された場合は、どちらもシステムにインストールされていないことを意味します。まず`chronyd`または`ntpd`インストールし、自動的に起動できることを確認してください。デフォルトでは`ntpd`が使用されます。
 
         システムが`chronyd`使用するように構成されている場合は、手順 3 に進みます。
 
@@ -230,7 +238,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
     chronyc tracking
     ```
 
-    -   コマンドが`Leap status     : Normal`を返す場合、同期プロセスは正常です。
+    -   コマンドが`Leap status     : Normal`返す場合、同期プロセスは正常です。
 
             Reference ID    : 5EC69F0A (ntp1.time.nl)
             Stratum         : 2
@@ -275,7 +283,12 @@ sudo systemctl enable ntpd.service
 本番環境の TiDB の場合、次の方法でオペレーティング システム構成を最適化することをお勧めします。
 
 1.  THP (Transparent Huge Pages) を無効にします。データベースのメモリアクセス パターンは、連続的ではなく、散在的になる傾向があります。高レベルのメモリの断片化が深刻な場合、THP ページが割り当てられると、レイテンシーが高くなります。
-2.  storageメディアの I/O スケジューラを`noop`に設定します。高速 SSDstorageメディアの場合、カーネルの I/O スケジューリング操作によってパフォーマンスが低下する可能性があります。スケジューラを`noop`に設定すると、カーネルが他の操作なしでハードウェアに I/O 要求を直接送信するため、パフォーマンスが向上します。また、noop スケジューラの適用性も向上します。
+
+2.  storageメディアの I/O スケジューラを設定します。
+
+    -   高速 SSDstorageの場合、カーネルのデフォルトの I/O スケジューリング操作によってパフォーマンスが低下する可能性があります。I/O スケジューラを`noop`や`none`などの先入れ先出し (FIFO) に設定することをお勧めします。この構成により、カーネルはスケジュールなしで I/O 要求を直接ハードウェアに渡すことができるため、パフォーマンスが向上します。
+    -   NVMestorageの場合、デフォルトの I/O スケジューラは`none`なので、調整は必要ありません。
+
 3.  CPU 周波数を制御する cpufrequ モジュールの`performance`モードを選択します。CPU 周波数が動的な調整なしでサポートされている最高の動作周波数に固定されている場合、パフォーマンスが最大化されます。
 
 現在のオペレーティング システムの構成を確認し、最適なパラメータを構成するには、次の手順を実行します。
@@ -290,9 +303,11 @@ sudo systemctl enable ntpd.service
 
     > **注記：**
     >
-    > `[always] madvise never`出力された場合、THP が有効になっています。無効にする必要があります。
+    > `[always] madvise never`が出力された場合、THP が有効になっています。無効にする必要があります。
 
-2.  次のコマンドを実行して、データ ディレクトリが配置されているディスクの I/O スケジューラを確認します。sdb ディスクと sdc ディスクの両方にデータ ディレクトリを作成するものとします。
+2.  次のコマンドを実行して、データ ディレクトリが配置されているディスクの I/O スケジューラを確認します。
+
+    データ ディレクトリで SD または VD デバイスを使用している場合は、次のコマンドを実行して I/O スケジューラを確認します。
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -305,6 +320,19 @@ sudo systemctl enable ntpd.service
     >
     > `noop [deadline] cfq`出力された場合、ディスクの I/O スケジューラは`deadline`モードになっています。これを`noop`に変更する必要があります。
 
+    データ ディレクトリで NVMe デバイスを使用している場合は、次のコマンドを実行して I/O スケジューラを確認します。
+
+    ```bash
+    cat /sys/block/nvme[01]*/queue/scheduler
+    ```
+
+        [none] mq-deadline kyber bfq
+        [none] mq-deadline kyber bfq
+
+    > **注記：**
+    >
+    > `[none] mq-deadline kyber bfq` NVMe デバイスが`none` I/O スケジューラを使用し、変更する必要がないことを示します。
+
 3.  ディスクの`ID_SERIAL`表示するには、次のコマンドを実行します。
 
     ```bash
@@ -316,7 +344,8 @@ sudo systemctl enable ntpd.service
 
     > **注記：**
     >
-    > 複数のディスクにデータ ディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`記録するために上記のコマンドを複数回実行する必要があります。
+    > -   複数のディスクにデータ ディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`記録するために、各ディスクに対して上記のコマンドを実行する必要があります。
+    > -   デバイスが`noop`または`none`スケジューラを使用している場合は、 `ID_SERIAL`を記録したり、udev ルールや調整されたプロファイルを構成したりする必要はありません。
 
 4.  cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
 
@@ -355,9 +384,9 @@ sudo systemctl enable ntpd.service
                 - virtual-host                - Optimize for running KVM guests
                 Current active profile: balanced
 
-            出力`Current active profile: balanced` 、現在のオペレーティング システムの調整済みプロファイルが`balanced`であることを意味します。現在のプロファイルに基づいて、オペレーティング システムの構成を最適化することをお勧めします。
+            出力`Current active profile: balanced`は、現在のオペレーティング システムの調整済みプロファイルが`balanced`であることを意味します。現在のプロファイルに基づいて、オペレーティング システムの構成を最適化することをお勧めします。
 
-        2.  新しい調整プロファイルを作成します。
+        2.  新しい調整済みプロファイルを作成します。
 
             ```bash
             mkdir /etc/tuned/balanced-tidb-optimal/
@@ -377,9 +406,13 @@ sudo systemctl enable ntpd.service
                 devices_udev_regex=(ID_SERIAL=36d0946606d79f90025f3e09a0c1fc035)|(ID_SERIAL=36d0946606d79f90025f3e09a0c1f9e81)
                 elevator=noop
 
-            出力`include=balanced`オペレーティング システムの最適化構成を現在の`balanced`プロファイルに追加することを意味します。
+            出力`include=balanced`は、オペレーティング システムの最適化構成を現在の`balanced`プロファイルに追加することを意味します。
 
         3.  新しく調整されたプロファイルを適用します。
+
+            > **注記：**
+            >
+            > デバイスが`noop`または`none` I/O スケジューラを使用している場合は、この手順をスキップしてください。調整されたプロファイルではスケジューラの構成は必要ありません。
 
             ```bash
             tuned-adm profile balanced-tidb-optimal
@@ -391,7 +424,7 @@ sudo systemctl enable ntpd.service
 
             > **注記：**
             >
-            > `grubby`を実行する前に、まず`grubby`パッケージをインストールします。
+            > `grubby`実行する前に、まず`grubby`パッケージをインストールします。
 
             ```bash
             grubby --default-kernel
@@ -404,12 +437,12 @@ sudo systemctl enable ntpd.service
         2.  カーネル構成を変更するには、 `grubby --update-kernel`実行します。
 
             ```bash
-            grubby --args="transparent_hugepage=never" --update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64
+            grubby --args="transparent_hugepage=never" --update-kernel `grubby --default-kernel`
             ```
 
             > **注記：**
             >
-            > `--update-kernel`後には実際のデフォルトのカーネル バージョンが続きます。
+            > `--update-kernel`後に実際のバージョン番号を指定することもできます (例: `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64` )。
 
         3.  変更されたデフォルトのカーネル構成を確認するには、 `grubby --info`実行します。
 
@@ -448,6 +481,10 @@ sudo systemctl enable ntpd.service
             ```
 
         6.  udev スクリプトを適用します。
+
+            > **注記：**
+            >
+            > デバイスが`noop`または`none` I/O スケジューラを使用している場合は、この手順をスキップしてください。udev ルールの構成は必要ありません。
 
             ```bash
             udevadm control --reload-rules
@@ -519,8 +556,9 @@ sudo systemctl enable ntpd.service
     >
     > -   `vm.min_free_kbytes`は、システムによって予約される空きメモリの最小量 (KiB 単位) を制御する Linux カーネル パラメータです。
     > -   `vm.min_free_kbytes`に設定すると、メモリ再利用メカニズムに影響します。設定が大きすぎると使用可能なメモリが減少し、設定が小さすぎるとメモリ要求速度がバックグラウンド再利用速度を超え、メモリ再利用が発生してメモリ割り当てが遅れる可能性があります。
-    > -   少なくとも`vm.min_free_kbytes` ～ `1048576` KiB (1 GiB) に設定することをお勧めします。 [NUMAがインストールされている](/check-before-deployment.md#install-the-numactl-tool)の場合は`number of NUMA nodes * 1048576` KiB に設定することをお勧めします。
-    > -   メモリサイズが 16 GiB 未満のサーバーの場合は、デフォルト値の`vm.min_free_kbytes`を変更せずに維持することをお勧めします。
+    > -   少なくとも`vm.min_free_kbytes` ～ `1048576` KiB (1 GiB) に設定することをお勧めします。 [NUMAがインストールされている](/check-before-deployment.md#install-the-numactl-tool)場合は`number of NUMA nodes * 1048576` KiB に設定することをお勧めします。
+    > -   メモリサイズが 16 GiB 未満のサーバーの場合は、デフォルト値の`vm.min_free_kbytes`変更せずに維持することをお勧めします。
+    > -   `tcp_tw_recycle` Linux カーネル 4.12 で削除されました。それ以降のカーネル バージョンを使用している場合は、この設定をスキップしてください。
 
 10. ユーザーの`limits.conf`ファイルを構成するには、次のコマンドを実行します。
 
@@ -535,7 +573,7 @@ sudo systemctl enable ntpd.service
 
 ## SSH相互信頼とパスワードなしのsudoを手動で設定する {#manually-configure-the-ssh-mutual-trust-and-sudo-without-password}
 
-このセクションでは、SSH 相互信頼とパスワードなしの sudo を手動で構成する方法について説明します。デプロイメントには、SSH 相互信頼とパスワードなしのログインを自動的に構成するTiUPを使用することをお勧めします。TiUPを使用して TiDB クラスターをデプロイする場合は、このセクションを無視してください。
+このセクションでは、SSH 相互信頼とパスワードなしの sudo を手動で構成する方法について説明します。デプロイメントには、SSH 相互信頼とパスワードなしのログインを自動的に構成するTiUP を使用することをお勧めします。TiUPを使用して TiDB クラスターをデプロイする場合は、このセクションを無視してください。
 
 1.  それぞれ`root`ユーザー アカウントを使用してターゲット マシンにログインし、 `tidb`ユーザーを作成してログイン パスワードを設定します。
 
@@ -544,7 +582,7 @@ sudo systemctl enable ntpd.service
     passwd tidb
     ```
 
-2.  パスワードなしで sudo を設定するには、次のコマンドを実行し、ファイルの末尾に`tidb ALL=(ALL) NOPASSWD: ALL`追加します。
+2.  パスワードなしで sudo を設定するには、次のコマンドを実行し、ファイルの末尾に`tidb ALL=(ALL) NOPASSWD: ALL`を追加します。
 
     ```bash
     visudo
@@ -559,7 +597,7 @@ sudo systemctl enable ntpd.service
     ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.1.1
     ```
 
-4.  `tidb`ユーザーアカウントを使用してコントロールマシンにログインし、 `ssh`を使用してターゲットマシンの IP にログインします。パスワードを入力する必要がなく、正常にログインできる場合は、SSH 相互信頼が正常に構成されています。
+4.  `tidb`ユーザーアカウントを使用してコントロールマシンにログインし、 `ssh`使用してターゲットマシンの IP にログインします。パスワードを入力する必要がなく、正常にログインできる場合は、SSH 相互信頼が正常に構成されています。
 
     ```bash
     ssh 10.0.1.1
@@ -582,7 +620,7 @@ sudo systemctl enable ntpd.service
 > **注記：**
 >
 > -   NUMA を使用してコアをバインドすることは、CPU リソースを分離する方法であり、高度に構成された物理マシンに複数のインスタンスを展開するのに適しています。
-> -   `tiup cluster deploy`を使用してデプロイを完了したら、 `exec`コマンドを使用してクラスター レベルの管理操作を実行できます。
+> -   `tiup cluster deploy`使用してデプロイを完了したら、 `exec`コマンドを使用してクラスター レベルの管理操作を実行できます。
 
 NUMA ツールをインストールするには、次の 2 つの方法のいずれかを実行します。
 
@@ -594,7 +632,7 @@ sudo yum -y install numactl
 
 **方法 2** : `tiup cluster exec`コマンドを実行して、既存のクラスターに NUMA をバッチでインストールします。
 
-1.  [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってクラスター`tidb-test`を展開します。TiDB クラスターをインストールしている場合は、この手順をスキップできます。
+1.  [TiUP を使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってクラスター`tidb-test`を展開します。TiDB クラスターをインストールしている場合は、この手順をスキップできます。
 
     ```bash
     tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
