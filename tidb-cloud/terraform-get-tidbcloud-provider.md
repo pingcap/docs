@@ -48,7 +48,7 @@ For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
+         version = "~> 0.3.0"
        }
      }
      required_version = ">= 1.0.0"
@@ -103,11 +103,27 @@ provider "tidbcloud" {
 `public_key` and `private_key` are the API key's public key and private key. You can also pass them through the environment variables:
 
 ```
-export TIDBCLOUD_PUBLIC_KEY = ${public_key}
-export TIDBCLOUD_PRIVATE_KEY = ${private_key}
+export TIDBCLOUD_PUBLIC_KEY=${public_key}
+export TIDBCLOUD_PRIVATE_KEY=${private_key}
 ```
 
 Now, you can use the TiDB Cloud Terraform Provider.
+
+## Step 5. Configure TiDB Cloud Terraform Provider with sync configuration
+
+Terraform provider (>= 0.3.0) supports an optional parameter `sync`.
+
+By setting `sync` to `true`, you can create, update, or delete resources synchronously. Here is an example:
+
+```
+provider "tidbcloud" {
+  public_key = "your_public_key"
+  private_key = "your_private_key"
+  sync = true
+}
+```
+
+Setting `sync` to `true` is recommended, but note that `sync` currently only works with the cluster resource. If you need synchronous operations for other resources, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Next step
 
