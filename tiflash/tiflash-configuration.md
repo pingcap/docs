@@ -214,6 +214,12 @@ delta_index_cache_size = 0
     ## It is recommended that you set this value to 9 if dt_compression_method is LZ4HC.
     dt_compression_level = 1
 
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads that one resource group can use. The default value is 5000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/v6.1/tiflash-mintso-scheduler.
+    task_scheduler_thread_soft_limit = 5000
+
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads in the global scope. The default value is 10000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/v6.1/tiflash-mintso-scheduler.
+    task_scheduler_thread_hard_limit = 10000
+
 ## Security settings take effect starting from v4.0.5.
 [security]
     ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
