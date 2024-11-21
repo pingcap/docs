@@ -238,6 +238,15 @@ delta_index_cache_size = 0
     ## New in v7.0.0. This item specifies the maximum memory available for the HashJoin operator with EquiJoin before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashJoin with EquiJoin.
     max_bytes_before_external_join = 0
 
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads that one resource group can use. The default value is 5000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/v7.1/tiflash-mintso-scheduler.
+    task_scheduler_thread_soft_limit = 5000
+
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads in the global scope. The default value is 10000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/v7.1/tiflash-mintso-scheduler.
+    task_scheduler_thread_hard_limit = 10000
+
+    ## New in v6.4.0. This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. The default value is 0, which means twice the number of vCPUs. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/v7.1/tiflash-mintso-scheduler.
+    task_scheduler_active_set_soft_limit = 0
+
 ## Security settings take effect starting from v4.0.5.
 [security]
     ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
