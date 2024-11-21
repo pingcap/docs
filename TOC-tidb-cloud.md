@@ -403,7 +403,7 @@
       - [Expression Syntax](/expression-syntax.md)
       - [Comment Syntax](/comment-syntax.md)
     - SQL Statements
-      - [Overview](/sql-statements/sql-statement-overview.md) <!---doc improvements->
+      - [Overview](/sql-statements/sql-statement-overview.md) <!---added as doc improvements->
       - [`ADMIN`](/sql-statements/sql-statement-admin.md)
       - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
       - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
@@ -506,7 +506,7 @@
       - [`SHOW BUILTINS`](/sql-statements/sql-statement-show-builtins.md)
       - [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
       - [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
-      - [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) <!---doc improvements->
+      - [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) <!---added as doc improvements->
       - [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
       - [`SHOW CREATE DATABASE`](/sql-statements/sql-statement-show-create-database.md)
       - [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)
@@ -530,12 +530,12 @@
       - [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)
       - [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md)
       - [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
-      - [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md) <!---doc improvements->
+      - [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md) <!---added as doc improvements->
       - [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)
       - [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md)
       - [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md)
       - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
-      - [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md) <!---doc improvements->
+      - [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md) <!---added as doc improvements->
       - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
       - [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
       - [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
@@ -574,12 +574,12 @@
       - [Information Functions](/functions-and-operators/information-functions.md)
       - JSON Functions
         - [Overview](/functions-and-operators/json-functions.md)
-        - [Functions That Create JSON](/functions-and-operators/json-functions/json-functions-create.md) <!---doc improvements->
-        - [Functions That Search JSON](/functions-and-operators/json-functions/json-functions-search.md) <!---doc improvements->
-        - [Functions That Modify JSON](/functions-and-operators/json-functions/json-functions-modify.md) <!---doc improvements->
-        - [Functions That Return JSON](/functions-and-operators/json-functions/json-functions-return.md) <!---doc improvements->
-        - [JSON Utility Functions](/functions-and-operators/json-functions/json-functions-utility.md) <!---doc improvements->
-        - [Functions That Aggregate JSON](/functions-and-operators/json-functions/json-functions-aggregate.md) <!---doc improvements->
+        - [Functions That Create JSON](/functions-and-operators/json-functions/json-functions-create.md) <!---added as doc improvements->
+        - [Functions That Search JSON](/functions-and-operators/json-functions/json-functions-search.md) <!---added as doc improvements->
+        - [Functions That Modify JSON](/functions-and-operators/json-functions/json-functions-modify.md) <!---added as doc improvements->
+        - [Functions That Return JSON](/functions-and-operators/json-functions/json-functions-return.md) <!---added as doc improvements->
+        - [JSON Utility Functions](/functions-and-operators/json-functions/json-functions-utility.md) <!---added as doc improvements->
+        - [Functions That Aggregate JSON](/functions-and-operators/json-functions/json-functions-aggregate.md) <!---added as doc improvements->
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
       - [GROUP BY Modifiers](/functions-and-operators/group-by-modifier.md)
       - [Window Functions](/functions-and-operators/window-functions.md)
@@ -619,7 +619,7 @@
     - System Tables
       - `mysql` Schema
         - [Overview](/mysql-schema/mysql-schema.md)
-        - [`user`](/mysql-schema/mysql-schema-user.md) <!---doc improvements->
+        - [`user`](/mysql-schema/mysql-schema-user.md) <!---added as doc improvements->
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
         - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
