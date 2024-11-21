@@ -11,18 +11,18 @@ This document introduces how to use the OpenAPI Specification of a [Data App](/t
 
 Before using OpenAPI Specification with Next.js, make sure that you have the following:
 
-- A TiDB cluster. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- A TiDB cluster. For more information, see [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 - [Node.js](https://nodejs.org/en/download)
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [yarn](https://yarnpkg.com/getting-started/install)
 
-This document uses a TiDB Serverless cluster as an example.
+This document uses a TiDB Cloud Serverless cluster as an example.
 
 ## Step 1. Prepare data
 
 To begin with, create a table `test.repository` in your TiDB cluster and insert some sample data into it. The following example inserts some open source projects developed by PingCAP as data for demonstration purposes.
 
-To execute the SQL statements, you can use [Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://tidbcloud.com).
+To execute the SQL statements, you can use [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://tidbcloud.com).
 
 ```sql
 -- Select the database
