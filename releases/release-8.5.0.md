@@ -209,17 +209,19 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Security
 
-* BR supports client-side encryption of full backup (GA) [#28640](https://github.com/pingcap/tidb/issues/28640) @[joccau](https://github.com/joccau) and log backup data (GA) [#56433] (https://github.com/pingcap/tidb/issues/56433) @[Tristan1900](https://github.com/Tristan1900) tw@qiancai <!--1998-->
-TiDB V5.3.0 introduced an experimental feature to encrypt full backup data on the client side, you can encrypt the backup data using a custom fixed key. This feature is Generally Available in v8.5.0
+* BR supports client-side encryption of both full backup data and log backup data (GA) [#28640](https://github.com/pingcap/tidb/issues/28640) [#56433] (https://github.com/pingcap/tidb/issues/56433) @[joccau](https://github.com/joccau) @[Tristan1900](https://github.com/Tristan1900) tw@qiancai <!--1998-->
 
-For more information, see [documentation](/br/br-snapshot-manual.md#encrypt-the-backup-data).
-    TiDB v8.4.0 introduced an experimental feature to encrypt log backup data on the client side. Starting from v8.5.0, this feature is now Generally Available. Before uploading log backup data to your backup storage, you can encrypt the log backup data to ensure its security via one of the following methods:
+    * Client-side encryption of full backup data (introduced as experimental in TiDB v5.3.0) enables you to encrypt backup data on the client side using a custom fixed key.
 
-    - Encrypt using a custom fixed key
-    - Encrypt using a master key stored on a local disk
-    - Encrypt using a master key managed by a Key Management Service (KMS)
+    * Client-side encryption of log backup data  (introduced as experimental in TiDB v8.4.0) enables you to encrypt log backup data on the client side using one of the following methods:
 
-  For more information, see [documentation](/br/br-pitr-manual.md#encrypt-the-log-backup-data).
+        * Encrypt using a custom fixed key
+        * Encrypt using a master key stored on a local disk
+        * Encrypt using a master key managed by a Key Management Service (KMS)
+
+  Starting from v8.5.0, both features become generally available (GA), offering enhanced client-side data security.
+
+    For more information, see [Encrypt the backup data](/br/br-snapshot-manual.md#encrypt-the-backup-data) and [Encrypt the log backup data](/br/br-pitr-manual.md#encrypt-the-log-backup-data).
 
 * TiKV encryption at rest supports Google [Key Management Service (Cloud KMS)](https://cloud.google.com/docs/security/key-management-deep-dive?hl) (GA) [#8906](https://github.com/tikv/tikv/issues/8906) @[glorv](https://github.com/glorv)
 
