@@ -39,8 +39,8 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     </td>
   </tr>
   <tr>
-    <td>Active PD Follower 成为正式功能  **tw@Oreoxmt 2015**</td>
-    <td>TiDB v7.6.0 引入了 Active PD Follower 特性，允许 PD follower 提供 Region 信息查询服务。在 TiDB 节点数量较多和 Region 数量较多的集群中，该特性可以提升 PD 集群处理 <code>GetRegion</code>、<code>ScanRegions</code> 请求的能力，减轻 PD leader 的 CPU 压力。在 v8.5.0，Active PD Follower 成为正式功能。</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Use Active PD Followers to enhance PD's Region information query service</a> (GA in v8.5.0) **tw@Oreoxmt 2015**</td>
+    <td>TiDB v7.6.0 introduces an experimental feature "Active PD Follower", which allows PD followers to provide Region information query services. This feature improves the capability of the PD cluster to handle <code>GetRegion</code> and <code>ScanRegions</code> requests in clusters with a large number of TiDB nodes and Regions, thereby reducing the CPU pressure on PD leaders. In v8.5.0, this feature becomes generally available (GA).</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_enable_instance_plan_cache-从-v840-版本开始引入">实例级执行计划缓存</a>（实验特性）（v8.4.0 引入）</td>
@@ -72,11 +72,11 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td>为资源管控的后台任务设置百分比上限，针对不同业务系统的需求，控制后台任务的消耗，从而将后台任务的消耗限制在一个很低的水平，保证在线业务的服务质量。</td>
   </tr>
   <tr>
-    <td>增强并扩展 TiProxy 的使用场景 **tw@Oreoxmt**</td>
-    <td>作为 TiDB 高可用的重要组成，TiProxy 在做好 SQL 流量接入和转发的同时，开始尝试对集群变更进行评估。主要包括：
-    <li> TiProxy 流量捕获和回放（实验特性）（v8.4.0 引入）</li>
-    <li> TiProxy 内置虚拟 IP 管理（v8.3.0 引入）</li>
-    <li> TiProxy 支持多种负载均衡策略 （v8.2.0 引入）</li>
+    <td>Enhance and expand TiProxy use cases **tw@Oreoxmt**</td>
+    <td>As a crucial component of the high availability of TiDB, <a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-overview">TiProxy</a> extends its capabilities beyond SQL traffic access and forwarding to support cluster change evaluation. Key features include:
+    <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-traffic-replay">TiProxy supports traffic capture and replay</a> (experimental, introduced in v8.4.0)</li>
+    <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-overview">	Built-in virtual IP management in TiProxy</a> (introduced in v8.3.0)</li>
+    <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-load-balance">TiProxy supports multiple load balancing policies</a> (introduced in v8.2.0)</li>
     </td>
   </tr>
   <tr>
