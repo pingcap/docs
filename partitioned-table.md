@@ -1487,7 +1487,7 @@ This section introduces some restrictions and limitations on partitioned tables 
 
 ### Partitioning keys, primary keys and unique keys
 
-This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship is as follows: every unique key on the table, including the primary key, must use every column in the table's partitioning expression, because the primary key is also a unique key by definition.
+This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship is as follows: every unique key on the partitioned table, including the primary key, must use every column in the table's partitioning expression, because the primary key is also a unique key by definition.
 
 > **Note:**
 >
