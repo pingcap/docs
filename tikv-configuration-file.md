@@ -248,7 +248,7 @@ This document only describes the parameters that are not included in command-lin
 ### `raft-client-queue-size`
 
 + Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability.
-+ Default value: `8192`
++ Default value: `16384`
 
 ### `simplify-metrics` <span class="version-mark">New in v6.2.0</span>
 
