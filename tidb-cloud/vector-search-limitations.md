@@ -19,11 +19,11 @@ This document describes the known limitations of TiDB Vector Search.
 - Vector columns cannot be used in primary keys, unique indexes or partition keys. To accelerate the vector search performance, use [Vector Search Index](/tidb-cloud/vector-search-index.md).
 - Multiple vector columns in a table is allowed. However, there is [a limit of total number of columns in a table](/tidb-limitations.md#limitations-on-a-single-table).
 - Currently TiDB does not support dropping a vector column with vector search index attached. To drop such column, drop the vector search index first, then drop the vector column.
-- Currently TiDB does not support modifying a vector column to other data types (such as `JSON` and `VARCHAR`).
+- Currently TiDB does not support modifying a vector column to other data types such as `JSON` and `VARCHAR`.
 
 ## Vector index limitations
 
-- Vector index is used for vector search. It cannot accelerate other queries like range queries or equality queries. It is not possible to create a vector index on a non-vector column, or on multiple vector columns.
+- Vector index is used for vector search. It cannot accelerate other queries like range queries or equality queries. Thus, it is not possible to create a vector index on a non-vector column, or on multiple vector columns.
 - Multiple vector indexes in a table is allowed. However, there is [a limit of total number of indexes in a table](/tidb-limitations.md#limitations-on-a-single-table).
 - Multiple vector indexes on the same column is allowed only if they use different distance functions.
 - Currently only `VEC_COSINE_DISTANCE()` and `VEC_L2_DISTANCE()` are supported as the distance functions for vector indexes.
