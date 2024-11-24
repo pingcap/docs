@@ -52,7 +52,7 @@ When creating an HNSW vector index, you need to specify the distance function fo
 
 The vector index can only be created for fixed-dimensional vector columns, such as a column defined as `VECTOR(3)`. It cannot be created for non-fixed-dimensional vector columns (such as a column defined as `VECTOR`) because vector distances can only be calculated between vectors with the same dimension.
 
-For restrictions and limitations of vector search indexes, see [Restrictions](#restrictions).
+For other limitations, see [Vector index limitations](/tidb-cloud/vector-search-limitations.md#vector-index-limitations).
 
 ## Use the vector index
 
