@@ -30,12 +30,12 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td rowspan="6">可扩展性与性能</td>
     <td> Reduce data processing latency in multiple dimensions **tw@qiancai**</td>
     <td>TiDB continuously refines data processing to enhance performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include: 
-    <li> <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">Support parallel sorting</a> (introduced in v8.2.0) </li>
-    <li>  <a href="https://docs.pingcap.com/zh/tidb/v8.5/tidb-configuration-file#batch-policy-new-in-v830">Optimize batch processing strategy for KV (key-value) requests </a> (introduced in v8.3.0) </li>
-    <li>  <a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">Support parallel mode for TSO requests</a> (introduced in v8.4.0) </li>
+    <li>Support <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">parallel sorting</a> (introduced in v8.2.0) </li>
+    <li>Optimize <a href="https://docs.pingcap.com/zh/tidb/v8.5/tidb-configuration-file#batch-policy-new-in-v830">batch processing strategy for KV (key-value) requests </a> (introduced in v8.3.0) </li>
+    <li>Support <a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">parallel mode for TSO requests</a> (introduced in v8.4.0) </li>
     <li>Reduce the resource overhead of  <a href="https://docs.pingcap.com/tidb/v8.5/sql-statement-delete">DELETE</a> operations (introduced in v8.4.0) </li>
     <li>Improve query performance for <a href="https://docs.pingcap.com/tidb/v8.5/cached-tables">cached tables</a> (introduced in v8.4.0) </li>
-    <li>  <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_hash_join_version-new-in-v840">Introduce an optimized version of Hash Join</a> (introduced in v8.4.0) </li>
+    <li>Introduce <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_hash_join_version-new-in-v840">an optimized version of Hash Join</a> (introduced in v8.4.0) </li>
     </td>
   </tr>
   <tr>
