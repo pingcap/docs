@@ -81,5 +81,15 @@ jobs:
         with:
           node-version: 18
           cache: "npm"
-      - name: Check format
-        run: npx prettier --check **/*.md
+      - name: Get all changed markdown files
+        id: changed-markdown-files
+        uses: tj-actions/changed-files@v45
+        with:
+          files: |
+            **/*.md
+      - name: Check format for changed markdown files
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+        run: |
+          npx prettier --check ${ALL_CHANGED_FILES}

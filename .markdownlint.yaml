@@ -1,4 +1,4 @@
-comment: 'Markdownlint Rules for PingCAP docs'
+comment: "Markdownlint Rules for PingCAP docs"
 
 # disable all by default
 default: false
@@ -15,10 +15,6 @@ heading-style:
 
 # MD010
 no-hard-tabs: true
-
-# MD007
-ul-indent:
-  indent: 4
 
 # MD012
 no-multiple-blanks: true
@@ -43,11 +39,11 @@ no-duplicate-heading:
 
 # MD025
 single-title:
-  front_matter_title: ''
+  front_matter_title: ""
 
 # MD026
 no-trailing-punctuation:
-  punctuation: '.,;:!。，；：！'
+  punctuation: ".,;:!。，；：！"
 
 # MD027
 no-multiple-space-blockquote: true
