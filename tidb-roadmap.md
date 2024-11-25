@@ -40,7 +40,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>Adaptive Parallelism for Stats Collection (GA)</b>
+            <b>Adaptive Parallelism for Statistics Collection (GA)</b>
             <br />Dynamically adjusts parallelism and concurrency based on hardware and node count, accelerating statistics collection.
           </li>
           <br />
