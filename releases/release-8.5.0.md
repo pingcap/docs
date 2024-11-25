@@ -85,7 +85,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="2"> SQL </td>
-    <td>Foreign key (GA in v8.5.0) **tw@lilin90 1894**</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/foreign-key">Foreign key</a> (GA in v8.5.0) **tw@lilin90 1894**</td>
     <td>Foreign keys are constraints in a database that establish relationships between tables, ensuring data consistency and integrity. They restrict the data referenced in a child table to exist in the parent table, preventing the insertion of invalid data. Foreign keys also support cascading operations (such as automatic synchronization during deletion or update), simplifying business logic implementation and reducing the complexity of manually maintaining data relationships.</td>
   </tr>
   <tr>
