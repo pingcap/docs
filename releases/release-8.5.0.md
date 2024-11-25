@@ -60,8 +60,8 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="5">Reliability and availability</td>
-    <td>提升超大规模集群的稳定性 **tw@hfxsd 1976**</td>
-    <td>对于使用 TiDB 运行多租户应用或者 SaaS 应用的公司，经常需要存储大量的表，TiDB 在 v8.5.0 着力增强了大规模集群的稳定性。 <a href="https://docs.pingcap.com/zh/tidb/v8.5/schema-cache">Schema 缓存控制</a>以及<a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_stats_cache_mem_quota-从-v610-版本开始引入">Stats 缓存控制</a>已经成为正式功能，减少了内存过度消耗带来的稳定性问题。 PD 通过 <a href="https://docs.pingcap.com/zh/tidb/v8.5/tune-region-performance#通过-active-pd-follower-提升-pd-region-信息查询服务的扩展能力">Active Follower</a> 应对大量 Region 带来的压力，并<a href="https://docs.pingcap.com/zh/tidb/v8.5/pd-microservices">将 PD 所承担的服务逐步解耦</a>，独立部署。通过<a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-从-v840-版本开始引入">增加并发度</a>，以及<a href="https://docs.pingcap.com/zh/tidb/v8.5/statistics#收集部分列的统计信息">减少收集对象的数量</a>，统计信息收集和加载效率得到提升，保证了大集群执行计划的稳定性。</td>
+    <td>Improve the stability of large-scale clusters **tw@hfxsd 1976**</td>
+    <td>Companies that use TiDB to run multi-tenant or SaaS applications often need to store a large number of tables. In TiDB v8.5.0, significant efforts have been made to enhance the stability of large-scale clusters. <a href="https://docs.pingcap.com/tidb/v8.5/schema-cache">Schema cache control</a> and <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_cache_mem_quota-new-in-v610">the memory quota for the TiDB statistics cache</a> become generally available (GA). They reduce stability problems caused by excessive memory consumption. PD uses <a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Active Follower</a> to address the pressures of a large number of Regions. It also <a href="https://docs.pingcap.com/tidb/v8.5/pd-microservices">decouples the services undertaken by the PD</a> and deploys them independently. <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840">By increasing concurrency</a>, and <a href="https://docs.pingcap.com/zh/tidb/v8.5/statistics#collect-statistics-on-some-columns">reducing the number of collection objects</a>, the efficiency of statistics collection and loading is improved, ensuring the stability of execution plans for large clusters.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/tidb-resource-control#query_limit-parameters">Support more triggers for runaway queries, and support switching resource groups</a> (introduced in v8.4.0) </td>
@@ -123,7 +123,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     
     Starting from v8.4.0, this feature is enabled by default with a default value of `536870912` (that is, 512MiB). You can adjust it as needed through the variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 
-    For more information, see [Documentation](/schema-cache.md).
+    For more information, see [documentation](/schema-cache.md).
 
 * Use the Active PD Follower feature to enhance the scalability of PD's Region information query service (GA) [#7431](https://github.com/tikv/pd/issues/7431) @[okJiang](https://github.com/okJiang) tw@Oreoxmt <!--2015-->
 
@@ -149,6 +149,13 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [Documentation](/accelerated-table-creation.md).
 
+* TiKV supports MVCC In-memory Engine (IME). It can accelerate queries that require scanning of a large number of MVCC historical versions. [#16141](https://github.com/tikv/tikv/issues/16141) [@SpadeA-Tang](https://github.com/SpadeA-Tang) [@glorv](https://github.com/glorv) [@overvenus](https://github.com/overvenus)
+
+    In scenarios where records are updated frequently or TiDB is required to retain historical versions for a long period of time (for example, 24 hours), a buildup of MVCC versions can lead to degradation of scanning performance. TiKV MVCC In-memory Engine improves scanning performance by caching the most recent MVCC versions in memory and deleting the historical versions from memory through a fast GC mechanism.
+
+    Starting from v8.5.0, TiKV introduces MVCC In-memory Engine. When scanning performance is degraded due to the buildup of MVCC versions in a TiKV cluster, you can enable the TiKV MVCC memory engine to improve scanning performance by setting the TiKV configuration parameter [`in-memory-engine.enable`](/tikv-in-memory-engine.md#usage).
+
+    For more information, see [documentation](/tikv-in-memory-engine.md).
 ### Reliability
 
 * Support limiting the maximum rate and concurrency of requests processed by PD [#5739](https://github.com/tikv/pd/issues/5739) @[rleungx](https://github.com/rleungx) **tw@qiancai** <!--2018-->
