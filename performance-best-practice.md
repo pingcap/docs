@@ -3,7 +3,7 @@ title: Optimizing TiDB Settings for Maximum Performance
 summary: Learn how to optimize TiDB performance by configuring key settings and addressing edge cases
 ---
 
-# Optimizing TiDB Settings for Maximum Performance
+## Optimizing TiDB Settings for Maximum Performance
 
 This guide provides essential information on optimizing TiDB for maximum performance. We'll explore:
 - Performance best practices for common workloads
@@ -13,8 +13,7 @@ This guide provides essential information on optimizing TiDB for maximum perform
 >
 > These optimization techniques are particularly valuable when pursuing extreme performance in TiDB. However, it's important to note that performance tuning often involves trade-offs between multiple factors, and there is no single "silver bullet" solution. Some of the techniques described here may use experimental features, which are specifically called out. While these optimizations can yield significant performance gains, they may not be suitable for stable production environments and should be used with caution.
 
-
-# Why This Matters
+## Why This Matters
 
 Optimizing TiDB for peak performance requires careful tuning of various settings. In many cases, achieving optimal performance involves adjusting configurations beyond their default values.
 
@@ -22,7 +21,7 @@ While default settings are chosen for stability, maximizing performance often re
 
 This guide explains these non-default settings, detailing their benefits and potential trade-offs. It's designed to help you make informed decisions when fine-tuning TiDB for your specific workload requirements.
 
-# Key Settings for Common Workloads
+## Key Settings for Common Workloads
 
 The following suggested settings cover the most common optimizations for improving TiDB performance:
 
@@ -32,7 +31,7 @@ The following suggested settings cover the most common optimizations for improvi
 
 These settings can significantly boost performance for many common workloads, but as with any optimization, it's important to test thoroughly in your specific environment.
 
-## System variables
+### System variables
 
 ```SQL 
 set global tidb_enable_instance_plan_cache=on;
@@ -49,7 +48,7 @@ set global pd_enable_follower_handle_region=on;
 set global tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:ON,52869:ON';
 ```
 
-### Justifications
+#### Justifications
 
 | variables| Pro | Cons | 
 | ---------| ---- | ----|
@@ -65,6 +64,7 @@ set global tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:
 | pd_enable_follower_handle_region| enable the Active PD Follower feature, TiDB evenly distributes requests for Region information to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader| The feature is experimental | 
 
 #### fix control explanation
+
 Use aggressive optimizer controls to enable more possible optimizations.
 
 - 44262:ON: Allow the use of Dynamic pruning mode to access the partitioned table when the GlobalStats are missing.
@@ -74,7 +74,7 @@ Use aggressive optimizer controls to enable more possible optimizations.
 - 44855:ON: Enable IndexJoin when the Probe side of an IndexJoin operator contains a Selection operator.
 - 52869:ON: Enable indexmerge if the optimizer can choose the single index scan method (other than full table scan) for a query plan
 
-## TiDB Configurations
+### TiDB Configurations
 
 ```toml
 [performance]
@@ -86,14 +86,14 @@ lite-init-stats = false
 region-cache-ttl = 1200
 ```
 
-### Justifications
+#### Justifications
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
 | concurrently-init-stats force-init-stats lite-init-stats| make sure the statistics is full loaded and ready during TiDB startup | need to wait more time during TiDB startup and more memory usage | 
 | region-cache-ttl| Increase from 10m to 20m, to reduce the GetRegion request to pd server | Higher possibility for leaders/region miss backoff if the data are changed and moved frequently | 
 
-## TiKV Configurations
+### TiKV Configurations
 
 ```toml
 [server]
@@ -115,7 +115,7 @@ blob-file-compression = "zstd"
 l0-files-threshold = 60
 ```
 
-### Justifications
+#### Justifications
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
@@ -124,30 +124,33 @@ l0-files-threshold = 60
 | rocksdb.titan rocksdb.defaultcf.titan | RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.  To alleviate the bottleneck caused by limited disk throughput, you can improve performance by enabling Titan. | When Titan is enabled, there might be a slight performance degradation for range scans on the primary key, and the space amplification is higher than RocksDB, at worse case, the space usage is 2x of the original data. For more information, see Impact of min-blob-size on performance. | 
 | l0-files-threshold | increase the thrshhold to avoid unneccessary flow control | - | 
 
-## TiFlash configurations
+### TiFlash configurations
 
 ```toml
 [raftstore-proxy.server]
 snap-io-max-write-bytes-per-sec = "300MiB"
 ```
 
-### Justifications
+#### Justifications
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
 | snap-io-max-write-bytes-per-sec | Increase the bandwidth to speed up data replication to TiFlash Nodes | more impact on online traffic during scale operation | 
 
-# Benchmark 
+## Benchmark 
 
-## Sysbench workloads on 1000 tables
-### Environment
+### Sysbench workloads on 1000 tables
+
+#### Environment
+
 Environment: Cluster specification: 3 tidb (16c64g) + 3 tikv (16c64g)
 
 TiDB Version: v8.4.0
 
 Workload : [sysbench oltp_read_only](https://github.com/akopytov/sysbench/blob/master/src/lua/oltp_read_only.lua)
 
-### Performance Comparison
+#### Performance Comparison
+
 The following results illustrate the throughput enhancements achieved with the Key Settings in comparison to the baseline, measured in operations per second (OPS), latency, and plan cache hit ratio.
 
 Baseline: the default settings
@@ -161,7 +164,7 @@ Key Settings: the settings of variables and configurations in this guide
 | Plan Cache Hit Ratio (%) | 56.89% | 87.51% | 53.82% |
 | Plan cache Memory Usage (MiB) | 95.3 | 70.2 | -26.34% |
 
-### Key Benefits
+#### Key Benefits
 
 The instance plan cache demonstrates significant performance improvements over the baseline configuration:
 
@@ -171,14 +174,14 @@ The instance plan cache demonstrates significant performance improvements over t
     - QPS increased by 12.38%
     - Average latency reduced by 11.01%
     - P95 latency reduced by 13.41%
-### How It Works
+#### How It Works
 
 - Caches execution plans for SELECT statements in memory
 - Shares cached plans across all connections (up to 200) on the same TiDB instance
 - Can effectively store plans for up to 5,000 SELECT statements across 1,000 tables
 - Cache misses primarily occur only for BEGIN and COMMIT statements
 
-### Real-World Impact
+#### Real-World Impact
 
 While our benchmark using simple sysbench oltp_read_only queries (14KB per plan) showed modest improvements, real-world applications often see much more dramatic benefits:
 
@@ -192,7 +195,7 @@ Instance plan cache is particularly effective when your system has:
 - High concurrent connections
 - Diverse query patterns
 
-### Memory Efficiency
+#### Memory Efficiency
 
 Instance plan cache provides better memory efficiency than session-level plan cache because:
 
@@ -204,8 +207,7 @@ In scenarios with multiple connections and complex queries, session-level plan c
 
 ![instance-plan-cache](/media/key-settings/instance-plan-cache.png)
 
-
-### Workload Commands
+#### Workload Commands
 Load data
 ```
 sysbench oltp_read_only prepare --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=100 --time=900 --report-interval=10 --tables=1000 --table-size=10000
@@ -216,15 +218,15 @@ Run workload
 sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=200 --time=900 --report-interval=10 --tables=1000 --table-size=10000
 ```
 
-## YCSB workloads on Large record value
+### YCSB workloads on Large record value
 
-### Environment
+#### Environment
 
 Environment: Cluster specification: 3 tidb (16c64g) + 3 tikv (16c64g)
 TiDB Version: v8.4.0
 Workload : [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
 
-### Performance Comparison
+#### Performance Comparison
 
 Below result show the throughput improvement of Key Settings comparing to the baseline as OPS(operation per second).
 
@@ -236,7 +238,7 @@ Key Settings: the settings of variables and configurations in this guide
 | load data| 2858.5 | 5074.3 | 77.59% |
 | workloada | 2243.0 | 12804.3 | 470.86% |
 
-### Performance Analysis
+#### Performance Analysis
 
 Titan is enabled by default since v7.6.0 and the default min-blob-size of Titan in TiDB v8.4.0 is 32KB. For the baseline configuration, we use a record size of 31KB to ensure data is stored in RocksDB. In contrast, for the key settings configuration, we set min-blob-size to 1KB, causing data to be stored in Titan.
 
@@ -249,7 +251,8 @@ This significant reduction in compaction overhead contributes to the overall thr
 ![titan-rocksdb-compactions](/media/key-settings/titan-rocksdb-compactions.png)
 
 
-### Workload Commands
+#### Workload Commands
+
 Load data
 
 ```
@@ -260,19 +263,17 @@ Run workload
 ```
 go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p mysql.db=test -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -prequestdistribution=uniform -p fieldcount=31 -p fieldlength=1024
 ```
-
-
-# Edge Cases and Specific Optimizations
+## Edge Cases and Specific Optimizations
 
 While the general configurations provided earlier offer a good starting point for performance tuning, certain scenarios require more targeted optimizations. This section covers specific cases that may need individual attention and fine-tuning.
 
-## Identifying Edge Cases
+### Identifying Edge Cases
 
 1. Analyze query patterns and workload characteristics
 2. Monitor system metrics and performance bottlenecks
 3. Gather feedback from application teams on specific pain points
 
-## Common Edge Cases and Solutions
+### Common Edge Cases and Solutions
 
 Here are the common edge cases and solutions:
 
@@ -289,24 +290,28 @@ Each of these cases may require adjustments to different parameters or usage of 
 
 Remember that these optimizations should be applied cautiously and with thorough testing, as their effectiveness can vary depending on your specific use case and data patterns.
 
-## High TSO wait for high-frequency small queries
-### How to Troubleshooting
+### High TSO wait for high-frequency small queries
+
+#### How to Troubleshooting
+
 When TSO (Timestamp Oracle) waiting time takes up a large percentage of total SQL execution time, it indicates a potential performance bottleneck. This can happen with high-frequency small queries that require frequent TSO requests. It can be Identified by [SQL Execute Time Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-methods#tune-by-color) in the grafana dashboard [performance overview](https://docs.pingcap.com/tidb/stable/grafana-performance-overview-dashboard).
 
-### Solution 1 `tidb_low_resolution_tso`
+#### Solution 1 `tidb_low_resolution_tso`
+
 If the TSO (Timestamp Oracle) wait contributes significantly to the execution plan time, and if the application can tolerate stale reads, you can use the `tidb_low_resolution_tso` setting in TiDB to avoid the TSO wait time and improve query latency. Here's how to enable it:
 
 ```SQL
 set global tidb_low_resolution_tso=on;
 ```
 
-### Justifications
+##### Justifications
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
 | tidb_low_resolution_tso| Enables stale reads to avoid TSO wait time, improving query latency | Only suitable for applications that can tolerate reading stale data. Not recommended for scenarios requiring strict data consistency | 
 
-### Solution 2 `tidb_tso_client_rpc_mode`
+#### Solution 2 `tidb_tso_client_rpc_mode`
+
 The default value of `tidb_tso_client_rpc_mode` is `DEFAULT`. When the following conditions are met, you can consider switching `tidb_tso_client_rpc_mode` to `PARALLEL` or `PARALLEL-FAST` for potential performance improvements:
 
 - TSO waiting time constitutes a significant portion of the total execution time of SQL queries.
@@ -317,11 +322,11 @@ The default value of `tidb_tso_client_rpc_mode` is `DEFAULT`. When the following
   - To get the duration of PD TSO allocation, check the PD server TSO handle duration panel in the TiDB section of the Grafana PD dashboard.
 - The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for PARALLEL or four times for PARALLEL-FAST) is acceptable.
 
-```SQL
+```sql
 set global tidb_tso_client_rpc_mode=PARALLEL;
 ```
 
-## Tune coprocessor cache for read-heavy workloads
+### Tune coprocessor cache for read-heavy workloads
 
 If the workload is read-heavy, you can increase the coprocessor cache size, lower the cache threshold, to coprocess cache hit ratio. Here is the detail document to check the hit ratiofor [coprocessor cache](https://docs.pingcap.com/tidb/stable/coprocessor-cache).
 
@@ -335,30 +340,30 @@ admission-max-result-mb = 10
 admission-min-process-ms = 0
 ```
 
-## Choose the proper max chunk size for different workloads
+### Choose the proper max chunk size for different workloads
+
 The tidb_max_chunk_size parameter in TiDB controls the maximum number of rows that can be processed in a single chunk during query execution. Adjusting this parameter based on the workload type can optimize performance:
 
 - For pure OLTP workloads: Lower the default value (e.g., from 1024 to 128) to reduce memory allocation overhead and make limit pushdown more efficient.
-
 - For analytical workloads: Increase the default value to improve processing efficiency for large result sets.
 
 It's important to test different values and monitor performance, as the optimal setting depends on your specific workload characteristics.
 
-```SQL
+```sql
 set global tidb_max_chunk_size=128;
 ```
 
-### Justifications
+#### Justifications
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
 | tidb_max_chunk_size | Reduce from default 1024 to 128, reduce the memory allocation overhead, make the limit pushdown more efficient | For the analytical workloads on TiKV, By adjusting tidb_max_chunk_size from 1024 to 128, the performance degradation is between 3.3% and 10.9% | 
 
-## Choose proper tidb_txn_mode and tidb_dml_type for different workloads
+### Choose proper tidb_txn_mode and tidb_dml_type for different workloads
 
 Here is the guideline how to choose txn mode and dml type
 
-### Justifications
+#### Justifications
 
 | Type | Variable | Use case | 
 | ---------| ---- | ----|
@@ -366,7 +371,7 @@ Here is the guideline how to choose txn mode and dml type
 | Optimistic mode | Set session tidb_txn_mode="optimistic"; | - begin .. insert..insert..insert...end; - No or a few write conflict - Use optimistic mode | 
 | pessimistic mode (by default) | Set session tidb_txn_mode="pessimistic"; | Use pessimistic and  standard for other cases | 
 
-## Optimize group by and distinct operations with TiKV pushdown
+### Optimize group by and distinct operations with TiKV pushdown
 
 Group by and distinct pushdown can significantly improve query performance by offloading aggregation operations to TiKV, reducing data transfer and processing load on TiDB. However, the effectiveness of this optimization depends on the data characteristics:
 
@@ -375,19 +380,16 @@ Group by and distinct pushdown can significantly improve query performance by of
 
 To enable these optimizations:
 
-```SQL
+```sql
 set global tidb_opt_agg_push_down=on;
 set global tidb_opt_distinct_agg_push_down=on;
 ```
-
 
 | variables | Pro | Cons | 
 | ---------| ---- | ----|
 | tidb_opt_agg_push_down tidb_opt_distinct_agg_push_down| Low NDV (right scenario) | High NDV (bad scenario) | 
 
-
-
-## Mitigate too many MVCC versions by in-memory engine
+### Mitigate too many MVCC versions by in-memory engine
 If too many MVCC versions are observed during the PoC, either due to hot read/write spots or issues with garbage collection and compaction, you can mitigate this problem by enabling the in-memory engine. This feature is available as a hotfix. To enable the in-memory engine in TiKV by adding the following configuration to your TiKV configuration file. 
 
 > **Note:**
@@ -405,7 +407,7 @@ If too many MVCC versions are observed during the PoC, either due to hot read/wr
    load-evict-interval = "4m"
    ```
 
-### How to Troubleshoot Too Many MVCC Versions
+#### How to Troubleshoot Too Many MVCC Versions
 
 There are two common ways to identify if the system is suffering from too many MVCC versions:
 
@@ -424,7 +426,7 @@ Other common symptoms associated with too many MVCC versions include:
 
 To mitigate these issues, consider enabling the in-memory engine as described in the previous section, and monitor your system closely after making any changes.
 
-## Disable auto analyze job during batch processing
+### Disable auto analyze job during batch processing
 
 During batch processing operations, it's recommended to disable automatic statistics collection and manually gather statistics when needed. This prevents frequent analyze jobs from consuming excessive resources during critical batch operations.
 
@@ -433,7 +435,7 @@ To disable auto analyze:
 set global tidb_enable_auto_analyze = off;
 ```
 
-## Adjust thread pool size for large TiKV instance types
+### Adjust thread pool size for large TiKV instance types
 The default TiKV pool size is usually sufficient for 8c and 16c instance types. However, for larger instance types like 32c, it is recommended to increase the thread pool size to fully utilize the CPU resources. This is especially important for the grpc and raftstore pool size. Here are the settings proposed for 32c instance types.
 
 ```toml
