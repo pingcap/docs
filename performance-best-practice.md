@@ -29,7 +29,7 @@ The following suggested settings cover the most common optimizations for improvi
 - Optimizing the query optimizer's behavior
 - More aggressive use of TiKV's Titan storage engine
 
-These settings can significantly boost performance for many common workloads, but as with any optimization, it's important to test thoroughly in your specific environment.
+These settings can significantly boost performance for many common workloads, but as with any optimization, it's essential to test thoroughly in your specific environment.
 
 ### System variables
 
@@ -52,16 +52,16 @@ set global tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:
 
 | variables| Pro | Cons | 
 | ---------| ---- | ----|
-| [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)| Instance Plan Cache is to replace the old session-level plan cache. The instance plan cache allows effective use of the plan cache in scenarios with many prepared statements or many connections | The feature is experimental | 
-| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Turn on none prepared plan cache for application not using prepared statement to reduce the compile cost | - | 
-| [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Cache plan for application using prepared statements but close the plan after every single execution| - | 
+| [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)| Introduces instance-level plan caching to replace session-level caching, significantly improving performance for workloads with high connection counts or frequent prepared statement usage | As an experimental feature, carefully evaluate in non-production environments first. Monitor memory usage as plan cache size increases |
+| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Turns on none prepared plan cache for applications not using prepared statement to reduce the compile cost | - | 
+| [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Caches plan for applications using prepared statements but close the plan after every single execution | - | 
 | [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)| Index Join is supported when the inner table has Selection or Projection operators on it | - | 
-| [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)| enable the optimization rule of Deriving TopN or Limit from window functions | Only limited to ROW_NUMBER() window function | 
-| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)| By default enabling runtime filter | The variable is added to v7.2.0, and for safety, it's disabled by default | 
-| [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)| the non-recursive Common Table Expressions (CTE) can be executed on TiFlash MPP | The feature is experimental  | 
-| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)| for read-committed isolation level, Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency. | This feature is incompatible with replica-read. | 
-| [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)| the process of fetching TS for commit TS from the PD server is skipped | with the cost that only causal consistency is guaranteed but not linearizability.  | 
-| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)| enable the Active PD Follower feature, TiDB evenly distributes requests for Region information to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader| The feature is experimental | 
+| [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)| Enables the optimization rule of Deriving TopN or Limit from window functions | Only limited to ROW_NUMBER() window function | 
+| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)| Enables runtime filter to improve the hash join efficiency | The variable is added to v7.2.0, and for safety, it's disabled by default | 
+| [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)| Enables non-recursive Common Table Expressions (CTE) pushdown to TiFlash | The feature is experimental  | 
+| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)| For read-committed isolation level, Enables this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency. | This feature is incompatible with repeatable-read | 
+| [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)| Improves performance by skipping the commit timestamp fetch from PD server | Trades linearizability for performance - only causal consistency is guaranteed. Not suitable for scenarios requiring strict linearizability |
+| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)| Enables the Active PD Follower feature, TiDB evenly distributes requests for Region information to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader| The feature is experimental | 
 
 #### fix control explanation
 
@@ -86,7 +86,7 @@ lite-init-stats = false
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
-| [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752) [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | `concurrently-init-stats` `force-init-stats` and `lite-init-stats` make sure the statistics is fully loaded and ready during TiDB startup | requires additional startup time and increases memory consumption |
+| [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752) [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Ensures comprehensive and concurrent loading of table statistics during TiDB startup, improving query optimization readiness | Potentialy increases startup time and memory consumption |
 
 ### TiKV Configurations
 
@@ -114,7 +114,7 @@ l0-files-threshold = 60
 
 | configurations | Pro | Cons | 
 | ---------| ---- | ----|
-| [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit) [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit) [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Increase the bandwidth to speed up tikv scale in/out operations, improve snapshot speed, scale-in/out is frequent operation during performance tuning | more impact on online traffic during scale operation | 
+| [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit) [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit) [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Increases the bandwidth to speed up tikv scale in/out operations, improve snapshot speed, scale-in/out is frequent operation during performance tuning | more impact on online traffic during scale operation | 
 | [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) [`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840) | Increases the memory limit for caching pessimistic locks in memory, which improves transaction performance by avoiding lock information being written to disk | Higher memory usage since lock information is cached in memory rather than written to disk. Monitor memory usage carefully when increasing these limits | 
 | [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan) [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan) [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.  To alleviate the bottleneck caused by limited disk throughput, you can improve performance by enabling Titan. | When Titan is enabled, there might be a slight performance degradation for range scans on the primary key, and the space amplification is higher than RocksDB, at worse case, the space usage is 2x of the original data. For more information, see Impact of min-blob-size on performance. | 
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | increase the thrshhold to avoid unneccessary flow control | - | 
@@ -277,7 +277,7 @@ Here are the common edge cases and solutions:
 3. Tune coprocessor cache for read-heavy workloads
 4. Choose proper tidb_txn_mode and tidb_dml_type for different workloads
 5. Optimize group by and distinct operations with TiKV pushdown
-6. Mitigate too many MVCC versions by in-memory engine
+6. Mitigate MVCC version accumulation using in-memory engine
 7. Disable auto analyze job during batch processing
 8. Adjust thread pool size for large TiKV instance types
 
@@ -342,7 +342,7 @@ The [`tidb_max_chunk_size`](system-variables.md#tidb_max_chunk_size) parameter i
 - For pure OLTP workloads: Lower the default value (e.g., from 1024 to 128) to reduce memory allocation overhead and make limit pushdown more efficient.
 - For analytical workloads: Increase the default value to improve processing efficiency for large result sets.
 
-It's important to test different values and monitor performance, as the optimal setting depends on your specific workload characteristics.
+It's essential to test different values and monitor performance, as the optimal setting depends on your specific workload characteristics.
 
 ```sql
 set global tidb_max_chunk_size=128;
@@ -384,8 +384,8 @@ set global tidb_opt_distinct_agg_push_down=on;
 | ---------| ---- | ----|
 | [`tidb_opt_agg_push_down`](system-variables.md#tidb_opt_agg_push_down) [`tidb_opt_distinct_agg_push_down`](system-variables.md#tidb_opt_distinct_agg_push_down) | Low NDV (right scenario) | High NDV (bad scenario) | 
 
-### Mitigate too many MVCC versions by in-memory engine
-If too many MVCC versions are observed during the PoC, either due to hot read/write spots or issues with garbage collection and compaction, you can mitigate this problem by enabling the in-memory engine. This feature is available as a hotfix. To enable the in-memory engine in TiKV by adding the following configuration to your TiKV configuration file. 
+### Mitigate MVCC version accumulation using in-memory engine
+If you observe excessive MVCC versions during performance testing (caused by either hot read/write spots or garbage collection/compaction issues), you can enable the in-memory engine feature to alleviate this problem. This feature is available since v8.4.0 and can be enabled by adding the following configuration to your TiKV configuration file.
 
 > **Note:**
 >
@@ -441,4 +441,3 @@ grpc-concurrency = 10
 apply-pool-size=4
 store-pool-size=4
 store-io-pool-size=2
-```
