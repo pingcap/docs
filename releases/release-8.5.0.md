@@ -151,9 +151,9 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Reliability
 
-* Support configuring the rate limit and concurrency for gRPC API requests sent to PD [#5739](https://github.com/tikv/pd/issues/5739) @[rleungx](https://github.com/rleungx) **tw@qiancai** <!--2018-->
+* Support limiting the maximum rate and concurrency of requests processed by PD [#5739](https://github.com/tikv/pd/issues/5739) @[rleungx](https://github.com/rleungx) **tw@qiancai** <!--2018-->
 
-    When a sudden influx of requests is sent to PD, it can lead to high workloads and potentially affect PD performance. Starting from v8.5.0, you can use [`pd-ctl`](/pd-control.md) to configure rate limits and concurrency for gRPC API requests sent to PD, improving its stability.
+    When a sudden influx of requests is sent to PD, it can lead to high workloads and potentially affect PD performance. Starting from v8.5.0, you can use [`pd-ctl`](/pd-control.md) to limit the maximum rate and concurrency of requests processed by PD, improving its stability.
 
     For more information, see [Documentation](/pd-control.md).
 
@@ -219,7 +219,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
         * Encrypt using a master key stored on a local disk
         * Encrypt using a master key managed by a Key Management Service (KMS)
 
-  Starting from v8.5.0, both features become generally available (GA), offering enhanced client-side data security.
+  Starting from v8.5.0, both encryption features become generally available (GA), offering enhanced client-side data security.
 
     For more information, see [Encrypt the backup data](/br/br-snapshot-manual.md#encrypt-the-backup-data) and [Encrypt the log backup data](/br/br-pitr-manual.md#encrypt-the-log-backup-data).
 
