@@ -95,7 +95,7 @@ The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the curre
     - `txn-merge`: transactional backfilling with a temporary index that gets merged with the original index when the backfilling is finished.
     - `DXF`: tasks executed with distributed frameworks configured via [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710).
     - `service_scope`: the service scope of the TiDB node configured via [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740).
-    - `thread`: concurrency of backfill tasks. The initial value can be set with `tidb_ddl_reorg_worker_cnt`. It supports dynamic modification via `ADMIN ALTER DDL JOBS`.
+    - `thread`: concurrency of backfill tasks. The initial value can be set with `tidb_ddl_reorg_worker_cnt`. It supports dynamic modification via [`ADMIN ALTER DDL JOBS`](sql-statements/sql-statement-admin-alter-ddl.md).
     - `batch_size`: batch size of backfill tasks. The initial value can be set with `tidb_ddl_reorg_batch_size`. It supports dynamic modification via `ADMIN ALTER DDL JOBS`.
     - `max_write_speed`: flow control during ingest task import. The initial value can be set with `tidb_ddl_reorg_max_write_speed`. It supports dynamic modification via `ADMIN ALTER DDL JOBS`.
 
