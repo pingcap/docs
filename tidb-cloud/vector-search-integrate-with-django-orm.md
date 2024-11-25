@@ -21,6 +21,7 @@ To complete this tutorial, you need:
 
 ## Run the sample app
 
+
 You can quickly learn about how to integrate TiDB Vector Search with Django ORM by following the steps below.
 
 ### Step 1. Clone the repository
