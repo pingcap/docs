@@ -27,7 +27,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 </thead>
 <tbody>
   <tr>
-    <td rowspan="6">可扩展性与性能</td>
+    <td rowspan="6">Scalability and Performance</td>
     <td> Reduce data processing latency in multiple dimensions **tw@qiancai**</td>
     <td>TiDB continuously refines data processing to enhance performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include: 
     <li>Support <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">parallel sorting</a> (introduced in v8.2.0) </li>
