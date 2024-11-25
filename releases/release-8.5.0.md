@@ -28,14 +28,14 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 <tbody>
   <tr>
     <td rowspan="6">可扩展性与性能</td>
-    <td> 多维度降低数据处理延迟 **tw@qiancai**</td>
-    <td>通过不断挖掘数据处理的细节，TiDB 持续提升自身性能，力求满足金融场景对 SQL 处理时延的要求。 包括以下关键更新：
-    <li> 并行排序 (v8.2.0 引入) </li>
-    <li> 优化 KV 请求批处理策略 (v8.3.0 引入) </li>
-    <li> 并行获取 TSO (v8.4.0 引入) </li>
-    <li> 删除语句只获取必要的列 (v8.4.0 引入) </li>
-    <li> 优化缓存表场景性能 (v8.4.0 引入) </li>
-    <li> Hash Join 算法演进 (v8.4.0 引入) </li>
+    <td> Reduce data processing latency in multiple dimensions **tw@qiancai**</td>
+    <td>TiDB continuously refines data processing to enhance performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include: 
+    <li> <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">Support parallel sorting</a> (introduced in v8.2.0) </li>
+    <li>  <a href="https://docs.pingcap.com/zh/tidb/v8.5/tidb-configuration-file#batch-policy-new-in-v830">Optimize batch processing strategy for KV (key-value) requests </a> (introduced in v8.3.0) </li>
+    <li>  <a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">Support parallel mode for TSO requests</a> (introduced in v8.4.0) </li>
+    <li>Reduce the resource overhead of  <a href="https://docs.pingcap.com/tidb/v8.5/sql-statement-delete">DELETE</a> operations (introduced in v8.4.0) </li>
+    <li>Improve query performance for <a href="https://docs.pingcap.com/tidb/v8.5/cached-tables">cached tables</a> (introduced in v8.4.0) </li>
+    <li>  <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_hash_join_version-new-in-v840">Introduce an optimized version of Hash Join</a> (introduced in v8.4.0) </li>
     </td>
   </tr>
   <tr>
@@ -43,7 +43,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td>TiDB v7.6.0 introduces an experimental feature "Active PD Follower", which allows PD followers to provide Region information query services. This feature improves the capability of the PD cluster to handle <code>GetRegion</code> and <code>ScanRegions</code> requests in clusters with a large number of TiDB nodes and Regions, thereby reducing the CPU pressure on PD leaders. In v8.5.0, this feature becomes generally available (GA).</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_instance_plan_cache-new-in-v840">Instance-level execution plan cache</a> (experimental) (introduced in v8.4.0) </td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_instance_plan_cache-new-in-v840">Instance-level execution plan cache</a> (experimental, introduced in v8.4.0) </td>
     <td>Instance-level plan cache allows all sessions within the same TiDB instance to share the plan cache. Compared with session-level plan cache, this feature reduces SQL compilation time by caching more execution plans in memory, decreasing overall SQL execution time. It improves OLTP performance and throughput while providing better control over memory usage and enhancing database stability.</td>
   </tr>
   <tr>
