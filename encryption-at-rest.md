@@ -94,10 +94,6 @@ If encryption is enabled (that is, the value of `data-encryption-method` is not 
 
 TiKV supports KMS encryption for three platforms: AWS, Google Cloud, and Azure. Depending on the platform where your service is deployed, you can choose one of them to configure KMS encryption.
 
-> **Warning:**
->
-> Currently, specifying a master key using Google Cloud KMS is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 <SimpleTab>
 
 <div label="AWS KMS">
