@@ -24,9 +24,9 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 - You are using a TiDB Cloud Dedicated cluster. Audit logging is not available for TiDB Cloud Serverless clusters.
 - You are in the `Organization Owner` or `Project Owner` role of your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
-## Enable audit logging for AWS or Google Cloud
+## Enable audit logging
 
-To allow TiDB Cloud to write audit logs to your cloud bucket, you need to enable audit logging first.
+TiDB Cloud supports recording the audit logs of a TiDB Cloud Dedicated cluster to your cloud storage service. Before enabling database audit logging, configure your cloud storage service on the cloud provider where the cluster is located.
 
 ### Enable audit logging for AWS
 
@@ -40,12 +40,17 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
 #### Step 2. Configure Amazon S3 access
 
-1. Get the TiDB Cloud account ID and the External ID of the TiDB cluster that you want to enable audit logging.
+1. Get the TiDB Cloud Account ID and the External ID of the TiDB cluster that you want to enable audit logging.
 
-    1. In the TiDB Cloud console, choose a project and a cluster deployed on AWS.
-    2. Select **Settings** > **Audit Settings**. The **Audit Logging** dialog is displayed.
-    3. In the **Audit Logging** dialog, click **Show AWS IAM policy settings**. The corresponding TiDB Cloud Account ID and TiDB Cloud External ID of the TiDB cluster are displayed.
-    4. Record the TiDB Cloud Account ID and the External ID for later use.
+    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+    2. Click the name of your target cluster to go to its overview page, and then click **DB Audit Logging** in the left navigation pane.
+    3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
+    4. In the **Enable Database Audit Logging** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
 
 2. In the AWS Management Console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is a storage bucket policy with the `s3:PutObject` write-only permission.
 
@@ -79,23 +84,23 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
 #### Step 3. Enable audit logging
 
-In the TiDB Cloud console, go back to the **Audit Logging** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
+In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the TiDB Cloud account ID and the External ID values, and then take the following steps:
 
 1. In the **Bucket URI** field, enter the URI of your S3 bucket where the audit log files are to be written.
 2. In the **Bucket Region** drop-down list, select the AWS region where the bucket locates.
 3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
-4. Click **Test Connectivity** to verify whether TiDB Cloud can access and write to the bucket.
+4. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
 
-    If it is successful, **Pass** is displayed. Otherwise, check your access configuration.
+    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
 
-5. In the upper-right corner, toggle the audit setting to **On**.
+5. Click **Enable** to enable audit logging for the cluster.
 
     TiDB Cloud is ready to write audit logs for the specified cluster to your Amazon S3 bucket.
 
 > **Note:**
 >
-> - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Restart** to load the changes and rerun the **Test Connectivity** check to make the changes effective.
-> - To remove Amazon S3 access from TiDB Cloud, simply delete the trust policy that you added.
+> - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
+> - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this cluster in the AWS Management Console.
 
 ### Enable audit logging for Google Cloud
 
@@ -111,9 +116,15 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
 1. Get the Google Cloud Service Account ID of the TiDB cluster that you want to enable audit logging.
 
-    1. In the TiDB Cloud console, choose a project and a cluster deployed on Google Cloud Platform.
-    2. Select **Settings** > **Audit Settings**. The **Audit Logging** dialog box is displayed.
-    3. Click **Show Google Cloud Server Account ID**, and then copy the Service Account ID for later use.
+    1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+    2. Click the name of your target cluster to go to its overview page, and then click **DB Audit Logging** in the left navigation pane.
+    3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
+    4. In the **Enable Database Audit Logging** dialog, locate the **Google Cloud Server Account ID** section, and record **Service Account ID** for later use.
 
 2. In the Google Cloud console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions of the storage container exists.
 
@@ -138,22 +149,22 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
 #### Step 3. Enable audit logging
 
-In the TiDB Cloud console, go back to the **Audit Logging** dialog box where you got the TiDB Cloud account ID, and then take the following steps:
+In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the TiDB Cloud account ID, and then take the following steps:
 
 1. In the **Bucket URI** field, enter your full GCS bucket name.
 2. In the **Bucket Region** field, select the GCS region where the bucket locates.
-3. Click **Test Connectivity** to verify whether TiDB Cloud can access and write to the bucket.
+3. Click **Test Connection** to verify whether TiDB Cloud can access and write to the bucket.
 
-    If it is successful, **Pass** is displayed. Otherwise, check your access configuration.
+    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
 
-4. In the upper-right corner, toggle the audit setting to **On**.
+4. Click **Enable** to enable audit logging for the cluster.
 
-    TiDB Cloud is ready to write audit logs for the specified cluster to your Amazon S3 bucket.
+    TiDB Cloud is ready to write audit logs for the specified cluster to your GCS bucket.
 
 > **Note:**
 >
-> - After enabling audit logging, if you make any new changes to bucket URI or location, you must click **Restart** to load the changes and rerun the **Test Connectivity** check to make the changes effective.
-> - To remove GCS access from TiDB Cloud, simply delete the principal that you added.
+> - After enabling audit logging, if you make any new changes to the bucket URI or location, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
+> - To remove TiDB Cloud's access to your GCS bucket, delete the trust policy granted to this cluster in the Google Cloud console.
 
 ## Specify auditing filter rules
 
