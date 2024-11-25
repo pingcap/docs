@@ -65,7 +65,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>PD Microservice Router Service</b>
-            <br />Enables independent deployment, stateless (no Strong Leader) and easy scaling of Router Service (region meta query/updates) in PD, preventing PD from becoming a bottleneck for cluster resources.
+            <br />Enables independent deployment, stateless operation (without a strong leader), and easy scaling of the PD router service (region metadata queries and updates), preventing PD from becoming a bottleneck for cluster resources.
           </li>
           <br />
           <li>
@@ -74,8 +74,8 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>Limit Operator Pushdown</b>
-            <br />Removes limitations on pushing down the Limit operator from TiDB to TiKV, enabling more efficient query processing directly at the storage layer.
+            <b><code>Limit</code> Operator Pushdown</b>
+            <br />Removes limitations on pushing down the <code>Limit</code> operator from TiDB to TiKV, enabling more efficient query processing directly at the storage layer.
           </li>
           <br />
           <li>
@@ -85,12 +85,12 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Scalable DDL Execution Framework</b>
-            <br />Provides a parallel DDL execution framework to improve the performance and stability of DDL operations.
+            <br />Provides a scalable and parallel DDL execution framework to improve the performance and stability of DDL operations.
           </li>
           <br />
           <li>
             <b>Increased TiCDC Scalability</b>
-            <br />Updated TiCDC architecture delivers increased scalability and performance for change data capture use cases.
+            <br />Introduces a new TiCDC architecture that enhances scalability and performance for change data capture scenarios.
           </li>
           <br />
         </ul>
@@ -108,7 +108,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>Enhance the Scalability of Region Meta Storage</b>
+            <b>Enhance the Scalability of Region Metadata Storage</b>
             <br />Migrate region meta storage from PD to TiKV, allowing the storage layer to scale infinitely and easily.
           </li>
           <br />
@@ -124,7 +124,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Vector Search</b>
-            <br />Enables vector data types, indexing, and high-performance vector search, with support for mixed queries involving vector and relational data.
+            <br />Enables vector data types, indexing, and high-performance vector search, supporting mixed queries involving vector and relational data.
           </li>
           <br />
           <li>
@@ -165,11 +165,11 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Limit Memory for Backups</b>
+            <b>Limit Memory Usage for Backups</b>
           </li>
           <br />
           <li>
-            <b>Limit Memory for Statistics Collection (GA)</b>
+            <b>Limit Memory Usage for Statistics Collection (GA)</b>
           </li>
           <br />
           <li>
@@ -179,17 +179,17 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Improved Resource Group Control for Complex SQL (GA)</b>
-            <br />Monitors RU usage of complex queries mid-execution to minimize system impact.
+            <br />Monitors RU usage during complex query execution to minimize system impact.
           </li>
           <br />
           <li>
             <b>Automatic Resource Group Switching for Runaway Queries (GA)</b>
-            <br />Detects runaway queries and redirects them to designated resource groups with set limits.
+            <br />Detects runaway queries and redirects them to designated resource groups with predefined limits.
           </li>
           <br />
           <li>
             <b>Limit Memory Usage for Schema Metadata (GA)</b>
-            <br />Enhances stability in large-scale clusters by capping memory consumption for schema metadata.
+            <br />Enhances stability in large-scale clusters by reducing memory consumption for schema metadata.
           </li>
           <br />
         </ul>
@@ -203,7 +203,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Optimized Memory Management with Disk Spilling</b>
-            <br />Allows operators like HashAgg, Sort, and Join to spill to disk, reducing memory load and preventing out-of-memory (OOM) issues.
+            <br />Allows operators such as HashAgg, Sort, and Join to spill to disk, reducing memory load and preventing out-of-memory (OOM) issues.
           </li>
           <br />
           <li>
@@ -227,7 +227,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Enhanced Memory Protection</b>
-            <br />Monitors memory usage across all components to prevent operations that might impact system stability.
+            <br />Monitors memory usage across all components to prevent operations that might affect system stability.
           </li>
           <br />
           <li>
@@ -261,7 +261,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>Permissioned Resource Group Switching (GA)</b>
+            <b>Access Control for Resource Group Switching (GA)</b>
             <br />Restricts resource group switching to authorized users, preventing resource misuse.
           </li>
           <br />
@@ -276,7 +276,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Customizable Statistics Collection (GA)</b>
-            <br />Allows tailored statistics strategies for specific tables, adjusting parameters like health and parallelism.
+            <br />Allows tailored statistics strategies for specific tables, adjusting parameters such as health and concurrency.
           </li>
           <br />
           <li>
@@ -291,12 +291,12 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Standardized Time Model (GA)</b>
-            <br />Establishes a unified SQL execution time model to help identify database load sources through logs and cluster metrics, pinpointing problematic nodes and statements.
+            <br />Establishes a unified SQL execution time model to help identify database load sources through statement summary tables, logs, and cluster metrics, pinpointing problematic nodes and statements.
           </li>
           <br />
           <li>
             <b>TiFlash CPU Time Monitoring (GA)</b>
-            <br />Adds TiFlash CPU time metrics to statements and slow logs, enabling quick identification of statements that cause CPU spikes in TiFlash.
+            <br />Adds TiFlash CPU time metrics to statement summary tables and slow logs, enabling quick identification of statements that cause CPU spikes in TiFlash.
           </li>
           <br />
         </ul>
@@ -354,12 +354,12 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Kerberos Authentication (GA)</b>
-            <br />Enables authentication using Kerberos for added security.
+            <br />Enables authentication using Kerberos for enhanced security.
           </li>
           <br />
           <li>
             <b>Multi-Factor Authentication (MFA)</b>
-            <br />Adds support for multi-factor authentication to enhance user verification.
+            <br />Supports multi-factor authentication to enhance user verification.
           </li>
           <br />
           <li>
