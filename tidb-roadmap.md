@@ -51,7 +51,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Unlimited Transaction Size</b>
-            <br />Removes memory limits on uncommitted transactions, improving batch task success rates.
+            <br />Removes memory limits on uncommitted transactions, improving success rates of transactions and batch tasks.
           </li>
           <br />
           <li>
