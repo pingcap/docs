@@ -109,7 +109,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Enhance the Scalability of Region Metadata Storage</b>
-            <br />Migrate region meta storage from PD to TiKV, allowing the storage layer to scale infinitely and easily.
+            <br />Splits a dedicated stateless Router Service (Read/Write of region metadata), and migrates region metadata storage from PD to TiKV. The metadata storage layer will scale limitless and easily.
           </li>
           <br />
         </ul>
