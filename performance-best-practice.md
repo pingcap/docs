@@ -9,7 +9,7 @@ This guide provides essential information on optimizing TiDB for maximum perform
 - Performance best practices for common workloads
 - Strategies for addressing challenging performance scenarios
 
-> **Important Note:**
+> **Note:**
 >
 > These optimization techniques are particularly valuable when pursuing extreme performance in TiDB. However, it's important to note that performance tuning often involves trade-offs between multiple factors, and there is no single "silver bullet" solution. Some of the techniques described here may use experimental features, which are specifically called out. While these optimizations can yield significant performance gains, they may not be suitable for stable production environments and should be used with caution.
 
@@ -32,7 +32,7 @@ The following suggested settings cover the most common optimizations for improvi
 
 These settings can significantly boost performance for many common workloads, but as with any optimization, it's important to test thoroughly in your specific environment.
 
-## system variables
+## System variables
 
 ```SQL 
 set global tidb_enable_instance_plan_cache=on;
@@ -78,9 +78,9 @@ Use aggressive optimizer controls to enable more possible optimizations.
 
 ```toml
 [performance]
-concurrently-init-stats: true
-force-init-stats: true
-lite-init-stats: false
+concurrently-init-stats = true
+force-init-stats = true
+lite-init-stats = false
 
 [tikv-client]
 region-cache-ttl = 1200
@@ -124,7 +124,7 @@ l0-files-threshold = 60
 | rocksdb.titan rocksdb.defaultcf.titan | RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.  To alleviate the bottleneck caused by limited disk throughput, you can improve performance by enabling Titan. | When Titan is enabled, there might be a slight performance degradation for range scans on the primary key, and the space amplification is higher than RocksDB, at worse case, the space usage is 2x of the original data. For more information, see Impact of min-blob-size on performance. | 
 | l0-files-threshold | increase the thrshhold to avoid unneccessary flow control | - | 
 
-## TiFlash Congiurations
+## TiFlash configurations
 
 ```toml
 [raftstore-proxy.server]
