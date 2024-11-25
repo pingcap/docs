@@ -87,7 +87,16 @@ jobs:
         with:
           files: |
             **/*.md
-      - name: Check format for changed markdown files
+      - name: List changed files
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+        run: |
+          echo "Changed files:
+          for file in ${ALL_CHANGED_FILES}; do
+            echo "- $file"
+          done
+      - name: Check format for changed files
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}

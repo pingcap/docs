@@ -22,7 +22,7 @@ If you submit a Pull Request (PR) that does not conform to the rules, your PR mi
    }
    ```
 
-3. Now you are ready!
+3. Now you are ready.
 
    The markdown document will be formatted automatically according to our standard when you save it. Or to format manually, Open Command Palette (Ctrl+Shift+P/Ctrl+Shift+P/⇧⌘P) and type `Format Document`.
 
