@@ -121,7 +121,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     In some SaaS scenarios, when the number of tables reaches hundreds of thousands or even millions, the schema meta can consume significant memory. Enabling this feature allows TiDB to use the LRU algorithm to cache and evict the corresponding schema meta information, effectively reducing memory usage. 
     
-    Starting from v8.4.0, this feature is enabled by default with a default value of `536870912` (that is, 512MiB). You can adjust it as needed through the variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
+    Starting from v8.4.0, this feature is enabled by default with a default value of `536870912` (that is, 512 MiB). You can adjust it as needed through the variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 
     For more information, see [documentation](/schema-cache.md).
 
@@ -188,7 +188,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 * Introduce the `ADMIN ALTER DDL JOBS` statement to support modifying the DDL jobs online [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
 
-    Starting from v8.3.0, you can set the variables [`tidb_ddl_reorg_batch_size`](/system-variables#tidb_ddl_reorg_batch_size)  and [`tidb_ddl_reorg_worker_cnt`](/system-variables#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, you need to cancel the DDL job first, adjust the variables, and then resubmit the job.
+    Starting from v8.3.0, you can set the variables [`tidb_ddl_reorg_batch_size`](/system-variables#tidb_ddl_reorg_batch_size) and [`tidb_ddl_reorg_worker_cnt`](/system-variables#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, you need to cancel the DDL job first, adjust the variables, and then resubmit the job.
 
     TiDB v8.5.0 introduces the `ADMIN ALTER DDL JOBS` statement, allowing online adjustment of variable values for specific DDL jobs. This enables flexible balancing of resource consumption and performance, with changes limited to an individual job, making the impact more controllable. For example:
 
@@ -196,7 +196,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     - `ADMIN ALTER DDL JOBS job_id BATCH_SIZE = 256;`: adjusts the `tidb_ddl_reorg_batch_size` for the specified DDL task.
     - `ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB';`: adjusts the write traffic size for index data on each TiKV node.
 
-  For more information, see [Documentation](/sql-statements/sql-statement-admin-alter-ddl.md).
+  For more information, see [documentation](/sql-statements/sql-statement-admin-alter-ddl.md).
 
 ### DB operations
 
