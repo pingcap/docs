@@ -85,8 +85,8 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="2"> SQL </td>
-    <td>外键约束成为正式功能 **tw@lilin90 1894**</td>
-    <td>外键（Foreign Key）是数据库中的一种约束，用于建立表与表之间的关联关系，确保数据一致性和完整性。它可以限制子表中引用的数据必须存在于主表中，防止无效数据插入。同时，外键支持级联操作（如删除或更新时自动同步），简化了业务逻辑的实现，减少了手动维护数据关联的复杂性。</td>
+    <td>Foreign key (GA in v8.5.0) **tw@lilin90 1894**</td>
+    <td>Foreign keys are constraints in a database that establish relationships between tables, ensuring data consistency and integrity. They restrict the data referenced in a child table to exist in the parent table, preventing the insertion of invalid data. Foreign keys also support cascading operations (such as automatic synchronization during deletion or update), simplifying business logic implementation and reducing the complexity of manually maintaining data relationships.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/vector-search-overview">Vector search</a> (experimental, introduced in v8.4.0) </td>
@@ -173,11 +173,11 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [Documentation](link).
 
-* The Foreign Key feature is now Generally Available (GA) [#36982](https://github.com/pingcap/tidb/issues/36982) @[YangKeao](https://github.com/YangKeao) @[crazycs520](https://github.com/crazycs520) tw@lilin90 <!--1894-->
+* Support foreign keys (GA) [#36982](https://github.com/pingcap/tidb/issues/36982) @[YangKeao](https://github.com/YangKeao) @[crazycs520](https://github.com/crazycs520) tw@lilin90 <!--1894-->
 
-    The Foreign Key feature is now GA, enabling the use of foreign key constraints to enhance data consistency and integrity. Users can easily create foreign key constraints between tables, with support for cascading updates and deletions, making data management more convenient. This feature provides better support for applications with complex data constraints.
+    The foreign key feature becomes generally available (GA) in v8.5.0. Foreign key constraints help ensure data consistency and integrity. You can easily establish foreign key relationships between tables, with support for cascading updates and deletions, simplifying data management. This feature enhances support for applications with complex data relationships.
 
-    For more information, see [Documentation](link).
+    For more information, see [Documentation](/foreign-key.md).
 
 * Introduce the `ADMIN ALTER DDL JOBS` statement to support modifying the DDL jobs online [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
 
