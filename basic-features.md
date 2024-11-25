@@ -64,7 +64,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Clustered index on integer `PRIMARY KEY`](/clustered-indexes.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on composite or non-integer key](/clustered-indexes.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) | Y | Y | Y | Y | N | N | N | N | N | N |
-| [Foreign key](/constraints.md#foreign-key) | E | E | E | E | N | N | N | N | N | N |
+| [Foreign key](/foreign-key.md) | Y | E | E | E | N | N | N | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | Y | Y | Y | N | N | N | N | N | N |
 | [Global index](/partitioned-table.md#global-indexes) | Y |  N | N  | N | N | N | N | N | N | N |
 | [Vector index](/vector-search-index.md) | E | N | N | N | N | N | N | N | N | N |
