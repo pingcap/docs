@@ -349,13 +349,17 @@ Usage:
     config set flow-round-by-digit 4
     ```
 
-#### `config [show | set service-middleware <option> <value>]`
+#### `config [show | set service-middleware <option> [<key> <value> | <label> <qps|concurrency> <value>]]`
 
-`service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as auditing and request rate limiting. Starting from v8.5.0, you can control the rate and concurrency of the following gRPC API requests through `service-middleware`:
+`service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as audit logs, request rate limiting, and concurrency limiting. Starting from v8.5.0, PD supports modifying the following configurations of `service-middleware` via `pd-ctl`:
 
-- `GetRegion`: Get information of a specified Region
-- `GetStore`: Get information of a specified Store
-- `GetMembers`: Get information of PD cluster members
+- `audit`: Controls whether to enable audit logs for HTTP requests processed by PD (enabled by default). When enabled, `service-middleware` logs relevant information about HTTP requests in the PD logs.
+- `rate-limit`: Used to limit the maximum rate and concurrency of PD processing HTTP API requests.
+- `grpc-rate-limit`: Used to limit the maximum rate and concurrency of PD processing gRPC API requests.
+
+> **Note:**
+>
+> To avoid the impact of request rate limiting and concurrency limiting on PD performance, it is not recommended to modify the configurations in `service-middleware`.
 
 Display the related config information of `service-middleware`:
 
@@ -379,13 +383,25 @@ config show service-middleware
 }
 ```
 
-Control the rate of a specific gRPC API request, using the `GetRegion` API request as an example:
+`service-middleware audit` is used to enable or disable the audit log function for HTTP requests. For example, to disable this function:
+
+```bash
+config set service-middleware audit enable-audit false
+```
+
+`service-middleware grpc-rate-limit` is used to control the maximum rate and concurrency of the following gRPC API requests:
+
+- `GetRegion`: Get information of a specified Region
+- `GetStore`: Get information of a specified Store
+- `GetMembers`: Get information of PD cluster members
+
+To control the maximum rate of a gRPC API request, for example, the `GetRegion` API request:
 
 ```bash
 config set service-middleware grpc-rate-limit GetRegion qps 100
 ```
 
-Control the concurrency of a specific gRPC API request, using the `GetRegion` API request as an example:
+To control the maximum concurrency of a gRPC API request, for example, the `GetRegion` API request:
 
 ```bash
 config set service-middleware grpc-rate-limit GetRegion concurrency 10
@@ -411,7 +427,7 @@ config show service-middleware
     "grpc-limiter-config": {
       "GetRegion": {
         "QPS": 100,
-        "QPSBurst": 100,
+        "QPSBurst": 100, // Automatically adjusted based on QPS, for display only
         "ConcurrencyLimit": 10
       }
     }
@@ -424,6 +440,30 @@ Reset the above settings:
 ```bash
 config set service-middleware grpc-rate-limit GetRegion qps 0
 config set service-middleware grpc-rate-limit GetRegion concurrency 0
+```
+
+`service-middleware rate-limit` is used to control the maximum rate and concurrency of the following HTTP API requests:
+
+- `GetRegion`: Get information of a specified Region
+- `GetStore`: Get information of a specified Store
+
+To control the maximum rate of an HTTP API request, for example, the `GetRegion` API request:
+
+```bash
+config set service-middleware rate-limit GetRegion qps 100
+```
+
+To control the maximum concurrency of an HTTP API request, for example, the `GetRegion` API request:
+
+```bash
+config set service-middleware rate-limit GetRegion concurrency 10
+```
+
+Reset the above settings:
+
+```bash
+config set service-middleware rate-limit GetRegion qps 0
+config set service-middleware rate-limit GetRegion concurrency 0
 ```
 
 #### `config placement-rules [disable | enable | load | save | show | rule-group]`
