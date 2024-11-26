@@ -1,75 +1,52 @@
 ---
-title: TiDB Performance Troubleshooting Guide
+title: TiDB Performance Tools Guidelines
 summary: learn how to use performance tools in TiDB for efficiently performance troubleshooting 
 ---
 
-# TiDB Performance Troubleshooting Guide
+# TiDB Performance Tools Guidelines
 
-## Important Background
+## Introduction
 
-TiDB is designed with comprehensive instrumentation in mind, featuring a well-organized system of over 1000 metrics. Similar to MySQL, it provides essential monitoring capabilities through TopSQL views and slow query logs.
-In real-world use cases, performance troubleshooting in distributed databases like TiDB still presents unique challenges that can overwhelm even experienced database administrators. While TiDB offers powerful features at its core, it operates on fundamental database principles that we can systematically analyze and optimize.
+TiDB is a distributed database that needs systematic performance troubleshooting. While it has advanced features, it follows basic database principles that we can analyze step by step.
 
-### Current Challenges
+## Performance Troubleshooting Challenges
 
-#### 1. Tool Complexity
+Performance issues in TiDB can stem from various sources:
 
-TiDB provides various performance monitoring and debugging tools:
+- Application Layer Issues: Suboptimal connection management and improper batch processing
+- Query Optimization Issues: Suboptimal execution plans and lack of appropriate indexes
+- Resource Constraints: Undersized TiDB or TiKV servers
+- Distributed System Challenges: Read or write Hot spot issues in TiKV
 
-* **TiDB Dashboard** for visual monitoring
-* **Grafana metrics** for detailed performance data
-* **System views** for internal state analysis
-* **Log files** for event tracking
-* **Advanced tools** including:
-  * Command-line utilities
-  * Continuous profilers
-  * Trace files
+Each type of performance issue requires specific diagnostic approaches:
 
-#### 2. Learning Curve
-Many users, especially those new to distributed systems, find themselves:
+- Application issues: Application related metrics analysis
+- Query issues: Execution plan analysis and index optimization
+- Resource issues: Server metrics and capacity planning
+- Distributed issues: Key Visualizer and hot spot analysis
 
-* Overwhelmed by the variety of available tools
-* Uncertain about which metrics matter most
-* Struggling to correlate data from different sources
-* Unable to identify true performance bottlenecks
+Understanding which tools to use in each scenario is crucial for effective problem resolution.
 
-#### 3. Common Pitfalls
-A frequent trap for beginners is:
-* Getting lost in the abundance of metrics, there are over 1000 existing metrics, and there are missing descriptions in user docs for metrics, tables, logs 
-* Missing the holistic view of system performance and over-focusing on individual performance indicators
-* Following incorrect troubleshooting paths
+## Common Challenges for New Users
 
-### Document Purpose
+Performance troubleshooting in distributed databases like TiDB presents unique challenges:
 
-This guide aims to bridge the gap between TiDB's complexity and practical performance optimization by:
+- **Tool Complexity**: The diverse set of diagnostic tools requires familiarity with multiple interfaces and approaches
+- **Metric Volume**: Processing and correlating over 1000 metrics can be overwhelming
+- **Complex Execution Plans**: Understanding query execution across distributed components requires specialized knowledge
+- **Metric Correlation**: Identifying relationships between different performance indicators can be challenging
 
-1. Providing a structured methodology for performance troubleshooting that's accessible to beginners
-2. Focusing on real-world use cases rather than theoretical tool documentation
-3. Teaching how to correlate different monitoring tools effectively
-4. Building a systematic approach to identifying true bottlenecks
+## Document Purpose
 
-### Methodological Approach
+TiDB combines advanced distributed features with core database principles. This guide shows you how to systematically troubleshoot performance issues using proven methods.
 
-We introduce two fundamental approaches that align with traditional database performance analysis while accounting for TiDB's distributed nature:
+Here are two effective ways to analyze TiDB performance:
 
-#### 1. Database Time Analysis
+- Database Time Analysis: Database Time Analysis uses statement summaries and metrics to provide multiple views of performance, helping you identify bottlenecks both inside and outside TiDB, and systematically trace issues from symptoms to root causes.
+- Database CPU Analysis: This approach focuses on analyzing top CPU utilization patterns through Top SQL features, helping you understand resource-intensive top SQL statements. It's particularly effective for identifying read or write hotspots at the TiKV level.
 
 
+## Database Time Analysis
 
-* Leverages both statement summaries and metrics
-* Provides multiple perspectives on performance issues
-* Helps identify whether bottlenecks are inside or outside TiDB
-* Enables systematic drilling down from high-level symptoms to root causes
 
-#### 2. Database CPU Analysis
-
-* Focuses on resource utilization patterns
-* Uses Top SQL features to identify high-impact queries
-* Helps understand load distribution across nodes
-* Enables targeted optimization of resource-intensive operations
-
----
-
-This document emphasizes practical, actionable approaches over theoretical understanding, ensuring users can effectively troubleshoot performance issues while building their expertise with TiDB's advanced features.
-
-[Rest of the document follows...]
+## Database CPU Analysis
