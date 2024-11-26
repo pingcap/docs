@@ -75,7 +75,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td>Enhance and expand TiProxy use cases **tw@Oreoxmt**</td>
     <td>As a crucial component of the high availability of TiDB, <a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-overview">TiProxy</a> extends its capabilities beyond SQL traffic access and forwarding to support cluster change evaluation. Key features include:
     <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-traffic-replay">TiProxy supports traffic capture and replay</a> (experimental, introduced in v8.4.0)</li>
-    <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-overview">	Built-in virtual IP management in TiProxy</a> (introduced in v8.3.0)</li>
+    <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-overview">TiProxy supports built-in virtual IP management</a> (introduced in v8.3.0)</li>
     <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-load-balance">TiProxy supports multiple load balancing policies</a> (introduced in v8.2.0)</li>
     </td>
   </tr>
@@ -125,7 +125,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [documentation](/schema-cache.md).
 
-* Use the Active PD Follower feature to enhance the scalability of PD's Region information query service (GA) [#7431](https://github.com/tikv/pd/issues/7431) @[okJiang](https://github.com/okJiang) tw@Oreoxmt <!--2015-->
+* Provide the Active PD Follower feature to enhance the scalability of PD's Region information query service (GA) [#7431](https://github.com/tikv/pd/issues/7431) @[okJiang](https://github.com/okJiang) tw@Oreoxmt <!--2015-->
 
     In a TiDB cluster with a large number of Regions, the PD leader might experience high CPU load due to the increased overhead of handling heartbeats and scheduling tasks. If the cluster has many TiDB instances, and there is a high concurrency of requests for Region information, the CPU pressure on the PD leader increases further and might cause PD services to become unavailable.
 
