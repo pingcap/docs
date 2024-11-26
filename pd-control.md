@@ -351,17 +351,18 @@ Usage:
 
 #### `config [show | set service-middleware <option> [<key> <value> | <label> <qps|concurrency> <value>]]`
 
-`service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as audit logs, request rate limiting, and concurrency limiting. Starting from v8.5.0, PD supports modifying the following configurations of `service-middleware` via `pd-ctl`:
+`service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as audit logging, request rate limiting, and concurrency limiting. Starting from v8.5.0, PD enables you to modify the following configurations of `service-middleware` via `pd-ctl`:
 
-- `audit`: Controls whether to enable audit logs for HTTP requests processed by PD (enabled by default). When enabled, `service-middleware` logs relevant information about HTTP requests in the PD logs.
-- `rate-limit`: Used to limit the maximum rate and concurrency of PD processing HTTP API requests.
-- `grpc-rate-limit`: Used to limit the maximum rate and concurrency of PD processing gRPC API requests.
+- `audit`: controls whether to enable audit logging for HTTP requests processed by PD (enabled by default). When enabled, `service-middleware` logs information about HTTP requests in the PD logs.
+- `rate-limit`: limits the maximum rate and concurrency of HTTP API requests processed by PD.
+- `grpc-rate-limit`: limits the maximum rate and concurrency of gRPC API requests processed by PD.
+``
 
 > **Note:**
 >
-> To avoid the impact of request rate limiting and concurrency limiting on PD performance, it is not recommended to modify the configurations in `service-middleware`.
+> To avoid the impact of request rate limiting and concurrency limiting on PD performance, it is not recommended to modify configurations in `service-middleware`.
 
-Display the related config information of `service-middleware`:
+Display the configuration information of `service-middleware`:
 
 ```bash
 config show service-middleware
@@ -383,25 +384,25 @@ config show service-middleware
 }
 ```
 
-`service-middleware audit` is used to enable or disable the audit log function for HTTP requests. For example, to disable this function:
+`service-middleware audit` enables or disables the audit logging function for HTTP requests. For example, to disable this function, run the following command:
 
 ```bash
 config set service-middleware audit enable-audit false
 ```
 
-`service-middleware grpc-rate-limit` is used to control the maximum rate and concurrency of the following gRPC API requests:
+`service-middleware grpc-rate-limit` controls the maximum rate and concurrency of the following gRPC API requests:
 
-- `GetRegion`: Get information of a specified Region
-- `GetStore`: Get information of a specified Store
-- `GetMembers`: Get information of PD cluster members
+- `GetRegion`: get information about a specified Region
+- `GetStore`: get information about a specified store
+- `GetMembers`: get information about PD cluster members
 
-To control the maximum rate of a gRPC API request, for example, the `GetRegion` API request:
+To control the maximum rate of a gRPC API requests, such as `GetRegion` API requests, run the following command:
 
 ```bash
 config set service-middleware grpc-rate-limit GetRegion qps 100
 ```
 
-To control the maximum concurrency of a gRPC API request, for example, the `GetRegion` API request:
+To control the maximum concurrency of a gRPC API requests, such as `GetRegion` API requests, run the following command:
 
 ```bash
 config set service-middleware grpc-rate-limit GetRegion concurrency 10
@@ -435,31 +436,31 @@ config show service-middleware
 }
 ```
 
-Reset the above settings:
+Reset the preceding settings:
 
 ```bash
 config set service-middleware grpc-rate-limit GetRegion qps 0
 config set service-middleware grpc-rate-limit GetRegion concurrency 0
 ```
 
-`service-middleware rate-limit` is used to control the maximum rate and concurrency of the following HTTP API requests:
+`service-middleware rate-limit` controls the maximum rate and concurrency of the following HTTP API requests:
 
-- `GetRegion`: Get information of a specified Region
-- `GetStore`: Get information of a specified Store
+- `GetRegion`: get information about a specified Region
+- `GetStore`: get information about a specified store
 
-To control the maximum rate of an HTTP API request, for example, the `GetRegion` API request:
+To control the maximum rate of HTTP API requests, such as `GetRegion` API requests, run the following command:
 
 ```bash
 config set service-middleware rate-limit GetRegion qps 100
 ```
 
-To control the maximum concurrency of an HTTP API request, for example, the `GetRegion` API request:
+To control the maximum concurrency of HTTP API requests, such as `GetRegion` API requests, run the following command:
 
 ```bash
 config set service-middleware rate-limit GetRegion concurrency 10
 ```
 
-Reset the above settings:
+Reset the preceding settings:
 
 ```bash
 config set service-middleware rate-limit GetRegion qps 0
