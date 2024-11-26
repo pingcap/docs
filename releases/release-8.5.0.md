@@ -86,7 +86,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   <tr>
     <td rowspan="2"> SQL </td>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/foreign-key">Foreign key</a> (GA in v8.5.0) **tw@lilin90 1894**</td>
-    <td>Foreign keys are constraints in a database that establish relationships between tables, ensuring data consistency and integrity. They restrict the data referenced in a child table to exist in the parent table, preventing the insertion of invalid data. Foreign keys also support cascading operations (such as automatic synchronization during deletion or update), simplifying business logic implementation and reducing the complexity of manually maintaining data relationships.</td>
+    <td>Foreign keys are constraints in a database that establish relationships between tables, ensuring data consistency and integrity. They ensure that the data referenced in a child table exist in the parent table, preventing the insertion of invalid data. Foreign keys also support cascading operations (such as automatic synchronization during deletion or update), simplifying business logic implementation and reducing the complexity of manually maintaining data relationships.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/vector-search-overview">Vector search</a> (experimental, introduced in v8.4.0) </td>
@@ -184,7 +184,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     The foreign key feature becomes generally available (GA) in v8.5.0. Foreign key constraints help ensure data consistency and integrity. You can easily establish foreign key relationships between tables, with support for cascading updates and deletions, simplifying data management. This feature enhances support for applications with complex data relationships.
 
-    For more information, see [Documentation](/foreign-key.md).
+    For more information, see [documentation](/foreign-key.md).
 
 * Introduce the `ADMIN ALTER DDL JOBS` statement to support modifying the DDL jobs online [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
 
