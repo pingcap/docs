@@ -17,10 +17,6 @@ TiDB Cloud Serverless extends these capabilities with two types of high availabi
 
 - **Regional high availability (beta)**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. This feature is available in selected regions with multi-availability zone support and can only be enabled during cluster creation. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
 
-> **Note:**
->
-> Regional high availability is in beta and only available in the AWS Tokyo (`ap-northeast-1`) region.
-
 ## Zonal high availability architecture
 
 > **Note:**
@@ -88,7 +84,7 @@ TiDB Cloud Serverless provides robust automated backup mechanisms to ensure cont
 - **Daily full backups**: A full backup of your database is created once a day, capturing the entire database state.
 - **Continuous transaction log backups**: Transaction logs are backed up continuously, approximately every 5 minutes, though the exact frequency depends on database activity.
 
-These automated backups enable you to restore your database either from a full backup or from a specific point in time by combining full backups with continuous transaction logs. This flexibility ensures you can recover your database to a precise point just before an incident occurred.
+These automated backups enable you to restore your database either from a full backup or from a specific point in time by combining full backups with continuous transaction logs. This flexibility ensures that you can recover your database to a precise point just before an incident occurs.
 
 > **Note:**
 >
