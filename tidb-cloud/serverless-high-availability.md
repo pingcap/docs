@@ -11,7 +11,11 @@ TiDB provides high availability and data durability using the Raft consensus alg
 
 - **Zonal (Default)**: This option places all nodes in the same availability zone, resulting in lower network latency. It ensures high availability without requiring application redundancy across zones, making it ideal for applications achieving the highest availability within a single zone with minimal latency. Available in all regions supporting TiDB Cloud Serverless.
 
-- **Regional**. This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. While it provides the highest level of availability, it requires configuring application-level redundancy across zones. Recommended for organizations that requires the highest availability against infrastructure failures within a zone at the cost of increased latency and potential cross-zone data transfer fees. Available  in selected regions supporting multiple availability zones and can only be enabled during cluster creation.
+- **Regional (Beta)**. This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. While it provides the highest level of availability, it requires configuring application-level redundancy across zones. Recommended for organizations that requires the highest availability against infrastructure failures within a zone at the cost of increased latency and potential cross-zone data transfer fees. Available  in selected regions supporting multiple availability zones and can only be enabled during cluster creation.
+
+> **Note:**
+>
+> Regional HA is in Beta and only avliable in AWS Tokyo (ap-northeast-1) region.
 
 ## Zonal High Availability Architecture
 
