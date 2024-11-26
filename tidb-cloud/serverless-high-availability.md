@@ -60,7 +60,6 @@ In Regional High Availability architecture:
 - Data is replicated across TiFlash write nodes within the primary availability zone.
 - TiDB servers and TiFlash compute nodes read from and write to these TiKV and TiFlash write nodes, which are safeguarded by storage-level replication.
 
-
 ### Failover Process
 
 In the unlikely event of a primary zone failure scenario, which could be caused by a natural disaster, a configuration change, a software issue, or a hardware component failure. Critical OLTP workload components, including Gateway and TiDB, are automatically launched in the Standby Availability Zone. Traffic is then automatically redirected there. This process ensures a swift recovery to normal operations and maintains business continuity.
@@ -73,8 +72,6 @@ TiDB Cloud Serverless ensures business continuity with minimal service disruptio
 In addition to high availability through TiKV replication, TiKV instances are deployed and configured to place each data replica in a different availability zone. As long as two zones are operating normally, the system remains available to serve your application. Data persistence is ensured by regularly pushing data to S3 for high durability. Even if two zones fail, your data on S3 remains accessible and can be recovered.
 
 Applications remain unaffected by non-primary zone failures and are unaware of such issues. In the event of a primary zone failure, both Gateway and TiDB are launched in the standby zone to handle the workload. Applications should implement retry logic for connections to redirect new requests to the active servers in the standby zone.
-
-
 ## Automatic Backups and Durability
 
 Database backups are a critical component of any business continuity and disaster recovery strategy as they help protect your data from corruption or accidental deletion. With these backups, you can restore your database to a specific point in time within the configured retention period, minimizing potential data loss and downtime.
@@ -109,4 +106,3 @@ The following table compares RPO and RTO of each high availability option:
 |--------------------------------|-------------------------------|-----------------|
 | Zonal                          | Near 0                        | 0               |
 | Regional                       | Typically less than 600 seconds | 0               |
-
