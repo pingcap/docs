@@ -48,5 +48,7 @@ Here are two effective ways to analyze TiDB performance:
 
 ## Database Time Analysis
 
+TiDB is constantly measuring and collecting SQL processing paths and database time. Therefore, it is easy to identify database performance bottlenecks in TiDB. Based on database time metrics, you can achieve the following two goals even without data on user response time:
+
 
 ## Database CPU Analysis
