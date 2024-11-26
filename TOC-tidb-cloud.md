@@ -6,6 +6,7 @@
   - [What is TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
+    - [TiDB Cloud Serverless HA](/tidb-cloud/serverless-high-availability.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started
