@@ -353,10 +353,9 @@ Usage:
 
 `service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as audit logging, request rate limiting, and concurrency limiting. Starting from v8.5.0, PD enables you to modify the following configurations of `service-middleware` via `pd-ctl`:
 
-- `audit`: controls whether to enable audit logging for HTTP requests processed by PD (enabled by default). When enabled, `service-middleware` logs information about HTTP requests in the PD logs.
+- `audit`: controls whether to enable audit logging for HTTP requests processed by PD (enabled by default). When enabled, `service-middleware` logs information about HTTP requests in PD logs.
 - `rate-limit`: limits the maximum rate and concurrency of HTTP API requests processed by PD.
 - `grpc-rate-limit`: limits the maximum rate and concurrency of gRPC API requests processed by PD.
-``
 
 > **Note:**
 >
