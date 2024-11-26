@@ -1707,7 +1707,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 1125899906842624]` (the maximum value that can be set is 1 PiB)
-- This variable limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in the cluster is quite large, limiting the write bandwidth for index creation can reduce the impact on the frontend workload.
+- This variable limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
 - The default value `0` means no write bandwidth limit. The default unit is bytes per second. You can also set the value in formats such as `'1GiB'` or `'256MiB`.
 
 ### tidb_ddl_reorg_worker_cnt
