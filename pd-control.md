@@ -396,13 +396,13 @@ config set service-middleware audit enable-audit false
 - `GetStore`: get information about a specified store
 - `GetMembers`: get information about PD cluster members
 
-To control the maximum rate of a gRPC API requests, such as `GetRegion` API requests, run the following command:
+To control the maximum rate of gRPC API requests, such as `GetRegion` API requests, run the following command:
 
 ```bash
 config set service-middleware grpc-rate-limit GetRegion qps 100
 ```
 
-To control the maximum concurrency of a gRPC API requests, such as `GetRegion` API requests, run the following command:
+To control the maximum concurrency of gRPC API requests, such as `GetRegion` API requests, run the following command:
 
 ```bash
 config set service-middleware grpc-rate-limit GetRegion concurrency 10
