@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Regional high availability (beta) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-    This feature is designed for workloads requiring maximum infrastructure redundancy and business continuity. Key features include:
+    This feature is designed for workloads that require maximum infrastructure redundancy and business continuity. Key features include:
 
     - Nodes are distributed across multiple availability zones to ensure high availability in the event of a zone failure.
     - Critical OLTP (Online Transactional Processing) components, such as PD and TiKV, are replicated across availability zones for redundancy.
@@ -29,7 +29,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) reduces costs for large data writes by up to 80% for the following scenarios:
 
     - When you perform write operations larger than 16 MiB in [autocommit mode](/transaction-overview.md#autocommit).
-    - When you perform write operations larger than 16 MiB in [optimistic transaction mode](/sql-statements/sql-statement-begin.md).
+    - When you perform write operations larger than 16 MiB in [optimistic transaction model](/optimistic-transaction.md).
     - When you [import data into TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
 
   This improvement enhances the efficiency and cost-effectiveness of your data operations, providing greater savings as your workload scales.
