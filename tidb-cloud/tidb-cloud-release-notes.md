@@ -8,6 +8,32 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## November 26, 2024
+
+**General changes**
+
+- Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v7.5.4](https://docs.pingcap.com/tidb/v7.5/release-7.5.4) to [v8.1.1](https://docs.pingcap.com/tidb/stable/release-8.1.1).
+
+- Regional high availability (beta) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
+    This feature is designed for workloads requiring maximum infrastructure redundancy and business continuity. Key features include:
+
+    - Nodes are distributed across multiple availability zones to ensure high availability in the event of a zone failure.
+    - Critical OLTP (Online Transactional Processing) components, such as PD and TiKV, are replicated across availability zones for redundancy.
+    - Automatic failover minimizes service disruption during a primary zone failure.
+
+  This feature is currently available only in the AWS Tokyo (`ap-northeast-1`) region and can be enabled only during cluster creation.
+
+    For more information, see [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md).
+
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) reduces costs for large data writes by up to 80% for the following scenarios:
+
+    - When you perform write operations larger than 16 MiB in [autocommit mode](/transaction-overview.md#autocommit).
+    - When you perform write operations larger than 16 MiB in [optimistic transaction mode](/sql-statements/sql-statement-begin.md).
+    - When you [import data into TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
+
+  This improvement enhances the efficiency and cost-effectiveness of your data operations, providing greater savings as your workload scales.
+
 ## November 19, 2024
 
 **General changes**
