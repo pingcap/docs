@@ -1926,7 +1926,7 @@ select * from t;
 
 ### Dynamic pruning mode
 
-TiDB accesses partitioned tables in either `dynamic` or `static` mode. `dynamic` mode is used by default since v6.3.0. However, dynamic partitioning is effective only after the full table-level statistics, or GlobalStats, are collected. Before GlobalStats are collected, TiDB will use the `static` mode instead. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+TiDB accesses partitioned tables in either `dynamic` or `static` mode. `dynamic` mode is used by default since v6.3.0. However, dynamic partitioning is effective only after the full table-level statistics, or global statistics, are collected. If you enable the `dynamic` pruning mode before global statistics collection is completed, TiDB remains in the `static` mode until global statistics are fully collected. For detailed information about global statistics, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
 {{< copyable "sql" >}}
 
@@ -1936,9 +1936,9 @@ set @@session.tidb_partition_prune_mode = 'dynamic'
 
 Manual ANALYZE and normal queries use the session-level `tidb_partition_prune_mode` setting. The `auto-analyze` operation in the background uses the global `tidb_partition_prune_mode` setting.
 
-In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level GlobalStats.
+In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level global statistics.
 
-When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
+When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. Global statistics are collected only upon the next `auto-analyze` operation.
 
 {{< copyable "sql" >}}
 
@@ -1958,7 +1958,7 @@ show stats_meta where table_name like "t";
 3 rows in set (0.01 sec)
 ```
 
-To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain GlobalStats.
+To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain global statistics.
 
 {{< copyable "sql" >}}
 
