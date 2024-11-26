@@ -28,12 +28,12 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 <tbody>
   <tr>
     <td rowspan="6">Scalability and Performance</td>
-    <td> Reduce data processing latency in multiple dimensions **tw@qiancai**</td>
-    <td>TiDB continuously refines data processing to enhance performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include: 
+    <td>Reduce data processing latency in multiple dimensions **tw@qiancai**</td>
+    <td>TiDB continuously refines data processing to improve performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include: 
     <li>Support <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">parallel sorting</a> (introduced in v8.2.0) </li>
     <li>Optimize <a href="https://docs.pingcap.com/zh/tidb/v8.5/tidb-configuration-file#batch-policy-new-in-v830">batch processing strategy for KV (key-value) requests </a> (introduced in v8.3.0) </li>
-    <li>Support <a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">parallel mode for TSO requests</a> (introduced in v8.4.0) </li>
-    <li>Reduce the resource overhead of  <a href="https://docs.pingcap.com/tidb/v8.5/sql-statement-delete">DELETE</a> operations (introduced in v8.4.0) </li>
+    <li>Support <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_tso_client_rpc_mode-new-in-v840">parallel mode for TSO requests</a> (introduced in v8.4.0) </li>
+    <li>Reduce the resource overhead of <a href="https://docs.pingcap.com/tidb/v8.5/sql-statement-delete">DELETE</a> operations (introduced in v8.4.0) </li>
     <li>Improve query performance for <a href="https://docs.pingcap.com/tidb/v8.5/cached-tables">cached tables</a> (introduced in v8.4.0) </li>
     <li>Introduce <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_hash_join_version-new-in-v840">an optimized version of Hash Join</a> (introduced in v8.4.0) </li>
     </td>
@@ -162,7 +162,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     When a sudden influx of requests is sent to PD, it can lead to high workloads and potentially affect PD performance. Starting from v8.5.0, you can use [`pd-ctl`](/pd-control.md) to limit the maximum rate and concurrency of requests processed by PD, improving its stability.
 
-    For more information, see [Documentation](/pd-control.md).
+    For more information, see [documentation](/pd-control.md).
 
 ### Availability
 
@@ -216,11 +216,11 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Security
 
-* BR supports client-side encryption of both full backup data and log backup data (GA) [#28640](https://github.com/pingcap/tidb/issues/28640) [#56433] (https://github.com/pingcap/tidb/issues/56433) @[joccau](https://github.com/joccau) @[Tristan1900](https://github.com/Tristan1900) tw@qiancai <!--1998-->
+* BR supports client-side encryption of both full backup data and log backup data (GA) [#28640](https://github.com/pingcap/tidb/issues/28640) [#56433](https://github.com/pingcap/tidb/issues/56433) @[joccau](https://github.com/joccau) @[Tristan1900](https://github.com/Tristan1900) tw@qiancai <!--1998-->
 
     * Client-side encryption of full backup data (introduced as experimental in TiDB v5.3.0) enables you to encrypt backup data on the client side using a custom fixed key.
 
-    * Client-side encryption of log backup data  (introduced as experimental in TiDB v8.4.0) enables you to encrypt log backup data on the client side using one of the following methods:
+    * Client-side encryption of log backup data (introduced as experimental in TiDB v8.4.0) enables you to encrypt log backup data on the client side using one of the following methods:
 
         * Encrypt using a custom fixed key
         * Encrypt using a master key stored on a local disk
@@ -230,7 +230,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [Encrypt the backup data](/br/br-snapshot-manual.md#encrypt-the-backup-data) and [Encrypt the log backup data](/br/br-pitr-manual.md#encrypt-the-log-backup-data).
 
-* TiKV encryption at rest supports Google [Key Management Service (Cloud KMS)](https://cloud.google.com/docs/security/key-management-deep-dive?hl) (GA) [#8906](https://github.com/tikv/tikv/issues/8906) @[glorv](https://github.com/glorv) **tw@qiancai** <!--1876-->
+* TiKV encryption at rest supports [Google Cloud Key Management Service (Google Cloud KMS)](https://cloud.google.com/docs/security/key-management-deep-dive) (GA) [#8906](https://github.com/tikv/tikv/issues/8906) @[glorv](https://github.com/glorv) **tw@qiancai** <!--1876-->
 
     TiKV ensures data security by using the encryption at rest technique to encrypt stored data. The core aspect of this technique is proper key management. In v8.0.0, TiKV encryption at rest experimentally supports using Google Cloud KMS for master key management.
 
