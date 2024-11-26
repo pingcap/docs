@@ -7,6 +7,8 @@ summary: Learn about the high availability architecture of TiDB Cloud Serverless
 
 TiDB Cloud Serverless is designed with robust mechanisms to maintain high availability and data durability by default, preventing single points of failure and ensuring continuous service even in the face of disruptions. As a fully managed service based on the battle-tested TiDB Open Source product, it inherits TiDB's core high availability (HA) features and augments them with additional cloud-native capabilities.
 
+## Overview
+
 TiDB ensures high availability and data durability using the Raft consensus algorithm. This algorithm consistently replicates data changes across multiple nodes, allowing TiDB to handle read and write requests even in the event of node failures or network partitions. This approach provides both high data durability and fault tolerance.
 
 TiDB Cloud Serverless extends these capabilities with two types of high availability to meet different operational requirements:
@@ -72,7 +74,7 @@ TiDB Cloud Serverless minimizes service disruption and ensures business continui
 - Automatically create new replicas of Gateway and TiDB in the standby availability zone.
 - Use the elastic load balancer to detect active gateway replicas in the standby availability zone and redirect OLTP traffic from the failed primary zone.
 
-In addition to high availability through TiKV replication, TiKV instances are deployed and configured to place each data replica in a different availability zone. As long as two zones are operating normally, the system remains available to serve your application. Data persistence is ensured by regularly pushing data to S3 for high durability. Even if two zones fail, your data on S3 remains accessible and can be recovered.
+In addition to providing high availability through TiKV replication, TiKV instances are deployed and configured to place each data replica in a different availability zone. The system remains available as long as two availability zones are operating normally. For high durability, data persistence is ensured by regularly backing up data to S3. Even if two zones fail, data stored in S3 remains accessible and recoverable.
 
 Applications are unaffected by failures in non-primary zones and remain unaware of such events. During a primary zone failure, Gateway and TiDB are launched in the standby availability zone to handle workloads. Ensure that your applications implement retry logic to redirect new requests to active servers in the standby availability zone.
 
@@ -98,7 +100,7 @@ During a failure, ongoing transactions on the failed server might be interrupted
 - **TiDB failures**: If a TiDB instance fails, client connections are unaffected because TiDB Cloud Serverless automatically reroutes traffic through the gateway. While transactions on the failed TiDB instance might be interrupted, the system ensures that committed data is preserved, and new transactions are handled by another available TiDB instance.
 - **Gateway failures**: If the Gateway fails, client connections are disrupted. However, TiDB Cloud Serverless gateways are stateless and can restart immediately in a new zone or server. Traffic is automatically redirected to the new gateway, minimizing downtime.
 
-Applications should handle recoverable failures with retry logic. For specific implementation details and usage, refer to the documentation for your respective driver or ORM (e.g., [JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html)).
+It is recommended to implement retry logic in your application to handle recoverable failures. For implementation details, refer to your driver or ORM documentation (for example, [JDBC](https://dev.mysql.com/doc/connector-j/en/connector-j-config-failover.html)).
 
 ## RTO and RPO
 
