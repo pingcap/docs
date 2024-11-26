@@ -46,6 +46,7 @@ TiDB Cloud Serverless ensures a transparent failover process for your applicatio
 - Servers providing storage services recover local caches from persisted data on Amazon S3, restoring the system to a consistent state with the replicas.
 
 In the storage layer, persisted data is regularly pushed to Amazon S3 for high durability. Moreover, immediate updates are not only replicated across multiple TiKV servers but also stored on the EBS of each server, which further replicates the data for additional durability. TiDB automatically resolves issues by backing off and retrying in milliseconds, ensuring the failover process remains seamless for client applications.
+
 The gateway and computing layers are stateless, so failover involves restarting them elsewhere immediately. Applications should implement retry logic for their connections. While the zonal setup provides high availability, it cannot handle an entire zone failure. If the zone becomes unavailable, downtime will occur until the zone and its dependent services are restored.
 
 ## Regional high availability architecture
