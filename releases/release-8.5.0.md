@@ -297,23 +297,23 @@ The following features are planned for deprecation in future versions:
 
 + TiDB <!--tw@hfxsd: 12 notes-->
 
-    - 提升关闭分布式框架的 fast reorg 加索引任务对任务取消的响应速度 [#56017](https://github.com/pingcap/tidb/issues/56017) @[lance6716](https://github.com/lance6716)
-    - 提升小表加索引的速度 [#54230](https://github.com/pingcap/tidb/issues/54230) @[tangenta](https://github.com/tangenta)
-    - 增加系统变量 tidb_ddl_reorg_max_write_speed 来限制加索引时 ingest 阶段速度上限 [#57156](https://github.com/pingcap/tidb/issues/57156) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - 提升某些情况下查询 information_schema.tables 的性能 [#57295](https://github.com/pingcap/tidb/issues/57295) @[tangenta](https://github.com/tangenta)
-    - 支持动态调整更多 DDL 任务参数 [#57526](https://github.com/pingcap/tidb/issues/57526) @[fzzf678](https://github.com/fzzf678)
-    - 允许全局索引包含分区表达式中的所有列 [#56230](https://github.com/pingcap/tidb/issues/56230) @[Defined2014](https://github.com/Defined2014)
-    - 对于 list 分区表，支持对非"点查"的场景(range 查询)进行分区裁剪 [#56673](https://github.com/pingcap/tidb/issues/56673) @[Defined2014](https://github.com/Defined2014)
+    - Improve the response speed of `ADD INDEX` acceleration to task cancelation when the Distributed eXecution Framework (DXF) is disabled [#56017](https://github.com/pingcap/tidb/issues/56017) @[lance6716](https://github.com/lance6716)
+    - Improve the speed of adding indexes to small tables [#54230](https://github.com/pingcap/tidb/issues/54230) @[tangenta](https://github.com/tangenta)
+    - Add the system variable `tidb_ddl_reorg_max_write_speed` to limit the maximum speed of the ingest phase when adding indexes [#57156](https://github.com/pingcap/tidb/issues/57156) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Improve the performance of querying `information_schema.tables` in some cases [#57295](https://github.com/pingcap/tidb/issues/57295) @[tangenta](https://github.com/tangenta)
+    - Support dynamically adjusting more DDL task parameters [#57526](https://github.com/pingcap/tidb/issues/57526) @[fzzf678](https://github.com/fzzf678)
+    - Support global indexes containing all columns in a partitioned expression [#56230](https://github.com/pingcap/tidb/issues/56230) @[Defined2014](https://github.com/Defined2014)
+    - Support partition pruning for list partitioned tables in range query scenarios [#56673](https://github.com/pingcap/tidb/issues/56673) @[Defined2014](https://github.com/Defined2014)
     - 默认开启 FixControl#46177，避免某些情况选择全表扫没有选择索引范围扫描的问题 [#46177](https://github.com/pingcap/tidb/issues/46177) @[terry1purcell](https://github.com/terry1purcell)
-    - 改进内部估算逻辑，使其能够更充分地利用多列多值索引的统计信息，提升某些涉及多值索引的查询的估算精度 [#56915](https://github.com/pingcap/tidb/issues/56915) @[time-and-fate](https://github.com/time-and-fate)
-    - 提高特定情况下全表扫描的代价估算，减少错误的选择全表扫描的概率 [#57085](https://github.com/pingcap/tidb/issues/57085) @[terry1purcell](https://github.com/terry1purcell)
-    - 优化统计信息同步加载所需的数据量，提升加载性能 [#56812](https://github.com/pingcap/tidb/issues/56812) @[winoros](https://github.com/winoros)
-    - 优化特定情况下，OUTER JOIN 含有唯一索引且有 ORDER BY LIMIT 语句时的执行计划，提高执行效率 [#56321](https://github.com/pingcap/tidb/issues/56321) @[winoros](https://github.com/winoros)
+    - Improve the internal estimation logic so that it can better use the statistics of multi-column and multi-value indexes to improve the estimation accuracy of certain queries involving multi-value indexes [#56915](https://github.com/pingcap/tidb/issues/56915) @[time-and-fate](https://github.com/time-and-fate)
+    - Improve the cost estimation of full table scan in specific cases and reduce the probability of incorrectly choosing the full table scan [#57085](https://github.com/pingcap/tidb/issues/57085) @[terry1purcell](https://github.com/terry1purcell)
+    - Optimize the amount of data required for synchronous loading of statistics to improve loading performance [#56812](https://github.com/pingcap/tidb/issues/56812) @[winoros](https://github.com/winoros)
+    - Optimize the execution plan when `OUTER JOIN` contains a unique index and there is an `ORDER BY LIMIT` statement in certain cases to improve execution efficiency [#56321](https://github.com/pingcap/tidb/issues/56321) @[winoros](https://github.com/winoros)
 
 + TiKV <!--tw@hfxsd: 2 notes-->
 
-    - 利用单独的线程来进行副本清理工作，保证 Raft 读写关键路径的延迟稳定 [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
-    - 提升向量距离函数性能，为向量距离函数添加 SIMD 支持 [#17290](https://github.com/tikv/tikv/issues/17290) @[EricZequan](https://github.com/EricZequan)
+    - Use a separate thread for replica cleanup to ensure stable latency for critical paths of Raft reads and writes [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
+    - Improve the performance of vector distance function by supporting SIMD [#17290](https://github.com/tikv/tikv/issues/17290) @[EricZequan](https://github.com/EricZequan)
 
 + PD <!--tw@qiancai: 2 notes-->
 
@@ -409,9 +409,9 @@ The following features are planned for deprecation in future versions:
 + PD <!--tw@hfxsd: 3 notes-->
 
     - (dup): release-7.1.6.md > 错误修复> PD - 修复热点缓存中可能存在的内存泄露问题 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
-    - 使得 resource group 选择器对所有面板生效 [#56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
-    - 修复 syncer 加载过程中日志不清晰的问题 [#8717](https://github.com/tikv/pd/issues/8717) @[lhy1024](https://github.com/lhy1024)
-    - 修复已删除的 resource group 仍然出现在监控面板中的问题  [#8716](https://github.com/tikv/pd/issues/8716) @[AndreMouche](https://github.com/AndreMouche)
+    - Fix the issue that the resource group selector does not take effect for all panels [#56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
+    - Fix the issue that deleted resource groups still appear in the monitoring panel [#8716](https://github.com/tikv/pd/issues/8716) @[AndreMouche](https://github.com/AndreMouche)
+    - Fix the issue that log description is not clear when loading syncer [#8717](https://github.com/tikv/pd/issues/8717) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash <!--tw@Oreoxmt: 4 notes-->
 
@@ -425,10 +425,10 @@ The following features are planned for deprecation in future versions:
 
     + Backup & Restore (BR) <!--tw@hfxsd: 4 notes-->
 
-        - 减少了预先分配的内存从而避免当 incomplete range 过多时的 OOM [#53529](https://github.com/pingcap/tidb/issues/53529) @[Leavrth](https://github.com/Leavrth)
-        - 修复了备份时无法备份 global index 的错误 [#57469](https://github.com/pingcap/tidb/issues/57469) @[Defined2014](https://github.com/Defined2014)]
-        - 修复了日志可能打印出加密信息的错误 [#57585](https://github.com/pingcap/tidb/issues/57585) @[kennytm](https://github.com/kennytm)
-        - 修复了 advancer 无法处理锁冲突的情形 [#57134](https://github.com/pingcap/tidb/issues/57134) @[3pointer](https://github.com/3pointer)
+        - Fix the OOM issue when there are too many incomplete ranges that have not been backed up yet during backup [#53529](https://github.com/pingcap/tidb/issues/53529) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that global indexes cannot be backed up [#57469](https://github.com/pingcap/tidb/issues/57469) @[Defined2014](https://github.com/Defined2014)]
+        - Fix the issue that logs might print out encrypted information [#57585](https://github.com/pingcap/tidb/issues/57585) @[kennytm](https://github.com/kennytm)
+        - Fix the issue that Advancer cannot handle lock conflicts [#57134](https://github.com/pingcap/tidb/issues/57134) @[3pointer](https://github.com/3pointer)
 
     + TiCDC <!--tw@Oreoxmt: 3 notes-->
 
