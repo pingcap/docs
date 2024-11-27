@@ -2485,15 +2485,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_gc_life_time <span class="version-mark">New in v5.0</span>
 
+<<<<<<< HEAD
 > **Note:**
 >
 > This variable is read-only for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
+=======
+>>>>>>> 586d4cd889 (update serverless tidb_gc_life_time restriction (#19511))
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Duration
 - Default value: `10m0s`
-- Range: `[10m0s, 8760h0m0s]`
+- Range: `[10m0s, 8760h0m0s]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[10m0s, 168h0m0s]` for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
 - The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point.
 
 > **Note:**
