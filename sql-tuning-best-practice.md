@@ -75,7 +75,7 @@ In a distributed architecture like TiDB, it's essential to maintain a balanced w
 
 # Identifying High-Load SQL
 
-The most efficient way to identify Resource-Intensive SQL is using TiDB Dashboard, There are other tools like views and logs available as well.
+The most efficient way to identify Resource-Intensive SQL is using TiDB Dashboard. There are other tools like views and logs available as well.
 
 ## Monitoring SQL Statements by Using TiDB Dashboard
 
@@ -108,11 +108,9 @@ In addition to TiDB Dashboard, there are several other tools available to identi
 
 Each tool offers unique insights and can be valuable for different analysis scenarios. Using a combination of these tools allows for comprehensive SQL performance monitoring and optimization.
 
-- [slow query log](/identify-slow-queries.md)
-- [statements_summary view](/statement-summary-tables.md#statements_summary)
 - [Top SQL feature](/dashboard/top-sql.md)
-- [expensive queries in TiDB log](/identify-expensive-queries.md)
-- [cluster_processlist view](/information-schema/information-schema-processlist.md#cluster_processlist)
+- Logs: [slow query log](/identify-slow-queries.md) and [expensive queries in TiDB log](/identify-expensive-queries.md)
+- Views: [cluster_statements_summary view](/statement-summary-tables.md##the-cluster-tables-for-statement-summary) and [cluster_processlist view](/information-schema/information-schema-processlist.md#cluster_processlist)
 
 ## Gathering Data on the SQL Identified
 
@@ -180,7 +178,7 @@ The optimizer is as good as the information it receives. Therefore, ensuring up-
 
 Statistics are essential to the TiDB optimizer. TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement.
 
-statistics is generally divided into two levels: table level and column level. 
+Statistics is generally divided into two levels: table level and column level. 
 
 - For table-level statistics, it includes the total number of rows in the table and the number of rows that have been modified since the last collection of statistics. 
 - The column-level statistics information is more abundant, including histograms, Count-Min Sketch, Top-N (values or indexes with the highest occurrences), distribution and quantity of different values, and the number of null values, and so on.
@@ -222,7 +220,7 @@ Partition_name:
 
 In TiDB database, there are two ways to collect statistics: automatic collection and manual collection. In most case, the auto collection job works fine. Automatic collection is actually triggered when certain conditions are met for a table, and TiDB will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
 
-- tidb_auto_analyze_ratio: The healthiness trigger
+- [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio): The healthiness trigger
 - [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) and [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time): The allowed job window
 
 ```sql
@@ -239,7 +237,9 @@ SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
 +-----------------------------------------+-------------+
 ```
 
-In cases where automatic collection doesn't meet your needs, you can manually collect statistics using the `ANALYZE TABLE table_name` statement. This allows you to:
+There are cases where automatic collection doesn't meet your needs. The analyze windown by default is 00:00 to 23:59, which means the analyze job can be triggered any time during the day. If you want to trigger the analyze job only during certain hours, you can set the start time and end time, to avoid performance impact for the online business.
+
+You can manually collect statistics using the `ANALYZE TABLE table_name` statement. This allows you to:
 
 1. Adjust the sample rate for more accurate or faster analysis
 2. Increase the number of top-N values collected
@@ -267,9 +267,9 @@ An SQL statement undergoes optimization primarily in the optimizer through three
 
 ### Pre-Processing
 
-The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using Point_Get or Batch_Point_Get.
+The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using [`Point_Get`](https://docs.pingcap.com/tidb/stable/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](https://docs.pingcap.com/tidb/stable/explain-indexes#point_get-and-batch_point_get).
 
-Point_Get or Batch_Point_Get is to get 1 or 0 or many row only by using the TiKV key, the explicit or implicit (`_tidb_rowid`) primary key. For example, when id column is the primary key of a [clustered index](/clustered-indexes.md) table, Point_Get is used to get the particular row. If a plan is identified as Point_Get, optimizer will skip the logical transformation and cost-based optimization.
+`Point_Get` or `Batch_Point_Get` is to get 1 or 0 or many row only by using the TiKV key, the explicit or implicit (`_tidb_rowid`) primary key. For example, when id column is the primary key of a [clustered index](/clustered-indexes.md) table, `Point_Get` is used to get the particular row. If a plan is identified as `Point_Get`, optimizer will skip the logical transformation and cost-based optimization.
 
 ```sql
 SELECT id, name FROM emp WHERE id = 901; 
@@ -345,16 +345,19 @@ Note: Some attributes and explain table columns are omitted for improved formatt
 
 ```sql
 EXPLAIN ANALYZE
-SELECT SUM(pm.m_count)/COUNT(*) FROM
-(SELECT COUNT(m.name) m_count
-FROM universe.moons m
-RIGHT JOIN
-(SELECT p.id, p.name
-FROM universe.planet_categories c
-JOIN universe.planets p
-ON c.id = p.category_id AND c.name = 'Jovian') pc
-ON m.planet_id = pc.id
-GROUP BY pc.name) pm;
+SELECT SUM(pm.m_count) / COUNT(*) 
+FROM (
+    SELECT COUNT(m.name) m_count
+    FROM universe.moons m
+    RIGHT JOIN (
+        SELECT p.id, p.name
+        FROM universe.planet_categories c
+        JOIN universe.planets p
+            ON c.id = p.category_id 
+            AND c.name = 'Jovian'
+    ) pc ON m.planet_id = pc.id
+    GROUP BY pc.name
+) pm;
 ```
 
 ```
@@ -410,11 +413,19 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first child of the tree). For the table `stars`, the optimizer ony need to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`. The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` is to implemented the two order by and limit corespondingly. The final operator `Projection_16` is to implemented the column projection for `t5.name`.
 
 ```sql
-EXPLAIN SELECT t5.name FROM
-(SELECT p.name, p.gravity, p.distance_from_sun FROM universe.planets p JOIN universe.stars s
-ON s.id = p.sun_id AND s.name = 'Sun'
-ORDER BY p.distance_from_sun ASC LIMIT 5) t5
-ORDER BY t5.gravity DESC LIMIT 3;
+EXPLAIN 
+SELECT t5.name 
+FROM (
+    SELECT p.name, p.gravity, p.distance_from_sun 
+    FROM universe.planets p 
+    JOIN universe.stars s
+        ON s.id = p.sun_id 
+        AND s.name = 'Sun'
+    ORDER BY p.distance_from_sun ASC 
+    LIMIT 5
+) t5
+ORDER BY t5.gravity DESC 
+LIMIT 3;
 ```
 
 ```
@@ -665,15 +676,17 @@ Here is the query pattern
 ```sql
 SELECT `orders`.*
 FROM `orders`
-WHERE `orders`.`mode` = 'production'
-AND `orders`.`user_id` = 11111
-AND (orders.label_id IS NOT NULL)
-AND (orders.created_at >= '2024-04-07 18:07:52')
-AND (orders.created_at <= '2024-05-11 18:07:52')
-AND (id >= 1000000000)
-AND (id <= 2000000000)
-AND (orders.id < 1500000000) 
-ORDER BY orders.id DESC LIMIT 101;
+WHERE 
+    `orders`.`mode` = 'production'
+    AND `orders`.`user_id` = 11111
+    AND orders.label_id IS NOT NULL
+    AND orders.created_at >= '2024-04-07 18:07:52'
+    AND orders.created_at <= '2024-05-11 18:07:52'
+    AND id >= 1000000000
+    AND id <= 2000000000
+    AND orders.id < 1500000000
+ORDER BY orders.id DESC 
+LIMIT 101;
 ```
 
 ```sql
