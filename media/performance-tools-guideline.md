@@ -38,17 +38,24 @@ Performance troubleshooting in distributed databases like TiDB presents unique c
 
 ## Document Purpose
 
-TiDB combines advanced distributed features with core database principles. This guide shows you how to systematically troubleshoot performance issues using proven methods.
+TiDB combines advanced distributed features with core database principles. This guide shows you how to systematically troubleshoot performance issues using proven methods. There are plenty resource available under the TiDB Performance [Tuning guide](/performance-tuning-overview.md), 
 
 Here are two effective ways to analyze TiDB performance:
 
-- Database Time Analysis: Database Time Analysis uses statement summaries and metrics to provide multiple views of performance, helping you identify bottlenecks both inside and outside TiDB, and systematically trace issues from symptoms to root causes.
-- Database CPU Analysis: This approach focuses on analyzing top CPU utilization patterns through Top SQL features, helping you understand resource-intensive top SQL statements. It's particularly effective for identifying read or write hotspots at the TiKV level.
+- Database Time Analysis: Using view [cluster_statements_summary view](/statement-summary-tables.md##the-cluster-tables-for-statement-summary) and performance metrics, this method helps pinpoint bottlenecks throughout your TiDB cluster and track down performance issues from high-level symptoms to root causes.
+- Database CPU Analysis: This approach focuses on analyzing top CPU utilization patterns through [Top SQL feature](/dashboard/top-sql.md), helping you understand resource-intensive top SQL statements. It's particularly effective for identifying read or write hotspots at the TiKV level.
 
 
 ## Database Time Analysis
 
-TiDB is constantly measuring and collecting SQL processing paths and database time. Therefore, it is easy to identify database performance bottlenecks in TiDB. Based on database time metrics, you can achieve the following two goals even without data on user response time:
+TiDB is constantly measuring and collecting SQL processing paths and database time. Therefore, it is easy to identify database performance bottlenecks in TiDB. Based on database time metrics and system views, you can achieve the following goals: 
 
+- Walkthrough [TiDB Performance Tuning Overview](/performance-tuning-overview.md) to understand the basic concepts of performance tuning, especially about the user response time vs database time
+- Determine whether the bottleneck is in TiDB by comparing the average SQL processing latency with the idle time of a TiDB connection in a transaction.
+- If the bottleneck is in TiDB, you can identifying high-load sql and the bottleneck module of the TiDB cluster
+    - The most efficient way to identify Resource-Intensive SQL is using `SQL Statements` panel in [`TiDB Dashboard`](/dashboard/dashboard-overview.md#show-a-list-of-execution-information-of-all-sql-statements). You can also use [TiDB SQL Tuning Best Practice for Beginners] to do sql tuning.
+    - The most efficient way to leverage metrics, is to use [Performance Overview dashboard](/grafana-performance-overview-dashboard.md) and following database time based methods, [Performance Analysis and Tuning](/performance-tuning-methods.md), you can identify the exact module in the distributed system based on database time overview, color-based performance data, key metrics, resource utilization, and top-down latency breakdowns. [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md) show real-world usage of these methods with CPU and heap profiles for TiDB. Besides the [Performance Overview dashboard](/grafana-performance-overview-dashboard.md), you can also use other grafana dashboards, [TiDB](/grafana-tidb-dashboard.md), [TiKV](/grafana-tikv-dashboard.md), [PD](/grafana-pd-dashboard.md) to identify the exact module in the distributed system.
 
 ## Database CPU Analysis
+
+The database cpu analysis helps you identify top SQL statements that consume the most CPU in the TiDB or TiKV nodes. It's particularly effective for identifying read or write hotspots at the TiKV level. To apply this method, you can use the [Top SQL feature](/dashboard/top-sql.md) in TiDB Dashboard. 
