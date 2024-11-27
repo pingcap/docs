@@ -5,77 +5,79 @@ summary: Learn how to optimize TiDB performance by configuring key settings and 
 
 ## Configure TiDB for Optimal Performance
 
-This guide provides essential information on optimizing TiDB for maximum performance. We'll explore:
-- Performance best practices for common workloads
-- Strategies for addressing challenging performance scenarios
+This guide describes how to optimize the performance of TiDB, including:
+- Best practices for common workloads.
+- Strategies for handling challenging performance scenarios.
 
 > **Note:**
 >
-> These optimization techniques are particularly valuable when pursuing extreme performance in TiDB. However, it's important to note that performance tuning often involves trade-offs between multiple factors, and there is no single "silver bullet" solution. Some of the techniques described here may use experimental features, which are specifically called out. While these optimizations can yield significant performance gains, they may not be suitable for stable production environments and should be used with caution.
+> The optimization techniques in this guide can help achieve optimal performance in TiDB. However, performance tuning often involves balancing multiple factors, and no single solution addresses all performance needs. Some techniques in this guide use experimental features, which are marked accordingly. Although these optimizations can significantly improve performance, they might not be suitable for production environments and require careful evaluation before implementation.
 
-## Why This Matters
+## Overview
 
 Optimizing TiDB for peak performance requires careful tuning of various settings. In many cases, achieving optimal performance involves adjusting configurations beyond their default values.
 
-While default settings are chosen for stability, maximizing performance often requires more aggressive configurations and sometimes the use of experimental features. This approach is based on insights gained from numerous real-world deployments and performance optimization efforts.
+The default settings prioritize stability over performance. To maximize performance, you might need to use more aggressive configurations and, in some cases, experimental features. These recommendations are based on production deployment experience and performance optimization research.
 
-This guide explains these non-default settings, detailing their benefits and potential trade-offs. It's designed to help you make informed decisions when fine-tuning TiDB for your specific workload requirements.
+This guide describes the non-default settings, including their benefits and potential trade-offs. Use this information to optimize TiDB settings for your workload requirements.
 
-## Key Settings for Common Workloads
+## Key settings for common workloads
 
-The following suggested settings cover the most common optimizations for improving TiDB performance:
+The following settings are commonly used to optimize TiDB performance:
 
-- Enhancing query plan caching
-- Optimizing the query optimizer's behavior
-- More aggressive use of TiKV's Titan storage engine
+- Enhance execution plan caching, such as [Instance-level execution plan cache](/sql-prepared-plan-cache.md), [Non-prepared plan cache](/sql-non-prepared-plan-cache.md), and [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
+- Optimize behavior of the TiDB optimizer using [Optimizer Fix Controls](/optimizer-fix-controls.md).
+- Use the [Titan](/storage-engine/titan-overview.md) storage engine more aggressively.
 
-These settings can significantly boost performance for many common workloads, but as with any optimization, it's essential to test thoroughly in your specific environment.
+These settings can significantly improve performance for many workloads. However, as with any optimization, thoroughly test them in your environment before deploying to production.
 
 ### System variables
 
-```SQL 
-set global tidb_enable_instance_plan_cache=on;
-set global tidb_instance_plan_cache_max_size=2GiB;
-set global tidb_enable_non_prepared_plan_cache=on;
-set global tidb_ignore_prepared_cache_close_stmt=on;
-set global tidb_enable_inl_join_inner_multi_pattern=on;
-set global tidb_opt_derive_topn=on;
-set global tidb_runtime_filter_mode=LOCAL;
-set global tidb_opt_enable_mpp_shared_cte_execution=on;
-set global tidb_rc_read_check_ts=on;
-set global tidb_guarantee_linearizability=off;
-set global pd_enable_follower_handle_region=on;
-set global tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:ON,52869:ON';
+Execute the following SQL commands to apply the recommended settings:
+
+```sql
+SET GLOBAL tidb_enable_instance_plan_cache=on;
+SET GLOBAL tidb_instance_plan_cache_max_size=2GiB;
+SET GLOBAL tidb_enable_non_prepared_plan_cache=on;
+SET GLOBAL tidb_ignore_prepared_cache_close_stmt=on;
+SET GLOBAL tidb_enable_inl_join_inner_multi_pattern=on;
+SET GLOBAL tidb_opt_derive_topn=on;
+SET GLOBAL tidb_runtime_filter_mode=LOCAL;
+SET GLOBAL tidb_opt_enable_mpp_shared_cte_execution=on;
+SET GLOBAL tidb_rc_read_check_ts=on;
+SET GLOBAL tidb_guarantee_linearizability=off;
+SET GLOBAL pd_enable_follower_handle_region=on;
+SET GLOBAL tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:ON,52869:ON';
 ```
 
-#### Justifications
+The following table outlines the impact of specific system variable configurations:
 
-| variables| Pro | Cons | 
+| System variable | Description | Note |
 | ---------| ---- | ----|
-| [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)| Introduces instance-level plan caching to replace session-level caching, significantly improving performance for workloads with high connection counts or frequent prepared statement usage | As an experimental feature, carefully evaluate in non-production environments first. Monitor memory usage as plan cache size increases |
-| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Turns on none prepared plan cache for applications not using prepared statement to reduce the compile cost | - | 
-| [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Caches plan for applications using prepared statements but close the plan after every single execution | - | 
-| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)| Index Join is supported when the inner table has Selection or Projection operators on it | - | 
-| [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)| Enables the optimization rule of Deriving TopN or Limit from window functions | Only limited to ROW_NUMBER() window function | 
-| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)| Enables runtime filter to improve the hash join efficiency | The variable is added to v7.2.0, and for safety, it's disabled by default | 
-| [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)| Enables non-recursive Common Table Expressions (CTE) pushdown to TiFlash | The feature is experimental  | 
-| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)| For read-committed isolation level, Enables this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency. | This feature is incompatible with repeatable-read | 
-| [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)| Improves performance by skipping the commit timestamp fetch from PD server | Trades linearizability for performance - only causal consistency is guaranteed. Not suitable for scenarios requiring strict linearizability |
-| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)| Activates the PD Follower feature, allowing PD followers to process Region requests, which helps distribute load evenly across all PD servers and reduces CPU pressure on the PD leader | This feature is experimental and should be tested in non-production environments |
-| [`tidb_opt_fix_control`](/optimizer-fix-controls.md#tidb_opt_fix_control) | Enables advanced query optimization strategies to improve performance through additional optimization rules and heuristics | Test thoroughly in your environment as benefits vary by workload |
+| [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) and [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)| Use instance-level plan cache instead of session-level caching. This significantly improves performance for workloads with high connection counts or frequent prepared statement usage. | This is an experimental feature. Test in non-production environments first and monitor memory usage as the plan cache size increases. |
+| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature to reduce compile costs for applications that do not use prepared statements. | N/A |
+| [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Cache plans for applications that use prepared statements but close the plan after each execution. | N/A |
+| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)| Enable Index Join support when the inner table has `Selection` or `Projection` operators on it. | N/A | 
+| [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)| Enable the optimization rule of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md). | This is limited to the `ROW_NUMBER()` window function. | 
+| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)| Enable [Runtime Filter](/runtime-filter.md#runtime-filter-mode) in the local mode to improve hash join efficiency. | The variable is introduced in v7.2.0 and is disabled by default for safety. | 
+| [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)| Enable non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) pushdown to TiFlash. | This is an experimental feature. | 
+| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)| For the read-committed isolation level, enabling this variable avoids the latency and cost of getting the global timestamp and optimizes transaction-level read latency. | This feature is incompatible with the Repeatable Read isolation level. | 
+| [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)| Improve performance by skipping the commit timestamp fetch from the PD server. | This sacrifices linearizability in favor of performance. Only causal consistency is guaranteed. It is not suitable for scenarios requiring strict linearizability. |
+| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)| Activate the PD Follower feature, allowing PD followers to process Region requests. This helps distribute load evenly across all PD servers and reduces CPU pressure on the PD leader. | This is an experimental feature. Test in non-production environments. |
+| [`tidb_opt_fix_control`](/optimizer-fix-controls.md#tidb_opt_fix_control) | Enable advanced query optimization strategies to improve performance through additional optimization rules and heuristics. | Test thoroughly in your environment, as performance improvements vary by workload. |
 
-#### fix control explanation
+The following describes the optimizer control configurations that enable additional optimizations:
 
-Use aggressive optimizer controls to enable more possible optimizations.
+- [`44262:ON`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720): Use [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access the partitioned table when the [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) are missing.
+- [`44389:ON`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720): For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, build more comprehensive scan ranges for `IndexRangeScan`.
+- [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730): To save memory, Plan Cache does not cache queries with parameters exceeding the specified number of this variable. Increase plan cache parameter limit from `200` to `10000` to make plan cache available for query with long in-lists.
+- [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v730): Plan Cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
+- [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v730): The optimizer selects `IndexJoin` when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator.
+- [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810): The optimizer chooses index merge automatically if the optimizer can choose the single index scan method (other than full table scan) for a query plan.
 
-- [`44262`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720):ON: Allow the use of Dynamic pruning mode to access the partitioned table when the GlobalStats are missing.
-- [`44389`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720):ON: For filters such as c = 10 and (a = 'xx' or (a = 'kk' and b = 1)), this variable enable to try to build more comprehensive scan ranges for IndexRangeScan.
-- [`44823`](/optimizer-fix-controls.md#44823-new-in-v730):10000: To save memory, Plan Cache does not cache queries with parameters exceeding the specified number of this variable. Increased from from 200 to 10000 to make plan cache availabe for query with long in-list;
-- [`44830`](/optimizer-fix-controls.md#44830-new-in-v730):ON: Plan Cache is allowed to cache execution plans with the PointGet operator generated during physical optimization.
-- [`44855`](/optimizer-fix-controls.md#44855-new-in-v730):ON: Enable IndexJoin when the Probe side of an IndexJoin operator contains a Selection operator.
-- [`52869`](/optimizer-fix-controls.md#52869-new-in-v810):ON: Enable indexmerge if the optimizer can choose the single index scan method (other than full table scan) for a query plan
+### TiDB configurations
 
-### TiDB Configurations
+Add the following configuration items to the TiDB configuration file:
 
 ```toml
 [performance]
@@ -83,11 +85,10 @@ concurrently-init-stats = true
 force-init-stats = true
 lite-init-stats = false
 ```
-#### Justifications
 
-| configurations | Pro | Cons | 
+| Configuration item | Description | Note | 
 | ---------| ---- | ----|
-| [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752) [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Ensures comprehensive and concurrent loading of table statistics during TiDB startup, improving query optimization readiness | Potentialy increases startup time and memory consumption |
+| [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752), [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710), and [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Ensure the concurrent and comprehensive loading of table statistics during TiDB startup, which improves initial query optimization performance. | Might increase startup duration and memory usage. |
 
 ### TiKV Configurations
 
