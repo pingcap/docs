@@ -3287,7 +3287,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 > **Note:**
 >
 > - Currently, the optimized hash join only supports inner join and outer join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the legacy hash join.
-> - Currently, the optimized hash join does not support spilling to disk when the memory is out of quota.
 
 ### tidb_hashagg_final_concurrency
 
