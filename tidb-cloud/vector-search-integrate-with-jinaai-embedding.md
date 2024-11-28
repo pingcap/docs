@@ -9,7 +9,7 @@ This tutorial walks you through how to use [Jina AI](https://jina.ai/) to genera
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
 ## Prerequisites
 
@@ -59,33 +59,33 @@ Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embedd
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Connection Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `SQLAlchemy`
-    - **Operating System** matches your environment.
+   - **Connection Type** is set to `Public`
+   - **Branch** is set to `main`
+   - **Connect With** is set to `SQLAlchemy`
+   - **Operating System** matches your environment.
 
-    > **Tip:**
-    >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+   > **Tip:**
+   >
+   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
 4. Switch to the **PyMySQL** tab and click the **Copy** icon to copy the connection string.
 
-    > **Tip:**
-    >
-    > If you have not set a password yet, click **Create password** to generate a random password.
+   > **Tip:**
+   >
+   > If you have not set a password yet, click **Create password** to generate a random password.
 
 5. Set the Jina AI API key and the TiDB connection string as environment variables in your terminal, or create a `.env` file with the following environment variables:
 
-    ```dotenv
-    JINAAI_API_KEY="****"
-    TIDB_DATABASE_URL="{tidb_connection_string}"
-    ```
+   ```dotenv
+   JINAAI_API_KEY="****"
+   TIDB_DATABASE_URL="{tidb_connection_string}"
+   ```
 
-    The following is an example connection string for macOS:
+   The following is an example connection string for macOS:
 
-    ```dotenv
-    TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-    ```
+   ```dotenv
+   TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+   ```
 
 ### Step 5. Run the demo
 
