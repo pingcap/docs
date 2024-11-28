@@ -18,9 +18,9 @@ Using vector data types provides the following advantages over using the [`JSON`
 - Dimension enforcement: You can specify a dimension to forbid inserting vectors with different dimensions.
 - Optimized storage format: Vector data types are optimized for handling vector data, offering better space efficiency and performance compared to `JSON` types.
 
-> **Note:**
+> **Note**
 >
-> Vector data types are only available for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
 ## Syntax
 
@@ -231,9 +231,9 @@ Currently, direct casting between Vector and other data types (such as `JSON`) i
 
 Note that vector data type columns stored in a table cannot be converted to other data types using `ALTER TABLE ... MODIFY COLUMN ...`.
 
-## Restrictions
+## Limitations
 
-For restrictions on vector data types, see [Vector search limitations](/tidb-cloud/vector-search-limitations.md) and [Vector index restrictions](/tidb-cloud/vector-search-index.md#restrictions).
+See [Vector data type limitations](/tidb-cloud/vector-search-limitations.md#vector-data-type-limitations).
 
 ## MySQL compatibility
 

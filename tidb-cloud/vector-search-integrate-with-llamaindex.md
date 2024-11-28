@@ -9,7 +9,7 @@ This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vect
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
 > **Tip**
 >
@@ -65,33 +65,33 @@ Take the following steps to obtain the cluster connection string and configure e
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
+   - **Connection Type** is set to `Public`.
+   - **Branch** is set to `main`.
+   - **Connect With** is set to `SQLAlchemy`.
+   - **Operating System** matches your environment.
 
 4. Click the **PyMySQL** tab and copy the connection string.
 
-    > **Tip:**
-    >
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+   > **Tip:**
+   >
+   > If you have not set a password yet, click **Generate Password** to generate a random password.
 
 5. Configure environment variables.
 
-    This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+   This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
 
-    To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
+   To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
 
-    ```python
-    # Use getpass to securely prompt for environment variables in your terminal.
-    import getpass
-    import os
+   ```python
+   # Use getpass to securely prompt for environment variables in your terminal.
+   import getpass
+   import os
 
-    # Copy your connection string from the TiDB Cloud console.
-    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-    tidb_connection_string = getpass.getpass("TiDB Connection String:")
-    os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-    ```
+   # Copy your connection string from the TiDB Cloud console.
+   # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+   tidb_connection_string = getpass.getpass("TiDB Connection String:")
+   os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
+   ```
 
 ### Step 4. Load the sample document
 

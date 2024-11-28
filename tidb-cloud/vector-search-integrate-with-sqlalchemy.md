@@ -9,7 +9,7 @@ This tutorial walks you through how to use [SQLAlchemy](https://www.sqlalchemy.o
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
 ## Prerequisites
 
@@ -63,28 +63,28 @@ pip install pymysql python-dotenv sqlalchemy tidb-vector
 
 3. Ensure the configurations in the connection dialog match your environment.
 
-    - **Connection Type** is set to `Public`.
-    - **Branch** is set to `main`.
-    - **Connect With** is set to `SQLAlchemy`.
-    - **Operating System** matches your environment.
+   - **Connection Type** is set to `Public`.
+   - **Branch** is set to `main`.
+   - **Connect With** is set to `SQLAlchemy`.
+   - **Operating System** matches your environment.
 
-    > **Tip:**
-    >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+   > **Tip:**
+   >
+   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
 4. Click the **PyMySQL** tab and copy the connection string.
 
-    > **Tip:**
-    >
-    > If you have not set a password yet, click **Generate Password** to generate a random password.
+   > **Tip:**
+   >
+   > If you have not set a password yet, click **Generate Password** to generate a random password.
 
 5. In the root directory of your Python project, create a `.env` file and paste the connection string into it.
 
-    The following is an example for macOS:
+   The following is an example for macOS:
 
-    ```dotenv
-    TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-    ```
+   ```dotenv
+   TIDB_DATABASE_URL="mysql+pymysql://<prefix>.root:<password>@gateway01.<region>.prod.aws.tidbcloud.com:4000/test?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+   ```
 
 ### Step 5. Run the demo
 

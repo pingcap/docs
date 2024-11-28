@@ -9,14 +9,14 @@ This document provides an overview of TiDB Vector Search integration, including 
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
 ## AI frameworks
 
 TiDB provides official support for the following AI frameworks, enabling you to easily integrate AI applications developed based on these frameworks with TiDB Vector Search.
 
 | AI frameworks | Tutorial                                                                                          |
-|---------------|---------------------------------------------------------------------------------------------------|
+| ------------- | ------------------------------------------------------------------------------------------------- |
 | Langchain     | [Integrate Vector Search with LangChain](/tidb-cloud/vector-search-integrate-with-langchain.md)   |
 | LlamaIndex    | [Integrate Vector Search with LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md) |
 
@@ -31,7 +31,7 @@ You can either use self-deployed open-source embedding models or third-party emb
 The following table lists some mainstream embedding service providers and the corresponding integration tutorials.
 
 | Embedding service providers | Tutorial                                                                                                            |
-|-----------------------------|---------------------------------------------------------------------------------------------------------------------|
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | Jina AI                     | [Integrate Vector Search with Jina AI Embeddings API](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md) |
 
 ## Object Relational Mapping (ORM) libraries
