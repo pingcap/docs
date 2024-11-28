@@ -19,7 +19,7 @@ This document describes the known limitations of TiDB Vector Search.
 - Vector columns cannot be used in primary keys, unique indexes, or partition keys. To accelerate the vector search performance, use [Vector Search Index](/tidb-cloud/vector-search-index.md).
 - A table can have multiple vector columns. However, there is [a limit on the total number of columns in a table](/tidb-limitations.md#limitations-on-a-single-table).
 - Currently, TiDB does not support dropping a vector column with a vector index. To drop such a column, drop the vector index first, then drop the vector column.
-- Currently TiDB does not support modifying a vector column to other data types such as `JSON` and `VARCHAR`.
+- Currently, TiDB does not support modifying a vector column to other data types such as `JSON` and `VARCHAR`.
 
 ## Vector index limitations
 
