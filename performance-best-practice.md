@@ -417,8 +417,8 @@ TiDB provides different transaction modes and DML execution types to optimize pe
     - Ideal for bulk data loading with no conflicts
     - Reduces TiDB memory usage during large writes
     - Requirements:
-      - Auto-commit must be enabled
-      - `pessimistic-auto-commit` must be false
+        - Auto-commit must be enabled
+        - `pessimistic-auto-commit` must be false
 
     ```sql
     SET SESSION tidb_dml_type = "bulk";
