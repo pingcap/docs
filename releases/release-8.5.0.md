@@ -339,7 +339,7 @@ The following features are planned for deprecation in future versions:
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
 
-        - 在 DM 集群启动时，增加 dm-worker 连接到 dm-master 的重试 [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Add retries for DM-worker to connect to DM-master when the DM cluster starts up [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
 
 ## Bug fixes
 
@@ -374,26 +374,26 @@ The following features are planned for deprecation in future versions:
     - 修复 `CREATE VIEW` 语句中带有变量或参数时不报错的问题 [#53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)
     - 修复 `JSON_VALID()` 函数执行结果错误的问题 [#56293](https://github.com/pingcap/tidb/issues/56293) @[YangKeao](https://github.com/YangKeao)
     - 修复关闭 `tidb_ttl_job_enable` 后 TTL 任务没有被取消的问题 [#57404](https://github.com/pingcap/tidb/issues/57404) @[YangKeao](https://github.com/YangKeao) <!--tw@lilin90: the following 20 notes-->
-    - 修复同时使用 `RANGE COLUMNS` 分区函数和 `utf8mb4_0900_ai_ci` 排序规则时，查询结果错误的问题 [#57261](https://github.com/pingcap/tidb/issues/57261) @[Defined2014](https://github.com/Defined2014)
-    - 修复了执行以换行符开头的 prepared statement 会导致数组越界的运行时错误 [#54283](https://github.com/pingcap/tidb/issues/54283) @[Defined2014](https://github.com/Defined2014)
-    - 修复了时间/日期函数中设置无效精度的一些问题，比如精度设置得太大 [#56451](https://github.com/pingcap/tidb/issues/56451) @[chagelo](https://github.com/chagelo)
-    - 在 `UPDATE/INSERT/DELETE IGNORE` statement 中忽略掉一些外键错误 [#56678](https://github.com/pingcap/tidb/issues/56678) @[YangKeao](https://github.com/YangKeao)
-    - 修正了查询 slow_query 表时，如果不加时间过滤条件则只会查询最新的慢日志文件的行为 [#56100](https://github.com/pingcap/tidb/issues/56100) @[crazycs520](https://github.com/crazycs520)
-    - 修复了 TTL 表的内存泄漏问题 [#56934](https://github.com/pingcap/tidb/issues/56934) @[lcwangchao](https://github.com/lcwangchao)
-    - 避免使用 non-public 状态的表，该改动可以修复 write_only 状态的表外键约束未生效的一处问题 [#55813](https://github.com/pingcap/tidb/issues/55813) @[YangKeao](https://github.com/YangKeao)
-    - 修复使用 NATURAL JOIN 或者 USING CLAUSE 之后再使用子查询可能会报错的问题 [#53766](https://github.com/pingcap/tidb/issues/53766) @[dash12653](https://github.com/dash12653)
-    - 修复如果 CTE 包含 orderby/limit/distinct 子句并且被另外一个 CTE 的 recursive part 所引用时，可能被错误的 INLINE 导致执行报错的问题 [#56603](https://github.com/pingcap/tidb/issues/56603) @[elsa0520](https://github.com/elsa0520)
-    - 修复 VIEW 中定义的 CTE 被错误 INLINE 的问题 [#56582](https://github.com/pingcap/tidb/issues/56582) @[elsa0520](https://github.com/elsa0520)
-    - 修复 Plan Replayer 导入含有外键的表结构时可能报错的问题 [#56456](https://github.com/pingcap/tidb/issues/56456) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复 Plan Replayer 导入含有 Placement Rule 的表结构时可能报错的问题 [#54961](https://github.com/pingcap/tidb/issues/54961) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复使用 ANALYZE 收集含有引用了虚拟生成列的表达式索引的表的统计信息时执行会报错的问题 [#57079](https://github.com/pingcap/tidb/issues/57079) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复 DROP DATABASE 语句没有正确触发统计信息对应变更的问题 [#57227](https://github.com/pingcap/tidb/issues/57227) @[Rustin170506](https://github.com/Rustin170506)
-    - 修复在 CTE 中解析数据库名时，得到错误的数据库名的问题 [#54582](https://github.com/pingcap/tidb/issues/54582) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复在 DUMP STATS 生成 json 的过程中导致直方图上下界数据受损的问题 [#56083](https://github.com/pingcap/tidb/issues/56083) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复 EXISTS 子查询的结果继续参与代数运算时，结果和 MySQL 不一致的问题 [#56641](https://github.com/pingcap/tidb/issues/56641) @[windtalker](https://github.com/windtalker)
-    - 修复无法为带别名的多表删除创建计划绑定的问题 [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复优化器在简化复杂谓词时没有考虑字符集及排序规则导致执行可能报错的问题 [#56479](https://github.com/pingcap/tidb/issues/56479) @[dash12653](https://github.com/dash12653)
-    - 修复 Grafana 中 STATS_HEALTHY 图标可能统计出错的问题 [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the query result is wrong when using the `RANGE COLUMNS` partition function and the `utf8mb4_0900_ai_ci` collation at the same time [#57261](https://github.com/pingcap/tidb/issues/57261) @[Defined2014](https://github.com/Defined2014)
+    - Fix the runtime error caused by executing a prepared statement that begins with a newline character, resulting in an array out of bounds [#54283](https://github.com/pingcap/tidb/issues/54283) @[Defined2014](https://github.com/Defined2014)
+    - Fix the precision issue in the `UTC_TIMESTAMP()` function, for example, the precision is set too high [#56451](https://github.com/pingcap/tidb/issues/56451) @[chagelo](https://github.com/chagelo)
+    - Fix the issue that foreign key errors are not omitted in `UPDATE`, `INSERT`, and `DELETE IGNORE` statements [#56678](https://github.com/pingcap/tidb/issues/56678) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that when querying the `information_schema.cluster_slow_query` table, if the time filter is not added, only the latest slow log file will be queried [#56100](https://github.com/pingcap/tidb/issues/56100) @[crazycs520](https://github.com/crazycs520)
+    - Fix memory leaks in TTL tables [#56934](https://github.com/pingcap/tidb/issues/56934) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that foreign key constraints do not take effect for tables with `write_only` status, and avoid using tables with `non-public` status [#55813](https://github.com/pingcap/tidb/issues/55813) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that using subqueries after using `NATURAL JOIN` or `USING CLAUSE` might result in errors [#53766](https://github.com/pingcap/tidb/issues/53766) @[dash12653](https://github.com/dash12653)
+    - Fix the issue that if a CTE contains `ORDER BY`, `LIMIT`, or `SELECT DISTINCT` clauses and is referenced by the recursive part of another CTE, it might be incorrectly inlined and result in an execution error [#56603](https://github.com/pingcap/tidb/issues/56603) @[elsa0520](https://github.com/elsa0520)
+    - Fix the issue that the CTE defined in `VIEW` is incorrectly inlined [#56582](https://github.com/pingcap/tidb/issues/56582) @[elsa0520](https://github.com/elsa0520)
+    - Fix the issue that Plan Replayer might report an error when importing a table structure containing foreign keys [#56456](https://github.com/pingcap/tidb/issues/56456) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that Plan Replayer might report an error when importing a table structure containing Placement Rules [#54961](https://github.com/pingcap/tidb/issues/54961) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that when using `ANALYZE` to collect statistics for a table, if the table contains expression indexes of virtually generated columns, the execution reports an error [#57079](https://github.com/pingcap/tidb/issues/57079) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the `DROP DATABASE` statement does not correctly trigger the corresponding change in statistics [#57227](https://github.com/pingcap/tidb/issues/57227) @[Rustin170506](https://github.com/Rustin170506)
+    - Fix the issue that when parsing a database name in CTE, it returns a wrong database name [#54582](https://github.com/pingcap/tidb/issues/54582) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the upper and lower bounds of the histogram are damaged when `DUMP STATS` is generating JSON [#56083](https://github.com/pingcap/tidb/issues/56083) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the result of `EXISTS` subquery is inconsistent with MySQL when it continues to participate in algebraic operations [#56641](https://github.com/pingcap/tidb/issues/56641) @[windtalker](https://github.com/windtalker)
+    - Fix the issue that plan bindings cannot be created for the multi-table deletion statement `DELETE` with aliases [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the optimizer does not take into account the character set and collations when simplifying complex predicates, resulting in possible execution errors [#56479](https://github.com/pingcap/tidb/issues/56479) @[dash12653](https://github.com/dash12653)
+    - Fix the issue that the data for Stats Healthy Distribution in Grafana might be incorrect [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
 
 + TiKV <!--tw@Oreoxmt: 6 notes-->
 
