@@ -299,7 +299,7 @@ The following features are planned for deprecation in future versions:
 
     - Improve the response speed of `ADD INDEX` acceleration to task cancelation when the Distributed eXecution Framework (DXF) is disabled [#56017](https://github.com/pingcap/tidb/issues/56017) @[lance6716](https://github.com/lance6716)
     - Improve the speed of adding indexes to small tables [#54230](https://github.com/pingcap/tidb/issues/54230) @[tangenta](https://github.com/tangenta)
-    - Add the system variable `tidb_ddl_reorg_max_write_speed` to limit the maximum speed of the ingest phase when adding indexes [#57156](https://github.com/pingcap/tidb/issues/57156) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Add a new system variable `tidb_ddl_reorg_max_write_speed` to limit the maximum speed of the ingest phase when adding indexes [#57156](https://github.com/pingcap/tidb/issues/57156) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve the performance of querying `information_schema.tables` in some cases [#57295](https://github.com/pingcap/tidb/issues/57295) @[tangenta](https://github.com/tangenta)
     - Support dynamically adjusting more DDL task parameters [#57526](https://github.com/pingcap/tidb/issues/57526) @[fzzf678](https://github.com/fzzf678)
     - Support global indexes containing all columns in a partitioned expression [#56230](https://github.com/pingcap/tidb/issues/56230) @[Defined2014](https://github.com/Defined2014)
@@ -313,7 +313,7 @@ The following features are planned for deprecation in future versions:
 + TiKV <!--tw@hfxsd: 2 notes-->
 
     - Use a separate thread for replica cleanup to ensure stable latency for critical paths of Raft reads and writes [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
-    - Improve the performance of vector distance function by supporting SIMD [#17290](https://github.com/tikv/tikv/issues/17290) @[EricZequan](https://github.com/EricZequan)
+    - Improve the performance of the vector distance function by supporting SIMD [#17290](https://github.com/tikv/tikv/issues/17290) @[EricZequan](https://github.com/EricZequan)
 
 + PD <!--tw@qiancai: 2 notes-->
 
