@@ -39,20 +39,36 @@ const ghGetBranch = async (branchName = "master") => {
 };
 
 const ghCompareCommits = async (base = "", head = "") => {
-  const basehead = `${base}...${head}`;
-  const result = await octokit.request(
-    `GET /repos/pingcap/docs/compare/${basehead}`,
-    {
-      owner: "pingcap",
-      repo: "docs",
-      basehead,
+  const nextPattern = /(?<=<)([\S]*)(?=>; rel="next")/i;
+  let pagesRemaining = true;
+  let allData = [];
+  let url = `/repos/pingcap/docs/compare/${base}...${head}`;
+
+  while (pagesRemaining) {
+    const result = await octokit.request(
+      `GET ${url}`,
+      {
+        per_page: 100,
+      }
+    );
+
+    if (result.status === 200) {
+      const data = result.data;
+      allData = [...allData, ...data];
+
+      const linkHeader = result.headers.link;
+
+      pagesRemaining = linkHeader && linkHeader.includes('rel="next"');
+
+      if (pagesRemaining) {
+        url = linkHeader.match(nextPattern)[0];
+      }
+    } else {
+      throw new Error(`ghCompareCommits error: ${result}`);
     }
-  );
-  if (result.status === 200) {
-    const data = result.data;
-    return data;
   }
-  throw new Error(`ghGetBranch error: ${result}`);
+
+  return allData;
 };
 
 const downloadFile = async (url, targetPath) => {
