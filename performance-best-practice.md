@@ -256,7 +256,6 @@ The performance improvement observed in the Key Settings is primarily attributed
 This significant reduction in compaction overhead contributes to the overall throughput improvement seen in the Key Settings configuration.
 ![titan-rocksdb-compactions](/media/key-settings/titan-rocksdb-compactions.png)
 
-
 #### Workload Commands
 
 The following `go-ycsb load` command loads data:
@@ -337,8 +336,8 @@ The default value of `tidb_tso_client_rpc_mode` is `DEFAULT`. When the following
 - The TSO allocation in PD has not reached its bottleneck.
 - PD and TiDB nodes have sufficient CPU resources.
 - The network latency between TiDB and PD is significantly higher than the time PD takes to allocate TSO (that is, network latency accounts for the majority of TSO RPC duration).
-  - To get the duration of TSO RPC requests, check the PD TSO RPC Duration panel in the PD Client section of the TiDB dashboard.
-  - To get the duration of PD TSO allocation, check the PD server TSO handle duration panel in the TiDB section of the Grafana PD dashboard.
+    - To get the duration of TSO RPC requests, check the PD TSO RPC Duration panel in the PD Client section of the TiDB dashboard.
+    - To get the duration of PD TSO allocation, check the PD server TSO handle duration panel in the TiDB section of the Grafana PD dashboard.
 - The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for PARALLEL or four times for PARALLEL-FAST) is acceptable.
 
 ```sql
@@ -370,22 +369,22 @@ The [`tidb_max_chunk_size`](system-variables.md#tidb_max_chunk_size) controls ho
 #### Workload-Specific Recommendations
 
 - **OLTP Workloads** (high concurrency, small transactions):
-  - Recommended range: 128-256 rows (default is 1024)
-  - Benefits: Reduced memory overhead, faster limit query processing
-  - Use case: Point queries, small range scans
+    - Recommended range: 128-256 rows (default is 1024)
+    - Benefits: Reduced memory overhead, faster limit query processing
+    - Use case: Point queries, small range scans
 
-  ```sql
-  SET GLOBAL tidb_max_chunk_size = 128;
-  ```
+    ```sql
+    SET GLOBAL tidb_max_chunk_size = 128;
+    ```
 
 - **OLAP/Analytical Workloads** (complex queries, large result sets):
-  - Recommended range: 1024-4096 rows
-  - Benefits: Improved throughput for large scans
-  - Use case: Aggregations, large table scans
+    - Recommended range: 1024-4096 rows
+    - Benefits: Improved throughput for large scans
+    - Use case: Aggregations, large table scans
 
-  ```sql
-  SET GLOBAL tidb_max_chunk_size = 4096;
-  ```
+    ```sql
+    SET GLOBAL tidb_max_chunk_size = 4096;
+    ```
 
 ### Optimize transaction mode and DML type for different workloads
 
@@ -394,33 +393,36 @@ TiDB provides different transaction modes and DML execution types to optimize pe
 #### Transaction Modes
 
 - **Pessimistic Mode** (Default):
-  - Best for general workloads with potential write conflicts
-  - Provides better consistency guarantees
-  ```sql
-  SET SESSION tidb_txn_mode = "pessimistic";
-  ```
+    - Best for general workloads with potential write conflicts
+    - Provides better consistency guarantees
+
+    ```sql
+    SET SESSION tidb_txn_mode = "pessimistic";
+    ```
 
 - **Optimistic Mode**:
-  - Suitable for workloads with minimal write conflicts
-  - Better performance for multi-statement transactions
-  - Example: `begin; insert...; insert...; commit;`
-  ```sql
-  SET SESSION tidb_txn_mode = "optimistic";
-  ```
+    - Suitable for workloads with minimal write conflicts
+    - Better performance for multi-statement transactions
+    - Example: `begin; insert...; insert...; commit;`
+
+    ```sql
+    SET SESSION tidb_txn_mode = "optimistic";
+    ```
 
 #### DML Types
 
 `tidb_dml_type = "bulk"` indicates the bulk DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB.
 
 - **Pipeline DML** (New in v8.0.0):
-  - Ideal for bulk data loading with no conflicts
-  - Reduces TiDB memory usage during large writes
-  - Requirements:
-    - Auto-commit must be enabled
-    - `pessimistic-auto-commit` must be false
-  ```sql
-  SET SESSION tidb_dml_type = "bulk";
-  ```
+    - Ideal for bulk data loading with no conflicts
+    - Reduces TiDB memory usage during large writes
+    - Requirements:
+      - Auto-commit must be enabled
+      - `pessimistic-auto-commit` must be false
+
+    ```sql
+    SET SESSION tidb_dml_type = "bulk";
+    ```
 
 ### Optimize group by and distinct operations with TiKV pushdown
 
@@ -429,14 +431,14 @@ TiDB can push down aggregation operations to TiKV to optimize query performance 
 #### When to Use Pushdown
 
 - **Ideal Scenarios** (High Performance Gain):
-  - Columns with low number of distinct values (NDV)
-  - Data with high repetition (many duplicate values)
-  - Example: Status columns, category codes, date parts
+    - Columns with low number of distinct values (NDV)
+    - Data with high repetition (many duplicate values)
+    - Example: Status columns, category codes, date parts
 
 - **Non-Ideal Scenarios** (Potential Performance Loss):
-  - Columns with high NDV (mostly unique values)
-  - Unique identifiers or timestamps
-  - Example: User IDs, transaction IDs
+    - Columns with high NDV (mostly unique values)
+    - Unique identifiers or timestamps
+    - Example: User IDs, transaction IDs
 
 #### Configuration
 
@@ -451,6 +453,7 @@ SET GLOBAL tidb_opt_distinct_agg_push_down = ON;
 ```
 
 ### Mitigate MVCC version accumulation using in-memory engine
+
 If you observe excessive MVCC versions during performance testing (caused by either hot read/write spots or garbage collection/compaction issues), you can enable the in-memory engine feature to alleviate this problem. This feature is available since v8.4.0 and can be enabled by adding the following configuration to your TiKV configuration file.
 
 > **Note:**
@@ -482,12 +485,14 @@ Statistics collection is crucial for query optimization but can impact performan
 #### Best Practices
 
 1. **Before Batch Operation**:
+
    ```sql
    -- Disable auto analyze
    SET GLOBAL tidb_enable_auto_analyze = OFF;
    ```
 
 2. **After Batch Operation**:
+
    ```sql
    -- Manually collect statistics
    ANALYZE TABLE your_table;
