@@ -6,6 +6,7 @@ summary: Learn how to optimize TiDB performance by configuring key settings and 
 ## Configure TiDB for Optimal Performance
 
 This guide describes how to optimize the performance of TiDB, including:
+
 - Best practices for common workloads.
 - Strategies for handling challenging performance scenarios.
 
@@ -90,7 +91,9 @@ lite-init-stats = false
 | ---------| ---- | ----|
 | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752), [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710), and [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Ensure the concurrent and comprehensive loading of table statistics during TiDB startup, which improves initial query optimization performance. | Might increase startup duration and memory usage. |
 
-### TiKV Configurations
+### TiKV configurations
+
+Add the following configuration items to the TiKV configuration file:
 
 ```toml
 [server]
@@ -112,85 +115,87 @@ blob-file-compression = "zstd"
 l0-files-threshold = 60
 ```
 
-#### Justifications
-
-| configurations | Pro | Cons | 
+| Configuration item | Description | Note |
 | ---------| ---- | ----|
-| [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit) [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit) [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Configures concurrent snapshot transfer limits and I/O bandwidth for TiKV scaling operations. Higher limits reduce scaling time by allowing faster data migration | Consider the trade-off between scaling speed and online transaction performance when adjusting these limits |
-| [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) [`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840) | Controls the memory allocation for pessimistic lock caching at peer and instance levels. Keeping locks in memory reduces disk I/O and improves transaction performance | Requires careful memory monitoring and tuning. Higher limits increase memory usage but reduce disk writes for lock information |
-| [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan) [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan) [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Enables Titan storage engine to reduce write amplification and alleviate disk I/O bottlenecks. Particularly effective when RocksDB compaction cannot keep up with write workload, leading to accumulated pending compaction bytes | Trade-offs include: 1) Potential performance impact on primary key range scans 2) Increased space amplification (up to 2x in worst case) 3) Additional memory usage for blob cache. Consider enabling when write amplification is the primary bottleneck |
-| [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | Controls when write flow control is triggered based on L0 file count. Increasing the threshold reduces write stalls during high write workloads | Higher thresholds may lead to more aggressive compactions when there are many L0 files |
+| [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit), [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit), and [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Set limits for concurrent snapshot transfer and I/O bandwidth during TiKV scaling operations. Higher limits reduce scaling time by allowing faster data migration. | Adjusting these limits affects the trade-off between scaling speed and online transaction performance. |
+| [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) and [`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840) | Control the memory allocation for pessimistic lock caching at the Region and TiKV instance levels. Storing locks in memory reduces disk I/O and improves transaction performance. | Monitor memory usage carefully. Higher limits improve performance but increase memory consumption. |
+| [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan), [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan), [`min-blob-size`](/tikv-configuration-file.md#min-blob-size), and [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Enable the Titan storage engine to reduce write amplification and alleviate disk I/O bottlenecks. Particularly useful when RocksDB compaction cannot keep up with write workloads, resulting in accumulated pending compaction bytes. | Enable when write amplification is the primary bottleneck. Trade-offs: 1. Potential performance impact on primary key range scans. 2. Increased space amplification (up to 2x in the worst case). 3. Additional memory usage for blob cache. |
+| [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | Control when write flow control is triggered based on the number of kvDB L0 files. Increasing the threshold reduces write stalls during high write workloads. | Higher thresholds might lead to more aggressive compactions when many L0 files exist. |
 
 ### TiFlash configurations
+
+Add the following configuration items to the TiFlash configuration file:
 
 ```toml
 [raftstore-proxy.server]
 snap-io-max-write-bytes-per-sec = "300MiB"
 ```
 
-#### Justifications
-
-| configurations | Pro | Cons | 
+| Configuration item | Description | Note |
 | ---------| ---- | ----|
-| `snap-io-max-write-bytes-per-sec` | Controls maximum write bandwidth for TiKV to TiFlash data replication. Higher limits accelerate initial data loading and catch-up replication | Higher bandwidth consumption may impact online transaction performance. Balance between replication speed and system stability |
+| `snap-io-max-write-bytes-per-sec` | Control the maximum write bandwidth for data replication from TiKV to TiFlash. Higher limits accelerate initial data loading and catch-up replication. | Higher bandwidth consumption might impact online transaction performance. Balance between replication speed and system stability. |
 
 ## Benchmark 
 
+This section compares performance between default settings (baseline) and optimized settings based on the preceding [key settings for common loads](#key-settings-for-common-workloads).
+
 ### Sysbench workloads on 1000 tables
 
-#### Environment
+#### Test environment
 
-Environment: Cluster specification: 3 tidb (16c64g) + 3 tikv (16c64g)
+The test environment is as follows:
 
-TiDB Version: v8.4.0
+- 3 TiDB servers (16 cores, 64 GiB)
+- 3 TiKV servers (16 cores, 64 GiB)
+- TiDB version: v8.4.0
+- Workload: [sysbench oltp_read_only](https://github.com/akopytov/sysbench/blob/master/src/lua/oltp_read_only.lua)
 
-Workload : [sysbench oltp_read_only](https://github.com/akopytov/sysbench/blob/master/src/lua/oltp_read_only.lua)
+#### Performance comparison
 
-#### Performance Comparison
+The following table compares throughput, latency, and plan cache hit ratio between baseline and optimized settings.
 
-The following results illustrate the throughput enhancements achieved with the Key Settings in comparison to the baseline, measured in operations per second (OPS), latency, and plan cache hit ratio.
-
-Baseline: the default settings
-Key Settings: the settings of variables and configurations in this guide
-
-| Item | Baseline | Key Settings | Diff(%) |
+| Metric | Baseline | Optimized | Improvement |
 | ---------| ---- | ----| ----|
-| QPS | 89,100 | 100,128 | 12.38% |
-| Avg Latency（ms）|35.87 | 31.92 | -11.01% |
-| P95 Latency（ms）| 58.92 | 51.02 | -13.41% |
-| Plan Cache Hit Ratio (%) | 56.89% | 87.51% | 53.82% |
-| Plan cache Memory Usage (MiB) | 95.3 | 70.2 | -26.34% |
+| QPS | 89,100 | 100,128 | +12.38% |
+| Average latency (ms)|35.87 | 31.92 | -11.01% |
+| P95 latency (ms)| 58.92 | 51.02 | -13.41% |
+| Plan cache hit ratio (%) | 56.89% | 87.51% | +53.82% |
+| Plan cache memory usage (MiB) | 95.3 | 70.2 | -26.34% |
 
 #### Key Benefits
 
 The instance plan cache demonstrates significant performance improvements over the baseline configuration:
 
-- Higher Hit Ratio: Increased from 56.89% to 87.51% (+53.82%)
-- Lower Memory Usage: Reduced from 95.3 MiB to 70.2 MiB (-26.3%)
-- Better Performance:
-    - QPS increased by 12.38%
-    - Average latency reduced by 11.01%
-    - P95 latency reduced by 13.41%
+- Higher hit ratio: increases by 53.82% (from 56.89% to 87.51%).
+- Lower memory usage: decreases by 26.3% (from 95.3 MiB to 70.2 MiB).
+- Better performance:
+
+    - QPS increases by 12.38%.
+    - Average latency decreases by 11.01%.
+    - P95 latency decreases by 13.41%.
+
 #### How It Works
 
-- Caches execution plans for SELECT statements in memory
-- Shares cached plans across all connections (up to 200) on the same TiDB instance
-- Can effectively store plans for up to 5,000 SELECT statements across 1,000 tables
-- Cache misses primarily occur only for BEGIN and COMMIT statements
+Instance plan cache improves performance through these mechanisms:
 
-#### Real-World Impact
+- Cache execution plans for `SELECT` statements in memory.
+- Share cached plans across all connections (up to 200) on the same TiDB instance.
+- Can effectively store plans for up to 5,000 `SELECT` statements across 1,000 tables.
+- Cache misses primarily occur only for `BEGIN` and `COMMIT` statements.
 
-While our benchmark using simple sysbench oltp_read_only queries (14KB per plan) showed modest improvements, real-world applications often see much more dramatic benefits:
+#### Real-world benefits
 
-- Up to 20x latency improvement for complex queries
-- Significantly better memory efficiency compared to session-level plan cache
+Although the benchmark using simple sysbench `oltp_read_only` queries (14 KB per plan) shows modest improvements, you can expect greater benefits in real-word applications:
 
-Instance plan cache is particularly effective when your system has:
+- Complex queries can run up to 20 times faster.
+- Memory usage is more efficient compared to session-level plan cache.
 
-- Large tables with many columns
-- Complex SQL queries
-- High concurrent connections
-- Diverse query patterns
+Instance plan cache is particularly effective for systems with:
+
+- Large tables with many columns.
+- Complex SQL queries.
+- High concurrent connections.
+- Diverse query patterns.
 
 #### Memory Efficiency
 
@@ -204,36 +209,40 @@ In scenarios with multiple connections and complex queries, session-level plan c
 
 ![instance-plan-cache](/media/key-settings/instance-plan-cache.png)
 
-#### Workload Commands
-Load data
-```
+#### Test workload
+
+The following `sysbench oltp_read_only prepare` command loads data:
+
+```bash
 sysbench oltp_read_only prepare --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=100 --time=900 --report-interval=10 --tables=1000 --table-size=10000
 ```
 
-Run workload
-```
+The following `sysbench oltp_read_only run` command runs workload:
+
+```bash
 sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=200 --time=900 --report-interval=10 --tables=1000 --table-size=10000
 ```
 
+For more information, see [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md).
+
 ### YCSB workloads on Large record value
 
-#### Environment
+#### Test environment
 
-Environment: Cluster specification: 3 tidb (16c64g) + 3 tikv (16c64g)
-TiDB Version: v8.4.0
-Workload : [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
+The test environment is as follows:
+
+- 3 TiDB servers (16 cores, 64 GiB)
+- 3 TiKV servers (16 cores, 64 GiB)
+- TiDB version: v8.4.0
+- Workload: [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
 
 #### Performance Comparison
 
-Below result show the throughput improvement of Key Settings comparing to the baseline as OPS(operation per second).
-
-Baseline: the default settings
-Key Settings: the settings of variables and configurations in this guide
-
-| Item | Baseline(OPS) | Key Settings(OPS) | Diff(%) |
+The following table compares throughput (operations per second) between the baseline and optimized settings.
+| Item | Baseline (OPS) | Optimized (OPS) | Improvement |
 | ---------| ---- | ----| ----|
-| load data| 2858.5 | 5074.3 | 77.59% |
-| workloada | 2243.0 | 12804.3 | 470.86% |
+| load data | 2858.5 | 5074.3 | +77.59% |
+| workloada | 2243.0 | 12804.3 | +470.86% |
 
 #### Performance Analysis
 
@@ -250,16 +259,18 @@ This significant reduction in compaction overhead contributes to the overall thr
 
 #### Workload Commands
 
-Load data
+The following `go-ycsb load` command loads data:
 
-```
+```bash
 go-ycsb load mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -p requestdistribution=uniform -pfieldcount=31 -p fieldlength=1024
 ```
 
-Run workload
-```
+The following `go-ycsb run` command runs workload:
+
+```bash
 go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p mysql.db=test -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -prequestdistribution=uniform -p fieldcount=31 -p fieldlength=1024
 ```
+
 ## Edge Cases and Specific Optimizations
 
 While the general configurations provided earlier offer a good starting point for performance tuning, certain scenarios require more targeted optimizations. This section covers specific cases that may need individual attention and fine-tuning.
