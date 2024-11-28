@@ -260,7 +260,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 | [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620) | Newly added | This variable controls whether to show `noop` variables in the result of `SHOW [GLOBAL] VARIABLES`. |
 | [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620) | Newly added | This variable is used to set the maximum number of rows during the coprocessor paging request process. |
 | [tidb_txn_commit_batch_size](/system-variables.md#tidb_txn_commit_batch_size-new-in-v620) | Newly added | This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. |
-| tidb_enable_change_multi_schema | Deleted | This variable is used to control whether multiple columns or indexes can be altered in one `ALTER TABLE` statement. |
+| tidb_enable_change_multi_schema | Deleted | This variable is deleted because, starting from v6.2.0, you can alter multiple columns or indexes in one `ALTER TABLE` statement by default. |
 | [tidb_enable_outer_join_reorder](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Modified | This variable controls whether the Join Reorder algorithm of TiDB supports Outer Join. In v6.1.0, the default value is `ON`, which means the Join Reorder's support for Outer Join is enabled by default. From v6.2.0, the default value is `OFF`, which means the support is disabled by default. |
 
 ### Configuration file parameters
