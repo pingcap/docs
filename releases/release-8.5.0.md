@@ -335,7 +335,7 @@ The following features are planned for deprecation in future versions:
         - Optimize error message for the encryption key `--crypter.key` [#56388](https://github.com/pingcap/tidb/issues/56388) @[Tristan1900](https://github.com/Tristan1900)
         - Increase concurrency during BR database creation to improve data restore performance [#56866](https://github.com/pingcap/tidb/issues/56866) @[Leavrth](https://github.com/Leavrth)
         - Disable checksum by default during full backups to improve production environment performance while keeping it enabled in testing environments. This checksum is used only for the internal verification logic of BR, while the checksum that verifies backup data integrity remains enabled [#56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
-        - Fix the issue that backup might hang when processing a large number of tables [#57666](https://github.com/pingcap/tidb/issues/57666) @[3pointer](https://github.com/3pointer)
+        - Add independent connection timeout tracking and reset mechanisms for each storage node, enhancing the handling of slow nodes and preventing backup operation from hanging [#57666](https://github.com/pingcap/tidb/issues/57666) @[3pointer](https://github.com/3pointer)
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
 
