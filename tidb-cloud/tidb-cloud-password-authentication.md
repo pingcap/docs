@@ -86,7 +86,7 @@ If you forget your password, you can reset it by email as follows:
 
 After logging in to TiDB Cloud, you can enable MFA in accordance with laws and regulations.
 
-Two-factor authentication adds additional security by requiring an Authenticator app to generate a one-time password for login. You can use any Authenticator app from the iOS or Android App Store to generate this password, such as Google Authenticator and Authy.
+Two-factor authentication (also known as MFA or 2FA) adds additional security by requiring an Authenticator app to generate a one-time password for login. You can use any Authenticator app from the iOS or Android App Store to generate this password, such as Google Authenticator and Authy.
 
 ### Enable MFA
 
@@ -97,6 +97,10 @@ Two-factor authentication adds additional security by requiring an Authenticator
 3. Click the **Two Factor Authentication** tab.
 
 4. Click **Enable**.
+
+5. Logout and Log back in, you should now get a QR Code that you can scan with your authenticator app.
+
+6. Enter the code from your authenticator app.
 
 ### Disable MFA
 
