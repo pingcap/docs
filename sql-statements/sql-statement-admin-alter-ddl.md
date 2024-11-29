@@ -46,7 +46,7 @@ ADMIN ALTER DDL JOBS 101 MAX_WRITE_SPEED = '200MiB';
 ADMIN ALTER DDL JOBS 101 THREAD = 8, BATCH_SIZE = 256;
 ```
 
-To view the current parameter values for a particular DDL job, you can execute `ADMIN SHOW DDL JOBS` and the results are displayed in the `COMMENTS` column:
+To view the current parameter values for a specific DDL job, you can execute `ADMIN SHOW DDL JOBS` and the results are displayed in the `COMMENTS` column:
 
 ```sql
 mysql> ADMIN SHOW DDL JOBS 1;
