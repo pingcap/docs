@@ -160,7 +160,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_force_priority` | Not supported [^4] | Not supported [^4] |
 | `tidb_gc_concurrency` | No limitation | Read-only [^10] |
 | `tidb_gc_enable` | No limitation | Read-only [^10] |
-| `tidb_gc_life_time` | No limitation | Read-only [^10] |
 | `tidb_gc_max_wait_time` | No limitation | Read-only [^10] |
 | `tidb_gc_run_interval` | No limitation | Read-only [^10] |
 | `tidb_gc_scan_lock_mode` | No limitation | Read-only [^10] |
