@@ -2485,13 +2485,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_gc_life_time <span class="version-mark">New in v5.0</span>
 
-<<<<<<< HEAD
-> **Note:**
->
-> This variable is read-only for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
-
-=======
->>>>>>> 586d4cd889 (update serverless tidb_gc_life_time restriction (#19511))
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Duration
