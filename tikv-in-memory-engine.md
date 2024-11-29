@@ -5,7 +5,7 @@ summary: Learn the applicable scenarios and working principles of the In-Memory 
 
 # TiKV MVCC In-Memory Engine
 
-TiKV MVCC In-Memory Engine (IME) is primarily used to accelerate queries that need to scan a large number of MVCC historical versions, that is, [the total number of versions scanned (total_keys) is much greater than the number of versions processed (processed_keys)](/analyze-slow-queries.md#expired-or-excessive-mvcc-versions).
+TiKV MVCC In-Memory Engine (IME) is primarily used to accelerate queries that need to scan a large number of MVCC historical versions, that is, [the total number of versions scanned (total_keys) is much greater than the number of versions processed (processed_keys)](/analyze-slow-queries.md#expired-mvcc-versions-and-excessive-keys).
 
 TiKV MVCC In-Memory Engine is suitable for the following scenarios:
 
