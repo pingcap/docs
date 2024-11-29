@@ -356,7 +356,7 @@ Usage example:
 
 ```shell
 tiup br log truncate --until='2022-07-26 21:20:00+0800' \
-  –-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
+  --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
@@ -396,7 +396,7 @@ The `--storage` parameter is used to specify the backup storage address. Current
 Usage example:
 
 ```shell
-tiup br log metadata –-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
+tiup br log metadata --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
