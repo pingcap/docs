@@ -61,7 +61,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   <tr>
     <td rowspan="5">Reliability and availability</td>
     <td>Improve the stability of large-scale clusters **tw@hfxsd 1976**</td>
-    <td>Companies that use TiDB to run multi-tenant or SaaS applications often need to store a large number of tables. In TiDB v8.5.0, significant efforts have been made to enhance the stability of large-scale clusters. <a href="https://docs.pingcap.com/tidb/v8.5/schema-cache">Schema cache control</a> and <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_cache_mem_quota-new-in-v610">the memory quota for the TiDB statistics cache</a> become generally available (GA). They reduce stability problems caused by excessive memory consumption. PD uses <a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Active Follower</a> to address the pressures of a large number of Regions. It also <a href="https://docs.pingcap.com/tidb/v8.5/pd-microservices">decouples the services undertaken by the PD</a> and deploys them independently. You can <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840">increase concurrency</a> and <a href="https://docs.pingcap.com/zh/tidb/v8.5/statistics#collect-statistics-on-some-columns">reduce the number of collection objects</a> to improve the efficiency of statistics collection and loading, ensuring the stability of execution plans for large clusters.</td>
+    <td>Companies that use TiDB to run multi-tenant or SaaS applications often need to store a large number of tables. In v8.5.0, TiDB significantly enhances the stability of large-scale clusters. <a href="https://docs.pingcap.com/tidb/v8.5/schema-cache">Schema cache control</a> and <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_cache_mem_quota-new-in-v610">setting the memory quota for the TiDB statistics cache</a> are generally available (GA), reducing stability issues caused by excessive memory consumption. PD introduces <a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Active Follower</a> to handle the pressure brought by numerous Regions, and gradually <a href="https://docs.pingcap.com/tidb/v8.5/pd-microservices">decouples the services handled by PD</a> for independent deployment. You can <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840">increase concurrency</a> and <a href="https://docs.pingcap.com/zh/tidb/v8.5/statistics#collect-statistics-on-some-columns">reduce the number of collected objects</a> to improve the efficiency of statistics collection and loading, ensuring the stability of execution plans in large clusters.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/tidb-resource-control#query_limit-parameters">Support more triggers for runaway queries, and support switching resource groups</a> (introduced in v8.4.0) </td>
@@ -117,11 +117,11 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Scalability
 
-* The schema cache memory limit feature is now generally available (GA), reducing memory usage in scenarios with hundreds of thousands or even millions of databases or tables. [#50959](https://github.com/pingcap/tidb/issues/50959) @[tiancaiamao](https://github.com/tiancaiamao) @[wjhuang2016](https://github.com/wjhuang2016) @[gmhdbjd](https://github.com/gmhdbjd) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--1976-->
+* Setting the memory limit for schema cache is now generally available (GA), reducing memory usage in large-scale data scenarios [#50959](https://github.com/pingcap/tidb/issues/50959) @[tiancaiamao](https://github.com/tiancaiamao) @[wjhuang2016](https://github.com/wjhuang2016) @[gmhdbjd](https://github.com/gmhdbjd) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--1976-->
 
-    In some SaaS scenarios, when the number of tables reaches hundreds of thousands or even millions, the schema meta can consume significant memory. Enabling this feature allows TiDB to use the LRU algorithm to cache and evict the corresponding schema meta information, effectively reducing memory usage. 
+    In some SaaS scenarios, where the number of tables reaches hundreds of thousands or even millions, schema metadata can consume a significant amount of memory. With this feature enabled, TiDB uses the Least Recently Used (LRU) algorithm to cache and evict the corresponding schema metadata, effectively reducing memory usage.
     
-    Starting from v8.4.0, this feature is enabled by default with a default value of `536870912` (that is, 512 MiB). You can adjust it as needed through the variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
+    Starting from v8.4.0, this feature is enabled by default with a default value of `536870912` (that is, 512 MiB). You can adjust it as needed using the variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 
     For more information, see [documentation](/schema-cache.md).
 
@@ -149,11 +149,11 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [Documentation](/accelerated-table-creation.md).
 
-* TiKV supports MVCC In-memory Engine (IME). It can accelerate queries that require scanning of a large number of MVCC historical versions. [#16141](https://github.com/tikv/tikv/issues/16141) [@SpadeA-Tang](https://github.com/SpadeA-Tang) [@glorv](https://github.com/glorv) [@overvenus](https://github.com/overvenus)
+* TiKV supports the MVCC in-memory engine (IME), which accelerates queries involving scans of extensive MVCC historical versions [#16141](https://github.com/tikv/tikv/issues/16141) [@SpadeA-Tang](https://github.com/SpadeA-Tang) [@glorv](https://github.com/glorv) [@overvenus](https://github.com/overvenus)
 
-    In scenarios where records are updated frequently or TiDB is required to retain historical versions for a long period of time (for example, 24 hours), a buildup of MVCC versions can lead to degradation of scanning performance. TiKV MVCC In-memory Engine improves scanning performance by caching the most recent MVCC versions in memory and deleting the historical versions from memory through a fast GC mechanism.
+    When records are frequently updated, or TiDB is required to retain historical versions for extended periods (for example, 24 hours), the accumulation of MVCC versions can degrade scan performance. The TiKV MVCC in-memory engine improves scan performance by caching the latest MVCC versions in memory, and using a rapid GC mechanism to remove historical versions from memory.
 
-    Starting from v8.5.0, TiKV introduces MVCC In-memory Engine. When scanning performance is degraded due to the buildup of MVCC versions in a TiKV cluster, you can enable the TiKV MVCC memory engine to improve scanning performance by setting the TiKV configuration parameter [`in-memory-engine.enable`](/tikv-in-memory-engine.md#usage).
+    Starting from v8.5.0, TiKV introduces MVCC in-memory engine. If the accumulation of MVCC versions in the TiKV cluster leads to degraded scan performance, you can enable the TiKV MVCC in-memory engine to improve scan performance by setting the TiKV configuration parameter [`in-memory-engine.enable`](/tikv-in-memory-engine.md#usage).
 
     For more information, see [documentation](/tikv-in-memory-engine.md).
 
@@ -191,11 +191,11 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     Starting from v8.3.0, you can set the variables [`tidb_ddl_reorg_batch_size`](/system-variables#tidb_ddl_reorg_batch_size) and [`tidb_ddl_reorg_worker_cnt`](/system-variables#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, you need to cancel the DDL job first, adjust the variables, and then resubmit the job.
 
-    TiDB v8.5.0 introduces the `ADMIN ALTER DDL JOBS` statement, allowing online adjustment of variable values for specific DDL jobs. This enables flexible balancing of resource consumption and performance, with changes limited to an individual job, making the impact more controllable. For example:
+    TiDB v8.5.0 introduces the `ADMIN ALTER DDL JOBS` statement, letting you adjust the variable values of specific DDL jobs online. This enables flexible balancing of resource consumption and performance. The changes are limited to individual jobs, making the impact more controllable. For example:
 
-    - `ADMIN ALTER DDL JOBS job_id THREAD = 8;`: adjusts the `tidb_ddl_reorg_worker_cnt` for the specified DDL task.
-    - `ADMIN ALTER DDL JOBS job_id BATCH_SIZE = 256;`: adjusts the `tidb_ddl_reorg_batch_size` for the specified DDL task.
-    - `ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB';`: adjusts the write traffic size for index data on each TiKV node.
+    - `ADMIN ALTER DDL JOBS job_id THREAD = 8;`: adjusts the `tidb_ddl_reorg_worker_cnt` of the specified DDL job online.
+    - `ADMIN ALTER DDL JOBS job_id BATCH_SIZE = 256;`: adjusts the `tidb_ddl_reorg_batch_size` of the specified job online.
+    - `ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB';`: adjusts the write traffic of index data to each TiKV node online.
 
   For more information, see [documentation](/sql-statements/sql-statement-admin-alter-ddl.md).
 
