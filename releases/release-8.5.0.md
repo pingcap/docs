@@ -334,7 +334,7 @@ The following features are planned for deprecation in future versions:
         - (dup): release-7.1.6.md > 改进提升> Tools> Backup & Restore (BR) - 减少备份过程中无效日志的打印 [#55902](https://github.com/pingcap/tidb/issues/55902) @[Leavrth](https://github.com/Leavrth)
         - Optimize the error message for the encryption key `--crypter.key` [#56388](https://github.com/pingcap/tidb/issues/56388) @[Tristan1900](https://github.com/Tristan1900)
         - Increase concurrency in BR when creating databases to improve data restore performance [#56866](https://github.com/pingcap/tidb/issues/56866) @[Leavrth](https://github.com/Leavrth)
-        - Disable checksum by default during full backups to improve production environment performance while keeping it enabled in testing environments. This checksum is used only for the internal verification logic of BR, while the checksum that verifies backup data integrity remains enabled [#56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
+        - During a full backup, the checksum for BR internal validation is disabled by default (`--checksum=false`) to improve backup performance. The checksum used to verify backup data integrity remains enabled [#56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
         - Add a mechanism to independently track and reset the connection timeout for each storage node, enhancing the handling of slow nodes and preventing backup operations from hanging [#57666](https://github.com/pingcap/tidb/issues/57666) @[3pointer](https://github.com/3pointer)
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
