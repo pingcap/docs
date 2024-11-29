@@ -394,6 +394,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that plan bindings cannot be created for the multi-table deletion statement `DELETE` with aliases [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that the optimizer does not take into account the character set and collations when simplifying complex predicates, resulting in possible execution errors [#56479](https://github.com/pingcap/tidb/issues/56479) @[dash12653](https://github.com/dash12653)
     - Fix the issue that the data for Stats Healthy Distribution in Grafana might be incorrect [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that vector search might return incorrect results when querying tables with clustered indexes [#57627](https://github.com/pingcap/tidb/issues/57627) @[winoros](https://github.com/winoros)
 
 + TiKV <!--tw@Oreoxmt: 6 notes-->
 
