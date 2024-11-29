@@ -297,22 +297,22 @@ The following features are planned for deprecation in future versions:
 
 + TiDB <!--tw@hfxsd: 12 notes-->
 
-    - Improve the response speed of `ADD INDEX` acceleration to task cancelation when the Distributed eXecution Framework (DXF) is disabled [#56017](https://github.com/pingcap/tidb/issues/56017) @[lance6716](https://github.com/lance6716)
+    - Improve the response speed of job cancellation for the `ADD INDEX` acceleration feature when disabling the Distributed eXecution Framework (DXF) [#56017](https://github.com/pingcap/tidb/issues/56017) @[lance6716](https://github.com/lance6716)
     - Improve the speed of adding indexes to small tables [#54230](https://github.com/pingcap/tidb/issues/54230) @[tangenta](https://github.com/tangenta)
     - Add a new system variable `tidb_ddl_reorg_max_write_speed` to limit the maximum speed of the ingest phase when adding indexes [#57156](https://github.com/pingcap/tidb/issues/57156) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - Improve the performance of querying `information_schema.tables` in some cases [#57295](https://github.com/pingcap/tidb/issues/57295) @[tangenta](https://github.com/tangenta)
-    - Support dynamically adjusting more DDL task parameters [#57526](https://github.com/pingcap/tidb/issues/57526) @[fzzf678](https://github.com/fzzf678)
-    - Support global indexes containing all columns in a partitioned expression [#56230](https://github.com/pingcap/tidb/issues/56230) @[Defined2014](https://github.com/Defined2014)
+    - Support dynamically adjusting more DDL job parameters [#57526](https://github.com/pingcap/tidb/issues/57526) @[fzzf678](https://github.com/fzzf678)
+    - Support global indexes that contain all columns from a partition expression [#56230](https://github.com/pingcap/tidb/issues/56230) @[Defined2014](https://github.com/Defined2014)
     - Support partition pruning for list partitioned tables in range query scenarios [#56673](https://github.com/pingcap/tidb/issues/56673) @[Defined2014](https://github.com/Defined2014)
-    - Enable FixControl#46177 by default to fix the issue that table full scan is incorrectly selected (instead of the index range scan) in some cases [#46177](https://github.com/pingcap/tidb/issues/46177) @[terry1purcell](https://github.com/terry1purcell)
-    - Improve the internal estimation logic so that it can better use the statistics of multi-column and multi-value indexes to improve the estimation accuracy of certain queries involving multi-value indexes [#56915](https://github.com/pingcap/tidb/issues/56915) @[time-and-fate](https://github.com/time-and-fate)
-    - Improve the cost estimation of full table scan in specific cases and reduce the probability of incorrectly choosing the full table scan [#57085](https://github.com/pingcap/tidb/issues/57085) @[terry1purcell](https://github.com/terry1purcell)
+    - Enable FixControl#46177 by default to fix the issue that a full table scan is incorrectly selected instead of an index range scan in some cases [#46177](https://github.com/pingcap/tidb/issues/46177) @[terry1purcell](https://github.com/terry1purcell)
+    - Improve the internal estimation logic to better utilize statistics of multi-column and multi-value indexes, enhancing estimation accuracy for certain queries involving multi-value indexes [#56915](https://github.com/pingcap/tidb/issues/56915) @[time-and-fate](https://github.com/time-and-fate)
+    - Improve the cost estimation for full table scans in specific scenarios, reducing the probability of incorrectly choosing a full table scan [#57085](https://github.com/pingcap/tidb/issues/57085) @[terry1purcell](https://github.com/terry1purcell)
     - Optimize the amount of data required for synchronous loading of statistics to improve loading performance [#56812](https://github.com/pingcap/tidb/issues/56812) @[winoros](https://github.com/winoros)
-    - Optimize the execution plan when `OUTER JOIN` contains a unique index and there is an `ORDER BY LIMIT` statement in certain cases to improve execution efficiency [#56321](https://github.com/pingcap/tidb/issues/56321) @[winoros](https://github.com/winoros)
+    - Optimize the execution plan in specific cases where an `OUTER JOIN` involves a unique index and an `ORDER BY ... LIMIT` clause, improving execution efficiency [#56321](https://github.com/pingcap/tidb/issues/56321) @[winoros](https://github.com/winoros)
 
 + TiKV <!--tw@hfxsd: 2 notes-->
 
-    - Use a separate thread for replica cleanup to ensure stable latency for critical paths of Raft reads and writes [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
+    - Use a separate thread to clean up replicas, ensuring stable latency for critical paths of Raft reads and writes [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
     - Improve the performance of the vector distance function by supporting SIMD [#17290](https://github.com/tikv/tikv/issues/17290) @[EricZequan](https://github.com/EricZequan)
 
 + PD <!--tw@qiancai: 2 notes-->
@@ -410,9 +410,9 @@ The following features are planned for deprecation in future versions:
 + PD <!--tw@hfxsd: 3 notes-->
 
     - (dup): release-7.1.6.md > 错误修复> PD - 修复热点缓存中可能存在的内存泄露问题 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
-    - Fix the issue that the resource group selector does not take effect for all panels [#56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
+    - Fix the issue that the resource group selector does not take effect on any panel [#56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
     - Fix the issue that deleted resource groups still appear in the monitoring panel [#8716](https://github.com/tikv/pd/issues/8716) @[AndreMouche](https://github.com/AndreMouche)
-    - Fix the issue that log description is not clear when loading syncer [#8717](https://github.com/tikv/pd/issues/8717) @[lhy1024](https://github.com/lhy1024)
+    - Fix unclear log descriptions during the Region syncer loading process [#8717](https://github.com/tikv/pd/issues/8717) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash <!--tw@Oreoxmt: 4 notes-->
 
@@ -426,10 +426,10 @@ The following features are planned for deprecation in future versions:
 
     + Backup & Restore (BR) <!--tw@hfxsd: 4 notes-->
 
-        - Fix the OOM issue when there are too many incomplete ranges that have not been backed up yet during backup [#53529](https://github.com/pingcap/tidb/issues/53529) @[Leavrth](https://github.com/Leavrth)
+        - Fix the OOM issue during backups when there are too many uncompleted range gaps, reducing the amount of pre-allocated memory [#53529](https://github.com/pingcap/tidb/issues/53529) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that global indexes cannot be backed up [#57469](https://github.com/pingcap/tidb/issues/57469) @[Defined2014](https://github.com/Defined2014)
         - Fix the issue that logs might print out encrypted information [#57585](https://github.com/pingcap/tidb/issues/57585) @[kennytm](https://github.com/kennytm)
-        - Fix the issue that Advancer cannot handle lock conflicts [#57134](https://github.com/pingcap/tidb/issues/57134) @[3pointer](https://github.com/3pointer)
+        - Fix the issue that the advancer cannot handle lock conflicts [#57134](https://github.com/pingcap/tidb/issues/57134) @[3pointer](https://github.com/3pointer)
 
     + TiCDC <!--tw@Oreoxmt: 3 notes-->
 
