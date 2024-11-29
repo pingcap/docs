@@ -1,20 +1,20 @@
 ---
 title: TiKV MVCC In-Memory Engine
-summary: Learn the applicable scenarios and working principles of the In-Memory Engine, and how to use the In-Memory Engine to accelerate queries for MVCC versions.
+summary: Learn the applicable scenarios and working principles of the in-memory engine, and how to use the in-memory engine to accelerate queries for MVCC versions.
 ---
 
 # TiKV MVCC In-Memory Engine
 
 TiKV MVCC In-Memory Engine (IME) is primarily used to accelerate queries that need to scan a large number of MVCC historical versions, that is, [the total number of versions scanned (total_keys) is much greater than the number of versions processed (processed_keys)](/analyze-slow-queries.md#expired-mvcc-versions-and-excessive-keys).
 
-TiKV MVCC In-Memory Engine is suitable for the following scenarios:
+TiKV MVCC in-memory engine is suitable for the following scenarios:
 
 - An application requires frequent queries on frequently updated or deleted records.
 - An application requires adjusting the [`tidb_gc_life_time`](/garbage-collection-configuration.md#garbage-collection-configuration) to make TiDB retain historical versions for a longer period (for example, 24 hours).
 
 ## Working principles
 
-TiKV MVCC In-Memory Engine caches the latest written MVCC versions in memory and implements an MVCC GC mechanism independent of TiDB, allowing it to quickly perform GC on MVCC versions in memory, reducing the number of versions scanned during queries, and achieving the effect of reducing request latency and CPU overhead.
+TiKV MVCC in-memory engine caches the latest written MVCC versions in memory and implements an MVCC GC mechanism independent of TiDB, allowing it to quickly perform GC on MVCC versions in memory, reducing the number of versions scanned during queries, and achieving the effect of reducing request latency and CPU overhead.
 
 The following diagram illustrates how TiKV organizes MVCC versions.
 
@@ -33,32 +33,32 @@ Enabling IME requires adjusting the TiKV configuration and restarting. The follo
 
 ```toml
 [in-memory-engine]
-# This parameter is the switch for the In-memory Engine feature, which is disabled by default. You can set it to true to enable it.
+# This parameter is the switch for the in-memory engine feature, which is disabled by default. You can set it to true to enable it.
 enable = false
 #
-# This parameter controls the memory capacity that In-memory Engine can use. The default value is 10% of the system memory, and the maximum value is 5 GiB.
+# This parameter controls the memory capacity that in-memory engine can use. The default value is 10% of the system memory, and the maximum value is 5 GiB.
 # You can manually configure it to use more memory.
-# Note: When In-Memory Engine is enabled, block-cache.capacity will be reduced by 10%.
+# Note: When in-memory engine is enabled, block-cache.capacity will be reduced by 10%.
 #capacity = "5GiB"
 #
-# This parameter controls the time interval for In-memory Engine to GC the cached MVCC versions.
+# This parameter controls the time interval for in-memory engine to GC the cached MVCC versions.
 # The default value is 3 minutes, representing that GC is performed every 3 minutes on the cached MVCC versions.
 # Decreasing the value of this parameter can speed up the GC frequency, reduce MVCC versions, but will increase GC CPU consumption and increase the probability of cache miss.
 #gc-run-interval = "3m"
 #
-# This parameter controls the threshold for In-memory Engine to select and load Regions based on MVCC read amplification.
-# The default value is 10, indicating that when the number of MVCC versions processed for a row of records in a Region exceeds 10, it might be loaded into the In-memory Engine.
+# This parameter controls the threshold for in-memory engine to select and load Regions based on MVCC read amplification.
+# The default value is 10, indicating that when the number of MVCC versions processed for a row of records in a Region exceeds 10, it might be loaded into the in-memory engine.
 #mvcc-amplification-threshold = 10
 ```
 
 > **Note:**
 >
-> + The In-memory Engine is disabled by default. After you enable it, you need to restart TiKV.
+> + The in-memory engine is disabled by default. After you enable it, you need to restart TiKV.
 > + Except for `enable`, all the other configuration items can be dynamically adjusted.
 
 ### Automatic loading
 
-After you enable the In-memory Engine, Regions will be automatically loaded based on their read traffic and MVCC amplification. The process is as follows:
+After you enable the in-memory engine, Regions will be automatically loaded based on their read traffic and MVCC amplification. The process is as follows:
 
 1. Regions are sorted by the number of next (RocksDB Iterator next API) and prev (RocksDB Iterator next API) operations in the recent time period.
 2. Regions are filtered using `mvcc-amplification-threshold` (`10` by default. MVCC amplification measures read amplification, calculated as (next + prev) / processed_keys).
@@ -78,11 +78,11 @@ IME also periodically performs Region eviction. The process is as follows:
 
 ## FAQ
 
-### Can In-memory Engine reduce write latency and increase write throughput?
+### Can in-memory engine reduce write latency and increase write throughput?
 
-No, In-memory Engine can only accelerate read requests that scan a large number of MVCC versions.
+No, in-memory engine can only accelerate read requests that scan a large number of MVCC versions.
 
-### How to determine if In-memory Engine can improve my scenario?
+### How to determine if in-memory engine can improve my scenario?
 
 You can execute the following SQL statement to check if there are slow queries with `Total_keys` much greater than `Process_keys`.
 
