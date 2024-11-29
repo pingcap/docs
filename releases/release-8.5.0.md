@@ -332,10 +332,10 @@ The following features are planned for deprecation in future versions:
     + Backup & Restore (BR) <!--tw@Oreoxmt: 4 notes-->
 
         - (dup): release-7.1.6.md > 改进提升> Tools> Backup & Restore (BR) - 减少备份过程中无效日志的打印 [#55902](https://github.com/pingcap/tidb/issues/55902) @[Leavrth](https://github.com/Leavrth)
-        - Optimize error message for the encryption key `--crypter.key` [#56388](https://github.com/pingcap/tidb/issues/56388) @[Tristan1900](https://github.com/Tristan1900)
-        - Increase concurrency during BR database creation to improve data restore performance [#56866](https://github.com/pingcap/tidb/issues/56866) @[Leavrth](https://github.com/Leavrth)
+        - Optimize the error message for the encryption key `--crypter.key` [#56388](https://github.com/pingcap/tidb/issues/56388) @[Tristan1900](https://github.com/Tristan1900)
+        - Increase concurrency in BR when creating databases to improve data restore performance [#56866](https://github.com/pingcap/tidb/issues/56866) @[Leavrth](https://github.com/Leavrth)
         - Disable checksum by default during full backups to improve production environment performance while keeping it enabled in testing environments. This checksum is used only for the internal verification logic of BR, while the checksum that verifies backup data integrity remains enabled [#56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
-        - Add independent connection timeout tracking and reset mechanisms for each storage node, enhancing the handling of slow nodes and preventing backup operation from hanging [#57666](https://github.com/pingcap/tidb/issues/57666) @[3pointer](https://github.com/3pointer)
+        - Add a mechanism to independently track and reset the connection timeout for each storage node, enhancing the handling of slow nodes and preventing backup operations from hanging [#57666](https://github.com/pingcap/tidb/issues/57666) @[3pointer](https://github.com/3pointer)
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
 
@@ -400,11 +400,11 @@ The following features are planned for deprecation in future versions:
 
     - (dup): release-7.1.6.md > 错误修复> TiKV - 修复读线程在从 Raft Engine 中的 MemTable 读取过时索引时出现的 panic 问题 [#17383](https://github.com/tikv/tikv/issues/17383) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-7.5.4.md > 错误修复> TiKV - 修复当大量事务在排队等待同一个 key 上的锁被释放且该 key 被频繁更新时，TiKV 可能因死锁检测压力过大而出现 OOM 的问题 [#17394](https://github.com/tikv/tikv/issues/17394) @[MyonKeminta](https://github.com/MyonKeminta)
-    - Fix the issue that CPU usage for background tasks of resource control is counted multiple times [#17603](https://github.com/tikv/tikv/issues/17603) @[glorv](https://github.com/glorv)
+    - Fix the issue that CPU usage for background tasks of resource control is counted twice [#17603](https://github.com/tikv/tikv/issues/17603) @[glorv](https://github.com/glorv)
     - Fix the issue that TiKV OOM might occur due to the accumulation of CDC internal tasks [#17696](https://github.com/tikv/tikv/issues/17696) @[3AceShowHand](https://github.com/3AceShowHand)
-    - Fix the issue that large batch writes cause jitter when `raft-entry-max-size` is set too high [#17701](https://github.com/tikv/tikv/issues/17701) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - Fix the issue that large batch writes cause performance jitter when `raft-entry-max-size` is set too high [#17701](https://github.com/tikv/tikv/issues/17701) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - Fix the issue that the leader could not be quickly elected after Region split [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Fix the issue that TiKV might panic when using `RADIANS()` or `DEGREES()` [#17852](https://github.com/tikv/tikv/issues/17852) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue that TiKV might panic when executing queries containing `RADIANS()` or `DEGREES()` functions [#17852](https://github.com/tikv/tikv/issues/17852) @[gengliqi](https://github.com/gengliqi)
     - Fix the issue that write jitter might occur when all hibernated Regions are awakened [#17101](https://github.com/tikv/tikv/issues/17101) @[hhwyt](https://github.com/hhwyt)
 
 + PD <!--tw@hfxsd: 3 notes-->
@@ -434,8 +434,8 @@ The following features are planned for deprecation in future versions:
     + TiCDC <!--tw@Oreoxmt: 3 notes-->
 
         - Fix the issue that the Kafka messages lack Key fields when using the Debezium protocol [#1799](https://github.com/pingcap/tiflow/issues/1799) @[wk989898](https://github.com/wk989898)
-        - Fix the issue that the redo module fails to properly report  errors [#11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the issue that TiCDC mistakenly discards DDL tasks when the schema version of DDL tasks become non-incremental during TiDB Owner changes [#11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Fix the issue that the redo module fails to properly report errors [#11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that TiCDC mistakenly discards DDL tasks when the schema versions of DDL tasks become non-incremental during TiDB DDL owner changes [#11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
 
     + TiDB Lightning <!--tw@Oreoxmt: 1 note-->
 
