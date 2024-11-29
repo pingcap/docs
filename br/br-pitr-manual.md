@@ -356,7 +356,7 @@ Usage example:
 
 ```shell
 tiup br log truncate --until='2022-07-26 21:20:00+0800' \
-–-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
@@ -396,7 +396,7 @@ The `--storage` parameter is used to specify the backup storage address. Current
 Usage example:
 
 ```shell
-tiup br log metadata –-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+tiup br log metadata --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
@@ -450,8 +450,8 @@ Usage example:
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}'
 
 Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 *** ***["Full Restore success summary"] ****** [total-take=3.112928252s] [restore-data-size(after-compressed)=5.056kB] [Size=5056] [BackupTS=434693927394607136] [total-kv=4] [total-kv-size=290B] [average-speed=93.16B/s]
@@ -474,8 +474,8 @@ The following is an example:
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
 --crypter.method aes128-ctr
 --crypter.key 0123456789abcdef0123456789abcdef
 --log.crypter.method aes128-ctr
@@ -486,8 +486,8 @@ If a log backup is encrypted using a master key, you can decrypt and restore the
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}"'
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
 --crypter.method aes128-ctr
 --crypter.key 0123456789abcdef0123456789abcdef
 --master-key-crypter-method aes128-ctr
