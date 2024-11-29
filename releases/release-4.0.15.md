@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.15 Release Notes
-summary: 「TiDB 4.0.15 リリース ノート: 互換性の変更には、アップグレードの非互換性を引き起こす可能性のあるバグ修正が含まれます。TiKV の機能強化により、構成の動的な変更がサポートされます。TiDB、TiKV、PD、およびツールが改善されました。TiDB、TiKV、PD、 TiFlash、バックアップと復元、および TiCDC のバグ修正。」
+summary: TiDB 4.0.15 リリース ノート 互換性の変更には、アップグレードの非互換性を引き起こす可能性のあるバグ修正が含まれます。TiKV の機能強化により、構成の動的な変更がサポートされます。TiDB、TiKV、PD、およびツールが改善されました。TiDB、TiKV、PD、 TiFlash、バックアップと復元、および TiCDC のバグ修正。
 ---
 
 # TiDB 4.0.15 リリースノート {#tidb-4-0-15-release-notes}
