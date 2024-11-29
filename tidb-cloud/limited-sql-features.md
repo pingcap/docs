@@ -161,20 +161,12 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_enable_tso_follower_proxy` | No limitation | Read-only [^11] |
 | `tidb_expensive_query_time_threshold` | Not supported [^4] | Not supported [^4] |
 | `tidb_force_priority` | Not supported [^4] | Not supported [^4] |
-<<<<<<< HEAD
 | `tidb_gc_concurrency` | No limitation | Read-only [^11] |
 | `tidb_gc_enable` | No limitation | Read-only [^11] |
 | `tidb_gc_life_time` | No limitation | Read-only [^11] |
 | `tidb_gc_max_wait_time` | No limitation | Read-only [^11] |
 | `tidb_gc_run_interval` | No limitation | Read-only [^11] |
 | `tidb_gc_scan_lock_mode` | No limitation | Read-only [^11] |
-=======
-| `tidb_gc_concurrency` | No limitation | Read-only [^10] |
-| `tidb_gc_enable` | No limitation | Read-only [^10] |
-| `tidb_gc_max_wait_time` | No limitation | Read-only [^10] |
-| `tidb_gc_run_interval` | No limitation | Read-only [^10] |
-| `tidb_gc_scan_lock_mode` | No limitation | Read-only [^10] |
->>>>>>> 586d4cd889 (update serverless tidb_gc_life_time restriction (#19511))
 | `tidb_general_log` | Not supported [^4] | Not supported [^4] |
 | `tidb_generate_binary_plan` | No limitation | Read-only [^11] |
 | `tidb_gogc_tuner_threshold` | No limitation | Read-only [^11] |
