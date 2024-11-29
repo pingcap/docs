@@ -1,102 +1,102 @@
 ---
 title: Compatibility of TiDB Lightning and IMPORT INTO with TiCDC and Log Backup
-summary: Learn about compatibility of IMPORT INTO and TiDB Lightning with log backup and TiCDC.
+summary: IMPORT INTO およびTiDB Lightning とログ バックアップおよび TiCDC との互換性について説明します。
 ---
 
-# Compatibility of TiDB Lightning and IMPORT INTO with TiCDC and Log Backup
+# TiDB Lightningと IMPORT INTO と TiCDC およびログ バックアップとの互換性 {#compatibility-of-tidb-lightning-and-import-into-with-ticdc-and-log-backup}
 
-This document describes TiDB Lightning and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) compatibility with [log backup](/br/br-pitr-guide.md) and [TiCDC](/ticdc/ticdc-overview.md), as well as some special usage scenarios.
+このドキュメントでは、 TiDB Lightningおよび[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)と[ログバックアップ](/br/br-pitr-guide.md)および[ティCDC](/ticdc/ticdc-overview.md)との互換性、およびいくつかの特殊な使用シナリオについて説明します。
 
-## `IMPORT INTO` vs. TiDB Lightning
+## <code>IMPORT INTO</code>とTiDB Lightningの比較 {#code-import-into-code-vs-tidb-lightning}
 
-[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) integrates with the physical import mode of TiDB Lightning, but there are some differences. See [`IMPORT INTO` vs. TiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md) for details.
+[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) TiDB Lightningの物理インポートモードと統合されますが、いくつか違いがあります。詳細については[`IMPORT INTO`とTiDB Lightningの比較](/tidb-lightning/import-into-vs-tidb-lightning.md)参照してください。
 
-## Compatibility with log backup and TiCDC
+## ログバックアップおよびTiCDCとの互換性 {#compatibility-with-log-backup-and-ticdc}
 
-- TiDB Lightning [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) is compatible with log backup and TiCDC.
+-   TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md) 、ログ バックアップおよび TiCDC と互換性があります。
 
-- TiDB Lightning [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) is not compatible with log backup and TiCDC. The reason is that physical import mode directly ingests encoded KV pairs of the source data to TiKV, causing TiKV not to generate corresponding change logs during this process. Without such change logs, the relevant data cannot be backed up via log backup and cannot be replicated by TiCDC.
+-   TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) 、ログ バックアップおよび TiCDC と互換性がありません。その理由は、物理インポート モードでは、ソース データのエンコードされた KV ペアが TiKV に直接取り込まれるため、このプロセス中に TiKV が対応する変更ログを生成しないからです。このような変更ログがないと、関連データをログ バックアップでバックアップできず、TiCDC でレプリケートできません。
 
-- To use TiDB Lightning and TiCDC together in a cluster, see [Compatibility with TiDB Lightning](/ticdc/ticdc-compatibility.md#compatibility-with-tidb-lightning).
+-   クラスター内でTiDB Lightningと TiCDC を一緒に使用するには、 [TiDB Lightningとの互換性](/ticdc/ticdc-compatibility.md#compatibility-with-tidb-lightning)参照してください。
 
-- `IMPORT INTO` is not compatible with log backup and TiCDC. The reason is that `IMPORT INTO` also ingests encoded KV pairs of the source data directly to TiKV.
+-   `IMPORT INTO`ログ バックアップおよび TiCDC と互換性がありません。その理由は、 `IMPORT INTO`ではソース データのエンコードされた KV ペアも TiKV に直接取り込まれるためです。
 
-## Scenarios for TiDB Lightning logical import mode
+## TiDB Lightning論理インポート モードのシナリオ {#scenarios-for-tidb-lightning-logical-import-mode}
 
-If TiDB Lightning logical import mode can meet your application's performance requirements and your application requires imported tables to be backed up or replicated downstream using TiCDC, it is recommended to use TiDB Lightning logical import mode.
+TiDB Lightning論理インポート モードがアプリケーションのパフォーマンス要件を満たすことができ、アプリケーションでインポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、 TiDB Lightning論理インポート モードを使用することをお勧めします。
 
-## Scenarios for TiDB Lightning physical import mode
+## TiDB Lightning物理インポート モードのシナリオ {#scenarios-for-tidb-lightning-physical-import-mode}
 
-This section describes how to use TiDB Lightning together with [log backup](/br/br-pitr-guide.md) and [TiCDC](/ticdc/ticdc-overview.md).
+このセクションでは、 TiDB Lightning を[ログバックアップ](/br/br-pitr-guide.md)および[ティCDC](/ticdc/ticdc-overview.md)と一緒に使用する方法について説明します。
 
-If TiDB Lightning logical import mode does not meet your application's performance requirements, you have to use TiDB Lightning physical import mode, and imported tables need to be backed up or replicated downstream using TiCDC, then the following scenarios are recommended.
+TiDB Lightning論理インポート モードがアプリケーションのパフォーマンス要件を満たしていない場合、 TiDB Lightning物理インポート モードを使用する必要があり、インポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、次のシナリオが推奨されます。
 
-### Used with log backup
+### ログバックアップで使用される {#used-with-log-backup}
 
-You can perform in different scenarios as follows:
+次のようにさまざまなシナリオで実行できます。
 
-- Scenario 1: tables in physical import mode do not need to be backed up
+-   シナリオ1: 物理インポートモードのテーブルはバックアップする必要がない
 
-    In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after TiDB Lightning starts. If you are sure that these tables do not need backup or [log backup](/br/br-pitr-guide.md), you can change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) to `false` and restart the import task.
+    このシナリオでは、 [ピトル](/br/br-log-architecture.md#process-of-pitr)有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)必要ないことが確実な場合は、 [TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更して、インポート タスクを再開できます。
 
-- Scenario 2: after the physical import is finished, there will be no new DML operations on the table
+-   シナリオ2: 物理インポートが完了した後、テーブルに対して新しいDML操作は行われません。
 
-    This scenario does not involve incremental data writes, so it is sufficient to perform a table-level snapshot backup of the table after completing the data import in TiDB Lightning physical import mode, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table).
+    このシナリオでは増分データ書き込みは行われないため、 [テーブルをバックアップする](/br/br-snapshot-manual.md#back-up-a-table)で説明したように、 TiDB Lightning物理インポート モードでデータのインポートを完了した後、テーブルのテーブル レベルのスナップショット バックアップを実行するだけで十分です。
 
-    During data recovery, the snapshot data of the table is restored. See [Restore a table](/br/br-snapshot-manual.md#restore-a-table) for the procedure.
+    データ復旧では、テーブルのスナップショットデータが復元されます。手順については[テーブルを復元する](/br/br-snapshot-manual.md#restore-a-table)参照してください。
 
-- Scenario 3: after the physical import is finished, there will be new DML operations on the table (not supported)
+-   シナリオ 3: 物理インポートが完了した後、テーブルに対して新しい DML 操作が実行されます (サポートされていません)
 
-    In this scenario, you can only choose either [full snapshot backup](/br/br-snapshot-guide.md) or [log backup](/br/br-pitr-guide.md) for this table. You cannot back up and restore both the full snapshot data and log backup data of this table.
+    このシナリオでは、このテーブルに対して[完全なスナップショットバックアップ](/br/br-snapshot-guide.md)または[ログバックアップ](/br/br-pitr-guide.md)いずれかのみを選択できます。このテーブルの完全なスナップショット データとログ バックアップ データの両方をバックアップおよび復元することはできません。
 
-### Used with TiCDC
+### TiCDC で使用 {#used-with-ticdc}
 
-Using TiCDC with physical import mode is not compatible in the short term, because TiCDC cannot keep up with the write speed of TiDB Lightning physical import mode, which might result in increasing cluster replication latency.
+TiCDC を物理インポート モードで使用することは、短期的には互換性がありません。これは、TiCDC がTiDB Lightning物理インポート モードの書き込み速度に追いつけず、クラスター レプリケーションのレイテンシーが増加する可能性があるためです。
 
-You can perform in different scenarios as follows:
+次のようにさまざまなシナリオで実行できます。
 
-- Scenario 1: the table does not need to be replicated downstream by TiCDC.
+-   シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
 
-    In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after TiDB Lightning starts. If you are sure that these tables do not need backup or [log backup](/br/br-pitr-guide.md), you can change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) to `false` and restart the import task.
+    このシナリオでは、TiCDC changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)必要ないことが確実な場合は、 [TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更して、インポート タスクを再開できます。
 
-- Scenario 2: the table needs to be replicated downstream by TiCDC.
+-   シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
-    In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after TiDB Lightning starts. You need to change the `Lightning.check-requirements` parameter in the [TiDB Lightning configuration file](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) in the upstream TiDB cluster to `false` and restart the import task.
+    このシナリオでは、TiCDC changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。アップストリーム TiDB クラスターの[TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更し、インポート タスクを再起動する必要があります。
 
-    After the import task for the upstream TiDB cluster is finished, use TiDB Lightning to import the same data in the downstream TiDB cluster. If you have databases such as Redshift and Snowflake in the downstream, you can configure them to read CSV, SQL, or Parquet files from a cloud storage service and then write the data to the database.
+    アップストリーム TiDB クラスターのインポート タスクが完了したら、 TiDB Lightning を使用してダウンストリーム TiDB クラスターに同じデータをインポートします。ダウンストリームに Redshift や Snowflake などのデータベースがある場合は、クラウドstorageサービスから CSV、SQL、または Parquet ファイルを読み取り、そのデータをデータベースに書き込むように構成できます。
 
-## Scenarios for `IMPORT INTO`
+## <code>IMPORT INTO</code>のシナリオ {#scenarios-for-code-import-into-code}
 
-This section describes how to use `IMPORT INTO` together with [log backup](/br/br-pitr-guide.md) and [TiCDC](/ticdc/ticdc-overview.md).
+このセクションでは、 `IMPORT INTO` [ログバックアップ](/br/br-pitr-guide.md)および[ティCDC](/ticdc/ticdc-overview.md)と一緒に使用する方法について説明します。
 
-### Used with log backup
+### ログバックアップで使用される {#used-with-log-backup}
 
-You can perform in different scenarios as follows:
+次のようにさまざまなシナリオで実行できます。
 
-- Scenario 1: tables do not need to be backed up
+-   シナリオ 1: テーブルをバックアップする必要がない
 
-    In this scenario, if [PITR](/br/br-log-architecture.md#process-of-pitr) is enabled, the compatibility check will report an error after you submit the `IMPORT INTO` statement. If you are sure that these tables do not need backup or [log backup](/br/br-pitr-guide.md), you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that statement, and then resubmit it. In this way, the data import task ignores the compatibility check and imports the data directly.
+    このシナリオでは、 [ピトル](/br/br-log-architecture.md#process-of-pitr)有効になっている場合、 `IMPORT INTO`ステートメントを送信した後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)必要ないことが確実な場合は、そのステートメントの[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて、再送信することができます。このようにして、データ インポート タスクは互換性チェックを無視し、データを直接インポートします。
 
-- Scenario 2: after the import is finished, there will be no new DML operations on the table
+-   シナリオ2: インポートが完了した後、テーブルに対して新しいDML操作は行われません。
 
-    This scenario does not involve incremental data writes, so it is sufficient to perform a table-level snapshot backup of the table after completing the data import, as described in [Back up a table](/br/br-snapshot-manual.md#back-up-a-table).
+    このシナリオでは増分データ書き込みは行われないため、 [テーブルをバックアップする](/br/br-snapshot-manual.md#back-up-a-table)で説明したように、データのインポートが完了したら、テーブルのテーブルレベルのスナップショット バックアップを実行するだけで十分です。
 
-    During data recovery, the snapshot data of the table is restored. See [Restore a table](/br/br-snapshot-manual.md#restore-a-table) for the procedure.
+    データ復旧では、テーブルのスナップショットデータが復元されます。手順については[テーブルを復元する](/br/br-snapshot-manual.md#restore-a-table)参照してください。
 
-- Scenario 3: after the import is finished, there will be new DML operations on the table (not supported)
+-   シナリオ 3: インポートが完了した後、テーブルに対して新しい DML 操作が実行されます (サポートされていません)
 
-    In this scenario, you can only choose either [full snapshot backup](/br/br-snapshot-guide.md) or [log backup](/br/br-pitr-guide.md) for this table. You cannot back up and restore both the full snapshot data and log backup data of this table.
+    このシナリオでは、このテーブルに対して[完全なスナップショットバックアップ](/br/br-snapshot-guide.md)または[ログバックアップ](/br/br-pitr-guide.md)いずれかのみを選択できます。このテーブルの完全なスナップショット データとログ バックアップ データの両方をバックアップおよび復元することはできません。
 
-### Used with TiCDC
+### TiCDC で使用 {#used-with-ticdc}
 
-You can perform in different scenarios as follows:
+次のようにさまざまなシナリオで実行できます。
 
-- Scenario 1: the table does not need to be replicated downstream by TiCDC.
+-   シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
 
-    In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after you submit the `IMPORT INTO` statement. If you are sure that these tables do not need to be replicated by TiCDC, you can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that statement, and then resubmit it. In this way, the data import task ignores the compatibility check and imports the data directly.
+    このシナリオでは、TiCDC の変更フィードが有効になっている場合、 `IMPORT INTO`ステートメントを送信した後に互換性チェックでエラーが報告されます。これらのテーブルを TiCDC で複製する必要がないことが確実な場合は、そのステートメントの[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて、再送信することができます。このように、データ インポート タスクは互換性チェックを無視し、データを直接インポートします。
 
-- Scenario 2: the table needs to be replicated downstream by TiCDC.
+-   シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
-    In this scenario, if TiCDC changefeed is enabled, the compatibility check will report an error after you submit the `IMPORT INTO` statement. You can include `DISABLE_PRECHECK` (introduced in v8.0.0) in [`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions) of that statement, and then resubmit it. In this way, the data import task ignores the compatibility check and imports the data directly.
+    このシナリオでは、TiCDC の変更フィードが有効になっている場合、 `IMPORT INTO`ステートメントを送信した後に互換性チェックでエラーが報告されます。そのステートメントの[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて、再送信することができます。このように、データ インポート タスクは互換性チェックを無視し、データを直接インポートします。
 
-    After the import task for the upstream TiDB cluster is finished, use `IMPORT INTO` to import the same data in the downstream TiDB cluster. If you have databases such as Redshift and Snowflake in the downstream, you can configure them to read CSV, SQL, or Parquet files from a cloud storage service and then write the data to the database.
+    アップストリーム TiDB クラスターのインポート タスクが完了したら、 `IMPORT INTO`使用してダウンストリーム TiDB クラスターに同じデータをインポートします。ダウンストリームに Redshift や Snowflake などのデータベースがある場合は、クラウドstorageサービスから CSV、SQL、または Parquet ファイルを読み取り、そのデータをデータベースに書き込むように構成できます。

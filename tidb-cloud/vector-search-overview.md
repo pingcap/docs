@@ -1,72 +1,72 @@
 ---
 title: Vector Search (Beta) Overview
-summary: Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+summary: TiDB のベクター検索について学習します。この機能は、ドキュメント、画像、オーディオ、ビデオなど、さまざまなデータ タイプにわたってセマンティック類似性検索を実行するための高度な検索ソリューションを提供します。
 ---
 
-# Vector Search (Beta) Overview
+# ベクトル検索（ベータ版）の概要 {#vector-search-beta-overview}
 
-TiDB Vector Search (beta) provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
+TiDB Vector Search (ベータ版) は、ドキュメント、画像、音声、ビデオなど、さまざまなデータ タイプにわたって意味的類似性検索を実行するための高度な検索ソリューションを提供します。この機能により、開発者は使い慣れた MySQL スキルを使用して、生成型人工知能 (AI) 機能を備えたスケーラブルなアプリケーションを簡単に構築できます。
 
-> **Note**
+> **注記**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
 
-## Concepts
+## コンセプト {#concepts}
 
-Vector search is a search method that prioritizes the meaning of your data to deliver relevant results.
+ベクトル検索は、データの意味を優先して関連性の高い結果を提供する検索方法です。
 
-Unlike traditional full-text search, which relies on exact keyword matching and word frequency, vector search converts various data types (such as text, images, or audio) into high-dimensional vectors and queries based on the similarity between these vectors. This search method captures the semantic meaning and contextual information of the data, leading to a more precise understanding of user intent.
+正確なキーワード一致と単語の頻度に依存する従来の全文検索とは異なり、ベクトル検索はさまざまなデータ タイプ (テキスト、画像、音声など) を高次元ベクトルに変換し、これらのベクトル間の類似性に基づいてクエリを実行します。この検索方法は、データの意味とコンテキスト情報をキャプチャし、ユーザーの意図をより正確に理解することにつながります。
 
-Even when the search terms do not exactly match the content in the database, vector search can still provide results that align with the user's intent by analyzing the semantics of the data.
+検索用語がデータベースの内容と完全に一致しない場合でも、ベクター検索ではデータのセマンティクスを分析することで、ユーザーの意図に一致する結果を提供できます。
 
-For example, a full-text search for "a swimming animal" only returns results containing these exact keywords. In contrast, vector search can return results for other swimming animals, such as fish or ducks, even if these results do not contain the exact keywords.
+たとえば、「泳ぐ動物」の全文検索では、これらのキーワードを正確に含む結果のみが返されます。対照的に、ベクター検索では、魚やアヒルなど、他の泳ぐ動物の結果が、これらの結果に正確なキーワードが含まれていなくても返されます。
 
-### Vector embedding
+### ベクトル埋め込み {#vector-embedding}
 
-A vector embedding, also known as an embedding, is a sequence of numbers that represents real-world objects in a high-dimensional space. It captures the meaning and context of unstructured data, such as documents, images, audio, and videos.
+ベクトル埋め込みは、埋め込みとも呼ばれ、高次元空間内の現実世界のオブジェクトを表す一連の数字です。ドキュメント、画像、音声、ビデオなどの非構造化データの意味とコンテキストをキャプチャします。
 
-Vector embeddings are essential in machine learning and serve as the foundation for semantic similarity searches.
+ベクトル埋め込みは機械学習に不可欠であり、意味的類似性検索の基盤として機能します。
 
-TiDB introduces [Vector data types](/tidb-cloud/vector-search-data-types.md) and [Vector search index](/tidb-cloud/vector-search-index.md) designed to optimize the storage and retrieval of vector embeddings, enhancing their use in AI applications. You can store vector embeddings in TiDB and perform vector search queries to find the most relevant data using these data types.
+TiDB では、ベクトル埋め込みのstorageと取得を最適化し、AI アプリケーションでの使用を強化するように設計された[ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)と[ベクトル検索インデックス](/tidb-cloud/vector-search-index.md)導入されています。ベクトル埋め込みを TiDB に保存し、ベクトル検索クエリを実行して、これらのデータ型を使用して最も関連性の高いデータを見つけることができます。
 
-### Embedding model
+### 埋め込みモデル {#embedding-model}
 
-Embedding models are algorithms that transform data into [vector embeddings](#vector-embedding).
+埋め込みモデルは、データを[ベクトル埋め込み](#vector-embedding)に変換するアルゴリズムです。
 
-Choosing an appropriate embedding model is crucial for ensuring the accuracy and relevance of semantic search results. For unstructured text data, you can find top-performing text embedding models on the [Massive Text Embedding Benchmark (MTEB) Leaderboard](https://huggingface.co/spaces/mteb/leaderboard).
+適切な埋め込みモデルを選択することは、セマンティック検索結果の正確性と関連性を保証するために重要です。非構造化テキスト データの場合、 [大規模テキスト埋め込みベンチマーク (MTEB) リーダーボード](https://huggingface.co/spaces/mteb/leaderboard)で最高のパフォーマンスを発揮するテキスト埋め込みモデルを見つけることができます。
 
-To learn how to generate vector embeddings for your specific data types, refer to integration tutorials or examples of embedding models.
+特定のデータ タイプのベクトル埋め込みを生成する方法については、統合チュートリアルまたは埋め込みモデルの例を参照してください。
 
-## How vector search works
+## ベクトル検索の仕組み {#how-vector-search-works}
 
-After converting raw data into vector embeddings and storing them in TiDB, your application can execute vector search queries to find the data most semantically or contextually relevant to a user's query.
+生データをベクトル埋め込みに変換して TiDB に保存した後、アプリケーションはベクトル検索クエリを実行して、ユーザーのクエリに意味的または文脈的に最も関連性の高いデータを見つけることができます。
 
-TiDB Vector Search identifies the top-k nearest neighbor (KNN) vectors by using a [distance function](/tidb-cloud/vector-search-functions-and-operators.md) to calculate the distance between the given vector and vectors stored in the database. The vectors closest to the given vector in the query represent the most similar data in meaning.
+TiDB ベクトル検索は、 [距離関数](/tidb-cloud/vector-search-functions-and-operators.md)を使用して指定されたベクトルとデータベースに保存されているベクトル間の距離を計算し、上位 k 近傍 (KNN) ベクトルを識別します。クエリ内の指定されたベクトルに最も近いベクトルは、意味の最も類似したデータを表します。
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
-As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector representations (that is, vector embeddings) together in one database. You can choose any of the following ways for storage:
+統合ベクトル検索機能を備えたリレーショナル データベースである TiDB を使用すると、データとそれに対応するベクトル表現 (つまり、ベクトル埋め込み) を 1 つのデータベースにまとめて保存できます。storageには、次のいずれかの方法を選択できます。
 
-- Store data and their corresponding vector representations in different columns of the same table.
-- Store data and their corresponding vector representation in different tables. In this way, you need to use `JOIN` queries to combine the tables when retrieving data.
+-   データとそれに対応するベクトル表現を同じテーブルの異なる列に格納します。
+-   データとそれに対応するベクトル表現を別のテーブルに保存します。この方法では、データを取得するときに`JOIN`クエリを使用してテーブルを結合する必要があります。
 
-## Use cases
+## ユースケース {#use-cases}
 
-### Retrieval-Augmented Generation (RAG)
+### 検索拡張生成 (RAG) {#retrieval-augmented-generation-rag}
 
-Retrieval-Augmented Generation (RAG) is an architecture designed to optimize the output of Large Language Models (LLMs). By using vector search, RAG applications can store vector embeddings in the database and retrieve relevant documents as additional context when the LLM generates responses, thereby improving the quality and relevance of the answers.
+検索拡張生成 (RAG) は、大規模言語モデル (LLM) の出力を最適化するために設計されたアーキテクチャです。ベクトル検索を使用することで、RAG アプリケーションはベクトル埋め込みをデータベースに保存し、LLM が応答を生成するときに関連ドキュメントを追加のコンテキストとして取得できるため、回答の品質と関連性が向上します。
 
-### Semantic search
+### セマンティック検索 {#semantic-search}
 
-Semantic search is a search technology that returns results based on the meaning of a query, rather than simply matching keywords. It interprets the meaning across different languages and various types of data (such as text, images, and audio) using embeddings. Vector search algorithms then use these embeddings to find the most relevant data that satisfies the user's query.
+セマンティック検索は、単にキーワードを一致させるのではなく、クエリの意味に基づいて結果を返す検索テクノロジーです。埋め込みを使用して、さまざまな言語やさまざまな種類のデータ (テキスト、画像、音声など) の意味を解釈します。次に、ベクター検索アルゴリズムがこれらの埋め込みを使用して、ユーザーのクエリを満たす最も関連性の高いデータを検索します。
 
-### Recommendation engine
+### 推奨エンジン {#recommendation-engine}
 
-A recommendation engine is a system that proactively suggests content, products, or services that are relevant and personalized to users. It accomplishes this by creating embeddings that represent user behavior and preferences. These embeddings help the system identify similar items that other users have interacted with or shown interest in. This increases the likelihood that the recommendations will be both relevant and appealing to the user.
+推奨エンジンは、ユーザーにとって関連性がありパーソナライズされたコンテンツ、製品、またはサービスを積極的に提案するシステムです。これは、ユーザーの行動と好みを表す埋め込みを作成することで実現されます。これらの埋め込みは、他のユーザーが操作した、または興味を示した類似のアイテムをシステムが識別するのに役立ちます。これにより、推奨事項がユーザーにとって関連性があり魅力的になる可能性が高まります。
 
-## See also
+## 参照 {#see-also}
 
-To get started with TiDB Vector Search, see the following documents:
+TiDB Vector Search を使い始めるには、次のドキュメントを参照してください。
 
-- [Get started with vector search using Python](/tidb-cloud/vector-search-get-started-using-python.md)
-- [Get started with vector search using SQL](/tidb-cloud/vector-search-get-started-using-sql.md)
+-   [Python を使用したベクトル検索の開始](/tidb-cloud/vector-search-get-started-using-python.md)
+-   [SQL を使用したベクトル検索の開始](/tidb-cloud/vector-search-get-started-using-sql.md)

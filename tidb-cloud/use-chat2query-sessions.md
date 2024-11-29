@@ -1,29 +1,29 @@
 ---
 title: Start Multi-round Chat2Query
-summary: Learn how to start multi-round chat by using Chat2Query session-related APIs.
+summary: Chat2Query セッション関連 API を使用して、マルチラウンド チャットを開始する方法を学習します。
 ---
 
-# Start Multi-round Chat2Query
+# マルチラウンドChat2Queryを開始する {#start-multi-round-chat2query}
 
-Starting from v3, the Chat2Query API enables you to start multi-round chats by calling session related endpoints. You can use the `session_id` returned by the `/v3/chat2data` endpoint to continue your conversation in the next round.
+v3 以降、Chat2Query API では、セッション関連のエンドポイントを呼び出して、複数ラウンドのチャットを開始できます。3 `/v3/chat2data`ポイントによって返される`session_id`使用して、次のラウンドで会話を続行できます。
 
-## Before you begin
+## 始める前に {#before-you-begin}
 
-Before starting multi-round Chat2Query, make sure that you have the following:
+マルチラウンド Chat2Query を開始する前に、次のものを用意してください。
 
-- A [Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app).
-- An [API key for the Chat2Query Data App](/tidb-cloud/use-chat2query-api.md#create-an-api-key).
-- A [data summary for your target database](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries).
+-   A [Chat2Query データ アプリ](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app) 。
+-   [Chat2Query データ アプリの API キー](/tidb-cloud/use-chat2query-api.md#create-an-api-key) 。
+-   A [ターゲットデータベースのデータ概要](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries) 。
 
-## Step 1. Start a session
+## ステップ1.セッションを開始する {#step-1-start-a-session}
 
-To start a session, you can call the `/v3/sessions` endpoint of your Chat2Query Data App.
+セッションを開始するには、Chat2Query データ アプリの`/v3/sessions`エンドポイントを呼び出します。
 
-The following is a general code example for calling this endpoint.
+以下は、このエンドポイントを呼び出すための一般的なコード例です。
 
-> **Tip:**
+> **ヒント：**
 >
-> To get a specific code example for your endpoint, click the endpoint name in the left pane of your Data App, and then click **Show Code Example**. For more information, see [Get the example code of an endpoint](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint).
+> エンドポイントの特定のコード例を取得するには、データ アプリの左側のペインでエンドポイント名をクリックし、 **[コード例の表示]**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)参照してください。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/sessions'\
@@ -35,13 +35,13 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-In the preceding code, the request body is a JSON object with the following properties:
+上記のコードでは、リクエスト本文は次のプロパティを持つ JSON オブジェクトです。
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
-- `database`: _string_. The name of the database.
-- `name`: _string_. The name of the session.
+-   `cluster_id` :*文字列*。TiDB クラスターの一意の識別子。
+-   `database` :*文字列*。データベースの名前。
+-   `name` :*文字列*。セッションの名前。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -61,11 +61,11 @@ An example response is as follows:
 }
 ```
 
-## Step 2. Call Chat2Data endpoints with the session
+## ステップ2. セッションでChat2Dataエンドポイントを呼び出す {#step-2-call-chat2data-endpoints-with-the-session}
 
-After starting a session, you can call `/v3/sessions/{session_id}/chat2data` to continue your conversation in the next round.
+セッションを開始した後、 `/v3/sessions/{session_id}/chat2data`電話して次のラウンドで会話を続けることができます。
 
-The following is a general code example:
+以下は一般的なコード例です。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-central-1.data.tidbcloud.com/api/v1beta/app/chat2query-YqAvnlRj/endpoint/v3/sessions/{session_id}/chat2data'\
@@ -78,14 +78,14 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-cen
 }'
 ```
 
-In the preceding code, the request body is a JSON object with the following properties:
+上記のコードでは、リクエスト本文は次のプロパティを持つ JSON オブジェクトです。
 
-- `question`: _string_. A question in natural language describing the query you want.
-- `feedback_answer_id`: _string_. The feedback answer ID. This field is optional and is only used for feedback.
-- `feedback_task_id`: _string_. The feedback task ID. This field is optional and is only used for feedback.
-- `sql_generate_mode`: _string_. The mode to generate SQL statements. The value can be `direct` or `auto_breakdown`. If you set it to `direct`, the API will generate SQL statements directly based on the `question` you provided. If you set it to `auto_breakdown`, the API will break down the `question` into multiple tasks and generate SQL statements for each task.
+-   `question` :*文字列*。必要なクエリを説明する自然言語での質問。
+-   `feedback_answer_id` :*文字列*。フィードバック回答 ID。このフィールドはオプションであり、フィードバックにのみ使用されます。
+-   `feedback_task_id` :*文字列*。フィードバック タスク ID。このフィールドはオプションであり、フィードバックにのみ使用されます。
+-   `sql_generate_mode` :*文字列*。SQL 文を生成するモード。値は`direct`または`auto_breakdown`です。 `direct`に設定すると、API は指定した`question`に基づいて SQL 文を直接生成します。 `auto_breakdown`に設定すると、API は`question`複数のタスクに分割し、各タスクの SQL 文を生成します。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -98,4 +98,4 @@ An example response is as follows:
 }
 ```
 
-The response is similar to the response of the `/v3/chat2data` endpoint. You can check the job status by calling the `/v2/jobs/{job_id}` endpoint. For more information, see [Check the analysis status by calling `/v2/jobs/{job_id}`](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id).
+応答は`/v3/chat2data`エンドポイントの応答と同様です。 `/v2/jobs/{job_id}`エンドポイントを呼び出すことでジョブのステータスを確認できます。詳細については[`/v2/jobs/{job_id}`を呼び出して分析ステータスを確認します。](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id)参照してください。

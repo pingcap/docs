@@ -1,44 +1,44 @@
 ---
 title: Integrate Vector Search with LangChain
-summary: Learn how to integrate Vector Search in TiDB Cloud with LangChain.
+summary: TiDB Cloudの Vector Search を LangChain と統合する方法を学びます。
 ---
 
-# Integrate Vector Search with LangChain
+# ベクトル検索をLangChainと統合する {#integrate-vector-search-with-langchain}
 
-This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vector-search-overview.md) feature in TiDB Cloud with [LangChain](https://python.langchain.com/).
+このチュートリアルでは、 TiDB Cloudの[ベクトル検索](/tidb-cloud/vector-search-overview.md)機能を[ランチェーン](https://python.langchain.com/)と統合する方法を説明します。
 
-> **Note**
+> **注記**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
 
-> **Tip**
+> **ヒント**
 >
-> You can view the complete [sample code](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) on Jupyter Notebook, or run the sample code directly in the [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) online environment.
+> 完全な[サンプルコード](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb) Jupyter Notebook で表示したり、サンプル コードを[コラボ](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)オンライン環境で直接実行したりできます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Jupyter Notebook](https://jupyter.org/install) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+-   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
+-   [ジュピターノートブック](https://jupyter.org/install)インストールされました。
+-   [ギット](https://git-scm.com/downloads)インストールされました。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
-## Get started
+## 始める {#get-started}
 
-This section provides step-by-step instructions for integrating TiDB Vector Search with LangChain to perform semantic searches.
+このセクションでは、TiDB Vector Search を LangChain と統合してセマンティック検索を実行するための手順を段階的に説明します。
 
-### Step 1. Create a new Jupyter Notebook file
+### ステップ1. 新しいJupyter Notebookファイルを作成する {#step-1-create-a-new-jupyter-notebook-file}
 
-In your preferred directory, create a new Jupyter Notebook file named `integrate_with_langchain.ipynb`:
+任意のディレクトリに、 `integrate_with_langchain.ipynb`という名前の新しい Jupyter Notebook ファイルを作成します。
 
 ```shell
 touch integrate_with_langchain.ipynb
 ```
 
-### Step 2. Install required dependencies
+### ステップ2. 必要な依存関係をインストールする {#step-2-install-required-dependencies}
 
-In your project directory, run the following command to install the required packages:
+プロジェクト ディレクトリで、次のコマンドを実行して必要なパッケージをインストールします。
 
 ```shell
 !pip install langchain langchain-community
@@ -47,7 +47,7 @@ In your project directory, run the following command to install the required pac
 !pip install tidb-vector
 ```
 
-Open the `integrate_with_langchain.ipynb` file in Jupyter Notebook, and then add the following code to import the required packages:
+Jupyter Notebook で`integrate_with_langchain.ipynb`ファイルを開き、次のコードを追加して必要なパッケージをインポートします。
 
 ```python
 from langchain_community.document_loaders import TextLoader
@@ -56,58 +56,58 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 ```
 
-### Step 3. Set up your environment
+### ステップ3. 環境を設定する {#step-3-set-up-your-environment}
 
-Take the following steps to obtain the cluster connection string and configure environment variables:
+クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-   - **Connection Type** is set to `Public`.
-   - **Branch** is set to `main`.
-   - **Connect With** is set to `SQLAlchemy`.
-   - **Operating System** matches your environment.
+    -   **接続タイプは**`Public`に設定されています。
+    -   **ブランチは**`main`に設定されています。
+    -   **Connect With は**`SQLAlchemy`に設定されています。
+    -   **オペレーティング システムは**環境に適合します。
 
-4. Click the **PyMySQL** tab and copy the connection string.
+4.  **PyMySQL**タブをクリックし、接続文字列をコピーします。
 
-   > **Tip:**
-   >
-   > If you have not set a password yet, click **Generate Password** to generate a random password.
+    > **ヒント：**
+    >
+    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
-5. Configure environment variables.
+5.  環境変数を設定します。
 
-   This document uses [OpenAI](https://platform.openai.com/docs/introduction) as the embedding model provider. In this step, you need to provide the connection string obtained from the previous step and your [OpenAI API key](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key).
+    このドキュメントでは、埋め込みモデル プロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、前の手順で取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)指定する必要があります。
 
-   To configure the environment variables, run the following code. You will be prompted to enter your connection string and OpenAI API key:
+    環境変数を設定するには、次のコードを実行します。接続文字列と OpenAI API キーを入力するよう求められます。
 
-   ```python
-   # Use getpass to securely prompt for environment variables in your terminal.
-   import getpass
-   import os
+    ```python
+    # Use getpass to securely prompt for environment variables in your terminal.
+    import getpass
+    import os
 
-   # Copy your connection string from the TiDB Cloud console.
-   # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
-   tidb_connection_string = getpass.getpass("TiDB Connection String:")
-   os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
-   ```
+    # Copy your connection string from the TiDB Cloud console.
+    # Connection string format: "mysql+pymysql://<USER>:<PASSWORD>@<HOST>:4000/<DB>?ssl_ca=/etc/ssl/cert.pem&ssl_verify_cert=true&ssl_verify_identity=true"
+    tidb_connection_string = getpass.getpass("TiDB Connection String:")
+    os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
+    ```
 
-### Step 4. Load the sample document
+### ステップ4. サンプルドキュメントを読み込む {#step-4-load-the-sample-document}
 
-#### Step 4.1 Download the sample document
+#### ステップ4.1 サンプルドキュメントをダウンロードする {#step-4-1-download-the-sample-document}
 
-In your project directory, create a directory named `data/how_to/` and download the sample document [`state_of_the_union.txt`](https://github.com/langchain-ai/langchain/blob/master/docs/docs/how_to/state_of_the_union.txt) from the [langchain-ai/langchain](https://github.com/langchain-ai/langchain) GitHub repository.
+プロジェクト ディレクトリに`data/how_to/`という名前のディレクトリを作成し、 [langchain-ai/langchain](https://github.com/langchain-ai/langchain) GitHub リポジトリからサンプル ドキュメント[`state_of_the_union.txt`](https://github.com/langchain-ai/langchain/blob/master/docs/docs/how_to/state_of_the_union.txt)ダウンロードします。
 
 ```shell
 !mkdir -p 'data/how_to/'
 !wget 'https://raw.githubusercontent.com/langchain-ai/langchain/master/docs/docs/how_to/state_of_the_union.txt' -O 'data/how_to/state_of_the_union.txt'
 ```
 
-#### Step 4.2 Load and split the document
+#### ステップ4.2 ドキュメントを読み込み、分割する {#step-4-2-load-and-split-the-document}
 
-Load the sample document from `data/how_to/state_of_the_union.txt` and split it into chunks of approximately 1,000 characters each using a `CharacterTextSplitter`.
+サンプル ドキュメントを`data/how_to/state_of_the_union.txt`から読み込み、 `CharacterTextSplitter`使用して約 1,000 文字のチャンクに分割します。
 
 ```python
 loader = TextLoader("data/how_to/state_of_the_union.txt")
@@ -116,11 +116,11 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
 ```
 
-### Step 5. Embed and store document vectors
+### ステップ5. ドキュメントベクターを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
 
-TiDB vector store supports both cosine distance (`consine`) and Euclidean distance (`l2`) for measuring similarity between vectors. The default strategy is cosine distance.
+TiDBベクトルストアは、ベクトル間の類似性を測定するためにコサイン距離（ `consine` ）とユークリッド距離（ `l2` ）の両方をサポートしています。デフォルトの戦略はコサイン距離です。
 
-The following code creates a table named `embedded_documents` in TiDB, which is optimized for vector search.
+次のコードは、ベクトル検索に最適化された`embedded_documents`という名前のテーブルを TiDB に作成します。
 
 ```python
 embeddings = OpenAIEmbeddings()
@@ -133,19 +133,19 @@ vector_store = TiDBVectorStore.from_documents(
 )
 ```
 
-Upon successful execution, you can directly view and access the `embedded_documents` table in your TiDB database.
+実行が成功すると、TiDB データベース内の`embedded_documents`テーブルを直接表示してアクセスできるようになります。
 
-### Step 6. Perform a vector search
+### ステップ6. ベクトル検索を実行する {#step-6-perform-a-vector-search}
 
-This step demonstrates how to query "What did the president say about Ketanji Brown Jackson" from the document `state_of_the_union.txt`.
+このステップでは、ドキュメント`state_of_the_union.txt`から「大統領は Ketanji Brown Jackson について何と言ったか」を照会する方法を示します。
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"
 ```
 
-#### Option 1: Use `similarity_search_with_score()`
+#### オプション 1: <code>similarity_search_with_score()</code>を使用する {#option-1-use-code-similarity-search-with-score-code}
 
-The `similarity_search_with_score()` method calculates the vector space distance between the documents and the query. This distance serves as a similarity score, determined by the chosen `distance_strategy`. The method returns the top `k` documents with the lowest scores. A lower score indicates a higher similarity between a document and your query.
+`similarity_search_with_score()`メソッドは、ドキュメントとクエリ間のベクトル空間距離を計算します。この距離は、選択された`distance_strategy`によって決定される類似度スコアとして機能します。このメソッドは、スコアが最も低い上位`k`のドキュメントを返します。スコアが低いほど、ドキュメントとクエリ間の類似性が高いことを示します。
 
 ```python
 docs_with_score = vector_store.similarity_search_with_score(query, k=3)
@@ -156,8 +156,7 @@ for doc, score in docs_with_score:
    print("-" * 80)
 ```
 
-<details>
-   <summary><b>Expected output</b></summary>
+<details><summary><b>期待される出力</b></summary>
 
 ```plain
 --------------------------------------------------------------------------------
@@ -202,9 +201,9 @@ First, beat the opioid epidemic.
 
 </details>
 
-#### Option 2: Use `similarity_search_with_relevance_scores()`
+#### オプション 2: <code>similarity_search_with_relevance_scores()</code>を使用する {#option-2-use-code-similarity-search-with-relevance-scores-code}
 
-The `similarity_search_with_relevance_scores()` method returns the top `k` documents with the highest relevance scores. A higher score indicates a higher degree of similarity between a document and your query.
+`similarity_search_with_relevance_scores()`メソッドは、関連性スコアが最も高い上位`k`ドキュメントを返します。スコアが高いほど、ドキュメントとクエリの類似度が高いことを示します。
 
 ```python
 docs_with_relevance_score = vector_store.similarity_search_with_relevance_scores(query, k=2)
@@ -215,8 +214,7 @@ for doc, score in docs_with_relevance_score:
     print("-" * 80)
 ```
 
-<details>
-   <summary><b>Expected output</b></summary>
+<details><summary><b>期待される出力</b></summary>
 
 ```plain
 --------------------------------------------------------------------------------
@@ -247,9 +245,9 @@ We’re securing commitments and supporting partners in South and Central Americ
 
 </details>
 
-### Use as a retriever
+### レトリーバーとして使用する {#use-as-a-retriever}
 
-In Langchain, a [retriever](https://python.langchain.com/v0.2/docs/concepts/#retrievers) is an interface that retrieves documents in response to an unstructured query, providing more functionality than a vector store. The following code demonstrates how to use TiDB vector store as a retriever.
+Langchain では、 [レトリーバー](https://python.langchain.com/v0.2/docs/concepts/#retrievers)は非構造化クエリに応答してドキュメントを取得するインターフェースであり、ベクター ストアよりも多くの機能を提供します。次のコードは、TiDB ベクター ストアを取得子として使用する方法を示しています。
 
 ```python
 retriever = vector_store.as_retriever(
@@ -263,65 +261,39 @@ for doc in docs_retrieved:
    print("-" * 80)
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
-```
---------------------------------------------------------------------------------
-Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
+    --------------------------------------------------------------------------------
+    Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
 
-Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
+    Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
 
-One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
+    One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
 
-And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
---------------------------------------------------------------------------------
-```
+    And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
+    --------------------------------------------------------------------------------
 
-### Remove the vector store
+### ベクトルストアを削除する {#remove-the-vector-store}
 
-To remove an existing TiDB vector store, use the `drop_vectorstore()` method:
+既存の TiDB ベクトル ストアを削除するには、 `drop_vectorstore()`メソッドを使用します。
 
 ```python
 vector_store.drop_vectorstore()
 ```
 
-## Search with metadata filters
+## メタデータフィルターで検索 {#search-with-metadata-filters}
 
-To refine your searches, you can use metadata filters to retrieve specific nearest-neighbor results that match the applied filters.
+検索を絞り込むには、メタデータ フィルターを使用して、適用したフィルターに一致する特定の最も近い結果を取得できます。
 
-### Supported metadata types
+### サポートされているメタデータタイプ {#supported-metadata-types}
 
-Each document in the TiDB vector store can be paired with metadata, structured as key-value pairs within a JSON object. Keys are always strings, while values can be any of the following types:
+TiDB ベクトル ストア内の各ドキュメントは、JSON オブジェクト内のキーと値のペアとして構造化されたメタデータとペアにすることができます。キーは常に文字列ですが、値は次のいずれかの型になります。
 
-- String
-- Number: integer or floating point
-- Boolean: `true` or `false`
+-   弦
+-   数値: 整数または浮動小数点数
+-   ブール値: `true`または`false`
 
-For example, the following is a valid metadata payload:
-
-```json
-{
-  "page": 12,
-  "book_title": "Siddhartha"
-}
-```
-
-### Metadata filter syntax
-
-Available filters include the following:
-
-- `$or`: Selects vectors that match any one of the specified conditions.
-- `$and`: Selects vectors that match all the specified conditions.
-- `$eq`: Equal to the specified value.
-- `$ne`: Not equal to the specified value.
-- `$gt`: Greater than the specified value.
-- `$gte`: Greater than or equal to the specified value.
-- `$lt`: Less than the specified value.
-- `$lte`: Less than or equal to the specified value.
-- `$in`: In the specified array of values.
-- `$nin`: Not in the specified array of values.
-
-If the metadata of a document is as follows:
+たとえば、有効なメタデータ ペイロードは次のとおりです。
 
 ```json
 {
@@ -330,7 +302,31 @@ If the metadata of a document is as follows:
 }
 ```
 
-The following metadata filters can match this document:
+### メタデータフィルター構文 {#metadata-filter-syntax}
+
+利用可能なフィルターは次のとおりです。
+
+-   `$or` : 指定された条件のいずれかに一致するベクトルを選択します。
+-   `$and` : 指定されたすべての条件に一致するベクトルを選択します。
+-   `$eq` : 指定された値と等しい。
+-   `$ne` : 指定された値と等しくありません。
+-   `$gt` : 指定された値より大きい。
+-   `$gte` : 指定された値以上。
+-   `$lt` : 指定された値より小さい。
+-   `$lte` : 指定された値以下。
+-   `$in` : 指定された値の配列内。
+-   `$nin` : 指定された値の配列に存在しません。
+
+ドキュメントのメタデータが次のとおりである場合:
+
+```json
+{
+  "page": 12,
+  "book_title": "Siddhartha"
+}
+```
+
+次のメタデータ フィルターがこのドキュメントに一致します。
 
 ```json
 { "page": 12 }
@@ -363,11 +359,11 @@ The following metadata filters can match this document:
 }
 ```
 
-In a metadata filter, TiDB treats each key-value pair as a separate filter clause and combines these clauses using the `AND` logical operator.
+メタデータ フィルターでは、TiDB は各キーと値のペアを個別のフィルター句として扱い、 `AND`論理演算子を使用してこれらの句を結合します。
 
-### Example
+### 例 {#example}
 
-The following example adds two documents to `TiDBVectorStore` and adds a `title` field to each document as the metadata:
+次の例では、ドキュメント`TiDBVectorStore`に 2 つのドキュメントを追加し、各ドキュメントにメタデータとしてフィールド`title`を追加します。
 
 ```python
 vector_store.add_texts(
@@ -382,14 +378,14 @@ vector_store.add_texts(
 )
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
 ```plain
 [UUID('c782cb02-8eec-45be-a31f-fdb78914f0a7'),
  UUID('08dcd2ba-9f16-4f29-a9b7-18141f8edae3')]
 ```
 
-Perform a similarity search with metadata filters:
+メタデータ フィルターを使用して類似性検索を実行します。
 
 ```python
 docs_with_score = vector_store.similarity_search_with_score(
@@ -402,7 +398,7 @@ for doc, score in docs_with_score:
     print("-" * 80)
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
 ```plain
 --------------------------------------------------------------------------------
@@ -411,18 +407,18 @@ TiDB Vector offers advanced, high-speed vector processing capabilities, enhancin
 --------------------------------------------------------------------------------
 ```
 
-## Advanced usage example: travel agent
+## 高度な使用例: 旅行代理店 {#advanced-usage-example-travel-agent}
 
-This section demonstrates a use case of integrating vector search with Langchain for a travel agent. The goal is to create personalized travel reports for clients, helping them find airports with specific amenities, such as clean lounges and vegetarian options.
+このセクションでは、旅行代理店向けにベクトル検索と Langchain を統合するユースケースを紹介します。目標は、顧客向けにパーソナライズされた旅行レポートを作成し、清潔なラウンジやベジタリアン向けのオプションなど、特定のアメニティを備えた空港を見つけやすくすることです。
 
-The process involves two main steps:
+このプロセスには主に 2 つのステップが含まれます。
 
-1. Perform a semantic search across airport reviews to identify airport codes that match the desired amenities.
-2. Execute a SQL query to merge these codes with route information, highlighting airlines and destinations that align with user's preferences.
+1.  空港レビュー全体でセマンティック検索を実行し、希望する設備に一致する空港コードを特定します。
+2.  SQL クエリを実行してこれらのコードをルート情報と結合し、ユーザーの好みに一致する航空会社と目的地を強調表示します。
 
-### Prepare data
+### データを準備する {#prepare-data}
 
-First, create a table to store airport route data:
+まず、空港ルートデータを保存するテーブルを作成します。
 
 ```python
 # Create a table to store flight plan data.
@@ -473,7 +469,7 @@ vector_store.add_texts(
 )
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
 ```plain
 [UUID('6dab390f-acd9-4c7d-b252-616606fbc89b'),
@@ -481,9 +477,9 @@ The expected output is as follows:
  UUID('f426747c-0f7b-4c62-97ed-3eeb7c8dd76e')]
 ```
 
-### Perform a semantic search
+### セマンティック検索を実行する {#perform-a-semantic-search}
 
-The following code searches for airports with clean facilities and vegetarian options:
+次のコードは、清潔な施設とベジタリアン向けのオプションを備えた空港を検索します。
 
 ```python
 retriever = vector_store.as_retriever(
@@ -499,7 +495,7 @@ for r in reviews:
     print("-" * 80)
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
 ```plain
 --------------------------------------------------------------------------------
@@ -512,9 +508,9 @@ Comfortable seating in lounge areas and diverse food selections, including veget
 --------------------------------------------------------------------------------
 ```
 
-### Retrieve detailed airport information
+### 詳細な空港情報を取得する {#retrieve-detailed-airport-information}
 
-Extract airport codes from the search results and query the database for detailed route information:
+検索結果から空港コードを抽出し、詳細なルート情報をデータベースに照会します。
 
 ```python
 # Extracting airport codes from the metadata
@@ -528,16 +524,16 @@ airport_details = vector_store.tidb_vector_client.execute(search_query, params)
 airport_details.get("result")
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
 ```plain
 [(1, 'JFK', 'DL', 'LAX', 'Non-stop from JFK to LAX.', datetime.timedelta(seconds=21600), 5, 'Boeing 777', Decimal('299.99'), 'None'),
  (2, 'LAX', 'AA', 'ORD', 'Direct LAX to ORD route.', datetime.timedelta(seconds=14400), 3, 'Airbus A320', Decimal('149.99'), 'None')]
 ```
 
-### Streamline the process
+### プロセスを合理化する {#streamline-the-process}
 
-Alternatively, you can streamline the entire process using a single SQL query:
+あるいは、単一の SQL クエリを使用してプロセス全体を合理化することもできます。
 
 ```python
 search_query = f"""
@@ -558,7 +554,7 @@ airport_details = vector_store.tidb_vector_client.execute(search_query, params)
 airport_details.get("result")
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
 ```plain
 [(0.1219207353407008, 1, 'JFK', 'DL', 'LAX', 'Non-stop from JFK to LAX.', datetime.timedelta(seconds=21600), 5, 'Boeing 777', Decimal('299.99'), 'None', 'Clean lounges and excellent vegetarian dining options. Highly recommended.'),
@@ -566,21 +562,21 @@ The expected output is as follows:
  (0.19840519342700513, 3, 'EFGH', 'UA', 'SEA', 'Daily flights from SFO to SEA.', datetime.timedelta(seconds=9000), 7, 'Boeing 737', Decimal('129.99'), 'None', 'Small airport with basic facilities.')]
 ```
 
-### Clean up data
+### データをクリーンアップする {#clean-up-data}
 
-Finally, clean up the resources by dropping the created table:
+最後に、作成したテーブルを削除してリソースをクリーンアップします。
 
 ```python
 vector_store.tidb_vector_client.execute("DROP TABLE airplan_routes")
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
 ```plain
 {'success': True, 'result': 0, 'error': None}
 ```
 
-## See also
+## 参照 {#see-also}
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
+-   [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)
+-   [ベクター検索インデックス](/tidb-cloud/vector-search-index.md)

@@ -1,36 +1,36 @@
 ---
 title: TiCDC Glossary
-summary: Learn the terms about TiCDC and their definitions.
+summary: TiCDC に関する用語とその定義を学びます。
 ---
 
-# TiCDC Glossary
+# TiCDC 用語集 {#ticdc-glossary}
 
-This glossary provides TiCDC-related terms and definitions. These terms appears in TiCDC logs, monitoring metrics, configurations, and documents.
+この用語集では、TiCDC 関連の用語と定義について説明します。これらの用語は、TiCDC ログ、監視メトリック、構成、およびドキュメントに表示されます。
 
-For TiDB-related terms and definitions, refer to [TiDB glossary](/glossary.md).
+TiDB関連の用語と定義については、 [TiDB 用語集](/glossary.md)を参照してください。
 
-## C
+## Ｃ {#c}
 
-### Capture
+### 捕獲 {#capture}
 
-A single TiCDC instance on which the replication task of the cluster runs. Multiple captures form a TiCDC cluster.
+クラスターのレプリケーション タスクが実行される単一の TiCDC インスタンス。複数のキャプチャによって TiCDC クラスターが形成されます。
 
-### Changed data
+### 変更されたデータ {#changed-data}
 
-The data to be written to TiCDC from the upstream TiDB cluster, including the DML-caused data changes and the DDL-caused table schema changes.
+DML によるデータ変更と DDL によるテーブル スキーマ変更を含む、上流の TiDB クラスターから TiCDC に書き込まれるデータ。
 
-### Changefeed
+### チェンジフィード {#changefeed}
 
-An incremental replication task in TiCDC, which outputs the data change logs of several tables in a TiDB cluster to the designated downstream.
+TiCDC の増分レプリケーション タスク。TiDB クラスター内の複数のテーブルのデータ変更ログを指定されたダウンストリームに出力します。
 
-## O
+## お {#o}
 
-### Owner
+### 所有者 {#owner}
 
-A [capture](#capture) of a special role that manages the TiCDC cluster and schedules replication tasks of the cluster. An owner is elected by captures and there is at most one owner at any time.
+TiCDC クラスターを管理し、クラスターのレプリケーション タスクをスケジュールする特別なロールの[捕獲](#capture) 。所有者はキャプチャによって選出され、一度に最大 1 人の所有者が存在します。
 
-## P
+## ポ {#p}
 
-### Processor
+### プロセッサ {#processor}
 
-TiCDC replication tasks allocate data tables on TiCDC instances, and the processor refers to the replication processing unit of these tables. Processor tasks include pulling, sorting, restoring, and distributing changed data.
+TiCDC レプリケーション タスクは、TiCDC インスタンスにデータ テーブルを割り当て、プロセッサはこれらのテーブルのレプリケーション処理ユニットを参照します。プロセッサ タスクには、変更されたデータのプル、ソート、復元、および配布が含まれます。

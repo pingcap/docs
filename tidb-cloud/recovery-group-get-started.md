@@ -1,89 +1,89 @@
 ---
 title: Get Started with Recovery Groups
-summary: Learn how to create a recovery group in TiDB Cloud and view its details.
+summary: TiDB Cloudでリカバリ グループを作成し、その詳細を表示する方法について説明します。
 ---
 
-# Get Started with Recovery Groups
+# リカバリグループの使用を開始する {#get-started-with-recovery-groups}
 
-This document describes how to create a recovery group to protect your databases running on TiDB Cloud Dedicated clusters using the [TiDB Cloud console](https://tidbcloud.com/). It also shows how to view details of a recovery group.
+このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com/)を使用してTiDB Cloud Dedicated クラスターで実行されているデータベースを保護するためのリカバリ グループを作成する方法について説明します。また、リカバリ グループの詳細を表示する方法も示します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- A recovery group replicates your databases to another cluster to protect your databases from regional disasters. Before creating a recovery group, you need to have two TiDB Cloud Dedicated clusters. One cluster hosts the primary databases, and a second cluster hosts the replicas of the primary databases. If you have not done so already, follow the steps in [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create the necessary clusters.
-- To create a recovery group, you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
+-   リカバリ グループは、データベースを別のクラスターに複製して、地域の災害からデータベースを保護します。リカバリ グループを作成する前に、2 つのTiDB Cloud Dedicated クラスターが必要です。1 つのクラスターはプライマリ データベースをホストし、2 つ目のクラスターはプライマリ データベースのレプリカをホストします。まだ行っていない場合は、 [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)の手順に従って必要なクラスターを作成してください。
+-   リカバリ グループを作成するには、組織の`Organization Owner`のロールまたは対象プロジェクトの`Project Owner`のロールに属している必要があります。
 
-> **Note**
+> **注記**
 >
-> Currently, only TiDB Cloud Dedicated clusters hosted on AWS support recovery groups.
+> 現在、AWS でホストされているTiDB Cloud Dedicated クラスターのみがリカバリ グループをサポートしています。
 
-## Create a new recovery group
+## 新しい回復グループを作成する {#create-a-new-recovery-group}
 
-To create a recovery group, perform the following steps:
+回復グループを作成するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-left-projects">左下隅で、複数のプロジェクトがある場合は対象プロジェクトに切り替えて、 **[プロジェクト設定]**をクリックします。</mdsvgicon>
 
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
+2.  **プロジェクト設定**ナビゲーション ペインで、**回復グループ**をクリックします。
 
-3. On the **Recovery Group** page, click **Create Recovery Group**. 
+3.  **[回復グループ]**ページで、 **[回復グループの作成]**をクリックします。
 
-4. On the **Create Recovery Group** page, enter a name for the recovery group.
+4.  **[リカバリ グループの作成]**ページで、リカバリ グループの名前を入力します。
 
-    > **Note**
+    > **注記**
     >
-    > Currently only one resiliency level is supported. For more information, see [About resiliency levels](#about-resiliency-levels).
+    > 現在サポートされている回復力レベルは 1 つだけです。詳細については、 [回復力レベルについて](#about-resiliency-levels)参照してください。
 
-5. Select the TiDB Cloud Dedicated cluster that will be the primary cluster for this group.
+5.  このグループのプライマリ クラスターとなるTiDB Cloud Dedicated クラスターを選択します。
 
-6. Select the TiDB Cloud Dedicated cluster that will be the secondary cluster where databases will be replicated for this group.
+6.  このグループのデータベースが複製されるセカンダリ クラスターとなるTiDB Cloud Dedicated クラスターを選択します。
 
-7. Select which databases you wish to replicate as part of this recovery group.
+7.  このリカバリ グループの一部としてレプリケートするデータベースを選択します。
 
-    > **Note**
+    > **注記**
     >
-    > When assigning databases to the group, you can select specific databases, or select all (non-system) databases on the primary cluster (current and future).
+    > グループにデータベースを割り当てるときは、特定のデータベースを選択するか、プライマリ クラスター (現在および将来) 上のすべての (システム以外の) データベースを選択できます。
     >
-    > - If you **Assign all databases (current and future)**, any future databases added to the cluster will be automatically included in this recovery group and replicated to the secondary cluster.
-    > - If you **Assign specific databases**, select the specific databases on the primary cluster that you want to replicate to the secondary cluster. If any databases are added to the primary cluster in the future, these new databases will not be automatically replicated as part of this recovery group.
-   >
-    > During the initial replication, due to the volume of data transferred, the online query performance at the primary or secondary clusters might be affected. Schedule the initial protection of databases for a less busy period.
-
-    > **Warning**
-    > 
-    > During the initial replication, the content of the selected databases at the primary cluster will replace the content of the databases at the secondary cluster. If you wish to preserve the unique content at the secondary cluster, complete a backup before setting up the recovery group.
-
-8. Review the summary information, and then click **Create** to begin protecting the databases as part of the new recovery group.
-
-## View recovery group details
-
-After creating a recovery group, you can view its status information on the **Recovery Group Detail** page:
-
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-
-2. In the **Project Settings** navigation pane, click **Recovery Group**.
-
-3. On the **Recovery Group** page, click the name of the recovery group that you wish to view.
-
-    The **Recovery Group Detail** page provides information about a recovery group, including its configuration details, status, and metrics on the replication throughput and latency. 
-
-4. When a replication relationship is fully established and functioning, the status is displayed as **Available**.
-
-    > **Warning**
+    > -   **すべてのデータベース (現在および将来) を割り当てる**と、クラスターに追加される将来のデータベースはすべてこのリカバリ グループに自動的に含まれ、セカンダリ クラスターに複製されます。
+    > -   **特定のデータベースを割り当てる**場合は、セカンダリ クラスターにレプリケートするプライマリ クラスター上の特定のデータベースを選択します。将来、プライマリ クラスターにデータベースが追加されても、これらの新しいデータベースはこのリカバリ グループの一部として自動的にレプリケートされません。
     >
-    > During the setup of a recovery group, an account named following the pattern `cloud-rg-*` will be created on the secondary cluster for the replication process. Deleting or modifying this account will interrupt the replication.
+    > 初期レプリケーション中は、転送されるデータの量により、プライマリ クラスターまたはセカンダリ クラスターでのオンライン クエリ パフォーマンスが影響を受ける可能性があります。データベースの初期保護は、あまり忙しくない期間にスケジュールしてください。
 
-## About resiliency levels
+    > **警告**
+    >
+    > 初期レプリケーション中に、プライマリ クラスターの選択されたデータベースの内容が、セカンダリ クラスターのデータベースの内容に置き換えられます。セカンダリ クラスターの一意の内容を保持する場合は、リカバリ グループを設定する前にバックアップを完了してください。
 
-A resiliency level defines the consistency characteristics of data reading in different scenarios of a recovery group. Currently, TiDB Cloud only provides the following resiliency level:
+8.  概要情報を確認し、 **[作成]**をクリックして、新しい回復グループの一部としてデータベースの保護を開始します。
 
-- No consistency guaranteed. During the replication of a recovery group, the downstream cluster does not guarantee transaction consistency read. When the upstream cluster becomes unavailable, you can not restore the data in the downstream cluster to a transaction consistency state.
+## 回復グループの詳細をビュー {#view-recovery-group-details}
 
-TiDB Cloud will provide two additional resiliency levels in the near future:
+リカバリ グループを作成した後、**リカバリ グループの詳細**ページでそのステータス情報を表示できます。
 
-- Eventual consistency. During the replication of a recovery group, the downstream cluster does not guarantee transaction consistency read. However, when the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
-- Near real-time consistency. During the replication of a recovery group, the downstream cluster provides approximately real-time transaction consistency read. When the upstream cluster becomes unavailable, you can restore the data in the downstream cluster to a transaction consistency state.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-left-projects">左下隅で、複数のプロジェクトがある場合は対象プロジェクトに切り替えて、 **[プロジェクト設定]**をクリックします。</mdsvgicon>
 
-## What's next
+2.  **プロジェクト設定**ナビゲーション ペインで、**回復グループ**をクリックします。
 
-After creating the recovery group, you might want to familiarize yourself with the failover and reprotect operations. These operations are used to **Failover** the primary cluster for the replicated databases from one cluster to the other, and then to later re-establish replication in the opposite direction to **Reprotect** the failed over databases.
+3.  **[回復グループ]**ページで、表示する回復グループの名前をクリックします。
 
-- [Failover and Reprotect Databases](/tidb-cloud/recovery-group-failover.md)
+    **リカバリ グループの詳細**ページには、リカバリ グループの構成の詳細、ステータス、レプリケーションのスループットとレイテンシーのメトリックなど、リカバリ グループに関する情報が表示されます。
+
+4.  レプリケーション関係が完全に確立され、機能している場合、ステータスは**「使用可能」**として表示されます。
+
+    > **警告**
+    >
+    > リカバリ グループのセットアップ中に、パターン`cloud-rg-*`に従って名前が付けられたアカウントがレプリケーション プロセス用のセカンダリ クラスターに作成されます。このアカウントを削除または変更すると、レプリケーションが中断されます。
+
+## 回復力レベルについて {#about-resiliency-levels}
+
+回復レベルは、リカバリ グループのさまざまなシナリオにおけるデータ読み取りの一貫性特性を定義します。現在、 TiDB Cloud は次の回復レベルのみを提供しています。
+
+-   一貫性は保証されません。リカバリ グループのレプリケーション中、ダウンストリーム クラスターはトランザクション一貫性読み取りを保証しません。アップストリーム クラスターが使用できなくなった場合、ダウンストリーム クラスターのデータをトランザクション一貫性状態に復元することはできません。
+
+TiDB Cloud は、近い将来、次の 2 つの追加の回復力レベルを提供する予定です。
+
+-   最終的な一貫性。リカバリ グループのレプリケーション中、ダウンストリーム クラスターはトランザクションの一貫性読み取りを保証しません。ただし、アップストリーム クラスターが使用できなくなった場合は、ダウンストリーム クラスターのデータをトランザクションの一貫性状態に復元できます。
+-   ほぼリアルタイムの一貫性。リカバリ グループのレプリケーション中、ダウンストリーム クラスターはほぼリアルタイムのトランザクション一貫性読み取りを提供します。アップストリーム クラスターが使用できなくなった場合は、ダウンストリーム クラスターのデータをトランザクション一貫性状態に復元できます。
+
+## 次は何か {#what-s-next}
+
+リカバリ グループを作成したら、フェールオーバーと再保護の操作について理解しておく必要があります。これらの操作は、レプリケートされたデータベースのプライマリ クラスターを 1 つのクラスターから別のクラスターに**フェールオーバーし**、その後、反対方向にレプリケーションを再確立して、フェールオーバーされたデータベースを**再保護する**ために使用されます。
+
+-   [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)

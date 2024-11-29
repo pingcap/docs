@@ -1,36 +1,36 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
-summary: Learn how to connect to TiDB Cloud Serverless from serverless and edge environments.
+summary: サーバーレス環境およびエッジ環境からTiDB Cloud Serverless に接続する方法を学習します。
 aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
-# TiDB Cloud Serverless Driver (Beta)
+# TiDB CloudサーバーレスDriver(ベータ版) {#tidb-cloud-serverless-driver-beta}
 
-## Why use TiDB Cloud Serverless Driver (Beta)
+## TiDB Cloud Serverless Driver (ベータ版) を使用する理由 {#why-use-tidb-cloud-serverless-driver-beta}
 
-Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
+従来の TCP ベースの MySQL ドライバーは、長寿命で永続的な TCP 接続を期待しているため、サーバーレス関数には適していません。これは、サーバーレス関数の短寿命の性質と矛盾しています。さらに、包括的な TCP サポートと完全な Node.js 互換性が欠如している可能性のある[Vercel エッジ機能](https://vercel.com/docs/functions/edge-functions)や[Cloudflare ワーカー](https://workers.cloudflare.com/)などのエッジ環境では、これらのドライバーがまったく機能しない可能性があります。
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Cloud Serverless cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to TiDB Cloud Serverless clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
+JavaScript 用の[TiDB Cloudサーバーレス ドライバー (ベータ版)](https://github.com/tidbcloud/serverless-js)使用すると、サーバーレス環境で一般的にサポートされている HTTP 経由でTiDB Cloud Serverless クラスターに接続できます。これにより、従来の TCP ベースの MySQL ドライバーと同様の開発エクスペリエンスを維持しながら、エッジ環境からTiDB Cloud Serverless クラスターに接続し、TCP による接続オーバーヘッドを削減できるようになりました。
 
-> **Note:**
+> **注記：**
 >
-> If you prefer programming with RESTful API rather than SQL or ORM, you can use [Data Service (beta)](/tidb-cloud/data-service-overview.md).
+> SQL や ORM ではなく RESTful API でプログラミングしたい場合は、 [データ サービス (ベータ版)](/tidb-cloud/data-service-overview.md)使用できます。
 
-## Install the serverless driver
+## サーバーレスドライバーをインストールする {#install-the-serverless-driver}
 
-You can install the driver with npm:
+npm を使用してドライバーをインストールできます。
 
 ```bash
 npm install @tidbcloud/serverless
 ```
 
-## Use the serverless driver
+## サーバーレスドライバーを使用する {#use-the-serverless-driver}
 
-You can use the serverless driver to query data of a TiDB Cloud Serverless cluster or perform interactive transactions.
+サーバーレス ドライバーを使用して、 TiDB Cloud Serverless クラスターのデータを照会したり、対話型トランザクションを実行したりできます。
 
-### Query
+### クエリ {#query}
 
-To query data from a TiDB Cloud Serverless cluster, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
+TiDB Cloud Serverless クラスターからデータをクエリするには、まず接続を作成する必要があります。次に、接続を使用して生の SQL クエリを実行できます。例:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -39,9 +39,9 @@ const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test where id = ?',[1])
 ```
 
-### Transaction (experimental)
+### トランザクション（実験的） {#transaction-experimental}
 
-You can also perform interactive transactions with the serverless driver. For example:
+サーバーレス ドライバーを使用して対話型トランザクションを実行することもできます。例:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -59,9 +59,9 @@ try {
 }
 ```
 
-## Edge examples
+## エッジの例 {#edge-examples}
 
-Here are some examples of using the serverless driver in edge environments. For a complete example, you can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
+エッジ環境でサーバーレス ドライバーを使用する例をいくつか示します。完全な例については、こちら[ライブデモ](https://github.com/tidbcloud/car-sales-insight)も試してください。
 
 <SimpleTab>
 
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-Learn more about [using TiDB Cloud serverless driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+[Vercel でTiDB Cloudサーバーレス ドライバーを使用する](/tidb-cloud/integrate-tidbcloud-with-vercel.md)について詳しく学びます。
 
 </div>
 
@@ -100,7 +100,7 @@ export default {
 };
 ```
 
-Learn more about [using TiDB Cloud serverless driver in Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
+[Cloudflare Workers でTiDB Cloudサーバーレス ドライバーを使用する](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)について詳しく学びます。
 
 </div>
 
@@ -116,7 +116,7 @@ export default async () => {
 }
 ```
 
-Learn more about [using TiDB Cloud serverless driver in Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
+[Netlify でTiDB Cloudサーバーレス ドライバーを使用する](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function)について詳しく学びます。
 
 </div>
 
@@ -144,33 +144,33 @@ const result = await conn.execute('show tables')
 
 </SimpleTab>
 
-## Configure the serverless driver
+## サーバーレスドライバーを構成する {#configure-the-serverless-driver}
 
-You can configure TiDB Cloud serverless driver at both the connection level and the SQL level.
+TiDB Cloudサーバーレス ドライバーは、接続レベルと SQL レベルの両方で構成できます。
 
-### Connection level configurations
+### 接続レベルの構成 {#connection-level-configurations}
 
-At the connection level, you can make the following configurations:
+接続レベルでは、次の構成を行うことができます。
 
-| Name         | Type     | Default value | Description                                                                                                                                                                                                                                                                                                                                                  |
-|--------------|----------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`   | string   | N/A           | Username of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `password`   | string   | N/A           | Password of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `host`       | string   | N/A           | Hostname of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `database`   | string   | `test`        | Database of TiDB Cloud Serverless                                                                                                                                                                                                                                                                                                                                  |
-| `url`        | string   | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database.                                                                                                                                                                                 |
-| `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                                                                                                                                               |
-| `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                         |
-| `fullResult` | bool     | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                                                                                                                                                   |
-| `decoders`   | object   | `{}`          | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. |
+| 名前           | タイプ | デフォルト値    | 説明                                                                                                                                                           |
+| ------------ | --- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `username`   | 弦   | 該当なし      | TiDB Cloud Serverlessのユーザー名                                                                                                                                  |
+| `password`   | 弦   | 該当なし      | TiDB Cloud Serverlessのパスワード                                                                                                                                  |
+| `host`       | 弦   | 該当なし      | TiDB Cloud Serverlessのホスト名                                                                                                                                   |
+| `database`   | 弦   | `test`    | TiDB Cloud Serverlessのデータベース                                                                                                                                 |
+| `url`        | 弦   | 該当なし      | データベースの URL は`mysql://[username]:[password]@[host]/[database]`形式で、デフォルトのデータベースに接続する場合は`database`スキップできます。                                                    |
+| `fetch`      | 関数  | グローバルフェッチ | カスタム フェッチ関数。たとえば、node.js の`undici`フェッチを使用できます。                                                                                                               |
+| `arrayMode`  | ブール | `false`   | 結果をオブジェクトではなく配列として返すかどうか。パフォーマンスを向上させるには、 `true`に設定します。                                                                                                      |
+| `fullResult` | ブール | `false`   | 行だけではなく完全な結果オブジェクトを返すかどうか。より詳細な結果を取得するには、 `true`に設定します。                                                                                                      |
+| `decoders`   | 物体  | `{}`      | キーと値のペアのコレクション。これにより、さまざまな列タイプのデコード プロセスをカスタマイズできます。各ペアでは、列タイプをキーとして指定し、対応する関数を値として指定できます。この関数は、 TiDB Cloudサーバーレス ドライバーから受信した生の文字列値を引数として受け取り、デコードされた値を返します。 |
 
-**Database URL**
+**データベースURL**
 
-> **Note:**
+> **注記：**
 >
-> If your username, password, or database name contains special characters, you must [percentage-encode](https://en.wikipedia.org/wiki/Percent-encoding) these characters when passing them by the URL. For example, the password `password1@//?` needs to be encoded as `password1%40%2F%2F%3F` in the URL.
+> ユーザー名、パスワード、またはデータベース名に特殊文字が含まれている場合は、URL で渡すときにこれらの文字を[パーセンテージエンコード](https://en.wikipedia.org/wiki/Percent-encoding)エンコードする必要があります。たとえば、パスワード`password1@//?` 、URL では`password1%40%2F%2F%3F`としてエンコードする必要があります。
 
-When `url` is configured, there is no need to configure `host`, `username`, `password`, and `database` separately. The following codes are equivalent:
+`url`設定されている場合、 `host` 、 `username` 、 `password` 、および`database`個別に設定する必要はありません。次のコードは同等です。
 
 ```ts
 const config = {
@@ -193,42 +193,42 @@ const config = {
 const conn = connect(config)
 ```
 
-### SQL level options
+### SQL レベル オプション {#sql-level-options}
 
-> **Note:**
+> **注記：**
 >
-> The SQL level options have a higher priority over connection level configurations.
+> SQL レベルのオプションは、接続レベルの構成よりも優先されます。
 
-At the SQL level, you can configure the following options:
+SQL レベルでは、次のオプションを構成できます。
 
-| Option       | Type   | Default value     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-|--------------|--------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `arrayMode`  | bool   | `false`           | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `fullResult` | bool   | `false`           | Whether to return the full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `isolation`  | string | `REPEATABLE READ` | The transaction isolation level, which can be set to `READ COMMITTED` or `REPEATABLE READ`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `decoders`   | object | `{}`              | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. If you have configured `decoders` at both the connection and SQL levels, the key-value pairs with different keys configured at the connection level will be merged to the SQL level to take effect. If the same key (this is, column type) is specified at both levels, the value at the SQL level takes precedence. |
+| オプション        | タイプ | デフォルト値            | 説明                                                                                                                                                                                                                                                                                                  |
+| ------------ | --- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `arrayMode`  | ブール | `false`           | 結果をオブジェクトではなく配列として返すかどうか。パフォーマンスを向上させるには、 `true`に設定します。                                                                                                                                                                                                                                             |
+| `fullResult` | ブール | `false`           | 行だけではなく、完全な結果オブジェクトを返すかどうか。より詳細な結果を取得するには、 `true`に設定します。                                                                                                                                                                                                                                            |
+| `isolation`  | 弦   | `REPEATABLE READ` | トランザクション分離レベル。 `READ COMMITTED`または`REPEATABLE READ`に設定できます。                                                                                                                                                                                                                                         |
+| `decoders`   | 物体  | `{}`              | キーと値のペアのコレクション。これにより、さまざまな列の種類のデコード処理をカスタマイズできます。各ペアでは、列の種類をキーとして指定し、対応する関数を値として指定できます。この関数は、 TiDB Cloudサーバーレス ドライバーから受け取った生の文字列値を引数として受け取り、デコードされた値を返します。接続レベルと SQL レベルの両方で`decoders`設定した場合、接続レベルで設定された異なるキーを持つキーと値のペアは、SQL レベルにマージされて有効になります。両方のレベルで同じキー (つまり、列の種類) が指定されている場合は、SQL レベルの値が優先されます。 |
 
-**arrayMode and fullResult**
+**arrayMode と fullResult**
 
-To return the full result object as arrays, you can configure the `arrayMode` and `fullResult` options as follows:
+完全な結果オブジェクトを配列として返すには、オプション`arrayMode`と`fullResult`次のように構成します。
 
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})
 ```
 
-**isolation**
+**分離**
 
-The `isolation` option can only be used in the `begin` function.
+`isolation`オプションは`begin`機能でのみ使用できます。
 
 ```ts
 const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const tx = await conn.begin({isolation:"READ COMMITTED"})
 ```
 
-**decoders**
+**デコーダー**
 
-To customize the format of returned column values, you can configure the `decoder` option in the `connect()` method as follows:
+返される列の値の形式をカスタマイズするには、 `connect()`メソッドの`decoder`オプションを次のように構成します。
 
 ```ts
 import { connect, ColumnType } from '@tidbcloud/serverless';
@@ -252,91 +252,91 @@ conn.execute(`select ...`, [], {
 })
 ```
 
-> **Note:**
+> **注記：**
 >
-> TiDB Cloud serverless driver configuration changes:
-> 
-> - v0.0.7: add the SQL level option `isolation`.
-> - v0.0.10: add the connection level configuration `decoders` and the SQL level option `decoders`.
-
-## Features
-
-### Supported SQL statements
-
-DDL is supported and the following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`, and `SET`.
-
-### Data type mapping
-
-The type mapping between TiDB Cloud Serverless and Javascript is as follows:
-
-| TiDB Cloud Serverless type | Javascript type |
-|----------------------|-----------------|
-| TINYINT              | number          |
-| UNSIGNED TINYINT     | number          |
-| BOOL                 | number          |
-| SMALLINT             | number          |
-| UNSIGNED SMALLINT    | number          |
-| MEDIUMINT            | number          |
-| INT                  | number          |
-| UNSIGNED INT         | number          |
-| YEAR                 | number          |
-| FLOAT                | number          |
-| DOUBLE               | number          |
-| BIGINT               | string          |
-| UNSIGNED BIGINT      | string          |
-| DECIMAL              | string          |
-| CHAR                 | string          |
-| VARCHAR              | string          |
-| BINARY               | Uint8Array      |
-| VARBINARY            | Uint8Array      |
-| TINYTEXT             | string          |
-| TEXT                 | string          |
-| MEDIUMTEXT           | string          |
-| LONGTEXT             | string          |
-| TINYBLOB             | Uint8Array      |
-| BLOB                 | Uint8Array      |
-| MEDIUMBLOB           | Uint8Array      |
-| LONGBLOB             | Uint8Array      |
-| DATE                 | string          |
-| TIME                 | string          |
-| DATETIME             | string          |
-| TIMESTAMP            | string          |
-| ENUM                 | string          |
-| SET                  | string          |
-| BIT                  | Uint8Array      |
-| JSON                 | object          |
-| NULL                 | null            |
-| Others               | string          |
-
-> **Note:**
+> TiDB Cloudサーバーレス ドライバー構成の変更:
 >
-> Make sure to use the default `utf8mb4` character set in TiDB Cloud Serverless for the type conversion to JavaScript strings, because TiDB Cloud serverless driver uses the UTF-8 encoding to decode them to strings. 
+> -   v0.0.7: SQL レベル オプション`isolation`を追加します。
+> -   v0.0.10: 接続レベルの構成`decoders`と SQL レベル オプション`decoders`を追加します。
 
-> **Note:**
+## 特徴 {#features}
+
+### サポートされているSQL文 {#supported-sql-statements}
+
+DDL がサポートされ`DELETE` `UPDATE` 、次の`SET`ステートメント`EXPLAIN`サポートされ`SHOW` `USE` `INSERT` `COMMIT` `SELECT` `BEGIN`および`ROLLBACK` 。
+
+### データ型マッピング {#data-type-mapping}
+
+TiDB Cloud Serverless と Javascript 間の型マッピングは次のとおりです。
+
+| TiDB Cloudサーバーレスタイプ | Javascriptタイプ |
+| ------------------- | ------------- |
+| 小さな                 | 番号            |
+| 符号なし TINYINT        | 番号            |
+| ブール                 | 番号            |
+| スモールイント             | 番号            |
+| 符号なし小整数             | 番号            |
+| ミディアムミント            | 番号            |
+| 内部                  | 番号            |
+| 符号なし整数              | 番号            |
+| 年                   | 番号            |
+| フロート                | 番号            |
+| ダブル                 | 番号            |
+| ビッグイント              | 弦             |
+| 符号なしBIGINT          | 弦             |
+| 小数点                 | 弦             |
+| 文字                  | 弦             |
+| バルチャー               | 弦             |
+| バイナリ                | Uint8配列       |
+| バイナリ                | Uint8配列       |
+| 小さなテキスト             | 弦             |
+| TEXT                | 弦             |
+| 中テキスト               | 弦             |
+| 長文                  | 弦             |
+| タイニーブロブ             | Uint8配列       |
+| ブロブ                 | Uint8配列       |
+| ミディアムブロブ            | Uint8配列       |
+| ロングロブ               | Uint8配列       |
+| 日付                  | 弦             |
+| 時間                  | 弦             |
+| 日時                  | 弦             |
+| タイムスタンプ             | 弦             |
+| 列挙                  | 弦             |
+| セット                 | 弦             |
+| 少し                  | Uint8配列       |
+| 翻訳                  | 物体            |
+| NULL                | ヌル            |
+| その他                 | 弦             |
+
+> **注記：**
 >
-> TiDB Cloud serverless driver data type mapping changes:
-> 
-> - v0.1.0: the `BINARY`, `VARBINARY`, `TINYBLOB`, `BLOB`, `MEDIUMBLOB`, `LONGBLOB`, and `BIT` types are now returned as a `Uint8Array` instead of a `string`.
+> TiDB Cloudサーバーレス ドライバーは UTF-8 エンコーディングを使用して JavaScript 文字列を文字列にデコードするため、JavaScript 文字列への型変換にはTiDB Cloudサーバーレスのデフォルトの`utf8mb4`文字セットを使用するようにしてください。
 
-### ORM integrations
+> **注記：**
+>
+> TiDB Cloudサーバーレス ドライバーのデータ型マッピングの変更:
+>
+> -   v0.1.0: `BINARY` 、 `VARBINARY` 、 `TINYBLOB` 、 `BLOB` 、 `MEDIUMBLOB` 、 `LONGBLOB` 、および`BIT`タイプは、 `string`ではなく`Uint8Array`として返されるようになりました。
 
-TiDB Cloud serverless driver has been integrated with the following ORMs:
+### ORM統合 {#orm-integrations}
 
-- [TiDB Cloud serverless driver Kysely dialect](https://github.com/tidbcloud/kysely).
-- [TiDB Cloud serverless driver Prisma adapter](https://github.com/tidbcloud/prisma-adapter).
+TiDB Cloudサーバーレス ドライバーは、次の ORM と統合されています。
 
-## Pricing
+-   [TiDB Cloudサーバーレス ドライバー Kysely 方言](https://github.com/tidbcloud/kysely) 。
+-   [TiDB Cloudサーバーレス ドライバー Prisma アダプター](https://github.com/tidbcloud/prisma-adapter) 。
 
-The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [TiDB Cloud Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
+## 価格 {#pricing}
 
-## Limitations
+サーバーレス ドライバー自体は無料ですが、ドライバーを使用してデータにアクセスすると[リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit)とstorage使用量が発生します。価格は[TiDB Cloud Serverless の価格](https://www.pingcap.com/tidb-serverless-pricing-details/)モデルに従います。
 
-Currently, using serverless driver has the following limitations:
+## 制限事項 {#limitations}
 
-- Up to 10,000 rows can be fetched in a single query.
-- You can execute only a single SQL statement at a time. Multiple SQL statements in one query are not supported yet.
-- Connection with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
+現在、サーバーレス ドライバーの使用には次の制限があります。
 
-## What's next
+-   1 回のクエリで最大 10,000 行を取得できます。
+-   一度に実行できる SQL ステートメントは 1 つだけです。1 つのクエリで複数の SQL ステートメントを実行することはまだサポートされていません。
+-   [プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)との接続はまだサポートされていません。
 
-- Learn how to [use TiDB Cloud serverless driver in a local Node.js project](/tidb-cloud/serverless-driver-node-example.md).
+## 次は何か {#what-s-next}
+
+-   [ローカル Node.js プロジェクトでTiDB Cloudサーバーレス ドライバーを使用する](/tidb-cloud/serverless-driver-node-example.md)方法を学びます。

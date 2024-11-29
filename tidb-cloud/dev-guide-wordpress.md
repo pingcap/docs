@@ -1,79 +1,79 @@
 ---
 title: Connect to TiDB Cloud Serverless with WordPress
-summary: Learn how to use TiDB Cloud Serverless to run WordPress. This tutorial gives step-by-step guidance to run WordPress + TiDB Cloud Serverless in a few minutes.
+summary: TiDB Cloud Serverless を使用して WordPress を実行する方法を学びます。このチュートリアルでは、数分で WordPress + TiDB Cloud Serverless を実行するための手順を説明します。
 ---
 
-# Connect to TiDB Cloud Serverless with WordPress
+# WordPress でTiDB Cloud Serverless に接続する {#connect-to-tidb-cloud-serverless-with-wordpress}
 
-TiDB is a MySQL-compatible database, TiDB Cloud Serverless is a fully managed TiDB offering, and [WordPress](https://github.com/WordPress) is a free, open-source content management system (CMS) that lets users create and manage websites. WordPress is written in PHP and uses a MySQL database.
+TiDB は MySQL 互換のデータベース、 TiDB Cloud Serverless は完全に管理された TiDB サービス、 [ワードプレス](https://github.com/WordPress)ユーザーが Web サイトを作成および管理できる無料のオープンソース コンテンツ管理システム (CMS) です。WordPress は PHP で記述されており、MySQL データベースを使用します。
 
-In this tutorial, you can learn how to use TiDB Cloud Serverless to run WordPress for free.
+このチュートリアルでは、 TiDB Cloud Serverless を使用して WordPress を無料で実行する方法を学ぶことができます。
 
-> **Note:**
+> **注記：**
 >
-> In addition to TiDB Cloud Serverless, this tutorial works with TiDB Cloud Dedicated and TiDB Self-Managed clusters as well. However, it is highly recommended to run WordPress with TiDB Cloud Serverless for cost efficiency.
+> このチュートリアルは、 TiDB Cloud Serverless に加えて、 TiDB Cloud Dedicated および TiDB Self-Managed クラスターでも機能します。ただし、コスト効率の観点から、WordPress はTiDB Cloud Serverless で実行することを強くお勧めします。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster if you don't have one.
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
-## Run WordPress with TiDB Cloud Serverless
+## TiDB Cloud Serverless で WordPress を実行する {#run-wordpress-with-tidb-cloud-serverless}
 
-This section demonstrates how to run WordPress with TiDB Cloud Serverless.
+このセクションでは、 TiDB Cloud Serverless を使用して WordPress を実行する方法を説明します。
 
-### Step 1: Clone the WordPress sample repository
+### ステップ1: WordPressサンプルリポジトリをクローンする {#step-1-clone-the-wordpress-sample-repository}
 
-Run the following commands in your terminal window to clone the sample code repository:
+サンプル コード リポジトリを複製するには、ターミナル ウィンドウで次のコマンドを実行します。
 
 ```shell
 git clone https://github.com/Icemap/wordpress-tidb-docker.git
 cd wordpress-tidb-docker
 ```
 
-### Step 2: Install dependencies
+### ステップ2: 依存関係をインストールする {#step-2-install-dependencies}
 
-1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start WordPress. If you have them installed, you can skip this step. It is highly recommended to run your WordPress in a Linux environment (such as Ubuntu). Run the following command to install Docker and Docker Compose:
+1.  サンプル リポジトリでは、WordPress を起動するために[ドッカー](https://www.docker.com/)と[Docker の作成](https://docs.docker.com/compose/)必要です。これらがインストールされている場合は、この手順をスキップできます。WordPress は Linux 環境 (Ubuntu など) で実行することを強くお勧めします。次のコマンドを実行して、Docker と Docker Compose をインストールします。
 
     ```shell
     sudo sh install.sh
     ```
 
-2. The sample repository includes the [TiDB Compatibility Plugin](https://github.com/pingcap/wordpress-tidb-plugin) as a submodule. Run the following command to update the submodule:
+2.  サンプル リポジトリにはサブモジュールとして[TiDB 互換性プラグイン](https://github.com/pingcap/wordpress-tidb-plugin)含まれています。サブモジュールを更新するには、次のコマンドを実行します。
 
     ```shell
     git submodule update --init --recursive
     ```
 
-### Step 3: Configure connection information
+### ステップ3: 接続情報を構成する {#step-3-configure-connection-information}
 
-Configure the WordPress database connection to TiDB Cloud Serverless.
+TiDB Cloud Serverless への WordPress データベース接続を構成します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    - **Connection Type** is set to `Public`.
-    - **Connect With** is set to `WordPress`.
-    - **Operating System** is set to `Debian/Ubuntu/Arch`.
-    - **Database** is set to the database you want to use—for example, `test`.
+    -   **接続タイプは**`Public`に設定されています。
+    -   **Connect With は**`WordPress`に設定されています。
+    -   **オペレーティング システムは**`Debian/Ubuntu/Arch`に設定されています。
+    -   **データベースは**、使用するデータベース（例： `test` ）に設定されます。
 
-4. Click **Generate Password** to create a random password.
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」**をクリックします。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
 
-5. Run the following command to copy `.env.example` and rename it to `.env`:
+5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
     ```shell
     cp .env.example .env
     ```
 
-6. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
+6.  対応する接続文字列をコピーして`.env`ファイルに貼り付けます。例の結果は次のようになります。
 
     ```dotenv
     TIDB_HOST='{HOST}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
@@ -83,26 +83,26 @@ Configure the WordPress database connection to TiDB Cloud Serverless.
     TIDB_DB_NAME='test'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog. By default, your TiDB Cloud Serverless comes with a `test` database. If you have already created another database in your TiDB Cloud Serverless cluster, you can replace `test` with your database name.
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメータに必ず置き換えてください。デフォルトでは、 TiDB Cloud Serverless には`test`データベースが付属しています。TiDB TiDB Cloud Serverless クラスターに別のデータベースを既に作成している場合は、 `test`データベース名に置き換えることができます。
 
-7. Save the `.env` file.
+7.  `.env`ファイルを保存します。
 
-### Step 4: Start WordPress with TiDB Cloud Serverless
+### ステップ4: TiDB Cloud ServerlessでWordPressを起動する {#step-4-start-wordpress-with-tidb-cloud-serverless}
 
-1. Execute the following command to run WordPress as a Docker container:
+1.  WordPress を Docker コンテナとして実行するには、次のコマンドを実行します。
 
     ```shell
     docker compose up -d
     ```
 
-2. Set up your WordPress site by visiting [localhost](http://localhost/) if you start the container on your local machine or `http://<your_instance_ip>` if the WordPress is running on a remote machine.
+2.  ローカル マシンでコンテナーを起動する場合は[ローカルホスト](http://localhost/)アクセスし、WordPress がリモート マシンで実行されている場合は`http://<your_instance_ip>`アクセスして、WordPress サイトをセットアップします。
 
-### Step 5: Confirm the database connection
+### ステップ5: データベース接続を確認する {#step-5-confirm-the-database-connection}
 
-1. Close the connection dialog for your cluster on the TiDB Cloud console, and open the **SQL Editor** page.
-2. Under the **Schemas** tab on the left, click the database you connected to Wordpress.
-3. Confirm that you now see the Wordpress tables (such as `wp_posts` and `wp_comments`) in the list of tables for that database.
+1.  TiDB Cloudコンソールでクラスターの接続ダイアログを閉じ、 **SQL エディター**ページを開きます。
+2.  左側の**「スキーマ」**タブで、Wordpress に接続したデータベースをクリックします。
+3.  そのデータベースのテーブルのリストに、Wordpress テーブル ( `wp_posts`や`wp_comments`など) が表示されていることを確認します。
 
-## Need help?
+## ヘルプが必要ですか? {#need-help}
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。

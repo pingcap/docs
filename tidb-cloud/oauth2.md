@@ -1,47 +1,47 @@
 ---
 title: OAuth 2.0
-summary: Learn about how to use OAuth 2.0 in TiDB Cloud.
+summary: TiDB Cloudで OAuth 2.0 を使用する方法について説明します。
 ---
 
-# OAuth 2.0
+# 認証局2.0 {#oauth-2-0}
 
-This document describes how to access TiDB Cloud using OAuth 2.0.
+このドキュメントでは、OAuth 2.0 を使用してTiDB Cloud にアクセスする方法について説明します。
 
-OAuth, which stands for Open Authorization, is an open standard authentication protocol that allows secure access to resources on behalf of a user. It provides a way for third-party applications to access user resources without exposing their credentials.
+OAuth (Open Authorization) は、ユーザーに代わってリソースへの安全なアクセスを可能にするオープン スタンダード認証プロトコルです。これにより、サードパーティ アプリケーションがユーザーの資格情報を公開することなく、ユーザー リソースにアクセスできるようになります。
 
-[OAuth 2.0](https://oauth.net/2/), the latest version of OAuth, has become the industry-standard protocol for authorization. Key benefits of OAuth 2.0 include:
+OAuth の最新バージョンである[認証局2.0](https://oauth.net/2/)は、認証の業界標準プロトコルになりました。OAuth 2.0 の主な利点は次のとおりです。
 
-- Security: By using token-based authentication, OAuth 2.0 minimizes the risk of password theft and unauthorized access.
-- Convenience: You can grant and revoke access to your data without managing multiple credentials.
-- Access control: You can specify the exact level of access granted to third-party applications, ensuring only necessary permissions are given.
+-   Security: トークンベースの認証を使用することで、OAuth 2.0 はパスワードの盗難や不正アクセスのリスクを最小限に抑えます。
+-   利便性: 複数の資格情報を管理することなく、データへのアクセスを許可したり取り消したりできます。
+-   アクセス制御: サードパーティ アプリケーションに付与されるアクセスの正確なレベルを指定し、必要な権限のみが付与されるようにすることができます。
 
-## OAuth grant types
+## OAuth 付与タイプ {#oauth-grant-types}
 
-The OAuth framework specifies several grant types for different use cases. TiDB Cloud supports two most common OAuth grant types: Device Code and Authorization Code.
+OAuth フレームワークは、さまざまなユースケースに対して複数の付与タイプを指定します。TiDB TiDB Cloud は、デバイス コードと認証コードという 2 つの最も一般的な OAuth 付与タイプをサポートしています。
 
-### Device Code grant type
+### デバイスコード付与タイプ {#device-code-grant-type}
 
-It is usually used by browserless or input-constrained devices in the device flow to exchange a previously obtained device code for an access token.
+これは通常、デバイス フロー内のブラウザーレス デバイスまたは入力が制限されたデバイスによって、以前に取得したデバイス コードをアクセス トークンと交換するために使用されます。
 
-### Authorization Code grant type
+### 認証コード付与タイプ {#authorization-code-grant-type}
 
-It is the most common OAuth 2.0 grant type, which enables both web apps and native apps to get an access token after a user authorizes an app.
+これは最も一般的な OAuth 2.0 付与タイプであり、ユーザーがアプリを承認した後、Web アプリとネイティブ アプリの両方がアクセス トークンを取得できるようになります。
 
-## Use OAuth to access TiDB Cloud
+## OAuthを使用してTiDB Cloudにアクセスする {#use-oauth-to-access-tidb-cloud}
 
-You can access TiDB Cloud CLI using the OAuth 2.0 Device Code grant type:
+OAuth 2.0 デバイス コード付与タイプを使用して、 TiDB Cloud CLI にアクセスできます。
 
-- [ticloud auth login](/tidb-cloud/ticloud-auth-login.md): Authenticate with TiDB Cloud
-- [ticloud auth logout](/tidb-cloud/ticloud-auth-logout.md): Log out of TiDB Cloud
+-   [ticloud 認証ログイン](/tidb-cloud/ticloud-auth-login.md) : TiDB Cloudで認証する
+-   [ticloud 認証ログアウト](/tidb-cloud/ticloud-auth-logout.md) : TiDB Cloudからログアウト
 
-If your app needs to access TiDB Cloud using OAuth, submit a request to [become a Cloud & Technology Partner](https://www.pingcap.com/partners/become-a-partner/) (select **Cloud & Technology Partner** in **Partner Program**). We will reach out to you.
+アプリが OAuth を使用してTiDB Cloud にアクセスする必要がある場合は、 [クラウド＆テクノロジーパートナーになる](https://www.pingcap.com/partners/become-a-partner/) (**パートナー プログラム**で**Cloud &amp; Technology Partner を**選択) にリクエストを送信してください。弊社からご連絡いたします。
 
-## View and revoke authorized OAuth apps
+## 承認された OAuth アプリのビューと取り消し {#view-and-revoke-authorized-oauth-apps}
 
-You can view the records for authorized OAuth applications in the TiDB Cloud console as follows:
+次のように、 TiDB Cloudコンソールで承認された OAuth アプリケーションのレコードを表示できます。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner.
-2. Click **Account Settings**.
-3. In the left navigation pane, click **Authorized OAuth Apps**. You can view authorized OAuth applications.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-top-account-settings">左下隅にあります。</mdsvgicon>
+2.  **[アカウント設定]を**クリックします。
+3.  左側のナビゲーション ペインで、 **[承認済み OAuth アプリ]**をクリックします。承認済み OAuth アプリケーションを表示できます。
 
-You can click **Revoke** to revoke your authorization at any time.
+**「取り消し」**をクリックすると、いつでも承認を取り消すことができます。

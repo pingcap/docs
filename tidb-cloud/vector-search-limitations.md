@@ -1,42 +1,42 @@
 ---
 title: Vector Search Limitations
-summary: Learn the limitations of the TiDB Vector Search.
+summary: TiDB ベクトル検索の制限について学習します。
 ---
 
-# Vector Search Limitations
+# ベクトル検索の制限 {#vector-search-limitations}
 
-This document describes the known limitations of TiDB Vector Search.
+このドキュメントでは、TiDB Vector Search の既知の制限について説明します。
 
-> **Note**
+> **注記**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
 
-## Vector data type limitations
+## ベクトルデータ型の制限 {#vector-data-type-limitations}
 
-- Each [vector](/tidb-cloud/vector-search-data-types.md) supports up to 16383 dimensions.
-- Vector data types cannot store `NaN`, `Infinity`, or `-Infinity` values.
-- Vector data types cannot store double-precision floating-point numbers. If you insert or store double-precision floating-point numbers in vector columns, TiDB converts them to single-precision floating-point numbers.
-- Vector columns cannot be used in primary keys, unique indexes, or partition keys. To accelerate the vector search performance, use [Vector Search Index](/tidb-cloud/vector-search-index.md).
-- A table can have multiple vector columns. However, there is [a limit on the total number of columns in a table](/tidb-limitations.md#limitations-on-a-single-table).
-- Currently, TiDB does not support dropping a vector column with a vector index. To drop such a column, drop the vector index first, then drop the vector column.
-- Currently, TiDB does not support modifying a vector column to other data types such as `JSON` and `VARCHAR`.
+-   [ベクター](/tidb-cloud/vector-search-data-types.md)最大 16383 次元をサポートします。
+-   ベクトル データ型では、 `NaN` 、 `Infinity` 、または`-Infinity`値を格納できません。
+-   ベクトル データ型では倍精度浮動小数点数を格納できません。ベクトル列に倍精度浮動小数点数を挿入または格納すると、TiDB はそれを単精度浮動小数点数に変換します。
+-   ベクトル列は、主キー、一意のインデックス、またはパーティション キーでは使用できません。ベクトル検索のパフォーマンスを高速化するには、 [ベクター検索インデックス](/tidb-cloud/vector-search-index.md)使用します。
+-   テーブルには複数のベクトル列を含めることができます。ただし、 [テーブル内の列の総数の制限](/tidb-limitations.md#limitations-on-a-single-table)あります。
+-   現在、TiDB はベクトル インデックスを持つベクトル列の削除をサポートしていません。このような列を削除するには、まずベクトル インデックスを削除し、次にベクトル列を削除します。
+-   現在、TiDB はベクター列を`JSON`や`VARCHAR`などの他のデータ型に変更することをサポートしていません。
 
-## Vector index limitations
+## ベクトルインデックスの制限 {#vector-index-limitations}
 
-- Vector index is used for vector search. It cannot accelerate other queries like range queries or equality queries. Thus, it is not possible to create a vector index on a non-vector column, or on multiple vector columns.
-- A table can have multiple vector indexes. However, there is [a limit on the total number of indexes in a table](/tidb-limitations.md#limitations-on-a-single-table).
-- Creating multiple vector indexes on the same column is allowed only if they use different distance functions.
-- Currently, only `VEC_COSINE_DISTANCE()` and `VEC_L2_DISTANCE()` are supported as the distance functions for vector indexes.
-- Currently, TiDB does not support dropping a vector column with a vector index. To drop such a column, drop the vector index first, then drop the vector column.
-- Currently, TiDB does not support setting vector index as [invisible](/sql-statements/sql-statement-alter-index.md).
+-   ベクトル インデックスはベクトル検索に使用されます。範囲クエリや等価クエリなどの他のクエリを高速化することはできません。したがって、ベクトル以外の列や複数のベクトル列にベクトル インデックスを作成することはできません。
+-   テーブルには複数のベクトル インデックスを設定できます。ただし、 [テーブル内のインデックスの総数の制限](/tidb-limitations.md#limitations-on-a-single-table)しかありません。
+-   同じ列に複数のベクトル インデックスを作成できるのは、異なる距離関数を使用する場合のみです。
+-   現在、ベクトル インデックスの距離関数としてサポートされているのは`VEC_COSINE_DISTANCE()`と`VEC_L2_DISTANCE()`のみです。
+-   現在、TiDB はベクトル インデックスを持つベクトル列の削除をサポートしていません。このような列を削除するには、まずベクトル インデックスを削除し、次にベクトル列を削除します。
+-   現在、TiDB はベクトル インデックスを[見えない](/sql-statements/sql-statement-alter-index.md)に設定することをサポートしていません。
 
-## Compatibility with TiDB tools
+## TiDBツールとの互換性 {#compatibility-with-tidb-tools}
 
-- The Data Migration feature in the TiDB Cloud console does not support migrating or replicating MySQL 9.0 vector data types to TiDB Cloud.
+-   TiDB Cloudコンソールのデータ移行機能では、MySQL 9.0 ベクトル データ型のTiDB Cloudへの移行または複製はサポートされていません。
 
-## Feedback
+## フィードバック {#feedback}
 
-We value your feedback and are always here to help:
+私たちはあなたのフィードバックを大切にしており、いつでもお手伝いいたします。
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
-- [Visit our Support Portal](https://tidb.support.pingcap.com/)
+-   [Discordに参加する](https://discord.gg/zcqexutz2R)
+-   [サポートポータルにアクセス](https://tidb.support.pingcap.com/)

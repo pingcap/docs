@@ -1,113 +1,113 @@
 ---
 title: Manage Budgets for TiDB Cloud
-summary: Learn about how to use the budget feature of TiDB Cloud to monitor your costs.
+summary: TiDB Cloudの予算機能を使用してコストを監視する方法について説明します。
 ---
 
-# Manage Budgets for TiDB Cloud
+# TiDB Cloudの予算管理 {#manage-budgets-for-tidb-cloud}
 
-In TiDB Cloud, you can use the budget feature to monitor your costs and keep your spending under control.
+TiDB Cloudでは、予算機能を使用してコストを監視し、支出を管理することができます。
 
-When your monthly actual costs exceed the percentage thresholds of your specified budget, alert emails are sent to your organization owners and billing administrators. These notifications help you stay informed and take proactive measures to manage your spending, aligning your expenses with your budget.
+月々の実際の費用が指定した予算の割合のしきい値を超えると、組織の所有者と課金管理者に警告メールが送信されます。これらの通知により、情報を入手し、支出を管理するための積極的な対策を講じて、経費を予算に合わせることができます。
 
-TiDB Cloud provides two types of budgets to help you track your spending:
+TiDB Cloud は、支出を追跡するのに役立つ 2 種類の予算を提供します。
 
-- **Serverless Spending Limit** budget: for each TiDB Cloud Serverless scalable cluster, TiDB Cloud automatically creates a **Serverless Spending Limit** budget. This budget helps you track the actual cost against the [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) configured on that cluster. It includes three threshold rules: 75%, 90%, and 100% of the budget, which are not editable.
+-   **サーバーレス支出制限**予算: TiDB Cloud Serverless スケーラブル クラスターごとに、 TiDB Cloud は**サーバーレス支出制限**予算を自動的に作成します。この予算は、そのクラスターで構成されている[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)の予算に対する実際のコストを追跡するのに役立ちます。予算の 75%、90%、100% の 3 つのしきい値ルールが含まれており、編集できません。
 
-- **Custom** budget: you can create custom budgets to track actual costs for an entire organization or specific projects. For each budget, you can specify a budget scope, set a target spending amount, and configure alert thresholds. After creating a custom budget, you can compare your monthly actual costs with your planned costs to ensure you stay within budget.
+-   **カスタム**予算: カスタム予算を作成して、組織全体または特定のプロジェクトの実際のコストを追跡できます。予算ごとに、予算の範囲を指定し、目標支出額を設定し、アラートしきい値を構成できます。カスタム予算を作成したら、毎月の実際のコストと計画コストを比較して、予算内に収まるようにすることができます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To view, create, edit, or delete budgets of your organization or projects, you must be in the `Organization Owner` or `Organization Billing Admin` role of your organization.
+組織またはプロジェクトの予算を表示、作成、編集、または削除するには、組織の`Organization Owner`または`Organization Billing Admin`ロールを持っている必要があります。
 
-## View the budget information
+## 予算情報をビュー {#view-the-budget-information}
 
-To view the budget page of your organization, take the following steps:
+組織の予算ページを表示するには、次の手順を実行します。
 
-1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+1.  TiDB Cloudコンソールの左下隅で、<mdsvgicon name="icon-top-organization">をクリックし、 **「請求」を**クリックします。</mdsvgicon>
 
-    > **Note:**
+    > **注記：**
     >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
+    > 複数の組織に所属している場合は、組織名をクリックして対象の組織に切り替えます。
 
-2. On the **Billing** page, click the **Budgets** tab.
+2.  **「請求」**ページで、 **「予算」**タブをクリックします。
 
-For each budget, you can view its name, type, status, amount used, budget amount, period, and scope.
+各予算について、名前、タイプ、ステータス、使用額、予算額、期間、範囲を表示できます。
 
-## Create a custom budget
+## カスタム予算を作成する {#create-a-custom-budget}
 
-To create a custom budget to monitor the spending of your organization or specific projects, take the following steps:
+組織または特定のプロジェクトの支出を監視するためのカスタム予算を作成するには、次の手順を実行します。
 
-1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+1.  TiDB Cloudコンソールの左下隅で、<mdsvgicon name="icon-top-organization">をクリックし、 **「請求」を**クリックします。</mdsvgicon>
 
-    > **Note:**
+    > **注記：**
     >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
+    > 複数の組織に所属している場合は、組織名をクリックして対象の組織に切り替えます。
 
-2. On the **Billing** page, click the **Budgets** tab.
+2.  **「請求」**ページで、 **「予算」**タブをクリックします。
 
-3. On the **Budgets** page, click **Create Custom Budget**. You can create up to five custom budgets.
+3.  **「予算」**ページで、 **「カスタム予算の作成」**をクリックします。最大 5 つのカスタム予算を作成できます。
 
-4. Provide the budget basic settings.
+4.  予算の基本設定を提供します。
 
-    - **Name**: enter a name for the budget.
-    - **Period**: select a time range for tracking costs. Currently, you can only select **Monthly**, which starts on the first day of each month and resets at the beginning of each month. TiDB Cloud tracks your actual spending during the time range against your budget amount (your planned spending).
-    - **Budget scope**: apply the scope to all projects (which means the entire TiDB Cloud organization) or a specific project as needed.
+    -   **名前**: 予算の名前を入力します。
+    -   **期間**: コストを追跡する期間を選択します。現在選択できるのは、毎月 1 日に開始し、毎月初めにリセットされる**「月次」**のみです。TiDB TiDB Cloud は、期間内の実際の支出を予算額 (計画支出) と比較して追跡します。
+    -   **予算範囲**: 必要に応じて、すべてのプロジェクト (つまり、 TiDB Cloud組織全体) または特定のプロジェクトに範囲を適用します。
 
-5. Set the budget amount.
+5.  予算金額を設定します。
 
-    - **Budget Amount**: enter a planned spending amount for the selected period.
-    - **Apply credits**: choose whether to apply credits to the running total cost. Credits are used to reduce the cost of your TiDB Cloud usage. When this option is enabled, the budget tracks the running total cost minus credits.
-    - **Apply discounts**: choose whether to apply discounts to the running total cost. Discounts are reductions in the regular price of TiDB Cloud service. When this option is enabled, the budget tracks the running total cost minus discounts.
+    -   **予算金額**: 選択した期間の予定支出金額を入力します。
+    -   **クレジットを適用**: 実行中の総コストにクレジットを適用するかどうかを選択します。クレジットは、 TiDB Cloud の使用コストを削減するために使用されます。このオプションを有効にすると、予算は実行中の総コストからクレジットを差し引いたものを追跡します。
+    -   **割引を適用**: 実行中の合計コストに割引を適用するかどうかを選択します。割引は、 TiDB Cloudサービスの通常価格の割引です。このオプションを有効にすると、予算は割引を差し引いた実行中の合計コストを追跡します。
 
-6. Configure alert thresholds for the budget. If your actual spending exceeds specified thresholds during the selected period, TiDB Cloud sends a budget notification email to your organization owners and billing administrators.
+6.  予算のアラートしきい値を設定します。選択した期間中に実際の支出が指定されたしきい値を超えた場合、 TiDB Cloud は組織の所有者と課金管理者に予算通知メールを送信します。
 
-    - By default, TiDB Cloud provides three alert thresholds: 75%, 90%, and 100% of the budget amount. You can modify these percentages as needed.
-    - To add a new alert threshold, click **Add alert threshold.**
-    - To remove a threshold, click the delete icon next to the threshold.
+    -   デフォルトでは、 TiDB Cloud は予算額の 75%、90%、100% の 3 つのアラートしきい値を提供します。必要に応じてこれらのパーセンテージを変更できます。
+    -   新しいアラートしきい値を追加するには、 **「アラートしきい値の追加」をクリックします。**
+    -   しきい値を削除するには、しきい値の横にある削除アイコンをクリックします。
 
-7. Click **Create**.
+7.  **[作成]**をクリックします。
 
-## Edit a custom budget
+## カスタム予算を編集する {#edit-a-custom-budget}
 
-> **Note:**
+> **注記：**
 >
-> The **Serverless Spending Limit** budget cannot be edited because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Cloud Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
+> **サーバーレス支出制限の**予算は、TiDB Cloudによって自動的に作成され、 TiDB Cloud Serverless スケーラブル クラスターのコストを[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)に対して追跡できるようにするために編集できません。
 
-To edit a custom budget, take the following steps:
+カスタム予算を編集するには、次の手順を実行します。
 
-1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+1.  TiDB Cloudコンソールの左下隅で、<mdsvgicon name="icon-top-organization">をクリックし、 **「請求」を**クリックします。</mdsvgicon>
 
-    > **Note:**
+    > **注記：**
     >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
+    > 複数の組織に所属している場合は、組織名をクリックして対象の組織に切り替えます。
 
-2. On the **Billing** page, click the **Budgets** tab.
+2.  **「請求」**ページで、 **「予算」**タブをクリックします。
 
-3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Edit**.
+3.  「**予算」**ページで、予算の行を見つけて、その行の**「...」**をクリックし、 **「編集」**をクリックします。
 
-4. Edit the budget name, budget scope, budget amount, and alert thresholds as needed.
+4.  必要に応じて、予算名、予算範囲、予算金額、アラートしきい値を編集します。
 
-    > **Note:**
+    > **注記：**
     >
-    > Editing the budget period and whether to apply credits and discounts is not supported.
+    > 予算期間の編集、およびクレジットと割引を適用するかどうかの編集はサポートされていません。
 
-5. Click **Update**.
+5.  **[更新]**をクリックします。
 
-## Delete a custom budget
+## カスタム予算を削除する {#delete-a-custom-budget}
 
-> **Note:**
+> **注記：**
 >
-> - Once a custom budget is deleted, you will no longer receive any alert emails related to it.
-> - The **Serverless Spending Limit** budget cannot be deleted because it is automatically created by TiDB Cloud to help you track the cost of a TiDB Cloud Serverless scalable cluster against its [spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
+> -   カスタム予算を削除すると、それに関連するアラートメールは受信されなくなります。
+> -   **サーバーレス支出制限**予算は、TiDB Cloudによって自動的に作成され、 TiDB Cloud Serverless スケーラブル クラスターのコストを[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)に対して追跡できるようにするために作成されているため、削除できません。
 
-To delete a custom budget, take the following steps:
+カスタム予算を削除するには、次の手順を実行します。
 
-1. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+1.  TiDB Cloudコンソールの左下隅で、<mdsvgicon name="icon-top-organization">をクリックし、 **「請求」を**クリックします。</mdsvgicon>
 
-    > **Note:**
+    > **注記：**
     >
-    > If you are in multiple organizations, switch to your target organization by clicking its name.
+    > 複数の組織に所属している場合は、組織名をクリックして対象の組織に切り替えます。
 
-2. On the **Billing** page, click the **Budgets** tab.
+2.  **「請求」**ページで、 **「予算」**タブをクリックします。
 
-3. On the **Budgets** page, locate the row of your budget, click **...** in that row, and then click **Delete**.
+3.  **[予算]**ページで、予算の行を見つけて、その行の**[...]**をクリックし、 **[削除]**をクリックします。

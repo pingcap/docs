@@ -1,36 +1,36 @@
 ---
 title: Vector Data Types
-summary: Learn about the Vector data types in TiDB.
+summary: TiDB の Vector データ型について学習します。
 ---
 
-# Vector Data Types
+# ベクトルデータ型 {#vector-data-types}
 
-A vector is a sequence of floating-point numbers, such as `[0.3, 0.5, -0.1, ...]`. TiDB offers Vector data types, specifically optimized for efficiently storing and querying vector embeddings widely used in AI applications.
+ベクトルは、 `[0.3, 0.5, -0.1, ...]`などの浮動小数点数のシーケンスです。TiDB は、AI アプリケーションで広く使用されているベクトル埋め込みを効率的に保存および照会するために特別に最適化されたベクトル データ型を提供します。
 
-The following Vector data types are currently available:
+現在、次のベクター データ型が利用可能です。
 
-- `VECTOR`: A sequence of single-precision floating-point numbers with any dimension.
-- `VECTOR(D)`: A sequence of single-precision floating-point numbers with a fixed dimension `D`.
+-   `VECTOR` : 任意の次元を持つ単精度浮動小数点数のシーケンス。
+-   `VECTOR(D)` : 固定次元`D`の単精度浮動小数点数のシーケンス。
 
-Using vector data types provides the following advantages over using the [`JSON`](/data-type-json.md) type:
+ベクトル データ型を使用すると、 [`JSON`](/data-type-json.md)型を使用する場合に比べて次の利点があります。
 
-- Vector index support: You can build a [vector search index](/tidb-cloud/vector-search-index.md) to speed up vector searching.
-- Dimension enforcement: You can specify a dimension to forbid inserting vectors with different dimensions.
-- Optimized storage format: Vector data types are optimized for handling vector data, offering better space efficiency and performance compared to `JSON` types.
+-   ベクトル インデックスのサポート: ベクトルの検索を高速化するために[ベクトル検索インデックス](/tidb-cloud/vector-search-index.md)構築できます。
+-   次元の強制: 異なる次元のベクトルの挿入を禁止する次元を指定できます。
+-   最適化されたstorage形式: ベクター データ型はベクター データの処理に最適化されており、 `JSON`型と比較して優れたスペース効率とパフォーマンスを提供します。
 
-> **Note**
+> **注記**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
 
-## Syntax
+## 構文 {#syntax}
 
-You can use a string in the following syntax to represent a Vector value:
+次の構文の文字列を使用して Vector 値を表すことができます。
 
 ```sql
 '[<float>, <float>, ...]'
 ```
 
-Example:
+例：
 
 ```sql
 CREATE TABLE vector_table (
@@ -43,27 +43,27 @@ INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]');
 INSERT INTO vector_table VALUES (2, NULL);
 ```
 
-Inserting vector values with invalid syntax will result in an error:
+無効な構文でベクトル値を挿入すると、エラーが発生します。
 
 ```sql
 [tidb]> INSERT INTO vector_table VALUES (3, '[5, ]');
 ERROR 1105 (HY000): Invalid vector text: [5, ]
 ```
 
-In the following example, because dimension `3` is enforced for the `embedding` column when the table is created, inserting a vector with a different dimension will result in an error:
+次の例では、テーブルの作成時に`embedding`列に次元`3`が強制されるため、異なる次元のベクトルを挿入するとエラーが発生します。
 
 ```sql
 [tidb]> INSERT INTO vector_table VALUES (4, '[0.3, 0.5]');
 ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 ```
 
-For available functions and operators over the vector data types, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
+ベクトルデータ型で使用可能な関数と演算子については、 [ベクトル関数と演算子](/tidb-cloud/vector-search-functions-and-operators.md)参照してください。
 
-For more information about building and using a vector search index, see [Vector Search Index](/tidb-cloud/vector-search-index.md).
+ベクター検索インデックスの構築と使用の詳細については、 [ベクター検索インデックス](/tidb-cloud/vector-search-index.md)参照してください。
 
-## Store vectors with different dimensions
+## 異なる次元のベクトルを保存する {#store-vectors-with-different-dimensions}
 
-You can store vectors with different dimensions in the same column by omitting the dimension parameter in the `VECTOR` type:
+`VECTOR`型の次元パラメータを省略すると、異なる次元のベクトルを同じ列に格納できます。
 
 ```sql
 CREATE TABLE vector_table (
@@ -75,29 +75,29 @@ INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]'); -- 3 dimensions vector,
 INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector, OK
 ```
 
-However, note that you cannot build a [vector search index](/tidb-cloud/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
+ただし、ベクトル距離は同じ次元のベクトル間でのみ計算できるため、この列に[ベクトル検索インデックス](/tidb-cloud/vector-search-index.md)構築できないことに注意してください。
 
-## Comparison
+## 比較 {#comparison}
 
-You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
+[比較演算子](/functions-and-operators/operators.md)使用して、 `=` 、 `!=` 、 `<` 、 `>` 、 `<=` 、 `>=`などのベクトル データ型を比較できます。ベクトル データ型の比較演算子と関数の完全なリストについては、 [ベクトル関数と演算子](/tidb-cloud/vector-search-functions-and-operators.md)参照してください。
 
-Vector data types are compared element-wise numerically. For example:
+ベクトル データ型は要素ごとに数値的に比較されます。例:
 
-- `[1] < [12]`
-- `[1,2,3] < [1,2,5]`
-- `[1,2,3] = [1,2,3]`
-- `[2,2,3] > [1,2,3]`
+-   `[1] < [12]`
+-   `[1,2,3] < [1,2,5]`
+-   `[1,2,3] = [1,2,3]`
+-   `[2,2,3] > [1,2,3]`
 
-Two vectors with different dimensions are compared using lexicographical comparison, with the following rules:
+異なる次元を持つ 2 つのベクトルは、次の規則に従って辞書式比較を使用して比較されます。
 
-- Two vectors are compared element by element from the start, and each element is compared numerically.
-- The first mismatching element determines which vector is lexicographically _less_ or _greater_ than the other.
-- If one vector is a prefix of another, the shorter vector is lexicographically _less_ than the other. For example, `[1,2,3] < [1,2,3,0]`.
-- Vectors of the same length with identical elements are lexicographically _equal_.
-- An empty vector is lexicographically _less_ than any non-empty vector. For example, `[] < [1]`.
-- Two empty vectors are lexicographically _equal_.
+-   2 つのベクトルは最初から要素ごとに比較され、各要素は数値的に比較されます。
+-   最初の不一致要素によって、どのベクトルが辞書式に他より*小さい*か*大きいかが*決まります。
+-   あるベクトルが別のベクトルの接頭辞である場合、短いベクトルは辞書順で他のベクトルより*小さくなり*ます。たとえば、 `[1,2,3] < [1,2,3,0]`です。
+-   同じ長さで要素が同一のベクトルは辞書的に*等しい*。
+-   空のベクトルは、辞書式に空でないベクトルよりも*小さくなります*。たとえば、 `[] < [1]`です。
+-   2 つの空のベクトルは辞書的に*等しい*です。
 
-When comparing vector constants, consider performing an [explicit cast](#cast) from string to vector to avoid comparisons based on string values:
+ベクトル定数を比較する場合は、文字列値に基づく比較を避けるために、文字列からベクトルへの[明示的なキャスト](#cast)実行を検討してください。
 
 ```sql
 -- Because string is given, TiDB is comparing strings:
@@ -119,11 +119,11 @@ When comparing vector constants, consider performing an [explicit cast](#cast) f
 1 row in set (0.01 sec)
 ```
 
-## Arithmetic
+## 算術 {#arithmetic}
 
-Vector data types support arithmetic operations `+` (addition) and `-` (subtraction). However, arithmetic operations between vectors with different dimensions are not supported and will result in an error.
+ベクトル データ型は、算術演算`+` (加算) と`-` (減算) をサポートします。ただし、異なる次元のベクトル間の算術演算はサポートされていないため、エラーが発生します。
 
-Examples:
+例:
 
 ```sql
 [tidb]> SELECT VEC_FROM_TEXT('[4]') + VEC_FROM_TEXT('[5]');
@@ -146,18 +146,18 @@ Examples:
 ERROR 1105 (HY000): vectors have different dimensions: 1 and 3
 ```
 
-## Cast
+## キャスト {#cast}
 
-### Cast between Vector ⇔ String
+### ベクトル ⇨ 文字列間のキャスト {#cast-between-vector-string}
 
-To cast between Vector and String, use the following functions:
+Vector と String 間でキャストするには、次の関数を使用します。
 
-- `CAST(... AS VECTOR)`: String ⇒ Vector
-- `CAST(... AS CHAR)`: Vector ⇒ String
-- `VEC_FROM_TEXT`: String ⇒ Vector
-- `VEC_AS_TEXT`: Vector ⇒ String
+-   `CAST(... AS VECTOR)` : 文字列 ⇒ ベクトル
+-   `CAST(... AS CHAR)` : ベクトル ⇒ 文字列
+-   `VEC_FROM_TEXT` : 文字列 ⇒ ベクトル
+-   `VEC_AS_TEXT` : ベクトル ⇒ 文字列
 
-To improve usability, if you call a function that only supports vector data types, such as a vector correlation distance function, you can also just pass in a format-compliant string. TiDB automatically performs an implicit cast in this case.
+使いやすさを向上させるために、ベクトル相関距離関数などのベクトル データ型のみをサポートする関数を呼び出す場合は、形式に準拠した文字列を渡すこともできます。この場合、TiDB は自動的に暗黙的なキャストを実行します。
 
 ```sql
 -- The VEC_DIMS function only accepts VECTOR arguments, so you can directly pass in a string for an implicit cast.
@@ -188,7 +188,7 @@ To improve usability, if you call a function that only supports vector data type
 1 row in set (0.01 sec)
 ```
 
-When using an operator or function that accepts multiple data types, you need to explicitly cast the string type to the vector type before passing the string to that operator or function, because TiDB does not perform implicit casts in this case. For example, before performing comparison operations, you need to explicitly cast strings to vectors; otherwise, TiDB compares them as string values rather than as vector numeric values:
+複数のデータ型を受け入れる演算子または関数を使用する場合、TiDB はこの場合暗黙的なキャストを実行しないため、文字列をその演算子または関数に渡す前に、文字列型をベクター型に明示的にキャストする必要があります。たとえば、比較演算を実行する前に、文字列をベクターに明示的にキャストする必要があります。そうしないと、TiDB はそれらをベクター数値ではなく文字列値として比較します。
 
 ```sql
 -- Because string is given, TiDB is comparing strings:
@@ -210,7 +210,7 @@ When using an operator or function that accepts multiple data types, you need to
 1 row in set (0.01 sec)
 ```
 
-You can also explicitly cast a vector to its string representation. Take using the `VEC_AS_TEXT()` function as an example:
+ベクトルを明示的に文字列表現にキャストすることもできます。1 `VEC_AS_TEXT()`を例に挙げてみましょう。
 
 ```sql
 -- The string is first implicitly cast to a vector, and then the vector is explicitly cast to a string, thus returning a string in the normalized format:
@@ -223,24 +223,24 @@ You can also explicitly cast a vector to its string representation. Take using t
 1 row in set (0.01 sec)
 ```
 
-For additional cast functions, see [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md).
+追加のキャスト関数については、 [ベクトル関数と演算子](/tidb-cloud/vector-search-functions-and-operators.md)参照してください。
 
-### Cast between Vector ⇔ other data types
+### ベクター と 他のデータ型間のキャスト {#cast-between-vector-other-data-types}
 
-Currently, direct casting between Vector and other data types (such as `JSON`) is not supported. To work around this limitation, use String as an intermediate data type for casting in your SQL statement.
+現在、 Vector と他のデータ型 ( `JSON`など) 間の直接キャストはサポートされていません。この制限を回避するには、SQL ステートメントでキャストするための中間データ型として String を使用します。
 
-Note that vector data type columns stored in a table cannot be converted to other data types using `ALTER TABLE ... MODIFY COLUMN ...`.
+テーブルに格納されているベクトル データ型の列は、 `ALTER TABLE ... MODIFY COLUMN ...`使用して他のデータ型に変換できないことに注意してください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-See [Vector data type limitations](/tidb-cloud/vector-search-limitations.md#vector-data-type-limitations).
+[ベクトルデータ型の制限](/tidb-cloud/vector-search-limitations.md#vector-data-type-limitations)参照。
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-Vector data types are TiDB specific, and are not supported in MySQL.
+ベクトル データ型は TiDB 固有であり、MySQL ではサポートされていません。
 
-## See also
+## 参照 {#see-also}
 
-- [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
-- [Improve Vector Search Performance](/tidb-cloud/vector-search-improve-performance.md)
+-   [ベクトル関数と演算子](/tidb-cloud/vector-search-functions-and-operators.md)
+-   [ベクター検索インデックス](/tidb-cloud/vector-search-index.md)
+-   [ベクトル検索のパフォーマンスを向上させる](/tidb-cloud/vector-search-improve-performance.md)

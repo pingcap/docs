@@ -1,13 +1,13 @@
 ---
 title: SHOW PROFILES
-summary: An overview of the usage of SHOW PROFILES for the TiDB database.
+summary: TiDB データベースの SHOW PROFILES の使用法の概要。
 ---
 
-# SHOW PROFILES
+# プロフィールを表示 {#show-profiles}
 
-The `SHOW PROFILES` statement currently only returns an empty result.
+`SHOW PROFILES`ステートメントは現在、空の結果のみを返します。
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowProfilesStmt ::=
@@ -18,18 +18,16 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 SHOW PROFILES;
 ```
 
-```
-Empty set (0.00 sec)
-```
+    Empty set (0.00 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is included only for compatibility with MySQL. Executing `SHOW PROFILES` always returns an empty result.
+このステートメントは、MySQL との互換性のためだけに含まれています。1 `SHOW PROFILES`実行すると、常に空の結果が返されます。
 
-As an alternative, TiDB provides [statement summary tables](/statement-summary-tables.md) to help understand SQL performance issues.
+代替として、TiDB は SQL パフォーマンスの問題を理解するのに役立つ[ステートメント要約表](/statement-summary-tables.md)を提供します。

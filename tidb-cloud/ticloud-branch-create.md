@@ -1,56 +1,56 @@
 ---
 title: ticloud serverless branch create
-summary: The reference of `ticloud serverless branch create`.
+summary: ticloud serverless branch create` のリファレンス。
 ---
 
-# ticloud serverless branch create
+# ticloud サーバーレス ブランチ作成 {#ticloud-serverless-branch-create}
 
-Create a [branch](/tidb-cloud/branch-overview.md) for a TiDB Cloud Serverless cluster:
+TiDB Cloud Serverless クラスターの[支店](/tidb-cloud/branch-overview.md)作成します。
 
 ```shell
 ticloud serverless branch create [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a branch for a TiDB Cloud Serverless cluster in interactive mode:
+インタラクティブ モードでTiDB Cloud Serverless クラスターのブランチを作成します。
 
 ```shell
 ticloud serverless branch create
 ```
 
-Create a branch for a TiDB Cloud Serverless cluster in non-interactive mode:
+非対話モードでTiDB Cloud Serverless クラスターのブランチを作成します。
 
 ```shell
 ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name>
 ```
 
-Create a branch from another branch with a specified timestamp in non-interactive mode:
+非対話モードで、指定されたタイムスタンプを持つ別のブランチからブランチを作成します。
 
 ```shell
 ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name> --parent-id <parent-branch-id> --parent-timestamp <parent-timestamp>
 ```
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
-| Flag                      | Description                                                                                               | Required | Note                                                |
-|---------------------------|-----------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------|
-| -c, --cluster-id string   | Specifies the ID of the cluster, in which the branch will be created.                                     | Yes      | Only works in non-interactive mode.                 |
-| -n, --display-name string | Specifies the name of the branch to be created.                                                           | Yes      | Only works in non-interactive mode.                 |
-| --parent-id string        | Specifies the ID of the branch parent. The default value is the cluster ID.                                                       | No       | Only works in non-interactive mode.                 |
-| --parent-timestamp string | Specifies the timestamp of the parent branch in RFC3339 format, such as `2024-01-01T00:00:00Z`. The default value is the current time.  | No       | Only works in non-interactive mode.                 |
-| -h, --help                | Shows help information for this command.                                                                  | No       | Works in both non-interactive and interactive modes |
+| フラグ                    | 説明                                                                          | 必須  | 注記                                |
+| ---------------------- | --------------------------------------------------------------------------- | --- | --------------------------------- |
+| -c, --cluster-id 文字列   | ブランチが作成されるクラスターの ID を指定します。                                                 | はい  | 非対話型モードでのみ動作します。                  |
+| -n, --display-name 文字列 | 作成するブランチの名前を指定します。                                                          | はい  | 非対話型モードでのみ動作します。                  |
+| --親ID文字列               | ブランチの親の ID を指定します。デフォルト値はクラスター ID です。                                       | いいえ | 非対話型モードでのみ動作します。                  |
+| --親タイムスタンプ文字列          | 親ブランチのタイムスタンプを RFC3339 形式で指定します (例: `2024-01-01T00:00:00Z` 。デフォルト値は現在の時刻です。 | いいえ | 非対話型モードでのみ動作します。                  |
+| -h, --help             | このコマンドのヘルプ情報を表示します。                                                         | いいえ | 非インタラクティブモードとインタラクティブモードの両方で動作します |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                             |
+| ----------------- | ------------------------------------------------------------------------------ | --- | -------------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
+| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関してご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、あらゆる貢献を歓迎します。

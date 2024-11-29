@@ -1,62 +1,62 @@
 ---
 title: Vector Search Index
-summary: Learn how to build and use the vector search index to accelerate K-Nearest neighbors (KNN) queries in TiDB.
+summary: ベクトル検索インデックスを構築して使用し、TiDB で K 近傍法 (KNN) クエリを高速化する方法を学びます。
 ---
 
-# Vector Search Index
+# ベクター検索インデックス {#vector-search-index}
 
-K-nearest neighbors (KNN) search is the method for finding the K closest points to a given point in a vector space. The most straightforward approach to perform KNN search is a brute force search, which calculates the distance between the given vector and all other vectors in the space. This approach guarantees perfect accuracy, but it is usually too slow for real-world use. Therefore, approximate algorithms are commonly used in KNN search to enhance speed and efficiency.
+K 近傍法 (KNN) 検索は、ベクトル空間内の特定の点に最も近い K 個の点を検索する方法です。KNN 検索を実行する最も簡単な方法は、特定のベクトルと空間内の他のすべてのベクトル間の距離を計算する総当たり検索です。この方法では完全な精度が保証されますが、実用的に使用するには通常は遅すぎます。そのため、KNN 検索では速度と効率を高めるために、近似アルゴリズムが一般的に使用されます。
 
-In TiDB, you can create and use vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/tidb-cloud/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
+TiDB では、 [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)の列に対するこのような近似最近傍 (ANN) 検索にベクトル検索インデックスを作成して使用できます。ベクトル検索インデックスを使用すると、ベクトル検索クエリを数ミリ秒で完了できます。
 
-Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) vector search index algorithm.
+現在、TiDB は[HNSW (階層的にナビゲート可能なスモールワールド)](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)ベクトル検索インデックス アルゴリズムをサポートしています。
 
-## Create the HNSW vector index
+## HNSWベクトルインデックスを作成する {#create-the-hnsw-vector-index}
 
-[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy, up to 98% in specific cases.
+[HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)は、最も人気のあるベクトル インデックス アルゴリズムの 1 つです。HNSW インデックスは、特定のケースでは最大 98% という比較的高い精度で優れたパフォーマンスを提供します。
 
-In TiDB, you can create an HNSW index for a column with a [vector data type](/tidb-cloud/vector-search-data-types.md) in either of the following ways:
+TiDB では、次のいずれかの方法で、 [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)列に対して HNSW インデックスを作成できます。
 
-- When creating a table, use the following syntax to specify the vector column for the HNSW index:
+-   テーブルを作成するときは、次の構文を使用して HNSW インデックスのベクトル列を指定します。
 
-  ```sql
-  CREATE TABLE foo (
-      id       INT PRIMARY KEY,
-      embedding     VECTOR(5),
-      VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)))
-  );
-  ```
+    ```sql
+    CREATE TABLE foo (
+        id       INT PRIMARY KEY,
+        embedding     VECTOR(5),
+        VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)))
+    );
+    ```
 
-- For an existing table that already contains a vector column, use the following syntax to create an HNSW index for the vector column:
+-   ベクター列がすでに含まれている既存のテーブルの場合は、次の構文を使用してベクター列の HNSW インデックスを作成します。
 
-  ```sql
-  CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding)));
-  ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)));
+    ```sql
+    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding)));
+    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding)));
 
-  -- You can also explicitly specify "USING HNSW" to build the vector search index.
-  CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
-  ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
-  ```
+    -- You can also explicitly specify "USING HNSW" to build the vector search index.
+    CREATE VECTOR INDEX idx_embedding ON foo ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
+    ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
+    ```
 
-> **Note:**
+> **注記：**
 >
-> The vector search index feature relies on TiFlash replicas for tables.
+> ベクター検索インデックス機能は、テーブルのTiFlashレプリカに依存します。
 >
-> - If a vector search index is defined when a table is created, TiDB automatically creates a TiFlash replica for the table.
-> - If no vector search index is defined when a table is created, and the table currently does not have a TiFlash replica, you need to manually create a TiFlash replica before adding a vector search index to the table. For example: `ALTER TABLE 'table_name' SET TIFLASH REPLICA 1;`.
+> -   テーブルの作成時にベクトル検索インデックスが定義されている場合、TiDB はテーブルのTiFlashレプリカを自動的に作成します。
+> -   テーブルの作成時にベクトル検索インデックスが定義されておらず、テーブルに現在TiFlashレプリカがない場合は、テーブルにベクトル検索インデックスを追加する前に、手動でTiFlashレプリカを作成する必要があります。例: `ALTER TABLE 'table_name' SET TIFLASH REPLICA 1;` 。
 
-When creating an HNSW vector index, you need to specify the distance function for the vector:
+HNSW ベクトル インデックスを作成するときは、ベクトルの距離関数を指定する必要があります。
 
-- Cosine Distance: `((VEC_COSINE_DISTANCE(embedding)))`
-- L2 Distance: `((VEC_L2_DISTANCE(embedding)))`
+-   コサイン距離: `((VEC_COSINE_DISTANCE(embedding)))`
+-   L2距離: `((VEC_L2_DISTANCE(embedding)))`
 
-The vector index can only be created for fixed-dimensional vector columns, such as a column defined as `VECTOR(3)`. It cannot be created for non-fixed-dimensional vector columns (such as a column defined as `VECTOR`) because vector distances can only be calculated between vectors with the same dimension.
+ベクトル インデックスは、 `VECTOR(3)`として定義された列などの固定次元のベクトル列に対してのみ作成できます。ベクトル距離は同じ次元のベクトル間でのみ計算できるため、固定次元でないベクトル列 ( `VECTOR`として定義された列など) に対しては作成できません。
 
-For other limitations, see [Vector index limitations](/tidb-cloud/vector-search-limitations.md#vector-index-limitations).
+その他の制限については[ベクトルインデックスの制限](/tidb-cloud/vector-search-limitations.md#vector-index-limitations)参照してください。
 
-## Use the vector index
+## ベクトルインデックスを使用する {#use-the-vector-index}
 
-The vector search index can be used in K-nearest neighbor search queries by using the `ORDER BY ... LIMIT` clause as follows:
+ベクトル検索インデックスは、次のように`ORDER BY ... LIMIT`句を使用して K 近傍検索クエリで使用できます。
 
 ```sql
 SELECT *
@@ -65,11 +65,11 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3, 4, 5]')
 LIMIT 10
 ```
 
-To use an index in a vector search, make sure that the `ORDER BY ... LIMIT` clause uses the same distance function as the one specified when creating the vector index.
+ベクトル検索でインデックスを使用するには、 `ORDER BY ... LIMIT`句がベクトル インデックスの作成時に指定したものと同じ距離関数を使用していることを確認します。
 
-## Use the vector index with filters
+## フィルター付きベクトルインデックスを使用する {#use-the-vector-index-with-filters}
 
-Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize the vector index because they are not querying for K-Nearest neighbors according to the SQL semantics. For example:
+プレフィルター ( `WHERE`句を使用) を含むクエリは、SQL セマンティクスに従って K 近傍をクエリしていないため、ベクトル インデックスを利用できません。例:
 
 ```sql
 -- For the following query, the `WHERE` filter is performed before KNN, so the vector index cannot be used:
@@ -80,7 +80,7 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-To use the vector index with filters, query for the K-Nearest neighbors first using vector search, and then filter out unwanted results:
+フィルター付きのベクター インデックスを使用するには、まずベクター検索を使用して K 近傍を照会し、次に不要な結果をフィルター処理します。
 
 ```sql
 -- For the following query, the `WHERE` filter is performed after KNN, so the vector index cannot be used:
@@ -96,11 +96,11 @@ WHERE category = "document";
 -- Note that this query might return fewer than 5 results if some are filtered out.
 ```
 
-## View index build progress
+## インデックス構築の進行状況をビュー {#view-index-build-progress}
 
-After you insert a large volume of data, some of it might not be instantly persisted to TiFlash. For vector data that has already been persisted, the vector search index is built synchronously. For data that has not yet been persisted, the index will be built once the data is persisted. This process does not affect the accuracy and consistency of the data. You can still perform vector searches at any time and get complete results. However, performance will be suboptimal until vector indexes are fully built.
+大量のデータを挿入した後、その一部がTiFlashに即座に保存されない場合があります。すでに保存されているベクター データの場合、ベクター検索インデックスは同期的に構築されます。まだ保存されていないデータの場合、データが保存されるとインデックスが構築されます。このプロセスは、データの精度と一貫性に影響しません。ベクター検索はいつでも実行でき、完全な結果を得ることができます。ただし、ベクター インデックスが完全に構築されるまで、パフォーマンスは最適ではありません。
 
-To view the index build progress, you can query the `INFORMATION_SCHEMA.TIFLASH_INDEXES` table as follows:
+インデックス構築の進行状況を表示するには、次のように`INFORMATION_SCHEMA.TIFLASH_INDEXES`テーブルをクエリします。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
@@ -112,27 +112,27 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 +---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
 ```
 
-- You can check the `ROWS_STABLE_INDEXED` and `ROWS_STABLE_NOT_INDEXED` columns for the index build progress. When `ROWS_STABLE_NOT_INDEXED` becomes 0, the index build is complete.
+-   インデックス構築の進行状況は、 `ROWS_STABLE_INDEXED`列と`ROWS_STABLE_NOT_INDEXED`列で確認できます。5 が`ROWS_STABLE_NOT_INDEXED`になると、インデックス構築が完了します。
 
-  As a reference, indexing a 500 MiB vector dataset with 768 dimensions might take up to 20 minutes. The indexer can run in parallel for multiple tables. Currently, adjusting the indexer priority or speed is not supported.
+    参考までに、768 次元の 500 MiB ベクター データセットのインデックス作成には最大 20 分かかる場合があります。インデクサーは複数のテーブルに対して並列実行できます。現在、インデクサーの優先度や速度の調整はサポートされていません。
 
-- You can check the `ROWS_DELTA_NOT_INDEXED` column for the number of rows in the Delta layer. Data in the storage layer of TiFlash is stored in two layers: Delta layer and Stable layer. The Delta layer stores recently inserted or updated rows and is periodically merged into the Stable layer according to the write workload. This merge process is called Compaction.
+-   デルタレイヤーの行数は`ROWS_DELTA_NOT_INDEXED`列で確認できます。TiFlash のstorageレイヤーのデータは、デルタレイヤーと安定レイヤーの2 つのレイヤーに保存されます。デルタレイヤーには最近挿入または更新された行が保存され、書き込みワークロードに応じて定期的に安定レイヤーにマージされます。このマージ プロセスは、コンパクションと呼ばれます。
 
-  The Delta layer is always not indexed. To achieve optimal performance, you can force the merge of the Delta layer into the Stable layer so that all data can be indexed:
+    デルタレイヤーは常にインデックス化されません。最適なパフォーマンスを実現するには、デルタレイヤーを安定レイヤーに強制的にマージして、すべてのデータをインデックス化できるようにします。
 
-  ```sql
-  ALTER TABLE <TABLE_NAME> COMPACT;
-  ```
+    ```sql
+    ALTER TABLE <TABLE_NAME> COMPACT;
+    ```
 
-  For more information, see [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md).
+    詳細については[`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)参照してください。
 
-In addition, you can monitor the execution progress of the DDL job by executing `ADMIN SHOW DDL JOBS;` and checking the `row count`. However, this method is not fully accurate, because the `row count` value is obtained from the `rows_stable_indexed` field in `TIFLASH_INDEXES`. You can use this approach as a reference for tracking the progress of indexing.
+さらに、 `ADMIN SHOW DDL JOBS;`実行して`row count`確認することで、 DDL ジョブの実行進行状況を監視できます。ただし、 `row count`値は`TIFLASH_INDEXES`の`rows_stable_indexed`フィールドから取得されるため、この方法は完全に正確ではありません。このアプローチは、インデックス作成の進行状況を追跡するための参照として使用できます。
 
-## Check whether the vector index is used
+## ベクトルインデックスが使用されているかどうかを確認する {#check-whether-the-vector-index-is-used}
 
-Use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement to check whether a query is using the vector index. When `annIndex:` is presented in the `operator info` column for the `TableFullScan` executor, it means this table scan is utilizing the vector index.
+クエリがベクトル インデックスを使用しているかどうかを確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用します。9 `TableFullScan`キュータの`operator info`列に`annIndex:`表示されている場合は、このテーブル スキャンがベクトル インデックスを使用していることを意味します。
 
-**Example: the vector index is used**
+**例: ベクトルインデックスが使用される**
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
@@ -154,7 +154,7 @@ LIMIT 10;
 9 rows in set (0.01 sec)
 ```
 
-**Example: The vector index is not used because of not specifying a Top K**
+**例: Top Kを指定していないため、ベクトルインデックスは使用されません。**
 
 ```sql
 [tidb]> EXPLAIN SELECT * FROM vector_table_with_index
@@ -172,7 +172,7 @@ LIMIT 10;
 6 rows in set, 1 warning (0.01 sec)
 ```
 
-When the vector index cannot be used, a warning occurs in some cases to help you learn the cause:
+ベクトル インデックスが使用できない場合、原因の調査に役立つ警告が表示される場合があります。
 
 ```sql
 -- Using a wrong distance function:
@@ -192,9 +192,9 @@ LIMIT 10;
 ANN index not used: index can be used only when ordering by vec_cosine_distance() in ASC order
 ```
 
-## Analyze vector search performance
+## ベクトル検索のパフォーマンスを分析する {#analyze-vector-search-performance}
 
-To learn detailed information about how a vector index is used, you can execute the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statement and check the `execution info` column in the output:
+ベクトル インデックスの使用方法に関する詳細情報を確認するには、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを実行し、出力の`execution info`列を確認します。
 
 ```sql
 [tidb]> EXPLAIN ANALYZE SELECT * FROM vector_table_with_index
@@ -218,26 +218,26 @@ LIMIT 10;
 +-----+--------------------------------------------------------+-----+
 ```
 
-> **Note:**
+> **注記：**
 >
-> The execution information is internal. Fields and formats are subject to change without any notification. Do not rely on them.
+> 実行情報は内部情報です。フィールドと形式は予告なく変更される可能性があります。これらに依存しないでください。
 
-Explanation of some important fields:
+いくつかの重要なフィールドの説明:
 
-- `vector_index.load.total`: The total duration of loading index. This field might be larger than the actual query time because multiple vector indexes might be loaded in parallel.
-- `vector_index.load.from_s3`: Number of indexes loaded from S3.
-- `vector_index.load.from_disk`: Number of indexes loaded from disk. The index was already downloaded from S3 previously.
-- `vector_index.load.from_cache`: Number of indexes loaded from cache. The index was already downloaded from S3 previously.
-- `vector_index.search.total`: The total duration of searching in the index. Large latency usually means the index is cold (never accessed before, or accessed long ago) so that there are heavy I/O operations when searching through the index. This field might be larger than the actual query time because multiple vector indexes might be searched in parallel.
-- `vector_index.search.discarded_nodes`: Number of vector rows visited but discarded during the search. These discarded vectors are not considered in the search result. Large values usually indicate that there are many stale rows caused by `UPDATE` or `DELETE` statements.
+-   `vector_index.load.total` : インデックスのロードにかかる合計時間。複数のベクター インデックスが並行してロードされる可能性があるため、このフィールドは実際のクエリ時間よりも長くなる可能性があります。
+-   `vector_index.load.from_s3` : S3 からロードされたインデックスの数。
+-   `vector_index.load.from_disk` : ディスクからロードされたインデックスの数。インデックスは以前に S3 からすでにダウンロードされています。
+-   `vector_index.load.from_cache` : キャッシュからロードされたインデックスの数。インデックスは以前に S3 からダウンロード済みです。
+-   `vector_index.search.total` : インデックスの検索にかかる合計時間。通常、レイテンシーが長いということは、インデックスがコールド状態 (以前に一度もアクセスされていないか、かなり前にアクセスされている) であるため、インデックスを検索するときに I/O 操作が大量に発生することを意味します。複数のベクター インデックスが並行して検索される可能性があるため、このフィールドは実際のクエリ時間よりも長くなる場合があります。
+-   `vector_index.search.discarded_nodes` : 検索中に訪問されたが破棄されたベクトル行の数。これらの破棄されたベクトルは検索結果では考慮されません。通常、値が大きい場合は、 `UPDATE`または`DELETE`ステートメントによって古い行が多数あることを示します。
 
-See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md), and [EXPLAIN Walkthrough](/explain-walkthrough.md) for interpreting the output.
+出力の解釈については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 、 [EXPLAIN コマンド](/explain-walkthrough.md)参照してください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-See [Vector index limitations](/tidb-cloud/vector-search-limitations.md#vector-index-limitations).
+[ベクトルインデックスの制限](/tidb-cloud/vector-search-limitations.md#vector-index-limitations)参照。
 
-## See also
+## 参照 {#see-also}
 
-- [Improve Vector Search Performance](/tidb-cloud/vector-search-improve-performance.md)
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
+-   [ベクトル検索のパフォーマンスを向上させる](/tidb-cloud/vector-search-improve-performance.md)
+-   [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)

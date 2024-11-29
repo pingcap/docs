@@ -1,153 +1,153 @@
 ---
 title: TiDB Cloud Serverless FAQs
-summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud Serverless.
+summary: TiDB Cloud Serverless に関するよくある質問 (FAQ) について説明します。
 aliases: ['/tidbcloud/serverless-tier-faqs']
 ---
 
-# TiDB Cloud Serverless FAQs
+# TiDB Cloudサーバーレスに関するよくある質問 {#tidb-cloud-serverless-faqs}
 
 <!-- markdownlint-disable MD026 -->
 
-This document lists the most frequently asked questions about TiDB Cloud Serverless.
+このドキュメントには、 TiDB Cloud Serverless に関するよくある質問が記載されています。
 
-## General FAQs
+## 一般的なよくある質問 {#general-faqs}
 
-### What is TiDB Cloud Serverless?
+### TiDB Cloud Serverless とは何ですか? {#what-is-tidb-cloud-serverless}
 
-TiDB Cloud Serverless offers the TiDB database with full HTAP capabilities for you and your organization. It is a fully managed, auto-scaling deployment of TiDB that lets you start using your database immediately, develop and run your application without caring about the underlying nodes, and automatically scale based on your application's workload changes.
+TiDB Cloud Serverless は、お客様とお客様の組織に完全な HTAP 機能を備えた TiDB データベースを提供します。これは、完全に管理された自動スケーリングの TiDB デプロイメントであり、データベースをすぐに使い始め、基盤となるノードを気にせずにアプリケーションを開発および実行し、アプリケーションのワークロードの変化に基づいて自動的にスケーリングすることができます。
 
-### How do I get started with TiDB Cloud Serverless?
+### TiDB Cloud Serverless を使い始めるにはどうすればよいですか? {#how-do-i-get-started-with-tidb-cloud-serverless}
 
-Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md).
+5 分間の[TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md)から始めましょう。
 
-### How many TiDB Cloud Serverless clusters can I create in TiDB Cloud?
+### TiDB Cloudで作成できるTiDB Cloud Serverless クラスターの数はいくつですか? {#how-many-tidb-cloud-serverless-clusters-can-i-create-in-tidb-cloud}
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Serverless clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+TiDB Cloudの各組織では、デフォルトで最大 5 つの[フリークラスター](/tidb-cloud/select-cluster-tier.md#free-cluster-plan)を作成できます。さらにTiDB Cloud Serverless クラスターを作成するには、クレジットカードを追加し、使用量に応じて[スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)作成する必要があります。
 
-### Are all TiDB Cloud features fully supported on TiDB Cloud Serverless?
+### TiDB Cloud Serverless ではすべてのTiDB Cloud機能が完全にサポートされていますか? {#are-all-tidb-cloud-features-fully-supported-on-tidb-cloud-serverless}
 
-Some of TiDB Cloud features are partially supported or not supported on TiDB Cloud Serverless. For more information, see [TiDB Cloud Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md).
+TiDB Cloud の機能の一部は、 TiDB Cloud Serverless では部分的にサポートされているか、サポートされていません。詳細については、 [TiDB Cloudサーバーレスの制限とクォータ](/tidb-cloud/serverless-limitations.md)参照してください。
 
-### When will TiDB Cloud Serverless be available on cloud platforms other than AWS, such as Google Cloud or Azure?
+### TiDB Cloud Serverless は、Google Cloud や Azure など、AWS 以外のクラウド プラットフォームでいつ利用できるようになりますか? {#when-will-tidb-cloud-serverless-be-available-on-cloud-platforms-other-than-aws-such-as-google-cloud-or-azure}
 
-We are actively working on expanding TiDB Cloud Serverless to other cloud platforms, including Google Cloud and Azure. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Cloud Serverless available on more cloud platforms, and we will keep our community updated as we progress.
+当社は、Google Cloud や Azure などの他のクラウド プラットフォームにTiDB Cloud Serverless を拡張することに積極的に取り組んでいます。ただし、現在はギャップを埋め、すべての環境でシームレスな機能を確保することに重点を置いているため、正確なタイムラインは現時点ではわかりません。ご安心ください。当社は、 TiDB Cloud Serverless をより多くのクラウド プラットフォームで利用できるように懸命に取り組んでおり、進捗状況はコミュニティに随時お知らせします。
 
-### I created a Developer Tier cluster before TiDB Cloud Serverless was available. Can I still use my cluster?
+### TiDB Cloud Serverless が利用可能になる前にDeveloper Tierクラスターを作成しました。クラスターをまだ使用できますか? {#i-created-a-developer-tier-cluster-before-tidb-cloud-serverless-was-available-can-i-still-use-my-cluster}
 
-Yes, your Developer Tier cluster has been automatically migrated to the TiDB Cloud Serverless cluster, providing you with an improved user experience without any disruptions to your prior usage.
+はい、 Developer TierクラスターはTiDB Cloud Serverless クラスターに自動的に移行されており、以前の使用状況に支障をきたすことなく、ユーザー エクスペリエンスが向上します。
 
-### What is columnar storage in TiDB Cloud Serverless?
+### TiDB Cloud Serverless の列指向storageとは何ですか? {#what-is-columnar-storage-in-tidb-cloud-serverless}
 
-Columnar storage in TiDB Cloud Serverless acts as an additional replica of row-based storage, ensuring strong consistency. Unlike traditional row-based storage, which stores data in rows, columnar storage organizes data in columns, optimizing it for data analytics tasks.
+TiDB Cloud Serverless の列指向storageは、行ベースstorageの追加レプリカとして機能し、強力な一貫性を保証します。データを行に格納する従来の行ベースstorageとは異なり、列指向storageはデータを列に整理し、データ分析タスクに最適化します。
 
-Columnar storage is a key feature that enables the Hybrid Transactional and Analytical Processing (HTAP) capabilities of TiDB by seamlessly blending transactional and analytical workloads.
+列指向storageは、トランザクション ワークロードと分析ワークロードをシームレスに融合することで、TiDB のハイブリッド トランザクションおよび分析処理 (HTAP) 機能を有効にする重要な機能です。
 
-To efficiently manage columnar storage data, TiDB Cloud Serverless uses a separate elastic TiFlash engine. During query execution, the optimizer guides the cluster to automatically decide whether to retrieve data from row-based or columnar storage.
+列指向storageデータを効率的に管理するために、 TiDB Cloud Serverless は別個の柔軟なTiFlashエンジンを使用します。クエリ実行中、オプティマイザーはクラスターをガイドして、行ベース ストレージと列指向storageのどちらからデータを取得するかを自動的に決定します。
 
-### When should I use columnar storage in TiDB Cloud Serverless?
+### TiDB Cloud Serverless で列指向storageを使用するのはいつですか? {#when-should-i-use-columnar-storage-in-tidb-cloud-serverless}
 
-Consider using columnar storage in TiDB Cloud Serverless in the following scenarios:
+次のシナリオでは、 TiDB Cloud Serverless の列指向storageの使用を検討してください。
 
-- Your workload involves analytical tasks that require efficient data scanning and aggregation.
-- You prioritize improved performance, especially for analytics workloads.
-- You want to isolate analytical processing from transactional processing to prevent performance impact on your transactional processing (TP) workload. The separate columnar storage helps optimize these distinct workload patterns.
+-   ワークロードには、効率的なデータスキャンと集約を必要とする分析タスクが含まれます。
+-   特に分析ワークロードのパフォーマンス向上を優先します。
+-   トランザクション処理 (TP) ワークロードのパフォーマンスへの影響を防ぐために、分析処理をトランザクション処理から分離する必要があります。個別の列型storageは、これらの異なるワークロード パターンを最適化するのに役立ちます。
 
-In these scenarios, columnar storage can significantly improve query performance and provide a seamless experience for mixed workloads in your system.
+このようなシナリオでは、列指向storageクエリのパフォーマンスが大幅に向上し、システム内の混合ワークロードに対してシームレスなエクスペリエンスを提供できます。
 
-### How to use columnar storage in TiDB Cloud Serverless?
+### TiDB Cloud Serverless で列指向storageを使用する方法は? {#how-to-use-columnar-storage-in-tidb-cloud-serverless}
 
-Using columnar storage in TiDB Cloud Serverless is similar to using it in TiFlash. You can enable columnar storage at both the table and database levels:
+TiDB Cloud Serverless での列指向storageの使用は、 TiFlashでの使用に似ています。テーブル レベルとデータベース レベルの両方で列指向storageを有効にできます。
 
-- Table level: Assign a TiFlash replica to a table to enable columnar storage for that specific table.
-- Database level: Configure TiFlash replicas for all tables in a database to use columnar storage across the entire database.
+-   テーブル レベル: テーブルにTiFlashレプリカを割り当てて、その特定のテーブルの列指向storageを有効にします。
+-   データベース レベル: データベース全体で列型storageを使用するように、データベース内のすべてのテーブルのTiFlashレプリカを構成します。
 
-Once a TiFlash replica is set up for a table, TiDB automatically replicates data from the row-based storage to the columnar storage for that table. This ensures data consistency and optimizes performance for analytical queries.
+テーブルにTiFlashレプリカが設定されると、TiDB は行ベースのstorageからそのテーブルの列ベースのstorageにデータを自動的に複製します。これにより、データの一貫性が確保され、分析クエリのパフォーマンスが最適化されます。
 
-For more information about how to set up TiFlash replicas, see [Create TiFlash replicas](/tiflash/create-tiflash-replicas.md).
+TiFlashレプリカの設定方法の詳細については、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)参照してください。
 
-## Billing and metering FAQs
+## 課金と計測に関するよくある質問 {#billing-and-metering-faqs}
 
-### What are Request Units?
+### リクエストユニットとは何ですか? {#what-are-request-units}
 
-TiDB Cloud Serverless adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
+TiDB Cloud Serverless は従量課金モデルを採用しており、storageスペースとクラスターの使用に対してのみ料金を支払います。このモデルでは、SQL クエリ、一括操作、バックグラウンド ジョブなどのすべてのクラスター アクティビティが[リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit)で定量化されます。RU は、クラスターで開始されたリクエストのサイズと複雑さを表す抽象的な測定値です。詳細については、 [TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/)参照してください。
 
-### Is there any free plan available for TiDB Cloud Serverless?
+### TiDB Cloud Serverless には無料プランはありますか? {#is-there-any-free-plan-available-for-tidb-cloud-serverless}
 
-For the first five TiDB Cloud Serverless clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+組織内の最初の 5 つのTiDB Cloud Serverless クラスターに対して、 TiDB Cloud はそれぞれに次の無料使用量割り当てを提供します。
 
-- Row-based storage: 5 GiB
-- Columnar storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+-   行ベースのstorage: 5 GiB
+-   列指向storage: 5 GiB
+-   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 毎月5000万RU
 
-If you are using a scalable cluster, usage beyond the free quota will be charged. For a free cluster, once the free quota is reached, the read and write operations on this cluster will be throttled until you upgrade to a scalable cluster or the usage is reset upon the start of a new month.
+スケーラブル クラスターを使用している場合、無料割り当て量を超えた使用量には料金が発生します。無料クラスターの場合、無料割り当て量に達すると、スケーラブル クラスターにアップグレードするか、新しい月の開始時に使用量がリセットされるまで、このクラスターの読み取りおよび書き込み操作は制限されます。
 
-For more information, see [TiDB Cloud Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
+詳細については[TiDB Cloud Serverless 使用量割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)参照してください。
 
-### What are the limitations of the free plan?
+### 無料プランの制限は何ですか? {#what-are-the-limitations-of-the-free-plan}
 
-Under the free plan, cluster performance is limited due to non-scalable resources. This results in a restriction on memory allocation per query to 256 MiB and might cause observable bottlenecks in request units (RUs) per second. To maximize cluster performance and avoid these limitations, you can upgrade to a [scalable cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan).
+無料プランでは、スケーラブルでないリソースが原因でクラスターのパフォーマンスが制限されます。このため、クエリあたりのメモリ割り当てが 256 MiB に制限され、1 秒あたりのリクエスト ユニット (RU) に顕著なボトルネックが発生する可能性があります。クラスターのパフォーマンスを最大化し、これらの制限を回避するには、 [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)にアップグレードします。
 
-### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
+### ワークロードに必要な RU の数を見積もり、月間予算を計画するにはどうすればよいですか? {#how-can-i-estimate-the-number-of-rus-required-by-my-workloads-and-plan-my-monthly-budget}
 
-To get the RU consumption of individual SQL statements, you can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) SQL statement. However, it is important to note that the RUs usage returned in `EXPLAIN ANALYZE` does not incorporate egress RUs, as egress usage is measured separately in the gateway, which is unknown to the TiDB server.
+個々の SQL ステートメントの RU 消費量を取得するには、SQL ステートメント[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)を使用できます。ただし、 `EXPLAIN ANALYZE`で返される RU 使用量には出力 RU が組み込まれていないことに注意してください。出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないためです。
 
-To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can upgrade to a [scalable cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) and edit the spending limit. For more information, see [TiDB Cloud Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
+クラスターで使用されている RU とstorageを取得するには、クラスターの概要ページの [**今月の使用状況]**ペインを表示します。このペインの過去のリソース使用状況データとリアルタイムのリソース使用状況を使用して、クラスターのリソース消費を追跡し、適切な使用制限を見積もることができます。無料の割り当てで要件を満たせない場合は、 [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)にアップグレードして使用制限を編集できます。詳細については、 [TiDB Cloud Serverless 使用量割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)参照してください。
 
-### How can I optimize my workload to minimize the number of RUs consumed?
+### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいでしょうか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
 
-Ensure that your queries have been carefully optimized for optimal performance by following the guidelines in [Optimizing SQL Performance](/develop/dev-guide-optimize-sql-overview.md). To identify the SQL statements that consume the most RUs, navigate to **Diagnosis > SQL Statements** on your cluster overview page, where you can observe SQL execution and view the top statements sorted by **Total RU** or **Mean RU**. For more information, see [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis). In addition, minimizing the amount of egress traffic is also crucial for reducing RUs consumption. To achieve this, it is recommended to return only the necessary columns and rows in your query, which in turn helps reduce network egress traffic. This can be achieved by carefully selecting and filtering the columns and rows to be returned, thereby optimizing network utilization.
+[SQL パフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)のガイドラインに従って、クエリが最適なパフォーマンスを得るために慎重に最適化されていることを確認します。RU を最も多く消費する SQL ステートメントを特定するには、クラスターの概要ページで**[診断] &gt; [SQL ステートメント]**に移動します。ここで、SQL 実行を観察し、**合計 RU**または**平均 RU**で並べ替えられた上位のステートメントを表示できます。詳細については、 [ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)参照してください。また、出力トラフィックの量を最小限に抑えることも、RU の消費量を削減するために重要です。これを実現するには、クエリで必要な列と行のみを返すことをお勧めします。これにより、ネットワークの出力トラフィックが削減されます。これは、返される列と行を慎重に選択してフィルター処理することで実現でき、それによってネットワーク使用率が最適化されます。
 
-### How storage is metered for TiDB Cloud Serverless？
+### TiDB Cloud Serverless のstorageはどのように計測されますか? {#how-storage-is-metered-for-tidb-cloud-serverless}
 
-The storage is metered based on the amount of data stored in a TiDB Cloud Serverless cluster, measured in GiB per month. It is calculated by multiplying the total size of all the tables and indexes (excluding data compression or replicas) with the number of hours the data is stored in that month.
+storageは、 TiDB Cloud Serverless クラスターに保存されるデータの量に基づいて計測され、1 か月あたりの GiB 単位で測定されます。これは、すべてのテーブルとインデックスの合計サイズ (データ圧縮またはレプリカを除く) と、その月にデータが保存される時間数を掛けて計算されます。
 
-### Why does the storage usage size remain unchanged after dropping a table or database immediately?
+### テーブルまたはデータベースをすぐに削除した後、storage使用量のサイズが変更されないのはなぜですか? {#why-does-the-storage-usage-size-remain-unchanged-after-dropping-a-table-or-database-immediately}
 
-This is because TiDB retains dropped tables and databases for a certain period of time. This retention period ensures that transactions dependent on these tables can continue execution without disruption. Additionally, the retention period makes the [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)/[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) feature feasible, which allows you to recover dropped tables and databases if they were mistakenly deleted.
+これは[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) TiDB が削除されたテーブルとデータベースを一定期間保持するためです。この保持期間により、これらのテーブルに依存するトランザクションが中断されることなく実行を継続できます。さらに、保持期間により[`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)機能も実現可能になり、誤って削除されたテーブルやデータベースを回復できるようになります。
 
-### Why are there RU consumptions when I'm not actively running any queries?
+### クエリをアクティブに実行していないのに RU が消費されるのはなぜですか? {#why-are-there-ru-consumptions-when-i-m-not-actively-running-any-queries}
 
-RU consumptions can occur in various scenarios. One common scenario is during background queries, such as synchronizing schema changes between TiDB instances. Another scenario is when certain web console features generate queries, like loading schemas. These processes use RUs even without explicit user triggers.
+RU の消費はさまざまなシナリオで発生する可能性があります。一般的なシナリオの 1 つは、TiDB インスタンス間のスキーマ変更の同期など、バックグラウンド クエリの実行時です。もう 1 つのシナリオは、スキーマの読み込みなど、特定の Web コンソール機能によってクエリが生成される場合です。これらのプロセスでは、明示的なユーザー トリガーがなくても RU が使用されます。
 
-### Why is there a spike in RU usage when my workload is steady?
+### ワークロードが安定しているのに、RU 使用量が急増するのはなぜですか? {#why-is-there-a-spike-in-ru-usage-when-my-workload-is-steady}
 
-A spike in RU usage can occur due to necessary background jobs in TiDB. These jobs, such as automatically analyzing tables and rebuilding statistics, are required for generating optimized query plans.
+TiDB の必要なバックグラウンド ジョブが原因で、RU 使用量が急増する可能性があります。テーブルの自動分析や統計の再構築などのこれらのジョブは、最適化されたクエリ プランを生成するために必要です。
 
-### What happens when my cluster exhausts its free quota or exceeds its spending limit?
+### クラスターの無料割り当てを使い果たしたり、使用制限を超えたりするとどうなりますか? {#what-happens-when-my-cluster-exhausts-its-free-quota-or-exceeds-its-spending-limit}
 
-Once a cluster reaches its free quota or spending limit, the cluster immediately denies any new connection attempts until the quota is increased or the usage is reset at the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For more information, see [TiDB Cloud Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+クラスターが無料割り当てまたは使用制限に達すると、割り当てが増加するか、新しい月の開始時に使用量がリセットされるまで、クラスターは新しい接続試行を直ちに拒否します。割り当てに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。詳細については、 [TiDB Cloudサーバーレスの制限とクォータ](/tidb-cloud/serverless-limitations.md#usage-quota)参照してください。
 
-### Why do I observe spikes in RU usage while importing data?
+### データのインポート中に RU 使用量が急増するのはなぜですか? {#why-do-i-observe-spikes-in-ru-usage-while-importing-data}
 
-During the data import process of a TiDB Cloud Serverless cluster, RU consumption occurs only when the data is successfully imported, which leads to spikes in RU usage.
+TiDB Cloud Serverless クラスターのデータ インポート プロセス中、RU の消費はデータが正常にインポートされた場合にのみ発生するため、RU 使用量が急増します。
 
-### What costs are involved when using columnar storage in TiDB Cloud Serverless?
+### TiDB Cloud Serverless で列指向storageを使用する場合、どのようなコストがかかりますか? {#what-costs-are-involved-when-using-columnar-storage-in-tidb-cloud-serverless}
 
-The pricing for columnar storage in TiDB Cloud Serverless is similar to that for row-based storage. When you use columnar storage, an additional replica is created to store your data (without indexes). The replication of data from row-based to columnar storage does not incur extra charges.
+TiDB Cloud Serverless の列指向storageの料金は、行指向storageの料金と同様です。列指向storageを使用すると、データ (インデックスなし) を保存するための追加のレプリカが作成されます。行指向ストレージから列指向storageへのデータのレプリケーションには追加料金はかかりません。
 
-For detailed pricing information, see [TiDB Cloud Serverless pricing details](https://www.pingcap.com/tidb-serverless-pricing-details/).
+詳細な価格情報については[TiDB Cloud Serverless の価格詳細](https://www.pingcap.com/tidb-serverless-pricing-details/)参照してください。
 
-### Is using columnar storage more expensive?
+### 列指向storageを使用するとコストは高くなりますか? {#is-using-columnar-storage-more-expensive}
 
-Columnar storage in TiDB Cloud Serverless incurs additional costs due to the extra replica, which requires more storage and resources for data replication. However, columnar storage becomes more cost-effective when running analytical queries.
+TiDB Cloud Serverless の列指向storageでは、追加のレプリカにより追加コストが発生し、データ複製にさらに多くのstorageとリソースが必要になります。ただし、分析クエリを実行する場合、列指向storageはよりコスト効率が高くなります。
 
-According to the TPC-H benchmark test, the cost of running analytic queries on columnar storage is about one-third of the cost when using row-based storage.
+TPC-H ベンチマーク テストによると、列ベースのstorageで分析クエリを実行するコストは、行ベースのstorageを使用する場合のコストの約 3 分の 1 です。
 
-Therefore, while there might be an initial cost due to the extra replica, the reduced computational costs during analytics can make it more cost-effective for specific use cases. Especially for users with analytical demands, columnar storage can significantly reduce costs, offering considerable cost savings opportunities.
+したがって、追加のレプリカによる初期コストは発生する可能性がありますが、分析中の計算コストが削減されるため、特定のユースケースではコスト効率が向上します。特に分析ニーズのあるユーザーにとって、列指向storageはコストを大幅に削減し、かなりのコスト節約の機会を提供します。
 
-## Security FAQs
+## Securityよくある質問 {#security-faqs}
 
-### Is my TiDB Cloud Serverless shared or dedicated?
+### TiDB Cloud Serverless は共有ですか、それとも専用ですか? {#is-my-tidb-cloud-serverless-shared-or-dedicated}
 
-The serverless technology is designed for multi-tenancy and the resources used by all clusters are shared. To get managed TiDB service with isolated infrastructure and resources, you can upgrade it to [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+サーバーレス テクノロジーはマルチテナント向けに設計されており、すべてのクラスターで使用されるリソースは共有されます。分離されたインフラストラクチャとリソースを備えたマネージド TiDB サービスを取得するには、 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)にアップグレードできます。
 
-### How does TiDB Cloud Serverless ensure security?
+### TiDB Cloud Serverless はどのようにしてセキュリティを確保しますか? {#how-does-tidb-cloud-serverless-ensure-security}
 
-- Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to TiDB Cloud Serverless, see [TLS Connection to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-- All persisted data on TiDB Cloud Serverless is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
+-   接続はトランスポート層Security(TLS) によって暗号化されます。TLS を使用してTiDB Cloud Serverless に接続する方法の詳細については、 [TiDB Cloud ServerlessへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)参照してください。
+-   TiDB Cloud Serverless に保存されるすべてのデータは、クラスターが実行されているクラウド プロバイダーのツールを使用して保存時に暗号化されます。
 
-## Maintenance FAQ
+## メンテナンスに関するFAQ {#maintenance-faq}
 
-### Can I upgrade the version of TiDB that my cluster is running on?
+### クラスターが実行されている TiDB のバージョンをアップグレードできますか? {#can-i-upgrade-the-version-of-tidb-that-my-cluster-is-running-on}
 
-No. TiDB Cloud Serverless clusters are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud console](https://tidbcloud.com/console/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
+いいえ。TiDB TiDB Cloud Serverless クラスターは、TiDB Cloudで新しい TiDB バージョンがロールアウトされると自動的にアップグレードされます。クラスターで実行されている TiDB のバージョンは、 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)または最新の[リリースノート](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)で確認できます。または、クラスターに接続し、 `SELECT version()`または`SELECT tidb_version()`使用して TiDB のバージョンを確認することもできます。

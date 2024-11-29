@@ -1,15 +1,13 @@
 ---
 title: SHOW MASTER STATUS
-summary: An overview of the usage of SHOW MASTER STATUS for the TiDB database.
+summary: TiDB データベースの SHOW MASTER STATUS の使用法の概要。
 ---
 
-# SHOW MASTER STATUS
+# マスターステータスを表示 {#show-master-status}
 
-The `SHOW MASTER STATUS` statement displays the latest TSO in the cluster.
+`SHOW MASTER STATUS`ステートメントは、クラスター内の最新の TSO を表示します。
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 SHOW MASTER STATUS;
@@ -24,25 +22,25 @@ SHOW MASTER STATUS;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-The output of `SHOW MASTER STATUS` is designed to match MySQL. However, the execution results are different in that the MySQL result is the binlog location information and the TiDB result is the latest TSO information.
+`SHOW MASTER STATUS`の出力はMySQLと一致するように設計されていますが、MySQLの結果はbinlogの位置情報であり、TiDBの結果は最新のTSO情報である点で実行結果が異なります。
 
-The `SHOW BINARY LOG STATUS` statement was added in TiDB as an alias for `SHOW MASTER STATUS`, which has been deprecated in MySQL 8.2.0 and newer versions. 
+`SHOW BINARY LOG STATUS`ステートメントは、MySQL 8.2.0 以降のバージョンでは非推奨となっている`SHOW MASTER STATUS`のエイリアスとして TiDB に追加されました。
 
-## See also
+## 参照 {#see-also}
 
 <CustomContent platform="tidb">
 
-* [SHOW PUMP STATUS](/sql-statements/sql-statement-show-pump-status.md)
-* [SHOW DRAINER STATUS](/sql-statements/sql-statement-show-drainer-status.md)
-* [CHANGE PUMP STATUS](/sql-statements/sql-statement-change-pump.md)
-* [CHANGE DRAINER STATUS](/sql-statements/sql-statement-change-drainer.md)
+-   [ポンプの状態を表示](/sql-statements/sql-statement-show-pump-status.md)
+-   [ドレイナーステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
+-   [ポンプステータスの変更](/sql-statements/sql-statement-change-pump.md)
+-   [ドレイナーステータスの変更](/sql-statements/sql-statement-change-drainer.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
+-   [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
 
 </CustomContent>

@@ -1,28 +1,28 @@
 ---
 title: tiup cluster prune
-summary: When scaling in the cluster, TiUP does not immediately stop services or delete data for some components. You must wait for data scheduling to complete and then manually execute the 'tiup cluster prune' command to clean up. The syntax is 'tiup cluster prune <cluster-name> [flags]'. The option '-h, --help' prints help information and the output is the log of the cleanup process.
+summary: クラスターをスケーリングする場合、 TiUP はすぐにサービスを停止したり、一部のコンポーネントのデータを削除したりしません。データのスケジュールが完了するまで待ってから、手動で「tiup cluster prune」コマンドを実行してクリーンアップする必要があります。構文は「tiup cluster prune <cluster-name> [flags]」です。オプション「-h, --help」はヘルプ情報を出力、出力はクリーンアップ プロセスのログです。
 ---
 
-# tiup cluster prune
+# tiup cluster prune {#tiup-cluster-prune}
 
-When [scaling in the cluster](/tiup/tiup-component-cluster-scale-in.md), for some components, TiUP does not immediately stop their services or delete their data. You need to wait for the data scheduling to complete and then manually execute the `tiup cluster prune` command to clean up.
+[クラスターのスケーリング](/tiup/tiup-component-cluster-scale-in.md)場合、一部のコンポーネントでは、 TiUP はすぐにサービスを停止したり、データを削除したりしません。データのスケジュールが完了するまで待ってから、 `tiup cluster prune`コマンドを手動で実行してクリーンアップする必要があります。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster prune <cluster-name> [flags]
 ```
 
-## Option
+## オプション {#option}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-The log of the cleanup process.
+クリーンアップ プロセスのログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

@@ -1,395 +1,418 @@
 ---
 title: Manage an Endpoint
-summary: Learn how to create, develop, test, deploy, and delete an endpoint in a Data App in the TiDB Cloud console.
+summary: TiDB Cloudコンソールでデータ アプリのエンドポイントを作成、開発、テスト、デプロイ、削除する方法を学習します。
 ---
 
-# Manage an Endpoint
+# エンドポイントの管理 {#manage-an-endpoint}
 
-An endpoint in Data Service (beta) is a web API that you can customize to execute SQL statements. You can specify parameters for the SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the SQL statement with the provided parameters and returns the results as part of the HTTP response.
+Data Service (ベータ) のエンドポイントは、SQL ステートメントを実行するためにカスタマイズできる Web API です。1 句で使用される値など、SQL ステートメントのパラメーターを指定できます。クライアントがエンドポイントを呼び出し、要求 URL でパラメーターの値`WHERE`指定すると、エンドポイントは指定されたパラメーターを使用して SQL ステートメントを実行し、結果を HTTP 応答の一部として返します。
 
-This document describes how to manage your endpoints in a Data App in the TiDB Cloud console.
+このドキュメントでは、 TiDB Cloudコンソールのデータ アプリでエンドポイントを管理する方法について説明します。
 
-## Before you begin
+## 始める前に {#before-you-begin}
 
-- Before you create an endpoint, make sure the following:
+-   エンドポイントを作成する前に、次の点を確認してください。
 
-    - You have created a cluster and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
-    - The databases, tables, and columns that the endpoint will operate on already exist in the target cluster.
+    -   クラスターとデータ アプリを作成しました。詳細については、 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)参照してください。
+    -   エンドポイントが操作するデータベース、テーブル、および列は、ターゲット クラスターにすでに存在しています。
 
-- Before you call an endpoint, make sure that you have created an API key in the Data App. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
+-   エンドポイントを呼び出す前に、データ アプリで API キーを作成していることを確認してください。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)参照してください。
 
-## Create an endpoint
+## エンドポイントを作成する {#create-an-endpoint}
 
-In Data Service, you can automatically generate endpoints, manually create endpoints, or add predefined system endpoints.
+Data Service では、エンドポイントを自動的に生成したり、エンドポイントを手動で作成したり、定義済みのシステム エンドポイントを追加したりできます。
 
-> **Tip:**
+> **ヒント：**
 >
-> You can also create an endpoint from a SQL file in SQL Editor. For more information, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
+> SQL エディターで SQL ファイルからエンドポイントを作成することもできます。詳細については、 [SQL ファイルからエンドポイントを生成する](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)参照してください。
 
-### Generate an endpoint automatically
+### エンドポイントを自動的に生成する {#generate-an-endpoint-automatically}
 
-In TiDB Cloud Data Service, you can generate one or multiple endpoints automatically in one go as follows:
+TiDB Cloudデータ サービスでは、次のようにして 1 つまたは複数のエンドポイントを一度に自動的に生成できます。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Autogenerate Endpoint**. The dialog for endpoint generation is displayed.
-3. In the dialog, do the following:
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
-    1. Select the target cluster, database, and table for the endpoint to be generated.
+2.  左側のペインで、対象のデータ アプリを見つけ、アプリ名の右側にある**+**をクリックして、**エンドポイントの自動生成**をクリックします。エンドポイント生成のダイアログが表示されます。
 
-        > **Note:**
+3.  ダイアログで、次の操作を行います。
+
+    1.  生成するエンドポイントのターゲット クラスター、データベース、およびテーブルを選択します。
+
+        > **注記：**
         >
-        > The **Table** drop-down list includes only user-defined tables with at least one column, excluding system tables and any tables without a column definition.
+        > **テーブル**ドロップダウン リストには、システム テーブルと列定義のないテーブルを除き、少なくとも 1 つの列を持つユーザー定義テーブルのみが含まれます。
 
-    2. Select at least one HTTP operation (such as `GET (Retrieve)`, `POST (Create)`, and `PUT (Update)`) for the endpoint to be generated.
+    2.  生成するエンドポイントに対して、少なくとも 1 つの HTTP 操作 ( `GET (Retrieve)` 、 `POST (Create)` 、 `PUT (Update)`など) を選択します。
 
-        For each operation you select, TiDB Cloud Data Service will generate a corresponding endpoint. If you select a batch operation (such as `POST (Batch Create)`), the generated endpoint lets you operate on multiple rows in a single request.
+        選択した操作ごとに、 TiDB Cloud Data Service は対応するエンドポイントを生成します。バッチ操作 ( `POST (Batch Create)`など) を選択した場合、生成されたエンドポイントを使用すると、1 回のリクエストで複数の行を操作できます。
 
-        If the table you selected contains [vector data types](/tidb-cloud/vector-search-data-types.md), you can enable the **Vector Search Operations** option and select a vector distance function to generate a vector search endpoint that automatically calculates vector distances based on your selected distance function. The supported [vector distance functions](/tidb-cloud/vector-search-functions-and-operators.md) include the following:
+        選択したテーブルに[ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)が含まれている場合は、**ベクトル検索操作**オプションを有効にしてベクトル距離関数を選択し、選択した距離関数に基づいてベクトル距離を自動的に計算するベクトル検索エンドポイントを生成できます。サポートされている[ベクトル距離関数](/tidb-cloud/vector-search-functions-and-operators.md)次のとおりです。
 
-        - `VEC_L2_DISTANCE` (default): calculates the L2 distance (Euclidean distance) between two vectors.
-        - `VEC_COSINE_DISTANCE`: calculates the cosine distance between two vectors.
-        - `VEC_NEGATIVE_INNER_PRODUCT`: calculates the distance by using the negative of the inner product between two vectors.
-        - `VEC_L1_DISTANCE`: calculates the L1 distance (Manhattan distance) between two vectors.
-       
-    3. (Optional) Configure a timeout and tag for the operations. All the generated endpoints will automatically inherit the configured properties, which can be modified later as needed.
-    4. (Optional) The **Auto-Deploy Endpoint** option (disabled by default) controls whether to enable the direct deployment of the generated endpoints. When it is enabled, the draft review process is skipped, and the generated endpoints are deployed immediately without further manual review or approval.
+        -   `VEC_L2_DISTANCE` (デフォルト): 2 つのベクトル間の L2 距離 (ユークリッド距離) を計算します。
+        -   `VEC_COSINE_DISTANCE` : 2 つのベクトル間のコサイン距離を計算します。
+        -   `VEC_NEGATIVE_INNER_PRODUCT` : 2 つのベクトル間の内積の負の値を使用して距離を計算します。
+        -   `VEC_L1_DISTANCE` : 2 つのベクトル間の L1 距離 (マンハッタン距離) を計算します。
 
-4. Click **Generate**.
+    3.  (オプション) 操作のタイムアウトとタグを構成します。生成されたすべてのエンドポイントは、構成されたプロパティを自動的に継承します。これらのプロパティは、必要に応じて後で変更できます。
 
-    The generated endpoint is displayed at the top of the endpoint list.
+    4.  (オプション)**自動デプロイ エンドポイント**オプション (デフォルトでは無効) は、生成されたエンドポイントの直接デプロイを有効にするかどうかを制御します。有効にすると、ドラフト レビュー プロセスがスキップされ、生成されたエンドポイントは、手動によるレビューや承認なしですぐにデプロイされます。
 
-5. Check the generated endpoint name, SQL statements, properties, and parameters of the new endpoint.
+4.  **[生成]**をクリックします。
 
-    - Endpoint name: the generated endpoint name is in the `/<name of the selected table>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the endpoint name. For example, if the selected table name is `sample_table` and the selected operation is `POST (Create)`, the generated endpoint is displayed as `POST /sample_table`.
+    生成されたエンドポイントは、エンドポイント リストの上部に表示されます。
 
-        - If a batch operation is selected, TiDB Cloud Data Service appends `/bulk` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Batch Create)`, the generated endpoint is displayed as `POST /sample_table/bulk`.
-        - If `POST (Vector Similarity Search)` is selected, TiDB Cloud Data Service appends `/vector_search` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Vector Similarity Search)`, the generated endpoint is displayed as `POST /sample_table/vector_search`.
-        - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_dump_<random letters>` to the name of the generated endpoint. For example, `/sample_table_dump_EUKRfl`.
+5.  新しいエンドポイントの生成されたエンドポイント名、SQL ステートメント、プロパティ、およびパラメータを確認します。
 
-    - SQL statements: TiDB Cloud Data Service automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
-    - Endpoint properties: TiDB Cloud Data Service automatically configures the endpoint path, request method, timeout, and tag according to your selection. You can find the properties in the right pane of the page.
-    - Endpoint parameters: TiDB Cloud Data Service automatically configures parameters for the generated endpoints. You can find the parameters in the right pane of the page.
+    -   エンドポイント名: 生成されたエンドポイント名は`/<name of the selected table>`形式になり、リクエスト メソッド ( `GET` 、 `POST` 、 `PUT`など) がエンドポイント名の前に表示されます。たとえば、選択したテーブル名が`sample_table`で、選択した操作が`POST (Create)`の場合、生成されたエンドポイントは`POST /sample_table`として表示されます。
 
-6. If you want to modify the details of the generated endpoint, such as its name, SQL statements, properties, or parameters, refer to the instructions provided in [Develop an endpoint](#deploy-an-endpoint).
+        -   バッチ操作を選択した場合、 TiDB Cloud Data Service は生成されたエンドポイントの名前に`/bulk`追加します。たとえば、選択したテーブル名が`/sample_table`で、選択した操作が`POST (Batch Create)`の場合、生成されたエンドポイントは`POST /sample_table/bulk`として表示されます。
+        -   `POST (Vector Similarity Search)`選択した場合、 TiDB Cloud Data Service は生成されたエンドポイントの名前に`/vector_search`追加します。たとえば、選択したテーブル名が`/sample_table`で、選択した操作が`POST (Vector Similarity Search)`の場合、生成されたエンドポイントは`POST /sample_table/vector_search`として表示されます。
+        -   同じリクエスト メソッドとエンドポイント名を持つエンドポイントがすでに存在する場合、 TiDB Cloud Data Service は生成されたエンドポイントの名前に`_dump_<random letters>`追加します。たとえば、 `/sample_table_dump_EUKRfl`です。
 
-### Create an endpoint manually
+    -   SQL ステートメント: TiDB Cloud Data Service は、テーブル列の仕様と選択されたエンドポイント操作に従って、生成されたエンドポイントの SQL ステートメントを自動的に書き込みます。エンドポイント名をクリックすると、ページの中央のセクションにその SQL ステートメントが表示されます。
 
-To create an endpoint manually, perform the following steps:
+    -   エンドポイント プロパティ: TiDB Cloud Data Service は、選択内容に応じてエンドポイント パス、リクエスト メソッド、タイムアウト、タグを自動的に構成します。プロパティはページの右側のペインにあります。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Create Endpoint**.
-3. Update the default name if necessary. The newly created endpoint is added to the top of the endpoint list.
-4. Configure the new endpoint according to the instructions in [Develop an endpoint](#develop-an-endpoint).
+    -   エンドポイント パラメータ: TiDB Cloud Data Service は、生成されたエンドポイントのパラメータを自動的に構成します。パラメータはページの右側のペインにあります。
 
-### Add a predefined system endpoint
+6.  生成されたエンドポイントの詳細（名前、SQL ステートメント、プロパティ、パラメータなど）を変更する場合は、 [エンドポイントを開発する](#deploy-an-endpoint)に記載されている手順を参照してください。
 
-Data Service provides an endpoint library with predefined system endpoints that you can directly add to your Data App, reducing the effort in your endpoint development. Currently, the library only includes the `/system/query` endpoint, which enables you to execute any SQL statement by simply passing the statement in the predefined `sql` parameter.
+### エンドポイントを手動で作成する {#create-an-endpoint-manually}
 
-To add a predefined system endpoint to your Data App, perform the following steps:
+エンドポイントを手動で作成するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、対象のデータ アプリを見つけ、アプリ名の右側にある**+**をクリックして、**エンドポイントの作成を**クリックします。
+3.  必要に応じてデフォルト名を更新します。新しく作成されたエンドポイントは、エンドポイント リストの先頭に追加されます。
+4.  [エンドポイントを開発する](#develop-an-endpoint)の手順に従って新しいエンドポイントを構成します。
 
-2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Manage Endpoint Library**.
+### 定義済みのシステムエンドポイントを追加する {#add-a-predefined-system-endpoint}
 
-    A dialog for endpoint library management is displayed. Currently, only **Execute Query** (that is, the `/system/query` endpoint) is provided in the dialog.
+データ サービスは、データ アプリに直接追加できる定義済みのシステム エンドポイントを含むエンドポイント ライブラリを提供するため、エンドポイント開発の労力が軽減されます。現在、ライブラリには`/system/query`エンドポイントのみが含まれており、定義済みの`sql`パラメータでステートメントを渡すだけで、任意の SQL ステートメントを実行できます。
 
-3. To add the `/system/query` endpoint to your Data App, toggle the **Execute Query** switch to **Added**.
+定義済みのシステム エンドポイントをデータ アプリに追加するには、次の手順を実行します。
 
-    > **Tip:**
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+
+2.  左側のペインで、対象のデータ アプリを見つけ、アプリ名の右側にある**+**をクリックして、**エンドポイント ライブラリの管理を**クリックします。
+
+    エンドポイント ライブラリ管理のダイアログが表示されます。現在、ダイアログには**クエリの実行**(つまり、 `/system/query`エンドポイント) のみが提供されています。
+
+3.  データ アプリに`/system/query`エンドポイントを追加するには、 **[クエリの実行]**スイッチを**[追加済み]**に切り替えます。
+
+    > **ヒント：**
     >
-    > To remove an added predefined endpoint from your Data App, toggle the **Execute Query** switch to **Removed**.
+    > 追加された定義済みエンドポイントをデータ アプリから削除するには、 **[クエリの実行]**スイッチを**[削除済み]**に切り替えます。
 
-4. Click **Save**.
+4.  **「保存」**をクリックします。
 
-    > **Note:**
+    > **注記：**
     >
-    > - After you click **Save**, the added or removed endpoint is deployed to production immediately, which makes the added endpoint accessible and the removed endpoint inaccessible immediately.
-    > - If a non-predefined endpoint with the same path and method already exists in the current App, the creation of the system endpoint will fail.
+    > -   **[保存]**をクリックすると、追加または削除されたエンドポイントが直ちに本番にデプロイされ、追加されたエンドポイントは直ちにアクセス可能になり、削除されたエンドポイントは直ちにアクセス不可能になります。
+    > -   現在のアプリに同じパスとメソッドを持つ未定義のエンドポイントが既に存在する場合、システム エンドポイントの作成は失敗します。
 
-    The added system-provided endpoint is displayed at the top of the endpoint list.
+    追加されたシステム提供のエンドポイントは、エンドポイント リストの上部に表示されます。
 
-5. Check the endpoint name, SQL statements, properties, and parameters of the new endpoint.
+5.  新しいエンドポイントのエンドポイント名、SQL ステートメント、プロパティ、およびパラメータを確認します。
 
-    > **Note:**
+    > **注記：**
     >
-    > The `/system/query` endpoint is powerful and versatile but can be potentially destructive. Use it with discretion and ensure the queries are secure and well-considered to prevent unintended consequences.
+    > `/system/query`エンドポイントは強力で多用途ですが、潜在的に破壊的になる可能性があります。慎重に使用し、予期しない結果を防ぐためにクエリが安全で十分に検討されていることを確認してください。
 
-    - Endpoint name: the endpoint name and path is `/system/query`, and the request method `POST`.
-    - SQL statements: the `/system/query` endpoint does not come with any SQL statement. You can find the SQL editor in the middle section of the page and write your desired SQL statements in the SQL editor. Note that the SQL statements written in the SQL editor for the `/system/query` endpoint will be saved in the SQL editor so you can further develop and test them next time but they will not be saved in the endpoint configuration.
-    - Endpoint properties: in the right pane of the page, you can find the endpoint properties on the **Properties** tab. Unlike other custom endpoints, only the `timeout` and `max rows` properties can be customized for system endpoints.
-    - Endpoint parameters: in the right pane of the page, you can find the endpoint parameters on the **Params** tab. The parameters of the `/system/query` endpoint are configured automatically and cannot be modified.
+    -   エンドポイント名: エンドポイント名とパスは`/system/query` 、リクエストメソッドは`POST` 。
+    -   SQL ステートメント: `/system/query`エンドポイントには SQL ステートメントは付属していません。ページの中央のセクションに SQL エディターがあり、SQL エディターで必要な SQL ステートメントを記述できます。3 `/system/query`ポイントの SQL エディターで記述された SQL ステートメントは SQL エディターに保存されるため、次回さらに開発してテストできますが、エンドポイント構成には保存されないことに注意してください。
+    -   エンドポイント プロパティ: ページの右側のペインの**[プロパティ]**タブにエンドポイント プロパティがあります。他のカスタム エンドポイントとは異なり、システム エンドポイントでは`timeout`と`max rows`プロパティのみをカスタマイズできます。
+    -   エンドポイント パラメータ: ページの右側のペインの**[パラメータ]**タブでエンドポイント パラメータを見つけることができます。3 `/system/query`のエンドポイントのパラメータは自動的に構成され、変更することはできません。
 
-## Develop an endpoint
+## エンドポイントを開発する {#develop-an-endpoint}
 
-For each endpoint, you can write SQL statements to execute on a TiDB cluster, define parameters for the SQL statements, or manage the name and version.
+各エンドポイントに対して、TiDB クラスターで実行する SQL ステートメントを記述したり、SQL ステートメントのパラメーターを定義したり、名前とバージョンを管理したりできます。
 
-> **Note:**
+> **注記：**
 >
-> If you have connected your Data App to GitHub with **Auto Sync & Deployment** enabled, you can also update the endpoint configurations using GitHub. Any changes you made in GitHub will be deployed in TiDB Cloud Data Service automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+> **自動同期とデプロイメントを**有効にしてデータ アプリを GitHub に接続している場合は、GitHub を使用してエンドポイント構成を更新することもできます。GitHub で行った変更は、 TiDB Cloudデータ サービスに自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)参照してください。
 
-### Configure properties
+### プロパティを構成する {#configure-properties}
 
-On the right pane of the endpoint details page, you can click the **Properties** tab to view and configure properties of the endpoint.
+エンドポイントの詳細ページの右側のペインで、 **[プロパティ]**タブをクリックすると、エンドポイントのプロパティを表示および構成できます。
 
-#### Basic properties
+#### 基本的なプロパティ {#basic-properties}
 
-- **Path**: the path that users use to access the endpoint.
+-   **パス**: ユーザーがエンドポイントにアクセスするために使用するパス。
 
-    - The length of the path must be less than 64 characters.
-    - The combination of the request method and the path must be unique within a Data App.
-    - Only letters, numbers, underscores (`_`), slashes (`/`), and parameters enclosed in curly braces (such as `{var}`) are allowed in a path. Each path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
-    - For parameters enclosed in `{ }`, only letters, numbers, and underscores (`_`) are allowed. Each parameter enclosed in `{ }` must start with a letter or underscore (`_`).
+    -   パスの長さは 64 文字未満にする必要があります。
 
-    > **Note:**
+    -   リクエスト メソッドとパスの組み合わせは、データ アプリ内で一意である必要があります。
+
+    -   パスには、文字、数字、アンダースコア ( `_` )、スラッシュ ( `/` )、および中括弧で囲まれたパラメータ ( `{var}`など) のみを使用できます。各パスはスラッシュ ( `/` ) で始まり、文字、数字、またはアンダースコア ( `_` ) で終わる必要があります。たとえば、 `/my_endpoint/get_id`です。
+
+    -   `{ }`で囲まれたパラメータには、文字、数字、アンダースコア（ `_` ）のみを使用できます。 `{ }`で囲まれた各パラメータは、文字またはアンダースコア（ `_` ）で始まる必要があります。
+
+    > **注記：**
     >
-    > - In a path, each parameter must be at a separate level and does not support prefixes or suffixes.
+    > -   パスでは、各パラメータは別々のレベルにある必要があり、プレフィックスやサフィックスはサポートされません。
     >
-    >    Valid path: ```/var/{var}``` and  ```/{var}```
+    >     有効なパス: `/var/{var}`と`/{var}`
     >
-    >    Invalid path: ```/var{var}``` and ```/{var}var```
+    >     無効なパス: `/var{var}`と`/{var}var`
     >
-    > - Paths with the same method and prefix might conflict, as in the following example:
+    > -   次の例のように、同じメソッドとプレフィックスを持つパスは競合する可能性があります。
     >
-    >    ```GET /var/{var1}```
+    >     `GET /var/{var1}`
     >
-    >    ```GET /var/{var2}```
+    >     `GET /var/{var2}`
     >
-    >   These two paths will conflict with each other because `GET /var/123` matches both.
+    >     `GET /var/123`両方に一致するため、これら 2 つのパスは互いに競合します。
     >
-    > - Paths with parameters have lower priority than paths without parameters. For example:
+    > -   パラメータ付きのパスは、パラメータなしのパスよりも優先順位が低くなります。例:
     >
-    >    ```GET /var/{var1}```
+    >     `GET /var/{var1}`
     >
-    >    ```GET /var/123```
+    >     `GET /var/123`
     >
-    >   These two paths will not conflict because `GET /var/123` takes precedence.
+    >     `GET /var/123`優先されるため、これら 2 つのパスは競合しません。
     >
-    > - Path parameters can be used directly in SQL. For more information, see [Configure parameters](#configure-parameters).
+    > -   パスパラメータはSQLで直接使用できます。詳細については、 [パラメータを設定する](#configure-parameters)参照してください。
 
-- **Endpoint URL**: (read-only) the default URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`. To configure a custom domain for the Data App, see [Custom Domain in Data Service](/tidb-cloud/data-service-custom-domain.md).
+-   **エンドポイント URL** : (読み取り専用) デフォルトの URL は、対応するクラスタが配置されているリージョン、データ アプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データ アプリのカスタム ドメインを構成するには、 [データ サービスにおけるカスタム ドメイン](/tidb-cloud/data-service-custom-domain.md)参照してください。
 
-- **Request Method**: the HTTP method of the endpoint. The following methods are supported:
+-   **リクエスト メソッド**: エンドポイントの HTTP メソッド。次のメソッドがサポートされています。
 
-    - `GET`: use this method to query or retrieve data, such as a `SELECT` statement.
-    - `POST`: use this method to insert or create data, such as an `INSERT` statement.
-    - `PUT`: use this method to update or modify data, such as an `UPDATE` statement.
-    - `DELETE`: use this method to delete data, such as a `DELETE` statement.
+    -   `GET` : このメソッドを使用して、 `SELECT`ステートメントなどのデータを照会または取得します。
+    -   `POST` : このメソッドを使用して、 `INSERT`ステートメントなどのデータを挿入または作成します。
+    -   `PUT` : このメソッドを使用して、 `UPDATE`ステートメントなどのデータを更新または変更します。
+    -   `DELETE` : `DELETE`ステートメントなどのデータを削除するには、このメソッドを使用します。
 
-- **Description** (Optional): the description of the endpoint.
+-   **説明**(オプション): エンドポイントの説明。
 
-#### Advanced properties
+#### 高度なプロパティ {#advanced-properties}
 
-- **Timeout(ms)**: the timeout for the endpoint, in milliseconds.
-- **Max Rows**: the maximum number of rows that the endpoint can operate or return.
-- **Tag**: the tag used for identifying a group of endpoints.
-- **Pagination**: this property is available only when the request method is `GET` and the last SQL statement of the endpoint is a `SELECT` operation. When **Pagination** is enabled, you can paginate the results by specifying `page` and `page_size` as query parameters when calling the endpoint, such as `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>`. For more information, see [Call an endpoint](#call-an-endpoint).
+-   **タイムアウト(ms)** : エンドポイントのタイムアウト(ミリ秒)。
 
-    > **Note:**
+-   **最大行数**: エンドポイントが操作または返すことができる行の最大数。
+
+-   **タグ**: エンドポイントのグループを識別するために使用されるタグ。
+
+-   **ページネーション**: このプロパティは、リクエスト メソッドが`GET`で、エンドポイントの最後の SQL ステートメントが`SELECT`操作の場合にのみ使用できます。**ページネーション**が有効な場合、エンドポイントを呼び出すときにクエリ パラメーターとして`page`と`page_size`指定することにより、結果をページ分けできます (例: `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>` 。詳細については、 [エンドポイントを呼び出す](#call-an-endpoint)参照してください。
+
+    > **注記：**
     >
-    > - If you do not include the `page` and `page_size` parameters in the request, the default behavior is to return the maximum number of rows specified in the **Max Rows** property on a single page.
-    > - The `page_size` must be less than or equal to the **Max Rows** property. Otherwise, an error is returned.
+    > -   リクエストに`page`および`page_size`パラメータを含めない場合、デフォルトの動作では、1 ページの**Max Rows**プロパティで指定された最大行数が返されます。
+    > -   `page_size`は**Max Rows**プロパティ以下である必要があります。それ以外の場合は、エラーが返されます。
 
-- **Cache Response**: this property is available only when the request method is `GET`. When **Cache Response** is enabled, TiDB Cloud Data Service can cache the response returned by your `GET` requests within a specified time-to-live (TTL) period.
-- **Time-to-live(s)**: this property is available only when **Cache Response** is enabled. You can use it to specify the time-to-live (TTL) period in seconds for cached response. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance.
-- **Batch Operation**: this property is visible only when the request method is `POST` or `PUT`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by putting an array of data objects to the `items` field of an object in the `--data-raw` option of your curl command when [calling the endpoint](#call-an-endpoint).
+-   **キャッシュ レスポンス**: このプロパティは、リクエスト メソッドが`GET`場合にのみ使用できます。**キャッシュ レスポンス**を有効にすると、 TiDB Cloud Data Service は、指定された有効期間 (TTL) 内に`GET`のリクエストによって返されたレスポンスをキャッシュできます。
 
-    > **Note:**
+-   **有効期間**: このプロパティは、**キャッシュ レスポンス**が有効な場合にのみ使用できます。これを使用して、キャッシュされたレスポンスの有効期間 (TTL) を秒単位で指定できます。TTL 期間中に同じ`GET`リクエストを再度行うと、データ サービスはターゲット データベースからデータを再度取得するのではなく、キャッシュされたレスポンスを直接返すため、クエリのパフォーマンスが向上します。
+
+-   **バッチ操作**: このプロパティは、リクエスト メソッドが`POST`または`PUT`場合にのみ表示されます。**バッチ操作を**有効にすると、1 つのリクエストで複数の行を操作できます。たとえば、14 の場合、curl [エンドポイントを呼び出す](#call-an-endpoint)の`--data-raw`オプションでオブジェクトの`items`フィールドにデータ オブジェクトの配列を配置することで、1 つの`POST`リクエストで複数行のデータを挿入できます。
+
+    > **注記：**
     >
-    > The endpoint with **Batch Operation** enabled supports both array and object formats for the request body: `[{dataObject1}, {dataObject2}]` and `{items: [{dataObject1}, {dataObject2}]}`. For better compatibility with other systems, it is recommended that you use the object format `{items: [{dataObject1}, {dataObject2}]}`.
+    > **バッチ操作**が有効になっているエンドポイントは、リクエスト本文の配列形式とオブジェクト形式の両方をサポートします: `[{dataObject1}, {dataObject2}]`と`{items: [{dataObject1}, {dataObject2}]}` 。他のシステムとの互換性を高めるために、オブジェクト形式`{items: [{dataObject1}, {dataObject2}]}`を使用することをお勧めします。
 
-### Write SQL statements
+### SQL文を書く {#write-sql-statements}
 
-On the SQL editor of the endpoint details page, you can write and run the SQL statements for an endpoint. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
+エンドポイントの詳細ページの SQL エディターでは、エンドポイントの SQL ステートメントを記述して実行できます。また、単に`--`と入力して指示を入力するだけで、AI によって SQL ステートメントが自動的に生成されるようにすることもできます。
 
-1. Select a cluster.
+1.  クラスターを選択します。
 
-    > **Note:**
+    > **注記：**
     >
-    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
+    > ドロップダウン リストには、データ アプリにリンクされているクラスターのみが表示されます。リンクされたクラスターを管理するには、 [リンクされたクラスターを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)参照してください。
 
-    On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
+    SQL エディターの上部にあるドロップダウン リストから、SQL ステートメントを実行するクラスターを選択します。すると、右側のペインの**[スキーマ]**タブに、このクラスターのすべてのデータベースが表示されます。
 
-2. Depending on your endpoint type, do one of the following to select a database:
+2.  エンドポイントの種類に応じて、次のいずれかを実行してデータベースを選択します。
 
-    - Predefined system endpoints: on the upper part of the SQL editor, select the target database from the drop-down list.
-    - Other endpoints: write a SQL statement to specify the target database in the SQL editor. For example, `USE database_name;`.
+    -   定義済みシステム エンドポイント: SQL エディターの上部にあるドロップダウン リストからターゲット データベースを選択します。
+    -   その他のエンドポイント: SQL エディターでターゲット データベースを指定する SQL ステートメントを記述します。たとえば、 `USE database_name;`です。
 
-3. Write SQL statements.
+3.  SQL ステートメントを記述します。
 
-    In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
+    SQL エディターでは、テーブル結合クエリ、複雑なクエリ、集計関数などのステートメントを記述できます。また、単に`--`と入力して指示を入力するだけで、AI が SQL ステートメントを自動的に生成することもできます。
 
-    To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values. For more information, see [Parameters](#configure-parameters).
+    パラメータを定義するには、SQL ステートメントに`${ID}`のような変数プレースホルダとして挿入します。たとえば、 `SELECT * FROM table_name WHERE id = ${ID}`です。次に、右側のペインの**[Params]**タブをクリックして、パラメータ定義を変更し、値をテストします。詳細については、 [パラメータ](#configure-parameters)参照してください。
 
-    When defining an array parameter, the parameter is automatically converted to multiple comma-separated values in the SQL statement. To make sure that the SQL statement is valid, you need to add parentheses (`()`) around the parameter in some SQL statements (such as `IN`). For example, if you define an array parameter `ID` with test value `1,2,3`, use `SELECT * FROM table_name WHERE id IN (${ID})` to query the data.
+    配列パラメータを定義すると、パラメータは SQL 文で複数のコンマ区切り値に自動的に変換されます。SQL 文が有効であることを確認するには、一部の SQL 文 ( `IN`など) でパラメータを括弧 ( `()` ) で囲む必要があります。たとえば、テスト値`1,2,3`で配列パラメータ`ID`を定義する場合は、 `SELECT * FROM table_name WHERE id IN (${ID})`使用してデータを照会します。
 
-    > **Note:**
+    > **注記：**
     >
-    > - The parameter name is case-sensitive.
-    > - The parameter cannot be used as a table name or column name.
+    > -   パラメータ名では大文字と小文字が区別されます。
+    > -   パラメータはテーブル名または列名として使用できません。
 
-4. Run SQL statements.
+4.  SQL ステートメントを実行します。
 
-    If you have inserted parameters in the SQL statements, make sure that you have set test values or default values for the parameters in the **Params** tab on the right pane. Otherwise, an error is returned.
+    SQL ステートメントにパラメータを挿入した場合は、右側のペインの**[Params]**タブでパラメータのテスト値またはデフォルト値が設定されていることを確認してください。設定されていない場合は、エラーが返されます。
 
     <SimpleTab>
-    <div label="macOS">
+     <div label="macOS">
 
-    For macOS:
+    macOSの場合:
 
-    - If you have only one statement in the editor, to run it, press **⌘ + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
+    -   エディターにステートメントが1つしかない場合は、それを実行するには**⌘ + Enter**を押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**走る**。
 
-    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor, and then press **⌘ + Enter** or click **Run**.
+    -   エディターに複数のステートメントがある場合、そのうちの 1 つまたは複数のステートメントを順番に実行するには、対象のステートメントにカーソルを置くか、カーソルで対象のステートメントの行を選択して、 **⌘ + Enter キーを**押すか、 **[実行]**をクリックします。
 
-    - To run all statements in the editor sequentially, press **⇧ + ⌘ + Enter**, or select the lines of all statements with your cursor and click **Run**.
+    -   エディター内のすべてのステートメントを順番に実行するには、 **⇧ + ⌘ + Enter を**押すか、カーソルですべてのステートメントの行を選択して**「実行」**をクリックします。
 
     </div>
 
     <div label="Windows/Linux">
 
-    For Windows or Linux:
+    Windows または Linux の場合:
 
-    - If you have only one statement in the editor, to run it, press **Ctrl + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
+    -   エディターにステートメントが1つしかない場合は、それを実行するには**Ctrl + Enter**を押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**走る**。
 
-    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor, and then press **Ctrl + Enter** or click **Run**.
+    -   エディターに複数のステートメントがある場合、そのうちの 1 つまたは複数のステートメントを順番に実行するには、対象のステートメントにカーソルを置くか、カーソルで対象のステートメントの行を選択して、 **Ctrl + Enter キーを**押すか、[**実行]**をクリックします。
 
-    - To run all statements in the editor sequentially, press **Shift + Ctrl + Enter**, or select the lines of all statements with your cursor and click **Run**.
+    -   エディター内のすべてのステートメントを順番に実行するには、 **Shift + Ctrl + Enter**を押すか、カーソルですべてのステートメントの行を選択して**「実行」**をクリックします。
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-    After running the statements, you can see the query results immediately in the **Result** tab at the bottom of the page.
+    ステートメントを実行すると、ページの下部にある**[結果]**タブにクエリ結果がすぐに表示されます。
 
-    > **Note:**
+    > **注記：**
     >
-    > The returned result has a size limit of 8 MiB.
+    > 返される結果のサイズ制限は 8 MiB です。
 
-### Configure parameters
+### パラメータを設定する {#configure-parameters}
 
-On the right pane of the endpoint details page, you can click the **Params** tab to view and manage the parameters used in the endpoint.
+エンドポイントの詳細ページの右側のペインで、 **[Params]**タブをクリックすると、エンドポイントで使用されるパラメータを表示および管理できます。
 
-In the **Definition** section, you can view and manage the following properties for a parameter:
+**定義**セクションでは、パラメータの次のプロパティを表示および管理できます。
 
-- The parameter name: the name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`). **DO NOT** use `page` and `page_size` as parameter names, which are reserved for pagination of request results.
-- **Required**: specifies whether the parameter is required in the request. For path parameters, the configuration is required and cannot be modified. For other parameters, the default configuration is not required.
-- **Type**: specifies the data type of the parameter. For path parameters, only `STRING` and `INTEGER` are supported. For other parameters, `STRING`, `NUMBER`, `INTEGER`, `BOOLEAN`, and `ARRAY` are supported.
+-   パラメータ名: 名前には文字、数字、アンダースコア ( `_` ) のみを含めることができ、文字またはアンダースコア ( `_` ) で始まる必要があります。 `page`と`page_size` 、リクエスト結果のページ区切り用に予約されているため、パラメータ名として使用し**ないでください**。
 
-    When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+-   **必須**: リクエストでパラメータが必須かどうかを指定します。パス パラメータの場合、構成は必須であり、変更できません。その他のパラメータの場合、デフォルトの構成は必須ではありません。
 
-- **Enum Value**: (optional) specifies the valid values for the parameter and is available only when the parameter type is `STRING`, `INTEGER`, or `NUMBER`.
+-   **タイプ**: パラメータのデータ型を指定します。パスパラメータの場合、 `STRING`と`INTEGER`のみがサポートされます。その他のパラメータの場合、 `STRING` 、 `NUMBER` 、 `INTEGER` 、 `BOOLEAN` 、および`ARRAY`がサポートされます。
 
-    - If you leave this field empty, the parameter can be any value of the specified type.
-    - To specify multiple valid values, you can separate them with a comma (`,`). For example, if you set the parameter type to `STRING` and specify this field as `foo, bar`, the parameter value can only be `foo` or `bar`.
+    `STRING`型のパラメータを使用する場合は、引用符 ( `'`または`"` ) を追加する必要はありません。たとえば、 `foo` `STRING`型に有効であり、 `"foo"`として処理されますが、 `"foo"` `"\"foo\""`として処理されます。
 
-- **ItemType**: specifies the item type of an `ARRAY` type parameter.
-- **Default Value**: specifies the default value of the parameter.
+-   **列挙値**: (オプション) パラメータの有効な値を指定します。パラメータ タイプが`STRING` 、 `INTEGER` 、または`NUMBER`の場合にのみ使用できます。
 
-    - For `ARRAY` type, you need to separate multiple values with a comma (`,`).
-    - Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
-    - If you do not set a test value for a parameter, the default value is used when testing the endpoint.
-- **Location**: indicates the location of the parameter. This property cannot be modified.
-    - For path parameters, this property is `Path`.
-    - For other parameters, if the request method is `GET` or `DELETE`, this property is `Query`. If the request method is `POST` or `PUT`, this property is `Body`.
+    -   このフィールドを空のままにすると、パラメータは指定されたタイプの任意の値になります。
+    -   複数の有効な値を指定するには、カンマ ( `,` ) で区切ります。たとえば、パラメータ タイプを`STRING`に設定し、このフィールドを`foo, bar`に指定した場合、パラメータ値は`foo`または`bar`のみになります。
 
-In the **Test Values** section, you can view and set test parameters. These values are used as the parameter values when you test the endpoint. Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
+-   **ItemType** : `ARRAY`型パラメータの項目タイプを指定します。
 
-### Rename
+-   **デフォルト値**: パラメータのデフォルト値を指定します。
 
-To rename an endpoint, perform the following steps:
+    -   `ARRAY`型の場合、複数の値をカンマ（ `,` ）で区切る必要があります。
+    -   値がパラメータの型に変換できることを確認してください。変換できない場合、エンドポイントはエラーを返します。
+    -   パラメータにテスト値を設定しない場合は、エンドポイントをテストするときにデフォルト値が使用されます。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Locate the endpoint you want to rename, click **...** > **Rename**., and enter a new name for the endpoint.
+-   **場所**: パラメータの場所を示します。このプロパティは変更できません。
+    -   パスパラメータの場合、このプロパティは`Path`です。
+    -   その他のパラメータについては、リクエストメソッドが`GET`または`DELETE`場合、このプロパティは`Query`なります。リクエストメソッドが`POST`または`PUT`場合、このプロパティは`Body`になります。
 
-> **Note:**
+**テスト値**セクションでは、テスト パラメータを表示および設定できます。これらの値は、エンドポイントをテストするときにパラメータ値として使用されます。値がパラメータの型に変換できることを確認してください。そうでない場合、エンドポイントはエラーを返します。
+
+### 名前を変更 {#rename}
+
+エンドポイントの名前を変更するには、次の手順を実行します。
+
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
+3.  名前を変更するエンドポイントを見つけて、 **「...」** &gt; **「名前の変更」**をクリックし、エンドポイントの新しい名前を入力します。
+
+> **注記：**
 >
-> Predefined system endpoints do not support renaming.
+> 定義済みのシステム エンドポイントは名前の変更をサポートしていません。
 
-## Test an endpoint
+## エンドポイントをテストする {#test-an-endpoint}
 
-To test an endpoint, perform the following steps:
+エンドポイントをテストするには、次の手順を実行します。
 
-> **Tip:**
+> **ヒント：**
 >
-> If you have imported your Data App to Postman, you can also test endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
+> Data App を Postman にインポートした場合は、Postman で Data App のエンドポイントをテストすることもできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)参照してください。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Click the name of the endpoint you want to test to view its details.
-4. (Optional) If the endpoint contains parameters, you need to set test values before testing.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
-    1. On the right pane of the endpoint details page, click the **Params** tab.
-    2. Expand the **Test Values** section and set test values for the parameters.
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
 
-        If you do not set a test value for a parameter, the default value is used.
+3.  テストするエンドポイントの名前をクリックして、その詳細を表示します。
 
-5. Click **Test** in the upper-right corner.
+4.  (オプション) エンドポイントにパラメータが含まれている場合は、テストの前にテスト値を設定する必要があります。
 
-    > **Tip:**
+    1.  エンドポイントの詳細ページの右側のペインで、 **[Params]**タブをクリックします。
+    2.  **テスト値**セクションを展開し、パラメータのテスト値を設定します。
+
+        パラメータにテスト値を設定しない場合は、デフォルト値が使用されます。
+
+5.  右上隅の**「テスト」を**クリックします。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also press <kbd>F5</kbd> to test the endpoint.
+    > あるいは、 <kbd>F5 キー</kbd>を押してエンドポイントをテストすることもできます。
 
-After testing the endpoint, you can see the response as JSON at the bottom of the page. For more information about the JSON response, refer to [Response of an endpoint](#response).
+エンドポイントをテストすると、ページの下部に JSON として応答が表示されます。JSON 応答の詳細については、 [エンドポイントの応答](#response)を参照してください。
 
-## Deploy an endpoint
+## エンドポイントをデプロイ {#deploy-an-endpoint}
 
-> **Note:**
+> **注記：**
 >
-> If you have connected your Data App to GitHub with **Auto Sync & Deployment** enabled, any Data App changes you made in GitHub will be deployed in TiDB Cloud Data Service automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+> **自動同期とデプロイメントを**有効にしてデータ アプリを GitHub に接続した場合、GitHub で行ったデータ アプリの変更はTiDB Cloudデータ サービスに自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)参照してください。
 
-To deploy an endpoint, perform the following steps:
+エンドポイントをデプロイするには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Locate the endpoint you want to deploy, click the endpoint name to view its details, and then click **Deploy** in the upper-right corner.
-4. If **Review Draft** is enabled for your Data App, a dialog is displayed for you to review the changes you made. You can choose whether to discard the changes based on the review.
-5. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
+3.  デプロイするエンドポイントを見つけ、エンドポイント名をクリックして詳細を表示し、右上隅の**[デプロイ]**をクリックします。
+4.  データ アプリで**下書きの確認**が有効になっている場合は、変更内容を確認するためのダイアログが表示されます。確認に基づいて変更内容を破棄するかどうかを選択できます。
+5.  デプロイを確認するには、 **[デプロイ]**をクリックします。**エンドポイントが正常にデプロイされる**と、[エンドポイントがデプロイされました] というプロンプトが表示されます。
 
-    On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
+    エンドポイントの詳細ページの右側のペインで、 **[デプロイメント]**タブをクリックすると、デプロイされた履歴を表示できます。
 
-## Call an endpoint
+## エンドポイントを呼び出す {#call-an-endpoint}
 
-To call an endpoint, you can send an HTTPS request to either an undeployed draft version or a deployed online version of the endpoint.
+エンドポイントを呼び出すには、エンドポイントの未デプロイのドラフト バージョンまたはデプロイ済みのオンライン バージョンのいずれかに HTTPS 要求を送信できます。
 
-> **Tip:**
+> **ヒント：**
 >
-> If you have imported your Data App to Postman, you can also call endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
+> Data App を Postman にインポートした場合は、Postman で Data App のエンドポイントを呼び出すこともできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)参照してください。
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-Before calling an endpoint, you need to create an API key. For more information, refer to [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
+エンドポイントを呼び出す前に、API キーを作成する必要があります。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
-### Request
+### リクエスト {#request}
 
-TiDB Cloud Data Service generates code examples to help you call an endpoint. To get the code example, perform the following steps:
+TiDB Cloud Data Service は、エンドポイントの呼び出しに役立つコード例を生成します。コード例を取得するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Locate the endpoint you want to call and click **...** > **Code Example**. The **Code Example** dialog box is displayed.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
-    > **Tip:**
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
+
+3.  呼び出すエンドポイントを見つけて、 **[...]** &gt; **[コード例]**をクリックします。 **[コード例]**ダイアログ ボックスが表示されます。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also click the endpoint name to view its details and click **...** > **Code Example** in the upper-right corner.
+    > または、エンドポイント名をクリックして詳細を表示し、右上隅の**[...]** &gt; **[コード例]**をクリックすることもできます。
 
-4. In the dialog box, select the environment and authentication method that you want to use to call the endpoint, and then copy the code example.
+4.  ダイアログ ボックスで、エンドポイントを呼び出すために使用する環境と認証方法を選択し、コード例をコピーします。
 
-    > **Note:**
+    > **注記：**
     >
-    > - The code examples are generated based on the properties and parameters of the endpoint.
-    > - Currently, TiDB Cloud Data Service only provides the curl code example.
+    > -   コード例は、エンドポイントのプロパティとパラメータに基づいて生成されます。
+    > -   現在、 TiDB Cloudデータ サービスでは curl コード例のみが提供されています。
 
-    - Environment: choose **Test Environment** or **Online Environment** depending on your need. **Online Environment** is available only after you deploy the endpoint.
-    - Authentication method: choose **Basic Authentication** or **Digest Authentication**.
-        - **Basic Authentication** transmits your API key as based64 encoded text.
-        - **Digest Authentication** transmits your API key in an encrypted form, which is more secure.
+    -   環境: 必要に応じて、**テスト環境**または**オンライン環境を**選択します。**オンライン環境は、**エンドポイントをデプロイした後にのみ使用できます。
+    -   認証方法:**基本認証**または**ダイジェスト認証**を選択します。
 
-      Compared with **Basic Authentication**, the curl code of **Digest Authentication** includes an additional `--digest` option.
+        -   **基本認証では、** API キーが based64 でエンコードされたテキストとして送信されます。
+        -   **ダイジェスト認証では、** API キーが暗号化された形式で送信されるため、より安全です。
 
-    Here is an example of a curl code snippet for a `POST` request that enables **Batch Operation** and uses **Digest Authentication**:
+        **基本認証**と比較して、**ダイジェスト認証**の curl コードには`--digest`の追加オプションが含まれています。
+
+    以下は、**バッチ操作を**有効にし、**ダイジェスト認証**を使用する`POST`リクエストの curl コード スニペットの例です。
 
     <SimpleTab>
-    <div label="Test Environment">
+     <div label="Test Environment">
 
-    To call a draft version of the endpoint, you need to add the `endpoint-type: draft` header:
+    エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -410,9 +433,9 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
 
     <div label="Online Environment">
 
-    You must deploy your endpoint first before checking the code example in the online environment.
+    オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
 
-    To call the current online version of the endpoint, use the following command:
+    エンドポイントの現在のオンライン バージョンを呼び出すには、次のコマンドを使用します。
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -429,50 +452,52 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
     ```
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-    > **Note:**
+    > **注記：**
     >
-    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
-    > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud Data Service will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
+    > -   リージョンドメイン`<region>.data.tidbcloud.com`を要求すると、TiDB クラスターが配置されているリージョンのエンドポイントに直接アクセスできます。
+    > -   あるいは、リージョンを指定せずにグローバル ドメイン`data.tidbcloud.com`を要求することもできます。この方法では、 TiDB Cloud Data Service は内部的に要求をターゲット リージョンにリダイレクトしますが、これにより追加のレイテンシーが発生する可能性があります。この方法を選択する場合は、エンドポイントを呼び出すときに、curl コマンドに`--location-trusted`オプションを必ず追加してください。
 
-5. Paste the code example in your application, edit the example according to your need, and then run it.
+5.  コード例をアプリケーションに貼り付け、必要に応じて例を編集してから実行します。
 
-    - You need to replace the `<Public Key>` and `<Private Key>` placeholders with your API key. For more information, refer to [Manage an API key](/tidb-cloud/data-service-api-key.md).
-    - If the request method of your endpoint is `GET` and **Pagination** is enabled for the endpoint, you can paginate the results by updating the values of `page=<Page Number>` and `page_size=<Page Size>` with your desired values. For example, to get the second page with 10 items per page, use `page=2` and `page_size=10`.
-    - If the request method of your endpoint is `POST` or `PUT`, fill in the `--data-raw` option according to the rows of data that you want to operate on.
+    -   `<Public Key>`と`<Private Key>`プレースホルダーを API キーに置き換える必要があります。詳細については、 [APIキーを管理する](/tidb-cloud/data-service-api-key.md)を参照してください。
 
-        - For endpoints with **Batch Operation** enabled, the `--data-raw` option accepts an object with an `items` field containing an array of data objects so you can operate on multiple rows of data using one endpoint.
-        - For endpoints with **Batch Operation** not enabled, the `--data-raw` option only accepts one data object.
+    -   エンドポイントのリクエスト メソッドが`GET`で、エンドポイントで**ページネーション**が有効になっている場合は、 `page=<Page Number>`と`page_size=<Page Size>`の値を希望の値に更新することで、結果をページネーションできます。たとえば、1 ページあたり 10 個の項目を含む 2 ページ目を取得するには、 `page=2`と`page_size=10`使用します。
 
-    - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
+    -   エンドポイントのリクエスト メソッドが`POST`または`PUT`場合、操作するデータの行に応じて`--data-raw`オプションを入力します。
 
-### Response
+        -   **バッチ操作**が有効になっているエンドポイントの場合、 `--data-raw`オプションは、データ オブジェクトの配列を含む`items`フィールドを持つオブジェクトを受け入れるため、1 つのエンドポイントを使用して複数行のデータを操作できます。
+        -   **バッチ操作**が有効になっていないエンドポイントの場合、 `--data-raw`オプションは 1 つのデータ オブジェクトのみを受け入れます。
 
-After calling an endpoint, you can see the response in JSON format. For more information, see [Response and Status Codes of Data Service](/tidb-cloud/data-service-response-and-status-code.md).
+    -   エンドポイントにパラメータが含まれている場合は、エンドポイントを呼び出すときにパラメータ値を指定します。
 
-## Undeploy an endpoint
+### 応答 {#response}
 
-> **Note:**
+エンドポイントを呼び出すと、JSON 形式で応答が表示されます。詳細については、 [データサービスの応答コードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)参照してください。
+
+## エンドポイントのデプロイ解除 {#undeploy-an-endpoint}
+
+> **注記：**
 >
-> If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-github-connection.md) with **Auto Sync & Deployment** enabled, undeploying an endpoint of this Data App will also delete the configuration of this endpoint on GitHub.
+> **自動同期とデプロイメントが**有効になっているものが[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)ある場合、このデータ アプリのエンドポイントをデプロイ解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
 
-To undeploy an endpoint, perform the following steps:
+エンドポイントをアンデプロイするには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Locate the endpoint you want to undeploy, click **...** > **Undeploy**.
-4. Click **Undeploy** to confirm the undeployment.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
+3.  デプロイ解除するエンドポイントを見つけて、 **[...]** &gt; **[デプロイ解除]**をクリックします。
+4.  **「アンデプロイ」**をクリックしてアンデプロイを確認します。
 
-## Delete an endpoint
+## エンドポイントを削除する {#delete-an-endpoint}
 
-> **Note:**
+> **注記：**
 >
-> Before you delete an endpoint, make sure that the endpoint is not online. Otherwise, the endpoint cannot be deleted. To undeploy an endpoint, refer to [Undeploy an endpoint](#undeploy-an-endpoint).
+> エンドポイントを削除する前に、エンドポイントがオンラインでないことを確認してください。そうでない場合、エンドポイントは削除できません。エンドポイントをアンデプロイするには、 [エンドポイントのデプロイ解除](#undeploy-an-endpoint)を参照してください。
 
-To delete an endpoint, perform the following steps:
+エンドポイントを削除するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Click the name of the endpoint you want to delete, and then click **...** > **Delete** in the upper-right corner.
-4. Click **Delete** to confirm the deletion.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
+3.  削除するエンドポイントの名前をクリックし、右上隅の**[...]** &gt; **[削除]**をクリックします。
+4.  削除を確認するには、 **「削除」**をクリックします。

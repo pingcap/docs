@@ -1,36 +1,36 @@
 ---
 title: Improve Vector Search Performance
-summary: Learn best practices for improving the performance of TiDB Vector Search.
+summary: TiDB Vector Search のパフォーマンスを向上させるためのベスト プラクティスを学びます。
 ---
 
-# Improve Vector Search Performance
+# ベクトル検索のパフォーマンスを向上させる {#improve-vector-search-performance}
 
-TiDB Vector Search enables you to perform Approximate Nearest Neighbor (ANN) queries that search for results similar to an image, document, or other input. To improve the query performance, review the following best practices.
+TiDB ベクトル検索を使用すると、画像、ドキュメント、またはその他の入力に類似した結果を検索する近似最近傍 (ANN) クエリを実行できます。クエリのパフォーマンスを向上させるには、次のベスト プラクティスを確認してください。
 
-## Add vector search index for vector columns
+## ベクトル列にベクトル検索インデックスを追加する {#add-vector-search-index-for-vector-columns}
 
-The [vector search index](/tidb-cloud/vector-search-index.md) dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
+[ベクトル検索インデックス](/tidb-cloud/vector-search-index.md)は、リコール率がわずかに低下するだけのトレードオフで、ベクトル検索クエリのパフォーマンスを通常 10 倍以上大幅に向上させます。
 
-## Ensure vector indexes are fully built
+## ベクトルインデックスが完全に構築されていることを確認する {#ensure-vector-indexes-are-fully-built}
 
-After you insert a large volume of vector data, some of it might be in the Delta layer waiting for persistence. The vector index for such data will be built after the data is persisted. Until all vector data is indexed, vector search performance is suboptimal. To check the index build progress, see [View index build progress](/tidb-cloud/vector-search-index.md#view-index-build-progress).
+大量のベクター データを挿入すると、その一部がデルタレイヤーで永続化を待機している可能性があります。このようなデータのベクトル インデックスは、データが永続化された後に構築されます。すべてのベクター データがインデックス化されるまで、ベクター検索のパフォーマンスは最適ではありません。インデックス構築の進行状況を確認するには、 [インデックス構築の進行状況をビュー](/tidb-cloud/vector-search-index.md#view-index-build-progress)参照してください。
 
-## Reduce vector dimensions or shorten embeddings
+## ベクトルの次元を減らすか埋め込みを短くする {#reduce-vector-dimensions-or-shorten-embeddings}
 
-The computational complexity of vector search indexing and queries increases significantly as the dimension of vectors grows, requiring more floating-point comparisons.
+ベクトルの次元が大きくなるにつれて、ベクトル検索のインデックス作成とクエリの計算の複雑さが大幅に増加し、より多くの浮動小数点の比較が必要になります。
 
-To optimize performance, consider reducing vector dimensions whenever feasible. This usually needs switching to another embedding model. When switching models, you need to evaluate the impact of the model change on the accuracy of vector queries.
+パフォーマンスを最適化するには、可能な限りベクトル次元を減らすことを検討してください。通常、これには別の埋め込みモデルへの切り替えが必要です。モデルを切り替えるときは、モデルの変更がベクトル クエリの精度に与える影響を評価する必要があります。
 
-Certain embedding models like OpenAI `text-embedding-3-large` support [shortening embeddings](https://openai.com/index/new-embedding-models-and-api-updates/), which removes some numbers from the end of vector sequences without losing the embedding's concept-representing properties. You can also use such an embedding model to reduce the vector dimensions.
+OpenAI `text-embedding-3-large`などの特定の埋め込みモデルは[埋め込みの短縮](https://openai.com/index/new-embedding-models-and-api-updates/)サポートしています。これは、埋め込みの概念表現プロパティを失うことなく、ベクトルシーケンスの末尾からいくつかの数字を削除します。このような埋め込みモデルを使用して、ベクトルの次元を削減することもできます。
 
-## Exclude vector columns from the results
+## 結果からベクター列を除外する {#exclude-vector-columns-from-the-results}
 
-Vector embedding data is usually large and only used during the search process. By excluding vector columns from query results, you can greatly reduce the data transferred between the TiDB server and your SQL client, thereby improving query performance.
+ベクター埋め込みデータは通常大きく、検索プロセス中にのみ使用されます。クエリ結果からベクター列を除外すると、TiDBサーバーと SQL クライアント間で転送されるデータが大幅に削減され、クエリのパフォーマンスが向上します。
 
-To exclude vector columns, explicitly list the columns you want to retrieve in the `SELECT` clause, instead of using `SELECT *` to retrieve all columns.
+ベクター列を除外するには、 `SELECT *`使用してすべての列を取得するのではなく、 `SELECT`句で取得する列を明示的にリストします。
 
-## Warm up the index
+## インデックスをウォームアップする {#warm-up-the-index}
 
-When accessing an index that has never been used or has not been accessed for a long time (cold access), TiDB needs to load the entire index from cloud storage or disk (instead of from memory). This process takes time and often results in higher query latency. Additionally, if there are no SQL queries for an extended period (for example, several hours), computing resources are reclaimed, causing subsequent access to become cold access.
+一度も使用されていない、または長期間アクセスされていないインデックスにアクセスする場合 (コールド アクセス)、TiDB はインデックス全体をクラウドstorageまたはディスク (メモリではなく) から読み込む必要があります。このプロセスには時間がかかり、多くの場合、クエリのレイテンシーが長くなります。さらに、長期間 (たとえば、数時間) SQL クエリがない場合、コンピューティング リソースが再利用され、後続のアクセスがコールド アクセスになります。
 
-To avoid such query latency, warm up your index before actual workload by running similar vector search queries that hit the vector index.
+このようなクエリのレイテンシーを回避するには、実際のワークロードの前に、ベクトル インデックスにヒットする同様のベクトル検索クエリを実行して、インデックスをウォームアップします。

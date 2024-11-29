@@ -1,95 +1,91 @@
 ---
 title: TiProxy Command-Line Flags
-summary: Learn the command-line startup flags of TiProxy.
+summary: TiProxy のコマンドライン起動フラグについて学習します。
 ---
 
-# TiProxy Command-Line Flags
+# TiProxy コマンドラインフラグ {#tiproxy-command-line-flags}
 
-This document introduces the command-line flags that you can use when you launch TiProxy. It also introduces flags of `tiproxyctl`.
+このドキュメントでは、TiProxy を起動するときに使用できるコマンドライン フラグについて説明します。また、 `tiproxyctl`のフラグについても説明します。
 
-## TiProxy Server
+## TiProxy サーバー {#tiproxy-server}
 
-This section lists the flags of the server program `tiproxy`.
+このセクションでは、サーバープログラム`tiproxy`のフラグを一覧表示します。
 
-### `--config`
+### <code>--config</code> {#code-config-code}
 
-+ Specifies the path of the TiProxy configuration file.
-+ Type: `string`
-+ Default: `""`
-+ You must specify the configuration file. For detailed configuration items, refer to [Configure TiProxy](/tiproxy/tiproxy-configuration.md). Note that TiProxy automatically reloads the configuration when the configuration file is modified. Therefore, do not directly modify the configuration file. It is recommended to modify the configuration by executing [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) or [`kubectl edit tc`](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration).
+-   TiProxy 構成ファイルのパスを指定します。
+-   タイプ: `string`
+-   デフォルト: `""`
+-   設定ファイルを指定する必要があります。詳細な設定項目については[TiProxy を構成する](/tiproxy/tiproxy-configuration.md)を参照してください。なお、設定ファイルが変更されると、TiProxy は自動的に設定を再読み込みします。そのため、設定ファイルを直接変更しないでください。 [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)または[`kubectl edit tc`](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration)を実行して設定を変更することをお勧めします。
 
-## TiProxy Control
+## TiProxy コントロール {#tiproxy-control}
 
-This section introduces the syntax, options, and commands of the client program `tiproxyctl`.
+このセクションでは、クライアント プログラム`tiproxyctl`の構文、オプション、およびコマンドについて説明します。
 
-> **Note:**
+> **注記：**
 >
-> TiProxy Control is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiProxy. It's not recommended to include this tool in application or utility development to get information.
+> TiProxy コントロールはデバッグ用に特別に設計されており、TiProxy で将来導入される機能と完全に互換性がない可能性があります。情報を取得するためにこのツールをアプリケーションまたはユーティリティの開発に含めることはお勧めしません。
 
-### Syntax
+### 構文 {#syntax}
 
-```
-tiproxyctl [flags] [command]
-```
+    tiproxyctl [flags] [command]
 
-For example:
+例えば：
 
-```
-tiproxyctl --curls 127.0.0.1:3080 config get
-```
+    tiproxyctl --curls 127.0.0.1:3080 config get
 
-### Options
+### オプション {#options}
 
-#### `--log_encoder`
+#### <code>--log_encoder</code> {#code-log-encoder-code}
 
-+ Specifies the log format of `tiproxyctl`.
-+ Type: `string`
-+ Default: `"tidb"`
-+ It defaults to the same log format of TiDB. However, you can also specify it as one of the following:
+-   `tiproxyctl`のログ形式を指定します。
+-   タイプ: `string`
+-   デフォルト: `"tidb"`
+-   デフォルトでは、TiDB と同じログ形式になります。ただし、次のいずれかとして指定することもできます。
 
-    - `console`: a more human-readable format
-    - `json`: a structured log format
+    -   `console` : より人間が読みやすい形式
+    -   `json` : 構造化されたログ形式
 
-#### `--log_level`
+#### <code>--log_level</code> {#code-log-level-code}
 
-+ Specifies the log level of tiproxyctl.
-+ Type: `string`
-+ Default: `"warn"`
-+ You can specify `debug`, `info`, `warn`, `error`, `panic`.
+-   tiproxyctl のログ レベルを指定します。
+-   タイプ: `string`
+-   デフォルト: `"warn"`
+-   `debug` `info` `error`でき`warn` `panic`
 
-#### `--curls`
+#### <code>--curls</code> {#code-curls-code}
 
-+ Specifies the server addresses. You can add multiple listening addresses.
-+ Type: `comma separated lists of ip:port`
-+ Default: `localhost:3080`
-+ Server API gateway addresses.
+-   サーバーのアドレスを指定します。複数のリスニング アドレスを追加できます。
+-   タイプ: `comma separated lists of ip:port`
+-   デフォルト: `localhost:3080`
+-   サーバー API ゲートウェイ アドレス。
 
-#### `-k, --insecure`
+#### <code>-k, --insecure</code> {#code-k-insecure-code}
 
-+ Specifies whether to skip TLS CA verification when dialing to the server.
-+ Type: `boolean`
-+ Default: `false`
-+ Used for testing.
+-   サーバーにダイヤルするときに TLS CA 検証をスキップするかどうかを指定します。
+-   タイプ: `boolean`
+-   デフォルト: `false`
+-   テストに使用されます。
 
-#### `--ca`
+#### <code>--ca</code> {#code-ca-code}
 
-+ Specifies the CA when dialing to the server.
-+ Type: `string`
-+ Default: `""`
+-   サーバーにダイヤルするときに CA を指定します。
+-   タイプ: `string`
+-   デフォルト: `""`
 
-#### `--cert`
+#### <code>--cert</code> {#code-cert-code}
 
-+ Specifies the certificate when dialing to the server.
-+ Type: `string`
-+ Default: `""`
+-   サーバーにダイヤルするときに証明書を指定します。
+-   タイプ: `string`
+-   デフォルト: `""`
 
-### Commands
+### コマンド {#commands}
 
-#### `config set`
+#### <code>config set</code> {#code-config-set-code}
 
-The `tiproxyctl config set` command reads a TOML-formatted configuration file from standard input and sets these configuration items to TiProxy. Unspecified configuration items will remain unchanged, so you only need to specify the items that you want to modify.
+`tiproxyctl config set`コマンドは、標準入力から TOML 形式の構成ファイルを読み取り、これらの構成項目を TiProxy に設定します。指定されていない構成項目は変更されないため、変更する項目のみを指定する必要があります。
 
-The following example sets `log.level` as `'warning'`, while leaving other configuration items unchanged.
+次の例では、他の構成項目は変更せずに、 `log.level` `'warning'`に設定します。
 
 ```bash
 $ cat test.toml
@@ -101,15 +97,15 @@ $ tiproxyctl config get | grep level
 level = 'warning'
 ```
 
-#### `config get`
+#### <code>config get</code> {#code-config-get-code}
 
-The `tiproxyctl config get` command is used to get the current TiProxy configuration in TOML format.
+`tiproxyctl config get`コマンドは、現在の TiProxy 構成を TOML 形式で取得するために使用されます。
 
-#### `health`
+#### <code>health</code> {#code-health-code}
 
-The `tiproxyctl health` command is used to get the health status of TiProxy and the checksum of the configuration. When TiProxy is running normally, it returns the checksum of the configuration. When TiProxy is shutting down or offline, it returns an error.
+`tiproxyctl health`コマンドは、TiProxy のヘルス ステータスと構成のチェックサムを取得するために使用されます。TiProxy が正常に実行されている場合は、構成のチェックサムを返します。TiProxy がシャットダウンまたはオフラインの場合は、エラーを返します。
 
-Example output:
+出力例:
 
 ```json
 {"config_checksum":3006078629}

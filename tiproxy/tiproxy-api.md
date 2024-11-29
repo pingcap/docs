@@ -1,70 +1,70 @@
 ---
 title: TiProxy API
-summary: Learn how to use the TiProxy API to access its configuration, health status, and monitoring data.
+summary: TiProxy API を使用して、構成、ヘルス ステータス、監視データにアクセスする方法を学習します。
 ---
 
-# TiProxy API
+# TiプロキシAPI {#tiproxy-api}
 
-[TiProxy](/tiproxy/tiproxy-overview.md) provides API endpoints for accessing its configuration, health status, and monitoring data.
+[Tiプロキシ](/tiproxy/tiproxy-overview.md) 、構成、ヘルス ステータス、および監視データにアクセスするための API エンドポイントを提供します。
 
-> **Note:**
+> **注記：**
 >
-> TiProxy API is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiProxy. It's not recommended to include this tool in application or utility development to get information.
+> TiProxy API はデバッグ用に特別に設計されており、TiProxy で将来導入される機能と完全に互換性がない可能性があります。情報を取得するためにこのツールをアプリケーションまたはユーティリティ開発に含めることはお勧めしません。
 
-The address for accessing the TiProxy API is `http://${host}:${port}${path}`, where `${host}:${port}` is specified by the TiProxy configuration item [`api.addr`](/tiproxy/tiproxy-configuration.md#addr-1), and `${path}` is the specific API endpoint you want to access. For example:
+TiProxy API にアクセスするためのアドレスは`http://${host}:${port}${path}`です。ここで、 `${host}:${port}` TiProxy 構成項目[`api.addr`](/tiproxy/tiproxy-configuration.md#addr-1)によって指定され、 `${path}`アクセスする特定の API エンドポイントです。例:
 
 ```bash
 curl http://127.0.0.1:3080/api/admin/config/
 ```
 
-## Get TiProxy configuration
+## TiProxy 設定を取得する {#get-tiproxy-configuration}
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/admin/config/`
 
-### Parameter descriptions
+### パラメータの説明 {#parameter-descriptions}
 
-The query parameter is as follows:
+クエリパラメータは次のとおりです。
 
-- `format`: (optional) specifies the format of the returned configuration. Value options are `json` and `toml`. The default value is `toml`.
+-   `format` : (オプション) 返される構成の形式を指定します。値のオプションは`json`と`toml`です。デフォルト値は`toml`です。
 
-### Example
+### 例 {#example}
 
-The following example gets the TiProxy configuration in JSON format:
+次の例では、TiProxy 構成を JSON 形式で取得します。
 
 ```bash
 curl "http://127.0.0.1:3080/api/admin/config/?format=json"
 ```
 
-## Set TiProxy configuration
+## TiProxy設定を設定する {#set-tiproxy-configuration}
 
-Currently, you can only use the TOML format to modify TiProxy configuration. Unspecified configuration items will remain unchanged, so you only need to specify the items that you want to modify.
+現在、TiProxy 構成を変更するには TOML 形式のみを使用できます。指定されていない構成項目は変更されないため、変更する項目のみを指定する必要があります。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `PUT /api/admin/config/`
 
-### Request body
+### リクエスト本文 {#request-body}
 
-You need to provide the TiProxy configuration in TOML format. For example:
+TiProxy 構成を TOML 形式で提供する必要があります。例:
 
 ```toml
 [log]
 level='warning'
 ```
 
-### Example
+### 例 {#example}
 
-The following example sets `log.level` as `'warning'`, while leaving other configuration items unchanged.
+次の例では、他の構成項目は変更せずに、 `log.level` `'warning'`に設定します。
 
-1. Get the current TiProxy configuration:
+1.  現在の TiProxy 構成を取得します。
 
     ```bash
     curl http://127.0.0.1:3080/api/admin/config/
     ```
 
-    The output is as follows:
+    出力は次のようになります。
 
     ```toml
     [log]
@@ -72,7 +72,7 @@ The following example sets `log.level` as `'warning'`, while leaving other confi
     level = 'info'
     ```
 
-2. Specify the value of `log.level` in the `test.toml` file, and then send a `PUT /api/admin/config/` request to update the value of `log.level`:
+2.  `test.toml`ファイルで`log.level`の値を指定し、 `PUT /api/admin/config/`リクエストを送信して`log.level`の値を更新します。
 
     ```shell
     $ cat test.toml
@@ -81,13 +81,13 @@ The following example sets `log.level` as `'warning'`, while leaving other confi
     $ curl -X PUT --data-binary @test.toml http://127.0.0.1:3080/api/admin/config/
     ```
 
-3. Get the modified TiProxy configuration:
+3.  変更された TiProxy 構成を取得します。
 
     ```bash
     curl http://127.0.0.1:3080/api/admin/config/
     ```
 
-    The output is as follows:
+    出力は次のようになります。
 
     ```toml
     [log]
@@ -95,33 +95,33 @@ The following example sets `log.level` as `'warning'`, while leaving other confi
     level = 'warning'
     ```
 
-## Get TiProxy health status
+## TiProxy のヘルスステータスを取得する {#get-tiproxy-health-status}
 
-This endpoint is used to get the health status of TiProxy and the checksum of the configuration. When TiProxy is running normally, this endpoint returns the checksum of the configuration. When TiProxy is shutting down or offline, it returns an error.
+このエンドポイントは、TiProxy のヘルス ステータスと構成のチェックサムを取得するために使用されます。TiProxy が正常に実行されている場合、このエンドポイントは構成のチェックサムを返します。TiProxy がシャットダウンまたはオフラインの場合は、エラーを返します。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/debug/health`
 
-### Example
+### 例 {#example}
 
 ```bash
 curl http://127.0.0.1:3080/api/debug/health
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```bash
 {"config_checksum":3006078629}
 ```
 
-## Get TiProxy monitoring data
+## TiProxy監視データを取得する {#get-tiproxy-monitoring-data}
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /metrics/`
 
-### Example
+### 例 {#example}
 
 ```bash
 curl http://127.0.0.1:3080/metrics/

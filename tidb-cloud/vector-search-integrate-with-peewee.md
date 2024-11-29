@@ -1,39 +1,39 @@
 ---
 title: Integrate TiDB Vector Search with peewee
-summary: Learn how to integrate TiDB Vector Search with peewee to store embeddings and perform semantic searches.
+summary: TiDB Vector Search を peewee と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
 ---
 
-# Integrate TiDB Vector Search with peewee
+# TiDB Vector Search を peewee と統合する {#integrate-tidb-vector-search-with-peewee}
 
-This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with the [TiDB Vector Search](/tidb-cloud/vector-search-overview.md), store embeddings, and perform vector search queries.
+このチュートリアルでは、 [ピーウィー](https://docs.peewee-orm.com/)使用して[TiDB ベクトル検索](/tidb-cloud/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法について説明します。
 
-> **Note**
+> **注記**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [Python 3.8 or higher](https://www.python.org/downloads/) installed.
-- [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+-   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
+-   [ギット](https://git-scm.com/downloads)インストールされました。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
-## Run the sample app
+## サンプルアプリを実行する {#run-the-sample-app}
 
-You can quickly learn about how to integrate TiDB Vector Search with peewee by following the steps below.
+以下の手順に従って、TiDB Vector Search を peewee と統合する方法を簡単に学習できます。
 
-### Step 1. Clone the repository
+### ステップ1. リポジトリをクローンする {#step-1-clone-the-repository}
 
-Clone the [`tidb-vector-python`](https://github.com/pingcap/tidb-vector-python) repository to your local machine:
+[`tidb-vector-python`](https://github.com/pingcap/tidb-vector-python)リポジトリをローカル マシンにクローンします。
 
 ```shell
 git clone https://github.com/pingcap/tidb-vector-python.git
 ```
 
-### Step 2. Create a virtual environment
+### ステップ2. 仮想環境を作成する {#step-2-create-a-virtual-environment}
 
-Create a virtual environment for your project:
+プロジェクト用の仮想環境を作成します。
 
 ```bash
 cd tidb-vector-python/examples/orm-peewee-quickstart
@@ -41,70 +41,73 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Step 3. Install required dependencies
+### ステップ3. 必要な依存関係をインストールする {#step-3-install-required-dependencies}
 
-Install the required dependencies for the demo project:
+デモ プロジェクトに必要な依存関係をインストールします。
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Alternatively, you can install the following packages for your project:
+あるいは、プロジェクトに次のパッケージをインストールすることもできます。
 
 ```bash
 pip install peewee pymysql python-dotenv tidb-vector
 ```
 
-### Step 4. Configure the environment variables
+### ステップ4. 環境変数を設定する {#step-4-configure-the-environment-variables}
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-   - **Connection Type** is set to `Public`.
-   - **Branch** is set to `main`.
-   - **Connect With** is set to `General`.
-   - **Operating System** matches your environment.
+    -   **接続タイプは**`Public`に設定されています。
 
-   > **Tip:**
-   >
-   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    -   **ブランチは**`main`に設定されています。
 
-4. Copy the connection parameters from the connection dialog.
+    -   **Connect With は**`General`に設定されています。
 
-   > **Tip:**
-   >
-   > If you have not set a password yet, click **Generate Password** to generate a random password.
+    -   **オペレーティング システムは**環境に適合します。
 
-5. In the root directory of your Python project, create a `.env` file and paste the connection parameters to the corresponding environment variables.
+    > **ヒント：**
+    >
+    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-   - `TIDB_HOST`: The host of the TiDB cluster.
-   - `TIDB_PORT`: The port of the TiDB cluster.
-   - `TIDB_USERNAME`: The username to connect to the TiDB cluster.
-   - `TIDB_PASSWORD`: The password to connect to the TiDB cluster.
-   - `TIDB_DATABASE`: The database name to connect to.
-   - `TIDB_CA_PATH`: The path to the root certificate file.
+4.  接続ダイアログから接続パラメータをコピーします。
 
-   The following is an example for macOS:
+    > **ヒント：**
+    >
+    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
-   ```dotenv
-   TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
-   TIDB_PORT=4000
-   TIDB_USERNAME=********.root
-   TIDB_PASSWORD=********
-   TIDB_DATABASE=test
-   TIDB_CA_PATH=/etc/ssl/cert.pem
-   ```
+5.  Python プロジェクトのルート ディレクトリに`.env`ファイルを作成し、接続パラメータを対応する環境変数に貼り付けます。
 
-### Step 5. Run the demo
+    -   `TIDB_HOST` : TiDB クラスターのホスト。
+    -   `TIDB_PORT` : TiDB クラスターのポート。
+    -   `TIDB_USERNAME` : TiDB クラスターに接続するためのユーザー名。
+    -   `TIDB_PASSWORD` : TiDB クラスターに接続するためのパスワード。
+    -   `TIDB_DATABASE` : 接続するデータベース名。
+    -   `TIDB_CA_PATH` : ルート証明書ファイルへのパス。
+
+    以下は macOS の例です。
+
+    ```dotenv
+    TIDB_HOST=gateway01.****.prod.aws.tidbcloud.com
+    TIDB_PORT=4000
+    TIDB_USERNAME=********.root
+    TIDB_PASSWORD=********
+    TIDB_DATABASE=test
+    TIDB_CA_PATH=/etc/ssl/cert.pem
+    ```
+
+### ステップ5.デモを実行する {#step-5-run-the-demo}
 
 ```bash
 python peewee-quickstart.py
 ```
 
-Example output:
+出力例:
 
 ```text
 Get 3-nearest neighbor documents:
@@ -121,13 +124,13 @@ Get documents within a certain distance:
     document: dog
 ```
 
-## Sample code snippets
+## サンプルコードスニペット {#sample-code-snippets}
 
-You can refer to the following sample code snippets to develop your application.
+アプリケーションを開発するには、次のサンプル コード スニペットを参照してください。
 
-### Create vector tables
+### ベクターテーブルを作成する {#create-vector-tables}
 
-#### Connect to TiDB cluster
+#### TiDBクラスタに接続する {#connect-to-tidb-cluster}
 
 ```python
 import os
@@ -164,9 +167,9 @@ db = MySQLDatabase(
 )
 ```
 
-#### Define a vector column
+#### ベクトル列を定義する {#define-a-vector-column}
 
-Create a table with a column named `peewee_demo_documents` that stores a 3-dimensional vector.
+3 次元ベクトルを格納する`peewee_demo_documents`という名前の列を持つテーブルを作成します。
 
 ```python
 class Document(Model):
@@ -178,7 +181,7 @@ class Document(Model):
     embedding = VectorField(3)
 ```
 
-### Store documents with embeddings
+### 埋め込み付きドキュメントを保存する {#store-documents-with-embeddings}
 
 ```python
 Document.create(content='dog', embedding=[1, 2, 1])
@@ -186,18 +189,18 @@ Document.create(content='fish', embedding=[1, 2, 4])
 Document.create(content='tree', embedding=[1, 0, 0])
 ```
 
-### Search the nearest neighbor documents
+### 最も近い文書を検索する {#search-the-nearest-neighbor-documents}
 
-Search for the top-3 documents that are semantically closest to the query vector `[1, 2, 3]` based on the cosine distance function.
+コサイン距離関数に基づいて、クエリ ベクトル`[1, 2, 3]`に意味的に最も近い上位 3 つのドキュメントを検索します。
 
 ```python
 distance = Document.embedding.cosine_distance([1, 2, 3]).alias('distance')
 results = Document.select(Document, distance).order_by(distance).limit(3)
 ```
 
-### Search documents within a certain distance
+### 特定の距離内の文書を検索する {#search-documents-within-a-certain-distance}
 
-Search for the documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
+クエリベクトル`[1, 2, 3]`からのコサイン距離が 0.2 未満のドキュメントを検索します。
 
 ```python
 distance_expression = Document.embedding.cosine_distance([1, 2, 3])
@@ -205,7 +208,7 @@ distance = distance_expression.alias('distance')
 results = Document.select(Document, distance).where(distance_expression < 0.2).order_by(distance).limit(3)
 ```
 
-## See also
+## 参照 {#see-also}
 
-- [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
-- [Vector Search Index](/tidb-cloud/vector-search-index.md)
+-   [ベクトルデータ型](/tidb-cloud/vector-search-data-types.md)
+-   [ベクター検索インデックス](/tidb-cloud/vector-search-index.md)

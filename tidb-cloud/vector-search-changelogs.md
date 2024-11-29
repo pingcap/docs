@@ -1,14 +1,14 @@
 ---
 title: Vector Search Changelogs
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB Vector Search feature.
+summary: TiDB ベクトル検索機能の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
-# Vector Search Changelogs
+# ベクター検索の変更履歴 {#vector-search-changelogs}
 
-## June 25, 2024
+## 2024年6月25日 {#june-25-2024}
 
-- TiDB Vector Search (beta) is now available for TiDB Cloud Serverless clusters in all regions for all users.
+-   TiDB Vector Search (ベータ版) が、すべてのリージョンのすべてのユーザー向けにTiDB Cloud Serverless クラスターで利用できるようになりました。
 
-## April 1, 2024
+## 2024年4月1日 {#april-1-2024}
 
-- TiDB Vector Search (beta) is now available for TiDB Cloud Serverless clusters in EU regions for invited users.
+-   TiDB Vector Search (ベータ版) が、招待されたユーザー向けに EU リージョンのTiDB Cloud Serverless クラスターで利用できるようになりました。
