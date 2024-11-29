@@ -121,7 +121,7 @@ You can install the standard MySQL client with:
 <div label="macOS">
 
 macOS:
-{{< copyable "sql-regular" >}}
+
 ```shell
 brew install mysql-client
 ```
