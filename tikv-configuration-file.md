@@ -2503,7 +2503,7 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 
 ## in-memory-engine <span class="version-mark">New in v8.5.0</span>
 
-TiKV MVCC In-Memory Engine configuration items related to the storage layer.
+TiKV MVCC in-memory engine configuration items related to the storage layer.
 
 ### `enable` <span class="version-mark">New in v8.5.0</span>
 
@@ -2511,7 +2511,7 @@ TiKV MVCC In-Memory Engine configuration items related to the storage layer.
 >
 > This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
-+ Whether to enable the In-Memory Engine to accelerate multi-version queries. For more information about the in-memory engine, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
++ Whether to enable the in-memory engine to accelerate multi-version queries. For more information about the in-memory engine, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
 + Default value: false (the in-memory engine is disabled)
 
 ### `capacity` <span class="version-mark">New in v8.5.0</span>
@@ -2521,15 +2521,15 @@ TiKV MVCC In-Memory Engine configuration items related to the storage layer.
 > + When the in-memory engine is enabled, `block-cache.capacity` will automatically decrease by 10%.
 > + When you manually configure `capacity`, `block-cache.capacity` will not automatically decrease. In this case, you need to manually adjust the value to avoid OOM.
 
-+ Configure the maximum memory size that the In-Memory Engine can use. The maximum value is 5 GiB. You can manually configure it to use more memory.
++ Configure the maximum memory size that the in-memory engine can use. The maximum value is 5 GiB. You can manually configure it to use more memory.
 + Default value: 10% of the system memory.
 
 ### `gc-run-interval` <span class="version-mark">New in v8.5.0</span>
 
-+ Control the time interval for the In-memory Engine GC cached MVCC versions. Reducing this parameter can speed up the GC frequency, reduce MVCC records, but will increase GC CPU consumption and increase the probability of In-memory Engine cache miss.
++ Control the time interval for the In-memory Engine GC cached MVCC versions. Reducing this parameter can speed up the GC frequency, reduce MVCC records, but will increase GC CPU consumption and increase the probability of in-memory engine cache miss.
 + Default value: 3m
 
 ### `mvcc-amplification-threshold` <span class="version-mark">New in v8.5.0</span>
 
-+ Control the threshold for the In-memory Engine to select loading Region when MVCC read amplification occurs. The default value is `10`, indicating that when the number of MVCC versions processed for reading a row record in a certain Region exceeds 10, it might be loaded into the In-Memory Engine.
++ Control the threshold for the in-memory engine to select loading Region when MVCC read amplification occurs. The default value is `10`, indicating that when the number of MVCC versions processed for reading a row record in a certain Region exceeds 10, it might be loaded into the in-memory engine.
 + Default value: 10
