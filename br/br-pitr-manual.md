@@ -289,7 +289,7 @@ Usage example:
 
 ```shell
 tiup br log truncate --until='2022-07-26 21:20:00+0800' \
-–-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
@@ -329,7 +329,7 @@ The `--storage` parameter is used to specify the backup storage address. Current
 Usage example:
 
 ```shell
-tiup br log metadata –-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+tiup br log metadata --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
@@ -379,8 +379,8 @@ Usage example:
 
 ```shell
 tiup br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}'
 
 Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 *** ***["Full Restore success summary"] ****** [total-take=3.112928252s] [restore-data-size(after-compressed)=5.056kB] [Size=5056] [BackupTS=434693927394607136] [total-kv=4] [total-kv-size=290B] [average-speed=93.16B/s]
@@ -394,3 +394,34 @@ Restore KV Files <--------------------------------------------------------------
 > - When you restore the cluster for the first time, you must specify the full snapshot data. Otherwise, some data in the newly created table might be incorrect due to rewriting Table ID rules.
 > - You cannot restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
 > - When you restore log data of different time periods in multiple batches, ensure that the log data is restored in consecutive order. If you restore the log backup data of `[t1, t2)`, `[t2, t3)`, and `[t3, t4)` in consecutive order, the restored data is consistent. However, if you restore `[t1, t2)` and then skip `[t2, t3)` to restore `[t3, t4)`, the restored data might be inconsistent.
+<<<<<<< HEAD
+=======
+
+### Restore encrypted log backup data
+
+To restore encrypted log backup data, you need to pass the corresponding decryption parameters in the restore command. Make sure that the decryption parameters are the same as those used for encryption. If the decryption algorithm or key is incorrect, the data cannot be restored.
+
+The following is an example:
+
+```shell
+tiup br restore point --pd="${PD_IP}:2379"
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--crypter.method aes128-ctr
+--crypter.key 0123456789abcdef0123456789abcdef
+--log.crypter.method aes128-ctr
+--log.crypter.key 0123456789abcdef0123456789abcdef
+```
+
+If a log backup is encrypted using a master key, you can decrypt and restore the backup data using the following command:
+
+```shell
+tiup br restore point --pd="${PD_IP}:2379"
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--crypter.method aes128-ctr
+--crypter.key 0123456789abcdef0123456789abcdef
+--master-key-crypter-method aes128-ctr
+--master-key "local:///path/to/master.key"
+```
+>>>>>>> e781021e91 (br-pitr-manual: remove an unnecessary quotation mark (#19535))
