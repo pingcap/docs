@@ -1,7 +1,7 @@
 ---
 title: TiDB Log Backup and PITR Command Manual
 summary: Introduce the commands used in TiDB log backup and point-in-time recovery (PITR).
-aliases: ['/tidb/dev/br-log-command-line/']
+aliases: ["/tidb/dev/br-log-command-line/"]
 ---
 
 # TiDB Log Backup and PITR Command Manual
@@ -356,7 +356,7 @@ Usage example:
 
 ```shell
 tiup br log truncate --until='2022-07-26 21:20:00+0800' \
-  --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
