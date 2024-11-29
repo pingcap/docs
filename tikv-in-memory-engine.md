@@ -1,20 +1,20 @@
 ---
 title: TiKV MVCC In-Memory Engine
-summary: Understanding the applicable scenarios and working principles of the in-memory engine, and accelerating queries need to scan many MVCC versions using the in-memory engine.
+summary: Learn the applicable scenarios and working principles of the In-Memory Engine, and how to use the In-Memory Engine to accelerate queries for MVCC versions.
 ---
 
 # TiKV MVCC In-Memory Engine
 
-TiKV MVCC In-Memory Engine (IME) is primarily used to accelerate queries that need to scan a large number of MVCC historical versions, i.e., [the total number of versions scanned (total_keys) is much greater than the number of versions processed (processed_keys)](/analyze-slow-queries.md#expired-or-excessive-mvcc-versions).
+TiKV MVCC In-Memory Engine (IME) is primarily used to accelerate queries that need to scan a large number of MVCC historical versions, that is, [the total number of versions scanned (total_keys) is much greater than the number of versions processed (processed_keys)](/analyze-slow-queries.md#expired-or-excessive-mvcc-versions).
 
 TiKV MVCC In-Memory Engine is suitable for the following scenarios:
 
-- Business requires frequent queries on frequently updated or deleted records.
-- Business requires adjusting the [`tidb_gc_life_time`](/garbage-collection-configuration.md#garbage-collection-configuration) to make TiDB retain historical versions for a longer period (e.g., 24 hours).
+- An application requires frequent queries on frequently updated or deleted records.
+- An application requires adjusting the [`tidb_gc_life_time`](/garbage-collection-configuration.md#garbage-collection-configuration) to make TiDB retain historical versions for a longer period (for example, 24 hours).
 
-## Working Principle
+## Working principles
 
-TiKV MVCC In-Memory Engine caches the latest written MVCC versions in memory and implements an MVCC GC mechanism independent of TiDB, allowing it to quickly GC MVCC versions in memory, reducing the number of versions scanned during queries, and achieving the effect of reducing request latency and CPU overhead.
+TiKV MVCC In-Memory Engine caches the latest written MVCC versions in memory and implements an MVCC GC mechanism independent of TiDB, allowing it to quickly perform GC on MVCC versions in memory, reducing the number of versions scanned during queries, and achieving the effect of reducing request latency and CPU overhead.
 
 The following diagram illustrates how TiKV organizes MVCC versions.
 
@@ -25,49 +25,49 @@ The diagram shows two rows of records, each with 9 MVCC versions. The behavior i
 - On the left, without IME enabled, the table records are stored in RocksDB in ascending order by primary key, with the same row's MVCC versions adjacent to each other.
 - On the right, with IME enabled, the data in RocksDB is consistent with the left side, and IME caches the latest 2 MVCC versions of the 2 rows of records.
 - When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `8`, the left side without IME enabled needs to process 11 MVCC versions, while the right side with IME enabled only needs to process 4 MVCC versions, reducing request latency and CPU consumption.
-- When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `7`, since the right side lacks the historical versions that need to be read, the IME cache becomes invalid, and it falls back to reading data from RocksDB.
+- When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `7`, because the right side lacks the historical versions that need to be read, the IME cache becomes invalid, and it falls back to reading data from RocksDB.
 
 ## Usage
 
-Enabling IME requires adjusting the TiKV configuration and restarting. The following is the configuration explanation:
+Enabling IME requires adjusting the TiKV configuration and restarting. The following example explains the configuration items:
 
 ```toml
 [in-memory-engine]
-# This parameter is the switch for the In-memory Engine feature, which is disabled by default. Set it to true to enable.
+# This parameter is the switch for the In-memory Engine feature, which is disabled by default. You can set it to true to enable it.
 enable = false
 #
 # This parameter controls the memory capacity that In-memory Engine can use. The default value is 10% of the system memory, and the maximum value is 5 GiB.
-# It can be manually configured to use more memory.
-# Note: When in-memory-engine is enabled, block-cache.capacity will be reduced by 10%.
+# You can manually configure it to use more memory.
+# Note: When In-Memory Engine is enabled, block-cache.capacity will be reduced by 10%.
 #capacity = "5GiB"
 #
 # This parameter controls the time interval for In-memory Engine to GC the cached MVCC versions.
-# The default is 3 minutes, representing that GC is performed every 3 minutes on the cached MVCC versions.
-# Reducing this parameter can speed up the GC frequency, reduce MVCC versions, but will increase GC CPU consumption and increase the probability of cache miss.
+# The default value is 3 minutes, representing that GC is performed every 3 minutes on the cached MVCC versions.
+# Decreasing the value of this parameter can speed up the GC frequency, reduce MVCC versions, but will increase GC CPU consumption and increase the probability of cache miss.
 #gc-run-interval = "3m"
 #
 # This parameter controls the threshold for In-memory Engine to select and load Regions based on MVCC read amplification.
-# The default is 10, indicating that when the number of MVCC versions processed for a row of records in a Region exceeds 10, it may be loaded into In-memory Engine.
+# The default value is 10, indicating that when the number of MVCC versions processed for a row of records in a Region exceeds 10, it might be loaded into the In-memory Engine.
 #mvcc-amplification-threshold = 10
 ```
 
 > **Note:**
 >
-> + In-memory Engine is disabled by default, and modifying it from disabled to enabled requires restarting TiKV.
-> + Except for `enable`, all other configurations can be dynamically adjusted.
+> + The In-memory Engine is disabled by default. After you enable it, you need to restart TiKV.
+> + Except for `enable`, all the other configuration items can be dynamically adjusted.
 
-### Automatic Loading
+### Automatic loading
 
-After enabling In-memory Engine, Regions will be automatically loaded based on their read traffic and MVCC amplification. The specific process is as follows:
+After you enable the In-memory Engine, Regions will be automatically loaded based on their read traffic and MVCC amplification. The process is as follows:
 
 1. Regions are sorted by the number of next (RocksDB Iterator next API) and prev (RocksDB Iterator next API) operations in the recent time period.
-2. Regions are filtered using `mvcc-amplification-threshold` (default is `10`, MVCC amplification measures read amplification, calculated as (next + prev) / processed_keys).
+2. Regions are filtered using `mvcc-amplification-threshold` (`10` by default. MVCC amplification measures read amplification, calculated as (next + prev) / processed_keys).
 3. The top N Regions with severe MVCC amplification are loaded, where N is based on memory estimation.
 
-IME also periodically performs Region eviction. The specific process is as follows:
+IME also periodically performs Region eviction. The process is as follows:
 
 1. IME evicts Regions with low read traffic or low MVCC amplification.
-2. If memory usage reaches 90% of `capacity` and new Regions need to be loaded, IME will filter Regions based on read traffic and perform eviction.
+2. If memory usage reaches 90% of `capacity` and new Regions need to be loaded, IME will filter Regions based on read traffic and evict Regions.
 
 ## Compatibility
 
@@ -115,7 +115,7 @@ LIMIT 5;
 
 Example:
 
-The following result shows that there are queries with severe MVCC amplification on the `db1.tbl1` table. TiKV processed 1358517 MVCC versions and only returned 2 versions.
+The following result shows that there are queries with severe MVCC amplification on the `db1.tbl1` table. TiKV processes 1358517 MVCC versions and only returns 2 versions.
 
 ```
 +----------------------------+-----+-------------------+--------------+------------+-----------------------------------+--------------------+--------------------+--------------------+
