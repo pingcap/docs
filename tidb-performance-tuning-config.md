@@ -236,15 +236,16 @@ The test environment is as follows:
 - TiDB version: v8.4.0
 - Workload: [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
 
-#### Performance Comparison
+#### Performance comparison
 
 The following table compares throughput (operations per second) between the baseline and optimized settings.
+
 | Item | Baseline (OPS) | Optimized (OPS) | Improvement |
 | ---------| ---- | ----| ----|
 | load data | 2858.5 | 5074.3 | +77.59% |
 | workloada | 2243.0 | 12804.3 | +470.86% |
 
-#### Performance Analysis
+#### Performance analysis
 
 Titan is enabled by default since v7.6.0 and the default min-blob-size of Titan in TiDB v8.4.0 is 32KB. For the baseline configuration, we use a record size of 31KB to ensure data is stored in RocksDB. In contrast, for the key settings configuration, we set min-blob-size to 1KB, causing data to be stored in Titan.
 
@@ -254,9 +255,10 @@ The performance improvement observed in the Key Settings is primarily attributed
 - Key Settings: The peak throughput of RocksDB compaction remains below 100MB/s.
 
 This significant reduction in compaction overhead contributes to the overall throughput improvement seen in the Key Settings configuration.
+
 ![titan-rocksdb-compactions](/media/key-settings/titan-rocksdb-compactions.png)
 
-#### Workload Commands
+#### Test workload
 
 The following `go-ycsb load` command loads data:
 
@@ -270,89 +272,100 @@ The following `go-ycsb run` command runs workload:
 go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p mysql.db=test -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -prequestdistribution=uniform -p fieldcount=31 -p fieldlength=1024
 ```
 
-## Edge Cases and Specific Optimizations
+## Edge cases and optimizations
 
-While the general configurations provided earlier offer a good starting point for performance tuning, certain scenarios require more targeted optimizations. This section covers specific cases that may need individual attention and fine-tuning.
+This section shows you how to optimize TiDB for specific scenarios that need targeted adjustments beyond basic optimizations. You will learn how to tune TiDB for your particular use cases.
 
-### Identifying Edge Cases
+### Identify edge cases
 
-1. Analyze query patterns and workload characteristics
-2. Monitor system metrics and performance bottlenecks
-3. Gather feedback from application teams on specific pain points
+To identify edge cases, perform the following steps:
 
-### Common Edge Cases and Solutions
+1. Analyze query patterns and workload characteristics.
+2. Monitor system metrics to identify performance bottlenecks.
+3. Gather feedback from application teams about specific issues.
 
-Here are the common edge cases and solutions:
+### Common edge cases
 
-1. High TSO wait for high-frequency small queries
-2. Choose the proper max chunk size for different workloads
-3. Tune coprocessor cache for read-heavy workloads
-4. Optimize chunk size for workload characteristics
-5. Optimize transaction mode and DML type for different workloads
-6. Optimize group by and distinct operations with TiKV pushdown
-7. Mitigate MVCC version accumulation using in-memory engine
-8. Optimize statistics collection during batch operations
-9. Optimize thread pool settings for different instance types
+The following lists some common edge cases:
 
-Each of these cases may require adjustments to different parameters or usage of specific features in TiDB. The following sections provide more details on how to address these scenarios.
+- High TSO wait for high-frequency small queries
+- Choose the proper max chunk size for different workloads
+- Tune coprocessor cache for read-heavy workloads
+- Optimize chunk size for workload characteristics
+- Optimize transaction mode and DML type for different workloads
+- Optimize `GROUP BY` and `DISTINCT` operations with TiKV pushdown
+- Mitigate MVCC version accumulation using in-memory engine
+- Optimize statistics collection during batch operations
+- Optimize thread pool settings for different instance types
 
-Remember that these optimizations should be applied cautiously and with thorough testing, as their effectiveness can vary depending on your specific use case and data patterns.
+The following sections explain how to handle each of these cases. You need to adjust different parameters or use specific TiDB features for each scenario.
+
+> **Note:**
+>
+> Apply these optimizations carefully and test thoroughly, as their effectiveness might vary based on your use case and data patterns.
 
 ### High TSO wait for high-frequency small queries
 
-#### How to Troubleshooting
+#### Troubleshooting
 
-TSO (Timestamp Oracle) waiting time can become a significant performance bottleneck, particularly in workloads with high-frequency small transactions or queries that require frequent timestamp allocation. This bottleneck can be identified through the [SQL Execute Time Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-methods#tune-by-color) panel in the [Performance Overview Dashboard](https://docs.pingcap.com/tidb/stable/grafana-performance-overview-dashboard). If TSO waiting time constitutes a large percentage of total SQL execution time, consider these optimizations:
+If your workload involves frequent small transactions or queries that frequently request timestamps, [TSO (Timestamp Oracle)](/glossary.md#tso) can become a performance bottleneck. To check if TSO wait time is impacting your system, check the [**Performance Overview > SQL Execute Time Overview**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview) panel. If TSO wait time constitutes a large portion of your SQL execution time, consider the following optimizations:
 
-- Use [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso) for read operations that don't require strict consistency
+- Use low-precision TSO (enable [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)) for read operations that do not need strict consistency. For more information, see [Solution 1: use low-precision TSO](#solution-1-low-precision-tso).
 - Enable [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml) to reduce TSO requests for batch operations
-- Consider batching small transactions into larger ones where possible
+- Combine small transactions into larger ones where possible. For more information, see [Solution 2: parallel mode for TSO requests](#solution-2-parallel-mode-for-tso-requests).
 
-#### Solution 1 `tidb_low_resolution_tso`
+#### Solution 1: low-precision TSO
 
-The `tidb_low_resolution_tso` setting allows TiDB to use cached timestamps for read operations, significantly reducing TSO wait time at the cost of potentially stale reads. This optimization is particularly effective for:
+You can reduce TSO wait time by enabling the low-precision TSO feature ([`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)). After this feature is enabled, TiDB uses the cached timestamp to read data, reducing TSO wait time at the expense of potentially stale reads.
 
-- Read-heavy workloads where slight staleness is acceptable
-- Scenarios where reducing query latency is more critical than absolute consistency
-- Applications that can tolerate reads that may be a few seconds behind the latest committed state
+This optimization is particularly effective in the following scenarios:
+
+- Read-heavy workloads where slight staleness is acceptable.
+- Scenarios where reducing query latency is more important than absolute consistency.
+- Applications that can tolerate reads that are a few seconds behind the latest committed state.
+
+Benefits and trade-offs:
+
+- Reduce query latency by enabling stale reads with a cached TSO, eliminating the need to request new timestamps.
+- Balance performance against data consistency: this feature is only suitable for scenarios where stale reads are acceptable. It is not recommended to use it when strict data consistency is required.
 
 To enable this optimization:
 
 ```sql
-set global tidb_low_resolution_tso=on;
+SET GLOBAL tidb_low_resolution_tso=ON;
 ```
 
-##### Justifications
+#### Solution 2: parallel mode for TSO requests
 
-| configurations | Pro | Cons | 
-| ---------| ---- | ----|
-| [`tidb_low_resolution_tso`](system-variables.md#tidb_low_resolution_tso)| Reduces query latency by enabling stale reads with cached TSO, eliminating the need to request new timestamps | Trades consistency for performance - only suitable for scenarios that can tolerate stale reads. Not recommended when strict data consistency is required | 
-
-#### Solution 2 `tidb_tso_client_rpc_mode`
-
-The default value of `tidb_tso_client_rpc_mode` is `DEFAULT`. When the following conditions are met, you can consider switching `tidb_tso_client_rpc_mode` to `PARALLEL` or `PARALLEL-FAST` for potential performance improvements:
+The [`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840) system variable switches the mode in which TiDB sends TSO RPC requests to PD. The default value is `DEFAULT`. When the following conditions are met, you can consider switching this variable to `PARALLEL` or `PARALLEL-FAST` for potential performance improvements:
 
 - TSO waiting time constitutes a significant portion of the total execution time of SQL queries.
 - The TSO allocation in PD has not reached its bottleneck.
 - PD and TiDB nodes have sufficient CPU resources.
 - The network latency between TiDB and PD is significantly higher than the time PD takes to allocate TSO (that is, network latency accounts for the majority of TSO RPC duration).
-    - To get the duration of TSO RPC requests, check the PD TSO RPC Duration panel in the PD Client section of the TiDB dashboard.
-    - To get the duration of PD TSO allocation, check the PD server TSO handle duration panel in the TiDB section of the Grafana PD dashboard.
-- The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for PARALLEL or four times for PARALLEL-FAST) is acceptable.
+    - To get the duration of TSO RPC requests, check the **PD TSO RPC Duration** panel in the PD Client section of the Grafana TiDB dashboard.
+    - To get the duration of PD TSO allocation, check the **PD server TSO handle duration** panel in the TiDB section of the Grafana PD dashboard.
+- The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for `PARALLEL` or four times for `PARALLEL-FAST`) is acceptable.
+
+To switch the parallel mode, execute the following command:
 
 ```sql
-set global tidb_tso_client_rpc_mode=PARALLEL;
+-- Use the PARALLEL mode
+SET GLOBAL tidb_tso_client_rpc_mode=PARALLEL;
+
+-- Use the PARALLEL-FAST mode
+SET GLOBAL tidb_tso_client_rpc_mode=PARALLEL-FAST;
 ```
 
 ### Tune coprocessor cache for read-heavy workloads
 
-For read-heavy workloads, optimizing the coprocessor cache can significantly improve query performance. The [coprocessor cache](https://docs.pingcap.com/tidb/stable/coprocessor-cache) stores the results of coprocessor requests, reducing the need to recompute frequently accessed data. To optimize cache performance:
+You can improve query performance for read-heavy workloads by optimizing the [coprocessor cache](/coprocessor-cache.md). This cache stores the results of coprocessor requests, reducing repeated computations of frequently accessed data. To optimize cache performance, perform the following steps:
 
-1. Monitor the current cache hit ratio using the metrics described in the [coprocessor cache documentation](https://docs.pingcap.com/tidb/stable/coprocessor-cache)
-2. Consider increasing the cache size for better hit rates on larger working sets
-3. Adjust the admission threshold based on your query patterns
+1. Monitor cache hit ratio using the metrics described in [Coprocessor Cache](/coprocessor-cache.md#view-the-grafana-monitoring-panel).
+2. Increase cache size to improve hit rates for larger working sets.
+3. Adjust admission threshold based on query patterns.
 
-Here are the recommended settings for a read-heavy workload:
+The following lists some recommended settings for a read-heavy workload:
 
 ```toml
 [tikv-client.copr-cache]
@@ -364,23 +377,23 @@ admission-min-process-ms = 0
 
 ### Optimize chunk size for workload characteristics
 
-The [`tidb_max_chunk_size`](system-variables.md#tidb_max_chunk_size) controls how many rows TiDB processes in a single iteration during query execution. Optimizing this value based on your workload can significantly impact performance:
+The [`tidb_max_chunk_size`](system-variables.md#tidb_max_chunk_size) system variable sets the maximum number of rows in a chunk during the execution process. Adjusting this value based on your workload can improve performance.
 
-#### Workload-Specific Recommendations
+- For OLTP workloads with large concurrency and small transactions:
 
-- **OLTP Workloads** (high concurrency, small transactions):
-    - Recommended range: 128-256 rows (default is 1024)
-    - Benefits: Reduced memory overhead, faster limit query processing
-    - Use case: Point queries, small range scans
+    - Set the value between `128` and `256` rows (the default is 1024).
+    - This reduces memory usage and makes limit queries faster.
+    - Use case: point queries, small range scans.
 
     ```sql
     SET GLOBAL tidb_max_chunk_size = 128;
     ```
 
-- **OLAP/Analytical Workloads** (complex queries, large result sets):
-    - Recommended range: 1024-4096 rows
-    - Benefits: Improved throughput for large scans
-    - Use case: Aggregations, large table scans
+- For OLAP or analytical workloads with complex queries and large result sets:
+
+    - Set the value between `1024` and `4096` rows.
+    - This increases throughput when scanning large amounts of data.
+    - Use case: aggregations, large table scans.
 
     ```sql
     SET GLOBAL tidb_max_chunk_size = 4096;
@@ -388,57 +401,59 @@ The [`tidb_max_chunk_size`](system-variables.md#tidb_max_chunk_size) controls ho
 
 ### Optimize transaction mode and DML type for different workloads
 
-TiDB provides different transaction modes and DML execution types to optimize performance for various workload patterns:
+TiDB provides different transaction modes and DML execution types to optimize performance for various workload patterns.
 
-#### Transaction Modes
+#### Transaction modes
 
-- **Pessimistic Mode** (Default):
-    - Best for general workloads with potential write conflicts
-    - Provides better consistency guarantees
+You can set the transaction mode using the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) system variable.
+
+- [Pessimistic transaction mode](/pessimistic-transaction.md) (default):
+
+    - Suitable for general workloads with potential write conflicts.
+    - Provides stronger consistency guarantees.
 
     ```sql
     SET SESSION tidb_txn_mode = "pessimistic";
     ```
 
-- **Optimistic Mode**:
-    - Suitable for workloads with minimal write conflicts
-    - Better performance for multi-statement transactions
-    - Example: `begin; insert...; insert...; commit;`
+- [Optimistic transaction mode](/optimistic-transaction.md):
+
+    - Suitable for workloads with minimal write conflicts.
+    - Better performance for multi-statement transactions.
+    - Example: `BEGIN; INSERT...; INSERT...; COMMIT;`.
 
     ```sql
     SET SESSION tidb_txn_mode = "optimistic";
     ```
 
-#### DML Types
+#### DML types
 
-`tidb_dml_type = "bulk"` indicates the bulk DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB.
+You can control the execution mode of DML statements using the [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable, which is introduced in v8.0.0.
 
-- **Pipeline DML** (New in v8.0.0):
-    - Ideal for bulk data loading with no conflicts
-    - Reduces TiDB memory usage during large writes
-    - Requirements:
-        - Auto-commit must be enabled
-        - `pessimistic-auto-commit` must be false
+To use the bulk DML execution mode, set `tidb_dml_type` to `"bulk"`. This mode optimizes bulk data loading without conflicts and reduces memory usage during large write operations. Before using this mode, ensure that:
 
-    ```sql
-    SET SESSION tidb_dml_type = "bulk";
-    ```
+- Auto-commit is enabled.
+- The [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600) configuration item is set to `false`.
 
-### Optimize group by and distinct operations with TiKV pushdown
+```sql
+SET SESSION tidb_dml_type = "bulk";
+```
 
-TiDB can push down aggregation operations to TiKV to optimize query performance by reducing data transfer and processing overhead. The effectiveness depends on your data characteristics:
+### Optimize `GROUP BY` and `DISTINCT` operations with TiKV pushdown
 
-#### When to Use Pushdown
+TiDB pushes down aggregation operations to TiKV to reduce data transfer and processing overhead. The performance improvement varies based on your data characteristics.
 
-- **Ideal Scenarios** (High Performance Gain):
-    - Columns with low number of distinct values (NDV)
-    - Data with high repetition (many duplicate values)
-    - Example: Status columns, category codes, date parts
+#### Usage scenarios
 
-- **Non-Ideal Scenarios** (Potential Performance Loss):
-    - Columns with high NDV (mostly unique values)
-    - Unique identifiers or timestamps
-    - Example: User IDs, transaction IDs
+- **Ideal scenarios** (high performance gain):
+    - Columns containing few distinct values (low NDV).
+    - Data containing frequent duplicate values.
+    - Example: status columns, category codes, date parts.
+
+- **Non-ideal scenarios** (potential performance loss):
+    - Columns containing mostly unique values (high NDV).
+    - Unique identifiers or timestamps.
+    - Example: User IDs, transaction IDs.
 
 #### Configuration
 
@@ -454,44 +469,46 @@ SET GLOBAL tidb_opt_distinct_agg_push_down = ON;
 
 ### Mitigate MVCC version accumulation using in-memory engine
 
-If you observe excessive MVCC versions during performance testing (caused by either hot read/write spots or garbage collection/compaction issues), you can enable the in-memory engine feature to alleviate this problem. This feature is available since v8.4.0 and can be enabled by adding the following configuration to your TiKV configuration file.
+Excessive MVCC versions can cause performance bottlenecks, particularly in high read/write areas or due to issues with garbage collection and compaction. To mitigate this, you can use the [in-memory engine](/tikv-in-memory-engine.md). This feature is introduced in v8.5.0. To enable it, add the following configuration to your TiKV configuration file.
 
 > **Note:**
 >
-> The in-memory engine can help reduce the impact of excessive MVCC versions, but it may increase memory usage. Monitor your system closely after enabling this feature.
+> The in-memory engine helps reduce the impact of excessive MVCC versions but might increase memory usage. Monitor your system after enabling this feature.
 
-   ```toml
-   [in-memory-engine]
-   enabled = true
-   gc-interval = "2m"
-   hard-limit-threshold = "8GB"
-   soft-limit-threshold = "7GB"
-   stop-limit-threshold = "5GB"
-   mvcc-amplification = 100
-   load-evict-interval = "4m"
-   ```
+```toml
+[in-memory-engine]
+enabled = true
+gc-interval = "2m"
+hard-limit-threshold = "8GB"
+soft-limit-threshold = "7GB"
+stop-limit-threshold = "5GB"
+mvcc-amplification = 100
+load-evict-interval = "4m"
+```
 
 ### Optimize statistics collection during batch operations
 
-Statistics collection is crucial for query optimization but can impact performance during batch operations. Here's how to manage it effectively:
+You can optimize performance during batch operations while maintaining query optimization by managing statistics collection. This section describes how to manage this process effectively.
 
-#### When to Disable Auto Analyze
+#### When to disable auto analyze
 
-- During large data imports
-- Bulk update operations
-- Time-sensitive batch processing
-- When you want full control over statistics collection timing
+You can disable auto analyze by setting the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable to `OFF`  in the following scenarios:
 
-#### Best Practices
+- During large data imports.
+- During bulk update operations.
+- For time-sensitive batch processing.
+- When you need full control over the timing of statistics collection.
 
-1. **Before Batch Operation**:
+#### Best practices
+
+- Before the batch operation:
 
    ```sql
    -- Disable auto analyze
    SET GLOBAL tidb_enable_auto_analyze = OFF;
    ```
 
-2. **After Batch Operation**:
+- After the batch operation:
 
    ```sql
    -- Manually collect statistics
@@ -503,25 +520,20 @@ Statistics collection is crucial for query optimization but can impact performan
 
 ### Optimize thread pool settings for different instance types
 
-TiKV's performance can be significantly improved by properly configuring thread pools based on your instance's CPU resources. Here's how to optimize these settings:
+To improve TiKV performance, configure the thread pools based on your instance's CPU resources. The following guidelines help you optimize these settings:
 
-#### Thread Pool Recommendations
+- For instances with 8 to 16 cores, the default settings are typically sufficient.
 
-| Instance Size | Description | Recommended Settings |
-|--------------|-------------|---------------------|
-| 8-16 cores | Default settings usually sufficient | Use system defaults |
-| 32+ cores | Increase pool sizes for better resource utilization | Adjust as shown below |
+- For instances with 32 or more cores, increase the pool sizes for better resource utilization. Adjust the settings as follows:
 
-#### Configuration for 32 Core Instances
-
-```toml
-[server]
-# Increase gRPC thread pool 
-grpc-concurrency = 10
-
-[raftstore]
-# Optimize for write-intensive workloads
-apply-pool-size = 4
-store-pool-size = 4
-store-io-pool-size = 2
-```
+    ```toml
+    [server]
+    # Increase gRPC thread pool 
+    grpc-concurrency = 10
+    
+    [raftstore]
+    # Optimize for write-intensive workloads
+    apply-pool-size = 4
+    store-pool-size = 4
+    store-io-pool-size = 2
+    ```
