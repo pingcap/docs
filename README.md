@@ -28,6 +28,7 @@ Currently, we maintain the following versions of TiDB documentation in different
 | Branch name | TiDB docs version |
 | :---------|:----------|
 | [`master`](https://github.com/pingcap/docs/tree/master) | The latest development version |
+| [`release-8.4`](https://github.com/pingcap/docs/tree/release-8.4) | 8.4 Development Milestone Release |
 | [`release-8.3`](https://github.com/pingcap/docs/tree/release-8.3) | 8.3 Development Milestone Release |
 | [`release-8.2`](https://github.com/pingcap/docs/tree/release-8.2) | 8.2 Development Milestone Release |
 | [`release-8.1`](https://github.com/pingcap/docs/tree/release-8.1) | 8.1 LTS (Long-Term Support) |
@@ -61,6 +62,13 @@ Currently, we maintain the following versions of TiDB documentation in different
 [<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/docs/blob/master/credits.md)
 
 See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓
+
+<a href="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors?repo_id=63995402&limit=30" target="_blank" style="display: block;" align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?repo_id=63995402&limit=30&image_size=auto&color_scheme=dark" width="655" height="auto" />
+    <img alt="Active Contributors of pingcap/docs - Last 28 days" src="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?repo_id=63995402&limit=30&image_size=auto&color_scheme=light" width="655" height="auto" />
+  </picture>
+</a>
 
 ## License
 

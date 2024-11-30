@@ -7,10 +7,6 @@ summary: TiDB adopts an LRU-based (Least Recently Used) caching mechanism for sc
 
 In some multi-tenant scenarios, there might be hundreds of thousands or even millions of databases and tables. Loading the schema information of all these databases and tables into memory would not only consume a large amount of memory but also degrade access performance. To address this issue, TiDB introduces a schema caching mechanism similar to LRU (Least Recently Used). Only the schema information of the most recently accessed databases and tables is cached in memory.
 
-> **Warning:**
->
-> This feature is currently an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 ## Configure schema cache
 
 You can enable the schema caching feature by configuring the system variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
@@ -36,3 +32,9 @@ In scenarios with a large number of databases and tables, the following known is
     - `SHOW FULL TABLES`
     - `FLASHBACK`
     - `ALTER TABLE ... SET TIFLASH MODE ...`
+
+- When you use tables with the [`AUTO_INCREMENT`](/auto-increment.md) or [`AUTO_RANDOM`](/auto-random.md) attribute, a small schema cache size might cause the meta data of these tables to frequently enter and leave the cache. This can result in the allocated ID range becoming invalid before being fully used, leading to ID jumps. In write-intensive scenarios, this might even exhaust the ID range. To minimize abnormal ID allocation behavior and improve system stability, it is recommended to take the following measures:
+
+    - View the hit rate and size of the schema cache on the monitoring panel to assess whether the cache settings are reasonable. Increase the schema cache size properly to reduce frequent evictions.
+    - Set [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) to `1` to prevent ID jumps.
+    - Properly configure the shard bits and reserved bits of `AUTO_RANDOM` to avoid a too small ID range.

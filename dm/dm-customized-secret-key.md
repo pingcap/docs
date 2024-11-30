@@ -9,7 +9,7 @@ Before v8.0.0, [DM](/dm/dm-overview.md) uses a [fixed AES-256 secret key](https:
 
 ## Usage
 
-1. Create a custom key file, which must contain a 64-character hexadecimal AES-256 secret key.
+1. Create a custom key file, which must contain a 64-character hexadecimal AES-256 secret key. One way to generate this key is by calculating SHA256 checksum of random data, such as `head -n 256 /dev/urandom | sha256sum`.
 2. In the DM-master [command-line flags](/dm/dm-command-line-flags.md) or [configuration file](/dm/dm-master-configuration-file.md), specify `secret-key-path` as the path of your custom key file.
 
 ## Upgrade from a version earlier than v8.0.0
