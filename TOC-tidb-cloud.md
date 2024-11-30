@@ -295,7 +295,7 @@
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
-    - [Basic SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
+    - [Standard SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
