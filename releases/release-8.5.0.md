@@ -120,7 +120,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 * Setting the memory limit for schema cache is now generally available (GA), reducing memory usage in large-scale data scenarios [#50959](https://github.com/pingcap/tidb/issues/50959) @[tiancaiamao](https://github.com/tiancaiamao) @[wjhuang2016](https://github.com/wjhuang2016) @[gmhdbjd](https://github.com/gmhdbjd) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--1976-->
 
     In some SaaS scenarios, where the number of tables reaches hundreds of thousands or even millions, schema metadata can consume a significant amount of memory. With this feature enabled, TiDB uses the Least Recently Used (LRU) algorithm to cache and evict the corresponding schema metadata, effectively reducing memory usage.
-    
+
     Starting from v8.4.0, this feature is enabled by default with a default value of `536870912` (that is, 512 MiB). You can adjust it as needed using the variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800).
 
     For more information, see [documentation](/schema-cache.md).
@@ -134,12 +134,6 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     For more information, see [documentation](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service).
 
 ### Performance
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
 
 * TiDB accelerated table creation becomes generally available (GA), significantly reducing data migration and cluster initialization time [#50052](https://github.com/pingcap/tidb/issues/50052) @[D3Hunter](https://github.com/D3Hunter) @[gmhdbjd](https://github.com/gmhdbjd) tw@Oreoxmt <!--1977-->
 
@@ -165,21 +159,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [documentation](/pd-control.md).
 
-### Availability
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
 ### SQL
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
 
 * Support foreign keys (GA) [#36982](https://github.com/pingcap/tidb/issues/36982) @[YangKeao](https://github.com/YangKeao) @[crazycs520](https://github.com/crazycs520) tw@lilin90 <!--1894-->
 
@@ -187,7 +167,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [documentation](/foreign-key.md).
 
-* Introduce the `ADMIN ALTER DDL JOBS` statement to support modifying the DDL jobs online [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016--> 
+* Introduce the `ADMIN ALTER DDL JOBS` statement to support modifying the DDL jobs online [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016-->
 
     Starting from v8.3.0, you can set the variables [`tidb_ddl_reorg_batch_size`](/system-variables#tidb_ddl_reorg_batch_size) and [`tidb_ddl_reorg_worker_cnt`](/system-variables#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, you need to cancel the DDL job first, adjust the variables, and then resubmit the job.
 
@@ -198,22 +178,6 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     - `ADMIN ALTER DDL JOBS job_id MAX_WRITE_SPEED = '200MiB';`: adjusts the write traffic of index data to each TiKV node online.
 
   For more information, see [documentation](/sql-statements/sql-statement-admin-alter-ddl.md).
-
-### DB operations
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
-### Observability
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
 
 ### Security
 
@@ -236,16 +200,8 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     TiKV ensures data security by using the encryption at rest technique to encrypt stored data. The core aspect of this technique is proper key management. In v8.0.0, TiKV encryption at rest experimentally supports using Google Cloud KMS for master key management.
 
     Starting from v8.5.0, encryption at rest using Google Cloud KMS becomes generally available (GA). To use this feature, first create a key on Google Cloud, and then configure the `[security.encryption.master-key]` section in the TiKV configuration file.
-  
+
     For more information, see [documentation](/encryption-at-rest.md#tikv-encryption-at-rest).
-
-### Data migration
-
-* Placeholder for feature summary [#Issue-number](issue-link) @[Contributor-GitHub-ID](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
 
 ## Compatibility changes
 
@@ -255,31 +211,22 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Behavior changes
 
-### MySQL compatibility
+- In non-strict mode (`sql_mode = ''`), inserting `NULL` values into non-`NULL` columns now returns an error for MySQL compatibility. [#55457](https://github.com/pingcap/tidb/issues/55457) @[joechenrh](https://github.com/joechenrh)
+- The `ALTER TABLE ... DROP FOREIGN KEY IF EXISTS ...` statement is no longer supported. [#56703](https://github.com/pingcap/tidb/pull/56703) @[YangKeao](https://github.com/YangKeao)
 
 ### System variables
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-|tidb_ddl_reorg_max_write_speed  | Newly added |Used to control the speed at which TiDB writes index data to a single TiKV node. For example, setting the value to 200 MiB limits the maximum write speed to 200 MiB/s.  |
 | [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the [accelerated table creation](/accelerated-table-creation.md) feature is enabled by default. |
-|  |  |  |
+| [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v850)  | Newly added | Limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). For example, setting the variable to `200MiB` limits the maximum write speed to 200 MiB/s.  |
 
 ### Configuration parameters
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
+| TiDB | [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) | Modified | Starting with v8.5.0, the integer display width feature is deprecated. The default value of this configuration item is changed from `false` to `true`. |
 | TiKV | [`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size) | Modified | Changes the default value from `8192` to `16384`. |
-|  |  |  |  |
-|  |  |  |  |
-
-### System tables
-
-### Other changes
-
-## Offline package changes
-
-## Removed features
 
 ## Deprecated features
 
@@ -446,4 +393,8 @@ The following features are planned for deprecation in future versions:
 
 We would like to thank the following contributors from the TiDB community:
 
-- [Contributor-GitHub-ID](id-link)
+- [dash12653](https://github.com/dash12653) (First-time contributor)
+- [chagelo](https://github.com/chagelo) (First-time contributor)
+- [LindaSummer](https://github.com/LindaSummer)
+- [songzhibin97](https://github.com/songzhibin97)
+- [Hexilee](https://github.com/Hexilee)
