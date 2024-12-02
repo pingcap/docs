@@ -1,7 +1,6 @@
 ---
 title: Minimal Deployment Topology
 summary: Learn the minimal deployment topology of TiDB clusters.
-aliases: ['/docs/dev/minimal-deployment-topology/']
 ---
 
 # Minimal Deployment Topology
