@@ -730,6 +730,7 @@
     - SQL Statements
       - [Overview](/sql-statements/sql-statement-overview.md)
       - [`ADMIN`](/sql-statements/sql-statement-admin.md)
+      - [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)
       - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
       - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
