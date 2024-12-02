@@ -140,6 +140,7 @@ Linux (RHEL/CentOS):
 ```shell
 sudo yum install mysql
 ```
+
 </div>
 </SimpleTab>
 
