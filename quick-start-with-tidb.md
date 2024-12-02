@@ -171,8 +171,8 @@ Additionally, `tiup playground` installed optional components:
 
 - **TiFlash:** Real-time analytics engine that accelerates complex queries and reporting without slowing down your live application
 - Built-in **monitoring stack** with:
-  - TiDB Dashboard (default: http://127.0.0.1:2379/dashboard, user: `root`, no password)
-  - Grafana + Prometheus (default: http://127.0.0.1:3000, user: `admin`, password: `admin`)
+    - TiDB Dashboard (default: <http://127.0.0.1:2379/dashboard>, user: `root`, no password)
+    - Grafana + Prometheus (default: <http://127.0.0.1:3000>, user: `admin`, password: `admin`)
 
 You can verify your running database cluster components with:
 
@@ -231,7 +231,6 @@ To restart the environment, you can run `tiup playground` with the same argument
 
 To add a TiProxy instance as a load balancer to your existing `sample-app-env` environment with:
 
-
 ```shell
 tiup playground v8.1.0 --tag sample-app-env --db 2 --kv 3 --pd 1 --tiflash 0 --tiproxy 1
 ```
@@ -247,13 +246,11 @@ Connect TiProxy: mysql --host 127.0.0.1 --port 6000 -u root
 
 Now you can connect through TiProxy:
 
-
 ```shell
 mysql --host 127.0.0.1 --port 6000 -u root
 ```
 
 See all TiUP playground options with:
-
 
 ```shell
 tiup playground --help
@@ -396,11 +393,11 @@ As your weather monitoring system grows, you'll need to handle more stations, re
 
 Before scaling, set up these monitoring views to watch the scaling process:
 
-1. Open TiDB Dashboard (typically http://127.0.0.1:2379/dashboard):
+1. Open TiDB Dashboard (typically <http://127.0.0.1:2379/dashboard>):
 
     Go to "Cluster Info", "Store Topology"
 
-2. Open Grafana (typically http://127.0.0.1:3000):
+2. Open Grafana (typically <http://127.0.0.1:3000>):
 
     - Find "TiKV-Summary" dashboard
     - Look for the "Cluster" panel:
@@ -429,6 +426,7 @@ tiup playground display
 ```
 
 You should see something similar to:
+
 ```shell
 Pid     Role    Uptime
 ...
