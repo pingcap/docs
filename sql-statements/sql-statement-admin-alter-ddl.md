@@ -24,7 +24,7 @@ The following are the supported parameters for different DDL jobs and their corr
     - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.
     - `BATCH_SIZE`: the batch size. You can set the initial value by [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size).
     - `MAX_WRITE_SPEED`: the maximum bandwidth limit for importing index records into each TiKV. The initial value is set by [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v850). 
-  Currently this parameter only works for jobs with `ADD INDEX` submitted and running after disabling [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710).  
+  Currently these parameters only work for jobs with `ADD INDEX` submitted and running after [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is disabled.  
 
 - `MODIFY COLUMN`:
     - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.
