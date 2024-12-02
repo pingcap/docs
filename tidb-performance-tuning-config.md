@@ -26,8 +26,8 @@ This guide describes the non-default settings, including their benefits and pote
 
 The following settings are commonly used to optimize TiDB performance:
 
-- Enhance execution plan caching, such as [Instance-level execution plan cache](/sql-prepared-plan-cache.md), [Non-prepared plan cache](/sql-non-prepared-plan-cache.md), and [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
-- Optimize behavior of the TiDB optimizer using [Optimizer Fix Controls](/optimizer-fix-controls.md).
+- Enhance execution plan cache, such as [Instance-level execution plan cache](/sql-prepared-plan-cache.md), [Non-prepared plan cache](/sql-non-prepared-plan-cache.md), and [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
+- Optimize the behavior of the TiDB optimizer using [Optimizer Fix Controls](/optimizer-fix-controls.md).
 - Use the [Titan](/storage-engine/titan-overview.md) storage engine more aggressively.
 
 These settings can significantly improve performance for many workloads. However, as with any optimization, thoroughly test them in your environment before deploying to production.
@@ -119,7 +119,7 @@ l0-files-threshold = 60
 | ---------| ---- | ----|
 | [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit), [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit), and [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Set limits for concurrent snapshot transfer and I/O bandwidth during TiKV scaling operations. Higher limits reduce scaling time by allowing faster data migration. | Adjusting these limits affects the trade-off between scaling speed and online transaction performance. |
 | [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) and [`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840) | Control the memory allocation for pessimistic lock caching at the Region and TiKV instance levels. Storing locks in memory reduces disk I/O and improves transaction performance. | Monitor memory usage carefully. Higher limits improve performance but increase memory consumption. |
-| [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan), [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan), [`min-blob-size`](/tikv-configuration-file.md#min-blob-size), and [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Enable the Titan storage engine to reduce write amplification and alleviate disk I/O bottlenecks. Particularly useful when RocksDB compaction cannot keep up with write workloads, resulting in accumulated pending compaction bytes. | Enable when write amplification is the primary bottleneck. Trade-offs: 1. Potential performance impact on primary key range scans. 2. Increased space amplification (up to 2x in the worst case). 3. Additional memory usage for blob cache. |
+| [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan), [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan), [`min-blob-size`](/tikv-configuration-file.md#min-blob-size), and [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Enable the Titan storage engine to reduce write amplification and alleviate disk I/O bottlenecks. Particularly useful when RocksDB compaction cannot keep up with write workloads, resulting in accumulated pending compaction bytes. | Enable it when write amplification is the primary bottleneck. Trade-offs include: 1. Potential performance impact on primary key range scans. 2. Increased space amplification (up to 2x in the worst case). 3. Additional memory usage for blob cache. |
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | Control when write flow control is triggered based on the number of kvDB L0 files. Increasing the threshold reduces write stalls during high write workloads. | Higher thresholds might lead to more aggressive compactions when many L0 files exist. |
 
 ### TiFlash configurations
@@ -133,7 +133,7 @@ snap-io-max-write-bytes-per-sec = "300MiB"
 
 | Configuration item | Description | Note |
 | ---------| ---- | ----|
-| `snap-io-max-write-bytes-per-sec` | Control the maximum write bandwidth for data replication from TiKV to TiFlash. Higher limits accelerate initial data loading and catch-up replication. | Higher bandwidth consumption might impact online transaction performance. Balance between replication speed and system stability. |
+| [`snap-io-max-write-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Control the maximum write bandwidth for data replication from TiKV to TiFlash. Higher limits accelerate initial data loading and catch-up replication. | Higher bandwidth consumption might impact online transaction performance. Balance between replication speed and system stability. |
 
 ## Benchmark 
 
@@ -167,14 +167,14 @@ The following table compares throughput, latency, and plan cache hit ratio betwe
 The instance plan cache demonstrates significant performance improvements over the baseline configuration:
 
 - Higher hit ratio: increases by 53.82% (from 56.89% to 87.51%).
-- Lower memory usage: decreases by 26.3% (from 95.3 MiB to 70.2 MiB).
+- Lower memory usage: decreases by 26.34% (from 95.3 MiB to 70.2 MiB).
 - Better performance:
 
     - QPS increases by 12.38%.
     - Average latency decreases by 11.01%.
     - P95 latency decreases by 13.41%.
 
-#### How It Works
+#### How it works
 
 Instance plan cache improves performance through these mechanisms:
 
@@ -197,7 +197,7 @@ Instance plan cache is particularly effective for systems with:
 - High concurrent connections.
 - Diverse query patterns.
 
-#### Memory Efficiency
+#### Memory efficiency
 
 Instance plan cache provides better memory efficiency than session-level plan cache because:
 
@@ -225,7 +225,7 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 
 For more information, see [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md).
 
-### YCSB workloads on Large record value
+### YCSB workloads on large record value
 
 #### Test environment
 
@@ -247,12 +247,12 @@ The following table compares throughput (operations per second) between the base
 
 #### Performance analysis
 
-Titan is enabled by default since v7.6.0 and the default min-blob-size of Titan in TiDB v8.4.0 is 32KB. For the baseline configuration, we use a record size of 31KB to ensure data is stored in RocksDB. In contrast, for the key settings configuration, we set min-blob-size to 1KB, causing data to be stored in Titan.
+Titan is enabled by default starting from v7.6.0 and the default `min-blob-size` of Titan in TiDB v8.4.0 is `32KB`. The baseline configuration uses a record size of `31KB` to ensure data is stored in RocksDB. In contrast, for the key settings configuration, set `min-blob-size` to `1KB`, causing data to be stored in Titan.
 
-The performance improvement observed in the Key Settings is primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the figures below:
+The performance improvement observed in the Key Settings is primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the following figures:
 
-- Baseline: The total throughput of RocksDB compaction exceeds 1GB/s, with peaks over 3GB/s.
-- Key Settings: The peak throughput of RocksDB compaction remains below 100MB/s.
+- Baseline: The total throughput of RocksDB compaction exceeds 1 GiB/s, with peaks over 3 GiB/s.
+- Key Settings: The peak throughput of RocksDB compaction remains below 100 MiB/s.
 
 This significant reduction in compaction overhead contributes to the overall throughput improvement seen in the Key Settings configuration.
 
@@ -361,9 +361,9 @@ SET GLOBAL tidb_tso_client_rpc_mode=PARALLEL-FAST;
 
 You can improve query performance for read-heavy workloads by optimizing the [coprocessor cache](/coprocessor-cache.md). This cache stores the results of coprocessor requests, reducing repeated computations of frequently accessed data. To optimize cache performance, perform the following steps:
 
-1. Monitor cache hit ratio using the metrics described in [Coprocessor Cache](/coprocessor-cache.md#view-the-grafana-monitoring-panel).
-2. Increase cache size to improve hit rates for larger working sets.
-3. Adjust admission threshold based on query patterns.
+1. Monitor the cache hit ratio using the metrics described in [Coprocessor Cache](/coprocessor-cache.md#view-the-grafana-monitoring-panel).
+2. Increase the cache size to improve hit rates for larger working sets.
+3. Adjust the admission threshold based on query patterns.
 
 The following lists some recommended settings for a read-heavy workload:
 
@@ -381,7 +381,7 @@ The [`tidb_max_chunk_size`](system-variables.md#tidb_max_chunk_size) system vari
 
 - For OLTP workloads with large concurrency and small transactions:
 
-    - Set the value between `128` and `256` rows (the default is 1024).
+    - Set the value between `128` and `256` rows (the default value is `1024`).
     - This reduces memory usage and makes limit queries faster.
     - Use case: point queries, small range scans.
 
@@ -469,7 +469,7 @@ SET GLOBAL tidb_opt_distinct_agg_push_down = ON;
 
 ### Mitigate MVCC version accumulation using in-memory engine
 
-Excessive MVCC versions can cause performance bottlenecks, particularly in high read/write areas or due to issues with garbage collection and compaction. To mitigate this, you can use the [in-memory engine](/tikv-in-memory-engine.md). This feature is introduced in v8.5.0. To enable it, add the following configuration to your TiKV configuration file.
+Excessive MVCC versions can cause performance bottlenecks, particularly in high read/write areas or due to issues with garbage collection and compaction. You can use the [in-memory engine](/tikv-in-memory-engine.md) introduced in v8.5.0 to mitigate this issue. To enable it, add the following configuration to your TiKV configuration file.
 
 > **Note:**
 >
@@ -492,7 +492,7 @@ You can optimize performance during batch operations while maintaining query opt
 
 #### When to disable auto analyze
 
-You can disable auto analyze by setting the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable to `OFF`  in the following scenarios:
+You can disable auto analyze by setting the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable to `OFF` in the following scenarios:
 
 - During large data imports.
 - During bulk update operations.
