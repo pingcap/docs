@@ -12,19 +12,20 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 ```
 
 - `101`: indicates the ID of the DDL job. You can obtain the ID by executing [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
-- `THREAD`: indicates the concurrency of the DDL job. You can configure the initial value of the thread by the system variable [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt).
+- `THREAD`: indicates the concurrency of the DDL job. You can configure its initial value using the system variable [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt).
 
-The following DDL job types support `ADMIN ALTER DDL JOBS`: `ADD INDEX`, `MODIFY COLUMN`, and `REORGANIZE PARTITION`. For other DDL job types, executing `ADMIN ALTER DDL JOBS` reports an error `unsupported DDL operation`.
+Currently, the DDL job types supported by the `ADMIN ALTER DDL JOBS` statement include `ADD INDEX`, `MODIFY COLUMN`, and `REORGANIZE PARTITION`. For other DDL job types, executing `ADMIN ALTER DDL JOBS` returns the `unsupported DDL operation` error.
 
-Currently, you can only modiy the parameters of a single DDL job by executing `ADMIN ALTER DDL JOBS`. Modifying the parameters of multiple IDs at the same time is not supported.
+Currently, you can only modify the parameters of a single DDL job by executing `ADMIN ALTER DDL JOBS`. Modifying the parameters of multiple DDL job IDs at the same time is not supported.
 
 The following are the supported parameters for different DDL jobs and their corresponding system variables:
 
 - `ADD INDEX`:
     - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.
-    - `BATCH_SIZE`: the batch size. You can set the initial value by [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size).
+    - `BATCH_SIZE`: the batch size. The initial value is set by [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size).
     - `MAX_WRITE_SPEED`: the maximum bandwidth limit for importing index records into each TiKV. The initial value is set by [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v850).
-  Currently these parameters only work for jobs with `ADD INDEX` submitted and running after [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is disabled.
+
+  Currently, the preceding parameters only work for `ADD INDEX` jobs that are submitted and running after [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is disabled.
 
 - `MODIFY COLUMN`:
     - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.
@@ -34,11 +35,11 @@ The following are the supported parameters for different DDL jobs and their corr
     - `THREAD`: the concurrency of the DDL job. The initial value is set by `tidb_ddl_reorg_worker_cnt`.
     - `BATCH_SIZE`: the batch size. The initial value is set by `tidb_ddl_reorg_batch_size`.
 
-The value range of the parameter is consistent with that of the system variable.
+The value ranges of the preceding parameters are consistent with those of the corresponding system variables.
 
-`ADMIN ALTER DDL JOBS` takes effect only for running DDL jobs. If the DDL job does not exist or has ended, execution of this statement results in a `ddl job is not running` error.
+`ADMIN ALTER DDL JOBS` takes effect only on running DDL jobs. If the DDL job does not exist or has already completed, executing this statement returns the `ddl job is not running` error.
 
-The following are examples of this statement:
+The following are some examples of this statement:
 
 ```sql
 ADMIN ALTER DDL JOBS 101 THREAD = 8;
@@ -47,7 +48,7 @@ ADMIN ALTER DDL JOBS 101 MAX_WRITE_SPEED = '200MiB';
 ADMIN ALTER DDL JOBS 101 THREAD = 8, BATCH_SIZE = 256;
 ```
 
-To view the current parameter values for a specific DDL job, you can execute `ADMIN SHOW DDL JOBS` and the results are displayed in the `COMMENTS` column:
+To view the current parameter values for a specific DDL job, you can execute `ADMIN SHOW DDL JOBS`. The results are displayed in the `COMMENTS` column:
 
 ```sql
 ADMIN SHOW DDL JOBS 1;

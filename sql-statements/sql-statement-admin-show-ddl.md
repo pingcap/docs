@@ -12,9 +12,9 @@ The `ADMIN SHOW DDL [JOBS|JOB QUERIES]` statement shows information about runnin
 ```ebnf+diagram
 AdminShowDDLStmt ::=
     'ADMIN' 'SHOW' 'DDL'
-    ( 
-        'JOBS' Int64Num? WhereClauseOptional 
-    |   'JOB' 'QUERIES' NumList 
+    (
+        'JOBS' Int64Num? WhereClauseOptional
+    |   'JOB' 'QUERIES' NumList
     |   'JOB' 'QUERIES' 'LIMIT' m ( ('OFFSET' | ',') n )?
     )?
 
@@ -47,9 +47,9 @@ ADMIN SHOW DDL\G;
    SCHEMA_VER: 26
      OWNER_ID: 2d1982af-fa63-43ad-a3d5-73710683cc63
 OWNER_ADDRESS: 0.0.0.0:4000
- RUNNING_JOBS: 
+ RUNNING_JOBS:
       SELF_ID: 2d1982af-fa63-43ad-a3d5-73710683cc63
-        QUERY: 
+        QUERY:
 1 row in set (0.00 sec)
 ```
 
@@ -89,14 +89,14 @@ The `ADMIN SHOW DDL JOBS` statement is used to view the 10 jobs in the current D
     - `pausing`: indicates that the operation is being paused.
     - `paused`: indicates that the operation has been paused. This state only appears when you use the [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) command to pause the DDL job. You can use the [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) command to resume the DDL job.
     - `done`: indicates that the operation has been successfully executed on the TiDB owner node, but other TiDB nodes have not yet synchronized the changes performed by this DDL job.
-- `COMMENTS`: contains other information for auxiliary diagnostic purposes.
+- `COMMENTS`: contains additional information for diagnostic purposes.
     - `ingest`: ingest tasks for accelerated adding index backfill configured via [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)。
     - `txn`: transaction-based index backfill after [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is disabled.
     - `txn-merge`: transactional backfilling with a temporary index that gets merged with the original index when the backfilling is finished.
     - `DXF`: tasks executed with Distributed eXecution Framework (DXF) configured via [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710).
     - `service_scope`: the service scope of the TiDB node configured via [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740).
-    - `thread`: concurrency of backfill tasks. You can set the initial value by `tidb_ddl_reorg_worker_cnt`. It supports dynamic modification via [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md).
-    - `batch_size`: batch size of backfill tasks. You can set the initial value by `tidb_ddl_reorg_batch_size`. It supports dynamic modification via `ADMIN ALTER DDL JOBS`.
+    - `thread`: the concurrency of backfill tasks. You can set the initial value by `tidb_ddl_reorg_worker_cnt`. It supports dynamic modification via [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md).
+    - `batch_size`: the batch size of backfill tasks. You can set the initial value by `tidb_ddl_reorg_batch_size`. It supports dynamic modification via `ADMIN ALTER DDL JOBS`.
     - `max_write_speed`: flow control during ingest task import. The initial value can be set with `tidb_ddl_reorg_max_write_speed`. It supports dynamic modification via `ADMIN ALTER DDL JOBS`.
 
 </CustomContent>
