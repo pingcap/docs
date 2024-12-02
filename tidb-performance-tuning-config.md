@@ -133,7 +133,7 @@ snap-io-max-write-bytes-per-sec = "300MiB"
 
 | Configuration item | Description | Note |
 | ---------| ---- | ----|
-| [`snap-io-max-write-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Control the maximum write bandwidth for data replication from TiKV to TiFlash. Higher limits accelerate initial data loading and catch-up replication. | Higher bandwidth consumption might impact online transaction performance. Balance between replication speed and system stability. |
+| [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Control the maximum allowable disk bandwidth for data replication from TiKV to TiFlash. Higher limits accelerate initial data loading and catch-up replication. | Higher bandwidth consumption might impact online transaction performance. Balance between replication speed and system stability. |
 
 ## Benchmark 
 
