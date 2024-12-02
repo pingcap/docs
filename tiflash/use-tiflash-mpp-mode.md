@@ -130,7 +130,7 @@ mysql> DROP TABLE if exists test.employees;
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 mysql> CREATE TABLE test.employees
-(id int(11) NOT NULL,
+(id int NOT NULL,
  fname varchar(30) DEFAULT NULL,
  lname varchar(30) DEFAULT NULL,
  hired date NOT NULL DEFAULT '1970-01-01',

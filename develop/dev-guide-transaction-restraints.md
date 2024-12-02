@@ -83,10 +83,10 @@ public class EffectWriteSkew {
 
     public static void createDoctorTable(Connection connection) throws SQLException {
         connection.createStatement().executeUpdate("CREATE TABLE `doctors` (" +
-                "    `id` int(11) NOT NULL," +
+                "    `id` int NOT NULL," +
                 "    `name` varchar(255) DEFAULT NULL," +
-                "    `on_call` tinyint(1) DEFAULT NULL," +
-                "    `shift_id` int(11) DEFAULT NULL," +
+                "    `on_call` tinyint DEFAULT NULL," +
+                "    `shift_id` int DEFAULT NULL," +
                 "    PRIMARY KEY (`id`)," +
                 "    KEY `idx_shift_id` (`shift_id`)" +
                 "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin");
@@ -307,10 +307,10 @@ func prepareData(db *sql.DB) error {
 
 func createDoctorTable(db *sql.DB) error {
     _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
-        "    `id` int(11) NOT NULL," +
+        "    `id` int NOT NULL," +
         "    `name` varchar(255) DEFAULT NULL," +
-        "    `on_call` tinyint(1) DEFAULT NULL," +
-        "    `shift_id` int(11) DEFAULT NULL," +
+        "    `on_call` tinyint DEFAULT NULL," +
+        "    `shift_id` int DEFAULT NULL," +
         "    PRIMARY KEY (`id`)," +
         "    KEY `idx_shift_id` (`shift_id`)" +
         "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
@@ -410,10 +410,10 @@ public class EffectWriteSkew {
 
     public static void createDoctorTable(Connection connection) throws SQLException {
         connection.createStatement().executeUpdate("CREATE TABLE `doctors` (" +
-                "    `id` int(11) NOT NULL," +
+                "    `id` int NOT NULL," +
                 "    `name` varchar(255) DEFAULT NULL," +
-                "    `on_call` tinyint(1) DEFAULT NULL," +
-                "    `shift_id` int(11) DEFAULT NULL," +
+                "    `on_call` tinyint DEFAULT NULL," +
+                "    `shift_id` int DEFAULT NULL," +
                 "    PRIMARY KEY (`id`)," +
                 "    KEY `idx_shift_id` (`shift_id`)" +
                 "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin");
@@ -632,10 +632,10 @@ func prepareData(db *sql.DB) error {
 
 func createDoctorTable(db *sql.DB) error {
     _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
-        "    `id` int(11) NOT NULL," +
+        "    `id` int NOT NULL," +
         "    `name` varchar(255) DEFAULT NULL," +
-        "    `on_call` tinyint(1) DEFAULT NULL," +
-        "    `shift_id` int(11) DEFAULT NULL," +
+        "    `on_call` tinyint DEFAULT NULL," +
+        "    `shift_id` int DEFAULT NULL," +
         "    PRIMARY KEY (`id`)," +
         "    KEY `idx_shift_id` (`shift_id`)" +
         "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
