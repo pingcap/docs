@@ -477,13 +477,7 @@ Excessive MVCC versions can cause performance bottlenecks, particularly in high 
 
 ```toml
 [in-memory-engine]
-enabled = true
-gc-interval = "2m"
-hard-limit-threshold = "8GB"
-soft-limit-threshold = "7GB"
-stop-limit-threshold = "5GB"
-mvcc-amplification = 100
-load-evict-interval = "4m"
+enable = true
 ```
 
 ### Optimize statistics collection during batch operations
