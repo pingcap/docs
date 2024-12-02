@@ -18,7 +18,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 ## OS and platform requirements
 
-In v8.1 LTS, TiDB ensures multi-level quality standards for various combinations of operating systems and CPU architectures.
+In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations of operating systems and CPU architectures.
 
 + For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
 
