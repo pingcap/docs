@@ -154,7 +154,6 @@ You should see an output indicating the MySQL client version number.
 
 If you already have the MySQL client installed, you can connect to TiDB with:
 
-
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root
 ```
