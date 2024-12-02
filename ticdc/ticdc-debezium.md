@@ -5,7 +5,7 @@ summary: Learn the concept of the TiCDC Debezium Protocol and how to use it.
 
 # TiCDC Debezium Protocol
 
-[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration.
+[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration. Starting from v8.6, TiCDC supports DDL events and watermark events.
 
 ## Use the Debezium message format
 
@@ -27,11 +27,13 @@ In addition, the original Debezium format does not include important fields such
 
 This section describes the format definition of the DML event output in the Debezium format.
 
+### DDL event
+
 ### DML event
 
 TiCDC encodes a DML event into a Kafka message, with both the key and value encoded in the Debezium format.
 
-### Key format
+#### Key format
 
 ```json
 {
@@ -163,6 +165,9 @@ The key fields of the preceding JSON data are explained as follows:
 | schema.name    | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Envelope"` format. |
 | schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | schema.type    | String  | The data type of the field.                                      |
+
+### WATERMARK
+
 
 ### Data type mapping
 
