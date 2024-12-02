@@ -14,7 +14,7 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 - `101`: indicates the ID of the DDL job. You can obtain the ID by executing [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
 - `THREAD`: indicates the concurrency of the DDL job. You can configure its initial value using the system variable [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt).
 
-Currently, the DDL job types supported by the `ADMIN ALTER DDL JOBS` statement include `ADD INDEX`, `MODIFY COLUMN`, and `REORGANIZE PARTITION`. For other DDL job types, executing `ADMIN ALTER DDL JOBS` returns the `unsupported DDL operation` error.
+The DDL job types supported by the `ADMIN ALTER DDL JOBS` statement include `ADD INDEX`, `MODIFY COLUMN`, and `REORGANIZE PARTITION`. For other DDL job types, executing `ADMIN ALTER DDL JOBS` returns the `unsupported DDL operation` error.
 
 Currently, you can only modify the parameters of a single DDL job by executing `ADMIN ALTER DDL JOBS`. Modifying the parameters of multiple DDL job IDs at the same time is not supported.
 
