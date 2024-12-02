@@ -55,7 +55,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
 
 ### `ADMIN SHOW DDL JOBS`
 
-The `ADMIN SHOW DDL JOBS` statement is used to view all the results in the current DDL job queue, including running and queuing tasks, as well as the recent results in the completed DDL job queue. The returned result fields are described as follows:
+The `ADMIN SHOW DDL JOBS` statement is used to view the 10 jobs in the current DDL job queue, including running and pending jobs (if any), and the last 10 jobs in the executed DDL job queue (if any). The returned result fields are described as follows:
 
 <CustomContent platform="tidb">
 
@@ -156,7 +156,7 @@ ADMIN SHOW DDL JOBS;
 
 From the output above:
 
-- Job 565 is currently in progress (`STATE` of `running`). The schema state is currently in `write reorganization`, but will switch to `public` once the task is completed to note that the change can be observed publicly by user sessions. The `end_time` column is also `NULL` indicating that the completion time for the job is currently not known.
+- Job 565 is currently in progress (`STATE` of `running`). The schema state is currently in `write reorganization`, but will switch to `public` once the job is completed to note that the change can be observed publicly by user sessions. The `end_time` column is also `NULL` indicating that the completion time for the job is currently not known.
 
 - The `STATE` for `job_id` 566 is shown as `queueing`, indicating that it is queuing. When job 565 completes and job 566 begins execution, the `STATE` for job 566 will change to `running`.
 
