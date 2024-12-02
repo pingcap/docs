@@ -349,6 +349,123 @@ Usage:
     config set flow-round-by-digit 4
     ```
 
+#### `config [show | set service-middleware <option> [<key> <value> | <label> <qps|concurrency> <value>]]`
+
+`service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as audit logging, request rate limiting, and concurrency limiting. Starting from v8.5.0, you can modify the following configurations of `service-middleware` using `pd-ctl`:
+
+- `audit`: controls whether to enable audit logging for HTTP requests processed by PD (enabled by default). When enabled, `service-middleware` logs information about HTTP requests in PD logs.
+- `rate-limit`: limits the maximum rate and concurrency of HTTP API requests processed by PD.
+- `grpc-rate-limit`: limits the maximum rate and concurrency of gRPC API requests processed by PD.
+
+> **Note:**
+>
+> To avoid the impact of request rate limiting and concurrency limiting on PD performance, it is not recommended to modify configurations in `service-middleware`.
+
+Display the configuration information of `service-middleware`:
+
+```bash
+config show service-middleware
+```
+
+```bash
+{
+  "audit": {
+    "enable-audit": "true"
+  },
+  "rate-limit": {
+    "enable-rate-limit": "true",
+    "limiter-config": {}
+  },
+  "grpc-rate-limit": {
+    "enable-grpc-rate-limit": "true",
+    "grpc-limiter-config": {}
+  }
+}
+```
+
+`service-middleware audit` enables or disables the audit logging function for HTTP requests. For example, to disable this function, run the following command:
+
+```bash
+config set service-middleware audit enable-audit false
+```
+
+`service-middleware grpc-rate-limit` controls the maximum rate and concurrency of the following gRPC API requests:
+
+- `GetRegion`: get information about a specified Region
+- `GetStore`: get information about a specified store
+- `GetMembers`: get information about PD cluster members
+
+To control the maximum rate of gRPC API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion qps 100
+```
+
+To control the maximum concurrency of gRPC API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion concurrency 10
+```
+
+View the modified configuration:
+
+```bash
+config show service-middleware
+```
+
+```bash
+{
+  "audit": {
+    "enable-audit": "true"
+  },
+  "rate-limit": {
+    "enable-rate-limit": "true",
+    "limiter-config": {}
+  },
+  "grpc-rate-limit": {
+    "enable-grpc-rate-limit": "true",
+    "grpc-limiter-config": {
+      "GetRegion": {
+        "QPS": 100,
+        "QPSBurst": 100, // Automatically adjusted based on QPS, for display only
+        "ConcurrencyLimit": 10
+      }
+    }
+  }
+}
+```
+
+Reset the preceding settings:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion qps 0
+config set service-middleware grpc-rate-limit GetRegion concurrency 0
+```
+
+`service-middleware rate-limit` controls the maximum rate and concurrency of the following HTTP API requests:
+
+- `GetRegion`: get information about a specified Region
+- `GetStore`: get information about a specified store
+
+To control the maximum rate of HTTP API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware rate-limit GetRegion qps 100
+```
+
+To control the maximum concurrency of HTTP API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware rate-limit GetRegion concurrency 10
+```
+
+Reset the preceding settings:
+
+```bash
+config set service-middleware rate-limit GetRegion qps 0
+config set service-middleware rate-limit GetRegion concurrency 0
+```
+
 #### `config placement-rules [disable | enable | load | save | show | rule-group]`
 
 For the usage of `config placement-rules [disable | enable | load | save | show | rule-group]`, see [Configure placement rules](/configure-placement-rules.md#configure-rules).
