@@ -694,7 +694,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
     - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `2`.
     - `0`: compatible with all TiDB cluster versions. Features with the MPP version greater than `0` do not take effect in this mode.
     - `1`: new in v6.6.0, used to enable data exchange with compression on TiFlash. For details, see [MPP version and exchange data compression](/explain-mpp.md#mpp-version-and-exchange-data-compression).
-    - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash. 
+    - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash.
 
 ### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
 
@@ -1724,18 +1724,15 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
 
-> **Warning:**
->
-> This variable is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`. Before v8.5.0, the default value is `OFF`.
 - This variable is used to control whether to enable [TiDB Accelerated Table Creation](/accelerated-table-creation.md).
 - Starting from v8.0.0, TiDB supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement using `tidb_enable_fast_create_table`.
 - This variable is renamed from the variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
+- Starting from TiDB v8.5.0, the accelerated table creation feature is enabled by default for newly created clusters, with `tidb_enable_fast_create_table` set to `ON`. For clusters upgraded from v8.4.0 or earlier versions, the default value of `tidb_enable_fast_create_table` remains unchanged.
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
