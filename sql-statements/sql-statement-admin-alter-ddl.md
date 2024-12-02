@@ -5,7 +5,7 @@ summary: An overview of the usage of `ADMIN ALTER DDL JOBS` for the TiDB databas
 
 # ADMIN ALTER DDL JOBS
 
-`ADMIN ALTER DDL JOBS` can be used to change the parameter of a running DDL job. For example:
+The `ADMIN ALTER DDL JOBS` statement allows you to modify the parameter of a single running DDL job. For example:
 
 ```sql
 ADMIN ALTER DDL JOBS 101 THREAD = 8;
@@ -77,7 +77,7 @@ AlterJobOption ::=
 
 ## MySQL compatibility
 
-`ADMIN ALTER DDL JOBS` statement is a TiDB extension to MySQL syntax.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
