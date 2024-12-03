@@ -364,6 +364,7 @@ The following features are planned for deprecation in future versions:
     - Fix unclear log descriptions during the Region syncer loading process [#8717](https://github.com/tikv/pd/issues/8717) @[lhy1024](https://github.com/lhy1024)
     - (dup): release-7.1.6.md > Bug fixes> PD - Fix the memory leak issue in label statistics [#8700](https://github.com/tikv/pd/issues/8700) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that configuring `tidb_enable_tso_follower_proxy` to `0` or `OFF` fails to disable the TSO Follower Proxy feature [#8709](https://github.com/tikv/pd/issues/8709) @[JmPotato](https://github.com/JmPotato)
+
 + TiFlash <!--tw@Oreoxmt: 4 notes-->
 
     - (dup): release-7.1.6.md > Bug fixes> TiFlash - Fix the issue that the `SUBSTRING()` function does not support the `pos` and `len` arguments for certain integer types, causing query errors [#9473](https://github.com/pingcap/tiflash/issues/9473) @[gengliqi](https://github.com/gengliqi)
@@ -380,7 +381,7 @@ The following features are planned for deprecation in future versions:
         - Fix the issue that global indexes cannot be backed up [#57469](https://github.com/pingcap/tidb/issues/57469) @[Defined2014](https://github.com/Defined2014)
         - Fix the issue that logs might print out encrypted information [#57585](https://github.com/pingcap/tidb/issues/57585) @[kennytm](https://github.com/kennytm)
         - Fix the issue that the advancer cannot handle lock conflicts [#57134](https://github.com/pingcap/tidb/issues/57134) @[3pointer](https://github.com/3pointer)
-        - Fix the issue that PITR tasks might fail for tables with millions of rows (https://github.com/pingcap/tidb/issues/57743) @[Tristan1900](https://github.com/Tristan1900)
+        - Fix the issue that PITR tasks might fail for tables with millions of rows [#57743](https://github.com/pingcap/tidb/issues/57743) @[Tristan1900](https://github.com/Tristan1900)
 
     + TiCDC <!--tw@Oreoxmt: 3 notes-->
 
