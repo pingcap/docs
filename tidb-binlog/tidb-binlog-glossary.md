@@ -1,7 +1,7 @@
 ---
 title: TiDB Binlog Glossary
 summary: Learn the terms used in TiDB Binlog.
-aliases: ['/tidb/dev/tidb-binlog-glossary/','/docs/dev/tidb-binlog/tidb-binlog-glossary/','/docs/dev/reference/tidb-binlog/glossary/']
+aliases: ['/tidb/dev/tidb-binlog-glossary/','/tidb/stable/tidb-binlog-glossary/','/docs/dev/tidb-binlog/tidb-binlog-glossary/','/docs/dev/reference/tidb-binlog/glossary/']
 ---
 
 # TiDB Binlog Glossary

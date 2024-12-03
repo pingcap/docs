@@ -1,7 +1,7 @@
 ---
 title: CHANGE PUMP
 summary: An overview of the usage of CHANGE PUMP for the TiDB database.
-aliases: ['/tidb/dev/sql-statement-change-pump/','/docs/dev/sql-statements/sql-statement-change-pump/']
+aliases: ['/tidb/dev/sql-statement-change-pump/','/tidb/stable/sql-statement-change-pump/','/docs/dev/sql-statements/sql-statement-change-pump/']
 ---
 
 # CHANGE PUMP

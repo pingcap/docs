@@ -1,7 +1,7 @@
 ---
 title: TiDB Binlog Monitoring
 summary: Learn how to monitor the cluster version of TiDB Binlog.
-aliases: ['/tidb/dev/monitor-tidb-binlog-cluster/','/docs/dev/tidb-binlog/monitor-tidb-binlog-cluster/','/docs/dev/reference/tidb-binlog/monitor/','/docs/dev/how-to/monitor/tidb-binlog/']
+aliases: ['/tidb/dev/monitor-tidb-binlog-cluster/','/tidb/stable/monitor-tidb-binlog-cluster/','/docs/dev/tidb-binlog/monitor-tidb-binlog-cluster/','/docs/dev/reference/tidb-binlog/monitor/','/docs/dev/how-to/monitor/tidb-binlog/']
 ---
 
 # TiDB Binlog Monitoring
