@@ -12,18 +12,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Introduce the Recovery Group feature (beta) for disaster recovery of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on AWS.
-
-    This feature enables you to replicate your databases between TiDB Cloud Dedicated clusters, ensuring rapid recovery in the event of a regional disaster. If you are in the Project Owner role, you can enable this feature by creating a new recovery group and assigning databases to the group. By replicating databases with recovery groups, you can improve disaster readiness, meet stricter availability SLAs, and achieve more aggressive Recovery Point Objectives (RPO) and Recovery Time Objectives (RTO).
-  
-    For more information, see [Get started with recovery groups](/tidb-cloud/recovery-group-get-started.md).
-
-## November 26, 2024
-
-**General changes**
-
-- Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v7.5.4](https://docs.pingcap.com/tidb/v7.5/release-7.5.4) to [v8.1.1](https://docs.pingcap.com/tidb/stable/release-8.1.1).
-
 - Regional high availability (beta) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
     This feature is designed for workloads requiring maximum infrastructure redundancy and business continuity. Key features include:
@@ -36,10 +24,22 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md).
 
+- Introduce the Recovery Group feature (beta) for disaster recovery of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on AWS.
+
+    This feature enables you to replicate your databases between TiDB Cloud Dedicated clusters, ensuring rapid recovery in the event of a regional disaster. If you are in the Project Owner role, you can enable this feature by creating a new recovery group and assigning databases to the group. By replicating databases with recovery groups, you can improve disaster readiness, meet stricter availability SLAs, and achieve more aggressive Recovery Point Objectives (RPO) and Recovery Time Objectives (RTO).
+  
+    For more information, see [Get started with recovery groups](/tidb-cloud/recovery-group-get-started.md).
+
+## November 26, 2024
+
+**General changes**
+
+- Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v7.5.4](https://docs.pingcap.com/tidb/v7.5/release-7.5.4) to [v8.1.1](https://docs.pingcap.com/tidb/stable/release-8.1.1).
+
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) reduces costs for large data writes by up to 80% for the following scenarios:
 
     - When you perform write operations larger than 16 MiB in [autocommit mode](/transaction-overview.md#autocommit).
-    - When you perform write operations larger than 16 MiB in [optimistic transaction mode](/optimistic-transaction.md).
+    - When you perform write operations larger than 16 MiB in [optimistic transaction model](/optimistic-transaction.md).
     - When you [import data into TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
 
   This improvement enhances the efficiency and cost-effectiveness of your data operations, providing greater savings as your workload scales.
