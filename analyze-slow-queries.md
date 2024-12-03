@@ -98,9 +98,9 @@ The `Cop_wait` field in the slow log can help you determine this cause.
 
 The log above shows that a `cop-task` sent to the `10.6.131.78` instance waits `110ms` before being executed. It indicates that this instance is busy. You can check the CPU monitoring of that time to confirm the cause.
 
-#### Expired MVCC versions and excessive keys
+#### Obsolete MVCC versions and excessive keys
 
-Too many expired MVCC versions on TiKV or long GC retention time of historical version data can result in an accumulation of excessive MVCC versions, which will affect the scan speed due to processing these redundant MVCC versions.
+If too many obsolete MVCC versions exist on TiKV, or if the retention time of historical MVCC data is long, excessive MVCC versions can accumulate. Handling these unnecessary MVCC versions can affect scan performance.
 
 Check `Total_keys` and `Processed_keys`. If they are greatly different, the TiKV instance has too many keys of the older versions.
 
@@ -110,7 +110,7 @@ Check `Total_keys` and `Processed_keys`. If they are greatly different, the TiKV
 ...
 ```
 
-TiDB v8.5.0 introduces the TiKV MVCC in-memory engine feature, which can accelerate this type of slow query. For more information, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md).
+TiDB v8.5.0 introduces the TiKV MVCC in-memory engine (IME) feature, which can accelerate such slow queries. For more information, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md).
 
 ### Other key stages are slow
 
