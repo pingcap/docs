@@ -388,7 +388,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 + PD
 
-    - Add a controller that automatically adjusts the size of the store limit based on the execution details of the snapshot. To enable this controller, set `store-limit-version` to `v2`. Once enabled, you do not need to manually adjust the `store limit` configuration to control the speed of scaling in or scaling out [#6147](https://github.com/tikv/pd/issues/6147) @[bufferflies](https://github.com/bufferflies)
+    - Add a controller that automatically adjusts the size of the store limit based on the execution details of the snapshot. To enable this controller, set `store-limit-version` to `v2` (experimental). Once enabled, you do not need to manually adjust the `store limit` configuration to control the speed of scaling in or scaling out [#6147](https://github.com/tikv/pd/issues/6147) @[bufferflies](https://github.com/bufferflies)
     - Add historical load information to avoid frequent scheduling of Regions with unstable loads by the hotspot scheduler when the storage engine is raft-kv2 [#6297](https://github.com/tikv/pd/issues/6297) @[bufferflies](https://github.com/bufferflies)
     - Add a leader health check mechanism. When the PD server where the etcd leader is located cannot be elected as the leader, PD actively switches the etcd leader to ensure that the PD leader is available [#6403](https://github.com/tikv/pd/issues/6403) @[nolouch](https://github.com/nolouch)
 
