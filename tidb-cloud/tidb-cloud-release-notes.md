@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Regional high availability (beta) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-    This feature is designed for workloads requiring maximum infrastructure redundancy and business continuity. Key features include:
+    This feature is designed for workloads that require maximum infrastructure redundancy and business continuity. Key features include:
 
     - Nodes are distributed across multiple availability zones to ensure high availability in the event of a zone failure.
     - Critical OLTP (Online Transactional Processing) components, such as PD and TiKV, are replicated across availability zones for redundancy.
