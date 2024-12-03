@@ -2527,7 +2527,7 @@ TiKV MVCC in-memory engine (IME) configuration items related to the storage laye
 ### `gc-run-interval` <span class="version-mark">New in v8.5.0</span>
 
 + Controls the time interval that the in-memory engine GC caches MVCC versions. Reducing this parameter can increase the GC frequency, and decrease the number of MVCC versions, but will increase CPU consumption for GC and increase the probability of in-memory engine cache miss.
-+ Default value: `3m`
++ Default value: `"3m"`
 
 ### `mvcc-amplification-threshold` <span class="version-mark">New in v8.5.0</span>
 

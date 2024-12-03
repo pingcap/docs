@@ -100,7 +100,7 @@ The log above shows that a `cop-task` sent to the `10.6.131.78` instance waits `
 
 #### Obsolete MVCC versions and excessive keys
 
-If too many obsolete MVCC versions exist on TiKV, or if the retention time of historical MVCC data is long, excessive MVCC versions can accumulate. Handling these unnecessary MVCC versions can affect scan performance.
+If too many obsolete MVCC versions exist on TiKV, or if the retention time of historical MVCC data for GC is long, excessive MVCC versions can accumulate. Handling these unnecessary MVCC versions can affect scan performance.
 
 Check `Total_keys` and `Processed_keys`. If they are greatly different, the TiKV instance has too many keys of the older versions.
 

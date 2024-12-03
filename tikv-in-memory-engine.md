@@ -14,40 +14,44 @@ TiKV MVCC in-memory engine is suitable for the following scenarios:
 
 ## Implementation principles
 
-TiKV MVCC in-memory engine caches the latest written MVCC versions in memory and implements an MVCC GC mechanism independent of TiDB, allowing it to quickly perform GC on MVCC versions in memory, reducing the number of versions scanned during queries, and achieving the effect of reducing request latency and CPU overhead.
+The TiKV MVCC in-memory engine caches the latest written MVCC versions in memory, and implements an MVCC GC mechanism independent of TiDB. This allows it to quickly perform GC on MVCC versions in memory, reducing the number of versions scanned during queries, thereby lowering request latency and reducing CPU overhead.
 
-The following diagram illustrates how TiKV organizes MVCC versions.
+The following diagram illustrates how TiKV organizes MVCC versions:
 
 ![IME caches recent versions to reduce CPU overhead](/media/tikv-ime-data-organization.png)
 
-The diagram shows two rows of records, each with 9 MVCC versions. The behavior is compared between the cases with and without the in-memory engine enabled:
+The preceding diagram shows two rows of records, each with 9 MVCC versions. The behavior comparison between enabling and not enabling the in-memory engine is as follows:
 
-- On the left, without the in-memory engine enabled, the table records are stored in RocksDB in ascending order by the primary key, with the same row's MVCC versions adjacent to each other.
-- On the right, with IME enabled, the data in RocksDB is consistent with the left side, and IME caches the latest 2 MVCC versions of the 2 rows of records.
-- When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `8`, the left side without IME enabled needs to process 11 MVCC versions, while the right side with IME enabled only needs to process 4 MVCC versions, reducing request latency and CPU consumption.
-- When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `7`, because the right side lacks the historical versions that need to be read, the IME cache becomes invalid, and it falls back to reading data from RocksDB.
+- On the left (in-memory engine disabled): the table records are stored in RocksDB in ascending order by the primary key, with all MVCC versions of the same row adjacent to each other.
+- On the right (in-memory engine enabled): the data in RocksDB is the same as that on the left, but the in-memory engine caches the two latest MVCC versions for each of the two rows.
+- When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `8`:
+    - Without the in-memory engine (left), it needs to process 11 MVCC versions.
+    - With the in-memory engine (right), it only processes 4 MVCC versions, reducing request latency and CPU consumption.
+- When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `7`:
+    - Because the required historical versions are missing in the in-memory engine (right), the cache becomes invalid, and TiKV falls back to reading data from RocksDB.
 
 ## Usage
 
-Enabling IME requires adjusting the TiKV configuration and restarting. The following example explains the configuration items:
+To enable the TiKV MVCC in-memory engine (IME), you need to adjust the TiKV configuration and restart TiKV. The configuration details are as follows:
 
 ```toml
 [in-memory-engine]
 # This parameter is the switch for the in-memory engine feature, which is disabled by default. You can set it to true to enable it.
 enable = false
 
-# This parameter controls the memory capacity that the in-memory engine can use. The default value is 10% of the system memory, and the maximum value is 5 GiB.
-# You can manually configure it to use more memory.
-# Note: When the in-memory engine is enabled, block-cache.capacity will be reduced by 10%.
+# This parameter controls the memory size available to the in-memory engine.
+# The default value is 10% of the system memory, and the maximum value is 5 GiB.
+# You can manually adjust this configuration to allocate more memory.
+# Note: When the in-memory engine is enabled, block-cache.capacity automatically decreases by 10%.
 capacity = "5GiB"
 
 # This parameter controls the time interval for the in-memory engine to GC the cached MVCC versions.
 # The default value is 3 minutes, representing that GC is performed every 3 minutes on the cached MVCC versions.
-# Decreasing the value of this parameter can speed up the GC frequency, reduce MVCC versions, but will increase GC CPU consumption and increase the probability of cache miss.
+# Decreasing the value of this parameter can increase the GC frequency, reduce the number of MVCC versions, but will increase CPU consumption for GC and increase the probability of in-memory engine cache miss.
 gc-run-interval = "3m"
 
 # This parameter controls the threshold for the in-memory engine to select and load Regions based on MVCC read amplification.
-# The default value is 10, indicating that when the number of MVCC versions processed for a row of records in a Region exceeds 10, it might be loaded into the in-memory engine.
+# The default value is 10, indicating that if reading a single row in a Region requires processing more than 10 MVCC versions, this Region might be loaded into the in-memory engine.
 mvcc-amplification-threshold = 10
 ```
 
@@ -58,7 +62,7 @@ mvcc-amplification-threshold = 10
 
 ### Automatic loading
 
-After you enable the in-memory engine, Regions will be automatically loaded based on their read traffic and MVCC amplification. The process is as follows:
+After enabling the in-memory engine, TiKV automatically selects the Regions to load based on the read traffic and MVCC amplification of the Region. The specific process is as follows:
 
 1. Regions are sorted by the number of next (RocksDB Iterator next API) and prev (RocksDB Iterator next API) operations in the recent time period.
 2. Regions are filtered using `mvcc-amplification-threshold` (`10` by default. MVCC amplification measures read amplification, calculated as (next + prev) / processed_keys).
