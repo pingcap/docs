@@ -17,7 +17,7 @@ The expressions can be divided into the following types:
 
 - ParamMarker (`?`), system variables, user variables and CASE expressions.
 
-The following rules are the expression syntax, which is based on the [`parser.y`](https://github.com/pingcap/tidb/blob/master/pkg/parser/parser.y) rules of TiDB parser.
+The following rules are the expression syntax, which is based on the [`parser.y`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/parser/parser.y) rules of TiDB parser.
 
 ```ebnf+diagram
 Expression ::=
