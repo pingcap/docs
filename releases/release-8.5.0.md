@@ -266,6 +266,8 @@ The following features are planned for deprecation in future versions:
 
     - Support dynamic switching of the `tso` service between microservice and non-microservice modes [#8477](https://github.com/tikv/pd/issues/8477) @[rleungx](https://github.com/rleungx)
     - Optimize the case format of certain fields in the `pd-ctl config` output [#8694](https://github.com/tikv/pd/issues/8694) @[lhy1024](https://github.com/lhy1024)
+    - [Store limit v2](/configure-store-limit.md#principles-of-store-limit-v2) becomes generally available (GA) [#8865](https://github.com/tikv/pd/issues/8865) @[lhy1024](https://github.com/lhy1024)
+    - Support configuring Region inspection concurrency [#8866](https://github.com/tikv/pd/issues/8866) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash <!--tw@Oreoxmt: 3 notes-->
 
