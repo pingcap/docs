@@ -2510,7 +2510,7 @@ TiKV MVCC in-memory engine configuration items related to the storage layer.
 
 > **Note:**
 >
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
+> This configuration item can be configured in the configuration file, and cannot be queried via SQL statements.
 
 + Whether to enable the in-memory engine to accelerate multi-version queries. For more information about the in-memory engine, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
 + Default value: false (the in-memory engine is disabled)
