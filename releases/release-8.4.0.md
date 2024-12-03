@@ -336,6 +336,13 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
 - `binlogctl`
 - `arbiter`
 
+## Operating system and platform requirement changes
+
+- According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
+- According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
+
+For the supported operating systems and platforms, see [Software and hardware recommendations](/hardware-and-software-requirements.md#os-and-platform-requirements).
+
 ## Removed features
 
 * The following features are removed starting from v8.4.0:
