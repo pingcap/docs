@@ -20,9 +20,9 @@ The following diagram illustrates how TiKV organizes MVCC versions.
 
 <div style="text-align: center;"><img src="./media/tikv-ime-data-organization.png" alt="IME caches recent versions to reduce CPU overhead" width="400" /></div>
 
-The diagram shows two rows of records, each with 9 MVCC versions. The behavior is compared between the cases with and without IME enabled:
+The diagram shows two rows of records, each with 9 MVCC versions. The behavior is compared between the cases with and without the in-memory engine enabled:
 
-- On the left, without IME enabled, the table records are stored in RocksDB in ascending order by primary key, with the same row's MVCC versions adjacent to each other.
+- On the left, without the in-memory engine enabled, the table records are stored in RocksDB in ascending order by the primary key, with the same row's MVCC versions adjacent to each other.
 - On the right, with IME enabled, the data in RocksDB is consistent with the left side, and IME caches the latest 2 MVCC versions of the 2 rows of records.
 - When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `8`, the left side without IME enabled needs to process 11 MVCC versions, while the right side with IME enabled only needs to process 4 MVCC versions, reducing request latency and CPU consumption.
 - When TiKV processes a scan request with a range of `[k1, k2]` and a start timestamp of `7`, because the right side lacks the historical versions that need to be read, the IME cache becomes invalid, and it falls back to reading data from RocksDB.
@@ -35,20 +35,20 @@ Enabling IME requires adjusting the TiKV configuration and restarting. The follo
 [in-memory-engine]
 # This parameter is the switch for the in-memory engine feature, which is disabled by default. You can set it to true to enable it.
 enable = false
-#
-# This parameter controls the memory capacity that in-memory engine can use. The default value is 10% of the system memory, and the maximum value is 5 GiB.
+
+# This parameter controls the memory capacity that the in-memory engine can use. The default value is 10% of the system memory, and the maximum value is 5 GiB.
 # You can manually configure it to use more memory.
-# Note: When in-memory engine is enabled, block-cache.capacity will be reduced by 10%.
-#capacity = "5GiB"
-#
-# This parameter controls the time interval for in-memory engine to GC the cached MVCC versions.
+# Note: When the in-memory engine is enabled, block-cache.capacity will be reduced by 10%.
+capacity = "5GiB"
+
+# This parameter controls the time interval for the in-memory engine to GC the cached MVCC versions.
 # The default value is 3 minutes, representing that GC is performed every 3 minutes on the cached MVCC versions.
 # Decreasing the value of this parameter can speed up the GC frequency, reduce MVCC versions, but will increase GC CPU consumption and increase the probability of cache miss.
-#gc-run-interval = "3m"
-#
-# This parameter controls the threshold for in-memory engine to select and load Regions based on MVCC read amplification.
+gc-run-interval = "3m"
+
+# This parameter controls the threshold for the in-memory engine to select and load Regions based on MVCC read amplification.
 # The default value is 10, indicating that when the number of MVCC versions processed for a row of records in a Region exceeds 10, it might be loaded into the in-memory engine.
-#mvcc-amplification-threshold = 10
+mvcc-amplification-threshold = 10
 ```
 
 > **Note:**
@@ -64,25 +64,25 @@ After you enable the in-memory engine, Regions will be automatically loaded base
 2. Regions are filtered using `mvcc-amplification-threshold` (`10` by default. MVCC amplification measures read amplification, calculated as (next + prev) / processed_keys).
 3. The top N Regions with severe MVCC amplification are loaded, where N is based on memory estimation.
 
-IME also periodically performs Region eviction. The process is as follows:
+The in-memory engine also periodically performs Region eviction. The process is as follows:
 
-1. IME evicts Regions with low read traffic or low MVCC amplification.
-2. If memory usage reaches 90% of `capacity` and new Regions need to be loaded, IME will filter Regions based on read traffic and evict Regions.
+1. The in-memory engine evicts Regions with low read traffic or low MVCC amplification.
+2. If memory usage reaches 90% of `capacity` and new Regions need to be loaded, the in-memory engine will filter Regions based on read traffic and evict Regions.
 
 ## Compatibility
 
-+ [BR](/br/br-use-overview.md): IME can be used with BR, but BR restore will evict IME Regions involved in the restore. After BR restore is complete, if the corresponding Region is still a hotspot, it will be automatically loaded by IME.
-+ [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md): IME can be used with TiDB Lightning, but TiDB Lightning's physical import mode will evict IME Regions involved in the import. After TiDB Lightning completes the import, if the corresponding Region is still a hotspot, it will be automatically loaded by IME.
-+ [Follower Read](/develop/dev-guide-use-follower-read.md) and [Stale Read](/develop/dev-guide-use-stale-read.md): IME can be enabled with these two features, but IME can only accelerate Leader coprocessor requests and cannot accelerate Follower Read and Stale Read.
-+ [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md): IME can be used with Flashback, but Flashback will cause IME cache invalidation. After Flashback is complete, IME will automatically load hotspot Regions.
++ [BR](/br/br-use-overview.md): the in-memory engine can be used with BR, but BR restore will evict the in-memory engine Regions involved in the restore. After BR restore is complete, if the corresponding Region is still a hotspot, it will be automatically loaded by the in-memory engine.
++ [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md): the in-memory engine can be used with TiDB Lightning, but TiDB Lightning's physical import mode will evict the in-memory engine Regions involved in the import. After TiDB Lightning completes the import, if the corresponding Region is still a hotspot, it will be automatically loaded by the in-memory engine.
++ [Follower Read](/develop/dev-guide-use-follower-read.md) and [Stale Read](/develop/dev-guide-use-stale-read.md): the in-memory engine can be enabled with these two features, but the in-memory engine can only accelerate Leader coprocessor requests and cannot accelerate Follower Read and Stale Read.
++ [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md): the in-memory engine can be used with Flashback, but Flashback will cause the in-memory engine cache invalidation. After Flashback is complete, the in-memory engine will automatically load hotspot Regions.
 
 ## FAQ
 
-### Can in-memory engine reduce write latency and increase write throughput?
+### Can the in-memory engine reduce write latency and increase write throughput?
 
-No, in-memory engine can only accelerate read requests that scan a large number of MVCC versions.
+No, the in-memory engine can only accelerate read requests that scan a large number of MVCC versions.
 
-### How to determine if in-memory engine can improve my scenario?
+### How to determine if the in-memory engine can improve my scenario?
 
 You can execute the following SQL statement to check if there are slow queries with `Total_keys` much greater than `Process_keys`.
 
