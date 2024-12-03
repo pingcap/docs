@@ -18,7 +18,7 @@ TiKV MVCC in-memory engine caches the latest written MVCC versions in memory and
 
 The following diagram illustrates how TiKV organizes MVCC versions.
 
-<div style="text-align: center;"><img src="./media/tikv-ime-data-organization.png" alt="IME caches recent versions to reduce CPU overhead" width="400" /></div>
+![IME caches recent versions to reduce CPU overhead](/media/tikv-ime-data-organization.png)
 
 The diagram shows two rows of records, each with 9 MVCC versions. The behavior is compared between the cases with and without the in-memory engine enabled:
 
