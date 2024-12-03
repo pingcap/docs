@@ -27,7 +27,7 @@ This guide describes the non-default settings, including their benefits and pote
 The following settings are commonly used to optimize TiDB performance:
 
 - Enhance execution plan cache, such as [Instance-level execution plan cache](/sql-prepared-plan-cache.md), [Non-prepared plan cache](/sql-non-prepared-plan-cache.md), and [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
-- Optimize the behavior of the TiDB optimizer using [Optimizer Fix Controls](/optimizer-fix-controls.md).
+- Optimize the behavior of the TiDB optimizer by using [Optimizer Fix Controls](/optimizer-fix-controls.md).
 - Use the [Titan](/storage-engine/titan-overview.md) storage engine more aggressively.
 
 These settings can significantly improve performance for many workloads. However, as with any optimization, thoroughly test them in your environment before deploying to production.
@@ -71,8 +71,8 @@ The following describes the optimizer control configurations that enable additio
 
 - [`44262:ON`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720): Use [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access the partitioned table when the [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) are missing.
 - [`44389:ON`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720): For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, build more comprehensive scan ranges for `IndexRangeScan`.
-- [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730): To save memory, Plan Cache does not cache queries with parameters exceeding the specified number of this variable. Increase plan cache parameter limit from `200` to `10000` to make plan cache available for query with long in-lists.
-- [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v730): Plan Cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
+- [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730): To save memory, plan cache does not cache queries with parameters exceeding the specified number of this variable. Increase plan cache parameter limit from `200` to `10000` to make plan cache available for query with long in-lists.
+- [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v730): Plan cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
 - [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v730): The optimizer selects `IndexJoin` when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator.
 - [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810): The optimizer chooses index merge automatically if the optimizer can choose the single index scan method (other than full table scan) for a query plan.
 
@@ -99,7 +99,7 @@ Add the following configuration items to the TiKV configuration file:
 [server]
 concurrent-send-snap-limit = 64
 concurrent-recv-snap-limit = 64
-snap-io-max-bytes-per-sec = "400MB"
+snap-io-max-bytes-per-sec = "400MiB"
 
 [pessimistic-txn]
 in-memory-peer-size-limit = "32MiB"
@@ -128,7 +128,7 @@ Add the following configuration items to the TiFlash configuration file:
 
 ```toml
 [raftstore-proxy.server]
-snap-io-max-write-bytes-per-sec = "300MiB"
+snap-io-max-bytes-per-sec = "300MiB"
 ```
 
 | Configuration item | Description | Note |
@@ -247,7 +247,7 @@ The following table compares throughput (operations per second) between the base
 
 #### Performance analysis
 
-Titan is enabled by default starting from v7.6.0 and the default `min-blob-size` of Titan in TiDB v8.4.0 is `32KB`. The baseline configuration uses a record size of `31KB` to ensure data is stored in RocksDB. In contrast, for the key settings configuration, set `min-blob-size` to `1KB`, causing data to be stored in Titan.
+Titan is enabled by default starting from v7.6.0 and the default `min-blob-size` of Titan in TiDB v8.4.0 is `32KiB`. The baseline configuration uses a record size of `31KiB` to ensure data is stored in RocksDB. In contrast, for the key settings configuration, set `min-blob-size` to `1KiB`, causing data to be stored in Titan.
 
 The performance improvement observed in the Key Settings is primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the following figures:
 
