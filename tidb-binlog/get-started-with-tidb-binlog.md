@@ -1,7 +1,7 @@
 ---
 title: TiDB Binlog Tutorial
 summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
-aliases: ['/tidb/dev/get-started-with-tidb-binlog/','/docs/dev/get-started-with-tidb-binlog/','/docs/dev/how-to/get-started/tidb-binlog/']
+aliases: ['/tidb/dev/get-started-with-tidb-binlog/','/tidb/stable/get-started-with-tidb-binlog/','/docs/dev/get-started-with-tidb-binlog/','/docs/dev/how-to/get-started/tidb-binlog/']
 ---
 
 # TiDB Binlog Tutorial

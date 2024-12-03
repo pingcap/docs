@@ -1,7 +1,7 @@
 ---
 title: CHANGE DRAINER
 summary: An overview of the usage of CHANGE DRAINER for the TiDB database.
-aliases: ['/tidb/dev/sql-statement-change-drainer/','/docs/dev/sql-statements/sql-statement-change-drainer/']
+aliases: ['/tidb/dev/sql-statement-change-drainer/','/tidb/stable/sql-statement-change-drainer/','/docs/dev/sql-statements/sql-statement-change-drainer/']
 ---
 
 # CHANGE DRAINER
