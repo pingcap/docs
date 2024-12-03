@@ -187,4 +187,4 @@ In a read hotspot scenario, the hotspot TiKV node cannot process read requests i
 
 ## Use TiKV MVCC in-memory engine to mitigate read hotspots caused by high MVCC read amplification
 
-During long GC times or frequent updates and deletions, read hotspots might occur due to scanning a large number of MVCC versions. To alleviate this type of hotspot, you can enable the in-memory engine feature. For more information, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md).
+When the retention time of historical MVCC data for GC is too long, or when the records are frequently updated or deleted, read hotspots might occur due to scanning a large number of MVCC versions. To alleviate this type of hotspot, you can enable the [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) feature.
