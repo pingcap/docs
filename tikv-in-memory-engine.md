@@ -5,14 +5,14 @@ summary: Learn the applicable scenarios and working principles of the in-memory 
 
 # TiKV MVCC In-Memory Engine
 
-TiKV MVCC In-Memory Engine (IME) is primarily used to accelerate queries that need to scan a large number of MVCC historical versions, that is, [the total number of versions scanned (total_keys) is much greater than the number of versions processed (processed_keys)](/analyze-slow-queries.md#expired-mvcc-versions-and-excessive-keys).
+TiKV MVCC In-Memory Engine (IME) is primarily used to accelerate queries that need to scan a large number of MVCC historical versions, that is, [the total number of versions scanned (`total_keys`) is much greater than the number of versions processed (`processed_keys`)](/analyze-slow-queries.md#obsolete-mvcc-versions-and-excessive-keys).
 
 TiKV MVCC in-memory engine is suitable for the following scenarios:
 
-- An application requires frequent queries on frequently updated or deleted records.
-- An application requires adjusting the [`tidb_gc_life_time`](/garbage-collection-configuration.md#garbage-collection-configuration) to make TiDB retain historical versions for a longer period (for example, 24 hours).
+- The application that requires querying records that are frequently updated or deleted.
+- The application that requires adjusting [`tidb_gc_life_time`](/garbage-collection-configuration.md#garbage-collection-configuration) to retain historical versions in TiDB for a longer period (for example, 24 hours).
 
-## Working principles
+## Implementation principles
 
 TiKV MVCC in-memory engine caches the latest written MVCC versions in memory and implements an MVCC GC mechanism independent of TiDB, allowing it to quickly perform GC on MVCC versions in memory, reducing the number of versions scanned during queries, and achieving the effect of reducing request latency and CPU overhead.
 
