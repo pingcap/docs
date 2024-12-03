@@ -225,7 +225,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| TiDB | [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) | Modified | Starting with v8.5.0, the integer display width feature is deprecated. The default value of this configuration item is changed from `false` to `true`. |
+| TiDB | [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) | Modified | Starting from v8.5.0, the integer display width feature is deprecated. The default value of this configuration item is changed from `false` to `true`. |
 | TiKV | [`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size) | Modified | Changes the default value from `8192` to `16384`. |
 
 ## Deprecated features
