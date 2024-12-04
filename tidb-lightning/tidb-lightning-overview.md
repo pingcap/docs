@@ -1,12 +1,11 @@
 ---
 title: TiDB Lightning Overview
 summary: Learn about Lightning and the whole architecture.
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-overview/','/docs/dev/reference/tools/tidb-lightning/overview/','/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend','/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling','/tidb/dev/loader-overview/','/tidb/dev/tidb-lightning-backends']
 ---
 
 # TiDB Lightning Overview
 
-[TiDB Lightning](https://github.com/pingcap/tidb/tree/master/lightning) is a tool used for importing data at TB scale to TiDB clusters. It is often used for initial data import to TiDB clusters.
+[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-8.5/lightning) is a tool used for importing data at TB scale to TiDB clusters. It is often used for initial data import to TiDB clusters.
 
 TiDB Lightning supports the following file formats:
 

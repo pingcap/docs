@@ -1,7 +1,6 @@
 ---
 title: TiDB Troubleshooting Map
 summary: Learn how to troubleshoot common errors in TiDB.
-aliases: ['/docs/dev/tidb-troubleshooting-map/','/docs/dev/how-to/troubleshoot/diagnose-map/']
 ---
 
 # TiDB Troubleshooting Map
@@ -448,7 +447,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 6.2 TiDB Lightning
 
-- 6.2.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/lightning).
+- 6.2.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/release-8.5/lightning).
 
 - 6.2.2 Import speed is too slow.
 

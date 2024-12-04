@@ -1,7 +1,6 @@
 ---
 title: ticloud serverless region
 summary: The reference of `ticloud serverless region`.
-aliases: ['/tidbcloud/ticloud-serverless-regions']
 ---
 
 # ticloud serverless region

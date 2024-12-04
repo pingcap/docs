@@ -395,7 +395,7 @@ The following features are planned for deprecation in future versions:
     - Optimize the compaction trigger mechanism of RocksDB to accelerate disk space reclamation when handling a large number of DELETE versions [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - Support dynamically modifying flow-control configurations for write operations [#17395](https://github.com/tikv/tikv/issues/17395) @[glorv](https://github.com/glorv)
     - Improve the speed of Region Merge in scenarios with empty tables and small Regions [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Prevent [Pipelined DML](https://github.com/pingcap/tidb/blob/master/docs/design/2024-01-09-pipelined-DML.md) from blocking resolved-ts for long periods [#17459](https://github.com/tikv/tikv/issues/17459) @[ekexium](https://github.com/ekexium)
+    - Prevent [Pipelined DML](https://github.com/pingcap/tidb/blob/release-8.4/docs/design/2024-01-09-pipelined-DML.md) from blocking resolved-ts for long periods [#17459](https://github.com/tikv/tikv/issues/17459) @[ekexium](https://github.com/ekexium)
 
 + PD
 
