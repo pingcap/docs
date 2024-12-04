@@ -84,7 +84,7 @@ The data format of Value is the same as that of Key, by default. However, `field
 > - For Insert events, Avro encodes all column data to the Value part. 
 > - For Update events, Avro encodes only all column data that is updated to the Value part.
 >   
-> If you want the old values with Update or Delete events, you can use other protocols.
+> The Avro protocol does not encode the old values for Update and Delete events. Additionally, in order to be compatible to most Confluent sink connectors which only recognizes `null` record for deletion (`"delete.on.null"`), a Delete event cannot carry extension information such as `_tidb_commit_ts` even when enabling `enable-tidb-extension`. If you need these features, consider using other protocols such as Canal-JSON or Debezium.
 
 ## TiDB extension fields
 
