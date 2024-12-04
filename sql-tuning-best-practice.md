@@ -146,11 +146,11 @@ The client sends a SQL statement to the protocol layer of TiDB server. The proto
 To the right of the protocol layer is the Optimizer layer of TiDB Server, which is responsible for processing SQL statements. The process is as follows:
 
 1. SQL statement arrives at the SQL optimizer through the protocol layer and is first parsed into an Abstract Syntax Tree (AST).
-2. Pre-Process is primarily for Point Get. If it is a Point Get, the following-up optimization processes can be skipped, the next step jumps to the SQL Executor.
+2. Pre-Process is primarily for Point Get, a simple, one table lookup through a Primary or Unique Key like `SELECT * FROM t WHERE pk_col = X` or `SELECT * FROM t WHERE uk_col IN (X,Y,Z)`. If it is a Point Get, the following-up optimization processes can be skipped, the next step jumps to the SQL Executor.
 3. After confirming that it is not a Point Get, the AST goes to the Logical Transformation, which rewrites the SQL logically based on certain rules.
 4. The AST that has gone through Logical Transformation will undergo Cost-Based Optimization.
-5. During Cost-Based Optimization, the optimizer considers statistics to determine how to select specific operators and finally generates a physically executable physical execution plan.
-6. The generated physical execution plan is sent to the SQL Executor of the TiDB database for execution.
+5. During Cost-Based Optimization, the optimizer considers statistics to determine how to select specific operators and finally generates a physical execution plan.
+6. The generated physical execution plan is sent to the SQL Executor of the TiDB node for execution.
 7. Unlike traditional databases, TiDB databases need to push down the execution plan to different TiKV or TiFlash for reading and writing data.
 
 ![workflow](/media/sql-tuning/workflow-tiflash.png)
@@ -218,7 +218,7 @@ Partition_name:
 1 row in set (0.00 sec)
 ```
 
-In TiDB database, there are two ways to collect statistics: automatic collection and manual collection. In most case, the auto collection job works fine. Automatic collection is actually triggered when certain conditions are met for a table, and TiDB will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
+In TiDB database, there are two ways to collect statistics: automatic collection and manual collection. In most case, the auto collection job works fine. Automatic collection is triggered when certain conditions are met for a table, and TiDB will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
 
 - [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio): The healthiness trigger
 - [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) and [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time): The allowed job window
@@ -269,7 +269,9 @@ An SQL statement undergoes optimization primarily in the optimizer through three
 
 The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using [`Point_Get`](https://docs.pingcap.com/tidb/stable/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](https://docs.pingcap.com/tidb/stable/explain-indexes#point_get-and-batch_point_get).
 
-`Point_Get` or `Batch_Point_Get` is to get 1 or 0 or many row only by using the TiKV key, the explicit or implicit (`_tidb_rowid`) primary key. For example, when id column is the primary key of a [clustered index](/clustered-indexes.md) table, `Point_Get` is used to get the particular row. If a plan is identified as `Point_Get`, optimizer will skip the logical transformation and cost-based optimization.
+`Point_Get` or `Batch_Point_Get` means using a primary or unique key, to directly read from TiKV, by exact key lookup. For example, when id column is the primary key of a [clustered index](/clustered-indexes.md) table, `Point_Get` is used to get the particular row. If a plan is identified as `Point_Get`, optimizer will skip the logical transformation and cost-based optimization, since the exact key read will be the best way to access the row. `Batch_Point_Get` will read a batch of exact key lookups, like `SELECT * FROM t WHERE id IN (4,62,81)`
+
+Example:
 
 ```sql
 SELECT id, name FROM emp WHERE id = 901; 
@@ -289,7 +291,7 @@ The following figure illustrates the various data access paths and row set opera
 
 Also, the optimizer need to evaluate operations that manipulate row sets, such as aggregation, join, and sorting. For instance, the aggregation operator may utilize either `HASH_AGG` or `STREAM_AGG`, while the join operator can select from `HASH JOIN`, `MERGE JOIN`, or `INDEX JOIN`. 
 
-Furthermore, expression and operator push-down to the physical storage engines is part of the physical optimization phase. The physical plan is partitioned and distributed to different components based on the underlying storage engines:
+Furthermore, expression and operator push-down to the physical storage engines is part of the physical optimization phase. The physical plan is  distributed to different components based on the underlying storage engines:
 
 - Root Task runs at the TiDB layer
 - Cop (Coprocessor) Task runs at the TiKV or TiFlash layer
@@ -410,7 +412,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first child of the tree). For the table `stars`, the optimizer ony need to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`. The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` is to implemented the two order by and limit corespondingly. The final operator `Projection_16` is to implemented the column projection for `t5.name`.
+Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first child of the tree). For the table `stars`, the optimizer only needs to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`. The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` are to implement the `ORDER BY` and `LIMIT` clauses correspondingly. The final operator `Projection_16` is to implement the column projection for `t5.name`.
 
 ```sql
 EXPLAIN 
@@ -590,7 +592,7 @@ WHERE
 +-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
 ```
 
-After creating the covered index below, which includes the additional columns source_type, target_type, and amount, the query execution time improved to 90ms, and TiDB only needed to send a single cop task to TiKV for data scanning.
+After creating the covered index below, which includes the additional columns `source_type`, `target_type`, and `amount`, the query execution time improved to 90ms, and TiDB only needed to send a single cop task to TiKV for data scanning.
 
 ```sql
 CREATE INDEX logs_covered ON logs(snapshot_id, user_id, status, source_type, target_type, amount); 
@@ -608,7 +610,7 @@ CREATE INDEX logs_covered ON logs(snapshot_id, user_id, status, source_type, tar
 +-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 ```
 
-### SQL Tuning with a Composite Index Involing Sorting
+### SQL Tuning with a Composite Index Involving Sorting
 
 When optimizing SQL queries, especially those that include an `ORDER BY` clause, it is beneficial to create a composite index that encompasses both the filtering and sorting columns. This approach allows the database engine to efficiently access the required data while maintaining the desired order.
 
