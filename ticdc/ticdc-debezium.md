@@ -29,7 +29,41 @@ This section describes the format definition of the DML event output in the Debe
 
 ### DML event
 
-TiCDC encodes a DML event in the following format:
+TiCDC encodes a DML event into a Kafka message, with both the key and value encoded in the Debezium format.
+
+### Key format
+
+```json
+{
+    "payload": {
+        "a": 4
+    },
+    "schema": {
+        "fields": [
+            {
+                "field": "a",
+                "optional": true,
+                "type": "int32"
+            }
+        ],
+        "name": "default.test.t2.Key",
+        "optional": false,
+        "type": "struct"
+    }
+}
+```
+
+The fields in the key only include primary key or unique index columns. The fields are explained as follows:
+
+| Field            | Type    | Description                                                                 |
+|:------------------|:--------|:----------------------------------------------------------------------------|
+| `payload`        | JSON    | The information about primary key or unique index columns. The key and value in each field represent the column name and its current value, respectively. |
+| `schema.fields`  | JSON    | The type information of each field in the payload, including the schema information of the row data before and after the change. |
+| `schema.name`    | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Key"` format. |
+| `schema.optional`| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| `schema.type`    | String  | The data type of the field.                                      |
+
+#### Value format
 
 ```json
 {
@@ -125,7 +159,10 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.source.commit_ts     | Number  | The `CommitTs` identifier when TiCDC generates this message.       |
 | payload.source.db     | String   | The name of the database where the event occurs.    |
 | payload.source.table     | String  |  The name of the table where the event occurs.   |
-| schema.fields     | JSON   |  The type information of each field in the payload, including the schema information of the row data before and after the change.   |
+| schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |
+| schema.name    | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Envelope"` format. |
+| schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| schema.type    | String  | The data type of the field.                                      |
 
 ### Data type mapping
 

@@ -36,7 +36,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
-- This variable controls whether to allow the use of [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access the partitioned table when the [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) are missing.
+- This variable controls whether to allow the use of [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access a partitioned table when the [global statistics](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) of that table are missing.
 
 ### [`44389`](https://github.com/pingcap/tidb/issues/44389) <span class="version-mark">New in v6.5.3 and v7.2.0</span>
 

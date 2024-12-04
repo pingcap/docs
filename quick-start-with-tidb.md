@@ -1,12 +1,12 @@
 ---
-title: Quick Start Guide for the TiDB Database Platform
-summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
+title: Quick Start with TiDB Self-Managed
+summary: Learn how to quickly get started with TiDB Self-Managed using TiUP playground and see if TiDB is the right choice for you.
 aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-docker/']
 ---
 
-# Quick Start Guide for the TiDB Database Platform
+# Quick Start with TiDB Self-Managed
 
-This guide provides the quickest way to get started with TiDB. For non-production environments, you can deploy your TiDB database using either of the following methods:
+This guide provides the quickest way to get started with TiDB Self-Managed. For non-production environments, you can deploy your TiDB database using either of the following methods:
 
 - [Deploy a local test cluster](#deploy-a-local-test-cluster) (for macOS and Linux)
 - [Simulate production deployment on a single machine](#simulate-production-deployment-on-a-single-machine) (for Linux only)

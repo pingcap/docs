@@ -694,7 +694,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
     - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `2`.
     - `0`: compatible with all TiDB cluster versions. Features with the MPP version greater than `0` do not take effect in this mode.
     - `1`: new in v6.6.0, used to enable data exchange with compression on TiFlash. For details, see [MPP version and exchange data compression](/explain-mpp.md#mpp-version-and-exchange-data-compression).
-    - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash. 
+    - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash.
 
 ### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
 
@@ -778,10 +778,6 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ```
 
 ### pd_enable_follower_handle_region <span class="version-mark">New in v7.6.0</span>
-
-> **Warning:**
->
-> The [Active PD Follower](https://docs.pingcap.com/tidb/dev/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1152,7 +1148,7 @@ mysql> SHOW CREATE TABLE t;
 | Table | Create Table                                                                                                                                                                                                             |
 +-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | t     | CREATE TABLE `t` (
-  `a` int(11) DEFAULT NULL,
+  `a` int DEFAULT NULL,
   `b` varchar(10) DEFAULT NULL,
   `c` json DEFAULT NULL,
   `d` blob DEFAULT NULL,
@@ -1699,6 +1695,17 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
 - You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
 
+### tidb_ddl_reorg_max_write_speed <span class="version-mark">New in v8.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 1125899906842624]` (the maximum value that can be set is 1 PiB)
+- This variable limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
+- The default value `0` means no write bandwidth limit. The default unit is bytes per second. You can also set the value in formats such as `'1GiB'` or `'256MiB'`.
+
 ### tidb_ddl_reorg_worker_cnt
 
 > **Note:**
@@ -1717,18 +1724,15 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
 
-> **Warning:**
->
-> This variable is currently an experimental feature and it is not recommended to use in a production environment. This feature might change or be removed without prior notice. If you find a bug, please give feedback by raising an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`. Before v8.5.0, the default value is `OFF`.
 - This variable is used to control whether to enable [TiDB Accelerated Table Creation](/accelerated-table-creation.md).
 - Starting from v8.0.0, TiDB supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement using `tidb_enable_fast_create_table`.
 - This variable is renamed from the variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
+- Starting from TiDB v8.5.0, the accelerated table creation feature is enabled by default for newly created clusters, with `tidb_enable_fast_create_table` set to `ON`. For clusters upgraded from v8.4.0 or earlier versions, the default value of `tidb_enable_fast_create_table` remains unchanged.
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
@@ -3036,16 +3040,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_gc_life_time <span class="version-mark">New in v5.0</span>
 
-> **Note:**
->
-> This variable is read-only for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Duration
 - Default value: `10m0s`
-- Range: `[10m0s, 8760h0m0s]`
+- Range: `[10m0s, 8760h0m0s]` for TiDB Self-Managed and [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `[10m0s, 168h0m0s]` for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)
 - The time limit during which data is retained for each GC, in the format of Go Duration. When a GC happens, the current time minus this value is the safe point.
 
 > **Note:**
@@ -3279,8 +3279,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> - Currently, the optimized hash join only supports inner join and outer join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the legacy hash join.
-> - Currently, the optimized hash join does not support spilling to disk when the memory is out of quota.
+> Currently, the optimized hash join only supports inner join and outer join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the legacy hash join.
 
 ### tidb_hashagg_final_concurrency
 
@@ -4861,13 +4860,17 @@ SHOW WARNINGS;
 
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
+> **Warning:**
+>
+> Starting from v8.5.0, setting this variable to `static` or `static-only` returns a warning. This variable will be deprecated in a future release.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Enumeration
 - Default value: `dynamic`
 - Possible values: `static`, `dynamic`, `static-only`, `dynamic-only`
-- Specifies whether to use `dynamic` or `static` mode for partitioned tables. Note that dynamic partitioning is effective only after full table-level statistics, or GlobalStats, are collected. Before GlobalStats are collected, TiDB will use the `static` mode instead. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode).
+- Specifies whether to use `dynamic` or `static` mode for partitioned tables. Note that dynamic partitioning is effective only after full table-level statistics, or global statistics, are collected. If you enable the `dynamic` pruning mode before global statistics collection is completed, TiDB remains in the `static` mode until global statistics are fully collected. For detailed information about global statistics, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode). For details about the dynamic pruning mode, see [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode).
 
 ### tidb_persist_analyze_options <span class="version-mark">New in v5.4.0</span>
 
@@ -5041,7 +5044,7 @@ SHOW WARNINGS;
 ### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes (Note that if [non-transactional DML statements](/non-transactional-dml.md) exist, modifying the value of this variable using hint might not take effect.)
 - Type: String
 - Default value: `strict`
 - This variable is used to control the read consistency for an auto-commit read statement.
@@ -5051,7 +5054,7 @@ SHOW WARNINGS;
 ### tidb_read_staleness <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[-2147483648, 0]`
@@ -5222,18 +5225,13 @@ SHOW WARNINGS;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `""`
-- Possible values: `""`, `TABLE`, `GLOBAL`
-- By default, Regions are split for a new table when it is being created in TiDB. This variable controls the table Region scattering strategy, determining how TiDB scatters Regions after splitting. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV directly and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable. Possible value descriptions are as follows:
-    - `""`: the default value; indicates that TiDB does not scatter table Regions.
-    - `TABLE`: indicates that if you set the `PRE_SPLIT_REGIONS` or `SHARD_ROW_ID_BITS` attribute when you create a table, in the scenario of pre-splitting multiple Regions, the Regions of these tables will be scattered according to the granularity of the tables. However, if you do not set the preceding attribute when you create a table, in the scenario of creating a large number of tables rapidly, it will cause the Regions of these tables to be concentrated on a few TiKV nodes, resulting in an uneven distribution of Regions.
-    - `GLOBAL`: indicates that TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Especially when creating a large number of tables rapidly, using the `GLOBAL` option helps prevent Regions from becoming overly concentrated on a few TiKV nodes, ensuring a more balanced distribution of Regions across the cluster.
-- Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation.
+- Possible values: `""`, `table`, `global`
+- If the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` parameters are set during table creation, then the system automatically splits the table into a specified number of Regions upon successful creation. This variable controls the scattering strategy for these split Regions. TiDB processes the Regions based on the selected scattering strategy. It is important to note that because the table creation operation waits for the scattering process to complete before returning a success status, enabling this variable might significantly increase the execution time of the `CREATE TABLE` statement. Compared to the scenario where this variable is disabled, the execution time could be several times longer. Descriptions of possible values are as follows:
+    - `""`: the default value, indicating that the Regions of the table are not scattered after table creation.
+    - `table`: indicates that if you set the `PRE_SPLIT_REGIONS` or `SHARD_ROW_ID_BITS` attribute when you create a table, in the scenario of pre-splitting multiple Regions, the Regions of these tables are scattered according to the granularity of the tables. However, if you do not set the preceding attribute when you create a table, in the scenario of creating a large number of tables rapidly, it will cause the Regions of these tables to be concentrated on a few TiKV nodes, resulting in an uneven distribution of Regions.
+    - `global`: indicates that TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Especially when creating a large number of tables rapidly, using the `global` option helps prevent Regions from becoming overly concentrated on a few TiKV nodes, ensuring a more balanced distribution of Regions across the cluster.
 
 ### tidb_schema_cache_size <span class="version-mark">New in v8.0.0</span>
-
-> **Warning:**
->
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5402,10 +5400,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- When accessing a partitioned table in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), TiDB aggregates the statistics of each partition to generate GlobalStats. This variable controls the generation of GlobalStats when partition statistics are missing.
+- When accessing a partitioned table in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), TiDB aggregates the statistics of each partition to generate global statistics. This variable controls the generation of global statistics when partition statistics are missing.
 
-    - If this variable is `ON`, TiDB skips missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
-    - If this variable is `OFF`, TiDB stops generating GlobalStats when it detects any missing partition statistics.
+    - If this variable is `ON`, TiDB skips missing partition statistics when generating global statistics so the generation of global statistics is not affected.
+    - If this variable is `OFF`, TiDB stops generating global statistics when it detects any missing partition statistics.
 
 ### tidb_skip_utf8_check
 
