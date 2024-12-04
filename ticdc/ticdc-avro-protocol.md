@@ -83,6 +83,8 @@ The data format of Value is the same as that of Key, by default. However, `field
 > - For Delete events, Avro only encodes the Key part. The Value part is empty. 
 > - For Insert events, Avro encodes all column data to the Value part. 
 > - For Update events, Avro encodes only all column data that is updated to the Value part.
+>   
+> If you want the old values with UPDATE or DELETE events, you can use other protocols.
 
 ## TiDB extension fields
 
