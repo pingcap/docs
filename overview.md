@@ -1,7 +1,6 @@
 ---
 title: What is TiDB Self-Managed
 summary: Learn about the key features and usage scenarios of TiDB.
-aliases: ['/docs/dev/key-features/','/tidb/dev/key-features','/docs/dev/overview/']
 ---
 
 # What is TiDB Self-Managed

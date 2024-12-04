@@ -1,7 +1,6 @@
 ---
 title: Snapshot Backup and Restore Guide
 summary: This document describes how to back up and restore TiDB snapshots using the br command-line tool. It includes instructions for snapshot backup, restoring data of a specified time point, and restoring a database or table. The document also covers the performance and impact of snapshot backup and restore.
-aliases: ['/tidb/dev/br-usage-backup/','/tidb/dev/br-usage-restore/','/tidb/dev/br-usage-restore-for-maintain/', '/tidb/dev/br-usage-backup-for-maintain/']
 ---
 
 # Snapshot Backup and Restore Guide
@@ -153,7 +152,7 @@ tiup br restore full \
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/snap_client/systable_restore.go#L31)
+- [Other system tables](https://github.com/pingcap/tidb/blob/release-8.5/br/pkg/restore/snap_client/systable_restore.go#L31)
 
 ```
 +-----------------------------------------------------+

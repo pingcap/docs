@@ -1,7 +1,6 @@
 ---
 title: Migration Task Precheck
 summary: Learn the precheck that DM performs before starting a migration task.
-aliases: ['/docs/tidb-data-migration/dev/precheck/']
 ---
 
 # Migration Task Precheck
@@ -82,7 +81,7 @@ For the full data migration mode (`task-mode: full`), in addition to the [common
         - Primary key
         - Unique index
 
-    - In the optimistic mode, check whether the schemas of all sharded tables meet the [optimistic compatibility](https://github.com/pingcap/tiflow/blob/master/dm/docs/RFCS/20191209_optimistic_ddl.md#modifying-column-types).
+    - In the optimistic mode, check whether the schemas of all sharded tables meet the [optimistic compatibility](https://github.com/pingcap/tiflow/blob/release-8.5/dm/docs/RFCS/20191209_optimistic_ddl.md#modifying-column-types).
 
     - If a migration task was started successfully by the `start-task` command, the precheck of this task skips the consistency check.
 

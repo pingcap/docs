@@ -1,7 +1,6 @@
 ---
 title: CLUSTER_HARDWARE
 summary: Learn the `CLUSTER_HARDWARE` information_schema table.
-aliases: ['/docs/dev/system-tables/system-table-cluster-hardware/','/docs/dev/reference/system-databases/cluster-hardware/','/tidb/dev/system-table-cluster-hardware/']
 ---
 
 # CLUSTER_HARDWARE

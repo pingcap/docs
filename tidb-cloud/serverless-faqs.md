@@ -1,7 +1,6 @@
 ---
 title: TiDB Cloud Serverless FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud Serverless.
-aliases: ['/tidbcloud/serverless-tier-faqs']
 ---
 
 # TiDB Cloud Serverless FAQs

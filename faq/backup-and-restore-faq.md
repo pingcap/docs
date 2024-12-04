@@ -1,7 +1,6 @@
 ---
 title: Backup & Restore FAQs
 summary: Learn about Frequently Asked Questions (FAQs) and the solutions of backup and restore.
-aliases: ['/docs/dev/br/backup-and-restore-faq/','/tidb/dev/pitr-troubleshoot/','/tidb/dev/pitr-known-issues/']
 ---
 
 # Backup & Restore FAQs
@@ -276,7 +275,7 @@ Note that even if you configures [table filter](/table-filter.md#syntax), **BR d
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/snap_client/systable_restore.go#L31)
+- [Other system tables](https://github.com/pingcap/tidb/blob/release-8.5/br/pkg/restore/snap_client/systable_restore.go#L31)
 
 ### How to deal with the error of `cannot find rewrite rule` during restoration?
 
