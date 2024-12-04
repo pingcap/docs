@@ -328,7 +328,15 @@ Requires the `INSERT` and `SELECT` privileges for the table.
 
 `SHOW GRANTS` requires the `SELECT` privilege to the `mysql` database. If the target user is current user, `SHOW GRANTS` does not require any privilege.
 
+<<<<<<< HEAD
 `SHOW PROCESSLIST` requires `SUPER` to show connections belonging to other users.
+=======
+`SHOW PROCESSLIST` requires the `PROCESS` privilege to show connections belonging to other users.
+
+`SHOW IMPORT JOB` requires the `SUPER` privilege to show connections belonging to other users. Otherwise, it only shows jobs created by the current user.
+
+`SHOW STATS_LOCKED` requires the `SELECT` privilege to the `mysql.stats_table_locked` table.
+>>>>>>> 4a5c722463 (privilege: change privilege for SHOW PROCESSLIST from SUPER to PROCESS (#19559))
 
 ### CREATE ROLE/USER
 
