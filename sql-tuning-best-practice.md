@@ -71,7 +71,7 @@ Examples:
 
 ## Balance Workload Distribution
 
-In a distributed architecture like TiDB, it's essential to maintain a balanced workload across multiple TiKV nodes. This is crucial for achieving optimal performance. For guidance on identifying and resolving read and write hotspots, please refer to the [document](/troubleshoot-hot-spot-issues.md#optimization-of-small-table-hotspots). By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
+In a distributed architecture like TiDB, it's essential to maintain a balanced workload across multiple TiKV nodes. This is crucial for achieving optimal performance. For guidance on identifying and resolving read and write hotspots, please refer to the [troubleshoot hot spot issues page](/troubleshoot-hot-spot-issues.md#optimization-of-small-table-hotspots). By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
 
 # Identifying High-Load SQL
 
