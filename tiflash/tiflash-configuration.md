@@ -78,9 +78,8 @@ delta_index_cache_size = 0
     ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
     ## * format_version = 4, the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption
     ## * format_version = 5, introduced in v7.3.0, the default format for versions from v7.4.0 to v8.3.0, which reduces the number of physical files by merging smaller files.
-    # format_version = 5
     ## * format_version = 6, introduced in v8.4.0, which partially supports the building and storage of vector indexes.
-    ## * format_version = 7, introduced in v7.3.0, the default format for v8.4.0 and later versions, which supports the build and storage of vector indexes
+    ## * format_version = 7, introduced in v8.4.0, the default format for v8.4.0 and later versions, which supports the build and storage of vector indexes
     # format_version = 7
 
     [storage.main]
