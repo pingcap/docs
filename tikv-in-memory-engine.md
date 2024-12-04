@@ -62,33 +62,33 @@ mvcc-amplification-threshold = 10
 
 ### Automatic loading
 
-After enabling the in-memory engine, TiKV automatically selects the Regions to load based on the read traffic and MVCC amplification of the Region. The specific process is as follows:
+After you enable the in-memory engine, TiKV automatically selects the Regions to load based on the read traffic and MVCC amplification of the Region. The specific process is as follows:
 
-1. Regions are sorted by the number of next (RocksDB Iterator next API) and prev (RocksDB Iterator next API) operations in the recent time period.
-2. Regions are filtered using `mvcc-amplification-threshold` (`10` by default. MVCC amplification measures read amplification, calculated as (next + prev) / processed_keys).
-3. The top N Regions with severe MVCC amplification are loaded, where N is based on memory estimation.
+1. Regions are sorted based on the number of recent `next` (RocksDB Iterator next API) and `prev` (RocksDB Iterator prev API) calls.
+2. Regions are filtered using the `mvcc-amplification-threshold` configuration parameter. The default value is `10`. MVCC amplification measures read amplification, calculated as (`next` + `prev`) / `processed_keys`.
+3. The top N Regions with severe MVCC amplification are loaded, where N is determined based on memory estimation.
 
-The in-memory engine also periodically performs Region eviction. The process is as follows:
+The in-memory engine also periodically evicts Regions. The process is as follows:
 
 1. The in-memory engine evicts Regions with low read traffic or low MVCC amplification.
-2. If memory usage reaches 90% of `capacity` and new Regions need to be loaded, the in-memory engine will filter Regions based on read traffic and evict Regions.
+2. If memory usage reaches 90% of `capacity` and new Regions need to be loaded, then the in-memory engine selects and evicts Regions based on read traffic.
 
 ## Compatibility
 
-+ [BR](/br/br-use-overview.md): the in-memory engine can be used with BR, but BR restore will evict the in-memory engine Regions involved in the restore. After BR restore is complete, if the corresponding Region is still a hotspot, it will be automatically loaded by the in-memory engine.
-+ [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md): the in-memory engine can be used with TiDB Lightning, but TiDB Lightning's physical import mode will evict the in-memory engine Regions involved in the import. After TiDB Lightning completes the import, if the corresponding Region is still a hotspot, it will be automatically loaded by the in-memory engine.
-+ [Follower Read](/develop/dev-guide-use-follower-read.md) and [Stale Read](/develop/dev-guide-use-stale-read.md): the in-memory engine can be enabled with these two features, but the in-memory engine can only accelerate Leader coprocessor requests and cannot accelerate Follower Read and Stale Read.
-+ [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md): the in-memory engine can be used with Flashback, but Flashback will cause the in-memory engine cache invalidation. After Flashback is complete, the in-memory engine will automatically load hotspot Regions.
++ [BR](/br/br-use-overview.md): the in-memory engine can be used alongside BR. However, during a BR restore, the Regions involved in the restore process are evicted from the in-memory engine. After the BR restore is complete, if the corresponding Regions remain hotspots, they will be automatically loaded by the in-memory engine.
++ [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md): the in-memory engine can be used alongside TiDB Lightning. However, when TiDB Lightning operates in physical import mode, it evicts the Regions involved in the restore process from the in-memory engine. Once the physical import is complete, if the corresponding Regions remain hotspots, they will be automatically loaded by the in-memory engine.
++ [Follower Read](/develop/dev-guide-use-follower-read.md) and [Stale Read](/develop/dev-guide-use-stale-read.md): the in-memory engine can be used alongside these two features. However, the in-memory engine can only accelerate coprocessor requests on the Leader, and cannot accelerate Follower Read and Stale Read operations.
++ [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md): the in-memory engine can be used alongside Flashback. However, Flashback invalidates the in-memory engine cache. After the Flashback process is complete, the in-memory engine will automatically load hotspot Regions.
 
 ## FAQ
 
 ### Can the in-memory engine reduce write latency and increase write throughput?
 
-No, the in-memory engine can only accelerate read requests that scan a large number of MVCC versions.
+No. The in-memory engine can only accelerate read requests that scan a large number of MVCC versions.
 
 ### How to determine if the in-memory engine can improve my scenario?
 
-You can execute the following SQL statement to check if there are slow queries with `Total_keys` much greater than `Process_keys`.
+You can execute the following SQL statement to check if there are slow queries with `Total_keys` much greater than `Process_keys`:
 
 ```sql
 SELECT
@@ -119,7 +119,7 @@ LIMIT 5;
 
 Example:
 
-The following result shows that there are queries with severe MVCC amplification on the `db1.tbl1` table. TiKV processes 1358517 MVCC versions and only returns 2 versions.
+The following result shows that queries with severe MVCC amplification exist on the `db1.tbl1` table. TiKV processes 1358517 MVCC versions and only returns 2 versions.
 
 ```
 +----------------------------+-----+-------------------+--------------+------------+-----------------------------------+--------------------+--------------------+--------------------+
