@@ -59,7 +59,7 @@ To create an API key, perform the following steps:
 
 > **Note:**
 >
-> Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+> Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://tidb.support.pingcap.com/) to our support team.
 
 In each Chat2Query Data App, you can find the following endpoints:
 
@@ -316,9 +316,14 @@ When calling `/v1/chat2data`, you need to replace the following parameters:
 
 > **Note:**
 >
+<<<<<<< HEAD
 > Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 > An API Key with the role `Chat2Query Data Summary Management Role` cannot call the Chat2Data v1 endpoint.
 
+=======
+> - Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://tidb.support.pingcap.com/) to our support team.
+> - An API Key with the role `Chat2Query Data Summary Management Role` cannot call the Chat2Data v1 endpoint.
+>>>>>>> 52107ddec7 (*: update TiDB community channel descriptions and links (#19556))
 The following code example is used to count how many users are in the `sp500insight.users` table:
 
 ```bash
