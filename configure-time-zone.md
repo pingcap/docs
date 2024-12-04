@@ -6,11 +6,11 @@ aliases: ['/docs/dev/configure-time-zone/','/docs/dev/how-to/configure/time-zone
 
 # Time Zone Support
 
-The time zone in TiDB is decided by the [`time_zone`](/system-variables.md#time_zone) system variable, which can be set at the session or global level. The default value of `time_zone` is `SYSTEM`. The actual time zone corresponding to `SYSTEM` is configured when the TiDB cluster bootstrap is initialized. The detailed logic is as follows:
+The time zone in TiDB is decided by the [`time_zone`](/system-variables.md#time_zone) system variable. You can set it at the session or global level. The default value of `time_zone` is `SYSTEM`. The actual time zone corresponding to `SYSTEM` is configured when the TiDB cluster bootstrap is initialized. The detailed logic is as follows:
 
-- TiDB prioritizes the use of the `TZ` environment variable.
-- If the `TZ` environment variable fails, TiDB reads the time zone from the soft link at `/etc/localtime`.
-- If both of the preceding methods fail, TiDB uses `UTC` as the system time zone.
+1. TiDB prioritizes the use of the `TZ` environment variable.
+2. If the `TZ` environment variable fails, TiDB reads the time zone from the soft link at `/etc/localtime`.
+3. If both of the preceding methods fail, TiDB uses `UTC` as the system time zone.
 
 ## View time zone settings
 
@@ -54,7 +54,7 @@ Depending on your needs, you can set the time zone in TiDB at the global or sess
     SET time_zone = 'US/Pacific';
     ```
 
-## Functions and data types affected by time zone setting
+## Functions and data types affected by time zone settings
 
 The current session time zone setting affects the display and interpretation of time values that are zone-sensitive, such as the values returned by [`NOW()`](/functions-and-operators/date-and-time-functions.md) and `CURTIME()` functions. To convert between time zones, use the `CONVERT_TZ()` function. To get a timestamp based on UTC, use the `UTC_TIMESTAMP()` function, which helps avoid time zone-related issues.
 
@@ -115,7 +115,7 @@ In this example, no matter how you adjust the time zone value, the value of the 
 - For data migration, you need to pay special attention to the time zone setting of the primary database and the secondary database.
 - To get accurate timestamps, it is strongly recommended that you configure a reliable clock using Network Time Protocol (NTP) or Precision Time Protocol (PTP) services. For information about how to check NTP services, see [Check and install the NTP service](/check-before-deployment.md#check-and-install-the-ntp-service).
 - Be aware that using time zones that observe daylight saving time can result in ambiguous or nonexistent timestamps, especially when performing calculations with those timestamps.
-- MySQL uses `mysql_tzinfo_to_sql` to convert the time zone database of the operating system into tables in the `mysql` database. In contrast, TiDB directly reads the time zone data files from the time zone database of the operating system, which leverages the built-in time zone handling capabilities of the Go programming language.
+- MySQL uses [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.4/en/mysql-tzinfo-to-sql.html) to convert the time zone database of the operating system into tables in the `mysql` database. In contrast, TiDB directly reads the time zone data files from the time zone database of the operating system, which leverages the built-in time zone handling capabilities of the Go programming language.
 
 ## See also
 
