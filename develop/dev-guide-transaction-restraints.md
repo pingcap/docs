@@ -83,10 +83,10 @@ public class EffectWriteSkew {
 
     public static void createDoctorTable(Connection connection) throws SQLException {
         connection.createStatement().executeUpdate("CREATE TABLE `doctors` (" +
-                "    `id` int(11) NOT NULL," +
+                "    `id` int NOT NULL," +
                 "    `name` varchar(255) DEFAULT NULL," +
-                "    `on_call` tinyint(1) DEFAULT NULL," +
-                "    `shift_id` int(11) DEFAULT NULL," +
+                "    `on_call` tinyint DEFAULT NULL," +
+                "    `shift_id` int DEFAULT NULL," +
                 "    PRIMARY KEY (`id`)," +
                 "    KEY `idx_shift_id` (`shift_id`)" +
                 "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin");
@@ -307,10 +307,10 @@ func prepareData(db *sql.DB) error {
 
 func createDoctorTable(db *sql.DB) error {
     _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
-        "    `id` int(11) NOT NULL," +
+        "    `id` int NOT NULL," +
         "    `name` varchar(255) DEFAULT NULL," +
-        "    `on_call` tinyint(1) DEFAULT NULL," +
-        "    `shift_id` int(11) DEFAULT NULL," +
+        "    `on_call` tinyint DEFAULT NULL," +
+        "    `shift_id` int DEFAULT NULL," +
         "    PRIMARY KEY (`id`)," +
         "    KEY `idx_shift_id` (`shift_id`)" +
         "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
@@ -410,10 +410,10 @@ public class EffectWriteSkew {
 
     public static void createDoctorTable(Connection connection) throws SQLException {
         connection.createStatement().executeUpdate("CREATE TABLE `doctors` (" +
-                "    `id` int(11) NOT NULL," +
+                "    `id` int NOT NULL," +
                 "    `name` varchar(255) DEFAULT NULL," +
-                "    `on_call` tinyint(1) DEFAULT NULL," +
-                "    `shift_id` int(11) DEFAULT NULL," +
+                "    `on_call` tinyint DEFAULT NULL," +
+                "    `shift_id` int DEFAULT NULL," +
                 "    PRIMARY KEY (`id`)," +
                 "    KEY `idx_shift_id` (`shift_id`)" +
                 "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin");
@@ -632,10 +632,10 @@ func prepareData(db *sql.DB) error {
 
 func createDoctorTable(db *sql.DB) error {
     _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
-        "    `id` int(11) NOT NULL," +
+        "    `id` int NOT NULL," +
         "    `name` varchar(255) DEFAULT NULL," +
-        "    `on_call` tinyint(1) DEFAULT NULL," +
-        "    `shift_id` int(11) DEFAULT NULL," +
+        "    `on_call` tinyint DEFAULT NULL," +
+        "    `shift_id` int DEFAULT NULL," +
         "    PRIMARY KEY (`id`)," +
         "    KEY `idx_shift_id` (`shift_id`)" +
         "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
@@ -709,8 +709,15 @@ mysql> SELECT * FROM T2;
 
 The basic principle is to limit the size of the transaction. At the KV level, TiDB has a restriction on the size of a single transaction. At the SQL level, one row of data is mapped to one KV entry, and each additional index will add one KV entry. The restriction is as follows at the SQL level:
 
-- The maximum single row record size is `120 MB`. You can adjust it by using the `performance.txn-entry-size-limit` configuration parameter of tidb-server for TiDB v4.0.10 and later v4.0.x versions, TiDB v5.0.0 and later versions. The value is `6 MB` for versions earlier than v4.0.10.
-- The maximum single transaction size supported is `10 GB`. You can configure it by `performance.txn-total-size-limit` for TiDB v4.0 and later versions. The value is `100 MB` for earlier versions.
+- The maximum single row record size is 120 MiB.
+
+    - You can adjust it by using the [`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500) configuration parameter of tidb-server for TiDB v4.0.10 and later v4.0.x versions, TiDB v5.0.0 and later versions. The value is `6 MB` for versions earlier than v4.0.10.
+    - Starting from v7.6.0, you can use the [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) system variable to dynamically modify the value of this configuration item.
+
+- The maximum single transaction size supported is 1 TiB. 
+
+    - For TiDB v4.0 and later versions, You can configure it by [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)). The value is `100 MB` for earlier versions.
+    - For TiDB v6.5.0 and later versions, this configuration is no longer recommended. For more information, see [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)).
 
 Note that for both the size restrictions and row restrictions, you should also consider the overhead of encoding and additional keys for the transaction during the transaction execution. To achieve optimal performance, it is recommended to write one transaction every 100 ~ 500 rows.
 
@@ -726,12 +733,12 @@ This is a known incompatibility issue with MySQL. You can solve this issue by us
 
 <CustomContent platform="tidb">
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

@@ -31,10 +31,6 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul></td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
     <td>Amazon Linux 2</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
@@ -96,7 +92,8 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 > **Note:**
 >
 > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
+> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. While the upstream support for CentOS Linux 8 ends on December 31, 2021, CentOS Stream 8 continues to be supported by the CentOS organization.
+> - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. 
 > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
 > - If you are using the 32-bit version of an operating system listed in the preceding table, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
 > - Other operating system versions not mentioned above might work but are not officially supported.
@@ -105,7 +102,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.21 or later |
+|   Golang  |  1.23 or later |
 |   Rust    |   nightly-2023-12-28 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  17.0 or later  |
@@ -178,6 +175,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - In the production environment, the TiDB and PD instances can be deployed on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
 > - It is strongly recommended to configure TiDB, TiKV, and TiFlash with at least 8 CPU cores each in the production environment. To get better performance, a higher configuration is recommended.
 > - It is recommended to keep the size of TiKV hard disk within 4 TB if you are using PCIe SSDs or within 1.5 TB if you are using regular SSDs.
+> - If you deploy TiKV on a cloud provider, such as AWS, Google Cloud, or Azure, it is recommended to use cloud disks for TiKV nodes. Data on local disks might be lost if the TiKV instance crashes in the cloud environment.
 
 Before you deploy TiFlash, note the following items:
 

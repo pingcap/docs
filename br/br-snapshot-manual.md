@@ -42,7 +42,7 @@ tiup br backup full \
 
 In the preceding command:
 
-- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2024-06-28 13:30:00 +08:00`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
+- `--backupts`: The time point of the snapshot. The format can be [TSO](/tso.md) or timestamp, such as `400036290571534337` or `2024-06-28 13:30:00 +08:00`. If the data of this snapshot is garbage collected, the `tiup br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 - `--log-file`: The target file where `br` log is written.
 
@@ -134,10 +134,6 @@ tiup br restore full \
 When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
 
 ## Encrypt the backup data
-
-> **Warning:**
->
-> This is an experimental feature. It is not recommended that you use it in the production environment.
 
 BR supports encrypting backup data at the backup side and [at the storage side when backing up to Amazon S3](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption). You can choose either encryption method as required.
 
@@ -278,10 +274,6 @@ ADMIN RELOAD BINDINGS;
 ```
 
 ## Restore encrypted snapshots
-
-> **Warning:**
->
-> This is an experimental feature. It is not recommended that you use it in the production environment.
 
 After encrypting the backup data, you need to pass in the corresponding decryption parameters to restore the data. Ensure that the decryption algorithm and key are correct. If the decryption algorithm or key is incorrect, the data cannot be restored. The following is an example:
 

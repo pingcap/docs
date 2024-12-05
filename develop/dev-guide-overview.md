@@ -12,7 +12,7 @@ This guide is written for application developers, but if you are interested in t
 
 This tutorial shows how to quickly build an application using TiDB, the possible use cases of TiDB and how to handle common problems.
 
-Before reading this page, it is recommended that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md).
+Before reading this page, it is recommended that you read the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md).
 
 </CustomContent>
 
@@ -106,12 +106,12 @@ Here you can find additional resources to connect, manage and develop with TiDB 
 
 <CustomContent platform="tidb">
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

@@ -171,17 +171,19 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `64`
 - Currently, the valid value range is `[64, 512]`.
 
-### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>
+### `enable-telemetry` <span class="version-mark">New in v4.0.2 and deprecated in v8.1.0</span>
 
-- Enables or disables the telemetry collection in TiDB.
+> **Warning:**
+>
+> Starting from v8.1.0, the telemetry feature in TiDB is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions.
+
+- Before v8.1.0, this configuration item controls whether to enable telemetry collection in a TiDB instance.
 - Default value: `false`
-- When this configuration is set to `true` on a TiDB instance, the telemetry collection in this TiDB instance is enabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable takes effect.
-- When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
 ### `deprecate-integer-display-length`
 
 - Deprecates the display width for integer types when this configuration item is set to `true`.
-- Default value: `false`
+- Default value: `true`. Before v8.5.0, the default value is `false`.
 
 ### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
 
@@ -523,6 +525,7 @@ Configuration items related to performance.
 - In TiDB v6.5.0 and later versions, this configuration is no longer recommended. The memory size of a transaction will be accumulated into the memory usage of the session, and the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) variable will take effect when the session memory threshold is exceeded. To be compatible with previous versions, this configuration works as follows when you upgrade from an earlier version to TiDB v6.5.0 or later:
     - If this configuration is not set or is set to the default value (`104857600`), after an upgrade, the memory size of a transaction will be accumulated into the memory usage of the session, and the `tidb_mem_quota_query` variable will take effect.
     - If this configuration is not defaulted (`104857600`), it still takes effect and its behavior on controlling the size of a single transaction remains unchanged before and after the upgrade. This means that the memory size of the transaction is not controlled by the `tidb_mem_quota_query` variable.
+- When TiDB executes transactions in the [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"` mode, transaction size is not limited by the TiDB configuration item [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit).
 
 ### `tcp-keep-alive`
 
@@ -706,12 +709,14 @@ Configuration items related to opentracing.reporter.
 
 - The `keepalive` time interval of the RPC connection between TiDB and TiKV nodes. If there is no network packet within the specified time interval, the gRPC client executes `ping` command to TiKV to see if it is alive.
 - Default: `10`
+- Minimum value: `1`
 - Unit: second
 
 ### `grpc-keepalive-timeout`
 
 - The timeout of the RPC `keepalive` check between TiDB and TiKV nodes.
 - Default value: `3`
+- Minimum value: `0.05`
 - Unit: second
 
 ### `grpc-compression-type`
@@ -949,6 +954,13 @@ Configuration items related to read isolation.
 - Possible values: `OFF`, `ON`
 - The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl-new-in-v630)
 - Before v6.3.0, this configuration is set by `run-ddl`.
+
+### `tidb_enable_stats_owner` <span class="version-mark">New in v8.4.0</span>
+
+- This configuration controls whether the corresponding TiDB instance can run [automatic statistics update](/statistics.md#automatic-update) tasks.
+- Default value: `true`
+- Possible values: `true`, `false`
+- The value of this configuration will initialize the value of the system variable [`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840).
 
 ### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
 

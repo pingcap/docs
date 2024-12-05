@@ -50,7 +50,6 @@ Currently, the `help_topic` is NULL.
 - `stats_fm_sketch`: the FMSketch distribution of the histogram of the statistics column
 - `analyze_options`: the default `analyze` options for each table
 - `column_stats_usage`: the usage of column statistics
-- `schema_index_usage`: the usage of indexes
 - `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
 
 ## Execution plan-related system tables
@@ -85,13 +84,13 @@ Currently, the `help_topic` is NULL.
 
 ## System tables related to metadata locks
 
-* `tidb_mdl_view`: a view of metadata locks. You can use it to view information about the currently blocked DDL statements
-* `tidb_mdl_info`: used internally by TiDB to synchronize metadata locks across nodes
+* `tidb_mdl_view`: a view of metadata locks. You can use it to view information about the currently blocked DDL statements. See also [Metadata Lock](/metadata-lock.md).
+* `tidb_mdl_info`: used internally by TiDB to synchronize metadata locks across nodes.
 
 ## System tables related to DDL statements
 
 * `tidb_ddl_history`: the history records of DDL statements
-* `tidb_ddl_jobs`: the metadata of DDL statements that are currently being executed by TiDB
+* `tidb_ddl_job`: the metadata of DDL statements that are currently being executed by TiDB
 * `tidb_ddl_reorg`: the metadata of physical DDL statements (such as adding indexes) that are currently being executed by TiDB
 
 ## System tables related to TiDB Distributed eXecution Framework (DXF)

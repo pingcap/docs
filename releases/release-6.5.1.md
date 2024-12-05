@@ -15,8 +15,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 - Starting from February 20, 2023, the [telemetry feature](/telemetry.md) is disabled by default in new versions of TiDB and TiDB Dashboard, including v6.5.1, and usage information is not collected and shared with PingCAP. Before upgrading to these versions, if the cluster uses the default telemetry configuration, the telemetry feature is disabled after the upgrade. See [TiDB Release Timeline](/releases/release-timeline.md) for specific versions.
 
-    - The default value of the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable is changed from `ON` to `OFF`.
-    - The default value of the TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) configuration item is changed from `true` to `false`.
+    - The default value of the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402-and-deprecated-in-v810) system variable is changed from `ON` to `OFF`.
+    - The default value of the TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402-and-deprecated-in-v810) configuration item is changed from `true` to `false`.
     - The default value of the PD [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) configuration item is changed from `true` to `false`.
 
 - Starting from v1.11.3, the telemetry feature is disabled by default in newly deployed TiUP, and usage information is not collected. If you upgrade from a TiUP version earlier than v1.11.3 to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
@@ -165,7 +165,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - Fix the issue that changefeed might get stuck in special scenarios such as when scaling in or scaling out TiKV or TiCDC nodes [#8174](https://github.com/pingcap/tiflow/issues/8174) @[hicqu](https://github.com/hicqu)
         - Fix the issue that precheck is not performed on the storage path of redo log [#6335](https://github.com/pingcap/tiflow/issues/6335) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue of insufficient duration that redo log can tolerate for S3 storage failure [#8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the issue that `transaction_atomicity` and `protocol` cannot be updated via the configuration file [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that `transaction-atomicity` and `protocol` cannot be updated via the configuration file [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that the checkpoint cannot advance when TiCDC replicates an excessively large number of tables [#8004](https://github.com/pingcap/tiflow/issues/8004) @[overvenus](https://github.com/overvenus)
         - Fix the issue that applying redo log might cause OOM when the replication lag is excessively high [#8085](https://github.com/pingcap/tiflow/issues/8085) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that the performance degrades when redo log is enabled to write meta [#8074](https://github.com/pingcap/tiflow/issues/8074) @[CharlesCheung96](https://github.com/CharlesCheung96)
