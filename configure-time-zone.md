@@ -112,7 +112,7 @@ In this example, no matter how you adjust the time zone value, the value of the 
 ## Important considerations for time zone settings
 
 - Time zone is involved during the conversion of the values of `TIMESTAMP` and `DATETIME`, which is handled based on the `time_zone` of the current session.
-- For data migration, you need to pay special attention to the time zone setting of the primary database and the secondary database.
+- For data migration, you need to pay special attention to whether the time zone settings of the primary database and the secondary database are consistent.
 - To get accurate timestamps, it is strongly recommended that you configure a reliable clock using Network Time Protocol (NTP) or Precision Time Protocol (PTP) services. For information about how to check NTP services, see [Check and install the NTP service](/check-before-deployment.md#check-and-install-the-ntp-service).
 - Be aware that using time zones that observe daylight saving time can result in ambiguous or nonexistent timestamps, especially when performing calculations with those timestamps.
 - MySQL uses [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.4/en/mysql-tzinfo-to-sql.html) to convert the time zone database of the operating system into tables in the `mysql` database. In contrast, TiDB directly reads the time zone data files from the time zone database of the operating system, which leverages the built-in time zone handling capabilities of the Go programming language.
