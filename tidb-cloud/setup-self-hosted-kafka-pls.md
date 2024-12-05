@@ -35,19 +35,19 @@ The document provides an example of connecting to a Kafka Private Link service d
 2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in AWS first. Ensure that Kafka deployment information is alligned with your TiDB cluster.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
-    2. In the overview page, you can find the region of TiDB Cluster, make sure your Kafka cluster will be deployed to the same region.
-    3. Click **Create Changefeed**
+    2. On the overview page, you can find the region of TiDB Cluster. Ensure that your Kafka cluster will be deployed to the same region.
+    3. Click **Create Changefeed**.
         1. Select **Kafka** as **Target Type**.
-        2. Select **Private Link** as **Connectivity Method**
+        2. Select **Private Link** as **Connectivity Method**.
     4. Note down the principal of TiDB Cloud AWS account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to create an endpoint for the Kafka Private Link service.
     5. Select **Number of AZs**. Confirm that you will deploy the Kafka cluster in **Single AZ** or **3 AZ**. In this example, select **3 AZ**. Note down the ID of the AZ in which you want to deploy your Kafka cluster. If you want to know the relationship between your AZ names and AZ IDs, see [AWS document](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html) to find it.
     6. Pick a unique **Kafka Advertised Listener Pattern** for your Kafka Private Link service.
         1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
-        2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** which will be used to assemble EXTERNAL advertised listener for Kafka brokers. 
+        2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** that will be used to assemble the EXTERNAL advertised listener for Kafka brokers. 
 
 Note down all the deployment information. You need to use is to configure your Kafka Private Link service later.
 
-The following is an example of the deployment information.
+The following table shows an example of the deployment information.
 
 | Information     | Value    | Note    | 
 |--------|-----------------|---------------------------|
@@ -58,7 +58,7 @@ The following is an example of the deployment information.
 
 ## Step 1. Set up a Kafka cluster
 
-- If you need to set up a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
+- If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
 
 - If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
 
@@ -267,7 +267,7 @@ ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf openjdk-22.
     1. Configure an INTERNAL advertised listener for every broker with the internal IP of the broker node. Advertised internal Kafka clients use this address to visit the broker.
     2. Configure an EXTERNAL advertised listener based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help the Kafka client from TiDB Cloud side route requests to the right broker.
 
-        - `<port>` differentiate brokers from Kafka Private Link Service access point. Plan a port range for EXTERNAL advertised listener of all brokers. These ports do not have to be actual ports listened on brokers. They are ports listened on LB for Private Link Service that will forward requests to different brokers.
+        - `<port>` differentiates brokers from Kafka Private Link Service access point. Plan a port range for EXTERNAL advertised listener of all brokers. These ports do not have to be actual ports listened on brokers. They are ports listened on load balancer for Private Link Service that will forward requests to different brokers.
         - `AZ ID` in **Kafka Advertised Listener Pattern** indicates where the broker is deployed. TiDB Cloud will route requests to different endpoint DNS names based on the AZ ID.
      
       It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
@@ -523,7 +523,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
     1. Configure an EXTERNAL **listener** for every broker for external access from TiDB Cloud. Pick a unique port as EXTERNAL port, for example `39092`.
     2. Configure an EXTERNAL **advertised listener** based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
 
-        - `<port>` differentiate brokers from Kafka Private Link Service access point. Plan a port range for EXTERNAL advertised listeners of all brokers, for example `range from 9093`. These ports do not have to be actual ports listened on brokers. They are ports listened on load balancer for Private Link Service which will forward requests to different brokers.
+        - `<port>` differentiates brokers from Kafka Private Link Service access point. Plan a port range for EXTERNAL advertised listeners of all brokers, for example `range from 9093`. These ports do not have to be actual ports listened on brokers. They are ports listened on load balancer for Private Link Service which will forward requests to different brokers.
         - `AZ ID` in **Kafka Advertised Listener Pattern** indicates where the broker is deployed. TiDB Cloud will route requests to different endpoint DNS names based on the AZ ID.
       
       It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
@@ -588,7 +588,9 @@ tar -zxf kafka_2.13-3.7.1.tgz
 wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
 tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
 ```
-Test if the bootstrap is work as expected by executing following script
+
+Test if the bootstrap works as expected by executing the following script.
+
 ```shell
 export JAVA_HOME=/home/ec2-user/jdk-22.0.2
 
