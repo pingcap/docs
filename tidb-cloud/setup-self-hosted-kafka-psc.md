@@ -3,21 +3,21 @@ title: Set Up Self-Hosted Kafka Private Service Connect in Google Cloud
 summary: This document explains how to set up Private Service Connect for self-hosted Kafka in Google Cloud and how to make it work with TiDB Cloud.
 ---
 
-# Set up Self-hosted Kafka Private Service Connect in Google Cloud
+# Set Up Self-Hosted Kafka Private Service Connect in Google Cloud
 
 This document explains how to set up Private Service Connect for self-hosted Kafka in Google Cloud, and how to make it work with TiDB Cloud.
 
 The mechanism works as follows:
 
-1. TiDB Cloud VPC connects to Kafka VPC through limit private endpoints.
-2. Kafka clients need to talk directly to all Kafka brokers.
-3. Map every Kafka brokers to different ports to make every broker is unique in TiDB Cloud VPC.
-4. Leverage Kafka bootstrap mechanism and Google Cloud resources to achieve the mapping.
+1. TiDB Cloud VPC connects to Kafka VPC through private endpoints.
+2. Kafka clients need to communicate directly to all Kafka brokers.
+3. Each Kafka broker is mapped to a unique port within the TiDB Cloud VPC.
+4. Leverage the Kafka bootstrap mechanism and Google Cloud resources to achieve the mapping.
 
 There are two ways to set up Private Service Connect for self-hosted Kafka in Google Cloud:
 
-1. Use the PSC port mapping mechanism. This method requires static port-broker mapping configuration. Require to reconfigure existing Kafka cluster to add a group of EXTERNAL listeners and advertised listeners. 
-2. Use [Kafka-proxy](https://github.com/grepplabs/kafka-proxy). This method introduces an extra running process as the proxy between Kafka clients and Kafka brokers. The proxy will dynamically configure port-broker mapping and forward requests. You do not need to reconfigure the existing Kafka cluster.
+- Use the PSC port mapping mechanism. This method requires static port-broker mapping configuration. Require to reconfigure existing Kafka cluster to add a group of EXTERNAL listeners and advertised listeners. 
+- Use [Kafka-proxy](https://github.com/grepplabs/kafka-proxy). This method introduces an extra running process as the proxy between Kafka clients and Kafka brokers. The proxy will dynamically configure port-broker mapping and forward requests. You do not need to reconfigure the existing Kafka cluster.
 
 The document uses an example to show how to connect to a three AZ Kafka Private Link service in Google Cloud. There are other ways based on the similar port mapping mechanism. This document only shows fundamental process of the Kafka Private Link service. If you want to set up Kafka Private Link service in a production envrionment, you need to build a more resilient Kafka Private Link service with better operational maintainability and observability.
 
