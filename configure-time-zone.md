@@ -1,11 +1,6 @@
 ---
 title: Time Zone Support
-<<<<<<< HEAD
-summary: Learn how to set the time zone and its format.
-=======
 summary: The time zone setting in TiDB is controlled by the `time_zone` system variable, which can be set at the session or global level. The displayed values of the `TIMESTAMP` data type are affected by the time zone setting, while the `DATETIME`, `DATE`, and `TIME` data types are not affected. For data migration, you need to pay special attention to whether the time zone settings of the primary database and the secondary database are consistent.
-aliases: ['/docs/dev/configure-time-zone/','/docs/dev/how-to/configure/time-zone/']
->>>>>>> b13021b761 (Update timezone docs (#19067))
 ---
 
 # Time Zone Support
