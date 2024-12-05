@@ -162,7 +162,7 @@ The following table compares throughput, latency, and plan cache hit ratio betwe
 | Plan cache hit ratio (%) | 56.89% | 87.51% | +53.82% |
 | Plan cache memory usage (MiB) | 95.3 | 70.2 | -26.34% |
 
-#### Key Benefits
+#### Key benefits
 
 The instance plan cache demonstrates significant performance improvements over the baseline configuration:
 
