@@ -241,6 +241,7 @@
       - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
   - [Chat2Query (Beta) in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)
+  - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
 - Vector Search (Beta)
   - [Overview](/tidb-cloud/vector-search-overview.md)
   - Get Started
