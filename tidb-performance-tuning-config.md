@@ -469,7 +469,7 @@ SET GLOBAL tidb_opt_distinct_agg_push_down = ON;
 
 ### Mitigate MVCC version accumulation using in-memory engine
 
-Excessive MVCC versions can cause performance bottlenecks, particularly in high read/write areas or due to issues with garbage collection and compaction. You can use the [in-memory engine](/tikv-in-memory-engine.md) introduced in v8.5.0 to mitigate this issue. To enable it, add the following configuration to your TiKV configuration file.
+Excessive MVCC versions can cause performance bottlenecks, particularly in high read/write areas or due to issues with garbage collection and compaction. You can use the in-memory engine introduced in v8.5.0 to mitigate this issue. To enable it, add the following configuration to your TiKV configuration file.
 
 > **Note:**
 >
