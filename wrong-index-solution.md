@@ -7,13 +7,13 @@ summary: Learn how to solve the wrong index issue.
 
 If you find that the execution speed of some query does not reach the expectation, the optimizer might choose the wrong index to run the query.
 
-There are multiple reason why the optimizer might choose a different index than expected:
+There are multiple reasons why the optimizer might choose an unexpected index:
 
-1. Statistics not being up to date
-2. The statistics not matching the data closely
-3. The calculated cost being wrong
-4. Engine selection
-5. Function pushdown limitations
+- **Outdated statistics**: the optimizer relies on statistics to estimate query costs. If the statistics are outdated, the optimizer might make suboptimal choices.
+- **Statistics mismatch**: even if statistics are current, they might not accurately reflect the data distribution, leading to incorrect cost estimations.
+- **Incorrect cost calculation**: the optimizer might miscalculate the cost of using an index due to complex query structures or data distribution.
+- **Engine selection**: in some cases, the optimizer might select a storage engine that is not optimal for the query.
+- **Function pushdown limitations**: certain functions or operations might not be pushed down to storage engines, potentially affecting query performance.
 
 ## Statistics
 
@@ -37,29 +37,27 @@ Apart from the aforementioned situations, the wrong index issue might also be ca
 
 ## Statistics mismatch
 
-If the data is very skewed then the statistics might not reflect this. If this is the case then it might help to try the options of [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) to improve how well the statistics match the index.
+When data distribution is highly skewed, the statistics might not accurately reflect the actual data. In such cases, try configuring the options of the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement might help improve the accuracy of statistics and better match the index.
 
-An examples of this would be an index on a table with orders with an index on `customer_id`. And then having more than 50% of the orders with the same `customer_id`.
+For example, suppose you have an `orders` table with an index on the `customer_id` column, and more than 50% of the orders share the same `customer_id`. In this case, the statistics might not represent the data distribution well, affecting query performance.
 
 ## Cost information
 
-The [`EXPLAIN`](/sql-statements/sql-statement-explain.md) and [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) can show cost information with the `FORMAT=verbose` option. This can help to see the cost difference between two different execution paths.
+To view detailed information on execution costs, you can execute the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) and [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) statements with the `FORMAT=verbose` option. According to the information, you can see cost differences between different execution paths.
 
 ## Engine selection
 
-TiDB might have the option to use TiKV or TiFlash to access a table. By using engine isolation different engines can be tried out for the same query.
+By default, TiDB chooses TiKV or TiFlash for table access based on cost estimation. You can experiment with different engines for the same query by applying engine isolation.
 
-See [Engine isolation](/tiflash/use-tidb-to-read-tiflash.md#engine-isolation)
+For more information, see [Engine isolation](/tiflash/use-tidb-to-read-tiflash.md#engine-isolation).
 
 ## Function pushdown
 
-Functions be pushed down to storage engines if they are supported for the storage engine. Some functions can't be pushed down and this might limit the available execution plans.
+To enhance query performance, TiDB can push down certain functions to the TiKV or TiFlash storage engine for execution. However, some functions are not supported for pushdown, which might limit available execution plans and potentially affect query performance.
 
-Note that there is a blocklist of expression pushdown and optimization rules.
+For expressions that are supported for pushdown, see [TiKV supported oushdown calculations](/functions-and-operators/expressions-pushed-down.md) and [TiFlash supported pushdown calculations](/tiflash/tiflash-supported-pushdown-calculations.md). 
 
-- [TiKV Supported Pushdown Calculations](/functions-and-operators/expressions-pushed-down.md)
-- [TiFlash Supported Pushdown Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
-- [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
+Note that you can also disable the pushdown of specific expressions. For more information, see [Blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md).
 
 ## See also
 
