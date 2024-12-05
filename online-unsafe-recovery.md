@@ -47,7 +47,7 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 > **Note:**
 >
 > - Make sure that **all** unrecoverable TiKV and TiFlash nodes are specified in the preceding command at once. Omitting any unrecoverable nodes might cause the recovery process to be blocked.
-> - If you have already performed Online Unsafe Recovery within a short period (such as within a day), make sure that the subsequent execution of this command still include the previously processed TiKV and TiFlash nodes.
+> - If you have already performed Online Unsafe Recovery within a short period (such as within a day), make sure that the subsequent executions of this command still include the previously processed TiKV and TiFlash nodes.
 
 To specify the longest allowable duration of a recovery task, use the `--timeout <seconds>` option. If this option is not specified, the longest duration is 5 minutes by default. When the timeout occurs, the recovery is interrupted and returns an error.
 
