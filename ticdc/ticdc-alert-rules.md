@@ -143,15 +143,15 @@ Warning alerts are a reminder for an issue or error.
 
     Collect TiCDC monitoring metrics and TiKV logs to locate the root cause.
 
-### `ticdc_sink_mysql_execution_error`
+### `ticdc_sink_execution_error`
 
 - Alert rule:
 
-    `changes(ticdc_sink_mysql_execution_error[1m]) > 0`
+    `changes(ticdc_sink_execution_error[1m]) > 0`
 
 - Description:
 
-    An error occurs when a replication task writes data to the downstream MySQL.
+    An error occurs when a replication task writes data to the downstream.
 
 - Solution:
 
