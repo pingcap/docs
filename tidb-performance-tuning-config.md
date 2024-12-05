@@ -65,15 +65,15 @@ The following table outlines the impact of specific system variable configuratio
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)| For the read-committed isolation level, enabling this variable avoids the latency and cost of getting the global timestamp and optimizes transaction-level read latency. | This feature is incompatible with the Repeatable Read isolation level. | 
 | [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)| Improve performance by skipping the commit timestamp fetch from the PD server. | This sacrifices linearizability in favor of performance. Only causal consistency is guaranteed. It is not suitable for scenarios requiring strict linearizability. |
 | [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)| Activate the PD Follower feature, allowing PD followers to process Region requests. This helps distribute load evenly across all PD servers and reduces CPU pressure on the PD leader. | This is an experimental feature. Test in non-production environments. |
-| [`tidb_opt_fix_control`](/optimizer-fix-controls.md#tidb_opt_fix_control) | Enable advanced query optimization strategies to improve performance through additional optimization rules and heuristics. | Test thoroughly in your environment, as performance improvements vary by workload. |
+| [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) | Enable advanced query optimization strategies to improve performance through additional optimization rules and heuristics. | Test thoroughly in your environment, as performance improvements vary by workload. |
 
 The following describes the optimizer control configurations that enable additional optimizations:
 
 - [`44262:ON`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720): Use [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access the partitioned table when the [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) are missing.
 - [`44389:ON`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720): For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, build more comprehensive scan ranges for `IndexRangeScan`.
 - [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730): To save memory, plan cache does not cache queries with parameters exceeding the specified number of this variable. Increase plan cache parameter limit from `200` to `10000` to make plan cache available for query with long in-lists.
-- [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v730): Plan cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
-- [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v730): The optimizer selects `IndexJoin` when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator.
+- [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v657-and-v730): Plan cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
+- [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v654-and-v730): The optimizer selects `IndexJoin` when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator.
 - [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810): The optimizer chooses index merge automatically if the optimizer can choose the single index scan method (other than full table scan) for a query plan.
 
 ### TiDB configurations
@@ -308,7 +308,7 @@ The following sections explain how to handle each of these cases. You need to ad
 
 #### Troubleshooting
 
-If your workload involves frequent small transactions or queries that frequently request timestamps, [TSO (Timestamp Oracle)](/glossary.md#tso) can become a performance bottleneck. To check if TSO wait time is impacting your system, check the [**Performance Overview > SQL Execute Time Overview**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview) panel. If TSO wait time constitutes a large portion of your SQL execution time, consider the following optimizations:
+If your workload involves frequent small transactions or queries that frequently request timestamps, [TSO (Timestamp Oracle)](/glossary.md#timestamp-oracle-tso) can become a performance bottleneck. To check if TSO wait time is impacting your system, check the [**Performance Overview > SQL Execute Time Overview**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview) panel. If TSO wait time constitutes a large portion of your SQL execution time, consider the following optimizations:
 
 - Use low-precision TSO (enable [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)) for read operations that do not need strict consistency. For more information, see [Solution 1: use low-precision TSO](#solution-1-low-precision-tso).
 - Enable [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml) to reduce TSO requests for batch operations
