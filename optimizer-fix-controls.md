@@ -82,5 +82,5 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
-- Currently, TiDB optimizer has limitations in deriving index ranges for complex conjunctive conditions where each conjunct comprises a list of ranges. This  be addressed by applying general range intersection.
-- Enabling this fix control removes the limitation, allowing the optimizer to handle complex range intersections. However, for conditions with a large number of conjuncts (more than 10), there is a slight risk of increased optimization time.
+- Currently, TiDB optimizer has limitations in deriving index ranges for complex conjunctive conditions where each conjunct comprises a list of ranges. This can be addressed by applying general range intersection.
+- You can remove this limitation by enabling this fix control, allowing the optimizer to handle complex range intersections. However, for conditions with a large number of conjuncts (more than 10), there is a slight risk of increased optimization time.
