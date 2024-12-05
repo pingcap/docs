@@ -266,6 +266,7 @@
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
+    - [Configure TiDB for Optimal Performance](/tidb-performance-tuning-config.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
     - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
