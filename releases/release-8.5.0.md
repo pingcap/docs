@@ -48,7 +48,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/partitioned-table#global-indexes">Global indexes for partitioned tables</a> (GA in v8.4.0)</td>
-    <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned columns, and remove the restriction that a unique key must contain the partition key. This feature extends the usage scenarios of TiDB partitioned tables, and avoids some of the application modification work required for data migration.</td>
+    <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned columns, and remove the restriction that a unique key must contain the partition key. This feature extends the usage scenarios of TiDB partitioned tables, improves the performance of partitioned tables, and reduces resource consumption in certain query scenarios.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_projection_push_down-new-in-v610">Default pushdown of the <code>Projection</code> operator to the storage engine</a> (introduced in v8.3.0) </td>
