@@ -3,7 +3,7 @@ title: Set Up Self-Hosted Kafka Private Link Service in AWS
 summary: This document explains how to set up Private Link service for self-hosted Kafka in AWS and how to make it work with TiDB Cloud.
 ---
 
-# Set up Self-Hosted Kafka Private Link Service in AWS
+# Set Up Self-Hosted Kafka Private Link Service in AWS
 
 This document describes how to set up Private Link service for self-hosted Kafka in AWS, and how to make it work with TiDB Cloud.
 
@@ -12,7 +12,7 @@ The mechanism works as follows:
 1. TiDB Cloud VPC connects to Kafka VPC through private endpoints.
 2. Kafka clients need to communicate directly to all Kafka brokers.
 3. Each Kafka broker is mapped to a unique port within the TiDB Cloud VPC.
-4. Leverage the Kafka bootstrap mechanism and AWS cloud resources to achieve the mapping.
+4. Leverage the Kafka bootstrap mechanism and AWS resources to achieve the mapping.
 
 The following diagram shows the mechanism. 
 
