@@ -377,7 +377,7 @@ admission-min-process-ms = 0
 
 ### Optimize chunk size for workload characteristics
 
-The [`tidb_max_chunk_size`](system-variables.md#tidb_max_chunk_size) system variable sets the maximum number of rows in a chunk during the execution process. Adjusting this value based on your workload can improve performance.
+The [`tidb_max_chunk_size`](/system-variables.md#tidb_max_chunk_size) system variable sets the maximum number of rows in a chunk during the execution process. Adjusting this value based on your workload can improve performance.
 
 - For OLTP workloads with large concurrency and small transactions:
 
