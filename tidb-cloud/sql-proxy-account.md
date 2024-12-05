@@ -11,9 +11,9 @@ SQL proxy accounts provide a secure, token-based authentication mechanism for ac
 
 The key benefits of SQL proxy accounts are as follows:
 
-- Enhanced Security: mitigates risks associated with static credentials by using JWT tokens.
-- Streamlined Access: restricts access specifically to the SQL Editor and Data Service, ensuring precise control.
-- Ease of Management: simplifies authentication for developers and administrators working with TiDB Cloud.
+- Enhanced security: mitigates risks associated with static credentials by using JWT tokens.
+- Streamlined access: restricts access specifically to the SQL Editor and Data Service, ensuring precise control.
+- Ease of management: simplifies authentication for developers and administrators working with TiDB Cloud.
 
 ## Identify the SQL proxy account
 
@@ -74,13 +74,13 @@ Since SQL proxy accounts are JWT token-based, it is not necessary to manage pass
 
 The SQL proxy account's role depends on the TiDB Cloud user's IAM role:
 
-- Organization Level:
+- Organization level:
     - Organization Owner: role_admin
     - Organization Billing Admin: No Proxy account
     - Organization Member: No Proxy account
     - Organization Console Audit admin: No Proxy account
 
-- Project Level:
+- Project level:
     - Project Owner: role_admin
     - Project Data Access Read-Write: role_readwrite
     - Project Data Access Read-Only: role_readonly
