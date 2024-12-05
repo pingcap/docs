@@ -207,7 +207,7 @@ Instance plan cache provides better memory efficiency than session-level plan ca
 
 In scenarios with multiple connections and complex queries, session-level plan cache would require significantly more memory to achieve similar hit ratios, making instance plan cache the more efficient choice.
 
-![instance-plan-cache](/media/key-settings/instance-plan-cache.png)
+![Instance plan cache: Queries Using Plan Cache OPS](/media/performance/instance-plan-cache.png)
 
 #### Test workload
 
@@ -249,14 +249,14 @@ The following table compares throughput (operations per second) between the base
 
 Titan is enabled by default starting from v7.6.0 and the default `min-blob-size` of Titan in TiDB v8.4.0 is `32KiB`. The baseline configuration uses a record size of `31KiB` to ensure data is stored in RocksDB. In contrast, for the key settings configuration, set `min-blob-size` to `1KiB`, causing data to be stored in Titan.
 
-The performance improvement observed in the Key Settings is primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the following figures:
+The performance improvement observed in the key settings is primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the following figures:
 
 - Baseline: The total throughput of RocksDB compaction exceeds 1 GiB/s, with peaks over 3 GiB/s.
-- Key Settings: The peak throughput of RocksDB compaction remains below 100 MiB/s.
+- Key settings: The peak throughput of RocksDB compaction remains below 100 MiB/s.
 
-This significant reduction in compaction overhead contributes to the overall throughput improvement seen in the Key Settings configuration.
+This significant reduction in compaction overhead contributes to the overall throughput improvement seen in the key settings configuration.
 
-![titan-rocksdb-compactions](/media/key-settings/titan-rocksdb-compactions.png)
+![Titan RocksDB compaction:](/media/performance/titan-rocksdb-compactions.png)
 
 #### Test workload
 
@@ -412,9 +412,9 @@ You can set the transaction mode using the [`tidb_txn_mode`](/system-variables.m
     - Suitable for general workloads with potential write conflicts.
     - Provides stronger consistency guarantees.
 
-    ```sql
-    SET SESSION tidb_txn_mode = "pessimistic";
-    ```
+  ```sql
+  SET SESSION tidb_txn_mode = "pessimistic";
+  ```
 
 - [Optimistic transaction mode](/optimistic-transaction.md):
 
@@ -422,9 +422,9 @@ You can set the transaction mode using the [`tidb_txn_mode`](/system-variables.m
     - Better performance for multi-statement transactions.
     - Example: `BEGIN; INSERT...; INSERT...; COMMIT;`.
 
-    ```sql
-    SET SESSION tidb_txn_mode = "optimistic";
-    ```
+  ```sql
+  SET SESSION tidb_txn_mode = "optimistic";
+  ```
 
 #### DML types
 
