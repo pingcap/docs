@@ -288,7 +288,7 @@ The following features are planned for deprecation in future versions:
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
 
-        - Add retries for DM-worker to connect to DM-master when the DM cluster starts up [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Add retries for DM-worker to connect to DM-master during DM cluster startup [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
 
 ## Bug fixes
 
