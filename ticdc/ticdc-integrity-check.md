@@ -73,7 +73,7 @@ TiCDC then encodes the data into a specific format and sends it to Kafka. After 
 
 Starting from v8.4.0, TiDB and TiCDC introduce Checksum V2 to address issues of Checksum V1 in verifying old values in Update or Delete events after `ADD COLUMN` or `DROP COLUMN` operations.
 
-For clusters created in v8.4.0 or later, or clusters upgraded to v8.4.0, TiDB uses Checksum V2 by default when single-row data checksum verification is enabled. TiCDC supports handling both Checksum V1 and V2. This change only affects TiDB and TiCDC internal implementation and does not affect checksum calculation methods for downstream Kafka consumers.
+For clusters created in v8.4.0 or later, or clusters upgraded to v8.4.0 or later, TiDB uses Checksum V2 by default when single-row data checksum verification is enabled. TiCDC supports handling both Checksum V1 and V2. This change only affects TiDB and TiCDC internal implementation and does not affect checksum calculation methods for downstream Kafka consumers.
 
 ## Algorithm for checksum calculation
 

@@ -361,7 +361,7 @@ The output:
 
 ```
 --------------
-mysql  Ver 8.4.0 for Linux on x86_64 (MySQL Community Server - GPL)
+mysql  Ver 8.5.0 for Linux on x86_64 (MySQL Community Server - GPL)
 
 Connection id:       1
 Current database:    test
