@@ -418,10 +418,10 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.tableChanges.table.columns.scale | Number | The scale of the column. |
 | payload.tableChanges.table.columns.position | Number | The position of the column. |
 | payload.tableChanges.table.columns.optional | Boolean | Indicates whether the column is not null. |
-| schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |
-| schema.name    | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Envelope"` format. |
-| schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
-| schema.type    | String  | The data type of the field.       
+| schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the column of table changes.   |
+| schema.name     | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.SchemaChangeValue"` format. |
+| schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| schema.type     | String  | The data type of the field. |      
 
 ### DML event
 
@@ -431,21 +431,21 @@ TiCDC encodes a DML event into a Kafka message, with both the key and value enco
 
 ```json
 {
-    "payload": {
-        "a": 4
-    },
-    "schema": {
-        "fields": [
-            {
-                "field": "a",
-                "optional": true,
-                "type": "int32"
-            }
-        ],
-        "name": "default.test.t2.Key",
-        "optional": false,
-        "type": "struct"
-    }
+	"payload": {
+		"tiny": 1
+	},
+	"schema": {
+		"fields": [
+		{
+			"field":"tiny",
+			"optional":true,
+			"type":"int16"
+		}
+		],
+		"name": "test_cluster.test.table1.Key",
+		"optional": false,
+		"type":"struct"
+	}
 }
 ```
 
@@ -463,84 +463,102 @@ The fields in the key only include primary key or unique index columns. The fiel
 
 ```json
 {
-    "payload":{
-        "ts_ms":1707103832957,
-        "transaction":null,
-        "op":"c",
-        "before":null,
-        "after":{
-            "a":4,
-            "b":2
-        },
-        "source":{
-            "version":"2.4.0.Final",
-            "connector":"TiCDC",
-            "name":"default",
-            "ts_ms":1707103832263,
-            "snapshot":"false",
-            "db":"test",
-            "table":"t2",
-            "server_id":0,
-            "gtid":null,
-            "file":"",
-            "pos":0,
-            "row":0,
-            "thread":0,
-            "query":null,
-            "commit_ts":447507027004751877,
-            "cluster_id":"default"
-        }
-    },
-    "schema":{
-        "type":"struct",
-        "optional":false,
-        "name":"default.test.t2.Envelope",
-        "version":1,
-        "fields":{
-            {
-                "type":"struct",
-                "optional":true,
-                "name":"default.test.t2.Value",
-                "field":"before",
-                "fields":[
-                    {
-                        "type":"int32",
-                        "optional":false,
-                        "field":"a"
-                    },
-                    {
-                        "type":"int32",
-                        "optional":true,
-                        "field":"b"
-                    }
-                ]
-            },
-            {
-                "type":"struct",
-                "optional":true,
-                "name":"default.test.t2.Value",
-                "field":"after",
-                "fields":[
-                    {
-                        "type":"int32",
-                        "optional":false,
-                        "field":"a"
-                    },
-                    {
-                        "type":"int32",
-                        "optional":true,
-                        "field":"b"
-                    }
-                ]
-            },
-            {
-                "type":"string",
-                "optional":false,
-                "field":"op"
-            },
-            ...
-        }
-    }
+	"payload": {
+		"source": {
+			"version": "2.4.0.Final",
+			"connector": "TiCDC",
+			"name": "test_cluster",
+			"ts_ms": 0,
+			"snapshot": "false",
+			"db": "test",
+			"table": "table1",
+			"server_id": 0,
+			"gtid": null,
+			"file": "",
+			"pos": 0,
+			"row": 0,
+			"thread": 0,
+			"query": null,
+			"commit_ts": 1,
+			"cluster_id": "test_cluster"
+		},
+		"ts_ms": 1701326309000,
+		"transaction": null,
+		"op": "u",
+		"before": { "tiny": 2 },
+		"after": { "tiny": 1 }
+	},
+	"schema": {
+		"type": "struct",
+		"optional": false,
+		"name": "test_cluster.test.table1.Envelope",
+		"version": 1,
+		"fields": [
+			{
+				"type": "struct",
+				"optional": true,
+				"name": "test_cluster.test.table1.Value",
+				"field": "before",
+				"fields": [{ "type": "int16", "optional": true, "field": "tiny" }]
+			},
+			{
+				"type": "struct",
+				"optional": true,
+				"name": "test_cluster.test.table1.Value",
+				"field": "after",
+				"fields": [{ "type": "int16", "optional": true, "field": "tiny" }]
+			},
+			{
+				"type": "struct",
+				"fields": [
+					{ "type": "string", "optional": false, "field": "version" },
+					{ "type": "string", "optional": false, "field": "connector" },
+					{ "type": "string", "optional": false, "field": "name" },
+					{ "type": "int64", "optional": false, "field": "ts_ms" },
+					{
+						"type": "string",
+						"optional": true,
+						"name": "io.debezium.data.Enum",
+						"version": 1,
+						"parameters": { "allowed": "true,last,false,incremental" },
+						"default": "false",
+						"field": "snapshot"
+					},
+					{ "type": "string", "optional": false, "field": "db" },
+					{ "type": "string", "optional": true, "field": "sequence" },
+					{ "type": "string", "optional": true, "field": "table" },
+					{ "type": "int64", "optional": false, "field": "server_id" },
+					{ "type": "string", "optional": true, "field": "gtid" },
+					{ "type": "string", "optional": false, "field": "file" },
+					{ "type": "int64", "optional": false, "field": "pos" },
+					{ "type": "int32", "optional": false, "field": "row" },
+					{ "type": "int64", "optional": true, "field": "thread" },
+					{ "type": "string", "optional": true, "field": "query" }
+				],
+				"optional": false,
+				"name": "io.debezium.connector.mysql.Source",
+				"field": "source"
+			},
+			{ "type": "string", "optional": false, "field": "op" },
+			{ "type": "int64", "optional": true, "field": "ts_ms" },
+			{
+				"type": "struct",
+				"fields": [
+					{ "type": "string", "optional": false, "field": "id" },
+					{ "type": "int64", "optional": false, "field": "total_order" },
+					{
+						"type": "int64",
+						"optional": false,
+						"field": "data_collection_order"
+					}
+				],
+				"optional": true,
+				"name": "event.block",
+				"version": 1,
+				"field": "transaction"
+			}
+		]
+	}
 }
 ```
 
@@ -562,6 +580,202 @@ The key fields of the preceding JSON data are explained as follows:
 
 ### WATERMARK
 
+TiCDC encodes a Checkpoint event into a Kafka message, with both the key and value encoded in the Debezium format.
+
+#### Key format
+
+```json
+{
+	"payload": {},
+	"schema": {
+		"fields": [],
+		"optional": false,
+		"name": "test_cluster.watermark.Key",
+		"type": "struct"
+	}
+}
+```
+
+The fields are explained as follows:
+
+| Field            | Type    | Description                                                                 |
+|:------------------|:--------|:----------------------------------------------------------------------------|
+| `schema.name`    | String  | The name of the schema, in the `"{cluster-name}.watermark.Key"` format. |
+
+#### Value format
+
+```json
+{
+	"payload": {
+		"source": {
+			"version": "2.4.0.Final",
+			"connector": "TiCDC",
+			"name": "test_cluster",
+			"ts_ms": 0,
+			"snapshot": "false",
+			"db": "",
+			"table": "",
+			"server_id": 0,
+			"gtid": null,
+			"file": "",
+			"pos": 0,
+			"row": 0,
+			"thread": 0,
+			"query": null,
+			"commit_ts": 3,
+			"cluster_id": "test_cluster"
+		},
+		"op": "m",
+		"ts_ms": 1701326309000,
+		"transaction": null
+	},
+	"schema": {
+		"type": "struct",
+		"optional": false,
+		"name": "test_cluster.watermark.Envelope",
+		"version": 1,
+		"fields": [
+			{
+				"type": "struct",
+				"fields": [
+					{
+						"type": "string",
+						"optional": false,
+						"field": "version"
+					},
+					{
+						"type": "string",
+						"optional": false,
+						"field": "connector"
+					},
+					{
+						"type": "string",
+						"optional": false,
+						"field": "name"
+					},
+					{
+						"type": "int64",
+						"optional": false,
+						"field": "ts_ms"
+					},
+					{
+						"type": "string",
+						"optional": true,
+						"name": "io.debezium.data.Enum",
+						"version": 1,
+						"parameters": {
+							"allowed": "true,last,false,incremental"
+						},
+						"default": "false",
+						"field": "snapshot"
+					},
+					{
+						"type": "string",
+						"optional": false,
+						"field": "db"
+					},
+					{
+						"type": "string",
+						"optional": true,
+						"field": "sequence"
+					},
+					{
+						"type": "string",
+						"optional": true,
+						"field": "table"
+					},
+					{
+						"type": "int64",
+						"optional": false,
+						"field": "server_id"
+					},
+					{
+						"type": "string",
+						"optional": true,
+						"field": "gtid"
+					},
+					{
+						"type": "string",
+						"optional": false,
+						"field": "file"
+					},
+					{
+						"type": "int64",
+						"optional": false,
+						"field": "pos"
+					},
+					{
+						"type": "int32",
+						"optional": false,
+						"field": "row"
+					},
+					{
+						"type": "int64",
+						"optional": true,
+						"field": "thread"
+					},
+					{
+						"type": "string",
+						"optional": true,
+						"field": "query"
+					}
+				],
+				"optional": false,
+				"name": "io.debezium.connector.mysql.Source",
+				"field": "source"
+			},
+			{
+				"type": "string",
+				"optional": false,
+				"field": "op"
+			},
+			{
+				"type": "int64",
+				"optional": true,
+				"field": "ts_ms"
+			},
+			{
+				"type": "struct",
+				"fields": [
+					{
+						"type": "string",
+						"optional": false,
+						"field": "id"
+					},
+					{
+						"type": "int64",
+						"optional": false,
+						"field": "total_order"
+					},
+					{
+						"type": "int64",
+						"optional": false,
+						"field": "data_collection_order"
+					}
+				],
+				"optional": true,
+				"name": "event.block",
+				"version": 1,
+				"field": "transaction"
+			}
+		]
+	}
+}
+```
+
+The key fields of the preceding JSON data are explained as follows:
+
+| Field      | Type   | Description                                            |
+|:----------|:-------|:-------------------------------------------------------|
+| payload.op        | String | The type of the change event. `"m"` indicates an watermark event.  |
+| payload.ts_ms     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
+| payload.source.commit_ts     | Number  | The `CommitTs` identifier when TiCDC generates this message.       |
+| payload.source.db     | String   | The name of the database where the event occurs.    |
+| payload.source.table     | String  |  The name of the table where the event occurs.   |
+| schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |
+| schema.name    | String  | The name of the schema, in the `"{cluster-name}.watermark.Envelope"` format. |
+| schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| schema.type    | String  | The data type of the field.          |
 
 ### Data type mapping
 
