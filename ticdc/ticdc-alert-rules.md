@@ -75,9 +75,11 @@ Warning alerts are a reminder for an issue or error.
 ### `cdc_no_owner`
 
 - Alert rule:
+
     `sum(rate(ticdc_owner_ownership_counter[240s])) < 0.5`
 
 - Description:
+
     There is no owner in the TiCDC cluster for more than 10 minutes.
 
 - Solution:
@@ -91,6 +93,7 @@ Warning alerts are a reminder for an issue or error.
     `(max_over_time(ticdc_owner_status[1m]) == 1 or max_over_time(ticdc_owner_status[1m]) == 6) > 0`
 
 - Description:
+
     A replication task encounters an error.
 
 - Solution:
