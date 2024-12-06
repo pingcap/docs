@@ -59,7 +59,7 @@ If the command returns `Failed`, PD Control has failed to register the task to P
 - `invalid input store x doesn't exist`: The specified store ID does not exist.
 - `invalid input store x is up and connected`: The specified store with the ID is still healthy and should not be recovered.
 
-If PD losses store information for unrecoverable TiKV nodes after disaster recovery operations such as [`pd-recover`](/pd-recover.md), which makes the specific store IDs unknown, you can use the `--auto-detect` mode. This mode enables PD to automatically remove replicas from TiKV nodes that are either unregistered or previously registered but forcibly deleted.
+If PD loses store information for unrecoverable TiKV nodes after disaster recovery operations such as [`pd-recover`](/pd-recover.md), making the specific store IDs unknown, you can use the `--auto-detect` mode. This mode enables PD to automatically remove replicas from TiKV nodes that are either unregistered or previously registered but forcibly deleted.
 
 ```bash
 pd-ctl -u <pd_addr> unsafe remove-failed-stores --auto-detect
