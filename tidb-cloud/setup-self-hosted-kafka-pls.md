@@ -166,35 +166,35 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 
 - Broker 1 in subnet `broker-usw2-az1`
 
-   - Name: `broker-node1`
-   - Amazon Machine Image: `Amazon linux`
-   - Instance Type: `t2.large`
-   - Key pair: reuse `kafka-vpc-key-pair`
-   - Network settings
+    - Name: `broker-node1`
+    - Amazon Machine Image: `Amazon linux`
+    - Instance Type: `t2.large`
+    - Key pair: reuse `kafka-vpc-key-pair`
+    - Network settings
 
-       - VPC: `Kafka VPC`
-       - Subnet: `broker-usw2-az1`
-       - Auto-assign public IP: `Disable`
-       - Security Group: create a new security group to allow all TCP from Kafka VPC. You can narrow the rule for safety in the production environment.
-           - Protocol: `TCP`
-           - Port range: `0 - 65535`
-           - Source: `10.0.0.0/16`
+        - VPC: `Kafka VPC`
+        - Subnet: `broker-usw2-az1`
+        - Auto-assign public IP: `Disable`
+        - Security Group: create a new security group to allow all TCP from Kafka VPC. You can narrow the rule for safety in the production environment.
+            - Protocol: `TCP`
+            - Port range: `0 - 65535`
+            - Source: `10.0.0.0/16`
 
 - Broker 2 in subnet `broker-usw2-az2`
 
-   - Name: `broker-node2`
-   - Amazon Machine Image: `Amazon linux`
-   - Instance Type: `t2.large`
-   - Key pair: reuse `kafka-vpc-key-pair`
-   - Network settings
+    - Name: `broker-node2`
+    - Amazon Machine Image: `Amazon linux`
+    - Instance Type: `t2.large`
+    - Key pair: reuse `kafka-vpc-key-pair`
+    - Network settings
 
-       - VPC: `Kafka VPC`
-       - Subnet: `broker-usw2-az2`
-       - Auto-assign public IP: `Disable`
-       - Security Group: create a new security group to allow all TCP from Kafka VPC. You can narrow the rule for safety in the production environment.
-           - Protocol: `TCP`
-           - Port range: `0 - 65535`
-           - Source: `10.0.0.0/16`
+        - VPC: `Kafka VPC`
+        - Subnet: `broker-usw2-az2`
+        - Auto-assign public IP: `Disable`
+        - Security Group: create a new security group to allow all TCP from Kafka VPC. You can narrow the rule for safety in the production environment.
+            - Protocol: `TCP`
+            - Port range: `0 - 65535`
+            - Source: `10.0.0.0/16`
 
 - Broker 3 in subnet `broker-usw2-az3`
 
@@ -216,46 +216,49 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 
 1. Go to the detail page of bastion node. Get the **Public IPv4 address**. Use SSH to log in to the node with previous download `kafka-vpc-key-pair.pem`.
 
-```shell
-chmod 400 kafka-vpc-key-pair.pem
-ssh -i "kafka-vpc-key-pair.pem" ec2-user@{bastion_public_ip} # replace {bastion_public_ip} to your bastion's ip, for example 54.186.149.187
-scp -i "kafka-vpc-key-pair.pem" kafka-vpc-key-pair.pem ec2-user@{bastion_public_ip}:~/
-```
+    ```shell
+    chmod 400 kafka-vpc-key-pair.pem
+    ssh -i "kafka-vpc-key-pair.pem" ec2-user@{bastion_public_ip} # replace {bastion_public_ip} to your bastion's ip, for example 54.186.149.187
+    scp -i "kafka-vpc-key-pair.pem" kafka-vpc-key-pair.pem ec2-user@{bastion_public_ip}:~/
+    ```
 
 2. Download binaries.
 
-```shell
-# Download kafka & openjdk, decompress. PS: your can choose the binary version as you like
-wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
-tar -zxf kafka_2.13-3.7.1.tgz
-wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
-tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
-```
+    ```shell
+    # Download kafka & openjdk, decompress. PS: your can choose the binary version as you like
+    wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
+    tar -zxf kafka_2.13-3.7.1.tgz
+    wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
+    tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
+    ```
+
 3. Copy binaries to every broker nodes.
 
-```shell
-# Replace {broker-node1-ip} to your broker-node1 ip
-scp -i "kafka-vpc-key-pair.pem" kafka_2.13-3.7.1.tgz ec2-user@{broker-node1-ip}:~/
-ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node1-ip} "tar -zxf kafka_2.13-3.7.1.tgz"
-scp -i "kafka-vpc-key-pair.pem" openjdk-22.0.2_linux-x64_bin.tar.gz ec2-user@{broker-node1-ip}:~/
-ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node1-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
+    ```shell
+    # Replace {broker-node1-ip} to your broker-node1 ip
+    scp -i "kafka-vpc-key-pair.pem" kafka_2.13-3.7.1.tgz ec2-user@{broker-node1-ip}:~/
+    ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node1-ip} "tar -zxf kafka_2.13-3.7.1.tgz"
+    scp -i "kafka-vpc-key-pair.pem" openjdk-22.0.2_linux-x64_bin.tar.gz ec2-user@{broker-node1-ip}:~/
+    ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node1-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
 
-# Replace {broker-node2-ip} to your broker-node2 ip
-scp -i "kafka-vpc-key-pair.pem" kafka_2.13-3.7.1.tgz ec2-user@{broker-node2-ip}:~/
-ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node2-ip} "tar -zxf kafka_2.13-3.7.1.tgz"
-scp -i "kafka-vpc-key-pair.pem" openjdk-22.0.2_linux-x64_bin.tar.gz ec2-user@{broker-node2-ip}:~/
-ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node2-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
+    # Replace {broker-node2-ip} to your broker-node2 ip
+    scp -i "kafka-vpc-key-pair.pem" kafka_2.13-3.7.1.tgz ec2-user@{broker-node2-ip}:~/
+    ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node2-ip} "tar -zxf kafka_2.13-3.7.1.tgz"
+    scp -i "kafka-vpc-key-pair.pem" openjdk-22.0.2_linux-x64_bin.tar.gz ec2-user@{broker-node2-ip}:~/
+    ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node2-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
 
-# Replace {broker-node3-ip} to your broker-node3 ip
-scp -i "kafka-vpc-key-pair.pem" kafka_2.13-3.7.1.tgz ec2-user@{broker-node3-ip}:~/
-ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
-scp -i "kafka-vpc-key-pair.pem" openjdk-22.0.2_linux-x64_bin.tar.gz ec2-user@{broker-node3-ip}:~/
-ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
-```
+    # Replace {broker-node3-ip} to your broker-node3 ip
+    scp -i "kafka-vpc-key-pair.pem" kafka_2.13-3.7.1.tgz ec2-user@{broker-node3-ip}:~/
+    ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
+    scp -i "kafka-vpc-key-pair.pem" openjdk-22.0.2_linux-x64_bin.tar.gz ec2-user@{broker-node3-ip}:~/
+    ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
+    ```
 
 ##### 2.4. Set up kafka nodes in every broker node
 
-###### 2.4.1 Set up a KRaft Kafka cluster with three nodes. Each node will act as a broker and controller roles. For every broker:
+###### 2.4.1 Set up a KRaft Kafka cluster with three nodes
+
+Each node will act as a broker and controller roles. Do the following for every broker:
 
 1. For `listeners` item, all three brokers are the same and act as broker and controller roles: 
 
@@ -279,7 +282,9 @@ ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf openjdk-22.
     - EXTERNAL: `39092`
     - EXTERNAL advertised listener ports range: `9093~9095`
 
-###### 2.4.2. Use SSH to log in to every broker node. Create a configuration file "~/config/server.properties" with the following content.  
+###### 2.4.2. Create a configuration file
+
+Use SSH to log in to every broker node. Create a configuration file `~/config/server.properties` with the following content.  
 
 ```properties
 # brokers in usw2-az1
@@ -341,7 +346,9 @@ listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:
 log.dirs=./data
 ```
 
-###### 2.4.3 Create a script, and execute it to start the kafka broker in every broker node.
+###### 2.4.3 Create and execute a script
+
+Create a script, and execute it to start the kafka broker in every broker node.
 
 ```shell
 #!/bin/bash
@@ -704,7 +711,7 @@ Do the following to set up the load balancer:
     - Name: `kafka-pl-service`
     - Load balancer type: `Network`
     - Load balancers: `kafka-lb`
-    - Included Availability Zones: `usw2-az1`,` usw2-az2`, `usw2-az3`
+    - Included Availability Zones: `usw2-az1`,`usw2-az2`, `usw2-az3`
     - Require acceptance for endpoint: `Acceptance required`
     - Enable private DNS name: `No`
 
