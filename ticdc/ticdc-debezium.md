@@ -599,7 +599,7 @@ The fields are explained as follows:
 
 | Field            | Type    | Description                                                                 |
 |:------------------|:--------|:----------------------------------------------------------------------------|
-| `schema.name`    | String  | The name of the schema, in the `"{cluster-name}.watermark.Key"` format. |
+| schema.name   | String  | The name of the schema, in the `"{cluster-name}.watermark.Key"` format. |
 
 #### Value format
 
