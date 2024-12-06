@@ -132,7 +132,8 @@ If you select **Private Link** or **Private Service Connect** as the network con
 
 1. After you click the button, TiDB Cloud creates the endpoint for **Private Link** or **Private Service Connect**. It might take several minutes.
 2. After the endpoint is created, you need to log in the cloud vendor console and accept the connection request.
-3. Go back your TiDB Cloud console to confirm that you have already accepted the connection request. TiDB Cloud will test the connection and navigate to the next page if everything works.
+3. Go back to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have already accepted the connection request. TiDB Cloud will test the connection and navigate to the next page if everything works.
+
 ## Step 3. Set the changefeed
 
 1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
