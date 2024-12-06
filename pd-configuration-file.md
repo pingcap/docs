@@ -286,7 +286,7 @@ Configuration items related to scheduling
 
 > **Warning:**
 >
-> Setting this configuration item to a value greater than 1 enables concurrent checks. This is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/tikv/ps/issues) on GitHub.
+> Setting this configuration item to a value greater than 1 enables concurrent checks. This is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/tikv/pd/issues) on GitHub.
 
 + Controls the number of concurrent operators created by the checker when inspecting the health state of a Region. Normally, you do not need to adjust this configuration.
 + Default value: `1`
