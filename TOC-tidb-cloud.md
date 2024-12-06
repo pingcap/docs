@@ -232,7 +232,7 @@
       - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
       - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
   - Reference
-      - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
+      - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/dedicated-external-storage.md)
       - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
       - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
       - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
