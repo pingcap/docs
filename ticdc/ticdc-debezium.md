@@ -395,7 +395,6 @@ The key fields of the preceding JSON data are explained as follows:
 
 | Field      | Type   | Description                                            |
 |:----------|:-------|:-------------------------------------------------------|
-| payload.op        | String | The type of the change event. `"c"` indicates an `INSERT` event, `"u"` indicates an `UPDATE` event, and `"d"` indicates a `DELETE` event.  |
 | payload.ts_ms     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
 | payload.ddl    | String   | The SQL of DDL event.     |
 | payload.databaseName     | String   | The name of the database where the event occurs.     |
@@ -453,11 +452,11 @@ The fields in the key only include primary key or unique index columns. The fiel
 
 | Field            | Type    | Description                                                                 |
 |:------------------|:--------|:----------------------------------------------------------------------------|
-| `payload`        | JSON    | The information about primary key or unique index columns. The key and value in each field represent the column name and its current value, respectively. |
-| `schema.fields`  | JSON    | The type information of each field in the payload, including the schema information of the row data before and after the change. |
-| `schema.name`    | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Key"` format. |
-| `schema.optional`| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
-| `schema.type`    | String  | The data type of the field.                                      |
+| payload       | JSON    | The information about primary key or unique index columns. The key and value in each field represent the column name and its current value, respectively. |
+| schema.fields  | JSON    | The type information of each field in the payload, including the schema information of the row data before and after the change. |
+| schema.name`   | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Key"` format. |
+| schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| schema.type    | String  | The data type of the field.                                      |
 
 #### Value format
 
@@ -805,7 +804,7 @@ The values of some columns may be different between Debezium and TiCDC:
 
 - Debezium FLOAT data convert "5.61" to "5.610000133514404", but TiCDC does not.
 
-- TiCDC print the wrong `flen` with the FLOAT tidb#57060
+- TiCDC print the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060)
 
 - Debezium converts charsetName to "utf8mb4" when column COLLATE is "utf8_unicode_ci" and CHARACTER is null, but TiCDC doesn't.
 
