@@ -320,6 +320,7 @@
     - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
     - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
     - [TiKV Follower Read](/follower-read.md)
+    - [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
     - [Tune Region Performance](/tune-region-performance.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
