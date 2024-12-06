@@ -71,7 +71,7 @@ Expose every Kafka broker to TiDB Cloud VPC with unique port by using the PSC po
 
 #### Deploy a new Kafka cluster
 
-##### 1. Set up the Kafka VPC
+**1. Set up the Kafka VPC**
 
 You need to create two subnets for Kafka VPC, one for Kafka brokers, and the other for bastion node to make it easy to configure the Kafka cluster.
 
@@ -85,7 +85,7 @@ Go to the [Google Cloud console](https://cloud.google.com/cloud-console), and na
     - `kafka-vpc-allow-custom`
     - `kafka-vpc-allow-ssh`
 
-##### 2. Provisioning VMs
+**2. Provisioning VMs**
 
 Go to the [VM instances](https://console.cloud.google.com/compute/instances) page to provision VMs:
 
@@ -129,7 +129,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     - Subnetwork: `brokers-subnet`
     - External IPv4 address: `None`
 
-##### 3. Prepare kafka runtime binaries
+**3. Prepare kafka runtime binaries**
 
 1. Go to the detail page of the bastion node. Click **SSH** to log in to the bastion node. Download binaries.
 
@@ -157,7 +157,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     gcloud compute ssh broker-node3 --zone=us-west1-c --command="tar -zxf kafka_2.13-3.7.1.tgz && tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
     ```
 
-##### 4. Configure Kafka brokers
+**4. Configure Kafka brokers**
 
 1. Set up a KRaft Kafka cluster with three nodes. Each node acts as a broker and controller roles. For every broker:
 
@@ -272,7 +272,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properties" &
     ```
 
-##### 5. Test the Kafka cluster in the bastion node
+**5. Test the Kafka cluster in the bastion node**
 
 1. Test the Kafka bootstrap.
 
@@ -403,7 +403,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
 
 Ensure that your Kafka cluster is deployed in the same region as the TiDB cluster. It is recommended that the zones are also in the same region to reduce cross-zone traffic.
 
-##### 1. Configure the EXTERNAL listener for brokers
+**1. Configure the EXTERNAL listener for brokers**
 
 The following configuration applies to a Kafka KRaft cluster. The ZK mode configuration is similar.
 
@@ -432,7 +432,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
 3. After you reconfigure all the brokers, restart your Kafka brokers one by one.
 
-##### 2. Test EXTERNAL listener settings in your internal network
+**2. Test EXTERNAL listener settings in your internal network**
 
 You can download Kafka and OpenJDK in your Kafka client node.
 

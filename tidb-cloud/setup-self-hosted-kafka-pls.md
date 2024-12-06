@@ -85,7 +85,7 @@ Create private subnets in the following AZs:
 
 Follow the following steps to create the Kafka VPC.
 
-##### 1.1. Create the Kafka VPC
+**1.1. Create the Kafka VPC**
 
 1. Go to [AWS Console->VPC dashboard](https://console.aws.amazon.com/vpcconsole/home?#vpcs:), and switch to the region in which you want to deploy Kafka.
 
@@ -97,7 +97,7 @@ Follow the following steps to create the Kafka VPC.
     4. Use default values for other options. Click **Create VPC**.
     5. On the VPC detail page, take note of the VPC ID, for example `vpc-01f50b790fa01dffa`.
 
-##### 1.2. Create private subnets in the Kafka VPC
+**1.2. Create private subnets in the Kafka VPC**
 
 1. Go to the [Subnets Listing page](https://console.aws.amazon.com/vpcconsole/home?#subnets:).
 2. Click **Create subnet**.
@@ -121,7 +121,7 @@ Follow the following steps to create the Kafka VPC.
 
 5. Click **Create subnet**. The **Subnets Listing** page is displayed.
 
-##### 1.3. Create the public subnet in the Kafka VPC
+**1.3. Create the public subnet in the Kafka VPC**
 
 1. Click **Create subnet**.
 2. Select **VPC ID** (`vpc-01f50b790fa01dffa`) that you note down before.
@@ -145,7 +145,7 @@ Follow the following steps to create the Kafka VPC.
 
 #### 2. Set up Kafka brokers
 
-##### 2.1. Create a bastion node
+**2.1. Create a bastion node**
 
 Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:). Create the bastion node in the bastion subnet.
 
@@ -160,7 +160,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
     - Auto-assign public IP: `Enable`
     - Security Group: create a new security group allow ssh from anywhere. PS: you may narrow the rule for safety in the production environment.
 
-##### 2.2. Create broker nodes
+**2.2. Create broker nodes**
 
 Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:). Create three broker nodes in broker subnet, one for each AZ.
 
@@ -212,7 +212,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
             - Port range: `0 - 65535`
             - Source: `10.0.0.0/16`
 
-##### 2.3. Prepare kafka runtime binaries
+**2.3. Prepare kafka runtime binaries**
 
 1. Go to the detail page of bastion node. Get the **Public IPv4 address**. Use SSH to log in to the node with previous download `kafka-vpc-key-pair.pem`.
 
@@ -254,9 +254,9 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
     ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
     ```
 
-##### 2.4. Set up kafka nodes in every broker node
+**2.4. Set up kafka nodes in every broker node**
 
-###### 2.4.1 Set up a KRaft Kafka cluster with three nodes
+**2.4.1 Set up a KRaft Kafka cluster with three nodes**
 
 Each node will act as a broker and controller roles. Do the following for every broker:
 
@@ -282,7 +282,7 @@ Each node will act as a broker and controller roles. Do the following for every 
     - EXTERNAL: `39092`
     - EXTERNAL advertised listener ports range: `9093~9095`
 
-###### 2.4.2. Create a configuration file
+**2.4.2. Create a configuration file**
 
 Use SSH to log in to every broker node. Create a configuration file `~/config/server.properties` with the following content.  
 
@@ -346,7 +346,7 @@ listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:
 log.dirs=./data
 ```
 
-###### 2.4.3 Create and execute a script
+**2.4.3 Create and execute a script**
 
 Create a script, and execute it to start the kafka broker in every broker node.
 
@@ -390,7 +390,7 @@ $KAFKA_STORAGE_CMD format -t "BRl69zcmTFmiPaoaANybiw" -c "$KAFKA_CONFIG_DIR/serv
 LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properties" &
 ```
 
-##### 2.5. Test the cluster setting in the bastion node
+**2.5. Test the cluster setting in the bastion node**
 
 Test the Kafka bootstrap.
 
@@ -708,6 +708,7 @@ Do the following to set up the load balancer:
 ### 2. Set up Private Link Service
 
 1. Go to [Endpoint service](https://console.aws.amazon.com/vpcconsole/home#EndpointServices:). Click **Create endpoint service** to create a Private Link service for the Kafka load balancer.
+
     - Name: `kafka-pl-service`
     - Load balancer type: `Network`
     - Load balancers: `kafka-lb`
