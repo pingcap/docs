@@ -84,7 +84,6 @@ Warning alerts are a reminder for an issue or error.
 
     Collect TiCDC logs to identify the root cause.
 
-
 ### `ticdc_changefeed_meet_error`
 
 - Alert rule:
