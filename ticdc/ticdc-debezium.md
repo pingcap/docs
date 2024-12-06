@@ -777,7 +777,9 @@ The key fields of the preceding JSON data are explained as follows:
 | schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | schema.type    | String  | The data type of the field.          |
 
-### Data type mapping
+### Changes in TiCDC Debezium
+
+#### Data type mapping
 
 The data format mapping in the TiCDC Debezium message basically follows the [Debezium data type mapping rules](https://debezium.io/documentation/reference/2.4/connectors/mysql.html#mysql-data-types), which is generally consistent with the native message of the Debezium Connector for MySQL. However, for some data types, the following differences exist between TiCDC Debezium and Debezium Connector messages:
 
@@ -786,3 +788,27 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 - For string-like data types, including Varchar, String, VarString, TinyBlob, MediumBlob, BLOB, and LongBlob, when the column has the BINARY flag, TiCDC encodes it as a String type after encoding it in Base64; when the column does not have the BINARY flag, TiCDC encodes it directly as a String type. The native Debezium Connector encodes it in different ways according to `binary.handling.mode`.
 
 - For the Decimal data type, including `DECIMAL` and `NUMERIC`, TiCDC uses the float64 type to represent it. The native Debezium Connector encodes it in float32 or float64 according to the different precision of the data type.
+
+- TiCDC converts REAL to FLOAT when setting sql_mode='REAL_AS_FLOAT'
+
+- TiCDC converts BOOLEAN to TINYINT(1)
+
+#### Different values display
+
+The values of some columns may be different between Debezium and TiCDC:
+
+- Be careful with [time zone](https://debezium.io/documentation/reference/3.0/connectors/mysql.html#mysql-temporal-types).
+
+- In TiCDC, BLOB, TEXT, GEOMETRY, or JSON column 'binaryRepresentation' can't have a default value
+
+- The defaultValueExpression of BIT may not be the same when the length of the default value is not equal to the column length
+
+- Debezium FLOAT data convert "5.61" to "5.610000133514404", but TiCDC does not.
+
+- TiCDC print the wrong `flen` with the FLOAT tidb#57060
+
+- Debezium converts charsetName to "utf8mb4" when column COLLATE is "utf8_unicode_ci" and CHARACTER is null, but TiCDC doesn't.
+
+- Debezium doesn't escape character, but TiCDC does. e.g. ENUM('c, 'd', 'g,''h')
+
+- TiCDC converts "TIME" default value '1000-00-00 01:00:00.000' to "1000-00-00", but Debezium doesn't.
