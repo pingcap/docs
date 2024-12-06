@@ -60,12 +60,12 @@ The fields in the key only include database name. The fields are explained as fo
 
 | Field            | Type    | Description                                                                 |
 |:------------------|:--------|:----------------------------------------------------------------------------|
-| `payload`        | JSON    | The information about database name. |
-| `schema.fields`  | JSON    | The type information of each field in the payload. |
-| `schema.name`    | String  | Constant value "io.debezium.connector.mysql.SchemaChangeKey" |
-| `schema.type`    | String  | The data type of the field.                                      |
-| `schema.optional`| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
-| `schema.version`    | String  | The schema version.                                 |
+| payload        | JSON    | The information about database name. |
+| schema.fields  | JSON    | The type information of each field in the payload. |
+| schema.name   | String  | Constant value "io.debezium.connector.mysql.SchemaChangeKey" |
+| schema.type    | String  | The data type of the field.                                      |
+| schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| schema.version   | String  | The schema version.                                 |
 
 
 #### Value format
