@@ -144,8 +144,8 @@ The client sends a SQL statement to the protocol layer of TiDB server. The proto
 To the right of the protocol layer is the optimizer of TiDB server, which is responsible for processing SQL statements. The process is as follows:
 
 1. SQL statement arrives at the SQL optimizer through the protocol layer and is first parsed into an Abstract Syntax Tree (AST).
-2. Pre-Process is primarily for Point Get, a simple, one table lookup through a Primary or Unique Key like `SELECT * FROM t WHERE pk_col = X` or `SELECT * FROM t WHERE uk_col IN (X,Y,Z)`. If it is a Point Get, the following-up optimization processes can be skipped, the next step jumps to the SQL Executor.
-3. After confirming that it is not a Point Get, the AST goes to the Logical Transformation, which rewrites the SQL logically based on certain rules.
+2. Pre-Process is primarily for [Point Get](/explain-indexes#point_get-and-batch_point_get), a simple, one table lookup through a Primary or Unique Key like `SELECT * FROM t WHERE pk_col = 1` or `SELECT * FROM t WHERE uk_col IN (1,2,3)`. If it is a `Point Get`, the following-up optimization processes can be skipped, the next step jumps to the SQL Executor.
+3. After confirming that it is not a `Point Get`, the AST goes to the Logical Transformation, which rewrites the SQL logically based on certain rules.
 4. The AST that has gone through Logical Transformation will undergo Cost-Based Optimization.
 5. During Cost-Based Optimization, the optimizer considers statistics to determine how to select specific operators and finally generates a physical execution plan.
 6. The generated physical execution plan is sent to the SQL Executor of the TiDB node for execution.
@@ -261,9 +261,9 @@ An SQL statement undergoes optimization primarily in the optimizer through three
 
 ### Pre-Processing
 
-The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using [`Point_Get`](https://docs.pingcap.com/tidb/stable/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](https://docs.pingcap.com/tidb/stable/explain-indexes#point_get-and-batch_point_get).
+The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get).
 
-`Point_Get` or `Batch_Point_Get` means using a primary or unique key, to directly read from TiKV, by exact key lookup. For example, when id column is the primary key of a [clustered index](/clustered-indexes.md) table, `Point_Get` is used to get the particular row. If a plan is identified as `Point_Get`, optimizer will skip the logical transformation and cost-based optimization, since the exact key read will be the best way to access the row. `Batch_Point_Get` will read a batch of exact key lookups, like `SELECT * FROM t WHERE id IN (4,62,81)`
+`Point_Get` or `Batch_Point_Get` means using a primary or unique key, to directly read from TiKV, by exact key lookup. If a plan is identified as `Point_Get`, optimizer will skip the logical transformation and cost-based optimization, since the exact key read will be the best way to access the row.
 
 Example:
 
