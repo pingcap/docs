@@ -199,6 +199,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740).
 
+* Memory control on statistics cache is generally available [#issue]() @[hawkingrei](https://github.com/hawkingrei)
+
+    TiDB instances cache table statistics to accelerate execution plan generation, in order to improve SQL performance. Starting from v7.4.0, memory control on statistics cache becomes generally avaiable. By configuring system variable [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610), TiDB is able to limit the memory usage of the statistics cache. When the cache reaches the upper bound, TiDB automatically evicts inactive cache entries, helping to control instance memory usage and improve stability.
+    
+    For more information, see [documentation](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610).
+
 ### SQL
 
 * TiDB supports partition type management [#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss)
