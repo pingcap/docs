@@ -92,8 +92,6 @@ SQL statements are normalized as templates, where literals and bind variables ar
 
 ### Slow Queries Panel Default Display
 
-In the TiDB Dashboard, we can find the Slow Query panel, which displays all SQL statements whose execution time exceeds the time threshold set by the system variable tidb_slow_log_threshold (default 300 milliseconds). 
-
 On Slow Queries panel, we can find:
 
 1. The slowest SQL queries.
@@ -141,9 +139,9 @@ This guide focuses on providing actionable advice for beginners looking to optim
 
 ## Query Processing Workflow
 
-The client sends a SQL statement to the protocol layer of TiDB server. The protocol layer is responsible for handling the connection between TiDB Server and the client, receiving SQL statement from the client, and returning data to the client.
+The client sends a SQL statement to the protocol layer of TiDB server. The protocol layer is responsible for handling the connection between TiDB server and the client, receiving SQL statement from the client, and returning data to the client.
 
-To the right of the protocol layer is the Optimizer layer of TiDB Server, which is responsible for processing SQL statements. The process is as follows:
+To the right of the protocol layer is the optimizer of TiDB server, which is responsible for processing SQL statements. The process is as follows:
 
 1. SQL statement arrives at the SQL optimizer through the protocol layer and is first parsed into an Abstract Syntax Tree (AST).
 2. Pre-Process is primarily for Point Get, a simple, one table lookup through a Primary or Unique Key like `SELECT * FROM t WHERE pk_col = X` or `SELECT * FROM t WHERE uk_col IN (X,Y,Z)`. If it is a Point Get, the following-up optimization processes can be skipped, the next step jumps to the SQL Executor.
@@ -151,7 +149,7 @@ To the right of the protocol layer is the Optimizer layer of TiDB Server, which 
 4. The AST that has gone through Logical Transformation will undergo Cost-Based Optimization.
 5. During Cost-Based Optimization, the optimizer considers statistics to determine how to select specific operators and finally generates a physical execution plan.
 6. The generated physical execution plan is sent to the SQL Executor of the TiDB node for execution.
-7. Unlike traditional databases, TiDB databases need to push down the execution plan to different TiKV or TiFlash for reading and writing data.
+7. Unlike traditional single node databases, TiDB will push down operators/coprocessors to TiKV and/or TiFlash nodes containing the data, to process the parts of the execution plan where the data is stored, to more efficiently utilize the distributed nature, use resources in parallel, and send less data over the network. The executor in the TiDB node will assemble the final result and send it back to the client.
 
 ![workflow](/media/sql-tuning/workflow-tiflash.png)
 
@@ -178,10 +176,10 @@ The optimizer is as good as the information it receives. Therefore, ensuring up-
 
 Statistics are essential to the TiDB optimizer. TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement.
 
-Statistics is generally divided into two levels: table level and column level. 
+Statistics is generally divided into two levels: table level and index/column level. 
 
-- For table-level statistics, it includes the total number of rows in the table and the number of rows that have been modified since the last collection of statistics. 
-- The column-level statistics information is more abundant, including histograms, Count-Min Sketch, Top-N (values or indexes with the highest occurrences), distribution and quantity of different values, and the number of null values, and so on.
+- For table level statistics, it includes the total number of rows in the table and the number of rows that have been modified since the last collection of statistics. 
+- The index/column level statistics information is more abundant, including histograms, Count-Min Sketch, Top-N (values or indexes with the highest occurrences), distribution and quantity of different values, and the number of null values, and so on.
 
 To ensure the statistics are healthy and representative, you can use the following commands:
 
@@ -200,7 +198,7 @@ SHOW STATS_META WHERE table_name='T2'\G;
        Table_name: T2
    Partition_name:
       Update_time: 2023-05-11 02:16:50
-     Modify_count: 20000
+     Modify_count: 10000
         Row_count: 20000
 1 row in set (0.03 sec)
 ```
@@ -214,7 +212,7 @@ SHOW STATS_HEALTHY WHERE table_name='T2'\G;
        Db_name: test
     Table_name: T2
 Partition_name:
-       Healthy: 0
+       Healthy: 50
 1 row in set (0.00 sec)
 ```
 
@@ -237,15 +235,11 @@ SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
 +-----------------------------------------+-------------+
 ```
 
-There are cases where automatic collection doesn't meet your needs. The analyze windown by default is 00:00 to 23:59, which means the analyze job can be triggered any time during the day. If you want to trigger the analyze job only during certain hours, you can set the start time and end time, to avoid performance impact for the online business.
+There are cases where automatic collection doesn't meet your needs. The analyze windown by default is `00:00` to `23:59`, which means the analyze job can be triggered any time during the day. If you want to trigger the analyze job only during certain hours, you can set the start time and end time, to avoid performance impact for the online business.
 
-You can manually collect statistics using the `ANALYZE TABLE table_name` statement. This allows you to:
+You can manually collect statistics using the `ANALYZE TABLE table_name` statement. This allows you to adjust the default settings, such as the sample rate, number of top-N values, or only gathering statistics for specific columns only. 
 
-1. Adjust the sample rate for more accurate or faster analysis
-2. Increase the number of top-N values collected
-3. Gather statistics for specific columns only or for all columns
-
-It's important to note that after manual collection, subsequent automatic gathering jobs will inherit the new parameters. This means that any customizations you've made during manual collection will be carried forward in future automatic analyses.
+It's important to note that after manual collection, subsequent automatic gathering jobs will inherit the new settings. This means that any customizations you've made during manual collection will be carried forward in future automatic analyses.
 
 Another common scenario is locking table statistics. This is useful when:
 
@@ -274,27 +268,35 @@ The main actions in the pre-processing stage it to determine if the SQL statemen
 Example:
 
 ```sql
-SELECT id, name FROM emp WHERE id = 901; 
+explain SELECT id, name FROM emp WHERE id = 901;
+```
+
+```
++-------------+---------+------+---------------+---------------+
+| id          | estRows | task | access object | operator info |
++-------------+---------+------+---------------+---------------+
+| Point_Get_1 | 1.00    | root | table:emp     | handle:901    |
++-------------+---------+------+---------------+---------------+
 ```
 
 ### Logical Transformation
 
-The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules include column pruning，partition pruning，eliminate Max/Min, eliminate outer join, join reorder, predicates push-down，subquery rewrite，derive TopN from window functions，and de-correlation of correlated Subquery. Since this step is rule-based and fully automated by the query optimizer, it usually does not require manual adjustments.
+The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules are such as column pruning, partition pruning, join reorder etc. Since this step is rule-based and automated by the query optimizer, in most casesit usually does not require manual adjustments.
 
 More Detail for Logical Transformation: [SQL Logical Optimization](/sql-logical-optimization.md).
 
 ### Cost-Based Optimization
 
-TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement, and associates a cost with each plan step. The Cost-Based Optimization estimates the cost of each available plan choice, including index accesses and the sequence of table joins, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
+TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement, and associates a cost with each plan step. The Cost-Based Optimization estimates the cost of each available plan choice, including index accesses and join methods, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
 
 The following figure illustrates the various data access paths and row set operations that cost-based optimization can consider when developing the optimal execution plan. For data access paths, the optimizer determines the most efficient method to retrieve data, whether through an index scan or a table scan, and whether to retrieve the data from row-based TiKV or columnar-based TiFlash storage.
 
-Also, the optimizer need to evaluate operations that manipulate row sets, such as aggregation, join, and sorting. For instance, the aggregation operator may utilize either `HASH_AGG` or `STREAM_AGG`, while the join operator can select from `HASH JOIN`, `MERGE JOIN`, or `INDEX JOIN`. 
+Also, the optimizer need to evaluate operations that manipulate row sets, such as aggregation, join, and sorting. For instance, the aggregation operator may utilize either `HashAgg` or `StreamAgg`, while the join method can select from `HashJoin`, `MergeJoin`, or `IndexJoin`. 
 
 Furthermore, expression and operator push-down to the physical storage engines is part of the physical optimization phase. The physical plan is  distributed to different components based on the underlying storage engines:
 
 - Root Task runs at the TiDB layer
-- Cop (Coprocessor) Task runs at the TiKV or TiFlash layer
+- Cop (Coprocessor) Task runs at the TiKV layer
 - MPP (Massively Parallel Processing) Task runs at the TiFlash layer
 
 This distribution of the physical plan allows the different components to collaborate and execute the query efficiently.
@@ -313,7 +315,7 @@ Beside access the execution plan information through TiDB Dashboard, TiDB provid
 
 - id: Operator name and the step unique identifier
 - estRows: Estimated number of rows from the particular step
-- task: Indicates the layer where the operator is executed. For instance, `root` indicates execution at the TiDB layer, whereas `cop[tikv]` indicates execution at the TiKV layer. 
+- task: Indicates the layer where the operator is executed. For instance, `root` indicates execution at the TiDB layer, whereas `cop[tikv]` indicates execution at the TiKV layer, and `mpp[tiflash]` indicates execution at the TiFlash layer. 
 - access object: The object where the row sources are located
 - operator info: Extended information about the operator regarding the step
 
@@ -339,7 +341,7 @@ Additional Information in [EXPLAIN ANALYZE](sql-statements/sql-statement-explain
 Description
 
 - actRows: Number of rows output by the operator.
-- execution info: Detailed execution information of the operator. time represents the total wall time from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator then the time refers to the accumulated time. loops is the number of times the current operator is called by the parent operator.
+- execution info: Detailed execution information of the operator. `time` usually represents the total wall time, including the total execution time of all sub-operators. If the operator is called many times by the parent operator then the time refers to the accumulated time.
 - memory: Memory used by the operator.
 - disk: Disk space used by the operator.
 
@@ -383,17 +385,19 @@ FROM (
 
 ### Reading Execution Plans: First Child First
 
-To understand why SQL queries run slowly, it's very important to know how to read Execution Plans. The main rule for reading an execution plan is "first child first – recursive descent". Each operator of the plan produces rows of data. When we talk about how a plan runs, we really mean the order in which each operator produces its rows. The "first child first" rule means that to produce its rows, each operator of the plan asks its child operators to produce their rows first. Then it combines these rows in some way. The order in which it asks its child parts is the same as the order they appear in the plan.
+To understand why SQL queries run slowly, it's very important to know how to read Execution Plans. The main rule for reading an execution plan is "first child first – recursive descent". Each operator in the plan produces a set of rows, and the execution order determines how these rows flow through the plan tree. 
 
-There are three important details to add to this:
+The "first child first" rule means that before an operator can produce its output rows, it must first get the rows from all its child operators. For example, a join operator needs rows from both its child operators before it can perform the join operation. The "recursive descent" rule means we analyze the plan from top to bottom, but the actual data flows from bottom to top, as each operator depends on its children's output.
+
+The traversal of the execution plan follows a top-to-bottom, first-child-first approach. This traversal pattern corresponds to a postorder (Left, Right, Root) traversal of the plan tree.
+
+There are two important details to add to this:
 
 1. Parent-Child Interaction: Although a parent operator calls its child operators in sequence, it may cycle through them multiple times. For example, in an index lookup or nested loop join, the parent fetches a batch of rows from the first child, then (zero or more) rows from the second child, repeating this process until it consumes the entire result set from the first child.
 
 2. Blocking vs. Non-blocking Operators: Operators can be either blocking or non-blocking. Blocking operators, such as `TopN` and `HashAgg`, must create their entire result set before passing anything to their parent. Non-blocking operators, like `IndexLookup` and `IndexJoin`, create and pass their row source piece by piece on demand.
 
-3. Concurrent vs. Serial Execution: Child operators can be executed concurrently or serially. For instance, the child operators of an `IndexLookup` operator are executed serially, while those of a `HashJoin` operator can be executed concurrently.
-
-Let's apply the "first child first – recursive descent" rule to the first plan. When reading an execution plan, you should start from the top and work your down bottom. In the below example begin by looking at the `TableFullScan_18` (or the first child of the tree). In this case the access operator for table trips are implemented using full table scan. The rows produced by the tables scans will be consumed by the `Selection_19` operator. The `Selection_19` operator is to filter the data by `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`. Next the group-by operator `StreamAgg_9` is to implemented the aggregation `count(*)`. Be noted that the 3 operators `TableFullScan_18`, `Selection_19`, `StreamAgg_9` are pushdown to TiKV, which is marked as `cop[tikv]`, so that early filter and aggregation can be done in TiKV, to minize the data transfer between TiKV and TiDB. Finally the `TableReader_21` is to read the data from the `StreamAgg_9` operator, then finally the `StreamAgg_20` is to implemented the aggregation `count(*)`.
+Let's apply the "first child first – recursive descent" rule to the first plan. When reading an execution plan, you should start from the top and work your down bottom. In the below example, the final child operator is `TableFullScan_18` (or the leaf node of the plan tree). In this case the access operator is full table scan. The rows produced by the tables scans will be consumed by the `Selection_19` operator. The `Selection_19` operator is to filter the data by `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`. Next the group-by operator `StreamAgg_9` is to implemented the aggregation `count(*)`. Be noted that the 3 operators `TableFullScan_18`, `Selection_19`, `StreamAgg_9` are pushdown to TiKV, which is marked as `cop[tikv]`, so that early filter and aggregation can be done in TiKV, to minize the data transfer between TiKV and TiDB. Finally the `TableReader_21` is to read the data from the `StreamAgg_9` operator, then finally the `StreamAgg_20` is to implemented the aggregation `count(*)`.
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -412,7 +416,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first child of the tree). For the table `stars`, the optimizer only needs to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`. The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` are to implement the `ORDER BY` and `LIMIT` clauses correspondingly. The final operator `Projection_16` is to implement the column projection for `t5.name`.
+Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first leaf of the plan tree). For the table `stars`, the optimizer only needs to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`. The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` are to implement the `ORDER BY` and `LIMIT` clauses correspondingly. The final operator `Projection_16` is to implement the column projection for `t5.name`.
 
 ```sql
 EXPLAIN 
@@ -485,7 +489,7 @@ In the execution plan below, the query ran for 5 minutes and 51 seconds before b
 
 2. Memory overflow: Due to this underestimation, the hash join operator `HashJoin_69` attempts to build a hash table with far more data than anticipated. This results in excessive memory usage (22.6GB) and disk usage (7.65GB).
 
-3. Query termination: The `actRows` is 0 for `HashJoin_69` and subsequent operators, indicating that the hash join consumed too much memory, likely causing the query to be terminated by memory control mechanisms.
+3. Query termination: The `actRows` is 0 for `HashJoin_69` and the operators above, indicating either there is no rows matched or the query is terminated due to resource constraints. In this case, the hash join consumed too much memory, causing the query to be terminated by memory control mechanisms.
 
 4. Incorrect join order: The root cause of this inefficient plan is the severe underestimation of `estRows` for `IndexRangeScan_75`, which led to an incorrect join order decision by the optimizer.
 
@@ -516,7 +520,6 @@ Here is the expected execution plan after fixing the incorrect estimation on the
 1. Accurate estimation: The `estRows` values are now much closer to the `actRows`, indicating that the statistics have been updated and are more accurate.
 2. Efficient join order: The query now starts with a `TableReader` on the `labels` table, followed by an `IndexJoin` with the `rates` table, and finally another `IndexJoin` with the `orders` table. This join order is more efficient given the actual data distribution.
 3. No memory overflow: Unlike the previous plan, there are no signs of excessive memory or disk usage, indicating that the query executes within expected resource limits.
-4. Complete execution: All operators show non-zero `actRows`, confirming that the query completes successfully without being terminated due to resource constraints.
 
 This optimized plan demonstrates the importance of accurate statistics and proper join order in query performance. The dramatic reduction in execution time (from 351 seconds to 1.96 seconds) highlights the potential impact of addressing estimation errors and choosing appropriate execution strategies.
 
@@ -546,9 +549,9 @@ More Detail for understanding execution plans : [TiDB Query Execution Plan Overv
 
 ## Index Strategy in TiDB
 
-TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) requests that need to be processed.
+TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) RPC requests that need to be processed.
 
-In TiDB, leveraging indexes effectively is crucial for performance tuning, as it can significantly reduce the number of KV [RPC](/glossary.md#remote-procedure-call-rpc) requests. By minimizing these requests, you can greatly improve query performance and overall system efficiency. Here are some key strategies:
+In TiDB, leveraging indexes effectively is crucial for performance tuning, as it can significantly reduce the number of KV RPC requests. By minimizing these requests, you can greatly improve query performance and overall system efficiency. Here are some key strategies:
 
 - Avoiding full table scans
 - Avoiding sorting
