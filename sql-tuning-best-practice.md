@@ -549,19 +549,67 @@ More Detail for understanding execution plans : [TiDB Query Execution Plan Overv
 
 ## Index Strategy in TiDB
 
-TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) RPC requests that need to be processed.
+TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) RPC requests that need to be processed. Typical KV RPC are `Point_Get`, `Batch_Point_Get`, and Cop tasks.
 
 In TiDB, leveraging indexes effectively is crucial for performance tuning, as it can significantly reduce the number of KV RPC requests. By minimizing these requests, you can greatly improve query performance and overall system efficiency. Here are some key strategies:
 
 - Avoiding full table scans
 - Avoiding sorting
-- Skipping row lookups when possible
+- Skipping row lookups when possible by using covering index or not request non-needed columns
 
-This section showcases three practical examples that illustrate effective indexing strategies in TiDB, focusing on the use of composite and covered indexes for both filtering and sorting operations.
+This section explains the general index strategy and the cost of index. It showcases three practical examples that illustrate effective indexing strategies in TiDB, focusing on the use of composite and covering indexes for both filtering and sorting operations.
 
-### SQL Tuning with a Covered Index
+### Composite Index Strategy Guidelines
 
-A covered index is designed to include all columns referenced in the filter and select clauses. The query below requires an index lookup of 2597411 rows, taking 46.4 seconds to execute. TiDB needs to dispatch 67 cop tasks for the index range scan on logs_idx, identified as `IndexRangeScan_11`, and 301 cop tasks for table access via `TableRowIDScan_12`. By utilizing a covered index, the index lookup can be avoided, leading to improved performance.
+When creating a composite index, it's essential to follow a specific order for the columns to ensure optimal performance. This order is crucial because it directly impacts how efficiently the index can filter and sort data.
+
+Here is the recommended order for the columns in the index:
+
+1. Equal predicates for index prefix (columns accessed directly):
+   - Equal conditions 
+   - IS NULL conditions
+
+2. Columns after index prefix for sorting:
+   - Leverage index to preprocess sorting
+   - Ensure sort and limit pushdown to TiKV
+   - Maintain sorted order
+
+3. Additional filtering columns, to reduce row lookups:
+   - Non-equal predicates (`!=`, `<>`, `IS NOT NULL`, etc)
+   - Time range conditions on datetime columns
+   - Helps reduce row lookups
+
+4. Columns in index postfix for select list or aggregattion, to avoid row lookups
+
+### The Cost of Indexing
+
+While indexes can significantly improve query performance, they also come with costs that should be carefully considered:
+
+1. Performance Impact on Writes:
+   - Non-clustered index decreases the chance of single phase commit optimization.
+   - Each additional index slows down write operations (INSERT, UPDATE, DELETE)
+   - When data is modified, all affected indexes must be updated
+   - This overhead increases with each additional index
+
+2. Resource Consumption:
+   - Indexes require additional disk space
+   - More memory is needed to cache frequently accessed indexes
+   - Backup and recovery operations take longer
+
+3. Write Hotspot Risk:
+   - Secondary indexes can create write hotspots, for example, a datetime monotonically increasing index will cause the hotspots on the write of the table
+   - Performance can degrade significantly if hotspots occur
+
+Best Practice:
+
+- Only create indexes that provide clear performance benefits
+- Regularly review index usage statistics via [TIDB_INDEX_USAGE](/information-schema/information-schema-tidb-index-usage.md)
+- Consider the write/read ratio of your workload when designing indexes
+
+
+### SQL Tuning with a Covering Index
+
+A covering index is designed to include all columns referenced in the filter and select clauses. The query below requires an index lookup of 2597411 rows, taking 46.4 seconds to execute. TiDB needs to dispatch 67 cop tasks for the index range scan on logs_idx, identified as `IndexRangeScan_11`, and 301 cop tasks for table access via `TableRowIDScan_12`. By utilizing a covering index, the index lookup can be avoided, leading to improved performance.
 
 ```sql
 SELECT
@@ -597,8 +645,11 @@ WHERE
 
 After creating the covered index below, which includes the additional columns `source_type`, `target_type`, and `amount`, the query execution time improved to 90ms, and TiDB only needed to send a single cop task to TiKV for data scanning.
 
+Be noted after creating the index, the `ANALYZE TABLE` command is used to gather the statistics for the index. So that the optimizer can make the best use of the index. Since In TiDB, create index will not gather the statistics for the index.
+
 ```sql
 CREATE INDEX logs_covered ON logs(snapshot_id, user_id, status, source_type, target_type, amount); 
+ANALYZE TABLE logs INDEX Logs_covered;
 ```
 
 ```
@@ -617,18 +668,18 @@ CREATE INDEX logs_covered ON logs(snapshot_id, user_id, status, source_type, tar
 
 When optimizing SQL queries, especially those that include an `ORDER BY` clause, it is beneficial to create a composite index that encompasses both the filtering and sorting columns. This approach allows the database engine to efficiently access the required data while maintaining the desired order.
 
-For instance, consider the following query that retrieves logs based on specific conditions. The execution plan shows a duration of 170ms. TiDB employs the `logs_index` to perform an `IndexRangeScan_20` with the filter `snapshot_id = 459840`. Subsequently, it retrieves all columns from the table, resulting in 5715 rows being streamed back to TiDB after the `IndexLookUp_23`, which then sorts the dataset and returns 1000 rows. Note that the `id` column is the primary key, which means it is implicitly included in the `logs_idx` index. However, for `IndexRangeScan_20`, the order is not guaranteed because, after the index prefix column `snapshot_id`, there are two additional columns: `user_id` and `status`. Therefore, the ordering of `id` cannot be assured.
+For instance, consider the following query that retrieves data from `test` based on specific conditions. The execution plan shows a duration of 170ms. TiDB employs the `test_index` to perform an `IndexRangeScan_20` with the filter `snapshot_id = 459840`. Subsequently, it retrieves all columns from the table, resulting in 5715 rows being streamed back to TiDB after the `IndexLookUp_23`, which then sorts the dataset and returns 1000 rows. Note that the `id` column is the primary key, which means it is implicitly included in the `test_idx` index. However, for `IndexRangeScan_20`, the order is not guaranteed because, after the index prefix column `snapshot_id`, there are two additional columns: `user_id` and `status`. Therefore, the ordering of `id` cannot be assured.
 
 ```sql
 EXPLAIN ANALYZE SELECT  
-logs.*
+test.*
 FROM
-  logs
+  test
 WHERE
-  logs.snapshot_id = 459840
-  AND logs.id > 998464
+  test.snapshot_id = 459840
+  AND test.id > 998464
 ORDER BY
-  logs.id ASC
+  test.id ASC
 LIMIT
   1000
 ```
@@ -639,19 +690,20 @@ Original Plan
 +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
 | id                           | estRows | actRows | task      | access object                                            | execution info                                | operator info                              | 
 +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
-| id                           | estRows | actRows | task      | access object                                            | execution info                             ...| logs.id, offset:0, count:1000              | 
+| id                           | estRows | actRows | task      | access object                                            | execution info                             ...| test.id, offset:0, count:1000              | 
 | TopN_10                      | 19.98   | 1000    | root      |                                                          | time:170.6ms, loops:2                      ...|                                            |
 | └─IndexLookUp_23             | 19.98   | 5715    | root      |                                                          | time:166.6ms, loops:7                      ...|                                            | 
-|   ├─Selection_22(Build)      | 19.98   | 5715    | cop[tikv] |                                                          | time:18.6ms, loops:9, cop_task: {num: 3,   ...| gt(logs.id, 998464)                        | 
-|   │ └─IndexRangeScan_20      | 433.47  | 7715    | cop[tikv] | table:logs, index:logs_idx(snapshot_id, user_id, status) | tikv_task:{proc max:4ms, min:4ms, avg: 4ms ...| range:[459840,459840], keep order:false    |
-|   └─TableRowIDScan_21(Probe) | 19.98   | 5715    | cop[tikv] | table:logs                                               | time:301.6ms, loops:10, cop_task: {num: 3, ...| keep order:false                           | 
+|   ├─Selection_22(Build)      | 19.98   | 5715    | cop[tikv] |                                                          | time:18.6ms, loops:9, cop_task: {num: 3,   ...| gt(test.id, 998464)                        | 
+|   │ └─IndexRangeScan_20      | 433.47  | 7715    | cop[tikv] | table:test, index:test_idx(snapshot_id, user_id, status) | tikv_task:{proc max:4ms, min:4ms, avg: 4ms ...| range:[459840,459840], keep order:false    |
+|   └─TableRowIDScan_21(Probe) | 19.98   | 5715    | cop[tikv] | table:test                                               | time:301.6ms, loops:10, cop_task: {num: 3, ...| keep order:false                           | 
 +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
 ```
 
-To optimize the query, we can create a new index on (snapshot_id, id) to ensure that for each snapshot_id value, the id is sorted in the index. By utilizing this new index, the query execution time is reduced to 96ms. Note that the keep order is true for `IndexRangeScan_33`, and the `TopN` is replaced with `Limit`. For the `IndexLookUp_35`, only 1000 rows are returned to TiDB, eliminating the need for additional sorting operations.
+To optimize the query, we can create a new index on `(snapshot_id, id)` to ensure that for each snapshot_id value, the id is sorted in the index. By utilizing this new index, the query execution time is reduced to 96ms. Note that the keep order is true for `IndexRangeScan_33`, and the `TopN` is replaced with `Limit`. For the `IndexLookUp_35`, only 1000 rows are returned to TiDB, eliminating the need for additional sorting operations.
 
 ```sql
-CREATE INDEX logs_new ON logs(snapshot_id, id);
+CREATE INDEX test_new ON test(snapshot_id, id);
+ANALYZE TABLE test INDEX test_new;
 ```
 
 New Plan
@@ -662,16 +714,16 @@ New Plan
 +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
 | Limit_14                         | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:2, RU:92.300155           | offset:0, count:1000                               |
 | └─IndexLookUp_35                 | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:1, index_task:         ...|                                                    |
-|   ├─IndexRangeScan_33(Build)     | 17.59   | 5715    | cop[tikv] | table:logs, index:logs_new(snapshot_id, id)  | time:7.25ms, loops:8, cop_task: {num: 3,  ...| range:(459840 998464,459840 +inf], keep order:true |
-|   └─TableRowIDScan_34(Probe)     | 17.59   | 5715    | cop[tikv] | table:logs                                   | time:232.9ms, loops:9, cop_task: {num: 3, ...| keep order:false                                   |
+|   ├─IndexRangeScan_33(Build)     | 17.59   | 5715    | cop[tikv] | table:test, index:test_new(snapshot_id, id)  | time:7.25ms, loops:8, cop_task: {num: 3,  ...| range:(459840 998464,459840 +inf], keep order:true |
+|   └─TableRowIDScan_34(Probe)     | 17.59   | 5715    | cop[tikv] | table:test                                   | time:232.9ms, loops:9, cop_task: {num: 3, ...| keep order:false                                   |
 +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
 ```
 
 ### SQL Tuning with Composite Indexes for Efficient Filtering and Sorting
 
-The original query took 11 minutes and 9 seconds to complete, which is an extremely long execution time for a query that only needs to return 101 rows. This poor performance can be attributed to several factors:
+The original query below took 11 minutes and 9 seconds to complete, which is an extremely long execution time for a query that only needs to return 101 rows. This poor performance can be attributed to several factors:
 
-1. Inefficient index usage: The optimizer chose the index on created_at, which resulted in scanning 25,147,450 rows.
+1. Inefficient index usage: The optimizer chose the index on `created_at`, which resulted in scanning 25,147,450 rows.
 2. Large intermediate result set: After applying the date range filter, 12,082,311 rows still needed to be processed.
 3. Late filtering: The most selective predicates (mode, user_id, and label_id) were applied after accessing the table, resulting in 16,604 rows.
 4. Sorting overhead: The final sort operation on 16,604 rows added additional processing time.
@@ -687,12 +739,13 @@ WHERE
     AND orders.label_id IS NOT NULL
     AND orders.created_at >= '2024-04-07 18:07:52'
     AND orders.created_at <= '2024-05-11 18:07:52'
-    AND id >= 1000000000
-    AND id <= 2000000000
+    AND orders.id >= 1000000000
     AND orders.id < 1500000000
 ORDER BY orders.id DESC 
 LIMIT 101;
 ```
+
+Here is the index on `orders`
 
 ```sql
 PRIMARY KEY (`id`),
@@ -705,21 +758,21 @@ KEY `index_orders_on_created_at` (`created_at`)
 Original plan
 
 ```
-+--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
-| id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                                                        | memory   | disk |
-+--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
-| TopN_10                        | 101.00    | 101     | root      |                                                                                | time:11m9.8s, loops:2                               | orders.id:desc, offset:0, count:101                                                                                  | 271 KB   | N/A  |
-| └─IndexLookUp_39               | 173.83    | 16604   | root      |                                                                                | time:11m9.8s, loops:19, index_task: {total_time:...}|                                                                                                                      | 20.4 MB  | N/A  |
-|   ├─Selection_37(Build)        | 8296.70   | 12082311| cop[tikv] |                                                                                | time:26.4ms, loops:11834, cop_task: {num: 294, m...}| ge(orders.id, 1000000000), le(orders.id, 2000000000), lt(orders.id, 1500000000)                                      | N/A      | N/A  |
-|   │ └─IndexRangeScan_35        | 6934161.90| 25147450| cop[tikv] | table:orders, index:index_orders_on_created_at(created_at)                     | tikv_task:{proc max:2.15s, min:0s, avg: 58.9ms, ...}| range:[2024-04-07 18:07:52,2024-05-11 18:07:52), keep order:false                                                    | N/A      | N/A  |
-|   └─Selection_38(Probe)        | 173.83    | 16604   | cop[tikv] |                                                                                | time:54m46.2s, loops:651, cop_task: {num: 1076, ...}| eq(orders.mode, "production"), eq(orders.user_id, 11111), not(isnull(orders.label_id))                               | N/A      | N/A  |
-|     └─TableRowIDScan_36        | 8296.70   | 12082311| cop[tikv] | table:orders                                                                   | tikv_task:{proc max:44.8s, min:0s, avg: 3.33s, p...}| keep order:false                                                                                                     | N/A      | N/A  |
-+--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
+| id                             | estRows   | actRows | task      | access object                                                                  | execution info                                      | operator info                                                                          | memory   | disk |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
+| TopN_10                        | 101.00    | 101     | root      |                                                                                | time:11m9.8s, loops:2                               | orders.id:desc, offset:0, count:101                                                    | 271 KB   | N/A  |
+| └─IndexLookUp_39               | 173.83    | 16604   | root      |                                                                                | time:11m9.8s, loops:19, index_task: {total_time:...}|                                                                                        | 20.4 MB  | N/A  |
+|   ├─Selection_37(Build)        | 8296.70   | 12082311| cop[tikv] |                                                                                | time:26.4ms, loops:11834, cop_task: {num: 294, m...}| ge(orders.id, 1000000000), lt(orders.id, 1500000000)                                   | N/A      | N/A  |
+|   │ └─IndexRangeScan_35        | 6934161.90| 25147450| cop[tikv] | table:orders, index:index_orders_on_created_at(created_at)                     | tikv_task:{proc max:2.15s, min:0s, avg: 58.9ms, ...}| range:[2024-04-07 18:07:52,2024-05-11 18:07:52), keep order:false                      | N/A      | N/A  |
+|   └─Selection_38(Probe)        | 173.83    | 16604   | cop[tikv] |                                                                                | time:54m46.2s, loops:651, cop_task: {num: 1076, ...}| eq(orders.mode, "production"), eq(orders.user_id, 11111), not(isnull(orders.label_id)) | N/A      | N/A  |
+|     └─TableRowIDScan_36        | 8296.70   | 12082311| cop[tikv] | table:orders                                                                   | tikv_task:{proc max:44.8s, min:0s, avg: 3.33s, p...}| keep order:false                                                                       | N/A      | N/A  |
++--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
 ```
 
 Performance Improvement with the New Index:
 
-After creating the new index (new_idx on orders(user_id, mode, id, created_at, label_id)), the query performance improved dramatically. The execution time reduced from 11 minutes and 9 seconds to just 5.3 milliseconds, which is a staggering improvement of over 126,000 times faster. This massive improvement can be explained by:
+After creating the new index `idx_composite` on `orders(user_id, mode, id, created_at, label_id)`, the query performance improved dramatically. The execution time reduced from 11 minutes and 9 seconds to just 5.3 milliseconds, which is a staggering improvement of over 126,000 times faster. This massive improvement can be explained by:
 
 1. Efficient index usage: The new index allows for an index range scan on user_id, mode, and id, which are the most selective predicates. This drastically reduces the number of rows scanned from millions to just 224.
 2. Index-only sort: The 'keep order:true' in the plan indicates that the index structure is used for sorting, avoiding a separate sort operation.
@@ -728,7 +781,12 @@ After creating the new index (new_idx on orders(user_id, mode, id, created_at, l
 
 This case demonstrates the profound impact that a well-designed index can have on query performance. By aligning the index structure with the query's predicates, sort order, and required columns, we achieved a performance improvement of over five orders of magnitude.
 
-Plan with new index (user_id, mode, id, created_at, label_id) 
+```sql
+CREATE INDEX idx_composite ON Orders(user_id, mode, id, created_at, label_id);
+ANALYZE TABLE orders index idx_composite;
+```
+
+Plan with new index `idx_composite`
 
 ```
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
@@ -737,58 +795,10 @@ Plan with new index (user_id, mode, id, created_at, label_id)
 | IndexLookUp_32                 | 101.00    | 101     | root      |                                                                                | time:5.3ms, loops:2, RU:3.435006, index_task: {t...}| limit embedded(offset:0, count:101)                                                                                  | 128.5 KB | N/A  |
 | ├─Limit_31(Build)              | 101.00    | 101     | cop[tikv] |                                                                                | time:1.35ms, loops:1, cop_task: {num: 1, max: 1....}| offset:0, count:101                                                                                                  | N/A      | N/A  |
 | │ └─Selection_30               | 535.77    | 224     | cop[tikv] |                                                                                | tikv_task:{time:0s, loops:3}                        | ge(orders.created_at, 2024-04-07 18:07:52), le(orders.created_at, 2024-05-11 18:07:52), not(isnull(orders.label_id)) | N/A      | N/A  |
-| │   └─IndexRangeScan_28        | 503893.42 | 224     | cop[tikv] | table:orders, index:index_orders_new(user_id, mode, id, created_at, label_id)  | tikv_task:{time:0s, loops:3}                        | range:[11111 "production" 1000000000,11111 "production" 1500000000), keep order:true, desc                           | N/A      | N/A  |
+| │   └─IndexRangeScan_28        | 503893.42 | 224     | cop[tikv] | table:orders, index:idx_composite(user_id, mode, id, created_at, label_id)  | tikv_task:{time:0s, loops:3}                        | range:[11111 "production" 1000000000,11111 "production" 1500000000), keep order:true, desc                           | N/A      | N/A  |
 | └─TableRowIDScan_29(Probe)     | 101.00    | 101     | cop[tikv] | table:orders                                                                   | time:2.9ms, loops:2, cop_task: {num: 3, max: 2.7...}| keep order:false                                                                                                     | N/A      | N/A  |
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
 ```
-
-### Composite Index Strategy Guidelines
-
-When creating a composite index, it's essential to follow a specific order for the columns to ensure optimal performance. This order is crucial because it directly impacts how efficiently the index can filter and sort data.
-
-Here is the recommended order for the columns in the index:
-
-1. Equal predicates for index prefix (columns accessed directly):
-   - Equal conditions 
-   - IS NULL conditions
-
-2. Columns after index prefix for sorting:
-   - Leverage index to preprocess sorting
-   - Ensure sort and limit pushdown to TiKV
-   - Maintain sorted order
-
-3. Additional filtering columns:
-   - Non-equal predicates (`!=`, `<>`, `IS NOT NULL`, etc)
-   - Time range conditions on datetime columns
-   - Helps reduce row lookups
-
-4. columns in index postfix for select list or aggregate function:
-   - Leverage IndexReader
-   - Avoid IndexLookup operations
-
-### The Cost of Indexing
-
-While indexes can significantly improve query performance, they also come with costs that should be carefully considered:
-
-1. Performance Impact on Writes:
-   - Each additional index slows down write operations (INSERT, UPDATE, DELETE)
-   - When data is modified, all affected indexes must be updated
-   - This overhead increases with each additional index
-
-2. Resource Consumption:
-   - Indexes require additional disk space
-   - More memory is needed to cache frequently accessed indexes
-   - Backup and recovery operations take longer
-
-3. Write Hotspot Risk:
-   - Secondary indexes can create write hotspots, for example, a datetime monotonically increasing index will cause the hotspots on the write of the table
-   - Performance can degrade significantly if hotspots occur
-
-Best Practice:
-
-- Only create indexes that provide clear performance benefits
-- Regularly review index usage statistics via [TIDB_INDEX_USAGE](/information-schema/information-schema-tidb-index-usage.md)
-- Consider the write/read ratio of your workload when designing indexes
 
 ## When to Use TiFlash: A Simple Guide
 
@@ -797,7 +807,7 @@ This section explains the best scenarios for using TiFlash in TiDB. TiFlash is o
 - Large-Scale Data Analysis: For queries involving extensive data scans, such as OLAP workloads, TiFlash can deliver faster performance compared to TiKV due to its columnar storage and MPP capability.
 - Complex Scans, Aggregations and Joins: TiFlash is ideal for queries with heavy aggregations and joins, as it can process these operations more efficiently by only reading necessary columns.
 - Mixed Workloads: In hybrid environments where both transactional (OLTP) and analytical (OLAP) workloads run simultaneously, TiFlash can handle analytical queries without impacting TiKV’s performance for transactional queries.
-- SaaS Arbitrary Filtering Workloads: In SaaS workloads, there is often a need for arbitrary filtering across many columns. Indexing all columns is impractical, especially when the primary key includes a tenant ID and all queries include this ID. TiFlash is an ideal solution here: because data in TiFlash is sorted and clustered by primary key, it enables efficient table range scans. This allows TiFlash to provide fast performance without the overhead of maintaining multiple indexes.
+- SaaS Arbitrary Filtering Workloads: In SaaS workloads, there is often a need for arbitrary filtering across many columns. Indexing all columns is impractical, especially when the primary key includes a tenant ID and all queries include this ID. TiFlash is an ideal solution here: because data in TiFlash is sorted and clustered by primary key, and with the [late materialization](/tiflash/tiflash-late-materialization.md) feature, it enables efficient table range scans. This allows TiFlash to provide fast performance without the overhead of maintaining multiple indexes.
 
 Using TiFlash strategically can enhance query performance and optimize resource usage in TiDB for data-intensive, analytical queries. Here are two use case of TiFlash
 
@@ -882,8 +892,8 @@ Consider a table design with a composite primary key: (tenantId, objectTypeId, o
 
 #### Performance Comparison
 
-- TiKV Plan: When executing this query on TiKV storage engine, it takes 2 minutes 38.6 seconds as it requires a table range scan operation, and cannot utilize indexes effectively for dynamic filtering conditions across hundreds of columns.
-- TiFlash Plan: The same query on TiFlash MPP engine takes only 3.44 seconds - almost 46 times faster. Since data in TiFlash is sorted by primary key, queries filtered by the primary key's prefix will also use a TableRangeScan instead of a full table scan.
+- TiKV Plan: When executing this query on TiKV storage engine, it takes 2 minutes 38.6 seconds. `TableRangeScan` need to send 5121 cop tasks since data is spread over 5121 regions.
+- TiFlash Plan: The same query on TiFlash MPP engine takes only 3.44 seconds - almost 46 times faster. Since data in TiFlash is sorted by primary key, queries filtered by the primary key's prefix will also use a `TableRangeScan` instead of a full table scan. Compared to TiKV, TiFlash only uses 2 mpp tasks.
 
 ```sql
 WITH `results` AS (
@@ -946,7 +956,7 @@ TiFlash Plan
 +--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
 ```
 
-#### Intelligent Query Routing
+#### Query Routing between TiKV and TiFlash
 
 After enabling TiFlash replicas for tables with large amounts of multi-tenant data, the optimizer can make choices to serve the query on TiKV or TiFlash storage engine based on the row count:
 
