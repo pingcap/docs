@@ -130,11 +130,11 @@ This guide focuses on providing actionable advice for beginners looking to optim
 - How TiDB Builds A Execution Plan
 - Understand Execution Plan
 - Index Strategy in TiDB
+    - Composite Index Strategy Guidelines
+    - The Cost of Indexing
     - SQL Tuning with a Covered Index
     - SQL Tuning with a Composite Index Involing Sorting
     - SQL Tuning with a Composite Index for Efficient Filtering and Sorting
-    - Composite Index Strategy Guidelines
-    - The Cost of Indexing
 - When to Use TiFlash: A Simple Guide
 
 ## Query Processing Workflow
@@ -281,7 +281,7 @@ explain SELECT id, name FROM emp WHERE id = 901;
 
 ### Logical Transformation
 
-The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules are such as column pruning, partition pruning, join reorder etc. Since this step is rule-based and automated by the query optimizer, in most casesit usually does not require manual adjustments.
+The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules are such as column pruning, partition pruning, join reorder etc. Since this step is rule-based and automated by the query optimizer, in most cases it usually does not require manual adjustments.
 
 More Detail for Logical Transformation: [SQL Logical Optimization](/sql-logical-optimization.md).
 
@@ -346,6 +346,7 @@ Description
 - disk: Disk space used by the operator.
 
 Note: Some attributes and explain table columns are omitted for improved formatting
+Here is the query statement:
 
 ```sql
 EXPLAIN ANALYZE
@@ -389,8 +390,6 @@ To understand why SQL queries run slowly, it's very important to know how to rea
 
 The "first child first" rule means that before an operator can produce its output rows, it must first get the rows from all its child operators. For example, a join operator needs rows from both its child operators before it can perform the join operation. The "recursive descent" rule means we analyze the plan from top to bottom, but the actual data flows from bottom to top, as each operator depends on its children's output.
 
-The traversal of the execution plan follows a top-to-bottom, first-child-first approach. This traversal pattern corresponds to a postorder (Left, Right, Root) traversal of the plan tree.
-
 There are two important details to add to this:
 
 1. Parent-Child Interaction: Although a parent operator calls its child operators in sequence, it may cycle through them multiple times. For example, in an index lookup or nested loop join, the parent fetches a batch of rows from the first child, then (zero or more) rows from the second child, repeating this process until it consumes the entire result set from the first child.
@@ -417,6 +416,8 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 ```
 
 Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first leaf of the plan tree). For the table `stars`, the optimizer only needs to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`. The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` are to implement the `ORDER BY` and `LIMIT` clauses correspondingly. The final operator `Projection_16` is to implement the column projection for `t5.name`.
+
+Here is the query statement:
 
 ```sql
 EXPLAIN 
@@ -457,16 +458,16 @@ The traversal of the execution plan follows a top-to-bottom, first-child-first a
 
 To read this plan:
 
-1. Start at the top with Projection_16
-2. Move to its child, TopN_19
-3. Continue to TopN_26
-4. Proceed to HashJoin_44
-5. For HashJoin_44, first process its left (Build) child:
-   - IndexReader_48
-   - IndexRangeScan_47
+1. Start at the top with `Projection_16`
+2. Move to its child, `TopN_19`
+3. Continue to `TopN_26`
+4. Proceed to `HashJoin_44`
+5. For `HashJoin_44`, first process its left (Build) child:
+   - `IndexReader_48`
+   - `IndexRangeScan_47`
 6. Then process its right (Probe) child:
-   - TableReader_46
-   - TableFullScan_45
+   - `TableReader_46`
+   - `TableFullScan_45`
 
 This traversal ensures that each operator's inputs are processed before the operator itself, allowing for efficient execution of the query plan.
 
@@ -479,18 +480,15 @@ To identify the bottleneck in a poorly performing query:
 1. Scan the `execution info` section from top to bottom, looking for operators that consume a significant amount of time.
 2. For the first child operator with significant time consumption, analyze the following:
    - `actRows`: Compare with `estRows` to check for estimation accuracy.
-   - Detailed measurements in `execution info`: Look for high values in time, loops, or other metrics.
+   - Detailed measurements in `execution info`: Look for high values in time, or other metrics.
    - `memory` and `disk` usage: High values may indicate suboptimal plan or resource constraints.
-3. Correlate these factors to determine the root cause of the performance issue. For example, if you see a `TableFullScan` operation with a high `actRows` count and significant time in `execution info`, it might suggest the need for an index. Alternatively, if a `HashJoin` operation shows high memory usage and time, you might need to optimize the join or consider alternative join methods.
+3. Correlate these factors to determine the root cause of the performance issue. For example, if you see a `TableFullScan` operation with a high `actRows` count and significant time in `execution info`, it might suggest the need for an index. Alternatively, if a `HashJoin` operation shows high memory usage and time, you might need to optimize the join order or consider alternative join methods.
 
 In the execution plan below, the query ran for 5 minutes and 51 seconds before being canceled. Let's analyze the key issues:
 
-1. Severe underestimation: The first child operator `IndexReader_76` reads data from the index `index_orders_on_adjustment_id(adjustment_id)`. The actual number of rows (`actRows`) is 256,811,189, which is drastically higher than the estimated 1 row (`estRows`).
-
+1. Severe underestimation: The first leaf node `IndexReader_76` reads data from the index `index_orders_on_adjustment_id(adjustment_id)`. The actual number of rows (`actRows`) is 256,811,189, which is drastically higher than the estimated 1 row (`estRows`).
 2. Memory overflow: Due to this underestimation, the hash join operator `HashJoin_69` attempts to build a hash table with far more data than anticipated. This results in excessive memory usage (22.6GB) and disk usage (7.65GB).
-
 3. Query termination: The `actRows` is 0 for `HashJoin_69` and the operators above, indicating either there is no rows matched or the query is terminated due to resource constraints. In this case, the hash join consumed too much memory, causing the query to be terminated by memory control mechanisms.
-
 4. Incorrect join order: The root cause of this inefficient plan is the severe underestimation of `estRows` for `IndexRangeScan_75`, which led to an incorrect join order decision by the optimizer.
 
 To address these issues, need to ensure that table statistics are up-to-date, especially for the `orders` table and the `index_orders_on_adjustment_id` index.
@@ -521,7 +519,7 @@ Here is the expected execution plan after fixing the incorrect estimation on the
 2. Efficient join order: The query now starts with a `TableReader` on the `labels` table, followed by an `IndexJoin` with the `rates` table, and finally another `IndexJoin` with the `orders` table. This join order is more efficient given the actual data distribution.
 3. No memory overflow: Unlike the previous plan, there are no signs of excessive memory or disk usage, indicating that the query executes within expected resource limits.
 
-This optimized plan demonstrates the importance of accurate statistics and proper join order in query performance. The dramatic reduction in execution time (from 351 seconds to 1.96 seconds) highlights the potential impact of addressing estimation errors and choosing appropriate execution strategies.
+This optimized plan demonstrates the importance of accurate statistics and proper join order in query performance. The dramatic reduction in execution time (from 351 seconds to 1.96 seconds) highlights the impact of addressing estimation errors and choosing appropriate execution strategies.
 
 ```
 +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
@@ -549,7 +547,7 @@ More Detail for understanding execution plans : [TiDB Query Execution Plan Overv
 
 ## Index Strategy in TiDB
 
-TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB Server) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) RPC requests that need to be processed. Typical KV RPC are `Point_Get`, `Batch_Point_Get`, and Cop tasks.
+TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB Server) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) RPC requests that need to be processed. Typical KV RPC are `Point_Get`, `Batch_Point_Get`, and Coprocessor.
 
 In TiDB, leveraging indexes effectively is crucial for performance tuning, as it can significantly reduce the number of KV RPC requests. By minimizing these requests, you can greatly improve query performance and overall system efficiency. Here are some key strategies:
 
@@ -557,7 +555,7 @@ In TiDB, leveraging indexes effectively is crucial for performance tuning, as it
 - Avoiding sorting
 - Skipping row lookups when possible by using covering index or not request non-needed columns
 
-This section explains the general index strategy and the cost of index. It showcases three practical examples that illustrate effective indexing strategies in TiDB, focusing on the use of composite and covering indexes for both filtering and sorting operations.
+This section explains the general index strategy and the cost of indexing. Then it showcases three practical examples that illustrate effective indexing strategies in TiDB, focusing on the use of composite and covering indexes for both filtering and sorting operations.
 
 ### Composite Index Strategy Guidelines
 
@@ -567,7 +565,7 @@ Here is the recommended order for the columns in the index:
 
 1. Equal predicates for index prefix (columns accessed directly):
    - Equal conditions 
-   - IS NULL conditions
+   - `IS NULL` conditions
 
 2. Columns after index prefix for sorting:
    - Leverage index to preprocess sorting
@@ -575,11 +573,10 @@ Here is the recommended order for the columns in the index:
    - Maintain sorted order
 
 3. Additional filtering columns, to reduce row lookups:
-   - Non-equal predicates (`!=`, `<>`, `IS NOT NULL`, etc)
    - Time range conditions on datetime columns
-   - Helps reduce row lookups
+   - other non-equal predicates (`!=`, `<>`, `IS NOT NULL`, etc)
 
-4. Columns in index postfix for select list or aggregattion, to avoid row lookups
+4. Include columns in the SELECT list or aggregation to fully utilize a covering index.
 
 ### The Cost of Indexing
 
@@ -610,6 +607,8 @@ Best Practice:
 ### SQL Tuning with a Covering Index
 
 A covering index is designed to include all columns referenced in the filter and select clauses. The query below requires an index lookup of 2597411 rows, taking 46.4 seconds to execute. TiDB needs to dispatch 67 cop tasks for the index range scan on logs_idx, identified as `IndexRangeScan_11`, and 301 cop tasks for table access via `TableRowIDScan_12`. By utilizing a covering index, the index lookup can be avoided, leading to improved performance.
+
+Here is the query statement:
 
 ```sql
 SELECT
@@ -645,7 +644,7 @@ WHERE
 
 After creating the covered index below, which includes the additional columns `source_type`, `target_type`, and `amount`, the query execution time improved to 90ms, and TiDB only needed to send a single cop task to TiKV for data scanning.
 
-Be noted after creating the index, the `ANALYZE TABLE` command is used to gather the statistics for the index. So that the optimizer can make the best use of the index. Since In TiDB, create index will not gather the statistics for the index.
+Be noted after creating the index, the `ANALYZE TABLE` command is used to gather the statistics for the index. So that the optimizer can leverage the new index immediately. Since In TiDB, index creation will not gather the statistics for the index automatically.
 
 ```sql
 CREATE INDEX logs_covered ON logs(snapshot_id, user_id, status, source_type, target_type, amount); 
@@ -669,6 +668,8 @@ ANALYZE TABLE logs INDEX Logs_covered;
 When optimizing SQL queries, especially those that include an `ORDER BY` clause, it is beneficial to create a composite index that encompasses both the filtering and sorting columns. This approach allows the database engine to efficiently access the required data while maintaining the desired order.
 
 For instance, consider the following query that retrieves data from `test` based on specific conditions. The execution plan shows a duration of 170ms. TiDB employs the `test_index` to perform an `IndexRangeScan_20` with the filter `snapshot_id = 459840`. Subsequently, it retrieves all columns from the table, resulting in 5715 rows being streamed back to TiDB after the `IndexLookUp_23`, which then sorts the dataset and returns 1000 rows. Note that the `id` column is the primary key, which means it is implicitly included in the `test_idx` index. However, for `IndexRangeScan_20`, the order is not guaranteed because, after the index prefix column `snapshot_id`, there are two additional columns: `user_id` and `status`. Therefore, the ordering of `id` cannot be assured.
+
+Here is the query statement:
 
 ```sql
 EXPLAIN ANALYZE SELECT  
@@ -699,10 +700,12 @@ Original Plan
 +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
 ```
 
-To optimize the query, we can create a new index on `(snapshot_id, id)` to ensure that for each snapshot_id value, the id is sorted in the index. By utilizing this new index, the query execution time is reduced to 96ms. Note that the keep order is true for `IndexRangeScan_33`, and the `TopN` is replaced with `Limit`. For the `IndexLookUp_35`, only 1000 rows are returned to TiDB, eliminating the need for additional sorting operations.
+To optimize the query, we can create a new index on `(snapshot_id)` to ensure that for each snapshot_id value, the id is sorted in the index. By utilizing this new index, the query execution time is reduced to 96ms. Note that the `keep order` is true for `IndexRangeScan_33`, and the `TopN` is replaced with `Limit`. For the `IndexLookUp_35`, only 1000 rows are returned to TiDB, eliminating the need for additional sorting operations.
+
+Here is the query statement:
 
 ```sql
-CREATE INDEX test_new ON test(snapshot_id, id);
+CREATE INDEX test_new ON test(snapshot_id);
 ANALYZE TABLE test INDEX test_new;
 ```
 
@@ -714,7 +717,7 @@ New Plan
 +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
 | Limit_14                         | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:2, RU:92.300155           | offset:0, count:1000                               |
 | └─IndexLookUp_35                 | 17.59   | 1000    | root      |                                              | time:96.1ms, loops:1, index_task:         ...|                                                    |
-|   ├─IndexRangeScan_33(Build)     | 17.59   | 5715    | cop[tikv] | table:test, index:test_new(snapshot_id, id)  | time:7.25ms, loops:8, cop_task: {num: 3,  ...| range:(459840 998464,459840 +inf], keep order:true |
+|   ├─IndexRangeScan_33(Build)     | 17.59   | 5715    | cop[tikv] | table:test, index:test_new(snapshot_id)      | time:7.25ms, loops:8, cop_task: {num: 3,  ...| range:(459840 998464,459840 +inf], keep order:true |
 |   └─TableRowIDScan_34(Probe)     | 17.59   | 5715    | cop[tikv] | table:test                                   | time:232.9ms, loops:9, cop_task: {num: 3, ...| keep order:false                                   |
 +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
 ```
@@ -725,10 +728,10 @@ The original query below took 11 minutes and 9 seconds to complete, which is an 
 
 1. Inefficient index usage: The optimizer chose the index on `created_at`, which resulted in scanning 25,147,450 rows.
 2. Large intermediate result set: After applying the date range filter, 12,082,311 rows still needed to be processed.
-3. Late filtering: The most selective predicates (mode, user_id, and label_id) were applied after accessing the table, resulting in 16,604 rows.
+3. Late filtering: The most selective predicates `(mode, user_id, and label_id)` were applied after accessing the table, resulting in 16,604 rows.
 4. Sorting overhead: The final sort operation on 16,604 rows added additional processing time.
 
-Here is the query pattern
+Here is the query statement:
 
 ```sql
 SELECT `orders`.*
@@ -770,12 +773,10 @@ Original plan
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
 ```
 
-Performance Improvement with the New Index:
-
 After creating the new index `idx_composite` on `orders(user_id, mode, id, created_at, label_id)`, the query performance improved dramatically. The execution time reduced from 11 minutes and 9 seconds to just 5.3 milliseconds, which is a staggering improvement of over 126,000 times faster. This massive improvement can be explained by:
 
 1. Efficient index usage: The new index allows for an index range scan on user_id, mode, and id, which are the most selective predicates. This drastically reduces the number of rows scanned from millions to just 224.
-2. Index-only sort: The 'keep order:true' in the plan indicates that the index structure is used for sorting, avoiding a separate sort operation.
+2. Index-only sort: The `keep order:true` in the plan indicates that the index structure is used for sorting, avoiding a separate sort operation.
 3. Early filtering: The most selective predicates are applied first, quickly reducing the result set to 224 rows before further filtering.
 4. Limit push-down: The LIMIT clause is pushed down to the index scan, allowing early termination of the scan once 101 rows are found.
 
@@ -814,21 +815,12 @@ Using TiFlash strategically can enhance query performance and optimize resource 
 
 ### Analytical Query
 
-The original query requires joining the order_line and item tables. The plan for executing this query on the TiKV storage engine takes 21.1 seconds.
+Take the TPC-H Query 14 as an example. The original query requires joining the order_line and item tables. The plan for executing this query on the TiKV storage engine takes 21.1 seconds. The plan for executing the same query using TiFlash MPP mode takes only 1.41 seconds, which is 15 times faster than the TiKV plan.
 
-In the TiKV plan:
-
-- TiDB needs to fetch 3,864,397 rows from the lineitem table and 10 million rows from the part table.
-- The hash join operation (`HashJoin_21`) is performed at the TiDB, along with the subsequent projection (`Projection_38`) and aggregation (`HashAgg_9`) operations.
-
-The plan for executing the same query using TiFlash MPP mode takes only 1.41 seconds, which is 15 times faster than the TiKV plan.
-
-In the TiFlash plan using MPP mode:
-
-- The optimizer recognizes that both the order_line and item tables have TiFlash replicas available. TiDB automatically selects the MPP mode based on the optimizer's cost estimation. 
-- Under the MPP mode, the entire query is executed on TiFlash columnar storage engine, including the table scans, hash join, column projection, aggregation, leads to the significant performance improvement compared to the TiKV plan. 
+- TiKV plan: TiDB needs to fetch 3,864,397 rows from the lineitem table and 10 million rows from the part table. The hash join operation (`HashJoin_21`) is performed at the TiDB, along with the subsequent projection (`Projection_38`) and aggregation (`HashAgg_9`) operations.
+- TiFlash plan: The optimizer recognizes that both the order_line and item tables have TiFlash replicas available. TiDB automatically selects the MPP mode based on the optimizer's cost estimation. Under the MPP mode, the entire query is executed on TiFlash columnar storage engine, including the table scans, hash join, column projection and aggregation, leads to the significant performance improvement compared to the TiKV plan. 
  
-SQL query
+Here is the query statement:
 
 ```sql
 select 100.00 * sum(case when i_data like 'PR%' then ol_amount else 0 end) / (1+sum(ol_amount)) as promo_revenue
@@ -836,7 +828,7 @@ from	order_line, item
 where	ol_i_id = i_id and ol_delivery_d >= '2007-01-02 00:00:00.000000' and ol_delivery_d < '2030-01-02 00:00:00.000000';
 ```
 
-TiKV Plan
+TiKV plan
 
 ```
 +-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
@@ -854,7 +846,7 @@ TiKV Plan
 +-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
 ```
 
-TiFlash Plan using MPP mode
+TiFlash plan
 
 ```
 +--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
@@ -885,7 +877,7 @@ In SaaS applications, it's common to structure tables with composite primary key
 
 #### Case Study: Multi-tenant Data Access
 
-Consider a table design with a composite primary key: (tenantId, objectTypeId, objectId). A common query pattern is to:
+Consider a table design with a composite primary key: `(tenantId, objectTypeId, objectId)`. A common query pattern is to:
 
 - Fetch the first N records for a specific tenant and object type, and applying random filters across hundreds or thousands of other columns, Making it impractical to create indexes for every possible filter combination. There is a potential sort operator after the filter as well.
 - Get the total count of records matching these criterias
@@ -894,6 +886,8 @@ Consider a table design with a composite primary key: (tenantId, objectTypeId, o
 
 - TiKV Plan: When executing this query on TiKV storage engine, it takes 2 minutes 38.6 seconds. `TableRangeScan` need to send 5121 cop tasks since data is spread over 5121 regions.
 - TiFlash Plan: The same query on TiFlash MPP engine takes only 3.44 seconds - almost 46 times faster. Since data in TiFlash is sorted by primary key, queries filtered by the primary key's prefix will also use a `TableRangeScan` instead of a full table scan. Compared to TiKV, TiFlash only uses 2 mpp tasks.
+
+Here is the query statement:
 
 ```sql
 WITH `results` AS (
@@ -916,7 +910,7 @@ FROM
   ) `result_and_count`;
 ```
 
-TiKV Plan
+TiKV plan
 
 ```
 +--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
@@ -935,7 +929,7 @@ TiKV Plan
 +--------------------------------+-----------+---------+-----------+-----------------------+-----------------------------------------------------+
 ```
 
-TiFlash Plan
+TiFlash plan
 
 ```
 +--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
