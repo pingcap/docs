@@ -261,11 +261,9 @@ An SQL statement undergoes optimization primarily in the optimizer through three
 
 ### Pre-Processing
 
-The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get).
+The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get). `Point_Get` or `Batch_Point_Get` means using a primary or unique key, to directly read from TiKV, by exact key lookup. If a plan is identified as `Point_Get` or `Batch_Point_Get`, optimizer will skip the logical transformation and cost-based optimization, since the exact key read will be the best way to access the row.
 
-`Point_Get` or `Batch_Point_Get` means using a primary or unique key, to directly read from TiKV, by exact key lookup. If a plan is identified as `Point_Get`, optimizer will skip the logical transformation and cost-based optimization, since the exact key read will be the best way to access the row.
-
-Example:
+Here is the query statement:
 
 ```sql
 explain SELECT id, name FROM emp WHERE id = 901;
@@ -346,6 +344,7 @@ Description
 - disk: Disk space used by the operator.
 
 Note: Some attributes and explain table columns are omitted for improved formatting
+
 Here is the query statement:
 
 ```sql
@@ -519,7 +518,7 @@ Here is the expected execution plan after fixing the incorrect estimation on the
 2. Efficient join order: The query now starts with a `TableReader` on the `labels` table, followed by an `IndexJoin` with the `rates` table, and finally another `IndexJoin` with the `orders` table. This join order is more efficient given the actual data distribution.
 3. No memory overflow: Unlike the previous plan, there are no signs of excessive memory or disk usage, indicating that the query executes within expected resource limits.
 
-This optimized plan demonstrates the importance of accurate statistics and proper join order in query performance. The dramatic reduction in execution time (from 351 seconds to 1.96 seconds) highlights the impact of addressing estimation errors and choosing appropriate execution strategies.
+This optimized plan demonstrates the importance of accurate statistics and proper join order in query performance. The dramatic reduction in execution time (from 351 seconds to 1.96 seconds) highlights the impact of addressing estimation errors. 
 
 ```
 +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
@@ -555,7 +554,7 @@ In TiDB, leveraging indexes effectively is crucial for performance tuning, as it
 - Avoiding sorting
 - Skipping row lookups when possible by using covering index or not request non-needed columns
 
-This section explains the general index strategy and the cost of indexing. Then it showcases three practical examples that illustrate effective indexing strategies in TiDB, focusing on the use of composite and covering indexes for both filtering and sorting operations.
+This section explains the general index strategy and the cost of indexing. Then it showcases three practical examples that illustrate effective indexing strategies in TiDB, focusing on the use of composite and covering indexes for sql tuning.
 
 ### Composite Index Strategy Guidelines
 
@@ -629,6 +628,8 @@ WHERE
   );
 ```
 
+Original plan:
+
 ```
 +-------------------------------+------------+---------+-----------+--------------------------------------------------------------------------+------------------------------------------------------------+
 | id                            | estRows    | actRows | task      | access object                                                            | execution info                                             | 
@@ -650,6 +651,8 @@ Be noted after creating the index, the `ANALYZE TABLE` command is used to gather
 CREATE INDEX logs_covered ON logs(snapshot_id, user_id, status, source_type, target_type, amount); 
 ANALYZE TABLE logs INDEX Logs_covered;
 ```
+
+New plan:
 
 ```
 +-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
@@ -685,7 +688,7 @@ LIMIT
   1000
 ```
 
-Original Plan
+Original plan:
 
 ```
 +------------------------------+---------+---------+-----------+----------------------------------------------------------+-----------------------------------------------+--------------------------------------------+
@@ -709,7 +712,7 @@ CREATE INDEX test_new ON test(snapshot_id);
 ANALYZE TABLE test INDEX test_new;
 ```
 
-New Plan
+New plan:
 
 ```
 +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
@@ -758,7 +761,7 @@ KEY `index_orders_on_label_id` (`label_id`),
 KEY `index_orders_on_created_at` (`created_at`)
 ```
 
-Original plan
+Original plan:
 
 ```
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------+----------+------+
@@ -787,7 +790,7 @@ CREATE INDEX idx_composite ON Orders(user_id, mode, id, created_at, label_id);
 ANALYZE TABLE orders index idx_composite;
 ```
 
-Plan with new index `idx_composite`
+New plan:
 
 ```
 +--------------------------------+-----------+---------+-----------+--------------------------------------------------------------------------------+-----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+----------+------+
