@@ -295,9 +295,9 @@ Also, the optimizer need to evaluate operations that manipulate row sets, such a
 
 Furthermore, expression and operator push-down to the physical storage engines is part of the physical optimization phase. The physical plan is  distributed to different components based on the underlying storage engines:
 
-- Root Task runs at the TiDB layer
-- Cop (Coprocessor) Task runs at the TiKV layer
-- MPP (Massively Parallel Processing) Task runs at the TiFlash layer
+- Root Task runs at the TiDB Server
+- Cop (Coprocessor) Task runs at the TiKV
+- MPP (Massively Parallel Processing) Task runs at the TiFlash
 
 This distribution of the physical plan allows the different components to collaborate and execute the query efficiently.
 
@@ -315,7 +315,7 @@ Beside access the execution plan information through TiDB Dashboard, TiDB provid
 
 - id: Operator name and the step unique identifier
 - estRows: Estimated number of rows from the particular step
-- task: Indicates the layer where the operator is executed. For instance, `root` indicates execution at the TiDB layer, whereas `cop[tikv]` indicates execution at the TiKV layer, and `mpp[tiflash]` indicates execution at the TiFlash layer. 
+- task: Indicates the layer where the operator is executed. For instance, `root` indicates execution at the TiDB Server, whereas `cop[tikv]` indicates execution at the TiKV, and `mpp[tiflash]` indicates execution at the TiFlash. 
 - access object: The object where the row sources are located
 - operator info: Extended information about the operator regarding the step
 
@@ -549,7 +549,7 @@ More Detail for understanding execution plans : [TiDB Query Execution Plan Overv
 
 ## Index Strategy in TiDB
 
-TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) RPC requests that need to be processed. Typical KV RPC are `Point_Get`, `Batch_Point_Get`, and Cop tasks.
+TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB Server) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) RPC requests that need to be processed. Typical KV RPC are `Point_Get`, `Batch_Point_Get`, and Cop tasks.
 
 In TiDB, leveraging indexes effectively is crucial for performance tuning, as it can significantly reduce the number of KV RPC requests. By minimizing these requests, you can greatly improve query performance and overall system efficiency. Here are some key strategies:
 
@@ -819,17 +819,17 @@ The original query requires joining the order_line and item tables. The plan for
 In the TiKV plan:
 
 - TiDB needs to fetch 3,864,397 rows from the lineitem table and 10 million rows from the part table.
-- The hash join operation (HashJoin_21) is performed at the TiDB layer, along with the subsequent projection (Projection_38) and aggregation (HashAgg_9) operations.
+- The hash join operation (HashJoin_21) is performed at the TiDB, along with the subsequent projection (Projection_38) and aggregation (HashAgg_9) operations.
 
 The plan for executing the same query on the TiFlash MPP (Massively Parallel Processing) takes only 1.41 seconds, which is 15 times faster than the TiKV plan.
 
 In the TiFlash MPP plan:
 
 - The optimizer recognizes that both the order_line and item tables have TiFlash replicas available.
-- As a result, the optimizer is able to push down the entire query execution, including the table scans, hash join, column projection, and aggregation, to the TiFlash MPP layer.
-- Performing the entire query execution on the TiFlash MPP layer, which is optimized for analytical workloads, leads to the significant performance improvement compared to the TiKV plan.
+- As a result, the optimizer is able to push down the entire query execution to the TiFlash, including the table scans, hash join, column projection, and aggregation.
+- Performing the entire query execution on the TiFlash, which is optimized for analytical workloads, leads to the significant performance improvement compared to the TiKV plan.
 
-The key difference between the two plans is that the TiFlash MPP plan can leverage the distributed processing capabilities of the TiFlash MPP layer to execute the entire query more efficiently, while the TiKV plan requires more coordination between the TiDB and TiKV components.
+The key difference between the two plans is that the TiFlash MPP plan can leverage the distributed processing capabilities of the TiFlash to execute the entire query more efficiently, while the TiKV plan requires more coordination between the TiDB and TiKV components.
 
 ```sql
 select 100.00 * sum(case when i_data like 'PR%' then ol_amount else 0 end) / (1+sum(ol_amount)) as promo_revenue
@@ -964,5 +964,5 @@ After enabling TiFlash replicas for tables with large amounts of multi-tenant da
 - Small Tenants: TiKV is preferred for tenants with small data size, as it provides high concurrency for small queries with table range scan.
 - Large Tenants: For tenants with large datasets (like 10M rows in this case), TiFlash is more efficient as it:
     - Handles dynamic filtering conditions without requiring specific indexes
-    - Pushes down count, sort and limit operations to TiFlash MPP layer
+    - Pushes down count, sort and limit operations to TiFlash
     - Leverages columnar storage to scan only the required columns
