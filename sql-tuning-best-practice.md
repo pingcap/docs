@@ -296,8 +296,8 @@ Also, the optimizer need to evaluate operations that manipulate row sets, such a
 Furthermore, expression and operator push-down to the physical storage engines is part of the physical optimization phase. The physical plan is  distributed to different components based on the underlying storage engines:
 
 - Root Task runs at the TiDB Server
-- Cop (Coprocessor) Task runs at the TiKV
-- MPP (Massively Parallel Processing) Task runs at the TiFlash
+- Cop (Coprocessor) Task runs at TiKV
+- MPP Task runs at TiFlash
 
 This distribution of the physical plan allows the different components to collaborate and execute the query efficiently.
 
@@ -315,7 +315,7 @@ Beside access the execution plan information through TiDB Dashboard, TiDB provid
 
 - id: Operator name and the step unique identifier
 - estRows: Estimated number of rows from the particular step
-- task: Indicates the layer where the operator is executed. For instance, `root` indicates execution at the TiDB Server, whereas `cop[tikv]` indicates execution at the TiKV, and `mpp[tiflash]` indicates execution at the TiFlash. 
+- task: Indicates the layer where the operator is executed. For instance, `root` indicates execution at the TiDB Server, whereas `cop[tikv]` indicates execution at TiKV, and `mpp[tiflash]` indicates execution at TiFlash. 
 - access object: The object where the row sources are located
 - operator info: Extended information about the operator regarding the step
 
@@ -805,7 +805,7 @@ Plan with new index `idx_composite`
 
 This section explains the best scenarios for using TiFlash in TiDB. TiFlash is optimized for analytical queries that involve complex calculations, aggregations, and large dataset scans, thanks to its columnar storage format. Here’s when to consider TiFlash:
 
-- Large-Scale Data Analysis: For queries involving extensive data scans, such as OLAP workloads, TiFlash can deliver faster performance compared to TiKV due to its columnar storage and MPP capability.
+- Large-Scale Data Analysis: For queries involving extensive data scans, such as OLAP workloads, TiFlash can deliver faster performance compared to TiKV due to its columnar storage and MPP mode.
 - Complex Scans, Aggregations and Joins: TiFlash is ideal for queries with heavy aggregations and joins, as it can process these operations more efficiently by only reading necessary columns.
 - Mixed Workloads: In hybrid environments where both transactional (OLTP) and analytical (OLAP) workloads run simultaneously, TiFlash can handle analytical queries without impacting TiKV’s performance for transactional queries.
 - SaaS Arbitrary Filtering Workloads: In SaaS workloads, there is often a need for arbitrary filtering across many columns. Indexing all columns is impractical, especially when the primary key includes a tenant ID and all queries include this ID. TiFlash is an ideal solution here: because data in TiFlash is sorted and clustered by primary key, and with the [late materialization](/tiflash/tiflash-late-materialization.md) feature, it enables efficient table range scans. This allows TiFlash to provide fast performance without the overhead of maintaining multiple indexes.
@@ -819,17 +819,16 @@ The original query requires joining the order_line and item tables. The plan for
 In the TiKV plan:
 
 - TiDB needs to fetch 3,864,397 rows from the lineitem table and 10 million rows from the part table.
-- The hash join operation (HashJoin_21) is performed at the TiDB, along with the subsequent projection (Projection_38) and aggregation (HashAgg_9) operations.
+- The hash join operation (`HashJoin_21`) is performed at the TiDB, along with the subsequent projection (`Projection_38`) and aggregation (`HashAgg_9`) operations.
 
-The plan for executing the same query on the TiFlash MPP (Massively Parallel Processing) takes only 1.41 seconds, which is 15 times faster than the TiKV plan.
+The plan for executing the same query using TiFlash MPP mode takes only 1.41 seconds, which is 15 times faster than the TiKV plan.
 
-In the TiFlash MPP plan:
+In the TiFlash plan using MPP mode:
 
-- The optimizer recognizes that both the order_line and item tables have TiFlash replicas available.
-- As a result, the optimizer is able to push down the entire query execution to the TiFlash, including the table scans, hash join, column projection, and aggregation.
-- Performing the entire query execution on the TiFlash, which is optimized for analytical workloads, leads to the significant performance improvement compared to the TiKV plan.
-
-The key difference between the two plans is that the TiFlash MPP plan can leverage the distributed processing capabilities of the TiFlash to execute the entire query more efficiently, while the TiKV plan requires more coordination between the TiDB and TiKV components.
+- The optimizer recognizes that both the order_line and item tables have TiFlash replicas available. TiDB automatically selects the MPP mode based on the optimizer's cost estimation. 
+- Under the MPP mode, the entire query is executed on TiFlash columnar storage engine, including the table scans, hash join, column projection, aggregation, leads to the significant performance improvement compared to the TiKV plan. 
+ 
+SQL query
 
 ```sql
 select 100.00 * sum(case when i_data like 'PR%' then ol_amount else 0 end) / (1+sum(ol_amount)) as promo_revenue
@@ -855,7 +854,7 @@ TiKV Plan
 +-------------------------------+--------------+-----------+-----------+----------------+----------------------------------------------+
 ```
 
-TiFlash MPP Plan
+TiFlash Plan using MPP mode
 
 ```
 +--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
