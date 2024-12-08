@@ -32,7 +32,9 @@ In addition, you can also use the [SQL binding](/sql-plan-management.md#sql-bind
 
 ## How to prevent the execution of a particular SQL statement?
 
-You can create [SQL bindings](/sql-plan-management.md#sql-binding) with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint to limit the execution time of a particular statement to a small value (for example, 1ms). In this way, the statement is terminated automatically by the threshold.
+For v7.5 or higher, [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) is able to terminate particular queries. Please refer to [runaway query management](/tidb-resource-control.md#query-watch-parameters) for detail.
+
+For versions prior to v7.5, you can create [SQL bindings](/sql-plan-management.md#sql-binding) with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint to limit the execution time of a particular statement to a small value (for example, 1ms). In this way, the statement is terminated automatically by the threshold.
 
 For example, to prevent the execution of `SELECT * FROM t1, t2 WHERE t1.id = t2.id`, you can use the following SQL binding to limit the execution time of the statement to 1ms:
 
