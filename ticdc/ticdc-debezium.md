@@ -776,9 +776,8 @@ The key fields of the preceding JSON data are explained as follows:
 | schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | schema.type    | String  | The data type of the field.          |
 
-### Changes in TiCDC Debezium
 
-#### Data type mapping
+### Data type mapping
 
 The data format mapping in the TiCDC Debezium message basically follows the [Debezium data type mapping rules](https://debezium.io/documentation/reference/2.4/connectors/mysql.html#mysql-data-types), which is generally consistent with the native message of the Debezium Connector for MySQL. However, for some data types, the following differences exist between TiCDC Debezium and Debezium Connector messages:
 
@@ -786,15 +785,9 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - For string-like data types, including Varchar, String, VarString, TinyBlob, MediumBlob, BLOB, and LongBlob, when the column has the BINARY flag, TiCDC encodes it as a String type after encoding it in Base64; when the column does not have the BINARY flag, TiCDC encodes it directly as a String type. The native Debezium Connector encodes it in different ways according to `binary.handling.mode`.
 
-- For the Decimal data type, including `DECIMAL` and `NUMERIC`, TiCDC uses the float64 type to represent it. The native Debezium Connector encodes it in float32 or float64 according to the different precision of the data type.
+- For the Decimal data type, including DECIMAL and NUMERIC, TiCDC uses the float64 type to represent it. The native Debezium Connector encodes it in float32 or float64 according to the different precision of the data type.
 
-- TiCDC converts REAL to FLOAT when setting sql_mode='REAL_AS_FLOAT'
-
-- TiCDC converts BOOLEAN to TINYINT(1)
-
-#### Different values display
-
-The values of some columns may be different between Debezium and TiCDC:
+- TiCDC converts REAL to DOUBLE, and converts BOOLEAN to TINYINT(1) when the length is one.
 
 - In TiCDC, BLOB, TEXT, GEOMETRY, or JSON column can't have a default value
 
@@ -806,4 +799,4 @@ The values of some columns may be different between Debezium and TiCDC:
 
 - Debezium escapes character, but TiCDC does not. e.g. ENUM('c, 'd', 'g,''h')
 
-- TiCDC converts "TIME" default value '1000-00-00 01:00:00.000' to "1000-00-00", but Debezium doesn't.
+- TiCDC converts the default value of TIME like '1000-00-00 01:00:00.000' to "1000-00-00", but Debezium does not.
