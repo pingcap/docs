@@ -653,9 +653,9 @@ Assume that you already have a Kafka cluster running in the same region as the T
         - **IPv4 range**: set the CIDR based on your network planing
     - **Accepted projects**: Google Cloud project of TiDB Cloud you get in [Prerequisites](#prerequisites), for example `tidbcloud-prod-000`.
 
-3. After creation done, navigate to the detail page of the "kafka-proxy-psc". Note down the "Service attachment", for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`, which will be used in TiDB Cloud to connect to this PSC.
+3. Navigate to the detail page of the "kafka-proxy-psc". Note down the `Service attachment`, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`, which will be used in TiDB Cloud to connect to this PSC.
 
-4. Go to detail page of your VPC network. Add a firewall rule to allow PSC traffic to all brokers.
+4. Go to the detail page of your VPC network. Add a firewall rule to allow the PSC traffic for all brokers.
 
     - **Name**: `allow-proxy-psc-traffic`
     - **Direction of traffic**: `Ingress`
