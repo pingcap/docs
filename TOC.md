@@ -307,6 +307,7 @@
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
+    - [Configure TiDB for Optimal Performance](/tidb-performance-tuning-config.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
     - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
@@ -319,6 +320,7 @@
     - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
     - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
     - [TiKV Follower Read](/follower-read.md)
+    - [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
     - [Tune Region Performance](/tune-region-performance.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
