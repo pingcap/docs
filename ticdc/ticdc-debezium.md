@@ -410,7 +410,7 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.tableChanges.table.columns.name | String   | The name of the column. |
 | payload.tableChanges.table.columns.jdbcType | Number | The jdbc type of the column. |
 | payload.tableChanges.table.columns.comment | String | The comment of the column. |
-| payload.tableChanges.table.columns.defaultValueExpression | String | The default value of the column. notice "CURRENT_TIMESTAMP" is converted to "1970-01-01 00:00:00" |
+| payload.tableChanges.table.columns.defaultValueExpression | String | The default value of the column. |
 | payload.tableChanges.table.columns.enumValues | String | The enum values of the column. Format is ENUM ('e1', 'e2') or SET ('e1', 'e2') |
 | payload.tableChanges.table.columns.charsetName | String | The charset of the column. |
 | payload.tableChanges.table.columns.length | Number | The length of the column. |
@@ -796,7 +796,7 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 The values of some columns may be different between Debezium and TiCDC:
 
-- Be careful with [time zone](https://debezium.io/documentation/reference/3.0/connectors/mysql.html#mysql-temporal-types).
+- TIMESTAMP and DATETIME are converted to the column’s precision by using [UTC](https://debezium.io/documentation/reference/3.0/connectors/mysql.html#mysql-temporal-types).
 
 - In TiCDC, BLOB, TEXT, GEOMETRY, or JSON column 'binaryRepresentation' can't have a default value
 
@@ -806,8 +806,8 @@ The values of some columns may be different between Debezium and TiCDC:
 
 - TiCDC print the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060)
 
-- Debezium converts charsetName to "utf8mb4" when column COLLATE is "utf8_unicode_ci" and CHARACTER is null, but TiCDC doesn't.
+- Debezium converts charsetName to "utf8mb4" when column COLLATE is "utf8_unicode_ci" and CHARACTER is null, but TiCDC does not.
 
-- Debezium doesn't escape character, but TiCDC does. e.g. ENUM('c, 'd', 'g,''h')
+- Debezium escapes character, but TiCDC does not. e.g. ENUM('c, 'd', 'g,''h')
 
 - TiCDC converts "TIME" default value '1000-00-00 01:00:00.000' to "1000-00-00", but Debezium doesn't.
