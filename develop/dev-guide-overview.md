@@ -1,6 +1,7 @@
 ---
 title: Developer Guide Overview
 summary: Introduce the overview of the developer guide for TiDB Cloud and TiDB Self-Managed.
+aliases: ['/tidb/dev/connectors-and-apis/','/appdev/dev/','/tidb/dev/dev-guide-outdated-for-laravel']
 ---
 
 # Developer Guide Overview
