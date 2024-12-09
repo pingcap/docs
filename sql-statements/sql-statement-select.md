@@ -104,6 +104,10 @@ TableSample ::=
 |`LOCK IN SHARE MODE` | To guarantee compatibility, TiDB parses these three modifiers, but will ignore them. |
 | `TABLESAMPLE` | To get a sample of rows from the table. |
 
+> **Note:**
+>
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority (`HIGH_PRIORITY`) will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+
 ## Examples
 
 ### SELECT
