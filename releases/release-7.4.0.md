@@ -203,7 +203,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     Starting from v6.1.0, TiDB introduces the system variable [`tidb_stats_cache_mem_quota`](https://github.com/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610), allowing TiDB instances to cache table statistics for faster execution plan generation and improved SQL performance. By configuring the system variable, you can limit memory usage for the statistics cache. When the cache reaches its limit, TiDB automatically evicts inactive entries, helping control instance memory usage and improve stability.
 
-    Starting from v7.4.0, memory control for the statistics cache becomes generally available (GA).
+    Starting from v7.4.0, this feature becomes generally available (GA).
     
     For more information, see [documentation](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610).
 
