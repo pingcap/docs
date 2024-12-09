@@ -119,14 +119,6 @@ In v7.5 LTS, TiDB ensures multi-level quality standards for various combinations
 
 + Other operating system versions not mentioned above might work but are not officially supported.
 
-> **Note:**
->
-> - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
-> - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
-> - If you are using the 32-bit version of an operating system listed in the preceding table, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
-> - Other operating system versions not mentioned above might work but are not officially supported.
-
 ### Libraries required for compiling and running TiDB
 
 |  Libraries required for compiling and running TiDB |  Version   |
