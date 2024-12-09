@@ -184,3 +184,7 @@ For more details, see [Coprocessor Cache](/coprocessor-cache.md).
 ## Scatter read hotspots
 
 In a read hotspot scenario, the hotspot TiKV node cannot process read requests in time, resulting in the read requests queuing. However, not all TiKV resources are exhausted at this time. To reduce latency, TiDB v7.1.0 introduces the load-based replica read feature, which allows TiDB to read data from other TiKV nodes without queuing on the hotspot TiKV node. You can control the queue length of read requests using the [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700) system variable. When the estimated queue time of the leader node exceeds this threshold, TiDB prioritizes reading data from follower nodes. This feature can improve read throughput by 70% to 200% in a read hotspot scenario compared to not scattering read hotspots.
+
+## Use TiKV MVCC in-memory engine to mitigate read hotspots caused by high MVCC read amplification
+
+When the retention time of historical MVCC data for GC is too long, or when the records are frequently updated or deleted, read hotspots might occur due to scanning a large number of MVCC versions. To alleviate this type of hotspot, you can enable the [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) feature.
