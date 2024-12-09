@@ -41,7 +41,7 @@ The document provides an example of connecting to a Kafka Private Link service d
         1. Select **Kafka** as **Target Type**.
         2. Select **Private Service Connect** as **Connectivity Method**.
     4. Note down the Google Cloud project in **Reminders before proceeding**. You will use it to authorize the auto-accept endpoint creation request from TiDB Cloud.
-    5. Note down the **Suggested Kafka Zones**. You will deploy your TiDB cluster in these zones. It is recommended that you deploy Kafka in these Zones to reduce cross-zone traffic.
+    5. Note down the **Zones of TiDB Cluster**. You will deploy your TiDB cluster in these zones. It is recommended that you deploy Kafka in these Zones to reduce cross-zone traffic.
     6. Pick a unique **Kafka Advertised Listener Pattern** for your Kafka Private Service Connect service.
         1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
         2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** that will be used to assemble the EXTERNAL advertised listener for kafka brokers, or configure Kafka-proxy. 

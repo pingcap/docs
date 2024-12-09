@@ -48,7 +48,6 @@ Currently, TiDB Cloud only supports Private Connect to generic Kafka. No special
 
 - If your Apache Kafka service is set up in AWS, follow [Set Up Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to make sure the network connection is set up properly. After you set it up, you can get the following information back to the TiDB Cloud console to create the changefeed:
 
-    - AZs of Kafka Endpoint Service
     - ID in Kafka Advertised Listener Pattern
     - Endpoint Service Name
     - Bootstrap Ports
@@ -108,16 +107,14 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
         1. Authorize the AWS Account of TiDB Cloud. Make sure it can create the endpoint for your endpoint service. You can find the AWS Account of TiDB Cloud from the tip of the web page.
         2. Make sure you select the same **Number of AZs** and **Suggested Kafka Endpoint Service AZs**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [set up self hosted Kafka Private Link service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in the **Network** section.
-        3. Click **Check usage and generate** to double-check the **Kafka Advertised Listener Pattern**, which will show message to help you validate the unique ID.
-        4. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md).
-        5. Fill the **Boostrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
+        3. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md).
+        4. Fill the **Boostrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
 
     - If you select **Private Service Connect**, do the following:
     
         1. Make sure you fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) in **Network** section.
-        2. Click **Check usage and generate** to double-check the **Kafka Advertised Listener Pattern**.  A message is shown to help you validate the unique ID.
-        3. Fill the **Service Attachment** that you have configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md)
-        4. Fill the **Boostrap Ports**. It is recommended that you provide more than one ports. You can use commas `,` to separate multiple ports.
+        2. Fill the **Service Attachment** that you have configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md)
+        3. Fill the **Boostrap Ports**. It is recommended that you provide more than one ports. You can use commas `,` to separate multiple ports.
       
 2. Select an **Authentication** option according to your Kafka authentication configuration.
     - If your Kafka does not require authentication, keep the default option **Disable**.
