@@ -5,7 +5,7 @@ summary: Learn the concept of the TiCDC Debezium Protocol and how to use it.
 
 # TiCDC Debezium Protocol
 
-[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration. Starting from v8.6, TiCDC supports DDL events and watermark events.
+[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration. Starting from v9.1, TiCDC supports DDL events and watermark events.
 
 ## Use the Debezium message format
 
@@ -796,11 +796,7 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 The values of some columns may be different between Debezium and TiCDC:
 
-- TIMESTAMP and DATETIME are converted to the column’s precision by using [UTC](https://debezium.io/documentation/reference/3.0/connectors/mysql.html#mysql-temporal-types).
-
-- In TiCDC, BLOB, TEXT, GEOMETRY, or JSON column 'binaryRepresentation' can't have a default value
-
-- The defaultValueExpression of BIT may not be the same when the length of the default value is not equal to the column length
+- In TiCDC, BLOB, TEXT, GEOMETRY, or JSON column can't have a default value
 
 - Debezium FLOAT data convert "5.61" to "5.610000133514404", but TiCDC does not.
 
