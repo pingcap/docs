@@ -102,8 +102,8 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td>When hotspot issues are not caused by individual SQL statements, using the aggregated CPU time by table or database level in Top SQL can help you quickly identify the tables or applications responsible for the hotspots, significantly improving the efficiency of diagnosing hotspot and CPU consumption issues. </td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/backup-and-restore-storages#authentication">Support backing up TiKV instances with IMDSv2 service enabled</a> (introduced in v8.4.0) </td>
-    <td><a href="https://aws.amazon.com/cn/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/">AWS EC2 now uses IMDSv2 as the default metadata service</a>. TiDB supports backing up data from TiKV instances that have IMDSv2 enabled, helping you run TiDB clusters more effectively in public cloud services.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/backup-and-restore-overview">Backup & Restore (BR)</a> uses <a href="https://aws.amazon.com/sdk-for-rust/">AWS SDK for Rust</a> to access external storage (introduced in v8.5.0)</td>
+    <td>BR replaces the original Rusoto library with AWS SDK for Rust to access external storage such as Amazon S3 from TiKV. This change enhances compatibility with AWS features such as IMDSv2 and EKS Pod Identity.</td>
   </tr>
   <tr>
     <td rowspan="1">Security</td>
