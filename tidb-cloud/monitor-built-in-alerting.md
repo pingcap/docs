@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Built-in Alerting
-summary: Learn how to monitor your TiDB cluster by getting alert notification emails from TiDB Cloud.
+summary: Learn how to monitor your TiDB cluster by getting alert notifications from TiDB Cloud.
 ---
 
 # TiDB Cloud Built-in Alerting
 
-TiDB Cloud provides you with an easy way to view alerts, edit alert rules, and subscribe to alert notification emails.
+TiDB Cloud provides you with an easy way to view alerts, edit alert rules, and subscribe to alert notifications.
 
 This document describes how to do these operations and provides the TiDB Cloud built-in alert conditions for your reference.
 
@@ -40,35 +40,13 @@ In TiDB Cloud, you can edit the alert rules by disabling or enabling the alerts 
     >
     > Currently, TiDB Cloud provides limited capabilities for alert rule editing. Some alert rules do not support editing. If you would like to configure different trigger conditions or frequency, or have alerts automatically trigger actions in downstream services like [PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/), consider using a [third-party monitoring and alerting integration](/tidb-cloud/third-party-monitoring-integrations.md).
 
-## Subscribe to alert notification emails
+## Subscribe to alert notifications
 
-To get alert notification emails of clusters in your project, take the following steps:
+In TiDB Cloud, you can subscribe to alert notifications via one of the following methods:
 
-1. On the **Alerts** page , click **Subscribe Alerts**.
-2. Enter your email address, and then click **Subscribe**.
-
-    > **Tip:**
-    >
-    > The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
-
-Alternatively, you can also add the subscription from the **Alert Subscription** page as follows:
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
-4. Click **Add Subscriber**, enter your email address in the displayed dialog, and then click **Add**.
-
-If an alert condition remains unchanged, the alert sends email notifications every 3 hours.
-
-## Unsubscribe from alert notification emails
-
-If you no longer want to receive alert notification emails of clusters in your project, take the following steps:
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
-3. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
-4. Locate your email address and click **Unsubscribe**.
-5. Click **Delete** to confirm the unsubscription.
+- [Email](/tidb-cloud/monitor-alert-email.md)
+- [Slack](/tidb-cloud/monitor-alert-slack.md)
+- [Zoom](/tidb-cloud/monitor-alert-zoom.md)
 
 ## TiDB Cloud built-in alert conditions
 
