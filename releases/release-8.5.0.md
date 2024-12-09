@@ -103,7 +103,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/backup-and-restore-overview">Backup & Restore (BR)</a> uses <a href="https://aws.amazon.com/sdk-for-rust/">AWS SDK for Rust</a> to access external storage (introduced in v8.5.0)</td>
-    <td>BR replaces the original Rusoto library with<a href="https://aws.amazon.com/sdk-for-rust/">AWS SDK for Rust</a> to access external storage such as Amazon S3 from TiKV. This change enhances compatibility with AWS features such as <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html">IMDSv2</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html">EKS Pod Identity</a>.</td>
+    <td>BR replaces the original Rusoto library with <a href="https://aws.amazon.com/sdk-for-rust/">AWS SDK for Rust</a> to access external storage such as Amazon S3 from TiKV. This change enhances compatibility with AWS features such as <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html">IMDSv2</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html">EKS Pod Identity</a>.</td>
   </tr>
   <tr>
     <td rowspan="1">Security</td>
