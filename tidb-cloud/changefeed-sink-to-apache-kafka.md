@@ -18,12 +18,12 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 - Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
-- If you select **Private Link** or **Private Service Connect** as network connectivity method, make sure that your TiDB cluster version meets the following conditions:
+    - If you choose Private Link or Private Service Connect as the network connectivity method, ensure that your TiDB cluster version meets the following requirements:
 
-    - For v6.5.x, the version must be v6.5.9 or later
-    - For v7.1.x, the version must be v7.1.4 or later
-    - For v7.5.x, the version must be v7.5.1 or later
-    - For v8.1.x, support all versions of v8.1.0 and later
+        - For v6.5.x: version v6.5.9 or later
+        - For v7.1.x: version v7.1.4 or later
+        - For v7.5.x: version v7.5.1 or later
+        - For v8.1.x: all versions of v8.1.0 and later are supported
 
 ## Prerequisites
 
@@ -37,22 +37,22 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 Ensure that your TiDB cluster can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
 - Private Connect: ideal for avoiding VPC CIDR conflicts and meeting security compliance, but incurs additional [Private Data Link Cost](/tidbcloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
-- VPC Peering: suitable as a cost-effective solution, but requires managing potential VPC CIDR conflicts and security considerations.
+- VPC Peering: suitable as a cost-effective option, but requires managing potential VPC CIDR conflicts and security considerations.
 - Public IP: suitable for a quick setup.
 
 #### Private Connect
 
-Private Connect leverages **Private Link** or **Private Service Connect** technologies provided by cloud vendors. It allows the resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly in your VPC. 
+Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-Currently, TiDB Cloud only supports Private Connect to generic Kafka. No special integration with MSK and Confluent Kafka, or any others.
+Currently, TiDB Cloud supports Private Connect for generic Kafka only. It does not include special integration with MSK, Confluent Kafka, or other services.
 
-- If your Apache Kafka service is set up in AWS, follow [Set Up Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to make sure the network connection is set up properly. After you set it up, you can get the following information back to the TiDB Cloud console to create the changefeed:
+- If your Apache Kafka service is hosted on AWS, follow [Set Up Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
     - ID in Kafka Advertised Listener Pattern
     - Endpoint Service Name
     - Bootstrap Ports
 
-- If your Apache Kafka service is set up in Google Cloud, follow [Set Up Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to make sure the network connection is set up properly. After you set it up, you can get the following information back to the TiDB Cloud console to create the changefeed:
+- If your Apache Kafka service is hosted on Google Cloud, follow [Set Up Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeedd:
 
     - ID in Kafka Advertised Listener Pattern
     - Service Attachment
@@ -81,7 +81,7 @@ If your Apache Kafka service is in a Google Cloud VPC that has no internet acces
 
 #### Public IP
 
-If you want to provide Public IP access to your Apache Kafka service, you need to assign Public IPs to all you Kafka brokers. It is **NOT** recommended to use Public IP in the production environment. 
+If you want to provide Public IP access to your Apache Kafka service, assign Public IPs to all your Kafka brokers. However, using Public IP in a production environment is strongly discouraged. 
 
 ### Kafka ACL authorization
 
@@ -105,7 +105,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
     - If you select **Private Link**, do the following:
 
-        1. Authorize the AWS Account of TiDB Cloud. Make sure it can create the endpoint for your endpoint service. You can find the AWS Account of TiDB Cloud from the tip of the web page.
+        1. Authorize the TiDB Cloud AWS account to create an endpoint for your endpoint service. The TiDB Cloud AWS account ID is provided in the tip on the web page.
         2. Make sure you select the same **Number of AZs** and **Suggested Kafka Endpoint Service AZs**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [set up self hosted Kafka Private Link service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in the **Network** section.
         3. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md).
         4. Fill the **Boostrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
@@ -123,13 +123,13 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 3. Select your **Kafka Version**. If you do not know that, use Kafka V2.
 4. Select a desired **Compression** type for the data in this changefeed.
 5. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
-6. Click **Validate Connection and Next** to test the network connection, if all is well it will go to the next page.
+6. Click **Validate Connection and Next** to test the network connection. If the test is successful, you will be directed to the next page.
 
-If you select **Private Link** or **Private Service Connect** as the network connectivity method, you need to perform the following extra steps.
+If you select **Private Link** or **Private Service Connect** as the network connectivity method, follow these additional steps:
 
-1. After you click the button, TiDB Cloud creates the endpoint for **Private Link** or **Private Service Connect**. It might take several minutes.
-2. After the endpoint is created, you need to log in the cloud vendor console and accept the connection request.
-3. Go back to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have already accepted the connection request. TiDB Cloud will test the connection and navigate to the next page if everything works.
+1. After clicking the button, TiDB Cloud creates the endpoint for **Private Link** or **Private Service Connect**, which might take several minutes.
+2. Once the endpoint is created, log in to your cloud provider console and accept the connection request.
+3. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test is successful.
 
 ## Step 3. Set the changefeed
 
