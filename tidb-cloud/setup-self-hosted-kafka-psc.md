@@ -9,7 +9,7 @@ This document explains how to set up Private Service Connect for self-hosted Kaf
 
 The mechanism works as follows:
 
-1. TiDB Cloud VPC connects to Kafka VPC through private endpoints.
+1. The TiDB Cloud VPC connects to the Kafka VPC through private endpoints.
 2. Kafka clients need to communicate directly to all Kafka brokers.
 3. Each Kafka broker is mapped to a unique port within the TiDB Cloud VPC.
 4. Leverage the Kafka bootstrap mechanism and Google Cloud resources to achieve the mapping.
@@ -24,7 +24,7 @@ The document provides an example of connecting to a Kafka Private Link service d
 
 ## Prerequisites
 
-1. Ensure that you have authorization to set up Kafka Private Service Connect in your own Google Cloud account. 
+1. Ensure that you have the following authorization to set up Kafka Private Service Connect in your own Google Cloud account. 
 
     - Manage VM Nodes
     - Manage VPC
@@ -36,17 +36,17 @@ The document provides an example of connecting to a Kafka Private Link service d
 2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in Google Cloud first. Ensure that Kafka deployment information is alligned with your TiDB cluster.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
-    2. On the overview page, you can find the region of TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
+    2. On the overview page, find the region of TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
     3. Click **Create Changefeed**.
-        1. Select **Kafka** as **Target Type**.
-        2. Select **Private Service Connect** as **Connectivity Method**.
+        1. In **Target Type**, select **Kafka**.
+        2. In **Connectivity Method**, select **Private Service Connect**.
     4. Note down the Google Cloud project in **Reminders before proceeding**. You will use it to authorize the auto-accept endpoint creation request from TiDB Cloud.
-    5. Note down the **Zones of TiDB Cluster**. You will deploy your TiDB cluster in these zones. It is recommended that you deploy Kafka in these Zones to reduce cross-zone traffic.
+    5. Note down the **Zones of TiDB Cluster**. You will deploy your TiDB cluster in these zones. It is recommended that you deploy Kafka in these zones to reduce cross-zone traffic.
     6. Pick a unique **Kafka Advertised Listener Pattern** for your Kafka Private Service Connect service.
         1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
         2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** that will be used to assemble the EXTERNAL advertised listener for kafka brokers, or configure Kafka-proxy. 
 
-Note down all the deployment information. You need to use is to configure your Kafka Private Service Connect service later.
+Note down all the deployment information. You need to use it to configure your Kafka Private Service Connect service later.
 
 The following table shows an example of the deployment information.
 
@@ -59,7 +59,7 @@ The following table shows an example of the deployment information.
 
 ## Set up self-hosted Kafka Private Service Connect service by PSC port mapping
 
-Expose every Kafka broker to TiDB Cloud VPC with unique port by using the PSC port mapping mechanism. The following diagram shows how it works.
+Expose every Kafka broker to TiDB Cloud VPC with a unique port by using the PSC port mapping mechanism. The following diagram shows how it works.
 
 ![Connect to Google Cloud self-hosted Kafka Private Service Connect by port mapping](/media/tidb-cloud/changefeed/connect-to-google-cloud-self-hosted-kafka-private-service-connect-by-portmapping.png)
 
@@ -90,6 +90,7 @@ Go to the [Google Cloud console](https://cloud.google.com/cloud-console), and na
 Go to the [VM instances](https://console.cloud.google.com/compute/instances) page to provision VMs:
 
 1. Bastion node
+
     - **Name**: `bastion-node`
     - **Region**: `us-west1`
     - **Zone**: `Any`
@@ -100,6 +101,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     - **External IPv4 address**: `Ephemeral`
 
 2. Broker node 1
+
     - **Name**: `broker-node1`
     - **Region**: `us-west1`
     - **Zone**: `us-west1-a`
@@ -110,6 +112,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     - **External IPv4 address**: `None`
 
 3. Broker node 2
+
     - **Name**: `broker-node2`
     - **Region**: `us-west1`
     - **Zone**: `us-west1-b`
@@ -120,6 +123,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     - **External IPv4 address**: `None`
 
 4. Broker node 3
+
     - **Name**: `broker-node3`
     - **Region**: `us-west1`
     - **Zone**: `us-west1-c`
@@ -161,14 +165,14 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
 
 1. Set up a KRaft Kafka cluster with three nodes. Each node acts as a broker and controller roles. For every broker:
 
-    1. For `listeners`, all 3 brokers are the same and act as a broker and controller roles:
+    1. For `listeners`, all three brokers are the same and act as brokers and controller roles:
         1. Configure the same CONTROLLER listener for all **controller** role nodes. If you only want to add the **broker** role nodes, you do not need the CONTROLLER listener in `server.properties`.
         2. Configure two **broker** listeners. INTERNAL for internal access; EXTERNAL for external access from TiDB Cloud.
     
-    2. For `advertised.listeners`:
+    2. For `advertised.listeners`, do the following:
         1. Configure an INTERNAL advertised listener for every broker with internal ip of broker node, advertise internal Kafka clients use this address to visit the broker.
-        2. Configure an EXTERNAL advertised listener based on **Kafka Advertised Listener Pattern** we get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listener helps Kafka client from TiDB Cloud side route request the right broker.
-            - `<port>` differentiate brokers from Kafka Private Service Connect access point. Plan a port range for EXTERNAL advertised listeners of all brokers. These ports do not have to be actual ports listened on brokers. They are ports listened on the load balancer for Private Service Connect that will forward requests to different brokers.
+        2. Configure an EXTERNAL advertised listener based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
+            - `<port>` differentiates brokers from Kafka Private Service Connect access point. Plan a port range for EXTERNAL advertised listeners of all brokers. These ports do not have to be actual ports listened on brokers. They are ports listened on the load balancer for Private Service Connect that will forward requests to different brokers.
             - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
     
     3. The planing values:
@@ -177,7 +181,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
         - EXTERNAL: `39092`
         - EXTERNAL advertised listener ports range: `9093~9095`
 
-2. Use SSH to log in to every broker node. Create a configuration file `~/config/server.properties` with the following content.
+2. Use SSH to log in to every broker node. Create a configuration file `~/config/server.properties` with the following content for each broker node respectively.
 
     ```properties
     # broker-node1 ~/config/server.properties
@@ -352,7 +356,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     consume_messages
     ```
 
-4. Execute `produce.sh` and `consume.sh` to verify that the Kafka cluster is running. These scripts will also be reused for later network connection testing. The script will create a topic with `--partitions 3 --replication-factor 3`. Make sure all three brokers contain data. Make sure the script will connect to all three brokers to guarantee that network connection will be tested.
+4. Execute `produce.sh` and `consume.sh` to verify that the Kafka cluster is running. These scripts will also be reused for later network connection testing. The script will create a topic with `--partitions 3 --replication-factor 3`. Ensure that all three brokers contain data. Ensure that the scripts will connect to all three brokers to guarantee that network connection will be tested.
 
     ```shell
     # Test write message. 
@@ -407,11 +411,11 @@ Ensure that your Kafka cluster is deployed in the same region as the TiDB cluste
 
 The following configuration applies to a Kafka KRaft cluster. The ZK mode configuration is similar.
 
-1. Plan configuration changes
+1. Plan configuration changes.
 
-    1. Configure a EXTERNAL **listener** for every broker for external access from TiDB Cloud. Pick a unique port as EXTERNAL port, for example `39092`.
-    2. Configure a EXTERNAL **advertised listener** based on **Kafka Advertised Listener Pattern** we get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listener helps Kafka client from TiDB Cloud side route request the right broker.
-        - `<port>` differentiate brokers from Kafka Private Service Connect access point. Plan a port range for EXTERNAL advertised listeners of all brokers, for example `range from 9093`. These ports do not have to be actual ports listened on brokers. They are ports listened on the load balancer for Private Service Connect which will forward requests to different brokers. 
+    1. Configure an EXTERNAL **listener** for every broker for external access from TiDB Cloud. Select a unique port as the EXTERNAL port, for example `39092`.
+    2. Configure an EXTERNAL **advertised listener** based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
+        - `<port>` differentiates brokers from Kafka Private Service Connect access point. Plan a port range for EXTERNAL advertised listeners of all brokers, for example `range from 9093`. These ports do not have to be actual ports listened on brokers. They are ports listened on the load balancer for Private Service Connect which will forward requests to different brokers. 
         - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
 
 2. Use SSH to log in to every broker node. Modify the configuration file of every broker the following content.  
@@ -466,9 +470,9 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
     - **Name**: `kafka-neg`
     - **Network endpoint group type**: `Port Mapping NEG(Regional)`
-       - **Region**: `us-west1`
-       - **Network**: `kafka-vpc`
-       - **Subnet**: `brokers-subnet`
+        - **Region**: `us-west1`
+        - **Network**: `kafka-vpc`
+        - **Subnet**: `brokers-subnet`
 
 2. Go to the detail page of the network endpoint group to add network endpoints to configure port mapping to broker nodes.
 
@@ -507,10 +511,10 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     - **Internal load balancer**: `kafka-lb`
     - **Service name**: `kafka-psc`
     - **Subnets**: `RESERVE NEW SUBNET`
-       - **Name**: `psc-subnet`
-       - **VPC Network**: `kafka-vpc`
-       - **Region**: `us-west1`
-       - **IPv4 range**: `10.128.0.0/18`
+        - **Name**: `psc-subnet`
+        - **VPC Network**: `kafka-vpc`
+        - **Region**: `us-west1`
+        - **IPv4 range**: `10.128.0.0/18`
     - **Accepted projects**: the Google Cloud project of TiDB Cloud you got in [Prerequisites](#prerequisites), for example `tidbcloud-prod-000`.
 
 5. Navigate to the detail page of the `kafka-psc`. Note down the **Service attachment**, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`. You will use it in TiDB Cloud to connect to this PSC.
@@ -529,9 +533,9 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1. Go back to the [TiDB Cloud console](https://tidbcloud.com) to create the changefeed for the cluster to connect to the Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
-2. After you proceed to the "Configure the changefeed target->Connectivity Method->Private Service Connect", you just fill the following fields with corresponding values and others fields as needed
+2. After you proceed to the **Configure the changefeed target > Connectivity Method > Private Service Connect**, fill the following fields with corresponding values and others fields as needed.
 
-    - **Kafka Advertised Listener Pattern**: `abc`. It is the same as the unique random string we used to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
+    - **Kafka Advertised Listener Pattern**: `abc`. It is the same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
     - **Service Attachment**: the kafka service attachment of PSC, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`.
     - **Bootstrap Ports**: `9092,9093,9094`
 
@@ -557,13 +561,13 @@ Assume that you already have a Kafka cluster running in the same region as the T
         - **Machine type**: `e2-medium`. You can choose your own machine type based on you workload.
         - **Network**: your VPC network that can connect to Kafka cluster.
         - **Subnetwork**: your subnet that can connect to Kafka cluster.
-        - **External IPv4 address**: `Ephemeral`. Enable Internet access to make it easy configure Kafka-proxy, you can select **None** in your production environment and log in to the node in your way.
+        - **External IPv4 address**: `Ephemeral`. Enable Internet access to make it easy to configure Kafka-proxy. You can select **None** in your production environment and log in to the node in your way.
     - **Location**: `Single zone`
     - **Region**: `us-west1`
-    - **Zone**: choose your one of brokers' zones.
+    - **Zone**: choose one of your broker's zones.
     - **Autoscaling mode**: `Off`
     - **Minimum number of instances**: `1`
-    - **Maximum number of instances**: `1`. Kafka-proxy does not support the cluster mode, so only one instance can be deployed. Each Kafka-proxy randomly maps local ports to brokers' ports, resulting in different mappings across proxies. Deploying multiple Kafka-proxies behind a load balancer can cause issues. If a Kafka client connects to one proxy and then accesses a broker through another, the request might be routed to the wrong broker.
+    - **Maximum number of instances**: `1`. Kafka-proxy does not support the cluster mode, so only one instance can be deployed. Each Kafka-proxy randomly maps local ports to the ports of the broker, resulting in different mappings across proxies. Deploying multiple Kafka-proxies behind a load balancer can cause issues. If a Kafka client connects to one proxy and then accesses a broker through another, the request might be routed to the wrong broker.
 
 2. Go to the detail page of the node in kafka-proxy-ig. Click **SSH** to log in to the node. Download the binaries:
 
@@ -576,8 +580,8 @@ Assume that you already have a Kafka cluster running in the same region as the T
 3. Run Kafka-proxy and connect to Kafka brokers.
 
     ```shell
-    # There 3 kinds of parameters need to feed to the Kafka-proxy
-    # 1. --bootstrap-server-mapping defines the bootstrap mapping, suggest configure 3 mappings, one per zone for resilience.
+    # There are three kinds of parameters that need to feed to the Kafka-proxy
+    # 1. --bootstrap-server-mapping defines the bootstrap mapping. Suggest that you configure three mappings, one for each zone for resilience.
     #   a) Kafka broker address; 
     #   b) Local address for the broker in Kafka-proxy; 
     #   c) Advertised listener for the broker if Kafka clients bootstrap from Kafka-proxy
@@ -639,7 +643,7 @@ Assume that you already have a Kafka cluster running in the same region as the T
             - **Name**: `kafka-proxy-hc`
             - **Scope**: `Regional`
             - **Protocol**: `TCP`
-            - **Port**: `9092`. You can choose one of the bootstrap port in Kafka-proxy.
+            - **Port**: `9092`. You can select one of the bootstrap ports in Kafka-proxy.
 
 2. Go to [**Private Service Connect** > **PUBLISH SERVICE**](https://console.cloud.google.com/net-services/psc/list/producers).
 
@@ -651,9 +655,9 @@ Assume that you already have a Kafka cluster running in the same region as the T
         - **VPC Network**: your network
         - **Region**: `us-west1`
         - **IPv4 range**: set the CIDR based on your network planing
-    - **Accepted projects**: Google Cloud project of TiDB Cloud you get in [Prerequisites](#prerequisites), for example `tidbcloud-prod-000`.
+    - **Accepted projects**: the Google Cloud project of TiDB Cloud you get in [Prerequisites](#prerequisites), for example `tidbcloud-prod-000`.
 
-3. Navigate to the detail page of the "kafka-proxy-psc". Note down the `Service attachment`, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`, which will be used in TiDB Cloud to connect to this PSC.
+3. Navigate to the detail page of the **kafka-proxy-psc**. Note down the `Service attachment`, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`, which will be used in TiDB Cloud to connect to this PSC.
 
 4. Go to the detail page of your VPC network. Add a firewall rule to allow the PSC traffic for all brokers.
 
@@ -667,7 +671,7 @@ Assume that you already have a Kafka cluster running in the same region as the T
 
 ### Step 3. Connect from TiDB Cloud
 
-1. Go back to the[TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the cluster to connect to Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+1. Return to the[TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the cluster to connect to Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
 2. After you proceed to the **Configure the changefeed target** > **Connectivity Method** > **Private Service Connect**, fill in the following fields with corresponding values and others fields as needed.
 
@@ -685,13 +689,14 @@ If you have already followed the steps in this document and successfully set up 
 
 - If you set up Kafka PSC by PSC port mapping, do the following:
 
-    1. Follow instructions from the beginning of this document. When you proceed to [Step 1. Set up Kafka Cluster](#step-1-set-up-the-kafka-cluster). Follow the [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) section. Create another group of EXTERNAL listeners and advertised listeners, you can name it as `EXTERNAL2`. Note that the port range of `EXTERNAL2` cannot overlap with the EXTERNAL.
+    1. Follow instructions from the beginning of this document. When you proceed to [Step 1. Set up Kafka Cluster](#step-1-set-up-the-kafka-cluster), follow the [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) section. Create another group of EXTERNAL listeners and advertised listeners. You can name it as `EXTERNAL2`. Note that the port range of `EXTERNAL2` cannot overlap with the EXTERNAL.
 
-    2. After reconfiguring the brokers, you add another group of Network endpoints to the Network endpoint group, which maps the ports range to the `EXTERNAL2` listener.
+    2. After reconfiguring the brokers, add another group of Network endpoints to the Network endpoint group, which maps the ports range to the `EXTERNAL2` listener.
 
     3. Configure the TiDB Cloud connection with the following input to create the new changefeed:
+
         - New Bootstrap ports
         - New Kafka Advertised Listener Group
         - The same Service Attachment
 
-- If you set up Kafka PSC by Kafka-proxy, create a new Kafka-proxy PSC from the beginning with New Kafka Advertised Listener Group.
+- If you [set up self-hosted Kafka Private Service Connect by Kafka-proxy](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy), create a new Kafka-proxy PSC from the beginning with New Kafka Advertised Listener Group.

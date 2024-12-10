@@ -9,7 +9,7 @@ This document describes how to set up Private Link service for self-hosted Kafka
 
 The mechanism works as follows:
 
-1. TiDB Cloud VPC connects to Kafka VPC through private endpoints.
+1. The TiDB Cloud VPC connects to the Kafka VPC through private endpoints.
 2. Kafka clients need to communicate directly to all Kafka brokers.
 3. Each Kafka broker is mapped to a unique port within the TiDB Cloud VPC.
 4. Leverage the Kafka bootstrap mechanism and AWS resources to achieve the mapping.
@@ -22,7 +22,7 @@ The document provides an example of connecting to a Kafka Private Link service d
 
 ## Prerequisites
 
-1. Ensure that you have authorization to set up Kafka Private Link service in your own AWS account. 
+1. Ensure that you have the following authorization to set up Kafka Private Link service in your own AWS account. 
 
     - Manage EC2 Nodes
     - Manage VPC
@@ -35,23 +35,23 @@ The document provides an example of connecting to a Kafka Private Link service d
 2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in AWS first. Ensure that the Kafka deployment information is alligned with your TiDB cluster.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
-    2. On the overview page, you can find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
+    2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
     3. Click **Create Changefeed**.
-        1. Select **Kafka** as **Target Type**.
-        2. Select **Private Link** as **Connectivity Method**.
-    4. Note down the principal of TiDB Cloud AWS account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to create an endpoint for the Kafka Private Link service.
-    5. Select **Number of AZs**. Confirm that you will deploy the Kafka cluster in **Single AZ** or **3 AZs**. In this example, select **3 AZs**. Note down the IDs of the AZs in which you want to deploy your Kafka cluster. If you want to know the relationship between your AZ names and AZ IDs, see [Availability Zone IDs for your AWS resources](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html) to find it.
+        1. In **Target Type**, select **Kafka**.
+        2. In **Connectivity Method**, select **Private Link**.
+    4. Note down the information of TiDB Cloud AWS account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to create an endpoint for the Kafka Private Link service.
+    5. Select **Number of AZs**. In this example, select **3 AZs**. Note down the IDs of the AZs in which you want to deploy your Kafka cluster. If you want to know the relationship between your AZ names and AZ IDs, see [Availability Zone IDs for your AWS resources](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html) to find it.
     6. Enter a unique **Kafka Advertised Listener Pattern** for your Kafka Private Link service.
         1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
         2. Click **Check usage and generate** to check if the random string is unique and generate **Kafka Advertised Listener Pattern** that will be used to assemble the EXTERNAL advertised listener for Kafka brokers. 
 
-Note down all the deployment information. You need to use is to configure your Kafka Private Link service later.
+Note down all the deployment information. You need to use it to configure your Kafka Private Link service later.
 
 The following table shows an example of the deployment information.
 
 | Information     | Value    | Note    | 
 |--------|-----------------|---------------------------|
-| Region    | Oregon (`us-west-2`)      |  |
+| Region    | Oregon (`us-west-2`)    |  N/A |
 | Principal of TiDB Cloud AWS Account | `arn:aws:iam::<account_id>:root`     |    N/A  |
 | AZ IDs                              | 1. `usw2-az1` <br/> 2. `usw2-az2` <br/> 3. `usw2-az3`   | Align AZ IDs to AZ names in your AWS account.<br/>Example: <br/> 1. `usw2-az1` => `us-west-2a` <br/> 2. `usw2-az2` => `us-west-2c` <br/> 3. usw2-az3 => `us-west-2b`         |
 | Kafka Advertised Listener Pattern   | The unique random string: `abc` <br/> Generated pattern for AZs <br/> 1. `usw2-az1` => &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; <br/> 2. `usw2-az2` => &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; <br/> 3. `usw2-az3` => &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;            | Map AZ names to AZ-specified patterns. Make sure that you can configure the right pattern to the broker in a specific AZ later <br/> 1. `us-west-2a` => &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; <br/> 2. `us-west-2c` => &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; <br/> 3. `us-west-2b` => &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; |
@@ -87,7 +87,7 @@ Follow the following steps to create the Kafka VPC.
 
 **1.1. Create the Kafka VPC**
 
-1. Go to [AWS Console->VPC dashboard](https://console.aws.amazon.com/vpcconsole/home?#vpcs:), and switch to the region in which you want to deploy Kafka.
+1. Go to [AWS Console > VPC dashboard](https://console.aws.amazon.com/vpcconsole/home?#vpcs:), and switch to the region in which you want to deploy Kafka.
 
 2. Click **Create VPC**. Fill in the information on the **VPC settings** page.
 
@@ -133,15 +133,17 @@ Follow the following steps to create the Kafka VPC.
 4. Click **Create subnet**. The **Subnets Listing** page is displayed.
 5. Configure the bastion subnet to the Public subnet.
 
-    1. Go to [VPC dashboard -> Internet gateways](https://console.aws.amazon.com/vpcconsole/home#igws:). Create an Internet Gateway with the name `kafka-vpc-igw`.
+    1. Go to [VPC dashboard > Internet gateways](https://console.aws.amazon.com/vpcconsole/home#igws:). Create an Internet Gateway with the name `kafka-vpc-igw`.
     2. On the **Internet gateways Detail** page, in **Actions**, click **Attach to VPC** to attach the Internet Gateway to the Kafka VPC.
-    3. Go to [VPC dashboard -> Route tables](https://console.aws.amazon.com/vpcconsole/home#CreateRouteTable:). Create a route table to the Internet Gateway in Kafka VPC and add a new route with the following information:
+    3. Go to [VPC dashboard > Route tables](https://console.aws.amazon.com/vpcconsole/home#CreateRouteTable:). Create a route table to the Internet Gateway in Kafka VPC and add a new route with the following information:
 
        - **Name**: `kafka-vpc-igw-route-table`
        - **VPC**: `Kafka VPC`
-       - **Route**: **Destination** -`0.0.0.0/0`; **Target** - `Internet Gateway`, `kafka-vpc-igw`
+       - **Route**: 
+           - **Destination**: `0.0.0.0/0`
+           - **Target**: `Internet Gateway`, `kafka-vpc-igw`
 
-    4. Attach the route table to the bastion subnet. On the **Detail Page** of the route table, click **Subnet associations-> Edit subnet associations** to add the bastion subnet and save changes.
+    4. Attach the route table to the bastion subnet. On the **Detail** page of the route table, click **Subnet associations > Edit subnet associations** to add the bastion subnet and save changes.
 
 #### 2. Set up Kafka brokers
 
@@ -470,7 +472,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     consume_messages
     ```
 
-4. Execute `produce.sh` and `consume.sh` to verify that the kafka cluster is running. These scripts will also be reused for later network connection testing. The script will create a topic with `--partitions 3 --replication-factor 3`. Ensure that all these three brokers contain data. Ensure the script will connect to all three brokers to guarantee that network connection will be tested.
+4. Execute `produce.sh` and `consume.sh` to verify that the kafka cluster is running. These scripts will also be reused for later network connection testing. The script will create a topic with `--partitions 3 --replication-factor 3`. Ensure that all these three brokers contain data. Ensure that the script will connect to all three brokers to guarantee that network connection will be tested.
 
     ```shell
     # Test write message. 
@@ -629,45 +631,49 @@ Do the following to set up the load balancer:
 
 1. Go to [Target groups](https://console.aws.amazon.com/ec2/home#CreateTargetGroup:) to create four target groups.
 
-   1. Bootstrap target group 
-      - **Target type**: `Instances`
-      - **Target group name**: `bootstrap-target-group`
-      - **Protocol**: `TCP`
-      - **Port**: `9092`
-      - **IP address type**: `IPv4`
-      - **VPC**: `Kafka VPC`
-      - **Health check protocol**: `TCP`
-      - **Register targets**: `broker-node1:39092`, `broker-node2:39092`, `broker-node3:39092`
+    - Bootstrap target group 
 
-   2. Broker target group 1
-       - **Target type**: `Instances`
-       - **Target group name**: `broker-target-group-1`
-       - **Protocol**: `TCP`
-       - **Port**: `9093`
-       - **IP address type**: `IPv4`
-       - **VPC**: `Kafka VPC`
-       - **Health check protocol**: `TCP`
-       - **Register targets**: `broker-node1:39092`
+        - **Target type**: `Instances`
+        - **Target group name**: `bootstrap-target-group`
+        - **Protocol**: `TCP`
+        - **Port**: `9092`
+        - **IP address type**: `IPv4`
+        - **VPC**: `Kafka VPC`
+        - **Health check protocol**: `TCP`
+        - **Register targets**: `broker-node1:39092`, `broker-node2:39092`, `broker-node3:39092`
 
-   3. Broker target group 2
-       - **Target type**: `Instances`
-       - **Target group name**: `broker-target-group-2`
-       - **Protocol**: `TCP`
-       - **Port**: `9094`
-       - **IP address type**: `IPv4`
-       - **VPC**: `Kafka VPC`
-       - **Health check protocol**: `TCP`
-       - **Register targets**: `broker-node2:39092`
+    - Broker target group 1
 
-   4. Broker target group 3
-       - **Target type**: `Instances`
-       - **Target group name**: `broker-target-group-3`
-       - **Protocol**: `TCP`
-       - **Port**: `9095`
-       - **IP address type**: `IPv4`
-       - **VPC**: `Kafka VPC`
-       - **Health check protocol**: `TCP`
-       - **Register targets**: `broker-node3:39092`
+        - **Target type**: `Instances`
+        - **Target group name**: `broker-target-group-1`
+        - **Protocol**: `TCP`
+        - **Port**: `9093`
+        - **IP address type**: `IPv4`
+        - **VPC**: `Kafka VPC`
+        - **Health check protocol**: `TCP`
+        - **Register targets**: `broker-node1:39092`
+
+    - Broker target group 2
+
+        - **Target type**: `Instances`
+        - **Target group name**: `broker-target-group-2`
+        - **Protocol**: `TCP`
+        - **Port**: `9094`
+        - **IP address type**: `IPv4`
+        - **VPC**: `Kafka VPC`
+        - **Health check protocol**: `TCP`
+        - **Register targets**: `broker-node2:39092`
+
+    - Broker target group 3
+
+        - **Target type**: `Instances`
+        - **Target group name**: `broker-target-group-3`
+        - **Protocol**: `TCP`
+        - **Port**: `9095`
+        - **IP address type**: `IPv4`
+        - **VPC**: `Kafka VPC`
+        - **Health check protocol**: `TCP`
+        - **Register targets**: `broker-node3:39092`
 
 2. Go to [Load balancers](https://console.aws.amazon.com/ec2/home#LoadBalancers:) to create a network load balancer.
 
@@ -688,7 +694,7 @@ Do the following to set up the load balancer:
         - Protocol: `TCP`; Port: `9094`; Forward to: `broker-target-group-2`
         - Protocol: `TCP`; Port: `9095`; Forward to: `broker-target-group-3`
 
-3. Test the load balancer in the bastion node. This example only tests the Kafka bootstrap. Because the load balancer is listening on the Kafka EXTERNAL listener, the addresses of EXTERNAL advertised listeners can not be resolved in the bastion node. Note down the kafka-lb DNS name from the load balancer detail page, for example `kafka-lb-77405fa57191adcb.elb.us-west-2.amazonaws.com`. Execute the script in the bastion node.
+3. Test the load balancer in the bastion node. This example only tests the Kafka bootstrap. Because the load balancer is listening on the Kafka EXTERNAL listener, the addresses of EXTERNAL advertised listeners can not be resolved in the bastion node. Note down the `kafka-lb` DNS name from the load balancer detail page, for example `kafka-lb-77405fa57191adcb.elb.us-west-2.amazonaws.com`. Execute the script in the bastion node.
 
     ```shell
     # Please replace {lb_dns_name} to the actual value
@@ -721,11 +727,11 @@ Do the following to set up the load balancer:
 
 ## Step 3. Connect from TiDB Cloud
 
-1. Go back to the [TiDB Cloud console](https://tidbcloud.com) to create the changefeed for the cluster to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+1. Return to the [TiDB Cloud console](https://tidbcloud.com) to create the changefeed for the cluster to connect to the Kafka cluster by **Private Link**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
-2. After you proceed to the **Configure the changefeed target > Connectivity Method > Private Link**, fill in the following fields with corresponding values and others fields as needed.
+2. After you proceed to **Configure the changefeed target > Connectivity Method > Private Link**, fill in the following fields with corresponding values and others fields as needed.
 
-    - **Kafka Type**: `3 AZs`. Ensure that your Kafka cluster is deployed in the same 3 AZs.
+    - **Kafka Type**: `3 AZs`. Ensure that your Kafka cluster is deployed in the same three AZs.
     - **Kafka Advertised Listener Pattern**: `abc`. The same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequistes](#prerequisites).
     - **Endpoint Service Name**: the kafka service name.
     - **Bootstrap Ports**: `9092`. A single port is sufficient because you configure a dedicated bootstrap target group behind it.
@@ -744,7 +750,7 @@ Suppose that you have already followed this document successfully to set up the 
 
 2. When you proceed to [Step 2. Set up a Kafka cluster](#step-2-set-up-a-kafka-cluster), follow [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) to create another group of EXTERNAL listener and advertised listener. You can name it as **EXTERNAL2**. Note that the port range of **EXTERNAL2** cannot overlap with the **EXTERNAL**.
 
-3. After reconfiguring brokers, add another target group in the load balancer, including bootstraps and broker target groups.
+3. After reconfiguring brokers, add another target group in the load balancer, including the bootstrap and broker target groups.
 
 4. Configure the TiDB Cloud connection with the following information:
 
