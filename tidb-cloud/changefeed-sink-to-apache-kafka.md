@@ -127,7 +127,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 If you select **Private Link** or **Private Service Connect** as the network connectivity method, follow these additional steps:
 
-1. After clicking the button, TiDB Cloud creates the endpoint for **Private Link** or **Private Service Connect**, which might take several minutes.
+1. After clicking **Next**, TiDB Cloud creates the endpoint for **Private Link** or **Private Service Connect**, which might take several minutes.
 2. Once the endpoint is created, log in to your cloud provider console and accept the connection request.
 3. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test is successful.
 
