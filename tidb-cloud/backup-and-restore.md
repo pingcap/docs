@@ -92,7 +92,7 @@ To configure the backup schedule, perform the following steps:
         > **Note**
         >
         > - All auto-backups, except the latest one, will be deleted if their lifetime exceeds the retention period. The latest auto-backup will not be deleted unless you delete it explicitly. This ensures that the cluster is not accidentally deleted without the ability to restore data.
-        > - After you delete a cluster, auto-backups with a lifetime within the retention period will be moved to the Recycle Bin. Auto-backups, except the latest one, will be deleted if their lifetime exceeds the retention period. The latest auto-backup will not be deleted unless you delete it explicitly. This prevents accidental cluster deletion with no data to restore.
+        > - After you delete a cluster, auto-backups with a lifetime within the retention period will be moved to the Recycle Bin. 
         > - After you delete a cluster, existing manual backups will be retained until manually deleted or your account is closed.
 
 ### Turn on dual region backup
