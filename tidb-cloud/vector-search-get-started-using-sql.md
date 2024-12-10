@@ -16,7 +16,7 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 
 > **Note**
 >
-> TiDB Vector Search is currently in beta and is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
 ## Prerequisites
 
@@ -39,9 +39,9 @@ To complete this tutorial, you need:
 
 5. Copy the connection command and paste it into your terminal. The following is an example for macOS:
 
-    ```bash
-    mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
-    ```
+   ```bash
+   mysql -u '<prefix>.root' -h '<host>' -P 4000 -D 'test' --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p'<password>'
+   ```
 
 ### Step 2. Create a vector table
 

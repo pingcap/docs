@@ -11,7 +11,7 @@ With TiDB Cloud Serverless branches, developers can work in parallel, iterate ra
 
 ## Implementations
 
-When a branch for a cluster is created, the data in the branch diverges from the original cluster. This means that subsequent changes made in either the original cluster or the branch will not be synchronized with each other.
+When a branch for a cluster is created, the data in the branch diverges from the original cluster or its parent branch at a specific point in time. This means that subsequent changes made in either the parent or the branch will not be synchronized with each other.
 
 To ensure fast and seamless branch creation, TiDB Cloud Serverless uses a copy-on-write technique for sharing data between the original cluster and its branches. This process usually completes within a few minutes and is imperceptible to users, ensuring that it does not affect the performance of your original cluster.
 
@@ -40,6 +40,11 @@ Currently, TiDB Cloud Serverless branches are in beta and free of charge.
 - For each organization in TiDB Cloud, you can create a maximum of five TiDB Cloud Serverless branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster or a cluster larger than 100 GiB.
 
 - For each branch of a free cluster, 10 GiB storage is allowed. For each branch of a scalable cluster, 100 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
+
+- When [creating a branch](/tidb-cloud/branch-manage.md#create-a-branch) from a specific point in time:
+
+    - For branches of a free cluster, you can select any time within the last 24 hours.
+    - For branches of a scalable cluster, you can select any time within the last 14 days.
 
 If you need more quotas, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
