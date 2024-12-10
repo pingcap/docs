@@ -28,8 +28,8 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 <tbody>
   <tr>
     <td rowspan="6">Scalability and Performance</td>
-    <td>Reduce data processing latency in multiple dimensions **tw@qiancai**</td>
-    <td>TiDB continuously refines data processing to improve performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include: 
+    <td>Reduce data processing latency in multiple dimensions</td>
+    <td>TiDB continuously refines data processing to improve performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include:
     <li>Support <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">parallel sorting</a> (introduced in v8.2.0) </li>
     <li>Optimize <a href="https://docs.pingcap.com/zh/tidb/v8.5/tidb-configuration-file#batch-policy-new-in-v830">batch processing strategy for KV (key-value) requests </a> (introduced in v8.3.0) </li>
     <li>Support <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_tso_client_rpc_mode-new-in-v840">parallel mode for TSO requests</a> (introduced in v8.4.0) </li>
@@ -39,7 +39,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     </td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Use Active PD Followers to enhance PD's Region information query service</a> (GA in v8.5.0) **tw@Oreoxmt 2015**</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Use Active PD Followers to enhance PD's Region information query service</a> (GA in v8.5.0)</td>
     <td>TiDB v7.6.0 introduces an experimental feature "Active PD Follower", which allows PD followers to provide Region information query services. This feature improves the capability of the PD cluster to handle <code>GetRegion</code> and <code>ScanRegions</code> requests in clusters with a large number of TiDB nodes and Regions, thereby reducing the CPU pressure on PD leaders. In v8.5.0, this feature becomes generally available (GA).</td>
   </tr>
   <tr>
@@ -60,7 +60,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="5">Reliability and availability</td>
-    <td>Improve the stability of large-scale clusters **tw@hfxsd 1976**</td>
+    <td>Improve the stability of large-scale clusters</td>
     <td>Companies that use TiDB to run multi-tenant or SaaS applications often need to store a large number of tables. In v8.5.0, TiDB significantly enhances the stability of large-scale clusters. <a href="https://docs.pingcap.com/tidb/v8.5/schema-cache">Schema cache control</a> and <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_cache_mem_quota-new-in-v610">setting the memory quota for the TiDB statistics cache</a> are generally available (GA), reducing stability issues caused by excessive memory consumption. PD introduces <a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Active Follower</a> to handle the pressure brought by numerous Regions, and gradually <a href="https://docs.pingcap.com/tidb/v8.5/pd-microservices">decouples the services handled by PD</a> for independent deployment. You can <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840">increase concurrency</a> and <a href="https://docs.pingcap.com/zh/tidb/v8.5/statistics#collect-statistics-on-some-columns">reduce the number of collected objects</a> to improve the efficiency of statistics collection and loading, ensuring the stability of execution plans in large clusters.</td>
   </tr>
   <tr>
@@ -72,7 +72,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td>By setting a maximum percentage limit on background tasks of resource control, you can control their resource consumption based on the needs of different application systems. This keeps background task consumption at a low level and ensures the quality of online services.</td>
   </tr>
   <tr>
-    <td>Enhance and expand TiProxy use cases **tw@Oreoxmt**</td>
+    <td>Enhance and expand TiProxy use cases</td>
     <td>As a crucial component of the high availability of TiDB, <a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-overview">TiProxy</a> extends its capabilities beyond SQL traffic access and forwarding to support cluster change evaluation. Key features include:
     <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-traffic-replay">TiProxy supports traffic capture and replay</a> (experimental, introduced in v8.4.0)</li>
     <li><a href="https://docs.pingcap.com/tidb/v8.5/tiproxy-overview">TiProxy supports built-in virtual IP management</a> (introduced in v8.3.0)</li>
@@ -85,7 +85,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="2"> SQL </td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/foreign-key">Foreign key</a> (GA in v8.5.0) **tw@lilin90 1894**</td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/foreign-key">Foreign key</a> (GA in v8.5.0)</td>
     <td>Foreign keys are constraints in a database that establish relationships between tables, ensuring data consistency and integrity. They ensure that the data referenced in a child table exist in the parent table, preventing the insertion of invalid data. Foreign keys also support cascading operations (such as automatic synchronization during deletion or update), simplifying business logic implementation and reducing the complexity of manually maintaining data relationships.</td>
   </tr>
   <tr>
@@ -107,7 +107,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="1">Security</td>
-    <td>Client-side encryption of <a href="https://docs.pingcap.com/tidb/v8.5/br-snapshot-manual#encrypt-the-backup-data">snapshot backup data</a> and <a href="https://docs.pingcap.com/tidb/v8.5/br-pitr-manual#encrypt-log-backup-data">log backup data</a> (GA in v8.5.0)**tw@qiancai 1998**</td>
+    <td>Client-side encryption of <a href="https://docs.pingcap.com/tidb/v8.5/br-snapshot-manual#encrypt-the-backup-data">snapshot backup data</a> and <a href="https://docs.pingcap.com/tidb/v8.5/br-pitr-manual#encrypt-log-backup-data">log backup data</a> (GA in v8.5.0)</td>
     <td>Before uploading backup data to your backup storage, you can encrypt the backup data to ensure its security during storage and transmission.</td>
   </tr>
 </tbody>
@@ -117,7 +117,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Scalability
 
-* Setting the memory limit for schema cache is now generally available (GA). When the number of tables reaches hundreds of thousands or even millions, this feature significantly reduces the memory usage of schema metadata [#50959](https://github.com/pingcap/tidb/issues/50959) @[tiancaiamao](https://github.com/tiancaiamao) @[wjhuang2016](https://github.com/wjhuang2016) @[gmhdbjd](https://github.com/gmhdbjd) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--1976-->
+* Setting the memory limit for schema cache is now generally available (GA). When the number of tables reaches hundreds of thousands or even millions, this feature significantly reduces the memory usage of schema metadata [#50959](https://github.com/pingcap/tidb/issues/50959) @[tiancaiamao](https://github.com/tiancaiamao) @[wjhuang2016](https://github.com/wjhuang2016) @[gmhdbjd](https://github.com/gmhdbjd) @[tangenta](https://github.com/tangenta)
 
     In some SaaS scenarios, where the number of tables reaches hundreds of thousands or even millions, schema metadata can consume a significant amount of memory. With this feature enabled, TiDB uses the Least Recently Used (LRU) algorithm to cache and evict the corresponding schema metadata, effectively reducing memory usage.
 
@@ -125,7 +125,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [documentation](/schema-cache.md).
 
-* Provide the Active PD Follower feature to enhance the scalability of PD's Region information query service (GA) [#7431](https://github.com/tikv/pd/issues/7431) @[okJiang](https://github.com/okJiang) tw@Oreoxmt <!--2015-->
+* Provide the Active PD Follower feature to enhance the scalability of PD's Region information query service (GA) [#7431](https://github.com/tikv/pd/issues/7431) @[okJiang](https://github.com/okJiang)
 
     In a TiDB cluster with a large number of Regions, the PD leader might experience high CPU load due to the increased overhead of handling heartbeats and scheduling tasks. If the cluster has many TiDB instances, and there is a high concurrency of requests for Region information, the CPU pressure on the PD leader increases further and might cause PD services to become unavailable.
 
@@ -135,7 +135,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Performance
 
-* TiDB accelerated table creation becomes generally available (GA), significantly reducing data migration and cluster initialization time [#50052](https://github.com/pingcap/tidb/issues/50052) @[D3Hunter](https://github.com/D3Hunter) @[gmhdbjd](https://github.com/gmhdbjd) tw@Oreoxmt <!--1977-->
+* TiDB accelerated table creation becomes generally available (GA), significantly reducing data migration and cluster initialization time [#50052](https://github.com/pingcap/tidb/issues/50052) @[D3Hunter](https://github.com/D3Hunter) @[gmhdbjd](https://github.com/gmhdbjd)
 
     TiDB v7.6.0 introduces accelerated table creation as an experimental feature, controlled by the system variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760). Staring from v8.0.0, this system variable is renamed to [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800).
 
@@ -153,7 +153,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Reliability
 
-* Support limiting the maximum rate and concurrency of requests processed by PD [#5739](https://github.com/tikv/pd/issues/5739) @[rleungx](https://github.com/rleungx) **tw@qiancai** <!--2018-->
+* Support limiting the maximum rate and concurrency of requests processed by PD [#5739](https://github.com/tikv/pd/issues/5739) @[rleungx](https://github.com/rleungx)
 
     When a sudden influx of requests is sent to PD, it can lead to high workloads and potentially affect PD performance. Starting from v8.5.0, you can use [`pd-ctl`](/pd-control.md) to limit the maximum rate and concurrency of requests processed by PD, improving its stability.
 
@@ -161,13 +161,13 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### SQL
 
-* Support foreign keys (GA) [#36982](https://github.com/pingcap/tidb/issues/36982) @[YangKeao](https://github.com/YangKeao) @[crazycs520](https://github.com/crazycs520) tw@lilin90 <!--1894-->
+* Support foreign keys (GA) [#36982](https://github.com/pingcap/tidb/issues/36982) @[YangKeao](https://github.com/YangKeao) @[crazycs520](https://github.com/crazycs520)
 
     The foreign key feature becomes generally available (GA) in v8.5.0. Foreign key constraints help ensure data consistency and integrity. You can easily establish foreign key relationships between tables, with support for cascading updates and deletions, simplifying data management. This feature enhances support for applications with complex data relationships.
 
     For more information, see [documentation](/foreign-key.md).
 
-* Introduce the `ADMIN ALTER DDL JOBS` statement to support modifying the DDL jobs online [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta) tw@hfxsd <!--2016-->
+* Introduce the `ADMIN ALTER DDL JOBS` statement to support modifying the DDL jobs online [#57229](https://github.com/pingcap/tidb/issues/57229) @[fzzf678](https://github.com/fzzf678) @[tangenta](https://github.com/tangenta)
 
     Starting from v8.3.0, you can set the variables [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) and [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt) at the session level. As a result, setting these two variables globally no longer affects all running DDL jobs. To modify the values of these variables, you need to cancel the DDL job first, adjust the variables, and then resubmit the job.
 
@@ -181,7 +181,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ### Security
 
-* BR supports client-side encryption of both full backup data and log backup data (GA) [#28640](https://github.com/pingcap/tidb/issues/28640) [#56433](https://github.com/pingcap/tidb/issues/56433) @[joccau](https://github.com/joccau) @[Tristan1900](https://github.com/Tristan1900) tw@qiancai <!--1998-->
+* BR supports client-side encryption of both full backup data and log backup data (GA) [#28640](https://github.com/pingcap/tidb/issues/28640) [#56433](https://github.com/pingcap/tidb/issues/56433) @[joccau](https://github.com/joccau) @[Tristan1900](https://github.com/Tristan1900)
 
     * Client-side encryption of full backup data (introduced as experimental in TiDB v5.3.0) enables you to encrypt backup data on the client side using a custom fixed key.
 
@@ -195,7 +195,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [Encrypt the backup data](/br/br-snapshot-manual.md#encrypt-the-backup-data) and [Encrypt the log backup data](/br/br-pitr-manual.md#encrypt-the-log-backup-data).
 
-* TiKV encryption at rest supports [Google Cloud Key Management Service (Google Cloud KMS)](https://cloud.google.com/docs/security/key-management-deep-dive) (GA) [#8906](https://github.com/tikv/tikv/issues/8906) @[glorv](https://github.com/glorv) **tw@qiancai** <!--1876-->
+* TiKV encryption at rest supports [Google Cloud Key Management Service (Google Cloud KMS)](https://cloud.google.com/docs/security/key-management-deep-dive) (GA) [#8906](https://github.com/tikv/tikv/issues/8906) @[glorv](https://github.com/glorv)
 
     TiKV ensures data security by using the encryption at rest technique to encrypt stored data. The core aspect of this technique is proper key management. In v8.0.0, TiKV encryption at rest experimentally supports using Google Cloud KMS for master key management.
 
@@ -243,7 +243,7 @@ The following features are planned for deprecation in future versions:
 
 ## Improvements
 
-+ TiDB <!--tw@hfxsd: 12 notes-->
++ TiDB
 
     - Improve the response speed of job cancellation for the `ADD INDEX` acceleration feature when disabling the Distributed eXecution Framework (DXF) [#56017](https://github.com/pingcap/tidb/issues/56017) @[lance6716](https://github.com/lance6716)
     - Improve the speed of adding indexes to small tables [#54230](https://github.com/pingcap/tidb/issues/54230) @[tangenta](https://github.com/tangenta)
@@ -258,53 +258,53 @@ The following features are planned for deprecation in future versions:
     - Optimize the amount of data required for synchronous loading of statistics to improve loading performance [#56812](https://github.com/pingcap/tidb/issues/56812) @[winoros](https://github.com/winoros)
     - Optimize the execution plan in specific cases where an `OUTER JOIN` involves a unique index and an `ORDER BY ... LIMIT` clause, improving execution efficiency [#56321](https://github.com/pingcap/tidb/issues/56321) @[winoros](https://github.com/winoros)
 
-+ TiKV <!--tw@hfxsd: 2 notes-->
++ TiKV
 
     - Use a separate thread to clean up replicas, ensuring stable latency for critical paths of Raft reads and writes [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
     - Improve the performance of the vector distance function by supporting SIMD [#17290](https://github.com/tikv/tikv/issues/17290) @[EricZequan](https://github.com/EricZequan)
 
-+ PD <!--tw@qiancai: 2 notes-->
++ PD
 
     - Support dynamic switching of the `tso` service between microservice and non-microservice modes [#8477](https://github.com/tikv/pd/issues/8477) @[rleungx](https://github.com/rleungx)
     - Optimize the case format of certain fields in the `pd-ctl config` output [#8694](https://github.com/tikv/pd/issues/8694) @[lhy1024](https://github.com/lhy1024)
     - [Store limit v2](/configure-store-limit.md#principles-of-store-limit-v2) becomes generally available (GA) [#8865](https://github.com/tikv/pd/issues/8865) @[lhy1024](https://github.com/lhy1024)
     - Support configuring Region inspection concurrency (experimental) [#8866](https://github.com/tikv/pd/issues/8866) @[lhy1024](https://github.com/lhy1024)
 
-+ TiFlash <!--tw@Oreoxmt: 3 notes-->
++ TiFlash
 
-    - (dup): release-7.1.6.md > Improvements> TiFlash - Improve the garbage collection speed of outdated data in the background for tables with clustered indexes [#9529](https://github.com/pingcap/tiflash/issues/9529) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Improve the garbage collection speed of outdated data in the background for tables with clustered indexes [#9529](https://github.com/pingcap/tiflash/issues/9529) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Improve query performance of vector search in data update scenarios [#9599](https://github.com/pingcap/tiflash/issues/9599) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - Add monitoring metrics for CPU usage during vector index building [#9032](https://github.com/pingcap/tiflash/issues/9032) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Improve the execution efficiency of logical operators [#9146](https://github.com/pingcap/tiflash/issues/9146) @[windtalker](https://github.com/windtalker)
 
 + Tools
 
-    + Backup & Restore (BR) <!--tw@Oreoxmt: 4 notes-->
+    + Backup & Restore (BR)
 
-        - (dup): release-7.1.6.md > Improvements> Tools> Backup & Restore (BR) - Reduce unnecessary log printing during backup [#55902](https://github.com/pingcap/tidb/issues/55902) @[Leavrth](https://github.com/Leavrth)
+        - Reduce unnecessary log printing during backup [#55902](https://github.com/pingcap/tidb/issues/55902) @[Leavrth](https://github.com/Leavrth)
         - Optimize the error message for the encryption key `--crypter.key` [#56388](https://github.com/pingcap/tidb/issues/56388) @[Tristan1900](https://github.com/Tristan1900)
         - Increase concurrency in BR when creating databases to improve data restore performance [#56866](https://github.com/pingcap/tidb/issues/56866) @[Leavrth](https://github.com/Leavrth)
         - Disable the table-level checksum calculation during full backups by default (`--checksum=false`) to improve backup performance [#56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
         - Add a mechanism to independently track and reset the connection timeout for each storage node, enhancing the handling of slow nodes and preventing backup operations from hanging [#57666](https://github.com/pingcap/tidb/issues/57666) @[3pointer](https://github.com/3pointer)
 
-    + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
+    + TiDB Data Migration (DM)
 
         - Add retries for DM-worker to connect to DM-master during DM cluster startup [#4287](https://github.com/pingcap/tiflow/issues/4287) @[GMHDBJD](https://github.com/GMHDBJD)
 
 ## Bug fixes
 
-+ TiDB <!--tw@qiancai: the following 20 notes-->
++ TiDB
 
     - Fix the issue that TiDB does not automatically retry requests when the Region metadata returned from PD lacks Leader information, potentially causing execution errors [#56757](https://github.com/pingcap/tidb/issues/56757) @[cfzjywxk](https://github.com/cfzjywxk)
-    - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that TTL tasks cannot be canceled when there is a write conflict [#56422](https://github.com/pingcap/tidb/issues/56422) @[YangKeao](https://github.com/YangKeao)
-    - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that when canceling a TTL task, the corresponding SQL is not killed forcibly [#56511](https://github.com/pingcap/tidb/issues/56511) @[lcwangchao](https://github.com/lcwangchao)
-    - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that existing TTL tasks are executed unexpectedly frequently in a cluster that is upgraded from v6.5 to v7.5 or later [#56539](https://github.com/pingcap/tidb/issues/56539) @[lcwangchao](https://github.com/lcwangchao)
-    - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that the `INSERT ... ON DUPLICATE KEY` statement is not compatible with `mysql_insert_id` [#55965](https://github.com/pingcap/tidb/issues/55965) @[tiancaiamao](https://github.com/tiancaiamao)
-    - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that TTL might fail if TiKV is not selected as the storage engine [#56402](https://github.com/pingcap/tidb/issues/56402) @[YangKeao](https://github.com/YangKeao)
-    - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that the `AUTO_INCREMENT` field is not correctly set after importing data using the `IMPORT INTO` statement [#56476](https://github.com/pingcap/tidb/issues/56476) @[D3Hunter](https://github.com/D3Hunter)
-    - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that TiDB does not check the index length limitation when executing `ADD INDEX` [#56930](https://github.com/pingcap/tidb/issues/56930) @[fzzf678](https://github.com/fzzf678)
-    - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that executing `RECOVER TABLE BY JOB JOB_ID;` might cause TiDB to panic [#55113](https://github.com/pingcap/tidb/issues/55113) @[crazycs520](https://github.com/crazycs520)
-    - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that stale read does not strictly verify the timestamp of the read operation, resulting in a small probability of affecting the consistency of the transaction when an offset exists between the TSO and the real physical time [#56809](https://github.com/pingcap/tidb/issues/56809) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue that TTL tasks cannot be canceled when there is a write conflict [#56422](https://github.com/pingcap/tidb/issues/56422) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that when canceling a TTL task, the corresponding SQL is not killed forcibly [#56511](https://github.com/pingcap/tidb/issues/56511) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that existing TTL tasks are executed unexpectedly frequently in a cluster that is upgraded from v6.5 to v7.5 or later [#56539](https://github.com/pingcap/tidb/issues/56539) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that the `INSERT ... ON DUPLICATE KEY` statement is not compatible with `mysql_insert_id` [#55965](https://github.com/pingcap/tidb/issues/55965) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that TTL might fail if TiKV is not selected as the storage engine [#56402](https://github.com/pingcap/tidb/issues/56402) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that the `AUTO_INCREMENT` field is not correctly set after importing data using the `IMPORT INTO` statement [#56476](https://github.com/pingcap/tidb/issues/56476) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that TiDB does not check the index length limitation when executing `ADD INDEX` [#56930](https://github.com/pingcap/tidb/issues/56930) @[fzzf678](https://github.com/fzzf678)
+    - Fix the issue that executing `RECOVER TABLE BY JOB JOB_ID;` might cause TiDB to panic [#55113](https://github.com/pingcap/tidb/issues/55113) @[crazycs520](https://github.com/crazycs520)
+    - Fix the issue that stale read does not strictly verify the timestamp of the read operation, resulting in a small probability of affecting the consistency of the transaction when an offset exists between the TSO and the real physical time [#56809](https://github.com/pingcap/tidb/issues/56809) @[MyonKeminta](https://github.com/MyonKeminta)
     - Fix the issue that TiDB could not resume Reorg DDL tasks from the previous progress after the DDL owner node is switched [#56506](https://github.com/pingcap/tidb/issues/56506) @[tangenta](https://github.com/tangenta)
     - Fix the issue that some metrics in the monitoring panel of Distributed eXecution Framework (DXF) are inaccurate [#57172](https://github.com/pingcap/tidb/issues/57172) @[fzzf678](https://github.com/fzzf678) [#56942](https://github.com/pingcap/tidb/issues/56942) @[fzzf678](https://github.com/fzzf678)
     - Fix the issue that `REORGANIZE PARTITION` fails to return error reasons in certain cases [#56634](https://github.com/pingcap/tidb/issues/56634) @[mjonss](https://github.com/mjonss)
@@ -323,7 +323,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that converting data from the `BIT` type to the `CHAR` type might cause TiKV panics [#56494](https://github.com/pingcap/tidb/issues/56494) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that using variables or parameters in the `CREATE VIEW` statement does not report errors [#53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)
     - Fix the issue that the `JSON_VALID()` function returns incorrect results [#56293](https://github.com/pingcap/tidb/issues/56293) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that TTL tasks are not canceled after the `tidb_ttl_job_enable` variable is disabled [#57404](https://github.com/pingcap/tidb/issues/57404) @[YangKeao](https://github.com/YangKeao) <!--tw@lilin90: the following 20 notes-->
+    - Fix the issue that TTL tasks are not canceled after the `tidb_ttl_job_enable` variable is disabled [#57404](https://github.com/pingcap/tidb/issues/57404) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that using the `RANGE COLUMNS` partition function and the `utf8mb4_0900_ai_ci` collation at the same time could result in incorrect query results [#57261](https://github.com/pingcap/tidb/issues/57261) @[Defined2014](https://github.com/Defined2014)
     - Fix the runtime error caused by executing a prepared statement that begins with a newline character, resulting in an array out of bounds [#54283](https://github.com/pingcap/tidb/issues/54283) @[Defined2014](https://github.com/Defined2014)
     - Fix the precision issue in the `UTC_TIMESTAMP()` function, such as setting the precision too high [#56451](https://github.com/pingcap/tidb/issues/56451) @[chagelo](https://github.com/chagelo)
@@ -346,10 +346,10 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that the data in the **Stats Healthy Distribution** panel of Grafana might be incorrect [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that vector search might return incorrect results when querying tables with clustered indexes [#57627](https://github.com/pingcap/tidb/issues/57627) @[winoros](https://github.com/winoros)
 
-+ TiKV <!--tw@Oreoxmt: 6 notes-->
++ TiKV
 
-    - (dup): release-7.1.6.md > Bug fixes> TiKV - Fix the panic issue that occurs when read threads access outdated indexes in the MemTable of the Raft Engine [#17383](https://github.com/tikv/tikv/issues/17383) @[LykxSassinator](https://github.com/LykxSassinator)
-    - (dup): release-7.5.4.md > Bug fixes> TiKV - Fix the issue that when a large number of transactions are queuing for lock release on the same key and the key is frequently updated, excessive pressure on deadlock detection might cause TiKV OOM issues [#17394](https://github.com/tikv/tikv/issues/17394) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the panic issue that occurs when read threads access outdated indexes in the MemTable of the Raft Engine [#17383](https://github.com/tikv/tikv/issues/17383) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that when a large number of transactions are queuing for lock release on the same key and the key is frequently updated, excessive pressure on deadlock detection might cause TiKV OOM issues [#17394](https://github.com/tikv/tikv/issues/17394) @[MyonKeminta](https://github.com/MyonKeminta)
     - Fix the issue that CPU usage for background tasks of resource control is counted twice [#17603](https://github.com/tikv/tikv/issues/17603) @[glorv](https://github.com/glorv)
     - Fix the issue that TiKV OOM might occur due to the accumulation of CDC internal tasks [#17696](https://github.com/tikv/tikv/issues/17696) @[3AceShowHand](https://github.com/3AceShowHand)
     - Fix the issue that large batch writes cause performance jitter when `raft-entry-max-size` is set too high [#17701](https://github.com/tikv/tikv/issues/17701) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
@@ -357,18 +357,18 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that TiKV might panic when executing queries containing `RADIANS()` or `DEGREES()` functions [#17852](https://github.com/tikv/tikv/issues/17852) @[gengliqi](https://github.com/gengliqi)
     - Fix the issue that write jitter might occur when all hibernated Regions are awakened [#17101](https://github.com/tikv/tikv/issues/17101) @[hhwyt](https://github.com/hhwyt)
 
-+ PD <!--tw@hfxsd: 3 notes-->
++ PD
 
-    - (dup): release-7.1.6.md > Bug fixes> PD - Fix the memory leak issue in hotspot cache [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
+    - Fix the memory leak issue in hotspot cache [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that the resource group selector does not take effect on any panel [#56572](https://github.com/pingcap/tidb/issues/56572) @[glorv](https://github.com/glorv)
     - Fix the issue that deleted resource groups still appear in the monitoring panel [#8716](https://github.com/tikv/pd/issues/8716) @[AndreMouche](https://github.com/AndreMouche)
     - Fix unclear log descriptions during the Region syncer loading process [#8717](https://github.com/tikv/pd/issues/8717) @[lhy1024](https://github.com/lhy1024)
-    - (dup): release-7.1.6.md > Bug fixes> PD - Fix the memory leak issue in label statistics [#8700](https://github.com/tikv/pd/issues/8700) @[lhy1024](https://github.com/lhy1024)
+    - Fix the memory leak issue in label statistics [#8700](https://github.com/tikv/pd/issues/8700) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that configuring `tidb_enable_tso_follower_proxy` to `0` or `OFF` fails to disable the TSO Follower Proxy feature [#8709](https://github.com/tikv/pd/issues/8709) @[JmPotato](https://github.com/JmPotato)
 
-+ TiFlash <!--tw@Oreoxmt: 4 notes-->
++ TiFlash
 
-    - (dup): release-7.1.6.md > Bug fixes> TiFlash - Fix the issue that the `SUBSTRING()` function does not support the `pos` and `len` arguments for certain integer types, causing query errors [#9473](https://github.com/pingcap/tiflash/issues/9473) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue that the `SUBSTRING()` function does not support the `pos` and `len` arguments for certain integer types, causing query errors [#9473](https://github.com/pingcap/tiflash/issues/9473) @[gengliqi](https://github.com/gengliqi)
     - Fix the issue that vector search performance might degrade after scaling out TiFlash write nodes in the disaggregated storage and compute architecture [#9637](https://github.com/pingcap/tiflash/issues/9637) @[kolafish](https://github.com/kolafish)
     - Fix the issue that the `SUBSTRING()` function returns incorrect results when the second parameter is negative [#9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that the `REPLACE()` function returns an error when the first parameter is a constant [#9522](https://github.com/pingcap/tiflash/issues/9522) @[guo-shaoge](https://github.com/guo-shaoge)
@@ -376,7 +376,7 @@ The following features are planned for deprecation in future versions:
 
 + Tools
 
-    + Backup & Restore (BR) <!--tw@hfxsd: 4 notes-->
+    + Backup & Restore (BR)
 
         - Fix the OOM issue during backups when there are too many uncompleted range gaps, reducing the amount of pre-allocated memory [#53529](https://github.com/pingcap/tidb/issues/53529) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that global indexes cannot be backed up [#57469](https://github.com/pingcap/tidb/issues/57469) @[Defined2014](https://github.com/Defined2014)
@@ -385,15 +385,15 @@ The following features are planned for deprecation in future versions:
         - Fix potential security vulnerabilities by upgrading the `k8s.io/api` library version [#57790](https://github.com/pingcap/tidb/issues/57790) @[BornChanger](https://github.com/BornChanger)
         - Fix the issue that PITR tasks might return the `Information schema is out of date` error when there are a large number of tables in the cluster but the actual data size is small [#57743](https://github.com/pingcap/tidb/issues/57743) @[Tristan1900](https://github.com/Tristan1900)
 
-    + TiCDC <!--tw@Oreoxmt: 3 notes-->
+    + TiCDC
 
         - Fix the issue that the Kafka messages lack Key fields when using the Debezium protocol [#1799](https://github.com/pingcap/tiflow/issues/1799) @[wk989898](https://github.com/wk989898)
         - Fix the issue that the redo module fails to properly report errors [#11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that TiCDC mistakenly discards DDL tasks when the schema versions of DDL tasks become non-incremental during TiDB DDL owner changes [#11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
 
-    + TiDB Lightning <!--tw@Oreoxmt: 1 note-->
+    + TiDB Lightning
 
-        - (dup): release-7.1.6.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that TiDB Lightning fails to receive oversized messages sent from TiKV [#56114](https://github.com/pingcap/tidb/issues/56114) @[fishiu](https://github.com/fishiu)
+        - Fix the issue that TiDB Lightning fails to receive oversized messages sent from TiKV [#56114](https://github.com/pingcap/tidb/issues/56114) @[fishiu](https://github.com/fishiu)
         - Fix the issue that the `AUTO_INCREMENT` value is set too high after importing data using the physical import mode [#56814](https://github.com/pingcap/tidb/issues/56814) @[D3Hunter](https://github.com/D3Hunter)
 
 ## Contributors
