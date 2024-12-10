@@ -42,7 +42,7 @@ A `tiup br` command consists of multiple layers of sub-commands. Currently, br c
 
 `tiup br debug` includes the following sub-commands:
 
-* `checksum`: (hidden parameter) used to offline check the integrity of backup data to ensure that all backup files match the CRC64 checksum results calculated by [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md).
+* `checksum`: (hidden parameter) used to offline check the integrity of table-level backup data to ensure that all backup files match the CRC64 checksum results calculated by [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md). Starting from v8.5.0, the default value of this parameter is changed from `true` to `false` to improve backup performance.
 * `backupmeta`: used to check whether an intersection exists among backup data files. In normal cases, backup data files do not intersect.
 * `decode`: used to parse the `backupmeta` metadata file of a full backup into JSON format. In addition, you can parse specific fields using the `--field` parameter.
 * `encode`: used to encode the `backupmeta.json` metadata file of a full backup into the protobuf format that is used during data restore.
