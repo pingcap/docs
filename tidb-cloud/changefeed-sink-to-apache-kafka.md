@@ -112,7 +112,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
     - If you select **Private Service Connect**, do the following:
     
-        1. Make sure you fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) in **Network** section.
+        1. Ensure that you fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) in **Network** section.
         2. Fill the **Service Attachment** that you have configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md)
         3. Fill the **Boostrap Ports**. It is recommended that you provide more than one ports. You can use commas `,` to separate multiple ports.
       
@@ -121,7 +121,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
 
 3. Select your **Kafka Version**. If you do not know that, use Kafka V2.
-4. Select a desired **Compression** type for the data in this changefeed.
+4. Select a **Compression** type for the data in this changefeed.
 5. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 6. Click **Validate Connection and Next** to test the network connection. If the test is successful, you will be directed to the next page.
 
