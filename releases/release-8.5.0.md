@@ -227,6 +227,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 | -------- | -------- | -------- | -------- |
 | TiDB | [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) | Modified | Starting from v8.5.0, the integer display width feature is deprecated. The default value of this configuration item is changed from `false` to `true`. |
 | TiKV | [`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size) | Modified | Changes the default value from `8192` to `16384`. |
+| PD | [`patrol-region-worker-count`](/pd-configuration-file.md#patrol-region-worker-count-new-in-v850) | Newly added | Controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. |
 | BR | [`--checksum`](/br/use-br-command-line-tool.md) | Modified | Changes the default value from `true` to `false`, meaning that BR does not calculate the table-level checksum during full backups by default, to improve backup performance. |
 
 ## Deprecated features
