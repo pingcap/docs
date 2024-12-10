@@ -279,8 +279,17 @@ Configuration items related to scheduling
 
 ### `patrol-region-interval`
 
-+ Controls the running frequency at which `replicaChecker` checks the health state of a Region. The smaller this value is, the faster `replicaChecker` runs. Normally, you do not need to adjust this parameter.
++ Controls the running frequency at which the checker inspects the health state of a Region. The smaller this value is, the faster the checker runs. Normally, you do not need to adjust this configuration.
 + Default value: `10ms`
+
+### `patrol-region-worker-count` <span class="version-mark">New in v8.5.0</span>
+
+> **Warning:**
+>
+> Setting this configuration item to a value greater than 1 enables concurrent checks. This is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/tikv/pd/issues) on GitHub.
+
++ Controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. Normally, you do not need to adjust this configuration.
++ Default value: `1`
 
 ### `split-merge-interval`
 
