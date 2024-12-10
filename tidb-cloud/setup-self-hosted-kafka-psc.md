@@ -696,7 +696,7 @@ If you have already followed the steps in this document and successfully set up 
     3. Configure the TiDB Cloud connection with the following input to create the new changefeed:
 
         - New Bootstrap ports
-        - New Kafka Advertised Listener Group
+        - New Kafka Advertised Listener Pattern
         - The same Service Attachment
 
-- If you [set up self-hosted Kafka Private Service Connect by Kafka-proxy](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy), create a new Kafka-proxy PSC from the beginning with New Kafka Advertised Listener Group.
+- If you [set up self-hosted Kafka Private Service Connect by Kafka-proxy](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy), create a new Kafka-proxy PSC from the beginning with a new Kafka Advertised Listener Pattern.
