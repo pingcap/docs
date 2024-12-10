@@ -141,7 +141,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     In v8.5.0, TiDB accelerated table creation becomes generally available (GA) and is enabled by default. During data migration and cluster initialization, this feature supports rapid creation of millions of tables, significantly reducing operation time.
 
-    For more information, see [Documentation](/accelerated-table-creation.md).
+    For more information, see [documentation](/accelerated-table-creation.md).
 
 * TiKV supports the MVCC in-memory engine (IME), which accelerates queries involving scans of extensive MVCC historical versions [#16141](https://github.com/tikv/tikv/issues/16141) [@SpadeA-Tang](https://github.com/SpadeA-Tang) [@glorv](https://github.com/glorv) [@overvenus](https://github.com/overvenus)
 
