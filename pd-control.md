@@ -232,10 +232,16 @@ Usage:
     config set region-score-formula-version v2
     ```
 
-- `patrol-region-interval` controls the execution frequency that `replicaChecker` checks the health status of Regions. A shorter interval indicates a higher execution frequency. Generally, you do not need to adjust it.
+- `patrol-region-interval` controls the execution frequency that the checker inspects the health status of Regions. A shorter interval indicates a higher execution frequency. Generally, you do not need to adjust it.
 
     ```bash
-    config set patrol-region-interval 10ms // Set the execution frequency of replicaChecker to 10ms
+    config set patrol-region-interval 10ms // Set the execution frequency of the checker to 10ms
+    ```
+
+- `patrol-region-worker-count` controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. Normally, you do not need to adjust this configuration. Setting this configuration item to a value greater than 1 enables concurrent checks. Currently, this feature is experimental, and it is not recommended that you use it in the production environment.
+
+    ```bash
+    config set patrol-region-worker-count 2 // Set the checker concurrency to 2
     ```
 
 - `max-store-down-time` controls the time that PD decides the disconnected store cannot be restored if exceeded. If PD does not receive heartbeats from a store within the specified period of time, PD adds replicas in other nodes.

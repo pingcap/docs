@@ -280,7 +280,8 @@ The following PD configuration items can be modified dynamically:
 | `cluster-version` | The cluster version |
 | `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MiB) |
 | `schedule.max-merge-region-keys` | Specifies the maximum numbers of the `Region Merge` keys |
-| `schedule.patrol-region-interval` | Determines the frequency at which `replicaChecker` checks the health state of a Region |
+| `schedule.patrol-region-interval` | Determines the frequency at which the checker inspects the health state of a Region |
+| `scheduler.patrol-region-worker-count` | Controls the number of concurrent operators created by the checker when inspecting the health state of a Region |
 | `schedule.split-merge-interval` | Determines the time interval of performing split and merge operations on the same Region |
 | `schedule.max-snapshot-count` | Determines the maximum number of snapshots that a single store can send or receive at the same time |
 | `schedule.max-pending-peer-count` | Determines the maximum number of pending peers in a single store |
