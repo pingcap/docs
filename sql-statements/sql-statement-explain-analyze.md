@@ -38,10 +38,10 @@ Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL state
 
 | attribute name          | description |
 |:----------------|:---------------------------------|
-| actRows       | Number of rows output by the operator. |
-| execution info  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. |
-| memory  | Memory space occupied by the operator. |
-| disk  | Disk space occupied by the operator. |
+| `actRows`       | Number of rows output by the operator. |
+| `execution info`  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. 'open' represents the time required for operator initialization. 'close' represents the time from the operator processing all data to the operator ending. The time counted by 'time' includes the time of 'open' and 'close'. When the operator is executed concurrently, the execution information will show the sum of all used 'wall time'. At this time, 'time', 'open' and 'close' will be replaced with 'total_time', 'total_open' and 'total_close'. |
+| `memory`  | Max memory space occupied by the operator. |
+| `disk`  | Max disk space occupied by the operator. |
 
 ## Examples
 
@@ -99,7 +99,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## Execution information of operators
 
-In addition to the basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
+In addition to the basic `time`, `open`, `close` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
 
 ### Point_Get
 
@@ -338,6 +338,18 @@ after key/value request is processed:
 ```
 
 For writes and batch gets, the calculation is similar with different base costs.
+
+### tiflash_wait information
+
+When a query involves MPP tasks, the execution time is also affected by various tiflash_wait times, for example:
+
+```
+tiflash_wait: {minTSO_wait: 425ms, pipeline_breaker_wait: 133ms, pipeline_queue_wait: 512ms}
+```
+
+- `minTSO_wait`: Records the time spent waiting for an MPP Task to be scheduled by the [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
+- 'pipeline_breaker_wait': When TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the time it takes for the pipeline containing the pipeline breaker operator to wait for all data in the upstream pipeline. Currently only used to display the time it takes for the pipeline containing the 'Join' operator to wait for all hash table builds to complete.
+- `pipeline_queue_wait`: When TiFlash uses the Pipeline Execution Model(/tiflash/tiflash-pipeline-model.md), it records the waiting time in the CPU Task Thread Pool and IO Task Thread Pool during the execution of the pipeline.
 
 ### Other common execution information
 
