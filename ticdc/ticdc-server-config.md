@@ -30,7 +30,7 @@ The following are descriptions of options available in a `cdc server` command:
 
 The following describes the configuration file specified by the `config` option in the `cdc server` command. You can find the default configuration file in [`pkg/cmd/util/ticdc.toml`](https://github.com/pingcap/tiflow/blob/master/pkg/cmd/util/ticdc.toml).
 
-[//]: # (The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities.)
+<!-- The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities.)
 
 ### `addr`
 
@@ -99,7 +99,7 @@ The following describes the configuration file specified by the `config` option 
 - Lists the usernames that are allowed for client authentication. Authentication requests with usernames not in this list will be rejected.
 - Default value: `null`
 
-[//]: # (- Example: `["username_1", "username_2"]`)
+[//]: # (- Example: `["username_1", "username_2"]` -->
 
 ### `capture-session-ttl`
 

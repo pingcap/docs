@@ -100,13 +100,13 @@ This section introduces the configuration of a replication task.
 
 - Ignores the transaction of specified start_ts.
 
-[//]: # (- Example: `[1, 2]`)
+<!-- Example: `[1, 2]` -->
 
 #### `rules`
 
 - Specifies the filter rules. For more information, see [Syntax](/table-filter.md#syntax).
 
-[//]: # (- Example: `['*.*', '!test.*']`)
+<!-- Example: `['*.*', '!test.*']` -->
 
 #### filter.event-filters
 
@@ -189,7 +189,7 @@ This section introduces the configuration of a replication task.
 - When the downstream is a storage service, the protocol can only be canal-json or csv.
 - This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
 
-[//]: # (- 示例值：`"canal-json"`)
+<!-- 示例值：`"canal-json"` -->
 
 #### `delete-only-output-handle-key-columns` <span class="version-mark">New in v7.2.0</span>
 
@@ -205,7 +205,7 @@ This section introduces the configuration of a replication task.
 - Specifies the schema registry URL.
 - This configuration item only takes effect if the downstream is MQ.
 
-[//]: # (- Example: `"http://localhost:80801/subjects/{subject-name}/versions/{version-number}/schema"`)
+<!-- Example: `"http://localhost:80801/subjects/{subject-name}/versions/{version-number}/schema"` -->
 
 #### `encoder-concurrency`
 
@@ -417,7 +417,7 @@ The following configuration items only take effect when the downstream is Kafka.
 - Specifies the mechanism of Kafka SASL authentication.
 - Default value: `""`, indicating that SASL authentication is not used
 
-[//]: # (- Example: `OAUTHBEARER`)
+<!-- Example: `OAUTHBEARER` -->
 
 #### `sasl-oauth-client-id`
 
@@ -449,7 +449,7 @@ The following configuration items only take effect when the downstream is Kafka.
 - Specifies the audience in the Kafka SASL OAUTHBEARER authentication. This parameter is optional when the OAUTHBEARER authentication is used.
 - Default value: `""`
 
-[//]: # (- Example: `"kafka"`)
+<!-- Example: `"kafka"` -->
 
 #### `output-raw-change-event`
 
