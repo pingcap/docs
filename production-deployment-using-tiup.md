@@ -434,16 +434,14 @@ If the output log shows `Up` status, the cluster is running properly.
 
 ## See also
 
-If you have deployed [TiFlash](/tiflash/tiflash-overview.md) along with the TiDB cluster, see the following documents:
-
-- [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
-- [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md)
-- [TiFlash Alert Rules and Solutions](/tiflash/tiflash-alert-rules.md)
-- [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
-
-If you have deployed [TiCDC](/ticdc/ticdc-overview.md) along with the TiDB cluster, see the following documents:
-
-- [Changefeed Overview](/ticdc/ticdc-changefeed-overview.md)
-- [Manage Changefeed](/ticdc/ticdc-manage-changefeed.md)
-- [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
-- [TiCDC FAQs](/ticdc/ticdc-faq.md)
+- [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md)
+- If you have deployed [TiFlash](/tiflash/tiflash-overview.md) along with the TiDB cluster, see the following documents:
+    - [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
+    - [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md)
+    - [TiFlash Alert Rules and Solutions](/tiflash/tiflash-alert-rules.md)
+    - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+- If you have deployed [TiCDC](/ticdc/ticdc-overview.md) along with the TiDB cluster, see the following documents:
+    - [Changefeed Overview](/ticdc/ticdc-changefeed-overview.md)
+    - [Manage Changefeed](/ticdc/ticdc-manage-changefeed.md)
+    - [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
+    - [TiCDC FAQs](/ticdc/ticdc-faq.md)
