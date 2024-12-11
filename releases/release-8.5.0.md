@@ -30,12 +30,12 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <td rowspan="6">Scalability and Performance</td>
     <td>Reduce data processing latency in multiple dimensions</td>
     <td>TiDB continuously refines data processing to improve performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include:
-    <li>Support <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">parallel sorting</a> (introduced in v8.2.0) </li>
-    <li>Optimize <a href="https://docs.pingcap.com/zh/tidb/v8.5/tidb-configuration-file#batch-policy-new-in-v830">batch processing strategy for KV (key-value) requests </a> (introduced in v8.3.0) </li>
+    <li>Support <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">parallel sorting</a> (introduced in v8.2.0) </li>
+    <li>Optimize <a href="https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#batch-policy-new-in-v830">batch processing strategy for KV (key-value) requests </a> (introduced in v8.3.0) </li>
     <li>Support <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_tso_client_rpc_mode-new-in-v840">parallel mode for TSO requests</a> (introduced in v8.4.0) </li>
     <li>Reduce the resource overhead of <a href="https://docs.pingcap.com/tidb/v8.5/sql-statement-delete">DELETE</a> operations (introduced in v8.4.0) </li>
     <li>Improve query performance for <a href="https://docs.pingcap.com/tidb/v8.5/cached-tables">cached tables</a> (introduced in v8.4.0) </li>
-    <li>Introduce <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_hash_join_version-new-in-v840">an optimized version of Hash Join</a> (introduced in v8.4.0) </li>
+    <li>Introduce <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_hash_join_version-new-in-v840">an optimized version of Hash Join</a> (experimental, introduced in v8.4.0) </li>
     </td>
   </tr>
   <tr>
@@ -65,7 +65,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     <li><a href="https://docs.pingcap.com/tidb/v8.5/schema-cache">Schema cache control</a> and <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_stats_cache_mem_quota-new-in-v610">setting the memory quota for the TiDB statistics cache</a> are generally available (GA), reducing stability issues caused by excessive memory consumption. </li>
     <li>PD introduces <a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Active Follower</a> to handle the pressure brought by numerous Regions, gradually <a href="https://docs.pingcap.com/tidb/v8.5/pd-microservices">decouples the services handled by PD</a> for independent deployment. </li>
     <li>PD improves the performance of Region heartbeat processing and supports tens of millions of Regions for a single cluster.</li>
-    <li>You can <a href="https://docs.pingcap.com/zh/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840">increase concurrency</a> and <a href="https://docs.pingcap.com/zh/tidb/v8.5/statistics#collect-statistics-on-some-columns">reduce the number of collected objects</a> to improve the efficiency of statistics collection and loading, ensuring the stability of execution plans in large clusters.</li>
+    <li>You can <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840">increase concurrency</a> and <a href="https://docs.pingcap.com/tidb/v8.5/statistics#collect-statistics-on-some-columns">reduce the number of collected objects</a> to improve the efficiency of statistics collection and loading, ensuring the stability of execution plans in large clusters.</li>
     </td>
   </tr>
   <tr>
@@ -212,7 +212,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 > **Note:**
 >
-> This section provides compatibility changes you need to know when you upgrade from v8.1.0 to the current version (v8.2.0). If you are upgrading from v8.0.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
+> This section provides compatibility changes you need to know when you upgrade from v8.4.0 to the current version (v8.5.0). If you are upgrading from v8.3.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
 
 ### Behavior changes
 
