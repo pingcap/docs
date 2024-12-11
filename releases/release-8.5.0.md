@@ -402,6 +402,10 @@ The following features are planned for deprecation in future versions:
         - Fix the issue that TiDB Lightning fails to receive oversized messages sent from TiKV [#56114](https://github.com/pingcap/tidb/issues/56114) @[fishiu](https://github.com/fishiu)
         - Fix the issue that the `AUTO_INCREMENT` value is set too high after importing data using the physical import mode [#56814](https://github.com/pingcap/tidb/issues/56814) @[D3Hunter](https://github.com/D3Hunter)
 
+## Performance test
+
+To learn about the performance of TiDB v8.5.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v8.5-performance-benchmarking-with-tpcc) and [Sysbench performance test report](https://docs.pingcap.com/tidbcloud/v8.5-performance-benchmarking-with-sysbench) of the TiDB Cloud Dedicated cluster.
+
 ## Contributors
 
 We would like to thank the following contributors from the TiDB community:
