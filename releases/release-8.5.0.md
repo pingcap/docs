@@ -237,7 +237,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
 ## Removed features
 
-* The following features are removed starting from v8.4.0:
+* The following feature has been removed:
 
     * In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
 
