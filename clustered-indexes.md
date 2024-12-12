@@ -37,7 +37,7 @@ On the other hand, tables with clustered indexes have certain disadvantages. See
 
 ## Usages
 
-## Create a table with clustered indexes
+### Create a table with clustered indexes
 
 Since TiDB v5.0, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement to specify whether the table's primary key is a clustered index. For example:
 
@@ -106,7 +106,7 @@ mysql> SHOW CREATE TABLE t;
 | Table | Create Table                                                                                                                                                                                      |
 +-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | t     | CREATE TABLE `t` (
-  `a` bigint(20) NOT NULL,
+  `a` bigint NOT NULL,
   `b` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`a`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |

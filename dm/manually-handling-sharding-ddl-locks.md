@@ -173,7 +173,7 @@ SHOW CREATE TABLE shard_db_1.shard_table_1;
 | Table         | Create Table                             |
 +---------------+------------------------------------------+
 | shard_table_1 | CREATE TABLE `shard_table_1` (
-  `c1` int(11) NOT NULL,
+  `c1` int NOT NULL,
   PRIMARY KEY (`c1`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
 +---------------+------------------------------------------+
@@ -212,7 +212,7 @@ The operation processes of MySQL and DM are as follows:
                 "mode": "pessimistic"
                 "owner": "mysql-replica-01",
                 "DDLs": [
-                    "USE `shard_db`; ALTER TABLE `shard_db`.`shard_table` ADD COLUMN `c2` int(11);"
+                    "USE `shard_db`; ALTER TABLE `shard_db`.`shard_table` ADD COLUMN `c2` int;"
                 ],
                 "synced": [
                     "mysql-replica-01"
@@ -267,8 +267,8 @@ The operation processes of MySQL and DM are as follows:
     | Table       | Create Table                                     |
     +-------------+--------------------------------------------------+
     | shard_table | CREATE TABLE `shard_table` (
-      `c1` int(11) NOT NULL,
-      `c2` int(11) DEFAULT NULL,
+      `c1` int NOT NULL,
+      `c2` int DEFAULT NULL,
       PRIMARY KEY (`c1`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin |
     +-------------+--------------------------------------------------+
@@ -331,7 +331,7 @@ The operation processes are:
                 "mode": "pessimistic"
                 "owner": "mysql-replica-02",
                 "DDLs": [
-                    "USE `shard_db`; ALTER TABLE `shard_db`.`shard_table` ADD COLUMN `c2` int(11);"
+                    "USE `shard_db`; ALTER TABLE `shard_db`.`shard_table` ADD COLUMN `c2` int;"
                 ],
                 "synced": [
                     "mysql-replica-02"

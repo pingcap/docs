@@ -95,8 +95,8 @@ Enable `Region Merge` by configuring the following parameters:
 {{< copyable "" >}}
 
 ```
-config set max-merge-region-size 20
-config set max-merge-region-keys 200000
+config set max-merge-region-size 54
+config set max-merge-region-keys 540000
 config set merge-schedule-limit 8
 ```
 
@@ -138,7 +138,11 @@ If Region followers have not received the heartbeat from the leader within the `
 
 ### Method 6: Adjust Region size
 
-The default size of a Region is 96 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
+The default size of a Region is 256 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
+
+> **Note:**
+>
+> Starting from v8.4.0, the default Region size is increased from 96 MiB to 256 MiB. If you have not modified the Region size manually, when you upgrade a TiKV cluster to v8.4.0 or later,  the TiKV cluster's default Region size will automatically be updated to 256 MiB.
 
 > **Note:**
 >

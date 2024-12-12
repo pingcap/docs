@@ -45,8 +45,8 @@ Assume that the upstream schemas are as follows:
 
 ```sql
 CREATE TABLE `tbl_no_pk` (
-  `auto_pk_c1` bigint(20) NOT NULL,
-  `uk_c2` bigint(20) NOT NULL,
+  `auto_pk_c1` bigint NOT NULL,
+  `uk_c2` bigint NOT NULL,
   `content_c3` text,
   PRIMARY KEY (`auto_pk_c1`),
   UNIQUE KEY `uk_c2` (`uk_c2`)
@@ -64,8 +64,8 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
 
     ```sql
     CREATE TABLE `tbl_no_pk_2` (
-      `auto_pk_c1` bigint(20) NOT NULL,
-      `uk_c2` bigint(20) NOT NULL,
+      `auto_pk_c1` bigint NOT NULL,
+      `uk_c2` bigint NOT NULL,
       `content_c3` text,
       INDEX (`auto_pk_c1`),
       UNIQUE KEY `uk_c2` (`uk_c2`)
@@ -88,8 +88,8 @@ Assume that the upstream schemas are as follows:
 
 ```sql
 CREATE TABLE `tbl_multi_pk` (
-  `auto_pk_c1` bigint(20) NOT NULL,
-  `uuid_c2` bigint(20) NOT NULL,
+  `auto_pk_c1` bigint NOT NULL,
+  `uuid_c2` bigint NOT NULL,
   `content_c3` text,
   PRIMARY KEY (`auto_pk_c1`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
@@ -107,8 +107,8 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
 
     ```sql
     CREATE TABLE `tbl_multi_pk_c2` (
-      `auto_pk_c1` bigint(20) NOT NULL,
-      `uuid_c2` bigint(20) NOT NULL,
+      `auto_pk_c1` bigint NOT NULL,
+      `uuid_c2` bigint NOT NULL,
       `content_c3` text,
       PRIMARY KEY (`auto_pk_c1`,`uuid_c2`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1

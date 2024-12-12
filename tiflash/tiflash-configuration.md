@@ -77,8 +77,10 @@ delta_index_cache_size = 0
     ## * format_version = 2, the default format for versions < v6.0.0.
     ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
     ## * format_version = 4, the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption
-    ## * format_version = 5, the default format for v7.4.0 and later versions (introduced in v7.3.0), which reduces the number of physical files by merging smaller files. 
-    # format_version = 5
+    ## * format_version = 5, introduced in v7.3.0, the default format for versions from v7.4.0 to v8.3.0, which reduces the number of physical files by merging smaller files.
+    ## * format_version = 6, introduced in v8.4.0, which partially supports the building and storage of vector indexes.
+    ## * format_version = 7, introduced in v8.4.0, the default format for v8.4.0 and later versions, which supports the build and storage of vector indexes
+    # format_version = 7
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -260,6 +262,15 @@ delta_index_cache_size = 0
 
     ## New in v7.4.0. This item controls whether to enable the TiFlash resource control feature. When it is set to true, TiFlash uses the pipeline execution model.
     enable_resource_control = true
+
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads that one resource group can use. The default value is 5000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
+    task_scheduler_thread_soft_limit = 5000
+
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads in the global scope. The default value is 10000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
+    task_scheduler_thread_hard_limit = 10000
+
+    ## New in v6.4.0. This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. The default value is 0, which means twice the number of vCPUs. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
+    task_scheduler_active_set_soft_limit = 0
 
 ## Security settings take effect starting from v4.0.5.
 [security]

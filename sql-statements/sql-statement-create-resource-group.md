@@ -53,6 +53,8 @@ ResourceGroupRunawayOptionList ::=
 
 DirectResourceGroupRunawayOption ::=
     "EXEC_ELAPSED" EqOpt stringLit
+|   "PROCESSED_KEYS" EqOpt intLit
+|   "RU" EqOpt intLit
 |   "ACTION" EqOpt ResourceGroupRunawayActionOption
 |   "WATCH" EqOpt ResourceGroupRunawayWatchOption WatchDurationOption
 
@@ -68,6 +70,7 @@ ResourceGroupRunawayActionOption ::=
     DRYRUN
 |   COOLDOWN
 |   KILL
+| "SWITCH_GROUP" '(' ResourceGroupName ')'
 ```
 
 The resource group name parameter (`ResourceGroupName`) must be globally unique.

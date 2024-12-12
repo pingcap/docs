@@ -269,18 +269,27 @@ Configuration items related to scheduling
 ### `max-merge-region-size`
 
 + Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
-+ Default value: `20`
++ Default value: `54`. Before v8.4.0, the default value is `20`. Starting from v8.4.0, the default value is `54`.
 + Unit: MiB
 
 ### `max-merge-region-keys`
 
 + Specifies the upper limit of the `Region Merge` key. When the Region key is greater than the specified value, the PD does not merge the Region with its adjacent Regions.
-+ Default value: `200000`
++ Default value: `540000`. Before v8.4.0, the default value is `200000`. Starting from v8.4.0, the default value is `540000`.
 
 ### `patrol-region-interval`
 
-+ Controls the running frequency at which `replicaChecker` checks the health state of a Region. The smaller this value is, the faster `replicaChecker` runs. Normally, you do not need to adjust this parameter.
++ Controls the running frequency at which the checker inspects the health state of a Region. The smaller this value is, the faster the checker runs. Normally, you do not need to adjust this configuration.
 + Default value: `10ms`
+
+### `patrol-region-worker-count` <span class="version-mark">New in v8.5.0</span>
+
+> **Warning:**
+>
+> Setting this configuration item to a value greater than 1 enables concurrent checks. This is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/tikv/pd/issues) on GitHub.
+
++ Controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. Normally, you do not need to adjust this configuration.
++ Default value: `1`
 
 ### `split-merge-interval`
 
@@ -379,15 +388,11 @@ Configuration items related to scheduling
 
 ### `store-limit-version` <span class="version-mark">New in v7.1.0</span>
 
-> **Warning:**
->
-> Setting this configuration item to `"v2"` is an experimental feature. It is not recommended to use it in production environments.
-
 + Controls the version of the store limit formula
 + Default value: `v1`
 + Value options:
     + `v1`: In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV.
-    + `v2`: (experimental feature) In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
+    + `v2`: In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
 
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
@@ -485,9 +490,12 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 ### `enable-telemetry`
 
-+ Determines whether to enable the telemetry collection feature in TiDB Dashboard.
+> **Warning:**
+>
+> Starting from v8.1.0, the telemetry feature in TiDB Dashboard is removed, and this configuration item is no longer functional. It is retained solely for compatibility with earlier versions.
+
++ Before v8.1.0, this configuration item controls whether to enable telemetry collection in TiDB Dashboard.
 + Default value: `false`
-+ See [Telemetry](/telemetry.md) for details.
 
 ## `replication-mode`
 

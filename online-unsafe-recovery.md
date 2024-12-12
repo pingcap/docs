@@ -38,13 +38,18 @@ Before using Online Unsafe Recovery, make sure that the following requirements a
 
 ### Step 1. Specify the stores that cannot be recovered
 
-To trigger automatic recovery, use PD Control to execute [`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show) and specify **all** the TiKV nodes that cannot be recovered, separated by commas.
-
-{{< copyable "shell-regular" >}}
+To trigger automatic recovery, use PD Control to execute [`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show) and specify **all** the TiKV and TiFlash nodes that cannot be recovered, separated by commas.
 
 ```bash
 pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 ```
+
+> **Note:**
+>
+> - Make sure that **all** unrecoverable TiKV and TiFlash nodes are specified in the preceding command at once. Omitting any unrecoverable nodes might cause the recovery process to be blocked.
+> - If you have already performed Online Unsafe Recovery within a short period (such as within a day), make sure that the subsequent executions of this command still include the previously processed TiKV and TiFlash nodes.
+
+To specify the longest allowable duration of a recovery task, use the `--timeout <seconds>` option. If this option is not specified, the longest duration is 5 minutes by default. When the timeout occurs, the recovery is interrupted and returns an error.
 
 If the command returns `Success`, PD Control has successfully registered the task to PD. This only means that the request has been accepted, not that the recovery has been successfully performed. The recovery task is performed in the background. To see the recovery progress, use [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion).
 
@@ -54,11 +59,15 @@ If the command returns `Failed`, PD Control has failed to register the task to P
 - `invalid input store x doesn't exist`: The specified store ID does not exist.
 - `invalid input store x is up and connected`: The specified store with the ID is still healthy and should not be recovered.
 
-To specify the longest allowable duration of a recovery task, use the `--timeout <seconds>` option. If this option is not specified, the longest duration is 5 minutes by default. When the timeout occurs, the recovery is interrupted and returns an error.
+If PD loses store information for unrecoverable TiKV nodes after disaster recovery operations such as [`pd-recover`](/pd-recover.md), making the specific store IDs unknown, you can use the `--auto-detect` mode. This mode enables PD to automatically remove replicas from TiKV nodes that are either unregistered or previously registered but forcibly deleted.
+
+```bash
+pd-ctl -u <pd_addr> unsafe remove-failed-stores --auto-detect
+```
 
 > **Note:**
 >
-> - Because this command needs to collect information from all peers, it might cause an increase in memory usage (100,000 peers are estimated to use 500 MiB of memory).
+> - Because unsafe recovery needs to collect information from all peers, it might cause an increase in memory usage (100,000 peers are estimated to use 500 MiB of memory).
 > - If PD restarts when the command is running, the recovery is interrupted and you need to trigger the task again.
 > - Once the command is running, the specified stores will be set to the Tombstone status, and you cannot restart these stores.
 > - When the command is running, all scheduling tasks and split/merge are paused and will be resumed automatically after the recovery is successful or fails.

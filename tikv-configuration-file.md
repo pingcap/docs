@@ -248,7 +248,7 @@ This document only describes the parameters that are not included in command-lin
 ### `raft-client-queue-size`
 
 + Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability.
-+ Default value: `8192`
++ Default value: `16384`
 
 ### `simplify-metrics` <span class="version-mark">New in v6.2.0</span>
 
@@ -663,10 +663,6 @@ Configuration items related to Raftstore.
 
 ### `raft-max-size-per-msg`
 
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
-
 + The soft limit on the size of a single message packet
 + Default value: `"1MiB"`
 + Minimum value: greater than `0`
@@ -674,10 +670,6 @@ Configuration items related to Raftstore.
 + Unit: KiB|MiB|GiB
 
 ### `raft-max-inflight-msgs`
-
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
 + Default value: `256`
@@ -1082,7 +1074,7 @@ Configuration items related to Coprocessor.
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `"96MiB"`
++ Default value: `"256MiB"`. Before v8.4.0, the default value is `"96MiB"`.
 + Unit: KiB|MiB|GiB
 
 ### `region-max-keys`
@@ -1093,7 +1085,7 @@ Configuration items related to Coprocessor.
 ### `region-split-keys`
 
 + The number of keys in the newly split Region. This value is an estimate.
-+ Default value: `960000`
++ Default value: `2560000`. Before v8.4.0, the default value is `960000`.
 
 ### `consistency-check-method`
 
@@ -1933,6 +1925,20 @@ Configuration items related to Raft Engine.
 + If there are multiple disks on your machine, it is recommended to store the data of Raft Engine on a different disk to improve TiKV performance.
 + Default value: `""`
 
+### `spill-dir` <span class="version-mark">New in v8.4.0</span>
+
++ The auxiliary directory for storing Raft log files. When the disk for the `dir` directory is full, new Raft logs will be stored under this directory. If this auxiliary directory does not exist after configuration, it will be automatically created when TiKV is started.
++ If this configuration is not set, the auxiliary directory is not enabled.
+
+> **Note:**
+>
+> - This configuration takes effect only when the `dir` and `spill-dir` of the Raft Engine are set to different disk drives.
+> - After enabling this feature, if you want to disable it, you need to perform the following operations before restarting TiKV. Otherwise, TiKV will fail to start.
+>     1. Stop TiKV.
+>     2. Copy all the Raft Logs from the `spill-dir` directory to the [`dir`](/tikv-configuration-file.md#dir) directory.
+>     3. Remove this configuration from the TiKV configuration file.
+>     4. Restart TiKV.
+
 ### `batch-compression-threshold`
 
 + Specifies the threshold size of a log batch. A log batch larger than this configuration is compressed. If you set this configuration item to `0`, compression is disabled.
@@ -1940,9 +1946,13 @@ Configuration items related to Raft Engine.
 
 ### `bytes-per-sync`
 
+> **Warning:**
+>
+> Starting from v6.5.0, Raft Engine writes logs to disk directly without buffering. Therefore, this configuration item is deprecated and no longer functional.
+
 + Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
 + If you set this configuration item to `0`, incremental sync is disabled.
-+ Default value: `"4MiB"`
++ Before v6.5.0, the default value is `"4MiB"`.
 
 ### `target-file-size`
 
@@ -1990,7 +2000,7 @@ Configuration items related to Raft Engine.
 > 3. Enable Raft Engine by setting `enable` to `true` and restart TiKV to make the configuration take effect.
 
 + Specifies the version of log files in Raft Engine.
-+ Value Options:
++ Value options:
     + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
     + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
 + Default value:
@@ -2151,7 +2161,7 @@ Configuration items related to BR backup.
 
 + The threshold of the backup SST file size. If the size of a backup file in a TiKV Region exceeds this threshold, the file is backed up to several files with the TiKV Region split into multiple Region ranges. Each of the files in the split Regions is the same size as `sst-max-size` (or slightly larger).
 + For example, when the size of a backup file in the Region of `[a,e)` is larger than `sst-max-size`, the file is backed up to several files with regions `[a,b)`, `[b,c)`, `[c,d)` and `[d,e)`, and the size of `[a,b)`, `[b,c)`, `[c,d)` is the same as that of `sst-max-size` (or slightly larger).
-+ Default value: `"144MiB"`
++ Default value: `"384MiB"`. Before v8.4.0, the default value is `"144MiB"`.
 
 ### `enable-auto-tune` <span class="version-mark">New in v5.4.0</span>
 
@@ -2307,6 +2317,18 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Default value: `true`
 + Note that `in-memory` takes effect only when the value of `pipelined` is `true`.
 
+### `in-memory-peer-size-limit` <span class="version-mark">New in v8.4.0</span>
+
++ Controls the memory usage limit for [in-memory pessimistic locks](/pessimistic-transaction.md#in-memory-pessimistic-lock) in a Region. When this limit is exceeded, TiKV writes pessimistic locks persistently.
++ Default value: `512KiB`
++ Unit: KiB|MiB|GiB
+
+### `in-memory-instance-size-limit` <span class="version-mark">New in v8.4.0</span>
+
++ Controls the memory usage limit for [in-memory pessimistic locks](/pessimistic-transaction.md#in-memory-pessimistic-lock) in a TiKV instance. When this limit is exceeded, TiKV writes pessimistic locks persistently.
++ Default value: `100MiB`
++ Unit: KiB|MiB|GiB
+
 ## quota
 
 Configuration items related to Quota Limiter.
@@ -2430,6 +2452,16 @@ Configuration items related to resource control of the TiKV storage layer.
 + Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
 + Default value: `true`, which means scheduling based on the RU of the resource group is enabled.
 
+### `priority-ctl-strategy` <span class="version-mark">New in v8.4.0</span>
+
+Specifies the flow control strategy for low-priority tasks. TiKV ensures that higher priority tasks are prioritized for execution by applying flow control to low-priority tasks.
+
++ Value options:
+    + `aggressive`: this policy prioritizes the performance of high-priority tasks, ensuring that the throughput and latency of high-priority tasks are largely unaffected, but low-priority tasks will run slower.
+    + `moderate`: this policy imposes a balanced flow control on low-priority tasks and has a lower impact on high-priority tasks.
+    + `conservative`: this policy prioritizes ensuring that system resources are fully utilized, allowing low-priority tasks to fully utilize system available resources as needed, and therefore has a greater performance impact on high-priority tasks.
++ Default value: `moderate`.
+
 ## split
 
 Configuration items related to [Load Base Split](/configure-load-base-split.md).
@@ -2469,3 +2501,36 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 
 + Specifies the amount of data sampled by Heap Profiling each time, rounding up to the nearest power of 2.
 + Default value: `512KiB`
+
+## in-memory-engine <span class="version-mark">New in v8.5.0</span>
+
+TiKV MVCC in-memory engine (IME) configuration items related to the storage layer.
+
+### `enable` <span class="version-mark">New in v8.5.0</span>
+
+> **Note:**
+>
+> You can configure this configuration item in the configuration file, but cannot query it via SQL statements.
+
++ Whether to enable the in-memory engine to accelerate multi-version queries. For more information about the in-memory engine, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
++ Default value: `false` (indicating the in-memory engine is disabled)
+
+### `capacity` <span class="version-mark">New in v8.5.0</span>
+
+> **Note:**
+>
+> + After the in-memory engine is enabled, `block-cache.capacity` automatically decreases by 10%.
+> + If you manually configure `capacity`, `block-cache.capacity` does not automatically decrease. In this case, you need to manually adjust its value to avoid OOM.
+
++ Controls the maximum memory size that the in-memory engine can use. The maximum value is 5 GiB. You can manually configure it to use more memory.
++ Default value: 10% of the system memory.
+
+### `gc-run-interval` <span class="version-mark">New in v8.5.0</span>
+
++ Controls the time interval that the in-memory engine GC caches MVCC versions. Reducing this parameter can increase the GC frequency, and decrease the number of MVCC versions, but will increase CPU consumption for GC and increase the probability of in-memory engine cache miss.
++ Default value: `"3m"`
+
+### `mvcc-amplification-threshold` <span class="version-mark">New in v8.5.0</span>
+
++ Controls the threshold for MVCC read amplification when the in-memory engine selects and loads Regions. The default value is `10`, indicating that if reading a single row in a Region requires processing more than 10 MVCC versions, this Region might be loaded into the in-memory engine.
++ Default value: `10`

@@ -55,6 +55,111 @@ The expected output is as follows:
 >
 > This feature is introduced in TiCDC 4.0.3.
 
+## How to verify if TiCDC has replicated all updates after upstream stops updating?
+
+After the upstream TiDB cluster stops updating, you can verify if replication is complete by comparing the latest [TSO](/glossary.md#timestamp-oracle-tso) timestamp of the upstream TiDB cluster with the replication progress in TiCDC. If the TiCDC replication progress timestamp is greater than or equal to the upstream TiDB cluster's TSO, then all updates have been replicated. To verify replication completeness, perform the following steps:
+
+1. Get the latest TSO timestamp from the upstream TiDB cluster.
+
+    > **Note:**
+    >
+    > Use the [`TIDB_CURRENT_TSO()`](/functions-and-operators/tidb-functions.md#tidb_current_tso) function to get the current TSO, instead of using functions like `NOW()` that return the current time.
+
+    The following example uses [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso) to convert the TSO to a readable time format for further comparison:
+
+    ```sql
+    BEGIN;
+    SELECT TIDB_PARSE_TSO(TIDB_CURRENT_TSO());
+    ROLLBACK;
+    ```
+
+    The output is as follows:
+
+    ```sql
+    +------------------------------------+
+    | TIDB_PARSE_TSO(TIDB_CURRENT_TSO()) |
+    +------------------------------------+
+    | 2024-11-12 20:35:34.848000         |
+    +------------------------------------+
+    ```
+
+2. Get the replication progress in TiCDC.
+
+    You can check the replication progress in TiCDC using one of the following methods:
+
+    * **Method 1**: query the checkpoint of the changefeed (recommended).
+
+        Use the [TiCDC command-line tool](/ticdc/ticdc-manage-changefeed.md) `cdc cli` to view the checkpoint for all replication tasks:
+
+        ```shell
+        cdc cli changefeed list --server=http://127.0.0.1:8300
+        ```
+
+        The output is as follows:
+
+        ```json
+        [
+          {
+            "id": "syncpoint",
+            "namespace": "default",
+            "summary": {
+              "state": "normal",
+              "tso": 453880043653562372,
+              "checkpoint": "2024-11-12 20:36:01.447",
+              "error": null
+            }
+          }
+        ]
+        ```
+
+        In the output, `"checkpoint": "2024-11-12 20:36:01.447"` indicates that TiCDC has replicated all upstream TiDB changes before this time. If this timestamp is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, then all updates have been replicated downstream.
+
+    * **Method 2**: query Syncpoint from the downstream TiDB.
+
+        If the downstream is a TiDB cluster and the [TiCDC Syncpoint feature](/ticdc/ticdc-upstream-downstream-check.md) is enabled, you can get the replication progress by querying the Syncpoint in the downstream TiDB.
+
+        > **Note:**
+        >
+        > The Syncpoint update interval is controlled by the [`sync-point-interval`](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint) configuration item. For the most up-to-date replication progress, use method 1.
+
+        Execute the following SQL statement in the downstream TiDB to get the upstream TSO (`primary_ts`) and downstream TSO (`secondary_ts`):
+
+        ```sql
+        SELECT * FROM tidb_cdc.syncpoint_v1;
+        ```
+
+        The output is as follows:
+
+        ```sql
+        +------------------+------------+--------------------+--------------------+---------------------+
+        | ticdc_cluster_id | changefeed | primary_ts         | secondary_ts       | created_at          |
+        +------------------+------------+--------------------+--------------------+---------------------+
+        | default          | syncpoint  | 453879870259200000 | 453879870545461257 | 2024-11-12 20:25:01 |
+        | default          | syncpoint  | 453879948902400000 | 453879949214351361 | 2024-11-12 20:30:01 |
+        | default          | syncpoint  | 453880027545600000 | 453880027751907329 | 2024-11-12 20:35:00 |
+        +------------------+------------+--------------------+--------------------+---------------------+
+        ```
+
+        In the output, each row shows the upstream TiDB snapshot at `primary_ts` matches the downstream TiDB snapshot at `secondary_ts`.
+
+        To view the replication progress, convert the latest `primary_ts` to a readable time format:
+
+        ```sql
+        SELECT TIDB_PARSE_TSO(453880027545600000);
+        ```
+
+        The output is as follows:
+
+        ```sql
+        +------------------------------------+
+        | TIDB_PARSE_TSO(453880027545600000) |
+        +------------------------------------+
+        | 2024-11-12 20:35:00                |
+        +------------------------------------+
+        ```
+
+        If the time corresponding to the latest `primary_ts` is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, then TiCDC has replicated all updates downstream.
+
 ## What is `gc-ttl` in TiCDC?
 
 Since v4.0.0-rc.1, PD supports external services in setting the service-level GC safepoint. Any service can register and update its GC safepoint. PD ensures that the key-value data later than this GC safepoint is not cleaned by GC.
@@ -232,7 +337,7 @@ mysql root@127.0.0.1:test> show create table test;
 | Table | Create Table                                                                     |
 +-------+----------------------------------------------------------------------------------+
 | test  | CREATE TABLE `test` (                                                            |
-|       |   `id` int(11) NOT NULL,                                                         |
+|       |   `id` int NOT NULL,                                                         |
 |       |   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, |
 |       |   PRIMARY KEY (`id`)                                                             |
 |       | ) ENGINE=InnoDB DEFAULT CHARSET=latin1                                           |
