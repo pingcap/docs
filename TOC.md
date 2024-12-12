@@ -13,8 +13,8 @@
 - Get Started
   - [Quick Start with TiDB](/quick-start-with-tidb.md)
   - [Quick Start with HTAP](/quick-start-with-htap.md)
-  - [Learn TiDB SQL](/basic-sql-operations.md)
-  - [Learn HTAP](/explore-htap.md)
+  - [Explore SQL with TiDB](/basic-sql-operations.md)
+  - [Explore HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
