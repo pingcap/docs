@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB Self-Managed
   - [What is TiDB Self-Managed](/overview.md)
-  - [TiDB 8.4 Release Notes](/releases/release-8.4.0.md)
+  - [TiDB 8.5 Release Notes](/releases/release-8.5.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -1075,6 +1075,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v8.5
+    - [8.5.0](/releases/release-8.5.0.md)
   - v8.4
     - [8.4.0-DMR](/releases/release-8.4.0.md)
   - v8.3
