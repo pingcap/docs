@@ -143,7 +143,7 @@ An operator is a particular step that is executed as part of returning query res
 
 TiDB aggregates the data or calculation results scanned from TiKV/TiFlash. The data aggregation operators can be divided into the following categories:
 
-- **TableReader**: Aggregates the data obtained by the underlying operators like `TableFullScan` or `TableRangeScan` in TiKV.
+- **TableReader**: Aggregates the data obtained by the underlying operators in TiKV or TiFlash.
 - **IndexReader**: Aggregates the data obtained by the underlying operators like `IndexFullScan` or `IndexRangeScan` in TiKV.
 - **IndexLookUp**: First aggregates the RowID (in TiKV) scanned by the `Build` side. Then at the `Probe` side, accurately reads the data from TiKV based on these RowIDs. At the `Build` side, there are operators like `IndexFullScan` or `IndexRangeScan`; at the `Probe` side, there is the `TableRowIDScan` operator.
 - **IndexMerge**: Similar to `IndexLookUp`. `IndexMerge` can be seen as an extension of `IndexLookupReader`. `IndexMerge` supports reading multiple indexes at the same time. There are many `Build`s and one `Probe`. The execution process of `IndexMerge` the same as that of `IndexLookUp`.
@@ -166,9 +166,14 @@ In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result 
 
 ### Task overview
 
-Currently, calculation tasks of TiDB can be divided into two categories: cop tasks and root tasks. A `cop[tikv]` task indicates that the operator is performed inside the TiKV coprocessor. A `root` task indicates that it will be completed inside of TiDB.
+TiDB calculation tasks are categorized into four types: root task, cop task, batchCop task, and mpp task:
 
-One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans.
+- Root task: completed within TiDB.
+- Cop task: executed using the Coprocessor in TiKV or TiFlash.
+- BatchCop task: an optimized version of TiFlash cop tasks, allowing queries to be executed in multiple Regions in a single task.
+- MPP task: executed using TiFlash's [MPP mode](/explain-mpp.md).
+
+A key goal of SQL optimization is to push calculations down to TiKV or TiFlash whenever possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans. The Coprocessor in TiFlash is similar to TiKV in functionality, but does not support index scans.
 
 ### Operator info overview
 
