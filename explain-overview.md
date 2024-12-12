@@ -166,11 +166,12 @@ In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result 
 
 ### Task overview
 
-Currently, calculation tasks of TiDB can be divided into four categories: root task, cop task, batchCop task and mpp task:
-  - root task indicates that it will be completed inside of TiDB.
-  - cop task indicates that it will be executed using Coprocessor in TiKV or TiFlash.
-  - batchCop task is an optimization of TiFlash cop tasks, which can execute queries on multiple regions in one task.
-  - mpp task indicates that it will be executed using TiFlash's [MPP mode](/explain-mpp.md).
+TiDB calculation tasks are categorized into four types: root task, cop task, batchCop task, and mpp task:
+
+- Root task: completed within TiDB.
+- Cop task: executed using the Coprocessor in TiKV or TiFlash.
+- BatchCop task: an optimized version of TiFlash cop tasks, allowing queries to be executed in multiple Regions in a single task.
+- MPP task: executed using TiFlash's [MPP mode](/explain-mpp.md).
 
 One of the goals of SQL optimization is to push the calculation down to TiKV or TiFlash as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans. The Coprocessor in TiFlash is similar to TiKV in functionality, but does not support index scans.
 
