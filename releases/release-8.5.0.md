@@ -235,6 +235,16 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 | PD | [`patrol-region-worker-count`](/pd-configuration-file.md#patrol-region-worker-count-new-in-v850) | Newly added | Controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. |
 | BR | [`--checksum`](/br/br-snapshot-manual.md) | Modified | Changes the default value from `true` to `false`, meaning that BR does not calculate the table-level checksum during full backups by default, to improve backup performance. |
 
+## Removed features
+
+* The following features are removed starting from v8.4.0:
+
+    * In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
+
+* The following features are planned for removal in future versions:
+
+    * Starting from v8.0.0, TiDB Lightning deprecates the [old version of conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800) strategy for the physical import mode, and enables you to control the conflict detection strategy for both logical and physical import modes via the [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) parameter. The [`duplicate-resolution`](/tidb-lightning/tidb-lightning-configuration.md) parameter for the old version of conflict detection will be removed in a future release.
+
 ## Deprecated features
 
 The following features are planned for deprecation in future versions:
