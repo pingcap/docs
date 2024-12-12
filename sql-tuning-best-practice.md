@@ -3,7 +3,7 @@ title: A Practical Guide For SQL Tuning
 summary: Learn how to do SQL tuning in TiDB
 ---
 
-# Document Purpose and Objectives
+# Document purpose and objectives
 
 This guide is designed for TiDB SQL tuning beginners, with emphasis on:
 
@@ -13,7 +13,7 @@ This guide is designed for TiDB SQL tuning beginners, with emphasis on:
 - Gentle Learning Curve: Focusing on practicality over theoretical complexity
 - Scenario-Based: Incorporating real business cases to demonstrate optimization effects
 
-# Introduction to SQL Tuning
+# Introduction to SQL tuning
 
 SQL tuning is a critical aspect of optimizing database system performance. It involves a systematic approach to improve the efficiency of SQL queries. The process typically consists of three key steps:
 
@@ -42,7 +42,7 @@ It's important to note that SQL tuning is an ongoing process. As your data volum
 
 By consistently applying these practices, you can ensure that your database maintains optimal performance over time.
 
-# Goals for Tuning
+# Goals for tuning
 
 The primary objectives of SQL tuning are to:
 
@@ -51,7 +51,7 @@ The primary objectives of SQL tuning are to:
 
 These goals can be achieved through various strategies:
 
-## Optimize Query Execution
+## Optimize query execution
 
 SQL tuning often involves finding more efficient ways to process the same workload without changing the query's functionality. This can be done by:
 
@@ -69,17 +69,17 @@ Examples:
 - Creating an index for frequently queried columns can significantly reduce resource usage, especially for queries that access a small percentage of table data.
 - Utilizing index-only scans for queries that return a limited number of sorted results can avoid full table scans and sorting operations.
 
-## Balance Workload Distribution
+## Balance workload distribution
 
 In a distributed architecture like TiDB, it's essential to maintain a balanced workload across multiple TiKV nodes. This is crucial for achieving optimal performance. For guidance on identifying and resolving read and write hotspots, please refer to the [troubleshoot hot spot issues page](/troubleshoot-hot-spot-issues.md#optimization-of-small-table-hotspots). By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
 
-# Identifying High-Load SQL
+# Identifying high-load SQL
 
 The most efficient way to identify Resource-Intensive SQL is using TiDB Dashboard. There are other tools like views and logs available as well.
 
-## Monitoring SQL Statements by Using TiDB Dashboard
+## Monitoring SQL statements by using TiDB Dashboard
 
-### SQL Statements Panel 
+### SQL Statements panel 
 
 In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to SQL Statements panel, which helps us identify the following:
 
@@ -88,9 +88,10 @@ In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to SQL Statements
 3. Clicking on each SQL statement allows us to delve deeper into the `EXPLAIN ANALYZE` results.
 
 SQL statements are normalized as templates, where literals and bind variables are replaced by '?'. This normalization and sorting process allows you to quickly pinpoint the most resource-intensive queries that may require optimization.
+
 ![sql-statements-default](/media/sql-tuning/sql-statements-default.png)
 
-### Slow Queries Panel Default Display
+### Slow Queries panel default display
 
 On Slow Queries panel, we can find:
 
@@ -98,9 +99,10 @@ On Slow Queries panel, we can find:
 2. The SQL query that reads the most data from TiKV.
 3. The `EXPLAIN ANALYZE` output from drilling down the SQL statement by clicking it.
 4. Please note that on the Slow Queries panel, we cannot get the frequency of the SQL statement execution. Once the execution elapsed time exceeds [`tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) for single instance, the query is then listed on the Slow Queries panel.
+
 ![slow-query-default](/media/sql-tuning/slow-query-default.png)
 
-## Other Tools for Identifying Top SQL
+## Other tools for identifying Top SQL
 
 In addition to TiDB Dashboard, there are several other tools available to identify resource-intensive SQL queries:
 
@@ -110,7 +112,7 @@ Each tool offers unique insights and can be valuable for different analysis scen
 - Logs: [slow query log](/identify-slow-queries.md) and [expensive queries in TiDB log](/identify-expensive-queries.md)
 - Views: [cluster_statements_summary view](/statement-summary-tables.md##the-cluster-tables-for-statement-summary) and [cluster_processlist view](/information-schema/information-schema-processlist.md#cluster_processlist)
 
-## Gathering Data on the SQL Identified
+## Gathering data on the SQL identified
 
 For the top SQL statements identified, you can use [PLAN REPLAYER](/sql-plan-replayer.md) to capture and save the on-site information of a TiDB cluster. This tool allows you to recreate the execution environment for further analysis. The syntax for exporting SQL information is as follows:
 
@@ -120,7 +122,7 @@ PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql
 
 Use `EXPLAIN ANALYZE` whenever possible, as it captures actual execution information in addition to the execution plan. This provides more accurate insights into query performance.
 
-# SQL Tuning Guide
+# SQL tuning guide
 
 This guide focuses on providing actionable advice for beginners looking to optimize their SQL queries in TiDB. By following these best practices, you can ensure better query performance and SQL Tuning. We'll cover below topic:
 
@@ -137,7 +139,7 @@ This guide focuses on providing actionable advice for beginners looking to optim
     - SQL Tuning with a Composite Index for Efficient Filtering and Sorting
 - When to Use TiFlash: A Simple Guide
 
-## Query Processing Workflow
+## Query processing workflow
 
 The client sends a SQL statement to the protocol layer of TiDB server. The protocol layer is responsible for handling the connection between TiDB server and the client, receiving SQL statement from the client, and returning data to the client.
 
@@ -153,7 +155,7 @@ To the right of the protocol layer is the optimizer of TiDB server, which is res
 
 ![workflow](/media/sql-tuning/workflow-tiflash.png)
 
-## Optimizer Fundamentals
+## Optimizer fundamentals
 
 TiDB uses a cost-based optimizer (CBO) to determine the most efficient execution plan for a SQL statement. This optimizer evaluates different execution strategies and chooses the one with the lowest estimated cost. The cost is influenced by factors such as:
 
@@ -172,7 +174,7 @@ Based on the input, The cost model will produce the execution plan, which includ
 
 The optimizer is as good as the information it receives. Therefore, ensuring up-to-date statistics and well-designed indexes is critical.
 
-## Statistics Management
+## Statistics management
 
 Statistics are essential to the TiDB optimizer. TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement.
 
@@ -251,7 +253,7 @@ To lock the statistics for a table, you can use the following statement [`LOCK S
 
 for more detail about statistics, please refer to [statistics](/statistics.md).
 
-## How TiDB Builds A Execution Plan
+## How TiDB builds a execution plan
 
 An SQL statement undergoes optimization primarily in the optimizer through three stages:
 
@@ -259,7 +261,7 @@ An SQL statement undergoes optimization primarily in the optimizer through three
 - Logical Transformation
 - Cost-based Optimization
 
-### Pre-Processing
+### Pre-processing
 
 The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get). `Point_Get` or `Batch_Point_Get` means using a primary or unique key, to directly read from TiKV, by exact key lookup. If a plan is identified as `Point_Get` or `Batch_Point_Get`, optimizer will skip the logical transformation and cost-based optimization, since the exact key read will be the best way to access the row.
 
@@ -277,13 +279,13 @@ explain SELECT id, name FROM emp WHERE id = 901;
 +-------------+---------+------+---------------+---------------+
 ```
 
-### Logical Transformation
+### Logical transformation
 
 The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules are such as column pruning, partition pruning, join reorder etc. Since this step is rule-based and automated by the query optimizer, in most cases it usually does not require manual adjustments.
 
 More Detail for Logical Transformation: [SQL Logical Optimization](/sql-logical-optimization.md).
 
-### Cost-Based Optimization
+### Cost-Based optimization
 
 TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement, and associates a cost with each plan step. The Cost-Based Optimization estimates the cost of each available plan choice, including index accesses and join methods, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
 
@@ -303,11 +305,11 @@ This distribution of the physical plan allows the different components to collab
 
 More Detail for Cost-Based Optimization: [SQL Physical Optimization](/sql-physical-optimization.md).
 
-## Understanding Execution Plans
+## Understanding execution plans
 
 The execution plan represents the steps TiDB will follow to execute a SQL query. In this section, we will learn how to display and read the execution plan.
 
-### Generating and Displaying Execution Plans
+### Generating and displaying execution plans
 
 Beside access the execution plan information through TiDB Dashboard, TiDB provides a `EXPLAIN` statement to display the execution plan for a SQL query. Here's an example of using `EXPLAIN`:
 
@@ -383,7 +385,7 @@ FROM (
 +-----------------------------------------+.+---------+-----------+---------------------------+----------------------------------------------------------------+.+-----------+---------+
 ```
 
-### Reading Execution Plans: First Child First
+### Reading execution plans: first child first
 
 To understand why SQL queries run slowly, it's very important to know how to read Execution Plans. The main rule for reading an execution plan is "first child first – recursive descent". Each operator in the plan produces a set of rows, and the execution order determines how these rows flow through the plan tree. 
 
@@ -414,7 +416,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first leaf of the plan tree). For the table `stars`, the optimizer only needs to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`. The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TOPN_19` are to implement the `ORDER BY` and `LIMIT` clauses correspondingly. The final operator `Projection_16` is to implement the column projection for `t5.name`.
+Let's apply the "first child first – recursive descent" rule to the second plan. In the below example begin from the top to bottom, by looking at the `IndexRangeScan_47` (the first leaf of the plan tree). For the table `stars`, the optimizer only needs to select the column `name` and `id`, the two columns can be met by the index `name(name)`. So for the table `star`, the root reader is `IndexReader_48`, rather than a `TableReader`. The join method between `stars` and `planets` is a hash join, which is marked as `HashJoin_44`. The data access method on `planets` is a `TableFullScan_45`. After the join, the `TopN_26` and `TopN_19` are to implement the `ORDER BY` and `LIMIT` clauses correspondingly. The final operator `Projection_16` is to implement the column projection for `t5.name`.
 
 Here is the query statement:
 
@@ -470,7 +472,7 @@ To read this plan:
 
 This traversal ensures that each operator's inputs are processed before the operator itself, allowing for efficient execution of the query plan.
 
-### Identifying and Understanding Bottlenecks in Execution Plans
+### Identifying and understanding bottlenecks in execution plans
 
 When reading the execution plan, it's crucial to compare the `actRows` (actual rows) with the `estRows` (estimated rows) to assess the accuracy of the optimizer's estimations. A significant discrepancy between these values may indicate that the optimizer's statistics are outdated or inaccurate, potentially leading to suboptimal query plans.
 
@@ -544,7 +546,7 @@ This optimized plan demonstrates the importance of accurate statistics and prope
 
 More Detail for understanding execution plans : [TiDB Query Execution Plan Overview](/explain-overview.md) and [EXPLAIN Walkthrough](/explain-walkthrough.md).
 
-## Index Strategy in TiDB
+## Index strategy in TiDB
 
 TiDB is a distributed SQL database that completely decouples the SQL layer (TiDB Server) from the storage layer (TiKV). Unlike traditional databases, TiDB does not have a buffer pool to cache data at the compute node. As a result, the performance of SQL queries and the TiDB cluster is closely tied to the number of key-value (KV) RPC requests that need to be processed. Typical KV RPC are `Point_Get`, `Batch_Point_Get`, and Coprocessor.
 
@@ -556,7 +558,7 @@ In TiDB, leveraging indexes effectively is crucial for performance tuning, as it
 
 This section explains the general index strategy and the cost of indexing. Then it showcases three practical examples that illustrate effective indexing strategies in TiDB, focusing on the use of composite and covering indexes for sql tuning.
 
-### Composite Index Strategy Guidelines
+### Composite index strategy guidelines
 
 When creating a composite index, it's essential to follow a specific order for the columns to ensure optimal performance. This order is crucial because it directly impacts how efficiently the index can filter and sort data.
 
@@ -577,7 +579,7 @@ Here is the recommended order for the columns in the index:
 
 4. Include columns in the SELECT list or aggregation to fully utilize a covering index.
 
-### The Cost of Indexing
+### The cost of indexing
 
 While indexes can significantly improve query performance, they also come with costs that should be carefully considered:
 
@@ -603,7 +605,7 @@ Best Practice:
 - Consider the write/read ratio of your workload when designing indexes
 
 
-### SQL Tuning with a Covering Index
+### SQL tuning with a covering index
 
 A covering index is designed to include all columns referenced in the filter and select clauses. The query below requires an index lookup of 2597411 rows, taking 46.4 seconds to execute. TiDB needs to dispatch 67 cop tasks for the index range scan on logs_idx, identified as `IndexRangeScan_11`, and 301 cop tasks for table access via `TableRowIDScan_12`. By utilizing a covering index, the index lookup can be avoided, leading to improved performance.
 
@@ -666,7 +668,7 @@ New plan:
 +-------------------------------+------------+---------+-----------+---------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------+
 ```
 
-### SQL Tuning with a Composite Index Involving Sorting
+### SQL tuning with a composite index involving sorting
 
 When optimizing SQL queries, especially those that include an `ORDER BY` clause, it is beneficial to create a composite index that encompasses both the filtering and sorting columns. This approach allows the database engine to efficiently access the required data while maintaining the desired order.
 
@@ -725,7 +727,7 @@ New plan:
 +----------------------------------+---------+---------+-----------+----------------------------------------------+----------------------------------------------+----------------------------------------------------+
 ```
 
-### SQL Tuning with Composite Indexes for Efficient Filtering and Sorting
+### SQL tuning with composite indexes for efficient filtering and sorting
 
 The original query below took 11 minutes and 9 seconds to complete, which is an extremely long execution time for a query that only needs to return 101 rows. This poor performance can be attributed to several factors:
 
@@ -805,7 +807,7 @@ New plan:
 
 ```
 
-## When to Use TiFlash: A Simple Guide
+## When to use TiFlash: a simple guide
 
 This section explains the best scenarios for using TiFlash in TiDB. TiFlash is optimized for analytical queries that involve complex calculations, aggregations, and large dataset scans, thanks to its columnar storage format. Here’s when to consider TiFlash:
 
@@ -816,7 +818,7 @@ This section explains the best scenarios for using TiFlash in TiDB. TiFlash is o
 
 Using TiFlash strategically can enhance query performance and optimize resource usage in TiDB for data-intensive, analytical queries. Here are two use case of TiFlash
 
-### Analytical Query
+### Analytical query
 
 Take the TPC-H Query 14 as an example. The original query requires joining the order_line and item tables. The plan for executing this query on the TiKV storage engine takes 21.1 seconds. The plan for executing the same query using TiFlash MPP mode takes only 1.41 seconds, which is 15 times faster than the TiKV plan.
 
@@ -872,20 +874,20 @@ TiFlash plan
 +--------------------------------------------+-------------+----------+--------------+----------------+--------------------------------------+
 ```
 
-### SaaS Arbitrary Filtering Workloads
+### SaaS arbitrary filtering workloads
 
 #### Overview
 
 In SaaS applications, it's common to structure tables with composite primary keys that include tenant identification. Let's look at a typical example where TiFlash can significantly improve query performance.
 
-#### Case Study: Multi-tenant Data Access
+#### Case study: multi-tenant data access
 
 Consider a table design with a composite primary key: `(tenantId, objectTypeId, objectId)`. A common query pattern is to:
 
 - Fetch the first N records for a specific tenant and object type, and applying random filters across hundreds or thousands of other columns, Making it impractical to create indexes for every possible filter combination. There is a potential sort operator after the filter as well.
 - Get the total count of records matching these criterias
 
-#### Performance Comparison
+#### Performance comparison
 
 - TiKV Plan: When executing this query on TiKV storage engine, it takes 2 minutes 38.6 seconds. `TableRangeScan` need to send 5121 cop tasks since data is spread over 5121 regions.
 - TiFlash Plan: The same query on TiFlash MPP engine takes only 3.44 seconds - almost 46 times faster. Since data in TiFlash is sorted by primary key, queries filtered by the primary key's prefix will also use a `TableRangeScan` instead of a full table scan. Compared to TiKV, TiFlash only uses 2 mpp tasks.
@@ -953,7 +955,7 @@ TiFlash plan
 +--------------------------------+-----------+---------+--------------+--------------------+-----------------------------------------------------+
 ```
 
-#### Query Routing between TiKV and TiFlash
+#### Query routing between TiKV and TiFlash
 
 After enabling TiFlash replicas for tables with large amounts of multi-tenant data, the optimizer can make choices to serve the query on TiKV or TiFlash storage engine based on the row count:
 
