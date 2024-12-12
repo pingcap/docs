@@ -10,7 +10,7 @@ To address the issue of slow queries, you need to take the following two steps:
 1. Among many queries, identify which type of queries are slow.
 2. Analyze why this type of queries are slow.
 
-You can easily perform step 1 using the [slow query log](/dashboard/dashboard-slow-query.md) and the [statement summary table](/statement-summary-tables.md) features. It is recommended to use [TiDB Dashboard](/dashboard/dashboard-intro.md), which integrates the two features and directly displays the slow queries in your browser. 
+You can easily perform step 1 using the [slow query log](/dashboard/dashboard-slow-query.md) and the [statement summary table](/statement-summary-tables.md) features. It is recommended to use [TiDB Dashboard](/dashboard/dashboard-intro.md), which integrates the two features and directly displays the slow queries in your browser.
 
 This document focuses on how to perform step 2 - analyze why this type of queries are slow.
 
@@ -98,9 +98,9 @@ The `Cop_wait` field in the slow log can help you determine this cause.
 
 The log above shows that a `cop-task` sent to the `10.6.131.78` instance waits `110ms` before being executed. It indicates that this instance is busy. You can check the CPU monitoring of that time to confirm the cause.
 
-#### Too many outdated keys
+#### Obsolete MVCC versions and excessive keys
 
-A TiKV instance has much outdated data, which needs to be cleaned up for data scan. This impacts the processing speed.
+If too many obsolete MVCC versions exist on TiKV, or if the retention time of historical MVCC data for GC is long, excessive MVCC versions can accumulate. Handling these unnecessary MVCC versions can affect scan performance.
 
 Check `Total_keys` and `Processed_keys`. If they are greatly different, the TiKV instance has too many keys of the older versions.
 
@@ -109,6 +109,8 @@ Check `Total_keys` and `Processed_keys`. If they are greatly different, the TiKV
 # Total_keys: 2215187529 Processed_keys: 1108056368
 ...
 ```
+
+TiDB v8.5.0 introduces the TiKV MVCC in-memory engine (IME) feature, which can accelerate such slow queries. For more information, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md).
 
 ### Other key stages are slow
 

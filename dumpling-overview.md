@@ -198,7 +198,7 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
 
     ```shell
     CREATE TABLE `t1` (
-      `id` int(11) DEFAULT NULL
+      `id` int DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
     ```
 

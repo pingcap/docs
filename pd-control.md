@@ -233,10 +233,16 @@ Usage:
     config set region-score-formula-version v2
     ```
 
-- `patrol-region-interval` controls the execution frequency that `replicaChecker` checks the health status of Regions. A shorter interval indicates a higher execution frequency. Generally, you do not need to adjust it.
+- `patrol-region-interval` controls the execution frequency that the checker inspects the health status of Regions. A shorter interval indicates a higher execution frequency. Generally, you do not need to adjust it.
 
     ```bash
-    config set patrol-region-interval 10ms // Set the execution frequency of replicaChecker to 10ms
+    config set patrol-region-interval 10ms // Set the execution frequency of the checker to 10ms
+    ```
+
+- `patrol-region-worker-count` controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. Normally, you do not need to adjust this configuration. Setting this configuration item to a value greater than 1 enables concurrent checks. Currently, this feature is experimental, and it is not recommended that you use it in the production environment.
+
+    ```bash
+    config set patrol-region-worker-count 2 // Set the checker concurrency to 2
     ```
 
 - `max-store-down-time` controls the time that PD decides the disconnected store cannot be restored if exceeded. If PD does not receive heartbeats from a store within the specified period of time, PD adds replicas in other nodes.
@@ -333,7 +339,7 @@ Usage:
 
 - `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (deprecated).
 
-- `store-limit-version` controls the version of the store limit formula. In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV. The v2 mode is an experimental feature. In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
+- `store-limit-version` controls the version of the store limit formula. In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV. In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
 
     ```bash
     config set store-limit-version v2       // using store limit v2
@@ -348,6 +354,123 @@ Usage:
     ```bash
     config set flow-round-by-digit 4
     ```
+
+#### `config [show | set service-middleware <option> [<key> <value> | <label> <qps|concurrency> <value>]]`
+
+`service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as audit logging, request rate limiting, and concurrency limiting. Starting from v8.5.0, you can modify the following configurations of `service-middleware` using `pd-ctl`:
+
+- `audit`: controls whether to enable audit logging for HTTP requests processed by PD (enabled by default). When enabled, `service-middleware` logs information about HTTP requests in PD logs.
+- `rate-limit`: limits the maximum rate and concurrency of HTTP API requests processed by PD.
+- `grpc-rate-limit`: limits the maximum rate and concurrency of gRPC API requests processed by PD.
+
+> **Note:**
+>
+> To avoid the impact of request rate limiting and concurrency limiting on PD performance, it is not recommended to modify configurations in `service-middleware`.
+
+Display the configuration information of `service-middleware`:
+
+```bash
+config show service-middleware
+```
+
+```bash
+{
+  "audit": {
+    "enable-audit": "true"
+  },
+  "rate-limit": {
+    "enable-rate-limit": "true",
+    "limiter-config": {}
+  },
+  "grpc-rate-limit": {
+    "enable-grpc-rate-limit": "true",
+    "grpc-limiter-config": {}
+  }
+}
+```
+
+`service-middleware audit` enables or disables the audit logging function for HTTP requests. For example, to disable this function, run the following command:
+
+```bash
+config set service-middleware audit enable-audit false
+```
+
+`service-middleware grpc-rate-limit` controls the maximum rate and concurrency of the following gRPC API requests:
+
+- `GetRegion`: get information about a specified Region
+- `GetStore`: get information about a specified store
+- `GetMembers`: get information about PD cluster members
+
+To control the maximum rate of gRPC API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion qps 100
+```
+
+To control the maximum concurrency of gRPC API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion concurrency 10
+```
+
+View the modified configuration:
+
+```bash
+config show service-middleware
+```
+
+```bash
+{
+  "audit": {
+    "enable-audit": "true"
+  },
+  "rate-limit": {
+    "enable-rate-limit": "true",
+    "limiter-config": {}
+  },
+  "grpc-rate-limit": {
+    "enable-grpc-rate-limit": "true",
+    "grpc-limiter-config": {
+      "GetRegion": {
+        "QPS": 100,
+        "QPSBurst": 100, // Automatically adjusted based on QPS, for display only
+        "ConcurrencyLimit": 10
+      }
+    }
+  }
+}
+```
+
+Reset the preceding settings:
+
+```bash
+config set service-middleware grpc-rate-limit GetRegion qps 0
+config set service-middleware grpc-rate-limit GetRegion concurrency 0
+```
+
+`service-middleware rate-limit` controls the maximum rate and concurrency of the following HTTP API requests:
+
+- `GetRegion`: get information about a specified Region
+- `GetStore`: get information about a specified store
+
+To control the maximum rate of HTTP API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware rate-limit GetRegion qps 100
+```
+
+To control the maximum concurrency of HTTP API requests, such as `GetRegion` API requests, run the following command:
+
+```bash
+config set service-middleware rate-limit GetRegion concurrency 10
+```
+
+Reset the preceding settings:
+
+```bash
+config set service-middleware rate-limit GetRegion qps 0
+config set service-middleware rate-limit GetRegion concurrency 0
+```
 
 #### `config placement-rules [disable | enable | load | save | show | rule-group]`
 
