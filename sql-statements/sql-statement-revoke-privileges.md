@@ -10,8 +10,8 @@ This statement removes privileges from an existing user. Executing this statemen
 ## Synopsis
 
 ```ebnf+diagram
-GrantStmt ::=
-    'GRANT' PrivElemList 'ON' ObjectType PrivLevel 'TO' UserSpecList RequireClauseOpt WithGrantOptionOpt
+RevokeStmt ::=
+    'REVOKE' PrivElemList 'ON' ObjectType PrivLevel 'FROM' UserSpecList
 
 PrivElemList ::=
     PrivElem ( ',' PrivElem )*
