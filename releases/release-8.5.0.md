@@ -7,7 +7,7 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 <EmailSubscriptionWrapper />
 
-Release date: xx xx, 2024
+Release date: December xx, 2024
 
 TiDB version: 8.5.0
 
