@@ -62,7 +62,6 @@ The fields in the key only include database name. The fields are explained as fo
 |:------------------|:--------|:----------------------------------------------------------------------------|
 | payload        | JSON    | The information about database name. |
 | schema.fields  | JSON    | The type information of each field in the payload. |
-| schema.name   | String  | Constant value "io.debezium.connector.mysql.SchemaChangeKey" |
 | schema.type    | String  | The data type of the field.                                      |
 | schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | schema.version   | String  | The schema version.                                 |
@@ -405,7 +404,7 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.tableChanges.type     | String   | Describes the kind of change. The value is one of the following: CREATE Table created. ALTER Table modified. DROP Table deleted. |
 | payload.tableChanges.id     | String   | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of <old>,<new> table names. |
 | payload.tableChanges.table.defaultCharsetName | string   | The charset of the table where the event occurs. |
-| payload.tableChanges.table.primaryKeyColumnNames | string   | List of columns that compose the table’s primary key. |
+| payload.tableChanges.table.primaryKeyColumnNames | string   | List of columns that compose the table's primary key. |
 | payload.tableChanges.table.columns | Array   | Metadata for each column in the changed table. |
 | payload.tableChanges.table.columns.name | String   | The name of the column. |
 | payload.tableChanges.table.columns.jdbcType | Number | The jdbc type of the column. |
@@ -797,6 +796,6 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - Debezium converts charsetName to "utf8mb4" when column COLLATE is "utf8_unicode_ci" and CHARACTER is null, but TiCDC does not.
 
-- Debezium escapes character, but TiCDC does not. e.g. ENUM('c, 'd', 'g,''h')
-
+- Debezium escapes character, but TiCDC does not. for example, Debezium encode ENUM elements ('c', 'd', 'g,''h') to ('c','d','g,\'\'h')
+ 
 - TiCDC converts the default value of TIME like '1000-00-00 01:00:00.000' to "1000-00-00", but Debezium does not.
