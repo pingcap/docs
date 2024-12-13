@@ -53,7 +53,6 @@ TiDB supports specifying the following expressions as default values in the `DEF
 * [`UUID()`](/functions-and-operators/miscellaneous-functions.md#uuid), [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)
 * [`VEC_FROM_TEXT()`](/vector-search-functions-and-operators.md#vec_from_text)
 
-
 TiDB supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions to set the default values for these data types and not literals. The following is an example of `BLOB`:
 
 ```sql
