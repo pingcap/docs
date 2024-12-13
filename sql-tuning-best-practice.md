@@ -604,7 +604,6 @@ Best Practice:
 - Regularly review index usage statistics via [TIDB_INDEX_USAGE](/information-schema/information-schema-tidb-index-usage.md)
 - Consider the write/read ratio of your workload when designing indexes
 
-
 ### SQL tuning with a covering index
 
 A covering index is designed to include all columns referenced in the filter and select clauses. The query below requires an index lookup of 2597411 rows, taking 46.4 seconds to execute. TiDB needs to dispatch 67 cop tasks for the index range scan on logs_idx, identified as `IndexRangeScan_11`, and 301 cop tasks for table access via `TableRowIDScan_12`. By utilizing a covering index, the index lookup can be avoided, leading to improved performance.
@@ -829,8 +828,8 @@ Here is the query statement:
 
 ```sql
 select 100.00 * sum(case when i_data like 'PR%' then ol_amount else 0 end) / (1+sum(ol_amount)) as promo_revenue
-from	order_line, item
-where	ol_i_id = i_id and ol_delivery_d >= '2007-01-02 00:00:00.000000' and ol_delivery_d < '2030-01-02 00:00:00.000000';
+from order_line, item
+where ol_i_id = i_id and ol_delivery_d >= '2007-01-02 00:00:00.000000' and ol_delivery_d < '2030-01-02 00:00:00.000000';
 ```
 
 TiKV plan
