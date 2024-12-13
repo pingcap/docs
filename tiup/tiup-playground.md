@@ -25,8 +25,9 @@ This command actually performs the following operations:
 - Because this command does not specify the number of each component, TiUP playground, by default, starts a smallest cluster that consists of one TiDB instance, one TiKV instance, one PD instance, and one TiFlash instance.
 - After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the [TiDB Dashboard](/dashboard/dashboard-intro.md).
 
-The command-line flags of the playground component are described as follows:
+You can use the following command to view the command-line flags of the playground component:
 
+<<<<<<< HEAD
 ```bash
 Flags:
       --db int                   Specify the number of TiDB instances (default: 1)
@@ -67,6 +68,10 @@ Flags:
       --tiproxy.timeout int      TiProxy max wait time in seconds for starting. 0 means no limit (default 60)
       -v, --version              Specify the version of playground
       --without-monitor          Disable the monitoring function of Prometheus and Grafana. If you do not add this flag, the monitoring function is enabled by default.
+=======
+```shell
+tiup playground --help
+>>>>>>> da0d15025a (tiup: refine description about `tiup playground --tag` (#19669))
 ```
 
 ## Examples
@@ -117,12 +122,12 @@ By default, only one instance is started for each TiDB, TiKV, and PD component. 
 tiup playground --db 3 --pd 3 --kv 3
 ```
 
-### Specify a tag when starting the TiDB cluster
+### Specify a tag when starting the TiDB cluster to store the data
 
 After you stop a TiDB cluster started using TiUP playground, all cluster data is cleaned up as well. To start a TiDB cluster using TiUP playground and ensure that the cluster data is not cleaned up automatically, you can specify a tag when starting the cluster. After specifying the tag, you can find the cluster data in the `~/.tiup/data` directory. Run the following command to specify a tag:
 
 ```shell
-tiup playground --tag <tagname>
+tiup playground --tag ${tag_name}
 ```
 
 For a cluster started in this way, the data files are retained after the cluster is stopped. You can use this tag to start the cluster next time so that you can use the data kept since the cluster was stopped.
