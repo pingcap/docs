@@ -38,10 +38,10 @@ Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL state
 
 | attribute name          | description |
 |:----------------|:---------------------------------|
-| actRows       | Number of rows output by the operator. |
-| execution info  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. |
-| memory  | Memory space occupied by the operator. |
-| disk  | Disk space occupied by the operator. |
+| `actRows`       | Number of rows output by the operator. |
+| `execution info`  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called multiple times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. `open` represents the time spent initializing the operator. `close` refers to the time taken from when the operator finishes processing data to when it ends execution. The `time` value includes both `open` and `close` time. When the operator is executed concurrently, `execution info` shows the sum of all used `wall time`. In this case, `time`, `open`, and `close` are replaced with `total_time`, `total_open`, and `total_close`. |
+| `memory`  | Maximum memory space occupied by the operator. |
+| `disk`  | Maximum disk space occupied by the operator. |
 
 ## Examples
 
@@ -99,7 +99,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## Execution information of operators
 
-In addition to the basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
+In addition to the basic `time`, `open`, `close` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
 
 ### Point_Get
 
@@ -338,6 +338,29 @@ after key/value request is processed:
 ```
 
 For writes and batch gets, the calculation is similar with different base costs.
+
+### tiflash_wait information
+
+When a query involves MPP tasks, the execution time is also affected by various tiflash_wait times, for example:
+
+```
+tiflash_wait: {minTSO_wait: 425ms, pipeline_breaker_wait: 133ms, pipeline_queue_wait: 512ms}
+```
+
+<CustomContent platform="tidb">
+
+- `minTSO_wait`: records the time spent waiting for an MPP task to be scheduled by the [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
+- `pipeline_breaker_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the time taken by the pipeline containing the pipeline breaker operator to wait for all data in the upstream pipeline. Currently, it is only used to display the time taken by the pipeline containing the `Join` operator to wait for all hash table builds to complete.
+- `pipeline_queue_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the waiting time in the CPU Task Thread Pool and IO Task Thread Pool during the execution of the pipeline.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+- `minTSO_wait`: records the time spent waiting for an MPP task to be scheduled by the [TiFlash MinTSO Scheduler](https://docs.pingcap.com/tidb/stable/tiflash-mintso-scheduler).
+- `pipeline_breaker_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the time taken by the pipeline containing the pipeline breaker operator to wait for all data in the upstream pipeline. Currently, it is only used to display the time taken by the pipeline containing the `Join` operator to wait for all hash table builds to complete.
+- `pipeline_queue_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the waiting time in the CPU Task Thread Pool and IO Task Thread Pool during the execution of the pipeline.
+
+</CustomContent>
 
 ### Other common execution information
 
