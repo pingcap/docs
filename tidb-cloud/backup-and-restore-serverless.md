@@ -12,13 +12,13 @@ This document describes how to back up and restore your TiDB Cloud Serverless cl
 >
 > To learn how to back up and restore TiDB Cloud Dedicated cluster data, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
-## Automatic Backup
+## Automatic Backups
 
-Automatic backups will be scheduled for your TiDB Cloud Serverless clusters according to the backup setting, which can reduce your loss in extreme disaster situations.
+Automatic backups will back up your cluster data automatically, and you can restore your data from the backup snapshot to reduce your loss in extreme disaster situations.
 
 ### Learn about the backup setting
 
-The Automatic backups will be controlled by the backup setting, which is different for free clusters and scalable clusters:
+Automatic backups is controlled by the backup setting, which is different for free clusters and scalable clusters:
 
 | backup setting   | free cluster | scalable cluster |
 |------------------|--------------|------------------|
@@ -26,15 +26,15 @@ The Automatic backups will be controlled by the backup setting, which is differe
 | Backup Retention | 1 day        | 14 days          |
 | Backup Time      | Fixed time   | Configurable     |
 
-- **Backup Cycle**: The frequency at which backups are taken.
-   - For free clusters, the backup cycle is daily.
-   - For scalable clusters, the backup cycle is daily.
-- **Backup Retention**: The duration for which backups are retained. The expired backups will not be available for restoration.
-   - For free clusters, the backup retention is 1 day.
-   - For scalable clusters, the backup retention is 14 days.
-- **Backup Time**: The time when the backup start to be scheduled. Note that the final backup time may fall behind the configured backup time.
-   - For free clusters, the backup time is a randomly fixed time.
-   - For scalable clusters, the backup time can be configured to every half an hour. Default to a randomly fixed time.
+- **Backup Cycle** is the frequency at which backups are taken.
+   - Free clusters: the backup cycle is daily.
+   - Scalable clusters: the backup cycle is daily.
+- **Backup Retention** is the duration for which backups are retained. The expired backups will not be available for restoration.
+   - Free clusters: the backup retention is 1 day.
+   - Scalable clusters: the backup retention is 14 days.
+- **Backup Time** is the time when the backup start to be scheduled. Note that the final backup time may fall behind the configured backup time.
+   - Free clusters: the backup time is a randomly fixed time.
+   - Scalable clusters: the backup time can be configured to every half an hour. Default to a randomly fixed time.
 
 ### Configure the backup setting
 
@@ -57,13 +57,9 @@ TiDB Cloud Serverless cluster provides restore functionality to help you recover
 TiDB Cloud Serverless supports snapshot restore and point-in-time restore for your cluster.
 
 - **Snapshot Restore**: Restore your cluster from a specific backup snapshot.
-- **Point-in-Time Restore**: Restore your cluster to a specific time.
+- **Point-in-Time Restore(beta)**: Restore your cluster to a specific time.
   - Free clusters: not supported.
   - Scalable clusters: restore to any time within the last 14 days, but you are not allowed to restore to a time before the cluster creation time or after the current time minus one minute.
-
-> **Note:**
->
-> The **Point-in-Time Restore** feature is currently in beta.
 
 ### Restore destination
 
@@ -74,7 +70,7 @@ TiDB Cloud Serverless supports restore in-place and restore to a new cluster.
 Restore to the current cluster, which will overwrite the existing data. Pay attention to the following points:
 
 - The existing connections will be terminated after the restore is triggered.
-- The cluster will be unavailable and any new connection will be blocked during the restore process
+- The cluster will be unavailable and any new connection will be blocked during the restore process.
 - When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
 
 **Restore to a New Cluster**
