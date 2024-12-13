@@ -77,7 +77,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Possible values: `ON`, `OFF`
 - This variable controls whether to allow the Plan Cache to cache plans accessing generated columns.
 
-### [`46177`](https://github.com/pingcap/tidb/issues/46177) <span class="version-mark">New in v7.5.0</span>
+### [`46177`](https://github.com/pingcap/tidb/issues/46177) <span class="version-mark">New in v6.5.6, v7.1.3 and v7.5.0</span>
 
 - Default value: `ON`
 - Possible values: `ON`, `OFF`
