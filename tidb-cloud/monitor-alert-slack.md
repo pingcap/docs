@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB cluster by getting alert notification vi
 
 # Subscribe via Slack
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via multiple channels. This document describes how to subscribe to alert notifications via Slack.
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via Slack, [email](/tidb-cloud/monitor-alert-email.md), and [Zoom](/tidb-cloud/monitor-alert-zoom.md). This document describes how to subscribe to alert notifications via Slack.
 
 ## Prerequisites
 
@@ -17,11 +17,11 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ### Step 1. Generate a Slack webhook URL
 
-1. [Create a Slack app](https://api.slack.com/apps/new), if you don't have one already. Click **Create New App**, and choose **From scratch**. Pick a name, choose a workspace to associate your app with, then click **Create App**.
-2. Goto the settings page for your app, you can load its settings via your [app's management dashboard](https://api.slack.com/apps).
-3. Select **Incoming Webhooks** tab, and toggle **Activate Incoming Webhooks** to **ON**.
+1. [Create a Slack app](https://api.slack.com/apps/new), if you do not have one already. Click **Create New App**, and choose **From scratch**. Enter a name, choose a workspace to associate your app with, and then click **Create App**.
+2. Go to the settings page for your app. You can load its settings via your [app's management dashboard](https://api.slack.com/apps).
+3. Click the **Incoming Webhooks** tab, and then toggle **Activate Incoming Webhooks** to **ON**.
 4. Click **Add New Webhook to Workspace**.
-5. Go ahead and pick a channel that you want to receive alert notifications in, then select **Authorize**. If you need to add the incoming webhook to a private channel, you must first be in that channel.
+5. Select a channel that you want to receive alert notifications in, and then select **Authorize**. If you need to add the incoming webhook to a private channel, you must first be in that channel.
 6. You can see a new entry under the **Webhook URLs for Your Workspace** section in the format: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
 
 ### Step 2. Subscribe from TiDB Cloud
@@ -34,17 +34,17 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 2. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
 3. Click **Add Subscriber**.
 4. Select **Slack** from the **Subscriber Type** drop-down list.
-5. Enter **Name** field and your Slack webhook URL into **URL** field.
-6. Click **Test Connection** button.
+5. In the **Name** field, enter a name and your Slack webhook URL into **URL** field.
+6. Click **Test Connection**.
 
-    - If the test successes, the **Save** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the connection.
+    - If the test succeeds, the **Save** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
 
-7. Click **Save** button to complete the subscription.
+7. Click **Save** to complete the subscription.
 
-Alternatively, you can also find a **Subscribe** button in the top right corner of the **Alert** page of the cluster. Clicking it will take you to the **Alert Subscriber** page.
+Alternatively, you can also click **Subscribe** in the top right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
 
-If an alert condition remains unchanged, the alert sends notifications every 3 hours.
+If an alert condition remains unchanged, the alert sends notifications every three hours.
 
 ## Unsubscribe from alert notifications
 

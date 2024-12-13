@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB cluster by getting alert notification vi
 
 # Subscribe via Zoom
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via multiple channels. This document describes how to subscribe to alert notifications via Zoom.
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via Zoom, [Slack](/tidb-cloud/monitor-alert-slack.md), and [email](/tidb-cloud/monitor-alert-email.md). This document describes how to subscribe to alert notifications via Zoom.
 
 ## Prerequisites
 
@@ -30,10 +30,10 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 3. Under **Apps**, find and select **Incoming Webhook**, or select a chat channel from above that you would like to receive messages in.
 4. Enter the following command to make a new connection, please replace `<connectionName>` with your connection name that you want to use, for example, `tidbcloud-alerts`:
     ```shell
-    /inc connect <connectionName>
+    /inc connect ${connectionName}
     ```
 5. The command will return the following details:
-   - **Endpoint**, this will provide a webhook URL in the format: `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX`.
+   - **Endpoint**. It will provide a webhook URL in the format: `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX`.
    - **Verification Token**
 
 ### Step 3. Subscribe from TiDB Cloud
@@ -47,16 +47,16 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 3. Click **Add Subscriber**
 4. Select **Zoom** from the **Subscriber Type** drop-down list.
 5. Enter the **Name** field, your Zoom webhook URL into the **URL** field and the verification token into the **Token** field.
-6. Click **Test Connection** button.
+6. Click **Test Connection**.
 
-    - If the test successes, the **Save** button is displayed.
+    - If the test succeeds, the **Save** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the connection.
 
-7. Click **Save** button to complete the subscription.
+7. Click **Save** to complete the subscription.
 
-Alternatively, you can also find a **Subscribe** button in the top right corner of the **Alert** page of the cluster. Clicking it will take you to the **Alert Subscriber** page.
+Alternatively, you can also click **Subscribe** in the top right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
 
-If an alert condition remains unchanged, the alert sends notifications every 3 hours.
+If an alert condition remains unchanged, the alert sends notifications every three hours.
 
 ## Unsubscribe from alert notifications
 
