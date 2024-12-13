@@ -70,8 +70,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     > **Note:**
     >
-    > - For the playground operated in the following way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
-    > - If you want the data to be persisted on storage, run `tiup playground --tag ${tag_name}`. For details, refer to [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+    > For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command. If you want to persist data on storage, then add the `--tag` flag when you start the cluster: `tiup playground --tag ${tag_name}`. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
 
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
@@ -194,8 +193,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     > **Note:**
     >
-    > - For the playground operated in the following way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
-    > - If you want the data to be persisted on storage, run `tiup playground --tag ${tag_name}`. For details, refer to [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+    > For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command. If you want to persist data on storage, then add the `--tag` flag when starting the cluster: `tiup playground --tag ${tag_name}`. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
 
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
