@@ -71,6 +71,18 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - This variable sets the threshold for the optimizer's heuristic strategy to select access paths. If the estimated rows for an access path (such as `Index_A`) is much smaller than that of other access paths (default `1000` times), the optimizer skips the cost comparison and directly selects `Index_A`.
 - `0` means to disable this heuristic strategy.
 
+### [`45798`](https://github.com/pingcap/tidb/issues/45798) <span class="version-mark">New in v7.5.0</span>
+
+- Default value: `ON`
+- Possible values: `ON`, `OFF`
+- This variable controls whether Plan Cache is allowed to cache execution plans that access [generated columns](/generated-columns.md).
+
+### [`46177`](https://github.com/pingcap/tidb/issues/46177) <span class="version-mark">New in v6.5.6, v7.1.3 and v7.5.0</span>
+
+- Default value: `ON`
+- Possible values: `ON`, `OFF`
+- This variable controls whether the optimizer explores enforced plans during query optimization after finding an unenforced plan.
+
 ### [`52869`](https://github.com/pingcap/tidb/issues/52869) <span class="version-mark">New in v8.1.0</span>
 
 - Default value: `OFF`
