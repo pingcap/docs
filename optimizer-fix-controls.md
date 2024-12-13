@@ -81,4 +81,4 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `ON`
 - Possible values: `ON`, `OFF`
-- This variable controls whether to avoid calculating the heavy expression used in ORDER BY stmt twice。
+- This variable controls whether to avoid calculating the heavy expression used in ORDER BY stmt twice.
