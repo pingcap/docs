@@ -72,7 +72,6 @@ CREATE TABLE t3 (
 
 For more details on how to use UUID, see [UUID best practices](/best-practices/uuid.md).
 
-
 An example for using JSON:
 
 ```sql
