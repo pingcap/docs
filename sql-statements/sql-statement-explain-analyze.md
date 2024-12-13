@@ -347,9 +347,20 @@ When a query involves MPP tasks, the execution time is also affected by various 
 tiflash_wait: {minTSO_wait: 425ms, pipeline_breaker_wait: 133ms, pipeline_queue_wait: 512ms}
 ```
 
+<CustomContent platform="tidb">
+
 - `minTSO_wait`: records the time spent waiting for an MPP task to be scheduled by the [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
 - `pipeline_breaker_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the time that it takes for the pipeline containing the pipeline breaker operator to wait for all data in the upstream pipeline. Currently it is only used to display the time it takes for the pipeline containing the `Join` operator to wait for all hash table builds to complete.
 - `pipeline_queue_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the waiting time in the CPU Task Thread Pool and IO Task Thread Pool during the execution of the pipeline.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+- `minTSO_wait`: records the time spent waiting for an MPP task to be scheduled by the [TiFlash MinTSO Scheduler](https://docs.pingcap.com/tidb/stable/tiflash-mintso-scheduler).
+- `pipeline_breaker_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the time that it takes for the pipeline containing the pipeline breaker operator to wait for all data in the upstream pipeline. Currently it is only used to display the time it takes for the pipeline containing the `Join` operator to wait for all hash table builds to complete.
+- `pipeline_queue_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the waiting time in the CPU Task Thread Pool and IO Task Thread Pool during the execution of the pipeline.
+
+</CustomContent>
 
 ### Other common execution information
 
