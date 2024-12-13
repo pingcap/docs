@@ -30,10 +30,12 @@ Automatic backups is controlled by the backup setting, which is different for fr
 
    - Free clusters: the backup cycle is daily.
    - Scalable clusters: the backup cycle is daily.
+
 - **Backup Retention** is the duration for which backups are retained. The expired backups will not be available for restoration.
    
    - Free clusters: the backup retention is 1 day.
    - Scalable clusters: the backup retention is 14 days.
+
 - **Backup Time** is the time when the backup start to be scheduled. Note that the final backup time may fall behind the configured backup time.
    
    - Free clusters: the backup time is a randomly fixed time.
@@ -60,6 +62,7 @@ TiDB Cloud Serverless cluster provides restore functionality to help you recover
 TiDB Cloud Serverless supports snapshot restore and point-in-time restore for your cluster.
 
 - **Snapshot Restore**: Restore your cluster from a specific backup snapshot.
+
 - **Point-in-Time Restore(beta)**: Restore your cluster to a specific time.
 
   - Free clusters: not supported.
