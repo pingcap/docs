@@ -120,6 +120,8 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
 
 + Other operating system versions not mentioned above might work but are not officially supported.
 
++ Starting from v8.4.0, TiDB requires glibc 2.28. If your glibc version does not meet this requirement, it is recommended to use an operating system listed in the preceding table or upgrade the operating system to a version that supports glibc 2.28.
+
 ### Libraries required for compiling and running TiDB
 
 |  Libraries required for compiling and running TiDB |  Version   |
