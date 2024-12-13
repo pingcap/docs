@@ -37,7 +37,7 @@ Apart from the aforementioned situations, the wrong index issue might also be ca
 
 ## Statistics mismatch
 
-When data distribution is highly skewed, the statistics might not accurately reflect the actual data. In such cases, try configuring the options of the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement might help improve the accuracy of statistics and better match the index.
+When data distribution is highly skewed, the statistics might not accurately reflect the actual data. In such cases, try configuring the options of the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement. It might help improve the accuracy of statistics and better match the index.
 
 For example, suppose you have an `orders` table with an index on the `customer_id` column, and more than 50% of the orders share the same `customer_id`. In this case, the statistics might not represent the data distribution well, affecting query performance.
 
@@ -55,7 +55,7 @@ For more information, see [Engine isolation](/tiflash/use-tidb-to-read-tiflash.m
 
 To enhance query performance, TiDB can push down certain functions to the TiKV or TiFlash storage engine for execution. However, some functions are not supported for pushdown, which might limit available execution plans and potentially affect query performance.
 
-For expressions that are supported for pushdown, see [TiKV supported oushdown calculations](/functions-and-operators/expressions-pushed-down.md) and [TiFlash supported pushdown calculations](/tiflash/tiflash-supported-pushdown-calculations.md). 
+For expressions that are supported for pushdown, see [TiKV supported pushdown calculations](/functions-and-operators/expressions-pushed-down.md) and [TiFlash supported pushdown calculations](/tiflash/tiflash-supported-pushdown-calculations.md). 
 
 Note that you can also disable the pushdown of specific expressions. For more information, see [Blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md).
 
