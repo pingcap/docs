@@ -15,7 +15,7 @@ There are multiple reasons why the optimizer might choose an unexpected index:
 - **Engine selection**: in some cases, the optimizer might select a storage engine that is not optimal for the query.
 - **Function pushdown limitations**: certain functions or operations might not be pushed down to storage engines, potentially affecting query performance.
 
-## Statistics
+## Statistics health
 
 You can first view the [health state of tables](/statistics.md#health-state-of-tables) in the statistics, and then solve this issue according to the different health states.
 
