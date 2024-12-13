@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB cluster by getting alert notification vi
 
 # Subscribe via Email
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via multiple channels. This document describes how to subscribe to alert notifications via Email.
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via email, [Slack](/tidb-cloud/monitor-alert-slack.md), and [Zoom](/tidb-cloud/monitor-alert-zoom.md). This document describes how to subscribe to alert notifications via email.
 
 ## Prerequisites
 
@@ -24,16 +24,16 @@ To get alert notifications of clusters in your project, take the following steps
 3. Click **Add Subscriber**.
 4. Select **Email** from the **Subscriber Type** drop-down list.
 5. Enter your email address.
-6. Click **Test Connection** button.
+6. Click **Test Connection**.
 
-    - If the test successes, the **Save** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the connection.
+    - If the test succeeds, the **Save** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and then retry the connection.
 
-7. Click **Save** button to complete the subscription.
+7. Click **Save** to complete the subscription.
 
-Alternatively, you can also find a **Subscribe** button in the top right corner of the **Alert** page of the cluster. Clicking it will take you to the **Alert Subscriber** page.
+Alternatively, you can also click **Subscribe** in the top right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
 
-If an alert condition remains unchanged, the alert sends email notifications every 3 hours.
+If an alert condition remains unchanged, the alert sends email notifications every three hours.
 
 ## Unsubscribe from alert notifications
 
