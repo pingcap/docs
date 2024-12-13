@@ -121,7 +121,7 @@ By default, only one instance is started for each TiDB, TiKV, and PD component. 
 tiup playground --db 3 --pd 3 --kv 3
 ```
 
-### Specify a tag when starting the TiDB cluster
+### Specify a tag when starting the TiDB cluster to store the data
 
 After you stop a TiDB cluster started using TiUP playground, all cluster data is cleaned up as well. To start a TiDB cluster using TiUP playground and ensure that the cluster data is not cleaned up automatically, you can specify a tag when starting the cluster. After specifying the tag, you can find the cluster data in the `~/.tiup/data` directory. Run the following command to specify a tag:
 

@@ -68,6 +68,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 3. Start the cluster in the current session:
 
+        > **Note:**
+        >
+        > - For the playground operated in the following way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
+        > - If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
         {{< copyable "shell-regular" >}}
@@ -100,9 +105,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
         > **Note:**
         >
-        > + Since v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple M1 chip.
-        > + For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
-        > + If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) guide.
+        > Starting from v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple M1 chip.
 
 4. Start a new session to access TiDB:
 
@@ -189,6 +192,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 3. Start the cluster in the current session:
 
+        > **Note:**
+        >
+        > - For the playground operated in the following way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
+        > - If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
         {{< copyable "shell-regular" >}}
@@ -217,11 +225,6 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         To view the Prometheus: http://127.0.0.1:9090
         To view the Grafana: http://127.0.0.1:3000
         ```
-
-        > **Note:**
-        >
-        > For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
-        > If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) guide.
 
 4. Start a new session to access TiDB:
 
