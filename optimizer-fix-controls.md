@@ -76,3 +76,9 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
 - This variable controls whether the optimizer explores enforced plans during query optimization after finding an unenforced plan.
+
+### [`56318`](https://github.com/pingcap/tidb/issues/56318) <span class="version-mark">New in v7.5.0</span>
+
+- Default value: `ON`
+- Possible values: `ON`, `OFF`
+- This variable controls whether to avoid calculating the heavy expression used in ORDER BY stmt twice。
