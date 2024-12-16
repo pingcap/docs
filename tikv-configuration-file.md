@@ -1687,7 +1687,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + Recommended value: `0`. Starting from v8.0.0, TiKV introduces the `shared-blob-cache` configuration item and enables it by default, so there is no need to set `blob-cache-size` separately. The configuration of `blob-cache-size` only takes effect when `shared-blob-cache` is set to `false`.
 + Unit: KiB|MiB|GiB
 
-### `shared-blob-cache` (New in v8.0.0)
+### `shared-blob-cache` <span class="version-mark">New in v8.0.0</span>
 
 + Controls whether to enable the shared cache for Titan blob files and RocksDB block files.
 + Default value: `true`. When the shared cache is enabled, block files have higher priority. This means that TiKV prioritizes meeting the cache needs of block files and then uses the remaining cache for blob files.
