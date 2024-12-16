@@ -214,6 +214,10 @@
        - [Overview](/garbage-collection-overview.md)
        - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+  - [Manage TiDB Node Groups]
+    - [Optimize Resource Allocation](/tidb-cloud/optimize-resource-allocation.md)
+    - [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md)
+    - [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
