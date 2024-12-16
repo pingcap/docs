@@ -14,11 +14,11 @@ This document describes how to back up and restore your TiDB Cloud Serverless cl
 
 ## Automatic backups
 
-Automatic backups will back up your cluster data regularly, allowing you to restore data from a backup snapshot to minimize data loss in the event of a disaster.
+TiDB Cloud Serverless automatically backs up your cluster data, allowing you to restore data from a backup snapshot to minimize data loss in the event of a disaster.
 
 ### Learn about the backup setting
 
-Automatic backups is controlled by the backup setting, which is different for free clusters and scalable clusters, as shown in the following table:
+Automatic backup settings vary between free clusters and scalable clusters, as shown in the following table:
 
 | Backup setting   | Free clusters | Scalable clusters |
 |------------------|--------------|------------------|
@@ -28,14 +28,8 @@ Automatic backups is controlled by the backup setting, which is different for fr
 
 - **Backup Cycle** is the frequency at which backups are taken.
 
-    - Free clusters: the backup cycle is daily.
-    - Scalable clusters: the backup cycle is daily.
-
-- **Backup Retention** is the duration for which backups are retained. The expired backups will not be available for restoration.
+- **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
    
-    - Free clusters: the backup retention is 1 day.
-    - Scalable clusters: the backup retention is 14 days.
-
 - **Backup Time** is the time when the backup starts to be scheduled. Note that the final backup time might fall behind the configured backup time.
    
     - Free clusters: the backup time is a randomly fixed time.
@@ -61,16 +55,16 @@ TiDB Cloud Serverless clusters offer restore functionality to help recover data 
 
 TiDB Cloud Serverless supports snapshot restore and point-in-time restore for your cluster.
 
-- **Snapshot Restore**: Restore your cluster from a specific backup snapshot.
+- **Snapshot Restore**: restores your cluster from a specific backup snapshot.
 
-- **Point-in-Time Restore (beta)**: Restore your cluster to a specific time.
+- **Point-in-Time Restore (beta)**: restores your cluster to a specific time.
 
     - Free clusters: not supported.
-    - Scalable clusters: restore to any time within the last 14 days, but not before the cluster creation time or after the current time minus one minute.
+    - Scalable clusters: restores to any time within the last 14 days, but not before the cluster creation time or after the current time minus one minute.
 
 ### Restore destination
 
-TiDB Cloud Serverless supports restore in-place and restore to a new cluster.
+TiDB Cloud Serverless supports restoring in-place and restoring to a new cluster.
 
 **In-place restore**
 
@@ -78,7 +72,7 @@ Restore to the current cluster will overwrite existing data. Note the following:
 
 - Existing connections will be terminated once the restore is started.
 - The cluster will be unavailable, and new connections will be blocked during the restore process.
-- Restore will affect tables in the `mysql` schema. Any changes to user credentials, permissions, or system variables will be reverted to their state at the time of the backup.
+- Restore will affect tables in the `mysql` schema. Any changes to user credentials, permissions, or system variables will be reverted to their state at the backup time.
 
 **Restore to a new cluster**
 
@@ -115,7 +109,7 @@ To restore your TiDB Cloud Serverless cluster, follow these steps:
     </div>
     </SimpleTab>
 
-4. In **Destination**, you can choose to restore in-place or restore to a new cluster.
+4. In **Destination**, you can choose to restore to a new cluster or restore in-place.
 
     <SimpleTab>
     <div label="Restore to a new cluster">
@@ -125,8 +119,7 @@ To restore your TiDB Cloud Serverless cluster, follow these steps:
     1. Click **Restore to a New Cluster**.
     2. Enter a name for the new cluster.
     3. Choose the cluster plan for the new cluster.
-    4. Set spending limits when you choose a scalable cluster.
-    5. Set the advanced settings as needed when you choose a scalable cluster.
+    4. If you choose a scalable cluster, set a monthly spending limit, and then configure advanced settings as needed. Otherwise, skip this step.
 
     </div>
     <div label="Restore in-place">
@@ -138,7 +131,7 @@ To restore your TiDB Cloud Serverless cluster, follow these steps:
 
 5. Click **Restore** to begin the restore process.
 
-After initiating the restore process, the cluster status changes to **Restoring**. The cluster will be unavailable until the restore is complete and cluster status changes to **Available**.
+Once the restore process begins, the cluster status changes to **Restoring**. The cluster will remain unavailable until the restore is complete and the status changes to **Available**.
 
 ## Limitations
 
