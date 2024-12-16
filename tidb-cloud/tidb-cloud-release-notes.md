@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
-## December 3, 2024
+## December 17, 2024
 
 **General changes**
 
