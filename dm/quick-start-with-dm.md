@@ -10,7 +10,7 @@ This document describes how to migrate data from MySQL to TiDB using [TiDB Data 
 
 > **Note:**
 >
-> If your target machine's operating system supports SELinux, make sure that SELinux is **disabled**.
+> If your target machine's operating system supports SELinux, ensure that SELinux is **disabled**.
 
 ## Step 1: Deploy a DM cluster
 
