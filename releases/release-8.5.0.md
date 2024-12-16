@@ -389,6 +389,7 @@ The following features are planned for deprecation in future versions:
     - Fix the issue that the `SUBSTRING()` function returns incorrect results when the second parameter is negative [#9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that the `REPLACE()` function returns an error when the first parameter is a constant [#9522](https://github.com/pingcap/tiflash/issues/9522) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that `LPAD()` and `RPAD()` functions return incorrect results in some cases [#9465](https://github.com/pingcap/tiflash/issues/9465) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that after creating a vector index, if the internal task for building the vector index is unexpectedly interrupted, it could result in TiFlash writing corrupted data and being unable to restart [#9714](https://github.com/pingcap/tiflash/issues/9714) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 + Tools
 
