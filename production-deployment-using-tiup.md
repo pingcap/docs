@@ -10,7 +10,7 @@ This guide describes how to deploy a TiDB Self-Managed cluster using [TiUP](http
 
 TiUP is a cluster operation and maintenance tool introduced in TiDB 4.0. It provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/components/cluster), a Golang-based component for managing TiDB clusters. By using the TiUP cluster, you can easily perform routine database operations, such as deploying, starting, stopping, destroying, scaling, upgrading TiDB clusters, and managing TiDB cluster parameters.
 
-TiUP also supports deploying TiDB, TiFlash, TiCDC, and the monitoring system. This document introduces how to deploy TiDB clusters with different topologies.
+TiUP also supports deploying TiDB, TiFlash, TiCDC, and the monitoring system. This guide introduces how to deploy TiDB clusters with different topologies.
 
 ## Step 1. Prerequisites and precheck
 
