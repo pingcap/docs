@@ -12,7 +12,7 @@ There are multiple reasons why the optimizer might choose an unexpected index:
 - **Outdated statistics**: the optimizer relies on statistics to estimate query costs. If the statistics are outdated, the optimizer might make suboptimal choices.
 - **Statistics mismatch**: even if statistics are current, they might not accurately reflect the data distribution, leading to incorrect cost estimations.
 - **Incorrect cost calculation**: the optimizer might miscalculate the cost of using an index due to complex query structures or data distribution.
-- **Engine selection**: in some cases, the optimizer might select a storage engine that is not optimal for the query.
+- **Inappropriate engine selection**: in some cases, the optimizer might select a storage engine that is not optimal for the query.
 - **Function pushdown limitations**: certain functions or operations might not be pushed down to storage engines, potentially affecting query performance.
 
 ## Statistics health
