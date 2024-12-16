@@ -43,7 +43,7 @@ Automatic backups is controlled by the backup setting, which is different for fr
 
 ### Configure the backup setting
 
-To set the backup time, perform the following steps:
+To set the backup time for a scalable cluster, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Cloud Serverless cluster.
 
@@ -63,7 +63,7 @@ TiDB Cloud Serverless supports snapshot restore and point-in-time restore for yo
 
 - **Snapshot Restore**: Restore your cluster from a specific backup snapshot.
 
-- **Point-in-Time Restore(beta)**: Restore your cluster to a specific time.
+- **Point-in-Time Restore (beta)**: Restore your cluster to a specific time.
 
     - Free clusters: not supported.
     - Scalable clusters: restore to any time within the last 14 days, but not before the cluster creation time or after the current time minus one minute.
@@ -102,12 +102,12 @@ To restore your TiDB Cloud Serverless cluster, follow these steps:
     To restore from a selected backup snapshot, take the following steps:
 
     1. Click **Snapshot Restore**.
-    2. Select the backup snapshot you want to restore to.
+    2. Select the backup snapshot you want to restore from.
 
     </div>
     <div label="Point-in-Time Restore">
 
-    To restore to a specific point in time, take the following steps:
+    To restore to a specific point in time for a scalable cluster, take the following steps:
 
     1. Click **Point-in-Time Restore**.
     2. Select the date and time you want to restore to.
@@ -120,7 +120,7 @@ To restore your TiDB Cloud Serverless cluster, follow these steps:
     <SimpleTab>
     <div label="Restore to a new cluster">
 
-    To restore a new cluster, take the following steps:
+    To restore to a new cluster, take the following steps:
 
     1. Click **Restore to a New Cluster**.
     2. Enter a name for the new cluster.
@@ -136,7 +136,7 @@ To restore your TiDB Cloud Serverless cluster, follow these steps:
    </div>
    </SimpleTab>
 
-5. Click **Restore** to begin the restoration process.
+5. Click **Restore** to begin the restore process.
 
 After initiating the restore process, the cluster status changes to **Restoring**. The cluster will be unavailable until the restore is complete and cluster status changes to **Available**.
 
