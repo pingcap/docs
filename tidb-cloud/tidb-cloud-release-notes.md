@@ -12,6 +12,21 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+- TiDB Cloud Serverless backup and restore changes
+
+    - Support restoring data to a new cluster, providing greater flexibility and ensuring your current cluster's operations remain uninterrupted.
+
+    - Refine backup and restore strategies to align with your cluster plan. For more information, see [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md#learn-about-the-backup-setting).
+
+    - Apply the following compatibility policy to help you transition smoothly:
+
+        - Backups created before 2024-12-17T10:00:00Z will follow the previous retention duration across all clusters.
+        - The backup time of scalable clusters will retain the current configurations, while the backup time of free clusters will be reset to default settings.
+
+## December 3, 2024
+
+**General changes**
+
 - Introduce the Recovery Group feature (beta) for disaster recovery of [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on AWS.
 
     This feature enables you to replicate your databases between TiDB Cloud Dedicated clusters, ensuring rapid recovery in the event of a regional disaster. If you are in the Project Owner role, you can enable this feature by creating a new recovery group and assigning databases to the group. By replicating databases with recovery groups, you can improve disaster readiness, meet stricter availability SLAs, and achieve more aggressive Recovery Point Objectives (RPO) and Recovery Time Objectives (RTO).
