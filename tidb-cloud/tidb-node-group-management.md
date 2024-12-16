@@ -89,11 +89,11 @@ Because the cluster is in one VPC and all the TiDB node groups share the same VP
 1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters)  page.
 2. Click **Nodes** in the left pane.
 
-    ![TiDB node group window view](/media/tidb-cloud/tidb-node-group-window-view.png)
+![TiDB node group window view](/media/tidb-cloud/tidb-node-group-window-view.png)
 
-    **You can also click the button highlighted in the screenshot to switch to table view.**
+**You can also click the button highlighted in the screenshot to switch to table view.**
 
-    ![TiDB node group table view](/media/tidb-cloud/tidb-node-group-table-view.png)
+![TiDB node group table view](/media/tidb-cloud/tidb-node-group-table-view.png)
 
 ## Modify the TiDB node group
 
