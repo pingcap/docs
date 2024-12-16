@@ -77,8 +77,12 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Possible values: `ON`, `OFF`
 - This variable controls whether the optimizer explores enforced plans during query optimization after finding an unenforced plan.
 
-### [`56318`](https://github.com/pingcap/tidb/issues/56318) <span class="version-mark">For TiDB Cloud Serverless</span>
+### [`56318`](https://github.com/pingcap/tidb/issues/56318)
+
+> **Note:**
+>
+> This is only available for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
 
 - Default value: `ON`
 - Possible values: `ON`, `OFF`
-- This variable controls whether to avoid calculating the heavy expression used in `ORDER BY` stmt twice.
+- This variable controls whether to avoid calculating the heavy expression used in the `ORDER BY` statement twice.
