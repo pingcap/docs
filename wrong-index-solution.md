@@ -53,7 +53,7 @@ For more information, see [Engine isolation](/tiflash/use-tidb-to-read-tiflash.m
 
 ## Function pushdown
 
-To enhance query performance, TiDB can push down certain functions to the TiKV or TiFlash storage engine for execution. However, some functions are not supported for pushdown, which might limit available execution plans and potentially affect query performance.
+To enhance query performance, TiDB can push down certain functions to the TiKV or TiFlash storage engine for execution. However, some functions do not support pushdown, which might limit available execution plans and potentially affect query performance.
 
 For expressions that support pushdown, see [TiKV supported pushdown calculations](/functions-and-operators/expressions-pushed-down.md) and [TiFlash supported pushdown calculations](/tiflash/tiflash-supported-pushdown-calculations.md). 
 
