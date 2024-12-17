@@ -214,7 +214,7 @@
        - [Overview](/garbage-collection-overview.md)
        - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - [Manage TiDB Node Groups]
+  - Manage TiDB Node Groups
     - [Optimize Resource Allocation](/tidb-cloud/optimize-resource-allocation.md)
     - [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md)
     - [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md)
