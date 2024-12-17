@@ -1,9 +1,15 @@
 ---
+<<<<<<< HEAD
 title: Software and Hardware Recommendations
 summary: Learn the software and hardware recommendations for deploying and running TiDB.
+=======
+title: TiDB Software and Hardware Requirements
+summary: Learn the software and hardware requirements for deploying and running TiDB.
+aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/deploy/hardware-recommendations/']
+>>>>>>> 92f3d7700f (*: improve deployment doc and toc (#19653))
 ---
 
-# Software and Hardware Recommendations
+# TiDB Software and Hardware Requirements
 
 <!-- Localization note for TiDB:
 
@@ -13,12 +19,13 @@ summary: Learn the software and hardware recommendations for deploying and runni
 
 -->
 
-As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+This document describes the software and hardware requirements for deploying and running the TiDB database. As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
 ## OS and platform requirements
 
 In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations of operating systems and CPU architectures.
 
+<<<<<<< HEAD
 + For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
 
     <table>
@@ -121,6 +128,17 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
 + Other operating system versions not mentioned above might work but are not officially supported.
 
 + Starting from v8.4.0, TiDB requires glibc 2.28. If your glibc version does not meet this requirement, it is recommended to use an operating system listed in the preceding table or upgrade the operating system to a version that supports glibc 2.28.
+=======
+> **Note:**
+>
+> - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
+> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. While the upstream support for CentOS Linux 8 ends on December 31, 2021, CentOS Stream 8 continues to be supported by the CentOS organization.
+> - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
+> - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
+> - If you are using the 32-bit version of an operating system listed in the preceding table, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
+> - Other operating system versions not mentioned above might work but are not officially supported.
+> - Starting from v8.4.0, TiDB requires glibc 2.28. If your glibc version does not meet this requirement, it is recommended to use an operating system listed in the preceding table or upgrade the operating system to a version that supports glibc 2.28.
+>>>>>>> 92f3d7700f (*: improve deployment doc and toc (#19653))
 
 ### Libraries required for compiling and running TiDB
 
@@ -140,7 +158,7 @@ The following CPU architectures are supported:
 - x86_64. Starting from TiDB v6.6.0, the [x86-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
 - ARM 64
 
-## Software recommendations
+## Software requirements
 
 ### Control machine
 
@@ -161,7 +179,7 @@ The following CPU architectures are supported:
 | numa | 2.0.12 or later |
 | tar | any |
 
-## Server recommendations
+## Server requirements
 
 You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or on the hardware server platform in the ARM architecture. The requirements and recommendations about server hardware configuration (ignoring the resources occupied by the operating system itself) for development, test, and production environments are as follows:
 

@@ -5,16 +5,20 @@ summary: Learn how to easily deploy a TiDB cluster using TiUP.
 
 # Deploy a TiDB Cluster Using TiUP
 
-[TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/components/cluster), a cluster management component written in Golang. By using TiUP cluster, you can easily perform daily database operations, including deploying, starting, stopping, destroying, scaling, and upgrading a TiDB cluster, and manage TiDB cluster parameters.
+This guide describes how to deploy a TiDB Self-Managed cluster using [TiUP](https://github.com/pingcap/tiup) in the production environment.
 
-TiUP supports deploying TiDB, TiFlash, TiCDC, and the monitoring system. This document introduces how to deploy TiDB clusters of different topologies.
+TiUP is a cluster operation and maintenance tool introduced in TiDB v4.0. It provides [TiUP cluster](https://github.com/pingcap/tiup/tree/master/components/cluster), a Golang-based component for managing TiDB clusters. By using the TiUP cluster, you can easily perform routine database operations, such as deploying, starting, stopping, destroying, scaling, upgrading TiDB clusters, and managing TiDB cluster parameters.
+
+TiUP also supports deploying TiDB, TiFlash, TiCDC, and the monitoring system. This guide introduces how to deploy TiDB clusters with different topologies.
 
 ## Step 1. Prerequisites and precheck
 
 Make sure that you have read the following documents:
 
-- [Hardware and software requirements](/hardware-and-software-requirements.md)
-- [Environment and system configuration check](/check-before-deployment.md)
+- [TiDB Software and Hardware Requirements](/hardware-and-software-requirements.md)
+- [TiDB Environment and System Configuration Check](/check-before-deployment.md)
+
+In addition, it is recommended to learn the [Best Practices for TiDB Security Configuration](/best-practices-for-security-configuration.md).
 
 ## Step 2. Deploy TiUP on the control machine
 
@@ -440,9 +444,11 @@ If you have deployed [TiFlash](/tiflash/tiflash-overview.md) along with the TiDB
 - [TiFlash Alert Rules and Solutions](/tiflash/tiflash-alert-rules.md)
 - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
 
-If you have deployed [TiCDC](/ticdc/ticdc-overview.md) along with the TiDB cluster, see the following documents:
+If you have deployed [TiCDC](/ticdc/ticdc-overview.md) along with the TiDB cluster, see the following documents to stream data:
 
 - [Changefeed Overview](/ticdc/ticdc-changefeed-overview.md)
 - [Manage Changefeed](/ticdc/ticdc-manage-changefeed.md)
 - [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
 - [TiCDC FAQs](/ticdc/ticdc-faq.md)
+
+If you want to scale out or scale in your TiDB cluster without interrupting the online services, see [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
