@@ -1,53 +1,59 @@
 ---
-title: TiDB Node Group overview
+title: TiDB Node Group Overview
 summary: Learn about the overview of the TiDB Node Group feature.
 ---
 
-# TiDB Node Group overview
+# TiDB Node Group Overview
 
-TiDB Cloud lets you create TiDB node groups for TiDB Cloud Dedicated clusters. A TiDB node group physically groups the computing nodes (TiDB layer) of the cluster, each group is configured with a number of TiDB nodes. It provides a physical isolation of computing resources between different groups, allowing you to allocate reasonable resources to different businesses in multi-business situations.
+TiDB Cloud allows you to create TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. A TiDB node group physically groups the computing nodes (TiDB layer) of the cluster, with each group configured with a set number of TiDB nodes. This setup provides physical isolation of computing resources between groups, enabling efficient resource allocation in multi-business situations.
 
-With TiDB node groups, you can divide computing nodes into multiple TiDB node groups according to different business needs, and configure unique connection endpoints for each TiDB node group. Upper-layer businesses access the cluster through their respective endpoints, and requests are assigned to the corresponding TiDB node group for execution. Even if resources in one TiDB node group are overused, businesses in other TiDB node groups will not be affected.
+Using TiDB node groups, you can divide computing nodes into multiple TiDB node groups based on business needs, and configure unique connection endpoints for each TiDB node group. Upper-layer businesses access the cluster through their respective endpoints, and requests are routed to the corresponding TiDB node group for execution. This ensures that even if resources in one TiDB node group are overused, businesses in other TiDB node groups will not be affected.
+
+> **Note**:
+>
+> The TiDB Node Group feature is **NOT** available for TiDB Cloud Serverless clusters.
 
 ## Implementations
 
-TiDB node group can manage the grouping of TiDB nodes and maintain the mapping between endpoints and TiDB nodes. 
+TiDB node groups manage the grouping of TiDB nodes and maintain the mapping between endpoints and the corresponding TiDB nodes.
 
-For each TiDB node group, there is a dedicated load balancer created. When a user executes a SQL request to the endpoint of a TiDB node group, the request first passes through the load balancer deployed the group, and then the load balancer distributes the request only to the TiDB nodes in this group. 
+Each TiDB node group is associated with a dedicated load balancer. When a user sends a SQL request to the endpoint of a TiDB node group, the request first passes through the group's load balancer, and then the load balancer distributes the request exclusively to the TiDB nodes within that group.
 
-The following diagram shows the implementations of the TiDB Node Group feature
+The following diagram illustrates the implementation of the TiDB Node Group feature.
 
 ![The implementations of the TiDB Node Group feature](/media/tidb-cloud/implementation-of-tidb-node-group.png)
 
-All nodes in a TiDB node group respond to requests coming from the cooresponding endpoint. You can do the following:
+All nodes in a TiDB node group respond to requests from the corresponding endpoint. You can perform the following tasks:
 
-- Create a TiDB node group and assign TiDB nodes to the group.
-- Set up connection endpoints for each group. The following three connection types are supported by TiDB node group's endpoints: public connection, private endpoint and VPC peering. 
-- Let the applications send requests to different groups through different endpoints to achieve resource isolation.
+- Create a TiDB node group and assign TiDB nodes to it.
+- Set up connection endpoints for each group. Supported connection types include [public connection](/tidb-cloud/tidb-node-group-management.md#connect-via-public-connection), [private endpoint](/tidb-cloud/tidb-node-group-management.md#connect-via-private-endpoint), and [VPC peering](/tidb-cloud/tidb-node-group-management.md#connect-via-vpc-peering).
+- Direct applications to send requests to different groups through distinct endpoints to achieve resource isolation.
 
 ## Scenarios 
 
-The introduction of the TiDB Node Group feature is a big improvement for resource allocation of TiDB Cloud Dedicate clusters. TiDB nodes are for computing only and do not store data. TiDB node groups can divide TiDB nodes into multiple physical groups. Even if resources in one TiDB node group are overused, businesses in other TiDB node groups will not be affected.
+The TiDB Node Group feature significantly enhances resource allocation for TiDB Cloud Dedicated clusters. TiDB nodes are dedicated to computation and do not store data, and TiDB node groups allow you to organize these nodes into multiple physical groups. This isolation ensures that resource overuse in one node group does not impact businesses in other groups.
 
 With this feature, you can:
 
-- Combine multiple applications from different systems into a single TiDB Cloud Dedicated cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. By using the TiDB node group feature , you can ensure that the response time of transactional applications is not affected by data analysis or batch applications.
-- Do import or DDL tasks anytime for TiDB Cloud Dedicated cluster without concern about the performance impact for existing production workload. You can create separate TiDB node group for importing or DDL tasks. Even though importing or DDL tasks take a lot of CPU or memory resource, they only use the resource in their own TiDB node group, and the workload in other TiDB node group will not be impacted. 
-- Choose to combine all test environments into a single TiDB cluster, or group the batch tasks that consume more resources into a TiDB node group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can always get the necessary resources.
+- Consolidate multiple applications from different systems into a single TiDB Cloud Dedicated cluster. As an application's workload grows, it will not affect the normal operation of other applications. The TiDB Node Group feature ensures that the response time of transactional applications is not impacted by data analysis or batch applications.
 
-In addition, TiDB node groups are easily scaled in or out. For key applications with high performance requirments, you can plan enough TiDB nodes in the group. For applications that do not have high performance requirements, you can start with a small number of TiDB nodes and scale out when necessary.  The rational use of the TiDB Node Group feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
+- Perform import or DDL tasks on the TiDB Cloud Dedicated cluster without affecting the performance of the existing production workloads. You can create separate TiDB node group for importing or DDL tasks. Even though importing or DDL tasks take a lot of CPU or memory resource, they only use the resource in their own TiDB node group, and the workload in other TiDB node group will not be impacted. 
+
+- Combine all test environments into a single TiDB cluster or group resource-intensive batch tasks into a dedicated TiDB node group. This approach improves hardware utilization, reduces operating costs, and ensures that critical applications always have access to necessary resources.
+
+In addition, TiDB node groups are easy to scale in or out. For key applications with high performance requirments, you can allocate sufficient TiDB nodes to the group. For less demanding applications, you can start with a small number of TiDB nodes and scale out as needed. Efficient use of the TiDB Node Group feature can reduce the number of clusters, simplify operations and maintenance, and lower management costs.
 
 ## Limitations and quotas
 
-Currently, the TiDB Node Group feature is in beta and free of charge.
+Currently, the TiDB Node Group feature is in private beta and free of charge. The following are limitations and quotas:
 
-- You can only create TiDB node groups for TiDB Cloud Dedicated clusters on AWS. It is planned to support this feature for other cloud providers in near future. 
-- Clusters with TiDB 4 vCPU 16 Mem do not support the TiDB Node Group feature.
-- For a TiDB Cloud Dedicated cluster, you can create a maximum of five TiDB node groups by default. If you need more groups, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). 
-- Each TiDB node group must have at least one TiDB node. The maximum node count of a group is not limited. However, the total TiDB nodes in a TiDB Cloud Dedicated cluster must be fewer than 150. 
+- You can only create TiDB node groups for TiDB Cloud Dedicated clusters on AWS. Support for other cloud providers is planned for the near future.
+- TiDB clusters with 4 vCPU and 16 GiB memory do not support the TiDB Node Group feature.
+- By default, you can create up to five TiDB node groups for a TiDB Cloud Dedicated cluster. If you need more groups, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). 
+- Each TiDB node group must contain at least one TiDB node. While there is no limit to the number of nodes in a group, the total number of TiDB nodes in a TiDB Cloud Dedicated cluster must not exceed 150.
 
 ## SLA impact
 
-According to TiDB Cloud [Service Level Agreement (SLA)](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/), the Monthly Uptime Percentage of TiDB Cloud Dedicated clusters with multiple TiDB nodes deployment can be up to 99.99%. However, after introducing the TiDB Node Group feature, TiDB Cloud can not provide high availability across TiDB node groups. If you create multiple TiDB node groups with only one TiDB node in each group, you will lose the high availability for the groups and your cluster's monthly uptime percentage will downgrade to a single TiDB node deployment model.   
+According to TiDB Cloud [Service Level Agreement (SLA)](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/), the Monthly Uptime Percentage of TiDB Cloud Dedicated clusters with multiple TiDB nodes deployment can reach up to 99.99%. However, after introducing the TiDB Node Group feature, TiDB Cloud can not provide high availability across TiDB node groups. If you create multiple TiDB node groups with only one TiDB node in each group, you will lose the high availability for the groups and your cluster's monthly uptime percentage will downgrade to a single TiDB node deployment model.   
 
 For high availability, it is recommended that you configure at least two TiDB nodes for each TiDB node group.
