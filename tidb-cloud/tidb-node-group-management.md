@@ -9,10 +9,11 @@ This document describes how to manage TiDB node groups and their endpoints to is
 
 Currently, the TiDB Node Group feature is in private beta and only available upon request. To request this feature:
 
-1. Click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
-2. Click **Request Support**. 
-3. Fill in **Apply for TiDB Node Group feature** in the **Subject** field.
-4. Click **Submit**.
+1. Log on to the [TiDB Cloud console](https://tidbcloud.com/).
+2. Click **?** in the lower-right corner.
+3. Click **Request Support**. 
+4. Fill in **Apply for TiDB Node Group feature** in the **Subject** field.
+5. Click **Submit**.
 
 ## Terms
 
@@ -34,7 +35,7 @@ Currently, the TiDB Node Group feature is in private beta and only available upo
 >
 > If you create a TiDB node group but still use the endpoint of the default group to connect to the cluster, the TiDB nodes in the TiDB node group will not take any workload, which is a waste of the resource. 
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. Click **Nodes** in the left navigation pane.
 3. Click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, click **+** to add a new TiDB node group as follows.
@@ -65,7 +66,7 @@ Public connection for the new TiDB node group is disabled by default. You need t
 
 To enable public connection, do the following:
 
-1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. Choose the new TiDB node group and the **Public** connection type.
 4. Click **Configure the IP Access** List.
@@ -79,7 +80,7 @@ For more information, see [Connect to TiDB Cloud Dedicated via Public Connection
 
 ### Connect via private endpoint
 
-1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. Choose the new TiDB node group and **Private Endpoint** connection type.
 4. Click **Networking** in the left navigation pane. On the **Networking** page, select the TiDB node group.
@@ -96,12 +97,13 @@ For more information, see [Connect to TiDB Cloud Dedicated via Public Connection
 Because the cluster is in one VPC and all the TiDB node groups share the same VPC, you only need to create one VPC peering, then all the groups can use it. 
 
 1. Follow the instrcutions in [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to create a VPC peering for this cluster. 
-2. Click **Networking** in the left navigation pane. 
-3. On the **Networking** page, click **Connect** on the up-right to get the connection string. 
+2. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+3. Click **Networking** in the left navigation pane. 
+4. On the **Networking** page, click **Connect** on the up-right to get the connection string. 
 
 ## View TiDB node groups
 
-1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. Click **Nodes** in the left pane to view the list of TiDB node groups.
 
 ![TiDB node group window view](/media/tidb-cloud/tidb-node-group-window-view.png)
@@ -116,7 +118,7 @@ You can change the group name and the number of TiDB nodes in the group.
 
 ### Change the group name
 
-1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. Click **Nodes** in the left navigation pane.
 3. Click the edit icon highlighted in the screenshot to change the name of the TiDB node group.
 
@@ -124,7 +126,7 @@ You can change the group name and the number of TiDB nodes in the group.
 
 ### Change the number of TiDB nodes
 
-1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. Click **Nodes** in the left navigation pane.
 3. Click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, update the number of TiDB nodes, or add new node groups. On this page, you can also change the size and Storage X Nodes of the TiKV and TiFlash nodes.
@@ -137,7 +139,7 @@ You can change the group name and the number of TiDB nodes in the group.
 >
 > Deleting a TiDB node group will also remove the nodes and associated network configurations, including private endpoint connections and the IP list for public access.
 
-1. Navigate to the [Cluster](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [Cluster](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. Click **Nodes** in the left navigation pane.
 3. Click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, click the delete icon to delete the TiDB node group. 
