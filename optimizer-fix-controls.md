@@ -89,3 +89,13 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Possible values: `ON`, `OFF`
 - As stated in the **Note** of [Explain Statements Using Index Merge](/explain-index-merge.md#examples), if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge.
 - You can remove this limitation by enabling this fix control. Removing this limitation enables the optimizer to choose index merge automatically in more queries, but might cause the optimizer to ignore the optimal execution plans. Therefore, it is recommended to conduct sufficient tests on actual use cases before removing this limitation to make sure that it will not cause performance regressions.
+
+### [`56318`](https://github.com/pingcap/tidb/issues/56318)
+
+> **Note:**
+>
+> This is only available for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+
+- Default value: `ON`
+- Possible values: `ON`, `OFF`
+- This variable controls whether to avoid calculating the heavy expression used in the `ORDER BY` statement twice.
