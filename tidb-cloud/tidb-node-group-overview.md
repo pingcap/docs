@@ -37,11 +37,11 @@ With this feature, you can:
 
 - Consolidate multiple applications from different systems into a single TiDB Cloud Dedicated cluster. As an application's workload grows, it will not affect the normal operation of other applications. The TiDB Node Group feature ensures that the response time of transactional applications is not impacted by data analysis or batch applications.
 
-- Perform import or DDL tasks on the TiDB Cloud Dedicated cluster without affecting the performance of the existing production workloads. You can create separate TiDB node group for importing or DDL tasks. Even though importing or DDL tasks take a lot of CPU or memory resource, they only use the resource in their own TiDB node group, and the workload in other TiDB node group will not be impacted. 
+- Perform import or DDL tasks on the TiDB Cloud Dedicated cluster without affecting the performance of the existing production workloads. You can create separate TiDB node group for importing or DDL tasks. Even though importing or DDL tasks consume significant CPU or memory resource, they only use the resource in their own TiDB node group, and the workload in other TiDB node group will not be impacted. 
 
 - Combine all test environments into a single TiDB cluster or group resource-intensive batch tasks into a dedicated TiDB node group. This approach improves hardware utilization, reduces operating costs, and ensures that critical applications always have access to necessary resources.
 
-In addition, TiDB node groups are easy to scale in or out. For key applications with high performance requirments, you can allocate sufficient TiDB nodes to the group. For less demanding applications, you can start with a small number of TiDB nodes and scale out as needed. Efficient use of the TiDB Node Group feature can reduce the number of clusters, simplify operations and maintenance, and lower management costs.
+In addition, TiDB node groups are easy to scale in or out. For key applications with high performance requirments, you can allocate enough TiDB nodes to the group. For less demanding applications, you can start with a small number of TiDB nodes and scale out as needed. Efficient use of the TiDB Node Group feature can reduce the number of clusters, simplify operations and maintenance, and lower management costs.
 
 ## Limitations and quotas
 
