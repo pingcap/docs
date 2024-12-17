@@ -34,5 +34,5 @@ The following table compares the pros and cons of Resource Control and the TiDB 
 | Level of isolation  | TiKV or TiFlash logical layer    | TiDB node physical layer   |
 | Flow control        | Controls the flow of user read and write requests based on the quotas set for the resource groups. | Not supported. |
 | Configuration experience  | Configured using SQL statements  | Configured via the TiDB Cloud console    |
-| Distinguishing workloads | Supports binding resources at the following levels: <ul><li>- User level.</li><li>- Session level (set the resource group per session). </li><li>- Statement level (set the resource group per statement).</li></ul>| Provide different connection endpoints for different workloads.   |
+| Distinguishing workloads | Supports binding resources at the following levels: <ul><li>User level.</li><li>Session level (set the resource group per session). </li><li>Statement level (set the resource group per statement).</li></ul>| Provide different connection endpoints for different workloads.   |
 | Cost       | No extra cost     | Cost associated with adding TiDB nodes, but no extra cost for creating TiDB node groups.       |
