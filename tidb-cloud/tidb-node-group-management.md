@@ -1,3 +1,4 @@
+---
 title: Manage TiDB Node Groups
 summary: Learn about how to manage TiDB node groups.
 ---
@@ -45,7 +46,7 @@ Currently, the TiDB Node Group feature is in private beta and only available upo
         - **vCPU + RAM**: choose the [TiKV size](/tidb-cloud/size-your-cluster.md#size-tikv) you need.
         - **Storage X Nodes**: choose the storage size and the number of TiKV nodes.
 
-  ![Create TiDB Node Group](/media/tidb-cloud/tidb-node-group-create.png)
+    ![Create TiDB Node Group](/media/tidb-cloud/tidb-node-group-create.png)
 
 5. New TiDB nodes will be added with the new TiDB node group. The billing of the cluster will change. Review the cluster size in the right pane, and then click **Confirm**.
 
