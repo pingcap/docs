@@ -142,7 +142,7 @@ In the last section, we discussed some basic implementation mechanisms of TiDB a
 
 ### Deployment
 
-Before deployment, read [Software and Hardware Requirements](/hardware-and-software-requirements.md).
+Before deployment, read [TiDB Software and Hardware Requirements](/hardware-and-software-requirements.md).
 
 It is recommended to deploy the TiDB cluster using [TiUP](/production-deployment-using-tiup.md). This tool can deploy, stop, destroy, and upgrade the whole cluster, which is quite convenient. It is not recommended to manually deploy the TiDB cluster, which might be troublesome to maintain and upgrade later.
 

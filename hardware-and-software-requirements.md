@@ -1,10 +1,10 @@
 ---
-title: Software and Hardware Requirements
+title: TiDB Software and Hardware Requirements
 summary: Learn the software and hardware requirements for deploying and running TiDB.
 aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/deploy/hardware-recommendations/']
 ---
 
-# Software and Hardware Requirements
+# TiDB Software and Hardware Requirements
 
 <!-- Localization note for TiDB:
 

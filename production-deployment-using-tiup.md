@@ -16,7 +16,7 @@ TiUP also supports deploying TiDB, TiFlash, TiCDC, and the monitoring system. Th
 
 Make sure that you have read the following documents:
 
-- [Software and Hardware Requirements](/hardware-and-software-requirements.md)
+- [TiDB Software and Hardware Requirements](/hardware-and-software-requirements.md)
 - [TiDB Environment and System Configuration Check](/check-before-deployment.md)
 
 In addition, it is recommended to learn the [Best Practices for TiDB Security Configuration](/best-practices-for-security-configuration.md).
