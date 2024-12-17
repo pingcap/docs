@@ -1,9 +1,9 @@
 ---
-title: TiDB Node Group Overview
+title: Overview of TiDB Node Group 
 summary: Learn about the overview of the TiDB Node Group feature.
 ---
 
-# TiDB Node Group Overview
+# Overview of TiDB Node Group
 
 TiDB Cloud allows you to create TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. A TiDB node group physically groups the computing nodes (TiDB layer) of the cluster, with each group configured with a set number of TiDB nodes. This setup provides physical isolation of computing resources between groups, enabling efficient resource allocation in multi-business situations.
 

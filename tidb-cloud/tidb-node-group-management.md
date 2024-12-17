@@ -31,9 +31,7 @@ Currently, the TiDB Node Group feature is in private beta and only available upo
 
 ## Create a TiDB node group
 
-> **Note**:
->
-> If you create a TiDB node group but still use the endpoint of the default group to connect to the cluster, the TiDB nodes in the TiDB node group will not take any workload, which is a waste of the resource. 
+Do the following to create a TiDB node group:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. Click **Nodes** in the left navigation pane.
@@ -57,6 +55,8 @@ Currently, the TiDB Node Group feature is in private beta and only available upo
 5. New TiDB nodes will be added together with the new TiDB node group. The billing of the cluster will change. Review the cluster size in the right pane, and then click **Confirm**.
 
 By default, you can create up to five TiDB node groups for a TiDB Cloud Dedicated cluster. If you need more groups, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). 
+
+If you create a TiDB node group but still use the endpoint of the default group to connect to the cluster, the TiDB nodes in the TiDB node group will not take any workload, which is a waste of the resource. You need to create new connection to the TiDB nodes in the new TiDB node group. See [Connect to a TiDB node group](#connect-to-a-TiDB-node-group).
 
 ## Connect to a TiDB node group
 
