@@ -55,7 +55,7 @@ Javaアプリケーションで次のエラーが頻繁に表示される場合:
 -   別のスレッドを使用して、接続が利用可能かどうかを定期的に確認します。
 -   接続を維持するために定期的にテスト クエリを送信します。
 
-異なる接続プールの実装では、上記の方法の 1 つ以上がサポートされる場合があります。対応する構成を見つけるには、接続プールのドキュメントを確認してください。
+さまざまな接続プールの実装では、上記の方法の 1 つ以上がサポートされている場合があります。対応する構成を見つけるには、接続プールのドキュメントを確認してください。
 
 ### 経験に基づいた公式 {#formulas-based-on-experience}
 
@@ -263,7 +263,7 @@ UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; 
 
 #### タイムアウト関連のパラメータ {#timeout-related-parameters}
 
-TiDB は、タイムアウトを制御するために、MySQL 互換のパラメータ[`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) 2 つ提供しています。これら 2 つのパラメータは、それぞれJavaアプリケーションとの接続アイドル タイムアウトと、接続中の SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。TiDB v5.4 以降、デフォルト値`wait_timeout`は`28800`秒、つまり 8 時間です。v5.4 より前のバージョンの TiDB の場合、デフォルト値は`0`で、タイムアウトは無制限であることを意味します。デフォルト値`max_execution_time`は`0`で、SQL ステートメントの最大実行時間は無制限であることを意味します。
+TiDB は、タイムアウトを制御するために、MySQL 互換のパラメータ[`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) 2 つ提供しています。これら 2 つのパラメータは、それぞれJavaアプリケーションとの接続アイドル タイムアウトと、接続中の SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。TiDB v5.4 以降、デフォルト値`wait_timeout`は`28800`秒、つまり 8 時間です。TiDB バージョン v5.4 より前のバージョンでは、デフォルト値は`0`で、タイムアウトは無制限であることを意味します。デフォルト値`max_execution_time`は`0`で、SQL ステートメントの最大実行時間は無制限であることを意味します。
 
 デフォルト値の[`wait_timeout`](/system-variables.md#wait_timeout)は比較的大きい値です。トランザクションが開始されてもコミットもロールバックもされないシナリオでは、ロックの保持が長引かないように、よりきめ細かい制御と短いタイムアウトが必要になる場合があります。この場合、 [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) (TiDB v7.6.0 で導入) を使用して、ユーザー セッションのトランザクションのアイドル タイムアウトを制御できます。
 
@@ -273,12 +273,12 @@ TiDB は、タイムアウトを制御するために、MySQL 互換のパラメ
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

@@ -10,7 +10,7 @@ summary: オプティマイザー修正制御機能について学習し、tidb_
 -   一部の動作の効果は特定のシナリオに依存します。ほとんどのシナリオに改善をもたらす変更が、他のシナリオに後退を引き起こす可能性があります。
 -   場合によっては、動作の詳細の変化とその結果の関係が非常に複雑になることがあります。特定の動作の改善が全体的な退行を引き起こす可能性があります。
 
-そのため、TiDB は、一連の修正の値を設定することで TiDB オプティマイザの動作を細かく制御できるオプティマイザ修正制御機能を提供します。このドキュメントでは、オプティマイザ修正制御機能とその使用方法について説明し、現在 TiDB がオプティマイザ修正制御でサポートしているすべての修正を一覧表示します。
+そのため、TiDB は、一連の修正の値を設定することで TiDB オプティマイザの動作をきめ細かく制御できるオプティマイザ修正制御機能を提供します。このドキュメントでは、オプティマイザ修正制御機能とその使用方法について説明し、現在 TiDB がオプティマイザ修正制御でサポートしているすべての修正を一覧表示します。
 
 ## <code>tidb_opt_fix_control</code>の紹介 {#introduction-to-code-tidb-opt-fix-control-code}
 
@@ -71,9 +71,31 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 -   この変数は、アクセス パスを選択するためのオプティマイザのヒューリスティック戦略のしきい値を設定します。アクセス パスの推定行数 ( `Index_A`など) が他のアクセス パスの推定行数 (デフォルトは`1000`倍) よりもはるかに小さい場合、オプティマイザはコストの比較をスキップし、直接`Index_A`選択します。
 -   `0`このヒューリスティック戦略を無効にすることを意味します。
 
+### <a href="https://github.com/pingcap/tidb/issues/45798"><code>45798</code></a> <span class="version-mark">v7.5.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-45798-code-45798-code-a-span-class-version-mark-new-in-v7-5-0-span}
+
+-   デフォルト値: `ON`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、 Plan Cache が[生成された列](/generated-columns.md)アクセスする実行プランをキャッシュできるかどうかを制御します。
+
+### <a href="https://github.com/pingcap/tidb/issues/46177"><code>46177</code></a> <span class="version-mark">v6.5.6、v7.1.3、v7.5.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-46177-code-46177-code-a-span-class-version-mark-new-in-v6-5-6-v7-1-3-and-v7-5-0-span}
+
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、強制されていないプランを見つけた後、クエリの最適化中にオプティマイザーが強制されたプランを探索するかどうかを制御します。
+
 ### <a href="https://github.com/pingcap/tidb/issues/52869"><code>52869</code></a> <span class="version-mark">v8.1.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-52869-code-52869-code-a-span-class-version-mark-new-in-v8-1-0-span}
 
 -   デフォルト値: `OFF`
 -   可能な値: `ON` 、 `OFF`
 -   [インデックスマージを使用したステートメントの説明](/explain-index-merge.md#examples)の**注記**に記載されているように、オプティマイザがクエリ プランに対して単一インデックス スキャン メソッド (フル テーブル スキャン以外) を選択できる場合、オプティマイザはインデックス マージを自動的に使用しません。
 -   この制限は、この修正コントロールを有効にすることで解除できます。この制限を解除すると、オプティマイザーはより多くのクエリでインデックス マージを自動的に選択できるようになりますが、オプティマイザーが最適な実行プランを無視する可能性があります。したがって、この制限を解除する前に、実際の使用例で十分なテストを実施して、パフォーマンスの低下が発生しないことを確認することをお勧めします。
+
+### <a href="https://github.com/pingcap/tidb/issues/56318"><code>56318</code></a> {#a-href-https-github-com-pingcap-tidb-issues-56318-code-56318-code-a}
+
+> **注記：**
+>
+> これは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)のみ利用可能です。
+
+-   デフォルト値: `ON`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、 `ORDER BY`のステートメントで使用される重い式を 2 回計算しないようにするかどうかを制御します。

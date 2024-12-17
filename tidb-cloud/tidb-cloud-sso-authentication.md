@@ -1,9 +1,9 @@
 ---
-title: Basic SSO Authentication
+title: Standard SSO Authentication
 summary: Google、GitHub、または Microsoft アカウントを使用してTiDB Cloudコンソールにログインする方法を学びます。
 ---
 
-# 基本的なSSO認証 {#basic-sso-authentication}
+# 標準SSO認証 {#standard-sso-authentication}
 
 このドキュメントでは、迅速かつ便利な基本的なシングル サインオン (SSO) 認証を使用して[TiDB Cloudコンソール](https://tidbcloud.com/)にログインする方法について説明します。
 

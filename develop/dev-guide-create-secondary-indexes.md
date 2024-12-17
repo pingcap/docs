@@ -106,7 +106,7 @@ SQL ステートメントの実行プランを確認するには、 [`EXPLAIN`](
 EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-実行プランの出力例を次に示します。
+以下は実行プランの出力例です。
 
     +-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
     | id                      | estRows  | task      | access object | operator info                                                                                                            |
@@ -182,12 +182,12 @@ SHOW INDEXES FROM `bookshop`.`books`;
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

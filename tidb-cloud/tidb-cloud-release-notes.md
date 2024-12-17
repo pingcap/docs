@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2024 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2024年12月3日 {#december-3-2024}
+
+**一般的な変更**
+
+-   AWS にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの災害復旧のためのリカバリ グループ機能 (ベータ版) を導入します。
+
+    この機能により、 TiDB Cloud Dedicated クラスター間でデータベースを複製できるため、地域災害が発生した場合でも迅速な復旧が可能になります。プロジェクト オーナーの役割を担っている場合は、新しい復旧グループを作成し、そのグループにデータベースを割り当てることで、この機能を有効にできます。復旧グループを使用してデータベースを複製することで、災害への備えを強化し、より厳格な可用性 SLA を満たし、より積極的な復旧ポイント目標 (RPO) と復旧時間目標 (RTO) を達成できます。
+
+    詳細については[回復グループを始める](/tidb-cloud/recovery-group-get-started.md)参照してください。
+
 ## 2024年11月26日 {#november-26-2024}
 
 **一般的な変更**

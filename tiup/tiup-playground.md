@@ -25,48 +25,10 @@ tiup playground ${version} [flags]
 -   このコマンドは各コンポーネントの数を指定しないため、 TiUPプレイグラウンドはデフォルトで、1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスで構成される最小のクラスターを起動します。
 -   各 TiDBコンポーネントを起動すると、 TiUPプレイグラウンドはクラスターが正常に起動したことを通知し、MySQL クライアント経由で TiDB クラスターに接続する方法や[TiDBダッシュボード](/dashboard/dashboard-intro.md)にアクセスする方法などの役立つ情報を提供します。
 
-プレイグラウンドコンポーネントのコマンドライン フラグは次のように記述されます。
+次のコマンドを使用して、プレイグラウンドコンポーネントのコマンドライン フラグを表示できます。
 
-```bash
-Flags:
-      --db int                   Specify the number of TiDB instances (default: 1)
-      --db.host host             Specify the listening address of TiDB
-      --db.port int              Specify the port of TiDB
-      --db.binpath string        Specify the TiDB instance binary path (optional, for debugging)
-      --db.config string         Specify the TiDB instance configuration file (optional, for debugging)
-      --db.timeout int           Specify TiDB maximum wait time in seconds for starting. 0 means no limit
-      --drainer int              Specify Drainer data of the cluster
-      --drainer.binpath string   Specify the location of the Drainer binary files (optional, for debugging)
-      --drainer.config string    Specify the Drainer configuration file
-  -h, --help                     help for tiup
-      --host string              Specify the listening address of each component (default: `127.0.0.1`). Set it to `0.0.0.0` if provided for access of other machines
-      --kv int                   Specify the number of TiKV instances (default: 1)
-      --kv.binpath string        Specify the TiKV instance binary path (optional, for debugging)
-      --kv.config string         Specify the TiKV instance configuration file (optional, for debugging)
-      --mode string              Specify the playground mode: 'tidb' (default) and 'tikv-slim'
-      --pd int                   Specify the number of PD instances (default: 1)
-      --pd.host host             Specify the listening address of PD
-      --pd.binpath string        Specify the PD instance binary path (optional, for debugging)
-      --pd.config string         Specify the PD instance configuration file (optional, for debugging)
-      --pump int                 Specify the number of Pump instances. If the value is not `0`, TiDB Binlog is enabled.
-      --pump.binpath string      Specify the location of the Pump binary files (optional, for debugging)
-      --pump.config string       Specify the Pump configuration file (optional, for debugging)
-      -T, --tag string           Specify a tag for playground
-      --ticdc int                Specify the number of TiCDC instances (default: 0)
-      --ticdc.binpath string     Specify the TiCDC instance binary path (optional, for debugging)
-      --ticdc.config string      Specify the TiCDC instance configuration file (optional, for debugging)
-      --tiflash int              Specify the number of TiFlash instances (default: 1)
-      --tiflash.binpath string   Specify the TiFlash instance binary path (optional, for debugging)
-      --tiflash.config string    Specify the TiFlash instance configuration file (optional, for debugging)
-      --tiflash.timeout int      Specify TiFlash maximum wait time in seconds for starting. 0 means no limit
-      --tiproxy int              TiProxy instance number
-      --tiproxy.binpath string   TiProxy instance binary path
-      --tiproxy.config string    TiProxy instance configuration file
-      --tiproxy.host host        Playground TiProxy host. If not provided, TiProxy will still use host flag as its host
-      --tiproxy.port int         Playground TiProxy port. If not provided, TiProxy will use 6000 as its port
-      --tiproxy.timeout int      TiProxy max wait time in seconds for starting. 0 means no limit (default 60)
-      -v, --version              Specify the version of playground
-      --without-monitor          Disable the monitoring function of Prometheus and Grafana. If you do not add this flag, the monitoring function is enabled by default.
+```shell
+tiup playground --help
 ```
 
 ## 例 {#examples}
@@ -117,12 +79,12 @@ tiup playground --db.binpath /xx/tidb-server
 tiup playground --db 3 --pd 3 --kv 3
 ```
 
-### TiDBクラスタを起動するときにタグを指定する {#specify-a-tag-when-starting-the-tidb-cluster}
+### TiDBクラスタを起動するときにデータを保存するタグを指定します {#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data}
 
 TiUPプレイグラウンドを使用して起動した TiDB クラスターを停止すると、すべてのクラスター データもクリーンアップされます。TiUP プレイグラウンドを使用してTiUPクラスターを起動し、クラスター データが自動的にクリーンアップされないようにするには、クラスターの起動時にタグを指定します。タグを指定すると、クラスター データは`~/.tiup/data`ディレクトリにあります。タグを指定するには、次のコマンドを実行します。
 
 ```shell
-tiup playground --tag <tagname>
+tiup playground --tag ${tag_name}
 ```
 
 この方法で起動したクラスターの場合、クラスターが停止した後もデータ ファイルは保持されます。次回クラスターを起動するときにこのタグを使用すると、クラスターが停止してから保持されているデータを使用できます。

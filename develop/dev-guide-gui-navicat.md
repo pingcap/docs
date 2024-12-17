@@ -5,7 +5,7 @@ summary: Navicat を使用して TiDB に接続する方法を学習します。
 
 # NavicatでTiDBに接続する {#connect-to-tidb-with-navicat}
 
-TiDB は MySQL 互換のデータベースであり、 [ナビキャット](https://www.navicat.com)データベース ユーザー向けの GUI ツール セットです。このチュートリアルでは、 [ナビキャットプレミアム](https://www.navicat.com/en/products/navicat-premium)ツールを使用して TiDB に接続します。
+TiDB は MySQL 互換のデータベースで、 [ナビキャット](https://www.navicat.com)データベース ユーザー向けの GUI ツール セットです。このチュートリアルでは、 [ナビキャットプレミアム](https://www.navicat.com/en/products/navicat-premium)ツールを使用して TiDB に接続します。
 
 このチュートリアルでは、Navicat を使用して TiDB クラスターに接続する方法を学習します。
 
@@ -154,12 +154,12 @@ TiDB は MySQL 互換のデータベースであり、 [ナビキャット](http
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

@@ -61,6 +61,10 @@ store limit 1 5 remove-peer         // store 1 can at most delete 5 peers per mi
 
 ### ストア制限の原則 v2 {#principles-of-store-limit-v2}
 
+> **警告：**
+>
+> Store limit v2 は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
+
 [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) `v2`に設定すると、ストア制限 v2 が有効になります。v2 モードでは、演算子の制限は TiKV スナップショットの機能に基づいて動的に調整されます。TiKV の保留中のタスクが少なくなると、PD はスケジュール タスクを増やします。それ以外の場合は、PD はノードのスケジュール タスクを減らします。したがって、スケジュール プロセスを高速化するために手動で`store limit`を設定する必要はありません。
 
 v2モードでは、移行中の主なボトルネックはTiKVの実行速度になります。現在のスケジュール速度が上限に達しているかどうかは、 **TiKVの詳細**&gt;**スナップショット**&gt;**スナップショット速度**パネルで確認できます。ノードのスケジュール速度を増減するには、TiKVスナップショット制限（ [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) ）を調整します。

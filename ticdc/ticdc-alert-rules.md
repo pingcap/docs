@@ -55,20 +55,6 @@ summary: TiCDC アラート ルールとアラートの処理方法について�
 
     このアラートはレプリケーションの中断に似ています。 [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
-### <code>ticdc_processor_exit_with_error_count</code> {#code-ticdc-processor-exit-with-error-count-code}
-
--   アラートルール:
-
-    `changes(ticdc_processor_exit_with_error_count[1m]) > 0`
-
--   説明：
-
-    レプリケーション タスクはエラーを報告して終了します。
-
--   解決：
-
-    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)参照。
-
 ## 警告アラート {#warning-alerts}
 
 警告アラートは、問題またはエラーを通知するものです。
@@ -87,61 +73,47 @@ summary: TiCDC アラート ルールとアラートの処理方法について�
 
     根本原因を特定するために TiCDC ログを収集します。
 
-### <code>cdc_sink_flush_duration_time_more_than_10s</code> {#code-cdc-sink-flush-duration-time-more-than-10s-code}
+### <code>cdc_no_owner</code> {#code-cdc-no-owner-code}
 
 -   アラートルール:
 
-    `histogram_quantile(0.9, rate(ticdc_sink_txn_worker_flush_duration[1m])) > 10`
+    `sum(rate(ticdc_owner_ownership_counter[240s])) < 0.5`
 
 -   説明：
 
-    レプリケーション タスクでは、ダウンストリーム データベースにデータを書き込むのに 10 秒以上かかります。
+    TiCDC クラスターに 10 分以上所有者が存在しません。
 
 -   解決：
 
-    ダウンストリーム データベースに問題がないか確認します。
+    根本原因を特定するために TiCDC ログを収集します。
 
-### <code>cdc_processor_checkpoint_tso_no_change_for_1m</code> {#code-cdc-processor-checkpoint-tso-no-change-for-1m-code}
+### <code>ticdc_changefeed_meet_error</code> {#code-ticdc-changefeed-meet-error-code}
 
 -   アラートルール:
 
-    `changes(ticdc_processor_checkpoint_ts[1m]) < 1`
+    `(max_over_time(ticdc_owner_status[1m]) == 1 or max_over_time(ticdc_owner_status[1m]) == 6) > 0`
 
 -   説明：
 
-    レプリケーション タスクが 1 分以上進行していません。
+    レプリケーション タスクでエラーが発生しました。
 
 -   解決：
 
     [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)参照。
 
-### <code>ticdc_puller_entry_sorter_sort_bucket</code> {#code-ticdc-puller-entry-sorter-sort-bucket-code}
+### <code>ticdc_processor_exit_with_error_count</code> {#code-ticdc-processor-exit-with-error-count-code}
 
 -   アラートルール:
 
-    `histogram_quantile(0.9, rate(ticdc_puller_entry_sorter_sort_bucket{}[1m])) > 1`
+    `changes(ticdc_processor_exit_with_error_count[1m]) > 0`
 
 -   説明：
 
-    TiCDC プラー エントリ ソーターの遅延が大きすぎます。
+    レプリケーション タスクはエラーを報告して終了します。
 
 -   解決：
 
-    根本原因を特定するために TiCDC ログを収集します。
-
-### <code>ticdc_puller_entry_sorter_merge_bucket</code> {#code-ticdc-puller-entry-sorter-merge-bucket-code}
-
--   アラートルール:
-
-    `histogram_quantile(0.9, rate(ticdc_puller_entry_sorter_merge_bucket{}[1m])) > 1`
-
--   説明：
-
-    TiCDC プラー エントリ ソーター マージの遅延が大きすぎます。
-
--   解決：
-
-    根本原因を特定するために TiCDC ログを収集します。
+    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)参照。
 
 ### <code>tikv_cdc_min_resolved_ts_no_change_for_1m</code> {#code-tikv-cdc-min-resolved-ts-no-change-for-1m-code}
 
@@ -171,15 +143,15 @@ summary: TiCDC アラート ルールとアラートの処理方法について�
 
     根本原因を特定するために、TiCDC 監視メトリックと TiKV ログを収集します。
 
-### <code>ticdc_sink_mysql_execution_error</code> {#code-ticdc-sink-mysql-execution-error-code}
+### <code>ticdc_sink_execution_error</code> {#code-ticdc-sink-execution-error-code}
 
 -   アラートルール:
 
-    `changes(ticdc_sink_mysql_execution_error[1m]) > 0`
+    `changes(ticdc_sink_execution_error[1m]) > 0`
 
 -   説明：
 
-    レプリケーション タスクがダウンストリーム MySQL にデータを書き込むときにエラーが発生します。
+    レプリケーション タスクがダウンストリームにデータを書き込むときにエラーが発生します。
 
 -   解決：
 

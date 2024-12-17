@@ -5,7 +5,7 @@ summary: TiDB データベースでの REPLACE の使用法の概要。
 
 # 交換する {#replace}
 
-`REPLACE`ステートメントは意味的には`DELETE` + `INSERT`ステートメントを組み合わせたものです。これを使用してアプリケーション コードを簡素化できます。
+`REPLACE`ステートメントは意味的には`DELETE` + `INSERT`ステートメントを組み合わせたものです。これを使用して、アプリケーション コードを簡素化できます。
 
 ## 概要 {#synopsis}
 
@@ -31,6 +31,10 @@ InsertValues ::=
 |   UnionStmt
 |   'SET' ColumnSetValue? ( ',' ColumnSetValue )*
 ```
+
+> **注記：**
+>
+> v6.6.0 以降、TiDB は[リソース管理](/tidb-resource-control.md)サポートします。この機能を使用すると、異なるリソース グループで異なる優先度の SQL 文を実行できます。これらのリソース グループに適切なクォータと優先度を設定することで、異なる優先度の SQL 文のスケジュール制御を向上させることができます。リソース制御を有効にすると、文の優先度 ( `PriorityOpt` ) は無効になります。異なる SQL 文のリソース使用を管理するには、 [リソース管理](/tidb-resource-control.md)使用することをお勧めします。
 
 ## 例 {#examples}
 

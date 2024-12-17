@@ -218,7 +218,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   監査ログをTEXT形式と JSON 形式の両方で出力できるようにサポートし、サードパーティ ツールとの統合を容易にします。
     -   監査ログの編集をサポートします。すべてのリテラルを置き換えてセキュリティを強化できます。
 
-    データベース監査は、TiDB Enterprise Edition の重要な機能です。この機能は、企業がデータのセキュリティとコンプライアンスを確保するための強力な監視および監査ツールを提供します。この機能は、企業の管理者がデータベース操作のソースと影響を追跡して、違法なデータの盗難や改ざんを防止するのに役立ちます。さらに、データベース監査は、企業がさまざまな規制およびコンプライアンス要件を満たすのにも役立ち、法的および倫理的コンプライアンスを確保します。この機能は、企業の情報セキュリティにとって重要なアプリケーション価値を持っています。
+    データベース監査は、TiDB Enterprise Edition の重要な機能です。この機能は、企業がデータのセキュリティとコンプライアンスを確保するための強力な監視および監査ツールを提供します。企業の管理者は、データベース操作のソースと影響を追跡して、違法なデータの盗難や改ざんを防ぐことができます。さらに、データベース監査は、企業がさまざまな規制やコンプライアンスの要件を満たし、法的および倫理的コンプライアンスを確保するのにも役立ちます。この機能は、企業の情報セキュリティにとって重要なアプリケーション価値を持っています。
 
     詳細については、 [ユーザーガイド](https://static.pingcap.com/files/2023/09/18204824/TiDB-Database-Auditing-User-Guide1.pdf)参照してください。この機能は、TiDB Enterprise Edition に含まれています。この機能を使用するには、 [TiDBエンタープライズ](https://www.pingcap.com/tidb-enterprise)ページに移動して TiDB Enterprise Edition を入手してください。
 
@@ -318,12 +318,12 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     -   パーティション化されたRaft KV [＃14447](https://github.com/tikv/tikv/issues/14447) @ [スペードA-タン](https://github.com/SpadeA-Tang)使用する場合、分割操作による書き込み QPS への影響を軽減します。
     -   パーティション化されたRaft KV [＃14581](https://github.com/tikv/tikv/issues/14581) @ [バッファフライ](https://github.com/bufferflies)使用するときにスナップショットが占めるスペースを最適化します
-    -   TiKV [＃12362](https://github.com/tikv/tikv/issues/12362) @ [翻訳](https://github.com/cfzjywxk)でリクエストの処理の各段階について、より詳細な時間情報を提供します。
+    -   TiKV [＃12362](https://github.com/tikv/tikv/issues/12362) @ [翻訳](https://github.com/cfzjywxk)でリクエストの処理の各段階についてより詳細な時間情報を提供します
     -   ログバックアップ[＃13867](https://github.com/tikv/tikv/issues/13867) @ [ユジュンセン](https://github.com/YuJuncen)で PD をメタストアとして使用します
 
 -   PD
 
-    -   スナップショットの実行の詳細に基づいてストア制限のサイズを自動的に調整するコントローラを追加します。このコントローラを有効にするには、 `store-limit-version`を`v2`に設定します。有効にすると、スケールインまたはスケールアウトの速度を制御するために`store limit`構成を手動で調整する必要がなくなります[＃6147](https://github.com/tikv/pd/issues/6147) @ [バッファフライ](https://github.com/bufferflies)
+    -   スナップショットの実行の詳細に基づいてストア制限のサイズを自動的に調整するコントローラを追加します。このコントローラを有効にするには、 `store-limit-version`を`v2` (実験的) に設定します。有効にすると、スケールインまたはスケールアウトの速度を制御するために`store limit`構成を手動で調整する必要がなくなります[＃6147](https://github.com/tikv/pd/issues/6147) @ [バッファフライ](https://github.com/bufferflies)
     -   storageエンジンが raft-kv2 [＃6297](https://github.com/tikv/pd/issues/6297) @ [バッファフライ](https://github.com/bufferflies)の場合、ホットスポット スケジューラによって負荷が不安定なリージョンが頻繁にスケジュールされるのを避けるために、履歴負荷情報を追加します。
     -   リーダーのヘルスチェックメカニズムを追加します。etcdリーダーが配置されているPDサーバーがリーダーとして選出できない場合、PDはetcdリーダーをアクティブに切り替えて、PDリーダーが利用可能であることを確認します[＃6403](https://github.com/tikv/pd/issues/6403) @ [ノルーシュ](https://github.com/nolouch)
 

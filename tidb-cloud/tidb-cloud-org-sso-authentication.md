@@ -9,13 +9,13 @@ summary: カスタマイズされた組織認証を使用してTiDB Cloudコン�
 
 TiDB Cloud は、次の 2 種類の SSO 認証をサポートしています。
 
--   [基本的なSSO](/tidb-cloud/tidb-cloud-sso-authentication.md) : メンバーは、GitHub、Google、または Microsoft の認証方法を使用して[TiDB Cloudコンソール](https://tidbcloud.com/)にログインできます。基本 SSO は、 TiDB Cloudのすべての組織に対してデフォルトで有効になっています。
+-   [標準SSO](/tidb-cloud/tidb-cloud-sso-authentication.md) : メンバーは、GitHub、Google、または Microsoft の認証方法を使用して[TiDB Cloudコンソール](https://tidbcloud.com/)にログインできます。標準 SSO は、 TiDB Cloudのすべての組織でデフォルトで有効になっています。
 
 -   Cloud Organization SSO: メンバーは、組織で指定された認証方法を使用して、 TiDB Cloudのカスタム ログイン ページにログインできます。Cloud Organization SSO は、デフォルトでは無効になっています。
 
-基本的な SSO と比較して、Cloud Organization SSO は柔軟性とカスタマイズ性に優れているため、組織のセキュリティとコンプライアンスの要件をより適切に満たすことができます。たとえば、ログイン ページに表示される認証方法を指定したり、ログインに許可されるメール アドレス ドメインを制限したり、 [OpenIDコネクト（OIDC）](https://openid.net/connect/)または[Securityアサーションマークアップ言語 (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) ID プロトコルを使用する ID プロバイダー (IdP) を使用してメンバーがTiDB Cloudにログインできるようにしたりできます。
+標準の SSO と比較して、Cloud Organization SSO は柔軟性とカスタマイズ性に優れているため、組織のセキュリティとコンプライアンスの要件をより適切に満たすことができます。たとえば、ログイン ページに表示される認証方法を指定したり、ログインに許可されるメール アドレス ドメインを制限したり、 [OpenIDコネクト（OIDC）](https://openid.net/connect/)または[Securityアサーションマークアップ言語 (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) ID プロトコルを使用する ID プロバイダー (IdP) を使用してメンバーがTiDB Cloudにログインできるようにしたりできます。
 
-このドキュメントでは、組織の認証スキームを基本 SSO から Cloud Organization SSO に移行する方法について説明します。
+このドキュメントでは、組織の認証スキームを標準 SSO から Cloud Organization SSO に移行する方法について説明します。
 
 > **注記：**
 >
@@ -93,7 +93,7 @@ Cloud Organization SSO を有効にするには、次の手順を実行します
     >
     > ダイアログに、Cloud Organization SSO に再度招待して再度参加するユーザーのリストが含まれている場合、Cloud Organization SSO を有効にすると、 TiDB Cloud はそれらのユーザーに招待メールを自動的に送信します。招待メールを受信した後、各ユーザーはメール内のリンクをクリックして自分の ID を確認する必要があり、カスタム ログイン ページが表示されます。
 
-## ステップ2. 認証方法を構成する {#step-2-configure-authentication-methods}
+## ステップ2. 認証方法を設定する {#step-2-configure-authentication-methods}
 
 TiDB Cloudで認証方法を有効にすると、その方法を使用するメンバーはカスタム URL を使用してTiDB Cloudにログインできるようになります。
 
@@ -247,7 +247,7 @@ TiDB Cloudでは、SAML 認証方法はデフォルトで無効になってい�
 
     > **注記：**
     >
-    > グループにロールを付与すると、グループ内のすべてのメンバーがそのロールを取得します。グループにTiDB Cloud組織にすでに存在するメンバーが含まれている場合、これらのメンバーもグループの新しいロールを取得します。
+    > グループにロールを付与すると、グループ内のすべてのメンバーがそのロールを取得します。グループにTiDB Cloud組織にすでに含まれているメンバーが含まれている場合、これらのメンバーもグループの新しいロールを取得します。
 
     1.  グループに組織ロールを付与するには、 **「組織別」を**クリックし、 **「組織ロール」**列でロールを構成します。組織ロールの権限の詳細については、 [組織の役割](/tidb-cloud/manage-user-access.md#organization-roles)参照してください。
     2.  グループにプロジェクト ロールを付与するには、 **[プロジェクト別] を**クリックし、 **[プロジェクト ロール]**列でロールを構成します。プロジェクト ロールの権限の詳細については、 [プロジェクトの役割](/tidb-cloud/manage-user-access.md#project-roles)参照してください。

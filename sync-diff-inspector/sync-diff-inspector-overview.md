@@ -70,6 +70,9 @@ check-thread-count = 4
 # If enabled, SQL statements is exported to fix inconsistent tables.
 export-fix-sql = true
 
+# Only compares the data instead of the table structure. This configuration item is an experimental feature. It is not recommended that you use it in the production environment.
+check-data-only = false
+
 # Only compares the table structure instead of the data.
 check-struct-only = false
 

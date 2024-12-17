@@ -3,7 +3,7 @@ title: Response and HTTP Status Codes of Data Service
 summary: このドキュメントでは、 TiDB Cloudのデータ サービスの応答コードと HTTP ステータス コードについて説明します。
 ---
 
-# データ サービスの応答と HTTP ステータス コード {#response-and-http-status-codes-of-data-service}
+# データサービスの応答と HTTP ステータス コード {#response-and-http-status-codes-of-data-service}
 
 [データサービス](/tidb-cloud/data-service-overview.md)で定義された API エンドポイントを呼び出すと、データ サービスは HTTP 応答を返します。この応答の構造とステータス コードの意味を理解することは、データ サービス エンドポイントによって返されるデータを解釈するために不可欠です。
 
@@ -276,7 +276,7 @@ HTTP ステータス コードが`200`で、 `data.result.code`フィールド�
 
 ### 429 {#429}
 
-このステータス コードは、リクエストが API キーのレート制限を超えていることを示します。割り当てを増やすには、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)問い合わせください。
+このステータス コードは、リクエストが API キーのレート制限を超えていることを示します。割り当てを増やすには、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)問い合わせください。
 
 応答の例は次のとおりです。
 
@@ -291,7 +291,7 @@ HTTP ステータス コードが`200`で、 `data.result.code`フィールド�
     "rows": [],
     "result": {
       "code": 49900007,
-      "message": "The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
+      "message": "The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://tidb.support.pingcap.com/",
       "start_ms": "",
       "end_ms": "",
       "latency": "",
@@ -315,7 +315,7 @@ HTTP ステータス コードが`200`で、 `data.result.code`フィールド�
     "rows": [],
     "result": {
       "code": 429,
-      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
+      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://tidb.support.pingcap.com/",
       "start_ms": "",
       "end_ms": "",
       "latency": "",

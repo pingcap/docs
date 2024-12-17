@@ -21,21 +21,22 @@ v8.1 LTS では、TiDB はオペレーティング システムと CPU アーキ
 
 -   TiDB は、次のオペレーティング システムと CPU アーキテクチャの組み合わせに対して**エンタープライズ レベルの本番品質を提供し**、製品機能は包括的かつ体系的に検証されています。
 
-    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 8.4 以降の 8.x バージョン</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td><ul><li> Red Hat Enterprise Linux 7.3 以降の 7.x バージョン</li><li>CentOS 7.3 またはそれ以降の 7.x バージョン (TiDB は 8.4 DMR 以降でサポートを終了します)</li></ul></td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾン リナックス 2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾンリナックス2023</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Rocky Linux 9.1 以降</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td>キリン オイラー V10 SP1/SP2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>ユニオンテック OS (UOS) V20</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> openEuler 22.03 LTS SP1/SP3</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr></tbody></table>
+    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 8.4 以降の 8.x バージョン</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td><ul><li> Red Hat Enterprise Linux 7.3 またはそれ以降の 7.x バージョン (TiDB は 8.4 DMR 以降でサポートを終了します)</li><li> CentOS 7.3 またはそれ以降の 7.x バージョン (TiDB は 8.4 DMR 以降でサポートを終了します)</li></ul></td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾン リナックス 2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾンリナックス2023</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Rocky Linux 9.1 以降</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td>キリン オイラー V10 SP1/SP2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>ユニオンテック OS (UOS) V20</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> openEuler 22.03 LTS SP1/SP3</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr></tbody></table>
 
     > **注記：**
     >
     > -   [CentOS Linux のサポート終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)によると、CentOS Linux 7 のアップストリームサポートは 2024 年 6 月 30 日に終了します。TiDB は 8.4 DMR バージョンから CentOS 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。
-    > -   [CentOS Linux のサポート終了](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 8 のアップストリームサポートは 2021 年 12 月 31 日に終了しました。アップストリーム[CentOS Stream 8のサポート](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)は 2024 年 5 月 31 日に終了しました。CentOS Stream 9 は CentOS 組織によって引き続きサポートされます。
+    > -   [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024 年 6 月 30 日に終了します。TiDB は 8.4 DMR バージョンから Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。
 
 -   以下のオペレーティング システムと CPU アーキテクチャの組み合わせでは、TiDB をコンパイル、ビルド、およびデプロイできます。また、OLTP、OLAP、およびデータ ツールの基本機能も使用できます。ただし、TiDB は**エンタープライズ レベルの本番品質を保証するものではありません**。
 
-    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>macOS 12 (Monterey) 以降</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Oracle Enterprise Linux 8以降</td><td>64ビット</td></tr><tr><td>Ubuntu LTS 20.04以降</td><td>64ビット</td></tr><tr><td>CentOS 8 ストリーム</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Debian 10 (Buster) 以降</td><td>64ビット</td></tr><tr><td>Fedora 38以降</td><td>64ビット</td></tr><tr><td>openSUSE Leap v15.5 以降 (Tumbleweed は含みません)</td><td> 64ビット</td></tr><tr><td>SUSE Linux Enterprise Server 15</td><td> 64ビット</td></tr></tbody></table>
+    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>macOS 12 (Monterey) 以降</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Oracle Enterprise Linux 8以降</td><td>64ビット</td></tr><tr><td>Ubuntu LTS 20.04以降</td><td>64ビット</td></tr><tr><td>CentOS ストリーム 8</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Debian 10 (Buster) 以降</td><td>64ビット</td></tr><tr><td>Fedora 38以降</td><td>64ビット</td></tr><tr><td>openSUSE Leap v15.5 以降 (Tumbleweed は含みません)</td><td> 64ビット</td></tr><tr><td>SUSE Linux Enterprise Server 15</td><td> 64ビット</td></tr></tbody></table>
 
     > **注記：**
     >
     > -   Oracle Enterprise Linux の場合、TiDB は Red Hat 互換カーネル (RHCK) をサポートしており、Oracle Enterprise Linux が提供する Unbreakable Enterprise Kernel はサポートしていません。
     > -   Ubuntu 16.04 のサポートは、TiDB の将来のバージョンでは削除されます。Ubuntu 18.04 以降にアップグレードすることを強くお勧めします。
+    > -   CentOS Stream 8 は 2024 年 5 月 31 日に[ビルドの終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)到達します。
 
 -   前の 2 つの表に記載されているオペレーティング システムの 32 ビット バージョンを使用している場合、TiDB が 32 ビット オペレーティング システムおよび対応する CPUアーキテクチャ上でコンパイル、ビルド、またはデプロイ可能であること**は保証されません。**または、TiDB は 32 ビット オペレーティング システムに積極的に適応しません。
 
@@ -175,7 +176,7 @@ TiDB は、データベース メトリックの視覚化を提供するため�
 
 ## TiFlash分散storageおよびコンピューティングアーキテクチャのハードウェアおよびソフトウェア要件 {#hardware-and-software-requirements-for-tiflash-disaggregated-storage-and-compute-architecture}
 
-上記のTiFlashソフトウェアおよびハードウェア要件は、結合storageおよびコンピューティングアーキテクチャ用です。v7.0.0 以降、 TiFlash は[分散型storageとコンピューティングアーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードとコンピューティング ノードの 2 種類のノードに分かれています。これらのノードの要件は次のとおりです。
+上記のTiFlashソフトウェアおよびハードウェア要件は、結合されたstorageおよびコンピューティングアーキテクチャ用です。v7.0.0 以降、 TiFlash は[分散型storageとコンピューティングアーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードとコンピューティング ノードの 2 種類のノードに分かれています。これらのノードの要件は次のとおりです。
 
 -   ソフトウェア: 結合されたstorageとコンピューティングアーキテクチャと同じままです[OSおよびプラットフォームの要件](#os-and-platform-requirements)参照)。
 -   ネットワーク ポート: 結合されたstorageおよびコンピューティングアーキテクチャと同じままです[ネットワーク](#network-requirements)参照)。

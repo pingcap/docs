@@ -225,7 +225,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set key-type raw  // Enable cross table merge.
     ```
 
--   `region-score-formula-version`リージョンスコアの式のバージョンを制御します。値のオプションは`v1`と`v2`です。式のバージョン 2 は、TiKV ノードをオンラインまたはオフラインにするなどの一部のシナリオで、冗長なバランスリージョンスケジューリングを削減するのに役立ちます。
+-   `region-score-formula-version` 、リージョンスコアの式のバージョンを制御します。値のオプションは`v1`と`v2`です。式のバージョン 2 は、TiKV ノードをオンラインまたはオフラインにするなどの一部のシナリオで、冗長なバランスリージョンスケジューリングを削減するのに役立ちます。
 
     ```bash
     config set region-score-formula-version v2
@@ -257,7 +257,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set leader-schedule-limit 4         // 4 tasks of leader scheduling at the same time at most
     ```
 
--   `region-schedule-limit` 、同時にリージョンをスケジュールするタスクの数を制御します。この値により、リージョンバランス オペレーターが過度に作成されるのを回避できます。デフォルト値は`2048`で、これはすべてのサイズのクラスターに十分であり、値を`0`に設定するとスケジュールが閉じられます。通常、リージョンスケジューリング速度は`store-limit`に制限されますが、何をしているのかを正確に理解していない限り、この値をカスタマイズしないことをお勧めします。
+-   `region-schedule-limit` 、同時にリージョンをスケジュールするタスクの数を制御します。この値により、リージョンバランス オペレーターが過度に作成されるのを回避できます。デフォルト値は`2048`で、これはすべてのサイズのクラスターに十分であり、値を`0`に設定するとスケジュールが閉じられます。通常、リージョンのスケジュール速度は`store-limit`に制限されますが、何をしているのかを正確に理解していない限り、この値をカスタマイズしないことをお勧めします。
 
     ```bash
     config set region-schedule-limit 2         // 2 tasks of Region scheduling at the same time at most
@@ -307,7 +307,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
 
--   `replication-mode` 、デュアル データ センター シナリオにおけるリージョンのレプリケーション モードを制御します。詳細については[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)参照してください。
+-   `replication-mode`デュアル データ センター シナリオにおけるリージョンのレプリケーション モードを制御します。詳細については[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)参照してください。
 
 -   `leader-schedule-policy` 、リーダーのスケジュール戦略を選択するために使用されます。 `size`または`count`に従ってリーダーをスケジュールできます。
 
@@ -329,7 +329,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `store-limit-mode`ストア速度を制限するモードを制御するために使用されます。オプションのモードは`auto`と`manual`です。 `auto`モードでは、ストアは負荷に応じて自動的にバランス調整されます (非推奨)。
 
--   `store-limit-version`ストア制限の式のバージョンを制御します。v1 モードでは、 `store limit`を手動で変更して、単一の TiKV のスケジュール速度を制限できます。v2 モードは実験的機能です。v2 モードでは、PD が TiKV スナップショットの機能に基づいて動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [ストア制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
+-   `store-limit-version`ストア制限の式のバージョンを制御します。v1 モードでは、 `store limit`を手動で変更して、単一の TiKV のスケジュール速度を制限できます。v2 モードは実験的機能です。本番環境での使用はお勧めしません。v2 モードでは、PD が TiKV スナップショットの機能に基づいて動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [ストア制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
 
     ```bash
     config set store-limit-version v2       // using store limit v2
@@ -545,7 +545,7 @@ time: 43.12698ms
 
 ### <code>region key [--format=raw|encode|hex] &#x3C;key></code> {#code-region-key-format-raw-encode-hex-x3c-key-code}
 
-このコマンドを使用して、特定のキーが存在するリージョンを照会します。このコマンドは、raw、encoding、および 16 進形式をサポートしています。また、エンコード形式の場合は、キーを一重引用符で囲む必要があります。
+このコマンドを使用して、特定のキーが存在するリージョンを照会します。raw、encoding、および 16 進形式がサポートされています。また、エンコード形式の場合は、キーを一重引用符で囲む必要があります。
 
 16 進形式の使用法 (デフォルト):
 
@@ -828,7 +828,7 @@ TiDB v6.3.0 以降、 PD は`balance-region-scheduler`と`balance-leader-schedul
 
 このコマンドを使用して、 `balance-leader-scheduler`ポリシーを表示および制御します。
 
-TiDB v6.0.0 以降、PD は、バランス リーダーがタスクを処理する速度を制御するために、 `balance-leader-scheduler`の`Batch`パラメータを導入しました。このパラメータを使用するには、pd-ctl を使用して`balance-leader batch`構成項目を変更します。
+TiDB v6.0.0 以降、PD はバランスリーダーがタスクを処理する速度を制御するために`balance-leader-scheduler`の`Batch`パラメータを導入しました。このパラメータを使用するには、pd-ctl を使用して`balance-leader batch`構成項目を変更します。
 
 v6.0.0 より前の PD にはこの設定項目がないため、 `balance-leader batch=1`なります。v6.0.0 以降のバージョンでは、 `balance-leader batch`のデフォルト値は`4`です。この設定項目を`4`より大きい値に設定するには、同時に[`scheduler-max-waiting-operator`](#config-show--set-option-value--placement-rules) (デフォルト値は`5` ) にもより大きな値を設定する必要があります。両方の設定項目を変更した後にのみ、期待される高速化効果が得られます。
 
@@ -1099,7 +1099,7 @@ store weight 1 5 10
 
 > **注記：**
 >
-> `pd-ctl`使用して、 TiKV ストアの状態 ( `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ) を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)を参照してください。
+> `pd-ctl`使用して、TiKV ストアの状態 ( `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ) を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
 ### <code>log [fatal | error | warn | info | debug]</code> {#code-log-fatal-error-warn-info-debug-code}
 

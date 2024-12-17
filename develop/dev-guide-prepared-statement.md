@@ -5,7 +5,7 @@ summary: TiDB 準備済みステートメントの使用方法について学習
 
 # 準備された声明 {#prepared-statements}
 
-[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)パラメータのみが異なる複数の SQL 文をテンプレート化します。SQL 文とパラメータを分離します。これを使用して、SQL 文の次の側面を改善できます。
+[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)パラメータのみが異なる複数の SQL ステートメントをテンプレート化します。SQL ステートメントとパラメータを分離します。これを使用して、SQL ステートメントの次の側面を改善できます。
 
 -   **Security**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避できます。
 -   **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメータのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
@@ -215,12 +215,12 @@ Javaでの完全な例については、以下を参照してください。
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

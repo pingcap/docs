@@ -3,7 +3,7 @@ title: Connect to TiDB with TypeORM
 summary: TypeORM を使用して TiDB に接続する方法を学びます。このチュートリアルでは、TypeORM を使用して TiDB で動作する Node.js サンプル コード スニペットを紹介します。
 ---
 
-# TypeORM で TiDB に接続する {#connect-to-tidb-with-typeorm}
+# TypeORMでTiDBに接続する {#connect-to-tidb-with-typeorm}
 
 TiDB は MySQL 互換のデータベースであり、 [タイプORM](https://github.com/TypeORM/TypeORM) Node.js 用の人気のあるオープンソース ORM フレームワークです。
 
@@ -289,7 +289,7 @@ await this.dataSource.manager.save(player);
 
 ### クエリデータ {#query-data}
 
-次のクエリは、ID 101 の単一の`Player`のオブジェクトを返します。レコードが見つからない場合は`null`返します。
+次のクエリは、ID 101 の単一のオブジェクト`Player`を返します。レコードが見つからない場合は`null`返します。
 
 ```typescript
 const player: Player | null = await this.dataSource.manager.findOneBy(Player, {
@@ -369,12 +369,12 @@ export class ActionLog {
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

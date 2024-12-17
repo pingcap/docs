@@ -122,7 +122,7 @@ CREATE TABLE `books` (
 
 -   クエリ条件に複数のインデックスが使用可能で、実際にどのインデックスが最適かがわかっている場合は、 [オプティマイザーヒント](/optimizer-hints.md)使用して、TiDB オプティマイザにこのインデックスの使用を強制することをお勧めします。これにより、不正確な統計やその他の問題により、TiDB オプティマイザが間違ったインデックスを選択するのを防ぐことができます。
 
-    次のクエリでは、インデックス`id_idx`と`title_idx`それぞれ列`id`と`title`で使用可能であると仮定し、 `id_idx`方が適していることがわかっている場合は、SQL で`USE INDEX`ヒントを使用して、TiDB オプティマイザーに`id_idx`インデックスを使用するように強制できます。
+    次のクエリでは、インデックス`id_idx`と`title_idx`それぞれ列`id`と`title`で使用可能であると想定し、 `id_idx`方が適していることがわかっている場合は、SQL で`USE INDEX`ヒントを使用して、TiDB オプティマイザーに`id_idx`インデックスを使用するように強制できます。
 
     ```sql
     SELECT * FROM t USE INDEX(id_idx) WHERE id = 1 and title = 'database';
@@ -134,12 +134,12 @@ CREATE TABLE `books` (
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

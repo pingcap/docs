@@ -45,7 +45,7 @@ CREATE TABLE `bookshop`.`users` (
 
 ## 列を定義する {#define-columns}
 
-**列は**テーブルに従属します。各テーブルには少なくとも 1 つの列があります。列は、各行の値を単一のデータ型の小さなセルに分割することで、テーブルに構造を提供します。
+**列**はテーブルに従属します。各テーブルには少なくとも 1 つの列があります。列は、各行の値を単一のデータ型の小さなセルに分割することで、テーブルに構造を提供します。
 
 カラム定義は通常、次の形式になります。
 
@@ -71,7 +71,7 @@ CREATE TABLE `bookshop`.`users` (
 
 次に、長さ制限が 100 文字の[varchar](/data-type-string.md#varchar-type)型である`nickname`という名前のフィールドが定義されます。つまり、ユーザーのうち`nicknames`は`varchar`型を使用し、長さが 100 文字を超えないことを意味します。
 
-最後に、 `balance`という名前のフィールドが追加されます。これは[小数点](/data-type-numeric.md#decimal-type)型で、**精度**は`15` 、**スケール**は`2`です。**精度は**フィールド内の合計桁数を表し、**スケールは**小数点以下の桁数を表します。たとえば、 `decimal(5,2)`精度が`5` 、スケールが`2`で、範囲が`-999.99`から`999.99`あることを意味します。 `decimal(6,1)`精度が`6` 、スケールが`1`で、範囲が`-99999.9`から`99999.9`あることを意味します。**小数点**は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (ユーザー プロパティ関連など) では、必ず**小数点**型を使用してください。
+最後に、 `balance`という名前のフィールドが追加されます。これは[小数点](/data-type-numeric.md#decimal-type)型で、**精度**は`15` 、**スケール**は`2`です。**精度は**フィールド内の合計桁数を表し、**スケールは**小数点以下の桁数を表します。たとえば、 `decimal(5,2)`精度が`5` 、スケールが`2`で、範囲が`-999.99`から`999.99`であることを意味します。 `decimal(6,1)`精度が`6` 、スケールが`1`で、範囲が`-99999.9`から`99999.9`あることを意味します。**小数点**は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (ユーザー プロパティ関連など) では、必ず**小数点**型を使用してください。
 
 TiDB は、 [整数型](/data-type-numeric.md#integer-types) 、 [浮動小数点型](/data-type-numeric.md#floating-point-types) 、 [固定小数点型](/data-type-numeric.md#fixed-point-types) 、 [日付と時刻の種類](/data-type-date-and-time.md) 、 [列挙型](/data-type-string.md#enum-type)など、他の多くの列データ型をサポートしています。サポートされている列[データ型](/data-type-overview.md)を参照して、データベースに保存するデータに一致する**データ型**を使用できます。
 
@@ -163,7 +163,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 ## 列制約を追加する {#add-column-constraints}
 
-[主キー制約](#select-primary-key)に加えて、 TiDB は[NULLではない](/constraints.md#not-null)制約、 [ユニークキー](/constraints.md#unique-key)制約、 `DEFAULT`などの他の**列制約**もサポートしています。 完全な制約については、 [TiDB制約](/constraints.md)ドキュメントを参照してください。
+[主キー制約](#select-primary-key)に加えて、 TiDB は[NULLではない](/constraints.md#not-null)制約、 [ユニークキー](/constraints.md#unique-key)制約、 `DEFAULT`などの他の**列制約**もサポートしています。完全な制約については、 [TiDB制約](/constraints.md)ドキュメントを参照してください。
 
 ### デフォルト値を設定する {#set-default-value}
 
@@ -253,7 +253,7 @@ CREATE TABLE `bookshop`.`users` (
 
 <CustomContent platform="tidb">
 
-現在、TiDB は**TiFlash**と**TiSpark の**2 つのデータ分析エンジンをサポートしています。大規模データ シナリオ (100 T) の場合、HTAP のプライマリ ソリューションとして**TiFlash MPP**を推奨し、補完ソリューションとして**TiSpark を**推奨します。
+現在、TiDB は**TiFlash**と**TiSpark という**2 つのデータ分析エンジンをサポートしています。大規模データ シナリオ (100 T) の場合、HTAP のプライマリ ソリューションとして**TiFlash MPP**を推奨し、補完ソリューションとして**TiSpark を**推奨します。
 
 TiDB HTAP機能の詳細については、次のドキュメントを参照してください: [TiDB HTAPクイック スタート ガイド](/quick-start-with-htap.md)および[HTAPを探索する](/explore-htap.md) 。
 
@@ -412,12 +412,12 @@ SHOW TABLES IN `bookshop`;
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

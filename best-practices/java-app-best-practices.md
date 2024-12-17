@@ -45,7 +45,7 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 現在、ほとんどの上位フレームワークはSQL実行にPrepare APIを呼び出します。開発にJDBC APIを直接使用する場合は、Prepare APIを選択するように注意してください。
 
-また、MySQL Connector/J のデフォルト実装では、クライアント側のステートメントのみが前処理され、クライアント側で`?`が置換された後に、ステートメントがテキストファイルでサーバーに送信されます。そのため、Prepare API を使用するだけでなく、TiDBサーバーでステートメントの前処理を行う前に、JDBC 接続パラメータで`useServerPrepStmts = true`も設定する必要があります。詳細なパラメータ設定については、 [MySQL JDBCパラメータ](#mysql-jdbc-parameters)参照してください。
+また、MySQL Connector/J のデフォルト実装では、クライアント側のステートメントのみが前処理され、クライアント側で`?`が置換された後、ステートメントがテキストファイルでサーバーに送信されます。そのため、Prepare API を使用するだけでなく、TiDBサーバーでステートメントの前処理を行う前に、JDBC 接続パラメータで`useServerPrepStmts = true`も設定する必要があります。詳細なパラメータ設定については、 [MySQL JDBCパラメータ](#mysql-jdbc-parameters)参照してください。
 
 #### バッチAPIを使用する {#use-batch-api}
 
@@ -83,7 +83,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメータの形で提�
 
 ##### <code>useServerPrepStmts</code> {#code-useserverprepstmts-code}
 
-デフォルトでは`useServerPrepStmts`は`false`に設定されています。つまり、Prepare API を使用する場合でも、「準備」操作はクライアントでのみ実行されます。サーバーの解析オーバーヘッドを回避するために、同じ SQL ステートメントで Prepare API を複数回使用する場合は、この構成を`true`に設定することをお勧めします。
+デフォルトでは`useServerPrepStmts`が`false`に設定されています。つまり、Prepare API を使用する場合でも、「準備」操作はクライアントでのみ実行されます。サーバーの解析オーバーヘッドを回避するために、同じ SQL ステートメントで Prepare API を複数回使用する場合は、この構成を`true`に設定することをお勧めします。
 
 この設定がすでに有効になっていることを確認するには、次の操作を実行します。
 
@@ -310,7 +310,7 @@ Cursor<Post> queryAllPost();
 
 現実の世界では、アプリケーションは[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)と AOP の側面を使用してトランザクションを開始および停止する場合があります。
 
-メソッド定義に`@Transactional`アノテーションを追加することで、AOP はメソッドが呼び出される前にトランザクションを開始し、メソッドが結果を返す前にトランザクションをコミットします。アプリケーションで同様のニーズがある場合は、コード内の`@Transactional`見つけて、トランザクションがいつ開始および終了するかを判断できます。
+メソッド定義に`@Transactional`アノテーションを追加すると、AOP はメソッドが呼び出される前にトランザクションを開始し、メソッドが結果を返す前にトランザクションをコミットします。アプリケーションで同様のニーズがある場合は、コード内の`@Transactional`見つけて、トランザクションがいつ開始および終了するかを判断できます。
 
 埋め込みの特殊なケースに注意してください。その場合、Spring は[伝搬](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Propagation.html)構成に基づいて異なる動作をします。
 
@@ -357,4 +357,4 @@ Javaアプリケーションでフレーム グラフを取得するのは面倒
 
 ## ヘルプが必要ですか? {#need-help}
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。

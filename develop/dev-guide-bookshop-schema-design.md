@@ -293,4 +293,14 @@ CREATE TABLE `bookshop`.`orders` (
 
 ## ヘルプが必要ですか? {#need-help}
 
-[TiDB コミュニティ](https://ask.pingcap.com/)について質問します。
+<CustomContent platform="tidb">
+
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+
+</CustomContent>

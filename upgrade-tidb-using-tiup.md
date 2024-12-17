@@ -161,7 +161,7 @@ tiup update cluster
 
 -   クラスタDDL:
 
-    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)使用する場合、TiDB クラスターの DDL 操作を確認する必要はありません。DDL ジョブの完了を待ったり、進行中の DDL ジョブをキャンセルしたりする必要はありません。
+    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)使用して TiDB を v8.1.0 以降にアップグレードし、 [分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)有効になっている場合は、アップグレードする前に DXF を無効にすることをお勧めします。そうしないと、アップグレード プロセス中に追加されたインデックスがデータと一致しなくなり、アップグレードが失敗する可能性があります。
     -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)使用しない場合は、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、実行中の DDL ジョブが存在するかどうかを確認することをお勧めします。実行中の DDL ジョブが存在する場合は、アップグレードを実行する前に、その実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)ステートメントを使用してキャンセルしてください。
 
 -   クラスタバックアップ: クラスター内で実行中のバックアップまたは復元タスクがあるかどうかを確認するには、 [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)ステートメントを実行することをお勧めします。実行中の場合は、アップグレードを実行する前に完了するまで待機します。
@@ -286,7 +286,7 @@ tiup cluster display <cluster-name>
 
     失敗したアップグレード操作レコードを見つけて、この操作レコードの ID を保持します。ID は次の手順の`<audit-id>`値です。
 
-2.  対応する操作を再試行するには`tiup cluster replay <audit-id>`実行します。
+2.  対応する操作を再試行するには、 `tiup cluster replay <audit-id>`実行します。
 
     ```shell
     tiup cluster replay <audit-id>

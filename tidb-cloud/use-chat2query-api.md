@@ -57,7 +57,7 @@ API キーを作成するには、次の手順を実行します。
 
     -   `Chat2Query SQL ReadWrite` : API キーが提供された指示に基づいて SQL ステートメントを生成し、任意の SQL ステートメントを実行できるようにします。
 
-4.  デフォルトでは、API キーの有効期限はありません。キーの有効期限を設定する場合は、[ `Days`**期限]**をクリックし、時間単位 ( `Minutes` 、または`Months` ) を選択して、時間単位に必要な数値を入力します。
+4.  デフォルトでは、API キーの有効期限はありません。キーの有効期限`Days`設定する場合は、 **[有効期限]**をクリックし、時間単位 ( `Minutes` 、または`Months` ) を選択して、時間単位に必要な数値を入力します。
 
 5.  **「次へ」**をクリックします。公開鍵と秘密鍵が表示されます。
 
@@ -69,7 +69,7 @@ API キーを作成するには、次の手順を実行します。
 
 > **注記：**
 >
-> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。クォータを増やすには、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)お問い合わせください。
+> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。クォータを増やすには、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)お問い合わせください。
 
 各 Chat2Query データ アプリには、次のエンドポイントがあります。
 
@@ -365,7 +365,8 @@ TiDB Cloud は、エンドポイントを呼び出すのに役立つコード例
 
 > **注記：**
 >
-> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。クォータを増やすには、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)リクエストしてください。ロール`Chat2Query Data Summary Management Role`の API キーでは、Chat2Data v1 エンドポイントを呼び出すことはできません。次のコード例は、 `sp500insight.users`内のユーザー数をカウントするために使用されます。
+> -   各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。クォータを増やすには、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)お問い合わせください。
+> -   ロール`Chat2Query Data Summary Management Role`の API キーでは、Chat2Data v1 エンドポイントを呼び出すことはできません。次のコード例は、 `sp500insight.users`テーブル内のユーザー数をカウントするために使用されます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data'\

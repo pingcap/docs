@@ -26,6 +26,10 @@ TableRefs ::=
     EscapedTableRef ("," EscapedTableRef)*
 ```
 
+> **注記：**
+>
+> v6.6.0 以降、TiDB は[リソース管理](/tidb-resource-control.md)サポートします。この機能を使用すると、異なるリソース グループで異なる優先度の SQL 文を実行できます。これらのリソース グループに適切なクォータと優先度を構成することで、異なる優先度の SQL 文のスケジュールをより適切に制御できます。リソース制御を有効にすると、文の優先度 ( `LOW_PRIORITY`と`HIGH_PRIORITY` ) は無効になります。異なる SQL 文のリソース使用を管理するには、 [リソース管理](/tidb-resource-control.md)使用することをお勧めします。
+
 ## 例 {#examples}
 
 ```sql

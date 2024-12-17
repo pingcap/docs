@@ -100,7 +100,7 @@ summary: DBeaver コミュニティを使用して TiDB に接続する方法を
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-5.  適切な接続文字列をコピーして DBeaver 接続パネルに貼り付けます。DBeaver フィールドとTiDB Cloud Dedicated 接続文字列間のマッピングは次のとおりです。
+5.  適切な接続文字列をコピーして、DBeaver 接続パネルに貼り付けます。DBeaver フィールドとTiDB Cloud Dedicated 接続文字列間のマッピングは次のとおりです。
 
     | DBeaverフィールド | TiDB Cloud専用接続文字列 |
     | ------------ | ----------------- |
@@ -168,12 +168,12 @@ summary: DBeaver コミュニティを使用して TiDB に接続する方法を
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

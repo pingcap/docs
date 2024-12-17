@@ -719,7 +719,7 @@ mysql> SELECT * FROM T2;
     -   TiDB v4.0 以降のバージョンでは、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)で設定できます。それより前のバージョンでは、値は`100 MB`です。
     -   TiDB v6.5.0 以降のバージョンでは、この構成は推奨されません。詳細については、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) ) を参照してください。
 
-サイズ制限と行制限の両方について、トランザクション実行中にトランザクションのエンコードと追加キーのオーバーヘッドも考慮する必要があることに注意してください。最適なパフォーマンスを実現するには、100 ～ 500 行ごとに 1 つのトランザクションを書き込むことをお勧めします。
+サイズ制限と行制限の両方について、トランザクション実行中にトランザクションのエンコードと追加キーのオーバーヘッドも考慮する必要があることに注意してください。最適なパフォーマンスを実現するには、100〜500行ごとに1つのトランザクションを書き込むことをお勧めします。
 
 ## 自動コミットされた<code>SELECT FOR UPDATE</code>文はロックを待機しません。 {#auto-committed-code-select-for-update-code-statements-do-not-wait-for-locks}
 
@@ -733,12 +733,12 @@ mysql> SELECT * FROM T2;
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

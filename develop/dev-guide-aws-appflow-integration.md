@@ -71,7 +71,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     >
     > -   `--guided`オプションでは、プロンプトを使用してデプロイメントをガイドします。入力内容は構成ファイル (デフォルトでは`samconfig.toml` ) に保存されます。
     > -   `stack_name`デプロイする AWS Lambda の名前を指定します。
-    > -   このガイドでは、 TiDB Cloud Serverless のクラウド プロバイダーとして AWS を使用します。Amazon S3 をソースまたは宛先として使用するには、AWS Lambda の`region`を Amazon S3 と同じに設定する必要があります。
+    > -   このガイドでは、 TiDB Cloud Serverless のクラウドプロバイダーとして AWS を使用します。Amazon S3 をソースまたは宛先として使用するには、AWS Lambda の`region`を Amazon S3 と同じに設定する必要があります。
     > -   すでに`sam deploy --guided`実行している場合は、代わりに`sam deploy`実行するだけで、SAM CLI は構成ファイル`samconfig.toml`を使用して対話を簡素化します。
 
     次のような出力が表示された場合、この Lambda は正常にデプロイされています。
@@ -255,12 +255,12 @@ test> SELECT * FROM sf_account;
 
 <CustomContent platform="tidb">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](/support.md)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB コミュニティ](https://ask.pingcap.com/) 、または[サポートチケットを作成する](https://support.pingcap.com/)について質問します。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

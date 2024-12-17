@@ -32,7 +32,9 @@ TiDB にはコストベースのオプティマイザが含まれています。
 
 ## 特定の SQL ステートメントの実行を防ぐにはどうすればよいですか? {#how-to-prevent-the-execution-of-a-particular-sql-statement}
 
-[`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQL バインディング](/sql-plan-management.md#sql-binding)を作成し、特定のステートメントの実行時間を小さな値 (たとえば、1 ミリ秒) に制限することができます。このようにして、ステートメントはしきい値によって自動的に終了します。
+TiDB v7.5.0 以降のバージョンでは、 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)ステートメントを使用して特定の SQL ステートメントを終了できます。詳細については、 [予想以上に多くのリソースを消費するクエリを管理する (ランナウェイクエリ)](/tidb-resource-control.md#query-watch-parameters)参照してください。
+
+TiDB v7.5.0 より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQL バインディング](/sql-plan-management.md#sql-binding)作成し、特定のステートメントの実行時間を小さな値 (たとえば、1 ミリ秒) に制限できます。このようにして、ステートメントはしきい値によって自動的に終了します。
 
 たとえば、 `SELECT * FROM t1, t2 WHERE t1.id = t2.id`の実行を防ぐには、次の SQL バインディングを使用して、ステートメントの実行時間を 1 ミリ秒に制限できます。
 
@@ -207,7 +209,7 @@ TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)または
 
 > **注記：**
 >
-> v6.6.0 以降、TiDB は[リソース管理](/tidb-resource-control.md)サポートします。この機能を使用すると、異なるリソース グループで異なる優先度の SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先度を構成することで、異なる優先度の SQL ステートメントのスケジュール制御を向上させることができます。リソース制御を有効にすると、ステートメントの優先度は適用されなくなります。異なる SQL ステートメントのリソース使用を管理するには、 [リソース管理](/tidb-resource-control.md)使用することをお勧めします。
+> v6.6.0 以降、TiDB は[リソース管理](/tidb-resource-control.md)サポートします。この機能を使用すると、異なるリソース グループで異なる優先度の SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先度を構成することで、異なる優先度の SQL ステートメントのスケジュール制御を向上させることができます。リソース制御を有効にすると、ステートメントの優先度は無効になります。異なる SQL ステートメントのリソース使用を管理するには、 [リソース管理](/tidb-resource-control.md)使用することをお勧めします。
 
 上記の 2 つのパラメータを TiDB の DML と組み合わせて使用することができます。例:
 
@@ -393,7 +395,7 @@ ADMIN SHOW DDL;
 
 `cop task`は分散実行のために KV エンドにプッシュダウンされるコンピューティング タスクです。2 `root task` TiDB エンドでの単一ポイント実行のためのコンピューティング タスクです。
 
-通常、 `root task`の入力データは`cop task`から来ます。 `root task`データを処理しているとき、 TiKV の`cop task`同時にデータを処理し、 TiDB の`root task`のプルを待機できます。 したがって、 `cop`タスクは`root task`と同時に実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。 実行プロセス中、それらはある時間内に同時に実行されます。 たとえば、最初の`cop task` [100, 200] のデータを処理し、2 番目の`cop task` [1, 100] のデータを処理します。 詳細については、 [TiDBクエリプランを理解する](/explain-overview.md)参照してください。
+通常、 `root task`の入力データは`cop task`から来ます。 `root task`データを処理しているとき、 TiKV の`cop task`同時にデータを処理し、 TiDB の`root task`のプルを待機します。 したがって、 `cop`タスクは`root task`と同時に実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。 実行プロセス中、それらはある時間内に同時に実行されます。 たとえば、最初の`cop task` [100, 200] のデータを処理し、2 番目の`cop task` [1, 100] のデータを処理します。 詳細については、 [TiDBクエリプランを理解する](/explain-overview.md)参照してください。
 
 ## データベースの最適化 {#database-optimization}
 

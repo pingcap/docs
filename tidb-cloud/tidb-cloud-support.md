@@ -35,7 +35,7 @@ summary: TiDB Cloudのサポート チームに連絡する方法について説
 
 プロジェクトまたは組織のサポートを受けるには、 [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **[サポートをリクエスト]**をクリックします。
 
-または、<mdsvgicon name="icon-top-organization">左下隅にある**[サポート] を**クリックして、サポート ページに移動します。</mdsvgicon>
+または、<mdsvgicon name="icon-top-organization">をクリックし、 **[サポート] を**クリックしてサポート ページに移動します。</mdsvgicon>
 
 ## 送信したリクエストを確認してください {#check-your-submitted-request}
 
@@ -49,7 +49,7 @@ summary: TiDB Cloudのサポート チームに連絡する方法について説
 
     **「マイリクエスト」**ページでは、リクエストのステータスを確認できます。
 
-または、 [カスタマーサポート](https://support.pingcap.com/hc/en-us)ページにアクセスし、サポート ポータルにログインして、 **[リクエストのビュー]**をクリックすることもできます。
+または、 [カスタマーサポート](https://tidb.support.pingcap.com/)ページにアクセスし、サポート ポータルにログインして、 **[リクエストのビュー]**をクリックすることもできます。
 
 ## サポートプランを確認またはアップグレードする {#check-or-upgrade-your-support-plan}
 
