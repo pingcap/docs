@@ -5,7 +5,7 @@ summary: Learn about how to optimize your resource allocation in TiDB Cloud.
 
 # Optimize Your Resource Allocation
 
-As a Hybrid Transactional and Analytical Processing (HTAP) database, [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters clusters often support multiple upper-level businesses, each with different quality of service (QoS) requirements. In some cases, you might need to allocate maximum resources to high-priority businesses to ensure their latency remains within an acceptable range.
+As a Hybrid Transactional and Analytical Processing (HTAP) database, [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters often support multiple upper-level businesses, each with different quality of service (QoS) requirements. In some cases, you might need to allocate maximum resources to high-priority businesses to ensure their latency remains within an acceptable range.
 
 TiDB Cloud Dedicated clusters offer resource optimization features, including [Resource Control](/tidb-resource-control.md) and the [TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md) feature (Private Beta). These capabilities enable you to allocate resources efficiently in multi-business situations.
 
