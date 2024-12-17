@@ -9,7 +9,7 @@ This document describes how to manage TiDB node groups and their endpoints to is
 
 Currently, the TiDB Node Group feature is in private beta and only available upon request. To request this feature:
 
-1. Log on to the [TiDB Cloud console](https://tidbcloud.com/).
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
 2. Click **?** in the lower-right corner.
 3. Click **Request Support**. 
 4. Fill in **Apply for TiDB Node Group feature** in the **Subject** field.
