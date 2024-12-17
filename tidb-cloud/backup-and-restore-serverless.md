@@ -126,8 +126,8 @@ To restore your TiDB Cloud Serverless cluster, follow these steps:
 
     To restore in-place, click **In-place Restore**.
 
-   </div>
-   </SimpleTab>
+    </div>
+    </SimpleTab>
 
 5. Click **Restore** to begin the restore process.
 
