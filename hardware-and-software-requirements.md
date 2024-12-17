@@ -14,7 +14,7 @@ aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/depl
 
 -->
 
-As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+This document describes the software and hardware requirements for deploying and running TiDB. As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
 ## OS and platform requirements
 
