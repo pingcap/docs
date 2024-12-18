@@ -1,9 +1,9 @@
 ---
-title: Software and Hardware Recommendations
+title: TiDB Software and Hardware Requirements
 summary: Learn the software and hardware recommendations for deploying and running TiDB.
 ---
 
-# Software and Hardware Recommendations
+# TiDB Software and Hardware Requirements
 
 <!-- Localization note for TiDB:
 
@@ -13,7 +13,7 @@ summary: Learn the software and hardware recommendations for deploying and runni
 
 -->
 
-As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+This document describes the software and hardware requirements for deploying and running the TiDB database. As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
 ## OS and platform requirements
 
@@ -140,7 +140,7 @@ The following CPU architectures are supported:
 - x86_64. Starting from TiDB v6.6.0, the [x86-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
 - ARM 64
 
-## Software recommendations
+## Software requirements
 
 ### Control machine
 
@@ -161,7 +161,7 @@ The following CPU architectures are supported:
 | numa | 2.0.12 or later |
 | tar | any |
 
-## Server recommendations
+## Server requirements
 
 You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or on the hardware server platform in the ARM architecture. The requirements and recommendations about server hardware configuration (ignoring the resources occupied by the operating system itself) for development, test, and production environments are as follows:
 
