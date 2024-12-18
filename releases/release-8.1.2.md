@@ -60,7 +60,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
     + TiCDC <!--tw@lilin90: 1 note-->
 
         - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - TiCDC supports querying the status of asynchronously executed DDL tasks after granting `SUPER` privileges to avoid execution errors caused by duplicate DDL tasks on the same table [#11521](https://github.com/pingcap/tiflow/issues/11521) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - TiCDC supports querying the status of asynchronously executed DDL tasks after being granted the `SUPER` privilege, preventing execution errors caused by repeatedly executing DDL tasks on the same table [#11521](https://github.com/pingcap/tiflow/issues/11521) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-7.5.4.md > 改进提升> Tools> TiCDC - 当下游为 TiDB 且授予 `SUPER` 权限时，TiCDC 支持从下游数据库查询 `ADD INDEX DDL` 的执行状态，以避免某些情况下因重试执行 DDL 语句超时而导致数据同步失败 [#10682](https://github.com/pingcap/tiflow/issues/10682) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     + TiDB Data Migration (DM)
@@ -121,17 +121,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
     - (dup): release-7.5.4.md > 错误修复> TiDB - 修复 `INFORMATION_SCHEMA.STATISTICS` 表中 `SUB_PART` 值为空的问题 [#55812](https://github.com/pingcap/tidb/issues/55812) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that the default timeout for querying the TiFlash system table is too short [#57816](https://github.com/pingcap/tidb/issues/57816) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that the value of the `default_collation_for_utf8mb4` variable does not work for the `SET NAMES` statement [#56439](https://github.com/pingcap/tidb/issues/56439) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue that TTL internal concatenation might panic when you manually delete a timer in the `mysql.tidb_timer` table [#57112](https://github.com/pingcap/tidb/issues/57112) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that enabling `tidb_ddl_enable_fast_reorg` to add index acceleration might lead to the duplicate entry error [#49233](https://github.com/pingcap/tidb/issues/49233) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that TTL internal coroutine might panic when you manually delete a timer in the `mysql.tidb_timer` table [#57112](https://github.com/pingcap/tidb/issues/57112) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that enabling acceleration of `ADD INDEX` and `CREATE INDEX` via `tidb_ddl_enable_fast_reorg` might lead to the `Duplicate entry` error [#49233](https://github.com/pingcap/tidb/issues/49233) @[lance6716](https://github.com/lance6716)
     - Fix the issue that the index timestamp is set to `0` when adding indexes to large tables in a non-distributed manner [#57980](https://github.com/pingcap/tidb/issues/57980) @[lance6716](https://github.com/lance6716)
 
 + TiKV <!--tw@hfxsd: 5 notes-->
 
     - Fix the issue that the configuration `resolved-ts.advance-ts-interval` does not take effect, causing the replication latency of TiCDC and Point-in-time recovery (PITR) to increase dramatically when TiKV restarts [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
-    - Fix the issue that some tasks experience long delays when triggering resource control [#17589](https://github.com/tikv/tikv/issues/17589) @[glorv](https://github.com/glorv)
-    - Fix the issue that after Regions are merged, there is a very small probability that it will cause TiKV to panic [#17840](https://github.com/tikv/tikv/issues/17840) @[glorv](https://github.com/glorv)
-    - Fix the issue that TiKV can not report heartbeats to PD when the disk is stuck [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Fix the issue that when Raft and Rocksdb are deployed on different disks, the slow disk detection does not work for the disk where Rocksdb is located [#17884](https://github.com/tikv/tikv/issues/17884) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that some tasks experience high tail latency when triggering resource control [#17589](https://github.com/tikv/tikv/issues/17589) @[glorv](https://github.com/glorv)
+    - Fix the issue that merging Regions might cause TiKV to panic in rare cases [#17840](https://github.com/tikv/tikv/issues/17840) @[glorv](https://github.com/glorv)
+    - Fix the issue that TiKV cannot report heartbeats to PD when the disk is stuck [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that when Raft and RocksDB are deployed on different disks, the slow disk detection does not work for the disk where RocksDB is located [#17884](https://github.com/tikv/tikv/issues/17884) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-7.5.4.md > 错误修复> TiKV - 修复过期副本处理 Raft 快照时，由于分裂操作过慢并且随后立即删除新副本，可能导致 TiKV panic 的问题 [#17469](https://github.com/tikv/tikv/issues/17469) @[hbisheng](https://github.com/hbisheng)
     - (dup): release-8.5.0.md > 错误修复> TiKV - 修复使用 `RADIANS()` 或 `DEGREES()` 函数时可能导致 TiKV panic 的问题 [#17852](https://github.com/tikv/tikv/issues/17852) @[gengliqi](https://github.com/gengliqi)
     - (dup): release-7.5.4.md > 错误修复> TiKV - 修复当大量事务在排队等待同一个 key 上的锁被释放且该 key 被频繁更新时，TiKV 可能因死锁检测压力过大而出现 OOM 的问题 [#17394](https://github.com/tikv/tikv/issues/17394) @[MyonKeminta](https://github.com/MyonKeminta)
