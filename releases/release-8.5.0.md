@@ -27,7 +27,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 </thead>
 <tbody>
   <tr>
-    <td rowspan="6">Scalability and Performance</td>
+    <td rowspan="7">Scalability and Performance</td>
     <td>Reduce data processing latency in multiple dimensions</td>
     <td>TiDB continuously refines data processing to improve performance, effectively meeting the low-latency SQL processing requirements in financial scenarios. Key updates include:
     <li>Support <a href="https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_executor_concurrency-new-in-v50">parallel sorting</a> (introduced in v8.2.0) </li>
@@ -40,7 +40,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/tikv-in-memory-engine">TiKV MVCC In-Memory Engine (IME) </a> (introduced in v8.5.0)</td>
-    <td> The TiKV MVCC in-memory engine cachesa few recent versions of data in memory, helping TiKV quickly skip over old versions and retrieve the most recent data. This feature can significantly improve data scan performance in scenarios where data records are frequently updated or historical versions are retained for a longer period.</td>
+    <td> The TiKV MVCC in-memory engine caches a few recent versions of data in memory, helping TiKV quickly skip over old versions and retrieve the most recent data. This feature can significantly improve data scan performance in scenarios where data records are frequently updated or historical versions are retained for a longer period.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Use Active PD Followers to enhance PD's Region information query service</a> (GA in v8.5.0)</td>
