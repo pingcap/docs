@@ -783,4 +783,4 @@ sudo yum -y install numactl
 
 ## Disable SELinux
 
-Use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility to check if SELinux is disabled or set to permissive. SELinux in Enforcing mode can cause deployment failures. Consult your operating system's documentation for instructions on disabling SELinux.
+Use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility to check if SELinux is disabled or set to permissive. SELinux in enforcing mode can cause deployment failures. For instructions on disabling SELinux, refer to your operating system's documentation.
