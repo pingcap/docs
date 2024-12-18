@@ -28,7 +28,7 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.5.3` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v7.5.3-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.5.5` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v7.5.5-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
