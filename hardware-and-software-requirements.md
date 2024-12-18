@@ -1,5 +1,5 @@
 ---
-title: TiDB Software and Hardware Recommendations
+title: TiDB Software and Hardware Requirements
 summary: Learn the software and hardware recommendations for deploying and running TiDB.
 ---
 
