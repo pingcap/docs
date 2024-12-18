@@ -145,7 +145,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 -   システム パフォーマンスが要件を満たしているかどうかを評価します。合計 QPS とレイテンシーを確認します。システム パフォーマンスが満足できるものでない場合は、次のようにパフォーマンスを調整できます。
 
-    -   ネットワークレイテンシーを監視および最適化します。
+    -   ネットワークレイテンシーを監視し、最適化します。
     -   SQL パフォーマンスを調査して調整します。
     -   モニターと[ホットスポットの問題を解決する](https://docs.pingcap.com/tidb/dev/troubleshoot-hot-spot-issues#troubleshoot-hotspot-issues) 。
 
@@ -175,7 +175,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 -   バックアップ
 
-    ベンダー ロックインを回避するには、毎日のフル バックアップを使用してデータを新しいクラスターに移行し、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してデータをエクスポートします。詳細については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)および[TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md#backup)参照してください。
+    ベンダー ロックインを回避するには、毎日のフル バックアップを使用してデータを新しいクラスターに移行し、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してデータをエクスポートします。詳細については、 [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)および[TiDB Cloudサーバーレス データのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)参照してください。
 
 ## ステップ8. 環境をクリーンアップしてPoCを完了する {#step-8-clean-up-the-environment-and-finish-the-poc}
 

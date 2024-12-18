@@ -28,7 +28,7 @@ summary: TiDB クラスターを削除する方法を学習します。
 
     > **注記：**
     >
-    > [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) [バックアップからのインプレース復元](/tidb-cloud/backup-and-restore-serverless.md#restore)のみをサポートし、削除後のデータの復元はサポートしていません。TiDB TiDB Cloud Serverless クラスターを削除し、将来そのデータを復元する場合は、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してデータをバックアップとしてエクスポートできます。
+    > [TiDB Cloudサーバーレス クラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)削除後のデータの復元はサポートされていません。TiDB TiDB Cloud Serverless クラスターを削除し、後でそのデータを復元する場合は、 [TiDB Cloud Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)参照してデータをバックアップとしてエクスポートしてください。
 
 5.  **「理解しました、削除します」**をクリックします。
 
