@@ -39,6 +39,10 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     </td>
   </tr>
   <tr>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/tikv-in-memory-engine">TiKV MVCC In-Memory Engine (IME) </a> (introduced in v8.5.0)</td>
+    <td> The TiKV MVCC in-memory engine cachesa few recent versions of data in memory, helping TiKV quickly skip over old versions and retrieve the most recent data. This feature can significantly improve data scan performance in scenarios where data records are frequently updated or historical versions are retained for a longer period.</td>
+  </tr>
+  <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.5/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Use Active PD Followers to enhance PD's Region information query service</a> (GA in v8.5.0)</td>
     <td>TiDB v7.6.0 introduces an experimental feature "Active PD Follower", which allows PD followers to provide Region information query services. This feature improves the capability of the PD cluster to handle <code>GetRegion</code> and <code>ScanRegions</code> requests in clusters with a large number of TiDB nodes and Regions, thereby reducing the CPU pressure on PD leaders. In v8.5.0, this feature becomes generally available (GA).</td>
   </tr>
