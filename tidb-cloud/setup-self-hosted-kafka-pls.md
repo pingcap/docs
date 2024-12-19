@@ -32,7 +32,7 @@ The document provides an example of connecting to a Kafka Private Link service d
     - Manage Endpoint Service
     - Connect to EC2 Nodes to configure Kafka nodes
 
-2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in AWS first. Ensure that the Kafka deployment information is alligned with your TiDB cluster.
+2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in AWS first. Ensure that the Kafka deployment information is aligned with your TiDB cluster.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
     2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
@@ -58,9 +58,9 @@ The following table shows an example of the deployment information.
 
 ## Step 1. Set up a Kafka cluster
 
-- If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
+If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
 
-- If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
+If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
 
 ### Deploy a new Kafka cluster
 
@@ -89,12 +89,12 @@ Follow the following steps to create the Kafka VPC.
 
 1. Go to [AWS Console > VPC dashboard](https://console.aws.amazon.com/vpcconsole/home?#vpcs:), and switch to the region in which you want to deploy Kafka.
 
-2. Click **Create VPC**. Fill in the information on the **VPC settings** page.
+2. Click **Create VPC**. Fill in the information on the **VPC settings** page as follows.
 
     1. Select **VPC only**.
     2. Enter the **Name tag**, for example `Kafka VPC`.
     3. Select **IPv4 CIDR manual input**, and enter the IPv4 CIDR, for example `10.0.0.0/16`.
-    4. Use default values for other options. Click **Create VPC**.
+    4. Use the default values for other options. Click **Create VPC**.
     5. On the VPC detail page, take note of the VPC ID, for example `vpc-01f50b790fa01dffa`.
 
 **1.2. Create private subnets in the Kafka VPC**
@@ -109,7 +109,7 @@ Follow the following steps to create the Kafka VPC.
         - **Availability Zone**: `us-west-2a`
         - **IPv4 subnet CIDR block**: `10.0.0.0/18`
 
-    - Subnet2 in us-west-2c
+    - Subnet2 in `us-west-2c`
         - **Subnet name**: `broker-usw2-az2`
         - **Availability Zone**: `us-west-2c`
         - **IPv4 subnet CIDR block**: `10.0.64.0/18`
@@ -227,7 +227,7 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 2. Download binaries.
 
     ```shell
-    # Download kafka & openjdk, decompress. PS: your can choose the binary version as you like
+    # Download kafka and openjdk, and then decompress them. You can choose the binary version as needed
     wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
@@ -237,21 +237,21 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 3. Copy binaries to every broker nodes.
 
     ```shell
-    # Replace {broker-node1-ip} to your broker-node1 ip
+    # Replace {broker-node1-ip} with your broker-node1 ip
     scp -i "kafka-vpc-key-pair.pem" kafka_2.13-3.7.1.tgz ec2-user@{broker-node1-ip}:~/
     ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node1-ip} "tar -zxf kafka_2.13-3.7.1.tgz"
     scp -i "kafka-vpc-key-pair.pem" openjdk-22.0.2_linux-x64_bin.tar.gz ec2-user@{broker-node1-ip}:~/
     ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node1-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
 
-    # Replace {broker-node2-ip} to your broker-node2 ip
+    # Replace {broker-node2-ip} with your broker-node2 ip
     scp -i "kafka-vpc-key-pair.pem" kafka_2.13-3.7.1.tgz ec2-user@{broker-node2-ip}:~/
     ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node2-ip} "tar -zxf kafka_2.13-3.7.1.tgz"
     scp -i "kafka-vpc-key-pair.pem" openjdk-22.0.2_linux-x64_bin.tar.gz ec2-user@{broker-node2-ip}:~/
     ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node2-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
 
-    # Replace {broker-node3-ip} to your broker-node3 ip
+    # Replace {broker-node3-ip} with your broker-node3 ip
     scp -i "kafka-vpc-key-pair.pem" kafka_2.13-3.7.1.tgz ec2-user@{broker-node3-ip}:~/
-    ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
+    ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf kafka_2.13-3.7.1.tgz"
     scp -i "kafka-vpc-key-pair.pem" openjdk-22.0.2_linux-x64_bin.tar.gz ec2-user@{broker-node3-ip}:~/
     ssh -i "kafka-vpc-key-pair.pem" ec2-user@{broker-node3-ip} "tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz"
     ```
@@ -264,8 +264,8 @@ Each node will act as a broker and controller roles. Do the following for every 
 
 1. For the `listeners` item, all three brokers are the same and act as broker and controller roles: 
 
-    1. Configure the same CONTROLLER listener for all **controller** role nodes. If you only want to add **broker** role nodes, you do not need the CONTROLLER listener in `server.properties`.
-    2. Configure two **broker** listeners. `INTERNAL` for internal access and `EXTERNAL` for external access from TiDB Cloud.
+    1. Configure the same CONTROLLER listener for all **controller** role nodes. If you only want to add the **broker** role nodes, you do not need the CONTROLLER listener in `server.properties`.
+    2. Configure two **broker** listeners, `INTERNAL` for internal access and `EXTERNAL` for external access from TiDB Cloud.
 
 2. For the `advertised.listeners` item, do the following:
 
@@ -277,7 +277,7 @@ Each node will act as a broker and controller roles. Do the following for every 
      
       It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
 
-3. The planing values are as follows:
+3. The planning values are as follows:
 
     - **CONTROLLER port**: `29092`
     - **INTERNAL port**: `9092`
@@ -350,7 +350,7 @@ log.dirs=./data
 
 **2.4.3 Create and execute a script**
 
-Create a script, and execute it to start the kafka broker in every broker node.
+Create a script, and then execute it to start the kafka broker in every broker node.
 
 ```shell
 #!/bin/bash
