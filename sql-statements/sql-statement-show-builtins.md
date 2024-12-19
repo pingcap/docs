@@ -273,8 +273,11 @@ SHOW BUILTINS;
 | tidb_decode_key             |
 | tidb_decode_plan            |
 | tidb_decode_sql_digests     |
+| tidb_encode_index_key       |
+| tidb_encode_record_key      |
 | tidb_encode_sql_digest      |
 | tidb_is_ddl_owner           |
+| tidb_mvcc_info              |
 | tidb_parse_tso              |
 | tidb_parse_tso_logical      |
 | tidb_row_checksum           |
@@ -308,6 +311,14 @@ SHOW BUILTINS;
 | uuid_short                  |
 | uuid_to_bin                 |
 | validate_password_strength  |
+| vec_as_text                 |
+| vec_cosine_distance         |
+| vec_dims                    |
+| vec_from_text               |
+| vec_l1_distance             |
+| vec_l2_distance             |
+| vec_l2_norm                 |
+| vec_negative_inner_product  |
 | version                     |
 | vitess_hash                 |
 | week                        |
@@ -318,7 +329,7 @@ SHOW BUILTINS;
 | year                        |
 | yearweek                    |
 +-----------------------------+
-292 rows in set (0.00 sec)
+303 rows in set (0.00 sec)
 ```
 
 ## MySQL compatibility
