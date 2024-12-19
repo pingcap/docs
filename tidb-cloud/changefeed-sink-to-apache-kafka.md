@@ -18,12 +18,12 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 - Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
-    - If you choose Private Link or Private Service Connect as the network connectivity method, ensure that your TiDB cluster version meets the following requirements:
+- If you choose Private Link or Private Service Connect as the network connectivity method, ensure that your TiDB cluster version meets the following requirements:
 
-        - For v6.5.x: version v6.5.9 or later
-        - For v7.1.x: version v7.1.4 or later
-        - For v7.5.x: version v7.5.1 or later
-        - For v8.1.x: all versions of v8.1.0 and later are supported
+    - For v6.5.x: version v6.5.9 or later
+    - For v7.1.x: version v7.1.4 or later
+    - For v7.5.x: version v7.5.1 or later
+    - For v8.1.x: all versions of v8.1.0 and later are supported
 
 ## Prerequisites
 
