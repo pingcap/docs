@@ -96,7 +96,7 @@ For more information, see [Connect to TiDB Cloud Dedicated via Public Connection
 
 Because the cluster is in one VPC and all the TiDB node groups share the same VPC, you only need to create one VPC peering, then all the groups can use it. 
 
-1. Follow the instrcutions in [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to create a VPC peering for this cluster. 
+1. Follow the instructions in [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to create a VPC peering for this cluster. 
 2. Navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 3. Click **Networking** in the left navigation pane. 
 4. On the **Networking** page, click **Connect** on the up-right to get the connection string. 
