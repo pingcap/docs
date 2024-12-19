@@ -137,7 +137,7 @@ As shown, because of the shared allocator, the `id` increments by 2 each time. T
 
 <CustomContent platform="tidb">
 
-TiDB utilizes a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) for storing and querying performance monitoring metrics. In TiDB, performance schema tables do not return any results.
+TiDB utilizes a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) for storing and querying performance monitoring metrics. In TiDB, most [performance schema tables](/performance-schema/performance-schema.md) do not return any results.
 
 </CustomContent>
 
