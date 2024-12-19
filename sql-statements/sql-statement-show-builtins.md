@@ -88,12 +88,9 @@ SHOW BUILTINS;
 | decode                      |
 | default_func                |
 | degrees                     |
-| des_decrypt                 |
-| des_encrypt                 |
 | div                         |
 | elt                         |
 | encode                      |
-| encrypt                     |
 | eq                          |
 | exp                         |
 | export_set                  |
@@ -210,7 +207,6 @@ SHOW BUILTINS;
 | nulleq                      |
 | oct                         |
 | octet_length                |
-| old_password                |
 | or                          |
 | ord                         |
 | password_func               |
@@ -329,7 +325,7 @@ SHOW BUILTINS;
 | year                        |
 | yearweek                    |
 +-----------------------------+
-303 rows in set (0.00 sec)
+299 rows in set (0.00 sec)
 ```
 
 ## MySQL compatibility
