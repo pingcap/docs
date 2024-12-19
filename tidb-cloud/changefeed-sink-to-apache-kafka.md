@@ -40,7 +40,8 @@ Ensure that your TiDB cluster can connect to the Apache Kafka service. You can c
 - VPC Peering: suitable as a cost-effective option, but requires managing potential VPC CIDR conflicts and security considerations.
 - Public IP: suitable for a quick setup.
 
-#### Private Connect
+<SimpleTab>
+<div label="Private Connect">
 
 Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
@@ -48,17 +49,18 @@ Currently, TiDB Cloud supports Private Connect for generic Kafka only. It does n
 
 - If your Apache Kafka service is hosted on AWS, follow [Set Up Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
-    - ID in Kafka Advertised Listener Pattern
-    - Endpoint Service Name
-    - Bootstrap Ports
+    - The ID in Kafka Advertised Listener Pattern
+    - The Endpoint Service Name
+    - The Bootstrap Ports
 
 - If your Apache Kafka service is hosted on Google Cloud, follow [Set Up Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
-    - ID in Kafka Advertised Listener Pattern
-    - Service Attachment
-    - Bootstrap Ports
+    - The ID in Kafka Advertised Listener Pattern
+    - The Service Attachment
+    - The Bootstrap Ports
 
-#### VPC Peering
+</div>
+<div label="VPC Peering">
 
 If your Apache Kafka service is in an AWS VPC that has no internet access, take the following steps:
 
@@ -79,9 +81,15 @@ If your Apache Kafka service is in a Google Cloud VPC that has no internet acces
 
     You must add the CIDR of the region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
 
-#### Public IP
+</div>
+<div label="Public IP">
 
-If you want to provide Public IP access to your Apache Kafka service, assign Public IPs to all your Kafka brokers. However, using Public IP in a production environment is strongly discouraged. 
+If you want to provide Public IP access to your Apache Kafka service, assign Public IP addresses to all your Kafka brokers. 
+
+It is **NOT** recommended to use Public IP in a production environment. 
+
+</div>
+</SimpleTab>
 
 ### Kafka ACL authorization
 
@@ -94,42 +102,71 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 ## Step 1. Open the changefeed page for Apache Kafka
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Click **Create Changefeed**, and select **Kafka** as **Target Type**.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
+2. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+3. Click **Create Changefeed**, and select **Kafka** as **Target Type**.
 
 ## Step 2. Configure the changefeed target
 
-1. Select **Connectivity Method** by your Apache Kafka Service setup.
+The steps vary depending on the connectivity method you select.
 
-    - If you select **VPC Peering** or **Public IP**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
+<SimpleTab>
+<div label="VPC Peering or Public IP">
 
-    - If you select **Private Link**, do the following:
-
-        1. Authorize the TiDB Cloud AWS account to create an endpoint for your endpoint service. The TiDB Cloud AWS account ID is provided in the tip on the web page.
-        2. Make sure you select the same **Number of AZs** and **Suggested Kafka Endpoint Service AZs**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [set up self hosted Kafka Private Link service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in the **Network** section.
-        3. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md).
-        4. Fill the **Bootstrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
-
-    - If you select **Private Service Connect**, do the following:
-    
-        1. Ensure that you fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) in **Network** section.
-        2. Fill the **Service Attachment** that you have configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md)
-        3. Fill the **Bootstrap Ports**. It is recommended that you provide more than one port. You can use commas `,` to separate multiple ports.
-      
+1. In **Connectivity Method**, select **VPC Peering** or **Public IP**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
 2. Select an **Authentication** option according to your Kafka authentication configuration.
+
     - If your Kafka does not require authentication, keep the default option **Disable**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
 
-3. Select your **Kafka Version**. If you do not know that, use Kafka V2.
+3. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v2**.
 4. Select a **Compression** type for the data in this changefeed.
 5. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
-6. Click **Validate Connection and Next** to test the network connection. If the test is successful, you will be directed to the next page.
+6. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
 
-If you select **Private Link** or **Private Service Connect** as the network connectivity method, follow these additional steps:
+</div>
+<div label="Private Link">
 
-1. After clicking **Next**, TiDB Cloud creates the endpoint for **Private Link** or **Private Service Connect**, which might take several minutes.
-2. Once the endpoint is created, log in to your cloud provider console and accept the connection request.
-3. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test is successful.
+1. In **Connectivity Method**, select **Private Link**.
+2. Authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint for your endpoint service. The AWS Principal is provided in the tip on the web page.
+3. Make sure you select the same **Number of AZs** and **Suggested Kafka Endpoint Service AZs**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [set up self hosted Kafka Private Link service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in the **Network** section.
+4. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md).
+5. Fill the **Bootstrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
+6. Select an **Authentication** option according to your Kafka authentication configuration.
+
+    - If your Kafka does not require authentication, keep the default option **Disable**.
+    - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
+
+7. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v2**.
+8. Select a **Compression** type for the data in this changefeed.
+9. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
+10. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
+11. TiDB Cloud creates the endpoint for **Private Link** or **Private Service Connect**, which might take several minutes.
+12. Once the endpoint is created, log in to your cloud provider console and accept the connection request.
+13. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test succeeds.
+
+</div>
+<div label="Private Service Connect">
+
+1. In **Connectivity Method**, select **Private Service Connect**.    
+2. Ensure that you fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) in **Network** section.
+3. Fill the **Service Attachment** that you have configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md)
+4. Fill the **Bootstrap Ports**. It is recommended that you provide more than one port. You can use commas `,` to separate multiple ports.      
+5. Select an **Authentication** option according to your Kafka authentication configuration.
+
+    - If your Kafka does not require authentication, keep the default option **Disable**.
+    - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the **user name** and **password** of your Kafka account for authentication.
+
+6. Select your **Kafka Version**. If you do not know which one to use, use **Kafka v2**.
+7. Select a **Compression** type for the data in this changefeed.
+8. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
+9. Click **Next** to test the network connection. If the test succeeds, you will be directed to the next page.
+10. TiDB Cloud creates the endpoint for **Private Link** or **Private Service Connect**, which might take several minutes.
+11. Once the endpoint is created, log in to your cloud provider console and accept the connection request.
+12. Return to the [TiDB Cloud console](https://tidbcloud.com) to confirm that you have accepted the connection request. TiDB Cloud will test the connection and proceed to the next page if the test succeeds.
+
+</div>
+</SimpleTab>
 
 ## Step 3. Set the changefeed
 
@@ -146,8 +183,8 @@ If you select **Private Link** or **Private Service Connect** as the network con
 
 3. In the **Data Format** area, select your desired format of Kafka messages.
 
-   - Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
-   - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
+    - Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
+    - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
 
 4. Enable the **TiDB Extension** option if you want to add TiDB-extension fields to the Kafka message body.
 
@@ -164,29 +201,29 @@ If you select **Private Link** or **Private Service Connect** as the network con
 
     The distribution mode controls how the changefeed creates Kafka topics, by table, by database, or creating one topic for all changelogs.
 
-   - **Distribute changelogs by table to Kafka Topics**
+    - **Distribute changelogs by table to Kafka Topics**
 
         If you want the changefeed to create a dedicated Kafka topic for each table, choose this mode. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can customize topic names for tables by setting a topic prefix, a separator between a database name and table name, and a suffix. For example, if you set the separator as `_`, the topic names are in the format of `<Prefix><DatabaseName>_<TableName><Suffix>`.
 
         For changelogs of non-row events, such as Create Schema Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
 
-   - **Distribute changelogs by database to Kafka Topics**
+    - **Distribute changelogs by database to Kafka Topics**
 
         If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can customize topic names of databases by setting a topic prefix and a suffix.
 
         For changelogs of non-row events, such as Resolved Ts Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
 
-   - **Send all changelogs to one specified Kafka Topic**
+    - **Send all changelogs to one specified Kafka Topic**
 
         If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Topic Name** field.
 
 7. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to:
 
-   - **Distribute changelogs by index value to Kafka partition**
+    - **Distribute changelogs by index value to Kafka partition**
 
         If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The index value of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures row-level orderliness.
 
-   - **Distribute changelogs by table to Kafka partition**
+    - **Distribute changelogs by table to Kafka partition**
 
         If you want the changefeed to send Kafka messages of a table to one Kafka partition, choose this distribution method. The table name of a row changelog will determine which partition the changelog is sent to. This distribution method ensures table orderliness but might cause unbalanced partitions.
 
