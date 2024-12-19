@@ -1,27 +1,27 @@
 ---
 title: Overview of TiDB Node Group 
-summary: Learn about the overview of the TiDB Node Group feature.
+summary: Learn about the implementation and usage scenarios of the TiDB Node Group feature.
 ---
 
 # Overview of TiDB Node Group
 
-TiDB Cloud allows you to create TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. A TiDB node group physically groups the computing nodes (TiDB layer) of the cluster, with each group configured with a set number of TiDB nodes. This setup provides physical isolation of computing resources between groups, enabling efficient resource allocation in multi-business situations.
+TiDB Cloud enables you to create TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters. A TiDB node group physically groups the computing nodes (TiDB layer) of a cluster, with each group configured to include a specific number of TiDB nodes. This configuration provides physical isolation of computing resources between groups, enabling efficient resource allocation in multi-business scenarios.
 
-Using TiDB node groups, you can divide computing nodes into multiple TiDB node groups based on business needs and configure unique connection endpoints for each TiDB node group. Upper-layer businesses access the cluster through their respective endpoints, and requests are routed to the corresponding TiDB node group for execution. This ensures that even if resources in one TiDB node group are overused, businesses in other TiDB node groups will not be affected.
+With TiDB node groups, you can divide computing nodes into multiple TiDB node groups based on business requirements and configure unique connection endpoints for each TiDB node group. Your applications connect to the cluster through their respective endpoints, and requests route to the corresponding node group for processing. This ensures that resource overuse in one group does not affect other groups.
 
 > **Note**:
 >
 > The TiDB Node Group feature is **NOT** available for TiDB Cloud Serverless clusters.
 
-## Implementations
+## Implementation
 
-TiDB node groups manage the grouping of TiDB nodes and maintain the mapping between endpoints and the corresponding TiDB nodes.
+TiDB node groups manage the grouping of TiDB nodes and maintain the mapping between endpoints and their corresponding TiDB nodes.
 
-Each TiDB node group is associated with a dedicated load balancer. When a user sends a SQL request to the endpoint of a TiDB node group, the request first passes through the group's load balancer, and then the load balancer distributes the request exclusively to the TiDB nodes within that group.
+Each TiDB node group is associated with a dedicated load balancer. When a user sends a SQL request to the endpoint of a TiDB node group, the request first passes through that group's load balancer, which then routes it exclusively to TiDB nodes within the group.
 
 The following diagram illustrates the implementation of the TiDB Node Group feature.
 
-![The implementations of the TiDB Node Group feature](/media/tidb-cloud/implementation-of-tidb-node-group.png)
+![The implementation of the TiDB Node Group feature](/media/tidb-cloud/implementation-of-tidb-node-group.png)
 
 All nodes in a TiDB node group respond to requests from the corresponding endpoint. You can perform the following tasks:
 
