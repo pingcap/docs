@@ -71,6 +71,18 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - This variable sets the threshold for the optimizer's heuristic strategy to select access paths. If the estimated rows for an access path (such as `Index_A`) is much smaller than that of other access paths (default `1000` times), the optimizer skips the cost comparison and directly selects `Index_A`.
 - `0` means to disable this heuristic strategy.
 
+### [`45798`](https://github.com/pingcap/tidb/issues/45798) <span class="version-mark">New in v7.5.0</span>
+
+- Default value: `ON`
+- Possible values: `ON`, `OFF`
+- This variable controls whether Plan Cache is allowed to cache execution plans that access [generated columns](/generated-columns.md).
+
+### [`46177`](https://github.com/pingcap/tidb/issues/46177) <span class="version-mark">New in v6.5.6, v7.1.3 and v7.5.0</span>
+
+- Default value: `ON`. Before v8.5.0, the default value is `OFF`.
+- Possible values: `ON`, `OFF`
+- This variable controls whether the optimizer explores enforced plans during query optimization after finding an unenforced plan.
+
 ### [`47400`](https://github.com/pingcap/tidb/issues/47400) <span class="version-mark">New in v8.4.0</span>
 
 - Default value: `ON`
@@ -95,3 +107,10 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Possible values: `ON`, `OFF`
 - As stated in the **Note** of [Explain Statements Using Index Merge](/explain-index-merge.md#examples), if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge.
 - You can remove this limitation by enabling this fix control. Removing this limitation enables the optimizer to choose index merge automatically in more queries, but might cause the optimizer to ignore the optimal execution plans. Therefore, it is recommended to conduct sufficient tests on actual use cases before removing this limitation to make sure that it will not cause performance regressions.
+
+### [`54337`](https://github.com/pingcap/tidb/issues/54337) <span class="version-mark">New in v8.2.0</span>
+
+- Default value: `OFF`
+- Possible values: `ON`, `OFF`
+- Currently, the TiDB optimizer has limitations in deriving index ranges for complex conjunctive conditions where each conjunct comprises a list of ranges. This can be addressed by applying general range intersection.
+- You can remove this limitation by enabling this fix control, allowing the optimizer to handle complex range intersections. However, for conditions with a large number of conjuncts (more than 10), there is a slight risk of increased optimization time.

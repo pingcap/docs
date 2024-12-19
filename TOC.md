@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB Self-Managed
   - [What is TiDB Self-Managed](/overview.md)
-  - [TiDB 8.4 Release Notes](/releases/release-8.4.0.md)
+  - [TiDB 8.5 Release Notes](/releases/release-8.5.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -13,8 +13,8 @@
 - Get Started
   - [Quick Start with TiDB](/quick-start-with-tidb.md)
   - [Quick Start with HTAP](/quick-start-with-htap.md)
-  - [Learn TiDB SQL](/basic-sql-operations.md)
-  - [Learn HTAP](/explore-htap.md)
+  - [Explore SQL with TiDB](/basic-sql-operations.md)
+  - [Explore HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
@@ -307,6 +307,7 @@
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
+    - [Configure TiDB for Optimal Performance](/tidb-performance-tuning-config.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
     - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
@@ -319,6 +320,7 @@
     - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
     - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
     - [TiKV Follower Read](/follower-read.md)
+    - [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
     - [Tune Region Performance](/tune-region-performance.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
@@ -730,6 +732,7 @@
     - SQL Statements
       - [Overview](/sql-statements/sql-statement-overview.md)
       - [`ADMIN`](/sql-statements/sql-statement-admin.md)
+      - [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)
       - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
       - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
@@ -1072,6 +1075,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v8.5
+    - [8.5.0](/releases/release-8.5.0.md)
   - v8.4
     - [8.4.0-DMR](/releases/release-8.4.0.md)
   - v8.3

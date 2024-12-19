@@ -167,12 +167,12 @@ After the cluster information is imported, the TiDB cluster is loaded with the r
 
 ```sql
 mysql> desc t;
-+-------+---------+------+------+---------+-------+
-| Field | Type    | Null | Key  | Default | Extra |
-+-------+---------+------+------+---------+-------+
-| a     | int(11) | YES  |      | NULL    |       |
-| b     | int(11) | YES  |      | NULL    |       |
-+-------+---------+------+------+---------+-------+
++-------+------+------+------+---------+-------+
+| Field | Type | Null | Key  | Default | Extra |
++-------+------+------+------+---------+-------+
+| a     | int  | YES  |      | NULL    |       |
+| b     | int  | YES  |      | NULL    |       |
++-------+------+------+------+---------+-------+
 2 rows in set (0.01 sec)
 
 mysql> explain select * from t where a = 1 or b =1;

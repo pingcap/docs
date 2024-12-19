@@ -28,14 +28,14 @@ DESCRIBE session_connect_attrs;
 ```
 
 ```
-+------------------+---------------------+------+-----+---------+-------+
-| Field            | Type                | Null | Key | Default | Extra |
-+------------------+---------------------+------+-----+---------+-------+
-| PROCESSLIST_ID   | bigint(20) unsigned | NO   |     | NULL    |       |
-| ATTR_NAME        | varchar(32)         | NO   |     | NULL    |       |
-| ATTR_VALUE       | varchar(1024)       | YES  |     | NULL    |       |
-| ORDINAL_POSITION | int(11)             | YES  |     | NULL    |       |
-+------------------+---------------------+------+-----+---------+-------+
++------------------+-----------------+------+------+---------+-------+
+| Field            | Type            | Null | Key  | Default | Extra |
++------------------+-----------------+------+------+---------+-------+
+| PROCESSLIST_ID   | bigint unsigned | NO   |      | NULL    |       |
+| ATTR_NAME        | varchar(32)     | NO   |      | NULL    |       |
+| ATTR_VALUE       | varchar(1024)   | YES  |      | NULL    |       |
+| ORDINAL_POSITION | int             | YES  |      | NULL    |       |
++------------------+-----------------+------+------+---------+-------+
 ```
 
 You can view the information on session attributes stored in the `SESSION_CONNECT_ATTRS` table as follows:

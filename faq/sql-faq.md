@@ -32,7 +32,9 @@ In addition, you can also use the [SQL binding](/sql-plan-management.md#sql-bind
 
 ## How to prevent the execution of a particular SQL statement?
 
-You can create [SQL bindings](/sql-plan-management.md#sql-binding) with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint to limit the execution time of a particular statement to a small value (for example, 1ms). In this way, the statement is terminated automatically by the threshold.
+For TiDB v7.5.0 or later versions, you can use the [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) statement to terminate specific SQL statements. For more details, see [Manage queries that consume more resources than expected (Runaway Queries)](/tidb-resource-control.md#query-watch-parameters).
+
+For versions earlier than TiDB v7.5.0, you can create [SQL bindings](/sql-plan-management.md#sql-binding) with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint to limit the execution time of a particular statement to a small value (for example, 1ms). In this way, the statement is terminated automatically by the threshold.
 
 For example, to prevent the execution of `SELECT * FROM t1, t2 WHERE t1.id = t2.id`, you can use the following SQL binding to limit the execution time of the statement to 1ms:
 
@@ -351,7 +353,7 @@ The `count(1)` statement counts the total number of rows in a table. Improving t
 
 Recommendations:
 
-- Improve the hardware configuration. See [Software and Hardware Requirements](/hardware-and-software-requirements.md).
+- Improve the hardware configuration. See [TiDB Software and Hardware Requirements](/hardware-and-software-requirements.md).
 - Improve the concurrency. The default value is 10. You can improve it to 50 and have a try. But usually the improvement is 2-4 times of the default value.
 - Test the `count` in the case of large amount of data.
 - Optimize the TiKV configuration. See [Tune TiKV Thread Performance](/tune-tikv-thread-performance.md) and [Tune TiKV Memory Performance](/tune-tikv-memory-performance.md).

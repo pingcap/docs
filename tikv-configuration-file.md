@@ -1688,7 +1688,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + Recommended value: `0`. Starting from v8.0.0, TiKV introduces the `shared-blob-cache` configuration item and enables it by default, so there is no need to set `blob-cache-size` separately. The configuration of `blob-cache-size` only takes effect when `shared-blob-cache` is set to `false`.
 + Unit: KiB|MiB|GiB
 
-### `shared-blob-cache` (New in v8.0.0)
+### `shared-blob-cache` <span class="version-mark">New in v8.0.0</span>
 
 + Controls whether to enable the shared cache for Titan blob files and RocksDB block files.
 + Default value: `true`. When the shared cache is enabled, block files have higher priority. This means that TiKV prioritizes meeting the cache needs of block files and then uses the remaining cache for blob files.
@@ -2501,3 +2501,36 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 
 + Specifies the amount of data sampled by Heap Profiling each time, rounding up to the nearest power of 2.
 + Default value: `512KiB`
+
+## in-memory-engine <span class="version-mark">New in v8.5.0</span>
+
+TiKV MVCC in-memory engine (IME) configuration items related to the storage layer.
+
+### `enable` <span class="version-mark">New in v8.5.0</span>
+
+> **Note:**
+>
+> You can configure this configuration item in the configuration file, but cannot query it via SQL statements.
+
++ Whether to enable the in-memory engine to accelerate multi-version queries. For more information about the in-memory engine, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
++ Default value: `false` (indicating the in-memory engine is disabled)
+
+### `capacity` <span class="version-mark">New in v8.5.0</span>
+
+> **Note:**
+>
+> + After the in-memory engine is enabled, `block-cache.capacity` automatically decreases by 10%.
+> + If you manually configure `capacity`, `block-cache.capacity` does not automatically decrease. In this case, you need to manually adjust its value to avoid OOM.
+
++ Controls the maximum memory size that the in-memory engine can use. The maximum value is 5 GiB. You can manually configure it to use more memory.
++ Default value: 10% of the system memory.
+
+### `gc-run-interval` <span class="version-mark">New in v8.5.0</span>
+
++ Controls the time interval that the in-memory engine GC caches MVCC versions. Reducing this parameter can increase the GC frequency, and decrease the number of MVCC versions, but will increase CPU consumption for GC and increase the probability of in-memory engine cache miss.
++ Default value: `"3m"`
+
+### `mvcc-amplification-threshold` <span class="version-mark">New in v8.5.0</span>
+
++ Controls the threshold for MVCC read amplification when the in-memory engine selects and loads Regions. The default value is `10`, indicating that if reading a single row in a Region requires processing more than 10 MVCC versions, this Region might be loaded into the in-memory engine.
++ Default value: `10`

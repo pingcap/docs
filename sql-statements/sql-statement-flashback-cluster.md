@@ -16,7 +16,8 @@ Starting from v6.5.6, v7.1.3, v7.5.1, and v7.6.0, TiDB introduces the `FLASHBACK
 
 > **Warning:**
 >
-> When specifying a recovery point in time, make sure to check the validity of your target timestamp or TSO and avoid specifying a future time that exceeds the maximum TSO currently allocated by PD (see `Current TSO` on the Grafana PD panel). Otherwise, concurrent processing linear consistency and transaction isolation levels might be violated, leading to serious data correctness issues.
+> - When specifying a recovery point in time, make sure to check the validity of your target timestamp or TSO and avoid specifying a future time that exceeds the maximum TSO currently allocated by PD (see `Current TSO` on the Grafana PD panel). Otherwise, concurrent processing linear consistency and transaction isolation levels might be violated, leading to serious data correctness issues.
+> - During `FLASHBACK CLUSTER` execution, the data cleanup process does not guarantee transaction consistency. After `FLASHBACK CLUSTER` completes, if you intend to use any historical version reading features in TiDB (such as [Stale Read](/stale-read.md) or [`tidb_snapshot`](/read-historical-data.md)), make sure that the specified historical timestamp falls outside the `FLASHBACK CLUSTER` execution period. Reading a historical version that includes data not fully restored by FLASHBACK might violate concurrent processing linear consistency and transaction isolation levels, leading to serious data correctness issues.
 
 <CustomContent platform="tidb">
 

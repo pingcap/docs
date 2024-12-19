@@ -431,6 +431,5 @@ We would like to thank the following contributors from the TiDB community:
 - [michaelmdeng](https://github.com/michaelmdeng)
 - [mittalrishabh](https://github.com/mittalrishabh)
 - [qingfeng777](https://github.com/qingfeng777)
-- [renovate](https://github.com/apps/renovate)
 - [SandeepPadhi](https://github.com/SandeepPadhi)
 - [yzhan1](https://github.com/yzhan1)
