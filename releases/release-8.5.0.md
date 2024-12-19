@@ -152,7 +152,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 
     For more information, see [documentation](/accelerated-table-creation.md).
 
-* TiKV supports the MVCC in-memory engine (IME), which accelerates queries involving scans of extensive MVCC historical versions [#16141](https://github.com/tikv/tikv/issues/16141) [@SpadeA-Tang](https://github.com/SpadeA-Tang) [@glorv](https://github.com/glorv) [@overvenus](https://github.com/overvenus)
+* TiKV supports the MVCC in-memory engine (IME), which accelerates queries involving scans of extensive MVCC historical versions [#16141](https://github.com/tikv/tikv/issues/16141) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[glorv](https://github.com/glorv) @[overvenus](https://github.com/overvenus)
 
     When records are frequently updated, or TiDB is required to retain historical versions for extended periods (for example, 24 hours), the accumulation of MVCC versions can degrade scan performance. The TiKV MVCC in-memory engine improves scan performance by caching the latest MVCC versions in memory, and using a rapid GC mechanism to remove historical versions from memory.
 
