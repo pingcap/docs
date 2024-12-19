@@ -36,7 +36,7 @@ Do the following to create a TiDB node group:
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Cluster**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target cluster to go to its overview page.
 2. Click **Nodes** in the left navigation pane.
 3. Click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
-4. On the **Modify Cluster** page, click **+** to add a new TiDB node group as follows.
+4. On the **Modify Cluster** page, click **+** to add a new TiDB node group as follows. You can also use the default group directly.
 
     - TiDB
         - **vCPU + RAM**: choose the [TiDB size](/tidb-cloud/size-your-cluster.md#size-tidb) you need. Only TiDB nodes with 8 vCPU and 16 GiB memory or higher specifications are supported.
