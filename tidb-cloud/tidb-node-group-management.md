@@ -40,7 +40,7 @@ Do the following to create a TiDB node group:
 
     - TiDB
         - **vCPU + RAM**: choose the [TiDB size](/tidb-cloud/size-your-cluster.md#size-tidb) you need. Only TiDB nodes with 8 vCPU and 16 GiB memory or higher specifications are supported.
-        - **Node Groups**: enter the number of TiDB nodes in the Default Groups field. You can also create new node groups by clicking **+**. 
+        - **Node Groups**: enter the number of TiDB nodes in the **Default Groups** field. You can also create new node groups by clicking **+**. 
     
     - TiKV
         - **vCPU + RAM**: choose the [TiKV size](/tidb-cloud/size-your-cluster.md#size-tikv) you need.
