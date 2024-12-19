@@ -19,6 +19,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key) | Encodes an index key. |
+| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | Encodes a record key. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
 | [`TIDB_MVCC_INFO()`](#tidb_mvcc_info) | Returns MVCC info about a key. |
@@ -43,6 +44,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | Decodes a TiDB execution plan. |
 | [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | Queries the normalized SQL statements (a form without formats and arguments) corresponding to a set of SQL digests in the cluster. |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key) | Encodes an index key. |
+| [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | Encodes a record key. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
@@ -609,6 +611,52 @@ SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 1, 1);
 +----------------------------------------------------------------------------+
 | 74800000000000007f5f698000000000000001038000000000000001038000000000000001 |
 +----------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+## TIDB_ENCODE_RECORD_KEY
+
+Encodes a record key.
+
+```sql
+CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
+```
+
+```
+Query OK, 0 rows affected (0.00 sec)
+```
+
+```sql
+INSERT INTO t VALUES(1,1);
+```
+
+```
+Query OK, 1 row affected (0.00 sec)
+```
+
+```sql
+SELECT TIDB_ENCODE_RECORD_KEY('test', 't', 1);
+```
+
+```
++----------------------------------------+
+| TIDB_ENCODE_RECORD_KEY('test', 't', 1) |
++----------------------------------------+
+| 7480000000000000845f728000000000000001 |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+SELECT TIDB_DECODE_KEY('7480000000000000845f728000000000000001');
+```
+
+```
++-----------------------------------------------------------+
+| TIDB_DECODE_KEY('7480000000000000845f728000000000000001') |
++-----------------------------------------------------------+
+| {"id":1,"table_id":"132"}                                 |
++-----------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
 
