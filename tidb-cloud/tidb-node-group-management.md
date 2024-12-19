@@ -22,7 +22,7 @@ Currently, the TiDB Node Group feature is in private beta and only available upo
     - Each TiDB node group has an independent endpoint. 
     - When you delete a TiDB node group, the related network setting (such as private link and IP access list) will be deleted too. 
 
-- Default Group: When a cluster created, a default TiDB node group is created. Therefore, each cluster has a default group. The default group can not be deleted. 
+- Default Group: When a cluster is created, a default TiDB node group is created. Therefore, each cluster has a default group. The default group cannot be deleted. 
 
 ## Prerequisites
 
@@ -70,9 +70,9 @@ To enable public connection, do the following:
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. Choose the new TiDB node group and the **Public** connection type.
 4. Click **Configure the IP Access** List.
-4. On the **Networking** page, select the TiDB node group in the upper-right corner.
-5. Enable the public endpoint and add the IP access list.
-6. Click **Connect** on the up-right of the page and you can get the connection string. 
+5. On the **Networking** page, select the TiDB node group in the upper-right corner.
+6. Enable the public endpoint and add the IP access list.
+7. Click **Connect** on the up-right of the page and you can get the connection string. 
 
 ![Connect to the new TiDB node group via Public Endpoint](/media/tidb-cloud/tidb-node-group-connect-public-endpoint.png)
 
