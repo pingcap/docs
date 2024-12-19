@@ -65,9 +65,9 @@ Expose every Kafka broker to TiDB Cloud VPC with a unique port by using the PSC 
 
 ### Step 1. Set up the Kafka cluster
 
-- If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
+If you need to deploy a new cluster, follow the instructions in [Deploy a new Kafka cluster](#deploy-a-new-kafka-cluster).
 
-- If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
+If you need to expose an existing cluster, follow the instructions in [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster). 
 
 #### Deploy a new Kafka cluster
 
@@ -138,7 +138,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
 1. Go to the detail page of the bastion node. Click **SSH** to log in to the bastion node. Download binaries.
 
     ```shell
-    # Download kafka & openjdk, decompress. You can choose the binary version as needed.
+    # Download kafka and openjdk, and then decompress them. You can choose the binary version as needed.
     wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
@@ -234,7 +234,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     log.dirs=./data
     ```
 
-3. Create a script and execute it to start the Kafka broker in every broker node.
+3. Create a script and then execute it to start the Kafka broker in every broker node.
 
     ```shell
     #!/bin/bash
@@ -441,7 +441,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 You can download Kafka and OpenJDK in your Kafka client node.
 
 ```shell
-# Download kafka & openjdk, decompress. You can choose the binary version as needed.
+# Download kafka and openjdk, and then decompress them. You can choose the binary version as needed.
 wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
 tar -zxf kafka_2.13-3.7.1.tgz
 wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
@@ -588,7 +588,7 @@ Assume that you already have a Kafka cluster running in the same region as the T
     # 2. --dynamic-sequential-min-port defines the start port of the random mapping for others brokers
     # 3. --dynamic-advertised-listener defines advertised listener address for others brokers based on the pattern got from "Prerequisites" section
     #   a) The pattern: <broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>
-    #   b) Replace <broker_id> to fixed lower case string, for example "brokers", your can use your own string, but it's MUST. This will help TiDB Cloud route requests properly.
+    #   b) Replace <broker_id> to fixed lower case string, for example "brokers". You can use your own string, but it's MUST. This will help TiDB Cloud route requests properly.
     #   c) Remove ":<port>"
     #   d) The advertised listener address would be: brokers.abc.us-west1.gcp.3199745.tidbcloud.com
     ./kafka-proxy server \
@@ -602,7 +602,7 @@ Assume that you already have a Kafka cluster running in the same region as the T
 4. Test bootstrap in Kafka-proxy node.
 
     ```shell
-    # Download kafka & openjdk, decompress. Your can choose the binary version as needed.
+    # Download kafka and openjdk, and then decompress them. You can choose the binary version as needed.
     wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
