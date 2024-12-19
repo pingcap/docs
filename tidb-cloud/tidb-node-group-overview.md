@@ -41,7 +41,7 @@ With this feature, you can:
 
 - Combine all test environments into a single TiDB cluster or group resource-intensive batch tasks into a dedicated TiDB node group. This approach improves hardware utilization, reduces operating costs, and ensures that critical applications always have access to necessary resources.
 
-In addition, TiDB node groups are easy to scale in or out. For key applications with high performance requirements, you can allocate enough TiDB nodes to the group. For less demanding applications, you can start with a small number of TiDB nodes and scale out as needed. Efficient use of the TiDB Node Group feature can reduce the number of clusters, simplify operations and maintenance, and lower management costs.
+In addition, TiDB node groups are easy to scale in or out. For key applications with high performance requirements, you can allocate TiDB nodes to the group as needed. For less demanding applications, you can start with a small number of TiDB nodes and scale out as needed. Efficient use of the TiDB Node Group feature can reduce the number of clusters, simplify operations and maintenance, and lower management costs.
 
 ## Limitations and quotas
 
