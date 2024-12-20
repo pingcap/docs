@@ -7,6 +7,10 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
 
 This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration (DM)](/dm/dm-overview.md). This guide is a quick demo of DM features and is not recommended for any production environment.
 
+> **Note:**
+>
+> If your target machine's operating system supports SELinux, ensure that SELinux is **disabled**.
+
 ## Step 1: Deploy a DM cluster
 
 1. Install TiUP, and install [`dmctl`](/dm/dmctl-introduction.md) using TiUP:
