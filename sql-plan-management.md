@@ -78,7 +78,7 @@ USING
 -- Rewrite of type two statements: Remove the `USING` keyword from the `DELETE` statement.
 CREATE GLOBAL BINDING for
     DELETE users FROM users JOIN orders ON users.id = orders.user_id
-using
+USING
     DELETE users FROM users JOIN orders ON users.id = orders.user_id;
 ```
 
