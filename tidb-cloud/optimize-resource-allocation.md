@@ -7,7 +7,7 @@ summary: Learn about how to optimize your resource allocation in TiDB Cloud.
 
 As a Hybrid Transactional and Analytical Processing (HTAP) database, [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters often support multiple upper-level businesses, each with different quality of service (QoS) requirements. In some cases, you might need to allocate maximum resources to high-priority businesses to ensure their latency remains within an acceptable range.
 
-TiDB Cloud Dedicated clusters offer resource optimization features, including [Resource Control](/tidb-resource-control.md) and the [TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md) feature (Private Beta). These capabilities enable you to allocate resources efficiently in multi-business situations.
+TiDB Cloud Dedicated clusters offer resource optimization features, including [Resource Control](/tidb-resource-control.md) and the [TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md) feature. These capabilities enable you to allocate resources efficiently in multi-business situations.
 
 ## Resource Control
 
@@ -19,7 +19,7 @@ Effectively using resource control can reduce the number of clusters, simplify o
 
 ## The TiDB Node Group feature
 
-The [TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md) feature (Private Beta) physically groups the computing nodes (TiDB layer) of a TiDB Cloud Dedicated cluster. Each group is configured with a specific number of TiDB nodes, ensuring physical separation of computing resources between groups.
+The [TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md) feature physically groups the computing nodes (TiDB layer) of a TiDB Cloud Dedicated cluster. Each group is configured with a specific number of TiDB nodes, ensuring physical separation of computing resources between groups.
 
 You can divide computing nodes into multiple TiDB node groups based on business requirements and assign unique connection endpoints to each TiDB node group. Upper-layer businesses access the cluster through their respective endpoints, and requests are directed to the corresponding TiDB node group. This setup ensures that resource overuse in one TiDB node group does not impact businesses in other TiDB node groups.
 

@@ -7,7 +7,7 @@ summary: Learn about how to manage TiDB node groups.
 
 This document describes how to manage TiDB node groups and their endpoints to isolate your business workload using the [TiDB Cloud console](https://tidbcloud.com/). 
 
-Currently, the TiDB Node Group feature is in private beta and only available upon request. To request this feature:
+Currently, the TiDB Node Group feature is only available upon request. To request this feature:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
 2. Click **?** in the lower-right corner.

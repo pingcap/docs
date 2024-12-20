@@ -45,7 +45,7 @@ In addition, TiDB node groups are easy to scale in or out. For key applications 
 
 ## Limitations and quotas
 
-Currently, the TiDB Node Group feature is in private beta and free of charge. The following are limitations and quotas:
+Currently, the TiDB Node Group feature is free of charge. The following are limitations and quotas:
 
 - You can only create TiDB node groups for TiDB Cloud Dedicated clusters on AWS. Support for other cloud providers is planned for the near future.
 - TiDB clusters with 4 vCPU and 16 GiB memory do not support the TiDB Node Group feature.
