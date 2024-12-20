@@ -209,7 +209,7 @@ SHOW BUILTINS;
 | octet_length                |
 | or                          |
 | ord                         |
-| password_func               |
+| password                    |
 | period_add                  |
 | period_diff                 |
 | pi                          |
