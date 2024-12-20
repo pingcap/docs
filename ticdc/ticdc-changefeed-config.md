@@ -347,7 +347,7 @@ Note: The consistency-related configuration items only take effect when the down
 
 #### `level`
 
--The data consistency level. `"none"` means that the redo log is disabled.
+- The data consistency level. `"none"` means that the redo log is disabled.
 - Default value: `"none"`
 - Value options: `"none"`, `"eventual"`
 
