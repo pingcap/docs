@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.1 Release Notes
-summary: 「TiDB 3.0.1 リリース ノート 2019 年 7 月 16 日。TiDB バージョン 3.0.1。MAX_EXECUTION_TIME 機能のサポートを追加。自動増分 ID の増分ギャップの自動調整をサポート。ADMIN PLUGINS ENABLE/DISABLE SQL ステートメントを追加。計画準備キャッシュでウィンドウ関数がキャッシュされるのを禁止。さまざまなバグと問題を修正。TiKV: BLOB ファイル サイズの統計を追加。コア ダンプの問題を修正。PD: enable-grpc-gateway 構成オプションを追加。ホットリージョンスケジューリング戦略を最適化。ツール: TiDB Binlog - Pump GC 戦略を最適化。TiDB TiDB Lightning - インポート エラーを修正。TiDB Ansible - 事前チェック機能を追加、監視情報を更新。"
+summary: TiDB 3.0.1 リリース ノート 2019 年 7 月 16 日。TiDB バージョン 3.0.1。MAX_EXECUTION_TIME 機能のサポートを追加。自動増分 ID の増分ギャップの自動調整をサポート。ADMIN PLUGINS ENABLE/DISABLE SQL ステートメントを追加。計画準備キャッシュでウィンドウ関数がキャッシュされるのを禁止。さまざまなバグと問題を修正。TiKV BLOB ファイル サイズの統計を追加。コア ダンプの問題を修正。PD enable-grpc-gateway 構成オプションを追加。ホットリージョンスケジューリング戦略を最適化。ツール TiDB Binlog - Pump GC 戦略を最適化。TiDB TiDB Lightning - インポート エラーを修正。TiDB Ansible - 事前チェック機能を追加、監視情報を更新。
 ---
 
 # TiDB 3.0.1 リリースノート {#tidb-3-0-1-release-notes}
