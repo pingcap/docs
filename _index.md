@@ -18,87 +18,130 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Learn" icon="cloud1">
 
-<p><ExternalLink to="./overview">What is TiDB Self-Managed</ExternalLink></p>
+[What is TiDB Self-Managed](./overview?target=_blank)
 
-<p><ExternalLink to="./basic-features">Features</ExternalLink></p>
-<p><ExternalLink to="./tiflash-overview">TiFlash</ExternalLink></p>
+[Features](./basic-features?target=_blank)
+
+[TiFlash](./tiflash-overview?target=_blank)
+
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
-<p><ExternalLink to="./quick-start-with-tidb">Try Out TiDB Self-Managed</ExternalLink></p>
-<p><ExternalLink to="./quick-start-with-htap">Try Out HTAP</ExternalLink></p>
-<p><ExternalLink to="./import-example-data">Import Example Database</ExternalLink></p>
+[Try Out TiDB Self-Managed](./quick-start-with-tidb?target=_blank)
+
+[Try Out HTAP](./quick-start-with-htap?target=_blank)
+
+[Import Example Database](./import-example-data?target=_blank)
+
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-<p><ExternalLink to="./dev-guide-overview">Developer Guide Overview</ExternalLink></p>
-<p><ExternalLink to="./dev-guide-build-cluster-in-cloud">Quick Start</ExternalLink></p>
-<p><ExternalLink to="./dev-guide-sample-application-java-spring-boot">Example Application</ExternalLink></p>
+[Developer Guide Overview](./dev-guide-overview?target=_blank)
+
+[Quick Start](./dev-guide-build-cluster-in-cloud?target=_blank)
+
+[Example Application](./dev-guide-sample-application-java-spring-boot?target=_blank)
+
 </LearningPath>
 
 <LearningPath label="Deploy" icon="deploy">
 
-<p><ExternalLink to="./hardware-and-software-requirements">Software and Hardware Requirements</ExternalLink></p>
-<p><ExternalLink to="./production-deployment-using-tiup">Deploy a TiDB Cluster Using TiUP</ExternalLink></p>
-<p><ExternalLink to="../../tidb-in-kubernetes/stable">Deploy a TiDB Cluster on Kubernetes</ExternalLink></p>
+[Software and Hardware Requirements](./hardware-and-software-requirements?target=_blank)
+
+[Deploy a TiDB Cluster Using TiUP](./production-deployment-using-tiup?target=_blank)
+
+[Deploy a TiDB Cluster on Kubernetes](../../tidb-in-kubernetes/stable?target=_blank)
+
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
-<p><ExternalLink to="./migration-overview">Migration Overview</ExternalLink></p>
-<p><ExternalLink to="./migration-tools">Migration Tools</ExternalLink></p>
-<p><ExternalLink to="./migrate-aurora-to-tidb">Typical Scenarios</ExternalLink></p>
+[Migration Overview](./migration-overview?target=_blank)
+
+[Migration Tools](./migration-tools?target=_blank)
+
+[Typical Scenarios](./migrate-aurora-to-tidb?target=_blank)
+
 </LearningPath>
 
 <LearningPath label="Maintain" icon="maintain">
 
-<p><ExternalLink to="./upgrade-tidb-using-tiup">Upgrade a Cluster</ExternalLink></p>
-<p><ExternalLink to="./scale-tidb-using-tiup">Scale a Cluster</ExternalLink></p>
-<p><ExternalLink to="./backup-and-restore-overview">Back Up and Restore Cluster Data</ExternalLink></p>
-<p><ExternalLink to="./daily-check">Daily Check</ExternalLink></p>
-<p><ExternalLink to="./maintain-tidb-using-tiup">Maintain TiDB Using TiUP</ExternalLink></p>
+[Upgrade a Cluster](./upgrade-tidb-using-tiup?target=_blank)
+
+[Scale a Cluster](./scale-tidb-using-tiup?target=_blank)
+
+[Back Up and Restore Cluster Data](./backup-and-restore-overview?target=_blank)
+
+[Daily Check](./daily-check?target=_blank)
+
+[Maintain TiDB Using TiUP](./maintain-tidb-using-tiup?target=_blank)
+
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-<p><ExternalLink to="./tidb-monitoring-framework">Use Prometheus and Grafana</ExternalLink></p>
-<p><ExternalLink to="./tidb-monitoring-api">Monitoring API</ExternalLink></p>
-<p><ExternalLink to="./alert-rules">Alert Rules</ExternalLink></p>
+[Use Prometheus and Grafana](./tidb-monitoring-framework?target=_blank)
+
+[Monitoring API](./tidb-monitoring-api?target=_blank)
+
+[Alert Rules](./alert-rules?target=_blank)
+
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-<p><ExternalLink to="./performance-tuning-overview">Tuning Overview</ExternalLink></p>
-<p><ExternalLink to="./performance-tuning-methods">Tuning Methods</ExternalLink></p>
-<p><ExternalLink to="./performance-tuning-practices">Tune OLTP Performance</ExternalLink></p>
-<p><ExternalLink to="./tune-operating-system">Tune Operating System</ExternalLink></p>
-<p><ExternalLink to="./configure-memory-usage">Tune Configurations</ExternalLink></p>
-<p><ExternalLink to="./sql-tuning-overview">Tune SQL Performance</ExternalLink></p>
+[Tuning Overview](./performance-tuning-overview?target=_blank)
+
+[Tuning Methods](./performance-tuning-methods?target=_blank)
+
+[Tune OLTP Performance](./performance-tuning-practices?target=_blank)
+
+[Tune Operating System](./tune-operating-system?target=_blank)
+
+[Tune Configurations](./configure-memory-usage?target=_blank)
+
+[Tune SQL Performance](./sql-tuning-overview?target=_blank)
+
 </LearningPath>
 
 <LearningPath label="Tools" icon="doc7">
 
-<p><ExternalLink to="./tiup-overview">TiUP</ExternalLink></p>
-<p><ExternalLink to="./tidb-operator-overview">TiDB Operator</ExternalLink></p>
-<p><ExternalLink to="./dm-overview">TiDB Data Migration </ExternalLink></p>
-<p><ExternalLink to="./tidb-lightning-overview">TiDB Lightning</ExternalLink></p>
-<p><ExternalLink to="./dumpling-overview">Dumpling</ExternalLink></p>
-<p><ExternalLink to="./ticdc-overview">TiCDC</ExternalLink></p>
-<p><ExternalLink to="./backup-and-restore-overview">Backup & Restore </ExternalLink></p>
-<p><ExternalLink to="./clinic-introduction">PingCAP Clinic</ExternalLink></p>
+[TiUP](./tiup-overview?target=_blank)
+
+[TiDB Operator](./tidb-operator-overview?target=_blank)
+
+[TiDB Data Migration ](./dm-overview?target=_blank)
+
+[TiDB Lightning](./tidb-lightning-overview?target=_blank)
+
+[Dumpling](./dumpling-overview?target=_blank)
+
+[TiCDC](./ticdc-overview?target=_blank)
+
+[Backup & Restore ](./backup-and-restore-overview?target=_blank)
+
+[PingCAP Clinic](./clinic-introduction?target=_blank)
+
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-<p><ExternalLink to="./tidb-roadmap">TiDB Roadmap</ExternalLink></p>
-<p><ExternalLink to="./tidb-configuration-file">TiDB Configuration File Parameters</ExternalLink></p>
-<p><ExternalLink to="./command-line-flags-for-tidb-configuration">TiDB Command-line Flags</ExternalLink></p>
-<p><ExternalLink to="./tidb-control">TiDB Control</ExternalLink></p>
-<p><ExternalLink to="./system-variables">System Variables</ExternalLink></p>
-<p><ExternalLink to="./release-notes">Release Notes</ExternalLink></p>
-<p><ExternalLink to="./faq-overview">FAQ Summary</ExternalLink></p>
+[TiDB Roadmap](./tidb-roadmap?target=_blank)
+
+[TiDB Configuration File Parameters](./tidb-configuration-file?target=_blank)
+
+[TiDB Command-line Flags](./command-line-flags-for-tidb-configuration?target=_blank)
+
+[TiDB Control](./tidb-control?target=_blank)
+
+[System Variables](./system-variables?target=_blank)
+
+[Release Notes](./release-notes?target=_blank)
+
+[FAQ Summary](./faq-overview?target=_blank)
+
 </LearningPath>
 
 </LearningPathContainer>
