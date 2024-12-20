@@ -123,7 +123,7 @@ This section introduces the configuration of a replication task.
 
 ##### `ignore-sql`
 
-- `ignore-sql = ["^drop", "add column"]` ignores DDLs that start with  `DROP` or contain `ADD COLUMN`.
+- `ignore-sql = ["^drop", "add column"]` ignores DDLs that start with `DROP` or contain `ADD COLUMN`.
 
 ##### `ignore-delete-value-expr`
 
@@ -194,7 +194,7 @@ This section introduces the configuration of a replication task.
 #### `delete-only-output-handle-key-columns` <span class="version-mark">New in v7.2.0</span>
 
 - Specifies the output of DELETE events. This parameter is valid only for canal-json and open-protocol protocols.
-- This parameter is incompatible with `force-replicate`. If both this parameter and `force-replicate` is set to `true`, TiCDC reports an error when creating a changefeed.
+- This parameter is incompatible with `force-replicate`. If both this parameter and `force-replicate` are set to `true`, TiCDC reports an error when creating a changefeed.
 - The Avro protocol is not controlled by this parameter and always outputs only the primary key columns or unique index columns.
 - The CSV protocol is not controlled by this parameter and always outputs all columns.
 - Default value: `false`, which means outputting all columns
