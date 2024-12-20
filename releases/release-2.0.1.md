@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.0.1 Release Notes
 aliases: ['/docs/dev/releases/release-2.0.1/','/docs/dev/releases/201/']
+summary: TiDB 2.0.1 was released on May 16, 2018, with improvements in MySQL compatibility and system stability. Updates include real-time progress for 'Add Index', a new session variable for automatic statistics update, bug fixes, compatibility improvements, and behavior changes. PD added a new scheduler, optimized region balancing, and fixed various issues. TiKV fixed issues related to reading, thread calls, raftstore blocking, and split causing dirty read. Overall, the release focuses on enhancing performance, stability, and compatibility.
 ---
 
 # TiDB 2.0.1 Release Notes
@@ -22,7 +23,7 @@ On May 16, 2018, TiDB 2.0.1 is released. Compared with TiDB 2.0.0 (GA), this rel
 - Add an option for TiDB to control the behaviour of Binlog failure
 - Refactor the `Coprocessor` slow log to distinguish between the scenario of tasks with long processing time and long waiting time
 - Log nothing when meeting MySQL protocol handshake error, to avoid too many logs caused by the load balancer Keep Alive mechanism
-- Refine the “Out of range value for column” error message
+- Refine the "Out of range value for column" error message
 - Fix a bug when there is a subquery in an `Update` statement
 - Change the behaviour of handling `SIGTERM`, and do not wait for all queries to terminate anymore
 

@@ -10,14 +10,18 @@ This statement shows a list of assignable privileges in TiDB. It is a static lis
 
 ## Synopsis
 
-**ShowStmt:**
-
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+```ebnf+diagram
+ShowPrivilegesStmt ::=
+    "SHOW" "PRIVILEGES"
+```
 
 ## Examples
 
 ```sql
-mysql> show privileges;
+SHOW PRIVILEGES;
+```
+
+```
 +---------------------------------+---------------------------------------+-------------------------------------------------------+
 | Privilege                       | Context                               | Comment                                               |
 +---------------------------------+---------------------------------------+-------------------------------------------------------+
@@ -70,8 +74,9 @@ mysql> show privileges;
 | RESTRICTED_CONNECTION_ADMIN     | Server Admin                          |                                                       |
 | RESTRICTED_REPLICA_WRITER_ADMIN | Server Admin                          |                                                       |
 | RESOURCE_GROUP_ADMIN            | Server Admin                          |                                                       |
+| RESOURCE_GROUP_USER             | Server Admin                          |                                                       |
 +---------------------------------+---------------------------------------+-------------------------------------------------------+
-49 rows in set (0.00 sec)
+50 rows in set (0.00 sec)
 ```
 
 ## MySQL compatibility
@@ -80,5 +85,18 @@ The `SHOW PRIVILEGES` statement in TiDB is fully compatible with MySQL. If you f
 
 ## See also
 
+<CustomContent platform="tidb">
+
 * [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+* [Privilege Management](/privilege-management.md)
 * [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+* [Privilege Management](https://docs.pingcap.com/tidb/stable/privilege-management)
+* [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+
+</CustomContent>

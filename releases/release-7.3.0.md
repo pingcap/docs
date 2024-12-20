@@ -9,7 +9,7 @@ Release date: August 14, 2023
 
 TiDB version: 7.3.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v7.3.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-tidb)
 
 7.3.0 introduces the following major features. In addition to that, 7.3.0 also includes a series of enhancements (described in the [Feature details](#feature-details) section) to query stability in TiDB server and TiFlash. These enhancements are more miscellaneous in nature and not user-facing so they are not included in the following table.
 
@@ -155,6 +155,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 
 ### Behavior changes
 
+* TiDB
+
+    - MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. Compared with other protocols, the MPP protocol is more mature and can provide better task and resource management. Starting from v7.3.0, when TiDB pushes computation tasks to TiFlash, the optimizer only generates execution plans using the MPP protocol by default. If [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) is set to `OFF`, queries might return errors after you upgrade TiDB. It is recommended that you check the value of `tidb_allow_mpp` and set it to `ON` before the upgrade. If you still need the optimizer to choose one of the Cop, BatchCop, and MPP protocols for generating execution plans based on cost estimates, you can set the [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730) variable to `ON`.
+
 * Backup & Restore (BR)
 
     - BR adds an empty cluster check before performing a full data restoration. By default, restoring data to a non-empty cluster is not allowed. If you want to force the restoration, you can use the `--filter` option to specify the corresponding table name to restore data to.
@@ -175,9 +179,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720) | Modified | This system variable takes effect starting from v7.3.0. It controls whether non-recursive Common Table Expressions (CTEs) can be executed in TiFlash MPP. |
+| [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730) | Newly added | This system variable is used to select the protocol for generating execution plans when TiDB pushes computation tasks down to TiFlash. |
 | [`tidb_lock_unchanged_keys`](/system-variables.md#tidb_lock_unchanged_keys-new-in-v711-and-v730) | Newly added | This variable is used to control in certain scenarios whether to lock the keys that are involved but not modified in a transaction. |
 | [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) | Newly added | Controls whether the `EXPLAIN` statement disables the execution of constant subqueries that can be expanded at the optimization stage.  |
-| [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) | Newly added | This variable controls the generation of GlobalStats when partition statistics are missing. |
+| [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) | Newly added | This variable controls the generation of global statistics when partition statistics are missing. |
 | [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730) | Newly added | Controls the strategy for selecting TiFlash replicas when a query requires the TiFlash engine. |
 
 ### Configuration file parameters

@@ -5,7 +5,7 @@ summary: Learn the `TABLE_CONSTRAINTS` information_schema table.
 
 # TABLE_CONSTRAINTS
 
-The `TABLE_CONSTRAINTS` table describes which tables have constraints.
+The `TABLE_CONSTRAINTS` table describes which tables have [constraints](/constraints.md).
 
 {{< copyable "sql" >}}
 

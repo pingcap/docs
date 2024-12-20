@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1.16 Release Notes
 aliases: ['/docs/dev/releases/release-2.1.16/','/docs/dev/releases/2.1.16/']
+summary: TiDB 2.1.16 was released on August 15, 2019. It includes various fixes and improvements to the SQL optimizer, SQL execution engine, server, DDL, TiKV, TiDB Binlog, TiDB Lightning, and TiDB Ansible. Some notable changes include support for subqueries within SHOW statements, fixing issues with DATE_ADD function, and adding configuration items in Drainer for TiDB Binlog.
 ---
 
 # TiDB 2.1.16 Release Notes
@@ -53,7 +54,7 @@ TiDB Ansible version: 2.1.16
 + TiDB Binlog
     - Add the `ignore-txn-commit-ts` configuration item in Drainer to skip executing some statements in a transaction [#697](https://github.com/pingcap/tidb-binlog/pull/697)
     - Add the configuration item check on startup, which stops Pump and Drainer from running and returns an error message when meeting invalid configuration items [#708](https://github.com/pingcap/tidb-binlog/pull/708)
-    - Add the `node-id` configuration in Drainer to specify Drainer’s node ID [#706](https://github.com/pingcap/tidb-binlog/pull/706)
+    - Add the `node-id` configuration in Drainer to specify Drainer's node ID [#706](https://github.com/pingcap/tidb-binlog/pull/706)
 + TiDB Lightning
     - Fix the issue that `tikv_gc_life_time` fails to be changed back to its original value when 2 checksums are running at the same time [#224](https://github.com/pingcap/tidb-lightning/pull/224)
 

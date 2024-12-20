@@ -21,7 +21,7 @@ The backend for the physical import mode is `local`. You can modify it in `tidb-
 
 1. Before importing data, TiDB Lightning automatically switches the TiKV nodes to "import mode", which improves write performance and stops auto-compaction. TiDB Lightning determines whether to pause global scheduling according to the TiDB Lightning version.
 
-    - Starting from v7.1.0, you can you can control the scope of pausing scheduling by using the TiDB Lightning parameter [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md).
+    - Starting from v7.1.0, you can control the scope of pausing scheduling by using the TiDB Lightning parameter [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md).
     - For TiDB Lightning versions between v6.2.0 and v7.0.0, the behavior of pausing global scheduling depends on the TiDB cluster version. When the TiDB cluster >= v6.1.0, TiDB Lightning pauses scheduling for the Region that stores the target table data. After the import is completed, TiDB Lightning recovers scheduling. For other versions, TiDB Lightning pauses global scheduling.
     - When TiDB Lightning < v6.2.0, TiDB Lightning pauses global scheduling.
 
@@ -77,7 +77,7 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 - Do not use multiple TiDB Lightning instances to import data to the same TiDB cluster by default. Use [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md) instead.
 - When you use multiple TiDB Lightning to import data to the same target cluster, do not mix the import modes. That is, do not use the physical import mode and the logical import mode at the same time.
 - During the process of importing data, do not perform DDL and DML operations in the target table. Otherwise the import will fail or the data will be inconsistent. At the same time, it is not recommended to perform read operations, because the data you read might be inconsistent. You can perform read and write operations after the import operation is completed.
-- A single Lightning process can import a single table of 10 TB at most. Parallel import can use 10 Lightning instances at most.
+- A single Lightning process can import a single table of 10 TiB at most. Parallel import can use 10 Lightning instances at most.
 
 ### Tips for using with other components
 
@@ -92,3 +92,9 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 - When you use TiDB Lightning with TiCDC, note the following:
 
     - TiCDC cannot capture the data inserted in the physical import mode.
+
+- When you use TiDB Lightning with BR, note the following:
+
+    - When BR backs up snapshots of tables that are being imported by TiDB Lightning, it might result in inconsistent backup data for those tables.
+    - When BR backs up data using AWS EBS volume snapshots, TiDB Lightning might fail to import data.
+    - Data imported in TiDB Lightning physical import mode does not support [log backup](/br/br-pitr-guide.md#start-log-backup) and thereby cannot be restored by Point-in-Time Recovery (PITR).

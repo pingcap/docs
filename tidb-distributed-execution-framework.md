@@ -1,64 +1,50 @@
 ---
-title: TiDB Backend Task Distributed Execution Framework
-summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework.
+title: TiDB Distributed eXecution Framework (DXF)
+summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB Distributed eXecution Framework (DXF).
 ---
 
-# TiDB Backend Task Distributed Execution Framework
-
-<CustomContent platform="tidb-cloud">
+# TiDB Distributed eXecution Framework (DXF)
 
 > **Note:**
 >
-> Currently, this feature is only applicable to TiDB Dedicated clusters. You cannot use it on TiDB Serverless clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
-</CustomContent>
+TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a **Distributed eXecution Framework (DXF)** to further leverage the resource advantages of the distributed architecture. The goal of the DXF is to implement unified scheduling and distributed execution of tasks, and to provide unified resource management capabilities for both overall and individual tasks, which better meets users' expectations for resource usage.
 
-TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a backend task distributed execution framework to further leverage the resource advantages of the distributed architecture. The goal of this framework is to implement unified scheduling and distributed execution of all backend tasks, and to provide unified resource management capabilities for both overall and individual backend tasks, which better meets users' expectations for resource usage.
+This document describes the use cases, limitations, usage, and implementation principles of the DXF.
 
-This document describes the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework.
+## Use cases
 
-> **Note:**
->
-> This framework does not support the distributed execution of SQL queries.
-
-## Use cases and limitations
-
-<CustomContent platform="tidb">
-
-In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, IMPORT INTO, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These backend tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These backend tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
-
-</CustomContent>
+In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), [TTL](/time-to-live.md), [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md), and Backup/Restore. These tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
 
 - Need to process all data in a schema or a database object (table).
 - Might need to be executed periodically, but at a low frequency.
 - If the resources are not properly controlled, they are prone to affect TP and AP tasks, lowering the database service quality.
 
-Enabling the TiDB backend task distributed execution framework can solve the above problems and has the following three advantages:
+Enabling the DXF can solve the above problems and has the following three advantages:
 
 - The framework provides unified capabilities for high scalability, high availability, and high performance.
-- The framework supports distributed execution of backend tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
-- The framework provides unified resource usage and management capabilities for both overall and individual backend tasks.
+- The DXF supports distributed execution of tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
+- The DXF provides unified resource usage and management capabilities for both overall and individual tasks.
 
-Currently, for TiDB Self-Hosted, the TiDB backend task distributed execution framework supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
+Currently, the DXF supports the distributed execution of the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statements.
 
-- `ADD INDEX` is a DDL statement used to create indexes. For example:
+- [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) is a DDL statement used to create indexes. For example:
 
     ```sql
     ALTER TABLE t1 ADD INDEX idx1(c1);
     CREATE INDEX idx1 ON table t1(c1);
     ```
 
-- `IMPORT INTO` is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table. For more information, see [`IMPORT INTO`](https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into).
+- [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) is used to import data in formats such as CSV, SQL, and Parquet into an empty table.
+
+## Limitation
+
+The DXF can only schedule up to 16 tasks (including [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) tasks) simultaneously.
 
 ## Prerequisites
 
-Before using the distributed framework, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
+Before using the DXF to execute [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
 
 <CustomContent platform="tidb">
 
@@ -73,7 +59,7 @@ Before using the distributed framework, you need to enable the [Fast Online DDL]
 
 > **Note:**
 >
-> Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. Make sure that the operating system user that runs TiDB has the read and write permissions for this directory. Otherwise, The DDL operations might experience unpredictable issues. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item in advance before upgrading can avoid another restart.
+> It is recommended that you prepare at least 100 GiB of free space for the TiDB `temp-dir` directory.
 
 </CustomContent>
 
@@ -88,51 +74,46 @@ Adjust the following system variables related to Fast Online DDL:
 
 ## Usage
 
-1. To enable the distributed framework, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`:
+1. To enable the DXF, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`. Starting from v8.1.0, this variable is enabled by default. For newly created clusters of v8.1.0 or later versions, you can skip this step.
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
     ```
 
-    <CustomContent platform="tidb">
+    When the DXF tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes run DXF tasks by default.
 
-    When background tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
-
-    </CustomContent>
-
-    <CustomContent platform="tidb-cloud">
-
-    When background tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
-
-    </CustomContent>
-
-2. Adjust the following system variables that might affect the distributed execution of DDL tasks according to your needs:
+2. In general, for the following system variables that might affect the distributed execution of DDL tasks, it is recommended that you use their default values:
 
     * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
     * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
-3. Starting from v7.4.0, you can adjust the number of TiDB nodes that perform background tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute background tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute background tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the TiDB distributed execution framework schedules all TiDB nodes to execute background tasks by default.
-    > **Note:**
-    >
-    > - During the execution of a distributed task, if some TiDB nodes are offline, the distributed task randomly assigns subtasks to available TiDB nodes instead of dynamically assigning subtasks according to `tidb_service_scope`.
-    > - During the execution of a distributed task, changes to the `tidb_service_scope` configuration will not take effect for the current task, but will take effect from the next task.
+## Task scheduling
 
-> **Tip:**
+By default, the DXF schedules all TiDB nodes to execute distributed tasks. Starting from v7.4.0, for TiDB Self-Managed clusters, you can control which TiDB nodes can be scheduled by the DXF to execute distributed tasks by configuring [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740).
+
+- For versions from v7.4.0 to v8.0.0, the optional values of [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) are `''` or `background`. If the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules tasks to these nodes for execution. If the current cluster does not have TiDB nodes with `tidb_service_scope = 'background'`, whether due to faults or normal scaling in, the DXF schedules tasks to nodes with `tidb_service_scope = ''` for execution.
+
+- Starting from v8.1.0, you can set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to any valid value. When a distributed task is submitted, the task binds to the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) value of the currently connected TiDB node, and the DXF only schedules the task to the TiDB nodes with the same [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) value for execution. However, for configuration compatibility with earlier versions, if a distributed task is submitted on a node with `tidb_service_scope = ''` and the current cluster has TiDB nodes with `tidb_service_scope = 'background'`, the DXF schedules the task to TiDB nodes with `tidb_service_scope = 'background'` for execution.
+
+Starting from v8.1.0, if new nodes are added during task execution, the DXF determines whether to schedule tasks to the new nodes for execution based on the preceding rules. If you do not want newly added nodes to execute tasks, it is recommended to set a different [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for those newly added nodes in advance.
+
+> **Note:**
 >
-> For distributed execution of `ADD INDEX` statements, you only need to set `tidb_ddl_reorg_worker_cnt`.
+> - For versions from v7.4.0 to v8.0.0, in clusters with multiple TiDB nodes, it is strongly recommended to set [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to `background` on two or more TiDB nodes. If this variable is set only on a single TiDB node, when that node restarts or fails, tasks will be rescheduled to TiDB nodes with `tidb_service_scope = ''`, which affects applications running on these TiDB nodes.
+> - During the execution of a distributed task, changes to the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) configuration do not take effect for the current task, but take effect from the next task.
 
 ## Implementation principles
 
-The architecture of the TiDB backend task distributed execution framework is as follows:
+The architecture of the DXF is as follows:
 
-![Architecture of the TiDB backend task distributed execution framework](/media/dist-task/dist-task-architect.jpg)
+![Architecture of the DXF](/media/dist-task/dist-task-architect.jpg)
 
-As shown in the preceding diagram, the execution of backend tasks in the distributed framework is mainly handled by the following modules:
+As shown in the preceding diagram, the execution of tasks in the DXF is mainly handled by the following modules:
 
 - Dispatcher: generates the distributed execution plan for each task, manages the execution process, converts the task status, and collects and feeds back the runtime task information.
-- Scheduler: replicates the execution of distributed tasks among TiDB nodes to improve the efficiency of backend task execution.
+- Scheduler: replicates the execution of distributed tasks among TiDB nodes to improve the efficiency of task execution.
 - Subtask Executor: the actual executor of distributed subtasks. In addition, the Subtask Executor returns the execution status of subtasks to the Scheduler, and the Scheduler updates the execution status of subtasks in a unified manner.
 - Resource pool: provides the basis for quantifying resource usage and management by pooling computing resources of the above modules.
 

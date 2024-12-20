@@ -1,6 +1,6 @@
 ---
 title: TiDB Log Backup and PITR Command Manual
-summary: Learn about the commands of TiDB log backup and point-in-time recovery.
+summary: Introduce the commands used in TiDB log backup and point-in-time recovery (PITR).
 aliases: ['/tidb/dev/br-log-command-line/']
 ---
 
@@ -15,10 +15,10 @@ For more information about log backup and PITR, refer to:
 
 ## Perform log backup
 
-You can start and manage log backup using the `br log` command.
+You can start and manage log backup using the `tiup br log` command.
 
 ```shell
-./br log --help
+tiup br log --help
 
 backup stream log from TiDB/TiKV cluster
 
@@ -37,22 +37,22 @@ Available Commands:
 
 Each subcommand is described as follows:
 
-- `br log start`: start a log backup task.
-- `br log status`: query the status of the log backup task.
-- `br log pause`: pause a log backup task.
-- `br log resume`: resume a paused log backup task.
-- `br log stop`: stop a log backup task and delete the task metadata.
-- `br log truncate`: clean up the log backup data from the backup storage.
-- `br log metadata`: query the metadata of the log backup data.
+- `tiup br log start`: start a log backup task.
+- `tiup br log status`: query the status of the log backup task.
+- `tiup br log pause`: pause a log backup task.
+- `tiup br log resume`: resume a paused log backup task.
+- `tiup br log stop`: stop a log backup task and delete the task metadata.
+- `tiup br log truncate`: clean up the log backup data from the backup storage.
+- `tiup br log metadata`: query the metadata of the log backup data.
 
-### Start a backup task
+### Start a log backup task
 
-You can run the `br log start` command to start a log backup task. This task runs in the background of your TiDB cluster and automatically backs up the change log of KV storage to the backup storage.
+You can run the `tiup br log start` command to start a log backup task. This task runs in the background of your TiDB cluster and automatically backs up the change log of KV storage to the backup storage.
 
-Run `br log start --help` to see the help information:
+Run `tiup br log start --help` to see the help information:
 
 ```shell
-./br log start --help
+tiup br log start --help
 start a log backup task
 
 Usage:
@@ -83,18 +83,84 @@ The example output only shows the common parameters. These parameters are descri
 Usage example:
 
 ```shell
-./br log start --task-name=pitr --pd="${PD_IP}:2379" \
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+tiup br log start \
+  --task-name=pitr \
+  --pd="${PD_IP}:2379" \
+  --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
-### Query the backup status
+### Encrypt the log backup data
 
-You can run the `br log status` command to query the backup status.
+BR enables you to encrypt log backup data before uploading it to your backup storage.
 
-Run `br log status --help` to see the help information:
+Starting from TiDB v8.4.0, you can encrypt log backup data by passing the following parameters in the log backup command, which is similar to [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data):
+
+- `--log.crypter.method`: Encryption algorithm, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
+- `--log.crypter.key`: Encryption key in hexadecimal string format. It is a 128-bit (16 bytes) key for the algorithm `aes128-ctr`, a 24-byte key for the algorithm `aes192-ctr`, and a 32-byte key for the algorithm `aes256-ctr`.
+- `--log.crypter.key-file`: The key file. You can directly pass in the file path where the key is stored as a parameter without passing in the `crypter.key`.
+
+The following is an example:
 
 ```shell
-./br log status --help
+tiup br log start \
+    --task-name=pitr-with-encryption
+    --pd ${PD_IP}:2379 \
+    --storage "s3://${BACKUP_COLLECTION_ADDR}/snapshot-${DATE}?access-key=${AWS_ACCESS_KEY}&secret-access-key=${AWS_SECRET_ACCESS_KEY}" \
+    --log.crypter.method aes128-ctr \
+    --log.crypter.key 0123456789abcdef0123456789abcdef
+```
+
+However, in scenarios with higher security requirements, you might not want to pass a fixed encryption key directly in the command line. To further enhance security, you can use a master key based encryption system to manage encryption keys. This system generates different data keys to encrypt different log backup files and supports master key rotation. You can configure it using the following parameters:
+
+- `--master-key-crypter-method`: Encryption algorithm based on the master key, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
+- `--master-key`: Master key configuration. It can be a master key stored on a local disk or a master key managed by a cloud Key Management Service (KMS).
+
+Encrypt using a master key stored on a local disk:
+
+```shell
+tiup br log start \
+    --task-name=pitr-with-encryption \
+    --pd ${PD_IP}:2379 \
+    --storage "s3://${BACKUP_COLLECTION_ADDR}/snapshot-${DATE}?access-key=${AWS_ACCESS_KEY}&secret-access-key=${AWS_SECRET_ACCESS_KEY}" \
+    --master-key-crypter-method aes128-ctr \
+    --master-key "local:///path/to/master.key"
+```
+
+Encrypt using a master key managed by AWS KMS:
+
+```shell
+tiup br log start \
+    --task-name=pitr-with-encryption \
+    --pd ${PD_IP}:2379 \
+    --storage "s3://${BACKUP_COLLECTION_ADDR}/snapshot-${DATE}?access-key=${AWS_ACCESS_KEY}&secret-access-key=${AWS_SECRET_ACCESS_KEY}" \
+    --master-key-crypter-method aes128-ctr \
+    --master-key "aws-kms:///${AWS_KMS_KEY_ID}?AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY}&AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}&REGION=${AWS_REGION}"
+```
+
+Encrypt using a master key managed by Google Cloud KMS:
+
+```shell
+tiup br log start \
+    --task-name=pitr-with-encryption \
+    --pd ${PD_IP}:2379 \
+    --storage "s3://${BACKUP_COLLECTION_ADDR}/snapshot-${DATE}?access-key=${AWS_ACCESS_KEY}&secret-access-key=${AWS_SECRET_ACCESS_KEY}" \
+    --master-key-crypter-method aes128-ctr \
+    --master-key "gcp-kms:///projects/$GCP_PROJECT_ID/locations/$GCP_LOCATION/keyRings/$GCP_KEY_RING/cryptoKeys/$GCP_KEY_NAME?AUTH=specified&CREDENTIALS=$GCP_CREDENTIALS_PATH"
+```
+
+> **Note:**
+>
+> - If the key is lost, the log backup data cannot be restored to the cluster.
+> - The encryption feature needs to be used on `br` and TiDB clusters v8.4.0 or later versions. The encrypted log backup data cannot be restored on clusters earlier than v8.4.0.
+
+### Query the log backup status
+
+You can run the `tiup br log status` command to query the log backup status.
+
+Run `tiup br log status --help` to see the help information:
+
+```shell
+tiup br log status --help
 get status for the log backup task
 
 Usage:
@@ -118,7 +184,7 @@ In the example output, `task-name` is used to specify the name of the backup tas
 Usage example:
 
 ```shell
-./br log status --task-name=pitr --pd="${PD_IP}:2379"
+tiup br log status --task-name=pitr --pd="${PD_IP}:2379"
 ```
 
 Expected output:
@@ -144,14 +210,14 @@ The output fields are described as follows:
 - `checkpoint [global]`: all data before this checkpoint is backed up to the backup storage. This is the latest timestamp available for restoring the backup data.
 - `error [store]`: the error the log backup program encounters on the storage node.
 
-### Pause and resume a backup task
+### Pause and resume a log backup task
 
-You can run the `br log pause` command to pause a running backup task.
+You can run the `tiup br log pause` command to pause a running log backup task.
 
-Run `br log pause --help` to see the help information:
+Run `tiup br log pause --help` to see the help information:
 
 ```shell
-./br log pause --help
+tiup br log pause --help
 pause a log backup task
 
 Usage:
@@ -177,15 +243,15 @@ Global Flags:
 Usage example:
 
 ```shell
-./br log pause --task-name=pitr --pd="${PD_IP}:2379"
+tiup br log pause --task-name=pitr --pd="${PD_IP}:2379"
 ```
 
-You can run the `br log resume` command to resume a paused backup task.
+You can run the `tiup br log resume` command to resume a paused backup task.
 
-Run `br log resume --help` to see the help information:
+Run `tiup br log resume --help` to see the help information:
 
 ```shell
-./br log resume --help
+tiup br log resume --help
 resume a log backup task
 
 Usage:
@@ -202,26 +268,26 @@ Global Flags:
  -u, --pd strings             PD address (default [127.0.0.1:2379])
 ```
 
-After the backup task is paused for more than 24 hours, running `br log resume` reports an error, and BR prompts that backup data is lost. To handle this error, refer to [Backup & Restore FAQs](/faq/backup-and-restore-faq.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task).
+After the backup task is paused for more than 24 hours, running `tiup br log resume` reports an error, and BR prompts that backup data is lost. To handle this error, refer to [Backup & Restore FAQs](/faq/backup-and-restore-faq.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task).
 
 Usage example:
 
 ```shell
-./br log resume --task-name=pitr --pd="${PD_IP}:2379"
+tiup br log resume --task-name=pitr --pd="${PD_IP}:2379"
 ```
 
-### Stop and restart a backup task
+### Stop and restart a log backup task
 
-You can stop a log backup task by running the `br log stop` command and restart a backup task that is stopped by using the original `--storage` directory.
+You can stop a log backup task by running the `tiup br log stop` command and restart a log backup task that is stopped by using the original `--storage` directory.
 
-#### Stop a backup task
+### Stop a log backup task
 
-You can run the `br log stop` command to stop a log backup task. This command cleans up the task metadata in the backup cluster.
+You can run the `tiup br log stop` command to stop a log backup task. This command cleans up the task metadata in the backup cluster.
 
-Run `br log stop --help` to see the help information:
+Run `tiup br log stop --help` to see the help information:
 
 ```shell
-./br log stop --help
+tiup br log stop --help
 stop a log backup task
 
 Usage:
@@ -240,30 +306,30 @@ Global Flags:
 
 > **Note:**
 >
-> Use this command with caution. If you need to pause a log backup task, use `br log pause` and `br log resume` instead.
+> Use this command with caution. If you need to pause a log backup task, use `tiup br log pause` and `tiup br log resume` instead.
 
 Usage example:
 
 ```shell
-./br log stop --task-name=pitr --pd="${PD_IP}:2379"
+tiup br log stop --task-name=pitr --pd="${PD_IP}:2379"
 ```
 
-#### Restart a backup task
+#### Restart a log backup task
 
-After running the `br log stop` command to stop a log backup task, you can create a new log backup task in another `--storage` directory or restart the log backup task in the original `--storage` directory by running the `br log start` command. If you restart the task in the original `--storage` directory, pay attention to the following points:
+After running the `tiup br log stop` command to stop a log backup task, you can create a new log backup task in another `--storage` directory or restart the log backup task in the original `--storage` directory by running the `tiup br log start` command. If you restart the task in the original `--storage` directory, pay attention to the following points:
 
 - Parameters of the `--storage` directory for restarting a task must be the same as the task that is stopped.
 - The `--start-ts` does not need to be specified. BR automatically starts the backup from the last backup checkpoint.
 - If the task is stopped for a long time and multiple versions of the data have been garbage collected, the error `BR:Backup:ErrBackupGCSafepointExceeded` is reported when you attempt to restart the task. In this case, you have to create a new log backup task in another `--storage` directory.
 
-### Clean up backup data
+### Clean up log backup data
 
-You can run the `br log truncate` command to clean up the outdated or no longer needed log backup data.
+You can run the `tiup br log truncate` command to clean up the outdated or no longer needed log backup data.
 
-Run `br log truncate --help` to see the help information:
+Run `tiup br log truncate --help` to see the help information:
 
 ```shell
-./br log truncate --help
+tiup br log truncate --help
 truncate the incremental log until sometime.
 
 Usage:
@@ -289,8 +355,8 @@ This command only accesses the backup storage and does not access the TiDB clust
 Usage example:
 
 ```shell
-./br log truncate --until='2022-07-26 21:20:00+0800' \
-–-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+tiup br log truncate --until='2022-07-26 21:20:00+0800' \
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
@@ -303,14 +369,14 @@ Clearing data files... DONE; take = 43.504161ms, kv-count = 53, kv-size = 4573(4
 Removing metadata... DONE; take = 24.038962ms
 ```
 
-### View the backup metadata
+### View the log backup metadata
 
-You can run the `br log metadata` command to view the backup metadata in the storage system, such as the earliest and latest timestamp that can be restored.
+You can run the `tiup br log metadata` command to view the log backup metadata in the storage system, such as the earliest and latest timestamp that can be restored.
 
-Run `br log metadata --help` to see the help information:
+Run `tiup br log metadata --help` to see the help information:
 
 ```shell
-./br log metadata --help
+tiup br log metadata --help
 get the metadata of log backup storage
 
 Usage:
@@ -330,7 +396,7 @@ The `--storage` parameter is used to specify the backup storage address. Current
 Usage example:
 
 ```shell
-./br log metadata –-storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+tiup br log metadata --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 Expected output:
@@ -341,12 +407,16 @@ Expected output:
 
 ## Restore to a specified point in time (PITR)
 
-You can run the `br restore point` command to perform a PITR on a new cluster or just restore the log backup data.
+> **Note:**
+>
+> If you specify `--full-backup-storage` as the incremental backup address for `restore point`, for restores of this backup and any previous incremental backups, you need to set the parameter `--allow-pitr-from-incremental` to `true` to make the incremental backups compatible with the subsequent log backups.
 
-Run `br restore point --help` to see the help information:
+You can run the `tiup br restore point` command to perform a PITR on a new cluster or just restore the log backup data.
+
+Run `tiup br restore point --help` to see the help information:
 
 ```shell
-./br restore point --help
+tiup br restore point --help
 restore data from log until specify commit timestamp
 
 Usage:
@@ -369,7 +439,7 @@ Global Flags:
 
 The example output only shows the common parameters. These parameters are described as follows:
 
-- `--full-backup-storage`: the storage address for the snapshot (full) backup. To use PITR, specify this parameter and choose the latest snapshot backup before the restore timestamp. To restore only log backup data, you can omit this parameter. Currently, BR supports Amazon S3, GCS, or Azure Blob Storage as the storage for log backup. For details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+- `--full-backup-storage`: the storage address for the snapshot (full) backup. To use PITR, specify this parameter and choose the latest snapshot backup before the restore timestamp. To restore only log backup data, you can omit this parameter. Note that when initializing the recovery cluster for the first time, you must specify a snapshot backup. Currently, BR supports Amazon S3, GCS, and Azure Blob Storage as the storage for log backup. For details, see [URI Formats of External Storage Services](/external-storage-uri.md).
 - `--restored-ts`: the timestamp that you want to restore data to. If this parameter is not specified, BR restores data to the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
 - `--start-ts`: the start timestamp that you want to restore log backup data from. If you only need to restore log backup data, you must specify this parameter.
 - `--pd`: the PD address of the restore cluster.
@@ -379,9 +449,9 @@ The example output only shows the common parameters. These parameters are descri
 Usage example:
 
 ```shell
-./br restore point --pd="${PD_IP}:2379"
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
---full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+tiup br restore point --pd="${PD_IP}:2379"
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${access-key}&secret-access-key=${secret-access-key}'
 
 Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
 *** ***["Full Restore success summary"] ****** [total-take=3.112928252s] [restore-data-size(after-compressed)=5.056kB] [Size=5056] [BackupTS=434693927394607136] [total-kv=4] [total-kv-size=290B] [average-speed=93.16B/s]
@@ -392,5 +462,34 @@ Restore KV Files <--------------------------------------------------------------
 
 > **Note:**
 >
+> - When you restore the cluster for the first time, you must specify the full snapshot data. Otherwise, some data in the newly created table might be incorrect due to rewriting Table ID rules. For more information, see GitHub issue [#54418](https://github.com/pingcap/tidb/issues/54418).
 > - You cannot restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
 > - When you restore log data of different time periods in multiple batches, ensure that the log data is restored in consecutive order. If you restore the log backup data of `[t1, t2)`, `[t2, t3)`, and `[t3, t4)` in consecutive order, the restored data is consistent. However, if you restore `[t1, t2)` and then skip `[t2, t3)` to restore `[t3, t4)`, the restored data might be inconsistent.
+
+### Restore encrypted log backup data
+
+To restore encrypted log backup data, you need to pass the corresponding decryption parameters in the restore command. Make sure that the decryption parameters are the same as those used for encryption. If the decryption algorithm or key is incorrect, the data cannot be restored.
+
+The following is an example:
+
+```shell
+tiup br restore point --pd="${PD_IP}:2379"
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--crypter.method aes128-ctr
+--crypter.key 0123456789abcdef0123456789abcdef
+--log.crypter.method aes128-ctr
+--log.crypter.key 0123456789abcdef0123456789abcdef
+```
+
+If a log backup is encrypted using a master key, you can decrypt and restore the backup data using the following command:
+
+```shell
+tiup br restore point --pd="${PD_IP}:2379"
+--storage='s3://backup-101/logbackup?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--full-backup-storage='s3://backup-101/snapshot-202205120000?access-key=${ACCESS-KEY}&secret-access-key=${SECRET-ACCESS-KEY}'
+--crypter.method aes128-ctr
+--crypter.key 0123456789abcdef0123456789abcdef
+--master-key-crypter-method aes128-ctr
+--master-key "local:///path/to/master.key"
+```

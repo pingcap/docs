@@ -101,9 +101,9 @@ SHOW CREATE TABLE t;
 | Table | Create Table                                                                                                                                                                                                                                                                                                     |
 +-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | t     | CREATE TABLE `t` (
-  `a` int(11) DEFAULT NULL,
-  `b` int(11) DEFAULT NULL,
-  `c` int(11) DEFAULT NULL,
+  `a` int DEFAULT NULL,
+  `b` int DEFAULT NULL,
+  `c` int DEFAULT NULL,
 CONSTRAINT `c1` CHECK ((`b` > `c`)),
 CONSTRAINT `t_chk_1` CHECK ((`a` > 10)) /*!80016 NOT ENFORCED */,
 CONSTRAINT `t_chk_2` CHECK ((1 < `c`))
@@ -412,7 +412,7 @@ For more details about the primary key of the `CLUSTERED` type, refer to [cluste
 
 > **Note:**
 >
-> Starting from v6.6.0, TiDB supports the [FOREIGN KEY constraints](/foreign-key.md) as an experimental feature. Before v6.6.0, TiDB supports creating and deleting foreign key constraints, but the constraints are not actually effective. After upgrading TiDB to v6.6.0, you can delete the invalid foreign key and create a new one to make the foreign key constraints effective.
+> Starting from v6.6.0, TiDB supports the [FOREIGN KEY constraints](/foreign-key.md). Before v6.6.0, TiDB supports creating and deleting foreign key constraints, but the constraints are not actually effective. After upgrading TiDB to v6.6.0 or later, you can delete the invalid foreign key and create a new one to make the foreign key constraints effective. This feature becomes generally available in v8.5.0.
 
 TiDB supports creating `FOREIGN KEY` constraints in DDL commands.
 

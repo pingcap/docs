@@ -73,6 +73,9 @@ check-thread-count = 4
 # If enabled, SQL statements is exported to fix inconsistent tables.
 export-fix-sql = true
 
+# Only compares the data instead of the table structure. This configuration item is an experimental feature. It is not recommended that you use it in the production environment.
+check-data-only = false
+
 # Only compares the table structure instead of the data.
 check-struct-only = false
 
@@ -182,7 +185,7 @@ sync-diff-inspector sends progress information to `stdout` when running. Progres
 >
 > To ensure the display effect, keep the display window width above 80 characters.
 
-```progress
+```
 A total of 2 tables need to be compared
 
 Comparing the table structure of ``sbtest`.`sbtest96`` ... equivalent
@@ -193,7 +196,7 @@ _____________________________________________________________________________
 Progress [==========================================================>--] 98% 193/200
 ```
 
-```progress
+```
 A total of 2 tables need to be compared
 
 Comparing the table structure of ``sbtest`.`sbtest96`` ... equivalent
@@ -245,7 +248,7 @@ The running sync-diff-inspector periodically (every 10 seconds) prints the progr
 
 After the check is finished, sync-diff-inspector outputs a report. It is located at `${output}/summary.txt`, and `${output}` is the value of `output-dir` in the `config.toml` file.
 
-```summary
+```
 +---------------------+--------------------+----------------+---------+-----------+
 |        TABLE        | STRUCTURE EQUALITY | DATA DIFF ROWS | UPCOUNT | DOWNCOUNT |
 +---------------------+--------------------+----------------+---------+-----------+
@@ -260,6 +263,8 @@ Average Speed: 113.277149MB/s
 - `RESULT`: Whether the check is completed. If you have configured `skip-non-existing-table = true`, the value of this column is `skipped` for tables that do not exist in the upstream or downstream
 - `STRUCTURE EQUALITY`: Checks whether the table structure is the same
 - `DATA DIFF ROWS`: `rowAdd`/`rowDelete`. Indicates the number of rows that need to be added/deleted to fix the table
+- `UPCOUNT`: The number of rows in this table in the upstream data source
+- `DOWNCOUNT`: The number of rows in this table in the downstream data source
 
 ### SQL statements to fix inconsistent data
 

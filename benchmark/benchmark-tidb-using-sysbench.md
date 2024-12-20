@@ -1,6 +1,7 @@
 ---
 title: How to Test TiDB Using Sysbench
 aliases: ['/docs/dev/benchmark/benchmark-tidb-using-sysbench/','/docs/dev/benchmark/how-to-run-sysbench/']
+summary: TiDB performance can be optimized by using Sysbench 1.0 or later. Configure TiDB and TiKV with higher log levels for better performance. Adjust Sysbench configuration and import data to optimize performance. Address common issues related to proxy use and CPU utilization rates.
 ---
 
 # How to Test TiDB Using Sysbench
@@ -19,7 +20,7 @@ server_configs:
     log.level: "error"
 ```
 
-It is also recommended to make sure [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) is enabled and that you allow sysbench to use prepared statements by using `--db-ps-mode=auto`. See the [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) for documetnation about what the SQL plan cache does and how to monitor it.
+It is also recommended to make sure [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) is enabled and that you allow sysbench to use prepared statements by using `--db-ps-mode=auto`. See the [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) for documentation about what the SQL plan cache does and how to monitor it.
 
 > **Note:**
 >

@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.4 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.4/','/docs/dev/releases/3.0.4/']
+summary: TiDB 3.0.4 was released on October 8, 2019, with new features including system table for troubleshooting SQL performance issues, improvements in split performance and reverse scan, and fixed issues related to slow query logs and data replication. The release also includes contributions from the community and updates to TiDB, TiKV, PD, and TiDB Ansible.
 ---
 
 # TiDB 3.0.4 Release Notes
@@ -13,7 +14,7 @@ TiDB Ansible version: 3.0.4
 
 - New features
     - Add the `performance_schema.events_statements_summary_by_digest` system table to troubleshoot performance issues at the SQL level
-    - Add the `WHERE` clause in TiDB’s `SHOW TABLE REGIONS` syntax
+    - Add the `WHERE` clause in TiDB's `SHOW TABLE REGIONS` syntax
     - Add the `worker-count` and `txn-batch` configuration items in Reparo to control the recovery speed
 - Improvements
     - Support batch Region split command and empty split command in TiKV to improve split performance
@@ -42,12 +43,12 @@ TiDB Ansible version: 3.0.4
 ## TiDB
 
 - SQL Optimizer
-    - Fix the issue that invalid query ranges might be resulted when splitted by feedback [#12170](https://github.com/pingcap/tidb/pull/12170)
+    - Fix the issue that invalid query ranges might be resulted when split by feedback [#12170](https://github.com/pingcap/tidb/pull/12170)
     - Display the returned error of the `SHOW STATS_BUCKETS` statement in hexadecimal rather than return errors when the result contains invalid Keys [#12094](https://github.com/pingcap/tidb/pull/12094)
     - Fix the issue that when a query contains the `SLEEP` function (for example, `select 1 from (select sleep(1)) t;)`), column pruning causes invalid `sleep(1)` during query [#11953](https://github.com/pingcap/tidb/pull/11953)
     - Use index scan to lower IO when a query only concerns the number of columns rather than the table data [#12112](https://github.com/pingcap/tidb/pull/12112)
     - Do not use any index when no index is specified in `use index()` to be compatible with MySQL [#12100](https://github.com/pingcap/tidb/pull/12100)
-    - Strictly limit the number of `TopN` records in the `CMSketch` statistics to fix the issue that the `ANALYZE` statement fails because the statement count exceeds TiDB’s limit on the size of a transaction [#11914](https://github.com/pingcap/tidb/pull/11914)
+    - Strictly limit the number of `TopN` records in the `CMSketch` statistics to fix the issue that the `ANALYZE` statement fails because the statement count exceeds TiDB's limit on the size of a transaction [#11914](https://github.com/pingcap/tidb/pull/11914)
     - Fix the error occurred when converting the subqueries contained in the `Update` statement [#12483](https://github.com/pingcap/tidb/pull/12483)
     - Optimize execution performance of the `select ... limit ... offset ...` statement by pushing the Limit operator down to the `IndexLookUpReader` execution logic [#12378](https://github.com/pingcap/tidb/pull/12378)
 - SQL Execution Engine

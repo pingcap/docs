@@ -30,7 +30,7 @@ You can see the current status of each running cluster on the cluster page.
 
 > **Note:**
 >
-> The TiDB node status is only available for TiDB Dedicated clusters.
+> The TiDB node status is only available for TiDB Cloud Dedicated clusters.
 
 | TiDB node status | Description |
 |:--|:--|
@@ -43,7 +43,7 @@ You can see the current status of each running cluster on the cluster page.
 
 > **Note:**
 >
-> The TiKV node status is only available for TiDB Dedicated clusters.
+> The TiKV node status is only available for TiDB Cloud Dedicated clusters.
 
 | TiKV node status | Description |
 |:--|:--|
@@ -65,7 +65,7 @@ The cluster overview page provides general metrics of a cluster, including total
 
 > **Note:**
 >
-> Some of these metrics might be available only for TiDB Dedicated clusters.
+> Some of these metrics might be available only for TiDB Cloud Dedicated clusters.
 
 To view metrics on the cluster overview page, take the following steps:
 
@@ -79,7 +79,7 @@ The cluster monitoring page provides a full set of standard metrics of a cluster
 
 > **Note:**
 >
-> Currently, the cluster monitoring page is unavailable for [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless).
+> Currently, the cluster monitoring page is unavailable for [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
 
 To view metrics on the cluster monitoring page, take the following steps:
 

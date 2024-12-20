@@ -9,7 +9,7 @@ summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Synopsis
 
@@ -28,7 +28,7 @@ PolicyName ::=
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=p1;
-SHOW CREATE PLACEMENT POLICY p1\G;
+SHOW CREATE PLACEMENT POLICY p1\G
 ```
 
 ```

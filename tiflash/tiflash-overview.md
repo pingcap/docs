@@ -22,11 +22,11 @@ With TiDB Cloud, you can create an HTAP cluster easily by specifying one or more
 
 The above figure is the architecture of TiDB in its HTAP form, including TiFlash nodes.
 
-TiFlash provides the columnar storage, with a layer of coprocessors efficiently implemented by ClickHouse. Similar to TiKV, TiFlash also has a Multi-Raft system, which supports replicating and distributing data in the unit of Region (see [Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/) for details).
+TiFlash provides the columnar storage, with a layer of coprocessors efficiently implemented by ClickHouse. Similar to TiKV, TiFlash also has a Multi-Raft system, which supports replicating and distributing data in the unit of Region (see [Data Storage](https://www.pingcap.com/blog/tidb-internal-data-storage/) for details).
 
 TiFlash conducts real-time replication of data in the TiKV nodes at a low cost that does not block writes in TiKV. Meanwhile, it provides the same read consistency as in TiKV and ensures that the latest data is read. The Region replica in TiFlash is logically identical to those in TiKV, and is split and merged along with the Leader replica in TiKV at the same time.
 
-To deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
+To deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `grep avx2 /proc/cpuinfo` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `grep 'crc32' /proc/cpuinfo | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 
 <CustomContent platform="tidb">
 
@@ -110,7 +110,7 @@ You can use TiDB to read TiFlash replicas for analytical processing. See the fol
 
 <CustomContent platform="tidb">
 
-To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md).
+To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start with TiDB HTAP](/quick-start-with-htap.md).
 
 </CustomContent>
 
@@ -118,7 +118,7 @@ To experience the whole process from importing data to querying in a TPC-H datas
 
 <CustomContent platform="tidb">
 
-- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
+- To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 - To add a TiFlash node in a deployed cluster, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
 - [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
 - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md).

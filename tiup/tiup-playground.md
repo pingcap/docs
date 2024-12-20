@@ -22,46 +22,14 @@ This command actually performs the following operations:
 
 - Because this command does not specify the version of the playground component, TiUP first checks the latest version of the installed playground component. Assume that the latest version is v1.12.3, then this command works the same as `tiup playground:v1.12.3`.
 - If you have not used TiUP playground to install the TiDB, TiKV, and PD components, the playground component installs the latest stable version of these components, and then start these instances.
-- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v7.5.0, then this command works the same as `tiup playground:v1.12.3 v7.5.0`.
+- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v8.5.0, then this command works the same as `tiup playground:v1.12.3 v8.5.0`.
 - Because this command does not specify the number of each component, TiUP playground, by default, starts a smallest cluster that consists of one TiDB instance, one TiKV instance, one PD instance, and one TiFlash instance.
 - After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the [TiDB Dashboard](/dashboard/dashboard-intro.md).
 
-The command-line flags of the playground component are described as follows:
+You can use the following command to view the command-line flags of the playground component:
 
-```bash
-Flags:
-      --db int                   Specify the number of TiDB instances (default: 1)
-      --db.host host             Specify the listening address of TiDB
-      --db.port int              Specify the port of TiDB
-      --db.binpath string        Specify the TiDB instance binary path (optional, for debugging)
-      --db.config string         Specify the TiDB instance configuration file (optional, for debugging)
-      --db.timeout int           Specify TiDB maximum wait time in seconds for starting. 0 means no limit
-      --drainer int              Specify Drainer data of the cluster
-      --drainer.binpath string   Specify the location of the Drainer binary files (optional, for debugging)
-      --drainer.config string    Specify the Drainer configuration file
-  -h, --help                     help for tiup
-      --host string              Specify the listening address of each component (default: `127.0.0.1`). Set it to `0.0.0.0` if provided for access of other machines
-      --kv int                   Specify the number of TiKV instances (default: 1)
-      --kv.binpath string        Specify the TiKV instance binary path (optional, for debugging)
-      --kv.config string         Specify the TiKV instance configuration file (optional, for debugging)
-      --mode string              Specify the playground mode: 'tidb' (default) and 'tikv-slim'
-      --pd int                   Specify the number of PD instances (default: 1)
-      --pd.host host             Specify the listening address of PD
-      --pd.binpath string        Specify the PD instance binary path (optional, for debugging)
-      --pd.config string         Specify the PD instance configuration file (optional, for debugging)
-      --pump int                 Specify the number of Pump instances. If the value is not `0`, TiDB Binlog is enabled.
-      --pump.binpath string      Specify the location of the Pump binary files (optional, for debugging)
-      --pump.config string       Specify the Pump configuration file (optional, for debugging)
-      -T, --tag string           Specify a tag for playground
-      --ticdc int                Specify the number of TiCDC instances (default: 0)
-      --ticdc.binpath string     Specify the TiCDC instance binary path (optional, for debugging)
-      --ticdc.config string      Specify the TiCDC instance configuration file (optional, for debugging)
-      --tiflash int              Specify the number of TiFlash instances (default: 1)
-      --tiflash.binpath string   Specify the TiFlash instance binary path (optional, for debugging)
-      --tiflash.config string    Specify the TiFlash instance configuration file (optional, for debugging)
-      --tiflash.timeout int      Specify TiFlash maximum wait time in seconds for starting. 0 means no limit
-      -v, --version              Specify the version of playground
-      --without-monitor          Disable the monitoring function of Prometheus and Grafana. If you do not add this flag, the monitoring function is enabled by default.
+```shell
+tiup playground --help
 ```
 
 ## Examples
@@ -112,12 +80,12 @@ By default, only one instance is started for each TiDB, TiKV, and PD component. 
 tiup playground --db 3 --pd 3 --kv 3
 ```
 
-### Specify a tag when starting the TiDB cluster
+### Specify a tag when starting the TiDB cluster to store the data
 
 After you stop a TiDB cluster started using TiUP playground, all cluster data is cleaned up as well. To start a TiDB cluster using TiUP playground and ensure that the cluster data is not cleaned up automatically, you can specify a tag when starting the cluster. After specifying the tag, you can find the cluster data in the `~/.tiup/data` directory. Run the following command to specify a tag:
 
 ```shell
-tiup playground --tag <tagname>
+tiup playground --tag ${tag_name}
 ```
 
 For a cluster started in this way, the data files are retained after the cluster is stopped. You can use this tag to start the cluster next time so that you can use the data kept since the cluster was stopped.
@@ -145,10 +113,8 @@ Pid    Role     Uptime
 ---    ----     ------
 84518  pd       35m22.929404512s
 84519  tikv     35m22.927757153s
-84520  pump     35m22.92618275s
 86189  tidb     exited
 86526  tidb     34m28.293148663s
-86190  drainer  35m19.91349249s
 ```
 
 ## Scale out a cluster
@@ -166,3 +132,16 @@ You can specify a `pid` in the `tiup playground scale-in` command to scale in th
 ```shell
 tiup playground scale-in --pid 86526
 ```
+
+## Deploy PD microservices
+
+Starting from v8.2.0, [PD microservice mode](/pd-microservices.md) (experimental) can be deployed using TiUP. You can deploy the `tso` microservice and `scheduling` microservice for your cluster using TiUP Playground as follows:
+
+```shell
+tiup playground v8.5.0 --pd.mode ms --pd 3 --tso 2 --scheduling 2
+```
+
+- `--pd.mode`: setting it to `ms` means enabling the microservice mode for PD.
+- `--pd <num>`: specifies the number of APIs for PD microservices. It must be at least `1`.
+- `--tso <num>`: specifies the number of instances to be deployed for the `tso` microservice.
+- `--scheduling <num>`: specifies the number of instances to be deployed for the `scheduling` microservice.

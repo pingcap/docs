@@ -10,7 +10,7 @@ The `CLUSTER_LOAD` cluster load table provides the current load information of t
 
 > **Note:**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 {{< copyable "sql" >}}
 

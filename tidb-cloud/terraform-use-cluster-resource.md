@@ -11,9 +11,9 @@ In addition, you will also learn how to get the necessary information with the `
 
 The features of the `tidbcloud_cluster` resource include the following:
 
-- Create TiDB Serverless and TiDB Dedicated clusters.
-- Modify TiDB Dedicated clusters.
-- Delete TiDB Serverless and TiDB Dedicated clusters.
+- Create TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
+- Modify TiDB Cloud Dedicated clusters.
+- Delete TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
 
 ## Prerequisites
 
@@ -39,6 +39,7 @@ To view the information of all available projects, you can use the `tidbcloud_pr
    provider "tidbcloud" {
      public_key = "your_public_key"
      private_key = "your_private_key"
+     sync = true
    }
 
    data "tidbcloud_projects" "example_project" {
@@ -137,6 +138,7 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
     provider "tidbcloud" {
       public_key = "your_public_key"
       private_key = "your_private_key"
+      sync = true
     }
     data "tidbcloud_cluster_specs" "example_cluster_spec" {
     }
@@ -158,13 +160,6 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
         "cluster_type" = "DEDICATED"
         "region" = "eu-central-1"
         "tidb" = tolist([
-          {
-            "node_quantity_range" = {
-              "min" = 1
-              "step" = 1
-            }
-            "node_size" = "2C8G"
-          },
           {
             "node_quantity_range" = {
               "min" = 1
@@ -212,17 +207,6 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
           },
         ])
         "tikv" = tolist([
-          {
-            "node_quantity_range" = {
-              "min" = 3
-              "step" = 3
-            }
-            "node_size" = "2C8G"
-            "storage_size_gib_range" = {
-              "max" = 500
-              "min" = 200
-            }
-          },
           {
             "node_quantity_range" = {
               "min" = 3
@@ -285,11 +269,11 @@ In the results:
 
 > **Note:**
 >
-> Before you begin, make sure that you have set a Project CIDR in the TiDB Cloud console. For more information, see [Set a Project CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr).
+> Before you begin, make sure that you have set a CIDR in the TiDB Cloud console. For more information, see [Set a CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region).
 
 You can create a cluster using the `tidbcloud_cluster` resource.
 
-The following example shows how to create a TiDB Dedicated cluster.
+The following example shows how to create a TiDB Cloud Dedicated cluster.
 
 1. Create a directory for the cluster and enter it.
 
@@ -307,6 +291,7 @@ The following example shows how to create a TiDB Dedicated cluster.
    provider "tidbcloud" {
      public_key = "your_public_key"
      private_key = "your_private_key"
+     sync = true
    }
 
     resource "tidbcloud_cluster" "example_cluster" {
@@ -487,9 +472,9 @@ The following example shows how to create a TiDB Dedicated cluster.
 
 When the status is `AVAILABLE`, it indicates that your TiDB cluster is created and ready for use.
 
-## Modify a TiDB Dedicated cluster
+## Modify a TiDB Cloud Dedicated cluster
 
-For a TiDB Dedicated cluster, you can use Terraform to manage cluster resources as follows:
+For a TiDB Cloud Dedicated cluster, you can use Terraform to manage cluster resources as follows:
 
 - Add a TiFlash component to the cluster.
 - Scale the cluster.
@@ -622,7 +607,7 @@ You can scale a TiDB cluster when its status is `AVAILABLE`.
 
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the `components` configurations.
 
-    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3. You can [get this information from the cluster specifcation](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)), and one more node for TiFlash, you can edit the configurations as follows:
+    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3. You can [get this information from the cluster specification](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)), and one more node for TiFlash, you can edit the configurations as follows:
 
    ```
        components = {
@@ -845,7 +830,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 
 6. Wait for a moment, then use the `terraform refersh` command to update the state. The status will be changed to `AVAILABLE` finally.
 
-Now, you have created and managed a TiDB Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
+Now, you have created and managed a TiDB Cloud Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
 
 ## Import a cluster
 

@@ -1,11 +1,11 @@
 ---
-title: Pause or Resume a TiDB Dedicated Cluster
-summary: Learn how to pause or resume a TiDB Dedicated cluster.
+title: Pause or Resume a TiDB Cloud Dedicated Cluster
+summary: Learn how to pause or resume a TiDB Cloud Dedicated cluster.
 ---
 
-# Pause or Resume a TiDB Dedicated Cluster
+# Pause or Resume a TiDB Cloud Dedicated Cluster
 
-You can easily pause and resume a TiDB Dedicated cluster that is not in operation at all times in TiDB Cloud.
+You can easily pause and resume a TiDB Cloud Dedicated cluster that is not in operation at all times in TiDB Cloud.
 
 The pause does not affect your data stored in the cluster but only stops the collection of monitoring information and the consumption of computing resources. After the pause, you can resume your cluster at any time.
 
@@ -13,7 +13,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 > **Note:**
 >
-> You cannot pause a [TiDB Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-serverless).
+> You cannot pause a [TiDB Cloud Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
 
 ## Limitations
 
@@ -34,7 +34,7 @@ When a cluster is paused, note the following:
     - Node Storage Cost
     - Data Backup Cost
 
-- TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#automatic-backup) of the cluster.
+- TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
 
 To pause a cluster, take the following steps:
 
@@ -61,7 +61,7 @@ After a paused cluster is resumed, note the following:
 
 - TiDB Cloud resumes collecting the monitoring information of the cluster, and you can read data from or write data to the cluster.
 - TiDB Cloud resumes charging both compute and storage costs.
-- TiDB Cloud resumes [automatic backup](/tidb-cloud/backup-and-restore.md#automatic-backup) of the cluster.
+- TiDB Cloud resumes [automatic backup](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) of the cluster.
 
 To resume a paused cluster, take the following steps:
 

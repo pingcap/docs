@@ -11,13 +11,60 @@ This document describes various timeouts in TiDB to help you troubleshoot errors
 
 TiDB's transaction implementation uses the MVCC (Multiple Version Concurrency Control) mechanism. When the newly written data overwrites the old data, the old data will not be replaced, but kept together with the newly written data. The versions are distinguished by the timestamp. TiDB uses the mechanism of periodic Garbage Collection (GC) to clean up the old data that is no longer needed.
 
-By default, each MVCC version (consistency snapshots) is kept for 10 minutes. Transactions that take longer than 10 minutes to read will receive an error `GC life time is shorter than transaction duration`.
+- For TiDB versions earlier than v4.0:
 
-If you need longer read time, for example, when you are using **Dumpling** for full backups (**Dumpling** backs up consistent snapshots), you can adjust the value of `tikv_gc_life_time` in the `mysql.tidb` table in TiDB to increase the MVCC version retention time. Note that `tikv_gc_life_time` takes effect globally and immediately. Increasing the value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact TiKV's processing efficiency. So you need to change `tikv_gc_life_time` back to the previous setting in time after doing a full backup with **Dumpling**.
+    By default, each MVCC version (consistency snapshots) is kept for 10 minutes. Transactions that take longer than 10 minutes to read will receive an error `GC life time is shorter than transaction duration`.
+
+- For TiDB v4.0 and later versions:
+
+    For running transactions that do not exceed a duration of 24 hours, garbage collection (GC) are blocked during the transaction execution. The error `GC life time is shorter than transaction duration` does not occur.
+
+If you need longer read time temporarily in some cases, you can increase the retention time of MVCC versions:
+
+- For TiDB versions earlier than v5.0: adjust `tikv_gc_life_time` in the `mysql.tidb` table in TiDB.
+- For TiDB v5.0 and later versions: adjust the system variable [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50).
+
+Note that the system variable configuration takes effect globally and immediately. Increasing its value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact the performance of the TiDB cluster. So you need to change this variable back to the previous setting in time.
+
+<CustomContent platform="tidb">
+
+> **Tip:**
+>
+> Specifically, when Dumpling is exporting data from TiDB (less than 1 TB), if the TiDB version is v4.0.0 or later and Dumpling can access the PD address and the [`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md) table of the TiDB cluster, Dumpling automatically adjusts the GC safe point to block GC without affecting the original cluster.
+>
+> However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
+>
+> - The data size is very large (more than 1 TB).
+> - Dumpling cannot connect directly to PD, for example, the TiDB cluster is on TiDB Cloud or on Kubernetes that is separated from Dumpling.
+>
+> In such scenarios, you must manually extend the GC time in advance to avoid export failure due to GC during the export process.
+>
+> For more details, see [Manually set the TiDB GC time](/dumpling-overview.md#manually-set-the-tidb-gc-time).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Tip:**
+>
+> Specifically, when Dumpling is exporting data from TiDB (less than 1 TB), if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
+>
+> However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
+>
+> - The data size is very large (more than 1 TB).
+> - Dumpling cannot connect directly to PD, for example, the TiDB cluster is on TiDB Cloud or on Kubernetes that is separated from Dumpling.
+>
+> In such scenarios, you must manually extend the GC time in advance to avoid export failure due to GC during the export process.
+>
+> For more details, see [Manually set the TiDB GC time](https://docs.pingcap.com/tidb/stable/dumpling-overview#manually-set-the-tidb-gc-time).
+
+</CustomContent>
 
 For more information about GC, see [GC Overview](/garbage-collection-overview.md).
 
 ## Transaction timeout
+
+In scenarios where a transaction starts but is neither committed nor rolled back, you might need a finer-grained control and a shorter timeout to prevent prolonged lock holding.  In this case, you can use [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) (introduced in TiDB v7.6.0) to control the idle timeout for transactions in a user session.
 
 GC does not affect ongoing transactions. However, there is still an upper limit to the number of pessimistic transactions that can run, with a limit on the transaction timeout and a limit on the memory used by the transaction. You can modify the transaction timeout by `max-txn-ttl` under the `[performance]` category of the TiDB profile, `60` minutes by default.
 
@@ -41,3 +88,17 @@ However, in a real production environment, idle connections and indefinitely exe
 
 - `sessionVariables=wait_timeout=3600` (1 hour)
 - `sessionVariables=max_execution_time=300000` (5 minutes)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

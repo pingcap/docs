@@ -9,7 +9,7 @@ TiDB Cloud provides the console audit logging feature to help you track various 
 
 ## Prerequisites
 
-- You must be in the `Organization Owner` or `Organization Console Audit Admin` role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console. The `Organization Console Audit Admin` role is only visible upon request, so it is recommended that you use the `Organization Owner` role directly. If you need to use the `Organization Console Audit Admin` role, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for the Organization Console Audit Admin role" in the **Description** field and click **Send**. For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+- You must be in the `Organization Owner` or `Organization Console Audit Admin` role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console.
 - You can only enable and disable the console audit logging for your organization. You can only track the actions of users in your organization.
 - After the console audit logging is enabled, all event types of the TiDB Cloud console will be audited, and you cannot specify only auditing some of them.
 
@@ -121,7 +121,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | PauseCluster                   | Pause a cluster                                                                  |
 | ResumeCluster                  | Resume a cluster                                                                 |
 | ScaleCluster                   | Scale a cluster                                                                  |
-| DownloadTiDBClusterCA          | Download TiDB cluster CA certificate                                             |
+| DownloadTiDBClusterCA          | Download CA certificate                                             |
 | OpenWebSQLConsole              | Connect to a TiDB cluster through Web SQL                                        |
 | SetRootPassword                | Set the root password of a TiDB cluster                                          |
 | UpdateIPAccessList             | Update the IP access list of a TiDB cluster                                      |
@@ -147,12 +147,12 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | BindSupportPlan                | Bind a support plan                                                              |
 | CancelSupportPlan              | Cancel a support plan                                                            |
 | UpdateOrganizationName         | Update the organization name                                                     |
-| SetSpendLimit                  | Edit the spending limit of a TiDB Serverless cluster                             |
+| SetSpendLimit                  | Edit the spending limit of a TiDB Cloud Serverless scalable cluster                    |
 | UpdateMaintenanceWindow        | Modify maintenance window start time                                             |
 | DeferMaintenanceTask           | Defer a maintenance task                                                         |
-| CreateBranch                   | Create a TiDB Serverless branch                                                  |
-| DeleteBranch                   | Delete a TiDB Serverless branch                                                  |
-| SetBranchRootPassword          | Set root password for a TiDB Serverless branch                                   |
+| CreateBranch                   | Create a TiDB Cloud Serverless branch                                                  |
+| DeleteBranch                   | Delete a TiDB Cloud Serverless branch                                                  |
+| SetBranchRootPassword          | Set root password for a TiDB Cloud Serverless branch                                   |
 | ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
 | DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
 

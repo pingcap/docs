@@ -15,7 +15,7 @@ Since TiDB v5.1, TiDB supports the CTE of the ANSI SQL99 standard and recursion.
 
 ## Basic use
 
-A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can apply the `WITH` statement to use CTE.
+A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can apply the [`WITH`](/sql-statements/sql-statement-with.md) statement to use CTE.
 
 Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
 
@@ -214,3 +214,17 @@ The result is as follows:
 ## Read more
 
 - [WITH](/sql-statements/sql-statement-with.md)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

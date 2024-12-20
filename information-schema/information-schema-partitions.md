@@ -5,7 +5,7 @@ summary: Learn the `PARTITIONS` INFORMATION_SCHEMA table.
 
 # PARTITIONS
 
-The `PARTITIONS` table provides information about partitioned tables.
+The `PARTITIONS` table provides information about [partitioned tables](/partitioned-table.md).
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -115,3 +115,7 @@ SUBPARTITION_ORDINAL_POSITION: NULL
    TIDB_PLACEMENT_POLICY_NAME: NULL
 2 rows in set (0.00 sec)
 ```
+
+## See also
+
+- [Explain statements using partitions](/explain-partitions.md)

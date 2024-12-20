@@ -11,18 +11,18 @@ This document introduces how to use the OpenAPI Specification of a [Data App](/t
 
 Before using OpenAPI Specification with Next.js, make sure that you have the following:
 
-- A TiDB cluster. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- A TiDB cluster. For more information, see [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 - [Node.js](https://nodejs.org/en/download)
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [yarn](https://yarnpkg.com/getting-started/install)
 
-This document uses a TiDB Serverless cluster as an example.
+This document uses a TiDB Cloud Serverless cluster as an example.
 
 ## Step 1. Prepare data
 
 To begin with, create a table `test.repository` in your TiDB cluster and insert some sample data into it. The following example inserts some open source projects developed by PingCAP as data for demonstration purposes.
 
-To execute the SQL statements, you can use [Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://tidbcloud.com).
+To execute the SQL statements, you can use [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) in the [TiDB Cloud console](https://tidbcloud.com).
 
 ```sql
 -- Select the database
@@ -182,7 +182,7 @@ You can use the generated client code to develop your Next.js application.
 
     > **Note:**
     >
-    > If the linked clusters of your Data App are hosted in different regions, you wil see multiple items in the `servers` section of the downloaded OpenAPI Specification file. In this case, you also need to configure the endpoint path in the `config` object as follows:
+    > If the linked clusters of your Data App are hosted in different regions, you will see multiple items in the `servers` section of the downloaded OpenAPI Specification file. In this case, you also need to configure the endpoint path in the `config` object as follows:
     >
     >  ```js
     >  const config = new Configuration({
@@ -206,4 +206,4 @@ To preview your application in a local development server, run the following com
 yarn dev
 ```
 
-You can then open <http://localhost:3000> in your browser and see the data from the `test.repository` database displayed on the page.
+You can then open [http://localhost:3000](http://localhost:3000) in your browser and see the data from the `test.repository` database displayed on the page.

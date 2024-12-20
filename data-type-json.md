@@ -4,7 +4,7 @@ summary: Learn about the JSON data type in TiDB.
 aliases: ['/docs/dev/data-type-json/','/docs/dev/reference/sql/data-types/json/']
 ---
 
-# JSON Type
+# JSON Data Type
 
 TiDB supports the `JSON` (JavaScript Object Notation) data type, which is useful for storing semi-structured data. The `JSON` data type provides the following advantages over storing `JSON`-format strings in a string column:
 
@@ -26,10 +26,31 @@ SELECT id FROM city WHERE population >= 100;
 
 For more information, see [JSON Functions](/functions-and-operators/json-functions.md) and [Generated Columns](/generated-columns.md).
 
+## JSON value types
+
+The values inside a JSON document have types. This is visible in the output of [`JSON_TYPE`()](/functions-and-operators/json-functions/json-functions-return.md#json_type).
+
+| Type             | Example                        |
+|------------------|--------------------------------|
+| ARRAY            | `[]`                           |
+| BIT              |                                |
+| BLOB             | `0x616263`                     |
+| BOOLEAN          | `true`                         |
+| DATE             | `"2025-06-14"`                 |
+| DATETIME         | `"2025-06-14 09:05:10.000000"` |
+| DOUBLE           | `1.14`                         |
+| INTEGER          | `5`                            |
+| NULL             | `null`                         |
+| OBJECT           | `{}`                           |
+| OPAQUE           |                                |
+| STRING           | `"foobar"`                     |
+| TIME             | `"09:10:00.000000"`            |
+| UNSIGNED INTEGER | `9223372036854776000`          |
+
 ## Restrictions
 
 - Currently, TiDB only supports pushing down limited `JSON` functions to TiFlash. For more information, see [Push-down expressions](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions).
-- TiDB Backup & Restore (BR) versions earlier than v6.3.0 do not support recovering data containing JSON columns. No version of BR supports recovering data containing JSON columns to TiDB clusters earlier than v6.3.0.
+- TiDB Backup & Restore (BR) changes how JSON column data is encoded in v6.3.0. Therefore, it is not recommended to use BR to restore data containing JSON columns to a TiDB cluster earlier than v6.3.0.
 - Do not use any replication tool to replicate data containing non-standard `JSON` data types, such as `DATE`, `DATETIME`, and `TIME`.
 
 ## MySQL compatibility

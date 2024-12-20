@@ -23,7 +23,7 @@ For more information about how to modify the value of a system variable, see [Sy
 
 > **Note:**
 >
-> This section is only applicable to TiDB Self-Hosted. TiDB Cloud does not have a GC I/O limit by default.
+> This section is only applicable to TiDB Self-Managed. TiDB Cloud does not have a GC I/O limit by default.
 
 </CustomContent>
 
@@ -61,7 +61,7 @@ Based on the `DISTRIBUTED` GC mode, the mechanism of GC in Compaction Filter use
 
 > **Note:**
 >
-> The following examples of modifying TiKV configurations are only applicable to TiDB Self-Hosted. For TiDB Cloud, the mechanism of GC in Compaction Filter is enabled by default.
+> The following examples of modifying TiKV configurations are only applicable to TiDB Self-Managed. For TiDB Cloud, the mechanism of GC in Compaction Filter is enabled by default.
 
 </CustomContent>
 

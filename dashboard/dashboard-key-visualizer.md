@@ -1,6 +1,6 @@
 ---
 title: Key Visualizer Page
-summary: Learn how to use Key Visualizer to monitor traffic.
+summary: TiDB Dashboard's Key Visualizer page analyzes and troubleshoots traffic hotspots in the TiDB cluster. It visually shows traffic changes over time, and allows users to zoom in on specific time periods or region ranges. The page also provides settings to adjust brightness, select metrics, and refresh the heatmap. It identifies common heatmap types and offers solutions to address hotspot issues.
 aliases: ['/docs/dev/dashboard/dashboard-key-visualizer/','/docs/dev/key-visualizer-monitoring-tool/']
 ---
 
@@ -38,7 +38,7 @@ This section introduces the basic concepts that relate to Key Visualizer.
 
 In a TiDB cluster, the stored data is distributed among TiKV instances. Logically, TiKV is a huge and orderly key-value map. The whole key-value space is divided into many segments and each segment consists of a series of adjacent keys. Such segment is called a `Region`.
 
-For detailed introduction of Region, refer to [TiDB Internal (I) - Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/).
+For detailed introduction of Region, refer to [TiDB Internal (I) - Data Storage](https://www.pingcap.com/blog/tidb-internal-data-storage/).
 
 ### Hotspot
 

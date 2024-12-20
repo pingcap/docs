@@ -86,13 +86,14 @@ For example, to filter transactions with a long lock-waiting time using the `whe
 {{< copyable "sql" >}}
 
 ```sql
-select trx.* from information_schema.data_lock_waits as l left join information_schema.tidb_trx as trx on l.trx_id = trx.id where l.key = "7480000000000000415F728000000000000001"\G
+select trx.* from information_schema.data_lock_waits as l left join information_schema.cluster_tidb_trx as trx on l.trx_id = trx.id where l.key = "7480000000000000415F728000000000000001"\G
 ```
 
 The following is an example output:
 
 ```sql
 *************************** 1. row ***************************
+               INSTANCE: 127.0.0.1:10080
                      ID: 426831815660273668
              START_TIME: 2021-08-06 07:16:00.081000
      CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
@@ -106,6 +107,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
                      DB: test
         ALL_SQL_DIGESTS: ["0fdc781f19da1c6078c9de7eadef8a307889c001e05f107847bee4cfc8f3cdf3","06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7"]
 *************************** 2. row ***************************
+               INSTANCE: 127.0.0.1:10080
                      ID: 426831818019569665
              START_TIME: 2021-08-06 07:16:09.081000
      CURRENT_SQL_DIGEST: 06da614b93e62713bd282d4685fc5b88d688337f36e88fe55871726ce0eb80d7
@@ -156,6 +158,12 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 In the above query, the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function is used on the `ALL_SQL_DIGESTS` column of the `CLUSTER_TIDB_TRX` table. This function tries to convert this column (the value is a set of SQL digests) to the normalized SQL statements, which improves readability.
 
 If the `start_ts` of the current transaction is unknown, you can try to find it out from the information in the `TIDB_TRX` / `CLUSTER_TIDB_TRX` table or in the [`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md) table.
+
+### Metadata locks
+
+If a session is waiting on a schema change, this can be because of a metadata lock.
+
+See [Metadata Lock](/metadata-lock.md) for more information.
 
 ## Troubleshoot optimistic lock conflicts
 

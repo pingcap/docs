@@ -74,7 +74,7 @@ Slow query basics:
 * `Succ`: Whether a statement is executed successfully.
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 * `Plan`: The execution plan of a statement. Execute the `SELECT tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
-* `Binary_plan`: The execution plan of a binary-encoded statement. Execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific execution plan. The `Plan` and `Binary_plan` fields carry the same information. However, the format of execution plans parsed from the two fields are different.
+* `Binary_plan`: The execution plan of a binary-encoded statement. Execute the [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan) statement to parse the specific execution plan. The `Plan` and `Binary_plan` fields carry the same information. However, the format of execution plans parsed from the two fields are different.
 * `Prepared`: Whether this statement is a `Prepare` or `Execute` request or not.
 * `Plan_from_cache`: Whether this statement hits the execution plan cache.
 * `Plan_from_binding`: Whether this statement uses the bound execution plans.
@@ -101,7 +101,7 @@ The following fields are related to transaction execution:
 * `Write_keys`: The count of keys that the transaction writes to the Write CF in TiKV.
 * `Write_size`: The total size of the keys or values to be written when the transaction commits.
 * `Prewrite_region`: The number of TiKV Regions involved in the first phase (prewrite) of the two-phase transaction commit. Each Region triggers a remote procedure call.
-* `Wait_prewrite_binlog_time`: The time used to write binlogs when a transaction is committed.
+* `Wait_prewrite_binlog_time`: The time used to write binlogs when a transaction is committed. Starting from v8.4.0, TiDB Binlog is removed, and this field has no value.
 * `Resolve_lock_time`: The time to resolve or wait for the lock to be expired after a lock is encountered during a transaction commit.
 
 Memory usage fields:
@@ -160,6 +160,13 @@ TiKV Coprocessor Task fields:
 * `tiflashServerBusy`: The backoff caused by that the TiFlash load is too high to handle new requests.
 * `tikvDiskFull`: The backoff caused by that the TiKV disk is full.
 * `txnLockFast`: The backoff caused by that locks are encountered during data reads.
+
+Fields related to Resource Control:
+
+* `Resource_group`: the resource group that the statement is bound to.
+* `Request_unit_read`: the total read RUs consumed by the statement.
+* `Request_unit_write`: the total write RUs consumed by the statement.
+* `Time_queued_by_rc`: the total time that the statement waits for available resources.
 
 ## Related system variables
 
@@ -607,7 +614,7 @@ The following table shows output details:
 | details | The details of the SQL execution |
 | succ | Whether the SQL statement is executed successfully. `1` means success and `0` means failure. |
 | conn_id | The connection ID for the session |
-| transaction_ts | The `commit ts` for a transaction commit |
+| transaction_ts | The `start ts` of the transaction |
 | user | The user name for the execution of the statement |
 | db | The database involved when the statement is executed |
 | table_ids | The ID of the table involved when the SQL statement is executed |

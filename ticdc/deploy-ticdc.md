@@ -9,12 +9,7 @@ This document describes how to deploy and maintain a TiCDC cluster, including th
 
 ## Software and hardware recommendations
 
-In production environments, the recommendations of software and hardware for TiCDC are as follows:
-
-| Linux OS       | Version         |
-| :----------------------- | :----------: |
-| Red Hat Enterprise Linux | 7.3 or later versions   |
-| CentOS                   | 7.3 or later versions   |
+In production environments, the recommendations of hardware for TiCDC are as follows:
 
 | CPU | Memory | Disk | Network | Number of TiCDC cluster instances (minimum requirements for production environment) |
 | :--- | :--- | :--- | :--- | :--- |
@@ -95,7 +90,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **Note:**
 >
-> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v7.5.0.
+> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v8.5.0.
 
 ### Upgrade cautions
 
@@ -128,8 +123,6 @@ This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-co
       pd: {}
       tiflash: {}
       tiflash-learner: {}
-      pump: {}
-      drainer: {}
       cdc:
         gc-ttl: 172800
     ```
@@ -152,10 +145,10 @@ See [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
 
 ## View TiCDC status using the command-line tool
 
-Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v7.5.0`:
+Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v8.5.0`:
 
 ```shell
-tiup ctl:v<CLUSTER_VERSION> cdc capture list --server=http://10.0.10.25:8300
+tiup cdc:v<CLUSTER_VERSION> cli capture list --server=http://10.0.10.25:8300
 ```
 
 ```shell

@@ -152,7 +152,17 @@ Flags:
     tiup bench tpch --sf=1 prepare
     ```
 
-2. Run the TPC-H test by executing one of the following commands:
+2. Collect statistics:
+
+    For the OLAP scenarios, to ensure that the TiDB optimizer can generate the optimal execution plan, execute the following SQL statements to collect statistics in advance. **Be sure to set [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830) to `ALL`, otherwise collecting statistics can result in a significant drop in query performance.**
+
+    {{< copyable "shell-regular" >}}
+
+    ```sql
+    set global tidb_analyze_column_options='ALL';
+    ```
+
+3. Run the TPC-H test by executing one of the following commands:
 
     - If you check the result, run this command:
 
@@ -170,7 +180,7 @@ Flags:
         tiup bench tpch --count=22 --sf=1 run
         ```
 
-3. Clean up data:
+4. Clean up data:
 
     {{< copyable "shell-regular" >}}
 

@@ -14,7 +14,7 @@ To experiment with SQL and test out TiDB compatibility with MySQL queries, you c
 
 </CustomContent>
 
-This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
+This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
 
 ## Category
 
@@ -100,7 +100,7 @@ For example, to create a table named `person` which includes fields such as numb
 
 ```sql
 CREATE TABLE person (
-    id INT(11),
+    id INT,
     name VARCHAR(255),
     birthday DATE
     );

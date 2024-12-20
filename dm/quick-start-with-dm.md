@@ -6,7 +6,11 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
 # Quick Start Guide for TiDB Data Migration
 
-This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration](https://github.com/pingcap/dm) (DM). This guide is a quick demo of DM features and is not recommended for any production environment.
+This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration (DM)](/dm/dm-overview.md). This guide is a quick demo of DM features and is not recommended for any production environment.
+
+> **Note:**
+>
+> If your target machine's operating system supports SELinux, ensure that SELinux is **disabled**.
 
 ## Step 1: Deploy a DM cluster
 
@@ -48,7 +52,7 @@ You can use one or multiple MySQL instances as an upstream data source.
     from:
       host: "127.0.0.1"
       user: "root"
-      password: "fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg="  # encrypt with `tiup dmctl --encrypt "123456"`
+      password: "fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg="
       port: 3306
     ```
 

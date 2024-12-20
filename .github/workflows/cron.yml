@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Download translator repo
         with:
           repository: "shczhen/markdown-translator"
           path: "markdown-translator"
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Download docs repo and specified branch
         with:
-          ref: "i18n-ja-release-7.1"
+          ref: "i18n-ja-release-8.1"
           path: "docs"
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         name: Setup node 18
         with:
           node-version: 18
@@ -66,17 +66,17 @@ jobs:
 #     runs-on: ubuntu-latest
 
 #     steps:
-#       - uses: actions/checkout@v3
+#       - uses: actions/checkout@v4
 #         name: Download translator repo
 #         with:
 #           repository: "shczhen/markdown-translator"
 #           path: "markdown-translator"
-#       - uses: actions/checkout@v3
+#       - uses: actions/checkout@v4
 #         name: Download docs repo and specified branch
 #         with:
 #           ref: "i18n-ja-release-7.1"
 #           path: "docs"
-#       - uses: actions/setup-node@v3
+#       - uses: actions/setup-node@v4
 #         name: Setup node 18
 #         with:
 #           node-version: 18
@@ -130,4 +130,4 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: token ${{ secrets.DOCS_STAGING }}" \
           https://api.github.com/repos/pingcap/docs-staging/actions/workflows/update.yml/dispatches \
-          -d '{"ref":"main","inputs":{"full": "false", "repo":"${{ github.repository }}","branch":"i18n-ja-release-7.1"}}'
+          -d '{"ref":"main","inputs":{"full": "false", "repo":"${{ github.repository }}","branch":"i18n-ja-release-8.1"}}'

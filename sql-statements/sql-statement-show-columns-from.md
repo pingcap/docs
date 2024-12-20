@@ -16,101 +16,73 @@ The statements `SHOW [FULL] FIELDS FROM <table_name>`, `DESC <table_name>`, `DES
 
 ## Synopsis
 
-**ShowStmt:**
+```ebnf+diagram
+ShowColumnsFromStmt ::=
+    "SHOW" "FULL"? ("COLUMNS" | "FIELDS") ("FROM" | "IN") TableName ( ("FROM" | "IN") SchemaName)? ShowLikeOrWhere?
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
+TableName ::=
+    (Identifier ".")? Identifier
 
-**ShowColumnsFilterable:**
-
-![ShowColumnsFilterable](/media/sqlgram/ShowColumnsFilterable.png)
-
-**OptFull:**
-
-![OptFull](/media/sqlgram/OptFull.png)
-
-**FieldsOrColumns:**
-
-![FieldsOrColumns](/media/sqlgram/FieldsOrColumns.png)
-
-**ShowTableAliasOpt:**
-
-![ShowTableAliasOpt](/media/sqlgram/ShowTableAliasOpt.png)
-
-**FromOrIn:**
-
-![FromOrIn](/media/sqlgram/FromOrIn.png)
-
-**TableName:**
-
-![TableName](/media/sqlgram/TableName.png)
-
-**ShowDatabaseNameOpt:**
-
-![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
-
-**DBName:**
-
-![DBName](/media/sqlgram/DBName.png)
-
-**ShowLikeOrWhereOpt:**
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
 ```sql
-mysql> create view v1 as select 1;
+mysql> CREATE VIEW v1 AS SELECT 1;
 Query OK, 0 rows affected (0.11 sec)
 
-mysql> show columns from v1;
-+-------+-----------+------+------+---------+-------+
-| Field | Type      | Null | Key  | Default | Extra |
-+-------+-----------+------+------+---------+-------+
-| 1     | bigint(1) | YES  |      | NULL    |       |
+mysql> SHOW COLUMNS FROM v1;
++-------+--------+------+------+---------+-------+
+| Field | Type   | Null | Key  | Default | Extra |
++-------+--------+------+------+---------+-------+
+| 1     | bigint | YES  |      | NULL    |       |
++-------+--------+------+------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> DESC v1;
++-------+--------+------+------+---------+-------+
+| Field | Type   | Null | Key  | Default | Extra |
++-------+--------+------+------+---------+-------+
+| 1     | bigint | YES  |      | NULL    |       |
++-------+--------+------+------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> DESCRIBE v1;
++-------+--------+------+------+---------+-------+
+| Field | Type   | Null | Key  | Default | Extra |
++-------+--------+------+------+---------+-------+
+| 1     | bigint | YES  |      | NULL    |       |
 +-------+-----------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
-mysql> desc v1;
-+-------+-----------+------+------+---------+-------+
-| Field | Type      | Null | Key  | Default | Extra |
-+-------+-----------+------+------+---------+-------+
-| 1     | bigint(1) | YES  |      | NULL    |       |
-+-------+-----------+------+------+---------+-------+
+mysql> EXPLAIN v1;
++-------+--------+------+------+---------+-------+
+| Field | Type   | Null | Key  | Default | Extra |
++-------+--------+------+------+---------+-------+
+| 1     | bigint | YES  |      | NULL    |       |
++-------+--------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
-mysql> describe v1;
-+-------+-----------+------+------+---------+-------+
-| Field | Type      | Null | Key  | Default | Extra |
-+-------+-----------+------+------+---------+-------+
-| 1     | bigint(1) | YES  |      | NULL    |       |
-+-------+-----------+------+------+---------+-------+
+mysql> SHOW FIELDS FROM v1;
++-------+--------+------+------+---------+-------+
+| Field | Type   | Null | Key  | Default | Extra |
++-------+--------+------+------+---------+-------+
+| 1     | bigint | YES  |      | NULL    |       |
++-------+--------+------+------+---------+-------+
 1 row in set (0.00 sec)
 
-mysql> explain v1;
-+-------+-----------+------+------+---------+-------+
-| Field | Type      | Null | Key  | Default | Extra |
-+-------+-----------+------+------+---------+-------+
-| 1     | bigint(1) | YES  |      | NULL    |       |
-+-------+-----------+------+------+---------+-------+
+mysql> SHOW FULL COLUMNS FROM v1;
++-------+--------+-----------+------+------+---------+-------+---------------------------------+---------+
+| Field | Type   | Collation | Null | Key  | Default | Extra | Privileges                      | Comment |
++-------+--------+-----------+------+------+---------+-------+---------------------------------+---------+
+| 1     | bigint | NULL      | YES  |      | NULL    |       | select,insert,update,references |         |
++-------+--------+-----------+------+------+---------+-------+---------------------------------+---------+
 1 row in set (0.00 sec)
 
-mysql> show fields from v1;
-+-------+-----------+------+------+---------+-------+
-| Field | Type      | Null | Key  | Default | Extra |
-+-------+-----------+------+------+---------+-------+
-| 1     | bigint(1) | YES  |      | NULL    |       |
-+-------+-----------+------+------+---------+-------+
-1 row in set (0.00 sec)
-
-mysql> show full columns from v1;
-+-------+-----------+-----------+------+------+---------+-------+---------------------------------+---------+
-| Field | Type      | Collation | Null | Key  | Default | Extra | Privileges                      | Comment |
-+-------+-----------+-----------+------+------+---------+-------+---------------------------------+---------+
-| 1     | bigint(1) | NULL      | YES  |      | NULL    |       | select,insert,update,references |         |
-+-------+-----------+-----------+------+------+---------+-------+---------------------------------+---------+
-1 row in set (0.00 sec)
-
-mysql> show full columns from mysql.user;
+mysql> SHOW FULL COLUMNS FROM mysql.user;
 +------------------------+---------------+-------------+------+------+---------+-------+---------------------------------+---------+
 | Field                  | Type          | Collation   | Null | Key  | Default | Extra | Privileges                      | Comment |
 +------------------------+---------------+-------------+------+------+---------+-------+---------------------------------+---------+

@@ -11,7 +11,7 @@ This document describes how to create a database using SQL and various programmi
 
 Before creating a database, do the following:
 
-- [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 
 ## What is database
@@ -80,3 +80,17 @@ The following is an example output:
 ## Next step
 
 After creating a database, you can add **tables** to it. For more information, see [Create a Table](/develop/dev-guide-create-table.md).
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

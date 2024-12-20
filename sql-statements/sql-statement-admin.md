@@ -38,21 +38,16 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
 | [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
 | [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
-| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)      | Shows information that will be reported back to PingCAP as part of the telemetry feature. |
 
 </CustomContent>
 
 ## `ADMIN RELOAD` statement
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN RELOAD expr_pushdown_blacklist;
 ```
 
 The above statement is used to reload the blocklist pushed down by the expression.
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN RELOAD opt_rule_blacklist;
@@ -64,7 +59,7 @@ The above statement is used to reload the blocklist of logic optimization rules.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
@@ -80,15 +75,11 @@ The above statement is used to disable the `plugin_name` plugin.
 
 ## `ADMIN BINDINGS` related statement
 
-{{< copyable "sql" >}}
-
 ```sql
 ADMIN FLUSH BINDINGS;
 ```
 
 The above statement is used to persist SQL Plan binding information.
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN CAPTURE BINDINGS;
@@ -96,15 +87,11 @@ ADMIN CAPTURE BINDINGS;
 
 The above statement can generate the binding of SQL Plan from the `SELECT` statement that occurs more than once.
 
-{{< copyable "sql" >}}
-
 ```sql
 ADMIN EVOLVE BINDINGS;
 ```
 
 After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN RELOAD BINDINGS;
@@ -123,8 +110,6 @@ The above statement is used to reload SQL Plan binding information.
 </CustomContent>
 
 To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`:
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
@@ -148,7 +133,7 @@ The above statement is used to view the details of some special columns of a tab
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ```sql
 ADMIN SHOW SLOW RECENT N;
@@ -168,14 +153,56 @@ For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admi
 
 ```ebnf+diagram
 AdminStmt ::=
-    'ADMIN' ( 'SHOW' ( 'DDL' ( 'JOBS' Int64Num? WhereClauseOptional | 'JOB' 'QUERIES' NumList )? | TableName 'NEXT_ROW_ID' | 'SLOW' AdminShowSlow ) | 'CHECK' ( 'TABLE' TableNameList | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? ) | 'RECOVER' 'INDEX' TableName Identifier | 'CLEANUP' ( 'INDEX' TableName Identifier | 'TABLE' 'LOCK' TableNameList ) | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList | 'RELOAD' ( 'EXPR_PUSHDOWN_BLACKLIST' | 'OPT_RULE_BLACKLIST' | 'BINDINGS' ) | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList | 'REPAIR' 'TABLE' TableName CreateTableStmt | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS' )
+    'ADMIN' ( 
+        'SHOW' ( 
+            'DDL' ( 
+                'JOBS' Int64Num? WhereClauseOptional 
+                | 'JOB' 'QUERIES' (NumList | AdminStmtLimitOpt)
+            )? 
+            | TableName 'NEXT_ROW_ID' 
+            | 'SLOW' AdminShowSlow 
+            | 'BDR' 'ROLE'
+        ) 
+        | 'CHECK' ( 
+            'TABLE' TableNameList 
+            | 'INDEX' TableName Identifier ( HandleRange ( ',' HandleRange )* )? 
+        ) 
+        | 'RECOVER' 'INDEX' TableName Identifier 
+        | 'CLEANUP' ( 
+            'INDEX' TableName Identifier 
+            | 'TABLE' 'LOCK' TableNameList ) 
+        | 'CHECKSUM' 'TABLE' TableNameList | 'CANCEL' 'DDL' 'JOBS' NumList 
+        | ( 'CANCEL' | 'PAUSE' | 'RESUME' ) 'DDL' 'JOBS' NumList
+        | 'RELOAD' (
+            'EXPR_PUSHDOWN_BLACKLIST' 
+            | 'OPT_RULE_BLACKLIST' 
+            | 'BINDINGS'
+            | 'STATS_EXTENDED'
+            | 'STATISTICS'
+        ) 
+        | 'PLUGINS' ( 'ENABLE' | 'DISABLE' ) PluginNameList 
+        | 'REPAIR' 'TABLE' TableName CreateTableStmt 
+        | ( 'FLUSH' | 'CAPTURE' | 'EVOLVE' ) 'BINDINGS'
+        | 'FLUSH' ('SESSION' | 'INSTANCE') 'PLAN_CACHE'
+        | 'SET' 'BDR' 'ROLE' ( 'PRIMARY' | 'SECONDARY' )
+        | 'UNSET' 'BDR' 'ROLE'
+    )
+
+NumList ::=
+    Int64Num ( ',' Int64Num )*
+
+AdminStmtLimitOpt ::=
+    'LIMIT' LengthNum
+|    'LIMIT' LengthNum ',' LengthNum
+|    'LIMIT' LengthNum 'OFFSET' LengthNum
+
+TableNameList ::=
+    TableName ( ',' TableName )*
 ```
 
 ## Examples
 
 Run the following command to view the last 10 completed DDL jobs in the currently running DDL job queue. When `NUM` is not specified, only the last 10 completed DDL jobs is presented by default.
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -200,8 +227,6 @@ ADMIN SHOW DDL JOBS;
 ```
 
 Run the following command to view the last 5 completed DDL jobs in the currently running DDL job queue:
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN SHOW DDL JOBS 5;
@@ -237,8 +262,6 @@ ADMIN SHOW t NEXT_ROW_ID;
 ```
 
 Run the following command to view the uncompleted DDL jobs in the test database. The results include the DDL jobs that are running and the last 5 DDL jobs that are completed but failed.
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';

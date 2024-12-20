@@ -40,13 +40,13 @@ You can use `LOCAL` to specify data files on the client to be imported, where th
 
 If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud. 
 
-- The following is an example connection string for TiDB Serverless:
+- The following is an example connection string for TiDB Cloud Serverless:
 
     ```
     mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
     ```
 
-- The following is an example connection string for TiDB Dedicated:
+- The following is an example connection string for TiDB Cloud Dedicated:
 
     ```
     mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
@@ -153,11 +153,16 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 
 > **Note:**
 >
-> - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows.
-> - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default.
-> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`. Note that starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on the `LOAD DATA` statement.
-> - No matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
-> - The `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
+> - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows, which cannot be configured.
+> - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default. But if you need the `LOAD DATA` statement to commit every fixed number of rows, you can set [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to the desired number of rows.
+> - Starting from TiDB v7.0.0, `tidb_dml_batch_size` no longer takes effect on `LOAD DATA`, and TiDB commits all rows in one transaction.
+> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file.
+> - For versions earlier than TiDB v7.6.0, no matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
+> - For versions earlier than TiDB v7.6.0, the `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
+> - Starting from v7.6.0, TiDB processes `LOAD DATA` in transactions in the same way as other DML statements:
+>     - The `LOAD DATA` statement does not commit the current transaction or start a new transaction.
+>     - The `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction).
+>     - The `LOAD DATA` statement in a transaction can be rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in the transaction.
 
 </CustomContent>
 
@@ -165,12 +170,16 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 
 > **Note:**
 >
-> - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows.
-> - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default.
-> - Starting from TiDB v7.0.0, the number of rows to be committed in a batch is controlled by the `WITH batch_size=<number>` parameter of the `LOAD DATA` statement, which defaults to 1000 rows per commit.
-> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. To resolve this error, you can restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
-> - No matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
-> - The `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
+> - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows, which cannot be configured.
+> - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default. But if you need the `LOAD DATA` statement to commit every fixed number of rows, you can set [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to the desired number of rows.
+> - Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on `LOAD DATA`, and TiDB commits all rows in one transaction.
+> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. To resolve this error, you can contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to increase the [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) value.
+> - For versions earlier than TiDB v7.6.0, no matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
+> - For versions earlier than TiDB v7.6.0, the `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
+> - Starting from v7.6.0, TiDB processes `LOAD DATA` in transactions in the same way as other DML statements:
+>     - The `LOAD DATA` statement does not commit the current transaction or start a new transaction.
+>     - The `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction).
+>     - The `LOAD DATA` statement in a transaction can be rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in the transaction.
 
 </CustomContent>
 

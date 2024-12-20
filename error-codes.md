@@ -10,7 +10,7 @@ This document describes the problems encountered during the use of TiDB and prov
 
 ## Error codes
 
-TiDB is compatible with the error codes in MySQL, and in most cases returns the same error code as MySQL. For a list of error codes for MySQL, see [MySQL 5.7 Error Message Reference](https://dev.mysql.com/doc/mysql-errors/5.7/en/). In addition, TiDB has the following unique error codes:
+TiDB is compatible with the error codes in MySQL, and in most cases returns the same error code as MySQL. For a list of error codes for MySQL, see [MySQL 8.0 Error Message Reference](https://dev.mysql.com/doc/mysql-errors/8.0/en/). In addition, TiDB has the following unique error codes:
 
 > **Note:**
 >
@@ -90,7 +90,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The single Key-Value pair being written is too large. The largest single Key-Value pair supported in TiDB is 6 MB by default.
 
-    If a pair exceeds this limit, you need to properly adjust the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration value to relax the limit.
+    If a pair exceeds this limit, you need to properly adjust the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) configuration value to relax the limit.
 
 * Error Number: 8026
 
@@ -432,9 +432,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8216
 
-    The usage of automatic random columns is incorrect.
+    The usage of the `AUTO_RANDOM` columns is incorrect.
 
-    See [auto random](/auto-random.md) to modify.
+    See [`AUTO_RANDOM`](/auto-random.md) to modify.
 
 * Error Number: 8223
 
@@ -464,7 +464,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8228
 
-    Unsupported types are specified when using `setval` on Sequence.
+    Unsupported types are specified when using `SETVAL` on Sequence.
 
     See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#examples) to find the example of the function.
 
@@ -526,9 +526,13 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     DDL is paused by `ADMIN PAUSE` and cannot be paused again.
 
+* Error Number: 8263
+
+    This DDL cannot be executed under a specific BDR role. Make sure that the cluster is in [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). If the cluster is not in bidirectional replication, you can use `ADMIN UNSET BDR ROLE;` to make DDL normal.
+
 * Error Number: 9001
 
-    The complete error message: `ERROR 9001 (HY000): PD Server Timeout`
+    The complete error message: `ERROR 9001 (HY000): PD server timeout`
 
     The PD request timed out.
 
@@ -536,7 +540,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9002
 
-    The complete error message: `ERROR 9002 (HY000): TiKV Server Timeout`
+    The complete error message: `ERROR 9002 (HY000): TiKV server timeout`
 
     The TiKV request timed out.
 

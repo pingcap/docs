@@ -12,7 +12,7 @@ You can dynamically update the configuration of components (including TiDB, TiKV
 
 > **Note:**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/). For TiDB Cloud, you need to contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to modify the configurations.
+> This feature is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/). For TiDB Cloud, you need to contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to modify the configurations.
 
 ## Common Operations
 
@@ -135,6 +135,7 @@ The following TiKV configuration items can be modified dynamically:
 | `raftstore.raft-max-size-per-msg` | The soft limit on the size of a single message packet that is allowed to be generated |
 | `raftstore.raft-entry-max-size` | The hard limit on the maximum size of a single Raft log |
 | `raftstore.raft-entry-cache-life-time` | The maximum remaining time allowed for the log cache in memory |
+| `raftstore.max-apply-unpersisted-log-limit` | The maximum number of committed but not persisted Raft logs that can be applied |
 | `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
 | `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
 | `raftstore.region-compact-check-interval` | The time interval at which to check whether it is necessary to manually trigger RocksDB compaction |
@@ -164,8 +165,11 @@ The following TiKV configuration items can be modified dynamically:
 | `raftstore.apply-max-batch-size` | Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch. |
 | `raftstore.store-max-batch-size` | Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch. |
 | `raftstore.store-io-pool-size` | The number of threads that process Raft I/O tasks, which is also the size of the StoreWriter thread pool (**DO NOT** modify this value from a non-zero value to 0 or from 0 to a non-zero value) |
+| `raftstore.periodic-full-compact-start-max-cpu` | The CPU usage threshold at which TiKV performs periodic full compaction if full compaction is enabled |
 | `readpool.unified.max-thread-count` | The maximum number of threads in the thread pool that uniformly processes read requests, which is the size of the UnifyReadPool thread pool |
+| `readpool.unified.max-tasks-per-worker` | The maximum number of tasks allowed for a single thread in the unified read pool. `Server Is Busy` error is returned when the value is exceeded. |
 | `readpool.unified.auto-adjust-pool-size` | Determines whether to automatically adjust the UnifyReadPool thread pool size |
+| `resource-control.priority-ctl-strategy` | Configures the flow control strategy of low-priority tasks. |
 | `coprocessor.split-region-on-table` | Enables to split Region by table |
 | `coprocessor.batch-split-limit` | The threshold of Region split in batches |
 | `coprocessor.region-max-size` | The maximum size of a Region |
@@ -176,6 +180,8 @@ The following TiKV configuration items can be modified dynamically:
 | `pessimistic-txn.wake-up-delay-duration` | The duration after which a pessimistic transaction is woken up |
 | `pessimistic-txn.pipelined` | Determines whether to enable the pipelined pessimistic locking process |
 | `pessimistic-txn.in-memory` | Determines whether to enable the in-memory pessimistic lock |
+| `pessimistic-txn.in-memory-peer-size-limit`               | Controls the memory usage limit for in-memory pessimistic locks in a Region                                                                                                                                                                                  |
+| `pessimistic-txn.in-memory-instance-size-limit`           | Controls the memory usage limit for in-memory pessimistic locks in a TiKV instance                                                                                                                                                                           |
 | `quota.foreground-cpu-time` | The soft limit on the CPU resources used by TiKV foreground to process read and write requests |
 | `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
 | `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
@@ -211,6 +217,9 @@ The following TiKV configuration items can be modified dynamically:
 | `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | The soft limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | The hard limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
+| `{db-name}.{cf-name}.titan.min-blob-size` | The threshold at which data is stored in Titan. Data is stored in a Titan blob file when its value reaches this threshold. |
+| `{db-name}.{cf-name}.titan.blob-file-compression` | The compression algorithm used by Titan blob files |
+| `{db-name}.{cf-name}.titan.discardable-ratio` | The threshold of garbage data ratio in Titan data files for GC. When the ratio of useless data in a blob file exceeds the threshold, Titan GC is triggered. |
 | `server.grpc-memory-pool-quota` | Limits the memory size that can be used by gRPC |
 | `server.max-grpc-send-msg-len` | Sets the maximum length of a gRPC message that can be sent |
 | `server.snap-io-max-bytes-per-sec` | Sets the maximum allowable disk bandwidth when processing snapshots |
@@ -219,6 +228,11 @@ The following TiKV configuration items can be modified dynamically:
 | `server.raft-msg-max-batch-size` | Sets the maximum number of Raft messages that are contained in a single gRPC message |
 | `server.simplify-metrics`        | Controls whether to simplify the sampling monitoring metrics                   |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
+| storage.flow-control.enable | Determines whether to enable the flow control mechanism |
+| storage.flow-control.memtables-threshold | The maximum number of kvDB memtables that trigger flow control |
+| storage.flow-control.l0-files-threshold | The maximum number of kvDB L0 files that trigger flow control |
+| storage.flow-control.soft-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject some write requests |
+| storage.flow-control.hard-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject all write requests |
 | `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
 | `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for 10 consecutive seconds, this Region should be split.|
@@ -267,7 +281,8 @@ The following PD configuration items can be modified dynamically:
 | `cluster-version` | The cluster version |
 | `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MiB) |
 | `schedule.max-merge-region-keys` | Specifies the maximum numbers of the `Region Merge` keys |
-| `schedule.patrol-region-interval` | Determines the frequency at which `replicaChecker` checks the health state of a Region |
+| `schedule.patrol-region-interval` | Determines the frequency at which the checker inspects the health state of a Region |
+| `scheduler.patrol-region-worker-count` | Controls the number of concurrent operators created by the checker when inspecting the health state of a Region |
 | `schedule.split-merge-interval` | Determines the time interval of performing split and merge operations on the same Region |
 | `schedule.max-snapshot-count` | Determines the maximum number of snapshots that a single store can send or receive at the same time |
 | `schedule.max-pending-peer-count` | Determines the maximum number of pending peers in a single store |
@@ -338,10 +353,16 @@ select @@tidb_slow_log_threshold;
 The following TiDB configuration items can be modified dynamically:
 
 | Configuration item | SQL variable | Description |
-| :--- | :--- |
-| `instance.tidb_enable_slow_log` | `tidb_enable_slow_log` | Whether to enable slow log |
-| `instance.tidb_slow_log_threshold` | `tidb_slow_log_threshold` | The threshold of slow log |
-| `instance.tidb_expensive_query_time_threshold` | `tidb_expensive_query_time_threshold` | The threshold of a expensive query |
+| --- | --- | --- |
+| `instance.tidb_enable_slow_log` | `tidb_enable_slow_log` | Controls whether to enable slow log |
+| `instance.tidb_slow_log_threshold` | `tidb_slow_log_threshold` | Specifies the threshold of slow log |
+| `instance.tidb_expensive_query_time_threshold` | `tidb_expensive_query_time_threshold` | Specifies the threshold of an expensive query |
+| `instance.tidb_enable_collect_execution_info` | `tidb_enable_collect_execution_info` | Controls whether to record the execution information of operators |
+| `instance.tidb_record_plan_in_slow_log` | `tidb_record_plan_in_slow_log` | Controls whether to record execution plans in the slow log |
+| `instance.tidb_force_priority` | `tidb_force_priority` | Specifies the priority of statements that are submitted from this TiDB instance |
+| `instance.max_connections` | `max_connections` | Specifies the maximum number of concurrent connections permitted for this TiDB instance |
+| `instance.tidb_enable_ddl` | `tidb_enable_ddl` | Controls whether this TiDB instance can become a DDL owner |
+| `pessimistic-txn.constraint-check-in-place-pessimistic` | `tidb_constraint_check_in_place_pessimistic` | Controls whether to defer the unique constraint check of a unique index to the next time when this index requires a lock or to the time when the transaction is committed |
 
 ### Modify TiFlash configuration dynamically
 

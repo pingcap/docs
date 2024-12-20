@@ -1,12 +1,12 @@
 ---
-title: Quick Start Guide for the TiDB Database Platform
-summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
+title: Quick Start with TiDB Self-Managed
+summary: Learn how to quickly get started with TiDB Self-Managed using TiUP playground and see if TiDB is the right choice for you.
 aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-docker/']
 ---
 
-# Quick Start Guide for the TiDB Database Platform
+# Quick Start with TiDB Self-Managed
 
-This guide provides the quickest way to get started with TiDB. For non-production environments, you can deploy your TiDB database using either of the following methods:
+This guide provides the quickest way to get started with TiDB Self-Managed. For non-production environments, you can deploy your TiDB database using either of the following methods:
 
 - [Deploy a local test cluster](#deploy-a-local-test-cluster) (for macOS and Linux)
 - [Simulate production deployment on a single machine](#simulate-production-deployment-on-a-single-machine) (for Linux only)
@@ -15,7 +15,7 @@ In addition, you can try out TiDB features on [TiDB Playground](https://play.tid
 
 > **Note:**
 >
-> The deployment method provided in this guide is **ONLY FOR** quick start, **NOT FOR** production.
+> The deployment method provided in this guide is **ONLY FOR** quick start, **NOT FOR** production or comprehensive functionality and stability testing.
 >
 > - To deploy a self-hosted production cluster, see the [production installation guide](/production-deployment-using-tiup.md).
 > - To deploy TiDB on Kubernetes, see [Get Started with TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
@@ -68,6 +68,15 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 3. Start the cluster in the current session:
 
+    > **Note:**
+    >
+    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
+    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+    >
+    >     ```shell
+    >     tiup playground --tag ${tag_name}
+    >     ```
+
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
         {{< copyable "shell-regular" >}}
@@ -81,10 +90,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v7.5.0 --db 2 --pd 3 --kv 3
+        tiup playground v8.5.0 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v7.5.0. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v8.5.0. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -100,9 +109,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
         > **Note:**
         >
-        > + Since v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple M1 chip.
-        > + For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
-        > + If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) guide.
+        > Starting from v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple M1 chip.
 
 4. Start a new session to access TiDB:
 
@@ -189,6 +196,15 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 3. Start the cluster in the current session:
 
+    > **Note:**
+    >
+    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
+    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+    >
+    >     ```shell
+    >     tiup playground --tag ${tag_name}
+    >     ```
+
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
         {{< copyable "shell-regular" >}}
@@ -202,10 +218,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v7.5.0 --db 2 --pd 3 --kv 3
+        tiup playground v8.5.0 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v7.5.0. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v8.5.0. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -217,11 +233,6 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         To view the Prometheus: http://127.0.0.1:9090
         To view the Grafana: http://127.0.0.1:3000
         ```
-
-        > **Note:**
-        >
-        > For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
-        > If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) guide.
 
 4. Start a new session to access TiDB:
 
@@ -437,7 +448,7 @@ Other requirements for the target machine include:
     ```
 
     - `<cluster-name>`: Set the cluster name
-    - `<version>`: Set the TiDB cluster version, such as `v7.5.0`. You can see all the supported TiDB versions by running the `tiup list tidb` command
+    - `<version>`: Set the TiDB cluster version, such as `v8.5.0`. You can see all the supported TiDB versions by running the `tiup list tidb` command
     - `-p`: Specify the password used to connect to the target machine.
 
         > **Note:**
@@ -509,7 +520,13 @@ If you are ready to deploy a TiDB cluster for the production environment, here a
 - [Deploy TiDB using TiUP](/production-deployment-using-tiup.md)
 - Alternatively, you can deploy TiDB on Cloud using TiDB Operator by referring to the [TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable) documentation.
 
+If you are an application developer and want to quickly build an application using TiDB, here are the next steps:
+
+- [Developer Guide Overview](/develop/dev-guide-overview.md)
+- [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Example Applications](/develop/dev-guide-sample-application-java-jdbc.md)
+
 If you are looking for an analytics solution with TiFlash, here are the next steps:
 
-- [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
 - [TiFlash Overview](/tiflash/tiflash-overview.md)
+- [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)

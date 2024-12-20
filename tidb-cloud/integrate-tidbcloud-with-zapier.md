@@ -27,7 +27,7 @@ Before you start, you need:
 
 - A [Zapier account](https://zapier.com/app/login).
 - A [GitHub account](https://github.com/login).
-- A [TiDB Cloud account](https://tidbcloud.com/signup) and a TiDB Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
+- A [TiDB Cloud account](https://tidbcloud.com/signup) and a TiDB Cloud Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
 
 ### Step 1: Get the template
 
@@ -160,16 +160,16 @@ The following table lists the actions supported by TiDB Cloud App. Note that som
 
 | Action | Description | Resource |
 |---|---|---|
-| Find Cluster | Finds an existing TiDB Serverless or TiDB Dedicated cluster. | None |
-| Create Cluster | Creates a new cluster. Only supports creating a TiDB Serverless cluster. | None |
-| Find Database | Finds an existing database. | A TiDB Serverless cluster |
-| Create Database | Creates a new database. | A TiDB Serverless cluster |
-| Find Table | Finds an existing Table. | A TiDB Serverless cluster and a database |
-| Create Table | Creates a new table. | A TiDB Serverless cluster and a database |
-| Create Row | Creates a new row. | A TiDB Serverless cluster, a database, and a table |
-| Update Row | Updates an existing row. | A TiDB Serverless cluster, a database, and a table |
-| Find Row | Finds a row in a table via a lookup column. | A TiDB Serverless cluster, a database, and a table |
-| Find Row (Custom Query) | Finds a row in a table via a custom query the you provide. | A TiDB Serverless cluster, a database, and a table |
+| Find Cluster | Finds an existing TiDB Cloud Serverless or TiDB Cloud Dedicated cluster. | None |
+| Create Cluster | Creates a new cluster. Only supports creating a TiDB Cloud Serverless cluster. | None |
+| Find Database | Finds an existing database. | A TiDB Cloud Serverless cluster |
+| Create Database | Creates a new database. | A TiDB Cloud Serverless cluster |
+| Find Table | Finds an existing Table. | A TiDB Cloud Serverless cluster and a database |
+| Create Table | Creates a new table. | A TiDB Cloud Serverless cluster and a database |
+| Create Row | Creates a new row. | A TiDB Cloud Serverless cluster, a database, and a table |
+| Update Row | Updates an existing row. | A TiDB Cloud Serverless cluster, a database, and a table |
+| Find Row | Finds a row in a table via a lookup column. | A TiDB Cloud Serverless cluster, a database, and a table |
+| Find Row (Custom Query) | Finds a row in a table via a custom query the you provide. | A TiDB Cloud Serverless cluster, a database, and a table |
 
 ## TiDB Cloud App templates
 

@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.10 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.10/','/docs/dev/releases/3.0.10/']
+summary: TiDB 3.0.10 was released on February 20, 2020. It includes various bug fixes and improvements for TiDB, TiKV, PD, and TiDB Ansible. Some notable fixes include wrong Join results, data visibility issues, and system panic problems. TiDB Ansible also added new monitoring items to the dashboard. The release notes recommend using the latest 3.0.x version due to known issues in this release.
 ---
 
 # TiDB 3.0.10 Release Notes
@@ -51,7 +52,7 @@ TiDB Ansible version: 3.0.10
 
 + Raftstore
     - Fix the system panic issue #6460 or data loss issue #598 caused by Region merge failure [#6481](https://github.com/tikv/tikv/pull/6481)
-    - Support `yield` to optimize scheduling fairness, and support pre-transfering the leader to improve leader scheduling stability [#6563](https://github.com/tikv/tikv/pull/6563)
+    - Support `yield` to optimize scheduling fairness, and support pre-transferring the leader to improve leader scheduling stability [#6563](https://github.com/tikv/tikv/pull/6563)
 
 ## PD
 

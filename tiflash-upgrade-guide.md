@@ -19,15 +19,43 @@ To learn the standard upgrade process, see the following documents:
 >
 > - It is not recommended that you upgrade TiDB that includes TiFlash across major versions, for example, from v4.x to v6.x. Instead, you need to upgrade from v4.x to v5.x first, and then to v6.x.
 >
-> - v4.x is near the end of its life cycle. It is recommended that you upgrade to v5.x or later as soon as possible. For more information, see [TiDB Release Support Policy](https://en.pingcap.com/tidb-release-support-policy/).
+> - v4.x is near the end of its life cycle. It is recommended that you upgrade to v5.x or later as soon as possible. For more information, see [TiDB Release Support Policy](https://www.pingcap.com/tidb-release-support-policy/).
 >
 > - PingCAP does not provide bug fixes for non-LTS versions, such as v6.0. It is recommended that you upgrade to v6.1 and later LTS versions whenever possible.
 >
-> - To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
->
->     - Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
->     - Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`, such as `tiup cluster upgrade <cluster-name> v5.3.0 --offline`
->     - Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
+
+## Upgrade TiFlash using TiUP
+
+To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you must stop TiFlash and then upgrade it. When you upgrade TiFlash using TiUP, note the following:
+
+- If the TiUP cluster version is v1.12.0 or later, you cannot stop TiFlash and then upgrade it. If the target version requires a TiUP cluster version of v1.12.0 or later, it is recommended that you first use `tiup cluster:v1.11.3 <subcommand>` to upgrade TiFlash to an intermediate version, perform an online upgrade of the TiDB cluster, upgrade the TiUP version, and then upgrade the TiDB cluster to the target version directly without stopping it.
+- If the TiUP cluster version is earlier than v1.12.0, perform the following steps to upgrade TiFlash.
+
+The following steps help you use TiUP to upgrade TiFlash without interrupting other components:
+
+1. Stop the TiFlash instance:
+
+    ```shell
+    tiup cluster stop <cluster-name> -R tiflash
+    ```
+
+2. Upgrade the TiDB cluster without restarting it (only updating the files):
+
+    ```shell
+    tiup cluster upgrade <cluster-name> <version> --offline 
+    ```
+
+    For example:
+
+    ```shell
+    tiup cluster upgrade <cluster-name> v5.3.0 --offline
+    ```
+
+3. Reload the TiDB cluster. After the reload, the TiFlash instance is started and you do not need to manually start it.
+
+    ```shell
+    tiup cluster reload <cluster-name>
+    ```
 
 ## From 5.x or v6.0 to v6.1
 
@@ -51,7 +79,7 @@ If you do not enable [dynamic pruning mode](/partitioned-table.md#dynamic-prunin
 
 - TiDB v6.0 and earlier: Dynamic pruning is disabled by default. The setting of dynamic pruning after an upgrade inherits that of the previous version. That is, dynamic pruning will not be enabled (or disabled) automatically after an upgrade.
 
-    After an upgrade, to enable dynamic pruning, set `tidb_partition_prune_mode` to `dynamic` and manually update GlobalStats of partitioned tables. For details, see [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode).
+    After an upgrade, to enable dynamic pruning, set `tidb_partition_prune_mode` to `dynamic` and manually update global statistics of partitioned tables. For details, see [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode).
 
 ## From v5.x or v6.0 to v6.2
 
@@ -94,7 +122,11 @@ After upgrading TiFlash to v7.3 and configuring TiFlash to use V3 DTFiles, if yo
 
 ## From v6.x or v7.x to v7.4 or a later version
 
-Starting from v7.4, to reduce the read and write amplification generated during data compaction, TiFlash optimizes the data compaction logic of PageStorage V3, which leads to changes to some of the underlying storage file names. Therefore, after the upgrade to v7.4 or a later version, in-place downgrading to the original version is not supported.
+Starting from v7.4, to reduce the read and write amplification generated during data compaction, TiFlash optimizes the data compaction logic of PageStorage V3, which leads to changes to some of the underlying storage file names. Therefore, after TiFlash is upgraded to v7.4 or a later version, in-place downgrading to the original version is not supported.
+
+## From v7.x to v8.4 or a later version
+
+Starting from v8.4, the underlying storage format of TiFlash is updated to support [vector search](/vector-search-overview.md). Therefore, after TiFlash is upgraded to v8.4 or a later version, in-place downgrading to the original version is not supported.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 

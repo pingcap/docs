@@ -9,7 +9,7 @@ Release date: December 29, 2022
 
 TiDB version: 6.5.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.5.0#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
 TiDB 6.5.0 is a Long-Term Support Release (LTS).
 
@@ -25,7 +25,7 @@ Compared with TiDB [6.4.0-DMR](/releases/release-6.4.0.md), TiDB 6.5.0 introduce
 - The [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature becomes generally available (GA), which improves the performance of adding indexes by about 10 times compared with v6.1.0.
 - The TiDB global memory control becomes GA, and you can control the memory consumption threshold via [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
 - The high-performance and globally monotonic [`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode) column attribute becomes GA, which is compatible with MySQL.
-- [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) is now compatible with TiCDC and PITR and becomes GA.
+- [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md) is now compatible with TiCDC and PITR and becomes GA.
 - Enhance TiDB optimizer by making the more accurate [Cost Model version 2](/cost-model.md#cost-model-version-2) generally available and supporting expressions connected by `AND` for [INDEX MERGE](/explain-index-merge.md).
 - Support pushing down the `JSON_EXTRACT()` function to TiFlash.
 - Support [password management](/password-management.md) policies that meet password compliance auditing requirements.
@@ -52,9 +52,9 @@ Compared with TiDB [6.4.0-DMR](/releases/release-6.4.0.md), TiDB 6.5.0 introduce
 
 * Support restoring a cluster to a specific point in time by using `FLASHBACK CLUSTER TO TIMESTAMP` (GA) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo)
 
-    Since v6.4.0, TiDB has introduced the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement as an experimental feature. You can use this statement to restore a cluster to a specific point in time within the Garbage Collection (GC) life time. In v6.5.0, this feature is now compatible with TiCDC and PITR and becomes GA. This feature helps you to easily undo DML misoperations, restore the original cluster in minutes, and roll back data at different time points to determine the exact time when data changes.
+    Since v6.4.0, TiDB has introduced the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md) statement as an experimental feature. You can use this statement to restore a cluster to a specific point in time within the Garbage Collection (GC) life time. In v6.5.0, this feature is now compatible with TiCDC and PITR and becomes GA. This feature helps you to easily undo DML misoperations, restore the original cluster in minutes, and roll back data at different time points to determine the exact time when data changes.
 
-    For more information, see [documentation](/sql-statements/sql-statement-flashback-to-timestamp.md).
+    For more information, see [documentation](/sql-statements/sql-statement-flashback-cluster.md).
 
 * Fully support non-transactional DML statements including `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` [#33485](https://github.com/pingcap/tidb/issues/33485) @[ekexium](https://github.com/ekexium)
 
@@ -351,7 +351,8 @@ Compared with TiDB [6.4.0-DMR](/releases/release-6.4.0.md), TiDB 6.5.0 introduce
 | TiDB | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) | Deprecated | Starting from v6.5.0, this configuration item is deprecated. Instead, use the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) to manage memory globally. |
 | TiDB | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | Newly added | Determines whether TiDB disconnects the client connection when the password is expired. The default value is `true`, which means the client connection is disconnected when the password is expired. |
 | TiKV | `raw-min-ts-outlier-threshold` | Deleted | This configuration item was deprecated in v6.4.0 and deleted in v6.5.0. |
-| TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | To reduce CDC latency, the default value is changed from `1s` to `200ms`. |
+| TiKV | [`raft-engine.bytes-per-sync`](/tikv-configuration-file.md#bytes-per-sync-2) | Deprecated | Starting from v6.5.0, Raft Engine writes logs to disk directly without buffering. Therefore, this configuration item is deprecated and no longer functional.  |
+| TiKV | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)  | Modified | To reduce CDC latency, the default value is changed from `"1s"` to `"200ms"`. |
 | TiKV | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-new-in-v650) | Newly added | Indicates the ratio of available memory to total system memory in PITR log recovery. |
 | TiCDC | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Indicates the row terminator, which is used for separating two data change events. The value is empty by default, which means `\r\n` is used. |
 | TiCDC | [`sink.date-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. |

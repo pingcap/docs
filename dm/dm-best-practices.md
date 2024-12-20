@@ -41,7 +41,7 @@ To distribute the workload evenly on multiple nodes, the design for the distribu
 
 `AUTO_INCREMENT` in TiDB is compatible with `AUTO_INCREMENT` in MySQL. However, as a distributed database, TiDB usually has multiple computing nodes (entries for the client end). When the application data is written, the workload is evenly distributed. This leads to the result that when there is an `AUTO_INCREMENT` column in the table, the auto-increment IDs of the column might be inconsecutive. For more details, see [AUTO_INCREMENT](/auto-increment.md#implementation-principles).
 
-If your business has a strong dependence on auto-increment IDs, consider using the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function).
+If your business has a strong dependence on auto-increment IDs, consider using the [MySQL-compatible `AUTO_INCREMENT` mode](/auto-increment.md#mysql-compatibility-mode) or the [`SEQUENCE` function](/sql-statements/sql-statement-create-sequence.md#sequence-function).
 
 #### Usage of clustered indexes
 
@@ -99,7 +99,7 @@ The following table summarizes the pros and cons of optimistic mode and pessimis
 
 | Scenario | Pros | Cons |
 | :--- | :--- | :--- |
-| Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream binlogs have been cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use the relay log](#use-the relay-log). |
+| Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream binlogs have been cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use the relay log](#use-the-relay-log). |
 | Optimistic mode| Upstream schema changes will not cause data migration latency.  | In this mode, ensure that schema changes are compatible (check whether the incremental column has a default value). It is possible that the inconsistent data can be overlooked. For more information, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
 
 ### Other restrictions and impact

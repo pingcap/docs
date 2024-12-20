@@ -248,7 +248,7 @@ For more information about how TiDB chooses to use TiFlash, see [Use TiDB to rea
 
 <CustomContent platform="tidb">
 
-- [Quick Start with HTAP](/quick-start-with-htap.md)
+- [Quick Start with TiDB HTAP](/quick-start-with-htap.md)
 - [Explore HTAP](/explore-htap.md)
 
 </CustomContent>
@@ -261,3 +261,17 @@ For more information about how TiDB chooses to use TiFlash, see [Use TiDB to rea
 
 - [Window Functions](/functions-and-operators/window-functions.md)
 - [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>
