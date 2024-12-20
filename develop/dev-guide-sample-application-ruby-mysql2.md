@@ -192,7 +192,7 @@ ruby app.rb
 If the connection is successful, the console will output the version of the TiDB cluster as follows:
 
 ```
-🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.3)
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.5)
 ⏳ Loading sample game data...
 ✅ Loaded sample game data.
 
