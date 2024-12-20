@@ -98,12 +98,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 > **Note:**
 >
 > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-<<<<<<< HEAD
-> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. While the upstream support for CentOS Linux 8 ends on December 31, 2021, CentOS Stream 8 continues to be supported by the CentOS organization.
-> - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. 
-=======
 > - While the upstream support for CentOS Linux 8 ends on December 31, 2021, CentOS Stream 8 continues to be supported by the CentOS organization.
->>>>>>> 81d6c8497c (add warnings for CentOS 7 usage (#19752) (#19753))
 > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
 > - Starting from v8.4.0, TiDB requires glibc 2.28. If your glibc version does not meet this requirement, it is recommended to use an operating system listed in the preceding table or upgrade the operating system to a version that supports glibc 2.28.
 
