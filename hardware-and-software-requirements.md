@@ -60,10 +60,10 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
     </tbody>
     </table>
 
-    > **Note:**
+    > **Warning:**
     >
-    > - According to [CentOS Linux EOL](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
-    > - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
+    > - According to [CentOS Linux EOL](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or later will cause the cluster to become unavailable. Before upgrading TiDB, make sure to check your operating system version.
+    > - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable. Before upgrading TiDB, make sure to check your operating system version.
 
 + For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
 
