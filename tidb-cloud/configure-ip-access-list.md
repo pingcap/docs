@@ -1,24 +1,27 @@
 ---
 title: Configure an IP Access List
-summary: Learn how to configure IP addresses that are allowed to access your TiDB Cloud Dedicated cluster.
+summary: TiDB Cloud Dedicated クラスターへのアクセスを許可する IP アドレスを構成する方法について説明します。
 ---
 
-# Configure an IP Access List
+# IPアクセスリストを構成する {#configure-an-ip-access-list}
 
-For each TiDB Cloud Dedicated cluster in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the cluster, which works similarly to a firewall access control list. After the configuration, only the clients and applications whose IP addresses are in the IP access list can connect to your TiDB Cloud Dedicated cluster.
+TiDB Cloud内の各TiDB Cloud Dedicated クラスターに対して、クラスターにアクセスしようとするインターネット トラフィックをフィルタリングするための IP アクセス リストを設定できます。これは、ファイアウォールのアクセス制御リストと同様に機能します。設定後は、IP アドレスが IP アクセス リストに含まれているクライアントとアプリケーションのみがTiDB Cloud Dedicated クラスターに接続できます。
 
-> **Note:**
+> **注記：**
 >
-> Configuring the IP access list is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> IP アクセス リストの設定は[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対してのみ可能です。
 
-To configure an IP access list, take the following steps in the [TiDB Cloud console](https://tidbcloud.com/console/clusters):
+IP アクセス リストを設定するには、 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)で次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-2. In the left navigation pane, click **Networking**, and then click **Add IP Address**.
-3. In the dialog, choose one of the following options:
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-    - **Allow access from anywhere**: allows all IP addresses to access TiDB Cloud. This option exposes your cluster to the internet completely and is highly risky.
-    - **Use IP addresses** (recommended): you can add a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
+2.  左側のナビゲーション ウィンドウで、 **[ネットワーク]**をクリックし、 **[IP アドレスの追加]**をクリックします。
 
-4. If you choose **Use IP addresses**, add IP addresses or CIDR range with an optional description. For each TiDB Cloud Dedicated cluster, you can add up to 100 IP addresses.
-5. Click **Confirm** to save your changes.
+3.  ダイアログで、次のいずれかのオプションを選択します。
+
+    -   **どこからでもアクセスを許可**: すべての IP アドレスがTiDB Cloudにアクセスできるようにします。このオプションはクラスターをインターネットに完全に公開するため、非常に危険です。
+    -   **IP アドレスを使用する**(推奨): SQL クライアント経由でTiDB Cloudにアクセスできる IP と CIDR アドレスのリストを追加できます。
+
+4.  **[IP アドレスの使用]**を選択した場合は、オプションの説明とともに IP アドレスまたは CIDR 範囲を追加します。TiDB TiDB Cloud Dedicated クラスターごとに、最大 100 個の IP アドレスを追加できます。
+
+5.  変更を保存するには、 **「確認」**をクリックします。

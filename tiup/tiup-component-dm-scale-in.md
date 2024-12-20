@@ -1,42 +1,42 @@
 ---
 title: tiup dm scale-in
-summary: The tiup dm scale-in command is used to scale in the cluster by taking the service offline and removing the specified node from the cluster. The syntax is "tiup dm scale-in <cluster-name> [flags]". Options include -N, --force, and -h for specifying nodes, forcing removal of down nodes, and printing help information. The output is the log of scaling in.
+summary: tiup dm scale-inコマンドは、サービスをオフラインにして、指定されたノードをクラスターから削除することで、クラスターをスケールインするために使用されます。構文は「tiup dm scale-in <cluster-name> [flags]」です。オプションには、ノードの指定、ダウンしているノードの強制削除、ヘルプ情報の出力を行う -N、 --force、および -h があります。出力はスケールインのログです。
 ---
 
-# tiup dm scale-in
+# tiup dm scale-in {#tiup-dm-scale-in}
 
-The `tiup dm scale-in` command is used to scale in the cluster. Scaling in the cluster means taking the service offline, which eventually removes the specified node from the cluster and deletes the remaining related files.
+`tiup dm scale-in`コマンドは、クラスターをスケールインするために使用されます。クラスターをスケールインするとは、サービスをオフラインにすることを意味し、最終的には指定されたノードがクラスターから削除され、残りの関連ファイルが削除されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N、--ノード {#n-node}
 
-- Specifies the nodes to be scaled in. If you need to scale in multiple nodes, split them by commas.
-- Data type: `STRINGS`
-- Default: no. This option is mandatory and the value must be not null.
+-   スケールインするノードを指定します。複数のノードをスケールインする必要がある場合は、カンマで区切ります。
+-   データ型: `STRINGS`
+-   デフォルト: いいえ。このオプションは必須であり、値は null であってはなりません。
 
-### --force
+### &#x20;--force {#force}
 
-- In some cases, some scale-in nodes in the cluster have been down, making it impossible to connect to the node through SSH for operation. At this time, you can use the `--force` option to remove these nodes from the cluster.
-- Data type: `BOOLEAN`
-- Default: false. If this option is not specified in the command, the specified nodes are not forcibly removed.
+-   場合によっては、クラスター内の一部のスケールイン ノードがダウンし、SSH 経由でノードに接続して操作することができなくなります。このとき、 `--force`オプションを使用して、これらのノードをクラスターから削除できます。
+-   データ型: `BOOLEAN`
+-   デフォルト: false。このオプションがコマンドで指定されていない場合、指定されたノードは強制的に削除されません。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-The log of scaling in.
+スケールインのログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

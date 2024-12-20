@@ -1,116 +1,116 @@
 ---
 title: Optimizer Fix Controls
-summary: Learn about the Optimizer Fix Controls feature and how to use `tidb_opt_fix_control` to control the TiDB optimizer in a more fine-grained way.
+summary: オプティマイザー修正制御機能について学習し、tidb_opt_fix_control` を使用して TiDB オプティマイザーをより細かく制御する方法について説明します。
 ---
 
-# Optimizer Fix Controls
+# オプティマイザー修正コントロール {#optimizer-fix-controls}
 
-As the product evolves iteratively, the behavior of the TiDB optimizer changes, which in turn generates more reasonable execution plans. However, in some particular scenarios, the new behavior might lead to unexpected results. For example:
+製品が繰り返し進化するにつれて、TiDB オプティマイザーの動作が変化し、より合理的な実行プランが生成されます。ただし、特定のシナリオでは、新しい動作によって予期しない結果が生じる可能性があります。例:
 
-- The effect of some behaviors relies on a specific scenario. Changes that bring improvements to most scenarios might cause regressions to others.
-- Sometimes, the relationship between changes in the behavior details and their consequences is very complicated. An improvement in a certain behavior might cause overall regression.
+-   一部の動作の効果は特定のシナリオに依存します。ほとんどのシナリオに改善をもたらす変更が、他のシナリオに後退を引き起こす可能性があります。
+-   場合によっては、動作の詳細の変化とその結果の関係が非常に複雑になることがあります。特定の動作の改善が全体的な退行を引き起こす可能性があります。
 
-Therefore, TiDB provides the Optimizer Fix Controls feature that allows you to make fine-grained control of TiDB optimizer behaviors by setting values for a group of fixes. This document describes the Optimizer Fix Controls feature and how to use them, and lists all the fixes that TiDB currently supports for Optimizer Fix Controls.
+そのため、TiDB は、一連の修正の値を設定することで TiDB オプティマイザの動作を細かく制御できるオプティマイザ修正制御機能を提供します。このドキュメントでは、オプティマイザ修正制御機能とその使用方法について説明し、現在 TiDB がオプティマイザ修正制御でサポートしているすべての修正を一覧表示します。
 
-## Introduction to `tidb_opt_fix_control`
+## <code>tidb_opt_fix_control</code>の紹介 {#introduction-to-code-tidb-opt-fix-control-code}
 
-Starting from v6.5.3 and v7.1.0, TiDB provides the [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) system variable to control the behavior of the optimizer in a more fine-grained way.
+v6.5.3 および v7.1.0 以降、TiDB は、オプティマイザーの動作をより細かく制御するための[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)システム変数を提供します。
 
-Each fix is a control item used to adjust the behavior in the TiDB optimizer for one particular purpose. It is denoted by a number that corresponds to a GitHub Issue that contains the technical details of the behavior change. For example, for fix `44262`, you can review what it controls in [Issue 44262](https://github.com/pingcap/tidb/issues/44262).
+各修正は、特定の目的のために TiDB オプティマイザーの動作を調整するために使用される制御項目です。動作変更の技術的な詳細を含む GitHub の問題に対応する番号で示されます。たとえば、修正`44262`の場合、 [問題 44262](https://github.com/pingcap/tidb/issues/44262)でそれが制御するものを確認できます。
 
-The [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) system variable accepts multiple fixes as one value, separated by commas (`,`). The format is `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`, where `<#issueN>` is the fix number. For example:
+[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)システム変数は、複数の修正をカンマで区切られた 1 つの値 ( `,` ) として受け入れます。形式は`"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`で、 `<#issueN>`修正番号です。例:
 
 ```sql
 SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 ```
 
-## Optimizer Fix Controls reference
+## オプティマイザー修正コントロールリファレンス {#optimizer-fix-controls-reference}
 
-### [`33031`](https://github.com/pingcap/tidb/issues/33031) <span class="version-mark">New in v8.0.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/33031"><code>33031</code></a> <span class="version-mark">v8.0.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-33031-code-33031-code-a-span-class-version-mark-new-in-v8-0-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- This variable controls whether to allow plan cache for partitioned tables. If it is set to `ON`, neither [Prepared statement plan cache](/sql-prepared-plan-cache.md) nor [Non-prepared statement plan cache](/sql-non-prepared-plan-cache.md) will be enabled for [partitioned tables](/partitioned-table.md).
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、パーティション化されたテーブルに対してプラン キャッシュを許可するかどうかを制御します。 `ON`に設定されている場合、 [パーティションテーブル](/partitioned-table.md)に対して[準備されたステートメントプランキャッシュ](/sql-prepared-plan-cache.md)も[非プリペアドステートメントプランキャッシュ](/sql-non-prepared-plan-cache.md)有効になりません。
 
-### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v6.5.3 and v7.2.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44262"><code>44262</code></a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44262-code-44262-code-a-span-class-version-mark-new-in-v6-5-3-and-v7-2-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- This variable controls whether to allow the use of [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access a partitioned table when the [global statistics](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) of that table are missing.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、テーブルの[世界の統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合に、パーティションテーブルにアクセスするために[動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)の使用を許可するかどうかを制御します。
 
-### [`44389`](https://github.com/pingcap/tidb/issues/44389) <span class="version-mark">New in v6.5.3 and v7.2.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44389"><code>44389</code></a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44389-code-44389-code-a-span-class-version-mark-new-in-v6-5-3-and-v7-2-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, this variable controls whether to try to build more comprehensive scan ranges for `IndexRangeScan`.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`などのフィルターの場合、この変数は`IndexRangeScan`のより包括的なスキャン範囲を構築するかどうかを制御します。
 
-### [`44823`](https://github.com/pingcap/tidb/issues/44823) <span class="version-mark">New in v7.3.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44823"><code>44823</code></a> <span class="version-mark">v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44823-code-44823-code-a-span-class-version-mark-new-in-v7-3-0-span}
 
-- Default value: `200`
-- Possible values: `[0, 2147483647]`
-- To save memory, Plan Cache does not cache queries with parameters exceeding the specified number of this variable. `0` means no limit.
+-   デフォルト値: `200`
+-   可能な値: `[0, 2147483647]`
+-   メモリを節約するために、プラン キャッシュはこの変数で指定された数を超えるパラメータを持つクエリをキャッシュしません。1 `0`制限がないことを意味します。
 
-### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v6.5.7 and v7.3.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44830"><code>44830</code></a> <span class="version-mark">v6.5.7 および v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44830-code-44830-code-a-span-class-version-mark-new-in-v6-5-7-and-v7-3-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- This variable controls whether Plan Cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、物理的な最適化中に生成された`PointGet`演算子を使用してプラン キャッシュが実行プランをキャッシュできるかどうかを制御します。
 
-### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v6.5.4 and v7.3.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44855"><code>44855</code></a> <span class="version-mark">v6.5.4 および v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44855-code-44855-code-a-span-class-version-mark-new-in-v6-5-4-and-v7-3-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- In some scenarios, when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator, TiDB severely overestimates the row count of `IndexScan`. This might cause suboptimal query plans to be selected instead of `IndexJoin`.
-- To mitigate this issue, TiDB has introduced an improvement. However, due to potential query plan fallback risks, this improvement is disabled by default.
-- This variable controls whether to enable the preceding improvement.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   シナリオによっては、 `IndexJoin`演算子の`Probe`側に`Selection`演算子が含まれている場合、TiDB は行数`IndexScan`を大幅に過大評価します。これにより、 `IndexJoin`ではなく、最適ではないクエリ プランが選択される場合があります。
+-   この問題を軽減するために、TiDB では改善が導入されました。ただし、クエリ プランのフォールバックのリスクが発生する可能性があるため、この改善はデフォルトで無効になっています。
+-   この変数は、前述の改善を有効にするかどうかを制御します。
 
-### [`45132`](https://github.com/pingcap/tidb/issues/45132) <span class="version-mark">New in v7.4.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/45132"><code>45132</code></a> <span class="version-mark">v7.4.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-45132-code-45132-code-a-span-class-version-mark-new-in-v7-4-0-span}
 
-- Default value: `1000`
-- Possible values: `[0, 2147483647]`
-- This variable sets the threshold for the optimizer's heuristic strategy to select access paths. If the estimated rows for an access path (such as `Index_A`) is much smaller than that of other access paths (default `1000` times), the optimizer skips the cost comparison and directly selects `Index_A`.
-- `0` means to disable this heuristic strategy.
+-   デフォルト値: `1000`
+-   可能な値: `[0, 2147483647]`
+-   この変数は、アクセス パスを選択するためのオプティマイザのヒューリスティック戦略のしきい値を設定します。アクセス パスの推定行数 ( `Index_A`など) が他のアクセス パスの推定行数 (デフォルトは`1000`倍) よりもはるかに小さい場合、オプティマイザはコストの比較をスキップし、直接`Index_A`選択します。
+-   `0`このヒューリスティック戦略を無効にすることを意味します。
 
-### [`45798`](https://github.com/pingcap/tidb/issues/45798) <span class="version-mark">New in v7.5.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/45798"><code>45798</code></a> <span class="version-mark">v7.5.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-45798-code-45798-code-a-span-class-version-mark-new-in-v7-5-0-span}
 
-- Default value: `ON`
-- Possible values: `ON`, `OFF`
-- This variable controls whether Plan Cache is allowed to cache execution plans that access [generated columns](/generated-columns.md).
+-   デフォルト値: `ON`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、 Plan Cache が[生成された列](/generated-columns.md)アクセスする実行プランをキャッシュできるかどうかを制御します。
 
-### [`46177`](https://github.com/pingcap/tidb/issues/46177) <span class="version-mark">New in v6.5.6, v7.1.3 and v7.5.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/46177"><code>46177</code></a> <span class="version-mark">v6.5.6、v7.1.3、v7.5.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-46177-code-46177-code-a-span-class-version-mark-new-in-v6-5-6-v7-1-3-and-v7-5-0-span}
 
-- Default value: `ON`. Before v8.5.0, the default value is `OFF`.
-- Possible values: `ON`, `OFF`
-- This variable controls whether the optimizer explores enforced plans during query optimization after finding an unenforced plan.
+-   デフォルト値: `ON` 。v8.5.0 より前では、デフォルト値は`OFF`です。
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、強制されていないプランを見つけた後、クエリの最適化中にオプティマイザーが強制されたプランを探索するかどうかを制御します。
 
-### [`47400`](https://github.com/pingcap/tidb/issues/47400) <span class="version-mark">New in v8.4.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/47400"><code>47400</code></a> <span class="version-mark">v8.4.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-47400-code-47400-code-a-span-class-version-mark-new-in-v8-4-0-span}
 
-- Default value: `ON`
-- Possible values: `ON`, `OFF`
-- Due to challenges in accurately estimating the number of qualified rows for each plan step in a query plan, the optimizer might estimate a smaller value for `estRows`. This variable controls whether to limit the minimum value of `estRows`.
-- `ON`: limits the minimum value of `estRows` to 1, which is the new behavior introduced in v8.4.0 and is consistent with other databases, such as Oracle and DB2.
-- `OFF`: disables the minimum row estimate limit, which maintains the behavior consistent with versions before v8.4.0. In this case, `estRows` might be zero.
+-   デフォルト値: `ON`
+-   可能な値: `ON` 、 `OFF`
+-   クエリ プラン内の各プラン ステップの対象となる行数を正確に見積もることは難しいため、オプティマイザーは`estRows`の値を小さく見積もる場合があります。この変数は、最小値`estRows`を制限するかどうかを制御します。
+-   `ON` : 最小値`estRows`を 1 に制限します。これは、v8.4.0 で導入された新しい動作であり、Oracle や DB2 などの他のデータベースと一致しています。
+-   `OFF` : 最小行推定制限を無効にします。これにより、v8.4.0 より前のバージョンと一貫した動作が維持されます。この場合、 `estRows`ゼロになる可能性があります。
 
-### [`52592`](https://github.com/pingcap/tidb/issues/52592) <span class="version-mark">New in v8.4.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/52592"><code>52592</code></a> <span class="version-mark">v8.4.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-52592-code-52592-code-a-span-class-version-mark-new-in-v8-4-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- This variable controls whether to disable the `Point Get` and `Batch Point Get` operators for query execution. The default value `OFF` means that `Point Get` and `Batch Point Get` can be used for query execution. If set to `ON`, the optimizer disables `Point Get` and `Batch Point Get`, forcing the selection of Coprocessor for query execution.
-- `Point Get` and `Batch Point Get` do not support column projection (that is, they cannot return only a subset of the columns), so in some scenarios, their execution efficiency might be lower than that of the Coprocessor, and setting this variable to `ON` can improve query performance. The following are recommended scenarios for setting this variable to `ON`:
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、クエリ実行で`Point Get`および`Batch Point Get`演算子を無効にするかどうかを制御します。デフォルト値`OFF` 、クエリ実行に`Point Get`および`Batch Point Get`使用できることを意味します。 `ON`に設定すると、オプティマイザは`Point Get`および`Batch Point Get`無効にし、クエリ実行にコプロセッサーの選択を強制します。
+-   `Point Get`と`Batch Point Get`列投影をサポートしていません (つまり、列のサブセットのみを返すことはできません)。そのため、シナリオによっては、実行効率がコプロセッサーよりも低くなる可能性があります。この変数を`ON`に設定すると、クエリのパフォーマンスが向上します。この変数を`ON`に設定する推奨シナリオは次のとおりです。
 
-    - Wide tables with many columns, where only a few columns are queried.
-    - Tables with large JSON values, where the JSON column is not queried, or only a small portion of the JSON column is queried.
+    -   多数の列を持つ幅の広いテーブルで、少数の列のみがクエリされます。
+    -   大きな JSON 値を持つテーブルで、JSON 列がクエリされないか、JSON 列のごく一部のみがクエリされます。
 
-### [`52869`](https://github.com/pingcap/tidb/issues/52869) <span class="version-mark">New in v8.1.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/52869"><code>52869</code></a> <span class="version-mark">v8.1.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-52869-code-52869-code-a-span-class-version-mark-new-in-v8-1-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- As stated in the **Note** of [Explain Statements Using Index Merge](/explain-index-merge.md#examples), if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge.
-- You can remove this limitation by enabling this fix control. Removing this limitation enables the optimizer to choose index merge automatically in more queries, but might cause the optimizer to ignore the optimal execution plans. Therefore, it is recommended to conduct sufficient tests on actual use cases before removing this limitation to make sure that it will not cause performance regressions.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   [インデックスマージを使用したステートメントの説明](/explain-index-merge.md#examples)の**注記**に記載されているように、オプティマイザがクエリ プランに対して単一インデックス スキャン メソッド (フル テーブル スキャン以外) を選択できる場合、オプティマイザはインデックス マージを自動的に使用しません。
+-   この制限は、この修正コントロールを有効にすることで解除できます。この制限を解除すると、オプティマイザーはより多くのクエリでインデックス マージを自動的に選択できるようになりますが、オプティマイザーが最適な実行プランを無視する可能性があります。したがって、この制限を解除する前に、実際の使用例で十分なテストを実施して、パフォーマンスの低下が発生しないことを確認することをお勧めします。
 
-### [`54337`](https://github.com/pingcap/tidb/issues/54337) <span class="version-mark">New in v8.2.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/54337"><code>54337</code></a> <span class="version-mark">v8.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-54337-code-54337-code-a-span-class-version-mark-new-in-v8-2-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- Currently, the TiDB optimizer has limitations in deriving index ranges for complex conjunctive conditions where each conjunct comprises a list of ranges. This can be addressed by applying general range intersection.
-- You can remove this limitation by enabling this fix control, allowing the optimizer to handle complex range intersections. However, for conditions with a large number of conjuncts (more than 10), there is a slight risk of increased optimization time.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   現在、TiDB オプティマイザーには、各結合が範囲のリストで構成されている複雑な結合条件のインデックス範囲を導出する際に制限があります。これは、一般的な範囲の交差を適用することで解決できます。
+-   この修正コントロールを有効にすると、この制限がなくなり、オプティマイザーが複雑な範囲の交差を処理できるようになります。ただし、多数の結合子 (10 個以上) を含む条件の場合、最適化時間が長くなるリスクがわずかにあります。

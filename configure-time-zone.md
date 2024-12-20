@@ -1,122 +1,112 @@
 ---
 title: Time Zone Support
-summary: The time zone setting in TiDB is controlled by the `time_zone` system variable, which can be set at the session or global level. The displayed values of the `TIMESTAMP` data type are affected by the time zone setting, while the `DATETIME`, `DATE`, and `TIME` data types are not affected. For data migration, you need to pay special attention to whether the time zone settings of the primary database and the secondary database are consistent.
+summary: TiDB のタイムゾーン設定は、セッションレベルまたはグローバルレベルで設定できる time_zone` システム変数によって制御されます。 `TIMESTAMP` データ型の表示値はタイムゾーン設定の影響を受けますが、`DATETIME`、`DATE`、および `TIME` データ型は影響を受けません。データ移行では、プライマリデータベースとセカンダリデータベースのタイムゾーン設定が一致しているかどうかに特に注意する必要があります。
 ---
 
-# Time Zone Support
+# タイムゾーンのサポート {#time-zone-support}
 
-The time zone in TiDB is decided by the [`time_zone`](/system-variables.md#time_zone) system variable. You can set it at the session or global level. The default value of `time_zone` is `SYSTEM`. The actual time zone corresponding to `SYSTEM` is configured when the TiDB cluster bootstrap is initialized. The detailed logic is as follows:
+TiDB のタイムゾーンは、 [`time_zone`](/system-variables.md#time_zone)システム変数によって決定されます。セッションレベルまたはグローバルレベルで設定できます。 `time_zone`のデフォルト値は`SYSTEM`です。 `SYSTEM`に対応する実際のタイムゾーンは、TiDB クラスターのブートストラップが初期化されるときに構成されます。詳細なロジックは次のとおりです。
 
-1. TiDB prioritizes the use of the `TZ` environment variable.
-2. If the `TZ` environment variable fails, TiDB reads the time zone from the soft link at `/etc/localtime`.
-3. If both of the preceding methods fail, TiDB uses `UTC` as the system time zone.
+1.  TiDB は`TZ`環境変数の使用を優先します。
+2.  `TZ`環境変数が失敗した場合、TiDB は`/etc/localtime`のソフト リンクからタイム ゾーンを読み取ります。
+3.  上記の両方の方法が失敗した場合、TiDB はシステム タイム ゾーンとして`UTC`使用します。
 
-## View time zone settings
+## タイムゾーン設定をビュー {#view-time-zone-settings}
 
-To view the current values of the global, client-specific, and system time zones, execute the following statement:
+グローバル、クライアント固有、およびシステムのタイムゾーンの現在の値を表示するには、次のステートメントを実行します。
 
 ```sql
 SELECT @@global.time_zone, @@session.time_zone, @@global.system_time_zone;
 ```
 
-## Set the time zone
+## タイムゾーンを設定する {#set-the-time-zone}
 
-In TiDB, the value of the `time_zone` system variable can be set in one of the following formats:
+TiDB では、 `time_zone`システム変数の値は次のいずれかの形式で設定できます。
 
-- `SYSTEM` (default value), which indicates that the time zone should be the same as the system time zone.
-- A UTC offset, such as `'+10:00'` or `'-6:00'`.
-- A named time zone, such as `'Europe/Helsinki'`, `'US/Eastern'`, or `'MET'`.
+-   `SYSTEM` (デフォルト値) は、タイム ゾーンがシステムのタイム ゾーンと同じであることを示します。
+-   UTC オフセット ( `'+10:00'`や`'-6:00'`など)。
+-   `'Europe/Helsinki'` 、 `'US/Eastern'` 、 `'MET'`などの名前付きタイムゾーン。
 
-Depending on your needs, you can set the time zone in TiDB at the global or session level as follows:
+ニーズに応じて、次のように TiDB のタイムゾーンをグローバル レベルまたはセッション レベルで設定できます。
 
-- Set the time zone in TiDB at the global level:
+-   TiDB のタイムゾーンをグローバル レベルで設定します。
 
     ```sql
     SET GLOBAL time_zone = ${time-zone-value};
     ```
 
-    For example, set the global time zone to UTC:
+    たとえば、グローバル タイム ゾーンを UTC に設定します。
 
     ```sql
     SET GLOBAL time_zone = 'UTC';
     ```
 
-- Set the time zone in TiDB at the session level:
+-   セッション レベルで TiDB のタイム ゾーンを設定します。
 
     ```sql
     SET time_zone = ${time-zone-value};
     ```
 
-    For example, set the time zone of the current session to US/Pacific:
+    たとえば、現在のセッションのタイムゾーンを US/Pacific に設定します。
 
     ```sql
     SET time_zone = 'US/Pacific';
     ```
 
-## Functions and data types affected by time zone settings
+## タイムゾーン設定の影響を受ける関数とデータ型 {#functions-and-data-types-affected-by-time-zone-settings}
 
-The current session time zone setting affects the display and interpretation of time values that are zone-sensitive, such as the values returned by [`NOW()`](/functions-and-operators/date-and-time-functions.md) and `CURTIME()` functions. To convert between time zones, use the `CONVERT_TZ()` function. To get a timestamp based on UTC, use the `UTC_TIMESTAMP()` function, which helps avoid time zone-related issues.
+現在のセッションのタイム ゾーン設定は、 [`NOW()`](/functions-and-operators/date-and-time-functions.md)および`CURTIME()`関数によって返される値など、ゾーンに依存する時間値の表示と解釈に影響します。タイム ゾーンを変換するには、 `CONVERT_TZ()`関数を使用します。UTC に基づくタイムスタンプを取得するには、 `UTC_TIMESTAMP()`関数を使用します。これにより、タイム ゾーン関連の問題を回避できます。
 
-In TiDB, the displayed values of the `TIMESTAMP` data type are affected by time zone settings. This is because the `TIMESTAMP` data type uses the literal value and time zone information. Other data types, such as `DATETIME`, `DATE`, and `TIME`, do not have time zone information, thus their values are not affected by the changes of time zone.
+TiDB では、 `TIMESTAMP`データ型の表示値はタイムゾーン設定の影響を受けます。これは、 `TIMESTAMP`データ型がリテラル値とタイムゾーン情報を使用するためです。 `DATETIME` 、 `DATE` 、 `TIME`などの他のデータ型にはタイムゾーン情報がないため、それらの値はタイムゾーンの変更の影響を受けません。
 
-For example:
+例えば：
 
 ```sql
 create table t (ts timestamp, dt datetime);
 ```
 
-```
-Query OK, 0 rows affected (0.02 sec)
-```
+    Query OK, 0 rows affected (0.02 sec)
 
 ```sql
 set @@time_zone = 'UTC';
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
 ```sql
 insert into t values ('2017-09-30 11:11:11', '2017-09-30 11:11:11');
 ```
 
-```
-Query OK, 1 row affected (0.00 sec)
-```
+    Query OK, 1 row affected (0.00 sec)
 
 ```sql
 set @@time_zone = '+8:00';
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
 ```sql
 select * from t;
 ```
 
-```
-+---------------------|---------------------+
-| ts                  | dt                  |
-+---------------------|---------------------+
-| 2017-09-30 19:11:11 | 2017-09-30 11:11:11 |
-+---------------------|---------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------|---------------------+
+    | ts                  | dt                  |
+    +---------------------|---------------------+
+    | 2017-09-30 19:11:11 | 2017-09-30 11:11:11 |
+    +---------------------|---------------------+
+    1 row in set (0.00 sec)
 
-In this example, no matter how you adjust the time zone value, the value of the `DATETIME` data type is not affected. However, the displayed value of the `TIMESTAMP` data type reflects changes in the time zone. In fact, the `TIMESTAMP` value stored in the database remains unchanged, but it is displayed differently according to different time zone settings.
+この例では、タイムゾーンの値をどのように調整しても、 `DATETIME`データ型の値は影響を受けません。ただし、 `TIMESTAMP`データ型の表示値はタイムゾーンの変更を反映しています。実際、データベースに保存されている`TIMESTAMP`値は変更されませんが、タイムゾーンの設定に応じて表示が異なります。
 
-## Important considerations for time zone settings
+## タイムゾーン設定に関する重要な考慮事項 {#important-considerations-for-time-zone-settings}
 
-- Time zone is involved during the conversion of the values of `TIMESTAMP` and `DATETIME`, which is handled based on the `time_zone` of the current session.
-- For data migration, you need to pay special attention to whether the time zone settings of the primary database and the secondary database are consistent.
-- To get accurate timestamps, it is strongly recommended that you configure a reliable clock using Network Time Protocol (NTP) or Precision Time Protocol (PTP) services. For information about how to check NTP services, see [Check and install the NTP service](/check-before-deployment.md#check-and-install-the-ntp-service).
-- Be aware that using time zones that observe daylight saving time can result in ambiguous or nonexistent timestamps, especially when performing calculations with those timestamps.
-- MySQL uses [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.4/en/mysql-tzinfo-to-sql.html) to convert the time zone database of the operating system into tables in the `mysql` database. In contrast, TiDB directly reads the time zone data files from the time zone database of the operating system, which leverages the built-in time zone handling capabilities of the Go programming language.
+-   `TIMESTAMP`と`DATETIME`の値の変換時にはタイムゾーンが関係し、これは現在のセッションの`time_zone`に基づいて処理されます。
+-   データ移行では、プライマリ データベースとセカンダリ データベースのタイム ゾーン設定が一致しているかどうかに特に注意する必要があります。
+-   正確なタイムスタンプを取得するには、ネットワーク タイム プロトコル (NTP) または高精度時間プロトコル (PTP) サービスを使用して信頼性の高いクロックを構成することを強くお勧めします。NTP サービスを確認する方法については、 [NTPサービスを確認してインストールする](/check-before-deployment.md#check-and-install-the-ntp-service)参照してください。
+-   夏時間を採用しているタイムゾーンを使用すると、特にそれらのタイムスタンプを使用して計算を実行する場合に、タイムスタンプがあいまいになったり、タイムスタンプが存在しなくなったりする可能性があることに注意してください。
+-   MySQL は[`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.4/en/mysql-tzinfo-to-sql.html)使用して、オペレーティング システムのタイム ゾーン データベースを`mysql`データベースのテーブルに変換します。一方、TiDB は、オペレーティング システムのタイム ゾーン データベースからタイム ゾーン データ ファイルを直接読み取り、Go プログラミング言語に組み込まれたタイム ゾーン処理機能を活用します。
 
-## See also
+## 参照 {#see-also}
 
-- [Date and time data-type](/data-type-date-and-time.md)
-- [Data and time functions](/functions-and-operators/date-and-time-functions.md)
+-   [日付と時刻のデータ型](/data-type-date-and-time.md)
+-   [データと時間関数](/functions-and-operators/date-and-time-functions.md)

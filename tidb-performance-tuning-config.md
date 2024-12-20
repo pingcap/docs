@@ -1,40 +1,40 @@
 ---
 title: Configure TiDB for Optimal Performance
-summary: Learn how to optimize TiDB performance by configuring key settings and addressing edge cases.
+summary: 主要な設定を構成し、エッジケースに対処することで、TiDB のパフォーマンスを最適化する方法を学習します。
 ---
 
-## Configure TiDB for Optimal Performance
+## 最適なパフォーマンスを得るための TiDB の設定 {#configure-tidb-for-optimal-performance}
 
-This guide describes how to optimize the performance of TiDB, including:
+このガイドでは、TiDB のパフォーマンスを最適化する方法について説明します。
 
-- Best practices for common workloads.
-- Strategies for handling challenging performance scenarios.
+-   一般的なワークロードのベスト プラクティス。
+-   困難なパフォーマンス シナリオを処理するための戦略。
 
-> **Note:**
+> **注記：**
 >
-> The optimization techniques in this guide can help achieve optimal performance in TiDB. However, performance tuning often involves balancing multiple factors, and no single solution addresses all performance needs. Some techniques in this guide use experimental features, which are marked accordingly. Although these optimizations can significantly improve performance, they might not be suitable for production environments and require careful evaluation before implementation.
+> このガイドの最適化手法は、TiDB で最適なパフォーマンスを実現するのに役立ちます。ただし、パフォーマンスのチューニングには複数の要素のバランスを取る必要があることが多く、単一のソリューションですべてのパフォーマンス ニーズに対応できるわけではありません。このガイドの一部の手法では、実験的機能を使用しており、その旨が示されています。これらの最適化によりパフォーマンスが大幅に向上する可能性がありますが、本番環境には適さない可能性があり、実装前に慎重に評価する必要があります。
 
-## Overview
+## 概要 {#overview}
 
-Optimizing TiDB for peak performance requires careful tuning of various settings. In many cases, achieving optimal performance involves adjusting configurations beyond their default values.
+TiDB を最高のパフォーマンスに最適化するには、さまざまな設定を慎重に調整する必要があります。多くの場合、最適なパフォーマンスを実現するには、デフォルト値を超えて構成を調整する必要があります。
 
-The default settings prioritize stability over performance. To maximize performance, you might need to use more aggressive configurations and, in some cases, experimental features. These recommendations are based on production deployment experience and performance optimization research.
+デフォルト設定では、パフォーマンスよりも安定性が優先されます。パフォーマンスを最大化するには、より積極的な構成や、場合によっては実験的機能を使用する必要がある場合があります。これらの推奨事項は、本番の展開経験とパフォーマンス最適化の調査に基づいています。
 
-This guide describes the non-default settings, including their benefits and potential trade-offs. Use this information to optimize TiDB settings for your workload requirements.
+このガイドでは、デフォルト以外の設定について、その利点や潜在的なトレードオフなどを含めて説明します。この情報を使用して、ワークロード要件に合わせて TiDB 設定を最適化してください。
 
-## Key settings for common workloads
+## 一般的なワークロードのキー設定 {#key-settings-for-common-workloads}
 
-The following settings are commonly used to optimize TiDB performance:
+TiDB のパフォーマンスを最適化するために、次の設定が一般的に使用されます。
 
-- Enhance execution plan cache, such as [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md), [Non-prepared plan cache](/sql-non-prepared-plan-cache.md), and [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
-- Optimize the behavior of the TiDB optimizer by using [Optimizer Fix Controls](/optimizer-fix-controls.md).
-- Use the [Titan](/storage-engine/titan-overview.md) storage engine more aggressively.
+-   [SQL 準備実行プラン キャッシュ](/sql-prepared-plan-cache.md)などの実行プラン[インスタンスレベルの実行プランキャッシュ](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) [準備されていないプラン キャッシュ](/sql-non-prepared-plan-cache.md)強化します。
+-   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)使用して TiDB オプティマイザーの動作を最適化します。
+-   [タイタン](/storage-engine/titan-overview.md)storageエンジンをより積極的に使用します。
 
-These settings can significantly improve performance for many workloads. However, as with any optimization, thoroughly test them in your environment before deploying to production.
+これらの設定により、多くのワークロードのパフォーマンスが大幅に向上します。ただし、他の最適化と同様に、本番に展開する前に、ご使用の環境で徹底的にテストしてください。
 
-### System variables
+### システム変数 {#system-variables}
 
-Execute the following SQL commands to apply the recommended settings:
+推奨設定を適用するには、次の SQL コマンドを実行します。
 
 ```sql
 SET GLOBAL tidb_enable_instance_plan_cache=on;
@@ -51,34 +51,34 @@ SET GLOBAL pd_enable_follower_handle_region=on;
 SET GLOBAL tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:ON,52869:ON';
 ```
 
-The following table outlines the impact of specific system variable configurations:
+次の表は、特定のシステム変数の構成の影響を示しています。
 
-| System variable | Description | Note |
-| ---------| ---- | ----|
-| [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) and [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)| Use instance-level plan cache instead of session-level caching. This significantly improves performance for workloads with high connection counts or frequent prepared statement usage. | This is an experimental feature. Test in non-production environments first and monitor memory usage as the plan cache size increases. |
-| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature to reduce compile costs for applications that do not use prepared statements. | N/A |
-| [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Cache plans for applications that use prepared statements but close the plan after each execution. | N/A |
-| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)| Enable Index Join support when the inner table has `Selection` or `Projection` operators on it. | N/A | 
-| [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)| Enable the optimization rule of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md). | This is limited to the `ROW_NUMBER()` window function. | 
-| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)| Enable [Runtime Filter](/runtime-filter.md#runtime-filter-mode) in the local mode to improve hash join efficiency. | The variable is introduced in v7.2.0 and is disabled by default for safety. | 
-| [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)| Enable non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) pushdown to TiFlash. | This is an experimental feature. | 
-| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)| For the read-committed isolation level, enabling this variable avoids the latency and cost of getting the global timestamp and optimizes transaction-level read latency. | This feature is incompatible with the Repeatable Read isolation level. | 
-| [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)| Improve performance by skipping the commit timestamp fetch from the PD server. | This sacrifices linearizability in favor of performance. Only causal consistency is guaranteed. It is not suitable for scenarios requiring strict linearizability. |
-| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)| Activate the PD Follower feature, allowing PD followers to process Region requests. This helps distribute load evenly across all PD servers and reduces CPU pressure on the PD leader. | This is an experimental feature. Test in non-production environments. |
-| [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710) | Enable advanced query optimization strategies to improve performance through additional optimization rules and heuristics. | Test thoroughly in your environment, as performance improvements vary by workload. |
+| システム変数                                                                                                                                                                                                          | 説明                                                                                                             | 注記                                                                            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)と[`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840) | セッション レベルのキャッシュの代わりにインスタンス レベルのプラン キャッシュを使用します。これにより、接続数が多いワークロードやプリペアドステートメントの使用頻度が高いワークロードのパフォーマンスが大幅に向上します。 | これは実験的機能です。まずは非本番環境でテストし、プラン キャッシュ サイズの増加に伴うメモリ使用量を監視してください。                  |
+| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)                                                                                                               | [準備されていないプラン キャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にすると、準備されたステートメントを使用しないアプリケーションのコンパイル コストが削減されます。     | 該当なし                                                                          |
+| [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)                                                                                               | 準備されたステートメントを使用するが、実行ごとにプランを閉じるアプリケーションのプランをキャッシュします。                                                          | 該当なし                                                                          |
+| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)                                                                                         | 内部テーブルに`Selection`または`Projection`演算子がある場合に、インデックス結合のサポートを有効にします。                                               | 該当なし                                                                          |
+| [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)                                                                                                                                 | [ウィンドウ関数から TopN または Limit を導出する](/derive-topn-from-window.md)の最適化ルールを有効にします。                                   | これは`ROW_NUMBER()`ウィンドウ関数に制限されます。                                              |
+| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)                                                                                                                         | ハッシュ結合の効率を向上させるには、ローカル モードで[ランタイムフィルター](/runtime-filter.md#runtime-filter-mode)有効にします。                         | この変数は v7.2.0 で導入され、安全のためデフォルトでは無効になっています。                                     |
+| [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)                                                                                         | TiFlashへの非再帰的な[共通テーブル式 (CTE)](/sql-statements/sql-statement-with.md)プッシュダウンを有効にします。                            | これは実験的機能です。                                                                   |
+| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                                                                                               | 読み取りコミット分離レベルの場合、この変数を有効にすると、グローバル タイムスタンプの取得にかかるレイテンシーとコストが回避され、トランザクション レベルの読み取りレイテンシーが最適化されます。              | この機能は、繰り返し読み取り分離レベルと互換性がありません。                                                |
+| [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)                                                                                                              | PDサーバーからのコミット タイムスタンプの取得をスキップすることでパフォーマンスが向上します。                                                               | これにより、パフォーマンスを優先して線形化可能性が犠牲になります。因果一貫性のみが保証されます。厳密な線形化可能性を必要とするシナリオには適していません。 |
+| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)                                                                                                         | PDFollower機能を有効にして、PD フォロワーがリージョン要求を処理できるようにします。これにより、すべての PD サーバーに負荷が均等に分散され、PD リーダーの CPU 負荷が軽減されます。          | これは実験的機能です。非本番環境でテストしてください。                                                   |
+| [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)                                                                                                                        | 高度なクエリ最適化戦略を有効にして、追加の最適化ルールとヒューリスティックを通じてパフォーマンスを向上させます。                                                       | パフォーマンスの向上はワークロードによって異なるため、ご使用の環境で徹底的にテストしてください。                              |
 
-The following describes the optimizer control configurations that enable additional optimizations:
+追加の最適化を可能にするオプティマイザー制御構成について次に説明します。
 
-- [`44262:ON`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720): Use [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access the partitioned table when the [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) are missing.
-- [`44389:ON`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720): For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, build more comprehensive scan ranges for `IndexRangeScan`.
-- [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730): To save memory, plan cache does not cache queries with parameters exceeding the specified number of this variable. Increase plan cache parameter limit from `200` to `10000` to make plan cache available for query with long in-lists.
-- [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v657-and-v730): Plan cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
-- [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v654-and-v730): The optimizer selects `IndexJoin` when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator.
-- [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810): The optimizer chooses index merge automatically if the optimizer can choose the single index scan method (other than full table scan) for a query plan.
+-   [`44262:ON`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720) : [グローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)つが欠落している場合は、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)使用してパーティションテーブルにアクセスします。
+-   [`44389:ON`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720) : `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`などのフィルターの場合は、 `IndexRangeScan`のより包括的なスキャン範囲を構築します。
+-   [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730) :メモリを節約するために、プラン キャッシュはこの変数で指定された数を超えるパラメータを持つクエリをキャッシュしません。プラン キャッシュ パラメータの制限を`200`から`10000`に増やして、長いインリストを持つクエリでプラン キャッシュを使用できるようにします。
+-   [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v657-and-v730) : プラン キャッシュは、物理的な最適化中に生成された`PointGet`の演算子を使用して実行プランをキャッシュできます。
+-   [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v654-and-v730) : `IndexJoin`演算子の`Probe`側に`Selection`演算子が含まれている場合、オプティマイザーは`IndexJoin`選択します。
+-   [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810) : オプティマイザがクエリ プランに対して単一インデックス スキャン メソッド (フル テーブル スキャン以外) を選択できる場合、オプティマイザはインデックス マージを自動的に選択します。
 
-### TiDB configurations
+### TiDB 構成 {#tidb-configurations}
 
-Add the following configuration items to the TiDB configuration file:
+TiDB 構成ファイルに次の構成項目を追加します。
 
 ```toml
 [performance]
@@ -87,13 +87,13 @@ force-init-stats = true
 lite-init-stats = false
 ```
 
-| Configuration item | Description | Note | 
-| ---------| ---- | ----|
-| [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752), [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710), and [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Ensure the concurrent and comprehensive loading of table statistics during TiDB startup, which improves initial query optimization performance. | Might increase startup duration and memory usage. |
+| コンフィグレーション項目                                                                                                                                                                                                                                                               | 説明                                                             | 注記                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------- |
+| [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752) [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | TiDB の起動時にテーブル統計が同時に包括的にロードされるようにすることで、初期クエリの最適化パフォーマンスが向上します。 | 起動時間とメモリ使用量が増加する可能性があります。 |
 
-### TiKV configurations
+### TiKV 構成 {#tikv-configurations}
 
-Add the following configuration items to the TiKV configuration file:
+TiKV 構成ファイルに次の構成項目を追加します。
 
 ```toml
 [server]
@@ -115,238 +115,238 @@ blob-file-compression = "zstd"
 l0-files-threshold = 60
 ```
 
-| Configuration item | Description | Note |
-| ---------| ---- | ----|
-| [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit), [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit), and [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Set limits for concurrent snapshot transfer and I/O bandwidth during TiKV scaling operations. Higher limits reduce scaling time by allowing faster data migration. | Adjusting these limits affects the trade-off between scaling speed and online transaction performance. |
-| [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840) and [`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840) | Control the memory allocation for pessimistic lock caching at the Region and TiKV instance levels. Storing locks in memory reduces disk I/O and improves transaction performance. | Monitor memory usage carefully. Higher limits improve performance but increase memory consumption. |
-| [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan), [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan), [`min-blob-size`](/tikv-configuration-file.md#min-blob-size), and [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Enable the Titan storage engine to reduce write amplification and alleviate disk I/O bottlenecks. Particularly useful when RocksDB compaction cannot keep up with write workloads, resulting in accumulated pending compaction bytes. | Enable it when write amplification is the primary bottleneck. Trade-offs include: 1. Potential performance impact on primary key range scans. 2. Increased space amplification (up to 2x in the worst case). 3. Additional memory usage for blob cache. |
-| [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold) | Control when write flow control is triggered based on the number of kvDB L0 files. Increasing the threshold reduces write stalls during high write workloads. | Higher thresholds might lead to more aggressive compactions when many L0 files exist. |
+| コンフィグレーション項目                                                                                                                                                                                                                                                                         | 説明                                                                                                             | 注記                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit) [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit) [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec)                   | TiKV スケーリング操作中に同時スナップショット転送と I/O 帯域幅の制限を設定します。制限を高くすると、データ移行が高速化され、スケーリング時間が短縮されます。                            | これらの制限を調整すると、スケーリング速度とオンライン トランザクションのパフォーマンスのトレードオフに影響します。                                                                                |
+| [`in-memory-peer-size-limit`](/tikv-configuration-file.md#in-memory-peer-size-limit-new-in-v840)と[`in-memory-instance-size-limit`](/tikv-configuration-file.md#in-memory-instance-size-limit-new-in-v840)                                                                            | リージョンおよび TiKV インスタンス レベルで悲観的ロック キャッシュのメモリ割り当てを制御します。ロックをメモリに保存すると、ディスク I/O が削減され、トランザクション パフォーマンスが向上します。       | メモリ使用量を注意深く監視してください。制限を高くするとパフォーマンスは向上しますが、メモリ消費量も増加します。                                                                                  |
+| [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan) [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan) [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Titanstorageエンジンを有効にして、書き込み増幅を減らし、ディスク I/O ボトルネックを軽減します。RocksDB の圧縮が書き込みワークロードに対応できず、保留中の圧縮バイトが蓄積される場合に特に便利です。 | 書き込み増幅が主なボトルネックになっている場合は、これを有効にします。トレードオフには次のものが含まれます。1. 主キー範囲スキャンに対する潜在的なパフォーマンスへの影響。2. スペース増幅の増加 (最悪の場合、最大 2 倍)。3. BLOB キャッシュの追加メモリ使用量。 |
+| [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                                                                                                                                                                          | kvDB L0 ファイルの数に基づいて、書き込みフロー制御がトリガーされるタイミングを制御します。しきい値を増やすと、書き込みワークロードが高いときに書き込みが停止する回数が減少します。                  | しきい値を高くすると、多くの L0 ファイルが存在する場合に、より積極的な圧縮が行われる可能性があります。                                                                                     |
 
-### TiFlash configurations
+### TiFlash構成 {#tiflash-configurations}
 
-Add the following configuration items to the TiFlash configuration file:
+TiFlash構成ファイルに次の構成項目を追加します。
 
 ```toml
 [raftstore-proxy.server]
 snap-io-max-bytes-per-sec = "300MiB"
 ```
 
-| Configuration item | Description | Note |
-| ---------| ---- | ----|
-| [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | Control the maximum allowable disk bandwidth for data replication from TiKV to TiFlash. Higher limits accelerate initial data loading and catch-up replication. | Higher bandwidth consumption might impact online transaction performance. Balance between replication speed and system stability. |
+| コンフィグレーション項目                                                                         | 説明                                                                             | 注記                                                                                |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) | TiKV からTiFlashへのデータ複製の最大許容ディスク帯域幅を制御します。制限を高くすると、初期データの読み込みとキャッチアップ複製が高速化されます。 | 帯域幅の消費量が多いと、オンライン トランザクションのパフォーマンスに影響する可能性があります。レプリケーション速度とシステムの安定性のバランスをとってください。 |
 
-## Benchmark 
+## ベンチマーク {#benchmark}
 
-This section compares performance between default settings (baseline) and optimized settings based on the preceding [key settings for common loads](#key-settings-for-common-workloads).
+このセクションでは、デフォルト設定 (ベースライン) と、前述の[一般的な負荷のキー設定](#key-settings-for-common-workloads)に基づいて最適化された設定のパフォーマンスを比較します。
 
-### Sysbench workloads on 1000 tables
+### 1000 個のテーブルでの Sysbench ワークロード {#sysbench-workloads-on-1000-tables}
 
-#### Test environment
+#### テスト環境 {#test-environment}
 
-The test environment is as follows:
+テスト環境は次のとおりです。
 
-- 3 TiDB servers (16 cores, 64 GiB)
-- 3 TiKV servers (16 cores, 64 GiB)
-- TiDB version: v8.4.0
-- Workload: [sysbench oltp_read_only](https://github.com/akopytov/sysbench/blob/master/src/lua/oltp_read_only.lua)
+-   3 台の TiDB サーバー (16 コア、64 GiB)
+-   3 台の TiKV サーバー (16 コア、64 GiB)
+-   TiDB バージョン: v8.4.0
+-   作業量: [sysbench oltp_read_only](https://github.com/akopytov/sysbench/blob/master/src/lua/oltp_read_only.lua)
 
-#### Performance comparison
+#### パフォーマンス比較 {#performance-comparison}
 
-The following table compares throughput, latency, and plan cache hit ratio between baseline and optimized settings.
+次の表は、ベースライン設定と最適化設定の間のスループット、レイテンシー、プラン キャッシュ ヒット率を比較したものです。
 
-| Metric | Baseline | Optimized | Improvement |
-| ---------| ---- | ----| ----|
-| QPS | 89,100 | 100,128 | +12.38% |
-| Average latency (ms)|35.87 | 31.92 | -11.01% |
-| P95 latency (ms)| 58.92 | 51.02 | -13.41% |
-| Plan cache hit ratio (%) | 56.89% | 87.51% | +53.82% |
-| Plan cache memory usage (MiB) | 95.3 | 70.2 | -26.34% |
+| メトリック                  | ベースライン | 最適化     | 改善      |
+| ---------------------- | ------ | ------- | ------- |
+| 品質保証                   | 89,100 | 100,128 | +12.38% |
+| 平均レイテンシー（ミリ秒）          | 35.87  | 31.92   | -11.01% |
+| P95レイテンシー(ミリ秒)         | 58.92  | 51.02   | -13.41% |
+| プランキャッシュヒット率（％）        | 56.89% | 87.51%  | +53.82% |
+| キャッシュメモリ使用量を計画する (MiB) | 95.3   | 70.2    | -26.34% |
 
-#### Key benefits
+#### 主なメリット {#key-benefits}
 
-The instance plan cache demonstrates significant performance improvements over the baseline configuration:
+インスタンス プラン キャッシュは、ベースライン構成に比べてパフォーマンスが大幅に向上します。
 
-- Higher hit ratio: increases by 53.82% (from 56.89% to 87.51%).
-- Lower memory usage: decreases by 26.34% (from 95.3 MiB to 70.2 MiB).
-- Better performance:
+-   ヒット率の向上: 53.82% 増加 (56.89% から 87.51%)。
+-   メモリ使用量の削減: 26.34% 減少 (95.3 MiB から 70.2 MiB)。
+-   パフォーマンスの向上:
 
-    - QPS increases by 12.38%.
-    - Average latency decreases by 11.01%.
-    - P95 latency decreases by 13.41%.
+    -   QPS は 12.38% 増加します。
+    -   平均レイテンシーは 11.01% 減少します。
+    -   P95レイテンシーは 13.41% 減少します。
 
-#### How it works
+#### 仕組み {#how-it-works}
 
-Instance plan cache improves performance through these mechanisms:
+インスタンス プラン キャッシュは、次のメカニズムを通じてパフォーマンスを向上させます。
 
-- Cache execution plans for `SELECT` statements in memory.
-- Share cached plans across all connections (up to 200) on the same TiDB instance.
-- Can effectively store plans for up to 5,000 `SELECT` statements across 1,000 tables.
-- Cache misses primarily occur only for `BEGIN` and `COMMIT` statements.
+-   `SELECT`ステートメントの実行プランをメモリにキャッシュします。
+-   同じ TiDB インスタンス上のすべての接続 (最大 200) にわたってキャッシュされたプランを共有します。
+-   1,000 個のテーブルにわたって最大 5,000 `SELECT`ステートメントのプランを効率的に保存できます。
+-   キャッシュ ミスは主に`BEGIN`および`COMMIT`ステートメントでのみ発生します。
 
-#### Real-world benefits
+#### 現実世界のメリット {#real-world-benefits}
 
-Although the benchmark using simple sysbench `oltp_read_only` queries (14 KB per plan) shows modest improvements, you can expect greater benefits in real-word applications:
+単純な sysbench `oltp_read_only`クエリ (プランあたり 14 KB) を使用したベンチマークではわずかな改善が見られますが、実際のアプリケーションではさらに大きなメリットが期待できます。
 
-- Complex queries can run up to 20 times faster.
-- Memory usage is more efficient compared to session-level plan cache.
+-   複雑なクエリは最大 20 倍高速に実行できます。
+-   セッション レベルのプラン キャッシュと比較して、メモリの使用効率が向上します。
 
-Instance plan cache is particularly effective for systems with:
+インスタンス プラン キャッシュは、次のようなシステムに特に効果的です。
 
-- Large tables with many columns.
-- Complex SQL queries.
-- High concurrent connections.
-- Diverse query patterns.
+-   多くの列を持つ大きなテーブル。
+-   複雑な SQL クエリ。
+-   同時接続数が多い。
+-   多様なクエリパターン。
 
-#### Memory efficiency
+#### メモリ効率 {#memory-efficiency}
 
-Instance plan cache provides better memory efficiency than session-level plan cache because:
+インスタンス プラン キャッシュは、次の理由により、セッション レベルのプラン キャッシュよりもメモリ効率が優れています。
 
-- Plans are shared across all connections
-- No need to duplicate plans for each session
-- More efficient memory utilization while maintaining higher hit ratios
+-   プランはすべての接続で共有されます
+-   各セッションごとに計画を重複させる必要はありません
+-   高いヒット率を維持しながらメモリをより効率的に利用
 
-In scenarios with multiple connections and complex queries, session-level plan cache would require significantly more memory to achieve similar hit ratios, making instance plan cache the more efficient choice.
+複数の接続と複雑なクエリがあるシナリオでは、セッション レベルのプラン キャッシュでは同様のヒット率を達成するために大幅に多くのメモリが必要になるため、インスタンス プラン キャッシュの方が効率的な選択肢になります。
 
 ![Instance plan cache: Queries Using Plan Cache OPS](/media/performance/instance-plan-cache.png)
 
-#### Test workload
+#### テストの作業負荷 {#test-workload}
 
-The following `sysbench oltp_read_only prepare` command loads data:
+次の`sysbench oltp_read_only prepare`のコマンドはデータをロードします。
 
 ```bash
 sysbench oltp_read_only prepare --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=100 --time=900 --report-interval=10 --tables=1000 --table-size=10000
 ```
 
-The following `sysbench oltp_read_only run` command runs workload:
+次の`sysbench oltp_read_only run`のコマンドはワークロードを実行します。
 
 ```bash
 sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=200 --time=900 --report-interval=10 --tables=1000 --table-size=10000
 ```
 
-For more information, see [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md).
+詳細については[Sysbench を使用して TiDB をテストする方法](/benchmark/benchmark-tidb-using-sysbench.md)参照してください。
 
-### YCSB workloads on large record value
+### 大きなレコード値に対するYCSBのワークロード {#ycsb-workloads-on-large-record-value}
 
-#### Test environment
+#### テスト環境 {#test-environment}
 
-The test environment is as follows:
+テスト環境は次のとおりです。
 
-- 3 TiDB servers (16 cores, 64 GiB)
-- 3 TiKV servers (16 cores, 64 GiB)
-- TiDB version: v8.4.0
-- Workload: [go-ycsb workloada](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
+-   3 台の TiDB サーバー (16 コア、64 GiB)
+-   3 台の TiKV サーバー (16 コア、64 GiB)
+-   TiDB バージョン: v8.4.0
+-   作業量: [go-ycsb ワークロード](https://github.com/pingcap/go-ycsb/blob/master/workloads/workloada)
 
-#### Performance comparison
+#### パフォーマンス比較 {#performance-comparison}
 
-The following table compares throughput (operations per second) between the baseline and optimized settings.
+次の表は、ベースライン設定と最適化設定間のスループット (1 秒あたりの操作数) を比較したものです。
 
-| Item | Baseline (OPS) | Optimized (OPS) | Improvement |
-| ---------| ---- | ----| ----|
-| load data | 2858.5 | 5074.3 | +77.59% |
-| workloada | 2243.0 | 12804.3 | +470.86% |
+| アイテム     | ベースライン（OPS） | 最適化（OPS） | 改善       |
+| -------- | ----------- | -------- | -------- |
+| データを読み込む | 2858.5      | 5074.3   | +77.59%  |
+| 作業負荷     | 2243.0      | 12804.3  | +470.86% |
 
-#### Performance analysis
+#### パフォーマンス分析 {#performance-analysis}
 
-Titan is enabled by default starting from v7.6.0 and the default `min-blob-size` of Titan in TiDB v8.4.0 is `32KiB`. The baseline configuration uses a record size of `31KiB` to ensure data is stored in RocksDB. In contrast, for the key settings configuration, set `min-blob-size` to `1KiB`, causing data to be stored in Titan.
+Titan は v7.6.0 以降ではデフォルトで有効になっており、TiDB v8.4.0 の Titan のデフォルト`min-blob-size`は`32KiB`です。ベースライン構成では、データが RocksDB に保存されるようにレコード サイズ`31KiB`を使用します。一方、キー設定構成では、 `min-blob-size`を`1KiB`に設定して、データが Titan に保存されるようにします。
 
-The performance improvement observed in the key settings is primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the following figures:
+主要な設定で確認されたパフォーマンスの向上は、主に Titan の RocksDB 圧縮を削減する機能によるものです。次の図に示されています。
 
-- Baseline: The total throughput of RocksDB compaction exceeds 1 GiB/s, with peaks over 3 GiB/s.
-- Key settings: The peak throughput of RocksDB compaction remains below 100 MiB/s.
+-   ベースライン: RocksDB 圧縮の合計スループットは 1 GiB/秒を超え、ピーク時には 3 GiB/秒を超えます。
+-   主要な設定: RocksDB 圧縮のピーク スループットは 100 MiB/s 未満に維持されます。
 
-This significant reduction in compaction overhead contributes to the overall throughput improvement seen in the key settings configuration.
+この圧縮オーバーヘッドの大幅な削減は、主要な設定構成で確認される全体的なスループットの向上に貢献します。
 
 ![Titan RocksDB compaction:](/media/performance/titan-rocksdb-compactions.png)
 
-#### Test workload
+#### テストの作業負荷 {#test-workload}
 
-The following `go-ycsb load` command loads data:
+次の`go-ycsb load`のコマンドはデータをロードします。
 
 ```bash
 go-ycsb load mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -p requestdistribution=uniform -pfieldcount=31 -p fieldlength=1024
 ```
 
-The following `go-ycsb run` command runs workload:
+次の`go-ycsb run`のコマンドはワークロードを実行します。
 
 ```bash
 go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p mysql.db=test -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -prequestdistribution=uniform -p fieldcount=31 -p fieldlength=1024
 ```
 
-## Edge cases and optimizations
+## エッジケースと最適化 {#edge-cases-and-optimizations}
 
-This section shows you how to optimize TiDB for specific scenarios that need targeted adjustments beyond basic optimizations. You will learn how to tune TiDB for your particular use cases.
+このセクションでは、基本的な最適化を超えたターゲット調整が必要な特定のシナリオに合わせて TiDB を最適化する方法を説明します。特定のユースケースに合わせて TiDB を調整する方法を学習します。
 
-### Identify edge cases
+### エッジケースを特定する {#identify-edge-cases}
 
-To identify edge cases, perform the following steps:
+エッジケースを識別するには、次の手順を実行します。
 
-1. Analyze query patterns and workload characteristics.
-2. Monitor system metrics to identify performance bottlenecks.
-3. Gather feedback from application teams about specific issues.
+1.  クエリ パターンとワークロードの特性を分析します。
+2.  システム メトリックを監視してパフォーマンスのボトルネックを特定します。
+3.  特定の問題についてアプリケーション チームからフィードバックを収集します。
 
-### Common edge cases
+### よくあるエッジケース {#common-edge-cases}
 
-The following lists some common edge cases:
+以下に、一般的なエッジ ケースをいくつか示します。
 
-- High TSO wait for high-frequency small queries
-- Choose the proper max chunk size for different workloads
-- Tune coprocessor cache for read-heavy workloads
-- Optimize chunk size for workload characteristics
-- Optimize transaction mode and DML type for different workloads
-- Optimize `GROUP BY` and `DISTINCT` operations with TiKV pushdown
-- Mitigate MVCC version accumulation using in-memory engine
-- Optimize statistics collection during batch operations
-- Optimize thread pool settings for different instance types
+-   頻度の高い小さなクエリに対する TSO 待機時間が長い
+-   さまざまなワークロードに適した最大チャンクサイズを選択する
+-   読み取り負荷の高いワークロード向けにコプロセッサ キャッシュを調整する
+-   ワークロード特性に合わせてチャンクサイズを最適化する
+-   さまざまなワークロードに合わせてトランザクション モードと DML タイプを最適化する
+-   TiKVプッシュダウンで`GROUP BY`と`DISTINCT`操作を最適化する
+-   インメモリエンジンを使用してMVCCバージョンの蓄積を軽減する
+-   バッチ操作中の統計収集を最適化する
+-   さまざまなインスタンスタイプに合わせてスレッドプール設定を最適化する
 
-The following sections explain how to handle each of these cases. You need to adjust different parameters or use specific TiDB features for each scenario.
+次のセクションでは、それぞれのケースの処理方法について説明します。シナリオごとに異なるパラメータを調整するか、特定の TiDB 機能を使用する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> Apply these optimizations carefully and test thoroughly, as their effectiveness might vary based on your use case and data patterns.
+> これらの最適化は、ユースケースやデータ パターンによって効果が異なる可能性があるため、慎重に適用し、徹底的にテストしてください。
 
-### High TSO wait for high-frequency small queries
+### 頻度の高い小さなクエリに対する TSO 待機時間が長い {#high-tso-wait-for-high-frequency-small-queries}
 
-#### Troubleshooting
+#### トラブルシューティング {#troubleshooting}
 
-If your workload involves frequent small transactions or queries that frequently request timestamps, [TSO (Timestamp Oracle)](/glossary.md#timestamp-oracle-tso) can become a performance bottleneck. To check if TSO wait time is impacting your system, check the [**Performance Overview > SQL Execute Time Overview**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview) panel. If TSO wait time constitutes a large portion of your SQL execution time, consider the following optimizations:
+ワークロードに、タイムスタンプを頻繁に要求する小さなトランザクションやクエリが頻繁に含まれる場合、 [TSO (タイムスタンプ オラクル)](/glossary.md#timestamp-oracle-tso)パフォーマンスのボトルネックになる可能性があります。TSO 待機時間がシステムに影響を与えているかどうかを確認するには、 [**パフォーマンスの概要 &gt; SQL 実行時間の概要**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview)パネルを確認します。TSO 待機時間が SQL 実行時間の大部分を占める場合は、次の最適化を検討してください。
 
-- Use low-precision TSO (enable [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)) for read operations that do not need strict consistency. For more information, see [Solution 1: use low-precision TSO](#solution-1-low-precision-tso).
-- Combine small transactions into larger ones where possible. For more information, see [Solution 2: parallel mode for TSO requests](#solution-2-parallel-mode-for-tso-requests).
+-   厳密な一貫性を必要としない読み取り操作には、低精度 TSO (有効[`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso) ) を使用します。詳細については、 [解決策1: 低精度TSOを使用する](#solution-1-low-precision-tso)参照してください。
+-   可能な場合は、小規模なトランザクションを大規模なトランザクションに統合します。詳細については、 [ソリューション2: TSOリクエストの並列モード](#solution-2-parallel-mode-for-tso-requests)参照してください。
 
-#### Solution 1: low-precision TSO
+#### 解決策1: 低精度TSO {#solution-1-low-precision-tso}
 
-You can reduce TSO wait time by enabling the low-precision TSO feature ([`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)). After this feature is enabled, TiDB uses the cached timestamp to read data, reducing TSO wait time at the expense of potentially stale reads.
+低精度TSO機能（ [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso) ）を有効にすると、TSO待機時間を短縮できます。この機能を有効にすると、TiDBはキャッシュされたタイムスタンプを使用してデータを読み取るため、潜在的に古い読み取りを犠牲にしてTSO待機時間を短縮できます。
 
-This optimization is particularly effective in the following scenarios:
+この最適化は、次のシナリオで特に効果的です。
 
-- Read-heavy workloads where slight staleness is acceptable.
-- Scenarios where reducing query latency is more important than absolute consistency.
-- Applications that can tolerate reads that are a few seconds behind the latest committed state.
+-   多少の古さが許容される、読み取り中心のワークロード。
+-   絶対的な一貫性よりもクエリのレイテンシーを減らすことの方が重要なシナリオ。
+-   最新のコミット状態から数秒遅れた読み取りを許容できるアプリケーション。
 
-Benefits and trade-offs:
+利点とトレードオフ:
 
-- Reduce query latency by enabling stale reads with a cached TSO, eliminating the need to request new timestamps.
-- Balance performance against data consistency: this feature is only suitable for scenarios where stale reads are acceptable. It is not recommended to use it when strict data consistency is required.
+-   キャッシュされた TSO を使用して古い読み取りを有効にすることでクエリのレイテンシーを短縮し、新しいタイムスタンプを要求する必要性を排除します。
+-   パフォーマンスとデータの一貫性のバランスをとる: この機能は、古い読み取りが許容されるシナリオにのみ適しています。厳密なデータの一貫性が必要な場合には、この機能を使用することはお勧めしません。
 
-To enable this optimization:
+この最適化を有効にするには:
 
 ```sql
 SET GLOBAL tidb_low_resolution_tso=ON;
 ```
 
-#### Solution 2: parallel mode for TSO requests
+#### ソリューション2: TSOリクエストの並列モード {#solution-2-parallel-mode-for-tso-requests}
 
-The [`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840) system variable switches the mode in which TiDB sends TSO RPC requests to PD. The default value is `DEFAULT`. When the following conditions are met, you can consider switching this variable to `PARALLEL` or `PARALLEL-FAST` for potential performance improvements:
+[`tidb_tso_client_rpc_mode`](/system-variables.md#tidb_tso_client_rpc_mode-new-in-v840)システム変数は、TiDB が TSO RPC 要求を PD に送信するモードを切り替えます。デフォルト値は`DEFAULT`です。次の条件が満たされる場合は、パフォーマンスの向上の可能性を考慮して、この変数を`PARALLEL`または`PARALLEL-FAST`に切り替えることを検討してください。
 
-- TSO waiting time constitutes a significant portion of the total execution time of SQL queries.
-- The TSO allocation in PD has not reached its bottleneck.
-- PD and TiDB nodes have sufficient CPU resources.
-- The network latency between TiDB and PD is significantly higher than the time PD takes to allocate TSO (that is, network latency accounts for the majority of TSO RPC duration).
-    - To get the duration of TSO RPC requests, check the **PD TSO RPC Duration** panel in the PD Client section of the Grafana TiDB dashboard.
-    - To get the duration of PD TSO allocation, check the **PD server TSO handle duration** panel in the TiDB section of the Grafana PD dashboard.
-- The additional network traffic resulting from more TSO RPC requests between TiDB and PD (twice for `PARALLEL` or four times for `PARALLEL-FAST`) is acceptable.
+-   TSO 待機時間は、SQL クエリの合計実行時間の大部分を占めます。
+-   PD における TSO 割り当てはボトルネックに達していません。
+-   PD ノードと TiDB ノードには十分な CPU リソースがあります。
+-   TiDB と PD 間のネットワークレイテンシーは、PD が TSO を割り当てるのにかかる時間よりも大幅に長くなります (つまり、ネットワークレイテンシーがTSO RPC 期間の大部分を占めます)。
+    -   TSO RPC リクエストの期間を取得するには、Grafana TiDB ダッシュボードの PD クライアント セクションにある**PD TSO RPC 期間**パネルを確認します。
+    -   PD TSO 割り当ての期間を取得するには、Grafana PD ダッシュボードの TiDB セクションにある**PDサーバーTSO ハンドル期間**パネルを確認します。
+-   TiDB と PD 間の TSO RPC 要求の増加 ( `PARALLEL`の場合は 2 回、 `PARALLEL-FAST`の場合は 4 回) によって生じる追加のネットワーク トラフィックは許容されます。
 
-To switch the parallel mode, execute the following command:
+パラレルモードを切り替えるには、次のコマンドを実行します。
 
 ```sql
 -- Use the PARALLEL mode
@@ -356,15 +356,15 @@ SET GLOBAL tidb_tso_client_rpc_mode=PARALLEL;
 SET GLOBAL tidb_tso_client_rpc_mode=PARALLEL-FAST;
 ```
 
-### Tune coprocessor cache for read-heavy workloads
+### 読み取り負荷の高いワークロード向けにコプロセッサ キャッシュを調整する {#tune-coprocessor-cache-for-read-heavy-workloads}
 
-You can improve query performance for read-heavy workloads by optimizing the [coprocessor cache](/coprocessor-cache.md). This cache stores the results of coprocessor requests, reducing repeated computations of frequently accessed data. To optimize cache performance, perform the following steps:
+[コプロセッサキャッシュ](/coprocessor-cache.md)最適化することで、読み取り負荷の高いワークロードのクエリ パフォーマンスを向上させることができます。このキャッシュにはコプロセッサ要求の結果が格納され、頻繁にアクセスされるデータの繰り返し計算が削減されます。キャッシュ パフォーマンスを最適化するには、次の手順を実行します。
 
-1. Monitor the cache hit ratio using the metrics described in [Coprocessor Cache](/coprocessor-cache.md#view-the-grafana-monitoring-panel).
-2. Increase the cache size to improve hit rates for larger working sets.
-3. Adjust the admission threshold based on query patterns.
+1.  [コプロセッサーキャッシュ](/coprocessor-cache.md#view-the-grafana-monitoring-panel)で説明したメトリックを使用してキャッシュヒット率を監視します。
+2.  キャッシュ サイズを増やすと、より大きなワーキング セットのヒット率が向上します。
+3.  クエリ パターンに基づいて許可しきい値を調整します。
 
-The following lists some recommended settings for a read-heavy workload:
+読み取り負荷の高いワークロードに推奨される設定を以下に示します。
 
 ```toml
 [tikv-client.copr-cache]
@@ -374,89 +374,89 @@ admission-max-result-mb = 10
 admission-min-process-ms = 0
 ```
 
-### Optimize chunk size for workload characteristics
+### ワークロード特性に合わせてチャンクサイズを最適化する {#optimize-chunk-size-for-workload-characteristics}
 
-The [`tidb_max_chunk_size`](/system-variables.md#tidb_max_chunk_size) system variable sets the maximum number of rows in a chunk during the execution process. Adjusting this value based on your workload can improve performance.
+[`tidb_max_chunk_size`](/system-variables.md#tidb_max_chunk_size)システム変数は、実行プロセス中のチャンク内の最大行数を設定します。ワークロードに基づいてこの値を調整すると、パフォーマンスが向上します。
 
-- For OLTP workloads with large concurrency and small transactions:
+-   大規模な同時実行性と小規模なトランザクションを伴う OLTP ワークロードの場合:
 
-    - Set the value between `128` and `256` rows (the default value is `1024`).
-    - This reduces memory usage and makes limit queries faster.
-    - Use case: point queries, small range scans.
+    -   `128`行から`256`行の間の値を設定します (デフォルト値は`1024`です)。
+    -   これにより、メモリ使用量が削減され、制限クエリが高速化されます。
+    -   使用例: ポイント クエリ、小範囲スキャン。
 
     ```sql
     SET GLOBAL tidb_max_chunk_size = 128;
     ```
 
-- For OLAP or analytical workloads with complex queries and large result sets:
+-   複雑なクエリと大規模な結果セットを含む OLAP または分析ワークロードの場合:
 
-    - Set the value between `1024` and `4096` rows.
-    - This increases throughput when scanning large amounts of data.
-    - Use case: aggregations, large table scans.
+    -   `1024`から`4096`行の間で値を設定します。
+    -   これにより、大量のデータをスキャンする際のスループットが向上します。
+    -   使用例: 集計、大規模テーブルスキャン。
 
     ```sql
     SET GLOBAL tidb_max_chunk_size = 4096;
     ```
 
-### Optimize transaction mode and DML type for different workloads
+### さまざまなワークロードに合わせてトランザクション モードと DML タイプを最適化する {#optimize-transaction-mode-and-dml-type-for-different-workloads}
 
-TiDB provides different transaction modes and DML execution types to optimize performance for various workload patterns.
+TiDB は、さまざまなワークロード パターンのパフォーマンスを最適化するために、さまざまなトランザクション モードと DML 実行タイプを提供します。
 
-#### Transaction modes
+#### トランザクションモード {#transaction-modes}
 
-You can set the transaction mode using the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) system variable.
+[`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)システム変数を使用してトランザクション モードを設定できます。
 
-- [Pessimistic transaction mode](/pessimistic-transaction.md) (default):
+-   [悲観的なトランザクションモード](/pessimistic-transaction.md) (デフォルト):
 
-    - Suitable for general workloads with potential write conflicts.
-    - Provides stronger consistency guarantees.
+    -   書き込み競合が発生する可能性のある一般的なワークロードに適しています。
+    -   より強力な一貫性保証を提供します。
 
-  ```sql
-  SET SESSION tidb_txn_mode = "pessimistic";
-  ```
+    ```sql
+    SET SESSION tidb_txn_mode = "pessimistic";
+    ```
 
-- [Optimistic transaction mode](/optimistic-transaction.md):
+-   [楽観的トランザクションモード](/optimistic-transaction.md) :
 
-    - Suitable for workloads with minimal write conflicts.
-    - Better performance for multi-statement transactions.
-    - Example: `BEGIN; INSERT...; INSERT...; COMMIT;`.
+    -   書き込み競合が最小限のワークロードに適しています。
+    -   複数ステートメントのトランザクションのパフォーマンスが向上します。
+    -   例: `BEGIN; INSERT...; INSERT...; COMMIT;` .
 
-  ```sql
-  SET SESSION tidb_txn_mode = "optimistic";
-  ```
+    ```sql
+    SET SESSION tidb_txn_mode = "optimistic";
+    ```
 
-#### DML types
+#### DMLタイプ {#dml-types}
 
-You can control the execution mode of DML statements using the [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable, which is introduced in v8.0.0.
+バージョン 8.0.0 で導入された[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)システム変数を使用して、DML ステートメントの実行モードを制御できます。
 
-To use the bulk DML execution mode, set `tidb_dml_type` to `"bulk"`. This mode optimizes bulk data loading without conflicts and reduces memory usage during large write operations. Before using this mode, ensure that:
+バルク DML 実行モードを使用するには、 `tidb_dml_type`を`"bulk"`に設定します。このモードでは、競合なしでバルク データのロードが最適化され、大規模な書き込み操作中のメモリ使用量が削減されます。このモードを使用する前に、次の点を確認してください。
 
-- Auto-commit is enabled.
-- The [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600) configuration item is set to `false`.
+-   自動コミットが有効になっています。
+-   [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)構成項目は`false`に設定されています。
 
 ```sql
 SET SESSION tidb_dml_type = "bulk";
 ```
 
-### Optimize `GROUP BY` and `DISTINCT` operations with TiKV pushdown
+### TiKV プッシュダウンを使用して<code>GROUP BY</code>および<code>DISTINCT</code>操作を最適化する {#optimize-code-group-by-code-and-code-distinct-code-operations-with-tikv-pushdown}
 
-TiDB pushes down aggregation operations to TiKV to reduce data transfer and processing overhead. The performance improvement varies based on your data characteristics.
+TiDB は集計操作を TiKV にプッシュダウンして、データ転送と処理のオーバーヘッドを削減します。パフォーマンスの向上は、データの特性によって異なります。
 
-#### Usage scenarios
+#### 使用シナリオ {#usage-scenarios}
 
-- **Ideal scenarios** (high performance gain):
-    - Columns containing few distinct values (low NDV).
-    - Data containing frequent duplicate values.
-    - Example: status columns, category codes, date parts.
+-   **理想的なシナリオ**（高いパフォーマンス向上）:
+    -   異なる値がほとんど含まれない列 (NDV が低い)。
+    -   頻繁に重複する値を含むデータ。
+    -   例: ステータス列、カテゴリ コード、日付部分。
 
-- **Non-ideal scenarios** (potential performance loss):
-    - Columns containing mostly unique values (high NDV).
-    - Unique identifiers or timestamps.
-    - Example: User IDs, transaction IDs.
+-   **理想的でないシナリオ**（潜在的なパフォーマンス低下）:
+    -   ほとんどが一意の値を含む列 (高い NDV)。
+    -   一意の識別子またはタイムスタンプ。
+    -   例: ユーザー ID、トランザクション ID。
 
-#### Configuration
+#### コンフィグレーション {#configuration}
 
-Enable pushdown optimizations at the session or global level:
+セッションレベルまたはグローバルレベルでプッシュダウンの最適化を有効にします。
 
 ```sql
 -- Enable regular aggregation pushdown
@@ -466,64 +466,64 @@ SET GLOBAL tidb_opt_agg_push_down = ON;
 SET GLOBAL tidb_opt_distinct_agg_push_down = ON;
 ```
 
-### Mitigate MVCC version accumulation using in-memory engine
+### インメモリエンジンを使用してMVCCバージョンの蓄積を軽減する {#mitigate-mvcc-version-accumulation-using-in-memory-engine}
 
-Excessive MVCC versions can cause performance bottlenecks, particularly in high read/write areas or due to issues with garbage collection and compaction. You can use the in-memory engine introduced in v8.5.0 to mitigate this issue. To enable it, add the following configuration to your TiKV configuration file.
+MVCC バージョンが多すぎると、特に読み取り/書き込みが多い領域や、ガベージコレクションと圧縮の問題により、パフォーマンスのボトルネックが発生する可能性があります。この問題を軽減するには、v8.5.0 で導入されたインメモリ エンジンを使用できます。これを有効にするには、TiKV 構成ファイルに次の構成を追加します。
 
-> **Note:**
+> **注記：**
 >
-> The in-memory engine helps reduce the impact of excessive MVCC versions but might increase memory usage. Monitor your system after enabling this feature.
+> インメモリ エンジンは、過剰な MVCC バージョンの影響を軽減するのに役立ちますが、メモリ使用量が増加する可能性があります。この機能を有効にした後、システムを監視してください。
 
 ```toml
 [in-memory-engine]
 enable = true
 ```
 
-### Optimize statistics collection during batch operations
+### バッチ操作中の統計収集を最適化する {#optimize-statistics-collection-during-batch-operations}
 
-You can optimize performance during batch operations while maintaining query optimization by managing statistics collection. This section describes how to manage this process effectively.
+統計収集を管理することで、クエリの最適化を維持しながらバッチ操作中のパフォーマンスを最適化できます。このセクションでは、このプロセスを効果的に管理する方法について説明します。
 
-#### When to disable auto analyze
+#### auto analyzeを無効にする場合 {#when-to-disable-auto-analyze}
 
-You can disable auto analyze by setting the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable to `OFF` in the following scenarios:
+次のシナリオでは、システム変数[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)を`OFF`に設定することでauto analyzeを無効にすることができます。
 
-- During large data imports.
-- During bulk update operations.
-- For time-sensitive batch processing.
-- When you need full control over the timing of statistics collection.
+-   大規模なデータのインポート中。
+-   一括更新操作中。
+-   時間に敏感なバッチ処理用。
+-   統計収集のタイミングを完全に制御する必要がある場合。
 
-#### Best practices
+#### ベストプラクティス {#best-practices}
 
-- Before the batch operation:
+-   バッチ操作の前:
 
-   ```sql
-   -- Disable auto analyze
-   SET GLOBAL tidb_enable_auto_analyze = OFF;
-   ```
+    ```sql
+    -- Disable auto analyze
+    SET GLOBAL tidb_enable_auto_analyze = OFF;
+    ```
 
-- After the batch operation:
+-   バッチ操作後:
 
-   ```sql
-   -- Manually collect statistics
-   ANALYZE TABLE your_table;
-   
-   -- Re-enable auto analyze
-   SET GLOBAL tidb_enable_auto_analyze = ON;
-   ```
+    ```sql
+    -- Manually collect statistics
+    ANALYZE TABLE your_table;
 
-### Optimize thread pool settings for different instance types
+    -- Re-enable auto analyze
+    SET GLOBAL tidb_enable_auto_analyze = ON;
+    ```
 
-To improve TiKV performance, configure the thread pools based on your instance's CPU resources. The following guidelines help you optimize these settings:
+### さまざまなインスタンスタイプに合わせてスレッドプール設定を最適化する {#optimize-thread-pool-settings-for-different-instance-types}
 
-- For instances with 8 to 16 cores, the default settings are typically sufficient.
+TiKV のパフォーマンスを向上させるには、インスタンスの CPU リソースに基づいてスレッド プールを構成します。次のガイドラインは、これらの設定を最適化するのに役立ちます。
 
-- For instances with 32 or more cores, increase the pool sizes for better resource utilization. Adjust the settings as follows:
+-   8 ～ 16 個のコアを持つインスタンスの場合、通常はデフォルト設定で十分です。
+
+-   32 個以上のコアを持つインスタンスの場合は、リソースの使用率を向上させるためにプール サイズを増やします。次のように設定を調整します。
 
     ```toml
     [server]
     # Increase gRPC thread pool 
     grpc-concurrency = 10
-    
+
     [raftstore]
     # Optimize for write-intensive workloads
     apply-pool-size = 4

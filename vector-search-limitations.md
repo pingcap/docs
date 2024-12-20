@@ -1,67 +1,67 @@
 ---
 title: Vector Search Limitations
-summary: Learn the limitations of the TiDB vector search.
+summary: TiDB ベクトル検索の制限について学習します。
 ---
 
-# Vector Search Limitations
+# ベクトル検索の制限 {#vector-search-limitations}
 
-This document describes the known limitations of TiDB vector search.
+このドキュメントでは、TiDB ベクトル検索の既知の制限について説明します。
 
 <CustomContent platform="tidb">
 
-> **Warning:**
+> **警告：**
 >
-> The vector search feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ベクトル検索機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
 </CustomContent>
 
-> **Note:**
+> **注記：**
 >
-> The vector search feature is only available for TiDB Self-Managed clusters and [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> ベクトル検索機能は、TiDB セルフマネージド クラスターと[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでのみ使用できます。
 
-## Vector data type limitations
+## ベクトルデータ型の制限 {#vector-data-type-limitations}
 
-- Each [vector](/vector-search-data-types.md) supports up to 16383 dimensions.
-- Vector data types cannot store `NaN`, `Infinity`, or `-Infinity` values.
-- Vector data types cannot store double-precision floating-point numbers. If you insert or store double-precision floating-point numbers in vector columns, TiDB converts them to single-precision floating-point numbers.
-- Vector columns cannot be used as primary keys or as part of a primary key.
-- Vector columns cannot be used as unique indexes or as part of a unique index.
-- Vector columns cannot be used as partition keys or as part of a partition key.
-- Currently, TiDB does not support modifying a vector column to other data types (such as `JSON` and `VARCHAR`).
+-   [ベクター](/vector-search-data-types.md)最大 16383 次元をサポートします。
+-   ベクトル データ型では、 `NaN` 、 `Infinity` 、または`-Infinity`値を格納できません。
+-   ベクトル データ型では倍精度浮動小数点数を格納できません。ベクトル列に倍精度浮動小数点数を挿入または格納すると、TiDB はそれを単精度浮動小数点数に変換します。
+-   ベクトル列は主キーとして、または主キーの一部として使用することはできません。
+-   ベクター列は、一意のインデックスとして、または一意のインデックスの一部として使用することはできません。
+-   ベクター列はパーティション キーとして、またはパーティション キーの一部として使用することはできません。
+-   現在、TiDB はベクター列を他のデータ型 ( `JSON`や`VARCHAR`など) に変更することをサポートしていません。
 
-## Vector index limitations
+## ベクトルインデックスの制限 {#vector-index-limitations}
 
-See [Vector search restrictions](/vector-search-index.md#restrictions).
+[ベクトル検索の制限](/vector-search-index.md#restrictions)参照。
 
-## Compatibility with TiDB tools
+## TiDBツールとの互換性 {#compatibility-with-tidb-tools}
 
 <CustomContent platform="tidb">
 
-- Make sure that you are using v8.4.0 or a later version of BR to back up and restore data. Restoring tables with vector data types to TiDB clusters earlier than v8.4.0 is not supported.
-- TiDB Data Migration (DM) does not support migrating or replicating MySQL 9.0 vector data types to TiDB.
-- When TiCDC replicates vector data to a downstream that does not support vector data types, it will change the vector data types to another type. For more information, see [Compatibility with vector data types](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types).
+-   データのバックアップと復元には、 BRの v8.4.0 以降のバージョンを使用していることを確認してください。ベクター データ型のテーブルを v8.4.0 より前の TiDB クラスターに復元することはサポートされていません。
+-   TiDB データ移行 (DM) は、MySQL 9.0 ベクトル データ型の TiDB への移行または複製をサポートしていません。
+-   TiCDC は、ベクター データ型をサポートしていないダウンストリームにベクター データを複製する場合、ベクター データ型を別の型に変更します。詳細については、 [ベクトルデータ型との互換性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- The Data Migration feature in the TiDB Cloud console does not support migrating or replicating MySQL 9.0 vector data types to TiDB Cloud.
+-   TiDB Cloudコンソールのデータ移行機能では、MySQL 9.0 ベクトル データ型のTiDB Cloudへの移行または複製はサポートされていません。
 
 </CustomContent>
 
-## Feedback
+## フィードバック {#feedback}
 
-We value your feedback and are always here to help:
+私たちはあなたのフィードバックを大切にしており、いつでもお手伝いいたします。
 
 <CustomContent platform="tidb">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
+-   [Discordに参加する](https://discord.gg/zcqexutz2R)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Join our Discord](https://discord.gg/zcqexutz2R)
-- [Visit our Support Portal](https://tidb.support.pingcap.com/)
+-   [Discordに参加する](https://discord.gg/zcqexutz2R)
+-   [サポートポータルにアクセス](https://tidb.support.pingcap.com/)
 
 </CustomContent>

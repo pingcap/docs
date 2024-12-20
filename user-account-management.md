@@ -1,76 +1,76 @@
 ---
 title: TiDB User Account Management
-summary: Learn how to manage a TiDB user account.
+summary: TiDB ユーザー アカウントを管理する方法を学習します。
 ---
 
-# TiDB User Account Management
+# TiDB ユーザーアカウント管理 {#tidb-user-account-management}
 
-This document describes how to manage a TiDB user account.
+このドキュメントでは、TiDB ユーザー アカウントを管理する方法について説明します。
 
-## User names and passwords
+## ユーザー名とパスワード {#user-names-and-passwords}
 
-TiDB stores the user accounts in the table of the [`mysql.user`](/mysql-schema/mysql-schema-user.md) system table. Each account is identified by a user name and the client host. Each account may have a password.
+TiDB は、ユーザー アカウントを[`mysql.user`](/mysql-schema/mysql-schema-user.md)システム テーブルのテーブルに保存します。各アカウントは、ユーザー名とクライアント ホストによって識別されます。各アカウントにはパスワードがある場合があります。
 
-You can connect to the TiDB server using the MySQL client, and use the specified account and password to login. For each user name, make sure that it contains no more than 32 characters.
+MySQL クライアントを使用して TiDBサーバーに接続し、指定されたアカウントとパスワードを使用してログインできます。各ユーザー名は、32 文字以下であることを確認してください。
 
 ```shell
 mysql --port 4000 --user xxx --password
 ```
 
-Or use the abbreviation of command line parameters:
+または、コマンドラインパラメータの省略形を使用します。
 
 ```shell
 mysql -P 4000 -u xxx -p
 ```
 
-## Add user accounts
+## ユーザーアカウントを追加する {#add-user-accounts}
 
-You can create TiDB accounts in two ways:
+TiDB アカウントは次の 2 つの方法で作成できます。
 
-- By using the standard account-management SQL statements intended for creating accounts and establishing their privileges, such as [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and [`GRANT`](/sql-statements/sql-statement-grant-privileges.md).
-- By manipulating the privilege tables directly with statements such as [`INSERT`](/sql-statements/sql-statement-insert.md), [`UPDATE`](/sql-statements/sql-statement-update.md), or [`DELETE`](/sql-statements/sql-statement-delete.md) and running [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md). It is not recommended to use this method to create or modify accounts, because it might lead to incomplete updates.
+-   [`CREATE USER`](/sql-statements/sql-statement-create-user.md)や[`GRANT`](/sql-statements/sql-statement-grant-privileges.md)など、アカウントを作成して権限を確立するための標準のアカウント管理 SQL ステートメントを使用します。
+-   [`INSERT`](/sql-statements/sql-statement-insert.md) 、 [`UPDATE`](/sql-statements/sql-statement-update.md) 、 [`DELETE`](/sql-statements/sql-statement-delete.md)などのステートメントを使用して権限テーブルを直接操作し、 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)実行します。この方法では更新が不完全になる可能性があるため、アカウントの作成または変更にはこの方法を使用しないことをお勧めします。
 
-You can also create accounts by using [third party GUI tools](/develop/dev-guide-third-party-support.md#gui).
+[サードパーティのGUIツール](/develop/dev-guide-third-party-support.md#gui)使用してアカウントを作成することもできます。
 
 ```sql
 CREATE USER [IF NOT EXISTS] user [IDENTIFIED BY 'auth_string'];
 ```
 
-After you assign the password, TiDB hashes and stores the `auth_string` in the [`mysql.user`](/mysql-schema/mysql-schema-user.md) table.
+パスワードを割り当てると、TiDB は`auth_string`をハッシュして[`mysql.user`](/mysql-schema/mysql-schema-user.md)テーブルに保存します。
 
 ```sql
 CREATE USER 'test'@'127.0.0.1' IDENTIFIED BY 'xxx';
 ```
 
-The name of a TiDB account consists of a user name and a hostname. The syntax of the account name is 'user_name'@'host_name'.
+TiDB アカウントの名前は、ユーザー名とホスト名で構成されます。アカウント名の構文は、「user_name」@「host_name」です。
 
-- `user_name` is case sensitive.
+-   `user_name`大文字と小文字が区別されます。
 
-- `host_name` is a hostname or IP address, which supports the wild card `%` or `_`. For example, the hostname `'%'` matches all hosts, and the hostname `'192.168.1.%'` matches all hosts in the subnet.
+-   `host_name`はホスト名または IP アドレスであり、ワイルドカード`%`または`_`サポートします。たとえば、ホスト名`'%'`すべてのホストに一致し、ホスト名`'192.168.1.%'`サブネット内のすべてのホストに一致します。
 
-The host supports fuzzy matching:
+ホストはファジーマッチングをサポートしています:
 
 ```sql
 CREATE USER 'test'@'192.168.10.%';
 ```
 
-The `test` user is allowed to log in from any hosts on the `192.168.10` subnet.
+`test`ユーザーは、 `192.168.10`サブネット上の任意のホストからログインできます。
 
-If the host is not specified, the user is allowed to log in from any IP. If no password is specified, the default is empty password:
+ホストが指定されていない場合、ユーザーはどの IP からでもログインできます。パスワードが指定されていない場合、デフォルトは空のパスワードです。
 
 ```sql
 CREATE USER 'test';
 ```
 
-Equivalent to:
+以下と同等:
 
 ```sql
 CREATE USER 'test'@'%' IDENTIFIED BY '';
 ```
 
-If the specified user does not exist, the behavior of automatically creating users depends on [`sql_mode`](/system-variables.md#sql_mode). If the `sql_mode` includes `NO_AUTO_CREATE_USER`, the `GRANT` statement will not create users with an error returned.
+指定されたユーザーが存在しない場合、ユーザーを自動的に作成する動作は[`sql_mode`](/system-variables.md#sql_mode)によって異なります。 `sql_mode`に`NO_AUTO_CREATE_USER`含まれている場合、 `GRANT`ステートメントはユーザーを作成せず、エラーが返されます。
 
-For example, assume that the `sql_mode` does not include `NO_AUTO_CREATE_USER`, and you use the following `CREATE USER` and `GRANT` statements to create four accounts:
+たとえば、 `sql_mode`に`NO_AUTO_CREATE_USER`含まれず、次の`CREATE USER`と`GRANT`ステートメントを使用して 4 つのアカウントを作成するとします。
 
 ```sql
 CREATE USER 'finley'@'localhost' IDENTIFIED BY 'some_pass';
@@ -100,123 +100,117 @@ GRANT RELOAD,PROCESS ON *.* TO 'admin'@'localhost';
 CREATE USER 'dummy'@'localhost';
 ```
 
-To see the privileges granted for an account, use the [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md) statement:
+アカウントに付与された権限を確認するには、次の[`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)ステートメントを使用します。
 
 ```sql
 SHOW GRANTS FOR 'admin'@'localhost';
 ```
 
-```
-+-----------------------------------------------------+
-| Grants for admin@localhost                          |
-+-----------------------------------------------------+
-| GRANT RELOAD, PROCESS ON *.* TO 'admin'@'localhost' |
-+-----------------------------------------------------+
-```
+    +-----------------------------------------------------+
+    | Grants for admin@localhost                          |
+    +-----------------------------------------------------+
+    | GRANT RELOAD, PROCESS ON *.* TO 'admin'@'localhost' |
+    +-----------------------------------------------------+
 
-To see the account definition for an account, use the [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md) statement:
+アカウントのアカウント定義を表示するには、次の[`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)ステートメントを使用します。
 
 ```sql
 SHOW CREATE USER 'admin'@'localhost';
 ```
 
-```
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| CREATE USER for admin@localhost                                                                                                                                                                                                      |
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| CREATE USER 'admin'@'localhost' IDENTIFIED WITH 'mysql_native_password' AS '*14E65567ABDB5135D0CFD9A70B3032C179A49EE7' REQUIRE NONE PASSWORD EXPIRE DEFAULT ACCOUNT UNLOCK PASSWORD HISTORY DEFAULT PASSWORD REUSE INTERVAL DEFAULT  |
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | CREATE USER for admin@localhost                                                                                                                                                                                                      |
+    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | CREATE USER 'admin'@'localhost' IDENTIFIED WITH 'mysql_native_password' AS '*14E65567ABDB5135D0CFD9A70B3032C179A49EE7' REQUIRE NONE PASSWORD EXPIRE DEFAULT ACCOUNT UNLOCK PASSWORD HISTORY DEFAULT PASSWORD REUSE INTERVAL DEFAULT  |
+    +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
-## Remove user accounts
+## ユーザーアカウントを削除する {#remove-user-accounts}
 
-To remove a user account, use the [`DROP USER`](/sql-statements/sql-statement-drop-user.md) statement:
+ユーザー アカウントを削除するには、次の[`DROP USER`](/sql-statements/sql-statement-drop-user.md)ステートメントを使用します。
 
 ```sql
 DROP USER 'test'@'localhost';
 ```
 
-This operation clears the user's records in the [`mysql.user`](/mysql-schema/mysql-schema-user.md) table and the related records in the privilege table.
+この操作により、 [`mysql.user`](/mysql-schema/mysql-schema-user.md)テーブル内のユーザーのレコードと権限テーブル内の関連レコードがクリアされます。
 
-## Reserved user accounts
+## 予約済みユーザーアカウント {#reserved-user-accounts}
 
-TiDB creates the `'root'@'%'` default account during the database initialization.
+TiDB は、データベースの初期化中に`'root'@'%'`デフォルト アカウントを作成します。
 
-## Set account resource limits
+## アカウントのリソース制限を設定する {#set-account-resource-limits}
 
-TiDB can limit the resources consumed by users using resource groups. For more information, see [Use resource control to achieve resource isolation](/tidb-resource-control.md).
+TiDB は、リソース グループを使用してユーザーが消費するリソースを制限できます。詳細については、 [リソース制御を使用してリソースの分離を実現する](/tidb-resource-control.md)参照してください。
 
-## Assign account passwords
+## アカウントパスワードの割り当て {#assign-account-passwords}
 
-TiDB stores passwords in the [`mysql.user`](/mysql-schema/mysql-schema-user.md) system table. Operations that assign or update passwords are permitted only to users with the `CREATE USER` privilege, or, alternatively, privileges for the `mysql` database (`INSERT` privilege to create new accounts, `UPDATE` privilege to update existing accounts).
+TiDB は、パスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)システム テーブルに保存します。パスワードの割り当てまたは更新の操作は、 `CREATE USER`権限、または`mysql`データベースの権限(新しいアカウントを作成する`INSERT`権限、既存のアカウントを更新する`UPDATE`権限) を持つユーザーのみに許可されます。
 
-- To assign a password when you create a new account, use [`CREATE USER`](/sql-statements/sql-statement-create-user.md) and include an `IDENTIFIED BY` clause:
+-   新しいアカウントを作成するときにパスワードを割り当てるには、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)使用し、 `IDENTIFIED BY`句を含めます。
 
     ```sql
     CREATE USER 'test'@'localhost' IDENTIFIED BY 'mypass';
     ```
 
-- To assign or change a password for an existing account, use [`SET PASSWORD FOR`](/sql-statements/sql-statement-set-password.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md):
+-   既存のアカウントのパスワードを割り当てたり変更したりするには、 [`SET PASSWORD FOR`](/sql-statements/sql-statement-set-password.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)使用します。
 
     ```sql
     SET PASSWORD FOR 'root'@'%' = 'xxx';
     ```
 
-    Or:
+    または：
 
     ```sql
     ALTER USER 'test'@'localhost' IDENTIFIED BY 'mypass';
     ```
 
-## Forget the `root` password
+## <code>root</code>パスワードを忘れた {#forget-the-code-root-code-password}
 
-1. Modify the configuration file:
+1.  設定ファイルを変更します。
 
-    1. Log in to the machine where one of the tidb-server instances is located.
-    2. Enter the `conf` directory under the TiDB node deployment directory, and find the `tidb.toml` configuration file.
-    3. Add the configuration item [`skip-grant-table`](/tidb-configuration-file.md) in the [`security`](/tidb-configuration-file.md#security) section of the configuration file. If there is no `security` section, add the following two lines to the end of the `tidb.toml` configuration file:
+    1.  tidb-server インスタンスの 1 つが配置されているマシンにログインします。
+    2.  TiDB ノードのデプロイメント ディレクトリの下の`conf`ディレクトリに入り、 `tidb.toml`構成ファイルを見つけます。
+    3.  構成ファイルの[`security`](/tidb-configuration-file.md#security)セクションに設定項目[`skip-grant-table`](/tidb-configuration-file.md)を追加します。 `security`セクションがない場合は、 `tidb.toml`構成ファイルの末尾に次の 2 行を追加します。
 
-        ```
-        [security]
-        skip-grant-table = true
-        ```
+            [security]
+            skip-grant-table = true
 
-2. Stop the tidb-server process:
+2.  tidb-server プロセスを停止します。
 
-    1. View the tidb-server process:
+    1.  tidb-server プロセスをビュー。
 
         ```bash
         ps aux | grep tidb-server
         ```
 
-    2. Find the process ID (PID) corresponding to tidb-server and use the `kill` command to stop the process:
+    2.  tidb-server に対応するプロセス ID (PID) を見つけて、 `kill`コマンドを使用してプロセスを停止します。
 
         ```bash
         kill -9 <pid>
         ```
 
-3. Start TiDB using the modified configuration:
+3.  変更した構成を使用して TiDB を起動します。
 
-    > **Note:**
+    > **注記：**
     >
-    > If you set `skip-grant-table` before starting the TiDB process, a check on the operating system user will be initiated. Only the `root` user of the operating system can start the TiDB process.
+    > TiDB プロセスを開始する前に`skip-grant-table`設定すると、オペレーティング システム ユーザーのチェックが開始されます。オペレーティング システムの`root`ユーザーのみが TiDB プロセスを開始できます。
 
-    1. Enter the `scripts` directory under the TiDB node deployment directory.
-    2. Switch to the `root` account of the operating system.
-    3. Run the `run_tidb.sh` script in the directory in the foreground.
-    4. Log in as `root` in a new terminal window and change the password.
+    1.  TiDB ノードのデプロイメント ディレクトリの下の`scripts`ディレクトリを入力します。
+    2.  オペレーティング システムの`root`アカウントに切り替えます。
+    3.  ディレクトリ内の`run_tidb.sh`スクリプトをフォアグラウンドで実行します。
+    4.  新しいターミナル ウィンドウで`root`としてログインし、パスワードを変更します。
 
         ```bash
         mysql -h 127.0.0.1 -P 4000 -u root
         ```
 
-4. Stop running the `run_tidb.sh` script, remove the content added in the TiDB configuration file in step 1, and wait for tidb-server to start automatically.
+4.  `run_tidb.sh`スクリプトの実行を停止し、手順 1 で TiDB 構成ファイルに追加されたコンテンツを削除し、tidb-server が自動的に起動するのを待ちます。
 
-## `FLUSH PRIVILEGES`
+## <code>FLUSH PRIVILEGES</code> {#code-flush-privileges-code}
 
-Information related to users and privileges is stored in the TiKV server, and TiDB caches this information inside the process. Generally, modification of the related information through [`CREATE USER`](/sql-statements/sql-statement-create-user.md), [`GRANT`](/sql-statements/sql-statement-grant-privileges.md), and other statements takes effect quickly within the entire cluster. If the operation is affected by some factors such as temporarily unavailable network, the modification will take effect in about 15 minutes because TiDB will periodically reload the cache information.
+ユーザーや権限に関する情報は TiKVサーバーに保存され、TiDB はプロセス内にこの情報をキャッシュします。通常、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)などのステートメントによる関連情報の[`GRANT`](/sql-statements/sql-statement-grant-privileges.md)は、クラスター全体にすぐに反映されます。一時的にネットワークが利用できなくなるなどの要因によって操作が影響を受ける場合は、TiDB が定期的にキャッシュ情報を再読み込みするため、変更は約 15 分後に反映されます。
 
-If you modified the privilege tables directly, run the [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) to apply changes immediately.
+権限テーブルを直接変更した場合は、 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)を実行して変更をすぐに適用します。
 
-For details, see [Privilege Management](/privilege-management.md).
+詳細は[権限管理](/privilege-management.md)参照。

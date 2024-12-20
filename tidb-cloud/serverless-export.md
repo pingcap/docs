@@ -1,159 +1,162 @@
 ---
 title: Export Data from TiDB Cloud Serverless
-summary: Learn how to export data from TiDB Cloud Serverless clusters.
+summary: TiDB Cloud Serverless クラスターからデータをエクスポートする方法を学びます。
 ---
 
-# Export Data from TiDB Cloud Serverless
+# TiDB Cloud Serverless からデータをエクスポート {#export-data-from-tidb-cloud-serverless}
 
-TiDB Cloud Serverless Export (Beta) is a service that enables you to export data from a TiDB Cloud Serverless cluster to a local file or an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Cloud Serverless Export (ベータ版) は、 TiDB Cloud Serverless クラスターからローカル ファイルまたは外部storageサービスにデータをエクスポートできるサービスです。エクスポートされたデータは、バックアップ、移行、データ分析などの目的で使用できます。
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), TiDB Cloud Serverless Export offers a more convenient and efficient way to export data from a TiDB Cloud Serverless cluster. It brings the following benefits:
+[mysqlダンプ](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)や TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)などのツールを使用してデータをエクスポートすることもできますが、 TiDB Cloud Serverless Export を使用すると、 TiDB Cloud Serverless クラスターからデータをエクスポートするより便利で効率的な方法が提供されます。これには次の利点があります。
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a TiDB Cloud Serverless cluster, eliminating the need for additional tools or resources.
-- Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
-- Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
+-   利便性: エクスポート サービスは、 TiDB Cloud Serverless クラスターからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
+-   分離: エクスポート サービスは個別のコンピューティング リソースを使用するため、オンライン サービスで使用されるリソースからの分離が保証されます。
+-   一貫性: エクスポート サービスは、ロックを発生させることなくエクスポートされたデータの一貫性を確保するため、オンライン サービスには影響しません。
 
-## Export locations
+## エクスポート場所 {#export-locations}
 
-You can export data to a local file or [Amazon S3](https://aws.amazon.com/s3/).
+データをローカル ファイルまたは[アマゾンS3](https://aws.amazon.com/s3/)にエクスポートできます。
 
-> **Note:**
+> **注記：**
 >
-> If the size of the data to be exported is large (more than 100 GiB), it is recommended that you export it to an external storage.
+> エクスポートするデータのサイズが大きい場合（100 GiB 以上）は、外部storageにエクスポートすることをお勧めします。
 
-### A local file
+### ローカルファイル {#a-local-file}
 
-To export data from a TiDB Cloud Serverless cluster to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+TiDB Cloud Serverless クラスターからローカル ファイルにデータをエクスポートするには、データ[TiDB Cloudコンソールを使用する](#export-data-to-a-local-file)または[TiDB Cloud CLIを使用する](/tidb-cloud/ticloud-serverless-export-create.md)エクスポートし、 TiDB Cloud CLI を使用してエクスポートしたデータをダウンロードする必要があります。
 
-Exporting data to a local file has the following limitations:
+データをローカル ファイルにエクスポートする場合、次の制限があります。
 
-- Downloading exported data using the TiDB Cloud console is not supported.
-- Exported data is saved in the stashing area of TiDB Cloud and will expire after two days. You need to download the exported data in time.
-- If the storage space of stashing area is full, you will not be able to export data to the local file.
+-   TiDB Cloudコンソールを使用してエクスポートされたデータをダウンロードすることはサポートされていません。
+-   エクスポートされたデータはTiDB Cloudの保管領域に保存され、2 日後に期限切れになります。エクスポートされたデータは時間内にダウンロードする必要があります。
+-   スタッシング領域のstorageスペースがいっぱいの場合、データをローカル ファイルにエクスポートすることはできません。
 
-### Amazon S3
+### アマゾンS3 {#amazon-s3}
 
-To export data to Amazon S3, you need to provide the following information:
+データを Amazon S3 にエクスポートするには、次の情報を提供する必要があります。
 
-- URI: `s3://<bucket-name>/<file-path>`
-- One of the following access credentials:
-    - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN has the `s3:PutObject` and `s3:ListBucket` permissions. 
+-   URI: `s3://<bucket-name>/<file-path>`
+-   次のアクセス資格情報のいずれか:
+    -   [アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) : アクセス キーに`s3:PutObject`および`s3:ListBucket`権限があることを確認します。
+    -   [ロールARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) : ロール ARN に`s3:PutObject`および`s3:ListBucket`権限があることを確認します。
 
-For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+詳細については[TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
 
-## Export options
+## エクスポートオプション {#export-options}
 
-### Data filtering
+### データのフィルタリング {#data-filtering}
 
-- TiDB Cloud console supports exporting data with the selected databases and tables.
+-   TiDB Cloudコンソールは、選択したデータベースとテーブルを含むデータのエクスポートをサポートしています。
 
-### Data formats
+### データ形式 {#data-formats}
 
-You can export data in the following formats:
+次の形式でデータをエクスポートできます。
 
-- `SQL`: export data in SQL format.
-- `CSV`: export data in CSV format. You can specify the following options:
-    - `delimiter`: specify the delimiter used in the exported data. The default delimiter is `"`.
-    - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
-    - `header`: specify whether to include a header row in the exported data. The default value is `true`.
-    - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
+-   `SQL` : SQL 形式でデータをエクスポートします。
+-   `CSV` : CSV 形式でデータをエクスポートします。次のオプションを指定できます。
+    -   `delimiter` : エクスポートされたデータで使用する区切り文字を指定します。デフォルトの区切り文字は`"`です。
+    -   `separator` : エクスポートされたデータ内のフィールドを区切るために使用される文字を指定します。デフォルトの区切り文字は`,`です。
+    -   `header` : エクスポートされたデータにヘッダー行を含めるかどうかを指定します。デフォルト値は`true`です。
+    -   `null-value` : エクスポートされたデータ内の NULL 値を表す文字列を指定します。デフォルト値は`\N`です。
 
-The schema and data are exported according to the following naming conventions:
+スキーマとデータは、次の命名規則に従ってエクスポートされます。
 
-| Item            | Not compressed                                       | Compressed                                                                                                          |
-|-----------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Database schema | {database}-schema-create.sql                         | {database}-schema-create.sql.{compression-type}                                                                     |
-| Table schema    | {database}.{table}-schema.sql                        | {database}.{table}-schema.sql.{compression-type}                                                                    |
-| Data            | {database}.{table}.{0001}.{csv&#124;sql} | {database}.{table}.{0001}.{csv&#124;sql}.{compression-type} |
+| アイテム       | 圧縮されていない                         | 圧縮                                       |
+| ---------- | -------------------------------- | ---------------------------------------- |
+| データベーススキーマ | {データベース}-スキーマ作成.sql              | {データベース}-schema-create.sql.{圧縮タイプ}       |
+| テーブルスキーマ   | {データベース}.{テーブル}-schema.sql       | {データベース}.{テーブル}-schema.sql.{圧縮タイプ}       |
+| データ        | {データベース}.{テーブル}.{0001}.{csv|sql} | {データベース}.{テーブル}.{0001}.{csv|sql}.{圧縮タイプ} |
 
-### Data compression
+### データ圧縮 {#data-compression}
 
-You can compress the exported CSV and SQL data using the following algorithms:
+次のアルゴリズムを使用して、エクスポートされた CSV および SQL データを圧縮できます。
 
-- `gzip` (default): compress the exported data with `gzip`.
-- `snappy`: compress the exported data with `snappy`.
-- `zstd`: compress the exported data with `zstd`.
-- `none`: do not compress the exported `data`.
+-   `gzip` (デフォルト): エクスポートされたデータを`gzip`で圧縮します。
+-   `snappy` : エクスポートされたデータを`snappy`で圧縮します。
+-   `zstd` : エクスポートされたデータを`zstd`で圧縮します。
+-   `none` : エクスポートした`data`圧縮しません。
 
-## Steps
+## 手順 {#steps}
 
-### Export data to a local file
+### データをローカルファイルにエクスポートする {#export-data-to-a-local-file}
 
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project. 
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-   > **Tip:**
-   >
-   > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > **ヒント：**
+    >
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Local File** from the drop-down list. Fill in the following parameters:
+3.  **インポート**ページで、右上隅の**[データのエクスポート先]**をクリックし、ドロップダウン リストから**[ローカル ファイル]**を選択します。次のパラメータを入力します。
 
-    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL File** or **CSV**.
-    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
+    -   **タスク名**: エクスポート タスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
 
-   > **Tip:**
-   >
-   > If your cluster has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
+    -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
 
-4. Click **Export**.
+    -   **データ形式**: **SQL ファイル**または**CSV を**選択します。
 
-5. After the export task is successful, you can copy the download command displayed in the export task detail, and then download the exported data by running the command in the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+    -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、また**はなし**を選択します。
+
+    > **ヒント：**
+    >
+    > クラスターでこれまでにデータをインポートまたはエクスポートしたことがない場合は、ページの下部にある**[ここをクリックしてデータをエクスポート...] を**クリックしてデータをエクスポートする必要があります。
+
+4.  **[エクスポート]を**クリックします。
+
+5.  エクスポート タスクが成功したら、エクスポート タスクの詳細に表示されるダウンロード コマンドをコピーし、 [TiDB CloudCLI](/tidb-cloud/cli-reference.md)でコマンドを実行してエクスポートされたデータをダウンロードできます。
 
 </div>
 
 <div label="CLI">
 
-1. Create an export task:
+1.  エクスポート タスクを作成します。
 
     ```shell
     ticloud serverless export create -c <cluster-id>
     ```
 
-    You will get an export ID from the output.
+    出力からエクスポート ID が取得されます。
 
-2. After the export task is successful, download the exported data to your local file:
+2.  エクスポート タスクが成功したら、エクスポートされたデータをローカル ファイルにダウンロードします。
 
     ```shell
     ticloud serverless export download -c <cluster-id> -e <export-id>
     ```
 
-    For more information about the download command, see [ticloud serverless export download](/tidb-cloud/ticloud-serverless-export-download.md).
- 
+    ダウンロードコマンドの詳細については、 [ticloud サーバーレス エクスポート ダウンロード](/tidb-cloud/ticloud-serverless-export-download.md)参照してください。
+
 </div>
 </SimpleTab>
 
-### Export data to Amazon S3
+### Amazon S3にデータをエクスポートする {#export-data-to-amazon-s3}
 
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-   > **Tip:**
-   >
-   > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > **ヒント：**
+    >
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Amazon S3** from the drop-down list. Fill in the following parameters:
+3.  **インポート**ページで、右上隅の**[データのエクスポート先]**をクリックし、ドロップダウン リストから [ **Amazon S3]**を選択します。次のパラメータを入力します。
 
-    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL File** or **CSV**.
-    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
-    - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
-    - **Bucket Access**: choose one of the following access credentials and then fill in the credential information. If you do not have such information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
-        - **AWS Role ARN**: enter the role ARN that has the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
-        - **AWS Access Key**: enter the access key ID and access key secret that have the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
+    -   **タスク名**: エクスポート タスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
+    -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
+    -   **データ形式**: **SQL ファイル**または**CSV を**選択します。
+    -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、また**はなし**を選択します。
+    -   **フォルダー URI** : `s3://<bucket-name>/<folder-path>/`形式で Amazon S3 の URI を入力します。
+    -   **バケット アクセス**: 次のアクセス資格情報のいずれかを選択し、資格情報を入力します。資格情報がない場合は、 [TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
+        -   **AWS ロール ARN** : バケットにアクセスするための`s3:PutObject`および`s3:ListBucket`権限を持つロール ARN を入力します。
+        -   **AWS アクセスキー**: バケットにアクセスするための`s3:PutObject`と`s3:ListBucket`の権限を持つアクセスキー ID とアクセスキーシークレットを入力します。
 
-4. Click **Export**.
+4.  **[エクスポート]を**クリックします。
 
 </div>
 
@@ -163,33 +166,33 @@ You can compress the exported CSV and SQL data using the following algorithms:
 ticloud serverless export create -c <cluster-id> --s3.bucket-uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key>
 ```
 
-- `s3.bucket-uri`: the Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
-- `s3.access-key-id`: the access key ID of the user who has the permission to access the bucket.
-- `s3.secret-access-key`: the access key secret of the user who has the permission to access the bucket.
+-   `s3.bucket-uri` : `s3://<bucket-name>/<file-path>`形式の Amazon S3 URI。
+-   `s3.access-key-id` : バケットにアクセスする権限を持つユーザーのアクセスキー ID。
+-   `s3.secret-access-key` : バケットにアクセスする権限を持つユーザーのアクセスキーシークレット。
 
 </div>
 </SimpleTab>
 
-### Cancel an export task
+### エクスポートタスクをキャンセルする {#cancel-an-export-task}
 
-To cancel an ongoing export task, take the following steps:
+進行中のエクスポート タスクをキャンセルするには、次の手順を実行します。
 
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-   > **Tip:**
-   >
-   > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > **ヒント：**
+    >
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅にある をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-3. On the **Import** page, click **Export** to view the export task list.
+3.  **[インポート]**ページで**[エクスポート]**をクリックして、エクスポート タスク リストを表示します。
 
-4. Choose the export task you want to cancel, and then click **Action**.
+4.  キャンセルするエクスポート タスクを選択し、 **[アクション]**をクリックします。
 
-5. Choose **Cancel** in the drop-down list. Note that you can only cancel the export task that is in the **Running** status.
+5.  ドロップダウン リストで**[キャンセル] を**選択します。**実行中**ステータスのエクスポート タスクのみをキャンセルできることに注意してください。
 
 </div>
 
@@ -202,6 +205,6 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 </div>
 </SimpleTab>
 
-## Pricing
+## 価格 {#pricing}
 
-The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) generated during the export process of successful or canceled tasks. For failed export tasks, you will not be charged.
+ベータ期間中、エクスポート サービスは無料です。成功したタスクまたはキャンセルされたタスクのエクスポート プロセス中に生成された[リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit)に対してのみお支払いいただく必要があります。失敗したエクスポート タスクについては、料金は発生しません。

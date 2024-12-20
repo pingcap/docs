@@ -1,27 +1,23 @@
 ---
 title: RECOVER TABLE
-summary: An overview of the usage of RECOVER TABLE for the TiDB database.
+summary: TiDB データベースの RECOVER TABLE の使用法の概要。
 ---
 
-# RECOVER TABLE
+# テーブルの回復 {#recover-table}
 
-`RECOVER TABLE` is used to recover a deleted table and the data on it within the GC (Garbage Collection) life time after the `DROP TABLE` statement is executed.
+`RECOVER TABLE` 、 `DROP TABLE`ステートメントが実行された後、GC (ガベージ コレクション) の有効期間内に削除されたテーブルとそのテーブル上のデータを回復するために使用されます。
 
-## Syntax
-
-{{< copyable "sql" >}}
+## 構文 {#syntax}
 
 ```sql
 RECOVER TABLE table_name;
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 RECOVER TABLE BY JOB JOB_ID;
 ```
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 RecoverTableStmt ::=
@@ -35,70 +31,58 @@ Int64Num ::= NUM
 NUM ::= intLit
 ```
 
-> **Note:**
+> **注記：**
 >
-> If a table is deleted and the GC lifetime is out, the table cannot be recovered with `RECOVER TABLE`. Execution of `RECOVER TABLE` in this scenario returns an error like: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
+> テーブルが削除され、GC の有効期間が過ぎた場合、 `RECOVER TABLE`ではテーブルを回復できません。このシナリオで`RECOVER TABLE`実行すると、 `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`のようなエラーが返されます。
 
-## Examples
+## 例 {#examples}
 
-+ Recover the deleted table according to the table name.
-
-    {{< copyable "sql" >}}
+-   テーブル名に従って削除されたテーブルを回復します。
 
     ```sql
     DROP TABLE t;
     ```
-
-    {{< copyable "sql" >}}
 
     ```sql
     RECOVER TABLE t;
     ```
 
-    This method searches the recent DDL job history and locates the first DDL operation of the `DROP TABLE` type, and then recovers the deleted table with the name identical to the one table name specified in the `RECOVER TABLE` statement.
+    このメソッドは、最近の DDL ジョブ履歴を検索し、 `DROP TABLE`番目のタイプの最初の DDL 操作を見つけて、 `RECOVER TABLE`のステートメントで指定された 1 つのテーブル名と同じ名前を持つ削除されたテーブルを回復します。
 
-+ Recover the deleted table according to the table's `DDL JOB ID` used.
+-   使用されたテーブル`DDL JOB ID`に従って、削除されたテーブルを回復します。
 
-    Suppose that you had deleted the table `t` and created another `t`, and again you deleted the newly created `t`. Then, if you want to recover the `t` deleted in the first place, you must use the method that specifies the `DDL JOB ID`.
-
-    {{< copyable "sql" >}}
+    テーブル`t`削除して別の`t`作成し、さらに新しく作成した`t`削除したとします。この場合、最初に削除した`t`復元するには、 `DDL JOB ID`を指定する方法を使用する必要があります。
 
     ```sql
     DROP TABLE t;
     ```
 
-    {{< copyable "sql" >}}
-
     ```sql
     ADMIN SHOW DDL JOBS 1;
     ```
 
-    The second statement above is used to search for the table's `DDL JOB ID` to delete `t`. In the following example, the ID is `53`.
+    上記の 2 番目のステートメントは、テーブルの`DDL JOB ID`を検索して`t`削除するために使用されます。次の例では、 ID は`53`です。
 
-    ```
-    +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
-    | JOB_ID | DB_NAME | TABLE_NAME | JOB_TYPE   | SCHEMA_STATE | SCHEMA_ID | TABLE_ID | ROW_COUNT | START_TIME                        | STATE  |
-    +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
-    | 53     | test    |            | drop table | none         | 1         | 41       | 0         | 2019-07-10 13:23:18.277 +0800 CST | synced |
-    +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
-    ```
-
-    {{< copyable "sql" >}}
+        +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
+        | JOB_ID | DB_NAME | TABLE_NAME | JOB_TYPE   | SCHEMA_STATE | SCHEMA_ID | TABLE_ID | ROW_COUNT | START_TIME                        | STATE  |
+        +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
+        | 53     | test    |            | drop table | none         | 1         | 41       | 0         | 2019-07-10 13:23:18.277 +0800 CST | synced |
+        +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
 
     ```sql
     RECOVER TABLE BY JOB 53;
     ```
 
-    This method recovers the deleted table via the `DDL JOB ID`. If the corresponding DDL job is not of the `DROP TABLE` type, an error occurs.
+    このメソッドは、 `DDL JOB ID`介して削除されたテーブルを回復します。対応する DDL ジョブが`DROP TABLE`タイプでない場合は、エラーが発生します。
 
-## Implementation principle
+## 実施原則 {#implementation-principle}
 
-When deleting a table, TiDB only deletes the table metadata, and writes the table data (row data and index data) to be deleted to the `mysql.gc_delete_range` table. The GC Worker in the TiDB background periodically removes from the `mysql.gc_delete_range` table the keys that exceed the GC life time.
+テーブルを削除する場合、TiDB はテーブルメタデータのみを削除し、削除するテーブルデータ (行データとインデックスデータ) を`mysql.gc_delete_range`テーブルに書き込みます。TiDB のバックグラウンドの GC ワーカーは、GC ライフタイムを超えたキーを`mysql.gc_delete_range`テーブルから定期的に削除します。
 
-Therefore, to recover a table, you only need to recover the table metadata and delete the corresponding row record in the `mysql.gc_delete_range` table before the GC Worker deletes the table data. You can use a snapshot read of TiDB to recover the table metadata. Refer to [Read Historical Data](/read-historical-data.md) for details.
+したがって、テーブルを回復するには、GC ワーカーがテーブル データを削除する前に、テーブル メタデータを回復し、 `mysql.gc_delete_range`のテーブル内の対応する行レコードを削除するだけで済みます。テーブル メタデータを回復するには、TiDB のスナップショット読み取りを使用できます。詳細については、 [履歴データを読む](/read-historical-data.md)を参照してください。
 
-Table recovery is done by TiDB obtaining the table metadata through snapshot read, and then going through the process of table creation similar to `CREATE TABLE`. Therefore, `RECOVER TABLE` itself is, in essence, a kind of DDL operation.
+テーブルのリカバリは、TiDB がスナップショット読み取りによってテーブル メタデータを取得し、 `CREATE TABLE`と同様のテーブル作成プロセスを実行することによって行われます。したがって、 `RECOVER TABLE`自体は本質的には一種の DDL 操作です。
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。

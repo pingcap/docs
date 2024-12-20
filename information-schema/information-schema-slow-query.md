@@ -1,29 +1,29 @@
 ---
 title: SLOW_QUERY
-summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
+summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# SLOW_QUERY
+# 遅いクエリ {#slow-query}
 
 <CustomContent platform="tidb">
 
-The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](/tidb-configuration-file.md#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
+`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](/tidb-configuration-file.md#slow-query-file)の解析結果である現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
+`SLOW_QUERY`テーブルは、TiDB [遅いログファイル](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file)の解析結果である現在のノードのスロークエリ情報を提供します。テーブル内の列名は、スローログ内のフィールド名に対応しています。
 
 </CustomContent>
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
-For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
+この表を使用して問題のあるステートメントを識別し、クエリのパフォーマンスを向上させる方法については、 [スロークエリログドキュメント](/identify-slow-queries.md)参照してください。
 
 </CustomContent>
 
@@ -32,110 +32,108 @@ USE INFORMATION_SCHEMA;
 DESC SLOW_QUERY;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
-```
-+-------------------------------+---------------------+------+------+---------+-------+
-| Field                         | Type                | Null | Key  | Default | Extra |
-+-------------------------------+---------------------+------+------+---------+-------+
-| Time                          | timestamp(6)        | NO   | PRI  | NULL    |       |
-| Txn_start_ts                  | bigint(20) unsigned | YES  |      | NULL    |       |
-| User                          | varchar(64)         | YES  |      | NULL    |       |
-| Host                          | varchar(64)         | YES  |      | NULL    |       |
-| Conn_ID                       | bigint(20) unsigned | YES  |      | NULL    |       |
-| Session_alias                 | varchar(64)         | YES  |      | NULL    |       |
-| Exec_retry_count              | bigint(20) unsigned | YES  |      | NULL    |       |
-| Exec_retry_time               | double              | YES  |      | NULL    |       |
-| Query_time                    | double              | YES  |      | NULL    |       |
-| Parse_time                    | double              | YES  |      | NULL    |       |
-| Compile_time                  | double              | YES  |      | NULL    |       |
-| Rewrite_time                  | double              | YES  |      | NULL    |       |
-| Preproc_subqueries            | bigint(20) unsigned | YES  |      | NULL    |       |
-| Preproc_subqueries_time       | double              | YES  |      | NULL    |       |
-| Optimize_time                 | double              | YES  |      | NULL    |       |
-| Wait_TS                       | double              | YES  |      | NULL    |       |
-| Prewrite_time                 | double              | YES  |      | NULL    |       |
-| Wait_prewrite_binlog_time     | double              | YES  |      | NULL    |       |
-| Commit_time                   | double              | YES  |      | NULL    |       |
-| Get_commit_ts_time            | double              | YES  |      | NULL    |       |
-| Commit_backoff_time           | double              | YES  |      | NULL    |       |
-| Backoff_types                 | varchar(64)         | YES  |      | NULL    |       |
-| Resolve_lock_time             | double              | YES  |      | NULL    |       |
-| Local_latch_wait_time         | double              | YES  |      | NULL    |       |
-| Write_keys                    | bigint(22)          | YES  |      | NULL    |       |
-| Write_size                    | bigint(22)          | YES  |      | NULL    |       |
-| Prewrite_region               | bigint(22)          | YES  |      | NULL    |       |
-| Txn_retry                     | bigint(22)          | YES  |      | NULL    |       |
-| Cop_time                      | double              | YES  |      | NULL    |       |
-| Process_time                  | double              | YES  |      | NULL    |       |
-| Wait_time                     | double              | YES  |      | NULL    |       |
-| Backoff_time                  | double              | YES  |      | NULL    |       |
-| LockKeys_time                 | double              | YES  |      | NULL    |       |
-| Request_count                 | bigint(20) unsigned | YES  |      | NULL    |       |
-| Total_keys                    | bigint(20) unsigned | YES  |      | NULL    |       |
-| Process_keys                  | bigint(20) unsigned | YES  |      | NULL    |       |
-| Rocksdb_delete_skipped_count  | bigint(20) unsigned | YES  |      | NULL    |       |
-| Rocksdb_key_skipped_count     | bigint(20) unsigned | YES  |      | NULL    |       |
-| Rocksdb_block_cache_hit_count | bigint(20) unsigned | YES  |      | NULL    |       |
-| Rocksdb_block_read_count      | bigint(20) unsigned | YES  |      | NULL    |       |
-| Rocksdb_block_read_byte       | bigint(20) unsigned | YES  |      | NULL    |       |
-| DB                            | varchar(64)         | YES  |      | NULL    |       |
-| Index_names                   | varchar(100)        | YES  |      | NULL    |       |
-| Is_internal                   | tinyint(1)          | YES  |      | NULL    |       |
-| Digest                        | varchar(64)         | YES  |      | NULL    |       |
-| Stats                         | varchar(512)        | YES  |      | NULL    |       |
-| Cop_proc_avg                  | double              | YES  |      | NULL    |       |
-| Cop_proc_p90                  | double              | YES  |      | NULL    |       |
-| Cop_proc_max                  | double              | YES  |      | NULL    |       |
-| Cop_proc_addr                 | varchar(64)         | YES  |      | NULL    |       |
-| Cop_wait_avg                  | double              | YES  |      | NULL    |       |
-| Cop_wait_p90                  | double              | YES  |      | NULL    |       |
-| Cop_wait_max                  | double              | YES  |      | NULL    |       |
-| Cop_wait_addr                 | varchar(64)         | YES  |      | NULL    |       |
-| Mem_max                       | bigint(20)          | YES  |      | NULL    |       |
-| Disk_max                      | bigint(20)          | YES  |      | NULL    |       |
-| KV_total                      | double              | YES  |      | NULL    |       |
-| PD_total                      | double              | YES  |      | NULL    |       |
-| Backoff_total                 | double              | YES  |      | NULL    |       |
-| Write_sql_response_total      | double              | YES  |      | NULL    |       |
-| Result_rows                   | bigint(22)          | YES  |      | NULL    |       |
-| Warnings                      | longtext            | YES  |      | NULL    |       |
-| Backoff_Detail                | varchar(4096)       | YES  |      | NULL    |       |
-| Prepared                      | tinyint(1)          | YES  |      | NULL    |       |
-| Succ                          | tinyint(1)          | YES  |      | NULL    |       |
-| IsExplicitTxn                 | tinyint(1)          | YES  |      | NULL    |       |
-| IsWriteCacheTable             | tinyint(1)          | YES  |      | NULL    |       |
-| Plan_from_cache               | tinyint(1)          | YES  |      | NULL    |       |
-| Plan_from_binding             | tinyint(1)          | YES  |      | NULL    |       |
-| Has_more_results              | tinyint(1)          | YES  |      | NULL    |       |
-| Resource_group                | varchar(64)         | YES  |      | NULL    |       |
-| Request_unit_read             | double              | YES  |      | NULL    |       |
-| Request_unit_write            | double              | YES  |      | NULL    |       |
-| Time_queued_by_rc             | double              | YES  |      | NULL    |       |
-| Tidb_cpu_time                 | double              | YES  |      | NULL    |       |
-| Tikv_cpu_time                 | double              | YES  |      | NULL    |       |
-| Plan                          | longtext            | YES  |      | NULL    |       |
-| Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
-| Binary_plan                   | longtext            | YES  |      | NULL    |       |
-| Prev_stmt                     | longtext            | YES  |      | NULL    |       |
-| Query                         | longtext            | YES  |      | NULL    |       |
-+-------------------------------+---------------------+------+------+---------+-------+
-79 rows in set (0.00 sec)
-```
+    +-------------------------------+---------------------+------+------+---------+-------+
+    | Field                         | Type                | Null | Key  | Default | Extra |
+    +-------------------------------+---------------------+------+------+---------+-------+
+    | Time                          | timestamp(6)        | NO   | PRI  | NULL    |       |
+    | Txn_start_ts                  | bigint(20) unsigned | YES  |      | NULL    |       |
+    | User                          | varchar(64)         | YES  |      | NULL    |       |
+    | Host                          | varchar(64)         | YES  |      | NULL    |       |
+    | Conn_ID                       | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Session_alias                 | varchar(64)         | YES  |      | NULL    |       |
+    | Exec_retry_count              | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Exec_retry_time               | double              | YES  |      | NULL    |       |
+    | Query_time                    | double              | YES  |      | NULL    |       |
+    | Parse_time                    | double              | YES  |      | NULL    |       |
+    | Compile_time                  | double              | YES  |      | NULL    |       |
+    | Rewrite_time                  | double              | YES  |      | NULL    |       |
+    | Preproc_subqueries            | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Preproc_subqueries_time       | double              | YES  |      | NULL    |       |
+    | Optimize_time                 | double              | YES  |      | NULL    |       |
+    | Wait_TS                       | double              | YES  |      | NULL    |       |
+    | Prewrite_time                 | double              | YES  |      | NULL    |       |
+    | Wait_prewrite_binlog_time     | double              | YES  |      | NULL    |       |
+    | Commit_time                   | double              | YES  |      | NULL    |       |
+    | Get_commit_ts_time            | double              | YES  |      | NULL    |       |
+    | Commit_backoff_time           | double              | YES  |      | NULL    |       |
+    | Backoff_types                 | varchar(64)         | YES  |      | NULL    |       |
+    | Resolve_lock_time             | double              | YES  |      | NULL    |       |
+    | Local_latch_wait_time         | double              | YES  |      | NULL    |       |
+    | Write_keys                    | bigint(22)          | YES  |      | NULL    |       |
+    | Write_size                    | bigint(22)          | YES  |      | NULL    |       |
+    | Prewrite_region               | bigint(22)          | YES  |      | NULL    |       |
+    | Txn_retry                     | bigint(22)          | YES  |      | NULL    |       |
+    | Cop_time                      | double              | YES  |      | NULL    |       |
+    | Process_time                  | double              | YES  |      | NULL    |       |
+    | Wait_time                     | double              | YES  |      | NULL    |       |
+    | Backoff_time                  | double              | YES  |      | NULL    |       |
+    | LockKeys_time                 | double              | YES  |      | NULL    |       |
+    | Request_count                 | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Total_keys                    | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Process_keys                  | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Rocksdb_delete_skipped_count  | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Rocksdb_key_skipped_count     | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Rocksdb_block_cache_hit_count | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Rocksdb_block_read_count      | bigint(20) unsigned | YES  |      | NULL    |       |
+    | Rocksdb_block_read_byte       | bigint(20) unsigned | YES  |      | NULL    |       |
+    | DB                            | varchar(64)         | YES  |      | NULL    |       |
+    | Index_names                   | varchar(100)        | YES  |      | NULL    |       |
+    | Is_internal                   | tinyint(1)          | YES  |      | NULL    |       |
+    | Digest                        | varchar(64)         | YES  |      | NULL    |       |
+    | Stats                         | varchar(512)        | YES  |      | NULL    |       |
+    | Cop_proc_avg                  | double              | YES  |      | NULL    |       |
+    | Cop_proc_p90                  | double              | YES  |      | NULL    |       |
+    | Cop_proc_max                  | double              | YES  |      | NULL    |       |
+    | Cop_proc_addr                 | varchar(64)         | YES  |      | NULL    |       |
+    | Cop_wait_avg                  | double              | YES  |      | NULL    |       |
+    | Cop_wait_p90                  | double              | YES  |      | NULL    |       |
+    | Cop_wait_max                  | double              | YES  |      | NULL    |       |
+    | Cop_wait_addr                 | varchar(64)         | YES  |      | NULL    |       |
+    | Mem_max                       | bigint(20)          | YES  |      | NULL    |       |
+    | Disk_max                      | bigint(20)          | YES  |      | NULL    |       |
+    | KV_total                      | double              | YES  |      | NULL    |       |
+    | PD_total                      | double              | YES  |      | NULL    |       |
+    | Backoff_total                 | double              | YES  |      | NULL    |       |
+    | Write_sql_response_total      | double              | YES  |      | NULL    |       |
+    | Result_rows                   | bigint(22)          | YES  |      | NULL    |       |
+    | Warnings                      | longtext            | YES  |      | NULL    |       |
+    | Backoff_Detail                | varchar(4096)       | YES  |      | NULL    |       |
+    | Prepared                      | tinyint(1)          | YES  |      | NULL    |       |
+    | Succ                          | tinyint(1)          | YES  |      | NULL    |       |
+    | IsExplicitTxn                 | tinyint(1)          | YES  |      | NULL    |       |
+    | IsWriteCacheTable             | tinyint(1)          | YES  |      | NULL    |       |
+    | Plan_from_cache               | tinyint(1)          | YES  |      | NULL    |       |
+    | Plan_from_binding             | tinyint(1)          | YES  |      | NULL    |       |
+    | Has_more_results              | tinyint(1)          | YES  |      | NULL    |       |
+    | Resource_group                | varchar(64)         | YES  |      | NULL    |       |
+    | Request_unit_read             | double              | YES  |      | NULL    |       |
+    | Request_unit_write            | double              | YES  |      | NULL    |       |
+    | Time_queued_by_rc             | double              | YES  |      | NULL    |       |
+    | Tidb_cpu_time                 | double              | YES  |      | NULL    |       |
+    | Tikv_cpu_time                 | double              | YES  |      | NULL    |       |
+    | Plan                          | longtext            | YES  |      | NULL    |       |
+    | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
+    | Binary_plan                   | longtext            | YES  |      | NULL    |       |
+    | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
+    | Query                         | longtext            | YES  |      | NULL    |       |
+    +-------------------------------+---------------------+------+------+---------+-------+
+    79 rows in set (0.00 sec)
 
-The maximum statement length of the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
+`Query`列の最大ステートメント長は、 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)システム変数によって制限されます。
 
-## CLUSTER_SLOW_QUERY table
+## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 
-The `CLUSTER_SLOW_QUERY` table provides the slow query information of all nodes in the cluster, which is the parsing result of the TiDB slow log files. You can use the `CLUSTER_SLOW_QUERY` table the way you do with `SLOW_QUERY`. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query.
+`CLUSTER_SLOW_QUERY`テーブルは、クラスター内のすべてのノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは、 `SLOW_QUERY`と同じように使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルのテーブル スキーマと異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> このテーブルは[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
-For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
+この表を使用して問題のあるステートメントを識別し、クエリのパフォーマンスを向上させる方法については、 [スロークエリログドキュメント](/identify-slow-queries.md)参照してください。
 
 </CustomContent>
 
@@ -143,7 +141,7 @@ For how to use this table to identify problematic statements and improve query p
 DESC CLUSTER_SLOW_QUERY;
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -235,13 +233,13 @@ The output is as follows:
 80 rows in set (0.00 sec)
 ```
 
-When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
+クラスタ システム テーブルをクエリすると、TiDB はすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行プランは次のようになります。
 
 ```sql
 DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
 ```
 
-The output is as follows:
+出力は次のようになります。
 
 ```sql
 +----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
@@ -255,68 +253,64 @@ The output is as follows:
 4 rows in set (0.00 sec)
 ```
 
-In the preceding execution plan, the `user = u1` condition is pushed down to other (`cop`) TiDB nodes, and the aggregate operator is also pushed down (the `StreamAgg` operator in the graph).
+上記の実行プランでは、条件`user = u1`が他の ( `cop` ) TiDB ノードにプッシュダウンされ、集計演算子もプッシュダウンされます (グラフの`StreamAgg`演算子)。
 
-Currently, because statistics of the system tables are not collected, sometimes some aggregation operators cannot be pushed down, which results in slow execution. In this case, you can manually specify the SQL HINT to push down the aggregation operators. For example:
+現在、システム テーブルの統計が収集されていないため、一部の集計演算子をプッシュダウンできず、実行速度が遅くなることがあります。この場合、SQL HINT を手動で指定して集計演算子をプッシュダウンできます。例:
 
 ```sql
 SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 ```
 
-## View execution information
+## 実行情報をビュー {#view-execution-information}
 
-By running an [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) query on the `SLOW_QUERY` table, you can get detailed information about how the database fetches the slow query information. However, this information is **not** available when you run `EXPLAIN ANALYZE` on the `CLUSTER_SLOW_QUERY` table.
+`SLOW_QUERY`テーブルで[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行すると、データベースがスロー クエリ情報を取得する方法に関する詳細情報を取得できます。ただし、 `CLUSTER_SLOW_QUERY`テーブルで`EXPLAIN ANALYZE`実行した場合は、この情報は利用でき**ません**。
 
-Example:
+例：
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM INFORMATION_SCHEMA.SLOW_QUERY LIMIT 1\G
 ```
 
-```
-*************************** 1. row ***************************
-            id: Limit_7
-       estRows: 1.00
-       actRows: 1
-          task: root
- access object: 
-execution info: time:3.46ms, loops:2, RU:0.000000
- operator info: offset:0, count:1
-        memory: N/A
-          disk: N/A
-*************************** 2. row ***************************
-            id: └─MemTableScan_10
-       estRows: 10000.00
-       actRows: 64
-          task: root
- access object: table:SLOW_QUERY
-execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, parse_log: {time:4.11ms, concurrency:15}, total_file: 1, read_file: 1, read_size: 4.06 MB
- operator info: only search in the current 'tidb-slow.log' file
-        memory: 1.26 MB
-          disk: N/A
-2 rows in set (0.01 sec)
-```
+    *************************** 1. row ***************************
+                id: Limit_7
+           estRows: 1.00
+           actRows: 1
+              task: root
+     access object: 
+    execution info: time:3.46ms, loops:2, RU:0.000000
+     operator info: offset:0, count:1
+            memory: N/A
+              disk: N/A
+    *************************** 2. row ***************************
+                id: └─MemTableScan_10
+           estRows: 10000.00
+           actRows: 64
+              task: root
+     access object: table:SLOW_QUERY
+    execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, parse_log: {time:4.11ms, concurrency:15}, total_file: 1, read_file: 1, read_size: 4.06 MB
+     operator info: only search in the current 'tidb-slow.log' file
+            memory: 1.26 MB
+              disk: N/A
+    2 rows in set (0.01 sec)
 
-In the output, check the following fields (formatted for readability) in the `execution info` section:
+出力で、セクション`execution info`の次のフィールド (読みやすいようにフォーマットされています) を確認します。
 
-```
-initialize: 55.5µs,
-read_file: 1.21ms,
-parse_log: {
-  time:4.11ms,
-  concurrency:15
-},
-total_file: 1,
-read_file: 1,
-read_size: 4.06 MB
-```
+    initialize: 55.5µs,
+    read_file: 1.21ms,
+    parse_log: {
+      time:4.11ms,
+      concurrency:15
+    },
+    total_file: 1,
+    read_file: 1,
+    read_size: 4.06 MB
 
-| Field | Description |
-|---|---|
-| `initialize` | Time spent initializing |
-| `read_file` | Time spent reading the slow log file |
-| `parse_log.time` | Time spent parsing the slow log file |
-| `parse_log.concurrency` | Concurrency for parsing the slow log file (set by [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)) |
-| `total_file` | Total number of slow log files |
-| `read_file` | Number of slow log files that are read |
-| `read_size` | Bytes read from the log file |
+| 分野                      | 説明                                                                                                            |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `initialize`            | 初期化に要した時間                                                                                                     |
+| `read_file`             | スローログファイルの読み取りに要した時間                                                                                          |
+| `parse_log.time`        | スローログファイルの解析に要した時間                                                                                            |
+| `parse_log.concurrency` | スローログファイルの解析の同時実行性（ [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)に設定） |
+| `total_file`            | スローログファイルの合計数                                                                                                 |
+| `read_file`             | 読み取られる遅いログファイルの数                                                                                              |
+| `read_size`             | ログファイルから読み取られたバイト数                                                                                            |

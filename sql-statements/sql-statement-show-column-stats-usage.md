@@ -1,24 +1,24 @@
 ---
 title: SHOW COLUMN_STATS_USAGE
-summary: An overview of the usage of SHOW COLUMN_STATS_USAGE for TiDB database.
+summary: TiDB データベースの SHOW COLUMN_STATS_USAGE の使用法の概要。
 ---
 
-# SHOW COLUMN_STATS_USAGE
+# COLUMN_STATS_USAGE を表示 {#show-column-stats-usage}
 
-The `SHOW COLUMN_STATS_USAGE` statement shows the last usage time and collection time of column statistics. You can also use it to locate `PREDICATE COLUMNS` and columns on which statistics have been collected.
+`SHOW COLUMN_STATS_USAGE`ステートメントは、列統計の最終使用時間と収集時間を表示します。また、これを使用して、統計が収集された`PREDICATE COLUMNS`と列を見つけることもできます。
 
-Currently, the `SHOW COLUMN_STATS_USAGE` statement returns the following columns:
+現在、 `SHOW COLUMN_STATS_USAGE`ステートメントは次の列を返します。
 
-| Column name | Description            |
-| -------- | ------------- |
-| `Db_name`  |  The database name    |
-| `Table_name` | The table name |
-| `Partition_name` | The partition name |
-| `Column_name` | The column name |
-| `Last_used_at` | The last time when the column statistics were used in the query optimization |
-| `Last_analyzed_at` | The last time when the column statistics were collected |
+| カラム名               | 説明                     |
+| ------------------ | ---------------------- |
+| `Db_name`          | データベース名                |
+| `Table_name`       | テーブル名                  |
+| `Partition_name`   | パーティション名               |
+| `Column_name`      | 列名                     |
+| `Last_used_at`     | クエリの最適化で列統計が最後に使用された時刻 |
+| `Last_analyzed_at` | 列統計が最後に収集された時刻         |
 
-## Synopsis
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowColumnStatsUsageStmt ::=
@@ -29,30 +29,28 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 SHOW COLUMN_STATS_USAGE;
 ```
 
-```
-+---------+------------+----------------+-------------+--------------+---------------------+
-| Db_name | Table_name | Partition_name | Column_name | Last_used_at | Last_analyzed_at    |
-+---------+------------+----------------+-------------+--------------+---------------------+
-| test    | t1         |                | id          | NULL         | 2024-05-10 11:04:23 |
-| test    | t1         |                | b           | NULL         | 2024-05-10 11:04:23 |
-| test    | t1         |                | pad         | NULL         | 2024-05-10 11:04:23 |
-| test    | t          |                | a           | NULL         | 2024-05-10 11:37:06 |
-| test    | t          |                | b           | NULL         | 2024-05-10 11:37:06 |
-+---------+------------+----------------+-------------+--------------+---------------------+
-5 rows in set (0.00 sec)
-```
+    +---------+------------+----------------+-------------+--------------+---------------------+
+    | Db_name | Table_name | Partition_name | Column_name | Last_used_at | Last_analyzed_at    |
+    +---------+------------+----------------+-------------+--------------+---------------------+
+    | test    | t1         |                | id          | NULL         | 2024-05-10 11:04:23 |
+    | test    | t1         |                | b           | NULL         | 2024-05-10 11:04:23 |
+    | test    | t1         |                | pad         | NULL         | 2024-05-10 11:04:23 |
+    | test    | t          |                | a           | NULL         | 2024-05-10 11:37:06 |
+    | test    | t          |                | b           | NULL         | 2024-05-10 11:37:06 |
+    +---------+------------+----------------+-------------+--------------+---------------------+
+    5 rows in set (0.00 sec)
 
-## MySQL compatibility
+## MySQL 互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## See also
+## 参照 {#see-also}
 
-* [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
-* [Introduction to Statistics](/statistics.md)
+-   [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
+-   [統計入門](/statistics.md)

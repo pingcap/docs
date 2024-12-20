@@ -1,61 +1,61 @@
 ---
 title: ticloud serverless export create
-summary: The reference of `ticloud serverless export create`.
+summary: ticloud serverless export create` のリファレンス。
 ---
 
-# ticloud serverless export create
+# ticloud サーバーレス エクスポート 作成 {#ticloud-serverless-export-create}
 
-Export data from a TiDB Cloud Serverless cluster:
+TiDB Cloud Serverless クラスターからデータをエクスポートします。
 
 ```shell
 ticloud serverless export create [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Export data from a TiDB Cloud Serverless cluster in interactive mode:
+インタラクティブ モードでTiDB Cloud Serverless クラスターからデータをエクスポートします。
 
 ```shell
 ticloud serverless export create
 ```
 
-Export data from a TiDB Cloud Serverless cluster to local storage in non-interactive mode:
+非対話モードでTiDB Cloud Serverless クラスターからローカルstorageにデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --database <database>
 ```
 
-Export data from a TiDB Cloud Serverless cluster to Amazon S3 in non-interactive mode:
+非対話モードでTiDB Cloud Serverless クラスターから Amazon S3 にデータをエクスポートします。
 
 ```shell
 ticloud serverless export create -c <cluster-id> --s3.bucket-uri <bucket-uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key>
 ```
 
-## Flags
+## 旗 {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従ってフラグを入力するだけです。
 
-| Flag                          | Description                                                                                            | Required | Note                                                 |
-|-------------------------------|--------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string       | Specifies the ID of the cluster, from which you want to export data.                                             | Yes      | Only works in non-interactive mode.                  |
-| --file-type string            | Specifies the format of the exported file. The supported formats include `CSV` and `SQL`. The default value is `SQL`.                                          | No       | Only works in non-interactive mode.                  |
-| --database string             | Specifies the database from which you want to export data. The default value is `*`. This flag is required when you export data to local storage.                                                    | No       | Only works in non-interactive mode.                  |
-| --table string                | Specifies the table from which you want to export data. The default value is `*`.                                                         | No       | Only works in non-interactive mode.                  |
-| --target-type string          | Specifies the exported location. The supported location includes `LOCAL` and `S3`. The default value is `LOCAL`.                                           | No       | Only works in non-interactive mode.                  |
-| --s3.bucket-uri string        | Specifies the bucket URI of the S3. This flag is required when you export data to Amazon S3.                                              | No       | Only works in non-interactive mode.                  |
-| --s3.access-key-id string     | Specifies the access key ID of the S3 bucket. This flag is required when you export data to Amazon S3.                                    | NO       | Only works in non-interactive mode.                  |
-| --s3.secret-access-key string | Specifies the secret access key of the S3 bucket. This flag is required when you export data to Amazon S3.                                | No       | Only works in non-interactive mode.                  |
-| --compression string          | Specifies the compression algorithm of the export file. The supported algorithms include `GZIP`, `SNAPPY`, `ZSTD`, and `NONE`. The default value is `GZIP`. | No       | Only works in non-interactive mode.                  |
-| -h, --help                    | Shows help information for this command.                                                                     | No       | Works in both non-interactive and interactive modes. |
+| フラグ                        | 説明                                                                                                      | 必須  | 注記                       |
+| -------------------------- | ------------------------------------------------------------------------------------------------------- | --- | ------------------------ |
+| -c, --cluster-id 文字列       | データをエクスポートするクラスターの ID を指定します。                                                                           | はい  | 非対話型モードでのみ動作します。         |
+| --ファイルタイプ文字列               | エクスポート ファイルの形式を指定します。サポートされている形式には`CSV`と`SQL`あります。デフォルト値は`SQL`です。                                       | いいえ | 非対話型モードでのみ動作します。         |
+| --データベース文字列                | データをエクスポートするデータベースを指定します。デフォルト値は`*`です。このフラグは、データをローカルstorageにエクスポートするときに必要です。                           | いいえ | 非対話型モードでのみ動作します。         |
+| --テーブル文字列                  | データをエクスポートするテーブルを指定します。デフォルト値は`*`です。                                                                    | いいえ | 非対話型モードでのみ動作します。         |
+| --ターゲットタイプ文字列              | エクスポート場所を指定します。サポートされている場所には`LOCAL`と`S3`含まれます。デフォルト値は`LOCAL`です。                                         | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.bucket-uri 文字列        | S3 のバケット URI を指定します。このフラグは、データを Amazon S3 にエクスポートするときに必要です。                                             | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.アクセスキーID文字列           | S3 バケットのアクセスキー ID を指定します。このフラグは、データを Amazon S3 にエクスポートするときに必要です。                                        | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.secret-access-key 文字列 | S3 バケットのシークレット アクセス キーを指定します。このフラグは、データを Amazon S3 にエクスポートするときに必要です。                                    | いいえ | 非対話型モードでのみ動作します。         |
+| --圧縮文字列                    | エクスポート ファイルの圧縮アルゴリズムを指定します。サポートされているアルゴリズムには、 `GZIP` 、 `SNAPPY` 、 `ZSTD` 、 `NONE`があります。デフォルト値は`GZIP`です。 | いいえ | 非対話型モードでのみ動作します。         |
+| -h, --help                 | このコマンドのヘルプ情報を表示します。                                                                                     | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                             |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
+| フラグ               | 説明                                                                             | 必須  | 注記                                                             |
+| ----------------- | ------------------------------------------------------------------------------ | --- | -------------------------------------------------------------- |
+| --色なし             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部の UI コンポーネントで色を無効にしても機能しない可能性があります。 |
+| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
+| -D、--デバッグ         | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                       |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関してご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、あらゆる貢献を歓迎します。

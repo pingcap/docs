@@ -1,17 +1,17 @@
 ---
 title: TiDB Lightning Configuration
-summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
+summary: TiDB Lightningの CLI の使用方法とサンプル構成について学習します。
 ---
 
-# TiDB Lightning Configuration
+# TiDB Lightningコンフィグレーション {#tidb-lightning-configuration}
 
-This document provides samples for global configuration and task configuration, and describes the usage of command-line parameters.
+このドキュメントでは、グローバル構成とタスク構成のサンプルを提供し、コマンドライン パラメータの使用方法について説明します。
 
-## Configuration files
+## コンフィグレーションファイル {#configuration-files}
 
-TiDB Lightning has two configuration classes: "global" and "task", and they have compatible structures. Their distinction arises only when the [server mode](/tidb-lightning/tidb-lightning-web-interface.md) is enabled. When server mode is disabled (the default), TiDB Lightning will only execute one task, and the same configuration file is used for both global and task configurations.
+TiDB Lightning には、 「グローバル」と「タスク」の 2 つの構成クラスがあり、それらの構造は互換性があります。これらの違いは、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ生じます。サーバーモードが無効になっている場合 (デフォルト)、 TiDB Lightning は1 つのタスクのみを実行し、グローバル構成とタスク構成の両方に同じ構成ファイルが使用されます。
 
-### TiDB Lightning (Global)
+### TiDB Lightning(グローバル) {#tidb-lightning-global}
 
 ```toml
 ### tidb-lightning global configuration
@@ -40,7 +40,7 @@ max-backups = 14
 enable-diagnose-logs = false
 ```
 
-### TiDB Lightning (Task)
+### TiDB Lightning (タスク) {#tidb-lightning-task}
 
 ```toml
 ### tidb-lightning task configuration
