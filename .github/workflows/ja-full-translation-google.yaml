@@ -3,14 +3,14 @@ name: JA Full Translation (Google version)
 on:
   workflow_dispatch:
     inputs:
-    from:
-      description: "The EN source branch. e.g. release-8.5"
-      required: true
-      default: "release-8.5"
-    to:
-      description: "The JA target branch. e.g. i18n-ja-release-8.5"
-      required: true
-      default: "i18n-ja-release-8.5"
+      from:
+        description: "The EN source branch. e.g. release-8.5"
+        required: true
+        default: "release-8.5"
+      to:
+        description: "The JA target branch. e.g. i18n-ja-release-8.5"
+        required: true
+        default: "i18n-ja-release-8.5"
 
 jobs:
   ja-translation:
