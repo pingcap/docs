@@ -70,7 +70,7 @@ USING
 You can bypass syntax conflicts by using equivalent statements. For example, you can rewrite the above statements in the following ways:
 
 ```sql
--- First rewrite of type one statements: Delete the `JOIN` keyword. Replace it with a comma.
+-- Rewrite of type one statements: Delete the `JOIN` keyword. Replace it with a comma.
 CREATE GLOBAL BINDING for
     SELECT * FROM orders o1, orders o2
 USING
