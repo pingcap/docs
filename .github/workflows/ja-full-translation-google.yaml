@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
         name: Download specified branch of docs repo
         with:
-          ref: "release-8.1"
+          ref: "release-8.5"
           path: "docs"
       - uses: actions/setup-node@v4
         name: Setup node 18
