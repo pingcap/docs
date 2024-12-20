@@ -110,7 +110,7 @@ This section introduces the configuration of a replication task.
 
 #### filter.event-filters
 
-[//]: # (The detailed syntax is described in <https://docs.pingcap.com/tidb/stable/ticdc-filter>)
+<!-- The detailed syntax is described in https://docs.pingcap.com/tidb/stable/ticdc-filter -->
 
 ##### `matcher`
 
@@ -167,7 +167,7 @@ This section introduces the configuration of a replication task.
 
 ### sink
 
-[//]: # (MQ sink configuration items)
+<!-- MQ sink configuration items -->
 
 #### `dispatchers`
 
@@ -225,7 +225,7 @@ This section introduces the configuration of a replication task.
 - This configuration item only applies to the MQ downstream using the open-protocol and canal-json.
 - Default value: `false`
 
-[//]: # (Storage sink configuration items)
+<!-- Storage sink configuration items -->
 
 #### `terminator`
 
