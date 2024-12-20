@@ -149,7 +149,7 @@ Some operations in TiDB require writing temporary files to the server, so it is 
     When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is enabled, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the user that runs TiDB has read and write permissions for that directory of the operating system. The default directory `/tmp/tidb` uses tmpfs (temporary file system). It is recommended to explicitly specify a disk directory. The following uses `/data/tidb-deploy/tempdir` as an example:
 
     > **Note:**
-    > 
+    >
     > If DDL operations on large objects exist in your application, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
 
     ```shell
@@ -781,3 +781,7 @@ sudo yum -y install numactl
     ```
 
     To get help information of the `tiup cluster exec` command, run the `tiup cluster exec --help` command.
+
+## Disable SELinux
+
+Use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility to check if SELinux is disabled or set to permissive. SELinux in enforcing mode can cause deployment failures. For instructions on disabling SELinux, refer to your operating system's documentation.
