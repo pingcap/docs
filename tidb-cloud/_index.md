@@ -10,111 +10,111 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Learn" icon="cloud1">
 
-[Why TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
+[Why TiDB Cloud](/tidb-cloud-intro?target=_blank)
 
-[Architecture](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
+[Architecture](/tidb-cloud-intro#architecture?target=_blank)
 
-[FAQ](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq)
+[FAQ](/tidb-cloud-faq?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
+[Try Out TiDB Cloud](/tidb-cloud-quickstart?target=_blank)
 
-[Try Out TiDB + AI](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python)
+[Try Out TiDB + AI](/vector-search-get-started-using-python?target=_blank)
 
-[Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
+[Try Out HTAP](/tidb-cloud-htap-quickstart?target=_blank)
 
-[Proof of Concept](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
+[Proof of Concept](/tidb-cloud-poc?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
+[Developer Guide Overview](/dev-guide-overview?target=_blank)
 
-[Quick Start](https://docs.pingcap.com/tidbcloud/dev-guide-build-cluster-in-cloud)
+[Quick Start](/dev-guide-build-cluster-in-cloud?target=_blank)
 
-[Example Application](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-spring-boot)
+[Example Application](/dev-guide-sample-application-spring-boot?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Maintain" icon="cloud7">
 
-[Create a Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
+[Create a Cluster](/create-tidb-cluster?target=_blank)
 
-[Connect to a Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
+[Connect to a Cluster](/connect-to-tidb-cluster?target=_blank)
 
-[Use an HTAP Cluster](https://docs.pingcap.com/tidbcloud/tiflash-overview)
+[Use an HTAP Cluster](/tiflash-overview?target=_blank)
 
-[Back Up and Restore Data](https://docs.pingcap.com/tidbcloud/backup-and-restore)
+[Back Up and Restore Data](/backup-and-restore?target=_blank)
 
-[Scale a Cluster](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
+[Scale a Cluster](/scale-tidb-cluster?target=_blank)
 
-[Pause or Resume a TiDB Cluster](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
+[Pause or Resume a TiDB Cluster](/pause-or-resume-tidb-cluster?target=_blank)
 
-[Stream Data](http://docs.pingcap.com/tidbcloud/changefeed-overview)
+[Stream Data](http://docs.pingcap.com/tidbcloud/changefeed-overview?target=_blank)
 
-[Use API (Beta)](https://docs.pingcap.com/tidbcloud/api-overview)
+[Use API (Beta?target=_blank)](/api-overview?target=_blank)
 
-[Use TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
+[Use TiDB Cloud CLI](/get-started-with-cli?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Import Sample Data](https://docs.pingcap.com/tidbcloud/import-sample-data)
+[Import Sample Data](/import-sample-data?target=_blank)
 
-[From MySQL](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
+[From MySQL](/migrate-data-into-tidb?target=_blank)
 
-[From Amazon Aurora MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
+[From Amazon Aurora MySQL](/migrate-from-aurora-bulk-import?target=_blank)
 
-[From Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
+[From Amazon S3 or GCS](/migrate-from-amazon-s3-or-gcs?target=_blank)
 
-[From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[From CSV Files](/import-csv-files?target=_blank)
 
-[From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[From Apache Parquet Files](/import-csv-files?target=_blank)
 
-[With MySQL CLI](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli)
+[With MySQL CLI](/import-with-mysql-cli?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Status and Metrics](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster)
+[Status and Metrics](/monitor-tidb-cluster?target=_blank)
 
-[Built-in Monitoring](https://docs.pingcap.com/tidbcloud/built-in-monitoring)
+[Built-in Monitoring](/built-in-monitoring?target=_blank)
 
-[Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting)
+[Built-in Alerting](/monitor-built-in-alerting?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview)
+[Tuning Overview](/tidb-cloud-tune-performance-overview?target=_blank)
 
-[Analyze Performance](https://docs.pingcap.com/tidbcloud/tune-performance)
+[Analyze Performance](/tune-performance?target=_blank)
 
-[Tune SQL Performance](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview)
+[Tune SQL Performance](/tidb-cloud-sql-tuning-overview?target=_blank)
 
-[Tune TiFlash Performance](https://docs.pingcap.com/tidbcloud/tune-tiflash-performance)
+[Tune TiFlash Performance](/tune-tiflash-performance?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Security" icon="users">
 
-[Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication)
+[Password Authentication](/tidb-cloud-password-authentication?target=_blank)
 
-[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#user-roles)
+[User Roles](/manage-user-access#user-roles?target=_blank)
 
-[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
+[Manage User Profiles](/manage-user-access#manage-user-profiles?target=_blank)
 
-[Manage organization access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access)
+[Manage organization access](/manage-user-access#manage-organization-access?target=_blank)
 
-[Manage project access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
+[Manage project access](/manage-user-access#manage-project-access?target=_blank)
 
-[Configure Password Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
+[Configure Password Settings](/configure-security-settings?target=_blank)
 
 </LearningPath>
 
@@ -122,35 +122,35 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Pricing](https://www.pingcap.com/pricing/)
 
-[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
+[Invoices](/tidb-cloud-billing#invoices?target=_blank)
 
-[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits)
+[Credits](/tidb-cloud-billing#credits?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Integrations" icon="cloud4">
 
-[Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)
+[Airbyte](/integrate-tidbcloud-with-airbyte?target=_blank)
 
-[Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
+[Datadog](/monitor-datadog-integration?target=_blank)
 
-[Zapier](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
+[Zapier](/integrate-tidbcloud-with-zapier?target=_blank)
 
-[Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
+[Vercel](/integrate-tidbcloud-with-vercel?target=_blank)
 
-[Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+[Terraform](/terraform-tidbcloud-provider-overview?target=_blank)
 
-[Amazon AppFlow](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
+[Amazon AppFlow](/dev-guide-aws-appflow-integration?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[System Variables](https://docs.pingcap.com/tidbcloud/system-variables)
+[System Variables](/system-variables?target=_blank)
 
-[Release Notes](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)
+[Release Notes](/tidb-cloud-release-notes?target=_blank)
 
-[SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
+[SQL Reference](/basic-sql-operations?target=_blank)
 
 </LearningPath>
 
