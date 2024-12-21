@@ -18,129 +18,129 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Learn" icon="cloud1">
 
-[What is TiDB Self-Managed](./overview?target=_blank)
+[What is TiDB Self-Managed](/overview?target=_blank)
 
-[Features](./basic-features?target=_blank)
+[Features](/basic-features?target=_blank)
 
-[TiFlash](./tiflash-overview?target=_blank)
+[TiFlash](/tiflash-overview?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB Self-Managed](./quick-start-with-tidb?target=_blank)
+[Try Out TiDB Self-Managed](/quick-start-with-tidb?target=_blank)
 
-[Try Out HTAP](./quick-start-with-htap?target=_blank)
+[Try Out HTAP](/quick-start-with-htap?target=_blank)
 
-[Import Example Database](./import-example-data?target=_blank)
+[Import Example Database](/import-example-data?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](./dev-guide-overview?target=_blank)
+[Developer Guide Overview](/dev-guide-overview?target=_blank)
 
-[Quick Start](./dev-guide-build-cluster-in-cloud?target=_blank)
+[Quick Start](/dev-guide-build-cluster-in-cloud?target=_blank)
 
-[Example Application](./dev-guide-sample-application-java-spring-boot?target=_blank)
+[Example Application](/dev-guide-sample-application-java-spring-boot?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Deploy" icon="deploy">
 
-[Software and Hardware Requirements](./hardware-and-software-requirements?target=_blank)
+[Software and Hardware Requirements](/hardware-and-software-requirements?target=_blank)
 
-[Deploy a TiDB Cluster Using TiUP](./production-deployment-using-tiup?target=_blank)
+[Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup?target=_blank)
 
-[Deploy a TiDB Cluster on Kubernetes](../../tidb-in-kubernetes/stable?target=_blank)
+[Deploy a TiDB Cluster on Kubernetes](./../tidb-in-kubernetes/stable?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Migration Overview](./migration-overview?target=_blank)
+[Migration Overview](/migration-overview?target=_blank)
 
-[Migration Tools](./migration-tools?target=_blank)
+[Migration Tools](/migration-tools?target=_blank)
 
-[Typical Scenarios](./migrate-aurora-to-tidb?target=_blank)
+[Typical Scenarios](/migrate-aurora-to-tidb?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Maintain" icon="maintain">
 
-[Upgrade a Cluster](./upgrade-tidb-using-tiup?target=_blank)
+[Upgrade a Cluster](/upgrade-tidb-using-tiup?target=_blank)
 
-[Scale a Cluster](./scale-tidb-using-tiup?target=_blank)
+[Scale a Cluster](/scale-tidb-using-tiup?target=_blank)
 
-[Back Up and Restore Cluster Data](./backup-and-restore-overview?target=_blank)
+[Back Up and Restore Cluster Data](/backup-and-restore-overview?target=_blank)
 
-[Daily Check](./daily-check?target=_blank)
+[Daily Check](/daily-check?target=_blank)
 
-[Maintain TiDB Using TiUP](./maintain-tidb-using-tiup?target=_blank)
+[Maintain TiDB Using TiUP](/maintain-tidb-using-tiup?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Use Prometheus and Grafana](./tidb-monitoring-framework?target=_blank)
+[Use Prometheus and Grafana](/tidb-monitoring-framework?target=_blank)
 
-[Monitoring API](./tidb-monitoring-api?target=_blank)
+[Monitoring API](/tidb-monitoring-api?target=_blank)
 
-[Alert Rules](./alert-rules?target=_blank)
+[Alert Rules](/alert-rules?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](./performance-tuning-overview?target=_blank)
+[Tuning Overview](/performance-tuning-overview?target=_blank)
 
-[Tuning Methods](./performance-tuning-methods?target=_blank)
+[Tuning Methods](/performance-tuning-methods?target=_blank)
 
-[Tune OLTP Performance](./performance-tuning-practices?target=_blank)
+[Tune OLTP Performance](/performance-tuning-practices?target=_blank)
 
-[Tune Operating System](./tune-operating-system?target=_blank)
+[Tune Operating System](/tune-operating-system?target=_blank)
 
-[Tune Configurations](./configure-memory-usage?target=_blank)
+[Tune Configurations](/configure-memory-usage?target=_blank)
 
-[Tune SQL Performance](./sql-tuning-overview?target=_blank)
+[Tune SQL Performance](/sql-tuning-overview?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Tools" icon="doc7">
 
-[TiUP](./tiup-overview?target=_blank)
+[TiUP](/tiup-overview?target=_blank)
 
-[TiDB Operator](./tidb-operator-overview?target=_blank)
+[TiDB Operator](/tidb-operator-overview?target=_blank)
 
-[TiDB Data Migration ](./dm-overview?target=_blank)
+[TiDB Data Migration ](/dm-overview?target=_blank)
 
-[TiDB Lightning](./tidb-lightning-overview?target=_blank)
+[TiDB Lightning](/tidb-lightning-overview?target=_blank)
 
-[Dumpling](./dumpling-overview?target=_blank)
+[Dumpling](/dumpling-overview?target=_blank)
 
-[TiCDC](./ticdc-overview?target=_blank)
+[TiCDC](/ticdc-overview?target=_blank)
 
-[Backup & Restore ](./backup-and-restore-overview?target=_blank)
+[Backup & Restore ](/backup-and-restore-overview?target=_blank)
 
-[PingCAP Clinic](./clinic-introduction?target=_blank)
+[PingCAP Clinic](/clinic-introduction?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[TiDB Roadmap](./tidb-roadmap?target=_blank)
+[TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 
-[TiDB Configuration File Parameters](./tidb-configuration-file?target=_blank)
+[TiDB Configuration File Parameters](/tidb-configuration-file?target=_blank)
 
-[TiDB Command-line Flags](./command-line-flags-for-tidb-configuration?target=_blank)
+[TiDB Command-line Flags](/command-line-flags-for-tidb-configuration?target=_blank)
 
-[TiDB Control](./tidb-control?target=_blank)
+[TiDB Control](/tidb-control?target=_blank)
 
-[System Variables](./system-variables?target=_blank)
+[System Variables](/system-variables?target=_blank)
 
-[Release Notes](./release-notes?target=_blank)
+[Release Notes](/release-notes?target=_blank)
 
-[FAQ Summary](./faq-overview?target=_blank)
+[FAQ Summary](/faq-overview?target=_blank)
 
 </LearningPath>
 
