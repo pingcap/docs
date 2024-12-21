@@ -120,7 +120,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 [TiCDC](/ticdc-overview?target=_blank)
 
-[Backup & Restore ](/backup-and-restore-overview?target=_blank)
+[Backup & Restore (BR)](/backup-and-restore-overview?target=_blank)
 
 [PingCAP Clinic](/clinic-introduction?target=_blank)
 
