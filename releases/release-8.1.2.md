@@ -11,10 +11,6 @@ TiDB version: 8.1.2
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.1/production-deployment-using-tiup)
 
-## Compatibility changes
-
-- note [#issue](https://github.com/pingcap/${repo-name}/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-
 ## Improvements
 
 + TiDB
