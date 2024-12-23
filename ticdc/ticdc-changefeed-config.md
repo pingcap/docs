@@ -291,8 +291,8 @@ Starting from v6.5.0, TiCDC supports saving data changes to storage services in 
 ##### `output-old-value`
 
 - Controls whether to output the value before the row data changes. The default value is false. 
-- When it is enabled (setting it to `true`), the `UPDATE `event will output two rows of data: the first row is a `DELETE` event that outputs the data before the change; the second row is an `INSERT` event that outputs the changed data.
-- When it is enabled, the `"is-update"` column will be added before the column with data changes. This added column is used to identify whether the data change of the current row comes from the` UPDATE` event or the original `INSERT` or `DELETE` event. If the data change of the current row comes from the `UPDATE` event, the value of the `"is-update"` column is `true`. Otherwise, it is `false`.
+- When it is enabled (setting it to `true`), the `UPDATE` event will output two rows of data: the first row is a `DELETE` event that outputs the data before the change; the second row is an `INSERT` event that outputs the changed data.
+- When it is enabled, the `"is-update"` column will be added before the column with data changes. This added column is used to identify whether the data change of the current row comes from the `UPDATE` event or the original `INSERT` or `DELETE` event. If the data change of the current row comes from the `UPDATE` event, the value of the `"is-update"` column is `true`. Otherwise, it is `false`.
 - Default value: `false`
 
 Starting from v8.0.0, TiCDC supports the Simple message encoding protocol. The following are the configuration parameters for the Simple protocol. For more information about the protocol, see [TiCDC Simple Protocol](/ticdc/ticdc-simple-protocol.md).
