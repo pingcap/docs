@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: [${{ env.LTS_BRANCH }}, ${{ env.CLOUD_BRANCH }}]
+        branch: ${{ fromJson('["' + env.BRANCH_ONE + '","' + env.BRANCH_TWO + '"]') }}
 
     steps:
       - name: Skip duplicate branch
@@ -83,7 +83,6 @@ jobs:
           -H "Authorization: token ${{ secrets.DOCS_STAGING }}" \
           https://api.github.com/repos/pingcap/docs-staging/actions/workflows/update.yml/dispatches \
           -d '{"ref":"main","inputs":{"full": "false", "repo":"${{ github.repository }}","branch":"${{ matrix.branch }}"}}'
-
 
   # When ja-kernal version is different with cloud, open the comment and run the github action!
   #   ja-cloud:
