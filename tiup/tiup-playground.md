@@ -134,24 +134,24 @@ tiup playground scale-in --pid 86526
 
 ## Deploy TiProxy
 
-[TiProxy](/tiproxy/tiproxy-overview.md) is the official proxy component of PingCAP. It is placed between the client and the TiDB server to provide load balancing, connection persistence, service discovery, and other features for TiDB.
+[TiProxy](/tiproxy/tiproxy-overview.md) is the official proxy component from PingCAP, placed between the client and the TiDB server to provide load balancing, connection persistence, service discovery, and other features for TiDB.
 
-You can deploy the TiProxy for your cluster using TiUP Playground as in the following example:
+You can deploy TiProxy for your cluster using TiUP Playground, as in the following example:
 
 ```shell
 tiup playground v8.5.0 --tiproxy 1
 ```
 
-The following are command-line flags of the playground component for TiProxy:
+TiProxy-related command-line flags in the playground component are as follows:
 
 ```bash
 Flags:
       --tiproxy int                  Specifies the number of TiProxy nodes in the cluster. If not specified, TiProxy is not deployed.
-      --tiproxy.binpath string       TiProxy instance binary path
-      --tiproxy.config string        TiProxy instance configuration file
-      --tiproxy.host host            Playground TiProxy host. If not provided, TiProxy will still use host flag as its host
-      --tiproxy.port int             Playground TiProxy port. If not provided, TiProxy will use 6000 as its port
-      --tiproxy.timeout int          TiProxy max wait time in seconds for starting. 0 means no limit (default 60)
+      --tiproxy.binpath string       TiProxy instance binary path.
+      --tiproxy.config string        TiProxy instance configuration file.
+      --tiproxy.host host            Playground TiProxy host. If not provided, TiProxy will still use host flag as its host.
+      --tiproxy.port int             Playground TiProxy port. If not provided, TiProxy will use 6000 as its port.
+      --tiproxy.timeout int          TiProxy max wait time in seconds for starting. 0 means no limit (default 60).
 ```
 
 For more information about TiProxy, see [TiProxy documentation](/tiproxy/tiproxy-overview.md).
