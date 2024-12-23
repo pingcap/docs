@@ -780,3 +780,7 @@ sudo yum -y install numactl
     ```
 
     To get help information of the `tiup cluster exec` command, run the `tiup cluster exec --help` command.
+
+## Disable SELinux
+
+Use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility to check if SELinux is disabled or set to permissive. SELinux in enforcing mode can cause deployment failures. For instructions on disabling SELinux, refer to your operating system's documentation.
