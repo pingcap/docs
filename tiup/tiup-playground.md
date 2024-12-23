@@ -140,7 +140,7 @@ Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP P
 
 1. Create a `tidb.toml` file and add the following configuration:
 
-    ```toml
+    ```
     graceful-wait-before-shutdown=15
     ```
 
