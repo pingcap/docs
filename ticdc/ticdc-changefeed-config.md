@@ -468,7 +468,7 @@ secret-access-key="xxxx"
 token="xxxx"
 ```
 
-For more information, see [Integrate TiCDC with AWS Glue Schema Registry](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-aws-glue-schema-registry)。
+For more information, see [Integrate TiCDC with AWS Glue Schema Registry](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-aws-glue-schema-registry).
 
 ### sink.pulsar-config
 
