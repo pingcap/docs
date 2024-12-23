@@ -163,6 +163,7 @@ Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP P
           --tiproxy.host host            Playground TiProxy host. If not provided, TiProxy will still use host flag as its host.
           --tiproxy.port int             Playground TiProxy port. If not provided, TiProxy will use 6000 as its port.
           --tiproxy.timeout int          TiProxy maximum wait time in seconds for starting. 0 means no limit (default 60).
+          --tiproxy.version string       The version of TiProxy. If not specified, the latest version of TiProxy is deployed.
     ```
 
 For more information about deploying and using TiProxy, see [TiProxy installation and usage](/tiproxy/tiproxy-overview.md#installation-and-usage).
