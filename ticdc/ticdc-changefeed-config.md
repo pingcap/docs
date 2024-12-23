@@ -50,7 +50,7 @@ This section introduces the configuration of a replication task.
 ### `enable-sync-point` <span class="version-mark">New in v6.3.0</span>
 
 - Specifies whether to enable the Syncpoint feature, which is supported starting from v6.3.0 and is disabled by default.
-- Starting from v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
+- Starting from v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
 - This configuration item only takes effect if the downstream is TiDB.
 - Default value: `false`
 
@@ -131,15 +131,15 @@ This section introduces the configuration of a replication task.
 
 ##### `ignore-insert-value-expr`
 
-- `ignore-insert-value-expr = "id >= 100"` ignores `INSERT` DMLs that contain the condition `id >= 100`。
+- `ignore-insert-value-expr = "id >= 100"` ignores `INSERT` DMLs that contain the condition `id >= 100`
 
 ##### `ignore-update-old-value-expr`
 
-- `ignore-update-old-value-expr = "age < 18"` ignores `UPDATE` DMLs whose old value contains `age < 18`。
+- `ignore-update-old-value-expr = "age < 18"` ignores `UPDATE` DMLs whose old value contains `age < 18`
 
 ##### `ignore-update-new-value-expr`
 
-- `ignore-update-new-value-expr = "gender = 'male'"` ignores `UPDATE` DMLs whose new value contains `gender = 'male'`.
+- `ignore-update-new-value-expr = "gender = 'male'"` ignores `UPDATE` DMLs whose new value contains `gender = 'male'`
 
 ### scheduler
 
@@ -149,8 +149,8 @@ This section introduces the configuration of a replication task.
 - This configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
 - When `enable-table-across-nodes` is enabled, there are two allocation modes:
 
-    1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of `region-threshold`, the table will be allocated to multiple nodes for replication. The default value of `region-threshold` is `10000`.
-    2. Allocate tables based on the write traffic, so that each TiCDC node handles roughly the same number of modified rows. Only when the number of modified rows per minute in a table exceeds the value of `write-key-threshold`, will this allocation take effect.
+    1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of [`region-threshold`](#region-threshold), the table will be allocated to multiple nodes for replication. The default value of `region-threshold` is `10000`.
+    2. Allocate tables based on the write traffic, so that each TiCDC node handles roughly the same number of modified rows. Only when the number of modified rows per minute in a table exceeds the value of [`write-key-threshold`](#write-key-threshold), will this allocation take effect.
 
   You only need to configure one of the two modes. If both `region-threshold` and `write-key-threshold` are configured, TiCDC prioritizes the traffic allocation mode, namely `write-key-threshold`.
 
@@ -189,7 +189,7 @@ This section introduces the configuration of a replication task.
 - When the downstream is a storage service, the protocol can only be canal-json or csv.
 - This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
 
-<!-- 示例值：`"canal-json"` -->
+<!-- Example: `"canal-json"` -->
 
 #### `delete-only-output-handle-key-columns` <span class="version-mark">New in v7.2.0</span>
 
@@ -291,8 +291,8 @@ Starting from v6.5.0, TiCDC supports saving data changes to storage services in 
 ##### `output-old-value`
 
 - Controls whether to output the value before the row data changes. The default value is false. 
-- When it is enabled (setting it to `true`), the UPDATE event will output two rows of data: the first row is a DELETE event that outputs the data before the change; the second row is an INSERT event that outputs the changed data.
-- When it is enabled, the `"is-update"` column will be added before the column with data changes. This added column is used to identify whether the data change of the current row comes from the UPDATE event or the original INSERT/DELETE event. If the data change of the current row comes from the UPDATE event, the value of the `"is-update"` column is `true`. Otherwise, it is `false`.
+- When it is enabled (setting it to `true`), the `UPDATE `event will output two rows of data: the first row is a `DELETE` event that outputs the data before the change; the second row is an `INSERT` event that outputs the changed data.
+- When it is enabled, the `"is-update"` column will be added before the column with data changes. This added column is used to identify whether the data change of the current row comes from the` UPDATE` event or the original `INSERT` or `DELETE` event. If the data change of the current row comes from the `UPDATE` event, the value of the `"is-update"` column is `true`. Otherwise, it is `false`.
 - Default value: `false`
 
 Starting from v8.0.0, TiCDC supports the Simple message encoding protocol. The following are the configuration parameters for the Simple protocol. For more information about the protocol, see [TiCDC Simple Protocol](/ticdc/ticdc-simple-protocol.md).
@@ -309,7 +309,7 @@ The following configuration parameters control the sending behavior of bootstrap
 
 - Controls the message interval for sending bootstrap, in message count.
 - Default value: `10000`, which means that a bootstrap message is sent every 10000 row changed messages for each table
-- If you want to disable the sending of bootstrap messages, set both `send-bootstrap-interval-in-sec` and `send-bootstrap-in-msg-count` to `0`.
+- If you want to disable the sending of bootstrap messages, set both [`send-bootstrap-interval-in-sec`](#send-bootstrap-interval-in-sec) and `send-bootstrap-in-msg-count` to `0`.
 
 #### `send-bootstrap-to-all-partition`
 
@@ -329,19 +329,19 @@ The following configuration parameters control the sending behavior of bootstrap
 
 ##### `output-old-value`
 
-- Controls whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "p" field.
+- Controls whether to output the value before the row data changes. The default value is true. When it is disabled, the `UPDATE` event does not output the "p" field.
 - Default value: `true`
 
 #### sink.debezium
 
 ##### `output-old-value`
 
-- Controls whether to output the value before the row data changes. The default value is true. When it is disabled, the UPDATE event does not output the "before" field.
+- Controls whether to output the value before the row data changes. The default value is true. When it is disabled, the `UPDATE` event does not output the "before" field.
 - Default value: `true`
 
 ### consistent
 
-Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see [Eventually consistent replication in disaster scenarios](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)。
+Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see [Eventually consistent replication in disaster scenarios](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios).
 
 Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.
 
@@ -404,7 +404,7 @@ Note: The consistency-related configuration items only take effect when the down
 
 #### `corruption-handle-level`
 
-- Specifies the log level of the Changefeed when the checksum validation for single-row data fails.
+- Specifies the log level of the changefeed when the checksum validation for single-row data fails.
 - Default value: `"warn"` 
 - Value options: `"warn"`, `"error"`
 
@@ -453,7 +453,7 @@ The following configuration items only take effect when the downstream is Kafka.
 
 #### `output-raw-change-event`
 
-- Controls whether to output the original data change event. For more information, see [Control whether to split primary or unique key `UPDATE` events](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)。
+- Controls whether to output the original data change event. For more information, see [Control whether to split primary or unique key `UPDATE` events](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events).
 - Default value: `false`
 
 ### sink.kafka-config.glue-schema-registry-config
