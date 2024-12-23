@@ -20,6 +20,7 @@ jobs:
           echo "matrix=$(echo '[\"${{ env.LTS_BRANCH }}\", \"${{ env.CLOUD_BRANCH }}\"]')" >> $GITHUB_OUTPUT
 
   ja:
+    needs: build-matrix
     runs-on: ubuntu-latest
     strategy:
       matrix:
