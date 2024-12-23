@@ -16,8 +16,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: |
-          echo "matrix=[{\"name\":\"LTS\",\"value\":\"${{ env.LTS_BRANCH }}\"},{"\name\":\"Cloud\",\"value\":\"${{ env.CLOUD_BRANCH }}\"}]" >> $GITHUB_OUTPUT
+        run: echo "matrix=[{\"name\":\"LTS\",\"value\":\"${{ env.LTS_BRANCH }}\"},{"\name\":\"Cloud\",\"value\":\"${{ env.CLOUD_BRANCH }}\"}]" >> $GITHUB_OUTPUT
 
   ja:
     needs: build-matrix
