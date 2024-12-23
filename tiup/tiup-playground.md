@@ -149,7 +149,7 @@ In the playground component, TiProxy-related command-line flags are as follows:
 
 ```bash
 Flags:
-      --tiproxy int                  Specifies the number of TiProxy nodes in the cluster. If not specified, TiProxy is not deployed.
+      --tiproxy int                  The number of TiProxy nodes in the cluster. If not specified, TiProxy is not deployed.
       --tiproxy.binpath string       TiProxy instance binary path.
       --tiproxy.config string        TiProxy instance configuration file.
       --tiproxy.host host            Playground TiProxy host. If not provided, TiProxy will still use host flag as its host.
