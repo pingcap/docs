@@ -145,7 +145,7 @@ Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP P
     graceful-wait-before-shutdown=15
     ```
 
-    This configuration item controls the number of seconds TiDB waits before shutting down the server, avoiding client disconnections during cluster scaling-in operations.
+    This configuration item controls the duration (in seconds) that TiDB waits before shutting down the server, avoiding client disconnections during cluster scaling-in operations.
 
 2. Start the TiDB cluster:
 
