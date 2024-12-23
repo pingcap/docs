@@ -44,15 +44,15 @@ To create a TiDB node group, perform the following steps:
 
     - TiDB
         - **vCPU + RAM**: choose the [TiDB size](/tidb-cloud/size-your-cluster.md#size-tidb) you need. Only TiDB nodes with 8 vCPU and 16 GiB memory or higher specifications are supported.
-        - **Node Groups**: click **+** to create a new TiDB node group. You can also use the default group and enter the number of TiDB nodes in the **Default Groups** field.
+        - **Node Groups**: click **+** to create a new TiDB node group. You can also use the default group and enter the number of TiDB nodes in the **DefaultGroup** field.
     
     - TiKV
         - **vCPU + RAM**: choose the [TiKV size](/tidb-cloud/size-your-cluster.md#size-tikv) you need.
-        - **Storage X Nodes**: choose the storage size and the number of TiKV nodes.
+        - **Storage x Nodes**: choose the storage size and the number of TiKV nodes.
     
     - TiFlash (optional)
         - **vCPU + RAM**: choose the [TiFlash size](/tidb-cloud/size-your-cluster.md#size-tiflash) you need.
-        - **Storage X Nodes**: choose the storage size and the number of TiFlash nodes.
+        - **Storage x Nodes**: choose the storage size and the number of TiFlash nodes.
 
     ![Create TiDB Node Group](/media/tidb-cloud/tidb-node-group-create.png)
 
@@ -133,7 +133,7 @@ You can change the group name and the number of TiDB nodes in the group.
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. Click **Nodes** in the left navigation pane.
 3. Click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
-4. On the **Modify Cluster** page, update the number of TiDB nodes, or add new node groups. On this page, you can also change the size and Storage X Nodes of the TiKV and TiFlash nodes.
+4. On the **Modify Cluster** page, update the number of TiDB nodes, or add new node groups. On this page, you can also change the size and **Storage x Nodes** of the TiKV and TiFlash nodes.
 
 ![Change TiDB node group node count](/media/tidb-cloud/tidb-node-group-change-node-count.png)
 
