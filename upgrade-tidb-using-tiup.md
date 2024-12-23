@@ -78,7 +78,7 @@ The following provides compatibility changes you need to know when you upgrade f
 
 - TiDB v8.1.0 [compatibility changes](/releases/release-8.1.0.md#compatibility-changes)
 - TiDB v8.1.1 [compatibility changes](/releases/release-8.1.1.md#compatibility-changes)
-- TiDB v8.1.2 [compatibility changes](/releases/release-8.1.2.md#compatibility-changes)
+- TiDB v8.1.2 [release notes](/releases/release-8.1.2.md)
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
