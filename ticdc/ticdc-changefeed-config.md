@@ -110,7 +110,7 @@ This section introduces the configuration of a replication task.
 
 #### filter.event-filters
 
-For more information, see [Event filter rules](/ticdc/ticdc-filter.md##event-filter-rules).
+For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filter-rules).
 
 ##### `matcher`
 
