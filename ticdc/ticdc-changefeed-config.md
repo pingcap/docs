@@ -110,7 +110,7 @@ This section introduces the configuration of a replication task.
 
 #### filter.event-filters
 
-<!-- The detailed syntax is described in https://docs.pingcap.com/tidb/stable/ticdc-filter -->
+For more information, see [Event filter rules](/ticdc/ticdc-filter.md##event-filter-rules).
 
 ##### `matcher`
 
