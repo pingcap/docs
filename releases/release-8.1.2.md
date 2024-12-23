@@ -1,6 +1,6 @@
 ---
 title: TiDB 8.1.2 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 8.1.2.
+summary: Learn about the improvements and bug fixes in TiDB 8.1.2.
 ---
 
 # TiDB 8.1.2 Release Notes
