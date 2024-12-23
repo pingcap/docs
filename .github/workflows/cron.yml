@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: ${{ fromJson(needs.job1.outputs.matrix) }}
+        branch: ${{ fromJson(needs.build-matrix.outputs.matrix) }}
 
     steps:
       - name: Skip duplicate branch
