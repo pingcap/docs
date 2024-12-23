@@ -133,3 +133,43 @@ You can specify a `pid` in the `tiup playground scale-in` command to scale in th
 ```shell
 tiup playground scale-in --pid 86526
 ```
+<<<<<<< HEAD
+=======
+
+## Deploy TiProxy
+
+[TiProxy](/tiproxy/tiproxy-overview.md) is the official proxy component from PingCAP, placed between the client and the TiDB server to provide load balancing, connection persistence, service discovery, and other features for TiDB.
+
+Starting from TiUP v1.14.1, you can deploy TiProxy for your cluster using TiUP Playground, as in the following example:
+
+```shell
+tiup playground v8.5.0 --tiproxy 1
+```
+
+For more information about TiProxy deployment and usage, see [TiProxy documentation](/tiproxy/tiproxy-overview.md#installation-and-usage).
+
+In the playground component, TiProxy-related command-line flags are as follows:
+
+```bash
+Flags:
+      --tiproxy int                  The number of TiProxy nodes in the cluster. If not specified, TiProxy is not deployed.
+      --tiproxy.binpath string       TiProxy instance binary path.
+      --tiproxy.config string        TiProxy instance configuration file.
+      --tiproxy.host host            Playground TiProxy host. If not provided, TiProxy will still use host flag as its host.
+      --tiproxy.port int             Playground TiProxy port. If not provided, TiProxy will use 6000 as its port.
+      --tiproxy.timeout int          TiProxy maximum wait time in seconds for starting. 0 means no limit (default 60).
+```
+
+## Deploy PD microservices
+
+Starting from v8.2.0, [PD microservice mode](/pd-microservices.md) (experimental) can be deployed using TiUP. You can deploy the `tso` microservice and `scheduling` microservice for your cluster using TiUP Playground as follows:
+
+```shell
+tiup playground v8.5.0 --pd.mode ms --pd 3 --tso 2 --scheduling 2
+```
+
+- `--pd.mode`: setting it to `ms` means enabling the microservice mode for PD.
+- `--pd <num>`: specifies the number of APIs for PD microservices. It must be at least `1`.
+- `--tso <num>`: specifies the number of instances to be deployed for the `tso` microservice.
+- `--scheduling <num>`: specifies the number of instances to be deployed for the `scheduling` microservice.
+>>>>>>> 0015d117d5 (tiup-playground: add info about TiProxy (#19769))
