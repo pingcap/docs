@@ -10,11 +10,20 @@ env:
   CLOUD_BRANCH: i18n-ja-release-8.1
 
 jobs:
+  build-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          echo "matrix=$(echo '[\"${{ env.LTS_BRANCH }}\", \"${{ env.CLOUD_BRANCH }}\"]')" >> $GITHUB_OUTPUT
+
   ja:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: ${{ fromJson('[ "${{ env.LTS_BRANCH }}", "${{ env.CLOUD_BRANCH }}" ]') }}
+        branch: ${{ fromJson(needs.job1.outputs.matrix) }}
 
     steps:
       - name: Skip duplicate branch
