@@ -17,7 +17,7 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          echo "matrix=$(echo '[\"${{ env.LTS_BRANCH }}\", \"${{ env.CLOUD_BRANCH }}\"]')" >> $GITHUB_OUTPUT
+          echo echo "matrix={\"include\":[\"${{ env.LTS_BRANCH }}\", \"${{ env.CLOUD_BRANCH }}\"]}" >> $GITHUB_OUTPUT
 
   ja:
     needs: build-matrix
