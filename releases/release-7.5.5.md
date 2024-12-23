@@ -139,7 +139,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-8.1.2.md > 错误修复> TiKV - 修复 TiKV 处理 destroyed peer 时可能遇到的 panic 的问题 [#17840](https://github.com/tikv/tikv/issues/17840) @[glorv](https://github.com/glorv))
     - (dup): release-8.1.2.md > 错误修复> TiKV - 提升在 raft log 部署在独立磁盘情况下，磁盘出现故障时 TiKV 服务的 SLA [#17884](https://github.com/tikv/tikv/issues/17884) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that the output of jprof is not correctly captured and processed when the `log-file` parameter is not specified [#17607](https://github.com/tikv/tikv/issues/17607) @[Hexilee](https://github.com/Hexilee)
-    -  Fix the issue that latency might increase when hibernated Regions are awake [#17101](https://github.com/tikv/tikv/issues/17101) @[Connor1996](https://github.com/Connor1996)
+    - Fix the issue that latency might increase when hibernated Regions are awake [#17101](https://github.com/tikv/tikv/issues/17101) @[Connor1996](https://github.com/Connor1996)
     - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - (dup): release-8.5.0.md > 错误修复> TiKV - 修复使用 `RADIANS()` 或 `DEGREES()` 函数时可能导致 TiKV panic 的问题 [#17852](https://github.com/tikv/tikv/issues/17852) @[gengliqi](https://github.com/gengliqi)
