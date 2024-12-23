@@ -136,13 +136,15 @@ tiup playground scale-in --pid 86526
 
 [TiProxy](/tiproxy/tiproxy-overview.md) is the official proxy component from PingCAP, placed between the client and the TiDB server to provide load balancing, connection persistence, service discovery, and other features for TiDB.
 
-You can deploy TiProxy for your cluster using TiUP Playground, as in the following example:
+Starting from TiUP v1.14.1, you can deploy TiProxy for your cluster using TiUP Playground, as in the following example:
 
 ```shell
 tiup playground v8.5.0 --tiproxy 1
 ```
 
-TiProxy-related command-line flags in the playground component are as follows:
+For more information about TiProxy deployment and usage, see [TiProxy documentation](/tiproxy/tiproxy-overview.md#installation-and-usage).
+
+In the playground component, TiProxy-related command-line flags are as follows:
 
 ```bash
 Flags:
@@ -153,8 +155,6 @@ Flags:
       --tiproxy.port int             Playground TiProxy port. If not provided, TiProxy will use 6000 as its port.
       --tiproxy.timeout int          TiProxy max wait time in seconds for starting. 0 means no limit (default 60).
 ```
-
-For more information about TiProxy, see [TiProxy documentation](/tiproxy/tiproxy-overview.md).
 
 ## Deploy PD microservices
 
