@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Skip duplicate branch
-        if: ${{ matrix.branch.name == "LTS" && env.LTS_BRANCH == env.CLOUD_BRANCH }}
+        if: ${{ matrix.branch.name == 'LTS' && env.LTS_BRANCH == env.CLOUD_BRANCH }}
         run: |
           echo "Skipping duplicate branch ${{ matrix.branch.value }}"
           exit 1
