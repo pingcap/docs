@@ -153,7 +153,7 @@ Flags:
       --tiproxy.config string        TiProxy instance configuration file.
       --tiproxy.host host            Playground TiProxy host. If not provided, TiProxy will still use host flag as its host.
       --tiproxy.port int             Playground TiProxy port. If not provided, TiProxy will use 6000 as its port.
-      --tiproxy.timeout int          TiProxy max wait time in seconds for starting. 0 means no limit (default 60).
+      --tiproxy.timeout int          TiProxy maximum wait time in seconds for starting. 0 means no limit (default 60).
 ```
 
 ## Deploy PD microservices
