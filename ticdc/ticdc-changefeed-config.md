@@ -184,10 +184,10 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md##event-fil
 #### `protocol`
 
 - Specifies the protocol format used for encoding messages.
+- This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
 - When the downstream is Kafka, the protocol can be canal-json, avro, debezium, open-protocol, or simple.
 - When the downstream is Pulsar, the protocol can only be canal-json.
 - When the downstream is a storage service, the protocol can only be canal-json or csv.
-- This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
 
 <!-- Example: `"canal-json"` -->
 
