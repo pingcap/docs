@@ -29,7 +29,9 @@ jobs:
     steps:
       - name: Skip duplicate branch
         if: ${{ matrix.branch == env.LTS_BRANCH && env.LTS_BRANCH == env.CLOUD_BRANCH }}
-        run: echo "Skipping duplicate branch ${{ matrix.branch }}"
+        run: |
+          echo "Skipping duplicate branch ${{ matrix.branch }}"
+          exit 1
         continue-on-error: true
 
       - uses: actions/checkout@v4
