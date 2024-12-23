@@ -82,14 +82,13 @@ Add the following configuration items to the TiDB configuration file:
 
 ```toml
 [performance]
-concurrently-init-stats = true
 force-init-stats = true
 lite-init-stats = false
 ```
 
 | Configuration item | Description | Note | 
 | ---------| ---- | ----|
-| [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752), [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710), and [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Ensure the concurrent and comprehensive loading of table statistics during TiDB startup, which improves initial query optimization performance. | Might increase startup duration and memory usage. |
+| [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) and [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Ensure the comprehensive loading of table statistics during TiDB startup, which improves initial query optimization performance. | Might increase startup duration and memory usage. |
 
 ### TiKV configurations
 
