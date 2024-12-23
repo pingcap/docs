@@ -52,7 +52,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup?target=_blank)
 
-[Deploy a TiDB Cluster on Kubernetes](../../tidb-in-kubernetes/stable?target=_blank)
+[Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
 </LearningPath>
 
