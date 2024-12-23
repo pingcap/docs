@@ -31,7 +31,7 @@ This document describes how to migrate data from MySQL to TiDB using [TiDB Data 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup dm deploy dm-test 7.5.5 topology.yaml -p
+    tiup dm deploy dm-test 7.5.4 topology.yaml -p
     ```
 
 ## Step 2: Prepare the data source
