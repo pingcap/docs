@@ -53,7 +53,7 @@ The following table shows an example of the deployment information.
 | Information                        | Value                           |
 |------------------------------------|---------------------------------|
 | Region                             | Oregon (`us-west1`)               |
-| Google Cloud project of TiDB Cloud | tidbcloud-prod-000              |
+| Google Cloud project of TiDB Cloud | `tidbcloud-prod-000`              |
 | Zones                              | <ul><li> `us-west1-a` </li><li> `us-west1-b` </li><li> `us-west1-c` </li></ul>   |
 | Kafka Advertised Listener Pattern  | The unique random string: `abc` <br/> Generated pattern: &lt;broker_id&gt;.abc.us-west1.gcp.3199745.tidbcloud.com:&lt;port&gt; |
 
