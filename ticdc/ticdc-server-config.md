@@ -171,6 +171,8 @@ The following describes the configuration file specified by the `config` option 
 
 #### `region-retry-duration`
 
-- Specifies the retry duration of Region connections. This parameter is optional and its default value is `60000000000` nanoseconds (that is, 1 minute).
-- You can configure this parameter in two ways: specifying only the number (for example, configuring it as `50000000` represents 50000000 nanoseconds, which is 50 milliseconds), or specifying both the number and unit (for example, directly configuring it as `50ms`).
-- Default value: `60000000000`, that is, 1 minute
+- Specifies the retry duration of Region connections. This parameter is optional.
+- You can configure this parameter in two ways:
+    - Specify only the number, for example, `50000000` represents 50000000 nanoseconds (50 milliseconds)
+    - Specify both the number and the unit, for example, `50ms`
+- Default value: `60000000000` (1 minute)
