@@ -168,5 +168,3 @@ Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP P
     ```
 
 For more information about deploying and using TiProxy, see [TiProxy installation and usage](/tiproxy/tiproxy-overview.md#installation-and-usage).
-
-To use the TiProxy client program `tiproxyctl`, see [Install TiProxy Control](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control).
