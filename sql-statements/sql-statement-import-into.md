@@ -49,6 +49,7 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 - `IMPORT INTO ... FROM SELECT` does not support the task management statements such as `SHOW IMPORT JOB(s)` and `CANCEL IMPORT JOB <job-id>`.
 - The [temporary directory](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) of TiDB requires sufficient space to store the entire query result of the `SELECT` statement (configuring the `DISK_QUOTA` option is not supported currently).
 - Importing historical data using [`tidb_snapshot`](/read-historical-data.md) is not supported.
+- Because the syntax of the `SELECT` clause is complex, the `WITH` parameter in `IMPORT INTO` might conflict with it and cause parsing errors, such as `GROUP BY ... [WITH ROLLUP]`. It is recommended to create a view for complex `SELECT` statements and then use `IMPORT INTO ... FROM SELECT * FROM view_name` for importing. Alternatively, you can clarify the scope of the `SELECT` clause with parentheses, such as `IMPORT INTO ... FROM (SELECT ...) WITH ...`.
 
 ## Prerequisites for import
 
