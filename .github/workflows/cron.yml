@@ -1,4 +1,4 @@
-name: cron
+name: JA Translation Cron
 
 on:
   schedule:
