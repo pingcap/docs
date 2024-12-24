@@ -99,7 +99,7 @@ The subsequent content takes the following JSON document as an example to demons
             {
                 "version": "v8.1.2",
                 "type": "lts",
-                "release_date": "2024-12-23" 
+                "release_date": "2024-12-26" 
             },
             {
                 "version": "v8.0.0",        
@@ -128,7 +128,7 @@ The subsequent content takes the following JSON document as an example to demons
 | `$.database.features[0]`              | The first database feature.             | `"distributed"`               |
 | `$.database.features[2]`              | The third database feature.             | `"relational"`                |
 | `$.database.versions[0].type`         | The type of the first database version. | `"lts"`                       |
-| `$.database.versions[*].release_date` | The release date for all versions.      | `["2024-12-23","2024-03-29"]` |
+| `$.database.versions[*].release_date` | The release date for all versions.      | `["2024-12-26","2024-03-29"]` |
 | `$.*.features`                        | Two array's of features                 | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]`                              |
 | `$**.version`                         | All versions, with path wildcard        | `["v8.1.2","v8.0.0"]`         |
 | `$.database.features[0 to 2]`         | Range of database features from the first to the third.             | `["scalable","relational"]`   |
