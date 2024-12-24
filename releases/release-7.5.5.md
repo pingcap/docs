@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.5.5 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.5.5
+summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.5.5.
 ---
 
 # TiDB 7.5.5 Release Notes
@@ -14,6 +14,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 ## Compatibility changes
 
 - (dup): release-8.5.0.md > 改进提升> TiDB - 新增系统变量 `tidb_ddl_reorg_max_write_speed`，用于限制加索引时 ingest 阶段速度的上限 [#57156](https://github.com/pingcap/tidb/issues/57156) @[CbcWestwolf](https://github.com/CbcWestwolf)
+- Change the default value of the TiKV configuration item [`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size) from `8192` to `16384` [#17101](https://github.com/tikv/tikv/issues/17101) @[Connor1996](https://github.com/Connor1996)
 
 ## Improvements
 
