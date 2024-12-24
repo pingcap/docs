@@ -190,7 +190,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + TiCDC <!--tw@Oreoxmt: 2 notes-->
 
-        - Fix the issue that TiCDC might report an error when processing a truncate table DDL on a table without valid index [#11765](https://github.com/pingcap/tiflow/issues/11765) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that TiCDC might report an error when replicating a `TRUNCATE TABLE` DDL on a table without valid index [#11765](https://github.com/pingcap/tiflow/issues/11765) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue that the `tableID` for partitioned tables is not correctly set in Simple Protocol messages [#11846](https://github.com/pingcap/tiflow/issues/11846) @[3AceShowHand](https://github.com/3AceShowHand)
         - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - (dup): release-8.5.0.md > 错误修复> Tools> TiCDC - 修复 redo 模块无法正确上报错误的问题 [#11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
@@ -213,7 +213,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
         - (dup): release-8.5.0.md > 错误修复> Tools> TiDB Lightning - 修复使用物理导入模式导入数据后，`AUTO_INCREMENT` 值设置过大的问题 [#56814](https://github.com/pingcap/tidb/issues/56814) @[D3Hunter](https://github.com/D3Hunter)
         - Fix the issue that TiDB Lightning does not automatically retry when encountering `Lock wait timeout` errors during metadata updates [#53042](https://github.com/pingcap/tidb/issues/53042) @[guoshouyan](https://github.com/guoshouyan)
         - Fix the issue that the performance degrades when importing data from a cloud storage in high-concurrency scenarios [#57413](https://github.com/pingcap/tidb/issues/57413) @[xuanyu66](https://github.com/xuanyu66)
-        - Fix the issue that TiDB Lightning might get stuck for a long time during startup when importing a large number of Parquet files [#56104](https://github.com/pingcap/tidb/issues/56104) @[zeminzhou](https://github.com/zeminzhou)
+        - Fix the issue that TiDB Lightning might get stuck for a long time during the preparation phase when importing a large number of Parquet files [#56104](https://github.com/pingcap/tidb/issues/56104) @[zeminzhou](https://github.com/zeminzhou)
         - Fix the issue that the error report output is truncated when importing data using TiDB Lightning [#58085](https://github.com/pingcap/tidb/issues/58085) @[lance6716](https://github.com/lance6716)
 
     + TiDB Binlog
