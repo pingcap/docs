@@ -89,4 +89,4 @@ CREATE TABLE t5 (
 );
 ```
 
-The last two examples describe a similar default, but only the first one is allowed as it is using an expression and not a literal.
+The last two examples show similar defaults, but only the first one is valid because it uses an expression rather than a literal.
