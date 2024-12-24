@@ -54,6 +54,6 @@ Currently, the TiDB Node Group feature is free of charge. The following are limi
 
 ## SLA impact
 
-According to TiDB Cloud [Service Level Agreement (SLA)](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/), the Monthly Uptime Percentage of TiDB Cloud Dedicated clusters with multiple TiDB nodes deployment can reach up to 99.99%. However, after introducing the TiDB Node Group feature, TiDB Cloud can not provide TiDB node level high availability across TiDB node groups. If you create multiple TiDB node groups with only one TiDB node in each group, you will lose the high availability for the groups and your cluster's monthly uptime percentage will downgrade to the single TiDB node deployment model.   
+According to TiDB Cloud [Service Level Agreement (SLA)](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/), the Monthly Uptime Percentage of TiDB Cloud Dedicated clusters with multiple TiDB nodes deployment can reach up to 99.99%. However, after introducing TiDB Node Group, if you create multiple TiDB Node Groups with only 1 TiDB node in each group, you will lose the high availability for the groups and your cluster's monthly uptime percentage will downgrade to a single TiDB node deployment model (namely, up to 99.9%).  
 
 For high availability, it is recommended that you configure at least two TiDB nodes for each TiDB node group.
