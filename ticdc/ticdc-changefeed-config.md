@@ -215,9 +215,9 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 
 #### `enable-kafka-sink-v2`
 
-    > **Warning:**
-    >
-    > This configuration is an experimental feature. It is not recommended to use it in production environments.
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
 
 - Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
 - This configuration item only takes effect if the downstream is MQ.
