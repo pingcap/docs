@@ -87,11 +87,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-8.1.2.md > Bug fixes> TiDB - Fix the issue that the default timeout for querying the TiFlash system table is too short [#57816](https://github.com/pingcap/tidb/issues/57816) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-8.1.2.md > Bug fixes> TiDB - Fix the issue that the value of the `default_collation_for_utf8mb4` variable does not work for the `SET NAMES` statement [#56439](https://github.com/pingcap/tidb/issues/56439) @[Defined2014](https://github.com/Defined2014)
     - (dup): release-8.1.2.md > Bug fixes> TiDB - Fix the issue that TTL internal coroutine might panic when you manually delete a timer in the `mysql.tidb_timer` table [#57112](https://github.com/pingcap/tidb/issues/57112) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that when using the `ALTER TABLE` statement to convert a normal table to a partitioned table, insufficient checking might result in incorrect data [#55721](https://github.com/pingcap/tidb/issues/55721) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that when converting a normal table to a partitioned table using the `ALTER TABLE` statement, insufficient checks might result in incorrect data [#55721](https://github.com/pingcap/tidb/issues/55721) @[mjonss](https://github.com/mjonss)
     - Fix the issue that when setting `tidb_gogc_tuner_max_value` and `tidb_gogc_tuner_min_value`, if the maximum value is null, an incorrect warning message occurs [#57889](https://github.com/pingcap/tidb/issues/57889) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the potential data race issue that might occur in TiDB's internal coroutine [#57798](https://github.com/pingcap/tidb/issues/57798) [#56053](https://github.com/pingcap/tidb/issues/56053) @[fishiu](https://github.com/fishiu) @[tiancaiamao](https://github.com/tiancaiamao)
     - Update `golang-jwt` and `jwt` to prevent potential security risks [#57135](https://github.com/pingcap/tidb/issues/57135) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that concurrent writes might result in duplicate data when converting a clustered indexed table to a partitioned table using the `ALTER TABLE` statement [#57510](https://github.com/pingcap/tidb/issues/57510) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that concurrent writes might result in duplicate data when converting a table with clustered indexes to a partitioned table using the `ALTER TABLE` statement [#57510](https://github.com/pingcap/tidb/issues/57510) @[mjonss](https://github.com/mjonss)
 
 + TiKV <!--tw@qiancai: 3 notes-->
 
