@@ -10,7 +10,7 @@ This statement changes the user password for a user account in the TiDB system d
 
 > **Note:**
 >
-> The recommended way to change passwords is via the [ALTER USER](/sql-statements/sql-statement-alter-user.md) statement like this:
+> It is recommended to change the password by using the [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statement as follows:
 >
 > ```sql
 > ALTER USER myuser IDENTIFIED BY 'mypassword';
