@@ -47,13 +47,13 @@ Private Connect leverages **Private Link** or **Private Service Connect** techno
 
 Currently, TiDB Cloud supports Private Connect for generic Kafka only. It does not include special integration with MSK, Confluent Kafka, or other services.
 
-- If your Apache Kafka service is hosted on AWS, follow [Set Up Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
+- If your Apache Kafka service is hosted in AWS, follow [Set Up Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
     - The ID in Kafka Advertised Listener Pattern
     - The Endpoint Service Name
     - The Bootstrap Ports
 
-- If your Apache Kafka service is hosted on Google Cloud, follow [Set Up Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
+- If your Apache Kafka service is hosted in Google Cloud, follow [Set Up Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
     - The ID in Kafka Advertised Listener Pattern
     - The Service Attachment
