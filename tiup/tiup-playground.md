@@ -151,7 +151,7 @@ Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP P
 2. Start the TiDB cluster:
 
     ```shell
-    tiup playground v8.1.1 --tiproxy 1 --db.config tidb.toml
+    tiup playground v8.1.2 --tiproxy 1 --db.config tidb.toml
     ```
 
     In the playground component, TiProxy-related command-line flags are as follows:
