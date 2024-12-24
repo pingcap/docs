@@ -42,7 +42,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + TiDB Data Migration (DM) <!--tw@lilin90: 1 note-->
 
-        - Lower the log level when outputting unrecognized MariaDB binlog events [#10204](https://github.com/pingcap/tiflow/issues/10204) @[dveeden](https://github.com/dveeden)
+        - Lower the log level for unrecognized MariaDB binlog events [#10204](https://github.com/pingcap/tiflow/issues/10204) @[dveeden](https://github.com/dveeden)
 
 ## Bug fixes
 
@@ -77,9 +77,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that executing `RECOVER TABLE BY JOB JOB_ID;` might cause TiDB to panic [#55113](https://github.com/pingcap/tidb/issues/55113) @[crazycs520](https://github.com/crazycs520)
     - (dup): release-7.1.6.md > Bug fixes> TiDB - Fix the issue that the `read_from_storage` hint might not take effect when the query has an available Index Merge execution plan [#56217](https://github.com/pingcap/tidb/issues/56217) @[AilinKid](https://github.com/AilinKid)
     - (dup): release-8.5.0.md > Bug fixes> TiDB - Fix the issue that `INDEX_HASH_JOIN` might hang during an abnormal exit [#54055](https://github.com/pingcap/tidb/issues/54055) @[wshwsh12](https://github.com/wshwsh12)
-    - Fix the issue that querying system tables related to the Distributed eXecution Framework (DXF) might lead to upgrade exceptions [#49263](https://github.com/pingcap/tidb/issues/49263) @[D3Hunter](https://github.com/D3Hunter)
-    - Fix the issue that DDL internal transaction reports an error `GC life time is shorter than transaction duration`, which leads to failure to add indexes [#57043](https://github.com/pingcap/tidb/issues/57043) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that when executing `EXCHANGE PARTITION` and encountering invalid rows, InfoSchema is fully loaded with an error `failed to load schema diff` [#56685](https://github.com/pingcap/tidb/issues/56685) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that querying system tables related to the Distributed eXecution Framework (DXF) might lead to upgrade failures [#49263](https://github.com/pingcap/tidb/issues/49263) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that the DDL internal transaction error `GC life time is shorter than transaction duration` causes index addition to fail [#57043](https://github.com/pingcap/tidb/issues/57043) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that when executing `EXCHANGE PARTITION` and encountering invalid rows, InfoSchema is fully loaded and the error `failed to load schema diff` is reported [#56685](https://github.com/pingcap/tidb/issues/56685) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that collation is not handled correctly when `tidb_ddl_enable_fast_reorg` and `new_collations_enabled_on_first_bootstrap` are enabled, resulting in inconsistent data indexes [#58036](https://github.com/pingcap/tidb/issues/58036) @[djshow832](https://github.com/djshow832)
     - Fix the issue that data indexes are inconsistent because plan cache uses the wrong schema when adding indexes [#56733](https://github.com/pingcap/tidb/issues/56733) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that executing `ALTER TABLE TIFLASH REPLICA` during upgrade causes the TiDB node to crash [#57863](https://github.com/pingcap/tidb/issues/57863) @[tangenta](https://github.com/tangenta) <!--tw@hfxsd: the following 6 notes-->
