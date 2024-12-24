@@ -5,7 +5,7 @@ summary: Learn about the improvements and bug fixes in TiDB 8.1.2.
 
 # TiDB 8.1.2 Release Notes
 
-Release date: December 23, 2024
+Release date: December 26, 2024
 
 TiDB version: 8.1.2
 
