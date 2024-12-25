@@ -1789,7 +1789,7 @@ ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCA
 
 - If the `GLOBAL` keyword is not explicitly specified in the index definition, TiDB creates a local index by default.
 - The `GLOBAL` and `LOCAL` keywords only apply to partitioned tables and do not affect non-partitioned tables. In other words, there is no difference between a global index and a local index in non-partitioned tables.
-- Currently, TiDB only supports creating unique global indexes. If you need to create a global index on a non-unique column, the global index must include a primary key to create a composite index. For example, if the non-unique column is `col3` and the primary key is `col1`, you can use the following statement to create a global index on the non-unique column `col3`: 
+- Currently, TiDB only supports creating unique global indexes on unique columns. If you need to create a global index on a non-unique column, you can include a primary key in the global index to create a composite index. For example, if the non-unique column is `col3` and the primary key is `col1`, you can use the following statement to create a global index on the non-unique column `col3`: 
 
     ```sql
     ALTER TABLE ... ADD UNIQUE INDEX(col3, col1) GLOBAL;
