@@ -1790,13 +1790,13 @@ ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCA
 
 - If the `GLOBAL` keyword is not explicitly specified in the index definition, TiDB creates a local index by default.
 - The `GLOBAL` and `LOCAL` keywords only apply to partitioned tables and do not affect non-partitioned tables. In other words, there is no difference between a global index and a local index in non-partitioned tables.
-- Currently, TiDB only supports creating unique global indexes. If you need to create a global index on a non-unique column, the global index must include all the partition columns as a composite index, with the non-unique column appearing first. For example, if the non-unique column is `col3` and the partition column is `col1`, you can use the following statement to create a global index on the non-unique column `col3`: 
+- Currently, TiDB only supports creating unique global indexes. If you need to create a global index on a non-unique column, the global index must include a primary key to create a composite index. For example, if the non-unique column is `col3` and the primary key is `col1`, you can use the following statement to create a global index on the non-unique column `col3`: 
 
     ```sql
     ALTER TABLE ... ADD UNIQUE INDEX(col3, col1) GLOBAL;
     ```
 
-- DDL operations such as `ADD PARTITION`, `DROP PARTITION`, `TRUNCATE PARTITION`, `REORGANIZE PARTITION`, and `EXCHANGE PARTITION` also trigger updates to global indexes. The results of these DDL operations will only be returned after the global indexes of the corresponding tables are fully updated. This can delay operations that usually require quick DDL completion, such as data archiving operations (`TRUNCATE PARTITION` and `DROP PARTITION`). In contrast, when global indexes are not involved, these DDL operations can be completed immediately.
+- DDL operations such as `DROP PARTITION`, `TRUNCATE PARTITION`, `REORGANIZE PARTITION`, and `EXCHANGE PARTITION` also trigger updates to global indexes. These DDL operations need to wait for the global index updates to complete before returning results, which increases the execution time accordingly. This is particularly evident in data archiving scenarios, such as `DROP PARTITION` and `TRUNCATE PARTITION`. Without global indexes, these operations can typically complete immediately. However, with global indexes, the execution time increases as the number of indexes that need to be updated grows.
 - Tables with global indexes do not support the `EXCHANGE PARTITION` operation.
 - By default, the primary key of a partitioned table is a clustered index and must include the partition key. If you require the primary key to exclude the partition key, you can explicitly specify the primary key as a non-clustered global index when creating the table, for example, `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL`.
 - If a global index is added to an expression column, or a global index is also a prefix index (for example `UNIQUE KEY idx_id_prefix (id(10)) GLOBAL`), you need to collect statistics manually for this global index.
