@@ -72,11 +72,13 @@ To enable public connection, do the following:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. In the upper-right corner, click **Connect**. A connection dialog is displayed.
-3. Choose the new TiDB node group and the **Public** connection type.
-4. Click **Configure the IP Access** List.
-5. On the **Networking** page, select the TiDB node group in the upper-right corner.
-6. Enable the public endpoint and add the IP access list.
-7. In the up-right corner of the page, click **Connect**, and you can get the connection string. 
+3. Select your TiDB node group from the **TiDB Node Group** list and **Public** from the **Connection Type** list.
+
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+
+4. On the **Networking** page, select your TiDB node group from the **TiDB Node Group** list in the upper-right corner.
+5. Click **Enable** in the **Public Endpoint** section, then click **Add IP Address** in the **IP Access List** section.
+6. In the upper-right corner of the **Networking** page, click **Connect** to get the connection string.
 
 ![Connect to the new TiDB node group via Public Endpoint](/media/tidb-cloud/tidb-node-group-connect-public-endpoint.png)
 
@@ -86,24 +88,24 @@ For more information, see [Connect to TiDB Cloud Dedicated via Public Connection
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. In the upper-right corner, click **Connect**. A connection dialog is displayed.
-3. Choose the new TiDB node group and **Private Endpoint** connection type.
-4. In the left navigation pane, click **Networking**. On the **Networking** page, select the TiDB node group.
+3. Select your TiDB node group from the **TiDB Node Group** list and **Private Endpoint** from the **Connection Type** list.
+4. In the left navigation pane, click **Networking**, and then select your TiDB node group from the **TiDB Node Group** list in the upper-right corner.
 5. Click **Create Private Endpoint Connection** to create a new connection for this node group. For more information, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
 
     > **Note**:
     >
     > If you use Private Link to connect different node groups, you need to create separated private endpoint connection for each node group. 
 
-6. After you create the private endpoint connection, click **Connect** on the up-right of the page to get the connection string. 
+6. After creating the private endpoint connection, click **Connect** in the upper-right corner of the page to get the connection string.
 
 ### Connect via VPC peering
 
-Because the cluster is in one VPC and all the TiDB node groups share the same VPC, you only need to create one VPC peering, then all the groups can use it. 
+Because all TiDB node groups share the same VPC as the cluster, you only need to create one VPC peering connection to enable access for all groups.
 
 1. Follow the instructions in [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to create a VPC peering for this cluster. 
 2. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 3. In the left navigation pane, click **Networking**. 
-4. On the **Networking** page, click **Connect** on the up-right to get the connection string. 
+4. In the upper-right corner of the **Networking** page, click **Connect** to get the connection string.
 
 ## View TiDB node groups
 
@@ -111,8 +113,6 @@ To view the details of TiDB node groups, perform the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Nodes** to view the list of TiDB node groups.
-
-    ![TiDB node group window view](/media/tidb-cloud/tidb-node-group-window-view.png)
 
     To switch to the table view, click <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 -4 24 24" stroke-width="1.5"><path d="M3 9.5H21M3 14.5H21M7.8 4.5H16.2C17.8802 4.5 18.7202 4.5 19.362 4.82698C19.9265 5.1146 20.3854 5.57354 20.673 6.13803C21 6.77976 21 6.61984 21 8.3V15.7C21 17.3802 21 17.2202 20.673 17.862C20.3854 18.4265 19.9265 18.8854 19.362 19.173C18.7202 19.5 17.8802 19.5 16.2 19.5H7.8C6.11984 19.5 5.27976 19.5 4.63803 19.173C4.07354 18.8854 3.6146 18.4265 3.32698 17.862C3 17.2202 3 17.3802 3 15.7V8.3C3 6.61984 3 6.77976 3.32698 6.13803C3.6146 5.57354 4.07354 5.1146 4.63803 4.82698C5.27976 4.5 6.11984 4.5 7.8 4.5Z" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg>.
 
