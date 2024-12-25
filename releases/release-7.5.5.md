@@ -42,7 +42,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + TiDB Data Migration (DM)
 
-        - Lower the log level when outputting unrecognized MariaDB binlog events [#10204](https://github.com/pingcap/tiflow/issues/10204) @[dveeden](https://github.com/dveeden)
+        - Lower the log level for unrecognized MariaDB binlog events [#10204](https://github.com/pingcap/tiflow/issues/10204) @[dveeden](https://github.com/dveeden)
 
 ## Bug fixes
 
@@ -77,9 +77,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue that executing `RECOVER TABLE BY JOB JOB_ID;` might cause TiDB to panic [#55113](https://github.com/pingcap/tidb/issues/55113) @[crazycs520](https://github.com/crazycs520)
     - Fix the issue that the `read_from_storage` hint might not take effect when the query has an available Index Merge execution plan [#56217](https://github.com/pingcap/tidb/issues/56217) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that `INDEX_HASH_JOIN` might hang during an abnormal exit [#54055](https://github.com/pingcap/tidb/issues/54055) @[wshwsh12](https://github.com/wshwsh12)
-    - Fix the issue that querying system tables related to the Distributed eXecution Framework (DXF) might lead to upgrade exceptions [#49263](https://github.com/pingcap/tidb/issues/49263) @[D3Hunter](https://github.com/D3Hunter)
-    - Fix the issue that DDL internal transaction reports an error `GC life time is shorter than transaction duration`, which leads to failure to add indexes [#57043](https://github.com/pingcap/tidb/issues/57043) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that when executing `EXCHANGE PARTITION` and encountering invalid rows, InfoSchema is fully loaded with an error `failed to load schema diff` [#56685](https://github.com/pingcap/tidb/issues/56685) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that querying system tables related to the Distributed eXecution Framework (DXF) might lead to upgrade failures [#49263](https://github.com/pingcap/tidb/issues/49263) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that the DDL internal transaction error `GC life time is shorter than transaction duration` causes index addition to fail [#57043](https://github.com/pingcap/tidb/issues/57043) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that when executing `EXCHANGE PARTITION` and encountering invalid rows, InfoSchema is fully loaded and the error `failed to load schema diff` is reported [#56685](https://github.com/pingcap/tidb/issues/56685) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue that collation is not handled correctly when `tidb_ddl_enable_fast_reorg` and `new_collations_enabled_on_first_bootstrap` are enabled, resulting in inconsistent data indexes [#58036](https://github.com/pingcap/tidb/issues/58036) @[djshow832](https://github.com/djshow832)
     - Fix the issue that data indexes are inconsistent because plan cache uses the wrong schema when adding indexes [#56733](https://github.com/pingcap/tidb/issues/56733) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that executing `ALTER TABLE TIFLASH REPLICA` during upgrade causes the TiDB node to crash [#57863](https://github.com/pingcap/tidb/issues/57863) @[tangenta](https://github.com/tangenta)
@@ -87,11 +87,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue that the default timeout for querying the TiFlash system table is too short [#57816](https://github.com/pingcap/tidb/issues/57816) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that the value of the `default_collation_for_utf8mb4` variable does not work for the `SET NAMES` statement [#56439](https://github.com/pingcap/tidb/issues/56439) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that TTL internal coroutine might panic when you manually delete a timer in the `mysql.tidb_timer` table [#57112](https://github.com/pingcap/tidb/issues/57112) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that when using the `ALTER TABLE` statement to convert a normal table to a partitioned table, insufficient checking might result in incorrect data [#55721](https://github.com/pingcap/tidb/issues/55721) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that when converting a normal table to a partitioned table using the `ALTER TABLE` statement, insufficient checks might result in incorrect data [#55721](https://github.com/pingcap/tidb/issues/55721) @[mjonss](https://github.com/mjonss)
     - Fix the issue that when setting `tidb_gogc_tuner_max_value` and `tidb_gogc_tuner_min_value`, if the maximum value is null, an incorrect warning message occurs [#57889](https://github.com/pingcap/tidb/issues/57889) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the potential data race issue that might occur in TiDB's internal coroutine [#57798](https://github.com/pingcap/tidb/issues/57798) [#56053](https://github.com/pingcap/tidb/issues/56053) @[fishiu](https://github.com/fishiu) @[tiancaiamao](https://github.com/tiancaiamao)
     - Update `golang-jwt` and `jwt` to prevent potential security risks [#57135](https://github.com/pingcap/tidb/issues/57135) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that concurrent writes might result in duplicate data when converting a clustered indexed table to a partitioned table using the `ALTER TABLE` statement [#57510](https://github.com/pingcap/tidb/issues/57510) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that concurrent writes might result in duplicate data when converting a table with clustered indexes to a partitioned table using the `ALTER TABLE` statement [#57510](https://github.com/pingcap/tidb/issues/57510) @[mjonss](https://github.com/mjonss)
 
 + TiKV
 
