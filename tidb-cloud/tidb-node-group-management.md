@@ -71,12 +71,12 @@ Public connection for the new TiDB node group is disabled by default. You need t
 To enable public connection, do the following:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. In the upper-right corner, click **Connect**. A connection dialog is displayed.
 3. Choose the new TiDB node group and the **Public** connection type.
 4. Click **Configure the IP Access** List.
 5. On the **Networking** page, select the TiDB node group in the upper-right corner.
 6. Enable the public endpoint and add the IP access list.
-7. Click **Connect** on the up-right of the page and you can get the connection string. 
+7. In the up-right corner of the page, click **Connect**, and you can get the connection string. 
 
 ![Connect to the new TiDB node group via Public Endpoint](/media/tidb-cloud/tidb-node-group-connect-public-endpoint.png)
 
@@ -85,9 +85,9 @@ For more information, see [Connect to TiDB Cloud Dedicated via Public Connection
 ### Connect via private endpoint
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. In the upper-right corner, click **Connect**. A connection dialog is displayed.
 3. Choose the new TiDB node group and **Private Endpoint** connection type.
-4. Click **Networking** in the left navigation pane. On the **Networking** page, select the TiDB node group.
+4. In the left navigation pane, click **Networking**. On the **Networking** page, select the TiDB node group.
 5. Click **Create Private Endpoint Connection** to create a new connection for this node group. For more information, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
 
     > **Note**:
@@ -102,7 +102,7 @@ Because the cluster is in one VPC and all the TiDB node groups share the same VP
 
 1. Follow the instructions in [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to create a VPC peering for this cluster. 
 2. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-3. Click **Networking** in the left navigation pane. 
+3. In the left navigation pane, click **Networking**. 
 4. On the **Networking** page, click **Connect** on the up-right to get the connection string. 
 
 ## View TiDB node groups
@@ -154,6 +154,8 @@ To delete a TiDB node group, perform the following steps:
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 2. In the left navigation pane, click **Nodes**.
 3. On the **Node Map** page, click **Modify** in the upper-right corner. The **Modify Cluster** page is displayed.
-4. On the **Modify Cluster** page, click <svg TODO </svg> **Delete** to delete the TiDB node group.
+4. On the **Modify Cluster** page, click <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 6V5.2C16 4.0799 16 3.51984 15.782 3.09202C15.5903 2.71569 15.2843 2.40973 14.908 2.21799C14.4802 2 13.9201 2 12.8 2H11.2C10.0799 2 9.51984 2 9.09202 2.21799C8.71569 2.40973 8.40973 2.71569 8.21799 3.09202C8 3.51984 8 4.0799 8 5.2V6M10 11.5V16.5M14 11.5V16.5M3 6H21M19 6V17.2C19 18.8802 19 19.7202 18.673 20.362C18.3854 20.9265 17.9265 21.3854 17.362 21.673C16.7202 22 15.8802 22 14.2 22H9.8C8.11984 22 7.27976 22 6.63803 21.673C6.07354 21.3854 5.6146 20.9265 5.32698 20.362C5 19.7202 5 18.8802 5 17.2V6" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>**Delete** to delete the TiDB node group.
 
 ![Delete the TiDB node group](/media/tidb-cloud/tidb-node-group-delete.png)
