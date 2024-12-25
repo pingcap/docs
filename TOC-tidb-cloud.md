@@ -379,6 +379,10 @@
         -   [導入](/tidb-distributed-execution-framework.md)
         -   [TiDB グローバルソート](/tidb-global-sort.md)
     -   ベンチマーク
+        -   TiDB v8.5
+            -   [パフォーマンスハイライト](/tidb-cloud/v8.5-performance-highlights.md)
+            -   [TPC-C パフォーマンス テスト レポート](/tidb-cloud/v8.5-performance-benchmarking-with-tpcc.md)
+            -   [Sysbench パフォーマンス テスト レポート](/tidb-cloud/v8.5-performance-benchmarking-with-sysbench.md)
         -   TiDB v8.1
             -   [TPC-C パフォーマンス テスト レポート](/tidb-cloud/v8.1-performance-benchmarking-with-tpcc.md)
             -   [Sysbench パフォーマンス テスト レポート](/tidb-cloud/v8.1-performance-benchmarking-with-sysbench.md)

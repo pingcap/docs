@@ -131,3 +131,36 @@ tiup playground scale-out --db 2
 ```shell
 tiup playground scale-in --pid 86526
 ```
+
+## TiProxy をデプロイ {#deploy-tiproxy}
+
+[Tiプロキシ](/tiproxy/tiproxy-overview.md)は PingCAP の公式プロキシコンポーネントであり、クライアントと TiDBサーバーの間に配置され、負荷分散、接続の永続性、サービス検出、および TiDB のその他の機能を提供します。
+
+TiUP v1.15.0 以降では、 TiUP Playground を使用してクラスターに TiProxy をデプロイできます。
+
+1.  `tidb.toml`ファイルを作成し、次の構成を追加します。
+
+        graceful-wait-before-shutdown=15
+
+    この構成項目は、TiDB がサーバーをシャットダウンする前に待機する期間 (秒単位) を制御し、クラスターのスケールイン操作中にクライアントが切断されるのを回避します。
+
+2.  TiDB クラスターを起動します。
+
+    ```shell
+    tiup playground v8.1.1 --tiproxy 1 --db.config tidb.toml
+    ```
+
+    プレイグラウンドコンポーネントでは、TiProxy 関連のコマンドライン フラグは次のとおりです。
+
+    ```bash
+    Flags:
+          --tiproxy int                  The number of TiProxy nodes in the cluster. If not specified, TiProxy is not deployed.
+          --tiproxy.binpath string       TiProxy instance binary path.
+          --tiproxy.config string        TiProxy instance configuration file.
+          --tiproxy.host host            Playground TiProxy host. If not provided, TiProxy will still use host flag as its host.
+          --tiproxy.port int             Playground TiProxy port. If not provided, TiProxy will use 6000 as its port.
+          --tiproxy.timeout int          TiProxy maximum wait time in seconds for starting. 0 means no limit (default 60).
+          --tiproxy.version string       The version of TiProxy. If not specified, the latest version of TiProxy is deployed.
+    ```
+
+TiProxy の導入と使用の詳細については、 [TiProxyのインストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)参照してください。

@@ -645,3 +645,7 @@ sudo yum -y install numactl
     ```
 
     `tiup cluster exec`コマンドのヘルプ情報を取得するには、 `tiup cluster exec --help`コマンドを実行します。
+
+## SELinuxを無効にする {#disable-selinux}
+
+[強制取得(8)](https://linux.die.net/man/8/getenforce)ユーティリティを使用して、SELinux が無効になっているか、または permissive に設定されているかを確認します。強制モードの SELinux は、デプロイメントの失敗を引き起こす可能性があります。SELinux を無効にする手順については、オペレーティング システムのドキュメントを参照してください。

@@ -24,7 +24,7 @@ summary: TiDB での IMPORT INTO の使用法の概要。
 -   `IMPORT INTO` [一時テーブル](/temporary-tables.md)または[キャッシュされたテーブル](/cached-tables.md)へのデータのインポートをサポートしていません。
 -   `IMPORT INTO`トランザクションやロールバックをサポートしていません。明示的なトランザクション ( `BEGIN` / `END` ) 内で`IMPORT INTO`実行すると、エラーが返されます。
 -   `IMPORT INTO` 、 [バックアップと復元](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) 、 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 、 [インデックス追加の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 、 TiDB Lightningを使用したデータのインポート、 TiCDC を使用したデータのレプリケーション、 [ポイントインタイムリカバリ (PITR)](https://docs.pingcap.com/tidb/stable/br-log-architecture)などの機能と同時に動作することはサポートされていません。 互換性の詳細については、 [TiDB Lightningと`IMPORT INTO`と TiCDC およびログ バックアップとの互換性](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios)参照してください。
--   データのインポート プロセス中は、ターゲット テーブルに対して DDL または DML 操作を実行しないでください。また、ターゲット データベースに対して[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)実行しないでください。これらの操作は、インポートの失敗やデータの不整合につながる可能性があります。また、読み取られるデータに不整合がある可能性があるため、インポート プロセス中に読み取り操作を実行することは推奨され**ません**。インポートが完了した後にのみ、読み取りおよび書き込み操作を実行してください。
+-   データのインポート プロセス中は、ターゲット テーブルに対して DDL または DML 操作を実行しないでください。また、ターゲット データベースに対して[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)実行しないでください。これらの操作は、インポートの失敗やデータの不整合につながる可能性があります。また、読み取られるデータに不整合がある可能性があるため、インポート プロセス中に読み取り操作を実行することは推奨され**ません**。読み取りおよび書き込み操作は、インポートが完了した後にのみ実行してください。
 -   インポート プロセスはシステム リソースを大量に消費します。TiDB Self-Managed では、パフォーマンスを向上させるために、少なくとも 32 個のコアと 64 GiB のメモリを備えた TiDB ノードを使用することをお勧めします。TiDB はインポート中にソートされたデータを TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)に書き込むため、フラッシュメモリなどの高性能なstorageメディアを TiDB Self-Managed 用に構成することをお勧めします。詳細については、 [物理インポートモードの制限](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions)参照してください。
 -   TiDB Self-Managed の場合、TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)には少なくとも 90 GiB の使用可能スペースがあることが予想されます。インポートするデータの量以上のstorageスペースを割り当てることをお勧めします。
 -   1 つのインポート ジョブでは、1 つのターゲット テーブルへのデータのインポートのみがサポートされます。
@@ -49,6 +49,7 @@ summary: TiDB での IMPORT INTO の使用法の概要。
 -   `IMPORT INTO ... FROM SELECT` `SHOW IMPORT JOB(s)`や`CANCEL IMPORT JOB <job-id>`などのタスク管理ステートメントをサポートしていません。
 -   TiDB の[一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)には、 `SELECT`ステートメントのクエリ結果全体を格納するのに十分なスペースが必要です ( `DISK_QUOTA`オプションの構成は現在サポートされていません)。
 -   [`tidb_snapshot`](/read-historical-data.md)使用した履歴データのインポートはサポートされていません。
+-   `SELECT`節の構文は複雑なため、 `IMPORT INTO`の`WITH`パラメータがそれと競合し、 `GROUP BY ... [WITH ROLLUP]`のような解析エラーが発生する可能性があります。複雑な`SELECT`ステートメントのビューを作成し、インポートには`IMPORT INTO ... FROM SELECT * FROM view_name`使用することをお勧めします。または、 `IMPORT INTO ... FROM (SELECT ...) WITH ...`のように括弧を使用して`SELECT`のスコープを明確にすることもできます。
 
 ## インポートの前提条件 {#prerequisites-for-import}
 
@@ -226,7 +227,7 @@ IMPORT INTO t FROM '/path/to/small.csv';
 +--------+--------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
 ```
 
-`DETACHED`モードが有効になっている場合、 `IMPORT INTO ... FROM FILE`ステートメントを実行すると、出力にジョブ情報がすぐに返されます。出力から、ジョブのステータスが`pending`であり、実行を待機中であることがわかります。
+`DETACHED`モードが有効になっている場合、 `IMPORT INTO ... FROM FILE`ステートメントを実行すると、出力にジョブ情報がすぐに返されます。出力から、ジョブのステータスが`pending`であり、実行を待機していることがわかります。
 
 ```sql
 IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
