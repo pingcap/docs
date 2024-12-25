@@ -43,6 +43,8 @@ If you still encounter errors, you can specify the installation path of the MySQ
 /opt/homebrew/opt/mysql-client@8.0/bin/mysql --comments --host ${YOUR_IP_ADDRESS} --port ${YOUR_PORT_NUMBER} -u ${your_user_name} -p
 ```
 
+Replace `/opt/homebrew/opt/mysql-client@8.0/bin/mysql` in the preceding command with the installation path of the MySQL v8.0 client in your actual environment.
+
 </div>
 
 <div label="MySQL Shell">
