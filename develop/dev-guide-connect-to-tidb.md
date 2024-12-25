@@ -29,7 +29,7 @@ After the installation, you can connect to TiDB using the following command:
 mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 ```
 
-The MySQL v9.0 Client on macOS cannot correctly load the `mysql_native_password` plugin, causing the error `ERROR 2059 (HY000): Authentication plugin 'mysql_native_password' cannot be loaded` when connecting to TiDB. To address this issue, it is recommended to install and use the MySQL v8.0 Client to connect to TiDB. Run the following commands to install it:
+The MySQL v9.0 client on macOS cannot correctly load the `mysql_native_password` plugin, causing the error `ERROR 2059 (HY000): Authentication plugin 'mysql_native_password' cannot be loaded` when connecting to TiDB. To address this issue, it is recommended to install and use the MySQL v8.0 client to connect to TiDB. Run the following commands to install it:
 
 ```shell
 brew install mysql-client@8.0
@@ -37,7 +37,7 @@ brew unlink mysql
 brew link mysql-client@8.0
 ```
 
-If you still encounter errors, try to specify the installation path of the MySQL v8.0 Client to use it for connecting to TiDB. Run the following command to install it:
+If you still encounter errors, you can specify the installation path of the MySQL v8.0 client to connect to TiDB. Run the following command:
 
 ```shell
 /opt/homebrew/opt/mysql-client@8.0/bin/mysql --comments --host ${YOUR_IP_ADDRESS} --port ${YOUR_PORT_NUMBER} -u ${your_user_name} -p
