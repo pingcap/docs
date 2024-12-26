@@ -20,7 +20,7 @@ There are two ways to set up Private Service Connect for self-hosted Kafka in Go
 
 - Use [Kafka-proxy](https://github.com/grepplabs/kafka-proxy). This method introduces an extra running process as the proxy between Kafka clients and Kafka brokers. The proxy dynamically configures the port-broker mapping and forwards requests. You do not need to reconfigure the existing Kafka cluster. See [Set up self-hosted Kafka Private Service Connect by Kafka-proxy](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy).
 
-The document provides an example of connecting to a Kafka Private Link service deployed across three availability zones (AZ) in Google Cloud. While other configurations are possible based on similar port-mapping principles, this document covers the fundamental setup process of the Kafka Private Link service. For production environments, a more resilient Kafka Private Link service with enhanced operational maintainability and observability is recommended.
+The document provides an example of connecting to a Kafka Private Service Connect service deployed across three availability zones (AZ) in Google Cloud. While other configurations are possible based on similar port-mapping principles, this document covers the fundamental setup process of the Kafka Private Service Connect service. For production environments, a more resilient Kafka Private Service Connect service with enhanced operational maintainability and observability is recommended.
 
 ## Prerequisites
 

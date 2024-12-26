@@ -11,7 +11,7 @@ The mechanism works as follows:
 
 1. The TiDB Cloud VPC connects to the Kafka VPC through private endpoints.
 2. Kafka clients need to communicate directly to all Kafka brokers.
-3. Each Kafka broker is mapped to a unique port within the TiDB Cloud VPC.
+3. Each Kafka broker is mapped to a unique port of endpoints within the TiDB Cloud VPC.
 4. Leverage the Kafka bootstrap mechanism and AWS resources to achieve the mapping.
 
 The following diagram shows the mechanism. 
@@ -53,7 +53,7 @@ The following table shows an example of the deployment information.
 |--------|-----------------|---------------------------|
 | Region    | Oregon (`us-west-2`)    |  N/A |
 | Principal of TiDB Cloud AWS Account | `arn:aws:iam::<account_id>:root`     |    N/A  |
-| AZ IDs                              | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>  | Align AZ IDs to AZ names in your AWS account.<br/>Example: <ul><li> `usw2-az1` => `us-west-2a` </li><li> `usw2-az2` => `us-west-2c` </li><li> usw2-az3 => `us-west-2b`</li></ul>  |
+| AZ IDs                              | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>  | Align AZ IDs to AZ names in your AWS account.<br/>Example: <ul><li> `usw2-az1` => `us-west-2a` </li><li> `usw2-az2` => `us-west-2c` </li><li>`usw2-az3` => `us-west-2b`</li></ul>  |
 | Kafka Advertised Listener Pattern   | The unique random string: `abc` <br/>Generated pattern for AZs <ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; </li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; </li></ul>    | Map AZ names to AZ-specified patterns. Make sure that you can configure the right pattern to the broker in a specific AZ later. <ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; </li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt; </li></ul>|
 
 ## Step 1. Set up a Kafka cluster
@@ -348,7 +348,7 @@ listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:
 log.dirs=./data
 ```
 
-**2.4.3 Create and execute a script**
+**2.4.3 Start Kafka brokers**
 
 Create a script, and then execute it to start the kafka broker in every broker node.
 
