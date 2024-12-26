@@ -185,6 +185,8 @@ The steps vary depending on the connectivity method you select.
 
     - Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
     - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
+    - Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. For more information, see [Open Protocol data format](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol). 
+    - Debezium is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. For more information, see [Debezium data format](https://docs.pingcap.com/tidb/stable/ticdc-debezium).
 
 4. Enable the **TiDB Extension** option if you want to add TiDB-extension fields to the Kafka message body.
 
@@ -217,15 +219,23 @@ The steps vary depending on the connectivity method you select.
 
         If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Topic Name** field.
 
-7. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to:
+7. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to. You can define **a single partition dispatcher for all tables**, or you can define **different partition dispatcher for different tables**. We provide 4 types of dispatcher:
 
-    - **Distribute changelogs by index value to Kafka partition**
+    - **Distribute changelogs by primary key or index value to Kafka partition**
 
-        If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The index value of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures row-level orderliness.
+        If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The primary key or index value of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures row-level orderliness.
 
     - **Distribute changelogs by table to Kafka partition**
 
         If you want the changefeed to send Kafka messages of a table to one Kafka partition, choose this distribution method. The table name of a row changelog will determine which partition the changelog is sent to. This distribution method ensures table orderliness but might cause unbalanced partitions.
+
+   - **Distribute changelogs by timestamp to Kafka partition**
+
+     If you want the changefeed to send Kafka messages to different Kafka partitions randomly, choose this distribution method. The commitTs of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures orderliness in each partition. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
+
+   - **Distribute changelogs by columns value to Kafka partition**
+
+     If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The specified columns values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees changelog with same column values will send to the same partition.
 
 8. In the **Topic Configuration** area, configure the following numbers. The changefeed will automatically create the Kafka topics according to the numbers.
 
