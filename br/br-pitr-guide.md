@@ -104,17 +104,17 @@ The following steps describe how to clean up backup data that exceeds the backup
 
 ## Performance capabilities of PITR
 
-- On each TiKV node, PITR can restore snapshot data (full restore) at a speed of 280 GB/h and log data (including meta files and KV files) at a speed of 30 GB/h.
+- On each TiKV node, PITR can restore snapshot data (full restore) at a speed of 2 TiB/h and log data (including meta files and KV files) at a speed of 30 GiB/h.
 - BR deletes outdated log backup data (`tiup br log truncate`) at a speed of 600 GB/h.
 
 > **Note:**
 >
 > The preceding specifications are based on test results from the following two testing scenarios. The actual data might be different.
 >
-> - Snapshot data restore speed = Snapshot data size / (duration * the number of TiKV nodes)
-> - Log data restore speed = Restored log data size / (duration * the number of TiKV nodes)
+> - Snapshot data restore speed = Total size of restored snapshot data on all TiKV nodes in the cluster / (duration * the number of TiKV nodes)
+> - Log data restore speed = Total size of restored log data on all TiKV nodes in the cluster / (duration * the number of TiKV nodes)
 >
-> The snapshot data size refers to the logical size of all KVs in a single replica, not the actual amount of restored data. BR restores all replicas according to the number of replicas configured for the cluster. The more replicas there are, the more data can be actually restored.
+> External storage only contains KV data of a single replica. Therefore, the data size in external storage does not represent the actual data size restored in the cluster. BR restores all replicas according to the number of replicas configured for the cluster. The more replicas there are, the more data can be actually restored.
 > The default replica number for all clusters in the test is 3.
 > To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`pitr-concurrency`](/br/use-br-command-line-tool.md#common-options) option in the BR command.
 
