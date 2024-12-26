@@ -1051,7 +1051,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: NONE
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `json_array, json_array_append, json_array_insert, json_contains, json_contains_path, json_depth, json_extract, json_insert, json_keys, json_length, json_merge_patch, json_merge_preserve, json_object, json_pretty, json_quote, json_remove, json_replace, json_search, json_set, json_storage_size, json_type, json_unquote, json_valid, lower, md5, reverse, tidb_shard, upper, vitess_hash`
+- Default value: `json_array, json_array_append, json_array_insert, json_contains, json_contains_path, json_depth, json_extract, json_insert, json_keys, json_length, json_merge_patch, json_merge_preserve, json_object, json_pretty, json_quote, json_remove, json_replace, json_schema_valid, json_search, json_set, json_storage_size, json_type, json_unquote, json_valid, lower, md5, reverse, tidb_shard, upper, vitess_hash`
 - This read-only variable is used to show the functions that are allowed to be used for creating [expression indexes](/sql-statements/sql-statement-create-index.md#expression-index).
 
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
