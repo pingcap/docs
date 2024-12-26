@@ -219,7 +219,7 @@ The steps vary depending on the connectivity method you select.
 
         If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Topic Name** field.
 
-7. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to. You can define **a single partition dispatcher for all tables**, or you can define **different partition dispatcher for different tables**. We provide 4 types of dispatcher:
+7. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to. You can define **a single partition dispatcher for all tables**, or **different partition dispatchers for different tables**. TiDB Cloud provides four types of dispatchers:
 
     - **Distribute changelogs by primary key or index value to Kafka partition**
 
@@ -229,13 +229,13 @@ The steps vary depending on the connectivity method you select.
 
         If you want the changefeed to send Kafka messages of a table to one Kafka partition, choose this distribution method. The table name of a row changelog will determine which partition the changelog is sent to. This distribution method ensures table orderliness but might cause unbalanced partitions.
 
-   - **Distribute changelogs by timestamp to Kafka partition**
+    - **Distribute changelogs by timestamp to Kafka partition**
 
-     If you want the changefeed to send Kafka messages to different Kafka partitions randomly, choose this distribution method. The commitTs of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures orderliness in each partition. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
+        If you want the changefeed to send Kafka messages to different Kafka partitions randomly, choose this distribution method. The commitTs of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures orderliness in each partition. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
 
-   - **Distribute changelogs by columns value to Kafka partition**
+    - **Distribute changelogs by column value to Kafka partition**
 
-     If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The specified columns values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees changelog with same column values will send to the same partition.
+        If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The specified column values of a row changelog will determine which partition the changelog is sent to. This distribution method ensures orderliness in each partition and guarantees that the changelog with the same column values is send to the same partition.
 
 8. In the **Topic Configuration** area, configure the following numbers. The changefeed will automatically create the Kafka topics according to the numbers.
 
