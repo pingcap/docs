@@ -214,6 +214,12 @@
        - [Overview](/garbage-collection-overview.md)
        - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+  - Optimize Resource Allocation
+    - [Overview of Resource Allocation](/tidb-cloud/optimize-resource-allocation.md)
+    - [Resource Control](/tidb-resource-control.md)
+    - TiDB Node Group
+      - [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md)
+      - [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
@@ -745,7 +751,6 @@
     - [upgrade](/tidb-cloud/ticloud-upgrade.md)
     - [help](/tidb-cloud/ticloud-help.md)
   - [Table Filter](/table-filter.md)
-  - [Resource Control](/tidb-resource-control.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
