@@ -111,7 +111,7 @@ The following steps describe how to clean up backup data that exceeds the backup
 >
 > The preceding specifications are based on test results from the following two testing scenarios. The actual data might be different.
 >
-> - Snapshot data restore speed = Total size of snapshot data on all TiKV nodes in the cluster / (duration * the number of TiKV nodes)
+> - Snapshot data restore speed = Total size of restored snapshot data on all TiKV nodes in the cluster / (duration * the number of TiKV nodes)
 > - Log data restore speed = Total size of restored log data on all TiKV nodes in the cluster / (duration * the number of TiKV nodes)
 >
 > External storage only contains KV data of a single replica. Therefore, the data size in external storage does not represent the actual data size restored in the cluster. BR restores all replicas according to the number of replicas configured for the cluster. The more replicas there are, the more data can be actually restored.
