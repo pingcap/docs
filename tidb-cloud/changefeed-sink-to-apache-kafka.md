@@ -129,7 +129,7 @@ The steps vary depending on the connectivity method you select.
 
 1. In **Connectivity Method**, select **Private Link**.
 2. Authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint for your endpoint service. The AWS Principal is provided in the tip on the web page.
-3. Make sure you select the same **Number of AZs** and **Suggested Kafka Endpoint Service AZs**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [set up self hosted Kafka Private Link service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in the **Network** section.
+3. Make sure you select the same **Number of AZs** and **AZ IDs of Kafka Deployment**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [set up self hosted Kafka Private Link service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in the **Network** section.
 4. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md).
 5. Fill the **Bootstrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
 6. Select an **Authentication** option according to your Kafka authentication configuration.
