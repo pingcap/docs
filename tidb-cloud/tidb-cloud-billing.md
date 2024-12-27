@@ -16,7 +16,7 @@ TiDB Cloud charges according to the resources that you consume. You can visit th
 
 ## Invoices
 
-If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
 
 After you set up the payment method, TiDB Cloud will generate an invoice once your cost reaches a quota, which is $500 by default. If you want to raise the quota or receive one invoice per month, you can [contact our sales](https://www.pingcap.com/contact-us/).
 
@@ -52,7 +52,7 @@ To view the list of invoices, perform the following steps:
 
 ## Billing details
 
-If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
 
 After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
 
@@ -82,7 +82,7 @@ The billing details page shows the billing summary by project and by service. Yo
 
 ## Cost explorer
 
-If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view and analyze the usage costs of TiDB Cloud. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view and analyze the usage costs of TiDB Cloud. Otherwise, skip this section.
 
 To analyze and customize your cost reports of your organization, perform the following steps:
 
@@ -157,7 +157,7 @@ To view this page, perform the following steps:
 
 ## Discounts
 
-If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view the discount information of TiDB Cloud on the **Discounts** page. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view the discount information of TiDB Cloud on the **Discounts** page. Otherwise, skip this section.
 
 The discount information includes all discounts that you have received, the status, the discount percentage, and the discount start and end date.
 
@@ -174,7 +174,7 @@ To view this page, perform the following steps:
 
 ## Payment method
 
-If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
 
 > **Note:**
 >
@@ -222,7 +222,7 @@ To set the default credit card, perform the following steps:
 
 ## Contract
 
-If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can manage your customized TiDB Cloud subscriptions in the TiDB Cloud console to meet compliance requirements. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage your customized TiDB Cloud subscriptions in the TiDB Cloud console to meet compliance requirements. Otherwise, skip this section.
 
 If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
@@ -240,7 +240,7 @@ To learn more about contracts, feel free to [contact our sales](https://www.ping
 
 ## Billing from AWS Marketplace or Google Cloud Marketplace
 
-If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can link your TiDB Cloud account to an AWS billing account or Google Cloud billing account. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can link your TiDB Cloud account to an AWS billing account or Google Cloud billing account. Otherwise, skip this section.
 
 If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), and pay for the usage via the AWS or Google Cloud billing account.
 

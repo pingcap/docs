@@ -207,7 +207,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Introduce the budget feature to help you track actual TiDB Cloud costs against planned expenses, preventing unexpected costs.
 
-    To access this feature, you must be in the `Organization Owner` or `Organization Billing Admin` role of your organization.
+    To access this feature, you must be in the `Organization Owner` or `Organization Billing Manager` role of your organization.
 
     For more information, see [Manage budgets for TiDB Cloud](/tidb-cloud/tidb-cloud-budget.md).
 

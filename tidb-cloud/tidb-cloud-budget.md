@@ -17,7 +17,7 @@ TiDB Cloud provides two types of budgets to help you track your spending:
 
 ## Prerequisites
 
-To view, create, edit, or delete budgets of your organization or projects, you must be in the `Organization Owner` or `Organization Billing Admin` role of your organization.
+To view, create, edit, or delete budgets of your organization or projects, you must be in the `Organization Owner` or `Organization Billing Manager` role of your organization.
 
 ## View the budget information
 
