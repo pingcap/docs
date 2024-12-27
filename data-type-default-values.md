@@ -45,7 +45,7 @@ TiDB supports specifying the following expressions as default values in the `DEF
     * `DATE_FORMAT(NOW(), '%Y-%m-%d %H.%i.%s')`
     * `DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')`
 * `STR_TO_DATE('1980-01-01', '%Y-%m-%d')`
-* [`CURRENT_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md), [`CURRENT_DATE()`](/functions-and-operators/date-and-time-functions.md): both with default fsp
+* [`CURRENT_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md), [`CURRENT_DATE()`](/functions-and-operators/date-and-time-functions.md): both use the default fsp (fractional seconds precision)
 * [`JSON_OBJECT()`](/functions-and-operators/json-functions.md), [`JSON_ARRAY()`](/functions-and-operators/json-functions.md), [`JSON_QUOTE()`](/functions-and-operators/json-functions.md)
 * [`NEXTVAL()`](/functions-and-operators/sequence-functions.md#nextval)
 * [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md)
