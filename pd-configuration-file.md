@@ -491,7 +491,11 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 
 Configuration items related to the replication mode of all Regions. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
 
+<<<<<<< HEAD
 ## Controllor
+=======
+## controller
+>>>>>>> ce5b9a6e6a (configuration-file: correct the initial capitalization of certain configuration items (#19825))
 
 This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control.md).
 
