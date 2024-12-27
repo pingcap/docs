@@ -24,6 +24,11 @@ This document describes how to create a changefeed to stream data from TiDB Clou
     - For v7.1.x: version v7.1.4 or later
     - For v7.5.x: version v7.5.1 or later
     - For v8.1.x: all versions of v8.1.0 and later are supported
+- If you want to use Debezium as Data Format, make sure version of your TiDB cluster should be v8.1.0 or later.
+- For the Partition Distribution
+
+    - If you want to distribute changelogs by primary key or index value to Kafka partition with specified index name, make sure version of your TiDB cluster should be v7.5.0 or later
+    - If you want to distribute changelogs by column value to Kafka partition, make sure version of your TiDB cluster should be v7.5.0 or later
 
 ## Prerequisites
 
