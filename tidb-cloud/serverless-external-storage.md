@@ -199,13 +199,13 @@ Take the following steps to configure a service account key:
 
    ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3. Choose the default `JSON` key type, and then click the **CREATE** button to download the Google Cloud credentials file The file contains the service account key that you need to configure the GCS access for the TiDB Cloud Serverless cluster.
+3. Choose the default `JSON` key type, and then click the **CREATE** button to download the Google Cloud credentials file. The file contains the service account key that you need to configure the GCS access for the TiDB Cloud Serverless cluster.
 
 ## Configure Azure Blob Storage access
 
 To allow TiDB Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use a service SAS token to configure the container access.
 
-It is recommended that you use [Azure ARM template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) to create a role ARN. Take the following steps to create one:
+It is recommended that you use [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) to create a SAS token. Take the following steps to create one:
 
 1. Open the **Import** page for your target cluster.
 
@@ -229,13 +229,13 @@ It is recommended that you use [Azure ARM template](https://docs.aws.amazon.com/
 
     3. Fill in the **Resource group** and **Storage Account Name** in the **Custom deployment** page. You can get all the information from the storage account overview page where the container is located.
 
-    ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
+        ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
     4. Ckick **Review + create** or **Next** button to review the deployment. Then click **Create** to start the deployment.
    
     5. Once it completes, it will redirect you to the deployment overview page. Navigate to the Outputs section to get the SAS token.
 
-If you have any trouble creating a SAS token withAAzure ARM template, you can take the following steps to create one manually:
+If you have any trouble creating a SAS token with Azure ARM template, you can take the following steps to create one manually:
 
 <details>
 <summary>Click here to see details</summary>

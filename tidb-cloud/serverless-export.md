@@ -62,7 +62,7 @@ For more information, see [Configure External Storage Access for TiDB Serverless
 
 To export data to Azure Blob Storage, you need to provide the following information:
 
-- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` or `http://<account-name>.blob.core.windows.net/<container-name>/<folder-path>`
+- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>`
 - Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
@@ -173,7 +173,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL**, **CSV** or **Parquet**.
+    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
 
    > **Tip:**
@@ -224,7 +224,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL**, **CSV** or **Parquet**.
+    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
     - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
@@ -268,7 +268,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL**, **CSV** or **Parquet**.
+    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Google Cloud Storage with the `gs://<bucket-name>/<folder-path>/` format.
     - **Bucket Access**: upload the Google Cloud credentials file which has permission to access the bucket.
@@ -306,7 +306,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL**, **CSV** or **Parquet**.
+    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Google Cloud Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` format.
     - **Bucket Access**: enter the SAS token which has permission to access the container. It is recommended to create the SAS token with Azure ARM Template. For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
@@ -321,7 +321,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
 ```
 
-- `azblob.uri`: the URI of the Azure Blob Storage in the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` format.
+- `azblob.uri`: the URI of the Azure Blob Storage in the `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` format.
 - `azblob.sas-token`: the account SAS token of the Azure Blob Storage.
 
 </div>
