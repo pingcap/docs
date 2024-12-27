@@ -354,7 +354,7 @@ Usage:
     config set flow-round-by-digit 4
     ```
 
-#### `config [show | set service-middleware <option> [<key> <value> | <label> <qps|concurrency> <value>]]`
+### `config [show | set service-middleware <option> [<key> <value> | <label> <qps|concurrency> <value>]]`
 
 `service-middleware` is a configuration module in PD, mainly used to manage and control middleware functions of PD services, such as audit logging, request rate limiting, and concurrency limiting. Starting from v8.5.0, you can modify the following configurations of `service-middleware` using `pd-ctl`:
 
