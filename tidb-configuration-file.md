@@ -263,7 +263,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 > - In TiDB, the `zone` label is specially used to specify the zone where a server is located. If `zone` is set to a non-null value, the corresponding value is automatically used by features such as [`txn-score`](/system-variables.md#txn_scope) and [`Follower read`](/follower-read.md).
 > - The `group` label has a special use in TiDB Operator. For clusters deployed using [TiDB Operator](/tidb-operator-overview.md), it is **NOT** recommended that you specify the `group` label manually.
 
-## Log
+## log
 
 Configuration items related to log.
 
@@ -378,7 +378,7 @@ Configuration items related to log files.
 + Value options: `""`, `"gzip"`
 + The default value is `""`, which means no compression. To enable the gzip compression, set this value to `"gzip"`. After compression is enabled, all log files are affected, such as [`slow-query-file`](#slow-query-file) and [`general-log-file`](#general-log-file-new-in-v800).
 
-## Security
+## security
 
 Configuration items related to security.
 
@@ -473,7 +473,7 @@ Configuration items related to security.
 + Default value: ""
 + Refer to the descriptions of [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640).
 
-## Performance
+## performance
 
 Configuration items related to performance.
 
