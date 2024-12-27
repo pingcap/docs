@@ -31,7 +31,7 @@ It is recommended to enable Pipelined DML in the following scenarios:
 - Encountering memory insufficient errors during DML operations
 - Experiencing noticeable workload fluctuations during large-scale data operations
 
-Note that although Pipelined DML significantly reduces memory usage during transaction processing, you still need to configure a [reasonable memory threshold](/system-variables.md#tidb_mem_quota_query) (at least 2 GiB recommended) to ensure other modules (such as executors) function properly during large-scale data operations.
+Note that although Pipelined DML significantly reduces memory usage during transaction processing, you still need to configure a [reasonable memory threshold](/system-variables.md#tidb_mem_quota_query) (at least 2 GiB recommended) to ensure other components (such as executors) function properly during large-scale data operations.
 
 ## Limitations
 
