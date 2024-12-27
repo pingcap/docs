@@ -337,18 +337,7 @@ Configuration items related to log files.
 - Default value: `0`
 - All the log files are retained by default. If you set it to `7`, seven log files are retained at maximum.
 
-<<<<<<< HEAD
-## Security
-=======
-#### `compression` <span class="version-mark">New in v8.0.0</span>
-
-+ The compression method for the log.
-+ Default value: `""`
-+ Value options: `""`, `"gzip"`
-+ The default value is `""`, which means no compression. To enable the gzip compression, set this value to `"gzip"`. After compression is enabled, all log files are affected, such as [`slow-query-file`](#slow-query-file) and [`general-log-file`](#general-log-file-new-in-v800).
-
 ## security
->>>>>>> ce5b9a6e6a (configuration-file: correct the initial capitalization of certain configuration items (#19825))
 
 Configuration items related to security.
 
