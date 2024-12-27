@@ -80,7 +80,7 @@ Non-transactional DML is introduced in TiDB v6.1.0. Initially, only the `DELETE`
 
 - Suitable for scenarios involving bulk data inserts, updates, and deletions. Due to its limitations, it is recommended to consider non-transactional DML only when Pipelined DML is not applicable.
 
-For more details, refer to the [Non-transactional DML](/non-transactional-dml.md) documentation.
+For more information, see [Non-transactional DML](/non-transactional-dml.md).
 
 ### Deprecated batch-dml feature
 
