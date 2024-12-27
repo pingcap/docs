@@ -117,7 +117,7 @@ You can monitor the execution of Pipelined DML using the following methods:
 
 ## FAQs
 
-### Why wasn’t my query executed using Pipelined DML?
+### Why wasn't my query executed using Pipelined DML?
 
 When TiDB rejects to execute a statement using Pipelined DML, it generates a warning message accordingly. You can execute `SHOW WARNINGS;` to check the warning and identify the cause.
 
