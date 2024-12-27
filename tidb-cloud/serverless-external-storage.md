@@ -199,14 +199,49 @@ Take the following steps to configure a service account key:
 
    ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3. Choose the default `JSON` key type, and then click the **CREATE** button to download the service account key.
+3. Choose the default `JSON` key type, and then click the **CREATE** button to download the Google Cloud credentials file The file contains the service account key that you need to configure the GCS access for the TiDB Cloud Serverless cluster.
 
 ## Configure Azure Blob Storage access
 
-To allow TiDB Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use a service SAS token to configure the container access:
+To allow TiDB Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use a service SAS token to configure the container access.
+
+It is recommended that you use [Azure ARM template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) to create a role ARN. Take the following steps to create one:
+
+1. Open the **Import** page for your target cluster.
+
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+2. Open the **Generate New SAS Token via ARM Template Deployment** dialog.
+        
+    - If you want to export data to Azure Blob Storage:
+
+        1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
+        2. Fill in the **Folder URI** field.
+        3. Click **Click here to create a new one with Azure ARM template**.       
+   
+3. Create a SAS token with the Azure ARM template.
+
+    1. In the **Generate New SAS Token via ARM Template Deployment** dialog, click **Click to open the Azure Portal with the pre-configured ARM template**.
+   
+    2. You will be redirected to the Azure **Custom deployment** page after you log in to the Azure.
+
+    3. Fill in the **Resource group** and **Storage Account Name** in the **Custom deployment** page. You can get all the information from the storage account overview page where the container is located.
+
+    ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
+
+    4. Ckick **Review + create** or **Next** button to review the deployment. Then click **Create** to start the deployment.
+   
+    5. Once it completes, it will redirect you to the deployment overview page. Navigate to the Outputs section to get the SAS token.
+
+If you have any trouble creating a SAS token withAAzure ARM template, you can take the following steps to create one manually:
+
+<details>
+<summary>Click here to see details</summary>
 
 1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
-
+   
 2. On your **Storage account** page, click the **Security+network**, and then click **Shared access signature**.
 
    ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
@@ -222,3 +257,5 @@ To allow TiDB Serverless to access your Azure Blob container, you need to config
    ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
 4. Click **Generate SAS and connection string** to generate the SAS token.
+
+</details>
