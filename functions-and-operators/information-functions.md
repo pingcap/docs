@@ -219,6 +219,8 @@ TABLE t1;
 >
 > - In the preceding example, IDs increase by 2 while MySQL would generate IDs incrementing by 1 in the same scenario. For more compatibility information, see [Auto-increment ID](/mysql-compatibility.md#auto-increment-id).
 
+The `LAST_INSERT_ID(expr)` function can be used with an expression as argument, in which case the value is remembered for the next call to `LAST_INSERT_ID()` allowing this to be used as a MySQL compatible way of generating sequences. Note that TiDB also has support for proper [sequences](/functions-and-operators/sequence-functions.md).
+
 ### ROW_COUNT()
 
 The `ROW_COUNT()` function returns the number of affected rows.
