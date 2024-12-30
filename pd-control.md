@@ -472,7 +472,7 @@ config set service-middleware rate-limit GetRegion qps 0
 config set service-middleware rate-limit GetRegion concurrency 0
 ```
 
-#### `config placement-rules [disable | enable | load | save | show | rule-group]`
+### `config placement-rules [disable | enable | load | save | show | rule-group]`
 
 For the usage of `config placement-rules [disable | enable | load | save | show | rule-group]`, see [Configure placement rules](/configure-placement-rules.md#configure-rules).
 
