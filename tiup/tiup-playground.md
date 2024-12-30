@@ -22,7 +22,7 @@ This command actually performs the following operations:
 
 - Because this command does not specify the version of the playground component, TiUP first checks the latest version of the installed playground component. Assume that the latest version is v1.12.3, then this command works the same as `tiup playground:v1.12.3`.
 - If you have not used TiUP playground to install the TiDB, TiKV, and PD components, the playground component installs the latest stable version of these components, and then start these instances.
-- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v8.4.0, then this command works the same as `tiup playground:v1.12.3 v8.4.0`.
+- Because this command does not specify the version of the TiDB, PD, and TiKV component, TiUP playground uses the latest version of each component by default. Assume that the latest version is v8.5.0, then this command works the same as `tiup playground:v1.12.3 v8.5.0`.
 - Because this command does not specify the number of each component, TiUP playground, by default, starts a smallest cluster that consists of one TiDB instance, one TiKV instance, one PD instance, and one TiFlash instance.
 - After starting each TiDB component, TiUP playground reminds you that the cluster is successfully started and provides you some useful information, such as how to connect to the TiDB cluster through the MySQL client and how to access the [TiDB Dashboard](/dashboard/dashboard-intro.md).
 
@@ -133,12 +133,49 @@ You can specify a `pid` in the `tiup playground scale-in` command to scale in th
 tiup playground scale-in --pid 86526
 ```
 
+## Deploy TiProxy
+
+[TiProxy](/tiproxy/tiproxy-overview.md) is the official proxy component from PingCAP, placed between the client and the TiDB server to provide load balancing, connection persistence, service discovery, and other features for TiDB.
+
+Starting from TiUP v1.15.0, you can deploy TiProxy for your cluster using TiUP Playground.
+
+1. Create a `tidb.toml` file and add the following configuration:
+
+    ```
+    graceful-wait-before-shutdown=15
+    ```
+
+    This configuration item controls the duration (in seconds) that TiDB waits before shutting down the server, avoiding client disconnections during cluster scaling-in operations.
+
+2. Start the TiDB cluster:
+
+    ```shell
+    tiup playground v8.5.0 --tiproxy 1 --db.config tidb.toml
+    ```
+
+    In the playground component, TiProxy-related command-line flags are as follows:
+
+    ```bash
+    Flags:
+          --tiproxy int                  The number of TiProxy nodes in the cluster. If not specified, TiProxy is not deployed.
+          --tiproxy.binpath string       TiProxy instance binary path.
+          --tiproxy.config string        TiProxy instance configuration file.
+          --tiproxy.host host            Playground TiProxy host. If not provided, TiProxy will still use host flag as its host.
+          --tiproxy.port int             Playground TiProxy port. If not provided, TiProxy will use 6000 as its port.
+          --tiproxy.timeout int          TiProxy maximum wait time in seconds for starting. 0 means no limit (default 60).
+          --tiproxy.version string       The version of TiProxy. If not specified, the latest version of TiProxy is deployed.
+    ```
+
+For more information about deploying and using TiProxy, see [TiProxy installation and usage](/tiproxy/tiproxy-overview.md#installation-and-usage).
+
+To use the TiProxy client program `tiproxyctl`, see [Install TiProxy Control](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control).
+
 ## Deploy PD microservices
 
 Starting from v8.2.0, [PD microservice mode](/pd-microservices.md) (experimental) can be deployed using TiUP. You can deploy the `tso` microservice and `scheduling` microservice for your cluster using TiUP Playground as follows:
 
 ```shell
-tiup playground v8.4.0 --pd.mode ms --pd 3 --tso 2 --scheduling 2
+tiup playground v8.5.0 --pd.mode ms --pd 3 --tso 2 --scheduling 2
 ```
 
 - `--pd.mode`: setting it to `ms` means enabling the microservice mode for PD.
