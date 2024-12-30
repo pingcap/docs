@@ -140,6 +140,13 @@ This section introduces the configuration items of Drainer. For the example of a
 * Specifies the externally accessible HTTP API address. This address is registered in PD in the format of `host:port`.
 * Default value: `127.0.0.1:8249`
 
+### load-schema-snapshot
+
+* The default value is false.
+* When set to false: Drainer will derive the table schema for each table at a specific schema version by replaying all DDL operations in the history. This approach means that Drainer needs to process and replay all DDL changes from the initial state to the target schema version, which could involve a large amount of data processing and replaying.
+* When set to true: Drainer will directly read the table info at the checkpoint TS. Since it directly reads the table info at a specific point in time, this method is generally more efficient. However, it is subject to the GC mechanism. Since GC may delete older data versions, if the checkpoint TS is too old, the table information at that time might have already been deleted by GC, causing an inability to read it directly.
+* When configuring Drainer, you need to choose whether to directly read the table info at the checkpoint TS based on actual requirements. If you need to ensure data integrity and consistency and do not mind processing a large amount of DDL changes, it is recommended to set it to false. If you prioritize efficiency and performance, and can ensure that the checkpoint TS is after the GC safe point, it is recommended to set it to true.
+
 ### log-file
 
 * Specifies the path where log files are stored. If the parameter is set to an empty value, log files are not stored.
