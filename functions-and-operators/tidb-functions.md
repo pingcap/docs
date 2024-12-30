@@ -662,7 +662,7 @@ SELECT TIDB_DECODE_KEY('7480000000000000845f728000000000000001');
 
 ## TIDB_MVCC_INFO
 
-Returns MVCC info for a key. The `TIDB_ENCODE_INDEX_KEY` function can be used to obtain a key.
+Returns the [MVCC (Multi-Version Concurrency Control)](/glossary.md#multi-version-concurrency-control-mvcc) information for a key. You can use the [`TIDB_ENCODE_INDEX_KEY`](#TIDB_ENCODE_INDEX_KEY) function to obtain a key.
 
 ```sql
 SELECT JSON_PRETTY(TIDB_MVCC_INFO('74800000000000007f5f698000000000000001038000000000000001038000000000000001')) AS info\G
