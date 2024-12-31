@@ -142,10 +142,10 @@ This section introduces the configuration items of Drainer. For the example of a
 
 ### load-schema-snapshot
 
-* The default value is false.
-* When set to false: Drainer will derive the table schema for each table at a specific schema version by replaying all DDL operations in the history. This approach means that Drainer needs to process and replay all DDL changes from the initial state to the target schema version, which could involve a large amount of data processing and replaying.
-* When set to true: Drainer will directly read the table info at the checkpoint TS. Since it directly reads the table info at a specific point in time, this method is generally more efficient. However, it is subject to the GC mechanism. Since GC may delete older data versions, if the checkpoint TS is too old, the table information at that time might have already been deleted by GC, causing an inability to read it directly.
-* When configuring Drainer, you need to choose whether to directly read the table info at the checkpoint TS based on actual requirements. If you need to ensure data integrity and consistency and do not mind processing a large amount of DDL changes, it is recommended to set it to false. If you prioritize efficiency and performance, and can ensure that the checkpoint TS is after the GC safe point, it is recommended to set it to true.
+- When configuring Drainer, choose whether to read the table information at the checkpoint TS based on actual needs. If data integrity and consistency are priorities and handling a large number of DDL changes is acceptable, it is recommended to set this to `false`. If efficiency and performance are more important, and the checkpoint TS is guaranteed to be after the GC safe point, setting it to `true` is recommended.
+- When you set it to `false`, Drainer replays all DDL operations from history to derive the table schema for each table at a specific schema version. This approach requires processing all DDL changes from the initial state to the target schema version, which might involve significant data processing and replaying.
+- When you set it to `true`, Drainer directly reads the table information at the checkpoint TS. Becasue it directly reads the table information at a specific point in time, this method is usually more efficient. However, it is subject to the GC mechanism, because GC might delete older data versions. If the checkpoint TS is too old, the corresponding table information might have been deleted by GC, making it impossible to read directly.
+- Default value: `false`
 
 ### log-file
 
