@@ -228,7 +228,7 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 | [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the [accelerated table creation](/accelerated-table-creation.md) feature is enabled by default. |
-| [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v850)  | Newly added | Limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable). For example, setting the variable to `200MiB` limits the maximum write speed to 200 MiB/s.  |
+| [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v755-and-v850)  | Newly added | Limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable). For example, setting the variable to `200MiB` limits the maximum write speed to 200 MiB/s.  |
 
 ### Configuration parameters
 
