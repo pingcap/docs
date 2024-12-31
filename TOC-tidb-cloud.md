@@ -22,7 +22,7 @@
   - [Database Schema](/tidb-cloud/database-schema-concepts.md)
   - [Transactions](/tidb-cloud/transaction_concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
-  - [AI features](/tidb-cloud/ai-feature-concepts.md)
+  - [AI Features](/tidb-cloud/ai-feature-concepts.md)
   - [Data Service](/tidb-cloud/data-service-concepts.md)![BETA](?color=#F6F6F4)
   - [Scalability](/tidb-cloud/scalability-concepts.md)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
@@ -775,7 +775,7 @@
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [TiDB Cloud Serverless FAQs](/tidb-cloud/serverless-faqs.md)
 
-## Releases
+## RELEASES
 
 - Release Notes
   - [2024](/tidb-cloud/tidb-cloud-release-notes.md)
