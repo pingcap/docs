@@ -1032,6 +1032,7 @@
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
   - v7.5
+    - [7.5.5](/releases/release-7.5.5.md)
     - [7.5.4](/releases/release-7.5.4.md)
     - [7.5.3](/releases/release-7.5.3.md)
     - [7.5.2](/releases/release-7.5.2.md)
