@@ -1694,7 +1694,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - This variable is used to set the priority of executing the `ADD INDEX` operation in the `re-organize` phase.
 - You can set the value of this variable to `PRIORITY_LOW`, `PRIORITY_NORMAL` or `PRIORITY_HIGH`.
 
-### tidb_ddl_reorg_max_write_speed <span class="version-mark">New in v8.5.0</span>
+### tidb_ddl_reorg_max_write_speed <span class="version-mark">New in v7.5.5 and v8.5.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
