@@ -154,13 +154,13 @@ Go to the [EC2 Listing page](https://console.aws.amazon.com/ec2/home#Instances:)
 - **Name**: `bastion-node`
 - **Amazon Machine Image**: `Amazon linux`
 - **Instance Type**: `t2.small`
-- **Key pair**: `kafka-vpc-key-pair`. Create a new key pair name `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local for following configuration.
+- **Key pair**: `kafka-vpc-key-pair`. create a new key pair named `kafka-vpc-key-pair`. Download **kafka-vpc-key-pair.pem** to your local for later configuration.
 - Network settings
 
     - **VPC**: `Kafka VPC`
     - **Subnet**: `bastion`
     - **Auto-assign public IP**: `Enable`
-    - **Security Group**: create a new security group allow ssh from anywhere. PS: you may narrow the rule for safety in the production environment.
+    - **Security Group**: create a new security group allow SSH login from anywhere. You can narrow the rule for safety in the production environment.
 
 **2.2. Create broker nodes**
 
@@ -618,7 +618,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ### 1. Set up the load balancer
 
-Create a network load balancer with four target groups with different ports. One is for bootstrap, and the others will map to different brokers.
+Create a network load balancer with four target groups with different ports. One target group is for bootstrap, and the others will map to different brokers.
 
 1. bootstrap target group => 9092 => broker-node1:39092,broker-node2:39092,broker-node3:39092
 2. broker target group 1  => 9093 => broker-node1:39092

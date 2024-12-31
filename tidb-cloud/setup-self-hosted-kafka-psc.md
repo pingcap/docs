@@ -33,7 +33,7 @@ The document provides an example of connecting to a Kafka Private Service Connec
     - Manage Private Service Connect
     - Connect to VM Nodes to configure Kafka nodes
 
-2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in Google Cloud first. Ensure that Kafka deployment information is aligned with your TiDB cluster.
+2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in Google Cloud first. Ensure that the Kafka deployment information is aligned with your TiDB cluster.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
     2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
@@ -466,7 +466,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 ### Step 2. Expose the Kafka cluster as Private Service Connect
 
-1. Go to the [Network endpoint group](https://console.cloud.google.com/compute/networkendpointgroups/list) page. Create a network endpoint group.
+1. Go to the [Network endpoint group](https://console.cloud.google.com/compute/networkendpointgroups/list) page. Create a network endpoint group as follows:
 
     - **Name**: `kafka-neg`
     - **Network endpoint group type**: `Port Mapping NEG(Regional)`
@@ -474,7 +474,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         - **Network**: `kafka-vpc`
         - **Subnet**: `brokers-subnet`
 
-2. Go to the detail page of the network endpoint group to add network endpoints to configure port mapping to broker nodes.
+2. Go to the detail page of the network endpoint group, and add the network endpoints to configure the port mapping to broker nodes.
 
     1. Network endpoint 1
         - **Instance**: `broker-node1`
@@ -489,7 +489,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         - **VM Port**: `39092`
         - **Client Port**: `9095`
 
-3. Go to the [Load balancing](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers) page. Create a load balancer:
+3. Go to the [Load balancing](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers) page. Create a load balancer as follows:
 
     - **Type of load balancer**: `Network Load Balancer`
     - **Proxy or Passthrough**: `Passthrough`
@@ -671,7 +671,7 @@ Assume that you already have a Kafka cluster running in the same region as the T
 
 ### Step 3. Connect from TiDB Cloud
 
-1. Return to the[TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the cluster to connect to Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+1. Return to the [TiDB Cloud console](https://tidbcloud.com) and create a changefeed for the cluster to connect to Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
 2. After you proceed to the **Configure the changefeed target** > **Connectivity Method** > **Private Service Connect**, fill in the following fields with corresponding values and others fields as needed.
 
@@ -685,7 +685,7 @@ Assume that you already have a Kafka cluster running in the same region as the T
 
 ### How to connect to the same Kafka Private Service Connect service from two different TiDB Cloud projects?
 
-If you have already followed the steps in this document and successfully set up the connection from the first project, and you want to set up the second connection from the second project, you can connect to the same Kafka Private Service Connect service from two different TiDB Cloud projects as follows:
+If you have already followed the steps in this document and successfully set up the connection from the first project, and you want to set up a second connection from the second project, you can connect to the same Kafka Private Service Connect service from two different TiDB Cloud projects as follows:
 
 - If you set up Kafka PSC by PSC port mapping, do the following:
 
