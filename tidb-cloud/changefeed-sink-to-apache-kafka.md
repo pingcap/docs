@@ -23,12 +23,12 @@ This document describes how to create a changefeed to stream data from TiDB Clou
     - For v6.5.x: version v6.5.9 or later
     - For v7.1.x: version v7.1.4 or later
     - For v7.5.x: version v7.5.1 or later
-    - For v8.1.x: all versions of v8.1.0 and later are supported
-- If you want to use Debezium as Data Format, make sure version of your TiDB cluster should be v8.1.0 or later.
-- For the Partition Distribution
+    - For v8.1.x: all versions of v8.1.x and later are supported
+- If you want to use Debezium as your data format, make sure the version of your TiDB cluster is v8.1.0 or later.
+- For the partition distribution of Kafka messages, note the following:
 
-    - If you want to distribute changelogs by primary key or index value to Kafka partition with specified index name, make sure version of your TiDB cluster should be v7.5.0 or later
-    - If you want to distribute changelogs by column value to Kafka partition, make sure version of your TiDB cluster should be v7.5.0 or later
+    - If you want to distribute changelogs by primary key or index value to Kafka partition with a specified index name, make sure the version of your TiDB cluster is v7.5.0 or later.
+    - If you want to distribute changelogs by column value to Kafka partition, make sure the version of your TiDB cluster is v7.5.0 or later.
 
 ## Prerequisites
 
@@ -52,13 +52,13 @@ Private Connect leverages **Private Link** or **Private Service Connect** techno
 
 Currently, TiDB Cloud supports Private Connect for generic Kafka only. It does not include special integration with MSK, Confluent Kafka, or other services.
 
-- If your Apache Kafka service is hosted in AWS, follow [Set Up Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
+- If your Apache Kafka service is hosted in AWS, follow [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
     - The ID in Kafka Advertised Listener Pattern
     - The Endpoint Service Name
     - The Bootstrap Ports
 
-- If your Apache Kafka service is hosted in Google Cloud, follow [Set Up Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
+- If your Apache Kafka service is hosted in Google Cloud, follow [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) to ensure that the network connection is properly configured. After setup, provide the following information in the TiDB Cloud console to create the changefeed:
 
     - The ID in Kafka Advertised Listener Pattern
     - The Service Attachment
@@ -134,9 +134,9 @@ The steps vary depending on the connectivity method you select.
 
 1. In **Connectivity Method**, select **Private Link**.
 2. Authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint for your endpoint service. The AWS Principal is provided in the tip on the web page.
-3. Make sure you select the same **Number of AZs** and **AZ IDs of Kafka Deployment**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [set up self hosted Kafka Private Link service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in the **Network** section.
-4. Fill the **Endpoint Service Name** which is configured in [Setup Self Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md).
-5. Fill the **Bootstrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
+3. Make sure you select the same **Number of AZs** and **AZ IDs of Kafka Deployment**, and fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md) in the **Network** section.
+4. Fill in the **Endpoint Service Name** which is configured in [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-pls.md).
+5. Fill in the **Bootstrap Ports**. It is recommended that you set at least one port for one AZ. You can use commas `,` to separate multiple ports.
 6. Select an **Authentication** option according to your Kafka authentication configuration.
 
     - If your Kafka does not require authentication, keep the default option **Disable**.
@@ -154,9 +154,9 @@ The steps vary depending on the connectivity method you select.
 <div label="Private Service Connect">
 
 1. In **Connectivity Method**, select **Private Service Connect**.    
-2. Ensure that you fill the same unique ID in **Kafka Advertised Listener Pattern** when you [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) in **Network** section.
-3. Fill the **Service Attachment** that you have configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md)
-4. Fill the **Bootstrap Ports**. It is recommended that you provide more than one port. You can use commas `,` to separate multiple ports.      
+2. Ensure that you fill in the same unique ID in **Kafka Advertised Listener Pattern** when you [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md) in the **Network** section.
+3. Fill in the **Service Attachment** that you have configured in [Setup Self Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-psc.md)
+4. Fill in the **Bootstrap Ports**. It is recommended that you provide more than one port. You can use commas `,` to separate multiple ports. 
 5. Select an **Authentication** option according to your Kafka authentication configuration.
 
     - If your Kafka does not require authentication, keep the default option **Disable**.
