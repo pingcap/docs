@@ -142,9 +142,10 @@ This section introduces the configuration items of Drainer. For the example of a
 
 ### load-schema-snapshot
 
-- When configuring Drainer, choose whether to read the table information at the checkpoint TS based on actual needs. If data integrity and consistency are priorities and handling a large number of DDL changes is acceptable, it is recommended to set this to `false`. If efficiency and performance are more important, and the checkpoint TS is guaranteed to be after the GC safe point, setting it to `true` is recommended.
+- Specifies how Drainer loads table information.
 - When you set it to `false`, Drainer replays all DDL operations from history to derive the table schema for each table at a specific schema version. This approach requires processing all DDL changes from the initial state to the target schema version, which might involve significant data processing and replaying.
 - When you set it to `true`, Drainer directly reads the table information at the checkpoint TS. Becasue it directly reads the table information at a specific point in time, this method is usually more efficient. However, it is subject to the GC mechanism, because GC might delete older data versions. If the checkpoint TS is too old, the corresponding table information might have been deleted by GC, making it impossible to read directly.
+- When configuring Drainer, choose whether to read the table information at the checkpoint TS based on actual needs. If data integrity and consistency are priorities and handling a large number of DDL changes is acceptable, it is recommended to set this to `false`. If efficiency and performance are more important, and the checkpoint TS is guaranteed to be after the GC safe point, setting it to `true` is recommended.
 - Default value: `false`
 
 ### log-file
