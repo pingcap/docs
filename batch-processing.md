@@ -46,7 +46,7 @@ Pipelined DML is an experimental feature introduced in TiDB v8.0.0. In v8.5.0, t
 
 #### Key benefits
 
-- Streams data to the storage layer during transaction execution instead of caching it entirely in memory, allowing transaction size no longer limited by TiDB memory and supporting ultra-large-scale data processing
+- Streams data to the storage layer during transaction execution instead of buffering it entirely in memory, allowing transaction size no longer limited by TiDB memory and supporting ultra-large-scale data processing
 - Achieves faster performance compared to standard DML
 - Can be enabled through system variables without SQL modifications
 

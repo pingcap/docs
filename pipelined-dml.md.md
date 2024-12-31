@@ -13,7 +13,7 @@ This document introduces the use cases, methods, limitations, and common issues 
 
 ## Overview
 
-Pipelined DML is an experimental feature introduced in TiDB v8.0.0 to improve the performance of large-scale data write operations. When this feature is enabled, TiDB streams data directly to the storage layer during DML operations, instead of caching it entirely in memory. This pipeline-like approach simultaneously reads data (input) and writes it to the storage layer (output), effectively resolving common challenges in large-scale DML operations as follows:
+Pipelined DML is an experimental feature introduced in TiDB v8.0.0 to improve the performance of large-scale data write operations. When this feature is enabled, TiDB streams data directly to the storage layer during DML operations, instead of buffering it entirely in memory. This pipeline-like approach simultaneously reads data (input) and writes it to the storage layer (output), effectively resolving common challenges in large-scale DML operations as follows:
 
 - Memory limits: traditional DML operations might encounter out-of-memory (OOM) errors when handling large datasets.
 - Performance bottlenecks: large transactions are often inefficient and is prone to causing workload fluctuations.
@@ -113,7 +113,7 @@ You can monitor the execution of Pipelined DML using the following methods:
 - Check the [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409) system variable to get information about the last transaction executed in the current session, including whether Pipelined DML was used.
 - Look for lines containing `"[pipelined dml]"` in TiDB logs to understand the execution process and progress of Pipelined DML, including the current stage and the amount of data written.
 - View the `affected rows` field in the [`expensive query`](/identify-expensive-queries.md#expensive-query-log-example) logs to track the progress of long-running statements.
-- Query the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table to view transaction execution progress. Pipelined DML is typically used for large transactions, so you can use this table monitor their execution progress.
+- Query the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table to view transaction execution progress. Pipelined DML is typically used for large transactions, so you can use this table to monitor their execution progress.
 
 ## FAQs
 
