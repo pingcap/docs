@@ -27,7 +27,7 @@ summary: TiDB 監視サービスの API を学習します。
 curl http://127.0.0.1:10080/status
 {
     connections: 0,  # The current number of clients connected to the TiDB server.
-    version: "8.0.11-TiDB-v8.1.1",  # The TiDB version number.
+    version: "8.0.11-TiDB-v8.1.2",  # The TiDB version number.
     git_hash: "778c3f4a5a716880bcd1d71b257c8165685f0d70"  # The Git Hash of the current TiDB code.
 }
 ```

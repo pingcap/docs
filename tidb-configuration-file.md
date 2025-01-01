@@ -150,7 +150,7 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 
 -   TiDB で許可される同時クライアント接続の最大数。リソースを制御するために使用されます。
 -   デフォルト値: `0`
--   デフォルトでは、TiDB は同時クライアント接続の数に制限を設定しません。この構成項目の値が`0`より大きく、実際のクライアント接続の数がこの値に達すると、TiDBサーバーは新しいクライアント接続を拒否します。
+-   デフォルトでは、TiDB は同時クライアント接続の数に制限を設定しません。この構成項目の値が`0`より大きく、実際のクライアント接続数がこの値に達すると、TiDBサーバーは新しいクライアント接続を拒否します。
 -   v6.2.0 以降、TiDB 構成項目[`instance.max_connections`](/tidb-configuration-file.md#max_connections)またはシステム変数[`max_connections`](/system-variables.md#max_connections)を使用して、TiDB で許可される同時クライアント接続の最大数を設定します。5 `max-server-connections`引き続き有効です。ただし、 `max-server-connections`と`instance.max_connections`同時に設定されている場合、後者が有効になります。
 
 ### <code>max-index-length</code> {#code-max-index-length-code}
@@ -380,7 +380,7 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 -   `"gzip"`のオプション: `""`
 -   デフォルト値は`""`で、圧縮なしを意味します。gzip 圧縮を有効にするには、この値を`"gzip"`に設定します。圧縮を有効にすると、 [`slow-query-file`](#slow-query-file)や[`general-log-file`](#general-log-file-new-in-v800)など、すべてのログ ファイルが影響を受けます。
 
-## Security {#security}
+## 安全 {#security}
 
 セキュリティに関するコンフィグレーション項目。
 
@@ -577,7 +577,7 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 
 > **注記：**
 >
-> v6.6.0 以降、TiDB は[リソース管理](/tidb-resource-control.md)サポートします。この機能を使用すると、異なるリソース グループで異なる優先度の SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先度を構成することで、異なる優先度の SQL ステートメントのスケジュール制御を向上させることができます。リソース制御を有効にすると、ステートメントの優先度は無効になります。異なる SQL ステートメントのリソース使用を管理するには、 [リソース管理](/tidb-resource-control.md)使用することをお勧めします。
+> v6.6.0 以降、TiDB は[リソース管理](/tidb-resource-control.md)サポートします。この機能を使用すると、異なるリソース グループで異なる優先度の SQL ステートメントを実行できます。これらのリソース グループに適切なクォータと優先度を構成することで、異なる優先度の SQL ステートメントのスケジュール制御を向上させることができます。リソース制御を有効にすると、ステートメントの優先度は適用されなくなります。異なる SQL ステートメントのリソース使用を管理するには、 [リソース管理](/tidb-resource-control.md)使用することをお勧めします。
 
 ### <code>distinct-agg-push-down</code> {#code-distinct-agg-push-down-code}
 
@@ -865,7 +865,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 ### deadlock-history-collect-retryable {#deadlock-history-collect-retryable}
 
--   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロックエラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)参照してください。
+-   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロック エラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)参照してください。
 -   デフォルト値: `false`
 
 ### pessimistic-auto-commit<span class="version-mark">v6.0.0 の新機能</span> {#pessimistic-auto-commit-span-class-version-mark-new-in-v6-0-0-span}
@@ -917,7 +917,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 ### <code>in-mem-slow-query-topn-num</code> <span class="version-mark">v7.3.0 の新機能</span> {#code-in-mem-slow-query-topn-num-code-span-class-version-mark-new-in-v7-3-0-span}
 
--   構成により、メモリにキャッシュされる最も遅いクエリの数を制御します。
+-   この構成では、メモリにキャッシュされる最も遅いクエリの数を制御します。
 -   デフォルト値: 30
 
 ### <code>in-mem-slow-query-recent-num</code> <span class="version-mark">v7.3.0 の新機能</span> {#code-in-mem-slow-query-recent-num-code-span-class-version-mark-new-in-v7-3-0-span}

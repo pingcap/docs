@@ -147,10 +147,10 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスは完�
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > 上記のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスター バージョンに置き換える必要があります (例: `v8.1.1`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換える)。次に例を示します。
+    > 上記のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスター バージョンに置き換える必要があります (例: `v8.1.2`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換える)。次に例を示します。
     >
     > ```shell
-    > tiup ctl:v8.1.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v8.1.2 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
     数分以内に、 TiFlashノードの CPU とディスク IO リソースの使用率が大幅に増加し、 TiFlashレプリカの作成速度が速くなります。同時に、TiKV ノードの CPU とディスク IO リソースの使用率も増加します。

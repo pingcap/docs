@@ -3,7 +3,7 @@ title: Connect to TiDB with TypeORM
 summary: TypeORM を使用して TiDB に接続する方法を学びます。このチュートリアルでは、TypeORM を使用して TiDB で動作する Node.js サンプル コード スニペットを紹介します。
 ---
 
-# TypeORMでTiDBに接続する {#connect-to-tidb-with-typeorm}
+# TypeORM で TiDB に接続する {#connect-to-tidb-with-typeorm}
 
 TiDB は MySQL 互換のデータベースであり、 [タイプORM](https://github.com/TypeORM/TypeORM) Node.js 用の人気のあるオープンソース ORM フレームワークです。
 
@@ -230,7 +230,7 @@ npm start
 
 接続が成功すると、ターミナルは次のように TiDB クラスターのバージョンを出力します。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.1)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.2)
     🆕 Created a new player with ID 2.
     ℹ️ Got Player 2: Player { id: 2, coins: 100, goods: 100 }
     🔢 Added 50 coins and 50 goods to player 2, now player 2 has 100 coins and 150 goods.

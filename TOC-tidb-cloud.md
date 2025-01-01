@@ -215,6 +215,12 @@
             -   [概要](/garbage-collection-overview.md)
             -   [コンフィグレーション](/garbage-collection-configuration.md)
         -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
+    -   リソース割り当ての最適化
+        -   [リソース割り当ての概要](/tidb-cloud/optimize-resource-allocation.md)
+        -   [リソース管理](/tidb-resource-control.md)
+        -   TiDB ノード グループ
+            -   [TiDBノードグループの概要](/tidb-cloud/tidb-node-group-overview.md)
+            -   [TiDBノードグループの管理](/tidb-cloud/tidb-node-group-management.md)
     -   [TiDBクラスタのアップグレード](/tidb-cloud/upgrade-tidb-cluster.md)
     -   [TiDBクラスタを削除する](/tidb-cloud/delete-tidb-cluster.md)
 -   データの移行またはインポート
@@ -746,7 +752,6 @@
         -   [アップグレード](/tidb-cloud/ticloud-upgrade.md)
         -   [ヘルプ](/tidb-cloud/ticloud-help.md)
     -   [テーブルフィルター](/table-filter.md)
-    -   [リソース管理](/tidb-resource-control.md)
     -   [外部ストレージサービスの URI 形式](/external-storage-uri.md)
     -   [DDL 実行の原則とベスト プラクティス](/ddl-introduction.md)
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)

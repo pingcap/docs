@@ -65,7 +65,7 @@ docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
 TiDBサーバーを実行するには、次のコマンドを使用します。
 
 ```bash
-wget https://download.pingcap.org/tidb-community-server-v8.1.1-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-community-server-v8.1.2-linux-amd64.tar.gz
 tar -xzvf tidb-latest-linux-amd64.tar.gz
 mv tidb-latest-linux-amd64/bin/tidb-server ./
 ./tidb-server

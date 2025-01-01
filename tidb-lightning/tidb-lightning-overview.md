@@ -11,7 +11,7 @@ TiDB Lightning は次のファイル形式をサポートしています。
 
 -   [Dumpling](/dumpling-overview.md)によってエクスポートされたファイル
 -   CSVファイル
--   [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md)
+-   [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、またはSnowflake
 
 TiDB Lightning は次のソースからデータを読み取ることができます。
 

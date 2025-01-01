@@ -213,6 +213,7 @@ show warnings;
 | `server.simplify-metrics`                                 | サンプリング監視メトリックを簡素化するかどうかを制御します                                                                                                                           |
 | `storage.block-cache.capacity`                            | 共有ブロックキャッシュのサイズ (v4.0.3 以降でサポート)                                                                                                                        |
 | `storage.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                                    |
+| `import.num-threads`                                      | 復元またはインポート RPC 要求を処理するスレッドの数 (動的変更は v8.1.2 以降でサポートされます)                                                                                                 |
 | `backup.num-threads`                                      | バックアップ スレッドの数 (v4.0.3 以降でサポート)                                                                                                                          |
 | `split.qps-threshold`                                     | リージョンで`load-base-split`実行するしきい値。リージョンの読み取り要求の QPS が 10 秒連続で`qps-threshold`超える場合、このリージョンは分割される必要があります。                                                   |
 | `split.byte-threshold`                                    | リージョンで`load-base-split`実行するしきい値。リージョンの読み取り要求のトラフィックが 10 秒連続で`byte-threshold`超える場合、このリージョンは分割される必要があります。                                                 |

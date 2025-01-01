@@ -25,7 +25,7 @@ TiDB Toolkit は次のリンクからダウンロードできます。
 
     https://download.pingcap.org/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
 
-リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v8.1.1`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v8.1.1-linux-amd64.tar.gz`です。
+リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v8.1.2`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v8.1.2-linux-amd64.tar.gz`です。
 
 > **注記：**
 >

@@ -90,7 +90,7 @@ TiDB Lightningの基本は次のとおりです。
 -   データソース:
     -   Dumplingの出力ファイル
     -   その他の互換性のあるCSVファイル
-    -   Amazon Auroraまたは Apache Hive からエクスポートされた Parquet ファイル
+    -   Amazon Aurora、Apache Hive、またはSnowflakeからエクスポートされたParquetファイル
 -   サポートされている TiDB バージョン: v2.1 以降
 -   Kubernetes サポート: はい。詳細については[TiDB Lightningを使用して Kubernetes 上の TiDB クラスターにデータをすばやく復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)参照してください。
 

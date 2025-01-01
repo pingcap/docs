@@ -9,6 +9,7 @@ summary: TiDB は、8.1.0、8.0.0-DMR、7.6.0-DMR、7.5.1、7.5.0、7.4.0-DMR、
 
 ## 8.1 {#8-1}
 
+-   [8.1.2](/releases/release-8.1.2.md) : 2024-12-26
 -   [8.1.1](/releases/release-8.1.1.md) : 2024-08-27
 -   [8.1.0](/releases/release-8.1.0.md) : 2024-05-24
 
@@ -22,6 +23,7 @@ summary: TiDB は、8.1.0、8.0.0-DMR、7.6.0-DMR、7.5.1、7.5.0、7.4.0-DMR、
 
 ## 7.5 {#7-5}
 
+-   [7.5.5](/releases/release-7.5.5.md) : 2024-12-31
 -   [7.5.4](/releases/release-7.5.4.md) : 2024-10-15
 -   [7.5.3](/releases/release-7.5.3.md) : 2024-08-05
 -   [7.5.2](/releases/release-7.5.2.md) : 2024-06-13

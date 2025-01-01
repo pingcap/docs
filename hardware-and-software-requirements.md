@@ -21,7 +21,7 @@ v8.1 LTS では、TiDB はオペレーティング システムと CPU アーキ
 
 -   TiDB は、次のオペレーティング システムと CPU アーキテクチャの組み合わせに対して**エンタープライズ レベルの本番品質を提供し**、製品機能は包括的かつ体系的に検証されています。
 
-    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 8.4 以降の 8.x バージョン</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td><ul><li> Red Hat Enterprise Linux 7.3 またはそれ以降の 7.x バージョン (TiDB は 8.4 DMR 以降でサポートを終了します)</li><li> CentOS 7.3 またはそれ以降の 7.x バージョン (TiDB は 8.4 DMR 以降でサポートを終了します)</li></ul></td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾン リナックス 2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾンリナックス2023</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Rocky Linux 9.1 以降</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td>キリン オイラー V10 SP1/SP2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>ユニオンテック OS (UOS) V20</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> openEuler 22.03 LTS SP1/SP3</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr></tbody></table>
+    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされているCPUアーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 8.4 以降の 8.x バージョン</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td><ul><li> Red Hat Enterprise Linux 7.3 またはそれ以降の 7.x バージョン (TiDB は 8.4 DMR 以降でサポートを終了します)</li><li> CentOS 7.3 またはそれ以降の 7.x バージョン (TiDB は 8.4 DMR 以降でサポートを終了します)</li></ul></td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾン リナックス 2</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>アマゾンリナックス2023</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Rocky Linux 9.1 以降</td><td><ul><li>64ビット</li><li>アーム64</li></ul></td></tr><tr><td> Kylin Euler V10 SP1/SP2/SP3 (SP3 は v7.5.5 以降でサポートされます)</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td>ユニオンテック OS (UOS) V20</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr><tr><td> openEuler 22.03 LTS SP1/SP3</td><td><ul><li> 64ビット</li><li>アーム64</li></ul></td></tr></tbody></table>
 
     > **注記：**
     >
@@ -176,7 +176,7 @@ TiDB は、データベース メトリックの視覚化を提供するため�
 
 ## TiFlash分散storageおよびコンピューティングアーキテクチャのハードウェアおよびソフトウェア要件 {#hardware-and-software-requirements-for-tiflash-disaggregated-storage-and-compute-architecture}
 
-上記のTiFlashソフトウェアおよびハードウェア要件は、結合されたstorageおよびコンピューティングアーキテクチャ用です。v7.0.0 以降、 TiFlash は[分散型storageとコンピューティングアーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードとコンピューティング ノードの 2 種類のノードに分かれています。これらのノードの要件は次のとおりです。
+上記のTiFlashソフトウェアおよびハードウェア要件は、結合storageおよびコンピューティングアーキテクチャ用です。v7.0.0 以降、 TiFlash は[分散型storageとコンピューティングアーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードとコンピューティング ノードの 2 種類のノードに分かれています。これらのノードの要件は次のとおりです。
 
 -   ソフトウェア: 結合されたstorageとコンピューティングアーキテクチャと同じままです[OSおよびプラットフォームの要件](#os-and-platform-requirements)参照)。
 -   ネットワーク ポート: 結合されたstorageおよびコンピューティングアーキテクチャと同じままです[ネットワーク](#network-requirements)参照)。

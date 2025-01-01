@@ -5,7 +5,7 @@ summary: TiDB クラスターの実行ステータスを確認する方法を学
 
 # クラスタのステータスを確認する {#check-cluster-status}
 
-TiDB クラスターをデプロイした後は、クラスターが正常に動作しているかどうかを確認する必要があります。このドキュメントでは、 TiUPコマンド[TiDBダッシュボード](/dashboard/dashboard-intro.md)と Grafana を使用してクラスターの状態を確認する方法と、TiDB データベースにログインして簡単な SQL 操作を実行する方法を紹介します。
+TiDB クラスターをデプロイした後は、クラスターが正常に動作しているか確認する必要があります。このドキュメントでは、 TiUPコマンド[TiDBダッシュボード](/dashboard/dashboard-intro.md)と Grafana を使用してクラスターの状態を確認する方法と、TiDB データベースにログインして簡単な SQL 操作を実行する方法を紹介します。
 
 ## TiDBクラスタのステータスを確認する {#check-the-tidb-cluster-status}
 
@@ -51,14 +51,14 @@ tiup cluster display tidb-test
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000
 ```
 
-`${tidb_server_host_IP_address}` 、 `10.0.1.7`などの[クラスタトポロジファイルを初期化する](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)の場合に`tidb_servers`に設定される IP アドレスの 1 つです。
+`${tidb_server_host_IP_address}` 、 [クラスタトポロジファイルを初期化する](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)場合に`tidb_servers`に設定される IP アドレスの 1 つ ( `10.0.1.7`など) です。
 
 次の情報はログインが成功したことを示します。
 
 ```sql
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 3
-Server version: 8.0.11-TiDB-v8.1.1 TiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible
+Server version: 8.0.11-TiDB-v8.1.2 TiDB Server (Apache License 2.0) Community Edition, MySQL 8.0 compatible
 Copyright (c) 2000, 2023, Oracle and/or its affiliates. All rights reserved.
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective

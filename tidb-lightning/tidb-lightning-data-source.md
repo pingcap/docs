@@ -340,7 +340,7 @@ TiDB Lightning がTiDB Lightningファイルを処理する場合、単一の SQ
 
 ## 寄木細工 {#parquet}
 
-TiDB Lightning は現在、Amazon Auroraまたは Apache Hive によって生成された Parquet ファイルのみをサポートしています。S3 のファイル構造を識別するには、次の設定を使用してすべてのデータ ファイルを一致させます。
+TiDB Lightning は現在、Amazon Aurora、Apache Hive、Snowflake によって生成された Parquet ファイルのみをサポートしています。S3 内のファイル構造を識別するには、次の設定を使用してすべてのデータ ファイルを一致させます。
 
     [[mydumper.files]]
     # The expression needed for parsing Amazon Aurora parquet files
@@ -390,7 +390,7 @@ type = '$3'
 
 -   **schema** : ターゲット データベースの名前。値は次のとおりです。
     -   正規表現を使用して取得されたグループ インデックス (例: `$1` )。
-    -   インポートするデータベースの名前 (例: `db1` )。一致したファイルはすべて`db1`にインポートされます。
+    -   インポートするデータベースの名前 (例: `db1` )。一致したすべてのファイルは`db1`にインポートされます。
 -   **table** : 対象テーブルの名前。値は次のとおりです。
     -   正規表現を使用して取得されたグループ インデックス (例: `$2` )。
     -   インポートするテーブルの名前 (例: `table1` )。一致したすべてのファイルは`table1`にインポートされます。

@@ -28,7 +28,7 @@ PD Control を使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<p
 
 > **注記：**
 >
-> リンク内の`{version}` TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v8.1.1`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v8.1.1-linux-amd64.tar.gz`です。
+> リンク内の`{version}` TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v8.1.2`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v8.1.2-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -186,7 +186,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set max-pending-peer-count 64  // Set the maximum number of pending peers to 64
     ```
 
--   `max-merge-region-size`リージョンマージのサイズの上限を制御します (単位は MiB)。 `regionSize`指定された値を超えると、PD は隣接するリージョンとマージしません。 0 に設定すると、リージョンマージが無効になります。
+-   `max-merge-region-size`リージョンマージのサイズの上限を制御します (単位は MiB)。2 `regionSize`指定された値を超えると、PD は隣接するリージョンとマージしません。0 に設定すると、リージョンマージが無効になります。
 
     ```bash
     config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16 MiB
@@ -307,7 +307,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
 
--   `replication-mode`デュアル データ センター シナリオにおけるリージョンのレプリケーション モードを制御します。詳細については[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)参照してください。
+-   `replication-mode` 、デュアル データ センター シナリオにおけるリージョンのレプリケーション モードを制御します。詳細については[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)参照してください。
 
 -   `leader-schedule-policy` 、リーダーのスケジュール戦略を選択するために使用されます。 `size`または`count`に従ってリーダーをスケジュールできます。
 
@@ -345,7 +345,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 #### <code>config placement-rules [disable | enable | load | save | show | rule-group]</code> {#code-config-placement-rules-disable-enable-load-save-show-rule-group-code}
 
-`config placement-rules [disable | enable | load | save | show | rule-group]`の使い方については[配置ルールを設定する](/configure-placement-rules.md#configure-rules)参照してください。
+`config placement-rules [disable | enable | load | save | show | rule-group]`の使い方については[配置ルールを構成する](/configure-placement-rules.md#configure-rules)参照してください。
 
 ### <code>health</code> {#code-health-code}
 
@@ -545,7 +545,7 @@ time: 43.12698ms
 
 ### <code>region key [--format=raw|encode|hex] &#x3C;key></code> {#code-region-key-format-raw-encode-hex-x3c-key-code}
 
-このコマンドを使用して、特定のキーが存在するリージョンを照会します。raw、encoding、および 16 進形式がサポートされています。また、エンコード形式の場合は、キーを一重引用符で囲む必要があります。
+このコマンドを使用して、特定のキーが存在するリージョンを照会します。このコマンドは、raw、encoding、および 16 進形式をサポートしています。また、エンコード形式の場合は、キーを一重引用符で囲む必要があります。
 
 16 進形式の使用法 (デフォルト):
 
@@ -776,7 +776,7 @@ resource-manager config controller show
 }
 ```
 
--   `ltb-max-wait-duration` : ローカル トークン バケット (LTB) の最大待機時間。デフォルト値は`30s`で、値の範囲は`[0, 24h]`です[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)要求の推定消費量が LTB の現在の累積 RU を超える場合、要求は一定時間待機する必要があります。推定待機時間がこの最大値を超えると、事前にアプリケーションにエラー メッセージ[`ERROR 8252 (HY000) : Exceeded resource group quota limitation`](/error-codes.md)が返されます。この値を増やすと、同時実行数が急増した場合、トランザクションやクエリが大規模になった場合に`ERROR 8252`が発生する可能性が低くなります。
+-   `ltb-max-wait-duration` : ローカル トークン バケット (LTB) の最大待機時間。デフォルト値は`30s`で、値の範囲は`[0, 24h]`です[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)要求の推定消費量が LTB の現在の累積 RU を超える場合、要求は一定時間待機する必要があります。推定待機時間がこの最大値を超えると、事前にアプリケーションにエラー メッセージ[`ERROR 8252 (HY000) : Exceeded resource group quota limitation`](/error-codes.md)が返されます。この値を増やすと、突然の同時実行の増加、大規模なトランザクション、大規模なクエリの場合に`ERROR 8252`が発生する可能性を減らすことができます。
 -   `enable-controller-trace-log` : コントローラー診断ログを有効にするかどうかを制御します。
 
 #### リソースコントロールのコントローラー構成を変更する {#modify-the-controller-configuration-of-resource-control}
@@ -828,7 +828,7 @@ TiDB v6.3.0 以降、 PD は`balance-region-scheduler`と`balance-leader-schedul
 
 このコマンドを使用して、 `balance-leader-scheduler`ポリシーを表示および制御します。
 
-TiDB v6.0.0 以降、PD はバランスリーダーがタスクを処理する速度を制御するために`balance-leader-scheduler`の`Batch`パラメータを導入しました。このパラメータを使用するには、pd-ctl を使用して`balance-leader batch`構成項目を変更します。
+TiDB v6.0.0 以降、PD は、バランス リーダーがタスクを処理する速度を制御するために、 `balance-leader-scheduler`の`Batch`パラメータを導入しました。このパラメータを使用するには、pd-ctl を使用して`balance-leader batch`構成項目を変更します。
 
 v6.0.0 より前の PD にはこの設定項目がないため、 `balance-leader batch=1`なります。v6.0.0 以降のバージョンでは、 `balance-leader batch`のデフォルト値は`4`です。この設定項目を`4`より大きい値に設定するには、同時に[`scheduler-max-waiting-operator`](#config-show--set-option-value--placement-rules) (デフォルト値は`5` ) にもより大きな値を設定する必要があります。両方の設定項目を変更した後にのみ、期待される高速化効果が得られます。
 
@@ -1099,7 +1099,7 @@ store weight 1 5 10
 
 > **注記：**
 >
-> `pd-ctl`使用して、TiKV ストアの状態 ( `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ) を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)を参照してください。
+> `pd-ctl`使用して、 TiKV ストアの状態 ( `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ) を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
 ### <code>log [fatal | error | warn | info | debug]</code> {#code-log-fatal-error-warn-info-debug-code}
 

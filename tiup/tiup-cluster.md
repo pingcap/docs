@@ -59,7 +59,7 @@ tiup cluster
 tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
-このコマンドでは、クラスター名、TiDB クラスター バージョン ( `v8.1.1`など)、およびクラスターのトポロジ ファイルを指定する必要があります。
+このコマンドでは、クラスター名、TiDB クラスター バージョン ( `v8.1.2`など)、およびクラスターのトポロジ ファイルを指定する必要があります。
 
 トポロジ ファイルを作成するには、 [例](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。次のファイルは最も単純なトポロジの例です。
 
@@ -119,10 +119,10 @@ tidb_servers:
 ...
 ```
 
-ファイルを`/tmp/topology.yaml`として保存します。TiDB v8.1.1 を使用し、クラスター名が`prod-cluster`場合は、次のコマンドを実行します。
+ファイルを`/tmp/topology.yaml`として保存します。TiDB v8.1.2 を使用し、クラスター名が`prod-cluster`場合は、次のコマンドを実行します。
 
 ```shell
-tiup cluster deploy -p prod-cluster v8.1.1 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster v8.1.2 /tmp/topology.yaml
 ```
 
 実行中に、 TiUP はトポロジーを再度確認するように要求し、ターゲット マシンのルート パスワードを要求します (フラグ`-p`はパスワードの入力を意味します)。
@@ -130,7 +130,7 @@ tiup cluster deploy -p prod-cluster v8.1.1 /tmp/topology.yaml
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v8.1.1
+TiDB Version: v8.1.2
 Type        Host          Ports                            OS/Arch       Directories
 ----        ----          -----                            -------       -----------
 pd          172.16.5.134  2379/2380                        linux/x86_64  deploy/pd-2379,data/pd-2379
@@ -171,7 +171,7 @@ tiup cluster list
     Starting /root/.tiup/components/cluster/v1.12.3/cluster list
     Name          User  Version    Path                                               PrivateKey
     ----          ----  -------    ----                                               ----------
-    prod-cluster  tidb  v8.1.1    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+    prod-cluster  tidb  v8.1.2    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
 
 ## クラスターを起動する {#start-the-cluster}
 
@@ -195,7 +195,7 @@ tiup cluster display prod-cluster
 
     Starting /root/.tiup/components/cluster/v1.12.3/cluster display prod-cluster
     TiDB Cluster: prod-cluster
-    TiDB Version: v8.1.1
+    TiDB Version: v8.1.2
     ID                  Role        Host          Ports                            OS/Arch       Status  Data Dir              Deploy Dir
     --                  ----        ----          -----                            -------       ------  --------              ----------
     172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up      -                     deploy/grafana-3000
@@ -222,7 +222,7 @@ PDコンポーネントの場合、 `Up`または`Down`に`|L`または`|UI`追�
 
 > **注記：**
 >
-> このセクションでは、スケールインコマンドの構文についてのみ説明します。オンラインスケーリングの詳細な手順については、 [TiUP を使用して TiDBクラスタをスケールする](/scale-tidb-using-tiup.md)を参照してください。
+> このセクションでは、スケールインコマンドの構文についてのみ説明します。オンラインスケーリングの詳細な手順については、 [TiUPを使用して TiDBクラスタを拡張する](/scale-tidb-using-tiup.md)を参照してください。
 
 クラスターのスケーリングとは、一部のノードをオフラインにすることを意味します。この操作により、特定のノードがクラスターから削除され、残りのファイルが削除されます。
 
@@ -264,7 +264,7 @@ tiup cluster display prod-cluster
 
     Starting /root/.tiup/components/cluster/v1.12.3/cluster display prod-cluster
     TiDB Cluster: prod-cluster
-    TiDB Version: v8.1.1
+    TiDB Version: v8.1.2
     ID                  Role        Host          Ports                            OS/Arch       Status   Data Dir              Deploy Dir
     --                  ----        ----          -----                            -------       ------   --------              ----------
     172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up       -                     deploy/grafana-3000
@@ -373,10 +373,10 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-たとえば、次のコマンドはクラスターを v8.1.1 にアップグレードします。
+たとえば、次のコマンドはクラスターを v8.1.2 にアップグレードします。
 
 ```bash
-tiup cluster upgrade tidb-test v8.1.1
+tiup cluster upgrade tidb-test v8.1.2
 ```
 
 ## 構成の更新 {#update-configuration}
@@ -538,11 +538,11 @@ tiup cluster audit
     Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.12.3/cluster audit
     ID      Time                       Command
     --      ----                       -------
-    4BLhr0  2024-08-27T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.1 /tmp/topology.yaml
-    4BKWjF  2024-08-27T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.1 /tmp/topology.yaml
-    4BKVwH  2024-08-27T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.1 /tmp/topology.yaml
-    4BKKH1  2024-08-27T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster destroy test
-    4BKKDx  2024-08-27T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.1 /tmp/topology.yaml
+    4BLhr0  2024-12-26T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.2 /tmp/topology.yaml
+    4BKWjF  2024-12-26T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.2 /tmp/topology.yaml
+    4BKVwH  2024-12-26T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.2 /tmp/topology.yaml
+    4BKKH1  2024-12-26T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster destroy test
+    4BKKDx  2024-12-26T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.12.3/cluster deploy test v8.1.2 /tmp/topology.yaml
 
 最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のようにコマンドの`audit-id`フラグとして渡します。
 
@@ -651,7 +651,7 @@ CPU スレッド数チェック、メモリサイズ チェック、およびデ
 
 次に、 `--ssh=system`コマンドライン フラグを使用して、システム ネイティブ コマンドライン ツールを有効にします。
 
--   クラスターをデプロイ: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system` `<cluster-name>`にクラスターの名前、 `<version>`にデプロイする TiDB バージョン ( `v8.1.1`など)、 `<topo>`にトポロジ ファイルを入力します。
+-   クラスターをデプロイ: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system` `<cluster-name>`にクラスターの名前、 `<version>`にデプロイする TiDB バージョン ( `v8.1.2`など)、 `<topo>`にトポロジ ファイルを入力します。
 -   クラスターを開始する: `tiup cluster start <cluster-name> --ssh=system`
 -   クラスターのアップグレード: `tiup cluster upgrade ... --ssh=system`
 

@@ -310,7 +310,7 @@ mysql> SELECT * FROM t1;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 列挙
 -   デフォルト値: `aes-128-ecb`
--   `aes-256-cbc` `aes-192-ecb` `aes-192-cbc` `aes-128-cbc` `aes-128-ecb` `aes-256-ecb` `aes-128-ofb` `aes-192-ofb` `aes-256-ofb` `aes-128-cfb` `aes-192-cfb` `aes-256-cfb`
+-   `aes-256-cbc` `aes-256-ecb` `aes-192-cbc` `aes-128-cbc` `aes-128-ecb` `aes-192-ecb` `aes-128-ofb` `aes-192-ofb` `aes-256-ofb` `aes-128-cfb` `aes-192-cfb` `aes-256-cfb`
 -   この変数は、組み込み関数[`AES_ENCRYPT()`](/functions-and-operators/encryption-and-compression-functions.md#aes_encrypt)および[`AES_DECRYPT()`](/functions-and-operators/encryption-and-compression-functions.md#aes_decrypt)の暗号化モードを設定します。
 
 ### 文字セットクライアント {#character-set-client}
@@ -461,7 +461,7 @@ mysql> SELECT * FROM t1;
 -   `utf8mb4_0900_ai_ci` `utf8mb4_general_ci`オプション: `utf8mb4_bin`
 -   この変数は、 `utf8mb4`文字セットのデフォルト[照合順序](/character-set-and-collation.md)設定するために使用されます。これは、次のステートメントの動作に影響します。
     -   [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)と[`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)ステートメントに表示されるデフォルトの照合照合順序。
-    -   [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)および[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)ステートメントに、照合順序を指定せずにテーブルまたは列に対して`CHARACTER SET utf8mb4`句が含まれている場合、この変数で指定された照合順序順序が使用されます。これは、 `CHARACTER SET`句が使用されていない場合の動作には影響しません。
+    -   [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)および[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)ステートメントに、照合順序を指定せずにテーブルまたは列に対して`CHARACTER SET utf8mb4`節が含まれている場合、この変数で指定された照合順序順序が使用されます。これは、 `CHARACTER SET`節が使用されていない場合の動作には影響しません。
     -   [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)と[`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)ステートメントに照合順序を指定せずに`CHARACTER SET utf8mb4`の句が含まれている場合、この変数で指定された照合順序が使用されます。これは、 `CHARACTER SET`番目の句が使用されていない場合の動作には影響しません。
     -   `COLLATE`句が使用されていない場合、 `_utf8mb4'string'`形式のすべてのリテラル文字列はこの変数で指定された照合順序を使用します。
 
@@ -788,7 +788,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 > **警告：**
 >
-> [アクティブPDFollower](https://docs.pingcap.com/tidb/dev/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)機能は実験的です。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告できます。
+> [アクティブPDFollower](https://docs.pingcap.com/tidb/dev/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)機能は実験的です。本番環境での使用は推奨されません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
 -   範囲: グローバル
 -   クラスターに存続: はい
@@ -1219,7 +1219,7 @@ MPP はTiFlashエンジンが提供する分散コンピューティング フ�
 -   この変数の値がパーティション数より小さい場合、TiDB はパーティションテーブルのすべてのパーティションを複数のバッチで自動的に分析します。この変数の値がパーティション数以上の場合、TiDB はパーティションテーブルのすべてのパーティションを同時に分析します。
 -   パーティションテーブルのパーティション数がこの変数値よりもはるかに多く、自動分析に時間がかかる場合は、この変数の値を増やして時間の消費を減らすことができます。
 
-### tidb_auto_analyze_ratio {#tidb-auto-analyze-ratio}
+### tidb_自動分析比率 {#tidb-auto-analyze-ratio}
 
 -   範囲: グローバル
 -   クラスターに存続: はい
@@ -2745,7 +2745,7 @@ Query OK, 0 rows affected (0.09 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: ブール値
 -   デフォルト値: `ON`
--   この変数は、 [ウィンドウ関数](/functions-and-operators/window-functions.md)のサポートを有効にするかどうかを制御するために使用されます。ウィンドウ関数では予約キーワードが使用される場合があることに注意してください。これにより、TiDB のアップグレード後に、正常に実行できる SQL ステートメントが解析されなくなる可能性があります。この場合、 `tidb_enable_window_function` `OFF`に設定できます。
+-   この変数は、 [ウィンドウ関数](/functions-and-operators/window-functions.md)のサポートを有効にするかどうかを制御するために使用されます。ウィンドウ関数は予約キーワードを使用する場合があることに注意してください。これにより、正常に実行できる SQL ステートメントが TiDB のアップグレード後に解析に失敗する可能性があります。この場合、 `tidb_enable_window_function` `OFF`に設定できます。
 
 ### <code>tidb_enable_row_level_checksum</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-tidb-enable-row-level-checksum-code-span-class-version-mark-new-in-v7-1-0-span}
 
@@ -2947,16 +2947,12 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 ### tidb_gc_life_time <span class="version-mark">v5.0 の新機能</span> {#tidb-gc-life-time-span-class-version-mark-new-in-v5-0-span}
 
-> **注記：**
->
-> この変数は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)場合読み取り専用です。
-
 -   範囲: グローバル
 -   クラスターに存続: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   タイプ: 期間
 -   デフォルト値: `10m0s`
--   範囲: `[10m0s, 8760h0m0s]`
+-   範囲: TiDBセルフマネージドの場合は`[10m0s, 8760h0m0s]` [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) `[10m0s, 168h0m0s]`は[TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)
 -   各 GC でデータが保持される時間制限 (Go Duration 形式)。GC が発生すると、現在の時刻からこの値を引いた値が安全ポイントになります。
 
 > **注記：**
@@ -3457,7 +3453,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 
 </CustomContent>
 
-### 低解像度 {#tidb-low-resolution-tso}
+### 低解像度tso {#tidb-low-resolution-tso}
 
 -   スコープ: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
@@ -3525,7 +3521,7 @@ v5.0 以降では、上記のシステム変数を個別に変更することが
 -   タイプ: 整数
 -   デフォルト値: `-1`
 -   範囲: `[-1, 9223372036854775807]`
--   この変数は、 TiFlashのハッシュ結合演算子の最大メモリ使用量を`JOIN`単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はハッシュ結合演算子をトリガーしてディスクにスピルします。この変数の値が`-1`の場合、 TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合にのみ、 TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量が無制限であることを意味します。つまり、 TiFlashハッシュ結合演算子はスピルをトリガーしません。詳細については、 [TiFlashディスクへの書き込み](/tiflash/tiflash-spill-disk.md)参照してください。
+-   この変数は、 TiFlashのハッシュ結合演算子の最大メモリ使用量を`JOIN`単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はハッシュ結合演算子をトリガーしてディスクに書き出します。この変数の値が`-1`の場合、 TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合にのみ、 TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量が無制限であることを意味します。つまり、 TiFlashハッシュ結合演算子は書き出しをトリガーしません。詳細については、 [TiFlashディスクへの書き込み](/tiflash/tiflash-spill-disk.md)参照してください。
 
 <CustomContent platform="tidb">
 
@@ -4899,7 +4895,7 @@ SHOW WARNINGS;
 -   デフォルト値: `strict`
 -   この変数は、自動コミット読み取りステートメントの読み取り一貫性を制御するために使用されます。
 -   変数値が`weak`に設定されている場合、読み取りステートメントによって検出されたロックは直接スキップされ、読み取り実行が高速化される可能性があります。これは、弱い一貫性の読み取りモードです。ただし、トランザクション セマンティクス (アトミック性など) と分散一貫性 (線形化可能性など) は保証されません。
--   自動コミット読み取りが高速に返す必要があり、弱い一貫性の読み取り結果が許容されるユーザー シナリオでは、弱い一貫性の読み取りモードを使用できます。
+-   自動コミット読み取りが高速に返される必要があり、弱い一貫性の読み取り結果が許容されるユーザー シナリオでは、弱い一貫性の読み取りモードを使用できます。
 
 ### tidb_read_staleness <span class="version-mark">v5.4.0 の新機能</span> {#tidb-read-staleness-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -4991,7 +4987,7 @@ SHOW WARNINGS;
     -   `tidb_restricted_read_only`が`ON`場合、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) `OFF`に設定することはできません。
 -   TiDB の DBaaS プロバイダーの場合、TiDB クラスターが別のデータベースのダウンストリーム データベースである場合、TiDB クラスターを読み取り専用にするには、 [Security強化モード](#tidb_enable_enhanced_security)有効にした`tidb_restricted_read_only`使用する必要があります。これにより、顧客が[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)使用してクラスターを書き込み可能にすることができなくなります。これを実現するには、 [Security強化モード](#tidb_enable_enhanced_security)有効にし、 `SYSTEM_VARIABLES_ADMIN`および`RESTRICTED_VARIABLES_ADMIN`権限を持つ管理者ユーザーを使用して`tidb_restricted_read_only`制御し、データベース ユーザーが`SUPER`権限を持つルート ユーザーを使用して[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)のみを制御できるようにする必要があります。
 -   この変数は、クラスター全体の読み取り専用ステータスを制御します。変数が`ON`の場合、クラスター全体のすべての TiDB サーバーは読み取り専用モードになります。この場合、 TiDB は`SELECT` 、 `USE` 、 `SHOW`などのデータを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、 TiDB は読み取り専用モードでのそれらのステートメントの実行を拒否します。
--   この変数を使用して読み取り専用モードを有効にすると、クラスター全体が最終的に読み取り専用ステータスになることが保証されます。TiDB クラスターでこの変数の値を変更したが、その変更がまだ他の TiDB サーバーに伝播していない場合、更新されていない TiDB サーバーはまだ読み取り専用モードでは**ありません**。
+-   この変数を使用して読み取り専用モードを有効にすると、クラスター全体が最終的に読み取り専用ステータスになることが保証されます。TiDB クラスターでこの変数の値を変更したが、その変更が他の TiDB サーバーにまだ伝播していない場合、更新されていない TiDB サーバーはまだ読み取り専用モードでは**ありません**。
 -   TiDB は、SQL ステートメントが実行される前に読み取り専用フラグをチェックします。v6.2.0 以降では、SQL ステートメントがコミットされる前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントによってデータが変更される可能性を防ぐことができます。
 -   この変数を有効にすると、TiDB はコミットされていないトランザクションを次の方法で処理します。
     -   コミットされていない読み取り専用トランザクションの場合は、通常どおりトランザクションをコミットできます。
@@ -5716,7 +5712,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **警告：**
 >
-> この変数を無効にすると、TiDB はメモリ使用量を正確に追跡できず、対応する SQL ステートメントのメモリ使用量を制御できなくなります。
+> この変数を無効にすると、TiDB はメモリ使用量を正確に追跡できず、対応する SQL ステートメントのメモリ使用量を制御できなくなる可能性があります。
 
 ### tidb_tso_client_batch_max_wait_time <span class="version-mark">v5.3.0 の新機能</span> {#tidb-tso-client-batch-max-wait-time-span-class-version-mark-new-in-v5-3-0-span}
 
@@ -5875,7 +5871,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 -   可能な`STRICT` `FAST` `OFF`
 
--   この変数はアサーション レベルを制御するために使用されます。アサーションは、データとインデックス間の一貫性チェックであり、書き込まれるキーがトランザクション コミット プロセス内に存在するかどうかをチェックします。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)参照してください。
+-   この変数はアサーション レベルを制御するために使用されます。アサーションは、データとインデックス間の一貫性チェックであり、書き込まれるキーがトランザクション コミット プロセスに存在するかどうかをチェックします。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)参照してください。
 
     -   `OFF` : このチェックを無効にします。
     -   `FAST` : ほとんどのチェック項目を有効にしますが、パフォーマンスにはほとんど影響しません。
@@ -6261,7 +6257,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に該当: いいえ
 -   デフォルト値: `8.0.11-TiDB-` (tidb バージョン)
--   この変数は、MySQL のバージョンに続いて TiDB のバージョンを返します。たとえば、「8.0.11-TiDB-v8.1.1」などです。
+-   この変数は、MySQL のバージョンに続いて TiDB のバージョンを返します。たとえば、「8.0.11-TiDB-v8.1.2」などです。
 
 ### バージョンコメント {#version-comment}
 

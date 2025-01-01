@@ -97,9 +97,9 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
         "license": "Apache-2.0 license",
         "versions": [
             {
-                "version": "v8.1.1",
+                "version": "v8.1.2",
                 "type": "lts",
-                "release_date": "2024-08-27" 
+                "release_date": "2024-12-26" 
             },
             {
                 "version": "v8.0.0",        
@@ -128,9 +128,9 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | `$.database.features[0]`              | 最初のデータベース機能。               | `"distributed"`                                                                                      |
 | `$.database.features[2]`              | 3番目のデータベース機能。              | `"relational"`                                                                                       |
 | `$.database.versions[0].type`         | 最初のデータベース バージョンのタイプ。       | `"lts"`                                                                                              |
-| `$.database.versions[*].release_date` | すべてのバージョンのリリース日。           | `["2024-08-27","2024-03-29"]`                                                                        |
+| `$.database.versions[*].release_date` | すべてのバージョンのリリース日。           | `["2024-12-26","2024-03-29"]`                                                                        |
 | `$.*.features`                        | 2つの機能配列                    | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]` |
-| `$**.version`                         | パスワイルドカードを含むすべてのバージョン      | `["v8.1.1","v8.0.0"]`                                                                                |
+| `$**.version`                         | パスワイルドカードを含むすべてのバージョン      | `["v8.1.2","v8.0.0"]`                                                                                |
 | `$.database.features[0 to 2]`         | 1 番目から 3 番目までのデータベース機能の範囲。 | `["scalable","relational"]`                                                                          |
 
 詳細については[JSONPathのIETFドラフト](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html)参照してください。

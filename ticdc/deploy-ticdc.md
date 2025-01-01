@@ -95,7 +95,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **注記：**
 >
-> 上記のコマンドでは、 `<cluster-name>`と`<version>`実際のクラスター名とクラスター バージョンに置き換える必要があります。たとえば、バージョンは v8.1.1 になります。
+> 上記のコマンドでは、 `<cluster-name>`と`<version>`実際のクラスター名とクラスター バージョンに置き換える必要があります。たとえば、バージョンは v8.1.2 になります。
 
 ### アップグレードに関する注意事項 {#upgrade-cautions}
 
@@ -146,7 +146,7 @@ TiUP を使用すると、TiCDC ノードを簡単に停止および起動でき
 
 -   TiCDCを停止: `tiup cluster stop -R cdc`
 -   TiCDC を開始: `tiup cluster start -R cdc`
--   TiCDCを再起動: `tiup cluster restart -R cdc`
+-   TiCDC を再起動: `tiup cluster restart -R cdc`
 
 ## TiCDC の TLS を有効にする {#enable-tls-for-ticdc}
 
@@ -154,7 +154,7 @@ TiUP を使用すると、TiCDC ノードを簡単に停止および起動でき
 
 ## コマンドラインツールを使用して TiCDC のステータスをビュー {#view-ticdc-status-using-the-command-line-tool}
 
-次のコマンドを実行して、TiCDC クラスターのステータスを表示します。 `v<CLUSTER_VERSION>` `v8.1.1`などの TiCDC クラスターのバージョンに置き換える必要があることに注意してください。
+次のコマンドを実行して、TiCDC クラスターのステータスを表示します。 `v<CLUSTER_VERSION>` `v8.1.2`などの TiCDC クラスターのバージョンに置き換える必要があることに注意してください。
 
 ```shell
 tiup cdc:v<CLUSTER_VERSION> cli capture list --server=http://10.0.10.25:8300

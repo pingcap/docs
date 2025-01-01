@@ -268,7 +268,7 @@ void main();
 
 接続が成功すると、ターミナルは次のように TiDB クラスターのバージョンを出力します。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.1)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.2)
     🆕 Created a new player with ID 1.
     ℹ️ Got Player 1: Player { id: 1, coins: 100, goods: 100 }
     🔢 Added 50 coins and 50 goods to player 1, now player 1 has 150 coins and 150 goods.
@@ -357,7 +357,7 @@ await prisma.player.delete({
 
     > **警告：**
     >
-    > **外部キーは、小規模および中規模のデータ シナリオに適しています。**大規模なデータ ボリュームで外部キーを使用すると、重大なパフォーマンスの問題が発生し、システムに予期しない影響が生じる可能性があります。外部キーを使用する予定の場合は、まず徹底的な検証を実施し、慎重に使用してください。
+    > **外部キーは、小規模および中規模のデータ シナリオに適しています。**大規模なデータ ボリュームで外部キーを使用すると、重大なパフォーマンスの問題が発生し、システムに予期しない影響が生じる可能性があります。外部キーを使用する場合は、まず徹底的な検証を実施し、慎重に使用してください。
 
 -   [プリズマ関係モード](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode) 、Prisma クライアント側での参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
 

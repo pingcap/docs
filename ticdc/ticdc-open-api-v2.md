@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v8.1.1",
+  "version": "v8.1.2",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -291,7 +291,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `ignore_event`                 | `STRING ARRAY`タイプ。たとえば、 `["insert"]` INSERT イベントが除外されることを示します。(オプション)                                                |
 | `ignore_insert_value_expr`     | `STRING ARRAY`型。たとえば、 `"id >= 100"` `id >= 100`条件に一致する INSERT DML ステートメントを除外することを意味します。(オプション)                       |
 | `ignore_sql`                   | `STRING ARRAY`型。たとえば、 `["^drop", "add column"]` `DROP`で始まるか`ADD COLUMN`含む DDL ステートメントを除外することを意味します。(オプション)           |
-| `ignore_update_new_value_expr` | `STRING ARRAY`型。たとえば、 `"gender = 'male'"`新しい値`gender = 'male'`を持つ UPDATE DML ステートメントを除外することを意味します。(オプション)            |
+| `ignore_update_new_value_expr` | `STRING ARRAY`型。たとえば、 `"gender = 'male'"` 、新しい値`gender = 'male'`を持つ UPDATE DML ステートメントを除外することを意味します。(オプション)          |
 | `ignore_update_old_value_expr` | `STRING ARRAY`型。たとえば、 `"age < 18"`古い値`age < 18`を持つ UPDATE DML ステートメントを除外することを意味します。(オプション)                           |
 | `matcher`                      | `STRING ARRAY`タイプ。許可リストとして機能します。たとえば、 `["test.worker"]` 、フィルター ルールが`test`データベースの`worker`テーブルにのみ適用されることを意味します。(オプション) |
 

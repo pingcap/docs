@@ -18,7 +18,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-08-27T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.1.1"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-12-26T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.1.2"}
 ```
 
 ## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
@@ -169,7 +169,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 ```
 
 -   `--changefeed-id=uuid`再開するレプリケーション タスクに対応する変更フィードの ID を表します。
--   `--overwrite-checkpoint-ts` : v6.2.0 以降では、レプリケーション タスクを再開する開始 TSO を指定できます。TiCDC は、指定された TSO からデータのプルを開始します。引数は`now`または特定の TSO (434873584621453313 など) を受け入れます。指定された TSO は、(GC セーフ ポイント、CurrentTSO] の範囲内である必要があります。この引数が指定されていない場合、TiCDC はデフォルトで現在の`checkpoint-ts`からデータを複製します。
+-   `--overwrite-checkpoint-ts` : v6.2.0 以降では、レプリケーション タスクを再開する開始 TSO を指定できます。TiCDC は指定された TSO からデータのプルを開始します。引数は`now`または特定の TSO (434873584621453313 など) を受け入れます。指定された TSO は [GC セーフ ポイント、CurrentTSO] の範囲内である必要があります。この引数が指定されていない場合、TiCDC はデフォルトで現在の`checkpoint-ts`からデータを複製します。
 -   `--no-confirm` : レプリケーションが再開されたときに、関連情報を確認する必要はありません。デフォルトは`false`です。
 
 > **注記：**
