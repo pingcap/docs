@@ -59,11 +59,27 @@ In TiDB Cloud, you can view the commonly used metrics of a cluster from the foll
 
 ### Metrics on the cluster overview page
 
-The cluster overview page provides general metrics of a cluster, including total QPS, query duration, active connections, TiDB CPU, TiKV CPU, TiFlash CPU, TiDB memory, TiKV memory, TiFlash memory, TiKV used storage size, and TiFlash used storage size.
+The cluster overview page provides general metrics of a cluster.
 
-> **Note:**
->
-> Some of these metrics might be available only for Dedicated Tier clusters.
+For Dedicated Tier clusters:
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| QPS | total | The number of SQL statements executed per second in all TiDB instances. |
+| Query Duration | avg | The duration from the time TiDB receives a client request to the time TiDB executes the request and returns the result to the client. |
+| Active Connection | active connections | The number of active connections to all TiDB instances. |
+| CPU | avg-tidb, avg-tikv, avg-tiflash | The average statistics of CPU usage for all TiDB instances. |
+| Memory | avg-tidb, avg-tikv, avg-tiflash | TThe average statistics of Memory usage for all TiDB instances. |
+| Used Storage Size | total-tikv, total-tiflash | The total storage size on TiKV or TiFlash instances. |
+
+For Serverless Tier:
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| QPS | total | The number of SQL statements executed per second in Serverless Tier. |
+| Query Duration | avg | The duration from the time TiDB receives a client request to the time TiDB executes the request and returns the result to the client. |
+| Active Connection | active connections | The number of connections that are actively executing SQL statements to Serverless Tier. |
+| Used Storage Size | total-tikv | The total storage size on TiKV instances. |
 
 To view metrics on the cluster overview page, take the following steps:
 
