@@ -72,7 +72,7 @@ You can grant roles to a user at the organization level or at the project level.
 
 At the organization level, TiDB Cloud defines four roles, in which `Organization Owner` can invite members and grant organization roles to members.
 
-| Permission  | `Organization Owner` | `Organization Billing Manager` | `Organization Billing Viewer` | `Organization Console Audit Admin` | `Organization Viewer` |
+| Permission  | `Organization Owner` | `Organization Billing Manager` | `Organization Billing Viewer` | `Organization Console Audit Manager` | `Organization Viewer` |
 |---|---|---|---|---|---|
 | Manage organization settings, such as projects, API keys, and time zones. | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Invite users to or remove users from an organization, and edit organization roles of users. | ✅ | ❌ | ❌ | ❌ | ❌ |
@@ -85,7 +85,7 @@ At the organization level, TiDB Cloud defines four roles, in which `Organization
 
 > **Note:**
 >
-> - The `Organization Console Audit Admin` role is used to manage audit logging in the TiDB Cloud console, instead of database audit logging. To manage database auditing, use the `Project Owner` role at the project level.
+> - The `Organization Console Audit Manager` role (renamed from `Organization Console Audit Admin`) is used to manage audit logging in the TiDB Cloud console, instead of database audit logging. To manage database auditing, use the `Project Owner` role at the project level.
 > - The `Organization Billing Manager` role is renamed from `Organization Billing Admin`, and the `Organization Viewer` role is renamed from `Organization Member`.
 
 ### Project roles

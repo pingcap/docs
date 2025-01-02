@@ -78,7 +78,7 @@ The SQL proxy account's role depends on the TiDB Cloud user's IAM role:
     - Organization Owner: role_admin
     - Organization Billing Manager: No proxy account
     - Organization Viewer: No proxy account
-    - Organization Console Audit admin: No proxy account
+    - Organization Console Audit Manager: No proxy account
 
 - Project level:
     - Project Owner: role_admin
