@@ -264,7 +264,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 
 2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Google Cloud Storage** from the drop-down list. Fill in the following parameters:
+3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Google Cloud Storage** from the drop-down list. Fill in the following parameters:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
