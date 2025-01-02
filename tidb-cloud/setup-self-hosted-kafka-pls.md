@@ -32,7 +32,9 @@ The document provides an example of connecting to a Kafka Private Link service d
     - Manage endpoint services
     - Connect to EC2 nodes to configure Kafka nodes
 
-2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in AWS first. Ensure that the Kafka deployment information is aligned with your TiDB cluster.
+2. [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) if you do not have one.
+
+3. Get the Kafka deployment information from your TiDB Cloud Dedicated cluster.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
     2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
