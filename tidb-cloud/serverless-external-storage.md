@@ -199,13 +199,15 @@ Take the following steps to configure a service account key:
 
    ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3. Choose the default `JSON` key type, and then click the **CREATE** button to download the Google Cloud credentials file. The file contains the service account key that you need to configure the GCS access for the TiDB Cloud Serverless cluster.
+3. Choose the default `JSON` key type, and then click **CREATE** to download the Google Cloud credentials file. The file contains the service account key that you need to use when configuring the GCS access for the TiDB Cloud Serverless cluster.
 
 ## Configure Azure Blob Storage access
 
-To allow TiDB Serverless to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use a service SAS token to configure the container access.
+To allow TiDB Serverless to access your Azure Blob container, you need to create a service SAS token for the container.
 
-It is recommended that you use [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) to create a SAS token. Take the following steps to create one:
+You can create a SAS token either using an [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (recommended) or manual configuration. 
+
+To create a SAS token using an Azure ARM template, take the following steps:
 
 1. Open the **Import** page for your target cluster.
 
@@ -217,7 +219,7 @@ It is recommended that you use [Azure ARM template](https://learn.microsoft.com/
         
     1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
    
-    2. Click **Click here to create a new one with Azure ARM template** under the SAS Token field.       
+    2. Scroll down to the **Azure Blob Storage Settings** area, and then click **Click here to create a new one with Azure ARM template** under the SAS Token field. 
    
 3. Create a SAS token with the Azure ARM template.
 

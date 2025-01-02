@@ -271,7 +271,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
     - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Google Cloud Storage with the `gs://<bucket-name>/<folder-path>/` format.
-    - **Bucket Access**: upload the Google Cloud credentials file which has permission to access the bucket.
+    - **Bucket Access**: upload the Google Cloud credentials file that has permission to access the bucket.
 
 4. Click **Export**.
 
@@ -302,7 +302,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 
 2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Azure Blob Storage** from the drop-down list. Fill in the following parameters:
+3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Azure Blob Storage** from the drop-down list. Fill in the following parameters:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
