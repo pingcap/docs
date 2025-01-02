@@ -40,6 +40,7 @@ summary: TiDB has released multiple versions, including 8.5.0, 8.4.0-DMR, 8.3.0-
 
 ## 7.5
 
+- [7.5.5](/releases/release-7.5.5.md): 2024-12-31
 - [7.5.4](/releases/release-7.5.4.md): 2024-10-15
 - [7.5.3](/releases/release-7.5.3.md): 2024-08-05
 - [7.5.2](/releases/release-7.5.2.md): 2024-06-13

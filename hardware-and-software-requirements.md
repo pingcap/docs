@@ -43,7 +43,7 @@ This document describes the software and hardware requirements for deploying and
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Kylin Euler V10 SP1/SP2</td>
+    <td>Kylin Euler V10 SP1/SP2/SP3 (SP3 is supported starting from v7.5.5)</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
