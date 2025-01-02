@@ -45,7 +45,7 @@ To export data to Amazon S3, you need to provide the following information:
 - URI: `s3://<bucket-name>/<folder-path>`
 - One of the following access credentials:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN has the `s3:PutObject` and `s3:ListBucket` permissions. 
+    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. 
 
 For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
@@ -228,8 +228,8 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
     - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
-        - **AWS Role ARN**: enter the role ARN that has permission to access the bucket. It is recommended to create the role arn with AWS CloudFormation. For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
-        - **AWS Access Key**: enter the access key ID and access key secret that have permission to access the bucket.
+        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+        - **AWS Access Key**: enter the access key ID and access key secret that have the permission to access the bucket.
 
 4. Click **Export**.
 
@@ -246,7 +246,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 - `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<folder-path>` format.
 - `s3.access-key-id`: the access key ID of the user who has the permission to access the bucket.
 - `s3.secret-access-key`: the access key secret of the user who has the permission to access the bucket.
-- `s3.role-aen`: the role arn which has the permission to access the bucket.
+- `s3.role-arn`: the role ARN that has the permission to access the bucket.
 
 </div>
 </SimpleTab>
@@ -308,8 +308,8 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
     - **Exported Data**: choose the databases and tables you want to export.
     - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
-    - **Folder URI**: enter the URI of the Google Cloud Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` format.
-    - **Bucket Access**: enter the SAS token which has permission to access the container. It is recommended to create the SAS token with Azure ARM Template. For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` format.
+    - **Bucket Access**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Export**.
 

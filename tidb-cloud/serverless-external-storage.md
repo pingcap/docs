@@ -225,17 +225,17 @@ It is recommended that you use [Azure ARM template](https://learn.microsoft.com/
 
     1. In the **Generate New SAS Token via ARM Template Deployment** dialog, click **Click to open the Azure Portal with the pre-configured ARM template**.
    
-    2. You will be redirected to the Azure **Custom deployment** page after you log in to the Azure.
+    2. After logging in to Azure, you will be redirected to the Azure **Custom deployment** page.
 
     3. Fill in the **Resource group** and **Storage Account Name** in the **Custom deployment** page. You can get all the information from the storage account overview page where the container is located.
 
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
-    4. Ckick **Review + create** or **Next** button to review the deployment. Then click **Create** to start the deployment.
+    4. Click **Review + create** or **Next** to review the deployment. Click **Create** to start the deployment.
    
-    5. Once it completes, it will redirect you to the deployment overview page. Navigate to the Outputs section to get the SAS token.
+    5. After it completes, you will be redirected to the deployment overview page. Navigate to the **Outputs** section to get the SAS token.
 
-If you have any trouble creating a SAS token with Azure ARM template, you can take the following steps to create one manually:
+If you have any trouble creating a SAS token with the Azure ARM template, take the following steps to create one manually:
 
 <details>
 <summary>Click here to see details</summary>
