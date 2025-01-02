@@ -735,7 +735,7 @@ Do the following to set up the load balancer:
 
     - **Kafka Type**: `3 AZs`. Ensure that your Kafka cluster is deployed in the same three AZs.
     - **Kafka Advertised Listener Pattern**: `abc`. The same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequistes](#prerequisites).
-    - **Endpoint Service Name**: the kafka service name.
+    - **Endpoint Service Name**: the Kafka service name.
     - **Bootstrap Ports**: `9092`. A single port is sufficient because you configure a dedicated bootstrap target group behind it.
 
 3. Continue to follow the guideline in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
