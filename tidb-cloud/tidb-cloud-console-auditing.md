@@ -9,7 +9,7 @@ TiDB Cloud provides the console audit logging feature to help you track various 
 
 ## Prerequisites
 
-- You must be in the `Organization Owner` or `Organization Console Audit Admin` role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console.
+- You must be in the `Organization Owner` or `Organization Console Audit Manager` role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console.
 - You can only enable and disable the console audit logging for your organization. You can only track the actions of users in your organization.
 - After the console audit logging is enabled, all event types of the TiDB Cloud console will be audited, and you cannot specify only auditing some of them.
 
