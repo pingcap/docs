@@ -61,7 +61,7 @@ SHOW TABLES;
 1 row in set (0.00 sec)
 ```
 
-The following example demonstrates how to rename multiple tables across databases:
+The following example demonstrates how to rename multiple tables across databases, assuming that the databases `db1`, `db2`, `db3`, and `db4` already exist, and that the tables `db1.t1` and `db3.t3` already exist:
 
 ```sql
 RENAME TABLE db1.t1 To db2.t2, db3.t3 To db4.t4;
