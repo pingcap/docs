@@ -41,7 +41,7 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 Ensure that your TiDB cluster can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
-- Private Connect (Beta): ideal for avoiding VPC CIDR conflicts and meeting security compliance, but incurs additional [Private Data Link Cost](/tidbcloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
+- Private Connect (Beta): ideal for avoiding VPC CIDR conflicts and meeting security compliance, but incurs additional [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
 - VPC Peering: suitable as a cost-effective option, but requires managing potential VPC CIDR conflicts and security considerations.
 - Public IP: suitable for a quick setup.
 
