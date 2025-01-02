@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support creating TiDB node groups for TiDB Cloud Dedicated clusters to enhance resource management flexibility. For more information, see [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md).
 
-- Support using private connect to connect to generic Kafka in AWS and Google Cloud (Beta).
+- Support using private connect to connect to generic Kafka in AWS and Google Cloud (beta).
 
     Private Connect leverages Private Link or Private Service Connect technologies from cloud providers to enable changefeed in the TiDB Cloud VPC to connect to Kafka in customers' VPCs using private IP addresses, as if those Kafkas were hosted directly within the TiDB Cloud VPC. This feature helps prevent VPC CIDR conflicts and meets security compliance requirements.
 
