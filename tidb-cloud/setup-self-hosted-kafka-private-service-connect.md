@@ -460,7 +460,7 @@ export JAVA_HOME=~/jdk-22.0.2
 
 # Expected output for the last 3 lines (the actual order might be different)
 # There will be some exceptions or errors since advertised listeners can not be resolved in your Kafka network. 
-# We will make them resolvable in TiDB Cloud side and make it route to the right broker. 
+# We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Service Connect. 
 b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
