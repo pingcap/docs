@@ -7,7 +7,7 @@ summary: TiDB Index Advisor.
 
 TiDB's Index Advisor helps users optimize their workload by recommending indexes to improve query performance. The new SQL instruction, `RECOMMEND INDEX`, allows users to generate index recommendations for a single query or an entire workload. To avoid the resource-intensive process of physically creating indexes for evaluation, TiDB supports hypothetical indexes—logical indexes that are not materialized. The syntax and usage of Hypo Indexes are detailed in the Appendix.
 
-The Index Advisor analyzes queries to identify indexable columns from relevant clauses (e.g., `WHERE`, `GROUP BY`, `ORDER BY`) and generates index candidates. Using the Hypo Index feature, it estimates the performance benefits of these candidates and employs a genetic search algorithm to select the optimal set of indexes. This algorithm begins with single-column indexes and iteratively explores multi-column indexes, leveraging a `What-If` analysis to evaluate potential indexes based on their impact on optimizer plan costs. Indexes are recommended if they reduce the overall cost compared to executing queries without them.
+The Index Advisor analyzes queries to identify indexable columns from relevant clauses (for example, `WHERE`, `GROUP BY`, `ORDER BY`) and generates index candidates. Using the Hypo Index feature, it estimates the performance benefits of these candidates and employs a genetic search algorithm to select the optimal set of indexes. This algorithm begins with single-column indexes and iteratively explores multi-column indexes, leveraging a `What-If` analysis to evaluate potential indexes based on their impact on optimizer plan costs. Indexes are recommended if they reduce the overall cost compared to executing queries without them.
 
 In addition to recommending new indexes, TiDB also offers a feature to suggest dropping inactive indexes, ensuring efficient index management.
 
@@ -129,7 +129,7 @@ mysql> recommend index set timeout='20s';
 Query OK, 1 row affected (0.00 sec)
 ```
 
-This example shows how users can inspect and update the index advisor’s settings to fine-tune its behavior for their workloads.
+This example shows how users can inspect and update the index advisor's settings to fine-tune its behavior for their workloads.
 
 ## Limitations
 
