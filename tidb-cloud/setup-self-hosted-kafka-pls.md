@@ -24,13 +24,13 @@ The document provides an example of connecting to a Kafka Private Link service d
 
 1. Ensure that you have the following authorization to set up a Kafka Private Link service in your own AWS account. 
 
-    - Manage EC2 Nodes
+    - Manage EC2 nodes
     - Manage VPC
-    - Manage Subnet
-    - Manage Security Group
-    - Manage Load Balancer
-    - Manage Endpoint Service
-    - Connect to EC2 Nodes to configure Kafka nodes
+    - Manage subnets
+    - Manage security groups
+    - Manage load balancer
+    - Manage endpoint services
+    - Connect to EC2 nodes to configure Kafka nodes
 
 2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in AWS first. Ensure that the Kafka deployment information is aligned with your TiDB cluster.
 
