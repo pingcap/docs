@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-rename-table/','/docs/dev/refe
 
 # RENAME TABLE
 
-This statement is used to rename existing tables, supporting renaming multiple tables at once and renaming across databases.
+This statement is used to rename existing tables and views, supporting renaming multiple tables at once and renaming across databases.
 
 ## Synopsis
 
