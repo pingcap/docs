@@ -750,7 +750,7 @@ If you have already followed this document to successfully set up the connection
 
 1. Follow instructions from the beginning of this document. 
 
-2. When you proceed to [Step 2. Set up a Kafka cluster](#step-2-set-up-a-kafka-cluster), follow [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) to create another group of EXTERNAL listeners and advertised listeners. You can name it as **EXTERNAL2**. Note that the port range of **EXTERNAL2** cannot overlap with the **EXTERNAL**.
+2. When you proceed to [Step 1. Set up a Kafka cluster](#step-1-set-up-a-kafka-cluster), follow [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) to create another group of EXTERNAL listeners and advertised listeners. You can name it as **EXTERNAL2**. Note that the port range of **EXTERNAL2** cannot overlap with the **EXTERNAL**.
 
 3. After reconfiguring brokers, add another target group in the load balancer, including the bootstrap and broker target groups.
 
