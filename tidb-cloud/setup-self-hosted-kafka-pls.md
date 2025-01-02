@@ -738,7 +738,7 @@ Do the following to set up the load balancer:
     - **Endpoint Service Name**: the Kafka service name.
     - **Bootstrap Ports**: `9092`. A single port is sufficient because you configure a dedicated bootstrap target group behind it.
 
-3. Continue to follow the guideline in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+3. Proceed with the steps in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
 Now you have successfully finished the task.
 
