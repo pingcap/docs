@@ -62,6 +62,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   
     For more information, see [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md).
 
+- Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.1.1](https://docs.pingcap.com/tidb/stable/release-8.1.1) to [v8.1.2](https://docs.pingcap.com/tidb/stable/release-8.1.2).
+
 **Console changes**
 
 - Strengthen the data export service:
