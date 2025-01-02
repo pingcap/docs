@@ -75,7 +75,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 
 **1. Set up the Kafka VPC**
 
-You need to create two subnets for Kafka VPC, one for Kafka brokers, and the other for bastion node to make it easy to configure the Kafka cluster.
+You need to create two subnets for Kafka VPC, one for Kafka brokers, and the other for the bastion node to make it easy to configure the Kafka cluster.
 
 Go to the [Google Cloud console](https://cloud.google.com/cloud-console), and navigate to the [VPC networks](https://console.cloud.google.com/networking/networks/list) page to create the Kafka VPC with the following attributes:
 
@@ -172,9 +172,9 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
         2. Configure two **broker** listeners. INTERNAL for internal access; EXTERNAL for external access from TiDB Cloud.
     
     2. For `advertised.listeners`, do the following:
-        1. Configure an INTERNAL advertised listener for every broker with internal IP of broker node, advertise internal Kafka clients use this address to visit the broker.
+        1. Configure an INTERNAL advertised listener for each broker using the internal IP address of the broker node, which allows internal Kafka clients to connect to the broker via the advertised address.
         2. Configure an EXTERNAL advertised listener based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
-            - `<port>` differentiates brokers from Kafka Private Service Connect access point. Plan a port range for EXTERNAL advertised listeners of all brokers. These ports do not have to be actual ports listened on brokers. They are ports listened on the load balancer for Private Service Connect that will forward requests to different brokers.
+            - `<port>` differentiates brokers from Kafka Private Service Connect access points. Plan a port range for EXTERNAL advertised listeners of all brokers. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer for Private Service Connect that will forward requests to different brokers.
             - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
     
     3. The planning values:
@@ -253,7 +253,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     KAFKA_LOG_DIR=$SCRIPT_DIR/log
     KAFKA_CONFIG_DIR=$SCRIPT_DIR/config
 
-    # Cleanup step which makes it easy for multiple experiments
+    # Cleanup step, which makes it easy for multiple experiments
     # Find all Kafka process IDs
     KAFKA_PIDS=$(ps aux | grep 'kafka.Kafka' | grep -v grep | awk '{print $2}')
     if [ -z "$KAFKA_PIDS" ]; then
@@ -273,7 +273,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     rm -rf $KAFKA_LOG_DIR
     mkdir -p $KAFKA_LOG_DIR
 
-    # Magic id: BRl69zcmTFmiPaoaANybiw, you can use your own
+    # Magic id: BRl69zcmTFmiPaoaANybiw. You can use your own magic ID.
     $KAFKA_STORAGE_CMD format -t "BRl69zcmTFmiPaoaANybiw" -c "$KAFKA_CONFIG_DIR/server.properties" > $KAFKA_LOG_DIR/server_format.log   
     LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properties" &
     ```
@@ -426,9 +426,9 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
      # Add EXTERNAL listener
      listeners=INTERNAL:...,EXTERNAL://0.0.0.0:39092
 
-     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-     # 1. The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>"
-     # 2. So the EXTERNAL can be "bx.abc.us-west1.gcp.3199745.tidbcloud.com:xxxx", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port in EXTERNAL advertised listener ports range 
+     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section
+     # 1. The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>".
+     # 2. So the EXTERNAL can be "bx.abc.us-west1.gcp.3199745.tidbcloud.com:xxxx". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port in the port range of the EXTERNAL advertised listener.
      # For example
      advertised.listeners=...,EXTERNAL://b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093
 
@@ -459,7 +459,7 @@ export JAVA_HOME=~/jdk-22.0.2
 ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
 
 # Expected output for the last 3 lines (the actual order might be different)
-# There will be some exceptions or errors since advertised listeners can not be resolved in your Kafka network. 
+# There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network. 
 # We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Service Connect. 
 b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -517,9 +517,9 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         - **VPC Network**: `kafka-vpc`
         - **Region**: `us-west1`
         - **IPv4 range**: `10.128.0.0/18`
-    - **Accepted projects**: the Google Cloud project of TiDB Cloud you got in [Prerequisites](#prerequisites), for example `tidbcloud-prod-000`.
+    - **Accepted projects**: the Google Cloud project of TiDB Cloud you got in [Prerequisites](#prerequisites), for example, `tidbcloud-prod-000`.
 
-5. Navigate to the detail page of the `kafka-psc`. Note down the **Service attachment**, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`. You will use it in TiDB Cloud to connect to this PSC.
+5. Navigate to the detail page of the `kafka-psc`. Note down the **Service attachment**, for example, `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`. You will use it in TiDB Cloud to connect to this PSC.
 
 6. Go to the detail page of the VPC network `kafka-vpc`. Add a firewall rule to allow PSC traffic to all brokers.
 
@@ -538,7 +538,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 2. When you proceed to **Configure the changefeed target > Connectivity Method > Private Service Connect**, fill in the following fields with corresponding values and other fields as needed.
 
     - **Kafka Advertised Listener Pattern**: `abc`. It is the same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
-    - **Service Attachment**: the kafka service attachment of PSC, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`.
+    - **Service Attachment**: the Kafka service attachment of PSC, for example, `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`.
     - **Bootstrap Ports**: `9092,9093,9094`
 
 3. Proceed with the steps in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
@@ -551,7 +551,7 @@ Expose each Kafka broker to TiDB Cloud VPC with a unique port by using the Kafka
 
 ### Step 1. Set up Kafka-proxy
 
-Assume that you already have a Kafka cluster running in the same region as the TiDB Cluster. You can connect to the Kafka cluster from your VPC network. The Kafka cluster can be self-hosted or provided by third-party providers, such as Confluent.
+Assume that you already have a Kafka cluster running in the same region as the TiDB cluster. You can connect to the Kafka cluster from your VPC network. The Kafka cluster can be self-hosted or provided by third-party providers, such as Confluent.
 
 1. Go to the [Instance groups](https://console.cloud.google.com/compute/instanceGroups/list) page, and create an instance group for Kafka-proxy.
 
@@ -560,9 +560,9 @@ Assume that you already have a Kafka cluster running in the same region as the T
         - **Name**: `kafka-proxy-tpl`
         - **Location**: `Regional`
         - **Region**: `us-west1`
-        - **Machine type**: `e2-medium`. You can choose your own machine type based on you workload.
-        - **Network**: your VPC network that can connect to Kafka cluster.
-        - **Subnetwork**: your subnet that can connect to Kafka cluster.
+        - **Machine type**: `e2-medium`. You can choose your own machine type based on your workload.
+        - **Network**: your VPC network that can connect to the Kafka cluster.
+        - **Subnetwork**: your subnet that can connect to the Kafka cluster.
         - **External IPv4 address**: `Ephemeral`. Enable Internet access to make it easy to configure Kafka-proxy. You can select **None** in your production environment and log in to the node in your way.
     - **Location**: `Single zone`
     - **Region**: `us-west1`
@@ -587,10 +587,10 @@ Assume that you already have a Kafka cluster running in the same region as the T
     #   a) Kafka broker address; 
     #   b) Local address for the broker in Kafka-proxy; 
     #   c) Advertised listener for the broker if Kafka clients bootstrap from Kafka-proxy
-    # 2. --dynamic-sequential-min-port defines the start port of the random mapping for others brokers
-    # 3. --dynamic-advertised-listener defines advertised listener address for others brokers based on the pattern got from "Prerequisites" section
+    # 2. --dynamic-sequential-min-port defines the start port of the random mapping for other brokers
+    # 3. --dynamic-advertised-listener defines advertised listener address for other brokers based on the pattern obtained from the "Prerequisites" section
     #   a) The pattern: <broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>
-    #   b) Replace <broker_id> to fixed lower case string, for example "brokers". You can use your own string, but it's MUST. This will help TiDB Cloud route requests properly.
+    #   b) Make sure to replace <broker_id> with a fixed lowercase string, for example, "brokers". You can use your own string. This step will help TiDB Cloud route requests properly.
     #   c) Remove ":<port>"
     #   d) The advertised listener address would be: brokers.abc.us-west1.gcp.3199745.tidbcloud.com
     ./kafka-proxy server \
@@ -601,7 +601,7 @@ Assume that you already have a Kafka cluster running in the same region as the T
             --dynamic-advertised-listener=brokers.abc.us-west1.gcp.3199745.tidbcloud.com > ./kafka_proxy.log 2>&1 &
     ```
 
-4. Test bootstrap in Kafka-proxy node.
+4. Test bootstrap in the Kafka-proxy node.
 
     ```shell
     # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
@@ -613,8 +613,8 @@ Assume that you already have a Kafka cluster running in the same region as the T
     export JAVA_HOME=~/jdk-22.0.2
 
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server 0.0.0.0:9092
-    # Expected output(lines in tail), order may be different.
-    # There are exceptions or errors since advertised listeners can not be resolved in your network.
+    # Expected output of the last few lines (the actual order might be different)
+    # There might be exceptions or errors because advertised listeners cannot be resolved in your network.
     # We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Service Connect. 
     b1.abc.us-west1.gcp.3199745.tidbcloud.com:9092 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b2.abc.us-west1.gcp.3199745.tidbcloud.com:9093 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -657,9 +657,9 @@ Assume that you already have a Kafka cluster running in the same region as the T
         - **VPC Network**: your network
         - **Region**: `us-west1`
         - **IPv4 range**: set the CIDR based on your network planning
-    - **Accepted projects**: the Google Cloud project of TiDB Cloud you get in [Prerequisites](#prerequisites), for example `tidbcloud-prod-000`.
+    - **Accepted projects**: the Google Cloud project of TiDB Cloud you get in [Prerequisites](#prerequisites), for example, `tidbcloud-prod-000`.
 
-3. Navigate to the detail page of the **kafka-proxy-psc**. Note down the `Service attachment`, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`, which will be used in TiDB Cloud to connect to this PSC.
+3. Navigate to the detail page of the **kafka-proxy-psc**. Note down the `Service attachment`, for example, `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`, which will be used in TiDB Cloud to connect to this PSC.
 
 4. Go to the detail page of your VPC network. Add a firewall rule to allow the PSC traffic for all brokers.
 
@@ -673,12 +673,12 @@ Assume that you already have a Kafka cluster running in the same region as the T
 
 ### Step 3. Connect from TiDB Cloud
 
-1. Return to the [TiDB Cloud console](https://tidbcloud.com) and create a changefeed for the cluster to connect to Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+1. Return to the [TiDB Cloud console](https://tidbcloud.com) and create a changefeed for the cluster to connect to the Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
-2. After you proceed to the **Configure the changefeed target** > **Connectivity Method** > **Private Service Connect**, fill in the following fields with corresponding values and others fields as needed.
+2. After you proceed to the **Configure the changefeed target** > **Connectivity Method** > **Private Service Connect**, fill in the following fields with corresponding values and other fields as needed.
 
    - **Kafka Advertised Listener Pattern**: `abc`. The same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
-   - **Service Attachment**: the kafka-proxy service attachment of PSC, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`.
+   - **Service Attachment**: the kafka-proxy service attachment of PSC, for example, `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc`.
    - **Bootstrap Ports**: `9092,9093,9094`
 
 3. Continue to follow the guideline in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
