@@ -5,7 +5,9 @@
 - About TiDB Cloud
   - [What is TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
-  - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
+  - High Availability
+    - [Multi-AZ Deployments](/tidb-cloud/high-availability-with-multi-az.md)
+    - [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started
@@ -294,6 +296,9 @@
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - Reference
+    - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md)
+    - [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
 - Disaster Recovery
   - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
   - [Get Started](/tidb-cloud/recovery-group-get-started.md)

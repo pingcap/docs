@@ -42,10 +42,10 @@ Exporting data to a local file has the following limitations:
 
 To export data to Amazon S3, you need to provide the following information:
 
-- URI: `s3://<bucket-name>/<file-path>`
+- URI: `s3://<bucket-name>/<folder-path>/`
 - One of the following access credentials:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN has the `s3:PutObject` and `s3:ListBucket` permissions. 
+    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. 
 
 For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
@@ -53,27 +53,19 @@ For more information, see [Configure External Storage Access for TiDB Cloud Serv
 
 To export data to Google Cloud Storage, you need to provide the following information:
 
-- URI: `gs://<bucket-name>/<file-path>`
+- URI: `gs://<bucket-name>/<folder-path>/`
 - Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
-
-> **Note:**
->
-> Currently, you can only export to Google Cloud Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 ### Azure Blob Storage
 
 To export data to Azure Blob Storage, you need to provide the following information:
 
-- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>`
+- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
 - Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
-
-> **Note:**
->
-> Currently, you can only export to Azure Blob Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 ## Export options
 
@@ -92,7 +84,7 @@ You can export data in the following formats:
     - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
     - `header`: specify whether to include a header row in the exported data. The default value is `true`.
     - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
-- `Parquet`: export data in Parquet format. Currently, it is only supported in TiDB Cloud CLI.
+- `Parquet`: export data in Parquet format.
 
 The schema and data are exported according to the following naming conventions:
 
@@ -181,7 +173,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL File** or **CSV**.
+    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
 
    > **Tip:**
@@ -232,12 +224,12 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
     - **Exported Data**: choose the databases and tables you want to export.
-    - **Data Format**: choose **SQL File** or **CSV**.
+    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
-    - **Bucket Access**: choose one of the following access credentials and then fill in the credential information. If you do not have such information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
-        - **AWS Role ARN**: enter the role ARN that has the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
-        - **AWS Access Key**: enter the access key ID and access key secret that have the `s3:PutObject` and `s3:ListBucket` permissions to access the bucket.
+    - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
+        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+        - **AWS Access Key**: enter the access key ID and access key secret that have the permission to access the bucket.
 
 4. Click **Export**.
 
@@ -246,37 +238,94 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 <div label="CLI">
 
 ```shell
-ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter "database.table"
+ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter "database.table"
+
+ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri> --s3.role-arn <role-arn> --filter "database.table"
 ```
 
-- `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<file-path>` format.
+- `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<folder-path>/` format.
 - `s3.access-key-id`: the access key ID of the user who has the permission to access the bucket.
 - `s3.secret-access-key`: the access key secret of the user who has the permission to access the bucket.
+- `s3.role-arn`: the role ARN that has the permission to access the bucket.
 
 </div>
 </SimpleTab>
 
 ### Export data to Google Cloud Storage
 
-Currently, you can only export data to Google Cloud Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+<SimpleTab>
+<div label="Console">
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+   > **Tip:**
+   >
+   > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Google Cloud Storage** from the drop-down list. Fill in the following parameters:
+
+    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
+    - **Exported Data**: choose the databases and tables you want to export.
+    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
+    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
+    - **Folder URI**: enter the URI of the Google Cloud Storage with the `gs://<bucket-name>/<folder-path>/` format.
+    - **Bucket Access**: upload the Google Cloud credentials file that has permission to access the bucket.
+
+4. Click **Export**.
+
+</div>
+
+<div label="CLI">
 
 ```shell
-ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
+ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
 ```
 
-- `gcs.uri`: the URI of the Google Cloud Storage bucket in the `gs://<bucket-name>/<file-path>` format.
+- `gcs.uri`: the URI of the Google Cloud Storage bucket in the `gs://<bucket-name>/<folder-path>/` format.
 - `gcs.service-account-key`: the base64 encoded service account key.
+
+</div>
+</SimpleTab>
 
 ### Export data to Azure Blob Storage
 
-Currently, you can only export data to Azure Blob Storage using [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+<SimpleTab>
+<div label="Console">
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+   > **Tip:**
+   >
+   > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Azure Blob Storage** from the drop-down list. Fill in the following parameters:
+
+    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
+    - **Exported Data**: choose the databases and tables you want to export.
+    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
+    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
+    - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
+    - **SAS Token**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+
+4. Click **Export**.
+
+</div>
+
+<div label="CLI">
 
 ```shell
-ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
+ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
 ```
 
-- `azblob.uri`: the URI of the Azure Blob Storage in the `azure://<account-name>.blob.core.windows.net/<container-name>/<file-path>` format.
+- `azblob.uri`: the URI of the Azure Blob Storage in the `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
 - `azblob.sas-token`: the account SAS token of the Azure Blob Storage.
+
+</div>
+</SimpleTab>
 
 ### Cancel an export task
 
