@@ -18,15 +18,15 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support using private connect to connect to generic Kafka in AWS and Google Cloud (beta).
 
-    Private Connect leverages Private Link or Private Service Connect technologies from cloud providers to enable changefeed in the TiDB Cloud VPC to connect to Kafka in customers' VPCs using private IP addresses, as if those Kafkas were hosted directly within the TiDB Cloud VPC. This feature helps prevent VPC CIDR conflicts and meets security compliance requirements.
+    Private Connect leverages Private Link or Private Service Connect technologies from cloud providers to enable changefeeds in the TiDB Cloud VPC to connect to Kafka in customers' VPCs using private IP addresses, as if those Kafkas were hosted directly within the TiDB Cloud VPC. This feature helps prevent VPC CIDR conflicts and meets security compliance requirements.
 
     - For Apache Kafka in AWS, follow the instructions in [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md) to configure the network connection.
 
     - For Apache Kafka in Google Cloud, follow the instructions in [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md) to configure the network connection.
   
-    Note that using this feature incurs additional [Private Data Link costs](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
+  Note that using this feature incurs additional [Private Data Link costs](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
 
-  For more information, see [Changefeed Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md#network).
+    For more information, see [Changefeed Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md#network).
 
 - Introduce additional configurable options for Kafka changefeeds:
 
@@ -52,13 +52,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Regional high availability (beta) for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
-    This feature is designed for workloads that require maximum infrastructure redundancy and business continuity. Key features include:
+    This feature is designed for workloads that require maximum infrastructure redundancy and business continuity. Key functions include:
 
-        - Nodes are distributed across multiple availability zones to ensure high availability in the event of a zone failure.
-        - Critical OLTP (Online Transactional Processing) components, such as PD and TiKV, are replicated across availability zones for redundancy.
-        - Automatic failover minimizes service disruption during a primary zone failure.
+    - Nodes are distributed across multiple availability zones to ensure high availability in the event of a zone failure.
+    - Critical OLTP (Online Transactional Processing) components, such as PD and TiKV, are replicated across availability zones for redundancy.
+    - Automatic failover minimizes service disruption during a primary zone failure.
   
-    This feature is currently available only in the AWS Tokyo (ap-northeast-1) region and can be enabled only during cluster creation.
+  This feature is currently available only in the AWS Tokyo (ap-northeast-1) region and can be enabled only during cluster creation.
   
     For more information, see [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md).
 
