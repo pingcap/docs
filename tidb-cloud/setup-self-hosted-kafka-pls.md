@@ -71,7 +71,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 The Kafka VPC requires the following:
 
 - Three private subnets for brokers, one for each AZ. 
-- One public subnet in any AZ with a bastion node that can connect to the internet and three private subnets, which makes it easy to set up the kafka cluster. In a production environment, you might have your own bastion node that can connect to the Kafka VPC.
+- One public subnet in any AZ with a bastion node that can connect to the internet and three private subnets, which makes it easy to set up the Kafka cluster. In a production environment, you might have your own bastion node that can connect to the Kafka VPC.
 
 Before creating subnets, create subnets in AZs based on the mappings of AZ IDs and AZ names. Take the following mapping as an example.
 
