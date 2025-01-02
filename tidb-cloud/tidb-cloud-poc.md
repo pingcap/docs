@@ -175,7 +175,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore-serverless.md#backup).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## Step 8. Clean up the environment and finish the PoC
 

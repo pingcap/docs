@@ -8,6 +8,21 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2024.
 
+## December 17, 2024
+
+**General changes**
+
+- TiDB Cloud Serverless backup and restore changes
+
+    - Support restoring data to a new cluster, providing greater flexibility and ensuring your current cluster's operations remain uninterrupted.
+
+    - Refine backup and restore strategies to align with your cluster plan. For more information, see [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md#learn-about-the-backup-setting).
+
+    - Apply the following compatibility policy to help you transition smoothly:
+
+        - Backups created before 2024-12-17T10:00:00Z will follow the previous retention duration across all clusters.
+        - The backup time of scalable clusters will retain the current configurations, while the backup time of free clusters will be reset to default settings.
+
 ## December 3, 2024
 
 **General changes**
