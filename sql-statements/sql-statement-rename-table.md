@@ -5,7 +5,7 @@ summary: An overview of the usage of RENAME TABLE for the TiDB database.
 
 # RENAME TABLE
 
-This statement renames an existing table to a new name.
+This statement is used to rename existing tables, supporting renaming multiple tables at once and renaming across databases.
 
 ## Synopsis
 
@@ -20,26 +20,100 @@ TableToTable ::=
 ## Examples
 
 ```sql
-mysql> CREATE TABLE t1 (a int);
-Query OK, 0 rows affected (0.12 sec)
+CREATE TABLE t1 (a int);
+```
 
-mysql> SHOW TABLES;
+```
+Query OK, 0 rows affected (0.12 sec)
+```
+
+```sql
+SHOW TABLES;
+```
+
+```
 +----------------+
 | Tables_in_test |
 +----------------+
 | t1             |
 +----------------+
 1 row in set (0.00 sec)
+```
 
-mysql> RENAME TABLE t1 TO t2;
+```sql
+RENAME TABLE t1 TO t2;
+```
+
+```
 Query OK, 0 rows affected (0.08 sec)
+```
 
-mysql> SHOW TABLES;
+```sql
+SHOW TABLES;
+```
+
+```
 +----------------+
 | Tables_in_test |
 +----------------+
 | t2             |
 +----------------+
+1 row in set (0.00 sec)
+```
+
+The following example demonstrates how to rename multiple tables across databases:
+
+```sql
+RENAME TABLE db1.t1 To db2.t2, db3.t3 To db4.t4;
+```
+
+```
+Query OK, 0 rows affected (0.08 sec)
+```
+
+```sql
+USE db1; SHOW TABLES;
+```
+
+```
+Database changed
+Empty set (0.00 sec)
+```
+
+```sql
+USE db2; SHOW TABLES;
+```
+
+```
+Database changed
++---------------+
+| Tables_in_db2 |
++---------------+
+| t2            |
++---------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+USE db3; SHOW TABLES;
+```
+
+```
+Database changed
+Empty set (0.00 sec)
+```
+
+```sql
+USE db4; SHOW TABLES;
+```
+
+```
+Database changed
++---------------+
+| Tables_in_db4 |
++---------------+
+| t4            |
++---------------+
 1 row in set (0.00 sec)
 ```
 
