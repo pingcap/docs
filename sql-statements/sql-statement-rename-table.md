@@ -117,6 +117,47 @@ Database changed
 1 row in set (0.00 sec)
 ```
 
+The atomic rename can be used to swap out a table without having any moment in which the table does not exist.
+
+```sql
+CREATE TABLE t1(id int PRIMARY KEY);
+```
+
+```
+Query OK, 0 rows affected (0.04 sec)
+```
+
+```sql
+CREATE TABLE t1_new(id int PRIMARY KEY, n CHAR(0));
+````
+
+```
+Query OK, 0 rows affected (0.04 sec)
+```
+
+```sql
+RENAME TABLE t1 TO t1_old, t1_new TO t1;
+```
+
+```
+Query OK, 0 rows affected (0.07 sec)
+```
+
+```sql
+SHOW CREATE TABLE t1\G
+```
+
+```
+*************************** 1. row ***************************
+       Table: t1
+Create Table: CREATE TABLE `t1` (
+  `id` int NOT NULL,
+  `n` char(0) DEFAULT NULL,
+  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+1 row in set (0.00 sec)
+```
+
 ## MySQL compatibility
 
 The `RENAME TABLE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
