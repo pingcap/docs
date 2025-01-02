@@ -12,7 +12,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support creating TiDB node groups for TiDB Cloud Dedicated clusters to enhance resource management flexibility. For more information, see [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md).
+- Support creating TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters to enhance resource management flexibility. 
+
+    For more information, see [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md).
 
 - Support using private connect to connect to generic Kafka in AWS and Google Cloud (beta).
 
@@ -24,7 +26,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   
     Note that using this feature incurs additional [Private Data Link costs](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
 
-  For more information, see [Changefeed Sink to Apache KafkaNetwork](/tidb-cloud/changefeed-sink-to-apache-kafka.md#network).
+  For more information, see [Changefeed Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md#network).
 
 - Introduce additional configurable options for Kafka changefeeds:
 
