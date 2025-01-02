@@ -22,7 +22,7 @@ The document provides an example of connecting to a Kafka Private Link service d
 
 ## Prerequisites
 
-1. Ensure that you have the following authorization to set up Kafka Private Link service in your own AWS account. 
+1. Ensure that you have the following authorization to set up a Kafka Private Link service in your own AWS account. 
 
     - Manage EC2 Nodes
     - Manage VPC
