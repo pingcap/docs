@@ -26,12 +26,12 @@ The document provides an example of connecting to a Kafka Private Service Connec
 
 1. Ensure that you have the following authorization to set up Kafka Private Service Connect in your own Google Cloud account. 
 
-    - Manage VM Nodes
+    - Manage VM nodes
     - Manage VPC
-    - Manage Subnet
-    - Manage Load Balancer
+    - Manage subnets
+    - Manage load balancer
     - Manage Private Service Connect
-    - Connect to VM Nodes to configure Kafka nodes
+    - Connect to VM nodes to configure Kafka nodes
 
 2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in Google Cloud first. Ensure that the Kafka deployment information is aligned with your TiDB cluster.
 
