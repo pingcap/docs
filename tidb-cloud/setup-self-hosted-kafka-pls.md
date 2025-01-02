@@ -41,7 +41,7 @@ The document provides an example of connecting to a Kafka Private Link service d
     3. Click **Create Changefeed**.
         1. In **Target Type**, select **Kafka**.
         2. In **Connectivity Method**, select **Private Link**.
-    4. Note down the information of TiDB Cloud AWS account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to create an endpoint for the Kafka Private Link service.
+    4. Note down the information of the TiDB Cloud AWS account in **Reminders before proceeding**. You will use it to authorize TiDB Cloud to create an endpoint for the Kafka Private Link service.
     5. Select **Number of AZs**. In this example, select **3 AZs**. Note down the IDs of the AZs in which you want to deploy your Kafka cluster. If you want to know the relationship between your AZ names and AZ IDs, see [Availability Zone IDs for your AWS resources](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html) to find it.
     6. Enter a unique **Kafka Advertised Listener Pattern** for your Kafka Private Link service.
         1. Input a unique random string. It can only include numbers or lowercase letters. You will use it to generate **Kafka Advertised Listener Pattern** later.
