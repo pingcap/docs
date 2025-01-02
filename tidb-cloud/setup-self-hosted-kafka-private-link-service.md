@@ -369,7 +369,7 @@ KAFKA_DATA_DIR=$SCRIPT_DIR/data
 KAFKA_LOG_DIR=$SCRIPT_DIR/log
 KAFKA_CONFIG_DIR=$SCRIPT_DIR/config
 
-# Cleanup step which makes it easy for multiple experiments
+# Cleanup step, which makes it easy for multiple experiments
 # Find all Kafka process IDs
 KAFKA_PIDS=$(ps aux | grep 'kafka.Kafka' | grep -v grep | awk '{print $2}')
 if [ -z "$KAFKA_PIDS" ]; then
@@ -564,7 +564,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
     # 1. The pattern for AZ(ID: usw2-az2) is "<broker_id>.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:<port>"
-    # 2. So the EXTERNAL can be "b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port(9094) in EXTERNAL advertised listener ports range 
+    # 2. So the EXTERNAL can be "b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9094) in EXTERNAL advertised listener ports range.
     advertised.listeners=...,EXTERNAL://b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094
 
     # Configure EXTERNAL map
@@ -579,7 +579,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
     # 1. The pattern for AZ(ID: usw2-az3) is "<broker_id>.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:<port>"
-    # 2. So the EXTERNAL can be "b2.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port(9095) in EXTERNAL advertised listener ports range 
+    # 2. So the EXTERNAL can be "b2.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9095) in EXTERNAL advertised listener ports range.
     advertised.listeners=...,EXTERNAL://b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095
 
     # Configure EXTERNAL map
@@ -609,7 +609,7 @@ export JAVA_HOME=/home/ec2-user/jdk-22.0.2
 ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
 
 # Expected output for the last 3 lines (the actual order might be different)
-# There will be some exceptions or errors since advertised listeners can not be resolved in your Kafka network. 
+# There will be some exceptions or errors becasue advertised listeners cannot be resolved in your Kafka network. 
 # We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link. 
 b1.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -699,7 +699,7 @@ Do the following to set up the load balancer:
 3. Test the load balancer in the bastion node. This example only tests the Kafka bootstrap. Because the load balancer is listening on the Kafka EXTERNAL listener, the addresses of EXTERNAL advertised listeners can not be resolved in the bastion node. Note down the `kafka-lb` DNS name from the load balancer detail page, for example `kafka-lb-77405fa57191adcb.elb.us-west-2.amazonaws.com`. Execute the script in the bastion node.
 
     ```shell
-    # Please replace {lb_dns_name} to the actual value
+    # Replace {lb_dns_name} to your actual value
     export JAVA_HOME=/home/ec2-user/jdk-22.0.2
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {lb_dns_name}:9092
 
