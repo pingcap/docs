@@ -33,7 +33,9 @@ The document provides an example of connecting to a Kafka Private Service Connec
     - Manage Private Service Connect
     - Connect to VM nodes to configure Kafka nodes
 
-2. Create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster in Google Cloud first. Ensure that the Kafka deployment information is aligned with your TiDB cluster.
+2. [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) if you do not have one.
+
+3. Get the Kafka deployment information from your TiDB Cloud Dedicated cluster.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
     2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
@@ -59,7 +61,7 @@ The following table shows an example of the deployment information.
 
 ## Set up self-hosted Kafka Private Service Connect service by PSC port mapping
 
-Expose every Kafka broker to TiDB Cloud VPC with a unique port by using the PSC port mapping mechanism. The following diagram shows how it works.
+Expose each Kafka broker to TiDB Cloud VPC with a unique port by using the PSC port mapping mechanism. The following diagram shows how it works.
 
 ![Connect to Google Cloud self-hosted Kafka Private Service Connect by port mapping](/media/tidb-cloud/changefeed/connect-to-google-cloud-self-hosted-kafka-private-service-connect-by-portmapping.png)
 
@@ -133,19 +135,19 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     - **Subnetwork**: `brokers-subnet`
     - **External IPv4 address**: `None`
 
-**3. Prepare kafka runtime binaries**
+**3. Prepare Kafka runtime binaries**
 
 1. Go to the detail page of the bastion node. Click **SSH** to log in to the bastion node. Download binaries.
 
     ```shell
-    # Download kafka and openjdk, and then decompress them. You can choose the binary version as needed.
+    # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
     wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
     ```
 
-2. Copy binaries to every broker node.
+2. Copy binaries to each broker node.
 
     ```shell
     # Run this command to authorize gcloud to access the Cloud Platform with Google user credentials
@@ -185,10 +187,10 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
 
     ```properties
     # broker-node1 ~/config/server.properties
-    # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} to real ips
-    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-    # 2.1 The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>"
-    # 2.2 So the EXTERNAL can be "b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port(9093) in EXTERNAL advertised listener ports range
+    # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
+    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
+    # 2.1 The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>".
+    # 2.2 So the EXTERNAL can be "b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9093) in the port range of the EXTERNAL advertised listener.
     process.roles=broker,controller
     node.id=1
     controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
@@ -202,10 +204,10 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
 
     ```properties
     # broker-node2 ~/config/server.properties
-    # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} to real ips
-    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-    # 2.1 The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>"
-    # 2.2 So the EXTERNAL can be "b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port(9094) in EXTERNAL advertised listener ports range
+    # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
+    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
+    # 2.1 The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>".
+    # 2.2 So the EXTERNAL can be "b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9094) in the port range of the EXTERNAL advertised listener.
     process.roles=broker,controller
     node.id=2
     controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
@@ -219,10 +221,10 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
 
     ```properties
     # broker-node3 ~/config/server.properties
-    # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} to real ips
-    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
-    # 2.1 The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>"
-    # 2.2 So the EXTERNAL can be "b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095", replace <broker_id> with "b" prefix plus "node.id" properties, replace <port> with a unique port(9095) in EXTERNAL advertised listener ports range
+    # 1. Replace {broker-node1-ip}, {broker-node2-ip}, {broker-node3-ip} with the actual IP addresses.
+    # 2. Configure EXTERNAL in "advertised.listeners" based on the "Kafka Advertised Listener Pattern" in the "Prerequisites" section.
+    # 2.1 The pattern is "<broker_id>.abc.us-west1.gcp.3199745.tidbcloud.com:<port>".
+    # 2.2 So the EXTERNAL can be "b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port (9095) in the port range of the EXTERNAL advertised listener.
     process.roles=broker,controller
     node.id=3
     controller.quorum.voters=1@{broker-node1-ip}:29092,2@{broker-node2-ip}:29092,3@{broker-node3-ip}:29092
@@ -234,7 +236,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     log.dirs=./data
     ```
 
-3. Create a script and then execute it to start the Kafka broker in every broker node.
+3. Create a script, and then execute it to start the Kafka broker in each broker node.
 
     ```shell
     #!/bin/bash
@@ -251,7 +253,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     KAFKA_LOG_DIR=$SCRIPT_DIR/log
     KAFKA_CONFIG_DIR=$SCRIPT_DIR/config
 
-    # Cleanup step make it easy to multiple experiments
+    # Cleanup step which makes it easy for multiple experiments
     # Find all Kafka process IDs
     KAFKA_PIDS=$(ps aux | grep 'kafka.Kafka' | grep -v grep | awk '{print $2}')
     if [ -z "$KAFKA_PIDS" ]; then
@@ -285,15 +287,15 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
 
     # Bootstrap from INTERNAL listener
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:9092 | grep 9092
-    # Expected output, order may be different.
+    # Expected output (the actual order might be different)
     {broker-node1-ip}:9092 (id: 1 rack: null) -> (
     {broker-node2-ip}:9092 (id: 2 rack: null) -> (
     {broker-node3-ip}:9092 (id: 3 rack: null) -> (
 
     # Bootstrap from EXTERNAL listener
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
-    # Expected output(last 3 lines), order may be different.
-    # The differences of output from "bootstrap from INTERNAL listener" is that there are exceptions or errors since advertised listeners can not be resolved in Kafka VPC.
+    # Expected output for the last 3 lines (the actual order might be different)
+    # The difference in the output from "bootstrap from INTERNAL listener" is that exceptions or errors might occur because advertised listeners cannot be resolved in Kafka VPC.
     # We will make them resolvable in TiDB Cloud side and make it route to the right broker. 
     b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b2.abc.us-west1.gcp.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -386,7 +388,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
     ```
 
     ```text
-    # Expected example output (message order may be different)
+    # Expected example output (the actual message order might be different)
     Consuming messages from the topic...
     Test message 3
     Test message 4
@@ -413,12 +415,12 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
 1. Plan configuration changes.
 
-    1. Configure an EXTERNAL **listener** for every broker for external access from TiDB Cloud. Select a unique port as the EXTERNAL port, for example `39092`.
+    1. Configure an EXTERNAL **listener** for every broker for external access from TiDB Cloud. Select a unique port as the EXTERNAL port, for example, `39092`.
     2. Configure an EXTERNAL **advertised listener** based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
-        - `<port>` differentiates brokers from Kafka Private Service Connect access point. Plan a port range for EXTERNAL advertised listeners of all brokers, for example `range from 9093`. These ports do not have to be actual ports listened on brokers. They are ports listened on the load balancer for Private Service Connect which will forward requests to different brokers. 
+       - `<port>` differentiates brokers from Kafka Private Service Connect access points. Plan a port range for EXTERNAL advertised listeners of all brokers, for example, `range from 9093`. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer for Private Service Connect that will forward requests to different brokers.
         - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
 
-2. Use SSH to log in to every broker node. Modify the configuration file of every broker the following content.  
+2. Use SSH to log in to each broker node. Modify the configuration file of each broker with the following content:
 
      ```properties
      # Add EXTERNAL listener
@@ -441,7 +443,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 You can download Kafka and OpenJDK in your Kafka client node.
 
 ```shell
-# Download kafka and openjdk, and then decompress them. You can choose the binary version as needed.
+# Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
 wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
 tar -zxf kafka_2.13-3.7.1.tgz
 wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
@@ -453,10 +455,10 @@ Execute the following script to test if the bootstrap works as expected.
 ```shell
 export JAVA_HOME=~/jdk-22.0.2
 
-# Bootstrap from EXTERNAL listener
+# Bootstrap from the EXTERNAL listener
 ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
 
-# Expected output(last 3 lines), order may be different.
+# Expected output for the last 3 lines (the actual order might be different)
 # There will be some exceptions or errors since advertised listeners can not be resolved in your Kafka network. 
 # We will make them resolvable in TiDB Cloud side and make it route to the right broker. 
 b1.abc.us-west1.gcp.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -531,19 +533,19 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 ### Step 3. Connect from TiDB Cloud
 
-1. Go back to the [TiDB Cloud console](https://tidbcloud.com) to create the changefeed for the cluster to connect to the Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+1. Go back to the [TiDB Cloud console](https://tidbcloud.com) to create a changefeed for the cluster to connect to the Kafka cluster by **Private Service Connect**. For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
-2. After you proceed to the **Configure the changefeed target > Connectivity Method > Private Service Connect**, fill the following fields with corresponding values and others fields as needed.
+2. When you proceed to **Configure the changefeed target > Connectivity Method > Private Service Connect**, fill in the following fields with corresponding values and other fields as needed.
 
     - **Kafka Advertised Listener Pattern**: `abc`. It is the same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
     - **Service Attachment**: the kafka service attachment of PSC, for example `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-psc`.
     - **Bootstrap Ports**: `9092,9093,9094`
 
-3. Continue to follow the guideline in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+3. Proceed with the steps in [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
 
 ## Set up self-hosted Kafka Private Service Connect by Kafka-proxy
 
-Expose every kafka broker to TiDB Cloud VPC with a unique port by using the Kafka-proxy dynamic port mapping mechanism. The following diagram shows how it works.
+Expose each Kafka broker to TiDB Cloud VPC with a unique port by using the Kafka-proxy dynamic port mapping mechanism. The following diagram shows how it works.
 
 ![Connect to Google Cloud self-hosted Kafka Private Service Connect by Kafka proxy](/media/tidb-cloud/changefeed/connect-to-google-cloud-self-hosted-kafka-private-service-connect-by-kafka-proxy.png)
 
@@ -602,7 +604,7 @@ Assume that you already have a Kafka cluster running in the same region as the T
 4. Test bootstrap in Kafka-proxy node.
 
     ```shell
-    # Download kafka and openjdk, and then decompress them. You can choose the binary version as needed.
+    # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
     wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
@@ -689,7 +691,7 @@ If you have already followed the steps in this document and successfully set up 
 
 - If you set up Kafka PSC by PSC port mapping, do the following:
 
-    1. Follow instructions from the beginning of this document. When you proceed to [Step 1. Set up Kafka Cluster](#step-1-set-up-the-kafka-cluster), follow the [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) section. Create another group of EXTERNAL listeners and advertised listeners. You can name it as `EXTERNAL2`. Note that the port range of `EXTERNAL2` cannot overlap with the EXTERNAL.
+    1. Follow instructions from the beginning of this document. When you proceed to [Step 1. Set up Kafka Cluster](#step-1-set-up-the-kafka-cluster), follow the [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) section to create another group of EXTERNAL listeners and advertised listeners. You can name it as `EXTERNAL2`. Note that the port range of `EXTERNAL2` cannot overlap with the EXTERNAL.
 
     2. After reconfiguring the brokers, add another group of Network endpoints to the Network endpoint group, which maps the ports range to the `EXTERNAL2` listener.
 
