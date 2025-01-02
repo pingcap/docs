@@ -215,11 +215,9 @@ It is recommended that you use [Azure ARM template](https://learn.microsoft.com/
 
 2. Open the **Generate New SAS Token via ARM Template Deployment** dialog.
         
-    - If you want to export data to Azure Blob Storage:
-
-        1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
-        2. Fill in the **Folder URI** field.
-        3. Click **Click here to create a new one with Azure ARM template**.       
+    1. Click **Export data to...**  > **Azure Blob Storage**. If your cluster has neither imported nor exported any data before, click **Click here to export data to...** > **Azure Blob Storage** at the bottom of the page.
+   
+    2. Click **Click here to create a new one with Azure ARM template** under the SAS Token field.       
    
 3. Create a SAS token with the Azure ARM template.
 
