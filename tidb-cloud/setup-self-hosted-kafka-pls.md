@@ -734,7 +734,7 @@ Do the following to set up the load balancer:
 2. After you proceed to **Configure the changefeed target > Connectivity Method > Private Link**, fill in the following fields with corresponding values and others fields as needed.
 
     - **Kafka Type**: `3 AZs`. Ensure that your Kafka cluster is deployed in the same three AZs.
-    - **Kafka Advertised Listener Pattern**: `abc`. The same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequistes](#prerequisites).
+    - **Kafka Advertised Listener Pattern**: `abc`. It is the same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequistes](#prerequisites).
     - **Endpoint Service Name**: the Kafka service name.
     - **Bootstrap Ports**: `9092`. A single port is sufficient because you configure a dedicated bootstrap target group behind it.
 
