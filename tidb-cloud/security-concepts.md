@@ -63,13 +63,13 @@ TiDB Cloud provides granular database access control through user-based and role
 
     - Regularly audit and update user access to align with changing organizational requirements.
 
-### User accounts
+### Database user accounts
 
-User accounts are stored in the `mysql.user` system table and uniquely identified by a username and client host.
+Database user accounts are stored in the `mysql.user` system table and uniquely identified by a username and client host.
 
 During database initialization, TiDB automatically creates a default account: `'root'@'%'`.
 
-For more information, see TiDB [TiDB User Account Management](/user-account-management.md#user-names-and-passwords).
+For more information, see [TiDB User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management#user-names-and-passwords).
 
 ### SQL Proxy accounts
 
