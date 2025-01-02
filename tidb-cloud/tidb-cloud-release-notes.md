@@ -14,6 +14,28 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support creating TiDB node groups for TiDB Cloud Dedicated clusters to enhance resource management flexibility. For more information, see [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md).
 
+- Support using private connect to connect to generic Kafka in AWS and Google Cloud (Beta).
+
+    Private Connect leverages Private Link or Private Service Connect technologies from cloud providers to enable changefeed in the TiDB Cloud VPC to connect to Kafka in customers' VPCs using private IP addresses, as if those Kafkas were hosted directly within the TiDB Cloud VPC. This feature helps prevent VPC CIDR conflicts and meets security compliance requirements.
+
+    - For Apache Kafka in AWS, follow the instructions in [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md) to configure the network connection.
+
+    - For Apache Kafka in Google Cloud, follow the instructions in [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md) to configure the network connection.
+  
+    Note that using this feature incurs additional [Private Data Link costs](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
+
+  For more information, see [Changefeed Sink to Apache KafkaNetwork](/tidb-cloud/changefeed-sink-to-apache-kafka.md#network).
+
+- Introduce additional configurable options for Kafka changefeeds:
+
+    - Support using the Debezium protocol. Debezium is a tool for capturing database changes. It converts each captured database change into a message called an event, and sends these events to Kafka. For more information, see [TiCDC Debezium Protocol](/ticdc/ticdc-debezium.md).
+
+    - Support defining a single partition dispatcher for all tables, or different partition dispatchers for different tables. 
+
+    - Introduce two new dispatcher types for the partition distribution of Kafka messages: timestamp and column value.
+
+  For more information, see [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md).
+
 - Enhance roles in TiDB Cloud:
 
     - Introduce the `Project Viewer` and `Organization Billing Viewer` roles to enhance granular access control on TiDB Cloud.
