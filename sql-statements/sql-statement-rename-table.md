@@ -5,7 +5,7 @@ summary: An overview of the usage of RENAME TABLE for the TiDB database.
 
 # RENAME TABLE
 
-This statement is used to rename existing tables, supporting renaming multiple tables at once and renaming across databases.
+This statement is used to rename existing tables and views, supporting renaming multiple tables at once and renaming across databases.
 
 ## Synopsis
 
