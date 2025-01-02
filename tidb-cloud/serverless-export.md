@@ -42,7 +42,7 @@ Exporting data to a local file has the following limitations:
 
 To export data to Amazon S3, you need to provide the following information:
 
-- URI: `s3://<bucket-name>/<folder-path>`
+- URI: `s3://<bucket-name>/<folder-path>/`
 - One of the following access credentials:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
     - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. 
@@ -53,7 +53,7 @@ For more information, see [Configure External Storage Access for TiDB Cloud Serv
 
 To export data to Google Cloud Storage, you need to provide the following information:
 
-- URI: `gs://<bucket-name>/<folder-path>`
+- URI: `gs://<bucket-name>/<folder-path>/`
 - Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
@@ -62,7 +62,7 @@ For more information, see [Configure External Storage Access for TiDB Serverless
 
 To export data to Azure Blob Storage, you need to provide the following information:
 
-- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>`
+- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
 - Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
 For more information, see [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
@@ -243,7 +243,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri> --s3.role-arn <role-arn> --filter "database.table"
 ```
 
-- `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<folder-path>` format.
+- `s3.uri`: the Amazon S3 URI with the `s3://<bucket-name>/<folder-path>/` format.
 - `s3.access-key-id`: the access key ID of the user who has the permission to access the bucket.
 - `s3.secret-access-key`: the access key secret of the user who has the permission to access the bucket.
 - `s3.role-arn`: the role ARN that has the permission to access the bucket.
@@ -283,7 +283,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter "database.table"
 ```
 
-- `gcs.uri`: the URI of the Google Cloud Storage bucket in the `gs://<bucket-name>/<folder-path>` format.
+- `gcs.uri`: the URI of the Google Cloud Storage bucket in the `gs://<bucket-name>/<folder-path>/` format.
 - `gcs.service-account-key`: the base64 encoded service account key.
 
 </div>
@@ -308,8 +308,8 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
     - **Exported Data**: choose the databases and tables you want to export.
     - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
-    - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` format.
-    - **Bucket Access**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
+    - **SAS Token**: enter the SAS token that has the permission to access the container. It is recommended to create a SAS token with the [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/). For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Export**.
 
@@ -321,7 +321,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azblob.uri <uri> --azblob.sas-token <sas-token> --filter "database.table"
 ```
 
-- `azblob.uri`: the URI of the Azure Blob Storage in the `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>` format.
+- `azblob.uri`: the URI of the Azure Blob Storage in the `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
 - `azblob.sas-token`: the account SAS token of the Azure Blob Storage.
 
 </div>
