@@ -137,6 +137,26 @@ The compatibility information for BR before TiDB v6.6.0 is as follows:
 | TiDB v6.0, v6.1, v6.2, v6.3, v6.4, or v6.5 snapshot backup | Compatible (known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible (BR must be v6.6) |
 | TiDB v6.3, v6.4, v6.5, or v6.6 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
 
+The compatibility information for BR between TiDB versions 6.5.0 and 8.5.0, including all long-term support versions (6.5.0, 7.1.0, 7.5.0, 8.1.0, 8.5.0):
+
+**Known Issue:** Some system table fields were changed to be case-sensitive in version 7.2.0, which may cause cross-version backup and restore failures. Refer to [#43717](https://github.com/pingcap/tidb/issues/43717).
+
+| Backup Type                       | Backup Version | Restore Version | Result        |
+|-----------------------------------|----------------|-----------------|---------------|
+| Full Backup                       | 6.5.0          | 7.1.0           | Compatible    |
+|                                   | 6.5.0          | 7.5.0 or above  | ❌ Incompatible |
+|                                   | 7.1.0          | 7.5.0 or above  | ❌ Incompatible |
+|                                   | 7.5.0          | 7.5.0 or above  | Compatible    |
+|                                   | 8.1.0          | 8.1.0 or above  | Compatible    |
+| Full Backup (only user data)      | All versions   | All versions    | Compatible    |
+| Log Backup                        | 6.5.0          | 7.1.0           | Compatible    |
+|                                   | 6.5.0          | 7.5.0 or above  | ❌ Incompatible |
+|                                   | 7.1.0          | 7.5.0 or above  | ❌ Incompatible |
+|                                   | 7.1.0          | 7.5.0 or above  | ❌ Incompatible |
+|                                   | 7.5.0          | 7.5.0 or above  | Compatible    |
+|                                   | 8.1.0          | 8.5.0 or above  | Compatible    |
+| Log Backup (only user data)       | All versions   | All versions    | Compatible    |
+
 ## See also
 
 - [TiDB Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
