@@ -926,7 +926,7 @@
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
       - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
-    - [Vector Index](/vector-search-index.md)
+    - [Vector Index](/vector-search/vector-search-index.md)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)
     - [SQL Mode](/sql-mode.md)
