@@ -36,7 +36,7 @@ Implicit defaults are defined as follows:
 
 Starting from 8.0.13, MySQL supports specifying expressions as default values in the `DEFAULT` clause. For more information, see [Explicit default handling as of MySQL 8.0.13](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit).
 
-Starting from v8.0.0, TiDB additionally supports specifying the following expressions as default values in the `DEFAULT` clause.
+TiDB supports specifying the following expressions as default values in the `DEFAULT` clause.
 
 * `UPPER(SUBSTRING_INDEX(USER(), '@', 1))`
 * `REPLACE(UPPER(UUID()), '-', '')`
@@ -46,9 +46,48 @@ Starting from v8.0.0, TiDB additionally supports specifying the following expres
     * `DATE_FORMAT(NOW(), '%Y-%m-%d %H.%i.%s')`
     * `DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')`
 * `STR_TO_DATE('1980-01-01', '%Y-%m-%d')`
+* [`CURRENT_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md), [`CURRENT_DATE()`](/functions-and-operators/date-and-time-functions.md): both use the default fractional seconds precision (fsp)
+* [`JSON_OBJECT()`](/functions-and-operators/json-functions.md), [`JSON_ARRAY()`](/functions-and-operators/json-functions.md), [`JSON_QUOTE()`](/functions-and-operators/json-functions.md)
+* [`NEXTVAL()`](/functions-and-operators/sequence-functions.md#nextval)
+* [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md)
+* [`UUID()`](/functions-and-operators/miscellaneous-functions.md#uuid), [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)
+* [`VEC_FROM_TEXT()`](/vector-search-functions-and-operators.md#vec_from_text)
 
-Starting from v8.0.0, TiDB additionally supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions to set the default values for these data types. The following is an example of `BLOB`:
+TiDB supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions, not literals, to define default values for these data types. The following is an example of `BLOB`:
 
 ```sql
-CREATE TABLE t2 (b BLOB DEFAULT (RAND()));
+CREATE TABLE t2 (
+  b BLOB DEFAULT (RAND())
+);
 ```
+
+An example for using a UUID:
+
+```sql
+CREATE TABLE t3 (
+  uuid BINARY(16) DEFAULT (UUID_TO_BIN(UUID())),
+  name VARCHAR(255)
+);
+```
+
+For more information on how to use UUID, see [UUID best practices](/best-practices/uuid.md).
+
+An example for using `JSON`:
+
+```sql
+CREATE TABLE t4 (
+  id bigint AUTO_RANDOM PRIMARY KEY,
+  j json DEFAULT (JSON_OBJECT("a", 1, "b", 2))
+);
+```
+
+An example for what is not allowed for `JSON`:
+
+```sql
+CREATE TABLE t5 (
+  id bigint AUTO_RANDOM PRIMARY KEY,
+  j json DEFAULT ('{"a": 1, "b": 2}')
+);
+```
+
+The last two examples show similar defaults, but only the first one is valid because it uses an expression rather than a literal.
