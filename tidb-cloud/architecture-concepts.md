@@ -17,13 +17,19 @@ TiDB Cloud Serverless is a fully managed serverless solution that provides HTAP 
 
 By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
 
+![TiDB Cloud Serverless zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+
 For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
+
+![TiDB Cloud Serverless regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
 
 ## TiDB Cloud Dedicated
 
 TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full HTAP capabilities.
 
 Built on isolated cloud resources such as VPCs, VMs, managed Kubernetes services, and cloud storage, it leverages the infrastructure of major cloud providers. TiDB Cloud Dedicated clusters support the complete TiDB feature set, enabling rapid scaling, reliable backups, deployment within specific VPCs, and geographic-level disaster recovery.
+
+![TiDB Cloud Dedicated Architecture](/media/tidb-cloud/tidb-cloud-dedicated-architecture.png)
 
 ## TiDB Cloud console
 
