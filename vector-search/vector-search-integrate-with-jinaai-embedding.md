@@ -291,5 +291,5 @@ with Session(engine) as session:
 
 ## See also
 
-- [Vector Data Types](/vector-search-data-types.md)
-- [Vector Search Index](/vector-search-index.md)
+- [Vector Data Types](/vector-search/vector-search-data-types.md)
+- [Vector Search Index](/vector-search/vector-search-index.md)

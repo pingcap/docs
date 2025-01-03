@@ -26,7 +26,7 @@ The following Vector data types are currently available:
 
 Using vector data types provides the following advantages over using the [`JSON`](/data-type-json.md) type:
 
-- Vector index support: You can build a [vector search index](/vector-search-index.md) to speed up vector searching.
+- Vector index support: You can build a [vector search index](/vector-search/vector-search-index.md) to speed up vector searching.
 - Dimension enforcement: You can specify a dimension to forbid inserting vectors with different dimensions.
 - Optimized storage format: Vector data types are optimized for handling vector data, offering better space efficiency and performance compared to `JSON` types.
 
@@ -65,9 +65,9 @@ In the following example, because dimension `3` is enforced for the `embedding` 
 ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 ```
 
-For available functions and operators over the vector data types, see [Vector Functions and Operators](/vector-search-functions-and-operators.md).
+For available functions and operators over the vector data types, see [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md).
 
-For more information about building and using a vector search index, see [Vector Search Index](/vector-search-index.md).
+For more information about building and using a vector search index, see [Vector Search Index](/vector-search/vector-search-index.md).
 
 ## Store vectors with different dimensions
 
@@ -83,11 +83,11 @@ INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]'); -- 3 dimensions vector,
 INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector, OK
 ```
 
-However, note that you cannot build a [vector search index](/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
+However, note that you cannot build a [vector search index](/vector-search/vector-search-index.md) for this column, as vector distances can be only calculated between vectors with the same dimensions.
 
 ## Comparison
 
-You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector Functions and Operators](/vector-search-functions-and-operators.md).
+You can compare vector data types using [comparison operators](/functions-and-operators/operators.md) such as `=`, `!=`, `<`, `>`, `<=`, and `>=`. For a complete list of comparison operators and functions for vector data types, see [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md).
 
 Vector data types are compared element-wise numerically. For example:
 
@@ -231,7 +231,7 @@ You can also explicitly cast a vector to its string representation. Take using t
 1 row in set (0.01 sec)
 ```
 
-For additional cast functions, see [Vector Functions and Operators](/vector-search-functions-and-operators.md).
+For additional cast functions, see [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md).
 
 ### Cast between Vector ⇔ other data types
 
@@ -241,7 +241,7 @@ Note that vector data type columns stored in a table cannot be converted to othe
 
 ## Restrictions
 
-For restrictions on vector data types, see [Vector search limitations](/vector-search-limitations.md) and [Vector index restrictions](/vector-search-index.md#restrictions).
+For restrictions on vector data types, see [Vector search limitations](/vector-search/vector-search-limitations.md) and [Vector index restrictions](/vector-search/vector-search-index.md#restrictions).
 
 ## MySQL compatibility
 
@@ -249,6 +249,6 @@ Vector data types are TiDB specific, and are not supported in MySQL.
 
 ## See also
 
-- [Vector Functions and Operators](/vector-search-functions-and-operators.md)
-- [Vector Search Index](/vector-search-index.md)
-- [Improve Vector Search Performance](/vector-search-improve-performance.md)
+- [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
+- [Vector Search Index](/vector-search/vector-search-index.md)
+- [Improve Vector Search Performance](/vector-search/vector-search-improve-performance.md)
