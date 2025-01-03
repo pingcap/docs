@@ -5,6 +5,10 @@ summary: Learn about database schema concepts for TiDB Cloud.
 
 # Database Schema
 
+A database schema defines the structure and organization of data within databases, tables, columns, indexes, and other objects.
+
+This document introduces the key concepts of database schemas, such as databases, tables, columns, data types, constraints, and indexes. It also introduces advanced features such as temporary tables for managing intermediate data seamlessly, vector indexes for efficient approximate nearest neighbor (ANN) searches, and cached tables to improve read performance.
+
 ## Databases
 
 A database in TiDB is a collection of objects such as tables and indexes.

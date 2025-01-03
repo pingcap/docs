@@ -5,6 +5,10 @@ summary: Learn about AI features for TiDB Cloud.
 
 # AI Features
 
+The AI features in TiDB enable you to fully leverage advanced technologies for data exploration, search, and integration. From natural language-driven SQL query generation to high-performance vector search, TiDB combines database capabilities with modern AI features to power innovative applications. With support for popular AI frameworks, embedding models, and seamless integration with ORM libraries, TiDB offers a versatile platform for use cases such as semantic search and AI-powered analytics.
+
+This document highlights these AI features and how they enhance the TiDB experience.
+
 ## Chat2Query
 
 Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
