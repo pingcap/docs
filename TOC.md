@@ -82,23 +82,23 @@
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
   - Vector Search
-    - [Overview](/vector-search-overview.md)
+    - [Overview](/vector-search/vector-search-overview.md)
     - Get Started
-      - [Get Started with SQL](/vector-search-get-started-using-sql.md)
-      - [Get Started with Python](/vector-search-get-started-using-python.md)
+      - [Get Started with SQL](/vector-search/vector-search-get-started-using-sql.md)
+      - [Get Started with Python](/vector-search/vector-search-get-started-using-python.md)
     - Integrations
-      - [Overview](/vector-search-integration-overview.md)
+      - [Overview](/vector-search/vector-search-integration-overview.md)
       - AI Frameworks
-        - [LlamaIndex](/vector-search-integrate-with-llamaindex.md)
-        - [Langchain](/vector-search-integrate-with-langchain.md)
+        - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
+        - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
       - Embedding Models/Services
-        - [Jina AI](/vector-search-integrate-with-jinaai-embedding.md)
+        - [Jina AI](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
       - ORM Libraries
-        - [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
-        - [peewee](/vector-search-integrate-with-peewee.md)
-        - [Django](/vector-search-integrate-with-django-orm.md)
-    - [Improve Performance](/vector-search-improve-performance.md)
-    - [Limitations](/vector-search-limitations.md)
+        - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
+        - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
+        - [Django](/vector-search/vector-search-integrate-with-django-orm.md)
+    - [Improve Performance](/vector-search/vector-search-improve-performance.md)
+    - [Limitations](/vector-search/vector-search-limitations.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
