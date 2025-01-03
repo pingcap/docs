@@ -5,7 +5,7 @@ summary: Learn about AI features for TiDB Cloud.
 
 # AI Features
 
-The AI features in TiDB enable you to fully leverage advanced technologies for data exploration, search, and integration. From natural language-driven SQL query generation to high-performance vector search, TiDB combines database capabilities with modern AI features to power innovative applications. With support for popular AI frameworks, embedding models, and seamless integration with ORM libraries, TiDB offers a versatile platform for use cases such as semantic search and AI-powered analytics.
+The AI features in TiDB Cloud enable you to fully leverage advanced technologies for data exploration, search, and integration. From natural language-driven SQL query generation to high-performance vector search, TiDB combines database capabilities with modern AI features to power innovative applications. With support for popular AI frameworks, embedding models, and seamless integration with ORM libraries, TiDB offers a versatile platform for use cases such as semantic search and AI-powered analytics.
 
 This document highlights these AI features and how they enhance the TiDB experience.
 

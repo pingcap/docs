@@ -53,7 +53,7 @@ TiDB Cloud user accounts are the foundation for managing identity and access to 
 
     - For more information, see [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md).
 
-### Database Access Control
+### Database access control
 
 TiDB Cloud provides granular database access control through user-based and role-based permissions. These mechanisms allow administrators to securely manage access to data objects and schemas while ensuring compliance with organizational security policies.
 
