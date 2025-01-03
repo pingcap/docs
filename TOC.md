@@ -685,7 +685,7 @@
     - [Introduction](/tidb-distributed-execution-framework.md)
     - [TiDB Global Sort](/tidb-global-sort.md)
   - [System Variables](/system-variables.md)
-  - [System Variables References](/system-variables-references.md)
+  - [System Variable Reference](/system-variable-reference.md)
   - [Server Status Variables](/status-variables.md)
   - Configuration File Parameters
     - [tidb-server](/tidb-configuration-file.md)
