@@ -445,4 +445,3 @@ Besides the data files, you could also define named templates to replace the fil
 | view | `{{fn .DB}}.{{fn .Table}}-schema-view` |
 
 For instance, using `--output-filename-template '{{define "table"}}{{fn .Table}}.$schema{{end}}{{define "data"}}{{fn .Table}}.{{printf "%09d" .Index}}{{end}}'`, Dumpling will write the schema of the table `"db"."tbl:normal"` into the file `tbl%3Anormal.$schema.sql`, and data into the files like `tbl%3Anormal.000000000.sql`.
-
