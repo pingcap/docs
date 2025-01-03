@@ -9,7 +9,7 @@ TiDB Cloud provides a robust and flexible security framework designed to protect
 
 **Key components**
 
-- **Identity and Access Management (****IAM****)**: Secure and flexible authentication and permission management for both the TiDB Cloud console and database environments.
+- **Identity and Access Management (IAM)**: Secure and flexible authentication and permission management for both the TiDB Cloud console and database environments.
 
 - **Network access control**: Configurable connectivity options, including private endpoints, VPC peering, TLS encryption, and IP access lists.
 
