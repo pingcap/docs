@@ -410,3 +410,39 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--tidb-mem-quota-query`     | The memory limit of exporting SQL statements by a single line of Dumpling command, and the unit is byte. For v4.0.10 or later versions, if you do not set this parameter, TiDB uses the value of the `mem-quota-query` configuration item as the memory limit value by default. For versions earlier than v4.0.10, the parameter value defaults to 32 GB.  | 34359738368 |
 | `--params`                   | Specifies the session variable for the connection of the database to be exported. The required format is `"character_set_client=latin1,character_set_connection=latin1"`                                                                                                                                                           |
 |  `-c` or `--compress` |  Compresses the CSV and SQL data and table structure files exported by Dumpling. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`.  | "" |
+
+## Output filename template
+
+The `--output-filename-template` argument specifies how all files are named, before including the file extensions. It accepts strings in the [Go `text/template` syntax](https://golang.org/pkg/text/template/).
+
+The following fields are available to the template:
+
+* `.DB` — database name
+* `.Table` — table name or object name
+* `.Index` — when a table is split into multiple files, this is the 0-based sequence number indicating which part we are dumping
+
+The database and table names may contain special characters like `/` not acceptable in the file system. Thus, Dumpling also provided a function `fn` to percent-escape these special characters:
+
+* U+0000 to U+001F (control characters)
+* `/`, `\`, `<`, `>`, `:`, `"`, `*`, `?` (invalid Windows path characters)
+* `.` (database/table name separator)
+* `-`, if appeared as part of `-schema`
+
+For instance, using `--output-filename-template '{{fn .Table}}.{{printf "%09d" .Index}}'`, Dumpling will write the table `"db"."tbl:normal"` into files named like `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, etc.
+
+Besides the data files, you could also define named templates to replace the file name of the schema files. The default are configuration is:
+
+| Name | Content |
+|------|---------|
+| data | `{{fn .DB}}.{{fn .Table}}.{{.Index}}` |
+| schema | `{{fn .DB}}-schema-create` |
+| table | `{{fn .DB}}.{{fn .Table}}-schema` |
+| event | `{{fn .DB}}.{{fn .Table}}-schema-post` |
+| function | `{{fn .DB}}.{{fn .Table}}-schema-post` |
+| procedure | `{{fn .DB}}.{{fn .Table}}-schema-post` |
+| sequence | `{{fn .DB}}.{{fn .Table}}-schema-sequence` |
+| trigger | `{{fn .DB}}.{{fn .Table}}-schema-triggers` |
+| view | `{{fn .DB}}.{{fn .Table}}-schema-view` |
+
+For instance, using `--output-filename-template '{{define "table"}}{{fn .Table}}.$schema{{end}}{{define "data"}}{{fn .Table}}.{{printf "%09d" .Index}}{{end}}'`, Dumpling will write the schema of the table `"db"."tbl:normal"` into the file `tbl%3Anormal.$schema.sql`, and data into the files like `tbl%3Anormal.000000000.sql`.
+
