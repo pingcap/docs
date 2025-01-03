@@ -45,14 +45,14 @@ TiDB supports specifying the following expressions as default values in the `DEF
     * `DATE_FORMAT(NOW(), '%Y-%m-%d %H.%i.%s')`
     * `DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')`
 * `STR_TO_DATE('1980-01-01', '%Y-%m-%d')`
-* [`CURRENT_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md), [`CURRENT_DATE()`](/functions-and-operators/date-and-time-functions.md): both use the default fsp (fractional seconds precision)
+* [`CURRENT_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md), [`CURRENT_DATE()`](/functions-and-operators/date-and-time-functions.md): both use the default fractional seconds precision (fsp)
 * [`JSON_OBJECT()`](/functions-and-operators/json-functions.md), [`JSON_ARRAY()`](/functions-and-operators/json-functions.md), [`JSON_QUOTE()`](/functions-and-operators/json-functions.md)
 * [`NEXTVAL()`](/functions-and-operators/sequence-functions.md#nextval)
 * [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md)
 * [`UUID()`](/functions-and-operators/miscellaneous-functions.md#uuid), [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)
 * [`VEC_FROM_TEXT()`](/vector-search-functions-and-operators.md#vec_from_text)
 
-TiDB supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions to set the default values for these data types and not literals. The following is an example of `BLOB`:
+TiDB supports assigning default values to `BLOB`, `TEXT`, and `JSON` data types. However, you can only use expressions, not literals, to define default values for these data types. The following is an example of `BLOB`:
 
 ```sql
 CREATE TABLE t2 (
@@ -69,7 +69,7 @@ CREATE TABLE t3 (
 );
 ```
 
-For more details on how to use UUID, see [UUID best practices](/best-practices/uuid.md).
+For more information on how to use UUID, see [UUID best practices](/best-practices/uuid.md).
 
 An example for using JSON:
 
