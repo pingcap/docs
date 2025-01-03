@@ -1,9 +1,9 @@
 ---
-title: AI features
+title: AI Features
 summary: Learn about AI features for TiDB Cloud.
 ---
 
-# AI features
+# AI Features
 
 ## Chat2Query
 

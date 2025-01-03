@@ -3,8 +3,6 @@
 
 # Table of Contents
 
-- [Docs Home](https://docs.pingcap.com/)
-
 ## GET STARTED
 
 - Why TiDB Cloud
