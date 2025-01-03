@@ -5,7 +5,7 @@ summary: Learn how to integrate TiDB Vector Search with LlamaIndex.
 
 # Integrate Vector Search with LlamaIndex
 
-This tutorial demonstrates how to integrate the [vector search](/vector-search-overview.md) feature of TiDB with [LlamaIndex](https://www.llamaindex.ai).
+This tutorial demonstrates how to integrate the [vector search](/vector-search/vector-search-overview.md) feature of TiDB with [LlamaIndex](https://www.llamaindex.ai).
 
 <CustomContent platform="tidb">
 
@@ -330,5 +330,5 @@ Empty Response
 
 ## See also
 
-- [Vector Data Types](/vector-search-data-types.md)
-- [Vector Search Index](/vector-search-index.md)
+- [Vector Data Types](/vector-search/vector-search-data-types.md)
+- [Vector Search Index](/vector-search/vector-search-index.md)
