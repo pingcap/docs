@@ -18,39 +18,39 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Learn" icon="cloud1">
 
-[What is TiDB Self-Managed](https://docs.pingcap.com/tidb/dev/overview)
+[What is TiDB Self-Managed](/overview?target=_blank)
 
-[Features](https://docs.pingcap.com/tidb/dev/basic-features)
+[Features](/basic-features?target=_blank)
 
-[TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview)
+[TiFlash](/tiflash-overview?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB Self-Managed](https://docs.pingcap.com/tidb/dev/quick-start-with-tidb)
+[Try Out TiDB Self-Managed](/quick-start-with-tidb?target=_blank)
 
-[Try Out HTAP](https://docs.pingcap.com/tidb/dev/quick-start-with-htap)
+[Try Out HTAP](/quick-start-with-htap?target=_blank)
 
-[Import Example Database](https://docs.pingcap.com/tidb/dev/import-example-data)
+[Import Example Database](/import-example-data?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidb/dev/dev-guide-overview)
+[Developer Guide Overview](/dev-guide-overview?target=_blank)
 
-[Quick Start](https://docs.pingcap.com/tidb/dev/dev-guide-build-cluster-in-cloud)
+[Quick Start](/dev-guide-build-cluster-in-cloud?target=_blank)
 
-[Example Application](https://docs.pingcap.com/tidb/dev/dev-guide-sample-application-java-spring-boot)
+[Example Application](/dev-guide-sample-application-java-spring-boot?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Deploy" icon="deploy">
 
-[Software and Hardware Requirements](https://docs.pingcap.com/tidb/dev/hardware-and-software-requirements)
+[Software and Hardware Requirements](/hardware-and-software-requirements?target=_blank)
 
-[Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/dev/production-deployment-using-tiup)
+[Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup?target=_blank)
 
 [Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
@@ -58,71 +58,71 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Migration Overview](https://docs.pingcap.com/tidb/dev/migration-overview)
+[Migration Overview](/migration-overview?target=_blank)
 
-[Migration Tools](https://docs.pingcap.com/tidb/dev/migration-tools)
+[Migration Tools](/migration-tools?target=_blank)
 
-[Typical Scenarios](https://docs.pingcap.com/tidb/dev/migrate-aurora-to-tidb)
+[Typical Scenarios](/migrate-aurora-to-tidb?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Maintain" icon="maintain">
 
-[Upgrade a Cluster](https://docs.pingcap.com/tidb/dev/upgrade-tidb-using-tiup)
+[Upgrade a Cluster](/upgrade-tidb-using-tiup?target=_blank)
 
-[Scale a Cluster](https://docs.pingcap.com/tidb/dev/scale-tidb-using-tiup)
+[Scale a Cluster](/scale-tidb-using-tiup?target=_blank)
 
-[Back Up and Restore Cluster Data](https://docs.pingcap.com/tidb/dev/backup-and-restore-overview)
+[Back Up and Restore Cluster Data](/backup-and-restore-overview?target=_blank)
 
-[Daily Check](https://docs.pingcap.com/tidb/dev/daily-check)
+[Daily Check](/daily-check?target=_blank)
 
-[Maintain TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/maintain-tidb-using-tiup)
+[Maintain TiDB Using TiUP](/maintain-tidb-using-tiup?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/dev/tidb-monitoring-framework)
+[Use Prometheus and Grafana](/tidb-monitoring-framework?target=_blank)
 
-[Monitoring API](https://docs.pingcap.com/tidb/dev/tidb-monitoring-api)
+[Monitoring API](/tidb-monitoring-api?target=_blank)
 
-[Alert Rules](https://docs.pingcap.com/tidb/dev/alert-rules)
+[Alert Rules](/alert-rules?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](https://docs.pingcap.com/tidb/dev/performance-tuning-overview)
+[Tuning Overview](/performance-tuning-overview?target=_blank)
 
-[Tuning Methods](https://docs.pingcap.com/tidb/dev/performance-tuning-methods)
+[Tuning Methods](/performance-tuning-methods?target=_blank)
 
-[Tune OLTP Performance](https://docs.pingcap.com/tidb/dev/performance-tuning-practices)
+[Tune OLTP Performance](/performance-tuning-practices?target=_blank)
 
-[Tune Operating System](https://docs.pingcap.com/tidb/dev/tune-operating-system)
+[Tune Operating System](/tune-operating-system?target=_blank)
 
-[Tune Configurations](https://docs.pingcap.com/tidb/dev/configure-memory-usage)
+[Tune Configurations](/configure-memory-usage?target=_blank)
 
-[Tune SQL Performance](https://docs.pingcap.com/tidb/dev/sql-tuning-overview)
+[Tune SQL Performance](/sql-tuning-overview?target=_blank)
 
 </LearningPath>
 
 <LearningPath label="Tools" icon="doc7">
 
-[TiUP](https://docs.pingcap.com/tidb/dev/tiup-overview)
+[TiUP](/tiup-overview?target=_blank)
 
-[TiDB Operator](https://docs.pingcap.com/tidb/dev/tidb-operator-overview)
+[TiDB Operator](/tidb-operator-overview?target=_blank)
 
-[TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/dev/dm-overview)
+[TiDB Data Migration ](/dm-overview?target=_blank)
 
-[TiDB Lightning](https://docs.pingcap.com/tidb/dev/tidb-lightning-overview)
+[TiDB Lightning](/tidb-lightning-overview?target=_blank)
 
-[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)
+[Dumpling](/dumpling-overview?target=_blank)
 
-[TiCDC](https://docs.pingcap.com/tidb/dev/ticdc-overview)
+[TiCDC](/ticdc-overview?target=_blank)
 
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/dev/backup-and-restore-overview)
+[Backup & Restore (BR)](/backup-and-restore-overview?target=_blank)
 
-[PingCAP Clinic](https://docs.pingcap.com/tidb/dev/clinic-introduction)
+[PingCAP Clinic](/clinic-introduction?target=_blank)
 
 </LearningPath>
 
@@ -130,17 +130,17 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 [TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 
-[TiDB Configuration File Parameters](https://docs.pingcap.com/tidb/dev/tidb-configuration-file)
+[TiDB Configuration File Parameters](/tidb-configuration-file?target=_blank)
 
-[TiDB Command-line Flags](https://docs.pingcap.com/tidb/dev/command-line-flags-for-tidb-configuration)
+[TiDB Command-line Flags](/command-line-flags-for-tidb-configuration?target=_blank)
 
-[TiDB Control](https://docs.pingcap.com/tidb/dev/tidb-control)
+[TiDB Control](/tidb-control?target=_blank)
 
-[System Variables](https://docs.pingcap.com/tidb/dev/system-variables)
+[System Variables](/system-variables?target=_blank)
 
-[Release Notes](https://docs.pingcap.com/tidb/dev/release-notes)
+[Release Notes](/release-notes?target=_blank)
 
-[FAQ Summary](https://docs.pingcap.com/tidb/dev/faq-overview)
+[FAQ Summary](/faq-overview?target=_blank)
 
 </LearningPath>
 
