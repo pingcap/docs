@@ -765,7 +765,8 @@
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [TiDB Cloud Serverless FAQs](/tidb-cloud/serverless-faqs.md)
 - Release Notes
-  - [2024](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2025](/tidb-cloud/tidb-cloud-release-notes.md)
+  - [2024](/tidb-cloud/release-notes-2024.md)
   - [2023](/tidb-cloud/release-notes-2023.md)
   - [2022](/tidb-cloud/release-notes-2022.md)
   - [2021](/tidb-cloud/release-notes-2021.md)
