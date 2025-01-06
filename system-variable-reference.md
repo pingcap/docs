@@ -7,17 +7,17 @@ summary: A list of all TiDB system variables and their references in the documen
 
 This document lists all TiDB system variables and the files that reference them in the documentation. View the [System Variables](/system-variables.md) for more details of each variable.
 
-## Variables
+## Variable reference
 
 ### allow_auto_random_explicit_insert
 
 Referenced in:
 
 - [AUTO_RANDOM](/auto-random.md)
-- [TiDB 4.0.3 Release Notes](/releases/release-4.0.3.md)
-- [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
-- [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
 - [Insert Data](/develop/dev-guide-insert-data.md)
+- [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
+- [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
+- [TiDB 4.0.3 Release Notes](/releases/release-4.0.3.md)
 
 ### authentication_ldap_sasl_auth_method_name
 
@@ -143,38 +143,38 @@ Referenced in:
 
 Referenced in:
 
+- [AUTO_INCREMENT](/auto-increment.md)
 - [AUTO_RANDOM](/auto-random.md)
-- [Auto-Increment](/auto-increment.md)
-- [Error Codes](/error-codes.md)
-- [Bidirectional Replication Between TiDB Clusters](/ticdc/ticdc-bidirectional-replication.md)
+- [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+- [Error Codes and Troubleshooting](/error-codes.md)
+- [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
 - [TiDB 6.5.10 Release Notes](/releases/release-6.5.10.md)
 - [TiDB 3.0.9 Release Notes](/releases/release-3.0.9.md)
-- [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
 
 ### auto_increment_offset
 
 Referenced in:
 
+- [AUTO_INCREMENT](/auto-increment.md)
 - [AUTO_RANDOM](/auto-random.md)
-- [Auto-Increment](/auto-increment.md)
-- [Error Codes](/error-codes.md)
-- [Bidirectional Replication Between TiDB Clusters](/ticdc/ticdc-bidirectional-replication.md)
+- [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+- [Error Codes and Troubleshooting](/error-codes.md)
+- [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
 - [TiDB 6.5.10 Release Notes](/releases/release-6.5.10.md)
 - [TiDB 3.0.9 Release Notes](/releases/release-3.0.9.md)
-- [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
 
 ### autocommit
 
 Referenced in:
 
+- [Non-Transactional DML Statements](/non-transactional-dml.md)
 - [Transaction Overview](/transaction-overview.md)
-- [Pessimistic Transaction](/pessimistic-transaction.md)
+- [Pessimistic Transaction Mode](/pessimistic-transaction.md)
 - [Temporary Tables](/temporary-tables.md)
-- [Non-Transactional DML](/non-transactional-dml.md)
-- [Sample Application: Use Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
-- [Sample Application: Use MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
-- [TiDB 6.5.3 Release Notes](/releases/release-6.5.3.md)
+- [Connect to TiDB with Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
+- [Connect to TiDB with MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
 - [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
+- [TiDB 6.5.3 Release Notes](/releases/release-6.5.3.md)
 
 ### block_encryption_mode
 
@@ -186,36 +186,36 @@ Referenced in:
 
 Referenced in:
 
-- [GBK Character Set Support](/character-set-gbk.md)
-- [Dumpling Overview](/dumpling-overview.md)
-- [Information Schema](/information-schema/information-schema-views.md)
 - [Character Sets and Collations](/character-set-and-collation.md)
-- [SET NAMES](/sql-statements/sql-statement-set-names.md)
-- [Views](/views.md)
+- [Dumpling Overview](/dumpling-overview.md)
+- [GBK Character Set](/character-set-gbk.md)
+- [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 - [Use Views](/develop/dev-guide-use-views.md)
+- [Views](/views.md)
+- [`VIEWS` INFORMATION_SCHEMA Table](/information-schema/information-schema-views.md)
 
 ### character_set_connection
 
 Referenced in:
 
-- [GBK Character Set Support](/character-set-gbk.md)
-- [Dumpling Overview](/dumpling-overview.md)
 - [Character Sets and Collations](/character-set-and-collation.md)
-- [SET NAMES](/sql-statements/sql-statement-set-names.md)
+- [Dumpling Overview](/dumpling-overview.md)
+- [GBK Character Set](/character-set-gbk.md)
+- [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 
 ### character_set_database
 
 Referenced in:
 
 - [Character Sets and Collations](/character-set-and-collation.md)
-- [SET NAMES](/sql-statements/sql-statement-set-names.md)
+- [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 
 ### character_set_results
 
 Referenced in:
 
 - [Character Sets and Collations](/character-set-and-collation.md)
-- [SET NAMES](/sql-statements/sql-statement-set-names.md)
+- [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 - [TiDB 2.1 RC1 Release Notes](/releases/release-2.1-rc.1.md)
 
@@ -224,18 +224,18 @@ Referenced in:
 Referenced in:
 
 - [Character Sets and Collations](/character-set-and-collation.md)
-- [SET NAMES](/sql-statements/sql-statement-set-names.md)
+- [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 - [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
 
 ### collation_connection
 
 Referenced in:
 
-- [String Functions](/functions-and-operators/string-functions.md)
-- [Information Schema](/information-schema/information-schema-views.md)
 - [Character Sets and Collations](/character-set-and-collation.md)
-- [Views](/views.md)
+- [String Functions](/functions-and-operators/string-functions.md)
 - [Use Views](/develop/dev-guide-use-views.md)
+- [Views](/views.md)
+- [`VIEWS` INFORMATION_SCHEMA Table](/information-schema/information-schema-views.md)
 
 ### collation_database
 
@@ -248,22 +248,22 @@ Referenced in:
 Referenced in:
 
 - [Character Sets and Collations](/character-set-and-collation.md)
-- [TiDB 5.0.2 Release Notes](/releases/release-5.0.2.md)
 - [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
 - [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
+- [TiDB 5.0.2 Release Notes](/releases/release-5.0.2.md)
 
 ### cte_max_recursion_depth
 
 Referenced in:
 
-- [High Concurrency Best Practices](/best-practices/high-concurrency-best-practices.md)
+- [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
 - [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
 
 ### datadir
 
 Referenced in:
 
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### ddl_slow_threshold
 
@@ -286,8 +286,8 @@ Referenced in:
 Referenced in:
 
 - [Character Sets and Collations](/character-set-and-collation.md)
-- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 - [TiDB 8.1.2 Release Notes](/releases/release-8.1.2.md)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 
 ### default_password_lifetime
 
@@ -321,13 +321,13 @@ Referenced in:
 
 Referenced in:
 
-- [TiDB 2.1 RC1 Release Notes](/releases/release-2.1-rc.1.md): Added support for this variable.
+- [TiDB 2.1 RC1 Release Notes](/releases/release-2.1-rc.1.md)
 
 ### foreign_key_checks
 
 Referenced in:
 
-- [Foreign Key](/foreign-key.md)
+- [FOREIGN KEY Constraints](/foreign-key.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
 ### group_concat_max_len
@@ -341,93 +341,92 @@ Referenced in:
 
 Referenced in:
 
-- [Certificate-based Authentication](/certificate-authentication.md)
+- [Certificate-Based Authentication for Login](/certificate-authentication.md)
 
 ### have_ssl
 
 Referenced in:
 
-- [Certificate-based Authentication](/certificate-authentication.md)
+- [Certificate-Based Authentication for Login](/certificate-authentication.md)
 
 ### hostname
 
 Referenced in:
 
-- [The mysql.user Table](/mysql-schema/mysql-schema-user.md)
-- [Best Practices for HAProxy](/best-practices/haproxy-best-practices.md)
+- [Best Practices for Using HAProxy in TiDB](/best-practices/haproxy-best-practices.md)
+- [The `mysql.user` Table](/mysql-schema/mysql-schema-user.md)
 
 ### identity
 
 Referenced in:
 
 - [Configure SSO for TiDB Dashboard](/dashboard/dashboard-session-sso.md)
-- [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md)
 - [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
 - [Password Management](/password-management.md)
+- [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md)
 
 ### init_connect
 
 Referenced in:
 
-- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md): Improved MySQL compatibility with parsing check
-- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md): Added as a new feature
-- [TiDB 5.0.4 Release Notes](/releases/release-5.0.4.md): Added support for this system variable
-- [TiDB 4.0.14 Release Notes](/releases/release-4.0.14.md): Added support for this system variable and associated features
-
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
+- [TiDB 5.0.4 Release Notes](/releases/release-5.0.4.md)
+- [TiDB 4.0.14 Release Notes](/releases/release-4.0.14.md)
 
 ### innodb_lock_wait_timeout
 
 Referenced in:
 
-- [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
 - [Pessimistic Transaction Model](/pessimistic-transaction.md)
 - [TiKV Configuration File](/tikv-configuration-file.md)
+- [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
 - [TiDB 3.0.6 Release Notes](/releases/release-3.0.6.md)
 
 ### interactive_timeout
 
 Referenced in:
 
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
 - [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
-- [TiDB FAQs](/faq/manage-cluster-faq.md)
-- [TiDB 3.0 Beta Release Notes](/releases/release-3.0-beta.md)
 - [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [TiDB 3.0 Beta Release Notes](/releases/release-3.0-beta.md)
 
 ### last_insert_id
 
 Referenced in:
 
 - [AUTO_RANDOM](/auto-random.md)
+- [Connect to TiDB with mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
 - [Information Functions](/functions-and-operators/information-functions.md)
-- [Prepared Plan Cache](/sql-prepared-plan-cache.md)
-- [TiDB 2.1 RC2 Release Notes](/releases/release-2.1-rc.2.md)
-- [TiDB 2.1.17 Release Notes](/releases/release-2.1.17.md)
-- [TiDB 3.1.0-rc Release Notes](/releases/release-3.1.0-rc.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
 - [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
-- [Build a Simple CRUD App with TiDB and Ruby](/develop/dev-guide-sample-application-ruby-mysql2.md)
+- [TiDB 3.1.0-rc Release Notes](/releases/release-3.1.0-rc.md)
+- [TiDB 2.1.17 Release Notes](/releases/release-2.1.17.md)
+- [TiDB 2.1 RC2 Release Notes](/releases/release-2.1-rc.2.md)
 
 ### last_plan_from_binding
 
 Referenced in:
 
-- [SQL Plan Management](/sql-plan-management.md)
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
 - [TiDB 4.0.12 Release Notes](/releases/release-4.0.12.md)
 
 ### last_plan_from_cache
 
 Referenced in:
 
-- [SQL Prepared Plan Cache](/sql-prepared-plan-cache.md)
-- [SQL Non-prepared Plan Cache](/sql-non-prepared-plan-cache.md)
-- [Choose Indexes](/choose-index.md)
+- [Index Selection](/choose-index.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
 - [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
 
 ### last_sql_use_alloc
 
 Referenced in:
 
-- [What's New in TiDB 6.4.0](/releases/release-6.4.0.md): Added support for this variable.
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 
 ### license
 
@@ -439,42 +438,42 @@ Referenced in:
 
 Referenced in:
 
-- [TiDB Data Migration FAQs](/dm/dm-faq.md)
+- [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md)
 - [Handle Errors in TiDB Data Migration](/dm/dm-error-handling.md)
-- [DM Task Configuration File](/dm/task-configuration-file-full.md)
-- [TiDB Cloud Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB Data Migration FAQs](/dm/dm-faq.md)
 - [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md)
-- [Release Notes](/releases/release-6.1.0.md)
-- [Release Notes](/releases/release-5.2.4.md)
-- [Release Notes](/releases/release-3.0.2.md)
-- [Release Notes](/releases/release-2.1.5.md)
-- [Release Notes](/releases/release-2.1-rc.2.md)
-- [Release Notes](/releases/release-2.0.6.md)
+- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+- [TiDB 5.2.4 Release Notes](/releases/release-5.2.4.md)
+- [TiDB 3.0.2 Release Notes](/releases/release-3.0.2.md)
+- [TiDB 2.1.5 Release Notes](/releases/release-2.1.5.md)
+- [TiDB 2.1 RC2 Release Notes](/releases/release-2.1-rc.2.md)
+- [TiDB 2.0.6 Release Notes](/releases/release-2.0.6.md)
 
 ### max_connections
 
 Referenced in:
 
-- [TiDB FAQs](/faq/manage-cluster-faq.md)
-- [Dynamic Configuration](/dynamic-config.md)
-- [Integrate ProxySQL with TiDB](/develop/dev-guide-proxysql-integration.md)
-- [TiDB Cloud Data Migration Precheck and Troubleshooting](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
+- [Integrate TiDB with ProxySQL](/develop/dev-guide-proxysql-integration.md)
+- [Modify Configuration Dynamically](/dynamic-config.md)
+- [Precheck Errors, Migration Errors, and Alerts for Data Migration](https://docs.pingcap.com/tidbcloud/tidb-cloud-dm-precheck-and-troubleshooting)
+- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
 
 ### max_execution_time
 
 Referenced in:
 
-- [Best Practices for Java Applications](/best-practices/java-app-best-practices.md)
-- [SQL Plan Management](/sql-plan-management.md)
-- [SQL Prepared Plan Cache](/sql-prepared-plan-cache.md)
-- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
-- [SQL FAQs](/faq/sql-faq.md)
+- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Optimizer Hints](/optimizer-hints.md)
-- [Connection Parameters](/develop/dev-guide-connection-parameters.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
 - [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
-- [What's New in TiDB 6.4.0](/releases/release-6.4.0.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 - [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
 - [TiDB 2.1.14 Release Notes](/releases/release-2.1.14.md)
 
@@ -482,7 +481,7 @@ Referenced in:
 
 Referenced in:
 
-- [PREPARE | TiDB SQL Statement Reference](/sql-statements/sql-statement-prepare.md)
+- [The `PREPARE` SQL Statement](/sql-statements/sql-statement-prepare.md)
 - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 6.5.2 Release Notes](/releases/release-6.5.2.md)
 
@@ -490,14 +489,14 @@ Referenced in:
 
 Referenced in:
 
-- [MPP Query Execution](/explain-mpp.md)
+- [Explain Statements in the MPP Mode](/explain-mpp.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
 ### mpp_version
 
 Referenced in:
 
-- [MPP Query Execution](/explain-mpp.md)
+- [Explain Statements in the MPP Mode](/explain-mpp.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
 ### password_history
@@ -505,7 +504,7 @@ Referenced in:
 Referenced in:
 
 - [Password Management](/password-management.md)
-- [The MYSQL Schema](/mysql-schema/mysql-schema.md)
+- [The `mysql` Schema](/mysql-schema/mysql-schema.md)
 - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
@@ -522,21 +521,21 @@ Referenced in:
 
 - [Tune Region Performance](/tune-region-performance.md)
 - [TiDB Features](/basic-features.md)
-- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 
 ### plugin_dir
 
 Referenced in:
 
-- [TiDB Cloud Feature Limitations](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
 
 ### plugin_load
 
 Referenced in:
 
-- [TiDB Cloud Feature Limitations](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### port
 
@@ -546,7 +545,7 @@ Referenced in:
 - [TiFlash Deployment Topology](/tiflash-deployment-topology.md)
 - [TSO Configuration File](/tso-configuration-file.md)
 
-### rand_seed1
+<!-- ### rand_seed1
 
 Referenced in:
 
@@ -556,90 +555,99 @@ Referenced in:
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### require_secure_transport
 
 Referenced in:
 
-- [Enable TLS Between Clients and Servers](/enable-tls-between-clients-and-servers.md)
-- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
-- [TiDB 6.5.6 Release Notes](/releases/release-6.5.6.md)
-- [TiDB 7.1.2 Release Notes](/releases/release-7.1.2.md)
-- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
-- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
-- [TiDB Cloud Feature Limitations](/tidb-cloud/limited-sql-features.md)
-- [TiDB Cloud Release Notes - 2022](/tidb-cloud/release-notes-2022.md)
-- [Connect to TiDB Dedicated via TLS](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+<CustomContent platform="tidb-cloud">
 
-### skip_name_resolve
+- [Limited SQL features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
+- [TiDB Cloud Release Notes in 2022](/tidb-cloud/release-notes-2022.md)
+- [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+- [Enable TLS Between Clients and Servers](/enable-tls-between-clients-and-servers.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
+- [TiDB 7.1.2 Release Notes](/releases/release-7.1.2.md)
+- [TiDB 6.5.6 Release Notes](/releases/release-6.5.6.md)
+- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+
+</CustomContent>
+
+<!-- ### skip_name_resolve
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### socket
 
 Referenced in:
 
-- [HAProxy Best Practices](/best-practices/haproxy-best-practices.md)
+- [Best Practices for Using HAProxy in TiDB](/best-practices/haproxy-best-practices.md)
 - [SHOW CONFIG](/sql-statements/sql-statement-show-config.md)
 
 ### sql_mode
 
 Referenced in:
 
-- [Date and Time Types](/data-type-date-and-time.md)
-- [Avoid Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
-- [DM Open API](/dm/dm-open-api.md)
-- [DM Task Configuration File](/dm/task-configuration-file-full.md)
-- [SQL FAQs](/faq/sql-faq.md)
 - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
+- [Date and Time Types](/data-type-date-and-time.md)
+- [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md)
+- [Handle Unstable Result Set Errors](/develop/dev-guide-unstable-result-set.md)
+- [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
 - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
+- [Partitioning](/partitioned-table.md)
 - [Precision Math](/functions-and-operators/precision-math.md)
-- [Partitioned Table](/partitioned-table.md)
 - [Privilege Management](/privilege-management.md)
 - [Schema Object Names](/schema-object-names.md)
+- [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+- [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
+- [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)
+- [SQL FAQs](/faq/sql-faq.md)
 - [SQL Mode](/sql-mode.md)
-- [SET](/sql-statements/sql-statement-set-variable.md)
-- [SHOW ERRORS](/sql-statements/sql-statement-show-errors.md)
-- [SHOW WARNINGS](/sql-statements/sql-statement-show-warnings.md)
 - [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md)
-- [TiFlash Results Materialization](/tiflash/tiflash-results-materialization.md)
-- [Use TiDB to Read TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
+- [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
 - [User Account Management](/user-account-management.md)
+- [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
 
 ### sql_require_primary_key
 
 Referenced in:
 
-- [DM Task Configuration File](/dm/task-configuration-file-full.md)
-- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md): Added support for this variable.
+- [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
 ### sql_select_limit
 
 Referenced in:
 
-- [Prepared Plan Cache](/sql-prepared-plan-cache.md)
-- [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md): Added support for this variable as session and global variable.
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
 
 ### ssl_ca
 
 Referenced in:
 
-- [Certificate-Based Authentication](/certificate-authentication.md)
-- [Build a Simple CRUD App with Node.js and MySQL (mysql2)](/develop/dev-guide-sample-application-nodejs-mysql2.md)
-- [Build a Simple CRUD App with Node.js and MySQL (mysql)](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
-- [Build a Simple CRUD App with Node.js and Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
-- [Build a Simple CRUD App with Node.js and TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
-- [Build a Simple CRUD App with Python and Django](/develop/dev-guide-sample-application-python-django.md)
-- [Build a Simple CRUD App with Python and MySQL Connector](/develop/dev-guide-sample-application-python-mysql-connector.md)
-- [Build a Simple CRUD App with Python and Peewee](/develop/dev-guide-sample-application-python-peewee.md)
-- [Build a Simple CRUD App with Python and PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
-- [Build a Simple CRUD App with Python and SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
-- [Build a Simple CRUD App with Ruby and mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-- [Get Started with Vector Search Using Python](/vector-search-get-started-using-python.md)
-- [Integrate Vector Search with Jina AI Embedding](/vector-search-integrate-with-jinaai-embedding.md)
+- [Certificate-Based Authentication for Login](/certificate-authentication.md)
+- [Connect to TiDB with Django](/develop/dev-guide-sample-application-python-django.md)
+- [Connect to TiDB with MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
+- [Connect to TiDB with mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
+- [Connect to TiDB with mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
+- [Connect to TiDB with node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
+- [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md)
+- [Connect to TiDB with Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
+- [Connect to TiDB with PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
+- [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
+- [Connect to TiDB with TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
+- [Get Started with TiDB + AI via Python](/vector-search-get-started-using-python.md)
+- [Integrate TiDB Vector Search with Jina AI Embeddings API](/vector-search-integrate-with-jinaai-embedding.md)
 - [Integrate Vector Search with LangChain](/vector-search-integrate-with-langchain.md)
 - [Integrate Vector Search with LlamaIndex](/vector-search-integrate-with-llamaindex.md)
 - [Integrate Vector Search with SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
@@ -648,13 +656,13 @@ Referenced in:
 
 Referenced in:
 
-- [Certificate-Based Authentication](/certificate-authentication.md)
+- [Certificate-Based Authentication for Login](/certificate-authentication.md)
 
 ### ssl_key
 
 Referenced in:
 
-- [Certificate-Based Authentication](/certificate-authentication.md)
+- [Certificate-Based Authentication for Login](/certificate-authentication.md)
 
 ### system_time_zone
 
@@ -668,19 +676,19 @@ Referenced in:
 Referenced in:
 
 - [Configure Time Zone](/configure-time-zone.md)
-- [Prepared Plan Cache](/sql-prepared-plan-cache.md)
 - [Date and Time Types](/data-type-date-and-time.md)
 - [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [TiDB 2.1.8 Release Notes](/releases/release-2.1.8.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
 - [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
+- [TiDB 2.1.8 Release Notes](/releases/release-2.1.8.md)
 
 ### tidb_adaptive_closest_read_threshold
 
 Referenced in:
 
 - [Follower Read](/follower-read.md)
-- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
 ### tidb_allow_tiflash_cop
 
@@ -692,10 +700,10 @@ Referenced in:
 
 Referenced in:
 
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
-- [TiDB 4.0.0-rc.2 Release Notes](/releases/release-4.0.0-rc.2.md)
-- [TiDB 4.0.3 Release Notes](/releases/release-4.0.3.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [TiDB 4.0.3 Release Notes](/releases/release-4.0.3.md)
+- [TiDB 4.0.0-rc.2 Release Notes](/releases/release-4.0.0-rc.2.md)
 
 ### tidb_allow_fallback_to_tikv
 
@@ -707,30 +715,30 @@ Referenced in:
 
 Referenced in:
 
-- [Basic Features](/basic-features.md)
-- [CREATE INDEX | TiDB SQL Statement Reference](/sql-statements/sql-statement-create-index.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB Features](/basic-features.md)
 
 ### tidb_allow_mpp
 
 Referenced in:
 
-- [MPP Query Execution](/explain-mpp.md)
-- [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
-- [TiFlash Results Materialization](/tiflash/tiflash-results-materialization.md)
+- [Explain Statements in the MPP Mode](/explain-mpp.md)
 - [Explore HTAP](/explore-htap.md)
+- [TiDB TPC-H Performance Test Report -- v5.4](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
+- [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
+- [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
-- [TiDB TPC-H Performance Test Report -- v5.4](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
 
 ### tidb_allow_remove_auto_inc
 
 Referenced in:
 
 - [Auto-increment](/auto-increment.md)
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
+- [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
 - [MySQL Compatibility](/mysql-compatibility.md)
-- [Third-Party Tools Compatibility](/develop/dev-guide-third-party-tools-compatibility.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [TiDB 3.0.4 Release Notes](/releases/release-3.0.4.md)
 - [TiDB 2.1.18 Release Notes](/releases/release-2.1.18.md)
 
@@ -738,17 +746,17 @@ Referenced in:
 
 Referenced in:
 
+- [How to Run CH-benCHmark Test on TiDB](/benchmark/benchmark-tidb-using-ch.md)
+- [Stress Test TiDB Using TiUP Bench Component](/tiup/tiup-bench.md)
 - [TiDB Performance Tuning Configuration](/tidb-performance-tuning-config.md)
-- [TiUP Bench User Guide](/tiup/tiup-bench.md)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
-- [Benchmark TiDB Using ClickHouse](/benchmark/benchmark-tidb-using-ch.md)
 
 ### tidb_analyze_distsql_scan_concurrency
 
 Referenced in:
 
-- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 
 ### tidb_analyze_partition_concurrency
 
@@ -756,27 +764,27 @@ Referenced in:
 
 - [Statistics](/statistics.md)
 - [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
-- [TiDB 7.5.3 Release Notes](/releases/release-7.5.3.md)
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
-- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
 - [TiDB 8.1.1 Release Notes](/releases/release-8.1.1.md)
+- [TiDB 7.5.3 Release Notes](/releases/release-7.5.3.md)
+- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
 
 ### tidb_analyze_version
 
 Referenced in:
 
-- [Troubleshoot TiDB Out of Memory (OOM) Errors](/troubleshoot-tidb-oom.md)
 - [ANALYZE_STATUS](/information-schema/information-schema-analyze-status.md)
+- [SHOW ANALYZE STATUS](/sql-statements/sql-statement-show-analyze-status.md)
 - [Statistics](/statistics.md)
-- [Configure Memory Usage](/configure-memory-usage.md)
-- [SHOW ANALYZE STATUS | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-analyze-status.md)
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
+- [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
+- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.2.4 Release Notes](/releases/release-5.2.4.md)
 - [TiDB 5.1.4 Release Notes](/releases/release-5.1.4.md)
 - [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
-- [TiDB 5.2.4 Release Notes](/releases/release-5.2.4.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
-- [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
 
 ### tidb_analyze_skip_column_types
 
@@ -790,10 +798,10 @@ Referenced in:
 
 Referenced in:
 
-- [Troubleshoot TiDB CPU Performance Issues](/troubleshoot-cpu-issues.md)
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
-- [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statistics](/statistics.md)
+- [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+- [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
 - [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
 
 ### tidb_auto_analyze_partition_batch_size
@@ -801,24 +809,24 @@ Referenced in:
 Referenced in:
 
 - [Statistics](/statistics.md)
-- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 
 ### tidb_auto_analyze_ratio
 
 Referenced in:
 
-- [TiDB 2.1.8 Release Notes](/releases/release-2.1.8.md)
 - [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
+- [TiDB 2.1.8 Release Notes](/releases/release-2.1.8.md)
 
 ### tidb_auto_analyze_start_time
 
 Referenced in:
 
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statistics](/statistics.md)
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-- [Troubleshoot TiDB CPU Performance Issues](/troubleshoot-cpu-issues.md)
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
+- [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
 - [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
 
 ### tidb_auto_build_stats_concurrency
@@ -831,14 +839,14 @@ Referenced in:
 
 Referenced in:
 
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
 
 ### tidb_backoff_weight
 
 Referenced in:
 
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [TiDB 3.0.3 Release Notes](/releases/release-3.0.3.md)
 
 ### tidb_batch_commit
@@ -852,7 +860,7 @@ Referenced in:
 
 Referenced in:
 
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 
 ### tidb_batch_insert
 
@@ -860,26 +868,26 @@ Referenced in:
 
 - [TiDB 2.0.6 Release Notes](/releases/release-2.0.6.md)
 
-### tidb_batch_pending_tiflash_count
+<!-- ### tidb_batch_pending_tiflash_count
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tidb_broadcast_join_threshold_count
 
 Referenced in:
 
-- [MPP Execution](/explain-mpp.md)
-- [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+- [Explain Statements in the MPP Mode](/explain-mpp.md)
 - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+- [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 
 ### tidb_broadcast_join_threshold_size
 
 Referenced in:
 
-- [MPP Execution](/explain-mpp.md)
+- [Explain Statements in the MPP Mode](/explain-mpp.md)
 - [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
@@ -888,14 +896,14 @@ Referenced in:
 
 Referenced in:
 
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statistics](/statistics.md)
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
-- [TiDB Cloud v8.1 Performance Benchmarking with TPC-C](/tidb-cloud/v8.1-performance-benchmarking-with-tpcc.md)
-- [TiDB Cloud v6.5 Performance Benchmarking with TPC-C](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
-- [TiDB Cloud v7.1 Performance Benchmarking with TPC-C](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
-- [TiDB Cloud v7.5 Performance Benchmarking with TPC-C](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v8.1.0](https://docs.pingcap.com/tidbcloud/v8.5-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.5.0](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.1.3](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v6.5.6](https://docs.pingcap.com/tidbcloud/v6.5-performance-benchmarking-with-tpcc)
+- [TiDB TPC-H Performance Test Report — v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
 - [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
-- [TiDB 4.0 Performance Benchmarking with TPC-H](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
 
 ### tidb_build_sampling_stats_concurrency
 
@@ -908,8 +916,8 @@ Referenced in:
 
 Referenced in:
 
-- [SQL Plan Management](/sql-plan-management.md)
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
 - [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
 - [TiDB 4.0.0-rc.1 Release Notes](/releases/release-4.0.0-rc.1.md)
 
@@ -917,69 +925,78 @@ Referenced in:
 
 Referenced in:
 
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### tidb_check_mb4_value_in_utf8
 
 Referenced in:
 
-- [Character Set and Collation](/character-set-and-collation.md)
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
-- [Upgrade FAQs](/faq/upgrade-faq.md)
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [Character Sets and Collations](/character-set-and-collation.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
+- [Upgrade and After Upgrade FAQs](/faq/upgrade-faq.md)
 
 ### tidb_checksum_table_concurrency
 
 Referenced in:
 
 - [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md)
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 
 ### tidb_committer_concurrency
 
 Referenced in:
 
-- [Grafana TiDB Dashboard](/grafana-tidb-dashboard.md)
+<CustomContent platform="tidb">
+
+- [TiDB Monitoring Metrics](/grafana-tidb-dashboard.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
-- [TiDB Cloud Release Notes - 2022](/tidb-cloud/release-notes-2022.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [TiDB Cloud Release Notes in 2022](/tidb-cloud/release-notes-2022.md)
+
+</CustomContent>
 
 ### tidb_config
 
 Referenced in:
 
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
-- [TiDB 1.1 Beta Release Notes](/releases/release-1.1-beta.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
+- [TiDB 1.1 Beta Release Notes](/releases/release-1.1-beta.md)
 
 ### tidb_constraint_check_in_place
 
 Referenced in:
 
+- [COMMIT](/sql-statements/sql-statement-commit.md)
 - [Constraints](/constraints.md)
-- [Task Configuration File](/dm/task-configuration-file-full.md)
+- [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md)
 - [Error Codes and Troubleshooting](/error-codes.md)
-- [Pessimistic Transaction Model](/pessimistic-transaction.md)
+- [Pessimistic Transaction Mode](/pessimistic-transaction.md)
+- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Transaction Overview](/transaction-overview.md)
 - [TiDB 2.1.5 Release Notes](/releases/release-2.1.5.md)
-- [COMMIT | TiDB SQL Statement Reference](/sql-statements/sql-statement-commit.md)
-- [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
-- [TiDB Transaction Overview](/transaction-overview.md)
 
 ### tidb_constraint_check_in_place_pessimistic
 
 Referenced in:
 
 - [Constraints](/constraints.md)
-- [Dynamic Configuration](/dynamic-config.md)
 - [Error Codes and Troubleshooting](/error-codes.md)
-- [Pessimistic Transaction Model](/pessimistic-transaction.md)
-- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
-- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
-- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
-- [SAVEPOINT | TiDB SQL Statement Reference](/sql-statements/sql-statement-savepoint.md)
+- [Modify Configuration Dynamically](/dynamic-config.md)
+- [Pessimistic Transaction Mode](/pessimistic-transaction.md)
+- [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
 ### tidb_cost_model_version
 
@@ -1007,7 +1024,7 @@ Referenced in:
 
 Referenced in:
 
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
@@ -1023,7 +1040,7 @@ Referenced in:
 - [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
 - [Check Environment Before Deployment](/check-before-deployment.md)
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 - [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
@@ -1038,7 +1055,7 @@ Referenced in:
 Referenced in:
 
 - [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SQL FAQs](/faq/sql-faq.md)
 - [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
 
@@ -1058,7 +1075,7 @@ Referenced in:
 - [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
 - [CREATE INDEX | TiDB SQL Statement Reference](/sql-statements/sql-statement-create-index.md)
 - [ADMIN ALTER DDL | TiDB SQL Statement Reference](/sql-statements/sql-statement-admin-alter-ddl.md)
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SQL FAQs](/faq/sql-faq.md)
 - [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
 - [SQL Plan Management Best Practices](/explain-walkthrough.md)
@@ -1069,7 +1086,7 @@ Referenced in:
 
 - [SHOW VARIABLES | TiDB SQL Statement Reference](/sql-statements/sql-statement-show-variables.md)
 - [CREATE INDEX | TiDB SQL Statement Reference](/sql-statements/sql-statement-create-index.md)
-- [Limited SQL Features](/tidb-cloud/limited-sql-features.md)
+- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SQL FAQs](/faq/sql-faq.md)
 - [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
 
