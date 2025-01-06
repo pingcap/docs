@@ -3,6 +3,11 @@ title: System Variable Reference
 summary: A list of all TiDB system variables and their references in the documentation.
 ---
 
+<!-- Note: The content of the reference lists in this file is organized in the following order:
+- Put non-release-notes docs ahead of release notes.
+- For non-release-notes docs, put them in alphabetical order.
+- For release notes docs, put them in reverse order by version number. -->
+
 # System Variable Reference
 
 This document lists all TiDB system variables and the files that reference them in the documentation. View the [System Variables](/system-variables.md) for more details of each variable.
