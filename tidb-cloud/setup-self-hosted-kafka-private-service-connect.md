@@ -141,7 +141,7 @@ Go to the [VM instances](https://console.cloud.google.com/compute/instances) pag
 
     ```shell
     # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
-    wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
+    wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
@@ -444,7 +444,7 @@ You can download Kafka and OpenJDK in your Kafka client node.
 
 ```shell
 # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
-wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
+wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
 tar -zxf kafka_2.13-3.7.1.tgz
 wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
 tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
@@ -605,7 +605,7 @@ Assume that you already have a Kafka cluster running in the same region as the T
 
     ```shell
     # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
-    wget https://downloads.apache.org/kafka/3.7.1/kafka_2.13-3.7.1.tgz
+    wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
     tar -zxf openjdk-22.0.2_linux-x64_bin.tar.gz
