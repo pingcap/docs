@@ -37,22 +37,22 @@ TiCDC encodes a DDL event into a Kafka message, with both the key and value enco
 
 ```json
 {
-	"payload": {
-		"databaseName": "test"
-	},
-	"schema": {
-		"type": "struct",
-		"name": "io.debezium.connector.mysql.SchemaChangeKey",
-		"optional": false,
-		"version": 1,
-		"fields": [
-			{
-				"field": "databaseName",
-				"optional": false,
-				"type": "string"
-			}
-		]
-	}
+    "payload": {
+        "databaseName": "test"
+    },
+    "schema": {
+        "type": "struct",
+        "name": "io.debezium.connector.mysql.SchemaChangeKey",
+        "optional": false,
+        "version": 1,
+        "fields": [
+            {
+                "field": "databaseName",
+                "optional": false,
+                "type": "string"
+            }
+        ]
+    }
 }
 ```
 
@@ -71,322 +71,322 @@ The fields in the key only include database name. The fields are explained as fo
 
 ```json
 {
-	"payload": {
-		"source": {
-			"version": "2.4.0.Final",
-			"connector": "TiCDC",
-			"name": "test_cluster",
-			"ts_ms": 0,
-			"snapshot": "false",
-			"db": "test",
-			"table": "table1",
-			"server_id": 0,
-			"gtid": null,
-			"file": "",
-			"pos": 0,
-			"row": 0,
-			"thread": 0,
-			"query": null,
-			"commit_ts": 1,
-			"cluster_id": "test_cluster"
-		},
-		"ts_ms": 1701326309000,
-		"databaseName": "test",
-		"schemaName": null,
-		"ddl": "RENAME TABLE test.table1 to test.table2",
-		"tableChanges": [
-			{
-				"type": "ALTER",
-				"id": "\"test\".\"table2\",\"test\".\"table1\"",
-				"table": {
-					"defaultCharsetName": "",
-					"primaryKeyColumnNames": [
-						"id"
-					],
-					"columns": [
-						{
-							"name": "id",
-							"jdbcType": 4,
-							"nativeType": null,
-							"comment": null,
-							"defaultValueExpression": null,
-							"enumValues": null,
-							"typeName": "INT",
-							"typeExpression": "INT",
-							"charsetName": null,
-							"length": 0,
-							"scale": null,
-							"position": 1,
-							"optional": false,
-							"autoIncremented": false,
-							"generated": false
-						}
-					],
-					"comment": null
-				}
-			}
-		]
-	},
-	"schema": {
-		"optional": false,
-		"type": "struct",
-		"version": 1,
-		"name": "io.debezium.connector.mysql.SchemaChangeValue",
-		"fields": [
-			{
-				"field": "source",
-				"name": "io.debezium.connector.mysql.Source",
-				"optional": false,
-				"type": "struct",
-				"fields": [
-					{
-						"field": "version",
-						"optional": false,
-						"type": "string"
-					},
-					{
-						"field": "connector",
-						"optional": false,
-						"type": "string"
-					},
-					{
-						"field": "name",
-						"optional": false,
-						"type": "string"
-					},
-					{
-						"field": "ts_ms",
-						"optional": false,
-						"type": "int64"
-					},
-					{
-						"field": "snapshot",
-						"optional": true,
-						"type": "string",
-						"parameters": {
-							"allowed": "true,last,false,incremental"
-						},
-						"default": "false",
-						"name": "io.debezium.data.Enum",
-						"version": 1
-					},
-					{
-						"field": "db",
-						"optional": false,
-						"type": "string"
-					},
-					{
-						"field": "sequence",
-						"optional": true,
-						"type": "string"
-					},
-					{
-						"field": "table",
-						"optional": true,
-						"type": "string"
-					},
-					{
-						"field": "server_id",
-						"optional": false,
-						"type": "int64"
-					},
-					{
-						"field": "gtid",
-						"optional": true,
-						"type": "string"
-					},
-					{
-						"field": "file",
-						"optional": false,
-						"type": "string"
-					},
-					{
-						"field": "pos",
-						"optional": false,
-						"type": "int64"
-					},
-					{
-						"field": "row",
-						"optional": false,
-						"type": "int32"
-					},
-					{
-						"field": "thread",
-						"optional": true,
-						"type": "int64"
-					},
-					{
-						"field": "query",
-						"optional": true,
-						"type": "string"
-					}
-				]
-			},
-			{
-				"field": "ts_ms",
-				"optional": false,
-				"type": "int64"
-			},
-			{
-				"field": "databaseName",
-				"optional": true,
-				"type": "string"
-			},
-			{
-				"field": "schemaName",
-				"optional": true,
-				"type": "string"
-			},
-			{
-				"field": "ddl",
-				"optional": true,
-				"type": "string"
-			},
-			{
-				"field": "tableChanges",
-				"optional": false,
-				"type": "array",
-				"items": {
-					"name": "io.debezium.connector.schema.Change",
-					"optional": false,
-					"type": "struct",
-					"version": 1,
-					"fields": [
-						{
-							"field": "type",
-							"optional": false,
-							"type": "string"
-						},
-						{
-							"field": "id",
-							"optional": false,
-							"type": "string"
-						},
-						{
-							"field": "table",
-							"optional": true,
-							"type": "struct",
-							"name": "io.debezium.connector.schema.Table",
-							"version": 1,
-							"fields": [
-								{
-									"field": "defaultCharsetName",
-									"optional": true,
-									"type": "string"
-								},
-								{
-									"field": "primaryKeyColumnNames",
-									"optional": true,
-									"type": "array",
-									"items": {
-										"type": "string",
-										"optional": false
-									}
-								},
-								{
-									"field": "columns",
-									"optional": false,
-									"type": "array",
-									"items": {
-										"name": "io.debezium.connector.schema.Column",
-										"optional": false,
-										"type": "struct",
-										"version": 1,
-										"fields": [
-											{
-												"field": "name",
-												"optional": false,
-												"type": "string"
-											},
-											{
-												"field": "jdbcType",
-												"optional": false,
-												"type": "int32"
-											},
-											{
-												"field": "nativeType",
-												"optional": true,
-												"type": "int32"
-											},
-											{
-												"field": "typeName",
-												"optional": false,
-												"type": "string"
-											},
-											{
-												"field": "typeExpression",
-												"optional": true,
-												"type": "string"
-											},
-											{
-												"field": "charsetName",
-												"optional": true,
-												"type": "string"
-											},
-											{
-												"field": "length",
-												"optional": true,
-												"type": "int32"
-											},
-											{
-												"field": "scale",
-												"optional": true,
-												"type": "int32"
-											},
-											{
-												"field": "position",
-												"optional": false,
-												"type": "int32"
-											},
-											{
-												"field": "optional",
-												"optional": true,
-												"type": "boolean"
-											},
-											{
-												"field": "autoIncremented",
-												"optional": true,
-												"type": "boolean"
-											},
-											{
-												"field": "generated",
-												"optional": true,
-												"type": "boolean"
-											},
-											{
-												"field": "comment",
-												"optional": true,
-												"type": "string"
-											},
-											{
-												"field": "defaultValueExpression",
-												"optional": true,
-												"type": "string"
-											},
-											{
-												"field": "enumValues",
-												"optional": true,
-												"type": "array",
-												"items": {
-													"type": "string",
-													"optional": false
-												}
-											}
-										]
-									}
-								},
-								{
-									"field": "comment",
-									"optional": true,
-									"type": "string"
-								}
-							]
-						}
-					]
-				}
-			}
-		]
-	}
+    "payload": {
+        "source": {
+            "version": "2.4.0.Final",
+            "connector": "TiCDC",
+            "name": "test_cluster",
+            "ts_ms": 0,
+            "snapshot": "false",
+            "db": "test",
+            "table": "table1",
+            "server_id": 0,
+            "gtid": null,
+            "file": "",
+            "pos": 0,
+            "row": 0,
+            "thread": 0,
+            "query": null,
+            "commit_ts": 1,
+            "cluster_id": "test_cluster"
+        },
+        "ts_ms": 1701326309000,
+        "databaseName": "test",
+        "schemaName": null,
+        "ddl": "RENAME TABLE test.table1 to test.table2",
+        "tableChanges": [
+            {
+                "type": "ALTER",
+                "id": "\"test\".\"table2\",\"test\".\"table1\"",
+                "table": {
+                    "defaultCharsetName": "",
+                    "primaryKeyColumnNames": [
+                        "id"
+                    ],
+                    "columns": [
+                        {
+                            "name": "id",
+                            "jdbcType": 4,
+                            "nativeType": null,
+                            "comment": null,
+                            "defaultValueExpression": null,
+                            "enumValues": null,
+                            "typeName": "INT",
+                            "typeExpression": "INT",
+                            "charsetName": null,
+                            "length": 0,
+                            "scale": null,
+                            "position": 1,
+                            "optional": false,
+                            "autoIncremented": false,
+                            "generated": false
+                        }
+                    ],
+                    "comment": null
+                }
+            }
+        ]
+    },
+    "schema": {
+        "optional": false,
+        "type": "struct",
+        "version": 1,
+        "name": "io.debezium.connector.mysql.SchemaChangeValue",
+        "fields": [
+            {
+                "field": "source",
+                "name": "io.debezium.connector.mysql.Source",
+                "optional": false,
+                "type": "struct",
+                "fields": [
+                    {
+                        "field": "version",
+                        "optional": false,
+                        "type": "string"
+                    },
+                    {
+                        "field": "connector",
+                        "optional": false,
+                        "type": "string"
+                    },
+                    {
+                        "field": "name",
+                        "optional": false,
+                        "type": "string"
+                    },
+                    {
+                        "field": "ts_ms",
+                        "optional": false,
+                        "type": "int64"
+                    },
+                    {
+                        "field": "snapshot",
+                        "optional": true,
+                        "type": "string",
+                        "parameters": {
+                            "allowed": "true,last,false,incremental"
+                        },
+                        "default": "false",
+                        "name": "io.debezium.data.Enum",
+                        "version": 1
+                    },
+                    {
+                        "field": "db",
+                        "optional": false,
+                        "type": "string"
+                    },
+                    {
+                        "field": "sequence",
+                        "optional": true,
+                        "type": "string"
+                    },
+                    {
+                        "field": "table",
+                        "optional": true,
+                        "type": "string"
+                    },
+                    {
+                        "field": "server_id",
+                        "optional": false,
+                        "type": "int64"
+                    },
+                    {
+                        "field": "gtid",
+                        "optional": true,
+                        "type": "string"
+                    },
+                    {
+                        "field": "file",
+                        "optional": false,
+                        "type": "string"
+                    },
+                    {
+                        "field": "pos",
+                        "optional": false,
+                        "type": "int64"
+                    },
+                    {
+                        "field": "row",
+                        "optional": false,
+                        "type": "int32"
+                    },
+                    {
+                        "field": "thread",
+                        "optional": true,
+                        "type": "int64"
+                    },
+                    {
+                        "field": "query",
+                        "optional": true,
+                        "type": "string"
+                    }
+                ]
+            },
+            {
+                "field": "ts_ms",
+                "optional": false,
+                "type": "int64"
+            },
+            {
+                "field": "databaseName",
+                "optional": true,
+                "type": "string"
+            },
+            {
+                "field": "schemaName",
+                "optional": true,
+                "type": "string"
+            },
+            {
+                "field": "ddl",
+                "optional": true,
+                "type": "string"
+            },
+            {
+                "field": "tableChanges",
+                "optional": false,
+                "type": "array",
+                "items": {
+                    "name": "io.debezium.connector.schema.Change",
+                    "optional": false,
+                    "type": "struct",
+                    "version": 1,
+                    "fields": [
+                        {
+                            "field": "type",
+                            "optional": false,
+                            "type": "string"
+                        },
+                        {
+                            "field": "id",
+                            "optional": false,
+                            "type": "string"
+                        },
+                        {
+                            "field": "table",
+                            "optional": true,
+                            "type": "struct",
+                            "name": "io.debezium.connector.schema.Table",
+                            "version": 1,
+                            "fields": [
+                                {
+                                    "field": "defaultCharsetName",
+                                    "optional": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "field": "primaryKeyColumnNames",
+                                    "optional": true,
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "optional": false
+                                    }
+                                },
+                                {
+                                    "field": "columns",
+                                    "optional": false,
+                                    "type": "array",
+                                    "items": {
+                                        "name": "io.debezium.connector.schema.Column",
+                                        "optional": false,
+                                        "type": "struct",
+                                        "version": 1,
+                                        "fields": [
+                                            {
+                                                "field": "name",
+                                                "optional": false,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "field": "jdbcType",
+                                                "optional": false,
+                                                "type": "int32"
+                                            },
+                                            {
+                                                "field": "nativeType",
+                                                "optional": true,
+                                                "type": "int32"
+                                            },
+                                            {
+                                                "field": "typeName",
+                                                "optional": false,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "field": "typeExpression",
+                                                "optional": true,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "field": "charsetName",
+                                                "optional": true,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "field": "length",
+                                                "optional": true,
+                                                "type": "int32"
+                                            },
+                                            {
+                                                "field": "scale",
+                                                "optional": true,
+                                                "type": "int32"
+                                            },
+                                            {
+                                                "field": "position",
+                                                "optional": false,
+                                                "type": "int32"
+                                            },
+                                            {
+                                                "field": "optional",
+                                                "optional": true,
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "field": "autoIncremented",
+                                                "optional": true,
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "field": "generated",
+                                                "optional": true,
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "field": "comment",
+                                                "optional": true,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "field": "defaultValueExpression",
+                                                "optional": true,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "field": "enumValues",
+                                                "optional": true,
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "optional": false
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "field": "comment",
+                                    "optional": true,
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -419,7 +419,7 @@ The key fields of the preceding JSON data are explained as follows:
 | schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the column of table changes.   |
 | schema.name     | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.SchemaChangeValue"` format. |
 | schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
-| schema.type     | String  | The data type of the field. |      
+| schema.type     | String  | The data type of the field. |
 
 ### DML event
 
@@ -429,21 +429,21 @@ TiCDC encodes a DML event into a Kafka message, with both the key and value enco
 
 ```json
 {
-	"payload": {
-		"tiny": 1
-	},
-	"schema": {
-		"fields": [
-		{
-			"field":"tiny",
-			"optional":true,
-			"type":"int16"
-		}
-		],
-		"name": "test_cluster.test.table1.Key",
-		"optional": false,
-		"type":"struct"
-	}
+    "payload": {
+        "tiny": 1
+    },
+    "schema": {
+        "fields": [
+        {
+            "field":"tiny",
+            "optional":true,
+            "type":"int16"
+        }
+        ],
+        "name": "test_cluster.test.table1.Key",
+        "optional": false,
+        "type":"struct"
+    }
 }
 ```
 
@@ -461,102 +461,102 @@ The fields in the key only include primary key or unique index columns. The fiel
 
 ```json
 {
-	"payload": {
-		"source": {
-			"version": "2.4.0.Final",
-			"connector": "TiCDC",
-			"name": "test_cluster",
-			"ts_ms": 0,
-			"snapshot": "false",
-			"db": "test",
-			"table": "table1",
-			"server_id": 0,
-			"gtid": null,
-			"file": "",
-			"pos": 0,
-			"row": 0,
-			"thread": 0,
-			"query": null,
-			"commit_ts": 1,
-			"cluster_id": "test_cluster"
-		},
-		"ts_ms": 1701326309000,
-		"transaction": null,
-		"op": "u",
-		"before": { "tiny": 2 },
-		"after": { "tiny": 1 }
-	},
-	"schema": {
-		"type": "struct",
-		"optional": false,
-		"name": "test_cluster.test.table1.Envelope",
-		"version": 1,
-		"fields": [
-			{
-				"type": "struct",
-				"optional": true,
-				"name": "test_cluster.test.table1.Value",
-				"field": "before",
-				"fields": [{ "type": "int16", "optional": true, "field": "tiny" }]
-			},
-			{
-				"type": "struct",
-				"optional": true,
-				"name": "test_cluster.test.table1.Value",
-				"field": "after",
-				"fields": [{ "type": "int16", "optional": true, "field": "tiny" }]
-			},
-			{
-				"type": "struct",
-				"fields": [
-					{ "type": "string", "optional": false, "field": "version" },
-					{ "type": "string", "optional": false, "field": "connector" },
-					{ "type": "string", "optional": false, "field": "name" },
-					{ "type": "int64", "optional": false, "field": "ts_ms" },
-					{
-						"type": "string",
-						"optional": true,
-						"name": "io.debezium.data.Enum",
-						"version": 1,
-						"parameters": { "allowed": "true,last,false,incremental" },
-						"default": "false",
-						"field": "snapshot"
-					},
-					{ "type": "string", "optional": false, "field": "db" },
-					{ "type": "string", "optional": true, "field": "sequence" },
-					{ "type": "string", "optional": true, "field": "table" },
-					{ "type": "int64", "optional": false, "field": "server_id" },
-					{ "type": "string", "optional": true, "field": "gtid" },
-					{ "type": "string", "optional": false, "field": "file" },
-					{ "type": "int64", "optional": false, "field": "pos" },
-					{ "type": "int32", "optional": false, "field": "row" },
-					{ "type": "int64", "optional": true, "field": "thread" },
-					{ "type": "string", "optional": true, "field": "query" }
-				],
-				"optional": false,
-				"name": "io.debezium.connector.mysql.Source",
-				"field": "source"
-			},
-			{ "type": "string", "optional": false, "field": "op" },
-			{ "type": "int64", "optional": true, "field": "ts_ms" },
-			{
-				"type": "struct",
-				"fields": [
-					{ "type": "string", "optional": false, "field": "id" },
-					{ "type": "int64", "optional": false, "field": "total_order" },
-					{
-						"type": "int64",
-						"optional": false,
-						"field": "data_collection_order"
-					}
-				],
-				"optional": true,
-				"name": "event.block",
-				"version": 1,
-				"field": "transaction"
-			}
-		]
-	}
+    "payload": {
+        "source": {
+            "version": "2.4.0.Final",
+            "connector": "TiCDC",
+            "name": "test_cluster",
+            "ts_ms": 0,
+            "snapshot": "false",
+            "db": "test",
+            "table": "table1",
+            "server_id": 0,
+            "gtid": null,
+            "file": "",
+            "pos": 0,
+            "row": 0,
+            "thread": 0,
+            "query": null,
+            "commit_ts": 1,
+            "cluster_id": "test_cluster"
+        },
+        "ts_ms": 1701326309000,
+        "transaction": null,
+        "op": "u",
+        "before": { "tiny": 2 },
+        "after": { "tiny": 1 }
+    },
+    "schema": {
+        "type": "struct",
+        "optional": false,
+        "name": "test_cluster.test.table1.Envelope",
+        "version": 1,
+        "fields": [
+            {
+                "type": "struct",
+                "optional": true,
+                "name": "test_cluster.test.table1.Value",
+                "field": "before",
+                "fields": [{ "type": "int16", "optional": true, "field": "tiny" }]
+            },
+            {
+                "type": "struct",
+                "optional": true,
+                "name": "test_cluster.test.table1.Value",
+                "field": "after",
+                "fields": [{ "type": "int16", "optional": true, "field": "tiny" }]
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    { "type": "string", "optional": false, "field": "version" },
+                    { "type": "string", "optional": false, "field": "connector" },
+                    { "type": "string", "optional": false, "field": "name" },
+                    { "type": "int64", "optional": false, "field": "ts_ms" },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "name": "io.debezium.data.Enum",
+                        "version": 1,
+                        "parameters": { "allowed": "true,last,false,incremental" },
+                        "default": "false",
+                        "field": "snapshot"
+                    },
+                    { "type": "string", "optional": false, "field": "db" },
+                    { "type": "string", "optional": true, "field": "sequence" },
+                    { "type": "string", "optional": true, "field": "table" },
+                    { "type": "int64", "optional": false, "field": "server_id" },
+                    { "type": "string", "optional": true, "field": "gtid" },
+                    { "type": "string", "optional": false, "field": "file" },
+                    { "type": "int64", "optional": false, "field": "pos" },
+                    { "type": "int32", "optional": false, "field": "row" },
+                    { "type": "int64", "optional": true, "field": "thread" },
+                    { "type": "string", "optional": true, "field": "query" }
+                ],
+                "optional": false,
+                "name": "io.debezium.connector.mysql.Source",
+                "field": "source"
+            },
+            { "type": "string", "optional": false, "field": "op" },
+            { "type": "int64", "optional": true, "field": "ts_ms" },
+            {
+                "type": "struct",
+                "fields": [
+                    { "type": "string", "optional": false, "field": "id" },
+                    { "type": "int64", "optional": false, "field": "total_order" },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "data_collection_order"
+                    }
+                ],
+                "optional": true,
+                "name": "event.block",
+                "version": 1,
+                "field": "transaction"
+            }
+        ]
+    }
 }
 ```
 
@@ -584,13 +584,13 @@ TiCDC encodes a Checkpoint event into a Kafka message, with both the key and val
 
 ```json
 {
-	"payload": {},
-	"schema": {
-		"fields": [],
-		"optional": false,
-		"name": "test_cluster.watermark.Key",
-		"type": "struct"
-	}
+    "payload": {},
+    "schema": {
+        "fields": [],
+        "optional": false,
+        "name": "test_cluster.watermark.Key",
+        "type": "struct"
+    }
 }
 ```
 
@@ -604,160 +604,160 @@ The fields are explained as follows:
 
 ```json
 {
-	"payload": {
-		"source": {
-			"version": "2.4.0.Final",
-			"connector": "TiCDC",
-			"name": "test_cluster",
-			"ts_ms": 0,
-			"snapshot": "false",
-			"db": "",
-			"table": "",
-			"server_id": 0,
-			"gtid": null,
-			"file": "",
-			"pos": 0,
-			"row": 0,
-			"thread": 0,
-			"query": null,
-			"commit_ts": 3,
-			"cluster_id": "test_cluster"
-		},
-		"op": "m",
-		"ts_ms": 1701326309000,
-		"transaction": null
-	},
-	"schema": {
-		"type": "struct",
-		"optional": false,
-		"name": "test_cluster.watermark.Envelope",
-		"version": 1,
-		"fields": [
-			{
-				"type": "struct",
-				"fields": [
-					{
-						"type": "string",
-						"optional": false,
-						"field": "version"
-					},
-					{
-						"type": "string",
-						"optional": false,
-						"field": "connector"
-					},
-					{
-						"type": "string",
-						"optional": false,
-						"field": "name"
-					},
-					{
-						"type": "int64",
-						"optional": false,
-						"field": "ts_ms"
-					},
-					{
-						"type": "string",
-						"optional": true,
-						"name": "io.debezium.data.Enum",
-						"version": 1,
-						"parameters": {
-							"allowed": "true,last,false,incremental"
-						},
-						"default": "false",
-						"field": "snapshot"
-					},
-					{
-						"type": "string",
-						"optional": false,
-						"field": "db"
-					},
-					{
-						"type": "string",
-						"optional": true,
-						"field": "sequence"
-					},
-					{
-						"type": "string",
-						"optional": true,
-						"field": "table"
-					},
-					{
-						"type": "int64",
-						"optional": false,
-						"field": "server_id"
-					},
-					{
-						"type": "string",
-						"optional": true,
-						"field": "gtid"
-					},
-					{
-						"type": "string",
-						"optional": false,
-						"field": "file"
-					},
-					{
-						"type": "int64",
-						"optional": false,
-						"field": "pos"
-					},
-					{
-						"type": "int32",
-						"optional": false,
-						"field": "row"
-					},
-					{
-						"type": "int64",
-						"optional": true,
-						"field": "thread"
-					},
-					{
-						"type": "string",
-						"optional": true,
-						"field": "query"
-					}
-				],
-				"optional": false,
-				"name": "io.debezium.connector.mysql.Source",
-				"field": "source"
-			},
-			{
-				"type": "string",
-				"optional": false,
-				"field": "op"
-			},
-			{
-				"type": "int64",
-				"optional": true,
-				"field": "ts_ms"
-			},
-			{
-				"type": "struct",
-				"fields": [
-					{
-						"type": "string",
-						"optional": false,
-						"field": "id"
-					},
-					{
-						"type": "int64",
-						"optional": false,
-						"field": "total_order"
-					},
-					{
-						"type": "int64",
-						"optional": false,
-						"field": "data_collection_order"
-					}
-				],
-				"optional": true,
-				"name": "event.block",
-				"version": 1,
-				"field": "transaction"
-			}
-		]
-	}
+    "payload": {
+        "source": {
+            "version": "2.4.0.Final",
+            "connector": "TiCDC",
+            "name": "test_cluster",
+            "ts_ms": 0,
+            "snapshot": "false",
+            "db": "",
+            "table": "",
+            "server_id": 0,
+            "gtid": null,
+            "file": "",
+            "pos": 0,
+            "row": 0,
+            "thread": 0,
+            "query": null,
+            "commit_ts": 3,
+            "cluster_id": "test_cluster"
+        },
+        "op": "m",
+        "ts_ms": 1701326309000,
+        "transaction": null
+    },
+    "schema": {
+        "type": "struct",
+        "optional": false,
+        "name": "test_cluster.watermark.Envelope",
+        "version": 1,
+        "fields": [
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "version"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "connector"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "name"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "ts_ms"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "name": "io.debezium.data.Enum",
+                        "version": 1,
+                        "parameters": {
+                            "allowed": "true,last,false,incremental"
+                        },
+                        "default": "false",
+                        "field": "snapshot"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "db"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "sequence"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "table"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "server_id"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "gtid"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "file"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "pos"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": false,
+                        "field": "row"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "field": "thread"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "query"
+                    }
+                ],
+                "optional": false,
+                "name": "io.debezium.connector.mysql.Source",
+                "field": "source"
+            },
+            {
+                "type": "string",
+                "optional": false,
+                "field": "op"
+            },
+            {
+                "type": "int64",
+                "optional": true,
+                "field": "ts_ms"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "id"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "total_order"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "data_collection_order"
+                    }
+                ],
+                "optional": true,
+                "name": "event.block",
+                "version": 1,
+                "field": "transaction"
+            }
+        ]
+    }
 }
 ```
 
@@ -774,7 +774,6 @@ The key fields of the preceding JSON data are explained as follows:
 | schema.name    | String  | The name of the schema, in the `"{cluster-name}.watermark.Envelope"` format. |
 | schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | schema.type    | String  | The data type of the field.          |
-
 
 ### Data type mapping
 
@@ -797,5 +796,5 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 - Debezium converts charsetName to "utf8mb4" when column COLLATE is "utf8_unicode_ci" and CHARACTER is null, but TiCDC does not.
 
 - Debezium escapes character, but TiCDC does not. for example, Debezium encode ENUM elements ('c', 'd', 'g,''h') to ('c','d','g,\'\'h')
- 
+
 - TiCDC converts the default value of TIME like '1000-00-00 01:00:00.000' to "1000-00-00", but Debezium does not.
