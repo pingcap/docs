@@ -66,7 +66,6 @@ The fields in the key only include database name. The fields are explained as fo
 | schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | schema.version   | String  | The schema version.                                 |
 
-
 #### Value format
 
 ```json
@@ -451,11 +450,11 @@ The fields in the key only include primary key or unique index columns. The fiel
 
 | Field            | Type    | Description                                                                 |
 |:------------------|:--------|:----------------------------------------------------------------------------|
-| payload       | JSON    | The information about primary key or unique index columns. The key and value in each field represent the column name and its current value, respectively. |
-| schema.fields  | JSON    | The type information of each field in the payload, including the schema information of the row data before and after the change. |
-| schema.name`   | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Key"` format. |
-| schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
-| schema.type    | String  | The data type of the field.                                      |
+| `payload`       | JSON    | The information about primary key or unique index columns. The key and value in each field represent the column name and its current value, respectively. |
+| `schema.fields`  | JSON    | The type information of each field in the payload, including the schema information of the row data before and after the change. |
+| `schema.name`   | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Key"` format. |
+| `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| `schema.type`    | String  | The data type of the field.                                      |
 
 #### Value format
 
