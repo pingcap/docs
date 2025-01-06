@@ -21,14 +21,13 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Data types, functions, and operators
 
-<<<<<<< HEAD
 | Data types, functions, and operators | 8.4 | 8.3 | 8.2 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Numeric types](/data-type-numeric.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Date and time types](/data-type-date-and-time.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [String types](/data-type-string.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [JSON type](/data-type-json.md) | Y | Y | Y | Y | Y | Y | Y | E | E | E | E | E |
-| [Vectort types](/vector-search-data-types.md) | E | N | N | N | N | N | N | N | N | N | N | N |
+| [Vectort types](/vector-search/vector-search-data-types.md) | E | N | N | N | N | N | N | N | N | N | N | N |
 | [Control flow functions](/functions-and-operators/control-flow-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [String functions](/functions-and-operators/string-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -36,7 +35,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Bit functions and operators](/functions-and-operators/bit-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Cast functions and operators](/functions-and-operators/cast-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Encryption and compression functions](/functions-and-operators/encryption-and-compression-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Vector functions and operators](/vector-search-functions-and-operators.md) | E | N | N | N | N | N | N | N | N | N | N | N |
+| [Vector functions and operators](/vector-search/vector-search-functions-and-operators.md) | E | N | N | N | N | N | N | N | N | N | N | N |
 | [Information functions](/functions-and-operators/information-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [JSON functions](/functions-and-operators/json-functions.md) | Y | Y | Y | Y | Y | Y | Y | E | E | E | E | E |
 | [Aggregation functions](/functions-and-operators/aggregate-group-by-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -67,55 +66,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Foreign key](/constraints.md#foreign-key) | E | E | E | E | E | E | N | N | N | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | Y | Y | Y | Y | Y | N | N | N | N | N | N |
 | [Global index](/partitioned-table.md#global-indexes) | Y | E |  N |  N | N  | N | N | N | N | N | N | N |
-| [Vector index](/vector-search-index.md) | E | N | N | N | N | N | N | N | N | N | N | N |
-=======
-| Data types, functions, and operators | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Numeric types](/data-type-numeric.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Date and time types](/data-type-date-and-time.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [String types](/data-type-string.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [JSON type](/data-type-json.md) | Y | Y | Y | Y | Y | E | E | E | E | E |
-| [Vectort types](/vector-search/vector-search-data-types.md) | E | N | N | N | N | N | N | N | N | N |
-| [Control flow functions](/functions-and-operators/control-flow-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [String functions](/functions-and-operators/string-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Date and time functions](/functions-and-operators/date-and-time-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Bit functions and operators](/functions-and-operators/bit-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Cast functions and operators](/functions-and-operators/cast-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Encryption and compression functions](/functions-and-operators/encryption-and-compression-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Vector functions and operators](/vector-search/vector-search-functions-and-operators.md) | E | N | N | N | N | N | N | N | N | N |
-| [Information functions](/functions-and-operators/information-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [JSON functions](/functions-and-operators/json-functions.md) | Y | Y | Y | Y | Y | E | E | E | E | E |
-| [Aggregation functions](/functions-and-operators/aggregate-group-by-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Window functions](/functions-and-operators/window-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Operators](/functions-and-operators/operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Character sets and collations](/character-set-and-collation.md) [^1] | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [User-level lock](/functions-and-operators/locking-functions.md) | Y | Y | Y | Y | Y | Y | N | N | N | N |
-
-## Indexing and constraints
-
-| Indexing and constraints | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) [^2] | Y | Y | Y | Y | Y | E | E | E | E | E |
-| [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Use FastScan to accelerate queries in OLAP scenarios](/tiflash/use-fastscan.md) | Y | Y | Y | Y | E | N | N | N | N | N |
-| [RocksDB engine](/storage-engine/rocksdb-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Titan plugin](/storage-engine/titan-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental) | E | E | E | E | E | E | E | E | E | E |
-| [Use buckets to improve scan concurrency](/tune-region-performance.md#use-bucket-to-increase-concurrency) | E | E | E | E | E | E | N | N | N | N |
-| [Invisible indexes](/sql-statements/sql-statement-create-index.md#invisible-index) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Composite `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [`CHECK` constraints](/constraints.md#check) | Y | Y | Y | N | N | N | N | N | N | N |
-| [Unique indexes](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Clustered index on integer `PRIMARY KEY`](/clustered-indexes.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Clustered index on composite or non-integer key](/clustered-indexes.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) | Y | Y | Y | Y | N | N | N | N | N | N |
-| [Foreign key](/foreign-key.md) | Y | E | E | E | N | N | N | N | N | N |
-| [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | Y | Y | Y | N | N | N | N | N | N |
-| [Global index](/partitioned-table.md#global-indexes) | Y |  N | N  | N | N | N | N | N | N | N |
-| [Vector index](/vector-search/vector-search-index.md) | E | N | N | N | N | N | N | N | N | N |
->>>>>>> 90b3b375f3 (*: add a vector-search directory and update links (#19893))
+| [Vector index](/vector-search/vector-search-index.md) | E | N | N | N | N | N | N | N | N | N | N | N |
 
 ## SQL statements
 
@@ -144,10 +95,9 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Advanced SQL features
 
-<<<<<<< HEAD
 | Advanced SQL features | 8.4 | 8.3 | 8.2 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Vector search](/vector-search-overview.md) |  E |  N |  N |  N |  N  | N | N | N | N | N | N | N |
+| [Vector search](/vector-search/vector-search-overview.md) |  E |  N |  N |  N |  N  | N | N | N | N | N | N | N |
 | [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | E | E |
 | [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | Y | Y | Y | Y | Y | E | N | N | N | N | N | N |
 | [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) | E | N | N | N | N | N | N | N | N | N | N | N |
@@ -167,30 +117,6 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Placement Rules in SQL](/placement-rules-in-sql.md) | Y | Y | Y | Y | Y | Y | Y | Y | E | E | N | N |
 | [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner) | E | E | E | E | E | E | E | E | E | E | E | E |
 | [Runtime Filter](/runtime-filter.md) | Y | Y | Y | Y | Y | N | N | N | N | N | N | N |
-=======
-| Advanced SQL features | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Vector search](/vector-search/vector-search-overview.md) |  E |  N |  N  | N | N | N | N | N | N | N |
-| [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | E | E |
-| [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | Y | Y | Y | E | N | N | N | N | N | N |
-| [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) | E | N | N | N | N | N | N | N | N | N |
-| [SQL binding](/sql-plan-management.md#sql-binding) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Cross-database binding](/sql-plan-management.md#cross-database-binding) | Y | Y | N | N | N | N | N | N | N | N |
-| [Create bindings according to historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) | Y | Y | Y | Y | E | N | N | N | N | N |
-| [Coprocessor cache](/coprocessor-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Stale Read](/stale-read.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Follower reads](/follower-read.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Read historical data (tidb_snapshot)](/read-historical-data.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Optimizer hints](/optimizer-hints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [MPP execution engine](/explain-mpp.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [MPP execution engine - compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) | Y | Y | Y | Y | N | N | N | N | N | N |
-| [TiFlash Pipeline Model](/tiflash/tiflash-pipeline-model.md) | Y | Y | Y | N | N | N | N | N | N | N |
-| [TiFlash replica selection strategy](/system-variables.md#tiflash_replica_read-new-in-v730) | Y | Y | Y | N | N | N | N | N | N | N |
-| [Index Merge](/explain-index-merge.md) | Y | Y | Y | Y | Y | Y | Y | E | E | E |
-| [Placement Rules in SQL](/placement-rules-in-sql.md) | Y | Y | Y | Y | Y | Y | E | E | N | N |
-| [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner) | E | E | E | E | E | E | E | E | E | E |
-| [Runtime Filter](/runtime-filter.md) | Y | Y | Y | N | N | N | N | N | N | N |
->>>>>>> 90b3b375f3 (*: add a vector-search directory and update links (#19893))
 
 ## Data definition language (DDL)
 
