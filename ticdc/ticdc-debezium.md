@@ -14,7 +14,9 @@ When you use Kafka as the downstream sink, specify the `protocol` field as `debe
 There are three types of Events:
 
 DDL Event: Represents a DDL change record. It is sent after an upstream DDL statement is successfully executed. The DDL Event is sent to the MQ Partition with the index being 0.
+
 DML Event: Represents a row data change record. This type of Event is sent when a row change occurs. It contains the information about the row after the change occurs.
+
 WATERMARK Event: Represents a special time point. It indicates that the Events received before this point is complete.
 
 The configuration example for using the Debezium message format is as follows:
