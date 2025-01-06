@@ -234,6 +234,7 @@ The following TiKV configuration items can be modified dynamically:
 | storage.flow-control.soft-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject some write requests |
 | storage.flow-control.hard-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject all write requests |
 | `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
+| `import.num-threads` | The number of threads to process restore or import RPC requests (dynamic modification is supported starting from v8.1.2) |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
 | `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for 10 consecutive seconds, this Region should be split.|
 | `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for 10 consecutive seconds, this Region should be split. |
@@ -281,7 +282,8 @@ The following PD configuration items can be modified dynamically:
 | `cluster-version` | The cluster version |
 | `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MiB) |
 | `schedule.max-merge-region-keys` | Specifies the maximum numbers of the `Region Merge` keys |
-| `schedule.patrol-region-interval` | Determines the frequency at which `replicaChecker` checks the health state of a Region |
+| `schedule.patrol-region-interval` | Determines the frequency at which the checker inspects the health state of a Region |
+| `scheduler.patrol-region-worker-count` | Controls the number of concurrent operators created by the checker when inspecting the health state of a Region |
 | `schedule.split-merge-interval` | Determines the time interval of performing split and merge operations on the same Region |
 | `schedule.max-snapshot-count` | Determines the maximum number of snapshots that a single store can send or receive at the same time |
 | `schedule.max-pending-peer-count` | Determines the maximum number of pending peers in a single store |

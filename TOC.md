@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB Self-Managed
   - [What is TiDB Self-Managed](/overview.md)
-  - [TiDB 8.4 Release Notes](/releases/release-8.4.0.md)
+  - [TiDB 8.5 Release Notes](/releases/release-8.5.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -13,8 +13,8 @@
 - Get Started
   - [Quick Start with TiDB](/quick-start-with-tidb.md)
   - [Quick Start with HTAP](/quick-start-with-htap.md)
-  - [Learn TiDB SQL](/basic-sql-operations.md)
-  - [Learn HTAP](/explore-htap.md)
+  - [Explore SQL with TiDB](/basic-sql-operations.md)
+  - [Explore HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
@@ -82,23 +82,23 @@
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
   - Vector Search
-    - [Overview](/vector-search-overview.md)
+    - [Overview](/vector-search/vector-search-overview.md)
     - Get Started
-      - [Get Started with SQL](/vector-search-get-started-using-sql.md)
-      - [Get Started with Python](/vector-search-get-started-using-python.md)
+      - [Get Started with SQL](/vector-search/vector-search-get-started-using-sql.md)
+      - [Get Started with Python](/vector-search/vector-search-get-started-using-python.md)
     - Integrations
-      - [Overview](/vector-search-integration-overview.md)
+      - [Overview](/vector-search/vector-search-integration-overview.md)
       - AI Frameworks
-        - [LlamaIndex](/vector-search-integrate-with-llamaindex.md)
-        - [Langchain](/vector-search-integrate-with-langchain.md)
+        - [LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
+        - [Langchain](/vector-search/vector-search-integrate-with-langchain.md)
       - Embedding Models/Services
-        - [Jina AI](/vector-search-integrate-with-jinaai-embedding.md)
+        - [Jina AI](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
       - ORM Libraries
-        - [SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
-        - [peewee](/vector-search-integrate-with-peewee.md)
-        - [Django](/vector-search-integrate-with-django-orm.md)
-    - [Improve Performance](/vector-search-improve-performance.md)
-    - [Limitations](/vector-search-limitations.md)
+        - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
+        - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
+        - [Django](/vector-search/vector-search-integrate-with-django-orm.md)
+    - [Improve Performance](/vector-search/vector-search-improve-performance.md)
+    - [Limitations](/vector-search/vector-search-limitations.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -307,6 +307,7 @@
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
+    - [Configure TiDB for Optimal Performance](/tidb-performance-tuning-config.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
     - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
@@ -319,6 +320,7 @@
     - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
     - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
     - [TiKV Follower Read](/follower-read.md)
+    - [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
     - [Tune Region Performance](/tune-region-performance.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
@@ -889,7 +891,7 @@
       - [Date and Time Types](/data-type-date-and-time.md)
       - [String Types](/data-type-string.md)
       - [JSON Type](/data-type-json.md)
-      - [Vector Types](/vector-search-data-types.md)
+      - [Vector Types](/vector-search/vector-search-data-types.md)
     - Functions and Operators
       - [Overview](/functions-and-operators/functions-and-operators-overview.md)
       - [Type Conversion in Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md)
@@ -903,7 +905,7 @@
       - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
       - [Locking Functions](/functions-and-operators/locking-functions.md)
       - [Information Functions](/functions-and-operators/information-functions.md)
-      - [Vector Functions and Operators](/vector-search-functions-and-operators.md)
+      - [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
       - JSON Functions
         - [Overview](/functions-and-operators/json-functions.md)
         - [Functions That Create JSON](/functions-and-operators/json-functions/json-functions-create.md)
@@ -924,7 +926,7 @@
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
       - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
-    - [Vector Index](/vector-search-index.md)
+    - [Vector Index](/vector-search/vector-search-index.md)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)
     - [SQL Mode](/sql-mode.md)
@@ -1073,6 +1075,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v8.5
+    - [8.5.0](/releases/release-8.5.0.md)
   - v8.4
     - [8.4.0-DMR](/releases/release-8.4.0.md)
   - v8.3
@@ -1080,6 +1084,7 @@
   - v8.2
     - [8.2.0-DMR](/releases/release-8.2.0.md)
   - v8.1
+    - [8.1.2](/releases/release-8.1.2.md)
     - [8.1.1](/releases/release-8.1.1.md)
     - [8.1.0](/releases/release-8.1.0.md)
   - v8.0
@@ -1087,6 +1092,7 @@
   - v7.6
     - [7.6.0-DMR](/releases/release-7.6.0.md)
   - v7.5
+    - [7.5.5](/releases/release-7.5.5.md)
     - [7.5.4](/releases/release-7.5.4.md)
     - [7.5.3](/releases/release-7.5.3.md)
     - [7.5.2](/releases/release-7.5.2.md)

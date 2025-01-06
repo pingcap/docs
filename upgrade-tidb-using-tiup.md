@@ -6,15 +6,16 @@ aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-t
 
 # Upgrade TiDB Using TiUP
 
-This document applies to upgrading to TiDB v8.4.0 from the following versions: v6.1.x, v6.5.x, v7.1.x, v7.5.x, v8.1.x, v8.2.0, and v8.3.0
+This document applies to upgrading to TiDB v8.5.0 from the following versions: v6.1.x, v6.5.x, v7.1.x, v7.5.x, v8.1.x, v8.2.0, v8.3.0, and v8.4.0
 
 > **Warning:**
 >
-> 1. You cannot upgrade TiFlash online from versions earlier than 5.3 to 5.3 or later. Instead, you must first stop all the TiFlash instances of the early version, and then upgrade the cluster offline. If other components (such as TiDB and TiKV) do not support an online upgrade, follow the instructions in warnings in [Online upgrade](#online-upgrade).
-> 2. **DO NOT** run DDL statements during the upgrade process. Otherwise, the issue of undefined behavior might occur.
-> 3. **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes). Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
-> 4. If the TiDB version before upgrade is 7.1.0 or later, you can ignore the preceding warnings 2 and 3. For more information, see [limitations on using TiDB smooth upgrade](/smooth-upgrade-tidb.md#limitations).
-> 5. Be sure to read [limitations on user operations](/smooth-upgrade-tidb.md#limitations-on-user-operations) before upgrading your TiDB cluster using TiUP.
+> 1. Starting from v8.4.0, TiDB no longer supports CentOS 7 and Red Hat Enterprise Linux 7. It is recommended to use Rocky Linux 9.1 or later. Upgrading a TiDB cluster running on CentOS 7 or Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable. Before upgrading TiDB, ensure that your operating system version meets the [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements).
+> 2. You cannot upgrade TiFlash online from versions earlier than 5.3 to 5.3 or later. Instead, you must first stop all the TiFlash instances of the early version, and then upgrade the cluster offline. If other components (such as TiDB and TiKV) do not support an online upgrade, follow the instructions in warnings in [Online upgrade](#online-upgrade).
+> 3. **DO NOT** run DDL statements during the upgrade process. Otherwise, the issue of undefined behavior might occur.
+> 4. **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes). Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
+> 5. If the TiDB version before upgrade is 7.1.0 or later, you can ignore the preceding warnings 3 and 4. For more information, see [limitations on using TiDB smooth upgrade](/smooth-upgrade-tidb.md#limitations).
+> 6. Be sure to read [limitations on user operations](/smooth-upgrade-tidb.md#limitations-on-user-operations) before upgrading your TiDB cluster using TiUP.
 
 > **Note:**
 >
@@ -60,7 +61,7 @@ This section introduces the preparation works needed before upgrading your TiDB 
 
 ### Step 1: Review compatibility changes
 
-Review [the compatibility changes](/releases/release-8.4.0.md#compatibility-changes) in TiDB v8.4.0 release notes. If any changes affect your upgrade, take actions accordingly.
+Review [the compatibility changes](/releases/release-8.5.0.md#compatibility-changes) in TiDB v8.5.0 release notes. If any changes affect your upgrade, take actions accordingly.
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
@@ -135,7 +136,7 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 > Skip this step if one of the following situations applies:
 >
 > + You have not modified the configuration parameters of the original cluster. Or you have modified the configuration parameters using `tiup cluster` but no more modification is needed.
-> + After the upgrade, you want to use v8.4.0's default parameter values for the unmodified configuration items.
+> + After the upgrade, you want to use v8.5.0's default parameter values for the unmodified configuration items.
 
 1. Enter the `vi` editing mode to edit the topology file:
 
@@ -155,7 +156,7 @@ To avoid undefined behaviors or other unexpected problems during the upgrade, it
 
 - Cluster DDLs:
 
-    - If you use [smooth upgrade](/smooth-upgrade-tidb.md), you do not need to check the DDL operations of your TiDB cluster. You do not need to wait for the completion of DDL jobs or cancel ongoing DDL jobs.
+    - If you use [smooth upgrade](/smooth-upgrade-tidb.md) to upgrade TiDB to v8.1.0 or later, and the [Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) is enabled, it is recommended to disable the DXF before upgrading. Otherwise, the indexes added during the upgrade process might be inconsistent with the data, leading to upgrade failures. 
     - If you do not use [smooth upgrade](/smooth-upgrade-tidb.md), it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) statement to check whether ongoing DDL jobs exist. If an ongoing DDL job exists, wait for the completion of its execution or cancel it using the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) statement before performing an upgrade.
 
 - Cluster backup: It is recommended to execute the [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md) statement to check whether there is an ongoing backup or restore task in the cluster. If yes, wait for its completion before performing an upgrade.
@@ -195,12 +196,12 @@ If your application has a maintenance window for the database to be stopped for 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v8.4.0:
+For example, if you want to upgrade the cluster to v8.5.0:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v8.4.0
+tiup cluster upgrade <cluster-name> v8.5.0
 ```
 
 > **Note:**
@@ -246,7 +247,7 @@ tiup cluster upgrade -h | grep "version"
     tiup cluster stop <cluster-name>
     ```
 
-2. Use the `upgrade` command with the `--offline` option to perform the offline upgrade. Fill in the name of your cluster for `<cluster-name>` and the version to upgrade to for `<version>`, such as `v8.4.0`.
+2. Use the `upgrade` command with the `--offline` option to perform the offline upgrade. Fill in the name of your cluster for `<cluster-name>` and the version to upgrade to for `<version>`, such as `v8.5.0`.
 
     {{< copyable "shell-regular" >}}
 
@@ -275,7 +276,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v8.4.0
+Cluster version:    v8.5.0
 ```
 
 ## FAQ
@@ -330,7 +331,7 @@ Starting from v6.2.0, TiDB enables the [concurrent DDL framework](/ddl-introduct
 
 ### The evict leader has waited too long during the upgrade. How to skip this step for a quick upgrade?
 
-You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. In the following command, `<version>` is the version to upgrade to, such as `v8.4.0`.
+You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. In the following command, `<version>` is the version to upgrade to, such as `v8.5.0`.
 
 {{< copyable "shell-regular" >}}
 
@@ -345,5 +346,5 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install ctl:v8.4.0
+tiup install ctl:v8.5.0
 ```
