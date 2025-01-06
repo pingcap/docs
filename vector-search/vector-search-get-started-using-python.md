@@ -7,7 +7,7 @@ summary: Learn how to quickly develop an AI application that performs semantic s
 
 This tutorial demonstrates how to develop a simple AI application that provides **semantic search** features. Unlike traditional keyword search, semantic search intelligently understands the meaning behind your query and returns the most relevant result. For example, if you have documents titled "dog", "fish", and "tree", and you search for "a swimming animal", the application would identify "fish" as the most relevant result.
 
-Throughout this tutorial, you will develop this AI application using [TiDB Vector Search](/vector-search-overview.md), Python, [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python), and AI models.
+Throughout this tutorial, you will develop this AI application using [TiDB Vector Search](/vector-search/vector-search-overview.md), Python, [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python), and AI models.
 
 <CustomContent platform="tidb">
 
@@ -69,7 +69,7 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 ```
 
 - `tidb-vector`: the Python client for interacting with TiDB vector search.
-- [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/vector-search-overview.md#vector-embedding) from text.
+- [`sentence-transformers`](https://sbert.net): a Python library that provides pre-trained models for generating [vector embeddings](/vector-search/vector-search-overview.md#vector-embedding) from text.
 
 ### Step 3. Configure the connection string to the TiDB cluster
 
@@ -135,7 +135,7 @@ The following are descriptions for each parameter:
 
 ### Step 4. Initialize the embedding model
 
-An [embedding model](/vector-search-overview.md#embedding-model) transforms data into [vector embeddings](/vector-search-overview.md#vector-embedding). This example uses the pre-trained model [**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5) for text embedding. This lightweight model, provided by the `sentence-transformers` library, transforms text data into 384-dimensional vector embeddings.
+An [embedding model](/vector-search/vector-search-overview.md#embedding-model) transforms data into [vector embeddings](/vector-search/vector-search-overview.md#vector-embedding). This example uses the pre-trained model [**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5) for text embedding. This lightweight model, provided by the `sentence-transformers` library, transforms text data into 384-dimensional vector embeddings.
 
 To set up the model, copy the following code into the `example.py` file. This code initializes a `SentenceTransformer` instance and defines a `text_to_embedding()` function for later use.
 
@@ -247,5 +247,5 @@ Therefore, according to the output, the swimming animal is most likely a fish, o
 
 ## See also
 
-- [Vector Data Types](/vector-search-data-types.md)
-- [Vector Search Index](/vector-search-index.md)
+- [Vector Data Types](/vector-search/vector-search-data-types.md)
+- [Vector Search Index](/vector-search/vector-search-index.md)
