@@ -1098,12 +1098,12 @@ Configuration items related to Coprocessor.
 
 + The path of the directory where compiled coprocessor plugins are located. Plugins in this directory are automatically loaded by TiKV.
 + If this configuration item is not set, the coprocessor plugin is disabled.
-+ Default value: `"./coprocessors"`
++ Default value: None
 
 ### `enable-region-bucket` <span class="version-mark">New in v6.1.0</span>
 
 + Determines whether to divide a Region into smaller ranges called buckets. The bucket is used as the unit of the concurrent query to improve the scan concurrency. For more about the design of the bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md).
-+ Default value: false
++ Default value: None, which means disabled by default.
 
 > **Warning:**
 >
@@ -1338,7 +1338,7 @@ Configuration items related to RocksDB
 + Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. `0` means no limit.
 + Default value:
 
-    + When `storage.engine="raft-kv"`, the default value is `0`, which means no limit.
+    + When `storage.engine="raft-kv"`, the default value is none, which means no limit.
     + When `storage.engine="partitioned-raft-kv"`, the default value is 20% of the size of total system memory.
 
 + Unit: KiB|MiB|GiB
@@ -1460,7 +1460,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + Determines whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. When this configuration item is set, [`block-based-bloom-filter`](#block-based-bloom-filter) will be ignored.
 + Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
-+ Default value: `false`
++ Default value: None, which means disabled by default.
 
 ### `read-amp-bytes-per-bit`
 
@@ -1517,7 +1517,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `target-file-size-base`
 
 + The size of the target file at base level. This value is overridden by `compaction-guard-max-output-file-size` when the `enable-compaction-guard` value is `true`.
-+ Default value: `"8MiB"`
++ Default value: None, which means `"8MiB"` by default.
 + Minimum value: `0`
 + Unit: KiB|MiB|GiB
 
@@ -1600,7 +1600,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + Enables or disables the compaction guard, which is an optimization to split SST files at TiKV Region boundaries. This optimization can help reduce compaction I/O and allows TiKV to use larger SST file size (thus less SST files overall) and at the time efficiently clean up stale data when migrating Regions.
 + Default value for `defaultcf` and `writecf`: `true`
-+ Default value for `lockcf`: `false`
++ Default value for `lockcf`: None, which means disabled by default.
 
 ### `compaction-guard-min-output-file-size`
 
@@ -1632,13 +1632,13 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `ttl` <span class="version-mark">New in v7.2.0</span>
 
 + SST files with updates older than the TTL will be automatically selected for compaction. These SST files will go through the compaction in a cascading way so that they can be compacted to the bottommost level or file.
-+ Default value: `"0s"`, meaning that no SST file is selected by default.
++ Default value: None, meaning that no SST file is selected by default.
 + Unit: s(second)|h(hour)|d(day)
 
 ### `periodic-compaction-seconds` <span class="version-mark">New in v7.2.0</span>
 
 + The time interval for periodic compaction. SST files with updates older than this value will be selected for compaction and rewritten to the same level where these SST files originally reside.
-+ Default value: `"0s"`, meaning that periodic compaction is disabled by default.
++ Default value: None, meaning that periodic compaction is disabled by default.
 + Unit: s(second)|h(hour)|d(day)
 
 ## rocksdb.defaultcf.titan
@@ -1658,7 +1658,7 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 > - A value smaller than `32KiB` might affect the performance of range scans. However, if the workload primarily involves heavy writes and point queries, you can consider decreasing the value of `min-blob-size` for better performance.
 
 + The smallest value stored in a Blob file. Values smaller than the specified size are stored in the LSM-Tree.
-+ Default value: `"32KiB"`
++ Default value: None, which means `"32KiB"` by default.
 + Minimum value: `0`
 + Unit: KiB|MiB|GiB
 
