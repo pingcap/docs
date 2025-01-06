@@ -17,7 +17,6 @@ Pipelined DML is an experimental feature introduced in TiDB v8.0.0 to improve th
 
 - Memory limits: traditional DML operations might encounter out-of-memory (OOM) errors when handling large datasets.
 - Performance bottlenecks: large transactions are often inefficient and is prone to causing workload fluctuations.
-- Operational limits: TiDB memory limits make it difficult to execute ultra-large data processing tasks.
 
 With pipelined DML enabled, you can achieve the following:
 
