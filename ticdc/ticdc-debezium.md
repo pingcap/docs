@@ -403,7 +403,7 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.source.table     | String  |  The name of the table where the event occurs.   |
 | payload.tableChanges | Array | A structured representation of the entire table schema after the schema change. The tableChanges field contains an array that includes entries for each column of the table. Because the structured representation presents data in JSON or Avro format, consumers can easily read messages without first processing them through a DDL parser. |
 | payload.tableChanges.type     | String   | Describes the kind of change. The value is one of the following: CREATE Table created. ALTER Table modified. DROP Table deleted. |
-| payload.tableChanges.id     | String   | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of <old>,<new> table names. |
+| payload.tableChanges.id     | String   | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of `<old>` and `<new>` table names. |
 | payload.tableChanges.table.defaultCharsetName | string   | The charset of the table where the event occurs. |
 | payload.tableChanges.table.primaryKeyColumnNames | string   | List of columns that compose the table's primary key. |
 | payload.tableChanges.table.columns | Array   | Metadata for each column in the changed table. |
