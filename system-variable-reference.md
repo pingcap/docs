@@ -676,17 +676,6 @@ Referenced in:
 - [Configure Time Zone](/configure-time-zone.md)
 - [TiDB 3.0.8 Release Notes](/releases/release-3.0.8.md)
 
-### time_zone
-
-Referenced in:
-
-- [Configure Time Zone](/configure-time-zone.md)
-- [Date and Time Types](/data-type-date-and-time.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
-- [TiDB 2.1.8 Release Notes](/releases/release-2.1.8.md)
-
 ### tidb_adaptive_closest_read_threshold
 
 Referenced in:
@@ -2715,7 +2704,6 @@ Referenced in:
 - [Prepared Plan Cache](/sql-prepared-plan-cache.md)
 - [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
-- [TiDB 3.0.8 Release Notes](/releases/release-3.0.8.md)
 - [TiDB 2.1.8 Release Notes](/releases/release-2.1.8.md)
 
 ### timestamp
