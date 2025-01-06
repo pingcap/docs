@@ -22,7 +22,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | Encodes a record key. |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | Gets a digest for a query string. |
 | [`TIDB_IS_DDL_OWNER()`](#tidb_is_ddl_owner) | Checks whether or not the TiDB instance you are connected to is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
-| [`TIDB_MVCC_INFO()`](#tidb_mvcc_info) | Returns the MVCC (Multi-Version Concurrency Control) information about a key. |
+| [`TIDB_MVCC_INFO()`](#tidb_mvcc_info) | Returns the [MVCC (Multi-Version Concurrency Control)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) information about a key. |
 | [`TIDB_PARSE_TSO()`](#tidb_parse_tso) | Extracts the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
 | [`TIDB_PARSE_TSO_LOGICAL()`](#tidb_parse_tso_logical) | Extracts the logical timestamp from a TiDB TSO timestamp. |
 | [`TIDB_ROW_CHECKSUM()`](#tidb_row_checksum) | Queries the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
