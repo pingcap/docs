@@ -134,11 +134,11 @@ For each table with a TTL attribute, TiDB internally schedules a background job 
 ALTER TABLE orders TTL_JOB_INTERVAL = '48h';
 ```
 
-`TTL_JOB_INTERVAL` is set to `24h` by default (`1h` in v8.5 and the earlier version).
+`TTL_JOB_INTERVAL` is set to `24h` by default. The default value is `1h` in v8.5 and earlier versions.
 
-When executing a TTL job, TiDB will split the table into a number of tasks, with the Region being the smallest unit. These tasks will be executed distributedly. Typically, the maximum number of tasks for a single table is 64. But for larger clusters, such as those with more than 64 TiKV instances, the maximum number of tasks that a single table can be split into is equal to the number of TiKV instances. However, not all TTL jobs for all kinds of tables can be split into tasks. For more details on which kinds of tables' TTL jobs cannot be split into tasks, see [Limitations](#limitations).
+When executing a TTL job, TiDB splits the table into tasks, with the Region as the smallest unit. These tasks are executed distributedly. Typically, a single table can have up to 64 tasks. However, in larger clusters with more than 64 TiKV instances, the maximum number of tasks for a single table is equal to the number of TiKV instances. Note that not all TTL jobs for every type of table can be split into tasks. For more details on which table types are exceptions, see [Limitations](#limitations).
 
-TiDB also limits the number of concurrent TTL tasks at the cluster level. You can set the system variable [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700) to change this concurrency.
+TiDB also limits the number of concurrent TTL tasks at the cluster level. You can adjust this concurrency by setting the system variable [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700).
 
 To disable the execution of TTL jobs, in addition to setting the `TTL_ENABLE='OFF'` table option, you can also disable the execution of TTL jobs in the entire cluster by setting the [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) global variable:
 
