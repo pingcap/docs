@@ -1822,11 +1822,11 @@ Referenced in:
 - [TiDB Configuration File](/tidb-configuration-file.md)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 
-### tidb_hash_exchange_with_new_collation
+<!-- ### tidb_hash_exchange_with_new_collation
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tidb_hash_join_concurrency
 
@@ -1862,11 +1862,11 @@ Referenced in:
 - [TiDB TPC-C Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
 - [TiDB v5.0 TPC-C Performance Test Report](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
 
-### tidb_host_lookup_max_retries
+<!-- ### tidb_host_lookup_max_retries
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tidb_ignore_prepared_cache_close_stmt
 
@@ -1878,11 +1878,11 @@ Referenced in:
 - [Performance Tuning Methods](/performance-tuning-methods.md)
 - [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
 
-### tidb_ignore_index_hint
+<!-- ### tidb_ignore_index_hint
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tidb_index_join_batch_size
 
@@ -1951,11 +1951,11 @@ Referenced in:
 - [TiDB v5.4 TPC-H Performance Test Report](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
 - [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
 
-### tidb_last_txn_info
+<!-- ### tidb_last_txn_info
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tidb_max_auto_analyze_time
 
@@ -1986,7 +1986,7 @@ Referenced in:
 - [TiDB 2.1.18 Release Notes](/releases/release-2.1.18.md)
 - [TiDB 3.0.5 Release Notes](/releases/release-3.0.5.md)
 
-### tidb_max_disk_usage
+<!-- ### tidb_max_disk_usage
 
 Referenced in:
 
@@ -2002,7 +2002,7 @@ Referenced in:
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tidb_mem_oom_action
 
@@ -2027,11 +2027,11 @@ Referenced in:
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 - [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
 
-### tidb_mem_quota_apply_cache
+<!-- ### tidb_mem_quota_apply_cache
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tidb_mem_quota_binding_cache
 
@@ -2162,11 +2162,11 @@ Referenced in:
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
 
-### tidb_opt_broadcast_cartesian_join
+<!-- ### tidb_opt_broadcast_cartesian_join
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tidb_opt_concurrency_factor
 
@@ -2288,11 +2288,11 @@ Referenced in:
 
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 
-### tidb_opt_tiflash_concurrency_factor
+<!-- ### tidb_opt_tiflash_concurrency_factor
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tidb_opt_write_row_id
 
@@ -2607,7 +2607,7 @@ Referenced in:
 
 - [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 
-### tidb_window_pipelined_threshold
+<!-- ### tidb_window_pipelined_threshold
 
 Referenced in:
 
@@ -2623,7 +2623,7 @@ Referenced in:
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### tiflash_fastscan
 
@@ -2811,7 +2811,7 @@ Referenced in:
 - [Upgrade Monitoring Services](/upgrade-monitoring-services.md)
 - [Foreign Key](/foreign-key.md)
 
-### version_compile_machine
+<!-- ### version_compile_machine
 
 Referenced in:
 
@@ -2821,7 +2821,7 @@ Referenced in:
 
 Referenced in:
 
-- No direct references found
+- No direct references found -->
 
 ### wait_timeout
 
@@ -2842,10 +2842,10 @@ Referenced in:
 
 Referenced in:
 
-- [TiDB 2.1 RC1 Release Notes](/releases/release-2.1-rc.1.md): Added support for warning_count session variable
+- [TiDB 2.1 RC1 Release Notes](/releases/release-2.1-rc.1.md)
 
 ### windowing_use_high_precision
 
 Referenced in:
 
-- [Window Functions](/functions-and-operators/window-functions.md): Describes using windowing_use_high_precision to control precision mode
+- [Window Functions](/functions-and-operators/window-functions.md)
