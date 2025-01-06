@@ -145,5 +145,5 @@ In most cases, you can increase the system variable [`tidb_mem_quota_query`](/sy
 
 ## Learn More
 
-- [Batch Data Processing](/batch-processing.md)
+- [Batch Processing](/batch-processing.md)
 - [TiDB Memory Control](/configure-memory-usage.md)

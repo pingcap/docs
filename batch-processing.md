@@ -1,11 +1,11 @@
 ---
-title: Batch Data Processing
-summary: Introduces batch data processing features in TiDB, including Pipelined DML, non-transactional DML, the `IMPORT INTO` statement, and the deprecated batch-dml feature.
+title: Batch Processing
+summary: Introduces batch processing features in TiDB, including Pipelined DML, non-transactional DML, the `IMPORT INTO` statement, and the deprecated batch-dml feature.
 ---
 
-# Batch Data Processing
+# Batch Processing
 
-Batch data processing is a common and essential operation in real-world scenarios. It enables efficient handling of large datasets for tasks such as data migration, bulk imports, archiving, and large-scale updates.
+Batch processing is a common and essential operation in real-world scenarios. It enables efficient handling of large datasets for tasks such as data migration, bulk imports, archiving, and large-scale updates.
 
 To optimize performance for batch operations, TiDB introduces various features over its version evolution:
 
@@ -16,7 +16,7 @@ To optimize performance for batch operations, TiDB introduces various features o
     - Non-transactional DML (introduced in TiDB v6.1.0)
     - Batch-dml (deprecated)
 
-This document outlines the key benefits, limitations, and use cases of these features to help you choose the most suitable solution for efficient batch data processing.
+This document outlines the key benefits, limitations, and use cases of these features to help you choose the most suitable solution for efficient batch processing.
 
 ## Data import
 
@@ -56,7 +56,7 @@ Pipelined DML is an experimental feature introduced in TiDB v8.0.0. In v8.5.0, t
 
 #### Use cases
 
-- Suitable for general batch data processing tasks, such as bulk data inserts, updates, and deletions.
+- Suitable for general batch processing tasks, such as bulk data inserts, updates, and deletions.
 
 For more information, see [Pipelined DML](/pipelined-dml.md).
 
