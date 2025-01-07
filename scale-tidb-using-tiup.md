@@ -474,7 +474,7 @@ tiup cluster display <cluster-name>
 
 Access the monitoring platform at <http://10.0.1.5:3000> using your browser, and view the status of the cluster and the new nodes.
 
-After the scale-out, the cluster topology is as follows:
+After the scaling, the cluster topology is as follows:
 
 | Host IP   | Service   |
 |:----|:----|
