@@ -63,7 +63,7 @@ It is recommended that you use TiProxy for the scenarios that TiProxy is suitabl
 
 This section describes how to deploy and change TiProxy using TiUP.
 
-For other deployment methods, please refer to the following documents:
+For other deployment methods, refer to the following documents:
 
 - To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
 - To quickly deploy TiProxy locally using TiUP, see [Deploy TiProxy](/tiup/tiup-playground.md#deploy-tiproxy).
