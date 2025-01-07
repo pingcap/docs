@@ -215,7 +215,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 Cached tables are only suitable for scenarios with small tables, because TiDB loads the data of an entire table into memory, and the cached data becomes invalid after modification and needs to be reloaded.
 
-Currently, the size limit of a cached table is 64 MB in TiDB. If the table data exceeds 64 MB, executing `ALTER TABLE t CACHE` will fail.
+Currently, the size limit of a cached table is 64 MiB in TiDB. If the table data exceeds 64 MiB, executing `ALTER TABLE t CACHE` will fail.
 
 ## Compatibility restrictions with other TiDB features
 
