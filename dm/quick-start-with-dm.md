@@ -37,12 +37,12 @@ TiUP is a command-line tool for managing TiDB components. Its Playground feature
     Connect DM:      tiup dmctl --master-addr 127.0.0.1:8261
     TiDB Dashboard:  http://127.0.0.1:2379/dashboard
     ```
+
 4. Keep `tiup playground` running in the current terminal and open a new terminal for the next steps. This playground environment provides the running processes for the target TiDB database and the replication engine (DM-master and DM-worker). It will handle the data flow from MySQL (source) → DM (replication engine) → TiDB (target).
 
 ## Step 2: Prepare a Source Database (Optional)
 
 You can use one or multiple MySQL instances as a source database. If you do not have a MySQL-compatible instance already, you can create one for testing purposes follow these steps. If you already have a source MySQL database, skip to the Step 3.
-
 
 <SimpleTab>
 
@@ -193,7 +193,7 @@ On Enterprise Linux distros like CentOS, install MySQL 8.0 from the MySQL Yum re
         IDENTIFIED BY 'MyPassw0rd!';    
     ```
 
-6. For DM testing purposes, create a dedicated user and grant privileges:
+7. For DM testing purposes, create a dedicated user and grant privileges:
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -203,7 +203,7 @@ On Enterprise Linux distros like CentOS, install MySQL 8.0 from the MySQL Yum re
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
-7. Create sample data:
+8. Create sample data:
 
     ```sql
     CREATE DATABASE hello;
@@ -244,7 +244,6 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository:
     sudo systemctl start mysql
     ```
 
-
 4. Connect to MySQL as `root` via socket authentication:
 
     ```shell
@@ -281,7 +280,6 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository:
 </div>
 
 </SimpleTab>
-
 
 ## Step 3: Configure a TiDB DM Source
 
@@ -340,6 +338,7 @@ After configuring the source database, you can create a migration task in TiDB D
 Once the migration task is running, you can verify that the data replication is working as expected using the `dmctl` tool and by connecting to the target database to confirm that the data has been successfully replicated from the source MySQL database to the target TiDB cluster.
 
 1. Verify TiDB DM tasks status with:
+
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 query-status
     ```
@@ -355,8 +354,6 @@ Once the migration task is running, you can verify that the data replication is 
     ```sql
     SELECT * FROM hello.hello_tidb;
     ```
-
-
 
 ## Step 6: Clean Up (Optional)
 
@@ -419,12 +416,11 @@ Once the migration task is running, you can verify that the data replication is 
 
     </SimpleTab>
 
-3.	Remove the TiDB DM configuration files if they are no longer needed:
+3. Remove the TiDB DM configuration files if they are no longer needed:
 
     ```shell
     rm mysql-01.yaml tiup-playground-task.yaml
     ```
-
 
 4. If you no longer need TiUP, you can uninstall it:
 
