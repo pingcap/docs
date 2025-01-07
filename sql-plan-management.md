@@ -51,7 +51,7 @@ CREATE GLOBAL BINDING FOR SELECT * FROM orders USING SELECT /*+ use_index(orders
 >
 > Bindings have higher priority over manually added hints. Therefore, when you execute a statement containing a hint while a corresponding binding is present, the hint controlling the behavior of the optimizer does not take effect. However, other types of hints are still effective.
 
-Specifically, two types of these statements cannot be bound to execution plans due to syntax conflicts. A syntax error will be reported during creation. See the following examples:
+Specifically, two types of these statements cannot be bound to execution plans due to syntax conflicts. A syntax error will be reported during binding creation. See the following examples:
 
 ```sql
 -- Type one: Statements that get the Cartesian product by using the `JOIN` keyword and not specifying the associated columns with the `USING` keyword.
