@@ -10,7 +10,7 @@ TiDB Data Migration (DM) is a powerful tool that replicates databases from MySQL
 
 > **Note:**
 >
-> For production deployments, please refer to [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster.md).
+> For production deployments, please refer to [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
 
 ## Step 1: Set Up the Test Environment
 
@@ -432,7 +432,7 @@ Once the migration task is running, you can verify that the data replication is 
 
 Now that you successfully created a task that migrates data from a source MySQL database to a target TiDB in a testing environment, you can:
 
-- Explore [TiDB DM Features](/dm/dm-features.md)
-- Learn about [TiDB DM Architecture](/dm/dm-overview.md)
-- Set up [TiDB DM for a Proof of Concept or Production](/dm/deploy-a-dm-cluster.md)
+- Explore [TiDB DM Features](/dm/dm-overview.md)
+- Learn about [TiDB DM Architecture](/dm/dm-arch.md)
+- Set up [TiDB DM for a Proof of Concept or Production](/dm/deploy-a-dm-cluster-using-tiup.md)
 - Configure advanced [DM Tasks](/dm/dm-task-configuration-guide.md)
