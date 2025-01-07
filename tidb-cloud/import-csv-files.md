@@ -54,6 +54,10 @@ Because CSV files do not contain schema information, before importing data from 
         CREATE DATABASE mydb;
         ```
 
+        > **Note:**
+        >
+        > Each `${db_name}-schema-create.sql` file must only contain a single DDL statement for creating the database. Otherwise it might fail to create the database.
+
     2. Create table schema files for your source data.
 
         If you do not include the table schema files in the Amazon S3 or GCS directory where the CSV files are located, TiDB Cloud will not create the corresponding tables for you when you import the data.
@@ -73,7 +77,7 @@ Because CSV files do not contain schema information, before importing data from 
 
         > **Note:**
         >
-        > Each `${db_name}.${table_name}-schema.sql` file should only contain a single DDL statement. If the file contains multiple DDL statements, only the first one takes effect.
+        > Each `${db_name}.${table_name}-schema.sql` file must only contain a single DDL statement for creating the table. Otherwise it might fail to create the table.
 
 ## Step 3. Configure cross-account access
 
