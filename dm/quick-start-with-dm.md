@@ -41,7 +41,7 @@ TiUP is a command-line tool for managing TiDB components. Its Playground feature
 
 ## Step 2: Prepare a Source Database (Optional)
 
-You can use one or multiple MySQL instances as a source database. If you do not have a MySQL-compatible instance already, you can create one for testing purposes with the following procedure. If you already have a source MySQL database, you can skip to the Step 3.
+You can use one or multiple MySQL instances as a source database. If you do not have a MySQL-compatible instance already, you can create one for testing purposes follow these steps. If you already have a source MySQL database, skip to the Step 3.
 
 
 <SimpleTab>
@@ -350,7 +350,7 @@ Once the migration task is running, you can verify that the data replication is 
     mysql -uroot -h127.0.0.1 -P4000 --prompt 'tidb> '
     ```
 
-3. If you created the sample data in step 2, you can will see the `hello_tidb` table replicated from the MySQL source database to the TiDB target database:
+3. If you created the sample data in step 2, you will see the `hello_tidb` table replicated from the MySQL source database to the TiDB target database:
 
     ```sql
     SELECT * FROM hello.hello_tidb;
