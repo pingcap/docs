@@ -50,25 +50,29 @@ You can use one or multiple MySQL instances as a source database. If you do not 
 
 You can use Docker to quickly deploy a test MySQL 8.0 instance by following this procedure.
 
-1. Define a password for your source database and temporarilly add to an environment variable:
-
-    ```shell
-    export MYSQL_ROOT_PASSWORD=mysecretpwd
-    ```
-
-2. Run a MySQL 8 docker container with:
+1. Run a MySQL 8 docker container with:
 
     ```shell
     docker run --name mysql80 \
-        -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD \
+        -e MYSQL_ROOT_PASSWORD=MyPassw0rd! \
         -p 3306:3306 \
         -d mysql:8.0
     ```
 
-3. Connect to MySQL with:
+2. Connect to MySQL with:
 
     ```shell
-    docker exec -it mysql80 mysql -uroot -p$MYSQL_ROOT_PASSWORD
+    docker exec -it mysql80 mysql -uroot -pMyPassw0rd!
+    ```
+
+3. Create a dedicated user for DM with the necessary privileges:
+
+    ```sql
+    CREATE USER 'tidb-dm'@'%'
+        IDENTIFIED WITH mysql_native_password
+        BY 'MyPassw0rd!';
+
+    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
 4. Create sample data:
@@ -78,11 +82,11 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance by following this
     USE hello;
     
     CREATE TABLE hello_tidb (
-        id INT,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50)
     );
     
-    INSERT INTO hello_tidb VALUES (1, 'Hello World');
+    INSERT INTO hello_tidb (name) VALUES ('Hello World');
     
     SELECT * FROM hello_tidb;
     ```
@@ -102,7 +106,7 @@ If you are on macOS, you can quickly install and start MySQL 8.0 locally via [Ho
     brew install mysql@8.0
     ```
 
-2. (Optional) Link the `mysql` client command:
+2. Make MySQL commands accessible in the system path:
 
     ```shell
     brew link mysql@8.0 --force
@@ -114,24 +118,34 @@ If you are on macOS, you can quickly install and start MySQL 8.0 locally via [Ho
     brew services start mysql@8.0
     ```
 
-4. Connect to MySQL:
+4. Connect to MySQL as `root`:
 
     ```shell
-    mysql -u root -p
+    mysql -uroot
     ```
 
-5. Create sample data:
+5. For DM testing purposes, create a dedicated user and grant privileges:
+
+    ```sql
+    CREATE USER 'tidb-dm'@'%'
+        IDENTIFIED WITH mysql_native_password
+        BY 'MyPassw0rd!';
+
+    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
+    ```
+
+6. Create sample data:
 
     ```sql
     CREATE DATABASE hello;
     USE hello;
     
     CREATE TABLE hello_tidb (
-        id INT,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50)
     );
     
-    INSERT INTO hello_tidb VALUES (1, 'Hello World');
+    INSERT INTO hello_tidb (name) VALUES ('Hello World');
     
     SELECT * FROM hello_tidb;
     ```
@@ -151,7 +165,7 @@ On Enterprise Linux distros like CentOS, install MySQL 8.0 from the MySQL Yum re
 2. Install MySQL:
 
     ```shell
-    sudo yum install -y mysql-community-server
+    sudo yum install -y mysql-community-server --nogpgcheck
     ```
 
 3. Start MySQL:
@@ -166,24 +180,41 @@ On Enterprise Linux distros like CentOS, install MySQL 8.0 from the MySQL Yum re
     sudo grep 'temporary password' /var/log/mysqld.log
     ```
 
-5. Connect to MySQL with your new (or temporary) password:
+5. Connect to MySQL as `root` with the temporary password:
 
     ```shell
-    mysql -u root -p
+    mysql -uroot -p
     ```
 
-6. Create sample data:
+6. Reset MySQL `root` password: 
+
+    ```sql
+    ALTER USER 'root'@'localhost'
+        IDENTIFIED BY 'MyPassw0rd!';    
+    ```
+
+6. For DM testing purposes, create a dedicated user and grant privileges:
+
+    ```sql
+    CREATE USER 'tidb-dm'@'%'
+        IDENTIFIED WITH mysql_native_password
+        BY 'MyPassw0rd!';
+
+    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
+    ```
+
+7. Create sample data:
 
     ```sql
     CREATE DATABASE hello;
     USE hello;
     
     CREATE TABLE hello_tidb (
-        id INT,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50)
     );
     
-    INSERT INTO hello_tidb VALUES (1, 'Hello World');
+    INSERT INTO hello_tidb (name) VALUES ('Hello World');
     
     SELECT * FROM hello_tidb;
     ```
@@ -192,7 +223,7 @@ On Enterprise Linux distros like CentOS, install MySQL 8.0 from the MySQL Yum re
 
 <div label="Ubuntu">
 
-On Ubuntu, you can install MySQL 8.0 from the official Ubuntu repository:
+On Ubuntu, you can install MySQL from the official Ubuntu repository:
 
 1. Update your package list:
 
@@ -206,25 +237,29 @@ On Ubuntu, you can install MySQL 8.0 from the official Ubuntu repository:
     sudo apt-get install -y mysql-server
     ```
 
-3. Start MySQL (if it’s not already started):
+3. Check if `mysql` service is running, and start the service if necessary:
 
     ```shell
+    sudo systemctl status mysql
     sudo systemctl start mysql
-    sudo systemctl enable mysql
     ```
 
-4. (Optional) Secure your installation by running:
+
+4. Connect to MySQL as `root` via socket authentication:
 
     ```shell
-    sudo mysql_secure_installation
+    sudo mysql
     ```
 
-   Follow the on-screen prompts to set a root password and secure the installation.
+5. For DM testing purposes, create a dedicated user and grant privileges:
 
-5. Connect to MySQL:
+    ```sql
+    CREATE USER 'tidb-dm'@'%'
+        IDENTIFIED WITH mysql_native_password
+        BY 'MyPassw0rd!';
 
-    ```shell
-    mysql -u root -p
+
+    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';    
     ```
 
 6. Create sample data:
@@ -234,11 +269,11 @@ On Ubuntu, you can install MySQL 8.0 from the official Ubuntu repository:
     USE hello;
     
     CREATE TABLE hello_tidb (
-        id INT,
+        id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50)
     );
     
-    INSERT INTO hello_tidb VALUES (1, 'Hello World');
+    INSERT INTO hello_tidb (name) VALUES ('Hello World');
     
     SELECT * FROM hello_tidb;
     ```
@@ -254,12 +289,14 @@ With the source MySQL database ready and accessible, the next step is to configu
 
 1. Create a source configuration file `mysql-01.yaml`:
 
+    > **Note:** Here we assume the `tidb-dm` user with replication privileges has been created in the source database as shown in Step 2.
+
     ```yaml
     source-id: "mysql-01"
     from:
       host: "127.0.0.1"
-      user: "root"
-      password: "mysecretpwd"    # In production environments, it is recommended to use a password encrypted with dmctl.
+      user: "tidb-dm"
+      password: "MyPassw0rd!"    # In production environments, it is recommended to use a password encrypted with dmctl.
       port: 3306
     ```
 
@@ -349,6 +386,8 @@ Once the migration task is running, you can verify that the data replication is 
     brew uninstall mysql@8.0
     ```
 
+    > **Note:** If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/opt/homebrew/var/mysql`).
+
     </div>
 
     <div label="CentOS">
@@ -359,6 +398,8 @@ Once the migration task is running, you can verify that the data replication is 
     sudo systemctl stop mysqld
     sudo yum remove -y mysql-community-server
     ```
+
+    > **Note:** If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/var/lib/mysql`).
 
     </div>
 
@@ -371,6 +412,8 @@ Once the migration task is running, you can verify that the data replication is 
     sudo apt-get remove --purge -y mysql-server
     sudo apt-get autoremove -y
     ```
+
+    > **Note:** If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/var/lib/mysql`).
 
     </div>
 
