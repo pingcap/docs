@@ -30,7 +30,7 @@ TiDB implements Snapshot Isolation (SI) consistency, which it advertises as `REP
 
 For more information, see [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md).
 
-### Non-transactional DML statements
+## Non-transactional DML statements
 
 A non-transactional DML statement is a DML statement split into multiple SQL statements (which is, multiple batches) to be executed in sequence. It enhances the performance and ease of use in batch data processing at the expense of transactional atomicity and isolation.
 
