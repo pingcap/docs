@@ -21,7 +21,7 @@ Pipelined DML is an experimental feature introduced in TiDB v8.0.0 to improve th
 With pipelined DML enabled, you can achieve the following:
 
 - Perform large-scale data operations without being constrained by TiDB memory limits.
-- Maintain smoother workload and lower operation latency.
+- Maintain smoother workloads and lower operation latency.
 - Keep transaction memory usage predictable, typically within 1 GiB.
 
 It is recommended to enable Pipelined DML in the following scenarios:
@@ -138,7 +138,7 @@ Even with Pipelined DML enabled, you might still encounter query termination cau
 The query has been canceled due to exceeding the memory limit allowed for a single SQL query. Please try to narrow the query scope or increase the tidb_mem_quota_query limit, and then try again.
 ```
 
-This error occurs because Pipelined DML only controls the memory usage by data during transaction execution. However, the total memory consumed during statement execution also includes memory used by other components, such as executors. If the total memory required exceeds TiDB memory limit, out-of-memory (OOM) errors might still occur.
+This error occurs because Pipelined DML only controls the memory usage by data during transaction execution. However, the total memory consumed during statement execution also includes memory used by other components, such as executors. If the total memory required exceeds the TiDB memory limit, out-of-memory (OOM) errors might still occur.
 
 In most cases, you can increase the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) to a higher value to resolve this issue. A value of at least 2 GiB is recommended. For SQL statements with complex operators or involving large datasets, you might need to increase this value further.
 
