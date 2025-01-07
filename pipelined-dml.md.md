@@ -1,6 +1,6 @@
 ---
 title: Pipelined DML
-summary: Introduces the use cases, methods, limitations, and FAQs of Pipelined DML. Pipelined DML enhances TiDB's batch processing capabilities, allowing transaction sizes to bypass TiDB's memory limits.
+summary: Introduce the use cases, methods, limitations, and FAQs of Pipelined DML. Pipelined DML enhances TiDB's batch processing capabilities, allowing transaction sizes to bypass TiDB's memory limits.
 ---
 
 # Pipelined DML
@@ -26,9 +26,9 @@ With pipelined DML enabled, you can achieve the following:
 
 It is recommended to enable Pipelined DML in the following scenarios:
 
-- Processing data writes involving millions of rows or more
-- Encountering memory insufficient errors during DML operations
-- Experiencing noticeable workload fluctuations during large-scale data operations
+- Processing data writes involving millions of rows or more.
+- Encountering memory insufficient errors during DML operations.
+- Experiencing noticeable workload fluctuations during large-scale data operations.
 
 Note that although Pipelined DML significantly reduces memory usage during transaction processing, you still need to configure a [reasonable memory threshold](/system-variables.md#tidb_mem_quota_query) (at least 2 GiB recommended) to ensure other components (such as executors) function properly during large-scale data operations.
 
@@ -100,7 +100,7 @@ If the `pipelined` field in the output is `true`, it indicates that Pipelined DM
 ## Related configurations
 
 - The [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable controls whether Pipelined DML is enabled at the session level.
-- When [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit) configuration item behaves as if it is set to `false`.
+- When [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600) configuration item behaves as if it is set to `false`.
 - Transactions executed using Pipelined DML are not subject to the size limit specified by the TiDB configuration item [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit).
 - For large transactions executed using Pipelined DML, transaction duration might increase. In such cases, the maximum TTL for the transaction lock is the larger value of [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl) or 24 hours.
 - If the execution time of a transaction exceeds the value set by [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610), garbage collection (GC) might force the transaction to roll back, causing it to fail.
@@ -122,7 +122,7 @@ When TiDB rejects to execute a statement using Pipelined DML, it generates a war
 
 Common reasons:
 
-- The DML statement is not autocommited.
+- The DML statement is not autocommitted.
 - The statement involves unsupported table types, such as [temporary tables](/temporary-tables.md) or [cached tables](/cached-tables.md).
 - The operation involves foreign keys, and foreign key checks are enabled.
 
@@ -142,7 +142,7 @@ This error occurs because Pipelined DML only controls the memory usage by data d
 
 In most cases, you can increase the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) to a higher value to resolve this issue. A value of at least 2 GiB is recommended. For SQL statements with complex operators or involving large datasets, you might need to increase this value further.
 
-## Learn More
+## Learn more
 
 - [Batch Processing](/batch-processing.md)
 - [TiDB Memory Control](/configure-memory-usage.md)

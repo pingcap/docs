@@ -1,6 +1,6 @@
 ---
 title: Batch Processing
-summary: Introduces batch processing features in TiDB, including Pipelined DML, non-transactional DML, the `IMPORT INTO` statement, and the deprecated batch-dml feature.
+summary: Introduce batch processing features in TiDB, including Pipelined DML, non-transactional DML, the `IMPORT INTO` statement, and the deprecated batch-dml feature.
 ---
 
 # Batch Processing
@@ -20,7 +20,7 @@ This document outlines the key benefits, limitations, and use cases of these fea
 
 ## Data import
 
-The `IMPORT INTO` statement is designed for data import tasks. It allows you to quickly import data in formats such as CSV, SQL, or PARQUET into an empty TiDB table, without the need to deploy [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) separately.
+The `IMPORT INTO` statement is designed for data import tasks. It enables you to quickly import data in formats such as CSV, SQL, or PARQUET into an empty TiDB table, without the need to deploy [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) separately.
 
 ### Key benefits
 
@@ -62,7 +62,7 @@ For more information, see [Pipelined DML](/pipelined-dml.md).
 
 ### Non-transactional DML statements
 
-Non-transactional DML is introduced in TiDB v6.1.0. Initially, only the `DELETE` statement supports this feature. Starting from v6.5.0, `INSERT`, `REPLACE`, and `UPDATE` statements also supports this feature.
+Non-transactional DML is introduced in TiDB v6.1.0. Initially, only the `DELETE` statement supports this feature. Starting from v6.5.0, `INSERT`, `REPLACE`, and `UPDATE` statements also support this feature.
 
 #### Key benefits
 
