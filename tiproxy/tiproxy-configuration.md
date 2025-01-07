@@ -5,7 +5,9 @@ summary: Learn how to configure TiProxy.
 
 # TiProxy Configuration File
 
-This document introduces the configuration parameters related to the deployment and use of TiProxy. The following is an example configuration:
+This document introduces the configuration parameters related to the deployment and use of TiProxy. For the configurations of TiUP deployment topology, see [tiproxy-servers configurations](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers).
+
+The following is an example configuration:
 
 ```toml
 [proxy]
@@ -42,8 +44,17 @@ Configuration for SQL port.
 
 + Default value: `0.0.0.0:6000`
 + Support hot-reload: no
-+ SQL gateway address. The format is `<ip>:<port>`.
++ The listening address of the SQL service. The format is `<ip>:<port>`. This configuration item is automatically set when you deploy TiProxy using TiUP or TiDB Operator.
 
+<<<<<<< HEAD
+=======
+#### `advertise-addr`
+
++ Default value: `""`
++ Support hot-reload: no
++ Specifies the address that other components use to connect to this TiProxy instance. This address only contains the host name, not the port. This address might be different from the host name in [`addr`](#addr). For example, if the `Subject Alternative Name` in TiProxy's TLS certificate contains only the domain name, other components will fail to connect to TiProxy via IP. This configuration item is automatically set when you deploy TiProxy using TiUP or TiDB Operator. If not set, the external IP address of the TiProxy instance is used.
+
+>>>>>>> b89d2702a2 (tiproxy: improve deployment instructions for deploying TiProxy (#19904))
 #### `graceful-wait-before-shutdown`
 
 + Default value: `0`
@@ -101,6 +112,64 @@ Configurations for HTTP gateway.
 + Possible values: `""`, `"v2"`
 + Enable the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) on the port. `"v2"` indicates using the PROXY protocol version 2, and `""` indicates disabling the PROXY protocol.
 
+<<<<<<< HEAD
+=======
+### balance
+
+Configurations for the load balancing policy of TiProxy.
+
+#### `label-name`
+
++ Default value: `""`
++ Support hot-reload: yes
++ Specifies the label name used for [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing). TiProxy matches the label values of TiDB servers based on this label name and prioritizes routing requests to TiDB servers with the same label value as itself.
++ The default value of `label-name` is an empty string, indicating that label-based load balancing is not used. To enable this load balancing policy, you need to set this configuration item to a non-empty string and configure both [`labels`](#labels) in TiProxy and [`labels`](/tidb-configuration-file.md#labels) in TiDB. For more information, see [Label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
+
+#### `policy`
+
++ Default value: `resource`
++ Support hot-reload: yes
++ Possible values: `resource`, `location`, `connection`
++ Specifies the load balancing policy. For the meaning of each possible value, see [TiProxy load balancing policies](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies).
+
+### ha
+
+High availability configurations for TiProxy.
+
+#### `virtual-ip`
+
++ Default value: `""`
++ Support hot-reload: no
++ Specifies the virtual IP address in the CIDR format, such as `"10.0.1.10/24"`. In a cluster with multiple TiProxy instances, only one instance binds to the virtual IP. If this instance goes offline, another TiProxy instance will automatically bind to the IP, ensuring clients can always connect to an available TiProxy through the virtual IP.
+
+The following is an example configuration:
+
+```yaml
+server_configs:
+  tiproxy:
+    ha.virtual-ip: "10.0.1.10/24"
+    ha.interface: "eth0"
+```
+
+> **Note:**
+>
+> - Virtual IP is only supported on Linux operating systems.
+> - The Linux user running TiProxy must have permission to bind IP addresses.
+> - The virtual IP and the IPs of all TiProxy instances must be within the same CIDR range.
+
+#### `interface`
+
++ Default value: `""`
++ Support hot-reload: no
++ Specifies the network interface to bind the virtual IP to, such as `"eth0"`. The virtual IP will be bound to a TiProxy instance only when both [`ha.virtual-ip`](#virtual-ip) and `ha.interface` are set.
+
+### `labels`
+
++ Default value: `{}`
++ Support hot-reload: yes
++ Specifies server labels. For example, `{ zone = "us-west-1", dc = "dc1" }`.
+
+>>>>>>> b89d2702a2 (tiproxy: improve deployment instructions for deploying TiProxy (#19904))
 ### log
 
 #### `level`

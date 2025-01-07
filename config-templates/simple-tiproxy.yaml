@@ -5,6 +5,18 @@ global:
   ssh_port: 22
   deploy_dir: "/tidb-deploy"
   data_dir: "/tidb-data"
+<<<<<<< HEAD
+=======
+component_versions:
+  tiproxy: "v1.2.0"
+server_configs:
+  tidb:
+    graceful-wait-before-shutdown: 15
+  tiproxy:
+    ha.virtual-ip: "10.0.1.10/24"
+    ha.interface: "eth0"
+    graceful-wait-before-shutdown: 15
+>>>>>>> b89d2702a2 (tiproxy: improve deployment instructions for deploying TiProxy (#19904))
 
 pd_servers:
   - host: 10.0.1.1
@@ -23,6 +35,22 @@ tikv_servers:
 
 tiproxy_servers:
   - host: 10.0.1.11
+<<<<<<< HEAD
+=======
+    deploy_dir: "/tiproxy-deploy"
+    data_dir: "/tiproxy-data"
+    port: 6000
+    status_port: 3080
+    config:
+      labels: { zone: "east" }
+  - host: 10.0.1.12
+    deploy_dir: "/tiproxy-deploy"
+    data_dir: "/tiproxy-data"
+    port: 6000
+    status_port: 3080
+    config:
+      labels: { zone: "west" }
+>>>>>>> b89d2702a2 (tiproxy: improve deployment instructions for deploying TiProxy (#19904))
 
 monitoring_servers:
   - host: 10.0.1.13
