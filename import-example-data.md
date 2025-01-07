@@ -56,7 +56,7 @@ You can import the system data into TiDB using the following method.
 
     [mydumper]
     no-schema = true
-    data-source-dir = "/home/dvaneeden/bikeshare-data"
+    data-source-dir = "~/bikeshare-data"
 
     [mydumper.csv]
     header = true
@@ -65,6 +65,7 @@ You can import the system data into TiDB using the following method.
     host = "127.0.0.1"
     port = 4000
     user = "root"
+    password = "very_secret"
     ```
 
 4. Run the following command.
