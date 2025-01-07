@@ -61,7 +61,12 @@ It is recommended that you use TiProxy for the scenarios that TiProxy is suitabl
 
 ## Installation and usage
 
-This section describes how to deploy and change TiProxy using TiUP. For how to deploy TiProxy using TiDB Operator in Kubernetes, see [TiDB Operator documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy).
+This section describes how to deploy and change TiProxy using TiUP.
+
+For other deployment methods, refer to the following documents:
+
+- To deploy TiProxy using TiDB Operator, see the [TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy) documentation.
+- To quickly deploy TiProxy locally using TiUP, see [Deploy TiProxy](/tiup/tiup-playground.md#deploy-tiproxy).
 
 ### Deploy TiProxy
 
@@ -83,9 +88,6 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
       tidb:
         security.session-token-signing-cert: "/var/sess/cert.pem"
         security.session-token-signing-key: "/var/sess/key.pem"
-        security.ssl-ca: "/var/ssl/ca.pem"
-        security.ssl-cert: "/var/ssl/cert.pem"
-        security.ssl-key: "/var/ssl/key.pem"
         graceful-wait-before-shutdown: 15
     ```
 
@@ -100,7 +102,7 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
 
     It is recommended to specify the version number of TiProxy in the topology configuration so that TiProxy will not be upgraded when you upgrade the TiDB cluster through [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md). Otherwise, the client connection might be disconnected during TiProxy upgrade.
 
-    To configure TiProxy configuration items, see [TiProxy configuration](/tiproxy/tiproxy-configuration.md).
+    To configure TiProxy configuration items, see [TiProxy configuration](/tiproxy/tiproxy-configuration.md). For more configurations of TiUP deployment topology, see [tiproxy-servers configurations](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers).
 
     A configuration example is as follows:
 
@@ -109,9 +111,6 @@ This section describes how to deploy and change TiProxy using TiUP. For how to d
       tiproxy: "v1.2.0"
     server_configs:
       tiproxy:
-        security.server-tls.ca: "/var/ssl/ca.pem"
-        security.server-tls.cert: "/var/ssl/cert.pem"
-        security.server-tls.key: "/var/ssl/key.pem"
         ha.virtual-ip: "10.0.1.10/24"
         ha.interface: "eth0"
     ```
