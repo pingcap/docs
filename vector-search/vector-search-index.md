@@ -7,7 +7,7 @@ summary: Learn how to build and use the vector search index to accelerate K-Near
 
 K-nearest neighbors (KNN) search is the method for finding the K closest points to a given point in a vector space. The most straightforward approach to perform KNN search is a brute force search, which calculates the distance between the given vector and all other vectors in the space. This approach guarantees perfect accuracy, but it is usually too slow for real-world use. Therefore, approximate algorithms are commonly used in KNN search to enhance speed and efficiency.
 
-In TiDB, you can create and use vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
+In TiDB, you can create and use vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/vector-search/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
 
 <CustomContent platform="tidb">
 
@@ -39,7 +39,7 @@ Currently, TiDB supports the [HNSW (Hierarchical Navigable Small World)](https:/
 
 [HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world) is one of the most popular vector indexing algorithms. The HNSW index provides good performance with relatively high accuracy, up to 98% in specific cases.
 
-In TiDB, you can create an HNSW index for a column with a [vector data type](/vector-search-data-types.md) in either of the following ways:
+In TiDB, you can create an HNSW index for a column with a [vector data type](/vector-search/vector-search-data-types.md) in either of the following ways:
 
 - When creating a table, use the following syntax to specify the vector column for the HNSW index:
 
@@ -259,5 +259,5 @@ See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/
 
 ## See also
 
-- [Improve Vector Search Performance](/vector-search-improve-performance.md)
-- [Vector Data Types](/vector-search-data-types.md)
+- [Improve Vector Search Performance](/vector-search/vector-search-improve-performance.md)
+- [Vector Data Types](/vector-search/vector-search-data-types.md)

@@ -435,6 +435,8 @@ tiflash_servers:
 
 - `port`: The listening port of the TiProxy SQL services. The default value is `6000`.
 
+- `status_port`: The listening port of the TiProxy status service. It is used to view the status of the TiProxy services from the external via HTTP requests. The default value is `3080`.
+
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated based on the `deploy_dir` directory configured in `global`.
 
 - `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated based on the `data_dir` directory configured in `global`.
@@ -461,8 +463,18 @@ A `tiproxy_servers` configuration example is as follows:
 ```yaml
 tiproxy_servers:
   - host: 10.0.1.21
+    port: 6000
+    status_port: 3080
+    config:
+      labels: { zone: "zone1" }
   - host: 10.0.1.22
+    port: 6000
+    status_port: 3080
+    config:
+      labels: { zone: "zone2" }
 ```
+
+For more configuration examples, see [TiProxy Deployment Topology](/tiproxy/tiproxy-deployment-topology.md).
 
 ### `kvcdc_servers`
 
