@@ -40,7 +40,7 @@ Currently, data cannot be written directly into TiFlash. You need to write data 
 
 TiFlash consists of two main components: the columnar storage component, and the TiFlash proxy component. The TiFlash proxy component is responsible for the communication using the Multi-Raft consensus algorithm.
 
-After receiving a DDL command to create replicas for a table in TiFlash, TiDB automatically creates the corresponding [placement rules](/configure-placement-rules.md) in PD, and then PD performs the corresponding data scheduling based on these rules.
+After receiving a DDL command to create replicas for a table in TiFlash, TiDB automatically creates the corresponding [placement rules](https://docs.pingcap.com/tidb/stable/configure-placement-rules) in PD, and then PD performs the corresponding data scheduling based on these rules.
 
 ## Key features
 
