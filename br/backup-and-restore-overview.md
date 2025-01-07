@@ -139,23 +139,36 @@ The compatibility information for BR before TiDB v6.6.0 is as follows:
 
 The compatibility information for BR between TiDB versions 6.5.0 and 8.5.0, including all long-term support versions (6.5.0, 7.1.0, 7.5.0, 8.1.0, 8.5.0):
 
-**Known Issue:** Some system table fields were changed to be case-sensitive in version 7.2.0, which may cause cross-version backup and restore failures. Refer to [#43717](https://github.com/pingcap/tidb/issues/43717).
+> **Note:**
+>
+> Known Issue: In version 7.2.0, some system table fields became case-sensitive, which may cause cross-version backup and restore failures. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717)。
+>
+> To maximize the recovery of all system tables (skipping only those with format changes), you can add the following suffix during backup/restore:
+> --filter '*.*' --filter "__TiDB_BR_Temporary_*.*" --filter '!mysql.*' --filter 'mysql.bind_info' --filter 'mysql.user' --filter 'mysql.global_priv' --filter 'mysql.global_grants' --filter 'mysql.default_roles' --filter 'mysql.role_edges' --filter '!sys.*' --filter '!INFORMATION_SCHEMA.*' --filter '!PERFORMANCE_SCHEMA.*' --filter '!METRICS_SCHEMA.*' --filter '!INSPECTION_SCHEMA.*'
 
-| Backup Type                       | Backup Version | Restore Version | Result        |
-|-----------------------------------|----------------|-----------------|---------------|
-| Full Backup                       | 6.5.0          | 7.1.0           | Compatible    |
-|                                   | 6.5.0          | 7.5.0 or above  | ❌ Incompatible |
-|                                   | 7.1.0          | 7.5.0 or above  | ❌ Incompatible |
-|                                   | 7.5.0          | 7.5.0 or above  | Compatible    |
-|                                   | 8.1.0          | 8.1.0 or above  | Compatible    |
-| Full Backup (only user data)      | All versions   | All versions    | Compatible    |
-| Log Backup                        | 6.5.0          | 7.1.0           | Compatible    |
-|                                   | 6.5.0          | 7.5.0 or above  | ❌ Incompatible |
-|                                   | 7.1.0          | 7.5.0 or above  | ❌ Incompatible |
-|                                   | 7.1.0          | 7.5.0 or above  | ❌ Incompatible |
-|                                   | 7.5.0          | 7.5.0 or above  | Compatible    |
-|                                   | 8.1.0          | 8.5.0 or above  | Compatible    |
-| Log Backup (only user data)       | All versions   | All versions    | Compatible    |
+The following table lists the compatibility matrix for full backups:
+
+| Backup Version | Compatible Restore Versions | Incompatible Restore Versions |
+|:---------|:----------------|:------------------|
+| 6.5.0    | 7.1.0           | 7.5.0 and above   |
+| 7.1.0    | -               | 7.5.0 and above   |
+| 7.5.0    | 7.5.0 and above | -                 |
+| 8.1.0    | 8.1.0 and above | -                 |
+
+The following table lists the compatibility matrix for log backups:
+
+| Backup Version | Compatible Restore Versions | Incompatible Restore Versions |
+|:---------|:----------------|:------------------|
+| 6.5.0    | 7.1.0           | 7.5.0 and above   |
+| 7.1.0    | -               | 7.5.0 and above   |
+| 7.5.0    | 7.5.0 and above | -                 |
+| 8.1.0    | 8.1.0 and above | -                 |
+
+> **Note:**
+>
+> 	When only user data is backed up (full backup or log backup), all versions are compatible with each other.
+>
+>  “-” means there are no compatibility restrictions for the corresponding scenario.
 
 ## See also
 
