@@ -42,50 +42,44 @@ CREATE [GLOBAL | SESSION] BINDING [FOR BindableStmt] USING BindableStmt;
 This statement binds SQL execution plans at the GLOBAL or SESSION level. Currently, supported bindable SQL statements (BindableStmt) in TiDB include `SELECT`, `DELETE`, `UPDATE`, and `INSERT` / `REPLACE` with `SELECT` subqueries. The following is an example:
 
 ```sql
-CREATE GLOBAL BINDING USING SELECT /*+ use_index(t1, idx_a) */ * FROM t1;
-CREATE GLOBAL BINDING FOR SELECT * FROM t1 USING SELECT /*+ use_index(t1, idx_a) */ * FROM t1;
+CREATE GLOBAL BINDING USING SELECT /*+ use_index(orders, orders_book_id_idx) */ * FROM orders;
+CREATE GLOBAL BINDING FOR SELECT * FROM orders USING SELECT /*+ use_index(orders, orders_book_id_idx) */ * FROM orders;
 ```
 
 > **Note:**
 >
 > Bindings have higher priority over manually added hints. Therefore, when you execute a statement containing a hint while a corresponding binding is present, the hint controlling the behavior of the optimizer does not take effect. However, other types of hints are still effective.
 
-Specifically, two types of these statements cannot be bound to execution plans due to syntax conflicts. See the following examples:
+Specifically, two types of these statements cannot be bound to execution plans due to syntax conflicts. A syntax error will be reported during binding creation. See the following examples:
 
 ```sql
 -- Type one: Statements that get the Cartesian product by using the `JOIN` keyword and not specifying the associated columns with the `USING` keyword.
 CREATE GLOBAL BINDING for
-    SELECT * FROM t t1 JOIN t t2
+    SELECT * FROM orders o1 JOIN orders o2
 USING
-    SELECT * FROM t t1 JOIN t t2;
+    SELECT * FROM orders o1 JOIN orders o2;
 
 -- Type two: `DELETE` statements that contain the `USING` keyword.
 CREATE GLOBAL BINDING for
-    DELETE FROM t1 USING t1 JOIN t2 ON t1.a = t2.a
+    DELETE FROM users USING users JOIN orders ON users.id = orders.user_id
 USING
-    DELETE FROM t1 USING t1 JOIN t2 ON t1.a = t2.a;
+    DELETE FROM users USING users JOIN orders ON users.id = orders.user_id;
 ```
 
 You can bypass syntax conflicts by using equivalent statements. For example, you can rewrite the above statements in the following ways:
 
 ```sql
--- First rewrite of type one statements: Add a `USING` clause for the `JOIN` keyword.
+-- Rewrite of type one statements: Delete the `JOIN` keyword. Replace it with a comma.
 CREATE GLOBAL BINDING for
-    SELECT * FROM t t1 JOIN t t2 USING (a)
+    SELECT * FROM orders o1, orders o2
 USING
-    SELECT * FROM t t1 JOIN t t2 USING (a);
+    SELECT * FROM orders o1, orders o2;
 
--- Second rewrite of type one statements: Delete the `JOIN` keyword.
+-- Rewrite of type two statements: Remove the `USING` keyword from the `DELETE` statement.
 CREATE GLOBAL BINDING for
-    SELECT * FROM t t1, t t2
+    DELETE users FROM users JOIN orders ON users.id = orders.user_id
 USING
-    SELECT * FROM t t1, t t2;
-
--- Rewrite of type two statements: Remove the `USING` keyword from the `delete` statement.
-CREATE GLOBAL BINDING for
-    DELETE t1 FROM t1 JOIN t2 ON t1.a = t2.a
-using
-    DELETE t1 FROM t1 JOIN t2 ON t1.a = t2.a;
+    DELETE users FROM users JOIN orders ON users.id = orders.user_id;
 ```
 
 > **Note:**
@@ -97,15 +91,15 @@ Here are two examples:
 ```sql
 -- The hint takes effect in the following statement.
 CREATE GLOBAL BINDING for
-    INSERT INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1
-using
-    INSERT INTO t1 SELECT /*+ use_index(@sel_1 t2, idx_a) */ * FROM t2 WHERE a > 1 AND b = 1;
+    INSERT INTO orders SELECT * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR)
+USING
+    INSERT INTO orders SELECT /*+ use_index(@sel_1 pre_orders, idx_created) */ * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR);
 
 -- The hint cannot take effect in the following statement.
 CREATE GLOBAL BINDING for
-    INSERT INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1
-using
-    INSERT /*+ use_index(@sel_1 t2, idx_a) */ INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1;
+    INSERT INTO orders SELECT * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR)
+USING
+    INSERT /*+ use_index(@sel_1 pre_orders, idx_created) */ INTO orders SELECT * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR);
 ```
 
 If you do not specify the scope when creating an execution plan binding, the default scope is SESSION. The TiDB optimizer normalizes bound SQL statements and stores them in the system table. When processing SQL queries, if a normalized statement matches one of the bound SQL statements in the system table and the system variable `tidb_use_plan_baselines` is set to `on` (the default value is `on`), TiDB then uses the corresponding optimizer hint for this statement. If there are multiple matchable execution plans, the optimizer chooses the least costly one to bind.
@@ -113,9 +107,9 @@ If you do not specify the scope when creating an execution plan binding, the def
 `Normalization` is a process that converts a constant in an SQL statement to a variable parameter and explicitly specifies the database for tables referenced in the query, with standardized processing on the spaces and line breaks in the SQL statement. See the following example:
 
 ```sql
-SELECT * FROM t WHERE a >    1
+SELECT * FROM users WHERE balance >    100
 -- After normalization, the above statement is as follows:
-SELECT * FROM test . t WHERE a > ?
+SELECT * FROM bookshop . users WHERE balance > ?
 ```
 
 > **Note:**
@@ -125,11 +119,11 @@ SELECT * FROM test . t WHERE a > ?
 > For example:
 >
 > ```sql
-> SELECT * FROM t WHERE a IN (1)
-> SELECT * FROM t WHERE a IN (1,2,3)
+> SELECT * FROM books WHERE type IN ('Novel')
+> SELECT * FROM books WHERE type IN ('Novel','Life','Education')
 > -- After normalization, the above statements are as follows:
-> SELECT * FROM test . t WHERE a IN ( ... )
-> SELECT * FROM test . t WHERE a IN ( ... )
+> SELECT * FROM bookshop . books WHERE type IN ( ... )
+> SELECT * FROM bookshop . books WHERE type IN ( ... )
 > ```
 >
 > After normalization, `IN` predicates of different lengths are recognized as the same statement, so you only need to create one binding that applies to all these predicates.
