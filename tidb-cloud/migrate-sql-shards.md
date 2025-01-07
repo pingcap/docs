@@ -68,14 +68,14 @@ If there are shards across multiple instances, you can create one first-level di
 
 ### Step 2. Use Dumpling to export data to Amazon S3
 
-For information about how to install Dumpling, see [Dumpling Introduction](/dumpling-overview.md#dumpling-introduction).
+For information about how to install Dumpling, see [Dumpling Introduction](https://docs.pingcap.com/tidb/stable/dumpling-overview).
 
 When you use Dumpling to export data to Amazon S3, note the following:
 
 - Enable binlog for upstream clusters.
 - Choose the correct Amazon S3 directory and region.
-- Choose the appropriate concurrency by configuring the `-t` option to minimize the impact on the upstream cluster, or export directly from the backup database. For more information about how to use this parameter, see [Option list of Dumpling](/dumpling-overview.md#option-list-of-dumpling).
-- Set appropriate values for `--filetype csv` and `--no-schemas`. For more information about how to use these parameters, see [Option list of Dumpling](/dumpling-overview.md#option-list-of-dumpling).
+- Choose the appropriate concurrency by configuring the `-t` option to minimize the impact on the upstream cluster, or export directly from the backup database. For more information about how to use this parameter, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
+- Set appropriate values for `--filetype csv` and `--no-schemas`. For more information about how to use these parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
 
 Name the CSV files as follows:
 
@@ -83,7 +83,7 @@ Name the CSV files as follows:
 
 > **Note:**
 >
-> If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Patterns** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
+> If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
 
 To export data to Amazon S3, do the following:
 
@@ -100,7 +100,7 @@ To export data to Amazon S3, do the following:
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
     ```
 
-    For more information about the parameters, see [Option list of Dumpling](/dumpling-overview.md#option-list-of-dumpling).
+    For more information about the parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
 
 3. Export data from MySQL instance2 to the `s3://dumpling-s3/store/sales/instance02/` directory in the Amazon S3 bucket.
 
@@ -108,7 +108,7 @@ To export data to Amazon S3, do the following:
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql02-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance02/" --s3.region "ap-northeast-1"
     ```
 
-For detailed steps, see [Export data to Amazon S3 cloud storage](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage).
+For detailed steps, see [Export data to Amazon S3 cloud storage](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage).
 
 ### Step 3. Create schemas in TiDB Cloud cluster
 
@@ -125,12 +125,12 @@ In this example, the column IDs of the upstream tables `sale_01` and `sale_02` a
 
 ```sql
 mysql> CREATE TABLE `sales` (
-   ->   `id` bigint(20) NOT NULL ,
-   ->   `uid` varchar(40) NOT NULL,
-   ->   `sale_num` bigint DEFAULT NULL,
-   ->   INDEX (`id`),
-   ->   UNIQUE KEY `ind_uid` (`uid`)
-   -> );
+         `id` bigint(20) NOT NULL ,
+         `uid` varchar(40) NOT NULL,
+         `sale_num` bigint DEFAULT NULL,
+         INDEX (`id`),
+         UNIQUE KEY `ind_uid` (`uid`)
+        );
 Query OK, 0 rows affected (0.17 sec)
 ```
 
@@ -175,46 +175,55 @@ The following example only lists key policy configurations. Replace the Amazon S
 
 After configuring the Amazon S3 access, you can perform the data import task in the TiDB Cloud console as follows:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters). Navigate to the **Clusters** page for your project.
+1. Open the **Import** page for your target cluster.
 
-2. Locate your target cluster, click **...** in the upper-right corner of the cluster area, and select **Import Data**. The **Data Import** page is displayed.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-3. On the **Data Import** page, fill in the following information:
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+2. Select **Import data from S3**.
+
+    If this is your first time importing data into this cluster, select **Import From Amazon S3**.
+
+3. On the **Import Data from Amazon S3** page, fill in the following information:
+
+    - **Import File Count**: select **Multiple files**.
+    - **Included Schema Files**: select **No**.
     - **Data Format**: select **CSV**.
-    - **Location**: `AWS`
-    - **Bucket URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
-    - **Role ARN**: enter the Role-ARN you obtained.
-    - **Target Cluster**: shows the cluster name and the region name.
+    - **Folder URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales/` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
+    - **Bucket Access** > **AWS Role ARN**: enter the Role-ARN you obtained.
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    If the location of the bucket is different from your cluster, confirm the compliance of cross region.
 
     TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
-4. Modify the file patterns and add the table filter rules if needed.
+4. Click **Connect**.
 
-    - **File Pattern**: modify the file pattern if you want to import CSV files whose filenames match a certain pattern to a single target table.
+5. In the **Destination** section, select the target database and table.
 
-        > **Note:**
-        >
-        > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
-        To modify the file pattern, click **Modify**, specify a custom mapping rule between CSV files and a single target table in the following fields, and then click **Scan**.
+    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
 
-        - **Source file name**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, enter the file name here directly. Note that the names of the CSV files must include the suffix ".csv".
+    You can also use wildcards to match the source files. For example:
 
-            For example:
+    - `s3://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
 
-            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
-            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
 
-        - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+    Note that only `?` and `*` are supported.
 
-    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more [table filter](/table-filter.md#syntax) rules in this area.
+    > **Note:**
+    >
+    > The URI must contain the data source folder.
 
-5. Click **Next**.
+6. Edit the CSV configuration if needed.
 
-6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator.
+    You can also click **Edit CSV configuration** to configure Backslash Escape, Separator, and Delimiter for more fine-grained control.
 
     > **Note:**
     >
@@ -222,7 +231,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
 7. Click **Start Import**.
 
-8. When the import progress shows **Finished**, check the imported tables.
+8. When the import progress shows **Completed**, check the imported tables.
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added.
 
@@ -232,7 +241,7 @@ To replicate the data changes based on binlog from a specified position in the u
 
 ### Before you begin
 
-The TiDB Cloud console does not provide any feature about incremental data replication yet. You need to deploy TiDB DM to migrate incremental data. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, you need to manually deploy TiDB DM, because TiDB Cloud does not support migrating and merging MySQL shards yet. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
 ### Step 1. Add the data source
 
@@ -286,7 +295,7 @@ The TiDB Cloud console does not provide any feature about incremental data repli
     ```shell
     tiup is checking updates for component dmctl ...
 
-    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source1.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source1.yaml
 
     {
        "result": true,
@@ -314,7 +323,7 @@ The TiDB Cloud console does not provide any feature about incremental data repli
     ```shell
     tiup is checking updates for component dmctl ...
 
-    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
 
     {
        "result": true,
@@ -400,7 +409,7 @@ The TiDB Cloud console does not provide any feature about incremental data repli
      host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
      port: 4000
      user: "root"
-     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher. 
+     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
 
     ## ******** Function Configuration **********
     routes:
@@ -443,7 +452,7 @@ The following is an example output:
 ```shell
 tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
 
 {
    "result": true,
@@ -471,7 +480,7 @@ The following is an example output:
 ```shell
 tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 start-task dm-task.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 start-task dm-task.yaml
 
 {
    "result": true,

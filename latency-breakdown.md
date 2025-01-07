@@ -66,7 +66,7 @@ e2e duration =
 
 - `tidb_server_get_token_duration_seconds` records the duration of Token waiting. This is usually less than 1 millisecond and is small enough to be ignored.
 - `tidb_session_parse_duration_seconds` records the duration of parsing SQL queries to an Abstract Syntax Tree (AST), which can be skipped by [`PREPARE/EXECUTE` statements](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare).
-- `tidb_session_compile_duration_seconds` records the duration of compiling an AST to an execution plan, which can be skipped by [SQL prepare execution plan cache](/sql-prepared-plan-cache.md).
+- `tidb_session_compile_duration_seconds` records the duration of compiling an AST to an execution plan, which can be skipped by [SQL prepared execution plan cache](/sql-prepared-plan-cache.md).
 - `tidb_session_execute_duration_seconds{type="general"}` records the duration of execution, which mixes all types of user queries. This needs to be broken down into fine-grained durations for analyzing performance issues or bottlenecks.
 
 Generally, OLTP (Online Transactional Processing) workload can be divided into read and write queries, which share some critical code. The following sections describe latency in [read queries](#read-queries) and [write queries](#write-queries), which are executed differently.
@@ -104,7 +104,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching [TSO (Timestamp Oracle)](/glossary.md#tso) from PD. When reading in an auto-commit transaction mode with a clustered primary index or from a snapshot, the value will be zero.
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching [TSO (Timestamp Oracle)](/tso.md) from PD. When reading in an auto-commit transaction mode with a clustered primary index or from a snapshot, the value will be zero.
 
 The `read handle duration` and `read value duration` are calculated as:
 
@@ -468,7 +468,7 @@ Diagram(
                 Sequence(
                     Comment("2pc"),
                     NonTerminal("Get commit-ts"),
-                    NonTerminal("Check schema, try to amend if needed"),
+                    NonTerminal("Check schema"),
                     NonTerminal("Commit PK mutation"),
                 ),
                 Sequence(

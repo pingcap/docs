@@ -7,7 +7,7 @@ summary: Learn how to run CH-benCHmark test on TiDB.
 
 This document describes how to test TiDB using CH-benCHmark.
 
-CH-benCHmark is a mixed workload containing both [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/) tests. It is the most common workload to test HTAP systems. For more information, see [The mixed workload CH-benCHmark](https://research.tableau.com/sites/default/files/a8-cole.pdf).
+CH-benCHmark is a mixed workload containing both [TPC-C](http://www.tpc.org/tpcc/) and [TPC-H](http://www.tpc.org/tpch/) tests. It is the most common workload to test HTAP systems. For more information, see [The mixed workload CH-benCHmark](https://dl.acm.org/doi/10.1145/1988842.1988850).
 
 Before running the CH-benCHmark test, you need to deploy [TiFlash](/tiflash/tiflash-overview.md) first, which is a TiDB's HTAP component. After you deploy TiFlash and [create TiFlash replicas](#create-tiflash-replicas), TiKV will replicate the latest data of TPC-C online transactions to TiFlash in real time, and the TiDB optimizer will automatically push down OLAP queries from TPC-H workload to the MPP engine of TiFlash for efficient execution.
 
@@ -80,14 +80,15 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 
 In the result of the above statement:
 
-- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once a replica becomes available, this status does not change anymore. If you use DDL statements to modify the number of replicas, the replication progress will be recalculated.
-- `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1.0` means at least one replica is replicated.
+- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once a replica becomes available, this status does not change anymore.
+- `PROGRESS` means the progress of the replication. The value is between `0` and `1`. `1` means that the replication is complete for the TiFlash replica.
 
 ## Collect statistics
 
-To ensure that the TiDB optimizer can generate the optimal execution plan, execute the following SQL statements to collect statistics in advance.
+To ensure that the TiDB optimizer can generate the optimal execution plan, execute the following SQL statements to collect statistics in advance. **Be sure to set [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830) to `ALL`, otherwise collecting statistics can result in a significant drop in query performance.**
 
 ```
+set global tidb_analyze_column_options='ALL';
 analyze table customer;
 analyze table district;
 analyze table history;
@@ -109,7 +110,7 @@ Taking 50 TP concurrency and 1 AP concurrency as an example, execute the followi
 {{< copyable "shell-regular" >}}
 
 ```shell
-go-tpc ch --host 172.16.5.140 -P4000 --warehouses 1000 run -D tpcc -T 50 -t 1 --time 1h
+tiup bench ch --host 172.16.5.140 -P4000 --warehouses 1000 run -D tpcc -T 50 -t 1 --time 1h
 ```
 
 During the test, test results are continuously printed on the console. For example:

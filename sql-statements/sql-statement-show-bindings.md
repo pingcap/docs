@@ -10,29 +10,16 @@ The `SHOW BINDINGS` statement is used to display information about created SQL b
 
 ## Synopsis
 
-**ShowStmt:**
+```ebnf+diagram
+ShowBindingsStmt ::=
+    "SHOW" ("GLOBAL" | "SESSION")? "BINDINGS" ShowLikeOrWhere?
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
-
-**GlobalScope:**
-
-![GlobalScope](/media/sqlgram/GlobalScope.png)
-
-**ShowLikeOrWhereOpt**
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Syntax description
-
-{{< copyable "sql" >}}
-
-```sql
-SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhereOpt];
-```
 
 This statement outputs the execution plan bindings at the GLOBAL or SESSION level. The default scope is SESSION. Currently `SHOW BINDINGS` outputs eight columns, as shown below:
 
@@ -50,15 +37,13 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 
 ## Examples
 
-{{< copyable "sql" >}}
-
 ```sql
 mysql> CREATE TABLE t1 (
-    ->  id INT NOT NULL PRIMARY KEY auto_increment,
-    ->  b INT NOT NULL,
-    ->  pad VARBINARY(255),
-    ->  INDEX(b)
-    -> );
+          id INT NOT NULL PRIMARY KEY auto_increment,
+          b INT NOT NULL,
+          pad VARBINARY(255),
+          INDEX(b)
+         );
 Query OK, 0 rows affected (0.07 sec)
 
 mysql> INSERT INTO t1 SELECT NULL, FLOOR(RAND()*1000), RANDOM_BYTES(255) FROM dual;
@@ -111,12 +96,12 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 3 rows in set (0.02 sec)
 
 mysql> CREATE SESSION BINDING FOR
-    ->  SELECT * FROM t1 WHERE b = 123
-    -> USING
-    ->  SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123;
+         SELECT * FROM t1 WHERE b = 123
+        USING
+         SELECT * FROM t1 IGNORE INDEX (b) WHERE b = 123;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
+mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 +-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+
 | id                      | estRows   | actRows | task      | access object | execution info                                                                 | operator info      | memory        | disk |
 +-------------------------+-----------+---------+-----------+---------------+--------------------------------------------------------------------------------+--------------------+---------------+------+

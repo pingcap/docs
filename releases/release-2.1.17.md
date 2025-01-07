@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1.17 Release Notes
 aliases: ['/docs/dev/releases/release-2.1.17/','/docs/dev/releases/2.1.17/']
+summary: "TiDB 2.1.17 Release Notes: New features include `WHERE` clause in `SHOW TABLE REGIONS`, `config-check` feature in TiKV and PD, `remove-tombstone` command in pd-ctl, and `worker-count` and `txn-batch` configuration items in Reparo. Improvements in PD's scheduling process and TiKV's starting process. Changed behaviors in TiDB slow query logs and configuration files. Fixes and optimizations in SQL Optimizer, SQL Execution Engine, Server, DDL, Monitor, TiKV, PD, TiDB Binlog, TiDB Lightning, and TiDB Ansible."
 ---
 
 # TiDB 2.1.17 Release Notes
@@ -12,19 +13,19 @@ TiDB version: 2.1.17
 TiDB Ansible version: 2.1.17
 
 + New features
-    - Add the  `WHERE` clause in TiDB’s `SHOW TABLE REGIONS` syntax
+    - Add the `WHERE` clause in TiDB's `SHOW TABLE REGIONS` syntax
     - Add the `config-check` feature in TiKV and PD to check the configuration items
     - Add the `remove-tombstone` command in pd-ctl to clear tombstone store records
     - Add the `worker-count` and `txn-batch` configuration items in Reparo to control the recovery speed
 
 + Improvements
-    - Optimize PD’s scheduling process by supporting actively pushing operators
-    - Optimize TiKV’s starting process to reduce jitters caused by restarting nodes
+    - Optimize PD's scheduling process by supporting actively pushing operators
+    - Optimize TiKV's starting process to reduce jitters caused by restarting nodes
 
 + Changed behaviors
     - Change `start ts` in TiDB slow query logs from the last retry time to the first execution time
     - Replace the `Index_ids` field in TiDB slow query logs with the `Index_names` field to improve the usability of slow query logs
-    - Add the `split-region-max-num` parameter in TiDB’s configuration files to modify the maximum number of Regions allowed by the `SPLIT TABLE` syntax, which is increased from 1,000 to 10,000 in the default configuration
+    - Add the `split-region-max-num` parameter in TiDB's configuration files to modify the maximum number of Regions allowed by the `SPLIT TABLE` syntax, which is increased from 1,000 to 10,000 in the default configuration
 
 ## TiDB
 
@@ -33,20 +34,20 @@ TiDB Ansible version: 2.1.17
     - Fix the issue that the query result might be incorrect when the number of rows in the outer table is greater than that in a single batch in Index Lookup Join; expand the functional scope of Index Lookup Join; `UnionScan` can be used as a subnode of `IndexJoin` [#11843](https://github.com/pingcap/tidb/pull/11843)
     - Add the display of invalid keys (like `invalid encoded key flag 252` ) in the `SHOW STAT_BUCKETS` syntax, for the situation where invalid keys might occur during the statistics feedback process [#12098](https://github.com/pingcap/tidb/pull/12098)
 + SQL Execution Engine
-    - Fix some incorrect results (like `select cast(13835058000000000000 as double)`) caused by the number value that is first converted to  `UINT` when the `CAST` function is converting the number value type [#11712](https://github.com/pingcap/tidb/pull/11712)
+    - Fix some incorrect results (like `select cast(13835058000000000000 as double)`) caused by the number value that is first converted to `UINT` when the `CAST` function is converting the number value type [#11712](https://github.com/pingcap/tidb/pull/11712)
     - Fix the issue that the calculation result might be incorrect when the dividend of the `DIV` calculation is a decimal and this calculation contains a negative number [#11812](https://github.com/pingcap/tidb/pull/11812)
     - Add the `ConvertStrToIntStrict` function to fix the MySQL incompatibility issue caused by some strings being converted to the `INT` type when executing the `SELECT`/`EXPLAIN` statement [#11892](https://github.com/pingcap/tidb/pull/11892)
     - Fix the issue that the `Explain` result might be incorrect caused by wrong configuration of `stmtCtx` when `EXPLAIN ... FOR CONNECTION` is used [#11978](https://github.com/pingcap/tidb/pull/11978)
     - Fix the issue that the result returned by the `unaryMinus` function is incompatible with MySQL, caused by the non-decimal result when the integer result overflows [#11990](https://github.com/pingcap/tidb/pull/11990)
     - Fix the issue that `last_insert_id()` might be incorrect, caused by the counting order when the `LOAD DATA` statement is being executed [#11994](https://github.com/pingcap/tidb/pull/11994)
     - Fix the issue that `last_insert_id()` might be incorrect when the user writes auto-increment column data in an explicit-implicit mixed way [#12001](https://github.com/pingcap/tidb/pull/12001)
-    - Fix an over-quoted bug for the `JSON_UNQUOTE` function: only values enclosed by double quote marks (`"`) should be unquoted. For example, the result of “`SELECT JSON_UNQUOTE("\\\\")`” should be “`\\`” (not changed) [#12096](https://github.com/pingcap/tidb/pull/12096)
+    - Fix an over-quoted bug for the `JSON_UNQUOTE` function: only values enclosed by double quote marks (`"`) should be unquoted. For example, the result of "`SELECT JSON_UNQUOTE("\\\\")`" should be "`\\`" (not changed) [#12096](https://github.com/pingcap/tidb/pull/12096)
 + Server
     - Change `start ts` recorded in slow query logs from the last retry time to the first execution time when retrying TiDB transactions [#11878](https://github.com/pingcap/tidb/pull/11878)
     - Add the number of keys of a transaction in `LockResolver` to avoid the scan operation on the whole Region and reduce costs of resolving locking when the number of keys is reduced [#11889](https://github.com/pingcap/tidb/pull/11889)
     - Fix the issue that the `succ` field value might be incorrect in slow query logs [#11886](https://github.com/pingcap/tidb/pull/11886)
-    - Replace the `Index_ids` filed in slow query logs with the `Index_names` field to improve the usability of slow query logs [#12063](https://github.com/pingcap/tidb/pull/12063)
-    - Fix the connection break issue caused by TiDB parsing `-` into EOF Error when `Duration` contains `-` (like `select time(‘--’)`) [#11910](https://github.com/pingcap/tidb/pull/11910)
+    - Replace the `Index_ids` field in slow query logs with the `Index_names` field to improve the usability of slow query logs [#12063](https://github.com/pingcap/tidb/pull/12063)
+    - Fix the connection break issue caused by TiDB parsing `-` into EOF Error when `Duration` contains `-` (like `select time(‘--')`) [#11910](https://github.com/pingcap/tidb/pull/11910)
     - Remove an invalid Region from `RegionCache` more quickly to reduce the number of requests sent to this Region [#11931](https://github.com/pingcap/tidb/pull/11931)
     - Fix the connection break issue caused by incorrectly handling the OOM panic issue when `oom-action = "cancel"` and OOM occurs in the `Insert Into … Select` syntax [#12126](https://github.com/pingcap/tidb/pull/12126)
 + DDL
@@ -79,7 +80,7 @@ TiDB Ansible version: 2.1.17
 ## Tools
 
 + TiDB Binlog
-    - Add  `worker-count` and `txn-batch` configuration items in Reparo to control the recovery speed [#746](https://github.com/pingcap/tidb-binlog/pull/746)
+    - Add `worker-count` and `txn-batch` configuration items in Reparo to control the recovery speed [#746](https://github.com/pingcap/tidb-binlog/pull/746)
     - Optimize the memory usage of Drainer to improve the parallel execution efficiency [#735](https://github.com/pingcap/tidb-binlog/pull/735)
     - Fix the bug that Pump cannot quit normally in some cases [#739](https://github.com/pingcap/tidb-binlog/pull/739)
     - Optimize the processing logic of `LevelDB` in Pump to improve the execution efficiency of GC [#720](https://github.com/pingcap/tidb-binlog/pull/720)

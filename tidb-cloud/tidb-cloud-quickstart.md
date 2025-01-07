@@ -2,149 +2,121 @@
 title: TiDB Cloud Quick Start
 summary: Sign up quickly to try TiDB Cloud and create your TiDB cluster.
 category: quick start
-aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 ---
 
 # TiDB Cloud Quick Start
 
 *Estimated completion time: 20 minutes*
 
-This tutorial guides you through an easy way to get started with your TiDB Cloud. The content includes how to create a cluster, try playground, load your data, and connect to your cluster.
+This tutorial guides you through an easy way to get started with TiDB Cloud. You can also follow the step-by-step tutorials on the [**Getting Started**](https://tidbcloud.com/console/getting-started) page in the TiDB Cloud console.
 
-## Step 1. Create a TiDB cluster
+Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
-TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) is the best way to get started with TiDB Cloud. To create a free Serverless Tier cluster, take the following steps:
+## Step 1: Create a TiDB cluster
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
+[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) is the best way to get started with TiDB Cloud. To create a TiDB Cloud Serverless cluster, follow these steps:
 
-    For Google or GitHub users, you can also sign up with your Google or GitHub account. Your email address and password will be managed by Google or GitHub and cannot be changed using the TiDB Cloud console.
+1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up.
+
+    You can sign up with your email and password to manage your password using TiDB Cloud, or choose to sign in with your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-    The plan selection page is displayed by default.
+    The [**Clusters**](https://tidbcloud.com/console/clusters) page is displayed by default.
 
-3. On the plan selection page, click **Get Started for Free** in the **Serverless Tier** plan.
+3. For new sign-up users, TiDB Cloud automatically creates a default TiDB Cloud Serverless cluster named `Cluster0` for you.
 
-4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+    - To instantly try out TiDB Cloud features with this default cluster, proceed to [Step 2: Try AI-assisted SQL Editor](#step-2-try-ai-assisted-sql-editor).
+    - To create a new TiDB Cloud Serverless cluster on your own, follow these steps:
 
-5. Click **Create**.
+        1. Click **Create Cluster**.
+        2. On the **Create Cluster** page, **Serverless** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans), and then click **Create**. Your TiDB Cloud Serverless cluster will be created in approximately 30 seconds.
 
-    Your TiDB Cloud cluster will be created in several minutes.
+## Step 2: Try AI-assisted SQL Editor
 
-6. During the creation process, perform security settings for your cluster:
+You can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to maximize your data value. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
 
-    1. Click **Security Settings** in the upper-right corner of the cluster area.
-    2. In the **Security Settings** dialog box, set a root password to connect to your cluster, and then click **Apply**. If you do not set a root password, you cannot connect to the cluster.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click on a cluster name to go to its overview page, and then click **SQL Editor** in the left navigation pane.
 
-## Step 2. Try Playground
+2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and OpenAI to use your code snippets for research and service improvement, and then click **Save and Get Started**.
 
-After your TiDB Cloud cluster is created, you can quickly start experimenting with TiDB using the pre-loaded sample data on TiDB Cloud.
+3. In SQL Editor, press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
 
-On the **Clusters** page, click **Playground** to run queries instantly on TiDB Cloud.
+    For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, press <kbd>⌘</kbd> + <kbd>I</kbd>, type `create a new table t with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly. 
+    
+    For the generated statement, you can accept it by clicking **Accept** and then further edit it if needed, or reject it by clicking **Discard**.
 
-## Step 3. Load sample data
-
-After trying **Plaground**, you can load sample data to your TiDB Cloud cluster. We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
-
-1. Navigate to the **Clusters** page.
-
-2. In the area of your newly created cluster, click **...** in the upper-right corner and select **Import Data**. The **Data Import** page is displayed.
-
-    > **Tip:**
+    > **Note:**
     >
-    > Alternatively, you can also click the name of your newly created cluster on the **Clusters** page and click **Import Data** in the **Import** area.
+    > SQL queries generated by AI are not 100% accurate and might still require further tweaking.
 
-3. Fill in the import parameters:
+4. Run the SQL queries.
 
-    - **Data Format**: select **SQL File**
-    - **Location**: `AWS`
-    - **Bucket URI**: `s3://tidbcloud-samples/data-ingestion/`
-    - **Role ARN**: `arn:aws:iam::385595570414:role/import-sample-access`
+    <SimpleTab>
+    <div label="macOS">
 
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    For macOS:
 
-4. Add the table filter rules if needed. For the sample data, you can skip this step. Click **Next**.
+    - If you have only one query in the editor, press **⌘ + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run** to execute it.
 
-5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
+    - If you have multiple queries in the editor, select the lines of the target queries with your cursor, and then press **⌘ + Enter** or click **Run** to execute them sequentially.
 
-The data import process will take several minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+    - To run all queries in the editor sequentially, press **⇧ + ⌘ + Enter**, or select the lines of all queries with your cursor and click **Run**.
 
-## Step 4. Connect to your TiDB cluster
+    </div>
 
-After loading data to the cluster, you can connect to your cluster from the command line or with a programming language.
+    <div label="Windows/Linux">
 
-1. Navigate to the **Clusters** page.
+    For Windows or Linux:
 
-2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog is displayed.
+    - If you have only one query in the editor, press **Ctrl + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run** to execute it.
 
-3. Follow the instructions in the dialog to connect to your TiDB cluster.
+    - If you have multiple queries in the editor, select the lines of the target queries with your cursor, and then press **Ctrl + Enter** or click **Run** to execute them sequentially.
 
-    1. Create traffic filter for your connection.
+    - To run all queries in the editor sequentially, press **Shift + Ctrl + Enter**, or select the lines of all queries with your cursor and click **Run**.
 
-    2. Use a SQL client to connect to your cluster. Click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+    </div>
+    </SimpleTab>
 
-    > **Tip:**
-    >
-    > TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tool. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
+After running the queries, you can immediately see the query logs and results at the bottom of the page. 
 
-4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
+To let AI generate more SQL statements, you can type more instructions as shown in the following example:
 
-    {{< copyable "sql" >}}
+```sql
+use test;
 
-    ```sql
-    SELECT TiDB_version();
-    ```
+-- create a new table t with id and name 
+CREATE TABLE
+  `t` (`id` INT, `name` VARCHAR(255));
 
-    If you see the release version information, you are ready to use your TiDB cluster.
+-- add 3 rows 
+INSERT INTO
+  `t` (`id`, `name`)
+VALUES
+  (1, 'row1'),
+  (2, 'row2'),
+  (3, 'row3');
 
-## Step 4. Query data
+-- query all
+SELECT
+  `id`,
+  `name`
+FROM
+  `t`;
+```
 
-After connecting to your TiDB cluster, you can run some queries in your Terminal.
+## Step 3: Try interactive tutorials
 
-1. Use the `bikeshare` database and tables:
+TiDB Cloud offers interactive tutorials with carefully crafted sample datasets to help you quickly get started with TiDB Cloud. You can try these tutorials to learn how to use TiDB Cloud for high-performance data analytics.
 
-    {{< copyable "sql" >}}
+1. Click on the **?** icon in the lower-right corner of the console and select **Interactive Tutorials**.
+2. In the tutorials list, select a tutorial card to start, such as **Steam Game Stats**.
+3. Choose a TiDB Cloud Serverless cluster that you want to use for the tutorial, and click **Import Dataset**. The import process might take approximately one minute.
+4. Once the sample data is imported, follow the on-screen instructions to complete the tutorial.
 
-    ```sql
-    USE bikeshare;
-    SHOW tables;
-    ```
+## What's next
 
-2. Check the structure of the `trip` table:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    DESCRIBE trips;
-    ```
-
-3. Check how many records exist in the `trips` table:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    SELECT COUNT(*) FROM trips;
-    ```
-
-4. Check the entire trip history where the start station is "8th & D St NW":
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    SELECT * FROM trips WHERE start_station_name = '8th & D St NW';
-    ```
-
-5. Show the least ten popular bicycle stations for picking up:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    SELECT start_station_name, COUNT(ride_id) as count from `trips`
-    GROUP BY start_station_name
-    ORDER BY count ASC
-    LIMIT 10;
-    ```
-
-For more details on TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
-
-For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), refer to [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md) and create a Dedicated Tier cluster.
+- To learn how to connect to your cluster using different methods, see [Connect to a TiDB Cloud Serverless cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+- For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+- For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
+- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).

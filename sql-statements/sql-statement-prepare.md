@@ -19,6 +19,12 @@ PrepareSQL ::=
 |   UserVariable
 ```
 
+> **Note:**
+>
+> For each `PREPARE` statement, the maximum number of placeholders is 65535.
+
+To limit the number of `PREPARE` statements in the current TiDB instance, you can use the [`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count) system variable.
+
 ## Examples
 
 ```sql
@@ -42,7 +48,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The `PREPARE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

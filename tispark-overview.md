@@ -98,14 +98,20 @@ You can choose TiSpark version according to your TiDB and Spark version.
 | 2.5.x            | 5.x, 4.x               | 3.0.x, 3.1.x   | 2.12          |
 | 3.0.x            | 5.x, 4.x               | 3.0.x, 3.1.x, 3.2.x|2.12|
 | 3.1.x            | 6.x, 5.x, 4.x          | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
+| 3.2.x            | 6.x, 5.x, 4.x          | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
 
-TiSpark 2.4.4, 2.5.2, 3.0.2 and 3.1.1 are the latest stable versions and are highly recommended.
+TiSpark 2.4.4, 2.5.3, 3.0.3, 3.1.7, and 3.2.3 are the latest stable versions and are highly recommended.
+
+> **Note:**
+>
+> TiSpark does not guarantee compatibility with TiDB v7.0.0 and later versions.
+> TiSpark does not guarantee compatibility with Spark v3.4.0 and later versions.
 
 ### Get TiSpark jar
 
 You can get the TiSpark jar using one of the following methods:
 
-- Get from [maven central](https://search.maven.org/) and search with GroupId [![Maven Search](https://img.shields.io/badge/com.pingcap/tispark-green.svg)](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
+- Get from [maven central](https://search.maven.org/) and search for [`pingcap`](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
 - Get from [TiSpark releases](https://github.com/pingcap/tispark/releases)
 - Build from source with the steps below
 
@@ -130,11 +136,11 @@ mvn clean install -Dmaven.test.skip=true -Pspark3.2.1
 
 The Artifact ID of TiSpark varies with TiSpark versions.
 
-| TiSpark version               | Artifact ID                                        |
-|-------------------------------| -------------------------------------------------- |
-| 2.4.x-${scala_version}, 2.5.0 | tispark-assembly                                   |
-| 2.5.1                         | tispark-assembly-${spark_version}                  |
-| 3.0.x, 3.1.x                  | tispark-assembly-${spark_version}_${scala_version} |
+| TiSpark version                | Artifact ID                                        |
+|--------------------------------| -------------------------------------------------- |
+| 2.4.x-\${scala_version}, 2.5.0 | tispark-assembly                                   |
+| 2.5.1                          | tispark-assembly-\${spark_version}                  |
+| 3.0.x, 3.1.x, 3.2.x            | tispark-assembly-\${spark_version}-\${scala_version} |
 
 ## Getting started
 
@@ -148,9 +154,9 @@ Add the following configuration in `spark-defaults.conf`:
 
 ```
 spark.sql.extensions  org.apache.spark.sql.TiExtensions
-spark.tispark.pd.addresses  ${your_pd_adress}
+spark.tispark.pd.addresses  ${your_pd_address}
 spark.sql.catalog.tidb_catalog  org.apache.spark.sql.catalyst.catalog.TiCatalog
-spark.sql.catalog.tidb_catalog.pd.addresses  ${your_pd_adress}
+spark.sql.catalog.tidb_catalog.pd.addresses  ${your_pd_address}
 ```
 
 Start spark-shell with the `--jars` option.
@@ -201,7 +207,7 @@ customerDF.write
 
 See [Data Source API User Guide](https://github.com/pingcap/tispark/blob/master/docs/features/datasource_api_userguide.md) for more details.
 
-You can also write with Spark SQL since TiSpark 3.1. See [insert SQL](https://github.com/pingcap/tispark/blob/master/docs/features/insert_sql_userguide.md) for more details.
+Starting from TiSpark 3.1, you can write data to TiKV using Spark SQL. For more information, see [insert SQL](https://github.com/pingcap/tispark/blob/master/docs/features/insert_sql_userguide.md).
 
 ### Write data using JDBC DataSource
 
@@ -299,6 +305,8 @@ The configurations in the following table can be put together with `spark-defaul
 | `spark.tispark.tikv.conn_recycle_time`          | `60s`            | The interval for cleaning expired connections with TiKV. It takes effect only when certificate reloading is enabled. The default value is `60s` (60 seconds).                                                                                                                                                                                                                                                                                                                                                           |
 | `spark.tispark.host_mapping`                    |                  | The route map used to configure the mapping between public IP addresses and intranet IP addresses. When the TiDB cluster is running on the intranet, you can map a set of intranet IP addresses to public IP addresses for an outside Spark cluster to access. The format is `{Intranet IP1}:{Public IP1};{Intranet IP2}:{Public IP2}`, for example, `192.168.0.2:8.8.8.8;192.168.0.3:9.9.9.9`.                                                                                                                         |
 | `spark.tispark.new_collation_enable`            |                  | When [new collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation#new-framework-for-collations) is enabled on TiDB, this configuration can be set to `true`. If `new collation` is not enabled on TiDB, this configuration can be set to `false`. If this item is not configured, TiSpark configures `new collation` automatically based on the TiDB version. The configuration rule is as follows: If the TiDB version is greater than or equal to v6.0.0, it is `true`; otherwise, it is `false`. |
+| `spark.tispark.replica_read` | `leader` | The type of the replica to read. Value options are `leader`, `follower`, and `learner`. Multiple types can be specified at the same time and TiSpark selects the type according to the order. |
+| `spark.tispark.replica_read.label` |  | The label of the target TiKV node. The format is `label_x=value_x,label_y=value_y`, and the items are connected by logical conjunction. |
 
 ### TLS configurations
 
@@ -341,7 +349,7 @@ spark.tispark.jdbc.client_cert_password                        jdbc_clientstore_
 ```
 
 - For details about how to open TiDB TLS, see [Enable TLS between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md).
-- For details about how to generate a JAVA key store, see [Connecting Securely Using SSL](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-using-ssl.html).
+- For details about how to generate a JAVA key store, see [Connecting Securely Using SSL](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-using-ssl.html).
 
 ### Log4j configuration
 
@@ -456,7 +464,6 @@ For more information, see [Authorization and authentication through TiDB server]
 - [Stale read](https://github.com/pingcap/tispark/blob/master/docs/features/stale_read.md)
 - [TiSpark with multiple catalogs](https://github.com/pingcap/tispark/wiki/TiSpark-with-multiple-catalogs)
 - [TiSpark TLS](#tls-configurations)
-- [TiSpark Telemetry](https://github.com/pingcap/tispark/blob/master/docs/features/telemetry.md)
 - [TiSpark plan](https://github.com/pingcap/tispark/blob/master/docs/features/query_execution_plan_in_TiSpark.md)
 
 ## Statistics information

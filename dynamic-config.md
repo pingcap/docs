@@ -1,18 +1,22 @@
 ---
-title: Modify Configuration Online
-summary: Learn how to change the cluster configuration online.
+title: Modify Configuration Dynamically
+summary: Learn how to dynamically modify the cluster configuration.
 aliases: ['/docs/dev/dynamic-config/']
 ---
 
-# Modify Configuration Online
+# Modify Configuration Dynamically
 
-This document describes how to modify the cluster configuration online.
+This document describes how to dynamically modify the cluster configuration.
 
-You can update the configuration of components (including TiDB, TiKV, and PD) online using SQL statements, without restarting the cluster components. Currently, the method of changing TiDB instance configuration is different from that of changing configuration of other components (such TiKV and PD).
+You can dynamically update the configuration of components (including TiDB, TiKV, and PD) using SQL statements, without restarting the cluster components. Currently, the method of changing TiDB instance configuration is different from that of changing configuration of other components (such as TiKV and PD).
+
+> **Note:**
+>
+> This feature is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/). For TiDB Cloud, you need to contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to modify the configurations.
 
 ## Common Operations
 
-This section describes the common operations of modifying configuration online.
+This section describes the common operations of dynamically modifying configuration.
 
 ### View instance configuration
 
@@ -50,11 +54,11 @@ show config where name like '%log%'
 show config where type='tikv' and name='log.level'
 ```
 
-### Modify TiKV configuration online
+### Modify TiKV configuration dynamically
 
 > **Note:**
 >
-> - After changing TiKV configuration items online, the TiKV configuration file is automatically updated. However, you also need to modify the corresponding configuration items by executing `tiup edit-config`; otherwise, operations such as `upgrade` and `reload` will overwrite your changes. For details of modifying configuration items, refer to [Modify configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
+> - After dynamically changing TiKV configuration items, the TiKV configuration file is automatically updated. However, you also need to modify the corresponding configuration items by executing `tiup edit-config`; otherwise, operations such as `upgrade` and `reload` will overwrite your changes. For details of modifying configuration items, refer to [Modify configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
 > - After executing `tiup edit-config`, you do not need to execute `tiup reload`.
 
 When using the `set config` statement, you can modify the configuration of a single instance or of all instances according to the instance address or the component type.
@@ -118,7 +122,7 @@ If some modifications fail, you need to re-execute the corresponding statement o
 
 If a configuration item is successfully modified, the result is persisted in the configuration file, which will prevail in the subsequent operations. The names of some configuration items might conflict with TiDB reserved words, such as `limit` and `key`. For these configuration items, use backtick `` ` `` to enclose them. For example, `` `raftstore.raft-log-gc-size-limit` ``.
 
-The following TiKV configuration items can be modified online:
+The following TiKV configuration items can be modified dynamically:
 
 | Configuration item | Description |
 | :--- | :--- |
@@ -131,6 +135,7 @@ The following TiKV configuration items can be modified online:
 | `raftstore.raft-max-size-per-msg` | The soft limit on the size of a single message packet that is allowed to be generated |
 | `raftstore.raft-entry-max-size` | The hard limit on the maximum size of a single Raft log |
 | `raftstore.raft-entry-cache-life-time` | The maximum remaining time allowed for the log cache in memory |
+| `raftstore.max-apply-unpersisted-log-limit` | The maximum number of committed but not persisted Raft logs that can be applied |
 | `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
 | `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
 | `raftstore.region-compact-check-interval` | The time interval at which to check whether it is necessary to manually trigger RocksDB compaction |
@@ -153,13 +158,18 @@ The following TiKV configuration items can be modified online:
 | `raftstore.merge-check-tick-interval` | The time interval for merge check |
 | `raftstore.cleanup-import-sst-interval` | The time interval to check expired SST files |
 | `raftstore.local-read-batch-size` | The maximum number of read requests processed in one batch |
+| `raftstore.apply-yield-write-size` | The maximum number of bytes that the Apply thread can write for one FSM (Finite-state Machine) in each round |
 | `raftstore.hibernate-timeout` | The shortest wait duration before entering hibernation upon start. Within this duration, TiKV does not hibernate (not released). |
 | `raftstore.apply-pool-size` | The number of threads in the pool that flushes data to the disk, which is the size of the Apply thread pool |
 | `raftstore.store-pool-size` | The number of threads in the pool that processes Raft, which is the size of the Raftstore thread pool |
 | `raftstore.apply-max-batch-size` | Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch. |
 | `raftstore.store-max-batch-size` | Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch. |
+| `raftstore.store-io-pool-size` | The number of threads that process Raft I/O tasks, which is also the size of the StoreWriter thread pool (**DO NOT** modify this value from a non-zero value to 0 or from 0 to a non-zero value) |
+| `raftstore.periodic-full-compact-start-max-cpu` | The CPU usage threshold at which TiKV performs periodic full compaction if full compaction is enabled |
 | `readpool.unified.max-thread-count` | The maximum number of threads in the thread pool that uniformly processes read requests, which is the size of the UnifyReadPool thread pool |
+| `readpool.unified.max-tasks-per-worker` | The maximum number of tasks allowed for a single thread in the unified read pool. `Server Is Busy` error is returned when the value is exceeded. |
 | `readpool.unified.auto-adjust-pool-size` | Determines whether to automatically adjust the UnifyReadPool thread pool size |
+| `resource-control.priority-ctl-strategy` | Configures the flow control strategy of low-priority tasks. |
 | `coprocessor.split-region-on-table` | Enables to split Region by table |
 | `coprocessor.batch-split-limit` | The threshold of Region split in batches |
 | `coprocessor.region-max-size` | The maximum size of a Region |
@@ -170,6 +180,8 @@ The following TiKV configuration items can be modified online:
 | `pessimistic-txn.wake-up-delay-duration` | The duration after which a pessimistic transaction is woken up |
 | `pessimistic-txn.pipelined` | Determines whether to enable the pipelined pessimistic locking process |
 | `pessimistic-txn.in-memory` | Determines whether to enable the in-memory pessimistic lock |
+| `pessimistic-txn.in-memory-peer-size-limit`               | Controls the memory usage limit for in-memory pessimistic locks in a Region                                                                                                                                                                                  |
+| `pessimistic-txn.in-memory-instance-size-limit`           | Controls the memory usage limit for in-memory pessimistic locks in a TiKV instance                                                                                                                                                                           |
 | `quota.foreground-cpu-time` | The soft limit on the CPU resources used by TiKV foreground to process read and write requests |
 | `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
 | `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
@@ -205,12 +217,24 @@ The following TiKV configuration items can be modified online:
 | `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | The soft limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | The hard limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
+| `{db-name}.{cf-name}.titan.min-blob-size` | The threshold at which data is stored in Titan. Data is stored in a Titan blob file when its value reaches this threshold. |
+| `{db-name}.{cf-name}.titan.blob-file-compression` | The compression algorithm used by Titan blob files |
+| `{db-name}.{cf-name}.titan.discardable-ratio` | The threshold of garbage data ratio in Titan data files for GC. When the ratio of useless data in a blob file exceeds the threshold, Titan GC is triggered. |
 | `server.grpc-memory-pool-quota` | Limits the memory size that can be used by gRPC |
 | `server.max-grpc-send-msg-len` | Sets the maximum length of a gRPC message that can be sent |
+| `server.snap-io-max-bytes-per-sec` | Sets the maximum allowable disk bandwidth when processing snapshots |
+| `server.concurrent-send-snap-limit` | Sets the maximum number of snapshots sent at the same time |
+| `server.concurrent-recv-snap-limit` | Sets the maximum number of snapshots received at the same time |
 | `server.raft-msg-max-batch-size` | Sets the maximum number of Raft messages that are contained in a single gRPC message |
 | `server.simplify-metrics`        | Controls whether to simplify the sampling monitoring metrics                   |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
+| storage.flow-control.enable | Determines whether to enable the flow control mechanism |
+| storage.flow-control.memtables-threshold | The maximum number of kvDB memtables that trigger flow control |
+| storage.flow-control.l0-files-threshold | The maximum number of kvDB L0 files that trigger flow control |
+| storage.flow-control.soft-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject some write requests |
+| storage.flow-control.hard-pending-compaction-bytes-limit | The threshold of kvDB pending compaction bytes that triggers flow control mechanism to reject all write requests |
 | `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
+| `import.num-threads` | The number of threads to process restore or import RPC requests (dynamic modification is supported starting from v8.1.2) |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
 | `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for 10 consecutive seconds, this Region should be split.|
 | `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for 10 consecutive seconds, this Region should be split. |
@@ -230,7 +254,7 @@ In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` pre
 
 For detailed parameter description, refer to [TiKV Configuration File](/tikv-configuration-file.md).
 
-### Modify PD configuration online
+### Modify PD configuration dynamically
 
 Currently, PD does not support the separate configuration for each instance. All PD instances share the same configuration.
 
@@ -250,7 +274,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 If a configuration item is successfully modified, the result is persisted in etcd instead of in the configuration file; the configuration in etcd will prevail in the subsequent operations. The names of some configuration items might conflict with TiDB reserved words. For these configuration items, use backtick `` ` `` to enclose them. For example, `` `schedule.leader-schedule-limit` ``.
 
-The following PD configuration items can be modified online:
+The following PD configuration items can be modified dynamically:
 
 | Configuration item | Description |
 | :--- | :--- |
@@ -258,11 +282,12 @@ The following PD configuration items can be modified online:
 | `cluster-version` | The cluster version |
 | `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MiB) |
 | `schedule.max-merge-region-keys` | Specifies the maximum numbers of the `Region Merge` keys |
-| `schedule.patrol-region-interval` | Determines the frequency at which `replicaChecker` checks the health state of a Region |
+| `schedule.patrol-region-interval` | Determines the frequency at which the checker inspects the health state of a Region |
+| `scheduler.patrol-region-worker-count` | Controls the number of concurrent operators created by the checker when inspecting the health state of a Region |
 | `schedule.split-merge-interval` | Determines the time interval of performing split and merge operations on the same Region |
 | `schedule.max-snapshot-count` | Determines the maximum number of snapshots that a single store can send or receive at the same time |
 | `schedule.max-pending-peer-count` | Determines the maximum number of pending peers in a single store |
-| `schedule.max-store-down-time` | The downtime after which PD judges that the disconnected store can not be recovered |
+| `schedule.max-store-down-time` | The downtime after which PD judges that the disconnected store cannot be recovered |
 | `schedule.leader-schedule-policy` | Determines the policy of Leader scheduling |
 | `schedule.leader-schedule-limit` | The number of Leader scheduling tasks performed at the same time |
 | `schedule.region-schedule-limit` | The number of Region scheduling tasks performed at the same time |
@@ -293,11 +318,11 @@ The following PD configuration items can be modified online:
 
 For detailed parameter description, refer to [PD Configuration File](/pd-configuration-file.md).
 
-### Modify TiDB configuration online
+### Modify TiDB configuration dynamically
 
 Currently, the method of changing TiDB configuration is different from that of changing TiKV and PD configurations. You can modify TiDB configuration by using [system variables](/system-variables.md).
 
-The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable.
+The following example shows how to dynamically modify `slow-threshold` by using the `tidb_slow_log_threshold` variable.
 
 The default value of `slow-threshold` is 300 ms. You can set it to 200 ms by using `tidb_slow_log_threshold`.
 
@@ -326,15 +351,21 @@ select @@tidb_slow_log_threshold;
 1 row in set (0.00 sec)
 ```
 
-The following TiDB configuration items can be modified online:
+The following TiDB configuration items can be modified dynamically:
 
 | Configuration item | SQL variable | Description |
-| :--- | :--- |
-| `log.enable-slow-log` | `tidb_enable_slow_log` | Whether to enable slow log |
-| `log.slow-threshold` | `tidb_slow_log_threshold` | The threshold of slow log |
-| `log.expensive-threshold` | `tidb_expensive_query_time_threshold` | The threshold of a expensive query |
+| --- | --- | --- |
+| `instance.tidb_enable_slow_log` | `tidb_enable_slow_log` | Controls whether to enable slow log |
+| `instance.tidb_slow_log_threshold` | `tidb_slow_log_threshold` | Specifies the threshold of slow log |
+| `instance.tidb_expensive_query_time_threshold` | `tidb_expensive_query_time_threshold` | Specifies the threshold of an expensive query |
+| `instance.tidb_enable_collect_execution_info` | `tidb_enable_collect_execution_info` | Controls whether to record the execution information of operators |
+| `instance.tidb_record_plan_in_slow_log` | `tidb_record_plan_in_slow_log` | Controls whether to record execution plans in the slow log |
+| `instance.tidb_force_priority` | `tidb_force_priority` | Specifies the priority of statements that are submitted from this TiDB instance |
+| `instance.max_connections` | `max_connections` | Specifies the maximum number of concurrent connections permitted for this TiDB instance |
+| `instance.tidb_enable_ddl` | `tidb_enable_ddl` | Controls whether this TiDB instance can become a DDL owner |
+| `pessimistic-txn.constraint-check-in-place-pessimistic` | `tidb_constraint_check_in_place_pessimistic` | Controls whether to defer the unique constraint check of a unique index to the next time when this index requires a lock or to the time when the transaction is committed |
 
-### Modify TiFlash configuration online
+### Modify TiFlash configuration dynamically
 
 Currently, you can modify the TiFlash configuration `max_threads` by using the system variable [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610), which specifies the maximum concurrency for TiFlash to execute a request.
 

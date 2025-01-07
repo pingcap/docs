@@ -10,13 +10,13 @@ The `USE` statement selects a current database for the user session.
 
 ## Synopsis
 
-**UseStmt:**
+```ebnf+diagram
+UseStmt ::=
+    "USE" DBName
 
-![UseStmt](/media/sqlgram/UseStmt.png)
-
-**DBName:**
-
-![DBName](/media/sqlgram/DBName.png)
+DBName ::=
+    Identifier
+```
 
 ## Examples
 
@@ -75,7 +75,7 @@ mysql> SHOW TABLES;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The `USE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

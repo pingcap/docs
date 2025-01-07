@@ -37,8 +37,6 @@ Now there is a situation where doctors `Alice` and `Bob` are on call. Both are f
 
 <div label="Java" value="java">
 
-{{< copyable "" >}}
-
 ```java
 package com.pingcap.txn.write.skew;
 
@@ -85,10 +83,10 @@ public class EffectWriteSkew {
 
     public static void createDoctorTable(Connection connection) throws SQLException {
         connection.createStatement().executeUpdate("CREATE TABLE `doctors` (" +
-                "    `id` int(11) NOT NULL," +
+                "    `id` int NOT NULL," +
                 "    `name` varchar(255) DEFAULT NULL," +
-                "    `on_call` tinyint(1) DEFAULT NULL," +
-                "    `shift_id` int(11) DEFAULT NULL," +
+                "    `on_call` tinyint DEFAULT NULL," +
+                "    `shift_id` int DEFAULT NULL," +
                 "    PRIMARY KEY (`id`)," +
                 "    KEY `idx_shift_id` (`shift_id`)" +
                 "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin");
@@ -164,8 +162,6 @@ public class EffectWriteSkew {
 
 To adapt TiDB transactions, write a [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
 
-{{< copyable "" >}}
-
 ```go
 package main
 
@@ -311,10 +307,10 @@ func prepareData(db *sql.DB) error {
 
 func createDoctorTable(db *sql.DB) error {
     _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
-        "    `id` int(11) NOT NULL," +
+        "    `id` int NOT NULL," +
         "    `name` varchar(255) DEFAULT NULL," +
-        "    `on_call` tinyint(1) DEFAULT NULL," +
-        "    `shift_id` int(11) DEFAULT NULL," +
+        "    `on_call` tinyint DEFAULT NULL," +
+        "    `shift_id` int DEFAULT NULL," +
         "    PRIMARY KEY (`id`)," +
         "    KEY `idx_shift_id` (`shift_id`)" +
         "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
@@ -334,8 +330,6 @@ func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) err
 
 SQL log:
 
-{{< copyable "sql" >}}
-
 ```sql
 /* txn 1 */ BEGIN
     /* txn 2 */ BEGIN
@@ -348,8 +342,6 @@ SQL log:
 ```
 
 Running result:
-
-{{< copyable "sql" >}}
 
 ```sql
 mysql> SELECT * FROM doctors;
@@ -371,8 +363,6 @@ Now let's change the sample program to use `SELECT FOR UPDATE` to avoid the writ
 <SimpleTab groupId="language">
 
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.txn.write.skew;
@@ -420,10 +410,10 @@ public class EffectWriteSkew {
 
     public static void createDoctorTable(Connection connection) throws SQLException {
         connection.createStatement().executeUpdate("CREATE TABLE `doctors` (" +
-                "    `id` int(11) NOT NULL," +
+                "    `id` int NOT NULL," +
                 "    `name` varchar(255) DEFAULT NULL," +
-                "    `on_call` tinyint(1) DEFAULT NULL," +
-                "    `shift_id` int(11) DEFAULT NULL," +
+                "    `on_call` tinyint DEFAULT NULL," +
+                "    `shift_id` int DEFAULT NULL," +
                 "    PRIMARY KEY (`id`)," +
                 "    KEY `idx_shift_id` (`shift_id`)" +
                 "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin");
@@ -497,8 +487,6 @@ public class EffectWriteSkew {
 
 <div label="Golang" value="golang">
 
-{{< copyable "" >}}
-
 ```go
 package main
 
@@ -644,10 +632,10 @@ func prepareData(db *sql.DB) error {
 
 func createDoctorTable(db *sql.DB) error {
     _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
-        "    `id` int(11) NOT NULL," +
+        "    `id` int NOT NULL," +
         "    `name` varchar(255) DEFAULT NULL," +
-        "    `on_call` tinyint(1) DEFAULT NULL," +
-        "    `shift_id` int(11) DEFAULT NULL," +
+        "    `on_call` tinyint DEFAULT NULL," +
+        "    `shift_id` int DEFAULT NULL," +
         "    PRIMARY KEY (`id`)," +
         "    KEY `idx_shift_id` (`shift_id`)" +
         "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
@@ -667,8 +655,6 @@ func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) err
 
 SQL log:
 
-{{< copyable "sql" >}}
-
 ```sql
 /* txn 1 */ BEGIN
     /* txn 2 */ BEGIN
@@ -681,8 +667,6 @@ At least one doctor is on call
 ```
 
 Running result:
-
-{{< copyable "sql" >}}
 
 ```sql
 mysql> SELECT * FROM doctors;
@@ -697,11 +681,13 @@ mysql> SELECT * FROM doctors;
 
 ## Support for `savepoint` and nested transactions
 
+> **Note:**
+>
+> Starting from v6.2.0, TiDB supports the [`savepoint`](/sql-statements/sql-statement-savepoint.md) feature. If your TiDB cluster is earlier than v6.2.0, your TiDB cluster does not support the `PROPAGATION_NESTED` behavior. It is recommended to upgrade to v6.2.0 or a later version. If upgrading TiDB is not possible, and your applications are based on the **Java Spring** framework that uses the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
+
 The `PROPAGATION_NESTED` propagation behavior supported by **Spring** triggers a nested transaction, which is a child transaction that is started independently of the current transaction. A `savepoint` is recorded when the nested transaction starts. If the nested transaction fails, the transaction will roll back to the `savepoint` state. The nested transaction is part of the outer transaction and will be committed together with the outer transaction.
 
 The following example demonstrates the `savepoint` mechanism:
-
-{{< copyable "sql" >}}
 
 ```sql
 mysql> BEGIN;
@@ -719,16 +705,19 @@ mysql> SELECT * FROM T2;
 +------+
 ```
 
-> **Note:**
->
-> Since v6.2.0, TiDB supports the `savepoint` feature. If your TiDB cluster is earlier than v6.2.0, your TiDB cluster does not support the `PROPAGATION_NESTED` behavior. If your applications are based on the **Java Spring** framework that use the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
-
 ## Large transaction restrictions
 
 The basic principle is to limit the size of the transaction. At the KV level, TiDB has a restriction on the size of a single transaction. At the SQL level, one row of data is mapped to one KV entry, and each additional index will add one KV entry. The restriction is as follows at the SQL level:
 
-- The maximum single row record size is `120 MB`. You can configure it by `performance.txn-entry-size-limit` for TiDB v5.0 and later versions. The value is `6 MB` for earlier versions.
-- The maximum single transaction size supported is `10 GB`. You can configure it by `performance.txn-total-size-limit` for TiDB v4.0 and later versions. The value is `100 MB` for earlier versions.
+- The maximum single row record size is 120 MiB.
+
+    - You can adjust it by using the [`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500) configuration parameter of tidb-server for TiDB v4.0.10 and later v4.0.x versions, TiDB v5.0.0 and later versions. The value is `6 MB` for versions earlier than v4.0.10.
+    - Starting from v7.6.0, you can use the [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) system variable to dynamically modify the value of this configuration item.
+
+- The maximum single transaction size supported is 1 TiB. 
+
+    - For TiDB v4.0 and later versions, You can configure it by [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)). The value is `100 MB` for earlier versions.
+    - For TiDB v6.5.0 and later versions, this configuration is no longer recommended. For more information, see [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)).
 
 Note that for both the size restrictions and row restrictions, you should also consider the overhead of encoding and additional keys for the transaction during the transaction execution. To achieve optimal performance, it is recommended to write one transaction every 100 ~ 500 rows.
 
@@ -739,3 +728,17 @@ Currently locks are not added to auto-committed `SELECT FOR UPDATE` statements. 
 ![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
 
 This is a known incompatibility issue with MySQL. You can solve this issue by using the explicit `BEGIN;COMMIT;` statements.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

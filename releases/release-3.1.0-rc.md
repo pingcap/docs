@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.1 RC Release Notes
 aliases: ['/docs/dev/releases/release-3.1.0-rc/','/docs/dev/releases/3.1.0-rc/']
+summary: TiDB 3.1 RC was released on April 2, 2020. It includes new features such as improved partition pruning, support for `RECOVER` syntax, and TLS certificate updates. Bug fixes include resolving issues with TiFlash replica, `last_insert_id`, and `Aggregation` pushdown. TiKV now supports TLS authentication and AWS IAM web identity for backup. PD has fixed data race issues and placement rule inconsistencies. Tools like TiDB Lightning and BR have also been optimized and fixed.
 ---
 
 # TiDB 3.1 RC Release Notes
@@ -73,7 +74,7 @@ TiDB Ansible version: 3.1.0-rc
     - Fix the information schema error caused by frequently updating the TiFlash replica [#14884](https://github.com/pingcap/tidb/pull/14884)
     - Fix the issue that `last_insert_id` is incorrectly generated when applying `AUTO_RANDOM` [#15149](https://github.com/pingcap/tidb/pull/15149)
     - Fix the issue that updating the status of TiFlash replica might cause the DDL operation to get stuck [#15161](https://github.com/pingcap/tidb/pull/15161)
-    - Forbid `Aggregation` pushdown and `TopN` pushdown when there are predicates that can not be pushed down [#15141](https://github.com/pingcap/tidb/pull/15141)
+    - Forbid `Aggregation` pushdown and `TopN` pushdown when there are predicates that cannot be pushed down [#15141](https://github.com/pingcap/tidb/pull/15141)
     - Forbid the nested `view` creation [#15440](https://github.com/pingcap/tidb/pull/15440)
     - Fix the error occurred when executing `SELECT CURRENT_ROLE()` after `SET ROLE ALL` [#15570](https://github.com/pingcap/tidb/pull/15570)
     - Fix the failure to identify the `view` name when executing the `select view_name.col_name from view_name` statement [#15573](https://github.com/pingcap/tidb/pull/15573)

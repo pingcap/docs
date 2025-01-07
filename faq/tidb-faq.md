@@ -14,7 +14,15 @@ This document lists the Most Frequently Asked Questions about TiDB.
 
 ### What is TiDB?
 
-[TiDB](https://github.com/pingcap/tidb) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
+[TiDB](https://github.com/pingcap/tidb) is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
 
 ### What is TiDB's architecture?
 
@@ -36,7 +44,7 @@ Yes, it is. When all the required services are started, you can use TiDB as easi
 
 ### How is TiDB compatible with MySQL?
 
-Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support triggers, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
+Currently, TiDB supports the majority of MySQL 8.0 syntax, but does not support triggers, stored procedures, and user-defined functions. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
 ### Does TiDB support distributed transactions?
 
@@ -94,7 +102,7 @@ For more information, see [TiDB Limitations](/tidb-limitations.md).
 
 ### Does TiDB support XA?
 
-No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
+No. The JDBC driver of TiDB is MySQL Connector/J. When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
 
 After you configure the two data sources of Atomikos, set the JDBC drives to XA. When Atomikos operates TM and RM (DB), Atomikos sends the command including XA to the JDBC layer. Taking MySQL for an example, when XA is enabled in the JDBC layer, JDBC will send a series of XA logic operations to InnoDB, including using DML to change the `redo` log. This is the operation of the two-phase commit. The current TiDB version does not support the upper application layer JTA/XA and does not parse XA operations sent by Atomikos.
 
@@ -105,9 +113,9 @@ As a standalone database, MySQL can only implement across-database transactions 
 - [TiFlash](/tiflash/tiflash-overview.md) introduces a special structure named DeltaTree to process the modification of the columnar engine.
 - TiFlash acts as the learner role in a Raft group, so it does not vote for the log commit or writes. This means that DML operations do not have to wait for the acknowledgment of TiFlash, which is why TiFlash does not slow down the OLTP performance. In addition, TiFlash and TiKV work in separate instances, so they do not affect each other.
 
-### Is TiFlash eventually consistent?
+### What kind of consistency does TiFlash provide?
 
-Yes. TiFlash maintains strong data consistency by default.
+TiFlash maintains strong data consistency by default. The raft learner process updates the data. There is also a TSO check to ensure the data in queries is fully consistent with the transaction. For more information, see [Asynchronous replication](/tiflash/tiflash-overview.md#asynchronous-replication) and [Consistency](/tiflash/tiflash-overview.md#consistency).
 
 ## TiDB techniques
 

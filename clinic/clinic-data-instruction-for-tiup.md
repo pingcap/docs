@@ -1,6 +1,6 @@
 ---
 title: PingCAP Clinic Diagnostic Data
-summary: Learn what diagnostic data can be collected by PingCAP Clinic Diagnostic Service from the TiDB and DM clusters deployed using TiUP.
+summary: PingCAP Clinic Diagnostic Service collects diagnostic data from TiDB and DM clusters using TiUP. Data types include cluster information, diagnostic data for TiDB, TiKV, PD, TiFlash, TiCDC, Prometheus monitoring, system variables, and node system information. Data is stored in Clinic Server for international and Chinese mainland users. The collected data is only used for troubleshooting cluster problems.
 ---
 
 # PingCAP Clinic Diagnostic Data
@@ -11,12 +11,12 @@ The diagnostic data collected by PingCAP Clinic is **only** used for troubleshoo
 
 A diagnostic service deployed in the cloud, Clinic Server provides two independent services depending on the data storage location:
 
-- [Clinic Server in the US](https://clinic.pingcap.com): If you upload the collected data to Clinic Server in the US, the data will be stored in the Amazon S3 service deployed by PingCAP in AWS US regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
-- [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): If you upload the collected data to Clinic Server in the Chinese mainland, the data will be stored in the Amazon S3 service deployed by PingCAP in China (Beijing) regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
+- [Clinic Server for international users](https://clinic.pingcap.com): If you upload the collected data to Clinic Server for international users, the data will be stored in the Amazon S3 service deployed by PingCAP in AWS US regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
+- [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn): If you upload the collected data to Clinic Server for users in the Chinese mainland, the data will be stored in the Amazon S3 service deployed by PingCAP in China (Beijing) regions. PingCAP uses strict data access policies and only authorized technical support can access the data.
 
 ## TiDB clusters
 
-This section lists the types of diagnostic data that can be collected by Diag from the TiDB clusters deployed using TiUP.
+This section lists the types of diagnostic data that can be collected by [Diag](https://github.com/pingcap/diag) from the TiDB clusters deployed using TiUP.
 
 ### TiDB cluster information
 
@@ -52,8 +52,8 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Error log | `pd_stderr.log` | `--include=log` |
 | Configuration file | `pd.toml` | `--include=config` |
 | Real-time configuration | `config.json` | `--include=config` |
-| Outputs of the command `tiup ctl pd -u http://${pd IP}:${PORT} store` | `store.json` | `--include=config` |
-| Outputs of the command `tiup ctl pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config` |
+| Outputs of the command `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} store` | `store.json` | `--include=config` |
+| Outputs of the command `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config` |
 
 ### TiFlash diagnostic data
 
@@ -112,7 +112,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 
 | Data type | Exported file | Parameter for data collection by PingCAP Clinic |
 | :------ | :------ |:-------- |
-| Log | `m-master.log` | `--include=log` |
+| Log | `dm-master.log` | `--include=log` |
 | Error log | `dm-master_stderr.log` | `--include=log` |
 | Configuration file | `dm-master.toml` | `--include=config` |
 

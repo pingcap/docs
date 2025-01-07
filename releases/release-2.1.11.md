@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1.11 Release Notes
 aliases: ['/docs/dev/releases/release-2.1.11/','/docs/dev/releases/2.1.11/']
+summary: TiDB 2.1.11 was released on June 03, 2019. It includes fixes for various issues in TiDB, PD, TiKV, and Tools. Some highlights are the fix for incorrect schema in delete from join, calculation errors of unix_timestamp(), and the addition of Drainer parameters in TiDB Ansible.
 ---
 
 # TiDB 2.1.11 Release Notes
@@ -13,10 +14,10 @@ TiDB Ansible version: 2.1.11
 
 ## TiDB
 
-- Fix the issue that incorrect schema is used for  `delete from join` [#10595](https://github.com/pingcap/tidb/pull/10595)
+- Fix the issue that incorrect schema is used for `delete from join` [#10595](https://github.com/pingcap/tidb/pull/10595)
 - Fix the issue that the built-in `CONVERT()` may return incorrect field type [#10263](https://github.com/pingcap/tidb/pull/10263)
 - Merge non-overlapped feedback when updating bucket count [#10569](https://github.com/pingcap/tidb/pull/10569)
-- Fix calculation errors  of  `unix_timestamp()-unix_timestamp(now())` [#10491](https://github.com/pingcap/tidb/pull/10491)
+- Fix calculation errors of `unix_timestamp()-unix_timestamp(now())` [#10491](https://github.com/pingcap/tidb/pull/10491)
 - Fix the incompatibility issue of `period_diff` with MySQL 8.0 [#10501](https://github.com/pingcap/tidb/pull/10501)
 - Skip `Virtual Column` when collecting statistics to avoid exceptions [#10628](https://github.com/pingcap/tidb/pull/10628)
 - Support the `SHOW OPEN TABLES` statement [#10374](https://github.com/pingcap/tidb/pull/10374)

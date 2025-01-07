@@ -5,17 +5,19 @@ summary: Learn how to connect to TiDB.
 
 # Connect to TiDB
 
-TiDB is highly compatible with the MySQL protocol. For a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html).
+TiDB is highly compatible with the MySQL protocol. For a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html).
 
-TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/internals/en/client-server-protocol.html), which allows most client drivers and ORM frameworks to connect to TiDB just as they connect to MySQL.
+TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html), which allows most client drivers and ORM frameworks to connect to TiDB just as they connect to MySQL.
+
+## MySQL
 
 You can choose to use MySQL Client or MySQL Shell based on your personal preferences.
 
-## MySQL Client
+<SimpleTab>
+
+<div label="MySQL Client">
 
 You can connect to TiDB using MySQL Client, which can be used as a command-line tool for TiDB. To install MySQL Client, follow the instructions below for YUM based Linux distributions.
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 sudo yum install mysql
@@ -23,36 +25,52 @@ sudo yum install mysql
 
 After the installation, you can connect to TiDB using the following command:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 ```
 
-## MySQL Shell
+The MySQL v9.0 client on macOS cannot correctly load the `mysql_native_password` plugin, causing the error `ERROR 2059 (HY000): Authentication plugin 'mysql_native_password' cannot be loaded` when connecting to TiDB. To address this issue, it is recommended to install and use the MySQL v8.0 client to connect to TiDB. Run the following commands to install it:
+
+```shell
+brew install mysql-client@8.0
+brew unlink mysql
+brew link mysql-client@8.0
+```
+
+If you still encounter errors, you can specify the installation path of the MySQL v8.0 client to connect to TiDB. Run the following command:
+
+```shell
+/opt/homebrew/opt/mysql-client@8.0/bin/mysql --comments --host ${YOUR_IP_ADDRESS} --port ${YOUR_PORT_NUMBER} -u ${your_user_name} -p
+```
+
+Replace `/opt/homebrew/opt/mysql-client@8.0/bin/mysql` in the preceding command with the installation path of the MySQL v8.0 client in your actual environment.
+
+</div>
+
+<div label="MySQL Shell">
 
 You can connect to TiDB using MySQL Shell, which can be used as a command-line tool for TiDB. To install MySQL Shell, follow the instructions in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation, you can connect to TiDB using the following command:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 mysqlsh --sql mysql://root@<tidb_server_host>:4000
 ```
 
+</div>
+
+</SimpleTab>
+
 ## JDBC
 
-You can connect to TiDB using the [JDBC](https://dev.mysql.com/doc/connector-j/8.0/en/) driver. To do that, you need to create a `MysqlDataSource` or `MysqlConnectionPoolDataSource` object (both objects support the `DataSource` interface), and then set the connection string using the `setURL` function.
+You can connect to TiDB using the [JDBC](https://dev.mysql.com/doc/connector-j/en/) driver. To do that, you need to create a `MysqlDataSource` or `MysqlConnectionPoolDataSource` object (both objects support the `DataSource` interface), and then set the connection string using the `setURL` function.
 
 For example:
-
-{{< copyable "" >}}
 
 ```java
 MysqlDataSource mysqlDataSource = new MysqlDataSource();
 mysqlDataSource.setURL("jdbc:mysql://{host}:{port}/{database}?user={username}&password={password}");
 ```
 
-For more information on JDBC connections, see the [JDBC documentation](https://dev.mysql.com/doc/connector-j/8.0/en/)
+For more information on JDBC connections, see the [JDBC documentation](https://dev.mysql.com/doc/connector-j/en/)
 
 ### Connection parameters
 
@@ -82,8 +100,6 @@ You can connect to TiDB using the [Hibernate ORM](https://hibernate.org/orm/). T
 
 For example, if you use a `hibernate.cfg.xml` configuration file, set `hibernate.connection.url` as follows:
 
-{{< copyable "" >}}
-
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
@@ -99,8 +115,6 @@ For example, if you use a `hibernate.cfg.xml` configuration file, set `hibernate
 ```
 
 After the configuration is done, you can use the following command to read the configuration file and get the `SessionFactory` object:
-
-{{< copyable "" >}}
 
 ```java
 SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
@@ -135,3 +149,7 @@ For more information about TiDB SQL users, see [TiDB User Account Management](/u
 For more information about TiDB SQL users, see [TiDB User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management).
 
 </CustomContent>
+
+## Need help?
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).

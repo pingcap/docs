@@ -7,19 +7,22 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier) are free to use in beta. You will not be charged for the use of your Serverless Tier cluster, and your TiDB Cloud bill will not display any Serverless Tier charges.
+> [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
 
-TiDB Cloud charges according to the resources that you consume. You can visit [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/) to get more information.
+TiDB Cloud charges according to the resources that you consume. You can visit the following pages to get more information about the pricing.
+
+- [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/)
+- [TiDB Cloud Dedicated Pricing Details](https://www.pingcap.com/tidb-dedicated-pricing-details/)
 
 ## Invoices
 
-If you are the owner or billing administrator of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
 
 After you set up the payment method, TiDB Cloud will generate an invoice once your cost reaches a quota, which is $500 by default. If you want to raise the quota or receive one invoice per month, you can [contact our sales](https://www.pingcap.com/contact-us/).
 
 > **Note:**
 >
-> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
 After you contact our sales for receiving an invoice on a monthly basis, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
 
@@ -37,17 +40,19 @@ For each monthly invoice:
 
 To view the list of invoices, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
-2. Click **Billing**. The invoices page is displayed.
+2. In the left navigation pane, click the **Billing** tab.
+
+3. Click the **Invoices** tab. The invoices page is displayed.
 
 ## Billing details
 
-If you are the owner or billing administrator of the organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
 
 After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
 
@@ -57,11 +62,11 @@ After setting the payment method, TiDB Cloud will generate the invoice and billi
 
 To view the billing details, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click **Bills**. The billing details page is displayed.
@@ -75,6 +80,48 @@ The billing details page shows the billing summary by project and by service. Yo
 > - The total amount in the monthly bill is rounded off to the 2nd decimal place.
 > - The total amount in the daily usage details is accurate to the 6th decimal place.
 
+## Cost explorer
+
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view and analyze the usage costs of TiDB Cloud. Otherwise, skip this section.
+
+To analyze and customize your cost reports of your organization, perform the following steps:
+
+1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
+
+2. On the **Billing** page, click the **Cost Explorer** tab.
+3. On the **Cost Explorer** page, expand the **Filter** section in the upper-right corner to customize your report. You can set the time range, select a grouping option (such as by service, project, cluster, region, product type, and charge type), and apply filters by selecting specific services, projects, clusters, or regions. The cost explorer will display you with the following information:
+
+    - **Cost Graph**: visualizes the cost trends over the selected time range. You can switch between **Monthly**, **Daily**, and **Total** views.
+    - **Cost Breakdown**: displays a detailed breakdown of your costs according to the selected grouping option. For further analysis, you can download the data in CSV format.
+
+## Billing profile
+
+Paid organizations can create a billing profile. Information in this profile will be used to determine the tax calculation.
+
+To view or update the billing profile of your organization, click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner and then click **Billing** > **Billing Profile**.
+
+There are four fields in the billing profile.
+
+### Company name (optional)
+
+If this field is specified, this name will appear on invoices instead of your organization name.
+
+### Billing email (optional)
+
+If this field is specified, invoices and other billing-related notifications will be sent to this email address.
+
+### Primary business address
+
+This is the address of the company that purchases TiDB Cloud services. It is used to calculate any applicable taxes.
+
+### Business tax ID (optional)
+
+If your business is registered for VAT/GST, fill in a valid VAT/GST ID. By providing this information, we will exempt you from charging VAT/GST if applicable. This is important for businesses operating in regions where VAT/GST registration allows for certain tax exemptions or refunds.
+
 ## Credits
 
 TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
@@ -87,11 +134,11 @@ The detailed information of your credits is available on the **Credits** page, i
 
 To view this page, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click **Credits**. The credit details page is displayed.
@@ -108,15 +155,30 @@ To view this page, perform the following steps:
 > - If all your credits become expired before you add a payment method, you cannot create a new cluster. After 3 days, all your existing clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
 > - If all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
 
+## Discounts
+
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can view the discount information of TiDB Cloud on the **Discounts** page. Otherwise, skip this section.
+
+The discount information includes all discounts that you have received, the status, the discount percentage, and the discount start and end date.
+
+To view this page, perform the following steps:
+
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
+
+2. Click **Billing**.
+3. Click **Discounts**. The discount details page is displayed.
+
 ## Payment method
 
-If you are the owner or billing administrator of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
 
 > **Note:**
 >
-> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
-
-### Add a credit card
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
@@ -128,15 +190,17 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
 - Anytime in the billing console:
 
-    1. Click the account name in the upper-right corner of the TiDB Cloud console.
+    1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
         > **Note:**
         >
-        > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+        > If you are in multiple organizations, switch to your target organization by clicking its name.
 
     2. Click **Billing**.
     3. Under the **Payment Method** tab, click **Add a New Card**.
-    4. Fill in the billing address and card information, and then click **Save**.
+    4. Fill in the credit card information and credit card address, and then click **Save Card**.
+
+        If you do not specify a primary business address in [**Billing profile**](#billing-profile), the credit card address will be used as your primary business address for tax calculation. You can update your primary business address in **Billing profile** anytime.
 
 > **Note:**
 >
@@ -146,46 +210,87 @@ You can bind multiple credit cards, and set one of them as the default credit ca
 
 To set the default credit card, perform the following steps:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and click **Set as default**.
 
-### Edit billing profile information
-
-The billing profile information includes the business legal address and tax registration information. By providing your tax registration number, certain taxes might be exempted from your invoice.
-
-To edit the billing profile information, perform the following steps:
-
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
-
-    > **Note:**
-    >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
-
-2. Click **Billing**.
-3. Click the **Payment Method** tab.
-4. Edit the billing profile information, and then click **Save**.
-
 ## Contract
 
-If you are the owner or billing administrator of your organization, you can manage your customized TiDB Cloud subscriptions in the TiDB Cloud console to meet compliance requirements. Otherwise, skip this section.
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can manage your customized TiDB Cloud subscriptions in the TiDB Cloud console to meet compliance requirements. Otherwise, skip this section.
 
 If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click **Contract**. The contract list is displayed.
 4. Click **Download**, **Accept**, or **Reject** according to your need.
 
 To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
+
+## Billing from AWS Marketplace or Google Cloud Marketplace
+
+If you are in the `Organization Owner` or `Organization Billing Admin` role of your organization, you can link your TiDB Cloud account to an AWS billing account or Google Cloud billing account. Otherwise, skip this section.
+
+If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), and pay for the usage via the AWS or Google Cloud billing account.
+
+- To sign up through AWS Marketplace, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- To sign up through Google Cloud Marketplace, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+
+If you already have a TiDB Cloud account and you want to pay for the usage via your AWS or Google Cloud billing account, you can link your TiDB Cloud account to your AWS or Google Cloud billing account.
+
+<SimpleTab>
+<div label="AWS Marketplace">
+
+To link your TiDB Cloud account to an AWS billing account, take the following steps:
+
+1. Open the [AWS Marketplace page](https://aws.amazon.com/marketplace), search for `TiDB Cloud` and select **TiDB Cloud** in the search results. The TiDB Cloud product page is displayed.
+
+2. On the TiDB Cloud product page, click **Continue to Subscribe**. An order page is displayed.
+
+3. On the order page, click **Subscribe**, and then click **Set Up your Account**. You are directed to the TiDB Cloud sign-up page.
+
+4. Check the notification in the upper part of the sign-up page and click **Sign in**.
+
+5. Sign in with your TiDB Cloud account. The **Link to Your AWS Billing Account** page is displayed.
+
+6. On the **Link to Your AWS Billing Account** page, select your target organization and click **Link** to link to your AWS billing account.
+
+    > **Note:**
+    >
+    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added AWS billing account.
+
+</div>
+
+<div label="Google Cloud Marketplace">
+
+To link your TiDB Cloud account to a Google Cloud billing account, take the following steps:
+
+1. Open the [Google Cloud Marketplace page](https://console.cloud.google.com/marketplace), search for `TiDB Cloud` and select **TiDB Cloud** in the search results. The TiDB Cloud product page is displayed.
+
+2. On the TiDB Cloud product page, click **SUBSCRIBE**. A subscription page is displayed.
+
+3. On the subscription page, click **Subscribe**, and then click **Go to product page**. You are directed to the TiDB Cloud sign-up page.
+
+4. Check the notification in the upper part of the sign-up page and click **Sign in**.
+
+5. Sign in with your TiDB Cloud account. The page for linking to your Google Cloud billing account is displayed.
+
+6. On the page, select the target organization and click **Link** to link to your Google Cloud billing account.
+
+    > **Note:**
+    >
+    > If your organization already has a payment method in TiDB Cloud, the existing payment method for this organization will be replaced by the newly added Google Cloud billing account.
+
+</div>
+</SimpleTab>

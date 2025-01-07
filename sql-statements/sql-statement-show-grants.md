@@ -10,25 +10,17 @@ This statement shows a list of privileges associated with a user. As in MySQL, t
 
 ## Synopsis
 
-**ShowGrantsStmt:**
+```ebnf+diagram
+ShowGrantsStmt ::=
+    "SHOW" "GRANTS" ("FOR" Username ("USING" RolenameList)?)?
 
-![ShowGrantsStmt](/media/sqlgram/ShowGrantsStmt.png)
+Username ::=
+    "CURRENT_USER" ( "(" ")" )?
+| Username ("@" Hostname)?
 
-**Username:**
-
-![Username](/media/sqlgram/Username.png)
-
-**UsingRoles:**
-
-![UsingRoles](/media/sqlgram/UsingRoles.png)
-
-**RolenameList:**
-
-![RolenameList](/media/sqlgram/RolenameList.png)
-
-**Rolename:**
-
-![Rolename](/media/sqlgram/Rolename.png)
+RolenameList ::=
+    Rolename ("@" Hostname)? ("," Rolename ("@" Hostname)? )*
+```
 
 ## Examples
 
@@ -61,7 +53,7 @@ mysql> SHOW GRANTS FOR u1;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The `SHOW GRANTS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

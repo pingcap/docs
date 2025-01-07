@@ -19,7 +19,7 @@ The following are some typical OOM phenomena:
     - **TiDB-Runtime** > **Memory Usage** shows that the `estimate-inuse` metric keeps rising.
 
 - Check `tidb.log`, and you can find the following log entries:
-    - An alarm about OOM: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]`. For more information, see [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
+    - An alarm about OOM: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"]`. For more information, see [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
     - A log entry about restart: `[INFO] [printer.go:33] ["Welcome to TiDB."]`.
 
 ## Overall troubleshooting process
@@ -163,7 +163,7 @@ To locate the root cause of an OOM issue, you need to collect the following info
     - `mem-quota-query`
     - `oom-action`
     - `tidb_enable_rate_limit_action`
-    - `server-memory-quota`
+    - `tidb_server_memory_limit`
     - `oom-use-tmp-storage`
     - `tmp-storage-path`
     - `tmp-storage-quota`
@@ -183,13 +183,13 @@ To locate the root cause of an OOM issue, you need to collect the following info
 - Run the following command to collect the TiDB Profile information when memory usage is high:
 
     ```shell
-    curl -G http://{TiDBIP}:10080/debug/zip?seconds=10" > profile.zip
+    curl -G "http://{TiDBIP}:10080/debug/zip?seconds=10" > profile.zip
     ```
 
 - Run `grep "tidb-server has the risk of OOM" tidb.log` to check the path of the alert file collected by TiDB Server. The following is an example output:
 
     ```shell
-    ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"] ["is server-memory-quota set"=false] ["system memory total"=14388137984] ["system memory usage"=11897434112] ["tidb-server memory usage"=11223572312] [memory-usage-alarm-ratio=0.8] ["record path"="/tmp/0_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record"]
+    ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=14388137984] ["system memory usage"=11897434112] ["tidb-server memory usage"=11223572312] [memory-usage-alarm-ratio=0.8] ["record path"="/tmp/0_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record"]
     ```
 
 ## See also

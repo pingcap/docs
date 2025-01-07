@@ -7,6 +7,10 @@ summary: The usage of SHOW CREATE PLACEMENT POLICY in TiDB.
 
 `SHOW CREATE PLACEMENT POLICY` is used to show the definition of a placement policy. This can be used to see the current definition of a placement policy and recreate it in another TiDB cluster.
 
+> **Note:**
+>
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
 ## Synopsis
 
 ```ebnf+diagram
@@ -24,7 +28,7 @@ PolicyName ::=
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=p1;
-SHOW CREATE PLACEMENT POLICY p1\G;
+SHOW CREATE PLACEMENT POLICY p1\G
 ```
 
 ```

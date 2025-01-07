@@ -19,7 +19,7 @@ AlterTableStmt ::=
     'ALTER' IgnoreOptional 'TABLE' TableName (
         AlterTableSpecListOpt AlterTablePartitionOpt |
         'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt |
-        'COMPACT' 'TIFLASH' 'REPLICA'
+        'COMPACT' ( 'PARTITION' PartitionNameList )? 'TIFLASH' 'REPLICA'
     )
 
 TableName ::=
@@ -32,14 +32,14 @@ AlterTableSpec ::=
 |   'ADD' ( ColumnKeywordOpt IfNotExists ( ColumnDef ColumnPosition | '(' TableElementList ')' ) | Constraint | 'PARTITION' IfNotExists NoWriteToBinLogAliasOpt ( PartitionDefinitionListOpt | 'PARTITIONS' NUM ) )
 |   ( ( 'CHECK' | 'TRUNCATE' ) 'PARTITION' | ( 'OPTIMIZE' | 'REPAIR' | 'REBUILD' ) 'PARTITION' NoWriteToBinLogAliasOpt ) AllOrPartitionNameList
 |   'COALESCE' 'PARTITION' NoWriteToBinLogAliasOpt NUM
-|   'DROP' ( ColumnKeywordOpt IfExists ColumnName RestrictOrCascadeOpt | 'PRIMARY' 'KEY' |  'PARTITION' IfExists PartitionNameList | ( KeyOrIndex IfExists | 'CHECK' ) Identifier | 'FOREIGN' 'KEY' IfExists Symbol )
+|   'DROP' ( ColumnKeywordOpt IfExists ColumnName RestrictOrCascadeOpt | 'PRIMARY' 'KEY' |  'PARTITION' IfExists PartitionNameList | ( KeyOrIndex IfExists | 'CHECK' ) Identifier | 'FOREIGN' 'KEY' Symbol )
 |   'EXCHANGE' 'PARTITION' Identifier 'WITH' 'TABLE' TableName WithValidationOpt
 |   ( 'IMPORT' | 'DISCARD' ) ( 'PARTITION' AllOrPartitionNameList )? 'TABLESPACE'
 |   'REORGANIZE' 'PARTITION' NoWriteToBinLogAliasOpt ReorganizePartitionRuleOpt
 |   'ORDER' 'BY' AlterOrderItem ( ',' AlterOrderItem )*
 |   ( 'DISABLE' | 'ENABLE' ) 'KEYS'
 |   ( 'MODIFY' ColumnKeywordOpt IfExists | 'CHANGE' ColumnKeywordOpt IfExists ColumnName ) ColumnDef ColumnPosition
-|   'ALTER' ( ColumnKeywordOpt ColumnName ( 'SET' 'DEFAULT' ( SignedLiteral | '(' Expression ')' ) | 'DROP' 'DEFAULT' ) | 'CHECK' Identifier EnforcedOrNot | 'INDEX' Identifier IndexInvisible )
+|   'ALTER' ( ColumnKeywordOpt ColumnName ( 'SET' 'DEFAULT' ( SignedLiteral | '(' Expression ')' ) | 'DROP' 'DEFAULT' ) | 'CHECK' Identifier EnforcedOrNot | 'INDEX' Identifier ("VISIBLE" | "INVISIBLE") )
 |   'RENAME' ( ( 'COLUMN' | KeyOrIndex ) Identifier 'TO' Identifier | ( 'TO' | '='? | 'AS' ) TableName )
 |   LockClause
 |   AlgorithmClause
@@ -49,6 +49,17 @@ AlterTableSpec ::=
 |   'SECONDARY_UNLOAD'
 |   ( 'AUTO_INCREMENT' | 'AUTO_ID_CACHE' | 'AUTO_RANDOM_BASE' | 'SHARD_ROW_ID_BITS' ) EqOpt LengthNum
 |   ( 'CACHE' | 'NOCACHE' )
+|   (
+        'TTL' EqOpt TimeColumnName '+' 'INTERVAL' Expression TimeUnit (TTLEnable EqOpt ( 'ON' | 'OFF' ))?
+        | 'REMOVE' 'TTL'
+        | TTLEnable EqOpt ( 'ON' | 'OFF' )
+        | TTLJobInterval EqOpt stringLit
+    )
+|   PlacementPolicyOption
+
+PlacementPolicyOption ::=
+    "PLACEMENT" "POLICY" EqOpt PolicyName
+|   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
 ## Examples
@@ -160,7 +171,7 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 - When altering multiple schema objects in a single `ALTER TABLE` statement:
 
     - Modifying the same object in multiple changes is not supported.
-    - TiDB validates statements according to the table schema **before execution**. For example, an error returns when `ALTER TABLE ADD INDEX i(b), DROP INDEX i;` is executed because the index `i` does not exist in the table.
+    - TiDB validates statements according to the table schema **before execution**. For example, an error returns when `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;` is executed because column `c1` does not exist in the table.
     - For an `ALTER TABLE` statement, the order of execution in TiDB is one change after another from left to right, which is incompatible with MySQL in some cases.
 
 - Changes of the [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
@@ -175,11 +186,11 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 
 - `ALTER TABLE t CACHE | NOCACHE` is a TiDB extension to MySQL syntax. For details, see [Cached Tables](/cached-tables.md).
 
-For further restrictions, see [MySQL Compatibility](/mysql-compatibility.md#ddl).
+For further restrictions, see [MySQL Compatibility](/mysql-compatibility.md#ddl-operations).
 
 ## See also
 
-- [MySQL Compatibility](/mysql-compatibility.md#ddl)
+- [MySQL Compatibility](/mysql-compatibility.md#ddl-operations)
 - [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
 - [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
 - [ADD INDEX](/sql-statements/sql-statement-add-index.md)

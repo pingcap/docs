@@ -37,7 +37,7 @@ On the other hand, tables with clustered indexes have certain disadvantages. See
 
 ## Usages
 
-## Create a table with clustered indexes
+### Create a table with clustered indexes
 
 Since TiDB v5.0, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement to specify whether the table's primary key is a clustered index. For example:
 
@@ -61,13 +61,13 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index] NONCLUSTERED */);
 ```
 
-For statements that do not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`, the default behavior is controlled by the system variable `@@global.tidb_enable_clustered_index`. Supported values for this variable are as follows:
+For statements that do not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`, the default behavior is controlled by the system variable [`@@global.tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50). Supported values for this variable are as follows:
 
 - `OFF` indicates that primary keys are created as non-clustered indexes by default.
 - `ON` indicates that primary keys are created as clustered indexes by default.
 - `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, primary keys are created as non-clustered indexes by default. If it is set to `false`, only the primary keys which consist of an integer column are created as clustered indexes.
 
-The default value of `@@global.tidb_enable_clustered_index` is `INT_ONLY`.
+The default value of `@@global.tidb_enable_clustered_index` is `ON`.
 
 ### Add or drop clustered indexes
 
@@ -106,7 +106,7 @@ mysql> SHOW CREATE TABLE t;
 | Table | Create Table                                                                                                                                                                                      |
 +-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | t     | CREATE TABLE `t` (
-  `a` bigint(20) NOT NULL,
+  `a` bigint NOT NULL,
   `b` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`a`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
@@ -147,15 +147,6 @@ Currently, there are several different types of limitations for the clustered in
     - Downgrading tables with clustered indexes is not supported. If you need to downgrade such tables, use logical backup tools to migrate data instead.
 - Situations that are not supported yet but in the support plan:
     - Adding, dropping, and altering clustered indexes using `ALTER TABLE` statements are not supported.
-- Limitations for specific versions:    
-    - In v5.0, using the clustered index feature together with TiDB Binlog is not supported. After TiDB Binlog is enabled, TiDB only allows creating a single integer column as the clustered index of a primary key. TiDB Binlog does not replicate data changes (such as insertion, deletion, and update) on existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes to the downstream, upgrade your cluster to v5.1 or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) for replication instead.
-
-After TiDB Binlog is enabled, if the clustered index you create is not a single integer primary key, TiDB returns the following error:
-
-```sql
-mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED);
-ERROR 8200 (HY000): Cannot create clustered index table when the binlog is ON
-```
 
 If you use clustered indexes together with the attribute `SHARD_ROW_ID_BITS`, TiDB reports the following error:
 

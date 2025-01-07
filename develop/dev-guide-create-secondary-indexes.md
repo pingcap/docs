@@ -11,7 +11,7 @@ This document describes how to create a secondary index using SQL and various pr
 
 Before creating a secondary index, do the following:
 
-- [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 - [Create a Database](/develop/dev-guide-create-database.md).
 - [Create a Table](/develop/dev-guide-create-table.md).
@@ -38,8 +38,6 @@ In TiDB, you can either [add a secondary index to an existing table](#add-a-seco
 
 To add a secondary index to an existing table, you can use the [CREATE INDEX](/sql-statements/sql-statement-create-index.md) statement as follows:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE INDEX {index_name} ON {table_name} ({column_names});
 ```
@@ -53,8 +51,6 @@ Parameter description:
 ## Create a secondary index when creating a new table
 
 To create a secondary index at the same time as table creation, you can add a clause containing the `KEY` keyword to the end of the [CREATE TABLE](/sql-statements/sql-statement-create-table.md) statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 KEY `{index_name}` (`{column_names}`)
@@ -77,24 +73,22 @@ The fields in the `books` table are as follows:
 
 | Field name   | Type          | Field description                                                          |
 |--------------|---------------|------------------------------------------------------------------|
-| id           | bigint(20)    | Unique ID of the book                                            |
+| id           | bigint    | Unique ID of the book                                            |
 | title        | varchar(100)  | Book title                                                       |
 | type         | enum          | Types of books (for example, magazines, animations, and teaching aids) |
-| stock        | bigint(20)    | Stock                                                            |
+| stock        | bigint    | Stock                                                            |
 | price        | decimal(15,2) | Price                                                            |
 | published_at | datetime      | Date of publishing                                                  |
 
 The `books` table is created using the following SQL statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE `bookshop`.`books` (
-  `id` bigint(20) AUTO_RANDOM NOT NULL,
+  `id` bigint AUTO_RANDOM NOT NULL,
   `title` varchar(100) NOT NULL,
   `type` enum('Magazine', 'Novel', 'Life', 'Arts', 'Comics', 'Education & Reference', 'Humanities & Social Sciences', 'Science & Technology', 'Kids', 'Sports') NOT NULL,
   `published_at` datetime NOT NULL,
-  `stock` int(11) DEFAULT '0',
+  `stock` int DEFAULT '0',
   `price` decimal(15,2) DEFAULT '0.0',
   PRIMARY KEY (`id`) CLUSTERED
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -102,15 +96,11 @@ CREATE TABLE `bookshop`.`books` (
 
 To support the searching by year feature, you need to write a SQL statement to **search for all books published in a given year**. Taking 2022 as an example, write a SQL statement as follows:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
 To check the execution plan of the SQL statement, you can use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement.
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
@@ -132,8 +122,6 @@ The following is an example output of the execution plan:
 In the example output, **TableFullScan** is displayed in the `id` column, which means that TiDB is ready to do a full table scan on the `books` table in this query. In the case of a large amount of data, however, a full table scan might be quite slow and cause a fatal impact.
 
 To avoid such impact, you can add an index for the `published_at` column to the `books` table as follows:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`published_at`);
@@ -176,8 +164,6 @@ The execution plan does not return the same operator every time. This is because
 
 To query the indexes on a table, you can use the [SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md) statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 SHOW INDEXES FROM `bookshop`.`books`;
 ```
@@ -197,3 +183,17 @@ The following is an example output:
 ## Next step
 
 After creating a database and adding tables and secondary indexes to it, you can start adding the data [write](/develop/dev-guide-insert-data.md) and [read](/develop/dev-guide-get-data-from-single-table.md) features to your application.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

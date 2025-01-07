@@ -1,9 +1,9 @@
 ---
-title: Quick start with HTAP
+title: Quick Start with TiDB HTAP
 summary: Learn how to quickly get started with the TiDB HTAP.
 ---
 
-# Quick Start Guide for TiDB HTAP
+# Quick Start with TiDB HTAP
 
 This guide walks you through the quickest way to get started with TiDB's one-stop solution of Hybrid Transactional and Analytical Processing (HTAP).
 
@@ -26,7 +26,7 @@ In this document, you can experience the convenience and high performance of TiD
 
 ### Step 1. Deploy a local test environment
 
-Before using TiDB HTAP, follow the steps in the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) to prepare a local test environment, and run the following command to deploy a TiDB cluster:
+Before using TiDB HTAP, follow the steps in the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md) to prepare a local test environment, and run the following command to deploy a TiDB cluster:
 
 {{< copyable "shell-regular" >}}
 
@@ -97,7 +97,7 @@ In the following steps, you can create a [TPC-H](http://www.tpc.org/tpch/) datas
     | test.lineitem |        6491711 | 849.07 MiB| 99.06 MiB  | 948.13 MiB|
     +---------------+----------------+-----------+------------+-----------+
     8 rows in set (0.06 sec)
-     ```
+    ```
 
     This is a database of a commercial ordering system. In which, the `test.nation` table indicates the information about countries, the `test.region` table indicates the information about regions, the `test.part` table indicates the information about parts, the `test.supplier` table indicates the information about suppliers, the `test.partsupp` table indicates the information about parts of suppliers, the `test.customer` table indicates the information about customers, the `test.customer` table indicates the information about orders, and the `test.lineitem` table indicates the information about online items.
 
@@ -108,6 +108,7 @@ To know the performance of TiDB with only the row-based storage engine, execute 
 {{< copyable "sql" >}}
 
 ```sql
+USE test;
 SELECT
     l_orderkey,
     SUM(
@@ -139,7 +140,7 @@ This is a shipping priority query, which provides the priority and potential rev
 
 ### Step 4. Replicate the test data to the columnar storage engine
 
-After TiFlash is deployed, TiKV does not replicate data to TiFlash immediately. You need to execute the following DDL statements in a MySQL client of TiDB to specify which tables need to be replicated. After that, TiDB will create the specified replicas in TiFlash accordingly. 
+After TiFlash is deployed, TiKV does not replicate data to TiFlash immediately. You need to execute the following DDL statements in a MySQL client of TiDB to specify which tables need to be replicated. After that, TiDB will create the specified replicas in TiFlash accordingly.
 
 {{< copyable "sql" >}}
 
@@ -161,8 +162,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 In the result of the above statements:
 
-- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once a replica becomes available, this status does not change any more. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
-- `PROGRESS` means the progress of the replication. The value is between 0.0 and 1.0. 1 means at least one replica is replicated.
+- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once the `AVAILABLE` field becomes `1`, this status does not change anymore.
+- `PROGRESS` means the progress of the replication. The value is between 0.0 and 1.0. 1 means that the replication progress of the TiFlash replica is complete.
 
 ### Step 5. Analyze data faster using HTAP
 
@@ -173,7 +174,8 @@ For tables with TiFlash replicas, the TiDB optimizer automatically determines wh
 {{< copyable "sql" >}}
 
 ```sql
-explain analyze SELECT
+USE test;
+EXPLAIN ANALYZE SELECT
     l_orderkey,
     SUM(
         l_extendedprice * (1 - l_discount)

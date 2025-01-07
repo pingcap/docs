@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.15 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.15/']
+summary: TiDB 3.0.15 was released on June 5, 2020. New features include support for admin recover index and admin check index statements on partitioned tables, as well as optimization of memory allocation mechanism. Bug fixes address issues such as incorrect results in PointGet and inconsistent results between TiDB and MySQL when XOR operates on a floating-point number. TiKV fixes issues related to memory defragmentation and gRPC disconnection.
 ---
 
 # TiDB 3.0.15 Release Notes
@@ -14,7 +15,7 @@ TiDB version: 3.0.15
 + TiDB
 
     - Forbid the query in partitioned tables to use the plan cache feature [#16759](https://github.com/pingcap/tidb/pull/16759)
-    - Support the `admin recover index` and  `admin check index` statements on partitioned tables [#17315](https://github.com/pingcap/tidb/pull/17315) [#17390](https://github.com/pingcap/tidb/pull/17390)
+    - Support the `admin recover index` and `admin check index` statements on partitioned tables [#17315](https://github.com/pingcap/tidb/pull/17315) [#17390](https://github.com/pingcap/tidb/pull/17390)
     - Support partition pruning of the `in` condition for Range partitioned tables [#17318](https://github.com/pingcap/tidb/pull/17318)
     - Optimize the output of `SHOW CREATE TABLE`, and add quotation marks to the partition name [#16315](https://github.com/pingcap/tidb/pull/16315)
     - Support the `ORDER BY` clause in the `GROUP_CONCAT` function [#16988](https://github.com/pingcap/tidb/pull/16988)

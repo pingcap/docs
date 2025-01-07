@@ -1,5 +1,6 @@
 ---
 title: Gitpod
+summary: Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
 ---
 
 <!-- markdownlint-disable MD029 -->
@@ -26,21 +27,19 @@ Gitpod is an open-source Kubernetes application (GitHub repository address: <htt
 
 After completing the [quick-start](#quick-start) steps, it will take a while for Gitpod to set up your workspace.
 
-Take the [Spring Boot Web](/develop/dev-guide-sample-application-spring-boot.md) application as an example. You can create a new workspace by the `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL.
+Take the [Spring Boot Web](/develop/dev-guide-sample-application-java-spring-boot.md) application as an example. You can create a new workspace by the `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL.
 
 After that, you will see a page similar to the following:
 
 ![playground gitpod workspace init](/media/develop/playground-gitpod-workspace-init.png)
 
-This scenario in the page uses [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview) to build a TiDB Playground. You can check the progress on the left side of the terminal area.
+This scenario in the page uses [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview) to build a TiDB Playground. You can check the progress on the left side of the terminal area.
 
 Once the TiDB Playground is ready, another `Spring JPA Hibernate` task will run. You can check the progress on the right side of the terminal area.
 
 After all these tasks are finished, you will see a page similar to the following. On this page, check the `REMOTE EXPLORER` area in the left navigation pane (Gitpod supports URL-based port forwarding) and find the URL of your port `8080`.
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
-
-You can test the API by [sending an HTTP request](/develop/dev-guide-sample-application-spring-boot.md#step-6-http-requests). Make sure to replace the `http://localhost:8080` URL with the one you found in the `REMOTE EXPLORER` area.
 
 ## Using custom Gitpod configuration and Docker image
 
@@ -167,3 +166,17 @@ Visit `https://gitpod.io/workspaces` for all established workspaces.
 Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
 
 ![playground gitpod summary](/media/develop/playground-gitpod-summary.png)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

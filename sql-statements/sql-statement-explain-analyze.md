@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-explain-analyze/','/docs/dev/r
 
 # EXPLAIN ANALYZE
 
-The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major difference being that it will actually execute the statement. This allows you to compare the estimates used as part of query planning to actual values encountered during execution.  If the estimates differ significantly from the actual values, you should consider running `ANALYZE TABLE` on the affected tables.
+The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major difference being that it will actually execute the statement. This allows you to compare the estimates used as part of query planning to actual values encountered during execution. If the estimates differ significantly from the actual values, you should consider running `ANALYZE TABLE` on the affected tables.
 
 > **Note:**
 >
@@ -34,14 +34,14 @@ ExplainableStmt ::=
 
 ## EXPLAIN ANALYZE output format
 
-Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. Therefore, you can regard `EXPLAIN ANALYZE` as an extension of the `EXPLAIN` statement. Compared to `EXPLAIN` (for debugging query exeuction), the return results of `EXPLAIN ANALYZE` also include columns of information such as `actRows`, `execution info`, `memory`, and `disk`. The details of these columns are shown as follows:
+Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. Therefore, you can regard `EXPLAIN ANALYZE` as an extension of the `EXPLAIN` statement. Compared to `EXPLAIN` (for debugging query execution), the return results of `EXPLAIN ANALYZE` also include columns of information such as `actRows`, `execution info`, `memory`, and `disk`. The details of these columns are shown as follows:
 
 | attribute name          | description |
 |:----------------|:---------------------------------|
-| actRows       | Number of rows output by the operator. |
-| execution info  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. |
-| memory  | Memory space occupied by the operator. |
-| disk  | Disk space occupied by the operator. |
+| `actRows`       | Number of rows output by the operator. |
+| `execution info`  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called multiple times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. `open` represents the time spent initializing the operator. `close` refers to the time taken from when the operator finishes processing data to when it ends execution. The `time` value includes both `open` and `close` time. When the operator is executed concurrently, `execution info` shows the sum of all used `wall time`. In this case, `time`, `open`, and `close` are replaced with `total_time`, `total_open`, and `total_close`. |
+| `memory`  | Maximum memory space occupied by the operator. |
+| `disk`  | Maximum disk space occupied by the operator. |
 
 ## Examples
 
@@ -99,7 +99,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## Execution information of operators
 
-In addition to the basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
+In addition to the basic `time`, `open`, `close` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
 
 ### Point_Get
 
@@ -155,7 +155,7 @@ The `IndexJoin` operator has 1 outer worker and N inner workers for concurrent e
 
 1. The outer worker reads N outer rows, then wraps it into a task, and sends it to the result channel and the inner worker channel.
 2. The inner worker receives the task, build key ranges from the task, and fetches inner rows according to the key ranges. It then builds the inner row hash table.
-3. The main `IndexJoin`  thread receives the task from the result channel and waits for the inner worker to finish handling the task.
+3. The main `IndexJoin` thread receives the task from the result channel and waits for the inner worker to finish handling the task.
 4. The main `IndexJoin` thread joins each outer row by looking up to the inner rows' hash table.
 
 The `IndexJoin` operator contains the following execution information:
@@ -226,6 +226,33 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
     - `probe`: The total time consumed for joining with outer table rows and the hash table.
     - `fetch`: The total time that the join worker waits to read the outer table rows data.
 
+### TableFullScan (TiFlash)
+
+The `TableFullScan` operator executed on a TiFlash node contains the following execution information:
+
+```sql
+tiflash_scan: {
+  dtfile: {
+    total_scanned_packs: 2, 
+    total_skipped_packs: 1, 
+    total_scanned_rows: 16000, 
+    total_skipped_rows: 8192, 
+    total_rough_set_index_load_time: 2ms, 
+    total_read_time: 20ms
+  }, 
+  total_create_snapshot_time: 1ms
+}
+```
+
++ `dtfile`: the DTFile (DeltaTree File) related information during the table scan, which reflects the data scan status of the TiFlash Stable layer.
+    - `total_scanned_packs`: the total number of packs that have been scanned in the DTFile. A pack is the minimum unit that can be read in the TiFlash DTFile. By default, every 8192 rows constitute a pack.
+    - `total_skipped_packs`: the total number of packs that have been skipped by the scan in the DTFile. When a `WHERE` clause hits rough set indexes or matches the range filtering of a primary key, the irrelevant packs are skipped.
+    - `total_scanned_rows`: the total number of rows that have been scanned in the DTFile. If there are multiple versions of updates or deletions because of MVCC, each version is counted independently.
+    - `total_skipped_rows`: the total number of rows that are skipped by the scan in the DTFile.
+    - `total_rs_index_load_time`: the total time used to read DTFile rough set indexes.
+    - `total_read_time`:  the total time used to read DTFile data.
++ `total_create_snapshot_time`: the total time used to create snapshots during the table scan.
+
 ### lock_keys execution information
 
 When a DML statement is executed in a pessimistic transaction, the execution information of the operator might also include the execution information of `lock_keys`. For example:
@@ -254,6 +281,86 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 - `commit`: The time consumed for the `commit` phase during the 2PC commit of the transaction.
 - `write_keys`: The total `keys` written in the transaction.
 - `write_byte`: The total bytes of `key-value` written in the transaction, and the unit is byte.
+
+### RU (Request Unit) consumption
+
+[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit of system resources, which is defined in TiDB resource control. The `execution info` of the top-level operator shows the overall RU consumption of this particular SQL statement.
+
+```
+RU:273.842670
+```
+
+> **Note:**
+>
+> This value shows the actual RUs consumed by this execution. The same SQL statement might consume different amounts of RUs each time it is executed due to the effects of caching (for example, [coprocessor cache](/coprocessor-cache.md)).
+
+You can calculate the RU from the other values in `EXPLAIN ANALYZE`, specifically the `execution info` column. For example:
+
+```json
+'executeInfo':
+   time:2.55ms, 
+   loops:2, 
+   RU:0.329460, 
+   Get:{
+       num_rpc:1,
+       total_time:2.13ms
+   }, 
+   total_process_time: 231.5µs,
+   total_wait_time: 732.9µs, 
+   tikv_wall_time: 995.8µs,
+   scan_detail: {
+      total_process_keys: 1, 
+      total_process_keys_size: 150, 
+      total_keys: 1, 
+      get_snapshot_time: 691.7µs,
+      rocksdb: {
+          block: {
+              cache_hit_count: 2,
+              read_count: 1,
+              read_byte: 8.19 KB,
+              read_time: 10.3µs
+          }
+      }
+  },
+```
+
+The base costs are defined in the [`tikv/pd` source code](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67) and the calculations are performed in the [`model.go`](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107) file.
+
+If you are using TiDB v7.1, the calculation is the sum of `BeforeKVRequest()` and `AfterKVRequest()` in `pd/pd-client/model.go`, that is:
+
+```
+before key/value request is processed:
+      consumption.RRU += float64(kc.ReadBaseCost) -> kv.ReadBaseCost * rpc_nums
+
+after key/value request is processed:
+      consumption.RRU += float64(kc.ReadBytesCost) * readBytes -> kc.ReadBytesCost * total_process_keys_size
+      consumption.RRU += float64(kc.CPUMsCost) * kvCPUMs -> kc.CPUMsCost * total_process_time
+```
+
+For writes and batch gets, the calculation is similar with different base costs.
+
+### tiflash_wait information
+
+When a query involves MPP tasks, the execution time is also affected by various tiflash_wait times, for example:
+
+```
+tiflash_wait: {minTSO_wait: 425ms, pipeline_breaker_wait: 133ms, pipeline_queue_wait: 512ms}
+```
+
+<CustomContent platform="tidb">
+
+- `minTSO_wait`: records the time spent waiting for an MPP task to be scheduled by the [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
+- `pipeline_breaker_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the time taken by the pipeline containing the pipeline breaker operator to wait for all data in the upstream pipeline. Currently, it is only used to display the time taken by the pipeline containing the `Join` operator to wait for all hash table builds to complete.
+- `pipeline_queue_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the waiting time in the CPU Task Thread Pool and IO Task Thread Pool during the execution of the pipeline.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+- `minTSO_wait`: records the time spent waiting for an MPP task to be scheduled by the [TiFlash MinTSO Scheduler](https://docs.pingcap.com/tidb/stable/tiflash-mintso-scheduler).
+- `pipeline_breaker_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the time taken by the pipeline containing the pipeline breaker operator to wait for all data in the upstream pipeline. Currently, it is only used to display the time taken by the pipeline containing the `Join` operator to wait for all hash table builds to complete.
+- `pipeline_queue_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the waiting time in the CPU Task Thread Pool and IO Task Thread Pool during the execution of the pipeline.
+
+</CustomContent>
 
 ### Other common execution information
 

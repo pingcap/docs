@@ -1,6 +1,6 @@
 ---
 title: TiDB Best Practices
-summary: Learn the best practices of using TiDB.
+summary: This document summarizes best practices for using TiDB, covering SQL use and optimization tips for OLAP and OLTP scenarios, with a focus on TiDB-specific optimization options. It also recommends reading three blog posts introducing TiDB's technical principles before diving into the best practices.
 aliases: ['/docs/dev/tidb-best-practices/']
 ---
 
@@ -10,9 +10,9 @@ This document summarizes the best practices of using TiDB, including the use of 
 
 Before you read this document, it is recommended that you read three blog posts that introduce the technical principles of TiDB:
 
-* [TiDB Internal (I) - Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/)
-* [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/)
-* [TiDB Internal (III) - Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/)
+* [TiDB Internal (I) - Data Storage](https://www.pingcap.com/blog/tidb-internal-data-storage/)
+* [TiDB Internal (II) - Computing](https://www.pingcap.com/blog/tidb-internal-computing/)
+* [TiDB Internal (III) - Scheduling](https://www.pingcap.com/blog/tidb-internal-scheduling/)
 
 ## Preface
 
@@ -68,7 +68,7 @@ Placement Driver (PD) balances the load of the cluster according to the status o
 
 ### SQL on KV
 
-TiDB automatically maps the SQL structure into Key-Value structure. For details, see [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/).
+TiDB automatically maps the SQL structure into Key-Value structure. For details, see [TiDB Internal (II) - Computing](https://www.pingcap.com/blog/tidb-internal-computing/).
 
 Simply put, TiDB performs the following operations:
 
@@ -142,7 +142,7 @@ In the last section, we discussed some basic implementation mechanisms of TiDB a
 
 ### Deployment
 
-Before deployment, read [Software and Hardware Requirements](/hardware-and-software-requirements.md).
+Before deployment, read [TiDB Software and Hardware Requirements](/hardware-and-software-requirements.md).
 
 It is recommended to deploy the TiDB cluster using [TiUP](/production-deployment-using-tiup.md). This tool can deploy, stop, destroy, and upgrade the whole cluster, which is quite convenient. It is not recommended to manually deploy the TiDB cluster, which might be troublesome to maintain and upgrade later.
 

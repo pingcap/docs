@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.6 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.6/','/docs/dev/releases/3.0.6/']
+summary: TiDB 3.0.6 was released on November 28, 2019, with various fixes and optimizations. The release includes improvements to the SQL optimizer, SQL execution engine, server, DDL, TiKV, PD, TiDB Binlog, and TiDB Lightning. Fixes include issues with window function AST, pushing down `STREAM AGG()`, handling quotes for SQL binding, and more. TiKV improvements include accurate `lock_manager`, support for `innodb_lock_wait_timeout`, and dynamic modification of the GC I/O limit using `tikv-ctl`. PD enhancements include lower client log level and warning log for generating a timestamp. TiDB Binlog and TiDB Lightning also received fixes and improvements.
 ---
 
 # TiDB 3.0.6 Release Notes
@@ -63,7 +64,7 @@ TiDB Ansible version: 3.0.6
         - `Write_size`
         - `Prewrite_region`
         - `Txn_retry`
-    - Use the table’s `COLLATE` instead of the system’s default charset in the column when a table is created and the table contains `COLLATE` [#13174](https://github.com/pingcap/tidb/pull/13174)
+    - Use the table's `COLLATE` instead of the system's default charset in the column when a table is created and the table contains `COLLATE` [#13174](https://github.com/pingcap/tidb/pull/13174)
     - Limit the length of the index name when creating a table [#13310](https://github.com/pingcap/tidb/pull/13310)
     - Fix the issue that the table name length is not checked when a table is renamed [#13346](https://github.com/pingcap/tidb/pull/13346)
     - Add the `alter-primary-key` configuration (disabled by default) to support adding/dropping the primary key in TiDB [#13522](https://github.com/pingcap/tidb/pull/13522)
@@ -91,11 +92,11 @@ TiDB Ansible version: 3.0.6
 ## Tools
 
 + TiDB Binlog
-    - Obtain the initial replication timestamp from PD when `initial-commit-ts` is set to “-1” in Drainer [#788](https://github.com/pingcap/tidb-binlog/pull/788)
-    - Decouple Drainer’s `Checkpoint` storage from the downstream and support saving `Checkpoint` in  MySQL or local files [#790](https://github.com/pingcap/tidb-binlog/pull/790)
+    - Obtain the initial replication timestamp from PD when `initial-commit-ts` is set to "-1" in Drainer [#788](https://github.com/pingcap/tidb-binlog/pull/788)
+    - Decouple Drainer's `Checkpoint` storage from the downstream and support saving `Checkpoint` in MySQL or local files [#790](https://github.com/pingcap/tidb-binlog/pull/790)
     - Fix the Drainer panic issue caused by using empty values when configuring replication database/table filtering [#801](https://github.com/pingcap/tidb-binlog/pull/801)
     - Fix the issue that processes get into the deadlock status instead of exiting after a panic occurs because Drainer fails to apply binlog files to the downstream [#807](https://github.com/pingcap/tidb-binlog/pull/807)
-    - Fix the issue that Pump blocks when it exits because of gRPC’s `GracefulStop` [#817](https://github.com/pingcap/tidb-binlog/pull/817)
+    - Fix the issue that Pump blocks when it exits because of gRPC's `GracefulStop` [#817](https://github.com/pingcap/tidb-binlog/pull/817)
     - Fix the issue that Drainer fails when it receives a binlog which misses a column during the execution of a `DROP COLUMN` statement in TiDB (v3.0.6 or later) [#827](https://github.com/pingcap/tidb-binlog/pull/827)
 + TiDB Lightning
     - Add the `max-allowed-packet` configuration (64 M by default) for the TiDB backend [#248](https://github.com/pingcap/tidb-lightning/pull/248)

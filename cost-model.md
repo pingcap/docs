@@ -19,9 +19,9 @@ mysql> SHOW CREATE TABLE t;
 | Table | Create Table                                                                                                                                                                                        |
 +-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | t     | CREATE TABLE `t` (
-  `a` int(11) DEFAULT NULL,
-  `b` int(11) DEFAULT NULL,
-  `c` int(11) DEFAULT NULL,
+  `a` int DEFAULT NULL,
+  `b` int DEFAULT NULL,
+  `c` int DEFAULT NULL,
   KEY `b` (`b`),
   KEY `c` (`c`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
@@ -40,13 +40,12 @@ The preceding example is simplified and only used to explain the basic principle
 
 ## Cost Model Version 2
 
-> **Warning:**
->
-> - Cost Model Version 2 is currently an experimental feature. It is not recommended that you use it for production environments.
-> - Switching the version of the cost model might cause changes to query plans.
-
 TiDB v6.2.0 introduces Cost Model Version 2, a new cost model.
 
 Cost Model Version 2 provides a more accurate regression calibration of the cost formula, adjusts some of the cost formulas, and is more accurate than the previous version of the cost formula.
 
 To switch the version of cost model, you can set the [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable.
+
+> **Note:**
+>
+> Switching the version of the cost model might cause changes to query plans.

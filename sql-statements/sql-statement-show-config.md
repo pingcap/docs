@@ -8,21 +8,24 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-config/']
 
 The `SHOW CONFIG` statement is used to show the current configuration of various components of TiDB. Note that the configuration and system variables act on different dimensions and should not be mixed up. If you want to obtain the system variable information, use the [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md) syntax.
 
+> **Note:**
+>
+> This feature is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/). 
+
 ## Synopsis
 
-**ShowStmt:**
+```ebnf+diagram
+ShowConfigStmt ::=
+    "SHOW" "CONFIG" ShowLikeOrWhere?
 
-![ShowStmt](/media/sqlgram/ShowStmt.png)
-
-**ShowTargetFilterable:**
-
-![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
 Show all configurations:
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW CONFIG;
@@ -41,8 +44,6 @@ SHOW CONFIG;
 
 Show the configuration where the `type` is `tidb`:
 
-{{< copyable "sql" >}}
-
 ```sql
 SHOW CONFIG WHERE type = 'tidb' AND name = 'advertise-address';
 ```
@@ -57,8 +58,6 @@ SHOW CONFIG WHERE type = 'tidb' AND name = 'advertise-address';
 ```
 
 You can also use the `LIKE` clause to show the configuration where the `type` is `tidb`:
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW CONFIG LIKE 'tidb';

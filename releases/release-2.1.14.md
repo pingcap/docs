@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1.14 Release Notes
 aliases: ['/docs/dev/releases/release-2.1.14/','/docs/dev/releases/2.1.14/']
+summary: TiDB 2.1.14 was released on July 04, 2019. It includes various bug fixes and improvements, such as fixing wrong query results, adding new system variables, optimizing memory usage, and adding new configuration items for TiDB Binlog and TiDB Ansible. Additionally, there are optimizations for TiKV and PD.
 ---
 
 # TiDB 2.1.14 Release Notes
@@ -43,7 +44,7 @@ TiDB Binlog
 - Reparo
     - Add the `safe-mode` configuration item, and support importing duplicated data after this item is enabled [#662](https://github.com/pingcap/tidb-binlog/pull/662)
 - Pump
-    - Add the  `stop-write-at-available-space` configuration item to limit the available binlog space [#659](https://github.com/pingcap/tidb-binlog/pull/659)
+    - Add the `stop-write-at-available-space` configuration item to limit the available binlog space [#659](https://github.com/pingcap/tidb-binlog/pull/659)
     - Fix the issue that Garbage Collector does not work sometimes when the number of LevelDB L0 files is 0 [#648](https://github.com/pingcap/tidb-binlog/pull/648)
     - Optimize the algorithm of deleting log files to speed up releasing the space [#648](https://github.com/pingcap/tidb-binlog/pull/648)
 - Drainer

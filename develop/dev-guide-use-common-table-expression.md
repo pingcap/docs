@@ -15,15 +15,13 @@ Since TiDB v5.1, TiDB supports the CTE of the ANSI SQL99 standard and recursion.
 
 ## Basic use
 
-A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can apply the `WITH` statement to use CTE.
+A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can apply the [`WITH`](/sql-statements/sql-statement-with.md) statement to use CTE.
 
 Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
 
 ### Non-recursive CTE
 
 Non-recursive CTE can be defined using the following syntax:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH <query_name> AS (
@@ -38,8 +36,6 @@ For example, if you want to know how many books each of the 50 oldest authors ha
 <div label="SQL" value="sql">
 
 Change the statement in [temporary tables](/develop/dev-guide-use-temporary-tables.md) to the following:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH top_50_eldest_authors_cte AS (
@@ -75,8 +71,6 @@ The result is as follows:
 
 </div>
 <div label="Java" value = "java">
-
-{{< copyable "java" >}}
 
 ```java
 public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
@@ -116,8 +110,6 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </SimpleTab>
 
 It can be found that the author "Ray Macejkovic" wrote 4 books. With the CTE query, you can further get the order and rating information of these 4 books as follows:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH books_authored_by_rm AS (
@@ -189,8 +181,6 @@ SELECT ... FROM <query_name>;
 
 A classic example is to generate a set of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) with recursive CTE:
 
-{{< copyable "sql" >}}
-
 ```sql
 WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS
 (
@@ -224,3 +214,17 @@ The result is as follows:
 ## Read more
 
 - [WITH](/sql-statements/sql-statement-with.md)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

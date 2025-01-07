@@ -12,13 +12,14 @@ This statement shows a list of databases that the current user has privileges to
 
 ## Synopsis
 
-**ShowDatabasesStmt:**
+```ebnf+diagram
+ShowDatabasesStmt ::=
+    "SHOW" "DATABASES" ShowLikeOrWhere?
 
-![ShowDatabasesStmt](/media/sqlgram/ShowDatabasesStmt.png)
-
-**ShowLikeOrWhereOpt:**
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
+```
 
 ## Examples
 
@@ -52,10 +53,11 @@ mysql> SHOW DATABASES;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The `SHOW DATABASES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 
 * [SHOW SCHEMAS](/sql-statements/sql-statement-show-schemas.md)
 * [DROP DATABASE](/sql-statements/sql-statement-drop-database.md)
 * [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
+* [`INFORMATION_SCHEMA.SCHEMATA`](/information-schema/information-schema-schemata.md)

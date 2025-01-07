@@ -1,12 +1,12 @@
 ---
-title: Migrate MySQL of Small Datasets to TiDB
-summary: Learn how to migrate MySQL of small datasets to TiDB.
+title: Migrate Small Datasets from MySQL to TiDB
+summary: Learn how to migrate small datasets from MySQL to TiDB.
 aliases: ['/tidb/dev/usage-scenario-incremental-migration/']
 ---
 
-# Migrate MySQL of Small Datasets to TiDB
+# Migrate Small Datasets from MySQL to TiDB
 
-This document describes how to use TiDB Data Migration (DM) to migrate MySQL of small datasets to TiDB in the full migration mode and incremental replication mode. "Small datasets" in this document mean data size less than 1 TiB.
+This document describes how to use TiDB Data Migration (DM) to migrate small datasets from MySQL to TiDB in the full migration mode and incremental replication mode. "Small datasets" in this document mean data size less than 1 TiB.
 
 The migration speed varies from 30 GB/h to 50 GB/h, depending on multiple factors such as the number of indexes in the table schema, hardware, and network environment. <!--The migration process using DM is shown in the figure below.-->
 
@@ -137,8 +137,8 @@ To view the historical status of the migration task and other internal metrics, 
 
 If you have deployed Prometheus, Alertmanager, and Grafana when deploying DM using TiUP, you can access Grafana using the IP address and port specified during the deployment. You can then select the DM dashboard to view DM-related monitoring metrics.
 
-- The log directory of DM-master: specified by the DM-master process parameter `--log-file`. If you have deployd DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
-- The log directory of DM-worker: specified by the DM-worker process parameter `--log-file`. If you have deployd DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
+- The log directory of DM-master: specified by the DM-master process parameter `--log-file`. If you have deployed DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
+- The log directory of DM-worker: specified by the DM-worker process parameter `--log-file`. If you have deployed DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
 
 ## What's next
 

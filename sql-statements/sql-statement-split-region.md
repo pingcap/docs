@@ -12,43 +12,38 @@ In the above case, because there is only one Region at the beginning, all write 
 
 To solve the hotspot problem in the above scenario, TiDB introduces the pre-split function, which can pre-split multiple Regions for a certain table according to the specified parameters and scatter them to each TiKV node.
 
+> **Note:**
+>
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
 ## Synopsis
 
-**SplitRegionStmt:**
+```ebnf+diagram
+SplitRegionStmt ::=
+    "SPLIT" SplitSyntaxOption "TABLE" TableName PartitionNameList? ("INDEX" IndexName)? SplitOption
 
-![SplitRegionStmt](/media/sqlgram/SplitRegionStmt.png)
+SplitSyntaxOption ::=
+    ("REGION" "FOR")? "PARTITION"?
 
-**SplitSyntaxOption:**
+TableName ::=
+    (SchemaName ".")? Identifier
 
-![SplitSyntaxOption](/media/sqlgram/SplitSyntaxOption.png)
+PartitionNameList ::=
+    "PARTITION" "(" PartitionName ("," PartitionName)* ")"
 
-**TableName:**
+SplitOption ::=
+    ("BETWEEN" RowValue "AND" RowValue "REGIONS" NUM
+|   "BY" RowValue ("," RowValue)* )
 
-![TableName](/media/sqlgram/TableName.png)
-
-**PartitionNameListOpt:**
-
-![PartitionNameListOpt](/media/sqlgram/PartitionNameListOpt.png)
-
-**SplitOption:**
-
-![SplitOption](/media/sqlgram/SplitOption.png)
-
-**RowValue:**
-
-![RowValue](/media/sqlgram/RowValue.png)
-
-**Int64Num:**
-
-![Int64Num](/media/sqlgram/Int64Num.png)
+RowValue ::=
+    "(" ValuesOpt ")"
+```
 
 ## Usage of Split Region
 
 There are two types of Split Region syntax:
 
 - The syntax of even split:
-
-    {{< copyable "sql" >}}
 
     ```sql
     SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
@@ -57,8 +52,6 @@ There are two types of Split Region syntax:
     `BETWEEN lower_value AND upper_value REGIONS region_num` defines the upper boundary, the lower boundary, and the Region amount. Then the current region will be evenly spilt into the number of regions (as specified in `region_num`) between the upper and lower boundaries.
 
 - The syntax of uneven split:
-
-    {{< copyable "sql" >}}
 
     ```sql
     SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
@@ -108,15 +101,11 @@ Because `row_id` is an integer, the value of the key to be split can be calculat
 
 For example, if you want 16 evenly split Regions split from key range`minInt64`~`maxInt64` for table t, you can use this statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 SPLIT TABLE t BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
 This statement splits table t into 16 Regions between minInt64 and maxInt64. If the given primary key range is smaller than the specified one, for example, 0~1000000000, you can use 0 and 1000000000 take place of minInt64 and maxInt64 respectively to split Regions.
-
-{{< copyable "sql" >}}
 
 ```sql
 SPLIT TABLE t BETWEEN (0) AND (1000000000) REGIONS 16;
@@ -125,8 +114,6 @@ SPLIT TABLE t BETWEEN (0) AND (1000000000) REGIONS 16;
 #### Uneven split
 
 If the known data is unevenly distributed, and you want a Region to be split respectively in key ranges -inf ~ 10000, 10000 ~ 90000, and 90000 ~ +inf, you can achieve this by setting fixed points, as shown below:
-
-{{< copyable "sql" >}}
 
 ```sql
 SPLIT TABLE t BY (10000), (90000);
@@ -156,8 +143,6 @@ The values of `upper` and `lower` are encoded into a byte array firstly. After r
 
 If the column of the `idx` index is of the integer type, you can use the following SQL statement to split index data:
 
-{{< copyable "sql" >}}
-
 ```sql
 SPLIT TABLE t INDEX idx BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
@@ -166,17 +151,13 @@ This statement splits the Region of index idx in table t into 16 Regions from `m
 
 If the column of index idx1 is of varchar type, and you want to split index data by prefix letters.
 
-{{< copyable "sql" >}}
-
 ```sql
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 ```
 
-This statement splits index idx1 into 25 Regions from a~z. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, minIndexValue]`. For the `idx` index, data with the `a` prefix is written into Region 1, and data with the `b` prefix is written into Region 2, and so on.
+This statement splits index idx1 into 25 Regions from a~z. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, minIndexValue]`. For the `idx` index, data with the `a` prefix is written into Region 1, and data with the `b` prefix is written into Region 2.
 
 In the split method above, both data with the `y` and `z` prefixes are written into Region 25, because the upper bound is not `z`, but `{` (the character next to `z` in ASCII). Therefore, a more accurate split method is as follows:
-
-{{< copyable "sql" >}}
 
 ```sql
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("{") REGIONS 26;
@@ -186,17 +167,13 @@ This statement splits index idx1 of the table `t` into 26 Regions from a~`{`. Th
 
 If the column of index `idx2` is of time type like timestamp/datetime, and you want to split index Region by year:
 
-{{< copyable "sql" >}}
-
 ```sql
 SPLIT TABLE t INDEX idx2 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
-This statement splits the Region of index `idx2` in table `t` into 10 Regions from  `2010-01-01 00:00:00` to  `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue,  2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)` and so on.
+This statement splits the Region of index `idx2` in table `t` into 10 Regions from `2010-01-01 00:00:00` to `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue, 2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)`.
 
 If you want to split the index Region by day, see the following example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SPLIT TABLE t INDEX idx2 BETWEEN ("2020-06-01 00:00:00") AND ("2020-07-01 00:00:00") REGIONS 30;
@@ -210,15 +187,11 @@ For data Region split of joint indexes, the only difference is that you can spec
 
 For example, index `idx3 (a, b)` contains 2 columns, with column `a` of timestamp type and column `b` int. If you just want to do a time range split according to column `a`, you can use the SQL statement for splitting time index of a single column. In this case, do not specify the value of column `b` in `lower_value` and `upper_velue`.
 
-{{< copyable "sql" >}}
-
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
 Within the same range of time, if you want to do one more split according to column b column. Just specify the value for column b when splitting.
-
-{{< copyable "sql" >}}
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 00:00:00", "z") REGIONS 10;
@@ -226,13 +199,17 @@ SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 0
 
 This statement splits 10 Regions in the range of a~z according to the value of column b, with the same time prefix as column a. If the value specified for column a is different, the value of column b might not be used in this case.
 
+If the primary key of the table is a [non-clustered index](/clustered-indexes.md), you need to use backticks ``` ` ``` to escape the `PRIMARY` keyword when splitting Regions. For example:
+
+```sql
+SPLIT TABLE t INDEX `PRIMARY` BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
+```
+
 #### Uneven Split
 
 Index data can also be split by specified index values.
 
 For example, there is `idx4 (a,b)`, with column `a` of the varchar type and column `b` of the timestamp type.
-
-{{< copyable "sql" >}}
 
 ```sql
 SPLIT TABLE t1 INDEX idx4 BY ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:26:19"), ("c", "");
@@ -253,15 +230,11 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
 
 + The syntax of even split:
 
-    {{< copyable "sql" >}}
-
     ```sql
     SPLIT [PARTITION] TABLE t [PARTITION] [(partition_name_list...)] [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
 + The syntax of uneven split:
-
-    {{< copyable "sql" >}}
 
     ```sql
     SPLIT [PARTITION] TABLE table_name [PARTITION (partition_name_list...)] [INDEX index_name] BY (value_list) [, (value_list)] ...
@@ -271,18 +244,14 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
 
 1. Create a partitioned table `t`. Suppose that you want to create a Hash table divided into two partitions. The example statement is as follows:
 
-    {{< copyable "sql" >}}
-
     ```sql
-    create table t (a int,b int,index idx(a)) partition by hash(a) partitions 2;
+    CREATE TABLE t (a INT, b INT, INDEX idx(a)) PARTITION BY HASH(a) PARTITIONS 2;
     ```
 
-    After creating the table `t`, a Region is split for each partition. Use the `SHOW TABLE REGIONS` syntax to view the Regions of this table:
-
-    {{< copyable "sql" >}}
+    After creating the table `t`, a Region is split for each partition. Use the [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) syntax to view the Regions of this table:
 
     ```sql
-    show table t regions;
+    SHOW TABLE t REGIONS;
     ```
 
     ```sql
@@ -296,8 +265,6 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
 
 2. Use the `SPLIT` syntax to split a Region for each partition. Suppose that you want to split the data in the `[0,10000]` range of each partition into four Regions. The example statement is as follows:
 
-    {{< copyable "sql" >}}
-
     ```sql
     split partition table t between (0) and (10000) regions 4;
     ```
@@ -310,10 +277,8 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
 
 3. Use the `SHOW TABLE REGIONS` syntax to view the Regions of this table again. You can see that this table now has ten Regions, each partition with five Regions, four of which are the row data and one is the index data.
 
-    {{< copyable "sql" >}}
-
     ```sql
-    show table t regions;
+    SHOW TABLE t REGIONS;
     ```
 
     ```sql
@@ -335,10 +300,8 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
 
 4. You can also split Regions for the index of each partition. For example, you can split the `[1000,10000]` range of the `idx` index into two Regions. The example statement is as follows:
 
-    {{< copyable "sql" >}}
-
     ```sql
-    split partition table t index idx between (1000) and (10000) regions 2;
+    SPLIT PARTITION TABLE t INDEX idx BETWEEN (1000) AND (10000) REGIONS 2;
     ```
 
 #### Examples of Split Region for a single partition
@@ -347,37 +310,29 @@ You can specify the partition to be split.
 
 1. Create a partitioned table. Suppose that you want to create a Range partitioned table split into three partitions. The example statement is as follows:
 
-    {{< copyable "sql" >}}
-
     ```sql
-    create table t ( a int, b int, index idx(b)) partition by range( a ) (
-        partition p1 values less than (10000),
-        partition p2 values less than (20000),
-        partition p3 values less than (MAXVALUE) );
+    CREATE TABLE t ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
+        PARTITION p1 VALUES LESS THAN (10000),
+        PARTITION p2 VALUES LESS THAN (20000),
+        PARTITION p3 VALUES LESS THAN (MAXVALUE) );
     ```
 
 2. Suppose that you want to split the data in the `[0,10000]` range of the `p1` partition into two Regions. The example statement is as follows:
 
-    {{< copyable "sql" >}}
-
     ```sql
-    split partition table t partition (p1) between (0) and (10000) regions 2;
+    SPLIT PARTITION TABLE t PARTITION (p1) BETWEEN (0) AND (10000) REGIONS 2;
     ```
 
 3. Suppose that you want to split the data in the `[10000,20000]` range of the `p2` partition into two Regions. The example statement is as follows:
 
-    {{< copyable "sql" >}}
-
     ```sql
-    split partition table t partition (p2) between (10000) and (20000) regions 2;
+    SPLIT PARTITION TABLE t PARTITION (p2) BETWEEN (10000) AND (20000) REGIONS 2;
     ```
 
 4. You can use the `SHOW TABLE REGIONS` syntax to view the Regions of this table:
 
-    {{< copyable "sql" >}}
-
     ```sql
-    show table t regions;
+    SHOW TABLE t REGIONS;
     ```
 
     ```sql
@@ -394,28 +349,24 @@ You can specify the partition to be split.
 
 5. Suppose that you want to split the `[0,20000]` range of the `idx` index of the `p1` and `p2` partitions into two Regions. The example statement is as follows:
 
-    {{< copyable "sql" >}}
-
     ```sql
-    split partition table t partition (p1,p2) index idx between (0) and (20000) regions 2;
+    SPLIT PARTITION TABLE t PARTITION (p1,p2) INDEX idx BETWEEN (0) AND (20000) REGIONS 2;
     ```
 
 ## pre_split_regions
 
-To have evenly split Regions when a table is created, it is recommended you use `SHARD_ROW_ID_BITS` together with `PRE_SPLIT_REGIONS`. When a table is created successfully, `PRE_SPLIT_REGIONS` pre-spilts tables into the number of Regions as specified by `2^(PRE_SPLIT_REGIONS)`.
+When creating a table with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, you can also specify the `PRE_SPLIT_REGIONS` option if you want to evenly pre-split the table into Regions immediately after the table is created. The number of pre-split Regions for a table is `2^(PRE_SPLIT_REGIONS)`.
 
 > **Note:**
 >
-> The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS`.
+> The value of `PRE_SPLIT_REGIONS` must be less than or equal to that of `SHARD_ROW_ID_BITS` or `AUTO_RANDOM`.
 
-The `tidb_scatter_region` global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `1`, then TiDB will not return the results to the client until all the Regions are split and scattered. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
+The [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) global variable affects the behavior of `PRE_SPLIT_REGIONS`. This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `global`, then TiDB scatters the Regions of newly created tables according to the data distribution of the entire cluster. Otherwise, TiDB writes the data before the scattering is completed, which will have a significant impact on write performance.
 
 ### Examples of pre_split_regions
 
-{{< copyable "sql" >}}
-
 ```sql
-create table t (a int, b int,index idx1(a)) shard_row_id_bits = 4 pre_split_regions=2;
+CREATE TABLE t (a INT, b INT, INDEX idx1(a)) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REGIONS=2;
 ```
 
 After building the table, this statement splits `4 + 1` Regions for table t. `4 (2^2)` Regions are used to save table row data, and 1 Region is for saving the index data of `idx1`.
@@ -433,7 +384,7 @@ region4:   [ 3<<61     ,  +inf  )
 
 > **Note:**
 >
-> The Region split by the Split Region statement is controlled by the [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduler in PD. To avoid PD re-merging the newly split Region soon after, you need to [dynamically modify](/pd-control.md) configuration items related to the Region merge feature.
+> The Region split by the Split Region statement is controlled by the [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduler in PD. To avoid PD re-merging the newly split Region soon after, you need to use [table attributes](/table-attributes.md) or [dynamically modify](/pd-control.md) configuration items related to the Region merge feature.
 
 </CustomContent>
 

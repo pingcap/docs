@@ -8,8 +8,8 @@ summary: Learn the overview of data migration scenarios and the solutions.
 This document gives an overview of the data migration solutions that you can use with TiDB. The data migration solutions are as follows:
 
 - Full data migration.
-    - To import Amazon Aurora snapshots, CSV files, or Mydumper SQL files into TiDB, you can use TiDB Lightning to perform the full migration.
-    - To export all TiDB data as CSV files or Mydumper SQL files, you can use Dumpling to perform the full migration, which makes data migration from MySQL or MariaDB easier.
+    - To import Amazon Aurora snapshots, CSV files, or SQL dump files into TiDB, you can use TiDB Lightning to perform the full migration.
+    - To export all TiDB data as CSV files or SQL dump files, you can use Dumpling to perform the full migration, which makes data migration from MySQL or MariaDB easier.
     - To migrate all data from a database with a small data size volume (for example, less than 1 TiB), you can also use TiDB Data Migration (DM).
 
 - Quick initialization of TiDB. TiDB Lightning supports quickly importing data and can quickly initialize a specific table in TiDB. Before you use this feature, pay attention that the quick initialization has a great impact on TiDB and the cluster does not provide services during the initialization period.
@@ -30,13 +30,9 @@ When you migrate data from Aurora to a TiDB cluster deployed on AWS, your data m
 
 ## Migrate data from MySQL to TiDB
 
-If cloud storage (S3) service is not used, the network connectivity is good, and the network latency is low, you can use the following method to migrate data from MySQL to TiDB.
+If cloud storage (S3) service is not used, the network connectivity is good, and the network latency is low, you can follow instructions in [Migrate Small Datasets from MySQL to TiDB](/migrate-small-mysql-to-tidb.md) to migrate data from MySQL to TiDB.
 
-- [Migrate MySQL of Small Datasets to TiDB](/migrate-small-mysql-to-tidb.md)
-
-If you have a high demand on migration speed, or if the data size is large (for example, larger than 1 TiB), and you do not allow other applications to write to TiDB during the migration period, you can use TiDB Lightning to quickly import data. Then, you can use DM to replicate incremental data (binlog) based on your application needs.
-
-- [Migrate MySQL of Large Datasets to TiDB](/migrate-large-mysql-to-tidb.md)
+If you have a high demand on migration speed, or if the data size is large (for example, larger than 1 TiB), and you do not allow other applications to write to TiDB during the migration period, you can use TiDB Lightning to quickly import data. Then, you can use DM to replicate incremental data (binlog) based on your application needs. See [Migrate Large Datasets from MySQL to TiDB](/migrate-large-mysql-to-tidb.md).
 
 ## Migrate and merge MySQL shards into TiDB
 
@@ -48,10 +44,17 @@ If the data size of the sharded tables is large (for example, larger than 1 TiB)
 
 - [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md)
 
+## Migrate data from Vitess to TiDB
+
+To migrate data from Vitess to TiDB, the following guide is available:
+
+- [Migrate Data from Vitess to TiDB](/migrate-from-vitess.md)
+
 ## Migrate data from files to TiDB
 
 - [Migrate data from CSV files to TiDB](/migrate-from-csv-files-to-tidb.md)
 - [Migrate data from SQL files to TiDB](/migrate-from-sql-files-to-tidb.md)
+- [Migrate data from Parquet files to TiDB](/migrate-from-parquet-files-to-tidb.md)
 
 ## Incremental replication between TiDB clusters
 

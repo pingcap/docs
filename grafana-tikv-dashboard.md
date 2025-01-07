@@ -8,7 +8,7 @@ aliases: ['/docs/dev/grafana-tikv-dashboard/','/docs/dev/reference/key-monitorin
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Performance\_overview, and so on. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, and Performance\_overview. A lot of metrics are there to help you diagnose.
 
 ## TiKV-Details dashboard
 
@@ -36,7 +36,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 ### Errors
 
 - Critical error: The number of critical errors
-- Server is busy: Indicates occurrences of events that make the TiKV instance unavailable temporarily, such as Write Stall, Channel Full, and so on. It should be `0` in normal case.
+- Server is busy: Indicates occurrences of events that make the TiKV instance unavailable temporarily, such as Write Stall, and Channel Full. It should be `0` in normal case.
 - Server report failures: The number of error messages reported by server. It should be `0` in normal case.
 - Raftstore error: The number of Raftstore errors per type on each TiKV instance
 - Scheduler error: The number of scheduler errors per type on each TiKV instance
@@ -69,19 +69,29 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Average gRPC message duration: The average execution time of gRPC messages
 - gRPC batch size: The batch size of gRPC messages between TiDB and TiKV
 - Raft message batch size: The batch size of Raft messages between TiKV instances
+- gRPC request sources QPS: The QPS of gRPC request sources
+- gRPC request sources duration: The execution time of gRPC request sources
+- gRPC resource group QPS: The QPS of gRPC request sources by resource groups
 
 ### Thread CPU
 
 - Raft store CPU: The CPU utilization of the `raftstore` thread. The CPU utilization should be less than 80% * `raftstore.store-pool-size` in normal case.
 - Async apply CPU: The CPU utilization of the `async apply` thread. The CPU utilization should be less than 90% * `raftstore.apply-pool-size` in normal cases.
-- Scheduler worker CPU: The CPU utilization of the `scheduler worker` thread. The CPU utilization should be less than 90% * `storage.scheduler-worker-pool-size` in normal cases.
+- Store writer CPU: The CPU utilization of the async IO thread. The CPU utilization should be less than 90% * `raftstore.store-io-pool-size` in normal cases.
 - gRPC poll CPU: The CPU utilization of the `gRPC` thread. The CPU utilization should be less than 80% * `server.grpc-concurrency` in normal cases.
-- Unified read pool CPU: The CPU utilization of the `unified read pool` thread
+- Scheduler worker CPU: The CPU utilization of the `scheduler worker` thread. The CPU utilization should be less than 90% * `storage.scheduler-worker-pool-size` in normal cases.
 - Storage ReadPool CPU: The CPU utilization of the `storage read pool` thread
-- Coprocessor CPU: The CPU utilization of the `coprocessor` thread
+- Unified read pool CPU: The CPU utilization of the `unified read pool` thread
 - RocksDB CPU: The CPU utilization of the RocksDB thread
+- Coprocessor CPU: The CPU utilization of the `coprocessor` thread
 - GC worker CPU: The CPU utilization of the `GC worker` thread
 - BackGround worker CPU: The CPU utilization of the `background worker` thread
+- Import CPU: The CPU utilization of the `import` thread
+- Backup Worker CPU: The CPU utilization of the `backup` thread
+- CDC Worker CPU: The CPU utilization of the `CDC worker` thread
+- CDC endpoint CPU: The CPU utilization of the `CDC endpoint` thread
+- Raftlog fetch worker CPU: The CPU utilization of the async raft log fetcher worker
+- TSO Worker CPU: The CPU utilization of the `TSO worker` thread
 
 ### PD
 
@@ -114,6 +124,9 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - 0.99 Duration of Raft store events: The time consumed by Raftstore events (P99)
 - Process ready duration: The time consumed for processes to be ready in Raft
 - Process ready duration per server: The time consumed for peer processes to be ready in Raft per TiKV instance. It should be less than 2 seconds (P99.99).
+- Max Duration of Raft store events: The time consumed by the slowest Raftstore event.
+- Replica read lock checking duration: The time consumed for checking locks when processing Replica Read.
+- Peer msg length distribution: The number of messages processed by each Region in each TiKV instance at a time. The more messages, the busier the peer is.
 
 ![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
 
@@ -171,6 +184,21 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Storage async write duration: The time consumed by processing asynchronous write requests. It should be less than `1s` in `.99`.
 
 ![TiKV Dashboard - Storage metrics](/media/tikv-dashboard-storage.png)
+
+### Flow Control
+
+- Scheduler flow: The scheduler traffic on each TiKV instance in real time.
+- Scheduler discard ratio: The rejection ratio of scheduler requests on each TiKV instance. If this ratio is greater than 0, it indicates that flow control exists. When `Compaction pending bytes` exceeds its threshold, TiKV will linearly increase the `Scheduler discard ratio` based on the exceeded portion. The client will retry the rejected requests automatically.
+- Throttle duration: The blocked duration for the execution of the scheduler requests when flow control is triggered due to too many L0 files. If this metric has values, it indicates that flow control exists.
+- Scheduler throttled CF: The CF that triggers RocksDB throttling when the flow control threshold is reached.
+- Flow controller actions: The actions that trigger RocksDB throttling when the flow control threshold is reached.
+- Flush/L0 flow: The traffic of flush and L0 compaction for different CFs of RocksDB on each TiKV instance.
+- Flow control factors: The factors related to triggering RocksDB throttling.
+- Compaction pending bytes: The size of the RocksDB data awaiting compaction in real time on each TiKV instance.
+- Txn command throttled duration: The blocked duration for commands related to transactions due to throttling. Under normal circumstances, this metric is 0.
+- Non-txn command throttled duration: The blocked duration for other commands due to throttling. Under normal circumstances, this metric is 0.
+
+![TiKV Dashboard - Flow Control metrics](/media/tikv-dashboard-flow-control.png)
 
 ### Scheduler
 
@@ -266,7 +294,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Total Requests: The number of requests by type per second
 - Handle duration: The histogram of time spent actually processing coprocessor requests per minute
 - Total Request Errors: The number of request errors of Coprocessor per second. There should not be a lot of errors in a short time.
-- Total KV Cursor Operations: The total number of the KV cursor operations by type per second, such as `select`, `index`, `analyze_table`, `analyze_index`, `checksum_table`, `checksum_index`, and so on.
+- Total KV Cursor Operations: The total number of the KV cursor operations by type per second, such as `select`, `index`, `analyze_table`, `analyze_index`, `checksum_table`, and `checksum_index`.
 - KV Cursor Operations: The histogram of KV cursor operations by type per second
 - Total RocksDB Perf Statistics: The statistics of RocksDB performance
 - Total Response Size: The total size of coprocessor response
@@ -320,6 +348,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Bytes / Write: The bytes per write operation
 - Compaction flow: The flow rate of compaction operations per type
 - Compaction pending bytes: The pending bytes to be compacted
+- Compaction Job Size(files): The number of SST files involved in a single compaction job
 - Read amplification: The read amplification per TiKV instance
 - Compression ratio: The compression ratio of each level
 - Number of snapshots: The number of snapshots per TiKV instance
@@ -327,6 +356,30 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Number files at each level: The number of SST files for different column families in each level
 - Ingest SST duration seconds: The time consumed to ingest SST files
 - Stall conditions changed of each CF: Stall conditions changed of each column family
+
+### Raft Engine
+
+- Operations
+    - write: the number of write operations by Raft Engine per second
+    - read_entry: the number of raft log read operations by Raft Engine per second
+    - read_message: the number of raft metadata read operations by Raft Engine per second
+- Write duration: the duration of write operations by Raft Engine. This duration is close to the sum of the latency of disk IOs involved in writing these data.
+- Flow
+    - write: the write traffic of Raft Engine
+    - rewrite append: the traffic of rewriting append logs
+    - rewrite rewrite: the traffic of rewriting rewrite logs
+- Write Duration Breakdown (99%)
+    - wal: the latency of writing Raft Engine WAL
+    - wait: the waiting time before writing
+    - apply: the time consumed for applying data to memory
+- Bytes/Written: the bytes written by Raft Engine every time
+- WAL Duration Breakdown (P99%): the time consumed for each stage of writing Raft Engine WAL
+- File Count
+    - append: the number of files used for appending data by Raft Engine
+    - rewrite: the number of files used for rewriting data by Raft Engine (rewrite is similar to RocksDB compaction)
+- Entry Count
+    - rewrite: the number of entries rewritten by Raft Engine
+    - append: the number of entries appended by Raft Engine
 
 ### Titan - All
 
@@ -370,6 +423,20 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Total pessimistic locks memory size: The memory size occupied by the in-memory pessimistic locks
 - In-memory pessimistic locking result: The result of only saving pessimistic locks to memory. `full` means the number of times that the pessimistic lock is not saved to memory because the memory limit is exceeded.
 
+### Resolved-TS
+
+- Resolved-TS worker CPU: The CPU utilization of the resolved-ts worker threads
+- Advance-TS worker CPU: The CPU utilization of the advance-ts worker threads
+- Scan lock worker CPU: The CPU utilization of the scan lock worker threads
+- Max gap of resolved-ts: The maximum time difference between the resolved-ts of all active Regions in this TiKV and the current time
+- Max gap of safe-ts: The maximum time difference between the safe-ts of all active Regions in this TiKV and the current time
+- Min Resolved TS Region: The ID of the Region whose resolved-ts is the minimal
+- Min Safe TS Region: The ID of the Region whose safe-ts is the minimal
+- Check Leader Duration: The distribution of time spent on processing leader requests. The duration is from sending requests to receiving responses in leader
+- Max gap of resolved-ts in Region leaders: The maximum time difference between the resolved-ts of all active Regions in this TiKV and the current time, only for Region leaders
+- Min Leader Resolved TS Region: The ID of the Region whose resolved-ts is the minimal, only for Region leaders
+- Lock heap size: The size of the heap that tracks locks in the resolved-ts module
+
 ### Memory
 
 - Allocator Stats: The statistics of the memory allocator
@@ -392,6 +459,79 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Encryption meta files size: The size of the encryption meta file
 - Encrypt/decrypt data nanos: The histogram of duration on encrypting/decrypting data each time
 - Read/write encryption meta duration: The time consumed for reading/writing encryption meta files
+
+### Log Backup
+
+- Handle Event Rate: The speed of handling write events
+- Initial Scan Generate Event Throughput: Incremental scanning speed when generating a new listener stream
+- Abnormal Checkpoint TS Lag: The lag of the current checkpoint TS to the present time for each task
+- Memory Of Events: An estimated amount of memory occupied by temporary data generated by incremental scanning
+- Observed Region Count: The number of Regions currently listened to
+- Errors: The number and type of retryable and non-fatal errors
+- Fatal Errors: The number and type of fatal errors. Usually, fatal errors cause the task to be paused.
+- Checkpoint TS of Tasks: Checkpoint TS for each task
+- Flush Duration: The heat map of how long it takes for moving cached data to external storage
+- Initial Scanning Duration: The heat map of how long it takes for incremental scanning when creating a new listening stream
+- Convert Raft Event Duration: The heat map of how long it takes to transform a Raft log entry into backup data after creating a listening stream
+- Command Batch Size: The batch size (within a single Raft group) of the listening Raft command
+- Save to Temp File Duration: The heat map of how long it takes to temporarily store a batch of backup data (spanning several tasks) into the temporary file area
+- Write to Temp File Duration: The heat map of how long it takes to temporarily store a batch of backup data (from a particular task) into the temporary file area
+- System Write Call Duration: The heat map of how long it takes to write a batch of backup data (from a Region) to a temporary file
+- Internal Message Type: The type of messages received by the actor responsible for the log backup within TiKV
+- Internal Message Handling Duration (P90|P99): The speed of consuming and processing each type of messages
+- Initial Scan RocksDB Throughput: The read traffic generated by RocksDB internal logging during incremental scanning
+- Initial Scan RocksDB Operation: The number of individual operations logged internally by RocksDB during incremental scanning
+- Initial Scanning Trigger Reason: The reason for triggering incremental scanning
+- Region Checkpoint Key Putting: The number of checkpoint operations logged to the PD
+
+> **Note:**
+>
+> The following monitoring metrics all use TiDB nodes as their data source, but they have some impact on the log backup process. Therefore, they are placed in the **TiKV Details** dashboard for ease of reference. TiKV actively pushes progress most of the time, but it is normal for some of the following monitoring metrics to occasionally not have sampled data.
+
+- Request Checkpoint Batch Size: The request batch size when the log backup coordinator requests checkpoint information for each TiKV
+- Tick Duration \[P99|P90\]: The time taken by the tick inside the coordinator
+- Region Checkpoint Failure Reason: The reason why a Region checkpoint cannot advance within the coordinator
+- Request Result: The record of the coordinator's success or failure in advancing the Region checkpoint
+- Get Region Operation Count: The number of times the coordinator requests Region information from the PD
+- Try Advance Trigger Time: The time taken for the coordinator to attempt to advance the checkpoint
+
+### Backup & Import
+
+- Import CPU Utilization: The CPU utilization aggregated by SST importer.
+- Import Thread Count: The number of threads used by SST importer.
+- Import Errors: The number of errors encountered during SST import.
+- Import RPC Duration: The time spent on various RPC calls in SST importer.
+- Import RPC Ops: The total number of RPC calls in SST importer.
+- Import RPC Count: The number of RPC calls being processed by SST importer.
+- Import Write/Download RPC Duration: The RPC time for write or download operations in SST importer.
+- Import Wait Duration: The time spent waiting in queue for download task execution.
+- Import Read SST Duration: The time spent reading an SST file from external storage and downloading it to TiKV.
+- Import Rewrite SST Duration: The time spent rewriting the SST file based on rewrite rules.
+- Import Ingest RPC Duration: The time spent handling ingest RPC requests on TiKV.
+- Import Ingest SST Duration: The time spent ingesting the SST file into RocksDB.
+- Import Ingest SST Bytes: The number of bytes ingested.
+- Import Download SST Throughput: The SST download throughput in bytes per second.
+- cloud request: The number of requests to cloud providers.
+
+### Point In Time Restore
+
+- CPU Usage: The CPU utilization by point-in-time recovery (PITR).
+- P99 RPC Duration: The 99th percentile of RPC request duration.
+- Import RPC Ops: The total number of RPC calls in SST importer.
+- Import RPC Count: The number of RPC calls being processed by SST importer.
+- Cache Events: The number of events in the file cache during SST import.
+- Overall RPC Duration: The time spent on RPC calls.
+- Read File into Memory Duration: The time spent downloading files from external storage and loading them into memory.
+- Queuing Time: The time spent waiting to be scheduled on a thread.
+- Apply Request Throughput: The rate of applying requests in bytes.
+- Downloaded File Size: The size of downloaded file in bytes.
+- Apply Batch Size: The number of bytes for applying to Raft store in one batch.
+- Blocked by Concurrency Time: The time spent waiting for execution due to concurrency constraints.
+- Apply Request Speed: The speed of applying request to Raft store.
+- Cached File in Memory: The files cached by the applying requests of SST importer.
+- Engine Requests Unfinished: The number of pending requests to Raft store.
+- Apply Time: The time spent writing data to Raft store.
+- Raft Store Memory Usage: The memory usage for Raft store.
 
 ### Explanation of Common Parameters
 

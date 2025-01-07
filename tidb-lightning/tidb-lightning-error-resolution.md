@@ -7,11 +7,18 @@ summary: Learn how to resolve type conversion and duplication errors during data
 
 Starting from v5.4.0, you can configure TiDB Lightning to skip errors like invalid type conversion and unique key conflicts, and to continue the data processing as if those wrong row data does not exist. A report will be generated for you to read and manually fix errors afterward. This is ideal for importing from a slightly dirty data source, where locating the errors manually is difficult and restarting TiDB Lightning on every encounter is costly.
 
-This document introduces how to use the type error feature (`lightning.max-error`) and the duplicate resolution feature (`tikv-importer.duplicate-resolution`). It also introduces the database where these errors are stored (`lightning.task-info-schema-name`). At the end of this document, an example is provided.
+This document introduces TiDB Lightning error types, how to query the errors, and provides an example. The following configuration items are involved:
+
+- `lightning.max-error`: the tolerance threshold of type error
+- `conflict.strategy`, `conflict.threshold`, and `conflict.max-record-rows`: configurations related to conflicting data
+- `tikv-importer.duplicate-resolution` (deprecated in v8.0.0 and will be removed in a future release): the conflict handling configuration that can only be used in the physical import mode
+- `lightning.task-info-schema-name`: the database where conflicting data is stored when TiDB Lightning detects conflicts
+
+For more information, see [TiDB Lightning (Task)](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
 ## Type error
 
-You can use the `lightning.max-error` configuration to increase the tolerance of errors related to data types. If this configuration is set to *N*, TiDB Lightning allows and skips up to *N* errors from the data source before it exists. The default value `0` means that no error is allowed.
+You can use the `lightning.max-error` configuration to increase the tolerance of errors related to data types. If this configuration is set to *N*, TiDB Lightning allows and skips up to *N* type errors from the data source before it exists. The default value `0` means that no error is allowed.
 
 These errors are recorded in a database. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#error-report).
 
@@ -31,34 +38,18 @@ The above configuration covers the following errors:
 * Set NULL to a NOT NULL column.
 * Failed to evaluate a generated column expression.
 * Column count mismatch. The number of values in the row does not match the number of columns of the table.
-* Unique/Primary key conflict in TiDB-backend, when `on-duplicate = "error"`.
 * Any other SQL errors.
 
-The following errors are always fatal, and cannot be skipped by changing `max-error`:
+The following errors are always fatal, and cannot be skipped by changing `lightning.max-error`:
 
 * Syntax error (such as unclosed quotation marks) in the original CSV, SQL or Parquet file.
 * I/O, network or system permission errors.
 
-Unique/Primary key conflict in the Local-backend is handled separately and explained in the next section.
+## Conflict errors
 
-## Duplicate resolution in Local-backend mode
+You can use the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item to increase the tolerance of errors related to data conflict. If this configuration item is set to *N*, TiDB Lightning allows and skips up to *N* conflict errors from the data source before it exits. The default value is `10000`, which means that 10000 errors are tolerant.
 
-In the Local-backend mode, TiDB Lightning imports data by first converting them to KV pairs and ingesting the pairs into TiKV in batches. Unlike the TiDB-backend mode, duplicate rows are not detected until the end of a task. Therefore, duplicate errors in the Local-backend mode are not controlled by `max-error`, but rather by a separate configuration `duplicate-resolution`.
-
-{{< copyable "" >}}
-
-```toml
-[tikv-importer]
-duplicate-resolution = 'none'
-```
-
-The value options of `duplicate-resolution` are as follows:
-
-* **'none'**: Does not detect duplicate data. If a unique/primary key conflict does exist, the imported table will have inconsistent data and index, and will fail checksum check.
-* **'record'**: Detects duplicate data, but does not attempt to fix it. If a unique/primary key conflict does exist, the imported table will have inconsistent data and index, and will skip checksum and report the count of the conflict errors.
-* **'remove'**: Detects duplicate data, and removes *all* duplicated rows. The imported table will be consistent, but the involved rows are ignored and have to be added back manually.
-
-TiDB Lightning duplicate resolution can detect duplicate data only within the data source. This feature cannot handle conflict with existing data before running TiDB Lightning.
+These errors are recorded in a table. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#error-report)
 
 ## Error report
 
@@ -87,19 +78,9 @@ You can change the database name by configuring `lightning.task-info-schema-name
 task-info-schema-name = 'lightning_task_info'
 ```
 
-TiDB Lightning creates 3 tables in this database:
+TiDB Lightning creates three tables and one view in this database:
 
 ```sql
-CREATE TABLE syntax_error_v1 (
-    task_id     bigint NOT NULL,
-    create_time datetime(6) NOT NULL DEFAULT now(6),
-    table_name  varchar(261) NOT NULL,
-    path        varchar(2048) NOT NULL,
-    offset      bigint NOT NULL,
-    error       text NOT NULL,
-    context     text
-);
-
 CREATE TABLE type_error_v1 (
     task_id     bigint NOT NULL,
     create_time datetime(6) NOT NULL DEFAULT now(6),
@@ -109,8 +90,7 @@ CREATE TABLE type_error_v1 (
     error       text NOT NULL,
     row_data    text NOT NULL
 );
-
-CREATE TABLE conflict_error_v1 (
+CREATE TABLE conflict_error_v3 (
     task_id     bigint NOT NULL,
     create_time datetime(6) NOT NULL DEFAULT now(6),
     table_name  varchar(261) NOT NULL,
@@ -121,22 +101,43 @@ CREATE TABLE conflict_error_v1 (
     raw_value   mediumblob NOT NULL,
     raw_handle  mediumblob NOT NULL,
     raw_row     mediumblob NOT NULL,
+    kv_type     tinyint NOT NULL,
+    INDEX (task_id, table_name),
+    INDEX (index_name),
+    INDEX (table_name, index_name),
+    INDEX (kv_type)
+);
+CREATE TABLE conflict_records (
+    task_id     bigint NOT NULL,
+    create_time datetime(6) NOT NULL DEFAULT now(6),
+    table_name  varchar(261) NOT NULL,
+    path        varchar(2048) NOT NULL,
+    offset      bigint NOT NULL,
+    error       text NOT NULL,
+    row_id      bigint NOT NULL COMMENT 'the row id of the conflicted row',
+    row_data    text NOT NULL COMMENT 'the row data of the conflicted row',
     KEY (task_id, table_name)
 );
+CREATE VIEW conflict_view AS
+    SELECT 0 AS is_precheck_conflict, task_id, create_time, table_name, index_name, key_data, row_data, raw_key, raw_value, raw_handle, raw_row, kv_type, NULL AS path, NULL AS offset, NULL AS error, NULL AS row_id
+    FROM conflict_error_v3
+    UNION ALL
+    SELECT 1 AS is_precheck_conflict, task_id, create_time, table_name, NULL AS index_name, NULL AS key_data, row_data, NULL AS raw_key, NULL AS raw_value, NULL AS raw_handle, NULL AS raw_row, NULL AS kv_type, path, offset, error, row_id
+    FROM conflict_records;
 ```
 
-<!--
-**syntax_error_v1** is intended to record syntax error from files. It is not implemented yet.
--->
+The `type_error_v1` table records all [type errors](#type-error) managed by `lightning.max-error`. Each error corresponds to one row.
 
-**type_error_v1** records all [type errors](#type-error) managed by the `max-error` configuration. There is one row per error.
+The `conflict_error_v3` table records conflicts detected during postprocess conflict detection, managed by the `conflict` configuration group in the physical import mode. Each pair of conflicts corresponds to two rows.
 
-**conflict_error_v1** records all [unique/primary key conflict in the Local-backend](#duplicate-resolution-in-local-backend-mode). There are 2 rows per pair of conflicts.
+The `conflict_records` table records conflicts detected during pre-import conflict detection, managed by the `conflict` configuration group in both logical and physical import modes. Each error corresponds to one row.
+
+The `conflict_view` view records conflicts that are detected by both pre-import and postprocess conflict detection, managed by the `conflict` configuration group in both logical and physical import modes. This view is created by performing a `UNION` operation on the `conflict_error_v3` and `conflict_records` tables.
 
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | task_id      | ✓      | ✓    | ✓        | The TiDB Lightning task ID that generates this error                                                                                    |
-| create_table | ✓      | ✓    | ✓        | The time at which the error is recorded                                                                                                         |
+| create_time | ✓      | ✓    | ✓        | The time at which the error is recorded                                                                                                         |
 | table_name   | ✓      | ✓    | ✓        | The name of the table that contains the error, in the form of ``'`db`.`tbl`'``                                                                |
 | path         | ✓      | ✓    |          | The path of the file that contains the error                                                                                               |
 | offset       | ✓      | ✓    |          | The byte position in the file where the error is found                                                                                  |
@@ -198,13 +199,13 @@ In this example, a data source is prepared with some known errors.
         (54, 'fifty-four'),     -- conflicts with the other 'fifty-four' below
         (77, 'seventy-seven'),  -- the string is longer than 12 characters
         (600, 'six hundred'),   -- the number overflows TINYINT
-        (40, 'fourty'),         -- conflicts with the other 40 above
+        (40, 'forty'),         -- conflicts with the other 40 above
         (42, 'fifty-four');     -- conflicts with the other 'fifty-four' above
 
     EOF
     ```
 
-3. Configure TiDB Lightning to enable strict SQL mode, use the Local-backend to import data, delete duplicates, and skip up to 10 errors.
+3. Configure TiDB Lightning to enable strict SQL mode, use the Local-backend to import data, replace duplicates, and skip up to 10 errors.
 
     {{< copyable "shell-regular" >}}
 
@@ -217,8 +218,9 @@ In this example, a data source is prepared with some known errors.
         [tikv-importer]
         backend = 'local'
         sorted-kv-dir = '/tmp/lightning-tmp/'
-        duplicate-resolution = 'remove'
 
+        [conflict]
+        strategy = 'replace'
         [mydumper]
         data-source-dir = '.'
         [tidb]
@@ -280,14 +282,14 @@ In this example, a data source is prepared with some known errors.
      table_name: `example`.`t`
            path: example.t.1.sql
          offset: 253
-          error: failed to cast value as tinyint(4) for column `a` (#1): [types:1690]constant 600 overflows tinyint
+          error: failed to cast value as tinyint for column `a` (#1): [types:1690]constant 600 overflows tinyint
        row_data: (600,'six hundred')
     ```
 
-7. Check whether the `conflict_error_v1` table has caught the four rows that have unique/primary key conflicts:
+7. Check whether the `conflict_error_v3` table has caught the four rows that have unique/primary key conflicts:
 
     ```sql
-    $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v1;' --binary-as-hex -E
+    $ mysql -u root -h 127.0.0.1 -P 4000 -e 'select * from lightning_task_info.conflict_error_v3;' --binary-as-hex -E
 
     *************************** 1. row ***************************
         task_id: 1635888701843303564
@@ -307,7 +309,7 @@ In this example, a data source is prepared with some known errors.
      table_name: `example`.`t`
      index_name: PRIMARY
        key_data: 40
-       row_data: (40, "fourty")
+       row_data: (40, "forty")
         raw_key: 0x7480000000000000C15F728000000000000028
       raw_value: 0x800001000000020600666F75727479
      raw_handle: 0x7480000000000000C15F728000000000000028

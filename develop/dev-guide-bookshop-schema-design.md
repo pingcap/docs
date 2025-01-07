@@ -1,5 +1,6 @@
 ---
 title: Bookshop Example Application
+summary: Bookshop is an online bookstore app for buying and rating books. You can import table structures and data via TiUP or TiDB Cloud. Method 1 uses TiUP to quickly generate and import sample data, while Method 2 imports data from Amazon S3 to TiDB Cloud. The database tables include books, authors, users, ratings, book_authors, and orders. The database initialization script `dbinit.sql` creates the table structures for the Bookshop application.
 ---
 
 # Bookshop Example Application
@@ -35,8 +36,6 @@ If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-refer
 If your TiDB cluster is deployed using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
 
 </CustomContent>
-
-{{< copyable "shell" >}}
 
 ```shell
 tiup demo bookshop prepare
@@ -90,26 +89,28 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 ### Method 2: Via TiDB Cloud Import
 
-On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import** area to enter the **Data Import** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
+1. Open the **Import** page for your target cluster.
 
-1. Select **SQL File** for **Data Format**.
-2. Copy the following **Bucket URI** and **Role ARN** to the corresponding input boxes:
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-    **Bucket URI**:
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-    ```
-    s3://developer.pingcap.com/bookshop/
-    ```
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-   **Role ARN**:
+2. Select **Import data from S3**.
 
-    ```
-    arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
-    ```
+    If this is your first time using TiDB Cloud Import, select **Import From Amazon S3**.
 
-3. Click **Next** to go to the **File and filter** step to confirm the information of the files to be imported.
+3. On the **Import Data from Amazon S3** page, configure the following source data information:
 
-4. Click **Next** again to go to the **Preview** step to confirm the preview of the data to be imported.
+    - **Import File Count**: select **Multiple files**.
+    - **Included Schema Files**: select **Yes**.
+    - **Data Format**: select **SQL**.
+    - **Folder URI**: enter `s3://developer.pingcap.com/bookshop/`.
+    - **Bucket Access**: select **AWS Role ARN**.
+    - **Role ARN**: enter `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`.
 
     In this example, the following data is generated in advance:
 
@@ -119,7 +120,7 @@ On the cluster detail page of TiDB Cloud, click **Import Data** in the **Import*
     - 1,000,000 rows of rating records
     - 1,000,000 rows of order records
 
-5. Click **Start Import** to start the import process and wait for TiDB Cloud to complete the import.
+4. Click **Connect** > **Start Import** to start the import process and wait for TiDB Cloud to complete the import.
 
 For more information about how to import or migrate data to TiDB Cloud, see [TiDB Cloud Migration Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview).
 
@@ -165,10 +166,10 @@ This table stores the basic information of books.
 
 | Field name   | Type          | Description                                                          |
 |--------------|---------------|------------------------------------------------------------------|
-| id           | bigint(20)    | Unique ID of a book                                            |
+| id           | bigint    | Unique ID of a book                                            |
 | title        | varchar(100)  | Title of a book                                                       |
 | type         | enum          | Type of a book (for example, magazine, animation, or teaching aids) |
-| stock        | bigint(20)    | Stock                                                            |
+| stock        | bigint    | Stock                                                            |
 | price        | decimal(15,2) | Price                                                            |
 | published_at | datetime      | Date of publish                                                  |
 
@@ -178,11 +179,11 @@ This table stores basic information of authors.
 
 | Field name | Type         | Description                                               |
 |------------|--------------|-------------------------------------------------------|
-| id         | bigint(20)   | Unique ID of an author                               |
+| id         | bigint   | Unique ID of an author                               |
 | name       | varchar(100) | Name of an author                                                 |
-| gender     | tinyint(1)   | Biological gender (0: female, 1: male, NULL: unknown) |
-| birth_year | smallint(6)  | Year of birth                                     |
-| death_year | smallint(6)  | Year of death                                     |
+| gender     | tinyint   | Biological gender (0: female, 1: male, NULL: unknown) |
+| birth_year | smallint  | Year of birth                                     |
+| death_year | smallint  | Year of death                                     |
 
 ### `users` table
 
@@ -190,7 +191,7 @@ This table stores information of Bookshop users.
 
 | Field name | Type          | Description               |
 |------------|---------------|-----------------------|
-| id         | bigint(20)    | Unique ID of a user |
+| id         | bigint    | Unique ID of a user |
 | balance    | decimal(15,2) | Balance               |
 | nickname   | varchar(100)  | Nickname              |
 
@@ -211,8 +212,8 @@ An author may write multiple books, and a book may involve more than one author.
 
 | Field name | Type       | Description                                                      |
 |------------|------------|--------------------------------------------------------------|
-| book_id    | bigint(20) | Unique ID of a book (linked to [books](#books-table))      |
-| author_id  | bigint(20) | Unique ID of an author（Link to [authors](#authors-table)） |
+| book_id    | bigint | Unique ID of a book (linked to [books](#books-table))      |
+| author_id  | bigint | Unique ID of an author（Link to [authors](#authors-table)） |
 
 ### `orders` table
 
@@ -220,10 +221,10 @@ This table stores user purchase information.
 
 | Field name | Type       | Description                                                        |
 |------------|------------|----------------------------------------------------------------|
-| id         | bigint(20) | Unique ID of an order                                     |
-| book_id    | bigint(20) | Unique ID of a book (linked to [books](#books-table))        |
-| user_id    | bigint(20) | User unique identifier (associated with [users](#users-table)) |
-| quantity   | tinyint(4) | Purchase quantity                                              |
+| id         | bigint | Unique ID of an order                                     |
+| book_id    | bigint | Unique ID of a book (linked to [books](#books-table))        |
+| user_id    | bigint | User unique identifier (associated with [users](#users-table)) |
+| quantity   | tinyint | Purchase quantity                                              |
 | ordered_at | datetime   | Purchase time                                                  |
 
 ## Database initialization script `dbinit.sql`
@@ -235,29 +236,29 @@ CREATE DATABASE IF NOT EXISTS `bookshop`;
 
 DROP TABLE IF EXISTS `bookshop`.`books`;
 CREATE TABLE `bookshop`.`books` (
-  `id` bigint(20) AUTO_RANDOM NOT NULL,
+  `id` bigint AUTO_RANDOM NOT NULL,
   `title` varchar(100) NOT NULL,
   `type` enum('Magazine', 'Novel', 'Life', 'Arts', 'Comics', 'Education & Reference', 'Humanities & Social Sciences', 'Science & Technology', 'Kids', 'Sports') NOT NULL,
   `published_at` datetime NOT NULL,
-  `stock` int(11) DEFAULT '0',
+  `stock` int DEFAULT '0',
   `price` decimal(15,2) DEFAULT '0.0',
   PRIMARY KEY (`id`) CLUSTERED
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 DROP TABLE IF EXISTS `bookshop`.`authors`;
 CREATE TABLE `bookshop`.`authors` (
-  `id` bigint(20) AUTO_RANDOM NOT NULL,
+  `id` bigint AUTO_RANDOM NOT NULL,
   `name` varchar(100) NOT NULL,
-  `gender` tinyint(1) DEFAULT NULL,
-  `birth_year` smallint(6) DEFAULT NULL,
-  `death_year` smallint(6) DEFAULT NULL,
+  `gender` tinyint DEFAULT NULL,
+  `birth_year` smallint DEFAULT NULL,
+  `death_year` smallint DEFAULT NULL,
   PRIMARY KEY (`id`) CLUSTERED
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 DROP TABLE IF EXISTS `bookshop`.`book_authors`;
 CREATE TABLE `bookshop`.`book_authors` (
-  `book_id` bigint(20) NOT NULL,
-  `author_id` bigint(20) NOT NULL,
+  `book_id` bigint NOT NULL,
+  `author_id` bigint NOT NULL,
   PRIMARY KEY (`book_id`,`author_id`) CLUSTERED
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -282,12 +283,26 @@ CREATE TABLE `bookshop`.`users` (
 
 DROP TABLE IF EXISTS `bookshop`.`orders`;
 CREATE TABLE `bookshop`.`orders` (
-  `id` bigint(20) AUTO_RANDOM NOT NULL,
-  `book_id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `quality` tinyint(4) NOT NULL,
+  `id` bigint AUTO_RANDOM NOT NULL,
+  `book_id` bigint NOT NULL,
+  `user_id` bigint NOT NULL,
+  `quality` tinyint NOT NULL,
   `ordered_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) CLUSTERED,
   KEY `orders_book_id_idx` (`book_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

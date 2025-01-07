@@ -5,7 +5,7 @@ summary: Create, manage, and update your TiDB Cloud resources through Terraform.
 
 # Terraform Integration Overview
 
-[Terraform](https://www.terraform.io/) is an infrastructure as code tool that lets you define both cloud and on-premises resources in human-readable configuration files that you can version, reuse, and share.
+[Terraform](https://www.terraform.io/) is an infrastructure as code tool that lets you define both cloud and self-hosted resources in human-readable configuration files that you can version, reuse, and share.
 
 [TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) is a plugin that allows you to use Terraform to manage TiDB Cloud resources, such as clusters, backups, and restores.
 
@@ -32,15 +32,17 @@ TiDB Cloud supports the following resources and data sources:
 - Resources
 
     - `tidbcloud_cluster`
-    - `tidbcloud_backup` (updates are not supported)
-    - `tidbcloud_restore` (updates and deletion are not supported)
+    - `tidbcloud_backup`
+    - `tidbcloud_restore`
+    - `tidbcloud_import`
 
 - Data sources
 
-    - `tidbcloud_project`
-    - `tidbcloud_cluster_spec`
-    - `tidbcloud_restore`
-    - `tidbcloud_backup`
+    - `tidbcloud_projects`
+    - `tidbcloud_cluster_specs`
+    - `tidbcloud_clusters`
+    - `tidbcloud_restores`
+    - `tidbcloud_backups`
 
 To get all the available configurations for the resources and data sources, see this [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
 

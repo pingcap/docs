@@ -18,8 +18,6 @@ This section describes the SQL syntax for creating, running and deleting a prepa
 
 ### Create a prepared statement
 
-{{< copyable "sql" >}}
-
 ```sql
 PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 ```
@@ -35,8 +33,6 @@ See [PREPARE statement](/sql-statements/sql-statement-prepare.md) for more infor
 
 A prepared statement can only use **user variables** as parameters, so use the [`SET` statement](/sql-statements/sql-statement-set-variable.md) to set the variables before the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) can call the prepared statement.
 
-{{< copyable "sql" >}}
-
 ```sql
 SET @{parameter_name} = {parameter_value};
 EXECUTE {prepared_statement_name} USING @{parameter_name};
@@ -51,8 +47,6 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 See the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) for more information.
 
 ### Delete the prepared statement
-
-{{< copyable "sql" >}}
 
 ```sql
 DEALLOCATE PREPARE {prepared_statement_name};
@@ -76,8 +70,6 @@ For example, you need to query a book with `id = 1` in the [`bookshop` applicati
 
 <div label="SQL" value="sql">
 
-{{< copyable "sql" >}}
-
 ```sql
 PREPARE `books_query` FROM 'SELECT * FROM `books` WHERE `id` = ?';
 ```
@@ -88,8 +80,6 @@ Running result:
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SET @id = 1;
 ```
@@ -99,8 +89,6 @@ Running result:
 ```
 Query OK, 0 rows affected (0.04 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 EXECUTE `books_query` USING @id;
@@ -120,8 +108,6 @@ Running result:
 </div>
 
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -155,8 +141,6 @@ Using the [`books` table](/develop/dev-guide-bookshop-schema-design.md#books-tab
 
 <div label="SQL" value="sql">
 
-{{< copyable "sql" >}}
-
 ```sql
 PREPARE `books_insert` FROM 'INSERT INTO `books` (`title`, `type`, `stock`, `price`, `published_at`) VALUES (?, ?, ?, ?, ?);';
 ```
@@ -166,8 +150,6 @@ Running result:
 ```
 Query OK, 0 rows affected (0.03 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SET @title = 'TiDB Developer Guide';
@@ -183,8 +165,6 @@ Running result:
 Query OK, 0 rows affected (0.04 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
 ```
@@ -198,8 +178,6 @@ Query OK, 1 row affected (0.03 sec)
 </div>
 
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 try (Connection connection = ds.getConnection()) {
@@ -225,7 +203,7 @@ The following configurations help you use the TiDB server-side prepared statemen
 |            Parameter            |                 Means                  |   Recommended Scenario   | Recommended Configuration|
 | :------------------------: | :-----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------: |
 |    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statements    |  When you need to use a prepared statement more than once                                                             |          `true`          |
-|      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true` 时                                                            |          `true`          |
+|      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true`                                                             |          `true`          |
 |  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (256 characters by default)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
 |    `prepStmtCacheSize`     | Maximum number of prepared statements (25 by default) | When the number of prepared statements is greater than 25  | Configured according to the actual number of prepared statements |
 
@@ -239,10 +217,24 @@ You can also see the [insert rows](/develop/dev-guide-insert-data.md#insert-rows
 
 For a complete example in Java, see:
 
-- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+- [Connect to TiDB with JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
+- [Connect to TiDB with Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
+- [Connect to TiDB with Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 
 </SimpleTab>
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

@@ -1,12 +1,12 @@
 ---
 title: Best Practices for TiKV Performance Tuning with Massive Regions
-summary: Learn how to tune the performance of TiKV with a massive amount of Regions.
+summary: TiKV performance tuning involves reducing the number of Regions and messages, increasing Raftstore concurrency, enabling Hibernate Region and Region Merge, adjusting Raft base tick interval, increasing TiKV instances, and adjusting Region size. Other issues include slow PD leader switching and outdated PD routing information.
 aliases: ['/docs/dev/best-practices/massive-regions-best-practices/','/docs/dev/reference/best-practices/massive-regions/']
 ---
 
 # Best Practices for TiKV Performance Tuning with Massive Regions
 
-In TiDB, data is split into Regions, each storing data for a specific key range. These Regions are distributed among multiple TiKV instances. As data is written into a cluster, millions of or even tens of millions of Regions are created. Too many Regions on a single TiKV instance can bring a heavy burden to the cluster and affect its performance.
+In TiDB, data is split into Regions, each storing data for a specific key range. These Regions are distributed among multiple TiKV instances. As data is written into a cluster, millions of Regions might be created. Too many Regions on a single TiKV instance can bring a heavy burden to the cluster and affect its performance.
 
 This document introduces the workflow of Raftstore (a core module of TiKV), explains why a massive amount of Regions affect the performance, and offers methods for tuning TiKV performance.
 
@@ -51,6 +51,18 @@ You can check the following monitoring metrics in Grafana's **TiKV Dashboard**:
 
     ![Check Propose wait duration](/media/best-practices/propose-wait-duration.png)
 
++ `Commit log duration` in the **Raft IO** panel
+
+    `Commit log duration` is the time Raftstore takes to commit Raft logs to the majority of members in the respective Region. The possible reasons for a high value of this metric with significant fluctuations include the following:
+
+    - The workload on Raftstore is heavy.
+    - The append log operation is slow.
+    - Raft logs cannot be committed timely due to network congestion.
+
+  Reference value: lower than 200-500 ms.
+
+    ![Check Commit log duration](/media/best-practices/commit-log-duration.png)
+
 ## Performance tuning methods
 
 After finding out the cause of a performance problem, try to solve it from the following two aspects:
@@ -66,7 +78,7 @@ By default, `raftstore.store-pool-size` is configured to `2` in TiKV. If a bottl
 
 ### Method 2: Enable Hibernate Region
 
-In the actual situation, read and write requests are not evenly distributed on every Region. Instead, they are concentrated on a few Regions. Then you can minimize the number of messages between the Raft leader and the followers for the temporarily idle Regions, which is the feature of Hibernate Region. In this feature, Raftstore does sent tick messages to the Raft state machines of idle Regions if not necessary. Then these Raft state machines will not be triggered to generate heartbeat messages, which can greatly reduce the workload of Raftstore.
+In the actual situation, read and write requests are not evenly distributed on every Region. Instead, they are concentrated on a few Regions. Then you can minimize the number of messages between the Raft leader and the followers for the temporarily idle Regions, which is the feature of Hibernate Region. In this feature, Raftstore doesn't send tick messages to the Raft state machines of idle Regions if not necessary. Then these Raft state machines will not be triggered to generate heartbeat messages, which can greatly reduce the workload of Raftstore.
 
 Hibernate Region is enabled by default in [TiKV master](https://github.com/tikv/tikv/tree/master). You can configure this feature according to your needs. For details, refer to [Configure Hibernate Region](/tikv-configuration-file.md).
 
@@ -83,8 +95,8 @@ Enable `Region Merge` by configuring the following parameters:
 {{< copyable "" >}}
 
 ```
-config set max-merge-region-size 20
-config set max-merge-region-keys 200000
+config set max-merge-region-size 54
+config set max-merge-region-keys 540000
 config set merge-schedule-limit 8
 ```
 
@@ -126,15 +138,23 @@ If Region followers have not received the heartbeat from the leader within the `
 
 ### Method 6: Adjust Region size
 
-The default size of a Region is 96 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
+The default size of a Region is 256 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
 
-> **Warning:**
+> **Note:**
 >
-> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are as follows:
+> Starting from v8.4.0, the default Region size is increased from 96 MiB to 256 MiB. If you have not modified the Region size manually, when you upgrade a TiKV cluster to v8.4.0 or later,  the TiKV cluster's default Region size will automatically be updated to 256 MiB.
+
+> **Note:**
 >
-> + Performance jitter might be caused.
-> + The query performance, especially for queries that deal with a large range of data, might decrease.
-> + The Region scheduling slows down.
+> Customized Region size is an experimental feature before TiDB v6.5.0. If you need to resize the Region size, it is recommended that you upgrade to v6.5.0 or a later version.
+
+### Method 7: Increase the maximum number of connections for Raft communication
+
+By default, the maximum number of connections used for Raft communication between TiKV nodes is 1. Increasing this number can help alleviate blockage issues caused by heavy communication workloads of a large number of Regions. For detailed instructions, see [`grpc-raft-conn-num`](/tikv-configuration-file.md#grpc-raft-conn-num).
+
+> **Note:**
+>
+> To reduce unnecessary thread switching overhead and mitigate potential negative impacts from batch processing, it is recommended to set the number within the range of `[1, 4]`.
 
 ## Other problems and solutions
 

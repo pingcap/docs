@@ -10,9 +10,10 @@ This statement changes the user password for a user account in the TiDB system d
 
 ## Synopsis
 
-**SetStmt:**
-
-![SetStmt](/media/sqlgram/SetStmt.png)
+```ebnf+diagram
+SetPasswordStmt ::=
+    "SET" "PASSWORD" ( "FOR" Username )? "=" ( stringLit | "PASSWORD" "(" stringLit ")" )
+```
 
 ## Examples
 
@@ -56,7 +57,7 @@ mysql> SHOW CREATE USER 'newuser';
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The `SET PASSWORD` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

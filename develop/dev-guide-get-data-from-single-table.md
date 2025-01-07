@@ -28,7 +28,18 @@ Before querying data, make sure that you have completed the following steps:
 </CustomContent>
 
 2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
+
+<CustomContent platform="tidb">
+
 3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+3. [Connect to TiDB](/tidb-cloud/connect-to-tidb-cluster.md).
+
+</CustomContent>
 
 ## Execute a simple query
 
@@ -111,7 +122,18 @@ public class AuthorDAO {
 }
 ```
 
+<CustomContent platform="tidb">
+
 - After [connecting to TiDB using the JDBC driver](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-choose-driver-or-orm.md#java-drivers), you can create a `Statement` object with `conn.createStatus()`.
+
+</CustomContent>
+
 - Then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
 - The query results are stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
 
@@ -374,3 +396,17 @@ The result is as follows:
 ```
 
 In addition to the `COUNT` function, TiDB also supports other aggregate functions. For more information, see [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md).
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

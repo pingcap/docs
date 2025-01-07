@@ -56,7 +56,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 1. Disable Garbage Collection (GC).
 
-    To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before exporting full data. In this way, history data is not deleted.
+    To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before exporting full data. In this way, history data is not deleted. For TiDB v4.0.0 and later versions, Dumpling might [automatically adjust the GC safe point to block GC](/dumpling-overview.md#manually-set-the-tidb-gc-time). Nevertheless, manually disabling GC is still necessary because the GC process might begin after Dumpling exits, leading to the failure of incremental changes migration.
 
     Run the following command to disable GC:
 
@@ -75,7 +75,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     ```
 
     ```
-    +-------------------------+：
+    +-------------------------+
     | @@global.tidb_gc_enable |
     +-------------------------+
     |                       0 |
@@ -108,7 +108,9 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 3. Restore data.
 
-    Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For details about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Run the following command to import full data exported by Dumpling to MySQL:
+    Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For details about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Note that you need to use MyLoader v0.10 or earlier versions. Higher versions cannot process metadata files exported by Dumpling.
+
+    Run the following command to import full data exported by Dumpling to MySQL:
 
     ```shell
     myloader -h 127.0.0.1 -P 3306 -d ./dumpling_output/
@@ -158,17 +160,17 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     In the upstream cluster, run the following command to create a changefeed from the upstream to the downstream clusters:
 
     ```shell
-    tiup ctl:v6.3.0 cdc changefeed create --pd=http://127.0.0.1:2379 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
 
     In this command, the parameters are as follows:
 
-    - `--pd`: PD address of the upstream cluster
+    - `--server`: IP address of any node in the TiCDC cluster
     - `--sink-uri`: URI of the downstream cluster
     - `--changefeed-id`: changefeed ID, must be in the format of a regular expression, `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`
     - `--start-ts`: start timestamp of the changefeed, must be the backup time (or BackupTS in the "Back up data" section in [Step 2. Migrate full data](#step-2-migrate-full-data))
 
-    For more information about the changefeed configurations, see [Task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
+    For more information about the changefeed configurations, see [Task configuration file](/ticdc/ticdc-changefeed-config.md).
 
 3. Enable GC.
 

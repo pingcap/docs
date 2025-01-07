@@ -1,11 +1,11 @@
 ---
-title: Integrate TiDB Cloud with Datadog
+title: Integrate TiDB Cloud with Datadog (Beta)
 summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 ---
 
-# Integrate TiDB Cloud with Datadog
+# Integrate TiDB Cloud with Datadog (Beta)
 
-You can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
+TiDB Cloud supports Datadog integration (beta). You can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
 
 ## Prerequisites
 
@@ -17,15 +17,17 @@ You can configure TiDB Cloud to send metric data about your TiDB clusters to [Da
 
 ## Limitation
 
-You cannot use the Datadog integration in [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier).
+- You cannot use the Datadog integration in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
+- Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 ## Steps
 
 ### Step 1. Integrate with your Datadog API Key
 
-1. On the TiDB Cloud console, choose a target project for Datadog integration, and then click the **Project Settings** tab.
-2. In the left pane, click **Integrations**.
-3. Click **Integration to Datadog**.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+3. On the **Project Settings** page of your project, click **Integrations** in the left navigation pane, and then click **Integration to Datadog (BETA)**.
 4. Enter your API key of Datadog and choose the site of Datadog.
 5. Click **Test Integration**.
 
@@ -37,7 +39,7 @@ You cannot use the Datadog integration in [Serverless Tier clusters](/tidb-cloud
 ### Step 2. Install TiDB Cloud Integration in Datadog
 
 1. Log in to [Datadog](https://app.datadoghq.com).
-2. Go to the **TiDB Cloud Integration** page (<https://app.datadoghq.com/account/settings#integrations/tidb-cloud>) in Datadog.
+2. Go to the **TiDB Cloud Integration** page ([https://app.datadoghq.com/account/settings#integrations/tidb-cloud](https://app.datadoghq.com/account/settings#integrations/tidb-cloud)) in Datadog.
 3. In the **Configuration** tab, click **Install Integration**. The [**TiDBCloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard is displayed in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
 
 ## Pre-built dashboard

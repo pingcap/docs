@@ -52,3 +52,17 @@ This document introduces some general development specifications for using SQL.
     - [TiFlash supported push-down calculations](/tiflash/tiflash-supported-pushdown-calculations.md).
     - [TiKV - List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md).
     - [Predicate push down](/predicate-push-down.md).
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

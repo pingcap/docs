@@ -1,5 +1,6 @@
 ---
 title: TiUP Cluster
+summary: TiUP Cluster is a cluster management component of TiUP written in Golang. It is used for daily operations and maintenance, including deploying, starting, shutting down, destroying, elastic scaling, upgrading TiDB clusters, and managing TiDB cluster parameters. The syntax for using TiUP Cluster is "tiup cluster [command] [flags]". Supported commands include import, template, check, deploy, list, display, start, stop, restart, scale-in, scale-out, upgrade, prune, edit-config, reload, patch, rename, clean, destroy, audit, replay, enable, disable, meta backup, meta restore, and help.
 ---
 
 # TiUP Cluster
@@ -80,8 +81,10 @@ tiup cluster [command] [flags]
 - [destroy](/tiup/tiup-component-cluster-destroy.md): destroys a specified cluster
 - [audit](/tiup/tiup-component-cluster-audit.md): queries the operation audit log of a specified cluster
 - [replay](/tiup/tiup-component-cluster-replay.md): retries the specified command
-- [enable](/tiup/tiup-component-cluster-enable.md): enables the auto-enabling of the cluster service after a machine is restarted.
-- [disable](/tiup/tiup-component-cluster-disable.md): disables the auto-enabling of the cluster service after a machine is restarted.
+- [enable](/tiup/tiup-component-cluster-enable.md): enables the auto-enabling of the cluster service after a machine is restarted
+- [disable](/tiup/tiup-component-cluster-disable.md): disables the auto-enabling of the cluster service after a machine is restarted
+- [meta backup](/tiup/tiup-component-cluster-meta-backup.md): backs up the TiUP meta file required for the operation and maintenance of a specified cluster
+- [meta restore](/tiup/tiup-component-cluster-meta-restore.md): restores the TiUP meta file of a specified cluster
 - [help](/tiup/tiup-component-cluster-help.md): prints the help information
 
 [<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)

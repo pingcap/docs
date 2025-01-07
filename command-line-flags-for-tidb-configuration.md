@@ -42,10 +42,20 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The TiDB server monitors this address.
 - The `"0.0.0.0"` address monitors all network cards by default. If you have multiple network cards, specify the network card that provides service, such as `192.168.100.113`.
 
-## `--enable-binlog`
+## `--initialize-insecure`
 
-+ Enables or disables TiDB binlog generation
-+ Default: `false`
+- Bootstraps tidb-server in insecure mode
+- Default: `true`
+
+## `--initialize-secure`
+
+- Bootstraps tidb-server in secure mode
+- Default: `false`
+
+## `--initialize-sql-file`
+
+- The SQL script to be executed when the TiDB cluster is started for the first time. For details, see [configuration item `initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)
+- Default: `""`
 
 ## `-L`
 
@@ -63,6 +73,12 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The log file
 - Default: `""`
 - If this option is not set, logs are output to "stderr". If this option is set, logs are output to the corresponding file.
+
+## `--log-general`
+
++ The filename of the [General Log](/system-variables.md#tidb_general_log)
++ Default: `""`
++ If this option is not set, the general log is written to the file specified by [`--log-file`](#--log-file) by default.
 
 ## `--log-slow-query`
 
@@ -97,16 +113,21 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Default: `"/tmp/tidb"`
 - You can use `tidb-server --store=unistore --path=""` to enable a pure in-memory TiDB.
 
+## `--proxy-protocol-fallbackable`
+
+- Controls whether to enable PROXY protocol fallback mode. When this parameter is set to `true`, TiDB accepts client connections that belong to `--proxy-protocol-networks` without using the PROXY protocol specification or without sending a PROXY protocol header. By default, TiDB only accepts client connections that belong to `--proxy-protocol-networks` and send a PROXY protocol header.
+- Default value: `false`
+
 ## `--proxy-protocol-networks`
 
 - The list of proxy server's IP addresses allowed to connect to TiDB using the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt).
 - Default: `""`
 - In general cases, when you access TiDB behind a reverse proxy, TiDB takes the IP address of the reverse proxy server as the IP address of the client. By enabling the PROXY protocol, reverse proxies that support this protocol such as HAProxy can pass the real client IP address to TiDB.
-- After configuring this flag, TiDB allows the configured source IP address to connect to TiDB using the PROXY protocol; if a protocol other than PROXY is used, this connection will be denied. If this flag is left empty, no IP address can connect to TiDB using the PROXY protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24) with `,` as the separator. `*` means any IP addresses.
+- After configuring this flag, TiDB allows the configured source IP address to connect to TiDB using the PROXY protocol; if a protocol other than PROXY is used, this connection will be denied; other addresses are allowed to connect to TiDB without the PROXY protocol. If this flag is left empty, no IP address can connect to TiDB using the PROXY protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24) with `,` as the separator. `*` means any IP addresses.
 
 > **Warning:**
 >
-> Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
+> Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable unless `--proxy-protocol-fallbackable` is set to `true`.
 
 > **Note:**
 >
@@ -162,6 +183,16 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Default: `"unistore"`
 - You can choose "unistore" or "tikv". ("unistore" is the local storage engine; "tikv" is a distributed storage engine)
 
+## `--temp-dir`
+
+- The temporary directory of TiDB
+- Default: `"/tmp/tidb"`
+
+## `--tidb-service-scope`
+
++ Specifies the initial value of [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for the current TiDB instance.
++ Default: `""`
+
 ## `--token-limit`
 
 - The number of sessions allowed to run concurrently in TiDB. It is used for traffic control.
@@ -187,6 +218,12 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 + Sets the CPU affinity of TiDB servers, which is separated by commas. For example, "1,2,3".
 + Default: `""`
+
+## `--redact`
+
++ Determines whether the TiDB server desensitizes log files when using the subcommand `collect-log`.
++ Default: false
++ When the value is `true`, it is a masking operation, and all fields wrapped in `‹ ›` mark symbols are replaced with `?`. When the value is `false`, it is a restore operation, and all mark symbols are removed. To use this feature, execute `./tidb-server --redact=xxx collect-log <input> <output>` to desensitize or restore the TiDB server log file specified by `<input>` and output it to `<output>`. For more information, see the system variable [`tidb_redact_log`](/system-variables.md#tidb_redact_log).
 
 ## `--repair-mode`
 

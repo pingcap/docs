@@ -1,15 +1,15 @@
 ---
 title: CRUD SQL in TiDB
-summary: A brief introduction to TiDB's CURD SQL.
+summary: A brief introduction to TiDB's CRUD SQL.
 ---
 
 # CRUD SQL in TiDB
 
-This document briefly introduces how to use TiDB's CURD SQL.
+This document briefly introduces how to use TiDB's CRUD SQL.
 
 ## Before you start
 
-Please make sure you are connected to a TiDB cluster. If not, refer to [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster.
+Please make sure you are connected to a TiDB cluster. If not, refer to [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-cloud-serverless-cluster) to create a TiDB Cloud Serverless cluster.
 
 ## Explore SQL with TiDB
 
@@ -19,9 +19,9 @@ Please make sure you are connected to a TiDB cluster. If not, refer to [Build a 
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
-To experiment with SQL and test out TiDB compatibility with MySQL queries, you can [run TiDB directly in your web browser without installing it](https://tour.tidb.io/). You can also first deploy a TiDB cluster and then run SQL statements in it.
+To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations). You can also first deploy a TiDB cluster and then run SQL statements in it.
 
-This page walks you through the basic TiDB SQL statements such as DDL, DML, and CRUD operations. For a complete list of TiDB statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
+This page walks you through the basic TiDB SQL statements such as DDL, DML, and CRUD operations. For a complete list of TiDB statements, see [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
 
 ## Category
 
@@ -35,7 +35,7 @@ SQL is divided into the following 4 types according to their functions:
 
 - **DCL (Data Control Language)**: It is used to define access privileges and security levels.
 
-The following mainly introduces DML and DQL. For more information about DDL and DCL, see [Explore SQL with TiDB](/basic-sql-operations.md) or [TiDB SQL syntax detailed explanation](https://pingcap.github.io/sqlgram/).
+The following mainly introduces DML and DQL. For more information about DDL and DCL, see [Explore SQL with TiDB](/basic-sql-operations.md) or [SQL Statement Overview](/sql-statements/sql-statement-overview.md).
 
 ## Data Manipulation Language
 
@@ -43,15 +43,11 @@ Common DML features are adding, modifying, and deleting table records. The corre
 
 To insert data into a table, use the `INSERT` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
 To insert a record containing data of some fields into a table, use the `INSERT` statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO person(id,name) VALUES('2','bob');
@@ -59,15 +55,11 @@ INSERT INTO person(id,name) VALUES('2','bob');
 
 To update some fields of a record in a table, use the `UPDATE` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
 To delete the data in a table, use the `DELETE` statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 DELETE FROM person WHERE id=2;
@@ -83,15 +75,11 @@ DQL is used to retrieve the desired data rows from a table or multiple tables.
 
 To view the data in a table, use the `SELECT` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM person;
 ```
 
 To query a specific column, add the column name after the `SELECT` keyword:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT name FROM person;
@@ -110,8 +98,20 @@ The result is as follows:
 
 Use the `WHERE` clause to filter all records that match the conditions and then return the result:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM person WHERE id < 5;
 ```
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

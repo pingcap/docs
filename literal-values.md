@@ -74,7 +74,7 @@ To represent some special characters in a string, you can use escape characters 
 
 If you want to represent `"` in the string surrounded by `'`, or `'` in the string surrounded by `"`, you do not need to use escape characters.
 
-For more information, see [String Literals in MySQL](https://dev.mysql.com/doc/refman/5.7/en/string-literals.html).
+For more information, see [String Literals in MySQL](https://dev.mysql.com/doc/refman/8.0/en/string-literals.html).
 
 ## Numeric literals
 
@@ -86,7 +86,7 @@ Exact-value numeric literals can be represented as `1, .2, 3.4, -5, -6.78, +9.10
 
 Numeric literals can also be represented in scientific notation, such as `1.2E3, 1.2E-3, -1.2E3, -1.2E-3`.
 
-For more information, see [Numeric Literals in MySQL](https://dev.mysql.com/doc/refman/5.7/en/number-literals.html).
+For more information, see [Numeric Literals in MySQL](https://dev.mysql.com/doc/refman/8.0/en/number-literals.html).
 
 ## Date and time literals
 
@@ -98,7 +98,7 @@ TiDB supports the following date formats:
 * `'YYYYMMDDHHMMSS'` or `'YYMMDDHHMMSS'`: For example, `'20170824104520'` and `'170824104520'` are regarded as `'2017-08-24 10:45:20'`. However, if you provide a value out of range, such as `'170824304520'`, it is not treated as a valid date. Note that incorrect formats such as `YYYYMMDD HHMMSS`, `YYYYMMDD HH:MM:DD`, or `YYYY-MM-DD HHMMSS` will fail to insert.
 * `YYYYMMDDHHMMSS` or `YYMMDDHHMMSS`: Note that these formats have no single or double quotes, but a number. For example, `20170824104520` is interpreted as `'2017-08-24 10:45:20'`.
 
-DATETIME or TIMESTAMP values can be followed by a fractional part, used to represent microseconds precision (6 digits).  The fractional part should always be separated from the rest of the time by a decimal point `.`.
+DATETIME or TIMESTAMP values can be followed by a fractional part, used to represent microseconds precision (6 digits). The fractional part should always be separated from the rest of the time by a decimal point `.`.
 
 The year value containing only two digits is ambiguous. It is recommended to use the four-digit year format. TiDB interprets the two-digit year value according to the following rules:
 
@@ -122,7 +122,7 @@ TiDB supports the following formats for time values:
 
 The decimal point of the Time type is also `.`, with a precision of up to 6 digits after the decimal point.
 
-See [MySQL date and time literals](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-literals.html) for more details.
+See [MySQL date and time literals](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-literals.html) for more details.
 
 ## Boolean Literals
 

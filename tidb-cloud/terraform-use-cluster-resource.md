@@ -5,19 +5,25 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 # Use Cluster Resource
 
-You can learn how to create and modify a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
+You can learn how to manage a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
 
-In addition, you will also learn how to get the necessary information with the `tidbcloud_project` and `tidbcloud_cluster_spec` data sources.
+In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` and `tidbcloud_cluster_specs` data sources.
+
+The features of the `tidbcloud_cluster` resource include the following:
+
+- Create TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
+- Modify TiDB Cloud Dedicated clusters.
+- Delete TiDB Cloud Serverless and TiDB Cloud Dedicated clusters.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
 
-## Get project IDs using the project data source
+## Get project IDs using the `tidbcloud_projects` data source
 
 Each TiDB cluster is in a project. Before you create a TiDB cluster, you need to get the ID of the project in which you want to create a cluster.
 
-To view the information of all available projects, you can use the `tidbcloud_project` data source as follows:
+To view the information of all available projects, you can use the `tidbcloud_projects` data source as follows:
 
 1. In the `main.tf` file that is created when you [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md), add the `data` and `output` blocks as follows:
 
@@ -26,32 +32,31 @@ To view the information of all available projects, you can use the `tidbcloud_pr
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.0.1"
        }
      }
-     required_version = ">= 1.0.0"
    }
 
    provider "tidbcloud" {
-     public_key = "fake_public_key"
-     private_key = "fake_private_key"
+     public_key = "your_public_key"
+     private_key = "your_private_key"
+     sync = true
    }
 
-   data "tidbcloud_project" "example_project" {
+   data "tidbcloud_projects" "example_project" {
      page      = 1
      page_size = 10
    }
 
    output "projects" {
-     value = data.tidbcloud_project.example_project.items
+     value = data.tidbcloud_projects.example_project.items
    }
    ```
 
    - Use the `data` block to define the data source of TiDB Cloud, including the data source type and the data source name.
 
-      - To use the project data source, set the data source type as `tidbcloud_project`.
+      - To use the projects data source, set the data source type as `tidbcloud_projects`.
       - For the data source name, you can define it according to your need. For example, "example_project".
-      - For the project data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
+      - For the `tidbcloud_projects` data source, you can use the `page` and `page_size` attributes to limit the maximum number of projects you want to check.
 
    - Use the `output` block to define the data source information to be displayed in the output, and expose the information for other Terraform configurations to use.
 
@@ -65,8 +70,6 @@ To view the information of all available projects, you can use the `tidbcloud_pr
 
    ```
    $ terraform apply --auto-approve
-   data.tidbcloud_project.example_project: Reading...
-   data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
 
    Changes to Outputs:
      + projects = [
@@ -116,11 +119,11 @@ To view the information of all available projects, you can use the `tidbcloud_pr
 
 Now, you can get all the available projects from the output. Copy one of the project IDs that you need.
 
-## Get cluster specification information using the cluster-spec data source
+## Get cluster specification information using the `tidbcloud_cluster_specs` data source
 
 Before you create a cluster, you need to get the cluster specification information, which contains all available configuration values (such as supported cloud providers, regions, and node sizes).
 
-To get the cluster specification information, you can use the `tidbcloud_cluster_spec` data source as follows:
+To get the cluster specification information, you can use the `tidbcloud_cluster_specs` data source as follows:
 
 1. Edit the `main.tf` file as follows:
 
@@ -129,19 +132,18 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
       required_providers {
         tidbcloud = {
           source = "tidbcloud/tidbcloud"
-          version = "~> 0.0.1"
         }
       }
-      required_version = ">= 1.0.0"
     }
     provider "tidbcloud" {
-      public_key = "fake_public_key"
-      private_key = "fake_private_key"
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+      sync = true
     }
-    data "tidbcloud_cluster_spec" "example_cluster_spec" {
+    data "tidbcloud_cluster_specs" "example_cluster_spec" {
     }
     output "cluster_spec" {
-      value = data.tidbcloud_cluster_spec.example_cluster_spec.items
+      value = data.tidbcloud_cluster_specs.example_cluster_spec.items
     }
     ```
 
@@ -151,20 +153,13 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
 
     <details>
       <summary>Cluster specification</summary>
-   
+
     ```
     {
         "cloud_provider" = "AWS"
         "cluster_type" = "DEDICATED"
         "region" = "eu-central-1"
         "tidb" = tolist([
-          {
-            "node_quantity_range" = {
-              "min" = 1
-              "step" = 1
-            }
-            "node_size" = "2C8G"
-          },
           {
             "node_quantity_range" = {
               "min" = 1
@@ -212,17 +207,6 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
           },
         ])
         "tikv" = tolist([
-          {
-            "node_quantity_range" = {
-              "min" = 3
-              "step" = 3
-            }
-            "node_size" = "2C8G"
-            "storage_size_gib_range" = {
-              "max" = 500
-              "min" = 200
-            }
-          },
           {
             "node_quantity_range" = {
               "min" = 3
@@ -277,7 +261,7 @@ In the results:
 
 - `cloud_provider` is the cloud provider on which a TiDB cluster can be hosted.
 - `region` is the region of `cloud_provider`.
-- `node_quantity_range` shows the minimum node quantity and the step to scale a node.
+- `node_quantity_range` shows the minimum node number and the step to scale a node.
 - `node_size` is the size of a node.
 - `storage_size_gib_range` shows the minimum and maximum storage size you can set for a node.
 
@@ -285,11 +269,11 @@ In the results:
 
 > **Note:**
 >
-> Before you begin, make sure that you have set a Project CIDR in the TiDB Cloud console. For more information, see [Set a Project CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr).
+> Before you begin, make sure that you have set a CIDR in the TiDB Cloud console. For more information, see [Set a CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region).
 
 You can create a cluster using the `tidbcloud_cluster` resource.
 
-The following example shows how to create a Dedicated Tier cluster.
+The following example shows how to create a TiDB Cloud Dedicated cluster.
 
 1. Create a directory for the cluster and enter it.
 
@@ -300,15 +284,14 @@ The following example shows how to create a Dedicated Tier cluster.
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.0.1"
        }
      }
-     required_version = ">= 1.0.0"
    }
 
    provider "tidbcloud" {
-     public_key = "fake_public_key"
-     private_key = "fake_private_key"
+     public_key = "your_public_key"
+     private_key = "your_private_key"
+     sync = true
    }
 
     resource "tidbcloud_cluster" "example_cluster" {
@@ -345,11 +328,6 @@ The following example shows how to create a Dedicated Tier cluster.
 
     ```shell
     $ terraform apply
-    data.tidbcloud_project.example_project: Reading...
-    data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
-
-    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-      + create
 
     Terraform will perform the following actions:
 
@@ -494,9 +472,9 @@ The following example shows how to create a Dedicated Tier cluster.
 
 When the status is `AVAILABLE`, it indicates that your TiDB cluster is created and ready for use.
 
-## Modify a Dedicated Tier cluster
+## Modify a TiDB Cloud Dedicated cluster
 
-For a Dedicated Tier cluster, you can use Terraform to manage cluster resources as follows:
+For a TiDB Cloud Dedicated cluster, you can use Terraform to manage cluster resources as follows:
 
 - Add a TiFlash component to the cluster.
 - Scale the cluster.
@@ -629,7 +607,7 @@ You can scale a TiDB cluster when its status is `AVAILABLE`.
 
 1. In the `cluster.tf` file that is used when you [create the cluster](#create-a-cluster-using-the-cluster-resource), edit the `components` configurations.
 
-    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3. You can [get this information from the cluster specifcation](#get-cluster-specification-information-using-the-cluster-spec-data-source)), and one more node for TiFlash, you can edit the configurations as follows:
+    For example, to add one more node for TiDB, 3 more nodes for TiKV (The number of TiKV nodes needs to be a multiple of 3 for its step is 3. You can [get this information from the cluster specification](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)), and one more node for TiFlash, you can edit the configurations as follows:
 
    ```
        components = {
@@ -852,13 +830,13 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 
 6. Wait for a moment, then use the `terraform refersh` command to update the state. The status will be changed to `AVAILABLE` finally.
 
-Now, you have created and managed a Dedicated Tier cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
+Now, you have created and managed a TiDB Cloud Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
 
 ## Import a cluster
 
 For a TiDB cluster that is not managed by Terraform, you can use Terraform to manage it just by importing it.
 
-For example, you can import a cluster that is not created by Terraform or import a cluster that is [created with the restore resource](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task-with-the-restore-resource).
+For example, you can import a cluster that is not created by Terraform or import a cluster that is [created with the restore resource](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task).
 
 1. Create a `import_cluster.tf` file as follows:
 
@@ -867,10 +845,8 @@ For example, you can import a cluster that is not created by Terraform or import
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.0.1"
        }
      }
-     required_version = ">= 1.0.0"
    }
     resource "tidbcloud_cluster" "import_cluster" {}
     ```
@@ -980,7 +956,7 @@ For example, you can import a cluster that is not created by Terraform or import
     Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can use Terraform to manage the cluster. 
+Now you can use Terraform to manage the cluster.
 
 ## Delete a cluster
 

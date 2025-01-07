@@ -28,6 +28,8 @@ To enable OpenAPI, perform one of the following operations:
 > - DM provides the [specification document](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml) that meets the OpenAPI 3.0.0 standard. This document contains all the request parameters and returned values. You can copy the document yaml and preview it in [Swagger Editor](https://editor.swagger.io/).
 >
 > - After you deploy the DM-master nodes, you can access `http://{master-addr}/api/v1/docs` to preview the documentation online.
+>
+> - Some features supported in the configuration file are not supported in OpenAPI. Their capabilities are not fully aligned. In a production environment, it is recommended to use the [configuration file](/dm/dm-config-overview.md).
 
 You can use the APIs to perform the following maintenance operations on the DM cluster:
 
@@ -358,7 +360,7 @@ curl -X 'DELETE' \
 
 This API is a synchronous interface. If the request is successful, the information of the corresponding data source is returned.
 
-> **NOTE:**
+> **Note:**
 >
 > When you use this API to update the data source configuration, make sure that there are no running tasks under the current data source.
 
@@ -800,6 +802,16 @@ curl -X 'POST' \
         "import_threads": 16,
         "data_dir": "./exported_data",
         "consistency": "auto"
+        "import_mode": "physical",
+        "sorting_dir": "./sort_dir",
+        "disk_quota": "80G",
+        "checksum": "required",
+        "analyze": "optional",
+        "range_concurrency": 0,
+        "compress-kv-pairs": "",
+        "pd_addr": "",
+        "on_duplicate_logical": "error",
+        "on_duplicate_physical": "none"
       },
       "incr_migrate_conf": {
         "repl_threads": 16,
@@ -890,6 +902,16 @@ curl -X 'POST' \
       "import_threads": 16,
       "data_dir": "./exported_data",
       "consistency": "auto"
+      "import_mode": "physical",
+      "sorting_dir": "./sort_dir",
+      "disk_quota": "80G",
+      "checksum": "required",
+      "analyze": "optional",
+      "range_concurrency": 0,
+      "compress-kv-pairs": "",
+      "pd_addr": "",
+      "on_duplicate_logical": "error",
+      "on_duplicate_physical": "none"
     },
     "incr_migrate_conf": {
       "repl_threads": 16,
@@ -996,7 +1018,17 @@ curl -X 'GET' \
       "export_threads": 4,
       "import_threads": 16,
       "data_dir": "./exported_data",
-      "consistency": "auto"
+      "consistency": "auto",
+      "import_mode": "physical",
+      "sorting_dir": "./sort_dir",
+      "disk_quota": "80G",
+      "checksum": "required",
+      "analyze": "optional",
+      "range_concurrency": 0,
+      "compress-kv-pairs": "",
+      "pd_addr": "",
+      "on_duplicate_logical": "error",
+      "on_duplicate_physical": "none"
     },
     "incr_migrate_conf": {
       "repl_threads": 16,
@@ -1124,7 +1156,17 @@ curl -X 'PUT' \
         "export_threads": 4,
         "import_threads": 16,
         "data_dir": "./exported_data",
-        "consistency": "auto"
+        "consistency": "auto",
+        "import_mode": "physical",
+        "sorting_dir": "./sort_dir",
+        "disk_quota": "80G",
+        "checksum": "required",
+        "analyze": "optional",
+        "range_concurrency": 0,
+        "compress-kv-pairs": "",
+        "pd_addr": "",
+        "on_duplicate_logical": "error",
+        "on_duplicate_physical": "none"
       },
       "incr_migrate_conf": {
         "repl_threads": 16,
@@ -1215,6 +1257,16 @@ curl -X 'PUT' \
       "import_threads": 16,
       "data_dir": "./exported_data",
       "consistency": "auto"
+      "import_mode": "physical",
+      "sorting_dir": "./sort_dir",
+      "disk_quota": "80G",
+      "checksum": "required",
+      "analyze": "optional",
+      "range_concurrency": 0,
+      "compress-kv-pairs": "",
+      "pd_addr": "",
+      "on_duplicate_logical": "error",
+      "on_duplicate_physical": "none"
     },
     "incr_migrate_conf": {
       "repl_threads": 16,
@@ -1294,7 +1346,7 @@ curl -X 'GET' \
       "name": "string",
       "source_name": "string",
       "worker_name": "string",
-      "stage": "runing",
+      "stage": "running",
       "unit": "sync",
       "unresolved_ddl_lock_id": "string",
       "load_status": {
@@ -1431,7 +1483,17 @@ curl -X 'GET' \
           "export_threads": 4,
           "import_threads": 16,
           "data_dir": "./exported_data",
-          "consistency": "auto"
+          "consistency": "auto",
+          "import_mode": "physical",
+          "sorting_dir": "./sort_dir",
+          "disk_quota": "80G",
+          "checksum": "required",
+          "analyze": "optional",
+          "range_concurrency": 0,
+          "compress-kv-pairs": "",
+          "pd_addr": "",
+          "on_duplicate_logical": "error",
+          "on_duplicate_physical": "none"
         },
         "incr_migrate_conf": {
           "repl_threads": 16,
@@ -1553,7 +1615,7 @@ curl -X 'GET' \
 {
   "schema_name": "db1",
   "table_name": "table1",
-  "schema_create_sql": "CREATE TABLE `t1` (`id` int(11) NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin"
+  "schema_create_sql": "CREATE TABLE `t1` (`id` int NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin"
 }
 ```
 
@@ -1575,7 +1637,7 @@ curl -X 'PUT' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
-  "sql_content": "CREATE TABLE `t1` ( `c1` int(11) DEFAULT NULL, `c2` int(11) DEFAULT NULL, `c3` int(11) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;",
+  "sql_content": "CREATE TABLE `t1` ( `c1` int DEFAULT NULL, `c2` int DEFAULT NULL, `c3` int DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;",
   "flush": true,
   "sync": true
 }'

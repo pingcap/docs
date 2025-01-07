@@ -6,10 +6,6 @@ aliases: ['/docs/dev/generated-columns/','/docs/dev/reference/sql/generated-colu
 
 # Generated Columns
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 This document introduces the concept and usage of generated columns.
 
 ## Basic concepts
@@ -24,7 +20,7 @@ You can create an index on a generated column whether it is virtual or stored.
 
 One of the main usage of generated columns is to extract data from the JSON data type and indexing the data.
 
-In both MySQL 5.7 and TiDB, columns of type JSON can not be indexed directly. That is, the following table schema is **not supported**:
+In both MySQL 8.0 and TiDB, columns of type JSON cannot be indexed directly. That is, the following table schema is **not supported**:
 
 {{< copyable "sql" >}}
 
@@ -157,5 +153,6 @@ The current limitations of JSON and generated columns are as follows:
 - You cannot add a stored generated column through `ALTER TABLE`.
 - You can neither convert a stored generated column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a stored generated column.
 - You cannot modify the expression of a stored generated column through the `ALTER TABLE` statement.
-- Not all [JSON functions](/functions-and-operators/json-functions.md) are supported;
+- Not all [JSON functions](/functions-and-operators/json-functions.md) are supported.
+- The [`NULLIF()` function](/functions-and-operators/control-flow-functions.md#nullif) is not supported. You can use the [`CASE` function](/functions-and-operators/control-flow-functions.md#case) instead.
 - Currently, the generated column index replacement rule is valid only when the generated column is a virtual generated column. It is not valid on the stored generated column, but the index can still be used by directly using the generated column itself.

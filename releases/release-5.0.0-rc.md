@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.0 RC Release Notes
+summary: TiDB v5.0.0-rc is the predecessor version of TiDB v5.0. It includes new features like clustered index, async commit, reduced jitters, Raft Joint Consensus algorithm, optimized `EXPLAIN` features, invisible index, and improved reliability for enterprise data. It also supports desensitizing error messages and log files for security. Performance improvements include async commit, optimizer stability, and reduced performance jitter. It also enhances system availability during Region membership change. Additionally, it supports backup and restore to AWS S3 and Google Cloud GCS, data import/export, and optimized `EXPLAIN` features for troubleshooting SQL performance issues. Deployment and maintenance improvements include enhanced `mirror` command and easier installation process.
 ---
 
 # TiDB 5.0 RC Release Notes
@@ -64,7 +65,6 @@ The `EXCEPT` operator is a set operator, which combines the result sets of two q
 
 In the pessimistic transaction mode, if the tables involved in a transaction contain concurrent DDL operations or `SCHEMA VERSION` changes, the system automatically updates the transaction's `SCHEMA VERSION` to the latest to avoid the transaction being interrupted by DDL operations and to ensure the successful transaction commit. If the transaction is interrupted, the client receives the `Information schema is changed` error message.
 
-+ [User document](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407)
 + Related issue: [#18005](https://github.com/pingcap/tidb/issues/18005)
 
 ## Character set and collation
@@ -158,8 +158,8 @@ In the process of Region membership changes, "adding a member" and "deleting a m
 
 ## Backup and restore
 
-+ The Backup & Restore tool (BR) supports backing up data to AWS S3 and Google Cloud GCS. ([User document](/br/backup-storage-S3.md))
-+ The Backup & Restore tool (BR) supports restoring data from AWS S3 and Google Cloud GCS to TiDB. ([User document](/br/backup-storage-S3.md))
++ The Backup & Restore tool (BR) supports backing up data to AWS S3 and Google Cloud GCS. ([User document](/br/backup-and-restore-storages.md))
++ The Backup & Restore tool (BR) supports restoring data from AWS S3 and Google Cloud GCS to TiDB. ([User document](/br/backup-and-restore-storages.md))
 + Related issue: [#89](https://github.com/pingcap/br/issues/89)
 
 ## Data import and export

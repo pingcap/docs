@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1 RC1 Release Notes
 aliases: ['/docs/dev/releases/release-2.1-rc.1/','/docs/dev/releases/21rc1/']
+summary: TiDB 2.1 RC1 was released on August 24, 2018, with improvements in stability, SQL optimizer, statistics, and execution engine. The release includes fixes for various issues in SQL optimizer and execution engine. PD introduces version control, rolling update, and region merge features. TiKV supports batch split and row-based region splitting for improved efficiency. Overall, the release focuses on performance optimization and bug fixes.
 ---
 
 # TiDB 2.1 RC1 Release Notes
@@ -69,7 +70,7 @@ On August 24, 2018, TiDB 2.1 RC1 is released! Compared with TiDB 2.1 Beta, this 
     - Add the verification of the number of `PlaceHolder`s in the `Prepare` statement [#7162](https://github.com/pingcap/tidb/pull/7162)
     - Support `set character_set_results = null` [#7353](https://github.com/pingcap/tidb/pull/7353)
     - Support the `flush status` syntax [#7369](https://github.com/pingcap/tidb/pull/7369)
-    - Fix the column size of `SET` and  `ENUM` types in `information_schema` [#7347](https://github.com/pingcap/tidb/pull/7347)
+    - Fix the column size of `SET` and `ENUM` types in `information_schema` [#7347](https://github.com/pingcap/tidb/pull/7347)
     - Support the `NATIONAL CHARACTER` syntax of statements for creating a table [#7378](https://github.com/pingcap/tidb/pull/7378)
     - Support the `CHARACTER SET` syntax in the `LOAD DATA` statement [#7391](https://github.com/pingcap/tidb/pull/7391)
     - Fix the column information of the `SET` and `ENUM` types [#7417](https://github.com/pingcap/tidb/pull/7417)
@@ -91,7 +92,7 @@ On August 24, 2018, TiDB 2.1 RC1 is released! Compared with TiDB 2.1 Beta, this 
     - Fix the `ADD INDEX` issue in some cases [#7142](https://github.com/pingcap/tidb/pull/7142)
     - Increase the speed of adding `UNIQUE-KEY` index operation largely [#7132](https://github.com/pingcap/tidb/pull/7132)
     - Fix the truncating issue of the prefix index in UTF-8 character set [#7109](https://github.com/pingcap/tidb/pull/7109)
-    - Add the environment variable  `tidb_ddl_reorg_priority` to control the priority of the `add-index` operation [#7116](https://github.com/pingcap/tidb/pull/7116)
+    - Add the environment variable `tidb_ddl_reorg_priority` to control the priority of the `add-index` operation [#7116](https://github.com/pingcap/tidb/pull/7116)
     - Fix the display issue of `AUTO-INCREMENT` in `information_schema.tables` [#7037](https://github.com/pingcap/tidb/pull/7037)
     - Support the `admin show ddl jobs <number>` command and support output specified number of DDL jobs [#7028](https://github.com/pingcap/tidb/pull/7028)
     - Support parallel DDL job execution [#6955](https://github.com/pingcap/tidb/pull/6955)

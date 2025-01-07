@@ -7,16 +7,18 @@ summary: The usage of SHOW PLACEMENT LABELS in TiDB.
 
 `SHOW PLACEMENT LABELS` is used to summarize the labels and values that are available for Placement Rules.
 
+> **Note:**
+>
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
 ## Synopsis
 
 ```ebnf+diagram
 ShowStmt ::=
-    "PLACEMENT" "LABELS"
+    "SHOW" "PLACEMENT" "LABELS" ShowLikeOrWhere?
 ```
 
 ## Examples
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW PLACEMENT LABELS;

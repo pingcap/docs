@@ -35,8 +35,6 @@ For a self-contained subquery that uses subquery as operand of comparison operat
 
 For example, to query authors in the `authors` table whose age is greater than the average age, you can use a subquery as a comparison operator operand.
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
     SELECT
@@ -48,15 +46,11 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 
 The inner subquery is executed before TiDB executes the above query:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT AVG(IFNULL(a2.death_year, YEAR(NOW())) - a2.birth_year) AS average_age FROM authors a2;
 ```
 
 Suppose the result of the query is 34, that is, the average age is 34, and 34 will be used as a constant to replace the original subquery.
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM authors a1
@@ -95,8 +89,6 @@ Therefore, in the process of processing, TiDB will try to [Decorrelate of Correl
 
 The following statement is to query authors who are older than the average age of other authors of the same gender.
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
     SELECT
@@ -110,8 +102,6 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 ```
 
 TiDB rewrites it to an equivalent `join` query:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT *
@@ -137,4 +127,18 @@ As a best practice, in actual development, it is recommended to avoid querying t
 
 - [Subquery Related Optimizations](/subquery-optimization.md)
 - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
-- [Subquery Optimization in TiDB](https://en.pingcap.com/blog/subquery-optimization-in-tidb/)
+- [Subquery Optimization in TiDB](https://www.pingcap.com/blog/subquery-optimization-in-tidb/)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

@@ -1,15 +1,15 @@
 ---
 title: Troubleshoot Clusters Using PingCAP Clinic
-summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot cluster problems remotely and perform a quick check of the cluster status on a TiDB cluster or DM cluster deployed using TiUP.
+summary: PingCAP Clinic Diagnostic Service (PingCAP Clinic) helps troubleshoot TiDB and DM clusters deployed using TiUP. It allows remote troubleshooting and local cluster status checks using Diag client and Clinic Server. Prerequisites include installing Diag, setting an access token, and configuring the region. Troubleshooting remotely involves collecting, viewing, and uploading diagnostic data. Performing a quick check on the cluster status locally involves collecting and diagnosing configuration data. Data upload supports breakpoint upload, and uploaded data is kept on the Clinic Server for a maximum of 180 days.
 ---
 
 # Troubleshoot Clusters Using PingCAP Clinic
 
-For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on cluster status locally using Diag client (Diag) and Clinic Server.
+For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on cluster status locally using [Diag client (Diag)](https://github.com/pingcap/diag) and Clinic Server.
 
 > **Note:**
 >
-> - This document **only** applies to clusters deployed using TiUP in an on-premises environment. For clusters deployed using TiDB Operator in Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
+> - This document **only** applies to clusters deployed using TiUP in a self-hosted environment. For clusters deployed using TiDB Operator on Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
 >
 > - PingCAP Clinic **does not support** collecting data from clusters deployed using TiDB Ansible.
 
@@ -17,7 +17,7 @@ For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clini
 
 - [Troubleshoot cluster problems remotely](#troubleshoot-cluster-problems-remotely)
 
-    - When your cluster has some problems, if you need to contact PingCAP technical support, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support staff.
+    - When your cluster has some problems, if you need to [get support](/support.md) from PingCAP, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support staff.
     - When your cluster has some problems, if you cannot analyze the problems immediately, you can use Diag to collect and save the data for later analysis.
 
 - [Perform a quick check on the cluster status locally](#perform-a-quick-check-on-the-cluster-status-locally)
@@ -30,7 +30,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
 1. Install Diag.
 
-   - If you have installed TiUP on your control machine, run the following command to install Diag:
+    - If you have installed TiUP on your control machine, run the following command to install Diag:
 
         ```bash
         tiup install diag
@@ -56,14 +56,14 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     - Log in to the Clinic Server.
 
         <SimpleTab groupId="clinicServer">
-        <div label="Clinic Server in the US" value="clinic-us">
+        <div label="Clinic Server for international users" value="clinic-us">
 
-        [Clinic Server in the US](https://clinic.pingcap.com): Data is stored in AWS in US.
+        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US regions.
 
         </div>
-        <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+        <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-        [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
+        [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
 
         </div>
 
@@ -95,18 +95,18 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     > - For versions earlier than Diag v0.9.0, data is uploaded to Clinic Server in the Chinese region by default. To set `region` in these versions, run the `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
 
     <SimpleTab groupId="clinicServer">
-    <div label="Clinic Server in the US" value="clinic-us">
+    <div label="Clinic Server for international users" value="clinic-us">
 
-    For Clinic Server in the US, set `region` to `US` using the following command:
+    When using Clinic Server for international users, set `region` to `US` using the following command:
 
     ```bash
     tiup diag config clinic.region US
     ```
 
     </div>
-    <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+    <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    For Clinic Server in the Chinese mainland, set `region` to `CN` using the following command:
+    When using Clinic Server for users in the Chinese mainland, set `region` to `CN` using the following command:
 
     ```bash
     tiup diag config clinic.region CN
@@ -174,6 +174,15 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
     - `-N/--node`: only collects data from a specified node. The format is `ip:port`.
     - `--include`: only collects specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To include two or more types, you can use `,` as a separator between the types.
     - `--exclude`: does not collect specific types of data. The optional values are `system`, `monitor`, `log`, `config`, and `db_vars`. To exclude two or more types, you can use `,` as a separator between the types.
+    - `--metricsfilter`: only collects specified Prometheus metrics. You can specify metrics using a comma-separated list of metric prefixes. For example, `--metricsfilter=tidb,pd` collects metrics that start with `tidb` and metrics that start with `pd`.
+    
+        > **Tip:**
+        >
+        > To get available metric prefixes, you can query the TiDB monitoring API using the following command:
+        >
+        > ```bash
+        > curl -s 'http://${prometheus-host}:${prometheus-port}/api/v1/label/__name__/values' | jq -r '.data[]' | cut -d\_ -f1 | uniq -c | sort -rn
+        > ```
 
     After you run the command, Diag does not start collecting data immediately. Instead, Diag provides the estimated data size and the target data storage path in the output for you to confirm whether to continue. For example:
 
@@ -323,7 +332,7 @@ You can have a quick check on the cluster status locally using Diag. Even if you
     The following is the details of the abnormalities.
 
     ### Diagnostic result summary
-    The configuration rules are all derived from PingCAP’s OnCall Service.
+    The configuration rules are all derived from PingCAP's OnCall Service.
 
     If the results of the configuration rules are found to be abnormal, they may cause the cluster to fail.
 

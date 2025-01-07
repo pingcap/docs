@@ -7,50 +7,15 @@ summary: Learn about the FAQs related to TiDB deployment.
 
 This document summarizes the FAQs related to TiDB deployment.
 
-## Operating system requirements
+## Software and hardware requirements
 
-### What are the required operating system versions?
+### What operating systems does TiDB support?
 
-| Linux OS        | Version      |
-| :-----------------------:| :----------: |
-| Red Hat Enterprise Linux | 7.3 or later 7.x releases |
-| CentOS                   | 7.3 or later 7.x releases |
-| Oracle Enterprise Linux  | 7.3 or later 7.x releases |
-| Amazon Linux             | 2 |
-| Ubuntu LTS               | 16.04 or later |
+For the TiDB-supported operating systems, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
-### Why it is recommended to deploy the TiDB cluster on CentOS 7?
+### What is the recommended hardware configuration for a TiDB cluster in the development, test, or production environment?
 
-As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems. For details, see [Official Deployment Requirements](/hardware-and-software-requirements.md) for deploying TiDB.
-
-A lot of TiDB tests have been carried out in CentOS 7.3, and many deployment best practices have been accumulated in CentOS 7.3. Therefore, it is recommended that you use the CentOS 7.3+ Linux operating system when deploying TiDB.
-
-## Server requirements
-
-You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture. The requirements and recommendations about server hardware configuration for development, testing and production environments are as follows:
-
-### Development and testing environments
-
-| Component | CPU | Memory | Local Storage  | Network  | Instance Number (Minimum Requirement) |
-| :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
-| TiDB    | 8 core+   | 16 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
-| PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
-| TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3  |
-| TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
-| TiCDC | 8 core+ | 16 GB+ | SAS, 200 GB+ | Gigabit network card | 1 |
-|         |         |         |              | Total Server Number |  6  |
-
-### Production environment
-
-| Component | CPU | Memory | Hard Disk Type | Network | Instance Number (Minimum Requirement) |
-| :-----: | :------: | :------: | :------: | :------: | :-----: |
-|  TiDB  | 16 core+ | 48 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
-| PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
-| TiKV | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
-| TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
-| TiCDC | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
-| Monitor | 8 core+ | 16 GB+ | SAS | Gigabit network card | 1 |
-|     |     |     |      |  Total Server Number   |    13   |
+You can deploy and run TiDB on the 64-bit generic hardware server platform in the Intel x86-64 architecture or on the hardware server platform in the ARM architecture. For the requirements and recommendations about server hardware configuration for development, test, and production environments, see [Software and Hardware Recommendations - Server requirements](/hardware-and-software-requirements.md#server-requirements).
 
 ### What's the purposes of 2 network cards of 10 gigabit?
 
@@ -62,7 +27,7 @@ If the resources are adequate, it is recommended to use RAID 10 for SSD. If the 
 
 ### What's the recommended configuration of TiDB components?
 
-- TiDB has a high requirement on CPU and memory. If you need to enable TiDB Binlog, the local disk space should be increased based on the service volume estimation and the time requirement for the GC operation. But the SSD disk is not a must.
+- TiDB has a high requirement on CPU and memory.
 - PD stores the cluster metadata and has frequent Read and Write requests. It demands a high I/O disk. A disk of low performance will affect the performance of the whole cluster. It is recommended to use SSD disks. In addition, a larger number of Regions has a higher requirement on CPU and memory.
 - TiKV has a high requirement on CPU, memory and disk. It is required to use SSD.
 
@@ -105,14 +70,12 @@ Check the time difference between the machine time of the monitor and the time w
 | `enable_ntpd` | to monitor the NTP service of the managed node, True by default; do not close it |
 | `machine_benchmark` | to monitor the disk IOPS of the managed node, True by default; do not close it |
 | `set_hostname` | to edit the hostname of the managed node based on the IP, False by default |
-| `enable_binlog` | whether to deploy Pump and enable the binlog, False by default, dependent on the Kafka cluster; see the `zookeeper_addrs` variable |
-| `zookeeper_addrs` | the ZooKeeper address of the binlog Kafka cluster |
 | `enable_slow_query_log` | to record the slow query log of TiDB into a single file: ({{ deploy_dir }}/log/tidb_slow_query.log). False by default, to record it into the TiDB log |
 | `deploy_without_tidb` | the Key-Value mode, deploy only PD, TiKV and the monitoring service, not TiDB; set the IP of the tidb_servers host group to null in the `inventory.ini` file |
 
 ### How to separately record the slow query log in TiDB? How to locate the slow query SQL statement?
 
-1. The slow query definition for TiDB is in the TiDB configuration file. The `slow-threshold: 300` parameter is used to configure the threshold value of the slow query (unit: millisecond).
+1. The slow query definition for TiDB is in the TiDB configuration file. The `tidb_slow_log_threshold: 300` parameter is used to configure the threshold value of the slow query (unit: millisecond).
 
 2. If a slow query occurs, you can locate the `tidb-server` instance where the slow query is and the slow query time point using Grafana and find the SQL statement information recorded in the log on the corresponding node.
 
@@ -148,6 +111,6 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
 
 ## What public cloud vendors are currently supported by TiDB?
 
-TiDB supports deployment on [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks), and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
+TiDB supports deployment on [Google Cloud GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks), and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
 
-In addition, TiDB is currently available on JD Cloud and UCloud, and has the first-level database entries on them.
+In addition, TiDB is currently available on JD Cloud and UCloud.

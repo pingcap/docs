@@ -11,8 +11,6 @@ This document introduces how to create TiFlash replicas for tables and for datab
 
 After TiFlash is connected to the TiKV cluster, data replication by default does not begin. You can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for a specific table:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
@@ -21,19 +19,19 @@ The parameter of the above command is described as follows:
 
 - `count` indicates the number of replicas. When the value is `0`, the replica is deleted.
 
+> **Note:**
+>
+> For a [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) cluster, the `count` of TiFlash replicas can only be `2`. If you set it to `1`, it will be automatically adjusted to `2` for execution. If you set it to a number larger than 2, you will get an error about the replica count.
+
 If you execute multiple DDL statements on the same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
 
 Create two replicas for the table:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 2;
 ```
 
 Delete the replica:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
@@ -42,8 +40,6 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 **Notes:**
 
 * If the table `t` is replicated to TiFlash through the above DDL statements, the table created using the following statement will also be automatically replicated to TiFlash:
-
-    {{< copyable "sql" >}}
 
     ```sql
     CREATE TABLE table_name like t;
@@ -61,8 +57,6 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replica status of all tables.
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
 ```
@@ -76,8 +70,6 @@ In the result of above statement:
 
 Similar to creating TiFlash replicas for tables, you can send a DDL statement to TiDB through a MySQL client to create a TiFlash replica for all tables in a specific database:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER DATABASE db_name SET TIFLASH REPLICA count;
 ```
@@ -88,15 +80,11 @@ Examples:
 
 - Create two replicas for all tables in the database `tpch50`:
 
-    {{< copyable "sql" >}}
-
     ```sql
     ALTER DATABASE `tpch50` SET TIFLASH REPLICA 2;
     ```
 
 - Delete TiFlash replicas created for the database `tpch50`:
-
-    {{< copyable "sql" >}}
 
     ```sql
     ALTER DATABASE `tpch50` SET TIFLASH REPLICA 0;
@@ -108,8 +96,10 @@ Examples:
 >
 > - After executing the statement, do not set the number of TiFlash replicas or perform DDL operations on this database until **all tables in this database are replicated**. Otherwise, unexpected results might occur, which include:
 >     - If you set the number of TiFlash replicas to 2 and then change the number to 1 before all tables in the database are replicated, the final number of TiFlash replicas of all the tables is not necessarily 1 or 2.
->     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **may or may not** be created for these new tables.
+>     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **might or might not** be created for these new tables.
 >     - After executing the statement, if you add indexes for tables in the database before the completion of the statement execution, the statement might hang and resume only after the indexes are added.
+>
+> - If you create tables in this database **after** the completion of the statement execution, TiFlash replicas are not created automatically for these new tables.
 >
 > - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
 
@@ -117,19 +107,74 @@ Examples:
 
 Similar to creating TiFlash replicas for tables, successful execution of the DDL statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>';
 ```
 
 To check tables without TiFlash replicas in the database, you can execute the following SQL statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
 ```
+
+## Speed up TiFlash replication
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This section is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+Before TiFlash replicas are added, each TiKV instance performs a full table scan and sends the scanned data to TiFlash as a "snapshot" to create replicas. By default, TiFlash replicas are added slowly with fewer resources usage in order to minimize the impact on the online service. If there are spare CPU and disk IO resources in your TiKV and TiFlash nodes, you can accelerate TiFlash replication by performing the following steps.
+
+1. Temporarily increase the snapshot write speed limit for each TiKV and TiFlash instance by using the [Dynamic Config SQL statement](https://docs.pingcap.com/tidb/stable/dynamic-config):
+
+    ```sql
+    -- The default value for both configurations are 100MiB, i.e. the maximum disk bandwidth used for writing snapshots is no more than 100MiB/s.
+    SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '300MiB';
+    SET CONFIG tiflash `raftstore-proxy.server.snap-io-max-bytes-per-sec` = '300MiB';
+    ```
+
+    After executing these SQL statements, the configuration changes take effect immediately without restarting the cluster. However, since the replication speed is still restricted by the PD limit globally, you cannot observe the acceleration for now.
+
+2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the new replica speed limit.
+
+    The default new replica speed limit is 30, which means, approximately 30 Regions add TiFlash replicas every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
+    ```
+
+    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v8.5.0` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
+    >
+    > ```shell
+    > tiup ctl:v8.5.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > ```
+
+    Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.
+
+    If the TiKV and TiFlash nodes still have spare resources at this point and the latency of your online service does not increase significantly, you can further ease the limit, for example, triple the original speed:
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
+    ```
+
+3. After the TiFlash replication is complete, revert to the default configuration to reduce the impact on online services.
+
+    Execute the following PD Control command to restore the default new replica speed limit:
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
+    ```
+
+    Execute the following SQL statements to restore the default snapshot write speed limit:
+
+    ```sql
+    SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '100MiB';
+    SET CONFIG tiflash `raftstore-proxy.server.snap-io-max-bytes-per-sec` = '100MiB';
+    ```
 
 ## Set available zones
 
@@ -170,15 +215,11 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 
 2. After starting a cluster, specify the labels when creating replicas.
 
-    {{< copyable "sql" >}}
-
     ```sql
     ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;
     ```
 
     For example:
-
-    {{< copyable "sql" >}}
 
     ```sql
     ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
@@ -187,7 +228,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 3. PD schedules the replicas based on the labels. In this example, PD respectively schedules two replicas of the table `t` to two available zones. You can use pd-ctl to view the scheduling.
 
     ```shell
-    > tiup ctl:<version> pd -u<pd-host>:<pd-port> store
+    > tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store
 
         ...
         "address": "172.16.5.82:23913",
@@ -218,5 +259,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 <CustomContent platform="tidb">
 
 For more information about scheduling replicas by using labels, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md), [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md), and [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md).
+
+TiFlash supports configuring the replica selection strategy for different zones. For more information, see [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730).
 
 </CustomContent>

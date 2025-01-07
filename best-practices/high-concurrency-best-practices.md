@@ -1,6 +1,6 @@
 ---
 title: Highly Concurrent Write Best Practices
-summary: Learn best practices for highly-concurrent write-intensive workloads in TiDB.
+summary: This document provides best practices for handling highly-concurrent write-heavy workloads in TiDB. It addresses challenges and solutions for data distribution, hotspot cases, and complex hotspot problems. The article also discusses parameter configuration for optimizing performance.
 aliases: ['/docs/dev/best-practices/high-concurrency-best-practices/','/docs/dev/reference/best-practices/high-concurrency/']
 ---
 
@@ -10,15 +10,15 @@ This document describes best practices for handling highly-concurrent write-heav
 
 ## Target audience
 
-This document assumes that you have a basic understanding of TiDB. It is recommended that you first read the following three blog articles that explain TiDB fundamentals, and [TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/):
+This document assumes that you have a basic understanding of TiDB. It is recommended that you first read the following three blog articles that explain TiDB fundamentals, and [TiDB Best Practices](https://www.pingcap.com/blog/tidb-best-practice/):
 
-+ [Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/)
-+ [Computing](https://en.pingcap.com/blog/tidb-internal-computing/)
-+ [Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/)
++ [Data Storage](https://www.pingcap.com/blog/tidb-internal-data-storage/)
++ [Computing](https://www.pingcap.com/blog/tidb-internal-computing/)
++ [Scheduling](https://www.pingcap.com/blog/tidb-internal-scheduling/)
 
 ## Highly-concurrent write-intensive scenario
 
-The highly concurrent write scenario often occurs when you perform batch tasks in applications, such as clearing, settlement and so on. This scenario has the following features:
+The highly concurrent write scenario often occurs when you perform batch tasks in applications, such as clearing and settlement. This scenario has the following features:
 
 + A huge volume of data
 + The need to import historical data into database in a short time
@@ -33,7 +33,7 @@ For a distributed database, it is important to make full use of the capacity of 
 
 ## Data distribution principles in TiDB
 
-To address the above challenges, it is necessary to start with the data segmentation and scheduling principle of TiDB. Refer to [Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/) for more details.
+To address the above challenges, it is necessary to start with the data segmentation and scheduling principle of TiDB. Refer to [Scheduling](https://www.pingcap.com/blog/tidb-internal-scheduling/) for more details.
 
 TiDB splits data into Regions, each representing a range of data with a size limit of 96M by default. Each Region has multiple replicas, and each group of replicas is called a Raft Group. In a Raft Group, the Region Leader executes the read and write tasks (TiDB supports [Follower-Read](/follower-read.md)) within the data range. The Region Leader is automatically scheduled by the Placement Driver (PD) component to different physical nodes evenly to distribute the read and write pressure.
 
@@ -231,9 +231,9 @@ When data starts to be written into table `t`, the data is written into the pre-
 
 > **Note:**
 >
-> The `tidb_scatter_region` global variable affects the behavior of `PRE_SPLIT_REGIONS`.
+> The [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) global variable affects the behavior of `PRE_SPLIT_REGIONS`.
 >
-> This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `1`, then TiDB will not return the results to the client until all the Regions are split and scattered. Otherwise, TiDB writes data before the scattering is completed, which will have a significant impact on write performance.
+> This variable controls whether to wait for Regions to be pre-split and scattered before returning results after the table creation. If there are intensive writes after creating the table, you need to set the value of this variable to `global`, then TiDB will not return the results to the client until all the Regions are split and scattered. Otherwise, TiDB writes data before the scattering is completed, which will have a significant impact on write performance.
 
 **Problem two:**
 

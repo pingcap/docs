@@ -1,5 +1,6 @@
 ---
 title: TiDB 4.0.5 Release Notes
+summary: TiDB 4.0.5 was released on August 31, 2020. The new version includes compatibility changes, new features, improvements, bug fixes, and updates to TiKV, TiFlash, Tools, PD, and TiDB Lightning. Some notable changes include support for the unified log format with TiDB, optimization of performance, bug fixes for various issues, and support for encryption at rest for data storage in TiFlash.
 ---
 
 # TiDB 4.0.5 Release Notes
@@ -150,7 +151,7 @@ TiDB version: 4.0.5
 + TiFlash
 
     - Fix the issue that TiFlash cannot start normally after upgrading from an earlier version if the name of the database or table contains special characters
-    - Fix the issue that the TiFlash process can not exit if any exceptions are thrown during initialization
+    - Fix the issue that the TiFlash process cannot exit if any exceptions are thrown during initialization
 
 + Tools
 

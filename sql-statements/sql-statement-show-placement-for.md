@@ -7,6 +7,10 @@ summary: The usage of SHOW PLACEMENT FOR in TiDB.
 
 `SHOW PLACEMENT FOR` summarizes all placement options, and presents them in the canonical form for a specific table, database schema, or partition.
 
+> **Note:**
+>
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
 The statement returns a result set in which the `Scheduling_State` field indicates the current progress that the Placement Driver (PD) has made in scheduling the placement:
 
 * `PENDING`: The PD has not yet started scheduling the placement. This might indicate that that the placement rules are semantically correct, but cannot currently be satisfied by the cluster. For example, if `FOLLOWERS=4` but there are only 3 TiKV stores that are candidates for followers.
@@ -17,7 +21,7 @@ The statement returns a result set in which the `Scheduling_State` field indicat
 
 ```ebnf+diagram
 ShowStmt ::=
-    "PLACEMENT" "FOR" ShowPlacementTarget
+    "SHOW" "PLACEMENT" "FOR" ShowPlacementTarget
 
 ShowPlacementTarget ::=
     DatabaseSym DBName
@@ -27,17 +31,15 @@ ShowPlacementTarget ::=
 
 ## Examples
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
 ALTER DATABASE test PLACEMENT POLICY=p1;
 CREATE TABLE t1 (a INT);
 SHOW PLACEMENT FOR DATABASE test;
 SHOW PLACEMENT FOR TABLE t1;
-SHOW CREATE TABLE t1\G;
+SHOW CREATE TABLE t1\G
 CREATE TABLE t3 (a INT) PARTITION BY RANGE (a) (PARTITION p1 VALUES LESS THAN (10), PARTITION p2 VALUES LESS THAN (20));
-SHOW PLACEMENT FOR TABLE t3 PARTITION p1\G;
+SHOW PLACEMENT FOR TABLE t3 PARTITION p1\G
 ```
 
 ```
@@ -64,7 +66,7 @@ Query OK, 0 rows affected (0.01 sec)
 ***************************[ 1. row ]***************************
 Table        | t1
 Create Table | CREATE TABLE `t1` (
-  `a` int(11) DEFAULT NULL
+  `a` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin /*T![placement] PLACEMENT POLICY=`p1` */
 1 row in set (0.00 sec)
 

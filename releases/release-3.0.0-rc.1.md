@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.0-rc.1 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.0-rc.1/','/docs/dev/releases/3.0.0-rc.1/']
+summary: TiDB 3.0.0-rc.1 was released on May 10, 2019, with improved stability, usability, features, SQL optimizer, statistics, and execution engine. The release includes enhancements to the SQL optimizer, execution engine, server, DDL, PD, TiKV, TiDB Binlog, Lightning, sync-diff-inspector, and TiDB Ansible. Notable improvements include support for SQL Plan Management, memory usage tracking, and control in the execution engine, and the addition of the `pre_split_regions` option for `CREATE TABLE` statements in DDL. The release also includes various bug fixes and performance optimizations.
 ---
 
 # TiDB 3.0.0-rc.1 Release Notes
@@ -44,7 +45,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
     - Support `GRANT ROLE` [#9721](https://github.com/pingcap/tidb/pull/9721)
     - Fix the `ConnectionEvent` error from the `whitelist` plugin that makes TiDB exit [#9889](https://github.com/pingcap/tidb/pull/9889)
     - Fix the issue of mistakenly adding read-only statements to the transaction history [#9723](https://github.com/pingcap/tidb/pull/9723)
-    - Improve `kill` statements to stop SQL execution  and release resources more quickly [#9844](https://github.com/pingcap/tidb/pull/9844)
+    - Improve `kill` statements to stop SQL execution and release resources more quickly [#9844](https://github.com/pingcap/tidb/pull/9844)
     - Add a startup option `config-check` to check the validity of the configuration file [#9855](https://github.com/pingcap/tidb/pull/9855)
     - Fix the validity check of inserting NULL fields when the strict SQL mode is disabled [#10161](https://github.com/pingcap/tidb/pull/10161)
 
@@ -64,7 +65,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
 + Upgrade ETCD [#1452](https://github.com/pingcap/pd/pull/1452)
     - Unify the log format of etcd and PD server
     - Fix the issue of failing to elect Leader by PreVote
-    - Support fast dropping the “propose” and “read” requests that are to fail to avoid blocking the subsequent requests
+    - Support fast dropping the "propose" and "read" requests that are to fail to avoid blocking the subsequent requests
     - Fix the deadlock issue of Lease
 + Fix the issue that a hot store makes incorrect statistics of keys [#1487](https://github.com/pingcap/pd/pull/1487)
 + Support forcibly rebuilding a PD cluster from a single PD node [#1485](https://github.com/pingcap/pd/pull/1485)
@@ -86,7 +87,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
     - Support `block cache` sharing among different `column families` [#4612](https://github.com/tikv/tikv/pull/4612)
 
 + Server
-    - Reduce context switch overhead of  `batch commands` [#4473](https://github.com/tikv/tikv/pull/4473)
+    - Reduce context switch overhead of `batch commands` [#4473](https://github.com/tikv/tikv/pull/4473)
     - Check the validity of seek iterator status [#4470](https://github.com/tikv/tikv/pull/4470)
 
 + RaftStore
@@ -122,7 +123,7 @@ On May 10, 2019, TiDB 3.0.0-rc.1 is released. The corresponding TiDB Ansible ver
     - Fix the bug in Importer that import success may still be returned even if part of the SST failed to be imported [#4566](https://github.com/tikv/tikv/pull/4566)
     - Support speed limit in Importer when uploading SST to TiKV [#4412](https://github.com/tikv/tikv/pull/4412)
     - Support importing tables by size to reduce impacts on the cluster brought by Checksum and Analyze for big tables, and improve the success rate for Checksum and Analyze [#156](https://github.com/pingcap/tidb-lightning/pull/156)
-    - Improve Lightning’s SQL encoding performance by 50% by directly parsing data source file as types.Datum of TiDB and saving extra parsing overhead from the KV encoder [#145](https://github.com/pingcap/tidb-lightning/pull/145)
+    - Improve Lightning's SQL encoding performance by 50% by directly parsing data source file as types.Datum of TiDB and saving extra parsing overhead from the KV encoder [#145](https://github.com/pingcap/tidb-lightning/pull/145)
     - Change log format to [Unified Log Format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) [#162](https://github.com/pingcap/tidb-lightning/pull/162)
     - Add some command line options for use when the configuration file is missing [#157](https://github.com/pingcap/tidb-lightning/pull/157)
 

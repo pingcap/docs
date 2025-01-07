@@ -10,7 +10,7 @@ aliases: ['/docs/dev/schema-object-names/','/docs/dev/reference/sql/language-str
 
 This document introduces schema object names in TiDB SQL statements.
 
-Schema object names are used to name all schema objects in TiDB, including database, table, index, column, alias, and so on. You can quote these objects using identifiers in SQL statements.
+Schema object names are used to name all schema objects in TiDB, including database, table, index, column, and alias. You can quote these objects using identifiers in SQL statements.
 
 You can use backticks to enclose the identifier. For example, `SELECT * FROM t` can also be written as `` SELECT * FROM `t` ``. But if the identifier includes one or more special characters or is a reserved keyword, it must be enclosed in backticks to quote the schema object it represents.
 
@@ -77,7 +77,7 @@ SELECT 1 AS `identifier`, 2 AS 'string';
 1 row in set (0.00 sec)
 ```
 
-For more information, see [MySQL Schema Object Names](https://dev.mysql.com/doc/refman/5.7/en/identifiers.html).
+For more information, see [MySQL Schema Object Names](https://dev.mysql.com/doc/refman/8.0/en/identifiers.html).
 
 ## Identifier qualifiers
 
@@ -113,4 +113,4 @@ Instead of:
 `table_name.col_name`
 ```
 
-For more information, see [MySQL Identifier Qualifiers](https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html).
+For more information, see [MySQL Identifier Qualifiers](https://dev.mysql.com/doc/refman/8.0/en/identifier-qualifiers.html).

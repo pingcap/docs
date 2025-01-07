@@ -1,8 +1,9 @@
 ---
-title: TiDB Cloud Documentation
-aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', '/tidbcloud/beta/service-level-agreement']
+title: TiDB Cloud
+aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
+summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. It offers guides, samples, and references for learning, trying, developing, maintaining, migrating, monitoring, tuning, securing, billing, integrating, and referencing.
 ---
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
@@ -21,6 +22,8 @@ hide_commit: true
 
 [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
 
+[Try Out TiDB + AI](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python)
+
 [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
 
 [Proof of Concept](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
@@ -37,7 +40,7 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="Use" icon="cloud7">
+<LearningPath label="Maintain" icon="cloud7">
 
 [Create a Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
 
@@ -45,11 +48,17 @@ hide_commit: true
 
 [Use an HTAP Cluster](https://docs.pingcap.com/tidbcloud/tiflash-overview)
 
+[Back Up and Restore Data](https://docs.pingcap.com/tidbcloud/backup-and-restore)
+
 [Scale a Cluster](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
 [Pause or Resume a TiDB Cluster](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
-[Use API (beta)](https://docs.pingcap.com/tidbcloud/api-overview)
+[Stream Data](http://docs.pingcap.com/tidbcloud/changefeed-overview)
+
+[Use API (Beta)](https://docs.pingcap.com/tidbcloud/api-overview)
+
+[Use TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
 
 </LearningPath>
 
@@ -66,6 +75,8 @@ hide_commit: true
 [From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
 [From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+
+[With MySQL CLI](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli)
 
 </LearningPath>
 
@@ -91,25 +102,25 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="Manage Access" icon="users">
+<LearningPath label="Security" icon="users">
 
-[Manage Passwords](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-passwords)
+[Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication)
 
-[Manage Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
+[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#user-roles)
 
-[View Organization and Project](https://docs.pingcap.com/tidbcloud/manage-user-access#view-the-organization-and-project)
+[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
 
-[Invite a Member](https://docs.pingcap.com/tidbcloud/manage-user-access#invite-an-organization-member)
+[Manage organization access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access)
 
-[Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles)
+[Manage project access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
 
-[Configure Security Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
+[Configure Password Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
 </LearningPath>
 
 <LearningPath label="Billing" icon="cloud2">
 
-[Pricing](https://en.pingcap.com/tidb-cloud-pricing/)
+[Pricing](https://www.pingcap.com/pricing/)
 
 [Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
 
@@ -119,13 +130,17 @@ hide_commit: true
 
 <LearningPath label="Integrations" icon="cloud4">
 
+[Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)
+
 [Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
-[Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+[Zapier](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
+
+[Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
 
 [Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
 
-[Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
+[Amazon AppFlow](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
 
 </LearningPath>
 
@@ -133,7 +148,7 @@ hide_commit: true
 
 [System Variables](https://docs.pingcap.com/tidbcloud/system-variables)
 
-[Release Notes](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+[Release Notes](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)
 
 [SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 

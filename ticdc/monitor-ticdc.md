@@ -1,16 +1,16 @@
 ---
-title: Key Monitoring Metrics of TiCDC
+title: TiCDC Monitoring Metrics Details
 summary: Learn some key metrics displayed on the Grafana TiCDC dashboard.
 ---
 
-# Key Monitoring Metrics of TiCDC
+# TiCDC Monitoring Metrics Details
 
 If you use TiUP to deploy the TiDB cluster, you can see a sub-dashboard for TiCDC in the monitoring system which is deployed at the same time. You can get an overview of TiCDC's current status from the TiCDC dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
 
 The metric description in this document is based on the following replication task example, which replicates data to MySQL using the default configuration.
 
 ```shell
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
+cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
 ```
 
 The TiCDC dashboard contains four monitoring panels. See the following screenshot:
@@ -97,8 +97,8 @@ The description of each metric in the **Events** panel is as follows:
 - Entry sorter sort duration percentile: The time (P95, P99, and P999) spent by TiCDC sorting events within one second
 - Entry sorter merge duration: The histogram of the time spent by TiCDC nodes merging sorted events
 - Entry sorter merge duration percentile: The time (P95, P99, and P999) spent by TiCDC merging sorted events within one second
-- Mounter unmarshal duration: The histogram of the time spent by TiCDC nodes unmarshaling events
-- Mounter unmarshal duration percentile: The time (P95, P99, and P999) spent by TiCDC unmarshaling events within one second
+- Mounter unmarshal duration: The histogram of the time spent by TiCDC nodes unmarshalling events
+- Mounter unmarshal duration percentile: The time (P95, P99, and P999) spent by TiCDC unmarshalling events within one second
 - KV client dispatch events/s: The number of events that the KV client module dispatches among the TiCDC nodes
 - KV client batch resolved size: The batch size of resolved timestamp messages that TiKV sends to TiCDC
 

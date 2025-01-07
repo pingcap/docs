@@ -10,13 +10,13 @@ This document describes the problems encountered during the use of TiDB and prov
 
 ## Error codes
 
-TiDB is compatible with the error codes in MySQL, and in most cases returns the same error code as MySQL. For a list of error codes for MySQL, see [MySQL 5.7 Error Message Reference](https://dev.mysql.com/doc/mysql-errors/5.7/en/). In addition, TiDB has the following unique error codes:
+TiDB is compatible with the error codes in MySQL, and in most cases returns the same error code as MySQL. For a list of error codes for MySQL, see [MySQL 8.0 Error Message Reference](https://dev.mysql.com/doc/mysql-errors/8.0/en/). In addition, TiDB has the following unique error codes:
 
 > **Note:**
 >
 > Some error codes stand for internal errors. Normally, TiDB handles the error rather than return it to the user, so some error codes are not listed here.
 >
-> If you encounter an error code that is not listed here, [contact PingCAP](mailto:info@pingcap.com) for support.
+> If you encounter an error code that is not listed here, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8001
 
@@ -34,7 +34,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     If the data in a row is not consistent with the index when executing the [`ADMIN CHECK TABLE`](/sql-statements/sql-statement-admin-check-table-index.md) command, TiDB returns this error. This error is commonly seen when you check the data corruption in the table.
 
-    You can [contact PingCAP](mailto:info@pingcap.com) for support.
+    You can [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8004
 
@@ -84,13 +84,13 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Invalid transactions. If TiDB finds that no transaction ID (Start Timestamp) is obtained for the transaction that is being executed, which means this transaction is invalid, this error is returned.
 
-    Usually this error does not occur. If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    Usually this error does not occur. If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8025
 
     The single Key-Value pair being written is too large. The largest single Key-Value pair supported in TiDB is 6 MB by default.
 
-    If a pair exceeds this limit, you need to properly adjust the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration value to relax the limit.
+    If a pair exceeds this limit, you need to properly adjust the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) configuration value to relax the limit.
 
 * Error Number: 8026
 
@@ -166,13 +166,13 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Unknown data type is encountered when TiDB parses the Exec argument list sent by the client.
 
-    If you encounter this error, check the client. If the client is normal, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, check the client. If the client is normal, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8052
 
     The serial number of the data packet from the client is incorrect.
 
-    If you encounter this error, check the client. If the client is normal, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, check the client. If the client is normal, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8055
 
@@ -256,7 +256,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The plugin defines a system variable whose name does not begin with the plugin name.
 
-    Contact the developer of the plugin to modify.
+    Contact the developer of the plugin to modify, or [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8107
 
@@ -268,7 +268,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Unsupported execution plan type. This error is an internal error.
 
-    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8109
 
@@ -358,11 +358,67 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `OFF`, to ensure the correctness of transactions, any errors in the SQL statement execution might cause TiDB to return this `8147` error and abort the current transaction. For specific causes of the error, refer to the error message. For more information, see [Constraints](/constraints.md#pessimistic-transactions).
 
+* Error Number: 8154
+
+    Currently `LOAD DATA` does not support importing data locally from TiDB server. You can specify `LOCAL` to import from client, or upload data to S3 or GCS and then import it. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
+
+* Error Number: 8156
+
+    The provided path cannot be empty. You need to set a correct path before the import.
+
+* Error Number: 8157
+
+    The provided file format is unsupported. For the supported formats, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#format).
+
+* Error Number: 8158
+
+    The provided path is invalid. Refer to the specific error message for actions. For Amazon S3 or GCS path settings, see [URI Formats of External Storage Services](/external-storage-uri.md).
+
+* Error Number: 8159
+
+    TiDB cannot access the provided Amazon S3 or GCS path. Make sure that the specified S3 or GCS bucket exists and that you have provided the correct Access Key and Secret Access Key for TiDB to access the corresponding bucket.
+
+* Error Number: 8160
+
+    Failed to read the data files. Refer to the specific error message for actions.
+
+* Error Number: 8162
+
+    There is an error in the statement. Refer to the specific error message for actions.
+
+* Error Number: 8163
+
+    The provided option is unknown. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
+
+* Error Number: 8164
+
+    The provided option value is invalid. For valid values, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
+
+* Error Number: 8165
+
+    Duplicate options are specified. Each option can only be specified once.
+
+* Error Number: 8166
+
+    Certain options can only be used in specific conditions. Refer to the specific error message for actions. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
+
+* Error Number: 8170
+
+    The specified job does not exist.
+
+* Error Number: 8171
+
+    The current operation cannot be performed for the current job status. Refer to the specific error message for actions.
+
+* Error Number: 8173
+
+    When executing `IMPORT INTO`, TiDB checks the current environment, such as checking if the downstream table is empty. Refer to the specific error message for actions.
+
 * Error Number: 8200
 
     The DDL syntax is not yet supported.
 
-    See [compatibility of MySQL DDL](/mysql-compatibility.md#ddl) for reference.
+    See [compatibility of MySQL DDL](/mysql-compatibility.md#ddl-operations) for reference.
 
 * Error Number: 8214
 
@@ -372,19 +428,19 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     [`ADMIN REPAIR TABLE`](/sql-statements/sql-statement-admin.md#admin-repair-statement) fails.
 
-    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8216
 
-    The usage of automatic random columns is incorrect.
+    The usage of the `AUTO_RANDOM` columns is incorrect.
 
-    See [auto random](/auto-random.md) to modify.
+    See [`AUTO_RANDOM`](/auto-random.md) to modify.
 
 * Error Number: 8223
 
     This error occurs when detecting that the data is not consistent with the index.
 
-    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8224
 
@@ -408,7 +464,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8228
 
-    Unsupported types are specified when using `setval` on Sequence.
+    Unsupported types are specified when using `SETVAL` on Sequence.
 
     See [Sequence documentation](/sql-statements/sql-statement-create-sequence.md#examples) to find the example of the function.
 
@@ -422,9 +478,61 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     TiDB currently does not support using Sequence as the default value on newly added columns, and reports this error if you use it.
 
+* Error Number: 8248
+
+    The resource group already exists. This error is returned when a resource group is repeatedly created.
+
+* Error Number: 8249
+
+    The resource group does not exist. This error is returned when you modify or bind a resource group that does not exist. See [Create a resource group](/tidb-resource-control.md#create-a-resource-group).
+
+* Error Number: 8250
+
+    The complete error message is as follows:
+
+    `ERROR 8250 (HY000) : Resource control feature is disabled. Run "SET GLOBAL tidb_enable_resource_control='on'" to enable the feature`
+
+    This error is returned when you try to use the resource control feature but it is not enabled. You can turn on the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) to enable resource control.
+
+* Error Number: 8251
+
+    The `Resource Control` component is initialized upon TiDB startup. The associated configuration is fetched from the `Resource Manager` on the server side of `Resource Control`. This error is returned if there is an error during this process.
+
+* Error Number: 8252
+
+    The complete error message is as follows:
+
+    `ERROR 8252 (HY000) : Exceeded resource group quota limitation`
+
+    This error is returned when the attempted consumption exceeds the resource group limit. This error is usually caused by a single transaction that is too large or too many concurrent transactions. You need to adjust the transaction size or reduce the number of concurrent clients.
+
+* Error Number: 8253
+
+    The query stops because it meets the condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+
+* Error Number: 8254
+
+    The query stops because it meets the quarantined watch condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+
+* Error Number: 8260
+
+    DDL operations cannot be paused by `ADMIN PAUSE`.
+
+* Error Number: 8261
+
+    DDL operations cannot be resumed by `ADMIN RESUME`.
+
+* Error Number: 8262
+
+    DDL is paused by `ADMIN PAUSE` and cannot be paused again.
+
+* Error Number: 8263
+
+    This DDL cannot be executed under a specific BDR role. Make sure that the cluster is in [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). If the cluster is not in bidirectional replication, you can use `ADMIN UNSET BDR ROLE;` to make DDL normal.
+
 * Error Number: 9001
 
-    The complete error message: `ERROR 9001 (HY000): PD Server Timeout`
+    The complete error message: `ERROR 9001 (HY000): PD server timeout`
 
     The PD request timed out.
 
@@ -432,7 +540,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9002
 
-    The complete error message: `ERROR 9002 (HY000): TiKV Server Timeout`
+    The complete error message: `ERROR 9002 (HY000): TiKV server timeout`
 
     The TiKV request timed out.
 

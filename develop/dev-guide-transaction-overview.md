@@ -20,8 +20,6 @@ Transactions can ensure that both of the above operations are executed successfu
 
 Insert some sample data into the table using the `users` table in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database:
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO users (id, nickname, balance)
   VALUES (2, 'Bob', 200);
@@ -30,8 +28,6 @@ INSERT INTO users (id, nickname, balance)
 ```
 
 Run the following transactions and explain what each statement means:
-
-{{< copyable "sql" >}}
 
 ```sql
 BEGIN;
@@ -54,15 +50,11 @@ After the above transaction is executed successfully, the table should look like
 
 ### Start a transaction
 
-To explicitly start a new transaction, you can use either  `BEGIN` or `START TRANSACTION`. 
-
-{{< copyable "sql" >}}
+To explicitly start a new transaction, you can use either `BEGIN` or `START TRANSACTION`.
 
 ```sql
 BEGIN;
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 START TRANSACTION;
@@ -70,15 +62,11 @@ START TRANSACTION;
 
 The default transaction mode of TiDB is pessimistic. You can also explicitly specify the [optimistic transaction model](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
 
-{{< copyable "sql" >}}
-
 ```sql
 BEGIN OPTIMISTIC;
 ```
 
 Enable the [pessimistic transaction mode](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
-
-{{< copyable "sql" >}}
 
 ```sql
 BEGIN PESSIMISTIC;
@@ -90,8 +78,6 @@ If the current session is in the middle of a transaction when the above statemen
 
 You can use the `COMMIT` statement to commit all modifications made by TiDB in the current transaction.
 
-{{< copyable "sql" >}}
-
 ```sql
 COMMIT;
 ```
@@ -102,15 +88,11 @@ Before enabling optimistic transactions, make sure that your application can pro
 
 You can use the `ROLLBACK` statement to roll back modifications of the current transaction.
 
-{{< copyable "sql" >}}
-
 ```sql
 ROLLBACK;
 ```
 
 In the previous transfer example, if you roll back the entire transaction, Alice's and Bob's balances will remain unchanged, and all modifications of the current transaction are canceled.
-
-{{< copyable "sql" >}}
 
 ```sql
 TRUNCATE TABLE `users`;
@@ -163,8 +145,6 @@ See the table below for details:
 
 TiDB supports the following isolation levels: `READ COMMITTED` and `REPEATABLE READ`:
 
-{{< copyable "sql" >}}
-
 ```sql
 mysql> SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 ERROR 8048 (HY000): The isolation level 'READ-UNCOMMITTED' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
@@ -179,3 +159,17 @@ ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tid
 ```
 
 TiDB implements Snapshot Isolation (SI) level consistency, also known as "repeatable read" for consistency with MySQL. This isolation level is different from [ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read) and [MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read). For more details, see [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md).
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

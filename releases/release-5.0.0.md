@@ -1,5 +1,6 @@
 ---
 title: What's New in TiDB 5.0
+summary: TiDB 5.0 introduces MPP architecture, clustered index, async commit, and stability improvements. It also enhances compatibility changes, configuration parameters, and new features. Additionally, it optimizes performance, high availability, disaster recovery, data migration, diagnostics, deployment, and maintenance. Telemetry is added for cluster usage metrics.
 ---
 
 # What's New in TiDB 5.0
@@ -43,7 +44,7 @@ In v5.0, the key new features or improvements are as follows:
     - [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50)
     - [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
 + Change the default value of [`enable-joint-consensus`](/pd-configuration-file.md#enable-joint-consensus-new-in-v50) from `false` to `true`, which enables the Joint Consensus feature by default.
-+ Change the value of [`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407) from `0` or `1` to `ON` or `OFF`.
++ Change the value of `tidb_enable_amend_pessimistic_txn` from `0` or `1` to `ON` or `OFF`.
 + Change the default value of [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50) from `OFF` to `INT_ONLY` with the following new meanings:
     + `ON`: clustered index is enabled. Adding or deleting non-clustered indexes is supported.
     + `OFF`: clustered index is disabled. Adding or deleting non-clustered indexes is supported.
@@ -111,11 +112,11 @@ The `EXCEPT` operator is a set operator, which combines the result sets of two q
 
 ### Transaction
 
-[User document](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407), [#18005](https://github.com/pingcap/tidb/issues/18005)
+[#18005](https://github.com/pingcap/tidb/issues/18005)
 
 In the pessimistic transaction mode, if the tables involved in a transaction contain concurrent DDL operations or `SCHEMA VERSION` changes, the system automatically updates the transaction's `SCHEMA VERSION` to the latest to ensure the successful transaction commit, and to avoid that the client receives the `Information schema is changed` error when the transaction is interrupted by DDL operations or `SCHEMA VERSION` changes.
 
-This feature is disabled by default. To enable the feature, modify the value of [`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407) system variable. This feature is introduced in v4.0.7 and has the following issues fixed in v5.0:
+This feature is disabled by default. To enable the feature, modify the value of `tidb_enable_amend_pessimistic_txn` system variable. This feature is introduced in v4.0.7 and has the following issues fixed in v5.0:
 
 + The compatibility issue that occurs when TiDB Binlog executes `Add Column` operations
 + The data inconsistency issue that occurs when using the feature together with the unique index
@@ -321,7 +322,7 @@ This feature is disabled by default. You can enable this feature by modifying th
 
 [User document](/sql-plan-management.md)
 
-#### SQL Binding supports the `INSERT`、`REPLACE`、`UPDATE`、`DELETE` statements
+#### SQL Binding supports the `INSERT`, `REPLACE`, `UPDATE`, `DELETE` statements
 
 When tuning performance or maintaining the database, if you find that the system performance is unstable due to unstable execution plans, you can select a manually optimized SQL statement according to your judgement or tested by `EXPLAIN ANALYZE`. You can bind the optimized SQL statement to the SQL statement to be executed in the application code to ensure stable performance.
 
@@ -333,7 +334,7 @@ You can view the manually or automatically bound execution plan information by r
 
 When upgrading TiDB, to avoid performance jitter, you can enable the baseline capturing feature to allow the system to automatically capture and bind the latest execution plan and store it in the system table. After TiDB is upgraded, you can export the bound execution plan by running the `SHOW GLOBAL BINDING` command and decide whether to delete these plans.
 
-This feature is disbled by default. You can enable it by modifying the server or setting the `tidb_capture_plan_baselines` global system variable to `ON`. When this feature is enabled, the system fetches the SQL statements that appear at least twice from the Statement Summary every `bind-info-lease` (the default value is `3s`), and automatically captures and binds these SQL statements.
+This feature is disabled by default. You can enable it by modifying the server or setting the `tidb_capture_plan_baselines` global system variable to `ON`. When this feature is enabled, the system fetches the SQL statements that appear at least twice from the Statement Summary every `bind-info-lease` (the default value is `3s`), and automatically captures and binds these SQL statements.
 
 ### Improve stability of TiFlash queries
 
@@ -341,7 +342,7 @@ Add a system variable [`tidb_allow_fallback_to_tikv`](/system-variables.md#tidb_
 
 ### Improve TiCDC stability and alleviate the OOM issue caused by replicating too much incremental data
 
-[User document](/ticdc/manage-ticdc.md#unified-sorter), [#1150](https://github.com/pingcap/tiflow/issues/1150)
+[User document](/ticdc/ticdc-manage-changefeed.md#unified-sorter), [#1150](https://github.com/pingcap/tiflow/issues/1150)
 
 In TiCDC v4.0.9 or earlier versions, replicating too much data change might cause OOM. In v5.0, the Unified Sorter feature is enabled by default to mitigate OOM issues caused by the following scenarios:
 

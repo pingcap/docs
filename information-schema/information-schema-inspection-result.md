@@ -8,7 +8,11 @@ aliases: ['/docs/dev/system-tables/system-table-inspection-result/','/docs/dev/r
 
 TiDB has some built-in diagnostic rules for detecting faults and hidden issues in the system.
 
-The `INSPECTION_RESULT` diagnostic feature can help you quickly find problems and reduce your repetitive manual work. You can use the `select * from information_schema.inspection_result` statement to trigger the internal diagnostics.
+The `INSPECTION_RESULT` diagnostic table can help you quickly find problems and reduce your repetitive manual work. You can use the `select * from information_schema.inspection_result` statement to trigger the internal diagnostics.
+
+> **Note:**
+>
+> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 The structure of the `information_schema.inspection_result` diagnostic result table `information_schema.inspection_result` is as follows:
 
@@ -259,8 +263,7 @@ In `critical-error` diagnostic rule, the following two diagnostic rules are exec
     |  Component  | Error name | Monitoring table | Error description |
     |  ----  | ----  |  ----  |  ----  |
     | TiDB | panic-count | tidb_panic_count_total_count | Panic occurs in TiDB. |
-    | TiDB | binlog-error | tidb_binlog_error_total_count | An error occurs when TiDB writes binlog. |
-    | TiKV | critical-error | tikv_critical_error_total_coun | The critical error of TiKV. |
+    | TiKV | critical-error | tikv_critical_error_total_count | The critical error of TiKV. |
     | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | The TiKV scheduler is too busy, which makes TiKV temporarily unavailable. |
     | TiKV | coprocessor-is-busy | tikv_coprocessor_is_busy_total_count | The TiKV Coprocessor is too busy. |
     | TiKV | channel-is-full | tikv_channel_full_total_count | The "channel full" error occurs in TiKV. |

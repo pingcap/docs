@@ -24,18 +24,12 @@ max-backups = 14
 check-requirements = true
 
 [mydumper]
-# The local data source directory or the external storage URL.
+# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 
 [tikv-importer]
 # Import mode. "tidb" means using the logical import mode.
 backend = "tidb"
-
-# The operation of inserting duplicate data in the logical import mode.
-# - replace: replace existing data with new data
-# - ignore: keep existing data and ignore new data
-# - error: pause the import and report an error
-on-duplicate = "replace"
 
 [tidb]
 # The information of the target cluster. The address of any tidb-server from the cluster.
@@ -53,15 +47,18 @@ For the complete configuration file, refer to [TiDB Lightning Configuration](/ti
 
 ## Conflict detection
 
-Conflicting data refers to two or more records with the same data in the PK or UK column. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using the unique index.
-
-In the logical import mode, you can configure the strategy for resolving conflicting data by setting the `on-duplicate` configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
+Conflicting data refers to two or more records with the same data in the PK or UK column. In the logical import mode, you can configure the strategy for handling conflicting data by setting the [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
 
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
-| `replace` | Replacing existing data with new data. | `REPLACE INTO ...` |
-| `ignore` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
-| `error` | Pausing the import and reporting an error. | `INSERT INTO ...` |
+| `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
+| `"ignore"` | Keeping existing data and ignoring new data. | If `conflict.threshold` is greater than 0, `INSERT INTO` is used; if `conflict.threshold` is `0`, `INSERT IGNORE INTO ...` is used |
+| `"error"` | Terminating the import when conflicting data is detected. | `INSERT INTO ...` |
+|  `""`  | Converted to `"error"`, which means terminating the import when conflicting data is detected.  |  None   |
+
+When the strategy is `"error"`, errors caused by conflicting data directly terminate the import task. When the strategy is `"replace"` or `"ignore"`, you can control the maximum tolerant conflicts by configuring [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). The default value is `10000`, which means that 10000 errors are tolerant.
+
+When the strategy is `"ignore"`, conflicting data is recorded in the downstream `conflict_records` table. For further details, see [Error report](/tidb-lightning/tidb-lightning-error-resolution.md#error-report). Before v8.1.0, you can limit the records by configuring [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task), and conflicting data that exceeds the limit is skipped and not recorded. Starting from v8.1.0, you need to configure [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) instead, because TiDB Lightning automatically assigns the value of `max-record-rows` with the value of `threshold`, regardless of the user input.
 
 ## Performance tuning
 

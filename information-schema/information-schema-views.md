@@ -1,27 +1,27 @@
 ---
 title: VIEWS
-summary: Learn the `VIEWS` information_schema table.
+summary: Learn the `VIEWS` INFORMATION_SCHEMA table.
 ---
 
 # VIEWS
 
-The `VIEWS` table provides information about SQL views.
-
-{{< copyable "sql" >}}
+The `VIEWS` table provides information about [SQL views](/views.md).
 
 ```sql
-USE information_schema;
-DESC views;
+USE INFORMATION_SCHEMA;
+DESC VIEWS;
 ```
 
-```
+The output is as follows:
+
+```sql
 +----------------------+--------------+------+------+---------+-------+
 | Field                | Type         | Null | Key  | Default | Extra |
 +----------------------+--------------+------+------+---------+-------+
 | TABLE_CATALOG        | varchar(512) | NO   |      | NULL    |       |
 | TABLE_SCHEMA         | varchar(64)  | NO   |      | NULL    |       |
 | TABLE_NAME           | varchar(64)  | NO   |      | NULL    |       |
-| VIEW_DEFINITION      | longblob     | NO   |      | NULL    |       |
+| VIEW_DEFINITION      | longtext     | NO   |      | NULL    |       |
 | CHECK_OPTION         | varchar(8)   | NO   |      | NULL    |       |
 | IS_UPDATABLE         | varchar(3)   | NO   |      | NULL    |       |
 | DEFINER              | varchar(77)  | NO   |      | NULL    |       |
@@ -32,14 +32,16 @@ DESC views;
 10 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+Create a view and query the `VIEWS` table:
 
 ```sql
 CREATE VIEW test.v1 AS SELECT 1;
-SELECT * FROM views\G
+SELECT * FROM VIEWS\G
 ```
 
-```
+The output is as follows:
+
+```sql
 *************************** 1. row ***************************
        TABLE_CATALOG: def
         TABLE_SCHEMA: test
@@ -66,3 +68,8 @@ Fields in the `VIEWS` table are described as follows:
 * `SECURITY_TYPE`: The value of `SQL SECURITY`. The value options are `DEFINER` and `INVOKER`.
 * `CHARACTER_SET_CLIENT`: The value of the `character_set_client` session variable when the view is created.
 * `COLLATION_CONNECTION`: The value of the `collation_connection` session variable when the view is created.
+
+## See also
+
+- [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)
+- [`DROP VIEW`](/sql-statements/sql-statement-drop-view.md)

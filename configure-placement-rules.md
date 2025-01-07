@@ -36,7 +36,7 @@ The following table shows the meaning of each field in a rule:
 | `Override`        | `true`/`false`                     | Whether to overwrite rules with smaller index (in a group).  |
 | `StartKey`        | `string`, in hexadecimal form                |  Applies to the starting key of a range.                |
 | `EndKey`          | `string`, in hexadecimal form                |  Applies to the ending key of a range.                |
-| `Role`            | `string` | Replica roles, including leader/follower/learner.                           |
+| `Role`            | `string` | Replica roles, including voter/leader/follower/learner.                           |
 | `Count`           | `int`, positive integer                     |  The number of replicas.                            |
 | `LabelConstraint` | `[]Constraint`                    |  Filters nodes based on the label.               |
 | `LocationLabels`  | `[]string`                        |  Used for physical isolation.                       |
@@ -78,7 +78,7 @@ The Placement Rules feature is enabled by default in v5.0 and later versions of 
 enable-placement-rules = true
 ```
 
-In this way, PD enables this feature after the cluster is successfully bootstrapped and generates corresponding rules according to the `max-replicas` and `location-labels` configurations:
+In this way, PD enables this feature after the cluster is successfully bootstrapped and generates corresponding rules according to the [`max-replicas`](/pd-configuration-file.md#max-replicas), [`location-labels`](/pd-configuration-file.md#location-labels), and [`isolation-level`](/pd-configuration-file.md#isolation-level) configurations:
 
 {{< copyable "" >}}
 
@@ -95,7 +95,7 @@ In this way, PD enables this feature after the cluster is successfully bootstrap
 }
 ```
 
-For a bootstrapped cluster, you can also enable Placement Rules online through pd-ctl:
+For a bootstrapped cluster, you can also enable Placement Rules dynamically through pd-ctl:
 
 {{< copyable "shell-regular" >}}
 
@@ -103,11 +103,12 @@ For a bootstrapped cluster, you can also enable Placement Rules online through p
 pd-ctl config placement-rules enable
 ```
 
-PD also generates default rules based on the `max-replicas` and `location-labels` configurations.
+PD also generates default rules based on the `max-replicas`, `location-labels`, and `isolation-level` configurations.
 
 > **Note:**
 >
-> After enabling Placement Rules, the previously configured `max-replicas` and `location-labels` no longer take effect. To adjust the replica policy, use the interface related to Placement Rules.
+> - When Placement Rules are enabled and multiple rules exist, the previously configured `max-replicas`, `location-labels`, and `isolation-level` no longer take effect. To adjust the replica policy, use the interface related to Placement Rules.
+> - When Placement Rules are enabled and only one default rule exists, TiDB will automatically update this default rule when `max-replicas`, `location-labels`, or `isolation-level` configurations are changed.
 
 ### Disable Placement Rules
 
@@ -121,7 +122,7 @@ pd-ctl config placement-rules disable
 
 > **Note:**
 >
-> After disabling Placement Rules, PD uses the original `max-replicas` and `location-labels` configurations. The modification of rules (when Placement Rules is enabled) will not update these two configurations in real time. In addition, all the rules that have been configured remain in PD and will be used the next time you enable Placement Rules.
+> After disabling Placement Rules, PD uses the original `max-replicas`, `location-labels`, and `isolation-level` configurations. The modification of rules (when Placement Rules is enabled) will not update these three configurations in real time. In addition, all the rules that have been configured remain in PD and will be used the next time you enable Placement Rules.
 
 ### Set rules using pd-ctl
 
@@ -188,7 +189,9 @@ cat > rules.json <<EOF
     }
 ]
 EOF
-pd-ctl config placement save --in=rules.json
+
+» ./pd-ctl -u 127.0.0.1:2379 config placement-rules save --in=rules.json
+Success!
 ```
 
 The above operation writes `rule1` and `rule2` to PD. If a rule with the same `GroupID` + `ID` already exists in the system, this rule is overwritten.
@@ -206,7 +209,9 @@ cat > rules.json <<EOF
     }
 ]
 EOF
-pd-ctl config placement save --in=rules.json
+
+» ./pd-ctl -u 127.0.0.1:2379 config placement-rules save --in=rules.json
+Success!
 ```
 
 ### Use pd-ctl to configure rule groups
