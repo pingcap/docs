@@ -14,15 +14,93 @@ This document lists all TiDB system variables and the files that reference them 
 
 ## Variable reference
 
+### `tidb_enable_fast_create_table`
+
+Referenced in:
+
+- [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
+- [System Variables](/system-variables.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+
+### `tidb_enable_inl_join_inner_multi_pattern`
+
+Referenced in:
+
+- [Optimizer Hints](/optimizer-hints.md)
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+
+### `tidb_enable_row_level_checksum`
+
+Referenced in:
+
+- [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
+- [System Variables](/system-variables.md)
+- [TiCDC Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+
+### `tidb_load_binding_timeout`
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+
+### `tidb_lock_unchanged_keys`
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
+- [TiDB 7.1.1 Release Notes](/releases/release-7.1.1.md)
+
+### `tidb_low_resolution_tso_update_interval`
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+
+### `tidb_opt_derive_topn`
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+
+### `tidb_plan_cache_invalidation_on_fresh_stats`
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+
+### `tidb_plan_cache_max_plan_size`
+
+Referenced in:
+
+- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [System Variables](/system-variables.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+
 ### allow_auto_random_explicit_insert
 
 Referenced in:
 
-- [AUTO_RANDOM](/auto-random.md)
+- [AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>](/auto-random.md)
 - [Insert Data](/develop/dev-guide-insert-data.md)
 - [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
-- [System Variables](/system-variables.md)
 - [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
+- [System Variables](/system-variables.md)
 - [TiDB 4.0.3 Release Notes](/releases/release-4.0.3.md)
 
 ### authentication_ldap_sasl_auth_method_name
@@ -170,10 +248,12 @@ Referenced in:
 Referenced in:
 
 - [AUTO_INCREMENT](/auto-increment.md)
-- [AUTO_RANDOM](/auto-random.md)
-- [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+- [AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>](/auto-random.md)
 - [Error Codes and Troubleshooting](/error-codes.md)
+- [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
+- [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
 - [System Variables](/system-variables.md)
+- [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
 - [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
 - [TiDB 6.5.10 Release Notes](/releases/release-6.5.10.md)
 - [TiDB 3.0.9 Release Notes](/releases/release-3.0.9.md)
@@ -183,10 +263,12 @@ Referenced in:
 Referenced in:
 
 - [AUTO_INCREMENT](/auto-increment.md)
-- [AUTO_RANDOM](/auto-random.md)
-- [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+- [AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>](/auto-random.md)
 - [Error Codes and Troubleshooting](/error-codes.md)
+- [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
+- [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
 - [System Variables](/system-variables.md)
+- [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
 - [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
 - [TiDB 6.5.10 Release Notes](/releases/release-6.5.10.md)
 - [TiDB 3.0.9 Release Notes](/releases/release-3.0.9.md)
@@ -195,15 +277,8 @@ Referenced in:
 
 Referenced in:
 
-- [Connect to TiDB with Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
-- [Connect to TiDB with MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
 - [Non-Transactional DML Statements](/non-transactional-dml.md)
-- [Pessimistic Transaction Mode](/pessimistic-transaction.md)
-- [System Variables](/system-variables.md)
-- [Temporary Tables](/temporary-tables.md)
-- [Transaction Overview](/transaction-overview.md)
-- [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
-- [TiDB 6.5.3 Release Notes](/releases/release-6.5.3.md)
+- [Transactions](/transaction-overview.md)
 
 ### block_encryption_mode
 
@@ -216,22 +291,22 @@ Referenced in:
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
-- [Dumpling Overview](/dumpling-overview.md)
-- [GBK Character Set](/character-set-gbk.md)
+- [Character Set and Collation](/character-set-and-collation.md)
+- [GBK](/character-set-gbk.md)
+- [Views](/develop/dev-guide-use-views.md)
+- [Use Dumpling to Export Data](/dumpling-overview.md)
+- [VIEWS](/information-schema/information-schema-views.md)
 - [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 - [System Variables](/system-variables.md)
-- [Use Views](/develop/dev-guide-use-views.md)
 - [Views](/views.md)
-- [`VIEWS` INFORMATION_SCHEMA Table](/information-schema/information-schema-views.md)
 
 ### character_set_connection
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
-- [Dumpling Overview](/dumpling-overview.md)
-- [GBK Character Set](/character-set-gbk.md)
+- [Character Set and Collation](/character-set-and-collation.md)
+- [GBK](/character-set-gbk.md)
+- [Use Dumpling to Export Data](/dumpling-overview.md)
 - [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 - [System Variables](/system-variables.md)
 
@@ -239,7 +314,7 @@ Referenced in:
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
+- [Character Set and Collation](/character-set-and-collation.md)
 - [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 - [System Variables](/system-variables.md)
 
@@ -247,7 +322,7 @@ Referenced in:
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
+- [Character Set and Collation](/character-set-and-collation.md)
 - [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
@@ -257,37 +332,37 @@ Referenced in:
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
+- [Character Set and Collation](/character-set-and-collation.md)
 - [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 - [System Variables](/system-variables.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 
 ### collation_connection
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
+- [Character Set and Collation](/character-set-and-collation.md)
+- [Views](/develop/dev-guide-use-views.md)
 - [String Functions](/functions-and-operators/string-functions.md)
+- [VIEWS](/information-schema/information-schema-views.md)
 - [System Variables](/system-variables.md)
-- [Use Views](/develop/dev-guide-use-views.md)
 - [Views](/views.md)
-- [`VIEWS` INFORMATION_SCHEMA Table](/information-schema/information-schema-views.md)
 
 ### collation_database
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
+- [Character Set and Collation](/character-set-and-collation.md)
 - [System Variables](/system-variables.md)
 
 ### collation_server
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
+- [Character Set and Collation](/character-set-and-collation.md)
 - [System Variables](/system-variables.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
-- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
 - [TiDB 5.0.2 Release Notes](/releases/release-5.0.2.md)
 
 ### cte_max_recursion_depth
@@ -296,14 +371,7 @@ Referenced in:
 
 - [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
 - [System Variables](/system-variables.md)
-- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
-
-### datadir
-
-Referenced in:
-
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
 
 ### ddl_slow_threshold
 
@@ -316,27 +384,28 @@ Referenced in:
 
 Referenced in:
 
+- [TiDB Features](/basic-features.md)
 - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
 - [System Variables](/system-variables.md)
-- [TiDB Features](/basic-features.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
-- [TiDB 5.2.0 Release Notes](/releases/release-5.2.0.md)
+- [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
 
 ### default_collation_for_utf8mb4
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
+- [Character Set and Collation](/character-set-and-collation.md)
 - [System Variables](/system-variables.md)
 - [TiDB 8.1.2 Release Notes](/releases/release-8.1.2.md)
+- [TiDB 7.5.5 Release Notes](/releases/release-7.5.5.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 
 ### default_password_lifetime
 
 Referenced in:
 
-- [Password Management](/password-management.md)
+- [TiDB Password Management](/password-management.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
@@ -368,7 +437,15 @@ Referenced in:
 
 Referenced in:
 
+- [SQL FAQs](/faq/sql-faq.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [TiCDC Alert Rules](/ticdc/ticdc-alert-rules.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+- [TiDB 3.1 Beta.1 Release Notes](/releases/release-3.1.0-beta.1.md)
+- [TiDB 3.0.0 Beta.1 Release Notes](/releases/release-3.0.0-beta.1.md)
+- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
 - [TiDB 2.1 RC1 Release Notes](/releases/release-2.1-rc.1.md)
 
 ### foreign_key_checks
@@ -401,31 +478,13 @@ Referenced in:
 - [Certificate-Based Authentication for Login](/certificate-authentication.md)
 - [System Variables](/system-variables.md)
 
-### hostname
-
-Referenced in:
-
-- [Best Practices for Using HAProxy in TiDB](/best-practices/haproxy-best-practices.md)
-- [System Variables](/system-variables.md)
-- [The `mysql.user` Table](/mysql-schema/mysql-schema-user.md)
-
-### identity
-
-Referenced in:
-
-- [Configure SSO for TiDB Dashboard](/dashboard/dashboard-session-sso.md)
-- [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
-- [Password Management](/password-management.md)
-- [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md)
-- [System Variables](/system-variables.md)
-
 ### init_connect
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
-- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
 - [TiDB 5.0.4 Release Notes](/releases/release-5.0.4.md)
 - [TiDB 4.0.14 Release Notes](/releases/release-4.0.14.md)
 
@@ -433,7 +492,7 @@ Referenced in:
 
 Referenced in:
 
-- [Pessimistic Transaction Model](/pessimistic-transaction.md)
+- [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
 - [System Variables](/system-variables.md)
 - [TiKV Configuration File](/tikv-configuration-file.md)
 - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
@@ -443,24 +502,25 @@ Referenced in:
 
 Referenced in:
 
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
-- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
 - [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
-- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
+- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 3.0 Beta Release Notes](/releases/release-3.0-beta.md)
+- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
 
 ### last_insert_id
 
 Referenced in:
 
-- [AUTO_RANDOM](/auto-random.md)
+- [AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>](/auto-random.md)
 - [Connect to TiDB with mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
 - [Information Functions](/functions-and-operators/information-functions.md)
 - [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SHOW BUILTINS](/sql-statements/sql-statement-show-builtins.md)
 - [System Variables](/system-variables.md)
 - [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
-- [TiDB 3.1.0-rc Release Notes](/releases/release-3.1.0-rc.md)
+- [TiDB 3.1 RC Release Notes](/releases/release-3.1.0-rc.md)
 - [TiDB 2.1.17 Release Notes](/releases/release-2.1.17.md)
 - [TiDB 2.1 RC2 Release Notes](/releases/release-2.1-rc.2.md)
 
@@ -489,23 +549,16 @@ Referenced in:
 - [System Variables](/system-variables.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 
-### license
-
-Referenced in:
-
-- [System Variables](/system-variables.md)
-- [TiDB Data Migration Overview](/dm/dm-overview.md)
-
 ### max_allowed_packet
 
 Referenced in:
 
-- [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md)
 - [Handle Errors in TiDB Data Migration](/dm/dm-error-handling.md)
-- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
-- [TiDB Configuration File](/tidb-configuration-file.md)
 - [TiDB Data Migration FAQs](/dm/dm-faq.md)
+- [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
 - [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 - [TiDB 5.2.4 Release Notes](/releases/release-5.2.4.md)
@@ -520,9 +573,9 @@ Referenced in:
 
 - [Integrate TiDB with ProxySQL](/develop/dev-guide-proxysql-integration.md)
 - [Modify Configuration Dynamically](/dynamic-config.md)
-- [Precheck Errors, Migration Errors, and Alerts for Data Migration](https://docs.pingcap.com/tidbcloud/tidb-cloud-dm-precheck-and-troubleshooting)
-- [System Variables](/system-variables.md)
 - [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
+- [System Variables](/system-variables.md)
+- [Precheck Errors, Migration Errors, and Alerts for Data Migration](https://docs.pingcap.com/tidbcloud/tidb-cloud-dm-precheck-and-troubleshooting)
 - [TiDB Configuration File](/tidb-configuration-file.md)
 
 ### max_execution_time
@@ -531,12 +584,12 @@ Referenced in:
 
 - [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
-- [Optimizer Hints](/optimizer-hints.md)
+- [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
 - [SQL FAQs](/faq/sql-faq.md)
+- [Optimizer Hints](/optimizer-hints.md)
 - [SQL Plan Management (SPM)](/sql-plan-management.md)
 - [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
 - [System Variables](/system-variables.md)
-- [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
 - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 - [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
@@ -546,7 +599,7 @@ Referenced in:
 
 Referenced in:
 
-- [The `PREPARE` SQL Statement](/sql-statements/sql-statement-prepare.md)
+- [PREPARE](/sql-statements/sql-statement-prepare.md)
 - [System Variables](/system-variables.md)
 - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 6.5.2 Release Notes](/releases/release-6.5.2.md)
@@ -571,17 +624,17 @@ Referenced in:
 
 Referenced in:
 
-- [Password Management](/password-management.md)
-- [System Variables](/system-variables.md)
-- [The `mysql` Schema](/mysql-schema/mysql-schema.md)
+- [`mysql` Schema](/mysql-schema/mysql-schema.md)
+- [TiDB Password Management](/password-management.md)
 - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
+- [System Variables](/system-variables.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### password_reuse_interval
 
 Referenced in:
 
-- [Password Management](/password-management.md)
+- [TiDB Password Management](/password-management.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
@@ -589,9 +642,10 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md)
-- [Tune Region Performance](/tune-region-performance.md)
 - [TiDB Features](/basic-features.md)
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [Tune Region Performance](/tune-region-performance.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 
@@ -599,89 +653,92 @@ Referenced in:
 
 Referenced in:
 
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 
 ### plugin_load
 
 Referenced in:
 
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
-### port
+### rand_seed1
 
 Referenced in:
 
-- [Migrate Data from SQL Files to TiDB](/migrate-from-sql-files-to-tidb.md)
 - [System Variables](/system-variables.md)
-- [TiFlash Deployment Topology](/tiflash-deployment-topology.md)
-- [TSO Configuration File](/tso-configuration-file.md)
+
+### rand_seed2
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
 
 ### require_secure_transport
 
 Referenced in:
 
-<CustomContent platform="tidb-cloud">
-
+- [Enable TLS between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
+- [System Variables](/system-variables.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
 - [TiDB Cloud Release Notes in 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
-- [TLS Connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb">
-
-- [Enable TLS Between Clients and Servers](/enable-tls-between-clients-and-servers.md)
-- [System Variables](/system-variables.md)
+- [TLS Connections to TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/tidb-cloud-tls-connect-to-dedicated)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 - [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
 - [TiDB 7.1.2 Release Notes](/releases/release-7.1.2.md)
 - [TiDB 6.5.6 Release Notes](/releases/release-6.5.6.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
-</CustomContent>
-
 ### skip_name_resolve
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
-
-### socket
-
-Referenced in:
-
-- [Best Practices for Using HAProxy in TiDB](/best-practices/haproxy-best-practices.md)
-- [SHOW CONFIG](/sql-statements/sql-statement-show-config.md)
-- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### sql_mode
 
 Referenced in:
 
-- [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
 - [Date and Time Types](/data-type-date-and-time.md)
+- [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
 - [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md)
-- [Handle Unstable Result Set Errors](/develop/dev-guide-unstable-result-set.md)
-- [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
 - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
-- [Partitioning](/partitioned-table.md)
 - [Precision Math](/functions-and-operators/precision-math.md)
+- [Partitioning](/partitioned-table.md)
 - [Privilege Management](/privilege-management.md)
 - [Schema Object Names](/schema-object-names.md)
-- [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
-- [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
-- [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)
-- [SQL FAQs](/faq/sql-faq.md)
 - [SQL Mode](/sql-mode.md)
+- [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+- [SHOW ERRORS](/sql-statements/sql-statement-show-errors.md)
+- [SHOW WARNINGS](/sql-statements/sql-statement-show-warnings.md)
 - [System Variables](/system-variables.md)
-- [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md)
+- [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
 - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
-- [User Account Management](/user-account-management.md)
 - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+- [TiDB User Account Management](/user-account-management.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
+- [TiDB 7.5.5 Release Notes](/releases/release-7.5.5.md)
+- [TiDB 7.5.3 Release Notes](/releases/release-7.5.3.md)
+- [TiDB 7.5.2 Release Notes](/releases/release-7.5.2.md)
+- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
+- [TiDB 7.1.5 Release Notes](/releases/release-7.1.5.md)
+- [TiDB 7.1.4 Release Notes](/releases/release-7.1.4.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+- [TiDB 6.5.9 Release Notes](/releases/release-6.5.9.md)
+- [TiDB 6.5.7 Release Notes](/releases/release-6.5.7.md)
+- [TiDB 5.4.1 Release Notes](/releases/release-5.4.1.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
+- [TiDB 5.0.2 Release Notes](/releases/release-5.0.2.md)
+- [TiDB 4.0.16 Release Notes](/releases/release-4.0.16.md)
+- [TiDB RC2 Release Notes](/releases/release-rc.2.md)
 
 ### sql_require_primary_key
 
@@ -704,28 +761,30 @@ Referenced in:
 Referenced in:
 
 - [Certificate-Based Authentication for Login](/certificate-authentication.md)
+- [Connect to TiDB with node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
+- [Connect to TiDB with mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
+- [Connect to TiDB with Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
+- [Connect to TiDB with TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
 - [Connect to TiDB with Django](/develop/dev-guide-sample-application-python-django.md)
 - [Connect to TiDB with MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
-- [Connect to TiDB with mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-- [Connect to TiDB with mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
-- [Connect to TiDB with node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
 - [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md)
-- [Connect to TiDB with Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
 - [Connect to TiDB with PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
 - [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
-- [Connect to TiDB with TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
-- [Get Started with TiDB + AI via Python](/vector-search/vector-search-get-started-using-python.md)
-- [Integrate TiDB Vector Search with Jina AI Embeddings API](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
-- [Integrate Vector Search with LangChain](/vector-search/vector-search-integrate-with-langchain.md)
-- [Integrate Vector Search with LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
-- [Integrate Vector Search with SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
+- [Connect to TiDB with mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
+- [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
 - [System Variables](/system-variables.md)
+- [Get Started with TiDB + AI via Python](/vector-search-get-started-using-python.md)
+- [Integrate TiDB Vector Search with Jina AI Embeddings API](/vector-search-integrate-with-jinaai-embedding.md)
+- [Integrate Vector Search with LangChain](/vector-search-integrate-with-langchain.md)
+- [Integrate Vector Search with LlamaIndex](/vector-search-integrate-with-llamaindex.md)
+- [Integrate TiDB Vector Search with SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
 
 ### ssl_cert
 
 Referenced in:
 
 - [Certificate-Based Authentication for Login](/certificate-authentication.md)
+- [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
 - [System Variables](/system-variables.md)
 
 ### ssl_key
@@ -733,13 +792,14 @@ Referenced in:
 Referenced in:
 
 - [Certificate-Based Authentication for Login](/certificate-authentication.md)
+- [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
 - [System Variables](/system-variables.md)
 
 ### system_time_zone
 
 Referenced in:
 
-- [Configure Time Zone](/configure-time-zone.md)
+- [Time Zone Support](/configure-time-zone.md)
 - [System Variables](/system-variables.md)
 - [TiDB 3.0.8 Release Notes](/releases/release-3.0.8.md)
 
@@ -752,47 +812,40 @@ Referenced in:
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
-### tidb_allow_tiflash_cop
-
-Referenced in:
-
-- [System Variables](/system-variables.md)
-- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
-
 ### tidb_allow_batch_cop
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
 - [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
 - [TiDB 4.0.3 Release Notes](/releases/release-4.0.3.md)
-- [TiDB 4.0.0-rc.2 Release Notes](/releases/release-4.0.0-rc.2.md)
+- [TiDB 4.0 RC.2 Release Notes](/releases/release-4.0.0-rc.2.md)
 
 ### tidb_allow_fallback_to_tikv
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_allow_function_for_expression_index
 
 Referenced in:
 
+- [TiDB Features](/basic-features.md)
 - [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 - [System Variables](/system-variables.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiDB Features](/basic-features.md)
 
 ### tidb_allow_mpp
 
 Referenced in:
 
+- [TiDB TPC-H Performance Test Report -- TiDB v5.4 MPP mode vs. Greenplum 6.15.0 and Apache Spark 3.1.1](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
 - [Explain Statements in the MPP Mode](/explain-mpp.md)
 - [Explore HTAP](/explore-htap.md)
 - [System Variables](/system-variables.md)
-- [TiDB TPC-H Performance Test Report -- v5.4](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
 - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
 - [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
@@ -802,13 +855,20 @@ Referenced in:
 
 Referenced in:
 
-- [Auto-increment](/auto-increment.md)
+- [AUTO_INCREMENT](/auto-increment.md)
 - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
 - [MySQL Compatibility](/mysql-compatibility.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB 3.0.4 Release Notes](/releases/release-3.0.4.md)
 - [TiDB 2.1.18 Release Notes](/releases/release-2.1.18.md)
+
+### tidb_allow_tiflash_cop
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
 
 ### tidb_analyze_column_options
 
@@ -816,8 +876,8 @@ Referenced in:
 
 - [How to Run CH-benCHmark Test on TiDB](/benchmark/benchmark-tidb-using-ch.md)
 - [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 - [Stress Test TiDB Using TiUP Bench Component](/tiup/tiup-bench.md)
-- [TiDB Performance Tuning Configuration](/tidb-performance-tuning-config.md)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
 
 ### tidb_analyze_distsql_scan_concurrency
@@ -832,7 +892,7 @@ Referenced in:
 
 Referenced in:
 
-- [Statistics](/statistics.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
 - [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
@@ -840,49 +900,57 @@ Referenced in:
 - [TiDB 7.5.3 Release Notes](/releases/release-7.5.3.md)
 - [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
 
-### tidb_analyze_version
-
-Referenced in:
-
-- [ANALYZE_STATUS](/information-schema/information-schema-analyze-status.md)
-- [SHOW ANALYZE STATUS](/sql-statements/sql-statement-show-analyze-status.md)
-- [Statistics](/statistics.md)
-- [System Variables](/system-variables.md)
-- [TiDB Memory Control](/configure-memory-usage.md)
-- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
-- [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
-- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
-- [TiDB 5.2.4 Release Notes](/releases/release-5.2.4.md)
-- [TiDB 5.1.4 Release Notes](/releases/release-5.1.4.md)
-- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
-
 ### tidb_analyze_skip_column_types
 
 Referenced in:
 
-- [Statistics](/statistics.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
 - [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
+
+### tidb_analyze_version
+
+Referenced in:
+
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [ANALYZE_STATUS](/information-schema/information-schema-analyze-status.md)
+- [SHOW ANALYZE STATUS](/sql-statements/sql-statement-show-analyze-status.md)
+- [Introduction to Statistics](/statistics.md)
+- [System Variables](/system-variables.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
+- [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
+- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.2.4 Release Notes](/releases/release-5.2.4.md)
+- [TiDB 5.1.4 Release Notes](/releases/release-5.1.4.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
+
+### tidb_auto_analyze_concurrency
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
 
 ### tidb_auto_analyze_end_time
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [Statistics](/statistics.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
 - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 
 ### tidb_auto_analyze_partition_batch_size
 
 Referenced in:
 
-- [Statistics](/statistics.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
@@ -891,20 +959,27 @@ Referenced in:
 
 Referenced in:
 
+- [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [SHOW STATS_HEALTHY](/sql-statements/sql-statement-show-stats-healthy.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
-- [TiDB 2.1.8 Release Notes](/releases/release-2.1.8.md)
+- [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+- [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
+- [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
+- [TiDB 2.0.1 Release Notes](/releases/release-2.0.1.md)
 
 ### tidb_auto_analyze_start_time
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [Statistics](/statistics.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
 - [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 
 ### tidb_auto_build_stats_concurrency
 
@@ -917,15 +992,15 @@ Referenced in:
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
 
 ### tidb_backoff_weight
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB 3.0.3 Release Notes](/releases/release-3.0.3.md)
 
@@ -933,15 +1008,16 @@ Referenced in:
 
 Referenced in:
 
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
 - [TiDB 3.0 Beta Release Notes](/releases/release-3.0-beta.md)
+- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
 
 ### tidb_batch_delete
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 
 ### tidb_batch_insert
@@ -977,91 +1053,91 @@ Referenced in:
 - [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 
-### tidb_build_stats_concurrency
-
-Referenced in:
-
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [Statistics](/statistics.md)
-- [System Variables](/system-variables.md)
-- [TiDB Cloud TPC-C Performance Test Report for TiDB v8.1.0](https://docs.pingcap.com/tidbcloud/v8.5-performance-benchmarking-with-tpcc)
-- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.5.0](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
-- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.1.3](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
-- [TiDB Cloud TPC-C Performance Test Report for TiDB v6.5.6](https://docs.pingcap.com/tidbcloud/v6.5-performance-benchmarking-with-tpcc)
-- [TiDB TPC-H Performance Test Report — v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
-
 ### tidb_build_sampling_stats_concurrency
 
 Referenced in:
 
-- [Statistics](/statistics.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
+- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
+
+### tidb_build_stats_concurrency
+
+Referenced in:
+
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Introduction to Statistics](/statistics.md)
+- [System Variables](/system-variables.md)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v6.5.6](https://docs.pingcap.com/tidbcloud/v6.5-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.1.3](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.5.0](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v8.1.0](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)
 - [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
 
 ### tidb_capture_plan_baselines
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [SQL Plan Management (SPM)](/sql-plan-management.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
-- [TiDB 4.0.0-rc.1 Release Notes](/releases/release-4.0.0-rc.1.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 4.0 RC.1 Release Notes](/releases/release-4.0.0-rc.1.md)
 
 ### tidb_cdc_write_source
 
 Referenced in:
 
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### tidb_check_mb4_value_in_utf8
 
 Referenced in:
 
-- [Character Sets and Collations](/character-set-and-collation.md)
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
-- [TiDB Configuration File](/tidb-configuration-file.md)
+- [Character Set and Collation](/character-set-and-collation.md)
 - [Upgrade and After Upgrade FAQs](/faq/upgrade-faq.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
 
 ### tidb_checksum_table_concurrency
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md)
+
+### tidb_cloud_storage_uri
+
+Referenced in:
+
+- [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
+- [System Variables](/system-variables.md)
+- [TiDB Global Sort](/tidb-global-sort.md)
+- [TiDB 8.1.1 Release Notes](/releases/release-8.1.1.md)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 
 ### tidb_committer_concurrency
 
 Referenced in:
 
-<CustomContent platform="tidb">
-
 - [TiDB Monitoring Metrics](/grafana-tidb-dashboard.md)
 - [System Variables](/system-variables.md)
-- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- [System Variables](/system-variables.md)
 - [TiDB Cloud Release Notes in 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
-
-</CustomContent>
+- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
 ### tidb_config
 
 Referenced in:
 
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 - [TiDB 1.1 Beta Release Notes](/releases/release-1.1-beta.md)
 
@@ -1069,14 +1145,20 @@ Referenced in:
 
 Referenced in:
 
-- [COMMIT](/sql-statements/sql-statement-commit.md)
 - [Constraints](/constraints.md)
 - [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md)
+- [Modify Configuration Dynamically](/dynamic-config.md)
 - [Error Codes and Troubleshooting](/error-codes.md)
-- [Pessimistic Transaction Mode](/pessimistic-transaction.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
+- [COMMIT](/sql-statements/sql-statement-commit.md)
+- [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [Transaction Overview](/transaction-overview.md)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [Transactions](/transaction-overview.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 - [TiDB 2.1.5 Release Notes](/releases/release-2.1.5.md)
 
 ### tidb_constraint_check_in_place_pessimistic
@@ -1084,9 +1166,9 @@ Referenced in:
 Referenced in:
 
 - [Constraints](/constraints.md)
-- [Error Codes and Troubleshooting](/error-codes.md)
 - [Modify Configuration Dynamically](/dynamic-config.md)
-- [Pessimistic Transaction Mode](/pessimistic-transaction.md)
+- [Error Codes and Troubleshooting](/error-codes.md)
+- [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
 - [SAVEPOINT](/sql-statements/sql-statement-savepoint.md)
 - [System Variables](/system-variables.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
@@ -1098,8 +1180,8 @@ Referenced in:
 
 Referenced in:
 
+- [Cost Model](/cost-model.md)
 - [System Variables](/system-variables.md)
-- [TiDB Cost Model](/cost-model.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 
@@ -1107,23 +1189,23 @@ Referenced in:
 
 Referenced in:
 
-- [Disaster Recovery Solution Based on Primary and Secondary Clusters](/dr-secondary-cluster.md)
+- [DR Solution Based on Primary and Secondary Clusters](/dr-secondary-cluster.md)
+- [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
 - [FLASHBACK CLUSTER](/sql-statements/sql-statement-flashback-cluster.md)
-- [Read Historical Data Using the `tidb_external_ts` Variable](/tidb-external-ts.md)
 - [SHOW BUILTINS](/sql-statements/sql-statement-show-builtins.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiCDC FAQs](/ticdc/ticdc-faq.md)
-- [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
-- [Timestamp Oracle (TSO) in TiDB](/tso.md)
 - [Upstream and Downstream Clusters Data Validation and Snapshot Read](/ticdc/ticdc-upstream-downstream-check.md)
+- [Read Historical Data Using the `tidb_external_ts` Variable](/tidb-external-ts.md)
+- [TimeStamp Oracle (TSO) in TiDB](/tso.md)
 
 ### tidb_ddl_disk_quota
 
 Referenced in:
 
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
@@ -1131,19 +1213,20 @@ Referenced in:
 
 Referenced in:
 
-- [ADMIN SHOW DDL](/sql-statements/sql-statement-admin-show-ddl.md)
-- [Check Environment Before Deployment](/check-before-deployment.md)
-- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-- [Hardware and Software Requirements](/hardware-and-software-requirements.md)
-- [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
-- [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
 - [TiDB Features](/basic-features.md)
+- [TiDB Environment and System Configuration Check](/check-before-deployment.md)
+- [TiDB Software and Hardware Requirements](/hardware-and-software-requirements.md)
+- [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 8.1.2 Release Notes](/releases/release-8.1.2.md)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 7.5.5 Release Notes](/releases/release-7.5.5.md)
 - [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
@@ -1154,67 +1237,40 @@ Referenced in:
 
 Referenced in:
 
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [SQL FAQs](/faq/sql-faq.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
 
 ### tidb_ddl_flashback_concurrency
 
 Referenced in:
 
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
-- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
 ### tidb_ddl_reorg_batch_size
 
-<!--to further check the following-->
 Referenced in:
 
-- [ADMIN ALTER DDL](/sql-statements/sql-statement-admin-alter-ddl.md)
-- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
+- [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md)
+- [Performance Tuning Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
+- [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
 - [SQL FAQs](/faq/sql-faq.md)
-- [SQL Plan Management Best Practices](/explain-walkthrough.md)
-- [System Variables](/system-variables.md)
-- [TiDB DDL](/ddl-introduction.md)
-- [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
-
-### tidb_ddl_reorg_priority
-
-Referenced in:
-
+- [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
+- [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 - [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-- [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [SQL FAQs](/faq/sql-faq.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
-
-### tidb_ddl_reorg_worker_cnt
-
-Referenced in:
-
-- [ADMIN ALTER DDL](/sql-statements/sql-statement-admin-alter-ddl.md)
-- [ADMIN SHOW DDL](/sql-statements/sql-statement-admin-show-ddl.md)
-- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-- [Online Workloads and ADD INDEX Operations](/benchmark/online-workloads-and-add-index-operations.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [SQL Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
-- [SQL FAQs](/faq/sql-faq.md)
-- [SQL Plan Management Best Practices](/explain-walkthrough.md)
-- [System Variables](/system-variables.md)
-- [TiDB Cloud Limited SQL Features](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [TiDB DDL](/ddl-introduction.md)
-- [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
-- [Troubleshoot CPU Issues](/troubleshoot-cpu-issues.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+- [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
-- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 - [TiDB 3.0.3 Release Notes](/releases/release-3.0.3.md)
 - [TiDB 2.1.4 Release Notes](/releases/release-2.1.4.md)
 
@@ -1222,35 +1278,47 @@ Referenced in:
 
 Referenced in:
 
-- [ADMIN ALTER DDL](/sql-statements/sql-statement-admin-alter-ddl.md)
+- [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
+- [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
 - [System Variables](/system-variables.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 7.5.5 Release Notes](/releases/release-7.5.5.md)
 
-### tidb_enable_dist_task
-
-Referenced in:
-
-- [ADMIN ALTER DDL](/sql-statements/sql-statement-admin-alter-ddl.md)
-- [ADMIN SHOW DDL](/sql-statements/sql-statement-admin-show-ddl.md)
-- [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
-- [System Variables](/system-variables.md)
-- [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
-- [TiDB Global Sort](/tidb-global-sort.md)
-- [Upgrade TiDB Using TiUP](/smooth-upgrade-tidb.md)
-- [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
-- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
-- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
-- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
-
-### tidb_cloud_storage_uri
+### tidb_ddl_reorg_priority
 
 Referenced in:
 
-- [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Global Sort](/tidb-global-sort.md)
-- [TiDB 8.1.1 Release Notes](/releases/release-8.1.1.md)
-- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+- [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
+- [TiDB 2.1 RC1 Release Notes](/releases/release-2.1-rc.1.md)
+
+### tidb_ddl_reorg_worker_cnt
+
+Referenced in:
+
+- [Interaction Test on Online Workloads and `ADD INDEX` Operations](/benchmark/online-workloads-and-add-index-operations.md)
+- [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md)
+- [Performance Tuning Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
+- [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
+- [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+- [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 3.0.3 Release Notes](/releases/release-3.0.3.md)
+- [TiDB 2.1.4 Release Notes](/releases/release-2.1.4.md)
 
 ### tidb_default_string_match_selectivity
 
@@ -1263,39 +1331,40 @@ Referenced in:
 
 Referenced in:
 
+- [TiDB Sysbench Performance Test Report -- v4.0 vs. v3.0](/benchmark/benchmark-sysbench-v4-vs-v3.md)
 - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
+- [TiDB Sysbench Performance Test Report -- v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
+- [TiDB TPC-C Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
 - [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
-- [TiDB TPC-C Performance Test Report -- v3.0 vs v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
-- [TiDB TPC-C Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
-- [TiDB Transaction Overview](/transaction-overview.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Transactions](/transaction-overview.md)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
-- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
 - [TiDB 3.0.0-rc.2 Release Notes](/releases/release-3.0.0-rc.2.md)
-- [TiDB 2.1 GA Release Notes](/releases/release-2.1-ga.md)
+- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
 - [TiDB 2.1 Beta Release Notes](/releases/release-2.1-beta.md)
+- [TiDB 2.1 GA Release Notes](/releases/release-2.1-ga.md)
 - [TiDB 2.0.5 Release Notes](/releases/release-2.0.5.md)
 
 ### tidb_distsql_scan_concurrency
 
 Referenced in:
 
-- [Configure Memory Usage](/configure-memory-usage.md)
-- [Dumpling Overview](/dumpling-overview.md)
-- [INFORMATION_SCHEMA SLOW_QUERY Table](/information-schema/information-schema-slow-query.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [SQL FAQs](/faq/sql-faq.md)
-- [Statistics in TiDB](/statistics.md)
-- [System Variables](/system-variables.md)
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
 - [TiDB Best Practices](/best-practices/tidb-best-practices.md)
-- [TiDB Cloud v6.5 TPC-C Performance Test Report](https://docs.pingcap.com/tidbcloud/v6.5-performance-benchmarking-with-tpcc)
-- [TiDB Cloud v7.1 TPC-C Performance Test Report](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
-- [TiDB Cloud v7.5 TPC-C Performance Test Report](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
-- [TiDB Cloud v8.1 TPC-C Performance Test Report](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)
-- [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-- [Troubleshoot Out of Memory Errors](/troubleshoot-tidb-oom.md)
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [Use Dumpling to Export Data](/dumpling-overview.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [SLOW_QUERY](/information-schema/information-schema-slow-query.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Introduction to Statistics](/statistics.md)
+- [System Variables](/system-variables.md)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v6.5.6](https://docs.pingcap.com/tidbcloud/v6.5-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.1.3](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.5.0](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v8.1.0](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 
 ### tidb_dml_batch_size
@@ -1303,24 +1372,24 @@ Referenced in:
 Referenced in:
 
 - [LOAD DATA](/sql-statements/sql-statement-load-data.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
-- [TiDB 4.0.0-beta Release Notes](/releases/release-4.0.0-beta.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 4.0 Beta Release Notes](/releases/release-4.0.0-beta.md)
 
 ### tidb_dml_type
 
 Referenced in:
 
-- [Basic Features](/basic-features.md)
-- [Configure Memory Usage](/configure-memory-usage.md)
-- [Identify Slow Queries](/identify-expensive-queries.md)
-- [IMPORT INTO vs TiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md)
+- [TiDB Features](/basic-features.md)
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [Identify Expensive Queries](/identify-expensive-queries.md)
 - [System Variables](/system-variables.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiDB Performance Tuning Methods](/tidb-performance-tuning-config.md)
+- [IMPORT INTO vs. TiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 - [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
 - [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
@@ -1330,57 +1399,28 @@ Referenced in:
 
 Referenced in:
 
-- [Basic Features](/basic-features.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
+- [TiDB Features](/basic-features.md)
+- [TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
+- [TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
+- [TiDB Sysbench Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
+- [TiDB TPC-C Performance Test Report -- v5.0 vs. v4.0](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
 - [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
-- [Transaction Overview](/transaction-overview.md)
-- [TiDB Sysbench Performance Test Report - v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
-- [TiDB Sysbench Performance Test Report - v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
-- [TiDB Sysbench Performance Test Report - v6.0.0 vs. v5.4.0](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
-- [TiDB Sysbench Performance Test Report - v5.4.0 vs. v5.3.0](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
-- [TiDB Sysbench Performance Test Report - v5.3.0 vs. v5.2.2](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
-- [TiDB Sysbench Performance Test Report - v5.2.0 vs. v5.1.1](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
-- [TiDB Sysbench Performance Test Report - v5.1.0 vs. v5.0.2](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
-- [TiDB Sysbench Performance Test Report - v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
-- [TiDB v6.2 TPC-C Performance Test Report](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
-- [TiDB v6.1 TPC-C Performance Test Report](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
-- [TiDB v6.0 TPC-C Performance Test Report](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.4 TPC-C Performance Test Report](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.3 TPC-C Performance Test Report](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.2 TPC-C Performance Test Report](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.1 TPC-C Performance Test Report](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.0 TPC-C Performance Test Report](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
-- [TiDB 5.0.0-rc Release Notes](/releases/release-5.0.0-rc.md)
-
-### tidb_enable_async_commit
-
-Referenced in:
-
-- [Basic Features](/basic-features.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
-- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
-- [Transaction Overview](/transaction-overview.md)
-- [TiDB Sysbench Performance Test Report - v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
-- [TiDB Sysbench Performance Test Report - v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
-- [TiDB Sysbench Performance Test Report - v6.0.0 vs. v5.4.0](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
-- [TiDB Sysbench Performance Test Report - v5.4.0 vs. v5.3.0](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
-- [TiDB Sysbench Performance Test Report - v5.3.0 vs. v5.2.2](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
-- [TiDB Sysbench Performance Test Report - v5.2.0 vs. v5.1.1](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
-- [TiDB Sysbench Performance Test Report - v5.1.0 vs. v5.0.2](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
-- [TiDB Sysbench Performance Test Report - v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
-- [TiDB v6.2 TPC-C Performance Test Report](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
-- [TiDB v6.1 TPC-C Performance Test Report](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
-- [TiDB v6.0 TPC-C Performance Test Report](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.4 TPC-C Performance Test Report](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.3 TPC-C Performance Test Report](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.2 TPC-C Performance Test Report](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.1 TPC-C Performance Test Report](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.0 TPC-C Performance Test Report](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
-- [TiDB 5.0.0-rc Release Notes](/releases/release-5.0.0-rc.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Transactions](/transaction-overview.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_enable_analyze_snapshot
 
@@ -1389,23 +1429,70 @@ Referenced in:
 - [System Variables](/system-variables.md)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 
+### tidb_enable_async_commit
+
+Referenced in:
+
+- [TiDB Features](/basic-features.md)
+- [TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
+- [TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
+- [TiDB Sysbench Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
+- [TiDB TPC-C Performance Test Report -- v5.0 vs. v4.0](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
+- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Transactions](/transaction-overview.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 RC Release Notes](/releases/release-5.0.0-rc.md)
+
+### tidb_enable_async_merge_global_stats
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+- [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
+- [TiDB 8.1.1 Release Notes](/releases/release-8.1.1.md)
+- [TiDB 7.5.3 Release Notes](/releases/release-7.5.3.md)
+- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
+
 ### tidb_enable_auto_analyze
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SQL FAQs](/faq/sql-faq.md)
-- [SQL Plan Replayer User Guide](/sql-plan-replayer.md)
-- [Statistics in TiDB](/statistics.md)
+- [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
-- [TiDB Performance Tuning Methods](/tidb-performance-tuning-config.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+- [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
+- [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
 ### tidb_enable_auto_analyze_priority_queue
 
 Referenced in:
 
-- [Statistics in TiDB](/statistics.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
@@ -1420,7 +1507,7 @@ Referenced in:
 
 - [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
 - [System Variables](/system-variables.md)
-- [TiDB 5.2.0 Release Notes](/releases/release-5.2.0.md)
+- [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
 
 ### tidb_enable_batch_dml
 
@@ -1433,8 +1520,8 @@ Referenced in:
 
 Referenced in:
 
-- [Basic Features](/basic-features.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [TiDB Features](/basic-features.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB 3.0 Beta Release Notes](/releases/release-3.0-beta.md)
 
@@ -1442,18 +1529,65 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Java Applications](/best-practices/java-app-best-practices.md)
-- [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Constraints](/constraints.md)
+- [CHECK\_CONSTRAINTS](/information-schema/information-schema-check-constraints.md)
+- [TIDB\_CHECK\_CONSTRAINTS](/information-schema/information-schema-tidb-check-constraints.md)
 - [System Variables](/system-variables.md)
-- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
-- [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-- [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
-- [TiProxy Overview](/tiproxy/tiproxy-overview.md)
-- [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
-- [Troubleshoot Out of Memory Errors](/troubleshoot-tidb-oom.md)
-- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
-- [TiDB 3.0 Beta Release Notes](/releases/release-3.0-beta.md)
+- [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
+
+### tidb_enable_chunk_rpc
+
+Referenced in:
+
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+
+### tidb_enable_clustered_index
+
+Referenced in:
+
+- [TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
+- [TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
+- [TiDB Sysbench Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
+- [TiDB TPC-C Performance Test Report -- v5.0 vs. v4.0](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
+- [TiDB Backup & Restore Overview](/br/backup-and-restore-overview.md)
+- [Clustered Indexes](/clustered-indexes.md)
+- [Create a Table](/develop/dev-guide-create-table.md)
+- [TiDB Database Schema Design Overview](/develop/dev-guide-schema-design-overview.md)
+- [System Variables](/system-variables.md)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 RC Release Notes](/releases/release-5.0.0-rc.md)
+
+### tidb_enable_collect_execution_info
+
+Referenced in:
+
+- [Modify Configuration Dynamically](/dynamic-config.md)
+- [Identify Slow Queries](/identify-slow-queries.md)
+- [TIDB_INDEX_USAGE](/information-schema/information-schema-tidb-index-usage.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
+- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
+- [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
 
 ### tidb_enable_column_tracking
 
@@ -1462,20 +1596,46 @@ Referenced in:
 - [System Variables](/system-variables.md)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
+
+### tidb_enable_ddl
+
+Referenced in:
+
+- [Modify Configuration Dynamically](/dynamic-config.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [Topology Configuration File for TiDB Deployment Using TiUP](/tiup/tiup-cluster-topology-reference.md)
+
+### tidb_enable_dist_task
+
+Referenced in:
+
+- [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md)
+- [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
+- [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
+- [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
+- [System Variables](/system-variables.md)
+- [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+- [TiDB Global Sort](/tidb-global-sort.md)
+- [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
+- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
+- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 
 ### tidb_enable_enhanced_security
 
 Referenced in:
 
+- [TiDB Features](/basic-features.md)
+- [TiDB Dashboard User Management](/dashboard/dashboard-user.md)
 - [BACKUP](/sql-statements/sql-statement-backup.md)
-- [Basic Features](/basic-features.md)
 - [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiDB Dashboard User Guide](/dashboard/dashboard-user.md)
-- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
 
 ### tidb_enable_exchange_partition
 
@@ -1489,25 +1649,25 @@ Referenced in:
 
 Referenced in:
 
-- [Extended Statistics](/extended-statistics.md)
+- [Introduction to Extended Statistics](/extended-statistics.md)
 - [System Variables](/system-variables.md)
 
 ### tidb_enable_external_ts_read
 
 Referenced in:
 
-- [Check Data Consistency Between Upstream and Downstream](/ticdc/ticdc-upstream-downstream-check.md)
-- [External Timestamp Read](/tidb-external-ts.md)
-- [Secondary Cluster for Disaster Recovery](/dr-secondary-cluster.md)
+- [DR Solution Based on Primary and Secondary Clusters](/dr-secondary-cluster.md)
 - [System Variables](/system-variables.md)
+- [Upstream and Downstream Clusters Data Validation and Snapshot Read](/ticdc/ticdc-upstream-downstream-check.md)
+- [Read Historical Data Using the `tidb_external_ts` Variable](/tidb-external-ts.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 
 ### tidb_enable_fast_analyze
 
 Referenced in:
 
-- [Basic Features](/basic-features.md)
-- [Extended Statistics](/extended-statistics.md)
+- [TiDB Features](/basic-features.md)
+- [Introduction to Extended Statistics](/extended-statistics.md)
 - [System Variables](/system-variables.md)
 - [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
@@ -1532,8 +1692,8 @@ Referenced in:
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### tidb_enable_global_index
@@ -1545,22 +1705,127 @@ Referenced in:
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 
+### tidb_enable_gogc_tuner
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+
+### tidb_enable_historical_stats
+
+Referenced in:
+
+- [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
+- [System Variables](/system-variables.md)
+- [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
+
+### tidb_enable_historical_stats_for_capture
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
+
+### tidb_enable_index_merge
+
+Referenced in:
+
+- [Index Selection](/choose-index.md)
+- [Explain Statements Using Index Merge](/explain-index-merge.md)
+- [Optimizer Hints](/optimizer-hints.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
+
+### tidb_enable_index_merge_join
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+
+### tidb_enable_instance_plan_cache
+
+Referenced in:
+
+- [TiDB Features](/basic-features.md)
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+
 ### tidb_enable_lazy_cursor_fetch
 
 Referenced in:
 
 - [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
-- [Connection Parameters](/develop/dev-guide-connection-parameters.md)
+- [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [System Variables](/system-variables.md)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+
+### tidb_enable_legacy_instance_scope
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+
+### tidb_enable_list_partition
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+
+### tidb_enable_local_txn
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+
+### tidb_enable_metadata_lock
+
+Referenced in:
+
+- [Metadata Lock](/metadata-lock.md)
+- [System Variables](/system-variables.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+
+### tidb_enable_mutation_checker
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
+
+### tidb_enable_new_cost_interface
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
+
+### tidb_enable_new_only_full_group_by_check
+
+Referenced in:
+
+- [SQL Mode](/sql-mode.md)
+- [System Variables](/system-variables.md)
+- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
 ### tidb_enable_non_prepared_plan_cache
 
 Referenced in:
 
-- [Non-Prepared Plan Cache](/sql-non-prepared-plan-cache.md)
-- [Performance Tuning Methods](/tidb-performance-tuning-config.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
 - [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 - [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
@@ -1571,7 +1836,7 @@ Referenced in:
 
 Referenced in:
 
-- [Non-Prepared Plan Cache](/sql-non-prepared-plan-cache.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
 - [System Variables](/system-variables.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 
@@ -1580,13 +1845,13 @@ Referenced in:
 Referenced in:
 
 - [Information Functions](/functions-and-operators/information-functions.md)
-- [Pessimistic Transaction Model](/pessimistic-transaction.md)
+- [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
 - [SELECT](/sql-statements/sql-statement-select.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
-- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_enable_noop_variables
 
@@ -1603,16 +1868,35 @@ Referenced in:
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
+### tidb_enable_ordered_result_mode
+
+Referenced in:
+
+- [SQL FAQs](/faq/sql-faq.md)
+- [System Variables](/system-variables.md)
+- [TiDB 7.1.3 Release Notes](/releases/release-7.1.3.md)
+- [TiDB 6.5.6 Release Notes](/releases/release-6.5.6.md)
+
 ### tidb_enable_outer_join_reorder
 
 Referenced in:
 
-- [Join Reorder](/join-reorder.md)
+- [Introduction to Join Reorder](/join-reorder.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 - [TiDB 6.1.1 Release Notes](/releases/release-6.1.1.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+
+### tidb_enable_paging
+
+Referenced in:
+
+- [SQL FAQs](/faq/sql-faq.md)
+- [System Variables](/system-variables.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+- [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
 
 ### tidb_enable_parallel_apply
 
@@ -1624,18 +1908,45 @@ Referenced in:
 - [TiDB 6.5.4 Release Notes](/releases/release-6.5.4.md)
 - [TiDB 5.4.1 Release Notes](/releases/release-5.4.1.md)
 
+### tidb_enable_parallel_hashagg_spill
+
+Referenced in:
+
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [System Variables](/system-variables.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+- [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
+- [TiDB 8.1.1 Release Notes](/releases/release-8.1.1.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+
 ### tidb_enable_pipelined_window_function
 
 Referenced in:
 
-- [System Variables](/system-variables.md)
 - [Window Functions](/functions-and-operators/window-functions.md)
+- [System Variables](/system-variables.md)
+
+### tidb_enable_plan_cache_for_param_limit
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
+
+### tidb_enable_plan_cache_for_subquery
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 
 ### tidb_enable_plan_replayer_capture
 
 Referenced in:
 
-- [SQL Plan Management](/sql-plan-replayer.md)
+- [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
@@ -1643,7 +1954,7 @@ Referenced in:
 
 Referenced in:
 
-- [SQL Plan Management](/sql-plan-replayer.md)
+- [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
 - [System Variables](/system-variables.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 
@@ -1652,10 +1963,10 @@ Referenced in:
 Referenced in:
 
 - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
-- [Prepared Plan Cache](/sql-prepared-plan-cache.md)
+- [TiDB Dashboard FAQs](/dashboard/dashboard-faq.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
 - [System Variables](/system-variables.md)
-- [TiDB Dashboard FAQ](/dashboard/dashboard-faq.md)
-- [TiDB Cloud Release Notes - 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+- [TiDB Cloud Release Notes in 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 - [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
 - [TiDB 7.1.4 Release Notes](/releases/release-7.1.4.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
@@ -1675,16 +1986,34 @@ Referenced in:
 - [SQL FAQs](/faq/sql-faq.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 
 ### tidb_enable_rate_limit_action
 
 Referenced in:
 
-- [Configure Memory Usage](/configure-memory-usage.md)
+- [TiDB Memory Control](/configure-memory-usage.md)
 - [System Variables](/system-variables.md)
-- [Troubleshoot Out of Memory Errors](/troubleshoot-tidb-oom.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+
+### tidb_enable_resource_control
+
+Referenced in:
+
+- [Error Codes and Troubleshooting](/error-codes.md)
+- [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+- [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
+- [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
+- [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+- [SET RESOURCE GROUP](/sql-statements/sql-statement-set-resource-group.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
+- [TiKV Configuration File](/tikv-configuration-file.md)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
 ### tidb_enable_reuse_chunk
 
@@ -1694,38 +2023,43 @@ Referenced in:
 - [TiDB 6.5.1 Release Notes](/releases/release-6.5.1.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 
-### tidb_enable_row_level_checksum
+### tidb_enable_shared_lock_promotion
 
 Referenced in:
 
-- [Data Integrity Check](/ticdc/ticdc-integrity-check.md)
+- [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
 - [System Variables](/system-variables.md)
-- [TiDB Functions](/functions-and-operators/tidb-functions.md)
-- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
-- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
-- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
 
 ### tidb_enable_slow_log
 
 Referenced in:
 
-- [Dynamic Configuration](/dynamic-config.md)
+- [Slow Queries Page of TiDB Dashboard](/dashboard/dashboard-slow-query.md)
+- [Modify Configuration Dynamically](/dynamic-config.md)
 - [Identify Slow Queries](/identify-slow-queries.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+
+### tidb_enable_stats_owner
+
+Referenced in:
+
 - [System Variables](/system-variables.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiDB Dashboard Slow Query Page](/dashboard/dashboard-slow-query.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
 
 ### tidb_enable_stmt_summary
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [SQL Plan Management](/sql-plan-management.md)
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statement Summary Tables](/statement-summary-tables.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 3.0.4 Release Notes](/releases/release-3.0.4.md)
 
 ### tidb_enable_strict_double_type_check
@@ -1733,13 +2067,13 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_enable_table_partition
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
 - [TiDB 4.0.13 Release Notes](/releases/release-4.0.13.md)
@@ -1760,36 +2094,56 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [Use TiDB to Read TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
+- [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+
+### tidb_enable_tmp_storage_on_oom
+
+Referenced in:
+
+- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
+- [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
+- [Explain Statements That Use Joins](/explain-joins.md)
+- [System Variables](/system-variables.md)
+- [TiDB Configuration File](/tidb-configuration-file.md)
 
 ### tidb_enable_top_sql
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Dashboard Top SQL Page](/dashboard/top-sql.md)
 - [System Variables](/system-variables.md)
-- [Top SQL](/dashboard/top-sql.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
 
 ### tidb_enable_tso_follower_proxy
 
 Referenced in:
 
-- [Basic Features](/basic-features.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Features](/basic-features.md)
 - [PD Microservices](/pd-microservices.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
-- [TiDB 5.3.0 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+
+### tidb_enable_unsafe_substitute
+
+Referenced in:
+
+- [Generated Columns](/generated-columns.md)
+- [System Variables](/system-variables.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
 ### tidb_enable_vectorized_expression
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB 5.4.1 Release Notes](/releases/release-5.4.1.md)
 - [TiDB 5.2.4 Release Notes](/releases/release-5.2.4.md)
@@ -1797,65 +2151,116 @@ Referenced in:
 - [TiDB 5.0.6 Release Notes](/releases/release-5.0.6.md)
 - [TiDB 4.0.16 Release Notes](/releases/release-4.0.16.md)
 
+### tidb_enable_window_function
+
+Referenced in:
+
+- [Window Functions](/functions-and-operators/window-functions.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [TiDB 3.0.8 Release Notes](/releases/release-3.0.8.md)
+
 ### tidb_enforce_mpp
 
 Referenced in:
 
 - [Explore HTAP](/explore-htap.md)
-- [Stale Read](/stale-read.md)
+- [Usage Scenarios of Stale Read](/stale-read.md)
 - [System Variables](/system-variables.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiFlash Results Materialization](/tiflash/tiflash-results-materialization.md)
-- [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+- [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
+- [Troubleshoot a TiFlash Cluster](/tiflash/troubleshoot-tiflash.md)
 - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
 - [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 - [TiDB 5.4.2 Release Notes](/releases/release-5.4.2.md)
 - [TiDB 5.1.5 Release Notes](/releases/release-5.1.5.md)
-- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
 - [TiDB 5.0.4 Release Notes](/releases/release-5.0.4.md)
+
+### tidb_evolve_plan_baselines
+
+Referenced in:
+
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
+
+### tidb_evolve_plan_task_end_time
+
+Referenced in:
+
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+
+### tidb_evolve_plan_task_max_time
+
+Referenced in:
+
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+
+### tidb_evolve_plan_task_start_time
+
+Referenced in:
+
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
 
 ### tidb_executor_concurrency
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [Troubleshoot Out of Memory Errors](/troubleshoot-tidb-oom.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_expensive_query_time_threshold
 
 Referenced in:
 
-- [Dynamic Configuration](/dynamic-config.md)
-- [Identify Slow Queries](/identify-expensive-queries.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Modify Configuration Dynamically](/dynamic-config.md)
+- [Identify Expensive Queries](/identify-expensive-queries.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB Configuration File](/tidb-configuration-file.md)
+
+### tidb_expensive_txn_time_threshold
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
 
 ### tidb_external_ts
 
 Referenced in:
 
-- [Check Data Consistency Between Upstream and Downstream](/ticdc/ticdc-upstream-downstream-check.md)
-- [External Timestamp Read](/tidb-external-ts.md)
-- [Secondary Cluster for Disaster Recovery](/dr-secondary-cluster.md)
-- [Stale Read](/stale-read.md)
+- [TOC-tidb-cloud](/TOC-tidb-cloud.md)
+- [TOC](/TOC.md)
+- [DR Solution Based on Primary and Secondary Clusters](/dr-secondary-cluster.md)
+- [Usage Scenarios of Stale Read](/stale-read.md)
 - [System Variables](/system-variables.md)
+- [Upstream and Downstream Clusters Data Validation and Snapshot Read](/ticdc/ticdc-upstream-downstream-check.md)
+- [Read Historical Data Using the `tidb_external_ts` Variable](/tidb-external-ts.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 
 ### tidb_force_priority
 
 Referenced in:
 
-- [Dynamic Configuration](/dynamic-config.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Modify Configuration Dynamically](/dynamic-config.md)
 - [SQL FAQs](/faq/sql-faq.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB Configuration File](/tidb-configuration-file.md)
 - [TiDB 2.1.5 Release Notes](/releases/release-2.1.5.md)
 - [TiDB 2.1 RC3 Release Notes](/releases/release-2.1-rc.3.md)
@@ -1864,218 +2269,387 @@ Referenced in:
 
 Referenced in:
 
-- [GC Configuration](/garbage-collection-configuration.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Garbage Collection Configuration](/garbage-collection-configuration.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_gc_enable
 
 Referenced in:
 
-- [GC Configuration](/garbage-collection-configuration.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [Migrate Data from TiDB to MySQL](/migrate-from-tidb-to-mysql.md)
-- [Migrate Data from TiDB to TiDB](/migrate-from-tidb-to-tidb.md)
-- [Migrate from Self-Hosted TiDB to TiDB Cloud](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
+- [DR Solution Based on Primary and Secondary Clusters](/dr-secondary-cluster.md)
+- [Garbage Collection Configuration](/garbage-collection-configuration.md)
+- [Migrate Data from TiDB to MySQL-compatible Databases](/migrate-from-tidb-to-mysql.md)
+- [Migrate from One TiDB Cluster to Another TiDB Cluster](/migrate-from-tidb-to-tidb.md)
 - [Replicate Data Between Primary and Secondary Clusters](/replicate-between-primary-and-secondary-clusters.md)
-- [Secondary Cluster for Disaster Recovery](/dr-secondary-cluster.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Migrate from TiDB Self-Managed to TiDB Cloud](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_gc_life_time
 
 Referenced in:
 
-- [Back up and Restore Incrementally](/br/br-incremental-guide.md)
-- [Create a Changefeed with MySQL as Downstream](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-mysql)
-- [Create a Changefeed with TiDB Cloud as Downstream](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-tidb-cloud)
-- [Dumpling Overview](/dumpling-overview.md)
+- [TiDB Incremental Backup and Restore Guide](/br/br-incremental-guide.md)
+- [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
+- [Stale Read](/develop/dev-guide-use-stale-read.md)
+- [Use Dumpling to Export Data](/dumpling-overview.md)
 - [Error Codes and Troubleshooting](/error-codes.md)
+- [SQL FAQs](/faq/sql-faq.md)
+- [Garbage Collection Configuration](/garbage-collection-configuration.md)
+- [Read Historical Data Using the System Variable `tidb_snapshot`](/read-historical-data.md)
 - [FLASHBACK CLUSTER](/sql-statements/sql-statement-flashback-cluster.md)
 - [FLASHBACK DATABASE](/sql-statements/sql-statement-flashback-database.md)
 - [FLASHBACK TABLE](/sql-statements/sql-statement-flashback-table.md)
-- [GC Configuration](/garbage-collection-configuration.md)
-- [Read Historical Data](/read-historical-data.md)
-- [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
-- [SQL FAQs](/faq/sql-faq.md)
 - [System Variables](/system-variables.md)
 - [TiCDC FAQs](/ticdc/ticdc-faq.md)
+- [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
+- [Sink to MySQL](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-mysql)
+- [Sink to TiDB Cloud](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-tidb-cloud)
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-- [TiKV In-Memory Engine](/tikv-in-memory-engine.md)
-- [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
-- [Use Stale Read](/develop/dev-guide-use-stale-read.md)
+- [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
 - [TiDB 6.1.1 Release Notes](/releases/release-6.1.1.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+
+### tidb_gc_max_wait_time
+
+Referenced in:
+
+- [Garbage Collection Configuration](/garbage-collection-configuration.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
 ### tidb_gc_run_interval
 
 Referenced in:
 
-- [GC Configuration](/garbage-collection-configuration.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Garbage Collection Configuration](/garbage-collection-configuration.md)
 - [System Variables](/system-variables.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_gc_scan_lock_mode
 
 Referenced in:
 
-- [Basic Features](/basic-features.md)
-- [GC Configuration](/garbage-collection-configuration.md)
+- [TiDB Features](/basic-features.md)
+- [Garbage Collection Configuration](/garbage-collection-configuration.md)
 - [GC Overview](/garbage-collection-overview.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 5.0.4 Release Notes](/releases/release-5.0.4.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_general_log
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
-- [TiDB Command-Line Flags](/command-line-flags-for-tidb-configuration.md)
-- [TiDB Configuration File](/tidb-configuration-file.md)
+- [Configuration Options](/command-line-flags-for-tidb-configuration.md)
 - [TiDB Data Migration FAQs](/dm/dm-faq.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+
+### tidb_generate_binary_plan
+
+Referenced in:
+
+- [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
+
+### tidb_gogc_tuner_max_value
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.5.5 Release Notes](/releases/release-7.5.5.md)
+- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
+
+### tidb_gogc_tuner_min_value
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.5.5 Release Notes](/releases/release-7.5.5.md)
+- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
+
+### tidb_gogc_tuner_threshold
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 7.1.4 Release Notes](/releases/release-7.1.4.md)
+- [TiDB 6.5.9 Release Notes](/releases/release-6.5.9.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+
+### tidb_guarantee_linearizability
+
+Referenced in:
+
+- [TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
+- [TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
+- [TiDB Sysbench Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
+- [TiDB TPC-C Performance Test Report -- v5.0 vs. v4.0](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+
+### tidb_hash_exchange_with_new_collation
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
 
 ### tidb_hash_join_concurrency
 
 Referenced in:
 
 - [Analyze Slow Queries](/analyze-slow-queries.md)
-- [Explain Joins](/explain-joins.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [Best Practices for Three-Node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
+- [Explain Statements That Use Joins](/explain-joins.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [Three Nodes Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
-- [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+
+### tidb_hash_join_version
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
 
 ### tidb_hashagg_final_concurrency
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [TiDB Sysbench Performance Test Report -- v4.0 vs. v3.0](/benchmark/benchmark-sysbench-v4-vs-v3.md)
+- [TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
+- [TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
+- [TiDB Sysbench Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
+- [TiDB Sysbench Performance Test Report -- v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
+- [TiDB TPC-C Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [TiDB TPC-C Performance Test Report -- v5.0 vs. v4.0](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Sysbench Performance Test Report - v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
-- [TiDB Sysbench Performance Test Report - v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
-- [TiDB TPC-C Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
-- [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-- [TiDB v5.0 TPC-C Performance Test Report](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
-- [TiDB v5.1 TPC-C Performance Test Report](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
 
 ### tidb_hashagg_partial_concurrency
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [TiDB Sysbench Performance Test Report -- v4.0 vs. v3.0](/benchmark/benchmark-sysbench-v4-vs-v3.md)
+- [TiDB Sysbench Performance Test Report -- v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
+- [TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/benchmark-sysbench-v5.1.0-vs-v5.0.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/benchmark-sysbench-v5.2.0-vs-v5.1.1.md)
+- [TiDB Sysbench Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/benchmark-sysbench-v5.3.0-vs-v5.2.2.md)
+- [TiDB Sysbench Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/benchmark-sysbench-v5.4.0-vs-v5.3.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
+- [TiDB Sysbench Performance Test Report -- v3.0 vs. v2.1](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)
+- [TiDB TPC-C Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [TiDB TPC-C Performance Test Report -- v5.0 vs. v4.0](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.1.0 vs. v5.0.2](/benchmark/v5.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.2.0 vs. v5.1.1](/benchmark/v5.2-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.3.0 vs. v5.2.2](/benchmark/v5.3-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v5.4.0 vs. v5.3.0](/benchmark/v5.4-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.0.0 vs. v5.4.0](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Sysbench Performance Test Report - v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
-- [TiDB Sysbench Performance Test Report - v5.0 vs. v4.0](/benchmark/benchmark-sysbench-v5-vs-v4.md)
-- [TiDB TPC-C Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpcc.md)
-- [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-- [TiDB v5.0 TPC-C Performance Test Report](/benchmark/v5.0-performance-benchmarking-with-tpcc.md)
 
-### tidb_host_lookup_max_retries
+### tidb_historical_stats_duration
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
+
+### tidb_idle_transaction_timeout
+
+Referenced in:
+
+- [TiDB Features](/basic-features.md)
+- [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
+- [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
+- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
+- [System Variables](/system-variables.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 
 ### tidb_ignore_prepared_cache_close_stmt
 
 Referenced in:
 
-- [Performance Tuning Best Practices](/performance-tuning-practices.md)
-- [Performance Tuning Methods](/performance-tuning-methods.md)
-- [Prepared Plan Cache](/sql-prepared-plan-cache.md)
+- [Performance Analysis and Tuning](/performance-tuning-methods.md)
+- [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
 - [System Variables](/system-variables.md)
-- [TiDB Performance Tuning Methods](/tidb-performance-tuning-config.md)
-- [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
-
-### tidb_ignore_index_hint
-
-Referenced in:
-
-- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
 
 ### tidb_index_join_batch_size
 
 Referenced in:
 
-- [Explain Joins](/explain-joins.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Explain Statements That Use Joins](/explain-joins.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+
+### tidb_index_join_double_read_penalty_cost_rate
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
 ### tidb_index_lookup_concurrency
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
 - [TiDB Best Practices](/best-practices/tidb-best-practices.md)
-- [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
 
 ### tidb_index_lookup_join_concurrency
 
 Referenced in:
 
-- [Explain Joins](/explain-joins.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [Best Practices for Three-Node Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
+- [Explain Statements That Use Joins](/explain-joins.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [Three Nodes Hybrid Deployment](/best-practices/three-nodes-hybrid-deployment.md)
-- [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
 
 ### tidb_index_lookup_size
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
 - [TiDB Best Practices](/best-practices/tidb-best-practices.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+
+### tidb_index_merge_intersection_concurrency
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### tidb_index_serial_scan_concurrency
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [Statistics in TiDB](/statistics.md)
-- [System Variables](/system-variables.md)
 - [TiDB Best Practices](/best-practices/tidb-best-practices.md)
-- [TiDB Cloud v6.5 TPC-C Performance Test Report](https://docs.pingcap.com/tidbcloud/v6.5-performance-benchmarking-with-tpcc)
-- [TiDB Cloud v7.1 TPC-C Performance Test Report](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
-- [TiDB Cloud v7.5 TPC-C Performance Test Report](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
-- [TiDB Cloud v8.1 TPC-C Performance Test Report](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)
-- [Troubleshoot Out of Memory Errors](/troubleshoot-tidb-oom.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Introduction to Statistics](/statistics.md)
+- [System Variables](/system-variables.md)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v6.5.6](https://docs.pingcap.com/tidbcloud/v6.5-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.1.3](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v7.5.0](https://docs.pingcap.com/tidbcloud/v7.5-performance-benchmarking-with-tpcc)
+- [TiDB Cloud TPC-C Performance Test Report for TiDB v8.1.0](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 
 ### tidb_init_chunk_size
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md)
 - [TiDB 3.0 Beta Release Notes](/releases/release-3.0-beta.md)
-- [Transaction Isolation Levels](/transaction-isolation-levels.md)
+
+### tidb_instance_plan_cache_max_size
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+
+### tidb_instance_plan_cache_reserved_percentage
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
 
 ### tidb_isolation_read_engines
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [TiDB TPC-H Performance Test Report -- TiDB v5.4 MPP mode vs. Greenplum 6.15.0 and Apache Spark 3.1.1](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-- [TiDB v5.4 TPC-H Performance Test Report](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
-- [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
-- [TiFlash Compatibility](/tiflash/tiflash-compatibility.md)
-- [TiUP Bench Reference](/tiup/tiup-bench.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Use an HTAP Cluster](https://docs.pingcap.com/tidbcloud/use-htap-cluster)
+- [TiFlash Compatibility Notes](/tiflash/tiflash-compatibility.md)
 - [Use FastScan](/tiflash/use-fastscan.md)
-- [Use HTAP Cluster](https://docs.pingcap.com/tidbcloud/use-htap-cluster)
-- [Use TiDB to Read TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
+- [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+- [Stress Test TiDB Using TiUP Bench Component](/tiup/tiup-bench.md)
+- [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
+
+### tidb_last_ddl_info
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+
+### tidb_last_plan_replayer_token
+
+Referenced in:
+
+- [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
+- [System Variables](/system-variables.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+
+### tidb_last_query_info
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
+- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
 
 ### tidb_last_txn_info
 
@@ -2083,22 +2657,76 @@ Referenced in:
 
 - [System Variables](/system-variables.md)
 
+### tidb_load_based_replica_read_threshold
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+
+### tidb_log_file_max_days
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
+
+### tidb_low_resolution_tso
+
+Referenced in:
+
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 3.0.0-rc.2 Release Notes](/releases/release-3.0.0-rc.2.md)
+- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
+
 ### tidb_max_auto_analyze_time
 
 Referenced in:
 
-- [Statistics in TiDB](/statistics.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+
+### tidb_max_bytes_before_tiflash_external_group_by
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiFlash Spill to Disk](/tiflash/tiflash-spill-disk.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+
+### tidb_max_bytes_before_tiflash_external_join
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiFlash Spill to Disk](/tiflash/tiflash-spill-disk.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+
+### tidb_max_bytes_before_tiflash_external_sort
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiFlash Spill to Disk](/tiflash/tiflash-spill-disk.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 
 ### tidb_max_chunk_size
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Performance Tuning Methods](/tidb-performance-tuning-config.md)
-- [Transaction Isolation Levels](/transaction-isolation-levels.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 - [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
 - [TiDB 7.1.3 Release Notes](/releases/release-7.1.3.md)
@@ -2110,38 +2738,37 @@ Referenced in:
 Referenced in:
 
 - [SQL FAQs](/faq/sql-faq.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB 3.0.5 Release Notes](/releases/release-3.0.5.md)
 - [TiDB 2.1.18 Release Notes](/releases/release-2.1.18.md)
 
-### tidb_max_disk_usage
+### tidb_max_paging_size
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
-### tidb_max_disk_quota
-
-Referenced in:
-
-- [System Variables](/system-variables.md)
-
-### tidb_max_txn_ttl
+### tidb_max_tiflash_threads
 
 Referenced in:
 
+- [Modify Configuration Dynamically](/dynamic-config.md)
 - [System Variables](/system-variables.md)
+- [TiDB Cloud Release Notes in 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+- [Configure TiFlash](/tiflash/tiflash-configuration.md)
+- [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
 ### tidb_mem_oom_action
 
 Referenced in:
 
-- [Configure Memory Usage](/configure-memory-usage.md)
-- [Non-transactional DML](/non-transactional-dml.md)
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [Non-Transactional DML Statements](/non-transactional-dml.md)
 - [System Variables](/system-variables.md)
 - [TiDB Cloud Release Notes in 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
-- [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
@@ -2149,9 +2776,9 @@ Referenced in:
 
 Referenced in:
 
-- [Statistics in TiDB](/statistics.md)
+- [Introduction to Statistics](/statistics.md)
 - [System Variables](/system-variables.md)
-- [Troubleshoot Out of Memory Errors](/troubleshoot-tidb-oom.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
 - [TiDB 7.5.2 Release Notes](/releases/release-7.5.2.md)
 - [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
@@ -2168,47 +2795,35 @@ Referenced in:
 
 Referenced in:
 
-- [SQL Plan Management](/sql-plan-management.md)
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
 - [System Variables](/system-variables.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
-
-### tidb_mem_quota_indexlookupjoin
-
-Referenced in:
-
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
-
-### tidb_mem_quota_nestedloopapply
-
-Referenced in:
-
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
 
 ### tidb_mem_quota_query
 
 Referenced in:
 
-- [Configure Memory Usage](/configure-memory-usage.md)
-- [Contribute to TiDB Documentation](/CONTRIBUTING.md)
-- [Enable Disk Spill Encryption](/enable-disk-spill-encrypt.md)
+- [TiDB Documentation Contributing Guide](/CONTRIBUTING.md)
+- [TiDB TPC-H Performance Test Report -- TiDB v5.4 MPP mode vs. Greenplum 6.15.0 and Apache Spark 3.1.1](/benchmark/v5.4-performance-benchmarking-with-tpch.md)
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [Enable Encryption for Disk Spill](/enable-disk-spill-encrypt.md)
 - [Error Codes and Troubleshooting](/error-codes.md)
-- [Explain Joins](/explain-joins.md)
-- [Identify Slow Queries](/identify-expensive-queries.md)
-- [Non-transactional DML](/non-transactional-dml.md)
+- [Explain Statements That Use Joins](/explain-joins.md)
+- [Identify Expensive Queries](/identify-expensive-queries.md)
+- [Non-Transactional DML Statements](/non-transactional-dml.md)
 - [Optimizer Hints](/optimizer-hints.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [TiDB Cloud Release Notes in 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 - [TiDB Configuration File](/tidb-configuration-file.md)
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-- [TiFlash Results Materialization](/tiflash/tiflash-results-materialization.md)
-- [Troubleshoot Out of Memory Errors](/troubleshoot-tidb-oom.md)
-- [TiDB Cloud Release Notes - 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+- [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
 - [TiDB 8.1.2 Release Notes](/releases/release-8.1.2.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 - [TiDB 7.5.4 Release Notes](/releases/release-7.5.4.md)
+- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
 - [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
 - [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
@@ -2220,16 +2835,38 @@ Referenced in:
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
 - [TiDB 4.0.10 Release Notes](/releases/release-4.0.10.md)
 
-### tidb_mem_quota_sort
+### tidb_memory_debug_mode_alarm_ratio
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
+
+### tidb_memory_debug_mode_min_heap_inuse
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+
+### tidb_memory_usage_alarm_keep_record_num
+
+Referenced in:
+
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [System Variables](/system-variables.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+
+### tidb_memory_usage_alarm_ratio
+
+Referenced in:
+
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 
 ### tidb_merge_join_concurrency
 
@@ -2250,18 +2887,31 @@ Referenced in:
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [Monitoring API](/metrics-schema.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Metrics Schema](/metrics-schema.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### tidb_metric_query_step
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [Monitoring API](/metrics-schema.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Metrics Schema](/metrics-schema.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+
+### tidb_min_paging_size
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
+
+### tidb_mpp_store_fail_ttl
+
+Referenced in:
+
 - [System Variables](/system-variables.md)
 
 ### tidb_multi_statement_mode
@@ -2269,31 +2919,47 @@ Referenced in:
 Referenced in:
 
 - [Error Codes and Troubleshooting](/error-codes.md)
-- [Integrate TiDB Cloud with n8n](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-n8n)
 - [System Variables](/system-variables.md)
+- [Integrate TiDB Cloud with n8n](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-n8n)
 - [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
 - [TiDB 7.1.4 Release Notes](/releases/release-7.1.4.md)
 - [TiDB 6.5.8 Release Notes](/releases/release-6.5.8.md)
-- [TiDB 5.2.0 Release Notes](/releases/release-5.2.0.md)
+- [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
 - [TiDB 5.1.1 Release Notes](/releases/release-5.1.1.md)
 - [TiDB 5.0.3 Release Notes](/releases/release-5.0.3.md)
 - [TiDB 4.0.14 Release Notes](/releases/release-4.0.14.md)
+
+### tidb_non_prepared_plan_cache_size
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
 ### tidb_nontransactional_ignore_error
 
 Referenced in:
 
-- [Non-transactional DML](/non-transactional-dml.md)
+- [Non-Transactional DML Statements](/non-transactional-dml.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+
+### tidb_opt_advanced_join_hint
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 
 ### tidb_opt_agg_push_down
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Performance Tuning Methods](/tidb-performance-tuning-config.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
 - [TiDB 7.1.1 Release Notes](/releases/release-7.1.1.md)
@@ -2314,15 +2980,22 @@ Referenced in:
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+
+### tidb_opt_copcpu_factor
+
+Referenced in:
+
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 
 ### tidb_opt_correlation_exp_factor
 
 Referenced in:
 
-- [Extended Statistics](/extended-statistics.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Introduction to Extended Statistics](/extended-statistics.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB 3.0.0-rc.1 Release Notes](/releases/release-3.0.0-rc.1.md)
 
@@ -2330,43 +3003,121 @@ Referenced in:
 
 Referenced in:
 
-- [Extended Statistics](/extended-statistics.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Introduction to Extended Statistics](/extended-statistics.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+
+### tidb_opt_cpu_factor
+
+Referenced in:
+
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 
 ### tidb_opt_desc_factor
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+
+### tidb_opt_disk_factor
+
+Referenced in:
+
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 
 ### tidb_opt_distinct_agg_push_down
 
 Referenced in:
 
-- [Agg Distinct Optimization](/agg-distinct-optimization.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Distinct Optimization](/agg-distinct-optimization.md)
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiDB Performance Tuning Methods](/tidb-performance-tuning-config.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-- [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
 
 ### tidb_opt_enable_correlation_adjustment
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [TiDB 5.2.0 Release Notes](/releases/release-5.2.0.md)
+- [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
+
+### tidb_opt_enable_fuzzy_binding
+
+Referenced in:
+
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
+- [System Variables](/system-variables.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
+
+### tidb_opt_enable_hash_join
+
+Referenced in:
+
+- [Optimizer Hints](/optimizer-hints.md)
+- [System Variables](/system-variables.md)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
+- [TiDB 7.1.2 Release Notes](/releases/release-7.1.2.md)
+- [TiDB 6.5.6 Release Notes](/releases/release-6.5.6.md)
+
+### tidb_opt_enable_late_materialization
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+
+### tidb_opt_enable_mpp_shared_cte_execution
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
+
+### tidb_opt_enable_non_eval_scalar_subquery
+
+Referenced in:
+
+- [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
+- [`EXPLAIN`](/sql-statements/sql-statement-explain.md)
+- [System Variables](/system-variables.md)
+- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
+
+### tidb_opt_fix_control
+
+Referenced in:
+
+- [Control Execution Plan](/control-execution-plan.md)
+- [Optimizer Fix Controls](/optimizer-fix-controls.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+
+### tidb_opt_force_inline_cte
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
 
 ### tidb_opt_insubq_to_join_and_agg
 
 Referenced in:
 
 - [Optimizer Hints](/optimizer-hints.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [Subquery Optimization](/subquery-optimization.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Subquery Related Optimizations](/subquery-optimization.md)
 - [System Variables](/system-variables.md)
 - [TiDB 3.0 Beta Release Notes](/releases/release-3.0-beta.md)
 
@@ -2374,8 +3125,8 @@ Referenced in:
 
 Referenced in:
 
-- [Join Reorder](/join-reorder.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Introduction to Join Reorder](/join-reorder.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 - [TiDB 3.0.0-rc.1 Release Notes](/releases/release-3.0.0-rc.1.md)
@@ -2385,21 +3136,27 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [TiDB 5.2.0 Release Notes](/releases/release-5.2.0.md)
+- [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
 
 ### tidb_opt_memory_factor
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+
+### tidb_opt_mpp_outer_join_fixed_build_side
+
+Referenced in:
+
 - [System Variables](/system-variables.md)
 
 ### tidb_opt_network_factor
 
 Referenced in:
 
-- [Choose Indexes](/choose-index.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Index Selection](/choose-index.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 
 ### tidb_opt_objective
@@ -2411,12 +3168,41 @@ Referenced in:
 - [TiDB 7.5.2 Release Notes](/releases/release-7.5.2.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 
+### tidb_opt_ordering_index_selectivity_ratio
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+
+### tidb_opt_ordering_index_selectivity_threshold
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+
+### tidb_opt_prefer_range_scan
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+
 ### tidb_opt_prefix_index_single_scan
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+
+### tidb_opt_projection_push_down
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
 
 ### tidb_opt_range_max_size
 
@@ -2429,15 +3215,15 @@ Referenced in:
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 
 ### tidb_opt_seek_factor
 
 Referenced in:
 
-- [Choose Indexes](/choose-index.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Index Selection](/choose-index.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 
 ### tidb_opt_skew_distinct_agg
@@ -2447,56 +3233,113 @@ Referenced in:
 - [System Variables](/system-variables.md)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 
+### tidb_opt_three_stage_distinct_agg
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+
 ### tidb_opt_tiflash_concurrency_factor
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
 
+### tidb_opt_use_invisible_indexes
+
+Referenced in:
+
+- [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [System Variables](/system-variables.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+
 ### tidb_opt_write_row_id
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 2.1 RC5 Release Notes](/releases/release-2.1-rc.5.md)
 
 ### tidb_optimizer_selectivity_level
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 
 ### tidb_partition_prune_mode
 
 Referenced in:
 
-- [MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
-- [Partitioned Table](/partitioned-table.md)
-- [Prepared Plan Cache](/sql-prepared-plan-cache.md)
+- [Partitioning](/partitioned-table.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
 - [System Variables](/system-variables.md)
 - [TiFlash Upgrade Guide](/tiflash-upgrade-guide.md)
+- [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
-- [TiDB 5.1.0 Release Notes](/releases/release-5.1.0.md)
+- [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
+
+### tidb_persist_analyze_options
+
+Referenced in:
+
+- [Introduction to Statistics](/statistics.md)
+- [System Variables](/system-variables.md)
+- [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
+
+### tidb_pessimistic_txn_fair_locking
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+
+### tidb_placement_mode
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
 
 ### tidb_pprof_sql_cpu
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 3.0.10 Release Notes](/releases/release-3.0.10.md)
+
+### tidb_pre_split_regions
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+
+### tidb_prefer_broadcast_join_by_exchange_data_size
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 
 ### tidb_prepared_plan_cache_memory_guard_ratio
 
 Referenced in:
 
-- [Prepared Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
 - [System Variables](/system-variables.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
@@ -2504,12 +3347,12 @@ Referenced in:
 
 Referenced in:
 
+- [TiDB Sysbench Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+- [TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
+- [TiDB TPC-C Performance Test Report -- v6.1.0 vs. v6.0.0](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+- [TiDB TPC-C Performance Test Report -- v6.2.0 vs. v6.1.0](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
 - [System Variables](/system-variables.md)
-- [TiDB Sysbench Performance Test Report - v6.1.0 vs. v6.0.0](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
-- [TiDB Sysbench Performance Test Report - v6.2.0 vs. v6.1.0](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
-- [TiDB v6.1 TPC-C Performance Test Report](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
-- [TiDB v6.2 TPC-C Performance Test Report](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
-- [TiDB Cloud Release Notes - 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+- [TiDB Cloud Release Notes in 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
@@ -2518,334 +3361,827 @@ Referenced in:
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [TiDB TPC-H Performance Test Report -- v4.0 vs. v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB TPC-H Performance Test Report -- v4.0 vs v3.0](/benchmark/v4.0-performance-benchmarking-with-tpch.md)
-- [TiDB 5.0.0 Release Notes](/releases/release-5.0.0.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_query_log_max_len
 
 Referenced in:
 
 - [Identify Slow Queries](/identify-slow-queries.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Cloud Release Notes - 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+- [TiDB Cloud Release Notes in 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 - [TiDB 2.1 GA Release Notes](/releases/release-2.1-ga.md)
 - [TiDB 2.1 RC5 Release Notes](/releases/release-2.1-rc.5.md)
+
+### tidb_rc_read_check_ts
+
+Referenced in:
+
+- [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
+
+### tidb_rc_write_check_ts
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md)
+- [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+
+### tidb_read_consistency
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
 
 ### tidb_read_staleness
 
 Referenced in:
 
-- [Read Historical Data Using tidb_read_staleness](/tidb-read-staleness.md)
-- [Stale Read](/stale-read.md)
+- [TOC-tidb-cloud](/TOC-tidb-cloud.md)
+- [TOC](/TOC.md)
+- [Stale Read](/develop/dev-guide-use-stale-read.md)
+- [Usage Scenarios of Stale Read](/stale-read.md)
 - [System Variables](/system-variables.md)
-- [Use Stale Read](/develop/dev-guide-use-stale-read.md)
+- [Read Historical Data Using the `tidb_read_staleness` System Variable](/tidb-read-staleness.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
+
+### tidb_record_plan_in_slow_log
+
+Referenced in:
+
+- [Modify Configuration Dynamically](/dynamic-config.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB 3.0.5 Release Notes](/releases/release-3.0.5.md)
+
+### tidb_redact_log
+
+Referenced in:
+
+- [Configuration Options](/command-line-flags-for-tidb-configuration.md)
+- [Identify Slow Queries](/identify-slow-queries.md)
+- [Log Redaction](/log-redaction.md)
+- [Non-Transactional DML Statements](/non-transactional-dml.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+- [TiDB 8.1.1 Release Notes](/releases/release-8.1.1.md)
+- [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 7.5.4 Release Notes](/releases/release-7.5.4.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 RC Release Notes](/releases/release-5.0.0-rc.md)
+
+### tidb_regard_null_as_point
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
+
+### tidb_remove_orderby_in_subquery
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
 
 ### tidb_replica_read
 
 Referenced in:
 
-- [Best Practices for TiDB on Public Cloud Platforms](/best-practices-on-public-cloud.md)
-- [Best Practices for TiDB Read-Only Nodes Deployment](/best-practices/readonly-nodes.md)
+- [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
+- [Best Practices for Read-Only Storage Nodes](/best-practices/readonly-nodes.md)
+- [Local Read under Three Data Centers Deployment](/best-practices/three-dc-local-read.md)
+- [Follower Read](/develop/dev-guide-use-follower-read.md)
 - [Follower Read](/follower-read.md)
 - [Optimizer Hints](/optimizer-hints.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [Three Data Centers Deployment Solution with Local Read](/best-practices/three-dc-local-read.md)
-- [Use Follower Read to Ensure Strongly Consistent Reads](/develop/dev-guide-use-follower-read.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
 - [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
-- [TiDB 3.1.0-beta.2 Release Notes](/releases/release-3.1.0-beta.2.md)
+- [TiDB 3.1 Beta.2 Release Notes](/releases/release-3.1.0-beta.2.md)
+
+### tidb_request_source_type
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
+
+### tidb_resource_control_strict_mode
+
+Referenced in:
+
+- [Optimizer Hints](/optimizer-hints.md)
+- [Privilege Management](/privilege-management.md)
+- [SET RESOURCE GROUP](/sql-statements/sql-statement-set-resource-group.md)
+- [System Variables](/system-variables.md)
+- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
+- [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
+
+### tidb_restricted_read_only
+
+Referenced in:
+
+- [Privilege Management](/privilege-management.md)
+- [System Variables](/system-variables.md)
+- [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+- [TiDB 5.4.1 Release Notes](/releases/release-5.4.1.md)
+- [TiDB 5.3.1 Release Notes](/releases/release-5.3.1.md)
 
 ### tidb_retry_limit
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
 - [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
 - [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
-- [TiDB Transaction Overview](/transaction-overview.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Transactions](/transaction-overview.md)
 - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
-- [TiDB 2.1 GA Release Notes](/releases/release-2.1-ga.md)
 - [TiDB 2.1 Beta Release Notes](/releases/release-2.1-beta.md)
+- [TiDB 2.1 GA Release Notes](/releases/release-2.1-ga.md)
 
 ### tidb_row_format_version
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 3.0.0-rc.1 Release Notes](/releases/release-3.0.0-rc.1.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 4.0.13 Release Notes](/releases/release-4.0.13.md)
+
+### tidb_runtime_filter_mode
+
+Referenced in:
+
+- [Runtime Filter](/runtime-filter.md)
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
+
+### tidb_runtime_filter_type
+
+Referenced in:
+
+- [Runtime Filter](/runtime-filter.md)
+- [System Variables](/system-variables.md)
 
 ### tidb_scatter_region
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Split Region](/sql-statements/sql-statement-split-region.md)
 - [System Variables](/system-variables.md)
-- [TiDB 2.1 RC5 Release Notes](/releases/release-2.1-rc.5.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+- [TiDB 6.1.7 Release Notes](/releases/release-6.1.7.md)
+- [TiDB 2.1.15 Release Notes](/releases/release-2.1.15.md)
 
 ### tidb_schema_cache_size
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Schema Cache](/schema-cache.md)
 - [System Variables](/system-variables.md)
-- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+
+### tidb_schema_version_cache_limit
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
+
+### tidb_server_memory_limit
+
+Referenced in:
+
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [MEMORY_USAGE_OPS_HISTORY](/information-schema/information-schema-memory-usage-ops-history.md)
+- [MEMORY_USAGE](/information-schema/information-schema-memory-usage.md)
+- [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
+- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
+- [TiDB 7.1.4 Release Notes](/releases/release-7.1.4.md)
+- [TiDB 7.1.3 Release Notes](/releases/release-7.1.3.md)
+- [TiDB 6.5.9 Release Notes](/releases/release-6.5.9.md)
+- [TiDB 6.5.7 Release Notes](/releases/release-6.5.7.md)
+- [TiDB 6.5.2 Release Notes](/releases/release-6.5.2.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+
+### tidb_server_memory_limit_gc_trigger
+
+Referenced in:
+
+- [TiDB Memory Control](/configure-memory-usage.md)
+- [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+
+### tidb_server_memory_limit_sess_min_size
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.5.2 Release Notes](/releases/release-6.5.2.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+
+### tidb_service_scope
+
+Referenced in:
+
+- [TiDB Features](/basic-features.md)
+- [Configuration Options](/command-line-flags-for-tidb-configuration.md)
+- [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
+- [System Variables](/system-variables.md)
+- [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+- [TiDB Global Sort](/tidb-global-sort.md)
+- [IMPORT INTO vs. TiDB Lightning](/tidb-lightning/import-into-vs-tidb-lightning.md)
+- [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
+- [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
+- [TiDB 7.5.0 Release Notes](/releases/release-7.5.0.md)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 
 ### tidb_session_alias
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
+
+### tidb_session_plan_cache_size
+
+Referenced in:
+
+- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [System Variables](/system-variables.md)
+- [TiDB Cloud Sysbench Performance Test Report for TiDB v8.1.0](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+
+### tidb_shard_allocate_step
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+
+### tidb_shard_row_id_bits
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+
+### tidb_simplified_metrics
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### tidb_skip_ascii_check
 
 Referenced in:
 
-- [Character Set and Collation](/character-set-and-collation.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Configuration File](/tidb-configuration-file.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 
 ### tidb_skip_isolation_level_check
 
 Referenced in:
 
-- [Character Set and Collation](/character-set-and-collation.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [Statement Summary Tables](/statement-summary-tables.md)
-- [Stale Read](/stale-read.md)
+- [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
+- [Transaction overview](/develop/dev-guide-transaction-overview.md)
+- [Error Codes and Troubleshooting](/error-codes.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [Temporary Tables](/temporary-tables.md)
-- [Top SQL](/dashboard/top-sql.md)
-- [Transaction Isolation Levels](/transaction-isolation-levels.md)
-- [Use Stale Read](/develop/dev-guide-use-stale-read.md)
-- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
-- [TiDB 4.0.0-rc.2 Release Notes](/releases/release-4.0.0-rc.2.md)
+- [TiDB 5.1.4 Release Notes](/releases/release-5.1.4.md)
 - [TiDB 3.0.0-rc.1 Release Notes](/releases/release-3.0.0-rc.1.md)
-- [TiDB 2.1 RC5 Release Notes](/releases/release-2.1-rc.5.md)
+- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
+
+### tidb_skip_missing_partition_stats
+
+Referenced in:
+
+- [Introduction to Statistics](/statistics.md)
+- [System Variables](/system-variables.md)
+- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
 
 ### tidb_skip_utf8_check
 
 Referenced in:
 
 - [Character Set and Collation](/character-set-and-collation.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md)
+- [Upgrade and After Upgrade FAQs](/faq/upgrade-faq.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiDB 2.1 RC5 Release Notes](/releases/release-2.1-rc.5.md)
+- [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
 
 ### tidb_slow_log_threshold
 
 Referenced in:
 
-- [Dashboard Slow Query Page](/dashboard/dashboard-slow-query.md)
+- [Overview Page](/dashboard/dashboard-overview.md)
+- [Slow Queries Page of TiDB Dashboard](/dashboard/dashboard-slow-query.md)
+- [Modify Configuration Dynamically](/dynamic-config.md)
+- [TiDB Deployment FAQs](/faq/deploy-and-maintain-faq.md)
 - [Identify Slow Queries](/identify-slow-queries.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiDB 3.0.0-rc.1 Release Notes](/releases/release-3.0.0-rc.1.md)
+- [TiDB 2.1 GA Release Notes](/releases/release-2.1-ga.md)
+- [TiDB 2.1 RC5 Release Notes](/releases/release-2.1-rc.5.md)
 
 ### tidb_slow_query_file
 
 Referenced in:
 
 - [Identify Slow Queries](/identify-slow-queries.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Configuration File](/tidb-configuration-file.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### tidb_snapshot
 
 Referenced in:
 
-- [Read Historical Data](/read-historical-data.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [Stale Read](/stale-read.md)
+- [TOC-tidb-cloud](/TOC-tidb-cloud.md)
+- [TOC](/TOC.md)
+- [TiDB Features](/basic-features.md)
+- [Cached Tables](/cached-tables.md)
+- [Use Dumpling to Export Data](/dumpling-overview.md)
+- [Non-Transactional DML Statements](/non-transactional-dml.md)
+- [Read Historical Data Using the System Variable `tidb_snapshot`](/read-historical-data.md)
+- [FLASHBACK CLUSTER](/sql-statements/sql-statement-flashback-cluster.md)
+- [FLUSH TABLES](/sql-statements/sql-statement-flush-tables.md)
+- [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [Use Stale Read](/develop/dev-guide-use-stale-read.md)
-- [TiDB 2.1 RC5 Release Notes](/releases/release-2.1-rc.5.md)
+- [Temporary Tables](/temporary-tables.md)
+- [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+- [TiDB 5.2.2 Release Notes](/releases/release-5.2.2.md)
+- [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
+- [TiDB 5.1.5 Release Notes](/releases/release-5.1.5.md)
+- [TiDB 5.0.3 Release Notes](/releases/release-5.0.3.md)
+- [TiDB 4.0.12 Release Notes](/releases/release-4.0.12.md)
+- [TiDB 4.0.11 Release Notes](/releases/release-4.0.11.md)
+- [TiDB 4.0.5 Release Notes](/releases/release-4.0.5.md)
+- [TiDB 3.0.11 Release Notes](/releases/release-3.0.11.md)
+- [TiDB 2.1.11 Release Notes](/releases/release-2.1.11.md)
+- [TiDB 2.1.10 Release Notes](/releases/release-2.1.10.md)
+- [TiDB 2.0.4 Release Notes](/releases/release-2.0.4.md)
+
+### tidb_source_id
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_stats_cache_mem_quota
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
+- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+
+### tidb_stats_load_pseudo_timeout
+
+Referenced in:
+
+- [Introduction to Statistics](/statistics.md)
+- [System Variables](/system-variables.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
+
+### tidb_stats_load_sync_wait
+
+Referenced in:
+
+- [Introduction to Statistics](/statistics.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
+
+### tidb_stmt_summary_enable_persistent
+
+Referenced in:
+
+- [Statement Summary Tables](/statement-summary-tables.md)
+- [System Variables](/system-variables.md)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
+
+### tidb_stmt_summary_file_max_backups
+
+Referenced in:
+
+- [Statement Summary Tables](/statement-summary-tables.md)
+- [System Variables](/system-variables.md)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
+
+### tidb_stmt_summary_file_max_days
+
+Referenced in:
+
+- [Statement Summary Tables](/statement-summary-tables.md)
+- [System Variables](/system-variables.md)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
+
+### tidb_stmt_summary_file_max_size
+
+Referenced in:
+
+- [Statement Summary Tables](/statement-summary-tables.md)
+- [System Variables](/system-variables.md)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
+
+### tidb_stmt_summary_filename
+
+Referenced in:
+
+- [Statement Summary Tables](/statement-summary-tables.md)
+- [System Variables](/system-variables.md)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
 ### tidb_stmt_summary_history_size
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statement Summary Tables](/statement-summary-tables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 4.0.0-rc.2 Release Notes](/releases/release-4.0.0-rc.2.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### tidb_stmt_summary_internal_query
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statement Summary Tables](/statement-summary-tables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 4.0.0-rc.2 Release Notes](/releases/release-4.0.0-rc.2.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### tidb_stmt_summary_max_sql_length
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Slow Queries Page of TiDB Dashboard](/dashboard/dashboard-slow-query.md)
+- [SLOW_QUERY](/information-schema/information-schema-slow-query.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statement Summary Tables](/statement-summary-tables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 4.0.0-rc.2 Release Notes](/releases/release-4.0.0-rc.2.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### tidb_stmt_summary_max_stmt_count
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SQL Statements Page of TiDB Dashboard](/dashboard/dashboard-statement-list.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statement Summary Tables](/statement-summary-tables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 4.0.0-rc.2 Release Notes](/releases/release-4.0.0-rc.2.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 5.2 Release Notes](/releases/release-5.2.0.md)
+- [TiDB 5.1.1 Release Notes](/releases/release-5.1.1.md)
+- [TiDB 5.0.4 Release Notes](/releases/release-5.0.4.md)
+- [TiDB 4.0.14 Release Notes](/releases/release-4.0.14.md)
 
 ### tidb_stmt_summary_refresh_interval
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [Statement Summary Tables](/statement-summary-tables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 4.0.0-rc.2 Release Notes](/releases/release-4.0.0-rc.2.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+
+### tidb_store_batch_size
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+- [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
 ### tidb_store_limit
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Error Codes and Troubleshooting](/error-codes.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB Configuration File](/tidb-configuration-file.md)
-- [TiDB 3.0.0-rc.1 Release Notes](/releases/release-3.0.0-rc.1.md)
+- [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
 
-### tidb_tbl_cache_size
+### tidb_streamagg_concurrency
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+
+### tidb_super_read_only
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 5.4.1 Release Notes](/releases/release-5.4.1.md)
+- [TiDB 5.3.1 Release Notes](/releases/release-5.3.1.md)
+
+### tidb_sysdate_is_now
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
+
+### tidb_sysproc_scan_concurrency
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_table_cache_lease
+
+Referenced in:
+
+- [Cached Tables](/cached-tables.md)
+- [System Variables](/system-variables.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
 
 ### tidb_tmp_table_max_size
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 - [Temporary Tables](/temporary-tables.md)
-- [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 
 ### tidb_top_sql_max_meta_count
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [Top SQL](/dashboard/top-sql.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
 
 ### tidb_top_sql_max_time_series_count
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [Top SQL](/dashboard/top-sql.md)
-- [TiDB 5.4.0 Release Notes](/releases/release-5.4.0.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
+
+### tidb_track_aggregate_memory_usage
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+
+### tidb_tso_client_batch_max_wait_time
+
+Referenced in:
+
+- [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
+
+### tidb_tso_client_rpc_mode
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+
+### tidb_ttl_delete_batch_size
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_ttl_delete_rate_limit
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_ttl_delete_worker_count
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
+- [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
+- [TiDB 8.1.2 Release Notes](/releases/release-8.1.2.md)
+- [TiDB 7.1.6 Release Notes](/releases/release-7.1.6.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_ttl_job_enable
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
+- [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
+- [TiDB 8.1.2 Release Notes](/releases/release-8.1.2.md)
+- [TiDB 7.5.5 Release Notes](/releases/release-7.5.5.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_ttl_job_schedule_window_end_time
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_ttl_job_schedule_window_start_time
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_ttl_running_tasks
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
+- [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
+
+### tidb_ttl_scan_batch_size
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_ttl_scan_worker_count
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
+- [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### tidb_txn_assertion_level
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
+
+### tidb_txn_commit_batch_size
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
+
+### tidb_txn_entry_size_limit
+
+Referenced in:
+
+- [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
+- [System Variables](/system-variables.md)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [Troubleshoot TiDB Lightning](/tidb-lightning/troubleshoot-tidb-lightning.md)
+- [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 
 ### tidb_txn_mode
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
+- [Optimistic Transactions and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
 - [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
-- [TiDB Transaction Overview](/transaction-overview.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Configuration File](/tidb-configuration-file.md)
+- [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
+- [Transactions](/transaction-overview.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
+- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
 - [TiDB 3.0.8 Release Notes](/releases/release-3.0.8.md)
+- [TiDB 3.0.4 Release Notes](/releases/release-3.0.4.md)
 
 ### tidb_use_plan_baselines
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [SQL Plan Management](/sql-plan-management.md)
+- [SQL Plan Management (SPM)](/sql-plan-management.md)
+- [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 4.0.0-rc.1 Release Notes](/releases/release-4.0.0-rc.1.md)
 
 ### tidb_wait_split_region_finish
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Split Region](/sql-statements/sql-statement-split-region.md)
 - [System Variables](/system-variables.md)
-- [TiDB 2.1 RC5 Release Notes](/releases/release-2.1-rc.5.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB 3.0.1 Release Notes](/releases/release-3.0.1.md)
 
 ### tidb_wait_split_region_timeout
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Split Region](/sql-statements/sql-statement-split-region.md)
 - [System Variables](/system-variables.md)
-- [TiDB 2.1 RC5 Release Notes](/releases/release-2.1-rc.5.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 
 ### tidb_window_concurrency
 
 Referenced in:
 
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [System Variables](/system-variables.md)
-
-### tidb_window_pipelined_threshold
-
-Referenced in:
-
-- [System Variables](/system-variables.md)
-
-### tidb_window_pipelined_threshold_size
-
-Referenced in:
-
-- [System Variables](/system-variables.md)
-
-### tidb_window_size
-
-Referenced in:
-
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
 
 ### tiflash_fastscan
 
 Referenced in:
 
-- [Basic Features](/basic-features.md)
-- [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
 - [System Variables](/system-variables.md)
-- [TiFlash Disk Spill](/tiflash/tiflash-spill-disk.md)
-- [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-- [Use FastScan to Accelerate TiFlash Queries](/tiflash/use-fastscan.md)
-- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
-- [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
-- [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
+- [Use FastScan](/tiflash/use-fastscan.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
-- [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 
 ### tiflash_fine_grained_shuffle_batch_size
 
@@ -2862,12 +4198,19 @@ Referenced in:
 - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
 
+### tiflash_hashagg_preaggregation_mode
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+
 ### tiflash_mem_quota_query_per_node
 
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [TiFlash Disk Spill](/tiflash/tiflash-spill-disk.md)
+- [TiFlash Spill to Disk](/tiflash/tiflash-spill-disk.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 
 ### tiflash_query_spill_ratio
@@ -2875,24 +4218,17 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [TiFlash Disk Spill](/tiflash/tiflash-spill-disk.md)
+- [TiFlash Spill to Disk](/tiflash/tiflash-spill-disk.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 
 ### tiflash_replica_read
 
 Referenced in:
 
-- [Basic Features](/basic-features.md)
+- [TiDB Features](/basic-features.md)
+- [System Variables](/system-variables.md)
 - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
-- [System Variables](/system-variables.md)
 - [TiDB 7.3.0 Release Notes](/releases/release-7.3.0.md)
-
-### tiflash_hashagg_preaggregation_mode
-
-Referenced in:
-
-- [System Variables](/system-variables.md)
-- [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
 
 ### tikv_client_read_timeout
 
@@ -2906,62 +4242,60 @@ Referenced in:
 
 Referenced in:
 
-- [Configure Time Zone](/configure-time-zone.md)
+- [Time Zone Support](/configure-time-zone.md)
 - [Date and Time Types](/data-type-date-and-time.md)
-- [Prepared Plan Cache](/sql-prepared-plan-cache.md)
-- [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
+- [TiDB 3.0.8 Release Notes](/releases/release-3.0.8.md)
 - [TiDB 2.1.8 Release Notes](/releases/release-2.1.8.md)
-
-### timestamp
-
-Referenced in:
-
-- [Analyze Slow Queries](/analyze-slow-queries.md)
-- [Back up and Restore a Snapshot of TiDB Cluster Data](/br/br-snapshot-manual.md)
-- [Back up and Restore Incremental Data](/br/br-incremental-guide.md)
-- [Dumpling Overview](/dumpling-overview.md)
-- [Log Redaction](/log-redaction.md)
-- [Partitioned Table](/partitioned-table.md)
-- [Point-in-Time Recovery](/br/br-pitr-manual.md)
-- [System Variables](/system-variables.md)
-- [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
-- [Time Service Overview](/tso.md)
-- [Time To Live (TTL)](/time-to-live.md)
 
 ### transaction_isolation
 
 Referenced in:
 
+- [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
+- [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
 - [SET TRANSACTION](/sql-statements/sql-statement-set-transaction.md)
 - [System Variables](/system-variables.md)
-- [Third-Party Tool Compatibility](/develop/dev-guide-third-party-tools-compatibility.md)
-- [TiDB 6.0.0-DMR Release Notes](/releases/release-6.0.0-dmr.md)
+- [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
 
 ### tx_isolation
 
 Referenced in:
 
-- [Performance Tuning Package](/performance-tuning-practices.md)
+- [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+- [System Variables](/system-variables.md)
+
+### tx_isolation_one_shot
+
+Referenced in:
+
+- [System Variables](/system-variables.md)
+
+### tx_read_ts
+
+Referenced in:
+
 - [System Variables](/system-variables.md)
 
 ### txn_scope
 
 Referenced in:
 
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [Resource Control](/tidb-resource-control.md)
 - [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB Configuration File](/tidb-configuration-file.md)
+- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
 
 ### validate_password.check_user_name
 
 Referenced in:
 
 - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
-- [System Variables](/system-variables.md)
 - [TiDB Password Management](/password-management.md)
+- [System Variables](/system-variables.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### validate_password.dictionary
@@ -2969,9 +4303,9 @@ Referenced in:
 Referenced in:
 
 - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
+- [TiDB Password Management](/password-management.md)
 - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
 - [System Variables](/system-variables.md)
-- [TiDB Password Management](/password-management.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### validate_password.enable
@@ -2979,10 +4313,10 @@ Referenced in:
 Referenced in:
 
 - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiDB Password Management](/password-management.md)
 - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
 - [System Variables](/system-variables.md)
-- [TiDB Password Management](/password-management.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### validate_password.length
@@ -2990,9 +4324,9 @@ Referenced in:
 Referenced in:
 
 - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
 - [TiDB Password Management](/password-management.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### validate_password.mixed_case_count
@@ -3000,9 +4334,9 @@ Referenced in:
 Referenced in:
 
 - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
 - [TiDB Password Management](/password-management.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### validate_password.number_count
@@ -3010,9 +4344,9 @@ Referenced in:
 Referenced in:
 
 - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
 - [TiDB Password Management](/password-management.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### validate_password.policy
@@ -3020,9 +4354,9 @@ Referenced in:
 Referenced in:
 
 - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
 - [TiDB Password Management](/password-management.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
 ### validate_password.special_char_count
@@ -3030,20 +4364,16 @@ Referenced in:
 Referenced in:
 
 - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
 - [TiDB Password Management](/password-management.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
 
-### version
+### version_comment
 
 Referenced in:
 
-- [Ecosystem Tool User Guide](/ecosystem-tool-user-guide.md)
-- [Foreign Key](/foreign-key.md)
 - [System Variables](/system-variables.md)
-- [Troubleshoot Out of Memory Errors](/troubleshoot-tidb-oom.md)
-- [Upgrade Monitoring Services](/upgrade-monitoring-services.md)
 
 ### version_compile_machine
 
@@ -3061,17 +4391,20 @@ Referenced in:
 
 Referenced in:
 
-- [Best Practices for Java Applications](/best-practices/java-app-best-practices.md)
+- [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
-- [Limited SQL Features in TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md)
-- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
 - [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
+- [TiDB Cluster Management FAQs](/faq/manage-cluster-faq.md)
+- [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
+- [System Variables](/system-variables.md)
+- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+- [TiKV Configuration File](/tikv-configuration-file.md)
 - [TiProxy Overview](/tiproxy/tiproxy-overview.md)
 - [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
-- [Troubleshoot Out of Memory Errors](/troubleshoot-tidb-oom.md)
-- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
+- [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
+- [TiDB 3.0.6 Release Notes](/releases/release-3.0.6.md)
 - [TiDB 3.0 Beta Release Notes](/releases/release-3.0-beta.md)
+- [TiDB 3.0 GA Release Notes](/releases/release-3.0-ga.md)
 
 ### warning_count
 
@@ -3084,5 +4417,6 @@ Referenced in:
 
 Referenced in:
 
-- [System Variables](/system-variables.md)
 - [Window Functions](/functions-and-operators/window-functions.md)
+- [System Variables](/system-variables.md)
+
