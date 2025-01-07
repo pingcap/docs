@@ -5,7 +5,9 @@ summary: Learn how to configure TiProxy.
 
 # TiProxy Configuration File
 
-This document introduces the configuration parameters related to the deployment and use of TiProxy. The following is an example configuration:
+This document introduces the configuration parameters related to the deployment and use of TiProxy. For the configurations of TiUP deployment topology, see [tiproxy-servers configurations](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers).
+
+The following is an example configuration:
 
 ```toml
 [proxy]
@@ -43,13 +45,13 @@ Configuration for SQL port.
 
 + Default value: `0.0.0.0:6000`
 + Support hot-reload: no
-+ SQL gateway address. The format is `<ip>:<port>`.
++ The listening address of the SQL service. The format is `<ip>:<port>`. This configuration item is automatically set when you deploy TiProxy using TiUP or TiDB Operator.
 
 #### `advertise-addr`
 
 + Default value: `""`
 + Support hot-reload: no
-+ Specifies the address that clients use to connect to this TiProxy instance. This configuration item is automatically set when you deploy TiProxy using TiUP or TiDB Operator. If not set, the external IP address of the TiProxy instance is used.
++ Specifies the address that other components use to connect to this TiProxy instance. This address only contains the host name, not the port. This address might be different from the host name in [`addr`](#addr). For example, if the `Subject Alternative Name` in TiProxy's TLS certificate contains only the domain name, other components will fail to connect to TiProxy via IP. This configuration item is automatically set when you deploy TiProxy using TiUP or TiDB Operator. If not set, the external IP address of the TiProxy instance is used.
 
 #### `graceful-wait-before-shutdown`
 
@@ -135,6 +137,15 @@ High availability configurations for TiProxy.
 + Default value: `""`
 + Support hot-reload: no
 + Specifies the virtual IP address in the CIDR format, such as `"10.0.1.10/24"`. In a cluster with multiple TiProxy instances, only one instance binds to the virtual IP. If this instance goes offline, another TiProxy instance will automatically bind to the IP, ensuring clients can always connect to an available TiProxy through the virtual IP.
+
+The following is an example configuration:
+
+```yaml
+server_configs:
+  tiproxy:
+    ha.virtual-ip: "10.0.1.10/24"
+    ha.interface: "eth0"
+```
 
 > **Note:**
 >
