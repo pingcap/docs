@@ -96,7 +96,7 @@ Referenced in:
 
 Referenced in:
 
-- [AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>](/auto-random.md)
+- [AUTO_RANDOM](/auto-random.md)
 - [Insert Data](/develop/dev-guide-insert-data.md)
 - [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
 - [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
@@ -248,7 +248,7 @@ Referenced in:
 Referenced in:
 
 - [AUTO_INCREMENT](/auto-increment.md)
-- [AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>](/auto-random.md)
+- [AUTO_RANDOM](/auto-random.md)
 - [Error Codes and Troubleshooting](/error-codes.md)
 - [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
 - [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
@@ -263,7 +263,7 @@ Referenced in:
 Referenced in:
 
 - [AUTO_INCREMENT](/auto-increment.md)
-- [AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>](/auto-random.md)
+- [AUTO_RANDOM](/auto-random.md)
 - [Error Codes and Troubleshooting](/error-codes.md)
 - [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
 - [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
@@ -513,7 +513,7 @@ Referenced in:
 
 Referenced in:
 
-- [AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>](/auto-random.md)
+- [AUTO_RANDOM](/auto-random.md)
 - [Connect to TiDB with mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
 - [Information Functions](/functions-and-operators/information-functions.md)
 - [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
@@ -4419,4 +4419,3 @@ Referenced in:
 
 - [Window Functions](/functions-and-operators/window-functions.md)
 - [System Variables](/system-variables.md)
-
