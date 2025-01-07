@@ -773,11 +773,11 @@ Referenced in:
 - [Connect to TiDB with mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
 - [Maintain DM Clusters Using OpenAPI](/dm/dm-open-api.md)
 - [System Variables](/system-variables.md)
-- [Get Started with TiDB + AI via Python](/vector-search-get-started-using-python.md)
-- [Integrate TiDB Vector Search with Jina AI Embeddings API](/vector-search-integrate-with-jinaai-embedding.md)
-- [Integrate Vector Search with LangChain](/vector-search-integrate-with-langchain.md)
-- [Integrate Vector Search with LlamaIndex](/vector-search-integrate-with-llamaindex.md)
-- [Integrate TiDB Vector Search with SQLAlchemy](/vector-search-integrate-with-sqlalchemy.md)
+- [Get Started with TiDB + AI via Python](/vector-search/vector-search-get-started-using-python.md)
+- [Integrate TiDB Vector Search with Jina AI Embeddings API](/vector-search/vector-search-integrate-with-jinaai-embedding.md)
+- [Integrate Vector Search with LangChain](/vector-search/vector-search-integrate-with-langchain.md)
+- [Integrate Vector Search with LlamaIndex](/vector-search/vector-search-integrate-with-llamaindex.md)
+- [Integrate TiDB Vector Search with SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
 
 ### ssl_cert
 
@@ -2243,8 +2243,6 @@ Referenced in:
 
 Referenced in:
 
-- [TOC-tidb-cloud](/TOC-tidb-cloud.md)
-- [TOC](/TOC.md)
 - [DR Solution Based on Primary and Secondary Clusters](/dr-secondary-cluster.md)
 - [Usage Scenarios of Stale Read](/stale-read.md)
 - [System Variables](/system-variables.md)
@@ -3408,8 +3406,6 @@ Referenced in:
 
 Referenced in:
 
-- [TOC-tidb-cloud](/TOC-tidb-cloud.md)
-- [TOC](/TOC.md)
 - [Stale Read](/develop/dev-guide-use-stale-read.md)
 - [Usage Scenarios of Stale Read](/stale-read.md)
 - [System Variables](/system-variables.md)
@@ -3747,8 +3743,6 @@ Referenced in:
 
 Referenced in:
 
-- [TOC-tidb-cloud](/TOC-tidb-cloud.md)
-- [TOC](/TOC.md)
 - [TiDB Features](/basic-features.md)
 - [Cached Tables](/cached-tables.md)
 - [Use Dumpling to Export Data](/dumpling-overview.md)
@@ -4419,3 +4413,4 @@ Referenced in:
 
 - [Window Functions](/functions-and-operators/window-functions.md)
 - [System Variables](/system-variables.md)
+
