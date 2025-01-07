@@ -134,9 +134,9 @@ For each table with a TTL attribute, TiDB internally schedules a background job 
 ALTER TABLE orders TTL_JOB_INTERVAL = '48h';
 ```
 
-`TTL_JOB_INTERVAL` is set to `24h` by default. The default value is `1h` in v8.5 and earlier versions.
+`TTL_JOB_INTERVAL` is set to `24h` by default. In v8.5 and earlier versions, the default value is `1h`.
 
-When executing a TTL job, TiDB splits the table into tasks, with the Region as the smallest unit. These tasks are executed distributedly. Typically, a single table can have up to 64 tasks. However, in larger clusters with more than 64 TiKV instances, the maximum number of tasks for a single table is equal to the number of TiKV instances. Note that not all TTL jobs for every type of table can be split into tasks. For more details on which table types are exceptions, see [Limitations](#limitations).
+When executing a TTL job, TiDB splits the table into tasks, with the Region as the smallest unit. These tasks are executed distributedly. Typically, a single table can have up to 64 tasks. However, in larger clusters with more than 64 TiKV instances, the maximum number of tasks for a single table is equal to the number of TiKV instances. Note that not the TTL jobs of all types of tables can be split into tasks. For more details on which table types are exceptions, see [Limitations](#limitations).
 
 TiDB also limits the number of concurrent TTL tasks at the cluster level. You can adjust this concurrency by setting the system variable [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700).
 
