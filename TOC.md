@@ -397,6 +397,7 @@
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
+  - [Batch Processing](/batch-processing.md)
   - Use PD Microservices
     - [PD Microservices Overview](/pd-microservices.md)
     - [Scale PD Microservice Nodes Using TiUP](/scale-microservices-using-tiup.md)
@@ -938,6 +939,7 @@
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
       - [Non-Transactional DML Statements](/non-transactional-dml.md)
+      - [Pipelined DML](/pipelined-dml.md)
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
