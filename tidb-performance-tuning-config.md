@@ -42,7 +42,7 @@ SET GLOBAL tidb_instance_plan_cache_max_size=2GiB;
 SET GLOBAL tidb_enable_non_prepared_plan_cache=on;
 SET GLOBAL tidb_ignore_prepared_cache_close_stmt=on;
 SET GLOBAL tidb_analyze_column_options='ALL';
-SET GLOBAL tidb_enable_inl_join_inner_multi_pattern=on;
+SET GLOBAL tidb_stats_load_sync_wait=2000;
 SET GLOBAL tidb_opt_derive_topn=on;
 SET GLOBAL tidb_runtime_filter_mode=LOCAL;
 SET GLOBAL tidb_opt_enable_mpp_shared_cte_execution=on;
@@ -60,7 +60,7 @@ The following table outlines the impact of specific system variable configuratio
 | [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature to reduce compile costs for applications that do not use prepared statements. | N/A |
 | [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Cache plans for applications that use prepared statements but close the plan after each execution. | N/A |
 | [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)| Collect statistics for all columns to avoid suboptimal execution plans due to missing column statistics. By default, TiDB only collects statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns). | Setting this variable to `'ALL'` can cause more resource usage for the `ANALYZE TABLE` operation compared with the default value `'PREDICATE'`. |
-| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)| Enable Index Join support when the inner table has `Selection` or `Projection` operators on it. | N/A | 
+| [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)| Increase the timeout for synchronously loading statistics from the default 100 milliseconds to 2 seconds. This ensures TiDB loads the necessary statistics before query compilation. | Increasing this value leads to a longer synchronization wait time before query compilation. |
 | [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)| Enable the optimization rule of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md). | This is limited to the `ROW_NUMBER()` window function. | 
 | [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)| Enable [Runtime Filter](/runtime-filter.md#runtime-filter-mode) in the local mode to improve hash join efficiency. | The variable is introduced in v7.2.0 and is disabled by default for safety. | 
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)| Enable non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) pushdown to TiFlash. | This is an experimental feature. | 
@@ -77,20 +77,6 @@ The following describes the optimizer control configurations that enable additio
 - [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v657-and-v730): Plan cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
 - [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v654-and-v730): The optimizer selects `IndexJoin` when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator.
 - [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810): The optimizer chooses index merge automatically if the optimizer can choose the single index scan method (other than full table scan) for a query plan.
-
-### TiDB configurations
-
-Add the following configuration items to the TiDB configuration file:
-
-```toml
-[performance]
-force-init-stats = true
-lite-init-stats = false
-```
-
-| Configuration item | Description | Note | 
-| ---------| ---- | ----|
-| [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710) and [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Ensure the comprehensive loading of table statistics during TiDB startup, which improves initial query optimization performance. | Might increase startup duration and memory usage. |
 
 ### TiKV configurations
 
