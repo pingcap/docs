@@ -99,8 +99,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | Advanced SQL features | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Vector search](/vector-search/vector-search-overview.md) |  E |  N |  N  | N | N | N | N | N | N | N |
-| [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | E | E |
-| [Non-prepared statement cache](/sql-plan-cache.md) | Y | Y | Y | E | N | N | N | N | N | N |
+| [SQL Plan cache](/sql-plan-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | E | E |
 | [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) | E | N | N | N | N | N | N | N | N | N |
 | [SQL binding](/sql-plan-management.md#sql-binding) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Cross-database binding](/sql-plan-management.md#cross-database-binding) | Y | Y | N | N | N | N | N | N | N | N |
