@@ -1829,6 +1829,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Value options: `"standard"`, `"bulk"`
 - This variable controls the execution mode of DML statements.
     - `"standard"` indicates the standard DML execution mode, where TiDB transactions are cached in memory before being committed. This mode is suitable for high-concurrency transaction scenarios with potential conflicts and is the default recommended execution mode.
+<<<<<<< HEAD
     - `"bulk"` indicates the bulk DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB.
         - During the execution of TiDB transactions, the data is not fully cached in the TiDB memory, but is continuously written to TiKV to reduce memory usage and smooth the write pressure.
         - Only `INSERT`, `UPDATE`, `REPLACE`, and `DELETE` statements are affected by the `"bulk"` mode. Due to the pipelined execution in `"bulk"` mode, the usage of `INSERT IGNORE ... ON DUPLICATE UPDATE ...` might result in a `Duplicate entry` error when updates cause conflicts. In contrast, in `"standard"` mode, because the `IGNORE` keyword is set, this error would be ignored and not be returned to the user.
@@ -1841,6 +1842,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
         - When executing large transactions in the `"bulk"` mode, the transaction duration might be long. For transactions in this mode, the maximum TTL of the transaction lock is the greater value between [`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl) and 24 hours. Additionally, if the transaction execution time exceeds the value set by [`tidb_gc_max_wait_time`](#tidb_gc_max_wait_time-new-in-v610), the GC might force a rollback of the transaction, leading to its failure.
         - When TiDB executes transactions in the `"bulk"` mode, transaction size is not limited by the TiDB configuration item [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit).
         - This mode is implemented by the Pipelined DML feature. For detailed design and GitHub issues, see [Pipelined DML](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2024-01-09-pipelined-DML.md) and [#50215](https://github.com/pingcap/tidb/issues/50215).
+=======
+    - `"bulk"` indicates the pipelined DML execution mode, which is suitable for scenarios where a large amount of data is written, causing excessive memory usage in TiDB. For more information, see [Pipelined DML](/pipelined-dml.md).
+>>>>>>> 0d5fe90688 (doc: batch processing overview and pipelined dml (#19818))
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
