@@ -66,8 +66,8 @@ You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configurati
 
 | Type       | Upper limit   |
 |:----------|:----------|
-| CHAR       | 256 characters      |
-| BINARY     | 256 characters      |
+| CHAR       | 255 characters      |
+| BINARY     | 255 characters      |
 | VARBINARY  | 65535 characters    |
 | VARCHAR    | 16383 characters    |
 | TEXT       | 6 MB                |
