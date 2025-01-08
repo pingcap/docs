@@ -2198,7 +2198,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature.
+- This variable controls whether to enable the [Non-prepared plan cache](/sql-plan-cache.md) feature.
 - Enabling this feature might incur additional memory and CPU overhead and might not be suitable for all situations. Please determine whether to enable this feature according to your actual scenario.
 
 ### tidb_enable_non_prepared_plan_cache_for_dml <span class="version-mark">New in v7.1.0</span>
@@ -2212,7 +2212,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`.
-- This variable controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature for DML statements.
+- This variable controls whether to enable the [Non-prepared plan cache](/sql-plan-cache.md) feature for DML statements.
 
 ### tidb_enable_gogc_tuner <span class="version-mark">New in v6.4.0</span>
 
@@ -2425,7 +2425,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the Instance Plan Cache feature. This feature implements instance-level execution plan cache, which allows all sessions within the same TiDB instance to share the execution plan cache, thereby improving memory utilization. Before enabling Instance Plan Cache, it is recommended to disable session-level [Prepared execution plan cache](/sql-prepared-plan-cache.md) and [Non-prepared execution plan cache](/sql-non-prepared-plan-cache.md).
+- This variable controls whether to enable the Instance Plan Cache feature. This feature implements instance-level execution plan cache, which allows all sessions within the same TiDB instance to share the execution plan cache, thereby improving memory utilization. Before enabling Instance Plan Cache, it is recommended to disable session-level [Prepared execution plan cache](/sql-plan-cache.md) and [Non-prepared execution plan cache](/sql-plan-cache.md).
 
 ### tidb_enable_ordered_result_mode
 
@@ -2555,7 +2555,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
-- Determines whether to enable [Prepared Plan Cache](/sql-prepared-plan-cache.md). When it is enabled, the execution plans of `Prepare` and `Execute` are cached so that the subsequent executions skip optimizing the execution plans, which brings performance improvement.
+- Determines whether to enable [Prepared Plan Cache](/sql-plan-cache.md). When it is enabled, the execution plans of `Prepare` and `Execute` are cached so that the subsequent executions skip optimizing the execution plans, which brings performance improvement.
 - This setting was previously a `tidb.toml` option (`prepared-plan-cache.enabled`), but changed to a system variable starting from TiDB v6.1.0.
 
 ### tidb_enable_prepared_plan_cache_memory_monitor <span class="version-mark">New in v6.4.0</span>
@@ -2564,7 +2564,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
-- This variable controls whether to count the memory consumed by the execution plans cached in the Prepared Plan Cache. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache).
+- This variable controls whether to count the memory consumed by the execution plans cached in the Prepared Plan Cache. For details, see [Memory management of Prepared Plan Cache](/sql-plan-cache.md#memory-management-of-prepared-plan-cache).
 
 ### tidb_enable_pseudo_for_outdated_stats <span class="version-mark">New in v5.3.0</span>
 
@@ -3162,7 +3162,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 100000]`
-- This variable controls the maximum number of execution plans that can be cached by [Non-prepared plan cache](/sql-non-prepared-plan-cache.md).
+- This variable controls the maximum number of execution plans that can be cached by [Non-prepared plan cache](/sql-plan-cache.md).
 
 ### tidb_pre_split_regions <span class="version-mark">New in v8.4.0</span>
 
@@ -3344,7 +3344,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether to ignore the commands for closing prepared statement cache.
-- When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement).
+- When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement).
 
 ### tidb_index_join_batch_size
 
@@ -4932,7 +4932,7 @@ SHOW WARNINGS;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `2097152` (which is 2 MiB)
 - Range: `[0, 9223372036854775807]`, in bytes. The memory format with the units "KiB|MiB|GiB|TiB" is also supported. `0` means no limit.
-- This variable controls the maximum size of a plan that can be cached in prepared or non-prepared plan cache. If the size of a plan exceeds this value, the plan will not be cached. For more details, see [Memory management of prepared plan cache](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache) and [Non-prepared plan cache](/sql-plan-management.md#usage).
+- This variable controls the maximum size of a plan that can be cached in prepared or non-prepared plan cache. If the size of a plan exceeds this value, the plan will not be cached. For more details, see [Memory management of prepared plan cache](/sql-plan-cache.md#memory-management-of-prepared-plan-cache) and [Non-prepared plan cache](/sql-plan-management.md#usage).
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
@@ -4965,7 +4965,7 @@ SHOW WARNINGS;
 - Type: Float
 - Default value: `0.1`
 - Range: `[0, 1]`
-- The threshold at which the prepared plan cache triggers a memory protection mechanism. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md).
+- The threshold at which the prepared plan cache triggers a memory protection mechanism. For details, see [Memory management of Prepared Plan Cache](/sql-plan-cache.md).
 - This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0.
 
 ### tidb_prepared_plan_cache_size <span class="version-mark">New in v6.1.0</span>
@@ -4980,7 +4980,7 @@ SHOW WARNINGS;
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 100000]`
-- The maximum number of plans that can be cached in a session. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md).
+- The maximum number of plans that can be cached in a session. For details, see [Memory management of Prepared Plan Cache](/sql-plan-cache.md).
 - This setting was previously a `tidb.toml` option (`prepared-plan-cache.capacity`), but changed to a system variable starting from TiDB v6.1.0.
 
 ### tidb_projection_concurrency
@@ -5328,7 +5328,7 @@ SHOW WARNINGS;
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 100000]`
-- This variable controls the maximum number of plans that can be cached. [Prepared plan cache](/sql-prepared-plan-cache.md) and [non-prepared plan cache](/sql-non-prepared-plan-cache.md) share the same cache.
+- This variable controls the maximum number of plans that can be cached. [Prepared plan cache](/sql-plan-cache.md) and [non-prepared plan cache](/sql-plan-cache.md) share the same cache.
 - When you upgrade from an earlier version to a v7.1.0 or later version, this variable remains the same value as [`tidb_prepared_plan_cache_size`](#tidb_prepared_plan_cache_size-new-in-v610)
 
 ### tidb_shard_allocate_step <span class="version-mark">New in v5.0</span>

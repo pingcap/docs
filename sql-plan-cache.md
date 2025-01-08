@@ -324,7 +324,7 @@ Non-Prepared Plan Cache has all limitations that Prepared Plan Cache has, and be
 Below are its limitations:
 
 - Queries or plans that are not supported by the Prepared plan cache are also not supported by the non-prepared plan cache.
-- Queries or plans that are not supported by the [Prepared plan cache](/sql-prepared-plan-cache.md) are also not supported by the non-prepared plan cache.
+- Queries or plans that are not supported by the [Prepared plan cache](/sql-plan-cache.md) are also not supported by the non-prepared plan cache.
 - Queries that contain complex operators such as `Window` or `Having` are not supported.
 - Queries that contain three or more `Join` tables or subqueries are not supported.
 - Queries that contain numbers or expressions directly after `ORDER BY` or `GROUP BY` are not supported, such as `ORDER BY 1` and `GROUP BY a+1`. Only `ORDER BY column_name` and `GROUP BY column_name` are supported.

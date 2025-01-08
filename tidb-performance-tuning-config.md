@@ -26,7 +26,7 @@ This guide describes the non-default settings, including their benefits and pote
 
 The following settings are commonly used to optimize TiDB performance:
 
-- Enhance execution plan cache, such as [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md), [Non-prepared plan cache](/sql-non-prepared-plan-cache.md), and [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
+- Enhance execution plan cache, such as [SQL Prepared Execution Plan Cache](/sql-plan-cache.md), [Non-prepared plan cache](/sql-plan-cache.md), and [Instance-level execution plan cache](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840).
 - Optimize the behavior of the TiDB optimizer by using [Optimizer Fix Controls](/optimizer-fix-controls.md).
 - Use the [Titan](/storage-engine/titan-overview.md) storage engine more aggressively.
 
@@ -57,7 +57,7 @@ The following table outlines the impact of specific system variable configuratio
 | System variable | Description | Note |
 | ---------| ---- | ----|
 | [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) and [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)| Use instance-level plan cache instead of session-level caching. This significantly improves performance for workloads with high connection counts or frequent prepared statement usage. | This is an experimental feature. Test in non-production environments first and monitor memory usage as the plan cache size increases. |
-| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature to reduce compile costs for applications that do not use prepared statements. | N/A |
+| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Enable the [Non-prepared plan cache](/sql-plan-cache.md) feature to reduce compile costs for applications that do not use prepared statements. | N/A |
 | [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Cache plans for applications that use prepared statements but close the plan after each execution. | N/A |
 | [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)| Collect statistics for all columns to avoid suboptimal execution plans due to missing column statistics. By default, TiDB only collects statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns). | Setting this variable to `'ALL'` can cause more resource usage for the `ANALYZE TABLE` operation compared with the default value `'PREDICATE'`. |
 | [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)| Enable Index Join support when the inner table has `Selection` or `Projection` operators on it. | N/A | 

@@ -362,8 +362,8 @@
         - [Distinct Optimization](/agg-distinct-optimization.md)
         - [Cost Model](/cost-model.md)
         - [Runtime Filter](/runtime-filter.md)
-      - [Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
-      - [Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
+      - [Prepared Execution Plan Cache](/sql-plan-cache.md)
+      - [Non-Prepared Execution Plan Cache](/sql-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)
       - [Optimizer Hints](/optimizer-hints.md)

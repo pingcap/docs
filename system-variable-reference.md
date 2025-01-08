@@ -449,7 +449,7 @@ Referenced in:
 - [Connect to TiDB with mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
 - [Information Functions](/functions-and-operators/information-functions.md)
 - [SHOW BUILTINS](/sql-statements/sql-statement-show-builtins.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#last_insert_id)
 - [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
 - [TiDB 3.1 RC Release Notes](/releases/release-3.1.0-rc.md)
@@ -469,8 +469,8 @@ Referenced in:
 Referenced in:
 
 - [Index Selection](/choose-index.md)
-- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#last_plan_from_cache-new-in-v40)
 - [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
 
@@ -524,7 +524,7 @@ Referenced in:
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [Optimizer Hints](/optimizer-hints.md)
 - [SQL Plan Management (SPM)](/sql-plan-management.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#max_execution_time)
 - [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
 - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
@@ -701,7 +701,7 @@ Referenced in:
 
 Referenced in:
 
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#sql_select_limit-new-in-v402)
 - [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
 
@@ -1709,7 +1709,7 @@ Referenced in:
 
 Referenced in:
 
-- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#tidb_enable_non_prepared_plan_cache)
 - [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
@@ -1722,7 +1722,7 @@ Referenced in:
 
 Referenced in:
 
-- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#tidb_enable_non_prepared_plan_cache_for_dml-new-in-v710)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 
@@ -1849,7 +1849,7 @@ Referenced in:
 Referenced in:
 
 - [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)
 - [TiDB Cloud Release Notes in 2022](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 - [TiDB Dashboard FAQs](/dashboard/dashboard-faq.md)
@@ -2357,7 +2357,7 @@ Referenced in:
 
 - [Performance Analysis and Tuning](/performance-tuning-methods.md)
 - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)
 - [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 - [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
@@ -2957,7 +2957,7 @@ Referenced in:
 
 - [Control Execution Plan](/control-execution-plan.md)
 - [Optimizer Fix Controls](/optimizer-fix-controls.md)
-- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)
 - [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 - [TiDB 7.2.0 Release Notes](/releases/release-7.2.0.md)
@@ -3135,7 +3135,7 @@ Referenced in:
 Referenced in:
 
 - [Partitioning](/partitioned-table.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#tidb_partition_prune_mode-new-in-v51)
 - [TiFlash Upgrade Guide](/tiflash-upgrade-guide.md)
 - [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
@@ -3181,8 +3181,8 @@ Referenced in:
 
 Referenced in:
 
-- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
 
@@ -3214,7 +3214,7 @@ Referenced in:
 
 Referenced in:
 
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
@@ -3517,8 +3517,8 @@ Referenced in:
 
 Referenced in:
 
-- [SQL Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Non-Prepared Execution Plan Cache](/sql-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)
 - [TiDB Cloud Sysbench Performance Test Report for TiDB v8.1.0](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
@@ -4105,7 +4105,7 @@ Referenced in:
 
 - [Date and Time Types](/data-type-date-and-time.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
-- [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+- [SQL Prepared Execution Plan Cache](/sql-plan-cache.md)
 - [System Variables](/system-variables.md#time_zone)
 - [Time Zone Support](/configure-time-zone.md)
 - [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
