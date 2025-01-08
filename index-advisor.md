@@ -16,7 +16,7 @@ In addition to recommending new indexes, TiDB also offers a feature to suggest d
 SQL command `RECOMMEND INDEX` is introduced for index advisor tasks.  Sub command `RUN` explores historical workloads and saves the recommendations in system tables. With option `FOR`,  the command targets particular SQL statement even if it was not executed in the past. The command also accepts extra options for advance control. 
 
 ```sql
-Recommend Index [Run | For <SQL> | <Options>]
+Recommend Index Run [ For <SQL> ] [<Options>] 
 ```
 
 ## Single Query Option
