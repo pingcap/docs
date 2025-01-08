@@ -10,7 +10,7 @@ summary: A list of all TiDB system variables and their references in the documen
 
 # System Variable Reference
 
-This document lists all TiDB system variables and the files that reference them in the documentation. View the [System Variables](/system-variables.md) for more details of each variable.
+This page lists the documents that reference TiDB system variables in documentation. You can view the [System Variables](/system-variables.md) for more details of each variable.
 
 ## Variable reference
 
