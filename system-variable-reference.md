@@ -295,6 +295,12 @@ Referenced in:
 - [System Variables](/system-variables.md#cte_max_recursion_depth)
 - [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
 
+### datadir
+
+Referenced in:
+
+- [System Variables](/system-variables.md#datadir)
+
 ### ddl_slow_threshold
 
 Referenced in:
@@ -392,6 +398,18 @@ Referenced in:
 - [Certificate-Based Authentication for Login](/certificate-authentication.md)
 - [System Variables](/system-variables.md#have_ssl)
 
+### hostname
+
+Referenced in:
+
+- [System Variables](/system-variables.md#hostname)
+
+### identity
+
+Referenced in:
+
+- [System Variables](/system-variables.md#identity-new-in-v530)
+
 ### init_connect
 
 Referenced in:
@@ -462,6 +480,12 @@ Referenced in:
 
 - [System Variables](/system-variables.md#last_sql_use_alloc-new-in-v640)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+
+### license
+
+Referenced in:
+
+- [System Variables](/system-variables.md#license)
 
 ### max_allowed_packet
 
@@ -577,6 +601,24 @@ Referenced in:
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#plugin_load)
 
+### port
+
+Referenced in:
+
+- [System Variables](/system-variables.md#port)
+
+### rand_seed1
+
+Referenced in:
+
+- [System Variables](/system-variables.md#rand_seed1)
+
+### rand_seed2
+
+Referenced in:
+
+- [System Variables](/system-variables.md#rand_seed2)
+
 ### require_secure_transport
 
 Referenced in:
@@ -598,6 +640,12 @@ Referenced in:
 
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#skip_name_resolve-new-in-v520)
+
+### socket
+
+Referenced in:
+
+- [System Variables](/system-variables.md#socket)
 
 ### sql_mode
 
@@ -916,6 +964,12 @@ Referenced in:
 
 - [System Variables](/system-variables.md#tidb_batch_insert)
 - [TiDB 2.0.6 Release Notes](/releases/release-2.0.6.md)
+
+### tidb_batch_pending_tiflash_count
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)
 
 ### tidb_broadcast_join_threshold_count
 
@@ -1562,6 +1616,12 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_enable_index_merge-new-in-v40)
 - [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
 
+### tidb_enable_index_merge_join
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_enable_index_merge_join)
+
 ### tidb_enable_inl_join_inner_multi_pattern
 
 Referenced in:
@@ -1590,6 +1650,12 @@ Referenced in:
 - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
 - [System Variables](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
+
+### tidb_enable_legacy_instance_scope
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_enable_legacy_instance_scope-new-in-v600)
 
 ### tidb_enable_list_partition
 
@@ -2230,6 +2296,12 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)
 - [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 
+### tidb_hash_exchange_with_new_collation
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_hash_exchange_with_new_collation)
+
 ### tidb_hash_join_concurrency
 
 Referenced in:
@@ -2388,6 +2460,12 @@ Referenced in:
 - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
 - [TiDB 4.0.2 Release Notes](/releases/release-4.0.2.md)
 
+### tidb_last_ddl_info
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_last_ddl_info-new-in-v600)
+
 ### tidb_last_plan_replayer_token
 
 Referenced in:
@@ -2404,6 +2482,12 @@ Referenced in:
 - [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 - [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
+
+### tidb_last_txn_info
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_last_txn_info-new-in-v409)
 
 ### tidb_load_based_replica_read_threshold
 
@@ -2555,6 +2639,12 @@ Referenced in:
 - [TiDB 6.5.10 Release Notes](/releases/release-6.5.10.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
 
+### tidb_mem_quota_apply_cache
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_mem_quota_apply_cache-new-in-v50)
+
 ### tidb_mem_quota_binding_cache
 
 Referenced in:
@@ -2600,6 +2690,18 @@ Referenced in:
 - [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
 - [TiDB 4.0.10 Release Notes](/releases/release-4.0.10.md)
 
+### tidb_memory_debug_mode_alarm_ratio
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_memory_debug_mode_alarm_ratio)
+
+### tidb_memory_debug_mode_min_heap_inuse
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_memory_debug_mode_min_heap_inuse)
+
 ### tidb_memory_usage_alarm_keep_record_num
 
 Referenced in:
@@ -2617,6 +2719,12 @@ Referenced in:
 - [TiDB Memory Control](/configure-memory-usage.md)
 - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
+
+### tidb_merge_join_concurrency
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_merge_join_concurrency)
 
 ### tidb_merge_partition_stats_concurrency
 
@@ -2651,6 +2759,12 @@ Referenced in:
 
 - [System Variables](/system-variables.md#tidb_min_paging_size-new-in-v620)
 - [TiDB 6.2.0 Release Notes](/releases/release-6.2.0.md)
+
+### tidb_mpp_store_fail_ttl
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_mpp_store_fail_ttl)
 
 ### tidb_multi_statement_mode
 
@@ -2707,6 +2821,12 @@ Referenced in:
 - [TiDB 5.4.2 Release Notes](/releases/release-5.4.2.md)
 - [TiDB 5.1.5 Release Notes](/releases/release-5.1.5.md)
 - [TiDB 4.0 GA Release Notes](/releases/release-4.0-ga.md)
+
+### tidb_opt_broadcast_cartesian_join
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_opt_broadcast_cartesian_join)
 
 ### tidb_opt_concurrency_factor
 
@@ -2885,6 +3005,12 @@ Referenced in:
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md#tidb_opt_memory_factor)
 
+### tidb_opt_mpp_outer_join_fixed_build_side
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_opt_mpp_outer_join_fixed_build_side-new-in-v510)
+
 ### tidb_opt_network_factor
 
 Referenced in:
@@ -2972,6 +3098,12 @@ Referenced in:
 
 - [System Variables](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+
+### tidb_opt_tiflash_concurrency_factor
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_opt_tiflash_concurrency_factor)
 
 ### tidb_opt_use_invisible_indexes
 
@@ -3135,6 +3267,12 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)
 - [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md)
 - [TiDB 6.3.0 Release Notes](/releases/release-6.3.0.md)
+
+### tidb_read_consistency
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_read_consistency-new-in-v540)
 
 ### tidb_read_staleness
 
@@ -3385,6 +3523,12 @@ Referenced in:
 - [TiDB Cloud Sysbench Performance Test Report for TiDB v8.1.0](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 - [TiDB 7.1.0 Release Notes](/releases/release-7.1.0.md)
+
+### tidb_shard_allocate_step
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_shard_allocate_step-new-in-v50)
 
 ### tidb_shard_row_id_bits
 
@@ -3645,6 +3789,12 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_store_limit-new-in-v304-and-v40)
 - [TiDB 5.4 Release Notes](/releases/release-5.4.0.md)
 
+### tidb_streamagg_concurrency
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_streamagg_concurrency)
+
 ### tidb_super_read_only
 
 Referenced in:
@@ -3702,6 +3852,12 @@ Referenced in:
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#tidb_top_sql_max_time_series_count-new-in-v600)
 - [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
+
+### tidb_track_aggregate_memory_usage
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tidb_track_aggregate_memory_usage)
 
 ### tidb_tso_client_batch_max_wait_time
 
@@ -3955,6 +4111,12 @@ Referenced in:
 - [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
 - [TiDB 2.1.8 Release Notes](/releases/release-2.1.8.md)
 
+### timestamp
+
+Referenced in:
+
+- [System Variables](/system-variables.md#timestamp)
+
 ### transaction_isolation
 
 Referenced in:
@@ -3970,6 +4132,18 @@ Referenced in:
 
 - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
 - [System Variables](/system-variables.md#tx_isolation)
+
+### tx_isolation_one_shot
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tx_isolation_one_shot)
+
+### tx_read_ts
+
+Referenced in:
+
+- [System Variables](/system-variables.md#tx_read_ts)
 
 ### txn_scope
 
@@ -4059,6 +4233,30 @@ Referenced in:
 - [System Variables](/system-variables.md#validate_passwordspecial_char_count-new-in-v650)
 - [TiDB Password Management](/password-management.md)
 - [TiDB 6.5.0 Release Notes](/releases/release-6.5.0.md)
+
+### version
+
+Referenced in:
+
+- [System Variables](/system-variables.md#version)
+
+### version_comment
+
+Referenced in:
+
+- [System Variables](/system-variables.md#version_comment)
+
+### version_compile_machine
+
+Referenced in:
+
+- [System Variables](/system-variables.md#version_compile_machine)
+
+### version_compile_os
+
+Referenced in:
+
+- [System Variables](/system-variables.md#version_compile_os)
 
 ### wait_timeout
 
