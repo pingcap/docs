@@ -168,7 +168,9 @@ FROM information_schema.cluster_tidb_index_usage
 WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0_1 + percentage_access_1_10 + percentage_access_10_20 + percentage_access_20_50 = 0;
 ```
 
-Users should be aware that the data in `tidb_index_usage` may be delayed by up to 5 minutes, and the usage data is reset whenever a TiDB node restarts. Additionally, index usage is only recorded if the table has valid statistics.
+> **Note:**
+>
+> Users should be aware that the data in `tidb_index_usage` may be delayed by up to 5 minutes, and the usage data is reset whenever a TiDB node restarts. Additionally, index usage is only recorded if the table has valid statistics.
 
 
 
