@@ -135,7 +135,7 @@ This example shows how users can inspect and update the index advisor's settings
 
 Here are some current limitations of the index recommendation feature, which we plan to address in the future:
 1. It does not support prepared statements, meaning `RECOMMEND INDEX RUN` cannot recommend indexes for queries executed through the `Prepare` and `Execute` protocol.
-2. It does not provide recommendations for deleting indexes. We need to merge the removing index logic (see below) to the `RECOOEND` comamnd in the future. 
+2. It does not provide recommendations for deleting indexes. We need to merge the removing index logic (see below) to the `RECOMMEND` command in the future. 
 3. A UI for the Index Advisor will be available in the future.
 
 # Removing Unused Indexes
