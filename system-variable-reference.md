@@ -4088,4 +4088,3 @@ Referenced in:
 
 - [System Variables](/system-variables.md#windowing_use_high_precision)
 - [Window Functions](/functions-and-operators/window-functions.md)
-
