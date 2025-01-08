@@ -719,7 +719,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_allow_function_for_expression_index
 
@@ -965,7 +965,7 @@ Referenced in:
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [SQL Plan Management (SPM)](/sql-plan-management.md)
 - [System Variables](/system-variables.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 - [TiDB 4.0 RC.1 Release Notes](/releases/release-4.0.0-rc.1.md)
 
 ### tidb_cdc_write_source
@@ -1239,7 +1239,7 @@ Referenced in:
 - [System Variables](/system-variables.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 - [TiDB 4.0 Beta Release Notes](/releases/release-4.0.0-beta.md)
 
 ### tidb_dml_type
@@ -1264,7 +1264,7 @@ Referenced in:
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
 - [Transactions](/transaction-overview.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_enable_analyze_snapshot
 
@@ -1280,7 +1280,7 @@ Referenced in:
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
 - [Transactions](/transaction-overview.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 - [TiDB 5.0 RC Release Notes](/releases/release-5.0.0-rc.md)
 
 ### tidb_enable_async_merge_global_stats
@@ -1373,7 +1373,7 @@ Referenced in:
 - [TiDB Database Schema Design Overview](/develop/dev-guide-schema-design-overview.md)
 - [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md)
 - [TiDB 6.4.0 Release Notes](/releases/release-6.4.0.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 - [TiDB 5.0 RC Release Notes](/releases/release-5.0.0-rc.md)
 
 ### tidb_enable_collect_execution_info
@@ -1588,7 +1588,7 @@ Referenced in:
 - [System Variables](/system-variables.md)
 - [TiDB 8.4.0 Release Notes](/releases/release-8.4.0.md)
 - [TiDB 6.1.0 Release Notes](/releases/release-6.1.0.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_enable_local_txn
 
@@ -1661,7 +1661,7 @@ Referenced in:
 - [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
 - [TiDB 5.3 Release Notes](/releases/release-5.3.0.md)
 - [TiDB 5.1 Release Notes](/releases/release-5.1.0.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_enable_noop_variables
 
@@ -1888,7 +1888,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_enable_table_partition
 
@@ -2040,7 +2040,7 @@ Referenced in:
 - [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_expensive_query_time_threshold
 
@@ -2092,7 +2092,7 @@ Referenced in:
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
 - [TiDB 8.3.0 Release Notes](/releases/release-8.3.0.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_gc_enable
 
@@ -2107,7 +2107,7 @@ Referenced in:
 - [Replicate Data Between Primary and Secondary Clusters](/replicate-between-primary-and-secondary-clusters.md)
 - [System Variables](/system-variables.md)
 - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_gc_life_time
 
@@ -2130,7 +2130,7 @@ Referenced in:
 - [Timeouts in TiDB](/develop/dev-guide-timeouts-in-tidb.md)
 - [Use Dumpling to Export Data](/dumpling-overview.md)
 - [TiDB 6.1.1 Release Notes](/releases/release-6.1.1.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_gc_max_wait_time
 
@@ -2148,7 +2148,7 @@ Referenced in:
 - [Garbage Collection Configuration](/garbage-collection-configuration.md)
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_gc_scan_lock_mode
 
@@ -2159,7 +2159,7 @@ Referenced in:
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md)
 - [TiDB 5.0.4 Release Notes](/releases/release-5.0.4.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_general_log
 
@@ -3088,7 +3088,7 @@ Referenced in:
 
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_query_log_max_len
 
@@ -3159,7 +3159,7 @@ Referenced in:
 - [TiDB 8.1.0 Release Notes](/releases/release-8.1.0.md)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 - [TiDB 7.5.4 Release Notes](/releases/release-7.5.4.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 - [TiDB 5.0 RC Release Notes](/releases/release-5.0.0-rc.md)
 
 ### tidb_regard_null_as_point
@@ -3388,7 +3388,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 
 ### tidb_skip_isolation_level_check
 
@@ -3824,7 +3824,7 @@ Referenced in:
 - [Transactions](/transaction-overview.md)
 - [tidb-performance-tuning-config](/tidb-performance-tuning-config.md)
 - [TiDB 6.0.0 Release Notes](/releases/release-6.0.0-dmr.md)
-- [What's New in TiDB 5.0](/releases/release-5.0.0.md)
+- [TiDB 5.0 Release Notes](/releases/release-5.0.0.md)
 - [TiDB 3.0.8 Release Notes](/releases/release-3.0.8.md)
 - [TiDB 3.0.4 Release Notes](/releases/release-3.0.4.md)
 
