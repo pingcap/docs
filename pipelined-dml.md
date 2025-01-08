@@ -95,7 +95,7 @@ If the `pipelined` field in the output is `true`, it indicates that Pipelined DM
 ## Best practices
 
 - Increase the value of [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) slightly to ensure that memory usage for components such as executors does not exceed the limit. A value of at least 2 GiB is recommended. For environments with sufficient TiDB memory, you can increase this value further.
-- In scenarios where data is inserted into new tables, the performance of Pipelined DML might be affected by hotspots. To achieve optimal performance, it is recommended to address hotspots in advance. For more information, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+- In scenarios where data is inserted into new tables, the performance of Pipelined DML might be affected by hotspots. To achieve optimal performance, it is recommended to address hotspots in advance. For more information, see [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
 
 ## Related configurations
 
@@ -112,7 +112,7 @@ If the `pipelined` field in the output is `true`, it indicates that Pipelined DM
 <CustomContent platform="tidb-cloud">
 
 - The [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable controls whether Pipelined DML is enabled at the session level.
-- When [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600) configuration item behaves as if it is set to `false`.
+- When [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the [`pessimistic-auto-commit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#pessimistic-auto-commit-new-in-v600) configuration item behaves as if it is set to `false`.
 - Transactions executed using Pipelined DML are not subject to the size limit specified by the TiDB configuration item [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit).
 - For large transactions executed using Pipelined DML, transaction duration might increase. In such cases, the maximum TTL for the transaction lock is the larger value of [`max-txn-ttl`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-txn-ttl) or 24 hours.
 - If the execution time of a transaction exceeds the value set by [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610), garbage collection (GC) might force the transaction to roll back, causing it to fail.
@@ -125,7 +125,7 @@ You can monitor the execution of Pipelined DML using the following methods:
 
 - Check the [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409) system variable to get information about the last transaction executed in the current session, including whether Pipelined DML was used.
 - Look for lines containing `"[pipelined dml]"` in TiDB logs to understand the execution process and progress of Pipelined DML, including the current stage and the amount of data written.
-- View the `affected rows` field in the [`expensive query`](/identify-expensive-queries.md#expensive-query-log-example) logs to track the progress of long-running statements.
+- View the `affected rows` field in the [`expensive query`](https://docs.pingcap.com/tidb/stable/identify-expensive-queries#expensive-query-log-example) logs to track the progress of long-running statements.
 - Query the [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md) table to view transaction execution progress. Pipelined DML is typically used for large transactions, so you can use this table to monitor their execution progress.
 
 ## FAQs
@@ -158,5 +158,16 @@ In most cases, you can increase the system variable [`tidb_mem_quota_query`](/sy
 
 ## Learn more
 
+<CustomContent platform="tidb">
+
 - [Batch Processing](/batch-processing.md)
 - [TiDB Memory Control](/configure-memory-usage.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [Batch Processing](/batch-processing.md)
+- [TiDB Memory Control](https://docs.pingcap.com/tidb/stable/configure-memory-usage)
+
+</CustomContent>

@@ -29,8 +29,19 @@ The `IMPORT INTO` statement is designed for data import tasks. It enables you to
 
 ### Limitations
 
+<CustomContent platform="tidb">
+
 - No transactional [ACID](/glossary.md#acid) guarantees
 - Subject to various usage restrictions
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- No transactional [ACID](/tidb-cloud/tidb-cloud-glossary.md#acid) guarantees
+- Subject to various usage restrictions
+
+</CustomContent>
 
 ### Use cases
 
