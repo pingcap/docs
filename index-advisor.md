@@ -143,7 +143,7 @@ For v8.0 or higher, TiDB provides two system views/tables to help users identify
 
 ## View sys.schema_unused_indexes
 
-The `sys.schema_unused_indexes` view identifies indexes that have not been used since the startup of all TiDB instances. The view is defined based on system tables that have schema, table and column information. The view provides the full specification for the index including index, table and schema names. Users can query this view and decide on making indexes invisible or deleting them. 
+The [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) view identifies indexes that have not been used since the startup of all TiDB instances. The view is defined based on system tables that have schema, table and column information. The view provides the full specification for the index including index, table and schema names. Users can query this view and decide on making indexes invisible or deleting them. 
 
 > **Warning:**
 >
