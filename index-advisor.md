@@ -160,7 +160,7 @@ FROM information_schema.cluster_tidb_index_usage
 WHERE last_access_time IS NULL
   OR last_access_time < NOW() - INTERVAL 30 DAY;
 
--- Find indexes with low efficiency
+-- Find the indexes that are always scanned with over 50% of total records. 
 SELECT table_schema, table_name, index_name,
        query_total, rows_access_total,
        percentage_access_0 as full_table_scans
