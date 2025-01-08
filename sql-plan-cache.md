@@ -343,8 +343,6 @@ After you enable this feature, the optimizer quickly evaluates the query. If it 
 
 To reduce the syntax parsing cost of SQL statements, it is recommended that you run `prepare stmt` once, then `execute stmt` multiple times before running `deallocate prepare`:
 
-{{< copyable "sql" >}}
-
 ```sql
 MySQL [test]> prepare stmt from '...'; -- Prepare once
 MySQL [test]> execute stmt using ...;  -- Execute once
@@ -354,8 +352,6 @@ MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
 ```
 
 In real practice, you may be used to running `deallocate prepare` each time after running `execute stmt`, as shown below:
-
-{{< copyable "sql" >}}
 
 ```sql
 MySQL [test]> prepare stmt from '...'; -- Prepare once
