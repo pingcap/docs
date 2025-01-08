@@ -17,7 +17,7 @@ TiDB Cloud は、支出を追跡するのに役立つ 2 種類の予算を提供
 
 ## 前提条件 {#prerequisites}
 
-組織またはプロジェクトの予算を表示、作成、編集、または削除するには、組織の`Organization Owner`または`Organization Billing Admin`ロールを持っている必要があります。
+組織またはプロジェクトの予算を表示、作成、編集、または削除するには、組織の`Organization Owner`または`Organization Billing Manager`ロールを持っている必要があります。
 
 ## 予算情報をビュー {#view-the-budget-information}
 

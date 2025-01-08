@@ -70,19 +70,21 @@ TiDB Cloud は、組織、プロジェクト、またはその両方における
 
 組織レベルでは、 TiDB Cloud は4 つのロールを定義し、メンバーを招待したり`Organization Owner`メンバーに組織ロールを付与したりできます。
 
-| 許可                                                                                         | `Organization Owner` | `Organization Billing Admin` | `Organization Console Audit Admin` | `Organization Member` |
-| ------------------------------------------------------------------------------------------ | -------------------- | ---------------------------- | ---------------------------------- | --------------------- |
-| プロジェクト、API キー、タイムゾーンなどの組織設定を管理します。                                                         | ✅                    | ❌                            | ❌                                  | ❌                     |
-| 組織にユーザーを招待したり、組織からユーザーを削除したり、ユーザーの組織の役割を編集します。                                             | ✅                    | ❌                            | ❌                                  | ❌                     |
-| 組織内のすべてのプロジェクトに対する`Project Owner`のすべての権限。                                                  | ✅                    | ❌                            | ❌                                  | ❌                     |
-| 顧客管理暗号鍵 (CMEK) を有効にしてプロジェクトを作成する                                                           | ✅                    | ❌                            | ❌                                  | ❌                     |
-| 請求書をビュー、 [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)使用し、組織の支払い情報を編集します。 | ✅                    | ✅                            | ❌                                  | ❌                     |
-| 組織のTiDB Cloud [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)を管理します。               | ✅                    | ❌                            | ✅                                  | ❌                     |
-| 組織内のユーザーと、メンバーが所属するプロジェクトをビュー。                                                             | ✅                    | ✅                            | ✅                                  | ✅                     |
+| 許可                                                                           | `Organization Owner` | `Organization Billing Manager` | `Organization Billing Viewer` | `Organization Console Audit Manager` | `Organization Viewer` |
+| ---------------------------------------------------------------------------- | -------------------- | ------------------------------ | ----------------------------- | ------------------------------------ | --------------------- |
+| プロジェクト、API キー、タイムゾーンなどの組織設定を管理します。                                           | ✅                    | ❌                              | ❌                             | ❌                                    | ❌                     |
+| 組織にユーザーを招待したり、組織からユーザーを削除したり、ユーザーの組織の役割を編集します。                               | ✅                    | ❌                              | ❌                             | ❌                                    | ❌                     |
+| 組織内のすべてのプロジェクトに対する`Project Owner`のすべての権限。                                    | ✅                    | ❌                              | ❌                             | ❌                                    | ❌                     |
+| 顧客管理暗号化キー (CMEK) を有効にしてプロジェクトを作成します。                                         | ✅                    | ❌                              | ❌                             | ❌                                    | ❌                     |
+| 組織の支払い情報を編集します。                                                              | ✅                    | ✅                              | ❌                             | ❌                                    | ❌                     |
+| 請求書をビューて[コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)使用します。 | ✅                    | ✅                              | ✅                             | ❌                                    | ❌                     |
+| 組織のTiDB Cloud [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)を管理します。 | ✅                    | ❌                              | ❌                             | ✅                                    | ❌                     |
+| 組織内のユーザーと、メンバーが所属するプロジェクトをビュー。                                               | ✅                    | ✅                              | ✅                             | ✅                                    | ✅                     |
 
 > **注記：**
 >
-> `Organization Console Audit Admin`ロールは、データベース監査ログではなく、 TiDB Cloudコンソールで監査ログを管理するために使用されます。データベース監査を管理するには、プロジェクト レベルで`Project Owner`ロールを使用します。
+> -   `Organization Console Audit Manager`ロール ( `Organization Console Audit Admin`から名前変更) は、データベース監査ログではなく、 TiDB Cloudコンソールで監査ログを管理するために使用されます。データベース監査を管理するには、プロジェクト レベルで`Project Owner`ロールを使用します。
+> -   `Organization Billing Manager`ロールは`Organization Billing Admin`から名前が変更され、 `Organization Viewer`ロールは`Organization Member`から名前が変更されました。
 
 ### プロジェクトの役割 {#project-roles}
 
@@ -91,24 +93,26 @@ TiDB Cloud は、組織、プロジェクト、またはその両方における
 > **注記：**
 >
 > -   `Organization Owner`にはすべてのプロジェクトに対する`Project Owner`のすべての権限があるため、 `Organization Owner`プロジェクト メンバーを招待し、メンバーにプロジェクト ロールを付与することもできます。
-> -   各プロジェクト ロールには、デフォルトで`Organization Member`のすべての権限が付与されます。
+> -   各プロジェクト ロールには、デフォルトで`Organization Viewer`のすべての権限が付与されます。
 > -   組織内のユーザーがどのプロジェクトにも属していない場合、そのユーザーにはプロジェクト権限がありません。
 
-| 許可                                                                                                          | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` |
-| ----------------------------------------------------------------------------------------------------------- | --------------- | -------------------------------- | ------------------------------- |
-| プロジェクト設定を管理する                                                                                               | ✅               | ❌                                | ❌                               |
-| プロジェクトにユーザーを招待したり、プロジェクトからユーザーを削除したり、ユーザーのプロジェクト ロールを編集したりします。                                              | ✅               | ❌                                | ❌                               |
-| プロジェクトの[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を管理します。                                              | ✅               | ❌                                | ❌                               |
-| プロジェクト内のすべてのTiDB Cloud Serverless クラスターに対して[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)管理します。      | ✅               | ❌                                | ❌                               |
-| クラスターの作成、変更、削除など、プロジェクト内のクラスター操作を管理します。                                                                     | ✅               | ❌                                | ❌                               |
-| ブランチの作成、接続、削除など、プロジェクト内のTiDB Cloud Serverless クラスターのブランチを管理します。                                             | ✅               | ❌                                | ❌                               |
-| リカバリ グループの作成や削除など、プロジェクト内のTiDB Cloud Dedicated クラスターの[回復グループ](/tidb-cloud/recovery-group-overview.md)管理します。 | ✅               | ❌                                | ❌                               |
-| データのインポート、データのバックアップと復元、データの移行などのクラスター データを管理します。                                                           | ✅               | ✅                                | ❌                               |
-| データの読み取りのためのエンドポイントの使用や作成など、データの読み取り専用操作については[データサービス](/tidb-cloud/data-service-overview.md)管理します。          | ✅               | ✅                                | ✅                               |
-| データの読み取りおよび書き込み操作については[データサービス](/tidb-cloud/data-service-overview.md)管理します。                                 | ✅               | ✅                                | ❌                               |
-| [SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用してクラスター データをビュー。                                  | ✅               | ✅                                | ✅                               |
-| [SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用してクラスターデータを変更および削除します。                            | ✅               | ✅                                | ❌                               |
-| プロジェクト内のクラスターをビュー、クラスターのバックアップ レコードを表示し、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)管理します。               | ✅               | ✅                                | ✅                               |
+| 許可                                                                                                          | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` | `Project Viewer` |
+| ----------------------------------------------------------------------------------------------------------- | --------------- | -------------------------------- | ------------------------------- | ---------------- |
+| プロジェクト設定を管理する                                                                                               | ✅               | ❌                                | ❌                               | ❌                |
+| プロジェクトにユーザーを招待したり、プロジェクトからユーザーを削除したり、ユーザーのプロジェクト ロールを編集したりします。                                              | ✅               | ❌                                | ❌                               | ❌                |
+| プロジェクトの[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を管理します。                                              | ✅               | ❌                                | ❌                               | ❌                |
+| プロジェクト内のすべてのTiDB Cloud Serverless クラスターに対して[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)管理します。      | ✅               | ❌                                | ❌                               | ❌                |
+| クラスターの作成、変更、削除など、プロジェクト内のクラスター操作を管理します。                                                                     | ✅               | ❌                                | ❌                               | ❌                |
+| ブランチの作成、接続、削除など、プロジェクト内のTiDB Cloud Serverless クラスターのブランチを管理します。                                             | ✅               | ❌                                | ❌                               | ❌                |
+| リカバリ グループの作成や削除など、プロジェクト内のTiDB Cloud Dedicated クラスターの[回復グループ](/tidb-cloud/recovery-group-overview.md)管理します。 | ✅               | ❌                                | ❌                               | ❌                |
+| データのインポート、データのバックアップと復元、データの移行などのクラスター データを管理します。                                                           | ✅               | ✅                                | ❌                               | ❌                |
+| データの読み取りのためのエンドポイントの使用や作成など、データの読み取り専用操作については[データサービス](/tidb-cloud/data-service-overview.md)管理します。          | ✅               | ✅                                | ✅                               | ❌                |
+| データの読み取りおよび書き込み操作については[データサービス](/tidb-cloud/data-service-overview.md)管理します。                                 | ✅               | ✅                                | ❌                               | ❌                |
+| [SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用してクラスター データをビュー。                                  | ✅               | ✅                                | ✅                               | ❌                |
+| [SQL エディター](/tidb-cloud/explore-data-with-chat2query.md)使用してクラスターデータを変更および削除します。                            | ✅               | ✅                                | ❌                               | ❌                |
+| [チェンジフィード](/tidb-cloud/changefeed-overview.md)管理します。                                                        | ✅               | ✅                                | ✅                               | ❌                |
+| クラスターのパスワードを確認してリセットします。                                                                                    | ✅               | ✅                                | ✅                               | ❌                |
+| プロジェクト内のクラスターの概要、バックアップ レコード、メトリック、イベント、および[チェンジフィード](/tidb-cloud/changefeed-overview.md)ビュー。               | ✅               | ✅                                | ✅                               | ✅                |
 
 ## 組織のアクセスを管理する {#manage-organization-access}
 

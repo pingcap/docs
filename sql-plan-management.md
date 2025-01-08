@@ -40,50 +40,44 @@ CREATE [GLOBAL | SESSION] BINDING [FOR BindableStmt] USING BindableStmt;
 このステートメントは、SQL 実行プランを GLOBAL または SESSION レベルでバインドします。現在、TiDB でサポートされているバインド可能な SQL ステートメント (BindableStmt) には、 `SELECT`のサブクエリを持つ`SELECT` 、 `DELETE` 、 `UPDATE` 、および`INSERT` / `REPLACE`が含まれます。次に例を示します。
 
 ```sql
-CREATE GLOBAL BINDING USING SELECT /*+ use_index(t1, idx_a) */ * FROM t1;
-CREATE GLOBAL BINDING FOR SELECT * FROM t1 USING SELECT /*+ use_index(t1, idx_a) */ * FROM t1;
+CREATE GLOBAL BINDING USING SELECT /*+ use_index(orders, orders_book_id_idx) */ * FROM orders;
+CREATE GLOBAL BINDING FOR SELECT * FROM orders USING SELECT /*+ use_index(orders, orders_book_id_idx) */ * FROM orders;
 ```
 
 > **注記：**
 >
 > バインディングは、手動で追加されたヒントよりも優先されます。したがって、対応するバインディングが存在するときにヒントを含むステートメントを実行すると、オプティマイザの動作を制御するヒントは有効になりません。ただし、他のタイプのヒントは引き続き有効です。
 
-具体的には、これらのステートメントの 2 つのタイプは、構文の競合のため実行プランにバインドできません。次の例を参照してください。
+具体的には、これらのステートメントの 2 つのタイプは、構文の競合のため実行プランにバインドできません。バインドの作成中に構文エラーが報告されます。次の例を参照してください。
 
 ```sql
 -- Type one: Statements that get the Cartesian product by using the `JOIN` keyword and not specifying the associated columns with the `USING` keyword.
 CREATE GLOBAL BINDING for
-    SELECT * FROM t t1 JOIN t t2
+    SELECT * FROM orders o1 JOIN orders o2
 USING
-    SELECT * FROM t t1 JOIN t t2;
+    SELECT * FROM orders o1 JOIN orders o2;
 
 -- Type two: `DELETE` statements that contain the `USING` keyword.
 CREATE GLOBAL BINDING for
-    DELETE FROM t1 USING t1 JOIN t2 ON t1.a = t2.a
+    DELETE FROM users USING users JOIN orders ON users.id = orders.user_id
 USING
-    DELETE FROM t1 USING t1 JOIN t2 ON t1.a = t2.a;
+    DELETE FROM users USING users JOIN orders ON users.id = orders.user_id;
 ```
 
 同等のステートメントを使用することで、構文の競合を回避できます。たとえば、上記のステートメントを次のように書き直すことができます。
 
 ```sql
--- First rewrite of type one statements: Add a `USING` clause for the `JOIN` keyword.
+-- Rewrite of type one statements: Delete the `JOIN` keyword. Replace it with a comma.
 CREATE GLOBAL BINDING for
-    SELECT * FROM t t1 JOIN t t2 USING (a)
+    SELECT * FROM orders o1, orders o2
 USING
-    SELECT * FROM t t1 JOIN t t2 USING (a);
+    SELECT * FROM orders o1, orders o2;
 
--- Second rewrite of type one statements: Delete the `JOIN` keyword.
+-- Rewrite of type two statements: Remove the `USING` keyword from the `DELETE` statement.
 CREATE GLOBAL BINDING for
-    SELECT * FROM t t1, t t2
+    DELETE users FROM users JOIN orders ON users.id = orders.user_id
 USING
-    SELECT * FROM t t1, t t2;
-
--- Rewrite of type two statements: Remove the `USING` keyword from the `delete` statement.
-CREATE GLOBAL BINDING for
-    DELETE t1 FROM t1 JOIN t2 ON t1.a = t2.a
-using
-    DELETE t1 FROM t1 JOIN t2 ON t1.a = t2.a;
+    DELETE users FROM users JOIN orders ON users.id = orders.user_id;
 ```
 
 > **注記：**
@@ -95,15 +89,15 @@ using
 ```sql
 -- The hint takes effect in the following statement.
 CREATE GLOBAL BINDING for
-    INSERT INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1
-using
-    INSERT INTO t1 SELECT /*+ use_index(@sel_1 t2, idx_a) */ * FROM t2 WHERE a > 1 AND b = 1;
+    INSERT INTO orders SELECT * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR)
+USING
+    INSERT INTO orders SELECT /*+ use_index(@sel_1 pre_orders, idx_created) */ * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR);
 
 -- The hint cannot take effect in the following statement.
 CREATE GLOBAL BINDING for
-    INSERT INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1
-using
-    INSERT /*+ use_index(@sel_1 t2, idx_a) */ INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1;
+    INSERT INTO orders SELECT * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR)
+USING
+    INSERT /*+ use_index(@sel_1 pre_orders, idx_created) */ INTO orders SELECT * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR);
 ```
 
 実行プラン バインディングを作成するときにスコープを指定しない場合、デフォルトのスコープは SESSION です。TiDB オプティマイザーは、バインドされた SQL ステートメントを正規化し、システム テーブルに格納します。SQL クエリを処理するときに、正規化されたステートメントがシステム テーブル内のバインドされた SQL ステートメントの 1 つと一致し、システム変数`tidb_use_plan_baselines`が`on`に設定されている場合 (デフォルト値は`on` )、TiDB はこのステートメントに対応するオプティマイザー ヒントを使用します。一致可能な実行プランが複数ある場合、オプティマイザーは最もコストのかからないプランを選択してバインドします。
@@ -111,9 +105,9 @@ using
 `Normalization` 、SQL ステートメント内の定数を変数パラメータに変換し、SQL ステートメント内のスペースと改行を標準化した処理で、クエリで参照されるテーブルのデータベースを明示的に指定するプロセスです。次の例を参照してください。
 
 ```sql
-SELECT * FROM t WHERE a >    1
+SELECT * FROM users WHERE balance >    100
 -- After normalization, the above statement is as follows:
-SELECT * FROM test . t WHERE a > ?
+SELECT * FROM bookshop . users WHERE balance > ?
 ```
 
 > **注記：**
@@ -123,11 +117,11 @@ SELECT * FROM test . t WHERE a > ?
 > 例えば：
 >
 > ```sql
-> SELECT * FROM t WHERE a IN (1)
-> SELECT * FROM t WHERE a IN (1,2,3)
+> SELECT * FROM books WHERE type IN ('Novel')
+> SELECT * FROM books WHERE type IN ('Novel','Life','Education')
 > -- After normalization, the above statements are as follows:
-> SELECT * FROM test . t WHERE a IN ( ... )
-> SELECT * FROM test . t WHERE a IN ( ... )
+> SELECT * FROM bookshop . books WHERE type IN ( ... )
+> SELECT * FROM bookshop . books WHERE type IN ( ... )
 > ```
 >
 > 正規化後、長さの異なる`IN`の述語が同じステートメントとして認識されるため、これらすべての述語に適用される 1 つのバインディングを作成するだけで済みます。

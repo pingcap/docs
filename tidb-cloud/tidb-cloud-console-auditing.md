@@ -9,7 +9,7 @@ TiDB Cloud は、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloudで組織の`Organization Owner`または`Organization Console Audit Admin`ロールに属している必要があります。そうでない場合、 TiDB Cloudコンソールでコンソール監査ログ関連のオプションは表示されません。
+-   TiDB Cloudで組織の`Organization Owner`または`Organization Console Audit Manager`ロールに属している必要があります。そうでない場合、 TiDB Cloudコンソールでコンソール監査ログ関連のオプションは表示されません。
 -   コンソール監査ログを有効または無効にできるのは、組織のみです。追跡できるのは、組織内のユーザーのアクションのみです。
 -   コンソール監査ログを有効にすると、 TiDB Cloudコンソールのすべてのイベント タイプが監査され、一部のイベントのみを監査するように指定することはできません。
 
@@ -24,7 +24,7 @@ TiDB Cloud は、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー
 
 コンソール監査ログを無効にするには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある<mdsvgicon name="icon-top-organization">をクリックし、**コンソール監査ログ**をクリックします。</mdsvgicon>
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある<mdsvgicon name="icon-top-organization">をクリックし、 **[コンソール監査ログ]**をクリックします。</mdsvgicon>
 2.  右上隅の**[設定] を**クリックし、コンソール監査ログを無効にします。
 
 ## コンソール監査ログをビュー {#view-console-audit-logs}
@@ -36,7 +36,7 @@ TiDB Cloud は、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー
 > -   組織でコンソール監査ログを有効にするのが初めての場合、コンソール監査ログは空です。監査対象のイベントが実行されると、対応するログが表示されます。
 > -   コンソール監査ログが無効になってから 90 日以上経過すると、ログは表示されなくなります。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある<mdsvgicon name="icon-top-organization">をクリックし、**コンソール監査ログ**をクリックします。</mdsvgicon>
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある<mdsvgicon name="icon-top-organization">をクリックし、 **[コンソール監査ログ]**をクリックします。</mdsvgicon>
 2.  監査ログの特定の部分を取得するには、イベントの種類、操作ステータス、および時間範囲をフィルタリングできます。
 3.  (オプション) さらに多くのフィールドをフィルタリングするには、 **[高度なフィルタ]**をクリックし、さらにフィルタを追加して、 **[適用]**をクリックします。
 4.  ログの行をクリックすると、右側のペインに詳細情報が表示されます。
@@ -124,7 +124,7 @@ TiDB Cloud は、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー
 | TiDBClusterCA をダウンロード     | CA証明書をダウンロード                                 |
 | オープンWebSQLコンソール           | Web SQL 経由で TiDB クラスターに接続する                  |
 | ルートパスワードの設定               | TiDBクラスタのルートパスワードを設定する                       |
-| IPアクセスリストの更新              | TiDB クラスタの IP アクセス リストを更新する                  |
+| IPアクセスリストの更新              | TiDBクラスタのIPアクセスリストを更新する                      |
 | 自動バックアップの設定               | TiDBクラスタの自動バックアップメカニズムを設定する                  |
 | 手動バックアップ                  | TiDBクラスタの手動バックアップを実行する                       |
 | バックアップタスクの削除              | バックアップタスクを削除する                               |

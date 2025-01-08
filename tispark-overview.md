@@ -35,7 +35,7 @@ TiDB でのデータ処理には、Spark エコシステムのツールを使用
 
 ## 要件 {#requirements}
 
--   TiSpark は Spark 2.3 以上をサポートします。
+-   TiSpark は Spark 以降 2.3 をサポートします。
 -   TiSpark には JDK 1.8 および Scala 2.11/2.12 が必要です。
 -   TiSpark は、 `YARN` 、 `Mesos` 、 `Standalone`などの任意の Spark モードで実行されます。
 
@@ -97,11 +97,11 @@ TiDB と Spark のバージョンに応じて、TiSpark のバージョンを選
 | 3.1.x            | 6.x、5.x、4.x        | 3.0.x、3.1.x、3.2.x、3.3.x | 2.12       |
 | 3.2.x            | 6.x、5.x、4.x        | 3.0.x、3.1.x、3.2.x、3.3.x | 2.12       |
 
-TiSpark 2.4.4、2.5.2、3.0.2、3.1.1、および 3.2.3 は最新の安定バージョンであり、強く推奨されます。
+TiSpark 2.4.4、2.5.3、3.0.3、3.1.7、および 3.2.3 は最新の安定バージョンであり、強く推奨されます。
 
 > **注記：**
 >
-> TiSpark は、TiDB v7.0.0 以降のバージョンとの互換性を保証しません。
+> TiSpark は、TiDB v7.0.0 以降のバージョンとの互換性を保証しません。TiSpark は、Spark v3.4.0 以降のバージョンとの互換性を保証しません。
 
 ### TiSpark jarを入手する {#get-tispark-jar}
 
@@ -259,7 +259,7 @@ Spark SQL を使用して TiKV からデータを削除できます。
 | `spark.tispark.plan.allow_index_read`           | `true`           | 計画時にインデックスが有効になっているかどうか (TiKV に大きな負荷がかかる可能性があります)。                                                                                                                                                                                                                                                                                     |
 | `spark.tispark.index.scan_batch_size`           | `20000`          | 同時インデックススキャンのバッチ内の行キーの数。                                                                                                                                                                                                                                                                                                               |
 | `spark.tispark.index.scan_concurrency`          | `5`              | 行キーを取得するインデックス スキャンのスレッドの最大数 (各 JVM 内のタスク間で共有)。                                                                                                                                                                                                                                                                                        |
-| `spark.tispark.table.scan_concurrency`          | `512`            | テーブルスキャンのスレッドの最大数 (各 JVM 内のタスク間で共有されます)。                                                                                                                                                                                                                                                                                               |
+| `spark.tispark.table.scan_concurrency`          | `512`            | テーブルスキャンの最大スレッド数 (各 JVM 内のタスク間で共有)。                                                                                                                                                                                                                                                                                                    |
 | `spark.tispark.request.command.priority`        | `Low`            | 値のオプションは`Low` 、 `Normal` 、 `High`です。この設定は、TiKV で割り当てられたリソースに影響します。OLTP ワークロードが妨げられないため、 `Low`が推奨されます。                                                                                                                                                                                                                                  |
 | `spark.tispark.coprocess.codec_format`          | `chblock`        | コプロセッサのデフォルトのコーデック形式を保持します。使用可能なオプションは`default` 、 `chblock` 、 `chunk`です。                                                                                                                                                                                                                                                               |
 | `spark.tispark.coprocess.streaming`             | `false`          | レスポンスの取得にストリーミングを使用するかどうか (実験的)。                                                                                                                                                                                                                                                                                                       |
@@ -286,7 +286,7 @@ Spark SQL を使用して TiKV からデータを削除できます。
 | `spark.tispark.jdbc.client_cert_store`          |                  | JDBC の PKCS#12 証明書。これは`keytool`によって生成された JKS 形式の証明書です (例: `/home/tispark/config/jdbc-clientstore` )。デフォルトは &quot;&quot; で、これは TiDBサーバーがTiSpark を検証しないことを意味します。                                                                                                                                                                         |
 | `spark.tispark.jdbc.client_cert_password`       |                  | `spark.tispark.jdbc.client_cert_store`のパスワード。                                                                                                                                                                                                                                                                                          |
 | `spark.tispark.tikv.tls_reload_interval`        | `10s`            | 再読み込みする証明書があるかどうかを確認する間隔。デフォルト値は`10s` (10 秒) です。                                                                                                                                                                                                                                                                                       |
-| `spark.tispark.tikv.conn_recycle_time`          | `60s`            | TiKV を使用して期限切れの接続を消去する間隔。証明書の再読み込みが有効になっている場合にのみ有効になります。デフォルト値は`60s` (60 秒) です。                                                                                                                                                                                                                                                        |
+| `spark.tispark.tikv.conn_recycle_time`          | `60s`            | TiKV で期限切れの接続を消去する間隔。証明書の再読み込みが有効になっている場合にのみ有効になります。デフォルト値は`60s` (60 秒) です。                                                                                                                                                                                                                                                            |
 | `spark.tispark.host_mapping`                    |                  | パブリック IP アドレスとイントラネット IP アドレス間のマッピングを構成するために使用されるルート マップ。TiDB クラスターがイントラネット上で実行されている場合、外部の Spark クラスターがアクセスできるように、イントラネット IP アドレスのセットをパブリック IP アドレスにマッピングできます。形式は`{Intranet IP1}:{Public IP1};{Intranet IP2}:{Public IP2}`です (例: `192.168.0.2:8.8.8.8;192.168.0.3:9.9.9.9` )。                                                          |
 | `spark.tispark.new_collation_enable`            |                  | TiDB で[新しい照合順序](https://docs.pingcap.com/tidb/stable/character-set-and-collation#new-framework-for-collations)有効になっている場合、この構成は`true`に設定できます。TiDB で`new collation`が有効になっていない場合、この構成は`false`に設定できます。この項目が構成されていない場合、TiSpark は TiDB のバージョンに基づいて`new collation`自動的に構成します。構成ルールは次のとおりです。TiDB バージョンが v6.0.0 以上の場合は`true` 、それ以外の場合は`false`です。 |
 | `spark.tispark.replica_read`                    | `leader`         | 読み取るレプリカのタイプ。値のオプションは`leader` 、 `follower` 、 `learner`です。複数のタイプを同時に指定することができ、TiSpark は順序に従ってタイプを選択します。                                                                                                                                                                                                                                 |

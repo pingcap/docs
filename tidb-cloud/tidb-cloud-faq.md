@@ -25,7 +25,7 @@ TiDB Cloud は、TiDB の完全に管理されたクラウド データベース
 
 ### TiDB Cloud はMySQL と互換性がありますか? {#is-tidb-cloud-compatible-with-mysql}
 
-現在、 TiDB Cloud は、トリガー、ストアド プロシージャ、およびユーザー定義関数を除く、 MySQL 5.7および MySQL 8.0 構文の大部分をサポートしています。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)参照してください。
+現在、 TiDB Cloud は、トリガー、ストアド プロシージャ、およびユーザー定義関数を除く、 MySQL 5.7および MySQL 8.0 の構文の大部分をサポートしています。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)参照してください。
 
 ### TiDB Cloudを操作するために使用できるプログラミング言語は何ですか? {#what-programming-languages-can-i-use-to-work-with-tidb-cloud}
 
@@ -41,8 +41,8 @@ TiDB Cloudは現在、Amazon Web Services と Google Cloud で利用できます
 
 ### TiDB Cloudではどのバージョンの TiDB がサポートされていますか? {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
--   2024 年 11 月 26 日以降、新しいTiDB Cloud Dedicated クラスターのデフォルトの TiDB バージョンは v8.1.1 になります。
--   2024 年 2 月 21 日より、 TiDB Cloud Serverless クラスターの TiDB バージョンは v7.1.3 になります。
+-   2025 年 1 月 2 日以降、新しいTiDB Cloud Dedicated クラスターのデフォルトの TiDB バージョンは[バージョン8.1.2](https://docs.pingcap.com/tidb/v8.1/release-8.1.2)なります。
+-   2024 年 2 月 21 日より、 TiDB Cloud Serverless クラスターの TiDB バージョンは[バージョン7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3)なります。
 
 詳細については[TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)参照してください。
 

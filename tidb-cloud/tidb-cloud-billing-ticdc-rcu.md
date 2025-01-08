@@ -6,9 +6,11 @@ aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 
 # チェンジフィード課金 {#changefeed-billing}
 
+## RCU コスト {#rcu-cost}
+
 TiDB Cloud は、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)の容量を TiCDC レプリケーション容量単位 (RCU) で測定します。クラスターに[チェンジフィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)設定すると、適切な仕様を選択できます。RCU が高いほど、レプリケーション パフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。
 
-## TiCDC RCU の数 {#number-of-ticdc-rcus}
+### TiCDC RCU の数 {#number-of-ticdc-rcus}
 
 次の表は、変更フィードの仕様と対応するレプリケーション パフォーマンスを示しています。
 
@@ -26,6 +28,12 @@ TiDB Cloud は、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)
 >
 > 上記のパフォーマンス データは参考用であり、シナリオによって異なる場合があります。本番環境で changefeed 機能を使用する前に、実際のワークロード テストを実施することを強くお勧めします。さらにサポートが必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md#get-support-for-a-cluster)お問い合わせください。
 
-## 価格 {#price}
+### 価格 {#price}
 
 各 TiCDC RCU でサポートされているリージョンとTiDB Cloudの価格については、 [チェンジフィードコスト](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost)参照してください。
+
+## プライベートデータリンクのコスト {#private-data-link-cost}
+
+**プライベート リンク**または**プライベート サービス コネクトの**ネットワーク接続方法を選択した場合は、追加の**プライベート データ リンク**コストが発生します。これらの料金は[データ転送コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#data-transfer-cost)カテゴリに該当します。
+
+**プライベート データ リンク**の料金は**0.01 ドル/GiB**で、**処理済みデータ**[AWS インターフェースエンドポイントの料金](https://aws.amazon.com/privatelink/pricing/#Interface_Endpoint_pricing)および**コンシューマー データ処理**[Google Cloud プライベート サービス コネクトの料金](https://cloud.google.com/vpc/pricing#psc-forwarding-rules)と同じです。
