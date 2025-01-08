@@ -139,7 +139,7 @@ Here are some current limitations of the index recommendation feature, which we 
 3. A UI for the Index Advisor will be available in the future.
 
 # Removing Unused Indexes
-TiDB provides two system views/tables to help users identify inactive indexes in their workload. Users can either mark such indexes as invisible as a transitional state before dropping them or drop them right away. 
+For v8.0 or higher, TiDB provides two system views/tables to help users identify inactive indexes in their workload. Users can manage to drop these indexes to save the storage and overhead caused.  For online systems, it's highly recommended to make the target indexes invisible and observe the impact for one business cycle before dropping them completely. 
 
 ## View sys.schema_unused_indexes
 
