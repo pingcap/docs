@@ -1,4 +1,5 @@
-# This script is used to generate the reference index in `system-variable-reference.md` for all system variables in TiDB documentation.
+# This script enables you to update the "## Variable reference" section in `system-variable-reference.md` automatically according to the latest reference information of all system variables in TiDB documentation
+# Before running this script, you need to specify the local directory of the TiDB source documentation in the `docs_dir` variable.
 # If a system variable name contains `_`, the script will add all references to this variable name to the reference index, except when the variable name is surrounded by `_` or `-` or other English letters in the referenced docs.
 # If a system variable name does not contain `_`, the script will only count the link reference of this variable as valid references and add the valid references to the reference index.
 
