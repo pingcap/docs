@@ -145,6 +145,10 @@ For v8.0 or higher, TiDB provides two system views/tables to help users identify
 
 The `sys.schema_unused_indexes` view identifies indexes that have not been used since the startup of all TiDB instances. The view is defined based on system tables that have schema, table and column information. The view provides the full specification for the index including index, table and schema names. Users can query this view and decide on making indexes invisible or deleting them. 
 
+> **Warning:**
+>
+> As this view shows the unused indexes since last startup of all TiDB instances, please make sure the TiDB instances are alive long enough. Otherwise, it could show false candidates in case certain workloads are not included. SQL `select START_TIME,UPTIME from INFORMATION_SCHEMA.CLUSTER_INFO where TYPE='tidb';` helps identify the ages of all TiDB instances. 
+
 ## View information_schema.tidb_index_usage
 
 This table provides metrics like access patterns, last access time, and rows accessed. Below, we show SQL query recommendations on how to identify unused or inefficient indexes based on this table. 
