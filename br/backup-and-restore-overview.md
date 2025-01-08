@@ -130,7 +130,7 @@ Before performing backup and restore, BR compares the TiDB cluster version with 
 
 Starting from v7.0.0, TiDB gradually supports performing backup and restore operations through SQL statements. Therefore, it is strongly recommended to use the BR tool of the same major version as the TiDB cluster when backing up and restoring cluster data, and avoid performing data backup and restore operations across major versions. This helps ensure smooth execution of restore operations and data consistency. Starting from v7.6.0, BR restores data in some `mysql` system tables by default, that is, the `--with-sys-table` option is set to `true` by default. When restoring data to a TiDB cluster with a different version, if you encounter an error similar to `[BR:Restore:ErrRestoreIncompatibleSys]incompatible system table` due to different schemas of system tables, you can set `--with-sys-table=false` to skip restoring the system tables and avoid this error.
 
-#### Compatibility matrix for BR versions before TiDB v6.6.0
+#### BR version compatibility matrix before TiDB v6.6.0
 
 The compatibility information for BR before TiDB v6.6.0 is as follows:
 
@@ -139,13 +139,13 @@ The compatibility information for BR before TiDB v6.6.0 is as follows:
 | TiDB v6.0, v6.1, v6.2, v6.3, v6.4, or v6.5 snapshot backup | Compatible (known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible (BR must be v6.6) |
 | TiDB v6.3, v6.4, v6.5, or v6.6 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
 
-#### Compatibility matrix for BR versions between TiDB v6.5 and v8.5 
+#### BR version compatibility matrix between TiDB v6.5 and v8.5 
 
-This section introduces the compatibility information for BR versions between TiDB v6.5 and v8.5, including all long-term support (LTS) versions (v6.5, v7.1, v7.5, v8.1, and v8.5):
+This section introduces the BR compatibility information for all [Long-Term Support (LTS)](/releases/versioning.md#long-term-support-releases) versions between TiDB v6.5 and v8.5 (including v6.5, v7.1, v7.5, v8.1, and v8.5):
 
 > **Note:**
 >
-> Known Issue: In version 7.2.0, some system table fields became case-sensitive, which might cause cross-version backup and restore failures. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> Known issue: in v7.2.0, some system table fields are changed to case-sensitive, which might cause cross-version backup and restore failures. For more details, see [issue #43717](https://github.com/pingcap/tidb/issues/43717).
 
 The following table lists the compatibility matrix for full backups:
 
