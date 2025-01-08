@@ -20,7 +20,7 @@ This document outlines the key benefits, limitations, and use cases of these fea
 
 ## Data import
 
-The `IMPORT INTO` statement is designed for data import tasks. It enables you to quickly import data in formats such as CSV, SQL, or PARQUET into an empty TiDB table, without the need to deploy [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) separately.
+The `IMPORT INTO` statement is designed for data import tasks. It enables you to quickly import data in formats such as CSV, SQL, or PARQUET into an empty TiDB table, without the need to deploy [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) separately.
 
 ### Key benefits
 
