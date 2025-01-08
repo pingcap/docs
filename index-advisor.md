@@ -151,7 +151,7 @@ The [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) view
 
 ## View information_schema.tidb_index_usage
 
-This table provides metrics like access patterns, last access time, and rows accessed. Below, we show SQL query recommendations on how to identify unused or inefficient indexes based on this table. 
+[`information_schema.tidb_index_usage`](/information-schema/information-schema-tidb-indexes.md) provides metrics including selectivity buckets, last access time, and rows accessed.  Below example shows the queries to identify unused or inefficient indexes based on this table. 
 
 ```sql
 -- Find indexes that haven't been accessed recently
