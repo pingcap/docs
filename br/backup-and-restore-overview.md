@@ -151,19 +151,19 @@ The following table lists the compatibility matrix for full backups:
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
 |:---------|:----------------|:------------------|
-| 6.5.0    | 7.1.0           | 7.5.0 and above   |
-| 7.1.0    | -               | 7.5.0 and above   |
-| 7.5.0    | 7.5.0 and above | -                 |
-| 8.1.0    | 8.1.0 and above | -                 |
+| v6.5.0    | 7.1.0           | v7.5.0 and later   |
+| v7.1.0    | -                 | v7.5.0 and later  |
+| v7.5.0    | v7.5.0 and later | -                 |
+| v8.1.0    | v8.1.0 and later | -                 |
 
 The following table lists the compatibility matrix for log backups:
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
 |:---------|:----------------|:------------------|
-| 6.5.0    | 7.1.0           | 7.5.0 and above   |
-| 7.1.0    | -               | 7.5.0 and above   |
-| 7.5.0    | 7.5.0 and above | -                 |
-| 8.1.0    | 8.1.0 and above | -                 |
+| v6.5.0    | v7.1.0        | v7.5.0 and later  |
+| v7.1.0    | -                | v7.5.0 and later |
+| v7.5.0    | v7.5.0 and later | -                 |
+| v8.1.0    | v8.1.0 and later | -                 |
 
 > **Note:**
 >
