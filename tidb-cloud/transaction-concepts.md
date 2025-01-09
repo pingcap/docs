@@ -20,6 +20,7 @@ For more information, see [TiDB Optimistic Transaction Model](/optimistic-transa
 In TiDB, the pessimistic transaction mode has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
 
 However, if the application scenario has fewer conflicts, the optimistic transaction model has better performance.
+
 For more information, see [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
 
 ## Transaction isolation levels

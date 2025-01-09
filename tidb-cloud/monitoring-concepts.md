@@ -44,4 +44,5 @@ TiDB Cloud lets you integrate any of the following third-party metrics services 
 - New Relic integration
 
 Currently, these third-party metrics integrations are in beta.
+
 For more information, see [Third-Party Metrics Integration (Beta)](/tidb-cloud/third-party-monitoring-integrations.md).

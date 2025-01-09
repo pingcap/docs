@@ -34,6 +34,7 @@ For more information, see [Get Started with Chat2Query API](/tidb-cloud/use-chat
 Integrating third-party tools with your Data App enhances your applications with advanced natural language processing and artificial intelligence (AI) capabilities provided by third-party tools. This integration enables your applications to perform more complex tasks and deliver intelligent solutions.
 
 Currently, you can integrate third-party tools, such as GPTs and Dify, in the TiDB Cloud console.
+
 For more information, see [Integrate a Data App with Third-Party Tools](/tidb-cloud/data-service-integrations.md).
 
 ## Configuration as Code
@@ -41,6 +42,7 @@ For more information, see [Integrate a Data App with Third-Party Tools](/tidb-cl
 TiDB Cloud provides a Configuration as Code (CaC) approach to represent your entire Data App configurations as code using the JSON syntax.
 
 By connecting your Data App to GitHub, TiDB Cloud can use the CaC approach and push your Data App configurations as [configuration files](/tidb-cloud/data-service-app-config-files.md) to your preferred GitHub repository and branch.
+
 If Auto Sync & Deployment is enabled for your GitHub connection, you can also modify your Data App by updating its configuration files on GitHub. After you push the configuration file changes to GitHub, the new configurations will be deployed in TiDB Cloud automatically.
 
 For more information, see [Deploy Data App Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
