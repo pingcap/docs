@@ -143,7 +143,7 @@ TiDB utilizes a combination of [Prometheus and Grafana](/tidb-monitoring-api.md)
 
 <CustomContent platform="tidb-cloud">
 
-To check performance metrics in TiDB Cloud, you can either check the cluster overview page on the TiDB Cloud console or use [third-party monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md). Performance schema tables return empty results in TiDB.
+To check performance metrics in TiDB Cloud, you can either check the cluster overview page on the TiDB Cloud console or use [third-party monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md). Most [performance schema tables](/performance-schema/performance-schema.md) return empty results in TiDB.
 
 </CustomContent>
 
