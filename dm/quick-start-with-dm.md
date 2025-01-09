@@ -22,6 +22,18 @@ TiUP is a command-line tool for managing TiDB components. Its Playground feature
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
+    > **Note:** If you have an existing installation of TiUP, ensure it is updated to v1.16.1 or later to use the `--dm-master` and `--dm-worker` flags. You can check your current version with:
+    >
+    > ```shell
+    > tiup --version
+    > ```
+    >
+    > To upgrade TiUP to the latest version, run:
+    >
+    > ```shell
+    > tiup update --self
+    > ```
+
 2. Start TiUP Playground with a TiDB target database and DM components:
 
     ```shell
