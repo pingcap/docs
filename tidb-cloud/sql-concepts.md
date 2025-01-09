@@ -35,7 +35,7 @@ For more information, see [SQL Mode](/sql-mode.md).
 
 ## Row ID generation attributes
 
-TiDB provides three SQL attributes to optimize row ID generation and data distribution to address performance and scalability challenges.
+TiDB provides three SQL attributes to optimize row ID generation and data distribution.
 
 - AUTO_INCREMENT
 
