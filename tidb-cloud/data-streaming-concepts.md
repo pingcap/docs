@@ -7,7 +7,7 @@ summary: Learn about data streaming concepts for TiDB Cloud.
 
 TiDB Cloud lets you stream data changes from your TiDB Cluster to other systems like Kafka, MySQL, and object storage.
 
-Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, TiDB Cloud and cloud storage.
+Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, TiDB Cloud, and cloud storage.
 
 ## Changefeed
 

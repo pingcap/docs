@@ -37,7 +37,7 @@ Each table consists of rows and columns. Each value in a row belongs to a specif
 
 ### System table
 
-- The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables which are extensions to MySQL.
+- The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables that are extensions to MySQL.
 
 - Information Schema provides an ANSI-standard way of viewing system metadata. TiDB also provides a number of custom `INFORMATION_SCHEMA` tables, in addition to the tables included for MySQL compatibility. Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefit of querying `INFORMATION_SCHEMA` is that it is possible to join between tables.
 
@@ -99,7 +99,7 @@ A composite index is an index built on two or more columns of a table, which is 
 
 Invisible indexes are indexes that exist in the database but are hidden from the query optimizer, meaning they are ignored in query plans. In TiDB, invisible indexes are useful for testing and debugging, allowing you to assess the impact of an index on performance without fully dropping it.
 
-Starting from TiDB v8.0.0, you can make the optimizer select invisible indexes by modifying the system variable[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800).
+Starting from TiDB v8.0.0, you can make the optimizer select invisible indexes by modifying the [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) system variable.
 
 ### Clustered indexes
 
@@ -125,7 +125,7 @@ For the following TiDB deployment options, TiDB supports vector data types and v
 
 - TiDB Self-Managed v8.4.0 or later versions
 
-In TiDB, a *vector index* is a specialized index designed for efficient approximate nearest neighbor (ANN) searches over columns containing vector data. Vector indexes, particularly the HNSW (Hierarchical Navigable Small World) algorithm, allow K-nearest neighbors (KNN) searches to identify the closest data points in a vector space quickly. This significantly speeds up query performance, enabling results in milliseconds compared to brute-force methods.
+In TiDB, a vector index is a specialized index designed for efficient approximate nearest neighbor (ANN) searches over columns containing vector data. Vector indexes, particularly the HNSW (Hierarchical Navigable Small World) algorithm, allow K-nearest neighbors (KNN) searches to identify the closest data points in a vector space quickly. This significantly speeds up query performance, enabling results in milliseconds compared to brute-force methods.
 
 Vector indexes rely on TiFlash replicas for data storage and search functionality. Before creating and using vector indexes, make sure that TiFlash nodes are available in your cluster.
 
@@ -163,7 +163,7 @@ For more information, see [FOREIGN KEY constraints](/foreign-key.md).
 
 A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view. Using views has the following benefits:
 
-- Exposing only safe fields and data to users to ensure security of sensitive fields and data stored in the underlying table.
+- Exposing only safe fields and data to users to ensure the security of sensitive fields and data stored in the underlying table.
 
 - Defining complex queries that frequently appear as views to make complex queries easier and more convenient.
 

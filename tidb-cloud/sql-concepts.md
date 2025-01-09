@@ -19,7 +19,7 @@ SQL is divided into the following 4 types according to their functions:
 
 - DDL (Data Definition Language): It is used to define database objects, including databases, tables, views, and indexes. For DDL statements in TiDB, see [Schema management / Data definition statements (DDL)](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl).
 
-- DML (Data Manipulation Language): It is used to manipulate application related records. For DML statements in TiDB, see [Data manipulation statements (DML)](/sql-statements/sql-statement-overview.md#data-manipulation-statements-dml).
+- DML (Data Manipulation Language): It is used to manipulate application-related records. For DML statements in TiDB, see [Data manipulation statements (DML)](/sql-statements/sql-statement-overview.md#data-manipulation-statements-dml).
 
 - DQL (Data Query Language): It is used to query the records after conditional filtering.
 
@@ -55,9 +55,9 @@ For more information, see [AUTO_INCREMENT](/auto-increment.md).
 
 ### AUTO_RANDOM
 
-`AUTO_RANDOM` is a column attribute that is used to automatically assign values to a `BIGINT` column. Values assigned automatically are random and unique. Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md) to avoid write hotspot in a single storage node caused by TiDB assigning consecutive IDs.
+`AUTO_RANDOM` is a column attribute that is used to automatically assign values to a `BIGINT` column. Values assigned automatically are random and unique. Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md) to avoid write hotspots in a single storage node caused by TiDB assigning consecutive IDs.
 
-Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md)to avoid write hotspot in a single storage node caused by TiDB assigning consecutive IDs. If the current `AUTO_INCREMENT` column is a primary key and the type is `BIGINT`, you can execute the `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);` statement to switch from `AUTO_INCREMENT` to `AUTO_RANDOM`.
+Since the value of `AUTO_RANDOM` is random and unique, `AUTO_RANDOM` is often used in place of [`AUTO_INCREMENT`](/auto-increment.md) to avoid write hotspots in a single storage node caused by TiDB assigning consecutive IDs. If the current `AUTO_INCREMENT` column is a primary key and the type is `BIGINT`, you can execute the `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);` statement to switch from `AUTO_INCREMENT` to `AUTO_RANDOM`.
 
 For more information, see [AUTO_RANDOM](/auto-random.md).
 
@@ -65,7 +65,7 @@ For more information, see [AUTO_RANDOM](/auto-random.md).
 
 For the tables with a non-clustered primary key or no primary key, TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
 
-To mitigate the hot spot issue, you can configure [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md). The row IDs are scattered and the data are written into multiple different Regions.
+To mitigate the hot spot issue, you can configure [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md). The row IDs are scattered, and the data are written into multiple different Regions.
 
 ## Keywords
 

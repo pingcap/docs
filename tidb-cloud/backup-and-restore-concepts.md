@@ -26,7 +26,7 @@ If you want to choose the restore point as required, that is, to perform point-i
 
 ## Manual backup
 
-Dual region backup is a feature of TiDB Cloud Dedicated that enables you to back up your data to a known state as needed, and then restore to that state at any time.
+Manual backup is a feature of TiDB Cloud Dedicated that enables you to back up your data to a known state as needed, and then restore to that state at any time.
 
 For more information, see [Perform a manual backup](/tidb-cloud/backup-and-restore.md#perform-a-manual-backup).
 

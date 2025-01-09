@@ -138,7 +138,6 @@ TiDB Cloud manages users and resources with a hierarchical structure: organizati
     - Project 3
         - Cluster 5
         - Cluster 6
-
 ```
 
 ### Key features
@@ -201,7 +200,7 @@ TiDB Cloud safeguards static data with advanced encryption capabilities, ensurin
 
 **Customer-Managed Encryption Key (CMEK)**
 
-- Provides organizations full control over encryption for Dedicated clusters.
+- Provides organizations full control over encryption for TiDB Cloud Dedicated clusters.
 
 - Encrypts static data and backups with CMEK keys when enabled.
 
