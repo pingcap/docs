@@ -1,11 +1,11 @@
 ---
-title: Integrate TiDB Vector Search with Django ORM
-summary: Learn how to integrate TiDB Vector Search with Django ORM to store embeddings and perform semantic search.
+title: Integrate TiDB Vector Search with peewee
+summary: Learn how to integrate TiDB Vector Search with peewee to store embeddings and perform semantic searches.
 ---
 
-# Integrate TiDB Vector Search with Django ORM
+# Integrate TiDB Vector Search with peewee
 
-This tutorial walks you through how to use [Django](https://www.djangoproject.com/) ORM to interact with the [TiDB Vector Search](/vector-search-overview.md), store embeddings, and perform vector search queries.
+This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/) to interact with the [TiDB Vector Search](/vector-search/vector-search-overview.md), store embeddings, and perform vector search queries.
 
 <CustomContent platform="tidb">
 
@@ -46,11 +46,11 @@ To complete this tutorial, you need:
 
 ## Run the sample app
 
-You can quickly learn about how to integrate TiDB Vector Search with Django ORM by following the steps below.
+You can quickly learn about how to integrate TiDB Vector Search with peewee by following the steps below.
 
 ### Step 1. Clone the repository
 
-Clone the `tidb-vector-python` repository to your local machine:
+Clone the [`tidb-vector-python`](https://github.com/pingcap/tidb-vector-python) repository to your local machine:
 
 ```shell
 git clone https://github.com/pingcap/tidb-vector-python.git
@@ -61,7 +61,7 @@ git clone https://github.com/pingcap/tidb-vector-python.git
 Create a virtual environment for your project:
 
 ```bash
-cd tidb-vector-python/examples/orm-django-quickstart
+cd tidb-vector-python/examples/orm-peewee-quickstart
 python3 -m venv .venv
 source .venv/bin/activate
 ```
@@ -77,18 +77,8 @@ pip install -r requirements.txt
 Alternatively, you can install the following packages for your project:
 
 ```bash
-pip install Django django-tidb mysqlclient numpy python-dotenv
+pip install peewee pymysql python-dotenv tidb-vector
 ```
-
-If you encounter installation issues with mysqlclient, refer to the mysqlclient official documentation.
-
-#### What is `django-tidb`
-
-`django-tidb` is a TiDB dialect for Django, which enhances the Django ORM to support TiDB-specific features (for example, Vector Search) and resolves compatibility issues between TiDB and Django.
-
-To install `django-tidb`, choose a version that matches your Django version. For example, if you are using `django==4.2.*`, install `django-tidb==4.2.*`. The minor version does not need to be the same. It is recommended to use the latest minor version.
-
-For more information, refer to [django-tidb repository](https://github.com/pingcap/django-tidb).
 
 ### Step 4. Configure the environment variables
 
@@ -105,9 +95,9 @@ For a TiDB Cloud Serverless cluster, take the following steps to obtain the clus
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Connection Type** is set to `Public`
-    - **Branch** is set to `main`
-    - **Connect With** is set to `General`
+    - **Connection Type** is set to `Public`.
+    - **Branch** is set to `main`.
+    - **Connect With** is set to `General`.
     - **Operating System** matches your environment.
 
     > **Tip:**
@@ -169,99 +159,99 @@ The following are descriptions for each parameter:
 
 ### Step 5. Run the demo
 
-Migrate the database schema:
-
 ```bash
-python manage.py migrate
+python peewee-quickstart.py
 ```
 
-Run the Django development server:
+Example output:
 
-```bash
-python manage.py runserver
+```text
+Get 3-nearest neighbor documents:
+  - distance: 0.00853986601633272
+    document: fish
+  - distance: 0.12712843905603044
+    document: dog
+  - distance: 0.7327387580875756
+    document: tree
+Get documents within a certain distance:
+  - distance: 0.00853986601633272
+    document: fish
+  - distance: 0.12712843905603044
+    document: dog
 ```
-
-Open your browser and visit `http://127.0.0.1:8000` to try the demo application. Here are the available API paths:
-
-| API Path                                | Description                              |
-| --------------------------------------- | ---------------------------------------- |
-| `POST: /insert_documents`               | Insert documents with embeddings.        |
-| `GET: /get_nearest_neighbors_documents` | Get the 3-nearest neighbor documents.    |
-| `GET: /get_documents_within_distance`   | Get documents within a certain distance. |
 
 ## Sample code snippets
 
-You can refer to the following sample code snippets to complete your own application development.
-
-### Connect to the TiDB cluster
-
-In the file `sample_project/settings.py`, add the following configurations:
-
-```python
-dotenv.load_dotenv()
-
-DATABASES = {
-    "default": {
-        # https://github.com/pingcap/django-tidb
-        "ENGINE": "django_tidb",
-        "HOST": os.environ.get("TIDB_HOST", "127.0.0.1"),
-        "PORT": int(os.environ.get("TIDB_PORT", 4000)),
-        "USER": os.environ.get("TIDB_USERNAME", "root"),
-        "PASSWORD": os.environ.get("TIDB_PASSWORD", ""),
-        "NAME": os.environ.get("TIDB_DATABASE", "test"),
-        "OPTIONS": {
-            "charset": "utf8mb4",
-        },
-    }
-}
-
-TIDB_CA_PATH = os.environ.get("TIDB_CA_PATH", "")
-if TIDB_CA_PATH:
-    DATABASES["default"]["OPTIONS"]["ssl_mode"] = "VERIFY_IDENTITY"
-    DATABASES["default"]["OPTIONS"]["ssl"] = {
-        "ca": TIDB_CA_PATH,
-    }
-```
-
-You can create a `.env` file in the root directory of your project and set up the environment variables `TIDB_HOST`, `TIDB_PORT`, `TIDB_USERNAME`, `TIDB_PASSWORD`, `TIDB_DATABASE`, and `TIDB_CA_PATH` with the actual values of your TiDB cluster.
+You can refer to the following sample code snippets to develop your application.
 
 ### Create vector tables
 
-#### Define a vector column
-
-`tidb-django` provides a `VectorField` to store vector embeddings in a table.
-
-Create a table with a column named `embedding` that stores a 3-dimensional vector.
+#### Connect to TiDB cluster
 
 ```python
-class Document(models.Model):
-   content = models.TextField()
-   embedding = VectorField(dimensions=3)
+import os
+import dotenv
+
+from peewee import Model, MySQLDatabase, SQL, TextField
+from tidb_vector.peewee import VectorField
+
+dotenv.load_dotenv()
+
+# Using `pymysql` as the driver.
+connect_kwargs = {
+    'ssl_verify_cert': True,
+    'ssl_verify_identity': True,
+}
+
+# Using `mysqlclient` as the driver.
+# connect_kwargs = {
+#     'ssl_mode': 'VERIFY_IDENTITY',
+#     'ssl': {
+#         # Root certificate default path
+#         # https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/#root-certificate-default-path
+#         'ca': os.environ.get('TIDB_CA_PATH', '/path/to/ca.pem'),
+#     },
+# }
+
+db = MySQLDatabase(
+    database=os.environ.get('TIDB_DATABASE', 'test'),
+    user=os.environ.get('TIDB_USERNAME', 'root'),
+    password=os.environ.get('TIDB_PASSWORD', ''),
+    host=os.environ.get('TIDB_HOST', 'localhost'),
+    port=int(os.environ.get('TIDB_PORT', '4000')),
+    **connect_kwargs,
+)
+```
+
+#### Define a vector column
+
+Create a table with a column named `peewee_demo_documents` that stores a 3-dimensional vector.
+
+```python
+class Document(Model):
+    class Meta:
+        database = db
+        table_name = 'peewee_demo_documents'
+
+    content = TextField()
+    embedding = VectorField(3)
 ```
 
 ### Store documents with embeddings
 
 ```python
-Document.objects.create(content="dog", embedding=[1, 2, 1])
-Document.objects.create(content="fish", embedding=[1, 2, 4])
-Document.objects.create(content="tree", embedding=[1, 0, 0])
+Document.create(content='dog', embedding=[1, 2, 1])
+Document.create(content='fish', embedding=[1, 2, 4])
+Document.create(content='tree', embedding=[1, 0, 0])
 ```
 
 ### Search the nearest neighbor documents
 
-TiDB Vector support the following distance functions:
-
-- `L1Distance`
-- `L2Distance`
-- `CosineDistance`
-- `NegativeInnerProduct`
-
 Search for the top-3 documents that are semantically closest to the query vector `[1, 2, 3]` based on the cosine distance function.
 
 ```python
-results = Document.objects.annotate(
-   distance=CosineDistance('embedding', [1, 2, 3])
-).order_by('distance')[:3]
+distance = Document.embedding.cosine_distance([1, 2, 3]).alias('distance')
+results = Document.select(Document, distance).order_by(distance).limit(3)
 ```
 
 ### Search documents within a certain distance
@@ -269,12 +259,12 @@ results = Document.objects.annotate(
 Search for the documents whose cosine distance from the query vector `[1, 2, 3]` is less than 0.2.
 
 ```python
-results = Document.objects.annotate(
-   distance=CosineDistance('embedding', [1, 2, 3])
-).filter(distance__lt=0.2).order_by('distance')[:3]
+distance_expression = Document.embedding.cosine_distance([1, 2, 3])
+distance = distance_expression.alias('distance')
+results = Document.select(Document, distance).where(distance_expression < 0.2).order_by(distance).limit(3)
 ```
 
 ## See also
 
-- [Vector Data Types](/vector-search-data-types.md)
-- [Vector Search Index](/vector-search-index.md)
+- [Vector Data Types](/vector-search/vector-search-data-types.md)
+- [Vector Search Index](/vector-search/vector-search-index.md)

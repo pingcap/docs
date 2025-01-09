@@ -28,63 +28,151 @@ The following are descriptions of options available in a `cdc server` command:
 
 ## `cdc server` configuration file parameters
 
-The following describes the configuration file specified by the `config` option in the `cdc server` command:
+The following describes the configuration file specified by the `config` option in the `cdc server` command. You can find the default configuration file in [`pkg/cmd/util/ticdc.toml`](https://github.com/pingcap/tiflow/blob/master/pkg/cmd/util/ticdc.toml).
 
-```toml
-# The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities.
-addr = "127.0.0.1:8300"
-advertise-addr = ""
-log-file = ""
-log-level = "info"
-data-dir = ""
-gc-ttl = 86400 # 24 h
-tz = "System"
-cluster-id = "default"
-# This parameter specifies the maximum memory threshold (in bytes) for tuning GOGC: Setting a smaller threshold increases the GC frequency. Setting a larger threshold reduces GC frequency and consumes more memory resources for the TiCDC process. Once the memory usage exceeds this threshold, GOGC Tuner stops working. The default value is 0, indicating that GOGC Tuner is disabled.
-gc-tuner-memory-threshold = 0
+<!-- The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities. -->
 
-[security]
-  ca-path = ""
-  cert-path = ""
-  key-path = ""
-  # This parameter controls whether to enable the TLS client authentication. The default value is false.
-  mtls = false
-  # This parameter controls whether to use username and password for client authentication. The default value is false.
-  client-user-required = false
-  # This parameter lists the usernames that are allowed for client authentication. Authentication requests with usernames not in this list will be rejected. The default value is null.
-  client-allowed-user = ["username_1", "username_2"]
+### `addr`
 
-# The session duration between TiCDC and etcd services, measured in seconds. This parameter is optional and its default value is 10.
-capture-session-ttl = 10 # 10s
+- Example: `"127.0.0.1:8300"`
 
-# The interval at which the Owner module in the TiCDC cluster attempts to push the replication progress. This parameter is optional and its default value is `50000000` nanoseconds (that is, 50 milliseconds). You can configure this parameter in two ways: specifying only the number (for example, configuring it as `40000000` represents 40000000 nanoseconds, which is 40 milliseconds), or specifying both the number and unit (for example, directly configuring it as `40ms`).
-owner-flush-interval = 50000000 # 50 ms
+### `advertise-addr`
 
-# The interval at which the Processor module in the TiCDC cluster attempts to push the replication progress. This parameter is optional and its default value is `50000000` nanoseconds (that is, 50 milliseconds). The configuration method of this parameter is the same as that of `owner-flush-interval`.
-processor-flush-interval = 50000000 # 50 ms
+- Example: `""`
 
-# [log]
-# # The output location for internal error logs of the zap log module. This parameter is optional and its default value is "stderr".
-#   error-output = "stderr"
-#   [log.file]
-#     # The maximum size of a single log file, measured in MiB. This parameter is optional and its default value is 300.
-#     max-size = 300 # 300 MiB
-#     # The maximum number of days to retain log files. This parameter is optional and its default value is `0`, indicating never to delete.
-#     max-days = 0
-#     # The number of log files to retain. This parameter is optional and its default value is `0`, indicating to keep all log files.
-#     max-backups = 0
+### `log-file`
 
-#[sorter]
-# The size of the shared pebble block cache in the Sorter module for the 8 pebble DBs started by default, measured in MiB. The default value is 128.
-# cache-size-in-mb = 128
-# The directory where sorter files are stored relative to the data directory (`data-dir`). This parameter is optional and its default value is "/tmp/sorter".
-# sorter-dir = "/tmp/sorter"
+- Example: `""`
 
-# [kv-client]
-#   The number of threads that can be used in a single Region worker. This parameter is optional and its default value is 8.
-#   worker-concurrent = 8
-#   The number of threads in the shared thread pool of TiCDC, mainly used for processing KV events. This parameter is optional and its default value is 0, indicating that the default pool size is twice the number of CPU cores.
-#   worker-pool-size = 0
-#   The retry duration of Region connections. This parameter is optional and its default value is `60000000000` nanoseconds (that is, 1 minute). You can configure this parameter in two ways: specifying only the number (for example, configuring it as `50000000` represents 50000000 nanoseconds, which is 50 milliseconds), or specifying both the number and unit (for example, directly configuring it as `50ms`).
-#   region-retry-duration = 60000000000
-```
+### `log-level`
+
+- Example: `"info"`
+
+### `data-dir`
+
+- Example: `""`
+
+### `gc-ttl`
+
+- Example: `86400` (24h)
+
+### `tz`
+
+- Example: `"System"`
+
+### `cluster-id`
+
+- Example: `"default"`
+
+### `gc-tuner-memory-threshold`
+
+- Specifies the maximum memory threshold for tuning GOGC. Setting a smaller threshold increases the GC frequency. Setting a larger threshold reduces GC frequency and consumes more memory resources for the TiCDC process. Once the memory usage exceeds this threshold, GOGC Tuner stops working.
+- Default value: `0`, indicating that GOGC Tuner is disabled
+- Unit: Bytes
+
+### security
+
+#### `ca-path`
+
+- Example: `""`
+
+#### `cert-path`
+
+- Example: `""`
+
+#### `key-path`
+
+- Example: `""`
+
+#### `mtls`
+
+- Controls whether to enable the TLS client authentication.
+- Default value: `false`
+
+#### `client-user-required`
+
+- Controls whether to use username and password for client authentication. The default value is false.
+- Default value: `false`
+
+#### `client-allowed-user`
+
+- Lists the usernames that are allowed for client authentication. Authentication requests with usernames not in this list will be rejected.
+- Default value: `null`
+
+<!-- Example: `["username_1", "username_2"]` -->
+
+### `capture-session-ttl`
+
+- Specifies the session duration between TiCDC and etcd services. This parameter is optional.
+- Default value: `10`
+- Unit: Seconds
+
+### `owner-flush-interval`
+
+- Specifies the interval at which the Owner module in the TiCDC cluster attempts to push the replication progress. This parameter is optional and its default value is `50000000` nanoseconds (that is, 50 milliseconds).
+- You can configure this parameter in two ways: specifying only the number (for example, configuring it as `40000000` represents 40000000 nanoseconds, which is 40 milliseconds), or specifying both the number and unit (for example, directly configuring it as `40ms`).
+- Default value: `50000000`, that is, 50 milliseconds
+
+### `processor-flush-interval`
+
+- Specifies the interval at which the Processor module in the TiCDC cluster attempts to push the replication progress. This parameter is optional and its default value is `50000000` nanoseconds (that is, 50 milliseconds).
+- The configuration method of this parameter is the same as that of `owner-flush-interval`.
+- Default value: `50000000`, that is, 50 milliseconds
+
+### log
+
+#### `error-output`
+
+- Specifies the output location for internal error logs of the zap log module. This parameter is optional.
+- Default value: `"stderr"`
+
+#### log.file
+
+##### `max-size`
+
+- Specifies the maximum size of a single log file. This parameter is optional.
+- Default value: `300`
+- Unit: MiB
+
+##### `max-days`
+
+- Specifies the maximum number of days to retain log files. This parameter is optional.
+- Default value: `0`, indicating never to delete
+
+##### `max-backups`
+
+- Specifies the number of log files to retain. This parameter is optional.
+- Default value: `0`, indicating to keep all log files
+
+### sorter
+
+#### `cache-size-in-mb`
+
+- Specifies the size of the shared pebble block cache in the Sorter module for the 8 pebble DBs started by default.
+- Default value: `128`
+- Unit: MiB
+
+#### `sorter-dir`
+
+- Specifies the directory where sorter files are stored relative to the data directory (`data-dir`). This parameter is optional.
+- Default value: `"/tmp/sorter"`
+
+### kv-client
+
+#### `worker-concurrent`
+
+- Specifies the number of threads that can be used in a single Region worker. This parameter is optional.
+- Default value: `8`
+
+#### `worker-pool-size`
+
+- Specifies the number of threads in the shared thread pool of TiCDC, mainly used for processing KV events. This parameter is optional.
+- Default value: `0`, indicating that the default pool size is twice the number of CPU cores
+
+#### `region-retry-duration`
+
+- Specifies the retry duration of Region connections. This parameter is optional.
+- You can configure this parameter in two ways:
+    - Specify only the number, for example, `50000000` represents 50000000 nanoseconds (50 milliseconds)
+    - Specify both the number and the unit, for example, `50ms`
+- Default value: `60000000000` (1 minute)

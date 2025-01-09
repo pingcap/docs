@@ -8,6 +8,10 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
 This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration (DM)](/dm/dm-overview.md). This guide is a quick demo of DM features and is not recommended for any production environment.
 
+> **Note:**
+>
+> If your target machine's operating system supports SELinux, ensure that SELinux is **disabled**.
+
 ## Step 1: Deploy a DM cluster
 
 1. Install TiUP, and install [`dmctl`](/dm/dmctl-introduction.md) using TiUP:
@@ -32,7 +36,7 @@ This document describes how to migrate data from MySQL to TiDB using [TiDB Data 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup dm deploy dm-test 6.0.0 topology.yaml -p
+    tiup dm deploy dm-test 8.5.0 topology.yaml -p
     ```
 
 ## Step 2: Prepare the data source

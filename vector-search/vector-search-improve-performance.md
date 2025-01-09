@@ -21,11 +21,11 @@ TiDB Vector Search enables you to perform Approximate Nearest Neighbor (ANN) que
 
 ## Add vector search index for vector columns
 
-The [vector search index](/vector-search-index.md) dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
+The [vector search index](/vector-search/vector-search-index.md) dramatically improves the performance of vector search queries, usually by 10x or more, with a trade-off of only a small decrease of recall rate.
 
 ## Ensure vector indexes are fully built
 
-After you insert a large volume of vector data, some of it might be in the Delta layer waiting for persistence. The vector index for such data will be built after the data is persisted. Until all vector data is indexed, vector search performance is suboptimal. To check the index build progress, see [View index build progress](/vector-search-index.md#view-index-build-progress).
+After you insert a large volume of vector data, some of it might be in the Delta layer waiting for persistence. The vector index for such data will be built after the data is persisted. Until all vector data is indexed, vector search performance is suboptimal. To check the index build progress, see [View index build progress](/vector-search/vector-search-index.md#view-index-build-progress).
 
 ## Reduce vector dimensions or shorten embeddings
 
