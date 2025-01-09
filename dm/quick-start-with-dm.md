@@ -6,13 +6,13 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
 # Quick Start Guide for TiDB Data Migration
 
-TiDB Data Migration (DM) is a powerful tool that replicates databases from MySQL-compatible databases to TiDB. This guide will walk you through setting up a local TiDB DM environment for development and testing using TiUP Playground.
+[TiDB Data Migration (DM)](/dm/dm-overview.md) is a powerful tool that replicates data from MySQL-compatible databases to TiDB. This guide shows you how to set up a local TiDB DM environment for development and testing using [TiUP Playground](/tiup/tiup-playground.md).
 
 > **Note:**
 >
-> For production deployments, please refer to [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
+> For production deployments, refer to [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
 
-## Step 1: Set Up the Test Environment
+## Step 1: Set up the test environment
 
 TiUP is a command-line tool for managing TiDB components. Its Playground feature lets you quickly launch a temporary local environment with a TiDB database and TiDB DM for development and testing.
 
@@ -40,7 +40,7 @@ TiUP is a command-line tool for managing TiDB components. Its Playground feature
 
 4. Keep `tiup playground` running in the current terminal and open a new terminal for the next steps. This playground environment provides the running processes for the target TiDB database and the replication engine (DM-master and DM-worker). It will handle the data flow from MySQL (source) → DM (replication engine) → TiDB (target).
 
-## Step 2: Prepare a Source Database (Optional)
+## Step 2: Prepare a source database (optional)
 
 You can use one or multiple MySQL instances as a source database. If you do not have a MySQL-compatible instance already, you can create one for testing purposes follow these steps. If you already have a source MySQL database, skip to the Step 3.
 
@@ -92,8 +92,6 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance by following this
     ```
 
 </div>
-
-</SimpleTab>
 
 <div label="macOS">
 
@@ -281,7 +279,7 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository:
 
 </SimpleTab>
 
-## Step 3: Configure a TiDB DM Source
+## Step 3: Configure a TiDB DM source
 
 With the source MySQL database ready and accessible, the next step is to configure TiDB DM to connect to it. This involves creating a source configuration file with the connection details and applying the configurations using the `dmctl` tool.
 
@@ -304,7 +302,7 @@ With the source MySQL database ready and accessible, the next step is to configu
     tiup dmctl --master-addr 127.0.0.1:8261 operate-source create mysql-01.yaml
     ```
 
-## Step 4: Create a TiDB DM Task
+## Step 4: Create a TiDB DM task
 
 After configuring the source database, you can create a migration task in TiDB DM that will reference the source MySQL instances and define the target TiDB connection details. 
 
@@ -333,7 +331,7 @@ After configuring the source database, you can create a migration task in TiDB D
     tiup dmctl --master-addr 127.0.0.1:8261 start-task tiup-playground-task.yaml
     ```
 
-## Step 5: Verify the Data Replication
+## Step 5: Verify the data replication
 
 Once the migration task is running, you can verify that the data replication is working as expected using the `dmctl` tool and by connecting to the target database to confirm that the data has been successfully replicated from the source MySQL database to the target TiDB cluster.
 
@@ -355,7 +353,7 @@ Once the migration task is running, you can verify that the data replication is 
     SELECT * FROM hello.hello_tidb;
     ```
 
-## Step 6: Clean Up (Optional)
+## Step 6: Clean up (optional)
 
 1. In the terminal where the TiUP Playground is running, press `Ctrl + C` to terminate the process. This will stop all TiDB and DM components and delete the target environment.
 
@@ -428,7 +426,7 @@ Once the migration task is running, you can verify that the data replication is 
     rm -rf ~/.tiup
     ```
 
-## What's Next
+## What's next
 
 Now that you successfully created a task that migrates data from a source MySQL database to a target TiDB in a testing environment, you can:
 
