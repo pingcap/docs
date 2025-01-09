@@ -30,10 +30,6 @@ TiDB is for computing only and does not store data. You can configure the node n
 
 In general, TiDB performance increases linearly with the number of TiDB nodes.
 
-## Storage scalability
-
-In TiDB Cloud, you can scale both row-based and columnar data storage on demand to meet changing workloads and performance requirements.
-
 ## TiKV scalability
 
 TiKV is responsible for storing row-based data. You can configure the node number, vCPU and RAM, and storage for TiKV. The number of TiKV nodes should be at least 1 set (3 nodes in 3 different available zones) and increase by 3 nodes.
