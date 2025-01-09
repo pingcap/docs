@@ -72,7 +72,7 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
     > - When [Placement Rules](/configure-placement-rules.md) are enabled and multiple rules exist, the previously configured [`max-replicas`](/pd-configuration-file.md#max-replicas), [`location-labels`](/pd-configuration-file.md#location-labels), and [`isolation-level`](/pd-configuration-file.md#isolation-level) no longer take effect. To adjust the replica policy, use the interface related to Placement Rules.
     > - When [Placement Rules](/configure-placement-rules.md) are enabled and only one default rule exists, TiDB will automatically update this default rule when `max-replicas`, `location-labels`, or `isolation-level` configurations are changed.
 
-5. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the `low-space-ratio` parameter), PD cannot schedule data to this TiFlash node.
+5. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio) parameter), PD cannot schedule data to this TiFlash node.
 
 ## Some queries return the `Region Unavailable` error
 
@@ -95,16 +95,16 @@ Take the following steps to handle this issue:
 1. Check whether any table has more TiFlash replicas than the number of TiFlash nodes available after the cluster scale-in:
 
     ```sql
-    SELECT * FROM information_schema.tiflash_replica WHERE REPLICA_COUNT >  'tobe_left_nodes';
+    SELECT * FROM information_schema.tiflash_replica WHERE REPLICA_COUNT > 'tobe_left_nodes';
     ```
 
     `tobe_left_nodes` is the number of TiFlash nodes after the scale-in.
 
-    If the query result is not empty, you need to modify the number of TiFlash replicas for the corresponding tables. This is because when the number of TiFlash replicas is greater than the number of TiFlash nodes after scale-in, PD will not move Region peers away from the TiFlash nodes to be removed, which prevents the removal of these TiFlash nodes.
+    If the query result is not empty, you need to modify the number of TiFlash replicas for the corresponding tables. This is because, when the number of TiFlash replicas exceeds the number of TiFlash nodes after the scale-in, PD will not move Region peers away from the TiFlash nodes to be removed, causing the removal of these TiFlash nodes to fail.
 
-2. In scenarios where all TiFlash nodes need to be removed from a cluster, if the `INFORMATION_SCHEMA.TIFLASH_REPLICA` table shows that there are no TiFlash replicas in the cluster but removing TiFlash nodes still fails, check whether you have recently executed `DROP TABLE <db-nam>.<table-name>` or `DROP DATABASE <db-name>` operations.
+2. In scenarios where all TiFlash nodes need to be removed from a cluster, if the `INFORMATION_SCHEMA.TIFLASH_REPLICA` table shows that there are no TiFlash replicas in the cluster but removing TiFlash nodes still fails, check whether you have recently executed `DROP TABLE <db-name>.<table-name>` or `DROP DATABASE <db-name>` operations.
 
-    For tables or databases with TiFlash replicas, after executing `DROP TABLE <db-nam>.<table-name>` or `DROP DATABASE <db-name>`, TiDB does not immediately delete the TiFlash replication rules for the corresponding tables in PD. Instead, it waits until the corresponding tables meet the garbage collection (GC) conditions before deleting these replication rules. After GC is complete, the corresponding TiFlash nodes can be successfully removed.
+    For tables or databases with TiFlash replicas, after executing `DROP TABLE <db-name>.<table-name>` or `DROP DATABASE <db-name>`, TiDB does not immediately delete the TiFlash replication rules for the corresponding tables in PD. Instead, it waits until the corresponding tables meet the garbage collection (GC) conditions before deleting these replication rules. After GC is complete, the corresponding TiFlash nodes can be successfully removed.
 
     To remove data replication rules of TiFlash manually before the GC conditions are met, you can do the following:
 
