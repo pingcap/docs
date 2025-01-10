@@ -786,8 +786,11 @@
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-  - [Support](/tidb-cloud/tidb-cloud-support.md)
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
+- Support Plan
+  - [Announcing the new generation of TiDB Cloud support services - Connected Care](/tidb-cloud/connected-care-announcement.md)
+  - [Connected Care Detail](/tidb-cloud/connected-care-detail.md)
+  - [Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [TiDB Cloud Serverless FAQs](/tidb-cloud/serverless-faqs.md)
