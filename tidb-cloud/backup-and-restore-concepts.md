@@ -13,8 +13,8 @@ For both TiDB Cloud Serverless and TiDB Cloud Dedicated clusters, snapshot backu
 
 For more information, see the following:
 
-- [Automatic backups for TiDB Cloud Serverless clusters](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups).
-- [Automatic backups for TiDB Cloud Dedicated clusters](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
+- [Automatic backups for TiDB Cloud Serverless clusters](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups)
+- [Automatic backups for TiDB Cloud Dedicated clusters](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)
 
 ## Manual backup
 
