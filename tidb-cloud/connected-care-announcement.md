@@ -20,7 +20,7 @@ The new Connected Care support services are designed in order to:
 - Connect Basic plan customers with the vibrant TiDB community, fostering closer engagement and interaction
 
 There are four layers of support plans: Basic, Developer (corresponds to the “Standard” tier in the legacy plan), Enterprise, and Premium. Customers from all four have access to the PingCAP support portal for service requests. Advanced features such as Technical Account Managers and [Placeholder] are also available.
-The following is an overview of Connected Care services. See the [full details here](./connected-care-detail.md).
+The following is an overview of Connected Care services. See the [full details here](/tidb-cloud/connected-care-detail.md).
 
 |   | Basic | Developer | Enterprise | Premium |
 | :------ | :------ | :------ | :------ | :------ |
