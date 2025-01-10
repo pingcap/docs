@@ -35,7 +35,7 @@ Built on isolated cloud resources such as VPCs, VMs, managed Kubernetes services
 
 The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for both TiDB Cloud Serverless and TiDB Cloud Dedicated. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
 
-## TiDB Cloud CLI
+## TiDB Cloud CLI (Beta)
 
 The TiDB Cloud CLI, `ticloud`, allows you to manage TiDB Cloud Serverless and TiDB Cloud Dedicated directly from your terminal with simple commands. You can perform tasks such as:
 
@@ -45,7 +45,7 @@ The TiDB Cloud CLI, `ticloud`, allows you to manage TiDB Cloud Serverless and Ti
 
 For more information, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.md).
 
-## TiDB Cloud API
+## TiDB Cloud API (Beta)
 
 The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across TiDB Cloud Serverless and TiDB Cloud Dedicated. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, billing, and other resources in [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md).
 
