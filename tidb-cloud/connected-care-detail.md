@@ -152,5 +152,5 @@ Here is the detailed information about the Connected Care support services.
 </tbody>
 </table>
 
-- Business Hours: 9am - 6pm local time, Monday to Friday
+- Business Hours: 9 AM - 6 PM local time, Monday to Friday
 - IM: Instant Message. Currently we support Slack, and Lark. (We will support Teams in the future)
