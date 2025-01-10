@@ -54,6 +54,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     Note the Shell profile path in the output above. You need to use the path in the next step.
 
+    > **Note:**
+    >
+    > Starting from v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple silicon chip.
+
 2. Declare the global environment variable:
 
     > **Note:**
@@ -85,6 +89,18 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup playground
         ```
 
+        If this is the first time you run the command, TiUP will download the latest version of TiDB and start the cluster.
+
+        The output returns the list of endpoints of the cluster:
+
+        ```log
+        🎉 TiDB Playground Cluster is started, enjoy!
+
+        Connect TiDB:    mysql --comments --host 127.0.0.1 --port 4000 -u root
+        TiDB Dashboard:  http://127.0.0.1:2379/dashboard
+        Grafana:         http://127.0.0.1:3000
+        ```
+
     - To specify the TiDB version and the number of instances of each component, run a command like this:
 
         {{< copyable "shell-regular" >}}
@@ -93,25 +109,9 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup playground v8.5.0 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v8.5.0. To view the latest version, run `tiup list tidb`.
+        To view the all available versions, run `tiup list tidb`.
 
-        This command returns the access methods of the cluster:
-
-        ```log
-        CLUSTER START SUCCESSFULLY, Enjoy it ^-^
-        To connect TiDB: mysql --comments --host 127.0.0.1 --port 4001 -u root -p (no password)
-        To connect TiDB: mysql --comments --host 127.0.0.1 --port 4000 -u root -p (no password)
-        To view the dashboard: http://127.0.0.1:2379/dashboard
-        PD client endpoints: [127.0.0.1:2379 127.0.0.1:2382 127.0.0.1:2384]
-        To view Prometheus: http://127.0.0.1:9090
-        To view Grafana: http://127.0.0.1:3000
-        ```
-
-        > **Note:**
-        >
-        > Starting from v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple M1 chip.
-
-4. Start a new session to access TiDB:
+4. Start a new terminal session to access the TiDB cluster endpoints:
 
     + Use the TiUP client to connect to TiDB.
 
