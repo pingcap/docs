@@ -3,7 +3,7 @@ title: TiDB Cloud API Overview
 summary: Learn about what is TiDB Cloud API, its features, and how to use API to manage your TiDB Cloud clusters.
 ---
 
-# TiDB Cloud API Overview <span style="color: #fff; background-color: #00bfff; border-radius: 4px; font-size: 0.5em; vertical-align: middle; margin-left: 16px; padding: 0 2px;">Beta</span>
+# TiDB Cloud API Overview (Beta)
 
 > **Note:**
 >
