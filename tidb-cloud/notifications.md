@@ -11,23 +11,23 @@ The [TiDB Cloud console](https://tidbcloud.com/) provides notifications to keep 
 
 You might receive different types of notifications from the TiDB Cloud console, such as:
 
-- Informational notifications
+- **Informational notifications**
 
     These notifications provide helpful updates, such as feature usage tips, application changes, or reminders for upcoming events.
 
-- Actionable notifications
+- **Actionable notifications**
 
     These notifications prompt you to perform specific actions, such as adding a credit card.
 
-- Alert notifications
+- **Alert notifications**
 
     These notifications notify you of critical issues or urgent events requiring immediate attention, such as system errors, security warnings, or important updates.
 
-- Billing notifications
+- **Billing notifications**
 
     These notifications deliver updates about billing-related activities, such as credit and discount updates.
 
-- Feedback notifications
+- **Feedback notifications**
 
     These notifications request feedback on your experience with a feature, such as rating a recent interaction or completing a survey.
 
