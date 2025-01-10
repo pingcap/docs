@@ -3,7 +3,7 @@ title: TiDB Cloud CLI Reference
 summary: Provides an overview of TiDB Cloud CLI.
 ---
 
-# TiDB Cloud CLI Reference <span style="color: #fff; background-color: #00bfff; border-radius: 4px; font-size: 0.5em; vertical-align: middle; margin-left: 16px; padding: 0 2px;">Beta</span>
+# TiDB Cloud CLI Reference (Beta)
 
 > **Note:**
 >
