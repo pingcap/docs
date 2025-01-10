@@ -5,7 +5,7 @@ summary: Learn the concept of the TiCDC Debezium Protocol and how to use it.
 
 # TiCDC Debezium Protocol
 
-[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration. Starting from v9.1, TiCDC supports DDL events and watermark events.
+[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration. Starting from v9.0, TiCDC supports DDL events and watermark events.
 
 ## Use the Debezium message format
 
@@ -788,7 +788,7 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - TiCDC converts REAL to DOUBLE, and converts BOOLEAN to TINYINT(1) when the length is one.
 
-- In TiCDC, BLOB, TEXT, GEOMETRY, or JSON column can't have a default value
+- In TiCDC, BLOB, TEXT, GEOMETRY, or JSON column haven't a default value
 
 - Debezium FLOAT data convert "5.61" to "5.610000133514404", but TiCDC does not.
 
@@ -796,6 +796,6 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - Debezium converts charsetName to "utf8mb4" when column COLLATE is "utf8_unicode_ci" and CHARACTER is null, but TiCDC does not.
 
-- Debezium escapes character, but TiCDC does not. for example, Debezium encode ENUM elements ('c', 'd', 'g,''h') to ('c','d','g,\'\'h')
+- Debezium escapes ENUM elements, but TiCDC does not. for example, Debezium encodes ENUM elements ('c', 'd', 'g,''h') to ('c','d','g,\'\'h')
 
 - TiCDC converts the default value of TIME like '1000-00-00 01:00:00.000' to "1000-00-00", but Debezium does not.
