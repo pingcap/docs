@@ -733,6 +733,10 @@
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Support](/tidb-cloud/tidb-cloud-support.md)
+  - Support Plan
+    - [Announcing the new generation of TiDB Cloud support services - Connected Care](/tidb-cloud/connected-care-announcement.md)
+    - [Connected Care Detail](/tidb-cloud/connected-care-detail.md)
+    - [AI chat in IM](/tidb-cloud/connected-care-ai-chat-in-im.md)
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
