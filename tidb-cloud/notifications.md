@@ -25,7 +25,7 @@ You might receive different types of notifications from the TiDB Cloud console, 
 
 - Billing notifications
 
-    These notifications deliver updates about billing-related activities, such as `<placeholder-example-to-be-added>`.
+    These notifications deliver updates about billing-related activities, such as credit and discount updates.
 
 - Feedback notifications
 
@@ -35,19 +35,19 @@ You might receive different types of notifications from the TiDB Cloud console, 
 
 The following table lists the notifications available in TiDB Cloud and when they are triggered:
 
-| Notification name | Description |
+| Notification | Description |
 | --- |  --- |
-| TiDB Cloud Serverless Cluster Creation | It is sent to all project members after a TiDB Cloud Serverless cluster is created. |
-| TiDB Cloud Serverless Cluster Deletion | It is sent to all project members after a TiDB Cloud Serverless cluster is deleted. |
-| TiDB Cloud Dedicated Cluster Creation | It is sent to all project members after a TiDB Cloud Dedicated cluster is created. |
-| TiDB Cloud Dedicated Cluster Deletion | It is sent to all project members after a TiDB Cloud Dedicated cluster is deleted. |
+| TiDB Cloud Serverless cluster creation | It is sent to all project members after a TiDB Cloud Serverless cluster is created. |
+| TiDB Cloud Serverless cluster deletion | It is sent to all project members after a TiDB Cloud Serverless cluster is deleted. |
+| TiDB Cloud Dedicated cluster creation | It is sent to all project members after a TiDB Cloud Dedicated cluster is created. |
+| TiDB Cloud Dedicated cluster deletion | It is sent to all project members after a TiDB Cloud Dedicated cluster is deleted. |
 | Organization Budget threshold alert | It is sent to organization owners, organization billing managers, and organization viewers when the organization [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. |
 | Project Budget threshold alert | It is sent to organization owners, organization billing managers, and organization viewers when the organization project [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. |
 | Serverless cluster spending limit threshold alert | It is sent to organization owners, organization billing managers, and organization viewers when the [spending limit threshold](/tidb-cloud/manage-serverless-spend-limit.md) of TiDB Cloud Serverless clusters in the organization is reached. |
-| Credits updates | It is sent to organization owners, organization billing managers, and organization viewers after [credits](/tidb-cloud/tidb-cloud-billing.md#credits) in the organization are applied, fully used, reclaimed or expired. |
-| Discount updates | It is sent to organization owners, organization billing managers, and organization viewers after [discounts](/tidb-cloud/tidb-cloud-billing.md#discounts) in the organization are applied, reclaimed or expired. |
-| Marketplace updates | It is sent to organization owners, organization billing managers, and organization viewers after subscription or unsubscription through a cloud provider marketplace. |
-| Support plan updates | It is sent to all organization members when the support plan subscription is changed. |
+| Credits update | It is sent to organization owners, organization billing managers, and organization viewers after [credits](/tidb-cloud/tidb-cloud-billing.md#credits) in the organization are applied, fully used, reclaimed or expired. |
+| Discount update | It is sent to organization owners, organization billing managers, and organization viewers after [discounts](/tidb-cloud/tidb-cloud-billing.md#discounts) in the organization are applied, reclaimed or expired. |
+| Marketplace update | It is sent to organization owners, organization billing managers, and organization viewers after subscription or unsubscription through a cloud provider marketplace. |
+| Support plan update | It is sent to all organization members when the support plan subscription of the organization is changed. |
 
 ## View notifications
 
