@@ -24,8 +24,8 @@
   - [Data Service](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Scalability](/tidb-cloud/scalability-concepts.md)
   - High Availability
-    - [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md)
     - [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md)
+    - [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md)
   - [Monitoring](/tidb-cloud/monitoring-concepts.md)
   - [Data Streaming](/tidb-cloud/data-streaming-concepts.md)
   - [Backup & Restore](/tidb-cloud/backup-and-restore-concepts.md)
