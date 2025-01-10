@@ -23,7 +23,7 @@ In addition, you can try out TiDB features on [TiDB Playground](https://play.tid
 
 ## Deploy a local test cluster
 
-- Scenario: Quickly deploy a local TiDB cluster for testing using a single macOS or Linux server. By deploying such a cluster, you can learn the basic architecture of TiDB and the operation of its components, such as TiDB, TiKV, PD, and the monitoring components.
+Scenario: Quickly deploy a local TiDB cluster for testing using a single macOS or Linux server. By deploying such a cluster, you can learn the basic architecture of TiDB and the operation of its components, such as TiDB, TiKV, PD, and the monitoring components.
 
 <SimpleTab>
 <div label="macOS">
@@ -58,7 +58,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     >
     > Starting from v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple silicon chip.
 
-2. Declare the global environment variable:
+1. Declare the global environment variable:
 
     > **Note:**
     >
@@ -70,16 +70,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     source ${your_shell_profile}
     ```
 
-3. Start the cluster in the current session:
-
-    > **Note:**
-    >
-    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
-    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
-    >
-    >     ```shell
-    >     tiup playground --tag ${tag_name}
-    >     ```
+1. Start the cluster in the current session:
 
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
@@ -111,33 +102,44 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
         To view the all available versions, run `tiup list tidb`.
 
-4. Start a new terminal session to access the TiDB cluster endpoints:
+    > **Note:**
+    >
+    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
+    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+    >
+    >     ```shell
+    >     tiup playground --tag ${tag_name}
+    >     ```
 
-    + Use the TiUP client to connect to TiDB.
+1. Start a new session to access the TiDB cluster endpoints:
 
-        {{< copyable "shell-regular" >}}
+    - Connect to the TiDB database:
 
-        ```shell
-        tiup client
-        ```
+        - Use the TiUP client to connect to TiDB.
 
-    + Alternatively, you can use the MySQL client to connect to TiDB.
+            {{< copyable "shell-regular" >}}
 
-        {{< copyable "shell-regular" >}}
+            ```shell
+            tiup client
+            ```
 
-        ```shell
-        mysql --host 127.0.0.1 --port 4000 -u root
-        ```
+        - Alternatively, you can use the MySQL client to connect to TiDB.
 
-5. Access the Prometheus dashboard of TiDB at <http://127.0.0.1:9090>.
+            {{< copyable "shell-regular" >}}
 
-6. Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at <http://127.0.0.1:2379/dashboard>. The default username is `root`, and the password is empty.
+            ```shell
+            mysql --host 127.0.0.1 --port 4000 -u root
+            ```
 
-7. Access the Grafana dashboard of TiDB through <http://127.0.0.1:3000>. Both the default username and password are `admin`.
+    - Prometheus: <http://127.0.0.1:9090>.
 
-8. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
+    - [TiDB Dashboard](/dashboard/dashboard-intro.md): <http://127.0.0.1:2379/dashboard>. The default username is `root`, and the password is empty.
 
-9. Clean up the cluster after the test deployment:
+    - Grafana: <http://127.0.0.1:3000>. Both the default username and password are `admin`.
+
+1. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
+
+1. Clean up the cluster after the test deployment:
 
     1. Stop the above TiDB service by pressing <kbd>Control+C</kbd>.
 
@@ -281,7 +283,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 ## Simulate production deployment on a single machine
 
-- Scenario: Experience the smallest TiDB cluster with the complete topology and simulate the production deployment steps on a single Linux server.
+Scenario: Experience the smallest TiDB cluster with the complete topology and simulate the production deployment steps on a single Linux server.
 
 This section describes how to deploy a TiDB cluster using a YAML file of the smallest topology in TiUP.
 
@@ -294,17 +296,17 @@ Before deploying the TiDB cluster, ensure that the target machine meets the foll
 
 The smallest TiDB cluster topology consists of the following instances:
 
+| Instance | Count | IP | Configuration |
+|:-- | :-- | :-- | :-- |
+| TiKV | 3 | 10.0.1.1 | Use incremental port numbers to avoid conflicts |
+| TiDB | 1 | 10.0.1.1 | Use default port and other configurations |
+| PD | 1 | 10.0.1.1 | Use default port and other configurations |
+| TiFlash | 1 | 10.0.1.1 | Use default port and other configurations |
+| Monitor | 1 | 10.0.1.1 | Use default port and other configurations |
+
 > **Note:**
 >
 > The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
-
-| Instance | Count | IP | Configuration |
-|:-- | :-- | :-- | :-- |
-| TiKV | 3 | 10.0.1.1 <br/> 10.0.1.1 <br/> 10.0.1.1 | Avoid conflict between the port and the directory |
-| TiDB | 1 | 10.0.1.1 | The default port <br/> Global directory configuration |
-| PD | 1 | 10.0.1.1 | The default port <br/> Global directory configuration |
-| TiFlash | 1 | 10.0.1.1 | The default port <br/> Global directory configuration |
-| Monitor | 1 | 10.0.1.1 | The default port <br/> Global directory configuration |
 
 Other requirements for the target machine include:
 
@@ -312,8 +314,8 @@ Other requirements for the target machine include:
 - [Stop the firewall service of the target machine](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines), or open the port needed by the TiDB cluster nodes
 - Currently, the TiUP cluster supports deploying TiDB on the x86_64 (AMD64) and ARM architectures:
 
-    - It is recommended to use CentOS 7.3 or later versions on AMD64.
-    - It is recommended to use CentOS 7.6 1810 on ARM.
+    - It is recommended to use CentOS 7.3 or later versions on AMD64 architecture.
+    - It is recommended to use CentOS 7.6 (1810) on ARM architecture.
 
 ### Deploy
 
@@ -329,7 +331,7 @@ Other requirements for the target machine include:
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2. Declare the global environment variable.
+1. Declare the global environment variable.
 
     > **Note:**
     >
@@ -341,7 +343,7 @@ Other requirements for the target machine include:
     source ${your_shell_profile}
     ```
 
-3. Install the cluster component of TiUP:
+1. Install the cluster component of TiUP:
 
     {{< copyable "shell-regular" >}}
 
@@ -349,7 +351,7 @@ Other requirements for the target machine include:
     tiup cluster
     ```
 
-4. If the TiUP cluster is already installed on the machine, update the software version:
+1. If the TiUP cluster is already installed on the machine, update the software version:
 
     {{< copyable "shell-regular" >}}
 
@@ -357,7 +359,7 @@ Other requirements for the target machine include:
     tiup update --self && tiup update cluster
     ```
 
-5. Increase the connection limit of the `sshd` service using the root user privilege. This is because TiUP needs to simulate deployment on multiple machines.
+1. Increase the connection limit of the `sshd` service using the root user privilege. This is because TiUP needs to simulate deployment on multiple machines.
 
     1. Modify `/etc/ssh/sshd_config`, and set `MaxSessions` to `20`.
     2. Restart the `sshd` service:
@@ -368,9 +370,9 @@ Other requirements for the target machine include:
         service sshd restart
         ```
 
-6. Create and start the cluster:
+1. Create and start the cluster:
 
-    Edit the configuration file according to the following template, and name it as `topo.yaml`:
+    Create the [topology configuration file](/tiup-cluster-topology-reference) according to the following template, and name it as `topo.yaml`:
 
     {{< copyable "" >}}
 
@@ -439,7 +441,7 @@ Other requirements for the target machine include:
     - `replication.enable-placement-rules`: This PD parameter is set to ensure that TiFlash runs normally.
     - `host`: The IP of the target machine.
 
-7. Execute the cluster deployment command:
+1. Execute the cluster deployment command:
 
     {{< copyable "shell-regular" >}}
 
@@ -462,7 +464,7 @@ Other requirements for the target machine include:
     Input SSH password:
     ```
 
-8. Start the cluster:
+1. Start the cluster:
 
     {{< copyable "shell-regular" >}}
 
@@ -470,17 +472,9 @@ Other requirements for the target machine include:
     tiup cluster start <cluster-name>
     ```
 
-9. Access the cluster:
+1. Access the cluster endpoints:
 
-    - Install the MySQL client. If it is already installed, skip this step.
-
-        {{< copyable "shell-regular" >}}
-
-        ```shell
-        yum -y install mysql
-        ```
-
-    - Access TiDB. The password is empty:
+    - Connect to the TiDB database using MySQL client. The password is empty:
 
         {{< copyable "shell-regular" >}}
 
@@ -488,25 +482,25 @@ Other requirements for the target machine include:
         mysql -h 10.0.1.1 -P 4000 -u root
         ```
 
-    - Access the Grafana monitoring dashboard at <http://{grafana-ip}:3000>. The default username and password are both `admin`.
+    - Grafana: <http://{grafana-ip}:3000>. The default username and password are both `admin`.
 
-    - Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at <http://{pd-ip}:2379/dashboard>. The default username is `root`, and the password is empty.
+    - [TiDB Dashboard](/dashboard/dashboard-intro.md): <http://{pd-ip}:2379/dashboard>. The default username is `root`, and the password is empty.
 
-    - To view the currently deployed cluster list:
+1. To view the currently deployed cluster list:
 
-        {{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-        ```shell
-        tiup cluster list
-        ```
+    ```shell
+    tiup cluster list
+    ```
 
-    - To view the cluster topology and status:
+1. To view the cluster topology and status:
 
-         {{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-        ```shell
-        tiup cluster display <cluster-name>
-        ```
+    ```shell
+    tiup cluster display <cluster-name>
+    ```
 
 ## What's next
 
