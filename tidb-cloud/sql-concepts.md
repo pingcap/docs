@@ -75,7 +75,7 @@ Keywords are words that have special meanings in SQL statements, such as `SELECT
 
 - Some of them require special treatment before being used as identifiers, which are called reserved keywords.
 
-However, there are special non-reserved keywords that might still require special treatment. It is recommended that you treat them as reserved keywords.
+However, some non-reserved keywords might still require special treatment. It is recommended that you treat them as reserved keywords.
 
 For more information, see [Keywords](/keywords.md).
 
