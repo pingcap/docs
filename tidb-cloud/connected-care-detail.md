@@ -85,8 +85,8 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM subscription for Cloud alerts</td>
-    <td>Connected: IM subscription for Cloud alerts</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts</td>
   </tr>
   <tr>
     <td>-</td>

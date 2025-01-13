@@ -31,7 +31,7 @@ The following table provides an overview for each support plan in the Connected 
 | Initial response time                         | -                            | Business hours                                | 7x24                                           | 7x24                                      |
 | Connected: Clinic service                     | -                            | -                                             | ✔                                              | ✔                                         |
 | Connected: AI chat in IM                      | -                            | -                                             | ✔                                              | ✔                                         |
-| Connected: IM subscription for Cloud alerts   | -                            | -                                             | ✔                                              | ✔                                         |
+| Connected: IM subscription for TiDB Cloud alerts   | -                            | -                                             | ✔                                              | ✔                                         |
 | Connected: IM subscription for ticket updates | -                            | -                                             | ✔                                              | ✔                                         |
 | Connected: IM interaction for support tickets | -                            | -                                             | -                                              | ✔                                         |
 | Technical account manager                     | -                            | -                                             | -                                              | ✔                                         |
@@ -61,7 +61,7 @@ The following table lists the shutdown schedules for the legacy support plans:
 | Legacy **Standard** plan                           | Feb 15, 2025  |
 | Legacy **Enterprise** and **Premium** plans | Jan 15, 2026  |
 
-Once a legacy support plan shuts down, TiDB Cloud will no longer support it. If you does not transition to any support plan in Connected Care by the relevant shutdown date, you will be automatically transitioned to the **Basic** support plan in Connected Care.
+Once a legacy support plan shuts down, TiDB Cloud will no longer support it. If you do not transition to any support plan in Connected Care by the relevant shutdown date, you will be automatically transitioned to the **Basic** support plan in Connected Care.
 
 ## FAQs
 
