@@ -43,5 +43,4 @@ If you no longer want to receive alert notifications of clusters in your project
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 3. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
 4. In the row of your target subscriber to be deleted, and click **...**.
-5. Click **Unsubscribe** in the drop-down menu.
 5. Click **Unsubscribe** to confirm the unsubscription in the pop-up window.
