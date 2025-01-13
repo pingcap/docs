@@ -171,7 +171,7 @@ For details about the TiDB support of the GBK character set, see [GBK](/characte
 
 ## `utf8` and `utf8mb4` in TiDB
 
-In MySQL, the character set `utf8` is limited to a maximum of three bytes. This is sufficient to store characters in the Basic Multilingual Plane (BMP), but not enough to store characters such as emojis.  For new installations, it is recommended to use `utf8mb4` and migrate away from `utf8`.
+In MySQL, the character set `utf8` is limited to a maximum of three bytes. This is sufficient to store characters in the Basic Multilingual Plane (BMP), but not enough to store characters such as emojis. For new installations, it is recommended to use `utf8mb4` and migrate away from `utf8`.
 
 In both MySQL and TiDB, `utf8` and `utf8mb3` are aliases for the same character set.
 
