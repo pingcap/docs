@@ -33,24 +33,24 @@ You might receive different types of notifications from the TiDB Cloud console, 
 
 ## Notifications list
 
-The following table lists the notifications available in TiDB Cloud and when they are triggered:
+The following table lists the notifications available in TiDB Cloud, their trigger events, and the recipients who receive them:
 
-| Notification | Description |
-| --- |  --- |
-| TiDB Cloud Serverless cluster creation | It is sent to all project members after a TiDB Cloud Serverless cluster is created. |
-| TiDB Cloud Serverless cluster deletion | It is sent to all project members after a TiDB Cloud Serverless cluster is deleted. |
-| TiDB Cloud Dedicated cluster creation | It is sent to all project members after a TiDB Cloud Dedicated cluster is created. |
-| TiDB Cloud Dedicated cluster deletion | It is sent to all project members after a TiDB Cloud Dedicated cluster is deleted. |
-| Organization Budget threshold alert | It is sent to organization owners, organization billing managers, and organization viewers when the organization [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. |
-| Project Budget threshold alert | It is sent to organization owners, organization billing managers, and organization viewers when the organization project [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. |
-| Serverless cluster spending limit threshold alert | It is sent to organization owners, organization billing managers, and organization viewers when the [spending limit threshold](/tidb-cloud/manage-serverless-spend-limit.md) of TiDB Cloud Serverless clusters in the organization is reached. |
-| Credits update | It is sent to organization owners, organization billing managers, and organization viewers after [credits](/tidb-cloud/tidb-cloud-billing.md#credits) in the organization are applied, fully used, reclaimed or expired. |
-| Discount update | It is sent to organization owners, organization billing managers, and organization viewers after [discounts](/tidb-cloud/tidb-cloud-billing.md#discounts) in the organization are applied, reclaimed or expired. |
-| Marketplace update | It is sent to organization owners, organization billing managers, and organization viewers after subscription or unsubscription through a cloud provider marketplace. |
-| Support plan update | It is sent to all organization members when the support plan subscription of the organization is changed. |
+| Notification | Trigger event | Notification receiver |
+| --- | --- | --- |
+| TiDB Cloud Serverless cluster creation | A TiDB Cloud Serverless cluster is created. | All project members |
+| TiDB Cloud Serverless cluster deletion | A TiDB Cloud Serverless cluster is deleted. | All project members |
+| TiDB Cloud Dedicated cluster creation | A TiDB Cloud Dedicated cluster is created. | All project members |
+| TiDB Cloud Dedicated cluster deletion | A TiDB Cloud Dedicated cluster is deleted. | All project members |
+| Organization Budget threshold alert | The organization [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
+| Project Budget threshold alert | The project [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. | `Organization Owner`, `Organization Billing Manager`, `Organization Billing Viewer`, and `Project Owner` |
+| Serverless cluster spending limit threshold alert | The [spending limit threshold](/tidb-cloud/manage-serverless-spend-limit.md) of TiDB Cloud Serverless clusters in the organization is reached. | `Organization Owner`, `Organization Billing Manager`, `Organization Billing Viewer`, and `Project Owner` |
+| Credits update | [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) of the organization are applied, fully used, reclaimed, or expired. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
+| Discount update | [Discounts](/tidb-cloud/tidb-cloud-billing.md#discounts) of the organization are applied, reclaimed, or expired. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
+| Marketplace update | The organization has a subscription or unsubscription through a cloud provider marketplace. | All organization members |
+| Support plan update | The support plan subscription for the organization is changed. | All organization members |
 
 ## View notifications
 
-When a new notification is available, a red dot is displayed on the bell icon in the lower-right corner of the TiDB Cloud console. Click the bell icon to view the notification.
+When a new notification is available, a blue dot is displayed on the bell icon in the lower-right corner of the TiDB Cloud console. Click the bell icon to view the notification.
 
 Alternatively, you can click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console, and then click **Notifications** to view a list of all notifications, where you can click a specific notification for more details.
