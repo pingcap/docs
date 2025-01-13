@@ -3,9 +3,9 @@ title: Connected Care Details
 summary: Introduces detailed information about the Connected Care support services for TiDB Cloud.
 ---
 
-#Connected Care Details
+# Connected Care Details
 
-Here is the detailed information about the Connected Care support services.
+This document provides detailed information about the [Connected Care](/tidb-cloud/connected-care-announcement.md) support services.
 
 <table>
 <thead>
@@ -29,7 +29,7 @@ Here is the detailed information about the Connected Care support services.
     <td>Pricing</td>
     <td>Free</td>
     <td>Monthly cost is based on the greater of $29 or 10% of total monthly charges.<br><br><strong>Sign up with a one-month free trial</strong></td>
-    <td>Monthly cost is based on the greater of $699 or 20% of total monthly charges.<br><br><strong>Sign up, or Contact Sales</strong></td>
+    <td>Monthly cost is based on the greater of $699 or 20% of total monthly charges.<br><br><strong>Sign up, or contact sales</strong></td>
     <td>Contact sales</td>
   </tr>
   <tr>
@@ -59,10 +59,10 @@ Here is the detailed information about the Connected Care support services.
   </tr>
   <tr>
     <td rowspan="10">Services</td>
-    <td>Billing and Account Support</td>
-    <td>Billing and Account Support</td>
-    <td>Billing and Account Support</td>
-    <td>Billing and Account Support</td>
+    <td>Billing and account support</td>
+    <td>Billing and account support</td>
+    <td>Billing and account support</td>
+    <td>Billing and account support</td>
   </tr>
   <tr>
     <td>-</td>
@@ -154,3 +154,4 @@ Here is the detailed information about the Connected Care support services.
 
 - Business Hours: 9 AM - 6 PM local time, Monday to Friday
 - IM: Instant Message. Currently, [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) are supported. In the future, Microsoft Teams is planned.
+- Clinic: a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your TiDB Cloud clusters.
