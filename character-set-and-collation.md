@@ -76,6 +76,10 @@ SELECT
 
 ### Character set and collation naming
 
+A character set can have multiple collations, named in the format `<character_set>_<collation_properties>`. For example, the `utf8mb4` character set has a collation called `utf8mb4_bin`, which is a binary collation for `utf8mb4`. Multiple collation properties can be included in the name, separated by underscores (`_`). 
+
+The following table shows the suffixes and meanings of character sets and collations.
+
 | Suffix | Meaning |
 |---|---|
 | `_bin` | binary |
