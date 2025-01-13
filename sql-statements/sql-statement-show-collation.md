@@ -25,7 +25,11 @@ ShowLikeOrWhere ::=
 
 ## Examples
 
+<CustomContent platform="tidb">
+
 When [new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is enabled (the default) the output looks like this.
+
+</CustomContent>
 
 ```sql
 SHOW COLLATION;
@@ -52,6 +56,8 @@ SHOW COLLATION;
 13 rows in set (0.00 sec)
 ```
 
+<CustomContent platform="tidb">
+
 When new collation framework is disabled, only binary collations are listed.
 
 ```sql
@@ -71,6 +77,7 @@ SHOW COLLATION;
 +-------------+---------+----+---------+----------+---------+---------------+
 6 rows in set (0.00 sec)
 ```
+</CustomContent>
 
 To filter on the character set, you can add a `WHERE` clause.
 
