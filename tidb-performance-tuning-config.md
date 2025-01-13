@@ -55,11 +55,11 @@ The following table outlines the impact of specific system variable configuratio
 
 | System variable | Description | Note |
 | ---------| ---- | ----|
-| [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) | Increase the maximum number of plans that can be cached from the default `100` to `200`. This improves performance for workloads with many prepared statement patterns. | Increasing this value can lead to higher memeory usage for session plan cache. |
+| [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) | Increase the maximum number of plans that can be cached from the default `100` to `200`. This improves performance for workloads with many prepared statement patterns. | Increasing this value can lead to higher memory usage for the session plan cache. |
 | [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)| Enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature to reduce compile costs for applications that do not use prepared statements. | N/A |
 | [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)| Cache plans for applications that use prepared statements but close the plan after each execution. | N/A |
 | [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)| Increase the timeout for synchronously loading statistics from the default 100 milliseconds to 2 seconds. This ensures TiDB loads the necessary statistics before query compilation. | Increasing this value leads to a longer synchronization wait time before query compilation. |
-| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)| Enable Index Join support when the inner table has `Selection` or `Projection` operators on it. | N/A | 
+| [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700) | Enable Index Join support when the inner table has `Selection` or `Projection` operators on it. | N/A | 
 | [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)| Enable the optimization rule of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md). | This is limited to the `ROW_NUMBER()` window function. | 
 | [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)| Enable [Runtime Filter](/runtime-filter.md#runtime-filter-mode) in the local mode to improve hash join efficiency. | The variable is introduced in v7.2.0 and is disabled by default for safety. | 
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)| Enable non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) pushdown to TiFlash. | This is an experimental feature. | 
@@ -142,7 +142,7 @@ The following table compares throughput (operations per second) between the base
 
 #### Performance analysis
 
-Titan is enabled by default starting from v7.6.0 and the default `min-blob-size` of Titan in TiDB v8.4.0 is `32KiB`. The baseline configuration uses a record size of `31KiB` to ensure data is stored in RocksDB. In contrast, for the key settings configuration, set `min-blob-size` to `1KiB`, causing data to be stored in Titan.
+Titan is enabled by default starting from v7.6.0 and the default `min-blob-size` of Titan in TiDB v8.1.0 is `32KiB`. The baseline configuration uses a record size of `31KiB` to ensure data is stored in RocksDB. In contrast, for the key settings configuration, set `min-blob-size` to `1KiB`, causing data to be stored in Titan.
 
 The performance improvement observed in the key settings is primarily attributed to Titan's ability to reduce RocksDB compactions. As shown in the following figures:
 
@@ -205,7 +205,7 @@ The following sections explain how to handle each of these cases. You need to ad
 If your workload involves frequent small transactions or queries that frequently request timestamps, TSO (Timestamp Oracle) can become a performance bottleneck. To check if TSO wait time is impacting your system, check the [**Performance Overview > SQL Execute Time Overview**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview) panel. If TSO wait time constitutes a large portion of your SQL execution time, consider the following optimizations:
 
 - Use low-precision TSO (enable [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)) for read operations that do not need strict consistency. For more information, see [Solution 1: use low-precision TSO](#solution-1-low-precision-tso).
-- Enable [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml) to reduce TSO requests for batch operations
+- Enable [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml) to reduce TSO requests for batch operations.
 
 #### Solution 1: low-precision TSO
 
