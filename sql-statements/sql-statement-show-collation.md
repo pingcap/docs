@@ -76,6 +76,7 @@ SHOW COLLATION;
 +-------------+---------+----+---------+----------+---------+---------------+
 6 rows in set (0.00 sec)
 ```
+
 </CustomContent>
 
 To filter on the character set, you can add a `WHERE` clause.
