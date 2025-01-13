@@ -417,20 +417,20 @@ The `--output-filename-template` argument specifies how all files are named, bef
 
 The following fields are available to the template:
 
-* `.DB` — database name
-* `.Table` — table name or object name
-* `.Index` — when a table is split into multiple files, this is the 0-based sequence number indicating which part we are dumping
+* `.DB`: the database name
+* `.Table`: the table name or the object name
+* `.Index`: when a table is split into multiple files, this is the 0-based sequence number indicating which part you are dumping
 
-The database and table names may contain special characters like `/` not acceptable in the file system. Thus, Dumpling also provided a function `fn` to percent-escape these special characters:
+The database and table names might contain special characters such as `/` that is not acceptable in the file system. Thus, Dumpling also provides a function `fn` to percent-escape these special characters:
 
 * U+0000 to U+001F (control characters)
 * `/`, `\`, `<`, `>`, `:`, `"`, `*`, `?` (invalid Windows path characters)
 * `.` (database/table name separator)
-* `-`, if appeared as part of `-schema`
+* `-`, if used as part of `-schema`
 
-For instance, using `--output-filename-template '{{fn .Table}}.{{printf "%09d" .Index}}'`, Dumpling will write the table `"db"."tbl:normal"` into files named like `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, etc.
+For instance, using `--output-filename-template '{{fn .Table}}.{{printf "%09d" .Index}}'`, Dumpling will write the table `"db"."tbl:normal"` into files named such as `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.
 
-Besides the data files, you could also define named templates to replace the file name of the schema files. The default are configuration is:
+Besides the data files, you can also define named templates to replace the file name of the schema files. The following table shows the default configurations.
 
 | Name | Content |
 |------|---------|
