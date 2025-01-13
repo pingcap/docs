@@ -1,9 +1,9 @@
 ---
-title: Notifications on the TiDB Cloud console
+title: Notifications on the TiDB Cloud Console
 summary: Learn about notifications on the TiDB Cloud console, including notifications types, purposes, and how to view them.
 ---
 
-# Notifications on the TiDB Cloud console
+# Notifications on the TiDB Cloud Console
 
 The [TiDB Cloud console](https://tidbcloud.com/) provides notifications to keep you informed about important updates, system messages, product changes, billing reminders, and other relevant information. These notifications help ensure that you stay informed and can take necessary actions without leaving the console.
 
