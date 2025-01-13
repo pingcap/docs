@@ -1,9 +1,9 @@
 ---
-title: Connected Care Detail
-summary: Detailed information about the Connected Care support services
+title: Connected Care Details
+summary: Introduces detailed information about the Connected Care support services for TiDB Cloud.
 ---
 
-# Connetecd Care Detail
+#Connected Care Details
 
 Here is the detailed information about the Connected Care support services.
 
@@ -20,17 +20,17 @@ Here is the detailed information about the Connected Care support services.
 <tbody>
   <tr>
     <td>Features and Services</td>
-    <td>Great for personal starter projects, this plan connects you with an active community and AI-powered assistance for essential support needs.</td>
-    <td>Ideal for development and testing phases, offering direct connections with unlimited access to tech support, to kickstart your cloud journey.</td>
-    <td>Designed for production workloads, this plan connects your operations with advanced monitoring, prompt alerts, and fast 7x24 response times for a seamless experience.</td>
+    <td>Great for personal starter projects, connecting you with an active community and AI-powered assistance for essential support needs.</td>
+    <td>Ideal for development and testing phases, offering direct connections and unlimited access to tech support, to kickstart your cloud journey.</td>
+    <td>Designed for production workloads, connecting your operations with advanced monitoring, prompt alerts, and fast 7x24 response times for a seamless experience.</td>
     <td>Built for enterprises with mission-critical workloads, offering the fastest response times, proactive support, and dedicated connections through named Technical Account Managers.</td>
   </tr>
   <tr>
     <td>Pricing</td>
     <td>Free</td>
-    <td>Charges will be a minimum of $29, <strong>OR</strong> 10% of total TiDB Cloud monthly charges, whichever is higher.<br><br><strong>Sign up with a one-month free trial</strong></td>
-    <td>Charges will be a minimum of $699, <strong>OR</strong> 20% of total TiDB Cloud monthly charges, whichever is higher monthly charges.<br><br><strong>Sign up, or Contact Sales</strong></td>
-    <td>Contact Sales</td>
+    <td>Monthly cost is based on the greater of $29 or 10% of total monthly charges.<br><br><strong>Sign up with a one-month free trial</strong></td>
+    <td>Monthly cost is based on the greater of $699 or 20% of total monthly charges.<br><br><strong>Sign up, or Contact Sales</strong></td>
+    <td>Contact sales</td>
   </tr>
   <tr>
     <td rowspan="4">Initial Response Time</td>
@@ -153,4 +153,4 @@ Here is the detailed information about the Connected Care support services.
 </table>
 
 - Business Hours: 9 AM - 6 PM local time, Monday to Friday
-- IM: Instant Message. Currently we support Slack, and Lark. (We will support Teams in the future)
+- IM: Instant Message. Currently, [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) are supported. In the future, Microsoft Teams is planned.
