@@ -119,7 +119,7 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>Technical Account Management</td>
   </tr>
   <tr>
-    <td rowspan="5">Customer Resource</td>
+    <td rowspan="5">Customer Resources</td>
     <td>Documentations</td>
     <td>Documentations</td>
     <td>Documentations</td>
