@@ -54,7 +54,7 @@ SELECT 'A' = 'a';
 1 row in set (0.00 sec)
 ```
 
-The following demonstates differences in how various Unicode collations compare the `ß` that is used in the German language to `ss`. Here you can see that only the more strict Unicode collations consider this to be the same, resulting in `1` (which means `TRUE`).
+The following demonstrates how different Unicode collations compare the German `ß` with `ss`. You can see that only the more strict Unicode collations treat them as equivalent, returning 1 (which means `TRUE`).
 
 ```sql
 SELECT
@@ -172,7 +172,7 @@ For details about the TiDB support of the GBK character set, see [GBK](/characte
 
 In MySQL, the character set `utf8` is limited to a maximum of three bytes. This is sufficient to store characters in the Basic Multilingual Plane (BMP), but not enough to store characters such as emojis. It is recommended to use the character set `utf8mb4` for new installations and migrate away from `utf8`.
 
-In both MySQL and TiDB `utf8` and `utf8mb3` are aliases for the same character set.
+In both MySQL and TiDB, `utf8` and `utf8mb3` are aliases for the same character set.
 
 By default, TiDB also limits the character set `utf8` to a maximum of three bytes to ensure that data created in TiDB can still safely be restored in MySQL. You can disable it by changing the value of the system variable [`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8) to `OFF`. However it is recommended to use `utf8mb4` instead.
 
