@@ -1,6 +1,6 @@
 ---
 title: Notifications in the TiDB Cloud Console
-summary: Learn about notifications in the TiDB Cloud Console, including notification types, purposes, and how to view them.
+summary: Learn about notifications in the TiDB Cloud console, including notification types, purposes, and how to view them.
 ---
 
 # Notifications in the TiDB Cloud Console
@@ -37,9 +37,9 @@ The following table lists the notifications available in TiDB Cloud, along with 
 
 | Notification | Trigger event | Notification recipient |
 | --- | --- | --- |
-| TiDB Cloud Serverless cluster creation | A TiDB Cloud Serverless cluster is created. | All project members |
+| TiDB Cloud Serverless cluster creation | A [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster is created. | All project members |
 | TiDB Cloud Serverless cluster deletion | A TiDB Cloud Serverless cluster is deleted. | All project members |
-| TiDB Cloud Dedicated cluster creation | A TiDB Cloud Dedicated cluster is created. | All project members |
+| TiDB Cloud Dedicated cluster creation | A [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster is created. | All project members |
 | TiDB Cloud Dedicated cluster deletion | A TiDB Cloud Dedicated cluster is deleted. | All project members |
 | Organization Budget threshold alert | The organization [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. | `Organization Owner`, `Organization Billing Manager`, and `Organization Billing Viewer` |
 | Project Budget threshold alert | The project [budget threshold](/tidb-cloud/tidb-cloud-budget.md) is reached. | `Organization Owner`, `Organization Billing Manager`, `Organization Billing Viewer`, and `Project Owner` |
