@@ -29,10 +29,13 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 2. Click the **Team Chat** tab.
 3. Under **Apps**, find and select **Incoming Webhook**, or select a chat channel from above that you would like to receive messages in.
 4. Enter the following command to make a new connection, please replace `<connectionName>` with your connection name that you want to use, for example, `tidbcloud-alerts`:
+
     ```shell
     /inc connect ${connectionName}
     ```
+
 5. The command will return the following details:
+
    - **Endpoint**. It will provide a webhook URL in the format: `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX`.
    - **Verification Token**
 
