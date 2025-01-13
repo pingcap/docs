@@ -44,7 +44,7 @@ The default collation of the GBK character set in MySQL is `gbk_chinese_ci`. Unl
 
 <CustomContent platform="tidb">
 
-To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, you need to set the TiDB option [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) to `true` to enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations). This is the default for new deployments.
+To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, you need to set the TiDB option [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) to `true` to enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations). This is the default setting for new deployments.
 
 </CustomContent>
 
@@ -132,5 +132,5 @@ In the above table, the result of `SELECT HEX('a');` in the `utf8mb4` byte set i
 
 ## See also
 
-* [SHOW CHARACTER SET](/sql-statements/sql-statement-show-character-set.md)
+* [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
 * [Character Set and Collation](/character-set-and-collation.md)

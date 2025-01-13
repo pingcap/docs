@@ -27,7 +27,7 @@ ShowLikeOrWhere ::=
 
 <CustomContent platform="tidb">
 
-When [new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is enabled (the default) the output looks like this.
+When [the new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is enabled (the default) the output looks like this.
 
 </CustomContent>
 
@@ -58,7 +58,7 @@ SHOW COLLATION;
 
 <CustomContent platform="tidb">
 
-When new collation framework is disabled, only binary collations are listed.
+When the new collation framework is disabled, only binary collations are listed.
 
 ```sql
 SHOW COLLATION;
