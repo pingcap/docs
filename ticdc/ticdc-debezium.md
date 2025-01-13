@@ -17,7 +17,7 @@ DDL Event: Represents a DDL change record. It is sent after an upstream DDL stat
 
 DML Event: Represents a row data change record. This type of Event is sent when a row change occurs. It contains the information about the row after the change occurs.
 
-WATERMARK Event: Represents a special time point. It indicates that the Events received before this point is complete.
+WATERMARK Event: Represents a special time point. It indicates that the Events received before this point is complete. It applies only to the TiDB extension field and takes effect when you set `enable-tidb-extension` to `true` in `sink-uri`.
 
 The configuration example for using the Debezium message format is as follows:
 
