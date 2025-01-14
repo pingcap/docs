@@ -55,7 +55,7 @@ The support plans in the Connected Care services introduce a completely new set 
 
 - Connected: IM subscription for TiDB Cloud alerts
 
-    This feature provides you with an easy way to subscribe to alert notifications via an instant message (IM) tool, keeping you informed about critical updates.
+    This feature provides you with an easy way to subscribe to alert notifications via an IM tool, keeping you informed about critical updates.
 
 - Connected: IM subscription for ticket updates
 
