@@ -69,9 +69,9 @@ With these new features, the Connected Care services offer you better connectivi
 
 - New **Enterprise** and **Premium** plans: connect customers with modern communication tools and advanced AI capabilities through advanced monitoring service in Clinic, IM subscription for TiDB Cloud alerts, IM subscription for ticket updates, AI chat in IM, and IM interaction for support tickets.
 
-- New **Developer** plan: customers benefit from access to the same community and AI assistance as the **Basic** plan, while also enjoying a reduced subscription fee starting at $29 (decreased from $49 for the legacy **Standard** plan).
+- New **Developer** plan: customers benefit from access to the same community and [tidb.ai](https://tidb.ai/) assistance as the **Basic** plan, while also enjoying a reduced subscription fee starting at $29 (decreased from $49 for the legacy **Standard** plan).
 
-- New **Basic** plan: customers will be guided to join the active community channels, where they can engage with other community members and interact with an AI bot for technical assistance.
+- New **Basic** plan: customers will be guided to join the active community channels, where they can engage with other community members and interact with [tidb.ai](https://tidb.ai/) for technical assistance.
 
 ## Replacement and retirement of legacy support plans
 
