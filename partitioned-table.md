@@ -1782,7 +1782,9 @@ SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE table_name='t1';
 3 rows in set (0.00 sec)
 ```
 
-When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global indexes or revert them to local indexes as needed:
+When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global indexes or revert them to local indexes as needed.
+
+The following SQL will flipping all the indexes from GLOBAL to LOCAL and LOCAL to GLOBAL. And `uidx3` needs to be global, since it does not include the new partitioning column `col1`, while `uidx12` and `idx1` can be either GLOBAL or LOCAL.
 
 ```sql
 ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL, idx1 LOCAL);
