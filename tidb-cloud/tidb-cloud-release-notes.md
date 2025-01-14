@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Introduce the [Notifications](https://tidbcloud.com/console/notifications) feature, which enables you to stay informed instantly with TiDB Cloud updates and alerts through the [TiDB Cloud console](https://tidbcloud.com/).
 
-  For more information, see [Notifications](/tidb-cloud/notifications.md).
+    For more information, see [Notifications](/tidb-cloud/notifications.md).
 
 ## January 2, 2025
 
