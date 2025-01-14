@@ -27,7 +27,7 @@ ShowLikeOrWhere ::=
 
 <CustomContent platform="tidb">
 
-When [the new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is enabled (the default) the output looks like this.
+When [the new collation framework](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) is enabled (the default), the example output is as follows:
 
 </CustomContent>
 

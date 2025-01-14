@@ -55,7 +55,7 @@ SELECT 'A' = 'a';
 1 row in set (0.00 sec)
 ```
 
-The following demonstrates how different Unicode collations compare the German `ß` with `ss`. You can see that only the more strict Unicode collations treat them as equivalent, returning 1 (which means `TRUE`).
+The following example demonstrates how different Unicode collations compare the German `ß` with `ss`. You can see that only the more strict Unicode collations treat them as equivalent, returning `1` (which means TRUE).
 
 ```sql
 SELECT
@@ -77,17 +77,17 @@ SELECT
 
 ### Character set and collation naming
 
-A character set can have multiple collations, named in the format `<character_set>_<collation_properties>`. For example, the `utf8mb4` character set has a collation called `utf8mb4_bin`, which is a binary collation for `utf8mb4`. Multiple collation properties can be included in the name, separated by underscores (`_`). 
+A character set can have multiple collations, named in the `<character_set>_<collation_properties>` format. For example, the `utf8mb4` character set has a collation called `utf8mb4_bin`, which is a binary collation for `utf8mb4`. Multiple collation properties can be included in the name, separated by underscores (`_`). 
 
-The following table shows the suffixes and meanings of character sets and collations.
+The following table shows the common collation properties and meanings.
 
-| Suffix | Meaning |
+| Collation properties | Meaning |
 |---|---|
-| `_bin` | binary |
-| `_ci` | case insensitive |
-| `_ai_ci` | accent insensitive, case insensitive |
+| `_bin` | Binary |
+| `_ci` | Case insensitive |
+| `_ai_ci` | Accent insensitive, case insensitive |
 | `_0900_bin` | Unicode UCA 9.0.0, binary |
-| `_unicode_ci` | (older) Unicode UCA collation, case insensitive |
+| `_unicode_ci` | (Older) Unicode UCA collation, case insensitive |
 | `_general_ci` | Less strict Unicode collation, case insensitive |
 
 ## Character sets and collations supported by TiDB
@@ -179,7 +179,7 @@ In MySQL, the character set `utf8` is limited to a maximum of three bytes. This 
 
 In both MySQL and TiDB, `utf8` and `utf8mb3` are aliases for the same character set.
 
-By default, TiDB also limits the character set `utf8` to a maximum of three bytes to ensure that data created in TiDB can still safely be restored in MySQL. You can disable it by changing the value of the system variable [`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8) to `OFF`. However it is recommended to use `utf8mb4` instead.
+By default, TiDB also limits the character set `utf8` to a maximum of three bytes to ensure that data created in TiDB can still safely be restored in MySQL. You can disable it by changing the value of the system variable [`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8) to `OFF`. However, it is recommended to use `utf8mb4` instead for full Unicode support and better compatibility.
 
 The following demonstrates the default behavior when inserting a 4-byte emoji character into a table. The `INSERT` statement fails for the `utf8` character set, but succeeds for `utf8mb4`:
 
