@@ -7,7 +7,7 @@ summary: Introduces the new generation of TiDB Cloud support services - Connecte
 
 As customers of all sizes continue to scale use cases and operations on TiDB Cloud, TiDB Cloud is committed to re-imagining its support services to accommodate their evolving needs. To deliver even greater value and seamless experiences, TiDB Cloud is excited to announce the launch of the next-generation support services, **Connected Care**, on **Feb 17, 2025**.
 
-As part of this transition, the current support plan offerings will no longer be available for purchase starting from **Feb 17, 2025**. However, TiDB Cloud will continue to provide full support to customers subscribing to legacy plans until their respective [retirement dates](#legacy-plans-replacement-and-retirement).
+As part of this transition, the current support plan offerings will no longer be available for purchase and will be classified as legacy support plans starting from **Feb 17, 2025**. However, TiDB Cloud will continue to provide full support to customers subscribing to legacy plans until their respective [retirement dates](#legacy-plans-replacement-and-retirement).
 
 To ensure a smooth transition and access to the latest features, TiDB Cloud encourages customers to transition and adopt the Connected Care services.
 
@@ -59,17 +59,17 @@ The support plans in the Connected Care services introduce a completely new set 
 
 - Connected: IM subscription for ticket updates
 
-    This feature enables you to subscribe to your support ticket updates through an instant message (IM) tool.
+    This feature enables you to subscribe to your support ticket updates through an IM tool.
 
 - Connected: IM interaction for support tickets
 
-    This feature enables you to quickly create and interact with support tickets through an instant message (IM) tool for streamlined communication.
+    This feature enables you to quickly create and interact with support tickets through an IM tool for streamlined communication.
 
 With these new features, the Connected Care services offer you better connectivity, more personalized support, and cost-effective solutions for different customer needs.
 
 - New **Enterprise** and **Premium** plans: connect customers with modern communication tools and advanced AI capabilities through advanced monitoring service in Clinic, IM subscription for TiDB Cloud alerts, IM subscription for ticket updates, AI chat in IM, and IM interaction for support tickets.
 
-- New **Developer** plan: customers benefit from access to the same community and [tidb.ai](https://tidb.ai/) assistance as the **Basic** plan, while also enjoying a reduced subscription fee starting at $29 (decreased from $49 for the legacy **Standard** plan).
+- New **Developer** plan: customers benefit from access to the same community and [tidb.ai](https://tidb.ai/) assistance as the **Basic** plan, while also enjoying a reduced subscription fee starting at $29 (decreased from $49 for the legacy **Standard** plan) and direct connections with unlimited access to technical support.
 
 - New **Basic** plan: customers will be guided to join the active community channels, where they can engage with other community members and interact with [tidb.ai](https://tidb.ai/) for technical assistance.
 
