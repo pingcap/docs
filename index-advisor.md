@@ -25,12 +25,16 @@ Below is an example of a single query, assuming 5,000 rows in table  `t` (we omi
 
 ```sql
 mysql> CREATE TABLE t(a int, b int, c int);
-mysql> RECOMMEND INDEX RUN for "select a, b from t where a=1 and b=1";
-+----------+-------+------------+---------------+------------+----------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+---------------------------------+
-| database | table | index_name | index_columns | index_size | reason                                                                                                                           | top_impacted_query                                                                            | create_index_statement          |
-+----------+-------+------------+---------------+------------+----------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+---------------------------------+
-| test     | t     | idx_a_b    | a,b           | 19872      | Column [a b] appear in Equal or Range Predicate clause(s) in query: select `a` , `b` from `test` . `t` where `a` = ? and `b` = ? | [{"Query":"SELECT `a`,`b` FROM `test`.`t` WHERE `a` = 1 AND `b` = 1","Improvement":0.999994}] | CREATE INDEX idx_a_b ON t(a,b); |
-+----------+-------+------------+---------------+------------+----------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+---------------------------------+
+mysql> RECOMMEND INDEX RUN for "select a, b from t where a=1 and b=1"\G
+*************************** 1. row ***************************
+              database: test
+                 table: t
+            index_name: idx_a_b
+         index_columns: a,b
+        est_index_size: 0
+                reason: Column [a b] appear in Equal or Range Predicate clause(s) in query: select `a` , `b` from `test` . `t` where `a` = ? and `b` = ?
+    top_impacted_query: [{"Query":"SELECT `a`,`b` FROM `test`.`t` WHERE `a` = 1 AND `b` = 1","Improvement":0.999994}]
+create_index_statement: CREATE INDEX idx_a_b ON t(a,b);
 ```
 
 The index advisor considers single column indexes on `a` and `b` seperately and end up combining them in a single index which provides the best performance for the above singel query. 
@@ -71,7 +75,7 @@ mysql> select * from t1, t2 where t1.a=1 and t1.d=t2.d;
 
 mysql> RECOMMEND INDEX RUN;
 +----------+-------+------------+---------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| database | table | index_name | index_columns | index_size | reason                                                                                                                                                                | top_impacted_query                                                                                                                                                                                                              | create_index_statement           |
+| database | table | index_name | index_columns | est_index_size | reason                                                                                                                                                                | top_impacted_query                                                                                                                                                                                                              | create_index_statement           |
 +----------+-------+------------+---------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | test     | t1    | idx_a_b    | a,b           | 19872      | Column [a b] appear in Equal or Range Predicate clause(s) in query: select `a` , `b` from `test` . `t1` where `a` = ? and `b` <= ?                                    | [{"Query":"SELECT `a`,`b` FROM `test`.`t1` WHERE `a` = 1 AND `b` \u003c= 5","Improvement":0.998214},{"Query":"SELECT * FROM (`test`.`t1`) JOIN `test`.`t2` WHERE `t1`.`a` = 1 AND `t1`.`d` = `t2`.`d`","Improvement":0.336837}] | CREATE INDEX idx_a_b ON t1(a,b); |
 | test     | t1    | idx_d      | d             | 9936       | Column [d] appear in Equal or Range Predicate clause(s) in query: select `d` from `test` . `t1` order by `d` limit ?                                                  | [{"Query":"SELECT `d` FROM `test`.`t1` ORDER BY `d` LIMIT 10","Improvement":0.999433}]                                                                                                                                          | CREATE INDEX idx_d ON t1(d);     |
@@ -102,7 +106,7 @@ The `RECOMMEND INDEX` syntax supports configuring and displaying options related
 
 ```sql
 Recommend Index Set <option> = <value>;
-Recommend Index Show;
+Recommend Index Show Option;
 ```
 
 There are four configurable options available, detailed below:
@@ -114,7 +118,7 @@ There are four configurable options available, detailed below:
 Users can view the current settings using the `RECOMMEND INDEX SHOW` command. Below is an example that displays the current option values and demonstrates how to modify the timeout option:
 
 ```sql
-mysql> recommend index show;
+mysql> recommend index show option;
 +-------------------+-------+---------------------------------------------------------+
 | option            | value | description                                             |
 +-------------------+-------+---------------------------------------------------------+
