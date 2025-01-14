@@ -9,9 +9,9 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ## Prerequisites
 
-- To subscribe to alert notification of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
+- The Subscribing via Slack feature is only available for organizations that subscribes to the Enterprise support plan or higher.
 
-- To receive alert notifications via Slack, you need to have an Enterprise support plan or higher.
+- To subscribe to alert notification of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
 
 ## Subscribe to alert notifications
 
