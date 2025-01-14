@@ -62,7 +62,7 @@ This section introduces the preparation works needed before upgrading your TiDB 
 
 Review compatibility changes in TiDB release notes. If any changes affect your upgrade, take actions accordingly.
 
-The following provides release notes you need to know when you upgrade from v8.4.0 to the current version (v8.5.1). If you are upgrading from v8.3.0 or earlier versions to the current version, you might also need to check the release notes of the intermediate versions.
+The following provides release notes you need to know when you upgrade from v8.4.0 to the current version (v8.5.1). If you are upgrading from v8.3.0 or earlier versions to the current version, you might also need to check the [release notes](/releases/release-notes.md) of the intermediate versions.
 
 - TiDB v8.5.0 [compatibility changes](/releases/release-8.5.0.md#compatibility-changes)
 - TiDB v8.5.1 [release notes](/releases/release-8.5.1.md)
