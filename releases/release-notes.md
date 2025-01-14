@@ -8,6 +8,10 @@ summary: TiDB has released multiple versions, including 8.5.0, 8.4.0-DMR, 8.3.0-
 
 <EmailSubscriptionWrapper />
 
+This document lists all released TiDB versions, sorted by version number in descending order.
+
+To learn about the support timelines for Long-Term Support (LTS) versions of TiDB, see the [TiDB Release Support Policy](https://pingcap.com/tidb-release-support-policy/).
+
 ## 8.5
 
 - [8.5.0](/releases/release-8.5.0.md): 2024-12-19
