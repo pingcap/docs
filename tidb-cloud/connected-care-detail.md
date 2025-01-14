@@ -28,8 +28,8 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   <tr>
     <td>Pricing</td>
     <td>Free</td>
-    <td>Monthly cost is based on the greater of $29 or 10% of total monthly charges.<br><br><strong>Sign up with a one-month free trial</strong></td>
-    <td>Monthly cost is based on the greater of $699 or 20% of total monthly charges.<br><br><strong>Sign up, or contact sales</strong></td>
+    <td>Monthly cost is based on the greater of $29 or 10% of total monthly charges.</td>
+    <td>Monthly cost is based on the greater of $699 or 20% of total monthly charges.</td>
     <td>Contact sales</td>
   </tr>
   <tr>
