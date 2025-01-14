@@ -9,7 +9,7 @@ As customers of all sizes continue to scale use cases and operations on TiDB Clo
 
 As part of this transition, the current support plan offerings will no longer be available for purchase starting from **Feb 15, 2025**. However, TiDB Cloud will continue to provide full support to customers subscribing to legacy plans until their respective [retirement dates](#legacy-plans-replacement-and-retirement).
 
-To ensure a smooth transition and access to the latest features, TiDB Cloud encourages customers to transit and adopt the Connected Care services.
+To ensure a smooth transition and access to the latest features, TiDB Cloud encourages customers to transition and adopt the Connected Care services.
 
 ## Connected Care
 

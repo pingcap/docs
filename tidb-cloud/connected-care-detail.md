@@ -152,6 +152,6 @@ This document provides detailed information about the [Connected Care](/tidb-clo
 </tbody>
 </table>
 
-- Business Hours: 9 AM - 6 PM local time, Monday to Friday
+- Business hours: 9 AM - 6 PM local time, Monday to Friday
 - IM: Instant Message. Currently, [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) are supported. In the future, Microsoft Teams is planned.
 - Clinic: a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your TiDB Cloud clusters.
