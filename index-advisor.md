@@ -13,10 +13,10 @@ In addition to recommending new indexes, TiDB also offers a feature to suggest d
 
 # Recommend Index command
 
-The SQL syntax for the new SQL command `Recommend Index` is shown below. The command can be used for a single SQL query (`For` option) or for a workload (`Run` option). The comamnd also supports setting options for subsequent runs of the command.
+SQL command `RECOMMEND INDEX` is introduced for index advisor tasks.  Sub command `RUN` explores historical workloads and saves the recommendations in system tables. With option `FOR`,  the command targets particular SQL statement even if it was not executed in the past. The command also accepts extra options for advance control. 
 
 ```sql
-Recommend Index [Run | For <SQL> | <Options>]
+Recommend Index Run [ For <SQL> ] [<Options>] 
 ```
 
 ## Single Query Option
@@ -139,19 +139,23 @@ This example shows how users can inspect and update the index advisor's settings
 
 Here are some current limitations of the index recommendation feature, which we plan to address in the future:
 1. It does not support prepared statements, meaning `RECOMMEND INDEX RUN` cannot recommend indexes for queries executed through the `Prepare` and `Execute` protocol.
-2. It does not provide recommendations for deleting indexes. We need to merge the removing index logic (see below) to the `RECOOEND` comamnd in the future. 
+2. It does not provide recommendations for deleting indexes. We need to merge the removing index logic (see below) to the `RECOMMEND` command in the future. 
 3. A UI for the Index Advisor will be available in the future.
 
 # Removing Unused Indexes
-TiDB provides two system views/tables to help users identify inactive indexes in their workload. Users can either mark such indexes as invisible as a transitional state before dropping them or drop them right away. 
+For v8.0 or higher, TiDB provides two system views/tables to help users identify inactive indexes in their workload. Users can manage to drop these indexes to save the storage and overhead caused.  For online systems, it's highly recommended to make the target indexes invisible and observe the impact for one business cycle before dropping them completely. 
 
 ## View sys.schema_unused_indexes
 
-The `sys.schema_unused_indexes` view identifies indexes that have not been used since the startup of all TiDB instances. The view is defined based on system tables that have schema, table and column information. The view provides the full specification for the index including index, table and schema names. Users can query this view and decide on making indexes invisible or deleting them. 
+The [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) view identifies indexes that have not been used since the startup of all TiDB instances. The view is defined based on system tables that have schema, table and column information. The view provides the full specification for the index including index, table and schema names. Users can query this view and decide on making indexes invisible or deleting them. 
+
+> **Warning:**
+>
+> As this view shows the unused indexes since last startup of all TiDB instances, please make sure the TiDB instances are alive long enough. Otherwise, it could show false candidates in case certain workloads are not included. SQL `select START_TIME,UPTIME from INFORMATION_SCHEMA.CLUSTER_INFO where TYPE='tidb';` helps identify the ages of all TiDB instances. 
 
 ## View information_schema.tidb_index_usage
 
-This table provides metrics like access patterns, last access time, and rows accessed. Below, we show SQL query recommendations on how to identify unused or inefficient indexes based on this table. 
+[`information_schema.tidb_index_usage`](/information-schema/information-schema-tidb-indexes.md) provides metrics including selectivity buckets, last access time, and rows accessed.  Below example shows the queries to identify unused or inefficient indexes based on this table. 
 
 ```sql
 -- Find indexes that haven't been accessed recently
@@ -160,7 +164,7 @@ FROM information_schema.cluster_tidb_index_usage
 WHERE last_access_time IS NULL
   OR last_access_time < NOW() - INTERVAL 30 DAY;
 
--- Find indexes with low efficiency
+-- Find the indexes that are always scanned with over 50% of total records. 
 SELECT table_schema, table_name, index_name,
        query_total, rows_access_total,
        percentage_access_0 as full_table_scans
@@ -168,7 +172,9 @@ FROM information_schema.cluster_tidb_index_usage
 WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0_1 + percentage_access_1_10 + percentage_access_10_20 + percentage_access_20_50 = 0;
 ```
 
-Users should be aware that the data in `tidb_index_usage` may be delayed by up to 5 minutes, and the usage data is reset whenever a TiDB node restarts. Additionally, index usage is only recorded if the table has valid statistics.
+> **Note:**
+>
+> Users should be aware that the data in `tidb_index_usage` may be delayed by up to 5 minutes, and the usage data is reset whenever a TiDB node restarts. Additionally, index usage is only recorded if the table has valid statistics.
 
 
 
