@@ -43,9 +43,31 @@ The following table provides an overview for each support plan in the Connected 
 
 ## Differences between legacy support services and Connected Care support services
 
-The support plans in the new Connected Care services offer you better connectivity, more personalized support, and cost-effective solutions for different customer needs.
+The support plans in the Connected Care services introduce a completely new set of features as follows:
 
-- New **Enterprise** and **Premium** plans: connect customers with modern communication tools and advanced AI capabilities through a completely new set of features, such as advanced monitoring service in Clinic, IM subscription for TiDB Cloud alerts, IM subscription for ticket updates, AI chat in IM, and IM interaction for support tickets.
+- Connected: Clinic service
+
+    This feature offers an advanced monitoring and diagnostic service, Clinic, designed to help you quickly identify performance issues, optimize your database, and enhance overall performance with detailed analysis and actionable insights.
+
+- Connected: AI chat in IM
+
+    This feature enables you to chat with an AI assistant through an instant message (IM) tool to receive immediate answers to your questions.
+
+- Connected: IM subscription for TiDB Cloud alerts
+
+    This feature provides you with an easy way to subscribe to alert notifications via an instant message (IM) tool, keeping you informed about critical updates.
+
+- Connected: IM subscription for ticket updates
+
+    This feature enables you to subscribe to your support ticket updates through an instant message (IM) tool.
+
+- Connected: IM interaction for support tickets
+
+    This feature enables you to quickly create and interact with support tickets through an instant message (IM) tool for streamlined communication.
+
+With these new features, the Connected Care services offer you better connectivity, more personalized support, and cost-effective solutions for different customer needs.
+
+- New **Enterprise** and **Premium** plans: connect customers with modern communication tools and advanced AI capabilities through advanced monitoring service in Clinic, IM subscription for TiDB Cloud alerts, IM subscription for ticket updates, AI chat in IM, and IM interaction for support tickets.
 
 - New **Developer** plan: customers benefit from access to the same community and AI assistance as the **Basic** plan, while also enjoying a reduced subscription fee starting at $29 (decreased from $49 for the legacy **Standard** plan).
 
