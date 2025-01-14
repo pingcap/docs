@@ -9,20 +9,29 @@ Since v5.4.0, TiDB supports the GBK character set. This document provides the Ti
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
+```
+
+```
 +---------+-------------------------------------+-------------------+--------+
 | Charset | Description                         | Default collation | Maxlen |
 +---------+-------------------------------------+-------------------+--------+
 | gbk     | Chinese Internal Code Specification | gbk_bin           |      2 |
 +---------+-------------------------------------+-------------------+--------+
 1 row in set (0.00 sec)
+```
 
+```sql
 SHOW COLLATION WHERE CHARSET = 'gbk';
-+----------------+---------+------+---------+----------+---------+
-| Collation      | Charset | Id   | Default | Compiled | Sortlen |
-+----------------+---------+------+---------+----------+---------+
-| gbk_bin        | gbk     |   87 |         | Yes      |       1 |
-+----------------+---------+------+---------+----------+---------+
-1 rows in set (0.00 sec)
+```
+
+```
++----------------+---------+----+---------+----------+---------+---------------+
+| Collation      | Charset | Id | Default | Compiled | Sortlen | Pad_attribute |
++----------------+---------+----+---------+----------+---------+---------------+
+| gbk_bin        | gbk     | 87 |         | Yes      |       1 | PAD SPACE     |
+| gbk_chinese_ci | gbk     | 28 | Yes     | Yes      |       1 | PAD SPACE     |
++----------------+---------+----+---------+----------+---------+---------------+
+2 rows in set (0.00 sec)
 ```
 
 ## MySQL compatibility
@@ -31,11 +40,11 @@ This section provides the compatibility information between MySQL and TiDB.
 
 ### Collations
 
-The default collation of the GBK character set in MySQL is `gbk_chinese_ci`. Unlike MySQL, the default collation of the GBK character set in TiDB is `gbk_bin`. Additionally, because TiDB converts GBK to UTF8MB4 and then uses a binary collation, the `gbk_bin` collation in TiDB is not the same as the `gbk_bin` collation in MySQL.
+The default collation of the GBK character set in MySQL is `gbk_chinese_ci`. Unlike MySQL, the default collation of the GBK character set in TiDB is `gbk_bin`. Additionally, because TiDB converts GBK to `utf8mb4` and then uses a binary collation, the `gbk_bin` collation in TiDB is not the same as the `gbk_bin` collation in MySQL.
 
 <CustomContent platform="tidb">
 
-To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, you need to set the TiDB option [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) to `true` to enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations).
+To make TiDB compatible with the collations of MySQL GBK character set, when you first initialize the TiDB cluster, you need to set the TiDB option [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) to `true` to enable the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations). This is the default setting for new deployments.
 
 </CustomContent>
 
@@ -49,20 +58,28 @@ After enabling the new framework for collations, if you check the collations cor
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
+```
+
+```
 +---------+-------------------------------------+-------------------+--------+
 | Charset | Description                         | Default collation | Maxlen |
 +---------+-------------------------------------+-------------------+--------+
 | gbk     | Chinese Internal Code Specification | gbk_chinese_ci    |      2 |
 +---------+-------------------------------------+-------------------+--------+
 1 row in set (0.00 sec)
+```
 
+```sql
 SHOW COLLATION WHERE CHARSET = 'gbk';
-+----------------+---------+------+---------+----------+---------+
-| Collation      | Charset | Id   | Default | Compiled | Sortlen |
-+----------------+---------+------+---------+----------+---------+
-| gbk_bin        | gbk     |   87 |         | Yes      |       1 |
-| gbk_chinese_ci | gbk     |   28 | Yes     | Yes      |       1 |
-+----------------+---------+------+---------+----------+---------+
+```
+
+```
++----------------+---------+----+---------+----------+---------+---------------+
+| Collation      | Charset | Id | Default | Compiled | Sortlen | Pad_attribute |
++----------------+---------+----+---------+----------+---------+---------------+
+| gbk_bin        | gbk     | 87 |         | Yes      |       1 | PAD SPACE     |
+| gbk_chinese_ci | gbk     | 28 | Yes     | Yes      |       1 | PAD SPACE     |
++----------------+---------+----+---------+----------+---------+---------------+
 2 rows in set (0.00 sec)
 ```
 
@@ -93,6 +110,9 @@ In the above table, the result of `SELECT HEX('a');` in the `utf8mb4` byte set i
   CREATE TABLE t(a CHAR(10) CHARSET BINARY);
   Query OK, 0 rows affected (0.00 sec)
   INSERT INTO t VALUES (_gbk'啊');
+  ```
+
+  ```
   ERROR 1115 (42000): Unsupported character introducer: 'gbk'
   ```
 
@@ -109,3 +129,8 @@ In the above table, the result of `SELECT HEX('a');` in the `utf8mb4` byte set i
 - TiCDC versions earlier than v6.1.0 do not support replicating `charset=GBK` tables. No version of TiCDC supports replicating `charset=GBK` tables to TiDB clusters earlier than v6.1.0.
 
 - Backup & Restore (BR) versions earlier than v5.4.0 do not support recovering `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+
+## See also
+
+* [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
+* [Character Set and Collation](/character-set-and-collation.md)
