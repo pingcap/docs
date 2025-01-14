@@ -9,7 +9,7 @@ summary: Learn about the TiDB release timeline.
 
 This document shows all the released TiDB versions in reverse chronological order.
 
-For more information about TiDB release support timelines, see the [TiDB Release Support Policy](https://pingcap.com/tidb-release-support-policy/).
+To learn about the support timelines for Long-Term Support (LTS) versions of TiDB, see the [TiDB Release Support Policy](https://pingcap.com/tidb-release-support-policy/).
 
 | Version | Release Date |
 | :--- | :--- |
