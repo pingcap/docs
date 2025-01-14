@@ -5,9 +5,9 @@ summary: Introduces the new generation of TiDB Cloud support services - Connecte
 
 # Announcing the New Generation of TiDB Cloud Support Services - Connected Care
 
-As customers of all sizes continue to scale use cases and operations on TiDB Cloud, TiDB Cloud is committed to re-imagining its support services to accommodate their evolving needs. To deliver even greater value and seamless experiences, TiDB Cloud is excited to announce the launch of the next-generation support services, **Connected Care**, on **Feb 15, 2025**.
+As customers of all sizes continue to scale use cases and operations on TiDB Cloud, TiDB Cloud is committed to re-imagining its support services to accommodate their evolving needs. To deliver even greater value and seamless experiences, TiDB Cloud is excited to announce the launch of the next-generation support services, **Connected Care**, on **Feb 17, 2025**.
 
-As part of this transition, the current support plan offerings will no longer be available for purchase starting from **Feb 15, 2025**. However, TiDB Cloud will continue to provide full support to customers subscribing to legacy plans until their respective [retirement dates](#legacy-plans-replacement-and-retirement).
+As part of this transition, the current support plan offerings will no longer be available for purchase starting from **Feb 17, 2025**. However, TiDB Cloud will continue to provide full support to customers subscribing to legacy plans until their respective [retirement dates](#legacy-plans-replacement-and-retirement).
 
 To ensure a smooth transition and access to the latest features, TiDB Cloud encourages customers to transition and adopt the Connected Care services.
 
@@ -39,7 +39,7 @@ The following table provides an overview for each support plan in the Connected 
 
 > **Note**
 >
-> Customers from all four support plans have access to the [PingCAP support portal](https://tidb.support.pingcap.com/) for service requests. Advanced features such as Technical Account Managers and [Placeholder] are also available.
+> Customers from all four support plans have access to the [PingCAP support portal](https://tidb.support.pingcap.com/) for service requests.
 
 ## Differences between legacy support services and Connected Care support services
 
@@ -57,8 +57,8 @@ The following table lists the shutdown schedules for the legacy support plans:
 
 | Support plans                        | Shutdown date |
 |:----------------------------------------|:--------------|
-| Legacy **Basic** plan                     | Feb 15, 2025  |
-| Legacy **Standard** plan                           | Feb 15, 2025  |
+| Legacy **Basic** plan                     | Feb 17, 2025  |
+| Legacy **Standard** plan                           | Feb 17, 2025  |
 | Legacy **Enterprise** and **Premium** plans | Jan 15, 2026  |
 
 Once a legacy support plan shuts down, TiDB Cloud will no longer support it. If you do not transition to any support plan in Connected Care by the relevant shutdown date, you will be automatically transitioned to the **Basic** support plan in Connected Care.
