@@ -1611,10 +1611,13 @@ YEARWEEK()
 
 Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, Hash partitioning, and Key partitioning. Other partitioning types that are available in MySQL are not supported yet in TiDB.
 
+<<<<<<< HEAD
 Currently, TiDB does not support using an empty partition column list for Key partitioning.
 
 With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, and merge partitions.
 
+=======
+>>>>>>> 524109f5a5 (partitioned-table: remove incorrect limitation (#19977))
 For the unsupported partitioning types, when you create a table in TiDB, the partitioning information is ignored and the table is created in the regular form with a warning reported.
 
 The `LOAD DATA` syntax does not support partition selection currently in TiDB.
