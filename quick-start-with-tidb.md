@@ -23,7 +23,7 @@ In addition, you can try out TiDB features on [TiDB Playground](https://play.tid
 
 ## Deploy a local test cluster
 
-Scenario: Quickly deploy a local TiDB cluster for testing using a single macOS or Linux server. By deploying such a cluster, you can learn the basic architecture of TiDB and the operation of its components, such as TiDB, TiKV, PD, and the monitoring components.
+This section describes how to quickly deploy a local TiDB cluster for testing on a single macOS or Linux server. By deploying such a cluster, you can learn the basic architecture of the TiDB database and the operation of its components, such as TiDB, TiKV, PD, and the monitoring components.
 
 <SimpleTab>
 <div label="macOS">
@@ -283,7 +283,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 ## Simulate production deployment on a single machine
 
-Scenario: Experience the smallest TiDB cluster with the complete topology and simulate the production deployment steps on a single Linux server.
+This section describes how to set up the smallest TiDB cluster with a full topology, and simulate production deployment steps on a single Linux server.
 
 This section describes how to deploy a TiDB cluster using a YAML file of the smallest topology in TiUP.
 
