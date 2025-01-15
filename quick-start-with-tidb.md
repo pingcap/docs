@@ -184,7 +184,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     Note the Shell profile path in the output above. You need to use the path in the next step.
 
-2. Declare the global environment variable:
+1. Declare the global environment variable:
 
     > **Note:**
     >
@@ -196,16 +196,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     source ${your_shell_profile}
     ```
 
-3. Start the cluster in the current session:
-
-    > **Note:**
-    >
-    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
-    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
-    >
-    >     ```shell
-    >     tiup playground --tag ${tag_name}
-    >     ```
+1. Start the cluster in the current session:
 
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
@@ -228,41 +219,51 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         This command returns the access methods of the cluster:
 
         ```log
-        CLUSTER START SUCCESSFULLY, Enjoy it ^-^
-        To connect TiDB: mysql --host 127.0.0.1 --port 4000 -u root -p (no password) --comments
-        To view the dashboard: http://127.0.0.1:2379/dashboard
-        PD client endpoints: [127.0.0.1:2379]
-        To view the Prometheus: http://127.0.0.1:9090
-        To view the Grafana: http://127.0.0.1:3000
+     🎉 TiDB Playground Cluster is started, enjoy!
+
+        Connect TiDB:    mysql --comments --host 127.0.0.1 --port 4000 -u root
+        TiDB Dashboard:  http://127.0.0.1:2379/dashboard
+        Grafana:         http://127.0.0.1:3000
         ```
 
-4. Start a new session to access TiDB:
+    > **Note:**
+    >
+    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
+    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+    >
+    >     ```shell
+    >     tiup playground --tag ${tag_name}
+    >     ```
 
-    + Use the TiUP client to connect to TiDB.
+1. Start a new session to access the TiDB cluster endpoints:
 
-        {{< copyable "shell-regular" >}}
+    - Connect to the TiDB database:
 
-        ```shell
-        tiup client
-        ```
+        - Use the TiUP client to connect to TiDB.
 
-    + Alternatively, you can use the MySQL client to connect to TiDB.
+            {{< copyable "shell-regular" >}}
 
-        {{< copyable "shell-regular" >}}
+            ```shell
+            tiup client
+            ```
 
-        ```shell
-        mysql --host 127.0.0.1 --port 4000 -u root
-        ```
+        - Alternatively, you can use the MySQL client to connect to TiDB.
 
-5. Access the Prometheus dashboard of TiDB at <http://127.0.0.1:9090>.
+            {{< copyable "shell-regular" >}}
 
-6. Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at <http://127.0.0.1:2379/dashboard>. The default username is `root`, and the password is empty.
+            ```shell
+            mysql --host 127.0.0.1 --port 4000 -u root
+            ```
 
-7. Access the Grafana dashboard of TiDB through <http://127.0.0.1:3000>. Both the default username and password are `admin`.
+    - Prometheus: <http://127.0.0.1:9090>.
 
-8. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
+    - [TiDB Dashboard](/dashboard/dashboard-intro.md): <http://127.0.0.1:2379/dashboard>. The default username is `root`, and the password is empty.
 
-9. Clean up the cluster after the test deployment:
+    - Grafana: <http://127.0.0.1:3000>. Both the default username and password are `admin`.
+
+1. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
+
+1. Clean up the cluster after the test deployment:
 
     1. Stop the process by pressing <kbd>Control+C</kbd>.
 
