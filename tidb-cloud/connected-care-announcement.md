@@ -1,9 +1,9 @@
 ---
-title: Connected Care - the New Generation of TiDB Cloud Support Services
+title: Connected Care Overview
 summary: Introduces the new generation of TiDB Cloud support services - Connected Care.
 ---
 
-# Connected Care - the New Generation of TiDB Cloud Support Services
+# Connected Care Overview
 
 As customers of all sizes continue to scale use cases and operations on TiDB Cloud, TiDB Cloud is committed to re-imagining its support services to accommodate their evolving needs. To deliver even greater value and seamless experiences, TiDB Cloud is excited to announce the launch of the next-generation support services, **Connected Care**, on **Feb 17, 2025**.
 
@@ -89,7 +89,7 @@ Once a legacy support plan shuts down, TiDB Cloud will no longer support it. If 
 ### How do I check or make changes to my current support plan?
 
 Visit the [Support](https://tidbcloud.com/console/org-settings/support) page in the TiDB Cloud console. Your current support plan is displayed in the upper-left area of the page.
-You are able to make a change on the page for the new plans, with the exception of the **Premium** tier. Please [contact sales](https://www.pingcap.com/contact-us) if you wish to upgrade to the **Premium** plan. Kindly note the Connected Care plans will be available since Feb 17, 2025.
+You are able to make a change on the page for the new plans, with the exception of the **Premium** tier. Please [contact sales](https://www.pingcap.com/contact-us) if you wish to upgrade to the **Premium** plan.
 
 ### Do I need to pay more for similar services?
 
