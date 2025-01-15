@@ -100,7 +100,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup playground v8.5.0 --db 2 --pd 3 --kv 3
         ```
 
-        To view the all available versions, run `tiup list tidb`.
+        To view all available versions, run `tiup list tidb`.
 
     > **Note:**
     >
