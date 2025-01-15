@@ -786,6 +786,7 @@
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+  - [Notifications](/tidb-cloud/notifications.md)
   - [Support](/tidb-cloud/tidb-cloud-support.md)
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - FAQs
