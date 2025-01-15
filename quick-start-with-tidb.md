@@ -373,7 +373,7 @@ Other requirements for the target machine include:
 
 1. Create and start the cluster:
 
-    Create the [topology configuration file](/tiup-cluster-topology-reference) according to the following template, and name it as `topo.yaml`:
+    Create the [topology configuration file](/tiup/tiup-cluster-topology-reference.md) according to the following template, and name it as `topo.yaml`:
 
     {{< copyable "" >}}
 
