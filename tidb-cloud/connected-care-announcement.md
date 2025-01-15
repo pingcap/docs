@@ -89,7 +89,7 @@ Once a legacy support plan shuts down, TiDB Cloud will no longer support it. If 
 ### How do I check or make changes to my current support plan?
 
 Visit the [Support](https://tidbcloud.com/console/org-settings/support) page in the TiDB Cloud console. Your current support plan is displayed in the upper-left area of the page.
-You are able to make a change directly on the page for the new plans, with the exception of the **Premium** tier. Please [contact sales](https://www.pingcap.com/contact-us) if you wish to upgrade to the **Premium** plan. Kindly note the Connected Care plans will be available since Feb 17, 2025.
+You are able to make a change on the page for the new plans, with the exception of the **Premium** tier. Please [contact sales](https://www.pingcap.com/contact-us) if you wish to upgrade to the **Premium** plan. Kindly note the Connected Care plans will be available since Feb 17, 2025.
 
 ### Do I need to pay more for similar services?
 
