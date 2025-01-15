@@ -21,7 +21,7 @@ In the Connected Care services, there are four support plans: **Basic**, **Devel
 >
 > Although **Basic**, **Enterprise**, and **Premium** support plans use the same plan names as those in legacy plans, they refer to different plans with different service commitments.
 
-The following table provides an overview for each support plan in the Connected Care services. For more information, see the [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+The following table provides an overview for each support plan in the Connected Care services. For more information, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
 |   Support plan                                            | Basic                        | Developer                                     | Enterprise                                     | Premium                                   |
 |:----------------------------------------------|:-----------------------------|:----------------------------------------------|:-----------------------------------------------|:------------------------------------------|

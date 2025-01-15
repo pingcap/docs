@@ -10,7 +10,7 @@ This document provides detailed information about the [Connected Care](/tidb-clo
 <table>
 <thead>
   <tr>
-    <th></th>
+    <th>Support plan</th>
     <th>Basic</th>
     <th>Developer</th>
     <th>Enterprise</th>
