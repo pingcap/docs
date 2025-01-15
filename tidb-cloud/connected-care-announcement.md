@@ -7,7 +7,7 @@ summary: Introduces the new generation of TiDB Cloud support services - Connecte
 
 As customers of all sizes continue to scale use cases and operations on TiDB Cloud, TiDB Cloud is committed to re-imagining its support services to accommodate their evolving needs. To deliver even greater value and seamless experiences, TiDB Cloud is excited to announce the launch of the next-generation support services, **Connected Care**, on **Feb 17, 2025**.
 
-As part of this transition, the current support plan offerings will no longer be available for purchase and will be classified as legacy support plans starting from **Feb 17, 2025**. However, TiDB Cloud will continue to provide full support to customers subscribing to legacy plans until their respective [retirement dates](#legacy-plans-replacement-and-retirement).
+As part of this transition, the current support plan offerings will no longer be available for purchase and will be classified as legacy support plans starting from **Feb 17, 2025**. However, TiDB Cloud will continue to provide full support to customers subscribing to legacy plans until their respective [retirement dates](#replacement-and-retirement-of-legacy-support-plans).
 
 To ensure a smooth transition and access to the latest features, TiDB Cloud encourages customers to transition and adopt the Connected Care services.
 
