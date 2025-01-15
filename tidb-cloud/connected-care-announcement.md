@@ -3,7 +3,7 @@ title: Connected Care Overview
 summary: Introduces the new generation of TiDB Cloud support services - Connected Care.
 ---
 
-# Connected Care Overview
+# Connected Care TiDB Cloud Support Services
 
 As customers of all sizes continue to scale use cases and operations on TiDB Cloud, TiDB Cloud is committed to re-imagining its support services to accommodate their evolving needs. To deliver even greater value and seamless experiences, TiDB Cloud is excited to announce the launch of the next-generation support services, **Connected Care**, on **Feb 17, 2025**.
 
