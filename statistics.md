@@ -28,7 +28,7 @@ TiDB persists the update information every 60 seconds.
 
 </CustomContent>
 
-Based upon the number of changes to a table, TiDB will automatically schedule [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) to collect statistics on those tables. This is controlled by the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable and the following variables.
+Based upon the number of changes to a table, TiDB will automatically schedule [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) to collect statistics on those tables. This is controlled by the following system variables.
 
 |  System Variable | Default Value | Description |
 |---|---|---|
