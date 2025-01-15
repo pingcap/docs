@@ -37,9 +37,9 @@ TiFlash はTiDB と TiSpark の両方と互換性があり、これら 2 つの�
 
 現在、データを直接TiFlashに書き込むことはできません。TiFlash はLearnerロールとして TiDB クラスターに接続するため、TiKV にデータを書き込んでからTiFlashに複製する必要があります。TiFlashはテーブル単位でのデータ複製をサポートしていますが、デプロイ後、デフォルトではデータは複製されません。指定したテーブルのデータを複製するには、 [テーブルのTiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)参照してください。
 
-TiFlash には、列型storageモジュール、 `tiflash proxy`の 3 `pd buddy`のコンポーネントがあります。5 `tiflash proxy` Multi-Raft コンセンサス アルゴリズムを使用した通信を担当します。7 `pd buddy` PD と連携して、テーブル単位で TiKV からTiFlashにデータを複製します。
+TiFlash は、列型storageコンポーネントとTiFlashプロキシコンポーネントという 2 つの主要コンポーネントで構成されています。TiFlashTiFlashコンポーネントは、 Multi-Raft コンセンサス アルゴリズムを使用した通信を担当します。
 
-TiDBがTiFlashにレプリカを作成するためのDDLコマンドを受信すると、 `pd buddy`コンポーネントはTiDBのステータスポートを介して複製されるテーブルの情報を取得し、その情報をPDに送信します。次に、PDは`pd buddy`から提供された情報に従って対応するデータスケジューリングを実行します。
+TiFlash内のテーブルのレプリカを作成するための DDL コマンドを受信すると、TiDB は PD 内に対応する[配置ルール](https://docs.pingcap.com/tidb/stable/configure-placement-rules)を自動的に作成し、PD はこれらのルールに基づいて対応するデータのスケジューリングを実行します。
 
 ## 主な特徴 {#key-features}
 
@@ -63,7 +63,7 @@ TiFlash内のレプリカは、特別なロールであるRaft Learnerとして�
 
 TiFlash は、TiKV と同じスナップショット分離レベルの一貫性を提供し、最新のデータが読み取られることを保証します。つまり、TiKV に以前書き込まれたデータを読み取ることができます。このような一貫性は、データ レプリケーションの進行状況を検証することによって実現されます。
 
-TiFlash が読み取り要求を受信するたびに、リージョンレプリカは進行状況検証要求 (軽量 RPC 要求) をLeaderレプリカに送信します。TiFlashは、現在のレプリケーション進行状況に読み取り要求のタイムスタンプでカバーされるデータが含まれるようになった場合にのみ、読み取り操作を実行します。
+TiFlash が読み取り要求を受信するたびに、リージョンレプリカは進行状況検証要求 (軽量 RPC 要求) をLeaderレプリカに送信します。TiFlashは、現在のレプリケーション進行状況に読み取り要求のタイムスタンプでカバーされるデータが含まれた後にのみ、読み取り操作を実行します。
 
 ### 賢い選択 {#intelligent-choice}
 

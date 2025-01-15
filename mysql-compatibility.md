@@ -114,7 +114,7 @@ mysql> SELECT _tidb_rowid, id FROM t;
 3 rows in set (0.01 sec)
 ```
 
-ご覧のとおり、共有アロケータがあるため、 `id`毎回 2 ずつ増加します。この動作は[MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)では変わり、共有アロケータがないため、数字のスキップは行われません。
+示されているように、共有アロケータがあるため、 `id`毎回 2 ずつ増加します。この動作は[MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)では変わり、共有アロケータがないため、数字のスキップは行われません。
 
 <CustomContent platform="tidb">
 
@@ -136,13 +136,13 @@ mysql> SELECT _tidb_rowid, id FROM t;
 
 <CustomContent platform="tidb">
 
-TiDB は、パフォーマンス監視メトリックの保存とクエリに[プロメテウスとグラファナ](/tidb-monitoring-api.md)の組み合わせを利用します。TiDB では、パフォーマンス スキーマ テーブルは結果を返しません。
+TiDB は、パフォーマンス監視メトリックの保存とクエリに[プロメテウスとグラファナ](/tidb-monitoring-api.md)の組み合わせを利用します。TiDB では、ほとんどの場合、 [パフォーマンス スキーマ テーブル](/performance-schema/performance-schema.md)結果を返しません。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB Cloudコンソールのクラスター概要ページを確認するか、 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)使用します。パフォーマンス スキーマ テーブルは TiDB で空の結果を返します。
+TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB Cloudコンソールのクラスター概要ページを確認するか、 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)使用します。ほとんどの場合、 [パフォーマンス スキーマ テーブル](/performance-schema/performance-schema.md) TiDB で空の結果を返します。
 
 </CustomContent>
 
@@ -171,7 +171,7 @@ TiDB では、サポートされているすべての DDL 変更をオンライ�
 -   TiDB は、 `HASH` 、 `RANGE` 、 `LIST` 、および`KEY`のパーティション タイプをサポートします。サポートされていないパーティション タイプの場合、TiDB は`Warning: Unsupported partition type %s, treat as normal table`返します。ここで、 `%s`サポートされていない特定のパーティション タイプです。
 -   範囲、範囲列、リスト、およびリスト列でパーティション化されたテーブルは、 `ADD` 、 `DROP` 、 `TRUNCATE` 、および`REORGANIZE`操作をサポートします。その他のパーティション操作は無視されます。
 -   ハッシュおよびキーでパーティション化されたテーブルは、 `ADD` 、 `COALESCE` 、および`TRUNCATE`操作をサポートします。その他のパーティション操作は無視されます。
--   次の構文はパーティション テーブルではサポートされていません。
+-   パーティション テーブルでは次の構文はサポートされていません。
 
     -   `SUBPARTITION`
     -   `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD} PARTITION`

@@ -40,7 +40,7 @@ TiKV はRaft を使用してデータ レプリケーションを実行します
 
 ![Raft in TiDB](/media/tidb-storage-1.png)
 
-要約すると、TiKV はスタンドアロン マシン RocksDB を介してディスクにデータをすばやく保存し、マシン障害が発生した場合にはRaft を介して複数のマシンにデータを複製できます。データは RocksDB ではなくRaftのインターフェイスを介して書き込まれます。Raft の実装により、TiKV は分散型キー値storageになります。マシンに障害が発生した場合でも、TiKV はネイティブのRaftプロトコルにより自動的にRaftを完了できるため、アプリケーションには影響しません。
+要約すると、TiKV はスタンドアロン マシン RocksDB を介してディスクにデータをすばやく保存し、マシン障害が発生した場合にはRaftを介して複数のマシンにデータを複製できます。データは RocksDB ではなくRaftのインターフェイスを介して書き込まれます。Raft の実装により、TiKV は分散型キー値storageになります。マシンに障害が発生した場合でも、TiKV はネイティブのRaftプロトコルにより自動的にRaftを完了できるため、アプリケーションには影響しません。
 
 ## リージョン {#region}
 
@@ -70,7 +70,7 @@ TiKV は、キー値空間全体を一連の連続するキー セグメント�
 
 ![TiDB Storage](/media/tidb-storage-3.png)
 
-リージョン内でデータを分散および複製することで、ある程度の災害復旧機能を備えた分散型キー値システムが実現します。容量やディスク障害、データ損失について心配する必要がなくなります。
+リージョン内でデータを分散および複製することで、ある程度の災害復旧能力を備えた分散型キー値システムが実現します。容量やディスク障害、データ損失について心配する必要がなくなります。
 
 ## MVCC {#mvcc}
 
@@ -102,4 +102,4 @@ MVCC では、TiKV のキーと値のペアは次のようになります。
 
 ## 分散ACIDトランザクション {#distributed-acid-transaction}
 
-TiKV のトランザクションは、 Google が BigTable で使用しているモデルを採用しています: [パーコレーター](https://research.google.com/pubs/pub36726.html) 。TiKV の実装はこの論文にヒントを得て、多くの最適化が行われています。詳細については[取引の概要](/transaction-overview.md)参照してください。
+TiKV のトランザクションは、 Google が BigTable で使用しているモデルを採用しています: [パーコレーター](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/) 。TiKV の実装はこの論文にヒントを得て、多くの最適化が行われています。詳細については[取引の概要](/transaction-overview.md)参照してください。

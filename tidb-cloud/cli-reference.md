@@ -3,7 +3,7 @@ title: TiDB Cloud CLI Reference
 summary: TiDB Cloud CLI の概要を説明します。
 ---
 
-# TiDB Cloud CLI リファレンス<span style="color: #fff; background-color: #00bfff; border-radius: 4px; font-size: 0.5em; vertical-align: middle; margin-left: 16px; padding: 0 2px;">ベータ版</span> {#tidb-cloud-cli-reference-span-style-color-fff-background-color-00bfff-border-radius-4px-font-size-0-5em-vertical-align-middle-margin-left-16px-padding-0-2px-beta-span}
+# TiDB Cloud CLI リファレンス (ベータ版) {#tidb-cloud-cli-reference-beta}
 
 > **注記：**
 >

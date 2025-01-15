@@ -3,7 +3,7 @@ title: TiDB Cloud API Overview
 summary: TiDB Cloud API とは何か、その機能、API を使用してTiDB Cloudクラスターを管理する方法について学習します。
 ---
 
-# TiDB CloudAPI 概要<span style="color: #fff; background-color: #00bfff; border-radius: 4px; font-size: 0.5em; vertical-align: middle; margin-left: 16px; padding: 0 2px;">ベータ版</span> {#tidb-cloud-api-overview-span-style-color-fff-background-color-00bfff-border-radius-4px-font-size-0-5em-vertical-align-middle-margin-left-16px-padding-0-2px-beta-span}
+# TiDB CloudAPI の概要 (ベータ版) {#tidb-cloud-api-overview-beta}
 
 > **注記：**
 >

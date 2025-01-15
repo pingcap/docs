@@ -137,7 +137,7 @@
     -   [インポートのベストプラクティス](/tidb-lightning/data-import-best-practices.md)
     -   移行シナリオ
         -   [Auroraからの移行](/migrate-aurora-to-tidb.md)
-        -   [MySQL から小さなデータセットを移行する](/migrate-small-mysql-to-tidb.md)
+        -   [MySQL から小規模データセットを移行する](/migrate-small-mysql-to-tidb.md)
         -   [MySQL から大規模なデータセットを移行する](/migrate-large-mysql-to-tidb.md)
         -   [小さなデータセットの MySQL シャードの移行とマージ](/migrate-small-mysql-shards-to-tidb.md)
         -   [大規模データセットの MySQL シャードの移行とマージ](/migrate-large-mysql-shards-to-tidb.md)
@@ -249,6 +249,7 @@
 -   性能チューニング
     -   チューニングガイド
         -   [性能チューニングの概要](/performance-tuning-overview.md)
+        -   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
         -   [パフォーマンス分析とチューニング](/performance-tuning-methods.md)
         -   [OLTP シナリオの性能チューニングプラクティス](/performance-tuning-practices.md)
         -   [TiFlashパフォーマンス分析方法](/tiflash-performance-tuning-methods.md)
@@ -330,7 +331,7 @@
         -   [PDスケジュール](/best-practices/pd-scheduling-best-practices.md)
         -   [大規模リージョンによる TiKV性能チューニング](/best-practices/massive-regions-best-practices.md)
         -   [3ノードのハイブリッド展開](/best-practices/three-nodes-hybrid-deployment.md)
-        -   [3 つのデータ センター展開でのローカル読み取り](/best-practices/three-dc-local-read.md)
+        -   [3 つのデータセンター展開におけるローカル読み取り](/best-practices/three-dc-local-read.md)
         -   [UUIDを使用する](/best-practices/uuid.md)
         -   [読み取り専用ストレージノード](/best-practices/readonly-nodes.md)
     -   [配置ルールを使用する](/configure-placement-rules.md)
@@ -488,7 +489,7 @@
             -   データソースの管理
                 -   [移行するMySQLインスタンスを切り替える](/dm/usage-scenario-master-slave-switch.md)
             -   タスクの管理
-                -   [失敗したDDLステートメントの処理](/dm/handle-failed-ddl-statements.md)
+                -   [失敗したDDL文の処理](/dm/handle-failed-ddl-statements.md)
                 -   [移行するテーブルのスキーマを管理する](/dm/dm-manage-schema.md)
             -   [クラスターのデータソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)
             -   [アラートを処理する](/dm/dm-handle-alerts.md)

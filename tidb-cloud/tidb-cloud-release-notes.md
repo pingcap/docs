@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年1月14日 {#january-14-2025}
+
+**一般的な変更**
+
+-   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して新しい AWS リージョンをサポートします: `Jakarta (ap-southeast-3)` 。
+
+-   [通知](https://tidbcloud.com/console/notifications)機能を導入すると、 [TiDB Cloudコンソール](https://tidbcloud.com/)を通じてTiDB Cloud の更新とアラートを即座に把握できるようになります。
+
+    詳細については[通知](/tidb-cloud/notifications.md)参照してください。
+
 ## 2025年1月2日 {#january-2-2025}
 
 **一般的な変更**

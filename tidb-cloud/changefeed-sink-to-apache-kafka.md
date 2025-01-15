@@ -50,7 +50,7 @@ TiDB クラスターが Apache Kafka サービスに接続できることを確�
 
 Private Connect は、クラウド プロバイダーの**Private Link**または**Private Service Connect**テクノロジーを活用して、VPC 内のリソースがプライベート IP アドレスを使用して他の VPC 内のサービスに接続できるようにします。その場合、それらのサービスが VPC 内で直接ホストされているかのようになります。
 
-現在、 TiDB Cloud は汎用 Kafka の Private Connect のみをサポートしています。MSK、Confluent Kafka、またはその他のサービスとの特別な統合は含まれていません。
+TiDB Cloud は現在、セルフホスト型 Kafka のプライベート接続のみをサポートしています。MSK、Confluent Kafka、またはその他の Kafka SaaS サービスとの直接統合はサポートしていません。プライベート接続を介してこれらの Kafka SaaS サービスに接続するには、 [kafka プロキシ](https://github.com/grepplabs/kafka-proxy)を仲介としてデプロイし、Kafka サービスをセルフホスト型 Kafka として効果的に公開します。詳細な例については、 [Google Cloud で Kafka-proxy を使用してセルフホスト型 Kafka Private Service Connect を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)参照してください。この設定は、すべての Kafka SaaS サービスで同様です。
 
 -   Apache Kafka サービスが AWS でホストされている場合は、 [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md)に従って、ネットワーク接続が適切に構成されていることを確認します。セットアップ後、 TiDB Cloudコンソールで次の情報を入力して、変更フィードを作成します。
 
@@ -228,7 +228,7 @@ TiDB Cloud の変更フィードが Apache Kafka にデータをストリーミ�
     -   **Decimal**および**Unsigned BigInt**構成では、 TiDB Cloud がKafka メッセージ内の Decimal および Unsigned Bigint データ型を処理する方法を指定します。
     -   **スキーマ レジストリ**領域で、スキーマ レジストリ エンドポイントを入力します。HTTP**認証**を有効にすると、ユーザー名とパスワードのフィールドが表示され、TiDB クラスターのエンドポイントとパスワードが自動的に入力されます。
 
-6.  **「トピック配布」**領域で配布モードを選択し、モードに応じてトピック名の設定を入力します。
+6.  「**トピック配布」**領域で配布モードを選択し、モードに応じてトピック名の設定を入力します。
 
     データ形式として**Avro を**選択した場合は、 **「配布モード」**ドロップダウン リスト**で「変更ログをテーブルごとに Kafka トピックに配布」**モードのみを選択できます。
 

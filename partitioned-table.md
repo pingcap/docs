@@ -255,7 +255,7 @@ PARTITION BY RANGE COLUMNS (report_date)
 INTERVAL (1 MONTH) FIRST PARTITION LESS THAN ('2000-01-01') LAST PARTITION LESS THAN ('2025-01-01')
 ```
 
-次のテーブルが作成されます:
+次のテーブルが作成されます。
 
     CREATE TABLE `monthly_report_status` (
       `report_id` int(11) NOT NULL,
@@ -270,7 +270,7 @@ INTERVAL (1 MONTH) FIRST PARTITION LESS THAN ('2000-01-01') LAST PARTITION LESS 
      PARTITION `P_LT_2024-12-01` VALUES LESS THAN ('2024-12-01'),
      PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 
-オプションのパラメータ`NULL PARTITION`は、定義が`PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`のパーティションを作成します。これは、パーティション式が`NULL`に評価される場合にのみ一致します。 `NULL`他のどの値よりも小さいと見なされることを説明している[範囲分割による NULL の扱い](#handling-of-null-with-range-partitioning)を参照してください。
+オプションのパラメータ`NULL PARTITION`は、定義が`PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`のパーティションを作成します。これは、パーティション式が`NULL`に評価される場合にのみ一致します。 `NULL`他のどの値よりも小さいと見なされることを説明している[範囲分割による NULL の処理](#handling-of-null-with-range-partitioning)を参照してください。
 
 オプションパラメータ`MAXVALUE PARTITION`は、最後のパーティションを`PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`として作成します。
 
@@ -584,7 +584,7 @@ v7.0.0 以降、TiDB はキー パーティションをサポートします。v
 
 キー パーティショニングとハッシュ パーティショニングはどちらも、一定数のパーティションにデータを均等に分散できます。違いは、ハッシュ パーティショニングは指定された整数式または整数列に基づいてデータを分散することしかサポートしていないのに対し、キー パーティショニングは列リストに基づいてデータを分散することをサポートしており、キー パーティショニングのパーティション列は整数型に限定されていないことです。TiDB のキー パーティショニングのハッシュ アルゴリズムは MySQL のハッシュ アルゴリズムとは異なるため、テーブル データの分散も異なります。
 
-キーパーティションテーブルを作成するには、 `CREATE TABLE`ステートメントに`PARTITION BY KEY (columnList)`句を追加する必要があります。 `columnList` 、1 つ以上の列名を含む列リストです。リスト内の各列のデータ型は、 `BLOB` 、 `JSON` 、および`GEOMETRY`除く任意の型にすることができます (TiDB は`GEOMETRY`サポートしていないことに注意してください)。さらに、 `PARTITIONS num` ( `num`はテーブルがいくつのパーティションに分割されているかを示す正の整数) を追加したり、パーティション名の定義を追加したりする必要がある場合もあります。たとえば、 `(PARTITION p0, PARTITION p1)`追加すると、テーブルが`p0`と`p1`名前の 2 つのパーティションに分割されます。
+キーパーティションテーブルを作成するには、 `CREATE TABLE`ステートメントに`PARTITION BY KEY (columnList)`句を追加する必要があります。 `columnList` 、1 つ以上の列名を含む列リストです。リスト内の各列のデータ型は、 `BLOB` 、 `JSON` 、 `GEOMETRY`除く任意の型にすることができます (TiDB は`GEOMETRY`サポートしていないことに注意してください)。さらに、 `PARTITIONS num` ( `num`はテーブルが分割されているパーティションの数を示す正の整数) を追加したり、パーティション名の定義を追加したりする必要がある場合もあります。たとえば、 `(PARTITION p0, PARTITION p1)`追加すると、テーブルが`p0`と`p1`という名前の 2 つのパーティションに分割されます。
 
 次の操作は、 `store_id`ずつ 4 つのパーティションに分割されたキーパーティションテーブルを作成します。
 
@@ -1331,7 +1331,7 @@ SELECT store_id, COUNT(department_id) AS c
 
 パーティションの選択は、範囲パーティションやハッシュ パーティションを含むすべてのタイプのテーブル パーティションでサポートされています。ハッシュ パーティションの場合、パーティション名が指定されていない場合は、 `p0` 、 `p1` 、 `p2` 、...、または`pN-1`パーティション名として自動的に使用されます。
 
-`SELECT` in `INSERT ... SELECT`でもパーティション選択を使用できます。
+`SELECT` in `INSERT ... SELECT`ではパーティション選択も使用できます。
 
 ## パーティションの制限と制約 {#restrictions-and-limitations-on-partitions}
 
@@ -1563,8 +1563,6 @@ ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's parti
 ### MySQLとの互換性 {#compatibility-with-mysql}
 
 現在、TiDB は、範囲パーティション、範囲列パーティション、List パーティショニング、List COLUMNS パーティショニング、ハッシュ パーティション、およびキー パーティションをサポートしています。MySQL で使用できるその他のパーティション タイプは、TiDB ではまだサポートされていません。
-
-パーティション管理に関しては、ハッシュパーティションテーブル内のパーティション数の調整、範囲パーティションテーブルの範囲の変更、パーティションのマージなど、下位の実装でデータの移動を必要とする操作は現在サポートされていません。
 
 サポートされていないパーティション タイプの場合、TiDB でテーブルを作成すると、パーティション情報は無視され、警告が報告されて通常の形式でテーブルが作成されます。
 

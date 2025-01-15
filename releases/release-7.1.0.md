@@ -43,7 +43,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiFlash MPP モードは複数の結合アルゴリズムをサポートします。v7.1.0 より前では、TiDB は[`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)番目と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)の変数と実際のデータ量に基づいて、MPP モードでブロードキャスト ハッシュ結合アルゴリズムを使用するかどうかを決定します。
 
-    v7.1.0 では、TiDB は[`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710)変数を導入しました。これは、ネットワーク伝送の最小オーバーヘッドに基づいて MPP Join アルゴリズムを選択するかどうかを制御します。この変数はデフォルトで無効になっており、デフォルトのアルゴリズム選択方法は v7.1.0 以前と同じままであることを示しています。変数を`ON`に設定すると有効になります。有効にすると、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)変数を手動で調整する必要がなくなり (この時点では両方の変数は有効になりません)、TiDB は異なる Join アルゴリズムによるネットワーク伝送のしきい値を自動的に推定し、全体的なオーバーヘッドが最小のアルゴリズムを選択するため、ネットワーク トラフィックが削減され、MPP クエリのパフォーマンスが向上します。
+    v7.1.0 では、TiDB は[`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710)変数を導入しました。これは、ネットワーク伝送の最小オーバーヘッドに基づいて MPP Join アルゴリズムを選択するかどうかを制御します。この変数はデフォルトで無効になっており、デフォルトのアルゴリズム選択方法は v7.1.0 以前と同じであることを示しています。変数を`ON`に設定すると有効になります。有効にすると、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)変数を手動で調整する必要がなくなり (この時点では両方の変数は有効になりません)、TiDB は異なる Join アルゴリズムによるネットワーク伝送のしきい値を自動的に推定し、全体的なオーバーヘッドが最小のアルゴリズムを選択するため、ネットワーク トラフィックが削減され、MPP クエリのパフォーマンスが向上します。
 
     詳細については[ドキュメント](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode)参照してください。
 
@@ -113,7 +113,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     詳細については[ドキュメント](/statistics.md#load-statistics)参照してください。
 
--   TiCDCは単一行データのデータ整合性検証機能をサポートしています[＃8718](https://github.com/pingcap/tiflow/issues/8718) [＃42747](https://github.com/pingcap/tidb/issues/42747) @ [3エースショーハンド](https://github.com/3AceShowHand) @ [ジグアン](https://github.com/zyguan)
+-   TiCDCは、単一行データのデータ整合性検証機能をサポートしています[＃8718](https://github.com/pingcap/tiflow/issues/8718) [＃42747](https://github.com/pingcap/tidb/issues/42747) @ [3エースショーハンド](https://github.com/3AceShowHand) @ [ジグアン](https://github.com/zyguan)
 
     v7.1.0 以降、TiCDC では、チェックサム アルゴリズムを使用して単一行データの整合性を検証するデータ整合性検証機能が導入されています。この機能は、TiDB からデータを書き込み、それを TiCDC 経由で複製し、それを Kafka クラスターに書き込むプロセスでエラーが発生していないかどうかを確認するのに役立ちます。データ整合性検証機能は、Kafka をダウンストリームとして使用する変更フィードのみをサポートし、現在は Avro プロトコルをサポートしています。
 
@@ -142,7 +142,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     v6.5.0 以降、TiDB は`INSERT INTO SELECT`ステートメントの`SELECT`句 (分析クエリ) をTiFlashにプッシュダウンすることをサポートしています。これにより、 TiFlashクエリ結果を`INSERT INTO`で指定された TiDB テーブルに簡単に保存してさらに分析することができ、結果のキャッシュ (つまり、結果のマテリアライゼーション) として機能します。
 
-    v7.1.0 では、この機能が一般に提供されています。 `INSERT INTO SELECT`ステートメントの`SELECT`節の実行中に、オプティマイザーは、 [SQL モード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定できます。したがって、実験的フェーズで導入された`tidb_enable_tiflash_read_for_write_stmt`システム変数は非推奨になりましたTiFlashの`INSERT INTO SELECT`ステートメントの計算ルールは`STRICT SQL Mode`要件を満たしていないため、TiDB では、現在のセッションの[SQL モード](/sql-mode.md)が厳密でない場合にのみ、 `INSERT INTO SELECT`ステートメントの`SELECT`節をTiFlashにプッシュダウンできます。つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`含まれません。
+    v7.1.0 では、この機能が一般に提供されています。 `INSERT INTO SELECT`ステートメントの`SELECT`句の実行中に、オプティマイザーは、 [SQL モード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定できます。したがって、実験的フェーズで導入された`tidb_enable_tiflash_read_for_write_stmt`システム変数は非推奨になりましたTiFlashの`INSERT INTO SELECT`ステートメントの計算ルールは`STRICT SQL Mode`要件を満たしていないため、TiDB では、現在のセッションの[SQL モード](/sql-mode.md)が厳密でない場合にのみ、 `INSERT INTO SELECT`ステートメントの`SELECT`句をTiFlashにプッシュダウンできます。つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`含まれません。
 
     詳細については[ドキュメント](/tiflash/tiflash-results-materialization.md)参照してください。
 
@@ -236,7 +236,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバル スケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジューリングはターゲット テーブル データを格納するリージョンに対してのみ一時停止され、ターゲット テーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバル スケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)構成することで、グローバル スケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲット テーブル データを格納するリージョンに対してスケジューリングを一時停止します。ターゲット クラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
 
--   TiDB v7.1.0 で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)使用すると、FLASHBACK 操作が完了した後も、一部のリージョンが FLASHBACK プロセスに残ることがあります。v7.1.0 ではこの機能を使用しないことをお勧めします。詳細については、問題[＃44292](https://github.com/pingcap/tidb/issues/44292)を参照してください。この問題が発生した場合は、 [TiDB スナップショットのバックアップと復元](/br/br-snapshot-guide.md)機能を使用してデータを復元できます。
+-   TiDB v7.1.0 で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)使用すると、FLASHBACK 操作が完了した後も、一部の領域が FLASHBACK プロセスに残ることがあります。v7.1.0 ではこの機能を使用しないことをお勧めします。詳細については、問題[＃44292](https://github.com/pingcap/tidb/issues/44292)を参照してください。この問題が発生した場合は、 [TiDB スナップショットのバックアップと復元](/br/br-snapshot-guide.md)機能を使用してデータを復元できます。
 
 ### システム変数 {#system-variables}
 
@@ -318,7 +318,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     -   パーティション化されたRaft KV [＃14447](https://github.com/tikv/tikv/issues/14447) @ [スペードA-タン](https://github.com/SpadeA-Tang)使用する場合、分割操作による書き込み QPS への影響を軽減します。
     -   パーティション化されたRaft KV [＃14581](https://github.com/tikv/tikv/issues/14581) @ [バッファフライ](https://github.com/bufferflies)使用するときにスナップショットが占めるスペースを最適化します
-    -   TiKV [＃12362](https://github.com/tikv/tikv/issues/12362) @ [翻訳](https://github.com/cfzjywxk)でリクエストの処理の各段階についてより詳細な時間情報を提供します
+    -   TiKV [＃12362](https://github.com/tikv/tikv/issues/12362) @ [翻訳](https://github.com/cfzjywxk)でリクエストの処理の各段階について、より詳細な時間情報を提供します。
     -   ログバックアップ[＃13867](https://github.com/tikv/tikv/issues/13867) @ [ユジュンセン](https://github.com/YuJuncen)で PD をメタストアとして使用します
 
 -   PD
@@ -362,7 +362,6 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[＃42268](https://github.com/pingcap/tidb/issues/42268) @ [天菜まお](https://github.com/tiancaiamao)
     -   Grafana モニタリング パネル[＃42562](https://github.com/pingcap/tidb/issues/42562) @ [ピンとb](https://github.com/pingandb)で`Ignore Event Per Minute`と`Stats Cache LRU Cost`チャートが正常に表示されない問題を修正しました。
     -   `INFORMATION_SCHEMA.COLUMNS`テーブル[＃43379](https://github.com/pingcap/tidb/issues/43379) @ [bb7133](https://github.com/bb7133)をクエリしたときに`ORDINAL_POSITION`列が誤った結果を返す問題を修正しました
-    -   権限テーブル[＃41048](https://github.com/pingcap/tidb/issues/41048) @ [bb7133](https://github.com/bb7133)の一部の列における大文字と小文字の区別の問題を修正
     -   キャッシュ テーブルに新しい列が追加された後、列[＃42928](https://github.com/pingcap/tidb/issues/42928) @ [ルクス](https://github.com/lqs)のデフォルト値ではなく値が`NULL`なる問題を修正しました。
     -   述語[＃43645](https://github.com/pingcap/tidb/issues/43645) @ [ウィノロス](https://github.com/winoros)をプッシュダウンするときに CTE 結果が正しくない問題を修正しました
     -   多数のパーティションとTiFlashレプリカ[＃42940](https://github.com/pingcap/tidb/issues/42940) @ [ミョンス](https://github.com/mjonss)を持つパーティション テーブルに対して`TRUNCATE TABLE`実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。

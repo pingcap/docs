@@ -47,17 +47,15 @@ summary: TiFlashクラスターのトラブルシューティングを行う際�
 3.  `pd-ctl`を通じてTiFlashプロキシの状態が正常かどうかを確認します。
 
     ```shell
-    echo "store" | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
+    tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} store
     ```
 
     TiFlashプロキシの`store.labels`は`{"key": "engine", "value": "tiflash"}`などの情報が含まれています。この情報を確認することで、 TiFlashプロキシを確認できます。
 
-4.  `pd buddy`ログを正しく印刷できるかどうかを確認します (ログ パスは [flash.flash_cluster] 構成項目の`log`の値です。デフォルトのログ パスは、 TiFlash構成ファイルで構成されている`tmp`ディレクトリの下にあります)。
-
-5.  構成されたレプリカの数が、クラスター内の TiKV ノードの数以下であるかどうかを確認します。そうでない場合、PD はデータをTiFlashに複製できません。
+4.  構成されたレプリカの数が、クラスター内の TiKV ノードの数以下であるかどうかを確認します。そうでない場合、PD はデータをTiFlashに複製できません。
 
     ```shell
-    echo 'config placement-rules show' | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
+    tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} config placement-rules show | grep -C 10 default
     ```
 
     `default: count`の値を再確認します。
@@ -67,7 +65,7 @@ summary: TiFlashクラスターのトラブルシューティングを行う際�
     > -   [配置ルール](/configure-placement-rules.md)が有効になっていて、複数のルールが存在する場合、以前に構成された[`max-replicas`](/pd-configuration-file.md#max-replicas) 、 [`location-labels`](/pd-configuration-file.md#location-labels) 、および[`isolation-level`](/pd-configuration-file.md#isolation-level)有効になりません。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
     > -   [配置ルール](/configure-placement-rules.md)が有効になっていて、デフォルト ルールが 1 つだけ存在する場合、 `max-replicas` 、または`isolation-level` `location-labels`が変更されると、TiDB はこのデフォルト ルールを自動的に更新します。
 
-6.  マシン ( TiFlashノードの`store`があるマシン) の残りのディスク容量が十分かどうかを確認します。デフォルトでは、残りのディスク容量が`store`容量 ( `low-space-ratio`パラメータによって制御されます) の 20% 未満の場合、PD はこのTiFlashノードにデータをスケジュールできません。
+5.  マシン ( TiFlashノードの`store`があるマシン) の残りのディスク容量が十分かどうかを確認します。デフォルトでは、残りのディスク容量が`store`容量 ( [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio)パラメータによって制御されます) の 20% 未満の場合、PD はこのTiFlashノードにデータをスケジュールできません。
 
 ## 一部のクエリでは、 <code>Region Unavailable</code>エラーが返されます。 {#some-queries-return-the-code-region-unavailable-code-error}
 
@@ -82,6 +80,63 @@ TiFlashへの負荷が大きすぎてTiFlashデータのレプリケーション
 1.  対応するTiFlashノードを停止するには、 [TiFlashノードをダウンさせる](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 2.  TiFlashノードの関連データを削除します。
 3.  クラスター内のTiFlashノードを再デプロイします。
+
+## TiFlashノードの削除は遅い {#removing-tiflash-nodes-is-slow}
+
+この問題に対処するには、次の手順を実行します。
+
+1.  クラスターのスケールイン後に使用可能なTiFlashノードの数よりも多くのTiFlashレプリカがテーブルに存在するかどうかを確認します。
+
+    ```sql
+    SELECT * FROM information_schema.tiflash_replica WHERE REPLICA_COUNT > 'tobe_left_nodes';
+    ```
+
+    `tobe_left_nodes`スケールイン後のTiFlashノードの数です。
+
+    クエリ結果が空でない場合は、対応するテーブルのTiFlashレプリカの数を変更する必要があります。これは、スケールイン後にTiFlashレプリカの数がTiFlashノードの数を超えると、PD が削除するTiFlashノードからリージョンピアを移動しないため、これらのTiFlashノードの削除が失敗するためです。
+
+2.  すべてのTiFlashノードをクラスターから削除する必要があるシナリオで、 `INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルにクラスター内にTiFlashレプリカが存在しないことが示されていても、 TiFlashノードの削除が依然として失敗する場合は、最近`DROP TABLE <db-name>.<table-name>`または`DROP DATABASE <db-name>`操作を実行したかどうかを確認します。
+
+    TiFlashレプリカを持つテーブルまたはデータベースの場合、 `DROP TABLE <db-name>.<table-name>`または`DROP DATABASE <db-name>`実行した後、TiDB は PD 内の対応するテーブルのTiFlashレプリケーション ルールをすぐに削除しません。代わりに、対応するテーブルがガベージコレクション(GC) 条件を満たすまで待機してから、これらのレプリケーション ルールを削除します。GC が完了すると、対応するTiFlashノードを正常に削除できます。
+
+    GC 条件が満たされる前にTiFlashのデータ複製ルールを手動で削除するには、次の操作を実行します。
+
+    > **注記：**
+    >
+    > テーブルのTiFlashレプリケーション ルールを手動で削除した後、このテーブルに対して`RECOVER TABLE` 、または`FLASHBACK DATABASE` `FLASHBACK TABLE`を実行すると、このテーブルのTiFlashレプリカは復元されません。
+
+    1.  現在の PD インスタンス内のTiFlashに関連するすべてのデータ複製ルールをビュー。
+
+        ```shell
+        curl http://<pd_ip>:<pd_port>/pd/api/v1/config/rules/group/tiflash
+        ```
+
+            [
+              {
+                "group_id": "tiflash",
+                "id": "table-45-r",
+                "override": true,
+                "start_key": "7480000000000000FF2D5F720000000000FA",
+                "end_key": "7480000000000000FF2E00000000000000F8",
+                "role": "learner",
+                "count": 1,
+                "label_constraints": [
+                  {
+                    "key": "engine",
+                    "op": "in",
+                    "values": [
+                      "tiflash"
+                    ]
+                  }
+                ]
+              }
+            ]
+
+    2.  TiFlashに関連するすべてのデータ複製ルールを削除します。1 が`id` `table-45-r`あるルールを例にとります。次のコマンドで削除します。
+
+        ```shell
+        curl -v -X DELETE http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/table-45-r
+        ```
 
 ## TiFlash分析は遅い {#tiflash-analysis-is-slow}
 

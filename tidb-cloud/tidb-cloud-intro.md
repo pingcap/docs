@@ -64,13 +64,13 @@ TiDB Cloud を使用すると、次の主な機能を利用できます。
 
 TiDB Cloud、次の 2 つのデプロイメント オプションが提供されます。
 
--   [TiDB Cloudサーバーレス](https://www.pingcap.com/tidb-serverless)
+-   [TiDB Cloudサーバーレス](https://www.pingcap.com/tidb-cloud-serverless)
 
     TiDB Cloud Serverless は、完全に管理されたマルチテナントの TiDB サービスです。瞬時に自動スケーリングされる MySQL 互換データベースを提供し、十分な無料利用枠と、無料制限を超えた場合の使用量に基づく課金を提供します。
 
--   [TiDB Cloud専用](https://www.pingcap.com/tidb-dedicated)
+-   [TiDB Cloud専用](https://www.pingcap.com/tidb-cloud-dedicated)
 
-    TiDB Cloud Dedicated は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番環境向けです。
+    TiDB Cloud Dedicated は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番での使用向けです。
 
 TiDB Cloud Serverless とTiDB Cloud Dedicated の機能比較については、 [TiDB: 高度なオープンソースの分散SQLデータベース](https://www.pingcap.com/get-started-tidb)参照してください。
 

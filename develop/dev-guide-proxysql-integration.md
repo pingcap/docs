@@ -328,7 +328,7 @@ systemctl start docker
     > 3.  TiDB Cloud Serverless クラスターをホストのリストに追加します。
     > 4.  ProxySQL とTiDB Cloud Serverless クラスター間の安全な接続を有効にします。
     >
-    > より深く理解するために、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。ProxySQL 構成の詳細については、 [ProxySQL ドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
+    > 理解を深めるために、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。ProxySQL 構成の詳細については、 [ProxySQL ドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
 
     以下は出力例です。出力にクラスターのホスト名が表示されています。これは、ProxySQL とTiDB Cloud Serverless クラスター間の接続が確立されていることを意味します。
 
@@ -620,7 +620,7 @@ systemctl start docker
 
 ## 生産環境 {#production-environment}
 
-本番環境では、完全に管理されたエクスペリエンスを実現するために[TiDB Cloud専用](https://www.pingcap.com/tidb-dedicated/)直接使用することをお勧めします。
+本番環境では、完全に管理されたエクスペリエンスを実現するために[TiDB Cloud専用](https://www.pingcap.com/tidb-cloud-dedicated/)直接使用することをお勧めします。
 
 ### 前提条件 {#prerequisite}
 
@@ -797,7 +797,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 >
 > 次の手順では、TiDB と ProxySQL のコンテナ イメージを使用してクエリ ルールを構成します。まだ取得していない場合は、詳細な手順については[統合セクション](#option-2-integrate-tidb-self-hosted-with-proxysql)参照してください。
 
-1.  TiDB および ProxySQL の[統合サンプルコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンします。前の手順ですでにクローンしている場合は、この手順をスキップします。
+1.  TiDB および ProxySQL の[統合サンプルコードリポジトリ](https://github.com/pingcap-inc/tidb-proxysql-integration)クローンします。前の手順で既にクローンしている場合は、この手順をスキップします。
 
     <SimpleTab groupId="os">
 

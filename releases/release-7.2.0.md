@@ -24,7 +24,7 @@ TiDB バージョン: 7.2.0
     -   `FIRST_VALUE`
     -   `LAST_VALUE`
 
--   TiFlash はパイプライン実行モデル (実験的) [＃6518](https://github.com/pingcap/tiflash/issues/6518) @ [シーライズ](https://github.com/SeaRise)をサポートしています
+-   TiFlashはパイプライン実行モデル（実験的） [＃6518](https://github.com/pingcap/tiflash/issues/6518) @ [シーライズ](https://github.com/SeaRise)をサポートします
 
     v7.2.0 より前では、 TiFlashエンジンの各タスクは実行中に個別にスレッド リソースを要求する必要があります。TiFlashはタスクの数を制御してスレッド リソースの使用を制限し、過剰使用を防止しますが、この問題を完全に排除することはできませんでした。この問題に対処するために、v7.2.0 以降、 TiFlash はパイプライン実行モデルを導入しています。このモデルは、すべてのスレッド リソースを集中管理し、タスク実行を均一にスケジュールして、スレッド リソースの使用率を最大化しながらリソースの過剰使用を回避します。パイプライン実行モデルを有効または無効にするには、 [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-new-in-v720)システム変数を変更します。
 
@@ -44,7 +44,7 @@ TiDB バージョン: 7.2.0
 
     詳細については[ドキュメント](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)参照してください。
 
--   データとインデックスの一貫性のチェックのパフォーマンスを向上[＃43693](https://github.com/pingcap/tidb/issues/43693) @ [翻訳:](https://github.com/wjhuang2016)
+-   データとインデックスの一貫性チェックのパフォーマンスを向上[＃43693](https://github.com/pingcap/tidb/issues/43693) @ [翻訳:](https://github.com/wjhuang2016)
 
     [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントは、テーブル内のデータとそれに対応するインデックス間の一貫性をチェックするために使用されます。v7.2.0 では、TiDB はデータの一貫性をチェックする方法を最適化し、 [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)の実行効率を大幅に向上させました。大量のデータを扱うシナリオでは、この最適化によりパフォーマンスが数百倍向上します。
 
@@ -105,7 +105,7 @@ TiDB バージョン: 7.2.0
 
 ### DB操作 {#db-operations}
 
--   DDL ジョブは一時停止および再開操作をサポートします (実験的) [＃18015](https://github.com/pingcap/tidb/issues/18015) @ [ゴドゥム](https://github.com/godouxm)
+-   DDL ジョブは一時停止と再開操作をサポートします (実験的) [＃18015](https://github.com/pingcap/tidb/issues/18015) @ [ゴドゥム](https://github.com/godouxm)
 
     TiDB v7.2.0 より前では、DDL ジョブの実行中にビジネス ピークが発生した場合、ビジネスへの影響を軽減するために、DDL ジョブを手動でキャンセルすることしかできませんでした。v7.2.0 では、TiDB に DDL ジョブの一時停止および再開操作が導入されています。これらの操作により、ピーク時に DDL ジョブを一時停止し、ピーク終了後に再開できるため、アプリケーション ワークロードへの影響を回避できます。
 
@@ -161,7 +161,7 @@ TiDB バージョン: 7.2.0
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                 | タイプを変更   | 説明                                                                                                                                                                                                                                                                                  |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ティビ            | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                                                    | 修正済み     | さらなるテストの後、デフォルト値を`false`から`true`に変更します。つまり、TiDB は、初期化の効率を向上させるために、TiDB の起動時にデフォルトで軽量統計初期化を使用します。                                                                                                                                                                                    |
+| ティビ            | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                                                    | 修正済み     | さらにテストを行った後、デフォルト値を`false`から`true`に変更します。つまり、TiDB は、初期化の効率を向上させるために、TiDB の起動時にデフォルトで軽量統計初期化を使用します。                                                                                                                                                                                  |
 | ティビ            | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)                                                         | 修正済み     | デフォルト値を`false`から`true`に変更して[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)に合わせます。つまり、TiDB は、起動時にサービスを提供する前に、統計の初期化が完了するまで待機します。                                                                                                                        |
 | ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].compaction-guard-min-output-file-size`](/tikv-configuration-file.md#compaction-guard-min-output-file-size) | 修正済み     | RocksDB の圧縮タスクのデータ量を削減するために、デフォルト値を`"8MB"`から`"1MB"`に変更します。                                                                                                                                                                                                                          |
 | ティクヴ           | [`rocksdb.[defaultcf|writecf|lockcf].optimize-filters-for-memory`](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v720)         | 新しく追加された | メモリの内部断片化を最小限に抑える Bloom/Ribbon フィルターを生成するかどうかを制御します。                                                                                                                                                                                                                                |
@@ -184,7 +184,7 @@ TiDB バージョン: 7.2.0
     -   古い読み取りの再試行リーダーがロックに遭遇すると、TiDBはロックを解決した後、リーダーで強制的に再試行し、不要なオーバーヘッドを回避します[＃43659](https://github.com/pingcap/tidb/issues/43659) @ [あなた06](https://github.com/you06)
     -   推定時間を使用して古い読み取りtsを計算し、古い読み取り[＃44215](https://github.com/pingcap/tidb/issues/44215) @ [あなた06](https://github.com/you06)のオーバーヘッドを削減します。
     -   長時間実行されるトランザクションのログとシステム変数を追加する[＃41471](https://github.com/pingcap/tidb/issues/41471) @ [クレイジーcs520](https://github.com/crazycs520)
-    -   圧縮された MySQL プロトコルを介して TiDB に接続することをサポートします。これにより、低帯域幅ネットワークでのデータ集約型クエリのパフォーマンスが向上し、帯域幅コストが節約されます。これは、 `zlib`と`zstd`ベースの両方の圧縮をサポートします[＃22605](https://github.com/pingcap/tidb/issues/22605) @ [ドヴェーデン](https://github.com/dveeden)
+    -   圧縮された MySQL プロトコルを介して TiDB に接続することをサポートします。これにより、低帯域幅ネットワークでのデータ集約型クエリのパフォーマンスが向上し、帯域幅コストが節約されます。これは`zlib`と`zstd`ベースの両方の圧縮をサポートします[＃22605](https://github.com/pingcap/tidb/issues/22605) @ [ドヴェーデン](https://github.com/dveeden)
     -   `utf8`と`utf8bm3`両方を従来の 3 バイト UTF-8 文字セット エンコーディングとして認識します。これにより、従来の UTF-8 エンコーディングを持つテーブルを MySQL 8.0 から TiDB [＃26226](https://github.com/pingcap/tidb/issues/26226) @ [ドヴェーデン](https://github.com/dveeden)に移行しやすくなります。
     -   `UPDATE`ステートメント[＃44751](https://github.com/pingcap/tidb/issues/44751) @ [Cbcウェストウルフ](https://github.com/CbcWestwolf)での割り当てに`:=`使用することをサポートします
 
@@ -233,6 +233,7 @@ TiDB バージョン: 7.2.0
     -   コプロセッサータスク[＃43365](https://github.com/pingcap/tidb/issues/43365) @ [あなた06](https://github.com/you06)に`TxnScope`がないため、古い読み取りグローバル最適化が有効にならない問題を修正しました。
     -   フォロワー読み取りが再試行前にフラッシュバック エラーを処理せず、クエリ エラー[＃43673](https://github.com/pingcap/tidb/issues/43673) @ [あなた06](https://github.com/you06)が発生する問題を修正しました。
     -   `ON UPDATE`ステートメントが主キー[＃44565](https://github.com/pingcap/tidb/issues/44565) @ [ジグアン](https://github.com/zyguan)を正しく更新しない場合にデータとインデックスが不整合になる問題を修正しました
+    -   権限テーブル[＃41048](https://github.com/pingcap/tidb/issues/41048) @ [bb7133](https://github.com/bb7133)の一部の列における大文字と小文字の区別の問題を修正
     -   MySQL 8.0.28以降のバージョン[＃43987](https://github.com/pingcap/tidb/issues/43987) @ [ヤンケオ](https://github.com/YangKeao)と一致するように、 `UNIX_TIMESTAMP()`関数の上限を`3001-01-19 03:14:07.999999 UTC`に変更します。
     -   取り込みモード[＃44137](https://github.com/pingcap/tidb/issues/44137) @ [タンジェンタ](https://github.com/tangenta)でインデックスの追加が失敗する問題を修正
     -   ロールバック状態で DDL タスクをキャンセルすると、関連するメタデータ[＃44143](https://github.com/pingcap/tidb/issues/44143) @ [翻訳:](https://github.com/wjhuang2016)にエラーが発生する問題を修正しました
