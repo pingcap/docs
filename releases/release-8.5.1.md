@@ -23,15 +23,13 @@ Starting from v8.5.1, TiDB resumes the support for CentOS Linux 7. If you plan t
 
 + TiDB <!--tw@Oreoxmt: 5 notes-->
 
-    - 支持通过 SQL 动态调整 DDL reorg 的 concurrency 和 batch size 配置[#57526](https://github.com/pingcap/tidb/issues/57526) @[fzzf678](https://github.com/fzzf678)
-    - 在 ADMIN SHOW DDL JOBS 的结果中添加一列注释 [#57526](https://github.com/pingcap/tidb/issues/57526) @[tangenta](https://github.com/tangenta)
-    - 支持将只读的用户变量折叠为常量 [#52742](https://github.com/pingcap/tidb/issues/52742) @[winoros](https://github.com/winoros)
-    - 将具有 nulleq 条件的笛卡尔积 Semi Join 转换为具有相等条件的 Semi Join [#57583](https://github.com/pingcap/tidb/issues/57583) @[hawkingrei](https://github.com/hawkingrei)
-    - 统计信息内存缓存的默认阈值为总内存的 20% [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
+    - Support folding read-only user-defined variables into constants [#52742](https://github.com/pingcap/tidb/issues/52742) @[winoros](https://github.com/winoros)
+    - Convert Cartesian product Semi Join with nulleq condition to Semi Join with equality condition [#57583](https://github.com/pingcap/tidb/issues/57583) @[hawkingrei](https://github.com/hawkingrei)
+    - Adjust the default threshold of statistics memory cache to 20% of total memory [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
 
 + TiKV <!--tw@Oreoxmt: 1 note-->
 
-    - 增加了对非法 max-ts 更新的检测机制 [#17916](https://github.com/tikv/tikv/issues/17916) @[ekexium](https://github.com/ekexium)
+    - Add detection mechanism for illegal `max_ts` updates [#17916](https://github.com/tikv/tikv/issues/17916) @[ekexium](https://github.com/ekexium)
 
 + TiFlash
 
@@ -73,14 +71,14 @@ Starting from v8.5.1, TiDB resumes the support for CentOS Linux 7. If you plan t
 
 + TiKV <!--tw@Oreoxmt: 2 notes-->
 
-    - 修复了处理 GBK/GB18030 编码数据时的编码问题 [#17618](https://github.com/tikv/tikv/issues/17618) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - 修复了因 In-memory Engine 预加载尚未初始化的副本导致的 panic 问题 [#18046](https://github.com/tikv/tikv/issues/18046) @[overvenus]([https://github.com/overvenus]
+    - Fix the issue that encoding might fail when processing GBK/GB18030 encoded data [#17618](https://github.com/tikv/tikv/issues/17618) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Fix the issue that TiKV panics due to uninitialized replicas when the TiKV MVCC In-Memory Engine (IME) preloads them [#18046](https://github.com/tikv/tikv/issues/18046) @[overvenus](https://github.com/overvenus)
     - (dup): release-8.1.2.md > Bug fixes> TiKV - Fix the issue that the leader could not be quickly elected after Region split [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-8.1.2.md > Bug fixes> TiKV - Fix the issue that TiKV cannot report heartbeats to PD when the disk is stuck [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)
 
 + PD <!--tw@Oreoxmt: 1 note-->
 
-    - 修复 PD 在启用 `@@tidb_enable_tso_follower_proxy` 变量后可能出现的 Panic 问题 [#8950](https://github.com/tikv/pd/issues/8950) @[okJiang](https://github.com/okJiang)
+    - Fix the issue that PD might panic when the `tidb_enable_tso_follower_proxy` system variable is enabled [#8950](https://github.com/tikv/pd/issues/8950) @[okJiang](https://github.com/okJiang)
     - (dup): release-7.5.5.md > Bug fixes> PD - Fix the issue that `evict-leader-scheduler` fails to work properly when it is repeatedly created with the same Store ID [#8756](https://github.com/tikv/pd/issues/8756) @[okJiang](https://github.com/okJiang)
 
 + TiFlash <!--tw@qiancai: 2 notes-->
