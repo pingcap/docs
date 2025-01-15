@@ -1,9 +1,9 @@
 ---
-title: Use Resource Control to Achieve resource group limitation
+title: Use Resource Control to Achieve Resource Group Limitation
 summary: Learn how to use the resource control feature to control and schedule application resources.
 ---
 
-# Use Resource Control to Achieve resource group limitation
+# Use Resource Control to Achieve Resource Group Limitation
 
 > **Note:**
 >
@@ -259,6 +259,7 @@ The following example binds the current statement to the resource group `rg1`.
 ```sql
 SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 ```
+
 ## Disable resource control
 
 <CustomContent platform="tidb">

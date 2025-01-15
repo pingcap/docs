@@ -259,7 +259,7 @@ Remote Procedure Call (RPC) is a communication way between software components. 
 
 ### Request Unit (RU)
 
-Request Unit (RU) is a unified abstraction unit for the resource usage in TiDB. It is used with [Resource Control](/tidb-resource-control.md) to manage resource usage.
+Request Unit (RU) is a unified abstraction unit for the resource usage in TiDB. It is used with [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage.
 
 ### Restore
 

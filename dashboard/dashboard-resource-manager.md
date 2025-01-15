@@ -5,7 +5,7 @@ summary: TiDB Dashboard Resource Manager Page helps cluster administrators imple
 
 # TiDB Dashboard Resource Manager Page
 
-To implement resource isolation using the [Resource Control](/tidb-resource-control.md) feature, cluster administrators can create resource groups and set quotas for each group. Before resource planning, you need to know the overall capacity of the cluster. This document helps you view the information about resource control, so you can estimate the cluster capacity before resource planning and allocate resources more effectively.
+To implement resource isolation using the [Resource Control](/tidb-resource-control-ru-groups.md) feature, cluster administrators can create resource groups and set quotas for each group. Before resource planning, you need to know the overall capacity of the cluster. This document helps you view the information about resource control, so you can estimate the cluster capacity before resource planning and allocate resources more effectively.
 
 ## Access the page
 
@@ -34,7 +34,7 @@ The Resource Manager page contains the following three sections:
 
 ## Estimate Capacity
 
-Before resource planning, you need to know the overall capacity of the cluster. TiDB provides two methods to estimate the capacity of [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru#what-is-request-unit-ru) in the current cluster:
+Before resource planning, you need to know the overall capacity of the cluster. TiDB provides two methods to estimate the capacity of [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru#what-is-request-unit-ru) in the current cluster:
 
 - [Estimate capacity based on hardware deployment](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
     

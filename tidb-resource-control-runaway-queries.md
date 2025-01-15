@@ -5,7 +5,7 @@ summary: Introduces how to control and degrade queries with excessive resource c
 
 # Manage queries that consume more resources than expected (Runaway Queries)
 
-A runaway query is a query (`SELECT` statement only) that consumes more time or resources than expected. The term **runaway queries** is used in the following to describe the feature of managing the runaway query.
+A runaway query is a query that consumes more time or resources than expected. The term **runaway queries** is used in the following to describe the feature of managing the runaway query.
 
 - Starting from v7.2.0, the resource control feature introduces the management of runaway queries. You can set criteria for a resource group to identify runaway queries and automatically take actions to prevent them from exhausting resources and affecting other queries. You can manage runaway queries for a resource group by including the `QUERY_LIMIT` field in [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) or [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
 - Starting from v7.3.0, the resource control feature introduces manual management of runaway watches, enabling quick identification of runaway queries for a given SQL statement or Digest. You can execute the statement [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) to manually manage the runaway queries watch list in the resource group.
@@ -14,9 +14,9 @@ A runaway query is a query (`SELECT` statement only) that consumes more time or 
 
 If a query exceeds any of the following limits, it is identified as a runaway query:
 
-- `EXEC_ELAPSED`: checks whether the query execution time exceeds the limit.
-- `PROCESSED_KEYS`: checks whether the number of keys processed by the Coprocessor exceeds the limit.
-- `RU`: checks whether the total number of read and write RUs consumed by the statement exceeds the limit.
+- `EXEC_ELAPSED`: checks whether the query execution time exceeds the limit, this rule applies to read and write DML.
+- `PROCESSED_KEYS`: checks whether the number of keys processed by the Coprocessor exceeds the limit, this rule applies only to read statements.
+- `RU`: checks whether the total number of read and write RUs consumed by the statement exceeds the limit, this rule applies only to read statements.
 
 Supported operations (`ACTION`):
 
@@ -132,7 +132,7 @@ The parameters are as follows:
     QUERY WATCH REMOVE 1;
     ```
 
-#### Observability
+# Observability
 
 You can get more information about runaway queries from the following system tables and `INFORMATION_SCHEMA`:
 
