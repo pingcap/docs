@@ -72,7 +72,7 @@ With these new features, the Connected Care services offer you better connectivi
 
 - New **Basic** plan: customers will be guided to join the active community channels, where they can engage with other community members and interact with [tidb.ai](https://tidb.ai/) for technical assistance.
 
-## Replacement and retirement of legacy support plans
+## Transition to Connected Care
 
 The following table lists the shutdown schedules for the legacy support plans:
 
