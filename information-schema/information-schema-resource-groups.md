@@ -5,7 +5,7 @@ summary: Learn the `RESOURCE_GROUPS` information_schema table.
 
 # RESOURCE_GROUPS
 
-The `RESOURCE_GROUPS` table shows the information about all resource groups. For more information, see [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md).
+The `RESOURCE_GROUPS` table shows the information about all resource groups. For more information, see [Use Resource Control to Achieve resource group limitation](/tidb-resource-control.md).
 
 > **Note:**
 >
