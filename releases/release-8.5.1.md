@@ -39,7 +39,7 @@ Starting from v8.5.1, TiDB resumes the support for CentOS Linux 7. If you plan t
 
     + TiCDC <!--tw@qiancai: 1 note-->
 
-        - 减少 TiCDC 在做 Initial Scan 时对与 TiKV 中 cache hit rate 的影响 [#17877](https://github.com/tikv/tikv/issues/17877) @[hicqu](https://github.com/hicqu)
+        - Filter out events that are not subscribed to by TiCDC in advance to avoid unnecessary resource consumption [#17877](https://github.com/tikv/tikv/issues/17877) @[hicqu](https://github.com/hicqu)
 
 ## Bug fixes
 
@@ -84,19 +84,19 @@ Starting from v8.5.1, TiDB resumes the support for CentOS Linux 7. If you plan t
 + TiFlash <!--tw@qiancai: 2 notes-->
 
     - (dup): release-7.5.5.md > Bug fixes> TiFlash - Fix the issue that querying new columns might return incorrect results under the disaggregated storage and compute architecture [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
-    - 修复 TiFlash 可能在内存占用不高的情况下，发生意外拒绝处理 Raft 消息的行为 [#9745](https://github.com/pingcap/tiflash/issues/9745) @[CalvinNeo](https://github.com/CalvinNeo)
-    - 修复 TiFlash `Position` 函数不支持 Collation 的问题 [#9377](https://github.com/pingcap/tiflash/issues/9377) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that TiFlash might unexpectedly reject processing Raft messages when memory usage is low [#9745](https://github.com/pingcap/tiflash/issues/9745) @[CalvinNeo](https://github.com/CalvinNeo)
+    - Fix the issue that the `POSITION()` function for TiFlash does not support character set collation [#9377](https://github.com/pingcap/tiflash/issues/9377) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 + Tools
 
     + Backup & Restore (BR) <!--tw@qiancai: 1 note-->
 
-        - 修复了 PiTR 无法恢复大 Index 的问题。 [#58433](https://github.com/pingcap/tidb/pull/58433) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that PITR fails to restore indexes larger than 3072 bytes [#58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC <!--tw@qiancai: 5 notes-->
 
-        - 修复在扩容出新的 TiKV 节点后 Changefeed 可能会卡住的问题 [#11766](https://github.com/pingcap/tiflow/issues/11766) @[lidezhu](https://github.com/lidezhu)
-        - 修复 event filter 在处理 rename table DDL 时错误的使用新的表名而不是旧的表名来进行过滤的问题 [#11946](https://github.com/pingcap/tiflow/issues/11946) @[kennytm](https://github.com/kennytm)
-        - 修复在删除 changefeed 后 goroutine 泄漏的问题 [#11954](https://github.com/pingcap/tiflow/issues/11954) @[hicqu](https://github.com/hicqu)
-        - 修复由于 Sarama 客户端乱序重发消息导致 kafka 消息乱序的问题 [#11935](https://github.com/pingcap/tiflow/issues/11935) @[3AceShowHand](https://github.com/3AceShowHand)
-        - 修复 Debezium 协议中 not null timestamp 类型的默认值不正确的问题 [#11966](https://github.com/pingcap/tiflow/issues/11966) @[wk989898](https://github.com/wk989898)
+         - Fix the issue that the changefeed might get stuck after new TiKV nodes are added to the cluster [#11766](https://github.com/pingcap/tiflow/issues/11766) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that the event filter incorrectly uses the new table name instead of the old table name for filtering when processing `RENAME TABLE` DDL statements [#11946](https://github.com/pingcap/tiflow/issues/11946) @[kennytm](https://github.com/kennytm)
+        - Fix the issue that goroutines leak occurs after a changefeed is deleted [#11954](https://github.com/pingcap/tiflow/issues/11954) @[hicqu](https://github.com/hicqu)
+        - Fix the issue that out-of-order messages resent by the Sarama client cause Kafka message order to be incorrect [#11935](https://github.com/pingcap/tiflow/issues/11935) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that the default value of the NOT NULL timestamp field in the Debezium protocol is incorrect [#11966](https://github.com/pingcap/tiflow/issues/11966) @[wk989898](https://github.com/wk989898)
