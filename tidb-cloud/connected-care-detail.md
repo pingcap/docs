@@ -26,13 +26,6 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>Built for enterprises with mission-critical workloads, offering the fastest response times, proactive support, and dedicated connections through named Technical Account Managers.</td>
   </tr>
   <tr>
-    <td>Pricing</td>
-    <td>Free</td>
-    <td>Monthly cost is based on the greater of $29 or 10% of total monthly charges.</td>
-    <td>Monthly cost is based on the greater of $699 or 20% of total monthly charges.</td>
-    <td>Contact sales</td>
-  </tr>
-  <tr>
     <td rowspan="4">Initial Response Time</td>
     <td>-</td>
     <td>S1: 4 business hours</td>
@@ -153,5 +146,5 @@ This document provides detailed information about the [Connected Care](/tidb-clo
 </table>
 
 - Business hours: 9 AM - 6 PM local time, Monday to Friday
-- IM: Instant Message. Currently, [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) are supported. In the future, Microsoft Teams is planned.
+- IM: Instant Message. Currently, [Slack](https://slack.com/) and [Lark](https://www.larksuite.com/) are supported. We are planning to support [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) in the future.
 - Clinic: a modern monitoring service that provides advanced monitoring and diagnostic capabilities for your TiDB Cloud clusters.
