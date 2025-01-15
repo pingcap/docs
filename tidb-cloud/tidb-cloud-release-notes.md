@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## January 14, 2025
+
+**General changes**
+
+- Support a new AWS region for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `Jakarta (ap-southeast-3)`.
+
+- Introduce the [Notifications](https://tidbcloud.com/console/notifications) feature, which enables you to stay informed instantly with TiDB Cloud updates and alerts through the [TiDB Cloud console](https://tidbcloud.com/).
+
+    For more information, see [Notifications](/tidb-cloud/notifications.md).
+
 ## January 2, 2025
 
 **General changes**
