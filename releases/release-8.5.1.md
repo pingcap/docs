@@ -43,7 +43,7 @@ Starting from v8.5.1, TiDB resumes the support for CentOS Linux 7. If you plan t
 
 ## Bug fixes
 
-+ TiDB <!--tw@lilin90: the following 9 notes-->
++ TiDB <!--tw@lilin90: the following 10 notes-->
 
     - (dup): release-7.5.5.md > Bug fixes> TiDB - Fix the issue that the default timeout for querying the TiFlash system table is too short [#57816](https://github.com/pingcap/tidb/issues/57816) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-7.5.5.md > Bug fixes> TiDB - Fix the issue that when setting `tidb_gogc_tuner_max_value` and `tidb_gogc_tuner_min_value`, if the maximum value is null, an incorrect warning message occurs [#57889](https://github.com/pingcap/tidb/issues/57889) @[hawkingrei](https://github.com/hawkingrei)
@@ -57,7 +57,8 @@ Starting from v8.5.1, TiDB resumes the support for CentOS Linux 7. If you plan t
     - 修复 REORGANIZE PARTITION 操作未正确移除被替换的全局索引以及处理非聚簇表唯一索引的问题。[#56822](https://github.com/pingcap/tidb/issues/56822) @[mjonss](https://github.com/mjonss)
     - 修复分区表 Range INTERVAL 语法糖不支持使用 `MINUTE` 做间隔的问题。[#57698](https://github.com/pingcap/tidb/issues/57698) @[mjonss](https://github.com/mjonss)
     - 修复查询慢日志时，由于时区导致的时间范围错误的问题 [#58452](https://github.com/pingcap/tidb/issues/58452) @[lcwangchao](https://github.com/lcwangchao)
-    - 修复在缩减 TTL 扫描任务工作线程时，任务取消失败可能导致扫描任务泄漏的问题。 [#57708](https://github.com/pingcap/tidb/issues/57708) @[YangKeao](https://github.com/YangKeao) <!--tw@hfxsd: the following 10 notes-->
+    - 修复在缩减 TTL 扫描任务工作线程时，任务取消失败可能导致扫描任务泄漏的问题。 [#57708](https://github.com/pingcap/tidb/issues/57708) @[YangKeao](https://github.com/YangKeao) 
+    - 增强了时间戳合法性检查。[#57786](https://github.com/pingcap/tidb/issues/57786) @[MyonKeminta](https://github.com/MyonKeminta) <!--tw@hfxsd: the following 10 notes-->
     - 修复在丢失心跳后，若 TTL 表被删除或禁用，TTL 作业仍继续运行的问题 [#57702](https://github.com/pingcap/tidb/issues/57702) @[YangKeao](https://github.com/YangKeao)
     - 修复 TTL 作业被取消后，last_job_finish_time 显示不正确的问题 [#58109](https://github.com/pingcap/tidb/issues/58109) @[YangKeao](https://github.com/YangKeao)
     - 修复 TiDB 丢失心跳时，TTL 任务无法被取消的问题 [#57784](https://github.com/pingcap/tidb/issues/57784) @[YangKeao](https://github.com/YangKeao)
