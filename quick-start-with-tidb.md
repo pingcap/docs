@@ -487,21 +487,37 @@ Other requirements for the target machine include:
 
     - [TiDB Dashboard](/dashboard/dashboard-intro.md): <http://{pd-ip}:2379/dashboard>. The default username is `root`, and the password is empty.
 
-1. To view the currently deployed cluster list:
+1. (Optional) View the cluster list and topology.
 
-    {{< copyable "shell-regular" >}}
+    - To view the cluster list:
 
-    ```shell
-    tiup cluster list
-    ```
+        {{< copyable "shell-regular" >}}
 
-1. To view the cluster topology and status:
+        ```shell
+        tiup cluster list
+        ```
 
-    {{< copyable "shell-regular" >}}
+    - To view the cluster topology and status:
 
-    ```shell
-    tiup cluster display <cluster-name>
-    ```
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        tiup cluster display <cluster-name>
+        ```
+
+    To learn more about the `tiup cluster` commands, see [TiUP Cluster Commands](/tiup/tiup-component-cluster.md).
+
+1. Clean up the cluster after the test deployment:
+
+    1. Stop the above TiDB service by pressing <kbd>Control+C</kbd>.
+
+    2. Run the following command after the service is stopped:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        tiup clean --all
+        ```
 
 ## What's next
 
@@ -509,6 +525,7 @@ If you have just deployed a TiDB cluster for the local test environment, here ar
 
 - Learn about basic SQL operations in TiDB by referring to [Basic SQL operations in TiDB](/basic-sql-operations.md).
 - You can also migrate data to TiDB by referring to [Migrate data to TiDB](/migration-overview.md).
+- Learn more about using `tiup` to manage TiDB clusters by referring to [TiUP Overview](/tiup/tiup-overview.md).
 
 If you are ready to deploy a TiDB cluster for the production environment, here are the next steps:
 
