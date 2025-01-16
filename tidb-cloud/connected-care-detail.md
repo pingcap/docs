@@ -125,10 +125,10 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>Community Workspace</td>
   </tr>
   <tr>
-    <td>TiDB.AI</td>
-    <td>TiDB.AI</td>
-    <td>TiDB.AI</td>
-    <td>TiDB.AI</td>
+    <td><a href="https://tidb.ai/">TiDB.AI</a></td>
+    <td><a href="https://tidb.ai/">TiDB.AI</a></td>
+    <td><a href="https://tidb.ai/">TiDB.AI</a></td>
+    <td><a href="https://tidb.ai/">TiDB.AI</a></td>
   </tr>
   <tr>
     <td>-</td>
