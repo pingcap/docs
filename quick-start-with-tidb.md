@@ -243,7 +243,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 5. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
 
-6. Clean up the cluster after the test deployment:
+6. Clean up the cluster after testing:
 
     1. Stop the process by pressing <kbd>Control</kbd>+<kbd>C</kbd>.
 
@@ -310,7 +310,7 @@ Other requirements for the target machine include:
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-1. Declare the global environment variable.
+2. Declare the global environment variable.
 
     > **Note:**
     >
@@ -322,7 +322,7 @@ Other requirements for the target machine include:
     source ${your_shell_profile}
     ```
 
-1. Install the cluster component of TiUP:
+3. Install the cluster component of TiUP:
 
     {{< copyable "shell-regular" >}}
 
@@ -330,7 +330,7 @@ Other requirements for the target machine include:
     tiup cluster
     ```
 
-1. If the TiUP cluster is already installed on the machine, update the software version:
+4. If the TiUP cluster is already installed on the machine, update the software version:
 
     {{< copyable "shell-regular" >}}
 
@@ -338,7 +338,7 @@ Other requirements for the target machine include:
     tiup update --self && tiup update cluster
     ```
 
-1. Increase the connection limit of the `sshd` service using the root user privilege. This is because TiUP needs to simulate deployment on multiple machines.
+5. Increase the connection limit of the `sshd` service using the root user privilege. This is because TiUP needs to simulate deployment on multiple machines.
 
     1. Modify `/etc/ssh/sshd_config`, and set `MaxSessions` to `20`.
     2. Restart the `sshd` service:
@@ -349,7 +349,7 @@ Other requirements for the target machine include:
         service sshd restart
         ```
 
-1. Create and start the cluster:
+6. Create and start the cluster:
 
     Create the [topology configuration file](/tiup/tiup-cluster-topology-reference.md) according to the following template, and name it as `topo.yaml`:
 
@@ -420,7 +420,7 @@ Other requirements for the target machine include:
     - `replication.enable-placement-rules`: This PD parameter is set to ensure that TiFlash runs normally.
     - `host`: The IP of the target machine.
 
-1. Execute the cluster deployment command:
+7. Execute the cluster deployment command:
 
     {{< copyable "shell-regular" >}}
 
@@ -443,7 +443,7 @@ Other requirements for the target machine include:
     Input SSH password:
     ```
 
-1. Start the cluster:
+8. Start the cluster:
 
     {{< copyable "shell-regular" >}}
 
@@ -451,7 +451,7 @@ Other requirements for the target machine include:
     tiup cluster start <cluster-name>
     ```
 
-1. Access the cluster endpoints:
+9. Access the cluster endpoints:
 
     - Connect to the TiDB database using MySQL client. The password is empty:
 
@@ -465,7 +465,7 @@ Other requirements for the target machine include:
 
     - [TiDB Dashboard](/dashboard/dashboard-intro.md): <http://{pd-ip}:2379/dashboard>. The default username is `root`, and the password is empty.
 
-1. (Optional) View the cluster list and topology.
+10. (Optional) View the cluster list and topology.
 
     - To view the cluster list:
 
@@ -485,9 +485,9 @@ Other requirements for the target machine include:
 
     To learn more about the `tiup cluster` commands, see [TiUP Cluster Commands](/tiup/tiup-component-cluster.md).
 
-1. Clean up the cluster after the test deployment:
+11. Clean up the cluster after testing:
 
-    1. Stop the above TiDB service by pressing <kbd>Control+C</kbd>.
+    1. Stop the above TiDB service by pressing <kbd>Control</kbd>+<kbd>C</kbd>.
 
     2. Run the following command after the service is stopped:
 
@@ -503,7 +503,7 @@ If you have just deployed a TiDB cluster for the local test environment, here ar
 
 - Learn about basic SQL operations in TiDB by referring to [Basic SQL operations in TiDB](/basic-sql-operations.md).
 - You can also migrate data to TiDB by referring to [Migrate data to TiDB](/migration-overview.md).
-- Learn more about using `tiup` to manage TiDB clusters by referring to [TiUP Overview](/tiup/tiup-overview.md).
+- Learn more about using TiUP to manage TiDB clusters by referring to [TiUP Overview](/tiup/tiup-overview.md).
 
 If you are ready to deploy a TiDB cluster for the production environment, here are the next steps:
 
