@@ -58,7 +58,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     >
     > Starting from v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple silicon chip.
 
-1. Declare the global environment variable:
+2. Declare the global environment variable:
 
     > **Note:**
     >
@@ -70,7 +70,16 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     source ${your_shell_profile}
     ```
 
-1. Start the cluster in the current session:
+3. Start the cluster in the current session:
+
+    > **Note:**
+    >
+    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
+    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
+    >
+    >     ```shell
+    >     tiup playground --tag ${tag_name}
+    >     ```
 
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
@@ -102,16 +111,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
         To view all available versions, run `tiup list tidb`.
 
-    > **Note:**
-    >
-    > - For the playground operated in the following way, after the deployment and testing are finished, TiUP will automatically clean up the cluster data. You will get a new cluster after re-running the command.
-    > - If you want to persist data on storage, then add the `--tag` flag when you start the cluster. For details, see [Specify a tag when starting the TiDB cluster to store the data](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data).
-    >
-    >     ```shell
-    >     tiup playground --tag ${tag_name}
-    >     ```
-
-1. Start a new session to access the TiDB cluster endpoints:
+4. Start a new session to access the TiDB cluster endpoints:
 
     - Connect to the TiDB database:
 
@@ -137,11 +137,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     - Grafana: <http://127.0.0.1:3000>. Both the default username and password are `admin`.
 
-1. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
+5. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
 
-1. Clean up the cluster after the test deployment:
+6. Clean up the cluster after testing:
 
-    1. Stop the above TiDB service by pressing <kbd>Control+C</kbd>.
+    1. Stop the above TiDB service by pressing <kbd>Control</kbd>+<kbd>C</kbd>.
 
     2. Run the following command after the service is stopped:
 
