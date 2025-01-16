@@ -163,6 +163,33 @@ The output is as follows:
 
 TiDB implicitly allocates values to `AUTO_RANDOM` columns similarly to `AUTO_INCREMENT` columns. They are also controlled by the session-level system variables [`auto_increment_increment`](/system-variables.md#auto_increment_increment) and [`auto_increment_offset`](/system-variables.md#auto_increment_offset). The auto-increment bits (ID) of implicitly allocated values conform to the equation `(ID - auto_increment_offset) % auto_increment_increment == 0`.
 
+## Clear the auto-increment ID cache
+
+Explicitly inserting data into an `AUTO_RANDOM` column behaves the same as with an `AUTO_INCREMENT` column, so you also need to clear the auto-increment ID cache. For more details, see [Clear the auto-increment ID cache](/auto-increment.md#clear-the-auto-increment-id-cache).
+
+You can run the `ALTER TABLE` statement to set `AUTO_RANDOM_BASE=0` to clear the auto-increment ID cache on all TiDB nodes in the cluster. For example:
+
+```sql
+ALTER TABLE t AUTO_RANDOM_BASE=0;
+```
+
+```
+Query OK, 0 rows affected, 1 warning (0.52 sec)
+```
+
+```sql
+SHOW WARNINGS;
+```
+
+```
++---------+------+-------------------------------------------------------------------------+
+| Level   | Code | Message                                                                 |
++---------+------+-------------------------------------------------------------------------+
+| Warning | 1105 | Can't reset AUTO_INCREMENT to 0 without FORCE option, using 101 instead |
++---------+------+-------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ## Restrictions
 
 Pay attention to the following restrictions when you use `AUTO_RANDOM`:
