@@ -5,7 +5,7 @@ summary: Introduces detailed information about the Connected Care support servic
 
 # Connected Care Details
 
-This document provides detailed information about the [Connected Care](/tidb-cloud/connected-care-announcement.md) support services.
+This document provides detailed information about the [Connected Care](/tidb-cloud/connected-care-overview.md) support services.
 
 <table>
 <thead>
@@ -90,8 +90,8 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM ticket creation and update subscriptions</td>
-    <td>Connected: IM ticket creation and update subscriptions</td>
+    <td>Connected: IM ticket creation and update subscription</td>
+    <td>Connected: IM ticket creation and update subscription</td>
   </tr>
   <tr>
     <td>-</td>
