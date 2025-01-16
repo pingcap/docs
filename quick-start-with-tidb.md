@@ -174,8 +174,6 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
     >
     > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path.
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     source ${your_shell_profile}
     ```
@@ -193,21 +191,13 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     - To start a TiDB cluster of the latest version with 1 TiDB instance, 1 TiKV instance, 1 PD instance, and 1 TiFlash instance, run the following command:
 
-        {{< copyable "shell-regular" >}}
-
         ```shell
         tiup playground
         ```
 
-    - To specify the TiDB version and the number of instances of each component, run a command like this:
+        If this is the first time you run the command, TiUP will download the latest version of TiDB and start the cluster.
 
-        {{< copyable "shell-regular" >}}
-
-        ```shell
-        tiup playground v8.5.0 --db 2 --pd 3 --kv 3
-        ```
-
-        The preceding command downloads the specified version of TiDB such as v8.5.0, and starts the cluster. The output displays how to access the cluster:
+        The output displays a list of endpoints of the cluster:
 
         ```log
         🎉 TiDB Playground Cluster is started, enjoy!
@@ -215,6 +205,12 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         Connect TiDB:    mysql --comments --host 127.0.0.1 --port 4000 -u root
         TiDB Dashboard:  http://127.0.0.1:2379/dashboard
         Grafana:         http://127.0.0.1:3000
+        ```
+
+    - To specify the TiDB version and the number of instances of each component, run a command like this:
+
+        ```shell
+        tiup playground v8.5.0 --db 2 --pd 3 --kv 3
         ```
 
         To view all available versions, run `tiup list tidb`.
