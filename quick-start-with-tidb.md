@@ -91,7 +91,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
         If this is the first time you run the command, TiUP will download the latest version of TiDB and start the cluster.
 
-        The output returns the list of endpoints of the cluster:
+        The output displays a list of endpoints of the cluster:
 
         ```log
         🎉 TiDB Playground Cluster is started, enjoy!
