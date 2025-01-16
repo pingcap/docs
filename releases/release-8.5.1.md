@@ -26,6 +26,7 @@ Starting from v8.5.1, TiDB resumes the support for CentOS Linux 7. If you plan t
     - Support folding read-only user-defined variables into constants [#52742](https://github.com/pingcap/tidb/issues/52742) @[winoros](https://github.com/winoros)
     - Convert Cartesian product Semi Join with nulleq condition to Semi Join with equality condition [#57583](https://github.com/pingcap/tidb/issues/57583) @[hawkingrei](https://github.com/hawkingrei)
     - Adjust the default threshold of statistics memory cache to 20% of total memory [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
+    - Enhance the timestamp validity check [#57786](https://github.com/pingcap/tidb/issues/57786) @[MyonKeminta](https://github.com/MyonKeminta)
 
 + TiKV <!--tw@Oreoxmt: 1 note-->
 
@@ -49,16 +50,15 @@ Starting from v8.5.1, TiDB resumes the support for CentOS Linux 7. If you plan t
     - (dup): release-7.5.5.md > Bug fixes> TiDB - Fix the issue that when setting `tidb_gogc_tuner_max_value` and `tidb_gogc_tuner_min_value`, if the maximum value is null, an incorrect warning message occurs [#57889](https://github.com/pingcap/tidb/issues/57889) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.5.5.md > Bug fixes> TiDB - Fix the issue that data indexes are inconsistent because plan cache uses the wrong schema when adding indexes [#56733](https://github.com/pingcap/tidb/issues/56733) @[wjhuang2016](https://github.com/wjhuang2016)
     - (dup): release-7.5.5.md > Bug fixes> TiDB - Fix the issue that the data in the **Stats Healthy Distribution** panel of Grafana might be incorrect [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复没有收集过统计信息的表的上次 ANALYZE 时间可能不为 NULL 的问题 [#57735](https://github.com/pingcap/tidb/issues/57735) @[winoros](https://github.com/winoros)
-    - 正确处理取统计信息的异常，防止后台任务超时时内存内的统计信息被误删除的问题 [#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复执行 DROP DATABASE 语句后统计信息未被清理的问题  [#57230](https://github.com/pingcap/tidb/issues/57230) @[Rustin170506](https://github.com/Rustin170506)
-    - 修复在构造 IndexMerge 时可能丢失部分谓词的问题 [#58476](https://github.com/pingcap/tidb/issues/58476) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复在超过 3000 维向量类型的列上创建向量搜索索引会失败的问题 [#58836](https://github.com/pingcap/tidb/issues/58836) @[breezewish](https://github.com/breezewish)
-    - 修复 REORGANIZE PARTITION 操作未正确移除被替换的全局索引以及处理非聚簇表唯一索引的问题。[#56822](https://github.com/pingcap/tidb/issues/56822) @[mjonss](https://github.com/mjonss)
-    - 修复分区表 Range INTERVAL 语法糖不支持使用 `MINUTE` 做间隔的问题。[#57698](https://github.com/pingcap/tidb/issues/57698) @[mjonss](https://github.com/mjonss)
-    - 修复查询慢日志时，由于时区导致的时间范围错误的问题 [#58452](https://github.com/pingcap/tidb/issues/58452) @[lcwangchao](https://github.com/lcwangchao)
-    - 修复在缩减 TTL 扫描任务工作线程时，任务取消失败可能导致扫描任务泄漏的问题。 [#57708](https://github.com/pingcap/tidb/issues/57708) @[YangKeao](https://github.com/YangKeao) 
-    - 增强了时间戳合法性检查。[#57786](https://github.com/pingcap/tidb/issues/57786) @[MyonKeminta](https://github.com/MyonKeminta) <!--tw@hfxsd: the following 10 notes-->
+    - Fix the issue that the last `ANALYZE` time of tables without collected statistics might not be NULL [#57735](https://github.com/pingcap/tidb/issues/57735) @[winoros](https://github.com/winoros)
+    - Fix the issue that improper exception handling for statistics causes in-memory statistics to be mistakenly deleted when background tasks time out [#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that statistics are not cleared after executing the `DROP DATABASE` statement [#57230](https://github.com/pingcap/tidb/issues/57230) @[Rustin170506](https://github.com/Rustin170506)
+    - Fix the issue that some predicates might be lost when constructing IndexMerge [#58476](https://github.com/pingcap/tidb/issues/58476) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that creating a vector search index on a column with more than 3000 dimensions would fail [#58836](https://github.com/pingcap/tidb/issues/58836) @[breezewish](https://github.com/breezewish)
+    - Fix the issue that the `REORGANIZE PARTITION` operation does not correctly clean up replaced global indexes and handle unique indexes on non-clustered tables [#56822](https://github.com/pingcap/tidb/issues/56822) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that the Range INTERVAL syntax sugar of partitioned tables does not support using `MINUTE` as the interval [#57698](https://github.com/pingcap/tidb/issues/57698) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that the timezone causes incorrect time ranges when querying slow logs [#58452](https://github.com/pingcap/tidb/issues/58452) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that task cancellation failure might cause the task to leak when reducing the working threads of TTL scan tasks [#57708](https://github.com/pingcap/tidb/issues/57708) @[YangKeao](https://github.com/YangKeao) <!--tw@hfxsd: the following 10 notes-->
     - Fix the issue that after a heartbeat is lost and the TTL table is deleted or disabled, TTL jobs keep running [#57702](https://github.com/pingcap/tidb/issues/57702) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that `last_job_finish_time` is displayed incorrectly after a TTL job is canceled [#58109](https://github.com/pingcap/tidb/issues/58109) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that TTL jobs cannot be canceled if the TiDB heartbeat is lost [#57784](https://github.com/pingcap/tidb/issues/57784) @[YangKeao](https://github.com/YangKeao)
