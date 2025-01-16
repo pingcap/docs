@@ -1,13 +1,13 @@
 ---
-title: Announcing the New Generation of TiDB Cloud Support Services - Connected Care
+title: Connected Care Overview
 summary: Introduces the new generation of TiDB Cloud support services - Connected Care.
 ---
 
-# Announcing the New Generation of TiDB Cloud Support Services - Connected Care
+# Connected Care Overview
 
 As customers of all sizes continue to scale use cases and operations on TiDB Cloud, TiDB Cloud is committed to re-imagining its support services to accommodate their evolving needs. To deliver even greater value and seamless experiences, TiDB Cloud is excited to announce the launch of the next-generation support services, **Connected Care**, on **Feb 17, 2025**.
 
-As part of this transition, the current support plan offerings will no longer be available for purchase and will be classified as legacy support plans starting from **Feb 17, 2025**. However, TiDB Cloud will continue to provide full support to customers subscribing to legacy plans until their respective [retirement dates](#replacement-and-retirement-of-legacy-support-plans).
+As part of this transition, the current support plan offerings will no longer be available for purchase and will be classified as legacy support plans starting from **Feb 17, 2025**. However, TiDB Cloud will continue to provide full support to customers subscribing to legacy plans until their respective [retirement dates](#transition-to-connected-care).
 
 To ensure a smooth transition and access to the latest features, TiDB Cloud encourages customers to transition and adopt the Connected Care services.
 
@@ -72,7 +72,7 @@ With these new features, the Connected Care services offer you better connectivi
 
 - New **Basic** plan: customers will be guided to join the active community channels, where they can engage with other community members and interact with [tidb.ai](https://tidb.ai/) for technical assistance.
 
-## Replacement and retirement of legacy support plans
+## Transition to Connected Care
 
 The following table lists the shutdown schedules for the legacy support plans:
 
@@ -86,9 +86,11 @@ Once a legacy support plan shuts down, TiDB Cloud will no longer support it. If 
 
 ## FAQs
 
-### How do I check my current support plan?
+### How do I check or make changes to my current support plan?
 
 Visit the [Support](https://tidbcloud.com/console/org-settings/support) page in the TiDB Cloud console. Your current support plan is displayed in the upper-left area of the page.
+
+Starting from Feb 17, 2025, you can transition to the new support plans on the [Support](https://tidbcloud.com/console/org-settings/support) page, except for the **Premium** support plan. To upgrade to the **Premium** plan, please [contact sales](https://www.pingcap.com/contact-us).
 
 ### Do I need to pay more for similar services?
 
