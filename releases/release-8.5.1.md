@@ -13,11 +13,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-
 
 ## Operating system and platform requirement changes
 
-Starting from v8.5.1, TiDB resumes the support for CentOS Linux 7. If you plan to deploy TiDB v8.5 or upgrade your cluster to v8.5, ensure you use TiDB v8.5.1 or a later version.
+Starting from v8.5.1, TiDB resumed testing of CentOS Linux 7 and is compatible with it. If you plan to deploy TiDB v8.5 or upgrade your cluster to v8.5, ensure you use TiDB v8.5.1 or a later version.
 
-- According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ends on June 30, 2024. In v8.4.0 DMR and v8.5.0, TiDB temporarily suspends the support for CentOS 7 and recommends you to use Rocky Linux 9.1 or later. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or v8.5.0 will cause the risk of cluster unavailability.
+- TiDB v8.4.0 DMR and v8.5.0 releases dropped support and testing with CentOS Linux 7 due to it reaching [EOL status on June 30th, 2024](https://www.redhat.com/en/topics/linux/centos-linux-eol). To aid community users that are still running CentOS Linux 7, we resumed testing of CentOS Linux 7 with v8.5.1. TiDB continues to recommend that users migrate to a [currently supported distribution](/hardware-and-software-requirements.md#os-and-platform-requirements) for production usage.
 
-- Although TiDB v8.5.1 and later versions resume the support for CentOS Linux 7, due to the CentOS Linux EOL status, it is strongly recommended that you review the [official announcements and security guidance](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) for CentOS Linux 7 and consider migrating to an [operating system supported by TiDB](/hardware-and-software-requirements.md#os-and-platform-requirements), such as Rocky Linux 9.1 or later.
+- Although TiDB v8.5.1 and later versions resume testing for CentOS Linux 7, due to the CentOS Linux EOL status, it is strongly recommended that you review the [official announcements and security guidance](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) for CentOS Linux 7 and consider migrating to an [operating system supported by TiDB](/hardware-and-software-requirements.md#os-and-platform-requirements), such as Rocky Linux 9.1 or later.
+
+As CentOS Linux 7 has reached EOL in a future release, testing of this distribution will be stopped.
 
 ## Improvements
 
