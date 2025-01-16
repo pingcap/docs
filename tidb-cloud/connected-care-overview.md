@@ -1,6 +1,7 @@
 ---
 title: Connected Care Overview
 summary: Introduces the new generation of TiDB Cloud support services - Connected Care.
+aliases: ['/tidbcloud/connected-care-announcement']
 ---
 
 # Connected Care Overview
