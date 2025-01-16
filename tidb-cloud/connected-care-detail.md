@@ -84,14 +84,8 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM subscription for support ticket updates</td>
-    <td>Connected: IM subscription for support ticket updates</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>-</td>
-    <td>Connected: IM ticket creation</td>
-    <td>Connected: IM ticket creation</td>
+    <td>Connected: IM ticket creation and update subscriptions</td>
+    <td>Connected: IM ticket creation and update subscriptions</td>
   </tr>
   <tr>
     <td>-</td>
