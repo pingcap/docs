@@ -1205,7 +1205,12 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Default value: `23:59 +0000`
-- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
+- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set the time as follows:
+
+    - `tidb_auto_analyze_start_time='01:00 +0000'`
+    - `tidb_auto_analyze_end_time='03:00 +0000'`
+
+- If the time in the parameter includes the timezone information, that timezone will be used for parsing. Otherwise, the timezone specified by the `time_zone` in the current session will be used. For example, `01:00 +0000` refers to 1:00 AM in UTC.
 
 ### tidb_auto_analyze_partition_batch_size <span class="version-mark">New in v6.4.0</span>
 
@@ -1239,7 +1244,12 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Default value: `00:00 +0000`
-- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
+- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set the time as follows:
+
+    - `tidb_auto_analyze_start_time='01:00 +0000'`
+    - `tidb_auto_analyze_end_time='03:00 +0000'`
+
+- If the time in the parameter includes the timezone information, that timezone will be used for parsing. Otherwise, the timezone specified by the `time_zone` in the current session will be used. For example, `01:00 +0000` refers to 1:00 AM in UTC.
 
 ### tidb_auto_build_stats_concurrency <span class="version-mark">New in v6.5.0</span>
 
