@@ -64,3 +64,7 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 The log of scaling out.
 
 [<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+
+## See also
+
+- [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md)
