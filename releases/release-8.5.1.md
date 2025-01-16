@@ -17,7 +17,7 @@ Starting from v8.5.1, TiDB resumes testing of CentOS Linux 7 and is compatible w
 
 - TiDB v8.4.0 DMR and v8.5.0 releases dropped support and testing with CentOS Linux 7 because it reaches [EOL status on June 30, 2024](https://www.redhat.com/en/topics/linux/centos-linux-eol). Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or v8.5.0 will cause the risk of cluster unavailability.
 
-- To assist users still running CentOS Linux 7, we resumed testing of CentOS Linux 7 with v8.5.1. However, due to the EOL status of CentOS Linux, it is strongly recommended that you review the [official announcements and security guidance](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) for CentOS Linux 7 and migrate to an [operating system supported by TiDB](/hardware-and-software-requirements.md#os-and-platform-requirements) for production use, such as Rocky Linux 9.1 or later.
+- To assist users still running CentOS Linux 7, we resumed testing of CentOS Linux 7 starting from v8.5.1. However, due to the EOL status of CentOS Linux, it is strongly recommended that you review the [official announcements and security guidance](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) for CentOS Linux 7 and migrate to an [operating system supported by TiDB](/hardware-and-software-requirements.md#os-and-platform-requirements) for production use, such as Rocky Linux 9.1 or later.
 
 As CentOS Linux 7 has reached EOL, testing of this distribution will be stopped in a future release.
 
