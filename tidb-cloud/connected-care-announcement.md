@@ -58,7 +58,7 @@ The support plans in the Connected Care services introduce a completely new set 
 
 - Connected: IM ticket creation and update subscriptions
 
-    This feature enables you to create support ticket and subscribe to your support ticket updates through an IM tool.
+    This feature enables you to create a support ticket and subscribe to your support ticket updates through an IM tool.
 
 - Connected: IM interaction for support tickets
 
