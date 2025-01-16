@@ -72,6 +72,12 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   <tr>
     <td>-</td>
     <td>-</td>
+    <td>Connected: Clinic service for advanced monitoring</td>
+    <td>Connected: Clinic service for advanced monitoring</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>-</td>
     <td>Connected: AI chat in IM</td>
     <td>Connected: AI chat in IM</td>
   </tr>
@@ -86,12 +92,6 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>-</td>
     <td>Connected: IM ticket creation and update subscriptions</td>
     <td>Connected: IM ticket creation and update subscriptions</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>-</td>
-    <td>Connected: Clinic service for advanced monitoring</td>
-    <td>Connected: Clinic service for advanced monitoring</td>
   </tr>
   <tr>
     <td>-</td>
@@ -103,7 +103,7 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>-</td>
     <td>-</td>
     <td>-</td>
-    <td>Technical Account Management</td>
+    <td>Technical Account Manager</td>
   </tr>
   <tr>
     <td rowspan="5">Customer Resources</td>
