@@ -789,7 +789,7 @@
   - [Notifications](/tidb-cloud/notifications.md)
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - Support Plan
-  - [Connected Care Overview](/tidb-cloud/connected-care-announcement.md)
+  - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
   - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs

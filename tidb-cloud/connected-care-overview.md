@@ -1,6 +1,7 @@
 ---
 title: Connected Care Overview
 summary: Introduces the new generation of TiDB Cloud support services - Connected Care.
+aliases: ['/tidbcloud/connected-care-announcement']
 ---
 
 # Connected Care Overview
@@ -23,18 +24,18 @@ In the Connected Care services, there are four support plans: **Basic**, **Devel
 
 The following table provides an overview for each support plan in the Connected Care services. For more information, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
-|   Support plan                                            | Basic                        | Developer                                     | Enterprise                                     | Premium                                   |
-|:----------------------------------------------|:-----------------------------|:----------------------------------------------|:-----------------------------------------------|:------------------------------------------|
-| Recommended workloads                          | Personal or starter projects | Workloads under development                   | Workloads under production                     | Business-critical workloads in production |
-| Billing and account inquiries                 | ✔                            | ✔                                             | ✔                                              | ✔                                         |
-| Technical support                             | -                            | ✔                                             | ✔                                              | ✔                                         |
-| Initial response time                         | -                            | Business hours                                | 7x24                                           | 7x24                                      |
-| Connected: Clinic service                     | -                            | -                                             | ✔                                              | ✔                                         |
-| Connected: AI chat in IM                      | -                            | -                                             | ✔                                              | ✔                                         |
-| Connected: IM subscription for TiDB Cloud alerts   | -                            | -                                             | ✔                                              | ✔                                         |
-| Connected: IM subscription for ticket updates | -                            | -                                             | ✔                                              | ✔                                         |
-| Connected: IM interaction for support tickets | -                            | -                                             | -                                              | ✔                                         |
-| Technical account manager                     | -                            | -                                             | -                                              | ✔                                         |
+| Support plan                                          | Basic                        | Developer                                    | Enterprise                                     | Premium                                   |
+|:------------------------------------------------------|:-----------------------------|:---------------------------------------------|:-----------------------------------------------|:------------------------------------------|
+| Recommended workloads                                 | Personal or starter projects | Workloads under development                  | Workloads under production                     | Business-critical workloads in production |
+| Billing and account support                           | ✔                            | ✔                                            | ✔                                              | ✔                                         |
+| Technical support                                     | -                            | ✔                                            | ✔                                              | ✔                                         |
+| Initial response time                                 | -                            | Business hours                               | 7x24                                           | 7x24                                      |
+| Connected: Clinic service                             | -                            | -                                            | ✔                                              | ✔                                         |
+| Connected: AI chat in IM                              | -                            | -                                            | ✔                                              | ✔                                         |
+| Connected: IM subscription for TiDB Cloud alerts      | -                            | -                                            | ✔                                              | ✔                                         |
+| Connected: IM ticket creation and update subscription | -                            | -                                            | ✔                                              | ✔                                         |
+| Connected: IM interaction for support tickets         | -                            | -                                            | -                                              | ✔                                         |
+| Technical Account Manager                             | -                            | -                                            | -                                              | ✔                                         |
 
 > **Note**
 >
@@ -56,9 +57,9 @@ The support plans in the Connected Care services introduce a completely new set 
 
     This feature provides you with an easy way to subscribe to alert notifications via an IM tool, keeping you informed about critical updates.
 
-- Connected: IM subscription for ticket updates
+- Connected: IM ticket creation and update subscription
 
-    This feature enables you to subscribe to your support ticket updates through an IM tool.
+    This feature enables you to create a support ticket and subscribe to your support ticket updates through an IM tool.
 
 - Connected: IM interaction for support tickets
 
@@ -68,9 +69,9 @@ With these new features, the Connected Care services offer you better connectivi
 
 - New **Enterprise** and **Premium** plans: connect customers with modern communication tools and advanced AI capabilities through advanced monitoring service in Clinic, IM subscription for TiDB Cloud alerts, IM subscription for ticket updates, AI chat in IM, and IM interaction for support tickets.
 
-- New **Developer** plan: customers benefit from access to the same community and [tidb.ai](https://tidb.ai/) assistance as the **Basic** plan, while also enjoying direct connections with unlimited access to technical support.
+- New **Developer** plan: customers benefit from access to the same community and [TiDB.AI](https://tidb.ai/) assistance as the **Basic** plan, while also enjoying direct connections with unlimited access to technical support.
 
-- New **Basic** plan: customers will be guided to join the active community channels, where they can engage with other community members and interact with [tidb.ai](https://tidb.ai/) for technical assistance.
+- New **Basic** plan: customers will be guided to join the active community channels, where they can engage with other community members and interact with [TiDB.AI](https://tidb.ai/) for technical assistance.
 
 ## Transition to Connected Care
 
