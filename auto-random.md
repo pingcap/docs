@@ -167,7 +167,7 @@ TiDB implicitly allocates values to `AUTO_RANDOM` columns similarly to `AUTO_INC
 
 Explicitly inserting data into an `AUTO_RANDOM` column behaves the same as with an `AUTO_INCREMENT` column, so you also need to clear the auto-increment ID cache. For more details, see [Clear the auto-increment ID cache](/auto-increment.md#clear-the-auto-increment-id-cache).
 
-You can run the `ALTER TABLE` statement to set `AUTO_RANDOM_BASE = 0` to clear the auto-increment ID cache on all TiDB nodes in the cluster. For example:
+You can run the `ALTER TABLE` statement to set `AUTO_RANDOM_BASE=0` to clear the auto-increment ID cache on all TiDB nodes in the cluster. For example:
 
 ```sql
 ALTER TABLE t AUTO_RANDOM_BASE=0;
