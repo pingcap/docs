@@ -51,7 +51,7 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>S4: 24 business hours</td>
   </tr>
   <tr>
-    <td rowspan="10">Services</td>
+    <td rowspan="9">Services</td>
     <td>Billing and account support</td>
     <td>Billing and account support</td>
     <td>Billing and account support</td>
