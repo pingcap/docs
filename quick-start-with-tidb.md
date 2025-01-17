@@ -156,11 +156,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
     ```log
     Successfully set mirror to https://tiup-mirrors.pingcap.com
-    Detected shell: zsh
-    Shell profile:  /Users/user/.zshrc
-    /Users/user/.zshrc has been modified to add tiup to PATH
-    open a new terminal or source /Users/user/.zshrc to use it
-    Installed path: /Users/user/.tiup/bin/tiup
+    Detected shell: bash
+    Shell profile:  /home/user/.bashrc
+    /home/user/.bashrc has been modified to add tiup to PATH
+    open a new terminal or source /home/user/.bashrc to use it
+    Installed path: /home/user/.tiup/bin/tiup
     ===============================================
     Have a try:     tiup playground
     ===============================================
