@@ -356,11 +356,13 @@ In some scenarios, you might need to clear the auto-increment ID cache to ensure
 <CustomContent platform="tidb">
 
 - In the scenario of incremental replication using [Data Migration (DM)](/dm/dm-overview.md), once the replication is complete, data writing to the downstream TiDB switches from DM to your application's write operations. Meanwhile, the ID writing mode of the auto-increment column usually switches from explicit insertion to implicit allocation.
+- After TiDB Lightning completes the data import, it automatically clears the auto-increment ID cache. However, TiCDC does not automatically clear the cache after incremental data synchronization. Therefore, you need to manually clear the auto-increment ID cache in the downstream cluster after stopping TiCDC, and before performing the failover.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 - In the scenario of incremental replication using the [Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md) feature, once the replication is complete, data writing to the downstream TiDB switches from DM to your application's write operations. Meanwhile, the ID writing mode of the auto-increment column usually switches from explicit insertion to implicit allocation.
+- After TiDB Lightning completes the data import, it automatically clears the auto-increment ID cache. However, TiCDC does not automatically clear the cache after incremental data synchronization. Therefore, you need to manually clear the auto-increment ID cache in the downstream cluster after stopping TiCDC, and before performing the failover.
 
 </CustomContent>
 
