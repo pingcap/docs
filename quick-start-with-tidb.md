@@ -260,7 +260,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 This section describes how to set up the smallest TiDB cluster with a full topology, and simulate production deployment steps on a single Linux server.
 
-This section describes how to deploy a TiDB cluster using a YAML file of the smallest topology in TiUP.
+The following describes how to deploy a TiDB cluster using a YAML file of the smallest topology in TiUP.
 
 ### Prepare
 
