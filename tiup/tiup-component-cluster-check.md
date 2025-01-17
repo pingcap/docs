@@ -11,7 +11,7 @@ For a formal production environment, before the environment goes live, you need 
 
 ### Operating system version
 
-Check the operating system distribution and version of the deployed machines. See [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements) for a list of supported versions.
+Check the operating system distribution and version of the deployed machines. For a list of supported versions, see [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements).
 
 ### CPU EPOLLEXCLUSIVE
 
