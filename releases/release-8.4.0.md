@@ -327,7 +327,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 | BR | [`--master-key`](/br/br-pitr-manual.md#encrypt-the-log-backup-data) | Newly added | Specifies the master key for log backup data. It can be a master key stored on a local disk or a master key managed by a cloud Key Management Service (KMS). |
 | BR | [`--master-key-crypter-method`](/br/br-pitr-manual.md#encrypt-the-log-backup-data) | Newly added | Specifies the encryption algorithm based on the master key for log backup data, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted. |
 
-## Offline package changes
+### Offline package changes
 
 Starting from v8.4.0, the following contents are removed from the `TiDB-community-toolkit` [binary package](/binary-package.md):
 
@@ -336,7 +336,7 @@ Starting from v8.4.0, the following contents are removed from the `TiDB-communit
 - `binlogctl`
 - `arbiter`
 
-## Operating system and platform requirement changes
+### Operating system and platform requirement changes
 
 Before upgrading TiDB, ensure that your operating system version meets the [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements).
 
