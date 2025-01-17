@@ -27,12 +27,12 @@ As CentOS Linux 7 has reached EOL, testing of this distribution will be stopped 
 
     - Support folding read-only user-defined variables into constants [#52742](https://github.com/pingcap/tidb/issues/52742) @[winoros](https://github.com/winoros)
     - Convert Cartesian product Semi Join with nulleq condition to Semi Join with equality condition [#57583](https://github.com/pingcap/tidb/issues/57583) @[hawkingrei](https://github.com/hawkingrei)
-    - Adjust the default threshold of statistics memory cache to 20% of total memory [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
+    - Adjust the default threshold of statistics memory cache to 20% of the total memory [#58014](https://github.com/pingcap/tidb/issues/58014) @[hawkingrei](https://github.com/hawkingrei)
     - Enhance the timestamp validity check [#57786](https://github.com/pingcap/tidb/issues/57786) @[MyonKeminta](https://github.com/MyonKeminta)
 
 + TiKV
 
-    - Add detection mechanism for illegal `max_ts` updates [#17916](https://github.com/tikv/tikv/issues/17916) @[ekexium](https://github.com/ekexium)
+    - Add the detection mechanism for invalid `max_ts` updates [#17916](https://github.com/tikv/tikv/issues/17916) @[ekexium](https://github.com/ekexium)
 
 + TiFlash
 
@@ -88,7 +88,7 @@ As CentOS Linux 7 has reached EOL, testing of this distribution will be stopped 
 
     - Fix the issue that querying new columns might return incorrect results under the disaggregated storage and compute architecture [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
     - Fix the issue that TiFlash might unexpectedly reject processing Raft messages when memory usage is low [#9745](https://github.com/pingcap/tiflash/issues/9745) @[CalvinNeo](https://github.com/CalvinNeo)
-    - Fix the issue that the `POSITION()` function for TiFlash does not support character set collation [#9377](https://github.com/pingcap/tiflash/issues/9377) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that the `POSITION()` function for TiFlash does not support character set collations [#9377](https://github.com/pingcap/tiflash/issues/9377) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 + Tools
 
