@@ -50,3 +50,7 @@ tiup cluster destroy <cluster-name> [flags]
 The execution log of the tiup-cluster.
 
 [<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+
+## See also
+
+- [TiUP Common Operations](/maintain-tidb-using-tiup.md)
