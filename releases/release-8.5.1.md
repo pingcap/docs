@@ -5,7 +5,7 @@ summary: Learn about the operating system and platform requirement changes, impr
 
 # TiDB 8.5.1 Release Notes
 
-Release date: January xx, 2025
+Release date: January 17, 2025
 
 TiDB version: 8.5.1
 
