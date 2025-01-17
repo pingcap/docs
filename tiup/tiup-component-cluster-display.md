@@ -103,6 +103,6 @@ Node service status derives from the PD scheduling information. For more details
 
 [<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
 
-## See Also
+## See also
 
 - [TiUP Common Operations](/maintain-tidb-using-tiup.md)
