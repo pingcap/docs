@@ -239,12 +239,12 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
 | PD | [`patrol-region-worker-count`](/pd-configuration-file.md#patrol-region-worker-count-new-in-v850) | Newly added | Controls the number of concurrent [operators](/glossary.md#operator) created by the checker when inspecting the health state of a Region. |
 | BR | [`--checksum`](/br/br-snapshot-manual.md) | Modified | Changes the default value from `true` to `false`, meaning that BR does not calculate the table-level checksum during full backups by default, to improve backup performance. |
 
-## Operating system and platform requirement changes
+### Operating system and platform requirement changes
 
 Before upgrading TiDB, ensure that your operating system version meets the [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements).
 
-- According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or later will cause the cluster to become unavailable.
-- According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ends on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable.
+- According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 7 ended on June 30, 2024. Therefore, TiDB drops the support of CentOS 7 in v8.4.0 and v8.5.0. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or v8.5.0 will cause the risk of cluster unavailability. To assist users still using CentOS Linux 7, TiDB v8.5.1 resumes testing of CentOS Linux 7 and is compatible with it. For more information, see [TiDB v8.5.1 Release Notes](/releases/release-8.5.1.md).
+- According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ended on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from v8.4.0. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable.
 
 ## Removed features
 

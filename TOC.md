@@ -1079,6 +1079,7 @@
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
   - v8.5
+    - [8.5.1](/releases/release-8.5.1.md)
     - [8.5.0](/releases/release-8.5.0.md)
   - v8.4
     - [8.4.0-DMR](/releases/release-8.4.0.md)
