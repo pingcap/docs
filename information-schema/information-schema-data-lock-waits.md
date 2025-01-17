@@ -84,7 +84,7 @@ CURRENT_HOLDING_TRX_ID: 426790590082449409
 1 row in set (0.01 sec)
 ```
 
-The above query result shows that the transaction of the ID `426790594290122753` is trying to obtain the pessimistic lock on the key `"7480000000000000355F728000000000000001"` when executing a statement that has digest `"38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821"` and  is in the form of ``update `t` set `v` = `v` + ? where `id` = ?``, but the lock on this key was held by the transaction of the ID `426790590082449409`.
+The above query result shows that the transaction of the ID `426790594290122753` is trying to obtain the pessimistic lock on the key `"7480000000000000355F728000000000000001"` when executing a statement that has digest `"38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821"` and is in the form of ``update `t` set `v` = `v` + ? where `id` = ?``, but the lock on this key was held by the transaction of the ID `426790590082449409`.
 
 ## See also
 
