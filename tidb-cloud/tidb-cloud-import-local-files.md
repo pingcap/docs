@@ -19,7 +19,6 @@ Currently, this method supports importing one CSV file for one task into either 
     - If the extra columns are the primary keys or the unique keys and do not have the `auto_increment` or `auto_random` attribute, an error will be reported. In that case, it is recommended that you choose one of the following strategies:
         - Provide a source file that includes these the primary keys or the unique keys columns.
         - Set the attributes of the primary key or the unique key columns to `auto_increment` or `auto_random`.
-- If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name. For example, if the column name is `order`, TiDB Cloud automatically adds backticks `` ` `` to change it to `` `order` `` and imports the data into the target table.
 
 ## Import local files
 
@@ -55,8 +54,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If you need TiDB Cloud to create the target table, input the name for each column. The column name must meet the following requirements:
 
-        * The name must be composed of only letters (a-z and A-Z), numbers (0-9), characters (such as Chinese and Japanese), and the underscore (`_`) character.
-        * Other special characters are not supported.
+        * The name must be composed of characters in Unicode BMP, excluding \u0000 and whitespace characters
         * The length of the name must be less than 65 characters.
 
         You can also change the data type if needed.
@@ -102,7 +100,7 @@ If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE fil
 
 ### Why can't I query a column with a reserved keyword after importing data into TiDB Cloud?
 
-If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name and then imports the data into the target table. When you query the column, you need to add backticks `` ` `` to enclose the column name. For example, if the column name is `order`, you need to query the column with `` `order` ``.
+If a column name is a reserved [keyword](/keywords.md) in TiDB, when you query the column, you need to add backticks `` ` `` to enclose the column name. For example, if the column name is `order`, you need to query the column with `` `order` ``.
 
 ### How to import a local file larger than 50 MiB?
 
