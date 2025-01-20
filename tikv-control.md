@@ -299,7 +299,8 @@ Use the `compact` command to manually compact data of each TiKV.
 
 - Use the `--from` and `--to` options to specify the compaction range in the form of escaped raw key. If not set, the whole range will be compacted.
 - Use the `--region` option to compact the range of a specific region. If set, `--from` and `--to` will be ignored.
-- Use the `--db` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
+- Use the `-c` option to specify the column family name. The default value is `default`. The optional values are `default`, `lock`, and `write`.
+- Use the `-d` option to specify the RocksDB that performs compaction. The default value is `kv`. The optional values are `kv` and `raft`.
 - Use the `--threads` option allows you to specify the concurrency for the TiKV compaction and its default value is `8`. Generally, a higher concurrency comes with a faster compaction speed, which might yet affect the service. You need to choose an appropriate concurrency count based on your scenario.
 - Use the `--bottommost` option to include or exclude the bottommost files when TiKV performs compaction. The value options are `default`, `skip`, and `force`. The default value is `default`.
     - `default` means that the bottommost files are included only when the Compaction Filter feature is enabled.
@@ -309,18 +310,21 @@ Use the `compact` command to manually compact data of each TiKV.
 - To compact data in the local mode, use the following command:
 
     ```shell
-    tikv-ctl --data-dir /path/to/tikv compact --db kv
+    tikv-ctl --data-dir /path/to/tikv compact -d kv
     ```
 
 - To compact data in the remote mode, use the following command:
 
     ```shell
-    tikv-ctl --host ip:port compact --db kv
+    tikv-ctl --host ip:port compact -d kv
     ```
 
 ### Compact data of the whole TiKV cluster manually
 
-Use the `compact-cluster` command to manually compact data of the whole TiKV cluster. The flags of this command have the same meanings and usage as those of the `compact` command.
+Use the `compact-cluster` command to manually compact data of the whole TiKV cluster. The flags of this command have the same meanings and usage as those of the `compact` command. The only difference is as follows:
+
+- For the `compact-cluster` command, use `--pd` to specify the address of the PD, so that `tikv-ctl` can locate all TiKV nodes in the cluster as the compact target.
+- For the `compact` command, use `--data-dir` or `--host` to specify a single TiKV as the compact target.
 
 ### Set a Region to tombstone
 
@@ -522,6 +526,54 @@ success!
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
 > - You need to run this command for all stores where specified Regions' peers are located.
 
+### Flashback
+
+TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) syntax. You can use it to restore a cluster to a specific point in time. To facilitate usage without TiDB, starting from v6.5.3, tikv-ctl provides the `flashback` command. This command supports flashback operations at the TiKV level.
+
+> **Note:**
+>
+> - The `flashback` command writes the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for both the old data and the current data.
+> - This command only supports local mode.
+
+#### Prerequisites
+
+Before running the `flashback` command, you need to [stop PD scheduling](/pd-control.md#config-show--set-option-value--placement-rules) using the `pd-ctl config set halt-scheduling true` command.
+
+#### Usage
+
+```shell
+tikv-ctl --pd <pd_address:port> flashback -v <target_timestamp>
+```
+
+Use the `--pd` option to specify the access address of the PD. Use the `-v` option to specify the target timestamp for the flashback.
+
+By default, this command will flashback the entire cluster. If you need to flashback specified Regions or a key range, you can use the following options:
+
+- Use the `-r` option to specify the Regions. Multiple Regions are separated by commas (`,`).
+- Use `--start` and `--end` to specify all Regions within a key range (default: no range limit, in Hex format).
+
+When the command runs successfully, it will print `flashback all stores success!`. You can also view the execution progress via the [Raft admin > Peer in Flashback State](/grafana-tikv-dashboard.md#raft-admin) metrics.
+
+#### Examples
+
+- To flashback the entire cluster data to the timestamp `430315739761082369`:
+
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369
+    ```
+
+- To flashback the data of Regions with IDs `100` and `102` to the timestamp `430315739761082369`, use the following command:
+
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 -r 100,102
+    ```
+
+- To flashback the data within a key range to the timestamp `430315739761082369`, use the following command:
+
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 --start 7480000000000000FF0800000000000000F8 --end 7480000000000000FF0C000000000000000000F8
+    ```
+
 ### Ldb Command
 
 The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below. For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
@@ -636,9 +688,9 @@ it isn't easy to handle local data, start key:0101
 overlap region:
 RegionInfo { region: id: 4 end_key: 7480000000000000FF0500000000000000F8 region_epoch { conf_ver: 1 version: 2 } peers { id: 5 store_id: 1 }, leader: Some(id: 5 store_id: 1) }
 
-suggested operations:
-tikv-ctl ldb --db=data/tikv-21107/db unsafe_remove_sst_file "data/tikv-21107/db/000014.sst"
-tikv-ctl --db=data/tikv-21107/db tombstone -r 4 --pd <endpoint>
+refer operations:
+tikv-ctl ldb --db=/path/to/tikv/db unsafe_remove_sst_file 000014
+tikv-ctl --data-dir=/path/to/tikv tombstone -r 4 --pd <endpoint>
 --------------------------------------------------------
 corruption analysis has completed
 ```
@@ -648,3 +700,40 @@ From the output above, you can see that the information of the damaged SST file 
 + In the `sst meta` part, `14` means the SST file number; `552997` means the file size, followed by the smallest and largest sequence numbers and other meta-information.
 + The `overlap region` part shows the information of the Region involved. This information is obtained through the PD server.
 + The `suggested operations` part provides you suggestion to clean up the damaged SST file. You can take the suggestion to clean up files and restart the TiKV instance.
+
+### Get the state of a Region's `RegionReadProgress`
+
+Starting from v6.5.4, TiKV introduces the `get-region-read-progress` subcommand to get up-to-date details of the resolver and `RegionReadProgress`. You need to specify a Region ID and a TiKV, which can be obtained from Grafana (`Min Resolved TS Region` and `Min Safe TS Region`) or `DataIsNotReady` logs.
+
+- `--log` (optional): If specified, TiKV logs the smallest `start_ts` of locks in the Region's resolver in this TiKV at `INFO` level. This option helps you identify locks that might block resolved-ts in advance.
+
+- `--min-start-ts` (optional): If specified, TiKV filters out locks with smaller `start_ts` than this value in logs. You can use this to specify a transaction of interest for logging. It defaults to `0`, which means no filter.
+
+The following is an example:
+
+```
+./tikv-ctl --host 127.0.0.1:20160 get-region-read-progress -r 14 --log --min-start-ts 0
+```
+
+The output is as follows:
+
+```
+Region read progress:
+    exist: true,
+    safe_ts: 0,
+    applied_index: 92,
+    pending front item (oldest) ts: 0,
+    pending front item (oldest) applied index: 0,
+    pending back item (latest) ts: 0,
+    pending back item (latest) applied index: 0,
+    paused: false,
+Resolver:
+    exist: true,
+    resolved_ts: 0,
+    tracked index: 92,
+    number of locks: 0,
+    number of transactions: 0,
+    stopped: false,
+```
+
+The subcommand is useful in diagnosing issues related to Stale Read and safe-ts. For details, see [Understanding Stale Read and safe-ts in TiKV](/troubleshoot-stale-read.md).

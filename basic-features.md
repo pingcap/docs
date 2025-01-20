@@ -8,6 +8,8 @@ aliases: ['/tidb/v6.5/experimental-features','/tidb/stable/experimental-features
 
 This document lists the features supported in different TiDB versions, including [Long-Term Support (LTS)](/releases/versioning.md#long-term-support-releases) versions and [Development Milestone Release (DMR)](/releases/versioning.md#development-milestone-releases) versions after the latest LTS version.
 
+You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_features).
+
 > **Note:**
 >
 > PingCAP does not provide patch releases for DMR versions. Any bugs will be fixed in future releases. For general purposes, it is recommended to use the [latest LTS version](https://docs.pingcap.com/tidb/stable).
@@ -48,7 +50,7 @@ This document lists the features supported in different TiDB versions, including
 | ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
 | [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) [^2] | Y | E | E | E | E | E | E ||
 | [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)   | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Use FastScan to accelerate queries in OLAP scenarios](/develop/dev-guide-use-fastscan.md) | E | N | N | N | N | N | N | N |
+| [Use FastScan to accelerate queries in OLAP scenarios](/tiflash/use-fastscan.md) | E | N | N | N | N | N | N | N |
 | [RocksDB engine](/storage-engine/rocksdb-overview.md)        | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Titan plugin](/storage-engine/titan-overview.md)            | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental)   |  E   |  E    |    E     |    E     |    E     |    E     |    E     |    E     |
@@ -118,7 +120,7 @@ This document lists the features supported in different TiDB versions, including
 | Concurrent DDL statements | Y | N | N | N | N | N | N | N |
 | [Acceleration of `ADD INDEX` and `CREATE INDEX`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Y | N | N | N | N | N | N | N |
 | [Metadata lock](/metadata-lock.md) | Y | N | N | N | N | N | N | N |
-| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | Y | N | N | N | N | N | N | N |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Y | N | N | N | N | N | N | N |
 
 ## Transactions
 
@@ -154,7 +156,6 @@ This document lists the features supported in different TiDB versions, including
 | [Extended statistics](/extended-statistics.md)     | E | E | E| E | E | E | E | E |      N       |
 | Statistics feedback       | N | Deprecated | Deprecated | Deprecated   | E | E | E | E | E |
 | [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | E | E | E | E | E | E | E | E | E |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | E | E | E | E | E | N | N |
 | [Collect statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) | E | E | E | E | N | N | N | N | N |
 | [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | N | N | N | N | N | N | N |
@@ -171,7 +172,7 @@ This document lists the features supported in different TiDB versions, including
 | [Certificate-based authentication](/certificate-authentication.md) | Y | Y | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
 | [`caching_sha2_password` authentication](/system-variables.md#default_authentication_plugin)        | Y | Y | Y    |    Y    |    Y    |    N    |    N    |    N    |
 | [`tidb_sm3_password` authentication](/system-variables.md#default_authentication_plugin)             | Y | N | N | N | N |    N    |    N    |    N    |
-| [`tidb_auth_token` authentication](/system-variables.md#default_authentication_plugin)             | Y | N | N | N | N |    N    |    N    |    N    |
+| [`tidb_auth_token` authentication](/security-compatibility-with-mysql.md#tidb_auth_token)             | Y | N | N | N | N |    N    |    N    |    N    |
 | [Password management](/password-management.md) | Y | N | N | N | N | N | N | N |
 | [MySQL compatible `GRANT` system](/privilege-management.md)  | Y | Y | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
 | [Dynamic Privileges](/privilege-management.md#dynamic-privileges) | Y | Y | Y    |    Y    |    Y    |    Y    |    N    |    N    |

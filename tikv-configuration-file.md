@@ -11,6 +11,10 @@ The TiKV configuration file supports more options than command-line parameters. 
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ## Global configuration
 
 ### `abort-on-panic`
@@ -100,13 +104,6 @@ This document only describes the parameters that are not included in command-lin
     + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
 + Default value: `0`
 
-### `pd.enable-forwarding` <span class="version-mark">New in v5.0.0</span>
-
-+ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
-+ Default value: `false`
-+ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
-+ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
-
 ## server
 
 + Configuration items related to the server.
@@ -165,7 +162,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `grpc-raft-conn-num`
 
-+ The maximum number of links among TiKV nodes for Raft communication
++ The maximum number of connections between TiKV nodes for Raft communication
 + Default value: `1`
 + Minimum value: `1`
 
@@ -454,9 +451,9 @@ Configuration items related to storage.
 > **Warning:**
 >
 > - Set `enable-ttl` to `true` or `false` **ONLY WHEN** deploying a new TiKV cluster. **DO NOT** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `enable-ttl` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats, which causes the "can't enable TTL on a non-ttl" error when you restart the TiKV cluster.
-> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters). Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
+> - Use `enable-ttl` **ONLY IN** a TiKV cluster. **DO NOT** use this configuration item in a cluster that has TiDB nodes (which means setting `enable-ttl` to `true` in such clusters) unless `storage.api-version = 2` is configured. Otherwise, critical issues such as data corruption and the upgrade failure of TiDB clusters will occur.
 
-+ TTL is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
++ [TTL](/time-to-live.md) is short for "Time to live". If this item is enabled, TiKV automatically deletes data that reaches its TTL. To set the value of TTL, you need to specify it in the requests when writing data via the client. If the TTL is not specified, it means that TiKV does not automatically delete the corresponding data.
 + Default value: `false`
 
 ### `ttl-check-poll-interval`
@@ -478,9 +475,9 @@ Configuration items related to storage.
 + Value options:
     + `1`: Uses API V1, does not encode the data passed from the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
     + `2`: Uses API V2:
-        + The data is stored in the Multi-Version Concurrency Control (MVCC) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
+        + The data is stored in the [Multi-Version Concurrency Control (MVCC)](/glossary.md#multi-version-concurrency-control-mvcc) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
         + Data is scoped according to different usage and API V2 supports co-existence of TiDB, Transactional KV, and RawKV applications in a single cluster.
-        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on `enable-ttl` explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
+        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on [`enable-ttl`](#enable-ttl) explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
         + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim obsolete data. This tidb-server instance can provide read and write services at the same time. To ensure high availability, you can deploy multiple tidb-server instances.
         + Client support is required for API V2. For details, see the corresponding instruction of the client for the API V2.
         + Since v6.2.0, Change Data Capture (CDC) for RawKV is supported. Refer to [RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc).
@@ -551,6 +548,13 @@ Configuration items related to the I/O rate limiter.
 + Default value: `"write-only"`
 
 ## pd
+
+### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
 
 ### `endpoints`
 
@@ -646,10 +650,6 @@ Configuration items related to Raftstore.
 
 ### `raft-max-size-per-msg`
 
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
-
 + The soft limit on the size of a single message packet
 + Default value: `"1MB"`
 + Minimum value: greater than `0`
@@ -657,10 +657,6 @@ Configuration items related to Raftstore.
 + Unit: KB|MB|GB
 
 ### `raft-max-inflight-msgs`
-
-> **Note:**
->
-> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
 + Default value: `256`
@@ -762,6 +758,15 @@ Configuration items related to Raftstore.
 + Default value: `30`
 + Minimum value: `1`
 + Maximum value: `100`
+
+### `report-region-buckets-tick-interval` <span class="version-mark">New in v6.1.0</span>
+
+> **Warning:**
+>
+> `report-region-buckets-tick-interval` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
+
++ The interval at which TiKV reports bucket information to PD when `enable-region-bucket` is true.
++ Default value: `10s`
 
 ### `pd-heartbeat-tick-interval`
 
@@ -975,10 +980,10 @@ Configuration items related to Raftstore.
 + Default value: `1MB`
 + Minimum value: `0`
 
-### `report-min-resolved-ts-interval`
+### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.0.0</span>
 
-+ Determines the minimum interval at which the resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
-+ Default value: `"1s"`, which is the smallest positive value
++ Determines the interval at which the minimum resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
++ Default value: Before v6.3.0, the default value is `"0s"`. Starting from v6.3.0, the default value is `"1s"`, which is the smallest positive value.
 + Minimum value: `0`
 + Unit: second
 
@@ -1053,15 +1058,6 @@ Configuration items related to Coprocessor.
 >
 > `region-bucket-size` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
 
-### `report-region-buckets-tick-interval` <span class="version-mark">New in v6.1.0</span>
-
-> **Warning:**
->
-> `report-region-buckets-tick-interval` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
-
-+ The interval at which TiKV reports bucket information to PD when `enable-region-bucket` is true.
-+ Default value: `10s`
-
 ## rocksdb
 
 Configuration items related to RocksDB
@@ -1120,8 +1116,8 @@ Configuration items related to RocksDB
 
 ### `wal-dir`
 
-+ The directory in which WAL files are stored
-+ Default value: `"/tmp/tikv/store"`
++ The directory in which WAL files are stored. If not specified, the WAL files will be stored in the same directory as the data.
++ Default value: `""`
 
 ### `wal-ttl-seconds`
 
@@ -1215,6 +1211,10 @@ Configuration items related to RocksDB
 
 ### `info-log-max-size`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
 + The maximum size of Info log
 + Default value: `"1GB"`
 + Minimum value: `0`
@@ -1222,10 +1222,18 @@ Configuration items related to RocksDB
 
 ### `info-log-roll-time`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
 + The time interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
 + Default value: `"0s"`
 
 ### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
 
 + The maximum number of kept log files
 + Default value: `10`
@@ -1238,8 +1246,20 @@ Configuration items related to RocksDB
 
 ### `info-log-level`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
+
 + Log levels of RocksDB
 + Default value: `"info"`
+
+### `track-and-verify-wals-in-manifest` <span class="version-mark">New in v6.5.9</span>
+
++ Controls whether to record information about Write Ahead Log (WAL) files in the RocksDB MANIFEST file and whether to verify the integrity of WAL files during startup. For more information, see RocksDB [Track WAL in MANIFEST](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST).
++ Default value: `false`
++ Value options:
+    + `true`: records information about WAL files in the MANIFEST file and verifies the integrity of WAL files during startup.
+    + `false`: does not record information about WAL files in the MANIFEST file and does not verify the integrity of WAL files during startup.
 
 ## rocksdb.titan
 
@@ -1480,6 +1500,30 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
 
+### `format-version` <span class="version-mark">New in v6.2.0</span>
+
++ The format version of SST files. This configuration item only affects newly written tables. For existing tables, the version information is read from the footer.
++ Optional values:
+    - `0`: Can be read by all TiKV versions. The default checksum type is CRC32 and this version does not support changing the checksum type.
+    - `1`: Can be read by all TiKV versions. Supports non-default checksum types like xxHash. RocksDB only writes data when the checksum type is not CRC32. (version `0` is automatically upgraded)
+    - `2`: Can be read by all TiKV versions. Changes the encoding of compressed blocks using LZ4, BZip2 and Zlib compression.
+    - `3`: Can be read by TiKV v2.1 and later versions. Changes the encoding of the keys in index blocks.
+    - `4`: Can be read by TiKV v3.0 and later versions. Changes the encoding of the values in index blocks.
+    - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
++ Default value: `2`
+
+### `ttl` <span class="version-mark">New in v6.5.4</span>
+
++ SST files with updates older than the TTL will be automatically selected for compaction. These SST files will go through the compaction in a cascading way so that they can be compacted to the bottommost level or file.
++ Default value: `"0s"`, meaning that no SST file is selected by default.
++ Unit: s(second)|h(hour)|d(day)
+
+### `periodic-compaction-seconds` <span class="version-mark">New in v6.5.4</span>
+
++ The time interval for periodic compaction. SST files with updates older than this value will be selected for compaction and rewritten to the same level where these SST files originally reside.
++ Default value: `"0s"`, meaning that periodic compaction is disabled by default.
++ Unit: s(second)|h(hour)|d(day)
+
 ## rocksdb.defaultcf.titan
 
 Configuration items related to `rocksdb.defaultcf.titan`.
@@ -1669,6 +1713,10 @@ Configuration items related to `raftdb`
 
 ### `info-log-max-size`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-size`](#max-size-new-in-v540).
+
 + The maximum size of Info logs
 + Default value: `"1GB"`
 + Minimum value: `0`
@@ -1676,10 +1724,18 @@ Configuration items related to `raftdb`
 
 ### `info-log-roll-time`
 
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated. TiKV no longer supports automatic log splitting based on time. Instead, you can use the configuration item [`log.file.max-size`](#max-size-new-in-v540) to set the threshold for automatic log splitting based on file size.
+
 + The interval at which Info logs are truncated. If the value is `0s`, logs are not truncated.
 + Default value: `"0s"` (which means logs are not truncated)
 
 ### `info-log-keep-log-file-num`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.file.max-backups`](#max-backups-new-in-v540).
 
 + The maximum number of Info log files kept in RaftDB
 + Default value: `10`
@@ -1691,6 +1747,10 @@ Configuration items related to `raftdb`
 + Default value: `""`
 
 ### `info-log-level`
+
+> **Warning:**
+>
+> Starting from v5.4.0, RocksDB logs are managed by the logging module of TiKV. Therefore, this configuration item is deprecated, and its function is replaced by the configuration item [`log.level`](#level-new-in-v540).
 
 + Log levels of RaftDB
 + Default value: `"info"`
@@ -1723,9 +1783,13 @@ Configuration items related to Raft Engine.
 
 ### `bytes-per-sync`
 
+> **Warning:**
+>
+> Starting from v6.5.0, Raft Engine writes logs to disk directly without buffering. Therefore, this configuration item is deprecated and no longer functional.
+
 + Specifies the maximum accumulative size of buffered writes. When this configuration value is exceeded, buffered writes are flushed to the disk.
 + If you set this configuration item to `0`, incremental sync is disabled.
-+ Default value: `"4MB"`
++ Before v6.5.0, the default value is `"4MiB"`.
 
 ### `target-file-size`
 
@@ -1894,6 +1958,11 @@ Configuration items related to TiDB Lightning import and BR restore.
 + The garbage ratio threshold to trigger GC.
 + Default value: `1.1`
 
+### `num-threads` <span class="version-mark">New in v6.5.8</span>
+
++ The number of GC threads when `enable-compaction-filter` is `false`.
++ Default value: `1`
+
 ## backup
 
 Configuration items related to BR backup.
@@ -1966,8 +2035,8 @@ Configuration items related to log backup.
 
 ### `initial-scan-rate-limit` <span class="version-mark">New in v6.2.0</span>
 
-+ The rate limit on throughput in an incremental data scan during log backup.
-+ Default value: 60, indicating that the rate limit is 60 MB/s by default.
++ The rate limit on throughput in an incremental data scan during log backup, which means the maximum amount of data that can be read from the disk per second. Note that if you only specify a number (for example, `60`), the unit is Byte instead of KiB.
++ Default value: 60MiB
 
 ### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
 
@@ -1992,7 +2061,11 @@ Configuration items related to TiCDC.
 ### `min-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
-+ Default value: `"200ms"`
++ Default value: `"1s"`.
+
+> **Note:**
+>
+> In v6.5.0, the default value of `min-ts-interval` is changed from `"1s"` to `"200ms"` to reduce CDC latency. Starting from v6.5.1, this default value is changed back to `"1s"` to reduce network traffic.
 
 ### `old-value-cache-memory-quota`
 

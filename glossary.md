@@ -65,6 +65,12 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 
 Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#regionpeerraft-group). The leader services all client requests and replicates data to the followers. If the group leader fails, one of the followers will be elected as the new leader. Learners are non-voting followers that only serves in the process of replica addition.
 
+## M
+
+### Multi-version concurrency control (MVCC)
+
+[MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) is a concurrency control mechanism in TiDB and other databases. It processes the memory read by transactions to achieve concurrent access to TiDB, thereby avoiding blocking caused by conflicts between concurrent reads and writes.
+
 ## O
 
 ### Old value

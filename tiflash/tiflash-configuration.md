@@ -33,6 +33,10 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 This section introduces the configuration parameters of TiFlash.
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### Configure the `tiflash.toml` file
 
 ```toml
@@ -125,8 +129,8 @@ delta_index_cache_size = 0
     # auto_tune_sec = 5
 
 [flash]
-    tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
-    service_addr = The listening address of TiFlash Raft services and coprocessor services.
+    ## The listening address of TiFlash coprocessor services.
+    service_addr = "0.0.0.0:3930"
 
 ## Multiple TiFlash nodes elect a master to add or delete placement rules to PD,
 ## and the configurations in flash.flash_cluster control this process.
@@ -138,20 +142,30 @@ delta_index_cache_size = 0
     log = The pd buddy log path.
 
 [flash.proxy]
-    addr = The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
-    advertise-addr = The external access address of addr. If it is left empty, "addr" is used by default.
-    data-dir = The data storage path of proxy.
-    config = The configuration file path of proxy.
-    log-file = The log path of proxy.
-    log-level = The log level of proxy. "info" is used by default.
-    status-addr = The listening address from which the proxy pulls metrics | status information. If it is left empty, 127.0.0.1:20292 is used by default.
-    advertise-status-addr = The external access address of status-addr. If it is left empty, "status-addr" is used by default.
+    ## The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
+    addr = "127.0.0.1:20170"
+    ## The external access address of addr. If it is left empty, "addr" is used by default.
+    ## Should guarantee that other nodes can access through `advertise-addr` when you deploy the cluster on multiple nodes.
+    advertise-addr = ""
+    ## The listening address from which the proxy pulls metrics or status information. If it is left empty, 127.0.0.1:20292 is used by default.
+    status-addr = "127.0.0.1:20292"
+    ## The external access address of status-addr. If it is left empty, the value of "status-addr" is used by default.
+    ## Should guarantee that other nodes can access through `advertise-status-addr` when you deploy the cluster on multiple nodes.
+    advertise-status-addr = ""
+    ## The data storage path of proxy.
+    data-dir = "/tidb-data/tiflash-9000/flash"
+    ## The configuration file path of proxy.
+    config = "/tidb-deploy/tiflash-9000/conf/tiflash-learner.toml"
+    ## The log path of proxy.
+    log-file = "/tidb-deploy/tiflash-9000/log/tiflash_tikv.log"
+    ## The log level of proxy (available options: "trace", "debug", "info", "warn", "error"). The default value is "info"
+    # log-level = "info" 
 
 [logger]
-    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "debug".
-    level = "debug"
-    log = TiFlash log path
-    errorlog = TiFlash error log path
+    ## log level (available options: "trace", "debug", "info", "warn", "error"). Starting from v6.5.7, the default value changes from "debug" to "info".
+    level = "info"
+    log = "/tidb-deploy/tiflash-9000/log/tiflash.log"
+    errorlog = "/tidb-deploy/tiflash-9000/log/tiflash_error.log"
     ## Size of a single log file. The default value is "100M".
     size = "100M"
     ## Maximum number of log files to save. The default value is 10.
@@ -187,6 +201,13 @@ delta_index_cache_size = 0
 
     ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     cop_pool_size = 0
+
+    ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor handles at the same time, including the requests being executed and the requests waiting in the queue. If the number of requests exceeds the specified value, the error "TiFlash Server is Busy" is returned. -1 indicates no limit; 0 indicates using the default value, which is 10 * cop_pool_size.
+    cop_pool_handle_limit = 0
+
+    ## New in v5.0. This item specifies the maximum time that a cop request can queue in TiFlash. If a cop request waits in the queue for a time longer than the value specified by this configuration, the error "TiFlash Server is Busy" is returned. A value less than or equal to 0 indicates no limit.
+    cop_pool_max_queued_seconds = 15
+
     ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     batch_cop_pool_size = 0
     ## New in v6.1.0. This item specifies the number of requests that TiFlash can concurrently process when it receives ALTER TABLE ... COMPACT from TiDB.
@@ -205,6 +226,14 @@ delta_index_cache_size = 0
     ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
     dt_page_gc_threshold = 0.5
 
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads that one resource group can use. The default value is 5000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/v6.5/tiflash-mintso-scheduler.
+    task_scheduler_thread_soft_limit = 5000
+
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads in the global scope. The default value is 10000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/v6.5/tiflash-mintso-scheduler.
+    task_scheduler_thread_hard_limit = 10000
+
+    ## New in v6.4.0. This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. The default value is 0, which means twice the number of vCPUs. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/v6.5/tiflash-mintso-scheduler.
+    task_scheduler_active_set_soft_limit = 0
 
 ## Security settings take effect starting from v4.0.5.
 [security]

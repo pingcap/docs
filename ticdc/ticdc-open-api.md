@@ -1,11 +1,15 @@
 ---
-title: TiCDC OpenAPI
+title: TiCDC OpenAPI v1
 summary: Learn how to use the OpenAPI interface to manage the cluster status and data replication.
 ---
 
-# TiCDC OpenAPI
+# TiCDC OpenAPI v1
 
 <!-- markdownlint-disable MD024 -->
+
+> **Note**
+>
+> TiCDC OpenAPI v1 is deprecated and will be deleted in the future. It is recommended to use [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md).
 
 TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md).
 
@@ -144,26 +148,26 @@ The configuration parameters of sink are as follows:
 {
   "dispatchers":[
     {"matcher":["test1.*", "test2.*"], "dispatcher":"ts"},
-    {"matcher":["test3.*", "test4.*"], "dispatcher":"rowid"}
+    {"matcher":["test3.*", "test4.*"], "dispatcher":"index-value"}
   ],
   "protocal":"canal-json"
 }
 ```
 
-`dispatchers`: For the sink of MQ type, you can use dispatchers to configure the event dispatcher. Four dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
+`dispatchers`: For the sink of MQ type, you can use dispatchers to configure the event dispatcher. Four dispatchers are supported: `default`, `ts`, `index-value`, and `table`. The dispatcher rules are as follows:
 
-- `default`: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the `table` mode. When only one unique index (or the primary key) exists, events are dispatched in the `rowid` mode.
-- `ts`: Uses the commitTs of the row change to create the hash value and dispatch events.
-- `rowid`: Uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
-- `table`: Uses the schema name of the table and the table name to create the hash value and dispatch events.
+- `default`: dispatches events in the `table` mode.
+- `ts`: uses the commitTs of the row change to create the hash value and dispatch events.
+- `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
+- `table`: uses the schema name of the table and the table name to create the hash value and dispatch events.
 
 `matcher`: The matching syntax of matcher is the same as the filter rule syntax.
 
-`protocol`: For the sink of MQ type, you can specify the protocol format of the message. Currently the following protocols are supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`.
+`protocol`: For the sink of MQ type, you can specify the protocol format of the message. Currently the following protocols are supported: `canal-json`, `open-protocol`, and `avro`.
 
 ### Example
 
-The following request creates a replication task with an ID of `test5` and a `sink_uri` of `blackhome://`.
+The following request creates a replication task with an ID of `test5` and a `sink_uri` of `blackhole://`.
 
 {{< copyable "shell-regular" >}}
 

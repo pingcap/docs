@@ -22,12 +22,6 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: `,`
 
-## Header
-
-- Definition: whether *all* CSV files contain a header row. If **Header** is `True`, the first row is used as the column names. If **Header** is `False`, the first row is treated as an ordinary data row.
-
-- Default: `True`
-
 ## Delimiter
 
 - Definition: defines the delimiter used for quoting. If **Delimiter** is empty, all fields are unquoted.
@@ -38,6 +32,12 @@ The following is the CSV Configuration window when you use the Import Data servi
     * `''` disables quoting.
 
 - Default: `"`
+
+## With header
+
+- Definition: whether *all* CSV files contain a header row. If **With header** is `True`, the first row is used as the column names. If **With header** is `False`, the first row is treated as an ordinary data row.
+
+- Default: `True`
 
 ## Backslash escape
 
@@ -72,18 +72,3 @@ The following is the CSV Configuration window when you use the Import Data servi
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
 - Default: `True`
-
-## Trim last separator
-
-- Definition: whether to treat `Separator` as the line terminator and trim all trailing separators.
-
-    For example, in the following CSV file:
-
-    ```csv
-    A,,B,,
-    ```
-
-    - When `Trim last separator = False`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
-    - When `Trim last separator = True`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
-
-- Default: `False`

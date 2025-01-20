@@ -21,14 +21,28 @@ cdc cli changefeed create \
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
+Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2023-12-07T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
+- `--server`: The address of any TiCDC server in the TiCDC cluster.
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
 - `--sink-uri`: The downstream address of the replication task. For details, see [Configure sink URI with `kafka`](#configure-sink-uri-for-kafka).
 - `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
 - `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
+
+## Supported Kafka versions
+
+The following table shows the minimum supported Kafka versions for each TiCDC version:
+
+| TiCDC version            | Minimum supported Kafka version |
+|:-------------------------|:--------------------------------|
+| TiCDC >= v8.1.0          | 2.1.0                           |
+| v7.6.0 <= TiCDC < v8.1.0 | 2.4.0                           |
+| v7.5.2 <= TiCDC < v8.0.0 | 2.1.0                           |
+| v7.5.0 <= TiCDC < v7.5.2 | 2.4.0                           |
+| v6.5.0 <= TiCDC < v7.5.0 | 2.1.0                           |
+| v6.1.0 <= TiCDC < v6.5.0 | 2.0.0                           |
 
 ## Configure sink URI for Kafka
 
@@ -51,29 +65,30 @@ The following are descriptions of sink URI parameters and values that can be con
 | `127.0.0.1`          | The IP address of the downstream Kafka services.                                 |
 | `9092`               | The port for the downstream Kafka.                                          |
 | `topic-name` | Variable. The name of the Kafka topic. |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `3.2.0`. This value needs to be consistent with the actual version of the downstream Kafka).                      |
+| `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
-| `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default).                       |
+| `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default). This value must be greater than or equal to the value of [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) in Kafka. |
 | `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). |
-| `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
+| `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, and `avro`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
-| `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
+| `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Kafka messages. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol` (optional, `16` by default). |
 | `enable-tls` | Whether to use TLS to connect to the downstream Kafka instance (optional, `false` by default). |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional).  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional). |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional). |
+| `insecure-skip-verify` | Whether to skip certificate verification when connecting to the downstream Kafka instance (optional, `false` by default, introduced in v6.5.3). |
 | `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). |
-| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). |
+| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). If it contains special characters, they need to be URL encoded. |
 | `sasl-mechanism` | The name of SASL authentication needed to connect to the downstream Kafka instance. The value can be `plain`, `scram-sha-256`, `scram-sha-512`, or `gssapi`. |
 | `sasl-gssapi-auth-type` | The gssapi authentication type. Values can be `user` or `keytab` (optional). |
 | `sasl-gssapi-keytab-path` | The gssapi keytab path (optional).|
 | `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional). |
 | `sasl-gssapi-service-name` | The gssapi service name (optional). |
 | `sasl-gssapi-user` | The user name of gssapi authentication (optional). |
-| `sasl-gssapi-password` | The password of gssapi authentication (optional).  |
+| `sasl-gssapi-password` | The password of gssapi authentication (optional). If it contains special characters, they need to be URL encoded. |
 | `sasl-gssapi-realm` | The gssapi realm name (optional). |
 | `sasl-gssapi-disable-pafxfast` | Whether to disable the gssapi PA-FX-FAST (optional). |
 | `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s`. |
@@ -132,7 +147,7 @@ The following are examples when using Kafka SASL authentication:
 
     The minimum set of permissions required for TiCDC to function properly is as follows.
 
-    - The `Create` and `Write` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
+    - The `Create`, `Write`, and `Describe` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
     - The `DescribeConfigs` permission for the Cluster resource type.
 
 ### Integrate TiCDC with Kafka Connect (Confluent Platform)
@@ -158,7 +173,17 @@ For detailed integration guide, see [Quick Start Guide on Integrating TiDB with 
 
 ### Matcher rules
 
-In the example of the previous section:
+Take the following configuration of `dispatchers` as an example:
+
+```toml
+[sink]
+dispatchers = [
+  {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
+  {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
+  {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
+  {matcher = ['test6.*'], partition = "ts"}
+]
+```
 
 - For the tables that match the matcher rule, they are dispatched according to the policy specified by the corresponding topic expression. For example, the `test3.aa` table is dispatched according to "Topic expression 2"; the `test5.aa` table is dispatched according to "Topic expression 3".
 - For a table that matches multiple matcher rules, it is dispatched according to the first matching topic expression. For example, the `test1.aa` table is distributed according to "Topic expression 1".
@@ -169,10 +194,10 @@ In the example of the previous section:
 
 You can use topic = "xxx" to specify a Topic dispatcher and use topic expressions to implement flexible topic dispatching policies. It is recommended that the total number of topics be less than 1000.
 
-The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
+The format of the Topic expression is `[prefix][{schema}][middle][{table}][suffix]`.
 
 - `prefix`: optional. Indicates the prefix of the Topic Name.
-- `{schema}`: required. Used to match the schema name.
+- `[{schema}]`: it changes from required to optional starting from v6.5.7. Used to match the schema name.
 - `middle`: optional. Indicates the delimiter between schema name and table name.
 - `{table}`: optional. Used to match the table name.
 - `suffix`: optional. Indicates the suffix of the Topic Name.
@@ -187,6 +212,8 @@ Some examples:
 - `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
     - The data change events corresponding to all tables in `test3` are sent to the topic named `hello_test3_world`.
     - The data change events corresponding to all tables in `test4` are sent to the topic named `hello_test4_world`.
+- `matcher = ['test5.*, 'test6.*'], topic = "hard_code_topic_name"` (New in v6.5.7)
+    - The data change events corresponding to all tables in `test5` and `test6` are sent to the topic named `hard_code_topic_name`. You can specify the topic name directly.
 - `matcher = ['*.*'], topic = "{schema}_{table}"`
     - All tables listened by TiCDC are dispatched to separate topics according to the "schema_table" rule. For example, for the `test.account` table, TiCDC dispatches its data change log to a Topic named `test_account`.
 

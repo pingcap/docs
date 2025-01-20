@@ -19,7 +19,7 @@ TiDB Cloud allows developers and DBAs with little or no training to handle once-
 
 ### What is the relationship between TiDB and TiDB Cloud?
 
-TiDB is an open-source database and is the best option for organizations who want to run TiDB on-premises in their own data centers, in a self-managed cloud environment, or in a hybrid of the two.
+TiDB is an open-source database and is the best option for organizations who want to run TiDB Self-Hosted in their own data centers, in a self-managed cloud environment, or in a hybrid of the two.
 
 TiDB Cloud is a fully managed cloud Database as a Service of TiDB. It has an easy-to-use web-based management console to let you manage TiDB clusters for mission-critical production environments.
 
@@ -41,15 +41,18 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-For the currently supported TiDB version, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
+- Starting from June 20, 2023, the default TiDB version for new TiDB Dedicated clusters is v6.5.3. 
+- Starting from March 7, 2023, the default TiDB version for new TiDB Serverless clusters is v6.6.0.
+
+For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
 
 ### What companies are using TiDB or TiDB Cloud in production?
 
-TiDB is trusted by over 1500 global enterprises across a variety of industries, such as financial services, gaming, and e-commerce. Our users include Square (US), Shopee (Singapore), and China UnionPay (China). See our [case studies](https://en.pingcap.com/customers/) for specific details.
+TiDB is trusted by over 1500 global enterprises across a variety of industries, such as financial services, gaming, and e-commerce. Our users include Square (US), Shopee (Singapore), and China UnionPay (China). See our [case studies](https://www.pingcap.com/customers/) for specific details.
 
 ### What does the SLA look like?
 
-TiDB Cloud provides 99.99% SLA. For details, see [Service Level Agreement for TiDB Cloud Services](https://en.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/).
+TiDB Cloud provides 99.99% SLA. For details, see [Service Level Agreement for TiDB Cloud Services](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/).
 
 ### How can I learn more about TiDB Cloud?
 
@@ -57,7 +60,11 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 
 - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
-- [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
+- [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+
+### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
+
+In TiDB Cloud, a cluster is uniquely identified by the combination of the organization name, project name, and cluster name. To ensure that you are deleting the intended cluster, you need to provide the fully qualified name of that cluster, such as `XXX's Org/default project/Cluster0`.
 
 ## Architecture FAQs
 
@@ -85,19 +92,19 @@ Each data change is recorded as a Raft log. Through Raft log replication, data i
 
 TiDB uses the Raft consensus algorithm to ensure that data is highly available and safely replicated throughout storage in Raft Groups. Data is redundantly copied between TiKV nodes and placed in different Availability Zones to protect against machine or data center failure. With automatic failover, TiDB ensures that your service is always on.
 
-As a Software as a Service (SaaS) provider, we take data security seriously. We have established strict information security policies and procedures required by the [Service Organization Control (SOC) 2 Type 1 compliance](https://en.pingcap.com/press-release/pingcap-successfully-completes-soc-2-type-1-examination-for-tidb-cloud/). This ensures that your data is secure, available, and confidential.
+As a Software as a Service (SaaS) provider, we take data security seriously. We have established strict information security policies and procedures required by the [Service Organization Control (SOC) 2 Type 1 compliance](https://www.pingcap.com/press-release/pingcap-successfully-completes-soc-2-type-1-examination-for-tidb-cloud/). This ensures that your data is secure, available, and confidential.
 
 ## Migration FAQ
 
 ### Is there an easy migration path from another RDBMS to TiDB Cloud?
 
-TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
+TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
 ## Backup and restore FAQ
 
 ### Does TiDB Cloud support incremental backups?
 
-No. If you need to restore data to any point in time within the cluster's backup retention, you can [use PITR (Point-in-time Recovery)](/tidb-cloud/backup-and-restore.md#automatic-backup).
+No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Dedicated cluster](/tidb-cloud/backup-and-restore.md#automatic-backup) or [Use PITR in a TiDB Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 ## HTAP FAQs
 
@@ -121,9 +128,9 @@ No. TiFlash data cannot be exported.
 
 ### Is TiDB Cloud secure?
 
-In TiDB Cloud, all data at rest is encrypted, and all network traffic is encrypted using Transport Layer Security (TLS). 
+In TiDB Cloud, all data at rest is encrypted, and all network traffic is encrypted using Transport Layer Security (TLS).
 
-- Encryption of data at rest is automated using encrypted storage volumes. 
+- Encryption of data at rest is automated using encrypted storage volumes.
 - Encryption of data in transit between your client and your cluster is automated using TiDB Cloud web server TLS and TiDB cluster TLS.
 
 ### How does TiDB Cloud encrypt my business data?
@@ -142,16 +149,16 @@ No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud 
 
 ### Is my TiDB cluster secure?
 
-In TiDB Cloud, you can use either a Dedicated Tier cluster or a Serverless Tier cluster according to your needs.
+In TiDB Cloud, you can use either a TiDB Dedicated cluster or a TiDB Serverless cluster according to your needs.
 
-For Dedicated Tier clusters, TiDB Cloud ensures cluster security with the following measures:
+For TiDB Dedicated clusters, TiDB Cloud ensures cluster security with the following measures:
 
 - Creates independent sub-accounts and VPCs for each cluster.
 - Sets up firewall rules to isolate external connections.
 - Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
 - Provide IP access rules for each cluster to ensure that only allowed source IP addresses can access your cluster.
 
-For Serverless Tier clusters, TiDB Cloud ensures cluster security with the following measures:
+For TiDB Serverless clusters, TiDB Cloud ensures cluster security with the following measures:
 
 - Creates independent sub-accounts for each cluster.
 - Sets up firewall rules to isolate external connections.
@@ -159,25 +166,31 @@ For Serverless Tier clusters, TiDB Cloud ensures cluster security with the follo
 
 ### How do I connect to my database in a TiDB cluster?
 
-For a Dedicated Tier cluster, the steps to connect to your cluster are simplified as follows:
+<SimpleTab>
+<div label="TiDB Dedicated">
+
+For a TiDB Dedicated cluster, the steps to connect to your cluster are simplified as follows:
 
 1. Authorize your network.
 2. Set up your database users and login credentials.
 3. Download and configure TLS for your cluster server.
 4. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
 
-For a Serverless Tier cluster, the steps to connect to your cluster are simplified as follows: 
+For more information, see [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
-1. Set a database user and login credential. 
+</div>
+
+<div label="TiDB Serverless">
+
+For a TiDB Serverless cluster, the steps to connect to your cluster are simplified as follows:
+
+1. Set a database user and login credential.
 2. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
 
-For more information, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+For more information, see [Connect to Your TiDB Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
-### Who has access to my business data of a database cluster?
-
-Only you can access your table data in your own TiDB cluster. TiDB Cloud Support cannot directly access the data in your TiDB cluster. The only exception is that when you need to improve products and solve cluster operation problems, TiDB Cloud Support can access the cluster operation data after you provide your internal temporary authorization. All authorization and access records are audited annually by third-party audit organizations, for example, PCI-DSS, SOC2, and ISO27701. 
-
-TiDB Cloud operational data is described in [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
+</div>
+</SimpleTab>
 
 ## Support FAQ
 

@@ -49,7 +49,7 @@ Get the power of a cloud-native, distributed SQL database built for real-time an
 
 -->
 
-TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB on premises or in the cloud.
+TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB in a self-hosted environment or in the cloud.
 
 <DocHomeCardContainer>
 
@@ -103,37 +103,43 @@ Documentation for TiDB Cloud application developers
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
+<DocHomeCard href="https://play.tidbcloud.com/?utm_source=docs&utm_medium=home_more_resources" icon="playground" label="TiDB Playground">
+
+One-stop and interactive experience of TiDB's capabilities WITHOUT registration
+
+</DocHomeCard>
+
+<DocHomeCard href="https://www.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 
 Learn TiDB and TiDB Cloud through well-designed online courses and instructor-led training
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/community/" icon="doc9" label="Community">
+<DocHomeCard href="https://ask.pingcap.com?utm_source=doc" icon="doc9" label="Community">
 
-Join us on Slack or become a contributor
+Connect with other TiDB users on TiDB Community for sharing and learning.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/blog/" icon="doc10" label="Blog Posts">
+<DocHomeCard href="https://www.pingcap.com/blog/" icon="doc10" label="Blog Posts">
 
 Learn great articles about TiDB and TiDB Cloud
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/videos/" icon="doc11" label="Videos">
+<DocHomeCard href="https://www.pingcap.com/videos/" icon="doc11" label="Videos">
 
 See a compilation of short videos describing TiDB and a variety of use cases
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/event/" icon="events" label="Events">
+<DocHomeCard href="https://www.pingcap.com/event/" icon="events" label="Events">
 
 Learn events about PingCAP and the community
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
+<DocHomeCard href="https://www.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
 
 Download eBooks and papers
 

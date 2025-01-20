@@ -54,6 +54,8 @@ This section describes the URL format of the storage services:
     - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: ``, `AES256`, or `aws:kms`).
     - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
     - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
+    - `role-arn`: When you need to access Amazon S3 data from a third party using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), you can specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role with the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For more information about using an IAM role to access Amazon S3 data from a third party, see [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html).
+    - `external-id`: When you access Amazon S3 data from a third party, you might need to specify a correct [external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) to assume [the IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). In this case, you can use this `external-id` URL query parameter to specify the external ID and make sure that you can assume the IAM role. An external ID is an arbitrary string provided by the third party together with the IAM role ARN to access the Amazon S3 data. Providing an external ID is optional when assuming an IAM role, which means if the third party does not require an external ID for the IAM role, you can assume the IAM role and access the corresponding Amazon S3 data without providing this parameter.
 
 </div>
 <div label="GCS" value="gcs">
@@ -90,7 +92,7 @@ This section provides some URL examples by using `external` as the `host` parame
 **Back up snapshot data to Amazon S3**
 
 ```shell
-./br restore full -u "${PD_IP}:2379" \
+./br backup full -u "${PD_IP}:2379" \
 --storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
@@ -147,8 +149,9 @@ When storing backup data in a cloud storage system, you need to configure authen
 
 Before backup, configure the following privileges to access the backup directory on S3.
 
-- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
-- Minimum privileges for TiKV and BR to access the backup directories during restore: `s3:ListBucket` and `s3:GetObject`
+- Minimum privileges for TiKV and Backup & Restore (BR) to access the backup directories during backup: `s3:ListBucket`, `s3:GetObject`, `s3:PutObject`, `s3:DeleteObject`, and `s3:AbortMultipartUpload`
+- Minimum privileges for TiKV and BR to access the backup directories during snapshot restore: `s3:ListBucket` and `s3:GetObject`
+- Minimum privileges for TiKV and BR to access the backup directories during log restore: `s3:ListBucket`, `s3:GetObject`, and `s3:PutObject`. When restoring log backup data, BR writes the database and table to be restored to the backup directory.
 
 If you have not yet created a backup directory, refer to [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [Create a folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 

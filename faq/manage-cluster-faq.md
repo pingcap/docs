@@ -145,6 +145,10 @@ Most of the APIs of PD are available only when the TiKV cluster is initialized. 
 
 This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
 
+### The `[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)` message is displayed when enabling encryption at rest for PD
+ 
+Encryption at rest does not support storing the key file in the `root` directory or its subdirectories. Even if you grant read permissions, the same error occurs. To resolve this issue, store the key file in a location outside the `root` directory.
+
 ### What's the maximum tolerance for time synchronization error of PD?
 
 PD can tolerate any synchronization error, but a larger error value means a larger gap between the timestamp allocated by the PD and the physical time, which will affect functions such as read of historical versions.
@@ -411,7 +415,10 @@ The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 
 
 ### Can both TiDB data and RawKV data be stored in the same TiKV cluster?
 
-No. TiDB (or data created from the transactional API) relies on a specific key format. It is not compatible with data created from RawKV API (or data from other RawKV-based services).
+It depends on your TiDB version and whether TiKV API V2 is enabled ([`storage.api-version = 2`](/tikv-configuration-file.md#api-version-new-in-v610)). 
+
+- If your TiDB version is v6.1.0 or later and TiKV API V2 is enabled, TiDB data and RawKV data can be stored in the same TiKV cluster. 
+- Otherwise, the answer is no because the key format of TiDB data (or data created using the transactional API) is incompatible with data created using the RawKV API (or data from other RawKV-based services).
 
 ## TiDB testing
 

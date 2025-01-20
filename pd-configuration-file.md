@@ -11,6 +11,10 @@ The PD configuration file supports more options than command-line parameters. Yo
 
 This document only describes parameters that are not included in command-line parameters. Check [here](/command-line-flags-for-pd-configuration.md) for the command line parameters.
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### `name`
 
 - The unique name of a PD node
@@ -118,6 +122,17 @@ Configuration items related to pd-server
 >
 > If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
 
+### `min-resolved-ts-persistence-interval` <span class="version-mark">New in v6.0.0</span>
+
++ Determines the interval at which the minimum resolved timestamp is persistent to the PD. If this value is set to `0`, it means that the persistence is disabled.
++ Default value: Before v6.3.0, the default value is `"0s"`. Starting from v6.3.0, the default value is `"1s"`, which is the smallest positive value.
++ Minimum value: `0`
++ Unit: second
+
+> **Note:**
+>
+> For clusters upgraded from v6.0.0~v6.2.0, the default value of `min-resolved-ts-persistence-interval` does not change after the upgrade, which means that it will remain `"0s"`. To enable this feature, you need to manually change the value of this configuration item.
+
 ## security
 
 Configuration items related to security
@@ -199,6 +214,13 @@ Configuration items related to monitoring
 ## `schedule`
 
 Configuration items related to scheduling
+
+> **Note:**
+>
+> To modify these PD configuration items related to `schedule`, choose one of the following methods based on your cluster status:
+>
+> - For clusters to be newly deployed, you can modify the PD configuration file directly.
+> - For existing clusters, use the command-line tool [PD Control](/pd-control.md) to make changes instead. Direct modifications to these PD configuration items related to `schedule` in the configuration file do not take effect on existing clusters.
 
 ### `max-merge-region-size`
 
@@ -362,16 +384,20 @@ Configuration items related to replicas
 + Default value: `true`
 + See [Placement Rules](/configure-placement-rules.md).
 
-## `label-property`
+## `label-property` (deprecated)
 
-Configuration items related to labels
+Configuration items related to labels, which only support the `reject-leader` type.
 
-### `key`
+> **Note:**
+>
+> Starting from v5.2, the configuration items related to labels are deprecated. It is recommended to use [Placement Rules](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center) to configure the replica policy.
+
+### `key` (deprecated)
 
 + The label key for the store that rejected the Leader
 + Default value: `""`
 
-### `value`
+### `value` (deprecated)
 
 + The label value for the store that rejected the Leader
 + Default value: `""`

@@ -23,16 +23,16 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 | Installation package                                                                    | OS | Architecture | SHA256 checksum                                                    |
 | :------------------------------------------------------------------------ | :------- | :---- | :--------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.sha256` |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.5.1` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v6.5.1-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.5.11` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v6.5.11-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) Version 1.19 or later because the Go modules are used.
+1. [Go](https://golang.org/) 1.19 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -331,6 +331,8 @@ Usage:
 - `enable-placement-rules` is used to enable placement rules, which is enabled by default in v5.0 and later versions.
 
 - `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (experimental).
+
+- `halt-scheduling` is used to halt scheduling. When you set it to `true`, PD will halt scheduling and ignore other scheduling configurations. Introduced in v6.5.3.
 
 - PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 
@@ -757,20 +759,20 @@ Use this command to view and control the scheduling policy.
 Usage:
 
 ```bash
->> scheduler show                                 // Display all created schedulers
->> scheduler add grant-leader-scheduler 1         // Schedule all the leaders of the Regions on store 1 to store 1
->> scheduler add evict-leader-scheduler 1         // Move all the Region leaders on store 1 out
->> scheduler config evict-leader-scheduler        // Display the stores in which the scheduler is located since v4.0.0
->> scheduler add shuffle-leader-scheduler         // Randomly exchange the leader on different stores
->> scheduler add shuffle-region-scheduler         // Randomly scheduling the Regions on different stores
->> scheduler add evict-slow-store-scheduler       // When there is one and only one slow store, evict all Region leaders of that store
->> scheduler remove grant-leader-scheduler-1      // Remove the corresponding scheduler, and `-1` corresponds to the store ID
->> scheduler pause balance-region-scheduler 10    // Pause the balance-region scheduler for 10 seconds
->> scheduler pause all 10                         // Pause all schedulers for 10 seconds
->> scheduler resume balance-region-scheduler      // Continue to run the balance-region scheduler
->> scheduler resume all                           // Continue to run all schedulers
->> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
->> scheduler describe balance-region-scheduler    // Display the running state and related diagnostic information of the balance-region scheduler
+>> scheduler show                                          // Display all created schedulers
+>> scheduler add grant-leader-scheduler 1                  // Schedule all the leaders of the Regions on store 1 to store 1
+>> scheduler add evict-leader-scheduler 1                  // Move all the Region leaders on store 1 out
+>> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
+>> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
+>> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
+>> scheduler add evict-slow-store-scheduler                // When there is one and only one slow store, evict all Region leaders of that store
+>> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
+>> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
+>> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
+>> scheduler resume balance-region-scheduler               // Continue to run the balance-region scheduler
+>> scheduler resume all                                    // Continue to run all schedulers
+>> scheduler config balance-hot-region-scheduler           // Display the configuration of the balance-hot-region scheduler
+>> scheduler describe balance-region-scheduler             // Display the running state and related diagnostic information of the balance-region scheduler
 ```
 
 ### `scheduler describe balance-region-scheduler`
@@ -915,6 +917,24 @@ Usage:
     ```bash
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true
     ```
+
+### `scheduler config evict-leader-scheduler`
+
+Use this command to view and manage the configuration of the `evict-leader-scheduler`.
+
+- When an `evict-leader-scheduler` already exists, use the `add-store` subcommand to add leader eviction scheduling for the specified store:
+
+    ```bash
+    scheduler config evict-leader-scheduler add-store 2       // Add leader eviction scheduling for store 2
+    ```
+
+- When an `evict-leader-scheduler` already exists, use the `delete-store` subcommand to remove leader eviction scheduling for the specified store:
+
+    ```bash
+    scheduler config evict-leader-scheduler delete-store 2    // Remove leader eviction scheduling for store 2
+    ```
+
+    If all store configurations of an `evict-leader-scheduler` are removed, the scheduler itself is automatically removed.
 
 ### `service-gc-safepoint`
 

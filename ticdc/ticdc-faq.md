@@ -49,14 +49,116 @@ The expected output is as follows:
 ```
 
 * `checkpoint`: TiCDC has replicated all data before this timestamp to downstream.
-* `state`: The state of this replication task:
-    * `normal`: The task runs normally.
-    * `stopped`: The task is stopped manually or encounters an error.
-    * `removed`: The task is removed.
+* `state`: The state of this replication task. For more information about each state and its meaning, see [Changefeed states](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer).
 
 > **Note:**
 >
 > This feature is introduced in TiCDC 4.0.3.
+
+## How to verify if TiCDC has replicated all updates after upstream stops updating?
+
+After the upstream TiDB cluster stops updating, you can verify if replication is complete by comparing the latest [TSO](/glossary.md#tso) timestamp of the upstream TiDB cluster with the replication progress in TiCDC. If the TiCDC replication progress timestamp is greater than or equal to the upstream TiDB cluster's TSO, then all updates have been replicated. To verify replication completeness, perform the following steps:
+
+1. Get the latest TSO timestamp from the upstream TiDB cluster.
+
+    > **Note:**
+    >
+    > Use the `TIDB_CURRENT_TSO()` function to get the current TSO, instead of using functions like `NOW()` that return the current time.
+
+    The following example uses [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso) to convert the TSO to a readable time format for further comparison:
+
+    ```sql
+    BEGIN;
+    SELECT TIDB_PARSE_TSO(TIDB_CURRENT_TSO());
+    ROLLBACK;
+    ```
+
+    The output is as follows:
+
+    ```sql
+    +------------------------------------+
+    | TIDB_PARSE_TSO(TIDB_CURRENT_TSO()) |
+    +------------------------------------+
+    | 2024-11-12 20:35:34.848000         |
+    +------------------------------------+
+    ```
+
+2. Get the replication progress in TiCDC.
+
+    You can check the replication progress in TiCDC using one of the following methods:
+
+    * **Method 1**: query the checkpoint of the changefeed (recommended).
+
+        Use the [TiCDC command-line tool](/ticdc/ticdc-manage-changefeed.md) `cdc cli` to view the checkpoint for all replication tasks:
+
+        ```shell
+        cdc cli changefeed list --server=http://127.0.0.1:8300
+        ```
+
+        The output is as follows:
+
+        ```json
+        [
+          {
+            "id": "syncpoint",
+            "namespace": "default",
+            "summary": {
+              "state": "normal",
+              "tso": 453880043653562372,
+              "checkpoint": "2024-11-12 20:36:01.447",
+              "error": null
+            }
+          }
+        ]
+        ```
+
+        In the output, `"checkpoint": "2024-11-12 20:36:01.447"` indicates that TiCDC has replicated all upstream TiDB changes before this time. If this timestamp is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, then all updates have been replicated downstream.
+
+    * **Method 2**: query Syncpoint from the downstream TiDB.
+
+        If the downstream is a TiDB cluster and the [TiCDC Syncpoint feature](/ticdc/ticdc-upstream-downstream-check.md) is enabled, you can get the replication progress by querying the Syncpoint in the downstream TiDB.
+
+        > **Note:**
+        >
+        > The Syncpoint update interval is controlled by the [`sync-point-interval`](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint) configuration item. For the most up-to-date replication progress, use method 1.
+
+        Execute the following SQL statement in the downstream TiDB to get the upstream TSO (`primary_ts`) and downstream TSO (`secondary_ts`):
+
+        ```sql
+        SELECT * FROM tidb_cdc.syncpoint_v1;
+        ```
+
+        The output is as follows:
+
+        ```sql
+        +------------------+------------+--------------------+--------------------+---------------------+
+        | ticdc_cluster_id | changefeed | primary_ts         | secondary_ts       | created_at          |
+        +------------------+------------+--------------------+--------------------+---------------------+
+        | default          | syncpoint  | 453879870259200000 | 453879870545461257 | 2024-11-12 20:25:01 |
+        | default          | syncpoint  | 453879948902400000 | 453879949214351361 | 2024-11-12 20:30:01 |
+        | default          | syncpoint  | 453880027545600000 | 453880027751907329 | 2024-11-12 20:35:00 |
+        +------------------+------------+--------------------+--------------------+---------------------+
+        ```
+
+        In the output, each row shows the upstream TiDB snapshot at `primary_ts` matches the downstream TiDB snapshot at `secondary_ts`.
+
+        To view the replication progress, convert the latest `primary_ts` to a readable time format:
+
+        ```sql
+        SELECT TIDB_PARSE_TSO(453880027545600000);
+        ```
+
+        The output is as follows:
+
+        ```sql
+        +------------------------------------+
+        | TIDB_PARSE_TSO(453880027545600000) |
+        +------------------------------------+
+        | 2024-11-12 20:35:00                |
+        +------------------------------------+
+        ```
+
+        If the time corresponding to the latest `primary_ts` is greater than or equal to the upstream TiDB cluster's TSO obtained in step 1, then TiCDC has replicated all updates downstream.
 
 ## What is `gc-ttl` in TiCDC?
 
@@ -106,20 +208,20 @@ If you use the `cdc cli changefeed create` command without specifying the `-conf
 - Enables the Old Value feature
 - Only replicates tables that contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)
 
-## Does TiCDC support outputting data changes in the Canal format?
+## Does TiCDC support outputting data changes in the Canal protocol?
 
-Yes. To enable Canal output, specify the protocol as `canal` in the `--sink-uri` parameter. For example:
+Yes. Note that for the Canal protocol, TiCDC only supports the JSON output format, while the protobuf format is not officially supported yet. To enable Canal output, specify `protocol` as `canal-json` in the `--sink-uri` configuration. For example:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal" --config changefeed.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal-json" --config changefeed.toml
 ```
 
 > **Note:**
 >
 > * This feature is introduced in TiCDC 4.0.2.
-> * TiCDC currently supports outputting data changes in the Canal format only to MQ sinks such as Kafka.
+> * TiCDC currently supports outputting data changes in the Canal-JSON format only to MQ sinks such as Kafka.
 
 For more information, refer to [TiCDC changefeed configurations](/ticdc/ticdc-changefeed-config.md).
 
@@ -231,7 +333,7 @@ From the result, you can see that the table schema before and after the replicat
 
 Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets `explicit_defaults_for_timestamp = ON` to ensure that the time type is consistent between the upstream and downstream. For versions earlier than v5.0.1 or v4.0.13, pay attention to the compatibility issue caused by the inconsistent `explicit_defaults_for_timestamp` value when using TiCDC to replicate the time type data.
 
-## Why do `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream if I set `enable-old-value` to `true` when I create a TiCDC replication task?
+## Why do `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream if I set `safe-mode` to `true` when I create a TiCDC replication task?
 
 TiCDC guarantees that all data is replicated at least once. When there is duplicate data in the downstream, write conflicts occur. To avoid this problem, TiCDC converts `INSERT` and `UPDATE` statements into `REPLACE INTO` statements. This behavior is controlled by the `safe-mode` parameter.
 
@@ -259,7 +361,19 @@ When upstream write traffic is at peak hours, the downstream may fail to consume
 
 ## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR from upstream?
 
-Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefore, please avoid using TiDB Lightning and BR on tables that are replicated by TiCDC.
+Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefore, avoid using TiDB Lightning and BR on tables that are replicated by TiCDC. Otherwise, unknown errors might occur, such as TiCDC replication getting stuck, a significant spike in replication latency, or data loss.
+
+If you need to use TiDB Lightning or BR to restore data for some tables replicated by TiCDC, take these steps:
+
+1. Remove the TiCDC replication task related to these tables.
+
+2. Use TiDB Lightning or BR to restore data separately in the upstream and downstream clusters of TiCDC.
+
+3. After the restoration is complete and data consistency between the upstream and downstream clusters is verified, create a new TiCDC replication task for incremental replication, with the timestamp (TSO) from the upstream backup as the `start-ts` for the task. For example, assuming the snapshot timestamp of the BR backup in the upstream cluster is `431434047157698561`, you can create a new TiCDC replication task using the following command:
+
+    ```shell
+    cdc cli changefeed create -c "upstream-to-downstream-some-tables" --start-ts=431434047157698561 --sink-uri="mysql://root@127.0.0.1:4000? time-zone="
+    ```
 
 ## After a changefeed resumes from pause, its replication latency gets higher and higher and returns to normal only after a few minutes. Why?
 
@@ -267,11 +381,15 @@ When a changefeed is resumed, TiCDC needs to scan the historical versions of dat
 
 ## How should I deploy TiCDC to replicate data between two TiDB cluster located in different regions?
 
-It is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem.
+For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem. After optimization, starting from TiCDC v6.5.2, it is recommended that you deploy TiCDC in the upstream TiDB cluster.
 
 ## What is the order of executing DML and DDL statements?
 
-The execution order is: DML -> DDL -> DML. To ensure that the table schema is correct when DML events are executed downstream during data replication, it is necessary to coordinate the execution order of DDL and DML statements. Currently, TiCDC adopts a simple approach: it replicates all DML statements before the DDL ts to downstream first, and then replicates DDL statements.
+Currently, TiCDC adopts the following order:
+
+1. TiCDC blocks the replication progress of the tables affected by DDL statements until the DDL `commitTS`. This ensures that DML statements executed before DDL `commitTS` can be successfully replicated to the downstream first.
+2. TiCDC continues with the replication of DDL statements. If there are multiple DDL statements, TiCDC replicates them in a serial manner.
+3. After the DDL statements are executed in the downstream, TiCDC will continue with the replication of DML statements executed after DDL `commitTS`.
 
 ## How should I check whether the upstream and downstream data is consistent?
 
@@ -284,3 +402,99 @@ This feature is currently not supported, which might be supported in a future re
 ## Does TiCDC replication get stuck if the upstream has long-running uncommitted transactions?
 
 TiDB has a transaction timeout mechanism. When a transaction runs for a period longer than [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl), TiDB forcibly rolls it back. TiCDC waits for the transaction to be committed before proceeding with the replication, which causes replication delay.
+
+## What changes occur to the change event format when TiCDC enables the Old Value feature?
+
+In the following description, the definition of a valid index is as follows:
+
+- A primary key (`PRIMARY KEY`) is a valid index.
+- A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have a virtual generated column (`VIRTUAL GENERATED COLUMNS`).
+
+TiDB supports the clustered index feature starting from v5.0. This feature controls how data is stored in tables containing primary keys. For more information, see [Clustered indexes](/clustered-indexes.md).
+
+After you enable the [Old Value feature](/ticdc/ticdc-manage-changefeed.md#output-the-historical-value-of-a-row-changed-event), TiCDC behaves as follows:
+
+- For change events on invalid index columns, the output contains both new and old values.
+- For change events on valid index columns, the output varies based on certain conditions:
+    - If a unique index column (`UNIQUE INDEX`) is updated and the table has no primary key, the output contains both new and old values.
+    - If the clustered index is disabled in the upstream TiDB cluster, and a non-INT type primary key column is updated, the output contains both new and old values.
+    - Otherwise, the change event is split into a delete event for the old value and an insert event for the new value.
+
+The preceding behavior change might lead to the following issues.
+
+### When change events on a valid index column contains both new and old values, the distribution behavior of Kafka Sink might not guarantee that change events with the same index columns are distributed to the same partition
+
+The index-value mode of Kafka Sink distributes events according to the value of the index column. When change events contain both new and old values, the value of the index column changes, which might cause change events with the same index column to be distributed to different partitions. The following is an example:
+
+Create table `t` when the TiDB clustered index feature is disabled:
+
+```sql
+CREATE TABLE t (a VARCHAR(255) PRIMARY KEY NONCLUSTERED);
+```
+
+Execute the following DML statements:
+
+```sql
+INSERT INTO t VALUES ("2");
+UPDATE t SET a="1" WHERE a="2";
+INSERT INTO t VALUES ("2");
+UPDATE t SET a="3" WHERE a="2";
+```
+
+- When the Old Value feature is disabled, the change event is split into a delete event for the old value and an insert event for the new value. The index-value dispatcher of Kafka Sink calculates the corresponding partition for each event. The preceding DML events will be distributed to the following partitions:
+
+    | partition-1  | partition-2  | partition-3  |
+    | ------------ | ------------ | ------------ |
+    | INSERT a = 2 | INSERT a = 1 | INSERT a = 3 |
+    | DELETE a = 2 |              |              |
+    | INSERT a = 2 |              |              |
+    | DELETE a = 2 |              |              |
+
+    Because Kafka guarantees message order in each partition, consumers can independently process data in each partition, and get the same result as the DML execution order.
+
+- When the Old Value feature is enabled, the index-value dispatcher of Kafka Sink distributes change events with the same index columns to different partitions. Therefore, the preceding DML will be distributed to the following partitions (change events contain both new and old values):
+
+    | partition-1  | partition-2              | partition-3              |
+    | ------------ | ------------------------ | ------------------------ |
+    | INSERT a = 2 | UPDATE a = 1 WHERE a = 2 | UPDATE a = 3 WHERE a = 2 |
+    | INSERT a = 2 |                          |                          |
+
+    Because Kafka does not guarantee message order between partitions, the preceding DML might not preserve the update order of the index column during consumption. To maintain the order of index column updates when the output contains both new and old values, you can use the default dispatcher when enabling the Old Value feature.
+
+### When change events on an invalid index column and change events on a valid index column both contain new and old values, the Avro format of Kafka Sink cannot correctly output the old value
+
+In the Avro implementation, Kafka message values only contain the current column values. Therefore, old values cannot be output correctly when an event contains both new and old values. To output the old value, you can disable the Old Value feature to get the split delete and insert events.
+
+### When change events on an invalid index column and change events on a valid index column both contain new and old values, the CSV format of Cloud Storage Sink cannot correctly output the old value
+
+Because a CSV file has a fixed number of columns, old values cannot be output correctly when an event contains both new and old values. To output the old value, you can use the Canal-JSON format.
+
+## Why can't I use the `cdc cli` command to operate a TiCDC cluster deployed by TiDB Operator?
+
+This is because the default port number of the TiCDC cluster deployed by TiDB Operator is `8301`, while the default port number of the `cdc cli` command to connect to the TiCDC server is `8300`. When using the `cdc cli` command to operate the TiCDC cluster deployed by TiDB Operator, you need to explicitly specify the `--server` parameter, as follows:
+
+```shell
+./cdc cli changefeed list --server "127.0.0.1:8301"
+[
+  {
+    "id": "4k-table",
+    "namespace": "default",
+    "summary": {
+      "state": "stopped",
+      "tso": 441832628003799353,
+      "checkpoint": "2023-05-30 22:41:57.910",
+      "error": null
+    }
+  },
+  {
+    "id": "big-table",
+    "namespace": "default",
+    "summary": {
+      "state": "normal",
+      "tso": 441872834546892882,
+      "checkpoint": "2023-06-01 17:18:13.700",
+      "error": null
+    }
+  }
+]
+```

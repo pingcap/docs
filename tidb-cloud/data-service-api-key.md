@@ -19,7 +19,12 @@ The TiDB Cloud Data API uses [HTTP Digest Authentication](https://en.wikipedia.o
 
 ## Rate limiting
 
-Each Chat2Query Data App has a rate limit of 100 requests per day. Other Data Apps have a rate limit of 100 requests per minute per API key. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+Request quotas are rate-limited as follows:
+
+- 100 requests per minute (rpm) per API key
+- 100 requests per day for each Chat2Query Data App
+
+If you exceed the rate limit, the API returns a `429` error. To increase your quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 
 ## Manage API keys
 
@@ -31,7 +36,7 @@ To create an API key for a Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the **API Key** area, click **Create API Key**.
+3. In the **Authentication** area, click **Create API Key**.
 4. In the **Create API Key** dialog box, enter a description and select a role for your API key.
 
     The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:

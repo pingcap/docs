@@ -5,7 +5,7 @@ summary: An overview of the usage of KILL for the TiDB database.
 
 # KILL
 
-The `KILL` statement is used to terminate a connection in any TiDB instance in the current TiDB cluster.
+The `KILL` statement is used to terminate a connection in any TiDB instance in the current TiDB cluster. Starting from TiDB v6.2.0, you can also use the `KILL` statement to terminate ongoing DDL jobs. 
 
 ## Synopsis
 

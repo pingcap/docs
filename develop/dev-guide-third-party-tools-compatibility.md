@@ -132,7 +132,7 @@ Do not use the `noIndexUsed()` and `noGoodIndexUsed()` functions in TiDB.
 
 **Description**
 
-TiDB does not support the [enablePacketDebug](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-debugging-profiling.html) parameter. It is a MySQL Connector/J parameter used for debugging that will keep the buffer of the data packet. This might cause the connection to close unexpectedly. **DO NOT** turn it on.
+TiDB does not support the [enablePacketDebug](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-debugging-profiling.html) parameter. It is a MySQL Connector/J parameter used for debugging that will keep the buffer of the data packet. This might cause the connection to close unexpectedly. **DO NOT** turn it on.
 
 **Way to avoid**
 
@@ -154,34 +154,34 @@ To ensure data consistency by transaction, you can use `UPDATE` statements to up
 
 **Description**
 
-When the `useLocalTransactionState` and `rewriteBatchedStatements` parameters are set to `true` at the same time, the transaction might fail to commit. You can reproduce with [this code](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error).
+When using MySQL Connector/J 8.0.32 or an earlier version, if the `useLocalTransactionState` and `rewriteBatchedStatements` parameters are set to `true` at the same time, the transaction might fail to commit. You can reproduce with [this code](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error).
 
 **Way to avoid**
 
 > **Note:**
 >
-> This bug has been reported to MySQL JDBC. To keep track of the process, you can follow this [Bug Report](https://bugs.mysql.com/bug.php?id=108643).
+> `useConfigs=maxPerformance` includes a group of configurations. For detailed configurations in MySQL Connector/J 8.0 and MySQL Connector/J 5.1, see [mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties) and [mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties) respectively. You need to disable `useLocalTransactionState` when using `maxPerformance`. That is, use `useConfigs=maxPerformance&useLocalTransactionState=false`.
 
-**DO NOT** turn on `useLocalTransactionState` as this might prevent transactions from being committed or rolled back.
+This bug has been fixed in MySQL Connector/J 8.0.33. Considering updates for the 8.0.x series have ceased, it is strongly recommended to upgrade your MySQL Connector/J to [the latest General Availability (GA) version](https://dev.mysql.com/downloads/connector/j/) for improved stability and performance.
 
 ### Connector is incompatible with the server version earlier than 5.7.5
 
 **Description**
 
-The database connection might hang under certain conditions when using MySQL Connector/J 8.0.29 with a MySQL server < 5.7.5 or a database using the MySQL server < 5.7.5 protocol (such as TiDB earlier than v6.3.0). For more details, see the [Bug Report](https://bugs.mysql.com/bug.php?id=106252).
+The database connection might hang under certain conditions when using MySQL Connector/J 8.0.31 or an earlier version with a MySQL server < 5.7.5 or a database using the MySQL server < 5.7.5 protocol (such as TiDB earlier than v6.3.0). For more details, see the [Bug Report](https://bugs.mysql.com/bug.php?id=106252).
 
 **Way to avoid**
 
-This is a known issue. As of October 12, 2022, MySQL Connector/J has not fixed the issue.
+This bug has been fixed in MySQL Connector/J 8.0.32. Considering updates for the 8.0.x series have ceased, it is strongly recommended to upgrade your MySQL Connector/J to [the latest General Availability (GA) version](https://dev.mysql.com/downloads/connector/j/) for improved stability and performance.
 
-TiDB fixes it in the following ways:
+TiDB also fixes it in the following ways:
 
 - Client side: This bug has been fixed in **pingcap/mysql-connector-j** and you can use the [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j) instead of the official MySQL Connector/J.
 - Server side: This compatibility issue has been fixed since TiDB v6.3.0 and you can upgrade the server to v6.3.0 or later versions.
 
 ## Compatibility with Sequelize
 
-The compatibility information described in this section is based on [Sequelize v6.21.4](https://www.npmjs.com/package/sequelize/v/6.21.4).
+The compatibility information described in this section is based on [Sequelize v6.32.1](https://www.npmjs.com/package/sequelize/v/6.32.1).
 
 According to the test results, TiDB supports most of the Sequelize features ([using `MySQL` as the dialect](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/#mysql)).
 
@@ -194,6 +194,9 @@ Unsupported features are:
 - The `READ-UNCOMMITTED` and `SERIALIZABLE` [isolation levels](/system-variables.md#transaction_isolation) are not supported.
 - Modification of a column's `AUTO_INCREMENT` attribute is not allowed by default.
 - `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported.
+- `sequelize.queryInterface.showIndex(Model.tableName);` is not supported.
+- `sequelize.options.databaseVersion` is not supported.
+- Adding a foreign key reference using [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn) is not supported.
 
 ### Modification of integer primary key is not supported
 
@@ -230,3 +233,17 @@ To allow the removal of the `AUTO_INCREMENT` attribute, set `@@tidb_allow_remove
 **Description**
 
 `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

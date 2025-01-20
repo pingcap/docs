@@ -167,6 +167,23 @@ Range partitioning is particularly useful when one or more of the following cond
 
 Range COLUMNS partitioning is a variant of Range partitioning. You can use one or more columns as partitioning keys. The data types of partition columns can be integer, string (`CHAR` or `VARCHAR`), `DATE`, and `DATETIME`. Any expressions, such as non-COLUMNS partitioning, are not supported.
 
+Like Range partitioning, Range COLUMNS partitioning also requires the partition ranges to be strictly increasing. The partition definition in the following example is not supported:
+
+```sql
+CREATE TABLE t(
+    a int,
+    b datetime,
+    c varchar(8)
+) PARTITION BY RANGE COLUMNS(`c`,`b`)
+(PARTITION `p20240520A` VALUES LESS THAN ('A','2024-05-20 00:00:00'),
+ PARTITION `p20240520Z` VALUES LESS THAN ('Z','2024-05-20 00:00:00'),
+ PARTITION `p20240521A` VALUES LESS THAN ('A','2024-05-21 00:00:00'));
+```
+
+```
+Error 1493 (HY000): VALUES LESS THAN value must be strictly increasing for each partition
+```
+
 Suppose that you want to partition by name, and drop old and invalid data, then you can create a table as follows:
 
 ```sql
@@ -175,22 +192,16 @@ CREATE TABLE t (
   name varchar(255) CHARACTER SET ascii,
   notes text
 )
-PARTITION BY RANGE COLUMNS(name,valid_until)
+PARTITION BY RANGE COLUMNS(name, valid_until)
 (PARTITION `p2022-g` VALUES LESS THAN ('G','2023-01-01 00:00:00'),
  PARTITION `p2023-g` VALUES LESS THAN ('G','2024-01-01 00:00:00'),
- PARTITION `p2024-g` VALUES LESS THAN ('G','2025-01-01 00:00:00'),
  PARTITION `p2022-m` VALUES LESS THAN ('M','2023-01-01 00:00:00'),
  PARTITION `p2023-m` VALUES LESS THAN ('M','2024-01-01 00:00:00'),
- PARTITION `p2024-m` VALUES LESS THAN ('M','2025-01-01 00:00:00'),
  PARTITION `p2022-s` VALUES LESS THAN ('S','2023-01-01 00:00:00'),
- PARTITION `p2023-s` VALUES LESS THAN ('S','2024-01-01 00:00:00'),
- PARTITION `p2024-s` VALUES LESS THAN ('S','2025-01-01 00:00:00'),
- PARTITION `p2022-` VALUES LESS THAN (0x7f,'2023-01-01 00:00:00'),
- PARTITION `p2023-` VALUES LESS THAN (0x7f,'2024-01-01 00:00:00'),
- PARTITION `p2024-` VALUES LESS THAN (0x7f,'2025-01-01 00:00:00'))
+ PARTITION `p2023-s` VALUES LESS THAN ('S','2024-01-01 00:00:00'))
 ```
 
-It will partition the data by year and by name in the ranges ['', 'G'), ['G', 'M'), ['M', 'S') and ['S',). It allows you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns. In this example, `[,)` indicates a left-closed, right-open range. For example, ['G', 'M') indicates a range containing `G` and from `G` to `M`, but excluding `M`.
+The preceding SQL statement will partition the data by year and by name in the ranges `[ ('', ''), ('G', '2023-01-01 00:00:00') )`, `[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )`, `[ ('G', '2024-01-01 00:00:00'), ('M', '2023-01-01 00:00:00') )`, `[ ('M', '2023-01-01 00:00:00'), ('M', '2024-01-01 00:00:00') )`, `[ ('M', '2024-01-01 00:00:00'), ('S', '2023-01-01 00:00:00') )`, and `[ ('S', '2023-01-01 00:00:00'), ('S', '2024-01-01 00:00:00') )`. It allows you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns. In this example, `[,)` indicates a left-closed, right-open range. For example, `[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )` indicates a range of data whose name is `'G'`, the year contains `2023-01-01 00:00:00` and is greater than `2023-01-01 00:00:00` but less than `2024-01-01 00:00:00`. It does not include `(G, 2024-01-01 00:00:00)`.
 
 ### Range INTERVAL partitioning
 
@@ -303,7 +314,7 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 - The INTERVAL partitioning feature only involves the `CREATE/ALTER TABLE` syntax. There is no change in metadata, so tables created or altered with the new syntax are still MySQL-compatible.
 - There is no change in the output format of `SHOW CREATE TABLE` to keep MySQL compatibility.
 - The new `ALTER` syntax applies to existing tables conforming to INTERVAL. You do not need to create these tables with the `INTERVAL` syntax.
-- For `RANGE COLUMNS`, only integer, date, and datetime column types are supported.
+- To use the `INTERVAL` syntax for `RANGE COLUMNS` partitioning, you can only specify a single column in the `INTEGER`, `DATE`, or `DATETIME` type as the partitioning key.
 
 ### List partitioning
 
@@ -368,13 +379,13 @@ Unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` 
 
 ```sql
 test> CREATE TABLE t (
-    ->   a INT,
-    ->   b INT
-    -> )
-    -> PARTITION BY LIST (a) (
-    ->   PARTITION p0 VALUES IN (1, 2, 3),
-    ->   PARTITION p1 VALUES IN (4, 5, 6)
-    -> );
+      a INT,
+      b INT
+    )
+    PARTITION BY LIST (a) (
+      PARTITION p0 VALUES IN (1, 2, 3),
+      PARTITION p1 VALUES IN (4, 5, 6)
+    );
 Query OK, 0 rows affected (0.11 sec)
 
 test> INSERT INTO t VALUES (7, 7);
@@ -1106,6 +1117,11 @@ Partition selection is supported for all types of table partitioning, including 
 
 This section introduces some restrictions and limitations on partitioned tables in TiDB.
 
+- Using the [`ALTER TABLE ... CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md) statement to change column types of partitioned tables is not supported.
+- Using the [`ALTER TABLE ... CACHE`](/cached-tables.md) statement to set partitioned tables to cached tables is not supported.
+- [Temporary tables](/temporary-tables.md) in TiDB are **NOT** compatible with partitioned tables.
+- The [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-) hint does not work for partitioned tables and their related indexes, because indexes on partitioned tables cannot be read in order.
+
 ### Partitioning keys, primary keys and unique keys
 
 This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship can be expressed as follows: **Every unique key on the table must use every column in the table's partitioning expression**. This also includes the table's primary key, because it is by definition a unique key.
@@ -1351,7 +1367,7 @@ YEARWEEK()
 
 Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
 
-With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, merge partitions and exchange partitions.
+With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, and merge partitions.
 
 For the unsupported partitioning types, when you create a table in TiDB, the partitioning information is ignored and the table is created in the regular form with a warning reported.
 
@@ -1528,10 +1544,10 @@ In `static` mode, TiDB accesses each partition separately using multiple operato
 
 ```sql
 mysql> create table t1(id int, age int, key(id)) partition by range(id) (
-    ->     partition p0 values less than (100),
-    ->     partition p1 values less than (200),
-    ->     partition p2 values less than (300),
-    ->     partition p3 values less than (400));
+        partition p0 values less than (100),
+        partition p1 values less than (200),
+        partition p2 values less than (300),
+        partition p3 values less than (400));
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> explain select * from t1 where id < 150;
@@ -1581,10 +1597,10 @@ From the above query results, you can see that the `Union` operator in the execu
 
 ```sql
 mysql> create table t1 (id int, age int, key(id)) partition by range(id)
-    -> (partition p0 values less than (100),
-    ->  partition p1 values less than (200),
-    ->  partition p2 values less than (300),
-    ->  partition p3 values less than (400));
+    (partition p0 values less than (100),
+     partition p1 values less than (200),
+     partition p2 values less than (300),
+     partition p3 values less than (400));
 Query OK, 0 rows affected (0,08 sec)
 
 mysql> create table t2 (id int, code int);
@@ -1680,12 +1696,14 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
 
 2. Generate the statements for updating the statistics of all partitioned tables:
 
-    {{< copyable "sql" >}}
-
     ```sql
-    select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
-        from information_schema.PARTITIONS
-        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+    SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
+        FROM information_schema.PARTITIONS
+        WHERE TIDB_PARTITION_ID IS NOT NULL
+        AND TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+    ```
+
+    ```
     +----------------------------------------------------------------------+
     | concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') |
     +----------------------------------------------------------------------+
@@ -1698,12 +1716,11 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
 
 3. Export the batch update statements to a file:
 
-    {{< copyable "sql" >}}
-
-    ```sql
-    mysql --host xxxx --port xxxx -u root -p -e "select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
-        from information_schema.PARTITIONS \
-        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
+    ```shell
+    mysql --host xxxx --port xxxx -u root -p -e "SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
+        FROM information_schema.PARTITIONS \
+        WHERE TIDB_PARTITION_ID IS NOT NULL \
+        AND TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
     ```
 
 4. Execute a batch update:

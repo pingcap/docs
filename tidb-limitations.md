@@ -7,6 +7,10 @@ summary: Learn the usage limitations of TiDB.
 
 This document describes the common usage limitations of TiDB, including the maximum identifier length and the maximum number of supported databases, tables, indexes, partitioned tables, and sequences.
 
+> **Note:**
+>
+> TiDB offers high compatibility with the MySQL protocol and syntax, including many MySQL limitations. For example, a single index can include a maximum of 16 columns. For more information, see [MySQL Compatibility](/mysql-compatibility.md) and the official MySQL documentation.
+
 ## Limitations on identifier length
 
 | Identifier type | Maximum length (number of characters allowed) |
@@ -58,19 +62,7 @@ This document describes the common usage limitations of TiDB, including the maxi
 
 <CustomContent platform="tidb">
 
-You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item.
-
-</CustomContent>
-
-## Limitation on a single column
-
-| Type       | Upper limit (default value)   |
-|:----------|:----------|
-| Size       | Defaults to 6 MiB and can be adjusted to 120 MiB  |
-
-<CustomContent platform="tidb">
-
-You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item.
+You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500) configuration item.
 
 </CustomContent>
 
@@ -78,8 +70,8 @@ You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configurati
 
 | Type       | Upper limit   |
 |:----------|:----------|
-| CHAR       | 256 characters      |
-| BINARY     | 256 characters      |
+| CHAR       | 255 characters      |
+| BINARY     | 255 characters      |
 | VARBINARY  | 65535 characters    |
 | VARCHAR    | 16383 characters    |
 | TEXT       | Defaults to 6 MiB and can be adjusted to 120 MiB                |

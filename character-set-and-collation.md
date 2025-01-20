@@ -9,7 +9,7 @@ This document introduces the character sets and collations supported by TiDB.
 
 ## Concepts
 
-A character set is a set of symbols and encodings. The default character set in TiDB is utf8mb4, which matches the default in MySQL 8.0 and above.
+A character set is a set of symbols and encodings. The default character set in TiDB is `utf8mb4`, which matches the default character set in MySQL 8.0 and later.
 
 A collation is a set of rules for comparing characters in a character set, and the sorting order of characters. For example in a binary collation `A` and `a` do not compare as equal:
 
@@ -110,6 +110,8 @@ SHOW COLLATION;
 > **Warning:**
 >
 > TiDB incorrectly treats latin1 as a subset of utf8. This can lead to unexpected behaviors when you store characters that differ between latin1 and utf8 encodings. It is strongly recommended to the utf8mb4 character set. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+>
+> If the predicates include `LIKE` for string prefixes, such as `LIKE 'prefix%'`, and the target column is set to a non-binary collation (the suffix does not end with `_bin`), the optimizer currently cannot convert this predicate into a range scan. Instead, it performs a full scan. As a result, such SQL queries might lead to unexpected resource consumption.
 
 > **Note:**
 >
@@ -146,8 +148,8 @@ The following demonstrates the default behavior when inserting a 4-byte emoji ch
 
 ```sql
 CREATE TABLE utf8_test (
-    ->  c char(1) NOT NULL
-    -> ) CHARACTER SET utf8;
+     c char(1) NOT NULL
+    ) CHARACTER SET utf8;
 ```
 
 ```sql
@@ -156,8 +158,8 @@ Query OK, 0 rows affected (0.09 sec)
 
 ```sql
 CREATE TABLE utf8m4_test (
-    ->  c char(1) NOT NULL
-    -> ) CHARACTER SET utf8mb4;
+     c char(1) NOT NULL
+    ) CHARACTER SET utf8mb4;
 ```
 
 ```sql

@@ -11,13 +11,25 @@ This document describes the response and status codes of Data Service in TiDB Cl
 
 ## Response
 
-Data Service returns an HTTP response with a JSON body. The response body contains the following fields:
+Data Service returns an HTTP response with a JSON body.
+
+> **Note:**
+>
+> When you call an endpoint with multiple SQL statements, Data Service executes the statements one by one, but it only returns the execution result of the last statement in the HTTP response.
+
+The response body contains the following fields:
 
 - `type`: _string_. The type of this endpoint. The value might be `"sql_endpoint"` or `"chat2data_endpoint"`. Different endpoints return different types of responses.
 - `data`: _object_. The execution results, which include three parts:
 
     - `columns`: _array_. Schema information for the returned fields.
     - `rows`: _array_. The returned results in `key:value` format.
+
+        When **Batch Operation** is enabled for an endpoint and the last SQL statement of the endpoint is an `INSERT`, `UPDATE`, or `DELETE` operation, note the following:
+
+        - The returned results of the endpoint will also include the `"message"` and `"success"` fields for each row to indicate their response and status.
+        - If the primary key column of the target table is configured as `auto_increment`, the returned results of the endpoint will also include the `"auto_increment_id"` field for each row. The value of this field is the auto increment ID for an `INSERT` operation and is `null` for other operations such as `UPDATE` and `DELETE`.
+
     - `result`: _object_. The execution-related information of the SQL statement, including success/failure status, execution time, number of rows returned, and user configuration.
 
 An example response is as follows:
@@ -27,37 +39,34 @@ An example response is as follows:
 
 ```json
 {
-  "type": "sql_endpoint",
-  "data": {
-    "columns": [
-      {
-        "col": "id",
-        "data_type": "BIGINT",
-        "nullable": false
-      },
-      {
-        "col": "type",
-        "data_type": "VARCHAR",
-        "nullable": false
-      }
-    ],
-    "rows": [
-      {
-        "id": "20008295419",
-        "type": "CreateEvent"
-      }
-    ],
-    "result": {
-      "code": 200,
-      "message": "Query OK!",
-      "start_ms": 1678965476709,
-      "end_ms": 1678965476839,
-      "latency": "130ms",
-      "row_count": 1,
-      "row_affect": 0,
-      "limit": 50
+    "type": "sql_endpoint",
+    "data": {
+        "columns": [],
+        "rows": [
+            {
+                "auto_increment_id": "270001",
+                "index": "0",
+                "message": "Row insert successfully",
+                "success": "true"
+            },
+            {
+                "auto_increment_id": "270002",
+                "index": "1",
+                "message": "Row insert successfully",
+                "success": "true"
+            }
+        ],
+        "result": {
+            "code": 200,
+            "message": "Query OK, 2 rows affected (8.359 sec)",
+            "start_ms": 1689593360560,
+            "end_ms": 1689593368919,
+            "latency": "8.359s",
+            "row_count": 2,
+            "row_affect": 2,
+            "limit": 500
+        }
     }
-  }
 }
 ```
 

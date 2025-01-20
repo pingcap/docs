@@ -101,13 +101,13 @@ hide_commit: true
 
 [Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication)
 
+[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#user-roles)
+
 [Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
 
 [Manage organization access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access)
 
 [Manage project access](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
-
-[Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-role-access)
 
 [Configure Security Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
@@ -115,7 +115,7 @@ hide_commit: true
 
 <LearningPath label="Billing" icon="cloud2">
 
-[Pricing](https://en.pingcap.com/tidb-cloud-pricing/)
+[Pricing](https://www.pingcap.com/pricing/)
 
 [Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
 

@@ -24,32 +24,33 @@ In v6.5 LTS, TiDB provides multi-level support for different quality standards o
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
     | Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
-    | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+    | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version (TiDB ends support for it starting from 8.4 DMR)</li></ul> |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
     | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
-    | UOS V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+    | UnionTech OS (UOS) V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
 
     > **Note:**
     >
-    > According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
+    > According to [CentOS Linux EOL](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/), the upstream support for CentOS Linux 7 ends on June 30, 2024. TiDB ends the support for CentOS 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version.
 
 + For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
 
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
-    |   macOS Catalina or later   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
-    |  Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
-    |   Ubuntu LTS 18.04 or later   |  x86_64           |
-    | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
-    |  Debian 9 (Stretch) or later |  x86_64           |
-    |  Fedora 35 or later   |  x86_64           |
-    |  openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
-    |  SUSE Linux Enterprise Server 15  |  x86_64                        |
+    | macOS 12 (Monterey) or later |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
+    | Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
+    | Ubuntu LTS 18.04 or later   |  x86_64           |
+    | CentOS Stream 8 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
+    | Debian 9 (Stretch) or later |  x86_64           |
+    | Fedora 35 or later   |  x86_64           |
+    | openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
+    | SUSE Linux Enterprise Server 15  |  x86_64                        |
 
     > **Note:**
     >
     > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
     > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
+    > - CentOS Stream 8 reaches [End of Builds](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/) on May 31, 2024.
 
 + If you are using the 32-bit version of an operating system listed in the preceding two tables, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
 
@@ -59,7 +60,7 @@ In v6.5 LTS, TiDB provides multi-level support for different quality standards o
 
 |  Libraries required for compiling and building TiDB   |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.18.5 |
+|   Golang  |  1.19 or later |
 |   Rust    |   nightly-2022-07-31 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  13.0 or later  |
@@ -114,7 +115,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 | Component | CPU | Memory | Hard Disk Type | Network | Instance Number (Minimum Requirement) |
 | :-----: | :------: | :------: | :------: | :------: | :-----: |
-|  TiDB  | 16 core+ | 48 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
+| TiDB  | 16 core+ | 48 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
 | PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiKV | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
@@ -134,7 +135,7 @@ Before you deploy TiFlash, note the following items:
 - It is recommended to deploy TiFlash on different nodes from TiKV. If you must deploy TiFlash and TiKV on the same node, increase the number of CPU cores and memory, and try to deploy TiFlash and TiKV on different disks to avoid interfering each other.
 - The total capacity of the TiFlash disks is calculated in this way: `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas`. For example, if the overall planned capacity of TiKV is 1 TB, the number of TiKV replicas is 3, and the number of TiFlash replicas is 2, then the recommended total capacity of TiFlash is `1024 GB / 3 * 2`. You can replicate only the data of some tables. In such case, determine the TiFlash capacity according to the data volume of the tables to be replicated.
 
-Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD disks larger than 1 TB.
+Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe SSD disks larger than 500 GB.
 
 ## Network requirements
 
@@ -177,7 +178,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 
 | Component | Disk space requirement | Healthy disk usage |
 | :-- | :-- | :-- |
-| TiDB | At least 30 GB for the log disk | Lower than 90% |
+| TiDB | <ul><li>At least 30 GB for the log disk</li> <li> Starting from v6.5.0, `Fast Online DDL` (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see [Set a temporary space for a TiDB instance](/check-before-deployment.md#set-temporary-spaces-for-tidb-instances-recommended) </li></ul> | Lower than 90% |
 | PD | At least 20 GB for the data disk and for the log disk, respectively | Lower than 90% |
 | TiKV | At least 100 GB for the data disk and for the log disk, respectively | Lower than 80% |
 | TiFlash | At least 100 GB for the data disk and at least 30 GB for the log disk, respectively | Lower than 80% |

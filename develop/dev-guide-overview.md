@@ -67,7 +67,7 @@ Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the O
 - [Read Data](/develop/dev-guide-get-data-from-single-table.md)
 - [Transaction](/develop/dev-guide-transaction-overview.md)
 - [Optimize](/develop/dev-guide-optimize-sql-overview.md)
-- [Example Applications](/develop/dev-guide-sample-application-spring-boot.md)
+- [Example Applications](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </CustomContent>
 
@@ -80,6 +80,20 @@ Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the O
 - [Read Data](/develop/dev-guide-get-data-from-single-table.md)
 - [Transaction](/develop/dev-guide-transaction-overview.md)
 - [Optimize](/develop/dev-guide-optimize-sql-overview.md)
-- [Example Applications](/develop/dev-guide-sample-application-spring-boot.md)
+- [Example Applications](/develop/dev-guide-sample-application-java-spring-boot.md)
+
+</CustomContent>
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
 
 </CustomContent>

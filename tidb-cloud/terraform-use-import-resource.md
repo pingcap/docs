@@ -9,14 +9,14 @@ You can learn how to import data to a TiDB Cloud cluster with the `tidbcloud_imp
 
 The features of the `tidbcloud_import` resource include the following:
 
-- Create import tasks for Serverless Tier and Dedicated Tier clusters.
+- Create import tasks for TiDB Serverless and TiDB Dedicated clusters.
 - Import data either from local disks or from Amazon S3 buckets.
 - Cancel ongoing import tasks.
 
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- [Create a Serverless Tier or Dedicated Tier cluster](/tidb-cloud/create-tidb-cluster.md).
+- [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Create and run an import task
 
@@ -26,7 +26,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
 
 > **Note:**
 >
-> Importing local files is supported only for Serverless Tier clusters, not for Dedicated Tier clusters.
+> Importing local files is supported only for TiDB Serverless clusters, not for TiDB Dedicated clusters.
 
 1. Create a CSV file for import. For example:
 
@@ -51,7 +51,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
       public_key = "your_public_key"
       private_key = "your_private_key"
     }
-   
+
     resource "tidbcloud_import" "example_local" {
       project_id  = "your_project_id"
       cluster_id  = "your_cluster_id"
@@ -76,13 +76,13 @@ You can manage either a local import task or an Amazon S3 import task using the 
    $ terraform apply
    ...
    Plan: 1 to add, 0 to change, 0 to destroy.
-   
+
    Do you want to perform these actions?
    Terraform will perform the actions described above.
    Only 'yes' will be accepted to approve.
-   
+
    Enter a value: yes
-   
+
    tidbcloud_import.example_local: Creating...
    tidbcloud_import.example_local: Creation complete after 6s [id=781074]
    ```
@@ -201,12 +201,12 @@ You can manage either a local import task or an Amazon S3 import task using the 
        }
      }
    }
-   
+
    provider "tidbcloud" {
      public_key  = "your_public_key"
      private_key = "your_private_key"
    }
-   
+
    resource "tidbcloud_import" "example_s3_csv" {
      project_id   = "your_project_id"
      cluster_id   = "your_cluster_id"
@@ -215,7 +215,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
      aws_role_arn = "your_arn"
      source_url   = "your_url"
    }
-   
+
    resource "tidbcloud_import" "example_s3_parquet" {
      project_id   = "your_project_id"
      cluster_id   = "your_cluster_id"
@@ -225,26 +225,26 @@ You can manage either a local import task or an Amazon S3 import task using the 
      source_url   = "your_url"
    }
    ```
-   
+
 2. Run the `terraform apply` command to create an import task, and then type `yes` to confirm the creation and start the import:
 
    ```
    $ terraform apply
    ...
    Plan: 2 to add, 0 to change, 0 to destroy.
-   
+
    Do you want to perform these actions?
    Terraform will perform the actions described above.
    Only 'yes' will be accepted to approve.
-   
+
    Enter a value: yes
-   
+
    tidbcloud_import.example_s3_csv: Creating...
    tidbcloud_import.example_s3_csv: Creation complete after 3s [id=781075]
    tidbcloud_import.example_s3_parquet: Creating...
    tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
    ```
-   
+
 3. Use `terraform refresh` and `terraform state show tidbcloud_import.${resource-name}` to update and check the status of the import task.
 
 ## Update an import task
@@ -253,7 +253,7 @@ Import tasks cannot be updated.
 
 ## Delete an import task
 
-For Terraform, deleting an import task means canceling the corresponding import resource. 
+For Terraform, deleting an import task means canceling the corresponding import resource.
 
 You cannot cancel a `COMPLETED` import task. Otherwise, you will get a `Delete Error` as in the following example:
 
@@ -271,7 +271,7 @@ Do you really want to destroy all resources?
 tidbcloud_import.example_local: Destroying... [id=781074]
 ╷
 │ Error: Delete Error
-│ 
+│
 │ Unable to call CancelImport, got error: [DELETE /api/internal/projects/{project_id}/clusters/{cluster_id}/imports/{id}][500] CancelImport default  &{Code:59900104 Details:[] Message:failed to cancel
 │ import}
 ╵
@@ -289,11 +289,11 @@ Do you really want to destroy all resources?
   There is no undo. Only 'yes' will be accepted to confirm.
 
   Enter a value: yes
-  
+
 tidbcloud_import.example_local: Destroying... [id=781074]
 tidbcloud_import.example_local: Destruction complete after 0s
 
-Destroy complete! Resources: 1 destroyed.  
+Destroy complete! Resources: 1 destroyed.
 ```
 
 ## Configurations

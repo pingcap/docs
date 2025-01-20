@@ -39,7 +39,7 @@ max-backups = 14
 ### tidb-lightning task configuration
 
 [lightning]
-# Checks whether the cluster satisfies the minimum requirement before starting.
+# Checks whether the cluster satisfies the minimum requirement before starting the task, and check whether TiKV has more than 10% free space left during running time.
 #check-requirements = true
 
 # The maximum number of engines to be opened concurrently.
@@ -266,26 +266,30 @@ pd-addr = "172.16.31.4:2379"
 # This setting controls the log level of the TiDB library.
 log-level = "error"
 
-# Sets the TiDB session variable to speed up the Checksum and Analyze operations.
-# See https://pingcap.com/docs/dev/reference/performance/statistics/#control-analyze-concurrency
+# Sets the TiDB session variable to speed up the Checksum and Analyze operations. Note that if checksum-via-sql is set to "true", TiDB Lightning will execute the ADMIN CHECKSUM TABLE <table> SQL statement to perform the Checksum operation on TiDB. In this case, the following parameters `distsql-scan-concurrency` and `checksum-table-concurrency` will not take effect.
+# See https://docs.pingcap.com/tidb/stable/statistics#control-analyze-concurrency
 # for the meaning of each setting
 build-stats-concurrency = 20
 distsql-scan-concurrency = 15
 index-serial-scan-concurrency = 20
 checksum-table-concurrency = 2
 
+# Sets other TiDB session variables
+# [tidb.session-vars]
+# tidb_enable_clustered_index = "OFF"
+
 # The default SQL mode used to parse and execute the SQL statements.
-sql-mode = "ONLY_FULL_GROUP_BY,NO_ENGINE_SUBSTITUTION"
+sql-mode = "ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"
 # Sets maximum packet size allowed for SQL connections.
 # Set this to 0 to automatically fetch the `max_allowed_packet` variable from server on every connection.
 max-allowed-packet = 67_108_864
 
 # Whether to use TLS for SQL connections. Valid values are:
-#  * ""            - force TLS (same as "cluster") if [tidb.security] section is populated, otherwise same as "false"
-#  * "false"       - disable TLS
-#  * "cluster"     - force TLS and verify the server's certificate with the CA specified in the [tidb.security] section
-#  * "skip-verify" - force TLS but do not verify the server's certificate (insecure!)
-#  * "preferred"   - same as "skip-verify", but if the server does not support TLS, fallback to unencrypted connection
+#  - "": if configuration items in the [tidb.security] section are configured, TiDB Lightning requires TLS for SQL connections (same behavior as "cluster"). Otherwise, it uses an unencrypted connection.
+#  - "false": same behavior as "".
+#  - "cluster": requires TLS and verifies the server's certificate with the CA specified in the [tidb.security] section.
+#  - "skip-verify": requires TLS but does not verify the server's certificate (insecure). If the server does not support TLS, the connection falls back to an unencrypted state.
+#  - "preferred": same behavior as "skip-verify".
 # tls = ""
 
 # Specifies certificates and keys for TLS-enabled MySQL connections.
@@ -298,11 +302,11 @@ max-allowed-packet = 67_108_864
 # Private key of this service. Default to copy of `security.key-path`
 # key-path = "/path/to/lightning.key"
 
-# In the physical import mode, when data importing is complete, tidb-lightning can
+# In the physical import mode, when data importing is complete, TiDB Lightning can
 # automatically perform the Checksum and Analyze operations. It is recommended
 # to leave these as true in the production environment.
 # The execution order: Checksum -> Analyze.
-# In the logical import mode, Checksum and Analyze is not needed, and they are always
+# Note that in the logical import mode, Checksum and Analyze is not needed, and they are always
 # skipped in the actual operation.
 [post-restore]
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
@@ -311,22 +315,19 @@ max-allowed-packet = 67_108_864
 # - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a WARN log but ignore any error.
 # - "off": Do not perform checksum.
 # Note that since v4.0.8, the default value has changed from "true" to "required".
-# For backward compatibility, bool values "true" and "false" are also allowed for this field.
+# Note:
+# 1. Checksum failure usually means import exception (data loss or inconsistency). It is recommended to always enable checksum.
+# 2. For backward compatibility, bool values "true" and "false" are also allowed for this field.
 # "true" is equivalent to "required" and "false" is equivalent to "off".
 checksum = "required"
+# Specifies whether the ADMIN CHECKSUM TABLE <table> operation is executed via TiDB.
+# The default value is "false", which means that the ADMIN CHECKSUM TABLE <table> command is sent to TiKV for execution via TiDB Lightning.
+# It is recommended that you set this value to "true" to make it easier to locate the problem if checksum fails.
+# Meanwhile, if you want to adjust concurrency when this value is "true", you need to set the `tidb_checksum_table_concurrency` variable in TiDB (https://docs.pingcap.com/tidb/stable/system-variables#tidb_checksum_table_concurrency).
+checksum-via-sql = "false"
 # Specifies whether to perform `ANALYZE TABLE <table>` for each table after checksum is done.
 # Options available for this field are the same as `checksum`. However, the default value for this field is "optional".
 analyze = "optional"
-
-# If the value is set to `true`, a level-1 compaction is performed
-# every time a table is imported.
-# The default value is `false`.
-level-1-compact = false
-
-# If the value is set to `true`, a full compaction on the whole
-# TiKV cluster is performed at the end of the import.
-# The default value is `false`.
-compact = false
 
 # Configures the background periodic actions.
 # Supported units: h (hour), m (minute), s (second).
@@ -365,7 +366,7 @@ log-progress = "5m"
 | --enable-checkpoint *bool* | Whether to enable checkpoints (default = true) | `checkpoint.enable` |
 | --analyze *level* | Analyze tables after importing. Available values are "required", "optional" (default value), and "off" | `post-restore.analyze` |
 | --checksum *level* | Compare checksum after importing. Available values are "required" (default value), "optional", and "off" | `post-restore.checksum` |
-| --check-requirements *bool* | Check cluster version compatibility before starting (default = true) | `lightning.check-requirements` |
+| --check-requirements *bool* | Check cluster version compatibility before starting the task, and check whether TiKV has more than 10% free space left during running time. (default = true) | `lightning.check-requirements` |
 | --ca *file* | CA certificate path for TLS connection | `security.ca-path` |
 | --cert *file* | Certificate path for TLS connection | `security.cert-path` |
 | --key *file* | Private key path for TLS connection | `security.key-path` |

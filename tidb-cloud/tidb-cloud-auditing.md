@@ -9,7 +9,7 @@ TiDB Cloud provides you with a database audit logging feature to record a histor
 
 > **Note:**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Chat with Us**. Then, fill in "Apply for database audit logging" in the **Description** field and click **Send**.
+> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for database audit logging" in the **Description** field and click **Send**.
 
 To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
 
@@ -21,8 +21,8 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 ## Prerequisites
 
-- You are using a TiDB Cloud Dedicated Tier cluster. Audit logging is not available for TiDB Cloud Serverless Tier clusters.
-- You are the audit administrator of your organization in TiDB Cloud. Otherwise, you cannot see the audit-related options in the TiDB Cloud console. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
+- You are using a TiDB Dedicated cluster. Audit logging is not available for TiDB Serverless clusters.
+- You are in the `Organization Owner` or `Project Owner` role of your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
 ## Enable audit logging for AWS or GCP
 
@@ -209,7 +209,7 @@ For each database event record in audit logs, TiDB provides the following fields
 | 6 | EVENT_CLASS | VARCHAR | 15 | Event type     |
 | 7 | EVENT_SUBCLASS     | VARCHAR | 15 | Event subtype |
 | 8 | STATUS_CODE | INTEGER |  | Response status of the statement   |
-| 9 | COST_TIME | INTEGER |  | Time consumed by the statement    |
+| 9 | COST_TIME | FLOAT |  | Time consumed by the statement    |
 | 10 | HOST | VARCHAR | 16 | Server IP    |
 | 11 | CLIENT_IP         | VARCHAR | 16 | Client IP   |
 | 12 | USER | VARCHAR | 17 | Login username    |

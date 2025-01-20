@@ -50,3 +50,17 @@ After [tuning SQL performance](#sql-performance-tuning), if your application sti
 * [SQL Performance Tuning](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
 
 </CustomContent>
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask questions on [TiDB Community](https://ask.pingcap.com/), or [create a support ticket](https://support.pingcap.com/).
+
+</CustomContent>

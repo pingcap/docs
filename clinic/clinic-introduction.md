@@ -1,6 +1,6 @@
 ---
 title: PingCAP Clinic Overview
-summary: Learn about the PingCAP Clinic Diagnostic Service (PingCAP Clinic), including tool components, user scenarios, and implementation principles.
+summary: PingCAP Clinic is a diagnostic service for TiDB clusters deployed using TiUP or TiDB Operator. It helps troubleshoot cluster problems remotely, ensures stable operation, and provides quick cluster status checks. The service includes Diag client for data collection and Clinic Server for online diagnostic reports. Users can troubleshoot problems remotely and quickly check cluster status. Diag collects diagnostic data through various methods, and Clinic Server has limitations on clusters, storage, and data size. The service is free until April 15, 2025. Next steps include using PingCAP Clinic in different environments.
 ---
 
 # PingCAP Clinic Overview
@@ -61,7 +61,7 @@ First, Diag gets cluster topology information from the deployment tool TiUP (tiu
 
 > **Note:**
 >
-> - Clinic Server is free from July 15, 2022 to July 14, 2023. You will be notified through email before July 14, 2023 if the service starts charging fee afterwards.
+> - Clinic Server is free from July 15, 2022 to April 15, 2025. You will be notified through email before April 15, 2025 if the service starts charging fee afterwards.
 > - If you want to adjust the usage limitations, [get support](/support.md) from PingCAP.
 
 | Service Type| Limitation |
@@ -74,7 +74,7 @@ First, Diag gets cluster topology information from the deployment tool TiUP (tiu
 
 ## Next step
 
-- Use PingCAP Clinic in an on-premise environment
+- Use PingCAP Clinic in a self-hosted environment
     - [Quick Start with PingCAP Clinic](/clinic/quick-start-with-clinic.md)
     - [Troubleshoot Clusters using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)

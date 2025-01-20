@@ -54,7 +54,7 @@ The upstream database (MySQL/MariaDB) user must have the following privileges:
 If you need to migrate the data from `db1` to TiDB, execute the following `GRANT` statement:
 
 ```sql
-GRANT RELOAD,REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_wildcard_of_host'
+GRANT RELOAD,REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_wildcard_of_host';
 GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
@@ -79,6 +79,7 @@ Execute the following `GRANT` statement for the databases or tables that you nee
 
 ```sql
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX ON db.table TO 'your_user'@'your_wildcard_of_host';
+GRANT ALL ON dm_meta.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
 ### Minimal privilege required by each processing unit

@@ -1,6 +1,7 @@
 ---
 title: Migrate Data from CSV Files to TiDB
 summary: Learn how to migrate data from CSV files to TiDB.
+aliases: ['/tidb/stable/migrate-from-csv-using-tidb-lightning']
 ---
 
 # Migrate Data from CSV Files to TiDB
@@ -12,7 +13,7 @@ TiDB Lightning can read data from CSV files and other delimiter formats, such as
 ## Prerequisites
 
 - [Install TiDB Lightning](/migration-tools.md).
-- [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
+- [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database).
 
 ## Step 1. Prepare the CSV files
 
@@ -20,6 +21,8 @@ Put all the CSV files in the same directory. If you need TiDB Lightning to recog
 
 - If a CSV file contains the data for an entire table, name the file `${db_name}.${table_name}.csv`.
 - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.003.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
+
+TiDB Lightning recursively searches for all `.csv` files in this directory and its subdirectories.
 
 ## Step 2. Create the target table schema
 
@@ -38,8 +41,6 @@ Because CSV files do not contain schema information, before importing data from 
 
 Create a `tidb-lightning.toml` file with the following content:
 
-{{< copyable "shell-regular" >}}
-
 ```toml
 [lightning]
 # Log
@@ -49,6 +50,7 @@ file = "tidb-lightning.log"
 [tikv-importer]
 # "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
+# For more information on import mode, refer to <https://docs.pingcap.com/tidb/stable/tidb-lightning-overview#tidb-lightning-architecture>
 backend = "local"
 # Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
@@ -63,6 +65,8 @@ data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://m
 separator = ','
 # Delimiter. Can be zero or multiple characters.
 delimiter = '"'
+# Line terminator. By default, \r, \n, and \r\n are all treated as line terminators.
+# terminator = "\r\n"
 # Configures whether the CSV file has a table header.
 # If this item is set to true, TiDB Lightning uses the first line of the CSV file to parse the corresponding relationship of fields.
 header = true
@@ -103,6 +107,8 @@ In a strict-format CSV file, each field only takes up one line. It must meet the
 
 - The delimiter is empty.
 - Each field does not contain CR (`\r`) or LF (`\n`).
+
+You need to explicitly specify the line terminator `terminator` for a `strict-format` CSV file.
 
 If your CSV file meets the above requirements, you can speed up the import by enabling the `strict-format` mode as follows:
 
@@ -181,4 +187,4 @@ trim-last-separator = true
 
 ## What's next
 
-- [CSV Support and Restrictions](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md).
+- [CSV Support and Restrictions](/tidb-lightning/tidb-lightning-data-source.md#csv).

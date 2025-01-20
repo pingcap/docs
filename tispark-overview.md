@@ -97,14 +97,19 @@ You can choose TiSpark version according to your TiDB and Spark version.
 | 2.5.x            | 5.x, 4.x               | 3.0.x, 3.1.x   | 2.12          |
 | 3.0.x            | 5.x, 4.x               | 3.0.x, 3.1.x, 3.2.x|2.12|
 | 3.1.x            | 6.x, 5.x, 4.x          | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
+| 3.2.x            | 6.x, 5.x, 4.x          | 3.0.x, 3.1.x, 3.2.x, 3.3.x|2.12|
 
-TiSpark 2.4.4, 2.5.2, 3.0.2 and 3.1.1 are the latest stable versions and are highly recommended.
+TiSpark 2.4.4, 2.5.2, 3.0.2, 3.1.1, and 3.2.3 are the latest stable versions and are highly recommended.
+
+> **Note:**
+>
+> TiSpark does not guarantee compatibility with TiDB v7.0.0 and later versions.
 
 ### Get TiSpark jar
 
 You can get the TiSpark jar using one of the following methods:
 
-- Get from [maven central](https://search.maven.org/) and search with GroupId [![Maven Search](https://img.shields.io/badge/com.pingcap/tispark-green.svg)](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
+- Get from [maven central](https://search.maven.org/) and search for [`pingcap`](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)
 - Get from [TiSpark releases](https://github.com/pingcap/tispark/releases)
 - Build from source with the steps below
 
@@ -129,11 +134,11 @@ mvn clean install -Dmaven.test.skip=true -Pspark3.2.1
 
 The Artifact ID of TiSpark varies with TiSpark versions.
 
-| TiSpark version               | Artifact ID                                        |
-|-------------------------------| -------------------------------------------------- |
+| TiSpark version                | Artifact ID                                        |
+|--------------------------------| -------------------------------------------------- |
 | 2.4.x-\${scala_version}, 2.5.0 | tispark-assembly                                   |
-| 2.5.1                         | tispark-assembly-\${spark_version}                  |
-| 3.0.x, 3.1.x                  | tispark-assembly-\${spark_version}-\${scala_version} |
+| 2.5.1                          | tispark-assembly-\${spark_version}                  |
+| 3.0.x, 3.1.x, 3.2.x            | tispark-assembly-\${spark_version}-\${scala_version} |
 
 ## Getting started
 
@@ -200,7 +205,7 @@ customerDF.write
 
 See [Data Source API User Guide](https://github.com/pingcap/tispark/blob/master/docs/features/datasource_api_userguide.md) for more details.
 
-You can also write with Spark SQL since TiSpark 3.1. See [insert SQL](https://github.com/pingcap/tispark/blob/master/docs/features/insert_sql_userguide.md) for more details.
+Starting from TiSpark 3.1, you can write data to TiKV using Spark SQL. For more information, see [insert SQL](https://github.com/pingcap/tispark/blob/master/docs/features/insert_sql_userguide.md).
 
 ### Write data using JDBC DataSource
 
@@ -340,7 +345,7 @@ spark.tispark.jdbc.client_cert_password                        jdbc_clientstore_
 ```
 
 - For details about how to open TiDB TLS, see [Enable TLS between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md).
-- For details about how to generate a JAVA key store, see [Connecting Securely Using SSL](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-using-ssl.html).
+- For details about how to generate a JAVA key store, see [Connecting Securely Using SSL](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-using-ssl.html).
 
 ### Log4j configuration
 

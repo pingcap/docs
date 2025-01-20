@@ -4,8 +4,20 @@ title: Release Notes
 
 # TiDB Release Notes
 
+<EmailSubscriptionWrapper />
+
 ## 6.5
 
+- [6.5.11](/releases/release-6.5.11.md): 2024-09-20
+- [6.5.10](/releases/release-6.5.10.md): 2024-06-20
+- [6.5.9](/releases/release-6.5.9.md): 2024-04-12
+- [6.5.8](/releases/release-6.5.8.md): 2024-02-02
+- [6.5.7](/releases/release-6.5.7.md): 2024-01-08
+- [6.5.6](/releases/release-6.5.6.md): 2023-12-07
+- [6.5.5](/releases/release-6.5.5.md): 2023-09-21
+- [6.5.4](/releases/release-6.5.4.md): 2023-08-28
+- [6.5.3](/releases/release-6.5.3.md): 2023-06-14
+- [6.5.2](/releases/release-6.5.2.md): 2023-04-21
 - [6.5.1](/releases/release-6.5.1.md): 2023-03-10
 - [6.5.0](/releases/release-6.5.0.md): 2022-12-29
 
@@ -23,6 +35,7 @@ title: Release Notes
 
 ## 6.1
 
+- [6.1.7](/releases/release-6.1.7.md): 2023-07-12
 - [6.1.6](/releases/release-6.1.6.md): 2023-04-12
 - [6.1.5](/releases/release-6.1.5.md): 2023-02-28
 - [6.1.4](/releases/release-6.1.4.md): 2023-02-08
