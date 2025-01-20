@@ -449,9 +449,13 @@ Other requirements for the target machine include:
 
 9. Access the cluster endpoints:
 
-    - Connect to the TiDB database using MySQL client. The password is empty:
+    - Install the MySQL client. If it is already installed, skip this step.
 
-        {{< copyable "shell-regular" >}}
+        ```shell
+        yum -y install mysql
+        ```
+
+    - Connect to the TiDB database using the MySQL client. The password is empty:
 
         ```shell
         mysql -h 10.0.1.1 -P 4000 -u root
