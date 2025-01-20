@@ -23,6 +23,10 @@ TiCDC is a tool for replicating the incremental data of TiDB, introduced in TiDB
 | CDC | 3 | 8 VCore 16GB * 1 | 10.0.1.11 <br/> 10.0.1.12 <br/> 10.0.1.13 | Default port <br/> Global directory configuration |
 | Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.11 | Default port <br/> Global directory configuration |
 
+> **Note:**
+>
+> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+
 ### Topology templates
 
 - [The simple template for the TiCDC topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
