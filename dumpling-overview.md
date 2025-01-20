@@ -421,7 +421,7 @@ The following fields are available for the template:
 * `.Table`: the table name or the object name
 * `.Index`: the 0-based sequence number of the file when a table is split into multiple files, indicating which part is being dumped
 
-Database and table names might contain special characters, such as /, that are not allowed in file systems. To handle this, Dumpling provides the `fn` function to percent-encode these special characters:
+Database and table names might contain special characters (such as `/`) that are not allowed in file systems. To handle this issue, Dumpling provides the `fn` function to percent-encode these special characters:
 
 * U+0000 to U+001F (control characters)
 * `/`, `\`, `<`, `>`, `:`, `"`, `*`, `?` (invalid Windows path characters)
