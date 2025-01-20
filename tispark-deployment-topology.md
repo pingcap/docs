@@ -25,6 +25,10 @@ For more information about the TiSpark architecture and how to use it, see [TiSp
 | TiSpark | 3 | 8 VCore 16GB * 1 | 10.0.1.21 (master) <br/> 10.0.1.22 (worker) <br/> 10.0.1.23 (worker) | Default port <br/> Global directory configuration |
 | Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.11 | Default port <br/> Global directory configuration |
 
+> **Note:**
+>
+> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+
 ## Topology templates
 
 - [Simple TiSpark topology template](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml)
