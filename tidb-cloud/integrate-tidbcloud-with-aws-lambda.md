@@ -52,7 +52,7 @@ Before getting started, ensure that you have the following:
 
 ### Modify and rebuild the Lambda function code if necessary
 
-If you use `us-east-1` as your cluster region, skip this section and go to [Set up the project using CloudFormation](#set-up-the-project-using-cloudformation).
+If you use `us-east-1` as your cluster region, skip this section and go to [Set up the project using AWS CloudFormation](#set-up-the-project-using-aws-cloudformation).
 
 If you use a different AWS region other than `us-east-1` to create the AWS resources, you need to modify the Lambda function code, rebuild and upload the code bundle to your own S3 bucket.
 
@@ -104,18 +104,18 @@ To rebuild and upload the code bundle to your own S3 bucket, do the following:
     3. Upload the `index.zip` file to the bucket.
     4. Note down the S3 bucket name and region for later use.
 
-## Set up the project using CloudFormation
+## Step 1: Set up the project using AWS CloudFormation
 
-To set up the bookshop project using CloudFormation, do the following:
+To set up the bookshop project using AWS CloudFormation, do the following:
 
-1. Navigate to the AWS Management Console and access the [CloudFormation service](https://console.aws.amazon.com/cloudformation).
+1. Navigate to the AWS Management Console and access the [AWS CloudFormation service](https://console.aws.amazon.com/cloudformation).
 2. Click **Create Stack** > **With new resources (standard)**.
 3. On the **Create Stack** settings page, complete the stack creation process.
 
     1. In the **Prerequisite** panel, select **Template is ready**.
     2. Upload the template file (either YAML or JSON), and click **Next**.
 
-        If you do not have the file yet, download it from [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest). The file contains the CloudFormation template that creates the necessary resources for the project.
+        If you do not have the file yet, download it from [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest). The file contains the AWS CloudFormation template that creates the necessary resources for the project.
 
         ![aws-lambda-cf-create-stack](/media/develop/aws-lambda-cf-create-stack.png)
 
@@ -140,7 +140,7 @@ To set up the bookshop project using CloudFormation, do the following:
             2. In the stack details fields, specify the S3 bucket name and region in the `S3Bucket` and `S3Key` parameters according to your own configuration.
             3. Fill in other fields as in the preceding screenshot.
 
-## Use the project
+## Step 2: Use the project
 
 After the stack has been created, you can use the project as follows:
 
@@ -188,8 +188,8 @@ After the stack has been created, you can use the project as follows:
         curl -X DELETE https://<your-api-endpoint>/book/<book-id>
         ```
 
-## Clean up resources
+## Step 3: Clean up resources
 
 To avoid unnecessary charges, you can clean up any resources that have been created.
 
-To do so, access the [AWS Management Console](https://console.aws.amazon.com/cloudformation) and delete the CloudFormation stack.
+To do so, access the [AWS Management Console](https://console.aws.amazon.com/cloudformation) and delete the AWS CloudFormation stack.
