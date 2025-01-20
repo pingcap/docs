@@ -10,7 +10,7 @@ For a formal production environment, before the environment goes live, you need 
 
 ### Operating system version
 
-Check the operating system distribution and version of the deployed machines. Currently, only CentOS 7 is supported for deployment. More system versions may be supported in later releases for compatibility improvement.
+Check the operating system distribution and version of the deployed machines. For a list of supported versions, see [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements).
 
 ### CPU EPOLLEXCLUSIVE
 
@@ -18,7 +18,7 @@ Check whether the CPU of the target machine supports EPOLLEXCLUSIVE.
 
 ### numactl
 
-Check whether numactl is installed on the target machine. If tied cores are configured on the target machine, you must install numactl.
+Check whether `numactl` is installed on the target machine. If tied cores are configured on the target machine, you must install `numactl`.
 
 ### System time
 
@@ -65,7 +65,7 @@ Check the limit values in the `/etc/security/limits.conf` file:
 
 ### SELinux
 
-Check whether SELinux is enabled. It is recommended to disable SELinux.
+Check whether SELinux is enabled. It is required to disable SELinux.
 
 ### Firewall
 
