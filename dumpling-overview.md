@@ -414,13 +414,13 @@ SET GLOBAL tidb_gc_life_time = '10m';
 
 ## Output filename template
 
-The `--output-filename-template` argument defines the naming convention for all files, excluding the file extensions. It accepts strings in the [Go `text/template` syntax](https://golang.org/pkg/text/template/).
+The `--output-filename-template` argument defines the naming convention for output files, excluding the file extensions. It accepts strings in the [Go `text/template` syntax](https://golang.org/pkg/text/template/).
 
 The following fields are available for the template:
 
 * `.DB`: the database name
 * `.Table`: the table name or the object name
-* `.Index`: the 0-based sequence number of the file when a table is split into multiple files, indicating which part is being dumped
+* `.Index`: the 0-based sequence number of the file when a table is split into multiple files, indicating which part is being dumped. For example, `{{printf "%09d" .Index}}` means formatting `.Index` as a 9-digit number with leading zeros.
 
 Database and table names might contain special characters (such as `/`) that are not allowed in file systems. To handle this issue, Dumpling provides the `fn` function to percent-encode these special characters:
 
@@ -429,9 +429,9 @@ Database and table names might contain special characters (such as `/`) that are
 * `.` (database or table name separator)
 * `-`, if used as part of `-schema`
 
-For example, using `--output-filename-template '{{fn .Table}}.{{printf "%09d" .Index}}'`, Dumpling will write the table `"db"."tbl:normal"` into files named `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.
+For example, using `--output-filename-template '{{fn .Table}}.{{printf "%09d" .Index}}'`, Dumpling will write the table `db.tbl:normal` into files named `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.
 
-In addition to data files, you can define named templates to replace the file name of the schema files. The following table shows the default configurations.
+In addition to output data files, you can define `--output-filename-template` to replace file names of the schema files. The following table shows the default configurations.
 
 | Name | Content |
 |------|---------|
@@ -445,4 +445,4 @@ In addition to data files, you can define named templates to replace the file na
 | trigger | `{{fn .DB}}.{{fn .Table}}-schema-triggers` |
 | view | `{{fn .DB}}.{{fn .Table}}-schema-view` |
 
-For example, using `--output-filename-template '{{define "table"}}{{fn .Table}}.$schema{{end}}{{define "data"}}{{fn .Table}}.{{printf "%09d" .Index}}{{end}}'`, Dumpling will write the schema of the table `"db"."tbl:normal"` into a file named `tbl%3Anormal.$schema.sql`, and the data into files `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.
+For example, using `--output-filename-template '{{define "table"}}{{fn .Table}}.$schema{{end}}{{define "data"}}{{fn .Table}}.{{printf "%09d" .Index}}{{end}}'`, Dumpling will write the schema of the table `db.tbl:normal` into a file named `tbl%3Anormal.$schema.sql`, and write the data into files `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.
