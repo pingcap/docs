@@ -109,7 +109,7 @@ To rebuild and upload the code bundle to your own S3 bucket, do the following:
 To set up the bookshop project using CloudFormation, do the following:
 
 1. Navigate to the AWS Management Console and access the [CloudFormation service](https://console.aws.amazon.com/cloudformation).
-2. Click **Create Stack**.
+2. Click **Create Stack** > **With new resources (standard)**.
 3. On the **Create Stack** settings page, complete the stack creation process.
 
     1. In the **Prerequisite** panel, select **Template is ready**.
@@ -121,9 +121,18 @@ To set up the bookshop project using CloudFormation, do the following:
 
     3. Specify stack details.
 
-        - If you use `us-east-1` as your cluster region, fill out the fields as in the following image:
+        - If you use `us-east-1` as your cluster region, fill in the fields as in the following screenshot:
 
             ![aws-lambda-cf-stack-details](/media/develop/aws-lambda-cf-stack-config.png)
+
+            - **Stack name**: enter the stack name.
+            - **S3Bucket**: enter the S3 bucket where you store the zip file.
+            - **S3Key**: enter the S3 key.
+            - **TiDBDatabase**: enter the TiDB Cloud cluster name.
+            - **TiDBHost**: enter the host URL for TiDB Cloud database access. Enter `localhost`.
+            - **TiDBPassword**: enter the password for TiDB Cloud database access.
+            - **TiDBPort**: enter the port for TiDB Cloud database access.
+            - **TiDBUser**: enter the user name for TiDB Cloud database access.
 
         - If you use a different AWS region other than `us-east-1`, follow these steps:
 
