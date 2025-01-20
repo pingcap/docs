@@ -34,7 +34,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click **Upload a local file** to select and upload the target local file. Note that you can upload only one CSV file of less than 250 MiB for one task. If your local file is larger than 250 MiB, see [How to import a local file larger than 250 MiB?](#how-to-import-a-local-file-larger-than-250-mib).
 
-3. In the **Destination** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must contain characters in Unicode BMP, excluding \u0000 and whitespace characters, and at most contain 64 characters.. Click **Define Table**, the **Table Definition** section is displayed.
+3. In the **Destination** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must contain characters in Unicode BMP, excluding \u0000 and whitespace characters, and at most contain 64 characters. Click **Define Table**, the **Table Definition** section is displayed.
 
 4. Check the table.
 
