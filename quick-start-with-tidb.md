@@ -100,11 +100,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup playground v8.5.1 --db 2 --pd 3 --kv 3
         ```
 
-<<<<<<< HEAD
-        The command downloads a version cluster to the local machine and starts it, such as v8.5.1. To view the latest version, run `tiup list tidb`.
-=======
         To view all available versions, run `tiup list tidb`.
->>>>>>> cdc3caa800 (Quick start updates (#19960))
 
 4. Start a new session to access the TiDB cluster endpoints:
 
@@ -216,11 +212,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         tiup playground v8.5.1 --db 2 --pd 3 --kv 3
         ```
 
-<<<<<<< HEAD
-        The command downloads a version cluster to the local machine and starts it, such as v8.5.1. To view the latest version, run `tiup list tidb`.
-=======
         To view all available versions, run `tiup list tidb`.
->>>>>>> cdc3caa800 (Quick start updates (#19960))
 
 4. Start a new session to access the TiDB cluster endpoints:
 
