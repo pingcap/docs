@@ -34,7 +34,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click **Upload a local file** to select and upload the target local file. Note that you can upload only one CSV file of less than 250 MiB for one task. If your local file is larger than 250 MiB, see [How to import a local file larger than 250 MiB?](#how-to-import-a-local-file-larger-than-250-mib).
 
-3. In the **Destination** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. Click **Define Table**, the **Table Definition** section is displayed.
+3. In the **Destination** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must contain characters in Unicode BMP, excluding \u0000 and whitespace characters, and at most contain 64 characters.. Click **Define Table**, the **Table Definition** section is displayed.
 
 4. Check the table.
 
@@ -42,7 +42,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If you import data into an existing table in TiDB Cloud, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
 
-    - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be **int** (integer).
+    - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be integer.
 
 5. Configure the column names and data types.
 
@@ -105,6 +105,8 @@ If a column name is a reserved [keyword](/keywords.md) in TiDB, when you query t
 ### How to import a local file larger than 250 MiB?
 
 If the file is larger than 250 MiB, you can use [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) to import the file. For more information, see [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md).
+
+Or you can use the `split [-l ${line_count}]` utility to split it into multiple smaller files (for Linux or macOS only). For example, run `split -l 100000 tidb-01.csv small_files` to split a file named `tidb-01.csv` by line length `100000`, and the split files are named `small_files${suffix}`. Then, you can import these smaller files to TiDB Cloud one by one.
 
 Refer to the following script:
 
