@@ -34,7 +34,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click **Upload a local file** to select and upload the target local file. Note that you can upload only one CSV file of less than 250 MiB for one task. If your local file is larger than 250 MiB, see [How to import a local file larger than 250 MiB?](#how-to-import-a-local-file-larger-than-250-mib).
 
-3. In the **Destination** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must contain characters in Unicode BMP, excluding \u0000 and whitespace characters, and at most contain 64 characters. Click **Define Table**, the **Table Definition** section is displayed.
+3. In the **Destination** section, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must contain characters in Unicode BMP (Basic Multilingual Plane), excluding the null character `\u0000` and whitespace characters, and can be up to 64 characters in length. Click **Define Table**, the **Table Definition** section is displayed.
 
 4. Check the table.
 
@@ -54,7 +54,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If you need TiDB Cloud to create the target table, input the name for each column. The column name must meet the following requirements:
 
-        * The name must be composed of characters in Unicode BMP, excluding \u0000 and whitespace characters
+        * The name must be composed of characters in Unicode BMP, excluding the null character `\u0000` and whitespace characters.
         * The length of the name must be less than 65 characters.
 
         You can also change the data type if needed.
@@ -106,7 +106,7 @@ If a column name is a reserved [keyword](/keywords.md) in TiDB, when you query t
 
 If the file is larger than 250 MiB, you can use [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) to import the file. For more information, see [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md).
 
-Or you can use the `split [-l ${line_count}]` utility to split it into multiple smaller files (for Linux or macOS only). For example, run `split -l 100000 tidb-01.csv small_files` to split a file named `tidb-01.csv` by line length `100000`, and the split files are named `small_files${suffix}`. Then, you can import these smaller files to TiDB Cloud one by one.
+Alternatively, you can use the `split [-l ${line_count}]` utility to split it into multiple smaller files (for Linux or macOS only). For example, run `split -l 100000 tidb-01.csv small_files` to split a file named `tidb-01.csv` by line length `100000`, and the split files are named `small_files${suffix}`. Then, you can import these smaller files to TiDB Cloud one by one.
 
 Refer to the following script:
 
