@@ -17,6 +17,10 @@ This document takes the typical architecture of three data centers (DC) in two c
 | TiKV | 5 | 16 VCore 32GB 4TB (nvme ssd) * 1 | 10.0.1.11 <br/> 10.0.1.12 <br/> 10.0.1.13 <br/> 10.0.1.14 | 10.0.1.15 | Default port <br/> Global directory configuration |
 | Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.16 | | Default port <br/> Global directory configuration |
 
+> **Note:**
+>
+> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+
 ### Topology templates
 
 - [The geo-distributed topology template](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)

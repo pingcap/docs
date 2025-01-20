@@ -25,6 +25,10 @@ TiProxy is a L7 proxy server for TiDB, which can balance connections and migrate
 | TiProxy | 2 | 4 VCore 8 GB * 1  | 10.0.1.11 <br/> 10.0.1.12 | Default port <br/> Global directory configuration |
 | Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.13 | Default port <br/> Global directory configuration |
 
+> **Note:**
+>
+> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+
 ### Topology templates
 
 For more information about the template for TiProxy, see [The simple template for the TiProxy topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml).

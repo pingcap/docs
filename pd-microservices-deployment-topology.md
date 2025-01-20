@@ -18,6 +18,10 @@ This document describes the deployment topology of [PD microservices](/pd-micros
 | TiKV                  | 3     | 16 VCore 32GB 2TB (nvme ssd) * 1     | 10.0.1.10 <br/> 10.0.1.11 <br/> 10.0.1.12 | Default port <br/> Global directory configuration |
 | Monitoring & Grafana  | 1     | 4 VCore 8GB * 1 500GB (ssd)          | 10.0.1.13                               | Default port <br/> Global directory configuration |
 
+> **Note:**
+>
+> The IP addresses of the instances are given as examples only. In your actual deployment, replace the IP addresses with your actual IP addresses.
+
 ### Topology template
 
 <details>
