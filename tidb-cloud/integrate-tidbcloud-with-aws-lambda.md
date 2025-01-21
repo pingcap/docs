@@ -115,7 +115,7 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 
         If you do not have the file yet, download it from [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest). The file contains the AWS CloudFormation template that creates the necessary resources for the project.
 
-        ![aws-lambda-cf-create-stack](/media/develop/aws-lambda-cf-create-stack.png)
+        ![Create a stack](/media/develop/aws-lambda-cf-create-stack.png)
 
     3. Specify stack details.
 
