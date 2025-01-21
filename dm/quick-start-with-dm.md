@@ -1,10 +1,10 @@
 ---
-title: TiDB Data Migration Quick Start
+title: Quick Start with TiDB Data Migration
 summary: Learn how to quickly set up a data migration environment using TiUP playground.
 aliases: ['/docs/tidb-data-migration/dev/get-started/']
 ---
 
-# Quick Start Guide for TiDB Data Migration
+# Quick Start with TiDB Data Migration
 
 [TiDB Data Migration (DM)](/dm/dm-overview.md) is a powerful tool that replicates data from MySQL-compatible databases to TiDB. This guide shows you how to set up a local TiDB DM environment for development and testing using [TiUP Playground](/tiup/tiup-playground.md).
 
