@@ -48,7 +48,7 @@ Before getting started, ensure that you have the following:
 <details>
 <summary>Modify and rebuild the Lambda function code if you use a region other than <code>us-east-1</code></summary>
 
-If you use `us-east-1` as your cluster region, skip this section and go to [Step 1: Set up the project using AWS CloudFormation](#step-1-set-up-the-project-using-aws-cloudformation).
+If you use `us-east-1` as your cluster region, skip this section and go to [Step 1: Set up the project using AWS CloudFormation](#step-1-set-up-the-bookshop-project-using-aws-cloudformation).
 
 If you use a different AWS region other than `us-east-1` to create the AWS resources, you need to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
 
