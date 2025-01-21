@@ -251,7 +251,7 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository.
     sudo apt-get install -y mysql-server
     ```
 
-3. Check if `mysql` service is running, and start the service if necessary:
+3. Check whether the `mysql` service is running, and start the service if necessary:
 
     ```shell
     sudo systemctl status mysql
@@ -270,7 +270,6 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository.
     CREATE USER 'tidb-dm'@'%'
         IDENTIFIED WITH mysql_native_password
         BY 'MyPassw0rd!';
-
 
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
@@ -301,7 +300,9 @@ With the source MySQL database ready and accessible, the next step is to configu
 
 1. Create a source configuration file `mysql-01.yaml`:
 
-    > **Note:** Here we assume the `tidb-dm` user with replication privileges has been created in the source database as shown in Step 2.
+    > **Note:**
+    >
+    > Assume that the `tidb-dm` user with replication privileges has been created in the source database, as shown in [Step 2](#step-2-prepare-a-source-database-optional).
 
     ```yaml
     source-id: "mysql-01"
@@ -320,7 +321,7 @@ With the source MySQL database ready and accessible, the next step is to configu
 
 ## Step 4: Create a TiDB DM task
 
-After configuring the source database, you can create a migration task in TiDB DM that will reference the source MySQL instances and define the target TiDB connection details.
+After configuring the source database, you can create a migration task in TiDB DM. This migration task references the source MySQL instances and defines the target TiDB connection details.
 
 1. Create a DM task configuration file `tiup-playground-task.yaml`:
 
@@ -349,9 +350,9 @@ After configuring the source database, you can create a migration task in TiDB D
 
 ## Step 5: Verify the data replication
 
-Once the migration task is running, you can verify that the data replication is working as expected using the `dmctl` tool and by connecting to the target database to confirm that the data has been successfully replicated from the source MySQL database to the target TiDB cluster.
+Once the migration task is running, you can use the `dmctl` tool to verify whether the data replication is working as expected, and connect to the target database to confirm that the data has been successfully replicated from the source MySQL database to the target TiDB cluster.
 
-1. Verify TiDB DM tasks status with:
+1. Verify TiDB DM tasks status:
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 query-status
@@ -363,7 +364,7 @@ Once the migration task is running, you can verify that the data replication is 
     mysql -uroot -h127.0.0.1 -P4000 --prompt 'tidb> '
     ```
 
-3. If you created the sample data in step 2, you will see the `hello_tidb` table replicated from the MySQL source database to the TiDB target database:
+3. If you have created the sample data in [Step 2](#step-2-prepare-a-source-database-optional), you will see the `hello_tidb` table replicated from the MySQL source database to the TiDB target database:
 
     ```sql
     SELECT * FROM hello.hello_tidb;
@@ -371,9 +372,9 @@ Once the migration task is running, you can verify that the data replication is 
 
 ## Step 6: Clean up (optional)
 
-1. In the terminal where the TiUP Playground is running, press `Ctrl + C` to terminate the process. This will stop all TiDB and DM components and delete the target environment.
+1. In the terminal where the TiUP Playground is running, press <kbd>Control</kbd>+<kbd>C</kbd> to terminate the process. This stops all TiDB and DM components and deletes the target environment.
 
-2. If you created a source MySQL instance for testing in Step 2, stop and remove.
+2. If you have created a source MySQL instance for testing in [Step 2](#step-2-prepare-a-source-database-optional), stop and remove.
 
     <SimpleTab>
 
@@ -390,33 +391,37 @@ Once the migration task is running, you can verify that the data replication is 
 
     <div label="macOS">
 
-    If you installed MySQL 8.0 via Homebrew solely for testing, stop the service and uninstall with:
+    If you installed MySQL 8.0 via Homebrew solely for testing, stop the service and uninstall:
 
     ```shell
     brew services stop mysql@8.0
     brew uninstall mysql@8.0
     ```
 
-    > **Note:** If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/opt/homebrew/var/mysql`).
+    > **Note:**
+    >
+    > If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/opt/homebrew/var/mysql`).
 
     </div>
 
     <div label="CentOS">
 
-    If you installed MySQL 8.0 via the MySQL Yum repository, stop the service and uninstall with:
+    If you installed MySQL 8.0 via the MySQL Yum repository, stop the service and uninstall:
 
     ```shell
     sudo systemctl stop mysqld
     sudo yum remove -y mysql-community-server
     ```
 
-    > **Note:** If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/var/lib/mysql`).
+    > **Note:**
+    >
+    > If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/var/lib/mysql`).
 
     </div>
 
     <div label="Ubuntu">
 
-    If you installed MySQL from the official Ubuntu repository, stop the service and uninstall with:
+    If you installed MySQL from the official Ubuntu repository, stop the service and uninstall:
 
     ```shell
     sudo systemctl stop mysql
@@ -424,7 +429,9 @@ Once the migration task is running, you can verify that the data replication is 
     sudo apt-get autoremove -y
     ```
 
-    > **Note:** If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/var/lib/mysql`).
+    > **Note:**
+    >
+    > If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/var/lib/mysql`).
 
     </div>
 
