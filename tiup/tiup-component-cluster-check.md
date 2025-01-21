@@ -76,7 +76,11 @@ Check the limit values in the `/etc/security/limits.conf` file:
 
 ### SELinux
 
-Check whether SELinux is enabled. It is required to disable SELinux.
+Check whether SELinux is enabled. To check the current status use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility. It is required to disable SELinux or have it in Permissive mode.
+
+On some systems (e.g. Ubuntu) the `/etc/selinux/config` file might not exist and the `getenforce` command might not be installed, in that case you can skip this step.
+
+If SELinux is not disabled, change the line in `/etc/selinux/config` that starts with `SELINUX=` to have it say `SELINUX=disabled`. After changing this line you need to reboot the system as SELinux doesn't allow you to change the mode from Enforcing or Permissive to Disabled without a reboot.
 
 ### Firewall
 
