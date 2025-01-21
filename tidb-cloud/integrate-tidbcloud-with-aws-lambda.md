@@ -33,7 +33,7 @@ Before getting started, ensure that you have the following:
     - [Lambda services](https://aws.amazon.com/lambda/)
     - [S3](https://aws.amazon.com/s3/)
     - [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-- A [TiDB Cloud](https://tidbcloud.com) account and a TiDB Cloud Serverless cluster. Get the connection information for your TiDB Cloud Serverless:
+- A [TiDB Cloud](https://tidbcloud.com) account and a TiDB Cloud Serverless cluster. Get the connection information for your TiDB Cloud Serverless cluster:
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
