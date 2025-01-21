@@ -249,7 +249,7 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 - Controls whether to use partitions as the separation string.
 - This configuration item only takes effect if the downstream is a storage service.
 - Default value: `true`, which means that partitions in a table are stored in separate directories
-- It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables [#8581](https://github.com/pingcap/tiflow/issues/8581). For usage examples, see [Data change records](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records).
+- Note that this configuration will be deprecated in future versions and will be forcibly set to `true`. It is recommended to keep this configuration at its default value to avoid potential data loss in downstream partitioned tables. For more information, see [Issue #11979](https://github.com/pingcap/tiflow/issues/11979). For usage examples, see [Data change records](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records).
 
 #### `debezium-disable-schema`
 
