@@ -53,6 +53,7 @@ Check the values of the following kernel parameters:
 Check whether THP is enabled on the target machine. It is recommended to disable THP.
 
 To check if THP is enabled you can run this:
+
 ```
 cat /sys/kernel/mm/transparent_hugepage/enabled
 ```
