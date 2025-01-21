@@ -362,6 +362,7 @@
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
+  - [AWS Lambda](/tidb-cloud/integrate-tidbcloud-with-aws-lambda.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
