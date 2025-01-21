@@ -1,6 +1,6 @@
 ---
 title: Quick Start with TiDB Data Migration
-summary: Learn how to quickly set up a data migration environment using TiUP playground.
+summary: Learn how to quickly set up a data migration environment using TiUP Playground.
 aliases: ['/docs/tidb-data-migration/dev/get-started/']
 ---
 
@@ -10,11 +10,11 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
 > **Note:**
 >
-> For production deployments, refer to [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
+> For production deployments, see [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
 
 ## Step 1: Set up the test environment
 
-TiUP is a command-line tool for managing TiDB components. Its Playground feature lets you quickly launch a temporary local environment with a TiDB database and TiDB DM for development and testing.
+[TiUP](/tiup/tiup-overview.md) is a cluster operation and maintenance tool. Its Playground feature lets you quickly launch a temporary local environment with a TiDB database and TiDB DM for development and testing.
 
 1. Install TiUP:
 
@@ -22,7 +22,9 @@ TiUP is a command-line tool for managing TiDB components. Its Playground feature
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    > **Note:** If you have an existing installation of TiUP, ensure it is updated to v1.16.1 or later to use the `--dm-master` and `--dm-worker` flags. You can check your current version with:
+    > **Note:**
+    >
+    > If you have an existing installation of TiUP, ensure it is updated to v1.16.1 or later to use the `--dm-master` and `--dm-worker` flags. To check your current version:
     >
     > ```shell
     > tiup --version
@@ -40,7 +42,7 @@ TiUP is a command-line tool for managing TiDB components. Its Playground feature
     tiup playground --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
     ```
 
-3. Verify the environment by checking in the output if TiDB and DM are running: 
+3. Verify the environment by checking in the output whether TiDB and DM are running:
 
     ```text
     TiDB Playground Cluster is started, enjoy!
@@ -50,7 +52,9 @@ TiUP is a command-line tool for managing TiDB components. Its Playground feature
     TiDB Dashboard:  http://127.0.0.1:2379/dashboard
     ```
 
-4. Keep `tiup playground` running in the current terminal and open a new terminal for the next steps. This playground environment provides the running processes for the target TiDB database and the replication engine (DM-master and DM-worker). It will handle the data flow from MySQL (source) → DM (replication engine) → TiDB (target).
+4. Keep `tiup playground` running in the current terminal and open a new terminal for the following steps.
+
+    This playground environment provides the running processes for the target TiDB database and the replication engine (DM-master and DM-worker). It will handle the data flow: MySQL (source) → DM (replication engine) → TiDB (target).
 
 ## Step 2: Prepare a source database (optional)
 
@@ -92,14 +96,14 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance by following this
     ```sql
     CREATE DATABASE hello;
     USE hello;
-    
+
     CREATE TABLE hello_tidb (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50)
     );
-    
+
     INSERT INTO hello_tidb (name) VALUES ('Hello World');
-    
+
     SELECT * FROM hello_tidb;
     ```
 
