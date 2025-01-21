@@ -9,7 +9,7 @@ This document provides a step-by-step guide on how to use [AWS CloudFormation](h
 
 ## Solution overview
 
-In this guide, you will create a fully functional online bookshop with following components:
+In this guide, you will create a fully functional online bookshop with the following components:
 
 - AWS Lambda Function: handles requests and queries data from a TiDB Cloud Serverless cluster using Sequelize ORM and Fastify API framework.
 - AWS Secrets Manager SDK: retrieves and manages connection configurations for the TiDB Cloud Serverless cluster.
@@ -102,7 +102,7 @@ To rebuild and upload the code bundle to your own S3 bucket, do the following:
 
 </details>
 
-## Step 1. Set up the project using AWS CloudFormation
+## Step 1. Set up the bookshop project using AWS CloudFormation
 
 To set up the bookshop project using AWS CloudFormation, do the following:
 
@@ -134,7 +134,7 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 
         - If you use a different AWS region other than `us-east-1`, follow these steps:
 
-            1. Refer to [Modify and rebuild the Lambda function code if necessary](#prerequisites) to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
+            1. Refer to [Modify and rebuild the Lambda function code if you use a region other than `us-east-1`](#prerequisites) to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
             2. In the stack details fields, specify the S3 bucket name and region in the `S3Bucket` and `S3Key` parameters according to your own configuration.
             3. Fill in other fields as in the preceding screenshot.
 
@@ -146,7 +146,7 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 
         ![Review and create the stack](/media/develop/aws-lambda-cf-stack-config-review.png)
 
-## Step 2. Use the project
+## Step 2. Use the bookshop project
 
 After the stack has been created, you can use the project as follows:
 
@@ -170,7 +170,7 @@ After the stack has been created, you can use the project as follows:
         curl https://<your-api-endpoint>/book
         ```
 
-    - Get a book by ID:
+    - Get a book by the book ID:
 
         ```shell
         curl https://<your-api-endpoint>/book/<book-id>
