@@ -36,3 +36,7 @@ Outputs the table with the following fields:
 - PrivateKey: the path of the private key that is used to connect the cluster
 
 [<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+
+## See also
+
+- [TiUP Common Operations](/maintain-tidb-using-tiup.md)
