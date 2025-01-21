@@ -425,7 +425,7 @@ After completing your testing, you can clean up the environment by stopping the 
 
     </div>
 
-    <div label="Ubuntu" value="ubuntu>
+    <div label="Ubuntu" value="ubuntu">
 
     If you installed MySQL from the official Ubuntu repository, stop the service and uninstall it:
 
