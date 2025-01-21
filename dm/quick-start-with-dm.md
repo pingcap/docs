@@ -64,9 +64,9 @@ You can use one or multiple MySQL instances as a source database. If you do not 
 
 <div label="Docker">
 
-You can use Docker to quickly deploy a test MySQL 8.0 instance by following this procedure.
+You can use Docker to quickly deploy a test MySQL 8.0 instance.
 
-1. Run a MySQL 8 docker container with:
+1. Run a MySQL 8.0 docker container with:
 
     ```shell
     docker run --name mysql80 \
@@ -81,7 +81,7 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance by following this
     docker exec -it mysql80 mysql -uroot -pMyPassw0rd!
     ```
 
-3. Create a dedicated user for DM with the necessary privileges:
+3. Create a dedicated user for DM with necessary privileges:
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -111,7 +111,7 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance by following this
 
 <div label="macOS">
 
-If you are on macOS, you can quickly install and start MySQL 8.0 locally via [Homebrew](https://brew.sh):
+If you are on macOS, you can quickly install and start MySQL 8.0 locally via [Homebrew](https://brew.sh).
 
 1. Update Homebrew and install MySQL 8.0:
 
