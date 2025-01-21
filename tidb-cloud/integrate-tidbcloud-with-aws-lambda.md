@@ -5,7 +5,7 @@ summary: Introduce how to integrate TiDB with Amazon Lambda and CloudFormation s
 
 # Integrate TiDB Cloud Serverless with Amazon Lambda Using AWS CloudFormation
 
-This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud/), a cloud-native distributed SQL database, with [Amazon Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), a serverless amd event-driven compute service. By integrating TiDB Cloud Serverless with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through TiDB Cloud Serverless and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
+This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud/), a cloud-native distributed SQL database, with [Amazon Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), a serverless and event-driven compute service. By integrating TiDB Cloud Serverless with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through TiDB Cloud Serverless and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
 
 ## Solution overview
 
@@ -45,8 +45,8 @@ Before getting started, ensure that you have the following:
 
 > **Note:**
 >
-> - When you create the AWS resources, it is recommended to use `us-east-1` as your cluster region . This is because the Lambda function code in this demo hardcodes the region as `us-east-1`, and the code bundle is stored in the `us-east-1` region. 
-> - If you use a different region, you need to follow the following instructions to modify the Lambda function code, rebuild and upload the code bundle to your own S3 bucket.
+> - When you create the AWS resources, it is recommended to use `us-east-1` as your cluster region. This is because the Lambda function code in this demo hardcodes the region as `us-east-1`, and the code bundle is stored in the `us-east-1` region. 
+> - If you use a different region, you need to follow the following instructions to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
 
 <details>
 <summary>Modify and rebuild the Lambda function code if you use a region other than <code>us-east-1</code></summary>
