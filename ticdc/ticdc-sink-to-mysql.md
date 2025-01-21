@@ -85,7 +85,7 @@ MTIzNDU2Nzg=
 
 > **Note:**
 >
-> When the parameter of the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
+> When the sink URI parameters contain special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
 > 
 > For example, if the username for connecting to the downstream database is `R&D (2)` and the certificate file path is `/data1/R&D (2).pem`, you need to escape these parameters as follows:
 > 
