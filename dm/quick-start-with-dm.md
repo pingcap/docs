@@ -111,7 +111,7 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance.
 
 <div label="macOS">
 
-If you are on macOS, you can quickly install and start MySQL 8.0 locally via [Homebrew](https://brew.sh).
+On macOS, you can quickly install and start MySQL 8.0 locally via [Homebrew](https://brew.sh).
 
 1. Update Homebrew and install MySQL 8.0:
 
@@ -153,14 +153,14 @@ If you are on macOS, you can quickly install and start MySQL 8.0 locally via [Ho
     ```sql
     CREATE DATABASE hello;
     USE hello;
-    
+
     CREATE TABLE hello_tidb (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50)
     );
-    
+
     INSERT INTO hello_tidb (name) VALUES ('Hello World');
-    
+
     SELECT * FROM hello_tidb;
     ```
 
@@ -168,7 +168,7 @@ If you are on macOS, you can quickly install and start MySQL 8.0 locally via [Ho
 
 <div label="CentOS">
 
-On Enterprise Linux distros like CentOS, install MySQL 8.0 from the MySQL Yum repository:
+On CentOS, you can install MySQL 8.0 from the MySQL Yum repository.
 
 1. Download and install the MySQL Yum repository package from [MySQL Yum repo download page](https://dev.mysql.com/downloads/repo/yum). For Linux versions different than 9, you must replace the `el9` (Enterprise Linux version 9) in the URL below while keeping `mysql80` for MySQL version 8.0:
 
@@ -200,11 +200,11 @@ On Enterprise Linux distros like CentOS, install MySQL 8.0 from the MySQL Yum re
     mysql -uroot -p
     ```
 
-6. Reset MySQL `root` password: 
+6. Reset MySQL `root` password:
 
     ```sql
     ALTER USER 'root'@'localhost'
-        IDENTIFIED BY 'MyPassw0rd!';    
+        IDENTIFIED BY 'MyPassw0rd!';
     ```
 
 7. For DM testing purposes, create a dedicated user and grant privileges:
@@ -222,14 +222,14 @@ On Enterprise Linux distros like CentOS, install MySQL 8.0 from the MySQL Yum re
     ```sql
     CREATE DATABASE hello;
     USE hello;
-    
+
     CREATE TABLE hello_tidb (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50)
     );
-    
+
     INSERT INTO hello_tidb (name) VALUES ('Hello World');
-    
+
     SELECT * FROM hello_tidb;
     ```
 
@@ -237,7 +237,7 @@ On Enterprise Linux distros like CentOS, install MySQL 8.0 from the MySQL Yum re
 
 <div label="Ubuntu">
 
-On Ubuntu, you can install MySQL from the official Ubuntu repository:
+On Ubuntu, you can install MySQL from the official Ubuntu repository.
 
 1. Update your package list:
 
@@ -272,7 +272,7 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository:
         BY 'MyPassw0rd!';
 
 
-    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';    
+    GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
 6. Create sample data:
@@ -280,14 +280,14 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository:
     ```sql
     CREATE DATABASE hello;
     USE hello;
-    
+
     CREATE TABLE hello_tidb (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50)
     );
-    
+
     INSERT INTO hello_tidb (name) VALUES ('Hello World');
-    
+
     SELECT * FROM hello_tidb;
     ```
 
@@ -320,18 +320,18 @@ With the source MySQL database ready and accessible, the next step is to configu
 
 ## Step 4: Create a TiDB DM task
 
-After configuring the source database, you can create a migration task in TiDB DM that will reference the source MySQL instances and define the target TiDB connection details. 
+After configuring the source database, you can create a migration task in TiDB DM that will reference the source MySQL instances and define the target TiDB connection details.
 
 1. Create a DM task configuration file `tiup-playground-task.yaml`:
 
     ```yaml
-    # Task 
+    # Task
     name: tiup-playground-task
-    task-mode: "all"              # Execute all phases - full data migration and incremental sync. 
-    
+    task-mode: "all"              # Execute all phases - full data migration and incremental sync.
+
     # Source (MySQL)
     mysql-instances:
-      - source-id: "mysql-01" 
+      - source-id: "mysql-01"
 
     ## Target (TiDB)
     target-database:
