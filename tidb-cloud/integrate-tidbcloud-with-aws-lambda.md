@@ -1,17 +1,15 @@
 ---
 title: Integrate TiDB Cloud Serverless with Amazon Lambda Using AWS CloudFormation
-summary: Introduce how to integrate TiDB with Amazon Lambda and CloudFormation step by step.
+summary: Introduce how to integrate TiDB Cloud Serverless with Amazon Lambda and CloudFormation step by step.
 ---
 
 # Integrate TiDB Cloud Serverless with Amazon Lambda Using AWS CloudFormation
 
-This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud/), a cloud-native distributed SQL database, with [Amazon Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), a serverless and event-driven compute service. By integrating TiDB Cloud Serverless with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through TiDB Cloud Serverless and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
+This document provides a step-by-step guide on how to use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to integrate [TiDB Cloud Serverless](https://www.pingcap.com/tidb-cloud/), a cloud-native distributed SQL database, with [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), a serverless and event-driven compute service. By integrating TiDB Cloud Serverless with Amazon Lambda, you can leverage the scalability and cost-efficiency of microservices through TiDB Cloud Serverless and AWS Lambda. AWS CloudFormation automates the creation and management of AWS resources, including Lambda functions, API Gateway, and Secrets Manager.
 
 ## Solution overview
 
-In this guide, you will create a fully functional online bookshop.
-
-The project consists of the following components:
+In this guide, you will create a fully functional online bookshop with following components:
 
 - AWS Lambda Function: handles requests and queries data from a TiDB Cloud Serverless cluster using Sequelize ORM and Fastify API framework.
 - AWS Secrets Manager SDK: retrieves and manages connection configurations for the TiDB Cloud Serverless cluster.
@@ -22,14 +20,13 @@ AWS CloudFormation is used to create the necessary resources for the project, in
 
 The structure of the project is as follows:
 
-![aws-lambda-structure-overview](/media/develop/aws-lambda-structure-overview.png)
+![AWS Lambda structure overview](/media/develop/aws-lambda-structure-overview.png)
 
 ## Prerequisites
 
 Before getting started, ensure that you have the following:
 
-- An AWS account
-- Access to the following AWS services:
+- An AWS account with access to the following AWS services:
     - [AWS CloudFormation](https://aws.amazon.com/cloudformation/)
     - [Secrets Manager](https://aws.amazon.com/secrets-manager/)
     - [API Gateway](https://aws.amazon.com/api-gateway/)
@@ -53,7 +50,7 @@ Before getting started, ensure that you have the following:
 
 If you use `us-east-1` as your cluster region, skip this section and go to [Step 1: Set up the project using AWS CloudFormation](#step-1-set-up-the-project-using-aws-cloudformation).
 
-If you use a different AWS region other than `us-east-1` to create the AWS resources, you need to modify the Lambda function code, rebuild and upload the code bundle to your own S3 bucket.
+If you use a different AWS region other than `us-east-1` to create the AWS resources, you need to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
 
 To avoid local development environment issues, it is recommended that you use a cloud-native development environment, such as [Gitpod](https://www.gitpod.io/).
 
@@ -66,13 +63,13 @@ To rebuild and upload the code bundle to your own S3 bucket, do the following:
 2. Modify the Lambda function code.
 
     1. Open the `aws-lambda-cloudformation/src/secretManager.ts` file in the left sidebar.
-    2. Locate the line 22 and then modify the `region` variable to use your own region.
+    2. Locate the line 22 and then modify the `region` variable to match your own region.
 
 3. Rebuild the code bundle.
 
     1. Install the dependencies.
 
-        1. Open the Gitpod terminal.
+        1. Open a terminal in Gitpod.
         2. Enter the working directory:
 
             ```shell
@@ -105,7 +102,7 @@ To rebuild and upload the code bundle to your own S3 bucket, do the following:
 
 </details>
 
-## Step 1: Set up the project using AWS CloudFormation
+## Step 1. Set up the project using AWS CloudFormation
 
 To set up the bookshop project using AWS CloudFormation, do the following:
 
@@ -113,8 +110,8 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 2. Click **Create Stack** > **With new resources (standard)**.
 3. On the **Create Stack** settings page, complete the stack creation process.
 
-    1. In the **Prerequisite** panel, select **Template is ready**.
-    2. Upload the template file (either YAML or JSON), and click **Next**.
+    1. In the **Prerequisite** area, select **Choose an existing template**.
+    2. In the **Specify template** area, select **Upload a template file**, click **Choose file** to upload the template file (either YAML or JSON), and click **Next**.
 
         If you do not have the file yet, download it from [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest). The file contains the AWS CloudFormation template that creates the necessary resources for the project.
 
@@ -137,15 +134,16 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 
         - If you use a different AWS region other than `us-east-1`, follow these steps:
 
-            1. Refer to [Modify and rebuild the Lambda function code if necessary](#prerequisites) to modify the Lambda function code, rebuild and upload the code bundle to your own S3 bucket.
+            1. Refer to [Modify and rebuild the Lambda function code if necessary](#prerequisites) to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
             2. In the stack details fields, specify the S3 bucket name and region in the `S3Bucket` and `S3Key` parameters according to your own configuration.
             3. Fill in other fields as in the preceding screenshot.
 
-## Step 2: Use the project
+## Step 2. Use the project
 
 After the stack has been created, you can use the project as follows:
 
-1. Visit the [API Gateway service](https://console.aws.amazon.com/apigateway) in the AWS Management Console and click the `TiDBCloudApiGatewayV2` API.
+1. Visit the [API Gateway service](https://console.aws.amazon.com/apigateway) in the AWS Management Console, click the `TiDBCloudApiGatewayV2` API, and then click **API: TiDBCloudApiGatewayV2** in the left pane.
+
 
 2. Copy the `Invoke URL` from the **Overview** page. This URL serves as the API endpoint.
 
@@ -189,8 +187,9 @@ After the stack has been created, you can use the project as follows:
         curl -X DELETE https://<your-api-endpoint>/book/<book-id>
         ```
 
-## Step 3: Clean up resources
+## Step 3. Clean up resources
 
 To avoid unnecessary charges, clean up all resources that have been created.
 
-To do so, access the [AWS Management Console](https://console.aws.amazon.com/cloudformation) and delete the AWS CloudFormation stack.
+1. Access the [AWS Management Console](https://console.aws.amazon.com/cloudformation). 
+2. Delete the AWS CloudFormation stack that you created.
