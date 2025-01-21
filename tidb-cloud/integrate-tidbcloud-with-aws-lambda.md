@@ -191,6 +191,6 @@ After the stack has been created, you can use the project as follows:
 
 ## Step 3: Clean up resources
 
-To avoid unnecessary charges, you can clean up any resources that have been created.
+To avoid unnecessary charges, clean up all resources that have been created.
 
 To do so, access the [AWS Management Console](https://console.aws.amazon.com/cloudformation) and delete the AWS CloudFormation stack.
