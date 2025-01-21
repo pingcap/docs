@@ -18,7 +18,7 @@ In this guide, you will create a fully functional online bookshop with following
 
 AWS CloudFormation is used to create the necessary resources for the project, including the Secrets Manager, API Gateway, and Lambda Functions.
 
-The structure of the project is as follows:
+The structure of the bookshop project is as follows:
 
 ![AWS Lambda structure overview](/media/develop/aws-lambda-structure-overview.png)
 
@@ -108,7 +108,7 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 
 1. Navigate to the AWS Management Console and access the [AWS CloudFormation service](https://console.aws.amazon.com/cloudformation).
 2. Click **Create Stack** > **With new resources (standard)**.
-3. On the **Create Stack** settings page, complete the stack creation process.
+3. On the **Create Stack** page, complete the stack creation process.
 
     1. In the **Prerequisite** area, select **Choose an existing template**.
     2. In the **Specify template** area, select **Upload a template file**, click **Choose file** to upload the template file (either YAML or JSON), and click **Next**.
