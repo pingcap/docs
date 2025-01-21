@@ -121,7 +121,7 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 
         - If you use `us-east-1` as your cluster region, fill in the fields as in the following screenshot:
 
-            ![aws-lambda-cf-stack-details](/media/develop/aws-lambda-cf-stack-config.png)
+            ![Specify AWS Lambda stack details](/media/develop/aws-lambda-cf-stack-config.png)
 
             - **Stack name**: enter the stack name.
             - **S3Bucket**: enter the S3 bucket where you store the zip file.
@@ -138,16 +138,23 @@ To set up the bookshop project using AWS CloudFormation, do the following:
             2. In the stack details fields, specify the S3 bucket name and region in the `S3Bucket` and `S3Key` parameters according to your own configuration.
             3. Fill in other fields as in the preceding screenshot.
 
+    4. Configure stack options. You can use the default configurations.
+
+        ![Configure stack options](/media/develop/aws-lambda-cf-stack-config-option.png)
+
+    5. Review and create the stack.
+
+        ![Review and create the stack](/media/develop/aws-lambda-cf-stack-config-review.png)
+
 ## Step 2. Use the project
 
 After the stack has been created, you can use the project as follows:
 
 1. Visit the [API Gateway service](https://console.aws.amazon.com/apigateway) in the AWS Management Console, click the `TiDBCloudApiGatewayV2` API, and then click **API: TiDBCloudApiGatewayV2** in the left pane.
 
-
 2. Copy the `Invoke URL` from the **Overview** page. This URL serves as the API endpoint.
 
-    ![api-gateway-invoke-url](/media/develop/aws-lambda-get-apigateway-invoke-url.png)
+    ![API Gateway Invoke URL](/media/develop/aws-lambda-get-apigateway-invoke-url.png)
 
 3. Use API test tools such as Postman and cURL to test the API:
 
