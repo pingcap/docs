@@ -48,9 +48,10 @@ Before getting started, ensure that you have the following:
 > **Note:**
 >
 > - When you create the AWS resources, it is recommended to use `us-east-1` as your cluster region . This is because the Lambda function code in this demo hardcodes the region as `us-east-1`, and the code bundle is stored in the `us-east-1` region. 
-> - If you use a different region, you need to modify the Lambda function code, rebuild and upload the code bundle to your own S3 bucket.
+> - If you use a different region, you need to follow the following instructions to modify the Lambda function code, rebuild and upload the code bundle to your own S3 bucket.
 
-### Modify and rebuild the Lambda function code if necessary
+<details>
+<summary>Modify and rebuild the Lambda function code if you use a region other than <code>us-east-1</code></summary>
 
 If you use `us-east-1` as your cluster region, skip this section and go to [Step 1: Set up the project using AWS CloudFormation](#step-1-set-up-the-project-using-aws-cloudformation).
 
@@ -103,6 +104,8 @@ To rebuild and upload the code bundle to your own S3 bucket, do the following:
     2. Create a new bucket in your selected region.
     3. Upload the `index.zip` file to the bucket.
     4. Note down the S3 bucket name and region for later use.
+
+</details>
 
 ## Step 1: Set up the project using AWS CloudFormation
 
