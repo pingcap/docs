@@ -58,15 +58,15 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
 ## Step 2: Prepare a source database (optional)
 
-You can use one or multiple MySQL instances as a source database. If you do not have a MySQL-compatible instance already, you can create one for testing purposes follow these steps. If you already have a source MySQL database, skip to the Step 3.
+You can use one or multiple MySQL instances as a source database. If you already have a MySQL-compatible instance, skip to [Step 3](#step-3-configure-a-tidb-dm-source). Otherwise, take the following steps to create one for testing.
 
-<SimpleTab>
+<SimpleTab groupId="os">
 
-<div label="Docker">
+<div label="Docker" value="docker">
 
 You can use Docker to quickly deploy a test MySQL 8.0 instance.
 
-1. Run a MySQL 8.0 docker container with:
+1. Run a MySQL 8.0 Docker container:
 
     ```shell
     docker run --name mysql80 \
@@ -75,13 +75,13 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance.
         -d mysql:8.0
     ```
 
-2. Connect to MySQL with:
+2. Connect to MySQL:
 
     ```shell
     docker exec -it mysql80 mysql -uroot -pMyPassw0rd!
     ```
 
-3. Create a dedicated user for DM with necessary privileges:
+3. Create a dedicated user for DM with required privileges:
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -109,9 +109,9 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance.
 
 </div>
 
-<div label="macOS">
+<div label="macOS" value="macos">
 
-On macOS, you can quickly install and start MySQL 8.0 locally via [Homebrew](https://brew.sh).
+On macOS, you can quickly install and start MySQL 8.0 locally using [Homebrew](https://brew.sh).
 
 1. Update Homebrew and install MySQL 8.0:
 
@@ -132,7 +132,7 @@ On macOS, you can quickly install and start MySQL 8.0 locally via [Homebrew](htt
     brew services start mysql@8.0
     ```
 
-4. Connect to MySQL as `root`:
+4. Connect to MySQL as the `root` user:
 
     ```shell
     mysql -uroot
@@ -166,11 +166,11 @@ On macOS, you can quickly install and start MySQL 8.0 locally via [Homebrew](htt
 
 </div>
 
-<div label="CentOS">
+<div label="CentOS" value="centos">
 
-On CentOS, you can install MySQL 8.0 from the MySQL Yum repository.
+On Enterprise Linux distributions like CentOS, you can install MySQL 8.0 from the MySQL Yum repository.
 
-1. Download and install the MySQL Yum repository package from [MySQL Yum repo download page](https://dev.mysql.com/downloads/repo/yum). For Linux versions different than 9, you must replace the `el9` (Enterprise Linux version 9) in the URL below while keeping `mysql80` for MySQL version 8.0:
+1. Download and install the MySQL Yum repository package from [MySQL Yum repository download page](https://dev.mysql.com/downloads/repo/yum). For Linux versions other than 9, you must replace the `el9` (Enterprise Linux version 9) in the following URL while keeping `mysql80` for MySQL version 8.0:
 
     ```shell
     sudo yum install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
@@ -194,13 +194,13 @@ On CentOS, you can install MySQL 8.0 from the MySQL Yum repository.
     sudo grep 'temporary password' /var/log/mysqld.log
     ```
 
-5. Connect to MySQL as `root` with the temporary password:
+5. Connect to MySQL as the `root` user with the temporary password:
 
     ```shell
     mysql -uroot -p
     ```
 
-6. Reset MySQL `root` password:
+6. Reset the `root` password:
 
     ```sql
     ALTER USER 'root'@'localhost'
@@ -235,7 +235,7 @@ On CentOS, you can install MySQL 8.0 from the MySQL Yum repository.
 
 </div>
 
-<div label="Ubuntu">
+<div label="Ubuntu" value="ubuntu">
 
 On Ubuntu, you can install MySQL from the official Ubuntu repository.
 
@@ -258,7 +258,7 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository.
     sudo systemctl start mysql
     ```
 
-4. Connect to MySQL as `root` via socket authentication:
+4. Connect to MySQL as the `root` user using socket authentication:
 
     ```shell
     sudo mysql
@@ -296,13 +296,13 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository.
 
 ## Step 3: Configure a TiDB DM source
 
-With the source MySQL database ready and accessible, the next step is to configure TiDB DM to connect to it. This involves creating a source configuration file with the connection details and applying the configurations using the `dmctl` tool.
+After preparing the source MySQL database, configure TiDB DM to connect to it. To do this, create a source configuration file with the connection details and apply the configuration using the `dmctl` tool.
 
 1. Create a source configuration file `mysql-01.yaml`:
 
     > **Note:**
     >
-    > Assume that the `tidb-dm` user with replication privileges has been created in the source database, as shown in [Step 2](#step-2-prepare-a-source-database-optional).
+    > This step assumes you have already created the `tidb-dm` user with replication privileges in the source database, as described in [Step 2](#step-2-prepare-a-source-database-optional).
 
     ```yaml
     source-id: "mysql-01"
@@ -321,7 +321,7 @@ With the source MySQL database ready and accessible, the next step is to configu
 
 ## Step 4: Create a TiDB DM task
 
-After configuring the source database, you can create a migration task in TiDB DM. This migration task references the source MySQL instances and defines the target TiDB connection details.
+After configuring the source database, you can create a migration task in TiDB DM. This task references the source MySQL instance and defines the connection details for the target TiDB database.
 
 1. Create a DM task configuration file `tiup-playground-task.yaml`:
 
@@ -350,21 +350,21 @@ After configuring the source database, you can create a migration task in TiDB D
 
 ## Step 5: Verify the data replication
 
-Once the migration task is running, you can use the `dmctl` tool to verify whether the data replication is working as expected, and connect to the target database to confirm that the data has been successfully replicated from the source MySQL database to the target TiDB cluster.
+After starting the migration task, verify whether data replication is working as expected. Use the `dmctl` tool to check the task status, and connect to the target TiDB database to confirm that the data has been successfully replicated from the source MySQL database.
 
-1. Verify TiDB DM tasks status:
+1. Check the status of the TiDB DM task:
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 query-status
     ```
 
-2. Connect to the TiDB target database to verify the replicated data:
+2. Connect to the TiDB target database:
 
     ```shell
     mysql -uroot -h127.0.0.1 -P4000 --prompt 'tidb> '
     ```
 
-3. If you have created the sample data in [Step 2](#step-2-prepare-a-source-database-optional), you will see the `hello_tidb` table replicated from the MySQL source database to the TiDB target database:
+3. Verify the replicated data. If you have created the sample data in [Step 2](#step-2-prepare-a-source-database-optional), you will see the `hello_tidb` table replicated from the MySQL source database to the TiDB target database:
 
     ```sql
     SELECT * FROM hello.hello_tidb;
@@ -372,13 +372,19 @@ Once the migration task is running, you can use the `dmctl` tool to verify wheth
 
 ## Step 6: Clean up (optional)
 
-1. In the terminal where the TiUP Playground is running, press <kbd>Control</kbd>+<kbd>C</kbd> to terminate the process. This stops all TiDB and DM components and deletes the target environment.
+After completing your testing, you can clean up the environment by stopping the TiUP Playground, removing the source MySQL instance (if created for testing), and deleting unnecessary files.
 
-2. If you have created a source MySQL instance for testing in [Step 2](#step-2-prepare-a-source-database-optional), stop and remove.
+1. Stop the TiUP Playground:
 
-    <SimpleTab>
+    In the terminal where the TiUP Playground is running, press <kbd>Control</kbd>+<kbd>C</kbd> to terminate the process. This stops all TiDB and DM components and deletes the target environment.
 
-    <div label="Docker">
+2. Stop and remove the source MySQL instance:
+
+    If you have created a source MySQL instance for testing in [Step 2](#step-2-prepare-a-source-database-optional), stop and remove it by taking the following steps:
+
+    <SimpleTab groupId="os">
+
+    <div label="Docker" value="docker">
 
     To stop and remove the Docker container:
 
@@ -389,9 +395,9 @@ Once the migration task is running, you can use the `dmctl` tool to verify wheth
 
     </div>
 
-    <div label="macOS">
+    <div label="macOS" value="macos">
 
-    If you installed MySQL 8.0 via Homebrew solely for testing, stop the service and uninstall:
+    If you installed MySQL 8.0 using Homebrew solely for testing, stop the service and uninstall it:
 
     ```shell
     brew services stop mysql@8.0
@@ -400,13 +406,13 @@ Once the migration task is running, you can use the `dmctl` tool to verify wheth
 
     > **Note:**
     >
-    > If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/opt/homebrew/var/mysql`).
+    > If you want to remove all MySQL data files, delete the MySQL data directory (commonly located at `/opt/homebrew/var/mysql`).
 
     </div>
 
-    <div label="CentOS">
+    <div label="CentOS" value="centos">
 
-    If you installed MySQL 8.0 via the MySQL Yum repository, stop the service and uninstall:
+    If you installed MySQL 8.0 from the MySQL Yum repository, stop the service and uninstall it:
 
     ```shell
     sudo systemctl stop mysqld
@@ -415,13 +421,13 @@ Once the migration task is running, you can use the `dmctl` tool to verify wheth
 
     > **Note:**
     >
-    > If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/var/lib/mysql`).
+    > If you want to remove all MySQL data files, delete the MySQL data directory (commonly located at `/var/lib/mysql`).
 
     </div>
 
-    <div label="Ubuntu">
+    <div label="Ubuntu" value="ubuntu>
 
-    If you installed MySQL from the official Ubuntu repository, stop the service and uninstall:
+    If you installed MySQL from the official Ubuntu repository, stop the service and uninstall it:
 
     ```shell
     sudo systemctl stop mysql
@@ -431,7 +437,7 @@ Once the migration task is running, you can use the `dmctl` tool to verify wheth
 
     > **Note:**
     >
-    > If you want to remove all MySQL data files, remove the MySQL data directory (commonly `/var/lib/mysql`).
+    > If you want to remove all MySQL data files, delete the MySQL data directory (commonly located at `/var/lib/mysql`).
 
     </div>
 
