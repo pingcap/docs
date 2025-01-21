@@ -361,13 +361,24 @@ After starting the migration task, verify whether data replication is working as
 2. Connect to the TiDB target database:
 
     ```shell
-    mysql -uroot -h127.0.0.1 -P4000 --prompt 'tidb> '
+    mysql --host 127.0.0.1 --port 4000 -u root --prompt 'tidb> '
     ```
 
 3. Verify the replicated data. If you have created the sample data in [Step 2](#step-2-prepare-a-source-database-optional), you will see the `hello_tidb` table replicated from the MySQL source database to the TiDB target database:
 
     ```sql
     SELECT * FROM hello.hello_tidb;
+    ```
+
+    The output is as follows:
+
+    ```sql
+    +----+-------------+
+    | id | name        |
+    +----+-------------+
+    |  1 | Hello World |
+    +----+-------------+
+    1 row in set (0.00 sec)
     ```
 
 ## Step 6: Clean up (optional)
