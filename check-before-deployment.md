@@ -211,13 +211,15 @@ Instead of completely disabling it is also possible to change the default zone. 
 firewall-cmd --set-default-zone trusted
 ```
 
-to verify
+To verify:
+
 ```
 # firewall-cmd --get-default-zone
 trusted
 ```
 
-to list the policy for a zone
+To list the policy for a zone:
+
 ```
 # firewall-cmd --zone=trusted --list-all
 trusted
