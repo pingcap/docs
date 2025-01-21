@@ -137,7 +137,7 @@ To set up the bookshop project using AWS CloudFormation, do the following:
 
         - If you use a different AWS region other than `us-east-1`, follow these steps:
 
-            1. Refer to [Modify and rebuild the Lambda function code if necessary](#modify-and-rebuild-the-lambda-function-code-if-necessary) to modify the Lambda function code, rebuild and upload the code bundle to your own S3 bucket.
+            1. Refer to [Modify and rebuild the Lambda function code if necessary](#prerequisites) to modify the Lambda function code, rebuild and upload the code bundle to your own S3 bucket.
             2. In the stack details fields, specify the S3 bucket name and region in the `S3Bucket` and `S3Key` parameters according to your own configuration.
             3. Fill in other fields as in the preceding screenshot.
 
