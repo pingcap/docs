@@ -5,7 +5,11 @@ summary: TiDB Cloudのサポート チームに連絡する方法について説
 
 # TiDB Cloudサポート {#tidb-cloud-support}
 
-[TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**アイコンには、ドキュメント、対話型チュートリアル、自分のペースで進められるトレーニング、サポート エントリなど、 TiDB Cloudのすべてのヘルプとサポート情報が統合されています。
+> **注記：**
+>
+> TiDB Cloud は、次世代のサポート サービスである**Connected Care を****2025 年 2 月 17 日**に開始する予定です。詳細については、 [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)および[コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)参照してください。
+
+[TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**アイコンには、ドキュメント、対話型チュートリアル、自分のペースで進められるトレーニング、サポート エントリなど、 TiDB Cloudに関するすべてのヘルプとサポート情報が統合されています。
 
 ## PoC、デモ、無料トライアルのクレジットをリクエストする {#request-poc-demo-or-free-trial-credits}
 
@@ -35,7 +39,7 @@ summary: TiDB Cloudのサポート チームに連絡する方法について説
 
 プロジェクトまたは組織のサポートを受けるには、 [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックし、 **[サポートをリクエスト]**をクリックします。
 
-または、<mdsvgicon name="icon-top-organization">をクリックし、 **[サポート] を**クリックしてサポート ページに移動します。</mdsvgicon>
+または、<mdsvgicon name="icon-top-organization">左下隅にある**[サポート] を**クリックして、サポート ページに移動します。</mdsvgicon>
 
 ## 送信したリクエストを確認してください {#check-your-submitted-request}
 

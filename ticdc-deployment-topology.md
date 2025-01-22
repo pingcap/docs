@@ -23,6 +23,10 @@ TiCDC は、TiDB 4.0 で導入された、TiDB の増分データを複製する
 | CDC            | 3    | 8 VCore 16GB * 1                 | 10.0.1.11<br/> 10.0.1.12<br/> 10.0.1.13 | デフォルトポート<br/>グローバルディレクトリ構成 |
 | モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)      | 10.0.1.11                               | デフォルトポート<br/>グローバルディレクトリ構成 |
 
+> **注記：**
+>
+> インスタンスの IP アドレスは例としてのみ提供されています。実際の展開では、IP アドレスを実際の IP アドレスに置き換えてください。
+
 ### トポロジーテンプレート {#topology-templates}
 
 -   [TiCDCトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)

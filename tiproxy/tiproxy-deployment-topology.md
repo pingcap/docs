@@ -19,6 +19,10 @@ TiProxy は TiDB 用の L7 プロキシサーバーであり、接続のバラ�
 | Tiプロキシ         | 1    | 4 VCore 8 GB * 1                 | 10.0.1.11                            | デフォルトポート<br/>グローバルディレクトリ構成 |
 | モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)      | 10.0.1.13                            | デフォルトポート<br/>グローバルディレクトリ構成 |
 
+> **注記：**
+>
+> インスタンスの IP アドレスは例としてのみ提供されています。実際の展開では、IP アドレスを実際の IP アドレスに置き換えてください。
+
 ### トポロジーテンプレート {#topology-templates}
 
 TiProxy のテンプレートの詳細については、 [TiProxyトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)参照してください。

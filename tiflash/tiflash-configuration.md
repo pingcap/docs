@@ -11,7 +11,7 @@ summary: TiFlashの設定方法を学びます。
 
 [pd-ctl](/pd-control.md)使用して PD スケジューリング パラメータを調整できます。tiup を使用してクラスターをデプロイおよび管理する場合は、 `pd-ctl -u <pd_ip:pd_port>`代わりに`tiup ctl:v<CLUSTER_VERSION> pd`使用できることに注意してください。
 
--   [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit) : レプリカ関連のオペレーターが生成されるレートを決定します。このパラメーターは、ノードをオフラインにしたり、レプリカを追加したりする操作に影響します。
+-   [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit) : レプリカ関連のオペレータが生成されるレートを決定します。このパラメータは、ノードをオフラインにしたり、レプリカを追加したりする操作に影響します。
 
     > **注記：**
     >
@@ -230,6 +230,13 @@ delta_index_cache_size = 0
 
     ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     cop_pool_size = 0
+
+    ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor handles at the same time, including the requests being executed and the requests waiting in the queue. If the number of requests exceeds the specified value, the error "TiFlash Server is Busy" is returned. -1 indicates no limit; 0 indicates using the default value, which is 10 * cop_pool_size.
+    cop_pool_handle_limit = 0
+
+    ## New in v5.0. This item specifies the maximum time that a cop request can queue in TiFlash. If a cop request waits in the queue for a time longer than the value specified by this configuration, the error "TiFlash Server is Busy" is returned. A value less than or equal to 0 indicates no limit.
+    cop_pool_max_queued_seconds = 15
+
     ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     batch_cop_pool_size = 0
     ## New in v6.1.0. This item specifies the number of requests that TiFlash can concurrently process when it receives ALTER TABLE ... COMPACT from TiDB.
@@ -352,7 +359,7 @@ TiFlash は、マルチディスク展開をサポートしています。TiFlas
 
 v4.0.9 より前の TiDB クラスターの場合、 TiFlash はstorageエンジンのメイン データを複数のディスクに保存することのみをサポートします`path` ( TiUPでは`data_dir` ) および`path_realtime_mode`構成を指定することで、複数のディスクにTiFlashノードを設定できます。
 
-`path`に複数のデータstorageディレクトリがある場合は、それぞれをコンマで区切ります。たとえば、 `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`です。環境内に複数のディスクがある場合は、各ディレクトリを 1 つのディスクに対応させ、パフォーマンスが最も優れたディスクを先頭に配置して、すべてのディスクのパフォーマンスを最大化することをお勧めします。
+`path`に複数のデータstorageディレクトリがある場合は、それぞれをコンマで区切ります。たとえば、 `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`です。環境内に複数のディスクがある場合は、各ディレクトリを 1 つのディスクに対応させ、すべてのディスクのパフォーマンスを最大化するために、パフォーマンスが最も優れたディスクを先頭に配置することをお勧めします。
 
 TiFlashノードに同様の I/O メトリックを持つディスクが複数ある場合は、 `path_realtime_mode`パラメータをデフォルト値のままにしておくことができます (または明示的に`false`に設定することもできます)。これは、データがすべてのstorageディレクトリ間で均等に分散されることを意味します。ただし、最新のデータは最初のディレクトリにのみ書き込まれるため、対応するディスクは他のディスクよりもビジー状態になります。
 

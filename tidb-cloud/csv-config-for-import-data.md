@@ -66,3 +66,11 @@ summary: TiDB Cloudのインポート データ サービスで CSV 構成を使
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
 -   デフォルト: `True`
+
+## NULL値 {#null-value}
+
+-   定義: CSV ファイル内の`NULL`値を表す文字列を定義します。
+
+-   デフォルト: `\N`
+
+-   コンソールではカスタム null 値はサポートされていません。代わりに[TiDB CloudCLI](/tidb-cloud/get-started-with-cli.md)使用できます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)参照してください。

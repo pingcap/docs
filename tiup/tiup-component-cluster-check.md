@@ -11,7 +11,7 @@ summary: TiUP クラスタ は、ハードウェアおよびソフトウェア�
 
 ### オペレーティング システムのバージョン {#operating-system-version}
 
-デプロイされたマシンのオペレーティング システムのディストリビューションとバージョンを確認します。現在、デプロイでは CentOS 7 のみがサポートされています。互換性の向上のため、今後のリリースではさらに多くのシステム バージョンがサポートされる可能性があります。
+展開されたマシンのオペレーティング システムのディストリビューションとバージョンを確認します。サポートされているバージョンの一覧については、 [OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)参照してください。
 
 ### CPU EPOLLEX限定 {#cpu-epollexclusive}
 
@@ -19,7 +19,7 @@ summary: TiUP クラスタ は、ハードウェアおよびソフトウェア�
 
 ### ヌマクトル {#numactl}
 
-ターゲット マシンに numactl がインストールされているかどうかを確認します。ターゲット マシンに結び付けられたコアが構成されている場合は、numactl をインストールする必要があります。
+ターゲット マシンに`numactl`がインストールされているかどうかを確認します。ターゲット マシンに結合コアが設定されている場合は、 `numactl`インストールする必要があります。
 
 ### システム時間 {#system-time}
 
@@ -64,7 +64,7 @@ summary: TiUP クラスタ は、ハードウェアおよびソフトウェア�
 
 ### カーネル {#selinux}
 
-SELinux が有効になっているかどうかを確認します。SELinux を無効にすることをお勧めします。
+SELinux が有効になっているかどうかを確認します。SELinux を無効にする必要があります。
 
 ### ファイアウォール {#firewall}
 
@@ -164,7 +164,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 > **注記：**
 >
 > -   `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプション`tiup cluster check <cluster-name> --cluster`を追加する必要があります。
-> -   `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルをチェックすることもサポートされています。
+> -   `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルを確認することもサポートされています。
 >
 >     ```shell
 >     tiup cluster check <cluster-name> scale-out.yml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -172,7 +172,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -N、--ノード {#n-node}
 
--   チェックするノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。1 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)によって返されるクラスター ステータス テーブルの最初の列からノード ID を取得できます。
+-   チェックするノードを指定します。このオプションの値は、ノード ID のコンマ区切りリストです。ノード ID は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   コマンドでこのオプションが指定されていない場合、デフォルトですべてのノードがチェックされます。
 

@@ -363,6 +363,7 @@
 -   統合
     -   [エアバイト](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
     -   [Amazon アプリフロー](/develop/dev-guide-aws-appflow-integration.md)
+    -   [AWS ラムダ](/tidb-cloud/integrate-tidbcloud-with-aws-lambda.md)
     -   [クラウドフレア](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
     -   [データドッグ](/tidb-cloud/monitor-datadog-integration.md)
     -   [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
@@ -788,8 +789,11 @@
     -   [DDL 実行の原則とベスト プラクティス](/ddl-introduction.md)
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
     -   [通知](/tidb-cloud/notifications.md)
-    -   [サポート](/tidb-cloud/tidb-cloud-support.md)
     -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
+-   サポートプラン
+    -   [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)
+    -   [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)
+    -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 -   よくある質問
     -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
     -   [TiDB Cloudサーバーレスに関するよくある質問](/tidb-cloud/serverless-faqs.md)

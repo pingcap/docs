@@ -13,7 +13,7 @@ summary: TiCDC を使用する際に遭遇する可能性のある FAQ につい
 
 ## TiCDC でタスクを作成するときに<code>start-ts</code>選択するにはどうすればよいですか? {#how-do-i-choose-code-start-ts-code-when-creating-a-task-in-ticdc}
 
-レプリケーション タスクの`start-ts` 、上流の TiDB クラスターの Timestamp Oracle (TSO) に対応します。TiCDC は、レプリケーション タスクでこの TSO からデータを要求します。したがって、レプリケーション タスクの`start-ts`次の要件を満たす必要があります。
+レプリケーション タスクの`start-ts`は、上流の TiDB クラスターの Timestamp Oracle (TSO) に対応します。TiCDC は、レプリケーション タスクでこの TSO からデータを要求します。したがって、レプリケーション タスクの`start-ts`次の要件を満たす必要があります。
 
 -   `start-ts`の値は、現在の TiDB クラスターの`tikv_gc_safe_point`値よりも大きいです。それ以外の場合、タスクを作成するときにエラーが発生します。
 -   タスクを開始する前に、ダウンストリームに`start-ts`より前のすべてのデータが揃っていることを確認してください。メッセージ キューにデータを複製するなどのシナリオでは、アップストリームとダウンストリーム間のデータの一貫性が必要ない場合は、アプリケーションのニーズに応じてこの要件を緩和できます。
@@ -431,3 +431,11 @@ TiDB にはトランザクション タイムアウト メカニズムがあり�
   }
 ]
 ```
+
+## TiCDC は DML 操作で生成された列を複製しますか? {#does-ticdc-replicate-generated-columns-of-dml-operations}
+
+生成された列には、仮想生成された列と保存された生成された列が含まれます。TiCDC は仮想生成された列を無視し、保存された生成された列のみをダウンストリームに複製します。ただし、ダウンストリームが MySQL または別の MySQL 互換データベース (Kafka またはその他のstorageサービスではない) である場合、保存された生成された列も無視されます。
+
+> **注記：**
+>
+> 保存された生成列を Kafka またはstorageサービスに複製し、それを MySQL に書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)含まれており、列が生成列であるかどうかを区別できます。
