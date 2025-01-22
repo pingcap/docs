@@ -18,7 +18,7 @@ source-id: "mysql-replica-01"
 enable-gtid: false
 
 # Whether to enable relay log.
-enable-relay: false       # Since DM v2.0.2, this configuration item is deprecated. To enable the relay log feature, use the `start-relay` command instead.
+enable-relay: false
 relay-binlog-name: ""     # The file name from which DM-worker starts to pull the binlog.
 relay-binlog-gtid: ""     # The GTID from which DM-worker starts to pull the binlog.
 relay-dir: "relay-dir"  # The directory used to store relay log. The default value is "relay-dir".
@@ -69,9 +69,9 @@ This section describes each configuration parameter in the configuration file.
 | :------------ | :--------------------------------------- |
 | `source-id` | Represents a MySQL instance ID. |
 | `enable-gtid` | Determines whether to pull binlog from the upstream using GTID. The default value is `false`. In general, you do not need to configure `enable-gtid` manually. However, if GTID is enabled in the upstream database, and the primary/secondary switch is required, you need to set `enable-gtid` to `true`. |
-| `enable-relay` | Determines whether to enable the relay log feature. The default value is `false`. Since DM v2.0.2, this configuration item is deprecated. To [enable the relay log feature](/dm/relay-log.md#start-and-stop-the-relay-log-feature), use the `start-relay` command instead. |
-| `relay-binlog-name` | Specifies the file name from which DM-worker starts to pull the binlog. For example, `"mysql-bin.000002"`. It only works when `enable_gtid` is `false`. If this parameter is not specified, DM-worker will pull the binlogs starting from the latest one. |
-| `relay-binlog-gtid` | Specifies the GTID from which DM-worker starts to pull the binlog. For example, `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"`. It only works when `enable_gtid` is `true`. If this parameter is not specified, DM-worker will pull the binlogs starting from the latest GTID. |
+| `enable-relay` | Determines whether to enable the relay log feature. The default value is `false`. This parameter takes effect from v5.4. Additionally, you can [enable relay log dynamically](/dm/relay-log.md#start-and-stop-the-relay-log-feature) using the `start-relay` command. |
+| `relay-binlog-name` | Specifies the file name from which DM-worker starts to pull the binlog. For example, `"mysql-bin.000002"`. It only works when `enable_gtid` is `false`. If this parameter is not specified, DM-worker will start pulling from the earliest binlog file being replicated. Manual configuration is generally not required. |
+| `relay-binlog-gtid` | Specifies the GTID from which DM-worker starts to pull the binlog. For example, `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"`. It only works when `enable_gtid` is `true`. If this parameter is not specified, DM-worker will start pulling from the latest GTID being replicated. Manual configuration is generally not required. |
 | `relay-dir` | Specifies the relay log directory. |
 | `host` | Specifies the host of the upstream database. |
 | `port` | Specifies the port of the upstream database. |
