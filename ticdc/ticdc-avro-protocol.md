@@ -95,6 +95,16 @@ The `fields` in the key contains only primary key columns or unique index column
 
 The data format of Value is the same as that of Key, by default. However, `fields` in the Value contains all columns, not just the primary key columns.
 
+> **Note:**
+>
+> The Avro protocol encodes DML events as follows: 
+> 
+> - For Delete events, Avro only encodes the Key part. The Value part is empty. 
+> - For Insert events, Avro encodes all column data to the Value part. 
+> - For Update events, Avro encodes only all column data that is updated to the Value part.
+>
+> The Avro protocol does not encode the old values for Update and Delete events. Additionally, to be compatible with most Confluent sink connectors that rely on `null` records to identify deletions (`delete.on.null`), Delete events do not include extension information, such as `_tidb_commit_ts`, even when `enable-tidb-extension` is enabled. If you need these features, consider using other protocols such as Canal-JSON or Debezium.
+
 After you enable [`enable-tidb-extension`](#tidb-extension-fields), the data format of the Value will be as follows:
 
 ```
