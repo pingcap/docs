@@ -20,8 +20,8 @@ The following is the allow list of DDL statements supported by TiCDC. The abbrev
 
 > **Note**
 >
-> - When the upstream table has no valid index and `force-replicate=true` is not configured, the table will not be replicated. However, subsequent DDL statements (including `CREATE INDEX`, `ADD INDEX`, and `ADD PRIMARY KEY`) that create a **valid index** on this table will be replicated, which might cause inconsistency between downstream and upstream table schemas and lead to subsequent data replication failure.
-> - DDL statements (including `DROP INDEX` and `DROP PRIMARY KEY`) that drop the last **valid index** will not be replicated, causing subsequent data replication to fail.
+> - When the upstream table has no valid index and `force-replicate=true` is not configured, the table will not be replicated. However, subsequent DDL statements (including `CREATE INDEX`, `ADD INDEX`, and `ADD PRIMARY KEY`) that create a valid index on this table will be replicated, which might cause inconsistency between downstream and upstream table schemas and lead to subsequent data replication failure.
+> - DDL statements (including `DROP INDEX` and `DROP PRIMARY KEY`) that drop the last valid index will not be replicated, causing subsequent data replication to fail.
 
 | DDL | A valid index exists | A valid index does not exist and `force-replicate` is `false` (default) | A valid index does not exist and `force-replicate` is set to `true` |
 |---|:---:|:---:| :---: |
