@@ -409,16 +409,10 @@ Other requirements for the target machine include:
     tiup cluster deploy <cluster-name> <version> ./topo.yaml --user root -p
     ```
 
-<<<<<<< HEAD
-    - `<cluster-name>`: Set the cluster name
-    - `<version>`: Set the TiDB cluster version, such as `v8.5.1`. You can see all the supported TiDB versions by running the `tiup list tidb` command
-    - `-p`: Specify the password used to connect to the target machine.
-=======
     - `<cluster-name>`: sets the cluster name.
-    - `<version>`: sets the TiDB cluster version, such as `v8.5.0`. You can see all the supported TiDB versions by running the `tiup list tidb` command.
+    - `<version>`: sets the TiDB cluster version, such as `v8.5.1`. You can see all the supported TiDB versions by running the `tiup list tidb` command.
     - `--user`: specifies the user to initialize the environment.
     - `-p`: specifies the password used to connect to the target machine.
->>>>>>> b24b0dbc83 (tiup: add `--user` (#20085))
 
         > **Note:**
         >
