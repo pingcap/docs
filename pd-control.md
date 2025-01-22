@@ -573,7 +573,7 @@ Usage:
 }
 >> member delete name pd2               // Delete "pd2"
 Success!
->> member delete id 1319539429105371180 // Delete a node using id
+>> member delete id 1319539429105371180 // Delete a node using ID
 Success!
 >> member leader show                   // Display the leader information
 {
@@ -1190,7 +1190,7 @@ store remove-tombstone
 
 To manage the labels of a store, run the `store label` command.
 
-- To set a label with the key being `"zone"` and value being `"cn"` to the store with id of 1, run the following command:
+- To set a label with the key being `"zone"` and value being `"cn"` to the store with ID of 1, run the following command:
 
     ```bash
     store label 1 zone=cn
@@ -1307,7 +1307,7 @@ unsafe remove-failed-stores show
 ### Simplify the output of `store`
 
 ```bash
->> store --jq=".stores[].store | { id, address, state_name}"
+>> store --jq=".stores[].store | {id, address, state_name}"
 {"id":1,"address":"127.0.0.1:20161","state_name":"Up"}
 {"id":30,"address":"127.0.0.1:20162","state_name":"Up"}
 ...
@@ -1325,7 +1325,7 @@ unsafe remove-failed-stores show
 ### Query all nodes whose status is not `Up`
 
 ```bash
-store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_name}'
+store --jq='.stores[].store | select(.state_name!="Up") | {id, address, state_name}'
 ```
 
 ```
@@ -1339,7 +1339,7 @@ store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_n
 {{< copyable "" >}}
 
 ```bash
-store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | { id, address, state_name}'
+store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | {id, address, state_name}'
 ```
 
 ```
