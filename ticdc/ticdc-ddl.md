@@ -18,16 +18,21 @@ The following is the allow list of DDL statements supported by TiCDC. The abbrev
 - Y: Replication to the downstream is supported in this condition.
 - N: Replication to the downstream is not supported in this condition.
 
+> **Note**
+>
+> - When the upstream table has no valid index and `force-replicate=true` is not configured, the table will not be replicated. However, subsequent DDL statements (including `CREATE INDEX`, `ADD INDEX`, and `ADD PRIMARY KEY`) that create a **valid index** on this table will be replicated, which might cause inconsistency between downstream and upstream table schemas and lead to subsequent data replication failure.
+> - DDL statements (including `DROP INDEX` and `DROP PRIMARY KEY`) that drop the last **valid index** will not be replicated, causing subsequent data replication to fail.
+
 | DDL | A valid index exists | A valid index does not exist and `force-replicate` is default `false` | A valid index does not exist and `force-replicate` is set to `true` |
 |---|:---:|:---:| :---: |
 | `CREATE DATABASE` | Y | Y | Y |
 | `DROP DATABASE` | Y | Y | Y |
 | `ALTER DATABASE CHARACTER SET` | Y | Y | Y |
-| `CREATE INDEX` | Y | Y [^1] | Y |
-| `ADD INDEX` | Y | Y [^1] | Y |
-| `DROP INDEX` | Y [^2] | N | Y |
-| `ADD PRIMARY KEY` | Y | Y [^1] | Y |
-| `DROP PRIMARY KEY` | Y [^2] | N | Y |
+| `CREATE INDEX` | Y | Y | Y |
+| `ADD INDEX` | Y | Y | Y |
+| `DROP INDEX` | Y | N | Y |
+| `ADD PRIMARY KEY` | Y | Y | Y |
+| `DROP PRIMARY KEY` | Y | N | Y |
 | `CREATE TABLE` | Y | N | Y |
 | `DROP TABLE` | Y | N | Y |
 | `ADD COLUMN` | Y | N | Y |
@@ -51,10 +56,6 @@ The following is the allow list of DDL statements supported by TiCDC. The abbrev
 | `REORGANIZE PARTITION` | Y | N | Y |
 | `ALTER TABLE TTL` | Y | N | Y |
 | `ALTER TABLE REMOVE TTL` | Y | N | Y |
-
-[^1]: When the upstream table has no valid index and `force-replicate=true` is not configured, the table will not be replicated. However, subsequent DDL statements that create a **valid index** on this table will be replicated, which might cause inconsistency between downstream and upstream table schemas and lead to subsequent data replication failure.
-
-[^2]: DDL statements that drop the last **valid index** will not be replicated, causing subsequent data replication to fail.
 
 ## DDL replication considerations
 
