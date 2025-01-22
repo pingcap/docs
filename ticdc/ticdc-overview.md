@@ -82,7 +82,7 @@ Generally, TiCDC only replicates tables that have at least one valid index to th
 
 > **Note:**
 >
-> When you set `[`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) to `true`, TiCDC will forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
+> When you set [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) to `true`, TiCDC will forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
 ## Best practices
 
