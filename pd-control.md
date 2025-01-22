@@ -227,8 +227,6 @@ Usage:
 
 - `region-score-formula-version` controls the version of the Region score formula. The value options are `v1` and `v2`. The version 2 of the formula helps to reduce redundant balance Region scheduling in some scenarios, such as taking TiKV nodes online or offline.
 
-    {{< copyable "" >}}
-
     ```bash
     config set region-score-formula-version v2
     ```
@@ -254,8 +252,6 @@ Usage:
 - `max-store-preparing-time` controls the maximum waiting time for the store to go online. During the online stage of a store, PD can query the online progress of the store. When the specified time is exceeded, PD assumes that the store has been online and cannot query the online progress of the store again. But this does not prevent Regions from transferring to the new online store. In most scenarios, you do not need to adjust this parameter.
 
     The following command specifies that the maximum waiting time for the store to go online is 4 hours.
-
-    {{< copyable "" >}}
 
     ```bash
     config set max-store-preparing-time 4h
@@ -348,8 +344,6 @@ Usage:
 - PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 
 - For example, set the value of `flow-round-by-digit` to `4`:
-
-    {{< copyable "" >}}
 
     ```bash
     config set flow-round-by-digit 4
@@ -804,7 +798,7 @@ Usage:
 
 ### `region topread [limit]`
 
-Use this command to list Regions with top read flow. The default value of the limit is 16.
+Use this command to list Regions with top read flow. The default value of the limit is `16`.
 
 Usage:
 
@@ -818,7 +812,7 @@ Usage:
 
 ### `region topwrite [limit]`
 
-Use this command to list Regions with top write flow. The default value of the limit is 16.
+Use this command to list Regions with top write flow. The default value of the limit is `16`.
 
 Usage:
 
@@ -832,7 +826,7 @@ Usage:
 
 ### `region topconfver [limit]`
 
-Use this command to list Regions with top conf version. The default value of the limit is 16.
+Use this command to list Regions with top conf version. The default value of the limit is `16`.
 
 Usage:
 
@@ -846,7 +840,7 @@ Usage:
 
 ### `region topversion [limit]`
 
-Use this command to list Regions with top version. The default value of the limit is 16.
+Use this command to list Regions with top version. The default value of the limit is `16`.
 
 Usage:
 
@@ -860,7 +854,7 @@ Usage:
 
 ### `region topsize [limit]`
 
-Use this command to list Regions with top approximate size. The default value of the limit is 16.
+Use this command to list Regions with top approximate size. The default value of the limit is `16`.
 
 Usage:
 
@@ -1156,7 +1150,7 @@ store
 }
 ```
 
-To get the store with id of 1, run the following command:
+To get the store with ID of 1, run the following command:
 
 ```bash
 store 1
@@ -1168,7 +1162,7 @@ store 1
 
 #### Delete a store
 
-To delete the store with id of 1, run the following command:
+To delete the store with ID of 1, run the following command:
 
 ```bash
 store delete 1
@@ -1176,7 +1170,7 @@ store delete 1
 
 To cancel deleting `Offline` state stores which are deleted using `store delete`, run the `store cancel-delete` command. After canceling, the store changes from `Offline` to `Up`. Note that the `store cancel-delete` command cannot change a `Tombstone` state store to the `Up` state.
 
-To cancel deleting the store with id of 1, run the following command:
+To cancel deleting the store with ID of 1, run the following command:
 
 ```bash
 store cancel-delete 1
@@ -1202,19 +1196,19 @@ To manage the labels of a store, run the `store label` command.
     store label 1 zone=cn
     ```
 
-- To update the label of a store, for example, changing the value of the key `"zone"` from `"cn"` to `"us"` for the store with id of 1, run the following command:
+- To update the label of a store, for example, changing the value of the key `"zone"` from `"cn"` to `"us"` for the store with ID of 1, run the following command:
 
     ```bash
     store label 1 zone=us
     ```
 
-- To rewrite all labels of a store with id of 1, use the `--rewrite` option. Note that this option overwrites all existing labels:
+- To rewrite all labels of a store with ID of 1, use the `--rewrite` option. Note that this option overwrites all existing labels:
 
     ```bash
     store label 1 region=us-est-1 disk=ssd --rewrite
     ```
 
-- To delete the `"disk"` label for the store with id of 1, use the `--delete` option:
+- To delete the `"disk"` label for the store with ID 1, use the `--delete` option:
 
     ```bash
     store label 1 disk --delete
@@ -1222,12 +1216,12 @@ To manage the labels of a store, run the `store label` command.
 
 > **Note:**
 >
-> - The label of a store is updated by merging the label in TiKV and that in PD. Specifically, after you modify a store label in the TiKV configuration file and restart the cluster, PD merges its own store label with the TiKV store label, updates the label, and persists the merged result.
+> - The label of a store is updated by a merge strategy. After a TiKV process is restarted, the store labels in its configuration file will be merged with the store labels stored by PD, and the merged result will be persisted. During the merging process, if there are duplicate store labels between the PD side and the TiKV configuration file, the TiKV store label configuration will overwrite the PD label. For example, if the store label for store 1 is set to `"zone=cn"` through `store label 1 zone=cn`, but TiKV’s configuration file has `zone = "us"`, after TiKV restarts, the `"zone"` will be updated to `"us"`.
 > - To manage labels of a store using TiUP, you can run the `store label <id> --force` command to empty the labels stored in PD before restarting the cluster.
 
 #### Configure store weight
 
-To set the leader weight to 5 and Region weight to 10 for the store with id of 1, run the following command:
+To set the leader weight to `5` and Region weight to `10` for the store with ID of 1, run the following command:
 
 ```bash
 store weight 1 5 10
@@ -1251,7 +1245,7 @@ You can set the scheduling speed of stores by using `store limit`. For more deta
 
 > **Note:**
 >
-> You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, refer to [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
+> You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, see [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
 
 ### `log [fatal | error | warn | info | debug]`
 
@@ -1330,8 +1324,6 @@ unsafe remove-failed-stores show
 
 ### Query all nodes whose status is not `Up`
 
-{{< copyable "" >}}
-
 ```bash
 store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_name}'
 ```
@@ -1398,7 +1390,7 @@ You can also find out all Regions that have a replica on store30 or store31 in t
 
 ### Look for relevant Regions when restoring data
 
-For example, when [store1, store30, store31] is unavailable at its downtime, you can find all Regions whose Down replicas are more than normal replicas:
+For example, when `[store1, store30, store31]` is unavailable at its downtime, you can find all Regions whose Down replicas are more than normal replicas:
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length as $total | map(if .==(1,30,31) then . else empty end) | length>=$total-length) }"
@@ -1408,14 +1400,14 @@ For example, when [store1, store30, store31] is unavailable at its downtime, you
 ...
 ```
 
-Or when [store1, store30, store31] fails to start, you can find Regions where the data can be manually removed safely on store1. In this way, you can filter out all Regions that have a replica on store1 but don't have other DownPeers:
+Or when `[store1, store30, store31]` fails to start, you can find Regions where the data can be manually removed safely on store1. In this way, you can filter out all Regions that have a replica on store1 but don't have other DownPeers:
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length>1 and any(.==1) and all(.!=(30,31)))}"
 {"id":24,"peer_stores":[1,32,33]}
 ```
 
-When [store30, store31] is down, find out all Regions that can be safely processed by creating the `remove-peer` Operator, that is, Regions with one and only DownPeer:
+When `[store30, store31]` is down, find out all Regions that can be safely processed by creating the `remove-peer` Operator, that is, Regions with one and only DownPeer:
 
 ```bash
 >> region --jq=".regions[] | {id: .id, remove_peer: [.peers[].store_id] | select(length>1) | map(if .==(30,31) then . else empty end) | select(length==1)}"
