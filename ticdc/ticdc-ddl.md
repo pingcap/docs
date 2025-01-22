@@ -18,7 +18,7 @@ The following is the allow list of DDL statements supported by TiCDC. The abbrev
 - Y: Replication to the downstream is supported in this condition.
 - N: Replication to the downstream is not supported in this condition.
 
-| DDL | A valid index exists | A valid index does not exist and `force-replicate` is default `false` | A valid index does not exist and `force-replicate` is set to `false` |
+| DDL | A valid index exists | A valid index does not exist and `force-replicate` is default `false` | A valid index does not exist and `force-replicate` is set to `true` |
 |---|:---:|:---:| :---: |
 | `CREATE DATABASE` | Y | Y | Y |
 | `DROP DATABASE` | Y | Y | Y |
