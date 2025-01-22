@@ -300,8 +300,6 @@ Other requirements for the target machine include:
 
 1. Download and install TiUP:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
@@ -312,23 +310,17 @@ Other requirements for the target machine include:
     >
     > After the installation, TiUP displays the absolute path of the corresponding Shell profile file. You need to modify `${your_shell_profile}` in the following `source` command according to the path.
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     source ${your_shell_profile}
     ```
 
 3. Install the cluster component of TiUP:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     tiup cluster
     ```
 
 4. If the TiUP cluster is already installed on the machine, update the software version:
-
-    {{< copyable "shell-regular" >}}
 
     ```shell
     tiup update --self && tiup update cluster
@@ -339,8 +331,6 @@ Other requirements for the target machine include:
     1. Modify `/etc/ssh/sshd_config`, and set `MaxSessions` to `20`.
     2. Restart the `sshd` service:
 
-        {{< copyable "shell-root" >}}
-
         ```shell
         service sshd restart
         ```
@@ -348,8 +338,6 @@ Other requirements for the target machine include:
 6. Create and start the cluster:
 
     Create and edit the [topology configuration file](/tiup/tiup-cluster-topology-reference.md) according to the following template, and name it as `topo.yaml`:
-
-    {{< copyable "" >}}
 
     ```yaml
     # # Global variables are applied to all deployments and used as the default value of
@@ -418,15 +406,14 @@ Other requirements for the target machine include:
 
 7. Execute the cluster deployment command:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     tiup cluster deploy <cluster-name> <version> ./topo.yaml --user root -p
     ```
 
-    - `<cluster-name>`: Set the cluster name
-    - `<version>`: Set the TiDB cluster version, such as `v8.5.0`. You can see all the supported TiDB versions by running the `tiup list tidb` command
-    - `-p`: Specify the password used to connect to the target machine.
+    - `<cluster-name>`: sets the cluster name.
+    - `<version>`: sets the TiDB cluster version, such as `v8.5.0`. You can see all the supported TiDB versions by running the `tiup list tidb` command.
+    - `--user`: specifies the user who initializes the environment.
+    - `-p`: specifies the password used to connect to the target machine.
 
         > **Note:**
         >
@@ -440,8 +427,6 @@ Other requirements for the target machine include:
     ```
 
 8. Start the cluster:
-
-    {{< copyable "shell-regular" >}}
 
     ```shell
     tiup cluster start <cluster-name>
@@ -469,15 +454,11 @@ Other requirements for the target machine include:
 
     - To view the cluster list:
 
-        {{< copyable "shell-regular" >}}
-
         ```shell
         tiup cluster list
         ```
 
     - To view the cluster topology and status:
-
-        {{< copyable "shell-regular" >}}
 
         ```shell
         tiup cluster display <cluster-name>
@@ -490,8 +471,6 @@ Other requirements for the target machine include:
     1. Stop the above TiDB service by pressing <kbd>Control</kbd>+<kbd>C</kbd>.
 
     2. Run the following command after the service is stopped:
-
-        {{< copyable "shell-regular" >}}
 
         ```shell
         tiup clean --all
