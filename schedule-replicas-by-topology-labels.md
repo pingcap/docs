@@ -19,7 +19,7 @@ You can configure `labels` for TiKV, TiFlash, and TiDB based on the cluster topo
 
 ### Configure a cluster using TiUP (recommended)
 
-When using TiUP to deploy a cluster, you can configure the TiKV location in the [initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file). TiUP will generate the corresponding configuration files for TiDB, TiKV, PD, and TiFlash during deployment.
+When using TiUP to deploy a cluster, you can configure the TiKV location in the [initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file). TiUP will generate the corresponding configuration files for TiDB, TiKV, PD, and TiFlash during deployment.
 
 In the following example, a two-layer topology of `zone/host` is defined. The TiDB nodes, TiKV nodes, and TiFlash nodes of the cluster are distributed among three zones, z1, z2, and z3.
 
