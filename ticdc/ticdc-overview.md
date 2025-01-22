@@ -72,6 +72,17 @@ The components in the architecture diagram are described as follows:
 
 As shown in the architecture diagram, TiCDC supports replicating data to TiDB, MySQL, Kafka, and storage services.
 
+## Valid index
+
+Generally, TiCDC only replicates tables that have at least one valid index to the downstream. If an index in a table meets one of the following requirements, it is valid.
+
+- A primary key (`PRIMARY KEY`) is a valid index.
+- A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have a virtual generated column (`VIRTUAL GENERATED COLUMNS`).
+
+> **Note:**
+>
+> When you set [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) to `true`, TiCDC will forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
+
 ## Best practices
 
 - When you use TiCDC to replicate data between two TiDB clusters, if the network latency between the two clusters is higher than 100 ms:
@@ -79,10 +90,7 @@ As shown in the architecture diagram, TiCDC supports replicating data to TiDB, M
     - For TiCDC versions earlier than v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located.
     - With a series of improvements introduced starting from TiCDC v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the upstream TiDB cluster is located.
 
-- TiCDC only replicates tables that have at least one valid index. A valid index is defined as follows:
-
-    - A primary key (`PRIMARY KEY`) is a valid index.
-    - A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have a virtual generated column (`VIRTUAL GENERATED COLUMNS`).
+- Each table to be replicated by TiCDC has at least one [valid index](#valid-index).
 
 - To ensure eventual consistency when using TiCDC for disaster recovery, you need to configure [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios) and ensure that the storage system where the redo log is written can be read normally when a disaster occurs in the upstream.
 
