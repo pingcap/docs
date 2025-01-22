@@ -89,10 +89,7 @@ The `fields` in the key contains only primary key columns or unique index column
 }
 ```
 
-<<<<<<< HEAD
 The data format of Value is the same as that of Key, by default. However, `fields` in the Value contains all columns, not just the primary key columns.
-=======
-The data format of Value is the same as that of Key, by default. However, `fields` in the Value contains all columns.
 
 > **Note:**
 >
@@ -103,28 +100,6 @@ The data format of Value is the same as that of Key, by default. However, `field
 > - For Update events, Avro encodes only all column data that is updated to the Value part.
 >
 > The Avro protocol does not encode the old values for Update and Delete events. Additionally, to be compatible with most Confluent sink connectors that rely on `null` records to identify deletions (`delete.on.null`), Delete events do not include extension information, such as `_tidb_commit_ts`, even when `enable-tidb-extension` is enabled. If you need these features, consider using other protocols such as Canal-JSON or Debezium.
-
-## TiDB extension fields
-
-By default, Avro only collects data of changed rows in DML events and does not collect the type of data changes or TiDB-specific CommitTS (the unique identifiers of transactions). To address this issue, TiCDC introduces the following three TiDB extension fields to the Avro protocol message. When `enable-tidb-extension` is set to `true` (`false` by default) in `sink-uri`, TiCDC adds these three fields to the Avro messages during message generation.
-
-- `_tidb_op`: The DML type. "c" indicates insert and "u" indicates updates.
-- `_tidb_commit_ts`: The unique identifier of a transaction.
-- `_tidb_commit_physical_time`: The physical timestamp in a transaction identifier.
-
-The following is a configuration example:
-
-```shell
-cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-enable-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
-```
-
-```shell
-[sink]
-dispatchers = [
- {matcher = ['*.*'], topic = "tidb_{schema}_{table}"},
-]
-```
->>>>>>> a324df889f (ticdc: add note to the Avro protocol (#19573))
 
 After you enable [`enable-tidb-extension`](#tidb-extension-fields), the data format of the Value will be as follows:
 
