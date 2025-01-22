@@ -91,7 +91,7 @@ Generally, TiCDC only replicates tables that have at least one valid index to th
     - For TiCDC versions earlier than v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located.
     - With a series of improvements introduced starting from TiCDC v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the upstream TiDB cluster is located.
 
-- The table to be replicated by TiCDC has at least one [valid index](#valid-index).
+- Each table to be replicated by TiCDC has at least one [valid index](#valid-index).
 
 - To ensure eventual consistency when using TiCDC for disaster recovery, you need to configure [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios) and ensure that the storage system where the redo log is written can be read normally when a disaster occurs in the upstream.
 
