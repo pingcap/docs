@@ -47,6 +47,11 @@ This section introduces the configuration of a replication task.
 - This configuration item affects configurations related to filter and sink.
 - Default value: `false`
 
+### `force-replicate`
+
+- Specifies whether to forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
+- Default value: `false`
+
 ### `enable-sync-point` <span class="version-mark">New in v6.3.0</span>
 
 - Specifies whether to enable the Syncpoint feature, which is supported starting from v6.3.0 and is disabled by default.

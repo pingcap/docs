@@ -11,38 +11,51 @@ This document describes the rules and special cases of DDL replication in TiCDC.
 
 Currently, TiCDC uses an allow list to determine whether to replicate a DDL statement. Only the DDL statements in the allow list are replicated to the downstream. The DDL statements not in the allow list are not replicated.
 
-The allow list of DDL statements supported by TiCDC is as follows:
+In addition, TiCDC determines whether to replicate a DDL statement to the downstream based on whether the table has a [valid index](/ticdc/ticdc-overview.md#valid-index) and whether the configuration item [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) is set to `true`. When `force-replicate=true`, the replication task attempts to forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
-- create database
-- drop database
-- create table
-- drop table
-- add column
-- drop column
-- create index / add index
-- drop index
-- truncate table
-- modify column
-- rename table
-- alter column default value
-- alter table comment
-- rename index
-- add partition
-- drop partition
-- truncate partition
-- create view
-- drop view
-- alter table character set
-- alter database character set
-- recover table
-- add primary key
-- drop primary key
-- rebase auto id
-- alter table index visibility
-- exchange partition
-- reorganize partition
-- alter table ttl
-- alter table remove ttl
+The following is the allow list of DDL statements supported by TiCDC. The abbreviations in the table:
+
+- Y: Replication to the downstream is supported in this condition.
+- N: Replication to the downstream is not supported in this condition.
+
+> **Note**
+>
+> - When the upstream table has no valid index and `force-replicate=true` is not configured, the table will not be replicated. However, subsequent DDL statements (including `CREATE INDEX`, `ADD INDEX`, and `ADD PRIMARY KEY`) that create a valid index on this table will be replicated, which might cause inconsistency between downstream and upstream table schemas and lead to subsequent data replication failure.
+> - DDL statements (including `DROP INDEX` and `DROP PRIMARY KEY`) that drop the last valid index will not be replicated, causing subsequent data replication to fail.
+
+| DDL | A valid index exists | A valid index does not exist and `force-replicate` is `false` (default) | A valid index does not exist and `force-replicate` is set to `true` |
+|---|:---:|:---:| :---: |
+| `CREATE DATABASE` | Y | Y | Y |
+| `DROP DATABASE` | Y | Y | Y |
+| `ALTER DATABASE CHARACTER SET` | Y | Y | Y |
+| `CREATE INDEX` | Y | Y | Y |
+| `ADD INDEX` | Y | Y | Y |
+| `DROP INDEX` | Y | N | Y |
+| `ADD PRIMARY KEY` | Y | Y | Y |
+| `DROP PRIMARY KEY` | Y | N | Y |
+| `CREATE TABLE` | Y | N | Y |
+| `DROP TABLE` | Y | N | Y |
+| `ADD COLUMN` | Y | N | Y |
+| `DROP COLUMN` | Y | N | Y |
+| `TRUNCATE TABLE` | Y | N | Y |
+| `MODIFY COLUMN` | Y | N | Y |
+| `RENAME TABLE` | Y | N | Y |
+| `ALTER COLUMN DEFAULT VALUE` | Y | N | Y |
+| `ALTER TABLE COMMENT` | Y | N | Y |
+| `RENAME INDEX` | Y | N | Y |
+| `ADD PARTITION` | Y | N | Y |
+| `DROP PARTITION` | Y | N | Y |
+| `TRUNCATE PARTITION` | Y | N | Y |
+| `CREATE VIEW` | Y | N | Y |
+| `DROP VIEW` | Y | N | Y |
+| `ALTER TABLE CHARACTER SET` | Y | N | Y |
+| `RECOVER TABLE` | Y | N | Y |
+| `REBASE AUTO ID` | Y | N | Y |
+| `ALTER TABLE INDEX VISIBILITY` | Y | N | Y |
+| `EXCHANGE PARTITION` | Y | N | Y |
+| `REORGANIZE PARTITION` | Y | N | Y |
+| `ALTER TABLE TTL` | Y | N | Y |
+| `ALTER TABLE REMOVE TTL` | Y | N | Y |
 
 ## DDL replication considerations
 
