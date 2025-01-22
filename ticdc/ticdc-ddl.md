@@ -11,7 +11,7 @@ This document describes the rules and special cases of DDL replication in TiCDC.
 
 Currently, TiCDC uses an allow list to determine whether to replicate a DDL statement. Only the DDL statements in the allow list are replicated to the downstream. The DDL statements not in the allow list are not replicated.
 
-In addition, TiCDC determines whether to replicate a DDL statement to the downstream based on whether the table has a [valid index](/ticdc/ticdc-overview.md#valid-index) and whether the configuration item [`force-replicate`](/ticdc/ticdc-manage-changefeed.md#synchronize-tables-without-valid-indexes) is set to `true`. When `force-replicate=true`, the replication task attempts to forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
+In addition, TiCDC determines whether to replicate a DDL statement to the downstream based on whether the table has a [valid index](/ticdc/ticdc-overview.md#valid-index) and whether the configuration item [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) is set to `true`. When `force-replicate=true`, the replication task attempts to forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
 The following is the allow list of DDL statements supported by TiCDC. The abbreviations in the table:
 
@@ -23,7 +23,7 @@ The following is the allow list of DDL statements supported by TiCDC. The abbrev
 > - When the upstream table has no valid index and `force-replicate=true` is not configured, the table will not be replicated. However, subsequent DDL statements (including `CREATE INDEX`, `ADD INDEX`, and `ADD PRIMARY KEY`) that create a **valid index** on this table will be replicated, which might cause inconsistency between downstream and upstream table schemas and lead to subsequent data replication failure.
 > - DDL statements (including `DROP INDEX` and `DROP PRIMARY KEY`) that drop the last **valid index** will not be replicated, causing subsequent data replication to fail.
 
-| DDL | A valid index exists | A valid index does not exist and `force-replicate` is default `false` | A valid index does not exist and `force-replicate` is set to `true` |
+| DDL | A valid index exists | A valid index does not exist and `force-replicate` is `false` (default) | A valid index does not exist and `force-replicate` is set to `true` |
 |---|:---:|:---:| :---: |
 | `CREATE DATABASE` | Y | Y | Y |
 | `DROP DATABASE` | Y | Y | Y |
