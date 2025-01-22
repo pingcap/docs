@@ -6,7 +6,7 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
 # Quick Start with TiDB Data Migration
 
-[TiDB Data Migration (DM)](/dm/dm-overview.md) is a powerful tool that replicates data from MySQL-compatible databases to TiDB. This guide shows you how to set up a local TiDB DM environment for development and testing using [TiUP Playground](/tiup/tiup-playground.md).
+[TiDB Data Migration (DM)](/dm/dm-overview.md) is a powerful tool that replicates data from MySQL-compatible databases to TiDB. This guide shows you how to quickly set up a local TiDB DM environment for development and testing using [TiUP Playground](/tiup/tiup-playground.md).
 
 > **Note:**
 >
@@ -24,19 +24,19 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
     > **Note:**
     >
-    > If you have an existing installation of TiUP, ensure it is updated to v1.16.1 or later to use the `--dm-master` and `--dm-worker` flags. To check your current version:
+    > If you have an existing installation of TiUP, ensure it is updated to v1.16.1 or later to use the `--dm-master` and `--dm-worker` flags. To check your current version, run the following command:
     >
     > ```shell
     > tiup --version
     > ```
     >
-    > To upgrade TiUP to the latest version, run:
+    > To upgrade TiUP to the latest version, run the following command:
     >
     > ```shell
     > tiup update --self
     > ```
 
-2. Start TiUP Playground with a TiDB target database and DM components:
+2. Start TiUP Playground with a target TiDB database and DM components:
 
     ```shell
     tiup playground --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
@@ -58,7 +58,7 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 
 ## Step 2: Prepare a source database (optional)
 
-You can use one or multiple MySQL instances as a source database. If you already have a MySQL-compatible instance, skip to [Step 3](#step-3-configure-a-tidb-dm-source). Otherwise, take the following steps to create one for testing.
+You can use one or more MySQL instances as a source database. If you already have a MySQL-compatible instance, skip to [Step 3](#step-3-configure-a-tidb-dm-source). Otherwise, take the following steps to create one for testing.
 
 <SimpleTab groupId="os">
 
@@ -81,7 +81,7 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance.
     docker exec -it mysql80 mysql -uroot -pMyPassw0rd!
     ```
 
-3. Create a dedicated user for DM with required privileges:
+3. Create a dedicated user with required privileges for DM testing:
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -138,7 +138,7 @@ On macOS, you can quickly install and start MySQL 8.0 locally using [Homebrew](h
     mysql -uroot
     ```
 
-5. For DM testing purposes, create a dedicated user and grant privileges:
+5. Create a dedicated user with required privileges for DM testing:
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -207,7 +207,7 @@ On Enterprise Linux distributions like CentOS, you can install MySQL 8.0 from th
         IDENTIFIED BY 'MyPassw0rd!';
     ```
 
-7. For DM testing purposes, create a dedicated user and grant privileges:
+7. Create a dedicated user with required privileges for DM testing:
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -264,7 +264,7 @@ On Ubuntu, you can install MySQL from the official Ubuntu repository.
     sudo mysql
     ```
 
-5. For DM testing purposes, create a dedicated user and grant privileges:
+5. Create a dedicated user with required privileges for DM testing:
 
     ```sql
     CREATE USER 'tidb-dm'@'%'
@@ -358,13 +358,13 @@ After starting the migration task, verify whether data replication is working as
     tiup dmctl --master-addr 127.0.0.1:8261 query-status
     ```
 
-2. Connect to the TiDB target database:
+2. Connect to the target TiDB database:
 
     ```shell
     mysql --host 127.0.0.1 --port 4000 -u root --prompt 'tidb> '
     ```
 
-3. Verify the replicated data. If you have created the sample data in [Step 2](#step-2-prepare-a-source-database-optional), you will see the `hello_tidb` table replicated from the MySQL source database to the TiDB target database:
+3. Verify the replicated data. If you have created the sample data in [Step 2](#step-2-prepare-a-source-database-optional), you will see the `hello_tidb` table replicated from the MySQL source database to the target TiDB database:
 
     ```sql
     SELECT * FROM hello.hello_tidb;
@@ -423,7 +423,7 @@ After completing your testing, you can clean up the environment by stopping the 
 
     <div label="CentOS" value="centos">
 
-    If you installed MySQL 8.0 from the MySQL Yum repository, stop the service and uninstall it:
+    If you installed MySQL 8.0 from the MySQL Yum repository solely for testing, stop the service and uninstall it:
 
     ```shell
     sudo systemctl stop mysqld
@@ -438,7 +438,7 @@ After completing your testing, you can clean up the environment by stopping the 
 
     <div label="Ubuntu" value="ubuntu">
 
-    If you installed MySQL from the official Ubuntu repository, stop the service and uninstall it:
+    If you installed MySQL from the official Ubuntu repository solely for testing, stop the service and uninstall it:
 
     ```shell
     sudo systemctl stop mysql
