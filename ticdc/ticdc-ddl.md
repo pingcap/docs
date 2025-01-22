@@ -11,14 +11,14 @@ This document describes the rules and special cases of DDL replication in TiCDC.
 
 Currently, TiCDC uses an allow list to determine whether to replicate a DDL statement. Only the DDL statements in the allow list are replicated to the downstream. The DDL statements not in the allow list are not replicated.
 
-In addition, TiCDC determines whether to replicate a DDL statement to the downstream based on whether the table has a [valid index](/ticdc/ticdc-overview.md#valid-index) and whether the configuration item [`force-replicate`](/ticdc/ticdc-manage-changefeed.md#synchronize-tables-without-valid-indexes) is set to `true`. When `force-replicate=true`, the replication task attempts to forcibly [replicate tables without valid indexes](/ticdc/ticdc-manage-changefeed.md#synchronize-tables-without-valid-indexes).
+In addition, TiCDC determines whether to replicate a DDL statement to the downstream based on whether the table has a [valid index](/ticdc/ticdc-overview.md#valid-index) and whether the configuration item [`force-replicate`](/ticdc/ticdc-manage-changefeed.md#synchronize-tables-without-valid-indexes) is set to `true`. When `force-replicate=true`, the replication task attempts to forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
 The following is the allow list of DDL statements supported by TiCDC. The abbreviations in the table:
 
 - Y: Replication to the downstream is supported in this condition.
 - N: Replication to the downstream is not supported in this condition.
 
-| DDL | Has Valid Index | No Valid Index and `force-replicate` is Default `false` | No Valid Index and `force-replicate` is `true` |
+| DDL | A valid index exists | A valid index does not exist and `force-replicate` is default `false` | A valid index does not exist and `force-replicate` is set to `false` |
 |---|:---:|:---:| :---: |
 | `CREATE DATABASE` | Y | Y | Y |
 | `DROP DATABASE` | Y | Y | Y |
