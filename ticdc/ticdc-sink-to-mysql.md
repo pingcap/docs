@@ -77,7 +77,7 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `write-timeout` | go-sql-driver parameter, [I/O write timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-writetimeout) (optional, the default value is `2m`). |
 | `timeout` | go-sql-driver parameter, [timeout for establishing connections](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-timeout), also known as dial timeout (optional, the default value is `2m`). |
 | `safe-mode` | Convert all `INSERT` and `UPDATE` statements to `REPLACE INTO` statements (optional, the default value is `false`). |
-| `tidb-txn-mode` | Specify the system variable [tidb_txn_mode](https://docs.pingcap.com/zh/tidb/stable/system-variables#tidb_txn_mode) (optional, the default value is `optimistic`). |
+| `tidb-txn-mode` | Specify the system variable [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) (optional, the default value is `optimistic`). |
 
 To encode the database password in the sink URI using Base64, use the following command:
 
