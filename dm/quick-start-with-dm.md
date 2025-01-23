@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: TiDB Data Migration Quick Start
-summary: Learn how to quickly deploy a DM cluster using binary packages.
-=======
 title: Quick Start with TiDB Data Migration
 summary: Learn how to quickly set up a data migration environment using TiUP Playground.
-aliases: ['/docs/tidb-data-migration/dev/get-started/']
->>>>>>> 437eb5253b (dm: update DM quick start using TiUP Playground (#19925))
 ---
 
 # Quick Start with TiDB Data Migration
@@ -44,11 +38,7 @@ aliases: ['/docs/tidb-data-migration/dev/get-started/']
 2. Start TiUP Playground with a target TiDB database and DM components:
 
     ```shell
-<<<<<<< HEAD
-    tiup dm deploy dm-test 8.5.1 topology.yaml -p
-=======
-    tiup playground --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
->>>>>>> 437eb5253b (dm: update DM quick start using TiUP Playground (#19925))
+    tiup playground v8.5.1 --dm-master 1 --dm-worker 1 --tiflash 0 --without-monitor
     ```
 
 3. Verify the environment by checking in the output whether TiDB and DM are running:
