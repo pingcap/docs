@@ -31,5 +31,3 @@ tiup dm upgrade <cluster-name> <version> [flags]
 ## Output
 
 Log of the service upgrade process.
-
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
