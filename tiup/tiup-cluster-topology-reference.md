@@ -438,8 +438,6 @@ tiflash_servers:
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated based on the `deploy_dir` directory configured in `global`.
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated based on the `data_dir` directory configured in `global`.
-
 - `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is of string type. The value is the ID of the NUMA node, such as `"0,1"`.
 
 - `config`: The configuration rule of this field is the same as the `tiproxy` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiproxy` content in `server_configs`. If these two fields overlap, the content of this field takes effect. Subsequently, a configuration file is generated and sent to the machine specified in `host`.
@@ -453,7 +451,6 @@ Among the above fields, you cannot modify the following configured fields after 
 - `host`
 - `port`
 - `deploy_dir`
-- `data_dir`
 - `arch`
 - `os`
 
