@@ -146,6 +146,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 The log of the upgrading progress.
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
 
 ## See also
 

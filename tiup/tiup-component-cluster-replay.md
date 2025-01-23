@@ -25,3 +25,4 @@ Prints the help information.
 
 The output of the command corresponding to `<audit-id>`.
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

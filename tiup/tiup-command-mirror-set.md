@@ -47,3 +47,4 @@ In the steps above, if the mirror is attacked before the `wget` command, you can
 
 None
 
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

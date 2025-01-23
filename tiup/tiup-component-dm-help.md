@@ -25,3 +25,4 @@ tiup dm help [command] [flags]
 
 The help information of `[command]` or `tiup-dm`.
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

@@ -32,3 +32,4 @@ tiup dm audit [audit-id] [flags]
     - Time: the execution time of the command corresponding to the record
     - Command: the command corresponding to the record
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

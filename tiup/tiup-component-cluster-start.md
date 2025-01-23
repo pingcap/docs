@@ -56,6 +56,7 @@ Starts the cluster in a safe way. It is recommended to use this option when the 
 
 The log of starting the service.
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
 
 ## See also
 

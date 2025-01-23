@@ -48,3 +48,4 @@ tiup mirror clone <target-dir> [global version] [flags]
 - Data type: Strings
 - Default: Null
 
+[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

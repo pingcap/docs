@@ -25,3 +25,4 @@ Prints the help information.
 
 The output of the command corresponding to `<audit-id>`.
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

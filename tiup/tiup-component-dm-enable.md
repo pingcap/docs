@@ -45,3 +45,4 @@ Prints the help information.
 
 the execution log of tiup-dm.
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

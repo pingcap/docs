@@ -87,3 +87,4 @@ tiup cluster [command] [flags]
 - [meta restore](/tiup/tiup-component-cluster-meta-restore.md): restores the TiUP meta file of a specified cluster
 - [help](/tiup/tiup-component-cluster-help.md): prints the help information
 
+[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)

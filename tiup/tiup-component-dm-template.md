@@ -36,3 +36,4 @@ Prints the help information.
 
 Outputs the topology template according to the specified options, which can be redirected to the topology file for deployment.
 
+[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

@@ -67,6 +67,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 The deployment log.
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
 
 ## See also
 

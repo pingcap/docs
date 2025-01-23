@@ -32,3 +32,4 @@ tiup cluster audit [audit-id] [flags]
     - Time: the execution time of the command corresponding to the record
     - Command: the command corresponding to the record
 
+[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
