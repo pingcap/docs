@@ -48,7 +48,7 @@ You can import the system data into TiDB using the following method.
     );
     ```
 
-3. Create a tidb-lightning.toml file as follows:
+3. Create a `tidb-lightning.toml` file as follows:
 
     ```toml
     [tikv-importer]
