@@ -231,10 +231,10 @@ encoding-worker-num = 16
 # The number of flushing workers in the redo module.
 # The default value is 8.
 flush-worker-num = 8
-# The behavior to compress redo log files.
+# The behavior to compress redo log files (introduced in v6.5.6, v7.1.3, and v7.5.1).
 # Available options are "" and "lz4". The default value is "", which means no compression.
 compression = ""
-# The concurrency for uploading a single redo file.
+# The concurrency for uploading a single redo file (introduced in v6.5.6, v7.1.3, and v7.5.1).
 # The default value is 1, which means concurrency is disabled.
 flush-concurrency = 1
 
