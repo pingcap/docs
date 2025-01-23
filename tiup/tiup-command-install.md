@@ -25,4 +25,3 @@ None
 - If the component does not exist, the `The component "%s" not found` error is reported.
 - If the version does not exist, the `version %s not supported by component %s` error is reported.
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

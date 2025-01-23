@@ -53,4 +53,3 @@ A component can run in one of the following statuses:
 
 Component status derives from the PD scheduling information. For more details, see [Information collection](/tidb-scheduling.md#information-collection).
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

@@ -62,4 +62,3 @@ Marks a specified component or version as unavailable.
     - If the mirror is a remote mirror, TiUP reports the error `Error: The server refused, make sure you have access to this component`.
     - If the mirror is a local mirror, TiUP reports the error `Error: the signature is not correct`.
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

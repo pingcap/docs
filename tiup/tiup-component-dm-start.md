@@ -47,4 +47,3 @@ tiup dm start <cluster-name> [flags]
 
 The log of starting the service.
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

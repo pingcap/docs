@@ -23,4 +23,3 @@ None
 
 The help information of `[command]` or TiUP.
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

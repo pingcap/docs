@@ -43,4 +43,3 @@ source $HOME/.bash_profile
 tiup completion zsh > "${fpath[1]}/_tiup"
 ```
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

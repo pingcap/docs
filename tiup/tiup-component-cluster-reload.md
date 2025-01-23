@@ -103,7 +103,6 @@ After you specify the `--skip-restart` option, it only refreshes the configurati
 
 The execution log of the tiup-cluster.
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
 
 ## See also
 

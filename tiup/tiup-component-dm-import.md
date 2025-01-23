@@ -66,4 +66,3 @@ tiup dm import [flags]
 
 The log of the importing process.
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

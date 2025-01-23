@@ -25,4 +25,3 @@ tiup dm prune <cluster-name> [flags]
 
 The log of the cleanup process.
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

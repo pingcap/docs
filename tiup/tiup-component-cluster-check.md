@@ -253,4 +253,3 @@ A table containing the following fields:
 - `Result`: the check result (Pass, Warn, or Fail)
 - `Message`: the result description
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

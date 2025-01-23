@@ -35,4 +35,3 @@ tiup cluster audit cleanup [flags]
 clean audit log successfully
 ```
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

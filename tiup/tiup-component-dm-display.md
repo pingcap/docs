@@ -58,4 +58,3 @@ tiup dm display <cluster-name> [flags]
     - `Data Dir`: the data directory of the service. `-` means that there is no data directory.
     - `Deploy Dir`: the deployment directory of the service.
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

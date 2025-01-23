@@ -37,4 +37,3 @@ None
 - [clone](/tiup/tiup-command-mirror-clone.md): clones a new mirror from an existing one
 - [merge](/tiup/tiup-command-mirror-merge.md): merges mirrors
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
