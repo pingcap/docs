@@ -1,6 +1,7 @@
 ---
 title: Use TiDB Dashboard behind a Reverse Proxy
 aliases: ['/docs/dev/dashboard/dashboard-ops-reverse-proxy/']
+summary: TiDB Dashboard can be safely exposed using a reverse proxy. To do this, get the actual TiDB Dashboard address and configure the reverse proxy using either HAProxy or NGINX. You can also customize the path prefix for the TiDB Dashboard service. To enhance security, consider configuring a firewall.
 ---
 
 # Use TiDB Dashboard behind a Reverse Proxy
@@ -131,7 +132,7 @@ server_configs:
 <details>
 <summary> <strong>Modify configuration when deploying a new cluster using TiUP</strong> </summary>
 
-If you are deploying a new cluster, you can add the configuration above to the `topology.yaml` TiUP topology file and deploy the cluster. For specific instruction, see [TiUP deployment document](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file).
+If you are deploying a new cluster, you can add the configuration above to the `topology.yaml` TiUP topology file and deploy the cluster. For specific instruction, see [TiUP deployment document](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file).
 
 </details>
 

@@ -11,44 +11,59 @@ This document describes the rules and special cases of DDL replication in TiCDC.
 
 Currently, TiCDC uses an allow list to determine whether to replicate a DDL statement. Only the DDL statements in the allow list are replicated to the downstream. The DDL statements not in the allow list are not replicated.
 
-The allow list of DDL statements supported by TiCDC is as follows:
+In addition, TiCDC determines whether to replicate a DDL statement to the downstream based on whether the table has a [valid index](/ticdc/ticdc-overview.md#valid-index) and whether the configuration item [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) is set to `true`. When `force-replicate=true`, the replication task attempts to forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
 
-- create database
-- drop database
-- create table
-- drop table
-- add column
-- drop column
-- create index / add index
-- drop index
-- truncate table
-- modify column
-- rename table
-- alter column default value
-- alter table comment
-- rename index
-- add partition
-- drop partition
-- truncate partition
-- create view
-- drop view
-- alter table character set
-- alter database character set
-- recover table
-- add primary key
-- drop primary key
-- rebase auto id
-- alter table index visibility
-- exchange partition
-- reorganize partition
-- alter table ttl
-- alter table remove ttl
+The following is the allow list of DDL statements supported by TiCDC. The abbreviations in the table:
+
+- Y: Replication to the downstream is supported in this condition.
+- N: Replication to the downstream is not supported in this condition.
+
+> **Note**
+>
+> - When the upstream table has no valid index and `force-replicate=true` is not configured, the table will not be replicated. However, subsequent DDL statements (including `CREATE INDEX`, `ADD INDEX`, and `ADD PRIMARY KEY`) that create a valid index on this table will be replicated, which might cause inconsistency between downstream and upstream table schemas and lead to subsequent data replication failure.
+> - DDL statements (including `DROP INDEX` and `DROP PRIMARY KEY`) that drop the last valid index will not be replicated, causing subsequent data replication to fail.
+
+| DDL | A valid index exists | A valid index does not exist and `force-replicate` is `false` (default) | A valid index does not exist and `force-replicate` is set to `true` |
+|---|:---:|:---:| :---: |
+| `CREATE DATABASE` | Y | Y | Y |
+| `DROP DATABASE` | Y | Y | Y |
+| `ALTER DATABASE CHARACTER SET` | Y | Y | Y |
+| `CREATE INDEX` | Y | Y | Y |
+| `ADD INDEX` | Y | Y | Y |
+| `DROP INDEX` | Y | N | Y |
+| `ADD PRIMARY KEY` | Y | Y | Y |
+| `DROP PRIMARY KEY` | Y | N | Y |
+| `CREATE TABLE` | Y | N | Y |
+| `DROP TABLE` | Y | N | Y |
+| `ADD COLUMN` | Y | N | Y |
+| `DROP COLUMN` | Y | N | Y |
+| `TRUNCATE TABLE` | Y | N | Y |
+| `MODIFY COLUMN` | Y | N | Y |
+| `RENAME TABLE` | Y | N | Y |
+| `ALTER COLUMN DEFAULT VALUE` | Y | N | Y |
+| `ALTER TABLE COMMENT` | Y | N | Y |
+| `RENAME INDEX` | Y | N | Y |
+| `ADD PARTITION` | Y | N | Y |
+| `DROP PARTITION` | Y | N | Y |
+| `TRUNCATE PARTITION` | Y | N | Y |
+| `CREATE VIEW` | Y | N | Y |
+| `DROP VIEW` | Y | N | Y |
+| `ALTER TABLE CHARACTER SET` | Y | N | Y |
+| `RECOVER TABLE` | Y | N | Y |
+| `REBASE AUTO ID` | Y | N | Y |
+| `ALTER TABLE INDEX VISIBILITY` | Y | N | Y |
+| `EXCHANGE PARTITION` | Y | N | Y |
+| `REORGANIZE PARTITION` | Y | N | Y |
+| `ALTER TABLE TTL` | Y | N | Y |
+| `ALTER TABLE REMOVE TTL` | Y | N | Y |
 
 ## DDL replication considerations
 
 ### Asynchronous execution of `ADD INDEX` and `CREATE INDEX` DDLs
 
 When the downstream is TiDB, TiCDC executes `ADD INDEX` and `CREATE INDEX` DDL operations asynchronously to minimize the impact on changefeed replication latency. This means that, after replicating `ADD INDEX` and `CREATE INDEX` DDLs to the downstream TiDB for execution, TiCDC returns immediately without waiting for the completion of the DDL execution. This avoids blocking subsequent DML executions.
+
+During the execution of the `ADD INDEX` or `CREATE INDEX` DDL operation in the downstream, when TiCDC executes the next DDL operation of the same table, this DDL operation might be blocked in the `queueing` state for a long time. This can cause TiCDC to repeatedly execute this DDL operation, and if retries take too long, it might lead to replication task failure. Starting from v8.4.0, if TiCDC has the `SUPER` permission of the downstream database, it periodically runs `ADMIN SHOW DDL JOBS` to check the status of asynchronously executed DDL tasks. TiCDC will wait for index creation to complete before proceeding with replication. Although this might increase replication latency, it avoids replication task failure.
 
 > **Note:**
 >
@@ -102,25 +117,6 @@ TiCDC processes this type of DDL as follows:
 | `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` | Report an error | The new database name `ignore` does not match the filter rule. |
 | `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | Report an error | The `RENAME TABLE` DDL swaps the names of `test.t1` and `test.t3` in one DDL statement, which TiCDC cannot handle correctly. In this case, refer to the error message for handling. |
 
-### SQL mode
+### DDL statement considerations
 
-By default, TiCDC uses the default SQL mode of TiDB to parse DDL statements. If your upstream TiDB cluster uses a non-default SQL mode, you must specify the SQL mode in the TiCDC configuration file. Otherwise, TiCDC might fail to parse DDL statements correctly. For more information about TiDB SQL mode, see [SQL Mode](/sql-mode.md).
-
-For example, if the upstream TiDB cluster uses the `ANSI_QUOTES` mode, you must specify the SQL mode in the changefeed configuration file as follows:
-
-```toml
-# In the value, "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" is the default SQL mode of TiDB.
-# "ANSI_QUOTES" is the SQL mode added to your upstream TiDB cluster.
-
-sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,ANSI_QUOTES"
-```
-
-If the SQL mode is not configured, TiCDC might fail to parse some DDL statements correctly. For example:
-
-```sql
-CREATE TABLE "t1" ("a" int PRIMARY KEY);
-```
-
-Because in the default SQL mode of TiDB, double quotation marks are treated as strings rather than identifiers, TiCDC fails to parse the DDL statement correctly.
-
-Therefore, when creating a replication task, it is recommended that you specify the SQL mode used by the upstream TiDB cluster in the configuration file.
+When executing cross-database DDL statements (such as `CREATE TABLE db1.t1 LIKE t2`) in the upstream, it is recommended that you explicitly specify all relevant database names in DDL statements (such as `CREATE TABLE db1.t1 LIKE db2.t2`). Otherwise, cross-database DDL statements might not be executed correctly in the downstream due to the lack of database name information.

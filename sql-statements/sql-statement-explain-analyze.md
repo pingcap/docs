@@ -34,14 +34,14 @@ ExplainableStmt ::=
 
 ## EXPLAIN ANALYZE output format
 
-Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. Therefore, you can regard `EXPLAIN ANALYZE` as an extension of the `EXPLAIN` statement. Compared to `EXPLAIN` (for debugging query exeuction), the return results of `EXPLAIN ANALYZE` also include columns of information such as `actRows`, `execution info`, `memory`, and `disk`. The details of these columns are shown as follows:
+Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. Therefore, you can regard `EXPLAIN ANALYZE` as an extension of the `EXPLAIN` statement. Compared to `EXPLAIN` (for debugging query execution), the return results of `EXPLAIN ANALYZE` also include columns of information such as `actRows`, `execution info`, `memory`, and `disk`. The details of these columns are shown as follows:
 
 | attribute name          | description |
 |:----------------|:---------------------------------|
-| actRows       | Number of rows output by the operator. |
-| execution info  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called many times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. |
-| memory  | Memory space occupied by the operator. |
-| disk  | Disk space occupied by the operator. |
+| `actRows`       | Number of rows output by the operator. |
+| `execution info`  | Execution information of the operator. `time` represents the total `wall time` from entering the operator to leaving the operator, including the total execution time of all sub-operators. If the operator is called multiple times by the parent operator (in loops), then the time refers to the accumulated time. `loops` is the number of times the current operator is called by the parent operator. `open` represents the time spent initializing the operator. `close` refers to the time taken from when the operator finishes processing data to when it ends execution. The `time` value includes both `open` and `close` time. When the operator is executed concurrently, `execution info` shows the sum of all used `wall time`. In this case, `time`, `open`, and `close` are replaced with `total_time`, `total_open`, and `total_close`. |
+| `memory`  | Maximum memory space occupied by the operator. |
+| `disk`  | Maximum disk space occupied by the operator. |
 
 ## Examples
 
@@ -91,7 +91,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 +-------------------+----------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
 | id                | estRows  | actRows | task      | access object | execution info                                                                                                                                                                                                                            | operator info                  | memory    | disk |
 +-------------------+----------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
-| TableReader_5     | 10000.00 | 3       | root      |               | time:278.2µs, loops:2, cop_task: {num: 1, max: 437.6µs, proc_keys: 3, rpc_num: 1, rpc_time: 423.9µs, copr_cache_hit_ratio: 0.00}                                                                                                          | data:TableFullScan_4           | 251 Bytes | N/A  |
+| TableReader_5     | 10000.00 | 3       | root      |               | time:278.2µs, loops:2, cop_task: {num: 1, max: 437.6µs, proc_keys: 3, copr_cache_hit_ratio: 0.00}, rpc_info:{Cop:{num_rpc:1, total_time:423.9µs}}                                                                                         | data:TableFullScan_4           | 251 Bytes | N/A  |
 | └─TableFullScan_4 | 10000.00 | 3       | cop[tikv] | table:t1      | tikv_task:{time:0s, loops:1}, scan_detail: {total_process_keys: 3, total_process_keys_size: 111, total_keys: 4, rocksdb: {delete_skipped_count: 0, key_skipped_count: 3, block: {cache_hit_count: 0, read_count: 0, read_byte: 0 Bytes}}} | keep order:false, stats:pseudo | N/A       | N/A  |
 +-------------------+----------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
 2 rows in set (0.00 sec)
@@ -99,7 +99,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## Execution information of operators
 
-In addition to the basic `time` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
+In addition to the basic `time`, `open`, `close` and `loop` execution information, `execution info` also contains operator-specific execution information, which mainly includes the time consumed for the operator to send RPC requests and the duration of other steps.
 
 ### Point_Get
 
@@ -120,15 +120,15 @@ The execution information of the `Batch_Point_Get` operator is similar to that o
 The execution information of a `TableReader` operator is typically as follows:
 
 ```
-cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, rpc_num: 6, rpc_time: 5.313996 ms, copr_cache_hit_ratio: 0.00}
+cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, copr_cache_hit_ratio: 0.00}, rpc_info:{Cop:{num_rpc:6, total_time:5.313996ms}}
 ```
 
 - `cop_task`: Contains the execution information of `cop` tasks. For example:
     - `num`: The number of cop tasks.
     - `max`, `min`, `avg`, `p95`: The maximum, minimum, average, and P95 values of the execution time consumed for executing cop tasks.
     - `max_proc_keys` and `p95_proc_keys`: The maximum and P95 key-values scanned by TiKV in all cop tasks. If the difference between the maximum value and the P95 value is large, the data distribution might be imbalanced.
-    - `rpc_num`, `rpc_time`: The total number and total time consumed for `Cop` RPC requests sent to TiKV.
     - `copr_cache_hit_ratio`: The hit rate of Coprocessor Cache for `cop` task requests.
+- `rpc_info`: The total number and total time of RPC requests sent to TiKV aggregated by request type.
 - `backoff`: Contains different types of backoff and the total waiting time of backoff.
 
 ### Insert
@@ -338,6 +338,29 @@ after key/value request is processed:
 ```
 
 For writes and batch gets, the calculation is similar with different base costs.
+
+### tiflash_wait information
+
+When a query involves MPP tasks, the execution time is also affected by various tiflash_wait times, for example:
+
+```
+tiflash_wait: {minTSO_wait: 425ms, pipeline_breaker_wait: 133ms, pipeline_queue_wait: 512ms}
+```
+
+<CustomContent platform="tidb">
+
+- `minTSO_wait`: records the time spent waiting for an MPP task to be scheduled by the [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
+- `pipeline_breaker_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the time taken by the pipeline containing the pipeline breaker operator to wait for all data in the upstream pipeline. Currently, it is only used to display the time taken by the pipeline containing the `Join` operator to wait for all hash table builds to complete.
+- `pipeline_queue_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the waiting time in the CPU Task Thread Pool and IO Task Thread Pool during the execution of the pipeline.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+- `minTSO_wait`: records the time spent waiting for an MPP task to be scheduled by the [TiFlash MinTSO Scheduler](https://docs.pingcap.com/tidb/stable/tiflash-mintso-scheduler).
+- `pipeline_breaker_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the time taken by the pipeline containing the pipeline breaker operator to wait for all data in the upstream pipeline. Currently, it is only used to display the time taken by the pipeline containing the `Join` operator to wait for all hash table builds to complete.
+- `pipeline_queue_wait`: when TiFlash uses the [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md), it records the waiting time in the CPU Task Thread Pool and IO Task Thread Pool during the execution of the pipeline.
+
+</CustomContent>
 
 ### Other common execution information
 

@@ -9,7 +9,7 @@ summary: The usage of SHOW PLACEMENT in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 The statement returns a result set in which the `Scheduling_State` field indicates the current progress that the Placement Driver (PD) has made in scheduling the placement:
 
@@ -21,12 +21,10 @@ The statement returns a result set in which the `Scheduling_State` field indicat
 
 ```ebnf+diagram
 ShowStmt ::=
-    "PLACEMENT"
+    "SHOW" "PLACEMENT" ShowLikeOrWhere?
 ```
 
 ## Examples
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;

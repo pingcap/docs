@@ -6,9 +6,13 @@ aliases: ['/docs/dev/sql-statements/sql-statement-explain/','/docs/dev/reference
 
 # `EXPLAIN`
 
-The `EXPLAIN` statement shows the execution plan for a query without executing it. It is complimented by `EXPLAIN ANALYZE` which will execute the query. If the output of `EXPLAIN` does not match the expected result, consider executing `ANALYZE TABLE` on each table in the query.
+The `EXPLAIN` statement shows the execution plan for a query without executing it. It complements the `EXPLAIN ANALYZE` statement, which executes the query. If the output of `EXPLAIN` does not match the expected result, consider executing `ANALYZE TABLE` on each table in the query to make sure the table statistics are up to date.
 
-The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternative usage of `EXPLAIN <tableName>` is documented under [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md).
+> **Note:**
+>
+> Certain subqueries are pre-executed during the optimization phase to generate optimal execution plans, even in the `EXPLAIN` statement. For more information on this behavior and how to disable it, see [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) and [Disable the early execution of subqueries](/explain-walkthrough.md#disable-the-early-execution-of-subqueries).
+
+The statements `DESC` and `DESCRIBE` are aliases of the `EXPLAIN` statement. The alternative usage of `EXPLAIN <tableName>` is documented in [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md).
 
 TiDB supports the `EXPLAIN [options] FOR CONNECTION connection_id` statement. However, this statement is different from the `EXPLAIN FOR` statement in MySQL. For more details, see [`EXPLAIN FOR CONNECTION`](#explain-for-connection).
 
@@ -48,7 +52,7 @@ Currently, `EXPLAIN` in TiDB outputs 5 columns: `id`, `estRows`, `task`, `access
 |:----------------|:----------------------------------------------------------------------------------------------------------|
 | id            | The operator ID is the unique identifier of the operator in the entire execution plan. In TiDB 2.1, the ID is formatted to display the tree structure of the operator. Data flows from the child node to the parent node. One and only one parent node for each operator. |
 | estRows       | The number of rows that the operator is expected to output. This number is estimated according to the statistics and the operator's logic. `estRows` is called `count` in the earlier versions of TiDB 4.0. |
-| task          | The type of task the operator belongs to. Currently, the execution plans are divided into two tasks: **root** task, which is executed on tidb-server, and **cop** task, which is performed in parallel on TiKV or TiFlash. The topology of the execution plan at the task level is that a root task followed by many cop tasks. The root task uses the output of cop tasks as input. The cop tasks refer to tasks that TiDB pushes down to TiKV or TiFlash. Each cop task is distributed in the TiKV cluster or the TiFlash cluster, and is executed by multiple processes. |
+| task          | The type of task the operator belongs to. Execution plans are currently divided into four types of tasks: the root task, executed on TiDB server; the cop task, performed in parallel on TiKV or TiFlash; the batchCop task, executed in parallel on TiFlash; and the MPP task, executed in parallel on TiFlash. The execution plan topology at the task level consists of a root task followed by multiple other tasks. The root task uses the outputs of these tasks as input. The other tasks refer to those pushed down by TiDB to TiKV or TiFlash. Each pushed-down task is distributed across the TiKV or TiFlash clusters and executed by multiple processes. |
 | access object | Data item information accessed by the operator. The information includes `table`, `partition`, and `index` (if any). Only operators that directly access the data have such information. |
 | operator info | Other information about the operator. `operator info` of each operator is different. You can refer to the following examples. |
 
@@ -192,10 +196,12 @@ To specify the format of the `EXPLAIN` output, you can use the `FORMAT = xxx` sy
 | FORMAT | Description |
 | ------ | ------ |
 | Not specified  | If the format is not specified, `EXPLAIN` uses the default format `row`. |
-| `row`  | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
-| `brief`  | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
-| `dot`    | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
-| `tidb_json` | The `EXPLAIN` statement outputs execution plans in JSON and stores the operator information in a JSON array. |
+| `brief`        | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
+| `dot`          | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
+| `row`          | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
+| `tidb_json`    | The `EXPLAIN` statement outputs execution plans in JSON and stores the operator information in a JSON array. |
+| `verbose`      | The `EXPLAIN` statement outputs results in the `row` format, with an additional `estCost` column for the estimated cost of the query in the results. For more information about how to use this format, see [SQL Plan Management](/sql-plan-management.md). |
+| `plan_cache`   | The `EXPLAIN` statement outputs results in the `row` format, with the [Plan Cache](/sql-non-prepared-plan-cache.md#diagnostics) information as a warning. |
 
 <SimpleTab>
 
@@ -334,7 +340,7 @@ In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` h
 
 ## MySQL compatibility
 
-* Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substaintially from MySQL.
+* Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substantially from MySQL.
 * TiDB does not support the `FORMAT=JSON` or `FORMAT=TREE` options.
 * `FORMAT=tidb_json` in TiDB is the JSON format output of the default `EXPLAIN` result. The format and fields are different from the `FORMAT=JSON` output in MySQL.
 

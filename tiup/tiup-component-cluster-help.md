@@ -1,5 +1,6 @@
 ---
 title: tiup cluster help
+summary: tiup-cluster provides help information for users in the command line interface. Use the `help` command or `--help` option to access it. Specify `[command]` to view help information for a specific command. The output is the help information of the specified command or tiup-cluster.
 ---
 
 # tiup cluster help
@@ -23,5 +24,3 @@ tiup cluster help [command] [flags]
 ## Output
 
 The help information of the `[command]` or tiup-cluster.
-
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

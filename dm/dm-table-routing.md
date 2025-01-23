@@ -86,7 +86,7 @@ To migrate the upstream instances to the downstream `test`.`t`, you must create 
 
 Assuming in the scenario of sharded schemas and tables, you want to migrate the `test_{1,2,3...}`.`t_{1,2,3...}` tables in two upstream MySQL instances to the `test`.`t` table in the downstream TiDB instance. At the same time, you want to extract the source information of the sharded tables and write it to the downstream merged table.
 
-To migrate the upstream instances to the downstream `test`.`t`, you must create routing rules similar to the previous section [Merge sharded schemas and tables](#merge-sharded-schemas-and-tables). In addtion, you need to add the `extract-table`, `extract-schema`, and `extract-source` configurations:
+To migrate the upstream instances to the downstream `test`.`t`, you must create routing rules similar to the previous section [Merge sharded schemas and tables](#merge-sharded-schemas-and-tables). In addition, you need to add the `extract-table`, `extract-schema`, and `extract-source` configurations:
 
 - `extract-table`: For a sharded table matching `schema-pattern` and `table-pattern`, DM extracts the sharded table name by using `table-regexp` and writes the name suffix without the `t_` part to `target-column` of the merged table, that is, the `c_table` column.
 - `extract-schema`: For a sharded schema matching `schema-pattern` and `table-pattern`, DM extracts the sharded schema name by using `schema-regexp` and writes the name suffix without the `test_` part to `target-column` of the merged table, that is, the `c_schema` column.
@@ -116,7 +116,7 @@ To extract the source information of upstream sharded tables to the merged table
 
 ```sql
 CREATE TABLE `test`.`t` (
-    a int(11) PRIMARY KEY,
+    a int PRIMARY KEY,
     c_table varchar(10) DEFAULT NULL,
     c_schema varchar(10) DEFAULT NULL,
     c_source varchar(10) DEFAULT NULL
@@ -184,7 +184,7 @@ mysql> select * from test.t;
 ```sql
 CREATE TABLE `test`.`t` (
     c_table varchar(10) DEFAULT NULL,
-    a int(11) PRIMARY KEY,
+    a int PRIMARY KEY,
     c_schema varchar(10) DEFAULT NULL,
     c_source varchar(10) DEFAULT NULL
 );
@@ -194,7 +194,7 @@ CREATE TABLE `test`.`t` (
 
 ```sql
 CREATE TABLE `test`.`t` (
-    a int(11) PRIMARY KEY,
+    a int PRIMARY KEY,
     c_table varchar(10) DEFAULT NULL,
     c_schema varchar(10) DEFAULT NULL,
 );
@@ -204,9 +204,9 @@ CREATE TABLE `test`.`t` (
 
 ```sql
 CREATE TABLE `test`.`t` (
-    a int(11) PRIMARY KEY,
+    a int PRIMARY KEY,
     c_table varchar(10) DEFAULT NULL,
-    c_schema int(11) DEFAULT NULL,
+    c_schema int DEFAULT NULL,
     c_source varchar(10) DEFAULT NULL,
 );
 ```

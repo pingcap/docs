@@ -18,6 +18,22 @@ TiDB supports all the MySQL integer types, including `INTEGER`/`INT`, `TINYINT`,
 
 The following table summarizes field descriptions:
 
+<CustomContent platform="tidb">
+
+> **Warning:**
+>
+> Starting from v8.5.0, integer display width is deprecated ([`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length) is `true` by default). Specifying display width for integer types is NOT recommended.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Warning:**
+>
+> Starting from v8.5.0, integer display width is deprecated. Specifying display width for integer types is NOT recommended.
+
+</CustomContent>
+
 | Syntax Element | Description |
 | -------- | ------------------------------- |
 | M | the display width of the type. Optional. |

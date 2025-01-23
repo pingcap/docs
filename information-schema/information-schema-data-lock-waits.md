@@ -7,14 +7,12 @@ summary: Learn the `DATA_LOCK_WAITS` information_schema table.
 
 The `DATA_LOCK_WAITS` table shows the ongoing lock-wait information on all TiKV nodes in a cluster, including the lock-wait information of pessimistic transactions and the information of optimistic transactions being blocked.
 
-{{< copyable "sql" >}}
-
 ```sql
 USE information_schema;
 DESC data_lock_waits;
 ```
 
-```sql
+```
 +------------------------+---------------------+------+------+---------+-------+
 | Field                  | Type                | Null | Key  | Default | Extra |
 +------------------------+---------------------+------+------+---------+-------+
@@ -71,13 +69,11 @@ In the above fields, if the information of a field is not applicable or currentl
 
 ## Example
 
-{{< copyable "sql" >}}
-
 ```sql
 select * from information_schema.data_lock_waits\G
 ```
 
-```sql
+```
 *************************** 1. row ***************************
                    KEY: 7480000000000000355F728000000000000001
               KEY_INFO: {"db_id":1,"db_name":"test","table_id":53,"table_name":"t","handle_type":"int","handle_value":"1"}
@@ -88,4 +84,18 @@ CURRENT_HOLDING_TRX_ID: 426790590082449409
 1 row in set (0.01 sec)
 ```
 
-The above query result shows that the transaction of the ID `426790594290122753` is trying to obtain the pessimistic lock on the key `"7480000000000000355F728000000000000001"` when executing a statement that has digest `"38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821"` and  is in the form of ``update `t` set `v` = `v` + ? where `id` = ?``, but the lock on this key was held by the transaction of the ID `426790590082449409`.
+The above query result shows that the transaction of the ID `426790594290122753` is trying to obtain the pessimistic lock on the key `"7480000000000000355F728000000000000001"` when executing a statement that has digest `"38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821"` and is in the form of ``update `t` set `v` = `v` + ? where `id` = ?``, but the lock on this key was held by the transaction of the ID `426790590082449409`.
+
+## See also
+
+<CustomContent platform="tidb">
+
+- [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
+
+</CustomContent>

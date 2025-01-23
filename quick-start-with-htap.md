@@ -1,9 +1,9 @@
 ---
-title: Quick start with HTAP
+title: Quick Start with TiDB HTAP
 summary: Learn how to quickly get started with the TiDB HTAP.
 ---
 
-# Quick Start Guide for TiDB HTAP
+# Quick Start with TiDB HTAP
 
 This guide walks you through the quickest way to get started with TiDB's one-stop solution of Hybrid Transactional and Analytical Processing (HTAP).
 
@@ -26,7 +26,7 @@ In this document, you can experience the convenience and high performance of TiD
 
 ### Step 1. Deploy a local test environment
 
-Before using TiDB HTAP, follow the steps in the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) to prepare a local test environment, and run the following command to deploy a TiDB cluster:
+Before using TiDB HTAP, follow the steps in the [Quick Start with TiDB Self-Managed](/quick-start-with-tidb.md) to prepare a local test environment, and run the following command to deploy a TiDB cluster:
 
 {{< copyable "shell-regular" >}}
 
@@ -108,6 +108,7 @@ To know the performance of TiDB with only the row-based storage engine, execute 
 {{< copyable "sql" >}}
 
 ```sql
+USE test;
 SELECT
     l_orderkey,
     SUM(
@@ -173,7 +174,8 @@ For tables with TiFlash replicas, the TiDB optimizer automatically determines wh
 {{< copyable "sql" >}}
 
 ```sql
-explain analyze SELECT
+USE test;
+EXPLAIN ANALYZE SELECT
     l_orderkey,
     SUM(
         l_extendedprice * (1 - l_discount)

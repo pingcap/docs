@@ -5,7 +5,7 @@ summary: Learn about TimeStamp Oracle (TSO) in TiDB.
 
 # TimeStamp Oracle (TSO) in TiDB
 
-In TiDB, the Placement Driver (PD) plays a pivotal role in allocating timestamps to various components within a cluster. These timestamps are instrumental in the assignment of temporal markers to transactions and data, a mechanism crucial for enabling the [Percolator](https://research.google.com/pubs/pub36726.html) model within TiDB. The Percolator model is used to support Multi-Version Concurrency Control (MVCC) and [transaction management](/transaction-overview.md).
+In TiDB, the Placement Driver (PD) plays a pivotal role in allocating timestamps to various components within a cluster. These timestamps are instrumental in the assignment of temporal markers to transactions and data, a mechanism crucial for enabling the [Percolator](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/) model within TiDB. The Percolator model is used to support [Multi-Version Concurrency Control (MVCC)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc) and [transaction management](/transaction-overview.md).
 
 The following example shows how to get the current TSO in TiDB:
 
@@ -78,7 +78,7 @@ FROM_UNIXTIME((@ts >> 18)/1000): 2023-08-27 20:33:41.6870
 1 row in set (0.00 sec)
 ```
 
-The `>> 18` operation signifies a bitwise [right shift](/functions-and-operators/bit-functions-and-operators.md) by 18 bits, which is used to extract the physical timestamp. Because the physical timestamp is expressed in milliseconds, deviating from the more common UNIX timestamp format measured in seconds, you need to divide it by 1000 to convert it into a format compatible with [`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md). This process aligns with the functionality of `TIDB_PARSE_TSO()`.
+The `>> 18` operation signifies a bitwise [right shift](/functions-and-operators/bit-functions-and-operators.md#-right-shift) by 18 bits, which is used to extract the physical timestamp. Because the physical timestamp is expressed in milliseconds, deviating from the more common UNIX timestamp format measured in seconds, you need to divide it by 1000 to convert it into a format compatible with [`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md). This process aligns with the functionality of `TIDB_PARSE_TSO()`.
 
 You can also extract the logical timestamp `000000000000000100` in binary, which is equivalent to `4` in decimal.
 

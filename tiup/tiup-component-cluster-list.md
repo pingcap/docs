@@ -1,5 +1,6 @@
 ---
 title: tiup cluster list
+summary: tiup-cluster supports deploying multiple clusters using the same control machine. The `tiup cluster list` command outputs all clusters deployed by the currently logged-in user. The deployed cluster data is stored in the `~/.tiup/storage/cluster/clusters/` directory. Users can view the cluster name, deployment user, version, path, and private key used to connect the cluster.
 ---
 
 # tiup cluster list
@@ -34,4 +35,6 @@ Outputs the table with the following fields:
 - Path: the path of the cluster deployment data on the control machine
 - PrivateKey: the path of the private key that is used to connect the cluster
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+## See also
+
+- [TiUP Common Operations](/maintain-tidb-using-tiup.md)

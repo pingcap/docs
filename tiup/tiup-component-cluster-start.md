@@ -1,5 +1,6 @@
 ---
 title: tiup cluster start
+summary: The tiup cluster start command is used to start all or some services of a specified cluster. It has options like --init for safe start, -N for specifying nodes, -R for specifying roles, and -h for help. The output is the log of starting the service.
 ---
 
 # tiup cluster start
@@ -55,4 +56,6 @@ Starts the cluster in a safe way. It is recommended to use this option when the 
 
 The log of starting the service.
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+## See also
+
+- [TiUP Common Operations](/maintain-tidb-using-tiup.md)

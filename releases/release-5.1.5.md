@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.1.5 Release Notes
+summary: TiDB 5.1.5 was released on December 28, 2022. The release includes compatibility changes and numerous bug fixes for TiDB, TiKV, PD, TiFlash, and various tools. Bug fixes address issues such as panics, wrong results, and incorrect behaviors. Fixes also include issues related to data loss, memory usage, and incorrect metrics.
 ---
 
 # TiDB 5.1.5 Release Notes
@@ -8,7 +9,7 @@ Release date: December 28, 2022
 
 TiDB version: 5.1.5
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v5.1.5#version-list)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v5.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 
 ## Compatibility changes
 

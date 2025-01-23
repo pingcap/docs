@@ -1,5 +1,6 @@
 ---
 title: tiup cluster patch
+summary: The `tiup cluster patch` command allows for dynamic replacement of binaries in a running cluster. It uploads the binary package, stops the target service, replaces the binary, and starts the service. Preparation involves packing the binary package and using options like `--overwrite`, `--transfer-timeout`, `-N, --node`, `-R, --role`, and `--offline`. The output is the execution log of the tiup-cluster.
 ---
 
 # tiup cluster patch
@@ -7,7 +8,7 @@ title: tiup cluster patch
 If you need to dynamically replace the binaries of a service while the cluster is running (namely, keep the cluster available during the replacement process), you can use the `tiup cluster patch` command. After the command is executed, TiUP does the following things:
 
 - Uploads the binary package for replacement to the target machine.
-- If the target service is a storage service such as TiKV, TiFlash, or TiDB Binlog, TiUP first takes the related nodes offline via the API.
+- If the target service is a storage service such as TiKV or TiFlash, TiUP first takes the related nodes offline via the API.
 - Stops the target service.
 - Unpacks the binary package and replace the service.
 - Starts the target service.
@@ -28,7 +29,7 @@ Before running the `tiup cluster patch` command, you need to pack the binary pac
 1. Determine the following variables:
 
     - `${component}`: the name of the component to be replaced (such as `tidb`, `tikv`, or `pd`).
-    - `${version}`: the version of the component (such as `v7.5.0` or `v6.5.3`).
+    - `${version}`: the version of the component (such as `v8.5.0` or `v7.5.4`).
     - `${os}`: the operating system (`linux`).
     - `${arch}`: the platform on which the component runs (`amd64`, `arm64`).
 
@@ -119,4 +120,6 @@ After you have completed the preceding steps, you can use `/tmp/${component}-hot
 
 The execution log of the tiup-cluster.
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+## See also
+
+- [TiUP Common Operations](/maintain-tidb-using-tiup.md)

@@ -1,5 +1,6 @@
 ---
 title: tiup telemetry
+summary: TiUP telemetry is now disabled by default in v1.11.3. Usage information is not collected or shared with PingCAP. When enabled, it shares telemetry identifiers and command execution status. It does not share cluster details. Use 'tiup telemetry' command to control telemetry with sub-commands like status, reset, enable, and disable.
 ---
 
 # tiup telemetry
@@ -48,5 +49,3 @@ The `tiup telemetry enable` command is used to enable the telemetry.
 ### disable
 
 The `tiup telemetry disable` command is used to disable the telemetry.
-
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

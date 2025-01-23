@@ -1,5 +1,6 @@
 ---
 title: tiup cluster display
+summary: tiup cluster display command efficiently shows the operation status of each component in the cluster. It provides options to display dashboard information, node status, CPU and memory usage, and more. The output includes cluster name, version, SSH client type, dashboard address, and a table with node details. Node service status can be Up, Down, Tombstone, Pending Offline, or Unknown.
 ---
 
 # tiup cluster display
@@ -100,4 +101,6 @@ A node service can run in one of the following statuses:
 
 Node service status derives from the PD scheduling information. For more details, see [Information collection](/tidb-scheduling.md#information-collection).
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+## See also
+
+- [TiUP Common Operations](/maintain-tidb-using-tiup.md)

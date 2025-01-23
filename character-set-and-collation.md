@@ -10,11 +10,9 @@ This document introduces the character sets and collations supported by TiDB.
 
 ## Concepts
 
-A character set is a set of symbols and encodings. The default character set in TiDB is utf8mb4, which matches the default in MySQL 8.0 and above.
+A character set is a set of symbols and encodings. The default character set in TiDB is `utf8mb4`, which matches the default character set in MySQL 8.0 and later.
 
 A collation is a set of rules for comparing characters in a character set, and the sorting order of characters. For example in a binary collation `A` and `a` do not compare as equal:
-
-{{< copyable "sql" >}}
 
 ```sql
 SET NAMES utf8mb4 COLLATE utf8mb4_bin;
@@ -57,13 +55,44 @@ SELECT 'A' = 'a';
 1 row in set (0.00 sec)
 ```
 
-TiDB defaults to using a binary collation. This differs from MySQL, which uses a case-insensitive collation by default.
+The following example demonstrates how different Unicode collations compare the German `ß` with `ss`. You can see that only the more strict Unicode collations treat them as equivalent, returning `1` (which means TRUE).
+
+```sql
+SELECT
+  'ss' COLLATE utf8mb4_general_ci = 'ß',
+  'ss' COLLATE utf8mb4_unicode_ci = 'ß',
+  'ss' COLLATE utf8mb4_0900_ai_ci = 'ß',
+  'ss' COLLATE utf8mb4_0900_bin = 'ß'
+\G
+```
+
+```
+*************************** 1. row ***************************
+'ss' COLLATE utf8mb4_general_ci = 'ß': 0
+'ss' COLLATE utf8mb4_unicode_ci = 'ß': 1
+'ss' COLLATE utf8mb4_0900_ai_ci = 'ß': 1
+  'ss' COLLATE utf8mb4_0900_bin = 'ß': 0
+1 row in set (0.01 sec)
+```
+
+### Character set and collation naming
+
+A character set can have multiple collations, named in the `<character_set>_<collation_properties>` format. For example, the `utf8mb4` character set has a collation called `utf8mb4_bin`, which is a binary collation for `utf8mb4`. Multiple collation properties can be included in the name, separated by underscores (`_`). 
+
+The following table shows the common collation properties and meanings.
+
+| Collation properties | Meaning |
+|---|---|
+| `_bin` | Binary |
+| `_ci` | Case insensitive |
+| `_ai_ci` | Accent insensitive, case insensitive |
+| `_0900_bin` | Unicode UCA 9.0.0, binary |
+| `_unicode_ci` | (Older) Unicode UCA collation, case insensitive |
+| `_general_ci` | Less strict Unicode collation, case insensitive |
 
 ## Character sets and collations supported by TiDB
 
 Currently, TiDB supports the following character sets:
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW CHARACTER SET;
@@ -90,39 +119,40 @@ SHOW COLLATION;
 ```
 
 ```sql
-+--------------------+---------+------+---------+----------+---------+
-| Collation          | Charset | Id   | Default | Compiled | Sortlen |
-+--------------------+---------+------+---------+----------+---------+
-| ascii_bin          | ascii   |   65 | Yes     | Yes      |       1 |
-| binary             | binary  |   63 | Yes     | Yes      |       1 |
-| gbk_bin            | gbk     |   87 |         | Yes      |       1 |
-| gbk_chinese_ci     | gbk     |   28 | Yes     | Yes      |       1 |
-| latin1_bin         | latin1  |   47 | Yes     | Yes      |       1 |
-| utf8_bin           | utf8    |   83 | Yes     | Yes      |       1 |
-| utf8_general_ci    | utf8    |   33 |         | Yes      |       1 |
-| utf8_unicode_ci    | utf8    |  192 |         | Yes      |       1 |
-| utf8mb4_0900_ai_ci | utf8mb4 |  255 |         | Yes      |       1 |
-| utf8mb4_0900_bin   | utf8mb4 |  309 |         | Yes      |       1 |
-| utf8mb4_bin        | utf8mb4 |   46 | Yes     | Yes      |       1 |
-| utf8mb4_general_ci | utf8mb4 |   45 |         | Yes      |       1 |
-| utf8mb4_unicode_ci | utf8mb4 |  224 |         | Yes      |       1 |
-+--------------------+---------+------+---------+----------+---------+
++--------------------+---------+-----+---------+----------+---------+---------------+
+| Collation          | Charset | Id  | Default | Compiled | Sortlen | Pad_attribute |
++--------------------+---------+-----+---------+----------+---------+---------------+
+| ascii_bin          | ascii   |  65 | Yes     | Yes      |       1 | PAD SPACE     |
+| binary             | binary  |  63 | Yes     | Yes      |       1 | NO PAD        |
+| gbk_bin            | gbk     |  87 |         | Yes      |       1 | PAD SPACE     |
+| gbk_chinese_ci     | gbk     |  28 | Yes     | Yes      |       1 | PAD SPACE     |
+| latin1_bin         | latin1  |  47 | Yes     | Yes      |       1 | PAD SPACE     |
+| utf8_bin           | utf8    |  83 | Yes     | Yes      |       1 | PAD SPACE     |
+| utf8_general_ci    | utf8    |  33 |         | Yes      |       1 | PAD SPACE     |
+| utf8_unicode_ci    | utf8    | 192 |         | Yes      |       8 | PAD SPACE     |
+| utf8mb4_0900_ai_ci | utf8mb4 | 255 |         | Yes      |       0 | NO PAD        |
+| utf8mb4_0900_bin   | utf8mb4 | 309 |         | Yes      |       1 | NO PAD        |
+| utf8mb4_bin        | utf8mb4 |  46 | Yes     | Yes      |       1 | PAD SPACE     |
+| utf8mb4_general_ci | utf8mb4 |  45 |         | Yes      |       1 | PAD SPACE     |
+| utf8mb4_unicode_ci | utf8mb4 | 224 |         | Yes      |       8 | PAD SPACE     |
++--------------------+---------+-----+---------+----------+---------+---------------+
 13 rows in set (0.00 sec)
 ```
 
 > **Warning:**
 >
 > TiDB incorrectly treats latin1 as a subset of utf8. This can lead to unexpected behaviors when you store characters that differ between latin1 and utf8 encodings. It is strongly recommended to the utf8mb4 character set. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
->
-> If the predicates include `LIKE` for string prefixes, such as `LIKE 'prefix%'`, and the target column is set to a non-binary collation (the suffix does not end with `_bin`), the optimizer currently cannot convert this predicate into a range scan. Instead, it performs a full scan. As a result, such SQL queries might lead to unexpected resource consumption.
 
 > **Note:**
 >
 > The default collations in TiDB (binary collations, with the suffix `_bin`) are different than [the default collations in MySQL](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) (typically general collations, with the suffix `_general_ci` or `_ai_ci`). This can cause incompatible behavior when specifying an explicit character set but relying on the implicit default collation to be chosen.
+>
+> However, the default collations in TiDB are also affected by the [connection collation](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables) settings of your clients. For example, the MySQL 8.x client defaults to `utf8mb4_0900_ai_ci` as the connection collation for the `utf8mb4` character set.
+>
+> - Before TiDB v7.4.0, if your client uses `utf8mb4_0900_ai_ci` as the [connection collation](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables), TiDB falls back to using the TiDB server default collation `utf8mb4_bin` because TiDB does not support the `utf8mb4_0900_ai_ci` collation.
+> - Starting from v7.4.0, if your client uses `utf8mb4_0900_ai_ci` as the [connection collation](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables), TiDB follows the client's configuration to use `utf8mb4_0900_ai_ci` as the default collation.
 
 You can use the following statement to view the collations (under the [new framework for collations](#new-framework-for-collations)) that corresponds to the character set.
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW COLLATION WHERE Charset = 'utf8mb4';
@@ -145,9 +175,11 @@ For details about the TiDB support of the GBK character set, see [GBK](/characte
 
 ## `utf8` and `utf8mb4` in TiDB
 
-In MySQL, the character set `utf8` is limited to a maximum of three bytes. This is sufficient to store characters in the Basic Multilingual Plane (BMP), but not enough to store characters such as emojis. For this, it is recommended to use the character set `utf8mb4` instead.
+In MySQL, the character set `utf8` is limited to a maximum of three bytes. This is sufficient to store characters in the Basic Multilingual Plane (BMP), but not enough to store characters such as emojis. For new installations, it is recommended to use `utf8mb4` and migrate away from `utf8`.
 
-By default, TiDB also limits the character set `utf8` to a maximum of three bytes to ensure that data created in TiDB can still safely be restored in MySQL. You can disable it by changing the value of the system variable [`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8) to `OFF`.
+In both MySQL and TiDB, `utf8` and `utf8mb3` are aliases for the same character set.
+
+By default, TiDB also limits the character set `utf8` to a maximum of three bytes to ensure that data created in TiDB can still safely be restored in MySQL. You can disable it by changing the value of the system variable [`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8) to `OFF`. However, it is recommended to use `utf8mb4` instead for full Unicode support and better compatibility.
 
 The following demonstrates the default behavior when inserting a 4-byte emoji character into a table. The `INSERT` statement fails for the `utf8` character set, but succeeds for `utf8mb4`:
 
@@ -157,7 +189,7 @@ CREATE TABLE utf8_test (
     ) CHARACTER SET utf8;
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.09 sec)
 ```
 
@@ -167,7 +199,7 @@ CREATE TABLE utf8m4_test (
     ) CHARACTER SET utf8mb4;
 ```
 
-```sql
+```
 Query OK, 0 rows affected (0.09 sec)
 ```
 
@@ -175,7 +207,7 @@ Query OK, 0 rows affected (0.09 sec)
 INSERT INTO utf8_test VALUES ('😉');
 ```
 
-```sql
+```
 ERROR 1366 (HY000): incorrect utf8 value f09f9889(😉) for column c
 ```
 
@@ -183,7 +215,7 @@ ERROR 1366 (HY000): incorrect utf8 value f09f9889(😉) for column c
 INSERT INTO utf8m4_test VALUES ('😉');
 ```
 
-```sql
+```
 Query OK, 1 row affected (0.02 sec)
 ```
 
@@ -191,7 +223,7 @@ Query OK, 1 row affected (0.02 sec)
 SELECT char_length(c), length(c), c FROM utf8_test;
 ```
 
-```sql
+```
 Empty set (0.01 sec)
 ```
 
@@ -199,7 +231,7 @@ Empty set (0.01 sec)
 SELECT char_length(c), length(c), c FROM utf8m4_test;
 ```
 
-```sql
+```
 +----------------+-----------+------+
 | char_length(c) | length(c) | c    |
 +----------------+-----------+------+
@@ -230,8 +262,6 @@ ALTER DATABASE db_name
 
 Different databases can use different character sets and collations. Use the `character_set_database` and `collation_database` to see the character set and collation of the current database:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE SCHEMA test1 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
@@ -240,8 +270,6 @@ CREATE SCHEMA test1 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 USE test1;
 ```
@@ -249,8 +277,6 @@ USE test1;
 ```sql
 Database changed
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT @@character_set_database, @@collation_database;
@@ -265,8 +291,6 @@ SELECT @@character_set_database, @@collation_database;
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_bin;
 ```
@@ -275,8 +299,6 @@ CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_bin;
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 USE test2;
 ```
@@ -284,8 +306,6 @@ USE test2;
 ```sql
 Database changed
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT @@character_set_database, @@collation_database;
@@ -301,8 +321,6 @@ SELECT @@character_set_database, @@collation_database;
 ```
 
 You can also see the two values in `INFORMATION_SCHEMA`:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME
@@ -324,8 +342,6 @@ ALTER TABLE tbl_name
 ```
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t1(a int) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -357,15 +373,11 @@ If the column character set and collation are not specified, the table character
 
 Each string corresponds to a character set and a collation. When you use a string, this option is available:
 
-{{< copyable "sql" >}}
-
 ```sql
 [_charset_name]'string' [COLLATE collation_name]
 ```
 
 Example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT 'string';
@@ -412,7 +424,7 @@ You can use the following statement to set the character set and collation that 
     ```sql
     SET character_set_client = charset_name;
     SET character_set_results = charset_name;
-    SET charset_connection = @@charset_database;
+    SET character_set_connection=@@character_set_database;
     SET collation_connection = @@collation_database;
     ```
 
@@ -451,8 +463,6 @@ Since v4.0, TiDB supports a [new framework for collations](#new-framework-for-co
 ### Old framework for collations
 
 Before v4.0, you can specify most of the MySQL collations in TiDB, and these collations are processed according to the default collations, which means that the byte order determines the character order. Different from MySQL, TiDB does not handle the trailing spaces of a character, which causes the following behavior differences:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
@@ -529,8 +539,6 @@ Under the new framework, TiDB supports the `utf8_general_ci`, `utf8mb4_general_c
 
 When one of `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4_unicode_ci`, `utf8mb4_0900_ai_ci` and `gbk_chinese_ci` is used, the string comparison is case-insensitive and accent-insensitive. At the same time, TiDB also corrects the collation's `PADDING` behavior:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
 ```
@@ -552,7 +560,7 @@ INSERT INTO t VALUES ('a');
 ```
 
 ```sql
-ERROR 1062 (23000): Duplicate entry 'a' for key 't.PRIMARY' # TiDB is compatible with the case-insensitive collation of MySQL.
+ERROR 1062 (23000): Duplicate entry 'a' for key 't.PRIMARY' -- TiDB is compatible with the case-insensitive collation of MySQL.
 ```
 
 ```sql
@@ -560,7 +568,7 @@ INSERT INTO t VALUES ('a ');
 ```
 
 ```sql
-ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' # TiDB modifies the `PADDING` behavior to be compatible with MySQL.
+ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' -- TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
 > **Note:**
@@ -591,8 +599,6 @@ TiDB cannot infer the collation and reports an error in the following situations
 ## `COLLATE` clause
 
 TiDB supports using the `COLLATE` clause to specify the collation of an expression. The coercibility value of this expression is `0`, which has the highest priority. See the following example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;

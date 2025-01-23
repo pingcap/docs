@@ -13,9 +13,9 @@ This document describes the usage scenarios of cached tables, the examples, and 
 
 The cached table feature is suitable for tables with the following characteristics:
 
-- The data volume of the table is small.
-- The table is read-only or rarely updated.
-- The table is frequently accessed, and you expect a better read performance.
+- The data volume of the table is small, for example, less than 4 MiB.
+- The table is read-only or rarely updated, for example, with a write QPS (queries per second) of less than 10 times per minute.
+- The table is frequently accessed, and you expect a better read performance, for example, when encountering hotspots on small tables during direct reads from from TiKV.
 
 When the data volume of the table is small but the data is frequently accessed, the data is concentrated on a Region in TiKV and makes it a hotspot Region, which affects the performance. Therefore, the typical usage scenarios of cached tables are as follows:
 
@@ -33,8 +33,6 @@ This section describes the usage of cached tables by examples.
 
 Suppose that there is a table `users`:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE users (
     id BIGINT,
@@ -44,8 +42,6 @@ CREATE TABLE users (
 ```
 
 To set this table to a cached table, use the `ALTER TABLE` statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE users CACHE;
@@ -59,8 +55,6 @@ Query OK, 0 rows affected (0.01 sec)
 
 To verify a cached table, use the `SHOW CREATE TABLE` statement. If the table is cached, the returned result contains the `CACHED ON` attribute:
 
-{{< copyable "sql" >}}
-
 ```sql
 SHOW CREATE TABLE users;
 ```
@@ -70,7 +64,7 @@ SHOW CREATE TABLE users;
 | Table | Create Table                                                                                                                                                                                                               |
 +-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | users | CREATE TABLE `users` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin /* CACHED ON */ |
@@ -78,9 +72,7 @@ SHOW CREATE TABLE users;
 1 row in set (0.00 sec)
 ```
 
-After reading data from a cached table, TiDB loads the data in memory. You can use the `trace` statement to check whether the data is loaded into memory. When the cache is not loaded, the returned result contains the `regionRequest.SendReqCtx` attribute, which indicates that TiDB reads data from TiKV.
-
-{{< copyable "sql" >}}
+After reading data from a cached table, TiDB loads the data in memory. You can use the [`TRACE`](/sql-statements/sql-statement-trace.md) statement to check whether the data is loaded into memory. When the cache is not loaded, the returned result contains the `regionRequest.SendReqCtx` attribute, which indicates that TiDB reads data from TiKV.
 
 ```sql
 TRACE SELECT * FROM users;
@@ -106,9 +98,7 @@ TRACE SELECT * FROM users;
 12 rows in set (0.01 sec)
 ```
 
-After executing `trace` again, the returned result no longer contains the `regionRequest.SendReqCtx` attribute, which indicates that TiDB no longer reads data from TiKV but reads data from the memory instead.
-
-{{< copyable "sql" >}}
+After executing [`TRACE`](/sql-statements/sql-statement-trace.md) again, the returned result no longer contains the `regionRequest.SendReqCtx` attribute, which indicates that TiDB no longer reads data from TiKV but reads data from the memory instead.
 
 ```sql
 +----------------------------------------+-----------------+------------+
@@ -127,8 +117,6 @@ After executing `trace` again, the returned result no longer contains the `regio
 
 Note that the `UnionScan` operator is used to read the cached tables, so you can see `UnionScan` in the execution plan of the cached tables through `explain`:
 
-{{< copyable "sql" >}}
-
 ```sql
 +-------------------------+---------+-----------+---------------+--------------------------------+
 | id                      | estRows | task      | access object | operator info                  |
@@ -144,8 +132,6 @@ Note that the `UnionScan` operator is used to read the cached tables, so you can
 
 Cached tables support data writes. For example, you can insert a record into the `users` table:
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO users(id, name) VALUES(1001, 'Davis');
 ```
@@ -153,8 +139,6 @@ INSERT INTO users(id, name) VALUES(1001, 'Davis');
 ```sql
 Query OK, 1 row affected (0.00 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM users;
@@ -186,10 +170,10 @@ SHOW CREATE TABLE mysql.table_cache_meta\G
 *************************** 1. row ***************************
        Table: table_cache_meta
 Create Table: CREATE TABLE `table_cache_meta` (
-  `tid` bigint(11) NOT NULL DEFAULT '0',
+  `tid` bigint NOT NULL DEFAULT '0',
   `lock_type` enum('NONE','READ','INTEND','WRITE') NOT NULL DEFAULT 'NONE',
-  `lease` bigint(20) NOT NULL DEFAULT '0',
-  `oldReadLease` bigint(20) NOT NULL DEFAULT '0',
+  `lease` bigint NOT NULL DEFAULT '0',
+  `oldReadLease` bigint NOT NULL DEFAULT '0',
   PRIMARY KEY (`tid`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 1 row in set (0.00 sec)
@@ -201,8 +185,6 @@ Create Table: CREATE TABLE `table_cache_meta` (
 >
 > Executing DDL statements on a cached table will fail. Before executing DDL statements on a cached table, you need to remove the cache attribute first and set the cached table back to a normal table.
 
-{{< copyable "sql" >}}
-
 ```sql
 TRUNCATE TABLE users;
 ```
@@ -210,8 +192,6 @@ TRUNCATE TABLE users;
 ```sql
 ERROR 8242 (HY000): 'Truncate Table' is unsupported on cache tables.
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 mysql> ALTER TABLE users ADD INDEX k_id(id);
@@ -222,8 +202,6 @@ ERROR 8242 (HY000): 'Alter Table' is unsupported on cache tables.
 ```
 
 To revert a cached table to a normal table, use `ALTER TABLE t NOCACHE`:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE users NOCACHE;
@@ -237,7 +215,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 Cached tables are only suitable for scenarios with small tables, because TiDB loads the data of an entire table into memory, and the cached data becomes invalid after modification and needs to be reloaded.
 
-Currently, the size limit of a cached table is 64 MB in TiDB. If the table data exceeds 64 MB, executing `ALTER TABLE t CACHE` will fail.
+Currently, the size limit of a cached table is 64 MiB in TiDB. If the table data exceeds 64 MiB, executing `ALTER TABLE t CACHE` will fail.
 
 ## Compatibility restrictions with other TiDB features
 

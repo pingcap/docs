@@ -21,7 +21,7 @@ The available third-party integrations are displayed.
 
 ## Limitation
 
-- For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, third-party metrics integrations are not supported.
+- For [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, third-party metrics integrations are not supported.
 
 - Third-party metrics integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
@@ -35,7 +35,7 @@ For the detailed integration steps and a list of metrics that Datadog tracks, re
 
 ### Prometheus and Grafana integration (beta)
 
-With the Prometheus and Grafana integration, you can get a scrape_config file for Prometheus from TiDB Cloud and use the content from the file to configure Prometheus. You can view these metrics in your Grafana dashboards.
+With the Prometheus and Grafana integration, you can get a `scrape_config` file for Prometheus from TiDB Cloud and use the content from the file to configure Prometheus. You can view these metrics in your Grafana dashboards.
 
 For the detailed integration steps and a list of metrics that Prometheus tracks, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
 

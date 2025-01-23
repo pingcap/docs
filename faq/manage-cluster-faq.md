@@ -29,7 +29,7 @@ TiKV data is located in the [`--data-dir`](/command-line-flags-for-tikv-configur
 
 ### What are the system tables in TiDB?
 
-Similar to MySQL, TiDB includes system tables as well, used to store the information required by the server when it runs. See [TiDB system table](/mysql-schema.md).
+Similar to MySQL, TiDB includes system tables as well, used to store the information required by the server when it runs. See [TiDB system table](/mysql-schema/mysql-schema.md).
 
 ### Where are the TiDB/PD/TiKV logs?
 
@@ -55,7 +55,7 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 ### Does TiDB support session timeout?
 
-TiDB currently supports two timeouts, [`wait_timeout`](/system-variables.md#wait_timeout) and [`interactive_timeout`](/system-variables.md#interactive_timeout).
+TiDB currently supports the following timeouts: [`wait_timeout`](/system-variables.md#wait_timeout), [`interactive_timeout`](/system-variables.md#interactive_timeout), and [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760).
 
 ### What is the TiDB version management strategy?
 
@@ -73,7 +73,7 @@ TiDB provides a few features and [tools](/ecosystem-tool-user-guide.md), with wh
 
 The TiDB community is highly active. The engineers have been keeping optimizing features and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Release Timeline](/releases/release-timeline.md).
 
-It is recommeneded to deploy TiDB [using TiUP](/production-deployment-using-tiup.md) or [using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). TiDB has a unified management of the version number. You can view the version number using one of the following methods:
+It is recommended to deploy TiDB [using TiUP](/production-deployment-using-tiup.md) or [using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). TiDB has a unified management of the version number. You can view the version number using one of the following methods:
 
 - `select tidb_version()`
 - `tidb-server -V`
@@ -128,10 +128,7 @@ Two reasons:
 
 ### Why does the transaction not use the Async Commit or the one-phase commit feature?
 
-In the following situations, even you have enabled the [Async Commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) feature and the [one-phase commit](/system-variables.md#tidb_enable_1pc-new-in-v50) feature using the system variables, TiDB will not use these features:
-
-- If you have enabled TiDB Binlog, restricted by the implementation of TiDB Binlog, TiDB does not use the Async Commit or one-phase commit feature.
-- TiDB uses the Async Commit or one-phase commit features only when no more than 256 key-value pairs are written in the transaction and the total size of keys is no more than 4 KB. This is because, for transactions with a large amount of data to write, using Async Commit cannot greatly improve the performance.
+TiDB uses the Async Commit or one-phase commit features only when no more than 256 key-value pairs are written in the transaction and the total size of keys is no more than 4 KB. Otherwise, even you have enabled the [Async Commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) feature and the [one-phase commit](/system-variables.md#tidb_enable_1pc-new-in-v50) feature using the system variables, TiDB will not use these features. This is because, for transactions with a large amount of data to write, using Async Commit cannot greatly improve the performance.
 
 ## PD management
 
@@ -144,6 +141,10 @@ Most of the APIs of PD are available only when the TiKV cluster is initialized. 
 ### The `etcd cluster ID mismatch` message is displayed when starting PD
 
 This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
+
+### The `[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)` message is displayed when enabling encryption at rest for PD
+ 
+Encryption at rest does not support storing the key file in the `root` directory or its subdirectories. Even if you grant read permissions, the same error occurs. To resolve this issue, store the key file in a location outside the `root` directory.
 
 ### What's the maximum tolerance for time synchronization error of PD?
 
@@ -411,7 +412,10 @@ The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 
 
 ### Can both TiDB data and RawKV data be stored in the same TiKV cluster?
 
-No. TiDB (or data created from the transactional API) relies on a specific key format. It is not compatible with data created from RawKV API (or data from other RawKV-based services).
+It depends on your TiDB version and whether TiKV API V2 is enabled ([`storage.api-version = 2`](/tikv-configuration-file.md#api-version-new-in-v610)). 
+
+- If your TiDB version is v6.1.0 or later and TiKV API V2 is enabled, TiDB data and RawKV data can be stored in the same TiKV cluster. 
+- Otherwise, the answer is no because the key format of TiDB data (or data created using the transactional API) is incompatible with data created using the RawKV API (or data from other RawKV-based services).
 
 ## TiDB testing
 

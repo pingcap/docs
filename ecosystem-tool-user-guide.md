@@ -91,7 +91,7 @@ The following are the basics of TiDB Lightning:
 - Data source:
     - The output files of Dumpling
     - Other compatible CSV files
-    - Parquet files exported from Amazon Aurora or Apache Hive
+    - Parquet files exported from Amazon Aurora, Apache Hive, or Snowflake
 - Supported TiDB versions: v2.1 and later versions
 - Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster on Kubernetes using TiDB Lightning](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning) for details.
 
@@ -122,17 +122,6 @@ The following are the basics of TiCDC:
 - Source: TiDB clusters
 - Target: TiDB clusters, MySQL, Kafka, and Confluent
 - Supported TiDB versions: v4.0.6 and later versions
-
-### Incremental log replication - TiDB Binlog
-
-[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is a tool that collects binlog for TiDB clusters and provides nearly real-time data replication and backup. You can use it for incremental data replication between TiDB clusters, such as making a TiDB cluster the secondary cluster of the primary TiDB cluster.
-
-The following are the basics of TiDB Binlog:
-
-- Source: TiDB clusters
-- Target: TiDB clusters, MySQL, Kafka, or incremental backup files
-- Supported TiDB versions: v2.1 and later versions
-- Kubernetes support: Yes. See [TiDB Binlog Cluster Operations](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog) and [TiDB Binlog Drainer Configurations on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer) for details.
 
 ### sync-diff-inspector
 

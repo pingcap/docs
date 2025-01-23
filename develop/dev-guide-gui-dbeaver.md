@@ -11,7 +11,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using DBeave
 
 > **Note:**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> This tutorial is compatible with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
@@ -32,7 +32,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
@@ -42,7 +42,7 @@ To complete this tutorial, you need:
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="TiDB Serverless">
+<div label="TiDB Cloud Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -50,27 +50,28 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`
-    - **Connect With** is set to `JDBC`
+    - **Connection Type** is set to `Public`
+    - **Branch** is set to `main`
+    - **Connect With** is set to `DBeaver`
     - **Operating System** matches your environment.
 
-4. Click **Create password** to create a random password.
+4. Click **Generate Password** to create a random password.
 
     > **Tip:**
     >
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
 5. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-6. Copy the JDBC string from the TiDB Cloud connection dialog. In DBeaver, select **URL** for **Connect by** and paste the JDBC string into the **URL** field. You don't need to replace the `<your_password>` placeholder in the string with your actual password, because DBeaver reads username and password from the **Authentication (Database Native)** section.
+6. Copy the connection string from the TiDB Cloud connection dialog. In DBeaver, select **URL** for **Connect by** and paste the connection string into the **URL** field.
 
 7. In the **Authentication (Database Native)** section, enter your **Username** and **Password**. An example is as follows:
 
-    ![Configure connection settings for TiDB Serverless](/media/develop/dbeaver-connection-settings-serverless.jpg)
+    ![Configure connection settings for TiDB Cloud Serverless](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
+8. Click **Test Connection** to validate the connection to the TiDB Cloud Serverless cluster.
 
     If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
@@ -83,23 +84,25 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 9. Click **Finish** to save the connection configuration.
 
 </div>
-<div label="TiDB Dedicated">
+<div label="TiDB Cloud Dedicated">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Click **Allow Access from Anywhere**, and then click **Download TiDB cluster CA** to download the CA certificate.
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
+
+    In addition to the **Public** connection type, TiDB Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
 
 4. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-5. Copy and paste the appropriate connection string into the DBeaver connection panel. The mappings between DBeaver fields and TiDB Dedicated connection string are as follows:
+5. Copy and paste the appropriate connection string into the DBeaver connection panel. The mappings between DBeaver fields and TiDB Cloud Dedicated connection string are as follows:
 
-    | DBeaver field | TiDB Dedicated connection string |
+    | DBeaver field | TiDB Cloud Dedicated connection string |
     |---------------| ------------------------------- |
     | Server Host   | `{host}`                        |
     | Port          | `{port}`                        |
@@ -108,9 +111,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     An example is as follows:
 
-    ![Configure connection settings for TiDB Dedicated](/media/develop/dbeaver-connection-settings-dedicated.jpg)
+    ![Configure connection settings for TiDB Cloud Dedicated](/media/develop/dbeaver-connection-settings-dedicated.jpg)
 
-6. Click **Test Connection** to validate the connection to the TiDB Dedicated cluster.
+6. Click **Test Connection** to validate the connection to the TiDB Cloud Dedicated cluster.
 
     If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
@@ -123,7 +126,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 7. Click **Finish** to save the connection configuration.
 
 </div>
-<div label="TiDB Self-Hosted">
+<div label="TiDB Self-Managed">
 
 1. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
@@ -131,16 +134,16 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 2. Configure the following connection parameters:
 
-    - **Server Host**: The IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: The port number of your TiDB Self-Hosted cluster.
-    - **Username**: The username to use to connect to your TiDB Self-Hosted cluster.
+    - **Server Host**: The IP address or domain name of your TiDB Self-Managed cluster.
+    - **Port**: The port number of your TiDB Self-Managed cluster.
+    - **Username**: The username to use to connect to your TiDB Self-Managed cluster.
     - **Password**: The password of the username.
 
     An example is as follows:
 
-    ![Configure connection settings for TiDB Self-Hosted](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
+    ![Configure connection settings for TiDB Self-Managed](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
 
-3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
+3. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
 
     If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
@@ -165,12 +168,12 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 <CustomContent platform="tidb">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/support.md).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](https://support.pingcap.com/).
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
 
 </CustomContent>

@@ -1,5 +1,6 @@
 ---
 title: tiup mirror genkey
+summary: TiUP mirror genkey is a command used to generate a private key for TiUP. It has options to specify the name of the key and to show the corresponding public key. The command also allows saving the public key information as a file. It is important not to transmit private keys over the Internet.
 ---
 
 # tiup mirror genkey
@@ -51,5 +52,3 @@ tiup mirror genkey [flags]
 - If `-p/--public` is specified:
     - If the private key specified in `-n/--name` does not exist: TiUP reports the error `Error: open ${TIUP_HOME}/keys/{name}.json: no such file or directory`.
     - If the private key specified in `-n/--name` exists: TiUP outputs the content of the corresponding public key.
-
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

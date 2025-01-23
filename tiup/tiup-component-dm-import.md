@@ -1,5 +1,6 @@
 ---
 title: tiup dm import
+summary: The `import` command in TiUP DM is used to upgrade DM clusters from v1.0 to v2.0 or later versions. It does not support importing DM Portal components from v1.0 clusters and requires stopping the original cluster before importing. The command only supports importing to DM v2.0.0-rc.2 and later versions and can be used to import a DM v1.0 cluster to a new DM v2.0 cluster. After importing, there is only one DM-master node in the cluster, and the deployment directories of some components might be different from those in the original cluster.
 ---
 
 # tiup dm import <span class="version-mark">Only for upgrading DM v1.0</span>
@@ -64,5 +65,3 @@ tiup dm import [flags]
 ## Outputs
 
 The log of the importing process.
-
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

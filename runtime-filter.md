@@ -67,7 +67,7 @@ The execution process of Runtime Filter is as follows:
             |    | filter data                   |
             |    |                               |
       +-----+----v------+                +-------+--------+
-      |  TableFullScan  |                | TabelFullScan  |
+      |  TableFullScan  |                | TableFullScan  |
       |  store_sales    |                |    date_dim    |
       +-----------------+                +----------------+
 ```

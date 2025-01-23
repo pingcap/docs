@@ -9,7 +9,7 @@ summary: Learn how to export and import data sources and task configuration of c
 
 > **Note:**
 >
-> For clusters earlier than v2.0.5, you can use dmctl v2.0.5 or later to export and import the data source and task configuration files.
+> For clusters earlier than v2.0.5, you can use dmctl (>= v2.0.5 and < v8.0.0) to export and import the data source and task configuration files.
 
 {{< copyable "" >}}
 

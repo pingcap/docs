@@ -77,8 +77,10 @@ delta_index_cache_size = 0
     ## * format_version = 2, the default format for versions < v6.0.0.
     ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
     ## * format_version = 4, the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption
-    ## * format_version = 5, the default format for v7.4.0 and later versions (introduced in v7.3.0), which reduces the number of physical files by merging smaller files. 
-    # format_version = 5
+    ## * format_version = 5, introduced in v7.3.0, the default format for versions from v7.4.0 to v8.3.0, which reduces the number of physical files by merging smaller files.
+    ## * format_version = 6, introduced in v8.4.0, which partially supports the building and storage of vector indexes.
+    ## * format_version = 7, introduced in v8.4.0, the default format for v8.4.0 and later versions, which supports the build and storage of vector indexes
+    # format_version = 7
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -141,8 +143,8 @@ delta_index_cache_size = 0
     # capacity: 858993459200           # 800 GiB
 
 [flash]
-    tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
-    service_addr = The listening address of TiFlash Raft services and coprocessor services.
+    ## The listening address of TiFlash coprocessor services.
+    service_addr = "0.0.0.0:3930"
 
     ## Introduced in v7.4.0. When the gap between the `applied_index` advanced by the current Raft state machine and the `applied_index` at the last disk spilling exceeds `compact_log_min_gap`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk. Increasing this gap might reduce the disk spilling frequency of TiFlash, thus reducing read latency in random write scenarios, but it might also increase memory overhead. Decreasing this gap might increase the disk spilling frequency of TiFlash, thus alleviating memory pressure in TiFlash. However, at this stage, the disk spilling frequency of TiFlash will not be higher than that of TiKV, even if this gap is set to 0.
     ## It is recommended to keep the default value.
@@ -155,33 +157,37 @@ delta_index_cache_size = 0
     ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
     # disaggregated_mode = tiflash_write # The supported mode is `tiflash_write` or `tiflash_compute.
 
-## Multiple TiFlash nodes elect a master to add or delete placement rules to PD,
-## and the configurations in flash.flash_cluster control this process.
-[flash.flash_cluster]
-    refresh_interval = Master regularly refreshes the valid period.
-    update_rule_interval = Master regularly gets the status of TiFlash replicas and interacts with PD.
-    master_ttl = The valid period of the elected master.
-    cluster_manager_path = The absolute path of the pd buddy directory.
-    log = The pd buddy log path.
-
 [flash.proxy]
-    addr = The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
-    advertise-addr = The external access address of addr. If it is left empty, "addr" is used by default.
-    data-dir = The data storage path of proxy.
-    config = The configuration file path of proxy.
-    log-file = The log path of proxy.
-    log-level = The log level of proxy. "info" is used by default.
-    status-addr = The listening address from which the proxy pulls metrics | status information. If it is left empty, 127.0.0.1:20292 is used by default.
-    advertise-status-addr = The external access address of status-addr. If it is left empty, "status-addr" is used by default.
+    ## The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
+    addr = "127.0.0.1:20170"
+    ## The external access address of addr. If it is left empty, "addr" is used by default.
+    ## Should guarantee that other nodes can access through `advertise-addr` when you deploy the cluster on multiple nodes.
+    advertise-addr = ""
+    ## The listening address from which the proxy pulls metrics or status information. If it is left empty, 127.0.0.1:20292 is used by default.
+    status-addr = "127.0.0.1:20292"
+    ## The external access address of status-addr. If it is left empty, the value of "status-addr" is used by default.
+    ## Should guarantee that other nodes can access through `advertise-status-addr` when you deploy the cluster on multiple nodes.
+    advertise-status-addr = ""
+    ## The external access address of the TiFlash coprocessor service.
+    engine-addr = "10.0.1.20:3930"
+    ## The data storage path of proxy.
+    data-dir = "/tidb-data/tiflash-9000/flash"
+    ## The configuration file path of proxy.
+    config = "/tidb-deploy/tiflash-9000/conf/tiflash-learner.toml"
+    ## The log path of proxy.
+    log-file = "/tidb-deploy/tiflash-9000/log/tiflash_tikv.log"
 
 [logger]
-    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "debug".
-    level = "debug"
-    log = TiFlash log path
-    errorlog = TiFlash error log path
+    ## Note that the following parameters only take effect in tiflash.log and tiflash_error.log. If you need to configure log parameters of TiFlash Proxy, specify them in tiflash-learner.toml.
+    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "info".
+    level = "info"
+    ## The log of TiFlash.
+    log = "/tidb-deploy/tiflash-9000/log/tiflash.log"
+    ## The error log of TiFlash. The "warn" and "error" level logs are also output to this log file.
+    errorlog = "/tidb-deploy/tiflash-9000/log/tiflash_error.log"
     ## Size of a single log file. The default value is "100M".
     size = "100M"
-    ## Maximum number of log files to save. The default value is 10.
+    ## Maximum number of log files to save. The default value is 10. For TiFlash logs and TiFlash error logs, the maximum number of log files to save is `count` respectively.
     count = 10
 
 [raft]
@@ -204,6 +210,13 @@ delta_index_cache_size = 0
     ## see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
     # dt_enable_logical_split = false
 
+    ## `max_threads` indicates the internal thread concurrency when TiFlash executes an MPP task.
+    ## The default value is 0. When it is set to 0,
+    ## TiFlash uses the number of CPU cores as the execution concurrency.
+    ## This parameter only takes effect
+    ## when the system variable `tidb_max_tiflash_threads` is set to -1.
+    max_threads = 0
+    
     ## The memory usage limit for the generated intermediate data in a single query.
     ## When the value is an integer, the unit is byte. For example, 34359738368 means 32 GiB of memory limit, and 0 means no limit.
     ## When the value is a floating-point number in the range of [0.0, 1.0), it means the ratio of the allowed memory usage to the total memory of the node. For example, 0.8 means 80% of the total memory, and 0.0 means no limit.
@@ -220,6 +233,13 @@ delta_index_cache_size = 0
 
     ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     cop_pool_size = 0
+
+    ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor handles at the same time, including the requests being executed and the requests waiting in the queue. If the number of requests exceeds the specified value, the error "TiFlash Server is Busy" is returned. -1 indicates no limit; 0 indicates using the default value, which is 10 * cop_pool_size.
+    cop_pool_handle_limit = 0
+
+    ## New in v5.0. This item specifies the maximum time that a cop request can queue in TiFlash. If a cop request waits in the queue for a time longer than the value specified by this configuration, the error "TiFlash Server is Busy" is returned. A value less than or equal to 0 indicates no limit.
+    cop_pool_max_queued_seconds = 15
+
     ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     batch_cop_pool_size = 0
     ## New in v6.1.0. This item specifies the number of requests that TiFlash can concurrently process when it receives ALTER TABLE ... COMPACT from TiDB.
@@ -250,10 +270,22 @@ delta_index_cache_size = 0
     ## New in v7.4.0. This item controls whether to enable the TiFlash resource control feature. When it is set to true, TiFlash uses the pipeline execution model.
     enable_resource_control = true
 
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads that one resource group can use. The default value is 5000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
+    task_scheduler_thread_soft_limit = 5000
+
+    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads in the global scope. The default value is 10000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
+    task_scheduler_thread_hard_limit = 10000
+
+    ## New in v6.4.0. This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. The default value is 0, which means twice the number of vCPUs. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
+    task_scheduler_active_set_soft_limit = 0
+
 ## Security settings take effect starting from v4.0.5.
 [security]
-    ## New in v5.0. This configuration item enables or disables log redaction. If the configuration value
-    ## is set to true, all user data in the log will be replaced by ?.
+    ## New in v5.0. This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.2.0.
+    ## If the configuration item is set to `false` or `"off"`, log redaction is disabled.
+    ## If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
+    ## If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
+    ## The default value is `false`.
     ## Note that you also need to set security.redact-info-log for tiflash-learner's logging in tiflash-learner.toml.
     # redact_info_log = false
 
@@ -268,9 +300,26 @@ delta_index_cache_size = 0
 
 ### Configure the `tiflash-learner.toml` file
 
+The parameters in `tiflash-learner.toml` are basically the same as those in TiKV. You can refer to [TiKV configuration](/tikv-configuration-file.md) for TiFlash Proxy configuration. The following are only commonly used parameters. Note that:
+
+- Compared with TiKV, TiFlash Proxy has an extra `raftstore.snap-handle-pool-size` parameter.
+- The `label` whose key is `engine` is reserved and cannot be configured manually.
+
 ```toml
-[server]
-    engine-addr = The external access address of the TiFlash coprocessor service.
+[log]
+    ## The log level of TiFlash Proxy (available options: "trace", "debug", "info", "warn", "error"). The default value is "info". Introduced in v5.4.0.
+    level = "info"
+
+[log.file]
+    ## The maximum number of log files to save. Introduced in v5.4.0.
+    ## If this parameter is not set or set to the default value `0`, TiFlash Proxy saves all log files.
+    ## If this parameter is set to a non-zero value, TiFlash Proxy retains at most the number of old log files specified by `max-backups`. For example, if you set it to `7`, TiFlash Proxy retains at most 7 old log files.
+    max-backups = 0
+    ## The maximum number of days that the log files are retained. Introduced in v5.4.0.
+    ## If this parameter is not set or set to the default value `0`, TiFlash Proxy retains all log files.
+    ## If this parameter is set to a non-zero value, TiFlash Proxy cleans up outdated log files after the number of days specified by `max-days`.
+    max-days = 0
+
 [raftstore]
     ## The allowable number of threads in the pool that flushes Raft data to storage.
     apply-pool-size = 4
@@ -279,19 +328,16 @@ delta_index_cache_size = 0
     store-pool-size = 4
 
     ## The number of threads that handle snapshots.
-    ## The default number is 2.
-    ## If you set it to 0, the multi-thread optimization is disabled.
+    ## The default value is 2. If you set it to 0, the multi-thread optimization is disabled.
+    ## A specific parameter of TiFlash Proxy, introduced in v4.0.0.
     snap-handle-pool-size = 2
 
-    ## The shortest interval at which Raft store persists WAL.
-    ## You can properly increase the latency to reduce IOPS usage.
-    ## The default value is "4ms".
-    ## If you set it to 0ms, the optimization is disabled.
-    store-batch-retry-recv-timeout = "4ms"
 [security]
-    ## New in v5.0. This configuration item enables or disables log redaction.
-    ## If the configuration value is set to true,
-    ## all user data in the log will be replaced by ?. The default value is false.
+    ## New in v5.0. This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.3.0.
+    ## If the configuration item is set to `false` or `"off"`, log redaction is disabled.
+    ## If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
+    ## If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
+    ## The default value is `false`.
     redact-info-log = false
 
 [security.encryption]
@@ -308,8 +354,6 @@ delta_index_cache_size = 0
 [security.encryption.previous-master-key]
     ## Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see  Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
 ```
-
-In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.
 
 ### Schedule replicas by topology labels
 

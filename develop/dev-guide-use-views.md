@@ -122,3 +122,17 @@ For limitations of views in TiDB, see [Limitations of Views](/views.md#limitatio
 - [DROP VIEW Statement](/sql-statements/sql-statement-drop-view.md)
 - [EXPLAIN Statements Using Views](/explain-views.md)
 - [TiFlink: Strongly Consistent Materialized Views Using TiKV and Flink](https://github.com/tiflink/tiflink)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

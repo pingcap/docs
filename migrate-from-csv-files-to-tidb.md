@@ -22,6 +22,8 @@ Put all the CSV files in the same directory. If you need TiDB Lightning to recog
 - If a CSV file contains the data for an entire table, name the file `${db_name}.${table_name}.csv`.
 - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.003.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
 
+TiDB Lightning recursively searches for all `.csv` files in this directory and its subdirectories.
+
 ## Step 2. Create the target table schema
 
 Because CSV files do not contain schema information, before importing data from CSV files into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
@@ -63,6 +65,8 @@ data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://m
 separator = ','
 # Delimiter. Can be zero or multiple characters.
 delimiter = '"'
+# Line terminator. By default, \r, \n, and \r\n are all treated as line terminators.
+# terminator = "\r\n"
 # Configures whether the CSV file has a table header.
 # If this item is set to true, TiDB Lightning uses the first line of the CSV file to parse the corresponding relationship of fields.
 header = true
@@ -103,6 +107,8 @@ In a strict-format CSV file, each field only takes up one line. It must meet the
 
 - The delimiter is empty.
 - Each field does not contain CR (`\r`) or LF (`\n`).
+
+You need to explicitly specify the line terminator `terminator` for a `strict-format` CSV file.
 
 If your CSV file meets the above requirements, you can speed up the import by enabling the `strict-format` mode as follows:
 

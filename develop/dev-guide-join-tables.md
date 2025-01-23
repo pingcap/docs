@@ -253,3 +253,17 @@ For more information about the implementation details and limitations of this Jo
 
 - [Explain Statements That Use Joins](/explain-joins.md)
 - [Introduction to Join Reorder](/join-reorder.md)
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

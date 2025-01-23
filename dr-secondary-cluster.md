@@ -299,13 +299,20 @@ It is important to conduct regular DR drills for critical business systems to te
 2. After there are no more writes, query the latest TSO (`Position`) of the TiDB cluster:
 
     ```sql
-    mysql> show master status;
-    +-------------+--------------------+--------------+------------------+-------------------+
-    | File        | Position           | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
-    +-------------+--------------------+--------------+------------------+-------------------+
-    | tidb-binlog | 438223974697009153 |              |                  |                   |
-    +-------------+--------------------+--------------+------------------+-------------------+
-    1 row in set (0.33 sec)
+    BEGIN; SELECT TIDB_CURRENT_TSO(); ROLLBACK;
+    ```
+
+    ```sql
+    Query OK, 0 rows affected (0.00 sec)
+
+    +--------------------+
+    | TIDB_CURRENT_TSO() |
+    +--------------------+
+    | 452654700157468673 |
+    +--------------------+
+    1 row in set (0.00 sec)
+
+    Query OK, 0 rows affected (0.00 sec)
     ```
 
 3. Poll the changefeed `dr-primary-to-secondary` until it meets the condition `TSO >= Position`.

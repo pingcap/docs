@@ -1,6 +1,6 @@
 ---
 title: TiDB Log Backup and PITR Guide
-summary: Learns about how to perform log backup and PITR in TiDB.
+summary: TiDB Log Backup and PITR Guide explains how to back up and restore data using the br command-line tool. It includes instructions for starting log backup, running full backup regularly, and cleaning up outdated data. The guide also provides information on running PITR and the performance capabilities of PITR.
 aliases: ['/tidb/dev/pitr-usage']
 ---
 
@@ -19,11 +19,11 @@ Before you back up or restore data using the br command-line tool (hereinafter r
 > - The following examples assume that Amazon S3 access keys and secret keys are used to authorize permissions. If IAM roles are used to authorize permissions, you need to set `--send-credentials-to-tikv` to `false`.
 > - If other storage systems or authorization methods are used to authorize permissions, adjust the parameter settings according to [Backup Storages](/br/backup-and-restore-storages.md).
 
-To start a log backup, run `br log start`. A cluster can only run one log backup task each time.
+To start a log backup, run `tiup br log start`. A cluster can only run one log backup task each time.
 
 ```shell
 tiup br log start --task-name=pitr --pd "${PD_IP}:2379" \
---storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 After the log backup task starts, it runs in the background of the TiDB cluster until you stop it manually. During this process, the TiDB change logs are regularly backed up to the specified storage in small batches. To query the status of the log backup task, run the following command:
@@ -48,21 +48,21 @@ checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
 
 ### Run full backup regularly
 
-The snapshot backup can be used as a method of full backup. You can run `br backup full` to back up the cluster snapshot to the backup storage according to a fixed schedule (for example, every 2 days).
+The snapshot backup can be used as a method of full backup. You can run `tiup br backup full` to back up the cluster snapshot to the backup storage according to a fixed schedule (for example, every 2 days).
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
---storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 ## Run PITR
 
-To restore the cluster to any point in time within the backup retention period, you can use `br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. BR will automatically determine and read data needed for the restore, and then restore these data to the specified cluster in order.
+To restore the cluster to any point in time within the backup retention period, you can use `tiup br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. BR will automatically determine and read data needed for the restore, and then restore these data to the specified cluster in order.
 
 ```shell
-br restore point --pd "${PD_IP}:2379" \
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
---full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
+tiup br restore point --pd "${PD_IP}:2379" \
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}' \
+--full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}' \
 --restored-ts '2022-05-15 18:00:00+0800'
 ```
 
@@ -80,7 +80,7 @@ Restore KV Files <--------------------------------------------------------------
 
 As described in the [Usage Overview of TiDB Backup and Restore](/br/br-use-overview.md):
 
-To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup point and the restore point. Therefore, for log backups that exceed the backup retention period, you can use `br log truncate` to delete the backup before the specified time point. **It is recommended to only delete the log backup before the full snapshot**.
+To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup point and the restore point. Therefore, for log backups that exceed the backup retention period, you can use `tiup br log truncate` to delete the backup before the specified time point. **It is recommended to only delete the log backup before the full snapshot**.
 
 The following steps describe how to clean up backup data that exceeds the backup retention period:
 
@@ -94,53 +94,58 @@ The following steps describe how to clean up backup data that exceeds the backup
 3. Delete log backup data earlier than the snapshot backup `FULL_BACKUP_TS`:
 
     ```shell
-    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
     ```
 
 4. Delete snapshot data earlier than the snapshot backup `FULL_BACKUP_TS`:
 
     ```shell
-    rm -rf s3://backup-101/snapshot-${date}
+    aws s3 rm --recursive s3://backup-101/snapshot-${date}
     ```
 
-## Performance and impact of PITR
+## Performance capabilities of PITR
 
-### Capabilities
-
-- On each TiKV node, PITR can restore snapshot data at a speed of 280 GB/h and log data 30 GB/h.
-- BR deletes outdated log backup data at a speed of 600 GB/h.
+- On each TiKV node, PITR can restore snapshot data (full restore) at a speed of 2 TiB/h and log data (including meta files and KV files) at a speed of 30 GiB/h.
+- BR deletes outdated log backup data (`tiup br log truncate`) at a speed of 600 GB/h.
 
 > **Note:**
 >
 > The preceding specifications are based on test results from the following two testing scenarios. The actual data might be different.
 >
-> - Snapshot data restore speed = Snapshot data size / (duration * the number of TiKV nodes)
-> - Log data restore speed = Restored log data size / (duration * the number of TiKV nodes)
+> - Snapshot data restore speed = Total size of restored snapshot data on all TiKV nodes in the cluster / (duration * the number of TiKV nodes)
+> - Log data restore speed = Total size of restored log data on all TiKV nodes in the cluster / (duration * the number of TiKV nodes)
 >
-> The snapshot data size refers to the logical size of all KVs in a single replica, not the actual amount of restored data. BR restores all replicas according to the number of replicas configured for the cluster. The more replicas there are, the more data can be actually restored.
+> External storage only contains KV data of a single replica. Therefore, the data size in external storage does not represent the actual data size restored in the cluster. BR restores all replicas according to the number of replicas configured for the cluster. The more replicas there are, the more data can be actually restored.
 > The default replica number for all clusters in the test is 3.
-> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`concurrency`](/br/use-br-command-line-tool.md#common-options) option in the BR command.
+> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`pitr-concurrency`](/br/use-br-command-line-tool.md#common-options) option in the BR command.
 
-Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)):
+Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)) is as follows:
 
 - The number of TiKV nodes (8 core, 16 GB memory): 21
 - TiKV configuration item `import.num-threads`: 8
-- BR command option `concurrency`: 128
+- BR command option `pitr-concurrency`: 128
 - The number of Regions: 183,000
 - New log data created in the cluster: 10 GB/h
 - Write (INSERT/UPDATE/DELETE) QPS: 10,000
 
-Testing scenario 2 (on TiDB Self-Hosted):
+Testing scenario 2 (on TiDB Self-Managed) is as follows:
 
 - The number of TiKV nodes (8 core, 64 GB memory): 6
 - TiKV configuration item `import.num-threads`: 8
-- BR command option `concurrency`: 128
+- BR command option `pitr-concurrency`: 128
 - The number of Regions: 50,000
 - New log data created in the cluster: 10 GB/h
 - Write (INSERT/UPDATE/DELETE) QPS: 10,000
+
+## Monitoring and alert
+
+After log backup tasks are distributed, each TiKV node continuously writes data to external storage. You can view the monitoring data for this process in the **TiKV-Details > Backup Log** dashboard.
+
+To receive notifications metrics deviate from normal ranges, see [Log backup alerts](/br/br-monitoring-and-alert.md#log-backup-alerts) to configure alert rules.
 
 ## See also
 
 * [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
 * [br Command-line Manual](/br/use-br-command-line-tool.md)
 * [Log Backup and PITR Architecture](/br/br-log-architecture.md)
+* [Monitoring and Alert for Backup and Restore](/br/br-monitoring-and-alert.md)

@@ -1,5 +1,6 @@
 ---
 title: tiup mirror sign
+summary: The `tiup mirror sign` command is used to sign metadata files in TiUP mirror. It supports network addresses and local file paths. Options include specifying the private key location and setting the access timeout for network signing. Successful execution results in no output, while errors are reported for duplicate signing or invalid manifest files.
 ---
 
 # tiup mirror sign
@@ -45,5 +46,3 @@ If it is a network address, this address must provide the following features:
 - If the command is executed successfully, there is no output.
 - If the file has been signed by the specified key, TiUP reports the error `Error: this manifest file has already been signed by specified key`.
 - If the file is not a valid manifest, TiUP reports the error `Error: unmarshal manifest: %s`.
-
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

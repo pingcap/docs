@@ -50,7 +50,7 @@ CREATE TABLE test.t1 (a int);
 SELECT * FROM COLUMNS WHERE table_schema='test' AND TABLE_NAME='t1'\G
 ```
 
-输出结果如下：
+The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
@@ -122,3 +122,7 @@ The output is as follows:
 +-------+---------+------+------+---------+-------+
 1 row in set (0.00 sec)
 ```
+
+## See also
+
+- [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)

@@ -24,7 +24,7 @@ The following table lists the specifications and corresponding replication perfo
 
 > **Note:**
 >
-> The preceding performance data is for reference only and might vary in different scenarios.
+> The preceding performance data is for reference only and might vary in different scenarios. It is strongly recommended that you conduct a real workload test before using the changefeed feature in a production environment. For further assistance, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md#get-support-for-a-cluster).
 
 ## Price
 

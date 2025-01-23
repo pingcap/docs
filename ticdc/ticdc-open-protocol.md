@@ -50,7 +50,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 + **Key:**
 
-    ```
+    ```json
     {
         "ts":<TS>,
         "scm":<Schema Name>,
@@ -69,7 +69,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
     `Insert` event. The newly added row data is output.
 
-    ```
+    ```json
     {
         "u":{
             <Column Name>:{
@@ -90,7 +90,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
     `Update` event. The newly added row data ("u") and the row data before the update ("p") are output.
 
-    ```
+    ```json
     {
         "u":{
             <Column Name>:{
@@ -125,7 +125,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
     `Delete` event. The deleted row data is output.
 
-    ```
+    ```json
     {
         "d":{
             <Column Name>:{
@@ -156,7 +156,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 + **Key:**
 
-    ```
+    ```json
     {
         "ts":<TS>,
         "scm":<Schema Name>,
@@ -173,7 +173,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 + **Value:**
 
-    ```
+    ```json
     {
         "q":<DDL Query>,
         "t":<DDL Type>
@@ -189,7 +189,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 + **Key:**
 
-    ```
+    ```json
     {
         "ts":<TS>,
         "t":3
@@ -241,10 +241,10 @@ COMMIT;
 + Log 8 is a repeated event of Log 7. Row Changed Event might be repeated, but the first Event of each version is sent orderly.
 
 ```
-5. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":1},\"val\":{\"t\":15,\"v\":\"YWE=\"}}}"]
-6. [partition=1] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":2},\"val\":{\"t\":15,\"v\":\"YmI=\"}}}"]
-7. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":3},\"val\":{\"t\":15,\"v\":\"Y2M=\"}}}"]
-8. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":3},\"val\":{\"t\":15,\"v\":\"Y2M=\"}}}"]
+5. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":1},\"val\":{\"t\":15,\"v\":\"aa\"}}}"]
+6. [partition=1] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":2},\"val\":{\"t\":15,\"v\":\"bb\"}}}"]
+7. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":3},\"val\":{\"t\":15,\"v\":\"cc\"}}}"]
+8. [partition=0] [key="{\"ts\":415508878783938562,\"scm\":\"test\",\"tbl\":\"t1\",\"t\":1}"] [value="{\"u\":{\"id\":{\"t\":3,\"h\":true,\"v\":3},\"val\":{\"t\":15,\"v\":\"cc\"}}}"]
 ```
 
 Execute the following SQL statements in the upstream:

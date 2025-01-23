@@ -17,7 +17,7 @@ TiDB Cloud supports Datadog integration (beta). You can configure TiDB Cloud to 
 
 ## Limitation
 
-- You cannot use the Datadog integration in [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- You cannot use the Datadog integration in [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
 
 - Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
@@ -39,7 +39,7 @@ TiDB Cloud supports Datadog integration (beta). You can configure TiDB Cloud to 
 ### Step 2. Install TiDB Cloud Integration in Datadog
 
 1. Log in to [Datadog](https://app.datadoghq.com).
-2. Go to the **TiDB Cloud Integration** page (<https://app.datadoghq.com/account/settings#integrations/tidb-cloud>) in Datadog.
+2. Go to the **TiDB Cloud Integration** page ([https://app.datadoghq.com/account/settings#integrations/tidb-cloud](https://app.datadoghq.com/account/settings#integrations/tidb-cloud)) in Datadog.
 3. In the **Configuration** tab, click **Install Integration**. The [**TiDBCloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard is displayed in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
 
 ## Pre-built dashboard

@@ -31,7 +31,7 @@ Based on `sql-statement`, TiDB sorts out and exports the following on-site infor
 - The table schema in `sql-statement`
 - The statistics of the table in `sql-statement`
 - The result of `EXPLAIN [ANALYZE] sql-statement`
-- Some internal procudures of query optimization
+- Some internal procedures of query optimization
 
 If historical statistics are [enabled](/system-variables.md#tidb_enable_historical_stats), you can specify a time in the `PLAN REPLAYER` statement to get the historical statistics for the corresponding time. You can directly specify a time and date or specify a timestamp. TiDB looks for the historical statistics before the specified time and exports the latest one among them.
 
@@ -143,7 +143,7 @@ With an existing `ZIP` file exported using `PLAN REPLAYER`, you can use the `PLA
 PLAN REPLAYER LOAD 'file_name';
 ```
 
-In the statement above, `file_name` is the name of the `ZIP` file to be exported.
+In the statement above, `file_name` is the name of the `ZIP` file to be imported.
 
 For example:
 
@@ -153,16 +153,26 @@ For example:
 PLAN REPLAYER LOAD 'plan_replayer.zip';
 ```
 
+> **Note:**
+>
+> You need to disable auto analyze. Otherwise the imported statistics will be overwritten by analyze.
+
+You can disable auto analyze by setting the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable to `OFF`:
+
+```sql
+set @@global.tidb_enable_auto_analyze = OFF;
+```
+
 After the cluster information is imported, the TiDB cluster is loaded with the required table schema, statistics and other information that affects the construction of the execution plan. You can view the execution plan and verify statistics in the following way:
 
 ```sql
 mysql> desc t;
-+-------+---------+------+------+---------+-------+
-| Field | Type    | Null | Key  | Default | Extra |
-+-------+---------+------+------+---------+-------+
-| a     | int(11) | YES  |      | NULL    |       |
-| b     | int(11) | YES  |      | NULL    |       |
-+-------+---------+------+------+---------+-------+
++-------+------+------+------+---------+-------+
+| Field | Type | Null | Key  | Default | Extra |
++-------+------+------+------+---------+-------+
+| a     | int  | YES  |      | NULL    |       |
+| b     | int  | YES  |      | NULL    |       |
++-------+------+------+------+---------+-------+
 2 rows in set (0.01 sec)
 
 mysql> explain select * from t where a = 1 or b =1;
@@ -185,6 +195,10 @@ mysql> show stats_meta;
 ```
 
 After the scene is loaded and restored, you can diagnose and improve the execution plan for the cluster.
+
+> **Note:**
+>
+> If you use the `mysql` command-line client and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
 
 ## Use `PLAN REPLAYER CAPTURE` to capture target plans
 
@@ -221,7 +235,7 @@ PLAN REPLAYER CAPTURE 'sql_digest' '*';
 You can view the ongoing capture tasks of `PLAN REPLAYER CAPTURE` in the TiDB cluster using the following statement:
 
 ```sql
-mysql> PLAN PLAYER CAPTURE 'example_sql' 'example_plan';
+mysql> PLAN REPLAYER CAPTURE 'example_sql' 'example_plan';
 Query OK, 1 row affected (0.01 sec)
 
 mysql> SELECT * FROM mysql.plan_replayer_task;
@@ -254,6 +268,29 @@ The method of downloading the file of `PLAN REPLAYER CAPTURE` is the same as tha
 > **Note:**
 >
 > The result file of `PLAN REPLAYER CAPTURE` is kept in the TiDB cluster for up to one week. After one week, TiDB deletes the file.
+
+### Remove the capture tasks
+
+If a capture task is no longer needed, you can remove it using the `PLAN REPLAYER CAPTURE REMOVE` statement. For example:
+
+```sql
+mysql> PLAN REPLAYER CAPTURE '077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0' '4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM mysql.plan_replayer_task;
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+| sql_digest                                                       | plan_digest                                                      | update_time         |
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+| 077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0 | 4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce | 2024-05-21 11:26:10 |
++------------------------------------------------------------------+------------------------------------------------------------------+---------------------+
+1 row in set (0.01 sec)
+
+mysql> PLAN REPLAYER CAPTURE REMOVE '077a87a576e42360c95530ccdac7a1771c4efba17619e26be50a4cfd967204a0' '4838af52c1e07fc8694761ad193d16a689b2128bc5ced9d13beb31ae27b370ce';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM mysql.plan_replayer_task;
+Empty set (0.01 sec)
+```
 
 ## Use `PLAN REPLAYER CONTINUOUS CAPTURE`
 

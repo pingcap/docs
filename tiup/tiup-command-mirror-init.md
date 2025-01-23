@@ -1,5 +1,6 @@
 ---
 title: tiup mirror init
+summary: The `tiup mirror init` command initializes an empty mirror, generating root.json, 1.index.json, snapshot.json, and timestamp.json files. Use `tiup mirror init <path>` to specify a local directory for mirror files. Use the -k or --key-dir option to specify the directory for private key files. If the specified directory is not empty, an error will be reported.
 ---
 
 # tiup mirror init
@@ -42,5 +43,3 @@ tiup mirror init <path> [flags]
 - If the command is executed successfully, there is no output.
 - If the specified `<path>` is not empty, TiUP reports the error `Error: the target path '%s' is not an empty directory`.
 - If the specified `<path>` is not a directory, TiUP reports the error `Error: fdopendir: not a directory`.
-
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

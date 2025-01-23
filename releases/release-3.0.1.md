@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.1 Release Notes
 aliases: ['/docs/dev/releases/release-3.0.1/','/docs/dev/releases/3.0.1/']
+summary: "TiDB 3.0.1 Release Notes July 16, 2019. TiDB version 3.0.1. Add support for MAX_EXECUTION_TIME feature. Support auto-adjustment of incremental gap for auto-increment IDs. Add ADMIN PLUGINS ENABLE/DISABLE SQL statement. Prohibit Window Functions from being cached in Prepare Plan Cache. Fix various bugs and issues. TiKV: Add statistics of blob file size. Fix core dump issue. PD: Add enable-grpc-gateway configuration option. Optimize hot Region scheduling strategy. Tools: TiDB Binlog - Optimize Pump GC strategy. TiDB Lightning - Fix import error. TiDB Ansible - Add precheck feature, update monitoring information."
 ---
 
 # TiDB 3.0.1 Release Notes
@@ -38,7 +39,7 @@ TiDB Ansible version: 3.0.1
 + Fix the issue that the `DB` and `INFO` columns shown by the `SHOW PROCESSLIST` command are incompatible with MySQL [#11003](https://github.com/pingcap/tidb/pull/11003)
 + Fix the system panic issue caused by the `FLUSH PRIVILEGES` statement when `skip-grant-table=true` is configured [#11027](https://github.com/pingcap/tidb/pull/11027)
 + Fix the issue that the primary key statistics collected by `FAST ANALYZE` are not correct when the table primary key is an `UNSIGNED` integer [#11099](https://github.com/pingcap/tidb/pull/11099)
-+ Fix the issue that the “invalid key” error is reported by the `FAST ANALYZE` statement in some cases [#11098](https://github.com/pingcap/tidb/pull/11098)
++ Fix the issue that the "invalid key" error is reported by the `FAST ANALYZE` statement in some cases [#11098](https://github.com/pingcap/tidb/pull/11098)
 + Fix the issue that the precision shown by the `SHOW CREATE TABLE` statement is incomplete when `CURRENT_TIMESTAMP` is used as the default value of the column and the float precision is specified [#11088](https://github.com/pingcap/tidb/pull/11088)
 + Fix the issue that the function name is not in lowercase when window functions report an error to make it compatible with MySQL [#11118](https://github.com/pingcap/tidb/pull/11118)
 + Fix the issue that TiDB fails to connect to TiKV and thus cannot provide service after the background thread of TiKV Client Batch gRPC panics [#11101](https://github.com/pingcap/tidb/pull/11101)

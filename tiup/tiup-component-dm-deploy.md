@@ -1,5 +1,6 @@
 ---
 title: tiup dm deploy
+summary: The `tiup dm deploy` command is used to deploy a new cluster. It requires the cluster name, version, and a prepared topology file. Optional flags include user, identity file, password, and help. The output is the deployment log.
 ---
 
 # tiup dm deploy
@@ -45,5 +46,3 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 ## Output
 
 The deployment log.
-
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

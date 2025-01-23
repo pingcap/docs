@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Read-Only Storage Nodes
-summary: Learn how to configure read-only storage nodes to physically isolate important online services.
+summary: This document introduces configuring read-only storage nodes for isolating high-tolerance delay loads from online services. Steps include marking TiKV nodes as read-only, using Placement Rules to store data on read-only nodes as learners, and using Follower Read to read data from read-only nodes.
 ---
 
 # Best Practices for Read-Only Storage Nodes
@@ -127,5 +127,5 @@ spark.tispark.replica_read learner
 To read data from read-only nodes when backing up cluster data, you can specify the `--replica-read-label` option in the br command line. Note that when running the following command in shell, you need to use single quotes to wrap the label to prevent `$` from being parsed.
 
 ```shell
-br backup full ... --replica-read-label '$mode:readonly'
+tiup br backup full ... --replica-read-label '$mode:readonly'
 ```

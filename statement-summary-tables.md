@@ -18,13 +18,13 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 
 > **Note:**
 >
-> The preceding tables are not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> The preceding tables are not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
 ## `statements_summary`
 
-`statements_summary` is a system table in `information_schema`. `statements_summary` groups the SQL statements by the SQL digest and the plan digest, and provides statistics for each SQL category.
+`statements_summary` is a system table in `information_schema`. `statements_summary` groups the SQL statements by the resource group, the SQL digest and the plan digest, and provides statistics for each SQL category.
 
 The "SQL digest" here means the same as used in slow logs, which is a unique identifier calculated through normalized SQL statements. The normalization process ignores constant, blank characters, and is case insensitive. Therefore, statements with consistent syntaxes have the same digest. For example:
 
@@ -86,7 +86,8 @@ The following is a sample output of querying `statements_summary`:
 
 > **Note:**
 >
-> In TiDB, the time unit of fields in statement summary tables is nanosecond (ns), whereas in MySQL the time unit is picosecond (ps).
+> - In TiDB, the time unit of fields in statement summary tables is nanosecond (ns), whereas in MySQL the time unit is picosecond (ps).
+> - Starting from v7.5.1 and v7.6.0, for clusters with [resource control](/tidb-resource-control.md) enabled, `statements_summary` will be aggregated by resource group, for example, the same statements executed in different resource groups will be collected as different records.
 
 ## `statements_summary_history`
 
@@ -209,7 +210,7 @@ To address this issue, TiDB v6.6.0 experimentally introduces the [statement summ
 
 <CustomContent platform="tidb-cloud">
 
-This section is only applicable to TiDB Self-Hosted. For TiDB Cloud, the value of the `tidb_stmt_summary_enable_persistent` parameter is `false` by default and does not support dynamic modification.
+This section is only applicable to TiDB Self-Managed. For TiDB Cloud, the value of the `tidb_stmt_summary_enable_persistent` parameter is `false` by default and does not support dynamic modification.
 
 </CustomContent>
 
@@ -328,9 +329,11 @@ Basic fields:
 - `SAMPLE_USER`: The users who execute SQL statements of this category. Only one user is taken.
 - `PLAN_DIGEST`: The digest of the execution plan.
 - `PLAN`: The original execution plan. If there are multiple statements, the plan of only one statement is taken.
-- `BINARY_PLAN`: The original execution plan encoded in binary format. If there are multiple statements, the plan of only one statement is taken. Execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific execution plan.
+- `BINARY_PLAN`: The original execution plan encoded in binary format. If there are multiple statements, the plan of only one statement is taken. Execute the [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan) statement to parse the specific execution plan.
 - `PLAN_CACHE_HITS`: The total number of times that SQL statements of this category hit the plan cache.
 - `PLAN_IN_CACHE`: Indicates whether the previous execution of SQL statements of this category hit the plan cache.
+- `PLAN_CACHE_UNQUALIFIED`: The number of times that the SQL statements of this category fail to hit the plan cache.
+- `PLAN_CACHE_UNQUALIFIED_LAST_REASON`: The reason why the SQL statements of this category fail to hit the plan cache last time.
 
 Fields related to execution time:
 
@@ -401,6 +404,16 @@ Transaction-related fields:
 - `BACKOFF_TYPES`: All types of errors that require retries and the number of retries for each type. The format of the field is `type:number`. If there is more than one error type, each is separated by a comma, like `txnLock:2,pdRPC:1`.
 - `AVG_AFFECTED_ROWS`: The average number of rows affected.
 - `PREV_SAMPLE_TEXT`: When the current SQL statement is `COMMIT`, `PREV_SAMPLE_TEXT` is the previous statement to `COMMIT`. In this case, SQL statements are grouped by the digest and `prev_sample_text`. This means that `COMMIT` statements with different `prev_sample_text` are grouped to different rows. When the current SQL statement is not `COMMIT`, the `PREV_SAMPLE_TEXT` field is an empty string.
+
+Fields related to Resource Control:
+
+- `AVG_REQUEST_UNIT_WRITE`: the average number of write RUs consumed by SQL statements.
+- `MAX_REQUEST_UNIT_WRITE`: the maximum number of write RUs consumed by SQL statements.
+- `AVG_REQUEST_UNIT_READ`: the average number of read RUs consumed by SQL statements.
+- `MAX_REQUEST_UNIT_READ`: the maximum number of read RUs consumed by SQL statements.
+- `AVG_QUEUED_RC_TIME`: the average waiting time for available RU when executing SQL statements.
+- `MAX_QUEUED_RC_TIME`: the maximum waiting time for available RU when executing SQL statements.
+- `RESOURCE_GROUP`: the resource group bound to SQL statements.
 
 ### `statements_summary_evicted` fields description
 

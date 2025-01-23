@@ -88,3 +88,17 @@ As a best practice, it is recommended that you use a [MySQL client](https://dev.
 ## Object limitations
 
 For more information, see [TiDB Limitations](/tidb-limitations.md).
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

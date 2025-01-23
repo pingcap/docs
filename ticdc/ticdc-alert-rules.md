@@ -16,7 +16,7 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Alert rule:
 
-    (time() - ticdc_owner_checkpoint_ts / 1000) > 600
+    `ticdc_owner_checkpoint_ts_lag > 600`
 
 - Description:
 
@@ -24,13 +24,13 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+    See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
-## `cdc_resolvedts_high_delay`
+### `cdc_resolvedts_high_delay`
 
 - Alert rule:
 
-    (time() - ticdc_owner_resolved_ts / 1000) > 300
+    `ticdc_owner_resolved_ts_lag > 300`
 
 - Description:
 
@@ -38,21 +38,21 @@ For critical alerts, you need to pay close attention to abnormal monitoring metr
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+    See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
-### `ticdc_processor_exit_with_error_count`
+### `ticdc_changefeed_failed`
 
 - Alert rule:
 
-    `changes(ticdc_processor_exit_with_error_count[1m]) > 0`
+    `(max_over_time(ticdc_owner_status[1m]) == 2) > 0`
 
 - Description:
 
-    A replication task reports an error and exits.
+    A replication task encounters an unrecoverable error and enters the failed state.
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+    This alert is similar to replication interruption. See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ## Warning alerts
 
@@ -72,67 +72,53 @@ Warning alerts are a reminder for an issue or error.
 
     Collect TiCDC logs to locate the root cause.
 
-### `cdc_sink_flush_duration_time_more_than_10s`
+### `cdc_no_owner`
 
 - Alert rule:
 
-    `histogram_quantile(0.9, rate(ticdc_sink_txn_worker_flush_duration[1m])) > 10`
+    `sum(rate(ticdc_owner_ownership_counter[240s])) < 0.5`
 
 - Description:
 
-    It takes a replication task more than 10 seconds to write data to the downstream database.
+    There is no owner in the TiCDC cluster for more than 10 minutes.
 
 - Solution:
 
-    Check whether there are problems in the downstream database.
+    Collect TiCDC logs to identify the root cause.
 
-### `cdc_processor_checkpoint_tso_no_change_for_1m`
+### `ticdc_changefeed_meet_error`
 
 - Alert rule:
 
-    `changes(ticdc_processor_checkpoint_ts[1m]) < 1`
+    `(max_over_time(ticdc_owner_status[1m]) == 1 or max_over_time(ticdc_owner_status[1m]) == 6) > 0`
 
 - Description:
 
-    A replication task has not advanced for more than 1 minute.
+    A replication task encounters an error.
 
 - Solution:
 
-    See [TiCDC Handle Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
+    See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
-### `ticdc_puller_entry_sorter_sort_bucket`
+### `ticdc_processor_exit_with_error_count`
 
 - Alert rule:
 
-    `histogram_quantile(0.9, rate(ticdc_puller_entry_sorter_sort_bucket{}[1m])) > 1`
+    `changes(ticdc_processor_exit_with_error_count[1m]) > 0`
 
 - Description:
 
-    The delay of TiCDC puller entry sorter is too high.
+    A replication task reports an error and exits.
 
 - Solution:
 
-    Collect TiCDC logs to locate the root cause.
-
-### `ticdc_puller_entry_sorter_merge_bucket`
-
-- Alert rule:
-
-    `histogram_quantile(0.9, rate(ticdc_puller_entry_sorter_merge_bucket{}[1m])) > 1`
-
-- Description:
-
-    The delay of TiCDC puller entry sorter merge is too high.
-
-- Solution:
-
-    Collect TiCDC logs to locate the root cause.
+    See [TiCDC Handles Replication Interruption](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions).
 
 ### `tikv_cdc_min_resolved_ts_no_change_for_1m`
 
 - Alert rule:
 
-    `changes(tikv_cdc_min_resolved_ts[1m]) < 1 and ON (instance) tikv_cdc_region_resolve_status{status="resolved"} > 0`
+    `changes(tikv_cdc_min_resolved_ts[1m]) < 1 and ON (instance) tikv_cdc_region_resolve_status{status="resolved"} > 0 and ON (instance) tikv_cdc_captured_region_total > 0`
 
 - Description:
 
@@ -156,15 +142,15 @@ Warning alerts are a reminder for an issue or error.
 
     Collect TiCDC monitoring metrics and TiKV logs to locate the root cause.
 
-### `ticdc_sink_mysql_execution_error`
+### `ticdc_sink_execution_error`
 
 - Alert rule:
 
-    `changes(ticdc_sink_mysql_execution_error[1m]) > 0`
+    `changes(ticdc_sink_execution_error[1m]) > 0`
 
 - Description:
 
-    An error occurs when a replication task writes data to the downstream MySQL.
+    An error occurs when a replication task writes data to the downstream.
 
 - Solution:
 

@@ -12,7 +12,7 @@ USE INFORMATION_SCHEMA;
 DESC deadlocks;
 ```
 
-Thhe output is as follows:
+The output is as follows:
 
 ```sql
 +-------------------------+---------------------+------+------+---------+-------+

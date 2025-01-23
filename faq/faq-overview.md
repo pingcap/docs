@@ -37,7 +37,6 @@ This document summarizes frequently asked questions (FAQs) about TiDB.
         <li>Incremental data replication
           <ul>
             <li><a href="https://docs.pingcap.com/tidb/dev/ticdc-faq">TiCDC FAQs</a></li>
-            <li><a href="https://docs.pingcap.com/tidb/dev/tidb-binlog-faq">TiDB Binlog FAQs</a></li>
           </ul>
         </li>
       </ul>

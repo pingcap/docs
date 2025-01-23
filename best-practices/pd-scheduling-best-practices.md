@@ -1,6 +1,6 @@
 ---
 title: PD Scheduling Best Practices
-summary: Learn best practice and strategy for PD scheduling.
+summary: This document summarizes PD scheduling best practices, including scheduling process, load balancing, hot regions scheduling, cluster topology awareness, scale-down and failure recovery, region merge, query scheduling status, and control scheduling strategy. It also covers common scenarios such as uneven distribution of leaders/regions, slow node recovery, and troubleshooting TiKV nodes.
 aliases: ['/docs/dev/best-practices/pd-scheduling-best-practices/','/docs/dev/reference/best-practices/pd-scheduling/']
 ---
 
@@ -104,9 +104,9 @@ Region merge refers to the process of merging adjacent small regions. It serves 
 
 Specifically, when a newly split Region exists for more than the value of [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (`1h` by default), if the following conditions occur at the same time, this Region triggers the Region merge scheduling:
 
-- The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) (20 MiB by default)
+- The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size). Starting from v8.4.0, the default value is changed from 20 MiB to 54 MiB. The new default value is automatically applied only to newly created clusters. Existing clusters are not affected.
 
-- The number of keys in this Region is smaller than the value of [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) (200,000 by default).
+- The number of keys in this Region is smaller than the value of [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys). Starting from v8.4.0, the default value is changed from 200000 to 540000. The new default value is automatically applied only to newly created clusters. Existing clusters are not affected.
 
 ## Query scheduling status
 

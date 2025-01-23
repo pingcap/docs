@@ -10,17 +10,16 @@ The `SHUTDOWN` statement is used to perform a shutdown operation in TiDB. Execut
 
 > **Note:**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This feature is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 ## Synopsis
 
-**Statement:**
-
-![Statement](/media/sqlgram/ShutdownStmt.png)
+```ebnf+diagram
+ShutdownStmt ::=
+    "SHUTDOWN"
+```
 
 ## Examples
-
-{{< copyable "sql" >}}
 
 ```sql
 SHUTDOWN;

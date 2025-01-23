@@ -55,7 +55,7 @@ Dumpling has the following advantages:
 - Support exporting data to Amazon S3 cloud storage.
 - More optimizations are made for TiDB:
     - Support configuring the memory limit of a single TiDB SQL statement.
-    - If Dumpling can connect directly to PD, Dumpling supports automatic adjustment of TiDB GC time for TiDB v4.0.0 and later versions.
+    - If Dumpling can access the PD address and the [`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md) table of the TiDB cluster, Dumpling supports automatically adjusting the [GC](/garbage-collection-overview.md) safe point time to block GC for TiDB v4.0.0 and later versions.
     - Use TiDB's hidden column `_tidb_rowid` to optimize the performance of concurrent data export from a single table.
     - For TiDB, you can set the value of [`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the time point of the data backup. This ensures the consistency of the backup, instead of using `FLUSH TABLES WITH READ LOCK` to ensure the consistency.
 
@@ -87,7 +87,7 @@ Dumpling exports data to SQL files by default. You can also export data to SQL f
 {{< copyable "shell-regular" >}}
 
 ```shell
-dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000 -F 256MiB
+tiup dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000 -F 256MiB
 ```
 
 In the command above:
@@ -95,7 +95,7 @@ In the command above:
 + The `-h`, `-P`, and `-u` option respectively mean the address, the port, and the user. If a password is required for authentication, you can use `-p $YOUR_SECRET_PASSWORD` to pass the password to Dumpling.
 + The `-o` (or `--output`) option specifies the export directory of the storage, which supports an absolute local file path or an [external storage URI](/external-storage-uri.md).
 + The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large. Usually, it's less than 64.
-+ The `-r` option enables the in-table concurrency to speed up the export. The default value is `0`, which means disabled. A value greater than 0 means it is enabled, and the value is of `INT` type. When the source database is TiDB, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting, and reduces the memory usage. The specific `-r` value does not affect the split algorithm. When the source database is MySQL and the primary key is of the `INT` type, specifying `-r` can also enable the in-table concurrency.
++ The `-r` option enables the in-table concurrency to speed up the export. The default value is `0`, which means disabled. A value greater than 0 means it is enabled, and the value is of `INT` type. When the source database is TiDB, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting, and reduces the memory usage. The specific `-r` value does not affect the split algorithm. When the source database is MySQL and the primary key or the first column of the composite primary key is of the `INT` type, specifying `-r` can also enable the in-table concurrency.
 + The `-F` option is used to specify the maximum size of a single file (the unit here is `MiB`; inputs like `5GiB` or `8KB` are also acceptable). It is recommended to keep its value to 256 MiB or less if you plan to use TiDB Lightning to load this file into a TiDB instance.
 
 > **Note:**
@@ -121,7 +121,7 @@ When you export data to CSV files, you can use `--sql <SQL>` to filter the recor
 {{< copyable "shell-regular" >}}
 
 ```shell
-./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'select * from `test`.`sbtest1` where id < 100' -F 100MiB --output-filename-template 'test.sbtest1.{{.Index}}'
+tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'select * from `test`.`sbtest1` where id < 100' -F 100MiB --output-filename-template 'test.sbtest1.{{.Index}}'
 ```
 
 In the command above:
@@ -198,7 +198,7 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
 
     ```shell
     CREATE TABLE `t1` (
-      `id` int(11) DEFAULT NULL
+      `id` int DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
     ```
 
@@ -236,7 +236,7 @@ export AWS_SECRET_ACCESS_KEY=${SecretKey}
 Dumpling also supports reading credential files from `~/.aws/credentials`. For more information about URI parameter descriptions, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
 ```shell
-./dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}"
+tiup dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}"
 ```
 
 ### Filter the exported data
@@ -246,7 +246,7 @@ Dumpling also supports reading credential files from `~/.aws/credentials`. For m
 By default, Dumpling exports all databases except system databases (including `mysql`, `sys`, `INFORMATION_SCHEMA`, `PERFORMANCE_SCHEMA`, `METRICS_SCHEMA`, and `INSPECTION_SCHEMA`). You can use `--where <SQL where expression>` to select the records to be exported.
 
 ```shell
-./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --where "id < 100"
+tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --where "id < 100"
 ```
 
 The above command exports the data that matches `id < 100` from each table. Note that you cannot use the `--where` parameter together with `--sql`.
@@ -258,7 +258,7 @@ Dumpling can filter specific databases or tables by specifying the table filter 
 {{< copyable "shell-regular" >}}
 
 ```shell
-./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test -r 200000 --filter "employees.*" --filter "*.WorkOrder"
+tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test -r 200000 --filter "employees.*" --filter "*.WorkOrder"
 ```
 
 The above command exports all the tables in the `employees` database and the `WorkOrder` tables in all databases.
@@ -282,7 +282,7 @@ Examples:
 The exported file is stored in the `./export-<current local time>` directory by default. Commonly used options are as follows:
 
 - The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large.
-- The `-r` option enables the in-table concurrency to speed up the export. The default value is `0`, which means disabled. A value greater than 0 means it is enabled, and the value is of `INT` type. When the source database is TiDB, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting, and reduces the memory usage. The specific `-r` value does not affect the split algorithm. When the source database is MySQL and the primary key is of the `INT` type, specifying `-r` can also enable the in-table concurrency.
+- The `-r` option enables the in-table concurrency to speed up the export. The default value is `0`, which means disabled. A value greater than 0 means it is enabled, and the value is of `INT` type. When the source database is TiDB, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting, and reduces the memory usage. The specific `-r` value does not affect the split algorithm. When the source database is MySQL and the primary key or the first column of the composite primary key is of the `INT` type, specifying `-r` can also enable the in-table concurrency.
 - The `--compress <format>` option specifies the compression format of the dump. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. This option can speed up dumping of data if storage is the bottleneck or if storage capacity is a concern. The drawback is an increase in CPU usage. Each file is compressed individually.
 
 With the above options specified, Dumpling can have a quicker speed of data export.
@@ -329,8 +329,8 @@ The `--snapshot` option can be set to a TSO (the `Position` field output by the 
 {{< copyable "shell-regular" >}}
 
 ```shell
-./dumpling --snapshot 417773951312461825
-./dumpling --snapshot "2020-07-02 17:12:45"
+tiup dumpling --snapshot 417773951312461825
+tiup dumpling --snapshot "2020-07-02 17:12:45"
 ```
 
 The TiDB historical data snapshots when the TSO is `417773951312461825` and the time is `2020-07-02 17:12:45` are exported.
@@ -345,7 +345,7 @@ When Dumpling is exporting a large single table from TiDB, Out of Memory (OOM) m
 
 ### Manually set the TiDB GC time
 
-When exporting data from TiDB (more than 1 TB), if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
+When exporting data from TiDB (less than 1 TB), if the TiDB version is v4.0.0 or later and Dumpling can access the PD address and the [`INFORMATION_SCHEMA.CLUSTER_INFO`](/information-schema/information-schema-cluster-info.md) table of the TiDB cluster, Dumpling automatically adjusts the GC safe point to block GC without affecting the original cluster.
 
 However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
 
@@ -377,7 +377,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--case-sensitive`           | whether table-filter is case-sensitive                                                                                                                                                                                                                                                                                             | false (case-insensitive)                   |
 | `-h` or `--host`             | The IP address of the connected database host                                                                                                                                                                                                                                                                                      | "127.0.0.1"                                |
 | `-t` or `--threads`          | The number of concurrent backup threads                                                                                                                                                                                                                                                                                            | 4                                          |
-| `-r` or `--rows`             | Enable the in-table concurrency to speed up the export. The default value is `0`, which means disabled. A value greater than 0 means it is enabled, and the value is of `INT` type. When the source database is TiDB, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting, and reduces the memory usage. The specific `-r` value does not affect the split algorithm. When the source database is MySQL and the primary key is of the `INT` type, specifying `-r` can also enable the in-table concurrency.                                                                                                                                                                               |
+| `-r` or `--rows`             | Enable the in-table concurrency to speed up the export. The default value is `0`, which means disabled. A value greater than 0 means it is enabled, and the value is of `INT` type. When the source database is TiDB, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting, and reduces the memory usage. The specific `-r` value does not affect the split algorithm. When the source database is MySQL and the primary key or the first column of the composite primary key is of the `INT` type, specifying `-r` can also enable the in-table concurrency.                                                                                                                                                                               |
 | `-L` or `--logfile`          | Log output address. If it is empty, the log will be output to the console                                                                                                                                                                                                                                                          | ""                                         |
 | `--loglevel`                 | Log level {debug,info,warn,error,dpanic,panic,fatal}                                                                                                                                                                                                                                                                               | "info"                                     |
 | `--logfmt`                   | Log output format {text,json}                                                                                                                                                                                                                                                                                                      | "text"                                     |
@@ -404,9 +404,45 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--csv-separator`            | Separator of each value in CSV files. It is not recommended to use the default ','. It is recommended to use '\|+\|' or other uncommon character combinations| ','                                                                                                                                                                                                                                                                                               | ','                                        |
 | `--csv-null-value`           | Representation of null values in CSV files                                                                                                                                                                                                                                                                                         | "\\N"                                      |
 | `--csv-line-terminator`      | The terminator at the end of a line for CSV files. When exporting data to a CSV file, you can specify the desired terminator with this option. This option supports "\\r\\n" and "\\n". The default value is "\\r\\n", which is consistent with the earlier versions. Because quotes in bash have different escaping rules, if you want to specify LF (linefeed) as a terminator, you can use a syntax similar to `--csv-line-terminator $'\n'`. | "\\r\\n" |
+| `--csv-output-dialect`      | Indicates that the source data can be exported to a CSV file in a specific required format for the database. The option value can be `""`, `"snowflake"`, `"redshift"`, or `"bigquery"`.  The default value is `""`, which means to encode and export the source data according to UTF-8. If you set the option to `"snowflake"` or `"redshift"`, the binary data type in the source data will be converted to hexadecimal, but the `0x` prefix will be removed. For example, `0x61` will be represented as `61`. If you set the option to `"bigquery"`, the binary data type will be encoded using base64. In some cases, the binary strings might contain garbled characters. | `""`  |
 | `--escape-backslash`         | Use backslash (`\`) to escape special characters in the export file                                                                                                                                                                                                                                                                | true                                       |
 | `--output-filename-template` | The filename templates represented in the format of [golang template](https://golang.org/pkg/text/template/#hdr-Arguments) <br/> Support the `{{.DB}}`, `{{.Table}}`, and `{{.Index}}` arguments <br/> The three arguments represent the database name, table name, and chunk ID of the data file                                  | `{{.DB}}.{{.Table}}.{{.Index}}`            |
 | `--status-addr`              | Dumpling's service address, including the address for Prometheus to pull metrics and pprof debugging                                                                                                                                                                                                                               | ":8281"                                    |
 | `--tidb-mem-quota-query`     | The memory limit of exporting SQL statements by a single line of Dumpling command, and the unit is byte. For v4.0.10 or later versions, if you do not set this parameter, TiDB uses the value of the `mem-quota-query` configuration item as the memory limit value by default. For versions earlier than v4.0.10, the parameter value defaults to 32 GB.  | 34359738368 |
 | `--params`                   | Specifies the session variable for the connection of the database to be exported. The required format is `"character_set_client=latin1,character_set_connection=latin1"`                                                                                                                                                           |
 |  `-c` or `--compress` |  Compresses the CSV and SQL data and table structure files exported by Dumpling. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`.  | "" |
+
+## Output filename template
+
+The `--output-filename-template` argument defines the naming convention for output files, excluding the file extensions. It accepts strings in the [Go `text/template` syntax](https://golang.org/pkg/text/template/).
+
+The following fields are available for the template:
+
+* `.DB`: the database name
+* `.Table`: the table name or the object name
+* `.Index`: the 0-based sequence number of the file when a table is split into multiple files, indicating which part is being dumped. For example, `{{printf "%09d" .Index}}` means formatting `.Index` as a 9-digit number with leading zeros.
+
+Database and table names might contain special characters (such as `/`) that are not allowed in file systems. To handle this issue, Dumpling provides the `fn` function to percent-encode these special characters:
+
+* U+0000 to U+001F (control characters)
+* `/`, `\`, `<`, `>`, `:`, `"`, `*`, `?` (invalid Windows path characters)
+* `.` (database or table name separator)
+* `-`, if used as part of `-schema`
+
+For example, using `--output-filename-template '{{fn .Table}}.{{printf "%09d" .Index}}'`, Dumpling will write the table `db.tbl:normal` into files named `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.
+
+In addition to output data files, you can define `--output-filename-template` to replace file names of the schema files. The following table shows the default configurations.
+
+| Name | Content |
+|------|---------|
+| data | `{{fn .DB}}.{{fn .Table}}.{{.Index}}` |
+| schema | `{{fn .DB}}-schema-create` |
+| table | `{{fn .DB}}.{{fn .Table}}-schema` |
+| event | `{{fn .DB}}.{{fn .Table}}-schema-post` |
+| function | `{{fn .DB}}.{{fn .Table}}-schema-post` |
+| procedure | `{{fn .DB}}.{{fn .Table}}-schema-post` |
+| sequence | `{{fn .DB}}.{{fn .Table}}-schema-sequence` |
+| trigger | `{{fn .DB}}.{{fn .Table}}-schema-triggers` |
+| view | `{{fn .DB}}.{{fn .Table}}-schema-view` |
+
+For example, using `--output-filename-template '{{define "table"}}{{fn .Table}}.$schema{{end}}{{define "data"}}{{fn .Table}}.{{printf "%09d" .Index}}{{end}}'`, Dumpling will write the schema of the table `db.tbl:normal` into a file named `tbl%3Anormal.$schema.sql`, and write the data into files `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.

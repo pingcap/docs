@@ -74,8 +74,8 @@ In this example, TiDB contains five replicas and three regions. Region 1 is the 
         config:
           server.labels: { Region: "Region3", AZ: "AZ5" }
 
-          raftstore.raft-min-election-timeout-ticks: 1000
-          raftstore.raft-max-election-timeout-ticks: 1200
+          raftstore.raft-min-election-timeout-ticks: 50
+          raftstore.raft-max-election-timeout-ticks: 60
 
     monitoring_servers:
       - host: tidb-dr-test2
@@ -122,7 +122,7 @@ In this example, TiDB contains five replicas and three regions. Region 1 is the 
 
     > **Note:**
     >
-    > The greater the priority number, the higher the probability that this node becomes the leader.
+    > In all available PD nodes, the node with the highest priority number becomes the leader.
 
 3. Create placement rules and fix the primary replica of the test table to region 1:
 

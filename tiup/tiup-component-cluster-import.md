@@ -1,5 +1,6 @@
 ---
 title: tiup cluster import
+summary: TiUP Cluster provides the `import` command to transfer TiDB clusters from TiDB Ansible to TiUP for management. Do not use `import` for clusters with certain configurations. Use options like `--dir` and `--rename` to customize the import process.
 ---
 
 # tiup cluster import
@@ -66,5 +67,3 @@ tiup cluster import [flags]
 ## Output
 
 Shows the logs of the import process.
-
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

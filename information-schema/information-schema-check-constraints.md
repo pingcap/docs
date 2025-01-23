@@ -29,6 +29,7 @@ The output is as follows:
 The following example adds a `CHECK` constraint using the `CREATE TABLE` statement:
 
 ```sql
+SET GLOBAL tidb_enable_check_constraint = ON;
 CREATE TABLE test.t1 (id INT PRIMARY KEY, CHECK (id%2 = 0));
 SELECT * FROM CHECK_CONSTRAINTS\G
 ```

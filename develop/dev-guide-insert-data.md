@@ -13,7 +13,7 @@ This document describes how to insert data into TiDB by using the SQL language w
 
 Before reading this document, you need to prepare the following:
 
-- [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 
 ## Insert rows
@@ -85,7 +85,7 @@ Due to the default MySQL JDBC Driver settings, you need to change some parameter
 |            Parameter            |                 Means                  |   Recommended Scenario   | Recommended Configuration|
 | :------------------------: | :-----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------: |
 |    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statements    |  When you need to use a prepared statement more than once                                                             |          `true`          |
-|      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true` 时                                                            |          `true`          |
+|      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true`                                                             |          `true`          |
 |  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (256 characters by default)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
 |    `prepStmtCacheSize`     | Maximum number of prepared statement caches (25 by default) | When the number of prepared statements is greater than 25  | Configured according to the actual number of prepared statements |
 | `rewriteBatchedStatements` |          Whether to rewrite **Batched** statements          | When batch operations are required |          `true`          |
@@ -290,7 +290,7 @@ There are two solutions to handle this error:
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
-- If you are sure that you **_must_** specify this column, then you can use the [`SET` statement](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable) to allow the column of `AUTO_RANDOM` to be specified during insertion time by changing the user variable.
+- If you are sure that you **_must_** specify this column, then you can use the [`SET` statement](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable) to allow the column of `AUTO_RANDOM` to be specified during insertion time by changing the user variable.
 
     {{< copyable "sql" >}}
 
@@ -302,3 +302,17 @@ There are two solutions to handle this error:
 ## Use HTAP
 
 In TiDB, HTAP capabilities save you from performing additional operations when inserting data. There is no additional insertion logic. TiDB automatically guarantees data consistency. All you need to do is [turn on column-oriented replica synchronization](/develop/dev-guide-create-table.md#use-htap-capabilities) after creating the table, and use the column-oriented replica to speed up your queries directly.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

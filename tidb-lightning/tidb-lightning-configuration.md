@@ -125,17 +125,24 @@ driver = "file"
 # keep-after-success = false
 
 [conflict]
-# Starting from v7.3.0, a new version of strategy is introduced to handle conflicting data. The default value is "".
-# - "": TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error.
+# Starting from v7.3.0, a new version of strategy is introduced to handle conflicting data. The default value is "". Starting from v8.0.0, TiDB Lightning optimizes the conflict strategy for both physical and logical import modes.
+# - "": in the physical import mode, TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error. In the logical import mode, TiDB Lightning converts the "" strategy to the "error" strategy for processing.
 # - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
-# - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the new data and overwrites the old data.
-# - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data.
-# The new version strategy cannot be used together with tikv-importer.duplicate-resolution (the old version of conflict detection).
+# - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the latest data and overwrites the old data.
+#              When you use the physical import mode, the conflicting data are recorded in the `lightning_task_info.conflict_view` view of the target TiDB cluster.
+#              In the `lightning_task_info.conflict_view` view, if the `is_precheck_conflict` field for a row is `0`, it means that the conflicting data recorded in that row is detected by postprocess conflict detection; if the `is_precheck_conflict` field for a row is `1`, it means that conflicting data recorded in that row is detected by pre-import conflict detection.
+#              You can manually insert the correct records into the target table based on your application requirements. Note that the target TiKV must be v5.2.0 or later versions.
+# - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data. This option can only be used in the logical import mode.
 strategy = ""
-# Controls the upper limit of the conflicting data that can be handled when strategy is "replace" or "ignore". You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerant.
-# threshold = 9223372036854775807
-# Controls the maximum number of records in the conflict_records table. The default value is 100. If the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records that are overwritten are recorded. However, the "replace" strategy cannot record the conflict records in the logical import mode.
-# max-record-rows = 100
+# Controls whether to enable pre-import conflict detection, which checks conflicts in data before importing it to TiDB. The default value is false, indicating that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import. This parameter can be used only in the physical import mode. In scenarios where the number of conflict records is greater than 1,000,000, it is recommended to set `precheck-conflict-before-import = true` for better performance in conflict detection. In other scenarios, it is recommended to disable it.
+# precheck-conflict-before-import = false
+# Controls the maximum number of conflict errors that can be handled when strategy is "replace" or "ignore". You can set it only when the strategy is "replace" or "ignore". The default value is 10000. If you set a value larger than 10000, the import process might experience performance degradation.
+# threshold = 10000
+# Controls the maximum number of records in the `conflict_records` table. The default value is 10000.
+# Starting from v8.1.0, there is no need to configure `max-record-rows` manually, because TiDB Lightning automatically assigns the value of `max-record-rows` with the value of `threshold`, regardless of the user input. `max-record-rows` will be deprecated in a future release.
+# In the physical import mode, if the strategy is "replace", the conflict records that are overwritten are recorded.
+# In the logical import mode, if the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records are not recorded.
+# max-record-rows = 10000
 
 [tikv-importer]
 # "local": Physical import mode, used by default. It applies to large dataset import,
@@ -150,15 +157,13 @@ strategy = ""
 # Note that this parameter is only used in scenarios where the target table is empty.
 # parallel-import = false
 
+# The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. For more information, see <https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
-#  - none: does not detect duplicate records, which has the best performance of the two algorithms.
-#          But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
-#  - remove: if there are primary key or unique key conflicts between the inserting data A and B,
-#            A and B will be removed from the target table and recorded
-#            in the `lightning_task_info.conflict_error_v1` table in the target TiDB.
-#            You can manually insert the correct records into the target table based on your business requirements.
-#            Note that the target TiKV must be v5.2.0 or later versions; otherwise it falls back to 'none'.
+# - 'none': does not detect duplicate records.
+#         If there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
+#         If you set `duplicate-resolution = 'none'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`.
+# - 'remove': If you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign "replace" to `conflict.strategy` and enable the new version of conflict detection. 
 # The default value is 'none'.
 # duplicate-resolution = 'none'
 # The maximum number of KV pairs in one request when sending data to TiKV in physical import mode.
@@ -233,6 +238,28 @@ strategy = ""
 # The number of retries will not be increased if any Region becomes online between retries.
 # This parameter is introduced in v7.1.0.
 # region-check-backoff-limit = 1800
+
+# In Physical Import Mode, this parameter controls the I/O block size for sorting local files. When the disk IOPS is a bottleneck, you can increase this value to improve data import performance.
+# This parameter is introduced in v7.6.0. The default value is "16KiB". The value must be greater than or equal to `1B`. Note that if you only specify a number (for example, `16`), the unit is Byte instead of KiB.
+# block-size = "16KiB"
+
+# In Logical Import Mode, this parameter controls the size of each SQL statement executed on the downstream TiDB server.
+# This parameter is introduced in v8.0.0.
+# It specifies the expected size of the VALUES part of each INSERT or REPLACE statement in a single transaction.
+# This parameter is not a hard limit. The actual SQL executed might be longer or shorter, depending on the actual content imported.
+# The default value is "96KiB", which is optimized for import speed when TiDB Lightning is the only client of the cluster.
+# Due to the implementation details of TiDB Lightning, the value is capped at 96 KiB. Setting a larger value will not take effect.
+# You can decrease this value to reduce the stress on the cluster due to large transactions.
+# logical-import-batch-size = "96KiB"
+
+# In Logical Import Mode, this parameter controls the maximum number of rows inserted per transaction.
+# This parameter is introduced in v8.0.0. The default value is `65536` rows.
+# When both `logical-import-batch-size` and `logical-import-batch-rows` are specified, the parameter whose value reaches its threshold first will take effect.
+# You can decrease this value to reduce the stress on the cluster due to large transactions.
+# logical-import-batch-rows = 65536
+
+# In Logical Import Mode, this parameter controls whether to use prepared statements and statement cache to improve performance. The default value is `false`.
+logical-import-prep-stmt = false
 
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
@@ -359,8 +386,8 @@ user = "root"
 password = ""
 # Table schema information is fetched from TiDB via this status-port.
 status-port = 10080
-# Address of any PD server from the cluster.
-pd-addr = "172.16.31.4:2379"
+# Address of any PD server from the cluster. Starting from v7.6.0, TiDB supports setting multiple PD addresses.
+pd-addr = "172.16.31.4:2379,56.78.90.12:3456"
 # tidb-lightning imports TiDB as a library and generates some logs itself.
 # This setting controls the log level of the TiDB library.
 log-level = "error"
@@ -373,8 +400,12 @@ distsql-scan-concurrency = 15
 index-serial-scan-concurrency = 20
 checksum-table-concurrency = 2
 
+# Sets other TiDB session variables
+# [tidb.session-vars]
+# tidb_enable_clustered_index = "OFF"
+
 # The default SQL mode used to parse and execute the SQL statements.
-sql-mode = "ONLY_FULL_GROUP_BY,NO_ENGINE_SUBSTITUTION"
+sql-mode = "ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"
 # Sets maximum packet size allowed for SQL connections.
 # Set this to 0 to automatically fetch the `max_allowed_packet` variable from server on every connection.
 max-allowed-packet = 67_108_864
@@ -436,54 +467,3 @@ log-progress = "5m"
 # The default value is 60 seconds.
 # check-disk-quota = "60s"
 ```
-
-## Command line parameters
-
-### Usage of `tidb-lightning`
-
-| Parameter | Explanation | Corresponding setting |
-|:----|:----|:----|
-| --config *file* | Reads global configuration from *file*. If not specified, the default configuration would be used. | |
-| -V | Prints program version | |
-| -d *directory* | Directory or [external storage URI](/external-storage-uri.md) of the data dump to read from | `mydumper.data-source-dir` |
-| -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
-| -f *rule* | [Table filter rules](/table-filter.md) (can be specified multiple times) | `mydumper.filter` |
-| --backend *[backend](/tidb-lightning/tidb-lightning-overview.md)* | Select an import mode. `local` refers to the physical import mode; `tidb` refers to the logical import mode. | `local` |
-| --log-file *file* | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
-| --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
-| --pd-urls *host:port* | PD endpoint address | `tidb.pd-addr` |
-| --tidb-host *host* | TiDB server host | `tidb.host` |
-| --tidb-port *port* | TiDB server port (default = 4000) | `tidb.port` |
-| --tidb-status *port* | TiDB status port (default = 10080) | `tidb.status-port` |
-| --tidb-user *user* | User name to connect to TiDB | `tidb.user` |
-| --tidb-password *password* | Password to connect to TiDB. The password can either be plaintext or Base64 encoded. | `tidb.password` |
-| --enable-checkpoint *bool* | Whether to enable checkpoints (default = true) | `checkpoint.enable` |
-| --analyze *level* | Analyze tables after importing. Available values are "required", "optional" (default value), and "off" | `post-restore.analyze` |
-| --checksum *level* | Compare checksum after importing. Available values are "required" (default value), "optional", and "off" | `post-restore.checksum` |
-| --check-requirements *bool* | Check cluster version compatibility before starting the task, and check whether TiKV has more than 10% free space left during running time. (default = true) | `lightning.check-requirements` |
-| --ca *file* | CA certificate path for TLS connection | `security.ca-path` |
-| --cert *file* | Certificate path for TLS connection | `security.cert-path` |
-| --key *file* | Private key path for TLS connection | `security.key-path` |
-| --server-mode | Start TiDB Lightning in server mode | `lightning.server-mode` |
-
-If a command line parameter and the corresponding setting in the configuration file are both provided, the command line parameter will be used. For example, running `./tidb-lightning -L debug --config cfg.toml` would always set the log level to "debug" regardless of the content of `cfg.toml`.
-
-## Usage of `tidb-lightning-ctl`
-
-This tool can execute various actions given one of the following parameters:
-
-| Parameter | Explanation |
-|:----|:----|
-| --compact | Performs a full compaction |
-| --switch-mode *mode* | Switches every TiKV store to the given mode: normal, import |
-| --fetch-mode | Prints the current mode of every TiKV store |
-| --import-engine *uuid* | Imports the closed engine file from TiKV Importer into the TiKV cluster |
-| --cleanup-engine *uuid* | Deletes the engine file from TiKV Importer |
-| --checkpoint-dump *folder* | Dumps current checkpoint as CSVs into the folder |
-| --checkpoint-error-destroy *tablename* | Removes the checkpoint and drops the table if it caused error |
-| --checkpoint-error-ignore *tablename* | Ignores any error recorded in the checkpoint involving the given table |
-| --checkpoint-remove *tablename* | Unconditionally removes the checkpoint of the table |
-
-The *tablename* must either be a qualified table name in the form `` `db`.`tbl` `` (including the backquotes), or the keyword "all".
-
-Additionally, all parameters of `tidb-lightning` described in the section above are valid in `tidb-lightning-ctl`.

@@ -15,11 +15,11 @@ This section takes the `books` table in the [bookshop](/develop/dev-guide-booksh
 
 ```sql
 CREATE TABLE `books` (
-  `id` bigint(20) AUTO_RANDOM NOT NULL,
+  `id` bigint AUTO_RANDOM NOT NULL,
   `title` varchar(100) NOT NULL,
   `type` enum('Magazine', 'Novel', 'Life', 'Arts', 'Comics', 'Education & Reference', 'Humanities & Social Sciences', 'Science & Technology', 'Kids', 'Sports') NOT NULL,
   `published_at` datetime NOT NULL,
-  `stock` int(11) DEFAULT '0',
+  `stock` int DEFAULT '0',
   `price` decimal(15,2) DEFAULT '0.0',
   PRIMARY KEY (`id`) CLUSTERED
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -150,3 +150,17 @@ CREATE TABLE `books` (
     ```
 
 - When using the `IN` expression in a query condition, it is recommended that the number of value matched after it does not exceed 300, otherwise the execution efficiency will be poor.
+
+## Need help?
+
+<CustomContent platform="tidb">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
+
+</CustomContent>

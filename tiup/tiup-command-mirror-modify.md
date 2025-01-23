@@ -1,5 +1,6 @@
 ---
 title: tiup mirror modify
+summary: The tiup mirror modify command is used to modify published components. Only valid component owners can modify their published components. The syntax is "tiup mirror modify <component>[version] [flags]". Options include -k, --yank, --hide, and --standalone. If the command is executed successfully, there is no output. If the component owner is not authorized to modify the target component, TiUP reports an error.
 ---
 
 # tiup mirror modify
@@ -60,5 +61,3 @@ Marks a specified component or version as unavailable.
 - If the component owner is not authorized to modify the target component:
     - If the mirror is a remote mirror, TiUP reports the error `Error: The server refused, make sure you have access to this component`.
     - If the mirror is a local mirror, TiUP reports the error `Error: the signature is not correct`.
-
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)

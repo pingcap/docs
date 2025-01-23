@@ -10,7 +10,7 @@ The `PLACEMENT_POLICIES` table provides information on all placement policies. F
 
 > **Note:**
 >
-> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This table is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 {{< copyable "sql" >}}
 

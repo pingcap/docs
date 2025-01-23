@@ -31,6 +31,11 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 - `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
 - `--config`: Specifies the changefeed configuration file. For details, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
 
+> **Note:**
+>
+> - TiCDC only replicates incremental data. To initialize full data, use Dumpling/TiDB Lightning or BR.
+> - After the full data is initialized, you need to specify the `start-ts` as the TSO when the upstream backup is performed. For example, the `pos` value in the metadata file under the Dumpling directory, or the `backupTS` value in the log output after BR completes the backup.
+
 ## Configure sink URI for MySQL or TiDB
 
 Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
@@ -46,15 +51,15 @@ Sink URI is used to specify the connection information of the TiCDC target syste
 Sample configuration for MySQL:
 
 ```shell
---sink-uri="mysql://root:123456@127.0.0.1:3306"
+--sink-uri="mysql://root:12345678@127.0.0.1:3306"
 ```
 
 The following are descriptions of sink URI parameters and parameter values that can be configured for MySQL or TiDB:
 
 | Parameter/Parameter value    | Description                                             |
 | :------------ | :------------------------------------------------ |
-| `root`        | The username of the downstream database.                              |
-| `123456`       | The password of the downstream database (can be encoded using Base64).                                      |
+| `root`        | The username of the downstream database. To replicate data to TiDB or other MySQL-compatible databases, make sure that the downstream database user has [certain permissions](#permissions-required-for-the-downstream-database-user).                             |
+| `12345678`       | The password of the downstream database (can be encoded using Base64).                                      |
 | `127.0.0.1`    | The IP address of the downstream database.                               |
 | `3306`         | The port for the downstream data.                                 |
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default).       |
@@ -69,18 +74,43 @@ The following are descriptions of sink URI parameters and parameter values that 
 To encode the database password in the sink URI using Base64, use the following command:
 
 ```shell
-echo -n '123456' | base64   # '123456' is the password to be encoded.
+echo -n '12345678' | base64   # '12345678' is the password to be encoded.
 ```
 
-The encoded password is `MTIzNDU2`:
+The encoded password is as follows:
 
 ```shell
-MTIzNDU2
+MTIzNDU2Nzg=
 ```
 
 > **Note:**
 >
-> When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
+> When the sink URI parameters contain special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
+> 
+> For example, if the username for connecting to the downstream database is `R&D (2)` and the certificate file path is `/data1/R&D (2).pem`, you need to escape these parameters as follows:
+> 
+> ```shell
+> --sink-uri="mysql://R%26D%20%282%29:MTIzNDU2Nzg%3D@127.0.0.1:3306/?ssl-cert=/data1/R%26D%20%282%29.pem"
+> #                    ^~~ ^~~^~~ ^~~            ^~~                                  ^~~ ^~~^~~ ^~~
+> ```
+
+## Permissions required for the downstream database user
+
+To replicate data to TiDB or other MySQL-compatible databases, the downstream database user needs the following permissions:
+
+- `Select`
+- `Index`
+- `Insert`
+- `Update`
+- `Delete`
+- `Create`
+- `Drop`
+- `Alter`
+- `Create View`
+
+To replicate [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) to the downstream TiDB, the downstream database user also needs the `Super` permission.
+
+If the downstream TiDB cluster has [read-only mode](/system-variables.md#tidb_restricted_read_only-new-in-v520) enabled, the downstream database user also needs the `RESTRICTED_REPLICA_WRITER_ADMIN` permission.
 
 ## Eventually consistent replication in disaster scenarios
 

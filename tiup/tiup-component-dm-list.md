@@ -1,5 +1,6 @@
 ---
 title: tiup dm list
+summary: tiup-dm supports deploying multiple clusters using the same control machine. The "tiup dm list" command checks which clusters are deployed by the currently logged-in user. The data is stored in the ~/.tiup/storage/dm/clusters/ directory. The user can view the cluster name, deploying user, version, path, and private key.
 ---
 
 # tiup dm list
@@ -33,5 +34,3 @@ A table consisting of the following fields:
 - `Version`: the cluster version.
 - `Path`: the path of the cluster deployment data on the control machine.
 - `PrivateKey`: the path of the private key to the cluster.
-
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)

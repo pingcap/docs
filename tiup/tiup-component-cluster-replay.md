@@ -1,5 +1,6 @@
 ---
 title: tiup cluster replay
+summary: The `tiup cluster replay` command allows you to retry failed cluster operations and skip successfully performed steps. Use `tiup cluster replay <audit-id>` to retry the command with the specified audit ID. View audit IDs with `tiup cluster audit` command. The output is the result of the specified audit ID.
 ---
 
 # tiup cluster replay
@@ -23,5 +24,3 @@ Prints the help information.
 ## Output
 
 The output of the command corresponding to `<audit-id>`.
-
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

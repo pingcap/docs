@@ -1,5 +1,6 @@
 ---
 title: tiup clean
+summary: The "tiup clean" command clears data generated during component operation. The syntax is "tiup clean [name] [flags]", with the option to use "--all" to clear all operation records.
 ---
 
 # tiup clean
@@ -27,5 +28,3 @@ The value of `[name]` is the `Name` field output by the [`status` command](/tiup
 ```
 Clean instance of `%s`, directory: %s
 ```
-
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)

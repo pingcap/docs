@@ -25,10 +25,10 @@ The response body contains the following fields:
     - `columns`: _array_. Schema information for the returned fields.
     - `rows`: _array_. The returned results in `key:value` format.
 
-        When **Batch Operation** is enabled for an endpoint and the last SQL statement of the endpoint is an `INSERT`, `UPDATE`, or `DELETE` operation, note the following:
+        When **Batch Operation** is enabled for an endpoint and the last SQL statement of the endpoint is an `INSERT` or `UPDATE` operation, note the following:
 
         - The returned results of the endpoint will also include the `"message"` and `"success"` fields for each row to indicate their response and status.
-        - If the primary key column of the target table is configured as `auto_increment`, the returned results of the endpoint will also include the `"auto_increment_id"` field for each row. The value of this field is the auto increment ID for an `INSERT` operation and is `null` for other operations such as `UPDATE` and `DELETE`.
+        - If the primary key column of the target table is configured as `auto_increment`, the returned results of the endpoint will also include the `"auto_increment_id"` field for each row. The value of this field is the auto increment ID for an `INSERT` operation and is `null` for other operations such as `UPDATE`.
 
     - `result`: _object_. The execution-related information of the SQL statement, including success/failure status, execution time, number of rows returned, and user configuration.
 
@@ -275,7 +275,7 @@ An example response is as follows:
 
 ### 429
 
-This status code indicates that the request exceeds the rate limit of the API key. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+This status code indicates that the request exceeds the rate limit of the API key. For more quota, you can [submit a request](https://tidb.support.pingcap.com/) to our support team.
 
 An example response is as follows:
 
@@ -290,7 +290,7 @@ An example response is as follows:
     "rows": [],
     "result": {
       "code": 49900007,
-      "message": "The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
+      "message": "The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://tidb.support.pingcap.com/",
       "start_ms": "",
       "end_ms": "",
       "latency": "",
@@ -314,7 +314,7 @@ An example response is as follows:
     "rows": [],
     "result": {
       "code": 429,
-      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
+      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://tidb.support.pingcap.com/",
       "start_ms": "",
       "end_ms": "",
       "latency": "",

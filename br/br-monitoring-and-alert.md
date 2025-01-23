@@ -1,11 +1,15 @@
 ---
 title: Monitoring and Alert for Backup and Restore
-summary: Learn the monitoring and alert of the backup and restore feature.
+summary: This document describes monitoring and alert for backup and restore, including log backup monitoring, configuration, Grafana configuration, monitoring metrics, and log backup alerts. It covers the recommended alert items and their configurations for PITR.
 ---
 
 # Monitoring and Alert for Backup and Restore
 
 This document describes the monitoring and alert of the backup and restore feature, including how to deploy monitoring components, monitoring metrics, and common alerts.
+
+## Snapshot backup and restore monitoring
+
+To view the snapshot backup and restore metrics, go to the [**TiKV-Details** > **Backup & Import** dashboard](/grafana-tikv-dashboard.md#backup--import) in Grafana.
 
 ## Log backup monitoring
 
@@ -25,7 +29,7 @@ Log backup supports using [Prometheus](https://prometheus.io/) to collect monito
 
 | Metrics                                                | Type    |  Description                                                                                                                                                 |
 |-------------------------------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **tikv_log_backup_interal_actor_acting_duration_sec** | Histogram | The duration of handling all internal messages and events. <br/>`message :: TaskType`                                                                                                            |
+| **tikv_log_backup_internal_actor_acting_duration_sec** | Histogram | The duration of handling all internal messages and events. <br/>`message :: TaskType`                                                                                                            |
 | **tikv_log_backup_initial_scan_reason**               | Counter   | Statistics of the reasons why initial scan is triggered. The main reason is leader transfer or Region version change. <br/> `reason :: {"leader-changed", "region-changed", "retry"}`                                           |
 | **tikv_log_backup_event_handle_duration_sec**         | Histogram | The duration of handling KV events. Compared with `tikv_log_backup_on_event_duration_seconds`, this metric also includes the duration of internal conversion. <br/>`stage :: {"to_stream_event", "save_to_temp_file"}` |
 | **tikv_log_backup_handle_kv_batch**                   | Histogram |  Region-level statistics of the sizes of KV pair batches sent by Raftstore.                                                                                                    |

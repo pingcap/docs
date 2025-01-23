@@ -64,7 +64,7 @@ TiCDC encodes a DDL Event into the following Canal-JSON format.
     "data": null,
     "old": null,
     "_tidb": {     // TiDB extension field
-        "commitTs": 163963309467037594
+        "commitTs": 429918007904436226  // A TiDB TSO timestamp
     }
 }
 ```
@@ -133,7 +133,7 @@ TiCDC encodes a row of DML data change event as follows:
     ],
     "old": null,
     "_tidb": {     // TiDB extension field
-        "commitTs": 163963314122145239
+        "commitTs": 429918007904436226  // A TiDB TSO timestamp
     }
 }
 ```
@@ -162,7 +162,7 @@ The following is an example of the WATERMARK Event.
     "data": null,
     "old": null,
     "_tidb": {     // TiDB extension field
-        "watermarkTs": 429918007904436226
+        "watermarkTs": 429918007904436226  // A TiDB TSO timestamp
     }
 }
 ```
@@ -308,7 +308,7 @@ The way that TiCDC implements the Canal-JSON data format, including the `Update`
 
 ### Compatibility with the official Canal
 
-Starting from v6.5.6, TiCDC Canal-JSON supports compatibility with the data format of the official Canal. When creating a changefeed, you can set `content-compatible=true` in `sink-uri` to enable this feature. In this mode, TiCDC outputs Canal-JSON format data that is compatible with the official Canal. The specific changes are as follows:
+Starting from v6.5.6, v7.1.3, and v7.6.0, TiCDC Canal-JSON supports compatibility with the data format of the official Canal. When creating a changefeed, you can set `content-compatible=true` in `sink-uri` to enable this feature. In this mode, TiCDC outputs Canal-JSON format data that is compatible with the official Canal. The specific changes are as follows:
 
 * The `mysqlType` field contains the full information of the type parameter for each type.
 * An Event of `Update` Type only outputs the modified column data.

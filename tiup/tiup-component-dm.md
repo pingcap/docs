@@ -1,5 +1,6 @@
 ---
 title: TiUP DM
+summary: TiUP DM is used to manage DM clusters, including deploying, starting, stopping, destroying, scaling, upgrading, and managing configuration parameters. It supports options like SSH, timeout, confirmation skipping, version printing, and help information. Supported commands include import, template, deploy, list, display, start, stop, restart, scale-in, scale-out, upgrade, prune, edit-config, reload, patch, destroy, audit, replay, enable, disable, and help.
 ---
 
 # TiUP DM
@@ -81,5 +82,3 @@ tiup dm [command] [flags]
 - [enable](/tiup/tiup-component-dm-enable.md): Enables the auto-enabling of the cluster service after a machine is restarted.
 - [disable](/tiup/tiup-component-dm-disable.md): Disables the auto-enabling of the cluster service after a machine is restarted.
 - [help](/tiup/tiup-component-dm-help.md): Prints help information.
-
-[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)

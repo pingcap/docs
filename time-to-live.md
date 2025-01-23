@@ -159,7 +159,7 @@ The preceding statement allows TTL jobs to be scheduled only between 1:00 and 5:
 
 > **Note:**
 >
-> This section is only applicable to TiDB Self-Hosted. Currently, TiDB Cloud does not provide TTL metrics.
+> This section is only applicable to TiDB Self-Managed. Currently, TiDB Cloud does not provide TTL metrics.
 
 </CustomContent>
 
@@ -176,29 +176,32 @@ In addition, TiDB provides three tables to obtain more information about TTL job
 + The `mysql.tidb_ttl_table_status` table contains information about the previously executed TTL job and ongoing TTL job for all TTL tables
 
     ```sql
-    MySQL [(none)]> SELECT * FROM mysql.tidb_ttl_table_status LIMIT 1\G;
+    TABLE mysql.tidb_ttl_table_status LIMIT 1\G
+    ```
+
+    ```
     *************************** 1. row ***************************
                           table_id: 85
-                  parent_table_id: 85
+                   parent_table_id: 85
                   table_statistics: NULL
-                      last_job_id: 0b4a6d50-3041-4664-9516-5525ee6d9f90
-              last_job_start_time: 2023-02-15 20:43:46
+                       last_job_id: 0b4a6d50-3041-4664-9516-5525ee6d9f90
+               last_job_start_time: 2023-02-15 20:43:46
               last_job_finish_time: 2023-02-15 20:44:46
-              last_job_ttl_expire: 2023-02-15 19:43:46
+               last_job_ttl_expire: 2023-02-15 19:43:46
                   last_job_summary: {"total_rows":4369519,"success_rows":4369519,"error_rows":0,"total_scan_task":64,"scheduled_scan_task":64,"finished_scan_task":64}
                     current_job_id: NULL
               current_job_owner_id: NULL
             current_job_owner_addr: NULL
-        current_job_owner_hb_time: NULL
+         current_job_owner_hb_time: NULL
             current_job_start_time: NULL
             current_job_ttl_expire: NULL
-                current_job_state: NULL
+                 current_job_state: NULL
                 current_job_status: NULL
     current_job_status_update_time: NULL
     1 row in set (0.040 sec)
     ```
 
-    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `infomation_schema.tables`. If the table is not a partitioned table, the two IDs are the same.
+    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in [`information_schema.tables`](/information-schema/information-schema-tables.md). If the table is not a partitioned table, the two IDs are the same.
 
     The columns `{last, current}_job_{start_time, finish_time, ttl_expire}` describe respectively the start time, finish time, and expiration time used by the TTL job of the last or current execution. The `last_job_summary` column describes the execution status of the last TTL task, including the total number of rows, the number of successful rows, and the number of failed rows.
 
@@ -206,25 +209,28 @@ In addition, TiDB provides three tables to obtain more information about TTL job
 + The `mysql.tidb_ttl_job_history` table contains information about the TTL jobs that have been executed. The record of TTL job history is kept for 90 days.
 
     ```sql
-    MySQL [(none)]> SELECT * FROM mysql.tidb_ttl_job_history LIMIT 1\G;
-    *************************** 1. row ***************************
-              job_id: f221620c-ab84-4a28-9d24-b47ca2b5a301
-            table_id: 85
-      parent_table_id: 85
-        table_schema: test_schema
-          table_name: TestTable
-      partition_name: NULL
-          create_time: 2023-02-15 17:43:46
-          finish_time: 2023-02-15 17:45:46
-          ttl_expire: 2023-02-15 16:43:46
-        summary_text: {"total_rows":9588419,"success_rows":9588419,"error_rows":0,"total_scan_task":63,"scheduled_scan_task":63,"finished_scan_task":63}
-        expired_rows: 9588419
-        deleted_rows: 9588419
-    error_delete_rows: 0
-              status: finished
+    TABLE mysql.tidb_ttl_job_history LIMIT 1\G
     ```
 
-    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `infomation_schema.tables`. `table_schema`, `table_name`, and `partition_name` correspond to the database, table name, and partition name. `create_time`, `finish_time`, and `ttl_expire` indicate the creation time, end time, and expiration time of the TTL task. `expired_rows` and `deleted_rows` indicate the number of expired rows and the number of rows deleted successfully.
+    ```
+    *************************** 1. row ***************************
+               job_id: f221620c-ab84-4a28-9d24-b47ca2b5a301
+             table_id: 85
+      parent_table_id: 85
+         table_schema: test_schema
+           table_name: TestTable
+       partition_name: NULL
+          create_time: 2023-02-15 17:43:46
+          finish_time: 2023-02-15 17:45:46
+           ttl_expire: 2023-02-15 16:43:46
+         summary_text: {"total_rows":9588419,"success_rows":9588419,"error_rows":0,"total_scan_task":63,"scheduled_scan_task":63,"finished_scan_task":63}
+         expired_rows: 9588419
+         deleted_rows: 9588419
+    error_delete_rows: 0
+               status: finished
+    ```
+
+    The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `information_schema.tables`. `table_schema`, `table_name`, and `partition_name` correspond to the database, table name, and partition name. `create_time`, `finish_time`, and `ttl_expire` indicate the creation time, end time, and expiration time of the TTL task. `expired_rows` and `deleted_rows` indicate the number of expired rows and the number of rows deleted successfully.
 
 ## Compatibility with TiDB tools
 
@@ -242,7 +248,7 @@ TTL can be used with other TiDB migration, backup, and recovery tools.
 | :-- | :---- |
 | [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) |  `FLASHBACK TABLE` will set the `TTL_ENABLE` attribute of the tables to `OFF`. This prevents TiDB from immediately deleting expired data after the flashback. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
 | [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE` will set the `TTL_ENABLE` attribute of the tables to `OFF`, and the `TTL_ENABLE` attribute will not be modified. This prevents TiDB from immediately deleting expired data after the flashback. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
-| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | `FLASHBACK CLUSTER TO TIMESTAMP` will set the system variable [`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) to `OFF` and do not change the value of the `TTL_ENABLE` attribute. |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | `FLASHBACK CLUSTER` will set the system variable [`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) to `OFF` and do not change the value of the `TTL_ENABLE` attribute. |
 
 ## Limitations
 
@@ -251,8 +257,16 @@ Currently, the TTL feature has the following limitations:
 * The TTL attribute cannot be set on temporary tables, including local temporary tables and global temporary tables.
 * A table with the TTL attribute does not support being referenced by other tables as the primary table in a foreign key constraint.
 * It is not guaranteed that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup job.
-* For tables that use [clustered indexes](/clustered-indexes.md), if the primary key is neither an integer nor a binary string type, the TTL job cannot be split into multiple tasks. This will cause the TTL job to be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow.
-* TTL is not available for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+* For tables that use [clustered indexes](/clustered-indexes.md), a TTL job can be split into multiple subtasks only in the following scenarios:
+    - The first column of the primary key or composite primary key is of `INTEGER` or binary string types. The binary string types mainly refer to the following:
+        - `CHAR(N) CHARACTER SET BINARY`
+        - `VARCHAR(N) CHARACTER SET BINARY`
+        - `BINARY(N)`
+        - `VARBINARY(N)`
+        - `BIT(N)`
+    - The character set of the first column of the primary key or composite primary key is `utf8` or `utf8mb4`, and the collation is `utf8_bin`, `utf8mb4_bin`, or `utf8mb4_0900_bin`.
+    - For tables where the character set type of the first column of the primary key is `utf8` or `utf8mb4`, subtasks are split only based on the range of visible ASCII characters. If many primary key values have the same ASCII prefix, it might cause uneven task splitting.
+    - For tables that do not support splitting a TTL job into multiple subtasks, the TTL job will be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow.
 
 ## FAQs
 

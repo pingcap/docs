@@ -53,7 +53,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
 - Panic And Critical Error: the number of panics and critical errors occurred in TiDB
 - Time Jump Back OPS: the number of times that the operating system rewinds every second on each TiDB instance
 - Get Token Duration: the time cost of getting Token on each connection
-- Skip Binlog Count: the number of binlog write failures in TiDB
+- Skip Binlog Count: the number of binlog write failures in TiDB; starting from v8.4.0, TiDB Binlog is removed, and this metric has no value
 - Client Data Traffic: data traffic statistics of TiDB and the client
 
 ### Transaction
@@ -133,10 +133,10 @@ The following metrics relate to requests sent to TiKV. Retry requests are counte
 - PD Client CMD OPS: the statistics of commands executed by PD Client per second
 - PD Client CMD Duration: the time it takes for PD Client to execute commands
 - PD Client CMD Fail OPS: the statistics of failed commands executed by PD Client per second
-- PD TSO OPS: the number of TSO that TiDB obtains from PD per second
+- PD TSO OPS: the number of gRPC requests per second that TiDB sends to PD (cmd) and the number of TSO requests (request); each gRPC request contains a batch of TSO requests
 - PD TSO Wait Duration: the time that TiDB waits for PD to return TSO
-- PD TSO RPC duration: the duration from the time that TiDB sends request to PD (to get TSO) to the time that TiDB receives TSO
-- Start TSO Wait Duration: the duration from the time that TiDB sends request to PD (to get `start TSO`) to the time that TiDB receives `start TSO`
+- PD TSO RPC duration: the duration from the time that TiDB sends gRPC requests to PD to get TSO to the time that TiDB receives the gRPC response from PD
+- Async TSO Duration: the duration from the time that TiDB prepares to get TSO to the time that TiDB actually starts to wait for PD to return TSO
 
 ### Schema Load
 

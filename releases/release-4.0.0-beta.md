@@ -1,6 +1,7 @@
 ---
 title: TiDB 4.0 Beta Release Notes
 aliases: ['/docs/dev/releases/release-4.0.0-beta/','/docs/dev/releases/4.0.0-beta/']
+summary: TiDB version 4.0.0-beta and TiDB Ansible version 4.0.0-beta were released on January 17, 2020. The release includes various improvements such as increased accuracy in calculating the cost of Index Join, support for Table Locks, and optimization of the error code of SQL error messages. TiKV was also upgraded to RocksDB version 6.4.6 and now supports quick backup and restoration. PD now supports optimizing hotspot scheduling and adding Placement Rules feature. TiDB Lightning added a parameter to set the password of the downstream database, and TiDB Ansible now supports deploying and maintaining TiFlash.
 ---
 
 # TiDB 4.0 Beta Release Notes

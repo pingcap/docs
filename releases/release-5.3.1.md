@@ -1,5 +1,6 @@
 ---
 title: TiDB 5.3.1 Release Notes
+summary: TiDB 5.3.1 was released on March 3, 2022. The release includes compatibility changes, improvements, and bug fixes for TiDB, TiKV, PD, TiCDC, TiFlash, Backup & Restore (BR), and TiDB Data Migration (DM). Some notable changes include optimizing user login mode mapping, reducing TiCDC recovery time, and fixing various bugs in TiDB, TiKV, PD, TiFlash, and tools like TiCDC and TiDB Lightning. These fixes address issues related to data import, user login, garbage collection, configuration parameters, and more.
 ---
 
 # TiDB 5.3.1 Release Notes
@@ -20,7 +21,7 @@ TiDB version: 5.3.1
 
 - TiDB
 
-    - Optimize the mapping logic of user login mode to make the logging more MySQL-compatible [#30450](https://github.com/pingcap/tidb/issues/32648)
+    - Optimize the mapping logic of user login mode to make the logging more MySQL-compatible [#32648](https://github.com/pingcap/tidb/issues/32648)
 
 - TiKV
 
@@ -142,7 +143,7 @@ TiDB version: 5.3.1
         - Fix the issue that `stopped` changefeeds resume automatically after a cluster upgrade [#3473](https://github.com/pingcap/tiflow/issues/3473)
         - Fix the issue that default values cannot be replicated [#3793](https://github.com/pingcap/tiflow/issues/3793)
         - Fix the issue of overly frequent warnings caused by MySQL sink deadlock [#2706](https://github.com/pingcap/tiflow/issues/2706)
-        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on Canal and Maxwell protocols [#3676](https://github.com/pingcap/tiflow/issues/3676)
+        - Fix the bug that the `enable-old-value` configuration item is not automatically set to `true` on the Canal protocol [#3676](https://github.com/pingcap/tiflow/issues/3676)
         - Fix the issue that Avro sink does not support parsing JSON type columns [#3624](https://github.com/pingcap/tiflow/issues/3624)
         - Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/tiflow/issues/3010)
 

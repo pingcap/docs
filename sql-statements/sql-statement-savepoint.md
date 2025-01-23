@@ -15,8 +15,7 @@ RELEASE SAVEPOINT identifier
 
 > **Warning:**
 >
-> - You cannot use `SAVEPOINT` with TiDB Binlog enabled.
-> - You cannot use `SAVEPOINT` in pessimistic transactions when [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is disabled.
+> You cannot use `SAVEPOINT` in pessimistic transactions when [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is disabled.
 
 - `SAVEPOINT` is used to set a savepoint of a specified name in the current transaction. If a savepoint with the same name already exists, it will be deleted and a new savepoint with the same name will be set.
 
@@ -35,6 +34,19 @@ RELEASE SAVEPOINT identifier
     ```
 
     After the transaction is committed or rolled back, all savepoints in the transaction will be deleted.
+
+## Synopsis
+
+```ebnf+diagram
+SavepointStmt ::=
+    "SAVEPOINT" Identifier
+
+RollbackToStmt ::=
+    "ROLLBACK" "TO" "SAVEPOINT"? Identifier
+
+ReleaseSavepointStmt ::=
+    "RELEASE" "SAVEPOINT" Identifier
+```
 
 ## Examples
 
@@ -140,6 +152,8 @@ SELECT * FROM t1;
 ## MySQL compatibility
 
 When `ROLLBACK TO SAVEPOINT` is used to roll back a transaction to a specified savepoint, MySQL releases the locks held only after the specified savepoint, while in TiDB pessimistic transaction, TiDB does not immediately release the locks held after the specified savepoint. Instead, TiDB releases all locks when the transaction is committed or rolled back.
+
+TiDB does not support the MySQL syntax `ROLLBACK WORK TO SAVEPOINT ...`.
 
 ## See also
 

@@ -1,5 +1,6 @@
 ---
 title: tiup mirror grant
+summary: The `tiup mirror grant` command is used to add a component owner to the current mirror. The owner needs to send their public key to the mirror administrator before being added. This command is only supported for local mirrors. The syntax is `tiup mirror grant <id>`. The options include specifying the key and name of the component owner. If successful, there is no output. If there are errors, TiUP reports the specific error.
 ---
 
 # tiup mirror grant
@@ -40,5 +41,3 @@ tiup mirror grant <id> [flags]
 - If the command is executed successfully, there is no output.
 - If the component owner's ID is duplicated, TiUP reports the error `Error: owner %s exists`.
 - If the key is used by another component owner, TiUP reports the error `Error: key %s exists`.
-
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
