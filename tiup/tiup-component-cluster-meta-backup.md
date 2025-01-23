@@ -30,5 +30,3 @@ Specifies the target directory to store the TiUP meta backup file.
 ## Output
 
 The execution logs of tiup-cluster.
-
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

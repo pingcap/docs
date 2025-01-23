@@ -47,6 +47,11 @@ This section introduces the configuration of a replication task.
 - This configuration item affects configurations related to filter and sink.
 - Default value: `false`
 
+### `force-replicate`
+
+- Specifies whether to forcibly [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
+- Default value: `false`
+
 ### `enable-sync-point` <span class="version-mark">New in v6.3.0</span>
 
 - Specifies whether to enable the Syncpoint feature, which is supported starting from v6.3.0 and is disabled by default.
@@ -387,13 +392,13 @@ Note: The consistency-related configuration items only take effect when the down
 - The number of flushing workers in the redo module.
 - Default value: `8`
 
-#### `compression`
+#### `compression` <span class="version-mark">New in v6.5.6, v7.1.3, v7.5.1, and v7.6.0</span>
 
 - The behavior to compress redo log files.
 - Default value: `""`, which means no compression
 - Value options: `""`, `"lz4"`
 
-#### `flush-concurrency`
+#### `flush-concurrency` <span class="version-mark">New in v6.5.6, v7.1.3, v7.5.1, and v7.6.0</span>
 
 - The concurrency for uploading a single redo file.
 - Default value: `1`, which means concurrency is disabled
