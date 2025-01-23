@@ -6052,6 +6052,16 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > - `PARALLEL` and `PARALLEL-FAST` modes are incompatible with [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) and [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530). If either [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530) is set to a non-zero value or [`tidb_enable_tso_follower_proxy`](#tidb_enable_tso_follower_proxy-new-in-v530) is enabled, configuring `tidb_tso_client_rpc_mode` does not take effect, and TiDB always works in `DEFAULT` mode.
 > - `PARALLEL` and `PARALLEL-FAST` modes are designed to reduce the average time for retrieving TS in TiDB. In situations with significant latency fluctuations, such as long-tail latency or latency spikes, these two modes might not provide any remarkable performance improvements.
 
+
+### tidb_cb_pd_metadata_error_rate_threshold_pct
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `0`
+- Range: `[0, 100]`
+- This variable controls whether TiDB triggers the circuit breaker according to the error rate percentage of the specific requests sending to PD.
+
 ### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
 
 > **Note:**
