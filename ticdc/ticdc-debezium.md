@@ -5,19 +5,19 @@ summary: Learn the concept of the TiCDC Debezium Protocol and how to use it.
 
 # TiCDC Debezium Protocol
 
-[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration. Starting from v9.0, TiCDC supports DDL events and watermark events.
+[Debezium](https://debezium.io/) is a tool for capturing database changes. It converts each captured database change into a message called an "event" and sends these events to Kafka. Starting from v8.0.0, TiCDC supports sending TiDB changes to Kafka using a Debezium style output format, simplifying migration from MySQL databases for users who had previously been using Debezium's MySQL integration. Starting from v9.0, TiCDC supports DDL events and WATERMARK events.
 
 ## Use the Debezium message format
 
 When you use Kafka as the downstream sink, specify the `protocol` field as `debezium` in `sink-uri` configuration. Then TiCDC encapsulates the Debezium messages based on the events and sends TiDB data change events to the downstream.
 
-There are three types of Events:
+The Debezium protocol supports the following types of events:
 
-DDL Event: Represents a DDL change record. It is sent after an upstream DDL statement is successfully executed. The DDL Event is sent to the MQ Partition with the index being 0.
+- DDL event: represents a DDL change record. The DDL event is sent after an upstream DDL statement is successfully executed. It is sent to the MQ Partition with the index being 0.
 
-DML Event: Represents a row data change record. This type of Event is sent when a row change occurs. It contains the information about the row after the change occurs.
+- DML event: represents a row data change record. The DML event is sent when a row change occurs. It contains the information about the row after the change occurs.
 
-WATERMARK Event: Represents a special time point. It indicates that the Events received before this point is complete. It applies only to the TiDB extension field and takes effect when you set `enable-tidb-extension` to `true` in `sink-uri`.
+- WATERMARK event: represents a special time point. It indicates that the events received before this point are complete. The WATERMARK event applies only to the TiDB extension field and takes effect when you set `enable-tidb-extension` to `true` in `sink-uri`.
 
 The configuration example for using the Debezium message format is as follows:
 
@@ -30,6 +30,8 @@ The Debezium output format contains the schema information of the current row so
 In addition, the original Debezium format does not include important fields such as the unique transaction identifier of the `CommitTS` in TiDB. To ensure data integrity, TiCDC adds two fields, `CommitTs` and `ClusterID`, to the Debezium format to identify the relevant information of TiDB data changes.
 
 ## Message format definition
+
+This section describes the message formats of DDL events, DML events and WATERMARK events.
 
 ### DDL event
 
@@ -58,7 +60,7 @@ TiCDC encodes a DDL event into a Kafka message, with both the key and value enco
 }
 ```
 
-The fields in the key only include database name. The fields are explained as follows:
+The fields in the key only include the database name. The fields are explained as follows:
 
 | Field            | Type    | Description                                                                 |
 |:------------------|:--------|:----------------------------------------------------------------------------|
@@ -396,23 +398,23 @@ The key fields of the preceding JSON data are explained as follows:
 | Field      | Type   | Description                                            |
 |:----------|:-------|:-------------------------------------------------------|
 | payload.ts_ms     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
-| payload.ddl    | String   | The SQL of DDL event.     |
+| payload.ddl    | String   | The SQL statement of the DDL event.     |
 | payload.databaseName     | String   | The name of the database where the event occurs.     |
 | payload.source.commit_ts     | Number  | The `CommitTs` identifier when TiCDC generates this message.       |
 | payload.source.db     | String   | The name of the database where the event occurs.    |
 | payload.source.table     | String  |  The name of the table where the event occurs.   |
-| payload.tableChanges | Array | A structured representation of the entire table schema after the schema change. The tableChanges field contains an array that includes entries for each column of the table. Because the structured representation presents data in JSON or Avro format, consumers can easily read messages without first processing them through a DDL parser. |
-| payload.tableChanges.type     | String   | Describes the kind of change. The value is one of the following: CREATE Table created. ALTER Table modified. DROP Table deleted. |
+| payload.tableChanges | Array | A structured representation of the entire table schema after the schema change. The `tableChanges` field contains an array that includes entries for each column of the table. Because the structured representation presents data in JSON or Avro format, consumers can easily read messages without first processing them through a DDL parser. |
+| payload.tableChanges.type     | String   | Describes the kind of change. The value is one of the following: `CREATE`, indicating table created; `ALTER`, indicating table modified; `DROP`, indicating table deleted. |
 | payload.tableChanges.id     | String   | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of `<old>` and `<new>` table names. |
-| payload.tableChanges.table.defaultCharsetName | string   | The charset of the table where the event occurs. |
+| payload.tableChanges.table.defaultCharsetName | string   | The character set of the table where the event occurs. |
 | payload.tableChanges.table.primaryKeyColumnNames | string   | List of columns that compose the table's primary key. |
 | payload.tableChanges.table.columns | Array   | Metadata for each column in the changed table. |
 | payload.tableChanges.table.columns.name | String   | The name of the column. |
 | payload.tableChanges.table.columns.jdbcType | Number | The jdbc type of the column. |
 | payload.tableChanges.table.columns.comment | String | The comment of the column. |
 | payload.tableChanges.table.columns.defaultValueExpression | String | The default value of the column. |
-| payload.tableChanges.table.columns.enumValues | String | The enum values of the column. Format is ENUM ('e1', 'e2') or SET ('e1', 'e2') |
-| payload.tableChanges.table.columns.charsetName | String | The charset of the column. |
+| payload.tableChanges.table.columns.enumValues | String | The enumeration values of the column. The format is `ENUM ('e1', 'e2')` or `SET ('e1', 'e2')`. |
+| payload.tableChanges.table.columns.charsetName | String | The character set of the column. |
 | payload.tableChanges.table.columns.length | Number | The length of the column. |
 | payload.tableChanges.table.columns.scale | Number | The scale of the column. |
 | payload.tableChanges.table.columns.position | Number | The position of the column. |
@@ -579,7 +581,7 @@ The key fields of the preceding JSON data are explained as follows:
 
 ### WATERMARK
 
-TiCDC encodes a Checkpoint event into a Kafka message, with both the key and value encoded in the Debezium format.
+TiCDC encodes a WATERMARK event into a Kafka message, with both the key and value encoded in the Debezium format.
 
 #### Key format
 
@@ -788,14 +790,14 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - TiCDC converts REAL to DOUBLE, and converts BOOLEAN to TINYINT(1) when the length is one.
 
-- In TiCDC, BLOB, TEXT, GEOMETRY, or JSON column haven't a default value
+- In TiCDC, the BLOB, TEXT, GEOMETRY, or JSON column does not have a default value.
 
 - Debezium FLOAT data convert "5.61" to "5.610000133514404", but TiCDC does not.
 
-- TiCDC print the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060)
+- TiCDC print the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060).
 
 - Debezium converts charsetName to "utf8mb4" when column COLLATE is "utf8_unicode_ci" and CHARACTER is null, but TiCDC does not.
 
-- Debezium escapes ENUM elements, but TiCDC does not. for example, Debezium encodes ENUM elements ('c', 'd', 'g,''h') to ('c','d','g,\'\'h')
+- Debezium escapes ENUM elements, but TiCDC does not. For example, Debezium encodes ENUM elements ('c', 'd', 'g,''h') to ('c','d','g,\'\'h').
 
 - TiCDC converts the default value of TIME like '1000-00-00 01:00:00.000' to "1000-00-00", but Debezium does not.
