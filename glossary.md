@@ -366,7 +366,7 @@ For more information, see [Temporary Tables](/temporary-tables.md).
 
 ### TiCDC
 
-[TiCDC](/ticdc/ticdc-overview.md) is a tool that enables incremental data replication from TiDB to various downstream targets. These downstream targets can include other TiDB instances, MySQL-compatible databases, object storage locations, and streaming processors (such as Kafka and Pulsar). TiCDC pulls the data change logs from the upstream TiKV, parses them into ordered row-level change data, and then outputs the data to the downstream. For more information about the concepts and terms of TiCDC, see [TiCDC Glossary](/ticdc/ticdc-glossary.md).
+[TiCDC](/ticdc/ticdc-overview.md) is a tool that enables incremental data replication from TiDB to various downstream targets. These downstream targets can include other TiDB instances, MySQL-compatible databases, storage services, and streaming processors (such as Kafka and Pulsar). TiCDC pulls the data change logs from the upstream TiKV, parses them into ordered row-level change data, and then outputs the data to the downstream. For more information about the concepts and terms of TiCDC, see [TiCDC Glossary](/ticdc/ticdc-glossary.md).
 
 ### TiDB Lightning
 
