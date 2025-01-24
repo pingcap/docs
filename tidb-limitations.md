@@ -76,7 +76,6 @@ You can adjust this limit using the [`max-index-length`](/tidb-configuration-fil
 
 </CustomContent>
 
-
 ## Limitations on data types
 
 | Type       | Upper limit   |
