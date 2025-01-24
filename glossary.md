@@ -384,7 +384,7 @@ Because TiKV is a distributed storage system, it requires a global timing servic
 
 ### TiUP
 
-[TiUP](/tiup/tiup-overview.md) is a management tool used for deploying, upgrading, and managing TiDB clusters, as well as managing various components within the TiDB ecosystem including TiDB, PD, and TiKV. With TiUP, you can easily run any component within TiDB by executing a single command, greatly simplifying the management process.
+[TiUP](/tiup/tiup-overview.md) is a management tool used for deploying, upgrading, and managing TiDB clusters, as well as managing various components within the TiDB cluster including TiDB, PD, and TiKV. With TiUP, you can easily run any component within TiDB by executing a single command, greatly simplifying the management process.
 
 ### Top SQL
 
