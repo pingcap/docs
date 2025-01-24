@@ -42,7 +42,7 @@ Baseline Capturing captures queries that meet capturing conditions and create bi
 
 ### Batch Create Table
 
-The Batch Create Table feature greatly speeds up the creation of multiple tables at a time by creating tables in batches. For example, when restoring thousands of tables using the  Backup & Restore (BR) tool, this feature helps reduce the overall recovery time. For more information, see [Batch Create Table](/br/br-batch-create-table.md).
+The Batch Create Table feature greatly speeds up the creation of multiple tables at a time by creating tables in batches. For example, when restoring thousands of tables using the [Backup & Restore (BR)](/br/backup-and-restore-overview.md) tool, this feature helps reduce the overall recovery time. For more information, see [Batch Create Table](/br/br-batch-create-table.md).
 
 ### Bucket
 
@@ -151,7 +151,7 @@ Hotspot refers to the phenomenon where the read and/or write workloads of TiKV a
 
 ### Hybrid Transactional and Analytical Processing (HTAP)
 
-Hybrid Transactional and Analytical Processing (HTAP) is a database feature that enables both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads within the same database. For TiDB, the HTAP feature is provided by using TiKV for row storage and TiFlash for columnar storage. For more information, see [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
+Hybrid Transactional and Analytical Processing (HTAP) is a database feature that enables both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads within the same database. For TiDB, the HTAP feature is provided by using TiKV for row storage and TiFlash for columnar storage. For more information, see [Quick Start with TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
 
 ## I
 
