@@ -61,7 +61,7 @@ A cluster is a group of nodes that work together to provide services. By using c
 In the distributed architecture of TiDB:
 - TiDB nodes provide a scalable SQL layer for client interactions.
 - PD nodes provide a resilient metadata layer for TiDB.
-- TiKV nodes, using the Raft consensus protocol, provide highly available, scalable, and resilient storage for TiDB.
+- TiKV nodes, using the Raft protocol, provide highly available, scalable, and resilient storage for TiDB.
 
 For more information, see [TiDB Architecture](/tidb-architecture.md).
 
