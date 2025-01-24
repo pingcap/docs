@@ -42,7 +42,7 @@ Baseline Capturing captures queries that meet capturing conditions and create bi
 
 ### Batch Create Table
 
-Batch Create Table is a feature introduced in TiDB v6.0.0. This feature is enabled by default. When restoring data with a large number of tables (nearly 50000) using BR (Backup & Restore), the feature can greatly speed up the restore process by creating tables in batches. For more information, see [Batch Create Table](/br/br-batch-create-table.md).
+The Batch Create Table feature greatly speeds up the creation of multiple tables at a time by creating tables in batches. For example, when restoring thousands of tables using the  Backup & Restore (BR) tool, this feature helps reduce the overall recovery time. For more information, see [Batch Create Table](/br/br-batch-create-table.md).
 
 ### Bucket
 
@@ -56,7 +56,14 @@ With the cached table feature, TiDB loads the data of an entire table into the m
 
 ### Cluster
 
-A cluster is a group of nodes that work together to provide services. It typically consists of different types of nodes. For example, a TiDB cluster usually consists of TiDB nodes, TiKV nodes, and PD nodes, and a DM cluster usually consists of DM Master nodes and DM Worker nodes.
+A cluster is a group of nodes that work together to provide services. By using clusters in a distributed system, TiDB achieves higher availability and greater scalability compared to a single-node setup.
+
+In the distributed architecture of TiDB:
+- TiDB nodes provide a scalable SQL layer for client interactions.
+- PD nodes provide a resilient metadata layer for TiDB.
+- TiKV nodes, using the Raft consensus protocol, provide highly available, scalable, and resilient storage for TiDB.
+
+For more information, see [TiDB Architecture](/tidb-architecture.md).
 
 ### Coalesce Partition
 
@@ -72,7 +79,7 @@ A Common Table Expression (CTE) enables you to define a temporary result set tha
 
 ### Continuous Profiling
 
-Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For more information, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
+Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides fine-grained insights into performance issues, helping operations teams identify the root cause using a flame graph. For more information, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
 
 ### Coprocessor
 
@@ -249,7 +256,7 @@ For more information, see [TiDB Optimistic Transaction Model](/optimistic-transa
 
 PD Control (pd-ctl) is a command-line tool to interface with the placement driver (PD) of the cluster. You can use it to obtain cluster status information and modify the cluster. For more information, see [PD Control User Guide](/pd-control.md).
 
-### pending/down
+### Pending/Down
 
 "Pending" and "down" are two special states of a peer. Pending indicates that the Raft log of followers or learners is vastly different from that of leader. Followers in pending cannot be elected as leader. "Down" refers to a state that a peer ceases to respond to leader for a long time, which usually means the corresponding node is down or isolated from the network.
 
@@ -259,7 +266,7 @@ Placement Driver (PD) is a core component in the [TiDB Architecture](/tidb-archi
 
 ### Placement Rules
 
-Placement rules are used to configure the placement of data in a TiKV cluster through the SQL interface. With this feature, you can specify the deployment of tables and partitions to different regions, data centers, cabinets, and hosts. Use cases include optimizing data availability strategies at low cost, ensuring that local data replicas are available for local stale reads, and complying with local data compliance requirements.
+Placement rules are used to configure the placement of data in a TiKV cluster. With this feature, you can specify the deployment of tables and partitions to different regions, data centers, cabinets, and hosts. Use cases include optimizing data availability strategies at low cost, ensuring that local data replicas are available for local stale reads, and complying with local data compliance requirements.
 
 
 For more information, see [Placement Rules in SQL](/placement-rules-in-sql.md).
@@ -353,13 +360,13 @@ A store refers to the storage node in the TiKV cluster (an instance of `tikv-ser
 
 ### Temporary table
 
-Temporary tables solve the issue of temporarily storing the intermediate results of an application, which frees you from frequently creating and dropping tables. You can store the intermediate calculation data in temporary tables. When the intermediate data is no longer needed, TiDB automatically cleans up and recycles the temporary tables. This avoids user applications being too complicated, reduces table management overhead, and improves performance.
+Temporary tables enable you to store intermediate calculation results temporarily, eliminating the need to create and drop tables repeatedly. Once the data is no longer needed, TiDB automatically cleans up and recycles the temporary tables. This feature simplifies application logic, reduces table management overhead, and improves performance.
 
 For more information, see [Temporary Tables](/temporary-tables.md).
 
 ### TiCDC
 
-[TiCDC](/ticdc/ticdc-overview.md) is a tool for incrementally replicating data in TiDB. It pulls the data change logs from the upstream TiKV and parses them into ordered row-level change data, and then outputs the data to the downstream. For more information about the concepts and terms of TiCDC, see [TiCDC Glossary](/ticdc/ticdc-glossary.md).
+[TiCDC](/ticdc/ticdc-overview.md) is a tool that enables incremental data replication from TiDB to various downstream targets. These downstream targets can include other TiDB instances, MySQL-compatible databases, object storage locations, and streaming processors (such as Kafka and Pulsar). TiCDC pulls the data change logs from the upstream TiKV, parses them into ordered row-level change data, and then outputs the data to the downstream. For more information about the concepts and terms of TiCDC, see [TiCDC Glossary](/ticdc/ticdc-glossary.md).
 
 ### TiDB Lightning
 
