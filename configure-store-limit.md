@@ -28,9 +28,7 @@ Every time an operator is generated, it checks whether enough tokens exist in th
 
 Store Limit is different from other limit-related parameters in PD (such as `region-schedule-limit` and `leader-schedule-limit`) in that it mainly limits the consuming speed of operators, while other parameters limits the generating speed of operators. Before introducing the Store Limit feature, the speed limit of scheduling is mostly at the global scope. Therefore, even if the global speed is limited, it is still possible that the scheduling operations are concentrated on some stores, affecting the performance of the cluster. By limiting the speed at a finer level, Store Limit can better control the scheduling behavior.
 
-The store limit defines an upper bound in operations per minute.
-
-With a store limit of 5 operations per minute adding a new machine to the cluster will proceed with 5 regions per minute (`add-peer` operations). If there are 15 regions that need an `add-peer` then this will take 3 minutes (15 / 5 = 3) and will use up to 8 MiB/s ((5 × 96) / 60 = 8) if every region is 96 MiB.
+Store Limit defines the maximum number of operations per minute. With a Store Limit of 5 operations per minute, adding a new node to the cluster will process 5 Regions per minute (`add-peer` operations). If 15 Regions require an `add-peer`, the operation will take 3 minutes (15 / 5 = 3) and consume up to 8 MiB/s ((5 × 96) / 60 = 8), assuming each Region is 96 MiB.
 
 ## Usage
 
