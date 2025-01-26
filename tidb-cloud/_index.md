@@ -74,6 +74,8 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [From Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
 
+[From TiDB Self-Managed](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
+
 [From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
 [From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
@@ -148,11 +150,12 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Reference" icon="cloud-dev">
 
+[SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
+
 [System Variables](https://docs.pingcap.com/tidbcloud/system-variables)
 
 [Release Notes](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)
 
-[SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 
 </LearningPath>
 
