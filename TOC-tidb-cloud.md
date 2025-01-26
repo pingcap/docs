@@ -16,6 +16,7 @@
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Key Concepts
+  - [Overview](/tidb-cloud/key-concepts.md)
   - [Architecture](/tidb-cloud/architecture-concepts.md)
   - [Database Schema](/tidb-cloud/database-schema-concepts.md)
   - [Transactions](/tidb-cloud/transaction-concepts.md)
