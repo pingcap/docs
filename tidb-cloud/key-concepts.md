@@ -48,11 +48,11 @@ TiDB Cloud provides comprehensive monitoring capabilities for cluster performanc
 
 ## Data streaming
 
-TiDB Cloud lets you stream data changes from your TiDB Cluster to other systems like Kafka, MySQL, and object storage. [Learn more about data streaming](/tidb-cloud/data-streaming-concepts.md).
+TiDB Cloud lets you stream data changes from your TiDB Cluster to other systems such as Kafka, MySQL, and object storage. [Learn more about data streaming](/tidb-cloud/data-streaming-concepts.md).
 
 ## Backup & Restore
 
-TiDB Cloud offers automated backup solutions and point-in-time recovery capabilities. [Learn more about backup and restore](/tidb-cloud/backup-and-restore-concepts.md).
+TiDB Cloud offers automated backup solutions and point-in-time recovery (PITR) capabilities. [Learn more about backup and restore](/tidb-cloud/backup-and-restore-concepts.md).
 
 ## Security
 
