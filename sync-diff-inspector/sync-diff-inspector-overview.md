@@ -24,7 +24,7 @@ For TiDB v9.0.0 and later:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    docker pull pingcap/tiflow:latest
+    docker pull pingcap/sync-diff-inspector:latest
     ```
 
 For TiDB versions before v9.0.0:
