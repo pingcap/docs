@@ -17,6 +17,7 @@
     -   [TiDB Cloud CLI を試してみる](/tidb-cloud/get-started-with-cli.md)
     -   [PoCを実行する](/tidb-cloud/tidb-cloud-poc.md)
 -   重要な概念
+    -   [概要](/tidb-cloud/key-concepts.md)
     -   [アーキテクチャ](/tidb-cloud/architecture-concepts.md)
     -   [データベーススキーマ](/tidb-cloud/database-schema-concepts.md)
     -   [取引](/tidb-cloud/transaction-concepts.md)
@@ -250,7 +251,7 @@
         -   [データ移行を使用して既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
         -   [データ移行を使用して増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
         -   [大規模データセットの MySQL シャードの移行とマージ](/tidb-cloud/migrate-sql-shards.md)
-        -   [オンプレミスの TiDB からTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
+        -   [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
         -   [AWS DMS を使用して MySQL 互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
         -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloudにデータをインポートする

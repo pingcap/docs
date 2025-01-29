@@ -83,7 +83,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
     -   TiFlash (v4.0.5 の新機能)
 
-        `tiflash.toml`ファイルで設定し、 `http_port`項目を`https_port`に変更します。
+        `tiflash.toml`ファイルで設定します:
 
         ```toml
         [security]
@@ -196,7 +196,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
     cert-allowed-cn = ["TiDB"]
     ```
 
-## 証明書を再読み込みする {#reload-certificates}
+## 証明書を再読み込み {#reload-certificates}
 
 -   TiDB クラスターがローカル データ センターに展開されている場合、証明書とキーを再ロードするために、TiDB、PD、TiKV、 TiFlash、TiCDC、およびあらゆる種類のクライアントは、TiDB クラスターを再起動せずに、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み取ります。
 
