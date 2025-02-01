@@ -3,7 +3,7 @@ title: Quick Start with TiDB Self-Managed
 summary: TiUPプレイグラウンドを使用して TiDB Self-Managed をすぐに開始する方法を学び、TiDB が最適な選択であるかどうかを確認します。
 ---
 
-# TiDBセルフマネージドのクイックスタート {#quick-start-with-tidb-self-managed}
+# TiDB Self-Managed のクイックスタート {#quick-start-with-tidb-self-managed}
 
 このガイドでは、TiDB Self-Managed を使い始めるための最も簡単な方法を説明します。非本番環境では、次のいずれかの方法で TiDB データベースをデプロイできます。
 

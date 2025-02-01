@@ -3,8 +3,8 @@
 <!-- markdownlint-disable MD041 -->
 
 -   [ドキュメントホーム](https://docs.pingcap.com/)
--   TiDBセルフマネージドについて
-    -   [TiDBセルフマネージドとは](/overview.md)
+-   TiDB Self-Managedについて
+    -   [TiDB Self-Managedとは何か](/overview.md)
     -   [TiDB 8.5 リリースノート](/releases/release-8.5.0.md)
     -   [特徴](/basic-features.md)
     -   [MySQL 互換性](/mysql-compatibility.md)

@@ -17,7 +17,7 @@ summary: TiDB は、ハイブリッド トランザクションおよび分析�
 
 <LearningPath label="Learn" icon="cloud1">
 
-[TiDBセルフマネージドとは](https://docs.pingcap.com/tidb/v8.5/overview)
+[TiDB Self-Managedとは何か](https://docs.pingcap.com/tidb/v8.5/overview)
 
 [特徴](https://docs.pingcap.com/tidb/v8.5/basic-features)
 
@@ -27,7 +27,7 @@ summary: TiDB は、ハイブリッド トランザクションおよび分析�
 
 <LearningPath label="Try" icon="cloud5">
 
-[TiDBセルフマネージドを試してみる](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)
+[TiDB Self-Managedを試してみる](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)
 
 [HTAPを試してみる](https://docs.pingcap.com/tidb/v8.5/quick-start-with-htap)
 
@@ -117,7 +117,7 @@ summary: TiDB は、ハイブリッド トランザクションおよび分析�
 
 [Dumpling](https://docs.pingcap.com/tidb/v8.5/dumpling-overview)
 
-[ティCDC](https://docs.pingcap.com/tidb/v8.5/ticdc-overview)
+[TiCDC](https://docs.pingcap.com/tidb/v8.5/ticdc-overview)
 
 [バックアップと復元 (BR)](https://docs.pingcap.com/tidb/v8.5/backup-and-restore-overview)
 
