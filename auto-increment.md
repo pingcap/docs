@@ -435,6 +435,7 @@ CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
 When `AUTO_ID_CACHE` is set to `1`, IDs are strictly increasing across all TiDB instances, each ID is guaranteed to be unique, and gaps between IDs are minimal compared to the default cache mode (`AUTO_ID_CACHE 0` with 30000 cached values).
 
 For example, with `AUTO_ID_CACHE 1`, you might see this sequence:
+
 ```sql
 INSERT INTO t VALUES (); -- Returns ID 1
 INSERT INTO t VALUES (); -- Returns ID 2
@@ -444,6 +445,7 @@ INSERT INTO t VALUES (); -- Might return ID 5
 ```
 
 In contrast, with the default cache (`AUTO_ID_CACHE 0`), larger gaps can occur:
+
 ```sql
 INSERT INTO t VALUES (); -- Returns ID 1
 INSERT INTO t VALUES (); -- Returns ID 2
@@ -456,6 +458,7 @@ While IDs are always increasing and without significant gaps like those seen wit
 > **Note:**
 > 
 > The behavior and performance of `AUTO_ID_CACHE 1` has evolved across TiDB versions:
+>
 > - Before v6.4.0, each ID allocation required a TiKV transaction, which impacted performance.
 > - In v6.4.0, TiDB introduced a centralized allocating service that performs ID allocation as an in-memory operation, significantly improving performance.
 > - Starting from v8.1.0, TiDB removed the automatic forceRebase operation during primary node exits to enable faster restarts. While this may result in additional non-consecutive IDs during failover, it prevents potential write blocking when many tables use `AUTO_ID_CACHE 1`.
