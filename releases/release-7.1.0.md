@@ -41,7 +41,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   TiFlashは、ネットワーク伝送のオーバーヘッドに応じてMPP Joinアルゴリズムを自動的に選択することをサポートしています[＃7084](https://github.com/pingcap/tiflash/issues/7084) @ [ソロッツ](https://github.com/solotzg)
 
-    TiFlash MPP モードは、複数の結合アルゴリズムをサポートします。v7.1.0 より前では、TiDB は[`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)番目と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)番目の変数と実際のデータ量に基づいて、MPP モードでブロードキャスト ハッシュ結合アルゴリズムを使用するかどうかを決定します。
+    TiFlash MPP モードは複数の結合アルゴリズムをサポートします。v7.1.0 より前では、TiDB は[`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)番目と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)の変数と実際のデータ量に基づいて、MPP モードでブロードキャスト ハッシュ結合アルゴリズムを使用するかどうかを決定します。
 
     v7.1.0 では、TiDB は[`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710)変数を導入しました。これは、ネットワーク伝送の最小オーバーヘッドに基づいて MPP Join アルゴリズムを選択するかどうかを制御します。この変数はデフォルトで無効になっており、デフォルトのアルゴリズム選択方法は v7.1.0 以前と同じままであることを示しています。変数を`ON`に設定すると有効になります。有効にすると、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)変数を手動で調整する必要がなくなり (この時点では両方の変数は有効になりません)、TiDB は異なる Join アルゴリズムによるネットワーク伝送のしきい値を自動的に推定し、全体的なオーバーヘッドが最小のアルゴリズムを選択するため、ネットワーク トラフィックが削減され、MPP クエリのパフォーマンスが向上します。
 
@@ -236,7 +236,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバル スケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジューリングはターゲット テーブル データを格納するリージョンに対してのみ一時停止され、ターゲット テーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバル スケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)構成することで、グローバル スケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲット テーブル データを格納するリージョンに対してスケジューリングを一時停止します。ターゲット クラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
 
--   TiDB v7.1.0 で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)使用すると、FLASHBACK 操作が完了した後も、一部のリージョンが FLASHBACK プロセスに残ることがあります。v7.1.0 ではこの機能を使用しないことをお勧めします。詳細については、問題[＃44292](https://github.com/pingcap/tidb/issues/44292)を参照してください。この問題が発生した場合は、 [TiDB スナップショットのバックアップと復元](/br/br-snapshot-guide.md)機能を使用してデータを復元できます。
+-   TiDB v7.1.0 で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)使用すると、FLASHBACK 操作が完了した後も、一部の領域が FLASHBACK プロセスに残ることがあります。v7.1.0 ではこの機能を使用しないことをお勧めします。詳細については、問題[＃44292](https://github.com/pingcap/tidb/issues/44292)を参照してください。この問題が発生した場合は、 [TiDB スナップショットのバックアップと復元](/br/br-snapshot-guide.md)機能を使用してデータを復元できます。
 
 ### システム変数 {#system-variables}
 
@@ -362,7 +362,6 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[＃42268](https://github.com/pingcap/tidb/issues/42268) @ [天菜まお](https://github.com/tiancaiamao)
     -   Grafana モニタリング パネル[＃42562](https://github.com/pingcap/tidb/issues/42562) @ [ピンとb](https://github.com/pingandb)で`Ignore Event Per Minute`と`Stats Cache LRU Cost`チャートが正常に表示されない問題を修正しました。
     -   `INFORMATION_SCHEMA.COLUMNS`テーブル[＃43379](https://github.com/pingcap/tidb/issues/43379) @ [bb7133](https://github.com/bb7133)をクエリしたときに`ORDINAL_POSITION`列が誤った結果を返す問題を修正しました
-    -   権限テーブル[＃41048](https://github.com/pingcap/tidb/issues/41048) @ [bb7133](https://github.com/bb7133)の一部の列における大文字と小文字の区別の問題を修正
     -   キャッシュ テーブルに新しい列が追加された後、列[＃42928](https://github.com/pingcap/tidb/issues/42928) @ [ルクス](https://github.com/lqs)のデフォルト値ではなく値が`NULL`なる問題を修正しました。
     -   述語[＃43645](https://github.com/pingcap/tidb/issues/43645) @ [ウィノロス](https://github.com/winoros)をプッシュダウンするときに CTE 結果が正しくない問題を修正しました
     -   多数のパーティションとTiFlashレプリカ[＃42940](https://github.com/pingcap/tidb/issues/42940) @ [ミョンス](https://github.com/mjonss)を持つパーティション テーブルに対して`TRUNCATE TABLE`実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。

@@ -16,7 +16,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-12-05T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.5.0"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2024-12-26T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v8.1.2"}
 ```
 
 -   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`の正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
@@ -271,10 +271,10 @@ encoding-worker-num = 16
 # The number of flushing workers in the redo module.
 # The default value is 8.
 flush-worker-num = 8
-# The behavior to compress redo log files.
+# The behavior to compress redo log files (introduced in v6.5.6, v7.1.3, v7.5.1, and v7.6.0).
 # Available options are "" and "lz4". The default value is "", which means no compression.
 compression = ""
-# The concurrency for uploading a single redo file.
+# The concurrency for uploading a single redo file (introduced in v6.5.6, v7.1.3, v7.5.1, and v7.6.0).
 # The default value is 1, which means concurrency is disabled.
 flush-concurrency = 1
 
@@ -301,7 +301,7 @@ sasl-oauth-grant-type = "client_credentials"
 # The audience in the Kafka SASL OAUTHBEARER authentication. The default value is empty. This parameter is optional when the OAUTHBEARER authentication is used.
 sasl-oauth-audience = "kafka"
 
-# The following configuration item controls whether to output the original data change event. The default value is false. For more information, see https://docs.pingcap.com/tidb/dev/ticdc-split-update-behavior#control-whether-to-split-primary-or-unique-key-update-events.
+# The following configuration item controls whether to output the original data change event. The default value is false. For more information, see https://docs.pingcap.com/tidb/v8.1/ticdc-split-update-behavior#control-whether-to-split-primary-or-unique-key-update-events.
 # output-raw-change-event = false
 
 # The following configuration is only required when using Avro as the protocol and AWS Glue Schema Registry:
@@ -354,7 +354,7 @@ batching-max-publish-delay=10
 # The timeout for a Pulsar producer to send a message. The value is 30 seconds by default.
 send-timeout=30
 
-# The following configuration item controls whether to output the original data change event. The default value is false. For more information, see https://docs.pingcap.com/tidb/dev/ticdc-split-update-behavior#control-whether-to-split-primary-or-unique-key-update-events.
+# The following configuration item controls whether to output the original data change event. The default value is false. For more information, see https://docs.pingcap.com/tidb/v8.1/ticdc-split-update-behavior#control-whether-to-split-primary-or-unique-key-update-events.
 # output-raw-change-event = false
 
 [sink.cloud-storage-config]
@@ -376,6 +376,6 @@ file-cleanup-cron-spec = "0 0 2 * * *"
 # The concurrency for uploading a single file.
 # The default value is 1, which means concurrency is disabled.
 flush-concurrency = 1
-# The following configuration item controls whether to output the original data change event. The default value is false. For more information, see https://docs.pingcap.com/tidb/dev/ticdc-split-update-behavior#control-whether-to-split-primary-or-unique-key-update-events.
+# The following configuration item controls whether to output the original data change event. The default value is false. For more information, see https://docs.pingcap.com/tidb/v8.1/ticdc-split-update-behavior#control-whether-to-split-primary-or-unique-key-update-events.
 output-raw-change-event = false
 ```

@@ -49,7 +49,7 @@ ADMIN CHECKSUM TABLE `schema`.`table`;
 
 TiDB Lightning は以下をサポートします:
 
--   [Dumpling](/dumpling-overview.md)でエクスポートしたファイル、CSV ファイル、 [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md)をインポートします。
+-   [Dumpling](/dumpling-overview.md) 、CSV ファイル、 [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、Snowflake によってエクスポートされたファイルをインポートします。
 -   ローカルディスクまたは Amazon S3storageからデータを読み取ります。
 
 ## TiDB Lightning はスキーマとテーブルの作成をスキップできますか? {#could-tidb-lightning-skip-creating-schema-and-tables}
@@ -157,7 +157,7 @@ CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 
 **回避策:**
 
-TiDB Lightningで SQL の配置ルールを使用するには、データをターゲット テーブルにインポートする**前に、**関連するラベルとオブジェクトがターゲット TiDB クラスターに作成されていることを確認する必要があります。SQL の配置ルールは PD および TiKVレイヤーで機能するため、 TiDB Lightning はインポートされたデータを格納するためにどの TiKV を使用する必要があるかを判断するために必要な情報を取得できます。このように、SQL のこの配置ルールはTiDB Lightningに対して透過的です。
+TiDB Lightningで SQL の配置ルールを使用するには、データをターゲット テーブルにインポートする**前に、**関連するラベルとオブジェクトがターゲット TiDB クラスターに作成されていることを確認する必要があります。SQL の配置ルールは PD および TiKVレイヤーで機能するため、 TiDB Lightning は、インポートされたデータを格納するためにどの TiKV を使用する必要があるかを判断するために必要な情報を取得できます。このように、SQL のこの配置ルールはTiDB Lightningに対して透過的です。
 
 手順は次のとおりです。
 

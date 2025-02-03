@@ -1,11 +1,11 @@
 ---
-title: Quick Start with TiDB Self-Managed
-summary: TiUPプレイグラウンドを使用して TiDB Self-Managed をすぐに開始する方法を学び、TiDB が最適な選択であるかどうかを確認します。
+title: Quick Start Guide for the TiDB Database Platform
+summary: TiDB プラットフォームをすぐに使い始める方法を学び、TiDB が最適な選択であるかどうかを確認します。
 ---
 
-# TiDB Self-Managed のクイックスタート {#quick-start-with-tidb-self-managed}
+# TiDB データベース プラットフォームのクイック スタート ガイド {#quick-start-guide-for-the-tidb-database-platform}
 
-このガイドでは、TiDB Self-Managed を使い始めるための最も簡単な方法を説明します。非本番環境では、次のいずれかの方法で TiDB データベースをデプロイできます。
+このガイドでは、TiDB を使い始めるための最も簡単な方法を紹介します。非本番環境では、次のいずれかの方法で TiDB データベースをデプロイできます。
 
 -   [ローカルテストクラスタをデプロイ](#deploy-a-local-test-cluster) (macOS および Linux の場合)
 -   [単一のマシンで本番の展開をシミュレートする](#simulate-production-deployment-on-a-single-machine) (Linuxのみ)
@@ -81,10 +81,10 @@ summary: TiUPプレイグラウンドを使用して TiDB Self-Managed をすぐ
     -   TiDB のバージョンと各コンポーネントのインスタンスの数を指定するには、次のようなコマンドを実行します。
 
         ```shell
-        tiup playground v8.5.0 --db 2 --pd 3 --kv 3
+        tiup playground v8.1.2 --db 2 --pd 3 --kv 3
         ```
 
-        このコマンドは、バージョン クラスター (v8.5.0 など) をローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`実行します。
+        このコマンドは、バージョン クラスター (v8.1.2 など) をローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`実行します。
 
         このコマンドは、クラスターのアクセス方法を返します。
 
@@ -195,10 +195,10 @@ summary: TiUPプレイグラウンドを使用して TiDB Self-Managed をすぐ
     -   TiDB のバージョンと各コンポーネントのインスタンスの数を指定するには、次のようなコマンドを実行します。
 
         ```shell
-        tiup playground v8.5.0 --db 2 --pd 3 --kv 3
+        tiup playground v8.1.2 --db 2 --pd 3 --kv 3
         ```
 
-        このコマンドは、バージョン クラスター (v8.5.0 など) をローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`実行します。
+        このコマンドは、バージョン クラスター (v8.1.2 など) をローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`実行します。
 
         このコマンドは、クラスターのアクセス方法を返します。
 
@@ -405,7 +405,7 @@ TiDB クラスターを展開する前に、ターゲット マシンが次の�
     ```
 
     -   `<cluster-name>` : クラスター名を設定する
-    -   `<version>` : TiDBクラスタバージョンを設定します（例： `v8.5.0` ）。4 `tiup list tidb`を実行すると、サポートされているすべてのTiDBバージョンを確認できます。
+    -   `<version>` : TiDBクラスタバージョンを設定します（例： `v8.1.2` ）。4 `tiup list tidb`を実行すると、サポートされているすべてのTiDBバージョンを確認できます。
     -   `-p` : ターゲットマシンに接続するために使用するパスワードを指定します。
 
         > **注記：**
@@ -467,13 +467,7 @@ TiDB クラスターを展開する前に、ターゲット マシンが次の�
 -   [TiUP を使用して TiDB をデプロイ](/production-deployment-using-tiup.md)
 -   あるいは、 [Kubernetes 上の TiDB](https://docs.pingcap.com/tidb-in-kubernetes/stable)ドキュメントを参照して、 TiDB Operator を使用してクラウドに TiDB をデプロイすることもできます。
 
-アプリケーション開発者であり、TiDB を使用してアプリケーションをすばやく構築したい場合は、次の手順に従ってください。
-
--   [開発者ガイドの概要](/develop/dev-guide-overview.md)
--   [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
--   [アプリケーション例](/develop/dev-guide-sample-application-java-jdbc.md)
-
 TiFlashを使用した分析ソリューションをお探しの場合は、次の手順に従ってください。
 
--   [TiFlashの概要](/tiflash/tiflash-overview.md)
 -   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
+-   [TiFlashの概要](/tiflash/tiflash-overview.md)

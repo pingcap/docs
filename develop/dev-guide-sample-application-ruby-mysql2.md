@@ -190,7 +190,7 @@ ruby app.rb
 
 接続が成功すると、コンソールに次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.0)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.2)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 

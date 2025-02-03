@@ -3,7 +3,7 @@ title: TiDB Cloud API Overview
 summary: TiDB Cloud API とは何か、その機能、API を使用してTiDB Cloudクラスターを管理する方法について学習します。
 ---
 
-# TiDB CloudAPI 概要<span style="color: #fff; background-color: #00bfff; border-radius: 4px; font-size: 0.5em; vertical-align: middle; margin-left: 16px; padding: 0 2px;">ベータ版</span> {#tidb-cloud-api-overview-span-style-color-fff-background-color-00bfff-border-radius-4px-font-size-0-5em-vertical-align-middle-margin-left-16px-padding-0-2px-beta-span}
+# TiDB CloudAPI の概要 (ベータ版) {#tidb-cloud-api-overview-beta}
 
 > **注記：**
 >
@@ -27,6 +27,6 @@ TiDB Cloud API の使用を開始するには、 TiDB Cloud API ドキュメン�
         -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
         -   [データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
         -   [IAMは](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-        -   [MSP](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+        -   [MSP (非推奨)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
     -   [v1ベータ](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
 -   [変更履歴](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)

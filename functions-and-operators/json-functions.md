@@ -69,12 +69,6 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | [JSON_ARRAYAGG()](/functions-and-operators/json-functions/json-functions-aggregate.md#json_arrayagg)     | キーの集約を提供します。        |
 | [JSON_OBJECTAG() は、](/functions-and-operators/json-functions/json-functions-aggregate.md#json_objectagg) | 指定されたキーの値の集計を提供します。 |
 
-## 検証関数 {#validation-functions}
-
-| 関数名                                                                                                         | 説明                                             |
-| ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| [JSON_SCHEMA_VALID()](/functions-and-operators/json-functions/json-functions-validate.md#json_schema_valid) | データの整合性と一貫性を確保するために、JSON ドキュメントをスキーマに対して検証します。 |
-
 ## JSONパス {#jsonpath}
 
 多くの JSON関数は、JSON ドキュメントの一部を選択するために[JSONパス](https://www.rfc-editor.org/rfc/rfc9535.html)使用します。
@@ -103,9 +97,9 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
         "license": "Apache-2.0 license",
         "versions": [
             {
-                "version": "v8.1.0",
+                "version": "v8.1.2",
                 "type": "lts",
-                "release_date": "2024-05-24" 
+                "release_date": "2024-12-26" 
             },
             {
                 "version": "v8.0.0",        
@@ -134,9 +128,9 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | `$.database.features[0]`              | 最初のデータベース機能。               | `"distributed"`                                                                                      |
 | `$.database.features[2]`              | 3番目のデータベース機能。              | `"relational"`                                                                                       |
 | `$.database.versions[0].type`         | 最初のデータベース バージョンのタイプ。       | `"lts"`                                                                                              |
-| `$.database.versions[*].release_date` | すべてのバージョンのリリース日。           | `["2024-05-24","2024-03-29"]`                                                                        |
+| `$.database.versions[*].release_date` | すべてのバージョンのリリース日。           | `["2024-12-26","2024-03-29"]`                                                                        |
 | `$.*.features`                        | 2つの機能配列                    | `[["distributed", "scalable", "relational", "cloud native"], ["MySQL compatible", "Shard merging"]]` |
-| `$**.version`                         | パスワイルドカードを使用したすべてのバージョン    | `["v8.1.0","v8.0.0"]`                                                                                |
+| `$**.version`                         | パスワイルドカードを使用したすべてのバージョン    | `["v8.1.2","v8.0.0"]`                                                                                |
 | `$.database.features[0 to 2]`         | 1 番目から 3 番目までのデータベース機能の範囲。 | `["scalable","relational"]`                                                                          |
 
 詳細については[JSONPathのIETFドラフト](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html)参照してください。
@@ -147,6 +141,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 
 ## サポートされていない関数 {#unsupported-functions}
 
+-   `JSON_SCHEMA_VALID()`
 -   `JSON_SCHEMA_VALIDATION_REPORT()`
 -   `JSON_TABLE()`
 -   `JSON_VALUE()`

@@ -59,7 +59,7 @@ ProxySQL を TiDB とともにデプロイする最も明白な方法は、ア�
 <div label="macOS" value="macOS">
 
 1.  [ダウンロード](https://docs.docker.com/get-docker/)インストールして Docker を起動します (Docker Desktop にはすでに Docker Compose が含まれています)。
-2.  次のコマンドを実行して Python と`mysql-client`インストールします。
+2.  次のコマンドを実行して、Python と`mysql-client`インストールします。
 
     ```bash
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -620,7 +620,7 @@ systemctl start docker
 
 ## 生産環境 {#production-environment}
 
-本番環境では、完全に管理されたエクスペリエンスを実現するために[TiDB Cloud専用](https://www.pingcap.com/tidb-dedicated/)直接使用することをお勧めします。
+本番環境では、完全に管理されたエクスペリエンスを実現するために[TiDB Cloud専用](https://www.pingcap.com/tidb-cloud-dedicated/)直接使用することをお勧めします。
 
 ### 前提条件 {#prerequisite}
 
@@ -1061,7 +1061,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
             ROLLBACK;
             ```
 
-            このトランザクションでは、 `BEGIN`ステートメントはどのルールにも一致しません。デフォルトのホストグループ (この例では`hostgroup 0` ) を使用します。ProxySQL はデフォルトでユーザー transaction_persistent を有効にし、同じホストグループ内の同じトランザクション内のすべてのステートメントを実行するため、 `INSERT`および`SELECT * FROM test.tidb_server;`ステートメントも TiDB クラスター`hostgroup 0`に転送されます。
+            このトランザクションでは、 `BEGIN`ステートメントはどのルールにも一致しません。デフォルトのホストグループ (この例では`hostgroup 0` ) を使用します。ProxySQL はデフォルトでユーザー transaction_persistent を有効にし、同じトランザクション内のすべてのステートメントを同じホストグループで実行するので、 `INSERT`および`SELECT * FROM test.tidb_server;`ステートメントも TiDB クラスター`hostgroup 0`に転送されます。
 
         以下は出力例です。同様の出力が表示された場合、ProxySQL でクエリ ルールが正常に構成されています。
 

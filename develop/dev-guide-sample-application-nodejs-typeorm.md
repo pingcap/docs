@@ -230,7 +230,7 @@ npm start
 
 接続が成功すると、ターミナルは次のように TiDB クラスターのバージョンを出力します。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.0)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.2)
     🆕 Created a new player with ID 2.
     ℹ️ Got Player 2: Player { id: 2, coins: 100, goods: 100 }
     🔢 Added 50 coins and 50 goods to player 2, now player 2 has 100 coins and 150 goods.
@@ -340,7 +340,7 @@ console.log(rows[0]['tidb_version']);
 
 ### 外部キー制約 {#foreign-key-constraints}
 
-[外部キー制約](https://docs.pingcap.com/tidb/stable/foreign-key)使用すると、データベース側でチェックを追加することで、データの[参照整合性](https://en.wikipedia.org/wiki/Referential_integrity)保証されます。ただし、大量のデータを扱うシナリオでは、重大なパフォーマンスの問題が発生する可能性があります。
+[外部キー制約](https://docs.pingcap.com/tidb/stable/foreign-key) (実験的) を使用すると、データベース側でチェックを追加することで、データの[参照整合性](https://en.wikipedia.org/wiki/Referential_integrity)保証されます。ただし、大量のデータを扱うシナリオでは、重大なパフォーマンスの問題が発生する可能性があります。
 
 `createForeignKeyConstraints`オプション (デフォルト値は`true` ) を使用して、エンティティ間のリレーションシップを構築するときに外部キー制約を作成するかどうかを制御できます。
 

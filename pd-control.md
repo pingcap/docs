@@ -28,7 +28,7 @@ PD Control を使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<p
 
 > **注記：**
 >
-> リンク内の`{version}` TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v8.5.0`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v8.5.0-linux-amd64.tar.gz`です。
+> リンク内の`{version}` TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v8.1.2`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v8.1.2-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -145,8 +145,8 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     "leader-schedule-limit": 4,
     "leader-schedule-policy": "count",
     "low-space-ratio": 0.8,
-    "max-merge-region-keys": 540000,
-    "max-merge-region-size": 54,
+    "max-merge-region-keys": 200000,
+    "max-merge-region-size": 20,
     "max-pending-peer-count": 64,
     "max-snapshot-count": 64,
     "max-store-down-time": "30m0s",
@@ -231,16 +231,10 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set region-score-formula-version v2
     ```
 
--   `patrol-region-interval`チェッカーがリージョンのヘルス状態を検査する実行頻度を制御します。間隔が短いほど、実行頻度が高くなります。通常は、調整する必要はありません。
+-   `patrol-region-interval` 、リージョンのヘルス ステータスを`replicaChecker`する実行頻度を制御します。間隔が短いほど、実行頻度が高くなります。通常は、調整する必要はありません。
 
     ```bash
-    config set patrol-region-interval 10ms // Set the execution frequency of the checker to 10ms
-    ```
-
--   `patrol-region-worker-count` 、リージョンのヘルス状態を検査するときにチェッカーによって作成される同時実行[オペレーター](/glossary.md#operator)の数を制御します。通常、この構成を調整する必要はありません。この構成項目を 1 より大きい値に設定すると、同時実行チェックが有効になります。現在、この機能は実験的であり、本番環境での使用は推奨されません。
-
-    ```bash
-    config set patrol-region-worker-count 2 // Set the checker concurrency to 2
+    config set patrol-region-interval 10ms // Set the execution frequency of replicaChecker to 10ms
     ```
 
 -   `max-store-down-time`切断されたストアを復元できないと PD が判断する時間を制御します。指定された時間内に PD がストアからハートビートを受信しない場合、PD は他のノードにレプリカを追加します。
@@ -335,7 +329,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `store-limit-mode`ストア速度を制限するモードを制御するために使用されます。オプションのモードは`auto`と`manual`です。 `auto`モードでは、ストアは負荷に応じて自動的にバランス調整されます (非推奨)。
 
--   `store-limit-version`ストア制限の式のバージョンを制御します。v1 モードでは、 `store limit`を手動で変更して、単一の TiKV のスケジュール速度を制限できます。v2 モードでは、PD が TiKV スナップショットの機能に基づいて動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [ストア制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
+-   `store-limit-version`ストア制限の式のバージョンを制御します。v1 モードでは、 `store limit`を手動で変更して、単一の TiKV のスケジュール速度を制限できます。v2 モードは実験的機能です。本番環境での使用はお勧めしません。v2 モードでは、PD が TiKV スナップショットの機能に基づいて動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [ストア制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
 
     ```bash
     config set store-limit-version v2       // using store limit v2
@@ -348,123 +342,6 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     ```bash
     config set flow-round-by-digit 4
     ```
-
-#### <code>config [show | set service-middleware &#x3C;option> [&#x3C;key> &#x3C;value> | &#x3C;label> &#x3C;qps|concurrency> &#x3C;value>]]</code> {#code-config-show-set-service-middleware-x3c-option-x3c-key-x3c-value-x3c-label-x3c-qps-concurrency-x3c-value-code}
-
-`service-middleware`は PD 内の構成モジュールであり、主に監査ログ、要求レート制限、同時実行制限などの PD サービスのミドルウェア関数を管理および制御するために使用されます。v8.5.0 以降では、 `pd-ctl`使用して`service-middleware`の次の構成を変更できます。
-
--   `audit` : PD によって処理される HTTP 要求の監査ログを有効にするかどうかを制御します (デフォルトで有効)。有効にすると、 `service-middleware` HTTP 要求に関する情報を PD ログに記録します。
--   `rate-limit` : PD によって処理される HTTP API リクエストの最大レートと同時実行性を制限します。
--   `grpc-rate-limit` : PD によって処理される gRPC API リクエストの最大レートと同時実行性を制限します。
-
-> **注記：**
->
-> リクエスト レート制限と同時実行制限が PD パフォーマンスに与える影響を回避するために、 `service-middleware`の設定を変更することはお勧めしません。
-
-`service-middleware`の設定情報を表示します:
-
-```bash
-config show service-middleware
-```
-
-```bash
-{
-  "audit": {
-    "enable-audit": "true"
-  },
-  "rate-limit": {
-    "enable-rate-limit": "true",
-    "limiter-config": {}
-  },
-  "grpc-rate-limit": {
-    "enable-grpc-rate-limit": "true",
-    "grpc-limiter-config": {}
-  }
-}
-```
-
-`service-middleware audit` 、HTTP リクエストの監査ログ機能を有効または無効にします。たとえば、この機能を無効にするには、次のコマンドを実行します。
-
-```bash
-config set service-middleware audit enable-audit false
-```
-
-`service-middleware grpc-rate-limit` 、次の gRPC API リクエストの最大レートと同時実行性を制御します。
-
--   `GetRegion` : 指定されたリージョンに関する情報を取得する
--   `GetStore` : 指定された店舗の情報を取得する
--   `GetMembers` : PDクラスタメンバーに関する情報を取得する
-
-gRPC API リクエストの最大レート（ `GetRegion` API リクエストなど）を制御するには、次のコマンドを実行します。
-
-```bash
-config set service-middleware grpc-rate-limit GetRegion qps 100
-```
-
-gRPC API リクエストの最大同時実行数（ `GetRegion` API リクエストなど）を制御するには、次のコマンドを実行します。
-
-```bash
-config set service-middleware grpc-rate-limit GetRegion concurrency 10
-```
-
-変更された構成をビュー。
-
-```bash
-config show service-middleware
-```
-
-```bash
-{
-  "audit": {
-    "enable-audit": "true"
-  },
-  "rate-limit": {
-    "enable-rate-limit": "true",
-    "limiter-config": {}
-  },
-  "grpc-rate-limit": {
-    "enable-grpc-rate-limit": "true",
-    "grpc-limiter-config": {
-      "GetRegion": {
-        "QPS": 100,
-        "QPSBurst": 100, // Automatically adjusted based on QPS, for display only
-        "ConcurrencyLimit": 10
-      }
-    }
-  }
-}
-```
-
-上記の設定をリセットします。
-
-```bash
-config set service-middleware grpc-rate-limit GetRegion qps 0
-config set service-middleware grpc-rate-limit GetRegion concurrency 0
-```
-
-`service-middleware rate-limit`次の HTTP API リクエストの最大レートと同時実行性を制御します。
-
--   `GetRegion` : 指定されたリージョンに関する情報を取得する
--   `GetStore` : 指定された店舗の情報を取得する
-
-`GetRegion` API リクエストなどの HTTP API リクエストの最大レートを制御するには、次のコマンドを実行します。
-
-```bash
-config set service-middleware rate-limit GetRegion qps 100
-```
-
-HTTP API リクエストの最大同時実行数 ( `GetRegion` API リクエストなど) を制御するには、次のコマンドを実行します。
-
-```bash
-config set service-middleware rate-limit GetRegion concurrency 10
-```
-
-上記の設定をリセットします。
-
-```bash
-config set service-middleware rate-limit GetRegion qps 0
-config set service-middleware rate-limit GetRegion concurrency 0
-```
 
 #### <code>config placement-rules [disable | enable | load | save | show | rule-group]</code> {#code-config-placement-rules-disable-enable-load-save-show-rule-group-code}
 
@@ -587,20 +464,6 @@ Success!
 >> member leader transfer pd3 // Migrate leader to a specified member
 ......
 ```
-
-PDリーダーの優先度を指定します:
-
-```bash
-member leader_priority  pd-1 4
-member leader_priority  pd-2 3
-member leader_priority  pd-3 2
-member leader_priority  pd-4 1
-member leader_priority  pd-5 0
-```
-
-> **注記：**
->
-> 利用可能なすべての PD ノードの中で、優先順位番号が最も高いノードがリーダーになります。
 
 ### <code>operator [check | show | add | remove]</code> {#code-operator-check-show-add-remove-code}
 
@@ -1109,12 +972,6 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
     `evict-leader-scheduler`のすべてのストア構成が削除されると、スケジューラ自体も自動的に削除されます。
 
--   `evict-leader-scheduler`がすでに存在する場合は、 `set batch`サブコマンドを使用して`batch`値を変更します。 `batch`単一のスケジューリング プロセス中に生成されるオペレーターの数を制御します。デフォルト値は`3`で、範囲は`[1, 10]`です。 `batch`値が大きいほど、スケジューリング速度が速くなります。
-
-    ```bash
-    scheduler config evict-leader-scheduler set batch 10 // Set the batch value to 10
-    ```
-
 ### <code>service-gc-safepoint</code> {#code-service-gc-safepoint-code}
 
 このコマンドを使用して、現在の GC セーフポイントとサービス GC セーフポイントを照会します。出力は次のようになります。
@@ -1391,7 +1248,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 ...
 ```
 
-または、[store1、store30、store31] が起動に失敗した場合、store1 でデータを手動で安全に削除できるリージョンを見つけることができます。この方法では、store1 にレプリカがあり、他の DownPeer がないすべてのリージョンを除外できます。
+または、[store1、store30、store31] が起動に失敗した場合、store1 でデータを安全に手動で削除できるリージョンを見つけることができます。この方法では、store1 にレプリカがあり、他の DownPeer がないすべてのリージョンを除外できます。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(length>1 and any(.==1) and all(.!=(30,31)))}"

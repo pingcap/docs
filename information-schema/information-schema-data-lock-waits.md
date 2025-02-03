@@ -12,16 +12,18 @@ USE information_schema;
 DESC data_lock_waits;
 ```
 
-    +------------------------+---------------------+------+------+---------+-------+
-    | Field                  | Type                | Null | Key  | Default | Extra |
-    +------------------------+---------------------+------+------+---------+-------+
-    | KEY                    | text                | NO   |      | NULL    |       |
-    | KEY_INFO               | text                | YES  |      | NULL    |       |
-    | TRX_ID                 | bigint(21) unsigned | NO   |      | NULL    |       |
-    | CURRENT_HOLDING_TRX_ID | bigint(21) unsigned | NO   |      | NULL    |       |
-    | SQL_DIGEST             | varchar(64)         | YES  |      | NULL    |       |
-    | SQL_DIGEST_TEXT        | text                | YES  |      | NULL    |       |
-    +------------------------+---------------------+------+------+---------+-------+
+```sql
++------------------------+---------------------+------+------+---------+-------+
+| Field                  | Type                | Null | Key  | Default | Extra |
++------------------------+---------------------+------+------+---------+-------+
+| KEY                    | text                | NO   |      | NULL    |       |
+| KEY_INFO               | text                | YES  |      | NULL    |       |
+| TRX_ID                 | bigint(21) unsigned | NO   |      | NULL    |       |
+| CURRENT_HOLDING_TRX_ID | bigint(21) unsigned | NO   |      | NULL    |       |
+| SQL_DIGEST             | varchar(64)         | YES  |      | NULL    |       |
+| SQL_DIGEST_TEXT        | text                | YES  |      | NULL    |       |
++------------------------+---------------------+------+------+---------+-------+
+```
 
 `DATA_LOCK_WAITS`表の各列フィールドの意味は次のとおりです。
 
@@ -71,27 +73,15 @@ DESC data_lock_waits;
 select * from information_schema.data_lock_waits\G
 ```
 
-    *************************** 1. row ***************************
-                       KEY: 7480000000000000355F728000000000000001
-                  KEY_INFO: {"db_id":1,"db_name":"test","table_id":53,"table_name":"t","handle_type":"int","handle_value":"1"}
-                    TRX_ID: 426790594290122753
-    CURRENT_HOLDING_TRX_ID: 426790590082449409
-                SQL_DIGEST: 38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821
-           SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
-    1 row in set (0.01 sec)
+```sql
+*************************** 1. row ***************************
+                   KEY: 7480000000000000355F728000000000000001
+              KEY_INFO: {"db_id":1,"db_name":"test","table_id":53,"table_name":"t","handle_type":"int","handle_value":"1"}
+                TRX_ID: 426790594290122753
+CURRENT_HOLDING_TRX_ID: 426790590082449409
+            SQL_DIGEST: 38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821
+       SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
+1 row in set (0.01 sec)
+```
 
 上記のクエリ結果は、ID `426790594290122753`のトランザクションが、ダイジェスト`"38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821"`持ち、形式が``update `t` set `v` = `v` + ? where `id` = ?``であるステートメントを実行するときに、キー`"7480000000000000355F728000000000000001"`の悲観的ロックを取得しようとしているが、このキーのロックは ID `426790590082449409`のトランザクションによって保持されていることを示しています。
-
-## 参照 {#see-also}
-
-<CustomContent platform="tidb">
-
--   [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
--   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
-
-</CustomContent>

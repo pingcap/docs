@@ -268,7 +268,7 @@ void main();
 
 接続が成功すると、ターミナルは次のように TiDB クラスターのバージョンを出力します。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.0)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.2)
     🆕 Created a new player with ID 1.
     ℹ️ Got Player 1: Player { id: 1, coins: 100, goods: 100 }
     🔢 Added 50 coins and 50 goods to player 1, now player 1 has 150 coins and 150 goods.
@@ -353,7 +353,7 @@ await prisma.player.delete({
 
 [参照整合性](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector)確認するには、外部キー制約または Prisma リレーション モードを使用できます。
 
--   [外部キー](https://docs.pingcap.com/tidb/stable/foreign-key) 、TiDB v6.6.0 以降でサポートされ、v8.5.0 以降で一般利用可能になった機能です。外部キーにより関連データのテーブル間参照が可能になり、外部キー制約により関連データの一貫性が確保されます。
+-   [外部キー](https://docs.pingcap.com/tidb/stable/foreign-key)は、TiDB v6.6.0 からサポートされている実験的機能であり、関連データのテーブル間参照と、データの一貫性を維持するための外部キー制約を可能にします。
 
     > **警告：**
     >

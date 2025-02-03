@@ -25,6 +25,10 @@ TiSparkアーキテクチャとその使用方法の詳細については、 [Ti
 | ティスパーク         | 3    | 8 VCore 16GB * 1                 | 10.0.1.21 (マスター)<br/> 10.0.1.22 (ワーカー)<br/> 10.0.1.23 (ワーカー) | デフォルトポート<br/>グローバルディレクトリ構成 |
 | モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)      | 10.0.1.11                                                    | デフォルトポート<br/>グローバルディレクトリ構成 |
 
+> **注記：**
+>
+> インスタンスの IP アドレスは例としてのみ提供されています。実際の展開では、IP アドレスを実際の IP アドレスに置き換えてください。
+
 ## トポロジーテンプレート {#topology-templates}
 
 -   [シンプルな TiSpark トポロジー テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml)

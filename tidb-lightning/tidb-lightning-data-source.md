@@ -1,6 +1,6 @@
 ---
 title: TiDB Lightning Data Sources
-summary: TiDB Lightningでサポートされているすべてのデータ ソースについて説明します。
+summary: TiDB Lightningでサポートされているすべてのデータ ソースについて学習します。
 ---
 
 # TiDB Lightningデータソース {#tidb-lightning-data-sources}
@@ -11,7 +11,7 @@ TiDB Lightningのデータ ソースを指定するには、次の構成を使�
 
 ```toml
 [mydumper]
-# Local source data directory or the URI of the external storage such as S3. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/dev/backup-and-restore-storages#uri-format.
+# Local source data directory or the URI of the external storage such as S3. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v8.1/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 ```
 
@@ -340,7 +340,7 @@ TiDB Lightning がTiDB Lightningファイルを処理する場合、単一の SQ
 
 ## 寄木細工 {#parquet}
 
-TiDB Lightning は現在、Amazon Auroraまたは Apache Hive によって生成された Parquet ファイルのみをサポートしています。S3 のファイル構造を識別するには、次の設定を使用してすべてのデータ ファイルを一致させます。
+TiDB Lightning は現在、Amazon Aurora、Apache Hive、Snowflake によって生成された Parquet ファイルのみをサポートしています。S3 内のファイル構造を識別するには、次の設定を使用してすべてのデータ ファイルを一致させます。
 
     [[mydumper.files]]
     # The expression needed for parsing Amazon Aurora parquet files

@@ -16,6 +16,10 @@ summary: TiDB クラスターの最小限のデプロイメント トポロジ�
 | ティクヴ           | 3    | 16 VCore 32 GiB<br/>storage用 2 TiB (NVMe SSD) | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | デフォルトポート<br/>グローバルディレクトリ構成 |
 | モニタリングとGrafana | 1    | 4 VCore 8 GiB<br/>storage用 500 GiB (SSD)      | 10.0.1.10                            | デフォルトポート<br/>グローバルディレクトリ構成 |
 
+> **注記：**
+>
+> インスタンスの IP アドレスは例としてのみ提供されています。実際の展開では、IP アドレスを実際の IP アドレスに置き換えてください。
+
 ### トポロジーテンプレート {#topology-templates}
 
 -   [最小トポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml)

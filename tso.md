@@ -5,7 +5,7 @@ summary: TiDB の TimeStamp Oracle (TSO) について学習します。
 
 # TiDB のタイムスタンプ Oracle (TSO) {#timestamp-oracle-tso-in-tidb}
 
-TiDB では、配置Driver(PD) が、クラスター内のさまざまなコンポーネントにタイムスタンプを割り当てる上で重要な役割を果たします。これらのタイムスタンプは、トランザクションとデータに時間マーカーを割り当てる際に重要な役割を果たします。これは、TiDB 内で[パーコレーター](https://research.google.com/pubs/pub36726.html)モデルを有効にするために不可欠なメカニズムです。Percolator モデルは、マルチバージョン同時実行制御 (MVCC) と[取引管理](/transaction-overview.md)サポートするために使用されます。
+TiDB では、配置Driver(PD) が、クラスター内のさまざまなコンポーネントにタイムスタンプを割り当てる上で重要な役割を果たします。これらのタイムスタンプは、トランザクションとデータに時間マーカーを割り当てる際に重要な役割を果たします。これは、TiDB 内で[パーコレーター](https://research.google/pubs/large-scale-incremental-processing-using-distributed-transactions-and-notifications/)モデルを有効にするために不可欠なメカニズムです。Percolator モデルは、 [マルチバージョン同時実行制御 (MVCC)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc)と[取引管理](/transaction-overview.md)サポートするために使用されます。
 
 次の例は、TiDB で現在の TSO を取得する方法を示しています。
 

@@ -29,7 +29,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
 -   **ユーザーシナリオ**: TiDBへの完全なデータのインポート
 -   **アップストリーム（インポートされたソースファイル）** :
     -   Dumplingからエクスポートされたファイル
-    -   Amazon Auroraまたは Apache Hive によってエクスポートされた Parquet ファイル
+    -   Amazon Aurora、Apache Hive、Snowflake によってエクスポートされた Parquet ファイル
     -   CSVファイル
     -   ローカルディスクまたは Amazon S3 からのデータ
 -   **下流**：TiDB
@@ -59,7 +59,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
 -   **上流**: TiDB
 -   **ダウンストリーム**: TiDB、MySQL、Kafka、MQ、Confluent、Amazon S3、GCS、Azure Blob Storage、NFS などのstorageサービス。
 -   **利点**: TiCDCオープンプロトコルを提供する
--   **制限**: TiCDC は、少なくとも 1 つの有効なインデックスを持つテーブルのみをレプリケートします。次のシナリオはサポートされていません。
+-   **制限事項**: TiCDC は、少なくとも 1 つの有効なインデックスを持つテーブルのみを複製します。次のシナリオはサポートされていません。
     -   RawKV のみを使用する TiKV クラスター。
     -   DDL 操作`CREATE SEQUENCE`と TiDB の`SEQUENCE`関数。
 
@@ -72,7 +72,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   別のTiDBクラスタへのデータ移行に適しています
     -   災害復旧のための外部storageへのデータバックアップをサポート
 -   **制限事項**:
-    -   BR がTiCDC の上流クラスターにデータを復元する場合、復元されたデータは TiCDC によって下流に複製できません。
+    -   BR がTiCDC またはDrainerの上流クラスターにデータを復元する場合、復元されたデータは TiCDC またはDrainerによって下流に複製できません。
     -   BR は、 `mysql.tidb`テーブルで同じ`new_collation_enabled`値を持つクラスター間の操作のみをサポートします。
 
 ## <a href="/sync-diff-inspector/sync-diff-inspector-overview.md">同期差分インスペクター</a> {#a-href-sync-diff-inspector-sync-diff-inspector-overview-md-sync-diff-inspector-a}

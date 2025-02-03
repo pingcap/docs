@@ -65,7 +65,7 @@ docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
 TiDBサーバーを実行するには、次のコマンドを使用します。
 
 ```bash
-wget https://download.pingcap.org/tidb-community-server-v8.5.0-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-community-server-v8.1.2-linux-amd64.tar.gz
 tar -xzvf tidb-latest-linux-amd64.tar.gz
 mv tidb-latest-linux-amd64/bin/tidb-server ./
 ./tidb-server
@@ -133,7 +133,7 @@ MySQL2 の場合は、上記のコマンドの設定ファイルを MySQL2 の�
 
 ## データ移行タスクを作成する {#create-a-data-migration-task}
 
-[準備されたデータ](#prepare-data)インポートすると、MySQL1 インスタンスと MySQL2 インスタンスの両方に複数のシャード テーブルが存在します。これらのテーブルは構造が同一で、テーブル名に同じプレフィックス「t」が付きます。これらのテーブルが配置されているデータベースにはすべてプレフィックス「sharding」が付きます。また、主キーまたは一意キーに競合はありません (各シャード テーブルでは、主キーまたは一意キーが他のテーブルのものと異なります)。
+[準備されたデータ](#prepare-data)インポートすると、MySQL1 インスタンスと MySQL2 インスタンスの両方に複数のシャード テーブルが作成されます。これらのテーブルは構造が同一で、テーブル名に同じプレフィックス「t」が付きます。これらのテーブルが配置されているデータベースにはすべてプレフィックス「sharding」が付きます。また、主キーまたは一意キーに競合はありません (各シャード テーブルでは、主キーまたは一意キーが他のテーブルのものと異なります)。
 
 ここで、これらのシャード テーブルを TiDB の`db_target.t_target`テーブルに移行する必要があるとします。手順は次のとおりです。
 

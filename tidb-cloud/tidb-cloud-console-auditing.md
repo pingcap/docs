@@ -9,7 +9,7 @@ TiDB Cloud は、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloudで組織の`Organization Owner`または`Organization Console Audit Admin`ロールに属している必要があります。そうでない場合、 TiDB Cloudコンソールでコンソール監査ログ関連のオプションは表示されません。
+-   TiDB Cloudで組織の`Organization Owner`または`Organization Console Audit Manager`ロールに属している必要があります。そうでない場合、 TiDB Cloudコンソールでコンソール監査ログ関連のオプションは表示されません。
 -   コンソール監査ログを有効または無効にできるのは、組織のみです。追跡できるのは、組織内のユーザーのアクションのみです。
 -   コンソール監査ログを有効にすると、 TiDB Cloudコンソールのすべてのイベント タイプが監査され、一部のイベントのみを監査するように指定することはできません。
 

@@ -41,8 +41,8 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 
 1.  [TiDBクラスタを選択](#step-1-select-a-tidb-cluster)
 2.  [AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint)
-3.  [エンドポイントIDを入力してください](#step-3-fill-in-your-endpoint-id)
-4.  [プライベートDNSを有効にして接続を作成する](#step-4-enable-private-dns-and-create-connection)
+3.  [プライベートエンドポイント接続を作成する](#step-3-create-a-private-endpoint-connection)
+4.  [プライベートDNSを有効にする](#step-4-enable-private-dns)
 5.  [TiDBクラスターに接続する](#step-5-connect-to-your-tidb-cluster)
 
 複数のクラスターがある場合は、AWS PrivateLink を使用して接続するクラスターごとにこれらの手順を繰り返す必要があります。
@@ -93,7 +93,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
 5.  **[サービスの確認]**をクリックします。
 
-6.  ドロップダウンリストから VPC を選択します。
+6.  ドロップダウン リストから VPC を選択します。
 
 7.  **サブネット**領域で、TiDB クラスターが配置されている可用性ゾーンを選択します。
 
@@ -126,12 +126,20 @@ AWS CLI を使用して VPC インターフェイスエンドポイントを作�
 </div>
 </SimpleTab>
 
-### ステップ3. エンドポイントIDを入力します {#step-3-fill-in-your-endpoint-id}
+### ステップ3. プライベートエンドポイント接続を作成する {#step-3-create-a-private-endpoint-connection}
 
 1.  TiDB Cloudコンソールに戻ります。
 2.  **「AWS プライベートエンドポイント接続の作成**」ページで、VPC エンドポイント ID を入力します。
+3.  **「プライベート エンドポイント接続の作成」を**クリックします。
 
-### ステップ4. プライベートDNSを有効にして接続を作成する {#step-4-enable-private-dns-and-create-connection}
+> **ヒント：**
+>
+> プライベート エンドポイント接続は、次の 2 つのページで表示および管理できます。
+>
+> -   クラスター レベルの**ネットワーク**ページ: クラスターの概要ページの左側のナビゲーション ペインで**[ネットワーク]**をクリックします。
+> -   プロジェクト レベルの**ネットワーク アクセス**ページ:**プロジェクト設定**ページの左側のナビゲーション ペインで**[ネットワーク アクセス]**をクリックします。
+
+### ステップ4. プライベートDNSを有効にする {#step-4-enable-private-dns}
 
 AWS でプライベート DNS を有効にします。AWS マネジメントコンソールまたは AWS CLI を使用できます。
 
@@ -160,17 +168,6 @@ aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-
 
 </div>
 </SimpleTab>
-
-TiDB Cloudコンソールで**「プライベート エンドポイント接続の作成」**をクリックして、プライベート エンドポイントの作成を完了します。
-
-その後、TiDB クラスターに接続できます。
-
-> **ヒント：**
->
-> プライベート エンドポイント接続は、次の 2 つのページで表示および管理できます。
->
-> -   クラスター レベルの**ネットワーク**ページ: クラスターの概要ページの左側のナビゲーション ペインで**[ネットワーク]**をクリックします。
-> -   プロジェクト レベルの**ネットワーク アクセス**ページ:**プロジェクト設定**ページの左側のナビゲーション ペインで**[ネットワーク アクセス]**をクリックします。
 
 ### ステップ5. TiDBクラスターに接続する {#step-5-connect-to-your-tidb-cluster}
 
@@ -213,6 +210,6 @@ AWS マネジメントコンソールで、VPC エンドポイントのセキュ
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
 
-### プライベート DNS を有効にできません。enableDnsSupport および<code>enableDnsSupport</code> VPC 属性が<code>enableDnsHostnames</code>になっていないことを示すエラーが報告されます {#i-cannot-enable-private-dns-an-error-is-reported-indicating-that-the-code-enablednssupport-code-and-code-enablednshostnames-code-vpc-attributes-are-not-enabled}
+### プライベート DNS を有効にできません。enableDnsSupport および<code>enableDnsSupport</code> VPC 属性が有効になっていないことを示すエラーが報告されます<code>enableDnsHostnames</code> {#i-cannot-enable-private-dns-an-error-is-reported-indicating-that-the-code-enablednssupport-code-and-code-enablednshostnames-code-vpc-attributes-are-not-enabled}
 
 VPC 設定で DNS ホスト名と DNS 解決の両方が有効になっていることを確認してください。AWS マネジメントコンソールで VPC を作成すると、これらはデフォルトで無効になります。

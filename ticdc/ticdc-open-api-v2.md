@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v8.5.0",
+  "version": "v8.1.2",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -134,7 +134,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 ## レプリケーションタスクを作成する {#create-a-replication-task}
 
-このインターフェイスは、レプリケーション タスクを TiCDC に送信するために使用されます。要求が成功すると、 `200 OK`が返されます。返される結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
+このインターフェイスは、TiCDC にレプリケーション タスクを送信するために使用されます。要求が成功すると、 `200 OK`が返されます。返される結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
 ### リクエストURI {#request-uri}
 
@@ -291,7 +291,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `ignore_event`                 | `STRING ARRAY`タイプ。たとえば、 `["insert"]` INSERT イベントが除外されることを示します。(オプション)                                                |
 | `ignore_insert_value_expr`     | `STRING ARRAY`型。たとえば、 `"id >= 100"` `id >= 100`条件に一致する INSERT DML ステートメントを除外することを意味します。(オプション)                       |
 | `ignore_sql`                   | `STRING ARRAY`型。たとえば、 `["^drop", "add column"]` `DROP`で始まるか`ADD COLUMN`含む DDL ステートメントを除外することを意味します。(オプション)           |
-| `ignore_update_new_value_expr` | `STRING ARRAY`型。たとえば、 `"gender = 'male'"` 、新しい値`gender = 'male'`を持つ UPDATE DML ステートメントを除外することを意味します。(オプション)          |
+| `ignore_update_new_value_expr` | `STRING ARRAY`型。たとえば、 `"gender = 'male'"`新しい値`gender = 'male'`を持つ UPDATE DML ステートメントを除外することを意味します。(オプション)            |
 | `ignore_update_old_value_expr` | `STRING ARRAY`型。たとえば、 `"age < 18"`古い値`age < 18`を持つ UPDATE DML ステートメントを除外することを意味します。(オプション)                           |
 | `matcher`                      | `STRING ARRAY`タイプ。許可リストとして機能します。たとえば、 `["test.worker"]` 、フィルター ルールが`test`データベースの`worker`テーブルにのみ適用されることを意味します。(オプション) |
 
@@ -826,7 +826,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeed/test1/synced
 }
 ```
 
-この例は、進行中のレプリケーション タスクの応答を示しています。1 フィールドと`synced`フィールド`info`両方を確認すると、レプリケーション タスクがまだ完了しておらず、さらに待機する必要があることがわかります。
+この例は、進行中のレプリケーション タスクの応答を示しています。1 `synced`と`info`フィールドの両方を確認すると、レプリケーション タスクがまだ完了しておらず、さらに待機する必要があることがわかります。
 
 **例3: 同期ステータスをさらに確認する必要がある**
 

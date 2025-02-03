@@ -3,19 +3,19 @@
 <!-- markdownlint-disable MD041 -->
 
 -   [ドキュメントホーム](https://docs.pingcap.com/)
--   TiDB Self-Managedについて
-    -   [TiDB Self-Managedとは何か](/overview.md)
-    -   [TiDB 8.5 リリースノート](/releases/release-8.5.0.md)
+-   TiDBセルフマネージドについて
+    -   [TiDBセルフマネージドとは](/overview.md)
+    -   [TiDB 8.1 リリースノート](/releases/release-8.1.0.md)
     -   [特徴](/basic-features.md)
     -   [MySQL 互換性](/mysql-compatibility.md)
     -   [TiDB の制限](/tidb-limitations.md)
     -   [クレジット](/credits.md)
     -   [ロードマップ](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
--   始める
-    -   [TiDB のクイック スタート](/quick-start-with-tidb.md)
-    -   [HTAP のクイック スタート](/quick-start-with-htap.md)
-    -   [TiDB で SQL を探索する](/basic-sql-operations.md)
-    -   [HTAPを探索する](/explore-htap.md)
+-   クイックスタート
+    -   [TiDB を試してみる](/quick-start-with-tidb.md)
+    -   [HTAPを試してみる](/quick-start-with-htap.md)
+    -   [TiDB SQLを学ぶ](/basic-sql-operations.md)
+    -   [HTAPを学ぶ](/explore-htap.md)
     -   [サンプルデータベースのインポート](/import-example-data.md)
 -   開発する
     -   [概要](/develop/dev-guide-overview.md)
@@ -82,24 +82,6 @@
             -   [Follower Read](/develop/dev-guide-use-follower-read.md)
             -   [ステイル読み取り](/develop/dev-guide-use-stale-read.md)
         -   [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-    -   ベクトル検索
-        -   [概要](/vector-search-overview.md)
-        -   始める
-            -   [SQL を使い始める](/vector-search-get-started-using-sql.md)
-            -   [Pythonを始めよう](/vector-search-get-started-using-python.md)
-        -   統合
-            -   [概要](/vector-search-integration-overview.md)
-            -   AIフレームワーク
-                -   [ラマインデックス](/vector-search-integrate-with-llamaindex.md)
-                -   [ランチェイン](/vector-search-integrate-with-langchain.md)
-            -   モデル/サービスの埋め込み
-                -   [ジナ・アイ](/vector-search-integrate-with-jinaai-embedding.md)
-            -   ORM ライブラリ
-                -   [SQLアルケミー](/vector-search-integrate-with-sqlalchemy.md)
-                -   [ピーウィー](/vector-search-integrate-with-peewee.md)
-                -   [ジャンゴ](/vector-search-integrate-with-django-orm.md)
-        -   [パフォーマンスの向上](/vector-search-improve-performance.md)
-        -   [制限事項](/vector-search-limitations.md)
     -   トランザクション
         -   [概要](/develop/dev-guide-transaction-overview.md)
         -   [楽観的取引と悲観的取引](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -135,14 +117,15 @@
     -   クラスタトポロジを計画する
         -   [最小トポロジー](/minimal-deployment-topology.md)
         -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
-        -   [PD マイクロサービス トポロジ](/pd-microservices-deployment-topology.md)
         -   [TiProxy トポロジ](/tiproxy/tiproxy-deployment-topology.md)
         -   [TiCDC トポロジ](/ticdc-deployment-topology.md)
+        -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
         -   [TiSpark トポロジー](/tispark-deployment-topology.md)
         -   [クロスDCトポロジ](/geo-distributed-deployment-topology.md)
         -   [ハイブリッドトポロジー](/hybrid-deployment-topology.md)
-    -   [TiUPを使用してデプロイ](/production-deployment-using-tiup.md)
-    -   [Kubernetesにデプロイ](/tidb-in-kubernetes.md)
+    -   インストールして起動
+        -   [TiUPを使用する](/production-deployment-using-tiup.md)
+        -   [Kubernetesにデプロイ](/tidb-in-kubernetes.md)
     -   [クラスタのステータスを確認する](/post-installation-check.md)
     -   クラスタのパフォーマンスをテストする
         -   [Sysbench を使用して TiDB をテストする](/benchmark/benchmark-tidb-using-sysbench.md)
@@ -158,7 +141,6 @@
         -   [MySQL から大規模なデータセットを移行する](/migrate-large-mysql-to-tidb.md)
         -   [小さなデータセットの MySQL シャードの移行とマージ](/migrate-small-mysql-shards-to-tidb.md)
         -   [大規模データセットの MySQL シャードの移行とマージ](/migrate-large-mysql-shards-to-tidb.md)
-        -   [Vitessからの移行](/migrate-from-vitess.md)
         -   [MariaDBからの移行](/migrate-from-mariadb.md)
         -   [CSV ファイルからの移行](/migrate-from-csv-files-to-tidb.md)
         -   [SQL ファイルからの移行](/migrate-from-sql-files-to-tidb.md)
@@ -170,52 +152,11 @@
         -   [より多くの列を持つ下流テーブルに移行する](/migrate-with-more-columns-downstream.md)
         -   [Binlogイベントをフィルタリングする](/filter-binlog-event.md)
         -   [SQL 式を使用して DML イベントをフィルタリングする](/filter-dml-event.md)
--   ストリームデータ
-    -   [TiCDC の概要](/ticdc/ticdc-overview.md)
-    -   [デプロイと管理](/ticdc/deploy-ticdc.md)
-    -   チェンジフィード
-        -   [概要](/ticdc/ticdc-changefeed-overview.md)
-        -   チェンジフィードを作成する
-            -   [MySQL互換データベースにデータを複製する](/ticdc/ticdc-sink-to-mysql.md)
-            -   [Kafka にデータを複製する](/ticdc/ticdc-sink-to-kafka.md)
-            -   [Pulsarにデータを複製する](/ticdc/ticdc-sink-to-pulsar.md)
-            -   [ストレージサービスにデータを複製する](/ticdc/ticdc-sink-to-cloud-storage.md)
-        -   [チェンジフィードを管理する](/ticdc/ticdc-manage-changefeed.md)
-        -   [ログフィルター](/ticdc/ticdc-filter.md)
-        -   [DDL レプリケーション](/ticdc/ticdc-ddl.md)
-        -   [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)
-    -   監視と警告
-        -   [モニタリング指標の概要](/ticdc/ticdc-summary-monitor.md)
-        -   [モニタリング指標の詳細](/ticdc/monitor-ticdc.md)
-        -   [アラートルール](/ticdc/ticdc-alert-rules.md)
+-   統合する
+    -   [概要](/integration-overview.md)
     -   統合シナリオ
-        -   [概要](/integration-overview.md)
         -   [ConfluentとSnowflakeとの統合](/ticdc/integrate-confluent-using-ticdc.md)
         -   [Apache Kafka および Apache Flink との統合](/replicate-data-to-kafka.md)
-    -   参照
-        -   [TiCDCアーキテクチャ](/ticdc/ticdc-architecture.md)
-        -   [TiCDC サーバー構成](/ticdc/ticdc-server-config.md)
-        -   [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)
-        -   [TiCDC クライアント認証](/ticdc/ticdc-client-authentication.md)
-        -   [単一行データのデータ整合性検証](/ticdc/ticdc-integrity-check.md)
-        -   [上流および下流の TiDB クラスターのデータ整合性検証](/ticdc/ticdc-upstream-downstream-check.md)
-        -   [UPDATE イベントを分割する際の TiCDC の動作](/ticdc/ticdc-split-update-behavior.md)
-        -   出力プロトコル
-            -   [TiCDC Avro プロトコル](/ticdc/ticdc-avro-protocol.md)
-            -   [TiCDC Canal-JSON プロトコル](/ticdc/ticdc-canal-json.md)
-            -   [TiCDC CSV プロトコル](/ticdc/ticdc-csv.md)
-            -   [TiCDC デベジウム プロトコル](/ticdc/ticdc-debezium.md)
-            -   [TiCDC オープンプロトコル](/ticdc/ticdc-open-protocol.md)
-            -   [TiCDC シンプルプロトコル](/ticdc/ticdc-simple-protocol.md)
-        -   [TiCDC オープン API v2](/ticdc/ticdc-open-api-v2.md)
-        -   [TiCDC オープン API v1](/ticdc/ticdc-open-api.md)
-        -   TiCDC データ消費
-            -   [Avro に基づく TiCDC 行データ チェックサム検証](/ticdc/ticdc-avro-checksum-verification.md)
-            -   [ストレージシンクコンシューマーの開発ガイド](/ticdc/ticdc-storage-consumer-dev-guide.md)
-        -   [TiCDC 互換性](/ticdc/ticdc-compatibility.md)
-    -   [トラブルシューティング](/ticdc/troubleshoot-ticdc.md)
-    -   [よくある質問](/ticdc/ticdc-faq.md)
-    -   [用語集](/ticdc/ticdc-glossary.md)
 -   管理
     -   Security
         -   [TiDBSecurityコンフィグレーションのベスト プラクティス](/best-practices-for-security-configuration.md)
@@ -321,7 +262,6 @@
         -   [TiKV スレッドを調整する](/tune-tikv-thread-performance.md)
         -   [TiKVメモリの調整](/tune-tikv-memory-performance.md)
         -   [TiKV Follower Readの調整](/follower-read.md)
-        -   [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)
         -   [リージョンパフォーマンスの調整](/tune-region-performance.md)
         -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
         -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
@@ -398,13 +338,7 @@
     -   [ロードベーススプリットを使用する](/configure-load-base-split.md)
     -   [ストア制限を使用する](/configure-store-limit.md)
     -   [DDL 実行の原則とベスト プラクティス](/ddl-introduction.md)
-    -   PDマイクロサービスを使用する
-        -   [PD マイクロサービスの概要](/pd-microservices.md)
-        -   [TiUPを使用して PD マイクロサービス ノードを拡張する](/scale-microservices-using-tiup.md)
-        -   [TSOコンフィグレーションファイル](/tso-configuration-file.md)
-        -   [TSOコンフィグレーションフラグ](/command-line-flags-for-tso-configuration.md)
-        -   [スケジュールコンフィグレーションファイル](/scheduling-configuration-file.md)
-        -   [スケジュールコンフィグレーションフラグ](/command-line-flags-for-scheduling-configuration.md)
+    -   [PDマイクロサービスを使用する](/pd-microservices.md)
 -   TiDB ツール
     -   [概要](/ecosystem-tool-user-guide.md)
     -   [ユースケース](/ecosystem-tool-user-case.md)
@@ -631,6 +565,68 @@
             -   [FAQ](/tidb-lightning/tidb-lightning-faq.md)
             -   [用語集](/tidb-lightning/tidb-lightning-glossary.md)
     -   [Dumpling](/dumpling-overview.md)
+    -   ティCDC
+        -   [概要](/ticdc/ticdc-overview.md)
+        -   [デプロイと管理](/ticdc/deploy-ticdc.md)
+        -   チェンジフィード
+            -   [概要](/ticdc/ticdc-changefeed-overview.md)
+            -   チェンジフィードを作成する
+                -   [MySQL互換データベースにデータを複製する](/ticdc/ticdc-sink-to-mysql.md)
+                -   [Kafka にデータを複製する](/ticdc/ticdc-sink-to-kafka.md)
+                -   [Pulsarにデータを複製する](/ticdc/ticdc-sink-to-pulsar.md)
+                -   [ストレージサービスにデータを複製する](/ticdc/ticdc-sink-to-cloud-storage.md)
+            -   [チェンジフィードを管理する](/ticdc/ticdc-manage-changefeed.md)
+            -   [TiCDC クライアント認証](/ticdc/ticdc-client-authentication.md)
+            -   [ログフィルター](/ticdc/ticdc-filter.md)
+            -   [DDL レプリケーション](/ticdc/ticdc-ddl.md)
+            -   [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)
+            -   [単一行データのデータ整合性検証](/ticdc/ticdc-integrity-check.md)
+            -   [TiDB アップストリーム/ダウンストリーム クラスターのデータ整合性検証](/ticdc/ticdc-upstream-downstream-check.md)
+            -   [UPDATE イベントを分割する際の TiCDC の動作](/ticdc/ticdc-split-update-behavior.md)
+        -   監視と警告
+            -   [モニタリング指標の概要](/ticdc/ticdc-summary-monitor.md)
+            -   [モニタリング指標の詳細](/ticdc/monitor-ticdc.md)
+            -   [アラートルール](/ticdc/ticdc-alert-rules.md)
+        -   参照
+            -   [アーキテクチャ](/ticdc/ticdc-architecture.md)
+            -   [TiCDC サーバー構成](/ticdc/ticdc-server-config.md)
+            -   [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)
+            -   出力プロトコル
+                -   [TiCDC Avro プロトコル](/ticdc/ticdc-avro-protocol.md)
+                -   [TiCDC Canal-JSON プロトコル](/ticdc/ticdc-canal-json.md)
+                -   [TiCDC CSV プロトコル](/ticdc/ticdc-csv.md)
+                -   [TiCDC デベジウム プロトコル](/ticdc/ticdc-debezium.md)
+                -   [TiCDC オープンプロトコル](/ticdc/ticdc-open-protocol.md)
+                -   [TiCDC シンプルプロトコル](/ticdc/ticdc-simple-protocol.md)
+            -   [TiCDC オープン API v2](/ticdc/ticdc-open-api-v2.md)
+            -   [TiCDC オープン API v1](/ticdc/ticdc-open-api.md)
+            -   TiCDC データ消費
+                -   [Avro に基づく TiCDC 行データ チェックサム検証](/ticdc/ticdc-avro-checksum-verification.md)
+                -   [ストレージシンクコンシューマーの開発ガイド](/ticdc/ticdc-storage-consumer-dev-guide.md)
+            -   [互換性](/ticdc/ticdc-compatibility.md)
+        -   [トラブルシューティング](/ticdc/troubleshoot-ticdc.md)
+        -   [よくある質問](/ticdc/ticdc-faq.md)
+        -   [用語集](/ticdc/ticdc-glossary.md)
+    -   TiDBBinlog
+        -   [概要](/tidb-binlog/tidb-binlog-overview.md)
+        -   [クイックスタート](/tidb-binlog/get-started-with-tidb-binlog.md)
+        -   [デプロイ](/tidb-binlog/deploy-tidb-binlog.md)
+        -   [管理](/tidb-binlog/maintain-tidb-binlog-cluster.md)
+        -   [設定](/tidb-binlog/tidb-binlog-configuration-file.md)
+            -   [Pump](/tidb-binlog/tidb-binlog-configuration-file.md#pump)
+            -   [Drainer](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)
+        -   [アップグレード](/tidb-binlog/upgrade-tidb-binlog.md)
+        -   [モニター](/tidb-binlog/monitor-tidb-binlog-cluster.md)
+        -   [Reparo](/tidb-binlog/tidb-binlog-reparo.md)
+        -   [binlogctl](/tidb-binlog/binlog-control.md)
+        -   [Binlog Consumer Client](/tidb-binlog/binlog-consumer-client.md)
+        -   [TiDBBinlogリレーログ](/tidb-binlog/tidb-binlog-relay-log.md)
+        -   [TiDB クラスター間の双方向レプリケーション](/tidb-binlog/bidirectional-replication-between-tidb-clusters.md)
+        -   [用語集](/tidb-binlog/tidb-binlog-glossary.md)
+        -   トラブルシューティング
+            -   [トラブルシューティング](/tidb-binlog/troubleshoot-tidb-binlog.md)
+            -   [エラーの処理](/tidb-binlog/handle-tidb-binlog-errors.md)
+        -   [FAQ](/tidb-binlog/tidb-binlog-faq.md)
     -   PingCAPクリニック診断サービス
         -   [概要](/clinic/clinic-introduction.md)
         -   [クイックスタート](/clinic/quick-start-with-clinic.md)
@@ -645,8 +641,6 @@
         -   [DM レプリケーション シナリオにおけるデータ チェック](/sync-diff-inspector/dm-diff.md)
     -   Tiプロキシ
         -   [概要](/tiproxy/tiproxy-overview.md)
-        -   [負荷分散ポリシー](/tiproxy/tiproxy-load-balance.md)
-        -   [トラフィックリプレイ](/tiproxy/tiproxy-traffic-replay.md)
         -   [コンフィグレーション](/tiproxy/tiproxy-configuration.md)
         -   [コマンドラインパラメータ](/tiproxy/tiproxy-command-line-flags.md)
         -   [監視メトリクス](/tiproxy/tiproxy-grafana.md)
@@ -732,8 +726,9 @@
             -   [コメント構文](/comment-syntax.md)
         -   SQL ステートメント
             -   [概要](/sql-statements/sql-statement-overview.md)
+            -   [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
+            -   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
             -   [`ADMIN`](/sql-statements/sql-statement-admin.md)
-            -   [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)
             -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
             -   [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
             -   [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
@@ -744,22 +739,14 @@
             -   [`ADMIN [SET|SHOW|UNSET] BDR ROLE`](/sql-statements/sql-statement-admin-bdr-role.md)
             -   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
             -   [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
+            -   [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
             -   [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
             -   [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
             -   [`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)
             -   [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
             -   [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
-            -   `ALTER TABLE`
-                -   [概要](/sql-statements/sql-statement-alter-table.md)
-                -   [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
-                -   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
-                -   [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
-                -   [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
-                -   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
-                -   [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
-                -   [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
-                -   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
-                -   [`RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
+            -   [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
+            -   [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
             -   [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
             -   [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
             -   [`BACKUP`](/sql-statements/sql-statement-backup.md)
@@ -767,7 +754,10 @@
             -   [`BEGIN`](/sql-statements/sql-statement-begin.md)
             -   [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
             -   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+            -   [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
             -   [`COMMIT`](/sql-statements/sql-statement-commit.md)
+            -   [`CHANGE DRAINER`](/sql-statements/sql-statement-change-drainer.md)
+            -   [`CHANGE PUMP`](/sql-statements/sql-statement-change-pump.md)
             -   [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)
             -   [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
             -   [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)
@@ -785,7 +775,9 @@
             -   [`DESCRIBE`](/sql-statements/sql-statement-describe.md)
             -   [`DO`](/sql-statements/sql-statement-do.md)
             -   [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)
+            -   [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
             -   [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
+            -   [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
             -   [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)
             -   [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)
             -   [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
@@ -812,10 +804,12 @@
             -   [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)
             -   [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
             -   [`[LOCK|UNLOCK] TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
+            -   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
             -   [`PREPARE`](/sql-statements/sql-statement-prepare.md)
             -   [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)
             -   [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
             -   [`RENAME USER`](/sql-statements/sql-statement-rename-user.md)
+            -   [`RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
             -   [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
             -   [`REPLACE`](/sql-statements/sql-statement-replace.md)
             -   [`RESTORE`](/sql-statements/sql-statement-restore.md)
@@ -847,6 +841,7 @@
             -   [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
             -   [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
             -   [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)
+            -   [`SHOW DRAINER STATUS`](/sql-statements/sql-statement-show-drainer-status.md)
             -   [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
             -   [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
             -   [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)
@@ -861,6 +856,7 @@
             -   [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
             -   [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)
             -   [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md)
+            -   [`SHOW PUMP STATUS`](/sql-statements/sql-statement-show-pump-status.md)
             -   [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
             -   [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md)
             -   [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)
@@ -892,7 +888,6 @@
             -   [日付と時刻の種類](/data-type-date-and-time.md)
             -   [文字列型](/data-type-string.md)
             -   [JSON型](/data-type-json.md)
-            -   [ベクトル型](/vector-search-data-types.md)
         -   関数と演算子
             -   [概要](/functions-and-operators/functions-and-operators-overview.md)
             -   [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
@@ -906,7 +901,6 @@
             -   [暗号化と圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
             -   [ロック機能](/functions-and-operators/locking-functions.md)
             -   [情報機能](/functions-and-operators/information-functions.md)
-            -   [ベクトル関数と演算子](/vector-search-functions-and-operators.md)
             -   JSON関数
                 -   [概要](/functions-and-operators/json-functions.md)
                 -   [JSONを作成する関数](/functions-and-operators/json-functions/json-functions-create.md)
@@ -915,7 +909,6 @@
                 -   [JSONを返す関数](/functions-and-operators/json-functions/json-functions-return.md)
                 -   [JSON ユーティリティ関数](/functions-and-operators/json-functions/json-functions-utility.md)
                 -   [JSONを集約する関数](/functions-and-operators/json-functions/json-functions-aggregate.md)
-                -   [JSONを検証する関数](/functions-and-operators/json-functions/json-functions-validate.md)
             -   [集計 (GROUP BY) 関数](/functions-and-operators/aggregate-group-by-functions.md)
             -   [GROUP BY 修飾子](/functions-and-operators/group-by-modifier.md)
             -   [ウィンドウ関数](/functions-and-operators/window-functions.md)
@@ -927,7 +920,6 @@
             -   [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
             -   [Oracle と TiDB の機能と構文の比較](/oracle-functions-to-tidb.md)
         -   [クラスター化インデックス](/clustered-indexes.md)
-        -   [ベクトルインデックス](/vector-search-index.md)
         -   [制約](/constraints.md)
         -   [生成された列](/generated-columns.md)
         -   [SQL モード](/sql-mode.md)
@@ -1021,7 +1013,6 @@
                 -   [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
         -   [メタデータロック](/metadata-lock.md)
         -   [TiDB 高速テーブル作成](/accelerated-table-creation.md)
-        -   [スキーマキャッシュ](/schema-cache.md)
     -   インターフェース
         -   TiDBダッシュボード
             -   [概要](/dashboard/dashboard-intro.md)
@@ -1075,16 +1066,10 @@
     -   [すべてのリリース](/releases/release-notes.md)
     -   [リリースタイムライン](/releases/release-timeline.md)
     -   [TiDB バージョン管理](/releases/versioning.md)
+    -   [リリースサポートポリシー](https://www.pingcap.com/tidb-release-support-policy/)
     -   [TiDB インストール パッケージ](/binary-package.md)
-    -   バージョン8.5
-        -   [8.5.0](/releases/release-8.5.0.md)
-    -   バージョン8.4
-        -   [8.4.0-DMR](/releases/release-8.4.0.md)
-    -   バージョン8.3
-        -   [8.3.0-DMR](/releases/release-8.3.0.md)
-    -   バージョン8.2
-        -   [8.2.0-DMR](/releases/release-8.2.0.md)
     -   バージョン8.1
+        -   [8.1.2](/releases/release-8.1.2.md)
         -   [8.1.1](/releases/release-8.1.1.md)
         -   [8.1.0](/releases/release-8.1.0.md)
     -   バージョン8.0
@@ -1092,6 +1077,7 @@
     -   バージョン7.6
         -   [7.6.0-DMR](/releases/release-7.6.0.md)
     -   バージョン7.5
+        -   [7.5.5](/releases/release-7.5.5.md)
         -   [7.5.4](/releases/release-7.5.4.md)
         -   [7.5.3](/releases/release-7.5.3.md)
         -   [7.5.2](/releases/release-7.5.2.md)

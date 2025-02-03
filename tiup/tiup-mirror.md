@@ -82,9 +82,9 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     コンポーネントの 1 つのバージョンのみ (すべてのバージョンではない) を複製する場合は、 `--<component>=<version>`使用してこのバージョンを指定します。例:
 
-    -   `tiup mirror clone <target-dir> --tidb v8.5.0`コマンドを実行して、TiDBコンポーネントの v8.5.0 バージョンをクローンします。
-    -   `tiup mirror clone <target-dir> --tidb v8.5.0 --tikv all`コマンドを実行して、TiDBコンポーネントの v8.5.0 バージョンと TiKVコンポーネントのすべてのバージョンを複製します。
-    -   `tiup mirror clone <target-dir> v8.5.0`コマンドを実行して、クラスター内のすべてのコンポーネントの v8.5.0 バージョンを複製します。
+    -   `tiup mirror clone <target-dir> --tidb v8.1.2`コマンドを実行して、TiDBコンポーネントの v8.1.2 バージョンをクローンします。
+    -   `tiup mirror clone <target-dir> --tidb v8.1.2 --tikv all`コマンドを実行して、TiDBコンポーネントの v8.1.2 バージョンと TiKVコンポーネントのすべてのバージョンを複製します。
+    -   `tiup mirror clone <target-dir> v8.1.2`コマンドを実行して、クラスター内のすべてのコンポーネントの v8.1.2 バージョンを複製します。
 
 クローン作成後、署名キーが自動的に設定されます。
 

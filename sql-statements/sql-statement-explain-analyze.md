@@ -82,7 +82,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 +-------------------+----------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
 | id                | estRows  | actRows | task      | access object | execution info                                                                                                                                                                                                                            | operator info                  | memory    | disk |
 +-------------------+----------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
-| TableReader_5     | 10000.00 | 3       | root      |               | time:278.2µs, loops:2, cop_task: {num: 1, max: 437.6µs, proc_keys: 3, rpc_num: 1, rpc_time: 423.9µs, copr_cache_hit_ratio: 0.00}                                                                                                          | data:TableFullScan_4           | 251 Bytes | N/A  |
+| TableReader_5     | 10000.00 | 3       | root      |               | time:278.2µs, loops:2, cop_task: {num: 1, max: 437.6µs, proc_keys: 3, copr_cache_hit_ratio: 0.00}, rpc_info:{Cop:{num_rpc:1, total_time:423.9µs}}                                                                                         | data:TableFullScan_4           | 251 Bytes | N/A  |
 | └─TableFullScan_4 | 10000.00 | 3       | cop[tikv] | table:t1      | tikv_task:{time:0s, loops:1}, scan_detail: {total_process_keys: 3, total_process_keys_size: 111, total_keys: 4, rocksdb: {delete_skipped_count: 0, key_skipped_count: 3, block: {cache_hit_count: 0, read_count: 0, read_byte: 0 Bytes}}} | keep order:false, stats:pseudo | N/A       | N/A  |
 +-------------------+----------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
 2 rows in set (0.00 sec)
@@ -110,14 +110,14 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 `TableReader`演算子の実行情報は通常、次のようになります。
 
-    cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, rpc_num: 6, rpc_time: 5.313996 ms, copr_cache_hit_ratio: 0.00}
+    cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, copr_cache_hit_ratio: 0.00}, rpc_info:{Cop:{num_rpc:6, total_time:5.313996ms}}
 
 -   `cop_task` : `cop`タスクの実行情報が含まれます。例:
     -   `num` : copタスクの数。
     -   `max` : cop タスクの実行に費やされた実行時間の最大値、 `avg` `p95` 、平均値、 `min` P95 値。
     -   `max_proc_keys`と`p95_proc_keys` : すべての cop タスクで TiKV によってスキャンされた最大値と P95 キー値。最大値と P95 値の差が大きい場合、データ分布が不均衡になる可能性があります。
-    -   `rpc_num` : TiKV に送信された`Cop` `rpc_time`要求の合計数と合計所要時間。
     -   `copr_cache_hit_ratio` : `cop`のタスク要求に対するコプロセッサーキャッシュのヒット率。
+-   `rpc_info` : リクエスト タイプ別に集計された、TiKV に送信された RPC リクエストの合計数と合計時間。
 -   `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
 ### 入れる {#insert}

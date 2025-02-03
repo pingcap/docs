@@ -83,7 +83,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
     -   TiFlash (v4.0.5 の新機能)
 
-        `tiflash.toml`ファイルで設定し、 `http_port`項目を`https_port`に変更します。
+        `tiflash.toml`ファイルで設定します:
 
         ```toml
         [security]
@@ -145,14 +145,13 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
 ### コンポーネント呼び出し元のIDを確認する {#verify-component-caller-s-identity}
 
-一般的に、呼び出し先は、呼び出し元が提供するキー、証明書、および CA を検証することに加えて、 `Common Name`使用して呼び出し元の ID を検証する必要があります。たとえば、TiKV には TiDB のみがアクセスでき、他の訪問者は正当な証明書を持っていてもブロックされます。
+共通名は、発信者の検証に使用されます。通常、着信側は、発信者が提供するキー、証明書、および CA を検証するだけでなく、発信者の ID も検証する必要があります。たとえば、TiKV には TiDB のみがアクセスでき、他の訪問者は正当な証明書を持っていてもブロックされます。
 
-コンポーネントの呼び出し元の ID を確認するには、証明書を生成するときに`Common Name`使用して証明書のユーザー ID をマークし、呼び出し先に`cluster-verify-cn` (TiDB の場合) または`cert-allowed-cn` (その他のコンポーネントの場合) を設定して呼び出し元の ID を確認する必要があります。
+コンポーネントの呼び出し元の ID を確認するには、証明書を生成するときに`Common Name`使用して証明書のユーザー ID をマークし、呼び出し先の`Common Name`リストを構成して呼び出し元の ID を確認する必要があります。
 
 > **注記：**
 >
-> -   v8.4.0 以降、PD 構成項目`cert-allowed-cn`複数の値をサポートします。必要に応じて、TiDB の`cluster-verify-cn`構成項目と他のコンポーネントの`cert-allowed-cn`構成項目に複数の`Common Name`設定できます。TiUPは、コンポーネントのステータスを照会するときに別の識別子を使用することに注意してください。たとえば、クラスター名が`test`場合、 TiUP は`Common Name`として`test-client`使用します。
-> -   v8.3.0 以前のバージョンでは、PD 構成項目`cert-allowed-cn`には 1 つの値しか設定できません。したがって、すべての認証オブジェクトの`Common Name`同じ値に設定する必要があります。関連する構成例については、 [v8.3.0 ドキュメント](https://docs.pingcap.com/tidb/v8.3/enable-tls-between-components)参照してください。
+> 現在、PD の`cert-allowed-cn`構成項目には 1 つの値しか設定できません。したがって、すべての認証オブジェクトの`commonName`を同じ値に設定する必要があります。
 
 -   ティビ
 
@@ -160,7 +159,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
     ```toml
     [security]
-    cluster-verify-cn = ["tidb", "test-client", "prometheus"]
+    cluster-verify-cn = ["TiDB"]
     ```
 
 -   ティクヴ
@@ -169,7 +168,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
     ```toml
     [security]
-    cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "prometheus"]
+    cert-allowed-cn = ["TiDB"]
     ```
 
 -   PD
@@ -178,7 +177,7 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
     ```toml
     [security]
-    cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "test-client", "prometheus"]
+    cert-allowed-cn = ["TiDB"]
     ```
 
 -   TiFlash (v4.0.5 の新機能)
@@ -187,17 +186,17 @@ summary: TiDB コンポーネント間の TLS 認証を有効にする方法を�
 
     ```toml
     [security]
-    cert_allowed_cn = ["tidb", "tikv", "prometheus"]
+    cert_allowed_cn = ["TiDB"]
     ```
 
     `tiflash-learner.toml`ファイルで設定します:
 
     ```toml
     [security]
-    cert-allowed-cn = ["tidb", "tikv", "tiflash", "prometheus"]
+    cert-allowed-cn = ["TiDB"]
     ```
 
-## 証明書を再読み込み {#reload-certificates}
+## 証明書を再読み込みする {#reload-certificates}
 
 -   TiDB クラスターがローカル データ センターに展開されている場合、証明書とキーを再ロードするために、TiDB、PD、TiKV、 TiFlash、TiCDC、およびあらゆる種類のクライアントは、TiDB クラスターを再起動せずに、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み取ります。
 

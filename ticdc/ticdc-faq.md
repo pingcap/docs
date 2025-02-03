@@ -55,7 +55,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
 
 ## アップストリームが更新を停止した後、TiCDC がすべての更新を複製したかどうかを確認するにはどうすればよいですか? {#how-to-verify-if-ticdc-has-replicated-all-updates-after-upstream-stops-updating}
 
-アップストリーム TiDB クラスターの更新が停止したら、アップストリーム TiDB クラスターの最新の[TSO](/glossary.md#timestamp-oracle-tso)のタイムスタンプと TiCDC のレプリケーションの進行状況を比較して、レプリケーションが完了したかどうかを確認できます。TiCDC のレプリケーション進行状況のタイムスタンプがアップストリーム TiDB クラスターの TSO 以上である場合、すべての更新がレプリケートされています。レプリケーションの完了を確認するには、次の手順を実行します。
+アップストリーム TiDB クラスターの更新が停止したら、アップストリーム TiDB クラスターの最新の[TSO](/glossary.md#tso)のタイムスタンプと TiCDC のレプリケーションの進行状況を比較して、レプリケーションが完了したかどうかを確認できます。TiCDC のレプリケーション進行状況のタイムスタンプがアップストリーム TiDB クラスターの TSO 以上である場合、すべての更新がレプリケートされています。レプリケーションの完了を確認するには、次の手順を実行します。
 
 1.  アップストリーム TiDB クラスターから最新の TSO タイムスタンプを取得します。
 
@@ -222,7 +222,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 > **注記：**
 >
 > -   この機能は TiCDC 4.0.2 で導入されました。
-> -   TiCDC は現在、Kafka などの MQ シンクにのみ、Canal-JSON 形式でのデータ変更の出力をサポートしています。
+> -   TiCDC は現在、Kafka などの MQ シンクにのみ、Canal-JSON 形式でデータ変更を出力することをサポートしています。
 
 詳細については[TiCDC チェンジフィード構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
@@ -331,7 +331,7 @@ mysql root@127.0.0.1:test> show create table test;
 | Table | Create Table                                                                     |
 +-------+----------------------------------------------------------------------------------+
 | test  | CREATE TABLE `test` (                                                            |
-|       |   `id` int NOT NULL,                                                         |
+|       |   `id` int(11) NOT NULL,                                                         |
 |       |   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, |
 |       |   PRIMARY KEY (`id`)                                                             |
 |       | ) ENGINE=InnoDB DEFAULT CHARSET=latin1                                           |
@@ -431,3 +431,11 @@ TiDB にはトランザクション タイムアウト メカニズムがあり�
   }
 ]
 ```
+
+## TiCDC は DML 操作で生成された列を複製しますか? {#does-ticdc-replicate-generated-columns-of-dml-operations}
+
+生成された列には、仮想生成された列と保存された生成された列が含まれます。TiCDC は仮想生成された列を無視し、保存された生成された列のみをダウンストリームに複製します。ただし、ダウンストリームが MySQL または別の MySQL 互換データベース (Kafka またはその他のstorageサービスではない) である場合、保存された生成された列も無視されます。
+
+> **注記：**
+>
+> 保存された生成列を Kafka またはstorageサービスに複製し、それを MySQL に書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)含まれており、列が生成列であるかどうかを区別できます。

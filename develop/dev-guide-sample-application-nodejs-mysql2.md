@@ -149,7 +149,7 @@ npm install mysql2 dotenv --save
     >
     > パブリック エンドポイントを使用してTiDB Cloud Dedicated に接続する場合は、TLS 接続を有効にすることをお勧めします。
     >
-    > TLS 接続を有効にするには、 `TIDB_ENABLE_SSL`から`true`変更し、 `TIDB_CA_PATH`を使用して接続ダイアログからダウンロードした CA 証明書のファイル パスを指定します。
+    > TLS 接続を有効にするには、 `TIDB_ENABLE_SSL`から`true`変更し、 `TIDB_CA_PATH`使用して接続ダイアログからダウンロードした CA 証明書のファイル パスを指定します。
 
 6.  `.env`ファイルを保存します。
 
@@ -189,7 +189,7 @@ npm start
 
 接続が成功すると、コンソールに次のように TiDB クラスターのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.0)
+    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.1.2)
     ⏳ Loading sample game data...
     ✅ Loaded sample game data.
 

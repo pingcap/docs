@@ -172,3 +172,85 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
 </div>
 </SimpleTab>
+
+## GCS アクセスを構成する {#configure-gcs-access}
+
+TiDB Serverless クラスターが GCS バケットにアクセスできるようにするには、バケットの GCS アクセスを構成する必要があります。サービス アカウント キーを使用してバケット アクセスを構成できます。
+
+サービス アカウント キーを構成するには、次の手順を実行します。
+
+1.  Google Cloud [サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)で、 **[サービス アカウントの作成]**をクリックしてサービス アカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)参照してください。
+
+    1.  サービス アカウント名を入力します。
+    2.  オプション: サービス アカウントの説明を入力します。
+    3.  サービス アカウントを作成するには**、[作成して続行]**をクリックします。
+    4.  `Grant this service account access to project`で、必要な権限を持つ[IAMロール](https://cloud.google.com/iam/docs/understanding-roles)選択します。たとえば、 TiDB Cloud Serverless クラスターにデータをエクスポートするには、権限`storage.objects.create`を持つロールが必要です。
+    5.  **「続行」**をクリックして次のステップに進みます。
+    6.  オプション: `Grant users access to this service account`で、 [サービスアカウントを他のリソースに接続する](https://cloud.google.com/iam/docs/attach-service-accounts)が必要なメンバーを選択します。
+    7.  **[完了]**をクリックして、サービス アカウントの作成を完了します。
+
+    ![service-account](/media/tidb-cloud/serverless-external-storage/gcs-service-account.png)
+
+2.  サービス アカウントをクリックし、 `KEYS`ページで**[キーの追加]**をクリックしてサービス アカウント キーを作成します。
+
+    ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
+
+3.  デフォルトのキータイプ`JSON`を選択し、 **[作成]**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、 TiDB Cloud Serverless クラスタの GCS アクセスを構成するときに使用する必要があるサービス アカウント キーが含まれています。
+
+## Azure Blob Storage アクセスを構成する {#configure-azure-blob-storage-access}
+
+TiDB Serverless が Azure Blob コンテナーにアクセスできるようにするには、コンテナーのサービス SAS トークンを作成する必要があります。
+
+SAS トークンは、 [Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (推奨) または手動構成を使用して作成できます。
+
+Azure ARM テンプレートを使用して SAS トークンを作成するには、次の手順を実行します。
+
+1.  ターゲット クラスターの**インポート**ページを開きます。
+
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
+
+2.  **ARM テンプレートの展開による新しい SAS トークンの生成**ダイアログを開きます。
+
+    1.  **[データをエクスポート...]** &gt; **[Azure Blob Storage]**をクリックします。クラスターでこれまでにデータをインポートもエクスポートしたことがない場合は、ページの下部にある**[データをエクスポートするには、ここをクリックします...]** &gt; **[Azure Blob Storage] を**クリックします。
+
+    2.  **Azure Blob Storage 設定**領域まで下にスクロールし、SAS トークン フィールドの下に**ある Azure ARM テンプレートを使用して新規作成するには、ここをクリック**します。をクリックします。
+
+3.  Azure ARM テンプレートを使用して SAS トークンを作成します。
+
+    1.  **[ARM テンプレートのデプロイによる新しい SAS トークンの生成]**ダイアログで、[クリックして**、事前構成された ARM テンプレートを含む Azure ポータルを開く] を**クリックします。
+
+    2.  Azure にログインすると、Azure**カスタム デプロイメント**ページにリダイレクトされます。
+
+    3.  **カスタム デプロイ**ページで、**リソース グループ**と**ストレージ アカウント名**を入力します。コンテナーが配置されているstorageアカウントの概要ページからすべての情報を取得できます。
+
+        ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
+
+    4.  **[確認と作成]**または**[次へ**] をクリックして、展開を確認します。 **[作成] を**クリックして、展開を開始します。
+
+    5.  完了すると、デプロイの概要ページにリダイレクトされます。**出力**セクションに移動して、SAS トークンを取得します。
+
+Azure ARM テンプレートを使用して SAS トークンを作成する際に問題が発生した場合は、次の手順に従って手動で作成してください。
+
+<details><summary>詳細はこちらをクリック</summary>
+
+1.  [Azure ストレージ アカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するstorageアカウントをクリックします。
+
+2.  **ストレージ アカウント**ページで、[**Security+ ネットワーク]**をクリックし、 **[共有アクセス署名]**をクリックします。
+
+    ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
+
+3.  **Shared Access Signature**ページで、次のように必要なアクセス許可を持つサービス SAS トークンを作成します。詳細については、 [サービスSASトークンを作成する](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)参照してください。
+
+    1.  **[許可されたサービス]**セクションで、 **Blob**サービスを選択します。
+    2.  **許可されたリソース タイプ**セクションで、**コンテナー**と**オブジェクトを**選択します。
+    3.  **[許可された権限]**セクションで、必要に応じて権限を選択します。たとえば、 TiDB Cloud Serverless クラスターにデータをエクスポートするには、**読み取り**権限と**書き込み**権限が必要です。
+    4.  必要に応じて**開始日時と有効期限**を調整します。
+    5.  その他の設定はデフォルト値のままにしておきます。
+
+    ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
+
+4.  SAS トークンを生成するには、 **[SAS と接続文字列の生成]**をクリックします。
+
+</details>

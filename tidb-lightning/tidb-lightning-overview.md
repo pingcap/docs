@@ -5,13 +5,13 @@ summary: Lightning とアーキテクチャ全体について学びます。
 
 # TiDB Lightning の概要 {#tidb-lightning-overview}
 
-[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-8.5/lightning) 、TB 規模のデータを TiDB クラスターにインポートするために使用されるツールです。TiDB クラスターへの初期データ インポートによく使用されます。
+[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-8.1/lightning) 、TB 規模のデータを TiDB クラスターにインポートするために使用されるツールです。TiDB クラスターへの初期データ インポートによく使用されます。
 
 TiDB Lightning は次のファイル形式をサポートしています。
 
 -   [Dumpling](/dumpling-overview.md)によってエクスポートされたファイル
 -   CSVファイル
--   [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md)
+-   [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、またはSnowflake
 
 TiDB Lightning は次のソースからデータを読み取ることができます。
 
@@ -27,7 +27,7 @@ TiDB Lightning は次のソースからデータを読み取ることができ�
 
 ![Architecture of TiDB Lightning tool set](/media/tidb-lightning-architecture.png)
 
-TiDB Lightning は、 `backend`で設定された 2 つのインポート モードをサポートしています。インポート モードによって、データが TiDB にインポートされる方法が決まります。
+TiDB Lightning は、 `backend`で構成された 2 つのインポート モードをサポートしています。インポート モードによって、データが TiDB にインポートされる方法が決まります。
 
 -   [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) : TiDB Lightning は、まずデータをキーと値のペアにエンコードしてローカルの一時ディレクトリに保存し、次にこれらのキーと値のペアを各 TiKV ノードにアップロードし、最後に TiKV 取り込みインターフェイスを呼び出して TiKV の RocksDB にデータを挿入します。初期インポートを実行する必要がある場合は、インポート速度が速い物理インポート モードを検討してください。物理インポート モードのバックエンドは`local`です。
 

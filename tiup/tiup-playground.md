@@ -21,7 +21,7 @@ tiup playground ${version} [flags]
 
 -   このコマンドはプレイグラウンドコンポーネントのバージョンを指定しないため、 TiUP は最初にインストールされているプレイグラウンドコンポーネントの最新バージョンをチェックします。最新バージョンが v1.12.3 であると仮定すると、このコマンドは`tiup playground:v1.12.3`と同じように動作します。
 -   TiUPプレイグラウンドを使用して TiDB、TiKV、および PD コンポーネントをインストールしていない場合、プレイグラウンドコンポーネントはこれらのコンポーネントの最新の安定バージョンをインストールしてから、これらのインスタンスを起動します。
--   このコマンドは TiDB、PD、および TiKVコンポーネントのバージョンを指定しないため、 TiUPプレイグラウンドはデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンが v8.5.0 であると仮定すると、このコマンドは`tiup playground:v1.12.3 v8.5.0`と同じように動作します。
+-   このコマンドは TiDB、PD、および TiKVコンポーネントのバージョンを指定しないため、 TiUPプレイグラウンドはデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンが v8.1.2 であると仮定すると、このコマンドは`tiup playground:v1.12.3 v8.1.2`と同じように動作します。
 -   このコマンドは各コンポーネントの数を指定しないため、 TiUPプレイグラウンドはデフォルトで、1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスで構成される最小のクラスターを起動します。
 -   各 TiDBコンポーネントを起動すると、 TiUPプレイグラウンドはクラスターが正常に起動したことを通知し、MySQL クライアント経由で TiDB クラスターに接続する方法や[TiDBダッシュボード](/dashboard/dashboard-intro.md)にアクセスする方法などの役立つ情報を提供します。
 
@@ -57,7 +57,7 @@ tiup playground nightly
 
 ### PDのデフォルト設定を上書きする {#override-pd-s-default-configuration}
 
-まず、 [PD 構成テンプレート](https://github.com/pingcap/pd/blob/master/conf/config.toml)をコピーする必要があります。コピーしたファイルを`~/config/pd.toml`に配置し、必要に応じて変更を加えたら、次のコマンドを実行して PD のデフォルト設定を上書きできます。
+まず、 [PD 構成テンプレート](https://github.com/pingcap/pd/blob/release-8.1/conf/config.toml)をコピーする必要があります。コピーしたファイルを`~/config/pd.toml`に配置し、必要に応じて変更を加えたら、次のコマンドを実行して PD のデフォルト設定を上書きできます。
 
 ```shell
 tiup playground --pd.config ~/config/pd.toml
@@ -111,8 +111,10 @@ tiup playground display
     ---    ----     ------
     84518  pd       35m22.929404512s
     84519  tikv     35m22.927757153s
+    84520  pump     35m22.92618275s
     86189  tidb     exited
     86526  tidb     34m28.293148663s
+    86190  drainer  35m19.91349249s
 
 ## クラスターをスケールアウトする {#scale-out-a-cluster}
 
@@ -130,15 +132,35 @@ tiup playground scale-out --db 2
 tiup playground scale-in --pid 86526
 ```
 
-## PDマイクロサービスのデプロイ {#deploy-pd-microservices}
+## TiProxy をデプロイ {#deploy-tiproxy}
 
-v8.2.0 以降では、 TiUPを使用して[PDマイクロサービスモード](/pd-microservices.md) (実験的) をデプロイできます。 次のように、 TiUP Playground を使用して、クラスターに`tso`マイクロサービスと`scheduling`マイクロサービスをデプロイできます。
+[Tiプロキシ](/tiproxy/tiproxy-overview.md)は PingCAP の公式プロキシコンポーネントであり、クライアントと TiDBサーバーの間に配置され、負荷分散、接続の永続性、サービス検出、および TiDB のその他の機能を提供します。
 
-```shell
-tiup playground v8.5.0 --pd.mode ms --pd 3 --tso 2 --scheduling 2
-```
+TiUP v1.15.0 以降では、 TiUP Playground を使用してクラスターに TiProxy をデプロイできます。
 
--   `--pd.mode` : `ms`に設定すると、PD のマイクロサービス モードが有効になります。
--   `--pd <num>` : PD マイクロサービスの API の数を指定します。少なくとも`1`である必要があります。
--   `--tso <num>` : `tso`マイクロサービスにデプロイされるインスタンスの数を指定します。
--   `--scheduling <num>` : `scheduling`マイクロサービスにデプロイされるインスタンスの数を指定します。
+1.  `tidb.toml`ファイルを作成し、次の構成を追加します。
+
+        graceful-wait-before-shutdown=15
+
+    この構成項目は、TiDB がサーバーをシャットダウンする前に待機する期間 (秒単位) を制御し、クラスターのスケールイン操作中にクライアントが切断されるのを回避します。
+
+2.  TiDB クラスターを起動します。
+
+    ```shell
+    tiup playground v8.1.2 --tiproxy 1 --db.config tidb.toml
+    ```
+
+    プレイグラウンドコンポーネントでは、TiProxy 関連のコマンドライン フラグは次のとおりです。
+
+    ```bash
+    Flags:
+          --tiproxy int                  The number of TiProxy nodes in the cluster. If not specified, TiProxy is not deployed.
+          --tiproxy.binpath string       TiProxy instance binary path.
+          --tiproxy.config string        TiProxy instance configuration file.
+          --tiproxy.host host            Playground TiProxy host. If not provided, TiProxy will still use host flag as its host.
+          --tiproxy.port int             Playground TiProxy port. If not provided, TiProxy will use 6000 as its port.
+          --tiproxy.timeout int          TiProxy maximum wait time in seconds for starting. 0 means no limit (default 60).
+          --tiproxy.version string       The version of TiProxy. If not specified, the latest version of TiProxy is deployed.
+    ```
+
+TiProxy の導入と使用の詳細については、 [TiProxyのインストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)参照してください。

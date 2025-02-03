@@ -16,7 +16,7 @@ TiDB Cloud は、消費したリソースに応じて料金を請求します。
 
 ## 請求書 {#invoices}
 
-組織で`Organization Owner`または`Organization Billing Admin`のロールを担っている場合は、 TiDB Cloudの請求書情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
+組織で`Organization Owner`または`Organization Billing Manager`のロールを担っている場合は、 TiDB Cloudの請求書情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
 支払い方法を設定すると、コストが割り当て額 (デフォルトでは 500 ドル) に達すると、 TiDB Cloudによって請求書が生成されます。割り当て額を増やしたり、毎月 1 通の請求書を受け取りたい場合は、 [営業担当にお問い合わせください](https://www.pingcap.com/contact-us/)実行できます。
 
@@ -52,7 +52,7 @@ TiDB Cloud は、消費したリソースに応じて料金を請求します。
 
 ## 請求の詳細 {#billing-details}
 
-組織で`Organization Owner`または`Organization Billing Admin`のロールを担っている場合は、 TiDB Cloudの課金の詳細を表示およびエクスポートできます。それ以外の場合は、このセクションをスキップしてください。
+組織で`Organization Owner`または`Organization Billing Manager`のロールを担っている場合は、 TiDB Cloudの課金の詳細を表示およびエクスポートできます。それ以外の場合は、このセクションをスキップしてください。
 
 支払い方法を設定すると、 TiDB Cloud は過去の月の請求書と請求の詳細を生成し、毎月初めに現在の月の請求の詳細を生成します。請求の詳細には、組織の TiDB クラスターの使用状況、割引、バックアップstorageコスト、データ転送コスト、サポート サービス コスト、クレジット消費、プロジェクト分割情報が含まれます。
 
@@ -83,7 +83,7 @@ TiDB Cloud は、消費したリソースに応じて料金を請求します。
 
 ## コストエクスプローラー {#cost-explorer}
 
-組織内で`Organization Owner`または`Organization Billing Admin`のロールを担っている場合は、 TiDB Cloudの使用コストを表示および分析できます。それ以外の場合は、このセクションをスキップしてください。
+組織内で`Organization Owner`または`Organization Billing Manager`のロールを担っている場合は、 TiDB Cloudの使用コストを表示および分析できます。それ以外の場合は、このセクションをスキップしてください。
 
 組織のコスト レポートを分析およびカスタマイズするには、次の手順を実行します。
 
@@ -160,7 +160,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザー向けに一定数のクレジ�
 
 ## 割引 {#discounts}
 
-組織内で`Organization Owner`または`Organization Billing Admin`ロールを担っている場合は、**割引**ページでTiDB Cloudの割引情報を表示できます。それ以外の場合は、このセクションをスキップしてください。
+組織内で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、**割引**ページでTiDB Cloudの割引情報を表示できます。それ以外の場合は、このセクションをスキップしてください。
 
 割引情報には、受け取ったすべての割引、ステータス、割引率、割引の開始日と終了日が含まれます。
 
@@ -178,11 +178,11 @@ TiDB Cloud は、概念実証 (PoC) ユーザー向けに一定数のクレジ�
 
 ## 支払方法 {#payment-method}
 
-組織内で`Organization Owner`または`Organization Billing Admin`の役割を担っている場合は、 TiDB Cloudの支払い情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
+組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB Cloudの支払い情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
 > **注記：**
 >
-> [AWS マーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudにサインアップした場合、AWS アカウントまたは Google Cloud アカウントを通じて直接支払うことはできますが、 TiDB Cloudコンソールで支払い方法の追加や請求書のダウンロードを行うことはできません。
+> [AWS マーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudにサインアップした場合、AWS アカウントまたは Google Cloud アカウントを通じて直接支払うことはできますが、 TiDB Cloudコンソールで支払い方法の追加や請求書のダウンロードはできません。
 
 料金は、クラスターの使用状況に応じて、バインドされたクレジットカードから差し引かれます。有効なクレジットカードを追加するには、次のいずれかの方法を使用します。
 
@@ -212,7 +212,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザー向けに一定数のクレジ�
 >
 > クレジットカードの機密データのセキュリティを確保するため、 TiDB Cloud は顧客のクレジットカード情報を一切保存せず、サードパーティの支払いプラットフォーム Stripe に保存します。すべての請求の控除は Stripe を通じて完了します。
 
-複数のクレジットカードを紐付けて、そのうちの 1 つを課金コンソールの支払方法でデフォルトのクレジットカードとして設定することができます。設定後は、以降の請求はデフォルトのクレジットカードから自動的に引き落とされます。
+複数のクレジットカードを紐付けて、そのうちの 1 つを課金コンソールの支払い方法のデフォルトのクレジットカードとして設定することができます。設定後は、以降の請求はデフォルトのクレジットカードから自動的に引き落とされます。
 
 デフォルトのクレジットカードを設定するには、次の手順を実行します。
 
@@ -230,7 +230,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザー向けに一定数のクレジ�
 
 ## 契約 {#contract}
 
-組織で`Organization Owner`または`Organization Billing Admin`ロールを担っている場合は、コンプライアンス要件を満たすために、 TiDB CloudコンソールでカスタマイズされたTiDB Cloudサブスクリプションを管理できます。それ以外の場合は、このセクションをスキップしてください。
+組織で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、コンプライアンス要件を満たすために、 TiDB CloudコンソールでカスタマイズされたTiDB Cloudサブスクリプションを管理できます。それ以外の場合は、このセクションをスキップしてください。
 
 契約に基づいて当社の販売に同意し、契約をオンラインで確認して承認するためのメールを受け取った場合は、次の操作を実行できます。
 
@@ -250,7 +250,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザー向けに一定数のクレジ�
 
 ## AWS Marketplace または Google Cloud Marketplace からの請求 {#billing-from-aws-marketplace-or-google-cloud-marketplace}
 
-組織で`Organization Owner`または`Organization Billing Admin`ロールを担っている場合は、 TiDB Cloudアカウントを AWS 請求アカウントまたは Google Cloud 請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
+組織で`Organization Owner`または`Organization Billing Manager`ロールを担っている場合は、 TiDB Cloudアカウントを AWS 請求アカウントまたは Google Cloud 請求アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
 
 TiDB Cloudを初めて使用し、 TiDB Cloudアカウントをお持ちでない場合は、 [AWS マーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudアカウントにサインアップし、AWS または Google Cloud の請求アカウントを通じて使用料を支払うことができます。
 

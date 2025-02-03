@@ -1,6 +1,6 @@
 ---
 title: TiDB Backup & Restore Overview
-summary: TiDB バックアップ & リストア (BR) は、クラスターの高可用性とデータの安全性を保証します。短い RPO での災害復旧をサポートし、誤操作を処理し、履歴データ監査を提供します。バックアップ操作はオフピーク時に実行し、バックアップ データを互換性のあるstorageシステムに保存することをお勧めします。BRは、フル バックアップとログ バックアップをサポートし、任意の時点へのデータの復元もサポートします。バックアップと復元には、TiDB クラスターと同じメジャー バージョンのBR を使用することが重要です。
+summary: TiDB バックアップ & リストア (BR) は、クラスターの高可用性とデータの安全性を保証します。短い RPO での災害復旧をサポートし、誤操作を処理し、履歴データの監査を提供します。バックアップ操作はオフピーク時に実行し、バックアップ データを互換性のあるstorageシステムに保存することをお勧めします。BRは、フル バックアップとログ バックアップをサポートし、任意の時点へのデータの復元もサポートします。バックアップと復元には、TiDB クラスターと同じメジャー バージョンのBR を使用することが重要です。
 ---
 
 # TiDB バックアップと復元の概要 {#tidb-backup-x26-restore-overview}
@@ -85,7 +85,7 @@ TiDB BR は次の機能を提供します。
 
 -   完全バックアップを復元する
 
-    -   クラスター スナップショット バックアップの復元: スナップショット バックアップ データを空のクラスターまたはデータの競合がないクラスター (同じスキーマまたはテーブルを持つ) に復元できます。詳細については、 [スナップショットバックアップを復元する](/br/br-snapshot-guide.md#restore-cluster-snapshots)参照してください。また、バックアップ データから特定のデータベースまたはテーブルを復元し、不要なデータを除外することもできます。詳細については、 [バックアップデータから特定のデータベースまたはテーブルを復元する](/br/br-snapshot-guide.md#restore-a-database-or-a-table)参照してください。
+    -   クラスター スナップショット バックアップの復元: スナップショット バックアップ データを、空のクラスターまたはデータの競合がないクラスター (同じスキーマまたはテーブルを持つ) に復元できます。詳細については、 [スナップショットバックアップを復元する](/br/br-snapshot-guide.md#restore-cluster-snapshots)参照してください。また、バックアップ データから特定のデータベースまたはテーブルを復元し、不要なデータを除外することもできます。詳細については、 [バックアップデータから特定のデータベースまたはテーブルを復元する](/br/br-snapshot-guide.md#restore-a-database-or-a-table)参照してください。
 
 -   任意の時点へのデータの復元 (PITR)
 
@@ -93,7 +93,7 @@ TiDB BR は次の機能を提供します。
 
 #### TiDB クラスタのパフォーマンスと影響を復元する {#restore-performance-and-impact-on-tidb-clusters}
 
--   データの復元はスケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 100 MiB/秒です。詳細については、 [パフォーマンスとインパクトを回復する](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)参照してください。
+-   データの復元はスケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 1 GiB/秒です。詳細については、 [パフォーマンスとインパクトを回復する](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)参照してください。
 -   各 TiKV ノードでは、PITR は 30 GiB/h でログ データを復元できます。詳細については、 [PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)参照してください。
 
 ## バックアップstorage {#backup-storage}
@@ -116,8 +116,6 @@ TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS、�
 | 新しい照合順序               | [＃352](https://github.com/pingcap/br/issues/352) | 復元中の`mysql.tidb`テーブルの`new_collation_enabled`変数の値がバックアップ中の値と一致していることを確認してください。一致していないと、データ インデックスに不整合が発生し、チェックサムが合格しない可能性があります。詳細については、 [FAQ - BR が`new_collations_enabled_on_first_bootstrap`不一致を報告するのはなぜですか?](/faq/backup-and-restore-faq.md#why-is-new_collation_enabled-mismatch-reported-during-restore)参照してください。                                                                    |
 | グローバル一時テーブル           |                                                  | データのバックアップと復元には、 BRの v5.3.0 以降のバージョンを使用していることを確認してください。そうでない場合、バックアップされたグローバル一時テーブルの定義でエラーが発生します。                                                                                                                                                                                                                                                                                        |
 | TiDB Lightning物理インポート |                                                  | 上流データベースがTiDB Lightningの物理インポートモードを使用している場合、ログバックアップではデータをバックアップできません。データインポート後にフルバックアップを実行することをお勧めします。詳細については、 [上流データベースが物理インポート モードでTiDB Lightning を使用してデータをインポートすると、ログ バックアップ機能が使用できなくなります。なぜでしょうか?](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why)参照してください。 |
-| ティCDC                 |                                                  | BR v8.2.0 以降: 復元するターゲット クラスターに変更フィードがBR、変更フィード[チェックポイントTS](/ticdc/ticdc-architecture.md#checkpointts)が BackupTS より前の場合、 BR は復元を実行しません。BR バージョン v8.2.0 より前: 復元するターゲット クラスターにアクティブな TiCDC 変更フィードがある場合、 BR は復元を実行しません。                                                                                                                                                                      |
-| ベクトル検索                |                                                  | データのバックアップと復元には、 BRの v8.4.0 以降のバージョンを使用していることを確認してください。1 [ベクトルデータ型](/vector-search-data-types.md)含むテーブルを v8.4.0 より前の TiDB クラスターに復元することはサポートされていません。                                                                                                                                                                                                                                      |
 
 ### バージョンの互換性 {#version-compatibility}
 

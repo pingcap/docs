@@ -3,7 +3,7 @@ title: Scale a TiDB Cluster Using TiUP
 summary: TiUP を使用して TiDB クラスターをスケーリングする方法を学習します。
 ---
 
-# TiUP を使用して TiDBクラスタをスケールする {#scale-a-tidb-cluster-using-tiup}
+# TiUPを使用して TiDBクラスタを拡張する {#scale-a-tidb-cluster-using-tiup}
 
 TiDB クラスターの容量は、オンライン サービスを中断することなく増減できます。
 
@@ -255,7 +255,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 > **注記：**
 >
 > -   同様の手順で TiDB ノードまたは PD ノードを削除できます。
-> -   TiKV およびTiFlashコンポーネントは非同期的にオフラインになり、停止プロセスに時間がかかるため、 TiUP は別の方法でそれらをオフラインにします。詳細については、 [コンポーネントのオフラインプロセスの特別な処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)参照してください。
+> -   TiKV、 TiFlash、および TiDB Binlogコンポーネントは非同期にオフラインになり、停止プロセスに時間がかかるため、 TiUP は別の方法でそれらをオフラインにします。詳細については、 [コンポーネントのオフラインプロセスの特別な処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)参照してください。
 > -   TiKV の PD クライアントは、PD ノードのリストをキャッシュします。現在のバージョンの TiKV には、PD ノードを自動的かつ定期的に更新するメカニズムがあり、TiKV によってキャッシュされた PD ノードのリストが期限切れになる問題を軽減するのに役立ちます。ただし、PD をスケールアウトした後は、スケーリング前に存在していたすべての PD ノードを一度に直接削除することは避けてください。必要に応じて、以前から存在していたすべての PD ノードをオフラインにする前に、PD リーダーを新しく追加された PD ノードに切り替えてください。
 
 1.  ノード ID 情報をビュー。
@@ -266,7 +266,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
         Starting /root/.tiup/components/cluster/v1.12.3/cluster display <cluster-name>
         TiDB Cluster: <cluster-name>
-        TiDB Version: v8.5.0
+        TiDB Version: v8.1.2
         ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
         --              ----         ----        -----                            ------  --------                ----------
         10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -356,6 +356,8 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     ALTER TABLE <db-name>.<table-name> SET tiflash replica 'new_replica_num';
     ```
 
+    このステートメントを実行すると、TiDB はそれに応じて PD [配置ルール](/configure-placement-rules.md)変更または削除します。次に、PD は更新された配置ルールに基づいてデータをスケジュールします。
+
 3.  手順 1 を再度実行し、スケールイン後のTiFlashノードの数を超えるTiFlashレプリカを持つテーブルがないことを確認します。
 
 ### 2.スケールイン操作を実行する {#2-perform-the-scale-in-operation}
@@ -374,6 +376,18 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     ```shell
     tiup cluster scale-in <cluster-name> --node 10.0.1.4:9000
+    ```
+
+3.  削除されたTiFlashノードのステータスをビュー。
+
+    ```shell
+    tiup cluster display <cluster-name>
+    ```
+
+4.  削除されたTiFlashノードのステータスが`Tombstone`になったら、削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`ノードの関連データ ファイルを自動的にクリーンアップします)。
+
+    ```shell
+    tiup cluster prune <cluster-name>
     ```
 
 #### 解決策2. TiFlashノードを手動で削除する {#solution-2-manually-remove-a-tiflash-node}
@@ -410,62 +424,21 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 3.  TiFlashプロセスを停止する前に、 TiFlashノードのストアが消えるか、 `state_name` `Tombstone`になるまで待ちます。
 
-4.  TiFlashデータ ファイルを手動で削除します (場所は、クラスター トポロジ ファイルのTiFlash構成の下の`data_dir`ディレクトリにあります)。
-
-5.  次のコマンドを使用して、クラスター トポロジからダウンするTiFlashノードに関する情報を削除します。
+4.  削除されたノードの情報をTiUPトポロジから削除します (TiUP は`Tombstone`のノードの関連データ ファイルを自動的にクリーンアップします)。
 
     ```shell
-    tiup cluster scale-in <cluster-name> --node <pd_ip>:<pd_port> --force
+    tiup cluster prune <cluster-name>
     ```
 
-> **注記：**
->
-> クラスター内のすべてのTiFlashノードの実行が停止する前に、 TiFlashにレプリケートされたすべてのテーブルがキャンセルされていない場合は、PD 内のレプリケーション ルールを手動でクリーンアップする必要があります。そうしないと、 TiFlashノードを正常に停止できません。
+### 3. クラスターのステータスをビュー {#3-view-the-cluster-status}
 
-PD でレプリケーション ルールを手動でクリーンアップする手順は次のとおりです。
+```shell
+tiup cluster display <cluster-name>
+```
 
-1.  現在の PD インスタンス内のTiFlashに関連するすべてのデータ複製ルールをビュー。
+ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを表示します。
 
-    ```shell
-    curl http://<pd_ip>:<pd_port>/pd/api/v1/config/rules/group/tiflash
-    ```
-
-        [
-          {
-            "group_id": "tiflash",
-            "id": "table-45-r",
-            "override": true,
-            "start_key": "7480000000000000FF2D5F720000000000FA",
-            "end_key": "7480000000000000FF2E00000000000000F8",
-            "role": "learner",
-            "count": 1,
-            "label_constraints": [
-              {
-                "key": "engine",
-                "op": "in",
-                "values": [
-                  "tiflash"
-                ]
-              }
-            ]
-          }
-        ]
-
-2.  TiFlashに関連するすべてのデータ複製ルールを削除します。1 が`id` `table-45-r`あるルールを例にとります。次のコマンドで削除します。
-
-    ```shell
-    curl -v -X DELETE http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/table-45-r
-    ```
-
-3.  クラスターのステータスをビュー。
-
-    ```shell
-    tiup cluster display <cluster-name>
-    ```
-
-    ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを表示します。
-
-スケールアウト後のクラスター トポロジは次のようになります。
+スケーリング後のクラスター トポロジは次のようになります。
 
 | ホストIP    | サービス                               |
 | :------- | :--------------------------------- |

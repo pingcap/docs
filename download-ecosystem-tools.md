@@ -25,7 +25,7 @@ TiDB Toolkit は次のリンクからダウンロードできます。
 
     https://download.pingcap.org/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
 
-リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v8.5.0`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v8.5.0-linux-amd64.tar.gz`です。
+リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v8.1.2`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v8.1.2-linux-amd64.tar.gz`です。
 
 > **注記：**
 >
@@ -42,6 +42,7 @@ TiDB Toolkit は次のリンクからダウンロードできます。
 | [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)        | `tidb-lightning-ctl` <br/>`tidb-lightning-{version}-linux-{arch}.tar.gz`                                                                                            |
 | [TiDB データ移行 (DM)](/dm/dm-overview.md)                               | `dm-worker-{version}-linux-{arch}.tar.gz` <br/>`dm-master-{version}-linux-{arch}.tar.gz` <br/>`dmctl-{version}-linux-{arch}.tar.gz`                                 |
 | [ティCDC](/ticdc/ticdc-overview.md)                                   | `cdc-{version}-linux-{arch}.tar.gz`                                                                                                                                 |
+| [TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)                  | `pump-{version}-linux-{arch}.tar.gz` <br/>`drainer-{version}-linux-{arch}.tar.gz` <br/>`binlogctl` <br/>`reparo`                                                    |
 | [バックアップと復元 (BR)](/br/backup-and-restore-overview.md)                | `br-{version}-linux-{arch}.tar.gz`                                                                                                                                  |
 | [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md) | `sync_diff_inspector`                                                                                                                                               |
 | [PD回復](/pd-recover.md)                                              | `pd-recover-{version}-linux-{arch}.tar`                                                                                                                             |

@@ -258,7 +258,7 @@ INTERVAL (1 MONTH) FIRST PARTITION LESS THAN ('2000-01-01') LAST PARTITION LESS 
 次のテーブルが作成されます:
 
     CREATE TABLE `monthly_report_status` (
-      `report_id` int NOT NULL,
+      `report_id` int(11) NOT NULL,
       `report_status` varchar(20) NOT NULL,
       `report_date` date NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -294,6 +294,11 @@ INTERVAL パーティション化では、パーティションの追加と削�
 -   `RANGE COLUMNS`パーティション分割に`INTERVAL`構文を使用する場合、パーティション キーとして指定できるのは`INTEGER` 、 `DATE` 、または`DATETIME`タイプの単一の列のみです。
 
 ### List パーティショニング {#list-partitioning}
+
+リストパーティションテーブルを作成する前に、次のシステム変数がデフォルト値の`ON`に設定されていることを確認してください。
+
+-   [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)
+-   [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition)
 
 List パーティショニングは、範囲パーティションに似ています。範囲パーティションとは異なり、List パーティショニングでは、各パーティションのすべての行のパーティション式の値が、特定の値セットに含まれます。各パーティションに定義されたこの値セットには、任意の数の値を含めることができますが、重複する値を含めることはできません。値セットを定義するには、 `PARTITION ... VALUES IN (...)`句を使用できます。
 
@@ -1041,7 +1046,7 @@ SHOW CREATE TABLE\G
     *************************** 1. row ***************************
            Table: example
     Create Table: CREATE TABLE `example` (
-      `id` int NOT NULL,
+      `id` int(11) NOT NULL,
       `data` varchar(1024) DEFAULT NULL,
       PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -1081,7 +1086,7 @@ ALTER TABLE members REMOVE PARTITIONING
 既存の非パーティションテーブルをパーティション化したり、既存のパーティションテーブルのパーティション タイプを変更したりするには、次のステートメントを使用します。このステートメントは、すべての行をコピーし、新しいパーティション定義に従ってインデックスをオンラインで再作成します。
 
 ```sql
-ALTER TABLE <table_name> PARTITION BY <new partition type and definitions> [UPDATE INDEXES (<index name> {GLOBAL|LOCAL}[ , <index name> {GLOBAL|LOCAL}...])]
+ALTER TABLE <table_name> PARTITION BY <new partition type and definitions>
 ```
 
 例:
@@ -1100,21 +1105,6 @@ ALTER TABLE member_level PARTITION BY RANGE(level)
  PARTITION pMid VALUES LESS THAN (3),
  PARTITION pHigh VALUES LESS THAN (7)
  PARTITION pMax VALUES LESS THAN (MAXVALUE));
-```
-
-パーティションテーブルをパーティション化する場合、またはすでにパーティションテーブルを再パーティション化する場合は、必要に応じてインデックスをグローバルまたはローカルに更新できます。
-
-```sql
-CREATE TABLE t1 (
-    col1 INT NOT NULL,
-    col2 DATE NOT NULL,
-    col3 INT NOT NULL,
-    col4 INT NOT NULL,
-    UNIQUE KEY uidx12(col1, col2),
-    UNIQUE KEY uidx3(col3)
-);
-
-ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
 ```
 
 ## パーティションの整理 {#partition-pruning}
@@ -1213,7 +1203,6 @@ SELECT fname, lname, region_code, dob
 
     -   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
     -   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
-    -   `DATE`と`DATETIME`列の場合、 `YEAR`と`YEAR_MONTH`時間単位は単調関数と見なされます。10 列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND` 、および`HOUR_MICROSECOND`単調関数と見なされます。パーティション[`EXTRACT(&#x3C;time unit> FROM &#x3C;DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md)では、 `EXTRACT`では`WEEK`時間単位として`TIME`されていないことに注意してください。
 
     たとえば、パーティション式は単純な列です。
 
@@ -1342,7 +1331,7 @@ SELECT store_id, COUNT(department_id) AS c
 
 パーティションの選択は、範囲パーティションやハッシュ パーティションを含むすべてのタイプのテーブル パーティションでサポートされています。ハッシュ パーティションの場合、パーティション名が指定されていない場合は、 `p0` 、 `p1` 、 `p2` 、...、または`pN-1`パーティション名として自動的に使用されます。
 
-`SELECT` in `INSERT ... SELECT`でもパーティション選択を使用できます。
+`SELECT` in `INSERT ... SELECT`ではパーティション選択も使用できます。
 
 ## パーティションの制限と制約 {#restrictions-and-limitations-on-partitions}
 
@@ -1356,11 +1345,7 @@ SELECT store_id, COUNT(department_id) AS c
 
 ### パーティションキー、主キー、一意キー {#partitioning-keys-primary-keys-and-unique-keys}
 
-このセクションでは、パーティション キーと主キーおよび一意キーとの関係について説明します。この関係を規定するルールは次のとおりです。主キーも定義上一意キーであるため、パーティションテーブルのすべての一意キー (主キーを含む) は、テーブルのパーティション式のすべての列を使用する必要があります。
-
-> **注記：**
->
-> [グローバルインデックス](#global-indexes)使用する場合、このルールは無視できます。
+このセクションでは、パーティション キーと主キーおよび一意キーとの関係について説明します。この関係を規定するルールは、次のように表現できます。**テーブルのすべての一意キーは、テーブルのパーティション式のすべての列を使用する必要があります**。これには、テーブルの主キーも含まれます。これは、定義上、一意キーであるためです。
 
 たとえば、次のテーブル作成ステートメントは無効です。
 
@@ -1433,7 +1418,7 @@ PARTITION BY HASH(col1 + col3)
 PARTITIONS 4;
 ```
 
-    ERROR 8264 (HY000): Global Index is needed for index 'col1', since the unique index is not including all partitioning columns, and GLOBAL is not given as IndexOption
+    ERROR 1491 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
 
 `CREATE TABLE`ステートメントは、提案されたパーティション キーに`col1`と`col3`両方が含まれていますが、これらの列はどちらもテーブル上の両方の一意のキーの一部ではないため失敗します。次の変更を行うと、 `CREATE TABLE`ステートメントが有効になります。
 
@@ -1544,98 +1529,10 @@ CREATE TABLE t (a varchar(20), b blob,
 ```
 
 ```sql
-ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index is not including all partitioning columns, and GLOBAL is not given as IndexOption
+ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's partitioning function
 ```
 
-#### グローバルインデックス {#global-indexes}
-
-グローバル インデックスが導入される前は、TiDB は各パーティションにローカル インデックスを作成していた[制限](#partitioning-keys-primary-keys-and-unique-keys) 、データの一意性を確保するために、主キーと一意キーにパーティション キーを含める必要がありました。さらに、複数のパーティションにまたがるデータのクエリを実行する場合、TiDB は各パーティションのデータをスキャンして結果を返す必要がありました。
-
-これらの問題に対処するため、TiDB はバージョン 8.3.0 でグローバル インデックス機能を導入しました。グローバル インデックスは、単一のインデックスでテーブル全体のデータをカバーし、すべてのパーティション キーを含めなくても、主キーと一意のキーがグローバルな一意性を維持できるようにします。さらに、グローバル インデックスは、1 回の操作で複数のパーティションにわたるインデックス データにアクセスできるため、パーティションごとに 1 つのローカル インデックスを検索する代わりに、パーティション化されていないキーのクエリ パフォーマンスが大幅に向上します。
-
-主キーまたは一意キーのグローバル インデックスを作成するには、インデックス定義に`GLOBAL`キーワードを追加します。
-
-> **注記：**
->
-> グローバル インデックスはパーティション管理に影響します。 `DROP` 、 `TRUNCATE` 、および`REORGANIZE PARTITION`操作は、テーブル レベルのグローバル インデックスの更新もトリガーします。つまり、これらの DDL 操作は、対応するテーブルのグローバル インデックスが完全に更新された後にのみ結果を返します。
-
-```sql
-CREATE TABLE t1 (
-    col1 INT NOT NULL,
-    col2 DATE NOT NULL,
-    col3 INT NOT NULL,
-    col4 INT NOT NULL,
-    UNIQUE KEY uidx12(col1, col2) GLOBAL,
-    UNIQUE KEY uidx3(col3)
-)
-PARTITION BY HASH(col3)
-PARTITIONS 4;
-```
-
-前の例では、一意のインデックス`uidx12`グローバル インデックスですが、 `uidx3`通常の一意のインデックスです。
-
-次の例に示すように、**クラスター化インデックスは**グローバル インデックスにはできないことに注意してください。
-
-```sql
-CREATE TABLE t2 (
-    col1 INT NOT NULL,
-    col2 DATE NOT NULL,
-    PRIMARY KEY (col2) CLUSTERED GLOBAL
-) PARTITION BY HASH(col1) PARTITIONS 5;
-```
-
-    ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
-
-理由は、クラスター化インデックスがグローバル インデックスの場合、テーブルはパーティション化されなくなるためです。これは、クラスター化インデックスのキーがパーティション レベルのレコード キーでもあるのに対し、グローバル インデックスはテーブル レベルにあるため、競合が発生するためです。主キーをグローバル インデックスとして設定する必要がある場合は、明示的に非クラスター化インデックスとして定義する必要があります (例: `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL` )。
-
-[`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)出力の`GLOBAL`インデックス オプションによってグローバル インデックスを識別できます。
-
-```sql
-SHOW CREATE TABLE t1\G
-```
-
-           Table: t1
-    Create Table: CREATE TABLE `t1` (
-      `col1` int NOT NULL,
-      `col2` date NOT NULL,
-      `col3` int NOT NULL,
-      `col4` int NOT NULL,
-      UNIQUE KEY `uidx12` (`col1`,`col2`) /*T![global_index] GLOBAL */,
-      UNIQUE KEY `uidx3` (`col3`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-    PARTITION BY HASH (`col3`) PARTITIONS 4
-    1 row in set (0.00 sec)
-
-あるいは、 [`INFORMATION_SCHEMA.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)テーブルをクエリし、出力の`IS_GLOBAL`列を確認することもできます。
-
-```sql
-SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE table_name='t1';
-```
-
-    +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-    | TABLE_SCHEMA | TABLE_NAME | NON_UNIQUE | KEY_NAME | SEQ_IN_INDEX | COLUMN_NAME | SUB_PART | INDEX_COMMENT | Expression | INDEX_ID | IS_VISIBLE | CLUSTERED | IS_GLOBAL |
-    +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-    | test         | t1         |          0 | uidx12   |            1 | col1        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
-    | test         | t1         |          0 | uidx12   |            2 | col2        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
-    | test         | t1         |          0 | uidx3    |            1 | col3        |     NULL |               | NULL       |        2 | YES        | NO        |         0 |
-    +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-    3 rows in set (0.00 sec)
-
-パーティションテーブルをパーティション化する場合、またはすでにパーティションテーブルを再パーティション化する場合、必要に応じてインデックスをグローバル インデックスに更新したり、ローカル インデックスに戻したりできます。
-
-```sql
-ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL);
-```
-
-##### グローバルインデックスの制限 {#limitations-of-global-indexes}
-
--   インデックス定義で`GLOBAL`キーワードが明示的に指定されていない場合、TiDB はデフォルトでローカル インデックスを作成します。
--   キーワード`GLOBAL`と`LOCAL`パーティション テーブルにのみ適用され、パーティション化されていないテーブルには影響しません。つまり、パーティション化されていないテーブルでは、グローバル インデックスとローカル インデックスに違いはありません。
--   `ADD PARTITION`などの DDL 操作`EXCHANGE PARTITION` 、グローバル インデックスの更新をトリガーします。これら`SPLIT PARTITION` DDL 操作の結果は、対応`TRUNCATE PARTITION` `DROP PARTITION` `REORGANIZE PARTITION` `TRUNCATE PARTITION` `EXCHANGE PARTITION`は迅速な DDL 完了を必要と`DROP PARTITION`操作が遅れる可能性があります。対照的に、グローバル インデックスが関係しない場合は、これらの DDL 操作はすぐに完了できます。
--   デフォルトでは、パーティションテーブルの主キーはクラスター化インデックスであり、パーティション キーを含める必要があります。主キーからパーティション キーを除外する必要がある場合は、テーブルの作成時に、主キーを非クラスター化グローバル インデックスとして明示的に指定できます (例: `PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL` )。
--   グローバル インデックスが式列に追加される場合、またはグローバル インデックスがプレフィックス インデックスでもある場合 (たとえば`UNIQUE KEY idx_id_prefix (id(10)) GLOBAL` )、このグローバル インデックスの統計を手動で収集する必要があります。
-
-### 関数に関するパーティションの制限 {#partitioning-limitations-relating-to-functions}
+### 関数に関するパーティション分割の制限 {#partitioning-limitations-relating-to-functions}
 
 パーティション式では、次のリストに示す関数のみが許可されます。
 
@@ -1666,8 +1563,6 @@ ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCA
 ### MySQLとの互換性 {#compatibility-with-mysql}
 
 現在、TiDB は、範囲パーティション、範囲列パーティション、List パーティショニング、List COLUMNS パーティショニング、ハッシュ パーティション、およびキー パーティションをサポートしています。MySQL で使用できるその他のパーティション タイプは、TiDB ではまだサポートされていません。
-
-パーティション管理に関しては、ハッシュパーティションテーブル内のパーティション数の調整、範囲パーティションテーブルの範囲の変更、パーティションのマージなど、下位の実装でデータの移動を必要とする操作は現在サポートされていません。
 
 サポートされていないパーティション タイプの場合、TiDB でテーブルを作成すると、パーティション情報は無視され、警告が報告されて通常の形式でテーブルが作成されます。
 
@@ -1741,9 +1636,13 @@ select * from t;
     +------|------+
     5 rows in set (0.00 sec)
 
+`tidb_enable_list_partition`環境変数は、パーティションテーブル機能を有効にするかどうかを制御します。この変数を`OFF`に設定すると、テーブルの作成時にパーティション情報は無視され、このテーブルは通常のテーブルとして作成されます。
+
+この変数はテーブル作成時にのみ使用されます。テーブル作成後にこの変数の値を変更しても効果はありません。詳細については[システム変数](/system-variables.md#tidb_enable_list_partition-new-in-v50)参照してください。
+
 ### 動的プルーニングモード {#dynamic-pruning-mode}
 
-TiDB は、 `dynamic`または`static`モードのいずれかでパーティション テーブルにアクセスします。v6.3.0 以降では、 `dynamic`モードがデフォルトで使用されます。ただし、動的パーティション分割は、完全なテーブル レベルの統計、つまりグローバル統計が収集された後にのみ有効になります。グローバル統計の収集が完了する前に`dynamic`プルーニング モードを有効にすると、グローバル統計が完全に収集されるまで、TiDB は`static`モードのままになります。グローバル統計の詳細については、 [動的プルーニングモードでパーティションテーブルの統計を収集する](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)参照してください。
+TiDB は、 `dynamic`または`static`モードのいずれかでパーティション テーブルにアクセスします。v6.3.0 以降では、 `dynamic`モードがデフォルトで使用されます。ただし、動的パーティション分割は、完全なテーブル レベルの統計、つまり GlobalStats が収集された後にのみ有効になります。GlobalStats が収集される前は、TiDB は代わりに`static`モードを使用します。GlobalStats の詳細については、 [動的プルーニングモードでパーティションテーブルの統計を収集する](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)参照してください。
 
 ```sql
 set @@session.tidb_partition_prune_mode = 'dynamic'
@@ -1751,9 +1650,9 @@ set @@session.tidb_partition_prune_mode = 'dynamic'
 
 手動の ANALYZE と通常のクエリでは、セッション レベル`tidb_partition_prune_mode`設定が使用されます。バックグラウンドでの`auto-analyze`操作では、グローバル`tidb_partition_prune_mode`設定が使用されます。
 
-`static`モードでは、パーティション テーブルはパーティション レベルの統計を使用します。3 `dynamic`では、パーティション テーブルはテーブル レベルのグローバル統計を使用します。
+`static`モードでは、パーティション テーブルはパーティション レベルの統計を使用します。3 `dynamic`では、パーティション テーブルはテーブル レベルの GlobalStats を使用します。
 
-`static`モードから`dynamic`モードに切り替えるときは、統計を手動で確認して収集する必要があります。これは、 `dynamic`モードに切り替えた後、パーティション テーブルにはパーティション レベルの統計のみがあり、テーブル レベルの統計がないためである。グローバル統計は、次の`auto-analyze`操作でのみ収集されます。
+`static`モードから`dynamic`モードに切り替えるときは、統計を手動で確認して収集する必要があります。これは、 `dynamic`モードに切り替えた後、パーティション テーブルにはパーティション レベルの統計のみがあり、テーブル レベルの統計がないためである。GlobalStats は次の`auto-analyze`操作でのみ収集されます。
 
 ```sql
 set session tidb_partition_prune_mode = 'dynamic';
@@ -1769,7 +1668,7 @@ show stats_meta where table_name like "t";
     +---------+------------+----------------+---------------------+--------------+-----------+
     3 rows in set (0.01 sec)
 
-グローバル`dynamic`プルーニング モードを有効にした後、SQL ステートメントで使用される統計が正しいことを確認するには、テーブルまたはテーブルのパーティションで`analyze`手動でトリガーして、グローバル統計を取得する必要があります。
+グローバル`dynamic`プルーニング モードを有効にした後、SQL ステートメントで使用される統計が正しいことを確認するには、テーブルまたはテーブルのパーティションで`analyze`手動でトリガーして GlobalStats を取得する必要があります。
 
 ```sql
 analyze table t partition p1;
@@ -1859,7 +1758,7 @@ mysql> create table t2 (id int, code int);
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> set @@tidb_partition_prune_mode = 'static';
-Query OK, 0 rows affected, 1 warning (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
 
 mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 0 and t2.id = t1.id;
 +--------------------------------+----------+-----------+------------------------+------------------------------------------------+

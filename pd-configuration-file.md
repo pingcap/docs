@@ -7,7 +7,7 @@ summary: PD 構成ファイルについて学習します。
 
 <!-- markdownlint-disable MD001 -->
 
-PD 構成ファイルは、コマンドライン パラメータよりも多くのオプションをサポートしています。デフォルトの構成ファイルは[ここ](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)あります。
+PD 構成ファイルは、コマンドライン パラメータよりも多くのオプションをサポートしています。デフォルトの構成ファイルは[ここ](https://github.com/pingcap/pd/blob/release-8.1/conf/config.toml)あります。
 
 このドキュメントでは、コマンドライン パラメータに含まれないパラメータについてのみ説明します。コマンドライン パラメータについては[ここ](/command-line-flags-for-pd-configuration.md)確認してください。
 
@@ -195,9 +195,8 @@ pd-serverに関連するコンフィグレーション項目
 ### <code>redact-info-log</code> <span class="version-mark">v5.0 の新機能</span> {#code-redact-info-log-code-span-class-version-mark-new-in-v5-0-span}
 
 -   PDログでログ編集を有効にするかどうかを制御します
--   `true` `"marker"` : `false`
+-   構成値を`true`に設定すると、PD ログでユーザー データが編集されます。
 -   デフォルト値: `false`
--   詳しい使い方については[PD側でのログ編集](/log-redaction.md#log-redaction-in-pd-side)ご覧ください。
 
 ## <code>log</code> {#code-log-code}
 
@@ -266,27 +265,18 @@ pd-serverに関連するコンフィグレーション項目
 ### <code>max-merge-region-size</code> {#code-max-merge-region-size-code}
 
 -   `Region Merge`のサイズ制限を制御します。リージョンのサイズが指定された値より大きい場合、PD はリージョンを隣接する領域と結合しません。
--   デフォルト値: `54` 。v8.4.0 より前では、デフォルト値は`20`です。v8.4.0 以降では、デフォルト値は`54`です。
+-   デフォルト値: `20`
 -   単位: MiB
 
 ### <code>max-merge-region-keys</code> {#code-max-merge-region-keys-code}
 
 -   `Region Merge`キーの上限を指定します。リージョンキーが指定された値より大きい場合、PD はリージョンを隣接するリージョンと結合しません。
--   デフォルト値: `540000` 。v8.4.0 より前では、デフォルト値は`200000`です。v8.4.0 以降では、デフォルト値は`540000`です。
+-   デフォルト値: `200000`
 
 ### <code>patrol-region-interval</code> {#code-patrol-region-interval-code}
 
--   チェッカーがリージョンのヘルス状態を検査する実行頻度を制御します。この値が小さいほど、チェッカーの実行速度が速くなります。通常、この構成を調整する必要はありません。
+-   `replicaChecker`リージョンのヘルス状態をチェックする実行頻度を制御します。この値が小さいほど、 `replicaChecker`実行が速くなります。通常、このパラメータを調整する必要はありません。
 -   デフォルト値: `10ms`
-
-### <code>patrol-region-worker-count</code> <span class="version-mark">v8.5.0 の新機能</span> {#code-patrol-region-worker-count-code-span-class-version-mark-new-in-v8-5-0-span}
-
-> **警告：**
->
-> この構成項目を 1 より大きい値に設定すると、同時チェックが有効になります。これは実験的機能です。本番環境での使用はお勧めしません。この機能は予告なしに変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/tikv/pd/issues)を報告できます。
-
--   リージョンのヘルス状態を検査するときにチェッカーによって作成される同時実行[オペレーター](/glossary.md#operator)の数を制御します。通常、この構成を調整する必要はありません。
--   デフォルト値: `1`
 
 ### <code>split-merge-interval</code> {#code-split-merge-interval-code}
 
@@ -385,11 +375,15 @@ pd-serverに関連するコンフィグレーション項目
 
 ### <code>store-limit-version</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-store-limit-version-code-span-class-version-mark-new-in-v7-1-0-span}
 
--   ストア制限式のバージョンを制御します
+> **警告：**
+>
+> この構成項目を`"v2"`に設定するのは実験的機能です。本番環境での使用はお勧めしません。
+
+-   店舗制限の計算式のバージョンを制御します
 -   デフォルト値: `v1`
 -   値のオプション:
     -   `v1` : v1 モードでは、 `store limit`を手動で変更して、単一の TiKV のスケジュール速度を制限できます。
-    -   `v2` : v2 モードでは、PD が TiKV スナップショットの機能に基づいて動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [ストア制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
+    -   `v2` : (実験的機能 ) v2 モードでは、PD が TiKV スナップショットの機能に基づいて動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [ストア制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
 
 ### <code>enable-joint-consensus</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
 

@@ -40,50 +40,44 @@ CREATE [GLOBAL | SESSION] BINDING [FOR BindableStmt] USING BindableStmt;
 このステートメントは、SQL 実行プランを GLOBAL または SESSION レベルでバインドします。現在、TiDB でサポートされているバインド可能な SQL ステートメント (BindableStmt) には、 `SELECT`のサブクエリを持つ`SELECT` 、 `DELETE` 、 `UPDATE` 、および`INSERT` / `REPLACE`が含まれます。次に例を示します。
 
 ```sql
-CREATE GLOBAL BINDING USING SELECT /*+ use_index(t1, idx_a) */ * FROM t1;
-CREATE GLOBAL BINDING FOR SELECT * FROM t1 USING SELECT /*+ use_index(t1, idx_a) */ * FROM t1;
+CREATE GLOBAL BINDING USING SELECT /*+ use_index(orders, orders_book_id_idx) */ * FROM orders;
+CREATE GLOBAL BINDING FOR SELECT * FROM orders USING SELECT /*+ use_index(orders, orders_book_id_idx) */ * FROM orders;
 ```
 
 > **注記：**
 >
 > バインディングは、手動で追加されたヒントよりも優先されます。したがって、対応するバインディングが存在するときにヒントを含むステートメントを実行すると、オプティマイザの動作を制御するヒントは有効になりません。ただし、他のタイプのヒントは引き続き有効です。
 
-具体的には、これらのステートメントの 2 つのタイプは、構文の競合のため実行プランにバインドできません。次の例を参照してください。
+具体的には、これらのステートメントの 2 つのタイプは、構文の競合のため実行プランにバインドできません。バインドの作成中に構文エラーが報告されます。次の例を参照してください。
 
 ```sql
 -- Type one: Statements that get the Cartesian product by using the `JOIN` keyword and not specifying the associated columns with the `USING` keyword.
 CREATE GLOBAL BINDING for
-    SELECT * FROM t t1 JOIN t t2
+    SELECT * FROM orders o1 JOIN orders o2
 USING
-    SELECT * FROM t t1 JOIN t t2;
+    SELECT * FROM orders o1 JOIN orders o2;
 
 -- Type two: `DELETE` statements that contain the `USING` keyword.
 CREATE GLOBAL BINDING for
-    DELETE FROM t1 USING t1 JOIN t2 ON t1.a = t2.a
+    DELETE FROM users USING users JOIN orders ON users.id = orders.user_id
 USING
-    DELETE FROM t1 USING t1 JOIN t2 ON t1.a = t2.a;
+    DELETE FROM users USING users JOIN orders ON users.id = orders.user_id;
 ```
 
 同等のステートメントを使用することで、構文の競合を回避できます。たとえば、上記のステートメントを次のように書き直すことができます。
 
 ```sql
--- First rewrite of type one statements: Add a `USING` clause for the `JOIN` keyword.
+-- Rewrite of type one statements: Delete the `JOIN` keyword. Replace it with a comma.
 CREATE GLOBAL BINDING for
-    SELECT * FROM t t1 JOIN t t2 USING (a)
+    SELECT * FROM orders o1, orders o2
 USING
-    SELECT * FROM t t1 JOIN t t2 USING (a);
+    SELECT * FROM orders o1, orders o2;
 
--- Second rewrite of type one statements: Delete the `JOIN` keyword.
+-- Rewrite of type two statements: Remove the `USING` keyword from the `DELETE` statement.
 CREATE GLOBAL BINDING for
-    SELECT * FROM t t1, t t2
+    DELETE users FROM users JOIN orders ON users.id = orders.user_id
 USING
-    SELECT * FROM t t1, t t2;
-
--- Rewrite of type two statements: Remove the `USING` keyword from the `delete` statement.
-CREATE GLOBAL BINDING for
-    DELETE t1 FROM t1 JOIN t2 ON t1.a = t2.a
-using
-    DELETE t1 FROM t1 JOIN t2 ON t1.a = t2.a;
+    DELETE users FROM users JOIN orders ON users.id = orders.user_id;
 ```
 
 > **注記：**
@@ -95,15 +89,15 @@ using
 ```sql
 -- The hint takes effect in the following statement.
 CREATE GLOBAL BINDING for
-    INSERT INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1
-using
-    INSERT INTO t1 SELECT /*+ use_index(@sel_1 t2, idx_a) */ * FROM t2 WHERE a > 1 AND b = 1;
+    INSERT INTO orders SELECT * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR)
+USING
+    INSERT INTO orders SELECT /*+ use_index(@sel_1 pre_orders, idx_created) */ * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR);
 
 -- The hint cannot take effect in the following statement.
 CREATE GLOBAL BINDING for
-    INSERT INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1
-using
-    INSERT /*+ use_index(@sel_1 t2, idx_a) */ INTO t1 SELECT * FROM t2 WHERE a > 1 AND b = 1;
+    INSERT INTO orders SELECT * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR)
+USING
+    INSERT /*+ use_index(@sel_1 pre_orders, idx_created) */ INTO orders SELECT * FROM pre_orders WHERE status = 'VALID' AND created <= (NOW() - INTERVAL 1 HOUR);
 ```
 
 実行プラン バインディングを作成するときにスコープを指定しない場合、デフォルトのスコープは SESSION です。TiDB オプティマイザーは、バインドされた SQL ステートメントを正規化し、システム テーブルに格納します。SQL クエリを処理するときに、正規化されたステートメントがシステム テーブル内のバインドされた SQL ステートメントの 1 つと一致し、システム変数`tidb_use_plan_baselines`が`on`に設定されている場合 (デフォルト値は`on` )、TiDB はこのステートメントに対応するオプティマイザー ヒントを使用します。一致可能な実行プランが複数ある場合、オプティマイザーは最もコストのかからないプランを選択してバインドします。
@@ -111,9 +105,9 @@ using
 `Normalization` 、SQL ステートメント内の定数を変数パラメータに変換し、SQL ステートメント内のスペースと改行を標準化した処理で、クエリで参照されるテーブルのデータベースを明示的に指定するプロセスです。次の例を参照してください。
 
 ```sql
-SELECT * FROM t WHERE a >    1
+SELECT * FROM users WHERE balance >    100
 -- After normalization, the above statement is as follows:
-SELECT * FROM test . t WHERE a > ?
+SELECT * FROM bookshop . users WHERE balance > ?
 ```
 
 > **注記：**
@@ -123,11 +117,11 @@ SELECT * FROM test . t WHERE a > ?
 > 例えば：
 >
 > ```sql
-> SELECT * FROM t WHERE a IN (1)
-> SELECT * FROM t WHERE a IN (1,2,3)
+> SELECT * FROM books WHERE type IN ('Novel')
+> SELECT * FROM books WHERE type IN ('Novel','Life','Education')
 > -- After normalization, the above statements are as follows:
-> SELECT * FROM test . t WHERE a IN ( ... )
-> SELECT * FROM test . t WHERE a IN ( ... )
+> SELECT * FROM bookshop . books WHERE type IN ( ... )
+> SELECT * FROM bookshop . books WHERE type IN ( ... )
 > ```
 >
 > 正規化後、長さの異なる`IN`の述語が同じステートメントとして認識されるため、これらすべての述語に適用される 1 つのバインディングを作成するだけで済みます。
@@ -228,25 +222,25 @@ explain SELECT * FROM t1, t2 WHERE t1.id = t2.id;
 
 #### 過去の実行計画に従ってバインディングを作成する {#create-a-binding-according-to-a-historical-execution-plan}
 
-SQL 文の実行計画を履歴実行計画に固定するには、Plan Digest を使用してその履歴実行計画を SQL 文にバインドします。これは、SQL 文に従ってバインドするよりも便利です。また、複数の SQL 文の実行計画を一度にバインドすることもできます。詳細と例については、 [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)参照してください。
+SQL ステートメントの実行プランを履歴実行プランに固定するには、 `plan_digest`使用してその履歴実行プランを SQL ステートメントにバインドします。これは、SQL ステートメントに従ってバインドするよりも便利です。
 
 この機能を使用する場合、次の点に注意してください。
 
 -   この機能は、履歴実行プランに従ってヒントを生成し、生成されたヒントをバインディングに使用します。履歴実行プランは[ステートメント要約表](/statement-summary-tables.md)に保存されるため、この機能を使用する前に、まず[`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304)システム変数を有効にする必要があります。
 -   TiFlashクエリ、3 つ以上のテーブルを含む結合クエリ、およびサブクエリを含むクエリの場合、自動生成されたヒントは適切ではないため、プランが完全にバインドされない可能性があります。このような場合、バインドを作成するときに警告が発生します。
--   履歴実行プランがヒント付きの SQL ステートメント用である場合、ヒントがバインディングに追加されます。たとえば、 `SELECT /*+ max_execution_time(1000) */ * FROM t`実行した後、そのプラン ダイジェストで作成されたバインディングには`max_execution_time(1000)`含まれます。
+-   履歴実行プランがヒント付きの SQL ステートメント用である場合、ヒントがバインディングに追加されます。たとえば、 `SELECT /*+ max_execution_time(1000) */ * FROM t`実行した後、その`plan_digest`で作成されたバインディングには`max_execution_time(1000)`含まれます。
 
 このバインディング メソッドの SQL ステートメントは次のとおりです。
 
 ```sql
-CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOrUserVariableList;
+CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST 'plan_digest';
 ```
 
-上記のステートメントは、プラン ダイジェストを使用して実行プランを SQL ステートメントにバインドします。デフォルトのスコープは SESSION です。作成されたバインディングの適用可能な SQL ステートメント、優先順位、スコープ、および有効条件は、 [SQL文に従って作成されたバインディング](#create-a-binding-according-to-a-sql-statement)と同じです。
+この文は、 `plan_digest`使用して実行プランを SQL 文にバインドします。デフォルトのスコープは SESSION です。作成されたバインドの適用可能な SQL 文、優先順位、スコープ、および有効条件は、 [SQL文に従って作成されたバインディング](#create-a-binding-according-to-a-sql-statement)と同じです。
 
-このバインディング方法を使用するには、まず`statements_summary`で対象の履歴実行プランに対応する Plan Digest を取得し、次に Plan Digest を使用してバインディングを作成する必要があります。詳細な手順は次のとおりです。
+このバインディング方法を使用するには、まず`statements_summary`で対象の履歴実行プランに対応する`plan_digest`取得し、次に`plan_digest`を使用してバインディングを作成する必要があります。詳細な手順は次のとおりです。
 
-1.  `statements_summary`の対象実行プランに対応するプランダイジェストを取得します。
+1.  `statements_summary`の対象実行プランに対応する`plan_digest`取得します。
 
     例えば：
 
@@ -269,9 +263,9 @@ CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOr
                               └─TableFullScan_5 cop[tikv]   10000   table:t, keep order:false, stats:pseudo 0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
               BINARY_PLAN: 6QOYCuQDCg1UYWJsZVJlYWRlcl83Ev8BCgtTZWxlY3Rpb25fNhKOAQoPBSJQRnVsbFNjYW5fNSEBAAAAOA0/QSkAAQHwW4jDQDgCQAJKCwoJCgR0ZXN0EgF0Uh5rZWVwIG9yZGVyOmZhbHNlLCBzdGF0czpwc2V1ZG9qInRpa3ZfdGFzazp7dGltZTo1NjAuOMK1cywgbG9vcHM6MH1w////CQMEAXgJCBD///8BIQFzCDhVQw19BAAkBX0QUg9lcSgBfCAudC5hLCAxKWrmYQAYHOi0gc6hBB1hJAFAAVIQZGF0YTo9GgRaFAW4HDQuMDVtcywgCbYcMWKEAWNvcF8F2agge251bTogMSwgbWF4OiA1OTguNsK1cywgcHJvY19rZXlzOiAwLCBycGNfBSkAMgkMBVcQIDYwOS4pEPBDY29wcl9jYWNoZV9oaXRfcmF0aW86IDAuMDAsIGRpc3RzcWxfY29uY3VycmVuY3k6IDE1fXCwAXj///////////8BGAE=
 
-    この例では、 Plan Digest に対応する実行プランが`4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb`あることがわかります。
+    この例では、 `plan_digest`に対応する実行プランは`4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb`であることがわかります。
 
-2.  Plan Digest を使用してバインディングを作成します。
+2.  `plan_digest`使用してバインディングを作成します。
 
     ```sql
     CREATE BINDING FROM HISTORY USING PLAN DIGEST '4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb';
@@ -308,7 +302,7 @@ SELECT @@LAST_PLAN_FROM_BINDING;
 
 ### バインディングを削除する {#remove-a-binding}
 
-SQL ステートメントまたは SQL ダイジェストに従ってバインドを削除できます。
+SQL ステートメントまたは`sql_digest`に従ってバインドを削除できます。
 
 #### SQL文に従ってバインドを削除する {#remove-a-binding-according-to-a-sql-statement}
 
@@ -332,15 +326,15 @@ explain SELECT * FROM t1,t2 WHERE t1.id = t2.id;
 
 上記の例では、SESSION スコープで削除されたバインディングが、GLOBAL スコープ内の対応するバインディングをシールドします。オプティマイザーは、ステートメントに`sm_join(t1, t2)`ヒントを追加しません`explain`の結果の実行プランの最上位ノードは、このヒントによって MergeJoin に固定されません。代わりに、最上位ノードは、コスト見積もりに従ってオプティマイザーによって個別に選択されます。
 
-#### SQLダイジェストに従ってバインディングを削除する {#remove-a-binding-according-to-sql-digest}
+#### <code>sql_digest</code>に従ってバインディングを削除する {#remove-a-binding-according-to-code-sql-digest-code}
 
-SQL ステートメントに従ってバインドを削除するだけでなく、SQL ダイジェストに従ってバインドを削除することもできます。詳細と例については、 [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)参照してください。
+SQL ステートメントに従ってバインドを削除するだけでなく、 `sql_digest`に従ってバインドを削除することもできます。
 
 ```sql
-DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST StringLiteralOrUserVariableList;
+DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST 'sql_digest';
 ```
 
-このステートメントは、GLOBAL または SESSION レベルで SQL Digest に対応する実行プラン バインディングを削除します。デフォルトのスコープは SESSION です。SQL Digest は[バインディングの表示](#view-bindings)で取得できます。
+このステートメントは、GLOBAL または SESSION レベルで`sql_digest`に対応する実行プラン バインディングを削除します。デフォルトのスコープは SESSION です[バインディングの表示](#view-bindings)で`sql_digest`取得できます。
 
 > **注記：**
 >
@@ -511,7 +505,7 @@ ORDER BY SUM(exec_count) DESC LIMIT 100;                       -- Top 100 high-f
 
 ## データベース間のバインディング {#cross-database-binding}
 
-v7.6.0 以降では、バインディング作成構文でワイルドカード`*`を使用してデータベース名を表すことにより、TiDB でデータベース間バインディングを作成できます。データベース間バインディングを作成する前に、まず[`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)システム変数を有効にする必要があります。
+v7.6.0 以降では、バインディング作成構文でワイルドカード`*`使用してデータベース名を表すことにより、TiDB でデータベース間バインディングを作成できます。データベース間バインディングを作成する前に、まず[`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)システム変数を有効にする必要があります。
 
 クロスデータベース バインディングを使用すると、データが異なるデータベース間で分類および保存され、各データベースが同一のオブジェクト定義を維持し、同様のアプリケーション ロジックを実行するシナリオで、実行プランを修正するプロセスを簡素化できます。次に、一般的な使用例をいくつか示します。
 
@@ -628,7 +622,7 @@ SHOW GLOBAL BINDINGS;
 
 [アップグレード中の実行計画の回帰を防ぐ](#prevent-regression-of-execution-plans-during-an-upgrade)に使用されるこの機能は、キャプチャ条件を満たすクエリをキャプチャし、これらのクエリのバインディングを作成します。
 
-プラン ベースラインとは、オプティマイザが SQL 文を実行するために使用できる承認済みプランのコレクションを指します。通常、TiDB は、プランが適切に実行されることを確認した後にのみ、プランをプラン ベースラインに追加します。このコンテキストでのプランには、オプティマイザが実行プランを再現するために必要なプラン関連の詳細 (SQL プラン識別子、ヒント セット、バインド値、オプティマイザ環境など) がすべて含まれます。
+プラン ベースラインとは、オプティマイザが SQL 文を実行するために使用できる承認済みプランのコレクションを指します。通常、TiDB はプランが適切に実行されることを確認した後にのみ、プランをプラン ベースラインに追加します。このコンテキストでのプランには、オプティマイザが実行プランを再現するために必要なプラン関連の詳細 (SQL プラン識別子、ヒント セット、バインド値、オプティマイザ環境など) がすべて含まれます。
 
 ### キャプチャを有効にする {#enable-capturing}
 

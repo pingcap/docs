@@ -77,6 +77,8 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 > -   削除イベントの場合、Avro はキー部分のみをエンコードします。値の部分は空です。
 > -   挿入イベントの場合、Avro はすべての列データを値部分にエンコードします。
 > -   更新イベントの場合、Avro は値部分に更新されるすべての列データのみをエンコードします。
+>
+> Avro プロトコルは、Update イベントと Delete イベントの古い値をエンコードしません。さらに、削除を識別するために`null`レコードに依存するほとんどの Confluent シンク コネクタ ( `delete.on.null` ) との互換性を保つために、 `enable-tidb-extension`が有効になっている場合でも、Delete イベントには`_tidb_commit_ts`などの拡張情報は含まれません。これらの機能が必要な場合は、Canal-JSON や Debezium などの他のプロトコルの使用を検討してください。
 
 ## TiDB拡張フィールド {#tidb-extension-fields}
 
@@ -157,7 +159,7 @@ dispatchers = [
 
 -   `{{ColumnName}}`列名を示します。
 -   `{{TIDB_TYPE}}` TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
--   `{{AVRO_TYPE}}` [Avro仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
+-   `{{AVRO_TYPE}}` [Avro 仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
 
 | SQL タイプ  | TIDB_タイプ | AVRO_タイプ | 説明                                                                                                    |
 | -------- | -------- | -------- | ----------------------------------------------------------------------------------------------------- |

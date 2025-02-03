@@ -19,6 +19,10 @@ TiFlashは列型storageエンジンであり、徐々に標準的なクラスタ
 | TiFlash        | 1    | 32 VCore 64 GB 2TB (nvme ssd) * 1 | 10.0.1.11                            | デフォルトポート<br/>グローバルディレクトリ構成 |
 | モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB (SSD)       | 10.0.1.10                            | デフォルトポート<br/>グローバルディレクトリ構成 |
 
+> **注記：**
+>
+> インスタンスの IP アドレスは例としてのみ提供されています。実際の展開では、IP アドレスを実際の IP アドレスに置き換えてください。
+
 ### トポロジーテンプレート {#topology-templates}
 
 -   [TiFlashトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)

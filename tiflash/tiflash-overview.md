@@ -25,7 +25,7 @@ TiFlash は、ClickHouse によって効率的に実装されたコプロセッ�
 
 TiFlash は、 TiKV への書き込みをブロックしない低コストで、TiKV ノードのデータのリアルタイム レプリケーションを実行します。同時に、TiKV と同じ読み取り一貫性を提供し、最新のデータが読み取られることを保証しますTiFlashのリージョンレプリカは、TiKV のリージョン レプリカと論理的に同一であり、TiKV のLeaderレプリカと同時に分割および結合されます。
 
-Linux AMD64アーキテクチャでTiFlash を展開するには、CPU が AVX2 命令セットをサポートしている必要があります。1 `grep avx2 /proc/cpuinfo`出力されていることを確認してください。Linux ARM64アーキテクチャでTiFlashを展開するには、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。3 `grep 'crc32' /proc/cpuinfo | grep 'asimd'`出力されていることを確認してください。命令セット拡張を使用することで、TiFlash のベクトル化エンジンはより優れたパフォーマンスを発揮できます。
+Linux AMD64アーキテクチャでTiFlash を展開するには、CPU が AVX2 命令セットをサポートしている必要があります。1 `cat /proc/cpuinfo | grep avx2`出力されていることを確認してください。Linux ARM64アーキテクチャでTiFlashを展開するには、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。3 `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'`出力されていることを確認してください。命令セット拡張を使用することで、TiFlash のベクトル化エンジンはより優れたパフォーマンスを発揮できます。
 
 <CustomContent platform="tidb">
 
@@ -37,9 +37,9 @@ TiFlash はTiDB と TiSpark の両方と互換性があり、これら 2 つの�
 
 現在、データを直接TiFlashに書き込むことはできません。TiFlash はLearnerロールとして TiDB クラスターに接続するため、TiKV にデータを書き込んでからTiFlashに複製する必要があります。TiFlashはテーブル単位でのデータ複製をサポートしていますが、デプロイ後、デフォルトではデータは複製されません。指定したテーブルのデータを複製するには、 [テーブルのTiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)参照してください。
 
-TiFlash には、列型storageモジュール、 `tiflash proxy`の 3 `pd buddy`のコンポーネントがあります。5 `tiflash proxy` Multi-Raft コンセンサス アルゴリズムを使用した通信を担当します。7 `pd buddy` PD と連携して、テーブル単位で TiKV からTiFlashにデータを複製します。
+TiFlash は、列型storageコンポーネントとTiFlashプロキシコンポーネントという 2 つの主要コンポーネントで構成されています。TiFlashTiFlashコンポーネントは、 Multi-Raft コンセンサス アルゴリズムを使用した通信を担当します。
 
-TiDBがTiFlashにレプリカを作成するためのDDLコマンドを受信すると、 `pd buddy`コンポーネントはTiDBのステータスポートを介して複製されるテーブルの情報を取得し、その情報をPDに送信します。次に、PDは`pd buddy`から提供された情報に従って対応するデータスケジューリングを実行します。
+TiFlash内のテーブルのレプリカを作成するための DDL コマンドを受信すると、TiDB は PD 内に対応する[配置ルール](https://docs.pingcap.com/tidb/stable/configure-placement-rules)を自動的に作成し、PD はこれらのルールに基づいて対応するデータのスケジューリングを実行します。
 
 ## 主な特徴 {#key-features}
 
@@ -109,7 +109,7 @@ TiDB を使用して、分析処理のためにTiFlashレプリカを読み取�
 
 <CustomContent platform="tidb">
 
-TPC-H データセットでのデータのインポートからクエリまでのプロセス全体を体験するには、 [TiDB HTAPのクイック スタート](/quick-start-with-htap.md)を参照してください。
+TPC-H データセットでのデータのインポートからクエリまでのプロセス全体を体験するには、 [TiDB HTAPクイック スタート ガイド](/quick-start-with-htap.md)を参照してください。
 
 </CustomContent>
 
@@ -117,7 +117,7 @@ TPC-H データセットでのデータのインポートからクエリまで�
 
 <CustomContent platform="tidb">
 
--   TiFlashノードを使用して新しいクラスターを展開するには、 [TiUP を使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)参照してください。
+-   TiFlashノードを使用して新しいクラスターを展開するには、 [TiUP を使用して TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)参照してください。
 -   デプロイされたクラスターにTiFlashノードを追加するには、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)参照してください。
 -   [TiFlashクラスターを管理](/tiflash/maintain-tiflash.md) 。
 -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) 。

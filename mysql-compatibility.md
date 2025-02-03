@@ -114,7 +114,7 @@ mysql> SELECT _tidb_rowid, id FROM t;
 3 rows in set (0.01 sec)
 ```
 
-示されているように、共有アロケータがあるため、 `id`毎回 2 ずつ増加します。この動作は[MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)では変わり、共有アロケータがないため、数字のスキップは行われません。
+ご覧のとおり、共有アロケータがあるため、 `id`毎回 2 ずつ増加します。この動作は[MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)では変わり、共有アロケータがないため、数字のスキップは行われません。
 
 <CustomContent platform="tidb">
 
@@ -136,13 +136,13 @@ mysql> SELECT _tidb_rowid, id FROM t;
 
 <CustomContent platform="tidb">
 
-TiDB は、パフォーマンス監視メトリックの保存とクエリに[プロメテウスとグラファナ](/tidb-monitoring-api.md)の組み合わせを利用します。TiDB では、パフォーマンス スキーマ テーブルは結果を返しません。
+TiDB は、パフォーマンス監視メトリックの保存とクエリに[プロメテウスとグラファナ](/tidb-monitoring-api.md)の組み合わせを利用します。TiDB では、ほとんどの場合、 [パフォーマンス スキーマ テーブル](/performance-schema/performance-schema.md)結果を返しません。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB Cloudコンソールのクラスター概要ページを確認するか、 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)使用します。パフォーマンス スキーマ テーブルは TiDB で空の結果を返します。
+TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB Cloudコンソールのクラスター概要ページを確認するか、 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)使用します。ほとんどの場合、 [パフォーマンス スキーマ テーブル](/performance-schema/performance-schema.md) TiDB で空の結果を返します。
 
 </CustomContent>
 
@@ -275,7 +275,7 @@ TiDB は、次の点を考慮して名前付きタイムゾーンをサポート
 
 ### 正規表現 {#regular-expressions}
 
-`REGEXP_INSTR()` 、 `REGEXP_LIKE()` 、 `REGEXP_REPLACE()` 、 `REGEXP_SUBSTR()`を含む、MySQL との TiDB 正規表現の互換性については、 [MySQL との正規表現の互換性](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql)参照してください。
+`REGEXP_INSTR()`を含む、 `REGEXP_SUBSTR()`との TiDB 正規表現の`REGEXP_LIKE()`性については、 `REGEXP_REPLACE()` [MySQL との正規表現の互換性](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql)参照してください。
 
 ### 非推奨の機能による非互換性 {#incompatibility-due-to-deprecated-features}
 

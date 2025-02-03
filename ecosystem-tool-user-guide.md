@@ -90,7 +90,7 @@ TiDB Lightningの基本は次のとおりです。
 -   データソース:
     -   Dumplingの出力ファイル
     -   その他の互換性のあるCSVファイル
-    -   Amazon Auroraまたは Apache Hive からエクスポートされた Parquet ファイル
+    -   Amazon Aurora、Apache Hive、またはSnowflakeからエクスポートされたParquetファイル
 -   サポートされている TiDB バージョン: v2.1 以降
 -   Kubernetes サポート: はい。詳細については[TiDB Lightningを使用して Kubernetes 上の TiDB クラスターにデータをすばやく復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)参照してください。
 
@@ -122,6 +122,17 @@ TiCDC の基本は次のとおりです。
 -   出典: TiDB クラスター
 -   対象: TiDB クラスター、MySQL、Kafka、Confluent
 -   サポートされている TiDB バージョン: v4.0.6 以降
+
+### 増分ログレプリケーション - TiDB Binlog {#incremental-log-replication-tidb-binlog}
+
+[TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md) TiDB クラスターのbinlogを収集し、ほぼリアルタイムのデータ複製とバックアップを提供するツールです。TiDB クラスターをプライマリ TiDB クラスターのセカンダリ クラスターにするなど、TiDB クラスター間の増分データ複製に使用できます。
+
+TiDB Binlogの基本は次のとおりです。
+
+-   出典: TiDB クラスター
+-   ターゲット: TiDB クラスター、MySQL、Kafka、または増分バックアップ ファイル
+-   サポートされている TiDB バージョン: v2.1 以降
+-   Kubernetes サポート: はい。詳細については[TiDBBinlogクラスタ操作](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog)と[Kubernetes での TiDBBinlogDrainer構成](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer)参照してください。
 
 ### 同期差分インスペクター {#sync-diff-inspector}
 

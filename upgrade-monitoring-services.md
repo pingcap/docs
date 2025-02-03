@@ -7,7 +7,7 @@ summary: TiDB クラスターの Prometheus、Grafana、および Alertmanager �
 
 TiDB クラスターをデプロイすると、 TiUP はクラスターの監視サービス (Prometheus、Grafana、Alertmanager など) を自動的にデプロイします。このクラスターをスケールアウトすると、 TiUP はTiUP中に新しく追加されたノードの監視構成も自動的に追加します。TiUP によって自動的にデプロイされる監視サービスは、通常、これらのサードパーティ監視サービスの最新バージョンではありません。最新バージョンを使用するには、このドキュメントに従って監視サービスをアップグレードしてください。
 
-クラスターを管理する際、 TiUP は独自の構成を使用して監視サービスの構成を上書きします。構成ファイルを置き換えて監視サービスを直接アップグレードすると、クラスターでの後続のTiUP操作 ( `deploy`など`reload`によってアップグレード`scale-in`され、エラーが発生する可能性があります。Prometheus、 `scale-out` 、および Alertmanager をアップグレードするには、構成ファイルを直接置き換えるのではなく、このドキュメントの手順に従ってください。
+クラスターを管理する際、 TiUP は`reload`の構成`scale-out`使用して監視サービスの構成を上書きします。構成ファイルを置き換えて監視サービスを直接アップグレードすると、クラスターで`deploy`などの後続のTiUP操作によってアップグレードが上書き`scale-in`れ、エラーが発生する可能性があります。Prometheus、Grafana、および Alertmanager をアップグレードするには、構成ファイルを直接置き換えるのではなく、このドキュメントの手順に従ってください。
 
 > **注記：**
 >
@@ -34,7 +34,7 @@ TiDB との互換性を高めるために、TiDB インストール パッケー
 
     > **ヒント：**
     >
-    > リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v8.5.0`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v8.5.0-linux-amd64.tar.gz`です。
+    > リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v8.1.2`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v8.1.2-linux-amd64.tar.gz`です。
 
 2.  抽出したファイルで、 `prometheus-v{version}-linux-amd64.tar.gz`見つけて抽出します。
 
@@ -81,7 +81,7 @@ TiDB との互換性を高めるために、TiDB インストール パッケー
 
     > **ヒント：**
     >
-    > リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v8.5.0`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v8.5.0-linux-amd64.tar.gz`です。
+    > リンク内の`{version}` TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャ`amd64`または`arm64`を示します。たとえば、 `amd64`アーキテクチャの`v8.1.2`のダウンロード リンクは`https://download.pingcap.org/tidb-community-toolkit-v8.1.2-linux-amd64.tar.gz`です。
 
 2.  抽出したファイルで、 `grafana-v{version}-linux-amd64.tar.gz`見つけて抽出します。
 

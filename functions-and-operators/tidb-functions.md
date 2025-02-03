@@ -55,7 +55,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 `CURRENT_RESOURCE_GROUP()`機能は、現在[リソース管理](/tidb-resource-control.md)セッションがバインドされているリソース グループ名を表示するために使用されます。3 機能を有効にすると、SQL ステートメントで使用できるリソースは、バインドされたリソース グループのリソース クォータによって制限されます。
 
-セッションが確立されると、TiDB は、ログイン ユーザーがデフォルトでバインドされているリソース グループにセッションをバインドします。ユーザーがどのリソース グループにもバインドされていない場合、セッションは`default`リソース グループにバインドされます。セッションが確立されると、ユーザーのバインドされているリソース グループが[ユーザーにバインドされたリソース グループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)で変更されたとしても、バインドされているリソース グループはデフォルトでは変更されません。現在のセッションのバインドされているリソース グループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)使用できます。
+セッションが確立されると、TiDB は、ログイン ユーザーがデフォルトでバインドされているリソース グループにセッションをバインドします。ユーザーがどのリソース グループにもバインドされていない場合、セッションは`default`リソース グループにバインドされます。セッションが確立されると、ユーザーのバインドされたリソース グループが[ユーザーにバインドされたリソース グループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)で変更されたとしても、バインドされたリソース グループはデフォルトでは変更されません。現在のセッションのバインドされたリソース グループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)使用できます。
 
 例:
 
@@ -180,7 +180,7 @@ SHOW CREATE TABLE t2\G
        Table: t2
 Create Table: CREATE TABLE `t2` (
   `id` binary(36) NOT NULL,
-  `a` tinyint unsigned NOT NULL,
+  `a` tinyint(3) unsigned NOT NULL,
   `v` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`a`,`id`) /*T![clustered_index] CLUSTERED */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
@@ -522,11 +522,11 @@ SELECT TIDB_VERSION()\G
 
 ```sql
 *************************** 1. row ***************************
-TIDB_VERSION(): Release Version: v8.5.0
+TIDB_VERSION(): Release Version: v8.1.2
 Edition: Community
 Git Commit Hash: 821e491a20fbab36604b36b647b5bae26a2c1418
 Git Branch: HEAD
-UTC Build Time: 2024-12-05 19:16:25
+UTC Build Time: 2024-12-26 19:16:25
 GoVersion: go1.21.10
 Race Enabled: false
 Check Table Before Drop: false

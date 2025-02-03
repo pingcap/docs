@@ -18,7 +18,7 @@ source-id: "mysql-replica-01"
 enable-gtid: false
 
 # Whether to enable relay log.
-enable-relay: false       # Since DM v2.0.2, this configuration item is deprecated. To enable the relay log feature, use the `start-relay` command instead.
+enable-relay: false
 relay-binlog-name: ""     # The file name from which DM-worker starts to pull the binlog.
 relay-binlog-gtid: ""     # The GTID from which DM-worker starts to pull the binlog.
 # relay-dir: "relay-dir"  # The directory used to store relay log. The default value is "relay-dir". This configuration item is marked as deprecated since v6.1 and replaced by a parameter of the same name in the dm-worker configuration.
@@ -68,8 +68,8 @@ from:
 | パラメータ               | 説明                                                                                                                                                                                                            |
 | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `source-id`         | MySQL インスタンス ID を表します。                                                                                                                                                                                        |
-| `enable-gtid`       | GTID を使用してアップストリームからbinlog をプルするかどうかを決定します。デフォルト値は`false`です。通常、 `enable-gtid`手動で設定する必要はありません。ただし、アップストリーム データベースで GTID が有効になっていて、プライマリ/セカンダリ スイッチが必要な場合は、 `enable-gtid` `true`に設定する必要があります。                   |
-| `enable-relay`      | リレー ログ機能を有効にするかどうかを決定します。デフォルト値は`false`です。DM v2.0.2 以降、この構成項目は非推奨です。 [リレーログ機能を有効にする](/dm/relay-log.md#enable-and-disable-relay-log)にするには、代わりに`start-relay`コマンドを使用します。                                         |
+| `enable-gtid`       | GTID を使用してアップストリームからbinlogをプルするかどうかを決定します。デフォルト値は`false`です。通常、 `enable-gtid`手動で設定する必要はありません。ただし、アップストリーム データベースで GTID が有効になっていて、プライマリ/セカンダリ スイッチが必要な場合は、 `enable-gtid` `true`に設定する必要があります。                    |
+| `enable-relay`      | リレー ログ機能を有効にするかどうかを決定します。デフォルト値は`false`です。このパラメータは v5.4 から有効になります。また、 `start-relay`コマンドを使用して[リレーログを動的に有効にする](/dm/relay-log.md#enable-and-disable-relay-log)することもできます。                                         |
 | `relay-binlog-name` | DM-worker がbinlog の取得を開始するファイル名を指定します。たとえば、 `"mysql-bin.000002"` 。これは`enable_gtid`が`false`場合にのみ機能します。このパラメータが指定されていない場合、DM-worker はレプリケートされる最も古いbinlogファイルから取得を開始します。通常、手動設定は必要ありません。                         |
 | `relay-binlog-gtid` | DM-worker がbinlog のプルを開始する GTID を指定します。たとえば、 `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"` 。これは`enable_gtid`が`true`場合にのみ機能します。このパラメータが指定されていない場合、DM-worker はレプリケートされている最新の GTID からプルを開始します。通常、手動構成は必要ありません。 |
 | `relay-dir`         | リレー ログ ディレクトリを指定します。                                                                                                                                                                                          |

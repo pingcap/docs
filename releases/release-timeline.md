@@ -11,15 +11,13 @@ summary: TiDB リリースのタイムラインについて学びます。
 
 | バージョン                                            | リリース日      |
 | :----------------------------------------------- | :--------- |
-| [8.5.0](/releases/release-8.5.0.md)              | 2024-12-19 |
+| [7.5.5](/releases/release-7.5.5.md)              | 2024-12-31 |
+| [8.1.2](/releases/release-8.1.2.md)              | 2024-12-26 |
 | [7.1.6](/releases/release-7.1.6.md)              | 2024-11-21 |
-| [8.4.0-DMR](/releases/release-8.4.0.md)          | 2024-11-11 |
 | [7.5.4](/releases/release-7.5.4.md)              | 2024-10-15 |
 | [6.5.11](/releases/release-6.5.11.md)            | 2024-09-20 |
 | [8.1.1](/releases/release-8.1.1.md)              | 2024-08-27 |
-| [8.3.0-DMR](/releases/release-8.3.0.md)          | 2024-08-22 |
 | [7.5.3](/releases/release-7.5.3.md)              | 2024-08-05 |
-| [8.2.0-DMR](/releases/release-8.2.0.md)          | 2024-07-11 |
 | [6.5.10](/releases/release-6.5.10.md)            | 2024-06-20 |
 | [7.5.2](/releases/release-7.5.2.md)              | 2024-06-13 |
 | [8.1.0](/releases/release-8.1.0.md)              | 2024-05-24 |

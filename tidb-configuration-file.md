@@ -9,7 +9,7 @@ summary: コマンドライン オプションに関係しない TiDB 構成フ�
 
 # TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドライン パラメータよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)をダウンロードして、名前を`config.toml`に変更することができます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションについてのみ説明します。
+TiDB 構成ファイルは、コマンドライン パラメータよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.1/pkg/config/config.toml.example)をダウンロードして、名前を`config.toml`に変更することができます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションについてのみ説明します。
 
 > **ヒント：**
 >
@@ -41,7 +41,8 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 -   タイプ: 整数
 -   デフォルト値: `1000`
 -   最小値: `1`
--   最大値: `1048576`
+-   最大値（64 ビット プラットフォーム）: `18446744073709551615`
+-   最大値（32 ビット プラットフォーム）: `4294967295`
 
 ### <code>temp-dir</code> <span class="version-mark">v6.3.0 の新機能</span> {#code-temp-dir-code-span-class-version-mark-new-in-v6-3-0-span}
 
@@ -183,7 +184,7 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 ### <code>deprecate-integer-display-length</code> {#code-deprecate-integer-display-length-code}
 
 -   この構成項目が`true`に設定されている場合、整数型の表示幅は非推奨になります。
--   デフォルト値: `true` 。v8.5.0 より前では、デフォルト値は`false`です。
+-   デフォルト値: `false`
 
 ### <code>enable-tcp4-only</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-tcp4-only-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -379,7 +380,7 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 -   `"gzip"`のオプション: `""`
 -   デフォルト値は`""`で、圧縮なしを意味します。gzip 圧縮を有効にするには、この値を`"gzip"`に設定します。圧縮を有効にすると、 [`slow-query-file`](#slow-query-file)や[`general-log-file`](#general-log-file-new-in-v800)など、すべてのログ ファイルが影響を受けます。
 
-## Security {#security}
+## 安全 {#security}
 
 セキュリティに関するコンフィグレーション項目。
 
@@ -521,7 +522,7 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 
 -   TiDB における単一トランザクションのサイズ制限。
 -   デフォルト値: `104857600` (バイト単位)
--   1 回のトランザクションで、キー値レコードの合計サイズはこの値を超えることはできません。このパラメータの最大値は`1099511627776` (1 TB) です。
+-   1 回のトランザクションで、キー値レコードの合計サイズはこの値を超えることはできません。このパラメータの最大値は`1099511627776` (1 TB) です。下流のコンシューマー Kafka にサービスを提供するためにbinlog を使用している場合、このパラメータの値は`1073741824` (1 GB) 以下にする必要があります。これは、1 GB が Kafka が処理できる単一のメッセージ サイズの上限であるためです。それ以外の場合、この制限を超えるとエラーが返されます。
 -   TiDB v6.5.0 以降のバージョンでは、この構成は推奨されなくなりました。トランザクションのメモリサイズはセッションのメモリ使用量に累積され、セッションメモリしきい値を超えると[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)変数が有効になります。以前のバージョンとの互換性を保つために、以前のバージョンから TiDB v6.5.0 以降にアップグレードする場合、この構成は次のように機能します。
     -   この設定が設定されていないか、デフォルト値 ( `104857600` ) に設定されている場合、アップグレード後にトランザクションのメモリサイズがセッションのメモリ使用量に累積され、 `tidb_mem_quota_query`変数が有効になります。
     -   この設定がデフォルト（ `104857600` ）になっていない場合でも、設定は有効であり、単一トランザクションのサイズを制御する動作はアップグレードの前後で変更されません。つまり、トランザクションのメモリサイズは`tidb_mem_quota_query`変数によって制御されません。
@@ -598,8 +599,8 @@ TiDB 構成ファイルは、コマンドライン パラメータよりも多�
 ### <code>stats-load-concurrency</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-stats-load-concurrency-code-span-class-version-mark-new-in-v5-4-0-span}
 
 -   TiDB 同期ロード統計機能が同時に処理できる列の最大数。
--   デフォルト値: `0` 。v8.2.0 より前では、デフォルト値は`5`です。
--   現在、有効な値の範囲は`[0, 128]`です。値`0`は自動モードを意味し、サーバーの構成に基づいて同時実行性を自動的に調整します。v8.2.0 より前では、最小値は`1`です。
+-   デフォルト値: `5`
+-   現在、有効な値の範囲は`[1, 128]`です。
 
 ### <code>stats-load-queue-size</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-stats-load-queue-size-code-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -709,41 +710,25 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 -   TiDB ノードと TiKV ノード間の RPC 接続の`keepalive`時間間隔。指定された時間間隔内にネットワーク パケットがない場合、gRPC クライアントは TiKV に対して`ping`コマンドを実行して、TiKV が稼働しているかどうかを確認します。
 -   デフォルト: `10`
--   最小値: `1`
 -   単位: 秒
 
 ### <code>grpc-keepalive-timeout</code> {#code-grpc-keepalive-timeout-code}
 
 -   TiDB ノードと TiKV ノード間の RPC `keepalive`チェックのタイムアウト。
 -   デフォルト値: `3`
--   最小値: `0.05`
 -   単位: 秒
 
 ### <code>grpc-compression-type</code> {#code-grpc-compression-type-code}
 
--   TiDB ノードから TiKV ノードへのデータ転送に使用する圧縮タイプを指定します。デフォルト値は`"none"`で、圧縮なしを意味します。gzip 圧縮を有効にするには、この値を`"gzip"`に設定します。
+-   TiDB ノードと TiKV ノード間のデータ転送に使用する圧縮タイプを指定します。デフォルト値は`"none"`で、圧縮なしを意味します。gzip 圧縮を有効にするには、この値を`"gzip"`に設定します。
 -   デフォルト値: `"none"`
 -   `"gzip"`のオプション: `"none"`
-
-> **注記：**
->
-> TiKV ノードから TiDB ノードに返される応答メッセージの圧縮アルゴリズムは、TiKV 構成項目[`grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)によって制御されます。
 
 ### <code>commit-timeout</code> {#code-commit-timeout-code}
 
 -   トランザクションコミットを実行する際の最大タイムアウト。
 -   デフォルト値: `41s`
 -   この値は、 Raft選択タイムアウトの 2 倍より大きく設定する必要があります。
-
-### <code>batch-policy</code> <span class="version-mark">v8.3.0 の新機能</span> {#code-batch-policy-code-span-class-version-mark-new-in-v8-3-0-span}
-
--   TiDB から TiKV へのリクエストのバッチ処理戦略を制御します。TiDB は、リクエストを TiKV に送信する際、常に現在の待機キューにあるリクエストを`BatchCommandsRequest`にカプセル化し、パケットとして TiKV に送信します。これが基本的なバッチ処理戦略です。TiKV の負荷スループットが高い場合、TiDB は`batch-policy`の値に基づいて、基本的なバッチ処理後に追加の期間待機するかどうかを決定します。この追加のバッチ処理により、より多くのリクエストを単一の`BatchCommandsRequest`にカプセル化されたできます。
--   デフォルト値: `"standard"`
--   値のオプション:
-    -   `"basic"` : 動作は v8.3.0 より前のバージョンと一致しており、 [`tikv-client.max-batch-wait-time`](#max-batch-wait-time)が 0 より大きく、TiKV の負荷が[`tikv-client.overload-threshold`](#overload-threshold)の値を超える場合にのみ、TiDB は追加のバッチ処理を実行します。
-    -   `"standard"` : TiDB は、最近のリクエストの到着時間間隔に基づいてリクエストを動的にバッチ処理します。高スループットのシナリオに適しています。
-    -   `"positive"` : TiDB は常に追加のバッチ処理を実行します。これは、最適なパフォーマンスを実現するための高スループットのテスト シナリオに適しています。ただし、低負荷のシナリオでは、この戦略により不要なバッチ処理の待機時間が発生し、パフォーマンスが低下する可能性があります。
-    -   `"custom{...}"` : バッチ戦略パラメータのカスタマイズを許可します。このオプションは TiDB の内部テスト用であり、一般的な使用には**推奨されません**。
 
 ### <code>max-batch-size</code> {#code-max-batch-size-code}
 
@@ -781,7 +766,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 > **警告：**
 >
-> v8.2.0 以降、この構成項目は非推奨になりました。RPC 要求を TiKV に送信するときは、新しいバージョンのリージョンレプリカ セレクターがデフォルトで使用されます。
+> この構成パラメータは将来のバージョンでは廃止される可能性があります。値を変更し**ないでください**。
 
 -   RPC リクエストを TiKV に送信するときに、リージョンレプリカ セレクターの新しいバージョンを使用するかどうか。
 -   デフォルト値: `true`
@@ -810,6 +795,37 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 -   ハッシュに対応するスロットの数は、2 の指数倍数に自動的に調整されます。各スロットは 32 バイトのメモリを占有します。設定が小さすぎると、データの書き込みが比較的広い範囲をカバーするシナリオ (データのインポートなど) で実行速度が低下し、パフォーマンスが低下する可能性があります。
 -   デフォルト値: `2048000`
+
+## binlog {#binlog}
+
+TiDB Binlogに関連する構成。
+
+### <code>enable</code> {#code-enable-code}
+
+-   binlog を有効または無効にします。
+-   デフォルト値: `false`
+
+### <code>write-timeout</code> {#code-write-timeout-code}
+
+-   Pumpにbinlog を書き込むタイムアウト。この値を変更することはお勧めしません。
+-   デフォルト: `15s`
+-   単位: 秒
+
+### <code>ignore-error</code> {#code-ignore-error-code}
+
+-   binlog をPumpに書き込むプロセスで発生したエラーを無視するかどうかを決定します。この値を変更することはお勧めしません。
+-   デフォルト値: `false`
+-   値が`true`に設定され、エラーが発生すると、TiDB はbinlog の書き込みを停止し、監視項目`tidb_server_critical_error_total`のカウントに`1`追加します。値が`false`に設定されている場合、 binlog の書き込みは失敗し、TiDB サービス全体が停止します。
+
+### <code>binlog-socket</code> {#code-binlog-socket-code}
+
+-   binlogがエクスポートされるネットワーク アドレス。
+-   デフォルト値: &quot;&quot;
+
+### <code>strategy</code> {#code-strategy-code}
+
+-   binlog をエクスポートする際のPump選択の戦略。現在は、 `hash`と`range`方法のみがサポートされています。
+-   デフォルト値: `range`
 
 ## 状態 {#status}
 
@@ -849,7 +865,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 ### deadlock-history-collect-retryable {#deadlock-history-collect-retryable}
 
--   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロック エラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)参照してください。
+-   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロックエラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)参照してください。
 -   デフォルト値: `false`
 
 ### pessimistic-auto-commit<span class="version-mark">v6.0.0 の新機能</span> {#pessimistic-auto-commit-span-class-version-mark-new-in-v6-0-0-span}
@@ -954,13 +970,6 @@ TiDB サービスのステータスに関連するコンフィグレーション
 -   可能な値: `OFF` 、 `ON`
 -   この設定の値はシステム変数[`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl-new-in-v630)の値を初期化します。
 -   v6.3.0 より前では、この構成は`run-ddl`で設定されます。
-
-### <code>tidb_enable_stats_owner</code> <span class="version-mark">v8.4.0 の新機能</span> {#code-tidb-enable-stats-owner-code-span-class-version-mark-new-in-v8-4-0-span}
-
--   この構成は、対応する TiDB インスタンスが[自動統計更新](/statistics.md#automatic-update)タスクを実行できるかどうかを制御します。
--   デフォルト値: `true`
--   可能な値: `true` 、 `false`
--   この構成の値により、システム変数[`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840)の値が初期化されます。
 
 ### <code>tidb_stmt_summary_enable_persistent</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-tidb-stmt-summary-enable-persistent-code-span-class-version-mark-new-in-v6-6-0-span}
 

@@ -1,5 +1,6 @@
 ---
-title: TiDB Cloud
+title: TiDB Cloud Documentation
+aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
 summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提供する、完全に管理された Database-as-a-Service (DBaaS) です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供します。
@@ -11,7 +12,7 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 
 [TiDB Cloudを選ぶ理由](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
 
-[アーキテクチャ](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
+[重要な概念](https://docs.pingcap.com/tidbcloud/key-concepts)
 
 [FAQ](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq)
 
@@ -19,11 +20,13 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 
 <LearningPath label="Try" icon="cloud5">
 
-[TiDB Cloud を試してみる](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
+[TiDB Cloud Serverless を試してみる](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
 
 [TiDB + AI を試してみる](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python)
 
 [HTAPを試してみる](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
+
+[TiDB Cloud CLI を試してみる](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
 
 [概念実証](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
 
@@ -70,6 +73,8 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 [Amazon Aurora MySQLから](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
 
 [Amazon S3またはGCSから](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
+
+[TiDBセルフマネージドから](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
 
 [CSVファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
@@ -145,11 +150,11 @@ summary: TiDB Cloud は、 TiDB の優れた機能すべてをクラウドに提
 
 <LearningPath label="Reference" icon="cloud-dev">
 
+[SQL リファレンス](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
+
 [システム変数](https://docs.pingcap.com/tidbcloud/system-variables)
 
 [リリースノート](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)
-
-[SQL リファレンス](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 
 </LearningPath>
 

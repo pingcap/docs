@@ -5,6 +5,10 @@ summary: TiDB Cloudのサポート チームに連絡する方法について説
 
 # TiDB Cloudサポート {#tidb-cloud-support}
 
+> **注記：**
+>
+> TiDB Cloud は、次世代のサポート サービスである**Connected Care を****2025 年 2 月 17 日**に開始する予定です。詳細については、 [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)および[コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)参照してください。
+
 [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**アイコンには、ドキュメント、対話型チュートリアル、自分のペースで進められるトレーニング、サポート エントリなど、 TiDB Cloudのすべてのヘルプとサポート情報が統合されています。
 
 ## PoC、デモ、無料トライアルのクレジットをリクエストする {#request-poc-demo-or-free-trial-credits}

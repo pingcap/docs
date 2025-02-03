@@ -5,19 +5,25 @@ summary: TiUP を使用して TiDB をアップグレードする方法を学び
 
 # TiUP を使用して TiDB をアップグレードする {#upgrade-tidb-using-tiup}
 
-このドキュメントは、次のバージョンから TiDB v8.5.0 にアップグレードする場合に適用されます: v6.1.x、v6.5.x、v7.1.x、v7.5.x、v8.1.x、v8.2.0、v8.3.0、および v8.4.0
+このドキュメントは、次のアップグレード パスを対象としています。
+
+-   TiDB 4.0 バージョンから TiDB 8.1 にアップグレードします。
+-   TiDB 5.0-5.4 バージョンから TiDB 8.1 にアップグレードします。
+-   TiDB 6.0-6.6 から TiDB 8.1 にアップグレードします。
+-   TiDB 7.0-7.6 から TiDB 8.1 にアップグレードします。
+-   TiDB 8.0 から TiDB 8.1 にアップグレードします。
 
 > **警告：**
 >
-> 1.  v8.4.0 以降、TiDB は CentOS 7 および Red Hat Enterprise Linux 7 をサポートしなくなりました。Rocky Linux 9.1 以降を使用することをお勧めします。CentOS 7 または Red Hat Enterprise Linux 7 で実行されている TiDB クラスターを v8.4.0 以降にアップグレードすると、クラスターが使用できなくなります。TiDB をアップグレードする前に、オペレーティング システムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。
-> 2.  TiFlash を5.3 より前のバージョンから 5.3 以降にオンラインでアップグレードすることはできません。代わりに、まず以前のバージョンのすべてのTiFlashインスタンスを停止してから、クラスターをオフラインでアップグレードする必要があります。他のコンポーネント (TiDB や TiKV など) がオンライン アップグレードをサポートしていない場合は、 [オンラインアップグレード](#online-upgrade)の警告の手順に従ってください。
-> 3.  アップグレード プロセス中に DDL ステートメントを実行**しないでください**。そうしないと、未定義の動作の問題が発生する可能性があります。
-> 4.  クラスター内で DDL ステートメントが実行されているときは、TiDB クラスターをアップグレード**しないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに実行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合は、クラスターをアップグレードする前に、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
-> 5.  アップグレード前の TiDB バージョンが 7.1.0 以降の場合、前述の警告 3 と 4 は無視できます。詳細については、 [TiDB スムーズ アップグレードの使用に関する制限](/smooth-upgrade-tidb.md#limitations)参照してください。
-> 6.  TiUP を使用して TiDB クラスターをアップグレードする前に、必ず[ユーザー操作の制限](/smooth-upgrade-tidb.md#limitations-on-user-operations)お読みください。
+> 1.  TiFlash を5.3 より前のバージョンから 5.3 以降にオンラインでアップグレードすることはできません。代わりに、まず以前のバージョンのすべてのTiFlashインスタンスを停止してから、クラスターをオフラインでアップグレードする必要があります。他のコンポーネント (TiDB や TiKV など) がオンライン アップグレードをサポートしていない場合は、 [オンラインアップグレード](#online-upgrade)の警告の手順に従ってください。
+> 2.  アップグレード プロセス中に DDL ステートメントを実行**しないでください**。そうしないと、未定義の動作の問題が発生する可能性があります。
+> 3.  クラスター内で DDL ステートメントが実行されているときは、TiDB クラスターをアップグレード**しないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに実行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合は、クラスターをアップグレードする前に、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
+> 4.  アップグレード前の TiDB バージョンが 7.1.0 以降の場合、前述の警告 2 と 3 は無視できます。詳細については、 [TiDB スムーズ アップグレードの使用に関する制限](/smooth-upgrade-tidb.md#limitations)参照してください。
+> 5.  TiUP を使用して TiDB クラスターをアップグレードする前に、必ず[ユーザー操作の制限](/smooth-upgrade-tidb.md#limitations-on-user-operations)お読みください。
 
 > **注記：**
 >
+> -   アップグレードするクラスターが v3.1 またはそれ以前のバージョン (v3.0 または v2.1) の場合、v8.1.0 またはそれ以降の v8.1.x バージョンへの直接アップグレードはサポートされていません。最初にクラスターを v4.0 にアップグレードしてから、ターゲットの TiDB バージョンにアップグレードする必要があります。
 > -   アップグレードするクラスターが v6.2 より前の場合、一部のシナリオではクラスターを v6.2 以降のバージョンにアップグレードすると、アップグレードが停止する可能性があります。 [問題を解決する方法](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions)を参照してください。
 > -   TiDB ノードは、構成項目[`server-version`](/tidb-configuration-file.md#server-version)の値を使用して現在の TiDB バージョンを確認します。したがって、予期しない動作を回避するには、TiDB クラスターをアップグレードする前に、値`server-version`を空に設定するか、現在の TiDB クラスターの実際のバージョンに設定する必要があります。
 > -   [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)構成項目を`ON`に設定すると、 TiDB の起動時間が長くなり、起動タイムアウトやアップグレードの失敗が発生する可能性があります。 この問題を回避するには、 TiUPの待機タイムアウトを長く設定することをお勧めします。
@@ -46,7 +52,13 @@ summary: TiUP を使用して TiDB をアップグレードする方法を学び
 ## アップグレードの注意事項 {#upgrade-caveat}
 
 -   TiDB は現在、アップグレード後のバージョンのダウングレードや以前のバージョンへのロールバックをサポートしていません。
--   TiCDC、 TiFlash、およびその他のコンポーネントのバージョンのアップグレードをサポートします。
+-   TiDB Ansibleを使用して管理されているv4.0クラスターの場合、 [TiUP (v4.0) を使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup)に従って新しい管理のためにクラスターをTiUP （ `tiup cluster` ）にインポートする必要があります。その後、このドキュメントに従ってクラスターをv8.1.2にアップグレードできます。
+-   v3.0 より前のバージョンを v8.1.2 に更新するには:
+    1.  [TiDB アンシブル](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible)使用してこのバージョンを 3.0 に更新します。
+    2.  TiUP （ `tiup cluster` ）を使用してTiDB Ansible設定をインポートします。
+    3.  [TiUP (v4.0) を使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup)に従って 3.0 バージョンを 4.0 に更新します。
+    4.  このドキュメントに従ってクラスターを v8.1.2 にアップグレードします。
+-   TiDB Binlog、TiCDC、 TiFlash、およびその他のコンポーネントのバージョンのアップグレードをサポートします。
 -   TiFlash をv6.3.0 より前のバージョンから v6.3.0 以降のバージョンにアップグレードする場合、CPU が Linux AMD64アーキテクチャの AVX2 命令セットと Linux ARM64アーキテクチャの ARMv8 命令セットアーキテクチャをサポートしている必要があることに注意してください。詳細については、 [v6.3.0 リリースノート](/releases/release-6.3.0.md#others)の説明を参照してください。
 -   異なるバージョンの詳細な互換性の変更については、各バージョンの[リリースノート](/releases/release-notes.md)参照してください。対応するリリース ノートの「互換性の変更」セクションに従って、クラスター構成を変更します。
 -   クラスターを v5.3 より前のバージョンから v5.3 以降のバージョンに更新する場合、デフォルトでデプロイされた Prometheus によって生成されるアラートの時間形式が変更されることに注意してください。この形式の変更は、Prometheus v2.27.1 から導入されています。詳細については、 [プロメテウスコミット](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)参照してください。
@@ -57,7 +69,13 @@ summary: TiUP を使用して TiDB をアップグレードする方法を学び
 
 ### ステップ1: 互換性の変更を確認する {#step-1-review-compatibility-changes}
 
-TiDB v8.5.0 リリース ノートの[互換性の変更](/releases/release-8.5.0.md#compatibility-changes)確認してください。アップグレードに影響する変更がある場合は、それに応じて対処してください。
+TiDB リリース ノートで互換性の変更を確認してください。変更がアップグレードに影響する場合は、それに応じて対処してください。
+
+以下は、v8.0.0 から現在のバージョン (v8.1.2) にアップグレードするときに知っておく必要がある互換性の変更点を示しています。v7.6.0 以前のバージョンから現在のバージョンにアップグレードする場合は、対応する[リリースノート](/releases/release-notes.md)の中間バージョンで導入された互換性の変更点も確認する必要がある可能性があります。
+
+-   TiDB v8.1.0 [互換性の変更](/releases/release-8.1.0.md#compatibility-changes)
+-   TiDB v8.1.1 [互換性の変更](/releases/release-8.1.1.md#compatibility-changes)
+-   TiDB v8.1.2 [リリースノート](/releases/release-8.1.2.md)
 
 ### ステップ2: TiUPまたはTiUPオフラインミラーをアップグレードする {#step-2-upgrade-tiup-or-tiup-offline-mirror}
 
@@ -122,7 +140,7 @@ tiup update cluster
 > 次のいずれかの状況に該当する場合は、この手順をスキップしてください。
 >
 > -   元のクラスターの構成パラメータを変更していません。または、 `tiup cluster`使用して構成パラメータを変更しましたが、それ以上の変更は必要ありません。
-> -   アップグレード後、変更されていない構成項目に対して v8.5.0 のデフォルトのパラメータ値を使用します。
+> -   アップグレード後、変更されていない構成項目に対して v8.1.2 のデフォルトのパラメータ値を使用します。
 
 1.  トポロジファイルを編集するには、 `vi`編集モードに入ります。
 
@@ -133,6 +151,10 @@ tiup update cluster
 2.  [トポロジー](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)構成テンプレートの形式を参照して、トポロジ ファイルの`server_configs`セクションに変更するパラメータを入力します。
 
 3.  変更後、 <kbd>:</kbd> + <kbd>w</kbd> + <kbd>q</kbd>と入力して変更を保存し、編集モードを終了します。変更を確認するには、 <kbd>Y</kbd>と入力します。
+
+> **注記：**
+>
+> クラスターを v6.6.0 にアップグレードする前に、v4.0 で変更したパラメータが v8.1.2 と互換性があることを確認してください。詳細については、 [TiKVコンフィグレーションファイル](/tikv-configuration-file.md)参照してください。
 
 ### ステップ4: クラスターのDDLとバックアップのステータスを確認する {#step-4-check-the-ddl-and-backup-status-of-the-cluster}
 
@@ -176,10 +198,10 @@ tiup cluster check <cluster-name> --cluster
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-たとえば、クラスターを v8.5.0 にアップグレードする場合は、次のようにします。
+たとえば、クラスターを v8.1.2 にアップグレードする場合は、次のようにします。
 
 ```shell
-tiup cluster upgrade <cluster-name> v8.5.0
+tiup cluster upgrade <cluster-name> v8.1.2
 ```
 
 > **注記：**
@@ -191,6 +213,8 @@ tiup cluster upgrade <cluster-name> v8.5.0
 > -   安定したパフォーマンスを維持するには、インスタンスを停止する前に、TiKV インスタンス内のすべてのリーダーが排除されていることを確認してください。1 `--transfer-timeout` `--transfer-timeout 3600` (単位: 秒) などのより大きな値に設定できます。
 >
 > -   TiFlash をv5.3.0 より前のバージョンから v5.3.0 以降にアップグレードするには、 TiFlash を停止してからアップグレードする必要があり、 TiUP のバージョンは v1.12.0 より前である必要があります。詳細については、 [TiUPを使用してTiFlashをアップグレードする](/tiflash-upgrade-guide.md#upgrade-tiflash-using-tiup)参照してください。
+>
+> -   TiDB Binlog を使用してクラスターにローリング更新を適用するときは、新しいクラスター化インデックス テーブルを作成しないようにしてください。
 
 #### アップグレード中にコンポーネントのバージョンを指定する {#specify-the-component-version-during-upgrade}
 
@@ -223,7 +247,7 @@ tiup cluster upgrade -h | grep "version"
     tiup cluster stop <cluster-name>
     ```
 
-2.  オフライン アップグレードを実行するには、 `upgrade`コマンドを`--offline`オプションとともに使用します。 `<cluster-name>`にはクラスターの名前を入力し、 `<version>`にはアップグレードするバージョン ( `v8.5.0`など) を入力します。
+2.  オフライン アップグレードを実行するには、 `upgrade`コマンドを`--offline`オプションとともに使用します。 `<cluster-name>`にはクラスターの名前を入力し、 `<version>`にはアップグレードするバージョン ( `v8.1.2`など) を入力します。
 
     ```shell
     tiup cluster upgrade <cluster-name> <version> --offline
@@ -245,7 +269,7 @@ tiup cluster display <cluster-name>
 
     Cluster type:       tidb
     Cluster name:       <cluster-name>
-    Cluster version:    v8.5.0
+    Cluster version:    v8.1.2
 
 ## FAQ {#faq}
 
@@ -295,7 +319,7 @@ v6.2.0 以降、TiDB では、 [並行DDLフレームワーク](/ddl-introductio
 
 ### アップグレード中にエビクト リーダーが長時間待機しました。この手順をスキップして迅速にアップグレードするにはどうすればよいでしょうか。 {#the-evict-leader-has-waited-too-long-during-the-upgrade-how-to-skip-this-step-for-a-quick-upgrade}
 
-`--force`指定できます。その場合、アップグレード中に PD リーダーの転送と TiKV リーダーの削除のプロセスがスキップされます。クラスターは直接再起動されてバージョンが更新されるため、オンラインで実行されるクラスターに大きな影響を与えます。次のコマンドでは、 `<version>`アップグレードするバージョンです (例: `v8.5.0` 。
+`--force`指定できます。その場合、アップグレード中に PD リーダーの転送と TiKV リーダーの削除のプロセスがスキップされます。クラスターは直接再起動されてバージョンが更新されるため、オンラインで実行されるクラスターに大きな影響を与えます。次のコマンドでは、 `<version>`アップグレードするバージョンです (例: `v8.1.2` 。
 
 ```shell
 tiup cluster upgrade <cluster-name> <version> --force
@@ -306,5 +330,5 @@ tiup cluster upgrade <cluster-name> <version> --force
 TiUP を使用して対応するバージョンの`ctl`コンポーネントをインストールすることで、ツールのバージョンをアップグレードできます。
 
 ```shell
-tiup install ctl:v8.5.0
+tiup install ctl:v8.1.2
 ```
