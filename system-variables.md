@@ -2875,6 +2875,10 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_evolve_plan_baselines <span class="version-mark">New in v4.0</span>
 
+> **Warning:**
+>
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
