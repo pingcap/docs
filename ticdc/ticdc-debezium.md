@@ -418,7 +418,7 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.tableChanges.table.columns.length | Number | The length of the column. |
 | payload.tableChanges.table.columns.scale | Number | The scale of the column. |
 | payload.tableChanges.table.columns.position | Number | The position of the column. |
-| payload.tableChanges.table.columns.optional | Boolean | Indicates whether the column is not null. |
+| payload.tableChanges.table.columns.optional | Boolean | Indicates whether the column is optional. When it is `true`, the column is optional. |
 | schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the column of table changes.   |
 | schema.name     | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.SchemaChangeValue"` format. |
 | schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
