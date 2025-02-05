@@ -193,29 +193,6 @@ tidb_decode_binary_plan(binary_plan):
 | └─Selection_6       | 3323.33  | 5383000.00 | cop[tikv] |               | lt(test.t.a, 1)                 |
 |   └─TableFullScan_5 | 10000.00 | 4884000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo  |
 
-*************************** 2. row ***************************
-                          SQL_DIGEST: e46ac1d144fbf88c80d4eb9eeb43e8c57d92ed6cb7a6afbbe37a3f7651fa9446
-                            SQL_TEXT: select a from t where a=? and b=?
-                           STMT_TYPE: Select
-                          PARSE_USER: root
-                         PLAN_DIGEST: 88a275584ffbf1f6ae20629c677efecc8dc2bb3ec02f8a5859323d7755a4ff22
-                         BINARY_PLAN: 5AKwCuECCg5UYWJsZVJlYWRlcl8xMRKPAgoMUHJvamVjdGlvbl81EsgBCgxTZWxlCRAUMTASagoPBTRMRnVsbFNjYW5fOSEAAAAAiKFSQSkBCeAAiMNAOAJAAkoLCgkKBHRlc3QSAXRSHmtlZXAgb3JkZXI6ZmFsc2UsIHN0YXRzOnBzZXVkb3D///8JAgQBeAkIDP///wEFWTAkcFZBKXsUrkfheoQ/AVkQUiBlcSgBWCAudC5hLCAxKSwdEQBiARFaTgAM6lkQAEZOAAAIEUtaNgAYhEEHaxXvFx2EJAFAAVIRZGF0YTouKgFWPwA=
-                             BINDING: 
-                             OPT_ENV: 88676ae6596aa2968e2ddd45ec0756ca71e7ccc3f3d16f6f3e4db4737335af2c
-                        PARSE_VALUES: (1, 1)
-                            MEM_SIZE: 19630
-                          EXECUTIONS: 7
-                      PROCESSED_KEYS: 0
-                          TOTAL_KEYS: 0
-                         SUM_LATENCY: 9134791
-                           LOAD_TIME: 2024-12-05 15:41:56
-                    LAST_ACTIVE_TIME: 2024-12-05 15:42:02
-tidb_decode_binary_plan(binary_plan): 
-| id                    | estRows  | estCost    | task      | access object | operator info                     |
-| TableReader_11        | 0.01     | 392133.35  | root      |               | data:Projection_5                 |
-| └─Projection_5        | 0.01     | 5882000.00 | cop[tikv] |               | test.t.a                          |
-|   └─Selection_10      | 0.01     | 5882000.00 | cop[tikv] |               | eq(test.t.a, 1), eq(test.t.b, 1)  |
-|     └─TableFullScan_9 | 10000.00 | 4884000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo    |
 ```
 
 ## Diagnostics of Prepared Plan Cache
