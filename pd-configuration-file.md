@@ -517,7 +517,7 @@ The following are the configuration items about the [Request Unit (RU)](/tidb-re
 #### `read-base-cost`
 
 + Basis factor for conversion from a read request to RU
-+ Default value: 0.25
++ Default value: 0.125
 
 #### `write-base-cost`
 
