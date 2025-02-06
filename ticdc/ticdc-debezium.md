@@ -13,7 +13,7 @@ When you use Kafka as the downstream sink, specify the `protocol` field as `debe
 
 The Debezium protocol supports the following types of events:
 
-- DDL event: represents a DDL change record. The DDL event is sent after an upstream DDL statement is successfully executed. It is sent to the MQ Partition with the index being 0.
+- DDL event: represents a DDL change record. After the upstream DDL statement is successfully executed, the DDL event is sent to every Message Queue (MQ) partition.
 
 - DML event: represents a row data change record. The DML event is sent when a row change occurs. It contains the information about the row after the change occurs.
 
@@ -400,7 +400,7 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.ts_ms     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
 | payload.ddl    | String   | The SQL statement of the DDL event.     |
 | payload.databaseName     | String   | The name of the database where the event occurs.     |
-| payload.source.commit_ts     | Number  | The `CommitTs` identifier when TiCDC generates this message.       |
+| payload.source.commit_ts     | Number  | The `CommitTs` value of the event.       |
 | payload.source.db     | String   | The name of the database where the event occurs.    |
 | payload.source.table     | String  |  The name of the table where the event occurs.   |
 | payload.tableChanges | Array | A structured representation of the entire table schema after the schema change. The `tableChanges` field contains an array that includes entries for each column of the table. Because the structured representation presents data in JSON or Avro format, consumers can easily read messages without first processing them through a DDL parser. |
@@ -413,7 +413,7 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.tableChanges.table.columns.jdbcType | Number | The jdbc type of the column. |
 | payload.tableChanges.table.columns.comment | String | The comment of the column. |
 | payload.tableChanges.table.columns.defaultValueExpression | String | The default value of the column. |
-| payload.tableChanges.table.columns.enumValues | String | The enumeration values of the column. The format is `ENUM ('e1', 'e2')` or `SET ('e1', 'e2')`. |
+| payload.tableChanges.table.columns.enumValues | String | The enumeration values of the column. The format is `[ 'e1', 'e2' ]`. |
 | payload.tableChanges.table.columns.charsetName | String | The character set of the column. |
 | payload.tableChanges.table.columns.length | Number | The length of the column. |
 | payload.tableChanges.table.columns.scale | Number | The scale of the column. |
@@ -770,7 +770,7 @@ The key fields of the preceding JSON data are explained as follows:
 |:----------|:-------|:-------------------------------------------------------|
 | payload.op        | String | The type of the change event. `"m"` indicates an watermark event.  |
 | payload.ts_ms     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
-| payload.source.commit_ts     | Number  | The `CommitTs` identifier when TiCDC generates this message.       |
+| payload.source.commit_ts     | Number  | The `CommitTs` value of the event.      |
 | payload.source.db     | String   | The name of the database where the event occurs.    |
 | payload.source.table     | String  |  The name of the table where the event occurs.   |
 | schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |
