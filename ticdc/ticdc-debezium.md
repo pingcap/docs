@@ -419,7 +419,7 @@ The key fields of the preceding JSON data are explained as follows:
 | payload.tableChanges.table.columns.scale | Number | The scale of the column. |
 | payload.tableChanges.table.columns.position | Number | The position of the column. |
 | payload.tableChanges.table.columns.optional | Boolean | Indicates whether the column is optional. When it is `true`, the column is optional. |
-| schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the column of table changes.   |
+| schema.fields     | JSON   | The type information of each field in the payload, including the schema information of columns in the changed table.   |
 | schema.name     | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.SchemaChangeValue"` format. |
 | schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | schema.type     | String  | The data type of the field. |
@@ -796,7 +796,7 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - TiCDC print the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060).
 
-- Debezium converts charsetName to "utf8mb4" when column COLLATE is "utf8_unicode_ci" and CHARACTER is null, but TiCDC does not.
+- Debezium converts `charsetName` to `"utf8mb4"` when the column collation is `"utf8_unicode_ci"` and the character set is null, but TiCDC does not.
 
 - Debezium escapes ENUM elements, but TiCDC does not. For example, Debezium encodes ENUM elements ('c', 'd', 'g,''h') to ('c','d','g,\'\'h').
 
