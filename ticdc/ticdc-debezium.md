@@ -579,7 +579,7 @@ The key fields of the preceding JSON data are explained as follows:
 | schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | schema.type    | String  | The data type of the field.                                      |
 
-### WATERMARK
+### WATERMARK event
 
 TiCDC encodes a WATERMARK event into a Kafka message, with both the key and value encoded in the Debezium format.
 
