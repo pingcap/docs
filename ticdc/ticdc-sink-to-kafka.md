@@ -14,14 +14,14 @@ Create a replication task by running the following command:
 ```shell
 cdc cli changefeed create \
     --server=http://10.0.10.25:8300 \
-    --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1" \
+    --sink-uri="kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1" \
     --changefeed-id="simple-replication-task"
 ```
 
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2023-12-21T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
+Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2023-11-28T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
 - `--server`: The address of any TiCDC server in the TiCDC cluster.
@@ -62,8 +62,8 @@ The following are descriptions of sink URI parameters and values that can be con
 
 | Parameter/Parameter value               | Description                                                        |
 | :------------------ | :------------------------------------------------------------ |
-| `127.0.0.1`          | The IP address of the downstream Kafka services.                                 |
-| `9092`               | The port for the downstream Kafka.                                          |
+| `host`          | The IP address of the downstream Kafka services.                                 |
+| `port`               | The port for the downstream Kafka.                                          |
 | `topic-name` | Variable. The name of the Kafka topic. |
 | `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
