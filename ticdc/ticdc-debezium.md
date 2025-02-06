@@ -62,13 +62,13 @@ TiCDC encodes a DDL event into a Kafka message, with both the key and value enco
 
 The fields in the key only include the database name. The fields are explained as follows:
 
-| Field            | Type    | Description                                                                 |
-|:------------------|:--------|:----------------------------------------------------------------------------|
-| payload        | JSON    | The information about database name. |
-| schema.fields  | JSON    | The type information of each field in the payload. |
-| schema.type    | String  | The data type of the field.                                      |
-| schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
-| schema.version   | String  | The schema version.                                 |
+| Field            | Type    | Description                                         |
+|:------------------|:--------|:------------------------------------------------|
+| `payload`        | JSON    | The information about database name. |
+| `schema.fields`  | JSON    | The type information of each field in the payload. |
+| `schema.type`    | String  | The data type of the field.                                      |
+| `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| `schema.version`   | String  | The schema version.                                 |
 
 #### Value format
 
@@ -397,32 +397,32 @@ The key fields of the preceding JSON data are explained as follows:
 
 | Field      | Type   | Description                                            |
 |:----------|:-------|:-------------------------------------------------------|
-| payload.ts_ms     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
-| payload.ddl    | String   | The SQL statement of the DDL event.     |
-| payload.databaseName     | String   | The name of the database where the event occurs.     |
-| payload.source.commit_ts     | Number  | The `CommitTs` value of the event.       |
-| payload.source.db     | String   | The name of the database where the event occurs.    |
-| payload.source.table     | String  |  The name of the table where the event occurs.   |
-| payload.tableChanges | Array | A structured representation of the entire table schema after the schema change. The `tableChanges` field contains an array that includes entries for each column of the table. Because the structured representation presents data in JSON or Avro format, consumers can easily read messages without first processing them through a DDL parser. |
-| payload.tableChanges.type     | String   | Describes the kind of change. The value is one of the following: `CREATE`, indicating table created; `ALTER`, indicating table modified; `DROP`, indicating table deleted. |
-| payload.tableChanges.id     | String   | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of `<old>` and `<new>` table names. |
-| payload.tableChanges.table.defaultCharsetName | string   | The character set of the table where the event occurs. |
-| payload.tableChanges.table.primaryKeyColumnNames | string   | List of columns that compose the table's primary key. |
-| payload.tableChanges.table.columns | Array   | Metadata for each column in the changed table. |
-| payload.tableChanges.table.columns.name | String   | The name of the column. |
-| payload.tableChanges.table.columns.jdbcType | Number | The jdbc type of the column. |
-| payload.tableChanges.table.columns.comment | String | The comment of the column. |
-| payload.tableChanges.table.columns.defaultValueExpression | String | The default value of the column. |
-| payload.tableChanges.table.columns.enumValues | String | The enumeration values of the column. The format is `[ 'e1', 'e2' ]`. |
-| payload.tableChanges.table.columns.charsetName | String | The character set of the column. |
-| payload.tableChanges.table.columns.length | Number | The length of the column. |
-| payload.tableChanges.table.columns.scale | Number | The scale of the column. |
-| payload.tableChanges.table.columns.position | Number | The position of the column. |
-| payload.tableChanges.table.columns.optional | Boolean | Indicates whether the column is optional. When it is `true`, the column is optional. |
-| schema.fields     | JSON   | The type information of each field in the payload, including the schema information of columns in the changed table.   |
-| schema.name     | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.SchemaChangeValue"` format. |
-| schema.optional | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
-| schema.type     | String  | The data type of the field. |
+| `payload.ts_ms`     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
+| `payload.ddl`    | String   | The SQL statement of the DDL event.     |
+| `payload.databaseName`     | String   | The name of the database where the event occurs.     |
+| `payload.source.commit_ts`     | Number  | The `CommitTs` value of the event.       |
+| `payload.source.db`     | String   | The name of the database where the event occurs.    |
+| `payload.source.table`     | String  |  The name of the table where the event occurs.   |
+| `payload.tableChanges` | Array | A structured representation of the entire table schema after the schema change. The `tableChanges` field contains an array that includes entries for each column of the table. Because the structured representation presents data in JSON or Avro format, consumers can easily read messages without first processing them through a DDL parser. |
+| `payload.tableChanges.type`     | String   | Describes the kind of change. The value is one of the following: `CREATE`, indicating table created; `ALTER`, indicating table modified; `DROP`, indicating table deleted. |
+| `payload.tableChanges.id`     | String   | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of `<old>` and `<new>` table names. |
+| `payload.tableChanges.table.defaultCharsetName` | string   | The character set of the table where the event occurs. |
+| `payload.tableChanges.table.primaryKeyColumnNames` | string   | List of columns that compose the table's primary key. |
+| `payload.tableChanges.table.columns` | Array   | Metadata for each column in the changed table. |
+| `payload.tableChanges.table.columns.name` | String   | The name of the column. |
+| `payload.tableChanges.table.columns.jdbcType` | Number | The JDBC type of the column. |
+| `payload.tableChanges.table.columns.comment` | String | The comment of the column. |
+| `payload.tableChanges.table.columns.defaultValueExpression` | String | The default value of the column. |
+| `payload.tableChanges.table.columns.enumValues` | String | The enumeration values of the column. The format is `[ 'e1', 'e2' ]`. |
+| `payload.tableChanges.table.columns.charsetName` | String | The character set of the column. |
+| `payload.tableChanges.table.columns.length` | Number | The length of the column. |
+| `payload.tableChanges.table.columns.scale` | Number | The scale of the column. |
+| `payload.tableChanges.table.columns.position` | Number | The position of the column. |
+| `payload.tableChanges.table.columns.optional` | Boolean | Indicates whether the column is optional. When it is `true`, the column is optional. |
+| `schema.fields`     | JSON   | The type information of each field in the payload, including the schema information of columns in the changed table.   |
+| `schema.name`     | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.SchemaChangeValue"` format. |
+| `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| `schema.type`     | String  | The data type of the field. |
 
 ### DML event
 
@@ -567,17 +567,17 @@ The key fields of the preceding JSON data are explained as follows:
 
 | Field      | Type   | Description                                            |
 |:----------|:-------|:-------------------------------------------------------|
-| payload.op        | String | The type of the change event. `"c"` indicates an `INSERT` event, `"u"` indicates an `UPDATE` event, and `"d"` indicates a `DELETE` event.  |
-| payload.ts_ms     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
-| payload.before    | JSON   | The data value before the change event of a statement. For `"c"` events, the value of the `before` field is `null`.     |
-| payload.after     | JSON   | The data value after the change event of a statement. For `"d"` events, the value of the `after` field is `null`.     |
-| payload.source.commit_ts     | Number  | The `CommitTs` value of the event.       |
-| payload.source.db     | String   | The name of the database where the event occurs.    |
-| payload.source.table     | String  |  The name of the table where the event occurs.   |
-| schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |
-| schema.name    | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Envelope"` format. |
-| schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
-| schema.type    | String  | The data type of the field.                                      |
+| `payload.op`        | String | The type of the change event. `"c"` indicates an `INSERT` event, `"u"` indicates an `UPDATE` event, and `"d"` indicates a `DELETE` event.  |
+| `payload.ts_ms`     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
+| `payload.before`    | JSON   | The data value before the change event of a statement. For `"c"` events, the value of the `before` field is `null`.     |
+| `payload.after`     | JSON   | The data value after the change event of a statement. For `"d"` events, the value of the `after` field is `null`.     |
+| `payload.source.commit_ts`     | Number  | The `CommitTs` value of the event.       |
+| `payload.source.db`     | String   | The name of the database where the event occurs.    |
+| `payload.source.table`     | String  |  The name of the table where the event occurs.   |
+| `schema.fields`     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |
+| `schema.name`    | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Envelope"` format. |
+| `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| `schema.type`    | String  | The data type of the field.                                      |
 
 ### WATERMARK event
 
@@ -601,7 +601,7 @@ The fields are explained as follows:
 
 | Field            | Type    | Description                                                                 |
 |:------------------|:--------|:----------------------------------------------------------------------------|
-| schema.name   | String  | The name of the schema, in the `"{cluster-name}.watermark.Key"` format. |
+| `schema.name`   | String  | The name of the schema, in the `"{cluster-name}.watermark.Key"` format. |
 
 #### Value format
 
@@ -768,15 +768,15 @@ The key fields of the preceding JSON data are explained as follows:
 
 | Field      | Type   | Description                                            |
 |:----------|:-------|:-------------------------------------------------------|
-| payload.op        | String | The type of the change event. `"m"` indicates an watermark event.  |
-| payload.ts_ms     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
-| payload.source.commit_ts     | Number  | The `CommitTs` value of the event.      |
-| payload.source.db     | String   | The name of the database where the event occurs.    |
-| payload.source.table     | String  |  The name of the table where the event occurs.   |
-| schema.fields     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |
-| schema.name    | String  | The name of the schema, in the `"{cluster-name}.watermark.Envelope"` format. |
-| schema.optional| Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
-| schema.type    | String  | The data type of the field.          |
+| `payload.op`        | String | The type of the change event. `"m"` indicates an watermark event.  |
+| `payload.ts_ms`     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
+| `payload.source.commit_ts`     | Number  | The `CommitTs` value of the event.      |
+| `payload.source.db`     | String   | The name of the database where the event occurs.    |
+| `payload.source.table`     | String  |  The name of the table where the event occurs.   |
+| `schema.fields`     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |
+| `schema.name`    | String  | The name of the schema, in the `"{cluster-name}.watermark.Envelope"` format. |
+| `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
+| `schema.type`    | String  | The data type of the field.          |
 
 ### Data type mapping
 
