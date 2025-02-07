@@ -1895,7 +1895,7 @@ Referenced in:
 - [SET RESOURCE GROUP](/sql-statements/sql-statement-set-resource-group.md)
 - [System Variables](/system-variables.md#tidb_enable_resource_control-new-in-v660)
 - [TiKV Configuration File](/tikv-configuration-file.md)
-- [Use Resource Control to Achieve Resource Group Limitation](/tidb-resource-control-ru-groups.md)
+- [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
 - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)

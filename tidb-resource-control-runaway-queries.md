@@ -10,13 +10,15 @@ A runaway query is a query that consumes more time or resources than expected. T
 - Starting from v7.2.0, the resource control feature introduces the management of runaway queries. You can set criteria for a resource group to identify runaway queries and automatically take actions to prevent them from exhausting resources and affecting other queries. You can manage runaway queries for a resource group by including the `QUERY_LIMIT` field in [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) or [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
 - Starting from v7.3.0, the resource control feature introduces manual management of runaway watches, enabling quick identification of runaway queries for a given SQL statement or Digest. You can execute the statement [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) to manually manage the runaway queries watch list in the resource group.
 
+For more information about the resource control feature, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
+
 ## `QUERY_LIMIT` parameters
 
 If a query exceeds any of the following limits, it is identified as a runaway query:
 
-- `EXEC_ELAPSED`: checks whether the query execution time exceeds the limit, this rule applies to read and write DML.
-- `PROCESSED_KEYS`: checks whether the number of keys processed by the Coprocessor exceeds the limit, this rule applies only to read statements.
-- `RU`: checks whether the total number of read and write RUs consumed by the statement exceeds the limit, this rule applies only to read statements.
+- `EXEC_ELAPSED`: checks whether the query execution time exceeds the limit. This rule applies to read and write DML statements.
+- `PROCESSED_KEYS`: checks whether the number of keys processed by the Coprocessor exceeds the limit. This rule only applies to read statements.
+- `RU`: checks whether the total number of read and write RUs consumed by the statement exceeds the limit. This rule only applies to read statements.
 
 Supported operations (`ACTION`):
 
@@ -49,7 +51,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 
 > **Note:**
 >
-> If you want to strictly limit runaway queries to a specific resource group, it is recommended to use `SWITCH_GROUP` together with the [`QUERY WATCH`](/tidb-resource-control-runaway-queries.md#query-watch-parameters) statement. Because `QUERY_LIMIT` only triggers the corresponding `ACTION` operation when the query meets the criteria, `SWITCH_GROUP` might not be able to switch the query to the target resource group in a timely manner in such scenarios.
+> If you want to strictly limit runaway queries to a specific resource group, it is recommended to use `SWITCH_GROUP` together with the [`QUERY WATCH`](#query-watch-parameters) statement. Because `QUERY_LIMIT` only triggers the corresponding `ACTION` operation when the query meets the criteria, `SWITCH_GROUP` might not be able to switch the query to the target resource group in a timely manner in such scenarios.
 
 ## Examples
 
