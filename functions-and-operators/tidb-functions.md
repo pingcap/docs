@@ -36,7 +36,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See [using resource control to achieve resource isolation](/tidb-resource-control-ru-groups.md). |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. See [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md). |
 | [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
