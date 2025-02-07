@@ -1,5 +1,5 @@
 ---
-title: Managing Queries with Excessive Resource Consumption (Runaway Queries)
+title: Manage Queries That Consume More Resources Than Expected (Runaway Queries)
 summary: Introduces how to control and degrade queries with excessive resource consumption (Runaway Queries) through resource management capabilities.
 ---
 
