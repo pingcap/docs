@@ -132,7 +132,7 @@ The parameters are as follows:
     QUERY WATCH REMOVE 1;
     ```
 
-# Observability
+## Observability
 
 You can get more information about runaway queries from the following system tables and `INFORMATION_SCHEMA`:
 
