@@ -413,7 +413,7 @@ The key fields of the preceding JSON data are explained as follows:
 | `payload.tableChanges.table.columns.jdbcType` | Number | The JDBC type of the column. |
 | `payload.tableChanges.table.columns.comment` | String | The comment of the column. |
 | `payload.tableChanges.table.columns.defaultValueExpression` | String | The default value of the column. |
-| `payload.tableChanges.table.columns.enumValues` | String | The enumeration values of the column. The format is `[ 'e1', 'e2' ]`. |
+| `payload.tableChanges.table.columns.enumValues` | String | The enumeration values of the column. The format is `['e1', 'e2']`. |
 | `payload.tableChanges.table.columns.charsetName` | String | The character set of the column. |
 | `payload.tableChanges.table.columns.length` | Number | The length of the column. |
 | `payload.tableChanges.table.columns.scale` | Number | The scale of the column. |
