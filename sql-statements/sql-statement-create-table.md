@@ -128,7 +128,7 @@ PlacementPolicyOption ::=
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
-The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored. `ENGINE_ATTRIBUTE` are parsed but always return the `ERROR 3981 (HY000): Storage engine does not support ENGINE_ATTRIBUTE` error. This option is reserved for future use.
+The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored. `ENGINE_ATTRIBUTE` is parsed but always returns the `ERROR 3981 (HY000): Storage engine does not support ENGINE_ATTRIBUTE` error. This option is reserved for future use.
 
 | Options | Description | Example |
 | ---------- | ---------- | ------- |
