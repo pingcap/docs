@@ -17,7 +17,7 @@ The Debezium protocol supports the following types of events:
 
 - DML event: represents a row data change record. The DML event is sent when a row change occurs. It contains the information about the row after the change occurs.
 
-- WATERMARK event: represents a special time point. It indicates that the events received before this point are complete. The WATERMARK event applies only to the TiDB extension field and takes effect when you set `enable-tidb-extension` to `true` in `sink-uri`.
+- WATERMARK event: represents a special time point. It indicates that the events received before this point are complete. The WATERMARK event applies only to the TiDB extension field and takes effect when you set [`enable-tidb-extension`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) to `true` in `sink-uri`.
 
 The configuration example for using the Debezium message format is as follows:
 
@@ -404,7 +404,7 @@ The key fields of the preceding JSON data are explained as follows:
 | `payload.source.db`     | String   | The name of the database where the event occurs.    |
 | `payload.source.table`     | String  |  The name of the table where the event occurs.   |
 | `payload.tableChanges` | Array | A structured representation of the entire table schema after the schema change. The `tableChanges` field contains an array that includes entries for each column of the table. Because the structured representation presents data in JSON or Avro format, consumers can easily read messages without first processing them through a DDL parser. |
-| `payload.tableChanges.type`     | String   | Describes the kind of change. The value is one of the following: `CREATE`, indicating table created; `ALTER`, indicating table modified; `DROP`, indicating table deleted. |
+| `payload.tableChanges.type`     | String   | Describes the kind of change. The value is one of the following: `CREATE`, indicating that the table is created; `ALTER`, indicating that the table is modified; `DROP`, indicating that the table is deleted. |
 | `payload.tableChanges.id`     | String   | Full identifier of the table that was created, altered, or dropped. In the case of a table rename, this identifier is a concatenation of `<old>` and `<new>` table names. |
 | `payload.tableChanges.table.defaultCharsetName` | string   | The character set of the table where the event occurs. |
 | `payload.tableChanges.table.primaryKeyColumnNames` | string   | List of columns that compose the table's primary key. |
@@ -792,7 +792,7 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - In TiCDC, the BLOB, TEXT, GEOMETRY, or JSON column does not have a default value.
 
-- Debezium FLOAT data convert "5.61" to "5.610000133514404", but TiCDC does not.
+- Debezium FLOAT data convert `"5.61"` to `"5.610000133514404"`, but TiCDC does not.
 
 - TiCDC print the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060).
 
@@ -800,4 +800,4 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - Debezium escapes ENUM elements, but TiCDC does not. For example, Debezium encodes ENUM elements ('c', 'd', 'g,''h') to ('c','d','g,\'\'h').
 
-- TiCDC converts the default value of TIME like '1000-00-00 01:00:00.000' to "1000-00-00", but Debezium does not.
+- TiCDC converts the default value of TIME like `'1000-00-00 01:00:00.000'` to `"1000-00-00"`, but Debezium does not.
