@@ -33,6 +33,11 @@ Starting from v7.4.0, the resource control feature supports controlling TiFlash 
 
 </CustomContent>
 
+For information on how to manage background tasks and handle resource-intensive queries (Runaway Queries), see the following documents:
+
+- [Use Resource Control to Managing Background Tasks](/tidb-resource-control-background-tasks.md)
+- [Managing Runaway Queries](/tidb-resource-control-runaway-queries.md)
+- 
 ## Scenarios for resource control
 
 The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
