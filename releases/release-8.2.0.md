@@ -119,7 +119,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.2/quick-start-with-
 
     To maintain compatibility, the original behavior is retained when upgrading from earlier versions to v8.2.0 or later versions. To enable the enhanced privilege control, set the new variable [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) to `ON`.
 
-    For more information, see [user documentation](/tidb-resource-control.md#bind-resource-groups).
+    For more information, see [user documentation](/tidb-resource-control-ru-groups.md#bind-resource-groups).
 
 ### Observability
 

@@ -257,9 +257,9 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Global memory control](/configure-memory-usage.md#configure-the-memory-usage-threshold-of-a-tidb-server-instance) | Y | Y | Y | Y | Y | N | N | N | N | N |
 | [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) | E | E | E | E | E | N | N | N | N | N |
 | [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E | E | E | E |
-| [Resource control](/tidb-resource-control.md) | Y | Y | Y | Y | N | N | N | N | N | N |
-| [Runaway Queries management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | Y | Y | E | N | N | N | N | N | N | N |
-| [Background tasks management](/tidb-resource-control.md#manage-background-tasks) | E | E | E | N | N | N | N | N | N | N |
+| [Resource control](/tidb-resource-control-ru-groups.md) | Y | Y | Y | Y | N | N | N | N | N | N |
+| [Runaway Queries management](/tidb-resource-control-runaway-queries.md) | Y | Y | E | N | N | N | N | N | N | N |
+| [Background tasks management](/tidb-resource-control-background-tasks.md) | E | E | E | N | N | N | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | Y | Y | Y | E | N | N | N | N | N | N |
 | [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | Y | N | N | N | N | N | N | N |
 | PD Follower Proxy (controlled by [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)) | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
