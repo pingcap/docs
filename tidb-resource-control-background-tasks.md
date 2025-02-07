@@ -1,9 +1,9 @@
 ---
-title: Limit background task resource usage
+title: Use Resource Control to Manage Background Tasks
 summary: Introduces how to control background tasks through Resource Control.
 ---
 
-# Manage background tasks
+# Use Resource Control to Manage Background Tasks
 
 > **Warning:**
 >

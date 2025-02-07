@@ -1,9 +1,9 @@
 ---
-title: Managing Queries with Excessive Resource Consumption (Runaway Queries)
+title: Manage Queries That Consume More Resources Than Expected (Runaway Queries)
 summary: Introduces how to control and degrade queries with excessive resource consumption (Runaway Queries) through resource management capabilities.
 ---
 
-# Manage queries that consume more resources than expected (Runaway Queries)
+# Manage Queries That Consume More Resources Than Expected (Runaway Queries)
 
 A runaway query is a query that consumes more time or resources than expected. The term **runaway queries** is used in the following to describe the feature of managing the runaway query.
 
@@ -132,7 +132,7 @@ The parameters are as follows:
     QUERY WATCH REMOVE 1;
     ```
 
-#### Observability
+## Observability
 
 You can get more information about runaway queries from the following system tables and `INFORMATION_SCHEMA`:
 

@@ -75,7 +75,7 @@ ResourceGroupRunawayActionOption ::=
 
 The resource group name parameter (`ResourceGroupName`) must be globally unique.
 
-TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
+TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
 
 | Option     | Description                         | Example                |
 |---------------|-------------------------------------|------------------------|
@@ -145,4 +145,4 @@ MySQL also supports [CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [ALTER USER RESOURCE GROUP](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+* [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

@@ -163,7 +163,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) | Modifies a resource group. |
-| [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md) | Estimates and outputs the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) capacity of the current cluster. |
+| [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md) | Estimates and outputs the [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) capacity of the current cluster. |
 | [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) | Creates a new resource group. |
 | [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md) | Drops a resource group. |
 | [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manages the runaway query watch list. |

@@ -736,7 +736,7 @@
     - [update](/tidb-cloud/ticloud-update.md)
     - [help](/tidb-cloud/ticloud-help.md)
   - [Table Filter](/table-filter.md)
-  - [Resource Control](/tidb-resource-control.md)
+  - [Resource Control](/tidb-resource-control-ru-groups.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Batch Processing](/batch-processing.md)

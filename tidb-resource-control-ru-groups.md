@@ -1,9 +1,9 @@
 ---
-title: Use Resource Control to Achieve resource group limitation
+title: Use Resource Control to Achieve Resource Group Limitation and Flow Control
 summary: Learn how to use the resource control feature to control and schedule application resources.
 ---
 
-# Use Resource Control to Achieve resource group limitation
+# Use Resource Control to Achieve Resource Group Limitation and Flow Control
 
 > **Note:**
 >
@@ -32,6 +32,11 @@ Starting from v7.4.0, the resource control feature supports controlling TiFlash 
 - TiFlash scheduling: When system resources are insufficient, TiFlash schedules pipeline tasks among multiple resource groups based on their priorities. The specific logic is: First, TiFlash assesses the `PRIORITY` of the resource group, then considers the CPU usage and `RU_PER_SEC`. As a result, if `rg1` and `rg2` have the same `PRIORITY` but the `RU_PER_SEC` of `rg2` is twice that of `rg1`, the CPU usage of `rg2` is twice that of `rg1`.
 
 </CustomContent>
+
+For information on how to manage background tasks and handle resource-intensive queries (Runaway Queries), see the following documents:
+
+- [Use Resource Control to Managing Background Tasks](/tidb-resource-control-background-tasks.md)
+- [Manage Queries That Consume More Resources Than Expected (Runaway Queries)](/tidb-resource-control-runaway-queries.md)
 
 ## Scenarios for resource control
 
@@ -259,6 +264,7 @@ The following example binds the current statement to the resource group `rg1`.
 ```sql
 SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 ```
+
 ## Disable resource control
 
 <CustomContent platform="tidb">

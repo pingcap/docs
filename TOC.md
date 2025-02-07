@@ -263,9 +263,9 @@
     - [Multi-Replica Cluster DR](/dr-multi-replica.md)
     - [BR-based DR](/dr-backup-restore.md)
   - Resource Manager
-    - [Achieve resource group limitation and flow control using Resource Control](/tidb-resource-control.md)
-    - [Runaway Queries with resource consumption exceeding expectations](/tidb-resource-control-runaway-queries.md)
-    - [Limit background task resource usage](/tidb-resource-control-background-tasks.md)
+    - [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
+    - [Manage Runaway Queries](/tidb-resource-control-runaway-queries.md)
+    - [Manage Background Tasks](/tidb-resource-control-background-tasks.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)

@@ -162,7 +162,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
     - Session level. Set the resource group used by the current session via [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
     - Statement level. Set the resource group used by the current statement via [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name).
 
-  For more information, see [documentation](/tidb-resource-control.md).
+  For more information, see [documentation](/tidb-resource-control-ru-groups.md).
 
 * Support a checkpoint mechanism for Fast Online DDL, improving fault tolerance and automatic recovery capability [#42164](https://github.com/pingcap/tidb/issues/42164) @[tangenta](https://github.com/tangenta)
 
@@ -356,12 +356,12 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 | TiKV | [`resolved-ts.advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval) | Modified | The default value changes from `"1s"` to `"20s"`. This modification can increase the interval of the regular advancement of Resolved TS and reduce the traffic consumption between TiKV nodes. |
 | TiKV | [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) | Modified | The default value changes from `false` to `true`. |
 | TiKV | [`raft-engine.prefill-for-recycle`](/tikv-configuration-file.md#prefill-for-recycle-new-in-v700) | Newly added | Controls whether to generate empty log files for log recycling in Raft Engine. The default value is `false`. |
-| PD | [`degraded-mode-wait-duration`](/pd-configuration-file.md#degraded-mode-wait-duration) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the waiting time for triggering the degraded mode. The default value is `0s`. |
-| PD | [`read-base-cost`](/pd-configuration-file.md#read-base-cost) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from a read request to RU. The default value is `0.25`. |
-| PD | [`read-cost-per-byte`](/pd-configuration-file.md#read-cost-per-byte) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from read flow to RU. The default value is `1/ (64 * 1024)`. |
-| PD | [`read-cpu-ms-cost`](/pd-configuration-file.md#read-cpu-ms-cost) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from CPU to RU. The default value is `1/3`. |
-| PD | [`write-base-cost`](/pd-configuration-file.md#write-base-cost) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from a write request to RU. The default value is `1`. |
-| PD | [`write-cost-per-byte`](/pd-configuration-file.md#write-cost-per-byte) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from write flow to RU. The default value is `1/1024`. |
+| PD | [`degraded-mode-wait-duration`](/pd-configuration-file.md#degraded-mode-wait-duration) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the waiting time for triggering the degraded mode. The default value is `0s`. |
+| PD | [`read-base-cost`](/pd-configuration-file.md#read-base-cost) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from a read request to RU. The default value is `0.25`. |
+| PD | [`read-cost-per-byte`](/pd-configuration-file.md#read-cost-per-byte) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from read flow to RU. The default value is `1/ (64 * 1024)`. |
+| PD | [`read-cpu-ms-cost`](/pd-configuration-file.md#read-cpu-ms-cost) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from CPU to RU. The default value is `1/3`. |
+| PD | [`write-base-cost`](/pd-configuration-file.md#write-base-cost) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from a write request to RU. The default value is `1`. |
+| PD | [`write-cost-per-byte`](/pd-configuration-file.md#write-cost-per-byte) | Newly added | A [Resource Control](/tidb-resource-control-ru-groups.md)-related configuration item. It controls the basis factor for conversion from write flow to RU. The default value is `1/1024`. |
 | TiFlash | [`mark_cache_size`](/tiflash/tiflash-configuration.md) | Modified | Change the default cache limit of the metadata for a data block in TiFlash from `5368709120` to `1073741824` to reduce unnecessary memory usage. |
 | TiFlash | [`minmax_index_cache_size`](/tiflash/tiflash-configuration.md) | Modified | Change the default cache limit of the min-max index for a data block in TiFlash from `5368709120` to `1073741824` to reduce unnecessary memory usage. |
 | TiFlash | [`flash.disaggregated_mode`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | In the disaggregated architecture of TiFlash, it indicates whether this TiFlash node is a write node or a compute node. The value can be `tiflash_write` or `tiflash_compute`. |
