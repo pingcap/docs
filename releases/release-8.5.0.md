@@ -73,11 +73,11 @@ Compared with the previous LTS 8.1.0, 8.5.0 includes new features, improvements,
     </td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/tidb-resource-control#query_limit-parameters">Support more triggers for runaway queries, and support switching resource groups</a> (introduced in v8.4.0) </td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/tidb-resource-control-runaway-queries#query_limit-parameters">Support more triggers for runaway queries, and support switching resource groups</a> (introduced in v8.4.0) </td>
     <td>Runaway Queries offer an effective way to mitigate the impact of unexpected SQL performance issues on systems. TiDB v8.4.0 introduces the number of keys processed by the Coprocessor (<code>PROCESSED_KEYS</code>) and request units (<code>RU</code>) as identifying conditions, and puts identified queries into the specified resource group for more precise identification and control of runaway queries.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.5/tidb-resource-control#background-parameters">Support setting the maximum limit on resource usage for background tasks of resource control</a> (experimental, introduced in v8.4.0) </td>
+    <td><a href="https://docs.pingcap.com/tidb/v8.5/tidb-resource-control-background-tasks#background-parameters">Support setting the maximum limit on resource usage for background tasks of resource control</a> (experimental, introduced in v8.4.0) </td>
     <td>By setting a maximum percentage limit on background tasks of resource control, you can control their resource consumption based on the needs of different application systems. This keeps background task consumption at a low level and ensures the quality of online services.</td>
   </tr>
   <tr>
