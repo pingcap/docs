@@ -59,6 +59,7 @@ With the cached table feature, TiDB loads the data of an entire table into the m
 A cluster is a group of nodes that work together to provide services. By using clusters in a distributed system, TiDB achieves higher availability and greater scalability compared to a single-node setup.
 
 In the distributed architecture of TiDB:
+
 - TiDB nodes provide a scalable SQL layer for client interactions.
 - PD nodes provide a resilient metadata layer for TiDB.
 - TiKV nodes, using the Raft protocol, provide highly available, scalable, and resilient storage for TiDB.
