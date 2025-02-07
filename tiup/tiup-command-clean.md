@@ -28,5 +28,3 @@ The value of `[name]` is the `Name` field output by the [`status` command](/tiup
 ```
 Clean instance of `%s`, directory: %s
 ```
-
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
