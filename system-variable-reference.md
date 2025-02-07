@@ -3353,7 +3353,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md#tidb_request_source_type-new-in-v740)
-- [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
+- [Use Resource Control to Manage Background Tasks](/tidb-resource-control--background-tasks.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 
 ### tidb_resource_control_strict_mode
