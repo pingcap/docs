@@ -145,7 +145,7 @@ TiDB creates the `'root'@'%'` default account during the database initialization
 
 ## Set account resource limits
 
-TiDB can limit the resources consumed by users using resource groups. For more information, see [Use resource control to achieve resource isolation](/tidb-resource-control.md).
+TiDB can limit the resources consumed by users using resource groups. For more information, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
 
 ## Assign account passwords
 

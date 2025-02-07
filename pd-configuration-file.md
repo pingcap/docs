@@ -502,7 +502,7 @@ Configuration items related to the replication mode of all Regions. See [Enable 
 
 ## controller
 
-This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control.md).
+This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control-ru-groups.md).
 
 ### `degraded-mode-wait-duration`
 
@@ -512,7 +512,7 @@ This section describes the configuration items that are built into PD for [Resou
 
 ### `request-unit`
 
-The following are the configuration items about the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru).
+The following are the configuration items about the [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru).
 
 #### `read-base-cost`
 
