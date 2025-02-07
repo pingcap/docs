@@ -1,5 +1,5 @@
 ---
-title: Use Resource Control to Achieve Resource Group Limitation
+title: Use Resource Control to Achieve Resource Group Limitation and Flow Control
 summary: Learn how to use the resource control feature to control and schedule application resources.
 ---
 
