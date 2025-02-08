@@ -21,7 +21,7 @@ This document focuses on how to use the TiUP no-sudo Mode to deploy a cluster.
     adduser tidb
     ```
    
-2. Start systemd user mode for tidb user on every deployment target machine (important step)
+2. Start systemd user mode for `tidb` user on every deployment target machine (important step)
 
    1. Use `tidb` user to set XDG_RUNTIME_DIR  environment variable
    
@@ -59,9 +59,7 @@ This document focuses on how to use the TiUP no-sudo Mode to deploy a cluster.
    
       Execute `systemctl --user` in the terminal and no more errors are thrown, indicating that it has started normally.
 
-3. Switch to the `tidb` user on each deployment machine and create the `~/.config/systemd/user` directory.
-
-4. Use ssh-keygen in the central control computer to generate a key and copy the public key to other deployment machines.
+3. Use ssh-keygen in the central control computer to generate a key and copy the public key to other deployment machines.
 
 ## Prepare topology file
 
@@ -171,7 +169,7 @@ Since in no-sudo mode, the `tidb` user does not have sudo permissions, executing
        sysctl -p
    ```
    
-7. Configure the user’s limits.conf file
+7. Configure the user's limits.conf file
 
    {{< copyable "shell-regular" >}}
 
@@ -193,3 +191,14 @@ In order to use the `tidb` user prepared in the above steps and avoid re-creatin
 ```shell
   tiup cluster deploy mycluster v8.1.0 topology.yaml --user tidb
 ```
+
+## FAQ
+1. When starting user@.service, an error occurs: Failed to fully start up daemon: Permission denied
+
+   This may be because the `pam_systemd.so` is missing from your `/etc/pam.d/system-auth.ued` file. You can use the following command to check whether the `/etc/pam.d/system-auth.ued` file already contains the configuration of the `pam_systemd.so` module. If not, append the line `session optional pam_systemd.so` to the end of the file.
+
+   {{< copyable "shell-regular" >}}
+
+   ```shell
+   grep 'pam_systemd.so' /etc/pam.d/system-auth.ued || echo 'session     optional      pam_systemd.so' >> /etc/pam.d/system-auth.ued
+   ```
