@@ -798,6 +798,6 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - Debezium converts `charsetName` to `"utf8mb4"` when the column collation is `"utf8_unicode_ci"` and the character set is null, but TiCDC does not.
 
-- Debezium escapes ENUM elements, but TiCDC does not. For example, TiCDC encodes ENUM elements ('c,\\'d','g,\'\'h') to ('c,\'d', 'g,\'h').
+- TiCDC treats "\" as an escaped quotation in ENUM elements, but Debezium does not. For example, TiCDC encodes ENUM elements ("c,\\'d','g,\'\'h") to ('c,\'d', 'g,\'\'h').
 
 - TiCDC converts the default value of TIME like `'1000-00-00 01:00:00.000'` to `"1000-00-00"`, but Debezium does not.
