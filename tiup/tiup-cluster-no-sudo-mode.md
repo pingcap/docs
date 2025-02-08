@@ -57,7 +57,7 @@ This document focuses on how to use the TiUP no-sudo Mode to deploy a cluster.
                 └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
       ```
    
-      Execute `systemctl --user` in the terminal and no more errors are thrown, indicating that it has started normally.
+   Execute `systemctl --user` in the terminal and no more errors are thrown, indicating that it has started normally.
 
 3. Use ssh-keygen in the central control computer to generate a key and copy the public key to other deployment machines.
 
