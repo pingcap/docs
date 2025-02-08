@@ -73,12 +73,12 @@ This document focuses on how to use the TiUP no-sudo Mode to deploy a cluster.
    
 2. Edit the topology file.
 
-   Compared with the previous mode, TiUP using no-sudo mode needs to add `systemd_mode: "user"` to topology.yaml global block. If this parameter is not set, its default value is `system`, indicating that sudo permissions are required. In addition, no-sudo mode cannot use `/data` as `deploy_dir` and `data_dir` because there will be permission issues, and you need to choose a path that ordinary users can access. The example below uses relative paths and the final paths used are `/home/tidb/data/tidb-deploy` and `/home/tidb/data/tidb-data`.
+   Compared with the previous mode, TiUP using no-sudo mode needs to add the line `systemd_mode: "user"` in the global block of topology.yaml. The `systemd_mode` parameter is used to indicate whether to use systemd user mode. If this parameter is not set, its default value is `system`, indicating that sudo permissions are required. In addition, no-sudo mode cannot use `/data` as `deploy_dir` and `data_dir` because there will be permission issues, and you need to choose a path that ordinary users can access. The example below uses relative paths and the final paths used are `/home/tidb/data/tidb-deploy` and `/home/tidb/data/tidb-data`.
    The rest is consistent with the old version.
 
    {{< copyable "shell-regular" >}}
 
-   ```shell
+   ```yaml
    global:
      user: "tidb"
      systemd_mode: "user"
@@ -89,9 +89,9 @@ This document focuses on how to use the TiUP no-sudo Mode to deploy a cluster.
      ...
    ```
    
-## Manual repair failed check items
+## Manually repair failed check items
 
-Executing `tiup cluster check topology.yaml` will display some failed check items, examples:
+Executing `tiup cluster check topology.yaml --user tidb` will display some failed check items, examples:
 
 {{< copyable "shell-regular" >}}
 
@@ -112,7 +112,7 @@ Node            Check         Result  Message
 192.168.124.27  service       Fail    service firewalld is running but should be stopped
 ```
 
-Since in no-sudo mode, the `tidb` user does not have sudo permissions, executing `tiup cluster check topology.yaml --apply` will not be able to automatically repair failed check items due to insufficient permissions. Therefore, some operations need to be performed manually on the deployment machines using the `root` user.
+Since in no-sudo mode, the `tidb` user does not have sudo permissions, executing `tiup cluster check topology.yaml --apply --user tidb` will not be able to automatically repair failed check items due to insufficient permissions. Therefore, some operations need to be performed manually on the deployment machines using the `root` user.
 
 1. Install the numactl tool
 
@@ -177,8 +177,10 @@ Since in no-sudo mode, the `tidb` user does not have sudo permissions, executing
        cat << EOF >>/etc/security/limits.conf
        tidb           soft    nofile          1000000
        tidb           hard    nofile          1000000
-       tidb           soft    stack          32768
-       tidb           hard    stack          32768
+       tidb           soft    stack           32768
+       tidb           hard    stack           32768
+       tidb           soft    core            unlimited
+       tidb           hard    core            unlimited
        EOF
    ```
 
@@ -190,6 +192,38 @@ In order to use the `tidb` user prepared in the above steps and avoid re-creatin
 
 ```shell
   tiup cluster deploy mycluster v8.1.0 topology.yaml --user tidb
+```
+
+Start cluster
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster start mycluster
+```
+
+Scale-out cluster
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster scale-out mycluster scale.yaml --user tidb
+```
+
+Scale-in cluster
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster scale-in mycluster -N 192.168.124.27:20160
+```
+
+Upgrade cluster
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster upgrade mycluster v8.2.0
 ```
 
 ## FAQ
