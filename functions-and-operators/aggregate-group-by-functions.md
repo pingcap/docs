@@ -64,6 +64,32 @@ In addition, TiDB also provides the following aggregate functions:
 
 Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
 
++ `APPROX_COUNT_DISTINCT(expr)`
+
+    This function returns the approximate distinct count of `expr`. It uses `BJKST` algorithm and consumes less memory during simultaneous computation of cardinality for a large number of data sets whose cardinality has power law distribution. Moreover, it's very accurate for data sets with small cardinality and very efficient on CPU.
+
+    The following example shows how to use this function:
+
+    ```sql
+    DROP TABLE IF EXISTS t;
+    CREATE TABLE t(a INT, b INT);
+    INSERT INTO t VALUES(1, 1), (2, 1), (2, 1), (3, 1), (5, 2), (5, 2), (6, 2), (7, 2);
+    ```
+
+    ```sql
+    SELECT APPROX_COUNT_DISTINCT(a) FROM t GROUP BY b;
+    ```
+
+    ```sql
+    +--------------------------+
+    | APPROX_COUNT_DISTINCT(a) |
+    +--------------------------+
+    |                        3 |
+    |                        3 |
+    +--------------------------+
+    1 row in set (0.00 sec)
+    ```
+
 ## GROUP BY modifiers
 
 Starting from v7.4.0, the `GROUP BY` clause of TiDB supports the `WITH ROLLUP` modifier. For more information, see [GROUP BY modifiers](/functions-and-operators/group-by-modifier.md).
