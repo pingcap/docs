@@ -40,7 +40,7 @@ Consider an application that handles both transaction and BI workloads. To preve
 1. Set [`balance.label-name`](/tiproxy/tiproxy-configuration.md#label-name) to `"app"` in TiProxy, indicating that TiDB servers will be matched by the label name `"app"`, and connections will be routed to TiDB servers with matching label values.
 2. Configure two TiProxy instances, adding `"app"="Order"` and `"app"="BI"` to their respective [`labels`](/tiproxy/tiproxy-configuration.md#labels) configuration items.
 3. Divide TiDB instances into two groups, adding `"app"="Order"` and `"app"="BI"` to their respective [`labels`](/tidb-configuration-file.md#labels) configuration items.
-4. Optional: For storage layer isolation, configure [Placement Rules](/configure-placement-rules.md) or [Resource Control](/tidb-resource-control.md).
+4. Optional: For storage layer isolation, configure [Placement Rules](/configure-placement-rules.md) or [Resource Control](/tidb-resource-control-ru-groups.md).
 5. Direct transaction and BI clients to connect to their respective TiProxy instance addresses.
 
 <img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-balance-label.png" alt="Label-based Load Balancing" width="600" />

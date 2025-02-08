@@ -152,7 +152,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     To improve user experience, TiDB Dashboard provides the [Resource Manager page](/dashboard/dashboard-resource-manager.md). You can view the resource group configuration on this page and estimate cluster capacity in a visual way to facilitate reasonable resource allocation.
 
-    For more information, see [documentation](/tidb-resource-control.md).
+    For more information, see [documentation](/tidb-resource-control-ru-groups.md).
 
 * Support the checkpoint mechanism for Fast Online DDL to improve fault tolerance and automatic recovery capability [#42164](https://github.com/pingcap/tidb/issues/42164) @[tangenta](https://github.com/tangenta)
 
