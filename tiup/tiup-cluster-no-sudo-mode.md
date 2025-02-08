@@ -25,19 +25,19 @@ This document focuses on how to use the TiUP no-sudo Mode to deploy a cluster.
 
    1. Use `tidb` user to set XDG_RUNTIME_DIR  environment variable
    
-   {{< copyable "shell-regular" >}}
+      {{< copyable "shell-regular" >}}
 
-    ```shell
-    mkdir -p ~/.bashrc.d
-    echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" > ~/.bashrc.d/systemd
-    source ~/.bashrc.d/systemd
-    ```
+      ```shell
+      mkdir -p ~/.bashrc.d
+      echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" > ~/.bashrc.d/systemd
+      source ~/.bashrc.d/systemd
+      ```
    
    2. Use `root` user to start user service
    
-   {{< copyable "shell-regular" >}}
+      {{< copyable "shell-regular" >}}
       
-   ```shell
+      ```shell
       $ systemctl start user@1000.service #1000 is the id of tidb user. You can get the user id by executing id
       $ systemctl status user@1000.service
       user@1000.service - User Manager for UID 1000
@@ -118,70 +118,70 @@ Since in no-sudo mode, the `tidb` user does not have sudo permissions, executing
 
    {{< copyable "shell-regular" >}}
 
-    ```shell
-      sudo yum -y install numactl
-    ```
+   ```shell
+   sudo yum -y install numactl
+   ```
    
 2. Close swap
 
    {{< copyable "shell-regular" >}}
 
-    ```shell
-       swapoff -a || exit 0
-    ```
+   ```shell
+   swapoff -a || exit 0
+   ```
    
 3. Disable transparent huge pages
 
-    {{< copyable "shell-regular" >}}
+   {{< copyable "shell-regular" >}}
 
-    ```shell
-       echo never > /sys/kernel/mm/transparent_hugepage/enabled
-    ```
+   ```shell
+   echo never > /sys/kernel/mm/transparent_hugepage/enabled
+   ```
 
 4. Start irqbalance service
 
    {{< copyable "shell-regular" >}}
 
-    ```shell
-       systemctl start irqbalance
+   ```shell
+   systemctl start irqbalance
    ```
    
 5. Turn off the firewall and turn off firewall auto-start
    
-    {{< copyable "shell-regular" >}}
+   {{< copyable "shell-regular" >}}
 
-    ```shell
-       systemctl stop firewalld.service
-       systemctl disable firewalld.service
+   ```shell
+   systemctl stop firewalld.service
+   systemctl disable firewalld.service
    ```
    
 6. Modify sysctl parameters
    
-    {{< copyable "shell-regular" >}}
+   {{< copyable "shell-regular" >}}
 
-    ```shell
-       echo "fs.file-max = 1000000">> /etc/sysctl.conf
-       echo "net.core.somaxconn = 32768">> /etc/sysctl.conf
-       echo "net.ipv4.tcp_tw_recycle = 0">> /etc/sysctl.conf
-       echo "net.ipv4.tcp_syncookies = 0">> /etc/sysctl.conf
-       echo "vm.overcommit_memory = 1">> /etc/sysctl.conf
-       echo "vm.swappiness = 0">> /etc/sysctl.conf
-       sysctl -p
+   ```shell
+   echo "fs.file-max = 1000000">> /etc/sysctl.conf
+   echo "net.core.somaxconn = 32768">> /etc/sysctl.conf
+   echo "net.ipv4.tcp_tw_recycle = 0">> /etc/sysctl.conf
+   echo "net.ipv4.tcp_syncookies = 0">> /etc/sysctl.conf
+   echo "vm.overcommit_memory = 1">> /etc/sysctl.conf
+   echo "vm.swappiness = 0">> /etc/sysctl.conf
+   sysctl -p
    ```
    
 7. Configure the user's limits.conf file
 
    {{< copyable "shell-regular" >}}
 
-    ```shell
-       cat << EOF >>/etc/security/limits.conf
-       tidb           soft    nofile          1000000
-       tidb           hard    nofile          1000000
-       tidb           soft    stack           32768
-       tidb           hard    stack           32768
-       tidb           soft    core            unlimited
-       tidb           hard    core            unlimited
-       EOF
+   ```shell
+   cat << EOF >>/etc/security/limits.conf
+   tidb           soft    nofile          1000000
+   tidb           hard    nofile          1000000
+   tidb           soft    stack           32768
+   tidb           hard    stack           32768
+   tidb           soft    core            unlimited
+   tidb           hard    core            unlimited
+   EOF
    ```
 
 ## Deploy cluster
@@ -191,7 +191,7 @@ In order to use the `tidb` user prepared in the above steps and avoid re-creatin
 {{< copyable "shell-regular" >}}
 
 ```shell
-  tiup cluster deploy mycluster v8.1.0 topology.yaml --user tidb
+tiup cluster deploy mycluster v8.1.0 topology.yaml --user tidb
 ```
 
 Start cluster
