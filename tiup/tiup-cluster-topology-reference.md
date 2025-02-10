@@ -42,7 +42,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
 - `group`: The user group to which a user belongs. It is specified when the user is created. The value defaults to that of the `<user>` field. If the specified group does not exist, it is automatically created.
 
-- `systemd_mode`: The systemd mode used on the target machine during cluster deployment. The default value is `system`. If it is set to `user`, it means that sudo permissions are not used on the target machine, that is, the TiUP no-sudo mode is used.
+- `systemd_mode`: The `systemd` mode used on the target machine during cluster deployment. The default value is `system`. If you set it to `user`, it means that sudo permissions are not used on the target machine, that is, the [TiUP no-sudo mode](/tiup/tiup-cluster-no-sudo-mode.md) is used.
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. The default value is `22`.
 
