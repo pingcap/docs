@@ -604,7 +604,7 @@ Take the following steps to check the current operating system configuration and
 
     > **Warning:**
     >
-    > It is not recommended to increase `vm.min_free_kbytes` on systems with less than 16 GiB of memory, because it might cause instability and boot failures.
+    > It is not recommended to increase the value of `vm.min_free_kbytes` on systems with less than 16 GiB of memory, because it might cause instability and boot failures.
 
     > **Note:**
     >
