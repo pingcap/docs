@@ -5453,6 +5453,16 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
+### tidb_slow_txn_log_threshold <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Unsigned integer
+- Default value: `0`
+- Range: `[0, 9223372036854775807]`
+- Unit: Milliseconds
+- This variable sets the threshold for slow transaction logging. When the execution time of a transaction exceeds this threshold, TiDB logs detailed information about the transaction. When the value is set to `0`, this feature is disabled.
+
 ### tidb_snapshot
 
 - Scope: SESSION
