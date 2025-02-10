@@ -269,7 +269,6 @@ Placement Driver (PD) is a core component in the [TiDB Architecture](/tidb-archi
 
 Placement rules are used to configure the placement of data in a TiKV cluster. With this feature, you can specify the deployment of tables and partitions to different regions, data centers, cabinets, or hosts. Use cases include optimizing data availability strategies at low cost, ensuring that local data replicas are available for local stale reads, and complying with local data compliance requirements.
 
-
 For more information, see [Placement Rules in SQL](/placement-rules-in-sql.md).
 
 ### Point Get
