@@ -7,7 +7,7 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 > **Note:**
 >
-> TiDB Cloud will launch the next-generation of support services, **Connected Care**, on **Feb 17, 2025**. For more information, see [Announcing the New Generation of TiDB Cloud Support Services - Connected Care](/tidb-cloud/connected-care-announcement.md) and [Connected Care Details](/tidb-cloud/connected-care-detail.md).
+> TiDB Cloud will launch the next-generation of support services, **Connected Care**, on **Feb 17, 2025**. For more information, see [Connected Care Overview](/tidb-cloud/connected-care-overview.md) and [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
 The **?** icon in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/) consolidates all the help and support information for TiDB Cloud, such as documentation, interactive tutorials, self-paced training, and support entries.
 

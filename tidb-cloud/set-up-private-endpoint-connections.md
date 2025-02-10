@@ -42,8 +42,8 @@ To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete
 
 1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
-3. [Fill in your endpoint ID](#step-3-fill-in-your-endpoint-id)
-4. [Enable private DNS and create connection](#step-4-enable-private-dns-and-create-connection)
+3. [Create a private endpoint connection](#step-3-create-a-private-endpoint-connection)
+4. [Enable private DNS](#step-4-enable-private-dns)
 5. [Connect to your TiDB cluster](#step-5-connect-to-your-tidb-cluster)
 
 If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
@@ -122,12 +122,20 @@ To use the AWS CLI to create a VPC interface endpoint, perform the following ste
 </div>
 </SimpleTab>
 
-### Step 3. Fill in your endpoint ID
+### Step 3. Create a private endpoint connection
 
 1. Go back to the TiDB Cloud console.
 2. On the **Create AWS Private Endpoint Connection** page, enter your VPC endpoint ID.
+3. Click **Create Private Endpoint Connection**.
 
-### Step 4. Enable private DNS and create connection
+> **Tip:**
+>
+> You can view and manage private endpoint connections on two pages:
+>
+> - Cluster-level **Networking** page: click **Networking** in the left navigation pane of the cluster overview page.
+> - Project-level **Network Access** page: click **Network Access** in the left navigation pane of the **Project Settings** page.
+
+### Step 4. Enable private DNS
 
 Enable private DNS in AWS. You can either use the AWS Management Console or the AWS CLI.
 
@@ -156,17 +164,6 @@ Alternatively, you can find the command on the **Networking** page of your clust
 
 </div>
 </SimpleTab>
-
-Click **Create Private Endpoint Connection** in the TiDB Cloud console to finalize the creation of the private endpoint.
-
-Then you can connect to your TiDB cluster.
-
-> **Tip:**
->
-> You can view and manage private endpoint connections on two pages:
->
-> - Cluster-level **Networking** page: click **Networking** in the left navigation pane of the cluster overview page.
-> - Project-level **Network Access** page: click **Network Access** in the left navigation pane of the **Project Settings** page.
 
 ### Step 5. Connect to your TiDB cluster
 

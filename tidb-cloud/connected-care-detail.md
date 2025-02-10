@@ -5,7 +5,7 @@ summary: Introduces detailed information about the Connected Care support servic
 
 # Connected Care Details
 
-This document provides detailed information about the [Connected Care](/tidb-cloud/connected-care-announcement.md) support services.
+This document provides detailed information about the [Connected Care](/tidb-cloud/connected-care-overview.md) support services.
 
 <table>
 <thead>
@@ -51,7 +51,7 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>S4: 24 business hours</td>
   </tr>
   <tr>
-    <td rowspan="10">Services</td>
+    <td rowspan="9">Services</td>
     <td>Billing and account support</td>
     <td>Billing and account support</td>
     <td>Billing and account support</td>
@@ -68,6 +68,12 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>End-to-end database guidance</td>
     <td>End-to-end database guidance</td>
     <td>End-to-end database guidance</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>-</td>
+    <td>Connected: Clinic service for advanced monitoring</td>
+    <td>Connected: Clinic service for advanced monitoring</td>
   </tr>
   <tr>
     <td>-</td>
@@ -84,20 +90,8 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM subscription for support ticket updates</td>
-    <td>Connected: IM subscription for support ticket updates</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>-</td>
-    <td>Connected: IM ticket creation</td>
-    <td>Connected: IM ticket creation</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td>-</td>
-    <td>Connected: Clinic service for advanced monitoring</td>
-    <td>Connected: Clinic service for advanced monitoring</td>
+    <td>Connected: IM ticket creation and update subscription</td>
+    <td>Connected: IM ticket creation and update subscription</td>
   </tr>
   <tr>
     <td>-</td>
@@ -109,7 +103,7 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>-</td>
     <td>-</td>
     <td>-</td>
-    <td>Technical Account Management</td>
+    <td>Technical Account Manager</td>
   </tr>
   <tr>
     <td rowspan="5">Customer Resources</td>
@@ -131,10 +125,10 @@ This document provides detailed information about the [Connected Care](/tidb-clo
     <td>Community Workspace</td>
   </tr>
   <tr>
-    <td>TiDB.AI</td>
-    <td>TiDB.AI</td>
-    <td>TiDB.AI</td>
-    <td>TiDB.AI</td>
+    <td><a href="https://tidb.ai/">TiDB.AI</a></td>
+    <td><a href="https://tidb.ai/">TiDB.AI</a></td>
+    <td><a href="https://tidb.ai/">TiDB.AI</a></td>
+    <td><a href="https://tidb.ai/">TiDB.AI</a></td>
   </tr>
   <tr>
     <td>-</td>
