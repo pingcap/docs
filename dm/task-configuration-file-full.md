@@ -204,6 +204,10 @@ syncers:
     # `DELETE FROM tb WHERE a=1; DELETE FROM tb WHERE a=2` will become `DELETE FROM tb WHERE (a) IN (1),(2)`, where "a" is the primary key
     multiple-rows: true
 
+    # When set to a value greater than 0, DM will set the AUTO_ID_CACHE size for any newly-created AUTO_INCREMENT tables to the relevant value.
+    # For example, if set to 30, the statement: `CREATE TABLE tb (`id` INT AUTO_INCREMENT);` will be updated to `CREATE TABLE tb (`id` INT AUTO_INCREMENT) /*T![auto_id_cache] AUTO_ID_CACHE = 30 */;`
+    auto-id-cache-size: 0
+
 # Configuration arguments of continuous data validation (validator).
 validators:
   global:                # Configuration name.
