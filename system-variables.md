@@ -4368,7 +4368,6 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tidb_slow_txn_log_threshold <span class="version-mark">New in v7.0.0</span>
 
 - Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Unsigned integer
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
