@@ -11,7 +11,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 >
 > For CentOS, only CentOS 8 or later versions are supported.
 
-## Prepare user and configure SSH mutual trust
+## Prepare the user and configure the SSH mutual trust
 
 1. Log in to all deployment target machines in sequence, and use the `root` user to create a user named `tidb` with the following command. In no-sudo mode, there is no need to configure password-free sudo for the `tidb` user, that is, there is no need to add the `tidb` user to sudoers.
    
