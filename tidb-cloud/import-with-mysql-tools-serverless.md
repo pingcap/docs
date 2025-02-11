@@ -1,9 +1,9 @@
 ---
-title: Import Data into TiDB Cloud via MySQL CLI
-summary: Learn how to import Data into TiDB Cloud via MySQL CLI.
+title: Import Data into TiDB Cloud Serverless via MySQL Tools
+summary: Learn how to import Data into TiDB Cloud Serverless via MySQL Tools.
 ---
 
-# Import Data into TiDB Cloud via MySQL CLI
+# Import Data into TiDB Cloud Serverless via MySQL CLI
 
 This document describes how to import data into TiDB Cloud via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
 
@@ -17,9 +17,6 @@ Before you can import data via MySQL CLI to TiDB Cloud, you need the following p
 ## Step 1. Connect to your TiDB Cloud cluster
 
 Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
-
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -36,20 +33,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     > **Tip:**
     >
     > If you have created a password before, either use the original password or click **Reset Password** to generate a new one.
-
-</div>
-<div label="TiDB Cloud Dedicated">
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-3. Click **Allow Access from Anywhere**.
-
-    For more details about how to obtain the connection string, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
-
-</div>
-</SimpleTab>
 
 ## Step 2. Define the table and insert sample data
 

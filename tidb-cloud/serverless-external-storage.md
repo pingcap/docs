@@ -181,7 +181,7 @@ Take the following steps to configure an access key:
 
 ## Configure GCS access
 
-To allow a TiDB Serverless cluster to access your GCS bucket, you need to configure the GCS access for the bucket. You can use a service account key to configure the bucket access:
+To allow a TiDB Cloud Serverless cluster to access your GCS bucket, you need to configure the GCS access for the bucket. You can use a service account key to configure the bucket access:
 
 Take the following steps to configure a service account key:
 
@@ -207,7 +207,7 @@ Take the following steps to configure a service account key:
 
 ## Configure Azure Blob Storage access
 
-To allow TiDB Serverless to access your Azure Blob container, you need to create a service SAS token for the container.
+To allow TiDB Cloud Serverless to access your Azure Blob container, you need to create a service SAS token for the container.
 
 You can create a SAS token either using an [Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) (recommended) or manual configuration. 
 

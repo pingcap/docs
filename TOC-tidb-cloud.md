@@ -253,15 +253,21 @@
       - [Migrate from TiDB Self-Managed to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
       - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
       - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
-  - Import Data into TiDB Cloud
+  - Import Data into TiDB Cloud Dedicated
       - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
       - [Import Sample Data (SQL File)](/tidb-cloud/import-sample-data.md)
       - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
       - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
       - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
+  - Import Data into TiDB Cloud Serverless
+    - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files-serverless.md)
+    - [Import Sample Data (SQL File)](/tidb-cloud/import-sample-data-serverles.md)
+    - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files-serverles.md)
+    - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files-serverles.md)
+    - [Import with MySQL Tools](/tidb-cloud/import-with-mysql-tools-serverless.md)
   - Reference
       - [Configure External Storage Access for TiDB Dedicated](/tidb-cloud/config-s3-and-gcs-access.md)
-      - [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md)
+      - [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md)
       - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
       - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
       - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)

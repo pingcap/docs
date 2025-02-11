@@ -20,9 +20,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. Select **Import data from S3**.
-
-    If this is your first time importing data into this cluster, select **Import From Amazon S3**.
+2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
 3. On the **Import Data from Amazon S3** page, configure the following source data information:
 
@@ -41,37 +39,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 4. Click **Connect** > **Start Import**.
 
 </div>
-<div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
-
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
-
-        > **Tip:**
-        >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
-
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
-
-2. Click **Import Data** in the upper-right corner.
-
-    If this is your first time importing data into this cluster, select **Import From GCS**.
-
-3. On the **Import Data from GCS** page, configure the following source data information:
-
-    - **Import File Count**: for the sample data, select **Multiple files**.
-    - **Included Schema Files**: for the sample data, select **Yes**.
-        - To import schema and data from the source, select **Yes**. This option imports SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
-        - To import into pre-created tables, select **No**. This enables you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **SQL Editor** in the left navigation pane to create tables. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
-    - **Data Format**: select **SQL**. TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.${suffix}.sql.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.sql.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.sql.gz`. Note that you only need to compress the data files, not the database or table schema files. Note that you only need to compress the data files, not the database or table schema files. The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-    - **Folder URI** or **File URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
-    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
-
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region.
-
-4. Click **Connect** > **Start Import**.
-
-</div>
 </SimpleTab>
 
 When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
