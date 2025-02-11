@@ -42,7 +42,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-
 
 ## Definitions of message formats
 
-This section describes the formats of DDL Event, DML Event and WATERMARK Event, and how the data is resolved on the consumer side.
+This section describes the formats of DDL Event, DML Event and WATERMARK Event, and how the data is parsed on the consumer side.
 
 ### DDL Event
 
@@ -167,9 +167,9 @@ The following is an example of the WATERMARK Event.
 }
 ```
 
-### Data resolution on the consumer side
+### Data parsing on the consumer side
 
-As you can see from the example above, Canal-JSON has a uniform data format, with different field filling rules for different Event types. You can use a uniform method to resolve this JSON format data, and then determine the Event type by checking the field values.
+As you can see from the example above, Canal-JSON has a unified data format, with different field filling rules for different Event types. Consumers can parse data in this JSON format using a unified method, and then determine the Event type by checking the field values:
 
 * When `isDdl` is `true`, the message contains a DDL Event.
 * When `isDdl` is `false`, you need to further check the `type` field. If `type` is `TIDB_WATERMARK`, it is a WATERMARK Event; otherwise, it is a DML Event.
