@@ -7,7 +7,7 @@ summary: Learn the concept, user scenarios, usages, limitations, and compatibili
 
 TiDB supports the clustered index feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
 
-The term _clustered_ in this context refers to the _organization of how data is stored_ and not _a group of database servers working together_. Some database management systems refer to clustered indexes as _index-organized tables_ (IOT).
+The term _clustered_ in this context refers to the _organization of how data is stored_ and not _a group of database servers working together_. Some database management systems refer to clustered index tables as _index-organized tables_ (IOT).
 
 Currently, tables containing primary keys in TiDB are divided into the following two categories:
 
