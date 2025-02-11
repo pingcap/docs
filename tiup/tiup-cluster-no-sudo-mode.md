@@ -159,7 +159,7 @@ In no-sudo mode, the `tidb` user lacks sudo permissions, so running `tiup cluste
     EOF
     ```
 
-## Deploy the cluster
+## Deploy and manage the cluster
 
 To use the `tidb` user created in the previous steps and avoid creating a new one, add `--user tidb` when running the `deploy` command.
 
