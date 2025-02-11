@@ -497,8 +497,7 @@ Configures how CSV files are parsed.
 #### `pattern`
 
 - Expression used for parsing AWS Aurora parquet files.
-
-<!-- Example: `'(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'` -->
+- Example: `'(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'`
 
 #### `schema`
 
