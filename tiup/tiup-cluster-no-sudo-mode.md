@@ -23,11 +23,11 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
     1. Use the `tidb` user to set the `XDG_RUNTIME_DIR` environment variable.
    
-       ```shell
-       mkdir -p ~/.bashrc.d
-       echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" > ~/.bashrc.d/systemd
-       source ~/.bashrc.d/systemd
-       ```
+        ```shell
+        mkdir -p ~/.bashrc.d
+        echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" > ~/.bashrc.d/systemd
+        source ~/.bashrc.d/systemd
+        ```
    
     2. Use `root` user to start user service.
    
@@ -65,9 +65,9 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
    
 2. Edit the topology file.
 
-     Compared with the previous mode, TiUP in no-sudo mode requires adding `systemd_mode: "user"` in the global block of `topology.yaml`. The `systemd_mode` parameter specifies whether to use systemd's user mode. If this parameter is not set, the default value is `system`, meaning sudo permissions are required. Additionally, in no-sudo mode, `/data` cannot be used as the `deploy_dir` or `data_di`r due to potential permission issues. You must select a path accessible to non-root users.
-   
-    The following example uses relative paths and the final paths used are `/home/tidb/data/tidb-deploy` and `/home/tidb/data/tidb-data`. The rest is the same as the old version.
+    Compared with the previous mode, TiUP in no-sudo mode requires adding `systemd_mode: "user"` in the global block of `topology.yaml`. The `systemd_mode` parameter specifies whether to use systemd's user mode. If this parameter is not set, the default value is `system`, meaning sudo permissions are required. 
+
+    Additionally, in no-sudo mode, because the non-root user `tidb` has no required permissions, `/data` cannot be used as the `deploy_dir` or `data_dir`. You must select a path accessible to non-root users. The following example uses relative paths and the final paths used are `/home/tidb/data/tidb-deploy` and `/home/tidb/data/tidb-data`. The rest is the same as the old version.
 
     ```yaml
     global:
@@ -82,7 +82,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
    
 ## Manually repair failed check items
 
-Executing `tiup cluster check topology.yaml --user tidb` will display some failed check items. The following is an example.
+Executing `tiup cluster check topology.yaml --user tidb` will generate some failed check items. The following is an example.
 
 ```shell
 Node            Check         Result  Message
@@ -101,7 +101,7 @@ Node            Check         Result  Message
 192.168.124.27  service       Fail    service firewalld is running but should be stopped
 ```
 
-In no-sudo mode, the `tidb` user lacks sudo permissions, so running `tiup cluster check topology.yaml --apply --user tidb` cannot automatically fix failed check items due to insufficient permissions. As a result, certain operations must be performed manually on the deployment machines using the `root` user.
+In no-sudo mode, the `tidb` user lacks sudo permissions, so running `tiup cluster check topology.yaml --apply --user tidb` can cause failed check items that cannot be automatically fixed due to insufficient permissions. You need to perform operations manually on the deployment machines using the `root` user.
 
 1. Install the numactl tool.
 
@@ -121,7 +121,7 @@ In no-sudo mode, the `tidb` user lacks sudo permissions, so running `tiup cluste
     echo never > /sys/kernel/mm/transparent_hugepage/enabled
     ```
 
-4. Start the irqbalance service.
+4. Start the `irqbalance` service.
 
     ```shell
    systemctl start irqbalance
@@ -146,7 +146,7 @@ In no-sudo mode, the `tidb` user lacks sudo permissions, so running `tiup cluste
     sysctl -p
     ```
    
-7. Configure the user's `limits.conf` file
+7. Configure the user's `limits.conf` file.
 
     ```shell
     cat << EOF >>/etc/security/limits.conf
@@ -161,7 +161,7 @@ In no-sudo mode, the `tidb` user lacks sudo permissions, so running `tiup cluste
 
 ## Deploy the cluster
 
-To use the `tidb` user created in the previous steps and avoid creating a new one, add `--user tidb` when running the deploy command.
+To use the `tidb` user created in the previous steps and avoid creating a new one, add `--user tidb` when running the `deploy` command.
 
 ```shell
 tiup cluster deploy mycluster v8.1.0 topology.yaml --user tidb
@@ -197,7 +197,7 @@ tiup cluster upgrade mycluster v8.2.0
 
 This issue might be caused by the absence of `pam_systemd.so` in your `/etc/pam.d/system-auth.ued` file.
 
-To resolve this issue, use the following command to check if the `/etc/pam.d/system-auth.ued` file contains the `pam_systemd.so` module . If not, append `session optional pam_systemd.so` to the end of the file.
+To resolve this issue, use the following command to check if the `/etc/pam.d/system-auth.ued` file contains the `pam_systemd.so` module. If not, append `session optional pam_systemd.so` to the end of the file.
 
 ```shell
 grep 'pam_systemd.so' /etc/pam.d/system-auth.ued || echo 'session     optional      pam_systemd.so' >> /etc/pam.d/system-auth.ued
