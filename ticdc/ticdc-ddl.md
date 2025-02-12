@@ -74,17 +74,17 @@ rules = ['test.t*']
 
 TiCDC はこのタイプの DDL を次のように処理します。
 
-| DDL                                   | 複製するかどうか              | 取り扱い理由                                                                                  |
-| ------------------------------------- | --------------------- | --------------------------------------------------------------------------------------- |
-| `RENAME TABLE test.t1 TO test.t2`     | 複製する                  | `test.t1`フィルタルールに一致します                                                                  |
-| `RENAME TABLE test.t1 TO ignore.t1`   | 複製する                  | `test.t1`フィルタルールに一致します                                                                  |
-| `RENAME TABLE ignore.t1 TO ignore.t2` | 無視する                  | `ignore.t1`フィルタルールに一致しません                                                               |
-| `RENAME TABLE test.n1 TO test.t1`     | エラーを報告してレプリケーションを終了する | `test.n1`フィルタルールに一致しませんが、 `test.t1`フィルタルールに一致します。この操作は不正です。この場合、エラー メッセージを参照して対処してください。 |
-| `RENAME TABLE ignore.t1 TO test.t1`   | エラーを報告してレプリケーションを終了する | 上記と同じ理由です。                                                                              |
+| DDL                                   | 複製するかどうか              | 取り扱い理由                                                                                                  |
+| ------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------- |
+| `RENAME TABLE test.t1 TO test.t2`     | 複製する                  | `test.t1`フィルタルールに一致します                                                                                  |
+| `RENAME TABLE test.t1 TO ignore.t1`   | 複製する                  | `test.t1`フィルタルールに一致します                                                                                  |
+| `RENAME TABLE ignore.t1 TO ignore.t2` | 無視する                  | `ignore.t1`フィルタルールに一致しません                                                                               |
+| `RENAME TABLE test.n1 TO test.t1`     | エラーを報告してレプリケーションを終了する | 古いテーブル名`test.n1`フィルタ ルールに一致しませんが、新しいテーブル名`test.t1`フィルタ ルールに一致します。この操作は不正です。この場合、エラー メッセージを参照して対処してください。 |
+| `RENAME TABLE ignore.t1 TO test.t1`   | エラーを報告してレプリケーションを終了する | 上記と同じ理由です。                                                                                              |
 
 #### DDL ステートメントで複数のテーブルの名前を変更する {#rename-multiple-tables-in-a-ddl-statement}
 
-DDL ステートメントで複数のテーブルの名前を変更する場合、TiCDC は、古いデータベース名、古いテーブル名、および新しいデータベース名がすべてフィルター ルールに一致する場合にのみ、DDL ステートメントを複製します。
+DDL ステートメントで複数のテーブルの名前を変更する場合、TiCDC は、**古いデータベース名**、**古いテーブル名**、および**新しいデータベース名**がすべてフィルター ルールに一致する場合にのみ、DDL ステートメントを複製します。
 
 また、TiCDC はテーブル名を入れ替える`RENAME TABLE` DDL をサポートしていません。以下は例です。
 
@@ -102,8 +102,37 @@ TiCDC はこのタイプの DDL を次のように処理します。
 | `RENAME TABLE test.t1 TO test.t2, test.t3 TO test.t4`                      | 複製する     | すべてのデータベース名とテーブル名はフィルター ルールと一致します。                                                                                      |
 | `RENAME TABLE test.t1 TO test.ignore1, test.t3 TO test.ignore2`            | 複製する     | 古いデータベース名、古いテーブル名、および新しいデータベース名は、フィルター ルールと一致します。                                                                       |
 | `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`                  | エラーを報告する | 新しいデータベース名`ignore`フィルター ルールと一致しません。                                                                                     |
-| `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | エラーを報告する | `RENAME TABLE` DDL は 1 つの DDL ステートメント内で`test.t1`と`test.t3`の名前を入れ替えますが、TiCDC はこれを正しく処理できません。この場合、エラー メッセージを参照して対処してください。 |
+| `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | エラーを報告する | `RENAME TABLE` DDL は 1 つの DDL ステートメント内で`test.t1`と`test.t3`の名前を入れ替えますが、TiCDC はこれを正しく処理できません。この場合、エラー メッセージを参照して処理してください。 |
 
 ### DDL ステートメントの考慮事項 {#ddl-statement-considerations}
 
 アップストリームでクロスデータベース DDL ステートメント ( `CREATE TABLE db1.t1 LIKE t2`など) を実行する場合は、関連するすべてのデータベース名を DDL ステートメント ( `CREATE TABLE db1.t1 LIKE db2.t2`など) で明示的に指定することをお勧めします。そうしないと、データベース名情報が不足しているため、ダウンストリームでクロスデータベース DDL ステートメントが正しく実行されない可能性があります。
+
+### イベント フィルタ ルールを使用して DDL イベントをフィルタする場合の注意事項 {#notes-on-using-event-filter-rules-to-filter-ddl-events}
+
+フィルターされた DDL ステートメントにテーブルの作成または削除が含まれる場合、TiCDC は DML ステートメントのレプリケーション動作に影響を与えずに DDL ステートメントのみをフィルターします。次に例を示します。
+
+changefeed の構成ファイルが次のようになっていると仮定します。
+
+```toml
+[filter]
+rules = ['test.t*']
+
+matcher = ["test.t1"] # This filter rule applies only to the t1 table in the test database.
+ignore-event = ["create table", "drop table", "truncate table", "rename table"]
+```
+
+| DDL                                                    | DDLの動作 | DMLの動作    | 説明                                                                                                                           |
+| ------------------------------------------------------ | ------ | --------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `CREATE TABLE test.t1 (id INT, name VARCHAR(50));`     | 無視する   | 複製する      | `test.t1`イベント フィルタ ルールに一致するため、 `CREATE TABLE`イベントは無視されます。DML イベントのレプリケーションは影響を受けません。                                         |
+| `CREATE TABLE test.t2 (id INT, name VARCHAR(50));`     | 複製する   | 複製する      | `test.t2`イベント フィルタ ルールと一致しません。                                                                                               |
+| `CREATE TABLE test.ignore (id INT, name VARCHAR(50));` | 無視する   | 無視する      | `test.ignore`イベント フィルター ルールに一致するため、DDL イベントと DML イベントの両方が無視されます。                                                             |
+| `DROP TABLE test.t1;`                                  | 無視する   | <li></li> | `test.t1`イベント フィルタ ルールに一致するため、 `DROP TABLE`イベントは無視されます。テーブルが削除されたため、TiCDC は`t1`の DML イベントを複製しなくなります。                         |
+| `TRUNCATE TABLE test.t1;`                              | 無視する   | 複製する      | `test.t1`イベント フィルタ ルールに一致するため、 `TRUNCATE TABLE`イベントは無視されます。DML イベントのレプリケーションは影響を受けません。                                       |
+| `RENAME TABLE test.t1 TO test.t2;`                     | 無視する   | 複製する      | `test.t1`イベント フィルタ ルールに一致するため、 `RENAME TABLE`イベントは無視されます。DML イベントのレプリケーションは影響を受けません。                                         |
+| `RENAME TABLE test.t1 TO test.ignore;`                 | 無視する   | 無視する      | `test.t1`イベント フィルター ルールに一致するため、 `RENAME TABLE`イベントは無視されます。4 `test.ignore`イベント フィルター ルールに一致するため、DDL イベントと DML イベントの両方が無視されます。 |
+
+> **注記：**
+>
+> -   データをデータベースにレプリケートする場合は、イベント フィルターを使用して DDL イベントを慎重にフィルター処理します。レプリケーション中に上流と下流のデータベース スキーマが一貫していることを確認してください。そうでない場合、TiCDC はエラーを報告したり、未定義のレプリケーション動作を引き起こしたりする可能性があります。
+> -   v6.5.8、v7.1.4、v7.5.1 より前のバージョンでは、イベント フィルターを使用してテーブルの作成または削除を含む DDL イベントをフィルターすると、DML レプリケーションに影響します。これらのバージョンではこの機能を使用することはお勧めしません。

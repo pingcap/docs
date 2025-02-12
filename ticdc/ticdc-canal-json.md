@@ -38,7 +38,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-
 
 ## メッセージ形式の定義 {#definitions-of-message-formats}
 
-このセクションでは、DDL イベント、DML イベント、ウォーターマーク イベントの形式と、コンシューマー側でデータが解決される方法について説明します。
+このセクションでは、DDL イベント、DML イベント、WATERMARK イベントの形式と、コンシューマー側でデータが解析される方法について説明します。
 
 ### DDLイベント {#ddl-event}
 
@@ -163,9 +163,9 @@ TiCDC は、 `enable-tidb-extension`を`true`に設定した場合にのみ WATE
 }
 ```
 
-### 消費者側のデータ解決 {#data-resolution-on-the-consumer-side}
+### 消費者側でのデータ解析 {#data-parsing-on-the-consumer-side}
 
-上記の例からわかるように、Canal-JSON には統一されたデータ形式があり、イベントの種類ごとに異なるフィールド入力ルールがあります。統一された方法を使用してこの JSON 形式のデータを解決し、フィールド値をチェックしてイベントの種類を判別できます。
+上記の例からわかるように、Canal-JSON には統一されたデータ形式があり、イベントの種類ごとに異なるフィールド入力ルールがあります。コンシューマーは、統一された方法を使用してこの JSON 形式のデータを解析し、フィールド値をチェックしてイベントの種類を判別できます。
 
 -   `isDdl`が`true`場合、メッセージには DDL イベントが含まれます。
 -   `isDdl`が`false`場合、 `type`フィールドをさらに確認する必要があります。 `type`が`TIDB_WATERMARK`場合、それは WATERMARK イベントです。それ以外の場合は、DML イベントです。

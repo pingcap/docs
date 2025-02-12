@@ -75,7 +75,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiKV は、ログリサイクル[＃14371](https://github.com/tikv/tikv/issues/14371) @ [リクササシネーター](https://github.com/LykxSassinator)用の空のログファイルの自動生成をサポートします。
 
-    v6.3.0 では、TiKV は書き込み負荷によって発生するロングテールレイテンシーを削減する[Raft丸太リサイクル](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)機能を導入しました。ただし、ログのリサイクルはRaftログ ファイルの数が一定のしきい値に達した場合にのみ有効になるため、ユーザーがこの機能によってもたらされるスループットの向上を直接体験することは困難です。
+    v6.3.0 では、TiKV は書き込み負荷によって発生するロングテールレイテンシーを削減する[Raft丸太リサイクル](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)機能を導入しました。ただし、ログのリサイクルはRaftログ ファイルの数が一定のしきい値に達した場合にのみ有効になるため、この機能によってもたらされるスループットの向上をユーザーが直接体験することは困難です。
 
     v7.0.0 では、ユーザー エクスペリエンスを向上させるために、 `raft-engine.prefill-for-recycle`という新しい構成項目が導入されました。この項目は、プロセスの開始時にリサイクル用に空のログ ファイルを生成するかどうかを制御します。この構成を有効にすると、TiKV は初期化中に空のログ ファイルのバッチを自動的に埋め、初期化後すぐにログのリサイクルが有効になるようにします。
 
@@ -156,7 +156,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   `prefer-leader`オプションをサポートすることで、読み取り操作の可用性が向上し、不安定なネットワーク状況での応答レイテンシーが短縮されます[＃40905](https://github.com/pingcap/tidb/issues/40905) @ [リクササシネーター](https://github.com/LykxSassinator)
 
-    システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)を通じて、TiDB のデータ読み取り動作を制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。変数が`prefer-leader`に設定されている場合、TiDB はリーダー レプリカを選択して読み取り操作を実行することを優先します。ディスクやネットワークのパフォーマンスの変動などにより、リーダー レプリカの処理速度が大幅に低下した場合、TiDB は他の利用可能なフォロワー レプリカを選択して読み取り操作を実行し、可用性を高め、応答のレイテンシーを短縮します。
+    システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)を通じて、TiDB のデータ読み取り動作を制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。変数が`prefer-leader`に設定されている場合、TiDB はリーダー レプリカを選択して読み取り操作を実行することを優先します。ディスクまたはネットワーク パフォーマンスの変動などにより、リーダー レプリカの処理速度が大幅に低下した場合、TiDB は他の利用可能なフォロワー レプリカを選択して読み取り操作を実行し、可用性を高め、応答のレイテンシーを短縮します。
 
     詳細については[ドキュメント](/develop/dev-guide-use-follower-read.md)参照してください。
 
@@ -294,6 +294,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 | [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                   | 新しく追加された | この変数は、 [TiFlash後期実体化](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御します。デフォルト値は`OFF`で、これは機能が無効であることを意味します。                                                                         |
 | [`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700) | 新しく追加された | この変数は、SQL ステートメントに`ORDER BY`および`LIMIT`句が含まれ、フィルタリング条件がある場合に、オプティマイザーがインデックスを選択する方法を制御します。                                                                                                    |
 | [`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)                         | 新しく追加された | 単一行の競合シナリオでトランザクションの末尾のレイテンシーを削減するために、拡張された悲観的ロック ウェイク モデルを有効にするかどうかを制御します。デフォルト値は`ON`です。クラスターが以前のバージョンから v7.0.0 以降にアップグレードされると、この変数の値は`OFF`に設定されます。                                         |
+| [`tidb_slow_txn_log_threshold`](/system-variables.md#tidb_slow_txn_log_threshold-new-in-v700)                                     | 新しく追加された | 低速トランザクション ログのしきい値を設定します。トランザクションの実行時間がこのしきい値を超えると、TiDB はトランザクションに関する詳細情報をログに記録します。デフォルト値`0`は、この機能が無効であることを意味します。                                                                            |
 | [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)                                               | 新しく追加された | この変数は、クラスター全体の TTL タスクの同時実行を制限するために使用されます。デフォルト値`-1`は、TTL タスクが TiKV ノードの数と同じであることを意味します。                                                                                                     |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
@@ -356,7 +357,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
         -   Kafka がダウンストリームであるシナリオで、単一の大きなテーブルのデータ変更を複数の TiCDC ノードに分散することをサポートし、大規模な TiDB クラスターのデータ統合シナリオにおける単一テーブルのスケーラビリティの問題を解決します[＃8247](https://github.com/pingcap/tiflow/issues/8247) @ [金星の上](https://github.com/overvenus)
 
-            この機能を有効にするには、TiCDC 構成項目`enable_table_across_nodes`を`true`に設定します`region_threshold`使用すると、テーブルのリージョン数がこのしきい値を超えると、TiCDC が対応するテーブルのデータ変更を複数の TiCDC ノードに配布し始めるように指定できます。
+            この機能を有効にするには、TiCDC 構成項目`enable_table_across_nodes`を`true`に設定します`region_threshold`使用すると、テーブルのリージョンの数がこのしきい値を超えると、TiCDC が対応するテーブルのデータ変更を複数の TiCDC ノードに配布し始めるように指定できます。
 
         -   災害復旧シナリオでのスループットの向上とRTOの短縮のために、REDOアプライヤでのトランザクション分割をサポートする[＃8318](https://github.com/pingcap/tiflow/issues/8318) @ [チャールズ・チュン96](https://github.com/CharlesCheung96)
 

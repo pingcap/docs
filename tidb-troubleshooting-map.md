@@ -291,7 +291,7 @@ TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-s
 
 ### 4.5 TiKVの書き込みが遅い {#4-5-tikv-write-is-slow}
 
--   4.5.1 TiKV gRPC の`prewrite/commit/raw-put`期間を表示して、TiKV 書き込みが低いかどうかを確認します (RawKV クラスターのみ)。通常、 [パフォーマンスマップ](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png)に従って遅いフェーズを見つけることができます。一般的な状況をいくつか次に示します。
+-   4.5.1 TiKV gRPC の`prewrite/commit/raw-put`期間を表示して、TiKV 書き込みが遅いかどうかを確認します (RawKV クラスターのみ)。通常、 [パフォーマンスマップ](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png)に従って遅いフェーズを見つけることができます。一般的な状況をいくつか次に示します。
 
 -   4.5.2 スケジューラ CPU がビジー状態です (トランザクション kv のみ)。
 
@@ -458,7 +458,7 @@ TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-s
 
 -   6.1.9Drainerは`gen update sqls failed: table xxx: row data is corruption []`エラーを報告します。
 
-    -   トリガー: アップストリームは、 `DROP COLUMN` DDL を実行しながら、このテーブルに対して DML 操作を実行します。この問題は v3.0.6 で修正されました。中国語では[ケース-820](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case820.md)参照してください。
+    -   トリガー: アップストリームは、 `DROP COLUMN` DDL を実行しながら、このテーブルに対して DML 操作を実行します。この問題は v3.0.6 で修正されました。中国語では[ケース820](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case820.md)参照してください。
 
 -   6.1.10Drainerのレプリケーションがハングします。プロセスはアクティブなままですが、チェックポイントは更新されません。
 
@@ -604,7 +604,7 @@ TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-s
     SET GLOBAL tidb_gc_enable = 0;
     ```
 
-### 7.2 ティクヴァ {#7-2-tikv}
+### 7.2 ティクヴィ {#7-2-tikv}
 
 -   7.2.1 `key is locked` .
 

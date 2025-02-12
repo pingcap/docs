@@ -5,7 +5,7 @@ summary: PLAN REPLAYER を使用してクラスターのオンサイト情報を
 
 # PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する {#use-plan-replayer-to-save-and-restore-the-on-site-information-of-a-cluster}
 
-TiDB クラスターの問題を特定してトラブルシューティングする場合、多くの場合、システムと実行プランに関する情報を提供する必要があります。より便利かつ効率的に情報を取得し、クラスターの問題をトラブルシューティングできるように、TiDB v5.3.0 では`PLAN REPLAYER`コマンドが導入されています。このコマンドを使用すると、クラスターのオンサイト情報を簡単に保存および復元でき、トラブルシューティングの効率が向上し、管理のために問題をより簡単にアーカイブできるようになります。
+TiDB クラスターの問題を特定してトラブルシューティングする場合、多くの場合、システムと実行プランに関する情報を提供する必要があります。より便利かつ効率的に情報を取得し、クラスターの問題をトラブルシューティングできるようにするために、TiDB v5.3.0 で`PLAN REPLAYER`コマンドが導入されました。このコマンドを使用すると、クラスターのオンサイト情報を簡単に保存および復元でき、トラブルシューティングの効率が向上し、管理のために問題をより簡単にアーカイブできるようになります。
 
 `PLAN REPLAYER`の特徴は以下の通りです。
 
@@ -17,7 +17,7 @@ TiDB クラスターの問題を特定してトラブルシューティングす
 `PLAN REPLAYER`使用すると、TiDB クラスターのオンサイト情報を保存できます。エクスポート インターフェイスは次のとおりです。
 
 ```sql
-PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
+PLAN REPLAYER DUMP [WITH STATS AS OF TIMESTAMP expression] EXPLAIN [ANALYZE] sql-statement;
 ```
 
 TiDB は`sql-statement`に基づいて、次のオンサイト情報を整理してエクスポートします。

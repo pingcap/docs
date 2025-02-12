@@ -83,7 +83,7 @@ TiDB バージョン: 7.6.0
 
     v7.6.0 以降、TiDB は TiKV の定期的な完全圧縮をサポートしています。この機能は、冗長なデータ バージョンを排除するためのガベージ コレクション (GC) の拡張機能として機能します。アプリケーション アクティビティに明らかなピークと谷が見られるシナリオでは、この機能を使用してアイドル期間中にデータ圧縮を実行し、ピーク期間中のパフォーマンスを向上させることができます。
 
-    TiKV 構成項目[`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)構成することで、TiKV が定期的な完全圧縮を開始する特定の時間を設定し、 [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)構成することで TiKV の定期的な完全圧縮の最大 CPU 使用率を制限できます。デフォルト値`periodic-full-compact-start-max-cpu`は 10% です。つまり、定期的な完全圧縮は TiKV の CPU 使用率が 10% 未満の場合にのみトリガーされ、アプリケーション トラフィックへの影響が軽減されます。
+    TiKV 構成項目[`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)を構成することで、TiKV が定期的な完全圧縮を開始する特定の時間を設定し、 [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)構成することで TiKV の定期的な完全圧縮の最大 CPU 使用率を制限できます。 `periodic-full-compact-start-max-cpu`のデフォルト値は`0.1`です。これは、TiKV の CPU 使用率が 10% 未満の場合にのみ定期的な完全圧縮がトリガーされ、アプリケーション トラフィックへの影響が軽減されることを意味します。
 
     詳細については[ドキュメント](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)参照してください。
 
@@ -309,9 +309,9 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
 -   TiFlash
 
     -   ディスクパフォ​​ーマンスジッターによる読み取りレイテンシーへの影響を軽減[＃8583](https://github.com/pingcap/tiflash/issues/8583) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
-    -   バックグラウンドGCタスクが読み取りおよび書き込みタスクのレイテンシーに与える影響を軽減する[＃8650](https://github.com/pingcap/tiflash/issues/8650) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
+    -   バックグラウンドGCタスクによる読み取りおよび書き込みタスクのレイテンシーへの影響を軽減する[＃8650](https://github.com/pingcap/tiflash/issues/8650) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
     -   ストレージとコンピューティングの分離アーキテクチャで同一のデータ読み取り操作をマージして、高同時実行性[＃6834](https://github.com/pingcap/tiflash/issues/6834) @ [ジンヘリン](https://github.com/JinheLin)でのデータスキャンパフォーマンスを向上させることをサポートします。
-    -   `JOIN ON` [＃47424](https://github.com/pingcap/tidb/issues/47424) @ [ゲンリキ](https://github.com/gengliqi)にJOIN KEY等価条件のみが含まれる場合の`SEMI JOIN`と`LEFT OUTER SEMIJOIN`の実行パフォーマンスを最適化します
+    -   `JOIN ON` [＃47424](https://github.com/pingcap/tidb/issues/47424) @ [ゲンリキ](https://github.com/gengliqi)にJOIN KEY等価条件のみが含まれる場合の`SEMI JOIN`と`LEFT OUTER SEMIJOIN`の実行パフォーマンスを最適化します。
 
 -   ツール
 
@@ -329,7 +329,7 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
 
     -   TiDB データ移行 (DM)
 
-        -   DM OpenAPI [＃10193](https://github.com/pingcap/tiflow/issues/10193) @ [GMHDBJD](https://github.com/GMHDBJD)にフルデータ物理インポートの構成を追加します
+        -   DM OpenAPI [＃10193](https://github.com/pingcap/tiflow/issues/10193) @ [GMHDBJD](https://github.com/GMHDBJD)にフルデータ物理インポートの設定を追加します
 
     -   TiDB Lightning
 
@@ -350,8 +350,8 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
     -   パーティション列タイプが`DATETIME` [＃48814](https://github.com/pingcap/tidb/issues/48814) @ [クレイジーcs520](https://github.com/crazycs520)の場合に`ALTER TABLE ... LAST PARTITION`実行が失敗する問題を修正
     -   データの末尾にスペースが含まれている場合に`LIKE`で`_`ワイルドカードを使用すると、クエリ結果が不正確になる可能性がある問題を修正しました[＃48983](https://github.com/pingcap/tidb/issues/48983) @ [時間と運命](https://github.com/time-and-fate)
     -   `tidb_server_memory_limit` [＃48741](https://github.com/pingcap/tidb/issues/48741) @ [徐懐玉](https://github.com/XuHuaiyu)による長期メモリ圧迫により TiDB の CPU 使用率が高くなる問題を修正
-    -   `ENUM`型の列を結合キー[＃48991](https://github.com/pingcap/tidb/issues/48991) @ [ウィノロス](https://github.com/winoros)として使用するとクエリ結果が正しくなくなる問題を修正
-    -   メモリ制限を超えたときに CTE を含むクエリが予期せず停止する問題を修正[＃49096](https://github.com/pingcap/tidb/issues/49096) @ [アイリンキッド](https://github.com/AilinKid)
+    -   `ENUM`型の列を結合キー[＃48991](https://github.com/pingcap/tidb/issues/48991) @ [ウィノロス](https://github.com/winoros)として使用した場合にクエリ結果が正しくない問題を修正
+    -   メモリ制限を超えると CTE を含むクエリが予期せず停止する問題を修正[＃49096](https://github.com/pingcap/tidb/issues/49096) @ [アイリンキッド](https://github.com/AilinKid)
     -   監査ログ用のエンタープライズプラグインを使用すると、TiDBサーバーが大量のリソースを消費する可能性がある問題を修正[＃49273](https://github.com/pingcap/tidb/issues/49273) @ [lcwangchao](https://github.com/lcwangchao)
     -   特定のシナリオでオプティマイザがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正[＃49285](https://github.com/pingcap/tidb/issues/49285) @ [アイリンキッド](https://github.com/AilinKid)
     -   `WITH RECURSIVE` CTE を含む`UPDATE`または`DELETE`ステートメントで誤った結果が生成される可能性がある問題を修正しました[＃48969](https://github.com/pingcap/tidb/issues/48969) @ [ウィノロス](https://github.com/winoros)
@@ -359,7 +359,7 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
     -   非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われても、 [＃49369](https://github.com/pingcap/tidb/issues/49369) @ [天菜まお](https://github.com/tiancaiamao)エラーが報告される問題を修正しました。
     -   CTEクエリが再試行プロセス[＃46522](https://github.com/pingcap/tidb/issues/46522) @ [天菜まお](https://github.com/tiancaiamao)中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正
     -   ネストされた`UNION`クエリ[＃49377](https://github.com/pingcap/tidb/issues/49377) @ [アイリンキッド](https://github.com/AilinKid)で`LIMIT`と`ORDER BY`無効になる可能性がある問題を修正しました
-    -   `ENUM`または`SET`タイプの無効な値を解析すると、SQL ステートメント エラー[＃49487](https://github.com/pingcap/tidb/issues/49487) @ [ウィノロス](https://github.com/winoros)が直接発生する問題を修正しました。
+    -   `ENUM`または`SET`型の無効な値を解析すると、SQL ステートメント エラー[＃49487](https://github.com/pingcap/tidb/issues/49487) @ [ウィノロス](https://github.com/winoros)が直接発生する問題を修正しました。
     -   Golang の暗黙的な変換アルゴリズム[＃49801](https://github.com/pingcap/tidb/issues/49801) @ [qw4990](https://github.com/qw4990)によって発生する統計の構築における過度の統計エラーの問題を修正
     -   一部のタイムゾーンで夏時間が正しく表示されない問題を修正[＃49586](https://github.com/pingcap/tidb/issues/49586) @ [金星の上](https://github.com/overvenus)
     -   テーブルが[＃48869](https://github.com/pingcap/tidb/issues/48869) @ [天菜まお](https://github.com/tiancaiamao)と多数ある場合に、テーブルが`AUTO_ID_CACHE=1`の場合に gRPC クライアント リークが発生する可能性がある問題を修正しました。
@@ -373,7 +373,7 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
     -   `tidb_enable_collect_execution_info`無効にするとコプロセッサキャッシュがpanicになる問題を修正[＃48212](https://github.com/pingcap/tidb/issues/48212) @ [あなた06](https://github.com/you06)
     -   `shuffleExec`予期せず終了すると TiDB がクラッシュする問題を修正[＃48230](https://github.com/pingcap/tidb/issues/48230) @ [うわー](https://github.com/wshwsh12)
     -   静的`CALIBRATE RESOURCE` Prometheusデータ[＃49174](https://github.com/pingcap/tidb/issues/49174) @ [栄光](https://github.com/glorv)に依存している問題を修正
-    -   日付に大きな間隔を追加すると、誤った結果が返される問題を修正しました。修正後は、無効なプレフィックスまたは文字列`true`を持つ間隔はゼロとして扱われ、MySQL 8.0 [＃49227](https://github.com/pingcap/tidb/issues/49227) @ [lcwangchao](https://github.com/lcwangchao)と一致します。
+    -   日付に大きな間隔を追加すると、誤った結果が返される問題を修正しました。修正後は、無効なプレフィックスまたは文字列`true`を持つ間隔は 0 として扱われ、MySQL 8.0 [＃49227](https://github.com/pingcap/tidb/issues/49227) @ [lcwangchao](https://github.com/lcwangchao)と一致します。
     -   `ROW`関数が`null`型を誤って推論し、予期しないエラー[＃49015](https://github.com/pingcap/tidb/issues/49015) @ [うわー](https://github.com/wshwsh12)が発生する問題を修正しました。
     -   `ILIKE`関数がいくつかのシナリオでデータ競合を引き起こす可能性がある問題を修正[＃49677](https://github.com/pingcap/tidb/issues/49677) @ [lcwangchao](https://github.com/lcwangchao)
     -   `STREAM_AGG()` CI [＃49902](https://github.com/pingcap/tidb/issues/49902) @ [うわー](https://github.com/wshwsh12)を誤って処理したためにクエリ結果が正しくない問題を修正しました
