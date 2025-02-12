@@ -78,7 +78,7 @@ Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the pre
     SELECT APPROX_COUNT_DISTINCT(a, b) FROM t GROUP BY c;
     ```
 
-    ```sql
+    ```
     +-----------------------------+
     | approx_count_distinct(a, b) |
     +-----------------------------+
