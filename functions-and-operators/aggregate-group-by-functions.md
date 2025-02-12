@@ -63,7 +63,7 @@ Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the pre
 
 + `APPROX_COUNT_DISTINCT(expr, [expr...])`
 
-    The usage of this function is almost same with `COUNT(DISTINCT)` but returns approximate result. It uses `BJKST` algorithm and consumes less memory during simultaneous computation of cardinality for a large number of data sets whose cardinality has power law distribution. Moreover, it's very accurate for data sets with small cardinality and very efficient on CPU.
+    This function is similar to `COUNT(DISTINCT)` in counting the number of distinct values but returns an approximate result. It uses the `BJKST` algorithm, significantly reducing memory consumption when processing large datasets with a power-law distribution. Moreover, for low-cardinality data, this function provides high accuracy while maintaining efficient CPU utilization.
 
     The following example shows how to use this function:
 
