@@ -36,6 +36,10 @@ In most scenarios, you are recommended to use private endpoint connection over V
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
+## Prerequisites
+
+Make sure that DNS hostname and DNS resolution are both enabled in your AWS VPC settings. They are disabled by default when you create a VPC in the AWS Management Console.
+
 ## Set up a private endpoint connection and connect to your cluster
 
 To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the follow these steps:
@@ -76,6 +80,20 @@ If you see the `TiDB Private Link Service is ready` message, the corresponding e
 Then, you can create an AWS interface endpoint either using the [AWS Management Console](https://aws.amazon.com/console/) or using the AWS CLI.
 
 <SimpleTab>
+<div label="Use AWS CLI">
+
+To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
+
+1. Copy the generated command and run it in your terminal.
+2. Record the VPC endpoint ID you just created.
+
+> **Tip:**
+>
+> - Before running the command, you need to have AWS CLI installed and configured. See [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) for details.
+>
+> - If your service is spanning across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+
+</div>
 <div label="Use AWS Console">
 
 To use the AWS Management Console to create a VPC interface endpoint, perform the following steps:
@@ -106,20 +124,6 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 9. Click **Create endpoint**.
 
 </div>
-<div label="Use AWS CLI">
-
-To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
-
-1. Copy the generated command and run it in your terminal.
-2. Record the VPC endpoint ID you just created.
-
-> **Tip:**
->
-> - Before running the command, you need to have AWS CLI installed and configured. See [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) for details.
->
-> - If your service is spanning across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
-
-</div>
 </SimpleTab>
 
 ### Step 3. Create a private endpoint connection
@@ -140,6 +144,17 @@ To use the AWS CLI to create a VPC interface endpoint, perform the following ste
 Enable private DNS in AWS. You can either use the AWS Management Console or the AWS CLI.
 
 <SimpleTab>
+<div label="Use AWS CLI">
+
+To enable private DNS using your AWS CLI, copy the following `aws ec2 modify-vpc-endpoint` command from the **Create Private Endpoint Connection** page and run it in your AWS CLI.
+
+```bash
+aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
+```
+
+Alternatively, you can find the command on the **Networking** page of your cluster. Locate the private endpoint and click **...*** > **Enable DNS** in the **Action** column.
+
+</div>
 <div label="Use AWS Console">
 
 To enable private DNS in your AWS Management Console:
@@ -150,17 +165,6 @@ To enable private DNS in your AWS Management Console:
 4. Click **Save changes**.
 
     ![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
-
-</div>
-<div label="Use AWS CLI">
-
-To enable private DNS using your AWS CLI, copy the following `aws ec2 modify-vpc-endpoint` command from the **Create Private Endpoint Connection** page and run it in your AWS CLI.
-
-```bash
-aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
-```
-
-Alternatively, you can find the command on the **Networking** page of your cluster. Locate the private endpoint and click **...*** > **Enable DNS** in the **Action** column.
 
 </div>
 </SimpleTab>
@@ -205,7 +209,3 @@ The possible statuses of a private endpoint service are explained as follows:
 You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select the proper **Manage security groups**. A proper security group within your VPC that allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
-
-### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled
-
-Make sure that DNS hostname and DNS resolution are both enabled in your VPC setting. They are disabled by default when you create a VPC in the AWS Management Console.
