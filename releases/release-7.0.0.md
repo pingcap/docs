@@ -115,7 +115,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   高速オンラインDDLのチェックポイントメカニズムをサポートし、フォールトトレランスと自動リカバリ機能を向上させます[＃42164](https://github.com/pingcap/tidb/issues/42164) @ [タンジェンタ](https://github.com/tangenta)
 
-    TiDB v7.0.0 では、 [高速オンラインDDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)のチェックポイント メカニズムが導入され、フォールト トレランスと自動リカバリ機能が大幅に向上しました。DDL の進行状況を定期的に記録して同期することで、TiDB DDL 所有者の障害や切り替えが発生した場合でも、進行中の DDL 操作を高速オンライン DDL モードで引き続き実行できます。これにより、DDL の実行がより安定して効率的になります。
+    TiDB v7.0.0 では、 [高速オンラインDDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)のチェックポイント メカニズムが導入され、フォールト トレランスと自動リカバリ機能が大幅に向上しました。DDL の進行状況を定期的に記録して同期することで、TiDB DDL 所有者に障害が発生したり、切り替えがあったりしても、進行中の DDL 操作を高速オンライン DDL モードで引き続き実行できます。これにより、DDL の実行がより安定して効率的になります。
 
     詳細については[ドキュメント](/ddl-introduction.md)参照してください。
 
@@ -156,7 +156,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   `prefer-leader`オプションをサポートすることで、読み取り操作の可用性が向上し、不安定なネットワーク状況での応答レイテンシーが短縮されます[＃40905](https://github.com/pingcap/tidb/issues/40905) @ [リクササシネーター](https://github.com/LykxSassinator)
 
-    システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)を通じて、TiDB のデータ読み取り動作を制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。変数が`prefer-leader`に設定されている場合、TiDB はリーダー レプリカを選択して読み取り操作を実行することを優先します。ディスクやネットワークのパフォーマンスの変動などにより、リーダー レプリカの処理速度が大幅に低下した場合、TiDB は他の利用可能なフォロワー レプリカを選択して読み取り操作を実行し、可用性を高め、応答のレイテンシーを短縮します。
+    システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)を通じて、TiDB のデータ読み取り動作を制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。変数が`prefer-leader`に設定されている場合、TiDB はリーダー レプリカを選択して読み取り操作を実行することを優先します。ディスクまたはネットワーク パフォーマンスの変動などにより、リーダー レプリカの処理速度が大幅に低下した場合、TiDB は他の利用可能なフォロワー レプリカを選択して読み取り操作を実行し、可用性を高め、応答のレイテンシーを短縮します。
 
     詳細については[ドキュメント](/develop/dev-guide-use-follower-read.md)参照してください。
 
@@ -235,7 +235,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiDBは、自動インクリメント列がインデックス[＃40580](https://github.com/pingcap/tidb/issues/40580) @ [天菜まお](https://github.com/tiancaiamao)でなければならないという制約を削除します。
 
-    v7.0.0 より前の TiDB の動作は MySQL と一致しており、自動インクリメント列はインデックスまたはインデックス プレフィックスである必要があります。v7.0.0 以降、TiDB は自動インクリメント列がインデックスまたはインデックス プレフィックスである必要があるという制約を削除します。これで、テーブルの主キーをより柔軟に定義し、自動インクリメント列を使用して並べ替えとページネーションをより便利に実装できます。これにより、自動インクリメント列によって発生する書き込みホットスポットの問題も回避され、クラスター化インデックスを持つテーブルを使用することでクエリ パフォーマンスが向上します。新しいリリースでは、次の構文を使用してテーブルを作成できます。
+    v7.0.0 より前の TiDB の動作は MySQL と一致しており、自動インクリメント列はインデックスまたはインデックス プレフィックスである必要があります。v7.0.0 以降、TiDB は自動インクリメント列がインデックスまたはインデックス プレフィックスでなければならないという制約を削除します。これで、テーブルの主キーをより柔軟に定義し、自動インクリメント列を使用して並べ替えとページネーションをより便利に実装できます。これにより、自動インクリメント列によって発生する書き込みホットスポットの問題も回避され、クラスター化インデックスを持つテーブルを使用することでクエリ パフォーマンスが向上します。新しいリリースでは、次の構文を使用してテーブルを作成できます。
 
     ```sql
     CREATE TABLE test1 (
@@ -294,6 +294,7 @@ v7.0.0-DMR の主な新機能と改善点は次のとおりです。
 | [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                   | 新しく追加された | この変数は、 [TiFlash後期実体化](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御します。デフォルト値は`OFF`で、これは機能が無効であることを意味します。                                                                         |
 | [`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700) | 新しく追加された | この変数は、SQL ステートメントに`ORDER BY`および`LIMIT`句が含まれ、フィルタリング条件がある場合に、オプティマイザーがインデックスを選択する方法を制御します。                                                                                                    |
 | [`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)                         | 新しく追加された | 単一行の競合シナリオでトランザクションの末尾のレイテンシーを削減するために、拡張された悲観的ロック ウェイク モデルを有効にするかどうかを制御します。デフォルト値は`ON`です。クラスターが以前のバージョンから v7.0.0 以降にアップグレードされると、この変数の値は`OFF`に設定されます。                                         |
+| [`tidb_slow_txn_log_threshold`](/system-variables.md#tidb_slow_txn_log_threshold-new-in-v700)                                     | 新しく追加された | 低速トランザクション ログのしきい値を設定します。トランザクションの実行時間がこのしきい値を超えると、TiDB はトランザクションに関する詳細情報をログに記録します。デフォルト値`0`は、この機能が無効であることを意味します。                                                                            |
 | [`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)                                               | 新しく追加された | この変数は、クラスター全体の TTL タスクの同時実行を制限するために使用されます。デフォルト値`-1`は、TTL タスクが TiKV ノードの数と同じであることを意味します。                                                                                                     |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
@@ -457,7 +458,7 @@ TiDB コミュニティの以下の貢献者に感謝いたします。
 -   [アンチトップクォーク](https://github.com/AntiTopQuark)
 -   [えり](https://github.com/blacktear23)
 -   [ボーンチェンジャー](https://github.com/BornChanger)
--   [ドゥーシル9](https://github.com/Dousir9)
+-   [ドゥージール9](https://github.com/Dousir9)
 -   [エルワドバ](https://github.com/erwadba)
 -   [ハッピーv587](https://github.com/happy-v587)
 -   [ジフハウス](https://github.com/jiyfhust)

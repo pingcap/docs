@@ -551,20 +551,22 @@ sudo systemctl enable ntpd.service
     ```bash
     echo "fs.file-max = 1000000">> /etc/sysctl.conf
     echo "net.core.somaxconn = 32768">> /etc/sysctl.conf
-    echo "net.ipv4.tcp_tw_recycle = 0">> /etc/sysctl.conf
     echo "net.ipv4.tcp_syncookies = 0">> /etc/sysctl.conf
     echo "vm.overcommit_memory = 1">> /etc/sysctl.conf
     echo "vm.min_free_kbytes = 1048576">> /etc/sysctl.conf
     sysctl -p
     ```
 
+    > **警告：**
+    >
+    > メモリが 16 GiB 未満のシステムでは、不安定になったり起動に失敗する可能性があるため、値`vm.min_free_kbytes`を増やすことはお勧めしません。
+
     > **注記：**
     >
     > -   `vm.min_free_kbytes`は、システムによって予約される空きメモリの最小量 (KiB 単位) を制御する Linux カーネル パラメータです。
     > -   `vm.min_free_kbytes`に設定すると、メモリ再利用メカニズムに影響します。設定が大きすぎると使用可能なメモリが減少し、設定が小さすぎるとメモリ要求速度がバックグラウンド再利用速度を超え、メモリ再利用が発生してメモリ割り当てが遅れる可能性があります。
     > -   少なくとも`vm.min_free_kbytes` ～ `1048576` KiB (1 GiB) に設定することをお勧めします。 [NUMAがインストールされている](/check-before-deployment.md#install-the-numactl-tool)場合は`number of NUMA nodes * 1048576` KiB に設定することをお勧めします。
-    > -   メモリサイズが 16 GiB 未満のサーバーの場合は、デフォルト値の`vm.min_free_kbytes`変更せずに維持することをお勧めします。
-    > -   `tcp_tw_recycle` Linux カーネル 4.12 で削除されました。それ以降のカーネル バージョンを使用している場合は、この設定をスキップしてください。
+    > -   Linux カーネル 4.11 以前を実行しているシステムの場合は、 `net.ipv4.tcp_tw_recycle = 0`設定することをお勧めします。
 
 10. ユーザーの`limits.conf`ファイルを構成するには、次のコマンドを実行します。
 

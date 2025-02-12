@@ -509,7 +509,7 @@ pd-serverに関連するコンフィグレーション項目
 #### <code>read-base-cost</code> {#code-read-base-cost-code}
 
 -   読み取り要求から RU への変換の基礎係数
--   デフォルト値: 0.25
+-   デフォルト値: 0.125
 
 #### <code>write-base-cost</code> {#code-write-base-cost-code}
 

@@ -14,14 +14,14 @@ summary: TiCDC を使用して Apache Kafka にデータを複製する方法を
 ```shell
 cdc cli changefeed create \
     --server=http://10.0.10.25:8300 \
-    --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1" \
+    --sink-uri="kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1" \
     --changefeed-id="simple-replication-task"
 ```
 
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2023-11-28T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
+Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2023-11-28T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
 -   `--server` : TiCDC クラスター内の任意の TiCDCサーバーのアドレス。
@@ -70,8 +70,8 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 
 | パラメータ/パラメータ値                         | 説明                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `127.0.0.1`                          | ダウンストリーム Kafka サービスの IP アドレス。                                                                                                                                                                                                                                                                                                                                                                                          |
-| `9092`                               | ダウンストリーム Kafka のポート。                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `host`                               | ダウンストリーム Kafka サービスの IP アドレス。                                                                                                                                                                                                                                                                                                                                                                                          |
+| `port`                               | ダウンストリーム Kafka のポート。                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `topic-name`                         | 変数。Kafka トピックの名前。                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `protocol`                           | メッセージが Kafka に出力されるプロトコル。値のオプションは[`canal-json`](/ticdc/ticdc-canal-json.md) 、 [`open-protocol`](/ticdc/ticdc-open-protocol.md) 、 [`avro`](/ticdc/ticdc-avro-protocol.md) 、 [`debezium`](/ticdc/ticdc-debezium.md) 、 [`simple`](/ticdc/ticdc-simple-protocol.md)です。                                                                                                                                                     |
 | `kafka-version`                      | ダウンストリーム Kafka のバージョン。この値は、ダウンストリーム Kafka の実際のバージョンと一致している必要があります。                                                                                                                                                                                                                                                                                                                                                     |
@@ -157,7 +157,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
     TiCDC が適切に機能するために必要な最小限の権限セットは次のとおりです。
 
     -   トピック[リソースタイプ](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)の`Create` 、 `Write` 、および`Describe`権限。
-    -   クラスタリソース タイプに対する`DescribeConfig`の権限。
+    -   クラスタリソース タイプに対する`DescribeConfig`権限。
 
     各権限の使用シナリオは次のとおりです。
 
@@ -538,25 +538,4 @@ Kafka コンシューマーは、外部storage内の大きなメッセージの�
 }
 ```
 
-`key`および`value`フィールドは、Kafka メッセージの同じ名前のフィールドに対応します。コンシューマーは、これらの 2 つのフィールドのデータを解析することで、元の大きなメッセージを取得できます。オープン プロトコルでエンコードされた Kafka メッセージのみ、 `key`フィールドに有効なコンテンツが含まれます。TiCDC は、 `key`と`value`両方を 1 つの JSON オブジェクトにエンコードして、完全なメッセージを一度に配信します。他のプロトコルの場合、 `key`フィールドは常に空です。
-
-#### <code>value</code>フィールドを外部storageにのみ送信する {#send-the-code-value-code-field-to-external-storage-only}
-
-v8.4.0 以降、TiCDC は Kafka メッセージの`value`フィールドのみを外部storageに送信することをサポートします。この機能は、非オープン プロトコル シナリオにのみ適用されます。この機能は、 `claim-check-raw-value`パラメータ (デフォルトは`false`を設定することで制御できます。
-
-> **注記：**
->
-> オープンプロトコルを使用する場合、 `claim-check-raw-value` ～ `true`に設定するとエラーが発生します。
-
-`claim-check-raw-value` `true`に設定すると、changefeed は Kafka メッセージの`value`フィールドを、 `key`と`value`の追加の JSON シリアル化なしで外部storageに直接送信します。これにより、CPU オーバーヘッドが削減されます。さらに、コンシューマーは外部storageから直接消費可能なデータを読み取ることができるため、逆シリアル化のオーバーヘッドが削減されます。
-
-構成例は次のとおりです。
-
-```toml
-protocol = "simple"
-
-[sink.kafka-config.large-message-handle]
-large-message-handle-option = "claim-check"
-claim-check-storage-uri = "s3://claim-check-bucket"
-claim-check-raw-value = true
-```
+`key`フィールドと`value`フィールドには、エンコードされた大きなメッセージが含まれており、これは Kafka メッセージの対応するフィールドに送信されるはずです。コンシューマーは、これらの 2 つの部分のデータを解析して、大きなメッセージの内容を復元できます。

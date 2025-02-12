@@ -62,7 +62,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については[非トランザクションDMLステートメント](/non-transactional-dml.md)および[`BATCH`構文](/sql-statements/sql-statement-batch.md)参照してください。
 
--   存続時間 (TTL) のサポート (実験的) [＃39262](https://github.com/pingcap/tidb/issues/39262) @ [lcwangchao](https://github.com/lcwangchao)
+-   TTL (time to live) のサポート (実験的) [＃39262](https://github.com/pingcap/tidb/issues/39262) @ [lcwangchao](https://github.com/lcwangchao)
 
     TTL は、行レベルのデータ有効期間管理を提供します。TiDB では、TTL 属性を持つテーブルは、データ有効期間を自動的にチェックし、行レベルで期限切れのデータを削除します。TTL は、オンラインの読み取りおよび書き込みワークロードに影響を与えることなく、不要なデータを定期的かつタイムリーにクリーンアップできるように設計されています。
 
@@ -195,9 +195,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     v6.4.0 以降、TiDB は実験的機能としてグローバルメモリ制御を導入しました。v6.5.0 では GA となり、メインメモリの消費量を追跡できるようになりました。グローバルメモリの消費量が[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)で定義されたしきい値に達すると、TiDB は GC または SQL 操作のキャンセルによってメモリ使用量を制限し、安定性を確保しようとします。
 
-    セッション内のトランザクションによって消費されるメモリ(最大値は以前は構成項目[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)によって設定されていました) は、メモリ管理モジュールによって追跡されるようになりました。単一セッションのメモリ消費量がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)によって定義されたしきい値に達すると、システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)によって定義された動作がトリガーされます (デフォルトは`CANCEL` 、つまり操作のキャンセルです)。前方互換性を確保するために、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)がデフォルト以外の値として構成されている場合でも、TiDB はトランザクションが`txn-total-size-limit`によって設定されたメモリを使用できるようにします。
+    セッション内のトランザクションによって消費されるメモリ(最大値は以前は構成項目[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)によって設定されていました) は、メモリ管理モジュールによって追跡されるようになりました。単一セッションのメモリ消費がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)によって定義されたしきい値に達すると、システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)によって定義された動作がトリガーされます (デフォルトは`CANCEL` 、つまり操作のキャンセルです)。前方互換性を確保するために、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)がデフォルト以外の値として構成されている場合でも、TiDB はトランザクションが`txn-total-size-limit`によって設定されたメモリを使用できるようにします。
 
-    TiDB v6.5.0 以降を使用している場合は、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)削除し、トランザクションのメモリ使用量に個別の制限を設定しないことを推奨します。代わりに、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)と[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)使用してグローバルメモリを管理し、メモリ使用の効率を向上させることができます。
+    TiDB v6.5.0 以降を使用している場合は、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)削除し、トランザクションのメモリ使用量に個別の制限を設定しないことを推奨します。代わりに、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)と[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)使用してグローバルメモリを管理することで、メモリ使用の効率を向上させることができます。
 
     詳細については[ドキュメント](/configure-memory-usage.md)参照してください。
 
@@ -269,7 +269,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 -   TiCDCは2つのクラスター間の双方向レプリケーションをサポートします[＃38587](https://github.com/pingcap/tidb/issues/38587) @ [雄吉偉](https://github.com/xiongjiwei) @ [アズドンメン](https://github.com/asddongmen)
 
-    TiCDC は、2 つの TiDB クラスター間の双方向レプリケーションをサポートします。アプリケーション用に地理的に分散された複数のアクティブなデータ センターを構築する必要がある場合は、この機能をソリューションとして使用できます。1 つの TiDB クラスターから別の TiDB クラスターへの TiCDC 変更フィードに`bdr-mode = true`パラメータを構成すると、2 つの TiDB クラスター間の双方向データ レプリケーションを実現できます。
+    TiCDC は、2 つの TiDB クラスター間の双方向レプリケーションをサポートします。アプリケーション用に地理的に分散された複数のアクティブなデータ センターを構築する必要がある場合は、この機能をソリューションとして使用できます。1 つの TiDB クラスターから別の TiDB クラスターへの TiCDC 変更フィードに`bdr-mode = true`パラメータを構成することで、2 つの TiDB クラスター間の双方向データ レプリケーションを実現できます。
 
     詳細については[ドキュメント](/ticdc/ticdc-bidirectional-replication.md)参照してください。
 
@@ -323,6 +323,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | [`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)                                     | 新しく追加された | この変数は、経過時間に基づいて TiDB がパスワードの再利用を制限できるようにするパスワード再利用ポリシーを確立するために使用されます。デフォルト値`0`は、経過時間に基づくパスワード再利用ポリシーを無効にすることを意味します。                                                                                                                                                                                                                                  |
 | [`tidb_auto_build_stats_concurrency`](/system-variables.md#tidb_auto_build_stats_concurrency-new-in-v650)                 | 新しく追加された | この変数は、統計の自動更新を実行する同時実行性を設定するために使用されます。デフォルト値は`1`です。                                                                                                                                                                                                                                                                                                  |
 | [`tidb_cdc_write_source`](/system-variables.md#tidb_cdc_write_source-new-in-v650)                                         | 新しく追加された | この変数が 0 以外の値に設定されている場合、このセッションで書き込まれたデータは TiCDC によって書き込まれたものと見なされます。この変数は TiCDC によってのみ変更できます。いかなる場合でも、この変数を手動で変更しないでください。                                                                                                                                                                                                                            |
+| [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)                             | 新しく追加された | この変数によって制御される機能は、TiDB v6.5.0 では完全には機能しません。デフォルト値を変更しないでください。                                                                                                                                                                                                                                                                                         |
 | [`tidb_index_merge_intersection_concurrency`](/system-variables.md#tidb_index_merge_intersection_concurrency-new-in-v650) | 新しく追加された | インデックス マージが実行する交差操作の最大同時実行性を設定します。これは、TiDB が動的プルーニング モードでパーティション テーブルにアクセスする場合にのみ有効です。                                                                                                                                                                                                                                                               |
 | [`tidb_source_id`](/system-variables.md#tidb_source_id-new-in-v650)                                                       | 新しく追加された | この変数は、 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)クラスター内の異なるクラスター ID を構成するために使用されます。                                                                                                                                                                                                                                                    |
 | [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                         | 新しく追加された | この変数は、TiDB が内部 SQL ステートメント (統計の自動更新など) を実行するときに実行されるスキャン操作の同時実行性を設定するために使用されます。デフォルト値は`1`です。                                                                                                                                                                                                                                                         |

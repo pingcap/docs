@@ -83,7 +83,7 @@ TiDB バージョン: 7.6.0
 
     v7.6.0 以降、TiDB は TiKV の定期的な完全圧縮をサポートしています。この機能は、冗長なデータ バージョンを排除するためのガベージ コレクション (GC) の拡張機能として機能します。アプリケーション アクティビティに明らかなピークと谷が見られるシナリオでは、この機能を使用してアイドル期間中にデータ圧縮を実行し、ピーク期間中のパフォーマンスを向上させることができます。
 
-    TiKV 構成項目[`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)構成することで、TiKV が定期的な完全圧縮を開始する特定の時間を設定し、 [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)構成することで TiKV の定期的な完全圧縮の最大 CPU 使用率を制限できます。デフォルト値`periodic-full-compact-start-max-cpu`は 10% です。つまり、定期的な完全圧縮は TiKV の CPU 使用率が 10% 未満の場合にのみトリガーされ、アプリケーション トラフィックへの影響が軽減されます。
+    TiKV 構成項目[`periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)を構成することで、TiKV が定期的な完全圧縮を開始する特定の時間を設定し、 [`periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)構成することで TiKV の定期的な完全圧縮の最大 CPU 使用率を制限できます。 `periodic-full-compact-start-max-cpu`のデフォルト値は`0.1`です。これは、TiKV の CPU 使用率が 10% 未満の場合にのみ定期的な完全圧縮がトリガーされ、アプリケーション トラフィックへの影響が軽減されることを意味します。
 
     詳細については[ドキュメント](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)参照してください。
 
@@ -452,7 +452,7 @@ v7.6.0 以降、 `TiDB-community-server` [バイナリパッケージ](/binary-p
     -   ストリーム読み取り[＃8505](https://github.com/pingcap/tiflash/issues/8505) @ [ゲンリキ](https://github.com/gengliqi)中に複数のパーティション テーブルをスキャンするときに発生する可能性のある OOM 問題を修正しました。
     -   短いクエリが正常に実行されると過剰な情報ログ[＃8592](https://github.com/pingcap/tiflash/issues/8592) @ [風の話し手](https://github.com/windtalker)が出力される問題を修正しました
     -   TiFlashが停止時にクラッシュする可能性がある問題を修正[＃8550](https://github.com/pingcap/tiflash/issues/8550) @ [グオシャオゲ](https://github.com/guo-shaoge)
-    -   定数文字列パラメータ[＃8604](https://github.com/pingcap/tiflash/issues/8604) @ [風の話し手](https://github.com/windtalker)を含む`GREATEST`または`LEAST`関数で発生する可能性のあるランダムな無効なメモリアクセスの問題を修正しました。
+    -   定数文字列パラメータ[＃8604](https://github.com/pingcap/tiflash/issues/8604) @ [風を語る者](https://github.com/windtalker)を含む`GREATEST`または`LEAST`関数で発生する可能性のあるランダムな無効なメモリアクセスの問題を修正しました。
 
 -   ツール
 

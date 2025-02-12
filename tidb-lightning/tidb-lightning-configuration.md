@@ -128,16 +128,16 @@ driver = "file"
 # - "": in the physical import mode, TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error. In the logical import mode, TiDB Lightning converts the "" strategy to the "error" strategy for processing.
 # - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
 # - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the latest data and overwrites the old data.
-#              When you use the physical import mode, the conflicting data are recorded in the `lightning_task_info.conflict_view` view of the target TiDB cluster.
-#              In the `lightning_task_info.conflict_view` view, if the `is_precheck_conflict` field for a row is `0`, it means that the conflicting data recorded in that row is detected by postprocess conflict detection; if the `is_precheck_conflict` field for a row is `1`, it means that conflicting data recorded in that row is detected by pre-import conflict detection.
+#              When you use the physical import mode, the conflicting data are recorded in the `lightning_task_info.conflict_error_v2` table (recording conflicting data detected by post-import conflict detection in the physical import mode) and the `conflict_records` table (recording conflicting data detected by preprocess conflict detection in both logical and physical import modes) of the target TiDB cluster.
+#              If you set `conflict.strategy = "replace"` in physical import mode, the conflicting data can be checked in the `lightning_task_info.conflict_view` view.
 #              You can manually insert the correct records into the target table based on your application requirements. Note that the target TiKV must be v5.2.0 or later versions.
 # - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data. This option can only be used in the logical import mode.
 strategy = ""
-# Controls whether to enable pre-import conflict detection, which checks conflicts in data before importing it to TiDB. The default value is false, indicating that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import. This parameter can be used only in the physical import mode. In scenarios where the number of conflict records is greater than 1,000,000, it is recommended to set `precheck-conflict-before-import = true` for better performance in conflict detection. In other scenarios, it is recommended to disable it.
+# Controls whether to enable preprocess conflict detection, which checks conflicts in data before importing it to TiDB. The default value is false, indicating that TiDB Lightning only checks conflicts after the import. If you set it to true, TiDB Lightning checks conflicts both before and after the import. This parameter can be used only in the physical import mode. In scenarios where the number of conflict records is greater than 1,000,000, it is recommended to set `precheck-conflict-before-import = true` for better performance in conflict detection. In other scenarios, it is recommended to disable it.
 # precheck-conflict-before-import = false
 # Controls the maximum number of conflict errors that can be handled when strategy is "replace" or "ignore". You can set it only when the strategy is "replace" or "ignore". The default value is 10000. If you set a value larger than 10000, the import process might experience performance degradation.
 # threshold = 10000
-# Controls the maximum number of records in the `conflict_records` table. The default value is 10000.
+# Controls the maximum number of records in the `conflict_records` table. The default value is 10000. 
 # Starting from v8.1.0, there is no need to configure `max-record-rows` manually, because TiDB Lightning automatically assigns the value of `max-record-rows` with the value of `threshold`, regardless of the user input. `max-record-rows` will be deprecated in a future release.
 # In the physical import mode, if the strategy is "replace", the conflict records that are overwritten are recorded.
 # In the logical import mode, if the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records are not recorded.
@@ -156,13 +156,16 @@ strategy = ""
 # Note that this parameter is only used in scenarios where the target table is empty.
 # parallel-import = false
 
-# The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. For more information, see <https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
+# The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. For more information, see <https://docs.pingcap.com/tidb/dev/tidb-lightning-physical-import-mode-usage#the-old-version-of-conflict-detection-deprecated-in-v800>.
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
-# - 'none': does not detect duplicate records.
-#         If there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
-#         If you set `duplicate-resolution = 'none'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`.
-# - 'remove': If you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign "replace" to `conflict.strategy` and enable the new version of conflict detection. 
+#  - none: does not detect duplicate records, which has the best performance of the two algorithms.
+#          But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
+#  - remove: if there are primary key or unique key conflicts between the inserting data A and B,
+#            A and B will be removed from the target table and recorded
+#            in the `lightning_task_info.conflict_error_v1` table in the target TiDB.
+#            You can manually insert the correct records into the target table based on your business requirements.
+#            Note that the target TiKV must be v5.2.0 or later versions; otherwise it falls back to 'none'.
 # The default value is 'none'.
 # duplicate-resolution = 'none'
 # The maximum number of KV pairs in one request when sending data to TiKV in physical import mode.
@@ -256,9 +259,6 @@ strategy = ""
 # When both `logical-import-batch-size` and `logical-import-batch-rows` are specified, the parameter whose value reaches its threshold first will take effect.
 # You can decrease this value to reduce the stress on the cluster due to large transactions.
 # logical-import-batch-rows = 65536
-
-# In Logical Import Mode, this parameter controls whether to use prepared statements and statement cache to improve performance. The default value is `false`.
-logical-import-prep-stmt = false
 
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
@@ -399,10 +399,6 @@ distsql-scan-concurrency = 15
 index-serial-scan-concurrency = 20
 checksum-table-concurrency = 2
 
-# Sets other TiDB session variables
-# [tidb.session-vars]
-# tidb_enable_clustered_index = "OFF"
-
 # The default SQL mode used to parse and execute the SQL statements.
 sql-mode = "ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"
 # Sets maximum packet size allowed for SQL connections.
@@ -426,6 +422,10 @@ max-allowed-packet = 67_108_864
 # cert-path = "/path/to/lightning.pem"
 # Private key of this service. Default to copy of `security.key-path`
 # key-path = "/path/to/lightning.key"
+
+# Sets other TiDB session variables
+# [tidb.session-vars]
+# tidb_enable_clustered_index = "OFF"
 
 # In the physical import mode, when data importing is complete, TiDB Lightning can
 # automatically perform the Checksum and Analyze operations. It is recommended

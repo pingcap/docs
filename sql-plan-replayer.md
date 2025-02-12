@@ -17,7 +17,7 @@ TiDB クラスターの問題を特定してトラブルシューティングす
 `PLAN REPLAYER`使用すると、TiDB クラスターのオンサイト情報を保存できます。エクスポート インターフェイスは次のとおりです。
 
 ```sql
-PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
+PLAN REPLAYER DUMP [WITH STATS AS OF TIMESTAMP expression] EXPLAIN [ANALYZE] sql-statement;
 ```
 
 TiDB は`sql-statement`に基づいて、次のオンサイト情報を整理してエクスポートします。
@@ -31,7 +31,7 @@ TiDB は`sql-statement`に基づいて、次のオンサイト情報を整理し
 -   `EXPLAIN [ANALYZE] sql-statement`の結果
 -   クエリ最適化の内部手順
 
-履歴統計が[有効](/system-variables.md#tidb_enable_historical_stats)場合、 `PLAN REPLAYER`ステートメントで時間を指定して、対応する時間の履歴統計を取得できます。時間と日付を直接指定することも、タイムスタンプを指定することもできます。TiDB は指定された時間より前の履歴統計を検索し、その中から最新のものをエクスポートします。
+履歴統計が[有効](/system-variables.md#tidb_enable_historical_stats)場合、 `PLAN REPLAYER`ステートメントで時間を指定して、対応する時間の履歴統計を取得できます。時間と日付を直接指定することも、タイムスタンプを指定することもできます。TiDB は、指定された時間より前の履歴統計を検索し、その中から最新のものをエクスポートします。
 
 指定された時間より前の履歴統計がない場合、TiDB は最新の統計をエクスポートします。これは、時間が指定されていない場合の動作と一致します。また、TiDB は、エクスポートされた`ZIP`ファイル内に`errors.txt`ファイルのエラー メッセージを出力。
 
@@ -155,12 +155,12 @@ set @@global.tidb_enable_auto_analyze = OFF;
 
 ```sql
 mysql> desc t;
-+-------+------+------+------+---------+-------+
-| Field | Type | Null | Key  | Default | Extra |
-+-------+------+------+------+---------+-------+
-| a     | int  | YES  |      | NULL    |       |
-| b     | int  | YES  |      | NULL    |       |
-+-------+------+------+------+---------+-------+
++-------+---------+------+------+---------+-------+
+| Field | Type    | Null | Key  | Default | Extra |
++-------+---------+------+------+---------+-------+
+| a     | int(11) | YES  |      | NULL    |       |
+| b     | int(11) | YES  |      | NULL    |       |
++-------+---------+------+------+---------+-------+
 2 rows in set (0.01 sec)
 
 mysql> explain select * from t where a = 1 or b =1;

@@ -59,7 +59,31 @@ summary: TiDB でサポートされている集計関数について学習しま
     1 row in set (0.00 sec)
     ```
 
-`GROUP_CONCAT()`と`APPROX_PERCENTILE()`関数を除き、前述のすべての関数は[ウィンドウ関数](/functions-and-operators/window-functions.md)として機能します。
+-   `APPROX_COUNT_DISTINCT(expr, [expr...])`
+
+    この関数は、異なる値の数をカウントする点では`COUNT(DISTINCT)`に似ていますが、近似値の結果を返します。3 `BJKST`を使用して、べき乗分布を持つ大規模なデータセットを処理する際のメモリ消費を大幅に削減します。さらに、この関数は、カーディナリティの低いデータに対して、効率的な CPU 使用率を維持しながら高い精度を提供します。
+
+    次の例は、この関数の使用方法を示しています。
+
+    ```sql
+    DROP TABLE IF EXISTS t;
+    CREATE TABLE t(a INT, b INT, c INT);
+    INSERT INTO t VALUES(1, 1, 1), (2, 1, 1), (2, 2, 1), (3, 1, 1), (5, 1, 2), (5, 1, 2), (6, 1, 2), (7, 1, 2);
+    ```
+
+    ```sql
+    SELECT APPROX_COUNT_DISTINCT(a, b) FROM t GROUP BY c;
+    ```
+
+        +-----------------------------+
+        | approx_count_distinct(a, b) |
+        +-----------------------------+
+        |                           3 |
+        |                           4 |
+        +-----------------------------+
+        2 rows in set (0.00 sec)
+
+`GROUP_CONCAT()` `APPROX_PERCENTILE()`関数を除き、前述のすべての関数は`APPROX_COUNT_DISTINCT` [ウィンドウ関数](/functions-and-operators/window-functions.md)機能します。
 
 ## GROUP BY 修飾子 {#group-by-modifiers}
 
