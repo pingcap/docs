@@ -105,17 +105,17 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-3. Select **Endpoint services that use NLBs and GWLBs**.
-4. Enter the service name `${your_endpoint_service_name}` from the generated command (`--service-name ${your_endpoint_service_name}`).
+3. In the **Endpoint settings** area, fill in a name tag if needed, and then select the **Endpoint services that use NLBs and GWLBs** option.
+4. In the **Service settings** area, enter the service name `${your_endpoint_service_name}` from the generated command (`--service-name ${your_endpoint_service_name}`).
 5. Click **Verify service**.
-6. Select your VPC in the drop-down list.
-7. Select the availability zones where your TiDB cluster is located in the **Subnets** area.
+6. In the **Network settings** area, select your VPC in the drop-down list.
+7. In the **Subnets** area, select the availability zones where your TiDB cluster is located.
 
     > **Tip:**
     >
     > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
-8. Select your security group properly in the **Security groups** area.
+8. In the **Security groups** area, select your security group properly.
 
     > **Note:**
     >
