@@ -105,7 +105,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-3. Select **Other endpoint services**.
+3. Select **Endpoint services that use NLBs and GWLBs**.
 4. Enter the service name `${your_endpoint_service_name}` from the generated command (`--service-name ${your_endpoint_service_name}`).
 5. Click **Verify service**.
 6. Select your VPC in the drop-down list.
