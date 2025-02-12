@@ -789,7 +789,7 @@ sudo yum -y install numactl
 
 ## Disable SELinux
 
-Check whether SELinux is enabled. To check the current status use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility. It is required to disable SELinux or have it in Permissive mode.
+SELinux must be disabled or set to permissive mode. To check the current status, use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility.
 
 On some systems (e.g. Ubuntu) the `/etc/selinux/config` file might not exist and the `getenforce` command might not be installed, in that case you can skip this step.
 
