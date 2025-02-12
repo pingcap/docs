@@ -60,8 +60,6 @@ In addition, TiDB also provides the following aggregate functions:
     1 row in set (0.00 sec)
     ```
 
-Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
-
 + `APPROX_COUNT_DISTINCT(expr, [expr...])`
 
     This function is similar to `COUNT(DISTINCT)` in counting the number of distinct values but returns an approximate result. It uses the `BJKST` algorithm, significantly reducing memory consumption when processing large datasets with a power-law distribution. Moreover, for low-cardinality data, this function provides high accuracy while maintaining efficient CPU utilization.
@@ -87,6 +85,8 @@ Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the pre
     +-----------------------------+
     2 rows in set (0.00 sec)
     ```
+
+Except for the `GROUP_CONCAT()`, `APPROX_PERCENTILE()` and `APPROX_COUNT_DISTINCT` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
 
 ## GROUP BY modifiers
 
