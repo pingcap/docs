@@ -38,7 +38,7 @@ In most scenarios, you are recommended to use private endpoint connection over V
 
 ## Prerequisites
 
-Make sure that DNS hostname and DNS resolution are both enabled in your AWS VPC settings. They are disabled by default when you create a VPC in the AWS Management Console.
+Make sure that DNS hostname and DNS resolution are both enabled in your AWS VPC settings. They are disabled by default when you create a VPC in the [AWS Management Console](https://console.aws.amazon.com/).
 
 ## Set up a private endpoint connection and connect to your cluster
 
