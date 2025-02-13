@@ -49,7 +49,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     It only takes a few clicks to complete the task configuration, and then your local CSV data can be quickly imported into your TiDB cluster. When using this method, you do not need to provide the cloud storage bucket path and Role ARN. The whole importing process is quick and smooth.
 
-    For more information, see [Import local files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+    For more information, see [Import local files to TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-import-local-files-serverless.md).
 
 ## December 20, 2022
 

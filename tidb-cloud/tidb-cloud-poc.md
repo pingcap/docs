@@ -117,7 +117,7 @@ You can import a small dataset to quickly test feasibility, or a large dataset t
 You can import data in various formats to TiDB Cloud:
 
 - [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
-- [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md)
+- [Import Local Files to TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-import-local-files-serverless.md)
 - [Import sample data in the SQL file format](/tidb-cloud/import-sample-data.md)
 - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
 - [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md)

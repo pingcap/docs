@@ -1,20 +1,19 @@
 ---
-title: Import Local Files to TiDB Cloud
-summary: Learn how to import local files to TiDB Cloud.
+title: Import Local Files to TiDB Cloud Serverless
+summary: Learn how to import local files to TiDB Cloud Serverless.
 ---
 
-# Import Local Files to TiDB Cloud
+# Import Local Files to TiDB Cloud Serverless
 
-You can import local files to TiDB Cloud directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage bucket path and Role ARN. The whole importing process is quick and smooth.
+You can import local files to TiDB Cloud Serverless directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage bucket path and Role ARN. The whole importing process is quick and smooth.
 
 Currently, this method supports importing one CSV file for one task into either an existing table or a new table.
 
 ## Limitations
 
-- Currently, TiDB Cloud only supports importing a local file in CSV format within 250 MiB for one task.
-- Importing local files is supported only for TiDB Cloud Serverless clusters, not for TiDB Cloud Dedicated clusters.
+- Currently, TiDB Cloud Serverless only supports importing a local file in CSV format within 250 MiB for one task.
 - You cannot run more than one import task at the same time.
-- When you import a CSV file into an existing table in TiDB Cloud and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
+- When you import a CSV file into an existing table in TiDB Cloud Serverless and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
     - If the extra columns are not the primary keys or the unique keys, no error will be reported. Instead, these extra columns will be populated with their [default values](/data-type-default-values.md).
     - If the extra columns are the primary keys or the unique keys and do not have the `auto_increment` or `auto_random` attribute, an error will be reported. In that case, it is recommended that you choose one of the following strategies:
         - Provide a source file that includes these the primary keys or the unique keys columns.
@@ -38,11 +37,11 @@ Currently, this method supports importing one CSV file for one task into either 
 
 4. Check the table.
 
-    You can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
+    You can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud Serverless, the table column type inferred, and the previewed data from the CSV file.
 
-    - If you import data into an existing table in TiDB Cloud, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
+    - If you import data into an existing table in TiDB Cloud Serverless, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
 
-    - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be integer.
+    - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud Serverless. For example, if the previewed data is all integers, the inferred column type will be integer.
 
 5. Configure the column names and data types.
 
@@ -52,7 +51,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If the target table already exists, the columns in the CSV file will be imported into the target table in order. Extra columns will be truncated and missing columns will be filled with default values.
 
-    - If you need TiDB Cloud to create the target table, input the name for each column. The column name must meet the following requirements:
+    - If you need TiDB Cloud Serverless to create the target table, input the name for each column. The column name must meet the following requirements:
 
         * The name must be composed of characters in Unicode BMP, excluding the null character `\u0000` and whitespace characters.
         * The length of the name must be less than 65 characters.
@@ -80,7 +79,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 ## FAQ
 
-### Can I only import some specified columns by the Import feature in TiDB Cloud?
+### Can I only import some specified columns by the Import feature in TiDB Cloud Serverless?
 
 No. Currently, you can only import all columns of a CSV file into an existing table when using the Import feature.
 
@@ -98,7 +97,7 @@ LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',
 
 If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
 
-### Why can't I query a column with a reserved keyword after importing data into TiDB Cloud?
+### Why can't I query a column with a reserved keyword after importing data into TiDB Cloud Serverless?
 
 If a column name is a reserved [keyword](/keywords.md) in TiDB, when you query the column, you need to add backticks `` ` `` to enclose the column name. For example, if the column name is `order`, you need to query the column with `` `order` ``.
 
@@ -106,7 +105,7 @@ If a column name is a reserved [keyword](/keywords.md) in TiDB, when you query t
 
 If the file is larger than 250 MiB, you can use [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md) to import the file. For more information, see [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md).
 
-Alternatively, you can use the `split [-l ${line_count}]` utility to split it into multiple smaller files (for Linux or macOS only). For example, run `split -l 100000 tidb-01.csv small_files` to split a file named `tidb-01.csv` by line length `100000`, and the split files are named `small_files${suffix}`. Then, you can import these smaller files to TiDB Cloud one by one.
+Alternatively, you can use the `split [-l ${line_count}]` utility to split it into multiple smaller files (for Linux or macOS only). For example, run `split -l 100000 tidb-01.csv small_files` to split a file named `tidb-01.csv` by line length `100000`, and the split files are named `small_files${suffix}`. Then, you can import these smaller files to TiDB Cloud Serverless one by one.
 
 Refer to the following script:
 
