@@ -508,7 +508,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - When uploading a CSV file to TiDB, you can use not only English letters and numbers, but also characters such as Chinese and Japanese to define column names. However, for special characters, only underscore (`_`) is supported.
 
-    For details, refer to [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+    For details, refer to [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files-serverless.md).
 
 ## May 16, 2023
 
@@ -806,7 +806,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     When importing a local CSV file with a header row to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster, if you need TiDB Cloud to create the target table and the column names in the header row do not follow the TiDB Cloud column naming conventions, you will see a warning icon next to the corresponding column name. To resolve the warning, you can move the cursor over the icon and follow the message to edit the existing column names or enter new column names.
 
-    For information about column naming conventions, see [Import local files](/tidb-cloud/tidb-cloud-import-local-files.md#import-local-files).
+    For information about column naming conventions, see [Import local files](/tidb-cloud/tidb-cloud-import-local-files-serverless.md#import-local-files).
 
 ## March 7, 2023
 
@@ -952,7 +952,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - When creating an import task, if your target database or table does not exist, you can enter a name to let TiDB Cloud create it for you automatically. For the target table to be created, you can specify a primary key or select multiple fields to form a composite primary key.
     - After the import is completed, you can explore your data with [AI-powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) by clicking **Explore your data by Chat2Query** or clicking the target table name in the task list.
 
-  For more information, see [Import local files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+  For more information, see [Import local files to TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-import-local-files-serverless.md).
 
 **Console changes**
 

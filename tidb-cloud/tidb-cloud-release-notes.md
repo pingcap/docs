@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support importing a single local CSV file of up to 250 MiB per task to [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters, increased from the previous limit of 50 MiB.
 
-    For more information, see [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+    For more information, see [Import Local Files to TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-import-local-files-serverless.md).
 
 ## January 14, 2025
 

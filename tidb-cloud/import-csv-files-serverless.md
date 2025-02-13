@@ -213,9 +213,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
     - **File URI** or **Folder URI**:
         - When importing one file, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[azure|https]://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `[azure|https]://sampledata/ingest/`.
-    - **Bucket Access**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
-        - **AWS Role ARN**: enter the AWS Role ARN value.
-        - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
+    - **Bucket Access**: you can use a SAS token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Connect**.
 
