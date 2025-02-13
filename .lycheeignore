@@ -15,3 +15,4 @@ http://\{grafana-ip\}:3000
 http://\{pd-ip\}:2379/dashboard
 http://localhost:\d+/
 https://github\.com/\$user/(docs|docs-cn)
+https://linux.die.net/man.*
