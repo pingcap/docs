@@ -256,9 +256,9 @@
   - Import Data into TiDB Cloud Dedicated
       - [Import Sample Data](/tidb-cloud/import-sample-data.md)
       - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
+      - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
   - Import Data into TiDB Cloud Serverless
       - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
-      - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
       - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
   - Reference
       - [Configure External Storage Access for TiDB Dedicated](/tidb-cloud/config-s3-and-gcs-access.md)
