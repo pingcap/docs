@@ -465,7 +465,7 @@ While IDs are always increasing and without significant gaps like those seen wit
 >
 > - Before v6.4.0, each ID allocation requires a TiKV transaction, which affects performance.
 > - In v6.4.0, TiDB introduces a centralized allocating service that performs ID allocation as an in-memory operation, significantly improving performance.
-> - Starting from v8.1.0, TiDB removes the automatic forceRebase operation during primary node exits to enable faster restarts. While this might result in additional non-consecutive IDs during failover, it prevents potential write blocking when many tables use `AUTO_ID_CACHE 1`.
+> - Starting from v8.1.0, TiDB removes the automatic `forceRebase` operation during primary node exits to enable faster restarts. While this might result in additional non-consecutive IDs during failover, it prevents potential write blocking when many tables use `AUTO_ID_CACHE 1`.
 
 ## Restrictions
 
