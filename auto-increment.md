@@ -427,7 +427,7 @@ The value (ID) implicitly assigned to auto-increment columns satisfies the follo
 
 ## MySQL compatibility mode
 
-TiDB provides a MySQL-compatible mode for auto-increment columns that offers strictly increasing IDs with minimal gaps. To enable this mode, set `AUTO_ID_CACHE` to `1` when creating a table:
+TiDB provides a MySQL-compatible mode for auto-increment columns that ensures strictly increasing IDs with minimal gaps. To enable this mode, set `AUTO_ID_CACHE` to `1` when creating a table:
 
 ```sql
 CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
@@ -435,7 +435,7 @@ CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
 
 When `AUTO_ID_CACHE` is set to `1`, IDs are strictly increasing across all TiDB instances, each ID is guaranteed to be unique, and gaps between IDs are minimal compared to the default cache mode (`AUTO_ID_CACHE 0` with 30000 cached values).
 
-For example, with `AUTO_ID_CACHE 1`, you might see this sequence:
+For example, with `AUTO_ID_CACHE 1`, you might see a sequence as follows:
 
 ```sql
 INSERT INTO t VALUES (); -- Returns ID 1
@@ -454,15 +454,19 @@ INSERT INTO t VALUES (); -- Returns ID 2
 INSERT INTO t VALUES (); -- Returns ID 30001
 ```
 
-While IDs are always increasing and without significant gaps like those seen with `AUTO_ID_CACHE 0`, small gaps in the sequence may still occur in several scenarios: during failover when the primary instance exits or crashes, during rolling upgrades of TiDB nodes, and during normal concurrent transactions (similar to MySQL). These gaps are necessary to maintain both uniqueness and the strictly increasing property of the IDs.
+While IDs are always increasing and without significant gaps like those seen with `AUTO_ID_CACHE 0`, small gaps in the sequence might still occur in the following scenarios. These gaps are necessary to maintain both uniqueness and the strictly increasing property of the IDs.
+
+- During failover when the primary instance exits or crashes
+- During rolling upgrades of TiDB nodes
+- During normal concurrent transactions (similar to MySQL)
 
 > **Note:**
 > 
 > The behavior and performance of `AUTO_ID_CACHE 1` has evolved across TiDB versions:
 >
-> - Before v6.4.0, each ID allocation required a TiKV transaction, which impacted performance.
-> - In v6.4.0, TiDB introduced a centralized allocating service that performs ID allocation as an in-memory operation, significantly improving performance.
-> - Starting from v8.1.0, TiDB removed the automatic forceRebase operation during primary node exits to enable faster restarts. While this may result in additional non-consecutive IDs during failover, it prevents potential write blocking when many tables use `AUTO_ID_CACHE 1`.
+> - Before v6.4.0, each ID allocation requires a TiKV transaction, which affects performance.
+> - In v6.4.0, TiDB introduces a centralized allocating service that performs ID allocation as an in-memory operation, significantly improving performance.
+> - Starting from v8.1.0, TiDB removes the automatic forceRebase operation during primary node exits to enable faster restarts. While this might result in additional non-consecutive IDs during failover, it prevents potential write blocking when many tables use `AUTO_ID_CACHE 1`.
 
 ## Restrictions
 
