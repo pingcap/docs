@@ -77,7 +77,7 @@ If you see the `TiDB Private Link Service is ready` message, the corresponding e
     aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
     ```
 
-Then, you can create an AWS interface endpoint either using the [AWS Management Console](https://aws.amazon.com/console/) or using the AWS CLI.
+Then, you can create an AWS interface endpoint either using the AWS CLI or using the [AWS Management Console](https://aws.amazon.com/console/).
 
 <SimpleTab>
 <div label="Use AWS CLI">
@@ -141,7 +141,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
 ### Step 4. Enable private DNS
 
-Enable private DNS in AWS. You can either use the AWS Management Console or the AWS CLI.
+Enable private DNS in AWS. You can either use the AWS CLI or the AWS Management Console.
 
 <SimpleTab>
 <div label="Use AWS CLI">
