@@ -24,7 +24,7 @@ By default, subqueries use `semi join` mentioned in [Understanding TiDB Executio
 In this case, `ALL` and `ANY` can be replaced by `MAX` and `MIN`. When the table is empty, the result of `MAX(EXPR)` and `MIN(EXPR)` is NULL. It works the same when the result of `EXPR` contains `NULL`. Whether the result of `EXPR` contains `NULL` may affect the final result of the expression, so the complete rewrite is given in the following form:
 
 - `t.id < all (select s.id from s)` is rewritten as `t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`
-- `t.id < any (select s.id from s)` is rewritten as `t.id < max(s.id) or if(sum(s.id is null) != 0, null, false)`
+- `t.id > any (select s.id from s)` is rewritten as `t.id > max(s.id) or if(sum(s.id is null) != 0, null, false)`
 
 ## `... != ANY (SELECT ... FROM ...)`
 
