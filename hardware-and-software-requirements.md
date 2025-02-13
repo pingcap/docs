@@ -55,7 +55,7 @@ This document describes the software and hardware requirements for deploying and
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>macOS 12 (Monterey) or later</td>
+    <td>macOS 13 (Ventura) or later</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
@@ -63,27 +63,27 @@ This document describes the software and hardware requirements for deploying and
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>Ubuntu LTS 20.04 or later</td>
+    <td>Ubuntu LTS 22.04 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>CentOS 8 Stream</td>
+    <td>CentOS 9 Stream</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>Debian 10 (Buster) or later</td>
+    <td>Debian 11 (Bullseye) or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>Fedora 38 or later</td>
+    <td>Fedora 40 or later</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>openSUSE Leap later than v15.5 (not including Tumbleweed)</td>
+    <td>openSUSE Leap later than v15.6 (not including Tumbleweed)</td>
     <td>x86_64</td>
   </tr>
   <tr>
-    <td>SUSE Linux Enterprise Server 15</td>
+    <td>SUSE Linux Enterprise Server 15.6</td>
     <td>x86_64</td>
   </tr>
 </tbody>
