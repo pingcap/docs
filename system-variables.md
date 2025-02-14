@@ -1008,11 +1008,11 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)：No
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- When too many SQL users are created in the database, create user/modify password/change user privilege etc would suffer severe performance impact. The reason is that every modification to the user cause reload of all users' data. Setting the variable to `ON` is best practice is such scenario.
-    * `0` or `OFF`: modify user related operations cause reloading of all users' data, the performance is not good when there are a lot of users.
+- When too many (for example 100K) SQL users are created in the database, operations such as create user/modify password/change user privilege would suffer severe performance impact. The reason is that every modification to the user cause reload of all users' data. Setting the variable to `ON` is best practice is such scenario.
+    * `0` or `OFF`: modify user related operations cause reloading of all users' data, the performance is not good.
     * `1` or `ON`: modify user related operations only reload the active users, so the performance is better.
 
 ### tidb_adaptive_closest_read_threshold <span class="version-mark">New in v6.3.0</span>
