@@ -355,7 +355,7 @@ Specifies certificates and keys for TLS connections within the cluster.
 #### `logical-import-prep-stmt`
 
 - In Logical Import Mode, this parameter controls whether to use [prepared statements](/sql-statements/sql-statement-prepare.md) and statement cache to improve performance.
-- Default value:`false`
+- Default value: `false`
 
 ### mydumper
 
@@ -660,7 +660,7 @@ Sets other TiDB session variables
 
 - Specifies whether to perform `ANALYZE TABLE <table>` for each table after checksum is done.
 - Default value: `"optional"`
-- Value options:`"required"`, `"optional"`, `"off"`
+- Value options: `"required"`, `"optional"`, `"off"`
 
 ### cron
 
