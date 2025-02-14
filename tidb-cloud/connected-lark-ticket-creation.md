@@ -11,15 +11,15 @@ For customers subscribed to the Enterprise support plan, we provide **PingCAP Su
 
 In the Customer Support Group lark group, type `@PingCAP Support Bot create ticket` in a message. Then, **PingCAP Support Bot** will reply with a Lark message card for ticket creation.
 
-![lark-ticket-creation-1](/media/connected-lark-ticket-creation-1.png)
+![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
 Fill in the required fields and click `Submit`. Once submitted, the card will be updated to **Ticket Submitted**, indicating that your request is being processed.
 
-![lark-ticket-creation-2](/media/connected-lark-ticket-creation-2.png)
+![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
 After the support ticket is created, the **Ticket Submitted** card will be updated to the **Support Ticket Created** card, providing the ticket name and a link to view the ticket.
 
-![lark-ticket-creation-3](/media/connected-lark-ticket-creation-3.png)
+![lark-ticket-creation-3](/media/tidb-cloud/connected-lark-ticket-creation-3.png)
 
 ## Ticket Update Subscriptions
 

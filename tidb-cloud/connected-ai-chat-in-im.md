@@ -15,4 +15,4 @@ The AI chat in IM powered by PingCAP, is an offering to invite TiDB AI assistant
 
 **Example:**
 
-![ai-chat-example](/media/connected-ai-chat-example.png)
+![ai-chat-example](/media/tidb-cloud/connected-ai-chat-example.png)
