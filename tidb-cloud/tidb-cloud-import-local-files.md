@@ -1,24 +1,19 @@
 ---
-title: Import Local Files to TiDB Cloud
-summary: Learn how to import local files to TiDB Cloud.
+title: Import Local Files to TiDB Cloud Serverless
+summary: Learn how to import local files to TiDB Cloud Serverless.
 ---
 
-# Import Local Files to TiDB Cloud
+# Import Local Files to TiDB Cloud Serverless
 
-You can import local files to TiDB Cloud directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage bucket path and Role ARN. The whole importing process is quick and smooth.
+You can import local files to TiDB Cloud Serverless directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
 
-Currently, this method supports importing one CSV file for one task into either an existing table or a new table.
+Currently, this method supports importing one CSV file for one task into either an existing empty table or a new table.
 
 ## Limitations
 
 - Currently, TiDB Cloud only supports importing a local file in CSV format within 250 MiB for one task.
 - Importing local files is supported only for TiDB Cloud Serverless clusters, not for TiDB Cloud Dedicated clusters.
 - You cannot run more than one import task at the same time.
-- When you import a CSV file into an existing table in TiDB Cloud and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
-    - If the extra columns are not the primary keys or the unique keys, no error will be reported. Instead, these extra columns will be populated with their [default values](/data-type-default-values.md).
-    - If the extra columns are the primary keys or the unique keys and do not have the `auto_increment` or `auto_random` attribute, an error will be reported. In that case, it is recommended that you choose one of the following strategies:
-        - Provide a source file that includes these the primary keys or the unique keys columns.
-        - Set the attributes of the primary key or the unique key columns to `auto_increment` or `auto_random`.
 
 ## Import local files
 
@@ -59,12 +54,20 @@ Currently, this method supports importing one CSV file for one task into either 
 
         You can also change the data type if needed.
 
+    > **Note:**
+    >
+    > When you import a CSV file into an existing table in TiDB Cloud and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
+    > - If the extra columns are not the primary keys or the unique keys, no error will be reported. Instead, these extra columns will be populated with their [default values](/data-type-default-values.md).
+    > - If the extra columns are the primary keys or the unique keys and do not have the `auto_increment` or `auto_random` attribute, an error will be reported. In that case, it is recommended that you choose one of the following strategies:
+    >   - Provide a source file that includes these primary key or unique key columns.
+    >   - Modify the target table's primary key and unique key columns to match the existing columns in the source file.
+    >   - Set the attributes of the primary key or the unique key columns to `auto_increment` or `auto_random`.
+
 6. For a new target table, you can set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order in which you select the column names.
 
     > **Note:**
     >
-    > - The primary key of the table is a clustered index and cannot be deleted after creation.
-    > - Ensure that the data corresponding to the primary key field is unique and not empty. Otherwise, the import task will result in data inconsistency.
+    > The primary key of the table is a clustered index and cannot be dropped after creation.
 
 7. Edit the CSV configuration if needed.
 
