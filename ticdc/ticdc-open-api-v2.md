@@ -788,7 +788,7 @@ This API is a synchronous interface. If the request is successful, it returns th
 The following request queries the synchronization status of the replication task with the ID `test1`.
 
 ```shell
-curl -X GET http://127.0.0.1:8300/api/v2/changefeed/test1/synced
+curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 ```
 
 **Example 1: The synchronization is completed**
