@@ -795,7 +795,16 @@
 - Support Plan
   - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
-  - [Get Support](/tidb-cloud/tidb-cloud-support.md)
+  - Introduction to TiDB Cloud Connected Care Support Service Features
+    - [Connected: Clinic Service](/tidb-cloud/connected-clinic-service.md)
+    - [Connected: AI chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
+    - Connected: IM ticket creation and update subscription
+      - [Slack ticket creation and update subscription](/tidb-cloud/connected-slack-ticket-creation.md)
+      - [Lark ticket creation and update subscription](/tidb-cloud/connected-lark-ticket-creation.md)
+    - Connected: IM interaction for support tickets
+      - [Slack interaction for support tickets](/tidb-cloud/connected-slack-ticket-interaction.md)
+      - [Lark interaction for support tickets](/tidb-cloud/connected-lark-ticket-interaction.md)
+    - [Connected: IM Subscription for TiDB Cloud Alerts](/tidb-cloud/connected-im-subscription-for-tidb-cloud-alerts.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [TiDB Cloud Serverless FAQs](/tidb-cloud/serverless-faqs.md)
