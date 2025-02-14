@@ -30,6 +30,10 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 - Currently, TiDB Cloud supports private endpoint connection to TiDB Cloud Serverless only when the endpoint service is hosted in AWS. If the service is hosted in Google Cloud, the private endpoint is not applicable.
 - Private endpoint connection across regions is not supported.
 
+## Prerequisites
+
+Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC settings. They are disabled by default when you create a VPC in the [AWS Management Console](https://console.aws.amazon.com/).
+
 ## Set up a private endpoint with AWS
 
 To connect to your TiDB Cloud Serverless cluster via a private endpoint, follow these steps:
@@ -47,7 +51,7 @@ To connect to your TiDB Cloud Serverless cluster via a private endpoint, follow 
 
     > **Note:**
     >
-    >  You only need to create one private endpoint per AWS region, which can be shared by all TiDB Cloud Serverless clusters located in the same region.
+    > You only need to create one private endpoint per AWS region, which can be shared by all TiDB Cloud Serverless clusters located in the same region.
 
 ### Step 2. Create an AWS interface endpoint
 
@@ -63,7 +67,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-3. Select **Other endpoint services**.
+3. Select **Endpoint services that use NLBs and GWLBs**.
 4. Enter the service name that you found in [step 1](#step-1-choose-a-tidb-cluster).
 5. Click **Verify service**.
 6. Select your VPC in the drop-down list. Expand **Additional settings** and select the **Enable DNS name** checkbox.
@@ -72,7 +76,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     > **Note:**
     >
-    >  Make sure the selected security group allows inbound access from your EC2 instances on port 4000.
+    > Make sure the selected security group allows inbound access from your EC2 instances on port 4000.
 
 9. Click **Create endpoint**.
 
@@ -120,7 +124,3 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select the proper **Manage security groups**. A proper security group within your VPC that allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
-
-### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled
-
-Make sure that DNS hostname and DNS resolution are both enabled in your VPC setting. They are disabled by default when you create a VPC in the AWS Management Console.
