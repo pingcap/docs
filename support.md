@@ -19,9 +19,4 @@ If you encounter a problem when you use TiDB, you can reach out for support from
 
 + Learn TiDB's implementation and design
 
-<<<<<<< HEAD
-    - [TiDB Internals forum](https://internals.tidb.io/)
-=======
-    - [TiDB development guide](https://pingcap.github.io/tidb-dev-guide/)
     - [Discussions on GitHub](https://github.com/orgs/pingcap/discussions)
->>>>>>> 257ae3db1e (support: replace internals.tidb.io with discussions on GitHub (#20294))
