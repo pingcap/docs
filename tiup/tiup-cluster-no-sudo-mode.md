@@ -201,7 +201,7 @@ tiup cluster upgrade mycluster v8.2.0
 
 ## FAQ
 
-### When you start user@.service, the following error occurs: `Failed to fully start up daemon: Permission denied`
+### When you start user@.service, the following error occurs: `Trying to run as user instance, but $XDG_RUNTIME_DIR is not set.`
 
 This issue might be caused by the absence of `pam_systemd.so` in your `/etc/pam.d/system-auth.ued` file.
 
