@@ -189,8 +189,8 @@ Take the following steps to configure a service account key:
     2. Optional: Enter a description of the service account.
     3. Click **CREATE AND CONTINUE** to create the service account.
     4. In the `Grant this service account access to project`, choose the [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the needed permission.
-        a. Exporting data from a TiDB Cloud Serverless cluster needs a role with `storage.objects.create` permission.
-        b. Importing data into a TiDB Cloud Serverless cluster needs a role with `storage.buckets.get`, `storage.objects.get` and `storage.objects.list` permissions.
+        - Exporting data from a TiDB Cloud Serverless cluster needs a role with `storage.objects.create` permission.
+        - Importing data into a TiDB Cloud Serverless cluster needs a role with `storage.buckets.get`, `storage.objects.get` and `storage.objects.list` permissions.
     5. Click **Continue** to go to the next step.
     6. Optional: In the `Grant users access to this service account`, choose members that need to [attach the service account to other resources](https://cloud.google.com/iam/docs/attach-service-accounts).
     7. Click **Done** to finish creating the service account.
@@ -253,8 +253,8 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
     1. In the **Allowed services** section, choose the **Blob** service.
     2. In the **Allowed Resource types** section, choose **Container** and **Object**.
     3. In the **Allowed permissions** section, choose the permission as needed.
-        a. Exporting data from a TiDB Cloud Serverless cluster needs the **Read** and **Write** permissions.
-        b. Importing data into a TiDB Cloud Serverless cluster needs the **Read** and **List** permission.
+        - Exporting data from a TiDB Cloud Serverless cluster needs the **Read** and **Write** permissions.
+        - Importing data into a TiDB Cloud Serverless cluster needs the **Read** and **List** permission.
     4. Adjust **Start and expiry date/time** as needed.
     5. You can keep the default values for other settings.
 
