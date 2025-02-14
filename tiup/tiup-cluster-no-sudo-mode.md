@@ -29,7 +29,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
         source ~/.bashrc.d/systemd
         ```
    
-    2. Use `root` user to start user service.
+    2. Use  the `root` user to start user service.
    
         ```shell
         $ systemctl start user@1000.service # `1000` is the ID of the tidb user. You can get the user ID by executing the `id` command.
@@ -53,7 +53,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
        
        Execute `systemctl --user` in the terminal. If no errors are reported, it indicates that it has started normally.
 
-    3. Use `root` user to execute the following command to enable lingering for the systemd user instance.
+    3. Use the `root` user to execute the following command to enable lingering for the systemd user `tidb`.
 
         ```shell
         loginctl enable-linger tidb
