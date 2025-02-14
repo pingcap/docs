@@ -411,6 +411,35 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Blob GC output file size: The size of Titan GC output file
 - Blob GC file count: The count of blob files involved in Titan GC
 
+### In Memory Engine
+
+These are related to [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
+
+- Ops
+- Read MBps
+- Coprocessor Handle duration
+- Region Cache Hit
+- Region Cache Hit Rate
+- Region Cache Miss Reason
+- Memory Usage
+- Region Count
+- GC Filter
+- Region GC Duration
+- Region Load Duration
+- Region Load Count
+- Region Eviction Duration
+- Region Eviction Count
+- Write duration
+- 99% In-memory engine write duration per server
+- Prepare for write duration
+- 99% In-memory engine prepare for write duration per server
+- Iterator operations
+- Seek duration
+- Oldest Auto GC SafePoint
+- Newest Auto GC SafePoint
+- Auto GC SafePoint Gap
+- Auto GC SafePoint Gap With TiKV
+
 ### Pessimistic Locking
 
 - Lock Manager Thread CPU: The CPU utilization of the lock manager thread
