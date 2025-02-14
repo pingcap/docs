@@ -76,8 +76,9 @@ If you have any trouble creating a role ARN with AWS CloudFormation, you can tak
 
     4. On the **Create policy** page, click the **JSON** tab.
    
-    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data to a TiDB Cloud Serverless cluster.
-
+    5. Configure the policy in the policy text field according to your needs. The following is an example that you can use to export data from and import data into a TiDB Cloud Serverless cluster.
+       - Exporting data from a TiDB Cloud Serverless cluster needs the **s3:PutObject** and **s3:ListBucket** permissions.
+       - Importing data into a TiDB Cloud Serverless cluster needs the **s3:GetObject**, **s3:GetObjectVersion** and **s3:ListBucket** permission.
         ```json
         {
             "Version": "2012-10-17",
