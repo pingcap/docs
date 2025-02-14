@@ -50,8 +50,16 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
                 └─pulseaudio.service
                   └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
         ```
-   
-    Execute `systemctl --user` in the terminal. If no errors are reported, it indicates that it has started normally.
+       
+       Execute `systemctl --user` in the terminal. If no errors are reported, it indicates that it has started normally.
+
+    3. Use `root` user to execute the following command to enable lingering for the systemd user instance.
+
+        ```shell
+        loginctl enable-linger tidb
+        ```
+
+        You can read the systemd documentation for reference, [Automatic start-up of systemd user instances](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances).
 
 3. Use ssh-keygen in the central control computer to generate a key and copy the public key to other deployment machines.
 
