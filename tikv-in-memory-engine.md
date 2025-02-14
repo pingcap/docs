@@ -32,7 +32,7 @@ The preceding diagram shows two rows of records, each with 9 MVCC versions. The 
 
 ## Usage
 
-To enable the TiKV MVCC in-memory engine (IME), you need to adjust the TiKV configuration and restart TiKV. The configuration details are as follows:
+To enable the TiKV MVCC in-memory engine (IME), you need to adjust the [TiKV configuration](/tikv-configuration-file.md#in-memory-engine-new-in-v850) and restart TiKV. The configuration details are as follows:
 
 ```toml
 [in-memory-engine]
@@ -133,3 +133,31 @@ The following result shows that queries with severe MVCC amplification exist on 
 +----------------------------+-----+-------------------+--------------+------------+-----------------------------------+--------------------+--------------------+--------------------+
 5 rows in set (1.26 sec)
 ```
+
+### How can I see that the TiKV MVCC in-memory engine is enabled?
+
+The TiKV configuration can be inspected with a [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) statement.
+
+```sql
+SHOW CONFIG WHERE Type='tikv' AND Name LIKE 'in-memory-engine\.%';
+```
+
+```
++------+-----------------+-----------------------------------------------+---------+
+| Type | Instance        | Name                                          | Value   |
++------+-----------------+-----------------------------------------------+---------+
+| tikv | 127.0.0.1:20160 | in-memory-engine.capacity                     | 5GiB    |
+| tikv | 127.0.0.1:20160 | in-memory-engine.cross-check-interval         | 0s      |
+| tikv | 127.0.0.1:20160 | in-memory-engine.enable                       | true    |
+| tikv | 127.0.0.1:20160 | in-memory-engine.evict-threshold              | 4920MiB |
+| tikv | 127.0.0.1:20160 | in-memory-engine.gc-run-interval              | 3m      |
+| tikv | 127.0.0.1:20160 | in-memory-engine.load-evict-interval          | 5m      |
+| tikv | 127.0.0.1:20160 | in-memory-engine.mvcc-amplification-threshold | 10      |
+| tikv | 127.0.0.1:20160 | in-memory-engine.stop-load-threshold          | 4208MiB |
++------+-----------------+-----------------------------------------------+---------+
+8 rows in set (0.00 sec)
+```
+
+### How can I monitor the TiKV MVCC in-memory engine?
+
+The [TiKV Details dashboard](/grafana-tikv-dashboard.md) in Grafana has a In Memory Engine section.

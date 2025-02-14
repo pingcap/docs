@@ -163,6 +163,10 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 
 Index Merge is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans. Since v5.4, Index Merge has become a GA feature.
 
+### IME
+
+The IME abbreviation is for [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md).
+
 ## K
 
 ### Key Management Service (KMS)
