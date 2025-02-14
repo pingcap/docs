@@ -16,7 +16,7 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 
 #### `status-addr`
 
-- The HTTP port for displaying the web interface, pulling Prometheus metrics, exposing debug data, and submitting import tasks (in server mode).
+- The HTTP port for displaying the task progress on the web interface, pulling Prometheus metrics, exposing debug data, and submitting import tasks (in server mode).
 - Setting it to `0` disables the port.
 
 <!-- Example: `:8289` -->
@@ -53,7 +53,7 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 
 - Controls whether to enable the diagnostic logs.
 - Default value: `false`
-- - Value options:
+- Value options:
     - `false`: only the logs related to the import are output, and the logs of other dependent components are not output.
     - `true`: logs from both the import process and other dependent components are output, and GRPC debugging is enabled, which can be used for diagnosis.
 
@@ -63,19 +63,19 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 
 #### `check-requirements`
 
-- Checks whether the cluster satisfies the minimum requirement before starting the task, and check whether TiKV has more than 10% free space left during running time.
+- Checks whether the cluster meets the minimum requirement before starting the task, and checks whether TiKV has more than 10% free space left during running time.
 
 <!-- Example: `true` -->
 
 #### `index-concurrency`
 
-- The maximum number of index engines to be opened concurrently. Each table is split into one "index engine" to store indices, and multiple "data engines" to store row data. `index-concurrency` and `table-concurrency` settings control the maximum concurrent number for each type of engines. Generally, you can use the following two default values.
+- The maximum number of index engines to be opened concurrently. Each table is split into one "index engine" to store indices, and multiple "data engines" to store row data. `index-concurrency` and `table-concurrency` settings control the maximum concurrent number for each type of engines. Generally, use the default value.
 
 <!-- Example: `2` -->
 
 #### `table-concurrency`
 
-- The maximum number of data engines to be opened concurrently. Each table is split into one "index engine" to store indices, and multiple "data engines" to store row data. `index-concurrency` and `table-concurrency` settings control the maximum concurrent number for each type of engines. Generally, you can use the following two default values.
+- The maximum number of data engines to be opened concurrently. Each table is split into one "index engine" to store indices, and multiple "data engines" to store row data. `index-concurrency` and `table-concurrency` settings control the maximum concurrent number for each type of engines. Generally, use the default value.
 
 <!-- Example: `6` -->
 
@@ -95,7 +95,7 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 - The maximum number of non-fatal errors to tolerate before stopping TiDB Lightning.
 - Non-fatal errors are localized to a few rows, and ignoring those rows allows the import process to continue.
 - Setting this to N means that TiDB Lightning will stop as soon as possible when the (N+1)-th error is encountered.
-- The skipped rows will be inserted into tables inside the `task info` schema on the target TiDB, which can be configured below.
+- The skipped rows will be inserted into tables inside the `task info` schema on the target TiDB.
 - Default value: `MaxInt64` bytes, that is, `9223372036854775807` bytes.
 
 #### `task-info-schema-name`
@@ -119,7 +119,7 @@ Specifies certificates and keys for TLS connections within the cluster.
 
 #### `ca-path`
 
-- Specifies the public certificate of the CA. Leave empty to disable TLS.
+- Specifies the public certificate of the CA. Leave it empty if you want to disable TLS.
 
 <!-- Example: `"/path/to/ca.pem"` -->
 
@@ -161,7 +161,7 @@ Specifies certificates and keys for TLS connections within the cluster.
 #### `dsn`
 
 - The data source name (DSN) indicating the location of the checkpoint storage.
-- For the `file` driver, the DSN is a path. If the path is not specified, TiDB Lightning would default to `/tmp/CHECKPOINT_SCHEMA.pb`.
+- For the `file` driver, the DSN is a path. If the path is not specified, TiDB Lightning uses the default value `/tmp/CHECKPOINT_SCHEMA.pb`.
 - For the `mysql` driver, the DSN is a URL in the form of `USER:PASS@tcp(HOST:PORT)/`.
 - If the URL is not specified, the TiDB server from the `[tidb]` section is used to store the checkpoints.
 - You should specify a different MySQL-compatible database server to reduce the load of the target TiDB cluster.
@@ -238,13 +238,13 @@ Specifies certificates and keys for TLS connections within the cluster.
 
 > **Warning:**
 >
-> The `duplicate-resolution` parameter is deprecated starting from v8.0.0 and will be removed in a future release. For more information, see [The old version of conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800).
+> Starting from v8.0.0, the `duplicate-resolution` parameter is deprecated and will be removed in a future release. For more information, see [The old version of conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800).
 
 - Controls whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 - Default value: `'none'`
 - Value options:
     - `'none'`: does not detect duplicate records. If there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB. If you set `duplicate-resolution = 'none'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`.
-    - `'remove'`: If you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign "replace" to `conflict.strategy` and enable the new version of conflict detection. 
+    - `'remove'`: if you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign "replace" to `conflict.strategy` and enable the new version of conflict detection. 
 
 #### `send-kv-pairs`
 
@@ -274,7 +274,7 @@ Specifies certificates and keys for TLS connections within the cluster.
 
 #### `range-concurrency`
 
-- Specifies the  concurrency that TiKV writes KV data in the physical import mode.
+- Specifies the concurrency that TiKV writes KV data in the physical import mode.
 - When the network transmission speed between TiDB Lightning and TiKV exceeds 10 Gigabit, you can increase this value accordingly.
 
 <!-- Example: `16` -->
@@ -293,12 +293,12 @@ Specifies certificates and keys for TLS connections within the cluster.
 
 #### `add-index-by-sql`
 
-- Specifies whether Physical Import Mode adds indexes via SQL.
+- Specifies whether to add indexes via SQL in physical import mode.
 - This mechanism is consistent with that of the historical versions. The benefit of adding indexes via SQL is that you can separately import data and import indexes, and import data more quickly. After the data is imported, even if the indexes fail to be added, it does not affect the consistency of the imported data.
 - Default value: `false`
 - Value options:
     - `false`: TiDB Lightning will encode both row data and index data into KV pairs and import them into TiKV together.
-    - `true`: TiDB Lightning adds indexes via SQL after importing the row data.
+    - `true`: TiDB Lightning adds indexes via the `ADD INDEX` SQL statement after importing the row data.
 
 #### `keyspace-name`
 
@@ -348,7 +348,7 @@ Specifies certificates and keys for TLS connections within the cluster.
 #### `logical-import-batch-rows` <span class="version-mark">New in v8.0.0</span>
 
 - In Logical Import Mode, this parameter controls the maximum number of rows inserted per transaction.
-- When both [`logical-import-batch-size`](#logical-import-batch-size-new-in-v800) and `logical-import-batch-rows` are specified, the parameter whose value reaches its threshold first will take effect.
+- When you specify both [`logical-import-batch-size`](#logical-import-batch-size-new-in-v800) and `logical-import-batch-rows`, the parameter whose value reaches its threshold first will take effect.
 - You can decrease this value to reduce the stress on the cluster due to large transactions.
 - Default value: `65536`
 
@@ -381,14 +381,14 @@ Specifies certificates and keys for TLS connections within the cluster.
 
 #### `character-set`
 
-- Specifies the character set of the schema files, containing `CREATE TABLE` statements.
+- Specifies the character set of the schema files that contains the `CREATE TABLE` statements.
 - Default value: `"auto"`
 - Value options:
     - `"auto"`: automatically detects whether the schema is UTF-8 or GB-18030. An error is reported if the encoding is neither.
     - `"utf8mb4"`: the schema files must be encoded as UTF-8; otherwise, an error is reported.
     - `"gb18030"`: the schema files must be encoded as GB-18030; otherwise, an error is reported
-    - `"latin1"`:  the schema files use MySQL latin1 encoding, also known as Code Page 1252.
-    - `"binary"`:  do not try to decode the schema files
+    - `"latin1"`: the schema files use MySQL latin1 encoding, also known as Code Page 1252.
+    - `"binary"`: do not try to decode the schema files
 
 #### `data-character-set`
 
@@ -412,12 +412,12 @@ Specifies certificates and keys for TLS connections within the cluster.
 
 #### `strict-format`
 
-- Specifies the input data in a [strict format](/tidb-lightning/tidb-lightning-data-source.md#strict-format) speeds up processing. The default value is false for safety instead of speed.
+- Specifies the input data in a [strict format](/tidb-lightning/tidb-lightning-data-source.md#strict-format) to speed up processing. The default value is `false` for safety instead of speed.
 - Default value: `false`
 - Value options: `true`, `false`
 - `strict-format = true` requires that:
     - In CSV, every value cannot contain literal new lines (`U+000A` and `U+000D`, or `\r` and `\n`) even when quoted, which means new lines are strictly used to separate rows.
-    - "Strict" format allows TiDB Lightning to quickly locate split positions of a large file for parallel processing. However, if the input data is not "strict", it may split a valid data in half and corrupt the result.
+    - The strict format allows TiDB Lightning to quickly locate split positions of a large file for parallel processing. However, if the input data is not "strict", it might split a valid data in half and corrupt the result.
 
 #### `max-region-size`
 
@@ -426,7 +426,7 @@ Specifies certificates and keys for TLS connections within the cluster.
 
 #### `filter`
 
-- Only import tables if these wildcard rules are matched. See the corresponding section for details.
+- Only imports tables that match these wildcard rules. 
 
 <!-- Example: `['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']` -->
 
@@ -436,7 +436,7 @@ Configures how CSV files are parsed.
 
 #### `separator`
 
-- Specifies the separator between fields. Must not be empty.
+- Specifies the separator between fields. It supports one or more characters.
 - Default value: `','`
 
 #### `delimiter`
@@ -452,8 +452,8 @@ Configures how CSV files are parsed.
 #### `header`
 
 - Controls whether the CSV files contain a header.
-- If `header` is true, TiDB Lightning treats the first row as a table header and does not import it as data.
-- If `header` is false, the first row is also imported as CSV data.
+- If `header` is `true`, TiDB Lightning treats the first row as a table header and does not import it as data.
+- If `header` is `false`, the first row is also imported as CSV data.
 
 #### `header-schema-match`
 
@@ -570,7 +570,7 @@ Configures how CSV files are parsed.
 
 #### `checksum-table-concurrency`
 
-- Sets the TiDB session variable to speed up the Checksum and Analyze operations. For more information, see [Control `ANALYZE` concurrency](/statistics.md#control-analyze-concurrency).
+- Sets the TiDB session variable to speed up the Checksum and `ANALYZE` operations. For more information, see [Control `ANALYZE` concurrency](/statistics.md#control-analyze-concurrency).
 - If [`checksum-via-sql`](#checksum-via-sql) is set to `"true"`, TiDB Lightning will execute the `ADMIN CHECKSUM TABLE <table>` SQL statement to perform the Checksum operation on TiDB. In this case, the following parameters `distsql-scan-concurrency` and `checksum-table-concurrency` will not take effect.
 
 <!-- Example: `2` -->
@@ -596,27 +596,30 @@ Configures how CSV files are parsed.
     * `"false"`: disable TLS
     * `"cluster"`: force TLS and verify the server's certificate with the CA specified in the [`[tidb.security]`](#tidbsecurity) section
     * `"skip-verify"`: force TLS but do not verify the server's certificate (insecure!)
-    * `"preferred"`: same as `"skip-verify"`, but if the server does not support TLS, fallback to unencrypted connection
+    * `"preferred"`: the same as `"skip-verify"`, but if the server does not support TLS, fall back to unencrypted connection
 
 ### tidb.security
 
-- Specifies certificates and keys for TLS-enabled MySQL connections. Defaults to a copy of the [`security`](#security) section.
+- Specifies certificates and keys for TLS-enabled MySQL connections. 
+- Default value: the copy of the [`security`](#security) section.
 
 #### `ca-path`
 
-- Specifies the public certificate of the CA. Set to empty string to disable TLS for SQL.
+- Specifies the public certificate of the CA. Set to the empty string if you want to disable TLS for SQL.
 
 <!-- Example: `"/path/to/ca.pem"` -->
 
 #### `cert-path`
 
-- Specifies the public certificate of this service. Default to copy of [`security.cert-path`](#cert-path).
+- Specifies the public certificate of this service. 
+- Default value: the copy of [`security.cert-path`](#cert-path).
 
 <!-- Example: `"/path/to/lightning.pem"` -->
 
 #### `key-path`
 
-- Specifies the private key of this service. Default to copy of [`security.key-path`](#key-path).
+- Specifies the private key of this service. 
+- Default value: the copy of [`security.key-path`](#key-path).
 
 <!-- Example: `"/path/to/lightning.key"` -->
 
@@ -628,10 +631,10 @@ Sets other TiDB session variables
 
 ### post-restore
 
-- In the physical import mode, when data importing is complete, TiDB Lightning can automatically perform the Checksum and Analyze operations.
+- In the physical import mode, when data importing is complete, TiDB Lightning can automatically perform the Checksum and `ANALYZE` operations.
 - It is recommended to leave these as true in the production environment.
-- The execution order: Checksum -> Analyze.
-- Note that in the logical import mode, Checksum and Analyze is not needed, and they are always skipped in the actual operation.
+- The execution order: Checksum -> `ANALYZE`.
+- Note that in the logical import mode, Checksum and `ANALYZE` operations are not needed, and they are always skipped in the actual operation.
 
 #### `checksum`
 
