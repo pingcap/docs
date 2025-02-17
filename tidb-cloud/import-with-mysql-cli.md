@@ -11,7 +11,7 @@ This document describes how to import data into TiDB Cloud Dedicated via the [My
 
 Before you can import data via MySQL CLI to TiDB Cloud Dedicated, you need the following prerequisites:
 
-- You have access to your TiDB Cloud Dedicated cluster.
+- You have access to your TiDB Cloud Dedicated cluster. If you do not have, create one following the instructions in [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
 - Install MySQL CLI on your local computer.
 
 ## Step 1. Connect to your TiDB Cloud Dedicated cluster
