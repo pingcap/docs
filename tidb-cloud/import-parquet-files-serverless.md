@@ -11,6 +11,7 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 >
 > - TiDB Cloud Serverless only supports importing Parquet files into empty tables. To import data into an existing table that already contains data, you can use TiDB Cloud Serverless to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
 > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+
 ## Step 1. Prepare the Parquet files
 
 > **Note:**
@@ -22,6 +23,7 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 > - `BOOL`
 > - `ARRAY`
 > - `MAP`
+
 1. If a Parquet file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
 
     TiDB Cloud Serverless supports importing very large Parquet files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud Serverless can process multiple files in parallel, which can greatly improve the import speed.
@@ -34,6 +36,7 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
     > **Note:**
     >
     > If you cannot update the Parquet filenames according to the preceding rules in some cases (for example, the Parquet file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-serverless) to import your source data to a single target table.
+
 ## Step 2. Create the target table schemas
 
 Because Parquet files do not contain schema information, before importing data from Parquet files into TiDB Cloud Serverless, you need to create the table schemas using either of the following methods:

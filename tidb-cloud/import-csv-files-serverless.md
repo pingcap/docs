@@ -28,6 +28,7 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
     > - To achieve better performance, it is recommended to limit the size of each compressed file to 100 MiB.
     > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
     > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-csv-files-to-tidb-cloud-serverless) to import your source data to a single target table.
+
 ## Step 2. Create the target table schemas
 
 Because CSV files do not contain schema information, before importing data from CSV files into TiDB Cloud Serverless, you need to create the table schemas using either of the following methods:
@@ -75,13 +76,13 @@ Because CSV files do not contain schema information, before importing data from 
 
 To allow TiDB Cloud Serverless to access the CSV files in the Amazon S3, GCS, or Azure Blob Storage bucket, do one of the following:
 
-- If your CSV files are located in Amazon S3, [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+- If your CSV files are located in Amazon S3, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files-to-tidb-cloud-serverless).
 
-- If your CSV files are located in GCS, [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+- If your CSV files are located in GCS, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
-- If your CSV files are located in Azure Blob Storage, [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+- If your CSV files are located in Azure Blob Storage, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
 ## Step 4. Import CSV files to TiDB Cloud Serverless
 
@@ -162,7 +163,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
     - **File URI** or **Folder URI**:
         - When importing one file, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[gcs|gs]://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source file URI and name in the following format `[gcs|gs]://[bucket_name]/[data_source_folder]/`. For example, `[gcs|gs]://sampledata/ingest/`.
-    - **Bucket Access**: you can use a Service Account Key to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+    - **Bucket Access**: you can use a service account key to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
 4. Click **Connect**.
 
@@ -196,9 +197,9 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-       > **Tip:**
-       >
-       > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
@@ -218,21 +219,21 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 5. In the **Destination** section, select the target database and table.
 
-   When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
-   When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[azure|https]://sampledata/ingest/TableName.01.csv`.
+    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `[azure|https]://sampledata/ingest/TableName.01.csv`.
 
-   You can also use wildcards to match the source files. For example:
+    You can also use wildcards to match the source files. For example:
 
     - `[azure|https]://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
 
     - `[azure|https]://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
 
-   Note that only `?` and `*` are supported.
+    Note that only `?` and `*` are supported.
 
-   > **Note:**
-   >
-   > The URI must contain the data source folder.
+    > **Note:**
+    >
+    > The URI must contain the data source folder.
 
 6. Click **Start Import**.
 
