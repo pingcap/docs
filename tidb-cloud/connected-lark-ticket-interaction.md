@@ -1,13 +1,17 @@
 ---
-title: Lark interaction for support tickets
+title: Interact with Support Tickets via Lark
 summary: Introduces detailed information about the Lark interaction for support tickets
 ---
 
-# Lark interaction for support tickets
+# Interact with Support Tickets via Lark
 
-For customers subscribed to the **Premium** support plan, we provide a ticket bot called **PingCAP Support Bot** to support more comprehensive interaction and management of support tickets.
+For customers subscribed to the **Premium** support plan, TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to support more comprehensive interaction and management of support tickets.
 
-## Interaction for Support Tickets
+> **Note:**
+>
+> The ticket support feature for Lark is still in beta and is available upon request. If you are interested in trying this feature, contact TiDB Cloud support <support@pingcap.com> or reach out to your Technical Account Manager (TAM).
+
+## Interact with support tickets
 
 If Interaction for Support Tickets is enabled, **PingCAP Support Bot** will convert the **Support Ticket Created** message card to a thread to manage ticket interactions.
 
@@ -33,5 +37,4 @@ Log in to the [customer portal](https://tidb.support.pingcap.com/servicedesk/cus
 
 ## Contact support
 
-For help or questions, please contact our support team at support@pingcap.com. We are happy to help you.
-
+For help or questions, please contact our support team at <support@pingcap.com>. We are happy to help you.

@@ -5,7 +5,7 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 # TiDB Cloud Support
 
-TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. For more information, see [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail).
+TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. For more information, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
 > **Note:**
 >
@@ -22,7 +22,7 @@ You can access the PingCAP Help Center via <https://tidb.support.pingcap.com/ser
 - On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster, and then select **Get Support**.
 - On your cluster overview page, click **...** in the upper-right corner, and then select **Get Support**.
 
-## Create a account or billing support ticket
+## Create an account or billing support ticket
 
 To create a support ticket about account or billing issues, take the following steps:
 
@@ -53,9 +53,9 @@ To create a support ticket about technical issues, take the following steps:
 3. Fill in the following fields:
 
     - **Summary**: provide a brief summary of your question.
-    - **TiDB Cloud Org**: select the relevant TiDB Cloud organization of the issue.
+    - **TiDB Cloud Org**: select the relevant TiDB Cloud organization for the issue.
     - **TiDB Cloud Cluster**: select the relevant TiDB Cloud cluster, if applicable.
-    - **Environment**: select the corresponding environment in which you're using the TiDB Cloud cluster.
+    - **Environment**: select the corresponding environment in which you use the TiDB Cloud cluster.
     - **Description**: describe the issue you encountered as detailed as possible. For example, share the exact timestamp when you encountered the issue, attach the detailed error messages and call stack of the issue, and add your troubleshooting or analysis of the issue.
     - **Severity**: estimate the business impact of the issue and choose the proper severity for it.
 
@@ -92,7 +92,7 @@ To check or upgrade your support plan, perform the following steps:
 
     To upgrade to **Developer** or **Enterprise**:
 
-    1. Click **Upgrade** in the **Developer** or **Enterprise** pane. A **Upgrade to Developer Plan** or **Upgrade to Enterprise Plan** page is displayed.
+    1. Click **Upgrade** in the **Developer** or **Enterprise** pane. An **Upgrade to Developer Plan** or **Upgrade to Enterprise Plan** page is displayed.
     2. Check the corresponding support service information on the page. For a complete version of each support plan, see [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail) .
     3. Click **Add Credit Card and Upgrade**, and then fill in the **Credit Card** details.
 
