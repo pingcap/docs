@@ -1,13 +1,13 @@
 ---
-title: Slack ticket creation and update subscription
-summary: Introduces detailed information about the Slack ticket creation and update subscription
+title: Create Tickets and Subscribe to Ticket Updates in Slack
+summary: Introduces detailed information about the Slack ticket creation and update subscription.
 ---
 
-# Slack ticket creation and update subscription
+# Create Tickets and Subscribe to Ticket Updates in Slack
 
-For customers subscribed to the **Enterprise** support plan, we provide a ticket bot called **PingCAP Support Bot**, to support quick ticket creation.
+For customers subscribed to the Enterprise [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Slack](https://slack.com/), to support quick ticket creation.
 
-## Ticket Creation
+## Create a support ticket
 
 In the Slack support channel, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the ticket bot will respond with a thread containing a `Raise Request` button.
 
@@ -23,9 +23,9 @@ After successfully creating the ticket, the bot will reply with the ticket link.
 
 ![slack-ticket-creation-4](/media/tidb-cloud/connected-slack-ticket-creation-4.png)
 
-## Ticket Update Subscriptions
+## Subscribe to ticket updates
 
-The **Enterprise** support plan supports subscriptions to ticket updates in Slack. When a support engineer responds to a ticket, a ticket update message will appear in the Slack channel. The message includes information such as the ticket title, ticket link, and last comment content.
+The Enterprisesupport plan supports subscriptions to ticket updates in Slack. When a support engineer responds to a ticket, a ticket update message will appear in the Slack channel. The message includes information such as the ticket title, ticket link, and last comment content.
 
 ![slack-ticket-creation-5](/media/tidb-cloud/connected-slack-ticket-creation-5.png)
 
@@ -33,9 +33,8 @@ The **Enterprise** support plan supports subscriptions to ticket updates in Slac
 
 1. How can I check the status of my ticket?
 
-Log in to the [customer portal](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
 
 ## Contact support
 
-For help or questions, please contact our support team at support@pingcap.com. We are happy to help you.
-
+For help or questions, please contact our support team at <support@pingcap.com>. We are happy to help you.
