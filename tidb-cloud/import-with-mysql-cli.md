@@ -26,7 +26,6 @@ Connect to your TiDB cluster.
 
     For more details about how to obtain the connection string, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
-
 ## Step 2. Define the table and insert sample data
 
 Before importing data, you need to prepare the table structure and insert real sample data into it. The following is an example SQL file (`product_data.sql`) that you can use to create a table and insert sample data:
