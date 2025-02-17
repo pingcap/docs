@@ -4,115 +4,97 @@ summary: Learn how to contact the support team of TiDB Cloud.
 ---
 
 # TiDB Cloud Support
- 
-TiDB Cloud offers tiered support services to meet customer's specific needs. Learn how to leverage PingCAP's global support team and get the help you need by requesting support through our ticketing system. For details on support plan offerings, see [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail) .
 
-## How to Access PingCAP Help Center
+TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. For more information, see [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail).
 
-In the [TiDB Cloud console](https://tidbcloud.com/), you can choose the desired organization and go to **Support** page. Simply click the **Create a Support Ticket** button on the top right corner, and you'll be taken to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) .
+> **Note:**
+>
+> To request a [Proof of Concept (PoC)](/tidb-cloud/tidb-cloud-poc.md), a demo, or free trial credits, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Contact Sales**.
 
-![get-support-entry](/media/tidb-cloud/get-support-entry.png)
+## Access PingCAP Help Center
 
-The [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) offers several support portals.
+The [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) is the central hub for TiDB Cloud users to access support services and manage support tickets.
 
-*   **TiDB Cloud** **Account/Billing**: All TiDB Cloud users are able to raise support tickets for TiDB account/billing issues.
-    
-*   **TiDB Cloud Technical Support**: Customers with **Standard(Developer), Enterprise, Premium** support plans are able to raise technical support tickets via this portal. Tickets raised in this portal should contain questions about technical problems, such as TiDB cloud cluster failure, etc.
-    
+You can access the PingCAP Help Center via <https://tidb.support.pingcap.com/servicedesk/customer/portals> directly, or through the [TiDB Cloud console](https://tidbcloud.com/) in the following ways:
 
-### [TiDB Cloud Technical Support Portal](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)
+- Click **?**  the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Request Support**.
+- Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of [TiDB Cloud console](https://tidbcloud.com/), click **Support**, and then click **Create a Support Ticket**.
+- On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster, and then select **Get Support**.
+- On your cluster overview page, click **...** in the upper-right corner, and then select **Get Support**.
 
-![get-support-technical-support](/media/tidb-cloud/get-support-technical-support.PNG)
+## Create a account or billing support ticket
 
-### Support Ticket Fields
----------------------
+To create a support ticket about account or billing issues, take the following steps:
 
-*   **Summary**: Please provide a brief summary of your question.
-    
-*   **TiDB Cloud Org**: Please select the relevant TiDB Cloud Org of your reported issue.
-    
-*   **TiDB Cloud Cluster**: Please select the relevant TiDB Cloud Cluster if any.
-    
-*   **Environment**: Please select the corresponding environment in which you're using the TiDB Cloud cluster.
-    
-*   **Description**: Please try to describe your reported issue as detailed as possible. For example, you could share the exact timestamp when you encountered the issue, attach the detailed error message/call stack of the issue, add your troubleshooting/analysis of the issue, etc. and specify the ask from your side.
-    
-*   **Severity**: Please estimate the business impact of this reported issue and choose the proper severity for it.
-    
-<table>
-<thead>
-    <tr>
-        <th>Severity</th>
-        <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <td>S1</td>
-        <td>Complete loss of production environmental functions.</td>
-    </tr>
-    <tr>
-        <td>S2</td>
-        <td>High impact on operations in production environments.</td>
-    </tr>
-    <tr>
-        <td>S3</td>
-        <td>Non-critical database usage issues in production or non-production environments</td>
-    </tr>
-    <tr>
-        <td>S4</td>
-        <td>General question on how a particular feature or function performs or should be configured. An issue that has minimal impact on business and can be tolerated for a reasonable period.</td>
-    </tr>
-</tbody>
-</table>
+1. Log into the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), and then click [TiDB Cloud Account/Billing Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/16).
+2. Click **Submit a request**.
+3. Fill in the following fields:
 
-*   **Components**: Please select the relevant TiDB Cloud component that you'd like to report issue for, such as TiDB/TiKV/PD/TiFlash, etc.
-    
-*   **Affects versions**: the TiDB Cloud cluster version of the reported issue.
-    
+    - **Summary**: provide a brief summary of your question.
+    - **TiDB Cloud Org**: select the relevant TiDB Cloud organization, if applicable.
+    - **TiDB Cloud Cluster**: select the relevant TiDB Cloud cluster, if applicable.
+    - **Description**: provide the details about the issue.
+    - **Severity**: estimate the business impact of the issue and choose the proper severity for it. (S1 is not applicable to billing or account issues)
 
-### [TiDB Cloud Account/Billing Support Portal](https://tidb.support.pingcap.com/servicedesk/customer/portal/16)
+4. Click **Submit**.
 
-![get-support-account-billing-support](/media/tidb-cloud/get-support-account-billing-support.PNG)
+## Create a technical support ticket
 
-### Support Ticket Fields
----------------------
+To create a support ticket about technical issues, take the following steps:
 
-*   **Summary:** Please provide a brief summary of your question.
-    
-*   **TiDB Cloud** **Org:** Please select the relevant TiDB Cloud Org if any.
-    
-*   **TiDB Cloud** **Cluster:** Please select the relevant TiDB Cloud Cluster if any.
-    
-*   **Description:** Please provide the details about your reported issue.
-    
-*   **Severity:** Please estimate the business impact of this reported issue and choose the proper severity for it. (S1 is not applicable in billing/account type of requests)
-    
+1. Log into the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), and then click [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6).
 
-### View Support Tickets
+    > **Note:**
+    >
+    > The [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6) entry is only available for customers subscribed to Developer, Enterprise, or Premium support plans.
 
-Users can view all the historical support tickets in [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) by clicking the avatar on the top right corner, and go to **Requests** to view and track tickets.
+2. Click **Submit a request**.
+
+3. Fill in the following fields:
+
+    - **Summary**: provide a brief summary of your question.
+    - **TiDB Cloud Org**: select the relevant TiDB Cloud organization of the issue.
+    - **TiDB Cloud Cluster**: select the relevant TiDB Cloud cluster, if applicable.
+    - **Environment**: select the corresponding environment in which you're using the TiDB Cloud cluster.
+    - **Description**: describe the issue you encountered as detailed as possible. For example, share the exact timestamp when you encountered the issue, attach the detailed error messages and call stack of the issue, and add your troubleshooting or analysis of the issue.
+    - **Severity**: estimate the business impact of the issue and choose the proper severity for it.
+
+        | Severity | Description |
+        | --- | --- |
+        | S1 | Complete loss of production environmental functionality |
+        | S2 | High impact on operations in production environments |
+        | S3 | Non-critical database usage issues in production or non-production environments |
+        | S4 | General question on how a particular feature or function performs or should be configured. An issue that has minimal impact on business and can be tolerated for a reasonable period. |
+
+    - **Components**: select the relevant TiDB Cloud component to report the issue for, such as TiDB, TiKV, PD, or TiFlash.
+    - **Affects versions**: specify the TiDB Cloud cluster version related to the issue.
+
+4. Click **Submit**.
+
+## View support tickets
+
+To view all the historical support tickets, log into the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), click your avatar in the upper-right corner, and then click **Requests**.
 
 ## Check or upgrade your support plan
 
-TiDB Cloud offers free basic support plan and customers can upgrade to a paid plan for extended services.
+TiDB Cloud offers a free basic support plan by default. For extended services, you can upgrade to a paid plan.
 
 To check or upgrade your support plan, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), choose your organization and go to **Support** page.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner, and then click **Support** to go to the support page.
 
     On this page, you can find your **Current Plan**. By default, the **Basic** free plan is selected.
 
 2. Choose your desired support plan.
 
     <SimpleTab>
-    <div label="Upgrade to Standard or Enterprise">
+    <div label="Upgrade to Developer or Enterprise">
 
-    To upgrade to **Standard** or **Enterprise**:
+    To upgrade to **Developer** or **Enterprise**:
 
-    1. Click **Upgrade** button in the **Standard** or **Enterprise** pane. A **Upgrade to Standard Plan** or **Upgrade to Enterprise Plan** page is displayed.
-    2. Check the corresponding support service information on the page. For the complete version of every support plan, please refer to [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail) .
-    3. If you want to proceed with the upgrade, please click the **Add Credit Card and Upgrade** button and fill in the **Credit Card** details.
+    1. Click **Upgrade** in the **Developer** or **Enterprise** pane. A **Upgrade to Developer Plan** or **Upgrade to Enterprise Plan** page is displayed.
+    2. Check the corresponding support service information on the page. For a complete version of each support plan, see [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail) .
+    3. Click **Add Credit Card and Upgrade**, and then fill in the **Credit Card** details.
 
         For more information about billing, see [TiDB Cloud Payment Method](/tidb-cloud/tidb-cloud-billing.md#payment-method).
 
@@ -135,5 +117,5 @@ To check or upgrade your support plan, perform the following steps:
 
 To downgrade your support plan, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), choose your organization and go to **Support** page.
-2. Choose the desired support plan and click **Downgrade**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner, and then click **Support** to go to the support page.
+2. Choose the support plan you want to switch to, and then click **Downgrade**.
