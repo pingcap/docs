@@ -10,7 +10,7 @@ The AI chat in IM powered by PingCAP, is an offering to invite TiDB AI assistant
 
 > **Limitation:**
 >
-> The Lark version is not fully ready yet. If you would like to take a try with the private preview release, please contact our support team at support@pingcap.com or your Technical Account Manager (TAM).
+> While the Slack version is fully ready, the Lark version is still in private preview. If you're interested in trying the current Lark release, please contact our support team at support@pingcap.com or reach out to your Technical Account Manager (TAM).
 
 
 **Example:**
