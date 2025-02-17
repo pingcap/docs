@@ -5,7 +5,7 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 # TiDB Cloud Support
 
-TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. For more information, see [Connected Care Details](/tidb-cloud/connected-care-detail).
+TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. For more information, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
 > **Note:**
 >
