@@ -153,8 +153,7 @@ Specifies certificates and keys for TLS connections within the cluster.
 #### `driver`
 
 - Where to store the checkpoints.
-- - Value options:
-
+- Value options:
     - `"file"`:  store as a local file.
     - `"mysql"`: store into a remote MySQL-compatible database.
 
