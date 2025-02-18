@@ -9,7 +9,7 @@ For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connec
 
 ## Create a support ticket
 
-In the Slack support channel, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the ticket bot will send you a message with a **Raise Request** button.
+In the Slack support channel, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the ticket bot will send you a message with a **Raise request** button.
 
 ![slack-ticket-creation-1](/media/tidb-cloud/connected-slack-ticket-creation-1.png)
 
@@ -17,7 +17,7 @@ Click **Raise request** to open a form, fill it out according to the problem, an
 
 ![slack-ticket-creation-2](/media/tidb-cloud/connected-slack-ticket-creation-2.png)
 
-After successfully creating the ticket, the bot will reply with the ticket link. You can click the link to view the ticket details in the support portal.
+After successfully creating the ticket, the bot will reply with the ticket link. You can click the link to view the ticket details in the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
 
 ![slack-ticket-creation-3](/media/tidb-cloud/connected-slack-ticket-creation-3.png)
 
@@ -37,4 +37,4 @@ The **Enterprise** support plan supports subscriptions to ticket updates in Slac
 
 ## Contact support
 
-For help or questions, please contact our support team at <support@pingcap.com>.
+For help or questions, please contact our support team at <a href="mailto:support@pingcap.com">support@pingcap.com</a>.
