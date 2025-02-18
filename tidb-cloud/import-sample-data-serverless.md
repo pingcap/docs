@@ -53,7 +53,7 @@ This document describes how to import the sample data into TiDB Cloud Serverless
 
     If this is your first time importing data into this cluster, select **Import From GCS**.
 
-3. On the **Import Data from GCS** page, configure the following source data information:
+3. On the **Import Data from Google Cloud Storage** page, configure the following source data information:
 
     - **Import File Count**: for the sample data, select **Multiple files**.
     - **Included Schema Files**: for the sample data, select **Yes**.
@@ -68,7 +68,7 @@ This document describes how to import the sample data into TiDB Cloud Serverless
 </div>
 </SimpleTab>
 
-When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud Serverless.
 
 After connecting to the cluster, you can run some queries in your terminal to check the result, for example:
 

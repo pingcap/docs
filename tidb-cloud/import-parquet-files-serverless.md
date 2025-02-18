@@ -159,7 +159,7 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
 2. Select **Import data from Cloud Storage**, and then click **Google Cloud Storage**.
 
-3. On the **Import Data from GCS** page, provide the following information for the source Parquet files:
+3. On the **Import Data from Google Cloud Storage** page, provide the following information for the source Parquet files:
 
     - **Import File Count**: select **One file** or **Multiple files** as needed.
     - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
@@ -217,7 +217,7 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
     - **File URI** or **Folder URI**:
         - When importing one file, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `[azure|https]://sampledata/ingest/TableName.01.parquet`.
         - When importing multiple files, enter the source file URI and name in the following format `[azure|https]://[bucket_name]/[data_source_folder]/`. For example, `[azure|https]://sampledata/ingest/`.
-    - **Bucket Access**: you can use either a SAS token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+    - **Bucket Access**: you can use a shared access signature (SAS) token to access your bucket. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Connect**.
 
