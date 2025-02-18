@@ -182,7 +182,6 @@
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
     - [Third-Party Metrics Integrations](/tidb-cloud/third-party-monitoring-integrations.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
->>>>>>> 8ca9ce8de9 (cloud: Clinic on TiDB Cloud (#19895))
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - Analyze Performance
