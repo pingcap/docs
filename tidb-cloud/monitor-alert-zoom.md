@@ -20,7 +20,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 ### Step 1. Add Zoom Incoming Webhook App
 
 1. Sign in to the [Zoom App Marketplace](https://marketplace.zoom.us/) as the account administrator.
-2. Add [Incoming Webhook App](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ) from the Zoom App Marketplace, Click **Add**. If the app is not pre-approved, contact your Zoom admin to approve this app for your account. For more information, see [Approving apps and managing app requests](https://support.zoom.us/hc/en-us/articles/360027829671). 
+2. Go to the [Incoming Webhook App](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ) page in the Zoom App Marketplace, and then click **Add** to add this app. If the app is not pre-approved, contact your Zoom admin to approve this app for your account. For more information, see [Approving apps and managing app requests](https://support.zoom.us/hc/en-us/articles/360027829671). 
 3. Confirm the permissions the app requires, then click **Authorize** to add the Incoming Webhook app.
 
 ### Step 2. Generate a Zoom webhook URL
