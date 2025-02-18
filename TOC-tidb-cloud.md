@@ -180,10 +180,7 @@
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
-<<<<<<< HEAD
     - [Third-Party Metrics Integrations](/tidb-cloud/third-party-monitoring-integrations.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-=======
-    - [Third-Party Metrics Integrations (Beta)](/tidb-cloud/third-party-monitoring-integrations.md)
     - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
 >>>>>>> 8ca9ce8de9 (cloud: Clinic on TiDB Cloud (#19895))
   - Tune Performance
