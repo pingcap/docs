@@ -166,7 +166,9 @@ mysql> select @@last_plan_from_cache;
 ```
 
 
-And for Instance Plan Cache, TiDB provides 2 system views (after v8.5) `information_schema.tidb_plan_cache` and `information_schema.cluster_tidb_plan_cache` to see the internal information of the Instance Plan Cache of the current instance and the whole cluster: 
+In v8.5.0 and higher, two system tables were introduced to observe the entries in Instance Plan Cache: 
+* `information_schema.tidb_plan_cache`: The entries of instance plan cache in this particular TiDB instance.
+* `information_schema.cluster_tidb_plan_cache`:  The entries of instance plan cache from all available TiDB instances. 
 
 ```sql
 mysql> select *, tidb_decode_binary_plan(binary_plan) from information_schema.tidb_plan_cache\G;
