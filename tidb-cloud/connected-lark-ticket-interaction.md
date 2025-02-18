@@ -19,15 +19,7 @@ If Interaction for Support Tickets is enabled, **PingCAP Support Bot** will conv
 
 When a PingCAP support engineer comments on the ticket, the comment will be automatically synchronized to the thread.
 
-![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
-
-![lark-ticket-interaction-3](/media/tidb-cloud/connected-lark-ticket-interaction-3.png)
-
 When anyone comments in the thread, the comment will be synchronized back to the corresponding support ticket.
-
-![lark-ticket-interaction-4](/media/tidb-cloud/connected-lark-ticket-interaction-4.png)
-
-![lark-ticket-interaction-5](/media/tidb-cloud/connected-lark-ticket-interaction-5.png)
 
 ## FAQs
 

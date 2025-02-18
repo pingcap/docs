@@ -19,7 +19,7 @@ If an **Assist** app is added to the channel, you can use **Assist** to submit t
 
     ![slack-ticket-interaction-2](/media/tidb-cloud/connected-slack-ticket-interaction-2.png)
 
-    The **Assist** app will send you a message with a `Raise Request` button. Then, you can click the button, fill out the form, and submit your request.
+    The **Assist** app will send you a message with a **Raise Request** button. Then, you can click the button, fill out the form, and submit your request.
 
     ![slack-ticket-interaction-3](/media/tidb-cloud/connected-slack-ticket-interaction-3.png)
 

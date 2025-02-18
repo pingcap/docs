@@ -29,7 +29,7 @@ After the support ticket is created, the **Ticket Submitted** card will be updat
 
 Whenever a PingCAP support engineer comments on the ticket, **PingCAP Support Bot** will send a **New Comment on Your Ticket** card to the Lark group.
 
-![lark-ticket-update-subscription](/media/tidb-cloud/connected-lark-ticket-update-subscription.png)
+![connected-lark-ticket-creation-4](/media/tidb-cloud/connected-lark-ticket-creation-4.png)
 
 ## FAQs
 
