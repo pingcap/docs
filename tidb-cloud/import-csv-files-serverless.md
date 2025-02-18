@@ -45,8 +45,6 @@ Because CSV files do not contain schema information, before importing data from 
 
         For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud Serverless will create the `mydb` database when you import the data.
 
-        {{< copyable "sql" >}}
-
         ```sql
         CREATE DATABASE mydb;
         ```
@@ -58,8 +56,6 @@ Because CSV files do not contain schema information, before importing data from 
         Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Serverless will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
         For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, TiDB Cloud Serverless will create the `mytable` table in the `mydb` database when you import the data.
-
-        {{< copyable "sql" >}}
 
         ```sql
         CREATE TABLE mytable (

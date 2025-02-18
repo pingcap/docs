@@ -1,6 +1,6 @@
 ---
 title: Import Sample Data
-summary: Learn how to import sample data into TiDB Cloud Serverless via UI.
+summary: Learn how to import sample data into TiDB Cloud Serverless via the UI.
 ---
 
 # Import Sample Data
