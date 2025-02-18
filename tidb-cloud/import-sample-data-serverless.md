@@ -1,11 +1,11 @@
 ---
 title: Import Sample Data
-summary: Learn how to import sample data into TiDB Cloud Dedicated via the UI.
+summary: Learn how to import sample data into TiDB Cloud Serverless via the UI.
 ---
 
 # Import Sample Data
 
-This document describes how to import the sample data into TiDB Cloud Dedicated via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
+This document describes how to import the sample data into TiDB Cloud Serverless via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -53,7 +53,7 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
 
     If this is your first time importing data into this cluster, select **Import From GCS**.
 
-3. On the **Import Data from GCS** page, configure the following source data information:
+3. On the **Import Data from Google Cloud Storage** page, configure the following source data information:
 
     - **Import File Count**: for the sample data, select **Multiple files**.
     - **Included Schema Files**: for the sample data, select **Yes**.
@@ -68,7 +68,7 @@ This document describes how to import the sample data into TiDB Cloud Dedicated 
 </div>
 </SimpleTab>
 
-When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud Serverless.
 
 After connecting to the cluster, you can run some queries in your terminal to check the result, for example:
 
