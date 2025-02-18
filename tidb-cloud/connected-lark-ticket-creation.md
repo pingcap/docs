@@ -33,7 +33,7 @@ Whenever a PingCAP support engineer comments on the ticket, **PingCAP Support Bo
 
 ## FAQs
 
-1. How can I check the status of my ticket?
+- How can I check the status of my ticket?
 
     Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
 

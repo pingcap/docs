@@ -11,7 +11,7 @@ For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected
 
 If an **Assist** app is added to the channel, you can use **Assist** to submit the ticket. There are two ways to submit the request.
 
-- **Method 1: Add a  🎫 emoji to the message for ticket creation**
+- **Method 1: Add a 🎫 emoji to the message for ticket creation**
 
     Click the emoji icon next to the message that you need to create a ticket. Type `ticket` in the search box to quickly find the 🎫 emoji, and then click 🎫.
 
@@ -27,7 +27,7 @@ If an **Assist** app is added to the channel, you can use **Assist** to submit t
 
 - **Method 2: Type `/assist` or `/assist` along with the problem description for ticket creation**
 
-    Another faster way is to type `/assist` or `/assist + [problem description]` in the message box and press **Enter**. A request submission form will appear for you to complete and submit.
+    Another faster way is to type `/assist` or `/assist [problem description]` in the message box and press **Enter**. A request submission form will appear for you to complete and submit.
 
     ![slack-ticket-interaction-5](/media/tidb-cloud/connected-slack-ticket-interaction-5.png)
 
@@ -43,7 +43,7 @@ In this way, customers subscribed to the **Premium** support plan can quickly cr
 
 ## FAQs
 
-1. How can I check the status of my ticket?
+- How can I check the status of my ticket?
 
     Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
 

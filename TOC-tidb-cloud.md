@@ -803,10 +803,10 @@
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
-      - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)
+      - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     - Connected: IM Interaction for Support Tickets
       - [Interact with Support Tickets via Slack](/tidb-cloud/connected-slack-ticket-interaction.md)
-      - [Interact with Support Tickets via Lark](/tidb-cloud/connected-lark-ticket-interaction.md)
+      - [Interact with Support Tickets via Lark](/tidb-cloud/connected-lark-ticket-interaction.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)

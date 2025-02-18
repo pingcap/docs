@@ -17,7 +17,7 @@ The [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/
 
 You can access the PingCAP Help Center via <https://tidb.support.pingcap.com/servicedesk/customer/portals> directly, or through the [TiDB Cloud console](https://tidbcloud.com/) in the following ways:
 
-- Click **?**  the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Request Support**.
+- Click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Request Support**.
 - Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of [TiDB Cloud console](https://tidbcloud.com/), click **Support**, and then click **Create a Support Ticket**.
 - On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster, and then select **Get Support**.
 - On your cluster overview page, click **...** in the upper-right corner, and then select **Get Support**.
@@ -26,7 +26,7 @@ You can access the PingCAP Help Center via <https://tidb.support.pingcap.com/ser
 
 To create a support ticket about account or billing issues, take the following steps:
 
-1. Log into the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), and then click [TiDB Cloud Account/Billing Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/16).
+1. Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), and then click [TiDB Cloud Account/Billing Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/16).
 2. Click **Submit a request**.
 3. Fill in the following fields:
 
@@ -34,7 +34,7 @@ To create a support ticket about account or billing issues, take the following s
     - **TiDB Cloud Org**: select the relevant TiDB Cloud organization, if applicable.
     - **TiDB Cloud Cluster**: select the relevant TiDB Cloud cluster, if applicable.
     - **Description**: provide the details about the issue.
-    - **Severity**: estimate the business impact of the issue and choose the proper severity for it. (S1 is not applicable to billing or account issues)
+    - **Severity**: estimate the business impact of the issue and choose the proper severity for it. (S1 is not applicable to billing or account issues.)
 
 4. Click **Submit**.
 
@@ -42,7 +42,7 @@ To create a support ticket about account or billing issues, take the following s
 
 To create a support ticket about technical issues, take the following steps:
 
-1. Log into the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), and then click [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6).
+1. Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), and then click [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6).
 
     > **Note:**
     >
@@ -73,7 +73,7 @@ To create a support ticket about technical issues, take the following steps:
 
 ## View support tickets
 
-To view all the historical support tickets, log into the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), click your avatar in the upper-right corner, and then click **Requests**.
+To view all the historical support tickets, log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals), click your avatar in the upper-right corner, and then click **Requests**.
 
 ## Check or upgrade your support plan
 
@@ -93,7 +93,7 @@ To check or upgrade your support plan, perform the following steps:
     To upgrade to **Developer** or **Enterprise**:
 
     1. Click **Upgrade** in the **Developer** or **Enterprise** pane. An **Upgrade to Developer Plan** or **Upgrade to Enterprise Plan** page is displayed.
-    2. Check the corresponding support service information on the page. For a complete version of each support plan, see [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail) .
+    2. Check the corresponding support service information on the page. For a complete version of each support plan, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
     3. Click **Add Credit Card and Upgrade**, and then fill in the **Credit Card** details.
 
         For more information about billing, see [TiDB Cloud Payment Method](/tidb-cloud/tidb-cloud-billing.md#payment-method).

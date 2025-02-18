@@ -13,7 +13,7 @@ In the Slack support channel, you only need to mention **PingCAP Support Bot** a
 
 ![slack-ticket-creation-1](/media/tidb-cloud/connected-slack-ticket-creation-1.png)
 
-Click **Raise request** to open a form, fill it out according to the problem, and then click `Create` to submit the ticket.
+Click **Raise request** to open a form, fill it out according to the problem, and then click **Create** to submit the ticket.
 
 ![slack-ticket-creation-2](/media/tidb-cloud/connected-slack-ticket-creation-2.png)
 
@@ -31,7 +31,7 @@ The **Enterprise** support plan supports subscriptions to ticket updates in Slac
 
 ## FAQs
 
-1. How can I check the status of my ticket?
+- How can I check the status of my ticket?
 
     Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
 
