@@ -1,0 +1,18 @@
+{
+	"problemMatcher": [
+		{
+			"owner": "lychee",
+			"pattern": [
+				{
+					"regexp": "^\\[(.*)\\]:$",
+					"file": 1
+				},
+				{
+					"regexp": "^\\s*\\[ERROR\\] (.*)$",
+					"message": 1,
+					"loop": true
+				}
+			]
+		}
+	]
+}

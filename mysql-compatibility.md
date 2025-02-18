@@ -292,3 +292,5 @@ The following statements for creating, modifying, and dropping resource groups h
 - [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
 - [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)
 - [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
+
+This is a [broken link](https://broken.myname.nl) for testing purposes.
