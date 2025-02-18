@@ -13,13 +13,13 @@ If an **Assist** app is added to the channel, you can use **Assist** to submit t
 
 - **Method 1: Add a  🎫 emoji to the message for ticket creation**
 
-    Click the emoji icon next to the message that you need to create a ticket. Type "ticket" in the search box to quickly find the 🎫 emoji, and then click 🎫.
+    Click the emoji icon next to the message that you need to create a ticket. Type `ticket` in the search box to quickly find the 🎫 emoji, and then click 🎫.
 
     ![slack-ticket-interaction-1](/media/tidb-cloud/connected-slack-ticket-interaction-1.png)
 
     ![slack-ticket-interaction-2](/media/tidb-cloud/connected-slack-ticket-interaction-2.png)
 
-    The **Assist** app will send an ephemeral message to you with a `Raise Request` button. Click the button, fill out the form, and submit your request.
+    The **Assist** app will send you a message with a `Raise Request` button. Then, you can click the button, fill out the form, and submit your request.
 
     ![slack-ticket-interaction-3](/media/tidb-cloud/connected-slack-ticket-interaction-3.png)
 
@@ -45,8 +45,8 @@ In this way, customers subscribed to the **Premium** support plan can quickly cr
 
 1. How can I check the status of my ticket?
 
-Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
 
 ## Contact support
 
-For help or questions, please contact our support team at <support@pingcap.com>. We are happy to help you.
+For help or questions, please contact our support team at <support@pingcap.com>. 

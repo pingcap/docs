@@ -33,8 +33,8 @@ The **Enterprise** support plan supports subscriptions to ticket updates in Slac
 
 1. How can I check the status of my ticket?
 
-Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
 
 ## Contact support
 
-For help or questions, please contact our support team at <support@pingcap.com>. We are happy to help you.
+For help or questions, please contact our support team at <support@pingcap.com>.

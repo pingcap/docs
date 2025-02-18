@@ -17,7 +17,7 @@ In the **Customer Support Group** Lark group, type `@PingCAP Support Bot create 
 
 ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
-Fill in the required fields and click `Submit`. Once submitted, the card will be updated to **Ticket Submitted**, indicating that your request is being processed.
+Fill in the required fields and click **Submit**. Once submitted, the card will be updated to **Ticket Submitted**, indicating that your request is being processed.
 
 ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
@@ -35,8 +35,8 @@ Whenever a PingCAP support engineer comments on the ticket, **PingCAP Support Bo
 
 1. How can I check the status of my ticket?
 
-Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
 
 ## Contact support
 
-For help or questions, please contact our support team at <support@pingcap.com>. We are happy to help you.
+For help or questions, please contact our support team at <support@pingcap.com>.

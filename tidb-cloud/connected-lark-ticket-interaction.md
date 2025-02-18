@@ -17,13 +17,13 @@ If Interaction for Support Tickets is enabled, **PingCAP Support Bot** will conv
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
-When a PingCAP support engineer comments on the ticket, the comment will be automatically synced to the thread.
+When a PingCAP support engineer comments on the ticket, the comment will be automatically synchronized to the thread.
 
 ![lark-ticket-interaction-2](/media/tidb-cloud/connected-lark-ticket-interaction-2.png)
 
 ![lark-ticket-interaction-3](/media/tidb-cloud/connected-lark-ticket-interaction-3.png)
 
-When anyone comments in the thread, the comment will be synced back to the corresponding support ticket.
+When anyone comments in the thread, the comment will be synchronized back to the corresponding support ticket.
 
 ![lark-ticket-interaction-4](/media/tidb-cloud/connected-lark-ticket-interaction-4.png)
 
@@ -33,8 +33,8 @@ When anyone comments in the thread, the comment will be synced back to the corre
 
 1. How can I check the status of my ticket?
 
-Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+    Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
 
 ## Contact support
 
-For help or questions, please contact our support team at <support@pingcap.com>. We are happy to help you.
+For help or questions, please contact our support team at <support@pingcap.com>.
