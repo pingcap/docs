@@ -1,19 +1,21 @@
 ---
 title: Subscribe via Slack
-summary: Learn how to monitor your TiDB cluster by getting alert notification via Slack.
+summary: Learn how to monitor your TiDB cluster by getting alert notifications via Slack.
 ---
 
 # Subscribe via Slack
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via Slack, [email](/tidb-cloud/monitor-alert-email.md), and [Zoom](/tidb-cloud/monitor-alert-zoom.md). This document describes how to subscribe to alert notifications via Slack.
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via [Slack](https://slack.com/), [email](/tidb-cloud/monitor-alert-email.md), and [Zoom](/tidb-cloud/monitor-alert-zoom.md). This document describes how to subscribe to alert notifications via Slack.
 
-![tidb-cloud-alert-subscription](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
+The following screenshot shows two example alerts.
+
+![TiDB Cloud Alerts in Slack](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
 
 ## Prerequisites
 
-- The Subscribing via Slack feature is only available for organizations that subscribes to the Enterprise support plan or higher.
+- The subscribing via Slack feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
-- To subscribe to alert notification of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
+- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
 
 ## Subscribe to alert notifications
 
@@ -24,7 +26,8 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 3. Click the **Incoming Webhooks** tab, and then toggle **Activate Incoming Webhooks** to **ON**.
 4. Click **Add New Webhook to Workspace**.
 5. Select a channel that you want to receive alert notifications in, and then select **Authorize**. If you need to add the incoming webhook to a private channel, you must first be in that channel.
-6. You can see a new entry under the **Webhook URLs for Your Workspace** section in the format: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
+
+You can see a new entry under the **Webhook URLs for Your Workspace** section in the following format: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
 
 ### Step 2. Subscribe from TiDB Cloud
 
@@ -36,7 +39,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 2. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
 3. Click **Add Subscriber**.
 4. Select **Slack** from the **Subscriber Type** drop-down list.
-5. In the **Name** field, enter a name and your Slack webhook URL into **URL** field.
+5. Enter a name in the **Name** field and your Slack webhook URL in the **URL** field.
 6. Click **Test Connection**.
 
     - If the test succeeds, the **Save** button is displayed.
@@ -44,7 +47,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 7. Click **Save** to complete the subscription.
 
-Alternatively, you can also click **Subscribe** in the top right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the cluster. You will be directed to the **Alert Subscriber** page.
 
 If an alert condition remains unchanged, the alert sends notifications every three hours.
 
@@ -55,5 +58,5 @@ If you no longer want to receive alert notifications of clusters in your project
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 3. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
-4. In the row of your target subscriber to be deleted, and click **...**.
+4. In the row of your target subscriber to be deleted, click **...**.
 5. Click **Unsubscribe** to confirm the unsubscription in the pop-up window.
