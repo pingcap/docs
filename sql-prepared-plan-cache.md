@@ -133,7 +133,7 @@ MySQL [test]> select @@last_plan_from_cache;
 
 > **Warning:**
 >
-> Instance Plan Cache only supported after v8.4 and it is an experimental feature.
+> Instance Plan Cache is experimental feature.
 
 TiDB supports both Session Plan Cache and Instance Plan Cache. Session Plan Cache maintains cache for each session, while Instance Plan Cache maintains one single cache in each instance which can be shared across all sessions in this instance.
 
