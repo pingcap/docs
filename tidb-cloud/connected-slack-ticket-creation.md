@@ -5,7 +5,7 @@ summary: Introduces detailed information about the Slack ticket creation and upd
 
 # Create Tickets and Subscribe to Ticket Updates in Slack
 
-For customers subscribed to the Enterprise [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Slack](https://slack.com/), to support quick ticket creation.
+For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Slack](https://slack.com/), to support quick ticket creation.
 
 ## Create a support ticket
 
@@ -25,7 +25,7 @@ After successfully creating the ticket, the bot will reply with the ticket link.
 
 ## Subscribe to ticket updates
 
-The Enterprisesupport plan supports subscriptions to ticket updates in Slack. When a support engineer responds to a ticket, a ticket update message will appear in the Slack channel. The message includes information such as the ticket title, ticket link, and last comment content.
+The **Enterprise** support plan supports subscriptions to ticket updates in Slack. When a support engineer responds to a ticket, a ticket update message will appear in the Slack channel. The message includes information such as the ticket title, ticket link, and last comment content.
 
 ![slack-ticket-creation-5](/media/tidb-cloud/connected-slack-ticket-creation-5.png)
 

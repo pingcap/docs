@@ -5,7 +5,7 @@ summary: Introduces detailed information about the Lark interaction for support 
 
 # Interact with Support Tickets via Lark
 
-For customers subscribed to the **Premium** support plan, TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to support more comprehensive interaction and management of support tickets.
+For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to support more comprehensive interaction and management of support tickets.
 
 > **Note:**
 >
@@ -33,7 +33,7 @@ When anyone comments in the thread, the comment will be synced back to the corre
 
 1. How can I check the status of my ticket?
 
-Log in to the [customer portal](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
+Log in to the [PingCAP Help Center](https://tidb.support.pingcap.com/servicedesk/customer/user/requests) with the email address used to create the ticket. You can view all historical tickets and their status for the current account.
 
 ## Contact support
 

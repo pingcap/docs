@@ -59,11 +59,11 @@ The support plans in the Connected Care services introduce a completely new set 
 
 - Connected: IM ticket creation and update subscription
 
-    This feature enables you to create a support ticket and subscribe to your support ticket updates through an IM tool. For more information, see [Slack ticket creation and update subscription](/tidb-cloud/connected-slack-ticket-creation.md) and [Lark ticket creation and update subscription](/tidb-cloud/connected-lark-ticket-creation.md).
+    This feature enables you to create a support ticket and subscribe to your support ticket updates through an IM tool. For more information, see [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md) and [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md).
 
 - Connected: IM interaction for support tickets
 
-    This feature enables you to quickly create and interact with support tickets through an IM tool for streamlined communication. For more information, see [Slack interaction for support tickets](/tidb-cloud/connected-slack-ticket-interaction.md) and [Lark interaction for support tickets](/tidb-cloud/connected-lark-ticket-interaction.md).
+    This feature enables you to quickly create and interact with support tickets through an IM tool for streamlined communication. For more information, see [Interact with Support Tickets via Slack](/tidb-cloud/connected-slack-ticket-interaction.md) and [Interact with Support Tickets via Lark](/tidb-cloud/connected-lark-ticket-interaction.md).
 
 With these new features, the Connected Care services offer you better connectivity, more personalized support, and cost-effective solutions for different customer needs.
 

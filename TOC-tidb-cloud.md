@@ -797,16 +797,16 @@
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
   - Connected Care Support Service Features
     - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
-    - [Connected: AI chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
-    - Connected: IM subscription for TiDB Cloud alerts
+    - [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
+    - Connected: IM Subscription for TiDB Cloud Alerts
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
-    - Connected: IM ticket creation and update subscription
-      - [Slack ticket creation and update subscription](/tidb-cloud/connected-slack-ticket-creation.md)
-      - [Lark ticket creation and update subscription](/tidb-cloud/connected-lark-ticket-creation.md)
-    - Connected: IM interaction for support tickets
-      - [Slack interaction for support tickets](/tidb-cloud/connected-slack-ticket-interaction.md)
-      - [Lark interaction for support tickets](/tidb-cloud/connected-lark-ticket-interaction.md)
+    - Connected: IM Ticket Creation and Update Subscription
+      - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
+      - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)
+    - Connected: IM Interaction for Support Tickets
+      - [Interact with Support Tickets via Slack](/tidb-cloud/connected-slack-ticket-interaction.md)
+      - [Interact with Support Tickets via Lark](/tidb-cloud/connected-lark-ticket-interaction.md)
   - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)

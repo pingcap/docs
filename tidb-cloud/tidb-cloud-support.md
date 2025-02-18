@@ -46,7 +46,7 @@ To create a support ticket about technical issues, take the following steps:
 
     > **Note:**
     >
-    > The [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6) entry is only available for customers subscribed to Developer, Enterprise, or Premium support plans.
+    > The [TiDB Cloud Technical Support](https://tidb.support.pingcap.com/servicedesk/customer/portal/6) entry is only available for customers subscribed to **Developer**, **Enterprise**, or **Premium** [support plans](/tidb-cloud/connected-care-detail.md).
 
 2. Click **Submit a request**.
 

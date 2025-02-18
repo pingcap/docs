@@ -5,7 +5,7 @@ summary: Introduces detailed information about the Lark ticket creation and upda
 
 # Create Tickets and Subscribe to Ticket Updates via Lark
 
-For customers subscribed to the Enterprise [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to manage ticket creation and updates from the support ticket system.
+For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Lark](https://www.larksuite.com/), to manage ticket creation and updates from the support ticket system.
 
 > **Note:**
 >
