@@ -3272,13 +3272,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Enumeration
-- Default value: `optimized`
+- Default value: `optimized`. Before v9.0.0, the default value is `legacy`.
 - Possible values: `legacy`, `optimized`
 - This variable is used to control whether TiDB uses an optimized version of hash join. If it is set to `optimized`, TiDB uses the optimized version to execute hash join for better performance.
 
 > **Note:**
 >
-> Currently, the optimized hash join only supports inner join, outer join, semi join and anti semi join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the legacy hash join.
+> Currently, the optimized hash join only supports inner join, outer join, semi join and anti semi join. For other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the `legacy` hash join.
 
 ### tidb_hashagg_final_concurrency
 
