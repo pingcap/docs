@@ -5,7 +5,7 @@ summary: Learn how to use TiDB Cloud Clinic for advanced monitoring and diagnost
 
 # TiDB Cloud Clinic
 
-TiDB Cloud Clinic offers advanced monitoring and diagnostic capabilities for TiDB Cloud.
+TiDB Cloud Clinic offers advanced monitoring and diagnostic capabilities on the TiDB Cloud, designed to help you quickly identify performance issues, optimize your database, and enhance overall performance with detailed analysis and actionable insights.
 
 > **Note:**
 >
@@ -13,7 +13,7 @@ TiDB Cloud Clinic offers advanced monitoring and diagnostic capabilities for TiD
 
 ## Prerequisites
 
-To use TiDB Cloud Clinic, you need to have an **Enterprise** support plan or higher for TiDB Cloud.
+TiDB Cloud Clinic is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
 ## View the Cluster page
 
