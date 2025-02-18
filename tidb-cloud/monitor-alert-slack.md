@@ -7,6 +7,8 @@ summary: Learn how to monitor your TiDB cluster by getting alert notification vi
 
 TiDB Cloud provides you with an easy way to subscribe to alert notifications via Slack, [email](/tidb-cloud/monitor-alert-email.md), and [Zoom](/tidb-cloud/monitor-alert-zoom.md). This document describes how to subscribe to alert notifications via Slack.
 
+![tidb-cloud-alert-subscription](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
+
 ## Prerequisites
 
 - The Subscribing via Slack feature is only available for organizations that subscribes to the Enterprise support plan or higher.
