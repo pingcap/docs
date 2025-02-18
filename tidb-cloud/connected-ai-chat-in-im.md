@@ -1,5 +1,5 @@
 ---
-title: Connected: AI chat in IM
+title: AI chat in IM
 summary: Introduces detailed information about the AI chat in IM
 ---
 
