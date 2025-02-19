@@ -128,6 +128,13 @@ Configurations for the load balancing policy of TiProxy.
 + Possible values: `resource`, `location`, `connection`
 + Specifies the load balancing policy. For the meaning of each possible value, see [TiProxy load balancing policies](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies).
 
+### `enable-traffic-replay`
+
++ Default value: `true`
++ Support hot-reload: yes
++ Possible values: `true`, `false`
++ Specifies whether enabling [traffic replay](/tiproxy/tiproxy-traffic-replay.md). If it is `false`, capturing and replaying traffic will report errors.
+
 ### ha
 
 High availability configurations for TiProxy.
@@ -136,7 +143,7 @@ High availability configurations for TiProxy.
 
 + Default value: `""`
 + Support hot-reload: no
-+ Specifies the virtual IP address in the CIDR format, such as `"10.0.1.10/24"`. In a cluster with multiple TiProxy instances, only one instance binds to the virtual IP. If this instance goes offline, another TiProxy instance will automatically bind to the IP, ensuring clients can always connect to an available TiProxy through the virtual IP.
++ Specifies the virtual IP address in the CIDR format, such as `"10.0.1.10/24"`. When multiple TiProxy instances in a cluster are configured with the same virtual IP, only one TiProxy instance will be bound to the virtual IP. If this instance goes offline, another TiProxy instance will automatically bind to the IP, ensuring clients can always connect to an available TiProxy through the virtual IP.
 
 The following is an example configuration:
 
@@ -146,6 +153,8 @@ server_configs:
     ha.virtual-ip: "10.0.1.10/24"
     ha.interface: "eth0"
 ```
+
+When you need to isolate computing layer resources, you can configure multiple virtual IPs and use [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing) in combination. For examples, see [label-based load balancing](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing).
 
 > **Note:**
 >
@@ -229,6 +238,7 @@ TLS object fields:
 + `ca`: specifies the CA
 + `cert`: specifies the certificate
 + `key`: specifies the private key
++ `cert-allowed-cn`: when other components connect to TiProxy with TLS, TiProxy can prevent illegal access by verifying the `Common Name` in the caller's certificate. This item specifies a list of `Common Name` of legal callers. After setting this item, this TLS object must enable TLS, otherwise the item will not take effect. For more information on verifying component caller's identity, see [verify component caller's identity](/enable-tls-between-components.md#verify-component-callers-identity).
 + `auto-certs`: mostly used for tests. It generates certificates if no certificate or key is specified.
 + `skip-ca`: skips verifying certificates using CA on client object or skips server-side verification on server object.
 + `min-tls-version`: sets the minimum TLS version. Possible values are `1.0`、`1.1`、`1.2`, and `1.3`. The default value is `1.2`, which allows v1.2 or higher TLS versions.
@@ -241,7 +251,7 @@ For client TLS object:
 
 - You must set either `ca` or `skip-ca` to skip verifying server certificates.
 - Optionally, you can set `cert` or `key` to pass server-side client verification.
-- Useless fields: auto-certs.
+- Useless fields: `cert-allowed-cn`，`auto-certs`，`rsa-key-size`，`autocert-expire-duration`.
 
 For server TLS object:
 
@@ -251,6 +261,16 @@ For server TLS object:
 #### `cluster-tls`
 
 A client TLS object. It is used to access TiDB or PD.
+
+#### `encryption-key-path`
+
++ Default value: `""`
++ Support hot-reload: yes
++ Specifies the file path of the key used to encrypt the traffic files when capturing traffic. The file must contain a 256 bits (or 32 bytes) key encoded as hex string, end with a newline (`\n`) and contain nothing else. Example of the file content：
+
+```
+3b5896b5be691006e0f71c3040a29495ddcad20b14aff61806940ebd780d3c62
+```
 
 #### `require-backend-tls`
 
