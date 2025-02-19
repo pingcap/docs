@@ -189,7 +189,7 @@ WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0
 
 Hypothetical indexes (Hypo Indexes) are created using SQL comments, similar to [query hints](/optimizer-hints.md), rather than through the `CREATE INDEX` command. This approach enables lightweight experimentation with indexes without the overhead of physically materializing them.
 
-For example, the comment `/*+ HYPO_INDEX(t, idx_ab, a, b) */` instructs the query planner to create a hypothetical index named `idx_ab` on table `t` for columns `a` and `b`. The planner generates the index's metadata but does not physically materialize it. If applicable, the planner considers this hypothetical index during query optimization without without incurring the costs associated with index creation.
+For example, the comment `/*+ HYPO_INDEX(t, idx_ab, a, b) */` instructs the query planner to create a hypothetical index named `idx_ab` on table `t` for columns `a` and `b`. The planner generates the index's metadata but does not physically materialize it. If applicable, the planner considers this hypothetical index during query optimization without incurring the costs associated with index creation.
 
 The `RECOMMEND INDEX` advisor uses hypothetical indexes for "What-If" analysis to evaluate potential benefits of different indexes. You can also use hypothetical indexes directly to experiment with index designs before committing to their creation.
 
