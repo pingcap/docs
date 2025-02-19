@@ -208,8 +208,8 @@ The `tiproxyctl traffic show` command is used to display historical capture and 
 - `start_time`: the start time of the job
 - `end_time`: the end time if the job has finished, otherwise it is empty
 - `duration`: the duration of the traffic capture job
-- `output`: the output path of the captured traffic files
-- `input`: the input path of the replayed traffic files
+- `output`: the output traffic file path of the capture job
+- `input`: the input traffic file path of the replay job
 - `username`: the database username for traffic replay
 - `speed`: the replay speed multiplier
 - `progress`: the completion percentage of the job

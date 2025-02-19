@@ -19,7 +19,7 @@ TrafficStmt ::=
 
 ## Examples
 
-Assume that there are currently 2 TiProxys capturing traffic:
+Assume that there are currently 2 TiProxy instances capturing traffic:
 
 ```sql
 SHOW TRAFFIC JOBS

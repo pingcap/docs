@@ -20,9 +20,9 @@ The `SHOW TRAFFIC JOBS` statement returns the following columns:
 | Column name | Description   |
 | :-------- | :------------- |
 | `START_TIME` | The start time of the job |
-| `END_TIME` | It shows the end time if the job has finished, otherwise it is empty |
+| `END_TIME` | The end time if the job has finished, otherwise it is empty |
 | `INSTANCE` | The address of the TiProxy instance |
-| `TYPE` | It indicates the job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job |
+| `TYPE` | The job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job |
 | `PROGRESS` | The completion percentage of the job |
 | `STATUS` | The current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job failed |
 | `FAIL_REASON` | If the job fails, this column contains the reason for the failure, otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS` |

@@ -25,7 +25,7 @@ Traffic replay is not suitable for the following scenarios:
 
 ## Usage
 
-Before TiDB v9.0.0, only `tiproxyctl` was supported to connect to TiProxy for traffic capture and replay. Starting from TiDB v9.0.0, it is recommended to use SQL to capture and replay traffic.
+Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for traffic capture and replay. Starting from TiDB v9.0.0, it is recommended to use SQL to capture and replay traffic.
 
 <SimpleTab>
 <div label="Use SQL">
@@ -193,7 +193,7 @@ sample_replay_time: 2024-10-17 12:57:39
 <SimpleTab>
 <div label="Use SQL">
 
-To test cluster throughput, use the `--speed` option to adjust the replay rate.
+To test cluster throughput, use the `SPEED` option to adjust the replay rate.
 
 For example, `SPEED=2` executes SQL statements at twice the rate, reducing the total replay time by half:
 
