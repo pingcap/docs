@@ -29,7 +29,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 | Language | Driver | Latest tested version | Support level | TiDB adapter | Tutorial |
 |----------|--------|-----------------------|---------------|--------------|----------|
 | Go | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) | v1.6.0 | Full | N/A | [Connect to TiDB with Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md) |
-| Java | [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/) | 8.0 | Full | [pingcap/mysql-connector-j](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)</br> [pingcap/tidb-loadbalance](/develop/dev-guide-choose-driver-or-orm.md#java-client-load-balancing) | [Connect to TiDB with JDBC](/develop/dev-guide-sample-application-java-jdbc.md) |
+| Java | [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/) | 8.0 | Full | [pingcap/mysql-connector-j](/develop/dev-guide-choose-driver-or-orm.md#java-drivers) <br/> [pingcap/tidb-loadbalance](/develop/dev-guide-choose-driver-or-orm.md#java-client-load-balancing) | [Connect to TiDB with JDBC](/develop/dev-guide-sample-application-java-jdbc.md) |
 
 ## ORM
 
