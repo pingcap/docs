@@ -8,6 +8,29 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## February 18, 2025
+
+**Console changes**
+
+- Introduce Connected Care, the new support services for TiDB Cloud.
+
+    The Connected Care services are designed to strengthen your connection with TiDB Cloud through modern communication tools, proactive support, and advanced AI capabilities, delivering a seamless and customer-centric experience.
+
+    The Connected Care services introduce the following features:
+
+    - **Clinic service**: Advanced monitoring and diagnostics to optimize performance.
+    - **AI chat in IM**: Get immediate AI assistance through an instant message (IM) tool.
+    - **IM subscription for alerts and ticket updates**: Stay informed with alerts and ticket progress via IM.
+    - **IM interaction for support tickets**: Create and interact with support tickets through an IM tool.
+
+  For more information, see [Connected Care Overview](/tidb-cloud/connected-care-overview.md).
+
+- Support importing data from GCS and Azure Blob Storage into [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
+
+    TiDB Cloud Serverless now supports importing data from Google Cloud Storage (GCS) and Azure Blob Storage. You can use a Google Cloud service account key or an Azure shared access signature (SAS) token to authenticate. This feature simplifies data migration to TiDB Cloud Serverless.
+
+    For more information, see [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md) and [Import Apache Parquet Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless](/tidb-cloud/import-parquet-files-serverless.md).
+
 ## January 21, 2025
 
 **Console changes**
