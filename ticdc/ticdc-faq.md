@@ -353,7 +353,9 @@ Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets
 
 TiCDC guarantees that all data is replicated at least once. When there is duplicate data in the downstream, write conflicts occur. To avoid this problem, TiCDC converts `INSERT` and `UPDATE` statements into `REPLACE INTO` statements. This behavior is controlled by the `safe-mode` parameter.
 
-In versions earlier than v6.1.3, `safe-mode` defaults to `true`, which means all `INSERT` and `UPDATE` statements are converted into `REPLACE INTO` statements. In v6.1.3 and later versions, TiCDC can automatically determine whether the downstream has duplicate data, and the default value of `safe-mode` changes to `false`. If no duplicate data is detected, TiCDC replicates `INSERT` and `UPDATE` statements without conversion.
+In versions earlier than v6.1.3, the default value of `safe-mode` is `true`, which means all `INSERT` and `UPDATE` statements are converted into `REPLACE INTO` statements.
+
+In v6.1.3 and later versions, the default value of `safe-mode` changes to `false`, and TiCDC can automatically determine whether the downstream has duplicate data. If no duplicate data is detected, TiCDC directly replicates `INSERT` and `UPDATE` statements without conversion; otherwise, TiCDC converts `INSERT` and `UPDATE` statements into `REPLACE INTO` statements and then replicates them.
 
 ## Why does TiCDC use disks? When does TiCDC write to disks? Does TiCDC use memory buffer to improve replication performance?
 
@@ -437,3 +439,11 @@ This is because the default port number of the TiCDC cluster deployed by TiDB Op
   }
 ]
 ```
+
+## Does TiCDC replicate generated columns of DML operations?
+
+Generated columns include virtual generated columns and stored generated columns. TiCDC ignores virtual generated columns and only replicates stored generated columns to the downstream. However, stored generated columns are also ignored when the downstream is MySQL or another MySQL-compatible database (rather than Kafka or other storage services).
+
+> **Note:**
+>
+> When replicating stored generated columns to Kafka or a storage service and then writing them back to MySQL, `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed` might occur. To avoid this error, you can use [Open Protocol](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol) for replication. The output of this protocol includes [bit flags of columns](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns), which can distinguish whether a column is a generated column.

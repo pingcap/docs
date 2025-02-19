@@ -61,6 +61,10 @@ When `br` retries a restore, some data that has been restored might need to be r
 
 After a restore failure, avoid writing, deleting, or creating tables in the cluster. This is because the backup data might contain DDL operations for renaming tables. If you modify the cluster data, the checkpoint restore cannot decide whether the deleted or existing table are resulted from external operations, which affects the accuracy of the next restore retry.
 
+### Cross-major-version checkpoint recovery is not recommended
+
+Cross-major-version checkpoint recovery is not recommended. For clusters where `br` recovery fails using the Long-Term Support (LTS) versions prior to v8.5.0, recovery cannot be continued with v8.5.0 or later LTS versions, and vice versa.
+
 ## Implementation details
 
 Checkpoint restore operations are divided into two parts: snapshot restore and PITR restore.

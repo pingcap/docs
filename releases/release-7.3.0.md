@@ -99,7 +99,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 
     This feature provides an effective intervention method for sudden performance issues in the database. For performance issues caused by queries, before identifying the root cause, this feature can quickly alleviate its impact on overall performance, thereby improving system service quality.
 
-    For more information, see [documentation](/tidb-resource-control.md#query-watch-parameters).
+    For more information, see [documentation](/tidb-resource-control-runaway-queries.md#query-watch-parameters).
 
 ### SQL
 

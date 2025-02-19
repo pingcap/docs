@@ -262,7 +262,10 @@
     - [Primary-Secondary DR](/dr-secondary-cluster.md)
     - [Multi-Replica Cluster DR](/dr-multi-replica.md)
     - [BR-based DR](/dr-backup-restore.md)
-  - [Resource Control](/tidb-resource-control.md)
+  - Resource Manager
+    - [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
+    - [Manage Runaway Queries](/tidb-resource-control-runaway-queries.md)
+    - [Manage Background Tasks](/tidb-resource-control-background-tasks.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)

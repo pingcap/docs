@@ -33,8 +33,6 @@ tiup cluster edit-config <cluster-name> [flags]
 - If the command is successfully executed, there is no output.
 - If you have mistakenly modified the fields that cannot be modified, when you save the file, an error will be reported, reminding you to edit the file again. For the fields that cannot be modified, see the [topology file](/tiup/tiup-cluster-topology-reference.md).
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
-
 ## See also
 
 - [TiUP Common Operations](/maintain-tidb-using-tiup.md)

@@ -82,5 +82,3 @@ tiup dm [command] [flags]
 - [enable](/tiup/tiup-component-dm-enable.md): Enables the auto-enabling of the cluster service after a machine is restarted.
 - [disable](/tiup/tiup-component-dm-disable.md): Disables the auto-enabling of the cluster service after a machine is restarted.
 - [help](/tiup/tiup-component-dm-help.md): Prints help information.
-
-[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)
