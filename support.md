@@ -13,7 +13,7 @@ TiDB の使用中に問題が発生した場合は、次の方法で PingCAP ま
 
 -   PingCAP からTiDB Cloudのサポートを受けるには:
 
-    -   [TiDB Cloudコンソール](https://tidbcloud.com/)から直接問題を報告
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)から直接問題を報告してください
     -   [TiDB Cloudサポートに関するドキュメント](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)
 
 -   TiDB コミュニティから支援を求めてください:
@@ -30,4 +30,4 @@ TiDB の使用中に問題が発生した場合は、次の方法で PingCAP ま
 -   TiDBの実装と設計を学ぶ
 
     -   [TiDB 開発ガイド](https://pingcap.github.io/tidb-dev-guide/)
-    -   [TiDB 内部フォーラム](https://internals.tidb.io/)
+    -   [GitHub でのディスカッション](https://github.com/orgs/pingcap/discussions)

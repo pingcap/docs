@@ -29,6 +29,10 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 -   現在、 TiDB Cloud は、エンドポイント サービスが AWS でホストされている場合にのみ、 TiDB Cloud Serverless へのプライベート エンドポイント接続をサポートしています。サービスが Google Cloud でホストされている場合、プライベート エンドポイントは適用されません。
 -   リージョン間のプライベート エンドポイント接続はサポートされていません。
 
+## 前提条件 {#prerequisites}
+
+AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になっていることを確認します。1 [AWS マネジメントコンソール](https://console.aws.amazon.com/) VPC を作成すると、これらはデフォルトで無効になります。
+
 ## AWSでプライベートエンドポイントを設定する {#set-up-a-private-endpoint-with-aws}
 
 プライベート エンドポイント経由でTiDB Cloud Serverless クラスターに接続するには、次の手順に従います。
@@ -42,7 +46,7 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、ターゲットのTiDB Cloud Serverless クラスターの名前をクリックして、概要ページに移動します。
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 3.  **[接続タイプ]**ドロップダウン リストで、 **[プライベート エンドポイント]**を選択します。
-4.  **サービス名**、**アベイラビリティーゾーン ID** 、**リージョンID**をメモします。
+4.  **サービス名**、**アベイラビリティーゾーン ID** 、**リージョンID を**メモします。
 
     > **注記：**
     >
@@ -63,7 +67,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-3.  **「その他のエンドポイント サービス」**を選択します。
+3.  **NLB および GWLB を使用するエンドポイント サービス**を選択します。
 
 4.  [ステップ1](#step-1-choose-a-tidb-cluster)で確認したサービス名を入力します。
 
@@ -86,7 +90,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
 AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
 
-1.  **VPC ID**と**サブネット ID を**取得するには、AWS マネジメントコンソールに移動し、関連するセクションでそれらを見つけます[ステップ1](#step-1-choose-a-tidb-cluster)で確認した**アベイラビリティーゾーン ID を**必ず入力してください。
+1.  **VPC ID**と**サブネット ID**を取得するには、AWS マネジメントコンソールに移動し、関連するセクションでそれらを見つけます[ステップ1](#step-1-choose-a-tidb-cluster)で確認した**アベイラビリティーゾーン ID**を必ず入力してください。
 2.  以下のコマンドをコピーし、関連する引数を取得した情報に置き換えて、ターミナルで実行します。
 
 ```bash
@@ -109,14 +113,14 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 3.  **[接続タイプ]**ドロップダウン リストで、 **[プライベート エンドポイント]**を選択します。
-4.  **[接続方法]**ドロップダウン リストで、希望する接続方法を選択します。対応する接続文字列がダイアログの下部に表示されます。
+4.  **[接続方法**] ドロップダウン リストで、希望する接続方法を選択します。対応する接続文字列がダイアログの下部に表示されます。
 5.  接続文字列を使用してクラスターに接続します。
 
 > **ヒント：**
 >
 > クラスターに接続できない場合は、AWS の VPC エンドポイントのセキュリティ グループが適切に設定されていないことが原因である可能性があります。解決策については[このFAQ](#troubleshooting)参照してください。
 >
-> VPC エンドポイントを作成するときにエラー`private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`が発生した場合は、プライベート エンドポイントがすでに作成されているため、新しいエンドポイントを作成する必要はありません。
+> VPC エンドポイントを作成するときにエラー`private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`発生した場合は、プライベート エンドポイントがすでに作成されているため、新しいエンドポイントを作成する必要はありません。
 
 ## トラブルシューティング {#troubleshooting}
 
@@ -125,7 +129,3 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 AWS マネジメントコンソールで、VPC エンドポイントのセキュリティグループを適切に設定する必要がある場合があります。 **[VPC]** &gt; **[エンドポイント]**に移動します。VPC エンドポイントを右クリックし、適切な**[セキュリティグループの管理]**を選択します。ポート 4000 または顧客定義のポートで EC2 インスタンスからのインバウンドアクセスを許可する、VPC 内の適切なセキュリティグループ。
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
-
-### プライベート DNS を有効にできません。enableDnsSupport および<code>enableDnsSupport</code> VPC 属性が有効になっていないことを示すエラーが報告されます<code>enableDnsHostnames</code> {#i-cannot-enable-private-dns-an-error-is-reported-indicating-that-the-code-enablednssupport-code-and-code-enablednshostnames-code-vpc-attributes-are-not-enabled}
-
-VPC 設定で DNS ホスト名と DNS 解決の両方が有効になっていることを確認してください。AWS マネジメントコンソールで VPC を作成すると、これらはデフォルトで無効になります。

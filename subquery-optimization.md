@@ -23,20 +23,20 @@ summary: サブクエリに関連する最適化を理解します。
 
 この場合、 `ALL`と`ANY` `MAX`と`MIN`に置き換えることができます。テーブルが空の場合、 `MAX(EXPR)`と`MIN(EXPR)`の結果は NULL になります。 `EXPR`の結果に`NULL`含まれる場合も同様です。 `EXPR`の結果に`NULL`が含まれるかどうかは式の最終結果に影響する可能性があるため、完全な書き換えは次の形式で示されます。
 
--   `t.id < all (select s.id from s)` `t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`に書き換えられる
--   `t.id < any (select s.id from s)` `t.id < max(s.id) or if(sum(s.id is null) != 0, null, false)`に書き換えられる
+-   `t.id < all (select s.id from s)`は`t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`に書き換えられる
+-   `t.id > any (select s.id from s)`は`t.id > max(s.id) or if(sum(s.id is null) != 0, null, false)`に書き換えられる
 
 ## <code>... != ANY (SELECT ... FROM ...)</code> {#code-any-select-from-code}
 
 この場合、サブクエリのすべての値が異なっていれば、クエリをそれらと比較するだけで十分です。サブクエリ内の異なる値の数が 1 より多い場合は、不等性が存在する必要があります。したがって、このようなサブクエリは次のように書き換えることができます。
 
--   `select * from t where t.id != any (select s.id from s)` `select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`に書き換えられる
+-   `select * from t where t.id != any (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`に書き換えられる
 
 ## <code>... = ALL (SELECT ... FROM ...)</code> {#code-all-select-from-code}
 
 この場合、サブクエリ内の異なる値の数が 1 より多いと、この式の結果は必ず false になります。したがって、このようなサブクエリは、TiDB では次の形式に書き換えられます。
 
--   `select * from t where t.id = all (select s.id from s)` `select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`に書き換えられる
+-   `select * from t where t.id = all (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`に書き換えられる
 
 ## <code>... IN (SELECT ... FROM ...)</code> {#code-in-select-from-code}
 
@@ -61,7 +61,7 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-この書き換えは、 `IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えなしでは、 `index join` t2 を駆動テーブルとして使用することが不可能であるためです。ただし、欠点は、書き換え中に集計を自動的に削除できず、 `t2`テーブルが比較的大きい場合、この書き換えがクエリのパフォーマンスに影響を与えることです。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)が使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
+この書き換えは、 `IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えなしでは、 `index join` t2 を駆動テーブルとして使用することが不可能であるためです。ただし、欠点は、書き換え中に集計を自動的に削除できず、 `t2`テーブルが比較的大きい場合、この書き換えがクエリのパフォーマンスに影響を与えることです。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
 
 ## <code>EXISTS</code>サブクエリおよび<code>... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)</code> {#code-exists-code-subquery-and-code-x3c-x3c-select-from-code}
 
@@ -89,4 +89,4 @@ explain select * from t1 where exists (select * from t2);
 
 同様に、実行プランでインデックス結合が選択されている場合、セミ結合クエリは駆動テーブルとして外部クエリのみを使用できます。この場合、サブクエリの結果が外部クエリの結果よりも小さいと、実行速度が予想よりも遅くなる可能性があります。
 
-`SEMI_JOIN_REWRITE()`を使用してクエリを書き換えると、オプティマイザーは選択範囲を拡張して、より適切な実行プランを選択できます。
+`SEMI_JOIN_REWRITE()`使用してクエリを書き換えると、オプティマイザーは選択範囲を拡張して、より適切な実行プランを選択できます。

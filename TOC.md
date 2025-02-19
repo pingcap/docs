@@ -208,7 +208,7 @@
     -   [タイムゾーンの設定](/configure-time-zone.md)
     -   [毎日のチェックリスト](/daily-check.md)
     -   [TiFlashの管理](/tiflash/maintain-tiflash.md)
-    -   [TiUP を使用して TiDB を管理](/maintain-tidb-using-tiup.md)
+    -   [TiUPを使用して TiDBを管理](/maintain-tidb-using-tiup.md)
     -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
     -   [オンラインの安全でない回復](/online-unsafe-recovery.md)
     -   [プライマリクラスタとセカンダリクラスタ間でデータを複製する](/replicate-between-primary-and-secondary-clusters.md)
@@ -318,9 +318,9 @@
     -   履歴データを読む
         -   ステイル読み取りを使用する (推奨)
             -   [ステイル読み取りの使用シナリオ](/stale-read.md)
-            -   [`As OF TIMESTAMP`使用してステイル読み取りを実行する](/as-of-timestamp.md)
-            -   [`tidb_read_staleness`使用してステイル読み取りを実行する](/tidb-read-staleness.md)
-            -   [`tidb_external_ts`使用してステイル読み取りを実行する](/tidb-external-ts.md)
+            -   [`As OF TIMESTAMP`を使用してステイル読み取りを実行する](/as-of-timestamp.md)
+            -   [`tidb_read_staleness`を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
+            -   [`tidb_external_ts`を使用してステイル読み取りを実行する](/tidb-external-ts.md)
         -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
     -   ベストプラクティス
         -   [TiDBを使用する](/best-practices/tidb-best-practices.md)
@@ -433,6 +433,7 @@
         -   TiUPコンポーネント
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
+            -   [非sudoモード](/tiup/tiup-cluster-no-sudo-mode.md)
             -   [tiup-mirror](/tiup/tiup-mirror.md)
             -   [tiup-bench](/tiup/tiup-bench.md)
     -   [TiDB Operator](/tidb-operator-overview.md)
@@ -489,7 +490,7 @@
             -   データソースの管理
                 -   [移行するMySQLインスタンスを切り替える](/dm/usage-scenario-master-slave-switch.md)
             -   タスクの管理
-                -   [失敗したDDLステートメントの処理](/dm/handle-failed-ddl-statements.md)
+                -   [失敗したDDL文の処理](/dm/handle-failed-ddl-statements.md)
                 -   [移行するテーブルのスキーマを管理する](/dm/dm-manage-schema.md)
             -   [クラスターのデータソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)
             -   [アラートを処理する](/dm/dm-handle-alerts.md)
@@ -531,7 +532,7 @@
             -   [リリースノート](/dm/dm-release-notes.md)
     -   TiDB Lightning
         -   [概要](/tidb-lightning/tidb-lightning-overview.md)
-        -   [`IMPORT INTO`とTiDB Lightningの比較](/tidb-lightning/import-into-vs-tidb-lightning.md)
+        -   [`IMPORT INTO`とTiDB Lightning の比較](/tidb-lightning/import-into-vs-tidb-lightning.md)
         -   [TiDB Lightningと`IMPORT INTO`と TiCDC およびログ バックアップとの互換性](/tidb-lightning/tidb-lightning-compatibility-and-scenarios.md)
         -   [始める](/get-started-with-tidb-lightning.md)
         -   [TiDB Lightningをデプロイ](/tidb-lightning/deploy-tidb-lightning.md)
@@ -590,7 +591,7 @@
         -   参照
             -   [アーキテクチャ](/ticdc/ticdc-architecture.md)
             -   [TiCDC サーバー構成](/ticdc/ticdc-server-config.md)
-            -   [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)
+            -   [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)
             -   出力プロトコル
                 -   [TiCDC Avro プロトコル](/ticdc/ticdc-avro-protocol.md)
                 -   [TiCDC Canal-JSON プロトコル](/ticdc/ticdc-canal-json.md)
@@ -630,7 +631,7 @@
     -   PingCAPクリニック診断サービス
         -   [概要](/clinic/clinic-introduction.md)
         -   [クイックスタート](/clinic/quick-start-with-clinic.md)
-        -   [PingCAPクリニック を使用してクラスターをトラブルシューティングする](/clinic/clinic-user-guide-for-tiup.md)
+        -   [PingCAPクリニックを使用してクラスターをトラブルシューティングする](/clinic/clinic-user-guide-for-tiup.md)
         -   [PingCAPクリニック診断データ](/clinic/clinic-data-instruction-for-tiup.md)
     -   ティスパーク
         -   [ユーザーガイド](/tispark-overview.md)
