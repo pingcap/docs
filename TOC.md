@@ -502,6 +502,7 @@
     - TiUP Components
       - [tiup-playground](/tiup/tiup-playground.md)
       - [tiup-cluster](/tiup/tiup-cluster.md)
+      - [No-sudo Mode](/tiup/tiup-cluster-no-sudo-mode.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
   - [TiDB Operator](/tidb-operator-overview.md)
