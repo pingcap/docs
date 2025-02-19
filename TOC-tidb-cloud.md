@@ -179,8 +179,13 @@
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
+    - Subscribe to Alert Notifications
+      - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
+      - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
+      - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
     - [Third-Party Metrics Integrations](/tidb-cloud/third-party-monitoring-integrations.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - Analyze Performance
@@ -247,28 +252,31 @@
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
   - Migrate Data into TiDB Cloud
-      - [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
-      - [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
-      - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
-      - [Migrate from TiDB Self-Managed to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
-      - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
-      - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
+    - [Migrate Existing and Incremental Data Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+    - [Migrate Incremental Data Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
+    - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
+    - [Migrate from TiDB Self-Managed to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
+    - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
+    - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - Import Data into TiDB Cloud Dedicated
-      - [Import Sample Data](/tidb-cloud/import-sample-data.md)
-      - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
-      - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
-      - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
+    - [Import Sample Data](/tidb-cloud/import-sample-data.md)
+    - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
+    - [Import Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
+    - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
   - Import Data into TiDB Cloud Serverless
-      - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
-      - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
+    - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
+    - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
+    - [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-csv-files-serverless.md)
+    - [Import Parquet Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-parquet-files-serverless.md)
+    - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
-      - [Configure External Storage Access for TiDB Dedicated](/tidb-cloud/config-s3-and-gcs-access.md)
-      - [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md)
-      - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
-      - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
-      - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-      - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
-      - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
+    - [Configure External Storage Access for TiDB Dedicated](/tidb-cloud/config-s3-and-gcs-access.md)
+    - [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md)
+    - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
+    - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
+    - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+    - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
+    - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
   - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
@@ -795,6 +803,18 @@
 - Support Plan
   - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
+  - Connected Care Support Service Features
+    - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
+    - [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
+    - Connected: IM Subscription for TiDB Cloud Alerts
+      - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
+      - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
+    - Connected: IM Ticket Creation and Update Subscription
+      - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
+      - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - Connected: IM Interaction for Support Tickets
+      - [Interact with Support Tickets via Slack](/tidb-cloud/connected-slack-ticket-interaction.md)
+      - [Interact with Support Tickets via Lark](/tidb-cloud/connected-lark-ticket-interaction.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
