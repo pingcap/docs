@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Introduce Connected Care, the new support service.
+- Introduce Connected Care, the new support services for TiDB Cloud.
 
     The Connected Care services are designed to strengthen your connection with TiDB Cloud through modern communication tools, proactive support, and advanced AI capabilities, delivering a seamless and customer-centric experience.
 
