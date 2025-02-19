@@ -43,7 +43,7 @@ Before creating a changefeed, you need to export existing data from the source T
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. [Back up data](/tidb-cloud/backup-and-restore.md#backup) from your TiDB Cloud Dedicated cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the destination TiDB Cloud Serverless cluster.
+2. Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data from your TiDB Cloud Dedicated cluster, then use [TiDB Cloud Serverless Import](/tidb-cloud/import-csv-files-serverless.md) to load data to the destination TiDB Cloud Serverless cluster.
 
 3. From the [exported files of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files), get the start position of TiDB Cloud sink from the metadata file:
 
