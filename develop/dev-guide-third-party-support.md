@@ -27,6 +27,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 
 ## Driver
 
+<<<<<<< HEAD
 <table>
    <thead>
       <tr>
@@ -182,6 +183,31 @@ If you encounter problems when connecting to TiDB using the tools listed in this
       </tr>
    </tbody>
 </table>
+=======
+| Language | Driver | Latest tested version | Support level | TiDB adapter | Tutorial |
+|----------|--------|-----------------------|---------------|--------------|----------|
+| Go | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) | v1.6.0 | Full | N/A | [Connect to TiDB with Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md) |
+| Java | [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/) | 8.0 | Full | [pingcap/mysql-connector-j](/develop/dev-guide-choose-driver-or-orm.md#java-drivers) <br/> [pingcap/tidb-loadbalance](/develop/dev-guide-choose-driver-or-orm.md#java-client-load-balancing) | [Connect to TiDB with JDBC](/develop/dev-guide-sample-application-java-jdbc.md) |
+
+## ORM
+
+| Language                | ORM framework                             | Latest tested version | Support level | TiDB adapter | Tutorial |
+|-------------------------|-------------------------------------------|-----------------------|-------------|--------------|----------|
+| Go                      | [gorm](https://github.com/go-gorm/gorm)   | v1.23.5               | Full      | N/A           | [Connect to TiDB with GORM](/develop/dev-guide-sample-application-golang-gorm.md) |
+| Go                      | [beego](https://github.com/beego/beego)   | v2.0.3                | Full      | N/A           | N/A |
+| Go                      | [upper/db](https://github.com/upper/db)   | v4.5.2                | Full      | N/A           | N/A |
+| Go                      | [xorm](https://gitea.com/xorm/xorm)       | v1.3.1                | Full      | N/A           | N/A |
+| Java                    | [Hibernate](https://hibernate.org/orm/)   | 6.1.0.Final           | Full      | N/A           | [Connect to TiDB with Hibernate](/develop/dev-guide-sample-application-java-hibernate.md) |
+| Java                    | [MyBatis](https://mybatis.org/mybatis-3/) | v3.5.10               | Full      | N/A           | [Connect to TiDB with MyBatis](/develop/dev-guide-sample-application-java-mybatis.md) |
+| Java                    | [Spring Data JPA](https://spring.io/projects/spring-data-jpa/) | 2.7.2 | Full | N/A           | [Connect to TiDB with Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md) |
+| Java                    | [jOOQ](https://github.com/jOOQ/jOOQ)      | v3.16.7 (Open Source) | Full      | N/A           | N/A |
+| Ruby                    | [Active Record](https://guides.rubyonrails.org/active_record_basics.html) | v7.0 | Full | N/A | [Connect to TiDB with Rails Framework and ActiveRecord ORM](/develop/dev-guide-sample-application-ruby-rails.md) |
+| JavaScript / TypeScript | [Sequelize](https://sequelize.org/)       | v6.20.1               | Full      | N/A           | [Connect to TiDB with Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md) |
+| JavaScript / Typescript | [Prisma](https://www.prisma.io/)          | 4.16.2                | Full      | N/A           | [Connect to TiDB with Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md) |
+| JavaScript / Typescript | [TypeORM](https://typeorm.io/)            | v0.3.17               | Full      | N/A           | [Connect to TiDB with TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md) |
+| Python                  | [Django](https://www.djangoproject.com/)  | v4.2                  | Full      | [django-tidb](https://github.com/pingcap/django-tidb) | [Connect to TiDB with Django](/develop/dev-guide-sample-application-python-django.md) |
+| Python                  | [SQLAlchemy](https://www.sqlalchemy.org/) | v1.4.37               | Full      | N/A           | [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md) |
+>>>>>>> 01c98337fc (CI: Update LinkChecker URL excludes (#20287))
 
 ## GUI
 

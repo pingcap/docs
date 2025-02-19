@@ -25,14 +25,20 @@ https://dev\.mysql\.com/doc/dev/mysql-server/.*
 https://dev\.mysql\.com/downloads/.*
 https://bugs\.mysql\.com/bug\.php.*
 https://www\.mysql\.com/products/.*
+<<<<<<< HEAD
 https://help\.openai\.com/en/articles/.*
+=======
+>>>>>>> 01c98337fc (CI: Update LinkChecker URL excludes (#20287))
 https://platform\.openai\.com/docs/.*
 https://openai\.com/.*
 https://jwt\.io/
 https://typeorm\.io/.*
 https://dash\.cloudflare\.com/.*
 https://centminmod\.com/mydumper\.html
+<<<<<<< HEAD
 https://docs\.pingcap\.com/tidb/v6\.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660
 https://docs\.pingcap\.com/tidb/v7\.6/system-variables#tidb_ddl_version-new-in-v760
 https://developers\.redhat\.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level
 https://portal\.azure\.com/.*
+=======
+>>>>>>> 01c98337fc (CI: Update LinkChecker URL excludes (#20287))
