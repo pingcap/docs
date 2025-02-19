@@ -1,6 +1,6 @@
 ---
 title: Deploy and Maintain an Online TiDB Cluster Using TiUP No-sudo Mode
-summary: Learns how to deploy and maintain an online TiDB cluster using TiUP no-sudo mode.
+summary: Learn how to deploy and maintain an online TiDB cluster using the TiUP no-sudo mode.
 ---
 
 # Deploy and Maintain an Online TiDB Cluster Using TiUP No-sudo Mode
@@ -13,13 +13,13 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
 ## Prepare the user and configure the SSH mutual trust
 
-1. Log in to all deployment target machines in sequence, and use the `root` user to create a user named `tidb` with the following command. In no-sudo mode, there is no need to configure password-free sudo for the `tidb` user, that is, you do not need to add the `tidb` user to sudoers.
+1. Take the `tidb` user as an example. Log in to all the target machines and create a user named `tidb` using the `root` user with the following command. In no-sudo mode, configuring passwordless sudo for the `tidb` user is unnecessary, that is, you do not need to add the `tidb` user to the `sudoers` file.
    
     ```shell
     adduser tidb
     ```
    
-2. Start the `systemd` user mode for the `tidb` user on every deployment target machine. This step is required and do not skip it.
+2. Start the `systemd` user mode for the `tidb` user on each target machine. This step is required and do not skip it.
 
     1. Use the `tidb` user to set the `XDG_RUNTIME_DIR` environment variable.
    
@@ -29,7 +29,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
         source ~/.bashrc.d/systemd
         ```
    
-    2. Use  the `root` user to start user service.
+    2. Use the `root` user to start the user service.
    
         ```shell
         $ systemctl start user@1000.service # `1000` is the ID of the tidb user. You can get the user ID by executing the `id` command.
@@ -51,21 +51,21 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
                   └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
         ```
        
-       Execute `systemctl --user` in the terminal. If no errors are reported, it indicates that it has started normally.
+    3. Execute `systemctl --user`. If no errors occur, it indicates that the `systemd` user mode has started successfully.
 
-    3. Use the `root` user to execute the following command to enable lingering for the systemd user `tidb`.
+3. Use the `root` user to execute the following command to enable lingering for the systemd user `tidb`.
 
-        ```shell
-        loginctl enable-linger tidb
-        ```
+    ```shell
+    loginctl enable-linger tidb
+    ```
 
-        You can read the systemd documentation for reference, [Automatic start-up of systemd user instances](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances).
+    You can read the systemd documentation for reference, [Automatic start-up of systemd user instances](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances).
 
-3. Use ssh-keygen in the central control computer to generate a key and copy the public key to other deployment machines.
+4. Generate a key using `ssh-keygen` on the control machine, and copy the public key to the other deployment machines to establish SSH trust.
 
 ## Prepare the topology file
 
-1. Use the following command to generate topology file.
+1. Execute the following command to generate the topology file.
 
     ```shell
     tiup cluster template > topology.yaml
