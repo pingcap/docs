@@ -7,9 +7,9 @@ summary: TiUP は、トポロジ ファイルを使用して、TiDB のクラス
 
 TiUPを使用してTiDBをデプロイまたは拡張するには、クラスタートポロジを記述するトポロジファイル（ [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ）を提供する必要があります。
 
-同様に、クラスター トポロジを変更するには、トポロジ ファイルを変更する必要があります。違いは、クラスターがデプロイされた後は、トポロジ ファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジ ファイルの各セクションと、各セクション内の各フィールドについて説明します。
+同様に、クラスター トポロジを変更するには、トポロジ ファイルを変更する必要があります。違いは、クラスターがデプロイされた後は、トポロジ ファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジ ファイルの各セクションと、各セクションの各フィールドについて説明します。
 
-TiUP を使用して TiDB クラスターをデプロイすると、 TiUP はPrometheus、Grafana、Alertmanager などの監視サーバーもデプロイします。その間に、このクラスターをスケールアウトすると、 TiUP は新しいノードを監視範囲に追加します。前述の監視サーバーの構成をカスタマイズするには、 [監視サーバーの構成をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md)の手順に従ってください。
+TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はPrometheus、Grafana、Alertmanager などの監視サーバーもデプロイします。その間に、このクラスターをスケールアウトすると、 TiUP は新しいノードを監視範囲に追加します。前述の監視サーバーの構成をカスタマイズするには、 [監視サーバーの構成をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md)の手順に従ってください。
 
 ## ファイル構造 {#file-structure}
 
@@ -38,37 +38,39 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
 `global`セクションはクラスターのグローバル構成に対応し、次のフィールドがあります。
 
--   `user` : デプロイされたクラスターを起動するために使用されるユーザー。デフォルト値は`"tidb"`です。4 `<user>`に指定されたユーザーがターゲット マシンに存在しない場合は、このユーザーは自動的に作成されます。
+-   `user` : デプロイされたクラスターを起動するため`<user>`使用されるユーザー。デフォルト値は`"tidb"`です。4 フィールドに指定されたユーザーがターゲット マシンに存在しない場合は、このユーザーは自動的に作成されます。
 
 -   `group` : ユーザーが属するユーザー グループ。ユーザーの作成時に指定されます。デフォルト値は`<user>`フィールドの値になります。指定されたグループが存在しない場合は、自動的に作成されます。
+
+-   `systemd_mode` : クラスターの展開中にターゲット マシンで使用される`systemd`モードを指定します。デフォルト値は`system`です。 `user`に設定すると、ターゲット マシンで sudo 権限は必要なくなり、 [TiUP非sudoモード](/tiup/tiup-cluster-no-sudo-mode.md)使用されます。
 
 -   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。デフォルト値は`22`です。
 
 -   `enable_tls` : クラスターに対して TLS を有効にするかどうかを指定します。TLS を有効にすると、生成された TLS 証明書は、コンポーネント間またはクライアントとコンポーネント間の接続に使用する必要があります。デフォルト値は`false`です。
 
--   `listen_host` : デフォルトのリスニング IP アドレスを指定します。空の場合、各インスタンスは、 `host`フィールドに`:`含まれているかどうかに基づいて、自動的に`::`または`0.0.0.0`に設定します。このフィールドは、tiup-cluster v1.14.0 で導入されました。
+-   `listen_host` : デフォルトのリスニング IP アドレスを指定します。空の場合、各インスタンスは、 `host`フィールドに`:`含まれているかどうかに基づいて、自動的に`::`または`0.0.0.0`に設定します。このフィールドは、 tiup-cluster v1.14.0 で導入されました。
 
 -   `deploy_dir` : 各コンポーネントのデプロイメントディレクトリ。デフォルト値は`"deployed"`です。その適用ルールは次のとおりです。
 
-    -   インスタンス レベルで絶対パス`deploy_dir`が設定されている場合、実際のデプロイメント ディレクトリはインスタンスに対して`deploy_dir`に設定されます。
+    -   インスタンス レベルで絶対パス`deploy_dir`が設定されている場合、実際のデプロイメント ディレクトリはインスタンスに対して`deploy_dir`設定されます。
 
     -   各インスタンスに対して`deploy_dir`設定しない場合、デフォルト値は相対パス`<component-name>-<component-port>`になります。
 
-    -   `global.deploy_dir`絶対パスの場合、コンポーネントは`<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
+    -   `global.deploy_dir`が絶対パスの場合、コンポーネントは`<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 
     -   `global.deploy_dir`が相対パスの場合、コンポーネントは`/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 
 -   `data_dir` : データディレクトリ。デフォルト値: `"data"`適用ルールは次のとおりです。
 
-    -   インスタンス レベルで絶対パス`data_dir`が設定されている場合、実際のデプロイメント ディレクトリはインスタンスに対して`data_dir`に設定されます。
+    -   インスタンス レベルで絶対パス`data_dir`が設定されている場合、実際のデプロイメント ディレクトリはインスタンスに対して`data_dir`設定されます。
 
-    -   各インスタンスに対して`data_dir`設定しない場合、デフォルト値は`<global.data_dir>`になります。
+    -   各インスタンスに対して`data_dir`設定しない場合、デフォルト値は`<global.data_dir>`なります。
 
     -   `data_dir`相対パスの場合、コンポーネントデータは`<deploy_dir>/<data_dir>`に配置されます。 `<deploy_dir>`の計算規則については、 `deploy_dir`フィールドの適用規則を参照してください。
 
 -   `log_dir` : ログディレクトリ。デフォルト値: `"log"`適用ルールは次のとおりです。
 
-    -   絶対パス`log_dir`がインスタンス レベルで構成されている場合、実際のログ ディレクトリはインスタンスに構成されている`log_dir`になります。
+    -   絶対パス`log_dir`インスタンス レベルで構成されている場合、実際のログ ディレクトリはインスタンスに構成されている`log_dir`なります。
 
     -   各インスタンスに対して`log_dir`設定しない場合、デフォルト値は`<global.log_dir>`なります。
 
@@ -84,9 +86,9 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
     -   `cpu_quota` : 実行時の最大 CPU 使用率を制限します。たとえば、「200%」などです。
 
-    -   `io_read_bandwidth_max` : ディスク読み取りの最大 I/O 帯域幅を制限します。たとえば、 `"/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M"`です。
+    -   `io_read_bandwidth_max` : ディスク読み取りの最大 I/O 帯域幅を制限します。たとえば、 `"/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M"` 。
 
-    -   `io_write_bandwidth_max` : ディスク書き込みの最大 I/O 帯域幅を制限します。たとえば、 `/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M`です。
+    -   `io_write_bandwidth_max` : ディスク書き込みの最大 I/O 帯域幅を制限します。たとえば、 `/dev/disk/by-path/pci-0000:00:1f.2-scsi-0:0:0:0 100M` 。
 
     -   `limit_core` : コアダンプのサイズを制御します。
 
@@ -127,7 +129,7 @@ monitored:
 
 ### <code>server_configs</code> {#code-server-configs-code}
 
-`server_configs` 、サービスを設定し、各コンポーネントの設定ファイルを生成するために使用されます。 `global`セクションと同様に、このセクションの設定は、インスタンス内の同じ名前の設定によって上書きできます。 `server_configs`には主に次のフィールドが含まれます。
+`server_configs` 、サービスを設定し、各コンポーネントの設定ファイルを生成するために使用されます。 `global`セクションと同様に、このセクションの設定は、インスタンス内の同じ名前の設定によって上書きできます。 `server_configs`は主に次のフィールドが含まれます。
 
 -   `tidb` : TiDB サービス関連の構成。完全な構成については、 [TiDB 構成ファイル](/tidb-configuration-file.md)参照してください。
 
@@ -145,7 +147,7 @@ monitored:
 
 -   `drainer` :Drainerサービス関連の構成。完全な構成については、 [TiDBBinlog構成ファイル](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)参照してください。
 
--   `cdc` : TiCDC サービス関連の構成。完全な構成については、 [TiCDC をデプロイ](/ticdc/deploy-ticdc.md)参照してください。
+-   `cdc` : TiCDC サービス関連の構成。完全な構成については、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)参照してください。
 
 `server_configs`構成例は次のとおりです。
 
@@ -169,10 +171,10 @@ server_configs:
 >
 > TiDB、TiKV、PD、TiCDC など、バージョン番号を共有するコンポーネントについては、混合バージョンの展開シナリオで正しく動作することを確認するための完全なテストはありません。このセクションは、テスト環境でのみ使用するか、 [テクニカルサポート](/support.md)の助けを借りて使用してください。
 
-`component_versions`特定のコンポーネントのバージョン番号を指定するために使用されます。
+`component_versions` 、特定のコンポーネントのバージョン番号を指定するために使用されます。
 
--   `component_versions`が設定されていない場合、各コンポーネントはTiDB クラスターと同じバージョン番号 (PD や TiKV など) を使用するか、最新バージョン (Alertmanager など) を使用します。
--   `component_versions`が設定されている場合、対応するコンポーネントは指定されたバージョンを使用し、このバージョンは後続のクラスターのスケーリングおよびアップグレード操作で使用されます。
+-   `component_versions`設定されていない場合、各コンポーネントは TiDB クラスターと同じバージョン番号 (PD や TiKV など) を使用するか、最新バージョン (Alertmanager など) を使用します。
+-   `component_versions`設定されている場合、対応するコンポーネントは指定されたバージョンを使用し、このバージョンは後続のクラスターのスケーリングおよびアップグレード操作で使用されます。
 
 特定のバージョンのコンポーネントを使用する必要がある場合にのみ構成するようにしてください。
 
@@ -202,13 +204,13 @@ component_versions:
 
 ### <code>pd_servers</code> {#code-pd-servers-code}
 
-`pd_servers` PD サービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します`pd_servers`は配列であり、配列の各要素には次のフィールドが含まれます。
+`pd_servers` 、PD サービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します`pd_servers`は配列であり、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : PD サービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
 -   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `name` : PD インスタンスの名前を指定します。異なるインスタンスには一意の名前を付ける必要があります。そうでない場合、インスタンスをデプロイできません。
 
@@ -260,13 +262,13 @@ pd_servers:
 
 ### <code>tidb_servers</code> {#code-tidb-servers-code}
 
-`tidb_servers` TiDB サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tidb_servers`は配列であり、配列の各要素には次のフィールドが含まれます。
+`tidb_servers` 、TiDB サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tidb_servers`は配列であり、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : TiDB サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
 -   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : MySQL クライアントへの接続を提供するために使用される TiDB サービスのリスニング ポート。デフォルト値は`4000`です。
 
@@ -316,7 +318,7 @@ tidb_servers:
 
 -   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : TiKV サービスのリスニング ポート。デフォルト値は`20160`です。
 
@@ -364,15 +366,15 @@ tikv_servers:
 
 ### <code>tiflash_servers</code> {#code-tiflash-servers-code}
 
-`tiflash_servers` TiFlashサービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します。このセクションは配列であり、配列の各要素には次のフィールドが含まれます。
+`tiflash_servers` 、 TiFlashサービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します。このセクションは配列であり、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : TiFlashサービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
--   `tcp_port` : 内部テスト用のTiFlash TCP サービスのポート。デフォルト値は`9000`です。TiUP v1.12.5 以降では、この構成項目はv7.1.0 以降のクラスターでは有効になりません。
+-   `tcp_port` : 内部テスト用のTiFlash TCP サービスのポート。デフォルト値は`9000`です。TiUP v1.12.5 以降では、この構成項目は v7.1.0 以降のクラスターでは有効になりません。
 
--   `flash_service_port` : TiFlashがサービスを提供するポート。TiDB はこのポートを介してTiFlashからデータを読み取ります。デフォルト値は`3930`です。
+-   `flash_service_port` : TiFlash がサービスを提供するポート。TiDB はこのポートを介してTiFlashからデータを読み取ります。デフォルト値は`3930`です。
 
 -   `metrics_port` : メトリックデータを出力するために使用される TiFlash のステータス ポート。デフォルト値は`8234`です。
 
@@ -424,11 +426,11 @@ tiflash_servers:
 
 ### <code>tiproxy_servers</code> {#code-tiproxy-servers-code}
 
-`tiproxy_servers` TiProxy サービスが展開されるマシンと、各マシン上のサービス構成を指定します。2 `tiproxy_servers`配列であり、配列の各要素には次のフィールドが含まれます。
+`tiproxy_servers` 、TiProxy サービスが展開されるマシンと、各マシン上のサービス構成を指定します。2 `tiproxy_servers`配列であり、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : TiProxy サービスが展開されるマシンの IP アドレスを指定します。このフィールドは必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : TiProxy SQL サービスのリスニング ポート。デフォルト値は`6000`です。
 
@@ -463,11 +465,11 @@ tiproxy_servers:
 
 ### <code>pump_servers</code> {#code-pump-servers-code}
 
-`pump_servers` TiDB BinlogのPumpサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`pump_servers`は配列であり、配列の各要素には次のフィールドが含まれます。
+`pump_servers` 、TiDB BinlogのPumpサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`pump_servers`は配列であり、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : Pumpサービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` :Pumpサービスのリスニング ポート。デフォルト値は`8250`です。
 
@@ -509,11 +511,11 @@ pump_servers:
 
 ### <code>drainer_servers</code> {#code-drainer-servers-code}
 
-`drainer_servers` TiDB BinlogのDrainerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`drainer_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`drainer_servers` 、TiDB BinlogのDrainerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`drainer_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : Drainerサービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : Drainerサービスのリスニング ポート。デフォルト値は`8249`です。
 
@@ -568,11 +570,11 @@ drainer_servers:
 
 ### <code>kvcdc_servers</code> {#code-kvcdc-servers-code}
 
-`kvcdc_servers` [ティKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)のサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`kvcdc_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`kvcdc_servers` 、 [ティKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`kvcdc_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : TiKV-CDC サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : TiKV-CDC サービスのリスニング ポート。デフォルト値は`8600`です。
 
@@ -582,7 +584,7 @@ drainer_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `gc-ttl` : TiKV-CDC によって設定された PD のサービス レベル GC セーフポイントの TTL (Time to Live、秒単位) (オプション)。これは、レプリケーション タスクを一時停止できる期間で、デフォルトは`86400` (24 時間) です。レプリケーション タスクを一時停止すると、TiKVガベージコレクションセーフポイントの進行に影響することに注意してください。 `gc-ttl`が長いほど、変更フィードを一時停止できる時間が長くなりますが、同時に、より多くの古いデータが保持され、より多くのスペースを占有します。その逆も同様です。
+-   `gc-ttl` : TiKV-CDC によって設定された PD のサービス レベル GC セーフポイントの TTL (Time to Live、秒単位) (オプション)。これは、レプリケーション タスクを一時停止できる期間で、デフォルトは`86400` (24 時間) です。レプリケーション タスクを一時停止すると、TiKVガベージコレクションセーフポイントの進行に影響することに注意してください。 `gc-ttl`長いほど、変更フィードを一時停止できる時間が長くなりますが、同時に、より多くの古いデータが保持され、より多くのスペースを占有します。その逆も同様です。
 
 -   `tz` : TiKV-CDC サービスが使用するタイムゾーン。TiKV-CDC は、タイムスタンプなどの時間データ型を内部的に変換するとき、およびデータをダウンストリームに複製するときにこのタイムゾーンを使用します。デフォルト値は、プロセスが実行されるローカル タイムゾーンです。
 
@@ -616,11 +618,11 @@ kvcdc_servers:
 
 ### <code>cdc_servers</code> {#code-cdc-servers-code}
 
-`cdc_servers` TiCDC サービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します`cdc_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`cdc_servers` 、TiCDC サービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します`cdc_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : TiCDC サービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : TiCDC サービスのリスニング ポート。デフォルト値は`8300`です。
 
@@ -671,13 +673,13 @@ cdc_servers:
 
 ### <code>tispark_masters</code> {#code-tispark-masters-code}
 
-`tispark_masters` TiSpark のマスター ノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tispark_masters`は配列です。各配列要素には、次のフィールドが含まれます。
+`tispark_masters` 、TiSpark のマスター ノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tispark_masters`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : TiSpark マスターがデプロイされるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
 -   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : ノード前の通信に使用される Spark のリスニング ポート。デフォルト値は`7077`です。
 
@@ -728,13 +730,13 @@ tispark_masters:
 
 ### <code>tispark_workers</code> {#code-tispark-workers-code}
 
-`tispark_workers` TiSpark のワーカー ノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tispark_workers`は配列です。各配列要素には、次のフィールドが含まれます。
+`tispark_workers` 、TiSpark のワーカー ノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tispark_workers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : TiSpark ワーカーがデプロイされるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
 -   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : ノード前の通信に使用される Spark のリスニング ポート。デフォルト値は`7077`です。
 
@@ -768,13 +770,13 @@ tispark_workers:
 
 ### <code>monitoring_servers</code> {#code-monitoring-servers-code}
 
-`monitoring_servers` Prometheus サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`monitoring_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`monitoring_servers` 、Prometheus サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`monitoring_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : 監視サービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
 -   `ng_port` : NgMonitoring がリッスンするポートを指定します。TiUP TiUPで導入されたこのフィールドは、 [継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)サポートします。デフォルト値は`12020`です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : Prometheus サービスのリスニング ポート。デフォルト値は`9090`です。
 
@@ -788,7 +790,7 @@ tispark_workers:
 
 -   `storage_retention` : Prometheus 監視データの保持時間。デフォルト値は`"30d"`です。
 
--   `rule_dir` : 完全な`*.rules.yml`のファイルを格納するローカル ディレクトリを指定します。これらのファイルは、Prometheus のルールとして、クラスター構成の初期化フェーズ中にターゲット マシンに転送されます。
+-   `rule_dir` : 完全な`*.rules.yml`ファイルを格納するローカル ディレクトリを指定します。これらのファイルは、Prometheus のルールとして、クラスター構成の初期化フェーズ中にターゲット マシンに転送されます。
 
 -   `remote_config` : Prometheus データをリモートに書き込むか、リモートからデータを読み取ることをサポートします。このフィールドには 2 つの構成があります。
     -   `remote_write` : Prometheusドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
@@ -843,11 +845,11 @@ monitoring_servers:
 
 ### <code>grafana_servers</code> {#code-grafana-servers-code}
 
-`grafana_servers` Grafana サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`grafana_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`grafana_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : Grafana サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `port` : Grafana サービスのリスニング ポート。デフォルト値は`3000`です。
 
@@ -861,7 +863,7 @@ monitoring_servers:
 
 -   `password` : Grafanaに対応するパスワード。
 
--   `dashboard_dir` : 完全な`dashboard(*.json)`のファイルを格納するローカル ディレクトリを指定します。これらのファイルは、Grafana のダッシュボードとして、クラスター構成の初期化フェーズ中にターゲット マシンに転送されます。
+-   `dashboard_dir` : 完全な`dashboard(*.json)`ファイルを格納するローカル ディレクトリを指定します。これらのファイルは、Grafana のダッシュボードとして、クラスター構成の初期化フェーズ中にターゲット マシンに転送されます。
 
 -   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます (2 つのフィールドが重複している場合は、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは、 `global`の`resource_control`内容と同じです。
 
@@ -869,7 +871,7 @@ monitoring_servers:
 
 > **注記：**
 >
-> `dashboard_dir`フィールドが`grafana_servers`に設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
+> `dashboard_dir`フィールドが`grafana_servers`設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
 >
 > 1.  ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについては、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`クラスター名に基づいて名前が付けられているため)。
 > 2.  `tiup cluster reload -R grafana`コマンドを実行します。
@@ -892,11 +894,11 @@ grafana_servers:
 
 ### <code>alertmanager_servers</code> {#code-alertmanager-servers-code}
 
-`alertmanager_servers` Alertmanager サービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します`alertmanager_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`alertmanager_servers` 、Alertmanager サービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します`alertmanager_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : Alertmanager サービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
--   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`番目が使用されます。
+-   `ssh_port` : 操作のためにターゲットマシンに接続するための SSH ポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`が使用されます。
 
 -   `web_port` : Alertmanager が Web サービスを提供するために使用するポートを指定します。デフォルト値は`9093`です。
 

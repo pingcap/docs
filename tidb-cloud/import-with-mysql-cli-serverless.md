@@ -1,20 +1,20 @@
 ---
-title: Import Data into TiDB Cloud Dedicated via MySQL CLI
-summary: MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートする方法を学びます。
+title: Import Data into TiDB Cloud Serverless via MySQL CLI
+summary: MySQL CLI 経由でTiDB Cloud Serverless にデータをインポートする方法を学びます。
 ---
 
-# MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートする {#import-data-into-tidb-cloud-dedicated-via-mysql-cli}
+# MySQL CLI 経由でTiDB Cloud Serverless にデータをインポートする {#import-data-into-tidb-cloud-serverless-via-mysql-cli}
 
-このドキュメントでは、 [MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を介してTiDB Cloud Dedicated にデータをインポートする方法について説明します。SQL ファイルまたは CSV ファイルからデータをインポートできます。次のセクションでは、各ファイル タイプからデータをインポートするための手順を順を追って説明します。
+このドキュメントでは、 [MySQL コマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を介してTiDB Cloud Serverless にデータをインポートする方法について説明します。SQL ファイルまたは CSV ファイルからデータをインポートできます。次のセクションでは、各タイプのファイルからデータをインポートするための手順を順を追って説明します。
 
 ## 前提条件 {#prerequisites}
 
-MySQL CLI 経由でTiDB Cloud Dedicated にデータをインポートするには、次の前提条件を満たす必要があります。
+MySQL CLI 経由でTiDB Cloud Serverless にデータをインポートするには、次の前提条件を満たす必要があります。
 
--   TiDB Cloud Dedicated クラスターにアクセスできます。アクセスできない場合は、 [TiDB Cloud専用クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)手順に従って作成してください。
+-   TiDB Cloud Serverless クラスターにアクセスできます。アクセスできない場合は、 [TiDB Cloudサーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)手順に従って作成してください。
 -   ローカル コンピュータに MySQL CLI をインストールします。
 
-## ステップ1. TiDB Cloud Dedicatedクラスタに接続する {#step-1-connect-to-your-tidb-cloud-dedicated-cluster}
+## ステップ1. TiDB Cloud Serverlessクラスターに接続する {#step-1-connect-to-your-tidb-cloud-serverless-cluster}
 
 TiDB クラスターに接続します。
 
@@ -22,9 +22,17 @@ TiDB クラスターに接続します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3.  **[どこからでもアクセスを許可]**をクリックします。
+3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    接続文字列を取得する方法の詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続する](/tidb-cloud/connect-via-standard-connection.md)参照してください。
+    -   **接続タイプ**は`Public`に設定されています。
+    -   **Connect With は**`MySQL CLI`に設定されています。
+    -   **オペレーティング システムは**環境に適合します。
+
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
+
+    > **ヒント：**
+    >
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成します。
 
 ## ステップ2. テーブルを定義し、サンプルデータを挿入する {#step-2-define-the-table-and-insert-sample-data}
 
@@ -93,7 +101,7 @@ CSV ファイルからデータをインポートするには、次の手順を�
     IGNORE 1 LINES (product_id, product_name, price);"
     ```
 
-4.  パス、テーブル名 (この例では`products` )、 `<your_username>` 、 `<your_host>` 、 `<your_password>` 、 `<your_csv_path>` 、 `<your_ca_path>` 、およびその他のプレースホルダーを実際の情報に置き換え、必要に応じてサンプル CSV データを実際のデータセットに置き換えてください。
+    パス、テーブル名 (この例では`products` )、 `<your_username>` 、 `<your_host>` 、 `<your_password>` 、 `<your_csv_path>` 、 `<your_ca_path>` 、およびその他のプレースホルダーを実際の情報に置き換え、必要に応じてサンプル CSV データを実際のデータセットに置き換えてください。
 
 > **注記：**
 >

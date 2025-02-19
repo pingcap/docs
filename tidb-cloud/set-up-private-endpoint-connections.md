@@ -35,6 +35,10 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 -   TiCDC クラスターを使用してダウンストリーム クラスター (Amazon Aurora、MySQL、Kafka など) にデータを複製していますが、エンドポイント サービスを独自に維持することはできません。
 -   PD または TiKV ノードに直接接続しています。
 
+## 前提条件 {#prerequisites}
+
+AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になっていることを確認します。1 [AWS マネジメントコンソール](https://console.aws.amazon.com/) VPC を作成すると、これらはデフォルトで無効になります。
+
 ## プライベートエンドポイント接続を設定し、クラスターに接続する {#set-up-a-private-endpoint-connection-and-connect-to-your-cluster}
 
 プライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続するには、次の手順を実行します。
@@ -72,44 +76,9 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
     aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
     ```
 
-次に、 [AWS マネジメントコンソール](https://aws.amazon.com/console/)または AWS CLI を使用して AWS インターフェイスエンドポイントを作成できます。
+次に、AWS CLI または[AWS マネジメントコンソール](https://aws.amazon.com/console/)を使用して AWS インターフェイスエンドポイントを作成します。
 
 <SimpleTab>
-<div label="Use AWS Console">
-
-AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
-
-1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
-
-2.  ナビゲーション ペインで**[エンドポイント]**をクリックし、右上隅の**[エンドポイントの作成]**をクリックします。
-
-    **エンドポイントの作成**ページが表示されます。
-
-    ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
-
-3.  **「その他のエンドポイント サービス」**を選択します。
-
-4.  生成されたコマンド（ `--service-name ${your_endpoint_service_name}` ）からサービス名`${your_endpoint_service_name}`入力します。
-
-5.  **[サービスの確認]**をクリックします。
-
-6.  ドロップダウン リストから VPC を選択します。
-
-7.  **サブネット**領域で、TiDB クラスターが配置されている可用性ゾーンを選択します。
-
-    > **ヒント：**
-    >
-    > サービスが 3 つ以上のアベイラビリティ ゾーン (AZ) にまたがっている場合、**サブネット**領域で AZ を選択できないことがあります。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに余分な AZ がある場合に発生します。この場合は、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
-
-8.  **Securityグループ**領域でセキュリティ グループを適切に選択します。
-
-    > **注記：**
-    >
-    > 選択したセキュリティ グループが、ポート 4000 または顧客定義のポート上の EC2 インスタンスからの受信アクセスを許可していることを確認します。
-
-9.  **[エンドポイントの作成]**をクリックします。
-
-</div>
 <div label="Use AWS CLI">
 
 AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
@@ -124,38 +93,61 @@ AWS CLI を使用して VPC インターフェイスエンドポイントを作�
 > -   サービスが 3 つ以上のアベイラビリティーゾーン (AZ) にまたがっている場合、VPC エンドポイント サービスがサブネットの AZ をサポートしていないことを示すエラー メッセージが表示されます。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに余分な AZ がある場合に発生します。この場合、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
 
 </div>
+<div label="Use AWS Console">
+
+AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
+
+1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
+
+2.  ナビゲーション ペインで**[エンドポイント]**をクリックし、右上隅の**[エンドポイントの作成]**をクリックします。
+
+    **エンドポイントの作成**ページが表示されます。
+
+    ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
+
+3.  **エンドポイント設定**領域で、必要に応じて名前タグを入力し、 **NLB および GWLB を使用するエンドポイント サービス**オプションを選択します。
+
+4.  **サービス設定**領域に、生成されたコマンド（ `--service-name ${your_endpoint_service_name}` ）からサービス名`${your_endpoint_service_name}`入力します。
+
+5.  **[サービスの確認]**をクリックします。
+
+6.  **ネットワーク設定**領域で、ドロップダウンリストから VPC を選択します。
+
+7.  **[サブネット]**領域で、TiDB クラスターが配置されている可用性ゾーンを選択します。
+
+    > **ヒント：**
+    >
+    > サービスが 3 つ以上のアベイラビリティ ゾーン (AZ) にまたがっている場合、**サブネット**領域で AZ を選択できないことがあります。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに余分な AZ がある場合に発生します。この場合は、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
+
+8.  **Securityグループ**領域で、セキュリティ グループを適切に選択します。
+
+    > **注記：**
+    >
+    > 選択したセキュリティ グループが、ポート 4000 または顧客定義のポート上の EC2 インスタンスからの受信アクセスを許可していることを確認します。
+
+9.  **[エンドポイントの作成]**をクリックします。
+
+</div>
 </SimpleTab>
 
 ### ステップ3. プライベートエンドポイント接続を作成する {#step-3-create-a-private-endpoint-connection}
 
 1.  TiDB Cloudコンソールに戻ります。
-2.  **「AWS プライベートエンドポイント接続の作成**」ページで、VPC エンドポイント ID を入力します。
-3.  **[プライベート エンドポイント接続の作成]**をクリックします。
+2.  **「AWS プライベートエンドポイント接続の作成」**ページで、VPC エンドポイント ID を入力します。
+3.  **「プライベート エンドポイント接続の作成」を**クリックします。
 
 > **ヒント：**
 >
 > プライベート エンドポイント接続は、次の 2 つのページで表示および管理できます。
 >
-> -   クラスター レベルの**ネットワーク**ページ: クラスターの概要ページの左側のナビゲーション ペインで**[ネットワーク]**をクリックします。
-> -   プロジェクト レベルの**ネットワーク アクセス**ページ:**プロジェクト設定**ページの左側のナビゲーション ペインで**[ネットワーク アクセス]**をクリックします。
+> -   クラスター レベルの**ネットワーク**ページ: クラスターの概要ページの左側のナビゲーション ペインで**[ネットワーク] を**クリックします。
+> -   プロジェクト レベルの**ネットワーク アクセス**ページ:**プロジェクト設定**ページの左側のナビゲーション ペインで**[ネットワーク アクセス] を**クリックします。
 
 ### ステップ4. プライベートDNSを有効にする {#step-4-enable-private-dns}
 
-AWS でプライベート DNS を有効にします。AWS マネジメントコンソールまたは AWS CLI を使用できます。
+AWS でプライベート DNS を有効にします。AWS CLI または AWS マネジメントコンソールを使用できます。
 
 <SimpleTab>
-<div label="Use AWS Console">
-
-AWS マネジメントコンソールでプライベート DNS を有効にするには:
-
-1.  **VPC** &gt;**エンドポイント**に移動します。
-2.  エンドポイント ID を右クリックし、 **[プライベート DNS 名の変更]**を選択します。
-3.  **このエンドポイントに対して有効にする**チェックボックスをオンにします。
-4.  **「変更を保存」**をクリックします。
-
-    ![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
-
-</div>
 <div label="Use AWS CLI">
 
 AWS CLI を使用してプライベート DNS を有効にするには、 **「プライベートエンドポイント接続の作成」**ページから次の`aws ec2 modify-vpc-endpoint`コマンドをコピーし、AWS CLI で実行します。
@@ -164,7 +156,19 @@ AWS CLI を使用してプライベート DNS を有効にするには、 **「�
 aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
 ```
 
-または、クラスターの**[ネットワーク]**ページでコマンドを見つけることもできます。プライベート エンドポイントを見つけて、 **[アクション**] 列の**[...** *] &gt; **[DNS を有効にする]**をクリックします。
+または、クラスターの**[ネットワーク]**ページでコマンドを見つけることもできます。プライベート エンドポイントを見つけて、[**アクション]**列の**[...** *] &gt; **[DNS を有効にする]**をクリックします。
+
+</div>
+<div label="Use AWS Console">
+
+AWS マネジメントコンソールでプライベート DNS を有効にするには:
+
+1.  **VPC** &gt;**エンドポイント**に移動します。
+2.  エンドポイント ID を右クリックし、 **[プライベート DNS 名の変更]**を選択します。
+3.  **このエンドポイントに対して有効にする**チェックボックスをオンにします。
+4.  **「変更を保存」を**クリックします。
+
+    ![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
 
 </div>
 </SimpleTab>
@@ -174,7 +178,7 @@ aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-
 プライベート エンドポイント接続を承認すると、接続ダイアログにリダイレクトされます。
 
 1.  プライベート エンドポイントの接続ステータスが**「システム チェック中」**から**「アクティブ」**に変わるまで待ちます (約 5 分)。
-2.  **[接続方法]**ドロップダウン リストで、希望する接続方法を選択します。対応する接続文字列がダイアログの下部に表示されます。
+2.  **[接続方法**] ドロップダウン リストで、希望する接続方法を選択します。対応する接続文字列がダイアログの下部に表示されます。
 3.  接続文字列を使用してクラスターに接続します。
 
 > **ヒント：**
@@ -185,8 +189,8 @@ aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-
 
 プライベート エンドポイント接続を使用すると、プライベート エンドポイントまたはプライベート エンドポイント サービスのステータスが次のページに表示されます。
 
--   クラスター レベルの**ネットワーク**ページ: クラスターの概要ページの左側のナビゲーション ペインで**[ネットワーク]**をクリックします。
--   プロジェクト レベルの**ネットワーク アクセス**ページ:**プロジェクト設定**ページの左側のナビゲーション ペインで**[ネットワーク アクセス]**をクリックします。
+-   クラスター レベルの**ネットワーク**ページ: クラスターの概要ページの左側のナビゲーション ペインで**[ネットワーク] を**クリックします。
+-   プロジェクト レベルの**ネットワーク アクセス**ページ:**プロジェクト設定**ページの左側のナビゲーション ペインで**[ネットワーク アクセス] を**クリックします。
 
 プライベート エンドポイントの可能なステータスは次のように説明されます。
 
@@ -209,7 +213,3 @@ aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-
 AWS マネジメントコンソールで、VPC エンドポイントのセキュリティグループを適切に設定する必要がある場合があります。 **[VPC]** &gt; **[エンドポイント]**に移動します。VPC エンドポイントを右クリックし、適切な**[セキュリティグループの管理]**を選択します。ポート 4000 または顧客定義のポートで EC2 インスタンスからのインバウンドアクセスを許可する、VPC 内の適切なセキュリティグループ。
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
-
-### プライベート DNS を有効にできません。enableDnsSupport および<code>enableDnsSupport</code> VPC 属性が有効になっていないことを示すエラーが報告されます<code>enableDnsHostnames</code> {#i-cannot-enable-private-dns-an-error-is-reported-indicating-that-the-code-enablednssupport-code-and-code-enablednshostnames-code-vpc-attributes-are-not-enabled}
-
-VPC 設定で DNS ホスト名と DNS 解決の両方が有効になっていることを確認してください。AWS マネジメントコンソールで VPC を作成すると、これらはデフォルトで無効になります。

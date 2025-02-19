@@ -26,7 +26,7 @@ TiDB Cloud は、 [チェンジフィード](/tidb-cloud/changefeed-overview.md)
 
 > **注記：**
 >
-> 上記のパフォーマンス データは参考用であり、シナリオによって異なる場合があります。本番環境で changefeed 機能を使用する前に、実際のワークロード テストを実施することを強くお勧めします。さらにサポートが必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md#get-support-for-a-cluster)お問い合わせください。
+> 上記のパフォーマンス データは参考用であり、シナリオによって異なる場合があります。本番環境で changefeed 機能を使用する前に、実際のワークロード テストを実施することを強くお勧めします。さらにサポートが必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
 ### 価格 {#price}
 

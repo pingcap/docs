@@ -180,8 +180,13 @@
         -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
         -   [組み込みメトリック](/tidb-cloud/built-in-monitoring.md)
         -   [組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)
+        -   アラート通知を購読する
+            -   [メールで購読する](/tidb-cloud/monitor-alert-email.md)
+            -   [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)
+            -   [Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)
         -   [クラスタイベント](/tidb-cloud/tidb-cloud-events.md)
         -   [サードパーティのメトリクスの統合](/tidb-cloud/third-party-monitoring-integrations.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+        -   [TiDB Cloudクリニック](/tidb-cloud/tidb-cloud-clinic.md)
     -   パフォーマンスの調整
         -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
         -   パフォーマンスを分析する
@@ -254,12 +259,17 @@
         -   [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
         -   [AWS DMS を使用して MySQL 互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
         -   [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
-    -   TiDB Cloudにデータをインポートする
-        -   [ローカルファイルのインポート](/tidb-cloud/tidb-cloud-import-local-files.md)
-        -   [サンプルデータのインポート (SQL ファイル)](/tidb-cloud/import-sample-data.md)
+    -   TiDB Cloud Dedicatedにデータをインポート
+        -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
         -   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
-        -   [Amazon S3 または GCS から Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
+        -   [Amazon S3 または GCS から Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
         -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli.md)
+    -   TiDB Cloud Serverless へのデータのインポート
+        -   [サンプルデータのインポート](/tidb-cloud/import-sample-data-serverless.md)
+        -   [ローカルファイルのインポート](/tidb-cloud/tidb-cloud-import-local-files.md)
+        -   [Amazon S3、GCS、または Azure Blob Storage から CSV ファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)
+        -   [Amazon S3、GCS、または Azure Blob Storage から Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
+        -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli-serverless.md)
     -   参照
         -   [TiDB専用外部ストレージアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)
         -   [TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)
@@ -608,9 +618,9 @@
     -   履歴データを読む
         -   ステイル読み取りを使用する (推奨)
             -   [ステイル読み取りの使用シナリオ](/stale-read.md)
-            -   [`As OF TIMESTAMP`使用してステイル読み取りを実行する](/as-of-timestamp.md)
-            -   [`tidb_read_staleness`使用してステイル読み取りを実行する](/tidb-read-staleness.md)
-            -   [`tidb_external_ts`使用してステイル読み取りを実行する](/tidb-external-ts.md)
+            -   [`As OF TIMESTAMP`を使用してステイル読み取りを実行する](/as-of-timestamp.md)
+            -   [`tidb_read_staleness`を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
+            -   [`tidb_external_ts`を使用してステイル読み取りを実行する](/tidb-external-ts.md)
         -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
     -   [SQL の配置ルール](/placement-rules-in-sql.md)
     -   システムテーブル
@@ -794,9 +804,21 @@
 -   サポートプラン
     -   [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)
     -   [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)
+    -   コネクテッドケアサポートサービスの特長
+        -   [コネクテッド：クリニックサービス](/tidb-cloud/tidb-cloud-clinic.md)
+        -   [接続: IM での AI チャット](/tidb-cloud/connected-ai-chat-in-im.md)
+        -   接続: TiDB Cloudアラートの IM サブスクリプション
+            -   [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)
+            -   [Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)
+        -   接続: IM チケットの作成とサブスクリプションの更新
+            -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
+            -   [Lark 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+        -   接続: サポートチケットの IM 対話
+            -   [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
+            -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 -   よくある質問
-    -   [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
+    -   [TiDB Cloudに関するよくある質問](/tidb-cloud/tidb-cloud-faq.md)
     -   [TiDB Cloudサーバーレスに関するよくある質問](/tidb-cloud/serverless-faqs.md)
 
 ## リリース {#releases}

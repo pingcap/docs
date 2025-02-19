@@ -30,4 +30,4 @@ TiDB の使用中に問題が発生した場合は、次の方法で PingCAP ま
 -   TiDBの実装と設計を学ぶ
 
     -   [TiDB 開発ガイド](https://pingcap.github.io/tidb-dev-guide/)
-    -   [TiDB 内部フォーラム](https://internals.tidb.io/)
+    -   [GitHub でのディスカッション](https://github.com/orgs/pingcap/discussions)
