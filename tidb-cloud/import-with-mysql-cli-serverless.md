@@ -1,20 +1,20 @@
 ---
-title: Import Data into TiDB Cloud Dedicated via MySQL CLI
-summary: Learn how to import Data into TiDB Cloud Dedicated via MySQL CLI.
+title: Import Data into TiDB Cloud Serverless via MySQL CLI
+summary: Learn how to import Data into TiDB Cloud Serverless via MySQL CLI.
 ---
 
-# Import Data into TiDB Cloud Dedicated via MySQL CLI
+# Import Data into TiDB Cloud Serverless via MySQL CLI
 
-This document describes how to import data into TiDB Cloud Dedicated via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
+This document describes how to import data into TiDB Cloud Serverless via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
 
 ## Prerequisites
 
-Before you can import data via MySQL CLI to TiDB Cloud Dedicated, you need the following prerequisites:
+Before you can import data via MySQL CLI to TiDB Cloud Serverless, you need the following prerequisites:
 
-- You have access to your TiDB Cloud Dedicated cluster. If you do not have, create one following the instructions in [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- You have access to your TiDB Cloud Serverless cluster. If you do not have, create one following the instructions in [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Install MySQL CLI on your local computer.
 
-## Step 1. Connect to your TiDB Cloud Dedicated cluster
+## Step 1. Connect to your TiDB Cloud Serverless cluster
 
 Connect to your TiDB cluster.
 
@@ -22,9 +22,17 @@ Connect to your TiDB cluster.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Click **Allow Access from Anywhere**.
+3. Ensure the configurations in the connection dialog match your operating environment.
 
-    For more details about how to obtain the connection string, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+    - **Connection Type** is set to `Public`.
+    - **Connect With** is set to `MySQL CLI`.
+    - **Operating System** matches your environment.
+
+4. Click **Generate Password** to create a random password.
+
+    > **Tip:**
+    >
+    > If you have created a password before, either use the original password or click **Reset Password** to generate a new one.
 
 ## Step 2. Define the table and insert sample data
 
@@ -93,7 +101,7 @@ Do the following to import data from a CSV file:
     IGNORE 1 LINES (product_id, product_name, price);"
     ```
 
-4. Make sure to replace the paths, table name (`products` in this example), `<your_username>`, `<your_host>`, `<your_password>`, `<your_csv_path>`, `<your_ca_path>`, and other placeholders with your actual information, and replace the sample CSV data with your real dataset as needed.
+    Make sure to replace the paths, table name (`products` in this example), `<your_username>`, `<your_host>`, `<your_password>`, `<your_csv_path>`, `<your_ca_path>`, and other placeholders with your actual information, and replace the sample CSV data with your real dataset as needed.
 
 > **Note:**
 >
