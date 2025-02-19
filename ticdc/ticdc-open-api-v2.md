@@ -773,7 +773,7 @@ This API is a synchronous interface. If the request is successful, it returns th
 
 ### Request URI
 
-`GET /api/v2/changefeed/{changefeed_id}/synced`
+`GET /api/v2/changefeeds/{changefeed_id}/synced`
 
 ### Parameter description
 
