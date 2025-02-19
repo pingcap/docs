@@ -34,7 +34,7 @@ DESC SLOW_QUERY;
 
 The output is as follows:
 
-```
+```sql
 +-------------------------------+---------------------+------+------+---------+-------+
 | Field                         | Type                | Null | Key  | Default | Extra |
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -120,7 +120,7 @@ The output is as follows:
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-79 rows in set (0.00 sec)
+81 rows in set (0.00 sec)
 ```
 
 The maximum statement length of the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
@@ -232,7 +232,7 @@ The output is as follows:
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-80 rows in set (0.00 sec)
+82 rows in set (0.00 sec)
 ```
 
 When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
