@@ -39,7 +39,7 @@ create_index_statement: CREATE INDEX idx_a_b ON t(a,b);
 
 The Index Advisor evaluates single-column indexes on `a` and `b` separately and ultimately combines them into a single index for optimal performance.
 
-The following `EXPLAIN` results compare the query execution without indexes and with the recommended two-column hypothetical index. The Index Advisor internally evaluates both cases and selects the option with the minimum cost. The search space also includes single-column hypothetical indexes on `a` and `b`, but these do not provide better performance than the combined two-column index. For brevity, the execution plans are omitted.
+The following `EXPLAIN` results compare the query execution without indexes and with the recommended two-column hypothetical index. The Index Advisor internally evaluates both cases and selects the option with the minimum cost. The Index Advisor also considers single-column hypothetical indexes on `a` and `b`, but these do not provide better performance than the combined two-column index. For brevity, the execution plans are omitted.
 
 ```sql
 EXPLAIN FORMAT='VERBOSE' SELECT a, b FROM t WHERE a=1 AND b=1;
