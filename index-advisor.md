@@ -9,11 +9,11 @@ In v8.5.0, TiDB introduces the Index Advisor feature, which helps optimize your 
 
 The Index Advisor analyzes queries to identify indexable columns from clauses such as `WHERE`, `GROUP BY`, and `ORDER BY`. Then, it generates index candidates and estimates their performance benefits using hypothetical indexes. TiDB uses a genetic search algorithm to select the optimal set of indexes starting with single-column indexes and iteratively exploring multi-column indexes, leveraging a "What-If" analysis to evaluate potential indexes based on their impact on optimizer plan costs. The advisor recommends indexes when they reduce the overall cost compared to executing queries without them.
 
-In addition to [recommending new indexes](#recommend-indexes-using-the-recommend-index-command), the Index Advisor also suggests [removing inactive indexes](#remove-unused-indexes) to ensure efficient index management.
+In addition to [recommending new indexes](#recommend-indexes-using-the-recommend-index-statement), the Index Advisor also suggests [removing inactive indexes](#remove-unused-indexes) to ensure efficient index management.
 
 ## Recommend indexes using the `RECOMMEND INDEX` statement
 
-TiDB introduces the `RECOMMEND INDEX` SQL statement for index advisor tasks. The `RUN` subcommand analyzes historical workloads and saves recommendations in system tables. With the `FOR` option, you can target a specific SQL statement, even if it was not executed previously. You can also use additional [options](#recommend-index-command-options) for advanced control. The syntax is as follows:
+TiDB introduces the `RECOMMEND INDEX` SQL statement for index advisor tasks. The `RUN` subcommand analyzes historical workloads and saves recommendations in system tables. With the `FOR` option, you can target a specific SQL statement, even if it was not executed previously. You can also use additional [options](#recommend-index-options) for advanced control. The syntax is as follows:
 
 ```sql
 RECOMMEND INDEX RUN [ FOR <SQL> ] [<Options>] 
@@ -86,7 +86,7 @@ RECOMMEND INDEX RUN;
 
 In this case, the Index Advisor identifies optimal indexes for the entire workload rather than a single query. The workload queries are sourced from the TiDB system table `INFORMATION_SCHEMA.STATEMENTS_SUMMARY`.
 
-This table can contain tens of thousands to hundreds of thousands of queries, which might affect the performance of the Index Advisor. To address this issue, the Index Advisor prioritizes the most frequently executed queries, as these queries have a greater impact on overall workload performance. By default, the Index Advisor selects the top 1,000 queries. You can adjust this value using the [`max_num_query`](#recommend-index-command-options) parameter.
+This table can contain tens of thousands to hundreds of thousands of queries, which might affect the performance of the Index Advisor. To address this issue, the Index Advisor prioritizes the most frequently executed queries, as these queries have a greater impact on overall workload performance. By default, the Index Advisor selects the top 1,000 queries. You can adjust this value using the [`max_num_query`](#recommend-index-options) parameter.
 
 The results of the `RECOMMEND INDEX` statements are stored in the `mysql.index_advisor_results` table. You can query this table to view the recommended indexes. The following example shows the contents of this system table after the previous two `RECOMMEND INDEX` statements are executed:
 
