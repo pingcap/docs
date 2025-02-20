@@ -13,7 +13,7 @@ TiProxy supports external storage including Amazon S3, Google Cloud Storage (GCS
 
 `TRAFFIC CAPTURE` has the following options:
 
-- `DURATION`: (required) specifies the duration of capture. The unit is one of `m` (minutes), `h` (hours), or `d` (days). For example, `--duration=1h` captures traffic for one hour.
+- `DURATION`: (required) specifies the duration of capture. The unit is one of `m` (minutes), `h` (hours), or `d` (days). For example, `DURATION="1h"` captures traffic for one hour.
 - `COMPRESS`: (optional) specifies whether to compress traffic files. `true` means compression, and the compression format is gzip. `false` means no compression. The default value is `true`.
 - `ENCRYPTION_METHOD`: (optional) specifies the algorithm for encrypting traffic files. Only `""`, `plaintext`, and `aes256-ctr` are supported. `""` and `plaintext` indicate no encryption, and `aes256-ctr` indicates encryption using the `AES256-CTR` algorithm. When specifying encryption, you also need to configure [`encrytion-key-path`](/tiproxy/tiproxy-configuration.md#encryption-key-path). The default value is """.
 
