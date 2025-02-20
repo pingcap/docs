@@ -66,8 +66,8 @@ EXPLAIN FORMAT='VERBOSE' SELECT /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b FROM t W
 The following example shows how to generate index recommendations for an entire workload. Assume tables `t1` and `t2` each contain 5,000 rows:
 
 ```sql
-mysql> CREATE TABLE t1 (a int, b int, c int, d int);
-mysql> CREATE TABLE t2 (a int, b int, c int, d int);
+CREATE TABLE t1 (a INT, b INT, c INT, d INT);
+CREATE TABLE t2 (a INT, b INT, c INT, d INT);
 
 -- Run some queries in this workload.
 SELECT a, b FROM t1 WHERE a=1 AND b<=5;
