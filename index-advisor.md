@@ -70,9 +70,9 @@ mysql> CREATE TABLE t1 (a int, b int, c int, d int);
 mysql> CREATE TABLE t2 (a int, b int, c int, d int);
 
 -- Run some queries in this workload.
-mysql> select a, b from t1 where a=1 and b<=5;
-mysql> select d from t1 order by d limit 10;
-mysql> select * from t1, t2 where t1.a=1 and t1.d=t2.d;
+SELECT a, b FROM t1 WHERE a=1 AND b<=5;
+SELECT d FROM t1 ORDER BY d LIMIT 10;
+SELECT * FROM t1, t2 WHERE t1.a=1 AND t1.d=t2.d;
 
 mysql> RECOMMEND INDEX RUN;
 +----------+-------+------------+---------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------+
