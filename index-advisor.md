@@ -143,9 +143,9 @@ Query OK, 1 row affected (0.00 sec)
 
 The index recommendation feature has the following limitations:
 
-- It does not support prepared statements. The `RECOMMEND INDEX RUN` command cannot recommend indexes for queries executed through the `Prepare` and `Execute` protocol.
-- It does not provide recommendations for deleting indexes. Future updates will include logic for [removing indexes](#remove-unused-indexes) in the `RECOMMEND` command.
-- A user interface (UI) for the Index Advisor is not yet available but will be introduced in the future.
+- Currently, it does not support [prepared statements](/develop/dev-guide-prepared-statement.md). The `RECOMMEND INDEX RUN` statement cannot recommend indexes for queries executed through the `Prepare` and `Execute` protocol.
+- Currently, it does not provide recommendations for deleting indexes.
+- Currently, a user interface (UI) for the Index Advisor is not yet available.
 
 ## Remove unused indexes
 
