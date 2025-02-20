@@ -163,7 +163,7 @@ The [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) view
 > SELECT START_TIME,UPTIME FROM INFORMATION_SCHEMA.CLUSTER_INFO WHERE TYPE='tidb';
 > ```
 
-### Use `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`
+### Use `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`
 
 The [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table provides metrics such as selectivity buckets, last access time, and rows accessed. The following examples show queries to identify unused or inefficient indexes based on this table:
 
