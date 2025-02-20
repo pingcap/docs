@@ -220,4 +220,4 @@ EXPLAIN FORMAT='verbose' SELECT /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b FROM t W
 
 In this example, the `HYPO_INDEX` hint specifies a hypothetical index. Using this index reduces the estimated cost from `392133.42` to `2.20` by enabling an index range scan (`IndexRangeScan`) instead of a full table scan (`TableFullScan`).
 
-Based on queries in your workload, TiDB can automatically generate index candidates that could benefit your workload. It uses hypothetical indexes to estimate their potential benefits and recommends the most effective ones.
+Based on queries in your workload, TiDB can automatically generate index candidates that could benefit your workload. It uses hypothetical indexes to estimate their potential benefits and recommend the most effective ones.
