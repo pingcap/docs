@@ -141,7 +141,7 @@ Query OK, 1 row affected (0.00 sec)
 
 ### Limitations
 
-The index recommendation feature has the following limitations, which will be addressed in future releases:
+The index recommendation feature has the following limitations:
 
 - It does not support prepared statements. The `RECOMMEND INDEX RUN` command cannot recommend indexes for queries executed through the `Prepare` and `Execute` protocol.
 - It does not provide recommendations for deleting indexes. Future updates will include logic for [removing indexes](#remove-unused-indexes) in the `RECOMMEND` command.
