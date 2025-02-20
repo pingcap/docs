@@ -5,15 +5,15 @@ summary: Learn how to optimize query performance with TiDB Index Advisor.
 
 # Index Advisor
 
-In v8.5.0, TiDB introduces the Index Advisor feature, which helps optimize your workload by recommending indexes that improve query performance. Using the new SQL command, `RECOMMEND INDEX`, you can generate index recommendations for a single query or an entire workload. To avoid the resource-intensive process of physically creating indexes for evaluation, TiDB supports [hypothetical indexes](#hypothetical-indexes), which are logical indexes that are not materialized.
+In v8.5.0, TiDB introduces the Index Advisor feature, which helps optimize your workload by recommending indexes that improve query performance. Using the new SQL statement, `RECOMMEND INDEX`, you can generate index recommendations for a single query or an entire workload. To avoid the resource-intensive process of physically creating indexes for evaluation, TiDB supports [hypothetical indexes](#hypothetical-indexes), which are logical indexes that are not materialized.
 
-The Index Advisor analyzes queries to identify indexable columns from clauses such as `WHERE`, `GROUP BY`, and `ORDER BY`. Then, it generates index candidates and estimates their performance benefits using hypothetical indexes. A genetic search algorithm is employed to select the optimal set of indexes starting with single-column indexes and iteratively exploring multi-column indexes, leveraging a "What-If" analysis to evaluate potential indexes based on their impact on optimizer plan costs. The advisor recommends indexes when they reduce the overall cost compared to executing queries without them.
+The Index Advisor analyzes queries to identify indexable columns from clauses such as `WHERE`, `GROUP BY`, and `ORDER BY`. Then, it generates index candidates and estimates their performance benefits using hypothetical indexes. TiDB uses a genetic search algorithm to select the optimal set of indexes starting with single-column indexes and iteratively exploring multi-column indexes, leveraging a "What-If" analysis to evaluate potential indexes based on their impact on optimizer plan costs. The advisor recommends indexes when they reduce the overall cost compared to executing queries without them.
 
 In addition to [recommending new indexes](#recommend-indexes-using-the-recommend-index-command), the Index Advisor also suggests [removing inactive indexes](#remove-unused-indexes) to ensure efficient index management.
 
-## Recommend indexes using the `RECOMMEND INDEX` command
+## Recommend indexes using the `RECOMMEND INDEX` statement
 
-TiDB introduces the `RECOMMEND INDEX` SQL command for index advisor tasks. The `RUN` subcommand analyzes historical workloads and saves recommendations in system tables. With the `FOR` option, you can target a specific SQL statement, even if it was not executed previously. You can also use additional [options](#recommend-index-command-options) for advanced control. The syntax is as follows:
+TiDB introduces the `RECOMMEND INDEX` SQL statement for index advisor tasks. The `RUN` subcommand analyzes historical workloads and saves recommendations in system tables. With the `FOR` option, you can target a specific SQL statement, even if it was not executed previously. You can also use additional [options](#recommend-index-command-options) for advanced control. The syntax is as follows:
 
 ```sql
 RECOMMEND INDEX RUN [ FOR <SQL> ] [<Options>] 
@@ -83,11 +83,11 @@ mysql> RECOMMEND INDEX RUN;
 +----------+-------+------------+---------------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------+
 ```
 
-In this case, the Index Advisor identifies optimal indexes for the entire workload rather than a single query. The workload queries are sourced from the TiDB system table `information_schema.statements_summary`.
+In this case, the Index Advisor identifies optimal indexes for the entire workload rather than a single query. The workload queries are sourced from the TiDB system table `INFORMATION_SCHEMA.STATEMENTS_SUMMARY`.
 
-This table can contain tens of thousands to hundreds of thousands of queries, which might impact the performance of the Index Advisor. To address this, the Index Advisor prioritizes the most frequently executed queries, as they have a greater impact on overall workload performance. By default, the Index Advisor selects the top 1,000 queries. You can adjust this value using the [`max_num_query`](#recommend-index-command-options) parameter.
+This table can contain tens of thousands to hundreds of thousands of queries, which might affect the performance of the Index Advisor. To address this issue, the Index Advisor prioritizes the most frequently executed queries, as these queries have a greater impact on overall workload performance. By default, the Index Advisor selects the top 1,000 queries. You can adjust this value using the [`max_num_query`](#recommend-index-command-options) parameter.
 
-The results of the `RECOMMEND INDEX` commands are stored in the `mysql.index_advisor_results` table. You can query this table to view the recommended indexes. The following example shows the contents of this system table after executing the previous two `RECOMMEND INDEX` commands:
+The results of the `RECOMMEND INDEX` statements are stored in the `mysql.index_advisor_results` table. You can query this table to view the recommended indexes. The following example shows the contents of this system table after the previous two `RECOMMEND INDEX` statements are executed:
 
 ```sql
 mysql> select * from mysql.index_advisor_results;
@@ -100,9 +100,9 @@ mysql> select * from mysql.index_advisor_results;
 +----+---------------------+---------------------+-------------+------------+------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+-------+
 ```
 
-### `RECOMMEND INDEX` command options
+### `RECOMMEND INDEX` options
 
-You can configure and view options for the `RECOMMEND INDEX` command to fine-tune its behavior for your workloads using the following statements:
+You can configure and view options for the `RECOMMEND INDEX` statement to fine-tune its behavior for your workloads as follows:
 
 ```sql
 RECOMMEND INDEX SET <option> = <value>;
@@ -112,14 +112,14 @@ RECOMMEND INDEX SHOW OPTION;
 The following options are available:
 
 - `timeout`: specifies the maximum time allowed for running the `RECOMMEND INDEX` command.
-- `max_num_index`: defines the maximum number of indexes to include in the result of `RECOMMEND INDEX`.
-- `max_index_columns`: sets the maximum number of columns allowed in multi-column indexes in the result.
+- `max_num_index`: specifies the maximum number of indexes to include in the result of `RECOMMEND INDEX`.
+- `max_index_columns`: specifies the maximum number of columns allowed in multi-column indexes in the result.
 - `max_num_query`: specifies the maximum number of queries to select from the statement summary workload.
 
-To check your current option settings, use the `RECOMMEND INDEX SHOW` command:
+To check your current option settings, execute the `RECOMMEND INDEX SHOW OPTION` statement:
 
 ```sql
-mysql> RECOMMEND INDEX SHOW OPTION;
+RECOMMEND INDEX SHOW OPTION;
 +-------------------+-------+---------------------------------------------------------+
 | option            | value | description                                             |
 +-------------------+-------+---------------------------------------------------------+
@@ -131,10 +131,10 @@ mysql> RECOMMEND INDEX SHOW OPTION;
 4 rows in set (0.00 sec)
 ```
 
-To modify an option, use the `RECOMMEND INDEX SET` command. For example, to change the `timeout` option:
+To modify an option, use the `RECOMMEND INDEX SET` statement. For example, to change the `timeout` option:
 
 ```sql
-mysql> RECOMMEND INDEX SET timeout='20s';
+RECOMMEND INDEX SET timeout='20s';
 Query OK, 1 row affected (0.00 sec)
 ```
 
@@ -148,7 +148,7 @@ The index recommendation feature has the following limitations, which will be ad
 
 ## Remove unused indexes
 
-For v8.0.0 or later versions, you can identify inactive indexes in your workload using `sys.schema_unused_indexes` and `information_schema.tidb_index_usage`. Removing these indexes can save storage space and reduce overhead. For production systems, it is highly recommended to make the target indexes invisible first and observe the impact for one complete business cycle before permanently removing them.
+For v8.0.0 or later versions, you can identify inactive indexes in your workload using [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) and [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md). Removing these indexes can save storage space and reduce overhead. For production environments, it is highly recommended to make the target indexes invisible first and observe the impact for one complete business cycle before permanently removing them.
 
 ### Use `sys.schema_unused_indexes`
 
@@ -162,9 +162,9 @@ The [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) view
 > SELECT START_TIME,UPTIME FROM INFORMATION_SCHEMA.CLUSTER_INFO WHERE TYPE='tidb';
 > ```
 
-### Use `information_schema.tidb_index_usage`
+### Use `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`
 
-The [`information_schema.tidb_index_usage`](/information-schema/information-schema-tidb-index-usage.md) table provides metrics such as selectivity buckets, last access time, and rows accessed. The following examples show queries to identify unused or inefficient indexes based on this table:
+The [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table provides metrics such as selectivity buckets, last access time, and rows accessed. The following examples show queries to identify unused or inefficient indexes based on this table:
 
 ```sql
 -- Find indexes that have not been accessed in the last 30 days.
@@ -183,15 +183,15 @@ WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0
 
 > **Note:**
 >
-> The data in `tidb_index_usage` might be delayed by up to five minutes, and the usage data is reset whenever a TiDB node restarts. Additionally, index usage is only recorded if the table has valid statistics.
+> The data in `INFORMATION_SCHEMA.TIDB_INDEX_USAGE` might be delayed by up to five minutes, and the usage data is reset whenever a TiDB node restarts. Additionally, index usage is only recorded if the table has valid statistics.
 
 ## Hypothetical indexes
 
-Hypothetical indexes (Hypo Indexes) are created using SQL comments, similar to [query hints](/optimizer-hints.md), rather than through the `CREATE INDEX` command. This approach enables lightweight experimentation with indexes without the overhead of physically materializing them.
+Hypothetical indexes (Hypo Indexes) are created using SQL comments, similar to [query hints](/optimizer-hints.md), rather than through the `CREATE INDEX` statement. This approach enables lightweight experimentation with indexes without the overhead of physically materializing them.
 
-For example, the comment `/*+ HYPO_INDEX(t, idx_ab, a, b) */` instructs the query planner to create a hypothetical index named `idx_ab` on table `t` for columns `a` and `b`. The planner generates the index's metadata but does not physically materialize it. If applicable, the planner considers this hypothetical index during query optimization without incurring the costs associated with index creation.
+For example, the `/*+ HYPO_INDEX(t, idx_ab, a, b) */` comment instructs the query planner to create a hypothetical index named `idx_ab` on table `t` for columns `a` and `b`. The planner generates the index's metadata but does not physically materialize it. If applicable, the planner considers this hypothetical index during query optimization without incurring the costs associated with index creation.
 
-The `RECOMMEND INDEX` advisor uses hypothetical indexes for "What-If" analysis to evaluate potential benefits of different indexes. You can also use hypothetical indexes directly to experiment with index designs before committing to their creation.
+The `RECOMMEND INDEX` advisor uses hypothetical indexes for "What-If" analysis to evaluate potential benefits of different indexes. You can also use hypothetical indexes directly to experiment with index designs before proceeding to create them.
 
 The following example shows a query using a hypothetical index:
 
