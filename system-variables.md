@@ -1011,7 +1011,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- When too many (for example 100K) SQL users are created in the database, operations such as create user/modify password/change user privilege would suffer severe performance impact. The reason is that every modification to the user cause reload of all users' data. Setting the variable to `ON` is best practice is such scenario.
+- When too many (for example 100,000) SQL users are created in the database, subsequent operations such as user creation, password modification, and permission setting might experience significant performance degradation. This is because every user update requires reloading all user data. In this scenario, it is recommended to set this variable to ON.
     * `0` or `OFF`: modify user related operations cause reloading of all users' data, the performance is not good.
     * `1` or `ON`: modify user related operations only reload the active users, so the performance is better.
 
