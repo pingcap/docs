@@ -196,10 +196,10 @@ The `RECOMMEND INDEX` advisor uses hypothetical indexes for "What-If" analysis t
 The following example shows a query using a hypothetical index:
 
 ```sql
-mysql> CREATE TABLE t(a int, b int, c int);
+CREATE TABLE t(a INT, b INT, c INT);
 Query OK, 0 rows affected (0.02 sec)
 
-mysql> explain format='verbose' select a, b from t where a=1 and b=1;
+EXPLAIN FORMAT='verbose' SELECT a, b FROM t WHERE a=1 AND b=1;
 +-------------------------+----------+------------+-----------+---------------+----------------------------------+
 | id                      | estRows  | estCost    | task      | access object | operator info                    |
 +-------------------------+----------+------------+-----------+---------------+----------------------------------+
@@ -208,7 +208,7 @@ mysql> explain format='verbose' select a, b from t where a=1 and b=1;
 |   └─TableFullScan_5     | 10000.00 | 4884000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo   |
 +-------------------------+----------+------------+-----------+---------------+----------------------------------+
 
-mysql> explain format='verbose' select /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b from t where a=1 and b=1;
+EXPLAIN FORMAT='verbose' SELECT /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b FROM t WHERE a=1 AND b=1;
 +------------------------+---------+---------+-----------+-----------------------------+-------------------------------------------------+
 | id                     | estRows | estCost | task      | access object               | operator info                                   |
 +------------------------+---------+---------+-----------+-----------------------------+-------------------------------------------------+
