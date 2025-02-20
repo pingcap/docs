@@ -1,6 +1,7 @@
 ---
 title: Use Resource Control to Achieve Resource Group Limitation and Flow Control
 summary: Learn how to use the resource control feature to control and schedule application resources.
+aliases: ['/tidb/dev/tidb-resource-control/']
 ---
 
 # Use Resource Control to Achieve Resource Group Limitation and Flow Control
