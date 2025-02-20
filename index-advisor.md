@@ -24,8 +24,8 @@ RECOMMEND INDEX RUN [ FOR <SQL> ] [<Options>]
 The following example shows how to generate an index recommendation for a query on table `t`, which contains 5,000 rows. For brevity, the `INSERT` statements are omitted.
 
 ```sql
-mysql> CREATE TABLE t(a int, b int, c int);
-mysql> RECOMMEND INDEX RUN for "select a, b from t where a=1 and b=1"\G
+CREATE TABLE t (a INT, b INT, c INT);
+RECOMMEND INDEX RUN for "SELECT a, b FROM t WHERE a = 1 AND b = 1"\G
 *************************** 1. row ***************************
               database: test
                  table: t
