@@ -149,7 +149,7 @@ The index recommendation feature has the following limitations:
 
 ## Remove unused indexes
 
-For v8.0.0 or later versions, you can identify inactive indexes in your workload using [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) and [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md). Removing these indexes can save storage space and reduce overhead. For production environments, it is highly recommended to make the target indexes invisible first and observe the impact for one complete business cycle before permanently removing them.
+For v8.0.0 or later versions, you can identify inactive indexes in your workload using [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) and [`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md). Removing these indexes can save storage space and reduce overhead. For production environments, it is highly recommended to make the target indexes invisible first and observe the impact for one complete business cycle before permanently removing them.
 
 ### Use `sys.schema_unused_indexes`
 
