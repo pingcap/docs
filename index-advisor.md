@@ -184,7 +184,7 @@ WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0
 
 > **Note:**
 >
-> The data in `INFORMATION_SCHEMA.TIDB_INDEX_USAGE` might be delayed by up to five minutes, and the usage data is reset whenever a TiDB node restarts. Additionally, index usage is only recorded if the table has valid statistics.
+> The data in `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE` might be delayed by up to five minutes, and the usage data is reset whenever a TiDB node restarts. Additionally, index usage is only recorded if the table has valid statistics.
 
 ## Hypothetical indexes
 
