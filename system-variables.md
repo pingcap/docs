@@ -1014,6 +1014,9 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - When too many (for example 100,000) SQL users are created in the database, subsequent operations such as user creation, password modification, and permission setting might experience significant performance degradation. This is because every user update requires reloading all user data. In this scenario, it is recommended to set this variable to ON.
     * `0` or `OFF`: modify user related operations cause reloading of all users' data, the performance is not good.
     * `1` or `ON`: modify user related operations only reload the active users, so the performance is better.
+        - Modifying operations for users who are not logged in will not trigger the loading of all user data into memory.
+        - Modifying operations for logged-in users will only reload the updated user data into memory.
+        - This provides better performance in scenarios with a large number of users.
 
 ### tidb_adaptive_closest_read_threshold <span class="version-mark">New in v6.3.0</span>
 
