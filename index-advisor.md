@@ -52,7 +52,7 @@ EXPLAIN FORMAT='VERBOSE' SELECT a, b FROM t WHERE a=1 AND b=1;
 |   └─TableFullScan_5     | 5000.00 | 2442000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo   |
 +-------------------------+---------+------------+-----------+---------------+----------------------------------+
 
-mysql> explain format='verbose' select /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b from t where a=1 and b=1;
+EXPLAIN FORMAT='VERBOSE' SELECT /*+ HYPO_INDEX(t, idx_ab, a, b) */ a, b FROM t WHERE a=1 AND b=1;
 +------------------------+---------+---------+-----------+-----------------------------+-------------------------------------------------+
 | id                     | estRows | estCost | task      | access object               | operator info                                   |
 +------------------------+---------+---------+-----------+-----------------------------+-------------------------------------------------+
