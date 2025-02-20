@@ -5,7 +5,7 @@ summary: Learn about the `tidb_mdl_view` table in the `mysql` schema.
 
 # `mysql.tidb_mdl_view`
 
-This table shows information aboud [metadata lock](/metadata-lock.md) views.
+This table shows the information about the [metadata lock](/metadata-lock.md) views.
 
 ```sql
 DESC mysql.tidb_mdl_view;
