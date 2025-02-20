@@ -165,7 +165,7 @@ The [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md) view
 
 ### Use `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`
 
-The [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table provides metrics such as selectivity buckets, last access time, and rows accessed. The following examples show queries to identify unused or inefficient indexes based on this table:
+The [`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md) table provides metrics such as selectivity buckets, last access time, and rows accessed. The following examples show queries to identify unused or inefficient indexes based on this table:
 
 ```sql
 -- Find indexes that have not been accessed in the last 30 days.
