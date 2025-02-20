@@ -1,21 +1,21 @@
 ---
-title: A Practical Guide For SQL Tuning
-summary: Learn how to do SQL tuning in TiDB
+title: A Practical Guide for SQL Tuning
+summary: Learn how to optimize SQL queries for better performance.
 ---
 
-## Document purpose and objectives
+# A Practical Guide for SQL Tuning
 
 This guide is designed for TiDB SQL tuning beginners. It focuses on:
 
-- Low entry barrier: introducing tuning concepts and methods progressively.
+- Low entry barrier: introducing tuning concepts and methods step by step.
 - Practice-oriented: providing specific steps and examples for each optimization tip.
 - Quick start: prioritizing the most common and effective optimization methods.
-- Gentle learning curve: emphasizing practicality over theoretical complexity.
+- Gentle learning curve: emphasizing practical techniques rather than complex theory.
 - Scenario-based: using real-world business cases to demonstrate optimization effects.
 
 ## Introduction to SQL tuning
 
-SQL tuning is crucial for optimizing database system performance. It involves systematically improving the efficiency of SQL queries. The process typically includes the following steps:
+SQL tuning is crucial for optimizing database performance. It involves systematically improving the efficiency of SQL queries. The process typically includes the following steps:
 
 1. Identify high-impact SQL statements:
 
@@ -29,15 +29,15 @@ SQL tuning is crucial for optimizing database system performance. It involves sy
 
 3. Implement optimizations:
 
-    - Apply corrective actions to improve poorly performing SQL statements.
+    - Apply corrective actions to improve inefficient SQL statements.
     - Optimizations might include rewriting queries, adding or modifying indexes, updating statistics, or adjusting database parameters.
 
 Repeat these steps iteratively until:
 
-- The system performance meets the desired targets.
+- The system performance meets target requirements.
 - No further improvements can be made to the remaining statements.
 
-SQL tuning is an ongoing process. As data volumes grow and query patterns change, you should:
+SQL tuning is an ongoing process. As data volume grows and query patterns change, you should:
 
 - Regularly monitor query performance.
 - Re-evaluate your optimization strategies.
@@ -45,85 +45,86 @@ SQL tuning is an ongoing process. As data volumes grow and query patterns change
 
 By consistently applying these practices, you can maintain optimal database performance over time.
 
-## Goals for tuning
+## Goals of SQL tuning
 
 The primary objectives of SQL tuning are to:
 
 - Reduce response time for end users.
 - Minimize resource consumption for processing workloads.
 
-To achieve these goals, you can use the following strategies:
+To achieve these goals, you can use the following strategies.
 
 ### Optimize query execution
 
-SQL tuning focuses on finding more efficient ways to process the same workload without changing the query's functionality. You can optimize query execution by:
+SQL tuning focuses on finding more efficient ways to process the same workload without changing query functionality. You can optimize query execution by:
 
 1. Improving execution plans:
-   - Analyze and modify query structures to enable more efficient processing.
+   - Analyze and modify query structures for more efficient processing.
    - Use appropriate indexes to reduce data access and processing time.
-   - Enable TiFlash for analytical queries on large datasets and leverage the MPP (Massively Parallel Processing) engine for complex aggregations and joins.
+   - Enable TiFlash for analytical queries on large datasets and leverage the [Massively Parallel Processing (MPP)](/glossary.md#massively-parallel-processing-mpp) engine for complex aggregations and joins.
 
 2. Enhancing data access methods:
-   - Use covering indexes to satisfy queries directly from the index, avoiding table access.
+   - Use covering indexes to satisfy queries directly from the index, avoiding table scans.
    - Implement partitioning strategies to limit data scans to relevant partitions.
 
 Examples:
 
-- Create an index for frequently queried columns to significantly reduce resource usage, especially for queries that access a small percentage of table data.
+- Create an index on frequently queried columns to significantly reduce resource usage, especially for queries that access a small percentage of table data.
 - Use index-only scans for queries that return a limited number of sorted results to avoid full table scans and sorting operations.
 
 ### Balance workload distribution
 
-In a distributed architecture like TiDB, maintaining a balanced workload across TiKV nodes is essential for optimal performance. For guidance on identifying and resolving read and write hotspots, see [Troubleshoot hotspot issues](/troubleshoot-hot-spot-issues.md#optimization-of-small-table-hotspots). By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
+In a distributed architecture like TiDB, balancing workloads across TiKV nodes is essential for optimal performance. To identify and resolve read and write hotspots, see [Troubleshoot hotspot issues](/troubleshoot-hot-spot-issues.md#optimization-of-small-table-hotspots).
 
-## Identifying high-load SQL
+By implementing these strategies, you can ensure that your TiDB cluster efficiently utilizes all available resources and avoids bottlenecks caused by uneven workload distribution or serialization on individual TiKV nodes.
 
-The most efficient way to identify Resource-Intensive SQL is using TiDB Dashboard. There are other tools like views and logs available as well.
+## Identify high-load SQL
 
-### Monitoring SQL statements by using TiDB Dashboard
+The most efficient way to identify resource-intensive SQL statements is by using [TiDB Dashboard](dashboard/dashboard-overview.md). You can also use other tools, such as views and logs, to identify high-load SQL statements.
 
-#### SQL Statements panel 
+### Monitor SQL statements using TiDB Dashboard
 
-In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to SQL Statements panel, which helps us identify the following:
+#### SQL Statements page
 
-1. The SQL statement with the highest total latency is the one that takes the longest time to execute out of multiple executions of the same SQL statement. 
-2. It can also display the number of times each SQL statement has been executed cumulatively, allowing us to find the SQL statement with the highest execution frequency.
-3. Clicking on each SQL statement allows us to delve deeper into the `EXPLAIN ANALYZE` results.
+In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to the [**SQL Statements** page](/dashboard/dashboard-statement-list.md) to identify the following:
 
-SQL statements are normalized as templates, where literals and bind variables are replaced by '?'. This normalization and sorting process allows you to quickly pinpoint the most resource-intensive queries that may require optimization.
+- The SQL statement with the highest total latency, which is the statement that takes the longest time to execute across multiple executions.
+- The number of times each SQL statement has been executed, which helps identify statements with the highest execution frequency.
+- Execution details of each SQL statement by clicking it to view `EXPLAIN ANALYZE` results.
+
+TiDB normalizes SQL statements into templates by replacing literals and bind variables with `?`. This normalization and sorting process helps you quickly identify the most resource-intensive queries that might require optimization.
 
 ![sql-statements-default](/media/sql-tuning/sql-statements-default.png)
 
-#### Slow Queries panel default display
+#### Slow Queries page
 
-On Slow Queries panel, we can find:
+In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to the [**Slow Queries** page](/dashboard/dashboard-slow-query.md) to find:
 
-1. The slowest SQL queries.
-2. The SQL query that reads the most data from TiKV.
-3. The `EXPLAIN ANALYZE` output from drilling down the SQL statement by clicking it.
-4. Please note that on the Slow Queries panel, we cannot get the frequency of the SQL statement execution. Once the execution elapsed time exceeds [`tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) for single instance, the query is then listed on the Slow Queries panel.
+- The slowest SQL queries.
+- The SQL query that reads the most data from TiKV.
+- The `EXPLAIN ANALYZE` output by clicking a query for detailed execution analysis.
+
+The **Slow Queries** page does not display SQL execution frequency. A query appears on this page if its execution time exceeds the [`tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) configuration item for a single instance.
 
 ![slow-query-default](/media/sql-tuning/slow-query-default.png)
 
-### Other tools for identifying Top SQL
+### Use other tools to identify Top SQL
 
-In addition to TiDB Dashboard, there are several other tools available to identify resource-intensive SQL queries:
+In addition to TiDB Dashboard, you can use other tools to identify resource-intensive SQL queries. Each tool offers unique insights and can be valuable for different analysis scenarios. Using a combination of these tools helps ensure comprehensive SQL performance monitoring and optimization.
 
-Each tool offers unique insights and can be valuable for different analysis scenarios. Using a combination of these tools allows for comprehensive SQL performance monitoring and optimization.
-
-- [Top SQL feature](/dashboard/top-sql.md)
+- [TiDB Dashboard Top SQL Page](/dashboard/top-sql.md)
 - Logs: [slow query log](/identify-slow-queries.md) and [expensive queries in TiDB log](/identify-expensive-queries.md)
-- Views: [cluster_statements_summary view](/statement-summary-tables.md##the-cluster-tables-for-statement-summary) and [cluster_processlist view](/information-schema/information-schema-processlist.md#cluster_processlist)
+- Views: [`cluster_statements_summary` view](/statement-summary-tables.md#the-cluster-tables-for-statement-summary) and [`cluster_processlist` view](/information-schema/information-schema-processlist.md#cluster_processlist)
 
-### Gathering data on the SQL identified
+### Gather data on identified SQL statements
 
-For the top SQL statements identified, you can use [PLAN REPLAYER](/sql-plan-replayer.md) to capture and save the on-site information of a TiDB cluster. This tool allows you to recreate the execution environment for further analysis. The syntax for exporting SQL information is as follows:
+For the top SQL statements identified, you can use [`PLAN REPLAYER`](/sql-plan-replayer.md) to capture and save on-site information from a TiDB cluster. This tool helps recreate the execution environment for further analysis. To export SQL information, use the following syntax:
 
 ```sql
 PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
 ```
 
-Use `EXPLAIN ANALYZE` whenever possible, as it captures actual execution information in addition to the execution plan. This provides more accurate insights into query performance.
+Use `EXPLAIN ANALYZE` whenever possible, as it captures both the execution plan and actual performance metrics. This provides more accurate insights into query performance.
 
 ## SQL tuning guide
 
