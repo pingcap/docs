@@ -1004,7 +1004,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
 
-### `tidb_accelerate_user_creation_update` <span class="version-mark">New in v9.0.0</span>
+### tidb_accelerate_user_creation_update <span class="version-mark">New in v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
