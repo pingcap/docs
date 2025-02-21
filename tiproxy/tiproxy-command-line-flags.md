@@ -209,9 +209,12 @@ The `tiproxyctl traffic show` command is used to display historical capture and 
 - `end_time`: the end time if the job has finished, otherwise it is empty
 - `duration`: the duration of the traffic capture job
 - `output`: the output traffic file path of the capture job
+- `encryption_method`: the encryption method of the traffic file
+- `compress`: whether the traffic files are compressed
 - `input`: the input traffic file path of the replay job
 - `username`: the database username for traffic replay
 - `speed`: the replay speed multiplier
+- `read_only`: whether only replays read-only statements
 - `progress`: the completion percentage of the job
 - `status`: the current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job failed
 - `error`: if the job fails, this column contains the reason for the failure, otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS`
