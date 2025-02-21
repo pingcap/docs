@@ -51,11 +51,13 @@ Example configuration for this topology:
 ```yaml
 component_versions:
   tiproxy: "v1.1.0"
+
 server_configs:
   tiproxy:
     balance.label-name: "app"
   tidb:
     graceful-wait-before-shutdown: 15
+
 tiproxy_servers:
   - host: tiproxy-host-1
     config:
@@ -77,6 +79,7 @@ tiproxy_servers:
       labels: {"app": "BI"}
       ha.virtual-ip: "10.0.1.20/24"
       ha.interface: "eth0"
+
 tidb_servers:
   - host: tidb-host-1
     config:
@@ -90,10 +93,12 @@ tidb_servers:
   - host: tidb-host-4
     config:
       labels: {"app": "BI"}
+
 tikv_servers:
   - host: tikv-host-1
   - host: tikv-host-2
   - host: tikv-host-3
+
 pd_servers:
   - host: pd-host-1
   - host: pd-host-2
