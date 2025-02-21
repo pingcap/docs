@@ -20,7 +20,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiDB <!--tw@hfxsd: 1 note-->
 
-    - 增强了读时间戳的合法性检测 [#57786](https://github.com/pingcap/tidb/issues/57786) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Enhance the validity check for read timestamps [#57786](https://github.com/pingcap/tidb/issues/57786) @[MyonKeminta](https://github.com/MyonKeminta)
 
 + TiKV
 
@@ -90,15 +90,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - 修复 `RADIANS` 函数计算顺序错误的问题 [#57671](https://github.com/pingcap/tidb/issues/57671) @[gengliqi](https://github.com/gengliqi)
     - 修复 `BIT` 列默认值错误的问题 [#57301](https://github.com/pingcap/tidb/issues/57301) @[YangKeao](https://github.com/YangKeao)
     - 修复无法为带别名的多表删除进行 binding 的问题 [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei) <!--tw@hfxsd: the following 9 notes-->
-    - 修复如果 CTE 包含 orderby/limit/distinct 子句并且被另外一个 CTE 的 recursive part 引用时可以出现的 inline 错误 [#56603](https://github.com/pingcap/tidb/issues/56603) @[elsa0520](https://github.com/elsa0520)
-    - 修复部分情况下统计信息同步加载超时处理不正确的问题 [#57710](https://github.com/pingcap/tidb/issues/57710) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复在CTE中解析数据库名时，可能得到错误的数据库名的问题 [#54582](https://github.com/pingcap/tidb/issues/54582) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复 TiDB 启动时由于非法 binding 数据可能导致 panic 的问题 [#58016](https://github.com/pingcap/tidb/issues/58016) @[qw4990](https://github.com/qw4990)
-    - 修复当代价估算在某些极端情况下估算出 INF/NaN 非法值的问题，以及该问题发生时 join reorder 可能结果出错的问题。 [#56704](https://github.com/pingcap/tidb/issues/56704) @[winoros](https://github.com/winoros)
-    - 修复手动 load 统计信息时 null 可能导致加载失败的问题 [#53966](https://github.com/pingcap/tidb/issues/53966) @[King-Dylan](https://github.com/King-Dylan)
-    - 修复创建两个相同名称的视图而不报错的问题 [#58769](https://github.com/pingcap/tidb/issues/58769) @[tiancaiamao](https://github.com/tiancaiamao)
-    - 修复虚拟生成列依赖包含 ON UPDATE 属性的列时，更新行记录出现的数据索引不一致问题 [#56829](https://github.com/pingcap/tidb/issues/56829) @[joechenrh](https://github.com/joechenrh)
-    - 修复系统表 INFORMATION_SCHEMA.TABLES 返回结果不正确的问题 [#57345](https://github.com/pingcap/tidb/issues/57345) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that an inline error might occur if a CTE contains ORDER BY, LIMIT, or SELECT DISTINCT clauses and is referenced by the recursive part of another CTE [#56603](https://github.com/pingcap/tidb/issues/56603) @[elsa0520](https://github.com/elsa0520)
+    - Fix the issue that timeout of statistics synchronization loading might not be handled correctly [#57710](https://github.com/pingcap/tidb/issues/57710) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that an incorrect database name might be returned when parsing the database name in a CTE [#54582](https://github.com/pingcap/tidb/issues/54582) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that TiDB might panic during startup due to invalid data binding [#58016](https://github.com/pingcap/tidb/issues/58016) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that the cost estimation might return invalide values such as INF/NaN in certain extreme cases, and the join reorder results might be incorrect when this issue occurs [#56704](https://github.com/pingcap/tidb/issues/56704) @[winoros](https://github.com/winoros)
+    - Fix the issue that loading fails when the statistics file contains null values during loading statistics manually [#53966](https://github.com/pingcap/tidb/issues/53966) @[King-Dylan](https://github.com/King-Dylan)
+    - Fix the issue that creating two views with the same name does not report an error [#58769](https://github.com/pingcap/tidb/issues/58769) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that when a virtual generated column's dependencies contain a column with the `ON UPDATE` attribute, the data of the updated row and its index data might be inconsistent [#56829](https://github.com/pingcap/tidb/issues/56829) @[joechenrh](https://github.com/joechenrh)
+    - Fix the issue that the `INFORMATION_SCHEMA.TABLES` system table returns incorrect results [#57345](https://github.com/pingcap/tidb/issues/57345) @[tangenta](https://github.com/tangenta)
 
 + TiKV <!--tw@Oreoxmt: 6 notes-->
 
