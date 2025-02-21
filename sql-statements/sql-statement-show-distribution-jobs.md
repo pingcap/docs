@@ -37,7 +37,7 @@ SHOW DISTRIBUTION JOBS;
 
 This statement is a TiDB extension to MySQL syntax.
 
-## See Also
+## See also
 
 - [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
 - [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
