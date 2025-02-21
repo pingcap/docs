@@ -56,7 +56,7 @@ TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456" SPEED=2
 Replay only read-only statements, not write statements:
 
 ```sql
-TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456" READONLY=true
+TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456" READ_ONLY=true
 ```
 
 ## MySQL compatibility

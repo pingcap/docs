@@ -7,7 +7,7 @@ summary: An overview of the usage of TRAFFIC CAPTURE for the TiDB database.
 
 TiDB v9.0.0 introduces the `TRAFFIC CAPTURE` syntax, which is used to send requests to all TiProxy instances in the cluster, allowing TiProxy to capture client traffic to traffic files.
 
-TiProxy supports capturing traffic to local and external storage. When capturing traffic to local, you need to manually copy the traffic file to the TiProxy cluster for replay after capturing the traffic, but when using external storage, there is no need to manually copy.
+TiProxy supports capturing traffic to local and external storage. When using local storage, you need to manually copy the traffic files to the TiProxy cluster for replay. When using external storage, no manual copying is needed.
 
 TiProxy supports external storage including Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, or other file storage services that implement the S3 protocol. For more information about external storage, see [URI formats of external storage services](/external-storage-uri.md).
 
@@ -15,7 +15,7 @@ TiProxy supports external storage including Amazon S3, Google Cloud Storage (GCS
 
 - `DURATION`: (required) specifies the duration of capture. The unit is one of `m` (minutes), `h` (hours), or `d` (days). For example, `DURATION="1h"` captures traffic for one hour.
 - `COMPRESS`: (optional) specifies whether to compress traffic files. `true` means compression, and the compression format is gzip. `false` means no compression. The default value is `true`.
-- `ENCRYPTION_METHOD`: (optional) specifies the algorithm for encrypting traffic files. Only `""`, `plaintext`, and `aes256-ctr` are supported. `""` and `plaintext` indicate no encryption, and `aes256-ctr` indicates encryption using the `AES256-CTR` algorithm. When specifying encryption, you also need to configure [`encrytion-key-path`](/tiproxy/tiproxy-configuration.md#encryption-key-path). The default value is """.
+- `ENCRYPTION_METHOD`: (optional) specifies the algorithm for encrypting traffic files. Only `""`, `plaintext`, and `aes256-ctr` are supported. `""` and `plaintext` indicate no encryption, and `aes256-ctr` indicates encryption using the `AES256-CTR` algorithm. When specifying encryption, you also need to configure [`encryption-key-path`](/tiproxy/tiproxy-configuration.md#encryption-key-path). The default value is `""`.
 
 Capturing traffic requires the current user to have the `SUPER` or [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
 

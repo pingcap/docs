@@ -7,8 +7,6 @@ summary: An overview of the usage of SHOW TRAFFIC JOBS for the TiDB database.
 
 TiDB v9.0.0 introduces the `SHOW TRAFFIC JOBS` syntax, which is used to show all traffic capture or replay jobs executed by TiProxy in the cluster. Each row represents a job of a TiProxy instance. Each TiProxy instance saves at most the 10 most recent jobs.
 
-This operation requires the following privileges:
-
 The shown results vary depending on the privileges the current user has.
 
 - If the user has the [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege, this statement shows traffic capture jobs.

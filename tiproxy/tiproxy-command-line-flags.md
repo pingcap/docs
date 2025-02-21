@@ -166,7 +166,7 @@ Options:
 - `--output`: (required) specifies the directory to store traffic files.
 - `--duration`: (required) specifies the duration of capture. The unit is one of `m` (minutes), `h` (hours), or `d` (days). For example, `--duration=1h` captures traffic for one hour.
 - `--compress`: (optional) specifies whether to compress traffic files. `true` means compression, and the compression format is gzip. `false` means no compression. The default value is `true`.
-- `--encryption-method`: (optional) specifies the algorithm for encrypting traffic files. Only `""`, `plaintext`, and `aes256-ctr` are supported. `""` and `plaintext` indicate no encryption, and `aes256-ctr` indicates encryption using the `AES256-CTR` algorithm. When specifying encryption, you also need to configure [`encrytion-key-path`](/tiproxy/tiproxy-configuration.md#encryption-key-path). The default value is """.
+- `--encryption-method`: (optional) specifies the algorithm for encrypting traffic files. Only `""`, `plaintext`, and `aes256-ctr` are supported. `""` and `plaintext` indicate no encryption, and `aes256-ctr` indicates encryption using the `AES256-CTR` algorithm. When specifying encryption, you also need to configure [`encryption-key-path`](/tiproxy/tiproxy-configuration.md#encryption-key-path). The default value is `""`.
 
 Example:
 
@@ -186,7 +186,7 @@ Options:
 - `--password`: (optional) specifies the password for the username. If not specified, the password will be entered in an interactive mode.
 - `--input`: (required) specifies the directory containing traffic files.
 - `--speed`: (optional) specifies the replay speed multiplier. The range is `[0.1, 10]`. The default value is `1`, indicating replay at the original speed.
-- `--read-only`: (optional) specifies whether to replay only read-only SQL statements. `true` means to replay only read-only SQL statements, `false` means to replay all SQL statements. The default value is `false`.
+- `--read-only`: (optional) specifies whether to replay only read-only SQL statements. `true` means to replay only read-only SQL statements, and `false` means to replay all SQL statements. The default value is `false`.
 
 Example:
 
@@ -202,7 +202,7 @@ The `tiproxyctl traffic cancel` command is used to cancel the current capture or
 
 #### `traffic show`
 
-The `tiproxyctl traffic show` command is used to display historical capture and replay jobs. It outputs an array of objects, each object represents a job. Each job has the following fields:
+The `tiproxyctl traffic show` command is used to display historical capture and replay jobs. It outputs an array of objects, and each object represents a job. Each job has the following fields:
 
 - `type`: the job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job
 - `start_time`: the start time of the job
@@ -214,7 +214,7 @@ The `tiproxyctl traffic show` command is used to display historical capture and 
 - `speed`: the replay speed multiplier
 - `progress`: the completion percentage of the job
 - `status`: the current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job failed
-- `err`: if the job fails, this column contains the reason for the failure, otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS`
+- `error`: if the job fails, this column contains the reason for the failure, otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS`
 
 Example output:
 
