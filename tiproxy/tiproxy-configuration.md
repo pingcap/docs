@@ -251,7 +251,7 @@ For client TLS object:
 
 - You must set either `ca` or `skip-ca` to skip verifying server certificates.
 - Optionally, you can set `cert` or `key` to pass server-side client verification.
-- Useless fields: `cert-allowed-cn`，`auto-certs`，`rsa-key-size`，`autocert-expire-duration`.
+- Useless fields: `cert-allowed-cn`, `auto-certs`, `rsa-key-size`, `autocert-expire-duration`.
 
 For server TLS object:
 
@@ -266,10 +266,10 @@ A client TLS object. It is used to access TiDB or PD.
 
 + Default value: `""`
 + Support hot-reload: yes
-+ Specifies the file path of the key used to encrypt the traffic files when capturing traffic. The file must contain a 256 bits (or 32 bytes) key encoded as hex string, end with a newline (`\n`) and contain nothing else. Example of the file content：
++ Specifies the file path of the key used to encrypt the traffic files when capturing traffic. The file must contain a 256 bits (or 32 bytes) key encoded as hex string and contain nothing else. Example of the file content:
 
 ```
-3b5896b5be691006e0f71c3040a29495ddcad20b14aff61806940ebd780d3c62
+3b5896b5be691006e0f71c3040a2949
 ```
 
 #### `require-backend-tls`
