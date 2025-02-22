@@ -266,7 +266,7 @@ A client TLS object. It is used to access TiDB or PD.
 
 + Default value: `""`
 + Support hot-reload: yes
-+ Specifies the file path of the key used to encrypt the traffic files when capturing traffic. The file must contain a 256 bits (or 32 bytes) key encoded as hex string and contain nothing else. Example of the file content:
++ Specifies the file path of the key used to encrypt the traffic files when capturing traffic. The TiProxy instance used for replay needs to be configured with the same key file. The file must contain a 256 bits (or 32 bytes) key encoded as hex string and contain nothing else. Example of the file content:
 
 ```
 3b5896b5be691006e0f71c3040a2949
