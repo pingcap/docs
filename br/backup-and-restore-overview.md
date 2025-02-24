@@ -144,9 +144,9 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 
 > **Note:**
 >
-> Known issue: in v7.2.0, some system table fields are changed to case-sensitive, which might cause cross-version backup and restore failures. For more details, see [issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> Known issue: Starting from version v7.2.0, some system table fields in newly created clusters are case-sensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-insensitive. Backup and restore operations involving system tables between these two types of clusters will fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
 
-The following table lists the compatibility matrix for full backups:
+The following table lists the compatibility matrix for full backups. For clusters upgraded from a version prior to v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
 |:---------|:----------------|:------------------|
@@ -155,7 +155,7 @@ The following table lists the compatibility matrix for full backups:
 | v7.5.0    | v7.5.0 and later | -                 |
 | v8.1.0    | v8.1.0 and later | -                 |
 
-The following table lists the compatibility matrix for log backups:
+The following table lists the compatibility matrix for log backups. For clusters upgraded from a version prior to v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
 |:---------|:----------------|:------------------|
