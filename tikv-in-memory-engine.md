@@ -134,9 +134,9 @@ The following result shows that queries with severe MVCC amplification exist on 
 5 rows in set (1.26 sec)
 ```
 
-### How can I see that the TiKV MVCC in-memory engine is enabled?
+### How can I check whether the TiKV MVCC in-memory engine is enabled?
 
-The TiKV configuration can be inspected with a [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) statement.
+You can check the TiKV configuration using the [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) statement.
 
 ```sql
 SHOW CONFIG WHERE Type='tikv' AND Name LIKE 'in-memory-engine\.%';
