@@ -442,9 +442,10 @@ mysql> SELECT * FROM t1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `mysql_native_password`
-- Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `tidb_auth_token`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
-- This variable sets the authentication method that the server advertises when the server-client connection is being established.
-- To authenticate using the `tidb_sm3_password` method, you can connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3).
+- Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
+- This variable sets the default authentication method and affects the following behavior:
+    - When you create users using [`CREATE USER`](/sql-statements/sql-statement-create-user.md), if the authentication method is not explicitly specified in the statement, the authentication method specified by this variable is used to create the user.
+    - This variable determines the authentication method advertised by the server when establishing a server-client connection.
 
 <CustomContent platform="tidb">
 
