@@ -4145,15 +4145,6 @@ Referenced in:
 
 - [System Variables](/system-variables.md#tx_read_ts)
 
-### txn_scope
-
-Referenced in:
-
-- [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
-- [System Variables](/system-variables.md#txn_scope)
-- [TiDB Configuration File](/tidb-configuration-file.md)
-- [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
-
 ### validate_password.check_user_name
 
 Referenced in:
