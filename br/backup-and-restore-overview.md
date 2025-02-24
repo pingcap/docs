@@ -145,9 +145,9 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 
 > **Note:**
 >
-> Known issue: Starting from version v7.2.0, some system table fields in newly created clusters are case-sensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-insensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> Known issue: Starting from version v7.2.0, fields of some system tables in newly created clusters become case-sensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding fields remain case-insensitive. Backup and restore operations involving system tables between these two types of clusters will fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
 
-The following table lists the compatibility matrix for full backups. Note that all data in the table comes from newly created clusters.
+The following table lists the compatibility matrix for full backups. For clusters upgraded from a version prior to v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
 |:---------|:----------------|:------------------|
@@ -156,7 +156,7 @@ The following table lists the compatibility matrix for full backups. Note that a
 | v7.5.0    | v7.5.0 and later | -                 |
 | v8.1.0    | v8.1.0 and later | -                 |
 
-The following table lists the compatibility matrix for log backups. Note that all data in the table comes from newly created clusters.
+The following table lists the compatibility matrix for log backups. For clusters upgraded from a version prior to v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
 |:---------|:----------------|:------------------|
