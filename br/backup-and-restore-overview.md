@@ -149,6 +149,7 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 
 The following table lists the compatibility matrix for full backups. For clusters upgraded from a version prior to v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
+
 | Backup version | Compatible restore versions | Incompatible restore versions |
 |:---------|:----------------|:------------------|
 | v6.5.0    | 7.1.0           | v7.5.0 and later   |
