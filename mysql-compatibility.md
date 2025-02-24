@@ -59,13 +59,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
 + "Session Tracker: Add GTIDs context to the OK packet"
-<<<<<<< HEAD
-=======
-+ Descending Index [#2519](https://github.com/pingcap/tidb/issues/2519)
-+ `SKIP LOCKED` syntax [#18207](https://github.com/pingcap/tidb/issues/18207)
-+ Lateral derived tables [#40328](https://github.com/pingcap/tidb/issues/40328)
 + JOIN ON subquery [#11414](https://github.com/pingcap/tidb/issues/11414)
->>>>>>> 9a300460c0 (mysql-compatibility.md: Add note about JOIN on subquery (#20309))
 
 ## Differences from MySQL
 
