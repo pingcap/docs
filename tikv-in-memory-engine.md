@@ -160,4 +160,4 @@ SHOW CONFIG WHERE Type='tikv' AND Name LIKE 'in-memory-engine\.%';
 
 ### How can I monitor the TiKV MVCC in-memory engine?
 
-You can check the **In Memory Engine** section on the [TiKV Details dashboard](/grafana-tikv-dashboard.md) in Grafana.
+You can check the **In Memory Engine** section on the [TiKV-Details dashboard](/grafana-tikv-dashboard.md) in Grafana.
