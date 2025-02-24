@@ -413,7 +413,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 
 ### In Memory Engine
 
-These are related to [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
+The following metrics are related to [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md).
 
 - Ops
 - Read MBps
