@@ -1217,8 +1217,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `128`. Before v7.6.0, the default value is `1`.
-- Range: `[1, 1024]`
+- Default value: `8192`. Before v7.6.0, the default value is `1`. For versions from v7.6.0 to v8.1.x, the default value is `128`. Starting from v8.2.0, the default value changes to `8192`.
+- Range: `[1, 8192]`. Before v8.2.0, the value range is `[1, 1024]`.
 - This variable specifies the number of partitions that TiDB [automatically analyzes](/statistics.md#automatic-update) when analyzing a partitioned table (which means automatically collecting statistics on a partitioned table).
 - If the value of this variable is smaller than the number of partitions, TiDB automatically analyzes all partitions of the partitioned table in multiple batches. If the value of this variable is greater than or equal to the number of partitions, TiDB analyzes all partitions of the partitioned table at the same time.
 - If the number of partitions of a partitioned table is far greater than this variable value and the auto-analyze takes a long time, you can increase the value of this variable to reduce the time consumption.
@@ -2804,7 +2804,7 @@ Query OK, 0 rows affected (0.09 sec)
 > **Note:**
 >
 > - Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
-> - This feature is incompatble with [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840). If this feature is enabled, [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840) does not take effect.
+> - This feature is incompatible with [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840). If this feature is enabled, [`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840) does not take effect.
 
 ### tidb_enable_unsafe_substitute <span class="version-mark">New in v6.3.0</span>
 
