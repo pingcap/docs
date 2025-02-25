@@ -412,7 +412,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 
 ### In Memory Engine
 
-The following metrics are related to [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md).
+The following metrics are related to [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) (IME).
 
 - Ops: The number of operations per second for column families
 - Read MBps: The total bytes of read traffic in RocksDB and the in-memory engine
