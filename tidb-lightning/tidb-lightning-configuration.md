@@ -115,7 +115,7 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 
 ### security
 
-Specifies certificates and keys for TLS connections within the cluster.
+- Specifies certificates and keys for TLS connections within the cluster.
 
 #### `ca-path`
 
