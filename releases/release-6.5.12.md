@@ -46,7 +46,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiDB Lightning <!--tw@Oreoxmt: 1 note-->
 
-        - Add row width check when parsing CSV files to prevent OOM issues [#58590](https://github.com/pingcap/tidb/issues/58590) @[D3Hunter](https://github.com/D3Hunter)
+        - Add a row width check when parsing CSV files to prevent OOM issues [#58590](https://github.com/pingcap/tidb/issues/58590) @[D3Hunter](https://github.com/D3Hunter)
 
 ## Bug fixes
 
@@ -105,7 +105,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - Fix the issue that TiKV might panic when destroying a peer [#18005](https://github.com/tikv/tikv/issues/18005) @[glorv](https://github.com/glorv)
     - Fix the issue that time rollback might cause abnormal RocksDB flow control, leading to performance jitter [#17995](https://github.com/tikv/tikv/issues/17995) @[LykxSassinator](https://github.com/LykxSassinator)
     - Fix the issue that disk stalls might prevent leader migration, leading to performance jitter [#17363](https://github.com/tikv/tikv/issues/17363) @[hhwyt](https://github.com/hhwyt)
-    - Fix the issue that the latest written data might not be readable when only one-phase commit (1PC) is enabled without enabling Async Commit [#18117](https://github.com/tikv/tikv/issues/18117) @[zyguan](https://github.com/zyguan)
+    - Fix the issue that the latest written data might not be readable when only one-phase commit (1PC) is enabled and Async Commit is not enabled [#18117](https://github.com/tikv/tikv/issues/18117) @[zyguan](https://github.com/zyguan)
     - Fix the issue that a deadlock might occur when GC Worker is under heavy load [#18214](https://github.com/tikv/tikv/issues/18214) @[zyguan](https://github.com/zyguan)
     - (dup): release-7.5.4.md > Bug fixes> TiKV - Fix the issue that the **Storage async write duration** monitoring metric on the TiKV panel in Grafana is inaccurate [#17579](https://github.com/tikv/tikv/issues/17579) @[overvenus](https://github.com/overvenus)
     - (dup): release-7.5.5.md > Bug fixes> TiKV - Fix the issue that TiKV might panic when executing queries containing `RADIANS()` or `DEGREES()` functions [#17852](https://github.com/tikv/tikv/issues/17852) @[gengliqi](https://github.com/gengliqi)
@@ -146,8 +146,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + Backup & Restore (BR) <!--tw@Oreoxmt: 3 notes-->
 
-        - Fix the issue that BR fails to restore due to receiving the `rpcClient is idle` error when sending requests to TiKV [#58845](https://github.com/pingcap/tidb/issues/58845) @[Tristan1900](https://github.com/Tristan1900)
-        - Fix the issue that the `status` field is missing when querying log backup tasks using `br log status --json` [#57959](https://github.com/pingcap/tidb/issues/57959) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that BR fails to restore due to getting the `rpcClient is idle` error when sending requests to TiKV [#58845](https://github.com/pingcap/tidb/issues/58845) @[Tristan1900](https://github.com/Tristan1900)
+        - Fix the issue that the `status` field is missing in the result when querying log backup tasks using `br log status --json` [#57959](https://github.com/pingcap/tidb/issues/57959) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that PD Leader I/O latency during log backup might increase checkpoint latency [#58574](https://github.com/pingcap/tidb/issues/58574) @[YuJuncen](https://github.com/YuJuncen)
         - (dup): release-8.5.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that the `tiup br restore` command omits checking whether the target cluster table already exists during database or table restoration, which might overwrite existing tables [#58168](https://github.com/pingcap/tidb/issues/58168) @[RidRisR](https://github.com/RidRisR)
         - (dup): release-8.5.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that log backup might unexpectedly enter a paused state when the advancer owner switches [#58031](https://github.com/pingcap/tidb/issues/58031) @[3pointer](https://github.com/3pointer)
