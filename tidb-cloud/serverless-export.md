@@ -42,6 +42,27 @@ To export data to Amazon S3, you need to provide the following information:
 
 For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
+<<<<<<< HEAD
+=======
+### Google Cloud Storage
+
+To export data to Google Cloud Storage, you need to provide the following information:
+
+- URI: `gs://<bucket-name>/<folder-path>/`
+- Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
+
+For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+
+### Azure Blob Storage
+
+To export data to Azure Blob Storage, you need to provide the following information:
+
+- URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
+- Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
+
+For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+
+>>>>>>> 041be7a76c (cloud: update product name (#20366))
 ## Export options
 
 ### Data filtering
