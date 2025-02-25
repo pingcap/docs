@@ -279,7 +279,7 @@ read-block-size = "64KiB" # default value
 batch-import-ratio = 0.75
 
 # Local source data directory or the URI of the external storage.
-# For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
+# For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 
 # The character set of the schema files, containing CREATE TABLE statements;
@@ -400,10 +400,6 @@ distsql-scan-concurrency = 15
 index-serial-scan-concurrency = 20
 checksum-table-concurrency = 2
 
-# Sets other TiDB session variables
-# [tidb.session-vars]
-# tidb_enable_clustered_index = "OFF"
-
 # The default SQL mode used to parse and execute the SQL statements.
 sql-mode = "ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"
 # Sets maximum packet size allowed for SQL connections.
@@ -427,6 +423,10 @@ max-allowed-packet = 67_108_864
 # cert-path = "/path/to/lightning.pem"
 # Private key of this service. Default to copy of `security.key-path`
 # key-path = "/path/to/lightning.key"
+
+# Sets other TiDB session variables
+# [tidb.session-vars]
+# tidb_enable_clustered_index = "OFF"
 
 # In the physical import mode, when data importing is complete, TiDB Lightning can
 # automatically perform the Checksum and Analyze operations. It is recommended

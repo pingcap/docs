@@ -1217,8 +1217,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `128`. Before v7.6.0, the default value is `1`.
-- Range: `[1, 1024]`
+- Default value: `8192`. Before v7.6.0, the default value is `1`. For versions from v7.6.0 to v8.1.x, the default value is `128`. Starting from v8.2.0, the default value changes to `8192`.
+- Range: `[1, 8192]`. Before v8.2.0, the value range is `[1, 1024]`.
 - This variable specifies the number of partitions that TiDB [automatically analyzes](/statistics.md#automatic-update) when analyzing a partitioned table (which means automatically collecting statistics on a partitioned table).
 - If the value of this variable is smaller than the number of partitions, TiDB automatically analyzes all partitions of the partitioned table in multiple batches. If the value of this variable is greater than or equal to the number of partitions, TiDB analyzes all partitions of the partitioned table at the same time.
 - If the number of partitions of a partitioned table is far greater than this variable value and the auto-analyze takes a long time, you can increase the value of this variable to reduce the time consumption.
@@ -2507,8 +2507,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the `PLAN REPLAYER CAPTURE` feature. The default value `OFF` means to disable the `PLAN REPLAYER CAPTURE` feature.
+- Default value: `ON`
+- This variable controls whether to enable the `PLAN REPLAYER CAPTURE` feature. The default value `ON` means to enable the `PLAN REPLAYER CAPTURE` feature.
 
 </CustomContent>
 
@@ -2622,7 +2622,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Type: Boolean
-- This variable is a switch for [the resource control feature](/tidb-resource-control.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
+- This variable is a switch for [the resource control feature](/tidb-resource-control-ru-groups.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
 
 ### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
 
@@ -2876,6 +2876,10 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_evolve_plan_baselines <span class="version-mark">New in v4.0</span>
 
+> **Warning:**
+>
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -3002,7 +3006,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control-ru-groups.md) to manage resource usage for different SQL statements.
 
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
@@ -3506,7 +3510,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - `start_ts`: The start timestamp of the transaction.
     - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
     - `error`: The error message, if any.
-    - `ru_consumption`: Consumed [RU](/tidb-resource-control.md#what-is-request-unit-ru) for executing the statement.
+    - `ru_consumption`: Consumed [RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) for executing the statement.
 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
@@ -5155,7 +5159,7 @@ SHOW WARNINGS;
 - Type: String
 - Default value: `""`
 - Possible values: `"ddl"`, `"stats"`, `"br"`, `"lightning"`, `"background"`
-- This variable is used to explicitly specify the task type for the current session, which is identified and controlled by [Resource Control](/tidb-resource-control.md). For example: `SET @@tidb_request_source_type = "background"`.
+- This variable is used to explicitly specify the task type for the current session, which is identified and controlled by [Resource Control](/tidb-resource-control-ru-groups.md). For example: `SET @@tidb_request_source_type = "background"`.
 
 ### tidb_resource_control_strict_mode <span class="version-mark">New in v8.2.0</span>
 
@@ -5449,6 +5453,16 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
+
+### tidb_slow_txn_log_threshold <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Unsigned integer
+- Default value: `0`
+- Range: `[0, 9223372036854775807]`
+- Unit: Milliseconds
+- This variable sets the threshold for slow transaction logging. When the execution time of a transaction exceeds this threshold, TiDB logs detailed information about the transaction. When the value is set to `0`, this feature is disabled.
 
 ### tidb_snapshot
 

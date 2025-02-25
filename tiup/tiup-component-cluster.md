@@ -86,5 +86,3 @@ tiup cluster [command] [flags]
 - [meta backup](/tiup/tiup-component-cluster-meta-backup.md): backs up the TiUP meta file required for the operation and maintenance of a specified cluster
 - [meta restore](/tiup/tiup-component-cluster-meta-restore.md): restores the TiUP meta file of a specified cluster
 - [help](/tiup/tiup-component-cluster-help.md): prints the help information
-
-[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)

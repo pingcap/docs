@@ -42,6 +42,8 @@ The `global` section corresponds to the cluster's global configuration and has t
 
 - `group`: The user group to which a user belongs. It is specified when the user is created. The value defaults to that of the `<user>` field. If the specified group does not exist, it is automatically created.
 
+- `systemd_mode`: Specifies the `systemd` mode used on the target machine during cluster deployment. The default value is `system`. If set to `user`, sudo permissions are not required on the target machine, meaning [TiUP no-sudo mode](/tiup/tiup-cluster-no-sudo-mode.md) is used.
+
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. The default value is `22`.
 
 - `enable_tls`: Specifies whether to enable TLS for the cluster. After TLS is enabled, the generated TLS certificate must be used for connections between components or between the client and the component. The default value is `false`.
@@ -372,7 +374,7 @@ tikv_servers:
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
-- `tcp_port`: The port of the TiFlash TCP service. The default value is `9000`.
+- `tcp_port`: The port of the TiFlash TCP service for internal testing purposes. The default value is `9000`. Starting from TiUP v1.12.5, this configuration item does not take effect on clusters that are v7.1.0 or later.
 
 - `flash_service_port`: The port via which TiFlash provides services. TiDB reads data from TiFlash via this port. The default value is `3930`.
 
@@ -406,7 +408,6 @@ After the deployment, for the fields above, you can only add directories to `dat
 
 - `host`
 - `tcp_port`
-- `http_port`
 - `flash_service_port`
 - `flash_proxy_port`
 - `flash_proxy_status_port`
@@ -439,8 +440,6 @@ tiflash_servers:
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated based on the `deploy_dir` directory configured in `global`.
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated based on the `data_dir` directory configured in `global`.
-
 - `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is of string type. The value is the ID of the NUMA node, such as `"0,1"`.
 
 - `config`: The configuration rule of this field is the same as the `tiproxy` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiproxy` content in `server_configs`. If these two fields overlap, the content of this field takes effect. Subsequently, a configuration file is generated and sent to the machine specified in `host`.
@@ -454,7 +453,6 @@ Among the above fields, you cannot modify the following configured fields after 
 - `host`
 - `port`
 - `deploy_dir`
-- `data_dir`
 - `arch`
 - `os`
 

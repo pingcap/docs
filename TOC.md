@@ -262,7 +262,10 @@
     - [Primary-Secondary DR](/dr-secondary-cluster.md)
     - [Multi-Replica Cluster DR](/dr-multi-replica.md)
     - [BR-based DR](/dr-backup-restore.md)
-  - [Resource Control](/tidb-resource-control.md)
+  - Resource Manager
+    - [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
+    - [Manage Runaway Queries](/tidb-resource-control-runaway-queries.md)
+    - [Manage Background Tasks](/tidb-resource-control-background-tasks.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -370,6 +373,7 @@
       - [SQL Plan Management](/sql-plan-management.md)
       - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
       - [Optimizer Fix Controls](/optimizer-fix-controls.md)
+    - [Index Advisor](/index-advisor.md)
 - Tutorials
   - [Multiple Availability Zones in One Region Deployment](/multi-data-centers-in-one-city-deployment.md)
   - [Three Availability Zones in Two Regions Deployment](/three-data-centers-in-two-cities-deployment.md)
@@ -499,6 +503,7 @@
     - TiUP Components
       - [tiup-playground](/tiup/tiup-playground.md)
       - [tiup-cluster](/tiup/tiup-cluster.md)
+      - [No-sudo Mode](/tiup/tiup-cluster-no-sudo-mode.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
   - [TiDB Operator](/tidb-operator-overview.md)

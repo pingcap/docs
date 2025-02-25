@@ -185,7 +185,7 @@ For more information, see [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command
 
 - TiProxy only supports replaying traffic files captured by TiProxy and does not support other file formats. Therefore, make sure to capture traffic from the production cluster using TiProxy first.
 - TiProxy traffic replay does not support filtering SQL types and DML and DDL statements are replayed. Therefore, you need to restore the cluster data to its pre-replay state before replaying again.
-- TiProxy traffic replay does not support testing [Resource Control](/tidb-resource-control.md) and [privilege management](/privilege-management.md) because TiProxy uses the same username to replay traffic.
+- TiProxy traffic replay does not support testing [Resource Control](/tidb-resource-control-ru-groups.md) and [privilege management](/privilege-management.md) because TiProxy uses the same username to replay traffic.
 - TiProxy does not support replaying [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statements.
 
 ## More resources

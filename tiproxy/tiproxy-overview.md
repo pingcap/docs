@@ -91,9 +91,7 @@ For other deployment methods, refer to the following documents:
         graceful-wait-before-shutdown: 15
     ```
 
-3. Configure the TiProxy instances.
-
-    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances and configure a virtual IP by setting [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) and [`ha.interface`](/tiproxy/tiproxy-configuration.md#interface) to route the traffic to the available TiProxy instance.
+3. Define the TiProxy instances.
 
     When selecting the model and number of TiProxy instances, consider the following factors:
 
@@ -102,24 +100,44 @@ For other deployment methods, refer to the following documents:
 
     It is recommended to specify the version number of TiProxy in the topology configuration so that TiProxy will not be upgraded when you upgrade the TiDB cluster through [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md). Otherwise, the client connection might be disconnected during TiProxy upgrade.
 
-    To configure TiProxy configuration items, see [TiProxy configuration](/tiproxy/tiproxy-configuration.md). For more configurations of TiUP deployment topology, see [tiproxy-servers configurations](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers).
+    For more information about the template for TiProxy, see [A simple template for the TiProxy topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml).
+
+    For detailed descriptions of the configuration items in the TiDB cluster topology file, see [Topology Configuration File for TiDB Deployment Using TiUP](/tiup/tiup-cluster-topology-reference.md).
 
     A configuration example is as follows:
 
     ```yaml
     component_versions:
       tiproxy: "v1.2.0"
+    tiproxy_servers:
+      - host: 10.0.1.11
+        port: 6000
+        status_port: 3080
+      - host: 10.0.1.12
+        port: 6000
+        status_port: 3080
+    ```
+
+4. Configure the TiProxy instances.
+
+    To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances and configure a virtual IP by setting [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) and [`ha.interface`](/tiproxy/tiproxy-configuration.md#interface) to route the traffic to the available TiProxy instance.
+
+    To configure TiProxy configuration items, see [TiProxy Configuration File](/tiproxy/tiproxy-configuration.md). For more configurations of TiUP deployment topology, see [tiproxy-servers configurations](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers).
+
+    A configuration example is as follows:
+
+    ```yaml
     server_configs:
       tiproxy:
         ha.virtual-ip: "10.0.1.10/24"
         ha.interface: "eth0"
     ```
 
-4. Start the cluster.
+5. Start the cluster.
 
     To start the cluster using TiUP, see [TiUP documentation](/tiup/tiup-documentation-guide.md).
 
-5. Connect to TiProxy.
+6. Connect to TiProxy.
 
     After the cluster is deployed, the cluster exposes the ports of TiDB server and TiProxy at the same time. The client should connect to the port of TiProxy instead of the port of TiDB server.
 
