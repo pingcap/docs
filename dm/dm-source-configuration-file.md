@@ -136,7 +136,7 @@ Generally, there is no need to manually configure these parameters unless there 
 
 - Sets the minimum amount of free disk space, in gigabytes. When the available disk space is smaller than this value, DM-worker tries to delete relay logs.
 - Default value: `15`
-- Unit: GB
+- Unit: GiB
 
 > **Note:**
 >
