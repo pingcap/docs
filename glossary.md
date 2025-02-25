@@ -163,10 +163,6 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 
 Index Merge is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans. Since v5.4, Index Merge has become a GA feature.
 
-### IME
-
-The IME abbreviation is for [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md).
-
 ## K
 
 ### Key Management Service (KMS)
@@ -380,6 +376,10 @@ For more information on the concepts and terminology of TiDB Lightning, see [TiD
 ### TiFlash
 
 [TiFlash](/tiflash/tiflash-overview.md) is a key component of TiDB's HTAP architecture. It is a columnar extension of TiKV that provides both strong consistency and good isolation. TiFlash maintains columnar replicas by asynchronously replicating data from TiKV using the **Raft Learner protocol**. For reads, it leverages the **Raft consensus index** and **MVCC (Multi-Version Concurrency Control)** to achieve **Snapshot Isolation** consistency. This architecture effectively addresses isolation and synchronization challenges in HTAP workloads, enabling efficient analytical queries while maintaining real-time data consistency.
+
+### TiKV MVCC In-Memory Engine (IME)
+	
+[TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) (IME) caches the latest written MVCC versions in memory and implements an MVCC GC mechanism independent of TiDB to accelerate queries involving a large number of MVCC historical versions.
 
 ### Timestamp Oracle (TSO)
 
