@@ -4,7 +4,7 @@
 
 import re, os
 
-doc_location = r'/Users/grcai/Documents/GitHub/docs-cn' # Specify the location of your doc source files
+doc_location = r'/Users/grcai/Documents/GitHub/docs' # Specify the location of your doc source files
 exclude_folders = ["doc-templates", "resource", ".github", ".vaunt", ".git"]
 exclude_files = ["_docHome.md", "CONTRIBUTING.md", "README.md", "TOC.md", "_index.md", "TOC-tidb-cloud.md"]
 
@@ -30,9 +30,9 @@ def get_file_not_in_toc(ext_path, toc_files):
 if __name__ == '__main__':
 
     toc_name = r'TOC.md'
-    cloud_name = r'TOC-tidb-cloud.md'
+    cloud_toc_name = r'TOC-tidb-cloud.md'
     tidb_toc_path = os.path.join(doc_location, toc_name)
-    cloud_toc_path = os.path.join(doc_location, cloud_name)
+    cloud_toc_path = os.path.join(doc_location, cloud_toc_name)
 
     toc_files = get_toc_files(tidb_toc_path)
 
