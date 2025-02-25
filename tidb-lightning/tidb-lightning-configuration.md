@@ -163,7 +163,7 @@ The `security` section specifies certificates and keys for TLS connections withi
 - For the `file` driver, the DSN is a path. If the path is not specified, TiDB Lightning uses the default value `/tmp/CHECKPOINT_SCHEMA.pb`.
 - For the `mysql` driver, the DSN is a URL in the form of `USER:PASS@tcp(HOST:PORT)/`.
 - If the URL is not specified, the TiDB server from the `[tidb]` section is used to store the checkpoints.
-- You should specify a different MySQL-compatible database server to reduce the load of the target TiDB cluster.
+- It is recommended that you specify a different MySQL-compatible database server to reduce the load of the target TiDB cluster.
 
 <!-- Example: `"/tmp/tidb_lightning_checkpoint.pb"` -->
 
@@ -228,7 +228,7 @@ The `security` section specifies certificates and keys for TLS connections withi
 
 #### `parallel-import`
 
-- Controls whether to enable multiple TiDB Lightning instances (in physical import mode) to import data to one or more target tables in parallel. Note that this parameter is only used in scenarios where the target table is empty.
+- Controls whether to enable multiple TiDB Lightning instances (in physical import mode) to import data to one or more target tables [in parallel](/tidb-lightning/tidb-lightning-distributed-import.md). Note that this parameter is only used in scenarios where the target table is empty.
 - Default value: `false`
 - Value options: `true`, `false`
 - When you use parallel import mode, you must set the parameter to `true`, but the premise is that no data exists in the target table, that is, all data can only be imported by TiDB Lightning.
@@ -397,11 +397,11 @@ The `security` section specifies certificates and keys for TLS connections withi
 - If the value of this configuration is not the same as the actual encoding of the source data file, a failed import, data loss or data disorder might appear.
 - Default value: `"binary"`
 - Value options:
-    - `"binary"`: Indicates that Lightning does not convert the encoding (by default).
-    - `"utf8mb4"`: Indicates that the source data file uses UTF-8 encoding.
-    - `"GB18030"`: Indicates that the source data file uses the GB-18030 encoding.
-    - `"GBK"`: The source data file uses GBK encoding (GBK encoding is an extension of the GB-2312 character set, also known as Code Page 936).
-    - `"latin1"`: The source data file uses MySQL latin1 encoding, also known as Code Page 1252.
+    - `"binary"`: indicates that TiDB Lightning does not convert the encoding (by default).
+    - `"utf8mb4"`: indicates that the source data file uses UTF-8 encoding.
+    - `"GB18030"`: indicates that the source data file uses the GB-18030 encoding.
+    - `"GBK"`: the source data file uses GBK encoding (GBK encoding is an extension of the GB-2312 character set, also known as Code Page 936).
+    - `"latin1"`: the source data file uses MySQL latin1 encoding, also known as Code Page 1252.
 
 #### `data-invalid-char-replace`
 
@@ -532,7 +532,7 @@ Configures how CSV files are parsed.
 
 #### `status-port`
 
-- Table schema information is fetched from TiDB via this `status-port`.
+- Fetches the table schema information from TiDB.
 
 <!-- Example: `10080` -->
 
@@ -591,11 +591,11 @@ Configures how CSV files are parsed.
 
 - Controls whether to use TLS for SQL connections.
 - Value options:
-    * `""`: force TLS (same as "cluster") if [`[tidb.security]`](#tidbsecurity) section is populated, otherwise same as `"false"`
-    * `"false"`: disable TLS
-    * `"cluster"`: force TLS and verify the server's certificate with the CA specified in the [`[tidb.security]`](#tidbsecurity) section
-    * `"skip-verify"`: force TLS but do not verify the server's certificate (insecure!)
-    * `"preferred"`: the same as `"skip-verify"`, but if the server does not support TLS, fall back to unencrypted connection
+    * `""`: forces TLS (the same as "cluster") if the [`[tidb.security]`](#tidbsecurity) section is populated. Otherwise, the same as `"false"`.
+    * `"false"`: disables TLS.
+    * `"cluster"`: forces TLS and verifies the server's certificate with the CA specified in the [`[tidb.security]`](#tidbsecurity) section.
+    * `"skip-verify"`: forces TLS but does not verify the server's certificate. Note that this setting is insecure.
+    * `"preferred"`: the same as `"skip-verify"`, but if the server does not support TLS, fall back to the unencrypted connection.
 
 ### tidb.security
 
@@ -624,7 +624,7 @@ Configures how CSV files are parsed.
 
 ### tidb.session-vars
 
-Sets other TiDB session variables
+- Specifies other TiDB session variables.
 
 <!-- tidb_enable_clustered_index = "OFF" -->
 
