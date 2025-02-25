@@ -189,7 +189,7 @@ This section describes how to stop and disable the firewall service of a target 
     sudo systemctl status firewalld.service
     ```
 
-### Chaning the firewall zone
+### Changing the firewall zone
 
 Instead of completely disabling it is also possible to change the default zone. By default the `public` zone is used, which only allows certain services and ports. The zone named `trusted` allows everything by default.
 
@@ -211,17 +211,17 @@ To list the policy for a zone:
 trusted
   target: ACCEPT
   icmp-block-inversion: no
-  interfaces: 
-  sources: 
-  services: 
-  ports: 
-  protocols: 
+  interfaces:
+  sources:
+  services:
+  ports:
+  protocols:
   forward: yes
   masquerade: no
-  forward-ports: 
-  source-ports: 
-  icmp-blocks: 
-  rich rules: 
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
 ```
 
 ### Configuring the firewall
@@ -455,7 +455,7 @@ Take the following steps to check the current operating system configuration and
     [none] mq-deadline kyber bfq
     [none] mq-deadline kyber bfq
     ```
-    
+
     > **Note:**
     >
     > `[none] mq-deadline kyber bfq` indicates that the NVMe device uses the `none` I/O Scheduler, and no changes are needed.
