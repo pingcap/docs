@@ -1,9 +1,9 @@
 ---
-title: Import Sample Data
+title: Import Sample Data into TiDB Cloud Serverless
 summary: Learn how to import sample data into TiDB Cloud Serverless via the UI.
 ---
 
-# Import Sample Data
+# Import Sample Data into TiDB Cloud Serverless
 
 This document describes how to import the sample data into TiDB Cloud Serverless via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
