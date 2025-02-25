@@ -128,104 +128,103 @@ Use `EXPLAIN ANALYZE` whenever possible, as it captures both the execution plan 
 
 ## SQL tuning guide
 
-This guide focuses on providing actionable advice for beginners looking to optimize their SQL queries in TiDB. By following these best practices, you can ensure better query performance and SQL Tuning. We'll cover below topic:
+This guide provides practical advice for beginners on optimizing SQL queries in TiDB. By following these best practices, you can improve query performance and streamline SQL tuning. This guide covers the following topics:
 
-- Query Processing Workflow
-- Optimizer Fundamentals
-- Statistics Management
-- How TiDB Builds A Execution Plan
-- Understand Execution Plan
-- Index Strategy in TiDB
-    - Composite Index Strategy Guidelines
-    - The Cost of Indexing
-    - SQL Tuning with a Covered Index
-    - SQL Tuning with a Composite Index Involing Sorting
-    - SQL Tuning with a Composite Index for Efficient Filtering and Sorting
-- When to Use TiFlash: A Simple Guide
+- Query processing workflow
+- Optimizer fundamentals
+- Statistics management
+- How TiDB builds an execution plan
+- Understand execution plans
+- Index strategies in TiDB
+    - Composite index strategy guidelines
+    - The cost of indexing
+    - SQL tuning with a covered index
+    - SQL tuning with a composite index involving sorting
+    - SQL tuning with a composite index for efficient filtering and sorting
+- When to use TiFlash
 
 ### Query processing workflow
 
-The client sends a SQL statement to the protocol layer of TiDB server. The protocol layer is responsible for handling the connection between TiDB server and the client, receiving SQL statement from the client, and returning data to the client.
+When a client sends a SQL statement to TiDB, the statement passes through the protocol layer of TiDB server. This layer manages the connection between the TiDB server and the client, receives SQL statements, and returns data to the client.
 
-To the right of the protocol layer is the optimizer of TiDB server, which is responsible for processing SQL statements. The process is as follows:
+In the following figure, to the right of the protocol layer is the optimizer of TiDB server, which processes SQL statements as follows:
 
-1. SQL statement arrives at the SQL optimizer through the protocol layer and is first parsed into an Abstract Syntax Tree (AST).
-2. Pre-Process is primarily for [Point Get](/explain-indexes#point_get-and-batch_point_get), a simple, one table lookup through a Primary or Unique Key like `SELECT * FROM t WHERE pk_col = 1` or `SELECT * FROM t WHERE uk_col IN (1,2,3)`. If it is a `Point Get`, the following-up optimization processes can be skipped, the next step jumps to the SQL Executor.
-3. After confirming that it is not a `Point Get`, the AST goes to the Logical Transformation, which rewrites the SQL logically based on certain rules.
-4. The AST that has gone through Logical Transformation will undergo Cost-Based Optimization.
-5. During Cost-Based Optimization, the optimizer considers statistics to determine how to select specific operators and finally generates a physical execution plan.
-6. The generated physical execution plan is sent to the SQL Executor of the TiDB node for execution.
-7. Unlike traditional single node databases, TiDB will push down operators/coprocessors to TiKV and/or TiFlash nodes containing the data, to process the parts of the execution plan where the data is stored, to more efficiently utilize the distributed nature, use resources in parallel, and send less data over the network. The executor in the TiDB node will assemble the final result and send it back to the client.
+1. The SQL statement arrives at the SQL optimizer through the protocol layer and is parsed into an abstract syntax tree (AST).
+2. The pre-processing step applies primarily to [Point Get](/explain-indexes#point_get-and-batch_point_get) queries, which involve a simple one-table lookup through a primary or unique key, such as `SELECT * FROM t WHERE pk_col = 1` or `SELECT * FROM t WHERE uk_col IN (1,2,3)`. For `Point Get` statements, TiDB skips subsequent optimization steps and proceeds directly to execution in the SQL executor.
+3. If the query is not a `Point Get`, the AST undergoes logical transformation, where TiDB rewrites the SQL logically based on specific rules.
+4. After logical transformation, TiDB processes the AST through cost-based optimization.
+5. During cost-based optimization, the optimizer uses statistics to select appropriate operators and generates a physical execution plan.
+6. The generated physical execution plan is sent to the SQL executor of the TiDB node for execution.
+7. Unlike traditional single-node databases, TiDB pushes down operators or coprocessors to TiKV and/or TiFlash nodes containing the data. This approach processes parts of the execution plan where the data is stored, efficiently utilizing the distributed architecture, using resources in parallel, and reducing network data transfer. The TiDB node executor then assembles the final result and returns it to the client.
 
 ![workflow](/media/sql-tuning/workflow-tiflash.png)
 
 ### Optimizer fundamentals
 
-TiDB uses a cost-based optimizer (CBO) to determine the most efficient execution plan for a SQL statement. This optimizer evaluates different execution strategies and chooses the one with the lowest estimated cost. The cost is influenced by factors such as:
+TiDB uses a cost-based optimizer (CBO) to determine the most efficient execution plan for a SQL statement. The optimizer evaluates different execution strategies and selects the one with the lowest estimated cost. The cost depends on factors such as:
 
-- SQL
-- Schema Design
-- Statistics
-    - Table
-    - Index
-    - Column
+- The SQL statement
+- Schema design
+- Statistics, including:
+    - Table statistics
+    - Index statistics
+    - Column statistics
 
-Based on the input, The cost model will produce the execution plan, which includes the details how the system execute the sql, including 
+Based on these inputs, the cost model produces an execution plan that details how the system will execute the SQL, including:
 
-- Access Method
-- Join Method
-- Join Order
+- Access method
+- Join method
+- Join order
 
-The optimizer is as good as the information it receives. Therefore, ensuring up-to-date statistics and well-designed indexes is critical.
+The effectiveness of the optimizer depends on the quality of the information it receives. To achieve optimal performance, ensure that statistics are up to date and indexes are well-designed.
 
 ### Statistics management
 
-Statistics are essential to the TiDB optimizer. TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement.
+Statistics are essential for the TiDB optimizer. TiDB uses statistics as the input of optimizer to estimate the number of rows processed in each step of a SQL execution plan.
 
-Statistics is generally divided into two levels: table level and index/column level. 
+Statistics are divided into two levels:
 
-- For table level statistics, it includes the total number of rows in the table and the number of rows that have been modified since the last collection of statistics. 
-- The index/column level statistics information is more abundant, including histograms, Count-Min Sketch, Top-N (values or indexes with the highest occurrences), distribution and quantity of different values, and the number of null values, and so on.
+- **Table-level statistics**: include the total number of rows in the table and the number of rows modified since the last statistics collection.
+- **Index/column-level statistics**: include detailed information such as histograms, Count-Min Sketch, Top-N (values or indexes with the highest occurrences), distribution and quantity of different values, and the number of NULL values.
 
-To ensure the statistics are healthy and representative, you can use the following commands:
+To check the accuracy and health of your statistics, you can use the following SQL statements:
 
-1. [`SHOW STATS_META`](sql-statements/sql-statement-show-stats-meta.md): This command provides metadata about table statistics.
-2. [`SHOW STATS_HEALTHY`](sql-statements/sql-statement-show-stats-healthy.md): This command shows the health status of table statistics.
+- [`SHOW STATS_META`](sql-statements/sql-statement-show-stats-meta.md): shows metadata about table statistics.
 
-For example, you can use:
+    ```sql
+    SHOW STATS_META WHERE table_name='T2'\G;
+    ```
 
-```sql
-SHOW STATS_META WHERE table_name='T2'\G;
-```
+    ```
+    *************************** 1. row ***************************
+              Db_name: test
+           Table_name: T2
+       Partition_name:
+          Update_time: 2023-05-11 02:16:50
+         Modify_count: 10000
+            Row_count: 20000
+    1 row in set (0.03 sec)
+    ```
 
-```
-*************************** 1. row ***************************
-          Db_name: test
-       Table_name: T2
-   Partition_name:
-      Update_time: 2023-05-11 02:16:50
-     Modify_count: 10000
-        Row_count: 20000
-1 row in set (0.03 sec)
-```
+- [`SHOW STATS_HEALTHY`](sql-statements/sql-statement-show-stats-healthy.md): shows the health status of table statistics.
 
-```sql
-SHOW STATS_HEALTHY WHERE table_name='T2'\G;
-```
+    ```sql
+    SHOW STATS_HEALTHY WHERE table_name='T2'\G;
+    ```
 
-```
-*************************** 1. row ***************************
-       Db_name: test
-    Table_name: T2
-Partition_name:
-       Healthy: 50
-1 row in set (0.00 sec)
-```
+    ```
+    *************************** 1. row ***************************
+           Db_name: test
+        Table_name: T2
+    Partition_name:
+           Healthy: 50
+    1 row in set (0.00 sec)
+    ```
 
-In TiDB database, there are two ways to collect statistics: automatic collection and manual collection. In most case, the auto collection job works fine. Automatic collection is triggered when certain conditions are met for a table, and TiDB will automatically collect statistics. We commonly use three triggering conditions, which are: ratio, start_time and end_time.
+TiDB provides two methods for collecting statistics: automatic and manual collection. In most cases, automatic collection is sufficient. TiDB triggers automatic collection when certain conditions are met. These common triggering conditions include:
 
-- [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio): The healthiness trigger
-- [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) and [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time): The allowed job window
+- [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio): the healthiness trigger.
+- [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) and [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time): the time window for automatic statistics collection.
 
 ```sql
 SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
@@ -241,38 +240,38 @@ SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
 +-----------------------------------------+-------------+
 ```
 
-There are cases where automatic collection doesn't meet your needs. The analyze windown by default is `00:00` to `23:59`, which means the analyze job can be triggered any time during the day. If you want to trigger the analyze job only during certain hours, you can set the start time and end time, to avoid performance impact for the online business.
+Sometimes automatic collection does not meet your needs. By default, the time window for automatic statistics collection is from `00:00` to `23:59`, meaning the analyze job can be triggered at any time during the day. To avoid performance impacts on your online business, you can set specific start and end times for statistics collection.
 
-You can manually collect statistics using the `ANALYZE TABLE table_name` statement. This allows you to adjust the default settings, such as the sample rate, number of top-N values, or only gathering statistics for specific columns only. 
+You can manually collect statistics using the `ANALYZE TABLE table_name` statement. This lets you adjust settings such as the sample rate, number of Top-N values, or collect statistics for specific columns only.
 
-It's important to note that after manual collection, subsequent automatic gathering jobs will inherit the new settings. This means that any customizations you've made during manual collection will be carried forward in future automatic analyses.
+Note that after manual collection, subsequent automatic collection jobs inherit the new settings. This means that any customizations made during manual collection will apply to future automatic analyses.
 
-Another common scenario is locking table statistics. This is useful when:
+Locking table statistics is useful in the following scenarios:
 
-1. The statistics on the table are already representative of the data.
-2. The table is very large and statistics collection is time-consuming.
-3. You want to maintain statistics only during specific time windows.
+- The statistics on the table already represent the data well.
+- The table is very large, and statistics collection is time-consuming.
+- You want to maintain statistics only during specific time windows.
 
-To lock the statistics for a table, you can use the following statement [`LOCK STATS table_name`](/sql-statements/sql-statement-lock-stats.md).
+To lock statistics for a table, you can use the [`LOCK STATS table_name`](/sql-statements/sql-statement-lock-stats.md) statement.
 
-for more detail about statistics, please refer to [statistics](/statistics.md).
+For more information, see [Statistics](/statistics.md).
 
-### How TiDB builds a execution plan
+### How TiDB builds an execution plan
 
-An SQL statement undergoes optimization primarily in the optimizer through three stages:
+A SQL statement undergoes three main optimization stages in the TiDB optimizer:
 
-- Pre-Processing
-- Logical Transformation
-- Cost-based Optimization
+1. [Pre-processing](#pre-processing)
+2. [Logical transformation](#logical-transformation)
+3. [Cost-based optimization](#cost-based-optimization)
 
 #### Pre-processing
 
-The main actions in the pre-processing stage it to determine if the SQL statement can be executed by using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get). `Point_Get` or `Batch_Point_Get` means using a primary or unique key, to directly read from TiKV, by exact key lookup. If a plan is identified as `Point_Get` or `Batch_Point_Get`, optimizer will skip the logical transformation and cost-based optimization, since the exact key read will be the best way to access the row.
+During pre-processing, TiDB determines whether the SQL statement can be executed using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get). These operations use a primary or unique key to read directly from TiKV through an exact key lookup. If a plan qualifies as `Point_Get` or `Batch_Point_Get`, the optimizer skips the logical transformation and cost-based optimization steps because direct key lookup is the most efficient way to access the row.
 
-Here is the query statement:
+The following is an example of a `Point_Get` query:
 
 ```sql
-explain SELECT id, name FROM emp WHERE id = 901;
+EXPLAIN SELECT id, name FROM emp WHERE id = 901;
 ```
 
 ```
@@ -285,43 +284,43 @@ explain SELECT id, name FROM emp WHERE id = 901;
 
 #### Logical transformation
 
-The purpose of logical Transformation is to optimize the execution of statements based on the characteristics of SELECT list, WHERE predicates, and other predicates in SQL queries. It generates a logical execution plan to annotate and rewrite the query. This logical plan is then passed to the Cost-Based Optimization. The optimization rules are such as column pruning, partition pruning, join reorder etc. Since this step is rule-based and automated by the query optimizer, in most cases it usually does not require manual adjustments.
+Logical transformation optimizes SQL statements based on the `SELECT` list, `WHERE` predicates, and other conditions. It generates a logical execution plan to annotate and rewrite the query. This logical plan is used in the next stage, cost-based optimization. The transformation applies rule-based optimizations such as column pruning, partition pruning, and join reordering. Since this process is rule-based and automatic, manual adjustments are usually unnecessary.
 
-More Detail for Logical Transformation: [SQL Logical Optimization](/sql-logical-optimization.md).
+For more information, see [SQL Logical Optimization](/sql-logical-optimization.md).
 
-#### Cost-Based optimization
+#### Cost-based optimization
 
-TiDB uses statistics as input to the optimizer to estimate the number of rows processed in each plan step for a SQL statement, and associates a cost with each plan step. The Cost-Based Optimization estimates the cost of each available plan choice, including index accesses and join methods, and produces a cost for each available plan. The optimizer then picks the execution plan with the lowest overall cost.
+The TiDB optimizer uses statistics to estimate the number of rows processed in each step of a SQL statement and assigns a cost to each step. During cost-based optimization, the optimizer evaluates all possible plan choices, including index accesses and join methods, and calculates the total cost for each plan. The optimizer then selects the execution plan with the minimal total cost.
 
-The following figure illustrates the various data access paths and row set operations that cost-based optimization can consider when developing the optimal execution plan. For data access paths, the optimizer determines the most efficient method to retrieve data, whether through an index scan or a table scan, and whether to retrieve the data from row-based TiKV or columnar-based TiFlash storage.
+The following figure illustrates various data access paths and row set operations considered during cost-based optimization. For data retrieval paths, the optimizer determines the most efficient method between index scans and full table scans, and decides whether to retrieve data from row-based TiKV storage or columnar TiFlash storage.
 
-Also, the optimizer need to evaluate operations that manipulate row sets, such as aggregation, join, and sorting. For instance, the aggregation operator may utilize either `HashAgg` or `StreamAgg`, while the join method can select from `HashJoin`, `MergeJoin`, or `IndexJoin`. 
+The optimizer also evaluates operations that manipulate row sets, such as aggregation, join, and sorting. For example, the aggregation operator might use either `HashAgg` or `StreamAgg`, while the join method can select from `HashJoin`, `MergeJoin`, or `IndexJoin`.
 
-Furthermore, expression and operator push-down to the physical storage engines is part of the physical optimization phase. The physical plan is  distributed to different components based on the underlying storage engines:
+Additionally, the physical optimization phase includes pushing down expressions and operators to the physical storage engines. The physical plan is distributed to different components based on the underlying storage engines:
 
-- Root Task runs at the TiDB Server
-- Cop (Coprocessor) Task runs at TiKV
-- MPP Task runs at TiFlash
+- Root task executes on the TiDB server.
+- Cop (Coprocessor) task executes on TiKV.
+- MPP task executes on TiFlash.
 
-This distribution of the physical plan allows the different components to collaborate and execute the query efficiently.
+This distribution enables cross-component collaboration for efficient query processing.
 
 ![cost-based-optimization](/media/sql-tuning/cost-based-optimization.png)
 
-More Detail for Cost-Based Optimization: [SQL Physical Optimization](/sql-physical-optimization.md).
+For more information, see [SQL Physical Optimization](/sql-physical-optimization.md).
 
-### Understanding execution plans
+### Understand execution plans
 
-The execution plan represents the steps TiDB will follow to execute a SQL query. In this section, we will learn how to display and read the execution plan.
+An execution plan outlines the steps TiDB will follow to execute a SQL query. This section explains how to generate, display, and interpret execution plans.
 
-#### Generating and displaying execution plans
+#### Generate and display execution plans
 
-Beside access the execution plan information through TiDB Dashboard, TiDB provides a `EXPLAIN` statement to display the execution plan for a SQL query. Here's an example of using `EXPLAIN`:
+Besides accessing execution plan information through TiDB Dashboard, you can use the `EXPLAIN` statement to display the execution plan for a SQL query. The `EXPLAIN` output includes the following columns:
 
-- id: Operator name and the step unique identifier
-- estRows: Estimated number of rows from the particular step
-- task: Indicates the layer where the operator is executed. For instance, `root` indicates execution at the TiDB Server, whereas `cop[tikv]` indicates execution at TiKV, and `mpp[tiflash]` indicates execution at TiFlash. 
-- access object: The object where the row sources are located
-- operator info: Extended information about the operator regarding the step
+- `id`: the operator name and a unique identifier of the step.
+- `estRows`: the estimated number of rows from the particular step.
+- `task`: indicates the layer where the operator is executed. For example, `root` indicates execution on the TiDB server, `cop[tikv]` indicates execution on TiKV, and `mpp[tiflash]` indicates execution on TiFlash.
+- `access object`: the object where row sources are located.
+- `operator info`: additional details about the operator in the step.
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -340,18 +339,16 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-Additional Information in [EXPLAIN ANALYZE](sql-statements/sql-statement-explain-analyze.md) Output. Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. There runtime information is crucial for debugging query execution.
+Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. This runtime information is crucial for debugging query execution. For more information, see [`EXPLAIN ANALYZE`](sql-statements/sql-statement-explain-analyze.md).
 
-Description
+The `EXPLAIN ANALYZE` output includes:
 
-- actRows: Number of rows output by the operator.
-- execution info: Detailed execution information of the operator. `time` usually represents the total wall time, including the total execution time of all sub-operators. If the operator is called many times by the parent operator then the time refers to the accumulated time.
-- memory: Memory used by the operator.
-- disk: Disk space used by the operator.
+- `actRows`: the number of rows output by the operator.
+- `execution info`: detailed execution information of the operator. `time` represents the total `wall time`, including the total execution time of all sub-operators. If the operator is called many times by the parent operator, then the time refers to the accumulated time.
+- `memory`: the memory used by the operator.
+- `disk`: the disk space used by the operator.
 
-Note: Some attributes and explain table columns are omitted for improved formatting
-
-Here is the query statement:
+The following is an example. Some attributes and table columns are omitted to improve formatting.
 
 ```sql
 EXPLAIN ANALYZE
