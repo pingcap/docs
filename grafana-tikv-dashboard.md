@@ -434,10 +434,10 @@ The following metrics are related to [TiKV MVCC In-Memory Engine](/tikv-in-memor
 - 99% In-memory engine prepare for write duration per server: The 99th percentile of time consumed for preparing write operations per TiKV server in the in-memory engine
 - Iterator operations: The number of different types of iterator operations
 - Seek duration: The time consumed for seek operations
-- Oldest Auto GC SafePoint: The oldest automatic GC safe point for Regions cached in the in-memory engine
-- Newest Auto GC SafePoint: The newest automatic GC safe point for Regions cached in the in-memory engine
-- Auto GC SafePoint Gap: The time gap between the newest automatic GC safe point and the oldest automatic GC safe point for Regions cached in the in-memory engine
-- Auto GC SafePoint Gap With TiKV: The gap between the TiKV automatic GC safe point and the oldest automatic GC safe point for Regions cached in the in-memory engine
+- Oldest Auto GC SafePoint: The oldest automatic GC safepoint for Regions cached in the in-memory engine
+- Newest Auto GC SafePoint: The newest automatic GC safepoint for Regions cached in the in-memory engine
+- Auto GC SafePoint Gap: The time gap between the newest automatic GC safepoint and the oldest automatic GC safepoint for Regions cached in the in-memory engine
+- Auto GC SafePoint Gap With TiKV: The gap between the TiKV automatic GC safepoint and the oldest automatic GC safepoint for Regions cached in the in-memory engine
 
 ### Pessimistic Locking
 
