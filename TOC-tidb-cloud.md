@@ -270,8 +270,8 @@
     - [Import Parquet Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-parquet-files-serverless.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
-    - [Configure External Storage Access for TiDB Dedicated](/tidb-cloud/config-s3-and-gcs-access.md)
-    - [Configure External Storage Access for TiDB Serverless](/tidb-cloud/serverless-external-storage.md)
+    - [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/config-s3-and-gcs-access.md)
+    - [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
