@@ -39,11 +39,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - (dup): release-8.1.1.md > Improvements> Tools> Backup & Restore (BR) - Except for the `br log restore` subcommand, all other `br log` subcommands support skipping the loading of the TiDB `domain` data structure to reduce memory consumption [#52088](https://github.com/pingcap/tidb/issues/52088) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-8.5.0.md > Improvements> Tools> Backup & Restore (BR) - Disable the table-level checksum calculation during full backups by default (`--checksum=false`) to improve backup performance [#56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
 
-    + TiCDC
-
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-
     + TiDB Lightning <!--tw@Oreoxmt: 1 note-->
 
         - Add a row width check when parsing CSV files to prevent OOM issues [#58590](https://github.com/pingcap/tidb/issues/58590) @[D3Hunter](https://github.com/D3Hunter)
