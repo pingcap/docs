@@ -5,13 +5,13 @@ summary: Navicat を使用して TiDB に接続する方法を学習します。
 
 # NavicatでTiDBに接続する {#connect-to-tidb-with-navicat}
 
-TiDB は MySQL 互換のデータベースで、 [ナビキャット](https://www.navicat.com)データベース ユーザー向けの GUI ツール セットです。このチュートリアルでは、 [ナビキャットプレミアム](https://www.navicat.com/en/products/navicat-premium)ツールを使用して TiDB に接続します。
+TiDB は MySQL 互換のデータベースであり、 [ナビキャット](https://www.navicat.com)データベース ユーザー向けの GUI ツール セットです。このチュートリアルでは、 [ナビキャットプレミアム](https://www.navicat.com/en/products/navicat-premium)ツールを使用して TiDB に接続します。
 
 このチュートリアルでは、Navicat を使用して TiDB クラスターに接続する方法を学習します。
 
 > **注記：**
 >
-> このチュートリアルは、TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -51,38 +51,38 @@ TiDB は MySQL 互換のデータベースで、 [ナビキャット](https://ww
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
-    -   **ブランチは**`main`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
     -   **Connect With は**`Navicat`に設定されています。
     -   **オペレーティング システムは**環境に適合します。
 
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」**をクリックします。
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-5.  Navicat Premium を起動し、左上隅の**「接続」**をクリックし、 **Venfor フィルター**リストから**PingCAP を**選択して、右側のパネルで**TiDB を**ダブルクリックします。
+5.  Navicat Premium を起動し、左上隅の**「接続」**をクリックし、 **Venfor フィルター**リストから**PingCAP**を選択して、右側のパネルで**TiDB を**ダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  **[新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
+6.  [**新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`のパラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`のパラメータを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`のパラメータを入力します。
+    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
     -   **パスワード**: TiDB Cloud Serverless クラスターのパスワードを入力します。
 
     ![Navicat: configure connection general panel for TiDB Cloud Serverless](/media/develop/navicat-premium-connection-config-serverless-general.png)
 
-7.  **[SSL** ] タブをクリックし、 **[SSL の使用]** 、 **[認証の使用]** 、 **[CA に対するサーバー証明書の検証**] チェックボックスをオンにします。次に、 TiDB Cloud接続ダイアログから`CA`ファイルを選択し、 **[CA 証明書]**フィールドに入力します。
+7.  **[SSL]**タブをクリックし、 **[SSL の使用]** 、 **[認証の使用]** 、 **[CA に対するサーバー証明書の検証**] チェックボックスをオンにします。次に、 TiDB Cloud接続ダイアログから`CA`ファイルを選択し、 **[CA 証明書]**フィールドに入力します。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Serverless](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
 8.  **「テスト接続」**をクリックして、 TiDB Cloud Serverless クラスターへの接続を検証します。
 
-9.  接続テストが成功すると、 **「接続成功」**メッセージが表示されます。 **[OK] を**クリックして接続構成を完了します。
+9.  接続テストが成功すると、「**接続成功」**メッセージが表示されます。 **[OK]**をクリックして接続構成を完了します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
@@ -93,42 +93,42 @@ TiDB は MySQL 互換のデータベースで、 [ナビキャット](https://ww
 
 3.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
 
-    **パブリック**接続タイプに加えて、TiDB Dedicated は**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
-4.  CA 証明書をダウンロードするには、 **「CA 証明書」を**クリックします。
+4.  **CA 証明書**をダウンロードするには、「CA 証明書」をクリックします。
 
-5.  Navicat Premium を起動し、左上隅の**「接続」**をクリックし、 **Venfor フィルター**リストから**PingCAP を**選択して、右側のパネルで**TiDB を**ダブルクリックします。
+5.  Navicat Premium を起動し、左上隅の**「接続」**をクリックし、 **Venfor フィルター**リストから**PingCAP**を選択して、右側のパネルで**TiDB を**ダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-6.  **[新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
+6.  [**新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
-    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`のパラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`のパラメータを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`のパラメータを入力します。
+    -   **ホスト**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
     -   **パスワード**: TiDB Cloud Dedicated クラスターのパスワードを入力します。
 
     ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
 
-7.  **[SSL]**タブをクリックし、 **[SSL の使用]** 、 **[認証の使用]** 、 **[CA に対するサーバー証明書の検証**] チェックボックスをオンにします。次に、手順 4 でダウンロードした CA ファイルを**[CA 証明書]**フィールドに選択します。
+7.  **[SSL]**タブをクリックし、 **[SSL の使用]** 、 **[認証の使用]** 、 **[CA に対するサーバー証明書の検証]**チェックボックスをオンにします。次に、手順 4 でダウンロードした CA ファイルを**[CA 証明書]**フィールドに選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
 8.  TiDB Cloud Dedicated クラスターへの接続を検証するための**テスト接続**。
 
-9.  接続テストが成功すると、 **「接続成功」**メッセージが表示されます。 **[OK] を**クリックして接続構成を完了します。
+9.  接続テストが成功すると、「**接続成功」**メッセージが表示されます。 **[OK]**をクリックして接続構成を完了します。
 
 </div>
 <div label="TiDB Self-Managed">
 
-1.  Navicat Premium を起動し、左上隅の**「接続」**をクリックし、 **Venfor フィルター**リストから**PingCAP を**選択して、右側のパネルで**TiDB を**ダブルクリックします。
+1.  Navicat Premium を起動し、左上隅の**「接続」**をクリックし、 **Venfor フィルター**リストから**PingCAP**を選択して、右側のパネルで**TiDB を**ダブルクリックします。
 
     ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
 
-2.  **[新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
+2.  [**新しい接続 (TiDB)]**ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
     -   **ホスト**: TiDB セルフマネージド クラスターの IP アドレスまたはドメイン名を入力します。
@@ -140,7 +140,7 @@ TiDB は MySQL 互換のデータベースで、 [ナビキャット](https://ww
 
 3.  **「テスト接続」**をクリックして、TiDB セルフマネージド クラスターへの接続を検証します。
 
-4.  接続テストが成功すると、 **「接続成功」**メッセージが表示されます。 **[OK] を**クリックして接続構成を完了します。
+4.  接続テストが成功すると、「**接続成功」**メッセージが表示されます。 **[OK]**をクリックして接続構成を完了します。
 
 </div>
 </SimpleTab>

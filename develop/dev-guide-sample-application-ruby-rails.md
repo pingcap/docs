@@ -5,13 +5,13 @@ summary: Rails フレームワークを使用して TiDB に接続する方法�
 
 # Rails フレームワークと ActiveRecord ORM を使用して TiDB に接続する {#connect-to-tidb-with-rails-framework-and-activerecord-orm}
 
-TiDB は MySQL 互換のデータベース、 [レール](https://github.com/rails/rails)は Ruby で書かれた人気の Web アプリケーション フレームワーク、 [アクティブレコードORM](https://github.com/rails/rails/tree/main/activerecord) Rails のオブジェクト リレーショナル マッピングです。
+TiDB は MySQL 互換のデータベース、 [レール](https://github.com/rails/rails) Ruby で書かれた人気の Web アプリケーション フレームワーク、 [アクティブレコードORM](https://github.com/rails/rails/tree/main/activerecord) Rails のオブジェクト リレーショナル マッピングです。
 
 このチュートリアルでは、TiDB と Rails を使用して次のタスクを実行する方法を学習します。
 
 -   環境を設定します。
 -   Rails を使用して TiDB クラスターに接続します。
--   アプリケーションをビルドして実行します。オプションで、ActiveRecord ORM を使用した基本的な CRUD 操作の[サンプルコードスニペット](#sample-code-snippets)見つけることができます。
+-   アプリケーションをビルドして実行します。オプションで、ActiveRecord ORM を使用して基本的な CRUD 操作の[サンプルコードスニペット](#sample-code-snippets)見つけることができます。
 
 > **注記：**
 >
@@ -85,7 +85,7 @@ bundle add mysql2 dotenv
 
 3.  接続ダイアログで、 **「接続先」**ドロップダウン リストから`Rails`選択し、**接続タイプ**のデフォルト設定を`Public`のままにします。
 
-4.  まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+4.  まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
 5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -114,9 +114,9 @@ bundle add mysql2 dotenv
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
 
-    **パブリック**接続タイプに加えて、TiDB Dedicated は**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -222,7 +222,7 @@ production:
 
 > **注記**
 >
-> TiDB Cloud Serverless の場合、パブリック エンドポイントを使用する場合は、 `DATABASE_URL`で`ssl_mode`クエリ パラメータを`verify_identity`に設定して TLS 接続を有効にする**必要があり**ますが、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_URL`で SSL CA 証明書を指定する必要は**ありません**。
+> TiDB Cloud Serverless の場合、パブリック エンドポイントを使用するときは、 `DATABASE_URL`で`ssl_mode`クエリ パラメータを`verify_identity`に設定して TLS 接続を有効にする**必要**がありますが、mysql2 gem はファイルが見つかるまで特定の順序で既存の CA 証明書を検索するため、 `DATABASE_URL`で SSL CA 証明書を指定する必要は**ありません**。
 
 ### データを挿入 {#insert-data}
 

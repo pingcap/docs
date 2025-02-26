@@ -16,7 +16,7 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 
 > **注記：**
 >
-> このチュートリアルは、TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -55,27 +55,27 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
-    -   **ブランチは**`main`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
     -   **Connect With は**`MySQL Workbench`に設定されています。
     -   **オペレーティング システムは**環境に適合します。
 
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」**をクリックします。
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
 5.  MySQL Workbench を起動し、 **MySQL 接続**タイトルの近くにある**+**をクリックします。
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
-6.  **[新しい接続のセットアップ]**ダイアログで、次の接続パラメータを構成します。
+6.  **[新しい接続のセットアップ**] ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
-    -   **ホスト名**: TiDB Cloud接続ダイアログから`HOST`のパラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`のパラメータを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`のパラメータを入力します。
+    -   **ホスト名**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
     -   **パスワード**: **「キーチェーンに保存...」**または**「ボールトに保存」**をクリックし、 TiDB Cloud Serverless クラスターのパスワードを入力してから、 **「OK」**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Cloud Serverless in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
@@ -97,20 +97,20 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
 
-    **パブリック**接続タイプに加えて、TiDB Dedicated は**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  MySQL Workbench を起動し、 **MySQL 接続**タイトルの近くにある**+**をクリックします。
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
-5.  **[新しい接続のセットアップ]**ダイアログで、次の接続パラメータを構成します。
+5.  **[新しい接続のセットアップ**] ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
-    -   **ホスト名**: TiDB Cloud接続ダイアログから`HOST`のパラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`のパラメータを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`のパラメータを入力します。
+    -   **ホスト名**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
     -   **パスワード**: **「キーチェーンに保存...」**をクリックし、 TiDB Cloud Dedicated クラスターのパスワードを入力して、 **「OK」**をクリックし、パスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Cloud Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
@@ -130,7 +130,7 @@ TiDB は MySQL 互換データベースであり、 [MySQL ワークベンチ](h
 
     ![MySQL Workbench: add new connection](/media/develop/mysql-workbench-add-new-connection.png)
 
-2.  **[新しい接続のセットアップ]**ダイアログで、次の接続パラメータを構成します。
+2.  **[新しい接続のセットアップ**] ダイアログで、次の接続パラメータを構成します。
 
     -   **接続名**: この接続に意味のある名前を付けます。
     -   **ホスト名**: TiDB セルフマネージド クラスターの IP アドレスまたはドメイン名を入力します。

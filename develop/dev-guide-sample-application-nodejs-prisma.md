@@ -84,12 +84,12 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
-    -   **ブランチは**`main`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
     -   **Connect With は**`Prisma`に設定されています。
-    -   **オペレーティング システムは**、アプリケーションを実行するオペレーティング システムと一致します。
+    -   **オペレーティング システムは、**アプリケーションを実行するオペレーティング システムと一致します。
 
-4.  まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+4.  まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
 5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -127,9 +127,9 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
 
-    **パブリック**接続タイプに加えて、TiDB Dedicated は**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -299,7 +299,7 @@ const player: Player = await prisma.player.create({
 
 ### クエリデータ {#query-data}
 
-次のクエリは、レコードが見つからない場合は ID `101`または`null`を持つ単一の`Player`オブジェクトを返します。
+次のクエリは、レコードが見つからない場合は ID `101`または`null`持つ単一の`Player`のオブジェクトを返します。
 
 ```javascript
 const player: Player | null = prisma.player.findUnique({
@@ -313,7 +313,7 @@ const player: Player | null = prisma.player.findUnique({
 
 ### データの更新 {#update-data}
 
-次のクエリは、 ID `101`の`Player`にコイン`50`枚と商品`50`を追加します。
+次のクエリは、 ID `101`の`Player`にコイン`50`と商品`50`を追加します。
 
 ```javascript
 await prisma.player.update({
@@ -353,7 +353,7 @@ await prisma.player.delete({
 
 [参照整合性](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector)確認するには、外部キー制約または Prisma リレーション モードを使用できます。
 
--   [外部キー](https://docs.pingcap.com/tidb/stable/foreign-key)は、TiDB v6.6.0 からサポートされている実験的機能であり、関連データのテーブル間参照と、データの一貫性を維持するための外部キー制約を可能にします。
+-   [外部キー](https://docs.pingcap.com/tidb/stable/foreign-key) 、TiDB v6.6.0 からサポートされている実験的機能であり、関連データのテーブル間参照と、データの一貫性を維持するための外部キー制約を可能にします。
 
     > **警告：**
     >

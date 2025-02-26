@@ -11,7 +11,7 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
 > **注記：**
 >
-> -   このチュートリアルは、TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
+> -   このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
 > -   このチュートリアルは、 [GitHub コードスペース](https://github.com/features/codespaces) 、 [Visual Studio Code 開発コンテナ](https://code.visualstudio.com/docs/devcontainers/containers) 、 [ビジュアルスタジオコード WSL](https://code.visualstudio.com/docs/remote/wsl)などの Visual Studio Code リモート開発環境でも機能します。
 
 ## 前提条件 {#prerequisites}
@@ -20,9 +20,9 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
 -   [ビジュアルスタジオコード](https://code.visualstudio.com/#alt-downloads) **1.72.0**以降のバージョン。
 -   Visual Studio Code の[SQLツール MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)拡張機能。インストールするには、次のいずれかの方法を使用します。
-    -   <a href="vscode:extension/mtxr.sqltools-driver-mysql">このリンクを</a>クリックして VS Code を起動し、拡張機能を直接インストールします。
-    -   [VS Code マーケットプレイス](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)に移動して、 **[インストール] を**クリックします。
-    -   VS Code の**[拡張機能]**タブで、 `mtxr.sqltools-driver-mysql`を検索して**SQLTools MySQL/MariaDB/TiDB**拡張機能を取得し、 **[インストール]**をクリックします。
+    -   <a href="vscode:extension/mtxr.sqltools-driver-mysql">このリンク</a>をクリックして VS Code を起動し、拡張機能を直接インストールします。
+    -   [VS Code マーケットプレイス](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql)に移動して、 **[インストール]**をクリックします。
+    -   VS Code の**[拡張機能]**タブで、 `mtxr.sqltools-driver-mysql`検索して**SQLTools MySQL/MariaDB/TiDB**拡張機能を取得し、 **[インストール] を**クリックします。
 -   TiDB クラスター。
 
 <CustomContent platform="tidb">
@@ -55,9 +55,9 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
 
-    -   **ブランチは**`main`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
 
     -   **Connect With は**`VS Code`に設定されています。
 
@@ -67,11 +67,11 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
     >
     > VS Code がリモート開発環境で実行されている場合は、リストからリモート オペレーティング システムを選択します。たとえば、Windows Subsystem for Linux (WSL) を使用している場合は、対応する Linux ディストリビューションに切り替えます。GitHub Codespaces を使用している場合は、これは必要ありません。
 
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」**をクリックします。
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
 5.  VS Code を起動し、ナビゲーション ペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで、 **[新しい接続の追加]**をクリックし、データベース ドライバーとして**TiDB を**選択します。
 
@@ -81,16 +81,16 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
     -   **接続名**: この接続に意味のある名前を付けます。
     -   **接続グループ**: (オプション) この接続グループに意味のある名前を付けます。同じグループ名の接続はグループ化されます。
-    -   **接続方法**:**サーバーとポートを**選択します。
-    -   **サーバー アドレス**: TiDB Cloud接続ダイアログから`HOST`のパラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`のパラメータを入力します。
+    -   **接続方法**:**サーバーとポート**を選択します。
+    -   **サーバー アドレス**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
     -   **データベース**: 接続するデータベースを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`のパラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
     -   **パスワード モード**: **SQLToolsDriver資格情報**を選択します。
     -   **MySQL ドライバー固有のオプション**領域で、次のパラメータを設定します。
 
         -   **認証プロトコル**:**デフォルト**を選択します。
-        -   **SSL** : **「有効」**を選択します。TiDB TiDB Cloud Serverless には安全な接続が必要です。 **「SSL オプション (node.TLSSocket)」**領域で、 TiDB Cloud接続ダイアログの`CA`のパラメータとして**「証明機関 (CA) 証明書ファイル」**フィールドを設定します。
+        -   **SSL** : **「有効」を**選択します。TiDB TiDB Cloud Serverless には安全な接続が必要です。 **「SSL オプション (node.TLSSocket)」**領域で、 TiDB Cloud接続ダイアログの`CA`パラメータとして**「証明機関 (CA) 証明書ファイル**」フィールドを設定します。
 
             > **注記：**
             >
@@ -116,9 +116,9 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
 
-    **パブリック**接続タイプに加えて、TiDB Dedicated は**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  VS Code を起動し、ナビゲーション ペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで、 **[新しい接続の追加]**をクリックし、データベース ドライバーとして**TiDB を**選択します。
 
@@ -128,11 +128,11 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
     -   **接続名**: この接続に意味のある名前を付けます。
     -   **接続グループ**: (オプション) この接続グループに意味のある名前を付けます。同じグループ名の接続はグループ化されます。
-    -   **接続方法**:**サーバーとポートを**選択します。
-    -   **サーバー アドレス**: TiDB Cloud接続ダイアログから`host`のパラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`port`のパラメータを入力します。
+    -   **接続方法**:**サーバーとポート**を選択します。
+    -   **サーバー アドレス**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
     -   **データベース**: 接続するデータベースを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`のパラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
     -   **パスワード モード**: **SQLToolsDriver資格情報**を選択します。
     -   **MySQL ドライバー固有のオプション**領域で、次のパラメータを設定します。
 
@@ -163,7 +163,7 @@ TiDB は MySQL 互換のデータベースであり、 [ビジュアルスタジ
 
     -   **接続グループ**: (オプション) この接続グループに意味のある名前を付けます。同じグループ名の接続はグループ化されます。
 
-    -   **接続方法**:**サーバーとポートを**選択します。
+    -   **接続方法**:**サーバーとポート**を選択します。
 
     -   **サーバー アドレス**: TiDB セルフマネージド クラスターの IP アドレスまたはドメイン名を入力します。
 

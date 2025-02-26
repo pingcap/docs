@@ -1,9 +1,9 @@
 ---
-title: Import Sample Data
+title: Import Sample Data into TiDB Cloud Dedicated
 summary: UI 経由でサンプル データをTiDB Cloud Dedicated にインポートする方法を学習します。
 ---
 
-# サンプルデータのインポート {#import-sample-data}
+# サンプルデータをTiDB Cloud Dedicatedにインポートする {#import-sample-data-into-tidb-cloud-dedicated}
 
 このドキュメントでは、UI を介してサンプル データをTiDB Cloud Dedicated にインポートする方法について説明します。使用するサンプル データは、Capital Bikeshare データ ライセンス契約に基づいてリリースされた Capital Bikeshare のシステム データです。サンプル データをインポートする前に、1 つの TiDB クラスターが必要です。
 

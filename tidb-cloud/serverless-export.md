@@ -30,7 +30,7 @@ TiDB Cloud Serverless Export (ベータ版) は、 TiDB Cloud Serverless クラ�
 
 ### ローカルファイル {#a-local-file}
 
-TiDB Cloud Serverless クラスターからローカル ファイルにデータをエクスポートするには、データ[TiDB Cloudコンソールを使用する](#export-data-to-a-local-file)または[TiDB Cloud CLIを使用する](/tidb-cloud/ticloud-serverless-export-create.md)エクスポートし、 TiDB Cloud CLI を使用してエクスポートしたデータをダウンロードする必要があります。
+TiDB Cloud Serverless クラスターからローカル ファイルにデータをエクスポートするには、データ[TiDB Cloudコンソールを使用する](#export-data-to-a-local-file)または[TiDB CloudCLIを使用する](/tidb-cloud/ticloud-serverless-export-create.md)エクスポートし、 TiDB Cloud CLI を使用してエクスポートしたデータをダウンロードする必要があります。
 
 データをローカル ファイルにエクスポートする場合、次の制限があります。
 
@@ -56,7 +56,7 @@ TiDB Cloud Serverless クラスターからローカル ファイルにデータ
 -   URI: `gs://<bucket-name>/<folder-path>/`
 -   アクセス認証情報: バケットの**base64 エンコードされた**[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)サービス アカウント キーに`storage.objects.create`権限があることを確認してください。
 
-詳細については[TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)参照してください。
+詳細については[TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-gcs-access)参照してください。
 
 ### Azure BLOB ストレージ {#azure-blob-storage}
 
@@ -65,7 +65,7 @@ Azure Blob Storage にデータをエクスポートするには、次の情報�
 -   URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
 -   アクセス資格情報: Azure Blob Storage コンテナーの場合は[共有アクセス署名 (SAS) トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)トークンに、 `Container`および`Object`リソースに対する`Read`および`Write`アクセス許可があることを確認します。
 
-詳細については[TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)参照してください。
+詳細については[TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)参照してください。
 
 ## エクスポートオプション {#export-options}
 
@@ -101,7 +101,7 @@ Azure Blob Storage にデータをエクスポートするには、次の情報�
 -   `gzip` (デフォルト): エクスポートされたデータを`gzip`で圧縮します。
 -   `snappy` : エクスポートされたデータを`snappy`で圧縮します。
 -   `zstd` : エクスポートされたデータを`zstd`で圧縮します。
--   `none` : エクスポートした`data`圧縮しません。
+-   `none` : エクスポートした`data`を圧縮しません。
 
 次のアルゴリズムを使用して、エクスポートされた Parquet データを圧縮できます。
 
@@ -181,9 +181,9 @@ Azure Blob Storage にデータをエクスポートするには、次の情報�
 
     > **ヒント：**
     >
-    > クラスターでこれまでにデータをインポートまたはエクスポートしたことがない場合は、ページの下部にある**[ここをクリックしてデータをエクスポート...] を**クリックしてデータをエクスポートする必要があります。
+    > クラスターでこれまでにデータをインポートまたはエクスポートしたことがない場合は、ページの下部にある**[ここをクリックしてデータをエクスポート...]**をクリックしてデータをエクスポートする必要があります。
 
-4.  **[エクスポート]を**クリックします。
+4.  **[エクスポート]**をクリックします。
 
 5.  エクスポート タスクが成功したら、エクスポート タスクの詳細に表示されるダウンロード コマンドをコピーし、 [TiDB CloudCLI](/tidb-cloud/cli-reference.md)でコマンドを実行してエクスポートされたデータをダウンロードできます。
 
@@ -223,7 +223,7 @@ Azure Blob Storage にデータをエクスポートするには、次の情報�
 
 2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-3.  **インポート**ページで、右上隅の**[データのエクスポート先]**をクリックし、ドロップダウン リストから [ **Amazon S3]**を選択します。次のパラメータを入力します。
+3.  **インポート**ページで、右上隅の**[データのエクスポート先]**をクリックし、ドロップダウン リストから**[Amazon S3]**を選択します。次のパラメータを入力します。
 
     -   **タスク名**: エクスポート タスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
     -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
@@ -234,7 +234,7 @@ Azure Blob Storage にデータをエクスポートするには、次の情報�
         -   **AWS ロール ARN** : バケットにアクセスする権限を持つロール ARN を入力します。AWS CloudFormation を使用してロール ARN を作成することをお勧めします。詳細については、 [TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access)参照してください。
         -   **AWS アクセスキー**: バケットにアクセスする権限を持つアクセスキー ID とアクセスキーシークレットを入力します。
 
-4.  **[エクスポート]を**クリックします。
+4.  **[エクスポート]**をクリックします。
 
 </div>
 
@@ -267,7 +267,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 
 2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-3.  **[インポート]**ページで、右上隅の**[データのエクスポート先]**をクリックし、ドロップダウン リストから**[Google Cloud Storage] を**選択します。次のパラメータを入力します。
+3.  **[インポート]**ページで、右上隅の**[データのエクスポート**先] をクリックし、ドロップダウン リストから**[Google Cloud Storage]**を選択します。次のパラメータを入力します。
 
     -   **タスク名**: エクスポート タスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
     -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
@@ -276,7 +276,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
     -   **フォルダ URI** : `gs://<bucket-name>/<folder-path>/`形式で Google Cloud Storage の URI を入力します。
     -   **バケット アクセス**: バケットにアクセスする権限を持つ Google Cloud 認証情報ファイルをアップロードします。
 
-4.  **[エクスポート]を**クリックします。
+4.  **[エクスポート]**をクリックします。
 
 </div>
 
@@ -305,7 +305,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 
 2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-3.  **[インポート]**ページで、右上隅の**[データのエクスポート先]**をクリックし、ドロップダウン リストから**[Azure Blob Storage] を**選択します。次のパラメーターを入力します。
+3.  **[インポート]**ページで、右上隅の**[データのエクスポート**先] をクリックし、ドロップダウン リストから**[Azure Blob Storage]**を選択します。次のパラメーターを入力します。
 
     -   **タスク名**: エクスポート タスクの名前を入力します。デフォルト値は`SNAPSHOT_{snapshot_time}`です。
     -   **エクスポートされたデータ**: エクスポートするデータベースとテーブルを選択します。
@@ -314,7 +314,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
     -   **フォルダー URI** : `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`形式で Azure Blob Storage の URI を入力します。
     -   **SAS トークン**: コンテナーへのアクセス許可を持つ SAS トークンを入力します。 [Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)を使用して SAS トークンを作成することをお勧めします。詳細については、 [TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access)参照してください。
 
-4.  **[エクスポート]を**クリックします。
+4.  **[エクスポート]**をクリックします。
 
 </div>
 
@@ -349,7 +349,7 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 
 4.  キャンセルするエクスポート タスクを選択し、 **[アクション]**をクリックします。
 
-5.  ドロップダウン リストで**[キャンセル] を**選択します。**実行中**ステータスのエクスポート タスクのみをキャンセルできることに注意してください。
+5.  ドロップダウン リストで**[キャンセル]**を選択します。**実行中**ステータスのエクスポート タスクのみをキャンセルできることに注意してください。
 
 </div>
 

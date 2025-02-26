@@ -13,7 +13,7 @@ summary: TiDB をデプロイする前に、環境チェック操作について
 
 `root`ユーザー アカウントを使用してターゲット マシンにログインします。
 
-データ ディスクを ext4 ファイルシステムにフォーマットし、ファイルシステムに`nodelalloc`および`noatime`マウント オプションを追加します`nodelalloc`オプションを追加する必要があります。そうしないと、 TiUPデプロイメントは事前チェックに合格できません`noatime`オプションはオプションです。
+データ ディスクを ext4 ファイルシステムにフォーマットし、ファイルシステムに`nodelalloc`および`noatime`マウント オプションを追加します。5 オプション`nodelalloc`追加する必要があります。そうしないと、 TiUPデプロイメントは事前チェックに合格できません。7 `noatime`はオプションです。
 
 > **注記：**
 >
@@ -44,7 +44,7 @@ summary: TiDB をデプロイする前に、環境チェック操作について
 
     > **注記：**
     >
-    > パーティションのデバイス番号を表示するには、 `lsblk`コマンドを使用します。NVMe ディスクの場合、生成されるデバイス番号は通常`nvme0n1p1`です。通常のディスク (たとえば、 `/dev/sdb` ) の場合、生成されるデバイス番号は通常`sdb1`です。
+    > パーティションのデバイス番号を表示するには、 `lsblk`コマンドを使用します。NVMe ディスクの場合、生成されるデバイス番号は通常`nvme0n1p1`です。通常のディスク (たとえば、 `/dev/sdb` ) の場合、生成されるデバイス番号は通常`sdb1` 。
 
 3.  データ ディスクを ext4 ファイルシステムにフォーマットします。
 
@@ -52,7 +52,7 @@ summary: TiDB をデプロイする前に、環境チェック操作について
     mkfs.ext4 /dev/nvme0n1p1
     ```
 
-4.  データ ディスクのパーティション UUID をビュー。
+4.  データ ディスクのパーティション UUIDをビュー。
 
     この例では、nvme0n1p1 の UUID は`c51eb23b-195c-4061-92a9-3fad812cc12f`です。
 
@@ -93,7 +93,7 @@ summary: TiDB をデプロイする前に、環境チェック操作について
 
         /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
 
-    ファイルシステムが ext4 であり、マウント オプションに`nodelalloc`が含まれている場合、ターゲット マシンにオプションを使用してデータ ディスク ext4 ファイルシステムを正常にマウントしています。
+    ファイルシステムが ext4 であり、マウント オプションに`nodelalloc`含まれている場合、ターゲット マシンにオプションを使用してデータ ディスク ext4 ファイルシステムを正常にマウントしています。
 
 ## システムスワップをチェックして無効にする {#check-and-disable-system-swap}
 
@@ -119,7 +119,7 @@ TiDB は、動作に十分な量のメモリを必要とします。TiDB が使�
 
 ## TiDBインスタンスの一時スペースを設定する（推奨） {#set-temporary-spaces-for-tidb-instances-recommended}
 
-TiDB の一部の操作では、一時ファイルをサーバーに書き込む必要があるため、TiDB を実行するオペレーティング システム ユーザーに、ターゲット ディレクトリの読み取りと書き込みを行うための十分な権限があることを確認する必要があります。1 `root`で TiDB インスタンスを起動しない場合は、ディレクトリの権限を確認し、正しく設定する必要があります。
+TiDB の一部の操作では、一時ファイルをサーバーに書き込む必要があるため、TiDB を実行するオペレーティング システム ユーザーに、 `root`ディレクトリの読み取りと書き込みを行うための十分な権限があることを確認する必要があります。1 権限で TiDB インスタンスを起動しない場合は、ディレクトリの権限を確認し、正しく設定する必要があります。
 
 -   TiDB 作業領域
 
@@ -127,7 +127,7 @@ TiDB の一部の操作では、一時ファイルをサーバーに書き込む
 
 -   `Fast Online DDL`作業エリア
 
-    変数[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が`ON` (v6.5.0 以降のバージョンではデフォルト値) に設定されている場合、 `Fast Online DDL`が有効になり、一部の DDL 操作ではファイルシステム内の一時ファイルの読み取りと書き込みが必要になります。場所は、構成項目[`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)によって定義されます。TiDB を実行するユーザーには、オペレーティング システムのそのディレクトリに対する読み取りおよび書き込み権限があることを確認する必要があります。デフォルトのディレクトリ`/tmp/tidb`は、tmpfs (一時ファイル システム) を使用します。ディスク ディレクトリを明示的に指定することをお勧めします。次の例では、 `/data/tidb-deploy/tempdir`使用しています。
+    変数[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) `ON` (v6.5.0 以降のバージョンではデフォルト値) に設定されている場合、 `Fast Online DDL`有効になり、一部の DDL 操作ではファイルシステム内の一時ファイルの読み取りと書き込みが必要になります。場所は、構成項目[`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)によって定義されます。TiDB を実行するユーザーには、オペレーティング システムのそのディレクトリに対する読み取りおよび書き込み権限があることを確認する必要があります。デフォルトのディレクトリ`/tmp/tidb` 、tmpfs (一時ファイル システム) を使用します。ディスク ディレクトリを明示的に指定することをお勧めします。次の例では、 `/data/tidb-deploy/tempdir`使用しています。
 
     > **注記：**
     >
@@ -186,7 +186,7 @@ TiDB は、 ACIDモデルでのトランザクションの線形一貫性を保�
 
 NTP サービスがインストールされ、NTPサーバーと正常に同期しているかどうかを確認するには、次の手順を実行します。
 
-1.  次のコマンドを実行します。 `running`が返された場合、NTP サービスは実行されています。
+1.  次のコマンドを実行します。 `running`返された場合、NTP サービスは実行されています。
 
     ```bash
     sudo systemctl status ntpd.service
@@ -196,7 +196,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
         Loaded: loaded (/usr/lib/systemd/system/ntpd.service; disabled; vendor preset: disabled)
         Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
 
-    -   `Unit ntpd.service could not be found.`が返された場合は、次のコマンドを試して、システムが NTP とのクロック同期を実行するために`ntpd`ではなく`chronyd`使用するように設定されているかどうかを確認します。
+    -   `Unit ntpd.service could not be found.`返された場合は、次のコマンドを試して、システムが NTP とのクロック同期を実行するために`ntpd`ではなく`chronyd`使用するように設定されているかどうかを確認します。
 
         ```bash
         sudo systemctl status chronyd.service
@@ -206,7 +206,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
             Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
             Active: active (running) since Mon 2021-04-05 09:55:29 EDT; 3 days ago
 
-        結果に`chronyd`も`ntpd`も設定されていないと表示された場合は、どちらもシステムにインストールされていないことを意味します。まず`chronyd`または`ntpd`インストールし、自動的に起動できることを確認してください。デフォルトでは`ntpd`が使用されます。
+        結果に`chronyd`も`ntpd`設定されていないと表示された場合は、どちらもシステムにインストールされていないことを意味します。まず`chronyd`または`ntpd`をインストールし、自動的に起動できることを確認してください。デフォルトでは`ntpd`が使用されます。
 
         システムが`chronyd`使用するように構成されている場合は、手順 3 に進みます。
 
@@ -309,7 +309,7 @@ sudo systemctl enable ntpd.service
 
     > **注記：**
     >
-    > `[always] madvise never`が出力された場合、THP が有効になっています。無効にする必要があります。
+    > `[always] madvise never`出力された場合、THP が有効になっています。無効にする必要があります。
 
 2.  次のコマンドを実行して、データ ディレクトリが配置されているディスクの I/O スケジューラを確認します。
 
@@ -351,7 +351,7 @@ sudo systemctl enable ntpd.service
     > **注記：**
     >
     > -   複数のディスクにデータ ディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`記録するために、各ディスクに対して上記のコマンドを実行する必要があります。
-    > -   デバイスが`noop`または`none`スケジューラを使用している場合は、 `ID_SERIAL`を記録したり、udev ルールや調整されたプロファイルを構成したりする必要はありません。
+    > -   デバイスが`noop`または`none`スケジューラを使用している場合は、 `ID_SERIAL`記録したり、udev ルールや調整されたプロファイルを構成したりする必要はありません。
 
 4.  cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
 
@@ -365,7 +365,7 @@ sudo systemctl enable ntpd.service
 
     > **注記：**
     >
-    > `The governor "powersave"`が出力された場合、 cpufreq モジュールの電源ポリシーは`powersave`です。これを`performance`に変更する必要があります。仮想マシンまたはクラウドホストを使用する場合、出力は通常`Unable to determine current policy`であり、何も変更する必要はありません。
+    > `The governor "powersave"`出力された場合、 cpufreq モジュールの電源ポリシーは`powersave`です。これを`performance`に変更する必要があります。仮想マシンまたはクラウドホストを使用する場合、出力は通常`Unable to determine current policy`であり、何も変更する必要はありません。
 
 5.  オペレーティング システムの最適なパラメータを構成します。
 
@@ -390,7 +390,7 @@ sudo systemctl enable ntpd.service
                 - virtual-host                - Optimize for running KVM guests
                 Current active profile: balanced
 
-            出力`Current active profile: balanced`は、現在のオペレーティング システムの調整済みプロファイルが`balanced`であることを意味します。現在のプロファイルに基づいて、オペレーティング システムの構成を最適化することをお勧めします。
+            出力`Current active profile: balanced` 、現在のオペレーティング システムの調整済みプロファイルが`balanced`あることを意味します。現在のプロファイルに基づいて、オペレーティング システムの構成を最適化することをお勧めします。
 
         2.  新しい調整済みプロファイルを作成します。
 
@@ -412,7 +412,7 @@ sudo systemctl enable ntpd.service
                 devices_udev_regex=(ID_SERIAL=36d0946606d79f90025f3e09a0c1fc035)|(ID_SERIAL=36d0946606d79f90025f3e09a0c1f9e81)
                 elevator=noop
 
-            出力`include=balanced`は、オペレーティング システムの最適化構成を現在の`balanced`プロファイルに追加することを意味します。
+            出力`include=balanced` 、オペレーティング システムの最適化構成を現在の`balanced`プロファイルに追加することを意味します。
 
         3.  新しく調整されたプロファイルを適用します。
 
@@ -581,7 +581,7 @@ sudo systemctl enable ntpd.service
 
 ## SSH相互信頼とパスワードなしのsudoを手動で設定する {#manually-configure-the-ssh-mutual-trust-and-sudo-without-password}
 
-このセクションでは、SSH 相互信頼とパスワードなしの sudo を手動で構成する方法について説明します。デプロイメントには、SSH 相互信頼とパスワードなしのログインを自動的に構成するTiUP を使用することをお勧めします。TiUPを使用して TiDB クラスターをデプロイする場合は、このセクションを無視してください。
+このセクションでは、SSH 相互信頼とパスワードなしの sudo を手動で構成する方法について説明します。デプロイメントには、SSH 相互信頼とパスワードなしのログインを自動的に構成するTiUPを使用することをお勧めします。TiUPを使用して TiDB クラスターをデプロイする場合は、このセクションを無視してください。
 
 1.  それぞれ`root`ユーザー アカウントを使用してターゲット マシンにログインし、 `tidb`ユーザーを作成してログイン パスワードを設定します。
 
@@ -590,7 +590,7 @@ sudo systemctl enable ntpd.service
     passwd tidb
     ```
 
-2.  パスワードなしで sudo を設定するには、次のコマンドを実行し、ファイルの末尾に`tidb ALL=(ALL) NOPASSWD: ALL`を追加します。
+2.  パスワードなしで sudo を設定するには、次のコマンドを実行し、ファイルの末尾に`tidb ALL=(ALL) NOPASSWD: ALL`追加します。
 
     ```bash
     visudo
@@ -640,7 +640,7 @@ sudo yum -y install numactl
 
 **方法 2** : `tiup cluster exec`コマンドを実行して、既存のクラスターに NUMA をバッチでインストールします。
 
-1.  [TiUP を使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってクラスター`tidb-test`を展開します。TiDB クラスターをインストールしている場合は、この手順をスキップできます。
+1.  [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってクラスター`tidb-test`を展開します。TiDB クラスターをインストールしている場合は、この手順をスキップできます。
 
     ```bash
     tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -656,4 +656,8 @@ sudo yum -y install numactl
 
 ## SELinuxを無効にする {#disable-selinux}
 
-[強制取得(8)](https://linux.die.net/man/8/getenforce)ユーティリティを使用して、SELinux が無効になっているか、または permissive に設定されているかを確認します。強制モードの SELinux は、デプロイメントの失敗を引き起こす可能性があります。SELinux を無効にする手順については、オペレーティング システムのドキュメントを参照してください。
+SELinux を無効にするか、許可モードに設定する必要があります。現在のステータスを確認するには、 [強制取得(8)](https://linux.die.net/man/8/getenforce)ユーティリティを使用します。
+
+SELinux が無効になっていない場合は、 `/etc/selinux/config`ファイルを開き、 `SELINUX=`で始まる行を見つけて、 `SELINUX=disabled`に変更します。この変更を行った後、システムを再起動する必要があります。再起動しないと、 `enforcing`または`permissive`から`disabled`への切り替えは有効にならないためです。
+
+一部のシステム (Ubuntu など) では、 `/etc/selinux/config`ファイルが存在せず、getenforce ユーティリティがインストールされていない可能性があります。その場合は、この手順をスキップできます。

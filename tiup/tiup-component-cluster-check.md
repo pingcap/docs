@@ -5,7 +5,7 @@ summary: TiUP クラスタ は、ハードウェアおよびソフトウェア�
 
 # tiup cluster check {#tiup-cluster-check}
 
-正式な本番環境では、環境が稼働する前に、一連のチェックを実行して、クラスターが最高のパフォーマンスを発揮していることを確認する必要があります。手動チェック手順を簡素化するために、 TiUP クラスタ は、指定されたクラスターのターゲット マシンのハードウェアおよびソフトウェア環境が正常に動作するための要件を満たしているかどうかを確認する`check`のコマンドを提供します。
+正式な本番環境では、環境が稼働する前に、一連のチェックを実行して、クラスターが最高のパフォーマンスを発揮していることを確認する必要があります。手動チェック手順を簡素化するために、 TiUP クラスタ は、指定されたクラスターのターゲット マシンのハードウェアおよびソフトウェア環境が正常に動作するための要件を満たしているかどうかを確認する`check`コマンドを提供します。
 
 ## チェック項目一覧 {#list-of-check-items}
 
@@ -19,7 +19,7 @@ summary: TiUP クラスタ は、ハードウェアおよびソフトウェア�
 
 ### ヌマクトル {#numactl}
 
-ターゲット マシンに`numactl`がインストールされているかどうかを確認します。ターゲット マシンに結合コアが設定されている場合は、 `numactl`インストールする必要があります。
+ターゲット マシンに`numactl`インストールされているかどうかを確認します。ターゲット マシンに結合コアが設定されている場合は、 `numactl`インストールする必要があります。
 
 ### システム時間 {#system-time}
 
@@ -62,9 +62,13 @@ summary: TiUP クラスタ は、ハードウェアおよびソフトウェア�
 
 `<deploy-user>`は TiDB クラスターを展開して実行するユーザーであり、最後の列はシステムに必要な最小値です。
 
-### カーネル {#selinux}
+### 翻訳Linux {#selinux}
 
-SELinux が有効になっているかどうかを確認します。SELinux を無効にする必要があります。
+SELinux を無効にするか、許可モードに設定する必要があります。現在のステータスを確認するには、 [強制取得(8)](https://linux.die.net/man/8/getenforce)ユーティリティを使用します。
+
+SELinux が無効になっていない場合は、 `/etc/selinux/config`ファイルを開き、 `SELINUX=`で始まる行を見つけて、 `SELINUX=disabled`に変更します。この変更を行った後、システムを再起動する必要があります。再起動しないと、 `enforcing`または`permissive`から`disabled`への切り替えは有効にならないためです。
+
+一部のシステム (Ubuntu など) では、 `/etc/selinux/config`ファイルが存在せず、getenforce ユーティリティがインストールされていない可能性があります。その場合は、この手順をスキップできます。
 
 ### ファイアウォール {#firewall}
 
@@ -144,7 +148,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **注記：**
 >
-> `tiup cluster check`次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルの修復もサポートされています。
+> `tiup cluster check` 、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルの修復もサポートされています。
 >
 > ```shell
 > tiup cluster check <cluster-name> scale-out.yml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -163,8 +167,8 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **注記：**
 >
-> -   `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプション`tiup cluster check <cluster-name> --cluster`を追加する必要があります。
-> -   `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルを確認することもサポートされています。
+> -   `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプション`tiup cluster check <cluster-name> --cluster`追加する必要があります。
+> -   `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルをチェックすることもサポートされています。
 >
 >     ```shell
 >     tiup cluster check <cluster-name> scale-out.yml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -178,7 +182,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **注記：**
 >
-> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがチェックされます。
+> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみがチェックされます。
 
 ### -R, --役割 {#r-role}
 
@@ -188,7 +192,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **注記：**
 >
-> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがチェックされます。
+> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみがチェックされます。
 
 ### --CPUを有効にする {#enable-cpu}
 
@@ -232,7 +236,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 -   ターゲットマシンに接続するときにパスワードを使用してログインします。
     -   クラスターに`--cluster`オプションが追加された場合、パスワードはクラスターがデプロイされたときにトポロジ ファイルで指定されたユーザーのパスワードになります。
-    -   クラスターにオプション`--cluster`が追加されていない場合、パスワードはオプション`-u/--user`で指定されたユーザーのパスワードになります。
+    -   クラスターにオプション`--cluster`追加されていない場合、パスワードはオプション`-u/--user`で指定されたユーザーのパスワードになります。
 -   データ型: `BOOLEAN`
 -   このオプションは、値`false`でデフォルトで無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないようにします。
 
