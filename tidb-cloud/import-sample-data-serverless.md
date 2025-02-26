@@ -1,9 +1,9 @@
 ---
-title: Import Sample Data
+title: Import Sample Data into TiDB Cloud Serverless
 summary: UI 経由でサンプル データをTiDB Cloud Serverless にインポートする方法を学習します。
 ---
 
-# サンプルデータのインポート {#import-sample-data}
+# サンプルデータをTiDB Cloud Serverlessにインポートする {#import-sample-data-into-tidb-cloud-serverless}
 
 このドキュメントでは、UI を介してサンプル データをTiDB Cloud Serverless にインポートする方法について説明します。使用するサンプル データは、Capital Bikeshare データ ライセンス契約に基づいてリリースされた Capital Bikeshare のシステム データです。サンプル データをインポートする前に、TiDB クラスターが 1 つ必要です。
 
@@ -99,7 +99,7 @@ summary: UI 経由でサンプル データをTiDB Cloud Serverless にインポ
     +-----------------+---------------+---------------------+---------------------+--------------------+------------------+-------------------------------------------+----------------+-----------+------------+-----------+------------+---------------+
     ```
 
-2.  電動自転車で旅行記録を取得:
+2.  電動自転車での旅行記録を取得:
 
     ```sql
     use bikeshare;

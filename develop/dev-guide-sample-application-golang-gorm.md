@@ -70,7 +70,7 @@ cd tidb-golang-gorm-quickstart
 
     -   **接続タイプ**は`Public`に設定されています
 
-    -   **ブランチは**`main`に設定されています
+    -   **ブランチ**は`main`に設定されています
 
     -   **接続先は**`General`に設定されています
 
@@ -80,11 +80,11 @@ cd tidb-golang-gorm-quickstart
     >
     > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」**をクリックします。
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
 5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -118,9 +118,9 @@ cd tidb-golang-gorm-quickstart
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
 
-    **パブリック**接続タイプに加えて、TiDB Dedicated は**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -178,7 +178,7 @@ cd tidb-golang-gorm-quickstart
     make
     ```
 
-2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-golang-gorm-quickstart/blob/main/Expected-Output.txt)をチェックして、出力が一致するかどうかを確認します。
+2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-golang-gorm-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
@@ -204,7 +204,7 @@ func createDB() *gorm.DB {
 }
 ```
 
-この関数を使用する場合、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}`を TiDB クラスターの実際の値に置き換える必要があります。TiDB TiDB Cloud Serverless では安全な接続が必要です。したがって、 `${use_ssl}`の値を`true`に設定する必要があります。
+この関数を使用する場合、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` TiDB クラスターの実際の値に置き換える必要があります。TiDB TiDB Cloud Serverless では安全な接続が必要です。したがって、 `${use_ssl}`の値を`true`に設定する必要があります。
 
 ### データを挿入 {#insert-data}
 
@@ -241,7 +241,7 @@ db.Delete(&Player{ID: "id"})
 
 ## 次のステップ {#next-steps}
 
--   GORM の詳しい使い方については、 [GORMのドキュメント](https://gorm.io/docs/index.html)と[GORMのドキュメントのTiDBセクション](https://gorm.io/docs/connecting_to_the_database.html#TiDB)参照してください。
+-   GORM の使い方を[GORMのドキュメント](https://gorm.io/docs/index.html)と[GORMのドキュメントのTiDBセクション](https://gorm.io/docs/connecting_to_the_database.html#TiDB)からさらに学びます。
 -   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
 -   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 

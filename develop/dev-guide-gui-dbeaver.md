@@ -11,7 +11,7 @@ summary: DBeaver コミュニティを使用して TiDB に接続する方法を
 
 > **注記：**
 >
-> このチュートリアルは、TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -51,17 +51,17 @@ summary: DBeaver コミュニティを使用して TiDB に接続する方法を
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
     -   **接続タイプ**は`Public`に設定されています
-    -   **ブランチは**`main`に設定されています
+    -   **ブランチ**は`main`に設定されています
     -   **接続先は**`DBeaver`に設定されています
     -   **オペレーティング システムは**環境に適合します。
 
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」**をクリックします。
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
-5.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続] ダイアログ**で、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
+5.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続**] ダイアログで、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
@@ -92,11 +92,11 @@ summary: DBeaver コミュニティを使用して TiDB に接続する方法を
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
 
-    **パブリック**接続タイプに加えて、TiDB Dedicated は**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
-4.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続] ダイアログ**で、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
+4.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続**] ダイアログで、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
@@ -128,7 +128,7 @@ summary: DBeaver コミュニティを使用して TiDB に接続する方法を
 </div>
 <div label="TiDB Self-Managed">
 
-1.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続] ダイアログ**で、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
+1.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースへの接続**] ダイアログで、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 

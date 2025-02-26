@@ -3,7 +3,7 @@ title: Connect to TiDB with TypeORM
 summary: TypeORM を使用して TiDB に接続する方法を学びます。このチュートリアルでは、TypeORM を使用して TiDB で動作する Node.js サンプル コード スニペットを紹介します。
 ---
 
-# TypeORM で TiDB に接続する {#connect-to-tidb-with-typeorm}
+# TypeORMでTiDBに接続する {#connect-to-tidb-with-typeorm}
 
 TiDB は MySQL 互換のデータベースであり、 [タイプORM](https://github.com/TypeORM/TypeORM) Node.js 用の人気のあるオープンソース ORM フレームワークです。
 
@@ -92,12 +92,12 @@ npm install @types/node ts-node typescript --save-dev
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
-    -   **ブランチは**`main`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
     -   **Connect With は**`General`に設定されています。
-    -   **オペレーティング システムは**、アプリケーションを実行するオペレーティング システムと一致します。
+    -   **オペレーティング システムは、**アプリケーションを実行するオペレーティング システムと一致します。
 
-4.  まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+4.  まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
 5.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -131,9 +131,9 @@ npm install @types/node ts-node typescript --save-dev
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
 
-    **パブリック**接続タイプに加えて、TiDB Dedicated は**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  次のコマンドを実行して`.env.example`コピーし、名前を`.env`に変更します。
 
@@ -274,7 +274,7 @@ export const AppDataSource = new DataSource({
 >
 > TiDB Cloud Serverless の場合、パブリックエンドポイントを使用するときは TLS 接続を有効にする必要があります。このサンプルコードでは、 `.env`ファイルの環境変数`TIDB_ENABLE_SSL` `true`に設定してください。
 >
-> ただし、Node.js はデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)使用し、これはTiDB Cloud Serverless によって信頼されているため、 `TIDB_CA_PATH`で SSL CA 証明書を指定する必要は**ありません**。
+> ただし、Node.js はデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用し、これはTiDB Cloud Serverless によって信頼されているため、 `TIDB_CA_PATH`で SSL CA 証明書を指定する必要は**ありません**。
 
 ### データを挿入 {#insert-data}
 
@@ -301,7 +301,7 @@ const player: Player | null = await this.dataSource.manager.findOneBy(Player, {
 
 ### データの更新 {#update-data}
 
-次のクエリは、ID `101`の商品`Player`に商品`50`を追加します。
+次のクエリは、ID `101`の商品`Player`に商品`50`追加します。
 
 ```typescript
 const player = await this.dataSource.manager.findOneBy(Player, {

@@ -9,7 +9,7 @@ TiDB は MySQL 互換のデータベースであり、 [ジェットブレイン
 
 > **注記：**
 >
-> このチュートリアルは、TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
+> このチュートリアルは、 TiDB Cloud Serverless、 TiDB Cloud Dedicated、および TiDB Self-Managed と互換性があります。
 
 DataGrip は次の 2 つの方法で使用できます。
 
@@ -56,21 +56,21 @@ DataGrip は次の 2 つの方法で使用できます。
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
     -   **接続タイプ**は`Public`に設定されています
-    -   **ブランチは**`main`に設定されています
+    -   **ブランチ**は`main`に設定されています
     -   **接続先は**`DataGrip`に設定されています
     -   **オペレーティング システムは**環境に適合します。
 
-4.  ランダムなパスワードを作成するには、 **「パスワードの生成」**をクリックします。
+4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
 
     > **ヒント：**
     >
-    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成することができます。
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」を**クリックして新しいパスワードを生成することができます。
 
 5.  DataGrip を起動し、接続を管理するためのプロジェクトを作成します。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-6.  新しく作成したプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB を**選択します。
+6.  新しく作成したプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -84,7 +84,7 @@ DataGrip は次の 2 つの方法で使用できます。
 
     ![Test the connection to a TiDB Cloud Serverless clustser](/media/develop/datagrip-test-connection.jpg)
 
-9.  **[OK] を**クリックして接続構成を保存します。
+9.  **[OK]**をクリックして接続構成を保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
@@ -95,19 +95,19 @@ DataGrip は次の 2 つの方法で使用できます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」**をクリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
 
-    **パブリック**接続タイプに加えて、TiDB Dedicated は**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
 
 4.  DataGrip を起動し、接続を管理するためのプロジェクトを作成します。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-5.  新しく作成したプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB を**選択します。
+5.  新しく作成したプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-6.  適切な接続文字列をコピーして、DataGrip の**[データ ソースとドライバー]**ウィンドウに貼り付けます。DataGrip フィールドとTiDB Cloud Dedicated 接続文字列間のマッピングは次のとおりです。
+6.  適切な接続文字列をコピーして、DataGrip の [**データ ソースとドライバー]**ウィンドウに貼り付けます。DataGrip フィールドとTiDB Cloud Dedicated 接続文字列間のマッピングは次のとおりです。
 
     | DataGrip フィールド | TiDB Cloud専用接続文字列 |
     | -------------- | ----------------- |
@@ -134,7 +134,7 @@ DataGrip は次の 2 つの方法で使用できます。
 
     ![Test the connection to a TiDB Cloud Dedicated cluster](/media/develop/datagrip-dedicated-test-connection.jpg)
 
-10. **[OK] を**クリックして接続構成を保存します。
+10. **[OK]**をクリックして接続構成を保存します。
 
 </div>
 <div label="TiDB Self-Managed">
@@ -143,7 +143,7 @@ DataGrip は次の 2 つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-2.  新しく作成したプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB を**選択します。
+2.  新しく作成したプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -164,7 +164,7 @@ DataGrip は次の 2 つの方法で使用できます。
 
     ![Test the connection to a TiDB Self-Managed cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
 
-5.  **[OK] を**クリックして接続構成を保存します。
+5.  **[OK]**をクリックして接続構成を保存します。
 
 </div>
 </SimpleTab>

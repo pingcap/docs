@@ -271,8 +271,8 @@
         -   [Amazon S3、GCS、または Azure Blob Storage から Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
         -   [MySQL CLI によるインポート](/tidb-cloud/import-with-mysql-cli-serverless.md)
     -   参照
-        -   [TiDB専用外部ストレージアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)
-        -   [TiDB Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)
+        -   [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)
+        -   [TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)
         -   [データインポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データをインポートするための CSV 構成](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3 からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -341,7 +341,7 @@
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
         -   [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
         -   [アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md)
-        -   [OAuth2.0 とは](/tidb-cloud/oauth2.md)
+        -   [認証局2.0](/tidb-cloud/oauth2.md)
     -   ネットワークアクセス制御
         -   TiDB Cloudサーバーレス
             -   [プライベートエンドポイント経由で接続](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
