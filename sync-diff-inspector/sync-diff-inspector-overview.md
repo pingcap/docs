@@ -10,7 +10,7 @@ aliases: ['/docs/dev/sync-diff-inspector/sync-diff-inspector-overview/','/docs/d
 
 This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. The installation method varies depending on your TiDB version:
 
-For TiDB v9.0.0 and later:
+For TiDB v9.0.0 and later versions:
 
 + Install using TiUP:
 
@@ -22,8 +22,6 @@ For TiDB v9.0.0 and later:
 
 + Docker image. Execute the following command to download:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     docker pull pingcap/sync-diff-inspector:latest
     ```
@@ -33,8 +31,6 @@ For TiDB versions before v9.0.0:
 + Binary package from the legacy tidb-tools repository. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 
 + Docker image (legacy version). Execute the following command to download:
-
-    {{< copyable "shell-regular" >}}
 
     ```shell
     docker pull pingcap/tidb-tools:latest
