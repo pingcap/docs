@@ -63,12 +63,13 @@ Do the following to import data from an SQL file:
 2. Use the following command to import data from the SQL file:
 
     ```bash
-    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p <your_password> < product_data.sql
+    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> < product_data.sql
     ```
 
 > **Note:**
 >
-> The default database name used here is `test`, and you can either manually create your own database or use the `CREATE DATABASE` command in an SQL file.
+> - The default database name used here is `test`, and you can either manually create your own database or use the `CREATE DATABASE` command in an SQL file.
+> - The MySQL v9.0 client on macOS cannot correctly load the `mysql_native_password` plugin, causing the error `ERROR 2059 (HY000): Authentication plugin 'mysql_native_password' cannot be loaded` when connecting to TiDB. To address this issue, it is recommended to install and use the MySQL v8.0 client to connect to TiDB.
 
 </div>
 <div label="From a CSV file">

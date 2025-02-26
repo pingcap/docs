@@ -39,10 +39,6 @@ To connect to a TiDB Cloud Dedicated cluster via public connection, take the fol
 
 5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
-> **Note:**
->
-> The MySQL v9.0 client on macOS cannot correctly load the `mysql_native_password` plugin, causing the error `ERROR 2059 (HY000): Authentication plugin 'mysql_native_password' cannot be loaded` when connecting to TiDB. To address this issue, it is recommended to install and use the MySQL v8.0 client to connect to TiDB.
-
 ## What's next
 
 After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
