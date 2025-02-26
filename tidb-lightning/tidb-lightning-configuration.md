@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-configuration/','/docs/dev/re
 
 # TiDB Lightning Configuration
 
-This document provides samples for global configuration and task configuration, and describes the usage of command-line parameters.
+This document provides samples for global configuration and task configuration, and describes the usage of command-line parameters. You can find a sample configuration file in [`lightning/tidb-lightning.toml`](https://github.com/pingcap/tidb/blob/master/lightning/tidb-lightning.toml).
 
 TiDB Lightning has two configuration classes: "global" and "task", and they have compatible structures. Their distinction arises only when the [server mode](/tidb-lightning/tidb-lightning-web-interface.md) is enabled. When server mode is disabled (the default), TiDB Lightning will only execute one task, and the same configuration file is used for both global and task configurations.
 
