@@ -283,7 +283,7 @@ The following configuration items only take effect for the TiFlash disaggregated
 ##### `advertise-status-addr`
 
 - The external access address of status-addr. If it is left empty, the value of `status-addr` is used by default.
-- Should guarantee that other nodes can access through `advertise-status-addr` when you deploy the cluster on multiple nodes.
+- You should guarantee that other nodes can access it through `advertise-status-addr` when you deploy the cluster on multiple nodes.
 
 ##### `engine-addr`
 
