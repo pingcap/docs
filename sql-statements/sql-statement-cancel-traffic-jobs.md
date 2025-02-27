@@ -63,7 +63,7 @@ SHOW TRAFFIC JOBS
 
 ## MySQL compatibility
 
-The `CANCEL TRAFFIC JOBS` syntax is TiDB-specific and not compatible with MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

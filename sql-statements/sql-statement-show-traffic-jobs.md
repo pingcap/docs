@@ -66,7 +66,7 @@ The following output example shows that the traffic replay jobs of two TiProxy i
 
 ## MySQL compatibility
 
-The `SHOW TRAFFIC JOBS` syntax is TiDB-specific and not compatible with MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

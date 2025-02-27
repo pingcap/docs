@@ -57,7 +57,7 @@ TRAFFIC CAPTURE TO "/tmp/traffic" DURATION="1h" COMPRESS=false ENCRYPTION_METHOD
 
 ## MySQL compatibility
 
-The `TRAFFIC CAPTURE` syntax is TiDB-specific and not compatible with MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

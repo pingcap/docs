@@ -61,7 +61,7 @@ TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456" READ_ONLY=true
 
 ## MySQL compatibility
 
-The `TRAFFIC REPLAY` syntax is TiDB-specific and not compatible with MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

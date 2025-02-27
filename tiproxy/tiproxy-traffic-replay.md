@@ -298,6 +298,7 @@ For more information, see [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command
 ## Limitations
 
 - TiProxy only supports replaying traffic files captured by TiProxy and does not support other file formats. Therefore, make sure to capture traffic from the production cluster using TiProxy first.
+- TiProxy does not support replaying [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statements.
 - For security reasons, the following statements will not be captured and replayed:
 
     - `CREATE USER` statement
