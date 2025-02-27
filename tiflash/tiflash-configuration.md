@@ -24,7 +24,7 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
   >
   > Since v4.0.2, the `store-balance-rate` parameter has been deprecated and changes have been made to the `store limit` command. See [store-limit](/configure-store-limit.md) for details.
 
-    - Execute the `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` command to set the scheduling rate of a specified store. (To get `store_id`, you can execute the `pd-ctl -u <pd_ip:pd_port> store` command.
+    - Execute the `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` command to set the scheduling rate of a specified store. To get `store_id`, you can execute the `pd-ctl -u <pd_ip:pd_port> store` command.
     - If you do not set the scheduling rate for Regions of a specified store, this store inherits the setting of `store-balance-rate`.
     - You can execute the `pd-ctl -u <pd_ip:pd_port> store limit` command to view the current setting value of `store-balance-rate`.
 
@@ -40,320 +40,550 @@ This section introduces the configuration parameters of TiFlash.
 
 ### Configure the `tiflash.toml` file
 
-```toml
-## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0", which means to listen on all IP addresses of this machine.
-listen_host = "0.0.0.0"
-## The TiFlash TCP service port. This port is used for internal testing and is set to 9000 by default. Before TiFlash v7.1.0, this port is enabled by default with a security risk. To enhance security, it is recommended to apply access control on this port to only allow access from whitelisted IP addresses. Starting from TiFlash v7.1.0, you can avoid the security risk by commenting out the configuration of this port. When the TiFlash configuration file does not specify this port, it will be disabled. 
-## It is **NOT** recommended to configure this port in any TiFlash deployment. (Note: Starting from TiFlash v7.1.0, TiFlash deployed by TiUP >= v1.12.5 or TiDB Operator >= v1.5.0 disables the port by default and is more secure.)
-# tcp_port = 9000
-## The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
-mark_cache_size = 1073741824
-## The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
-minmax_index_cache_size = 1073741824
-## The cache size limit of the DeltaIndex. The default value is 0, which means no limit.
-delta_index_cache_size = 0
+#### `listen_host`
 
-## The storage path of TiFlash data. If there are multiple directories, separate each directory with a comma.
-## path and path_realtime_mode are deprecated since v4.0.9. Use the configurations
-## in the [storage] section to get better performance in the multi-disk deployment scenarios
-## Since TiDB v5.2.0, if you need to use the storage.io_rate_limit configuration, you need to set the storage path of TiFlash data to storage.main.dir at the same time.
-## When the [storage] configurations exist, both path and path_realtime_mode configurations are ignored.
-# path = "/tidb-data/tiflash-9000"
-## or
-# path = "/ssd0/tidb-data/tiflash,/ssd1/tidb-data/tiflash,/ssd2/tidb-data/tiflash"
-## The default value is false. If you set it to true and multiple directories
-## are set in the path, the latest data is stored in the first directory and older
-## data is stored in the rest directories.
-# path_realtime_mode = false
+- The listening host for supporting services such as TPC/HTTP.
+- It is recommended to configure it as `"0.0.0.0"`, which means listening on all IP addresses of this machine.
 
-## The path in which the TiFlash temporary files are stored. By default it is the first directory in path
-## or in storage.latest.dir appended with "/tmp".
-# tmp_path = "/tidb-data/tiflash-9000/tmp"
+#### `tcp_port`
 
-## Storage paths settings take effect starting from v4.0.9
-[storage]
+- The TiFlash TCP service port. This port is used for internal testing and is set to 9000 by default.
+- Before TiFlash v7.1.0, this port is enabled by default with a security risk. To enhance security, it is recommended to apply access control on this port to only allow access from whitelisted IP addresses. Starting from TiFlash v7.1.0, you can avoid the security risk by commenting out the configuration of this port. When the TiFlash configuration file does not specify this port, it will be disabled. 
+- It is **NOT** recommended to configure this port in any TiFlash deployment. (Note: Starting from TiFlash v7.1.0, TiFlash deployed by TiUP >= v1.12.5 or TiDB Operator >= v1.5.0 disables the port by default and is more secure.)
+- Default value: `9000`
 
-    ## DTFile format
-    ## * format_version = 2, the default format for versions < v6.0.0.
-    ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
-    ## * format_version = 4, the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption
-    ## * format_version = 5, introduced in v7.3.0, the default format for versions from v7.4.0 to v8.3.0, which reduces the number of physical files by merging smaller files.
-    ## * format_version = 6, introduced in v8.4.0, which partially supports the building and storage of vector indexes.
-    ## * format_version = 7, introduced in v8.4.0, the default format for v8.4.0 and later versions, which supports the build and storage of vector indexes
-    # format_version = 7
+#### `mark_cache_size`
 
-    [storage.main]
-    ## The list of directories to store the main data. More than 90% of the total data is stored in
-    ## the directory list.
-    dir = [ "/tidb-data/tiflash-9000" ]
-    ## or
-    # dir = [ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]
+- The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
+- Default value: `1073741824`
 
-    ## The maximum storage capacity of each directory in storage.main.dir.
-    ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
-    ## Note that human-readable numbers such as "10GB" are not supported yet.
-    ## Numbers are specified in bytes.
-    ## The size of the capacity list should be the same with the dir size.
-    ## For example:
-    # capacity = [ 10737418240, 10737418240 ]
+#### `minmax_index_cache_size`
 
-    [storage.latest]
-    ## The list of directories to store the latest data. About 10% of the total data is stored in
-    ## the directory list. The directories (or directory) listed here require higher IOPS
-    ## metrics than those in storage.main.dir.
-    ## If it is not set (by default), the values of storage.main.dir are used.
-    # dir = [ ]
-    ## The maximum storage capacity of each directory in storage.latest.dir.
-    ## If it is not set, or is set to multiple 0, the actual disk (the disk where the directory is located) capacity is used.
-    # capacity = [ 10737418240, 10737418240 ]
+- The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
+- Default value: `1073741824`
 
-    ## [storage.io_rate_limit] settings are new in v5.2.0.
-    [storage.io_rate_limit]
-    ## This configuration item determines whether to limit the I/O traffic, which is disabled by default. This traffic limit in TiFlash is suitable for cloud storage that has the disk bandwidth of a small and specific size.
-    ## The total I/O bandwidth for disk reads and writes. The unit is bytes and the default value is 0, which means the I/O traffic is not limited by default.
-    # max_bytes_per_sec = 0
-    ## max_read_bytes_per_sec and max_write_bytes_per_sec have similar meanings to max_bytes_per_sec. max_read_bytes_per_sec means the total I/O bandwidth for disk reads, and max_write_bytes_per_sec means the total I/O bandwidth for disk writes.
-    ## These configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud.
-    ## When the value of max_bytes_per_sec is not 0, max_bytes_per_sec is prioritized.
-    # max_read_bytes_per_sec = 0
-    # max_write_bytes_per_sec = 0
+#### `delta_index_cache_size`
 
-    ## The following parameters control the bandwidth weights assigned to different I/O traffic types. Generally, you do not need to adjust these parameters.
-    ## TiFlash internally divides I/O requests into four types: foreground writes, background writes, foreground reads, background reads.
-    ## When the I/O traffic limit is initialized, TiFlash assigns the bandwidth according to the following weight ratio.
-    ## The following  default configurations indicate that each type of traffic gets a weight of 25% (25 / (25 + 25 + 25 + 25) = 25%).
-    ## If the weight is configured to 0, the corresponding I/O traffic is not limited.
-    # foreground_write_weight = 25
-    # background_write_weight = 25
-    # foreground_read_weight = 25
-    # background_read_weight = 25
-    ## TiFlash supports automatically tuning the traffic limit for different I/O types according to the current I/O load. Sometimes, the tuned bandwidth might exceed the weight ratio set above.
-    ## auto_tune_sec indicates the interval of automatic tuning. The unit is seconds. If the value of auto_tune_sec is 0, the automatic tuning is disabled.
-    # auto_tune_sec = 5
+- The cache size limit of the DeltaIndex.
+- Default value: `0`, which means no limit.
 
-    ## The following configuration items only take effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
-    # [storage.s3]
-    # endpoint: http://s3.{region}.amazonaws.com # S3 endpoint address
-    # bucket: mybucket                           # TiFlash stores all data in this bucket
-    # root: /cluster1_data                       # Root directory where data is stored in the S3 bucket
-    # access_key_id: {ACCESS_KEY_ID}             # Access S3 with ACCESS_KEY_ID
-    # secret_access_key: {SECRET_ACCESS_KEY}     # Access S3 with SECRET_ACCESS_KEY
-    # [storage.remote.cache]
-    # dir: /data1/tiflash/cache        # Local data cache directory of the Compute Node
-    # capacity: 858993459200           # 800 GiB
+#### `path`
 
-[flash]
-    ## The listening address of TiFlash coprocessor services.
-    service_addr = "0.0.0.0:3930"
+- The storage path of TiFlash data. If there are multiple directories, separate each directory with a comma.
+- Starting from TiDB v4.0.9, `path` and [`path_realtime_mode`](#path_realtime_mode) are deprecated. Use the configurations in the [`storage`](#storage-new-in-v409) section to get better performance in the multi-disk deployment scenarios.
+- Starting from TiDB v5.2.0, if you need to use the [`storage.io_rate_limit`](#storageio_rate_limit-new-in-v520) configuration, you need to set the storage path of TiFlash data to [`storage.main.dir`](#dir) at the same time.
+- When the `storage` configurations exist, both `path` and [`path_realtime_mode`](#path_realtime_mode) configurations are ignored.
 
-    ## Introduced in v7.4.0. When the gap between the `applied_index` advanced by the current Raft state machine and the `applied_index` at the last disk spilling exceeds `compact_log_min_gap`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk. Increasing this gap might reduce the disk spilling frequency of TiFlash, thus reducing read latency in random write scenarios, but it might also increase memory overhead. Decreasing this gap might increase the disk spilling frequency of TiFlash, thus alleviating memory pressure in TiFlash. However, at this stage, the disk spilling frequency of TiFlash will not be higher than that of TiKV, even if this gap is set to 0.
-    ## It is recommended to keep the default value.
-    # compact_log_min_gap = 200
-    ## Introduced in v5.0. When the number or the size of rows in the Regions cached by TiFlash exceeds either of the following thresholds, TiFlash executes the `CompactLog` command from TiKV and spills data to disk.
-    ## It is recommended to keep the default value.
-    # compact_log_min_rows = 40960 # 40k
-    # compact_log_min_bytes = 33554432 # 32MB
+<!-- Example: `"/tidb-data/tiflash-9000"` or `"/ssd0/tidb-data/tiflash,/ssd1/tidb-data/tiflash,/ssd2/tidb-data/tiflash"` -->
 
-    ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
-    # disaggregated_mode = tiflash_write # The supported mode is `tiflash_write` or `tiflash_compute.
+#### `path_realtime_mode`
 
-[flash.proxy]
-    ## The listening address of proxy. If it is left empty, 127.0.0.1:20170 is used by default.
-    addr = "127.0.0.1:20170"
-    ## The external access address of addr. If it is left empty, "addr" is used by default.
-    ## Should guarantee that other nodes can access through `advertise-addr` when you deploy the cluster on multiple nodes.
-    advertise-addr = ""
-    ## The listening address from which the proxy pulls metrics or status information. If it is left empty, 127.0.0.1:20292 is used by default.
-    status-addr = "127.0.0.1:20292"
-    ## The external access address of status-addr. If it is left empty, the value of "status-addr" is used by default.
-    ## Should guarantee that other nodes can access through `advertise-status-addr` when you deploy the cluster on multiple nodes.
-    advertise-status-addr = ""
-    ## The external access address of the TiFlash coprocessor service.
-    engine-addr = "10.0.1.20:3930"
-    ## The data storage path of proxy.
-    data-dir = "/tidb-data/tiflash-9000/flash"
-    ## The configuration file path of proxy.
-    config = "/tidb-deploy/tiflash-9000/conf/tiflash-learner.toml"
-    ## The log path of proxy.
-    log-file = "/tidb-deploy/tiflash-9000/log/tiflash_tikv.log"
+- If you set it to `true` and multiple directories are set in the `path`, the latest data is stored in the first directory and older data is stored in the rest directories.
+- Starting from TiDB v4.0.9, [`path`](#path) and `path_realtime_mode` are deprecated. Use the configurations in the [`storage`](#storage-new-in-v409) section to get better performance in the multi-disk deployment scenarios.
+- When the `storage` configurations exist, both [`path`](#path) and `path_realtime_mode` configurations are ignored.
+- Default value: `false`
 
-[logger]
-    ## Note that the following parameters only take effect in tiflash.log and tiflash_error.log. If you need to configure log parameters of TiFlash Proxy, specify them in tiflash-learner.toml.
-    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "info".
-    level = "info"
-    ## The log of TiFlash.
-    log = "/tidb-deploy/tiflash-9000/log/tiflash.log"
-    ## The error log of TiFlash. The "warn" and "error" level logs are also output to this log file.
-    errorlog = "/tidb-deploy/tiflash-9000/log/tiflash_error.log"
-    ## Size of a single log file. The default value is "100M".
-    size = "100M"
-    ## Maximum number of log files to save. The default value is 10. For TiFlash logs and TiFlash error logs, the maximum number of log files to save is `count` respectively.
-    count = 10
+#### `tmp_path`
 
-[raft]
-    ## PD service address. Multiple addresses are separated with commas.
-    pd_addr = "10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"
+- The path in which the TiFlash temporary files are stored.
+- By default, it is the first directory in [`path`](#path) or in [`storage.latest.dir`](#dir-1) appended with `"/tmp"`.
 
-[status]
-    ## The port through which Prometheus pulls metrics information. The default value is 8234.
-    metrics_port = 8234
+<!-- Example: `"/tidb-data/tiflash-9000/tmp"` -->
 
-[profiles]
+#### storage <span class="version-mark">New in v4.0.9</span>
 
-[profiles.default]
-    ## The default value is false. This parameter determines whether the segment
-    ## of DeltaTree Storage Engine uses logical split.
-    ## Using the logical split can reduce the write amplification.
-    ## However, these are at the cost of disk space waste.
-    ## It is strongly recommended to keep the default value `false` and
-    ## not to change it to `true` in v6.2.0 and later versions. For details,
-    ## see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
-    # dt_enable_logical_split = false
+Configure storage path related settings.
 
-    ## `max_threads` indicates the internal thread concurrency when TiFlash executes an MPP task.
-    ## The default value is 0. When it is set to 0,
-    ## TiFlash uses the number of CPU cores as the execution concurrency.
-    ## This parameter only takes effect
-    ## when the system variable `tidb_max_tiflash_threads` is set to -1.
-    max_threads = 0
-    
-    ## The memory usage limit for the generated intermediate data in a single query.
-    ## When the value is an integer, the unit is byte. For example, 34359738368 means 32 GiB of memory limit, and 0 means no limit.
-    ## When the value is a floating-point number in the range of [0.0, 1.0), it means the ratio of the allowed memory usage to the total memory of the node. For example, 0.8 means 80% of the total memory, and 0.0 means no limit.
-    ## The default value is 0, which means no limit.
-    ## When a query attempts to consume memory that exceeds this limit, the query is terminated and an error is reported.
-    max_memory_usage = 0
+##### `format_version`
 
-    ## The memory usage limit for the generated intermediate data in all queries.
-    ## When the value is an integer, the unit is byte. For example, 34359738368 means 32 GiB of memory limit, and 0 means no limit.
-    ## When the value is a floating-point number in the range of [0.0, 1.0), it means the ratio of the allowed memory usage to the total memory of the node. For example, 0.8 means 80% of the total memory, and 0.0 means no limit.
-    ## The default value is 0.8, which means 80% of the total memory.
-    ## When the queries attempt to consume memory that exceeds this limit, the queries are terminated and an error is reported.
-    max_memory_usage_for_all_queries = 0.8
+- The DTFile format.
+- Default value: `7`
+- Value options: `2`, `3`, `4`, `5`, `6`, `7`
+    - `format_version = 2`: the default format for versions < v6.0.0.
+    - `format_version = 3`: the default format for v6.0.0 and v6.1.x, which provides more data validation features.
+    - `format_version = 4`: the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption.
+    - `format_version = 5`: introduced in v7.3.0, the default format for versions from v7.4.0 to v8.3.0, which reduces the number of physical files by merging smaller files.
+    - `format_version = 6`: introduced in v8.4.0, which partially supports the building and storage of vector indexes.
+    - `format_version = 7`: introduced in v8.4.0, the default format for v8.4.0 and later versions, which supports the build and storage of vector indexes.
 
-    ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
-    cop_pool_size = 0
+#### storage.main
 
-    ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor handles at the same time, including the requests being executed and the requests waiting in the queue. If the number of requests exceeds the specified value, the error "TiFlash Server is Busy" is returned. -1 indicates no limit; 0 indicates using the default value, which is 10 * cop_pool_size.
-    cop_pool_handle_limit = 0
+##### `dir`
 
-    ## New in v5.0. This item specifies the maximum time that a cop request can queue in TiFlash. If a cop request waits in the queue for a time longer than the value specified by this configuration, the error "TiFlash Server is Busy" is returned. A value less than or equal to 0 indicates no limit.
-    cop_pool_max_queued_seconds = 15
+- The list of directories to store the main data. For example: `[ "/tidb-data/tiflash-9000" ]` or `[ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]`.
+- More than 90% of the total data is stored in the directory list.
 
-    ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
-    batch_cop_pool_size = 0
-    ## New in v6.1.0. This item specifies the number of requests that TiFlash can concurrently process when it receives ALTER TABLE ... COMPACT from TiDB.
-    ## If the value is set to 0, the default value 1 prevails.
-    manual_compact_pool_size = 1
-    ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is true.
-    enable_elastic_threadpool = true
-    ## Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
-    dt_compression_method = "LZ4"
-    ## Compression level of the TiFlash storage engine. The default value is 1.
-    ## It is recommended that you set this value to 1 if dt_compression_method is LZ4.
-    ## It is recommended that you set this value to -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd.
-    ## It is recommended that you set this value to 9 if dt_compression_method is LZ4HC.
-    dt_compression_level = 1
+##### `capacity`
 
-    ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
-    dt_page_gc_threshold = 0.5
+- The maximum storage capacity of each directory in [`storage.main.dir`](#dir). For example `[10737418240, 10737418240]`.
+- If it is not set, or is set to multiple `0`, the actual disk (the disk where the directory is located) capacity is used.
+- Unit: Byte. Note that human-readable numbers such as `"10GB"` are not supported yet.
+- The size of the `capacity` list should be the same with the [`storage.main.dir`](#dir) size.
 
-    ## New in v7.0.0. This item specifies the maximum memory available for the HashAggregation operator with group by key before a disk spill is triggered. When the memory usage exceeds the threshold, HashAggregation reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashAggregation.
-    max_bytes_before_external_group_by = 0
+#### storage.latest
 
-    ## New in v7.0.0. This item specifies the maximum memory available for the sort or topN operator before a disk spill is triggered. When the memory usage exceeds the threshold, the sort or topN operator reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for sort or topN.
-    max_bytes_before_external_sort = 0
+##### `dir`
 
-    ## New in v7.0.0. This item specifies the maximum memory available for the HashJoin operator with EquiJoin before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashJoin with EquiJoin.
-    max_bytes_before_external_join = 0
+- The list of directories to store the latest data. About 10% of the total data is stored in the directory list. The directories (or directory) listed here require higher IOPS metrics than those [`storage.main.dir`](#dir).
+- If it is not set (by default), the values of [`storage.main.dir`](#dir) are used.
 
-    ## New in v7.4.0. This item controls whether to enable the TiFlash resource control feature. When it is set to true, TiFlash uses the pipeline execution model.
-    enable_resource_control = true
+<!-- Example: `[]` -->
 
-    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads that one resource group can use. The default value is 5000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
-    task_scheduler_thread_soft_limit = 5000
+##### `capacity`
 
-    ## New in v6.0.0. This item is used for the MinTSO scheduler. It specifies the maximum number of threads in the global scope. The default value is 10000. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
-    task_scheduler_thread_hard_limit = 10000
+- The maximum storage capacity of each directory in [`storage.latest.dir`](#dir-1). If it is not set, or is set to multiple `0`, the actual disk (the disk where the directory is located) capacity is used.
 
-    ## New in v6.4.0. This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. The default value is 0, which means twice the number of vCPUs. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
-    task_scheduler_active_set_soft_limit = 0
+<!-- Example: `[10737418240, 10737418240]` -->
 
-## Security settings take effect starting from v4.0.5.
-[security]
-    ## New in v5.0. This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.2.0.
-    ## If the configuration item is set to `false` or `"off"`, log redaction is disabled.
-    ## If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
-    ## If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
-    ## The default value is `false`.
-    ## Note that you also need to set security.redact-info-log for tiflash-learner's logging in tiflash-learner.toml.
-    # redact_info_log = false
+#### storage.io_rate_limit <span class="version-mark">New in v5.2.0</span>
 
-    ## Path of the file that contains a list of trusted SSL CAs. If set, the following settings
-    ## cert_path and key_path are also needed.
-    # ca_path = "/path/to/ca.pem"
-    ## Path of the file that contains X509 certificate in PEM format.
-    # cert_path = "/path/to/tiflash-server.pem"
-    ## Path of the file that contains X509 key in PEM format.
-    # key_path = "/path/to/tiflash-server-key.pem"
-```
+Configure the I/O traffic limit settings.
+
+##### `max_bytes_per_sec`
+
+- The total I/O bandwidth for disk reads and writes. This configuration item determines whether to limit the I/O traffic, which is disabled by default. This traffic limit in TiFlash is suitable for cloud storage that has the disk bandwidth of a small and specific size.
+- Default value: `0`, which means the I/O traffic is not limited by default.
+- Unit: Byte
+
+##### `max_read_bytes_per_sec`
+
+- The total I/O bandwidth for disk reads.
+- `max_read_bytes_per_sec` and `max_write_bytes_per_sec` configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud.
+- When the value of `max_bytes_per_sec` is not `0`, [`max_bytes_per_sec`](#max_bytes_per_sec) is prioritized.
+- Default value: `0`
+
+##### `max_write_bytes_per_sec`
+
+- The total I/O bandwidth for disk writes.
+- `max_read_bytes_per_sec` and `max_write_bytes_per_sec` configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud.
+- When the value of `max_bytes_per_sec` is not `0`, [`max_bytes_per_sec`](#max_bytes_per_sec) is prioritized.
+- Default value: `0`
+
+##### `foreground_write_weight`
+
+<!-- The following  default configurations indicate that each type of traffic gets a weight of 25% (25 / (25 + 25 + 25 + 25) = 25%) -->
+
+- TiFlash internally divides I/O requests into four types: foreground writes, background writes, foreground reads, background reads. `foreground_write_weight` controls the bandwidth weights assigned to foreground write I/O traffic type. Generally, you do not need to adjust these parameters.
+- When the I/O traffic limit is initialized, TiFlash allocates bandwidth for these four types of requests according to the ratio of `foreground_write_weight`, [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight), [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight), and [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight).
+- If the weight is configured to `0`, the corresponding I/O traffic is not limited.
+- Default value: `25`, representing an allocation of 25% of the bandwidth.
+
+##### `background_write_weight`
+
+- TiFlash internally divides I/O requests into four types: foreground writes, background writes, foreground reads, background reads. `background_write_weight` controls the bandwidth weights assigned to background write I/O traffic type. Generally, you do not need to adjust these parameters.
+- When the I/O traffic limit is initialized, TiFlash allocates bandwidth for these four types of requests according to the ratio of [`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight), `background_write_weight`, [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight), and [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight).
+- If the weight is configured to `0`, the corresponding I/O traffic is not limited.
+- Default value: `25`, representing an allocation of 25% of the bandwidth.
+
+##### `foreground_read_weight`
+
+- TiFlash internally divides I/O requests into four types: foreground writes, background writes, foreground reads, background reads. `foreground_read_weight` controls the bandwidth weights assigned to foreground read I/O traffic type. Generally, you do not need to adjust these parameters.
+- When the I/O traffic limit is initialized, TiFlash allocates bandwidth for these four types of requests according to the ratio of [`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight), [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight), `foreground_read_weight`, and [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight).
+- If the weight is configured to `0`, the corresponding I/O traffic is not limited.
+- Default value: `25`, representing an allocation of 25% of the bandwidth.
+
+##### `background_read_weight`
+
+- TiFlash internally divides I/O requests into four types: foreground writes, background writes, foreground reads, background reads. `background_read_weight` controls the bandwidth weights assigned to background read I/O traffic type. Generally, you do not need to adjust these parameters.
+- When the I/O traffic limit is initialized, TiFlash allocates bandwidth for these four types of requests according to the ratio of [`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight), [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight), [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight), and `background_read_weight`.
+- If the weight is configured to `0`, the corresponding I/O traffic is not limited.
+- Default value: `25`, representing an allocation of 25% of the bandwidth.
+
+##### `auto_tune_sec`
+
+- TiFlash supports automatically tuning the traffic limit for different I/O types according to the current I/O load. Sometimes, the tuned bandwidth might exceed the weight ratio set above.
+- `auto_tune_sec` indicates the interval of automatic tuning. If the value of auto_tune_sec is `0`, the automatic tuning is disabled.
+- Default value: `5`
+- Unit: Seconds
+
+#### storage.s3
+
+The following configuration items only take effect for the TiFlash disaggregated storage and compute architecture mode. For details, see [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md).
+
+##### `endpoint`
+
+- The S3 endpoint address. For example: `http://s3.{region}.amazonaws.com`.
+
+##### `bucket`
+
+- TiFlash stores all data in this bucket.
+
+##### `root`
+
+- The root directory where data is stored in the S3 bucket. For example: `/cluster1_data`.
+
+##### `access_key_id`
+
+- The ACCESS_KEY_ID used to access S3.
+
+##### `secret_access_key`
+
+- The SECRET_ACCESS_KEY used to access S3.
+
+#### storage.remote.cache
+
+##### `dir`
+
+- The local data cache directory of the Compute Node in the disaggregated storage and compute architecture.
+
+<!-- Example: `"/data1/tiflash/cache"` -->
+
+##### `capacity`
+
+- Example: `858993459200` (800 GiB)
+
+#### flash
+
+##### `service_addr`
+
+- The listening address of TiFlash coprocessor services.
+
+<!-- Example: `"0.0.0.0:3930"` -->
+
+##### `compact_log_min_gap` <span class="version-mark">New in v7.4.0</span>
+
+- When the gap between the `applied_index` advanced by the current Raft state machine and the `applied_index` at the last disk spilling exceeds `compact_log_min_gap`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk.
+- Increasing this gap might reduce the disk spilling frequency of TiFlash, thus reducing read latency in random write scenarios, but it might also increase memory overhead. Decreasing this gap might increase the disk spilling frequency of TiFlash, thus alleviating memory pressure in TiFlash. However, at this stage, the disk spilling frequency of TiFlash will not be higher than that of TiKV, even if this gap is set to `0`.
+- It is recommended to keep the default value.
+- Default value: `200`
+
+##### `compact_log_min_rows` <span class="version-mark">New in v5.0</span>
+
+- When the number or the size of rows in the Regions cached by TiFlash exceeds either `compact_log_min_rows` or `compact_log_min_bytes`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk.
+- It is recommended to keep the default value.
+- Default value: `40960`
+
+##### `compact_log_min_bytes` <span class="version-mark">New in v5.0</span>
+
+- When the number or the size of rows in the Regions cached by TiFlash exceeds either `compact_log_min_rows` or `compact_log_min_bytes`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk.
+- It is recommended to keep the default value.
+- Default value: `33554432`
+
+##### `disaggregated_mode`
+
+- This configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md).
+- Value options: `"tiflash_write"`, `"tiflash_compute"`
+
+#### flash.proxy
+
+##### `addr`
+
+- The listening address of proxy.
+- Default value: `"127.0.0.1:20170"`
+
+##### `advertise-addr`
+
+- The external access address of `addr`. If it is left empty, `addr` is used by default.
+- You should guarantee that other nodes can access through `advertise-addr` when you deploy the cluster on multiple nodes.
+
+##### `status-addr`
+
+- The listening address from which the proxy pulls metrics or status information.
+- Default value: `"127.0.0.1:20292"`
+
+##### `advertise-status-addr`
+
+- The external access address of status-addr. If it is left empty, the value of `status-addr` is used by default.
+- You should guarantee that other nodes can access it through `advertise-status-addr` when you deploy the cluster on multiple nodes.
+
+##### `engine-addr`
+
+- The external access address of the TiFlash coprocessor service.
+
+<!-- Example: `"10.0.1.20:3930"` -->
+
+##### `data-dir`
+
+- The data storage path of proxy.
+
+<!-- Example: `"/tidb-data/tiflash-9000/flash"` -->
+
+##### `config`
+
+- The configuration file path of proxy.
+
+<!-- Example: `"/tidb-deploy/tiflash-9000/conf/tiflash-learner.toml"` -->
+
+##### `log-file`
+
+- The log path of proxy.
+
+<!-- Example: `"/tidb-deploy/tiflash-9000/log/tiflash_tikv.log"` -->
+
+#### logger
+
+Note that the following parameters only take effect in TiFlash logs and TiFlash error logs. If you need to configure log parameters of TiFlash Proxy, specify them in [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file).
+
+##### `level`
+
+- The log level.
+- Default value: `"info"`
+- Value options: `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`
+
+##### `log`
+
+- The log of TiFlash.
+
+<!-- Example: `"/tidb-deploy/tiflash-9000/log/tiflash.log"` -->
+
+##### `errorlog`
+
+- The error log of TiFlash. The `"warn"` and `"error"` level logs are also output to this log file.
+
+<!-- Example: `"/tidb-deploy/tiflash-9000/log/tiflash_error.log"` -->
+
+##### `size`
+
+- The size of a single log file.
+- Default value: `"100M"`
+
+##### `count`
+
+- The maximum number of log files to save. For TiFlash logs and TiFlash error logs, the maximum number of log files to save is `count` respectively.
+- Default value: `10`
+
+#### raft
+
+##### `pd_addr`
+
+- The PD service address.
+- Multiple addresses are separated with commas. For example, `"10.0.1.11:2379,10.0.1.12:2379,10.0.1.13:2379"`.
+
+#### status
+
+##### `metrics_port`
+
+- The port through which Prometheus pulls metrics information.
+- Default value: `8234`
+
+#### profiles.default
+
+##### `dt_enable_logical_split`
+
+- Determines whether the segment of DeltaTree Storage Engine uses logical split. Using the logical split can reduce the write amplification. However, these are at the cost of disk space waste.
+- It is strongly recommended to keep the default value `false` and not to change it to `true` in v6.2.0 and later versions. For details, see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
+- Default value: `false`
+
+##### `max_threads`
+
+- `max_threads` indicates the internal thread concurrency when TiFlash executes an MPP task. When it is set to 0, TiFlash uses the number of CPU cores as the execution concurrency.
+- This parameter only takes effect when the system variable [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) is set to `-1`.
+- Default value: `0`
+
+##### `max_memory_usage`
+
+- The memory usage limit for the generated intermediate data in a single query.
+- When the value is an integer, the unit is byte. For example, `34359738368` means 32 GiB of memory limit.
+- When the value is a floating-point number in the range of `[0.0, 1.0)`, it means the ratio of the allowed memory usage to the total memory of the node. For example, `0.8` means 80% of the total memory, and `0.0` means no limit.
+- When a query attempts to consume memory that exceeds this limit, the query is terminated and an error is reported.
+- Default value: `0`, which means no limit.
+
+##### `max_memory_usage_for_all_queries`
+
+- The memory usage limit for the generated intermediate data in all queries.
+- When the value is an integer, the unit is byte. For example, `34359738368` means 32 GiB of memory limit, and `0` means no limit.
+- When the value is a floating-point number in the range of `[0.0, 1.0)`, it means the ratio of the allowed memory usage to the total memory of the node. For example, `0.8` means 80% of the total memory, and `0.0` means no limit.
+- When the queries attempt to consume memory that exceeds this limit, the queries are terminated and an error is reported.
+- Default value: `0.8`, which means 80% of the total memory.
+
+##### `cop_pool_size` <span class="version-mark">New in v5.0</span>
+
+- Specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to `0` or not set, the default value is used, which is twice the number of physical cores.
+- Default value: twice the number of physical cores
+
+##### `cop_pool_handle_limit` <span class="version-mark">New in v5.0</span>
+
+- Specifies the maximum number of cop requests that TiFlash Coprocessor handles at the same time, including the requests being executed and the requests waiting in the queue. If the number of requests exceeds the specified value, the error `TiFlash Server is Busy` is returned.
+- `-1` indicates no limit; `0` indicates using the default value, which is `10 * cop_pool_size`.
+
+##### `cop_pool_max_queued_seconds` <span class="version-mark">New in v5.0</span>
+
+- Specifies the maximum time that a cop request can queue in TiFlash. If a cop request waits in the queue for a time longer than the value specified by this configuration, the error `TiFlash Server is Busy` is returned.
+- A value less than or equal to `0` indicates no limit.
+- Default value: `15`
+
+##### `batch_cop_pool_size` <span class="version-mark">New in v5.0</span>
+
+- Specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to `0` or not set, the default value is used, which is twice the number of physical cores.
+- Default value: twice the number of physical cores
+
+##### `manual_compact_pool_size` <span class="version-mark">New in v6.1</span>
+
+- Specifies the number of requests that TiFlash can concurrently process when it receives `ALTER TABLE ... COMPACT` from TiDB.
+- If the value is set to `0`, the default value `1` prevails.
+- Default value: `1`
+
+##### `enable_elastic_threadpool` <span class="version-mark">New in v5.4.0</span>
+
+- Controls whether to enable the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash.
+- Default value: `true`
+
+##### `dt_compression_method`
+
+- Compression algorithm of the TiFlash storage engine.
+- Default value: `LZ4`
+- Value options: `LZ4`, `zstd`, `LZ4HC`. The value is case-insensitive.
+
+##### `dt_compression_level`
+
+- Compression level of the TiFlash storage engine.
+- It is recommended that you set this value to `1` if `dt_compression_method` is `LZ4`.
+- It is recommended that you set this value to `-1` (smaller compression rate, but better read performance) or `1` if `dt_compression_method` is `zstd`.
+- It is recommended that you set this value to `9` if `dt_compression_method` is `LZ4HC`.
+- Default value: `1`
+
+##### `dt_page_gc_threshold` <span class="version-mark">New in v6.2.0</span>
+
+- Specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file.
+- Default value: `0.5`
+
+##### `max_bytes_before_external_group_by` <span class="version-mark">New in v7.0.0</span>
+
+- Specifies the maximum memory available for the Hash Aggregation operator with the `GROUP BY` key before a disk spill is triggered. When the memory usage exceeds the threshold, Hash Aggregation reduces memory usage by [spilling to disk](/tiflash/tiflash-spill-disk.md).
+- Default value: `0`, which means that the memory usage is unlimited and spill to disk is never used for Hash Aggregation.
+
+##### `max_bytes_before_external_sort` <span class="version-mark">New in v7.0.0</span>
+
+- Specifies the maximum memory available for the sort or topN operator before a disk spill is triggered. When the memory usage exceeds the threshold, the sort or topN operator reduces memory usage by [spilling to disk](/tiflash/tiflash-spill-disk.md).
+- Default value: `0`, which means that the memory usage is unlimited and spill to disk is never used for sort or topN.
+
+##### `max_bytes_before_external_join` <span class="version-mark">New in v7.0.0</span>
+
+- Specifies the maximum memory available for the Hash Join operator with equi-join conditions before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by [spilling to disk](/tiflash/tiflash-spill-disk.md).
+- Default value: `0`, which means that the memory usage is unlimited and spill to disk is never used for Hash Join with equi-join conditions.
+
+##### `enable_resource_control` <span class="version-mark">New in v7.4.0</span>
+
+- Controls whether to enable the TiFlash resource control feature. When it is set to `true`, TiFlash uses the [pipeline execution model](/tiflash/tiflash-pipeline-model.md).
+
+##### `task_scheduler_thread_soft_limit` <span class="version-mark">New in v6.0.0</span>
+
+- This item is used for the MinTSO scheduler. It specifies the maximum number of threads that one resource group can use. For more information, see [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
+- Default value: `5000`
+
+##### `task_scheduler_thread_hard_limit` <span class="version-mark">New in v6.0.0</span>
+
+- This item is used for the MinTSO scheduler. It specifies the maximum number of threads in the global scope. For more information, see [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
+- Default value: `10000`
+
+##### `task_scheduler_active_set_soft_limit` <span class="version-mark">New in v6.4.0</span>
+
+- This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. For more information, see [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
+- Default value: `0`, which means twice the number of vCPUs
+
+#### security <span class="version-mark">New in v4.0.5</span>
+
+Configure security related settings.
+
+##### `redact_info_log` <span class="version-mark">New in v5.0</span>
+
+- Controls whether to enable log redaction.
+- Default value: `false`
+- Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.2.0.
+- If the configuration item is set to `false` or `"off"`, log redaction is disabled.
+- If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
+- If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
+- Note that you also need to set `security.redact-info-log` for tiflash-learner's logging in [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file).
+
+##### `ca_path`
+
+- Path of the file that contains a list of trusted SSL CAs. If set, [`cert_path`](#cert_path) and [`key_path`](#key_path) are also needed.
+
+<!-- Example: `"/path/to/ca.pem"` -->
+
+##### `cert_path`
+
+- Path of the file that contains X509 certificate in PEM format.
+
+<!-- Example: `"/path/to/tiflash-server.pem"` -->
+
+##### `key_path`
+
+- Path of the file that contains X509 key in PEM format.
+
+<!-- Example: `"/path/to/tiflash-server-key.pem"` -->
 
 ### Configure the `tiflash-learner.toml` file
 
 The parameters in `tiflash-learner.toml` are basically the same as those in TiKV. You can refer to [TiKV configuration](/tikv-configuration-file.md) for TiFlash Proxy configuration. The following are only commonly used parameters. Note that:
 
-- Compared with TiKV, TiFlash Proxy has an extra `raftstore.snap-handle-pool-size` parameter.
+- Compared with TiKV, TiFlash Proxy has an extra [`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400) parameter.
 - The `label` whose key is `engine` is reserved and cannot be configured manually.
 
-```toml
-[log]
-    ## The log level of TiFlash Proxy (available options: "trace", "debug", "info", "warn", "error"). The default value is "info". Introduced in v5.4.0.
-    level = "info"
+#### log
 
-[log.file]
-    ## The maximum number of log files to save. Introduced in v5.4.0.
-    ## If this parameter is not set or set to the default value `0`, TiFlash Proxy saves all log files.
-    ## If this parameter is set to a non-zero value, TiFlash Proxy retains at most the number of old log files specified by `max-backups`. For example, if you set it to `7`, TiFlash Proxy retains at most 7 old log files.
-    max-backups = 0
-    ## The maximum number of days that the log files are retained. Introduced in v5.4.0.
-    ## If this parameter is not set or set to the default value `0`, TiFlash Proxy retains all log files.
-    ## If this parameter is set to a non-zero value, TiFlash Proxy cleans up outdated log files after the number of days specified by `max-days`.
-    max-days = 0
+##### `level` <span class="version-mark">New in v5.4.0</span>
 
-[raftstore]
-    ## The allowable number of threads in the pool that flushes Raft data to storage.
-    apply-pool-size = 4
+- The log level of TiFlash Proxy.
+- Default value: `"info"`
+- Value options: `"trace"`, `"debug"`, `"info"`, `"warn"`, `"error"`
 
-    ## The allowable number of threads that process Raft, which is the size of the Raftstore thread pool.
-    store-pool-size = 4
+#### log.file
 
-    ## The number of threads that handle snapshots.
-    ## The default value is 2. If you set it to 0, the multi-thread optimization is disabled.
-    ## A specific parameter of TiFlash Proxy, introduced in v4.0.0.
-    snap-handle-pool-size = 2
+##### `max-backups` <span class="version-mark">New in v5.4.0</span>
 
-[security]
-    ## New in v5.0. This configuration item enables or disables log redaction. Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.3.0.
-    ## If the configuration item is set to `false` or `"off"`, log redaction is disabled.
-    ## If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
-    ## If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
-    ## The default value is `false`.
-    redact-info-log = false
+- The maximum number of log files to save.
+- If this parameter is not set or set to the default value `0`, TiFlash Proxy saves all log files.
+- If this parameter is set to a non-zero value, TiFlash Proxy retains at most the number of old log files specified by `max-backups`. For example, if you set it to `7`, TiFlash Proxy retains at most 7 old log files.
+- Default value: `0`
 
-[security.encryption]
-    ## The encryption method for data files.
-    ## Value options: "aes128-ctr", "aes192-ctr", "aes256-ctr", "sm4-ctr" (supported since v6.4.0), and "plaintext".
-    ## Default value: `"plaintext"`, which means encryption is disabled by default. A value other than "plaintext" means that encryption is enabled, in which case the master key must be specified.
-    data-encryption-method = "aes128-ctr"
-    ## Specifies how often the data encryption key is rotated. Default value: `7d`.
-    data-key-rotation-period = "168h" # 7 days
+##### `max-days` <span class="version-mark">New in v5.4.0</span>
 
-[security.encryption.master-key]
-    ## Specifies the master key if encryption is enabled. To learn how to configure a master key, see Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
+- The maximum number of days that the log files are retained.
+- If this parameter is not set or set to the default value `0`, TiFlash Proxy retains all log files.
+- If this parameter is set to a non-zero value, TiFlash Proxy cleans up outdated log files after the number of days specified by `max-days`.
+- Default value: `0`
 
-[security.encryption.previous-master-key]
-    ## Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see  Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
-```
+#### raftstore
+
+##### `apply-pool-size`
+
+- The allowable number of threads in the pool that flushes Raft data to storage.
+
+<!-- Example: `4` -->
+
+##### `store-pool-size`
+
+- The allowable number of threads that process Raft, which is the size of the Raftstore thread pool.
+
+<!-- Example: `4` -->
+
+##### `snap-handle-pool-size` <span class="version-mark">New in v4.0.0</span>
+
+- The number of threads that handle snapshots. If you set it to `0`, the multi-thread optimization is disabled.
+- Default value: `2`
+
+#### security
+
+##### `redact-info-log` <span class="version-mark">New in v5.0</span>
+
+- Controls whether to enable log redaction.
+- Default value: `false`
+- Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.3.0.
+- If the configuration item is set to `false` or `"off"`, log redaction is disabled.
+- If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
+- If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
+
+#### security.encryption
+
+##### `data-encryption-method`
+
+- The encryption method for data files. A value other than `"plaintext"` means that encryption is enabled, in which case the master key must be specified.
+- Default value: `"plaintext"`, which means encryption is disabled by default.
+- Value options: `"aes128-ctr"`, `"aes192-ctr"`, `"aes256-ctr"`, `"sm4-ctr"`, `"plaintext"`. `"sm4-ctr"` is introduced in v6.4.0.
+
+##### `data-key-rotation-period`
+
+- Specifies how often the data encryption key is rotated.
+- Default value: `7d`
+
+#### security.encryption.master-key
+
+- Specifies the master key if encryption is enabled. To learn how to configure a master key, see [Configure encryption](/encryption-at-rest.md#configure-encryption).
+
+#### security.encryption.previous-master-key
+
+- Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Configure encryption](/encryption-at-rest.md#configure-encryption).
 
 ### Schedule replicas by topology labels
 
