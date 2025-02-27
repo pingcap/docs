@@ -154,7 +154,7 @@ The `security` section specifies certificates and keys for TLS connections withi
 
 - Where to store the checkpoints.
 - Value options:
-    - `"file"`:  store as a local file.
+    - `"file"`: store as a local file.
     - `"mysql"`: store into a remote MySQL-compatible database.
 
 #### `dsn`
@@ -243,7 +243,7 @@ The `security` section specifies certificates and keys for TLS connections withi
 - Default value: `'none'`
 - Value options:
     - `'none'`: does not detect duplicate records. If there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB. If you set `duplicate-resolution = 'none'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign `""` to `conflict.strategy`.
-    - `'remove'`: if you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign "replace" to `conflict.strategy` and enable the new version of conflict detection. 
+    - `'remove'`: if you set `duplicate-resolution = 'remove'` and do not set `conflict.strategy`, TiDB Lightning will automatically assign "replace" to `conflict.strategy` and enable the new version of conflict detection.
 
 #### `send-kv-pairs`
 
@@ -425,7 +425,7 @@ The `security` section specifies certificates and keys for TLS connections withi
 
 #### `filter`
 
-- Only imports tables that match these wildcard rules. 
+- Only imports tables that match these wildcard rules.
 
 <!-- Example: `['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']` -->
 
@@ -451,8 +451,9 @@ Configures how CSV files are parsed.
 #### `header`
 
 - Controls whether the CSV files contain a header.
-- If `header` is `true`, TiDB Lightning treats the first row as a table header and does not import it as data.
-- If `header` is `false`, the first row is also imported as CSV data.
+- Value options:
+    - `true`: TiDB Lightning treats the first row as a table header and does not import it as data.
+    - `false`: the first row is also imported as CSV data.
 
 #### `header-schema-match`
 
@@ -599,7 +600,7 @@ Configures how CSV files are parsed.
 
 ### tidb.security
 
-- Specifies certificates and keys for TLS-enabled MySQL connections. 
+- Specifies certificates and keys for TLS-enabled MySQL connections.
 - Default value: the copy of the [`security`](#security) section.
 
 #### `ca-path`
@@ -610,21 +611,21 @@ Configures how CSV files are parsed.
 
 #### `cert-path`
 
-- Specifies the public certificate of this service. 
+- Specifies the public certificate of this service.
 - Default value: the copy of [`security.cert-path`](#cert-path).
 
 <!-- Example: `"/path/to/lightning.pem"` -->
 
 #### `key-path`
 
-- Specifies the private key of this service. 
+- Specifies the private key of this service.
 - Default value: the copy of [`security.key-path`](#key-path).
 
 <!-- Example: `"/path/to/lightning.key"` -->
 
 ### tidb.session-vars
 
-- Specifies other TiDB session variables.
+Specifies other TiDB session variables.
 
 <!-- tidb_enable_clustered_index = "OFF" -->
 
