@@ -43,7 +43,7 @@ This section introduces the configuration parameters of TiFlash.
 #### `listen_host`
 
 - The listening host for supporting services such as TPC/HTTP.
-- It is recommended to configure it as `"0.0.0.0"`, which means to listen on all IP addresses of this machine.
+- It is recommended to configure it as `"0.0.0.0"`, which means listening on all IP addresses of this machine.
 
 #### `tcp_port`
 
@@ -117,7 +117,7 @@ Configure storage path related settings.
 
 - The maximum storage capacity of each directory in [`storage.main.dir`](#dir). For example `[10737418240, 10737418240]`.
 - If it is not set, or is set to multiple `0`, the actual disk (the disk where the directory is located) capacity is used.
-- Unit: Byte. Note that human-readable numbers such as "10GB" are not supported yet.
+- Unit: Byte. Note that human-readable numbers such as `"10GB"` are not supported yet.
 - The size of the `capacity` list should be the same with the [`storage.main.dir`](#dir) size.
 
 #### storage.latest
@@ -214,11 +214,11 @@ The following configuration items only take effect for the TiFlash disaggregated
 
 ##### `access_key_id`
 
-- Access S3 with ACCESS_KEY_ID.
+- The ACCESS_KEY_ID used to access S3.
 
 ##### `secret_access_key`
 
-- Access S3 with SECRET_ACCESS_KEY.
+- The SECRET_ACCESS_KEY used to access S3.
 
 #### storage.remote.cache
 
@@ -273,7 +273,7 @@ The following configuration items only take effect for the TiFlash disaggregated
 
 ##### `advertise-addr`
 
-- The external access address of addr. If it is left empty, `addr` is used by default.
+- The external access address of `addr`. If it is left empty, `addr` is used by default.
 - You should guarantee that other nodes can access through `advertise-addr` when you deploy the cluster on multiple nodes.
 
 ##### `status-addr`
@@ -410,7 +410,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 ##### `manual_compact_pool_size` <span class="version-mark">New in v6.1</span>
 
 - Specifies the number of requests that TiFlash can concurrently process when it receives `ALTER TABLE ... COMPACT` from TiDB.
-- If the value is set to 0, the default value 1 prevails.
+- If the value is set to `0`, the default value `1` prevails.
 - Default value: `1`
 
 ##### `enable_elastic_threadpool` <span class="version-mark">New in v5.4.0</span>
@@ -422,7 +422,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 - Compression algorithm of the TiFlash storage engine.
 - Default value: `LZ4`
-- Value options: `LZ4`, `zstd`, `LZ4HC`, and is case-insensitive
+- Value options: `LZ4`, `zstd`, `LZ4HC`. The value is case-insensitive.
 
 ##### `dt_compression_level`
 
@@ -439,7 +439,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 ##### `max_bytes_before_external_group_by` <span class="version-mark">New in v7.0.0</span>
 
-- Specifies the maximum memory available for the HashAggregation operator with `GROUP BY` key before a disk spill is triggered. When the memory usage exceeds the threshold, Hash Aggregation reduces memory usage by [spilling to disk](/tiflash/tiflash-spill-disk.md).
+- Specifies the maximum memory available for the Hash Aggregation operator with the `GROUP BY` key before a disk spill is triggered. When the memory usage exceeds the threshold, Hash Aggregation reduces memory usage by [spilling to disk](/tiflash/tiflash-spill-disk.md).
 - Default value: `0`, which means that the memory usage is unlimited and spill to disk is never used for Hash Aggregation.
 
 ##### `max_bytes_before_external_sort` <span class="version-mark">New in v7.0.0</span>
@@ -449,8 +449,8 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 ##### `max_bytes_before_external_join` <span class="version-mark">New in v7.0.0</span>
 
-- Specifies the maximum memory available for the Hash Join operator with EquiJoin before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by [spilling to disk](/tiflash/tiflash-spill-disk.md).
-- Default value: `0`, which means that the memory usage is unlimited and spill to disk is never used for Hash Join with EquiJoin.
+- Specifies the maximum memory available for the Hash Join operator with equi-join conditions before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by [spilling to disk](/tiflash/tiflash-spill-disk.md).
+- Default value: `0`, which means that the memory usage is unlimited and spill to disk is never used for Hash Join with equi-join conditions.
 
 ##### `enable_resource_control` <span class="version-mark">New in v7.4.0</span>
 
@@ -483,7 +483,7 @@ Configure security related settings.
 - If the configuration item is set to `false` or `"off"`, log redaction is disabled.
 - If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
 - If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
-- Note that you also need to set security.redact-info-log for tiflash-learner's logging in [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file).
+- Note that you also need to set `security.redact-info-log` for tiflash-learner's logging in [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file).
 
 ##### `ca_path`
 
@@ -507,7 +507,7 @@ Configure security related settings.
 
 The parameters in `tiflash-learner.toml` are basically the same as those in TiKV. You can refer to [TiKV configuration](/tikv-configuration-file.md) for TiFlash Proxy configuration. The following are only commonly used parameters. Note that:
 
-- Compared with TiKV, TiFlash Proxy has an extra `raftstore.snap-handle-pool-size` parameter.
+- Compared with TiKV, TiFlash Proxy has an extra [`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400) parameter.
 - The `label` whose key is `engine` is reserved and cannot be configured manually.
 
 #### log
