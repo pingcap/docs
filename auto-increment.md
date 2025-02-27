@@ -456,11 +456,14 @@ INSERT INTO t VALUES (); -- Returns ID 30001
 While IDs are always increasing and without significant gaps like those seen with `AUTO_ID_CACHE 0`, small gaps in the sequence might still occur in the following scenarios. These gaps are necessary to maintain both uniqueness and the strictly increasing property of the IDs.
 
 - During failover when the primary instance exits or crashes
+
+    After you enable the MySQL compatibility mode, the allocated IDs are **unique** and **monotonically increasing**, and the behavior is almost the same as MySQL. Even if you access across TiDB instances, the IDs will keep monotonic. Only when the primary instance of the centralized service crashes, there might be a few IDs that are not continuous. This is because the secondary instance discards some IDs that are supposed to have been allocated by the primary instance during the failover to ensure ID uniqueness.
+
 - During rolling upgrades of TiDB nodes
 - During normal concurrent transactions (similar to MySQL)
 
 > **Note:**
-> 
+>
 > The behavior and performance of `AUTO_ID_CACHE 1` has evolved across TiDB versions:
 >
 > - Before v6.4.0, each ID allocation requires a TiKV transaction, which affects performance.
