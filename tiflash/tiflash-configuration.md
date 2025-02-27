@@ -479,7 +479,7 @@ Configure security related settings.
 - Controls whether to enable log redaction.
 - Default value: `false`
 - Value options: `true`, `false`, `"on"`, `"off"`, and `"marker"`. The `"on"`, `"off"`, and `"marker"` options are introduced in v8.2.0.
--  If the configuration item is set to `false` or `"off"`, log redaction is disabled.
+- If the configuration item is set to `false` or `"off"`, log redaction is disabled.
 - If the configuration item is set to `true` or `"on"`, all user data in the log is replaced by `?`.
 - If the configuration item is set to `"marker"`, all user data in the log is wrapped in `‹ ›`. If user data contains `‹` or `›`, `‹` is escaped as `‹‹`, and `›` is escaped as `››`. Based on the marked logs, you can decide whether to desensitize the marked information when the logs are displayed.
 - Note that you also need to set security.redact-info-log for tiflash-learner's logging in [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file).
