@@ -1198,7 +1198,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 1125899906842624]` (the maximum value that can be set is 1 PiB)
