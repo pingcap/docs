@@ -305,7 +305,7 @@ The `security` section specifies certificates and keys for TLS connections withi
 - Default value: `""`, which means TiDB Lightning will automatically get the key space name of the corresponding tenant to import data.
 - If you specify a value, the specified key space name will be used to import data.
 
-#### `pause-pd-scheduler-scope` <span class="version-mark">从 v7.1.0</span>
+#### `pause-pd-scheduler-scope` <span class="version-mark">New in v7.1.0</span>
 
 - In Physical Import Mode, this parameter controls the scope in which TiDB Lightning stops PD scheduling.
 - Default value: `"table"`
