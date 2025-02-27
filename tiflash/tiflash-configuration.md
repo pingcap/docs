@@ -365,7 +365,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 ##### `max_threads`
 
-- `max_threads` indicates the internal thread concurrency when TiFlash executes an MPP task. When it is set to 0, TiFlash uses the number of CPU cores as the execution concurrency.
+- `max_threads` indicates the internal thread concurrency when TiFlash executes an MPP task. When it is set to `0`, TiFlash uses the number of logical CPU cores as the execution concurrency.
 - This parameter only takes effect when the system variable [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) is set to `-1`.
 - Default value: `0`
 
@@ -468,7 +468,7 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 ##### `task_scheduler_active_set_soft_limit` <span class="version-mark">New in v6.4.0</span>
 
 - This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. For more information, see [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
-- Default value: `0`, which means twice the number of vCPUs
+- Default value: `0`, which means twice the number of logical CPU cores
 
 #### security <span class="version-mark">New in v4.0.5</span>
 
