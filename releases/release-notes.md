@@ -26,6 +26,7 @@ title: Release Notes
 
 ## 6.5
 
+- [6.5.12](/releases/release-6.5.12.md): 2025-02-27
 - [6.5.11](/releases/release-6.5.11.md): 2024-09-20
 - [6.5.10](/releases/release-6.5.10.md): 2024-06-20
 - [6.5.9](/releases/release-6.5.9.md): 2024-04-12
