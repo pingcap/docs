@@ -37,7 +37,7 @@ TrafficCaptureOpt ::=
 
 ## Examples
 
-Capture 1 day of traffic to the local `/tmp/traffic` directory of the TiProxy instance:
+Capture one day of traffic to the local `/tmp/traffic` directory of the TiProxy instance:
 
 ```sql
 TRAFFIC CAPTURE TO "/tmp/traffic" DURATION="1d"
