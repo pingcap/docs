@@ -510,11 +510,15 @@ Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege.
 
 ### CANCEL TAFFIC JOBS
 
-Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege to cancel traffic capture jobs and requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege to cancel traffic replay jobs.
+Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege to cancel traffic capture jobs.
+
+Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege to cancel traffic replay jobs.
 
 ### SHOW TRAFFIC JOBS
 
-Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege to view traffic capture jobs and requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege to view traffic replay jobs.
+Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege to view traffic capture jobs.
+
+ Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege to view traffic replay jobs.
 
 ## Implementation of the privilege system
 

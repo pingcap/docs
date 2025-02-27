@@ -11,19 +11,19 @@ The shown results vary depending on the privileges the current user has.
 
 - If the user has the [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege, this statement shows traffic capture jobs.
 - If the user has the [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege, this statement shows traffic replay jobs.
-- If the user has the `SUPER` privilege or both above privileges, this statement shows both traffic capture and traffic replay jobs.
+- If the user has the `SUPER` privilege or both preceding privileges, this statement shows both traffic capture and traffic replay jobs.
 
 The `SHOW TRAFFIC JOBS` statement returns the following columns:
 
 | Column name | Description   |
 | :-------- | :------------- |
 | `START_TIME` | The start time of the job |
-| `END_TIME` | The end time if the job has finished, otherwise it is empty |
+| `END_TIME` | The end time if the job has finished. Otherwise it is empty. |
 | `INSTANCE` | The address of the TiProxy instance |
 | `TYPE` | The job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job |
 | `PROGRESS` | The completion percentage of the job |
-| `STATUS` | The current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job failed |
-| `FAIL_REASON` | If the job fails, this column contains the reason for the failure, otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS` |
+| `STATUS` | The current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job fails. |
+| `FAIL_REASON` | If the job fails, this column contains the reason for the failure. Otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS`. |
 
 ## Synopsis
 
@@ -52,7 +52,7 @@ The following output example shows that two TiProxy instances are capturing traf
 2 rows in set (0.01 sec)
 ```
 
-The following output example shows that the traffic replay jobs of two TiProxy instances were manually canceled:
+The following output example shows that the traffic replay jobs of two TiProxy instances are manually canceled:
 
 ```
 +----------------------------+----------------------------+----------------+--------+----------+----------+------------------+

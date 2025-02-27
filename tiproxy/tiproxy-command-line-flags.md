@@ -183,7 +183,7 @@ The `tiproxyctl traffic replay` command is used to replay captured traffic.
 Options:
 
 - `--username`: (required) specifies the database username for replay.
-- `--password`: (optional) specifies the password for the username. If not specified, the password will be entered in an interactive mode.
+- `--password`: (optional) specifies the password for the username. If not specified, you need to enter the password in an interactive mode.
 - `--input`: (required) specifies the directory containing traffic files.
 - `--speed`: (optional) specifies the replay speed multiplier. The range is `[0.1, 10]`. The default value is `1`, indicating replay at the original speed.
 - `--read-only`: (optional) specifies whether to replay only read-only SQL statements. `true` means to replay only read-only SQL statements, and `false` means to replay all SQL statements. The default value is `false`.
@@ -206,7 +206,7 @@ The `tiproxyctl traffic show` command is used to display historical capture and 
 
 - `type`: the job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job
 - `start_time`: the start time of the job
-- `end_time`: the end time if the job has finished, otherwise it is empty
+- `end_time`: the end time if the job has finished. Otherwise it is empty.
 - `duration`: the duration of the traffic capture job
 - `output`: the output traffic file path of the capture job
 - `encryption_method`: the encryption method of the traffic file
@@ -216,8 +216,8 @@ The `tiproxyctl traffic show` command is used to display historical capture and 
 - `speed`: the replay speed multiplier
 - `read_only`: whether only replays read-only statements
 - `progress`: the completion percentage of the job
-- `status`: the current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job failed
-- `error`: if the job fails, this column contains the reason for the failure, otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS`
+- `status`: the current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job fails.
+- `error`: if the job fails, this column contains the reason for the failure. Otherwise it is empty. For example, `manually stopped` means the user manually cancels the job by executing `CANCEL TRAFFIC JOBS`.
 
 Example output:
 

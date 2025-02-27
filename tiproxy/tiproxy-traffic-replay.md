@@ -118,7 +118,7 @@ Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for tra
 
     Because all traffic runs under user `u1`, ensure `u1` can access all databases and tables. If no such user exists, create one. If the production cluster has a [resource group](/tidb-resource-control-ru-groups.md#manage-resource-groups), TiProxy automatically sets the resource group of each session to the same as when it was captured. Therefore, configure the [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) [privilege](/sql-statements/sql-statement-set-resource-group.md#privilege) for `u1`.
 
-    If you replay all statements, before replaying again, you may need to restore the data to before the last replay to avoid errors caused by data duplication. You can also add the `--read-only=true` option to replay only read-only statements to avoid restoring data before each replay.
+    If you replay all statements, before replaying again, you might need to restore the data to before the last replay to avoid errors caused by data duplication. You can also add the `--read-only=true` option to replay only read-only statements to avoid restoring data before each replay.
 
     For more information, see [`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay).
 
