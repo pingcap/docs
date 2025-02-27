@@ -106,6 +106,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 | SQL Statement | Description |
 |---------------|-------------|
+| [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md) | Modifies the parameter of a single running DDL job. |
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) | Cancels a DDL job. |
 | [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | Checks the integrity of a table or index. |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) | Computes the checksum of a table. |
