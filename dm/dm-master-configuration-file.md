@@ -81,7 +81,7 @@ This section introduces the configuration parameters of DM-master.
 
 #### `join`
 
-- The value of `join` is the combination of the [`advertise-peer-urls`](#advertise-peer-urls) value of the existed DM-master nodes in the cluster. If the DM-master node is newly added, replace `initial-cluster` with `join`.
+- The value of `join` is the combination of the [`advertise-peer-urls`](#advertise-peer-urls) value of the existing DM-master nodes in the cluster. If the DM-master node is newly added, replace `initial-cluster` with `join`.
 
 #### `ssl-ca`
 

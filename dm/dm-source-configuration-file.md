@@ -122,20 +122,20 @@ Generally, there is no need to manually configure these parameters unless there 
 
 #### `interval`
 
-- Sets the time interval at which relay logs are regularly checked for expiration, in seconds.
+- Specifies the time interval at which relay logs are regularly checked for expiration, in seconds.
 - Default value: `3600`
 - Unit: seconds
 
 #### `expires`
 
-- Sets the expiration time for relay logs.
+- Specifies the expiration time for relay logs.
 - The relay log that is not written by the relay processing unit, or does not need to be read by the existing data migration task will be deleted by DM if it exceeds the expiration time. If this parameter is not specified, the automatic purge is not performed.
 - Default value: `0`
 - Unit: hours
 
 #### `remain-space`
 
-- Sets the minimum amount of free disk space, in gigabytes. When the available disk space is smaller than this value, DM-worker tries to delete relay logs.
+- Specifies the minimum amount of free disk space, in gigabytes. When the available disk space is smaller than this value, DM-worker tries to delete relay logs.
 - Default value: `15`
 - Unit: GiB
 
@@ -170,4 +170,4 @@ Starting from DM v2.0.2, you can configure binlog event filters in the source co
 
 #### `filters`
 
-- Sets binlog event filtering rules. For details, see [Binlog event filter parameter explanation](/dm/dm-binlog-event-filter.md#parameter-descriptions).
+- Specifies binlog event filtering rules. For details, see [Binlog event filter parameter explanation](/dm/dm-binlog-event-filter.md#parameter-descriptions).
