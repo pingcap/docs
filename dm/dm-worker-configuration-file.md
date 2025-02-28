@@ -70,7 +70,7 @@ cert-allowed-cn = ["dm"]
 - Default value: `60`
 - Unit: seconds
 
-#### `relay-keepalive-ttl` <span class="version-mark">New in v2.0.2</span>
+#### `relay-keepalive-ttl` <span class="version-mark">New in DM v2.0.2</span>
 
 - The keepalive time (in seconds) of a DM-worker node to the DM-master node if the upstream data source of the DM-worker node enables the relay log.
 - Default value: `1800`
