@@ -279,7 +279,7 @@ delta_index_cache_size = 0
     ## New in v6.4.0. This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. The default value is 0, which means twice the number of vCPUs. For details about the MinTSO scheduler, see https://docs.pingcap.com/tidb/dev/tiflash-mintso-scheduler.
     task_scheduler_active_set_soft_limit = 0
 
-    ## New in v9.1.0. TiFlash's HashAgg will use magic hash instead of the default CRC32 if this item is true.
+    ## New in v9.0.0. TiFlash's HashAgg will use magic hash instead of the default CRC32 if this item is true.
     ## The results of magic hash have a more uniform distribution, which reduces hash collisions. However, the computation speed will be slower.
     ## It is recommended to enable magic hash when the NDV (Number of Distinct Values) of GroupBy key is very high.
     hashagg_use_magic_hash = false
