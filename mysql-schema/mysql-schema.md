@@ -61,8 +61,8 @@ Currently, the `help_topic` is NULL.
 
 ## System tables related to the PLAN REPLAYER
 
-- `plan_replayer_status`: the PLAN REPLAYER CAPTURE tasks registered by the user
-- `plan_replayer_task`: PLAN REPLAYER CAPTURE results
+- `plan_replayer_status`: the [PLAN REPLAYER CAPTURE](/sql-plan-replayer.md#use-plan-replayer-capture) tasks registered by the user
+- `plan_replayer_task`: [PLAN REPLAYER CAPTURE](/sql-plan-replayer.md#use-plan-replayer-capture) results
 
 ## GC worker system tables
 
