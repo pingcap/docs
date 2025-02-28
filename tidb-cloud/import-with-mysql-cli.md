@@ -68,7 +68,7 @@ Do the following to import data from an SQL file:
 
 > **Note:**
 >
-> - The default database name used here is `test`, and you can either manually create your own database or use the `CREATE DATABASE` command in an SQL file.
+> The default database name used here is `test`, and you can either manually create your own database or use the `CREATE DATABASE` command in an SQL file.
 
 </div>
 <div label="From a CSV file">
