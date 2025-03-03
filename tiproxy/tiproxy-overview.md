@@ -11,7 +11,7 @@ TiProxy はオプションのコンポーネントです。サードパーティ
 
 次の図は、TiProxy のアーキテクチャを示しています。
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy アーキテクチャ" width="500" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy アーキテクチャ" width="500" />
 
 ## 主な特徴 {#main-features}
 
@@ -23,7 +23,7 @@ TiProxy は、クライアント接続を切断することなく、ある TiDB�
 
 次の図に示すように、クライアントは最初、TiProxy を介して TiDB 1 に接続します。接続の移行後、クライアントは実際には TiDB 2 に接続します。TiDB 1 がオフラインになる直前、または TiDB 1 の接続と TiDB 2 の接続の比率が設定されたしきい値を超えると、接続の移行がトリガーされます。クライアントは接続の移行を認識しません。
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy接続の移行" width="400" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy接続の移行" width="400" />
 
 接続の移行は通常、次のシナリオで発生します。
 
