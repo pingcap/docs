@@ -142,7 +142,7 @@ tiup cluster deploy mycluster v8.1.0 topology.yaml --user tidb
 
 > **Note:**
 >
-> You have to replace v8.1.0 in the command above with the TiDB version that you want to deploy.
+> You have to replace `v8.1.0` in the command above with the TiDB version that you want to deploy and `mycluster` with the name you want to give to your cluster.
 
 Start the cluster:
 
