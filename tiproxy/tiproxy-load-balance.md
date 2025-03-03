@@ -43,7 +43,7 @@ TiProxy は、SQL ポートとステータス ポートを使用して、TiDBサ
 4.  オプション:storageレイヤーの分離の場合は、 [配置ルール](/configure-placement-rules.md)または[リソース管理](/tidb-resource-control.md)を構成します。
 5.  トランザクションおよび BI クライアントをそれぞれの TiProxy インスタンス アドレスに接続するように直接指示します。
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-balance-label.png" alt="ラベルベースの負荷分散" width="600" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label.png" alt="ラベルベースの負荷分散" width="600" />
 
 このトポロジの構成例:
 

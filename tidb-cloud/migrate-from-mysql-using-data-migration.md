@@ -237,15 +237,15 @@ MySQL サービスが Google Cloud VPC 内にある場合は、次の手順を�
 
     -   **[すべて]**をクリックすると、移行ジョブはソース データベース インスタンス全体から既存のデータをTiDB Cloudに移行し、完全な移行後に進行中の変更を移行します。これは、前の手順で [**既存データの移行]**および**[増分データの移行**] チェックボックスをオンにした場合にのみ実行されることに注意してください。
 
-        <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
+        <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
 
     -   **「カスタマイズ」**をクリックしていくつかのデータベースを選択すると、移行ジョブによって既存のデータが移行され、選択したデータベースの進行中の変更がTiDB Cloudに移行されます。これは、前の手順で「**既存データの移行」**および**「増分データの移行」**チェックボックスを選択した場合にのみ実行されることに注意してください。
 
-        <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
+        <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
     -   **[カスタマイズ]**をクリックし、データセット名の下のいくつかのテーブルを選択すると、移行ジョブでは既存のデータのみが移行され、選択したテーブルの進行中の変更も移行されます。同じデータベース内で後で作成されたテーブルは移行されません。
 
-        <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
+        <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
     <!--
      - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.

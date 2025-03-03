@@ -72,7 +72,7 @@ curl http://127.0.0.1:10080/schema_storage/test
 
 -   PD API アドレス: `http://${host}:${port}/pd/api/v1/${api_name}`
 -   デフォルトポート: `2379`
--   API名の詳細については、 [PD API ドキュメント](https://download.pingcap.com/pd-api-v1.html)参照してください。
+-   API名の詳細については、 [PD API ドキュメント](https://docs-download.pingcap.com/api/pd-api/pd-api-v1.html)参照してください。
 
 PD インターフェイスは、すべての TiKV サーバーのステータスと負荷分散に関する情報を提供します。単一ノードの TiKV クラスターに関する情報については、次の例を参照してください。
 
