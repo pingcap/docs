@@ -508,7 +508,7 @@ Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege.
 
 Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege.
 
-### CANCEL TAFFIC JOBS
+### CANCEL TRAFFIC JOBS
 
 Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege to cancel traffic capture jobs.
 
