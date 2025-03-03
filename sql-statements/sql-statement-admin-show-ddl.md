@@ -248,7 +248,8 @@ This statement is a TiDB extension to MySQL syntax.
 ## See also
 
 * [DDL introduction](/ddl-introduction.md)
-* [ADMIN CANCEL DDL](/sql-statements/sql-statement-admin-cancel-ddl.md)
-* [ADMIN PAUSE DDL](/sql-statements/sql-statement-admin-pause-ddl.md)
-* [ADMIN RESUME DDL](/sql-statements/sql-statement-admin-resume-ddl.md)
+* [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
+* [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
+* [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
+* [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)
 * [INFORMATION_SCHEMA.DDL_JOBS](/information-schema/information-schema-ddl-jobs.md)
