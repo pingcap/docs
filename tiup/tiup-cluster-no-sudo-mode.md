@@ -59,6 +59,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
     ```shell
     loginctl enable-linger tidb
+    loginctl show-user -p Linger tidb # This should show: Linger=yes
     ```
 
     You can read the systemd documentation for reference, [Automatic start-up of systemd user instances](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances).
