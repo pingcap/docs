@@ -518,7 +518,7 @@ Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege to cancel traffic replay jo
 
 Requires `SUPER` or `TRAFFIC_CAPTURE_ADMIN` privilege to view traffic capture jobs.
 
- Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege to view traffic replay jobs.
+Requires `SUPER` or `TRAFFIC_REPLAY_ADMIN` privilege to view traffic replay jobs.
 
 ## Implementation of the privilege system
 
