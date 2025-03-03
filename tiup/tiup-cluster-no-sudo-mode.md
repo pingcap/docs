@@ -104,7 +104,6 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
    
 ## Manually repair failed check items
 
-
 > **Note:**
 >
 > If you use a minimal install, please make sure the `tar` package is installed. Otherwise the `tiup cluster check` command will fail.
@@ -129,7 +128,6 @@ Node            Check         Result  Message
 ```
 
 In no-sudo mode, the `tidb` user does not have sudo permissions. As a result, running `tiup cluster check topology.yaml --apply --user tidb` cannot automatically fix the failed check items. You need to manually perform the following steps using the `root` user on the target machines.
-
 
 See [Check before deployment](/check-before-deployment.md) for how to correct these.
 
