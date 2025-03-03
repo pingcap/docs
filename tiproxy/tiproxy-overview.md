@@ -11,7 +11,7 @@ TiProxy is an optional component. You can also use a third-party proxy component
 
 The following figure shows the architecture of TiProxy:
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy architecture" width="500" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy architecture" width="500" />
 
 ## Main features
 
@@ -23,7 +23,7 @@ TiProxy can migrate connections from one TiDB server to another without breaking
 
 As shown in the following figure, the client originally connects to TiDB 1 through TiProxy. After the connection migration, the client actually connects to TiDB 2. When TiDB 1 is about to be offline or the ratio of connections on TiDB 1 to connections on TiDB 2 exceeds the set threshold, the connection migration is triggered. The client is unaware of the connection migration.
 
-<img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy connection migration" width="400" />
+<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy connection migration" width="400" />
 
 Connection migration usually occurs in the following scenarios:
 
