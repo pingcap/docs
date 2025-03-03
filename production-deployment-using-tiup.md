@@ -27,6 +27,10 @@ You can deploy TiUP on the control machine in either of the two ways: online dep
 
 ### Deploy TiUP online
 
+> **Note:**
+>
+> If the TiUP environment switches to offline, refer to [Deploy TiUP offline](#deploy-tiup-offline) for deployment. Otherwise, TiUP cannot work properly.
+
 Log in to the control machine using a regular user account (take the `tidb` user as an example). Subsequent TiUP installation and cluster management can be performed by the `tidb` user.
 
 1. Install TiUP by running the following command:
