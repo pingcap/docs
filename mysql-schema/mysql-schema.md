@@ -60,10 +60,10 @@ Currently, the `help_topic` is NULL.
 - `bind_info`: the binding information of execution plans
 - `capture_plan_baselines_blacklist`: the blocklist for the automatic binding of the execution plan
 
-## System tables related to the PLAN REPLAYER
+## System tables related to PLAN REPLAYER
 
-- `plan_replayer_status`: the [PLAN REPLAYER CAPTURE](/sql-plan-replayer.md#use-plan-replayer-capture) tasks registered by the user
-- `plan_replayer_task`: [PLAN REPLAYER CAPTURE](/sql-plan-replayer.md#use-plan-replayer-capture) results
+- `plan_replayer_status`: the [`PLAN REPLAYER CAPTURE`](/sql-plan-replayer.md#use-plan-replayer-capture) tasks registered by the user
+- `plan_replayer_task`: the results of [`PLAN REPLAYER CAPTURE`](/sql-plan-replayer.md#use-plan-replayer-capture) tasks
 
 ## GC worker system tables
 
@@ -126,7 +126,7 @@ Currently, the `help_topic` is NULL.
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
 - `tidb_import_jobs`: the job information of [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
 - `tidb_timers`: the metadata of internal timers
-- `advisory_locks`: information related to the [Locking Functions](/functions-and-operators/locking-functions.md)
+- `advisory_locks`: information related to [Locking functions](/functions-and-operators/locking-functions.md)
 
 </CustomContent>
 
