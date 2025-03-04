@@ -145,7 +145,14 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 ### Enable binary logs
 
-To perform incremental data migration, make sure you have enabled binary logs of the upstream database, and the binary logs have been kept for more than 24 hours.
+To perform incremental data migration, make sure the following requirements are met:
+
+- Binary logs are enabled for the upstream database.
+- The binary logs are retained for at least 24 hours.
+- The binlog format for the upstream database is set to `ROW`. If not, update the format to `ROW` as follows to avoid the [format error](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#error-message-check-whether-mysql-binlog_format-is-row):
+
+    - MySQL: execute the `SET GLOBAL binlog_format=ROW;` statement. If you want to persist this change across reboots, you can execute the `SET PERSIST binlog_format=ROW;` statement.
+    - Amazon Aurora MySQL or RDS for MySQL: follow the instructions in [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithDBInstanceParamGroups.html) to create a new DB parameter group. Set the `binlog_format=row` parameter in the new DB parameter group, modify the instance to use the new DB parameter group, and then restart the instance to take effect.
 
 ## Step 1: Go to the **Data Migration** page
 

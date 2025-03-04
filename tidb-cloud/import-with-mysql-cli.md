@@ -20,9 +20,13 @@ Connect to your TiDB cluster.
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2. In the left navigation pane, click **Networking**.
 
-3. Click **Allow Access from Anywhere**.
+3. On the **Networking** page, click **Add IP Address** in the **IP Access List** area.
+
+4. In the dialog, choose **Allow access from anywhere**, and then click **Confirm**.
+
+5. In the upper-right corner, click **Connect** to open the dialog for connection information.
 
     For more details about how to obtain the connection string, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
@@ -59,7 +63,7 @@ Do the following to import data from an SQL file:
 2. Use the following command to import data from the SQL file:
 
     ```bash
-    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p <your_password> < product_data.sql
+    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> < product_data.sql
     ```
 
 > **Note:**
