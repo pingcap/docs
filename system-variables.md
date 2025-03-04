@@ -618,7 +618,6 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)
 
 ### last_plan_from_cache <span class="version-mark">New in v4.0</span>
@@ -626,14 +625,13 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
 ### last_sql_use_alloc <span class="version-mark">New in v6.4.0</span>
 
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `OFF`
+- Type: Boolean
 - This variable is read-only. It is used to show whether the previous statement uses a cached chunk object (chunk allocation).
 
 ### license
