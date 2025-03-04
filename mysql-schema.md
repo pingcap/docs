@@ -43,6 +43,9 @@ Currently, the `help_topic` is NULL.
 - `stats_extended`: extended statistics, such as the order correlation between columns
 - `stats_feedback`: the query feedback of statistics
 - `stats_fm_sketch`: the FMSketch distribution of the histogram of the statistics column
+- `stats_table_locked`: information about the locked statistics
+- `stats_meta_history`: the meta information in the historical statistics
+- `stats_history`: the other information in the historical statistics
 - `analyze_options`: the default `analyze` options for each table
 - `column_stats_usage`: the usage of column statistics
 - `schema_index_usage`: the usage of indexes
@@ -52,6 +55,11 @@ Currently, the `help_topic` is NULL.
 
 - `bind_info`: the binding information of execution plans
 - `capture_plan_baselines_blacklist`: the blocklist for the automatic binding of the execution plan
+
+## System tables related to PLAN REPLAYER
+
+- `plan_replayer_status`: the [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks registered by the user
+- `plan_replayer_task`: the results of [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks
 
 ## GC worker system tables
 
@@ -93,3 +101,4 @@ Currently, the `help_topic` is NULL.
 - `expr_pushdown_blacklist`: the blocklist for expression pushdown
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
 - `tidb_timers`: the metadata of internal timers
+- `advisory_locks`: information related to [Locking functions](/functions-and-operators/locking-functions.md)
