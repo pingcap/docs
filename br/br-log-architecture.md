@@ -120,11 +120,11 @@ Log backup generates the following types of files:
 └── v1_stream_truncate_safepoint.txt
 ```
 
-Among them:
+Explanation of the backup file directory structure:
 
-- `backupmeta` contains the metadata of the backup. The `resolved_ts` in the file name indicates the progress of the backup: data before this TSO has been fully backed up. However, please note that this data only reflects the progress of some shards, so this number is not very meaningful to users.
-- `global_checkpoint` stores the global progress of the backup: it records the latest point in time that can be restored to using `br restore point`.
-- The `{date}/{hour}` directory stores the backup data for the corresponding date. Please note that when cleaning up storage, you should use `br log truncate` instead of manually deleting the data, because the metadata points to this data though deleted manually, and manually deleting it will cause problems.
+- `backupmeta`: contains backup metadata. The `resolved_ts` in the filename indicates the backup progress, meaning that data before this TSO has been fully backed up. However, note that this TSO only reflects the progress of certain shards, so its significance is limited.
+- `global_checkpoint`: represents the global backup progress. It records the latest point in time to which data can be restored using `br restore point`.
+- `{date}/{hour}`: stores backup data for the corresponding date and hour. When cleaning up storage, always use `br log truncate` instead of manually deleting data. This is because the metadata references the data in this directory, and manual deletion might lead to restore failures or data inconsistencies after restore.
 
 The following is an example:
 
