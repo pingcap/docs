@@ -108,17 +108,23 @@ Log backup generates the following types of files:
 .
 ├── v1
 │   ├── backupmeta
-│   │   ├── {min_restored_ts}-{uuid}.meta
-│   │   ├── {checkpoint}-{uuid}.meta
+│   │   ├── ...
+│   │   └── {resolved_ts}-{uuid}.meta
 │   ├── global_checkpoint
-│   │   ├── {store_id}.ts
-│   ├── {date}
-│   │   ├── {hour}
-│   │   │   ├── {store_id}
-│   │   │   │   ├── {min_ts}-{uuid}.log
-│   │   │   │   ├── {min_ts}-{uuid}.log
-├── v1_stream_truncate_safepoint.txt
+│   │   └── {store_id}.ts
+│   └── {date}
+│       └── {hour}
+│           └── {store_id}
+│               ├── ...
+│               └── {min_ts}-{uuid}.log
+└── v1_stream_truncate_safepoint.txt
 ```
+
+Among them:
+
+- `backupmeta` contains the metadata of the backup. The `resolved_ts` in the file name indicates the progress of the backup: data before this TSO has been fully backed up. However, please note that this data only reflects the progress of some shards, so this number is not very meaningful to users.
+- `global_checkpoint` stores the global progress of the backup: it records the latest point in time that can be restored to using `br restore point`.
+- The `{date}/{hour}` directory stores the backup data for the corresponding date. Please note that when cleaning up storage, you should use `br log truncate` instead of manually deleting the data, because the metadata points to this data though deleted manually, and manually deleting it will cause problems.
 
 The following is an example:
 
@@ -129,24 +135,24 @@ The following is an example:
 │   │   ├── ...
 │   │   ├── 435213818858112001-e2569bda-a75a-4411-88de-f469b49d6256.meta
 │   │   ├── 435214043785779202-1780f291-3b8a-455e-a31d-8a1302c43ead.meta
-│   │   ├── 435214443785779202-224f1408-fff5-445f-8e41-ca4fcfbd2a67.meta
+│   │   └── 435214443785779202-224f1408-fff5-445f-8e41-ca4fcfbd2a67.meta
 │   ├── global_checkpoint
 │   │   ├── 1.ts
 │   │   ├── 2.ts
-│   │   ├── 3.ts
-│   ├── 20220811
-│   │   ├── 03
-│   │   │   ├── 1
-│   │   │   │   ├── ...
-│   │   │   │   ├── 435213866703257604-60fcbdb6-8f55-4098-b3e7-2ce604dafe54.log
-│   │   │   │   ├── 435214023989657606-72ce65ff-1fa8-4705-9fd9-cb4a1e803a56.log
-│   │   │   ├── 2
-│   │   │   │   ├── ...
-│   │   │   │   ├── 435214102632857605-11deba64-beff-4414-bc9c-7a161b6fb22c.log
-│   │   │   │   ├── 435214417205657604-e6980303-cbaa-4629-a863-1e745d7b8aed.log
-│   │   │   ├── 3
-│   │   │   │   ├── ...
-│   │   │   │   ├── 435214495848857605-7bf65e92-8c43-427e-b81e-f0050bd40be0.log
-│   │   │   │   ├── 435214574492057604-80d3b15e-3d9f-4b0c-b133-87ed3f6b2697.log
-├── v1_stream_truncate_safepoint.txt
+│   │   └── 3.ts
+│   └── 20220811
+│       └── 03
+│           ├── 1
+│           │   ├── ...
+│           │   ├── 435213866703257604-60fcbdb6-8f55-4098-b3e7-2ce604dafe54.log
+│           │   └── 435214023989657606-72ce65ff-1fa8-4705-9fd9-cb4a1e803a56.log
+│           ├── 2
+│           │   ├── ...
+│           │   ├── 435214102632857605-11deba64-beff-4414-bc9c-7a161b6fb22c.log
+│           │   └── 435214417205657604-e6980303-cbaa-4629-a863-1e745d7b8aed.log
+│           └── 3
+│               ├── ...
+│               ├── 435214495848857605-7bf65e92-8c43-427e-b81e-f0050bd40be0.log
+│               └── 435214574492057604-80d3b15e-3d9f-4b0c-b133-87ed3f6b2697.log
+└── v1_stream_truncate_safepoint.txt
 ```
