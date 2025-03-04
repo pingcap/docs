@@ -130,7 +130,7 @@ Node            Check         Result  Message
 
 In no-sudo mode, the `tidb` user does not have sudo permissions. As a result, running `tiup cluster check topology.yaml --apply --user tidb` cannot automatically fix the failed check items. You need to manually fix it by using the `root` user on the target machines.
 
-For more information, see [Check before deployment](/check-before-deployment.md). Note that you need to skip the step "Manually configure the SSH mutual trust and sudo without password" in the document.
+For more information, see [TiDB Environment and System Configuration Check](/check-before-deployment.md). Note that you need to skip the step [Manually configure the SSH mutual trust and sudo without password](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password) in the document.
 
 ## Deploy and manage the cluster
 
