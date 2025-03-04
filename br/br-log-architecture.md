@@ -122,7 +122,7 @@ Log backup generates the following types of files:
 
 Explanation of the backup file directory structure:
 
-- `backupmeta`: contains backup metadata. The `resolved_ts` in the filename indicates the backup progress, meaning that data before this TSO has been fully backed up. However, note that this TSO only reflects the progress of certain shards, so its significance is limited.
+- `backupmeta`: contains backup metadata. The `resolved_ts` in the filename indicates the backup progress, meaning that data before this TSO has been fully backed up. However, note that this TSO only reflects the progress of certain shards.
 - `global_checkpoint`: represents the global backup progress. It records the latest point in time to which data can be restored using `br restore point`.
 - `{date}/{hour}`: stores backup data for the corresponding date and hour. When cleaning up storage, always use `br log truncate` instead of manually deleting data. This is because the metadata references the data in this directory, and manual deletion might lead to restore failures or data inconsistencies after restore.
 
