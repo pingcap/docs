@@ -132,7 +132,6 @@ In no-sudo mode, the `tidb` user does not have sudo permissions. As a result, ru
 
 See [Check before deployment](/check-before-deployment.md) for how to correct these. Note that the step "Manually configure the SSH mutual trust and sudo without password" in the document needs to be skipped.
 
-
 ## Deploy and manage the cluster
 
 To use the `tidb` user created in preceding steps and avoid creating a new one, add `--user tidb` when running the following `deploy` command:
