@@ -64,7 +64,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
     You can read the systemd documentation for reference, [Automatic start-up of systemd user instances](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances).
 
-4. Generate a key using `ssh-keygen` on the control machine, and copy the public key to the other deployment machines to establish SSH trust. If you have set a password for the tidb user user you can use `ssh-copy-id` to copy the public key to the target machine. If you use any other method make user to check the permissions of the `/home/tidb/.ssh/authorized_keys` file.
+4. Generate a key using `ssh-keygen` on the control machine, and copy the public key to the other deployment machines to establish SSH trust. If you have set a password for the `tidb` user, you can use `ssh-copy-id` to copy the public key to the target machine. If you use any other method, make user to check the permissions of the `/home/tidb/.ssh/authorized_keys` file.
 
     ```shell
     ssh-keygen
@@ -107,7 +107,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
 > **Note:**
 >
-> If you use a minimal install, please make sure the `tar` package is installed. Otherwise the `tiup cluster check` command will fail.
+> If you use a minimal install, make sure the `tar` package is installed. Otherwise the `tiup cluster check` command will fail.
 
 Executing `tiup cluster check topology.yaml --user tidb` can generate some failed check items. The following is an example.
 
@@ -128,9 +128,9 @@ Node            Check         Result  Message
 192.168.124.27  service       Fail    service firewalld is running but should be stopped
 ```
 
-In no-sudo mode, the `tidb` user does not have sudo permissions. As a result, running `tiup cluster check topology.yaml --apply --user tidb` cannot automatically fix the failed check items. You need to manually perform the following steps using the `root` user on the target machines.
+In no-sudo mode, the `tidb` user does not have sudo permissions. As a result, running `tiup cluster check topology.yaml --apply --user tidb` cannot automatically fix the failed check items. You need to manually fix it by using the `root` user on the target machines.
 
-See [Check before deployment](/check-before-deployment.md) for how to correct these. Note that the step "Manually configure the SSH mutual trust and sudo without password" in the document needs to be skipped.
+For more information, see [Check before deployment](/check-before-deployment.md). Note that you need to skip the step "Manually configure the SSH mutual trust and sudo without password" in the document.
 
 ## Deploy and manage the cluster
 
@@ -142,7 +142,7 @@ tiup cluster deploy mycluster v8.1.0 topology.yaml --user tidb
 
 > **Note:**
 >
-> You have to replace `v8.1.0` in the command above with the TiDB version that you want to deploy and `mycluster` with the name you want to give to your cluster.
+> You need to replace `v8.1.0` in the preceding command with the TiDB version that you want to deploy and `mycluster` with the name you want to give to your cluster.
 
 Start the cluster:
 
