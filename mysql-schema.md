@@ -33,6 +33,8 @@ Currently, the `help_topic` is NULL.
 - `stats_extended`: extended statistics, such as the order correlation between columns
 - `stats_feedback`: the query feedback of statistics
 - `stats_fm_sketch`: the FMSketch distribution of the histogram of the statistics column
+- `stats_meta_history`: the meta information in the historical statistics
+- `stats_history`: the other information in the historical statistics
 - `analyze_options`: the default `analyze` options for each table
 - `column_stats_usage`: the usage of column statistics
 - `schema_index_usage`: the usage of indexes
@@ -58,5 +60,6 @@ Currently, the `help_topic` is NULL.
 - `expr_pushdown_blacklist`: the blocklist for expression pushdown
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
 - `table_cache_meta`: the metadata of cached tables
+- `advisory_locks`: information related to [Locking functions](/functions-and-operators/locking-functions.md)
 
 </CustomContent>
