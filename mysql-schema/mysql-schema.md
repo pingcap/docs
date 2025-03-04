@@ -61,8 +61,8 @@ Currently, the `help_topic` is NULL.
 
 ## System tables related to PLAN REPLAYER
 
-- `plan_replayer_status`: the [`PLAN REPLAYER CAPTURE`](/sql-plan-replayer.md#use-plan-replayer-capture) tasks registered by the user
-- `plan_replayer_task`: the results of [`PLAN REPLAYER CAPTURE`](/sql-plan-replayer.md#use-plan-replayer-capture) tasks
+- `plan_replayer_status`: the [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks registered by the user
+- `plan_replayer_task`: the results of [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks
 
 ## GC worker system tables
 
