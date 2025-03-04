@@ -9,7 +9,7 @@ For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connec
 
 > **Note:**
 >
-> The ticket support feature for Lark is still in beta and is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+> The ticket support feature for Lark is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
 
 ## Create a support ticket
 

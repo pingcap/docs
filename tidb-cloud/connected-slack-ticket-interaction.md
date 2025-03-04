@@ -7,6 +7,10 @@ summary: Introduces detailed information about the Slack interaction for support
 
 For customers subscribed to the **Premium** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **Assist** in [Slack](https://slack.com/), to support more comprehensive interaction and management of support tickets.
 
+> **Note:**
+>
+> The ticket support feature for Slack is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+
 ## Interact with support tickets
 
 If an **Assist** app is added to the channel, you can use **Assist** to submit the ticket. There are two ways to submit the request.
