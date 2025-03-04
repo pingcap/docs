@@ -7,6 +7,10 @@ summary: Introduces detailed information about the Slack ticket creation and upd
 
 For customers subscribed to the **Enterprise** [support plan](/tidb-cloud/connected-care-detail.md), TiDB Cloud provides a ticket bot called **PingCAP Support Bot** in [Slack](https://slack.com/), to support quick ticket creation.
 
+> **Note:**
+>
+> The ticket support feature for Slack is available upon request. If you are interested in trying this feature, contact TiDB Cloud support at <a href="mailto:support@pingcap.com">support@pingcap.com</a> or reach out to your Technical Account Manager (TAM).
+
 ## Create a support ticket
 
 In the Slack support channel, you only need to mention **PingCAP Support Bot** and describe the problem in a message. Then, the ticket bot will send you a message with a **Raise request** button.
