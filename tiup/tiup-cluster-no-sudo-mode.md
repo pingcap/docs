@@ -64,19 +64,28 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
     You can read the systemd documentation for reference, [Automatic start-up of systemd user instances](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances).
 
-4. Generate a key using `ssh-keygen` on the control machine, and copy the public key to the other deployment machines to establish SSH trust. If you have set a password for the `tidb` user, you can use `ssh-copy-id` to copy the public key to the target machine. If you use any other method, make user to check the permissions of the `/home/tidb/.ssh/authorized_keys` file.
+4. Generate a key using `ssh-keygen` on the control machine:
 
     ```shell
     ssh-keygen
-    ssh-copy-id tidb@host
     ```
 
-    Replace `host` with the hostname of the target machine and run the `ssh-copy-id` command for every machine in the cluster.
+5. Copy the public key to the other machines in the cluster to establish SSH trust.
 
-    ```
-    chown -R tidb:tidb /home/tidb/.ssh/authorized_keys
-    chmod 600 /home/tidb/.ssh/authorized_keys
-    ```
+    - If you have set a password for the `tidb` user, you can use `ssh-copy-id` command to copy the public key to the target machine.
+
+        ```shell
+        ssh-copy-id tidb@host
+        ```
+
+        You need to replace `host` with the hostname of the target machine and run this command on each of the other machines in the cluster.
+
+    - If you use a different method to copy the public key, make sure to check the permissions of the `/home/tidb/.ssh/authorized_keys` file after the copy.
+
+        ```shell
+        chown -R tidb:tidb /home/tidb/.ssh/authorized_keys
+        chmod 600 /home/tidb/.ssh/authorized_keys
+        ```
 
 ## Prepare the topology file
 
