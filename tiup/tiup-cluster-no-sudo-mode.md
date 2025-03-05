@@ -24,6 +24,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
     1. Use the `tidb` user to set the `XDG_RUNTIME_DIR` environment variable.
    
         ```shell
+        sudo -iu tidb  # Switch to the tidb user
         mkdir -p ~/.bashrc.d
         echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" > ~/.bashrc.d/systemd
         source ~/.bashrc.d/systemd
@@ -32,8 +33,9 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
     2. Use the `root` user to start the user service.
    
         ```shell
-        $ systemctl start user@1000.service # `1000` is the ID of the tidb user. You can get the user ID by executing the `id` command.
-        $ systemctl status user@1000.service
+        $ uid=$(id -u tidb) # Get the ID of the tidb user
+        $ systemctl start user@${uid}.service
+        $ systemctl status user@${uid}.service
         user@1000.service - User Manager for UID 1000
         Loaded: loaded (/usr/lib/systemd/system/user@.service; static; vendor preset>
         Active: active (running) since Mon 2024-01-29 03:30:51 EST; 1min 7s ago
@@ -57,11 +59,33 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
     ```shell
     loginctl enable-linger tidb
+    loginctl show-user -p Linger tidb # This should show: Linger=yes
     ```
 
     You can read the systemd documentation for reference, [Automatic start-up of systemd user instances](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances).
 
-4. Generate a key using `ssh-keygen` on the control machine, and copy the public key to the other deployment machines to establish SSH trust.
+4. Generate a key using `ssh-keygen` on the control machine:
+
+    ```shell
+    ssh-keygen
+    ```
+
+5. Copy the public key to the other machines in the cluster to establish SSH trust.
+
+    - If you have set a password for the `tidb` user, you can use `ssh-copy-id` command to copy the public key to the target machine.
+
+        ```shell
+        ssh-copy-id tidb@host
+        ```
+
+        You need to replace `host` with the hostname of the target machine and run this command on each of the other machines in the cluster.
+
+    - If you use a different method to copy the public key, make sure to check the permissions of the `/home/tidb/.ssh/authorized_keys` file after the copy.
+
+        ```shell
+        chown -R tidb:tidb /home/tidb/.ssh/authorized_keys
+        chmod 600 /home/tidb/.ssh/authorized_keys
+        ```
 
 ## Prepare the topology file
 
@@ -73,9 +97,9 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
    
 2. Edit the topology file.
 
-    Compared with the previous mode, when using TiUP in no-sudo mode, you need to add a line `systemd_mode: "user"` in the `global` module of the `topology.yaml` file. The `systemd_mode` parameter is used to set whether to use the `systemd user` mode. If this parameter is not set, the default value is `system`, meaning sudo permissions are required.
+    Compared with the regular mode, when using TiUP in no-sudo mode, you need to add a line `systemd_mode: "user"` in the `global` module of the `topology.yaml` file. The `systemd_mode` parameter is used to set whether to use the `systemd user` mode. If this parameter is not set, the default value is `system`, meaning sudo permissions are required.
 
-    Additionally, in no-sudo mode, because the non-root `tidb` user does not have permission to use the `/data` directory as `deploy_dir` or `data_dir`, you must select a path accessible to non-root users. The following example uses relative paths and the final paths used are `/home/tidb/data/tidb-deploy` and `/home/tidb/data/tidb-data`. The rest of the topology file remains the same as in the previous mode.
+    Additionally, in no-sudo mode, because the non-root `tidb` user does not have permission to use the `/data` directory as `deploy_dir` or `data_dir`, you must select a path accessible to non-root users. The following example uses relative paths, and the actual paths used are `/home/tidb/data/tidb-deploy` and `/home/tidb/data/tidb-data`. The rest of the topology file remains the same as in the regular mode. Another option is to use the root user to create the directories and then use `chown` to change the ownership to `tidb:tidb`.
 
     ```yaml
     global:
@@ -89,6 +113,10 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
     ```
    
 ## Manually repair failed check items
+
+> **Note:**
+>
+> If you use a minimal install, make sure the `tar` package is installed. Otherwise, the `tiup cluster check` command will fail.
 
 Executing `tiup cluster check topology.yaml --user tidb` can generate some failed check items. The following is an example.
 
@@ -109,71 +137,21 @@ Node            Check         Result  Message
 192.168.124.27  service       Fail    service firewalld is running but should be stopped
 ```
 
-In no-sudo mode, the `tidb` user does not have sudo permissions. As a result, running `tiup cluster check topology.yaml --apply --user tidb` cannot automatically fix the failed check items. You need to manually perform the following steps using the `root` user on the target machines:
+In no-sudo mode, the `tidb` user does not have sudo permissions. As a result, running `tiup cluster check topology.yaml --apply --user tidb` cannot automatically fix the failed check items. You need to manually fix it by using the `root` user on the target machines.
 
-1. Install the numactl tool.
-
-    ```shell
-    sudo yum -y install numactl
-    ```
-   
-2. Close swap.
-
-    ```shell
-    swapoff -a || exit 0
-    ```
-   
-3. Disable transparent huge pages.
-
-    ```shell
-    echo never > /sys/kernel/mm/transparent_hugepage/enabled
-    ```
-
-4. Start the `irqbalance` service.
-
-    ```shell
-    systemctl start irqbalance
-    ```
-   
-5. Stop the firewall and disable firewall auto-start.
-
-    ```shell
-    systemctl stop firewalld.service
-    systemctl disable firewalld.service
-    ```
-   
-6. Modify sysctl parameters.
-   
-    ```shell
-    echo "fs.file-max = 1000000">> /etc/sysctl.conf
-    echo "net.core.somaxconn = 32768">> /etc/sysctl.conf
-    echo "net.ipv4.tcp_tw_recycle = 0">> /etc/sysctl.conf
-    echo "net.ipv4.tcp_syncookies = 0">> /etc/sysctl.conf
-    echo "vm.overcommit_memory = 1">> /etc/sysctl.conf
-    echo "vm.swappiness = 0">> /etc/sysctl.conf
-    sysctl -p
-    ```
-   
-7. Configure the user's `limits.conf` file.
-
-    ```shell
-    cat << EOF >>/etc/security/limits.conf
-    tidb           soft    nofile          1000000
-    tidb           hard    nofile          1000000
-    tidb           soft    stack           32768
-    tidb           hard    stack           32768
-    tidb           soft    core            unlimited
-    tidb           hard    core            unlimited
-    EOF
-    ```
+For more information, see [TiDB Environment and System Configuration Check](/check-before-deployment.md). Note that you need to skip the step [Manually configure the SSH mutual trust and sudo without password](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password) in the document.
 
 ## Deploy and manage the cluster
 
 To use the `tidb` user created in preceding steps and avoid creating a new one, add `--user tidb` when running the following `deploy` command:
 
 ```shell
-tiup cluster deploy mycluster v8.1.0 topology.yaml --user tidb
+tiup cluster deploy mycluster v8.5.0 topology.yaml --user tidb
 ```
+
+> **Note:**
+>
+> You need to replace `v8.5.0` in the preceding command with the TiDB version that you want to deploy and `mycluster` with the name you want to give to your cluster.
 
 Start the cluster:
 
