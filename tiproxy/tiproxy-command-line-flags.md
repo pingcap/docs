@@ -231,7 +231,7 @@ Example output:
     "progress": "100%",
     "output": "/tmp/traffic",
     "duration": "2h",
-    "compress": true,
+    "compress": true
   },
   {
     "type": "capture",
