@@ -146,7 +146,7 @@ For more information, see [TiDB Environment and System Configuration Check](/che
 To use the `tidb` user created in preceding steps and avoid creating a new one, add `--user tidb` when running the following `deploy` command:
 
 ```shell
-tiup cluster deploy mycluster v8.1.0 topology.yaml --user tidb
+tiup cluster deploy mycluster v8.5.0 topology.yaml --user tidb
 ```
 
 > **Note:**
