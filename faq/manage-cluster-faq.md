@@ -413,12 +413,17 @@ It depends on your TiDB version and whether TiKV API V2 is enabled ([`storage.ap
 
 This section describes common problems you might encounter during TiDB testing, their causes, and solutions.
 
+### How to conduct a Sysbench benchmark test for TiDB?
+
+See [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md).
+
 ### What is the performance test result for TiDB using Sysbench?
 
-At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done a similar official test and find the test result is consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find a benchmark point. The suggestions are as follows:
+At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done similar tests and find the test results are consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find an entirely equivalent benchmark across many aspects.
 
-- Do not spend too much time on the benchmark test. Pay more attention to the difference of scenarios using TiDB.
-- See [Performance test result for TiDB using Sysbench](/benchmark/v3.0-performance-benchmarking-with-sysbench.md).
+Therefore, there is no need to overly focus on these benchmark tests. Instead, it is recommended to pay more attention to the difference of scenarios using TiDB.
+
+To learn about the performance of TiDB v8.5.0, you can refer to the [performance test reports](https://docs.pingcap.com/tidbcloud/v8.5-performance-highlights) of the TiDB Cloud Dedicated cluster.
 
 ### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
 
