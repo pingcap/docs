@@ -33,7 +33,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
     2. Use the `root` user to start the user service.
    
         ```shell
-        $ uid=$(id -u tidb) # Get the id of the tidb user
+        $ uid=$(id -u tidb) # Get the ID of the tidb user
         $ systemctl start user@${uid}.service
         $ systemctl status user@${uid}.service
         user@1000.service - User Manager for UID 1000
