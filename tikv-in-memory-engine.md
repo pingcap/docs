@@ -37,6 +37,8 @@ To enable the TiKV MVCC in-memory engine (IME), you need to adjust the [TiKV con
 ```toml
 [in-memory-engine]
 # This parameter is the switch for the in-memory engine feature, which is disabled by default. You can set it to true to enable it.
+# It is recommended to configure at least 8 GiB of memory for the TiKV node, with 32 GiB or more for optimal performance.
+# If the available memory for the TiKV node is insufficient, the in-memory engine will not be enabled even if this configuration item is set to true. In such cases, check the TiKV log file for messages containing "in-memory engine is disabled because" to learn why the in-memory engine is not enabled.
 enable = false
 
 # This parameter controls the memory size available to the in-memory engine.
