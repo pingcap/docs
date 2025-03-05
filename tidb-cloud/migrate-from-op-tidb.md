@@ -361,7 +361,7 @@ To replicate incremental data, do the following:
 8. Backup the [query bindings](/sql-plan-management.md) in upstream cluster and restore them in the downstream cluster. You can use the following query to backup the query bindings:
 
     ```sql
-    SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING for ', original_sql,' USING ', bind_sql,';')) from mysql.bind_info where status='enabled';
+    SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING for ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
     ```
 
     If you don't get any output you might not be using query bindings, which means you can skip this step.
