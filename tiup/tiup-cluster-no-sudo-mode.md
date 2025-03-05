@@ -24,7 +24,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
     1. Use the `tidb` user to set the `XDG_RUNTIME_DIR` environment variable.
    
         ```shell
-        sudo -iu tidb  # This is to switch to the tidb user
+        sudo -iu tidb  # Switch to the tidb user
         mkdir -p ~/.bashrc.d
         echo "export XDG_RUNTIME_DIR=/run/user/$(id -u)" > ~/.bashrc.d/systemd
         source ~/.bashrc.d/systemd
