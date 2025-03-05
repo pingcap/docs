@@ -358,11 +358,13 @@ To replicate incremental data, do the following:
         SELECT @@global.time_zone;
         ```
 
-8. Backup the query bindings in upstream cluster and restore them in the downstream cluster. You can use the following query to backup the query bindings:
+8. Backup the [query bindings](/sql-plan-management.md) in upstream cluster and restore them in the downstream cluster. You can use the following query to backup the query bindings:
 
     ```sql
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING for ', original_sql,' USING ', bind_sql,';')) from mysql.bind_info where status='enabled';
     ```
+
+    If you don't get any output you might not be using query bindings, which means you can skip this step.
 
     After you get the query bindings, you can run them in the downstream cluster to restore the query bindings.
 
