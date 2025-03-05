@@ -273,11 +273,11 @@ For example, the following output indicates a running capture job:
 [
    {
       "type": "capture",
+      "status": "running",
       "start_time": "2024-09-03T09:10:58.220644+08:00",
-      "duration": "2h",
-      "output": "/tmp/traffic",
       "progress": "45%",
-      "status": "running"
+      "output": "/tmp/traffic",
+      "duration": "2h"
    }
 ]
 ```

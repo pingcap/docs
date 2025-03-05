@@ -57,7 +57,7 @@ The following output example shows that the traffic replay jobs of two TiProxy i
 
 ```
 +----------------------------+----------------------------+----------------+--------+----------+----------+------------------+--------------------------------------------------------------------+
-| START_TIME                 | END_TIME                   | INSTANCE       | TYPE   | PROGRESS | STATUS   | FAIL_REASON      | PARAMS                                                                     |
+| START_TIME                 | END_TIME                   | INSTANCE       | TYPE   | PROGRESS | STATUS   | FAIL_REASON      | PARAMS                                                             |
 +----------------------------+----------------------------+----------------+--------+----------+----------+------------------+--------------------------------------------------------------------+
 | 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:42.000000 | 10.1.0.10:3080 | replay | 70%      | canceled | manually stopped | INPUT="/tmp/traffic", USER="root", SPEED=0.000000, READ_ONLY=false |
 | 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:43.000000 | 10.1.0.11:3080 | replay | 69%      | canceled | manually stopped | INPUT="/tmp/traffic", USER="root", SPEED=0.000000, READ_ONLY=false |
