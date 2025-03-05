@@ -24,6 +24,7 @@ The `SHOW TRAFFIC JOBS` statement returns the following columns:
 | `PROGRESS` | The completion percentage of the job |
 | `STATUS` | The current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job fails. |
 | `FAIL_REASON` | If the job fails, this column contains the reason for the failure. Otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS`. |
+| `PARAMS` | The parameters of the job |
 
 ## Synopsis
 
@@ -43,24 +44,24 @@ SHOW TRAFFIC JOBS
 The following output example shows that two TiProxy instances are capturing traffic, and the progress is 45% for both:
 
 ```
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
-| START_TIME                 | END_TIME | INSTANCE       | TYPE    | PROGRESS | STATUS  | FAIL_REASON |
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
-| 2024-12-17 10:54:41.000000 |          | 10.1.0.10:3080 | capture | 45%      | running |             |
-| 2024-12-17 10:54:41.000000 |          | 10.1.0.11:3080 | capture | 45%      | running |             |
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
+| START_TIME                 | END_TIME | INSTANCE       | TYPE    | PROGRESS | STATUS  | FAIL_REASON | PARAMS                                                                     |
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
+| 2024-12-17 10:54:41.000000 |          | 10.1.0.10:3080 | capture | 45%      | running |             | OUTPUT="/tmp/traffic", DURATION="10s", COMPRESS=true, ENCRYPTION_METHOD="" |
+| 2024-12-17 10:54:41.000000 |          | 10.1.0.11:3080 | capture | 45%      | running |             | OUTPUT="/tmp/traffic", DURATION="10s", COMPRESS=true, ENCRYPTION_METHOD="" |
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
 2 rows in set (0.01 sec)
 ```
 
 The following output example shows that the traffic replay jobs of two TiProxy instances are manually canceled:
 
 ```
-+----------------------------+----------------------------+----------------+--------+----------+----------+------------------+
-| START_TIME                 | END_TIME                   | INSTANCE       | TYPE   | PROGRESS | STATUS   | FAIL_REASON      |
-+----------------------------+----------------------------+----------------+--------+----------+----------+------------------+
-| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:42.000000 | 10.1.0.10:3080 | replay | 70%      | canceled | manually stopped |
-| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:43.000000 | 10.1.0.11:3080 | replay | 69%      | canceled | manually stopped |
-+----------------------------+----------------------------+----------------+--------+----------+----------+------------------+
++----------------------------+----------------------------+----------------+--------+----------+----------+------------------+----------------------------------------------------------------------------+
+| START_TIME                 | END_TIME                   | INSTANCE       | TYPE   | PROGRESS | STATUS   | FAIL_REASON      | PARAMS                                                                     |
++----------------------------+----------------------------+----------------+--------+----------+----------+------------------+----------------------------------------------------------------------------+
+| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:42.000000 | 10.1.0.10:3080 | replay | 70%      | canceled | manually stopped | INPUT="/tmp/traffic", USER="root", SPEED=0.000000, READ_ONLY=false         |
+| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:43.000000 | 10.1.0.11:3080 | replay | 69%      | canceled | manually stopped | INPUT="/tmp/traffic", USER="root", SPEED=0.000000, READ_ONLY=false         |
++----------------------------+----------------------------+----------------+--------+----------+----------+------------------+----------------------------------------------------------------------------+
 2 rows in set (0.01 sec)
 ```
 

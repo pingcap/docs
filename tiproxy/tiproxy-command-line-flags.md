@@ -205,19 +205,19 @@ The `tiproxyctl traffic cancel` command is used to cancel the current capture or
 The `tiproxyctl traffic show` command is used to display historical capture and replay jobs. It outputs an array of objects, and each object represents a job. Each job has the following fields:
 
 - `type`: the job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job
+- `status`: the current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job fails.
 - `start_time`: the start time of the job
 - `end_time`: the end time if the job has finished. Otherwise it is empty.
-- `duration`: the duration of the traffic capture job
+- `progress`: the completion percentage of the job
+- `error`: if the job fails, this column contains the reason for the failure. Otherwise it is empty. For example, `manually stopped` means the user manually cancels the job by executing `CANCEL TRAFFIC JOBS`.
 - `output`: the output traffic file path of the capture job
-- `encryption_method`: the encryption method of the traffic file
+- `duration`: the duration of the traffic capture job
 - `compress`: whether the traffic files are compressed
+- `encryption_method`: the encryption method of the traffic file
 - `input`: the input traffic file path of the replay job
 - `username`: the database username for traffic replay
 - `speed`: the replay speed multiplier
 - `read_only`: whether only replays read-only statements
-- `progress`: the completion percentage of the job
-- `status`: the current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job fails.
-- `error`: if the job fails, this column contains the reason for the failure. Otherwise it is empty. For example, `manually stopped` means the user manually cancels the job by executing `CANCEL TRAFFIC JOBS`.
 
 Example output:
 
@@ -225,30 +225,31 @@ Example output:
 [
   {
     "type": "capture",
+    "status": "done",
     "start_time": "2024-09-01T14:30:40.99096+08:00",
     "end_time": "2024-09-01T16:30:40.99096+08:00",
-    "duration": "2h",
-    "output": "/tmp/traffic",
     "progress": "100%",
-    "status": "done"
+    "output": "/tmp/traffic",
+    "duration": "2h",
+    "compress": true,
   },
   {
     "type": "capture",
+    "status": "canceled",
     "start_time": "2024-09-02T18:30:40.99096+08:00",
     "end_time": "2024-09-02T19:00:40.99096+08:00",
-    "duration": "2h",
-    "output": "/tmp/traffic",
     "progress": "25%",
-    "status": "canceled",
-    "error": "manually stopped"
+    "error": "manually stopped",
+    "output": "/tmp/traffic",
+    "duration": "2h"
   },
   {
     "type": "capture",
+    "status": "running",
     "start_time": "2024-09-03T13:31:40.99096+08:00",
-    "duration": "2h",
-    "output": "/tmp/traffic",
     "progress": "45%",
-    "status": "running"
+    "output": "/tmp/traffic",
+    "duration": "2h"
   }
 ]
 ```
