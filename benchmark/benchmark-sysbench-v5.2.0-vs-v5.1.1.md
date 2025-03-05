@@ -1,5 +1,6 @@
 ---
 title: TiDB Sysbench Performance Test Report -- v5.2.0 vs. v5.1.1
+aliases: ['/tidb/dev/benchmark-sysbench-v5.2.0-vs-v5.1.1/','/tidb/stable/benchmark-sysbench-v5.2.0-vs-v5.1.1/']
 ---
 
 # TiDB Sysbench Performance Test Report -- v5.2.0 vs. v5.1.1
