@@ -365,7 +365,7 @@ Region is not divided in advance, but it follows a Region split mechanism. When 
 
 ### Does TiKV have the `innodb_flush_log_trx_commit` parameter like MySQL, to guarantee the security of data?
 
-Yes. Currently, the standalone storage engine uses two RocksDB instances. One instance is used to store the raft-log. When the `sync-log` parameter in TiKV is set to true, each commit is mandatorily flushed to the raft-log. If a crash occurs, you can restore the KV data using the raft-log.
+Yes. Currently, the standalone storage engine uses two RocksDB instances. One instance is used to store the raft-log. In TiKV, each commit is mandatorily flushed to the raft-log. If a crash occurs, you can restore the KV data using the raft-log.
 
 ### What is the recommended server configuration for WAL storage, such as SSD, RAID level, cache strategy of RAID card, NUMA configuration, file system, I/O scheduling strategy of the operating system?
 
@@ -377,17 +377,9 @@ WAL belongs to ordered writing, and currently, we do not apply a unique configur
 - NUMA: no specific suggestion; for memory allocation strategy, you can use `interleave = all`
 - File system: ext4
 
-### How is the write performance in the most strict data available mode (`sync-log = true`)?
+### Can Raft + multiple replicas in the TiKV architecture achieve absolute data safety?
 
-Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](/benchmark/v3.0-performance-benchmarking-with-sysbench.md).
-
-### Can Raft + multiple replicas in the TiKV architecture achieve absolute data safety? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
-
-Data is redundantly replicated between TiKV nodes using the [Raft Consensus Algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, it is strongly recommended that you enable the `sync-log` mode.
-
-As an alternative to using `sync-log`, you may also consider having five replicas instead of three in your Raft group. This would allow for the failure of two replicas, while still providing data safety.
-
-For a standalone TiKV node, it is still recommended to enable the `sync-log` mode. Otherwise, the last write might be lost in case of a node failure.
+Data is redundantly replicated between TiKV nodes using the [Raft Consensus Algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, consider having five replicas instead of three in your Raft group. This would allow for the failure of two replicas, while still providing data safety.
 
 ### Since TiKV uses the Raft protocol, multiple network roundtrips occur during data writing. What is the actual write delay?
 

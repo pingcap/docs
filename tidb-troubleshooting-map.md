@@ -211,7 +211,7 @@ To learn more about the inconsistency error and how to bypass the check, see [Tr
 
 ### 4.1 TiKV panics and fails to start
 
-- 4.1.1 `sync-log = false`. The `unexpected raft log index: last_index X < applied_index Y` error is returned after the machine is powered off.
+- 4.1.1 The `unexpected raft log index: last_index X < applied_index Y` error is returned after the machine is powered off.
 
     This issue is expected. You can restore the Region using `tikv-ctl`.
 
