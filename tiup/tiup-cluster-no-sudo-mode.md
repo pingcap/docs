@@ -116,7 +116,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
 > **Note:**
 >
-> If you use a minimal install, make sure the `tar` package is installed. Otherwise the `tiup cluster check` command will fail.
+> If you use a minimal install, make sure the `tar` package is installed. Otherwise, the `tiup cluster check` command will fail.
 
 Executing `tiup cluster check topology.yaml --user tidb` can generate some failed check items. The following is an example.
 
