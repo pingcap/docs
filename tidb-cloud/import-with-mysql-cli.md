@@ -20,9 +20,13 @@ TiDB クラスターに接続します。
 
 1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動します。
 
-2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示されます。
+2.  左側のナビゲーション ペインで、 **[ネットワーク]**をクリックします。
 
-3.  **[どこからでもアクセスを許可]**をクリックします。
+3.  **[ネットワーク]**ページで、 **[IP アクセス リスト]**領域の**[IP アドレスの追加] を**クリックします。
+
+4.  ダイアログで、 **[どこからでもアクセスを許可する]**を選択し、 **[確認]**をクリックします。
+
+5.  右上隅の**「接続」**をクリックすると、接続情報のダイアログが開きます。
 
     接続文字列を取得する方法の詳細については、 [パブリック接続経由​​でTiDB Cloud Dedicatedに接続する](/tidb-cloud/connect-via-standard-connection.md)参照してください。
 
@@ -59,12 +63,12 @@ SQL ファイルからデータをインポートするには、次の手順を�
 2.  SQL ファイルからデータをインポートするには、次のコマンドを使用します。
 
     ```bash
-    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p <your_password> < product_data.sql
+    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> < product_data.sql
     ```
 
 > **注記：**
 >
-> ここで使用されるデフォルトのデータベース名は`test`ですが、手動で独自のデータベースを作成することも、SQL ファイルで`CREATE DATABASE`コマンドを使用することもできます。
+> ここで使用されるデフォルトのデータベース名は`test`ですが、独自のデータベースを手動で作成するか、SQL ファイルで`CREATE DATABASE`コマンドを使用することができます。
 
 </div>
 <div label="From a CSV file">

@@ -9,7 +9,7 @@ summary: TiDB システム テーブルについて学習します。
 
 > **注記：**
 >
-> ほとんどのシナリオでは、 `INSERT` 、 `UPDATE` 、または`DELETE`使用してシステム テーブルの内容を直接変更することは推奨されません。代わりに、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md) 、 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) 、 [`DROP USER`](/sql-statements/sql-statement-drop-user.md) 、 [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) 、 [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) 、および[`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)などのステートメントを使用して、ユーザーと権限を管理します。システム テーブルを直接変更する必要がある場合は、 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)使用して変更を有効にします。
+> ほとんどのシナリオでは、 `INSERT` 、 `UPDATE` 、または`DELETE`を使用してシステム テーブルの内容を直接変更することは推奨されません。代わりに、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md) 、 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) 、 [`DROP USER`](/sql-statements/sql-statement-drop-user.md) 、 [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) 、 [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) 、および[`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)などのステートメントを使用して、ユーザーと権限を管理します。システム テーブルを直接変更する必要がある場合は、 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)使用して変更を有効にします。
 
 ## システムテーブルの付与 {#grant-system-tables}
 
@@ -47,6 +47,9 @@ summary: TiDB システム テーブルについて学習します。
 -   `stats_extended` : 列間の順序相関などの拡張統計
 -   `stats_feedback` : 統計のクエリフィードバック
 -   `stats_fm_sketch` : 統計列のヒストグラムのFMSketch分布
+-   `stats_table_locked` : ロックされた統計に関する情報
+-   `stats_meta_history` : 履歴統計のメタ情報
+-   `stats_history` : 履歴統計のその他の情報
 -   `analyze_options` : 各テーブルのデフォルトの`analyze`オプション
 -   `column_stats_usage` : 列統計の使用
 -   `analyze_jobs` : 進行中の統計収集タスクと過去 7 日間の履歴タスク レコード
@@ -55,6 +58,11 @@ summary: TiDB システム テーブルについて学習します。
 
 -   `bind_info` : 実行計画のバインディング情報
 -   `capture_plan_baselines_blacklist` : 実行プランの自動バインディングのブロックリスト
+
+## PLAN REPLAYER に関連するシステム テーブル {#system-tables-related-to-plan-replayer}
+
+-   `plan_replayer_status` : ユーザーが登録した[`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture)タスク
+-   `plan_replayer_task` : [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture)タスクの結果
 
 ## GC ワーカー システム テーブル {#gc-worker-system-tables}
 
@@ -117,6 +125,7 @@ summary: TiDB システム テーブルについて学習します。
 -   `opt_rule_blacklist` : 論理最適化ルールのブロックリスト
 -   `tidb_import_jobs` : [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)の求人情報
 -   `tidb_timers` : 内部タイマーのメタデータ
+-   `advisory_locks` : [ロック関数](/functions-and-operators/locking-functions.md)に関連する情報
 
 </CustomContent>
 

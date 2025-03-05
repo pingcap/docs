@@ -67,12 +67,12 @@ SQL ファイルからデータをインポートするには、次の手順を�
 2.  SQL ファイルからデータをインポートするには、次のコマンドを使用します。
 
     ```bash
-    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p <your_password> < product_data.sql
+    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> < product_data.sql
     ```
 
 > **注記：**
 >
-> ここで使用されるデフォルトのデータベース名は`test`ですが、手動で独自のデータベースを作成することも、SQL ファイルで`CREATE DATABASE`コマンドを使用することもできます。
+> ここで使用されるデフォルトのデータベース名は`test`ですが、独自のデータベースを手動で作成するか、SQL ファイルで`CREATE DATABASE`コマンドを使用することができます。
 
 </div>
 <div label="From a CSV file">

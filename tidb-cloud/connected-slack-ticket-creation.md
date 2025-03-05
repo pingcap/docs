@@ -1,11 +1,15 @@
 ---
 title: Create Tickets and Subscribe to Ticket Updates in Slack
-summary: Slack チケットの作成とサブスクリプションの更新に関する詳細情報を紹介します。
+summary: Slack チケットの作成と更新サブスクリプションに関する詳細情報を紹介します。
 ---
 
 # Slack でチケットを作成し、チケットの更新を購読する {#create-tickets-and-subscribe-to-ticket-updates-in-slack}
 
 **Enterprise** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は[スラック](https://slack.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供し、迅速なチケット作成をサポートします。
+
+> **注記：**
+>
+> Slack のチケット サポート機能は、リクエストに応じてご利用いただけます。この機能を試してみたい場合は、 TiDB Cloudサポート ( <a href="mailto:support@pingcap.com">[サポート](mailto:support@pingcap.com)</a>にお問い合わせいただくか、テクニカル アカウント マネージャー (TAM) にご連絡ください。
 
 ## サポートチケットを作成する {#create-a-support-ticket}
 

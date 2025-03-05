@@ -9,7 +9,7 @@ PingCAP を搭載したインスタント メッセージ (IM) の AI チャッ�
 
 ## 制限 {#limitation}
 
-現在、 [ラーク](https://www.larksuite.com/)のチケット サポート機能はまだベータ版であり、リクエストに応じて利用できます。この機能を試してみたい場合は、 <a href="mailto:support@pingcap.com">[サポート](mailto:support@pingcap.com)</a>のTiDB Cloudサポートに連絡するか、テクニカル アカウント マネージャー (TAM) に問い合わせてください。
+現在、 [スラック](https://slack.com/)と[ラーク](https://www.larksuite.com/)チケット サポート機能はリクエストに応じてご利用いただけます。この機能を試してみたい場合は、 <a href="mailto:support@pingcap.com">[サポート](mailto:support@pingcap.com)</a>のTiDB Cloudサポートにお問い合わせいただくか、テクニカル アカウント マネージャー (TAM) にご連絡ください。
 
 ## 例 {#example}
 

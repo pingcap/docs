@@ -68,7 +68,7 @@
         -   [データの挿入](/develop/dev-guide-insert-data.md)
         -   [データの更新](/develop/dev-guide-update-data.md)
         -   [データを削除](/develop/dev-guide-delete-data.md)
-        -   [Time to Liveを使用して定期的にデータを削除する](/time-to-live.md)
+        -   [有効期限を使用して定期的にデータを削除する](/time-to-live.md)
         -   [準備された声明](/develop/dev-guide-prepared-statement.md)
     -   データの読み取り
         -   [単一のテーブルからデータをクエリする](/develop/dev-guide-get-data-from-single-table.md)
@@ -137,7 +137,7 @@
     -   [インポートのベストプラクティス](/tidb-lightning/data-import-best-practices.md)
     -   移行シナリオ
         -   [Auroraからの移行](/migrate-aurora-to-tidb.md)
-        -   [MySQL から小さなデータセットを移行する](/migrate-small-mysql-to-tidb.md)
+        -   [MySQL から小規模データセットを移行する](/migrate-small-mysql-to-tidb.md)
         -   [MySQL から大規模なデータセットを移行する](/migrate-large-mysql-to-tidb.md)
         -   [小さなデータセットの MySQL シャードの移行とマージ](/migrate-small-mysql-shards-to-tidb.md)
         -   [大規模データセットの MySQL シャードの移行とマージ](/migrate-large-mysql-shards-to-tidb.md)
@@ -188,7 +188,7 @@
             -   [バックアップストレージ](/br/backup-and-restore-storages.md)
         -   BR CLI マニュアル
             -   [概要](/br/use-br-command-line-tool.md)
-            -   [スナップショットのバックアップと復元コマンドマニュアル](/br/br-snapshot-manual.md)
+            -   [スナップショットのバックアップと復元のコマンドマニュアル](/br/br-snapshot-manual.md)
             -   [ログバックアップとPITRコマンドマニュアル](/br/br-pitr-manual.md)
         -   参考文献
             -   BR機能
@@ -200,7 +200,7 @@
             -   [RawKV のバックアップと復元](/br/rawkv-backup-and-restore.md)
             -   [増分バックアップと復元](/br/br-incremental-guide.md)
     -   クラスタ災害復旧 (DR)
-        -   [DRソリューションの概要](/dr-solution-introduction.md)
+        -   [DR ソリューションの概要](/dr-solution-introduction.md)
         -   [プライマリ-セカンダリ DR](/dr-secondary-cluster.md)
         -   [マルチレプリカクラスタDR](/dr-multi-replica.md)
         -   [BRベースのDR](/dr-backup-restore.md)
@@ -307,7 +307,7 @@
             -   [準備されていない実行プランのキャッシュ](/sql-non-prepared-plan-cache.md)
         -   制御実行計画
             -   [概要](/control-execution-plan.md)
-            -   [オプティマイザーのヒント](/optimizer-hints.md)
+            -   [オプティマイザのヒント](/optimizer-hints.md)
             -   [SQL プラン管理](/sql-plan-management.md)
             -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
             -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
@@ -1103,6 +1103,7 @@
     -   バージョン6.6
         -   [6.6.0-DMR](/releases/release-6.6.0.md)
     -   バージョン6.5
+        -   [6.5.12](/releases/release-6.5.12.md)
         -   [6.5.11](/releases/release-6.5.11.md)
         -   [6.5.10](/releases/release-6.5.10.md)
         -   [6.5.9](/releases/release-6.5.9.md)

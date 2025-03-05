@@ -7,6 +7,10 @@ summary: サポート チケットの Slack のやり取りに関する詳細情
 
 **Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は[スラック](https://slack.com/)で**Assist**と呼ばれるチケット ボットを提供し、サポート チケットのより包括的なやり取りと管理をサポートします。
 
+> **注記：**
+>
+> Slack のチケット サポート機能は、リクエストに応じてご利用いただけます。この機能を試してみたい場合は、 TiDB Cloudサポート ( <a href="mailto:support@pingcap.com">[サポート](mailto:support@pingcap.com)</a>にお問い合わせいただくか、テクニカル アカウント マネージャー (TAM) にご連絡ください。
+
 ## サポートチケットとのやり取り {#interact-with-support-tickets}
 
 チャネルに**Assist**アプリが追加されている場合は、 **Assist**を使用してチケットを送信できます。リクエストを送信するには 2 つの方法があります。
@@ -25,13 +29,13 @@ summary: サポート チケットの Slack のやり取りに関する詳細情
 
     ![slack-ticket-interaction-4](/media/tidb-cloud/connected-slack-ticket-interaction-4.png)
 
--   **方法2: チケット作成のために、問題の説明とともに`/assist`または`/assist`入力します。**
+-   **方法 2: チケット作成のために、問題の説明とともに`/assist`または`/assist`入力します。**
 
     もう 1 つのより速い方法は、メッセージ ボックスに`/assist`または`/assist [problem description]`と入力して**Enter キー**を押すことです。入力して送信するためのリクエスト送信フォームが表示されます。
 
     ![slack-ticket-interaction-5](/media/tidb-cloud/connected-slack-ticket-interaction-5.png)
 
-送信後、Assist アプリはチケット リンクとチケット ステータスを含む確認メッセージをスレッドに送信します。
+送信後、Assist アプリはスレッド内に確認メッセージを送信します。このメッセージには、チケット リンクとチケットのステータスが含まれます。
 
 **Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)にご加入のお客様の場合、Slack とチケットシステム間の双方向の情報同期がサポートされます。
 

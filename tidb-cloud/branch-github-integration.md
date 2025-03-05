@@ -11,7 +11,7 @@ summary: TiDB Cloud Serverless ブランチ機能を GitHub と統合する方�
 
 アプリケーション開発に GitHub を使用する場合は、 TiDB Cloud Serverless ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。
 
-統合プロセスでは、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching) GitHub アプリをインストールするように求められます。このアプリは、GitHub リポジトリのプル リクエストに従ってTiDB Cloud Serverless ブランチを自動的に管理できます。たとえば、プル リクエストを作成すると、アプリはTiDB Cloud Serverless クラスターに対応するブランチを作成します。このブランチでは、本番データベースに影響を与えることなく、新機能やバグ修正を個別に行うことができます。
+統合プロセスでは、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching) GitHub アプリをインストールするように求められます。このアプリは、GitHub リポジトリのプル リクエストに従ってTiDB Cloud Serverless ブランチを自動的に管理できます。たとえば、プル リクエストを作成すると、アプリはTiDB Cloud Serverless クラスターの対応するブランチを作成します。このブランチでは、本番データベースに影響を与えることなく、新機能やバグ修正を個別に行うことができます。
 
 このドキュメントでは、次のトピックについて説明します。
 
@@ -23,8 +23,8 @@ summary: TiDB Cloud Serverless ブランチ機能を GitHub と統合する方�
 
 統合する前に、次のものを用意してください。
 
--   GitHub アカウント
--   アプリケーション用のGitHubリポジトリ
+-   GitHubアカウント
+-   アプリケーション用の GitHub リポジトリ
 -   [TiDB Cloudサーバーレス クラスター](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ## TiDB Cloud ServerlessブランチをGitHubリポジトリに統合する {#integrate-tidb-cloud-serverless-branching-with-your-github-repository}
@@ -35,7 +35,7 @@ TiDB Cloud Serverless ブランチを GitHub リポジトリに統合するに�
 
 2.  左側のナビゲーション ペインで**[ブランチ]**をクリックします。
 
-3.  **「ブランチ」**ページの右上隅にある**「GitHub に接続」**をクリックします。
+3.  **「ブランチ」**ページの右上隅にある**「GitHub に接続」を**クリックします。
 
     -   GitHub にログインしていない場合は、まず GitHub にログインするように求められます。
     -   統合を初めて使用する場合は、 **TiDB Cloud Branching**アプリを承認するように求められます。
@@ -44,7 +44,7 @@ TiDB Cloud Serverless ブランチを GitHub リポジトリに統合するに�
 
 4.  **「GitHub に接続」**ダイアログで、 **「GitHub アカウント」**ドロップダウン リストから GitHub アカウントを選択します。
 
-    アカウントがリストに存在しない場合は、 **「その他のアカウントのインストール」**をクリックし、画面の指示に従ってアカウントをインストールします。
+    アカウントがリストに存在しない場合は、 **「その他のアカウントのインストール」を**クリックし、画面の指示に従ってアカウントをインストールします。
 
 5.  **GitHub リポジトリの**ドロップダウン リストでターゲット リポジトリを選択します。リストが長い場合は、名前を入力してリポジトリを検索できます。
 
@@ -56,12 +56,12 @@ TiDB Cloud Serverless ブランチを GitHub リポジトリに統合するに�
 
 TiDB Cloud Serverless クラスターを GitHub リポジトリに接続すると、このリポジトリ内の各プル リクエストに対して、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching) GitHub App が対応するTiDB Cloud Serverless ブランチを自動的に管理できるようになります。プル リクエストの変更に対するデフォルトの動作を次に示します。
 
-| プルリクエストの変更             | TiDB Cloudブランチングアプリの動作                                                                                                                                                                                                                                                                                                                                                                          |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| プルリクエストを作成する           | リポジトリにプル リクエストを作成すると、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリはTiDB Cloud Serverless クラスターのブランチを作成します。 `branch.mode`が`reset`に設定されている場合、ブランチ名は`${github_branch_name}_${pr_id}`形式に従います。 `branch.mode`が`reserve`に設定されている場合、ブランチ名は`${github_branch_name}_${pr_id}_${commit_sha}`形式に従います。ブランチの数には[制限](/tidb-cloud/branch-overview.md#limitations-and-quotas)があることに注意してください。 |
-| 新しいコミットをプルリクエストにプッシュする | `branch.mode` `reset`に設定すると、リポジトリ内のプル リクエストに新しいコミットをプッシュするたびに、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリはTiDB Cloud Serverless ブランチをリセットします。 `branch.mode` `reserve`に設定すると、アプリは最新のコミット用に新しいブランチを作成します。                                                                                                                                                                  |
-| プルリクエストをクローズまたはマージする   | プル リクエストをクローズまたはマージすると、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリによってこのプル リクエストのブランチが削除されます。                                                                                                                                                                                                                                                                            |
-| プルリクエストを再開する           | プル リクエストを再度開くと、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリによってプル リクエストの最新のコミットのブランチが作成されます。                                                                                                                                                                                                                                                                              |
+| プルリクエストの変更             | TiDB Cloudブランチングアプリの動作                                                                                                                                                                                                                                                                                                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| プルリクエストを作成する           | リポジトリにプル リクエストを作成すると、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリはTiDB Cloud Serverless クラスターのブランチを作成します。 `branch.mode` `reset`に設定されている場合、ブランチ名は`${github_branch_name}_${pr_id}`形式に従います。 `branch.mode` `reserve`に設定されている場合、ブランチ名は`${github_branch_name}_${pr_id}_${commit_sha}`形式に従います。 ブランチの数には[制限](/tidb-cloud/branch-overview.md#limitations-and-quotas)があることに注意してください。 |
+| 新しいコミットをプルリクエストにプッシュする | `branch.mode` `reset`に設定すると、リポジトリ内のプル リクエストに新しいコミットをプッシュするたびに、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリはTiDB Cloud Serverless ブランチをリセットします。 `branch.mode` `reserve`に設定すると、アプリは最新のコミット用に新しいブランチを作成します。                                                                                                                                                                   |
+| プルリクエストをクローズまたはマージする   | プル リクエストをクローズまたはマージすると、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリによってこのプル リクエストのブランチが削除されます。                                                                                                                                                                                                                                                                             |
+| プルリクエストを再開する           | プル リクエストを再度開くと、 [TiDB Cloudブランチ](https://github.com/apps/tidb-cloud-branching)アプリによってプル リクエストの最新のコミットのブランチが作成されます。                                                                                                                                                                                                                                                                               |
 
 ## TiDB Cloud Branching アプリを構成する {#configure-tidb-cloud-branching-app}
 
@@ -123,7 +123,7 @@ github:
 
 ## 分岐CIワークフローを作成する {#create-a-branching-ci-workflow}
 
-ブランチを使用するベスト プラクティスの 1 つは、ブランチ CI ワークフローを作成することです。このワークフローを使用すると、プル リクエストをマージする前に、本番クラスターを使用する代わりに、 TiDB Cloud Serverless ブランチを使用してコードをテストできます。ライブ デモ[ここ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)をご覧ください。
+ブランチを使用するベスト プラクティスの 1 つは、ブランチ CI ワークフローを作成することです。このワークフローを使用すると、プル リクエストをマージする前に、本番クラスターを使用する代わりに、 TiDB Cloud Serverless ブランチを使用してコードをテストできます。ライブ デモ[ここ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)ご覧ください。
 
 ワークフローを作成する主な手順は次のとおりです。
 
