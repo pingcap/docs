@@ -365,7 +365,7 @@ Region is not divided in advance, but it follows a Region split mechanism. When 
 
 ### Does TiKV have the `innodb_flush_log_trx_commit` parameter like MySQL, to guarantee the security of data?
 
-Yes. Currently, the standalone storage engine uses two RocksDB instances. One instance is used to store the raft-log. In TiKV, each commit is mandatorily flushed to the raft-log. If a crash occurs, you can restore the KV data using the raft-log.
+TiKV does not have a similar parameter, but each commit on TiKV is forced to be flushed to Raft logs (TiKV uses [Raft Engine](/glossary.md#raft-engine) to store Raft logs and forces a flush when committing). If TiKV crashes, the KV data will be recovered automatically according to the Raft logs.
 
 ### What is the recommended server configuration for WAL storage, such as SSD, RAID level, cache strategy of RAID card, NUMA configuration, file system, I/O scheduling strategy of the operating system?
 
@@ -379,7 +379,11 @@ WAL belongs to ordered writing, and currently, we do not apply a unique configur
 
 ### Can Raft + multiple replicas in the TiKV architecture achieve absolute data safety?
 
-Data is redundantly replicated between TiKV nodes using the [Raft Consensus Algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, consider having five replicas instead of three in your Raft group. This would allow for the failure of two replicas, while still providing data safety.
+Data is redundantly replicated between TiKV nodes using the [Raft Consensus Algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes).
+
+Because theoretically two nodes might crash, data written to TiKV is spilled to disk by default starting from v5.0, which means each commit is forced to be flushed to Raft logs. If TiKV crashes, the KV data will be recovered automatically according to the Raft logs.
+
+In addition, you might consider using five replicas instead of three in your Raft group. This approach would allow for the failure of two replicas, while still providing data safety.
 
 ### Since TiKV uses the Raft protocol, multiple network roundtrips occur during data writing. What is the actual write delay?
 
