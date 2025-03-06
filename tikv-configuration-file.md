@@ -2512,7 +2512,9 @@ TiKV MVCC in-memory engine (IME) configuration items related to the storage laye
 > You can configure this configuration item in the configuration file, but cannot query it via SQL statements.
 
 + Whether to enable the in-memory engine to accelerate multi-version queries. For more information about the in-memory engine, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
-+ Default value: `false` (indicating the in-memory engine is disabled)
++ Default value: `false` (in-memory engine is disabled)
++ It is recommended to configure at least 8 GiB of memory for the TiKV node, with 32 GiB or more for optimal performance.
++ If the available memory for the TiKV node is insufficient, the in-memory engine will not be enabled even if this configuration item is set to `true`. In such cases, check the TiKV log file for messages containing `"in-memory engine is disabled because"` to learn why the in-memory engine is not enabled.
 
 ### `capacity` <span class="version-mark">New in v8.5.0</span>
 
