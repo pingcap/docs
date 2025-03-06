@@ -129,13 +129,8 @@ PlacementPolicyOption ::=
 
 DefaultValueExpr ::=
     NowSymOptionFractionParentheses
-|   SignedLiteralParentheses
 |   NextValueForSequenceParentheses
 |   BuiltinFunction
-
-SignedLiteralParentheses ::=
-    '(' SignedLiteralParentheses ')'
-|   SignedLiteral
 
 BuiltinFunction ::=
     '(' BuiltinFunction ')'
