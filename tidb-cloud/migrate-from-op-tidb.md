@@ -381,7 +381,7 @@ To replicate incremental data, do the following:
     
     function backup_user_priv(){
         ret=0
-        sql="select concat(user,':',host,':',authentication_string) from mysql.user where user not in ('root')"
+        sql="SELECT CONCAT(user,':',host,':',authentication_string) FROM mysql.user WHERE user NOT IN('root')"
         for usr in `$MYSQL -se "$sql"`;do
             u=`echo $usr | awk -F ":" '{print $1}'`
             h=`echo $usr | awk -F ":" '{print $2}'`
