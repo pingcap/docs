@@ -7,7 +7,7 @@ summary: Learn about the compatibility changes, improvements, and bug fixes in T
 
 Release date: xx xx, 2025
 
-TiDB version: 7.5.5
+TiDB version: 7.5.6
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v7.5/production-deployment-using-tiup)
 
@@ -70,6 +70,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue that TTL jobs might be ignored or processed multiple times [#59347](https://github.com/pingcap/tidb/issues/59347) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that incorrect judgment in exchange partition causes execution failure [#59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
     - Fix the issue that setting the `tidb_audit_log` variable with multi-level relative paths causes errors in the log directory [#58971](https://github.com/pingcap/tidb/issues/58971) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that different data types on both sides of the Join's equality condition might cause TiFlash to produce incorrect results [#59877](https://github.com/pingcap/tidb/issues/59877) @[yibin87](https://github.com/yibin87)
 
 + TiKV <!--tw@qiancai: 3 notes-->
 
@@ -80,9 +81,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-6.5.12.md > 错误修复> TiKV - 修复 GC Worker 负载过高时可能出现的死锁问题 [#18214](https://github.com/tikv/tikv/issues/18214) @[zyguan](https://github.com/zyguan)
     - (dup): release-6.5.12.md > 错误修复> TiKV - 修复磁盘卡住可能导致 Leader 无法迁移，进而引发性能抖动的问题 [#17363](https://github.com/tikv/tikv/issues/17363) @[hhwyt](https://github.com/hhwyt)
     - (dup): release-6.5.12.md > 错误修复> TiKV - 修复处理 GBK/GB18030 编码的数据时可能出现编码失败的问题 [#17618](https://github.com/tikv/tikv/issues/17618) @[CbcWestwolf](https://github.com/CbcWestwolf)
-- Fix the issue that CDC connections might cause resource leakage when encountering exceptions [#18245](https://github.com/tikv/tikv/issues/18245) @[wlwilliamx](https://github.com/wlwilliamx)
-- Fix the issue that Region merge might lead to TiKV abnormal exit due to Raft index mismatch [#18129](https://github.com/tikv/tikv/issues/18129) @[glorv](https://github.com/glorv)
-- Fix the issue that Resolved-TS monitoring and logs might be abnormal [#17989](https://github.com/tikv/tikv/issues/17989) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that CDC connections might cause resource leakage when encountering exceptions [#18245](https://github.com/tikv/tikv/issues/18245) @[wlwilliamx](https://github.com/wlwilliamx)
+    - Fix the issue that Region merge might lead to TiKV abnormal exit due to Raft index mismatch [#18129](https://github.com/tikv/tikv/issues/18129) @[glorv](https://github.com/glorv)
+    - Fix the issue that Resolved-TS monitoring and logs might be abnormal [#17989](https://github.com/tikv/tikv/issues/17989) @[ekexium](https://github.com/ekexium)
   
 + PD <!--tw@qiancai: 3 notes-->
 
