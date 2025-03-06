@@ -156,7 +156,6 @@ NextValueForSequenceParentheses ::=
 NextValueForSequence ::=
     "NEXT" "VALUE" forKwd TableName
 |   "NEXTVAL" '(' TableName ')'
-
 ```
 
 The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored.
