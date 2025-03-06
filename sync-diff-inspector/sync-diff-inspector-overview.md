@@ -28,7 +28,7 @@ For TiDB v9.0.0 and later versions:
 
 For TiDB versions before v9.0.0:
 
-+ Binary package from the legacy tidb-tools repository. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
++ Binary package from the legacy [`tidb-tools`](https://github.com/pingcap/tidb-tools) repository. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 
 + Docker image (legacy version). Execute the following command to download:
 
