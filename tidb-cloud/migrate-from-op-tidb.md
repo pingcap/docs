@@ -373,15 +373,15 @@ To replicate incremental data, do the following:
     ```shell
     #!/bin/bash
 
-    HOST={tidb_op_host}
-    PORT={tidb_op_port}
-    USER=root
-    PSWD={root_password}
-    MYSQL="mysql -u${USER} -p${PSWD} -h${HOST} -P${PORT} --default-character-set=utf8mb4"
+    export MYSQL_HOST={tidb_op_host}
+    export MYSQL_TCP_PORT={tidb_op_port}
+    export MYSQL_USER=root
+    export MYSQL_PWD={root_password}
+    export MYSQL="mysql -u${MYSQL_USER} --default-character-set=utf8mb4"
     
     function backup_user_priv(){
         ret=0
-        sql="SELECT CONCAT(user,':',host,':',authentication_string) FROM mysql.user WHERE user NOT IN('root')"
+        sql="SELECT CONCAT(user,':',host,':',authentication_string) FROM mysql.user WHERE user NOT IN ('root')"
         for usr in `$MYSQL -se "$sql"`;do
             u=`echo $usr | awk -F ":" '{print $1}'`
             h=`echo $usr | awk -F ":" '{print $2}'`
