@@ -129,9 +129,7 @@ tiup br restore full \
 
 ### Restore tables in the `mysql` schema
 
-When the cluster is in snapshot backup, BR backs up system tables as tables with the database name prefix with `__TiDB_BR_Temporary`. For example, the table `mysql.user` will be backed up as `__TiDB_BR_Temporary_mysql.user`.
-
-When the cluster is in snapshot restore, BR at first restores tables with the database name prefix with `__TiDB_BR_Temporary`, in order to avoid conflicts with existing system tables in the cluster. Then when BR starts to restore the system tables, it inserts the data from tables with the database name prefix with `__TiDB_BR_Temporary` to the corresponding system tables through the `REPLACE INTO` SQL.
+When you perform a snapshot backup, BR backs up system tables as tables with the `__TiDB_BR_Temporary_` prefix added to the database name. For example, BR backs up the `mysql.user` table as `__TiDB_BR_Temporary_mysql.user`. During the snapshot restore, BR first restores these system tables with the `__TiDB_BR_Temporary_` prefix to avoid conflicts with existing system table data in the target cluster. While restoring system tables, BR writes the data from the tables with the `__TiDB_BR_Temporary_` prefix into the corresponding system tables using the `REPLACE INTO` statement.
 
 - Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default.
 - Starting from v6.2.0, BR lets you specify `--with-sys-table` to restore **data in some system tables**.
