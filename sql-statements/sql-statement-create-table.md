@@ -133,33 +133,33 @@ DefaultValueExpr ::=
 |   BuiltinFunction
 
 SignedLiteralParentheses ::=
-	'(' SignedLiteralParentheses ')'
-|	SignedLiteral
+    '(' SignedLiteralParentheses ')'
+|   SignedLiteral
 
 BuiltinFunction ::=
-	'(' BuiltinFunction ')'
-|	identifier '(' ')'
-|	identifier '(' ExpressionList ')'
-|	"REPLACE" '(' ExpressionList ')'
+    '(' BuiltinFunction ')'
+|   identifier '(' ')'
+|   identifier '(' ExpressionList ')'
+|   "REPLACE" '(' ExpressionList ')'
 
 NowSymOptionFractionParentheses ::=
-	'(' NowSymOptionFractionParentheses ')'
-|	NowSymOptionFraction
+    '(' NowSymOptionFractionParentheses ')'
+|   NowSymOptionFraction
 
 NowSymOptionFraction ::=
-	NowSym
-|	NowSymFunc '(' ')'
-|	NowSymFunc '(' NUM ')'
-|	CurdateSym '(' ')'
-|	"CURRENT_DATE"
+    NowSym
+|   NowSymFunc '(' ')'
+|   NowSymFunc '(' NUM ')'
+|   CurdateSym '(' ')'
+|   "CURRENT_DATE"
 
 NextValueForSequenceParentheses ::=
-	'(' NextValueForSequenceParentheses ')'
-|	NextValueForSequence
+    '(' NextValueForSequenceParentheses ')'
+|   NextValueForSequence
 
 NextValueForSequence ::=
-	"NEXT" "VALUE" forKwd TableName
-|	"NEXTVAL" '(' TableName ')'
+    "NEXT" "VALUE" forKwd TableName
+|   "NEXTVAL" '(' TableName ')'
 
 ```
 
