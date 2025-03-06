@@ -308,7 +308,7 @@
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Configure TiDB for Optimal Performance](/tidb-performance-tuning-config.md)
-    - [A Practical Guide For SQL Tuning](/sql-tuning-best-practice.md)
+    - [A Practical Guide for SQL Tuning](/sql-tuning-best-practice.md)
     - Tuning by Metrics
       - [Performance Analysis and Tuning](/performance-tuning-methods.md)
       - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
