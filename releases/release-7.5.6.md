@@ -21,7 +21,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     - (dup): release-7.1.6.md > Improvements> TiDB - Adjust estimation results from 0 to 1 for equality conditions that do not hit TopN when statistics are entirely composed of TopN and the modified row count in the corresponding table statistics is non-zero [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     - Enhance the timestamp validity check [#57786](https://github.com/pingcap/tidb/issues/57786) @[MyonKeminta](https://github.com/MyonKeminta)
-    - Modify TTL GC and related statistics collection tasks to run only on the owner node, thereby reducing overhead [#59357](https://github.com/pingcap/tidb/issues/59357) @[lcwangchao](https://github.com/lcwangchao)
+    - Limit the execution of GC for TTL tables and related statistics collection tasks to the owner node, thereby reducing overhead [#59357](https://github.com/pingcap/tidb/issues/59357) @[lcwangchao](https://github.com/lcwangchao)
 
 + TiKV
 
@@ -66,15 +66,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - (dup): release-6.5.12.md > Bug fixes> TiDB - Fix the issue that using `ORDER BY` when querying `cluster_slow_query table` might generate unordered results [#51723](https://github.com/pingcap/tidb/issues/51723) @[Defined2014](https://github.com/Defined2014)
     - (dup): release-6.5.12.md > Bug fixes> TiDB - Fix the issue that when a virtual generated column's dependencies contain a column with the `ON UPDATE` attribute, the data of the updated row and its index data might be inconsistent [#56829](https://github.com/pingcap/tidb/issues/56829) @[joechenrh](https://github.com/joechenrh)
     - (dup): release-8.5.1.md > Bug fixes> TiDB - Fix the issue that TTL jobs cannot be canceled if the TiDB heartbeat is lost [#57784](https://github.com/pingcap/tidb/issues/57784) @[YangKeao](https://github.com/YangKeao)
-    -When the parameter is of `Enum`, `Bit`, or `Set `type, the `Conv()` function will no longer be pushed down to TiKV [#51877](https://github.com/pingcap/tidb/issues/51877) @[yibin87](https://github.com/yibin87)
+    - When the parameter is of `Enum`, `Bit`, or `Set` type, the `Conv()` function is no longer pushed down to TiKV [#51877](https://github.com/pingcap/tidb/issues/51877) @[yibin87](https://github.com/yibin87)
     - Fix the issue that after executing `ALTER TABLE ... PLACEMENT POLICY ...` in a cluster with TiFlash nodes in the disaggregated storage and compute architecture, Region peers might be accidentally added to TiFlash Compute nodes [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that job status is overwritten when the DDL owner changes [#52747](https://github.com/pingcap/tidb/issues/52747) @[D3Hunter](https://github.com/D3Hunter)
-    - Fix the issue that TiDB panics when queries contain `is null` on Hash partitioned tables [#58374](https://github.com/pingcap/tidb/issues/58374) @[Defined2014](https://github.com/Defined2014/)
+    - Fix the issue that queries with `is null` conditions on Hash partitioned tables cause a panic [#58374](https://github.com/pingcap/tidb/issues/58374) @[Defined2014](https://github.com/Defined2014/)
     - Fix the issue that an error occurs when querying partitioned tables that contain generated columns [#58475](https://github.com/pingcap/tidb/issues/58475) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that TTL jobs might be ignored or processed multiple times [#59347](https://github.com/pingcap/tidb/issues/59347) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that incorrect judgment in exchange partition causes execution failure [#59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
     - Fix the issue that setting the `tidb_audit_log` variable with multi-level relative paths causes errors in the log directory [#58971](https://github.com/pingcap/tidb/issues/58971) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that different data types on both sides of the Join's equality condition might cause TiFlash to produce incorrect results [#59877](https://github.com/pingcap/tidb/issues/59877) @[yibin87](https://github.com/yibin87)
+    - Fix the issue that different data types on both sides of the equality condition in Join might cause incorrect results in TiFlash [#59877](https://github.com/pingcap/tidb/issues/59877) @[yibin87](https://github.com/yibin87)
 
 + TiKV <!--tw@qiancai: 3 notes-->
 
@@ -115,7 +115,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + Backup & Restore (BR) <!--tw@hfxsd: 1 note-->
 
-        - Fix the issue that log backup fails to exit properly when encountering a fatal error due to being not able to access PD [#58031](https://github.com/tikv/tikv/issues/18087) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that log backup fails to exit properly when encountering a fatal error due to not being able to access PD [#58031](https://github.com/tikv/tikv/issues/18087) @[YuJuncen](https://github.com/YuJuncen)
         - (dup): release-6.5.12.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that BR fails to restore due to getting the `rpcClient is idle` error when sending requests to TiKV [#58845](https://github.com/pingcap/tidb/issues/58845) @[Tristan1900](https://github.com/Tristan1900)
         - (dup): release-8.5.1.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that PITR fails to restore indexes larger than 3072 bytes [#58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
         - (dup): release-6.5.12.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that the `status` field is missing in the result when querying log backup tasks using `br log status --json` [#57959](https://github.com/pingcap/tidb/issues/57959) @[Leavrth](https://github.com/Leavrth)
