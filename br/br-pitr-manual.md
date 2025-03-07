@@ -503,13 +503,13 @@ tiup br restore point --pd="${PD_IP}:2379"
 
 Starting from v9.0.0, when a log backup task exists, if the following conditions are met, snapshot restore (`br restore [full|database|table]`) can be performed normally, and the restored content can be properly recorded by the ongoing log backup:
 
-- The node executing BR, in addition to having the necessary permissions to access the external storage for snapshot restoration, also needs to have write permissions to the log backup target external storage.
+- The node executing BR, in addition to having the necessary permissions to access the external storage for snapshot restore, also needs to have write permissions to the log backup target external storage.
 - The log backup target external storage type is S3 (`s3://`), GCS (`gcs://`), or Azure Blob Storage (`azblob://`).
 - Storage of the data to be restored and the log backup target storage have the same external storage type.
 - Neither the data to be restored nor the log backup has enabled local encryption: refer to [Log Backup Encryption](#encrypt-the-log-backup-data) and [Snapshot Backup Encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
 
-If these conditions are not met or if you want to restore to a specific point in time, BR will refuse to restore when a log backup task exists. In this case, you can [stop the backup task](#stop-a-log-backup-task) and after restoration is complete, perform a new snapshot backup and [restart the backup task](#restart-a-log-backup-task) to complete the restoration.
+If these conditions are not met or if you want to do a point in time restore (`br restore point`), BR will refuse to restore when a log backup task exists. In this case, you can [stop the backup task](#stop-a-log-backup-task) and after restoration is complete, perform a new snapshot backup and [restart the backup task](#restart-a-log-backup-task) to complete the restoration.
 
 > **Note:**
 >
-> When restoring log backups that have recorded full restorations, you also need to use BR version `v9.0.0` or higher. Otherwise, the recorded full restoration may not be recoverable.
+> When restoring log backups that have recorded full restores, you also need to use BR version `v9.0.0` or higher. Otherwise, the recorded full restoration may not be restored.
