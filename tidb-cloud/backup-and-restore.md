@@ -307,11 +307,7 @@ To export your cluster backups to Google Cloud Storage, take the following steps
 
    6. On the **Bucket details** page, click the **OBJECTS** tab.
 
-       If you want to copy a file's gsutil URI, select the file, click **Open object overflow menu**, and then click **Copy gsutil URI**.
-
-       ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
-
-       If you want to use a folder's gsutil URI, open the folder, and then click the copy button following the folder name to copy the folder name. After that, you need to add `gs://` to the beginning and `/` to the end of the name to get a correct URI of the folder.
+       If you want to copy a folder's gsutil URI, open the folder, and then click the copy button following the folder name to copy the folder name. After that, you need to add `gs://` to the beginning and `/` to the end of the name to get a correct URI of the folder.
 
        For example, if the folder name is `tidb-cloud-export-data`, you need to use `gs://tidb-cloud-export-data/` as the URI.
 
