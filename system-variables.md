@@ -784,7 +784,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: `ON` (Before v9.0.0, the default value is `OFF`)
 - This variable controls whether to enable the [Active PD Follower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) feature.
     - When it is `OFF`, TiDB only obtains Region information from the PD leader.
-    - When it is `ON`, TiDB evenly distributes Region information requests to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader. Starting from v9.0.0, Region information requests from TiDB Lightning and BR are also evenly sent to all PD nodes when the value is `ON`.
+    - When it is `ON`, TiDB evenly distributes Region information requests to all PD servers, so PD followers can also handle Region requests, reducing the CPU pressure on the PD leader. Starting from v9.0.0, Region information requests from TiDB Lightning and BR are also evenly sent to all PD nodes when the value is `ON`.
 - Scenarios for enabling Active PD Follower:
     * In a cluster with a large number of Regions, the PD leader experiences high CPU pressure due to the increased overhead of handling heartbeats and scheduling tasks.
     * In a TiDB cluster with many TiDB instances, the PD leader experiences high CPU pressure due to a high concurrency of requests for Region information.
