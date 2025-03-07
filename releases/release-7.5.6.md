@@ -88,6 +88,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     - Fix the issue that CDC connections might cause resource leakage when encountering exceptions [#18245](https://github.com/tikv/tikv/issues/18245) @[wlwilliamx](https://github.com/wlwilliamx)
     - Fix the issue that Region merge might lead to TiKV abnormal exit due to Raft index mismatch [#18129](https://github.com/tikv/tikv/issues/18129) @[glorv](https://github.com/glorv)
     - Fix the issue that Resolved-TS monitoring and logs might be abnormal [#17989](https://github.com/tikv/tikv/issues/17989) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that an incompatibility with the Titan component causes upgrade failure [#18263](https://github.com/tikv/tikv/issues/18263) @[v01dstar](https://github.com/v01dstar) @[LykxSassinator](https://github.com/LykxSassinator)
   
 + PD <!--tw@qiancai: 3 notes-->
 
