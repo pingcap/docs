@@ -210,15 +210,11 @@ To learn more about the inconsistency error and how to bypass the check, see [Tr
 
 ### 4.1 TiKV panics and fails to start
 
-- 4.1.1 `sync-log = false`. The `unexpected raft log index: last_index X < applied_index Y` error is returned after the machine is powered off.
-
-    This issue is expected. You can restore the Region using `tikv-ctl`.
-
-- 4.1.2 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y] is unavailable from storage` error is reported.
+- 4.1.1 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y] is unavailable from storage` error is reported.
 
     This issue is expected. The `fsync` of virtual machines is not reliable, so you need to restore the Region using `tikv-ctl`.
 
-- 4.1.3 For other unexpected causes, [report a bug](https://github.com/tikv/tikv/issues/new?template=bug-report.md).
+- 4.1.2 For other unexpected causes, [report a bug](https://github.com/tikv/tikv/issues/new?template=bug-report.md).
 
 ### 4.2 TiKV OOM
 
