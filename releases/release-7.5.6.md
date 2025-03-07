@@ -11,6 +11,10 @@ TiDB version: 7.5.6
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v7.5/production-deployment-using-tiup)
 
+## Compatibility changes
+
+- Support the openEuler 22.03 LTS SP3/SP4 operating system. For more information, see [OS and platform requirements](https://docs.pingcap.com/tidb/v7.5/hardware-and-software-requirements#os-and-platform-requirements).
+
 ## Improvements
 
 + TiDB <!--tw@lilin90: 2 notes-->
