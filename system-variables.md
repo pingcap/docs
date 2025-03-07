@@ -662,12 +662,12 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 ### `max_user_connections` <span class="version-mark">New in v9.0.0</span>
 
-- Scope：GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
-- Range：`[0, 100000]`
+- Range: `[0, 100000]`
 - This variable indicates the maximum connection number for a user allowed to connect to a tidb-server instance in TiDB and is used for resource control.
 - The default value `0` means there is no limit for user connection. When the value is greater than `0` and the number of user connections reaches this value, the TiDB server will reject the user's new connection.
 - This parameter cannot exceed [`max_connections`](/tidb-configuration-file.md#max_connections). If it exceeds, TiDB will use the value of `max_connections`. For example, if the variable of `max_user_connections` is set to `2000`, and `max_connections` is `1000`, the user can establish the maxinum of 1000 connections to one tidb-server instance.
