@@ -54,7 +54,7 @@ In v7.5 LTS, TiDB ensures multi-level quality standards for various combinations
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
-        <td>openEuler 22.03 LTS SP1/SP3</td>
+        <td>openEuler 22.03 LTS SP1/SP3 (before v7.5.6), SP3/SP4 (supported starting from v7.5.6)</td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
     </tbody>
