@@ -282,7 +282,7 @@ To export your cluster backups to Google Cloud Storage, take the following steps
 4. In **Google Cloud Storage Settings**, enter the Folder URI of a Google Cloud Storage location that you want to export the backup into.
 
     > **Note**
-    > - To allow TiDB Cloud to export the backup data to your GCS bucket, you need to configure the GCS access for the bucket. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can access the GCS bucket.
+    > - To allow TiDB Cloud to export the backup data to your GCS bucket, you need to configure the GCS access for the bucket. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project and region can access the GCS bucket.
 
 5. If this is the first time exporting a backup to this bucket then configure access by:
 
