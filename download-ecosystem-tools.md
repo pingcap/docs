@@ -46,7 +46,7 @@ Depending on which tools you want to use, you can install the corresponding offl
 | [TiDB Data Migration (DM)](/dm/dm-overview.md)  | `dm-worker-{version}-linux-{arch}.tar.gz` <br/>`dm-master-{version}-linux-{arch}.tar.gz` <br/>`dmctl-{version}-linux-{arch}.tar.gz`  |
 | [TiCDC](/ticdc/ticdc-overview.md)  | `cdc-{version}-linux-{arch}.tar.gz`  |
 | [Backup & Restore (BR)](/br/backup-and-restore-overview.md)  | `br-{version}-linux-{arch}.tar.gz`  |
-| [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)  | For TiDB v9.0.0 and later versions: included in TiUP and `tiflow-{version}-linux-{arch}.tar.gz` <br/>For TiDB versions before v9.0.0: `sync_diff_inspector` from tidb-tools  |
+| [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)  | For TiDB v9.0.0 and later versions: `tiflow-{version}-linux-{arch}.tar.gz` <br/>For TiDB versions before v9.0.0: `sync_diff_inspector`  |
 | [PD Recover](/pd-recover.md)  | `pd-recover-{version}-linux-{arch}.tar` |
 
 > **Note:**
