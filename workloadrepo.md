@@ -73,7 +73,6 @@ Note that the sampled tables return data specific to the TiDB node from which th
 
 Data is sampled from the following tables:
 
-
 | Table Name | Destination Table | Description |
 | --- | --- | --- |
 | PROCESSLIST | HIST_PROCESSLIST | Active sessions
@@ -99,7 +98,6 @@ SET GLOBAL tidb_workload_repository_retention_days = 30;
 ```
 
 A higher value for this variable allows for longer data retention, which may be beneficial for workload analysis, but will increase storage requirements.
-
 
 ## Notes
 
