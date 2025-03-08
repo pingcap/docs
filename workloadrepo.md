@@ -24,10 +24,12 @@ SET GLOBAL tidb_workload_repository_dest = '';
 ## Data Collection
 
 The Workload Repository stores data in tables under the `WORKLOAD_SCHEMA` database. It collects data via two different methods:
+
 * The Snapshot process, which runs at configurable intervals, typically hourly, and can be triggered manually.
 * The Time-based process, which runs at shorter intervals, typically every 5 seconds.
 
 ## Snapshot Sampling Process (Hourly by default)
+
 The snapshot sampling process, which runs every 15 minutes to 2 hours, samples data from various monitoring tables. Snapshots are initiated from one of the TiDB nodes at the specified intervals, and process is as follows:
 
  1. From the initiating node a row is inserted into HIST_SNAPSHOTS, capturing the snapshot’s ID, start and end timestamps, and server version details.
@@ -46,6 +48,7 @@ Data is sampled from the following tables:
 | CLIENT_ERRORS_SUMMARY_GLOBAL | HIST_CLIENT_ERRORS_SUMMARY_GLOBAL | Client error summaries by global |
 
 The snapshot sampling interval may be controlled with [`tidb_workload_repository_snapshot_interval`](/system-variables.md#tidb_workload_repository_snapshot_interval):
+
 ```sql
 SET GLOBAL tidb_workload_repository_snapshot_interval = 900; -- set interval to 15 minutes
 ```
@@ -59,6 +62,7 @@ ADMIN WORKLOAD REPOSITORY TAKE SNAPSHOT;
 ```
 
 ## Time-based Sampling Process (Every 5 seconds by default)
+
 The time-based sampling process, which runs every 1 to 600 seconds, samples data from various monitoring tables.
 
 When the time-base sampling process runs all rows from the source tables are copied to the corresponding history tables with the 'HIST_' prefix. The copied data includes the original columns from the source tables plus additional columns for the timestamp and instance ID.
@@ -79,6 +83,7 @@ Data is sampled from the following tables:
 | DEADLOCKS | HIST_DEADLOCKS | Deadlock information |
 
 The time-based sampling interval may be controlled with [tidb_workload_repository_active_sampling_interval](/system-variables.md#tidb_workload_repository_active_sampling_interval):
+
 ```sql
 SET GLOBAL tidb_workload_repository_active_sampling_interval = 20; -- set interval to 20 seconds
 ```
