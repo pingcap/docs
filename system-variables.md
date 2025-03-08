@@ -6207,6 +6207,51 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### tidb_workload_repository_dest
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `''`
+- This variable is used to set the destination of the [Workload Repository](/workloadrepo.md).
+- The value can be either `'table'` (enabling the workload repository) or `''` (disabling the workload repository).
+
+### tidb_workload_repository_active_sampling_interval
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `5`
+- Range: `[0, 600]`
+- Unit: Seconds
+- Sets the sampling interval for the [Workload Repository](/workloadrepo.md)'s Time-based Sampling Process.
+- Setting the value to `0` disables the Time-based Sampling Process.
+
+### tidb_workload_repository_retention_days
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `7`
+- Range: `[0, 365]`
+- Unit: Days
+- Sets the number of days that [Workload Repository](/workloadrepo.md) data is retained.
+- Setting the value to `0` disables automatic purging of old data.
+
+### tidb_workload_repository_snapshot_interval
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `3600`
+- Range: `[900, 7200]`
+- Unit: Seconds
+- Sets the sampling interval for the [Workload Repository](/workloadrepo.md)'s Snapshot Sampling Process.
+
 ### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
