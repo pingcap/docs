@@ -87,10 +87,6 @@ If the restore fails and you try to restore backup data with different checkpoin
 
 During the initial restore, `br` first enters the snapshot restore phase. BR records the checkpoint data, the upstream cluster ID, BackupTS of the backup data (that is, the start time point `start-ts` of log restore) and the restored time point `restored-ts` of log restore in the `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint` database. If restore fails during this phase, you cannot adjust the `start-ts` and `restored-ts` of log restore when resuming checkpoint restore.
 
-> **Note:**
->
-> Starting from v9.0.0, because PITR restore introduces the table filter feature, the result of the snapshot restore phase in PITR restore is affected by the `restored-ts` of log restore. Therefore, if it fails in the snapshot restore phase, the next retry needs to use the same `restored-ts`.
-
 When entering the log restore phase during the initial restore, `br` creates a `__TiDB_BR_Temporary_Log_Restore_Checkpoint` database in the target cluster. This database records checkpoint data, the upstream cluster ID, and the restore time range (`start-ts` and `restored-ts`). If restore fails during this phase, you need to specify the same `start-ts` and `restored-ts` as recorded in the checkpoint database when retrying. Otherwise, `br` will report an error and prompt that the current specified restore time range or upstream cluster ID is different from the checkpoint record. If the restore cluster has been cleaned, you can manually delete the `__TiDB_BR_Temporary_Log_Restore_Checkpoint` database and retry with a different backup.
 
 Before entering the log restore phase during the initial restore, `br` constructs a mapping of upstream and downstream cluster database and table IDs at the `restored-ts` time point. This mapping is persisted in the system table `mysql.tidb_pitr_id_map` to prevent duplicate allocation of database and table IDs. Deleting data from `mysql.tidb_pitr_id_map` might lead to inconsistent PITR restore data.
@@ -150,10 +146,6 @@ If the restore fails and you try to restore backup data with different checkpoin
 [PITR (Point-in-time recovery)](/br/br-pitr-guide.md) consists of snapshot restore and log restore phases.
 
 During the initial restore, `br` first enters the snapshot restore phase. BR records the checkpoint data, the upstream cluster ID, BackupTS of the backup data (that is, the start time point `start-ts` of log restore) and the restored time point `restored-ts` of log restore in the `restore-{downstream-cluster-ID}/snapshot` path. If restore fails during this phase, you cannot adjust the `start-ts` and `restored-ts` of log restore when resuming checkpoint restore.
-
-> **Note:**
->
-> Starting from v9.0.0, because PITR restore introduces the table filter feature, the result of the snapshot restore phase in PITR restore is affected by the `restored-ts` of log restore. Therefore, if it fails in the snapshot restore phase, the next retry needs to use the same `restored-ts`.
 
 When entering the log restore phase during the initial restore, `br` creates a `restore-{downstream-cluster-ID}/log` path in the target cluster. This path records checkpoint data, the upstream cluster ID, and the restore time range (`start-ts` and `restored-ts`). If restore fails during this phase, you need to specify the same `start-ts` and `restored-ts` as recorded in the checkpoint database when retrying. Otherwise, `br` will report an error and prompt that the current specified restore time range or upstream cluster ID is different from the checkpoint record. If the restore cluster has been cleaned, you can manually clean up the checkpoint data in the external storage or specify another external storage path to store checkpoint data, and retry with a different backup.
 
