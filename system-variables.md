@@ -5960,7 +5960,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Scope: NONE
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `8.0.11-TiDB-`(tidb version)
-- This variable returns the MySQL version, followed by the TiDB version. For example '8.0.11-TiDB-v7.5.5'.
+- This variable returns the MySQL version, followed by the TiDB version. For example '8.0.11-TiDB-v7.5.6'.
 
 ### version_comment
 
