@@ -35,6 +35,7 @@ To connect to a TiDB Cloud Serverless cluster via public endpoint, take the foll
     > **Note:**
     >
     > When you connect to a TiDB Cloud Serverless cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > Your client IP must be in the allowed IP rules of the public endpoint of your cluster. For more infomation, refer to [Configure IP Access List for TiDB Cloud Serverless](/tidb-cloud/networking-public.md)
 
 ## Disable a public endpoint
 

@@ -9,7 +9,7 @@ For each TiDB Cloud Dedicated cluster in TiDB Cloud, you can configure an IP acc
 
 > **Note:**
 >
-> Configuring the IP access list is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> This documentation applies to **TiDB Cloud Dedicated**. For instructions on configuring an IP access list for **TiDB Cloud Serverless**, refer to [Configure IP Access List for TiDB Cloud Serverless](/tidb-cloud/networking-public.md).
 
 To configure an IP access list, take the following steps in the [TiDB Cloud console](https://tidbcloud.com/console/clusters):
 
