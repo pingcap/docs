@@ -243,7 +243,7 @@ SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
 +-----------------------------------------+-------------+
 ```
 
-In some cases, automatic collection may not meet your needs. By default, it occurs between `00:00` and `23:59`, meaning the analyze job can run at any time. To minimize performance impact on your online business, you can set specific start and end times for statistics collection.
+In some cases, automatic collection might not meet your needs. By default, it occurs between `00:00` and `23:59`, meaning the analyze job can run at any time. To minimize performance impact on your online business, you can set specific start and end times for statistics collection.
 
 You can manually collect statistics using the `ANALYZE TABLE table_name` statement. This lets you adjust settings such as the sample rate, the number of Top-N values, or collect statistics for specific columns only.
 
