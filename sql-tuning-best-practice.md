@@ -129,24 +129,30 @@ Use `EXPLAIN ANALYZE` whenever possible, as it provides both the execution plan 
 
 This guide provides practical advice for beginners on optimizing SQL queries in TiDB. By following these best practices, you can improve query performance and streamline SQL tuning. This guide covers the following topics:
 
-- Understand query processing
-    - Query processing workflow
-    - Optimizer fundamentals
-    - Statistics management
-- Understand execution plans
-    - How TiDB builds an execution plan
-    - Generate and display execution plans
-    - Read execution plans: first child first
-    - Identify and understand bottlenecks in execution plans
-- Index strategies in TiDB
-    - Composite index strategy guidelines
-    - The cost of indexing
-    - SQL tuning with a covering index
-    - SQL tuning with a composite index involving sorting
-    - SQL tuning with a composite index for efficient filtering and sorting
-- When to use TiFlash
+- [Understand query processing](#understand-query-processing)
+    - [Query processing workflow](#query-processing-workflow)
+    - [Optimizer fundamentals](#optimizer-fundamentals)
+    - [Statistics management](#statistics-management)
+- [Understand execution plans](#understand-execution-plans)
+    - [How TiDB builds an execution plan](#how-tidb-builds-an-execution-plan)
+    - [Generate and display execution plans](#generate-and-display-execution-plans)
+    - [Read execution plans: first child first](#read-execution-plans-first-child-first)
+    - [Identify and understand bottlenecks in execution plans](#identify-and-understand-bottlenecks-in-execution-plans)
+- [Index strategies in TiDB](#index-strategies-in-tidb)
+    - [Composite index strategy guidelines](#composite-index-strategy-guidelines)
+    - [The cost of indexing](#the-cost-of-indexing)
+    - [SQL tuning with a covering index](#sql-tuning-with-a-covering-index)
+    - [SQL tuning with a composite index involving sorting](#sql-tuning-with-a-composite-index-involving-sorting)
+    - [SQL tuning with a composite index for efficient filtering and sorting](#sql-tuning-with-a-composite-index-for-efficient-filtering-and-sorting)
+- [When to use TiFlash](#when-to-use-tiflash)
+    - [Analytical query](#analytical-query)
+    - [SaaS arbitrary filtering workloads](#saas-arbitrary-filtering-workloads)
 
-### Query processing workflow
+### Understand query processing
+
+This section introduces the query processing workflow, optimizer fundamentals, and statistics management.
+
+#### Query processing workflow
 
 When a client sends a SQL statement to TiDB, the statement passes through the protocol layer of the TiDB server. This layer manages the connection between the TiDB server and the client, receives SQL statements, and returns data to the client.
 
@@ -162,7 +168,7 @@ In the following figure, to the right of the protocol layer is the optimizer of 
 
 ![workflow](/media/sql-tuning/workflow-tiflash.png)
 
-### Optimizer fundamentals
+#### Optimizer fundamentals
 
 TiDB uses a cost-based optimizer (CBO) to determine the most efficient execution plan for a SQL statement. The optimizer evaluates different execution strategies and selects the one with the lowest estimated cost. The cost depends on factors such as:
 
@@ -181,7 +187,7 @@ Based on these inputs, the cost model generates an execution plan that details h
 
 The effectiveness of the optimizer depends on the quality of the information it receives. To achieve optimal performance, ensure that statistics are up to date and indexes are well-designed.
 
-### Statistics management
+#### Statistics management
 
 Statistics are essential for the TiDB optimizer. TiDB uses statistics as the input of the optimizer to estimate the number of rows processed in each step of a SQL execution plan.
 
@@ -259,15 +265,19 @@ To lock statistics for a table, you can use the [`LOCK STATS table_name`](/sql-s
 
 For more information, see [Statistics](/statistics.md).
 
-### How TiDB builds an execution plan
+### Understand execution plans
+
+An execution plan details the steps that TiDB will follow to execute a SQL query. This section explains how TiDB builds an execution plan and how to generate, display, and interpret execution plans.
+
+#### How TiDB builds an execution plan
 
 A SQL statement undergoes three main optimization stages in the TiDB optimizer:
 
-1. [Pre-processing](#pre-processing)
-2. [Logical transformation](#logical-transformation)
-3. [Cost-based optimization](#cost-based-optimization)
+1. [Pre-processing](#1-pre-processing)
+2. [Logical transformation](#2-logical-transformation)
+3. [Cost-based optimization](#3-cost-based-optimization)
 
-#### Pre-processing
+##### 1. Pre-processing
 
 During pre-processing, TiDB determines whether the SQL statement can be executed using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get). These operations use a primary or unique key to read directly from TiKV through an exact key lookup. If a plan qualifies for `Point_Get` or `Batch_Point_Get`, the optimizer skips the logical transformation and cost-based optimization steps because direct key lookup is the most efficient way to access the row.
 
@@ -285,13 +295,13 @@ EXPLAIN SELECT id, name FROM emp WHERE id = 901;
 +-------------+---------+------+---------------+---------------+
 ```
 
-#### Logical transformation
+##### 2. Logical transformation
 
 During logical transformation, TiDB optimizes SQL statements based on the `SELECT` list, `WHERE` predicates, and other conditions. It generates a logical execution plan to annotate and rewrite the query. This logical plan is used in the next stage, cost-based optimization. The transformation applies rule-based optimizations such as column pruning, partition pruning, and join reordering. Because this process is rule-based and automatic, manual adjustments are usually unnecessary.
 
 For more information, see [SQL Logical Optimization](/sql-logical-optimization.md).
 
-#### Cost-based optimization
+##### 3. Cost-based optimization
 
 The TiDB optimizer uses statistics to estimate the number of rows processed in each step of a SQL statement and assigns a cost to each step. During cost-based optimization, the optimizer evaluates all possible plan choices, including index accesses and join methods, and calculates the total cost for each plan. The optimizer then selects the execution plan with the minimal total cost.
 
@@ -310,10 +320,6 @@ This distribution enables cross-component collaboration for efficient query proc
 ![cost-based-optimization](/media/sql-tuning/cost-based-optimization.png)
 
 For more information, see [SQL Physical Optimization](/sql-physical-optimization.md).
-
-### Understand execution plans
-
-An execution plan details the steps that TiDB will follow to execute a SQL query. This section explains how to generate, display, and interpret execution plans.
 
 #### Generate and display execution plans
 
