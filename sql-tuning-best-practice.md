@@ -85,7 +85,7 @@ The most efficient way to identify resource-intensive SQL statements is by using
 
 #### SQL Statements page
 
-In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to the [**SQL Statements** page](/dashboard/dashboard-statement-list.md) to identify the following:
+In [TiDB Dashboard](/dashboard/dashboard-overview.md), navigate to the [**SQL Statements** page](/dashboard/dashboard-statement-list.md) to identify the following:
 
 - The SQL statement with the highest total latency, which is the statement that takes the longest time to execute across multiple executions.
 - The number of times each SQL statement has been executed, which helps identify statements with the highest execution frequency.
@@ -97,7 +97,7 @@ TiDB normalizes SQL statements into templates by replacing literals and bind var
 
 #### Slow Queries page
 
-In [TiDB Dashboard](dashboard/dashboard-overview.md), navigate to the [**Slow Queries** page](/dashboard/dashboard-slow-query.md) to find the following:
+In [TiDB Dashboard](/dashboard/dashboard-overview.md), navigate to the [**Slow Queries** page](/dashboard/dashboard-slow-query.md) to find the following:
 
 - The slowest SQL queries.
 - The SQL query that reads the most data from TiKV.
