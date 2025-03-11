@@ -79,7 +79,7 @@ By implementing these strategies, you can ensure that your TiDB cluster efficien
 
 ## Identify high-load SQL
 
-The most efficient way to identify resource-intensive SQL statements is by using [TiDB Dashboard](dashboard/dashboard-overview.md). You can also use other tools, such as views and logs, to identify high-load SQL statements.
+The most efficient way to identify resource-intensive SQL statements is by using [TiDB Dashboard](/dashboard/dashboard-overview.md). You can also use other tools, such as views and logs, to identify high-load SQL statements.
 
 ### Monitor SQL statements using TiDB Dashboard
 
@@ -153,7 +153,7 @@ When a client sends a SQL statement to TiDB, the statement passes through the pr
 In the following figure, to the right of the protocol layer is the optimizer of the TiDB server, which processes SQL statements as follows:
 
 1. The SQL statement arrives at the SQL optimizer through the protocol layer and is parsed into an abstract syntax tree (AST).
-2. TiDB identifies whether it is a [Point Get](/explain-indexes#point_get-and-batch_point_get) statement, which involves a simple one-table lookup through a primary or unique key, such as `SELECT * FROM t WHERE pk_col = 1` or `SELECT * FROM t WHERE uk_col IN (1,2,3)`. For `Point Get` statements, TiDB skips subsequent optimization steps and proceeds directly to execution in the SQL executor.
+2. TiDB identifies whether it is a [Point Get](/explain-indexes.md#point_get-and-batch_point_get) statement, which involves a simple one-table lookup through a primary or unique key, such as `SELECT * FROM t WHERE pk_col = 1` or `SELECT * FROM t WHERE uk_col IN (1,2,3)`. For `Point Get` statements, TiDB skips subsequent optimization steps and proceeds directly to execution in the SQL executor.
 3. If the query is not a `Point Get`, the AST undergoes logical transformation, where TiDB rewrites the SQL logically based on specific rules.
 4. After logical transformation, TiDB processes the AST through cost-based optimization.
 5. During cost-based optimization, the optimizer uses statistics to select appropriate operators and generates a physical execution plan.
