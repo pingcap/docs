@@ -66,49 +66,108 @@ This section describes each configuration parameter in the configuration file.
 
 ### Global configuration
 
-| Parameter | Description |
-| :------------ | :--------------------------------------- |
-| `source-id` | Represents a MySQL instance ID. |
-| `enable-gtid` | Determines whether to pull binlog from the upstream using GTID. The default value is `false`. In general, you do not need to configure `enable-gtid` manually. However, if GTID is enabled in the upstream database, and the primary/secondary switch is required, you need to set `enable-gtid` to `true`. |
-| `enable-relay` | Determines whether to enable the relay log feature. The default value is `false`. This parameter takes effect from v5.4. Additionally, you can [enable relay log dynamically](/dm/relay-log.md#enable-and-disable-relay-log) using the `start-relay` command. |
-| `relay-binlog-name` | Specifies the file name from which DM-worker starts to pull the binlog. For example, `"mysql-bin.000002"`. It only works when `enable_gtid` is `false`. If this parameter is not specified, DM-worker will start pulling from the earliest binlog file being replicated. Manual configuration is generally not required. |
-| `relay-binlog-gtid` | Specifies the GTID from which DM-worker starts to pull the binlog. For example, `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"`. It only works when `enable_gtid` is `true`. If this parameter is not specified, DM-worker will start pulling from the latest GTID being replicated. Manual configuration is generally not required. |
-| `relay-dir` | Specifies the relay log directory. |
-| `host` | Specifies the host of the upstream database. |
-| `port` | Specifies the port of the upstream database. |
-| `user` | Specifies the username of the upstream database. |
-| `password` | Specifies the user password of the upstream database. It is recommended to use the password encrypted with dmctl. |
-| `security` | Specifies the TLS config of the upstream database. The configured file paths of the certificates must be accessible to all nodes. If the configured file paths are local paths, then all the nodes in the cluster need to store a copy of the certificates in the same path of each host.|
+#### `source-id`
+
+- Represents a MySQL instance ID.
+
+#### `enable-gtid`
+
+- Determines whether to pull binlog from the upstream using GTID.
+- In general, you do not need to configure `enable-gtid` manually. However, if GTID is enabled in the upstream database, and the primary/secondary switch is required, you need to set `enable-gtid` to `true`.
+- Default value: `false`
+
+#### `enable-relay`
+
+- Determines whether to enable the relay log feature. This parameter takes effect from v5.4. Additionally, you can [enable relay log dynamically](/dm/relay-log.md#enable-and-disable-relay-log) using the `start-relay` command.
+- Default value: `false`
+
+#### `relay-binlog-name`
+
+- Specifies the file name from which DM-worker starts to pull the binlog. For example, `"mysql-bin.000002"`.
+- It only works when [`enable-gtid`](#enable-gtid) is `false`. If this parameter is not specified, DM-worker will start pulling from the earliest binlog file being replicated. Manual configuration is generally not required.
+
+#### `relay-binlog-gtid`
+
+- Specifies the GTID from which DM-worker starts to pull the binlog. For example, `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"`.
+- It only works when [`enable-gtid`](#enable-gtid) is `true`. If this parameter is not specified, DM-worker will start pulling from the latest GTID being replicated. Manual configuration is generally not required.
+
+#### `relay-dir`
+
+- Specifies the relay log directory.
+- Default value: `"./relay_log"`
+
+#### `host`
+
+- Specifies the host of the upstream database.
+
+#### `port`
+
+- Specifies the port of the upstream database.
+
+#### `user`
+
+- Specifies the username of the upstream database.
+
+#### `password`
+
+- Specifies the user password of the upstream database. It is recommended to use the password encrypted with dmctl.
+
+#### `security`
+
+- Specifies the TLS config of the upstream database. The configured file paths of the certificates must be accessible to all nodes. If the configured file paths are local paths, then all the nodes in the cluster need to store a copy of the certificates in the same path of each host.
 
 ### Relay log cleanup strategy configuration (`purge`)
 
 Generally, there is no need to manually configure these parameters unless there is a large amount of relay logs and disk capacity is insufficient.
 
-| Parameter        | Description                           | Default value |
-| :------------ | :--------------------------------------- | :-------------|
-| `interval` | Sets the time interval at which relay logs are regularly checked for expiration, in seconds. | `3600`  |
-| `expires` | Sets the expiration time for relay logs, in hours. The relay log that is not written by the relay processing unit, or does not need to be read by the existing data migration task will be deleted by DM if it exceeds the expiration time. If this parameter is not specified, the automatic purge is not performed. | `0` |
-| `remain-space` | Sets the minimum amount of free disk space, in gigabytes. When the available disk space is smaller than this value, DM-worker tries to delete relay logs. | `15` |
+#### `interval`
+
+- Specifies the time interval at which relay logs are regularly checked for expiration, in seconds.
+- Default value: `3600`
+- Unit: seconds
+
+#### `expires`
+
+- Specifies the expiration time for relay logs.
+- The relay log that is not written by the relay processing unit, or does not need to be read by the existing data migration task will be deleted by DM if it exceeds the expiration time. If this parameter is not specified, the automatic purge is not performed.
+- Default value: `0`
+- Unit: hours
+
+#### `remain-space`
+
+- Specifies the minimum amount of free disk space, in gigabytes. When the available disk space is smaller than this value, DM-worker tries to delete relay logs.
+- Default value: `15`
+- Unit: GiB
 
 > **Note:**
 >
-> The automatic data purge strategy only takes effect when `interval` is not 0 and at least one of the two configuration items `expires` and `remain-space` is not 0.
+> The automatic data purge strategy only takes effect when [`interval`](#interval) is not `0` and at least one of the two configuration items [`expires`](#expires) and [`remain-space`](#remain-space) is not `0`.
 
 ### Task status checker configuration (`checker`)
 
 DM periodically checks the current task status and error message to determine if resuming the task will eliminate the error. If needed, DM automatically retries to resume the task. DM adjusts the checking interval using the exponential backoff strategy. Its behaviors can be adjusted by the following configuration.
 
-| Parameter        | Description                                    |
-| :------------ | :--------------------------------------- |
-| `check-enable` | Whether to enable this feature. |
-| `backoff-rollback` | If the current checking interval of backoff strategy is larger than this value and the task status is normal, DM will try to decrease the interval. |
-| `backoff-max` | The maximum value of checking interval of backoff strategy, must be larger than 1 second. |
+#### `check-enable`
+
+- Whether to enable this feature.
+
+#### `backoff-rollback`
+
+- If the current checking interval of backoff strategy is larger than this value and the task status is normal, DM will try to decrease the interval.
+
+#### `backoff-max`
+
+- The maximum value of checking interval of backoff strategy, must be larger than 1 second.
 
 ### Binlog event filter
 
 Starting from DM v2.0.2, you can configure binlog event filters in the source configuration file.
 
-| Parameter        | Description                                    |
-| :------------ | :--------------------------------------- |
-| `case-sensitive` | Determines whether the filtering rules are case-sensitive. The default value is `false`. |
-| `filters` | Sets binlog event filtering rules. For details, see [Binlog event filter parameter explanation](/dm/dm-binlog-event-filter.md#parameter-descriptions). |
+#### `case-sensitive`
+
+- Determines whether the filtering rules are case-sensitive.
+- Default value: `false`
+
+#### `filters`
+
+- Specifies binlog event filtering rules. For details, see [Binlog event filter parameter explanation](/dm/dm-binlog-event-filter.md#parameter-descriptions).
