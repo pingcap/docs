@@ -147,7 +147,7 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 
 > **Note:**
 >
-> Before you upgrade the cluster to v6.6.0, make sure that the parameters you have modified in v4.0 are compatible in v7.5.6. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
+> Before you upgrade the cluster to v7.5.6, make sure that the parameters you have modified in v4.0 are compatible in v7.5.6. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
 
 ### Step 4: Check the DDL and backup status of the cluster
 
