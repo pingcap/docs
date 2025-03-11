@@ -11,19 +11,19 @@ This document describes how to improve the efficiency of point-in-time recovery 
 
 Traditional log backups store write operations in a highly unstructured manner, which can lead to the following issues:
 
-- **Reduced recovery performance**: disordered data needs to be written to the cluster one by one through the Raft protocol.
-- **Write amplification**: repeated write operations increase storage pressure.
+- **Reduced recovery performance**: unordered data has to be written to the cluster one by one through the Raft protocol.
+- **Write amplification**: all writes must be compacted from L0 to the bottommost level by level.
 - **Dependency on full backups**: frequent full backups are required to control the amount of recovery data, which can impact application operations.
 
-Starting from v9.0.0, the compact log backup feature provides offline reorganization capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
+Starting from v9.0.0, the compact log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
 
-- **Enhanced recovery performance**: structured data supports efficient batch writes.
-- **Optimized storage space**: reduces redundant data storage.
-- **Extended full backup intervals**: minimizes the impact on application operations.
+- SST files can be quickly imported into the cluster, **improving recovery performance**.
+- Redundant data is removed during compaction, **reducing storage space consumption**.
+- You can set longer full backup intervals while ensuring the Recovery Time Objective (RTO), **reducing the impact on applications**.
 
 ## Limitations
 
-- Compact log backup is not a replacement for full backups. It must be used in conjunction with regular full backups. To ensure PITR capability, the compacting process retains MVCC data. Prolonged intervals without full backups can lead to excessive storage usage and recovery issues.
+- Compact log backup is not a replacement for full backups. It must be used in conjunction with periodical full backups. To ensure PITR capability, the compacting process retains all MVCC versions. Failing to perform full backups for a long time can lead to excessive storage usage and might cause issues when restoring data later.
 - Currently, compacting backups with local encryption enabled is not supported.
 
 ## Use compact log backup
