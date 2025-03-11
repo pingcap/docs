@@ -115,7 +115,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
 
     + Backup & Restore (BR)
 
-        - Fix the issue that log backup fails to exit properly when encountering a fatal error due to not being able to access PD [#58031](https://github.com/tikv/tikv/issues/18087) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that log backup fails to exit properly when encountering a fatal error due to not being able to access PD [#18087](https://github.com/tikv/tikv/issues/18087) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that BR fails to restore due to getting the `rpcClient is idle` error when sending requests to TiKV [#58845](https://github.com/pingcap/tidb/issues/58845) @[Tristan1900](https://github.com/Tristan1900)
         - Fix the issue that PITR fails to restore indexes larger than 3072 bytes [#58430](https://github.com/pingcap/tidb/issues/58430) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that the `status` field is missing in the result when querying log backup tasks using `br log status --json` [#57959](https://github.com/pingcap/tidb/issues/57959) @[Leavrth](https://github.com/Leavrth)
