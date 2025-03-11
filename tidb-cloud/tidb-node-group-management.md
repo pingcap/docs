@@ -30,8 +30,12 @@ Currently, the TiDB Node Group feature is only available upon request. To reques
 
 ## Prerequisites
 
-- You have a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster deployed on AWS.
+- You have a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster deployed on AWS or Google Cloud.
 - You are in the **Organization Owner** or **Project Owner** role of your organization. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+
+> **Note**:
+>
+> The TiDB Node Group can not be created during the cluster creation. You need to add the groups after the cluster is created and in Available state. 
 
 ## Create a TiDB node group
 
