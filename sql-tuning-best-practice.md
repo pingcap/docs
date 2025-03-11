@@ -173,7 +173,7 @@ TiDB uses a cost-based optimizer (CBO) to determine the most efficient execution
     - Index statistics
     - Column statistics
 
-Based on these inputs, the cost model produces an execution plan that details how the system will execute the SQL, including:
+Based on these inputs, the cost model generates an execution plan that details how TiDB will execute the SQL statement, including:
 
 - Access method
 - Join method
@@ -183,7 +183,7 @@ The effectiveness of the optimizer depends on the quality of the information it 
 
 ### Statistics management
 
-Statistics are essential for the TiDB optimizer. TiDB uses statistics as the input of optimizer to estimate the number of rows processed in each step of a SQL execution plan.
+Statistics are essential for the TiDB optimizer. TiDB uses statistics as the input of the optimizer to estimate the number of rows processed in each step of a SQL execution plan.
 
 Statistics are divided into two levels:
 
@@ -192,7 +192,7 @@ Statistics are divided into two levels:
 
 To check the accuracy and health of your statistics, you can use the following SQL statements:
 
-- [`SHOW STATS_META`](sql-statements/sql-statement-show-stats-meta.md): shows metadata about table statistics.
+- [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md): shows metadata about table statistics.
 
     ```sql
     SHOW STATS_META WHERE table_name='T2'\G;
@@ -209,7 +209,7 @@ To check the accuracy and health of your statistics, you can use the following S
     1 row in set (0.03 sec)
     ```
 
-- [`SHOW STATS_HEALTHY`](sql-statements/sql-statement-show-stats-healthy.md): shows the health status of table statistics.
+- [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md): shows the health status of table statistics.
 
     ```sql
     SHOW STATS_HEALTHY WHERE table_name='T2'\G;
@@ -224,7 +224,7 @@ To check the accuracy and health of your statistics, you can use the following S
     1 row in set (0.00 sec)
     ```
 
-TiDB provides two methods for collecting statistics: automatic and manual collection. In most cases, automatic collection is sufficient. TiDB triggers automatic collection when certain conditions are met. These common triggering conditions include:
+TiDB provides two methods for collecting statistics: automatic and manual collection. In most cases, automatic collection is sufficient. TiDB triggers automatic collection when certain conditions are met. Some common triggering conditions include:
 
 - [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio): the healthiness trigger.
 - [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) and [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time): the time window for automatic statistics collection.
@@ -243,9 +243,9 @@ SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
 +-----------------------------------------+-------------+
 ```
 
-Sometimes automatic collection does not meet your needs. By default, the time window for automatic statistics collection is from `00:00` to `23:59`, meaning the analyze job can be triggered at any time during the day. To avoid performance impacts on your online business, you can set specific start and end times for statistics collection.
+In some cases, automatic collection may not meet your needs. By default, it occurs between `00:00` and `23:59`, meaning the analyze job can run at any time. To minimize performance impact on your online business, you can set specific start and end times for statistics collection.
 
-You can manually collect statistics using the `ANALYZE TABLE table_name` statement. This lets you adjust settings such as the sample rate, number of Top-N values, or collect statistics for specific columns only.
+You can manually collect statistics using the `ANALYZE TABLE table_name` statement. This lets you adjust settings such as the sample rate, the number of Top-N values, or collect statistics for specific columns only.
 
 Note that after manual collection, subsequent automatic collection jobs inherit the new settings. This means that any customizations made during manual collection will apply to future automatic analyses.
 
@@ -269,7 +269,7 @@ A SQL statement undergoes three main optimization stages in the TiDB optimizer:
 
 #### Pre-processing
 
-During pre-processing, TiDB determines whether the SQL statement can be executed using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get). These operations use a primary or unique key to read directly from TiKV through an exact key lookup. If a plan qualifies as `Point_Get` or `Batch_Point_Get`, the optimizer skips the logical transformation and cost-based optimization steps because direct key lookup is the most efficient way to access the row.
+During pre-processing, TiDB determines whether the SQL statement can be executed using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get). These operations use a primary or unique key to read directly from TiKV through an exact key lookup. If a plan qualifies for `Point_Get` or `Batch_Point_Get`, the optimizer skips the logical transformation and cost-based optimization steps because direct key lookup is the most efficient way to access the row.
 
 The following is an example of a `Point_Get` query:
 
@@ -287,7 +287,7 @@ EXPLAIN SELECT id, name FROM emp WHERE id = 901;
 
 #### Logical transformation
 
-Logical transformation optimizes SQL statements based on the `SELECT` list, `WHERE` predicates, and other conditions. It generates a logical execution plan to annotate and rewrite the query. This logical plan is used in the next stage, cost-based optimization. The transformation applies rule-based optimizations such as column pruning, partition pruning, and join reordering. Since this process is rule-based and automatic, manual adjustments are usually unnecessary.
+During logical transformation, TiDB optimizes SQL statements based on the `SELECT` list, `WHERE` predicates, and other conditions. It generates a logical execution plan to annotate and rewrite the query. This logical plan is used in the next stage, cost-based optimization. The transformation applies rule-based optimizations such as column pruning, partition pruning, and join reordering. Because this process is rule-based and automatic, manual adjustments are usually unnecessary.
 
 For more information, see [SQL Logical Optimization](/sql-logical-optimization.md).
 
@@ -299,11 +299,11 @@ The following figure illustrates various data access paths and row set operation
 
 The optimizer also evaluates operations that manipulate row sets, such as aggregation, join, and sorting. For example, the aggregation operator might use either `HashAgg` or `StreamAgg`, while the join method can select from `HashJoin`, `MergeJoin`, or `IndexJoin`.
 
-Additionally, the physical optimization phase includes pushing down expressions and operators to the physical storage engines. The physical plan is distributed to different components based on the underlying storage engines:
+Additionally, the physical optimization phase includes pushing down expressions and operators to the physical storage engines. The physical plan is distributed to different components based on the underlying storage engines as follows:
 
-- Root task executes on the TiDB server.
-- Cop (Coprocessor) task executes on TiKV.
-- MPP task executes on TiFlash.
+- Root tasks are executed on the TiDB server.
+- Cop (Coprocessor) tasks are executed on TiKV.
+- MPP tasks are executed on TiFlash.
 
 This distribution enables cross-component collaboration for efficient query processing.
 
@@ -313,7 +313,7 @@ For more information, see [SQL Physical Optimization](/sql-physical-optimization
 
 ### Understand execution plans
 
-An execution plan outlines the steps TiDB will follow to execute a SQL query. This section explains how to generate, display, and interpret execution plans.
+An execution plan details the steps that TiDB will follow to execute a SQL query. This section explains how to generate, display, and interpret execution plans.
 
 #### Generate and display execution plans
 
@@ -342,7 +342,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the information together with the execution plan. This runtime information is crucial for debugging query execution. For more information, see [`EXPLAIN ANALYZE`](sql-statements/sql-statement-explain-analyze.md).
+Different from `EXPLAIN`, `EXPLAIN ANALYZE` executes the corresponding SQL statement, records its runtime information, and returns the runtime information together with the execution plan. This runtime information is crucial for debugging query execution. For more information, see [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
 
 The `EXPLAIN ANALYZE` output includes:
 
@@ -397,15 +397,15 @@ The "first child first" rule means that an operator must retrieve rows from all 
 
 Consider these two important concepts when reading execution plans:
 
-- Parent-child interaction: a parent operator calls its child operators sequentially but might cycle through them multiple times. For example, in an index lookup or nested loop join, the parent fetches a batch of rows from the first child, then retrieves zero or more rows from the second child. This process repeats until the first child's result set is fully consumed.
+- Parent-child interaction: a parent operator calls its child operators sequentially but might cycle through them multiple times. For example, in an index lookup or nested loop join, the parent fetches a batch of rows from the first child, then retrieves zero or more rows from the second child. This process repeats until the first child's result set is fully processed.
 
 - Blocking vs. non-blocking operators: operators can be either blocking or non-blocking:
     - Blocking operators, such as `TopN` and `HashAgg`, must create their entire result set before passing data to their parent.
     - Non-blocking operators, such as `IndexLookup` and `IndexJoin`, produce and pass rows incrementally as needed.
 
-When reading an execution plan, start from the top and work downward. In the following example, the final child operator is `TableFullScan_18`, which is the leaf node of the plan tree. The access operator in this case is a full table scan. The rows produced by this scan are consumed by the `Selection_19` operator, which filters the data based on `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`. Then, the group-by operator `StreamAgg_9` performs the final aggregation `COUNT(*)`.
+When reading an execution plan, start from the top and work downward. In the following example, the leaf node of the plan tree is `TableFullScan_18`, which performs a full table scan. The rows from this scan are consumed by the `Selection_19` operator, which filters the data based on `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`. Then, the group-by operator `StreamAgg_9` performs the final aggregation `COUNT(*)`.
 
-These three operators (`TableFullScan_18`, `Selection_19`, and `StreamAgg_9`) are pushed down to TiKV (marked as `cop[tikv]`), so that early filtering and aggregation occur in TiKV, minimizing data transfer between TiKV and TiDB. Finally, `TableReader_21` reads the data from `StreamAgg_9`, and `StreamAgg_20` performs the final aggregation `count(*)`.
+These three operators (`TableFullScan_18`, `Selection_19`, and `StreamAgg_9`) are pushed down to TiKV (marked as `cop[tikv]`), enabling early filtering and aggregation in TiKV to reduce data transfer between TiKV and TiDB. Finally, `TableReader_21` reads the data from `StreamAgg_9`, and `StreamAgg_20` performs the final aggregation `count(*)`.
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -424,7 +424,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-In the following example, first examine `IndexRangeScan_47`, the first leaf node of the plan tree. The optimizer selects only the `name` and `id` columns from the `stars` table, which can be retrieved from the `name(name)` index. As a result, the root reader for `stars` is `IndexReader_48`, not `TableReader`.
+In the following example, start by examining `IndexRangeScan_47`, the first leaf node of the plan tree. The optimizer selects only the `name` and `id` columns from the `stars` table, which can be retrieved from the `name(name)` index. As a result, the root reader for `stars` is `IndexReader_48`, not `TableReader`.
 
 The join between `stars` and `planets` is a hash join (`HashJoin_44`). The `planets` table is accessed using a full table scan (`TableFullScan_45`). After the join, `TopN_26` and `TopN_19` apply the `ORDER BY` and `LIMIT` clauses, respectively. The final operator, `Projection_16`, selects the final column `t5.name`.
 
@@ -465,7 +465,7 @@ The following figure illustrates the plan tree for the second execution plan:
 
 The execution plan follows a top-to-bottom, first-child-first traversal, corresponding to a postorder traversal (Left, Right, Root) of the plan tree.
 
-To read this plan:
+You can read this plan in the following order:
 
 1. Start at the top with `Projection_16`.
 2. Move to its child, `TopN_19`.
@@ -474,13 +474,13 @@ To read this plan:
 5. For `HashJoin_44`, process its left (Build) child first:
     - `IndexReader_48`
     - `IndexRangeScan_47`
-6. Then process its right (Probe) child:
+6. For `HashJoin_44`, process its right (Probe) child:
     - `TableReader_46`
     - `TableFullScan_45`
 
 This traversal ensures that each operator's inputs are processed before the operator itself, enabling efficient query execution.
 
-#### Identify and understand bottlenecks in execution plans
+#### Identify bottlenecks in execution plans
 
 When analyzing execution plans, compare `actRows` (actual rows) with `estRows` (estimated rows) to evaluate the accuracy of the optimizer's estimations. A significant difference between these values might indicate outdated or inaccurate statistics, which can lead to suboptimal query plans.
 
