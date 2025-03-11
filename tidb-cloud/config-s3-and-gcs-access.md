@@ -11,13 +11,12 @@ If you need to configure these external storages for TiDB Cloud Serverless clust
 
 ## Configure Amazon S3 access
 
-To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need to configure the bucket access for TiDB Cloud. You can use either of the following methods to configure the bucket access:
+To allow a TiDB Cloud Dedicated cluster to access the source data in your Amazon S3 bucket, configure the bucket access for the cluster using either of the following methods:
 
-- Use an AWS access key: use the access key of an IAM user to access your Amazon S3 bucket.
-- Use a Role ARN: use a Role ARN to access your Amazon S3 bucket.
+- [Use a Role ARN](#configure-amazon-s3-access-using-a-role-arn): use a Role ARN to access your Amazon S3 bucket.
+- [Use an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key): use the access key of an IAM user to access your Amazon S3 bucket.
 
-<SimpleTab>
-<div label="Role ARN">
+### Configure Amazon S3 access using a Role ARN
 
 Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
@@ -127,8 +126,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
 4. In the TiDB Cloud console, go to the **Data Import** page where you get the TiDB Cloud account ID and external ID, and then paste the role ARN to the **Role ARN** field.
 
-</div>
-<div label="Access Key">
+### Configure Amazon S3 access using an AWS access key
 
 It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
 
@@ -150,9 +148,6 @@ Take the following steps to configure an access key:
 > **Note:**
 >
 > TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import is complete.
-
-</div>
-</SimpleTab>
 
 ## Configure GCS access
 
