@@ -49,7 +49,7 @@ br operator base64ify --storage "s3://your/log/backup/storage/here" --load-creds
 > **Note:**
 >
 > - If the `--load-creds` option is included when you execute the preceding command, the encoded Base64 string contains credential information loaded from the current BR environment. Note to ensure proper security and access control.
-> - The `--storage` value should match the storage output from the `log status` command of the log backup task.
+> - The `--storage` value matches the storage output from the `log status` command of the log backup task.
 
 Example command output:
 
