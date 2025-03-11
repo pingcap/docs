@@ -150,7 +150,10 @@ This guide provides practical advice for beginners on optimizing SQL queries in 
 
 When a client sends a SQL statement to TiDB, the statement passes through the protocol layer of the TiDB server. This layer manages the connection between the TiDB server and the client, receives SQL statements, and returns data to the client.
 
-In the following figure, to the right of the protocol layer is the optimizer of the TiDB server, which processes SQL statements as follows:
+
+![workflow](/media/sql-tuning/workflow-tiflash.png)
+
+In the preceding figure, to the right of the protocol layer is the optimizer of the TiDB server, which processes SQL statements as follows:
 
 1. The SQL statement arrives at the SQL optimizer through the protocol layer and is parsed into an abstract syntax tree (AST).
 2. TiDB identifies whether it is a [Point Get](/explain-indexes.md#point_get-and-batch_point_get) statement, which involves a simple one-table lookup through a primary or unique key, such as `SELECT * FROM t WHERE pk_col = 1` or `SELECT * FROM t WHERE uk_col IN (1,2,3)`. For `Point Get` statements, TiDB skips subsequent optimization steps and proceeds directly to execution in the SQL executor.
@@ -159,8 +162,6 @@ In the following figure, to the right of the protocol layer is the optimizer of 
 5. During cost-based optimization, the optimizer uses statistics to select appropriate operators and generates a physical execution plan.
 6. The generated physical execution plan is sent to the SQL executor of the TiDB node for execution.
 7. Unlike traditional single-node databases, TiDB pushes down operators or coprocessors to TiKV and/or TiFlash nodes containing the data. This approach processes parts of the execution plan where the data is stored, efficiently utilizing the distributed architecture, using resources in parallel, and reducing network data transfer. The TiDB node executor then assembles the final result and returns it to the client.
-
-![workflow](/media/sql-tuning/workflow-tiflash.png)
 
 ### Optimizer fundamentals
 
