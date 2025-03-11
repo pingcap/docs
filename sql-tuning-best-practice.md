@@ -137,7 +137,7 @@ This guide provides practical advice for beginners on optimizing SQL queries in 
     - [How TiDB builds an execution plan](#how-tidb-builds-an-execution-plan)
     - [Generate and display execution plans](#generate-and-display-execution-plans)
     - [Read execution plans: first child first](#read-execution-plans-first-child-first)
-    - [Identify and understand bottlenecks in execution plans](#identify-and-understand-bottlenecks-in-execution-plans)
+    - [Identify bottlenecks in execution plans](#identify-bottlenecks-in-execution-plans)
 - [Index strategies in TiDB](#index-strategies-in-tidb)
     - [Composite index strategy guidelines](#composite-index-strategy-guidelines)
     - [The cost of indexing](#the-cost-of-indexing)
