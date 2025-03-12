@@ -201,6 +201,10 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
 
 ### HashJoin
 
+HashJoin executor has two versions, named HashJoinV1 and HashJoinV2 respectively. We can chooses them by system variable [`tidb_hash_join_version`](/system-variables.md#tidb_hash_join_version-从-v840-版本开始引入). The following introduces execution process of these two versions respectively.
+
+#### HashJoinv1
+
 The `HashJoin` operator has an inner worker, an outer worker, and N join workers. The detailed execution process is as follows:
 
 1. The inner worker reads inner table rows and constructs a hash table.
@@ -225,6 +229,45 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
     - `max`: The longest time for a single join worker to execute.
     - `probe`: The total time consumed for joining with outer table rows and the hash table.
     - `fetch`: The total time that the join worker waits to read the outer table rows data.
+
+#### HashJoinv2
+
+`HashJoin` executor contains one fetcher, N row table builder and N hash table builder at the build side, and contains one fetcher and N worker at the probe side. The detail execution logic is as follow:
+1. The fetcher at build side reads data from the downstream executor and dispatches data to each row table builder.
+2. The row table builder receives data chunks, splits them into several partitions and builds row table.
+3. Wait for the finish of building row table.
+4. The hash table builder builds hash table with row table.
+5. The fetcher at probe side reads data from the downstream executor and dispatches them to workers.
+6. Workers receive data, looks up hash table with data, construct final result and dispatch result to result channel.
+7. Main thread of `HashJoin` receives join result from result channel.
+
+`HashJoin` executor contains the following execution information:
+
+```
+build_hash_table:{concurrency:5, time:2.25s, fetch:1.06s, max_partition:1.06s, total_partition:5.27s, max_build:124ms, total_build:439.5ms}, probe:{concurrency:5, time:13s, fetch_and_wait:3.03s, max_worker_time:13s, total_worker_time:1m4.5s, max_probe:9.93s, total_probe:49.4s, probe_collision:59818971}, spill:{round:1, spilled_partition_num_per_round:[5/8], total_spill_GiB_per_round:[1.64], build_spill_row_table_GiB_per_round:[0.50], build_spill_hash_table_per_round:[0.12]}
+```
+
+`build_hash_table`: the execution information of reading downstream executor and building hash table.
+    - `time`: The total time consumption of building hash table.
+    - `fetch`: The total time consumption of reading data from downsteam.
+    - `max_partition`: The execution time of the builder that takes longest time in all row table builders.
+    - `total_partition`：The cumulative time taken by the execution of all row table builders.
+    - `max_build`：The execution time of the builder that takes longest time in all hash table builder.
+    - `total_build`：The cumulative time taken by the execution of all hash table builder.
+- `probe`: The execution information of reading downstream executor and doing probe.
+    - `time`: The total time consumption of probing.
+    - `fetch_and_wait`: The total time consumption of reading data from downstream and waiting for the data from upstream.
+    - `max_worker_time`: The longest execution time among all workers, including reading data from downstream, executing probe operation and waiting data from upstream.
+    - `total_worker_time`: The cumulative execution time of all workers.
+    - `max_probe`: The longest probe time among all workers.
+    - `total_probe`: The cumulative probing time of all workers.
+    - `probe_collision`：Collision number in the probing stage.
+- `spill`: The execution information during the spill.
+    - `round`: The number of spill round.
+    - `spilled_partition_num_per_round`: The spilled partition number in each round. The format is `x/y`, `x` represents the spilled partition number and `y` represents the number of all partitions. 
+    - `total_spill_GiB_per_round`: The total data size written into disk in each spill round.
+    - `build_spill_row_table_GiB_per_round`: The total data size of row table written into disk in each spill round at the build side.
+    - `build_spill_hash_table_per_round`: The total data size of hash table written into disk in each spill round at the build side.
 
 ### TableFullScan (TiFlash)
 
