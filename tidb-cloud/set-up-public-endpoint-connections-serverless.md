@@ -11,7 +11,6 @@ This article describes the public connectivity option for TiDB Cloud Serverless.
 >
 > This document applies to **TiDB Cloud Serverless**. For instructions on configuring an IP access list for **TiDB Cloud Dedicated**, see [Configure an IP Access List for TiDB Cloud Dedicated](/tidb-cloud/configure-ip-access-list.md).
 
-
 ## Public endpoints
 
 Configuring public access on your TiDB Cloud Serverless cluster allows the cluster access through a public endpoint. That is, the cluster is accessible through the internet. The public endpoint is a publicly resolvable DNS address. The phrase authorized networks refers to a range of IPs you choose to permit access to your cluster. These permissions are enforced through **firewall rules**.
@@ -46,9 +45,9 @@ This section provides an overview of managing firewall rules after creating a Ti
 
 3. **Enable** Public Endpoint if it is disabled. In **Firewall Rules**, click **+ Add Current IP**. This automatically creates a firewall rule with the public IP address of your computer, as perceived by TiDB Cloud.
 
-> **Note:**
->
-> In some situations, the IP address observed by the TiDB Cloud console differs from the IP address used when accessing the internet. Therefore, you might need to change the start and end IP addresses to make the rule function as expected. You can use a search engine or other online tool to check your own IP address. For example, search for "what is my IP."
+    > **Note:**
+    >
+    > In some situations, the IP address observed by the TiDB Cloud console differs from the IP address used when accessing the internet. Therefore, you might need to change the start and end IP addresses to make the rule function as expected. You can use a search engine or other online tool to check your own IP address. For example, search for "what is my IP."
 
 4. Click **Add rule** to add more address ranges. In the **Add Firewall Rule** window, you can specify a single IP address or a range of IP addresses. If you want to limit the rule to a single IP address, type the same IP address in the **Start IP Address** and **End IP Address** fields. Opening the firewall enables administrators, users, and applications to access any database on your TiDB Cloud Serverless cluster to which they have valid credentials. Click **Submit** to add the firewall rule.
 
