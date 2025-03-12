@@ -242,6 +242,7 @@
       - [Use Overview](/br/br-use-overview.md)
       - [Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
       - [Log Backup and PITR Guide](/br/br-pitr-guide.md)
+      - [Compact Log Backup](/br/br-compact-log-backup.md)
       - [Use Cases](/br/backup-and-restore-use-cases.md)
       - [Backup Storages](/br/backup-and-restore-storages.md)
     - BR CLI Manuals
