@@ -12,7 +12,7 @@ This article describes the public connectivity option for TiDB Cloud Serverless.
 > This document applies to **TiDB Cloud Serverless**. For instructions on configuring an IP access list for **TiDB Cloud Dedicated**, see [Configure an IP Access List for TiDB Cloud Dedicated](/tidb-cloud/configure-ip-access-list.md).
 
 
-## Public Endpoint
+## Public endpoints
 
 Configuring public access on your TiDB Cloud Serverless cluster allows the cluster access through a public endpoint. That is, the cluster is accessible through the internet. The public endpoint is a publicly resolvable DNS address. The phrase authorized networks refers to a range of IPs you choose to permit access to your cluster. These permissions are enforced through **firewall rules**.
 
