@@ -3,7 +3,7 @@ title: TiDB Serverless networking overview with public access (allowed IP addres
 summary: Learn how to configure and manage public access to your TiDB Cloud Serverless cluster securely.
 ---
 
-# Public Network Endpoint for TiDB Cloud Serverless
+# Connect to TiDB Cloud Serverless via Public Endpoint
 
 This article describes the public connectivity option for TiDB Cloud Serverless. You will learn key concepts for securely managing a TiDB Cloud Serverless cluster accessible via the internet.
 
