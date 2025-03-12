@@ -19,12 +19,12 @@ Configuring public access on your TiDB Cloud Serverless cluster allows the clust
 ### Characteristics of public access
 
 - Only specified IP addresses can access TiDB Cloud Serverless.  
-  - **Default:** All IP addresses (`0.0.0.0 - 255.255.255.255`) are allowed.  
-  - You can update allowed IP addresses after cluster creation.  
+    - **Default:** All IP addresses (`0.0.0.0 - 255.255.255.255`) are allowed.  
+    - You can update allowed IP addresses after cluster creation.  
 - Your cluster has a publicly resolvable DNS name.  
 - Network traffic to and from your cluster is routed over the **public internet** rather than a private network.
 
-### Firewall Rules
+### Firewall rules
 
 Granting access to an IP address is done via **firewall rules**. If a connection attempt originates from an unapproved IP address, the client will receive an error.
 
@@ -33,6 +33,7 @@ You can create a maximum of 200 IP firewall rules.
 ### Allow AWS access
 
 You can enable access from **all AWS IP addresses** by referring to the official [AWS IP address list](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html).  
+
 TiDB Cloud regularly updates this list and uses the reserved IP address **169.254.65.87** to represent all AWS IP addresses.
 
 ## Create and manage a firewall rule 
