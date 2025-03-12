@@ -41,9 +41,9 @@ This section provides an overview of managing firewall rules after creating a Ti
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), select the TiDB Cloud Serverless cluster on which you want to add firewall rules.
 
-2. Under **Security** heading, select **Networking** to open Networking page for the TiDB Cloud Serverless cluster.
+2. In the left navigation pane, click **Networking** to open the Networking page for the TiDB Cloud Serverless cluster.
 
-3. **Enable** Public Endpoint if it's disabled. Select **+ Add Current IP** in the Firewall Rules. This automatically creates a firewall rule with the public IP address of your computer, as perceived by the TiDB Cloud.
+3. **Enable** Public Endpoint if it is disabled. In **Firewall Rules**, click **+ Add Current IP**. This automatically creates a firewall rule with the public IP address of your computer, as perceived by TiDB Cloud.
 
 > **Note:**
 >
