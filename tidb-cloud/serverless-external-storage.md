@@ -11,13 +11,12 @@ TiDB Cloud Dedicated クラスター用にこれらの外部ストレージを�
 
 ## Amazon S3 アクセスを構成する {#configure-amazon-s3-access}
 
-TiDB Cloud Serverless クラスターが Amazon S3 バケットにアクセスできるようにするには、クラスターのバケット アクセスを設定する必要があります。バケット アクセスを設定するには、次のいずれかの方法を使用できます。
+TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソースデータにアクセスできるようにするには、次のいずれかの方法を使用してクラスターのバケットアクセスを設定します。
 
--   ロール ARN を使用する: ロール ARN を使用して Amazon S3 バケットにアクセスします。
--   AWS アクセスキーを使用する: IAMユーザーのアクセスキーを使用して Amazon S3 バケットにアクセスします。
+-   [ロールARNを使用する](#configure-amazon-s3-access-using-a-role-arn) : ロール ARN を使用して Amazon S3 バケットにアクセスします。
+-   [AWSアクセスキーを使用する](#configure-amazon-s3-access-using-an-aws-access-key) : IAMユーザーのアクセスキーを使用して Amazon S3 バケットにアクセスします。
 
-<SimpleTab>
-<div label="Role ARN">
+### ロール ARN を使用して Amazon S3 アクセスを構成する {#configure-amazon-s3-access-using-a-role-arn}
 
 ロール ARN を作成するには、 [AWS クラウドフォーメーション](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)使用することをお勧めします。作成するには、次の手順を実行します。
 
@@ -34,6 +33,7 @@ TiDB Cloud Serverless クラスターが Amazon S3 バケットにアクセス�
         1.  **S3 からインポート**をクリックします。
         2.  **ファイル URI**フィールドに入力します。
         3.  **AWS ロール ARN**を選択し、[**ここをクリックして AWS CloudFormation で新規作成] を**クリックします。
+
     -   データを Amazon S3 にエクスポートする場合は、次のようにして**「新しい ARN の追加」**ダイアログを開きます。
 
         1.  **[データをエクスポート...]** &gt; **[Amazon S3]**をクリックします。クラスターでこれまでにデータをインポートまたはエクスポートしたことがない場合は、ページの下部にある**[データをエクスポートするには、ここをクリックします...]** &gt; **[Amazon S3]**をクリックします。
@@ -64,7 +64,7 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
     1.  [AWS マネジメントコンソール](https://console.aws.amazon.com/)にサインインして[Amazon S3 コンソール](https://console.aws.amazon.com/s3/)開きます。
 
-    2.  **[バケット]**リストで、ソース データを含むバケットの名前を選択し、 **[ARN のコピー]**をクリックして S3 バケット ARN (例: `arn:aws:s3:::tidb-cloud-source-data` ) を取得します。後で使用するために、バケット ARN をメモしておきます。
+    2.  **[バケット]**リストで、ソース データがあるバケットの名前を選択し、 **[ARN のコピー]**をクリックして S3 バケット ARN (例: `arn:aws:s3:::tidb-cloud-source-data` ) を取得します。後で使用するために、バケット ARN をメモしておきます。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
@@ -107,7 +107,7 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
         ポリシー テキスト フィールドで、次の構成を独自の値に置き換えます。
 
-        -   `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"` 。例えば、
+        -   `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"` 。例えば:
 
             -   ソース データが`tidb-cloud-source-data`バケットのルート ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`使用します。
             -   ソース データがバケットの`mydata`ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`使用します。
@@ -155,9 +155,7 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
 </details>
 
-</div>
-
-<div label="Access Key">
+### AWS アクセスキーを使用して Amazon S3 アクセスを構成する {#configure-amazon-s3-access-using-an-aws-access-key}
 
 アクセスキーを作成するには、AWS アカウントのルートユーザーではなく、 IAMユーザーを使用することをお勧めします。
 
@@ -172,9 +170,6 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 > **注記：**
 >
 > TiDB Cloud はアクセス キーを保存しません。インポートまたはエクスポートが完了したら、 [アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)実行することをお勧めします。
-
-</div>
-</SimpleTab>
 
 ## GCS アクセスを構成する {#configure-gcs-access}
 
@@ -231,7 +226,7 @@ Azure ARM テンプレートを使用して SAS トークンを作成するに�
 
 3.  Azure ARM テンプレートを使用して SAS トークンを作成します。
 
-    1.  **[ARM テンプレートのデプロイによる新しい SAS トークンの生成]**ダイアログで、[クリックして**、事前構成された ARM テンプレートを含む Azure ポータルを開く] をクリックします**。
+    1.  **[ARM テンプレートの展開による新しい SAS トークンの生成]**ダイアログで、[クリックして**、事前構成された ARM テンプレートを含む Azure ポータルを開く] をクリックします**。
 
     2.  Azure にログインすると、Azure**カスタム デプロイメント**ページにリダイレクトされます。
 
@@ -239,7 +234,7 @@ Azure ARM テンプレートを使用して SAS トークンを作成するに�
 
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
-    4.  **[確認と作成]**または**[次へ**] をクリックして、展開を確認します。 **[作成]**をクリックして、展開を開始します。
+    4.  **[確認 + 作成]**または**[次へ**] をクリックして、展開を確認します。 **[作成]**をクリックして、展開を開始します。
 
     5.  完了すると、デプロイの概要ページにリダイレクトされます。**出力**セクションに移動して、SAS トークンを取得します。
 

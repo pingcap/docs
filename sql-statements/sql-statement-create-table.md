@@ -124,6 +124,37 @@ OnCommitOpt ::=
 PlacementPolicyOption ::=
     "PLACEMENT" "POLICY" EqOpt PolicyName
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
+
+DefaultValueExpr ::=
+    NowSymOptionFractionParentheses
+|   SignedLiteral
+|   NextValueForSequenceParentheses
+|   BuiltinFunction
+
+BuiltinFunction ::=
+    '(' BuiltinFunction ')'
+|   identifier '(' ')'
+|   identifier '(' ExpressionList ')'
+|   "REPLACE" '(' ExpressionList ')'
+
+NowSymOptionFractionParentheses ::=
+    '(' NowSymOptionFractionParentheses ')'
+|   NowSymOptionFraction
+
+NowSymOptionFraction ::=
+    NowSym
+|   NowSymFunc '(' ')'
+|   NowSymFunc '(' NUM ')'
+|   CurdateSym '(' ')'
+|   "CURRENT_DATE"
+
+NextValueForSequenceParentheses ::=
+    '(' NextValueForSequenceParentheses ')'
+|   NextValueForSequence
+
+NextValueForSequence ::=
+    "NEXT" "VALUE" forKwd TableName
+|   "NEXTVAL" '(' TableName ')'
 ```
 
 次の*table_options*がサポートされています。 `AVG_ROW_LENGTH` 、 `CHECKSUM` 、 `COMPRESSION` 、 `CONNECTION` 、 `DELAY_KEY_WRITE` 、 `ENGINE` 、 `KEY_BLOCK_SIZE` 、 `MAX_ROWS` 、 `MIN_ROWS` 、 `ROW_FORMAT` 、 `STATS_PERSISTENT`などの他のオプションは解析されますが無視されます。
@@ -199,7 +230,7 @@ SELECT * FROM t1;
     +------+
     1 row in set (0.00 sec)
 
-テーブルが存在する場合は削除し、存在しない場合は条件付きでテーブルを作成します。
+テーブルが存在する場合はそれを削除し、存在しない場合は条件付きでテーブルを作成します。
 
 ```sql
 DROP TABLE IF EXISTS t1;
@@ -234,7 +265,7 @@ mysql> DESC t1;
 
 -   空間型を除くすべてのデータ型がサポートされています。
 -   TiDB `RTREE` `BTREE` `HASH`インデックス タイプを受け入れますが、それらを無視します。
--   TiDB は`FULLTEXT`の構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
+-   TiDB は`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
 
 <CustomContent platform="tidb">
 
@@ -248,7 +279,7 @@ mysql> DESC t1;
 
 </CustomContent>
 
--   `index_col_name`のうち`[ASC | DESC]`現在解析されていますが無視されます (MySQL 5.7互換の動作)。
+-   `index_col_name`のうち`[ASC | DESC]`は現在解析されていますが無視されます (MySQL 5.7互換の動作)。
 -   `COMMENT`属性は`WITH PARSER`オプションをサポートしていません。
 -   TiDB は、デフォルトで 1 つのテーブルに 1017 列をサポートし、最大 4096 列をサポートします。InnoDB での対応する列数制限は 1017 列で、MySQL でのハード制限は 4096 列です。詳細については、 [TiDB の制限](/tidb-limitations.md)参照してください。
 -   TiDB は`HASH` 、 `RANGE` 、 `LIST` 、および`KEY` [パーティションタイプ](/partitioned-table.md#partitioning-types)をサポートします。サポートされていないパーティション タイプの場合、TiDB は`Warning: Unsupported partition type %s, treat as normal table`返します。ここで、 `%s`サポートされていない特定のパーティション タイプです。

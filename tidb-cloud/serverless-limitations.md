@@ -8,9 +8,9 @@ aliases: ['/tidbcloud/serverless-tier-limitations']
 
 <!-- markdownlint-disable MD026 -->
 
-TiDB Cloud Serverless は、TiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed またはTiDB Cloud Dedicated クラスターとTiDB Cloud Serverless クラスターの間には機能上の違いがいくつかあります。このドキュメントでは、 TiDB Cloud Serverless の制限について説明します。
+TiDB Cloud Serverless は、TiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed またはTiDB Cloud Dedicated クラスターとTiDB Cloud Serverless クラスターの間には機能上の違いがいくつかあります。このドキュメントでは、TiDB Cloud Serverless の制限について説明します。
 
-当社は、 TiDB Cloud Serverless とTiDB Cloud Dedicated 間の機能ギャップを継続的に埋めています。ギャップにこれらの機能や機能が必要な場合は、機能リクエストに[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)使用してください。
+当社は、TiDB Cloud Serverless とTiDB Cloud Dedicated 間の機能ギャップを継続的に埋めています。ギャップにこれらの機能や機能が必要な場合は、機能リクエストに[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)使用してください。
 
 ## 制限事項 {#limitations}
 
@@ -20,12 +20,12 @@ TiDB Cloud Serverless は、TiDB がサポートするほぼすべてのワー�
 
 ### 繋がり {#connection}
 
--   使用できるのは[パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみです[VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)使用してTiDB Cloud Serverless クラスターに接続することはできません。
+-   使用できるのは[パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみです。5 [VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)使用してTiDB Cloud Serverless クラスターに接続することはできません。
 -   [IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)サポート。
 
 ### 暗号化 {#encryption}
 
--   TiDB Cloud Serverless クラスターに保存されるデータは、クラスターを管理するクラウド プロバイダーが提供する暗号化ツールを使用して暗号化されます。ただし、 TiDB Cloud Serverless では、インフラストラクチャ レベルの暗号化を超えてディスクに保存されているデータを保護するための追加のオプション手段は提供されていません。
+-   TiDB Cloud Serverless クラスターに保存されるデータは、クラスターを管理するクラウド プロバイダーが提供する暗号化ツールを使用して暗号化されます。 [スケーラブルなクラスター](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan)場合、クラスター作成プロセス中にオプションの 2レイヤーの暗号化レイヤーが利用可能になり、保存時のデフォルトの暗号化を超える追加のセキュリティ レベルが提供されます。
 -   [顧客管理暗号化キー (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek.md)使用は現在利用できません。
 
 ### メンテナンス期間 {#maintenance-window}
@@ -45,8 +45,8 @@ TiDB Cloud Serverless は、TiDB がサポートするほぼすべてのワー�
 
 ### ストリームデータ {#stream-data}
 
--   [チェンジフィード](/tidb-cloud/changefeed-overview.md)現在、 TiDB Cloud Serverless ではサポートされていません。
--   [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)現在、 TiDB Cloud Serverless ではサポートされていません。
+-   [チェンジフィード](/tidb-cloud/changefeed-overview.md)は現在、 TiDB Cloud Serverless ではサポートされていません。
+-   [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)は現在、 TiDB Cloud Serverless ではサポートされていません。
 
 ### 存続時間 (TTL) {#time-to-live-ttl}
 
@@ -64,7 +64,7 @@ TiDB Cloudの各組織では、デフォルトで最大 5 つの[フリークラ
 組織内の最初の 5 つのTiDB Cloud Serverless クラスターについては、無料かスケーラブルかに関係なく、 TiDB Cloud はそれぞれに対して次のように無料使用量の割り当てを提供します。
 
 -   行ベースのstorage: 5 GiB
--   列指向storage: 5 GiB
+-   列型storage: 5 GiB
 -   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 毎月5000万RU
 
 リクエスト ユニット (RU) は、クエリまたはトランザクションのリソース消費を追跡するために使用される測定単位です。これは、データベース内の特定のリクエストを処理するために必要な計算リソースを見積もることができるメトリックです。リクエスト ユニットは、 TiDB Cloud Serverless サービスの課金単位でもあります。

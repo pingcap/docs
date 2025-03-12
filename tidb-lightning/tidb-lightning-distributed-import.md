@@ -3,13 +3,13 @@ title: Use TiDB Lightning to Import Data in Parallel
 summary: TiDB Lightningを使用する際のデータの並列インポートの概念、ユーザー シナリオ、使用方法、および制限について学習します。
 ---
 
-# TiDB Lightning を使用してデータを並列インポートする {#use-tidb-lightning-to-import-data-in-parallel}
+# TiDB Lightningを使用してデータを並列インポートする {#use-tidb-lightning-to-import-data-in-parallel}
 
-v5.3.0 以降、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) 、単一テーブルまたは複数テーブルの並列インポートをサポートしています。複数のTiDB Lightningインスタンスを同時に実行することで、異なる単一テーブルまたは複数テーブルからデータを並列にインポートできます。このように、 TiDB Lightning は水平方向にスケーリングする機能を提供し、大量のデータのインポートに必要な時間を大幅に短縮します。
+TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)以降では、単一テーブルまたは複数テーブルの並列インポートがサポートされています。複数のTiDB Lightningインスタンスを同時に実行することで、単一または複数のテーブルからデータを並列にインポートできます。このように、 TiDB Lightning は水平方向にスケーリングする機能を提供し、大量のデータのインポートに必要な時間を大幅に短縮します。
 
 技術的な実装では、 TiDB Lightning は各インスタンスのメタデータとターゲット TiDB にインポートされた各テーブルのデータを記録し、異なるインスタンスの Row ID 割り当て範囲、グローバル チェックサムの記録、TiKV と PD の構成変更と回復を調整します。
 
-TiDB Lightning を使用すると、次のシナリオでデータを並列にインポートできます。
+次のシナリオでは、 TiDB Lightning を使用してデータを並列にインポートできます。
 
 -   シャードされたスキーマとシャードされたテーブルをインポートします。このシナリオでは、複数のアップストリーム データベース インスタンスからの複数のテーブルが、異なるTiDB Lightningインスタンスによって並行してダウンストリーム TiDB データベースにインポートされます。
 -   単一テーブルを並列でインポートします。このシナリオでは、特定のディレクトリまたはクラウドstorage(Amazon S3 など) に保存されている単一テーブルが、異なるTiDB Lightningインスタンスによって下流の TiDB クラスターに並列でインポートされます。これは、TiDB 5.3.0 で導入された新機能です。
@@ -24,7 +24,7 @@ TiDB Lightning を使用すると、次のシナリオでデータを並列に�
 
 ## 考慮事項 {#considerations}
 
-並列インポートを使用するには、 `parallel-import = true`設定する必要があります。TiDB TiDB Lightningを起動すると、下流の TiDB クラスターにメタデータを登録し、同時にターゲット クラスターにデータを移行している他のインスタンスがあるかどうかを自動的に検出します。ある場合は、自動的に並列インポート モードに入ります。
+並列インポートを使用するには、 `parallel-import = true`設定する必要があります。TiDB TiDB Lightning が起動すると、下流の TiDB クラスターにメタデータを登録し、同時にターゲット クラスターにデータを移行している他のインスタンスがあるかどうかを自動的に検出します。ある場合は、自動的に並列インポート モードに入ります。
 
 ただし、データを並行して移行する場合は、次の点を考慮する必要があります。
 
@@ -33,7 +33,7 @@ TiDB Lightning を使用すると、次のシナリオでデータを並列に�
 
 ### 主キーまたは一意のインデックス間の競合を処理する {#handle-conflicts-between-primary-keys-or-unique-indexes}
 
-[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)使用してデータを並列にインポートする場合は、データ ソース間およびターゲット TiDB クラスター内のテーブル間で主キーまたは一意のインデックスの競合がないこと、およびインポート中にターゲット テーブルにデータが書き込まれていないことを確認してください。そうでない場合、 TiDB Lightning はインポートされたデータの正確性を保証できず、インポートが完了した後にターゲット テーブルに不整合なインデックスが含まれることになります。
+[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)使用してデータを並列にインポートする場合は、データ ソース間およびターゲット TiDB クラスター内のテーブル間に主キーまたは一意のインデックスの競合がないこと、およびインポート中にターゲット テーブルにデータが書き込まれていないことを確認してください。そうでない場合、 TiDB Lightning はインポートされたデータの正確性を保証できず、インポートが完了した後にターゲット テーブルに不整合なインデックスが含まれることになります。
 
 ### インポートパフォーマンスの最適化 {#optimize-import-performance}
 
@@ -43,7 +43,7 @@ TiDB Lightning は、生成されたキー値データを、対応するリー�
 -   並列インポートを実行する各TiDB Lightningインスタンスのソース ファイルの合計サイズは 5 TiB 未満である必要があります。
 -   TiDB Lightningインスタンスの合計数は 10 未満である必要があります。
 
-TiDB Lightning を使用して共有データベースとテーブルを並列でインポートする場合は、データの量に応じて適切な数のTiDB Lightningインスタンスを選択します。
+TiDB Lightningを使用して共有データベースとテーブルを並列でインポートする場合は、データの量に応じて適切な数のTiDB Lightningインスタンスを選択します。
 
 -   MySQL のデータ量が 2 TiB 未満の場合、並列インポートに 1 つのTiDB Lightningインスタンスを使用できます。
 -   MySQL データ量が 2 TiB を超え、MySQL インスタンスの合計数が 10 未満の場合は、MySQL インスタンスごとに 1 つのTiDB Lightningインスタンスを使用することをお勧めします。また、並列TiDB Lightningインスタンスの数は 10 を超えないようにしてください。
@@ -51,7 +51,7 @@ TiDB Lightning を使用して共有データベースとテーブルを並列�
 
 次に、このドキュメントでは、2 つの例を使用して、さまざまなシナリオでの並行インポートの操作手順を詳しく説明します。
 
--   例1: Dumpling + TiDB Lightningを使用して、シャードデータベースとテーブルをTiDBに並列でインポートする
+-   例 1: Dumpling + TiDB Lightningを使用して、シャードされたデータベースとテーブルを TiDB に並列でインポートする
 -   例2: 単一のテーブルを並列でインポートする
 
 ### 制限 {#restrictions}
@@ -63,20 +63,20 @@ TiDB Lightning は実行時に一部のリソースを排他的に使用しま�
     -   checkpoint.driver = &quot;file&quot; (デフォルト) を設定する場合は、チェックポイントへのパスがインスタンスごとに一意であることを確認してください。
     -   checkpoint.driver = &quot;mysql&quot; を設定する場合は、インスタンスごとに一意のスキーマを設定する必要があります。
 -   各TiDB Lightningのログ ファイルは、一意のパスに設定する必要があります。同じログ ファイルを共有すると、ログのクエリとトラブルシューティングに影響します。
--   [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)または Debug API を使用する場合は、インスタンスごとに`lightning.status-addr`一意のアドレスに設定する必要があります。そうしないと、ポートの競合によりTiDB Lightningプロセスが起動しません。
+-   [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)または Debug API を使用する場合は、インスタンスごとに`lightning.status-addr`一意のアドレスに設定する必要があります。そうしないと、ポートの競合によりTiDB Lightningプロセスが起動しなくなります。
 
-## 例 1: Dumpling + TiDB Lightning を使用して、シャードされたデータベースとテーブルを TiDB に並列でインポートする {#example-1-use-dumpling-tidb-lightning-to-import-sharded-databases-and-tables-into-tidb-in-parallel}
+## 例 1: Dumpling + TiDB Lightningを使用して、シャードされたデータベースとテーブルを TiDB に並列でインポートする {#example-1-use-dumpling-tidb-lightning-to-import-sharded-databases-and-tables-into-tidb-in-parallel}
 
 この例では、アップストリームが 10 個のシャード テーブルを持つ MySQL クラスターであり、合計サイズが 10 TiB であると想定します。5 つのTiDB Lightningインスタンスを使用して並列インポートを実行し、各インスタンスが 2 TiB をインポートします。合計インポート時間 ( Dumplingエクスポートに必要な時間を除く) は、約 40 時間から約 10 時間に短縮できると推定されます。
 
-アップストリームライブラリの名前が`my_db`で、各シャードテーブルの名前が`my_table_01` ～ `my_table_10`であると仮定します。これらをダウンストリームの`my_db.my_table`テーブルにマージしてインポートします。具体的な手順については、次のセクションで説明します。
+アップストリームライブラリの名前が`my_db` 、各シャードテーブルの名前が`my_table_01` ～ `my_table_10`であると仮定します。これらをダウンストリームの`my_db.my_table`テーブルにマージしてインポートします。具体的な手順については、次のセクションで説明します。
 
 ### ステップ1: Dumplingを使用してデータをエクスポートする {#step-1-use-dumpling-to-export-data}
 
 TiDB Lightningがデプロイされている 5 つのノード上の 2 つのシャード テーブルをエクスポートします。
 
--   2 つのシャード テーブルが同じ MySQL インスタンスにある場合は、 Dumplingの`--filter`パラメータを使用して直接エクスポートできます。TiDB TiDB Lightning を使用してインポートする場合は、 Dumpling がデータをエクスポートするディレクトリとして`data-source-dir`指定できます。
--   2 つのシャード テーブルのデータが別の MySQL ノードに分散されている場合は、 Dumpling を使用して個別にエクスポートする必要があります。エクスポートされたデータは、同じ親ディレクトリ内<b>の異なるサブディレクトリに</b>配置する必要があります。TiDB TiDB Lightning を使用して並列インポートを実行する場合は、親ディレクトリとして`data-source-dir`指定する必要があります。
+-   2 つのシャード テーブルが同じ MySQL インスタンスにある場合は、 Dumplingの`--filter`パラメータを使用して直接エクスポートできます。TiDB TiDB Lightningを使用してインポートする場合は、 Dumpling がデータをエクスポートするディレクトリとして`data-source-dir`指定できます。
+-   2 つのシャード テーブルのデータが別の MySQL ノードに分散されている場合は、 Dumplingを使用して個別にエクスポートする必要があります。エクスポートされたデータは、同じ親ディレクトリ内<b>の異なるサブディレクトリに</b>配置する必要があります。TiDB TiDB Lightningを使用して並列インポートを実行する場合は、親ディレクトリとして`data-source-dir`指定する必要があります。
 
 Dumpling を使用してデータをエクスポートする方法の詳細については、 [Dumpling](/dumpling-overview.md)参照してください。
 
