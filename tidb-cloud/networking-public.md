@@ -39,7 +39,7 @@ TiDB Cloud regularly updates this list and uses the reserved IP address **169.25
 
 This section provides an overview of managing firewall rules after creating a TiDB Cloud Serverless cluster. With a public endpoint, the connections to the TiDB Cloud Serverless cluster are restricted to allowed IP addresses only. The client IP addresses need to be allowed in firewall rules.
 
-1. In the TiDB Cloud console, select the TiDB Cloud Serverless cluster on which you want to add firewall rules.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), select the TiDB Cloud Serverless cluster on which you want to add firewall rules.
 
 2. Under **Security** heading, select **Networking** to open Networking page for the TiDB Cloud Serverless cluster.
 
