@@ -35,7 +35,7 @@ Currently, the TiDB Node Group feature is only available upon request. To reques
 
 > **Note**:
 >
-> The TiDB node groups cannot be created during the cluster creation. You need to add the groups after the cluster is created and in the **Available** state. 
+> The TiDB node groups cannot be created during cluster creation. You need to add the groups after the cluster is created and in the **Available** state. 
 
 ## Create a TiDB node group
 
