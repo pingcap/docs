@@ -5,7 +5,7 @@ summary: Learn how to improve Point-in-time Recovery (PITR) efficiency by compac
 
 # Compact Log Backup
 
-This document describes how to improve the efficiency of point-in-time recovery (PITR) by compacting log backups into the [SST](/glossary.md#static-sorted-table--sorted-string-table-sst) format.
+This document describes how to improve the efficiency of point-in-time recovery ([PITR](/glossary.md#point-in-time-recovery-pitr)) by compacting log backups into the [SST](/glossary.md#static-sorted-table--sorted-string-table-sst) format.
 
 ## Overview
 
