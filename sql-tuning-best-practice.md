@@ -279,7 +279,7 @@ A SQL statement undergoes three main optimization stages in the TiDB optimizer:
 
 ##### 1. Pre-processing
 
-During pre-processing, TiDB determines whether the SQL statement can be executed using [`Point_Get`](/explain-indexes#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes#point_get-and-batch_point_get). These operations use a primary or unique key to read directly from TiKV through an exact key lookup. If a plan qualifies for `Point_Get` or `Batch_Point_Get`, the optimizer skips the logical transformation and cost-based optimization steps because direct key lookup is the most efficient way to access the row.
+During pre-processing, TiDB determines whether the SQL statement can be executed using [`Point_Get`](/explain-indexes.md#point_get-and-batch_point_get) or [`Batch_Point_Get`](/explain-indexes.md#point_get-and-batch_point_get). These operations use a primary or unique key to read directly from TiKV through an exact key lookup. If a plan qualifies for `Point_Get` or `Batch_Point_Get`, the optimizer skips the logical transformation and cost-based optimization steps because direct key lookup is the most efficient way to access the row.
 
 The following is an example of a `Point_Get` query:
 
