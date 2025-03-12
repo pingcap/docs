@@ -9,7 +9,7 @@ This article describes the public connectivity option for TiDB Cloud Serverless.
 
 > **Note:**
 >
-> This documentation applies to **TiDB Cloud Serverless**. For instructions on configuring an IP access list for **TiDB Cloud Dedicated**, refer to [Configure IP Access List for TiDB Cloud Dedicated](/tidb-cloud/configure-ip-access-list.md).
+> This document applies to **TiDB Cloud Serverless**. For instructions on configuring an IP access list for **TiDB Cloud Dedicated**, see [Configure an IP Access List for TiDB Cloud Dedicated](/tidb-cloud/configure-ip-access-list.md).
 
 
 ## Public Endpoint
