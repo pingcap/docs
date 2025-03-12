@@ -575,6 +575,7 @@ The key fields of the preceding JSON data are explained as follows:
 | `payload.source.db`     | String   | The name of the database where the event occurs.    |
 | `payload.source.table`     | String  |  The name of the table where the event occurs.   |
 | `schema.fields`     | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change.   |
+| `schema.fields[1].fields[n].tidb_type`     | String  | The tidb type of each column in the `payload.after`. it occurs when `enable-tidb-extension = true`.   |
 | `schema.name`    | String  | The name of the schema, in the `"{cluster-name}.{schema-name}.{table-name}.Envelope"` format. |
 | `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | `schema.type`    | String  | The data type of the field.                                      |
