@@ -1002,6 +1002,21 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
 
+### tidb_accelerate_user_creation_update <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- When the number of SQL users in the system is very large (for example 100,000), operations such as creating users, modifying passwords, and setting permissions might experience significant performance degradation. This occurs because each user update operation triggers the reloading of all user data into memory.
+- To optimize performance in environments with a large number of users, it is recommended to set the related variable to `ON`.
+- `OFF` or `0`: every time an operation such as user creation, password modification, or permission setting is performed, TiDB reloads all user data into memory. In scenarios with many users, this setting might cause significant performance degradation.
+- `ON` or `1`: TiDB uses a more efficient user data loading strategy as follows:
+    - When you create users or perform operations such as modifying passwords and setting permissions for **non-logged-in** users, TiDB **does not** reload all user data into memory.
+    - When you perform operations on **logged-in** users, TiDB only reloads the updated data for those specific users into memory.
+    - In scenarios with many users, this setting can significantly improve performance.
+
 ### tidb_adaptive_closest_read_threshold <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1739,7 +1754,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `ON`. Before v8.5.0, the default value is `OFF`.
 - This variable is used to control whether to enable [TiDB Accelerated Table Creation](/accelerated-table-creation.md).
 - Starting from v8.0.0, TiDB supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement using `tidb_enable_fast_create_table`.
-- This variable is renamed from the variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
+- This variable is renamed from the variable [`tidb_ddl_version`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
 - Starting from TiDB v8.5.0, the accelerated table creation feature is enabled by default for newly created clusters, with `tidb_enable_fast_create_table` set to `ON`. For clusters upgraded from v8.4.0 or earlier versions, the default value of `tidb_enable_fast_create_table` remains unchanged.
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
@@ -4270,7 +4285,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
 - The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
-- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidb/v7.2/optimizer-fix-controls).
+- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidb/stable/optimizer-fix-controls).
 
 </CustomContent>
 
@@ -4896,7 +4911,7 @@ SHOW WARNINGS;
 >
 > - Depending on the specific business scenario, enabling this option might cause a certain degree of throughput reduction (average latency increase) for transactions with frequent lock conflicts.
 > - This option only takes effect on statements that need to lock a single key. If a statement needs to lock multiple rows at the same time, this option will not take effect on such statements.
-> - This feature is introduced in v6.6.0 by the [`tidb_pessimistic_txn_aggressive_locking`](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) variable, which is disabled by default.
+> - This feature is introduced in v6.6.0 by the [`tidb_pessimistic_txn_aggressive_locking`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) variable, which is disabled by default.
 
 ### tidb_placement_mode <span class="version-mark">New in v6.0.0</span>
 
