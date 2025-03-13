@@ -81,8 +81,8 @@ You can increase the storage of TiKV or TiFlash.
 
 > **Warning:**
 >
-> - For a running cluster, AWS and Google Cloud do not allow in-place storage capacity downgrade.
-> - AWS has a cooldown period of storage changes. If your TiDB cluster is hosted on AWS, after changing the storage or vCPU and RAM of TiKV or TiFlash, you must wait at least six hours before you can change it again.
+> - For a running cluster, TiDB Cloud do not allow in-place storage capacity downgrade.
+> - AWS and Azure has a cooldown period of storage changes. If your TiDB cluster is hosted on AWS or Azure, after changing the storage or vCPU and RAM of TiKV or TiFlash, you must wait at least six hours before you can change it again.
 
 To change the storage of TiKV or TiFlash, take the following steps:
 
