@@ -29,7 +29,7 @@ ticloud serverless audit-log disable --cluster-id <cluster-id>
 
 ### Redacted
 
-TiDB Cloud redacts sensitive data in the audit logs by default. For example, the following SQL statement:
+TiDB Cloud Serverless redacts sensitive data in the audit logs by default. For example, the following SQL statement:
 
 ```sql 
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -49,14 +49,14 @@ ticloud serverless audit-log config --cluster-id <cluster-id> --unredacted
 
 ### Rotation
 
-TiDB Cloud will start to generate a new audit log file when one of the following conditions is met:
+TiDB Cloud Serverless will start to generate a new audit log file when one of the following conditions is met:
 
 - The audit log file reaches 100 MB.
 - The time interval reaches 1 hour. Note that the audit log files may not be generated exactly at the time interval of 1 hour, it may be delayed for a few minutes depending on the underlying schedule.
 
 ## View audit logs
 
-TiDB Cloud audit logs are readable text files named `YYYY-MM-DD-<uuid>.log`. You can download the audit logs by [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) to view them.
+TiDB Cloud Serverless audit logs are readable text files named `YYYY-MM-DD-<uuid>.log`. You can download the audit logs by [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) to view them.
 
 ```shell
 ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-day <start-day> --end-day <end-day>
@@ -69,4 +69,4 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 
 - The audit logging is only available for TiDB Cloud CLI, the support of TiDB Cloud Console will be available soon.
 - The audit logging can only be generated in the TiDB Cloud, the support of external storage will be available soon.
-- TiDB Cloud does not guarantee the sequential order of the audit logs, which means you might have to review all log files to see the latest events. To order the logs, you can use the `TIMESTAMP` field in the event records.
+- TiDB Cloud Serverless does not guarantee the sequential order of the audit logs, which means you might have to review all log files to see the latest events. To order the logs, you can use the `TIME` field in the event records.
