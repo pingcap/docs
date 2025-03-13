@@ -1013,10 +1013,10 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: `OFF`
 - When the number of SQL users in the system is too large (for example 100,000), operations such as creating users, modifying passwords, and setting permissions might experience significant performance degradation. This is because each user update operation triggers the reloading of all user data into memory.
 - To optimize performance, it is recommended to set the relevant variables to `ON` in scenarios with a large number of users.
-- `OFF` or `0`: when set to `OFF` or `0`, every time a user creation, password modification, or permission setting operation is performed, TiDB will reload all user data into memory. In scenarios with a large number of users, this setting might cause significant performance degradation.
-- `ON` or `1`: when set to `ON` or `1`, TiDB will use a more efficient user data loading strategy:
-    - When creating users or performing operations such as modifying passwords and setting permissions for **non-logged-in** users, TiDB **will not** reload all user data into memory.
-    - When performing operations on **logged-in** users, the system will only reload the updated data for those specific users into memory.
+- `OFF` or `0`: every time a user creation, password modification, or permission setting operation is performed, TiDB will reload all user data into memory. In scenarios with a large number of users, this setting might cause significant performance degradation.
+- `ON` or `1`: TiDB uses a more efficient user data loading strategy as follows:
+    - When creating users or performing operations such as modifying passwords and setting permissions for **non-logged-in** users, TiDB **does not** reload all user data into memory.
+    - When performing operations on **logged-in** users, the system only reloads the updated data for those specific users into memory.
     - In scenarios with a large number of users, this setting can significantly improve performance.
 
 ### tidb_adaptive_closest_read_threshold <span class="version-mark">New in v6.3.0</span>
