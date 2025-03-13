@@ -358,7 +358,8 @@
   - Database Access Control
     - [Configure Cluster Password Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
-    - [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
+    - [TiDB Cloud Dedicated Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
+    - [TiDB Cloud Serverless Database Audit Logging](/tidb-cloud//serverless-audit-logging.md)
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
