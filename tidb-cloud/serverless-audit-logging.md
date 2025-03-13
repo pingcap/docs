@@ -67,7 +67,7 @@ ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <o
 ```
 
 > **Note:**
-> TiDB Cloud only download your audit logs within xx days.
+> TiDB Cloud only save your audit logs xx days.
 
 ## Audit logging limitations
 
