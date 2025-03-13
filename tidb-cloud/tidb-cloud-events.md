@@ -33,6 +33,7 @@ TiDB Cloud logs the following types of cluster events:
 | ResumeCluster |   Resume a cluster | 
 | ModifyClusterSize |   Modify cluster size | 
 | BackupCluster |   Back up a cluster |  
+| ExportBackup |   Export a backup |
 | RestoreFromCluster |   Restore a cluster |  
 | CreateChangefeed |   Create a changefeed |  
 | PauseChangefeed |   Pause a changefeed | 
