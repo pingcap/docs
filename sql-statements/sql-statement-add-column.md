@@ -49,7 +49,6 @@ DefaultValueExpr ::=
 |   NextValueForSequenceParentheses
 |   BuiltinFunction
 |   '(' SignedLiteral ')'
-
 ```
 
 ## Examples
