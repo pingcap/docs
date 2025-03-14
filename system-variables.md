@@ -3142,6 +3142,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - The [`tidb_redact_log`](#tidb_redact_log) variable can be used to redact the statements that are logged to the general log.
 
+- Only statements that were executed are logged, failed statements are not written to the general log. Failed statements are instead logged with a `command dispatched failed` message to the tidb log.
+
 - To see all records of this feature in the log, you need to set the TiDB configuration item [`log.level`](/tidb-configuration-file.md#level) to `"info"` or `"debug"` and then query the `"GENERAL_LOG"` string. The following information is recorded:
     - `time`: The time of the event.
     - `conn`: The ID of the current session.
