@@ -3,9 +3,9 @@ title: Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints
 summary: Learn how to configure and manage firewall rules with public access to your TiDB Cloud Serverless cluster securely.
 ---
 
-# Connect to TiDB Cloud Serverless via Public Endpoint
+# Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints
 
-This article describes the public connectivity option for TiDB Cloud Serverless. You will learn key concepts for securely managing a TiDB Cloud Serverless cluster accessible via the internet.
+This document describes the public connectivity option for TiDB Cloud Serverless. You will learn key concepts for securely managing a TiDB Cloud Serverless cluster accessible via the internet.
 
 > **Note:**
 >
