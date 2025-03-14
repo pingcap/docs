@@ -1708,7 +1708,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: String (Integer + Unit)
+- Type: String
 - Default value: `0`
 - Range: `[0, 1PiB]`
 - Unit: KiB|MiB|GiB|TiB
