@@ -344,6 +344,7 @@
   - Network Access Control
     - TiDB Cloud Serverless
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+      - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
       - [TLS Connections to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     - TiDB Cloud Dedicated
       - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
