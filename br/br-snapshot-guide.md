@@ -36,12 +36,12 @@ In the preceding command:
 
 During backup, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the backup task is completed and statistics such as total backup time, average backup speed, and backup data size are displayed.
 
-- `total-ranges` indicates the total number of files backed up
-- `ranges-succeed` indicates the number of files successfully backed up
-- `ranges-failed` indicates the number of files that failed to be backed up
-- `backup-total-ranges` indicates the number of tables (including partitions) and indexes backed up
-- `write-CF-files` indicates the number of backed up SSTs containing `write CF` data
-- `default-CF-files` indicates the number of backed up SSTs containing `default CF` data
+- `total-ranges`: indicates the total number of files that are backed up
+- `ranges-succeed`: indicates the number of files that are successfully backed up
+- `ranges-failed`: indicates the number of files that failed to be backed up
+- `backup-total-ranges`: indicates the number of tables (including partitions) and indexes that are backed up
+- `write-CF-files`: indicates the number of backup SST files that contain `write CF` data
+- `default-CF-files`: indicates the number of backup SST files that contain `default CF` data
 
 ```shell
 Full Backup <-------------------------------------------------------------------------------> 100.00%
