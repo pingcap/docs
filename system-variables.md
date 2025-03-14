@@ -1714,9 +1714,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: KiB|MiB|GiB|TiB
 - This variable limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
 - The default value `0` means no write bandwidth limit. 
-- This variable can be set in either a format with a unit or without a unit.
-    - When the value is set without a unit, the default unit is bytes per second. For example, `67108864` represents `64MiB` per second.
-    - When the value is set with a unit, supported units include KiB, MiB, GiB, and TiB. For example, '1GiB' represents 1 GiB per second, and '256MiB' represents 256 MiB per second.
+- You can specify this variable in either a format with a unit or without a unit.
+    - When you specify the value without a unit, the default unit is bytes per second. For example, `67108864` represents `64MiB` per second.
+    - When you specify the value with a unit, supported units include KiB, MiB, GiB, and TiB. For example, `'1GiB`' represents 1 GiB per second, and `'256MiB'` represents 256 MiB per second.
 
 ### tidb_ddl_reorg_worker_cnt
 
