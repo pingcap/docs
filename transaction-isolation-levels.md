@@ -100,13 +100,13 @@ The MySQL Read Committed isolation level is in line with the Consistent Read fea
 
 You can view and modify the transaction isolation level as follows.
 
-View the transaction isolation level of the current session as follows:
+View the transaction isolation level of the current session:
 
 ```sql
 SHOW VARIABLES LIKE 'transaction_isolation';
 ```
 
-Modify the transaction isolation level of the current session as follows:
+Modify the transaction isolation level of the current session:
 
 ```sql
 SET SESSION transaction_isolation = 'READ-COMMITTED';
