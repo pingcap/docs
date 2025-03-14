@@ -36,21 +36,21 @@ Download a new installation package from the [Prometheus download page](https://
 
     > **Tip:**
     >
-    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v7.5.5` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v7.5.5-linux-amd64.tar.gz`.
+    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v7.5.6` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v7.5.6-linux-amd64.tar.gz`.
 
-2. In the extracted files, locate `prometheus-v{version}-linux-amd64.tar.gz` and extract it.
+2. In the extracted files, locate `prometheus-v{version}-linux-{arch}.tar.gz` and extract it.
 
     ```bash
-    tar -xzf prometheus-v{version}-linux-amd64.tar.gz
+    tar -xzf prometheus-v{version}-linux-{arch}.tar.gz
     ```
 
 ### Step 3. Create a new Prometheus package that TiUP can use
 
-1. Copy the files extracted in [Step 1](#step-1-download-a-new-prometheus-installation-package-from-the-prometheus-website), and then use the copied files to replace the files in the `./prometheus-v{version}-linux-amd64/prometheus` directory extracted in [Step 2](#step-2-download-the-prometheus-installation-package-provided-by-tidb).
-2. Recompress the `./prometheus-v{version}-linux-amd64` directory and name the new compressed package as `prometheus-v{new-version}.tar.gz`, where `{new-version}` can be specified according to your need.
+1. Copy the files extracted in [Step 1](#step-1-download-a-new-prometheus-installation-package-from-the-prometheus-website), and then use the copied files to replace the files in the `./prometheus-v{version}-linux-{arch}/prometheus` directory extracted in [Step 2](#step-2-download-the-prometheus-installation-package-provided-by-tidb).
+2. Recompress the `./prometheus-v{version}-linux-{arch}` directory and name the new compressed package as `prometheus-v{new-version}.tar.gz`, where `{new-version}` can be specified according to your need.
 
     ```bash
-    cd prometheus-v{version}-linux-amd64
+    cd prometheus-v{version}-linux-{arch}
     tar -zcvf ../prometheus-v{new-version}.tar.gz ./
     ```
 
@@ -85,21 +85,21 @@ In the following upgrade steps, you need to download the Grafana installation pa
 
     > **Tip:**
     >
-    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v7.5.5` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v7.5.5-linux-amd64.tar.gz`.
+    > `{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v7.5.6` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v7.5.6-linux-amd64.tar.gz`.
 
-2. In the extracted files, locate `grafana-v{version}-linux-amd64.tar.gz` and extract it.
+2. In the extracted files, locate `grafana-v{version}-linux-{arch}.tar.gz` and extract it.
 
     ```bash
-    tar -xzf grafana-v{version}-linux-amd64.tar.gz
+    tar -xzf grafana-v{version}-linux-{arch}.tar.gz
     ```
 
 ### Step 3. Create a new Grafana package that TiUP can use
 
-1. Copy the files extracted in [Step 1](#step-1-download-a-new-grafana-installation-package-from-the-grafana-website), and then use the copied files to replace the files in the `./grafana-v{version}-linux-amd64/` directory extracted in [Step 2](#step-2-download-the-grafana-installation-package-provided-by-tidb).
-2. Recompress the `./grafana-v{version}-linux-amd64` directory and name the new compressed package as `grafana-v{new-version}.tar.gz`, where `{new-version}` can be specified according to your need.
+1. Copy the files extracted in [Step 1](#step-1-download-a-new-grafana-installation-package-from-the-grafana-website), and then use the copied files to replace the files in the `./grafana-v{version}-linux-{arch}/` directory extracted in [Step 2](#step-2-download-the-grafana-installation-package-provided-by-tidb).
+2. Recompress the `./grafana-v{version}-linux-{arch}` directory and name the new compressed package as `grafana-v{new-version}.tar.gz`, where `{new-version}` can be specified according to your need.
 
     ```bash
-    cd grafana-v{version}-linux-amd64
+    cd grafana-v{version}-linux-{arch}
     tar -zcvf ../grafana-v{new-version}.tar.gz ./
     ```
 
@@ -127,7 +127,7 @@ Download the `alertmanager` installation package from the [Prometheus download p
 Execute the following command to upgrade Alertmanager:
 
 ```bash
-tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-amd64.tar.gz -R alertmanager --overwrite
+tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-{arch}.tar.gz -R alertmanager --overwrite
 ```
 
 After the upgrade, you can go to the home page of the Alertmanager server (usually at `http://<Alertmanager-server-host-name>:9093`), click **Status** in the top navigation menu, and then check the Alertmanager version to confirm whether the upgrade is successful.
