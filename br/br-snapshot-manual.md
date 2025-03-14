@@ -181,7 +181,9 @@ In the preceding command:
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. Then `br` will verify the restored data to ensure data security.
 
 ```shell
-Full Restore <---------/...............................................> 17.12%.
+Split&Scatter Region <--------------------------------------------------------------------> 100.00%
+Download&Ingest SST <---------------------------------------------------------------------> 100.00%
+Restore Pipeline <-------------------------/...............................................> 17.12%
 ```
 
 ## Restore a database or a table
