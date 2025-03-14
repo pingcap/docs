@@ -93,7 +93,6 @@ To configure the backup schedule, perform the following steps:
         >
         > - All auto-backups, except the latest one, will be deleted if their lifetime exceeds the retention period. The latest auto-backup will not be deleted unless you delete it manually. This ensures that you can restore cluster data if accidental deletion occurs.
         > - After you delete a cluster, auto-backups with a lifetime within the retention period will be moved to the recycle bin.
-        > - After you delete a cluster, existing manual backups will be retained until manually deleted or your account is closed.
 
 ### Turn on dual region backup
 
@@ -158,6 +157,11 @@ To turn off dual region backup, perform the following steps:
 ### Perform a manual backup
 
 Manual backups are user-initiated backups that enable you to back up your data to a known state as needed, and then restore to that state at any time.
+
+> **Note**
+>
+> - Manual backups are retained indefinitely until you choose to delete them manually or your account is closed.
+> - After a TiDB Cloud Dedicated cluster is deleted, its existing manual backups will be moved to the recycle bin and kept there until manually deleted or your account is closed.
 
 To apply a manual backup to your TiDB Cloud Dedicated cluster, perform the following steps:
 
