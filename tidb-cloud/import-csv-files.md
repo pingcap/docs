@@ -113,9 +113,8 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 3. On the **Import Data from Amazon S3** page, provide the following information for the source CSV files:
 
-    - **Import File Count**: select **One file** or **Multiple files** as needed.
     - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
-    - **Data Format**: select **CSV**.
+    - **Data Format**: select **CSV**. 
     - **File URI** or **Folder URI**:
         - When importing one file, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
