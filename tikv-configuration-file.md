@@ -583,9 +583,9 @@ Configuration items related to `max-ts`.
 ### `max-drift` <span class="version-mark">New in v9.0.0</span>
 
 + Specifies the maximum time by which the timestamp of a read or write request can exceed the PD TSO cached in TiKV.
-+ If a read or write request uses a timestamp that exceeds the **PD TSO cached in TiKV + `max-drift`**, TiKV considers it an invalid `max-ts` update request and handles it according to the [`action-on-invalid-update`](#action-on-invalid-update) configuration.
++ If a read or write request uses a timestamp that exceeds the **PD TSO cached in TiKV plus `max-drift`**, TiKV considers it an invalid `max-ts` update request and handles it according to the [`action-on-invalid-update`](#action-on-invalid-update-new-in-v900) configuration.
 + Default value: `"60s"`
-+ It is recommended to set this value to at least three times the value of [`cache-sync-interval`](#cache-sync-interval).
++ It is recommended to set this value to at least three times the value of [`cache-sync-interval`](#cache-sync-interval-new-in-v900).
 
 ## pd
 
