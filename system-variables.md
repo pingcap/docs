@@ -1687,22 +1687,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
-<<<<<<< HEAD
-=======
-- Starting from v8.3.0, this parameter is supported at the SESSION level. Modifying the parameter at the GLOBAL level will not impact currently running DDL statements. It will only apply to DDLs submitted in new sessions.
-
-### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`. Before v8.5.0, the default value is `OFF`.
-- This variable is used to control whether to enable [TiDB Accelerated Table Creation](/accelerated-table-creation.md).
-- Starting from v8.0.0, TiDB supports accelerating table creation by the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement using `tidb_enable_fast_create_table`.
-- This variable is renamed from the variable [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760) that is introduced in v7.6.0. Starting from v8.0.0, `tidb_ddl_version` no longer takes effect.
-- Starting from TiDB v8.5.0, the accelerated table creation feature is enabled by default for newly created clusters, with `tidb_enable_fast_create_table` set to `ON`. For clusters upgraded from v8.4.0 or earlier versions, the default value of `tidb_enable_fast_create_table` remains unchanged.
->>>>>>> 68ee522bc4 (sys var: clarify the description of tidb_ddl_reorg_max_write_speed (#20527))
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
@@ -3998,11 +3982,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
 - The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
-<<<<<<< HEAD
 - For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidb/stable/optimizer-fix-controls/).
-=======
-- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidb/stable/optimizer-fix-controls).
->>>>>>> 68ee522bc4 (sys var: clarify the description of tidb_ddl_reorg_max_write_speed (#20527))
 
 </CustomContent>
 
