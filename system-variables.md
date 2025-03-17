@@ -658,7 +658,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - In the `SESSION` scope, this variable is read-only.
 - This variable is compatible with MySQL.
 
-### `max_user_connections` <span class="version-mark">New in v9.0.0</span>
+### max_user_connections <span class="version-mark">New in v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
