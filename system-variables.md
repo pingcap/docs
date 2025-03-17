@@ -3274,11 +3274,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Enumeration
 - Default value: `optimized`. Before v9.0.0, the default value is `legacy`.
 - Possible values: `legacy`, `optimized`
-- This variable is used to control whether TiDB uses an optimized version of hash join. If it is set to `optimized`, TiDB uses the optimized version to execute hash join for better performance.
+- This variable is used to control whether TiDB uses the [optimized version of hash join](/sql-statements/sql-statement-explain-analyze.md#hashjoinv2). If it is set to `optimized`, TiDB uses the optimized version to execute hash join for better performance.
 
 > **Note:**
 >
-> Currently, the optimized hash join only supports inner join, outer join, semi join and anti semi join. For other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the `legacy` hash join.
+> Currently, the optimized hash join only supports inner join, outer join, semi join, and anti semi join. For other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the `legacy` hash join.
 
 ### tidb_hashagg_final_concurrency
 
