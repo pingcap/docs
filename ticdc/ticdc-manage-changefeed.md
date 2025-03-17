@@ -259,7 +259,7 @@ Currently, you can modify the following configuration items:
 
 Starting from v9.0.0, TiCDC introduces a security mechanism to prevent users from accidentally configuring the same TiDB cluster as both the upstream and downstream for data replication, which could lead to circular replication and data anomalies.
 
-When creating, updating, or resuming a replication task, TiCDC automatically checks whether the upstream and downstream TiDB clusters have the same `cluster_id`. If TiCDC detects the same  `cluster_id` for both the upstream and downstream, it will reject the operation. The `cluster_id` (introduced in v9.0.0) is a unique identifier for TiDB clusters. You can query it using the following SQL statement:
+When creating, updating, or resuming a replication task, TiCDC automatically checks whether the upstream and downstream TiDB clusters have the same `cluster_id`. If TiCDC detects the same  `cluster_id` for both the upstream and downstream, it will reject the task. The `cluster_id` (introduced in v9.0.0) is a unique identifier for TiDB clusters. You can query it using the following SQL statement:
 
 ```sql
 SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = 'cluster_id';
@@ -267,8 +267,8 @@ SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = 'cluster_id';
 
 ### Compatibility
 
-- For non-TiDB downstream systems (such as MySQL, Kafka, etc.), TiCDC skips this check to ensure compatibility.
-- For TiDB versions earlier than v9.0.0, the system cannot retrieve the `cluster_id`, so TiCDC still allows you to create replication tasks to ensure no impact on existing functionality. In these cases, because of the lack of `cluster_id`, you need to manually check the configurations to avoid potential issues.
+- For non-TiDB downstream systems (such as MySQL and Kafka), TiCDC skips this check to ensure compatibility.
+- For TiDB versions earlier than v9.0.0, the system cannot retrieve the `cluster_id`, so TiCDC still lets you create replication tasks to ensure no impact on existing functionality. In these cases, because of the lack of `cluster_id`, you need to manually check the configurations to avoid potential issues.
 
 ### Example error messages
 
