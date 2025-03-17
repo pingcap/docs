@@ -242,6 +242,7 @@
       - [Use Overview](/br/br-use-overview.md)
       - [Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
       - [Log Backup and PITR Guide](/br/br-pitr-guide.md)
+      - [Compact Log Backup](/br/br-compact-log-backup.md)
       - [Use Cases](/br/backup-and-restore-use-cases.md)
       - [Backup Storages](/br/backup-and-restore-storages.md)
     - BR CLI Manuals
@@ -311,11 +312,13 @@
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Configure TiDB for Optimal Performance](/tidb-performance-tuning-config.md)
-    - [Performance Analysis and Tuning](/performance-tuning-methods.md)
-    - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
-    - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
-    - [TiCDC Performance Analysis Methods](/ticdc-performance-tuning-methods.md)
-    - [Latency Breakdown](/latency-breakdown.md)
+    - [A Practical Guide for SQL Tuning](/sql-tuning-best-practice.md)
+    - Tuning by Metrics
+      - [Performance Analysis and Tuning](/performance-tuning-methods.md)
+      - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+      - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
+      - [TiCDC Performance Analysis Methods](/ticdc-performance-tuning-methods.md)
+      - [Latency Breakdown](/latency-breakdown.md)
     - [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
   - Configuration Tuning
     - [Tune Operating System Performance](/tune-operating-system.md)
@@ -1101,6 +1104,7 @@
   - v7.6
     - [7.6.0-DMR](/releases/release-7.6.0.md)
   - v7.5
+    - [7.5.6](/releases/release-7.5.6.md)
     - [7.5.5](/releases/release-7.5.5.md)
     - [7.5.4](/releases/release-7.5.4.md)
     - [7.5.3](/releases/release-7.5.3.md)
