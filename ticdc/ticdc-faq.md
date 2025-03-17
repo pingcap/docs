@@ -523,7 +523,7 @@ When using TiCDC to replicate data to TiDB or MySQL, you might encounter the fol
 
 `CDC:ErrMySQLDuplicateEntryCDC`
 
-The cause of the error: TiDB combines `DELETE + INSERT` operations on the same row within the same transaction into a single `UPDATE` row change. When TiCDC replicates this change as an update to the downstream, the `UPDATE` operation attempting to swap unique key values might result in conflicts.
+The cause of the error: TiDB combines `DELETE + INSERT` operations on the same row within the same transaction into a single `UPDATE` row change. When TiCDC replicates these changes as updates to the downstream, the `UPDATE` operations attempting to swap unique key values might result in conflicts.
 
 Taking the following table as an example:
 
