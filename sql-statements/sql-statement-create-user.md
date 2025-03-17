@@ -188,7 +188,6 @@ The following `CREATE USER` options are not yet supported by TiDB, and will be p
 * `PASSWORD REQUIRE CURRENT DEFAULT`
 * `WITH MAX_QUERIES_PER_HOUR`
 * `WITH MAX_UPDATES_PER_HOUR`
-* `WITH MAX_USER_CONNECTIONS`
 
 The following `CREATE USER` options are not supported by TiDB either, and are *not* accepted by the parser:
 
