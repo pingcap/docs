@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## March 18, 2025
+
+**General changes**
+
+- Support creating TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on Google Cloud to enhance resource management flexibility.
+    
+    For more information, see [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md).
+
 ## February 18, 2025
 
 **Console changes**
