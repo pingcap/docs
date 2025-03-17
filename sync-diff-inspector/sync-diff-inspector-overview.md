@@ -10,6 +10,15 @@ aliases: ['/docs/dev/sync-diff-inspector/sync-diff-inspector-overview/','/docs/d
 
 This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool.
 
+## Key features
+
+* Compare the table schema and data
+* Generate the SQL statements used to repair data if the data inconsistency exists
+* Support [data check for tables with different schema or table names](/sync-diff-inspector/route-diff.md)
+* Support [data check in the sharding scenario](/sync-diff-inspector/shard-diff.md)
+* Support [data check for TiDB upstream-downstream clusters](/ticdc/ticdc-upstream-downstream-check.md)
+* Support [data check in the DM replication scenario](/sync-diff-inspector/dm-diff.md)
+
 ## Install sync-diff-inspector
 
 The installation method varies depending on your TiDB version:
@@ -39,15 +48,6 @@ For TiDB versions before v9.0.0:
     ```shell
     docker pull pingcap/tidb-tools:latest
     ```
-
-## Key features
-
-* Compare the table schema and data
-* Generate the SQL statements used to repair data if the data inconsistency exists
-* Support [data check for tables with different schema or table names](/sync-diff-inspector/route-diff.md)
-* Support [data check in the sharding scenario](/sync-diff-inspector/shard-diff.md)
-* Support [data check for TiDB upstream-downstream clusters](/ticdc/ticdc-upstream-downstream-check.md)
-* Support [data check in the DM replication scenario](/sync-diff-inspector/dm-diff.md)
 
 ## Restrictions of sync-diff-inspector
 
