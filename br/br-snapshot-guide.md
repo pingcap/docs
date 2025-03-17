@@ -36,12 +36,12 @@ In the preceding command:
 
 During backup, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the backup task is completed and statistics such as total backup time, average backup speed, and backup data size are displayed.
 
-- `total-ranges`: indicates the total number of files that are backed up
-- `ranges-succeed`: indicates the number of files that are successfully backed up
-- `ranges-failed`: indicates the number of files that failed to be backed up
-- `backup-total-ranges`: indicates the number of tables (including partitions) and indexes that are backed up
-- `write-CF-files`: indicates the number of backup SST files that contain `write CF` data
-- `default-CF-files`: indicates the number of backup SST files that contain `default CF` data
+- `total-ranges`: indicates the total number of files to be backed up.
+- `ranges-succeed`: indicates the number of files that are successfully backed up.
+- `ranges-failed`: indicates the number of files that failed to be backed up.
+- `backup-total-ranges`: indicates the number of tables (including partitions) and indexes that are to be backed up.
+- `write-CF-files`: indicates the number of backup SST files that contain `write CF` data.
+- `default-CF-files`: indicates the number of backup SST files that contain `default CF` data.
 
 ```shell
 Full Backup <-------------------------------------------------------------------------------> 100.00%
@@ -85,15 +85,15 @@ tiup br restore full --pd "${PD_IP}:2379" \
 
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
 
-- `total-ranges`: indicates the total number of files that are restored
-- `ranges-succeed`: indicates the number of files that are successfully restored
-- `ranges-failed`: indicates the number of files that failed to be restored
-- `merge-ranges`: indicates the time taken to merge the data range
-- `split-region`: indicates the time taken to split and scatter regions
-- `restore-files`: indicates the time it takes TiKV to download and ingest SST files
-- `write-CF-files`: indicates the number of restored SST files that contain `write CF` data
-- `default-CF-files`: indicates the number of restored SST files that contain `default CF` data
-- `split-keys`: indicates the number of keys generated for splitting regions
+- `total-ranges`: indicates the total number of files that are to be restored.
+- `ranges-succeed`: indicates the number of files that are successfully restored.
+- `ranges-failed`: indicates the number of files that failed to be restored.
+- `merge-ranges`: indicates the time taken to merge the data range.
+- `split-region`: indicates the time taken to split and scatter Regions.
+- `restore-files`: indicates the time TiKV takes to download and ingest SST files.
+- `write-CF-files`: indicates the number of restored SST files that contain `write CF` data.
+- `default-CF-files`: indicates the number of restored SST files that contain `default CF` data.
+- `split-keys`: indicates the number of keys generated for splitting Regions.
 
 ```shell
 Split&Scatter Region <--------------------------------------------------------------------> 100.00%
