@@ -89,13 +89,14 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     4. Zone options: Self-selected zone
     5. Availability zone: Zone 1, Zone 2, Zone 3
     6. Image: Ubuntu Server 24.04 LTS - x64 Gen2
-    7. Size: Standard_D2s_v3 
-    8. Authentication type: SSH public key
-    9. Username: azureuser
-    10. SSH public key source: Generate new key pair
-    11. Key pair name: kafka_broker_key
-    12. Public inbound ports: Allow selected ports
-    13. Select inbound ports: SSH (22)
+    7. VM architecture: x64
+    8. Size: Standard_D2s_v3 
+    9. Authentication type: SSH public key
+    10. Username: azureuser
+    11. SSH public key source: Generate new key pair
+    12. Key pair name: kafka_broker_key
+    13. Public inbound ports: Allow selected ports
+    14. Select inbound ports: SSH (22)
 3. In **Networking** tab, fill parameters as following:
     1. Virtual network: kafka-pls-vnet
     2. Subnet: brokers-subnet
@@ -121,6 +122,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 4. Download binaries in each broker nodes.
 
     ```shell
+    # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
     wget https://archive.apache.org/dist/kafka/3.7.1/kafka_2.13-3.7.1.tgz
     tar -zxf kafka_2.13-3.7.1.tgz
     wget https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz
@@ -239,7 +241,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 1. Test the Kafka bootstrap.
 
     ```shell
-    export JAVA_HOME=/home/ec2-user/jdk-22.0.2
+    export JAVA_HOME=/home/azureuser/jdk-22.0.2
 
     # Bootstrap from INTERNAL listener
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:9092 | grep 9092
@@ -269,17 +271,17 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     TOPIC="test-topic"
 
     create_topic() {
-    echo "Creating topic if it does not exist..."
-    $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
+        echo "Creating topic if it does not exist..."
+        $KAFKA_DIR/kafka-topics.sh --create --topic $TOPIC --bootstrap-server $BROKER_LIST --if-not-exists --partitions 3 --replication-factor 3
     }
 
     produce_messages() {
-    echo "Producing messages to the topic..."
-    for ((chrono=1; chrono <= 10; chrono++)); do
-        message="Test message "$chrono
-        echo "Create "$message
-        echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
-    done
+        echo "Producing messages to the topic..."
+        for ((chrono=1; chrono <= 10; chrono++)); do
+            message="Test message "$chrono
+            echo "Create "$message
+            echo $message | $KAFKA_DIR/kafka-console-producer.sh --broker-list $BROKER_LIST --topic $TOPIC
+        done
     }
     create_topic
     produce_messages 
@@ -295,8 +297,8 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     TOPIC="test-topic"
     CONSUMER_GROUP="test-group"
     consume_messages() {
-    echo "Consuming messages from the topic..."
-    $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
+        echo "Consuming messages from the topic..."
+        $KAFKA_DIR/kafka-console-consumer.sh --bootstrap-server $BROKER_LIST --topic $TOPIC --from-beginning --timeout-ms 5000 --consumer-property group.id=$CONSUMER_GROUP
     }
     consume_messages
     ```
@@ -350,7 +352,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 
 ### Reconfigure a running Kafka cluster
 
-Ensure that your Kafka cluster is deployed in the same region as the TiDB cluster. It is recommended that the zones are also in the same region to reduce cross-zone traffic.
+Ensure that your Kafka cluster is deployed in the same region as the TiDB cluster.
 
 **1. Configure the EXTERNAL listener for brokers**
 
@@ -360,7 +362,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
     1. Configure an EXTERNAL **listener** for every broker for external access from TiDB Cloud. Select a unique port as the EXTERNAL port, for example, `39092`.
     2. Configure an EXTERNAL **advertised listener** based on **Kafka Advertised Listener Pattern** you get from TiDB Cloud for every broker node to help TiDB Cloud differentiate between different brokers. Different EXTERNAL advertised listeners help Kafka clients from TiDB Cloud side route requests to the right broker.
-       - `<port>` differentiates brokers from Kafka Private Service Connect access points. Plan a port range for EXTERNAL advertised listeners of all brokers, for example, `range from 9093`. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer for Private Service Connect that will forward requests to different brokers.
+       - `<port>` differentiates brokers from Kafka Private Link service access points. Plan a port range for EXTERNAL advertised listeners of all brokers, for example, `range from 9093`. These ports do not have to be actual ports listened to by brokers. They are ports listened to by the load balancer for Private Link service that will forward requests to different brokers.
         - It is recommended to configure different broker IDs for different brokers to make it easy for troubleshooting.
 
 2. Use SSH to log in to each broker node. Modify the configuration file of each broker with the following content:
@@ -449,7 +451,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         - Frontend IP address: kafka-lb-ip
         - Backend pool: pool1
         - Protocol: TCP
-        - Port: 9093
+        - Port: 9094
         - Backend port: 39092
         - Health probe: kafka-lb-hp
     3. Rule 3
@@ -458,7 +460,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         - Frontend IP address: kafka-lb-ip
         - Backend pool: pool1
         - Protocol: TCP
-        - Port: 9093
+        - Port: 9095
         - Backend port: 39092
         - Health probe: kafka-lb-hp
 6. Click **Review + create**, check if everything is as expected.
@@ -511,4 +513,4 @@ If you have already followed this document to successfully set up the connection
 4. Configure the TiDB Cloud connection with the following information:
 
     - New Kafka Advertised Listener Group
-    - New Private Link service 
+    - New Private Link service
