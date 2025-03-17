@@ -365,7 +365,7 @@ Region is not divided in advance, but it follows a Region split mechanism. When 
 
 ### Does TiKV have the `innodb_flush_log_trx_commit` parameter like MySQL, to guarantee the security of data?
 
-Yes. Currently, the standalone storage engine uses two RocksDB instances. One instance is used to store the raft-log. When the `sync-log` parameter in TiKV is set to true, each commit is mandatorily flushed to the raft-log. If a crash occurs, you can restore the KV data using the raft-log.
+TiKV does not have a similar parameter, but each commit on TiKV is forced to be flushed to Raft logs (TiKV uses [Raft Engine](/glossary.md#raft-engine) to store Raft logs and forces a flush when committing). If TiKV crashes, the KV data will be recovered automatically according to the Raft logs.
 
 ### What is the recommended server configuration for WAL storage, such as SSD, RAID level, cache strategy of RAID card, NUMA configuration, file system, I/O scheduling strategy of the operating system?
 
@@ -377,17 +377,13 @@ WAL belongs to ordered writing, and currently, we do not apply a unique configur
 - NUMA: no specific suggestion; for memory allocation strategy, you can use `interleave = all`
 - File system: ext4
 
-### How is the write performance in the most strict data available mode (`sync-log = true`)?
+### Can Raft + multiple replicas in the TiKV architecture achieve absolute data safety?
 
-Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](/benchmark/v3.0-performance-benchmarking-with-sysbench.md).
+Data is redundantly replicated between TiKV nodes using the [Raft Consensus Algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes).
 
-### Can Raft + multiple replicas in the TiKV architecture achieve absolute data safety? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
+Because theoretically two nodes might crash, data written to TiKV is spilled to disk by default starting from v5.0, which means each commit is forced to be flushed to Raft logs. If TiKV crashes, the KV data will be recovered automatically according to the Raft logs.
 
-Data is redundantly replicated between TiKV nodes using the [Raft Consensus Algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, it is strongly recommended that you enable the `sync-log` mode.
-
-As an alternative to using `sync-log`, you may also consider having five replicas instead of three in your Raft group. This would allow for the failure of two replicas, while still providing data safety.
-
-For a standalone TiKV node, it is still recommended to enable the `sync-log` mode. Otherwise, the last write might be lost in case of a node failure.
+In addition, you might consider using five replicas instead of three in your Raft group. This approach would allow for the failure of two replicas, while still providing data safety.
 
 ### Since TiKV uses the Raft protocol, multiple network roundtrips occur during data writing. What is the actual write delay?
 
@@ -421,12 +417,17 @@ It depends on your TiDB version and whether TiKV API V2 is enabled ([`storage.ap
 
 This section describes common problems you might encounter during TiDB testing, their causes, and solutions.
 
+### How to conduct a Sysbench benchmark test for TiDB?
+
+See [How to Test TiDB Using Sysbench](/benchmark/benchmark-tidb-using-sysbench.md).
+
 ### What is the performance test result for TiDB using Sysbench?
 
-At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done a similar official test and find the test result is consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find a benchmark point. The suggestions are as follows:
+At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done similar tests and find the test results are consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find an entirely equivalent benchmark across many aspects.
 
-- Do not spend too much time on the benchmark test. Pay more attention to the difference of scenarios using TiDB.
-- See [Performance test result for TiDB using Sysbench](/benchmark/v3.0-performance-benchmarking-with-sysbench.md).
+Therefore, there is no need to overly focus on these benchmark tests. Instead, it is recommended to pay more attention to the difference of scenarios using TiDB.
+
+To learn about the performance of TiDB v8.5.0, you can refer to the [performance test reports](https://docs.pingcap.com/tidbcloud/v8.5-performance-highlights) of the TiDB Cloud Dedicated cluster.
 
 ### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
 
