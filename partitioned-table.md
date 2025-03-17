@@ -1703,7 +1703,7 @@ ERROR 8264 (HY000): Global Index is needed for index 'a', since the unique index
 
 Before the introduction of global indexes, TiDB created a local index for each partition, leading to [a limitation](#partitioning-keys-primary-keys-and-unique-keys) that primary keys and unique keys had to include the partition key to ensure data uniqueness. Additionally, when querying data across multiple partitions, TiDB needed to scan the data of each partition to return results.
 
-To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation, significantly improving query performance for non-partitioned keys instead of looking up in one local index for each partition. Starting from v9.0.0, non-unique indexes can also be created as global indexes.
+To address these issues, TiDB introduces the global indexes feature in v8.3.0. A global index covers the data of the entire table with a single index, allowing primary keys and unique keys to maintain global uniqueness without including all partition keys. Moreover, global indexes can access index data across multiple partitions in a single operation instead of looking up the local index for each partition, significantly improving query performance for non-partitioned keys. Starting from v9.0.0, non-unique indexes can also be created as global indexes.
 
 To create a global index, you can add the `GLOBAL` keyword in the index definition.
 
@@ -1782,9 +1782,9 @@ SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE table_name='t1';
 3 rows in set (0.00 sec)
 ```
 
-When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global indexes or revert them to local indexes as needed.
+When partitioning a non-partitioned table or repartitioning an already partitioned table, you can update the indexes to be global indexes or local indexes as needed.
 
-The following SQL will flipping all the indexes from GLOBAL to LOCAL and LOCAL to GLOBAL. And `uidx3` needs to be global, since it does not include the new partitioning column `col1`, while `uidx12` and `idx1` can be either GLOBAL or LOCAL.
+For example, the following SQL statement repartitions table `t1` based on the `col1` column, updates the global indexes `uidx12` and `idx1` to local indexes, and updates the local index `uidx3` to a global index. Because `uidx3` is a unique index on the `col3` column, it must be a global index to ensure the uniqueness of `col3` across all partitions. `uidx12` and `idx1` are indexes on the `col1` column, which means they can be either global or local indexes. 
 
 ```sql
 ALTER TABLE t1 PARTITION BY HASH (col1) PARTITIONS 3 UPDATE INDEXES (uidx12 LOCAL, uidx3 GLOBAL, idx1 LOCAL);
