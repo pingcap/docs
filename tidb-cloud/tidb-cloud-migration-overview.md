@@ -41,15 +41,15 @@ If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can
 
 - Import sample data (SQL file) to TiDB Cloud
 
-    You can import sample data (SQL file) to TiDB Cloud to quickly get familiar with the TiDB Cloud interface and the import process. For more information, see [Import Sample Data to TiDB Cloud](/tidb-cloud/import-sample-data.md).
+    You can import sample data (SQL file) to TiDB Cloud to quickly get familiar with the TiDB Cloud interface and the import process. For more information, see [Import Sample Data to TiDB Cloud](/tidb-cloud/import-sample-data-serverless.md).
 
 - Import CSV files from Amazon S3 or GCS into TiDB Cloud
 
-    You can import CSV files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+    You can import CSV files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md).
 
 - Import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud
 
-    You can import Parquet files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md).
+    You can import Parquet files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files-serverless.md).
 
 ## Reference
 
