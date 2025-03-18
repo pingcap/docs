@@ -160,81 +160,101 @@ Some operations in TiDB require writing temporary files to the server, so it is 
 
 In TiDB clusters, the access ports between nodes must be open to ensure the transmission of information such as read and write requests and data heartbeats. In common online scenarios, the data interaction between the database and the application service and between the database nodes are all made within a secure network. Therefore, if there are no special security requirements, it is recommended to stop the firewall of the target machine. Otherwise, refer to [the port usage](/hardware-and-software-requirements.md#network-requirements) and add the needed port information to the allowlist of the firewall service.
 
-### Stopping and disabling firewalld
+### Stop and disable firewalld
 
 This section describes how to stop and disable the firewall service of a target machine.
 
-1. Check the firewall status. Take CentOS Linux release 7.7.1908 (Core) as an example.
+1. Check the firewall status. The following example uses CentOS Linux release 7.7.1908 (Core):
 
     ```shell
     sudo firewall-cmd --state
     sudo systemctl status firewalld.service
     ```
 
-2. Stop the firewall service.
+2. Stop the firewall service:
 
     ```bash
     sudo systemctl stop firewalld.service
     ```
 
-3. Disable automatic start of the firewall service.
+3. Disable automatic startup of the firewall service:
 
     ```bash
     sudo systemctl disable firewalld.service
     ```
 
-4. Check the firewall status.
+4. Check the firewall status:
 
     ```bash
     sudo systemctl status firewalld.service
     ```
 
-### Changing the firewall zone
+### Change the firewall zone
 
-Instead of completely disabling it is also possible to change the default zone. By default the `public` zone is used, which only allows certain services and ports. The zone named `trusted` allows everything by default.
+Instead of disabling the firewall completely, you can use a less restrictive zone. The default `public` zone allows only specific services and ports, while the `trusted` zone allows all traffic by default.
 
-```
+To set the default zone to `trusted`:  
+
+```bash
 firewall-cmd --set-default-zone trusted
 ```
 
-To verify:
+To verify the default zone:
 
-```
-# firewall-cmd --get-default-zone
-trusted
+```bash
+firewall-cmd --get-default-zone
+# trusted
 ```
 
 To list the policy for a zone:
 
+```bash
+firewall-cmd --zone=trusted --list-all
+# trusted
+#   target: ACCEPT
+#   icmp-block-inversion: no
+#   interfaces:
+#   sources:
+#   services:
+#   ports:
+#   protocols:
+#   forward: yes
+#   masquerade: no
+#   forward-ports:
+#   source-ports:
+#   icmp-blocks:
+#   rich rules:
 ```
-# firewall-cmd --zone=trusted --list-all
-trusted
-  target: ACCEPT
-  icmp-block-inversion: no
-  interfaces:
-  sources:
-  services:
-  ports:
-  protocols:
-  forward: yes
-  masquerade: no
-  forward-ports:
-  source-ports:
-  icmp-blocks:
-  rich rules:
+
+### Configure the firewall
+
+To configure the firewall for TiDB cluster components, use the following commands. These examples are for reference only. Adjust the zone names, ports, and services based on your specific environment.
+
+Configure the firewall for the TiDB component:
+
+```bash
+firewall-cmd --permanent --new-service tidb
+firewall-cmd --permanent --service tidb --set-description="TiDB Server"
+firewall-cmd --permanent --service tidb --set-short="TiDB"
+firewall-cmd --permanent --service tidb --add-port=4000/tcp
+firewall-cmd --permanent --service tidb --add-port=10080/tcp
+firewall-cmd --permanent --zone=public --add-service=tidb
 ```
 
-### Configuring the firewall
+Configure the firewall for the TiKV component:
 
-To configure the firewall for TiDB the commands below can be used.
-
-> **Note:**
->
-> This is only an example, you might need to make changes based on the zone names, ports and additional services that you might be using.
-
-For PD:
-
+```bash
+firewall-cmd --permanent --new-service tikv
+firewall-cmd --permanent --service tikv --set-description="TiKV Server"
+firewall-cmd --permanent --service tikv --set-short="TiKV"
+firewall-cmd --permanent --service tikv --add-port=20160/tcp
+firewall-cmd --permanent --service tikv --add-port=20180/tcp
+firewall-cmd --permanent --zone=public --add-service=tikv
 ```
+
+Configure the firewall for the PD component:
+
+```bash
 firewall-cmd --permanent --new-service pd
 firewall-cmd --permanent --service pd --set-description="PD Server"
 firewall-cmd --permanent --service pd --set-short="PD"
@@ -243,38 +263,16 @@ firewall-cmd --permanent --service pd --add-port=2380/tcp
 firewall-cmd --permanent --zone=public --add-service=pd
 ```
 
-For TiKV:
+Configure the firewall for Prometheus:
 
-```
-firewall-cmd --permanent --new-service tikv
-firewall-cmd --permanent --service pd --set-description="TiKV Server"
-firewall-cmd --permanent --service pd --set-short="TiKV"
-firewall-cmd --permanent --service pd --add-port=20160/tcp
-firewall-cmd --permanent --service pd --add-port=20180/tcp
-firewall-cmd --permanent --zone=public --add-service=tikv
-```
-
-For TiDB:
-
-```
-firewall-cmd --permanent --new-service tidb
-firewall-cmd --permanent --service pd --set-description="TiDB Server"
-firewall-cmd --permanent --service pd --set-short="TiDB"
-firewall-cmd --permanent --service pd --add-port=4000/tcp
-firewall-cmd --permanent --service pd --add-port=10080/tcp
-firewall-cmd --permanent --zone=public --add-service=tidb
-```
-
-For Prometheus:
-
-```
+```bash
 firewall-cmd --permanent --zone=public --add-service=prometheus
 firewall-cmd --permenent --service=prometheus --add-port=12020/tcp
 ```
 
-For Grafana:
+Configure the firewall for Grafana:
 
-```
+```bash
 firewall-cmd --permanent --zone=public --add-service=grafana
 ```
 
