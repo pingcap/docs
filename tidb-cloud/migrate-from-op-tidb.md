@@ -352,7 +352,7 @@ To replicate incremental data, do the following:
         SET GLOBAL time_zone = '+08:00';
         ```
 
-    3. Check the timezone again to verify the setting.
+    3. Check the timezone again to verify the setting:
 
         ```sql
         SELECT @@global.time_zone;
@@ -361,10 +361,10 @@ To replicate incremental data, do the following:
 8. Back up the [query bindings](/sql-plan-management.md) in the upstream cluster and restore them in the downstream cluster. You can use the following query to back up the query bindings:
 
     ```sql
-    SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING for ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
+    SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
     ```
 
-    If you do not get any output, you might not be using query bindings. In this case, you can skip this step.
+    If you do not get any output, query bindings might not be used in the upstream cluster. In this case, you can skip this step.
 
     After you get the query bindings, run them in the downstream cluster to restore the query bindings.
 
@@ -388,7 +388,7 @@ To replicate incremental data, do the following:
             p=`echo $usr | awk -F ":" '{print $3}'`
             echo "-- Grants for '${u}'@'${h}';"
             [[ ! -z "${p}" ]] && echo "CREATE USER IF NOT EXISTS '${u}'@'${h}' IDENTIFIED WITH 'mysql_native_password' AS '${p}' ;"
-            $MYSQL -se "show grants for '${u}'@'${h}';" | sed 's/$/;/g'
+            $MYSQL -se "SHOW GRANTS FOR '${u}'@'${h}';" | sed 's/$/;/g'
             [ $? -ne 0 ] && ret=1 && break
         done
         return $ret
@@ -397,4 +397,4 @@ To replicate incremental data, do the following:
     backup_user_priv
     ```
     
-    After you get the user and privilege information, run them in the downstream cluster to restore the user and privilege information.
+    After you get the user and privilege information, run the generated SQL statements in the downstream cluster to restore the user and privilege information.
