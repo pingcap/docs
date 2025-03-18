@@ -18,5 +18,3 @@ On the changefeed page in the TiDB Cloud console, you can create a changefeed, v
 Replication includes only incremental data changes by default. If existing data must be replicated, it must be exported and loaded into the target system manually before starting the changefeed.
 
 In TiDB Cloud, replication can be tailored by defining table filters (to specify which tables to replicate) and event filters (to include or exclude specific types of events like INSERT or DELETE).
-
-For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md).
