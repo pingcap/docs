@@ -180,11 +180,11 @@ After enabling audit logging, you must specify auditing filter rules to control 
 
 To specify auditing filter rules for a cluster, take the following steps:
 
-1. On the **DB Audit Logging** page, you can click **Add Filter Rule** in the **Log Filter Rules** section to add audit filter rules.
+1. On the **DB Audit Logging** page, click **Add Filter Rule** in the **Log Filter Rules** section to add an audit filter rule.
 
-    You can add one audit rule at a time. Each rule specifies a user expression, database expression, table expression, and access type. You can add multiple audit rules to meet your audit requirements.
+    You can add one audit rule at a time. Each rule specifies a user expression, database expression, table expression, and access type. You can add multiple audit rules to meet your auditing requirements.
 
-2.In the **Log Filter Rules** section, click **>** to view the audit rules that have been added.
+2.In the **Log Filter Rules** section, click **>** to expand and view the list of audit rules you have added.
 
 > **Note:**
 >
