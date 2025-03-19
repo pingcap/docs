@@ -120,7 +120,7 @@ Multi-factor authentication (MFA) adds additional security by requiring an Authe
 
 4. Click **Disable**.
 
-5. Go to the **Disable Multi-Factor Authentication** section, where you will need to fill in your account password and MFA authentication code to ensure the security of the operation.
+5. In the **Disable Multi-Factor Authentication** section, enter your account password and MFA authentication code to confirm the operation.
 
 > **Note:**
 >
