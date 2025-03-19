@@ -34,6 +34,7 @@ These system tables contain grant information about user accounts and their priv
     * `tidb_server_version`: the version information of TiDB when it is initialized. Note that this value is read-only and cannot be modified.
     * `system_tz`: the system time zone of TiDB.
     * `new_collation_enabled`: whether TiDB has enabled the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations). Note that this value is read-only and cannot be modified.
+    * `cluster_id`: the unique identifier of the TiDB cluster. Note that this value is read-only and cannot be modified.
 
 ## Server-side help system tables
 
@@ -48,6 +49,9 @@ Currently, the `help_topic` is NULL.
 - `stats_extended`: extended statistics, such as the order correlation between columns
 - `stats_feedback`: the query feedback of statistics
 - `stats_fm_sketch`: the FMSketch distribution of the histogram of the statistics column
+- `stats_table_locked`: information about the locked statistics
+- `stats_meta_history`: the meta information in the historical statistics
+- `stats_history`: the other information in the historical statistics
 - `analyze_options`: the default `analyze` options for each table
 - `column_stats_usage`: the usage of column statistics
 - `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
@@ -56,6 +60,11 @@ Currently, the `help_topic` is NULL.
 
 - `bind_info`: the binding information of execution plans
 - `capture_plan_baselines_blacklist`: the blocklist for the automatic binding of the execution plan
+
+## System tables related to PLAN REPLAYER
+
+- `plan_replayer_status`: the [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks registered by the user
+- `plan_replayer_task`: the results of [`PLAN REPLAYER CAPTURE`](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#use-plan-replayer-capture) tasks
 
 ## GC worker system tables
 
@@ -118,6 +127,7 @@ Currently, the `help_topic` is NULL.
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
 - `tidb_import_jobs`: the job information of [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
 - `tidb_timers`: the metadata of internal timers
+- `advisory_locks`: information related to [Locking functions](/functions-and-operators/locking-functions.md)
 
 </CustomContent>
 

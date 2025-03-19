@@ -39,10 +39,17 @@ In the preceding command:
 
 During backup, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the backup task is completed and statistics such as total backup time, average backup speed, and backup data size are displayed.
 
+- `total-ranges`: indicates the total number of files to be backed up.
+- `ranges-succeed`: indicates the number of files that are successfully backed up.
+- `ranges-failed`: indicates the number of files that failed to be backed up.
+- `backup-total-ranges`: indicates the number of tables (including partitions) and indexes that are to be backed up.
+- `write-CF-files`: indicates the number of backup SST files that contain `write CF` data.
+- `default-CF-files`: indicates the number of backup SST files that contain `default CF` data.
+
 ```shell
 Full Backup <-------------------------------------------------------------------------------> 100.00%
 Checksum <----------------------------------------------------------------------------------> 100.00%
-*** ["Full Backup success summary"] *** [backup-checksum=3.597416ms] [backup-fast-checksum=2.36975ms] *** [total-take=4.715509333s] [BackupTS=435844546560000000] [total-kv=1131] [total-kv-size=250kB] [average-speed=53.02kB/s] [backup-data-size(after-compressed)=71.33kB] [Size=71330]
+*** ["Full Backup success summary"] *** [total-ranges=20] [ranges-succeed=20] [ranges-failed=0] [backup-checksum=3.597416ms] [backup-fast-checksum=2.36975ms] [backup-total-ranges=11] [backup-total-regions=10] [write-CF-files=14] [default-CF-files=6] [total-take=4.715509333s] [BackupTS=435844546560000000] [total-kv=1131] [total-kv-size=250kB] [average-speed=53.02kB/s] [backup-data-size(after-compressed)=71.33kB] [Size=71330]
 ```
 
 ## Get the backup time point of a snapshot backup
@@ -81,9 +88,21 @@ tiup br restore full --pd "${PD_IP}:2379" \
 
 During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed and statistics such as total restore time, average restore speed, and total data size are displayed.
 
+- `total-ranges`: indicates the total number of files that are to be restored.
+- `ranges-succeed`: indicates the number of files that are successfully restored.
+- `ranges-failed`: indicates the number of files that failed to be restored.
+- `merge-ranges`: indicates the time taken to merge the data range.
+- `split-region`: indicates the time taken to split and scatter Regions.
+- `restore-files`: indicates the time TiKV takes to download and ingest SST files.
+- `write-CF-files`: indicates the number of restored SST files that contain `write CF` data.
+- `default-CF-files`: indicates the number of restored SST files that contain `default CF` data.
+- `split-keys`: indicates the number of keys generated for splitting Regions.
+
 ```shell
-Full Restore <------------------------------------------------------------------------------> 100.00%
-*** ["Full Restore success summary"] *** [total-take=4.344617542s] [total-kv=5] [total-kv-size=327B] [average-speed=75.27B/s] [restore-data-size(after-compressed)=4.813kB] [Size=4813] [BackupTS=435844901803917314]
+Split&Scatter Region <--------------------------------------------------------------------> 100.00%
+Download&Ingest SST <---------------------------------------------------------------------> 100.00%
+Restore Pipeline <------------------------------------------------------------------------> 100.00%
+*** ["Full Restore success summary"] [total-ranges=20] [ranges-succeed=20] [ranges-failed=0] [merge-ranges=7.546971ms] [split-region=343.594072ms] [restore-files=1.57662s] [default-CF-files=6] [write-CF-files=14] [split-keys=9] [total-take=4.344617542s] [total-kv=5] [total-kv-size=327B] [average-speed=75.27B/s] [restore-data-size(after-compressed)=4.813kB] [Size=4813] [BackupTS=435844901803917314]
 ```
 
 ### Restore a database or a table

@@ -378,6 +378,10 @@ For more information on the concepts and terminology of TiDB Lightning, see [TiD
 
 [TiFlash](/tiflash/tiflash-overview.md) is a key component of TiDB's HTAP architecture. It is a columnar extension of TiKV that provides both strong consistency and good isolation. TiFlash maintains columnar replicas by asynchronously replicating data from TiKV using the **Raft Learner protocol**. For reads, it leverages the **Raft consensus index** and **MVCC (Multi-Version Concurrency Control)** to achieve **Snapshot Isolation** consistency. This architecture effectively addresses isolation and synchronization challenges in HTAP workloads, enabling efficient analytical queries while maintaining real-time data consistency.
 
+### TiKV MVCC In-Memory Engine (IME)
+
+[TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md) (IME) caches the latest written MVCC versions in memory and implements an MVCC GC mechanism independent of TiDB to accelerate queries involving a large number of MVCC historical versions.
+
 ### Timestamp Oracle (TSO)
 
 Because TiKV is a distributed storage system, it requires a global timing service, Timestamp Oracle (TSO), to assign a monotonically increasing timestamp. In TiKV, such a feature is provided by PD, and in Google [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), this feature is provided by multiple atomic clocks and GPS. For more information, see [TSO](/tso.md).
