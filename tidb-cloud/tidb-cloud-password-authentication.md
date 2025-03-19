@@ -78,7 +78,7 @@ If you forget your password, you can reset it by email as follows:
 
 3. Click the **Change Password** tab, click **Change Password**, and then check your email for TiDB Cloud to reset the password.
 
-## Manage Multi-Factor Authentication (optional)
+## Manage multi-factor authentication (optional)
 
 > **Note:**
 >
