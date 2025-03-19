@@ -124,4 +124,4 @@ Multi-factor authentication (MFA) adds additional security by requiring an Authe
 
 > **Note:**
 >
-> Be cautious when disabling MFA operations, as this will reduce the security of your account.
+> Disabling MFA reduces the security of your account. Proceed with caution.
