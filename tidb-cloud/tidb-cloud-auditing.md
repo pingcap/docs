@@ -193,7 +193,7 @@ To specify auditing filter rules for a cluster, take the following steps:
 
 ## View audit logs
 
-TiDB Cloud stores the audit log files of the database in your storage service by default, so you need to read the audit log information in your storage service.
+By default, TiDB Cloud stores database audit log files in your storage service, so you need to read the audit log information from your storage service.
 
 > **Note:**
 >
