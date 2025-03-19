@@ -267,7 +267,7 @@ Configure the firewall for Prometheus:
 
 ```bash
 firewall-cmd --permanent --zone=public --add-service=prometheus
-firewall-cmd --permenent --service=prometheus --add-port=12020/tcp
+firewall-cmd --permanent --service=prometheus --add-port=12020/tcp
 ```
 
 Configure the firewall for Grafana:
