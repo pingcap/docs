@@ -107,8 +107,8 @@ Multi-factor authentication (MFA) adds additional security by requiring an Authe
 
 > **Note:**
 >
-> - You need to keep the recovery code properly to ensure the security of your account.
-> - If you use the recovery code for MFA verification when logging in, the system will automatically generate a new recovery code for you after the verification is successful.
+> - You need to store the recovery code securely to maintain account security.
+> - If you use the recovery code for MFA verification during login, the system automatically generates a new recovery code after successful verification.
 
 ### Disable MFA
 
