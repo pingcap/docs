@@ -193,7 +193,7 @@ This section describes how to stop and disable the firewall service of a target 
 
 Instead of disabling the firewall completely, you can use a less restrictive zone. The default `public` zone allows only specific services and ports, while the `trusted` zone allows all traffic by default.
 
-To set the default zone to `trusted`:  
+To set the default zone to `trusted`:
 
 ```bash
 firewall-cmd --set-default-zone trusted
