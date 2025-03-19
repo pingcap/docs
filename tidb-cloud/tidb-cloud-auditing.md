@@ -176,7 +176,7 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 
 ## Specify auditing filter rules
 
-After enabling audit logging, you must specify auditing filter rules to control which user access events to capture and write to audit logs versus. If no filter rules are specified, TiDB Cloud does not log anything.
+After enabling audit logging, you must specify auditing filter rules to control which user access events to capture and write to audit logs. If no filter rules are specified, TiDB Cloud does not log anything.
 
 To specify auditing filter rules for a cluster, take the following steps:
 
