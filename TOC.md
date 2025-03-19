@@ -188,7 +188,7 @@
             -   [バックアップストレージ](/br/backup-and-restore-storages.md)
         -   BR CLI マニュアル
             -   [概要](/br/use-br-command-line-tool.md)
-            -   [スナップショットのバックアップと復元コマンドマニュアル](/br/br-snapshot-manual.md)
+            -   [スナップショットのバックアップと復元のコマンドマニュアル](/br/br-snapshot-manual.md)
             -   [ログバックアップとPITRコマンドマニュアル](/br/br-pitr-manual.md)
         -   参考文献
             -   BR機能
@@ -309,7 +309,7 @@
             -   [準備されていない実行プランのキャッシュ](/sql-non-prepared-plan-cache.md)
         -   制御実行計画
             -   [概要](/control-execution-plan.md)
-            -   [オプティマイザのヒント](/optimizer-hints.md)
+            -   [オプティマイザーのヒント](/optimizer-hints.md)
             -   [SQL プラン管理](/sql-plan-management.md)
             -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
             -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
@@ -647,7 +647,7 @@
         -   [コンフィグレーション](/tiproxy/tiproxy-configuration.md)
         -   [コマンドラインパラメータ](/tiproxy/tiproxy-command-line-flags.md)
         -   [監視メトリクス](/tiproxy/tiproxy-grafana.md)
-        -   [API](/tiproxy/tiproxy-api.md)
+        -   [翻訳](/tiproxy/tiproxy-api.md)
         -   [トラブルシューティング](/tiproxy/troubleshoot-tiproxy.md)
         -   [パフォーマンステスト](/tiproxy/tiproxy-performance-test.md)
 -   参照
@@ -888,7 +888,7 @@
             -   [概要](/data-type-overview.md)
             -   [デフォルト値](/data-type-default-values.md)
             -   [数値型](/data-type-numeric.md)
-            -   [日付と時刻の型](/data-type-date-and-time.md)
+            -   [日付と時刻の種類](/data-type-date-and-time.md)
             -   [文字列型](/data-type-string.md)
             -   [JSON型](/data-type-json.md)
         -   関数と演算子
@@ -1080,6 +1080,7 @@
     -   バージョン7.6
         -   [7.6.0-DMR](/releases/release-7.6.0.md)
     -   バージョン7.5
+        -   [7.5.6](/releases/release-7.5.6.md)
         -   [7.5.5](/releases/release-7.5.5.md)
         -   [7.5.4](/releases/release-7.5.4.md)
         -   [7.5.3](/releases/release-7.5.3.md)
@@ -1192,7 +1193,7 @@
         -   [4.0.0-ベータ.2](/releases/release-4.0.0-beta.2.md)
         -   [4.0.0-ベータ.1](/releases/release-4.0.0-beta.1.md)
         -   [4.0.0-ベータ](/releases/release-4.0.0-beta.md)
-    -   v3.1
+    -   バージョン3.1
         -   [3.1.2](/releases/release-3.1.2.md)
         -   [3.1.1](/releases/release-3.1.1.md)
         -   [3.1.0 正式版](/releases/release-3.1.0-ga.md)

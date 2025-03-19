@@ -5,11 +5,11 @@ summary: TiDB Cloudコンソールでパスワードを管理し、多要素認�
 
 # パスワード認証 {#password-authentication}
 
-このドキュメントでは、 TiDB Cloudコンソールでパスワードを管理し、多要素認証 (MFA) を有効にする方法について説明します。このドキュメントは、電子メールとパスワードを使用してTiDB Cloudに[サインアップ](https://tidbcloud.com/free-trial)ているユーザーにのみ適用されます。
+このドキュメントでは、 TiDB Cloudコンソールでパスワードを管理し、多要素認証 (MFA) を有効にする方法について説明します。このドキュメントは、電子メールとパスワードを使用してTiDB Cloudにログイン[サインアップ](https://tidbcloud.com/free-trial)いるユーザーにのみ適用されます。
 
 ## サインアップ {#sign-up}
 
-電子メールとパスワードを使用してTiDB Cloudに[サインアップ](https://tidbcloud.com/free-trial)するか、Google、GitHub、または Microsoft アカウントを選択してTiDB Cloudへのシングル サインオン (SSO) を行うことができます。
+電子メールとパスワードを使用してTiDB Cloudに[サインアップ](https://tidbcloud.com/free-trial)か、Google、GitHub、または Microsoft アカウントを選択してTiDB Cloudへのシングル サインオン (SSO) を行うことができます。
 
 -   メールアドレスとパスワードを使用してTiDB Cloudにサインアップすると、このドキュメントに従ってパスワードを管理できます。
 -   TiDB Cloudへの Google、GitHub、または Microsoft SSO を選択した場合、パスワードは選択したプラットフォームによって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
@@ -40,7 +40,7 @@ TiDB Cloudの確認メールが届きます。登録プロセス全体を完了�
 
 ### サインアウト {#sign-out}
 
-TiDB Cloudコンソールの左下隅で、<mdsvgicon name="icon-top-account-settings">**ログアウトを**選択します。</mdsvgicon>
+TiDB Cloudコンソールの左下隅で、<mdsvgicon name="icon-top-account-settings">**ログアウト**を選択します。</mdsvgicon>
 
 ## パスワードポリシー {#password-policy}
 
@@ -74,40 +74,54 @@ TiDB Cloud は、登録ユーザーに対してデフォルトのパスワード
 
 1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-2.  **[アカウント設定]を**クリックします。
+2.  **[アカウント設定]**をクリックします。
 
 3.  **[パスワードの変更]**タブをクリックし、 **[パスワードの変更]**をクリックして、 TiDB Cloudからの電子メールを確認し、パスワードをリセットします。
 
-## MFA を有効または無効にする (オプション) {#enable-or-disable-mfa-optional}
+## 多要素認証を管理する（オプション） {#manage-multi-factor-authentication-optional}
 
 > **注記：**
 >
-> このセクションは、電子メールとパスワードを使用してTiDB Cloudに[サインアップ](https://tidbcloud.com/free-trial)場合にのみ適用されます。Google、GitHub、または Microsoft SSO を使用してTiDB Cloudにサインアップする場合は、選択した ID 管理プラットフォームで MFA を有効にすることができます。
+> -   このセクションは、電子メールとパスワードを使用してTiDB Cloudに[サインアップ](https://tidbcloud.com/free-trial)場合にのみ適用されます。Google、GitHub、または Microsoft SSO を使用してTiDB Cloudにサインアップする場合は、選択した ID 管理プラットフォームで MFA を有効にすることができます。
+> -   SSO ログイン シナリオでTiDB Cloud MFA を有効にしている場合は、アカウントのセキュリティを確保するために、 **2025 年 9 月 30 日**までに MFA 管理を SSO ID 管理プラットフォームに移行してください。
 
-TiDB Cloudにログイン後、法律や規制に従って MFA を有効にすることができます。
-
-2 要素認証 (MFA または 2FA とも呼ばれます) では、認証アプリを使用してログイン用のワンタイム パスワードを生成することで、セキュリティが強化されます。このパスワードを生成するには、Google Authenticator や Authy など、iOS または Android App Store の任意の認証アプリを使用できます。
+多要素認証 (MFA) では、認証アプリでログイン用のワンタイム認証コードを生成することを要求することで、セキュリティが強化されます。ログインすると、 TiDB Cloud はパスワードと MFA 認証コードの両方を検証します。このパスワードを生成するには、Google Authenticator や Authy など、iOS または Android App Store の任意の認証アプリを使用できます。
 
 ### MFAを有効にする {#enable-mfa}
 
 1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-2.  **[アカウント設定]を**クリックします。
+2.  **[アカウント設定]**をクリックします。
 
-3.  「 **2要素認証」**タブをクリックします。
+3.  **「多要素認証」**タブをクリックします。
 
 4.  **[有効にする]**をクリックします。
 
-5.  ログアウトしてから再度ログインします。QR コードが表示されるので、認証アプリを使用してスキャンできます。
+5.  本人確認のため、アカウントのパスワードを入力してください。
 
-6.  アプリによって生成された認証コードを入力します。
+6.  **「認証アプリの設定」**セクションで、認証アプリを使用して QR コードをスキャンし、MFA デバイスを関連付けます。
+
+7.  アプリによって生成された認証コードを入力して、MFA デバイスの関連付けを完了します。
+
+8.  MFA デバイスが利用できない場合に認証するために役立つ、ワンタイム回復コードを保存します。
+
+> **注記：**
+>
+> -   アカウントのセキュリティを維持するために、回復コードを安全に保管する必要があります。
+> -   ログイン時に MFA 検証にリカバリ コードを使用すると、検証が成功するとシステムによって新しいリカバリ コードが自動的に生成されます。
 
 ### MFAを無効にする {#disable-mfa}
 
 1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-2.  **[アカウント設定]を**クリックします。
+2.  **[アカウント設定]**をクリックします。
 
-3.  「 **2要素認証」**タブをクリックします。
+3.  **「多要素認証」**タブをクリックします。
 
 4.  **[無効にする]**をクリックします。
+
+5.  **「多要素認証を無効にする」**セクションで、アカウントのパスワードと MFA 認証コードを入力して操作を確認します。
+
+> **注記：**
+>
+> MFA を無効にすると、アカウントのセキュリティが低下します。注意して進めてください。

@@ -30,9 +30,9 @@ TiDB は、MySQL との互換性のために`REPEATABLE-READ`として宣伝さ�
 
 > **注記：**
 >
-> TiDB v3.0 以降では、トランザクションの自動再試行はデフォルトで無効になっています。自動再試行を有効にすると、**トランザクション分離レベルが破られる**可能性があるため、有効にすることは推奨されません。詳細については[トランザクションの再試行](/optimistic-transaction.md#automatic-retry)を参照してください。
+> TiDB v3.0 以降では、トランザクションの自動再試行はデフォルトで無効になっています。自動再試行を有効にすると**、トランザクション分離レベルが破られる**可能性があるため、有効にすることは推奨されません。詳細については[トランザクションの再試行](/optimistic-transaction.md#automatic-retry)を参照してください。
 >
-> TiDB v3.0.8 以降、新しく作成された TiDB クラスターはデフォルトで[悲観的トランザクションモード](/pessimistic-transaction.md)使用します。現在の読み取り ( `for update`読み取り) は**繰り返し不可能な読み取り**です。詳細については[悲観的トランザクションモード](/pessimistic-transaction.md)を参照してください。
+> TiDB v3.0.8 以降、新しく作成された TiDB クラスターはデフォルトで[悲観的トランザクションモード](/pessimistic-transaction.md)使用します。現在の読み取り ( `for update`読み取り)**は繰り返し不可能な読み取り**です。詳細については[悲観的トランザクションモード](/pessimistic-transaction.md)を参照してください。
 
 ## 繰り返し読み取り分離レベル {#repeatable-read-isolation-level}
 
@@ -80,9 +80,9 @@ v6.0.0 以降、TiDB は、読み取り/書き込み競合がまれなシナリ�
 
 `READ-COMMITTED`分離レベルが使用され、 `SELECT`ステートメントが多く、読み取り/書き込みの競合がまれなシナリオでは、この変数を有効にすると、グローバル タイムスタンプを取得する際のレイテンシーとコストを回避できます。
 
-v6.3.0 以降、TiDB は、ポイント書き込みの競合が少ないシナリオでシステム変数[`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)を有効にすることで、タイムスタンプの取得を最適化することをサポートしています。この変数を有効にすると、ポイント書き込みステートメントの実行中に、TiDB は現在のトランザクションの有効なタイムスタンプを使用してデータを読み取り、ロックしようとします[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)が有効になっている場合、TiDB は同じ方法でデータを読み取ります。
+v6.3.0 以降、TiDB は、ポイント書き込みの競合が少ないシナリオでシステム変数[`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)有効にすることで、タイムスタンプの取得を最適化することをサポートしています。この変数を有効にすると、ポイント書き込みステートメントの実行中に、TiDB は現在のトランザクションの有効なタイムスタンプを使用してデータを読み取り、ロックしようとします。3 [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)有効になっている場合、TiDB は同じ方法でデータを読み取ります。
 
-現在、適用可能なポイント書き込みステートメントのタイプには、 `UPDATE` 、 `DELETE` 、および`SELECT ...... FOR UPDATE`があります。ポイント書き込みステートメントとは、主キーまたは一意のキーをフィルター条件として使用し、最終実行演算子に`POINT-GET`含まれる書き込みステートメントを指します。現在、3 種類のポイント書き込みステートメントには、最初にキー値に基づいてポイント クエリを実行するという共通点があります。キーが存在する場合は、キーをロックします。キーが存在しない場合は、空のセットを返します。
+現在、適用可能なポイント書き込みステートメントのタイプには、 `UPDATE` 、 `DELETE` 、および`SELECT ...... FOR UPDATE`あります。ポイント書き込みステートメントとは、主キーまたは一意のキーをフィルター条件として使用し、最終実行演算子に`POINT-GET`含まれる書き込みステートメントを指します。現在、3 種類のポイント書き込みステートメントには、最初にキー値に基づいてポイント クエリを実行するという共通点があります。キーが存在する場合は、キーをロックします。キーが存在しない場合は、空のセットを返します。
 
 -   ポイント書き込みステートメントの読み取りプロセス全体で更新されたデータ バージョンが検出されない場合、TiDB は引き続き現在のトランザクションのタイムスタンプを使用してデータをロックします。
     -   ロック取得プロセス中に古いタイムスタンプが原因で書き込み競合が発生した場合、TiDB は最新のグローバル タイムスタンプを取得してロック取得プロセスを再試行します。
@@ -94,3 +94,25 @@ v6.3.0 以降、TiDB は、ポイント書き込みの競合が少ないシナ�
 ## TiDB と MySQL Read Committed の違い {#difference-between-tidb-and-mysql-read-committed}
 
 MySQL の Read Committed 分離レベルは、ほとんどの場合、Consistent Read 機能と一致します。 [半一貫性のある読み取り](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html)などの例外もあります。この特殊な動作は TiDB ではサポートされていません。
+
+## トランザクション分離レベルのビューと変更 {#view-and-modify-transaction-isolation-levels}
+
+トランザクション分離レベルは次のように表示および変更できます。
+
+現在のセッションのトランザクション分離レベルをビュー。
+
+```sql
+SHOW VARIABLES LIKE 'transaction_isolation';
+```
+
+現在のセッションのトランザクション分離レベルを変更します。
+
+```sql
+SET SESSION transaction_isolation = 'READ-COMMITTED';
+```
+
+トランザクション分離レベルの構成と使用の詳細については、次のドキュメントを参照してください。
+
+-   [システム変数`transaction_isolation`](/system-variables.md#transaction_isolation)
+-   [隔離レベル](/pessimistic-transaction.md#isolation-level)
+-   [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)

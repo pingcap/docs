@@ -80,7 +80,7 @@
     -   サーバーレスDriver![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
         -   [TiDB CloudサーバーレスDriver](/tidb-cloud/serverless-driver.md)
         -   [Node.jsの例](/tidb-cloud/serverless-driver-node-example.md)
-        -   [プリズマの例](/tidb-cloud/serverless-driver-prisma-example.md)
+        -   [Prismaの例](/tidb-cloud/serverless-driver-prisma-example.md)
         -   [Kyselyの例](/tidb-cloud/serverless-driver-kysely-example.md)
         -   [霧雨の例](/tidb-cloud/serverless-driver-drizzle-example.md)
 -   開発リファレンス
@@ -232,7 +232,7 @@
                 -   [準備されていない実行プランのキャッシュ](/sql-non-prepared-plan-cache.md)
             -   制御実行計画
                 -   [概要](/control-execution-plan.md)
-                -   [オプティマイザーのヒント](/optimizer-hints.md)
+                -   [オプティマイザのヒント](/optimizer-hints.md)
                 -   [SQL プラン管理](/sql-plan-management.md)
                 -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
                 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
@@ -345,6 +345,7 @@
     -   ネットワークアクセス制御
         -   TiDB Cloudサーバーレス
             -   [プライベートエンドポイント経由で接続](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+            -   [パブリックエンドポイントのファイアウォールルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
             -   [TiDB Cloud ServerlessへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)
         -   TiDB Cloud専用
             -   [IPアクセスリストを構成する](/tidb-cloud/configure-ip-access-list.md)

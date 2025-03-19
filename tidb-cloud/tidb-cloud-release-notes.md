@@ -8,6 +8,24 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年3月18日 {#march-18-2025}
+
+**一般的な変更**
+
+-   リソース管理の柔軟性を高めるために、Google Cloud にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに対して TiDB ノード グループの作成をサポートします。
+
+    詳細については[TiDBノードグループの概要](/tidb-cloud/tidb-node-group-overview.md)参照してください。
+
+-   AWS にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータベース監査ログ ファイルをTiDB Cloudに保存することをサポートします。
+
+    これらの監査ログ ファイルは、TiDB Cloudから直接ダウンロードできます。この機能はリクエストに応じてのみ利用可能であることに注意してください。
+
+    詳細については[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)参照してください。
+
+-   多要素認証 (MFA) の管理を改善することで、 TiDB Cloudアカウントのセキュリティを強化します。この機能は、 TiDB Cloudのパスワードベースのログインに適用されます。
+
+    詳細については[パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)参照してください。
+
 ## 2025年2月18日 {#february-18-2025}
 
 **コンソールの変更**
@@ -35,7 +53,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   タスクあたり最大 250 MiB の単一のローカル CSV ファイルを[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターにインポートできるようになりました。以前の制限である 50 MiB から増加されました。
+-   タスクあたり最大 250 MiB の単一のローカル CSV ファイルを[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターにインポートできるようになりました。これは、以前の 50 MiB の制限から増加されました。
 
     詳細については[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)参照してください。
 
@@ -91,7 +109,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については[アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md#organization-roles)参照してください。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターの地域高可用性 (ベータ版)。
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターのリージョン高可用性 (ベータ版)。
 
     この機能は、最大限のインフラストラクチャ冗長性とビジネス継続性を必要とするワークロード向けに設計されています。主な関数は次のとおりです。
 
