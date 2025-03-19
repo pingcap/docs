@@ -197,7 +197,7 @@ By default, TiDB Cloud stores database audit log files in your storage service, 
 
 > **Note:**
 >
-> If you have applied and chosen to store audit log files in TiDB Cloud, you can download your audit log files in the **Audit Log Access** section of the **Database Audit Logging** page.
+> If you have requested and chosen to store audit log files in TiDB Cloud, you can download them from the **Audit Log Access** section on the **Database Audit Logging** page.
 
 TiDB Cloud audit logs are readable text files with the cluster ID, Pod ID, and log creation date incorporated into the fully qualified filenames.
 
