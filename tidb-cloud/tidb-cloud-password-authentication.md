@@ -97,7 +97,7 @@ Multi-factor authentication (MFA) adds additional security by requiring an Authe
 
 4. Click **Enable**.
 
-5. Enter your account password to ensure security.
+5. Enter your account password to confirm your identity.
 
 6. Go to the **Set Up Authenticator App** section, where you will need to use your authenticator app to scan the QR code to associate the MFA device.
 
