@@ -299,11 +299,6 @@ delta_index_cache_size = 0
     ## If you set it to 0, the multi-thread optimization is disabled.
     snap-handle-pool-size = 2
 
-    ## The shortest interval at which Raft store persists WAL.
-    ## You can properly increase the latency to reduce IOPS usage.
-    ## The default value is "4ms".
-    ## If you set it to 0ms, the optimization is disabled.
-    store-batch-retry-recv-timeout = "4ms"
 [security]
     ## New in v5.0. This configuration item enables or disables log redaction.
     ## If the configuration value is set to true,
