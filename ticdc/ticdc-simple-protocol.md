@@ -5,7 +5,7 @@ summary: Learn how to use the TiCDC Simple protocol and the data format implemen
 
 # TiCDC Simple Protocol
 
-Starting from v8.0.0, TiCDC supports Simple protocol. This document describes how to use the TiCDC Simple protocol and the data format implementation.
+Starting from v8.0.0, TiCDC supports the Simple protocol. This document describes how to use the TiCDC Simple protocol and the data format implementation.
 
 ## Use the TiCDC Simple protocol
 
