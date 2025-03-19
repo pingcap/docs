@@ -16,6 +16,16 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     
     For more information, see [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md).
 
+- Support storing database audit log files in TiDB Cloud for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on AWS.
+
+    You can download these audit log files directly from TiDB Cloud. Note that this feature is only available upon request.
+
+    For more information, see [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md).
+
+- Enhance TiDB Cloud account security by improving the management of multi-factor authentication (MFA). This feature applies to password-based logins for TiDB Cloud.
+
+    For more information, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
+
 ## February 18, 2025
 
 **Console changes**
