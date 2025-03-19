@@ -30,8 +30,7 @@ TiDB Cloud supports recording the audit logs of a TiDB Cloud Dedicated cluster t
 
 > **Note:**
 >
-> - For AWS deployment scenarios, When you enable Database audit logging, you can choose to store audit log files in TiDB Cloud.
-> - Currently, this feature is only available upon request. To request this feature, click ? in the lower-right corner of the TiDB Cloud console and click Request Support. Then, fill in "Apply to store audit log files in TiDB Cloud" in the Description field and click Submit.
+> For TiDB clusters deployed on AWS, you can choose to store audit log files in TiDB Cloud when enabling database audit logging. Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply to store audit log files in TiDB Cloud" in the **Description** field and click **Submit**.
 
 ### Enable audit logging for AWS
 
