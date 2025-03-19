@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Enhance TiDB Cloud account security by improving the management of multi-factor authentication (MFA). This feature applies to password-based logins for TiDB Cloud.
 
-    For more information, see [Password Authentication](tidb-cloud/tidb-cloud-password-authentication.md).
+    For more information, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
 
 ## February 18, 2025
 
