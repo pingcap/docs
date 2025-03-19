@@ -17,7 +17,7 @@ BR satisfies the following requirements:
 
 ## Before you use
 
-This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues.
+This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues. For more information about the compatibility of the BR tool with other features or versions, see [Compatibility](#compatibility).
 
 ### Restrictions
 
