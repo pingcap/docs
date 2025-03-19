@@ -83,7 +83,7 @@ If you forget your password, you can reset it by email as follows:
 > **Note:**
 >
 > - This section applies only when you [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords. If you sign up for TiDB Cloud with Google, GitHub, or Microsoft SSO, you can enable MFA on your chosen identity management platform.
-> - If you have enabled TiDB Cloud MFA in the SSO login scenario, to ensure the security of your account, please migrate your MFA management mechanism to your SSO identity management platform before September 30, 2025.
+> - If you have enabled TiDB Cloud MFA in an SSO login scenario, migrate your MFA management to your SSO identity management platform before **September 30, 2025**, to ensure account security.
 
 Multi-Factor authentication (MFA) adds additional security by requiring an Authenticator app to generate a one-time verification code for login. During login, TiDB Cloud needs to verify your password and MFA verification code. Regarding the authenticator app, You can use any Authenticator app from the iOS or Android App Store to generate this password, such as Google Authenticator and Authy.
 
