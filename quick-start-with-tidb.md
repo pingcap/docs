@@ -307,13 +307,8 @@ The smallest TiDB cluster topology consists of the following instances:
 
 Other requirements for the target machine include:
 
-<<<<<<< HEAD
-- The `root` user and its password are required
-- [Stop the firewall service of the target machine](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines), or open the port needed by the TiDB cluster nodes
-=======
 - The `root` user and its password are required.
 - [Stop the firewall service of the target machine](/check-before-deployment.md#check-the-firewall-service-of-target-machines), or open the ports needed by the TiDB cluster nodes.
->>>>>>> 503336c0f0 (tiup: extend the firewall docs (#20081))
 - Currently, the TiUP cluster supports deploying TiDB on the x86_64 (AMD64) and ARM architectures:
 
     - It is recommended to use CentOS 7.3 or later versions on AMD64.
