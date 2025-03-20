@@ -15,10 +15,6 @@ TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-a
 
 - Index Insight provides you with meaningful and actionable index recommendations.
 
-> **Note:**
->
-> Currently, **Key Visualizer** and **Index Insight (beta)** are unavailable for [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters.
-
 ## Slow Query
 
 By default, SQL queries that take more than 300 milliseconds are considered as slow queries.
@@ -52,29 +48,3 @@ To use the statement analysis, perform the following steps:
 The results are displayed in the form of a table, and you can sort the results by different columns.
 
 For more information, see [Statement Execution Details in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-details).
-
-## Key Visualizer
-
-> **Note:**
->
-> Key Visualizer is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
-
-To view the key analytics, perform the following steps:
-
-1. Navigate to the **Diagnosis** page of a cluster.
-
-2. Click the **Key Visualizer** tab.
-
-On the **Key Visualizer** page, a large heat map shows changes on access traffic over time. The average values ​​along each axis of the heat map are shown below and on the right side. The left side is the table name, index name and other information.
-
-For more information, see [Key Visualizer](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer).
-
-## Index Insight (beta)
-
-The Index Insight feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering recommended indexes for slow queries that are not utilizing indexes effectively.
-
-> **Note:**
->
-> Index Insight is currently in beta and only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
-
-For more information, see [Index Insight](/tidb-cloud/index-insight.md).
