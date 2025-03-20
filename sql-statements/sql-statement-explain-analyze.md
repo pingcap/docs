@@ -234,13 +234,13 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
 
 The `HashJoin` operator has one fetcher, N row table builders, and N hash table builders on the build side, and has one fetcher and N workers on the probe side. The detailed execution process is as follows:
 
-1. The fetcher at build side reads data from the downstream executor and dispatches data to each row table builder.
-2. The row table builder receives data chunks, splits them into several partitions and builds row table.
-3. Wait for the finish of building row table.
-4. The hash table builder builds hash table with row table.
-5. The fetcher at probe side reads data from the downstream executor and dispatches them to workers.
-6. Workers receive data, looks up hash table with data, construct final result and dispatch result to result channel.
-7. Main thread of `HashJoin` receives join result from result channel.
+1. The fetcher on the build side reads data from the downstream executor and dispatches data to each row table builder.
+2. Each row table builder receives data chunks, splits them into several partitions, and builds row tables.
+3. The process waits until all row tables are built.
+4. Hash table builders build hash tables using row tables.
+5. The fetcher on the probe side reads data from the downstream executor and dispatches it to workers.
+6. After receiving data, workers look up hash tables, build the final results, and dispatch the results to the result channel.
+7. The main thread of `HashJoin` retrieves the join results from the result channel.
 
 `HashJoin` executor contains the following execution information:
 
