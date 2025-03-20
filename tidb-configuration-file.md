@@ -338,6 +338,11 @@ Configuration items related to security.
 - The path of the SSL private key file used to connect TiKV or PD with TLS.
 - Default value: ""
 
+### `cluster-verify-cn`
+
+- A list of acceptable X.509 Common Names in certificates presented by clients. Requests are permitted only when the presented Common Name is an exact match with one of the entries in the list.
+- Default value: [], which means that the client certificate CN check is disabled.
+
 ### `spilled-file-encryption-method`
 
 + Determines the encryption method used for saving the spilled files to disk.
