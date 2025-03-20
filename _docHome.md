@@ -54,13 +54,13 @@ Planned features and releases for TiDB Cloud.
 
 <DocHomeCard href="https://www.pingcap.com/education/" label="Learning Center" icon="global-tidb-education">
 
-Learn TiDB Cloud and TiDB Self-Managed through well-designed online courses and instructor-led training.
+Learn TiDB Cloud through well-designed online courses and instructor-led training.
 
 </DocHomeCard>
 
 <DocHomeCard href="https://www.pingcap.com/blog/" label="Blog" icon="global-tidb-blog">
 
-Read great articles about TiDB Cloud and TiDB Self-Managed.
+Read great articles about TiDB Cloud.
 
 </DocHomeCard>
 
