@@ -264,11 +264,11 @@ build_hash_table:{concurrency:5, time:2.25s, fetch:1.06s, max_partition:1.06s, t
     - `total_probe`: The cumulative probing time of all workers.
     - `probe_collision`：Collision number in the probing stage.
 - `spill`: The execution information during the spill.
-    - `round`: The number of spill round.
-    - `spilled_partition_num_per_round`: The spilled partition number in each round. The format is `x/y`, `x` represents the spilled partition number and `y` represents the number of all partitions. 
-    - `total_spill_GiB_per_round`: The total data size written into disk in each spill round.
-    - `build_spill_row_table_GiB_per_round`: The total data size of row table written into disk in each spill round at the build side.
-    - `build_spill_hash_table_per_round`: The total data size of hash table written into disk in each spill round at the build side.
+    - `round`: The number of spill rounds.
+    - `spilled_partition_num_per_round`: The number of spilled partitions per round, formatted as `x/y`, where `x` is the number of spilled partitions and `y` is the total number of partitions.
+    - `total_spill_GiB_per_round`: The total size of data written into the disk in each spill round.
+    - `build_spill_row_table_GiB_per_round`: The total size of row table data written into the disk in each spill round on the build side.
+    - `build_spill_hash_table_per_round`: The total size of hash table data written into the disk in each spill round on the build side.
 
 ### TableFullScan (TiFlash)
 
