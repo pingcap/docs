@@ -248,16 +248,16 @@ The `HashJoin` operator contains the following execution information:
 build_hash_table:{concurrency:5, time:2.25s, fetch:1.06s, max_partition:1.06s, total_partition:5.27s, max_build:124ms, total_build:439.5ms}, probe:{concurrency:5, time:13s, fetch_and_wait:3.03s, max_worker_time:13s, total_worker_time:1m4.5s, max_probe:9.93s, total_probe:49.4s, probe_collision:59818971}, spill:{round:1, spilled_partition_num_per_round:[5/8], total_spill_GiB_per_round:[1.64], build_spill_row_table_GiB_per_round:[0.50], build_spill_hash_table_per_round:[0.12]}
 ```
 
-`build_hash_table`: The execution information of reading downstream executor and building hash table.
+`build_hash_table`: The execution information of reading data from the downstream operator and building hash tables.
     - `time`: The total time consumption of building hash tables.
     - `fetch`: The total time spent reading data from the downstream.
     - `max_partition`: The longest execution time among all row table builders.
-    - `total_partition`：The total execution time taken by all row table builders.
+    - `total_partition`: The total execution time taken by all row table builders.
     - `max_build`: The longest execution time among all hash table builders.
     - `total_build`: The total execution time taken by all hash table builders.
-- `probe`: The execution information of reading downstream executor and doing probe.
+- `probe`: The execution information of reading data from the downstream operator and executing probe operations.
     - `time`: The total time consumption of probing.
-    - `fetch_and_wait`: The total time spent reading data from downstream and waiting for the data received by the upstream.
+    - `fetch_and_wait`: The total time spent reading data from downstream and waiting for the data to be received by the upstream.
     - `max_worker_time`: The longest execution time among all workers, including reading data from downstream, executing probe operations, and waiting for the data received by the upstream.
     - `total_worker_time`: The total execution time of all workers.
     - `max_probe`: The longest probe time among all workers.
