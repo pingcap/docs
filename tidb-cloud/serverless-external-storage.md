@@ -231,7 +231,7 @@ To create a SAS token using an Azure ARM template, take the following steps:
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
     4. Click **Review + create** or **Next** to review the deployment. Click **Create** to start the deployment.
-   
+
     5. After it completes, you will be redirected to the deployment overview page. Navigate to the **Outputs** section to get the SAS token.
 
 If you have any trouble creating a SAS token with the Azure ARM template, take the following steps to create one manually:
@@ -240,7 +240,7 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
 <summary>Click here to see details</summary>
 
 1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
-   
+
 2. On your **Storage account** page, click the **Security+network**, and then click **Shared access signature**.
 
    ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
