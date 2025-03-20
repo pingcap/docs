@@ -307,8 +307,6 @@
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
-  - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
-  - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
   - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
@@ -727,10 +725,6 @@
   - [System Variables](/system-variables.md)
   - [Server Status Variables](/status-variables.md)
   - [Table Filter](/table-filter.md)
-  - Optimize Resource Allocation
-    - TiDB Node Group
-      - [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md)
-      - [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)

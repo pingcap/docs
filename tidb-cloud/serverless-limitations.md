@@ -16,17 +16,17 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 
 ### Audit logs
 
-- [Database audit logging](/tidb-cloud/tidb-cloud-auditing.md) is currently unavailable.
+- Database audit logging is currently unavailable.
 
 ### Connection
 
-- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Cloud Serverless clusters.
+- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use VPC Peering to connect to TiDB Cloud Serverless clusters.
 - No IP Access list support.
 
 ### Encryption
 
 - Data persisted in your TiDB Cloud Serverless cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), an optional second layer of encryption is available during the cluster creation process, providing an additional level of security beyond the default encryption at rest.
-- Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek.md) is currently unavailable.
+- Using customer-managed encryption keys (CMEK) is currently unavailable.
 
 ### Maintenance window
 

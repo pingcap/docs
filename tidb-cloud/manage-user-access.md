@@ -102,7 +102,6 @@ At the project level, TiDB Cloud defines three roles, in which `Project Owner` c
 |---|---|---|---|---|
 | Manage project settings | ✅ | ❌ | ❌ | ❌ |
 | Invite users to or remove users from a project, and edit project roles of users. | ✅ | ❌ | ❌ | ❌ |
-| Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the project. | ✅ | ❌ | ❌ | ❌ |
 | Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all TiDB Cloud Serverless clusters in the project. | ✅ | ❌ | ❌ | ❌ |
 | Manage cluster operations in the project, such as cluster creation, modification, and deletion. | ✅ | ❌ | ❌ | ❌ |
 | Manage branches for TiDB Cloud Serverless clusters in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ | ❌ |

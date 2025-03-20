@@ -11,10 +11,6 @@ TiDB Cloud Dedicated lets you adjust its compute and storage resources separatel
 >
 > [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) scales automatically based on your application's workload changes. However, you cannot manually scale a TiDB Cloud Serverless cluster.
 
-> **Tip:**
->
-> For information about how to determine the size of a TiDB Cloud Dedicated cluster, see [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md).
-
 ## Vertical and horizontal scaling
 
 TiDB Cloud Dedicated supports both vertical (scale up) and horizontal (scale out) scaling.

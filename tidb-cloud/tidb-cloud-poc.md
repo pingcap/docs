@@ -71,7 +71,6 @@ To create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud
 
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
-- For more information about estimation practice, see [Size Your TiDB](/tidb-cloud/size-your-cluster.md).
 - For configurations of the TiDB Cloud Serverless cluster, see [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md). Configure the cluster size for TiDB, TiKV, and TiFlash (optional) respectively.
 - For how to plan and optimize your PoC credits consumption effectively, see [FAQ](#faq) in this document.
 
@@ -136,7 +135,7 @@ After kicking off the workload, you can observe the system using the following m
 - The commonly used metrics of the cluster can be found on the cluster overview page, including Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write. See [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
 - Go to **Diagnosis > Statements**, where you can observe SQL execution and easily locate performance problems without querying the system tables. See [Statement Analysis](/tidb-cloud/tune-performance.md).
 - Go to **Diagnosis > Key Visualizer**, where you can view TiDB data access patterns and data hotspots. See [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
-- You can also integrate these metrics to your own Datadog and Prometheus. See [Third-Party Monitoring Integrations](/tidb-cloud/third-party-monitoring-integrations.md).
+- You can also integrate these metrics to your own Datadog and Prometheus.
 
 Now it is time for evaluating the test results.
 

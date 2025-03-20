@@ -102,7 +102,6 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
     - **User name**: User of TiDB Cloud Dedicated cluster for migration. Make sure it meets DMS requirements.
     - **Password**: Password of TiDB Cloud Dedicated cluster user.
     - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set it to **none**.
-    - (Optional) **CA certificate**: Get the CA certificate according to [TLS connections to TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md).
 
     </div>
     </SimpleTab>
