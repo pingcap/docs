@@ -11,6 +11,10 @@ The following screenshot shows two example alerts.
 
 ![TiDB Cloud Alerts in Slack](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
 
+> **Note:**
+>
+> Currently, alert subscription is only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
 ## Prerequisites
 
 - The subscribing via Slack feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
