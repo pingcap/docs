@@ -262,7 +262,7 @@ build_hash_table:{concurrency:5, time:2.25s, fetch:1.06s, max_partition:1.06s, t
     - `total_worker_time`: The total execution time of all workers.
     - `max_probe`: The longest probe time among all workers.
     - `total_probe`: The total probing time of all workers.
-    - `probe_collision`：Number of hash collisions encountered during probing.
+    - `probe_collision`: The number of hash collisions encountered during probing.
 - `spill`: The execution information during the spill.
     - `round`: The number of spill rounds.
     - `spilled_partition_num_per_round`: The number of spilled partitions per round, formatted as `x/y`, where `x` is the number of spilled partitions and `y` is the total number of partitions.
