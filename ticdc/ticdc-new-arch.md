@@ -18,7 +18,7 @@ Starting from v9.0.0, TiCDC introduces a new architecture that improves real-tim
 
 ## Architectural design
 
-![TiCDC New Architecture](/media/ticdc/ticdc-new-arch-1.jpg)
+![TiCDC New Architecture](/media/ticdc/ticdc-new-arch-1.png)
 
 The TiCDC new architecture consists of two core components: Log Service and Downstream Adapter.
 
@@ -43,7 +43,7 @@ The new architecture is designed to address common issues that users might encou
 | **Scalability** | Poor scalability (limited by the number of CPUs) | Strong scalability through multi-threaded processing and event queues |
 | **Changefeed interference** | The owner node might cause interference between changefeeds | Event-driven mode avoids interference between changefeeds |
 
-![TiCDC New Architecture](/media/ticdc/ticdc-new-arch-2.jpg)
+![TiCDC New Architecture](/media/ticdc/ticdc-new-arch-2.png)
 
 ## Limitations
 
