@@ -95,8 +95,6 @@ TiDB Cloud Dedicated is for production use with the benefits of cross-zone high 
 
 For TiDB Cloud Dedicated clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for high availability.
 
-To create a TiDB Cloud Dedicated cluster, you need to [add a payment method](/tidb-cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](/tidb-cloud/tidb-cloud-poc.md).
-
 > **Note:**
 >
 > You cannot decrease the node storage after your cluster is created.

@@ -14,7 +14,6 @@
   - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
-  - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Key Concepts
   - [Overview](/tidb-cloud/key-concepts.md)
   - [Architecture](/tidb-cloud/architecture-concepts.md)
