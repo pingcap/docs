@@ -88,4 +88,4 @@ For feature comparison between TiDB Cloud Serverless and TiDB Cloud Dedicated, s
 
 - Your VPC
 
-    You can connect to your TiDB cluster via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+    You can connect to your TiDB cluster via private endpoint connection or VPC peering connection.
