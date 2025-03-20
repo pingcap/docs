@@ -78,8 +78,6 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Built-in Monitoring](https://docs.tidb.io/tidbcloud/built-in-monitoring)
 
-[Built-in Alerting](https://docs.tidb.io/tidbcloud/monitor-built-in-alerting)
-
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
