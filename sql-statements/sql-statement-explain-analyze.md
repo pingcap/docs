@@ -248,11 +248,11 @@ The `HashJoin` operator has one fetcher, N row table builders, and N hash table 
 build_hash_table:{concurrency:5, time:2.25s, fetch:1.06s, max_partition:1.06s, total_partition:5.27s, max_build:124ms, total_build:439.5ms}, probe:{concurrency:5, time:13s, fetch_and_wait:3.03s, max_worker_time:13s, total_worker_time:1m4.5s, max_probe:9.93s, total_probe:49.4s, probe_collision:59818971}, spill:{round:1, spilled_partition_num_per_round:[5/8], total_spill_GiB_per_round:[1.64], build_spill_row_table_GiB_per_round:[0.50], build_spill_hash_table_per_round:[0.12]}
 ```
 
-`build_hash_table`: the execution information of reading downstream executor and building hash table.
-    - `time`: The total time consumption of building hash table.
-    - `fetch`: The total time consumption of reading data from downsteam.
-    - `max_partition`: The execution time of the builder that takes longest time in all row table builders.
-    - `total_partition`：The cumulative time taken by the execution of all row table builders.
+`build_hash_table`: The execution information of reading downstream executor and building hash table.
+    - `time`: The total time consumption of building hash tables.
+    - `fetch`: The total time spent reading data from the downstream.
+    - `max_partition`: The longest execution time among all row table builders.
+    - `total_partition`：The total execution time taken by all row table builders.
     - `max_build`：The execution time of the builder that takes longest time in all hash table builder.
     - `total_build`：The cumulative time taken by the execution of all hash table builder.
 - `probe`: The execution information of reading downstream executor and doing probe.
