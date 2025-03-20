@@ -13,7 +13,7 @@ For instructions about how to migrate existing data or both existing data and in
 
 > **Note**:
 >
-> This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
+> This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations.
 
 - If the target table is not yet created in the target database, the migration job will report an error as follows and fail. In this case, you need to manually create the target table and then retry the migration job.
 
@@ -38,7 +38,7 @@ If you specify GTID as the start position to migrate incremental data, note the 
 
 > **Note**:
 >
-> This section only includes prerequisites about incremental data migration. It is recommended that you also read the [general prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
+> This section only includes prerequisites about incremental data migration.
 
 If you want to use GTID to specify the start position, make sure that the GTID is enabled in the source database. The operations vary depending on the database type.
 

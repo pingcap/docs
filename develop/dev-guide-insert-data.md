@@ -246,7 +246,7 @@ The following are the recommended tools for bulk-insert:
 
 <CustomContent platform="tidb-cloud">
 
-- Data import: [Create Import](/tidb-cloud/import-sample-data.md) page in the [TiDB Cloud console](https://tidbcloud.com/). You can import **Dumpling** exported data, import a local **CSV** file, or [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md). It also supports reading data from a local disk, Amazon S3 cloud disk, or GCS cloud disk.
+- Data import: [Create Import](/tidb-cloud/import-sample-data-serverless.md) page in the [TiDB Cloud console](https://tidbcloud.com/). You can import **Dumpling** exported data, import a local **CSV** file, or [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md). It also supports reading data from a local disk, Amazon S3 cloud disk, or GCS cloud disk.
 - Data replication: [TiDB Data Migration](https://docs.pingcap.com/tidb/stable/dm-overview). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
 - Data backup and restore: [Backup](/tidb-cloud/backup-and-restore.md) page in the TiDB Cloud console. Compared to **Dumpling**, backup and restore is more suitable for **_big data_** scenario.
 
