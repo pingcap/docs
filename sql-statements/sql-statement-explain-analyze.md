@@ -232,7 +232,8 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
 
 #### HashJoinv2
 
-`HashJoin` executor contains one fetcher, N row table builder and N hash table builder at the build side, and contains one fetcher and N worker at the probe side. The detail execution logic is as follow:
+The `HashJoin` operator has one fetcher, N row table builders, and N hash table builders on the build side, and has one fetcher and N workers on the probe side. The detailed execution process is as follows:
+
 1. The fetcher at build side reads data from the downstream executor and dispatches data to each row table builder.
 2. The row table builder receives data chunks, splits them into several partitions and builds row table.
 3. Wait for the finish of building row table.
