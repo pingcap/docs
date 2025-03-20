@@ -28,8 +28,8 @@ To view the **Cluster** page, take the following steps:
 3. Click the name of your target cluster. The cluster overview page is displayed, where you can view detailed information about your cluster, including:
 
     - Advanced Metrics
-    - Top Slow Queries
-    - TopSQL
+    - Top Slow Queries (only supported when cluster version >= 8.1.1 or cluster version >= 7.5.4)
+    - TopSQL (only supported when cluster version >= 8.1.1 or cluster version >= 7.5.4)
     - Benchmark Report
 
 ## Monitor advanced metrics
