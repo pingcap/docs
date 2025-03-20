@@ -219,9 +219,6 @@
        - [Overview](/garbage-collection-overview.md)
        - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
-  - Optimize Resource Allocation
-    - [Overview of Resource Allocation](/tidb-cloud/optimize-resource-allocation.md)
-    - [Resource Control](/tidb-resource-control.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
@@ -748,9 +745,6 @@
   - Connected Care Support Service Features
     - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
-    - Connected: IM Subscription for TiDB Cloud Alerts
-      - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
-      - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)

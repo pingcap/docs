@@ -112,17 +112,15 @@ The following are alerts about Data Migration:
 
     Recommended action: check the error message on the data migration page, and see [Migration errors and solutions](#migration-errors-and-solutions) for help.
 
-- "Data migration job has been paused for more than 6 hours during incremental migration" 
+- "Data migration job has been paused for more than 6 hours during incremental migration"
 
-    Recommended action: resume the data migration job or ignore this alert.     
+    Recommended action: resume the data migration job or ignore this alert.
 
 - "Replication lag is larger than 10 minutes and stilling increasing for more than 20 minutes"
 
     - Recommended action: contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help.
 
 If you need help to address these alerts, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
-
-For more information about how to subscribe to alert emails, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
 
 ## See also
 

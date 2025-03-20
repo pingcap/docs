@@ -25,8 +25,6 @@ Built-in alerting refers to the cluster alerting mechanism that TiDB Cloud provi
 
 On the Alerts page of the TiDB Cloud console, you can view alerts of your cluster, edit alert rules, and subscribe to alert notification emails.
 
-For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
-
 ## Cluster events
 
 In TiDB Cloud, an event indicates a change in your TiDB Cloud cluster. TiDB Cloud logs the historical events at the cluster level to help you track cluster activities. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.

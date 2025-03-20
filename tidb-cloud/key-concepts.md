@@ -37,10 +37,7 @@ TiDB Cloud Dedicated lets you adjust its compute and storage resources separatel
 
 ## High availability
 
-TiDB Cloud ensures high availability in both TiDB Cloud Serverless and TiDB Cloud Dedicated clusters:
-
-- [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md)
-- [High Availability in TiDB Cloud Dedicated](/tidb-cloud/high-availability-with-multi-az.md)
+TiDB Cloud ensures high availability in both TiDB Cloud clusters. See [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md).
 
 ## Monitoring
 
