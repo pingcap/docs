@@ -3,10 +3,10 @@ title: PingCAP Documentation
 hide_sidebar: true
 hide_commit: true
 hide_leftNav: true
-summary: TiDB Documentation provides how-to guides and references for using TiDB Cloud and TiDB Self-Managed, including data migration and application building. TiDB Cloud is a fully-managed Database-as-a-Service, offering easy access to the power of a cloud-native, distributed SQL database. TiDB is an open-source distributed SQL database with MySQL compatibility, horizontal scalability, and high availability. Developers can access documentation for application development and explore additional resources such as TiDB Playground, PingCAP Education, and community engagement opportunities.
+summary: TiDB Documentation provides how-to guides and references for using TiDB Cloud, including data migration and application building. TiDB Cloud is a fully-managed Database-as-a-Service, offering easy access to the power of a cloud-native, distributed SQL database. TiDB is an open-source distributed SQL database with MySQL compatibility, horizontal scalability, and high availability. Developers can access documentation for application development and explore additional resources such as Learning Center, Playground, and community engagement opportunities.
 ---
 
-<DocHomeContainer title="TiDB Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud Serverless, TiDB Cloud Dedicated and TiDB Self-Managed, migrate data, and build your applications on the database." ctaLabel="Start TiDB Cloud Serverless for Free" ctaLink="https://tidbcloud.com/free-trial">
+<DocHomeContainer title="TiDB Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud Serverless, migrate data, and build your applications on the database." ctaLabel="Start TiDB Cloud Serverless for Free" ctaLink="https://tidbcloud.com/free-trial">
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
@@ -48,75 +48,19 @@ Planned features and releases for TiDB Cloud.
 
 </DocHomeSection>
 
-<DocHomeSection label="TiDB Self-Managed" anchor="tidb-self-managed" id="tidb-self-managed">
-
-<!-- Localization note for TiDB:
-
-- English: use distributed SQL, and start to emphasize HTAP
-- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
-- Japanese: use NewSQL because it is well-recognized
-
--->
-
-TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB in a self-hosted environment or on the cloud.
-
-<DocHomeCardContainer>
-
-<DocHomeCard href="/tidb/stable/overview" label="What is TiDB Self-Managed" icon="oss-product-blue">
-
-Learn what is TiDB Self-Managed and its key features.
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidb/stable/quick-start-with-tidb" label="Get started with TiDB Self-Managed" icon="oss-getstarted-blue">
-
-Walks you through the quickest way to get started with TiDB Self-Managed.
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidb/stable/production-deployment-using-tiup" label="Deploy a Local TiDB Cluster" icon="oss-deploy-blue">
-
-Learn how to deploy TiDB locally in a production environment.
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidb/stable/dev-guide-overview" label="Developer Guide" icon="oss-developer-blue">
-
-For application developers using TiDB Self-Managed.
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidb/stable/mysql-compatibility" label="MySQL Compatibility" icon="oss-mysql-blue">
-
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0.
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidb/dev/tidb-roadmap" label="TiDB Self-Managed Roadmap" icon="oss-roadmap-blue">
-
-Planned features and release dates for TiDB Self-Managed.
-
-</DocHomeCard>
-
-</DocHomeCardContainer>
-
-The open-source TiDB platform is released under the Apache 2.0 license and is supported by the community. [View on GitHub](https://github.com/pingcap/tidb)
-
-</DocHomeSection>
-
 <DocHomeSection label="More Resources" anchor="resources" id="resources">
 
 <DocHomeCardContainer>
 
 <DocHomeCard href="https://www.pingcap.com/education/" label="Learning Center" icon="global-tidb-education">
 
-Learn TiDB Cloud and TiDB Self-Managed through well-designed online courses and instructor-led training.
+Learn TiDB Cloud through well-designed online courses and instructor-led training.
 
 </DocHomeCard>
 
 <DocHomeCard href="https://www.pingcap.com/blog/" label="Blog" icon="global-tidb-blog">
 
-Read great articles about TiDB Cloud and TiDB Self-Managed.
+Read great articles about TiDB Cloud.
 
 </DocHomeCard>
 
