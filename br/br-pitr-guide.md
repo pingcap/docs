@@ -54,7 +54,7 @@ The fields are explained as follows:
 - `start`: the start timestamp of the log backup task.
 - `end`: the end timestamp of the log backup task. Currently, this field does not take effect.
 - `storage`: the URI of the external storage for the log backup.
-- `speed(est.)`: the current data transfer rate of the log backup. This value is estimated based on recent samples over a few seconds. For more accurate traffic statistics, you can check the `Log Backup` section under the `tikv-details` monitoring dashboard.
+- `speed(est.)`: the current data transfer rate of the log backup. This value is estimated based on recent samples over a few seconds. For more accurate traffic statistics, you can check the `Log Backup` row in the `tikv-details` dashboard at Grafana.
 - `checkpoint[global]`: the current progress of the log backup. You can use PITR to restore to a point in time before this timestamp.
 
 If the log backup task is paused, the `log status` command outputs additional fields to display the details of the pause. For example:
