@@ -201,7 +201,7 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
 
 ### HashJoin
 
-HashJoin executor has two versions, named HashJoinV1 and HashJoinV2 respectively. We can chooses them by system variable [`tidb_hash_join_version`](/system-variables.md#tidb_hash_join_version-从-v840-版本开始引入). The following introduces execution process of these two versions respectively.
+The HashJoin operator has two versions: HashJoinV1 and HashJoinV2. You can specify the desired version using the [`tidb_hash_join_version`](/system-variables.md#tidb_hash_join_version-new-in-v840) system variable. The following sections describe the execution process of each version respectively.
 
 #### HashJoinv1
 
