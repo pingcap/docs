@@ -9,13 +9,6 @@ TiDB is a MySQL-compatible database, TiDB Cloud Serverless is a fully managed Ti
 
 In this tutorial, you can learn how to connect to your TiDB Cloud Serverless cluster with Looker Studio.
 
-> **Note:**
->
-> Most steps in this tutorial work with TiDB Cloud Dedicated as well. However, for TiDB Cloud Dedicated, you need to note the following:
-> 
-> - Import your dataset following [Import data from files to TiDB Cloud](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud).
-> - Get the connection information for your cluster following [Connect to TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md). When connecting to TiDB Cloud Dedicated, you need to allow access from `142.251.74.0/23`. For more information about connections from Looker Studio, see [Looker Studio documentation](https://support.google.com/looker-studio/answer/7088031#zippy=%2Cin-this-article).
-
 ## Prerequisites
 
 To complete this tutorial, you need:

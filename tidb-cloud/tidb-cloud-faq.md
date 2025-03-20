@@ -104,7 +104,7 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 ### Does TiDB Cloud support incremental backups?
 
-No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Cloud Dedicated cluster](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) or [Use PITR in a TiDB Cloud Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
+No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Cloud Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 ## HTAP FAQs
 
@@ -166,31 +166,12 @@ For TiDB Cloud Serverless clusters, TiDB Cloud ensures cluster security with the
 
 ### How do I connect to my database in a TiDB cluster?
 
-<SimpleTab>
-<div label="TiDB Cloud Dedicated">
-
-For a TiDB Cloud Dedicated cluster, the steps to connect to your cluster are simplified as follows:
-
-1. Authorize your network.
-2. Set up your database users and login credentials.
-3. Download and configure TLS for your cluster server.
-4. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
-
-For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
-
-</div>
-
-<div label="TiDB Cloud Serverless">
-
 For a TiDB Cloud Serverless cluster, the steps to connect to your cluster are simplified as follows:
 
 1. Set a database user and login credential.
 2. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
 
 For more information, see [Connect to Your TiDB Cloud Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
-
-</div>
-</SimpleTab>
 
 ## Support FAQ
 

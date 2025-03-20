@@ -7,10 +7,6 @@ summary: Learn how to create your TiDB Cloud Serverless cluster.
 
 This document describes how to create a TiDB Cloud Serverless cluster in the [TiDB Cloud console](https://tidbcloud.com/).
 
-> **Tip:**
->
-> To learn how to create a TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md).
-
 ## Before you begin
 
 If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.

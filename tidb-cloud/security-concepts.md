@@ -190,8 +190,6 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 - Acts as a firewall to restrict cluster access to trusted IP addresses.
 
-- For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
-
 **Best practices:** Regularly audit and update the access list to maintain security.
 
 ## Data access control

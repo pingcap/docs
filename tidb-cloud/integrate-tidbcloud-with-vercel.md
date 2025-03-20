@@ -36,19 +36,11 @@ One Vercel project can only connect to one TiDB Cloud cluster. To change the int
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
+You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one:
 
-- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-
-    > **Note:**
-    >
-    > The TiDB Cloud Vercel integration supports creating TiDB Cloud Serverless clusters. You can also create one later during the integration process.
-
-- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
-
-    > **Note:**
-    >
-    > For TiDB Cloud Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address).
+> **Note:**
+>
+> The TiDB Cloud Vercel integration supports creating TiDB Cloud Serverless clusters. You can also create one later during the integration process.
 
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project in TiDB Cloud. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 

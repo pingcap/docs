@@ -8,10 +8,6 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 This document describes how to back up and restore your TiDB Cloud Serverless cluster data on TiDB Cloud.
 
-> **Tip:**
->
-> To learn how to back up and restore TiDB Cloud Dedicated cluster data, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md).
-
 ## Automatic backups
 
 TiDB Cloud Serverless automatically backs up your cluster data, allowing you to restore data from a backup snapshot to minimize data loss in the event of a disaster.
@@ -29,9 +25,9 @@ Automatic backup settings vary between free clusters and scalable clusters, as s
 - **Backup Cycle** is the frequency at which backups are taken.
 
 - **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
-   
+
 - **Backup Time** is the time when the backup starts to be scheduled. Note that the final backup time might fall behind the configured backup time.
-   
+
     - Free clusters: the backup time is a randomly fixed time.
     - Scalable clusters: you can configure the backup time to every half an hour. The default value is a randomly fixed time.
 

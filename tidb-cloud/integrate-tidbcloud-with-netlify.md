@@ -22,10 +22,7 @@ You are expected to have a Netlify account and CLI. If you do not have any, refe
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
-
-- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-- [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
+You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
 
 One TiDB Cloud cluster can connect to multiple Netlify sites.
 

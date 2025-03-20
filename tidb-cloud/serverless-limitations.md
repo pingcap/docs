@@ -21,7 +21,7 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 ### Connection
 
 - Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Cloud Serverless clusters.
-- No [IP Access list](/tidb-cloud/configure-ip-access-list.md) support.
+- No IP Access list support.
 
 ### Encryption
 
@@ -30,7 +30,7 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 
 ### Maintenance window
 
-- [Maintenance window](/tidb-cloud/configure-maintenance-window.md) is currently unavailable.
+- Maintenance window is currently unavailable.
 
 ### Monitoring and diagnosis
 

@@ -72,16 +72,16 @@ To create a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
 - For more information about estimation practice, see [Size Your TiDB](/tidb-cloud/size-your-cluster.md).
-- For configurations of the TiDB Cloud Dedicated cluster, see [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md). Configure the cluster size for TiDB, TiKV, and TiFlash (optional) respectively.
+- For configurations of the TiDB Cloud Serverless cluster, see [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md). Configure the cluster size for TiDB, TiKV, and TiFlash (optional) respectively.
 - For how to plan and optimize your PoC credits consumption effectively, see [FAQ](#faq) in this document.
 - For more information about scaling, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
-Once a dedicated PoC cluster is created, you are ready to load data and perform a series of tests. For how to connect to a TiDB cluster, see [Connect to Your TiDB Cloud Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+Once a dedicated PoC cluster is created, you are ready to load data and perform a series of tests. For how to connect to a TiDB cluster, see [Connect to Your TiDB Cloud Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
 For a newly created cluster, note the following configurations:
 
 - The default time zone (the **Create Time** column on the Dashboard) is UTC. You can change it to your local time zone by following [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization).
-- The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually. For the default backup time and more details, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
+- The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually.
 
 ## Step 4. Adapt your schemas and SQL
 
@@ -130,7 +130,7 @@ You can import data in various formats to TiDB Cloud:
 
 Now you have created the environment, adapted the schemas, and imported data. It is time to test your workload.
 
-Before testing the workload, consider performing a manual backup, so that you can restore the database to its original state if needed. For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup).
+Before testing the workload, consider performing a manual backup, so that you can restore the database to its original state if needed.
 
 After kicking off the workload, you can observe the system using the following methods:
 
@@ -175,7 +175,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup) and [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## Step 8. Clean up the environment and finish the PoC
 

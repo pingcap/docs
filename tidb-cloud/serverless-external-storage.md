@@ -7,8 +7,6 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 If you want to import data from or export data to an external storage in a TiDB Cloud Serverless cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for TiDB Cloud Serverless clusters.
 
-If you need to configure these external storages for a TiDB Cloud Dedicated cluster, see [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/config-s3-and-gcs-access.md).
-
 ## Configure Amazon S3 access
 
 To allow a TiDB Cloud Serverless cluster to access the source data in your Amazon S3 bucket, configure the bucket access for the cluster using either of the following methods:
