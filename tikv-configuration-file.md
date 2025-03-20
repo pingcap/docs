@@ -1068,8 +1068,8 @@ Configuration items related to Raftstore.
 ### `inspect-cpu-util-thd` <span class="version-mark">New in v7.6.0</span>
 
 + The threshold for determining whether a TiKV node is in a busy state during slow node detection.
-+ Value range: `[0%, 100%]`
-+ Default value: `40%`
++ Value range: `[0, 1]`
++ Default value: `0.4`, which means `40%`.
 
 ### `inspect-kvdb-interval` <span class="version-mark">New in v8.1.2</span>
 
@@ -1084,7 +1084,7 @@ Configuration items related to Raftstore.
 ### `request-voter-replicated-index-interval` <span class="version-mark">New in v6.6.0</span>
 
 + Controls the interval at which the Witness node periodically retrieves the replicated Raft log position from voting nodes.
-+ Default value: 5 minutes
++ Default value: `5m`, which means 5 minutes.
 
 ### `slow-trend-unsensitive-cause` <span class="version-mark">New in v6.6.0</span>
 
