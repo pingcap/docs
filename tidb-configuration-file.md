@@ -399,6 +399,11 @@ Configuration items related to security.
 - The path of the SSL private key file used to connect TiKV or PD with TLS.
 - Default value: ""
 
+### `cluster-verify-cn`
+
+- A list of acceptable X.509 Common Names in certificates presented by clients. Requests are permitted only when the presented Common Name is an exact match with one of the entries in the list.
+- Default value: [], which means that the client certificate CN check is disabled.
+
 ### `spilled-file-encryption-method`
 
 + Determines the encryption method used for saving the spilled files to disk.
@@ -435,13 +440,13 @@ Configuration items related to security.
 
 ### `session-token-signing-cert` <span class="version-mark">New in v6.4.0</span>
 
-+ The certificate file path, which is used by [TiProxy](https://docs.pingcap.com/tidb/v7.6/tiproxy-overview) for session migration.
++ The certificate file path, which is used by [TiProxy](https://docs.pingcap.com/tidb/stable/tiproxy-overview) for session migration.
 + Default value: ""
 + Empty value will cause TiProxy session migration to fail. To enable session migration, all TiDB nodes must set this to the same certificate and key. This means that you should store the same certificate and key on every TiDB node.
 
 ### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
 
-+ The key file path used by [TiProxy](https://docs.pingcap.com/tidb/v7.6/tiproxy-overview) for session migration.
++ The key file path used by [TiProxy](https://docs.pingcap.com/tidb/stable/tiproxy-overview) for session migration.
 + Default value: ""
 + Refer to the descriptions of [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640).
 
