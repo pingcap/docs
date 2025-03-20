@@ -282,6 +282,8 @@ Dynamic privileges include:
 * `RESTRICTED_USER_ADMIN` prohibits privilege owners to have their access revoked by SUPER users when SEM is enabled.
 * `RESTRICTED_CONNECTION_ADMIN` allows privilege owners to kill connections of `RESTRICTED_USER_ADMIN` users. This privilege affects `KILL` and `KILL TIDB` statements.
 * `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
+* `RESOURCE_GROUP_ADMIN` allows privilege owners to create, modify, or delete a resource group. For details, see [Manage resource groups](/tidb-resource-control-ru-groups.md#manage-resource-groups).
+* `RESOURCE_GROUP_USER` allows privilege owners to bind the current connection to a different resource group. For details, see [Bind resource groups](/tidb-resource-control-ru-groups.md#bind-resource-groups).
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
 
