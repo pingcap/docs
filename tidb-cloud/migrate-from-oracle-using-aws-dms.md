@@ -35,7 +35,6 @@ The following diagram illustrates the high-level architecture.
 
 Read the following prerequisites before you get started:
 
-- [AWS DMS Prerequisites](/tidb-cloud/migrate-from-mysql-using-aws-dms.md#prerequisites)
 - [AWS Cloud Account](https://aws.amazon.com)
 - [TiDB Cloud Account](https://tidbcloud.com)
 - [DBeaver](https://dbeaver.io/)
@@ -150,8 +149,3 @@ With AWS DMS, you can successfully migrate data from any upstream AWS RDS databa
 If you encounter any issues or failures during the migration, you can check the log information in [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
 
 ![Troubleshooting](/media/tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
-
-## See also
-
-- [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
-- [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
