@@ -255,7 +255,7 @@ build_hash_table:{concurrency:5, time:2.25s, fetch:1.06s, max_partition:1.06s, t
     - `total_partition`: The total execution time taken by all row table builders.
     - `max_build`: The longest execution time among all hash table builders.
     - `total_build`: The total execution time taken by all hash table builders.
-- `probe`: The execution information of reading data from the downstream operator and executing probe operations.
+- `probe`: The execution information of reading data from the downstream operator and performing probe operations.
     - `time`: The total time consumption of probing.
     - `fetch_and_wait`: The total time spent reading data from downstream and waiting for the data to be received by the upstream.
     - `max_worker_time`: The longest execution time among all workers, including reading data from downstream, executing probe operations, and waiting for the data received by the upstream.
