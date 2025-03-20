@@ -233,11 +233,6 @@
     - [Migrate from TiDB Self-Managed to TiDB Cloud](/tidb-cloud/migrate-from-op-tidb.md)
     - [Migrate from MySQL-Compatible Databases Using AWS DMS](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
-  - Import Data into TiDB Cloud Dedicated
-    - [Import Sample Data](/tidb-cloud/import-sample-data.md)
-    - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
-    - [Import Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
-    - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
   - Import Data into TiDB Cloud Serverless
     - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
     - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
@@ -294,15 +289,6 @@
   - [Use OpenAPI Specification with Next.js](/tidb-cloud/data-service-oas-with-nextjs.md)
   - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
-- Stream Data
-  - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
-  - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
-  - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-  - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
-  - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
-  - Reference
-    - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md)
-    - [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
 - Disaster Recovery
   - [Recovery Group Overview](/tidb-cloud/recovery-group-overview.md)
   - [Get Started](/tidb-cloud/recovery-group-get-started.md)
@@ -337,7 +323,6 @@
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
-  - [Billing for Changefeed](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
   - [Billing for Recovery Groups](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
   - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
@@ -655,8 +640,8 @@
   - [Metadata Lock](/metadata-lock.md)
   - [Use UUIDs](/best-practices/uuid.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
-- API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)   
-  - [Overview](/tidb-cloud/api-overview.md) 
+- API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Overview](/tidb-cloud/api-overview.md)
   - v1beta1
     - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
     - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
@@ -791,17 +776,3 @@
 
 - Release Notes
   - [2025](/tidb-cloud/tidb-cloud-release-notes.md)
-  - [2024](/tidb-cloud/release-notes-2024.md)
-  - [2023](/tidb-cloud/release-notes-2023.md)
-  - [2022](/tidb-cloud/release-notes-2022.md)
-  - [2021](/tidb-cloud/release-notes-2021.md)
-  - [2020](/tidb-cloud/release-notes-2020.md)
-- Maintenance Notification
-  - [[2024-09-15] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2024-09-15-console-maintenance.md)
-  - [[2024-04-18] TiDB Cloud Data Migration (DM) Feature Maintenance Notification](/tidb-cloud/notification-2024-04-18-dm-feature-maintenance.md)
-  - [[2024-04-16] TiDB Cloud Monitoring Features Maintenance Notification](/tidb-cloud/notification-2024-04-16-monitoring-features-maintenance.md)
-  - [[2024-04-11] TiDB Cloud Data Migration (DM) Feature Maintenance Notification](/tidb-cloud/notification-2024-04-11-dm-feature-maintenance.md)
-  - [[2024-04-09] TiDB Cloud Monitoring Features Maintenance Notification](/tidb-cloud/notification-2024-04-09-monitoring-features-maintenance.md)
-  - [[2023-11-14] TiDB Cloud Dedicated Scale Feature Maintenance Notification](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
-  - [[2023-09-26] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
-  - [[2023-08-31] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-08-31-console-maintenance.md)

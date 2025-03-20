@@ -20,7 +20,7 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 
 ### Connection
 
-- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Cloud Serverless clusters. 
+- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Cloud Serverless clusters.
 - No [IP Access list](/tidb-cloud/configure-ip-access-list.md) support.
 
 ### Encryption
@@ -34,7 +34,7 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 
 ### Monitoring and diagnosis
 
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
+- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
 - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently unavailable.
 - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) is currently unavailable.
 - [Index Insight](/tidb-cloud/tune-performance.md#index-insight-beta) is currently unavailable.
@@ -45,8 +45,8 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 
 ### Stream data
 
-- [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for TiDB Cloud Serverless currently.
-- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for TiDB Cloud Serverless currently.
+- Changefeed is not supported for TiDB Cloud Serverless currently.
+- The Data Migration feaure that migrates data from MySQL-compatible databases to TiDB Cloud is not supported for TiDB Cloud Serverless currently.
 
 ### Time to live (TTL)
 
