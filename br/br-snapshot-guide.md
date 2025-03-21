@@ -155,7 +155,7 @@ When you perform a snapshot backup, BR backs up system tables as tables with the
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/snap_client/systable_restore.go#L66)
+- Other system tables. See [Unrecoverable system tables](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)
 
 ```
 +-----------------------------------------------------+
