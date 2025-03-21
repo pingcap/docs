@@ -492,10 +492,10 @@ UPDATE data_table SET value = 'v1' WHERE id = 2;
 
 If the downstream table still contains `v1` when executing the second `UPDATE` statement, it violates the unique key constraint on the `value` column, resulting in the `CDC:ErrMySQLDuplicateEntryCDC` error.
 
-If the `CDC:ErrMySQLDuplicateEntryCDC` error occurs frequently, you can enable TiCDC safe mode by setting the `safe-mode=true` parameter in the `sink-uri` configuration:
+If the `CDC:ErrMySQLDuplicateEntryCDC` error occurs frequently, you can enable TiCDC safe mode by setting the `safe-mode=true` parameter in the [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)  configuration:
 
 ```
 mysql://user:password@host:port/?safe-mode=true
 ```
 
-In safe mode, TiCDC splits the `UPDATE` operation into `DELETE + INSERT` for execution, thus avoiding the unique key conflict error.
+In safe mode, TiCDC splits the `UPDATE` operation into `DELETE + REPLACE INTO` for execution, thus avoiding the unique key conflict error.
