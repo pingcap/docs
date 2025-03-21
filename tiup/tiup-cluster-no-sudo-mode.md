@@ -20,6 +20,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
         ```shell
         adduser tidb
         ```
+
     2. Configure the limits for the `tidb` user.
 
         ```shell
