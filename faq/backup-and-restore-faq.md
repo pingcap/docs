@@ -276,7 +276,7 @@ Note that even if you configures [table filter](/table-filter.md#syntax), **BR d
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
-- Other system tables
+- Other system tables. See [Unrecoverable system tables](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)
 
 ### How to deal with the error of `cannot find rewrite rule` during restoration?
 
