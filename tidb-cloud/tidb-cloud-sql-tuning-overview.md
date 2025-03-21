@@ -101,25 +101,4 @@ If you still cannot get better performance based on SQL performance tuning, you 
 
 For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts#troubleshoot-lock-conflicts).
 
-### Hotspot issues
-
-You can analyze hotspot issues using [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
-
-You can use Key Visualizer to analyze the usage patterns of TiDB clusters and troubleshoot traffic hotspots. This page provides a visual representation of the TiDB cluster's traffic over time.
-
-You can observe the following information in Key Visualizer. You may need to understand some [basic concepts](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts) first.
-
-- A large heat map that shows the overall traffic over time
-- The detailed information about a coordinate of the heat map
-- The identification information such as tables and indexes that is displayed on the left side
-
-In Key Visualizer, there are [four common heat map results](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#common-heatmap-types).
-
-- Evenly distributed workload: desired result
-- Alternating brightness and darkness along the X-axis (time): need to check the resources at peak times
-- Alternating brightness and darkness along the Y-axis: need to check the degree of hotspot aggregation generated
-- Bright diagonal lines: need to check the business model
-
-In both cases of X-axis and Y-axis alternating bright and dark, you need to address read and write pressure.
-
 For more information about SQL performance optimization, see [SQL Optimization](https://docs.pingcap.com/tidb/stable/sql-faq#sql-optimization) in SQL FAQs.

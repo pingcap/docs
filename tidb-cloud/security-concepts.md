@@ -166,55 +166,27 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 - Enables secure connectivity for SQL clients within your Virtual Private Cloud (VPC) to TiDB Cloud Dedicated clusters.
 
-- Supported by [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md) and [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
-
 **Best practices:** Use private endpoints in production to minimize public exposure and review configurations regularly.
 
 ### TLS (Transport Layer Security)
 
 - Encrypts communication between clients and servers to secure data transmission.
 
-- Setup guides available for both [Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md) and [Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md) clusters.
+- Setup guides available for [Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md) and clusters.
 
 **Best practices:** Ensure TLS certificates are current and rotate them periodically.
-
-### VPC peering
-
-- Establishes private connections between Virtual Private Clouds, enabling secure, seamless communication.
-
-- For more information, see [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md).
-
-**Best practices:** Use for critical workloads to avoid public internet exposure and monitor performance.
 
 ### IP access list
 
 - Acts as a firewall to restrict cluster access to trusted IP addresses.
 
-- For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+- For more information, see [Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
 
 **Best practices:** Regularly audit and update the access list to maintain security.
 
 ## Data access control
 
 TiDB Cloud safeguards static data with advanced encryption capabilities, ensuring security and compliance with industry regulations.
-
-**Customer-Managed Encryption Key (CMEK)**
-
-- Provides organizations full control over encryption for TiDB Cloud Dedicated clusters.
-
-- Encrypts static data and backups with CMEK keys when enabled.
-
-- For TiDB Cloud Dedicated clusters without CMEK, TiDB Cloud uses escrow keys; TiDB Cloud Serverless clusters rely exclusively on escrow keys.
-
-**Best practices:**
-
-- Regularly rotate CMEK keys to enhance security and meet compliance standards.
-
-- Encrypt backups consistently with CMEK keys for added protection.
-
-- Leverage CMEK for industries requiring strict compliance, such as HIPAA and GDPR.
-
-For more information, see [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md).
 
 ## Audit logging
 
@@ -229,15 +201,3 @@ Tracks key actions on the TiDB Cloud console, such as inviting users or managing
 - Integrate logs with SIEM tools for real-time monitoring and alerts.
 
 - Set retention policies to meet compliance requirements.
-
-### Database audit logging
-
-Records detailed database operations, including executed SQL statements and user access.
-
-**Best practices:**
-
-- Regularly review logs for unusual activity or unauthorized access.
-
-- Use logs for compliance reporting and forensic analysis.
-
-For more information, see [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md) and [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md).

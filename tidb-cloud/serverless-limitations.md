@@ -16,28 +16,27 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 
 ### Audit logs
 
-- [Database audit logging](/tidb-cloud/tidb-cloud-auditing.md) is currently unavailable.
+- Database audit logging is currently unavailable.
 
 ### Connection
 
-- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Cloud Serverless clusters.
-- No [IP Access list](/tidb-cloud/configure-ip-access-list.md) support.
+- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use VPC Peering to connect to TiDB Cloud Serverless clusters.
 
 ### Encryption
 
 - Data persisted in your TiDB Cloud Serverless cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), an optional second layer of encryption is available during the cluster creation process, providing an additional level of security beyond the default encryption at rest.
-- Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek.md) is currently unavailable.
+- Using customer-managed encryption keys (CMEK) is currently unavailable.
 
 ### Maintenance window
 
-- [Maintenance window](/tidb-cloud/configure-maintenance-window.md) is currently unavailable.
+- Maintenance window is currently unavailable.
 
 ### Monitoring and diagnosis
 
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
-- [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently unavailable.
-- [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) is currently unavailable.
-- [Index Insight](/tidb-cloud/tune-performance.md#index-insight-beta) is currently unavailable.
+- Third-party Monitoring integrations are currently unavailable.
+- Built-in Alerting is currently unavailable.
+- Key Visualizer is currently unavailable.
+- Index Insight is currently unavailable.
 
 ### Self-service upgrades
 

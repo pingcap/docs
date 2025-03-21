@@ -122,8 +122,6 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Airbyte](https://docs.tidb.io/tidbcloud/integrate-tidbcloud-with-airbyte)
 
-[Datadog](https://docs.tidb.io/tidbcloud/monitor-datadog-integration)
-
 [Zapier](https://docs.tidb.io/tidbcloud/integrate-tidbcloud-with-zapier)
 
 [Vercel](https://docs.tidb.io/tidbcloud/integrate-tidbcloud-with-vercel)

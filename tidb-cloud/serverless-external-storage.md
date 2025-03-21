@@ -7,8 +7,6 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 If you want to import data from or export data to an external storage in a TiDB Cloud Serverless cluster, you need to configure cross-account access. This document describes how to configure access to an external storage for TiDB Cloud Serverless clusters.
 
-If you need to configure these external storages for a TiDB Cloud Dedicated cluster, see [Configure External Storage Access for TiDB Cloud Dedicated](/tidb-cloud/config-s3-and-gcs-access.md).
-
 ## Configure Amazon S3 access
 
 To allow a TiDB Cloud Serverless cluster to access the source data in your Amazon S3 bucket, configure the bucket access for the cluster using either of the following methods:
@@ -233,7 +231,7 @@ To create a SAS token using an Azure ARM template, take the following steps:
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
     4. Click **Review + create** or **Next** to review the deployment. Click **Create** to start the deployment.
-   
+
     5. After it completes, you will be redirected to the deployment overview page. Navigate to the **Outputs** section to get the SAS token.
 
 If you have any trouble creating a SAS token with the Azure ARM template, take the following steps to create one manually:
@@ -242,7 +240,7 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
 <summary>Click here to see details</summary>
 
 1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
-   
+
 2. On your **Storage account** page, click the **Security+network**, and then click **Shared access signature**.
 
    ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)

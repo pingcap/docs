@@ -33,14 +33,6 @@ The recommended use cases of SQL Editor are as follows:
 
 2. Click your cluster name, and then click **SQL Editor** in the left navigation pane.
 
-    > **Note:**
-    >
-    > In the following cases, the **SQL Editor** entry is displayed in gray and not clickable.
-    >
-    > - Your TiDB Cloud Dedicated cluster is earlier than v6.5.0. To use SQL Editor, you need to contract [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md) to upgrade your clusters.
-    > - Your TiDB Cloud Dedicated cluster is just created and the running environment for SQL Editor is still in preparation. In this case, wait for a few minutes and Chat2Query will be available.
-    > - Your TiDB Cloud Dedicated cluster is [paused](/tidb-cloud/pause-or-resume-tidb-cluster.md).
-
 ## Enable or disable AI to generate SQL queries
 
 PingCAP takes the privacy and security of users' data as a top priority. The AI capacity of Chat2Query in SQL Editor only needs to access database schemas to generate SQL queries, not your data itself. For more information, see [Chat2Query Privacy FAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query).

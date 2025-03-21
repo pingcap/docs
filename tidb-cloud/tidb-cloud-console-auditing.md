@@ -110,8 +110,6 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | DeleteAWSPrivateEndPoint       | Delete AWS private endpoint                                                      |
 | SubscribeAlerts                | Subscribe alerts                                                                 |
 | UnsubscribeAlerts              | Unsubscribe alerts                                                               |
-| CreateDatadogIntegration       | Create datadog integration                                                       |
-| DeleteDatadogIntegration       | Delete datadog integration                                                       |
 | CreateVercelIntegration        | Create vercel integration                                                        |
 | DeleteVercelIntegration        | Delete vercel integration                                                        |
 | CreatePrometheusIntegration    | Create Prometheus integration                                                    |

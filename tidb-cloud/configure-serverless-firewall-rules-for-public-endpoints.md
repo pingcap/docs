@@ -7,20 +7,16 @@ summary: Learn how to configure and manage firewall rules with public access to 
 
 This document describes the public connectivity option for TiDB Cloud Serverless. You will learn key concepts for securely managing a TiDB Cloud Serverless cluster accessible via the internet.
 
-> **Note:**
->
-> This document applies to **TiDB Cloud Serverless**. For instructions on configuring an IP access list for **TiDB Cloud Dedicated**, see [Configure an IP Access List for TiDB Cloud Dedicated](/tidb-cloud/configure-ip-access-list.md).
-
 ## Public endpoints
 
 Configuring public access on your TiDB Cloud Serverless cluster allows the cluster access through a public endpoint. That is, the cluster is accessible through the internet. The public endpoint is a publicly resolvable DNS address. The term "authorized network" refers to a range of IP addresses you choose to permit access to your cluster. These permissions are enforced through **firewall rules**.
 
 ### Characteristics of public access
 
-- Only specified IP addresses can access TiDB Cloud Serverless.  
-    - By default, all IP addresses (`0.0.0.0 - 255.255.255.255`) are allowed.  
-    - You can update allowed IP addresses after cluster creation.  
-- Your cluster has a publicly resolvable DNS name.  
+- Only specified IP addresses can access TiDB Cloud Serverless.
+    - By default, all IP addresses (`0.0.0.0 - 255.255.255.255`) are allowed.
+    - You can update allowed IP addresses after cluster creation.
+- Your cluster has a publicly resolvable DNS name.
 - Network traffic to and from your cluster is routed over the **public internet** rather than a private network.
 
 ### Firewall rules

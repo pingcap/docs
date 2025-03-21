@@ -16,7 +16,7 @@ The features of the `tidbcloud_import` resource include the following:
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Create and run an import task
 
@@ -189,7 +189,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
 
 > **Note:**
 >
-> To allow TiDB Cloud to access your files in the Amazon S3 bucket, you need to [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) first.
+> To allow TiDB Cloud to access your files in the Amazon S3 bucket, you need to [configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access) first.
 
 1. Create an `import` directory, and then create a `main.tf` inside it. For example:
 

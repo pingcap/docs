@@ -77,7 +77,6 @@ At the organization level, TiDB Cloud defines four roles, in which `Organization
 | Manage organization settings, such as projects, API keys, and time zones. | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Invite users to or remove users from an organization, and edit organization roles of users. | ✅ | ❌ | ❌ | ❌ | ❌ |
 | All the permissions of `Project Owner` for all projects in the organization. | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Create projects with Customer-Managed Encryption Key (CMEK) enabled. | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Edit payment information for the organization. | ✅ | ✅ | ❌ | ❌ | ❌ |
 | View bills and use [cost explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer). | ✅ | ✅ | ✅ | ❌ | ❌ |
 | Manage TiDB Cloud [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ❌ | ✅ | ❌ |
@@ -102,11 +101,9 @@ At the project level, TiDB Cloud defines three roles, in which `Project Owner` c
 |---|---|---|---|---|
 | Manage project settings | ✅ | ❌ | ❌ | ❌ |
 | Invite users to or remove users from a project, and edit project roles of users. | ✅ | ❌ | ❌ | ❌ |
-| Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the project. | ✅ | ❌ | ❌ | ❌ |
 | Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all TiDB Cloud Serverless clusters in the project. | ✅ | ❌ | ❌ | ❌ |
 | Manage cluster operations in the project, such as cluster creation, modification, and deletion. | ✅ | ❌ | ❌ | ❌ |
 | Manage branches for TiDB Cloud Serverless clusters in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ | ❌ |
-| Manage [recovery groups](/tidb-cloud/recovery-group-overview.md) for TiDB Cloud Dedicated clusters in the project, such as recovery group creation and deletion. | ✅ | ❌ | ❌ | ❌ |
 | Manage cluster data such as data import, data backup and restore, and data migration. | ✅ | ✅ | ❌ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read-only operations such as using or creating endpoints to read data. | ✅ | ✅ | ✅ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read and write operations. | ✅ | ✅ | ❌ | ❌ |

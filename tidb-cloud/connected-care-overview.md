@@ -32,7 +32,6 @@ The following table provides an overview for each support plan in the Connected 
 | Initial response time                                                                                                                                                                                                              | -                            | Business hours                               | 7x24                                           | 7x24                                      |
 | [Connected: Clinic service](/tidb-cloud/tidb-cloud-clinic.md)                                                                                                                                                                      | -                            | -                                            | ✔                                              | ✔                                         |
 | [Connected: AI chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)                                                                                                                                                                 | -                            | -                                            | ✔                                              | ✔                                         |
-| Connected: IM subscription for TiDB Cloud alerts ([Slack](/tidb-cloud/monitor-alert-slack.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md))                                                                                          | -                            | -                                            | ✔                                              | ✔                                         |
 | Connected: IM ticket creation and update subscription ([Slack](/tidb-cloud/connected-slack-ticket-creation.md), [Lark](/tidb-cloud/connected-lark-ticket-creation.md)) | -                            | -                                            | ✔                                              | ✔                                         |
 | Connected: IM interaction for support tickets ([Slack](/tidb-cloud/connected-slack-ticket-interaction.md), [Lark](/tidb-cloud/connected-lark-ticket-interaction.md))   | -                            | -                                            | -                                              | ✔                                         |
 | Technical Account Manager                                                                                                                                                                                                          | -                            | -                                            | -                                              | ✔                                         |
@@ -52,10 +51,6 @@ The support plans in the Connected Care services introduce a completely new set 
 - Connected: AI chat in IM
 
     This feature enables you to chat with an AI assistant through an instant message (IM) tool to receive immediate answers to your questions. For more information, see [Connected: AI chat in IM](/tidb-cloud/connected-ai-chat-in-im.md).
-
-- Connected: IM subscription for TiDB Cloud alerts
-
-    This feature provides you with an easy way to subscribe to alert notifications via an IM tool, keeping you informed about critical updates. For more information, see [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md) and [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md).
 
 - Connected: IM ticket creation and update subscription
 

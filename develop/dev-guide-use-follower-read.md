@@ -25,14 +25,6 @@ For more information about handling hotspot, see [TiDB Hotspot Problem Handling]
 
 </CustomContent>
 
-<CustomContent platform="tidb-cloud">
-
-You can visually analyze whether your application has a hotspot Region on the [TiDB Cloud Key Visualizer Page](/tidb-cloud/tune-performance.md#key-visualizer). You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
-
-For more information about handling hotspot, see [TiDB Hotspot Problem Handling](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
-
-</CustomContent>
-
 If read hotspots are unavoidable or the changing cost is very high, you can try using the Follower Read feature to better load the balance of reading requests to the follower Region.
 
 ### Reduce latency for geo-distributed deployments
@@ -157,7 +149,6 @@ public static class AuthorDAO {
 <CustomContent platform="tidb-cloud">
 
 - [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
-- [TiDB Cloud Key Visualizer Page](/tidb-cloud/tune-performance.md#key-visualizer)
 
 </CustomContent>
 

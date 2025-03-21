@@ -43,15 +43,9 @@ To demonstrate the effect of the `swap_flag`, here are two tables with an identi
 
 In the screenshot of the [Key Visualizer](/dashboard/dashboard-key-visualizer.md) below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
 
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-In the screenshot of the [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) below, you can see that writes are concentrated in a single region of the `uuid_demo_2` table that has the order of the fields swapped in the binary format.
-
-</CustomContent>
-
 ![Key Visualizer](/media/best-practices/uuid_keyviz.png)
+
+</CustomContent>
 
 ```sql
 CREATE TABLE `uuid_demo_1` (
