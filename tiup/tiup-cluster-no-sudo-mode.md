@@ -29,6 +29,8 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
         tidb           hard    nofile          1000000
         tidb           soft    stack          32768
         tidb           hard    stack          32768
+        tidb           soft     core            unlimited
+        tidb           hard    core            unlimited
         EOF
         ```
 
