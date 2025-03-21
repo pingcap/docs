@@ -33,7 +33,7 @@ Data Service enables you to access TiDB Cloud data via an HTTPS request using a 
 
 ## Scalability
 
-TiDB Cloud Dedicated lets you adjust its compute and storage resources separately to match your data volume or workload changes. [Learn more about scalability](/tidb-cloud/scalability-concepts.md).
+[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) scales automatically based on your application's workload changes. [Learn more about scalability](/tidb-cloud/scalability-concepts.md).
 
 ## High availability
 

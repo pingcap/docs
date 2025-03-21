@@ -160,7 +160,7 @@ The following table lists the actions supported by TiDB Cloud App. Note that som
 
 | Action | Description | Resource |
 |---|---|---|
-| Find Cluster | Finds an existing TiDB Cloud Serverless or TiDB Cloud Dedicated cluster. | None |
+| Find Cluster | Finds an existing TiDB Cloud Serverless cluster. | None |
 | Create Cluster | Creates a new cluster. Only supports creating a TiDB Cloud Serverless cluster. | None |
 | Find Database | Finds an existing database. | A TiDB Cloud Serverless cluster |
 | Create Database | Creates a new database. | A TiDB Cloud Serverless cluster |

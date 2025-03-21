@@ -48,8 +48,6 @@ In some cases, the SQL proxy account username is exactly the same as the TiDB Cl
 
 | Environment | Email length | Username format |
 | ----------- | ------------ | --------------- |
-| TiDB Cloud Dedicated | <= 32 characters | Full email address |
-| TiDB Cloud Dedicated | > 32 characters | `prefix($email, 23)_prefix(base58(sha1($email)), 8)` |
 | TiDB Cloud Serverless | <= 15 characters | `serverless_unique_prefix + "." + email` |
 | TiDB Cloud Serverless | > 15 characters | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
 
@@ -57,8 +55,6 @@ Examples:
 
 | Environment | Email address | SQL proxy account username |
 | ----------- | ----- | -------- |
-| TiDB Cloud Dedicated | `user@pingcap.com` | `user@pingcap.com` |
-| TiDB Cloud Dedicated | `longemailaddressexample@pingcap.com` | `longemailaddressexample_48k1jwL9` |
 | TiDB Cloud Serverless | `u1@pingcap.com` | `{user_name_prefix}.u1@pingcap.com` |
 | TiDB Cloud Serverless | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9`|
 

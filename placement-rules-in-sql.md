@@ -58,16 +58,6 @@ For detailed configuration methods, see the following examples:
 | Deployment with TiUP | [Geo-distributed deployment topology](/geo-distributed-deployment-topology.md) |
 | Deployment with TiDB Operator | [Configure a TiDB cluster in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-data-high-availability) |
 
-> **Note:**
->
-> For TiDB Cloud Dedicated clusters, you can skip these label configuration steps because the labels on TiKV nodes in TiDB Cloud Dedicated clusters are configured automatically.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-For TiDB Cloud Dedicated clusters, labels on TiKV nodes are configured automatically.
-
 </CustomContent>
 
 To view all available labels in the current TiKV cluster, you can use the [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md) statement:

@@ -11,6 +11,7 @@ TiDB Cloud provides the following two options of cluster tiers. Before creating 
 
 - [TiDB Cloud Serverless](#tidb-cloud-serverless)
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
+<!--TBD, ToDo-->
 
 ## TiDB Cloud Serverless
 
@@ -89,6 +90,8 @@ To get the prefix for your cluster, take the following steps:
 Some of TiDB Cloud features are partially supported or not supported on TiDB Cloud Serverless. See [TiDB Cloud Serverless Limitations](/tidb-cloud/serverless-limitations.md) for details.
 
 ## TiDB Cloud Dedicated
+
+<!--TBD, ToDo-->
 
 TiDB Cloud Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 

@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 to accomplish the fol
 
 > **Note:**
 >
-> This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial works with TiDB Cloud Serverless.
 
 ## Prerequisites
 
@@ -77,9 +77,6 @@ bundle add mysql2 dotenv
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -115,71 +112,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
    > For TiDB Cloud Serverless, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
-
-</div>
-<div label="TiDB Cloud Dedicated">
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
-
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
-
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
-
-4. Run the following command to copy `.env.example` and rename it to `.env`:
-
-    ```shell
-    cp .env.example .env
-    ```
-
-5. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `{}` with connection parameters in the connection dialog:
-
-    ```dotenv
-    DATABASE_HOST={host}
-    DATABASE_PORT=4000
-    DATABASE_USER={user}
-    DATABASE_PASSWORD={password}
-    DATABASE_NAME=test
-    DATABASE_ENABLE_SSL=true
-    DATABASE_SSL_CA={downloaded_ssl_ca_path}
-    ```
-
-   > **Note**
-   >
-   > It is recommended to enable TLS connection when using the public endpoint to connect to a TiDB Cloud Dedicated cluster.
-   >
-   > To enable TLS connection, modify `DATABASE_ENABLE_SSL` to `true` and use `DATABASE_SSL_CA` to specify the file path of CA certificate downloaded from the connection dialog.
-
-6. Save the `.env` file.
-
-</div>
-<div label="TiDB Self-Managed">
-
-1. Run the following command to copy `.env.example` and rename it to `.env`:
-
-    ```shell
-    cp .env.example .env
-    ```
-
-2. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `{}` with your own TiDB connection information:
-
-    ```dotenv
-    DATABASE_HOST={host}
-    DATABASE_PORT=4000
-    DATABASE_USER={user}
-    DATABASE_PASSWORD={password}
-    DATABASE_NAME=test
-    ```
-
-   If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
-
-3. Save the `.env` file.
-
-</div>
-</SimpleTab>
 
 ### Step 4: Run the code and check the result
 

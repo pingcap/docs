@@ -29,7 +29,6 @@ The following table provides an overview for each support plan in the Connected 
 | Billing and account support                                                                                                                                                                                                        | ✔                            | ✔                                            | ✔                                              | ✔                                         |
 | Technical support                                                                                                                                                                                                                  | -                            | ✔                                            | ✔                                              | ✔                                         |
 | Initial response time                                                                                                                                                                                                              | -                            | Business hours                               | 7x24                                           | 7x24                                      |
-| [Connected: Clinic service](/tidb-cloud/tidb-cloud-clinic.md)                                                                                                                                                                      | -                            | -                                            | ✔                                              | ✔                                         |
 | [Connected: AI chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)                                                                                                                                                                 | -                            | -                                            | ✔                                              | ✔                                         |
 | Connected: IM ticket creation and update subscription ([Slack](/tidb-cloud/connected-slack-ticket-creation.md), [Lark](/tidb-cloud/connected-lark-ticket-creation.md)) | -                            | -                                            | ✔                                              | ✔                                         |
 | Connected: IM interaction for support tickets ([Slack](/tidb-cloud/connected-slack-ticket-interaction.md), [Lark](/tidb-cloud/connected-lark-ticket-interaction.md))   | -                            | -                                            | -                                              | ✔                                         |
@@ -42,10 +41,6 @@ The following table provides an overview for each support plan in the Connected 
 ## Differences between legacy support services and Connected Care support services
 
 The support plans in the Connected Care services introduce a completely new set of features as follows:
-
-- Connected: Clinic service
-
-    This feature offers an advanced monitoring and diagnostic service, Clinic, designed to help you quickly identify performance issues, optimize your database, and enhance overall performance with detailed analysis and actionable insights. For more information, see [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md).
 
 - Connected: AI chat in IM
 

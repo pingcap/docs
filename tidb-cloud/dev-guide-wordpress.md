@@ -9,10 +9,6 @@ TiDB is a MySQL-compatible database, TiDB Cloud Serverless is a fully managed Ti
 
 In this tutorial, you can learn how to use TiDB Cloud Serverless to run WordPress for free.
 
-> **Note:**
->
-> In addition to TiDB Cloud Serverless, this tutorial works with TiDB Cloud Dedicated and TiDB Self-Managed clusters as well. However, it is highly recommended to run WordPress with TiDB Cloud Serverless for cost efficiency.
-
 ## Prerequisites
 
 To complete this tutorial, you need:

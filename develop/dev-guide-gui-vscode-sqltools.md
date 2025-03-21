@@ -11,7 +11,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using Visual
 
 > **Note:**
 >
-> - This tutorial is compatible with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - This tutorial is compatible with TiDB Cloud Serverless.
 > - This tutorial also works with Visual Studio Code Remote Development environments, such as [GitHub Codespaces](https://github.com/features/codespaces), [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl).
 
 ## Prerequisites
@@ -45,9 +45,6 @@ To complete this tutorial, you need:
 ## Connect to TiDB
 
 Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
-
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -103,88 +100,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
         ![VS Code SQLTools: enter password to connect to TiDB Cloud Serverless](/media/develop/vsc-sqltools-password.jpg)
 
 8. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
-
-</div>
-<div label="TiDB Cloud Dedicated">
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
-
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
-
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
-
-4. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
-
-    ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
-
-5. In the setting pane, configure the following connection parameters:
-
-    - **Connection name**: give this connection a meaningful name.
-    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
-    - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the `host` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
-    - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
-    - **Password mode**: select **SQLTools Driver Credentials**.
-    - In the **MySQL driver specific options** area, configure the following parameters:
-
-        - **Authentication Protocol**: select **default**.
-        - **SSL**: select **Disabled**.
-
-    ![VS Code SQLTools: configure connection settings for TiDB Cloud Dedicated](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
-
-6. Click **TEST CONNECTION** to validate the connection to the TiDB Cloud Dedicated cluster.
-
-    1. In the pop-up window, click **Allow**.
-    2. In the **SQLTools Driver Credentials** dialog, enter the password of the TiDB Cloud Dedicated cluster.
-
-    ![VS Code SQLTools: enter password to connect to TiDB Cloud Dedicated](/media/develop/vsc-sqltools-password.jpg)
-
-7. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
-
-</div>
-<div label="TiDB Self-Managed">
-
-1. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
-
-    ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
-
-2. In the setting pane, configure the following connection parameters:
-
-    - **Connection name**: give this connection a meaningful name.
-    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
-    - **Connect using**: select **Server and Port**.
-    - **Server Address**: enter the IP address or domain name of your TiDB Self-Managed cluster.
-    - **Port**: enter the port number of your TiDB Self-Managed cluster.
-    - **Database**: enter the database that you want to connect to.
-    - **Username**: enter the username to use to connect to your TiDB Self-Managed cluster.
-    - **Password mode**:
-
-        - If the password is empty, select **Use empty password**.
-        - Otherwise, select **SQLTools Driver Credentials**.
-
-    - In the **MySQL driver specific options** area, configure the following parameters:
-
-        - **Authentication Protocol**: select **default**.
-        - **SSL**: select **Disabled**.
-
-    ![VS Code SQLTools: configure connection settings for TiDB Self-Managed](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
-
-3. Click **TEST CONNECTION** to validate the connection to the TiDB Self-Managed cluster.
-
-    If the password is not empty, click **Allow** in the pop-up window, and then enter the password of the TiDB Self-Managed cluster.
-
-    ![VS Code SQLTools: enter password to connect to TiDB Self-Managed](/media/develop/vsc-sqltools-password.jpg)
-
-4. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
-
-</div>
-</SimpleTab>
 
 ## Next steps
 
