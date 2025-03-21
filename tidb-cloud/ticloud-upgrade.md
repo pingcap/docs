@@ -1,7 +1,6 @@
 ---
 title: ticloud upgrade
 summary: The reference of `ticloud upgrade`.
-aliases: ['/tidbcloud/ticloud-update']
 ---
 
 # ticloud upgrade

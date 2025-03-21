@@ -1,7 +1,6 @@
 ---
 title: ticloud serverless shell
 summary: The reference of `ticloud serverless shell`.
-aliases: ['/tidbcloud/ticloud-connect']
 ---
 
 # ticloud serverless shell
