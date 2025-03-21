@@ -82,29 +82,12 @@ For connectivity, the steps for using TiDB Cloud clusters as a source or as a ta
 
 5. For the **Access to endpoint database** field, select the **Provide access information manually** checkbox and fill in cluster information as follows:
 
-    <SimpleTab>
-
-    <div label="TiDB Cloud Serverless">
-
     - **Server name**: `HOST` of TiDB Cloud Serverless cluster.
     - **Port**: `PORT` of TiDB Cloud Serverless cluster.
     - **User name**: User of TiDB Cloud Serverless cluster for migration. Make sure it meets DMS requirements.
     - **Password**: Password of the TiDB Cloud Serverless cluster user.
     - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set the mode to **none**.
     - (Optional) **CA certificate**: Use the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). For more information, see [TLS Connections to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-
-    </div>
-
-    <div label="TiDB Cloud Dedicated">
-
-    - **Server name**: `HOST` of TiDB Cloud Dedicated cluster.
-    - **Port**: `PORT` of TiDB Cloud Dedicated cluster.
-    - **User name**: User of TiDB Cloud Dedicated cluster for migration. Make sure it meets DMS requirements.
-    - **Password**: Password of TiDB Cloud Dedicated cluster user.
-    - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, it is highly recommended to set the mode to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set it to **none**.
-
-    </div>
-    </SimpleTab>
 
      ![Provide access information manually](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-connect-configure-endpoint.png)
 

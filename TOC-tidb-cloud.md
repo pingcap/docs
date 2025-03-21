@@ -160,7 +160,6 @@
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
-    - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - Analyze Performance
@@ -289,8 +288,6 @@
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
       - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
       - [TLS Connections to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
-  - Database Access Control
-    - [Configure Cluster Password Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
@@ -316,8 +313,6 @@
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
     - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
     - [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
-    - [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
-    - [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
     - [Use Import Resource](/tidb-cloud/terraform-use-import-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
@@ -544,7 +539,6 @@
       - [Perform Stale Read Using `tidb_read_staleness`](/tidb-read-staleness.md)
       - [Perform Stale Read Using `tidb_external_ts`](/tidb-external-ts.md)
     - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
-  - [Placement Rules in SQL](/placement-rules-in-sql.md)
   - System Tables
     - `mysql` Schema
       - [Overview](/mysql-schema/mysql-schema.md)
@@ -701,7 +695,6 @@
   - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
   - Connected Care Support Service Features
-    - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
