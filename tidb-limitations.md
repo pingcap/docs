@@ -68,7 +68,7 @@ You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configurati
 
 ## Limitations on indexes
 
-The maximum index length is 3072 bytes, equivalent to 768 characters using 4-byte UTF-8 encoding.
+The maximum index length is 3072 bytes, equivalent to 768 characters using 4-byte UTF-8 encoding. The maximum number of columns in a single index is limited to 16.
 
 <CustomContent platform="tidb">
 
