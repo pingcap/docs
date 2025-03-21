@@ -345,7 +345,6 @@
     - [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
     - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
     - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
-    - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
     - [`ALTER SEQUENCE`](/sql-statements/sql-statement-alter-sequence.md)
     - `ALTER TABLE`
       - [Overview](/sql-statements/sql-statement-alter-table.md)
