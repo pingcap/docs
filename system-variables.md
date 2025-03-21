@@ -699,12 +699,13 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `UNSPECIFIED`
-- Value options: `UNSPECIFIED`, `0`, `1`, `2`
+- Value options: `UNSPECIFIED`, `0`, `1`, `2`, `3`
 - This variable is used to specify different versions of the MPP execution plan. After a version is specified, TiDB selects the specified version of the MPP execution plan. The meanings of the variable values are as follows:
-    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `2`.
+    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `3`.
     - `0`: compatible with all TiDB cluster versions. Features with the MPP version greater than `0` do not take effect in this mode.
     - `1`: new in v6.6.0, used to enable data exchange with compression on TiFlash. For details, see [MPP version and exchange data compression](/explain-mpp.md#mpp-version-and-exchange-data-compression).
     - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash.
+    - `3`: new in v9.0.0, used to enable the new string data exchange format of TiFlash to improve string serialization and deserialization efficiency, thereby improving query performance.
 
 ### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
 
