@@ -85,8 +85,15 @@ The following is a sample output of querying `statements_summary`:
 
 > **Note:**
 >
-> - In TiDB, the time unit of fields in statement summary tables is nanosecond (ns), whereas in MySQL the time unit is picosecond (ps).
-> - Starting from v7.5.1 and v7.6.0, for clusters with [resource control](/tidb-resource-control.md) enabled, `statements_summary` will be aggregated by resource group, for example, the same statements executed in different resource groups will be collected as different records.
+> In TiDB, the time unit of fields in statement summary tables is nanosecond (ns), whereas in MySQL the time unit is picosecond (ps).
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> Starting from v7.5.1 and v7.6.0, for clusters with [resource control](/tidb-resource-control.md) enabled, `statements_summary` will be aggregated by resource group, for example, the same statements executed in different resource groups will be collected as different records.
+
+</CustomContent>
 
 ## `statements_summary_history`
 

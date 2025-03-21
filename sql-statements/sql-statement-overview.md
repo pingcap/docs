@@ -174,14 +174,9 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 <CustomContent platform="tidb-cloud">
 
-| SQL Statement | Description |
-|---------------|-------------|
-| [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) | Modifies a resource group. |
-| [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) | Creates a new resource group. |
-| [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md) | Drops a resource group. |
-| [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) | Manages the runaway query watch list. |
-| [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) | Sets a resource group. |
-| [`SHOW CREATE RESOURCE GROUP`](/sql-statements/sql-statement-show-create-resource-group.md) | Shows the `CREATE` statement for a resource group. |
+> **Note:**
+>
+> This resource group management statements are not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 </CustomContent>
 

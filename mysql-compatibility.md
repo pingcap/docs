@@ -287,8 +287,22 @@ TiDB does not implement specific features deprecated in MySQL, including:
 
 ### `CREATE RESOURCE GROUP`, `DROP RESOURCE GROUP`, and `ALTER RESOURCE GROUP` statements
 
-The following statements for creating, modifying, and dropping resource groups have different supported parameters than MySQL. For details, see the following documents:
+`CREATE RESOURCE GROUP`, `DROP RESOURCE GROUP`, and `ALTER RESOURCE GROUP` statements have different supported parameters than MySQL.
+
+<CustomContent platform="tidb">
+
+For details, see the following documents:
 
 - [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
 - [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)
 - [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> These statements are not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
+</CustomContent>
