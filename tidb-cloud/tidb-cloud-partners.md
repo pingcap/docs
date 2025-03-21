@@ -1,7 +1,6 @@
 ---
 title: TiDB Cloud Partner Web Console
 summary: Learn how to use the TiDB Cloud Partner web console as a reseller and Managed Service Provider (MSP).
-aliases: ['/tidbcloud/managed-service-provider']
 ---
 
 # TiDB Cloud Partner Web Console

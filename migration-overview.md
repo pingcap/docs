@@ -1,7 +1,6 @@
 ---
 title: Data Migration Overview
 summary: Learn the overview of data migration scenarios and the solutions.
-aliases: ['/tidb/stable/migrate-full-data-from-mysql']
 ---
 
 # Data Migration Overview
