@@ -176,12 +176,6 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 **Best practices:** Ensure TLS certificates are current and rotate them periodically.
 
-### VPC peering
-
-- Establishes private connections between Virtual Private Clouds, enabling secure, seamless communication.
-
-**Best practices:** Use for critical workloads to avoid public internet exposure and monitor performance.
-
 ### IP access list
 
 - Acts as a firewall to restrict cluster access to trusted IP addresses.
@@ -207,13 +201,3 @@ Tracks key actions on the TiDB Cloud console, such as inviting users or managing
 - Integrate logs with SIEM tools for real-time monitoring and alerts.
 
 - Set retention policies to meet compliance requirements.
-
-### Database audit logging
-
-Records detailed database operations, including executed SQL statements and user access.
-
-**Best practices:**
-
-- Regularly review logs for unusual activity or unauthorized access.
-
-- Use logs for compliance reporting and forensic analysis.

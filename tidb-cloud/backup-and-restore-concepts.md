@@ -13,14 +13,6 @@ For TiDB Cloud Serverless clusters, snapshot backups are taken automatically by 
 
 For more information, see [Automatic backups for TiDB Cloud Serverless clusters](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups).
 
-## Manual backup
-
-Manual backup is a feature of TiDB Cloud Dedicated that enables you to back up your data to a known state as needed, and then restore to that state at any time.
-
-## Dual region backup
-
-Dual region backup is a feature of TiDB Cloud Dedicated that enables you to replicate backups from your cluster region to another different region. After it is enabled, all backups are automatically replicated to the specified region. This provides cross-region data protection and disaster recovery capabilities. It is estimated that approximately 99% of the data can be replicated to the secondary region within an hour.
-
 ## Point-in-time Restore
 
 Point-in-time Restore is a feature that enables you to restore data of any point in time to a new cluster. You can use it to:
