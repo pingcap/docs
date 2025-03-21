@@ -37,7 +37,7 @@ The new architecture is designed to address common issues that users might encou
 | **Task triggering mechanism** | Timer-triggered main loop that checks tasks every 50 ms, with limited processing performance | Event-driven, triggered by events such as DML changes, DDL changes, and changefeed operations. Events in the queue are processed as quickly as possible without waiting for the fixed 50 ms interval, reducing additional latency |
 | **Task scheduling method** | Each changefeed runs a main loop that polls for tasks | Events are queued and processed concurrently by multiple threads |
 | **Task processing efficiency** | Each task goes through multiple cycles, creating performance bottlenecks | Events are processed immediately without waiting for fixed intervals, reducing latency |
-| **Resource consumption** | Frequent checks on inactive tables waste CPU resources | Consumer threads only queued events, avoiding the consumption of checking inactive tasks |
+| **Resource consumption** | Frequent checks on inactive tables waste CPU resources | Consumer threads only process queued events, avoiding the consumption of checking inactive tasks |
 | **Complexity** | O(n), performance degrades as the number of tables increases | O(1), not affected by the number of tables, improving efficiency |
 | **CPU utilization** | Each changefeed can only use one logical CPU | Each changefeed can fully utilize the parallel processing capabilities of multi-core CPUs |
 | **Scalability** | Poor scalability (limited by the number of CPUs) | Strong scalability through multi-threaded processing and event queues |
