@@ -36,6 +36,9 @@ StringName ::=
     stringLit
 |   Identifier
 
+ConnectionOptions ::=
+    ( 'WITH' 'MAX_USER_CONNECTIONS' N )?
+
 PasswordOption ::= ( 'PASSWORD' 'EXPIRE' ( 'DEFAULT' | 'NEVER' | 'INTERVAL' N 'DAY' )?
 | 'PASSWORD' 'HISTORY' ( 'DEFAULT' | N )
 | 'PASSWORD' 'REUSE' 'INTERVAL' ( 'DEFAULT' | N 'DAY' )
@@ -142,6 +145,22 @@ Create a user whose password is manually expired:
 CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
 ```
 
+Create a user with a maximum connection limit of 3:
+
+```sql
+CREATE USER 'newuser10'@'%' WITH MAX_USER_CONNECTIONS 3;
+SELECT User, Host, max_user_connections FROM mysql.user WHERE User='newuser10';
+```
+
+```
++-----------+------+----------------------+
+| user      | host | max_user_connections |
++-----------+------+----------------------+
+| newuser10 | %    |                    3 |
++-----------+------+----------------------+
+1 row in set (0.01 sec)
+```
+
 ```
 Query OK, 1 row affected (0.02 sec)
 ```
@@ -149,15 +168,15 @@ Query OK, 1 row affected (0.02 sec)
 Create a user that uses the resource group `rg1`.
 
 ```sql
-CREATE USER 'newuser7'@'%' RESOURCE GROUP rg1;
-SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
+CREATE USER 'newuser11'@'%' RESOURCE GROUP rg1;
+SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser11';
 ```
 
 ```sql
 +----------+------+---------------------------+
 | USER     | HOST | USER_ATTRIBUTES           |
 +----------+------+---------------------------+
-| newuser7 | %    | {"resource_group": "rg1"} |
+| newuser11| %    | {"resource_group": "rg1"} |
 +----------+------+---------------------------+
 1 rows in set (0.00 sec)
 ```
@@ -169,7 +188,6 @@ The following `CREATE USER` options are not yet supported by TiDB, and will be p
 * `PASSWORD REQUIRE CURRENT DEFAULT`
 * `WITH MAX_QUERIES_PER_HOUR`
 * `WITH MAX_UPDATES_PER_HOUR`
-* `WITH MAX_USER_CONNECTIONS`
 
 The following `CREATE USER` options are not supported by TiDB either, and are *not* accepted by the parser:
 
