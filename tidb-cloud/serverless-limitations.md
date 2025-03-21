@@ -21,7 +21,6 @@ We are constantly filling in the feature gaps between TiDB Cloud Serverless and 
 ### Connection
 
 - Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use VPC Peering to connect to TiDB Cloud Serverless clusters.
-- No IP Access list support.
 
 ### Encryption
 

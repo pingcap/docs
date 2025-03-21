@@ -186,6 +186,8 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 - Acts as a firewall to restrict cluster access to trusted IP addresses.
 
+- For more information, see [Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
+
 **Best practices:** Regularly audit and update the access list to maintain security.
 
 ## Data access control

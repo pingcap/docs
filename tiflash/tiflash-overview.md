@@ -11,7 +11,7 @@ In TiFlash, the columnar replicas are asynchronously replicated according to the
 
 <CustomContent platform="tidb-cloud">
 
-With TiDB Cloud, you can create an HTAP cluster easily by specifying one or more TiFlash nodes according to your HTAP workload.
+When you create a TiDB Cloud Serverless cluster, TiFlash is included in the cluster for columnar storage by default. 
 
 </CustomContent>
 
