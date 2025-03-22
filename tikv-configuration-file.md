@@ -2448,7 +2448,7 @@ Configuration items related to resource control of the TiKV storage layer.
 
 ### `enabled` <span class="version-mark">New in v6.6.0</span>
 
-+ Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
++ Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md).
 + Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
 + Default value: `true`, which means scheduling based on the RU of the resource group is enabled.
 
@@ -2513,7 +2513,9 @@ TiKV MVCC in-memory engine (IME) configuration items related to the storage laye
 > You can configure this configuration item in the configuration file, but cannot query it via SQL statements.
 
 + Whether to enable the in-memory engine to accelerate multi-version queries. For more information about the in-memory engine, see [TiKV MVCC In-Memory Engine](/tikv-in-memory-engine.md)
-+ Default value: `false` (indicating the in-memory engine is disabled)
++ Default value: `false` (in-memory engine is disabled)
++ It is recommended to configure at least 8 GiB of memory for the TiKV node, with 32 GiB or more for optimal performance.
++ If the available memory for the TiKV node is insufficient, the in-memory engine will not be enabled even if this configuration item is set to `true`. In such cases, check the TiKV log file for messages containing `"in-memory engine is disabled because"` to learn why the in-memory engine is not enabled.
 
 ### `capacity` <span class="version-mark">New in v8.5.0</span>
 

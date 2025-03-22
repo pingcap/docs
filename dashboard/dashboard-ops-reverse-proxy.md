@@ -132,7 +132,7 @@ server_configs:
 <details>
 <summary> <strong>Modify configuration when deploying a new cluster using TiUP</strong> </summary>
 
-If you are deploying a new cluster, you can add the configuration above to the `topology.yaml` TiUP topology file and deploy the cluster. For specific instruction, see [TiUP deployment document](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file).
+If you are deploying a new cluster, you can add the configuration above to the `topology.yaml` TiUP topology file and deploy the cluster. For specific instruction, see [TiUP deployment document](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file).
 
 </details>
 

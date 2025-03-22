@@ -51,7 +51,7 @@ Sink URI is used to specify the connection information of the TiCDC target syste
 Sample configuration for MySQL:
 
 ```shell
---sink-uri="mysql://root:123456@127.0.0.1:3306"
+--sink-uri="mysql://root:12345678@127.0.0.1:3306"
 ```
 
 The following are descriptions of sink URI parameters and parameter values that can be configured for MySQL or TiDB:
@@ -59,7 +59,7 @@ The following are descriptions of sink URI parameters and parameter values that 
 | Parameter/Parameter value    | Description                                             |
 | :------------ | :------------------------------------------------ |
 | `root`        | The username of the downstream database. To replicate data to TiDB or other MySQL-compatible databases, make sure that the downstream database user has [certain permissions](#permissions-required-for-the-downstream-database-user).                             |
-| `123456`       | The password of the downstream database (can be encoded using Base64).                                      |
+| `12345678`       | The password of the downstream database (can be encoded using Base64).                                      |
 | `127.0.0.1`    | The IP address of the downstream database.                               |
 | `3306`         | The port for the downstream data.                                 |
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default).       |
@@ -70,22 +70,30 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
 | `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, such as `time-zone=""`, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
 | `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
+| `safe-mode` | Specifies how TiCDC handles `INSERT` and `UPDATE` statements when replicating data to the downstream. When it is `true`, TiCDC converts all upstream `INSERT` statements to `REPLACE INTO` statements, and all `UPDATE` statements to `DELETE` + `REPLACE INTO` statements. Before v6.1.3, the default value of this parameter is `true`. Starting from v6.1.3, the default value is changed to `false`. When TiCDC starts, it obtains a current timestamp `ThresholdTs`. For `INSERT` and `UPDATE` statements with `CommitTs` less than `ThresholdTs`, TiCDC converts them to `REPLACE INTO` statements and `DELETE` + `REPLACE INTO` statements respectively. For `INSERT` and `UPDATE` statements with `CommitTs` greater than or equal to `ThresholdTs`, `INSERT` statements are directly replicated to the downstream, while the behavior of `UPDATE` statements follows the [TiCDC Behavior in Splitting UPDATE Events](/ticdc/ticdc-split-update-behavior.md). |
 
 To encode the database password in the sink URI using Base64, use the following command:
 
 ```shell
-echo -n '123456' | base64   # '123456' is the password to be encoded.
+echo -n '12345678' | base64   # '12345678' is the password to be encoded.
 ```
 
-The encoded password is `MTIzNDU2`:
+The encoded password is as follows:
 
 ```shell
-MTIzNDU2
+MTIzNDU2Nzg=
 ```
 
 > **Note:**
 >
-> When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
+> When the sink URI parameters contain special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
+> 
+> For example, if the username for connecting to the downstream database is `R&D (2)` and the certificate file path is `/data1/R&D (2).pem`, you need to escape these parameters as follows:
+> 
+> ```shell
+> --sink-uri="mysql://R%26D%20%282%29:MTIzNDU2Nzg%3D@127.0.0.1:3306/?ssl-cert=/data1/R%26D%20%282%29.pem"
+> #                    ^~~ ^~~^~~ ^~~            ^~~                                  ^~~ ^~~^~~ ^~~
+> ```
 
 ## Permissions required for the downstream database user
 

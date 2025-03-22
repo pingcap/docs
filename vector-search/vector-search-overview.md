@@ -5,7 +5,7 @@ summary: Learn about Vector Search in TiDB. This feature provides an advanced se
 
 # Vector Search Overview
 
-TiDB Vector Search provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video. This feature enables developers to easily build scalable applications with generative artificial intelligence (AI) capabilities using familiar MySQL skills.
+Vector search offers a powerful solution for semantic similarity searches across diverse data types, such as documents, images, audio, and video. It allows developers to leverage their MySQL expertise to build scalable applications enriched with generative AI capabilities, simplifying the integration of advanced search functionality.
 
 <CustomContent platform="tidb">
 

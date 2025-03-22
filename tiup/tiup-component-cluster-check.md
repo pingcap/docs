@@ -11,7 +11,7 @@ For a formal production environment, before the environment goes live, you need 
 
 ### Operating system version
 
-Check the operating system distribution and version of the deployed machines. Currently, only CentOS 7 is supported for deployment. More system versions may be supported in later releases for compatibility improvement.
+Check the operating system distribution and version of the deployed machines. For a list of supported versions, see [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements).
 
 ### CPU EPOLLEXCLUSIVE
 
@@ -19,7 +19,7 @@ Check whether the CPU of the target machine supports EPOLLEXCLUSIVE.
 
 ### numactl
 
-Check whether numactl is installed on the target machine. If tied cores are configured on the target machine, you must install numactl.
+Check whether `numactl` is installed on the target machine. If tied cores are configured on the target machine, you must install `numactl`.
 
 ### System time
 
@@ -52,6 +52,16 @@ Check the values of the following kernel parameters:
 
 Check whether THP is enabled on the target machine. It is recommended to disable THP.
 
+To check if THP is enabled you can run this:
+
+```
+cat /sys/kernel/mm/transparent_hugepage/enabled
+```
+
+If it is not set to `never`, you can change it with `grubby --update-kernel=ALL --args="transparent_hugepage=never"`.
+
+To change the running configuration, either reboot or run `echo never > /sys/kernel/mm/transparent_hugepage/enabled`.
+
 ### System limits
 
 Check the limit values in the `/etc/security/limits.conf` file:
@@ -66,7 +76,11 @@ Check the limit values in the `/etc/security/limits.conf` file:
 
 ### SELinux
 
-Check whether SELinux is enabled. It is recommended to disable SELinux.
+SELinux must be disabled or set to permissive mode. To check the current status, use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility.
+
+If SELinux is not disabled, open the `/etc/selinux/config` file, locate the line starting with `SELINUX=`, and change it to `SELINUX=disabled`. After making this change, you need to reboot the system because switching from `enforcing` or `permissive` to `disabled` does not take effect without a reboot.
+
+On some systems (such as Ubuntu), the `/etc/selinux/config` file might not exist, and the getenforce utility might not be installed. In that case, you can skip this step.
 
 ### Firewall
 
@@ -252,5 +266,3 @@ A table containing the following fields:
 - `Check`: the check item
 - `Result`: the check result (Pass, Warn, or Fail)
 - `Message`: the result description
-
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)

@@ -32,7 +32,7 @@ In addition, you can also use the [SQL binding](/sql-plan-management.md#sql-bind
 
 ## How to prevent the execution of a particular SQL statement?
 
-For TiDB v7.5.0 or later versions, you can use the [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) statement to terminate specific SQL statements. For more details, see [Manage queries that consume more resources than expected (Runaway Queries)](/tidb-resource-control.md#query-watch-parameters).
+For TiDB v7.5.0 or later versions, you can use the [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) statement to terminate specific SQL statements. For more details, see [Manage queries that consume more resources than expected (Runaway Queries)](/tidb-resource-control-runaway-queries.md#query-watch-parameters).
 
 For versions earlier than TiDB v7.5.0, you can create [SQL bindings](/sql-plan-management.md#sql-binding) with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint to limit the execution time of a particular statement to a small value (for example, 1ms). In this way, the statement is terminated automatically by the threshold.
 
@@ -211,7 +211,7 @@ TiDB supports changing the priority on a [global](/system-variables.md#tidb_forc
 
 > **Note:**
 >
-> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use [Resource Control](/tidb-resource-control.md) to manage resource usage for different SQL statements.
+> Starting from v6.6.0, TiDB supports [Resource Control](/tidb-resource-control-ru-groups.md). You can use this feature to execute SQL statements with different priorities in different resource groups. By configuring proper quotas and priorities for these resource groups, you can gain better scheduling control for SQL statements with different priorities. When resource control is enabled, statement priority will no longer take effect. It is recommended that you use Resource Control to manage resource usage for different SQL statements.
 
 You can combine the above two parameters with the DML of TiDB to use them. For example:
 

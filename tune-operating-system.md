@@ -70,6 +70,7 @@ It is **NOT** recommended to use THP for database applications, because database
 ```shell
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
 echo never > /sys/kernel/mm/transparent_hugepage/defrag
+grubby --update-kernel="$KERNEL" --args='transparent_hugepage=never'
 ```
 
 ### Memory—virtual memory parameters
