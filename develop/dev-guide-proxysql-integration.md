@@ -5,11 +5,11 @@ summary: Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
 
 # Integrate TiDB with ProxySQL
 
-This document provides a high-level introduction to ProxySQL, describes how to integrate ProxySQL with TiDB in a [development environment](#development-environment) and a [production environment](#production-environment), and demonstrates the key integration benefits through the [scenario of query routing](#typical-scenario).
+This document provides a high-level introduction to ProxySQL, describes how to integrate ProxySQL with TiDB in a [development environment](#development-environment), and demonstrates the key integration benefits through the [scenario of query routing](#typical-scenario).
 
 If you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
 
-- [TiDB Cloud](https://docs.pingcap.com/tidbcloud)
+- [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)
 - [TiDB Developer Guide](/develop/dev-guide-overview.md)
 - [ProxySQL Documentation](https://proxysql.com/documentation/)
 
@@ -37,7 +37,7 @@ The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standa
 
 ## Development environment
 
-This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the [prerequisites](#prerequisite) in place.
+This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the [prerequisites](#prerequisites) in place.
 
 - Option 1: [Integrate TiDB Cloud with ProxySQL](#option-1-integrate-tidb-cloud-with-proxysql)
 - Option 2: [Integrate TiDB (self-hosted) with ProxySQL](#option-2-integrate-tidb-self-hosted-with-proxysql)
@@ -621,174 +621,6 @@ The following steps will set up ProxySQL and TiDB on ports `6033` and `4000` res
     </div>
 
     </SimpleTab>
-
-## Production environment
-
-For a production environment, it is recommended that you use [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated/) directly for a fully-managed experience.
-
-### Prerequisite
-
-Download and install a MySQL client. For example, [MySQL Shell](https://dev.mysql.com/downloads/shell/).
-
-### Integrate TiDB Cloud with ProxySQL on CentOS
-
-ProxySQL can be installed on many different platforms. The following takes CentOS as an example.
-
-For a full list of supported platforms and the corresponding version requirements, see [ProxySQL documentation](https://proxysql.com/documentation/installing-proxysql/).
-
-#### Step 1. Create a TiDB Cloud Dedicated cluster
-
-For detailed steps, see [Create a TiDB Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster).
-
-#### Step 2. Install ProxySQL
-
-1. Add ProxySQL to the YUM repository:
-
-    ```bash
-    cat > /etc/yum.repos.d/proxysql.repo << EOF
-    [proxysql]
-    name=ProxySQL YUM repository
-    baseurl=https://repo.proxysql.com/ProxySQL/proxysql-2.4.x/centos/\$releasever
-    gpgcheck=1
-    gpgkey=https://repo.proxysql.com/ProxySQL/proxysql-2.4.x/repo_pub_key
-    EOF
-    ```
-
-2. Install ProxySQL:
-
-    ```bash
-    yum install -y proxysql
-    ```
-
-3. Start ProxySQL:
-
-    ```bash
-    systemctl start proxysql
-    ```
-
-To learn more about the supported platforms of ProxySQL and their installation, refer to [ProxySQL README](https://github.com/sysown/proxysql#installation) or [ProxySQL installation documentation](https://proxysql.com/documentation/installing-proxysql/).
-
-#### Step 3. Configure ProxySQL
-
-To use ProxySQL as a proxy for TiDB, you need to configure ProxySQL. To do so, you can either [execute SQL statements inside ProxySQL Admin Interface](#option-1-configure-proxysql-using-the-admin-interface) (recommended) or use the [configuration file](#option-2-configure-proxysql-using-a-configuration-file).
-
-> **Note:**
->
-> The following sections list only the required configuration items of ProxySQL.
-> For a comprehensive list of configurations, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
-
-##### Option 1: Configure ProxySQL using the Admin Interface
-
-1. Reconfigure ProxySQL's internals using the standard ProxySQL Admin interface, accessible via any MySQL command line client (available by default on port `6032`):
-
-    ```bash
-    mysql -u admin -padmin -h 127.0.0.1 -P6032 --prompt 'ProxySQL Admin> '
-    ```
-
-    The above step will take you to the ProxySQL admin prompt.
-
-2. Configure the TiDB clusters to be used, where you can add one or multiple TiDB clusters to ProxySQL. The following statement will add one TiDB Cloud Dedicated cluster for example. You need to replace `<tidb cloud dedicated cluster host>` and `<tidb cloud dedicated cluster port>` with your TiDB Cloud endpoint and port (the default port is `4000`).
-
-    ```sql
-    INSERT INTO mysql_servers(hostgroup_id, hostname, port) 
-    VALUES 
-      (
-        0,
-        '<tidb cloud dedicated cluster host>', 
-        <tidb cloud dedicated cluster port>
-      );
-    LOAD mysql servers TO runtime;
-    SAVE mysql servers TO DISK;
-    ```
-
-    > **Note:**
-    >
-    > - `hostgroup_id`:  specify an ID of the hostgroup. ProxySQL manages clusters using hostgroup. To distribute SQL traffic to these clusters evenly, you can configure several clusters that need load balancing to the same hostgroup. To distinguish the clusters, such as for read and write purposes, you can configure them to use different hostgroups.
-    > - `hostname`: the endpoint of the TiDB cluster.
-    > - `port`: the port of the TiDB cluster.
-
-3. Configure Proxy login users to make sure that the users have appropriate permissions on the TiDB cluster. In the following statements, you need to replace '*tidb cloud dedicated cluster username*' and '*tidb cloud dedicated cluster password*' with the actual username and password of your cluster.
-
-    ```sql
-    INSERT INTO mysql_users(
-      username, password, active, default_hostgroup, 
-      transaction_persistent
-    ) 
-    VALUES 
-      (
-        '<tidb cloud dedicated cluster username>', 
-        '<tidb cloud dedicated cluster password>', 
-        1, 0, 1
-      );
-    LOAD mysql users TO runtime;
-    SAVE mysql users TO DISK;
-    ```
-
-    > **Note:**
-    >
-    > - `username`: TiDB username.
-    > - `password`: TiDB password.
-    > - `active`: controls whether the user is active. `1` indicates that the user is **active** and can be used for login, while `0` indicates that the user is inactive.
-    > - `default_hostgroup`: the default hostgroup used by the user, where SQL traffic is distributed unless the query rule overrides the traffic to a specific hostgroup.
-    > - `transaction_persistent`: `1` indicates a persistent transaction. When a user starts a transaction within a connection, all query statements are routed to the same hostgroup until the transaction is committed or rolled back.
-
-##### Option 2: Configure ProxySQL using a configuration file
-
-This option should only be considered as an alternate method for configuring ProxySQL. For more information, see [Configuring ProxySQL through the config file](https://github.com/sysown/proxysql#configuring-proxysql-through-the-config-file).
-
-1. Delete any existing SQLite database (where configurations are stored internally):
-
-    ```bash
-    rm /var/lib/proxysql/proxysql.db
-    ```
-
-    > **Warning:**
-    >
-    > If you delete the SQLite database file, any configuration changes made using ProxySQL Admin interface will be lost.
-
-2. Modify the configuration file `/etc/proxysql.cnf` according to your need. For example:
-
-    ```
-    mysql_servers:
-    (
-        {
-            address="<tidb cloud dedicated cluster host>"
-            port=<tidb cloud dedicated cluster port>
-            hostgroup=0
-            max_connections=2000
-        }
-    )
-
-    mysql_users:
-    (
-        {
-            username = "<tidb cloud dedicated cluster username>"
-            password = "<tidb cloud dedicated cluster password>"
-            default_hostgroup = 0
-            max_connections = 1000
-            default_schema = "test"
-            active = 1
-            transaction_persistent = 1
-        }
-    )
-    ```
-
-    In the preceding example:
-
-    - `address` and `port`: specify the endpoint and port of your TiDB Cloud cluster.
-    - `username` and `password`: specify the username and password of your TiDB Cloud cluster.
-
-3. Restart ProxySQL:
-
-    ```bash
-    systemctl restart proxysql
-    ```
-
-    After the restart, the SQLite database will be created automatically.
-
-> **Warning:**
->
-> Do not run ProxySQL with default credentials in production. Before starting the `proxysql` service, you can change the defaults in the `/etc/proxysql.cnf` file by changing the `admin_credentials` variable.
 
 ## Typical scenario
 

@@ -11,7 +11,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using Navica
 
 > **Note:**
 >
-> This tutorial is compatible with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial is compatible with TiDB Cloud Serverless.
 
 ## Prerequisites
 
@@ -41,9 +41,6 @@ To complete this tutorial, you need:
 ## Connect to TiDB
 
 Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
-
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -83,67 +80,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 8. Click **Test Connection** to validate the connection to the TiDB Cloud Serverless cluster.
 
 9. If the connection test is successful, you can see the **Connection Successful** message. Click **OK** to finish the connection configuration.
-
-</div>
-<div label="TiDB Cloud Dedicated">
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
-
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
-
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
-
-4. Click **CA cert** to download the CA certificate.
-
-5. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Venfor Filter** list, and double-click **TiDB** in the right panel.
-
-    ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
-
-6. In the **New Connection (TiDB)** dialog, configure the following connection parameters:
-
-    - **Connection Name**: give this connection a meaningful name.
-    - **Host**: enter the `HOST` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `PORT` parameter from the TiDB Cloud connection dialog.
-    - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the password of the TiDB Cloud Dedicated cluster.
-
-    ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
-
-7. Click the **SSL** tab and select **Use SSL**, **Use authentication**, and **Verify server certificate against CA** checkboxes. Then, select the CA file downloaded in step 4 into the **CA Certificate** field.
-
-    ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
-
-8. **Test Connection** to validate the connection to the TiDB Cloud Dedicated cluster.
-
-9. If the connection test is successful, you can see the **Connection Successful** message. Click **OK** to finish the connection configuration.
-
-</div>
-<div label="TiDB Self-Managed">
-
-1. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Venfor Filter** list, and double-click **TiDB** in the right panel.
-
-    ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
-
-2. In the **New Connection (TiDB)** dialog, configure the following connection parameters:
-
-    - **Connection Name**: give this connection a meaningful name.
-    - **Host**: enter the IP address or domain name of your TiDB Self-Managed cluster.
-    - **Port**: enter the port number of your TiDB Self-Managed cluster.
-    - **User Name**: enter the username to use to connect to your TiDB.
-    - **Password**: enter the password to use to connect to your TiDB.
-
-    ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-premium-connection-config-self-hosted-general.png)
-
-3. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
-
-4. If the connection test is successful, you can see the **Connection Successful** message. Click **OK** to finish the connection configuration.
-
-</div>
-</SimpleTab>
 
 ## Next steps
 

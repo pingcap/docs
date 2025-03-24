@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and Hibernate to accomplish the 
 
 > **Note:**
 >
-> This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> This tutorial works with TiDB Cloud Serverless.
 
 ## Prerequisites
 
@@ -60,9 +60,6 @@ cd tidb-java-hibernate-quickstart
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -106,67 +103,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TiDB Cloud Serverless requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
 
 7. Save the `env.sh` file.
-
-</div>
-<div label="TiDB Cloud Dedicated">
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
-
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
-
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
-
-4. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
-
-    ```shell
-    cp env.sh.example env.sh
-    ```
-
-5. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
-
-    ```shell
-    export TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
-    export TIDB_PORT='4000'
-    export TIDB_USER='{user}'  # e.g. root
-    export TIDB_PASSWORD='{password}'
-    export TIDB_DB_NAME='test'
-    export USE_SSL='false'
-    ```
-
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
-
-6. Save the `env.sh` file.
-
-</div>
-<div label="TiDB Self-Managed">
-
-1. Run the following command to copy `env.sh.example` and rename it to `env.sh`:
-
-    ```shell
-    cp env.sh.example env.sh
-    ```
-
-2. Copy and paste the corresponding connection string into the `env.sh` file. The example result is as follows:
-
-    ```shell
-    export TIDB_HOST='{host}'
-    export TIDB_PORT='4000'
-    export TIDB_USER='root'
-    export TIDB_PASSWORD='{password}'
-    export TIDB_DB_NAME='test'
-    export USE_SSL='false'
-    ```
-
-    Be sure to replace the placeholders `{}` with the connection parameters, and set `USE_SSL` to `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
-
-3. Save the `env.sh` file.
-
-</div>
-</SimpleTab>
 
 ### Step 3: Run the code and check the result
 

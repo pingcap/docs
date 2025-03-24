@@ -244,7 +244,13 @@ Sampling is available via two separate options of the `ANALYZE` statement - with
 
 Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Since v5.3.0, the TiDB Version 2 statistics uses the Bernoulli sampling method to collect statistics by default. To re-use the reservoir sampling method, you can use the `WITH NUM SAMPLES` statement.
 
-The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the sum of all the values in the `APPROXIMATE_KEYS` column in the results of [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) of the table as another reference to calculate the sampling rate.
+The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. 
+
+<CustomContent platform="tidb">
+
+If you cannot observe this number, you can use the sum of all the values in the `APPROXIMATE_KEYS` column in the results of [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) of the table as another reference to calculate the sampling rate.
+
+</CustomContent>
 
 > **Note:**
 >
@@ -544,6 +550,8 @@ The interface to export statistics is as follows:
 
 ### Import statistics
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > When you start the MySQL client, use the `--local-infile=1` option.
@@ -559,6 +567,16 @@ LOAD STATS 'file_name';
 ```
 
 `file_name` is the file name of the statistics to be imported.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
+</CustomContent>
 
 ## Lock statistics
 
@@ -795,7 +813,6 @@ When you analyze index columns, you can use the [`tidb_index_serial_scan_concurr
 
 <CustomContent platform="tidb-cloud">
 
-* [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
 * [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
 * [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
 * [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)

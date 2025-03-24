@@ -164,7 +164,7 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 ### Private endpoints
 
-- Enables secure connectivity for SQL clients within your Virtual Private Cloud (VPC) to TiDB Cloud Dedicated clusters.
+- Enables secure connectivity for SQL clients within your Virtual Private Cloud (VPC) to TiDB Cloud Serverless clusters. For more information, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 **Best practices:** Use private endpoints in production to minimize public exposure and review configurations regularly.
 

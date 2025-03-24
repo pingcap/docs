@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in Next.js to accompl
 
 > **Note**
 >
-> This tutorial works with TiDB Cloud Serverless and TiDB Self-Managed.
+> This tutorial works with TiDB Cloud Serverless.
 
 ## Prerequisites
 
@@ -71,10 +71,6 @@ npm install
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
-<SimpleTab>
-
-<div label="TiDB Cloud Serverless">
-
 1. Navigate to the [**Clusters** page](https://tidbcloud.com/console/clusters), and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper right corner. A connection dialog is displayed.
@@ -121,40 +117,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     Replace the placeholders in `{}` with the values obtained in the connection dialog.
 
 7. Save the `.env` file.
-
-</div>
-
-<div label="TiDB Self-Managed">
-
-1. Run the following command to copy `.env.example` and rename it to `.env`:
-
-    ```bash
-    # Linux
-    cp .env.example .env
-    ```
-
-    ```powershell
-    # Windows
-    Copy-Item ".env.example" -Destination ".env"
-    ```
-
-2. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
-
-    ```bash
-    TIDB_HOST='{tidb_server_host}'
-    TIDB_PORT='4000'
-    TIDB_USER='root'
-    TIDB_PASSWORD='{password}'
-    TIDB_DB_NAME='test'
-    ```
-
-    Replace the placeholders in `{}` with the values obtained in the **Connect** window. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
-
-3. Save the `.env` file.
-
-</div>
-
-</SimpleTab>
 
 ### Step 4: Run the code and check the result
 

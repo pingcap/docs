@@ -33,7 +33,6 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)  | Returns the resource group name that the current session is bound to. This feature is not available on TiDB Cloud Serverless clusters. |
 | [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness) | Instructs TiDB to read most recent data within a specified time range. See [reading historical data using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md). |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso) | Returns the current [TimeStamp Oracle (TSO) in TiDB](/tso.md). |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | Decodes binary plans. |
@@ -53,11 +52,11 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 ## CURRENT_RESOURCE_GROUP
 
-The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the Resource control feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
-
 > **Note:**
 >
-> This resource control is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
+The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the Resource control feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
 
 When a session is established, TiDB binds the session to the resource group that the login user is bound to by default. If the user is not bound to any resource groups, the session is bound to the `default` resource group. Once the session is established, the bound resource group will not change by default, even if the bound resource group of the user is changed via [modifying the resource group bound to the user](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information).
 
@@ -153,7 +152,7 @@ SELECT @@tidb_current_ts;
 
 ## TIDB_DECODE_BINARY_PLAN
 
-The `TIDB_DECODE_BINARY_PLAN(binary_plan)` function decodes binary plans, like the ones in the `BINARY_PLAN` column of the [`STATEMENTS_SUMMARY`](/statement-summary-tables.md) table.
+The `TIDB_DECODE_BINARY_PLAN(binary_plan)` function decodes binary plans.
 
 The [`tidb_generate_binary_plan`](/system-variables.md#tidb_generate_binary_plan-new-in-v620) variable must be set to `ON` for the binary plans to be available.
 
@@ -308,7 +307,7 @@ This function returns a string, which is in the format of a JSON string array. T
 > **Note:**
 >
 > * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can use this function.
-> * When `TIDB_DECODE_SQL_DIGESTS` is executed, TiDB queries the statement corresponding to each SQL digest from the statement summary tables, so there is no guarantee that the corresponding statement can always be found for any SQL digest. Only the statements that have been executed in the cluster can be found, and whether these SQL statements can be queried or not is also affected by the related configuration of the statement summary tables. For the detailed description of the statement summary table, see [Statement Summary Tables](/statement-summary-tables.md).
+> * When `TIDB_DECODE_SQL_DIGESTS` is executed, TiDB queries the statement corresponding to each SQL digest from the statement summary tables, so there is no guarantee that the corresponding statement can always be found for any SQL digest. Only the statements that have been executed in the cluster can be found, and whether these SQL statements can be queried or not is also affected by the related configuration of the statement summary tables. <!--For the detailed description of the statement summary table, see [Statement Summary Tables](/statement-summary-tables.md).-->
 > * This function has a high overhead. In queries with a large number of rows (for example, querying the full table of `information_schema.cluster_tidb_trx` on a large and busy cluster), using this function might cause the queries to run for too long. Use it with caution.
 >     * This function has a high overhead because every time it is called, it internally queries the `STATEMENTS_SUMMARY`, `STATEMENTS_SUMMARY_HISTORY`, `CLUSTER_STATEMENTS_SUMMARY`, and `CLUSTER_STATEMENTS_SUMMARY_HISTORY` tables, and the query involves the `UNION` operation. This function currently does not support vectorization, that is, when calling this function for multiple rows of data, the above query is performed separately for each row.
 
@@ -346,8 +345,18 @@ The above call specifies the second parameter (that is, the truncation length) a
 
 See also:
 
-- [Statement summary tables](/statement-summary-tables.md)
-- [`INFORMATION_SCHEMA.TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+<CustomContent platform="tidb">
+
+* [Statement summary tables](/statement-summary-tables.md)
+* [`INFORMATION_SCHEMA.TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* [`INFORMATION_SCHEMA.TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+
+</CustomContent>
 
 ## TIDB_ENCODE_SQL_DIGEST
 
@@ -404,8 +413,8 @@ The `TIDB_PARSE_TSO()` function extracts the physical timestamp from a TiDB TSO 
 
 A TSO is a number that consists of two parts:
 
-- A physical timestamp
-- A logical counter
+* A physical timestamp
+* A logical counter
 
 ```sql
 BEGIN;
@@ -495,31 +504,31 @@ The output is as follows:
 
 The `TIDB_SHARD()` function creates a shard index to scatter the index hotspot. A shard index is an expression index prefixed with a `TIDB_SHARD()` function.
 
-- Creation:
+* Creation:
 
     To create a shard index for the index field `a`, you can use `uk((tidb_shard(a)), a))`. When there is a hotspot caused by monotonically increasing or decreasing data on the index field `a` in the unique secondary index `uk((tidb_shard(a)), a))`, the index's prefix `tidb_shard(a)` can scatter the hotspot to improve the scalability of the cluster.
 
-- Scenarios:
+* Scenarios:
 
-    - There is a write hotspot caused by monotonically increasing or decreasing keys on the unique secondary index, and the index contains integer type fields.
-    - The SQL statement executes an equality query based on all fields of the secondary index, either as a separate `SELECT` or as an internal query generated by `UPDATE`, `DELETE` and so on. The equality query includes two ways: `a = 1` or `a IN (1, 2, ......)`.
+    * There is a write hotspot caused by monotonically increasing or decreasing keys on the unique secondary index, and the index contains integer type fields.
+    * The SQL statement executes an equality query based on all fields of the secondary index, either as a separate `SELECT` or as an internal query generated by `UPDATE`, `DELETE` and so on. The equality query includes two ways: `a = 1` or `a IN (1, 2, ......)`.
 
-- Limitations:
+* Limitations:
 
-    - Cannot be used in inequality queries.
-    - Cannot be used in queries that contain `OR` mixed with an outmost `AND` operator.
-    - Cannot be used in the `GROUP BY` clause.
-    - Cannot be used in the `ORDER BY` clause.
-    - Cannot be used in the `ON` clause.
-    - Cannot be used in the `WHERE` subquery.
-    - Can be used to scatter unique indexes of only the integer fields.
-    - Might not take effect in composite indexes.
-    - Cannot go through FastPlan process, which affects optimizer performance.
-    - Cannot be used to prepare the execution plan cache.
+    * Cannot be used in inequality queries.
+    * Cannot be used in queries that contain `OR` mixed with an outmost `AND` operator.
+    * Cannot be used in the `GROUP BY` clause.
+    * Cannot be used in the `ORDER BY` clause.
+    * Cannot be used in the `ON` clause.
+    * Cannot be used in the `WHERE` subquery.
+    * Can be used to scatter unique indexes of only the integer fields.
+    * Might not take effect in composite indexes.
+    * Cannot go through FastPlan process, which affects optimizer performance.
+    * Cannot be used to prepare the execution plan cache.
 
 The following example shows how to use the `TIDB_SHARD()` function.
 
-- Use the `TIDB_SHARD()` function to calculate the SHARD value.
+* Use the `TIDB_SHARD()` function to calculate the SHARD value.
 
     The following statement shows how to use the `TIDB_SHARD()` function to calculate the SHARD value of `12373743746`:
 
@@ -527,7 +536,7 @@ The following example shows how to use the `TIDB_SHARD()` function.
     SELECT TIDB_SHARD(12373743746);
     ```
 
-- The SHARD value is:
+* The SHARD value is:
 
     ```sql
     +-------------------------+
@@ -538,7 +547,7 @@ The following example shows how to use the `TIDB_SHARD()` function.
     1 row in set (0.00 sec)
     ```
 
-- Create a shard index using the `TIDB_SHARD()` function:
+* Create a shard index using the `TIDB_SHARD()` function:
 
     ```sql
     CREATE TABLE test(id INT PRIMARY KEY CLUSTERED, a INT, b INT, UNIQUE KEY uk((tidb_shard(a)), a));

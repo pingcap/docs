@@ -41,10 +41,7 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-- Starting from January 2, 2025, the default TiDB version for new TiDB Cloud Dedicated clusters is [v8.1.2](https://docs.pingcap.com/tidb/v8.1/release-8.1.2).
-- Starting from February 21, 2024, the TiDB version for TiDB Cloud Serverless clusters is [v7.1.3](https://docs.pingcap.com/tidb/v7.1/release-7.1.3).
-
-For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
+The TiDB version for TiDB Cloud Serverless clusters is [v7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2).
 
 ### What companies are using TiDB or TiDB Cloud in production?
 
@@ -148,15 +145,6 @@ TiDB Cloud supports TLS 1.2 or TLS 1.3.
 No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
 
 ### Is my TiDB cluster secure?
-
-In TiDB Cloud, you can use either a TiDB Cloud Dedicated cluster or a TiDB Cloud Serverless cluster according to your needs.
-
-For TiDB Cloud Dedicated clusters, TiDB Cloud ensures cluster security with the following measures:
-
-- Creates independent sub-accounts and VPCs for each cluster.
-- Sets up firewall rules to isolate external connections.
-- Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
-- Provide IP access rules for each cluster to ensure that only allowed source IP addresses can access your cluster.
 
 For TiDB Cloud Serverless clusters, TiDB Cloud ensures cluster security with the following measures:
 

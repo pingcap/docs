@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and peewee to accomplish the fol
 
 > **Note:**
 >
-> This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed clusters.
+> This tutorial works with TiDB Cloud Serverless clusters.
 
 ## Prerequisites
 
@@ -71,9 +71,6 @@ peewee is an ORM library that works with multiple databases. It provides a high-
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
-<SimpleTab>
-<div label="TiDB Cloud Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -115,66 +112,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
 7. Save the `.env` file.
-
-</div>
-<div label="TiDB Cloud Dedicated">
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-3. In the connection dialog, select **Public** from the **Connection Type** drop-down list, and then click **CA cert** to download the CA certificate.
-
-    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list) to configure it before your first connection.
-
-    In addition to the **Public** connection type, TiDB Cloud Dedicated supports **Private Endpoint** and **VPC Peering** connection types. For more information, see [Connect to Your TiDB Cloud Dedicated Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
-
-4. Run the following command to copy `.env.example` and rename it to `.env`:
-
-    ```shell
-    cp .env.example .env
-    ```
-
-5. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
-
-    ```dotenv
-    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
-    TIDB_PORT='4000'
-    TIDB_USER='{user}'  # e.g. root
-    TIDB_PASSWORD='{password}'
-    TIDB_DB_NAME='test'
-    CA_PATH='{your-downloaded-ca-path}'
-    ```
-
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog, and configure `CA_PATH` with the certificate path downloaded in the previous step.
-
-6. Save the `.env` file.
-
-</div>
-<div label="TiDB Self-Managed">
-
-1. Run the following command to copy `.env.example` and rename it to `.env`:
-
-    ```shell
-    cp .env.example .env
-    ```
-
-2. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
-
-    ```dotenv
-    TIDB_HOST='{tidb_server_host}'
-    TIDB_PORT='4000'
-    TIDB_USER='root'
-    TIDB_PASSWORD='{password}'
-    TIDB_DB_NAME='test'
-    ```
-
-    Be sure to replace the placeholders `{}` with the connection parameters, and remove the `CA_PATH` line. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
-
-3. Save the `.env` file.
-
-</div>
-</SimpleTab>
 
 ### Step 4: Run the code and check the result
 

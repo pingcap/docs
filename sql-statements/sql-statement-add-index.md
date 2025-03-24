@@ -7,11 +7,11 @@ summary: An overview of the usage of ADD INDEX for the TiDB database.
 
 The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding an index.
 
+<CustomContent platform="tidb">
+
 > **Tip:**
 >
 > The [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) can be used to speed up the operation of this statement.
-
-<CustomContent platform="tidb">
 
 > **Warning:**
 >
@@ -84,21 +84,20 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## MySQL compatibility
 
-* TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
-* `SPATIAL` indexes are not supported.
-* TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
-* Descending indexes are not supported (similar to MySQL 5.7).
-* Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+- TiDB accepts index types such as `HASH`, `BTREE` and `RTREE` in syntax for compatibility with MySQL, but ignores them.
+- `SPATIAL` indexes are not supported.
+- TiDB supports parsing the `FULLTEXT` syntax but does not support using the `FULLTEXT` indexes.
+- Descending indexes are not supported (similar to MySQL 5.7).
+- Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ## See also
 
-* [Index Selection](/choose-index.md)
-* [Wrong Index Solution](/wrong-index-solution.md)
-* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
-* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
-* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [EXPLAIN](/sql-statements/sql-statement-explain.md)
-* [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+- [Index Selection](/choose-index.md)
+- [Wrong Index Solution](/wrong-index-solution.md)
+- [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+- [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+- [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+- [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+- [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [EXPLAIN](/sql-statements/sql-statement-explain.md)

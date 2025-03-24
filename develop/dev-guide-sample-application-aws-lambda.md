@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in AWS Lambda Functio
 
 > **Note**
 >
-> This tutorial works with TiDB Cloud Serverless and TiDB Self-Managed.
+> This tutorial works with TiDB Cloud Serverless.
 
 ## Prerequisites
 
@@ -77,10 +77,6 @@ npm install
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
-<SimpleTab>
-
-<div label="TiDB Cloud Serverless">
-
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper right corner. A connection dialog is displayed.
@@ -116,29 +112,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     ```
 
     Replace the placeholders in `{}` with the values obtained in the connection dialog.
-
-</div>
-
-<div label="TiDB Self-Managed">
-
-Copy and paste the corresponding connection string into `env.json`. The following is an example:
-
-```json
-{
-  "Parameters": {
-    "TIDB_HOST": "{tidb_server_host}",
-    "TIDB_PORT": "4000",
-    "TIDB_USER": "root",
-    "TIDB_PASSWORD": "{password}"
-  }
-}
-```
-
-Replace the placeholders in `{}` with the values obtained in the **Connect** window.
-
-</div>
-
-</SimpleTab>
 
 ### Step 4: Run the code and check the result
 

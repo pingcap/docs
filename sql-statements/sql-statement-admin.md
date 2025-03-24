@@ -8,11 +8,9 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB. This document introduces the following `ADMIN` related statements:
 
 - [`ADMIN RELOAD`](#admin-reload-statement)
-- [`ADMIN PLUGINS`](#admin-plugins-related-statement)
 - [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
 - [`ADMIN REPAIR`](#admin-repair-statement)
 - [`ADMIN SHOW NEXT_ROW_ID`](#admin-show-next_row_id-statement)
-- [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
 ## DDL related statement
 
@@ -53,24 +51,6 @@ ADMIN RELOAD opt_rule_blacklist;
 ```
 
 The above statement is used to reload the blocklist of logic optimization rules.
-
-## `ADMIN PLUGINS` related statement
-
-> **Note:**
->
-> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
-```sql
-ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
-```
-
-The above statement is used to enable the `plugin_name` plugin.
-
-```sql
-ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
-```
-
-The above statement is used to disable the `plugin_name` plugin.
 
 ## `ADMIN BINDINGS` related statement
 
@@ -127,26 +107,6 @@ ADMIN SHOW t NEXT_ROW_ID;
 ```
 
 The above statement is used to view the details of some special columns of a table. The output is the same as [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
-
-## `ADMIN SHOW SLOW` statement
-
-> **Note:**
->
-> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
-```sql
-ADMIN SHOW SLOW RECENT N;
-```
-
-```sql
-ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
-```
-
-<CustomContent platform="tidb">
-
-For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admin-show-slow-command).
-
-</CustomContent>
 
 ## Synopsis
 

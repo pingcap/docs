@@ -228,7 +228,7 @@ To make the execution plan of a SQL statement fixed to a historical execution pl
 
 When using this feature, note the following:
 
-- The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
+- The feature generates hints according to historical execution plans and uses the generated hints for binding.
 - For TiFlash queries, Join queries with three or more tables, and queries that contain subqueries, the auto-generated hints are not adequate, which might result in the plan not being fully bound. In such cases, a warning will occur when creating a binding.
 - If a historical execution plan is for a SQL statement with hints, the hints will be added to the binding. For example, after executing `SELECT /*+ max_execution_time(1000) */ * FROM t`, the binding created with its `plan_digest` will include `max_execution_time(1000)`.
 
@@ -479,7 +479,19 @@ SHOW binding_cache status;
 
 ## Utilize the statement summary table to obtain queries that need to be bound
 
+<CustomContent platform="tidb">
+
 [Statement summary](/statement-summary-tables.md) records recent SQL execution information, such as latency, execution times, and corresponding query plans. You can query statement summary tables to get qualified `plan_digest`, and then [create bindings according to these historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
+</CustomContent>
 
 The following example queries `SELECT` statements that have been executed more than 10 times in the past two weeks, and have multiple execution plans without SQL binding. It sorts the queries by the execution times, and binds the top 100 queries to their fastest plans.
 
@@ -648,9 +660,13 @@ A plan baseline refers to a collection of accepted plans that the optimizer can 
 
 To enable baseline capturing, set `tidb_capture_plan_baselines` to `on`. The default value is `off`.
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > Because the automatic binding creation function relies on [Statement Summary](/statement-summary-tables.md), make sure to enable Statement Summary before using automatic binding.
+
+</CustomContent>
 
 After automatic binding creation is enabled, the historical SQL statements in the Statement Summary are traversed every `bind-info-lease` (the default value is `3s`), and a binding is automatically created for SQL statements that appear at least twice. For these SQL statements, TiDB automatically binds the execution plan recorded in Statement Summary.
 
