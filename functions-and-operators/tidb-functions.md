@@ -50,6 +50,64 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 </CustomContent>
 
+## CURRENT_RESOURCE_GROUP
+
+> **Note:**
+>
+> This feature is not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
+The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the Resource control feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
+
+When a session is established, TiDB binds the session to the resource group that the login user is bound to by default. If the user is not bound to any resource groups, the session is bound to the `default` resource group. Once the session is established, the bound resource group will not change by default, even if the bound resource group of the user is changed via [modifying the resource group bound to the user](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information).
+
+<CustomContent platform="tidb">
+
+To change the bound resource group of the current session, you can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
+
+</CustomContent>
+
+Examples:
+
+Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the user `user1` to the resource group `rg1`:
+
+```sql
+CREATE USER 'user1';
+CREATE RESOURCE GROUP rg1 RU_PER_SEC = 1000;
+CREATE RESOURCE GROUP rg2 RU_PER_SEC = 2000;
+ALTER USER 'user1' RESOURCE GROUP `rg1`;
+```
+
+Use `user1` to log in and view the resource group bound to the current user:
+
+```sql
+SELECT CURRENT_RESOURCE_GROUP();
+```
+
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg1                      |
++--------------------------+
+1 row in set (0.00 sec)
+```
+
+Execute `SET RESOURCE GROUP` to set the resource group for the current session to `rg2`, and then view the resource group bound to the current user:
+
+```sql
+SET RESOURCE GROUP `rg2`;
+SELECT CURRENT_RESOURCE_GROUP();
+```
+
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg2                      |
++--------------------------+
+1 row in set (0.00 sec)
+```
+
 ## TIDB_BOUNDED_STALENESS
 
 The `TIDB_BOUNDED_STALENESS()` function is used as part of [`AS OF TIMESTAMP`](/as-of-timestamp.md) syntax.

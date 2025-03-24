@@ -27,7 +27,7 @@ Before you start, you need:
 
 - A [Zapier account](https://zapier.com/app/login).
 - A [GitHub account](https://github.com/login).
-- A [TiDB Cloud account](https://tidbcloud.com/signup) and a TiDB Cloud Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
+- A [TiDB Cloud account](https://tidbcloud.com/signup) and a TiDB Cloud Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](https://docs.tidb.io/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
 
 ### Step 1: Get the template
 
@@ -62,7 +62,7 @@ In the editor page, you can see the trigger and action. Click the trigger to set
 2. Choose account
 
     1. Click the **Sign in** button, and you will be redirected to a new login page.
-    2. On the login page, fill in your public key and private key. To get the TiDB Cloud API key, follow the instructions in [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+    2. On the login page, fill in your public key and private key. To get the TiDB Cloud API key, follow the instructions in [TiDB Cloud API documentation](https://docs.tidb.io/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
     3. Click **Continue**.
 
     ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
@@ -189,7 +189,7 @@ Here are some examples:
 
 Zapier requires your **TiDB Cloud API key** to connect with your TiDB Cloud account. Zapier does not need your login account for TiDB Cloud.
 
-To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+To get your TiDB Cloud API key, follow the [TiDB Cloud API documentation](https://docs.tidb.io/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
 ### How do TiDB Cloud triggers perform de-duplication?
 

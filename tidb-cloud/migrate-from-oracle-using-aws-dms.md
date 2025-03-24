@@ -9,8 +9,8 @@ This document describes a step-by-step example of how to migrate data from Amazo
 
 If you are interested in learning more about TiDB Cloud and AWS DMS, see the following:
 
-- [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)
-- [TiDB Developer Guide](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
+- [TiDB Cloud](https://docs.tidb.io/tidbcloud/)
+- [TiDB Developer Guide](https://docs.tidb.io/tidbcloud/dev-guide-overview)
 - [AWS DMS Documentation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html)
 
 ## Why use AWS DMS?

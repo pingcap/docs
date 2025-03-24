@@ -304,7 +304,7 @@ For an example of using peewee to build a TiDB application, see [Connect to TiDB
 
 <CustomContent platform="tidb-cloud">
 
-After you have determined the driver or ORM, you can [connect to your TiDB cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
+After you have determined the driver or ORM, you can [connect to your TiDB cluster](https://docs.tidb.io/tidbcloud/connect-to-tidb-cluster).
 
 </CustomContent>
 

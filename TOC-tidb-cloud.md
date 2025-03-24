@@ -578,11 +578,11 @@
 - API Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/api-overview.md)
   - v1beta1
-    - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
-    - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
-    - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-    - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
-  - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
+    - [Billing](https://docs.tidb.io/tidbcloud/api/v1beta1/billing)
+    - [Data Service](https://docs.tidb.io/tidbcloud/api/v1beta1/dataservice)
+    - [IAM](https://docs.tidb.io/tidbcloud/api/v1beta1/iam)
+    - [MSP (Deprecated)]( https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+  - [v1beta](https://docs.tidb.io/tidbcloud/api/v1beta)
 - CLI Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/cli-reference.md)
   - auth

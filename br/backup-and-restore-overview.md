@@ -49,7 +49,7 @@ The way to use BR varies with the deployment method of TiDB. This document intro
 
 For information about how to use this feature in other deployment scenarios, see the following documents:
 
-- [Back Up and Restore TiDB Deployed on TiDB Cloud](https://docs.pingcap.com/tidbcloud/backup-and-restore): It is recommended that you create TiDB clusters on [TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en). TiDB Cloud offers fully managed databases to let you focus on your applications.
+- [Back Up and Restore TiDB Deployed on TiDB Cloud](https://docs.tidb.io/tidbcloud/backup-and-restore): It is recommended that you create TiDB clusters on [TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en). TiDB Cloud offers fully managed databases to let you focus on your applications.
 - [Back Up and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview): If you deploy a TiDB cluster using TiDB Operator on Kubernetes, it is recommended to back up and restore data using Kubernetes CustomResourceDefinition (CRD).
 
 ## BR features
