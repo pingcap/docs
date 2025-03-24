@@ -38,7 +38,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Performance
 
+* Support pushing down the following functions to TiFlash [#59317](https://github.com/pingcap/tidb/issues/59317) @[guo-shaoge](https://github.com/guo-shaoge) **tw@Oreoxmt** <!--1918-->
 
+    * `TRUNCATE()`
+
+  For more information, see [documentation](/tiflash/tiflash-supported-pushdown-calculations.md).
+
+* Support pushing down the following date functions to TiKV [#59365](https://github.com/pingcap/tidb/issues/59365) @[gengliqi](https://github.com/gengliqi) **tw@Oreoxmt** <!--1837-->
+
+    * `FROM_UNIXTIME()`
+    * `TIMESTAMPDIFF()`
+    * `UNIX_TIMESTAMP()`
+
+  For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
 
 ### Reliability
 
