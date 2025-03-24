@@ -17,7 +17,7 @@ BR satisfies the following requirements:
 
 ## Before you use
 
-This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues.
+This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues. For more information about the compatibility of the BR tool with other features or versions, see [Compatibility](#compatibility).
 
 ### Restrictions
 
@@ -145,26 +145,25 @@ This section introduces the BR compatibility information for all [Long-Term Supp
 
 > **Note:**
 >
-> Known issue: in v7.2.0, some system table fields are changed to case-sensitive, which might cause cross-version backup and restore failures. For more details, see [issue #43717](https://github.com/pingcap/tidb/issues/43717).
+> Known issue: Starting from version v7.2.0, some system table fields in newly created clusters are case-insensitive. However, for clusters that are **upgraded online** from versions earlier than v7.2.0 to v7.2.0 or later, the corresponding system table fields remain case-sensitive. Backup and restore operations involving system tables between these two types of clusters might fail. For more details, see [Issue #43717](https://github.com/pingcap/tidb/issues/43717).
 
-The following table lists the compatibility matrix for full backups:
-
-| Backup version | Compatible restore versions | Incompatible restore versions |
-|:---------|:----------------|:------------------|
-| v6.5.0    | 7.1.0           | v7.5.0 and later   |
-| v7.1.0    | -                 | v7.5.0 and later  |
-| v7.5.0    | v7.5.0 and later | -                 |
-| v8.1.0    | v8.1.0 and later | -                 |
-
-The following table lists the compatibility matrix for log backups:
+The following table lists the compatibility matrix for full backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
 
 | Backup version | Compatible restore versions | Incompatible restore versions |
-|:---------|:----------------|:------------------|
-| v6.5.0    | v7.1.0        | v7.5.0 and later  |
-| v7.1.0    | -                | v7.5.0 and later |
-| v7.5.0    | v7.5.0 and later | -                 |
-| v8.1.0    | v8.1.0 and later | -                 |
+|:--|:--|:--|
+| v6.5.0 | 7.1.0 | v7.5.0 and later |
+| v7.1.0 | - | v7.5.0 and later |
+| v7.5.0 | v7.5.0 and later | - |
+| v8.1.0 | v8.1.0 and later | - |
 
+The following table lists the compatibility matrix for log backups. Note that all information in the table applies to newly created clusters. For clusters upgraded from a version earlier than v7.2.0 to v7.2.0 or later, their behavior is consistent with that of backups from v7.1.0.
+
+| Backup version | Compatible restore versions | Incompatible restore versions |
+|:--|:--|:--|
+| v6.5.0 | 7.1.0 | v7.5.0 and later |
+| v7.1.0 | - | v7.5.0 and later |
+| v7.5.0 | v7.5.0 and later | - |
+| v8.1.0 | v8.1.0 and later | - |
 > **Note:**
 >
 > - When only user data is backed up (full backup or log backup), all versions are compatible with each other.
