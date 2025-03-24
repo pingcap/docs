@@ -43,7 +43,6 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md) | Shows indexes of a table. |
 | [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md) | An alias to `SHOW DATABASES`, which shows a list of databases that the current user has privileges to. |
 | [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) | Shows the next row ID for a table. |
-| [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) | Shows the Region information of a table in TiDB. |
 | [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md) | Shows various statistics about tables in TiDB. |
 | [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md) | Shows tables in a database. |
 | [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) | Truncates all data from a table. |
@@ -117,7 +116,6 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md) |  Included for [MySQL compatibility](/mysql-compatibility.md). It has no effective usage in TiDB. |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md) | Modifies a system variable or user variable. |
 | [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md) | Set a character set and collation. |
-| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md) | Splits a Region into smaller Regions. |
 
 </CustomContent>
 
@@ -132,6 +130,8 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 ## Backup & restore
 
+<CustomContent platform="tidb">
+
 | SQL Statement | Description |
 |---------------|-------------|
 | [`BACKUP`](/sql-statements/sql-statement-backup.md) | Performs a distributed backup of the TiDB cluster. |
@@ -143,7 +143,21 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW BACKUPS`](/sql-statements/sql-statement-show-backups.md) | Shows backup tasks. |
 | [`SHOW RESTORES`](/sql-statements/sql-statement-show-backups.md) | Shows restore tasks. |
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| SQL Statement | Description |
+|---------------|-------------|
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Restores the cluster to a specific snapshot. |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | Restores a database and its data deleted by the `DROP` statement. |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) | Restore the tables and data dropped by the `DROP` or `TRUNCATE` operation. |
+| [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) | Recovers a deleted table and the data on it. |
+
+</CustomContent>
 ## Placement policy
+
+<CustomContent platform="tidb">
 
 | SQL Statement | Description |
 |---------------|-------------|
@@ -155,6 +169,16 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md) | Shows placement rules for a specific table. |
 | [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md) | Shows available placement labels. |
 | [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md) | Shows placement rules. |
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This placement policy management statements are not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
+</CustomContent>
 
 ## Resource groups
 
@@ -247,7 +271,6 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md) | Included for [compatibility with MySQL](/mysql-compatibility.md). TiDB Cloud provides [Monitoring](/tidb-cloud/monitor-tidb-cluster.md) for centralized metrics collection instead of `SHOW STATUS` for most metrics. |
 | [`KILL`](/sql-statements/sql-statement-kill.md) | Kills a connection in any TiDB instance in the current TiDB cluster. |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md) | Shows available storage engines. |
-| [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md) | Shows installed plugins. |
 | [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) | Shows the current sessions connected to the same TiDB server. |
 | [`SHOW PROFILES`](/sql-statements/sql-statement-show-profiles.md) | Shows query profiles. Included for [compatibility with MySQL](/mysql-compatibility.md). Currently only returns an empty result. |
 
@@ -320,7 +343,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md) | Drops an execution plan binding from a SQL statement. |
 | [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) | Drops statistics from a table. |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Works similar to `EXPLAIN`, with the major difference that it will execute the statement. |
-| [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) | Loads statistics into TiDB. |
+| `LOAD STATS` | Loads statistics into TiDB. This statement is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters. |
 | [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md) | Shows statistics collection tasks. |
 | [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md) | Shows created SQL bindings. |
 | [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) | Shows an estimation of how accurate statistics are believed to be. |

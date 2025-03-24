@@ -162,9 +162,7 @@
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
-    - Analyze Performance
-      - [Use the Diagnosis Tab](/tidb-cloud/tune-performance.md)
-      - [Use Statement Summary Tables](/statement-summary-tables.md)
+    - [Use the Diagnosis Tab to Analyze Performance](/tidb-cloud/tune-performance.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - Understanding the Query Execution Plan
@@ -654,9 +652,6 @@
     - [TiDB Cloud Partners](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
     - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
-  - TiDB Distributed eXecution Framework (DXF)
-    - [Introduction](/tidb-distributed-execution-framework.md)
-    - [TiDB Global Sort](/tidb-global-sort.md)
   - [TiDB Cloud Serverless Limitations](/tidb-cloud/serverless-limitations.md)
   - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)

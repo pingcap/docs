@@ -81,6 +81,8 @@ See [Guidelines to follow when selecting primary keys](/develop/dev-guide-create
 
 The speed of creating indexes is conservative by default, and the index creation process can be accelerated by [modifying variables](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices) in some scenarios.
 
+<!--(.|\n)*?-->
+
 <!--
 ### Use the slow log memory mapping table
 

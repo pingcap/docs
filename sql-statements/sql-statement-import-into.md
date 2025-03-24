@@ -34,12 +34,24 @@ The `IMPORT INTO` statement lets you import data to TiDB via the [Physical Impor
 
 ### `IMPORT INTO ... FROM FILE` restrictions
 
+<CustomContent platform="tidb">
+
 - For TiDB Self-Managed, each `IMPORT INTO` task supports importing data within 10 TiB. If you enable the [Global Sort](/tidb-global-sort.md) feature, each `IMPORT INTO` task supports importing data within 40 TiB.
 - The execution of `IMPORT INTO ... FROM FILE` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
 - Up to 16 `IMPORT INTO` tasks can run simultaneously on each cluster (see [TiDB Distributed eXecution Framework (DXF) usage limitations](/tidb-distributed-execution-framework.md#limitation)). When a cluster lacks sufficient resources or reaches the maximum number of tasks, newly submitted import tasks are queued for execution.
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the value of the `THREAD` option must be at least `8`.
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding must not exceed 32 MiB.
 - All `IMPORT INTO` tasks that are created when [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) is not enabled run directly on the nodes where the tasks are submitted, and these tasks will not be scheduled for execution on other TiDB nodes even after DXF is enabled later. After DXF is enabled, only newly created `IMPORT INTO` tasks that import data from S3 or GCS are automatically scheduled or failed over to other TiDB nodes for execution.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- The execution of `IMPORT INTO ... FROM FILE` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
+- Up to 16 `IMPORT INTO` tasks can run simultaneously on each cluster. When a cluster lacks sufficient resources or reaches the maximum number of tasks, newly submitted import tasks are queued for execution.
+- All `IMPORT INTO` tasks that are created run directly on the nodes where the tasks are submitted.
+
+</CustomContent>
 
 ### `IMPORT INTO ... FROM SELECT` restrictions
 
@@ -154,17 +166,21 @@ The supported options are described as follows:
 | `MAX_WRITE_SPEED='<string>'` | All file formats | Controls the write speed to a TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to 1 MiB/s. |
 | `CHECKSUM_TABLE='<string>'` | All file formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
 | `DETACHED` | All file formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` immediately returns the information of the import job (such as the `Job_ID`), and the job is executed asynchronously in the backend. |
-| `CLOUD_STORAGE_URI` | All file formats | Specifies the target address where encoded KV data for [Global Sort](/tidb-global-sort.md) is stored. When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use Global Sort based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for Global Sort. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket, including at least these permissions: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, `s3: AbortMultipartUpload`. |
+| `CLOUD_STORAGE_URI` | All file formats | Specifies the target address where encoded KV data for Global Sort is stored. It is not supported for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless). When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use Global Sort based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for Global Sort. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket, including at least these permissions: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, `s3: AbortMultipartUpload`. |
 | `DISABLE_PRECHECK` | All file formats and query results of `SELECT` | Setting this option disables pre-checks of non-critical items, such as checking whether there are CDC or PITR tasks.  |
 
 ## `IMPORT INTO ... FROM FILE` usage
 
 For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS.
 
+<CustomContent platform="tidb">
+
 - For data files stored in Amazon S3 or GCS, `IMPORT INTO ... FROM FILE` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
 
     - When the DXF is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
     - When the DXF is disabled, `IMPORT INTO ... FROM FILE` only supports running on the TiDB node where the current user is connected.
+
+</CustomContent>
 
 - For data files stored locally in TiDB, `IMPORT INTO ... FROM FILE` only supports running on the TiDB node where the current user is connected. Therefore, the data files need to be placed on the TiDB node where the current user is connected. If you access TiDB through a proxy or load balancer, you cannot import data files stored locally in TiDB.
 
@@ -185,6 +201,10 @@ For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from 
 
 ### Global Sort
 
+> **Note:**
+>
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
 `IMPORT INTO ... FROM FILE` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
 
 In the following scenarios, there can be significant overlap in KV ranges:
@@ -193,7 +213,17 @@ In the following scenarios, there can be significant overlap in KV ranges:
     - `IMPORT INTO` splits sub-jobs based on the traversal order of data files, usually sorted by file name in lexicographic order.
 - If the target table has many indexes, or the index column values are scattered in the data file, the index KV generated by the encoding of each sub-job will also overlap.
 
+<CustomContent platform="tidb">
+
 When the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md) is enabled, you can enable [Global Sort](/tidb-global-sort.md) by specifying the `CLOUD_STORAGE_URI` option in the `IMPORT INTO` statement or by specifying the target storage address for encoded KV data using the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). Currently, Global Sort supports using Amazon S3 as the storage address. When Global Sort is enabled, `IMPORT INTO` writes encoded KV data to the cloud storage, performs Global Sort in the cloud storage, and then parallelly imports the globally sorted index and table data into TiKV. This prevents problems caused by KV overlap and enhances import stability and performance.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+When the TiDB Distributed eXecution Framework (DXF) is enabled, you can enable Global Sort by specifying the `CLOUD_STORAGE_URI` option in the `IMPORT INTO` statement or by specifying the target storage address for encoded KV data using the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). Currently, Global Sort supports using Amazon S3 as the storage address. When Global Sort is enabled, `IMPORT INTO` writes encoded KV data to the cloud storage, performs Global Sort in the cloud storage, and then parallelly imports the globally sorted index and table data into TiKV. This prevents problems caused by KV overlap and enhances import stability and performance.
+
+</CustomContent>
 
 Global Sort consumes a significant amount of memory resources. Before the data import, it is recommended to configure the [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640) and [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) variables, which avoids golang GC being frequently triggered and thus affecting the import efficiency.
 
@@ -355,7 +385,6 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
-* [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
-* [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
-* [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
+- [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
+- [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+- [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)

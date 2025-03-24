@@ -1606,11 +1606,15 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_dist_task <span class="version-mark">New in v7.1.0</span>
 
+> **Note:**
+>
+> - This TiDB variable is not applicable to [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
-- This variable is used to control whether to enable the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md). After the framework is enabled, the DXF tasks such as DDL and import will be distributedly executed and completed by multiple TiDB nodes in the cluster.
+- This variable is used to control whether to enable the TiDB Distributed eXecution Framework (DXF). After the framework is enabled, the DXF tasks such as DDL and import will be distributedly executed and completed by multiple TiDB nodes in the cluster.
 - Starting from TiDB v7.1.0, the DXF supports distributedly executing the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement for partitioned tables.
 - Starting from TiDB v7.2.0, the DXF supports distributedly executing the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs.
 - Starting from TiDB v8.1.0, this variable is enabled by default. If you want to upgrade a cluster with the DXF enabled to v8.1.0 or later, disable the DXF (by setting `tidb_enable_dist_task` to `OFF`) before the upgrade, which avoids `ADD INDEX` operations during the upgrade causing data index inconsistency. After the upgrade, you can manually enable the DXF.
@@ -1620,13 +1624,21 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
+> This TiDB variable is not applicable to [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
 > Currently, the [Global Sort](/tidb-global-sort.md) process consumes a large amount of computing and memory resources of TiDB nodes. In scenarios such as adding indexes online while user business applications are running, it is recommended to add new TiDB nodes to the cluster, configure the [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) variable for these nodes, and connect to these nodes to create tasks. In this way, the distributed framework schedules tasks to these nodes, isolating the workload from other TiDB nodes to reduce the impact of executing backend tasks such as `ADD INDEX` and `IMPORT INTO` on user business applications.
+
+</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `""`
-- This variable is used to specify the Amazon S3 cloud storage URI to enable [Global Sort](/tidb-global-sort.md). After enabling the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), you can use the Global Sort feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. For more details, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format).
+- This variable is used to specify the Amazon S3 cloud storage URI to enable Global Sort. After enabling the TiDB Distributed eXecution Framework (DXF), you can use the Global Sort feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. For more details, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format).
 - The following statements can use the Global Sort feature.
     - The [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement.
     - The [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs.
@@ -4756,7 +4768,7 @@ SHOW WARNINGS;
 - Type: Enumeration
 - Default value: `STRICT`
 - Possible values: `STRICT`, `IGNORE`
-- This variable controls whether DDL statements ignore the [placement rules specified in SQL](/placement-rules-in-sql.md). When the variable value is `IGNORE`, all placement rule options are ignored.
+- This variable controls whether DDL statements ignore the placement rules specified in SQL. When the variable value is `IGNORE`, all placement rule options are ignored.
 - It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if invalid placement rules are assigned. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
 
 ### `tidb_plan_cache_invalidation_on_fresh_stats` <span class="version-mark">New in v7.1.0</span>
@@ -5146,7 +5158,7 @@ SHOW WARNINGS;
 - Type: String
 - Default value: ""
 - Optional value: a string with a length of up to 64 characters. Valid characters include digits `0-9`, letters `a-zA-Z`, underscores `_`, and hyphens `-`.
-- This variable is an instance-level system variable. You can use it to control the service scope of each TiDB node under the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md). The DXF determines which TiDB nodes can be scheduled to execute distributed tasks based on the value of this variable. For specific rules, see [Task scheduling](/tidb-distributed-execution-framework.md#task-scheduling).
+- This variable is an instance-level system variable. You can use it to control the service scope of each TiDB node under the TiDB Distributed eXecution Framework (DXF). The DXF determines which TiDB nodes can be scheduled to execute distributed tasks based on the value of this variable. <!--For specific rules, see [Task scheduling](/tidb-distributed-execution-framework.md#task-scheduling).-->
 
 ### tidb_session_alias <span class="version-mark">New in v7.4.0</span>
 
@@ -5368,11 +5380,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable is read-only. It controls whether to enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary).
+- This variable is read-only.
 
 <CustomContent platform="tidb">
 
+- It controls whether to enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary).
 - The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- It controls whether to enable statements summary persistence.
 
 </CustomContent>
 
@@ -5394,11 +5413,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: `"tidb-statements.log"`
-- This variable is read-only. It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+- This variable is read-only.
 
 <CustomContent platform="tidb">
 
+- It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
 - The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- It specifies the file to which persistent data is written when statements summary persistence is enabled.
 
 </CustomContent>
 
@@ -5420,11 +5446,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
-- This variable is read-only. It specifies the maximum number of data files that can be persisted when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+- This variable is read-only.
 
 <CustomContent platform="tidb">
 
+- It specifies the maximum number of data files that can be persisted when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
 - The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- It specifies the maximum number of data files that can be persisted when statements summary persistence is enabled.
 
 </CustomContent>
 
@@ -5447,11 +5480,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `3`
 - Unit: day
-- This variable is read-only. It specifies the maximum number of days to keep persistent data files when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+- This variable is read-only.
 
 <CustomContent platform="tidb">
 
+- It specifies the maximum number of days to keep persistent data files when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
 - The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- It specifies the maximum number of days to keep persistent data files when statements summary persistence is enabled.
 
 </CustomContent>
 
@@ -5474,11 +5514,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `64`
 - Unit: MiB
-- This variable is read-only. It specifies the maximum size of a persistent data file when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+- This variable is read-only.
 
 <CustomContent platform="tidb">
 
+- It specifies the maximum size of a persistent data file when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
 - The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- It specifies the maximum size of a persistent data file when statements summary persistence is enabled.
 
 </CustomContent>
 
@@ -5494,7 +5541,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `24`
 - Range: `[0, 255]`
+
+<CustomContent platform="tidb">
+
 - This variable is used to set the history capacity of [statement summary tables](/statement-summary-tables.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to set the history capacity of statement summary tables.
+
+</CustomContent>
 
 ### tidb_stmt_summary_internal_query <span class="version-mark">New in v4.0</span>
 
@@ -5507,7 +5565,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
+
+<CustomContent platform="tidb">
+
 - This variable is used to control whether to include the SQL information of TiDB in [statement summary tables](/statement-summary-tables.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to control whether to include the SQL information of TiDB in statement summary tables.
+
+</CustomContent>
 
 ### tidb_stmt_summary_max_sql_length <span class="version-mark">New in v4.0</span>
 
@@ -5531,7 +5600,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md).
+- This variable is used to control the length of the SQL string in statement summary tables.
 
 </CustomContent>
 
@@ -5547,7 +5616,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `3000`
 - Range: `[1, 32767]`
+
+<CustomContent platform="tidb">
+
 - This variable is used to set the maximum number of statements that [statement summary tables](/statement-summary-tables.md) store in memory.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to set the maximum number of statements that statement summary tables store in memory.
+
+</CustomContent>
 
 ### tidb_stmt_summary_refresh_interval <span class="version-mark">New in v4.0</span>
 
@@ -5562,7 +5642,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `1800`
 - Range: `[1, 2147483647]`
 - Unit: Seconds
+
+<CustomContent platform="tidb">
+
 - This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to set the refresh time of statement summary tables.
+
+</CustomContent>
 
 ### tidb_store_batch_size
 

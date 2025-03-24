@@ -544,6 +544,8 @@ The interface to export statistics is as follows:
 
 ### Import statistics
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > When you start the MySQL client, use the `--local-infile=1` option.
@@ -559,6 +561,16 @@ LOAD STATS 'file_name';
 ```
 
 `file_name` is the file name of the statistics to be imported.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
+</CustomContent>
 
 ## Lock statistics
 
@@ -795,7 +807,6 @@ When you analyze index columns, you can use the [`tidb_index_serial_scan_concurr
 
 <CustomContent platform="tidb-cloud">
 
-* [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
 * [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
 * [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
 * [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
