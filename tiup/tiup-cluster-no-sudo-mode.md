@@ -13,7 +13,13 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
 
 ## Prepare the user and configure the SSH mutual trust
 
-1. Take the `tidb` user as an example. Log in to all the target machines and create a user named `tidb` using the `root` user with the following command. In no-sudo mode, configuring passwordless sudo for the `tidb` user is unnecessary, that is, you do not need to add the `tidb` user to the `sudoers` file.
+This document takes the `tidb` user as an example.
+
+1. Log in to all the target machines as the `root` user, create a user named `tidb` and configure the system resource limits for this user as follows:
+
+>**Note:**
+>
+> In no-sudo mode, configuring passwordless sudo for the `tidb` user is unnecessary, that is, you do not need to add the `tidb` user to the `sudoers` file.
 
     1. Add the `tidb` user:
 
