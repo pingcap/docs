@@ -9,7 +9,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flex
 
 TiDB is MySQL-compatible, making it easy to migrate and work with existing applications, while offering seamless scalability to handle everything from small workloads to massive, high-performance clusters. It supports both transactional (OLTP) and analytical (OLAP) workloads in one system, simplifying operations and enabling real-time insights.
 
-TiDB Cloud provides **TiDB Cloud** **Serverless** for auto-scaling, cost-efficient workloads. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
+TiDB Cloud provides **TiDB Cloud Serverless** for auto-scaling, cost-efficient workloads. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
 
 ## TiDB Cloud Serverless
 
@@ -25,7 +25,7 @@ For applications that require maximum infrastructure isolation and redundancy, t
 
 ## TiDB Cloud console
 
-The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for both TiDB Cloud clusters. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
+The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for TiDB Cloud clusters. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
 
 ## TiDB Cloud CLI (Beta)
 
