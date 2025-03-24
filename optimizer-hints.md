@@ -851,7 +851,7 @@ SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 
 > **Note:**
 >
-> This resource control feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless) clusters.
+> This resource control feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 `RESOURCE_GROUP(resource_group_name)` is used for resource control to isolate resources. This hint temporarily executes the current statement using the specified resource group. If the specified resource group does not exist, this hint will be ignored.
 
