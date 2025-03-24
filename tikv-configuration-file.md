@@ -1026,7 +1026,6 @@ Configuration items related to Raftstore.
 + When TiKV uses the SlowTrend detection algorithm, this configuration item controls the sensitivity of QPS detection. A higher value indicates lower sensitivity.
 + Default value: `0.5`
 
->>>>>>> 6ff4bab1ae (tikv: add missing tikv configs (#20566))
 ## coprocessor
 
 Configuration items related to Coprocessor.
