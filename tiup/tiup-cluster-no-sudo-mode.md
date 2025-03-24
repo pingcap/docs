@@ -21,7 +21,7 @@ This document describes how to use the TiUP no-sudo mode to deploy a cluster.
         adduser tidb
         ```
 
-    2. Configure the limits for the `tidb` user.
+    2. Configure the limits for the `tidb` user:
 
         ```shell
         cat << EOF >>/etc/security/limits.conf
