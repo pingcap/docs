@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in Next.js to accompl
 
 > **Note**
 >
-> This tutorial works with TiDB Cloud Serverless and TiDB Self-Managed.
+> This tutorial works with TiDB Cloud Serverless.
 
 ## Prerequisites
 

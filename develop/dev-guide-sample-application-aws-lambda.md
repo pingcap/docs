@@ -16,7 +16,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in AWS Lambda Functio
 
 > **Note**
 >
-> This tutorial works with TiDB Cloud Serverless and TiDB Self-Managed.
+> This tutorial works with TiDB Cloud Serverless.
 
 ## Prerequisites
 

@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB along with [Spring Data JPA](htt
 
 > **Note:**
 >
-> This tutorial works with TiDB Cloud Serverless and TiDB Self-Managed.
+> This tutorial works with TiDB Cloud Serverless.
 
 ## Prerequisites
 
