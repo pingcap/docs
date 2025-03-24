@@ -218,7 +218,7 @@ This document only describes the parameters that are not included in command-lin
 
 ### `end-point-memory-quota` <span class="version-mark">New in v8.2.0</span>
 
-* The maximum memory limit for TiKV Coprocessor requests. If this limit is exceeded, subsequent Coprocessor requests will be rejected with the error "server is busy."
+* The maximum amount of memory that TiKV Coprocessor requests can use. If this limit is exceeded, subsequent Coprocessor requests are rejected with the error "server is busy."
 * Default value: 45% of the total system memory. If 45% of the total system memory exceeds 500 MiB, the default value is 500 MiB.
 
 ### `snap-io-max-bytes-per-sec`
@@ -1066,7 +1066,7 @@ Configuration items related to Raftstore.
 
 ### `inspect-cpu-util-thd` <span class="version-mark">New in v7.6.0</span>
 
-+ The threshold for determining whether a TiKV node is in a busy state during slow node detection.
++ The CPU utilization threshold for determining whether a TiKV node is busy during slow node detection.
 + Value range: `[0, 1]`
 + Default value: `0.4`, which means `40%`.
 
@@ -1077,22 +1077,22 @@ Configuration items related to Raftstore.
 
 ### `min-pending-apply-region-count` <span class="version-mark">New in v8.0.0</span>
 
-+ The maximum number of Regions busy applying Raft logs when TiKV starts. Raftstore only accepts leader transfers if the number of such Regions is below this value, reducing availability degradation during rolling restarts.
++ The maximum number of Regions in the busy state of applying Raft logs when TiKV starts. Raftstore accepts leader transfers only when the number of such Regions is below this value, reducing availability degradation during rolling restarts.
 + Default value: `10`
 
 ### `request-voter-replicated-index-interval` <span class="version-mark">New in v6.6.0</span>
 
-+ Controls the interval at which the Witness node periodically retrieves the replicated Raft log position from voting nodes.
++ Controls the interval at which the Witness node periodically retrieves the replicated Raft log position from voter nodes.
 + Default value: `5m`, which means 5 minutes.
 
 ### `slow-trend-unsensitive-cause` <span class="version-mark">New in v6.6.0</span>
 
-+ When TiKV uses the SlowTrend detection algorithm, this parameter controls the sensitivity of latency detection. A higher value indicates lower sensitivity.
++ When TiKV uses the SlowTrend detection algorithm, this configuration item controls the sensitivity of latency detection. A higher value indicates lower sensitivity.
 + Default value: `10`
 
 ### `slow-trend-unsensitive-result` <span class="version-mark">New in v6.6.0</span>
 
-+ When TiKV uses the SlowTrend detection algorithm, this parameter controls the sensitivity of QPS-side detection. A higher value indicates lower sensitivity.
++ When TiKV uses the SlowTrend detection algorithm, this configuration item controls the sensitivity of QPS detection. A higher value indicates lower sensitivity.
 + Default value: `0.5`
 
 ## coprocessor
@@ -1399,7 +1399,7 @@ Configuration items related to RocksDB
 
 ### `enable-multi-batch-write` <span class="version-mark">New in v6.2.0</span>
 
-+ Enables RocksDB write optimization, allowing the contents of WriteBatch to be written concurrently to the memtable, reducing write latency.
++ Controls whether to enable RocksDB write optimization, allowing the contents of WriteBatch to be written concurrently to the memtable, reducing write latency.
 + Default value: None. However, it is enabled by default unless explicitly set to `false` or if `rocksdb.enable-pipelined-write` or `rocksdb.enable-unordered-write` is enabled.
 
 ## rocksdb.titan
@@ -2082,7 +2082,7 @@ Configuration items related to Raft Engine.
 
 ### `compression-level` <span class="version-mark">New in v7.4.0</span>
 
-+ Sets the compression efficiency of the LZ4 algorithm used by Raft Engine when writing Raft log files. Lower values indicate higher compression speed but lower compression ratio.
++ Sets the compression efficiency of the LZ4 algorithm used by Raft Engine when writing Raft log files. A lower value indicates faster compression speed but lower compression ratio.
 + Range: `[1, 16]`
 + Default value: `1`
 
