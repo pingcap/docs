@@ -3155,9 +3155,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - If the [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800) option is set then the general log is written to a separate file. The [`log.format`](/tidb-configuration-file.md#format) is configuring the format of the log messages both when a separate file is used and when the general log is combined with other logging.
 
-- The [`tidb_redact_log`](#tidb_redact_log) variable can be used to redact the statements that are logged to the general log.
+- The [`tidb_redact_log`](#tidb_redact_log) variable enables you to redact SQL statements recorded in the general log.
 
-- Only statements that were executed are logged, failed statements are not written to the general log. Failed statements are instead logged with a `command dispatched failed` message to the tidb log.
+- Only successfully executed statements are logged. Failed statements are not recorded in the general log but are instead logged in the TiDB log with a `command dispatched failed` message.
 
 - To see all records of this feature in the log, you need to set the TiDB configuration item [`log.level`](/tidb-configuration-file.md#level) to `"info"` or `"debug"` and then query the `"GENERAL_LOG"` string. The following information is recorded:
     - `time`: The time of the event.
