@@ -40,7 +40,7 @@ After a SQL user is granted both a built-in role and multiple custom roles, the 
 
 To create a SQL user, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
     > **Tip:**
     >
@@ -70,7 +70,7 @@ To create a SQL user, take the following steps:
 
 To view SQL users of a cluster, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
     > **Tip:**
     >
@@ -82,7 +82,7 @@ To view SQL users of a cluster, take the following steps:
 
 To edit the password or roles of a SQL user, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
     > **Tip:**
     >
@@ -104,7 +104,7 @@ To edit the password or roles of a SQL user, take the following steps:
 
 To delete a SQL user, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
     > **Tip:**
     >

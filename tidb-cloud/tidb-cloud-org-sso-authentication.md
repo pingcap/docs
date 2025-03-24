@@ -36,7 +36,7 @@ When Cloud Organization SSO is enabled, your members must use your custom URL in
 
 The custom URL cannot be changed after the enablement, so you need to decide which URL to be used in advance.
 
-The format of the custom URL is `https://tidbcloud.com/enterprise/signin/your-company-name`, in which you can customize your company name.
+The format of the custom URL is `https://console.tidb.io/enterprise/signin/your-company-name`, in which you can customize your company name.
 
 ### Decide authentication methods for your organization members
 
