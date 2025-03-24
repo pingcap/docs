@@ -8,11 +8,9 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB. This document introduces the following `ADMIN` related statements:
 
 - [`ADMIN RELOAD`](#admin-reload-statement)
-- [`ADMIN PLUGINS`](#admin-plugins-related-statement)
 - [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
 - [`ADMIN REPAIR`](#admin-repair-statement)
 - [`ADMIN SHOW NEXT_ROW_ID`](#admin-show-next_row_id-statement)
-- [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
 ## DDL related statement
 

@@ -187,14 +187,9 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` statement. The bene
 | [`SEQUENCES`](/information-schema/information-schema-sequences.md)                      | The TiDB implementation of sequences is based on MariaDB. |
 | [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)  | Provides details about table sizes in storage. |
 | [`TIDB_HOT_REGIONS`](https://docs.pingcap.com/tidb/stable/information-schema-tidb-hot-regions)        | Provides statistics about which regions are hot. This table is not applicable to TiDB Cloud. |
-| [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md) | Provides history statistics about which Regions are hot. |
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                | Provides index information about TiDB tables. |
 | [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | Provides the information of the index usage statistics on the TiDB node. ｜
-| [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | Provides a list of TiDB servers (namely, tidb-server component) |
 | [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) | Provides the information of the transactions that are being executed on the TiDB node. |
 | [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)          | Provides details about TiFlash replicas. |
-| [`TIKV_REGION_PEERS`](/information-schema/information-schema-tikv-region-peers.md)      | Provides details about where regions are stored. |
-| [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)    | Provides statistics about regions. |
-| [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)      | Provides basic information about TiKV servers. |
 
 </CustomContent>

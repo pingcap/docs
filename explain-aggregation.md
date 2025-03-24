@@ -31,6 +31,8 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1;
 ```
 
+<CustomContent platform="tidb">
+
 From the output of [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md), you can see that this table is split into multiple Regions:
 
 {{< copyable "sql" >}}
@@ -50,6 +52,8 @@ SHOW TABLE t1 REGIONS;
 +-----------+--------------+--------------+-----------+-----------------+-------+------------+---------------+------------+----------------------+------------------+
 4 rows in set (0.00 sec)
 ```
+
+</CustomContent>
 
 Using `EXPLAIN` with the following aggregation statement, you can see that `└─StreamAgg_8` is first performed on each Region inside TiKV. Each TiKV Region will then send one row back to TiDB, which aggregates the data from each Region in `StreamAgg_16`:
 
