@@ -303,6 +303,6 @@ For details, see the following documents:
 
 > **Note:**
 >
-> These statements are not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> These statements are not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 </CustomContent>
