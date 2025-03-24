@@ -61,7 +61,7 @@ In this directory:
 
 - The `models` directory contains the project’s SQL models and table schemas. Note that the data analyst writes this section. For more information about models, see [SQL models](https://docs.getdbt.com/docs/build/sql-models).
 
-- The `seeds` directory stores the CSV files that are dumped by the database export tools. For example, you can [export the TiDB Cloud data](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) into CSV files through Dumpling. In the `jaffle_shop` project, these CSV files are used as raw data to be processed.
+- The `seeds` directory stores the CSV files that are dumped by the database export tools. For example, you can [export the TiDB Cloud data](https://docs.tidb.io/tidbcloud/export-data-from-tidb-cloud) into CSV files through Dumpling. In the `jaffle_shop` project, these CSV files are used as raw data to be processed.
 
 ## Step 3: Configure the project
 

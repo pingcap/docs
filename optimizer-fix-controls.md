@@ -94,7 +94,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 > **Note:**
 >
-> This is only available for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
+> This is only available for [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
 
 - Default value: `ON`
 - Possible values: `ON`, `OFF`
