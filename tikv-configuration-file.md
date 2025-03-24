@@ -1022,6 +1022,26 @@ Configuration items related to Raftstore.
 + Default value: `0.1`
 + Minimum value: `0`
 
+### `follower-read-max-log-gap` <span class="version-mark">New in v7.4.0</span>
+
++ The maximum number of logs a follower is allowed to lag behind when processing read requests. If this limit is exceeded, the read request is rejected.
++ Default value: `100`
+
+### `request-voter-replicated-index-interval` <span class="version-mark">New in v6.6.0</span>
+
++ Controls the interval at which the Witness node periodically retrieves the replicated Raft log position from voter nodes.
++ Default value: `5m`, which means 5 minutes.
+
+### `slow-trend-unsensitive-cause` <span class="version-mark">New in v6.6.0</span>
+
++ When TiKV uses the SlowTrend detection algorithm, this configuration item controls the sensitivity of latency detection. A higher value indicates lower sensitivity.
++ Default value: `10`
+
+### `slow-trend-unsensitive-result` <span class="version-mark">New in v6.6.0</span>
+
++ When TiKV uses the SlowTrend detection algorithm, this configuration item controls the sensitivity of QPS detection. A higher value indicates lower sensitivity.
++ Default value: `0.5`
+
 ## coprocessor
 
 Configuration items related to Coprocessor.
@@ -1324,6 +1344,11 @@ Configuration items related to RocksDB
     + `true`: records information about WAL files in the MANIFEST file and verifies the integrity of WAL files during startup.
     + `false`: does not record information about WAL files in the MANIFEST file and does not verify the integrity of WAL files during startup.
 
+### `enable-multi-batch-write` <span class="version-mark">New in v6.2.0</span>
+
++ Controls whether to enable RocksDB write optimization, allowing the contents of WriteBatch to be written concurrently to the memtable, reducing write latency.
++ Default value: None. However, it is enabled by default unless explicitly set to `false` or if `rocksdb.enable-pipelined-write` or `rocksdb.enable-unordered-write` is enabled.
+
 ## rocksdb.titan
 
 Configuration items related to Titan.
@@ -1349,7 +1374,7 @@ Configuration items related to Titan.
 + Default value: `4`
 + Minimum value: `1`
 
-## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf
+## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf
 
 Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rocksdb.lockcf`.
 
@@ -1607,6 +1632,11 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + The time interval for periodic compaction. SST files with updates older than this value will be selected for compaction and rewritten to the same level where these SST files originally reside.
 + Default value: `"0s"`, meaning that periodic compaction is disabled by default.
 + Unit: s(second)|h(hour)|d(day)
+
+### `max-compactions` <span class="version-mark">New in v6.6.0</span>
+
++ The maximum number of concurrent compaction tasks. The value `0` means no limit.
++ Default value: `0`
 
 ## rocksdb.defaultcf.titan
 
@@ -1946,6 +1976,12 @@ Configuration items related to Raft Engine.
 
 + Determines whether to generate empty log files for log recycling in Raft Engine. When it is enabled, Raft Engine will automatically fill a batch of empty log files for log recycling during initialization, making log recycling effective immediately after initialization.
 + Default value: `false`
+
+### `compression-level` <span class="version-mark">New in v7.4.0</span>
+
++ Sets the compression efficiency of the LZ4 algorithm used by Raft Engine when writing Raft log files. A lower value indicates faster compression speed but lower compression ratio.
++ Range: `[1, 16]`
++ Default value: `1`
 
 ## security
 
