@@ -66,7 +66,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 | Function and operator | TiDB Cloud Serverless |
 |:-|:-|
-| `SLEEP` | The [`SLEEP()` function](https://docs.tidb.io/tidbcloud/miscellaneous-functions) has a limitation wherein it can only support a maximum sleep time of 300 seconds.|
+| `SLEEP` | The [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) has a limitation wherein it can only support a maximum sleep time of 300 seconds.|
 
 ## System tables
 

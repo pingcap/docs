@@ -37,7 +37,7 @@ TiDB Cloud API uses HTTP Digest Authentication. It protects your private key fro
 
 Currently, TiDB Cloud Terraform Provider does not support managing API keys. So you need to create an API key in the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
 
-For detailed steps, see [TiDB Cloud API documentation](https://docs.tidb.io/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+For detailed steps, see [TiDB Cloud API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
 ## Step 3. Download TiDB Cloud Terraform Provider
 

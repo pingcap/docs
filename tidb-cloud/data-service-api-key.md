@@ -12,7 +12,7 @@ The TiDB Cloud Data API supports both [Basic Authentication](https://en.wikipedi
 
 > **Note:**
 >
-> The Data API key in Data Service is different from the key used in the [TiDB Cloud API](https://docs.tidb.io/tidbcloud/api/v1beta#section/Authentication). The Data API key is used to access data in the TiDB Cloud clusters, whereas the TiDB Cloud API key is used to manage resources such as projects, clusters, backups, restores, and imports.
+> The Data API key in Data Service is different from the key used in the [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication). The Data API key is used to access data in the TiDB Cloud clusters, whereas the TiDB Cloud API key is used to manage resources such as projects, clusters, backups, restores, and imports.
 
 ## API key overview
 

@@ -88,7 +88,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
             > **Note:**
             >
-            > If you are running on Windows or GitHub Codespaces, you can leave **SSL** blank. By default SQLTools trusts well-known CAs curated by Let's Encrypt. For more information, see [TiDB Cloud Serverless root certificate management](https://docs.tidb.io/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
+            > If you are running on Windows or GitHub Codespaces, you can leave **SSL** blank. By default SQLTools trusts well-known CAs curated by Let's Encrypt. For more information, see [TiDB Cloud Serverless root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
 
     ![VS Code SQLTools: configure connection settings for TiDB Cloud Serverless](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 

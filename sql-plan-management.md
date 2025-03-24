@@ -489,7 +489,7 @@ SHOW binding_cache status;
 
 > **Note:**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier/#tidb-cloud-serverless) clusters.
+> This feature is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-serverless) clusters.
 
 </CustomContent>
 

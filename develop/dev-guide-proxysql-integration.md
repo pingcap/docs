@@ -9,7 +9,7 @@ This document provides a high-level introduction to ProxySQL, describes how to i
 
 If you are interested in learning more about TiDB and ProxySQL, you can find some useful links as follows:
 
-- [TiDB Cloud](https://docs.tidb.io/tidbcloud/)
+- [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)
 - [TiDB Developer Guide](/develop/dev-guide-overview.md)
 - [ProxySQL Documentation](https://proxysql.com/documentation/)
 
@@ -123,7 +123,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
 #### Step 1. Create a TiDB Cloud Serverless cluster
 
-1. [Create a free TiDB Cloud Serverless cluster](https://docs.tidb.io/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
+1. [Create a free TiDB Cloud Serverless cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
 2. Get your cluster hostname, port, and username for later use.
 
     1. On the [Clusters](https://tidbcloud.com/console/clusters) page, click your cluster name to go to the cluster overview page.

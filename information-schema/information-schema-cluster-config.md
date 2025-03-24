@@ -9,7 +9,7 @@ You can use the `CLUSTER_CONFIG` cluster configuration table to get the current 
 
 > **Note:**
 >
-> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.tidb.io/tidbcloud/).
+> This table is only applicable to TiDB Self-Managed and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 {{< copyable "sql" >}}
 

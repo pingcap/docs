@@ -18,7 +18,7 @@ In addition, you can try out TiDB features on [TiDB Playground](https://play.tid
 >
 > - To deploy a self-hosted production cluster, see the [production installation guide](/production-deployment-using-tiup.md).
 > - To deploy TiDB on Kubernetes, see [Get Started with TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
-> - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.tidb.io/tidbcloud/tidb-cloud-quickstart).
+> - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart).
 
 ## Deploy a local test cluster
 

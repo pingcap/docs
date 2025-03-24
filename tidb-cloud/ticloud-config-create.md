@@ -13,7 +13,7 @@ ticloud config create [flags]
 
 > **Note:**
 >
-> Before creating a user profile, you need to [create a TiDB Cloud API Key](https://docs.tidb.io/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+> Before creating a user profile, you need to [create a TiDB Cloud API Key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
 ## Examples
 

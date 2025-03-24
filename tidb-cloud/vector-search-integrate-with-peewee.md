@@ -149,7 +149,7 @@ connect_kwargs = {
 #     'ssl_mode': 'VERIFY_IDENTITY',
 #     'ssl': {
 #         # Root certificate default path
-#         # https://docs.tidb.io/tidbcloud/secure-connections-to-serverless-clusters/#root-certificate-default-path
+#         # https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/#root-certificate-default-path
 #         'ca': os.environ.get('TIDB_CA_PATH', '/path/to/ca.pem'),
 #     },
 # }
