@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and Django to accomplish the fol
 
 > **Note:**
 >
-> This tutorial works with TiDB Cloud Serverless.clusters.
+> This tutorial works with TiDB Cloud Serverless clusters.
 
 ## Prerequisites
 
