@@ -306,3 +306,58 @@ This is because the default port number of the TiCDC cluster deployed by TiDB Op
   }
 ]
 ```
+<<<<<<< HEAD
+=======
+
+## Does TiCDC replicate generated columns of DML operations?
+
+Generated columns include virtual generated columns and stored generated columns. TiCDC ignores virtual generated columns and only replicates stored generated columns to the downstream. However, stored generated columns are also ignored when the downstream is MySQL or another MySQL-compatible database (rather than Kafka or other storage services).
+
+> **Note:**
+>
+> When replicating stored generated columns to Kafka or a storage service and then writing them back to MySQL, `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed` might occur. To avoid this error, you can use [Open Protocol](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol) for replication. The output of this protocol includes [bit flags of columns](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns), which can distinguish whether a column is a generated column.
+
+## How do I resolve frequent `CDC:ErrMySQLDuplicateEntryCDC` errors?
+
+When using TiCDC to replicate data to TiDB or MySQL, you might encounter the following error if SQL statements in the upstream are executed in a specific pattern:
+
+`CDC:ErrMySQLDuplicateEntryCDC`
+
+The cause of the error: TiDB combines `DELETE + INSERT` operations on the same row within the same transaction into a single `UPDATE` row change. When TiCDC replicates these changes as updates to the downstream, the `UPDATE` operations attempting to swap unique key values might result in conflicts.
+
+Taking the following table as an example:
+
+```sql
+CREATE TABLE data_table (
+    id BIGINT(20) NOT NULL PRIMARY KEY,
+    value BINARY(16) NOT NULL,
+    UNIQUE KEY value_index (value)
+) CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+```
+
+If the upstream attempts to swap the `value` field of the two rows in the table:
+
+```sql
+DELETE FROM data_table WHERE id = 1;
+DELETE FROM data_table WHERE id = 2;
+INSERT INTO data_table (id, value) VALUES (1, 'v3');
+INSERT INTO data_table (id, value) VALUES (2, 'v1');
+```
+
+TiDB generates two `UPDATE` row changes, so TiCDC converts them into two `UPDATE` statements for replication to the downstream:
+
+```sql
+UPDATE data_table SET value = 'v3' WHERE id = 1;
+UPDATE data_table SET value = 'v1' WHERE id = 2;
+```
+
+If the downstream table still contains `v1` when executing the second `UPDATE` statement, it violates the unique key constraint on the `value` column, resulting in the `CDC:ErrMySQLDuplicateEntryCDC` error.
+
+If the `CDC:ErrMySQLDuplicateEntryCDC` error occurs frequently, you can enable TiCDC safe mode by setting the `safe-mode=true` parameter in the [`sink-uri`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) configuration:
+
+```
+mysql://user:password@host:port/?safe-mode=true
+```
+
+In safe mode, TiCDC splits the `UPDATE` operation into `DELETE + REPLACE INTO` for execution, thus avoiding the unique key conflict error.
+>>>>>>> d80c373027 (ticdc: add duplicate entry faq (#20550))
