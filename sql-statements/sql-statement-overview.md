@@ -155,6 +155,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md) | Recovers a deleted table and the data on it. |
 
 </CustomContent>
+
 ## Placement policy
 
 <CustomContent platform="tidb">
