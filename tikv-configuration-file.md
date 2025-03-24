@@ -216,6 +216,11 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"60s"`
 + Minimum value: `"1s"`
 
+### `end-point-memory-quota` <span class="version-mark">New in v8.2.0</span>
+
+* The maximum amount of memory that TiKV Coprocessor requests can use. If this limit is exceeded, subsequent Coprocessor requests are rejected with the error "server is busy."
+* Default value: 45% of the total system memory. If 45% of the total system memory exceeds 500 MiB, the default value is 500 MiB.
+
 ### `snap-io-max-bytes-per-sec`
 
 + The maximum allowable disk bandwidth when processing snapshots
@@ -500,6 +505,11 @@ Configuration items related to storage.
 
 > - API V1 and API V2 are different from each other in the storage format. You can enable or disable API V2 directly **only** when TiKV contains only TiDB data. In other scenarios, you need to deploy a new cluster, and migrate data using [RawKV Backup & Restore](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/).
 > - After API V2 is enabled, you **cannot** downgrade the TiKV cluster to a version earlier than v6.1.0. Otherwise, data corruption might occur.
+
+## `txn-status-cache-capacity` <span class="version-mark">New in v7.6.0</span>
+
++ Sets the capacity of the transaction status cache in TiKV. Do not modify this parameter.
++ Default value: `5120000`
 
 ## storage.block-cache
 
@@ -1011,6 +1021,69 @@ Configuration items related to Raftstore.
 + Minimum value: `0`
 + Unit: second
 
+<<<<<<< HEAD
+=======
+### `evict-cache-on-memory-ratio` <span class="version-mark">New in v7.5.0</span>
+
++ When the memory usage of TiKV exceeds 90% of the system available memory, and the memory occupied by Raft entry cache exceeds the used memory * `evict-cache-on-memory-ratio`, TiKV evicts the Raft entry cache.
++ If this value is set to `0`, it means that this feature is disabled.
++ Default value: `0.1`
++ Minimum value: `0`
+
+### `periodic-full-compact-start-times` <span class="version-mark">New in v7.6.0</span>
+
+> **Warning:**
+>
+> Periodic full compaction is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Set the specific times that TiKV initiates periodic full compaction. You can specify multiple time schedules in an array. For example:
+    + `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM, based on the local time zone of the TiKV node.
+    + `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC timezone.
+    + `periodic-full-compact-start-times = ["03:00 +0800", "23:00 +0800"]` indicates that TiKV performs full compaction daily at 03:00 AM and 11:00 PM in UTC+08:00 timezone.
++ Default value: `[]`, which means periodic full compaction is disabled by default.
+
+### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in v7.6.0</span>
+
++ Limits the maximum CPU usage rate for TiKV periodic full compaction.
++ Default value: `0.1`, which means that the maximum CPU usage for periodic compaction processes is 10%.
+
+### `follower-read-max-log-gap` <span class="version-mark">New in v7.4.0</span>
+
++ The maximum number of logs a follower is allowed to lag behind when processing read requests. If this limit is exceeded, the read request is rejected.
++ Default value: `100`
+
+### `inspect-cpu-util-thd` <span class="version-mark">New in v7.6.0</span>
+
++ The CPU utilization threshold for determining whether a TiKV node is busy during slow node detection.
++ Value range: `[0, 1]`
++ Default value: `0.4`, which means `40%`.
+
+### `inspect-kvdb-interval` <span class="version-mark">New in v8.1.2</span>
+
++ The interval and timeout for checking the KV disk during slow node detection in TiKV. If KVDB and RaftDB share the same mount path, this value is overridden by `0` (no detection).
++ Default value: `2s`
+
+### `min-pending-apply-region-count` <span class="version-mark">New in v8.0.0</span>
+
++ The maximum number of Regions in the busy state of applying Raft logs when TiKV starts. Raftstore accepts leader transfers only when the number of such Regions is below this value, reducing availability degradation during rolling restarts.
++ Default value: `10`
+
+### `request-voter-replicated-index-interval` <span class="version-mark">New in v6.6.0</span>
+
++ Controls the interval at which the Witness node periodically retrieves the replicated Raft log position from voter nodes.
++ Default value: `5m`, which means 5 minutes.
+
+### `slow-trend-unsensitive-cause` <span class="version-mark">New in v6.6.0</span>
+
++ When TiKV uses the SlowTrend detection algorithm, this configuration item controls the sensitivity of latency detection. A higher value indicates lower sensitivity.
++ Default value: `10`
+
+### `slow-trend-unsensitive-result` <span class="version-mark">New in v6.6.0</span>
+
++ When TiKV uses the SlowTrend detection algorithm, this configuration item controls the sensitivity of QPS detection. A higher value indicates lower sensitivity.
++ Default value: `0.5`
+
+>>>>>>> 6ff4bab1ae (tikv: add missing tikv configs (#20566))
 ## coprocessor
 
 Configuration items related to Coprocessor.
@@ -1303,6 +1376,11 @@ Configuration items related to RocksDB
     + `true`: records information about WAL files in the MANIFEST file and verifies the integrity of WAL files during startup.
     + `false`: does not record information about WAL files in the MANIFEST file and does not verify the integrity of WAL files during startup.
 
+### `enable-multi-batch-write` <span class="version-mark">New in v6.2.0</span>
+
++ Controls whether to enable RocksDB write optimization, allowing the contents of WriteBatch to be written concurrently to the memtable, reducing write latency.
++ Default value: None. However, it is enabled by default unless explicitly set to `false` or if `rocksdb.enable-pipelined-write` or `rocksdb.enable-unordered-write` is enabled.
+
 ## rocksdb.titan
 
 Configuration items related to Titan.
@@ -1328,7 +1406,7 @@ Configuration items related to Titan.
 + Default value: `4`
 + Minimum value: `1`
 
-## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf
+## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf
 
 Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rocksdb.lockcf`.
 
@@ -1569,6 +1647,11 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + The time interval for periodic compaction. SST files with updates older than this value will be selected for compaction and rewritten to the same level where these SST files originally reside.
 + + Default value: `"0s"`, meaning that periodic compaction is disabled by default.
 + Unit: s(second)|h(hour)|d(day)
+
+### `max-compactions` <span class="version-mark">New in v6.6.0</span>
+
++ The maximum number of concurrent compaction tasks. The value `0` means no limit.
++ Default value: `0`
 
 ## rocksdb.defaultcf.titan
 
@@ -1904,6 +1987,12 @@ Configuration items related to Raft Engine.
 
 + Determines whether to generate empty log files for log recycling in Raft Engine. When it is enabled, Raft Engine will automatically fill a batch of empty log files for log recycling during initialization, making log recycling effective immediately after initialization.
 + Default value: `false`
+
+### `compression-level` <span class="version-mark">New in v7.4.0</span>
+
++ Sets the compression efficiency of the LZ4 algorithm used by Raft Engine when writing Raft log files. A lower value indicates faster compression speed but lower compression ratio.
++ Range: `[1, 16]`
++ Default value: `1`
 
 ## security
 
