@@ -290,6 +290,8 @@
     - AI Frameworks
       - [LlamaIndex](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
       - [Langchain](/tidb-cloud/vector-search-integrate-with-langchain.md)
+    - AI Services
+      - [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
     - Embedding Models/Services
       - [Jina AI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
