@@ -112,13 +112,16 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 
 **2.2. Prepare Kafka runtime binaries**
 
-1. Navigate to the page of every broker node "Home > {resource group} > broker-node-{1,2,3}"
-2. Click **Connect > Connect via Bastion**, fill parameters as following:
-    1. Authentication Type: SSH Private Key from Local File
-    2. Username: azureuser
-    3. Local File: select the private key downloaded by Drowser before
-    4. Check "Open in new browser tab"
-3. Click **Connect**, it will open a new browser tab with linux termial. You will need to open 3 linux termials since we have 3 broker nodes.
+1. Navigate to the page of every broker node "Home > {resource group} > broker-node-{1,2,3}".
+
+2. Click **Connect > Connect via Bastion**, fill in the parameters as following:
+
+    - **Authentication Type**: `SSH Private Key from Local File`
+    - **Username**: azureuser
+    - **Local File**: select the private key downloaded by browser before
+    - Click "Open in new browser tab".
+    
+3. Click **Connect**. A new browser tab with Linux termial is displayed. You need to open three Linux termials for the three broker nodes.
 
 4. Download binaries in each broker node.
 
