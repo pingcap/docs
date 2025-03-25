@@ -47,7 +47,7 @@ The new architecture is designed to address common issues that users might encou
 
 ## Limitations
 
-As an experimental feature, the TiCDC new architecture in v9.0.0 does not yet include all the functionalities of the old architecture. The following features will be available when the new architecture becomes generally available (GA) in future versions:
+As an experimental feature, the TiCDC new architecture does not yet include all the functionalities of the old architecture. The following features will be available when the new architecture becomes generally available (GA) in future versions:
 
 - [Split Update Events](/ticdc/ticdc-split-update-behavior.md)
 - [Eventually Consistent Replication for Disaster Scenarios](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)
