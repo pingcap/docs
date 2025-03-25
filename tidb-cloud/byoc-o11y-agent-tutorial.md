@@ -789,7 +789,7 @@ spec:
 
 The `remoteWrite.url` can be obtained after creating the O11y backend cluster as mentioned earlier - simply fill in the corresponding value.
 
-For standard TiDB clusters, we provide an `additionalScrapeConfigs` template to collect metrics from all TiDB components. Please refer to [TiDB VMAgent Config](./byoc-o11y-agent-vmagent-config-tidb.md).
+For standard TiDB clusters, we provide an `additionalScrapeConfigs` template to collect metrics from all TiDB components. Please refer to [TiDB VMAgent Config](/tidb-cloud/byoc-o11y-agent-vmagent-config-tidb.md).
 
 ### Deployment
 
@@ -816,13 +816,13 @@ kubectl logs -n monitoring -l app.kubernetes.io/name=tidb-vmagent --tail=50
 
 ### Functional Description
 
-**Kubernetes Victoria Metrics Agent** 专用于采集 Kubernetes 集群基础监控指标，每个 Kubernetes 集群需要部署一个实例。
+**Kubernetes Victoria Metrics Agent** is specifically designed to collect fundamental Kubernetes cluster metrics. One instance should be deployed per Kubernetes cluster.
 
 ### Prepare Resource File
 
-与 TiDB VMAgent 类似，需要准备一个专用于 Kubernetes VMAgent 的 CR 资源描述文件。
+Similar to the TiDB VMAgent, you need to prepare a dedicated Custom Resource (CR) definition file for the Kubernetes VMAgent.
 
-基本资源描述文件模板如下:
+Basic resource template:
 
 ```yaml
 apiVersion: operator.victoriametrics.com/v1beta1
@@ -866,7 +866,7 @@ spec:
 
 The `remoteWrite.url` can be obtained after creating the O11y backend cluster as mentioned earlier - simply fill in the corresponding value.
 
-For Kubernetes VMAgent, we provide an `additionalScrapeConfigs` template to collect metrics from all Kubernetes components. Please refer to [Kubernetes VMAgent Config](./byoc-o11y-agent-vmagent-config-k8s.md).
+For Kubernetes VMAgent, we provide an `additionalScrapeConfigs` template to collect metrics from all Kubernetes components. Please refer to [Kubernetes VMAgent Config](/tidb-cloud/byoc-o11y-agent-vmagent-config-k8s.md).
 
 ### Deployment
 
@@ -899,8 +899,8 @@ kubectl logs -n monitoring -l app.kubernetes.io/name=k8s-vmagent --tail=50
 
 For Kubernetes Vector Agent, we provide a Helm Values template to collect all necessary logs. Please refer to the following links for configuration:
 
-- [Node Vector Agent for AWS](./byoc-o11y-agent-vector-config-k8s-aws.md)
-- [Node Vector Agent for GCP](./byoc-o11y-agent-vector-config-k8s-gcp.md)
+- [Node Vector Agent for AWS](/tidb-cloud/byoc-o11y-agent-vector-config-k8s-aws.md)
+- [Node Vector Agent for GCP](/tidb-cloud/byoc-o11y-agent-vector-config-k8s-gcp.md)
 
 > Note: Please replace the variables in the `${VAR}` format in the configuration appropriately.
 
@@ -970,7 +970,7 @@ data:
     ...
 ```
 
-The content of `config.toml` can be referenced from [TiDB Vector Config](./byoc-o11y-agent-vector-config-tidb.md).
+The content of `config.toml` can be referenced from [TiDB Vector Config](/tidb-cloud/byoc-o11y-agent-vector-config-tidb.md).
 
 3. `Deployment` resource definition file:
 
