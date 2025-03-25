@@ -29,13 +29,16 @@ To complete this tutorial, you need:
 
     Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
-- An AWS account with the [necessary](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) permissions for [Amazon Bedrock](https://aws.amazon.com/bedrock/) and access to the `amazon.titan-embed-text-v2:0` and `us.meta.llama3-2-3b-instruct-v1:0` models
+- An AWS account with the [necessary](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) permissions for [Amazon Bedrock](https://aws.amazon.com/bedrock/) and access to the following models:
+
+    - **Amazon Titan Embeddings** (`amazon.titan-embed-text-v2:0`), used for generating text embeddings
+    - **Meta Llama 3** (`us.meta.llama3-2-3b-instruct-v1:0`), used for text generation
 
     If you don't have access, follow the instructions [here](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access) to request access.
 
 ## Get started
 
-This section provides step-by-step instructions for integrating TiDB Vector Search with Amazon Bedrock to build a RAG Q&A bot.
+This section provides step-by-step instructions for integrating TiDB Vector Search with Amazon Bedrock to build a RAG-based Q&A bot.
 
 ### Step 1. Set the environment variables
 
@@ -54,7 +57,7 @@ Get the TiDB connection information from the [TiDB Cloud console](https://tidbcl
 
     > **Tip:**
     >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > If your program is running on the Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
 4. Click **Generate Password** to create a random password.
 
@@ -62,7 +65,7 @@ Get the TiDB connection information from the [TiDB Cloud console](https://tidbcl
     >
     > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
-5. Run the following commands in your terminal window to set the environment variables. You need to replace the placeholders in the commands with the connection parameters obtained from the connection dialog.
+5. Run the following commands in your terminal to set the environment variables. You need to replace the placeholders in the commands with the corresponding connection parameters obtained from the connection dialog.
 
     ```shell
     export TIDB_HOST=<your-tidb-host>
