@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Vector Search with Amazon Bedrock
-summary: Learn how to integrate TiDB Vector Search with Amazon Bedrock to build a Retrieval Augmented Generation (RAG) Q&A bot.
+summary: Learn how to integrate TiDB Vector Search with Amazon Bedrock to build a Retrieval-Augmented Generation (RAG) Q&A bot.
 ---
 
 # Integrate TiDB Vector Search with Amazon Bedrock
@@ -113,7 +113,7 @@ from sqlalchemy.orm import declarative_base, Session
 from tidb_vector.sqlalchemy import VectorType
 ```
 
-### Step 4. Configure database connections
+### Step 4. Configure the database connection
 
 In `demo.py`, add the following code to configure the database connection:
 
@@ -136,7 +136,7 @@ engine = create_engine(get_db_url(), pool_recycle=300)
 Base = declarative_base()
 ```
 
-### Step 5. Invoke the Amazon Titan Text Embeddings V2 model using the bedrock runtime client
+### Step 5. Invoke the Amazon Titan Text Embeddings V2 model using the Bedrock runtime client
 
 The Amazon Bedrock runtime client provides you with an `invoke_model` API that accepts the following parameters:
 
