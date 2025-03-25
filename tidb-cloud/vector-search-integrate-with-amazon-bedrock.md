@@ -23,7 +23,7 @@ To complete this tutorial, you need:
 - [Pip](https://pypi.org/project/pip/) installed
 - [AWS CLI](https://aws.amazon.com/cli/) installed
 
-    Ensure your AWS CLI profile is configured to a supported [Amazon Bedrock](https://aws.amazon.com/bedrock/) region for this tutorial. You can find the list of supported regions at [Amazon Bedrock Regions](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-regions.html). To switch to a supported region, run the following command:
+    Ensure your AWS CLI profile is configured to a supported [Amazon Bedrock](https://aws.amazon.com/bedrock/) region for this tutorial. You can find the list of supported regions at [Amazon Bedrock Regions](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html). To switch to a supported region, run the following command:
 
     ```shell
     aws configure set region <your-region>
