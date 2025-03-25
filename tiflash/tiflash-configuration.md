@@ -473,8 +473,10 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 
 ##### `hashagg_use_magic_hash` <span class="version-mark">New in v9.0.0</span>
 
-- This item is used for the TiFlash Aggregation operator. If this option is set to true, TiFlash's HashAgg will use the magic hash instead of the default CRC32.
-- The results of magic hash have a more uniform distribution, which reduces hash collisions. However, the computation speed will be slower. It is recommended to enable magic hash when the NDV (Number of Distinct Values) of GroupBy key is very high.
+- Controls the hash function used by TiFlash during aggregation operations. When set to `true`, TiFlash HashAgg uses the magic hash instead of the default CRC32.
+- The magic hash function generates more evenly distributed hash values, reducing hash collisions. However, it is slower than CRC32. It is recommended to enable this configuration when the NDV (number of distinct values) of the `GROUP BY` key is high to optimize performance.
+- Default value: `false`
+- Value options: `true`, `false`
 
 #### security <span class="version-mark">New in v4.0.5</span>
 
