@@ -258,7 +258,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     ./kafka_2.13-3.7.1/bin/kafka-broker-api-versions.sh --bootstrap-server {one_of_broker_ip}:39092
     # Expected output for the last 3 lines (the actual order might be different)
     # The difference in the output from "bootstrap from INTERNAL listener" is that exceptions or errors might occur because advertised listeners cannot be resolved in kafka-pls-vnet.
-    # We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link. 
+    # TiDB Cloud will make them resolvable and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link Service. 
     b1.abc.eastus.azure.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b2.abc.eastus.azure.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     b3.abc.eastus.azure.3199745.tidbcloud.com.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
@@ -409,7 +409,7 @@ export JAVA_HOME=~/jdk-22.0.2
 
 # Expected output for the last 3 lines (the actual order might be different)
 # There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network. 
-# We will make them resolvable in TiDB Cloud side and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Service Connect. 
+# TiDB Cloud will make them resolvable and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link Sservice. 
 b1.abc.eastus.azure.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.abc.eastus.azure.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
