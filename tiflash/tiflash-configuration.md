@@ -97,14 +97,15 @@ Configure storage path related settings.
 ##### `format_version`
 
 - The DTFile format.
-- Default value: `7`
-- Value options: `2`, `3`, `4`, `5`, `6`, `7`
+- Default value: `8`
+- Value options: `2`, `3`, `4`, `5`, `6`, `7`, `8`
     - `format_version = 2`: the default format for versions < v6.0.0.
     - `format_version = 3`: the default format for v6.0.0 and v6.1.x, which provides more data validation features.
     - `format_version = 4`: the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption.
     - `format_version = 5`: introduced in v7.3.0, the default format for versions from v7.4.0 to v8.3.0, which reduces the number of physical files by merging smaller files.
     - `format_version = 6`: introduced in v8.4.0, which partially supports the building and storage of vector indexes.
-    - `format_version = 7`: introduced in v8.4.0, the default format for v8.4.0 and later versions, which supports the build and storage of vector indexes.
+    - `format_version = 7`, introduced in v8.4.0, the default format for v8.4.0 and v8.5.x, which supports the build and storage of vector indexes.
+    - `format_version = 8`, introduced in v9.0.0, the default format for v9.0.0 and later versions, which supports a new string serialization scheme that improves string read and write performance.
 
 #### storage.main
 
