@@ -1009,8 +1009,8 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- When the number of SQL users in the system is very large (for example 100,000), operations such as creating users, modifying passwords, and setting permissions might experience significant performance degradation. This occurs because each user update operation triggers the reloading of all user data into memory.
-- To optimize performance in environments with a large number of users, it is recommended to set the related variable to `ON`.
+- When the number of SQL users in TiDB is very large (for example, more than 100,000), operations such as creating users, modifying passwords, and setting permissions might experience significant performance degradation. This occurs because each user update operation triggers the reloading of all user data into memory.
+- To optimize performance in environments with a large number of users, it is recommended to set this variable to `ON`.
 - `OFF` or `0`: every time an operation such as user creation, password modification, or permission setting is performed, TiDB reloads all user data into memory. In scenarios with many users, this setting might cause significant performance degradation.
 - `ON` or `1`: TiDB uses a more efficient user data loading strategy as follows:
     - When you create users or perform operations such as modifying passwords and setting permissions for **non-logged-in** users, TiDB **does not** reload all user data into memory.
@@ -4285,7 +4285,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
 - The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
-- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidb/stable/optimizer-fix-controls).
+- For a more detailed introduction, see [Optimizer Fix Controls](/optimizer-fix-controls.md).
 
 </CustomContent>
 
