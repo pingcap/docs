@@ -32,7 +32,7 @@ The document provides an example of connecting to a Kafka Private Link service i
 
 2. [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) on Azure if you do not have one.
 
-3. Get the Kafka deployment information from your TiDB Cloud Dedicated cluster.
+3. Get the Kafka deployment information from your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the TiDB cluster, and then click **Changefeed** in the left navigation pane.
     2. On the overview page, find the region of the TiDB cluster. Ensure that your Kafka cluster will be deployed to the same region.
@@ -69,45 +69,46 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     1. Select your "Subscription", "Resource group" and "Region".
     2. Enter "Virtual network name", for example `kafka-pls-vnet`.
 3. In **Security** tab, enable Azure Bastion
-4. In **IP addresses** tab
-    1. Set address space, for example, `10.0.0.0/16`
-    2. Create a subnet for brokers
-        - Name: brokers-subnet
-        - IP address range: 10.0.0.0 - 10.0.0.255
-        - Size: /24
-    3. A AzureBastionSubnet will be created by default
-5. Click **Review + create**, check if everything is as expected.
-6. Click **Create**, wait the operation done.
+4. In **IP addresses** tab, do the following:
+    1. Set address space, for example, `10.0.0.0/16`.
+    2. Create a subnet for brokers:
+        - **Name**: brokers-subnet
+        - **IP address range**: 10.0.0.0 - 10.0.0.255
+        - **Size**: /24
+    3. An AzureBastionSubnet will be created by default.
+5. Click **Review + create**. Verify the information.
+6. Click **Create**.
 
 #### 2. Set up Kafka brokers
-**2.1. Create broker nodes**
-1. Go to [Azure Portal > Home > Virtual machines](https://portal.azure.com/#browse/Microsoft.Compute%2FVirtualMachines), click **Create**, select **Azure virtual machine**.
-2. In **Basics** tab, fill parameters as following:
-    1. Select your "Subscription", "Resource group" and "Region".
-    2. Virtual machine name: broker-node
-    3. Availability options: Availability zone
-    4. Zone options: Self-selected zone
-    5. Availability zone: Zone 1, Zone 2, Zone 3
-    6. Image: Ubuntu Server 24.04 LTS - x64 Gen2
-    7. VM architecture: x64
-    8. Size: Standard_D2s_v3 
-    9. Authentication type: SSH public key
-    10. Username: azureuser
-    11. SSH public key source: Generate new key pair
-    12. Key pair name: kafka_broker_key
-    13. Public inbound ports: Allow selected ports
-    14. Select inbound ports: SSH (22)
-3. In **Networking** tab, fill parameters as following:
-    1. Virtual network: kafka-pls-vnet
-    2. Subnet: brokers-subnet
-    3. Public IP: None
-    4. NIC network security group: Basic
-    5. Public inbound ports: SSH (22)
-    6. Load balancing options: None
-4. Click **Review + create**, check if everything is as expected.
-5. Click **Create**, there will be a popup for "Generate new key pair".
-6. Click **Download private key and create resource**, browser will download the private key to your local and show the progress of virtual machines creation.
 
+**2.1. Create broker nodes**
+
+1. Go to [Azure Portal > Home > Virtual machines](https://portal.azure.com/#browse/Microsoft.Compute%2FVirtualMachines), click **Create**, and select **Azure virtual machine**.
+2. In the **Basics** tab, fill parameters as following:
+    - Select your "Subscription", "Resource group" and "Region".
+    - **Virtual machine name**: `broker-node`
+    - **Availability options**: `Availability zone`
+    - **Zone options**: `Self-selected zone`
+    - **Availability zone**: `Zone 1, Zone 2, Zone 3`
+    - **Image**: `Ubuntu Server 24.04 LTS - x64 Gen2`
+    - **VM architecture:** `x64`
+    - **Size**: `Standard_D2s_v3` 
+    - **Authentication type**: `SSH public key`
+    - **Username**: azureuser
+    - **SSH public key source:** `Generate new key pair`
+    - **Key pair name**: `kafka_broker_key`
+    - **Public inbound ports**: `Allow selected ports`
+    - **Select inbound ports**: `SSH (22)`
+3. In the **Networking** tab, fill in the parameters as following:
+    - **Virtual network**: `kafka-pls-vnet`
+    - **Subnet**: `brokers-subnet`
+    - **Public IP**: `None`
+    - **NIC network security group**: `Basic`
+    - **Public inbound ports**: `SSH (22)`
+    - **Load balancing options**: `None`
+4. Click **Review + create**. Verify the information.
+5. Click **Create**. A popup for "Generate new key pair" appears.
+6. Click **Download private key and create resource** to download the private key to your local machine. You can see the progress of virtual machines creation.
 
 **2.2. Prepare Kafka runtime binaries**
 
@@ -119,7 +120,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     4. Check "Open in new browser tab"
 3. Click **Connect**, it will open a new browser tab with linux termial. You will need to open 3 linux termials since we have 3 broker nodes.
 
-4. Download binaries in each broker nodes.
+4. Download binaries in each broker node.
 
     ```shell
     # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
@@ -135,7 +136,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
 
     1. For `listeners`, all three brokers are the same and act as brokers and controller roles:
         1. Configure the same CONTROLLER listener for all **controller** role nodes. If you only want to add the **broker** role nodes, you do not need the CONTROLLER listener in `server.properties`.
-        2. Configure two **broker** listeners. INTERNAL for internal access; EXTERNAL for external access from TiDB Cloud.
+        2. Configure two **broker** listeners. INTERNAL for internal access, and EXTERNAL for external access from TiDB Cloud.
     
     2. For `advertised.listeners`, do the following:
         1. Configure an INTERNAL advertised listener for each broker using the internal IP address of the broker node, which allows internal Kafka clients to connect to the broker via the advertised address.
@@ -146,8 +147,8 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     3. The planning values:
         - CONTROLLER port: `29092`
         - INTERNAL port: `9092`
-        - EXTERNAL: `39092`
-        - EXTERNAL advertised listener ports range: `9093~9095`
+        - EXTERNAL port: `39092`
+        - Range of the EXTERNAL advertised listener ports: `9093~9095`
 
 2. Use SSH to log in to every broker node. Create a configuration file `~/config/server.properties` with the following content for each broker node respectively.
 
@@ -377,7 +378,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
      # For example
      advertised.listeners=...,EXTERNAL://b1.abc.eastus.azure.3199745.tidbcloud.com:9093
 
-     # Configure EXTERNAL map
+     # Configure the EXTERNAL map
     listener.security.protocol.map=...,EXTERNAL:PLAINTEXT
      ```
 
@@ -414,74 +415,93 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 ## Step 2. Expose the Kafka cluster as Private Link Service
 
 ### 1. Set up the load balancer
+
 1. Go to [Azure Portal > Home > Load balancing](https://portal.azure.com/#view/Microsoft_Azure_Network/LoadBalancingHubMenuBlade/~/loadBalancers), click **Create**.
 2. In **Basic** tab, fill parameters as following:
-    1. Select your "Subscription", "Resource group" and "Region".
-    2. Name: kafka-lb
-    3. SKU: Standard
-    4. Type: Internal
-    5. Tier: Regional
+
+    - Select your "Subscription", "Resource group" and "Region".
+    - **Name**: `kafka-lb`
+    - **SKU**: `Standard`
+    - **Type**: `Internal`
+    - **Tier**: `Regional`
+
 3. In **Frontend IP configuration** tab, add frontend IP configuration
-    1. Name: kafka-lb-ip
-    2. IP version: IPv4
-    3. Virtual network: kafka-pls-vnet
-    4. Subnet: brokers-subnet
-    5. Assignment: Dynamic
-    6. Availability zone: Zone-redundant
+
+    - **Name**: `kafka-lb-ip`
+    - **IP version**: `IPv4`
+    - **Virtual network**: `kafka-pls-vnet`
+    - **Subnet**: `brokers-subnet`
+    - **Assignment**: `Dynamic`
+    - **Availability zone**: `Zone-redundant`
+
 4. In **Backend pools**, add 3 backend pools
-    1. Name: pool1; Backend Pool Configuration: NIC; IP configurations: broker-node-1
-    2. Name: pool2; Backend Pool Configuration: NIC; IP configurations: broker-node-2
-    3. Name: pool3; Backend Pool Configuration: NIC; IP configurations: broker-node-3
-5. In **Inbound rules**, add 3 load balancing rules, create a health probe for these 3 rules.
+
+    - Name: pool1; Backend Pool Configuration: NIC; IP configurations: broker-node-1
+    - Name: pool2; Backend Pool Configuration: NIC; IP configurations: broker-node-2
+    - Name: pool3; Backend Pool Configuration: NIC; IP configurations: broker-node-3
+
+5. In **Inbound rules**, add three load balancing rules, and create a health probe for these three rules.
+
     1. Rule 1
-        - Name: rule1 
-        - IP version: IPv4
-        - Frontend IP address: kafka-lb-ip
-        - Backend pool: pool1
-        - Protocol: TCP
-        - Port: 9093
-        - Backend port: 39092
-        - Health probe:
-            - Name: kafka-lb-hp
-            - Protocol: TCP
-            - Port: 39092
+
+        - **Name**: rule1 
+        - **IP version**: IPv4
+        - **Frontend IP address**: kafka-lb-ip
+        - **Backend pool**: `pool1`
+        - **Protocol**: `TCP`
+        - **Port**: `9093`
+        - **Backend port**: `39092`
+        - **Health probe**:
+            - **Name**: `kafka-lb-hp`
+            - **Protocol**: `TCP`
+            - **Port**: `39092`
+    
     2. Rule 2
-        - Name: rule1 
-        - IP version: IPv4
-        - Frontend IP address: kafka-lb-ip
-        - Backend pool: pool1
-        - Protocol: TCP
-        - Port: 9094
-        - Backend port: 39092
-        - Health probe: kafka-lb-hp
+        - **Name**: `rule1` 
+        - **IP version**: `IPv4`
+        - **Frontend IP address**: `kafka-lb-ip`
+        - **Backend pool**: `pool1`
+        - **Protocol**: `TCP`
+        - **Port**: `9094`
+        - **Backend port**: `39092`
+        - **Health probe**: `kafka-lb-hp`
+
     3. Rule 3
-        - Name: rule1 
-        - IP version: IPv4
-        - Frontend IP address: kafka-lb-ip
-        - Backend pool: pool1
-        - Protocol: TCP
-        - Port: 9095
-        - Backend port: 39092
-        - Health probe: kafka-lb-hp
-6. Click **Review + create**, check if everything is as expected.
-7. Click **Create**, wait the operation done.
+    
+        - **Name**: `rule1` 
+        - **IP version**: `IPv4`
+        - **Frontend IP address**: `kafka-lb-ip`
+        - **Backend pool**: `pool1`
+        - **Protocol**: `TCP`
+        - **Port**: `9095`
+        - **Backend port**: `39092`
+        - **Health probe**: `kafka-lb-hp`
+    
+6. Click **Review + create**. Verify the information.
+
+7. Click **Create**.
 
 
 ### 2. Set up Private Link Service
 
 1. Go to [Azure Portal > Home > Private Link Center > Private link services](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices), click **Create** to create a Private Link service for the Kafka load balancer.
-2. In **Basic** tab, fill parameters as following:
-    1. Select your "Subscription", "Resource group" and "Region".
-    2. Name: kafka-pls
-3. In **Outbound settings** tab, fill parameters as following:
-    1. Load balancer: kafka-lb
-    2. Load balancer frontend IP address: kafka-lb-ip
-    3. Source NAT subnet: kafka-pls-vnet/brokers-subnet
-4. In **Access security** tab
-    1. For "Visibility", select "Restricted by subscription" or "Anyone with your alias".
-    2. For "Auto-approval", add "Subscription of TiDB Cloud Azure Account" you got before.
-5. Click **Review + create**, check if everything is as expected.
-6. Click **Create**, wait the operation done, note down the Alias of the Private Link service.
+
+2. In the **Basic** tab, fill in the parameters as follows:
+    - Select your "Subscription", "Resource group" and "Region".
+    - **Name**: `kafka-pls`
+
+3. In the **Outbound settings** tab, fill in the parameters as follows:
+    - **Load balancer**: `kafka-lb`
+    - **Load balancer frontend IP address**: `kafka-lb-ip`
+    - **Source NAT subnet**: `kafka-pls-vnet/brokers-subnet`
+
+4. In the **Access security** tab
+    - For "Visibility", select "Restricted by subscription" or "Anyone with your alias".
+    - For "Auto-approval", add "Subscription of TiDB Cloud Azure Account" you got before.
+
+5. Click **Review + create**. Verify the information.
+
+6. Click **Create**. When the operation is done, note down the Alias of the Private Link service.
 
 
 ## Step 3. Connect from TiDB Cloud
