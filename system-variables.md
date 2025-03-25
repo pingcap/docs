@@ -6207,7 +6207,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
-### tidb_workload_repository_dest
+### tidb_workload_repository_dest <span class="version-mark">New in v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6217,7 +6217,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to set the destination of the [Workload Repository](/workloadrepo.md).
 - The value can be either `'table'` (enabling the workload repository) or `''` (disabling the workload repository).
 
-### tidb_workload_repository_active_sampling_interval
+### tidb_workload_repository_active_sampling_interval <span class="version-mark">New in v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6229,7 +6229,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Sets the sampling interval for the [Workload Repository](/workloadrepo.md)'s Time-based Sampling Process.
 - Setting the value to `0` disables the Time-based Sampling Process.
 
-### tidb_workload_repository_retention_days
+### tidb_workload_repository_retention_days <span class="version-mark">New in v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -6241,7 +6241,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Sets the number of days that [Workload Repository](/workloadrepo.md) data is retained.
 - Setting the value to `0` disables automatic purging of old data.
 
-### tidb_workload_repository_snapshot_interval
+### tidb_workload_repository_snapshot_interval <span class="version-mark">New in v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
