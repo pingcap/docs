@@ -22,6 +22,12 @@ TiDB provides official support for the following AI frameworks, enabling you to 
 
 Moreover, you can also use TiDB for various purposes, such as document storage and knowledge graph storage for AI applications.
 
+## AI services
+
+TiDB Vector Search supports integration with the following AI service, enabling you to easily build Retrieval-Augmented Generation (RAG) based applications.
+
+- [Amazon Bedrock](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
+
 ## Embedding models and services
 
 TiDB Vector Search supports storing vectors of up to 16383 dimensions, which accommodates most embedding models.
