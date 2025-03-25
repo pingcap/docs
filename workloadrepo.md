@@ -47,13 +47,13 @@ Data is sampled from the following tables:
 | `CLIENT_ERRORS_SUMMARY_BY_USER` | `HIST_CLIENT_ERRORS_SUMMARY_BY_USER` | Client error summaries by user |
 | `CLIENT_ERRORS_SUMMARY_GLOBAL` | `HIST_CLIENT_ERRORS_SUMMARY_GLOBAL` | Client error summaries by global |
 
-The snapshot sampling interval may be controlled with [`tidb_workload_repository_snapshot_interval`](/system-variables.md#tidb_workload_repository_snapshot_interval):
+The snapshot sampling interval can be controlled with [`tidb_workload_repository_snapshot_interval`](/system-variables.md#tidb_workload_repository_snapshot_interval-new-in-v9.0.0):
 
 ```sql
 SET GLOBAL tidb_workload_repository_snapshot_interval = 900; -- set the interval to 15 minutes
 ```
 
-## Taking Manual Snapshots
+## Manual snapshots
 
 Note that while the snapshot sampling process runs automatically based on the configured interval, you can also trigger a manual snapshot using the following SQL statement:
 
@@ -81,7 +81,7 @@ Data is sampled from the following tables:
 | `MEMORY_USAGE` | `HIST_MEMORY_USAGE` | Memory usage |
 | `DEADLOCKS` | `HIST_DEADLOCKS` | Deadlock information |
 
-The time-based sampling interval may be controlled with [tidb_workload_repository_active_sampling_interval](/system-variables.md#tidb_workload_repository_active_sampling_interval):
+The time-based sampling interval can be controlled with [`tidb_workload_repository_active_sampling_interval`](/system-variables.md#tidb_workload_repository_active_sampling_interval-new-in-v9.0.0):
 
 ```sql
 SET GLOBAL tidb_workload_repository_active_sampling_interval = 20; -- set the interval to 20 seconds
@@ -103,7 +103,7 @@ A higher value for this variable allows for longer data retention, which may be 
 
 - Enabling the Workload Repository may have a small performance impact on the system.
 - Setting sampling intervals too low may increase system overhead.
-- Setting retention days to 0 disables automatic purging of old data.
+- Setting retention days to `0` disables automatic purging of old data.
 
 ## Best practices
 
