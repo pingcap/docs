@@ -97,7 +97,7 @@ Configure storage path related settings.
 ##### `format_version`
 
 - The DTFile format.
-- Default value: `7`
+- Default value: `8`
 - Value options: `2`, `3`, `4`, `5`, `6`, `7`, `8`
     - `format_version = 2`: the default format for versions < v6.0.0.
     - `format_version = 3`: the default format for v6.0.0 and v6.1.x, which provides more data validation features.
