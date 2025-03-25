@@ -19,7 +19,7 @@ This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vect
 
 To complete this tutorial, you need:
 
-- [Python 3.11](https://www.python.org/downloads/) or above installed
+- [Python 3.11 or later](https://www.python.org/downloads/) installed
 - [Pip](https://pypi.org/project/pip/) installed
 - [AWS CLI](https://aws.amazon.com/cli/) installed
 
@@ -33,12 +33,12 @@ To complete this tutorial, you need:
 
     Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
-- An AWS account with the [necessary](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) permissions for [Amazon Bedrock](https://aws.amazon.com/bedrock/) and access to the following models:
+- An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 
     - **Amazon Titan Embeddings** (`amazon.titan-embed-text-v2:0`), used for generating text embeddings
     - **Meta Llama 3** (`us.meta.llama3-2-3b-instruct-v1:0`), used for text generation
 
-    If you don't have access, follow the instructions [here](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access) to request access.
+  If you don't have access, follow the instructions in [Request access to an Amazon Bedrock foundation model](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access).
 
 ## Get started
 
@@ -61,7 +61,7 @@ Get the TiDB connection information from the [TiDB Cloud console](https://tidbcl
 
     > **Tip:**
     >
-    > If your program is running on the Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
 4. Click **Generate Password** to create a random password.
 
@@ -91,7 +91,7 @@ Get the TiDB connection information from the [TiDB Cloud console](https://tidbcl
 
     ```shell
     python3 -m venv env
-    source env/bin/activate  # On Windows use env\Scripts\activate
+    source env/bin/activate  # On Windows, use env\Scripts\activate
     ```
 
 3. Install the required dependencies:
@@ -115,7 +115,7 @@ from tidb_vector.sqlalchemy import VectorType
 
 ### Step 4. Configure database connections
 
-In `demo.py`, add the following code to configure the database connections:
+In `demo.py`, add the following code to configure the database connection:
 
 ```python
 # ---- Configuration Setup ----
@@ -140,12 +140,12 @@ Base = declarative_base()
 
 The Amazon Bedrock runtime client provides you with an `invoke_model` API that accepts the following parameters:
 
-- **modelId**: the model ID for the foundation model available in Amazon Bedrock.
-- **accept**: the type of input request.
-- **contentType**: the content type of the input.
-- **body**: a JSON string payload consisting of the prompt and the configurations.
+- `modelId`: the model ID of the foundation model available in Amazon Bedrock.
+- `accept`: the type of the input request.
+- `contentType`: the content type of the input.
+- `body`: a JSON string payload consisting of the prompt and the configurations.
 
-In `demo.py`, add the following code to invoke the `invoke_model` API to generate text embeddings using Amazon Titan Text Embeddings and responses from Meta Llama 3:
+In `demo.py`, add the following code to invoke the `invoke_model` API to generate text embeddings using Amazon Titan Text Embeddings and get responses from Meta Llama 3:
 
 ```python
 # Bedrock Runtime Client Setup
@@ -286,7 +286,6 @@ def save_entities_with_embedding(session, contents):
     The expected output is similar to the following:
 
     ```
-    python3 main.py
     Generated answer:  What is the main purpose of TiDB?
          What are the key features of TiDB?
          What are the key benefits of TiDB?
