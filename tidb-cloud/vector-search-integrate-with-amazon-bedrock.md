@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Vector Search with Amazon Bedrock
-summary: Learn how to integrate TiDB Vector Search with Amazon Bedrock.
+summary: Learn how to integrate TiDB Vector Search with Amazon Bedrock to build a Retrieval Augmented Generation (RAG) Q&A bot.
 ---
 
 # Integrate TiDB Vector Search with Amazon Bedrock
