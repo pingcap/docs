@@ -472,6 +472,13 @@ Note that the following parameters only take effect in TiFlash logs and TiFlash 
 - This item is used for the MinTSO scheduler. It specifies the maximum number of queries that can run simultaneously in a TiFlash instance. For more information, see [TiFlash MinTSO Scheduler](/tiflash/tiflash-mintso-scheduler.md).
 - Default value: `0`, which means twice the number of logical CPU cores
 
+##### `hashagg_use_magic_hash` <span class="version-mark">New in v9.0.0</span>
+
+- Controls the hash function TiFlash uses for aggregation. When set to `true`, TiFlash HashAgg uses the magic hash instead of the default CRC32.
+- The magic hash function generates more evenly distributed hash values, reducing hash collisions effectively. However, it is slower than CRC32. It is recommended to enable this configuration when the NDV (number of distinct values) of the `GROUP BY` key is high to optimize aggregation performance.
+- Default value: `false`
+- Value options: `true`, `false`
+
 #### security <span class="version-mark">New in v4.0.5</span>
 
 Configure security related settings.
