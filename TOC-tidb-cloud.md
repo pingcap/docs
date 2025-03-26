@@ -24,7 +24,7 @@
     -   [構文](/tidb-cloud/sql-concepts.md)
     -   [AI機能](/tidb-cloud/ai-feature-concepts.md)
     -   [データサービス](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-    -   [スケーラビリティ](/tidb-cloud/scalability-concepts.md)
+    -   [Scalability](/tidb-cloud/scalability-concepts.md)
     -   高可用性
         -   [TiDB Cloud Serverless の高可用性](/tidb-cloud/serverless-high-availability.md)
         -   [TiDB Cloud専用における高可用性](/tidb-cloud/high-availability-with-multi-az.md)
@@ -80,7 +80,7 @@
     -   サーバーレスDriver![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
         -   [TiDB CloudサーバーレスDriver](/tidb-cloud/serverless-driver.md)
         -   [Node.jsの例](/tidb-cloud/serverless-driver-node-example.md)
-        -   [Prismaの例](/tidb-cloud/serverless-driver-prisma-example.md)
+        -   [プリズマの例](/tidb-cloud/serverless-driver-prisma-example.md)
         -   [Kyselyの例](/tidb-cloud/serverless-driver-kysely-example.md)
         -   [霧雨の例](/tidb-cloud/serverless-driver-drizzle-example.md)
 -   開発リファレンス
@@ -126,7 +126,7 @@
         -   [タイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
     -   開発ガイドライン
         -   [オブジェクトの命名規則](/develop/dev-guide-object-naming-guidelines.md)
-        -   [SQL 開発仕様](/develop/dev-guide-sql-development-specification.md)
+        -   [SQL開発仕様](/develop/dev-guide-sql-development-specification.md)
     -   [書店のサンプルアプリケーション](/develop/dev-guide-bookshop-schema-design.md)
     -   サードパーティのサポート
         -   [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)
@@ -183,7 +183,7 @@
         -   アラート通知を購読する
             -   [メールで購読する](/tidb-cloud/monitor-alert-email.md)
             -   [Slackで購読する](/tidb-cloud/monitor-alert-slack.md)
-            -   [Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)
+            -   [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
         -   [クラスタイベント](/tidb-cloud/tidb-cloud-events.md)
         -   [サードパーティのメトリクスの統合](/tidb-cloud/third-party-monitoring-integrations.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
         -   [TiDB Cloudクリニック](/tidb-cloud/tidb-cloud-clinic.md)
@@ -232,15 +232,15 @@
                 -   [準備されていない実行プランのキャッシュ](/sql-non-prepared-plan-cache.md)
             -   制御実行計画
                 -   [概要](/control-execution-plan.md)
-                -   [オプティマイザのヒント](/optimizer-hints.md)
+                -   [オプティマイザーのヒント](/optimizer-hints.md)
                 -   [SQL プラン管理](/sql-plan-management.md)
                 -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
                 -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
-        -   [TiKV Follower Readの調整](/follower-read.md)
+        -   [TiKV Follower Read](/follower-read.md)
         -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
         -   ガベージコレクション (GC)
             -   [概要](/garbage-collection-overview.md)
-            -   [コンフィグレーション](/garbage-collection-configuration.md)
+            -   [Configuration](/garbage-collection-configuration.md)
         -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
     -   リソース割り当ての最適化
         -   [リソース割り当ての概要](/tidb-cloud/optimize-resource-allocation.md)
@@ -291,6 +291,8 @@
         -   AIフレームワーク
             -   [ラマインデックス](/tidb-cloud/vector-search-integrate-with-llamaindex.md)
             -   [ランチェイン](/tidb-cloud/vector-search-integrate-with-langchain.md)
+        -   AIサービス
+            -   [アマゾン岩盤](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
         -   モデル/サービスの埋め込み
             -   [ジナ・アイ](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
         -   ORM ライブラリ
@@ -329,7 +331,7 @@
     -   [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
     -   参照
         -   [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md)
-        -   [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
+        -   [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
 -   災害復旧
     -   [リカバリーグループの概要](/tidb-cloud/recovery-group-overview.md)
     -   [始める](/tidb-cloud/recovery-group-get-started.md)
@@ -367,7 +369,7 @@
     -   [請求プロファイル](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
     -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
     -   [お支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-    -   [AWS または GCP Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
+    -   [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
     -   [Changefeed の請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
     -   [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)
     -   [リカバリグループの請求](/tidb-cloud/tidb-cloud-billing-recovery-group.md)
@@ -568,7 +570,7 @@
         -   [文字列型](/data-type-string.md)
         -   [JSON型](/data-type-json.md)
     -   関数と演算子
-        -   [概要](/functions-and-operators/functions-and-operators-overview.md)
+        -   [Overview](/functions-and-operators/functions-and-operators-overview.md)
         -   [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
         -   [オペレーター](/functions-and-operators/operators.md)
         -   [制御フロー関数](/functions-and-operators/control-flow-functions.md)
@@ -809,7 +811,7 @@
         -   [コネクテッド：クリニックサービス](/tidb-cloud/tidb-cloud-clinic.md)
         -   [接続: IM での AI チャット](/tidb-cloud/connected-ai-chat-in-im.md)
         -   接続: TiDB Cloudアラートの IM サブスクリプション
-            -   [Slackで購読する](/tidb-cloud/monitor-alert-slack.md)
+            -   [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)
             -   [Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)
         -   接続: IM チケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)

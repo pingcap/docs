@@ -27,9 +27,9 @@ summary: sync-diff-inspector を使用してデータを比較し、不一致な
 
 ## sync-diff-inspector の制限 {#restrictions-of-sync-diff-inspector}
 
--   MySQL と TiDB 間のデータ移行ではオンライン チェックはサポートされていません。アップストリーム - ダウンストリーム チェックリストにデータが書き込まれていないこと、および特定の範囲のデータが変更されていないことを確認してください。 `range`設定すると、この範囲のデータをチェックできます。
+-   MySQL と TiDB 間のデータ移行では、オンライン チェックはサポートされていません。アップストリーム - ダウンストリーム チェックリストにデータが書き込まれていないこと、および特定の範囲のデータが変更されていないことを確認してください。 `range`設定すると、この範囲のデータをチェックできます。
 
--   TiDB と MySQL では、 `FLOAT` 、 `DOUBLE` 、およびその他の浮動小数点型の実装が異なります。 `FLOAT`と`DOUBLE`チェックサムの計算にそれぞれ 6 桁と 15 桁の有効桁数を使用します。 この機能を使用しない場合は、 `ignore-columns`設定してこれらの列のチェックをスキップします。
+-   TiDB と MySQL では、 `FLOAT` 、 `DOUBLE` 、およびその他の浮動小数点型の実装が異なります。 `FLOAT`と`DOUBLE` 、チェックサムの計算にそれぞれ 6 桁と 15 桁の有効桁数を使用します。 この機能を使用しない場合は、 `ignore-columns`設定してこれらの列のチェックをスキップします。
 
 -   主キーまたは一意のインデックスを含まないテーブルのチェックをサポートします。ただし、データに不整合がある場合、生成された SQL ステートメントはデータを正しく修復できない可能性があります。
 
@@ -40,7 +40,7 @@ sync-diff-inspector はテーブル スキーマの情報を取得し、デー�
 -   上流データベース
     -   `SELECT` (比較のためにデータをチェック)
     -   `SHOW_DATABASES` (データベース名を表示)
-    -   `RELOAD` (テーブルスキーマを表示)
+    -   `RELOAD` (テーブル スキーマを表示)
 -   下流データベース
     -   `SELECT` (比較のためにデータをチェック)
     -   `SHOW_DATABASES` (データベース名を表示)
@@ -51,14 +51,14 @@ sync-diff-inspector はテーブル スキーマの情報を取得し、デー�
 sync-diff-inspector の構成は次の部分で構成されます。
 
 -   `Global config` : チェックするスレッドの数、不整合なテーブルを修正するために SQL ステートメントをエクスポートするかどうか、データを比較するかどうか、上流または下流に存在しないテーブルのチェックをスキップするかどうかなどの一般的な構成。
--   `Databases config` : アップストリーム データベースとダウンストリーム データベースのインスタンスを構成します。
+-   `Databases config`: Configures the instances of the upstream and downstream databases.
 -   `Routes` : 上流の複数のスキーマ名が下流の単一のスキーマ名と一致するようにするためのルール**(オプション)** 。
 -   `Task config` : チェックするテーブルを構成します。一部のテーブルに上流データベースと下流データベース間の特定のマッピング関係がある場合、または特別な要件がある場合は、これらのテーブルを構成する必要があります。
 -   `Table config` : 指定された範囲や無視される列など、特定のテーブルに対する特別な構成**(オプション)** 。
 
 以下に完全な構成ファイルの説明を示します。
 
--   注: 名前の後に`s`付く構成には複数の値が含まれる可能性があるため、構成値を含めるには角括弧`[]`使用する必要があります。
+-   注: 名前の後に`s`が付く構成には複数の値が含まれる可能性があるため、構成値を含めるには角括弧`[]`使用する必要があります。
 
 ```toml
 # Diff Configuration.
@@ -174,7 +174,7 @@ collation = ""
 
 ### 進捗情報 {#progress-information}
 
-sync-diff-inspector は実行時に進行状況情報を`stdout`に送信します。進行状況情報には、テーブル構造の比較結果、テーブルデータの比較結果、および進行状況バーが含まれます。
+sync-diff-inspector sends progress information to `stdout` when running. Progress information includes the comparison results of table structures, comparison results of table data and the progress bar.
 
 > **注記：**
 >
@@ -231,7 +231,7 @@ sync-diff-inspector は実行時に進行状況情報を`stdout`に送信しま�
 
 sync-diff-inspector のログは`${output}/sync_diff.log`に保存され、そのうち`${output}` `config.toml`ファイルの`output-dir`の値です。
 
-### 進捗 {#progress}
+### Progress {#progress}
 
 実行中の sync-diff-inspector は、定期的に (10 秒ごとに) チェックポイントの進行状況を出力。チェックポイントは`${output}/checkpoint/sync_diff_checkpoints.pb`にあり、そのうち`${output}` `config.toml`ファイルの`output-dir`の値です。
 
@@ -249,7 +249,7 @@ sync-diff-inspector のログは`${output}/sync_diff.log`に保存され、そ�
     Average Speed: 113.277149MB/s
 
 -   `TABLE` : 対応するデータベース名とテーブル名
--   `RESULT` : チェックが完了したかどうか`skip-non-existing-table = true`設定した場合、上流または下流に存在しないテーブルの場合、この列の値は`skipped`になります。
+-   `RESULT`: Whether the check is completed. If you have configured `skip-non-existing-table = true`, the value of this column is `skipped` for tables that do not exist in the upstream or downstream
 -   `STRUCTURE EQUALITY` : テーブル構造が同じかどうかをチェックする
 -   `DATA DIFF ROWS` : `rowAdd` / `rowDelete` 。テーブルを修正するために追加/削除する必要がある行の数を示します。
 -   `UPCOUNT` : 上流データソース内のこのテーブルの行数
@@ -257,11 +257,11 @@ sync-diff-inspector のログは`${output}/sync_diff.log`に保存され、そ�
 
 ### 不整合なデータを修正するためのSQL文 {#sql-statements-to-fix-inconsistent-data}
 
-データ チェック プロセス中に異なる行が存在する場合、それを修正するための SQL ステートメントが生成されます。チャンク内にデータの不整合が存在する場合、 `chunk.Index`という名前の SQL ファイルが生成されます。SQL ファイルは`${output}/fix-on-${instance}`にあり、 `${instance}` `config.toml`ファイルの`task.target-instance`の値です。
+データ チェック プロセス中に異なる行が存在する場合、それを修正するための SQL ステートメントが生成されます。チャンク内にデータの不整合が存在する場合、 `chunk.Index`名前の SQL ファイルが生成されます。SQL ファイルは`${output}/fix-on-${instance}`にあり、 `${instance}` `config.toml`ファイルの`task.target-instance`の値です。
 
 SQL ファイルには、チャンクが属するテールおよび範囲情報が含まれます。SQL ファイルについては、次の 3 つの状況を考慮する必要があります。
 
--   下流データベースの行が欠落している場合は、REPLACEステートメントが適用されます。
+-   If the rows in the downstream database are missing, REPLACE statements will be applied
 -   下流データベースの行が冗長な場合は、DELETE文が適用されます。
 -   下流データベースの行の一部のデータが不整合な場合は、REPLACEステートメントが適用され、不整合な列はSQLファイルで注釈でマークされます。
 
@@ -282,7 +282,8 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 ## 注記 {#note}
 
 -   sync-diff-inspector は、データをチェックするときに一定量のサーバーリソースを消費します。業務のピーク時に sync-diff-inspector を使用してデータをチェックすることは避けてください。
--   MySQL のデータと TiDB のデータを比較する前に、テーブルの照合順序設定に注意してください。主キーまたは一意キーが`varchar`タイプで、MySQL の照合順序設定が TiDB の照合設定と異なる場合、照合順序の問題により最終チェック結果が正しくない可能性があります。sync-diff-inspector 設定ファイルに照合順序を追加する必要があります。
+-   MySQL のデータと TiDB のデータを比較する前に、テーブルの文字セットと`collation`構成を確認してください。これは、テーブルの主キーまたは一意のキーが`varchar`タイプの場合に特に重要です。上流データベースと下流データベース間で照合順序ルールが異なる場合、ソートの問題が発生し、検証結果が不正確になる可能性があります。たとえば、MySQL のデフォルトの照合順序では大文字と小文字が区別されませんが、TiDB のデフォルトの照合順序では大文字と小文字が区別されます。この不一致により、修復 SQL で同じ削除レコードと挿入レコードが発生する可能性があります。この問題を回避するには、 `index-fields`構成を使用して、大文字と小文字の区別の影響を受けないインデックス列を指定します。sync-diff-inspector 構成ファイルで`collation`構成し、チャンクベースの比較中に上流と下流の両方で同じ照合順序を明示的に使用する場合、インデックス フィールドの順序はテーブルの照合順序構成によって異なることに注意してください。照合が異なる場合、一方がインデックスを使用できない可能性があります。さらに、アップストリームとダウンストリームの文字セットが異なる場合 (たとえば、MySQL は UTF-8 を使用し、TiDB は UTF-8MB4 を使用する)、照合順序構成を統一することはできません。
+-   上流テーブルと下流テーブルで主キーが異なる場合、sync-diff-inspector はチャンクを分割するために元の主キー列を使用しません。たとえば、MySQL のシャード テーブルが、元の主キーとシャード キーを含む複合主キーを使用して TiDB にマージされる場合などです。この場合、元の主キー列を`index-fields`に設定し、 `check-data-only`を`true`に設定します。
 -   sync-diff-inspector は、まず TiDB 統計に従ってデータをチャンクに分割し、統計の精度を保証する必要があります。TiDB サーバーの*負荷が軽い*場合は、 `analyze table {table_name}`コマンドを手動で実行できます。
 -   `table-rules`に特に注意してください。 `schema-pattern="test1"` 、 `table-pattern = "t_1"` 、 `target-schema="test2"` 、 `target-table = "t_2"`を構成すると、ソース データベースの`test1` . `t_1`スキーマとターゲット データベースの`test2` . `t_2`スキーマが比較されます。 sync-diff-inspector ではシャーディングがデフォルトで有効になっているため、ソース データベースに`test2` . `t_2`テーブルがある場合、シャーディングとして機能するソース データベースの`test1` . `t_1`テーブルと`test2` . `t_2`テーブルが、ターゲット データベースの`test2` . `t_2`テーブルと比較されます。
 -   生成された SQL ファイルは、データを修復するための参照としてのみ使用されるため、これらの SQL ステートメントを実行してデータを修復する前に確認する必要があります。

@@ -5,11 +5,15 @@ summary: Zoom 経由でアラート通知を受信して TiDB クラスターを
 
 # Zoomで登録する {#subscribe-via-zoom}
 
-TiDB Cloud、 [ズーム](https://www.zoom.com/) 、 [スラック](/tidb-cloud/monitor-alert-slack.md) 、 [メール](/tidb-cloud/monitor-alert-email.md)を介してアラート通知を購読する簡単な方法が提供されています。このドキュメントでは、Zoom 経由でアラート通知を購読する方法について説明します。
+TiDB Cloud、 [ズーム](https://www.zoom.com/) 、 [スラック](/tidb-cloud/monitor-alert-slack.md) 、 [メール](/tidb-cloud/monitor-alert-email.md)を介してアラート通知を購読する簡単な方法が提供されています。このドキュメントでは、Zoom を介してアラート通知を購読する方法について説明します。
+
+> **Note:**
+>
+> 現在、アラートサブスクリプションは[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
 
 ## 前提条件 {#prerequisites}
 
--   Zoom 経由のサブスクリプション機能は、**エンタープライズ**または**プレミアム**サポート プランに加入している組織でのみ利用できます。
+-   Zoom 経由でのサブスクライブ機能は、**エンタープライズ**または**プレミアム**サポート プランに加入している組織でのみ利用できます。
 
 -   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
@@ -39,14 +43,14 @@ TiDB Cloud、 [ズーム](https://www.zoom.com/) 、 [スラック](/tidb-cloud/
 
 5.  このコマンドは次の詳細を返します。
 
-    -   **エンドポイント**。次の形式で Webhook URL が提供されます: `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX` 。
+    -   **エンドポイント**。2 `https://integrations.zoom.us/chat/webhooks/incomingwebhook/XXXXXXXXXXXXXXXXXXXXXXXX`形式で Webhook URL が提供されます。
     -   **検証トークン**
 
 ### ステップ3. TiDB Cloudからサブスクライブする {#step-3-subscribe-from-tidb-cloud}
 
 > **ヒント：**
 >
-> アラートのサブスクリプションは、現在のプロジェクト内のすべてのアラートを対象としています。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクライブする必要があります。
+> アラートのサブスクリプションは、現在のプロジェクト内のすべてのアラートを対象とします。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクライブする必要があります。
 
 1.  クリック<mdsvgicon name="icon-left-projects">左下隅で、複数のプロジェクトがある場合は対象プロジェクトに切り替えて、 **[プロジェクト設定] を**クリックします。</mdsvgicon>
 

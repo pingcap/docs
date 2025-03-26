@@ -7,6 +7,10 @@ summary: 電子メールでアラート通知を受信して TiDB クラスタ�
 
 TiDB Cloud、電子メール[スラック](/tidb-cloud/monitor-alert-slack.md) 、 [ズーム](/tidb-cloud/monitor-alert-zoom.md)経由でアラート通知を購読する簡単な方法が提供されています。このドキュメントでは、電子メール経由でアラート通知を購読する方法について説明します。
 
+> **注記：**
+>
+> 現在、アラートサブスクリプションは[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
+
 ## 前提条件 {#prerequisites}
 
 -   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
@@ -15,7 +19,7 @@ TiDB Cloud、電子メール[スラック](/tidb-cloud/monitor-alert-slack.md) �
 
 > **ヒント：**
 >
-> アラートのサブスクリプションは、現在のプロジェクト内のすべてのアラートを対象としています。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクライブする必要があります。
+> アラートのサブスクリプションは、現在のプロジェクト内のすべてのアラートを対象とします。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクライブする必要があります。
 
 プロジェクト内のクラスターのアラート通知を取得するには、次の手順を実行します。
 

@@ -3,13 +3,17 @@ title: Subscribe via Slack
 summary: Slack 経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
 ---
 
-# Slackで登録する {#subscribe-via-slack}
+# Slackで購読する {#subscribe-via-slack}
 
 TiDB Cloud、 [スラック](https://slack.com/) 、 [メール](/tidb-cloud/monitor-alert-email.md) 、 [ズーム](/tidb-cloud/monitor-alert-zoom.md)を介してアラート通知を購読する簡単な方法が提供されています。このドキュメントでは、Slack 経由でアラート通知を購読する方法について説明します。
 
 次のスクリーンショットは、2 つのアラートの例を示しています。
 
 ![TiDB Cloud Alerts in Slack](/media/tidb-cloud/tidb-cloud-alert-subscription.png)
+
+> **注記：**
+>
+> 現在、アラートサブスクリプションは[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
 
 ## 前提条件 {#prerequisites}
 
@@ -33,7 +37,7 @@ TiDB Cloud、 [スラック](https://slack.com/) 、 [メール](/tidb-cloud/mon
 
 > **ヒント：**
 >
-> アラートのサブスクリプションは、現在のプロジェクト内のすべてのアラートを対象としています。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクライブする必要があります。
+> アラートのサブスクリプションは、現在のプロジェクト内のすべてのアラートを対象とします。プロジェクト内に複数のクラスターがある場合は、一度だけサブスクライブする必要があります。
 
 1.  クリック<mdsvgicon name="icon-left-projects">左下隅で、複数のプロジェクトがある場合は対象プロジェクトに切り替えて、 **[プロジェクト設定] を**クリックします。</mdsvgicon>
 

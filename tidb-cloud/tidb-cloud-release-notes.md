@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年3月25日 {#march-25-2025}
+
+**コンソールの変更**
+
+-   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスター内のパブリック エンドポイントのファイアウォール ルールをサポートします。
+
+    TiDB Cloud Serverless クラスターのファイアウォール ルールを構成して、パブリック エンドポイント経由のアクセスを制御できるようになりました。セキュリティを強化するために、許可された IP アドレスまたは範囲を[TiDB Cloudコンソール](https://tidbcloud.com/)で直接指定します。
+
+    詳細については[パブリックエンドポイント用のTiDB Cloudサーバーレス ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)参照してください。
+
 ## 2025年3月18日 {#march-18-2025}
 
 **一般的な変更**
@@ -47,7 +57,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     TiDB Cloud Serverless は、Google Cloud Storage (GCS) および Azure Blob Storage からのデータのインポートをサポートするようになりました。認証には、Google Cloud サービス アカウント キーまたは Azure 共有アクセス署名 (SAS) トークンを使用できます。この機能により、 TiDB Cloud Serverless へのデータ移行が簡素化されます。
 
-    詳細については[Amazon S3、GCS、または Azure Blob ストレージから CSV ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-csv-files-serverless.md)および[Amazon S3、GCS、または Azure Blob ストレージから Apache Parquet ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-parquet-files-serverless.md)参照してください。
+    For more information, see [Amazon S3、GCS、または Azure Blob ストレージから CSV ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-csv-files-serverless.md) and [Amazon S3、GCS、または Azure Blob ストレージから Apache Parquet ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-parquet-files-serverless.md).
 
 ## 2025年1月21日 {#january-21-2025}
 
@@ -89,7 +99,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   Kafka の変更フィードに追加の構成可能なオプションを導入します。
 
-    -   Debezium プロトコルの使用をサポートします。Debezium はデータベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更をイベントと呼ばれるメッセージに変換し、これらのイベントを Kafka に送信します。詳細については、 [TiCDC デベジウム プロトコル](https://docs.pingcap.com/tidb/v8.1/ticdc-debezium)参照してください。
+    -   Support using the Debezium protocol. Debezium is a tool for capturing database changes. It converts each captured database change into a message called an event, and sends these events to Kafka. For more information, see [TiCDC デベジウム プロトコル](https://docs.pingcap.com/tidb/v8.1/ticdc-debezium).
 
     -   すべてのテーブルに対して単一のパーティション ディスパッチャーを定義することも、テーブルごとに異なるパーティション ディスパッチャーを定義することもサポートします。
 
@@ -123,7 +133,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.1.1](https://docs.pingcap.com/tidb/v8.1/release-8.1.1)から[バージョン8.1.2](https://docs.pingcap.com/tidb/v8.1/release-8.1.2)にアップグレードします。
 
-**コンソールの変更**
+**Console changes**
 
 -   データエクスポートサービスの強化:
 

@@ -16,7 +16,7 @@ BR は次の要件を満たします。
 
 ## 使用する前に {#before-you-use}
 
-このセクションでは、制限事項、使用上のヒント、互換性の問題など、TiDB バックアップと復元を使用するための前提条件について説明します。
+このセクションでは、制限事項、使用上のヒント、互換性の問題など、TiDB バックアップと復元を使用するための前提条件について説明します。BRBRと他の機能またはバージョンとの互換性の詳細については、 [互換性](#compatibility)参照してください。
 
 ### 制限 {#restrictions}
 
@@ -71,7 +71,7 @@ TiDB BR は次の機能を提供します。
 
 フルバックアップは多くのstorageスペースを占有し、特定の時点のクラスターデータのみが含まれます。必要に応じて復元ポイントを選択する場合、つまりポイントインタイムリカバリ (PITR) を実行する場合は、次の 2 つのバックアップ方法を同時に使用できます。
 
--   開始[ログバックアップ](/br/br-pitr-guide.md#start-log-backup) 。ログ バックアップが開始されると、タスクはすべての TiKV ノードで実行され続け、指定されたstorageに TiDB 増分データを小さなバッチで定期的にバックアップします。
+-   開始[log backup](/br/br-pitr-guide.md#start-log-backup) 。ログ バックアップが開始されると、タスクはすべての TiKV ノードで実行され続け、指定されたstorageに TiDB 増分データを小さなバッチで定期的にバックアップします。
 -   スナップショット バックアップを定期的に実行します。クラスター データ全体をバックアップstorageにバックアップします。たとえば、毎日午前 0 時にクラスター スナップショット バックアップを実行します。
 
 #### バックアップのパフォーマンスと TiDB クラスターへの影響 {#backup-performance-and-impact-on-tidb-clusters}
@@ -93,7 +93,7 @@ TiDB BR は次の機能を提供します。
 
 #### TiDB クラスタのパフォーマンスと影響を復元する {#restore-performance-and-impact-on-tidb-clusters}
 
--   データの復元はスケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 1 GiB/秒です。詳細については、 [パフォーマンスとインパクトを回復する](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)参照してください。
+-   Data restore is performed at a scalable speed. Generally, the speed is 1 GiB/s per TiKV node. For more details, see [パフォーマンスとインパクトを回復する](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore).
 -   各 TiKV ノードでは、PITR は 30 GiB/h でログ データを復元できます。詳細については、 [PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)参照してください。
 
 ## バックアップstorage {#backup-storage}

@@ -9,7 +9,7 @@ summary: サポートされている AI フレームワーク、埋め込みモ�
 
 > **注記**
 >
-> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
+> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)のみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
 
 ## AIフレームワーク {#ai-frameworks}
 
@@ -21,6 +21,12 @@ TiDB は以下の AI フレームワークを公式にサポートしており�
 | ラマインデックス  | [ベクトル検索をLlamaIndexと統合する](/tidb-cloud/vector-search-integrate-with-llamaindex.md) |
 
 さらに、TiDB は、ドキュメントのstorageや AI アプリケーション用のナレッジ グラフのstorageなど、さまざまな目的に使用できます。
+
+## AIサービス {#ai-services}
+
+TiDB Vector Search は次の AI サービスとの統合をサポートしており、検索拡張生成 (RAG) ベースのアプリケーションを簡単に構築できます。
+
+-   [アマゾン岩盤](/tidb-cloud/vector-search-integrate-with-amazon-bedrock.md)
 
 ## モデルとサービスの埋め込み {#embedding-models-and-services}
 
