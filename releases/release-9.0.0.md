@@ -25,7 +25,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 </thead>
 <tbody>
   <tr>
-   
+    <td>Data Migration</td>
+    <td>Support query argument redaction in DM logs</td>
+    <td>Introduces an optional <code>redact-info-log</code> parameter to mask query arguments in DM logs, preventing sensitive data from appearing in logs.</td>
+  </tr>
+  <tr>
+    <td>Data Migration</td>
+    <td>Ensure Lightning compatibility with TiDB <code>sql_require_primary_key=ON</code></td>
+    <td>Ensures the internal error-logging tables have primary keys if <code>sql_require_primary_key=ON</code> is enabled in TiDB, avoiding creation failures during data imports.</td>
+  </tr>
+  <tr>
+    <td>Data Migration</td>
+    <td>Migrated sync-diff-inspector from <code>tidb-tools</code> to <code>tiflow</code> repository</td>
+    <td>Consolidates sync-diff-inspector with other data migration and replication tools (DM and TiCDC) in the <code>tiflow</code> repository. Now available via TiUP and a dedicated Docker image.</td>
   </tr>
 </tbody>
 </table>
@@ -62,7 +74,31 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Security
 
+### Data migration
 
+* Support query argument redaction in DM logs [#11489](https://github.com/pingcap/tiflow/issues/11489) @[db-will] **tw@Oreoxmt** <!--2030-->
+
+    Introduces a new `redact-info-log` parameter, allowing DM to replace sensitive query arguments with `?` placeholders in DM logs. You can enable this feature by setting `redact-info-log = true` in the DM-worker configuration file or passing `--redact-info-log=true` at startup. This change only redacts query arguments (not entire SQL statements) and requires a DM-worker restart to take effect.
+
+    For more information, see [documentation](/dm/dm-worker-configuration-file.md).
+
+* Ensure TiDB Lightning compatibility with TiDB `sql_require_primary_key=ON` [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716] **tw@Oreoxmt** <!--2026-->
+
+    When `sql_require_primary_key=ON` is enabled in TiDB, tables must have a primary key. TiDB Lightning now adds a default primary key to its internal error-logging and conflict-detection tables (`conflict_error_v4`, `type_error_v2`, and `conflict_records_v2`), preventing table-creation failures. If you rely on these internal tables for automation, confirm the new naming and schema changes (primary key added), as scripts referencing older table names might need updates.
+
+* Migrated sync-diff-inspector from `tidb-tools` to `tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh] **tw@Oreoxmt** <!--2070-->
+
+    The sync-diff-inspector tool has moved from the old [tidb-tools](https://github.com/pingcap/tidb-tools) repository to [tiflow](https://github.com/pingcap/tiflow), unifying replication and migration tools (DM, TiCDC, sync-diff-inspector) in one place. 
+
+    For TiDB v9.0.0 and later, you can install sync-diff-inspector via:
+
+    * `tiup install sync-diff-inspector`
+    * `docker pull pingcap/sync-diff-inspector:latest`
+    * [TiDB Toolkit](/download-ecosystem-tools.md) binary
+
+    The old [tidb-tools repo](https://github.com/pingcap/tidb-tools) is now archived. If you previously installed sync-diff-inspector from tidb-tools, switch to TiUP, Docker, or the updated binary.
+
+    For more information, see [documentation](/sync-diff-inspector/sync-diff-inspector-overview.md).
 
 ## Compatibility changes
 
@@ -72,7 +108,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Behavior changes
 
-
+* TiDB Lightning internal error-logging and conflict-detection tables names changed to `conflict_error_v4`, `type_error_v2`, and `conflict_records_v2`, and now have primary keys. If you rely on these internal tables for automation, confirm the new naming and schema changes [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716]
 
 ### System variables
 
@@ -87,7 +123,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-|  |  |  | |
+| DM | [--redact-info-log](/dm/dm-command-line-flags/#--redact-info-log) | Newly added | Controls whether DM replaces sensitive query arguments with ? placeholders in logs. The default value is false. When set to true, query arguments in DM logs are redacted. This parameter only redacts query arguments (not entire SQL statements), and requires a DM-worker restart to take effect. |
 |  |  |  | |
 
 
