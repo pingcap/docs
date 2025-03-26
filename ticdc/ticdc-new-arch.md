@@ -29,7 +29,7 @@ By separating the architecture into stateful and stateless components, the TiCDC
 
 ## Comparison between the old and new architectures
 
-The new architecture is designed to address common issues that users might encounter during continuous system scaling, such as performance bottlenecks, insufficient stability, and limited scalability. Compared with the old architecture, the new architecture achieves significant optimizations in the following key dimensions:
+The new architecture is designed to address common issues during continuous system scaling, such as performance bottlenecks, insufficient stability, and limited scalability. Compared with the old architecture, the new architecture achieves significant optimizations in the following key dimensions:
 
 | Feature | TiCDC old architecture | TiCDC new architecture |
 | ------------------------ | ---------------------------------------- | ---------------------------------------- |
@@ -43,7 +43,7 @@ The new architecture is designed to address common issues that users might encou
 | **Scalability** | Poor scalability (limited by the number of CPUs) | Strong scalability through multi-threaded processing and event queues |
 | **Changefeed interference** | The owner node might cause interference between changefeeds | Event-driven mode avoids interference between changefeeds |
 
-![TiCDC New Architecture](/media/ticdc/ticdc-new-arch-2.png)
+![Comparison between the TiCDC old and new architectures](/media/ticdc/ticdc-new-arch-2.png)
 
 ## Limitations
 
@@ -75,7 +75,7 @@ You can use one of the following deployment methods:
 
 When deploying a new TiDB cluster of v9.0.0 or later using TiUP, you can also deploy the new architecture TiCDC at the same time. You only need to add the TiCDC related section and enable the new architecture in the configuration file that TiUP uses to start the TiDB cluster. The following is an example:
 
-```shell
+```yaml
 cdc_servers:
   - host: 10.0.1.20
     config:
@@ -87,7 +87,7 @@ cdc_servers:
 
 > **Note:**
 >
-> The `newarch` configuration item is used only for the new architecture. If the `newarch` configuration item is not specified, the old architecture is used by default. If you still need to use the old TiCDC architecture, do not add the `newarch` configuration item to the configuration file, as it might cause parsing failures.
+> The `newarch` configuration item is used only for the TiCDC new architecture. If the `newarch` configuration item is not specified, the old architecture is used by default. If you still need to use the old TiCDC architecture, do not add the `newarch` configuration item to the configuration file, as it might cause parsing failures.
 
 For detailed instructions, see [Deploy a new TiDB cluster that includes TiCDC using TiUP](/ticdc/deploy-ticdc.md#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup).
 
@@ -97,7 +97,7 @@ For detailed instructions, see [Deploy a new TiDB cluster that includes TiCDC us
 
 2. If your TiDB cluster version is earlier than v9.0.0, you need to manually download the TiCDC binary package of v9.0.0 or later, and then patch the downloaded file to your TiDB cluster. Otherwise, skip this step.
 
-    > **Note:**
+    > **Warning:**
     >
     > After TiCDC is upgraded to the new architecture, rolling back to the old architecture is not supported.
 
@@ -119,13 +119,13 @@ For detailed instructions, see [Deploy a new TiDB cluster that includes TiCDC us
 
 3. If your TiDB cluster has running changefeeds, refer to [Pause a replication task](/ticdc/ticdc-manage-changefeed.md#pause-a-replication-task) to pause all replication tasks of the changefeeds.
 
-4. Update the TiCDC configuration using TiUP:
+4. Update the TiCDC configuration using the [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command:
 
     ```shell
     tiup cluster edit-config <cluster-name>
     ```
 
-    ```shell
+    ```yaml
     server_configs:
       cdc:
         newarch: true
@@ -153,7 +153,7 @@ For more command usage methods and details, see [Manage Changefeeds](/ticdc/ticd
 
 ## Monitoring
 
-The monitoring dashboard for the TiCDC new architecture is integrated into the Grafana dashboard, with the name TiCDC-New-Arch. You can view monitoring metrics related to the new architecture on this dashboard.
+The monitoring dashboard for the TiCDC new architecture is integrated into the Grafana dashboard, with the name **TiCDC-New-Arch**. You can view monitoring metrics related to the new architecture on this dashboard.
 
 ## Notes
 
