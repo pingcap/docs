@@ -136,6 +136,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 | DM | [--redact-info-log](/dm/dm-command-line-flags/#--redact-info-log) | Newly added | Controls whether DM replaces sensitive query arguments with ? placeholders in logs. The default value is false. When set to true, query arguments in DM logs are redacted. This parameter only redacts query arguments (not entire SQL statements), and requires a DM-worker restart to take effect. |
 |  |  |  | |
 
+### Offline package changes
+
+Starting from v9.0.0, the offline package location of the [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) tool in the `TiDB-community-toolkit` [binary package](/binary-package.md) is changed from `sync_diff_inspector` to `tiflow-{version}-linux-{arch}.tar.gz`.
 
 ### Operating system and platform requirement changes
 
