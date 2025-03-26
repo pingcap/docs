@@ -27,7 +27,7 @@ This document takes the `tidb` user as an example.
         adduser tidb
         ```
 
-    2. Configure the limits for the `tidb` user:
+    2. Configure the resource limits for the `tidb` user:
 
         ```shell
         cat << EOF >>/etc/security/limits.conf
