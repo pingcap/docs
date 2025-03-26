@@ -96,17 +96,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     When `sql_require_primary_key=ON` is enabled in TiDB, tables must have a primary key. TiDB Lightning now adds a default primary key to its internal error-logging and conflict-detection tables (`conflict_error_v4`, `type_error_v2`, and `conflict_records_v2`), preventing table-creation failures. If you rely on these internal tables for automation, confirm the new naming and schema changes (primary key added), as scripts referencing older table names might need updates.
 
-* Migrated sync-diff-inspector from `tidb-tools` to `tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh] **tw@Oreoxmt** <!--2070-->
+* Migrate sync-diff-inspector from `pingcap/tidb-tools` to `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh) **tw@Oreoxmt** <!--2070-->
 
-    The sync-diff-inspector tool has moved from the old [tidb-tools](https://github.com/pingcap/tidb-tools) repository to [tiflow](https://github.com/pingcap/tiflow), unifying replication and migration tools (DM, TiCDC, sync-diff-inspector) in one place. 
+    Starting from v9.0.0, the sync-diff-inspector tool is moved from the [`pingcap/tidb-tools`](https://github.com/pingcap/tidb-tools) repository to [`pingcap/tiflow`](https://github.com/pingcap/tiflow). This change unifies replication and migration tools ([DM](/dm/dm-overview.md), [TiCDC](/ticdc/ticdc-overview.md), and [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)) into a single repository.
 
-    For TiDB v9.0.0 and later, you can install sync-diff-inspector via:
+    For TiDB v9.0.0 and later versions, you can install sync-diff-inspector using one of the following methods:
 
-    * `tiup install sync-diff-inspector`
-    * `docker pull pingcap/sync-diff-inspector:latest`
-    * [TiDB Toolkit](/download-ecosystem-tools.md) binary
+    - TiUP: `tiup install sync-diff-inspector`
+    - Docker image: `docker pull pingcap/sync-diff-inspector:latest`
+    - Binary package: [TiDB Toolkit](/download-ecosystem-tools.md)
 
-    The old [tidb-tools repo](https://github.com/pingcap/tidb-tools) is now archived. If you previously installed sync-diff-inspector from tidb-tools, switch to TiUP, Docker, or the updated binary.
+  The [`pingcap/tidb-tools`](https://github.com/pingcap/tidb-tools) repository is now archived. If you previously installed sync-diff-inspector from `tidb-tools`, switch to TiUP, Docker, or the TiDB Toolkit.
 
     For more information, see [documentation](/sync-diff-inspector/sync-diff-inspector-overview.md).
 
