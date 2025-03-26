@@ -1,6 +1,6 @@
 ---
 title: TiDB Workload Repository
-summary: The workload repository is a system for collecting and storing historical workload data from a TiDB cluster.
+summary: Introduces the workload repository system for collecting and storing historical workload data from a TiDB cluster.
 ---
 
 # TiDB Workload Repository
@@ -97,12 +97,12 @@ The [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_worklo
 SET GLOBAL tidb_workload_repository_retention_days = 30;
 ```
 
-A higher value for this variable allows for longer data retention, which may be beneficial for workload analysis, but will increase storage requirements.
+A higher value for this variable allows for longer data retention, which might be beneficial for workload analysis, but will increase storage requirements.
 
 ## Notes
 
-- Enabling the Workload Repository may have a small performance impact on the system.
-- Setting sampling intervals too low may increase system overhead.
+- Enabling the Workload Repository might have a small performance impact on the system.
+- Setting sampling intervals too low might increase system overhead.
 - Setting retention days to `0` disables automatic purging of old data.
 
 ## Best practices
