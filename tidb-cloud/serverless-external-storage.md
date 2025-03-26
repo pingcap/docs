@@ -20,7 +20,7 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
 > **Note:**
 >
-> Only clusters with cloud provider AWS are supported to use the Role ARN to access Amazon S3. If you are using other cloud providers, you need to use an AWS access key to access Amazon S3, as described in the [next section](#configure-amazon-s3-access-using-an-aws-access-key).
+> Role ARN access to Amazon S3 is only supported for clusters with AWS as the cloud provider. If you use a different cloud provider, use an AWS access key instead. For more details, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
 
 1. Open the **Import** page for your target cluster.
 
@@ -273,18 +273,18 @@ To allow TiDB Cloud Serverless to access your Alibaba Cloud OSS bucket, you need
 
 Take the following steps to configure an AccessKey pair:
 
-1. Create a RAM user and get the AccessKey pair. For more information, see [Create a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user?spm=a2c63.p38356.help-menu-28625.d_2_0_1_0.6bfe450eXgdtzq).
+1. Create a RAM user and get the AccessKey pair. For more information, see [Create a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user).
     
-    - In the Access Mode section, choose **Using permanent AccessKey to access**.
+    In the **Access Mode** section, select **Using permanent AccessKey to access**.
 
-2. Create a custom policy with the needed permissions. For more information, see [Create a custom policy](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy?spm=a2c63.p38356.help-menu-28625.d_2_3_3_0.78a9f427rh64MX).
+2. Create a custom policy with the required permissions. For more information, see [Create custom policies](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy).
     
-    - In the Effect section, select **Allow**.
-    - In the Service section, choose **Object Storage Service**.
-    - In the Action section, choose the permissions as needed.
+    - In the **Effect** section, select **Allow**.
+    - In the **Service** section, select **Object Storage Service**.
+    - In the **Action** section, select the permissions as needed.
    
-        - Importing data into a TiDB Cloud Serverless cluster needs the **oss:GetObject**, **oss:GetBucketInfo** and **oss:ListObjects** permissions.
+        To import data into a TiDB Cloud Serverless cluster, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
       
-    - In the Resource section, select the bucket and the objects in the bucket.
+    - In the **Resource** section, select the bucket and the objects in the bucket.
 
-3. Attach the custom policies to the RAM user. For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user?spm=a2c63.p38356.help-menu-28625.d_2_0_3_0.3ed24722P8TrSx).
+3. Attach the custom policies to the RAM user. For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).
