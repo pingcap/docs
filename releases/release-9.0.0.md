@@ -50,6 +50,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Performance
 
+* In scenarios with hundreds of thousands to millions of users, the performance of creating and modifying users has improved by 77 times [#55563](https://github.com/pingcap/tidb/issues/55563) @[tiancaiamao](https://github.com/tiancaiamao) tw@hfxsd<!--1941-->
+
+    In previous versions, when the number of users in a cluster exceeded 200,000, the QPS for creating and modifying users drops to 1. In certain SaaS environments, if there is a need to create millions of users and periodically update user passwords in bulk, it can take up to 2 days or more, which is unacceptable for some SaaS businesses.
+
+    TiDB v9.0.0 optimizes the performance of these DCL (Data Control Language) operations, allowing 2 million users to be created in just 37 minutes. This greatly enhances the execution performance of DCL statements and improves the user experience of TiDB in such SaaS scenarios.
+
+    For more information, see [documentation](/system-variables.md/#tidb_accelerate_user_creation_update-new-in-v900).
 * Support pushing down the following functions to TiFlash [#59317](https://github.com/pingcap/tidb/issues/59317) @[guo-shaoge](https://github.com/guo-shaoge) **tw@Oreoxmt** <!--1918-->
 
     * `TRUNCATE()`
@@ -64,9 +71,21 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
   For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
 
+### Availability
+
+* TiProxy officially supports the traffic replay feature (GA) [#642](https://github.com/pingcap/tiproxy/issues/642) @[djshow832](https://github.com/djshow832) tw@hfxsd<!--2062-->
+
+    In TiProxy v1.3.0, the traffic replay feature is released as an experimental feature. In TiProxy v1.4.0, the traffic replay feature becomes generally available (GA). TiProxy provides specialized SQL commands for traffic capture and replay. This feature lets you easily capture access traffic from TiDB production clusters and replay it at a specified rate in test clusters, facilitating business validation.
+    
+    For more information, see [documentation](/tiproxy/tiproxy-traffic-replay.md).
+
 ### Reliability
 
+* Introduce a new system variable `MAX_USER_CONNECTIONS` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) tw@hfxsd<!--2017-->
 
+    Starting from v9.0.0, you can use the `MAX_USER_CONNECTIONS` system variable to limit the number of connections a single user can establish to a single TiDB node. This helps prevent issues where excessive [token](/tidb-configuration-file.md/#token-limit) consumption by one user causes delays in responding to requests from other users.
+    
+    For more information, see [documentation](/system-variables.md/#max_user_connections-new-in-v900)
 
 ### SQL
 
@@ -82,6 +101,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](/statement-summary-tables.md#statements_summary-fields-description).
 
+* Optimize the `execution info` in the output of `EXPLAIN ANALYZE` [#56232](https://github.com/pingcap/tidb/issues/56232) @[yibin87](https://github.com/yibin87) tw@hfxsd<!--1697-->
+
+    [`EXPLAIN ANALYZE`](https://github.com/sql-statements/sql-statement-explain-analyze.md) executes SQL statements and records execution details in the `execution info` column. The same information is captured in the [slow query log](https://github.com/identify-slow-queries.md). These details are crucial for analyzing and understanding the time spent on SQL execution.
+
+    In v9.0.0, the `execution info` output is optimized for clearer representation of each metric. For example, `time` now refers to the wall-clock time for operator execution, `loops` indicates how many times the current operator is called by its parent operator, and `total_time` represents the sum of all concurrent execution times. These optimizations help you better understand the SQL execution process and devise more targeted optimization strategies.
+
+    For more information, see [documentation](/sql-statements/sql-statement-explain-analyze.md).
 ### Security
 
 ### Data migration
