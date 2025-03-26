@@ -13,7 +13,7 @@ This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vect
 
 > **Tip**
 >
-> You can view the complete [sample code](https://github.com/Icemap/aws-generativeai-partner-samples/blob/feat-tidb/tidb/samples/tidb-bedrock-boto3-rag.ipynb) in Notebook format.
+> You can view the complete [sample code](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/c6ccd4207533217c3e39c0fca972c3452304aa5e/tidb/samples/tidb-bedrock-boto3-rag.ipynb) in Notebook format.
 
 ## Prerequisites
 
