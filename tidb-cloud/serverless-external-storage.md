@@ -20,7 +20,7 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
 > **Note:**
 >
-> Role ARN access to Amazon S3 is only supported for clusters with AWS as the cloud provider. If you use a different cloud provider, use an AWS access key instead. For more details, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
+> Role ARN access to Amazon S3 is only supported for clusters with AWS as the cloud provider. If you use a different cloud provider, use an AWS access key instead. For more information, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
 
 1. Open the **Import** page for your target cluster.
 
