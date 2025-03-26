@@ -5,7 +5,7 @@ summary: Learn how to use the TiCDC Simple protocol and the data format implemen
 
 # TiCDC Simple Protocol
 
-TiCDC Simple protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between heterogeneous databases. This document describes how to use the TiCDC Simple protocol and the data format implementation.
+Starting from v8.0.0, TiCDC supports the Simple protocol. This document describes how to use the TiCDC Simple protocol and the data format implementation.
 
 ## Use the TiCDC Simple protocol
 
