@@ -11,10 +11,6 @@ This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vect
 >
 > TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless). It is not available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
 
-> **Tip**
->
-> You can view the complete [sample code](https://github.com/Icemap/aws-generativeai-partner-samples/blob/feat-tidb/tidb/samples/tidb-bedrock-boto3-rag.ipynb) in Notebook format.
-
 ## Prerequisites
 
 To complete this tutorial, you need:
