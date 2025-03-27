@@ -29,7 +29,7 @@ Before importing a Data App to Postman, make sure that you have the following:
 
 To import your Data App to Postman, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Data Service**](https://console.tidb.io/data-service) page of your project.
+1. In the [TiDB Cloud console](https://console.tidb.io/), navigate to the [**Data Service**](https://console.tidb.io/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the upper-right corner of the page, click **Run in Postman**. A dialog with import instructions is displayed.
 

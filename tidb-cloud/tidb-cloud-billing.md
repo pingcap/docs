@@ -83,7 +83,7 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 To analyze and customize your cost reports of your organization, perform the following steps:
 
-1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+1. In the lower-left corner of the [TiDB Cloud console](https://console.tidb.io/), click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
 
     > **Note:**
     >

@@ -1,11 +1,11 @@
 ---
-title: TiDB Cloud Starter Driver Prisma Tutorial
-summary: Learn how to use TiDB Cloud Starter driver with Prisma ORM.
+title: TiDB Cloud Serverless Driver Prisma Tutorial
+summary: Learn how to use TiDB Cloud Serverless Driver with Prisma ORM.
 ---
 
-# TiDB Cloud Starter Driver Prisma Tutorial
+# TiDB Cloud Serverless Driver Prisma Tutorial
 
-[Prisma](https://www.prisma.io/docs) is an open source next-generation ORM (Object-Relational Mapping) that helps developers interact with their database in an intuitive, efficient, and safe way. TiDB Cloud offers [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter), enabling you to use [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) over HTTPS with [TiDB Cloud Starter driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) brings the following benefits:
+[Prisma](https://www.prisma.io/docs) is an open source next-generation ORM (Object-Relational Mapping) that helps developers interact with their database in an intuitive, efficient, and safe way. TiDB Cloud offers [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter), enabling you to use [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) over HTTPS with [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) brings the following benefits:
 
 - Better performance of Prisma Client in serverless environments
 - Ability to use Prisma Client in edge environments
@@ -14,7 +14,7 @@ This tutorial describes how to use [@tidbcloud/prisma-adapter](https://github.co
 
 ## Install
 
-You need to install both [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) and [TiDB Cloud Starter driver](/tidb-cloud/serverless-driver.md). You can install them using [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
+You need to install both [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) and [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md). You can install them using [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
 
 Taking npm as an example, you can run the following commands for installation:
 
@@ -54,7 +54,7 @@ const adapter = new PrismaTiDBCloud(connection);
 const prisma = new PrismaClient({ adapter });
 ```
 
-Then, queries from Prisma Client can be sent to the TiDB Cloud Starter driver for processing.
+Then, queries from Prisma Client can be sent to the TiDB Cloud Serverless Driver for processing.
 
 ## Use the Prisma adapter in Node.js environments
 

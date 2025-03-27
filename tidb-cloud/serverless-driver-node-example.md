@@ -1,16 +1,16 @@
 ---
-title: TiDB Cloud Starter Driver Node.js Tutorial
-summary: Learn how to use TiDB Cloud Starter driver in a local Node.js project.
+title: TiDB Cloud Serverless Driver Node.js Tutorial
+summary: Learn how to use TiDB Cloud Serverless Driver in a local Node.js project.
 ---
 
-# TiDB Cloud Starter Driver Node.js Tutorial
+# TiDB Cloud Serverless Driver Node.js Tutorial
 
-This tutorial describes how to use TiDB Cloud Starter driver in a local Node.js project.
+This tutorial describes how to use TiDB Cloud Serverless Driver in a local Node.js project.
 
 > **Note:**
 >
 > - This tutorial is applicable to TiDB Cloud Starter clusters only. 
-> - To learn how to use TiDB Cloud Starter driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
+> - To learn how to use TiDB Cloud Serverless Driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
 
 ## Before you begin
 
@@ -29,7 +29,7 @@ To complete this step-by-step tutorial, you need the following:
     cd node-example
     ```
 
-2. Install the TiDB Cloud Starter driver using npm or your preferred package manager.
+2. Install the TiDB Cloud Serverless Driver using npm or your preferred package manager.
 
     The following command takes installation with npm as an example. Executing this command will create a `node_modules` directory and a `package.json` file in your project directory.
 

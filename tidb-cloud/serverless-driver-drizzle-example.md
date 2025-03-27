@@ -1,17 +1,17 @@
 ---
-title: TiDB Cloud Starter Driver Drizzle Tutorial
-summary: Learn how to use TiDB Cloud Starter driver with Drizzle.
+title: TiDB Cloud Serverless Driver Drizzle Tutorial
+summary: Learn how to use TiDB Cloud Serverless Driver with Drizzle.
 ---
 
-# TiDB Cloud Starter Driver Drizzle Tutorial
+# TiDB Cloud Serverless Driver Drizzle Tutorial
 
-[Drizzle ORM](https://orm.drizzle.team/) is a lightweight and performant TypeScript ORM with developer experience in mind. Starting from `drizzle-orm@0.31.2`, it supports [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless), enabling you to use Drizzle over HTTPS with [TiDB Cloud Starter driver](/tidb-cloud/serverless-driver.md).
+[Drizzle ORM](https://orm.drizzle.team/) is a lightweight and performant TypeScript ORM with developer experience in mind. Starting from `drizzle-orm@0.31.2`, it supports [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless), enabling you to use Drizzle over HTTPS with [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md).
 
-This tutorial describes how to use TiDB Cloud Starter driver with Drizzle in Node.js environments and edge environments.
+This tutorial describes how to use TiDB Cloud Serverless Driver with Drizzle in Node.js environments and edge environments.
 
-## Use Drizzle and TiDB Cloud Starter driver in Node.js environments
+## Use Drizzle and TiDB Cloud Serverless Driver in Node.js environments
 
-This section describes how to use TiDB Cloud Starter driver with Drizzle in Node.js environments.
+This section describes how to use TiDB Cloud Serverless Driver with Drizzle in Node.js environments.
 
 ### Before you begin
 
@@ -145,7 +145,7 @@ To complete this tutorial, you need the following:
    ts-node --esm hello-world.ts
    ```
 
-## Use Drizzle and TiDB Cloud Starter driver in edge environments
+## Use Drizzle and TiDB Cloud Serverless Driver in edge environments
 
 This section takes the Vercel Edge Function as an example.
 

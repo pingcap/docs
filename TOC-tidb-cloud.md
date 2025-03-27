@@ -74,7 +74,7 @@
     - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
   - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png) <!--TBD, ToDo: Not sure if we need to update the driver name-->
-    - [TiDB Cloud Starter Driver](/tidb-cloud/serverless-driver.md)
+    - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
     - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
     - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
     - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)

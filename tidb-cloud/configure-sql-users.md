@@ -9,7 +9,7 @@ This document describes how to manage database users and roles using the **SQL U
 
 > **Note:**
 >
-> - The **SQL Users** page is in beta and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for the SQL Users page" in the **Description** field and click **Submit**.
+> - The **SQL Users** page is in beta and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://console.tidb.io/) and click **Request Support**. Then, fill in "Apply for the SQL Users page" in the **Description** field and click **Submit**.
 > - Database users and roles are independent of [organization and project users and roles](/tidb-cloud/manage-user-access.md). Database users are used to access databases in a TiDB cluster, while organization and project users are used to access organizations and projects in the [TiDB Cloud console](https://console.tidb.io/).
 > - In addition to the **SQL Users** page, you can also manage database users and roles by connecting to your cluster with a SQL client and writing SQL statements. For more information, see [TiDB User Account Management](https://docs.pingcap.com/tidb/dev/user-account-management).
 

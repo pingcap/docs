@@ -7,7 +7,7 @@ summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
 
 [Netlify](https://netlify.com/) is an all-in-one platform for automating modern web projects. It replaces your hosting infrastructure, continuous integration, and deployment pipeline with a single workflow and integrates dynamic functionality like serverless functions, user authentication, and form handling as your projects grow.
 
-This document describes how to deploy a fullstack app on Netlify with TiDB Cloud as the database backend. You can also learn how to use Netlify edge function with our TiDB Cloud Starter driver.
+This document describes how to deploy a fullstack app on Netlify with TiDB Cloud as the database backend. You can also learn how to use Netlify edge function with our TiDB Cloud Serverless Driver.
 
 ## Prerequisites
 
@@ -219,7 +219,7 @@ For a TiDB Cloud Starter cluster, you can get the connection string either from 
 
 ## Use the edge function
 
-The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud Starter driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
+The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
 
 To use the edge function, take the following steps:
 

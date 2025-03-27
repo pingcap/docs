@@ -1,15 +1,15 @@
 ---
-title: TiDB Cloud Starter Driver (Beta)
+title: TiDB Cloud Serverless Driver (Beta)
 summary: Learn how to connect to TiDB Cloud Starter from serverless and edge environments.
 ---
 
-# TiDB Cloud Starter Driver (Beta)
+# TiDB Cloud Serverless Driver (Beta)
 
-## Why use TiDB Cloud Starter Driver (Beta)
+## Why use TiDB Cloud Serverless Driver (Beta)
 
 Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
 
-[TiDB Cloud Starter driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Cloud Starter cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to TiDB Cloud Starter clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
+[TiDB Cloud Serverless Driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Cloud Starter cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to TiDB Cloud Starter clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
 
 > **Note:**
 >
@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-Learn more about [using TiDB Cloud Starter driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+Learn more about [using TiDB Cloud Serverless Driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
 
 </div>
 
@@ -99,7 +99,7 @@ export default {
 };
 ```
 
-Learn more about [using TiDB Cloud Starter driver in Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
+Learn more about [using TiDB Cloud Serverless Driver in Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
 
 </div>
 
@@ -115,7 +115,7 @@ export default async () => {
 }
 ```
 
-Learn more about [using TiDB Cloud Starter driver in Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
+Learn more about [using TiDB Cloud Serverless Driver in Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
 
 </div>
 
@@ -145,7 +145,7 @@ const result = await conn.execute('show tables')
 
 ## Configure the serverless driver
 
-You can configure TiDB Cloud Starter driver at both the connection level and the SQL level.
+You can configure TiDB Cloud Serverless Driver at both the connection level and the SQL level.
 
 ### Connection level configurations
 
@@ -161,7 +161,7 @@ At the connection level, you can make the following configurations:
 | `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                                                                                                                                               |
 | `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                         |
 | `fullResult` | bool     | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                                                                                                                                                   |
-| `decoders`   | object   | `{}`          | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud Starter driver as an argument and returns the decoded value. |
+| `decoders`   | object   | `{}`          | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud Serverless Driver as an argument and returns the decoded value. |
 
 **Database URL**
 
@@ -205,7 +205,7 @@ At the SQL level, you can configure the following options:
 | `arrayMode`  | bool   | `false`           | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | `fullResult` | bool   | `false`           | Whether to return the full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `isolation`  | string | `REPEATABLE READ` | The transaction isolation level, which can be set to `READ COMMITTED` or `REPEATABLE READ`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `decoders`   | object | `{}`              | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud Starter driver as an argument and returns the decoded value. If you have configured `decoders` at both the connection and SQL levels, the key-value pairs with different keys configured at the connection level will be merged to the SQL level to take effect. If the same key (this is, column type) is specified at both levels, the value at the SQL level takes precedence. |
+| `decoders`   | object | `{}`              | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud Serverless Driver as an argument and returns the decoded value. If you have configured `decoders` at both the connection and SQL levels, the key-value pairs with different keys configured at the connection level will be merged to the SQL level to take effect. If the same key (this is, column type) is specified at both levels, the value at the SQL level takes precedence. |
 
 **arrayMode and fullResult**
 
@@ -235,10 +235,10 @@ import { connect, ColumnType } from '@tidbcloud/serverless';
 const conn = connect({
   url: 'mysql://[username]:[password]@[host]/[database]',
   decoders: {
-    // By default, TiDB Cloud Starter driver returns the BIGINT type as text value. This decoder converts BIGINT to the JavaScript built-in BigInt type.
+    // By default, TiDB Cloud Serverless Driver returns the BIGINT type as text value. This decoder converts BIGINT to the JavaScript built-in BigInt type.
     [ColumnType.BIGINT]: (rawValue: string) => BigInt(rawValue),
     
-    // By default, TiDB Cloud Starter driver returns the DATETIME type as the text value in the 'yyyy-MM-dd HH:mm:ss' format. This decoder converts the DATETIME text to the JavaScript native Date object.
+    // By default, TiDB Cloud Serverless Driver returns the DATETIME type as the text value in the 'yyyy-MM-dd HH:mm:ss' format. This decoder converts the DATETIME text to the JavaScript native Date object.
     [ColumnType.DATETIME]: (rawValue: string) => new Date(rawValue),
   }
 })
@@ -253,7 +253,7 @@ conn.execute(`select ...`, [], {
 
 > **Note:**
 >
-> TiDB Cloud Starter driver configuration changes:
+> TiDB Cloud Serverless Driver configuration changes:
 > 
 > - v0.0.7: add the SQL level option `isolation`.
 > - v0.0.10: add the connection level configuration `decoders` and the SQL level option `decoders`.
@@ -309,20 +309,20 @@ The type mapping between TiDB Cloud Starter and Javascript is as follows:
 
 > **Note:**
 >
-> Make sure to use the default `utf8mb4` character set in TiDB Cloud Starter for the type conversion to JavaScript strings, because TiDB Cloud Starter driver uses the UTF-8 encoding to decode them to strings. 
+> Make sure to use the default `utf8mb4` character set in TiDB Cloud Starter for the type conversion to JavaScript strings, because TiDB Cloud Serverless Driver uses the UTF-8 encoding to decode them to strings. 
 
 > **Note:**
 >
-> TiDB Cloud Starter driver data type mapping changes:
+> TiDB Cloud Serverless Driver data type mapping changes:
 > 
 > - v0.1.0: the `BINARY`, `VARBINARY`, `TINYBLOB`, `BLOB`, `MEDIUMBLOB`, `LONGBLOB`, and `BIT` types are now returned as a `Uint8Array` instead of a `string`.
 
 ### ORM integrations
 
-TiDB Cloud Starter driver has been integrated with the following ORMs:
+TiDB Cloud Serverless Driver has been integrated with the following ORMs:
 
-- [TiDB Cloud Starter driver Kysely dialect](https://github.com/tidbcloud/kysely).
-- [TiDB Cloud Starter driver Prisma adapter](https://github.com/tidbcloud/prisma-adapter).
+- [TiDB Cloud Serverless Driver Kysely dialect](https://github.com/tidbcloud/kysely).
+- [TiDB Cloud Serverless Driver Prisma adapter](https://github.com/tidbcloud/prisma-adapter).
 
 ## Pricing
 
@@ -338,4 +338,4 @@ Currently, using serverless driver has the following limitations:
 
 ## What's next
 
-- Learn how to [use TiDB Cloud Starter driver in a local Node.js project](/tidb-cloud/serverless-driver-node-example.md).
+- Learn how to [use TiDB Cloud Serverless Driver in a local Node.js project](/tidb-cloud/serverless-driver-node-example.md).

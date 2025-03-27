@@ -1,20 +1,20 @@
 ---
-title: TiDB Cloud Starter Driver Kysely Tutorial
-summary: Learn how to use TiDB Cloud Starter driver with Kysely.
+title: TiDB Cloud Serverless Driver Kysely Tutorial
+summary: Learn how to use TiDB Cloud Serverless Driver with Kysely.
 ---
 
-# TiDB Cloud Starter Driver Kysely Tutorial
+# TiDB Cloud Serverless Driver Kysely Tutorial
 
-[Kysely](https://kysely.dev/docs/intro) is a type-safe and autocompletion-friendly TypeScript SQL query builder. TiDB Cloud offers [@tidbcloud/kysely](https://github.com/tidbcloud/kysely), enabling you to use Kysely over HTTPS with [TiDB Cloud Starter driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/kysely](https://github.com/tidbcloud/kysely) brings the following benefits:
+[Kysely](https://kysely.dev/docs/intro) is a type-safe and autocompletion-friendly TypeScript SQL query builder. TiDB Cloud offers [@tidbcloud/kysely](https://github.com/tidbcloud/kysely), enabling you to use Kysely over HTTPS with [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/kysely](https://github.com/tidbcloud/kysely) brings the following benefits:
 
 - Better performance in serverless environments.
 - Ability to use Kysely in edge environments.
 
-This tutorial describes how to use TiDB Cloud Starter driver with Kysely in Node.js environments and edge environments.
+This tutorial describes how to use TiDB Cloud Serverless Driver with Kysely in Node.js environments and edge environments.
 
 ## Use TiDB Cloud Kysely dialect in Node.js environments
 
-This section describes how to use TiDB Cloud Starter driver with Kysely in Node.js environments.
+This section describes how to use TiDB Cloud Serverless Driver with Kysely in Node.js environments.
 
 ### Before you begin
 
