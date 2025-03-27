@@ -82,9 +82,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
   For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
 
-* TiFlash supports a new storage format to improve the scanning efficiency of string types [#9673](https://github.com/pingcap/tiflash/issues/9673) @[JinheLin](https://github.com/JinheLin) **tw@qiancai**<!--2066-->
+* TiFlash supports a new storage format to improve the scanning efficiency of string data [#9673](https://github.com/pingcap/tiflash/issues/9673) @[JinheLin](https://github.com/JinheLin) **tw@qiancai**<!--2066-->
 
-    Before v9.0.0, TiFlash stores string data in a format that requires reading each row when scanning the data, which is inefficient for string data with a small length. In v9.0.0, TiFlash introduced a new storage format that optimizes the storage of strings whose length is less than 64 bytes, improving scanning efficiency without affecting the storage and scanning performance of other data. To enable the new storage format, you can set the `format_version` parameter to `8` in the TiFlash configuration file. After the configuration takes effect, new data written to TiFlash will use the new storage format, while the storage format of existing data will remain unchanged.
+    Before v9.0.0, TiFlash stores string data in a format that requires to read each row individually when scanning the data, which is inefficient for short strings. In v9.0.0, TiFlash introduced a new storage format that optimizes the storage of strings shorter than 64 bytes, improving scanning efficiency without affecting the storage and scanning performance of other data. To enable the new storage format, set the `format_version` parameter to `8` in the TiFlash configuration file. After the configuration takes effect, new data written to TiFlash will use the new storage format, while the storage format of existing data will remain unchanged.
 
     Before upgrading TiFlash, make sure to read the [TiFlash upgrade guide](/tiflash-upgrade-guide.md) first.
 
@@ -110,7 +110,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Support creating global indexes on non-unique columns of partitioned tables [#58650](https://github.com/pingcap/tidb/issues/58650) @[Defined2014](https://github.com/Defined2014) @[mjonss](https://github.com/mjonss) **tw@qiancai**<!--2057-->
 
-    Starting from v8.3.0, TiDB supports creating global indexes on unique columns of partitioned tables to improve query performance, but does not support creating global indexes on non-unique columns yet. Starting from v9.0.0, TiDB removes this restriction, enabling you to create global indexes on non-unique columns of partitioned tables, improving the usability of global indexes.
+    Starting from v8.3.0, you can create global indexes on unique columns of partitioned tables in TiDB to improve query performance. However, creating global indexes on non-unique columns was not supported. Starting from v9.0.0, TiDB removes this restriction, enabling you to create global indexes on non-unique columns of partitioned tables, enhancing the usability of global indexes.
 
     For more information, see [documentation](/partitioned-table.md#global-index).
 
