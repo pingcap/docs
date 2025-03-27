@@ -9,7 +9,7 @@ The `TIDB_HOT_REGIONS_HISTORY` table provides information about history hot Regi
 
 > **Note:**
 >
-> This table is not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This table is not available on [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters.
 
 <CustomContent platform="tidb">
 

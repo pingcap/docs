@@ -26,7 +26,7 @@ You can delete a cluster at any time by performing the following steps:
 
     > **Note:**
     >
-    > [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) do not support restoring data after the deletion. If you want to delete a TiDB Cloud Serverless cluster and restore its data in the future, see [Export Data from TiDB Cloud Serverless](/tidb-cloud/serverless-export.md) to export your data as a backup.
+    > [TiDB Cloud Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) do not support restoring data after the deletion. If you want to delete a TiDB Cloud Starter cluster and restore its data in the future, see [Export Data from TiDB Cloud Starter](/tidb-cloud/serverless-export.md) to export your data as a backup.
 
 5. Click **I understand, delete it**.
 

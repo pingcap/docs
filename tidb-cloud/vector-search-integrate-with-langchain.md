@@ -9,7 +9,7 @@ This tutorial demonstrates how to integrate the [vector search](/tidb-cloud/vect
 
 > **Note**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter).
 
 > **Tip**
 >
@@ -22,7 +22,7 @@ To complete this tutorial, you need:
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Jupyter Notebook](https://jupyter.org/install) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB Cloud Starter cluster. Follow [creating a TiDB Cloud Starter cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Get started
 

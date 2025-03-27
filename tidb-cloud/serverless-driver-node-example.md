@@ -1,16 +1,16 @@
 ---
 title: TiDB Cloud Serverless Driver Node.js Tutorial
-summary: Learn how to use TiDB Cloud serverless driver in a local Node.js project.
+summary: Learn how to use TiDB Cloud Serverless Driver in a local Node.js project.
 ---
 
 # TiDB Cloud Serverless Driver Node.js Tutorial
 
-This tutorial describes how to use TiDB Cloud serverless driver in a local Node.js project.
+This tutorial describes how to use TiDB Cloud Serverless Driver in a local Node.js project.
 
 > **Note:**
 >
-> - This tutorial is applicable to TiDB Cloud Serverless clusters only. 
-> - To learn how to use TiDB Cloud serverless driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
+> - This tutorial is applicable to TiDB Cloud Starter clusters only. 
+> - To learn how to use TiDB Cloud Serverless Driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
 
 ## Before you begin
 
@@ -18,7 +18,7 @@ To complete this step-by-step tutorial, you need the following:
 
 - [Node.js](https://nodejs.org/en) >= 18.0.0.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Cloud Serverless cluster. If you don't have any, you can [create a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A TiDB Cloud Starter cluster. If you don't have any, you can [create a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ## Step 1. Create a local Node.js project
 
@@ -29,7 +29,7 @@ To complete this step-by-step tutorial, you need the following:
     cd node-example
     ```
 
-2. Install the TiDB Cloud serverless driver using npm or your preferred package manager.
+2. Install the TiDB Cloud Serverless Driver using npm or your preferred package manager.
 
     The following command takes installation with npm as an example. Executing this command will create a `node_modules` directory and a `package.json` file in your project directory.
 
@@ -41,7 +41,7 @@ To complete this step-by-step tutorial, you need the following:
 
 The serverless driver supports both CommonJS and ES modules. The following steps take the usage of the ES module as an example.
 
-1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1. On the overview page of your TiDB Cloud Starter cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
    mysql://[username]:[password]@[host]/[database]
@@ -65,7 +65,7 @@ The serverless driver supports both CommonJS and ES modules. The following steps
     ```js
     import { connect } from '@tidbcloud/serverless'
     
-    const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'}) // replace with your TiDB Cloud Serverless cluster information
+    const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'}) // replace with your TiDB Cloud Starter cluster information
     console.log(await conn.execute("show tables"))
     ```
 

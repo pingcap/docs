@@ -1,11 +1,11 @@
 ---
-title: Connect to TiDB Cloud Serverless via Private Endpoint
+title: Connect to TiDB Cloud Starter via Private Endpoint
 summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
 ---
 
-# Connect to TiDB Cloud Serverless via Private Endpoint
+# Connect to TiDB Cloud Starter via Private Endpoint
 
-This document describes how to connect to your TiDB Cloud Serverless cluster via private endpoint.
+This document describes how to connect to your TiDB Cloud Starter cluster via private endpoint.
 
 TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
@@ -22,7 +22,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Currently, TiDB Cloud supports private endpoint connection to TiDB Cloud Serverless only when the endpoint service is hosted in AWS. If the service is hosted in Google Cloud, the private endpoint is not applicable.
+- Currently, TiDB Cloud supports private endpoint connection to TiDB Cloud Starter only when the endpoint service is hosted in AWS. If the service is hosted in Google Cloud, the private endpoint is not applicable.
 - Private endpoint connection across regions is not supported.
 
 ## Prerequisites
@@ -31,7 +31,7 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 ## Set up a private endpoint with AWS
 
-To connect to your TiDB Cloud Serverless cluster via a private endpoint, follow these steps:
+To connect to your TiDB Cloud Starter cluster via a private endpoint, follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -39,14 +39,14 @@ To connect to your TiDB Cloud Serverless cluster via a private endpoint, follow 
 
 ### Step 1. Choose a TiDB cluster
 
-1. On the [**Clusters**](https://console.tidb.io/clusters) page, click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
+1. On the [**Clusters**](https://console.tidb.io/clusters) page, click the name of your target TiDB Cloud Starter cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
 
     > **Note:**
     >
-    > You only need to create one private endpoint per AWS region, which can be shared by all TiDB Cloud Serverless clusters located in the same region.
+    > You only need to create one private endpoint per AWS region, which can be shared by all TiDB Cloud Starter clusters located in the same region.
 
 ### Step 2. Create an AWS interface endpoint
 

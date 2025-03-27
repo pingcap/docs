@@ -177,7 +177,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 > **Note:**
 >
-> This placement policy management statements are not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This placement policy management statements are not available on [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters.
 
 </CustomContent>
 
@@ -201,7 +201,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 > **Note:**
 >
-> This resource group management statements are not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This resource group management statements are not available on [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters.
 
 </CustomContent>
 
@@ -327,7 +327,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 > **Note:**
 >
-> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) are tools for replicating TiDB data to the upstream for TiDB Self-Managed. Most SQL statements for TiCDC and TiDB Binlog are not applicable to TiDB Cloud. <!--For TiDB Cloud, you can use the [Changefeed](/tidb-cloud/changefeed-overview.md) feature in the [TiDB Cloud console](https://tidbcloud.com) instead to stream data.-->
+> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) & [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) are tools for replicating TiDB data to the upstream for TiDB Self-Managed. Most SQL statements for TiCDC and TiDB Binlog are not applicable to TiDB Cloud. <!--For TiDB Cloud, you can use the [Changefeed](/tidb-cloud/changefeed-overview.md) feature in the [TiDB Cloud console](https://console.tidb.io/) instead to stream data.-->
 
 | SQL Statement | Description |
 |---------------|-------------|
@@ -344,7 +344,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md) | Drops an execution plan binding from a SQL statement. |
 | [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) | Drops statistics from a table. |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Works similar to `EXPLAIN`, with the major difference that it will execute the statement. |
-| `LOAD STATS` | Loads statistics into TiDB. This statement is not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters. |
+| `LOAD STATS` | Loads statistics into TiDB. This statement is not available on [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters. |
 | [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md) | Shows statistics collection tasks. |
 | [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md) | Shows created SQL bindings. |
 | [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) | Shows an estimation of how accurate statistics are believed to be. |

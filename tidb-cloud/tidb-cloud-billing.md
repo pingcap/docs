@@ -7,9 +7,9 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [TiDB Cloud Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
+> [TiDB Cloud Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
 
-TiDB Cloud charges according to the resources that you consume. You can visit the [TiDB Cloud Serverless Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/) pages to get more information about the pricing.
+TiDB Cloud charges according to the resources that you consume. You can visit the [TiDB Cloud Starter Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/) pages to get more information about the pricing.
 
 ## Invoices
 
@@ -83,7 +83,7 @@ If you are in the `Organization Owner` or `Organization Billing Manager` role of
 
 To analyze and customize your cost reports of your organization, perform the following steps:
 
-1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
+1. In the lower-left corner of the [TiDB Cloud console](https://console.tidb.io/), click <MDSvgIcon name="icon-top-organization" />, and then click **Billing**.
 
     > **Note:**
     >

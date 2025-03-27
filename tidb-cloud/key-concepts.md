@@ -33,11 +33,11 @@ Data Service enables you to access TiDB Cloud data via an HTTPS request using a 
 
 ## Scalability
 
-[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) scales automatically based on your application's workload changes. [Learn more about scalability](/tidb-cloud/scalability-concepts.md).
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) scales automatically based on your application's workload changes. [Learn more about scalability](/tidb-cloud/scalability-concepts.md).
 
 ## High availability
 
-TiDB Cloud ensures high availability in both TiDB Cloud clusters. See [High Availability in TiDB Cloud Serverless](/tidb-cloud/serverless-high-availability.md).
+TiDB Cloud ensures high availability in both TiDB Cloud clusters. See [High Availability in TiDB Cloud Starter](/tidb-cloud/serverless-high-availability.md).
 
 ## Monitoring
 

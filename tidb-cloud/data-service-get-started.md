@@ -17,13 +17,13 @@ This document introduces how to quickly get started with TiDB Cloud Data Service
 
 ## Before you begin
 
-Before creating a Data App, make sure that you have created a [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) cluster. If you do not have one, follow the steps in [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+Before creating a Data App, make sure that you have created a [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) cluster. If you do not have one, follow the steps in [Create a TiDB Cloud Starter cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
 
 ## Get started with a sample Data App
 
 Creating a sample Data App is the best way to get started with Data Service. If your project does not have any Data App yet, you can follow the on-screen instructions on the **Data Service** page to create a sample Data App and use this App to explore Data Service features.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
+1. In the [TiDB Cloud console](https://console.tidb.io/), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
 
 2. On the **Data Service** page, click **Create Sample Data App**. A dialog is displayed.
 
@@ -47,7 +47,7 @@ To get started with Data Service, you can also create your own Data App, and the
 
  To create a Data App, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
+1. In the [TiDB Cloud console](https://console.tidb.io/), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
 
 2. On the [**Data Service**](https://console.tidb.io/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
 

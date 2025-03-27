@@ -1,15 +1,15 @@
 ---
-title: Back Up and Restore TiDB Cloud Serverless Data
-summary: Learn how to back up and restore your TiDB Cloud Serverless cluster.
+title: Back Up and Restore TiDB Cloud Starter Data
+summary: Learn how to back up and restore your TiDB Cloud Starter cluster.
 ---
 
-# Back Up and Restore TiDB Cloud Serverless Data
+# Back Up and Restore TiDB Cloud Starter Data
 
-This document describes how to back up and restore your TiDB Cloud Serverless cluster data on TiDB Cloud.
+This document describes how to back up and restore your TiDB Cloud Starter cluster data on TiDB Cloud.
 
 ## Automatic backups
 
-TiDB Cloud Serverless automatically backs up your cluster data, allowing you to restore data from a backup snapshot to minimize data loss in the event of a disaster.
+TiDB Cloud Starter automatically backs up your cluster data, allowing you to restore data from a backup snapshot to minimize data loss in the event of a disaster.
 
 ### Learn about the backup setting
 
@@ -34,7 +34,7 @@ Automatic backup settings vary between free clusters and scalable clusters, as s
 
 To set the backup time for a scalable cluster, perform the following steps:
 
-1. Navigate to the **Backup** page of a TiDB Cloud Serverless cluster.
+1. Navigate to the **Backup** page of a TiDB Cloud Starter cluster.
 
 2. Click **Backup Settings**. This will open the **Backup Settings** window, where you can configure the automatic backup settings according to your requirements.
 
@@ -44,11 +44,11 @@ To set the backup time for a scalable cluster, perform the following steps:
 
 ## Restore
 
-TiDB Cloud Serverless clusters offer restore functionality to help recover data in case of accidental loss or corruption.
+TiDB Cloud Starter clusters offer restore functionality to help recover data in case of accidental loss or corruption.
 
 ### Restore mode
 
-TiDB Cloud Serverless supports snapshot restore and point-in-time restore for your cluster.
+TiDB Cloud Starter supports snapshot restore and point-in-time restore for your cluster.
 
 - **Snapshot Restore**: restores your cluster from a specific backup snapshot.
 
@@ -59,7 +59,7 @@ TiDB Cloud Serverless supports snapshot restore and point-in-time restore for yo
 
 ### Restore destination
 
-TiDB Cloud Serverless supports restoring in-place and restoring to a new cluster.
+TiDB Cloud Starter supports restoring in-place and restoring to a new cluster.
 
 **In-place restore**
 
@@ -77,7 +77,7 @@ Create and restore to the new cluster. Note the following:
 
 ### Perform the restore
 
-To restore your TiDB Cloud Serverless cluster, follow these steps:
+To restore your TiDB Cloud Starter cluster, follow these steps:
 
 1. Navigate to the **Backup** page of a cluster.
 
@@ -131,4 +131,4 @@ Once the restore process begins, the cluster status changes to **Restoring**. Th
 ## Limitations
 
 - If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because data needs to be rebuilt in TiFlash.
-- Manual backups are not supported for TiDB Cloud Serverless clusters.
+- Manual backups are not supported for TiDB Cloud Starter clusters.

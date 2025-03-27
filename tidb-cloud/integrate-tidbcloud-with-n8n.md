@@ -7,7 +7,7 @@ summary: Learn the use of TiDB Cloud node in n8n.
 
 [n8n](https://n8n.io/) is an extendable workflow automation tool. With a [fair-code](https://faircode.io/) distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your custom functions, logic, and apps.
 
-This document introduces how to build an auto-workflow: create a TiDB Cloud Serverless cluster, gather Hacker News RSS, store it to TiDB and send a briefing email.
+This document introduces how to build an auto-workflow: create a TiDB Cloud Starter cluster, gather Hacker News RSS, store it to TiDB and send a briefing email.
 
 ## Prerequisites: Get TiDB Cloud API key
 
@@ -76,16 +76,16 @@ The final workflow should look like the following image.
 
 ![img](/media/tidb-cloud/integration-n8n-workflow-rss.jpg)
 
-### (Optional) Create a TiDB Cloud Serverless cluster
+### (Optional) Create a TiDB Cloud Starter cluster
 
-If you don't have a TiDB Cloud Serverless cluster, you can use this node to create one. Otherwise, feel free to skip this operation.
+If you don't have a TiDB Cloud Starter cluster, you can use this node to create one. Otherwise, feel free to skip this operation.
 
 1. Navigate to **Workflows** panel, and click **Add workflow**.
 2. In new workflow workspace, click **+** in the top right corner and choose **All** field.
 3. Search `TiDB Cloud` and drag it to the workspace.
 4. Enter credentials, which is the TiDB Cloud API key, for the TiDB Cloud node.
 5. In the **Project** list, select your project.
-6. In the **Operation** list, select `Create Serverless Cluster`.
+6. In the **Operation** list, select `Create Starter Cluster`.
 7. In the **Cluster Name** box, enter a cluster name.
 8. In the **Region** list, select a region.
 9. In the **Password** box, enter a password used to log in to your TiDB clusters.
@@ -93,7 +93,7 @@ If you don't have a TiDB Cloud Serverless cluster, you can use this node to crea
 
 > **Note:**
 >
-> It takes several seconds to create a new TiDB Cloud Serverless cluster.
+> It takes several seconds to create a new TiDB Cloud Starter cluster.
 
 ### Create a workflow
 
@@ -203,7 +203,7 @@ This trigger will execute your workflow every morning at 8 AM.
 
 After building up the workflow, you can click **Execute Workflow** to test run it.
 
-If the workflow runs as expected, you'll get Hacker News briefing emails. These news contents will be logged to your TiDB Cloud Serverless cluster, so you don't have to worry about losing them.
+If the workflow runs as expected, you'll get Hacker News briefing emails. These news contents will be logged to your TiDB Cloud Starter cluster, so you don't have to worry about losing them.
 
 Now you can activate this workflow in the **Workflows** panel. This workflow will help you get the front-page articles on Hacker News every day.
 
@@ -213,7 +213,7 @@ Now you can activate this workflow in the **Workflows** panel. This workflow wil
 
 TiDB Cloud node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#regular-nodes) and only supports the following five operations:
 
-- **Create Serverless Cluster**: creates a TiDB Cloud Serverless cluster.
+- **Create Starter Cluster**: creates a TiDB Cloud Starter cluster.
 - **Execute SQL**: executes an SQL statement in TiDB.
 - **Delete**: deletes rows in TiDB.
 - **Insert**: inserts rows in TiDB.
@@ -224,7 +224,7 @@ TiDB Cloud node acts as a [regular node](https://docs.n8n.io/workflows/nodes/#re
 To use different operations, you need to fill in the different required fields. The following shows the respective field descriptions for the corresponding operation.
 
 <SimpleTab>
-<div label="Create Serverless Cluster">
+<div label="Create Starter Cluster">
 
 - **Credential for TiDB Cloud API**: only supports TiDB Cloud API key. For how to create an API key, refer to [Get TiDB Cloud API Key](#prerequisites-get-tidb-cloud-api-key).
 - **Project**: the TiDB Cloud project name.

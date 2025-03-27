@@ -5,13 +5,13 @@ summary: Learn about the limited SQL features on TiDB Cloud.
 
 # Limited SQL features on TiDB Cloud
 
-TiDB Cloud works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed and TiDB Cloud Serverless. This document describes the limitations of SQL features on TiDB Cloud. We are constantly filling in the feature gaps between TiDB Self-Managed and TiDB Cloud Serverless. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
+TiDB Cloud works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed and TiDB Cloud Starter. This document describes the limitations of SQL features on TiDB Cloud. We are constantly filling in the feature gaps between TiDB Self-Managed and TiDB Cloud Starter. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
 
 ## Statements
 
 ### Placement and range management
 
-| Statement | TiDB Cloud Serverless |
+| Statement | TiDB Cloud Starter |
 |:-|:-|
 | `ALTER PLACEMENT POLICY` | Not supported [^1] |
 | `CREATE PLACEMENT POLICY` | Not supported [^1] |
@@ -25,7 +25,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ### Resource groups
 
-| Statement | TiDB Cloud Serverless |
+| Statement | TiDB Cloud Starter |
 |:-|:-|
 | `ALTER RESOURCE GROUP` | Not supported [^2] |
 | `CALIBRATE RESOURCE` | Not supported [^2] |
@@ -36,18 +36,18 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ### Others
 
-| Statement | TiDB Cloud Serverless |
+| Statement | TiDB Cloud Starter |
 |:-|:-|
 | `BACKUP` | Not supported [^3] |
 | `SHOW BACKUPS` | Not supported [^3] |
 | `RESTORE` | Not supported [^3] |
 | `SHOW RESTORES` | Not supported [^3] |
-| `ADMIN RESET TELEMETRY_ID` | Telemetry is not supported on TiDB Cloud Serverless. |
+| `ADMIN RESET TELEMETRY_ID` | Telemetry is not supported on TiDB Cloud Starter. |
 | `ADMIN SHOW TELEMETRY` | Not supported [^4] |
 | `ADMIN SHOW SLOW` | Not supported [^5] |
 | `ADMIN PLUGINS ENABLE` | Not supported [^8] |
 | `ADMIN PLUGINS DISABLE` | Not supported [^8] |
-| `ALTER INSTANCE RELOAD TLS` | TiDB Cloud Serverless automatically refreshes the TLS certificate. |
+| `ALTER INSTANCE RELOAD TLS` | TiDB Cloud Starter automatically refreshes the TLS certificate. |
 | `LOAD DATA INFILE` | Only supports `LOAD DATA LOCAL INFILE` |
 | `CHANGE DRAINER` | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] |
@@ -64,13 +64,13 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ## Functions and operators
 
-| Function and operator | TiDB Cloud Serverless |
+| Function and operator | TiDB Cloud Starter |
 |:-|:-|
 | `SLEEP` | The [`SLEEP()` function](https://docs.tidb.io/tidbcloud/miscellaneous-functions) has a limitation wherein it can only support a maximum sleep time of 300 seconds.|
 
 ## System tables
 
-| Database | TiDB Cloud Serverless |
+| Database | TiDB Cloud Starter |
 |:-|:-|
 | `information_schema` | Not supported [^1] |
 | `information_schema` | Not supported [^4] |
@@ -122,7 +122,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ## System variables
 
-| Variable | TiDB Cloud Serverless |
+| Variable | TiDB Cloud Starter |
 |:-|:-|
 | `datadir` | Not supported [^1] |
 | `interactive_timeout` | Read-only [^10] |
@@ -217,24 +217,24 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `validate_password.special_char_count` | At least `1` [^9] |
 | `wait_timeout` | Read-only [^10] |
 
-[^1]: Configuring data placement is not supported on TiDB Cloud Serverless.
+[^1]: Configuring data placement is not supported on TiDB Cloud Starter.
 
-[^2]: Configuring resource groups is not supported on TiDB Cloud Serverless.
+[^2]: Configuring resource groups is not supported on TiDB Cloud Starter.
 
-[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Cloud Serverless, you can use the TiDB Cloud console instead.
+[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Cloud Starter, you can use the TiDB Cloud console instead.
 
 [^4]: The feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security).
 
-[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on TiDB Cloud Serverless, you can use the TiDB Cloud console instead.
+[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on TiDB Cloud Starter, you can use the TiDB Cloud console instead.
 
-[^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on TiDB Cloud Serverless, you can use the TiDB Cloud console instead.
+[^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on TiDB Cloud Starter, you can use the TiDB Cloud console instead.
 
 [^7]: Drainer and Pump are not supported on TiDB Cloud.
 
-[^8]: Plugin is not supported on TiDB Cloud Serverless.
+[^8]: Plugin is not supported on TiDB Cloud Starter.
 
-[^9]: TiDB Cloud Serverless enforces strong password policy.
+[^9]: TiDB Cloud Starter enforces strong password policy.
 
-[^10]: The variable is read-only on TiDB Cloud Serverless.
+[^10]: The variable is read-only on TiDB Cloud Starter.
 
-[^11]: TiDB Cloud Serverless does not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, TiDB Cloud Serverless generates a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.
+[^11]: TiDB Cloud Starter does not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, TiDB Cloud Starter generates a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.

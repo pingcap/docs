@@ -1,22 +1,22 @@
 ---
-title: Import Apache Parquet Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless
-summary: Learn how to import Apache Parquet files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless.
+title: Import Apache Parquet Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter
+summary: Learn how to import Apache Parquet files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter.
 ---
 
-# Import Apache Parquet Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless
+# Import Apache Parquet Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter
 
-You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to TiDB Cloud Serverless. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Serverless.
+You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to TiDB Cloud Starter. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Starter.
 
 > **Note:**
 >
-> - TiDB Cloud Serverless only supports importing Parquet files into empty tables. To import data into an existing table that already contains data, you can use TiDB Cloud Serverless to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+> - TiDB Cloud Starter only supports importing Parquet files into empty tables. To import data into an existing table that already contains data, you can use TiDB Cloud Starter to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
 > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 
 ## Step 1. Prepare the Parquet files
 
 > **Note:**
 >
-> Currently, TiDB Cloud Serverless does not support importing Parquet files that contain any of the following data types. If Parquet files to be imported contain such data types, you need to first regenerate the Parquet files using the [supported data types](#supported-data-types) (for example, `STRING`). Alternatively, you could use a service such as AWS Glue to transform data types easily.
+> Currently, TiDB Cloud Starter does not support importing Parquet files that contain any of the following data types. If Parquet files to be imported contain such data types, you need to first regenerate the Parquet files using the [supported data types](#supported-data-types) (for example, `STRING`). Alternatively, you could use a service such as AWS Glue to transform data types easily.
 >
 > - `LIST`
 > - `NEST STRUCT`
@@ -26,7 +26,7 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 
 1. If a Parquet file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
 
-    TiDB Cloud Serverless supports importing very large Parquet files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud Serverless can process multiple files in parallel, which can greatly improve the import speed.
+    TiDB Cloud Starter supports importing very large Parquet files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud Starter can process multiple files in parallel, which can greatly improve the import speed.
 
 2. Name the Parquet files as follows:
 
@@ -35,13 +35,13 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 
     > **Note:**
     >
-    > If you cannot update the Parquet filenames according to the preceding rules in some cases (for example, the Parquet file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-serverless) to import your source data to a single target table.
+    > If you cannot update the Parquet filenames according to the preceding rules in some cases (for example, the Parquet file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-starter) to import your source data to a single target table.
 
 ## Step 2. Create the target table schemas
 
-Because Parquet files do not contain schema information, before importing data from Parquet files into TiDB Cloud Serverless, you need to create the table schemas using either of the following methods:
+Because Parquet files do not contain schema information, before importing data from Parquet files into TiDB Cloud Starter, you need to create the table schemas using either of the following methods:
 
-- Method 1: In TiDB Cloud Serverless, create the target databases and tables for your source data.
+- Method 1: In TiDB Cloud Starter, create the target databases and tables for your source data.
 
 - Method 2: In the Amazon S3, GCS, or Azure Blob Storage directory where the Parquet files are located, create the target table schema files for your source data as follows:
 
@@ -49,9 +49,9 @@ Because Parquet files do not contain schema information, before importing data f
 
         If your Parquet files follow the naming rules in [Step 1](#step-1-prepare-the-parquet-files), the database schema files are optional for the data import. Otherwise, the database schema files are mandatory.
 
-        Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud Serverless will create the `${db_name}` database to store your data when you import the data.
+        Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud Starter will create the `${db_name}` database to store your data when you import the data.
 
-        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud Serverless will create the `mydb` database when you import the data.
+        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud Starter will create the `mydb` database when you import the data.
 
         ```sql
         CREATE DATABASE mydb;
@@ -59,11 +59,11 @@ Because Parquet files do not contain schema information, before importing data f
 
     2. Create table schema files for your source data.
 
-        If you do not include the table schema files in the Amazon S3, GCS, or Azure Blob Storage directory where the Parquet files are located, TiDB Cloud Serverless will not create the corresponding tables for you when you import the data.
+        If you do not include the table schema files in the Amazon S3, GCS, or Azure Blob Storage directory where the Parquet files are located, TiDB Cloud Starter will not create the corresponding tables for you when you import the data.
 
-        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Serverless will create the `${db_table}` table in the `${db_name}` database when you import the data.
+        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Starter will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
-        For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, TiDB Cloud Serverless will create the `mytable` table in the `mydb` database when you import the data.
+        For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, TiDB Cloud Starter will create the `mytable` table in the `mydb` database when you import the data.
 
         ```sql
         CREATE TABLE mytable (
@@ -78,19 +78,19 @@ Because Parquet files do not contain schema information, before importing data f
 
 ## Step 3. Configure cross-account access
 
-To allow TiDB Cloud Serverless to access the Parquet files in the Amazon S3, GCS, or Azure Blob Storage bucket, do one of the following:
+To allow TiDB Cloud Starter to access the Parquet files in the Amazon S3, GCS, or Azure Blob Storage bucket, do one of the following:
 
-- If your Parquet files are located in Amazon S3, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+- If your Parquet files are located in Amazon S3, [configure external storage access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
-    You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-serverless).
+    You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-starter).
 
-- If your Parquet files are located in GCS, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+- If your Parquet files are located in GCS, [configure external storage access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
-- If your Parquet files are located in Azure Blob Storage, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+- If your Parquet files are located in Azure Blob Storage, [configure external storage access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
-## Step 4. Import Parquet files to TiDB Cloud Serverless
+## Step 4. Import Parquet files to TiDB Cloud Starter
 
-To import the Parquet files to TiDB Cloud Serverless, take the following steps:
+To import the Parquet files to TiDB Cloud Starter, take the following steps:
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -247,7 +247,7 @@ To import the Parquet files to TiDB Cloud Serverless, take the following steps:
 
 </SimpleTab>
 
-When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud Serverless terminates the import job automatically and reports an importing error.
+When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud Starter terminates the import job automatically and reports an importing error.
 
 If you get an importing error, do the following:
 
@@ -261,7 +261,7 @@ If you get an importing error, do the following:
 
 ## Supported data types
 
-The following table lists the supported Parquet data types that can be imported to TiDB Cloud Serverless.
+The following table lists the supported Parquet data types that can be imported to TiDB Cloud Starter.
 
 | Parquet Primitive Type | Parquet Logical Type | Types in TiDB or MySQL |
 |---|---|---|

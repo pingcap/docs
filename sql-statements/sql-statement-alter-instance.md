@@ -9,7 +9,7 @@ The `ALTER INSTANCE` statement is used to make changes to a single TiDB instance
 
 > **Note:**
 >
-> [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) can automatically refresh the TLS certificate, so this feature is not applicable to [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) can automatically refresh the TLS certificate, so this feature is not applicable to [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters.
 
 ## RELOAD TLS
 

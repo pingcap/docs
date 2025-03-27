@@ -41,7 +41,7 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-The TiDB version for TiDB Cloud Serverless clusters is [v7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2).
+The TiDB version for TiDB Cloud Starter clusters is [v7.5.2](https://docs.pingcap.com/tidb/v7.5/release-7.5.2).
 
 ### What companies are using TiDB or TiDB Cloud in production?
 
@@ -57,7 +57,7 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 
 - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
-- [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Cloud Starter Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
 
@@ -101,7 +101,7 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 ### Does TiDB Cloud support incremental backups?
 
-No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Cloud Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
+No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Cloud Starter cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 ## HTAP FAQs
 
@@ -146,7 +146,7 @@ No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud 
 
 ### Is my TiDB cluster secure?
 
-For TiDB Cloud Serverless clusters, TiDB Cloud ensures cluster security with the following measures:
+For TiDB Cloud Starter clusters, TiDB Cloud ensures cluster security with the following measures:
 
 - Creates independent sub-accounts for each cluster.
 - Sets up firewall rules to isolate external connections.
@@ -154,12 +154,12 @@ For TiDB Cloud Serverless clusters, TiDB Cloud ensures cluster security with the
 
 ### How do I connect to my database in a TiDB cluster?
 
-For a TiDB Cloud Serverless cluster, the steps to connect to your cluster are simplified as follows:
+For a TiDB Cloud Starter cluster, the steps to connect to your cluster are simplified as follows:
 
 1. Set a database user and login credential.
 2. Choose a SQL client, get an auto-generated connection string displayed on the TiDB Cloud UI, and then connect to your cluster through the SQL client using the string.
 
-For more information, see [Connect to Your TiDB Cloud Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+For more information, see [Connect to Your TiDB Cloud Starter Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
 ## Support FAQ
 

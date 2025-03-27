@@ -119,11 +119,11 @@ systemctl start docker
 
 ### Option 1: Integrate TiDB Cloud with ProxySQL
 
-For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a TiDB Cloud Serverless cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
+For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a TiDB Cloud Starter cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
 
-#### Step 1. Create a TiDB Cloud Serverless cluster
+#### Step 1. Create a TiDB Cloud Starter cluster
 
-1. [Create a free TiDB Cloud Serverless cluster](https://docs.tidb.io/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
+1. [Create a free TiDB Cloud Starter cluster](https://docs.tidb.io/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
 2. Get your cluster hostname, port, and username for later use.
 
     1. On the [Clusters](https://console.tidb.io/clusters) page, click your cluster name to go to the cluster overview page.
@@ -221,7 +221,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-    When prompted, enter the endpoint of your cluster for `Serverless Tier Host`, and then enter the username and the password of your cluster.
+    When prompted, enter the endpoint of your cluster for `Starter Tier Host`, and then enter the username and the password of your cluster.
 
     The following is an example output. You will see that three configuration files are generated under the current `tidb-cloud-connect` folder.
 
@@ -327,12 +327,12 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
     >
     > 1. Adds a user using the username and password of your cluster.
     > 2. Assigns the user to the monitoring account.
-    > 3. Adds your TiDB Cloud Serverless cluster to the list of hosts.
-    > 4. Enables a secure connection between ProxySQL and the TiDB Cloud Serverless cluster.
+    > 3. Adds your TiDB Cloud Starter cluster to the list of hosts.
+    > 4. Enables a secure connection between ProxySQL and the TiDB Cloud Starter cluster.
     >
     > To have a better understanding, it is strongly recommended that you check the `proxysql-prepare.sql` file. To learn more about ProxySQL configuration, see [ProxySQL documentation](https://proxysql.com/documentation/proxysql-configuration/).
 
-    The following is an example output. You will see that the hostname of your cluster is shown in the output, which means that the connectivity between ProxySQL and the TiDB Cloud Serverless cluster is established.
+    The following is an example output. You will see that the hostname of your cluster is shown in the output, which means that the connectivity between ProxySQL and the TiDB Cloud Starter cluster is established.
 
     ```
     *************************** 1. row ***************************
@@ -388,7 +388,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
     SELECT VERSION();
     ```
 
-    If the TiDB version is displayed, you are successfully connected to your TiDB Cloud Serverless cluster through ProxySQL. To exit from the MySQL client anytime, enter `quit` and press <kbd>enter</kbd>.
+    If the TiDB version is displayed, you are successfully connected to your TiDB Cloud Starter cluster through ProxySQL. To exit from the MySQL client anytime, enter `quit` and press <kbd>enter</kbd>.
 
     > **Note:**
     >

@@ -9,7 +9,7 @@ The `TIDB_SERVERS_INFO` table provides information about TiDB servers in the TiD
 
 > **Note:**
 >
-> This table is not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This table is not available on [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters.
 
 ```sql
 USE INFORMATION_SCHEMA;

@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 to accomplish the fol
 
 > **Note:**
 >
-> This tutorial works with TiDB Cloud Serverless.
+> This tutorial works with TiDB Cloud Starter.
 
 ## Prerequisites
 
@@ -30,13 +30,13 @@ To complete this tutorial, you need:
 
 <CustomContent platform="tidb">
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
@@ -109,7 +109,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
    > **Note**
    >
-   > For TiDB Cloud Serverless, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint.
+   > For TiDB Cloud Starter, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
 
@@ -163,7 +163,7 @@ client = Mysql2::Client.new(options)
 
 > **Note**
 >
-> For TiDB Cloud Serverless, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `DATABASE_SSL_CA`, because mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
+> For TiDB Cloud Starter, TLS connection **MUST** be enabled via `DATABASE_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `DATABASE_SSL_CA`, because mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
 
 ### Insert data
 

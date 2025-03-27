@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export list`.
 
 # ticloud serverless export list
 
-List data export tasks of TiDB Cloud Serverless clusters:
+List data export tasks of TiDB Cloud Starter clusters:
 
 ```shell
 ticloud serverless export list [flags]

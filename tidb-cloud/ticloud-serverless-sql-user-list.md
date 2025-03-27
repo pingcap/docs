@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless sql-user list`.
 
 # ticloud serverless sql-user list
 
-List TiDB Cloud Serverless SQL users:
+List TiDB Cloud Starter SQL users:
 
 ```shell
 ticloud serverless sql-user list [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user list [flags]
 
 ## Examples
 
-List TiDB Cloud Serverless SQL users in interactive mode:
+List TiDB Cloud Starter SQL users in interactive mode:
 
 ```shell
 ticloud serverless sql-user list
 ```
 
-List TiDB Cloud Serverless SQL users in non-interactive mode:
+List TiDB Cloud Starter SQL users in non-interactive mode:
 
 ```shell
 ticloud serverless sql-user list -c <cluster-id>

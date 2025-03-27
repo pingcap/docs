@@ -19,13 +19,13 @@ ticloud serverless branch get [flags]
 
 ## Examples
 
-Get branch information of a TiDB Cloud Serverless cluster in interactive mode:
+Get branch information of a TiDB Cloud Starter cluster in interactive mode:
 
 ```shell
 ticloud serverless branch describe
 ```
 
-Get branch information of a TiDB Cloud Serverless cluster in non-interactive mode:
+Get branch information of a TiDB Cloud Starter cluster in non-interactive mode:
 
 ```shell
 ticloud serverless branch describe --branch-id <branch-id> --cluster-id <cluster-id>
