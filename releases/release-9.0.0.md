@@ -119,7 +119,36 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Observability
 
-* SQL cross-AZ traffic monitoring [#57543](https://github.com/pingcap/tidb/issues/57543) @[nolouch](https://github.com/nolouch) @[yibin87](https://github.com/yibin87) **tw@Oreoxmt** <!--2021-->
+* Add the TiDB Workload Repository feature to support persisting historical workload data into TiKV [#58247](https://github.com/pingcap/tidb/issues/58247) @[xhebox](https://github.com/xhebox) @[henrybw](https://github.com/henrybw) @[wddevries](https://github.com/wddevries) **tw@lilin90**<!--1953-->
+
+    Many frequently updated workload metrics and status information are maintained in the memory of the instance. Such historical workload data can be persisted as part of the database for the following purposes:
+
+    * **Troubleshooting:** when diagnosing issues, it is necessary to review historical activities and events. Persisted workload data can help you revisit the state changes during a specific time period, identify anomalies, or precisely locate the specific behavior of a database session or SQL statement at a particular moment.
+    * **Automated operations:** database autonomy is an inevitable trend to enhance user experience and lower usage barriers. Achieving automated database tuning requires historical data. Based on persisted historical workload data, TiDB can gradually move towards automated operations, such as Index Advisor, Statistics Advisor, and SQL Binding Advisor.     
+    
+  In v9.0.0, you can enable the Workload Repository by setting the [`tidb_workload_repository_dest`](/system-variables.md#tidb_workload_repository_dest-new-in-v900) system variable. TiDB continuously writes snapshots of certain in-memory tables into the `workload_schema`, persisting them in TiKV. This feature is disabled by default. By persisting historical workload data, TiDB can better facilitate troubleshooting and optimization recommendations. In the future, a series of automated tools based on historical workload data will be introduced to enhance the user experience in database operations and diagnostics. The persisted in-memory tables are categorized into two types:
+
+    - **In-memory tables storing cumulative metrics**: these tables are larger in size, and their snapshots and storage costs are relatively high. Snapshots are taken in batches based on the [`tidb_workload_repository_snapshot_interval`](/system-variables.md#tidb_workload_repository_snapshot_interval-new-in-v900) setting, with a minimum interval of 15 minutes. By comparing the changes between any two snapshots, you can calculate the incremental metrics over a specific period. These tables include:
+
+        - [`INFORMATION_SCHEMA.TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)
+        - [`INFORMATION_SCHEMA.TIDB_STATEMENTS_STATS`](/statement-summary-tables.md) (Derived from `STATEMENTS_SUMMARY`, planned to replace it in the future.)
+        - [`INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_HOST`](/information-schema/client-errors-summary-by-host.md)
+        - [`INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_USER`](/information-schema/client-errors-summary-by-user.md)
+        - [`INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_GLOBAL`](/information-schema/client-errors-summary-global.md)
+
+    - **In-memory tables storing real-time states**: these tables are refreshed frequently and are usually smaller in size. Snapshots with very short intervals are necessary for them to be effective. You can specify the interval using the [`tidb_workload_repository_active_sampling_interval`](/system-variables.md#tidb_workload_repository_active_sampling_interval-new-in-v900) system variable, which defaults to 5 seconds. Setting it to `0` disables snapshots for this type of table. These tables include:
+
+        - [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)
+        - [`INFORMATION_SCHEMA.DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
+        - [`INFORMATION_SCHEMA.TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+        - [`INFORMATION_SCHEMA.MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)
+        - [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
+
+  Data in the Workload Repository is automatically cleaned up, with a default retention period of 7 days. You can modify the retention period by setting the [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900) system variable.
+
+      For more information, see [documentation](/workloadrepo.md).
+
+ * SQL cross-AZ traffic monitoring [#57543](https://github.com/pingcap/tidb/issues/57543) @[nolouch](https://github.com/nolouch) @[yibin87](https://github.com/yibin87) **tw@Oreoxmt** <!--2021-->
 
     Deploying TiDB clusters across Availability Zones (AZs) enhances the disaster recovery capability. However, in cloud environments, cross-AZ deployments incur additional network traffic costs. For example, AWS charges for both cross-region and cross-AZ traffic. Therefore, for TiDB clusters running on cloud services, accurately monitoring and analyzing network traffic is essential for cost control.
 
@@ -136,6 +165,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     In v9.0.0, the `execution info` output is optimized for clearer representation of each metric. For example, `time` now refers to the wall-clock time for operator execution, `loops` indicates how many times the current operator is called by its parent operator, and `total_time` represents the sum of all concurrent execution times. These optimizations help you better understand the SQL execution process and devise more targeted optimization strategies.
 
     For more information, see [documentation](/sql-statements/sql-statement-explain-analyze.md).
+
 ### Security
 
 ### Data migration
