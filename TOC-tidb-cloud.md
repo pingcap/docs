@@ -10,7 +10,7 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started with TiDB Cloud
-  - [Try Out TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
@@ -33,7 +33,7 @@
 
 - Development Quick Start
   - [Developer Guide Overview](/develop/dev-guide-overview.md)
-  - [Build a TiDB Cloud Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+  - [Build a TiDB Cloud Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
   - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
 - Connect to TiDB Cloud
   - GUI Database Tools
@@ -73,7 +73,7 @@
     - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
     - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
-  - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - Serverless Driver ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png) <!--TBD, ToDo: Not sure if we need to update the driver name-->
     - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
     - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
     - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
@@ -132,19 +132,18 @@
 
 - Manage Cluster
   - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
-  - Manage TiDB Cloud Serverless Clusters
-    - [Create a TiDB Cloud Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - Connect to Your TiDB Cloud Serverless Cluster
-      - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-      - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
-      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-    - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-      - [Overview](/tidb-cloud/branch-overview.md)
-      - [Manage Branches](/tidb-cloud/branch-manage.md)
-      - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
-    - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
-    - [Back Up and Restore TiDB Cloud Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
-    - [Export Data from TiDB Cloud Serverless](/tidb-cloud/serverless-export.md)
+  - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+  - Connect to Your TiDB Cloud Cluster
+    - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+    - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+    - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+  - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [Overview](/tidb-cloud/branch-overview.md)
+    - [Manage Branches](/tidb-cloud/branch-manage.md)
+    - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
+  - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
+  - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
+  - [Export Data from TiDB Cloud](/tidb-cloud/serverless-export.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
@@ -219,14 +218,14 @@
   - Migrate Data into TiDB Cloud
     - [Migrate and Merge MySQL Shards of Large Datasets](/tidb-cloud/migrate-sql-shards.md)
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
-  - Import Data into TiDB Cloud Serverless
+  - Import Data into TiDB Cloud
     - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
     - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
     - [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-csv-files-serverless.md)
     - [Import Parquet Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-parquet-files-serverless.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
-    - [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md)
+    - [Configure External Storage Access for TiDB Cloud](/tidb-cloud/serverless-external-storage.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -282,10 +281,9 @@
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
-    - TiDB Cloud Serverless
-      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
-      - [TLS Connections to TiDB Cloud Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
+    - [TLS Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - Audit Management
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
@@ -652,7 +650,7 @@
     - [TiDB Cloud Partners](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
     - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
-  - [TiDB Cloud Serverless Limitations](/tidb-cloud/serverless-limitations.md)
+  - [TiDB Cloud Starter Limitations](/tidb-cloud/serverless-limitations.md)
   - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [System Variables](/system-variables.md)
@@ -677,7 +675,7 @@
   - [Get Support](/tidb-cloud/tidb-cloud-support.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
-  - [TiDB Cloud Serverless FAQs](/tidb-cloud/serverless-faqs.md)
+  - [TiDB Cloud Starter FAQs](/tidb-cloud/serverless-faqs.md)
 
 ## RELEASES
 
