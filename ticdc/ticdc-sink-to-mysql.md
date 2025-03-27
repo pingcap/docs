@@ -72,12 +72,12 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
 | `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, such as `time-zone=""`, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
 | `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
-| `batch-dml-enable` | Enable the batch-dml feature (optional, the default value is `true`). |
-| `read-timeout` | go-sql-driver parameter, [I/O read timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-readtimeout) (optional, the default value is `2m`). |
-| `write-timeout` | go-sql-driver parameter, [I/O write timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-writetimeout) (optional, the default value is `2m`). |
-| `timeout` | go-sql-driver parameter, [timeout for establishing connections](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-timeout), also known as dial timeout (optional, the default value is `2m`). |
-| `safe-mode` | Convert all `INSERT` and `UPDATE` statements to `REPLACE INTO` statements (optional, the default value is `false`). |
-| `tidb-txn-mode` | Specify the system variable [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) (optional, the default value is `optimistic`). |
+| `batch-dml-enable` | Enables the batch-dml feature (optional, the default value is `true`). |
+| `read-timeout` | the go-sql-driver parameter, [I/O read timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-readtimeout) (optional, the default value is `2m`). |
+| `write-timeout` | the go-sql-driver parameter, [I/O write timeout](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-writetimeout) (optional, the default value is `2m`). |
+| `timeout` | the go-sql-driver parameter, [timeout for establishing connections](https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-timeout), also known as dial timeout (optional, the default value is `2m`). |
+| `tidb-txn-mode` | Specifies the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) system variable (optional, the default value is `optimistic`). |
+| `safe-mode` | Converts all `INSERT` and `UPDATE` statements to `REPLACE INTO` statements (optional, the default value is `false`). |
 
 To encode the database password in the sink URI using Base64, use the following command:
 
