@@ -132,18 +132,19 @@
 
 - Manage Cluster
   - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
-  - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-  - Connect to Your TiDB Cloud Cluster
-    - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
-    - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
-    - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-  - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [Overview](/tidb-cloud/branch-overview.md)
-    - [Manage Branches](/tidb-cloud/branch-manage.md)
-    - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
-  - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
-  - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
-  - [Export Data from TiDB Cloud](/tidb-cloud/serverless-export.md)
+  - Manage TiDB Cloud Starter Clusters
+    - [Create a TiDB Cloud Starter Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - Connect to Your TiDB Cloud Starter Cluster
+      - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+      - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+      - [Overview](/tidb-cloud/branch-overview.md)
+      - [Manage Branches](/tidb-cloud/branch-manage.md)
+      - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
+    - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
+    - [Back Up and Restore TiDB Cloud Starter Data](/tidb-cloud/backup-and-restore-serverless.md)
+    - [Export Data from TiDB Cloud Starter](/tidb-cloud/serverless-export.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
@@ -225,7 +226,7 @@
     - [Import Parquet Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-parquet-files-serverless.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
-    - [Configure External Storage Access for TiDB Cloud](/tidb-cloud/serverless-external-storage.md)
+    - [Configure External Storage Access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
@@ -281,9 +282,10 @@
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
-    - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-    - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
-    - [TLS Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - TiDB Cloud Starter
+      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+      - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
+      - [TLS Connections to TiDB Cloud Starter](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - Audit Management
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
