@@ -295,7 +295,7 @@ export class ActionLog {
 }
 ```
 
-For more information, refer to the [TypeORM FAQ](https://typeorm.io/relations-faq#avoid-foreign-key-constraint-creation) and [Foreign key constraints](https://docs.pingcap.com/tidbcloud/foreign-key#foreign-key-constraints).
+For more information, refer to the [TypeORM FAQ](https://typeorm.io/relations-faq#avoid-foreign-key-constraint-creation) and [Foreign key constraints](https://docs.tidb.io/tidbcloud/foreign-key#foreign-key-constraints).
 
 ## Next steps
 

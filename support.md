@@ -14,7 +14,7 @@ If you encounter a problem when you use TiDB, you can reach out for support from
 + Get support from PingCAP for TiDB Cloud:
 
     - Report an issue directly from the [TiDB Cloud console](https://tidbcloud.com/)
-    - [Documentation for TiDB Cloud support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)
+    - [Documentation for TiDB Cloud support](https://docs.tidb.io/tidbcloud/tidb-cloud-support)
 
 + Seek help from the TiDB community:
 

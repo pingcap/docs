@@ -122,7 +122,7 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 4. Click **Connect** > **Start Import** to start the import process and wait for TiDB Cloud to complete the import.
 
-For more information about how to import or migrate data to TiDB Cloud, see [TiDB Cloud Migration Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview).
+For more information about how to import or migrate data to TiDB Cloud, see [TiDB Cloud Migration Overview](https://docs.tidb.io/tidbcloud/tidb-cloud-migration-overview).
 
 ### View data import status
 

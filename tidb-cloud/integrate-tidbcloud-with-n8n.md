@@ -290,6 +290,6 @@ To use different operations, you need to fill in the different required fields. 
 
 ### Limitations
 
-- Normally only one SQL statement is allowed in the **Execute SQL** operation. If you want to execute more than one statement in a single operation, you need to manually enable [`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011).
+- Normally only one SQL statement is allowed in the **Execute SQL** operation. If you want to execute more than one statement in a single operation, you need to manually enable [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011).
 - For the **Delete** and **Update** operations, you need to specify one field as a key. For example, the `Delete Key` is set to `id`, which is equivalent to executing `DELETE FROM table WHERE id = ${item.id}`. Currently, the **Delete** and **Update** operations only support specifying one key.
 - For the **Insert** and **Update** operations, you need to specify the comma-separated list in the **Columns** field, and the field name must be the same as the input item's property.

@@ -21,7 +21,7 @@ The parameter of the above command is described as follows:
 
 > **Note:**
 >
-> For a [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) cluster, the `count` of TiFlash replicas can only be `2`. If you set it to `1`, it will be automatically adjusted to `2` for execution. If you set it to a number larger than 2, you will get an error about the replica count.
+> For a [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) cluster, the `count` of TiFlash replicas can only be `2`. If you set it to `1`, it will be automatically adjusted to `2` for execution. If you set it to a number larger than 2, you will get an error about the replica count.
 
 If you execute multiple DDL statements on the same table, only the last statement is ensured to take effect. In the following example, two DDL statements are executed on the table `tpch50`, but only the second statement (to delete the replica) takes effect.
 
