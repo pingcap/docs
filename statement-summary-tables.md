@@ -17,7 +17,7 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 
 > **Note:**
 >
-> The preceding tables are not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> The preceding tables are not available on [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters.
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 

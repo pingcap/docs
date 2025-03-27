@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and TypeORM to accomplish the fo
 
 > **Note**
 >
-> This tutorial works with TiDB Cloud Serverless.
+> This tutorial works with TiDB Cloud Starter.
 
 ## Prerequisites
 
@@ -29,13 +29,13 @@ To complete this tutorial, you need:
 
 <CustomContent platform="tidb">
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
@@ -116,7 +116,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     > **Note**
     >
-    > For TiDB Cloud Serverless, you **MUST** enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint.
+    > For TiDB Cloud Starter, you **MUST** enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
 
@@ -210,9 +210,9 @@ export const AppDataSource = new DataSource({
 
 > **Note**
 >
-> For TiDB Cloud Serverless, you MUST enable TLS connection when using public endpoint. In this sample code, please set up the environment variable `TIDB_ENABLE_SSL` in the `.env` file to `true`.
+> For TiDB Cloud Starter, you MUST enable TLS connection when using public endpoint. In this sample code, please set up the environment variable `TIDB_ENABLE_SSL` in the `.env` file to `true`.
 >
-> However, you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Cloud Serverless.
+> However, you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Cloud Starter.
 
 ### Insert data
 

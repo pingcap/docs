@@ -1,39 +1,39 @@
 ---
-title: Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless
-summary: Learn how to import CSV files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless.
+title: Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter
+summary: Learn how to import CSV files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter.
 ---
 
-# Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless
+# Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter
 
-This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Serverless.
+This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Starter.
 
 ## Limitations
 
-- To ensure data consistency, TiDB Cloud Serverless allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud Serverless to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+- To ensure data consistency, TiDB Cloud Starter allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud Starter to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
 
 ## Step 1. Prepare the CSV files
 
 1. If a CSV file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
 
-    TiDB Cloud Serverless supports importing very large CSV files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud Serverless can process multiple files in parallel, which can greatly improve the import speed.
+    TiDB Cloud Starter supports importing very large CSV files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud Starter can process multiple files in parallel, which can greatly improve the import speed.
 
 2. Name the CSV files as follows:
 
     - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
     - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
-    - TiDB Cloud Serverless supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.${suffix}.csv.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.csv.gz` file to the `bikeshare.trips` table, you need to rename the file as `bikeshare.trips.000001.csv.gz`.
+    - TiDB Cloud Starter supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.${suffix}.csv.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.csv.gz` file to the `bikeshare.trips` table, you need to rename the file as `bikeshare.trips.000001.csv.gz`.
 
     > **Note:**
     >
     > - To achieve better performance, it is recommended to limit the size of each compressed file to 100 MiB.
     > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-csv-files-to-tidb-cloud-serverless) to import your source data to a single target table.
+    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-csv-files-to-tidb-cloud-starter) to import your source data to a single target table.
 
 ## Step 2. Create the target table schemas
 
-Because CSV files do not contain schema information, before importing data from CSV files into TiDB Cloud Serverless, you need to create the table schemas using either of the following methods:
+Because CSV files do not contain schema information, before importing data from CSV files into TiDB Cloud Starter, you need to create the table schemas using either of the following methods:
 
-- Method 1: In TiDB Cloud Serverless, create the target databases and tables for your source data.
+- Method 1: In TiDB Cloud Starter, create the target databases and tables for your source data.
 
 - Method 2: In the Amazon S3, GCS, or Azure Blob Storage directory where the CSV files are located, create the target table schema files for your source data as follows:
 
@@ -41,9 +41,9 @@ Because CSV files do not contain schema information, before importing data from 
 
         If your CSV files follow the naming rules in [Step 1](#step-1-prepare-the-csv-files), the database schema files are optional for the data import. Otherwise, the database schema files are mandatory.
 
-        Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud Serverless will create the `${db_name}` database to store your data when you import the data.
+        Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud Starter will create the `${db_name}` database to store your data when you import the data.
 
-        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud Serverless will create the `mydb` database when you import the data.
+        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud Starter will create the `mydb` database when you import the data.
 
         ```sql
         CREATE DATABASE mydb;
@@ -51,11 +51,11 @@ Because CSV files do not contain schema information, before importing data from 
 
     2. Create table schema files for your source data.
 
-        If you do not include the table schema files in the Amazon S3, GCS, or Azure Blob Storage directory where the CSV files are located, TiDB Cloud Serverless will not create the corresponding tables for you when you import the data.
+        If you do not include the table schema files in the Amazon S3, GCS, or Azure Blob Storage directory where the CSV files are located, TiDB Cloud Starter will not create the corresponding tables for you when you import the data.
 
-        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Serverless will create the `${db_table}` table in the `${db_name}` database when you import the data.
+        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Starter will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
-        For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, TiDB Cloud Serverless will create the `mytable` table in the `mydb` database when you import the data.
+        For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, TiDB Cloud Starter will create the `mytable` table in the `mydb` database when you import the data.
 
         ```sql
         CREATE TABLE mytable (
@@ -70,19 +70,19 @@ Because CSV files do not contain schema information, before importing data from 
 
 ## Step 3. Configure cross-account access
 
-To allow TiDB Cloud Serverless to access the CSV files in the Amazon S3, GCS, or Azure Blob Storage bucket, do one of the following:
+To allow TiDB Cloud Starter to access the CSV files in the Amazon S3, GCS, or Azure Blob Storage bucket, do one of the following:
 
-- If your CSV files are located in Amazon S3, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+- If your CSV files are located in Amazon S3, [configure external storage access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
-    You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files-to-tidb-cloud-serverless).
+    You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files-to-tidb-cloud-starter).
 
-- If your CSV files are located in GCS, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+- If your CSV files are located in GCS, [configure external storage access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
-- If your CSV files are located in Azure Blob Storage, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+- If your CSV files are located in Azure Blob Storage, [configure external storage access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
-## Step 4. Import CSV files to TiDB Cloud Serverless
+## Step 4. Import CSV files to TiDB Cloud Starter
 
-To import the CSV files to TiDB Cloud Serverless, take the following steps:
+To import the CSV files to TiDB Cloud Starter, take the following steps:
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -239,7 +239,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 </SimpleTab>
 
-When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud Serverless terminates the import job automatically and reports an importing error.
+When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud Starter terminates the import job automatically and reports an importing error.
 
 If you get an importing error, do the following:
 

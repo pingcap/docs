@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and Prisma to accomplish the fol
 
 > **Note:**
 >
-> This tutorial works with TiDB Cloud Serverless.
+> This tutorial works with TiDB Cloud Starter.
 
 ## Prerequisites
 
@@ -29,13 +29,13 @@ To complete this tutorial, you need:
 
 <CustomContent platform="tidb">
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
@@ -103,7 +103,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     > **Note**
     >
-    > For TiDB Cloud Serverless, you **MUST** enable TLS connection by setting `sslaccept=strict` when using public endpoint.
+    > For TiDB Cloud Starter, you **MUST** enable TLS connection by setting `sslaccept=strict` when using public endpoint.
 
 7. Save the `.env` file.
 8. In the `prisma/schema.prisma`, set up `mysql` as the connection provider and `env("DATABASE_URL")` as the connection URL:

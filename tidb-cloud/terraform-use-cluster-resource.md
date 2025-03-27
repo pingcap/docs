@@ -11,8 +11,8 @@ In addition, you will also learn how to get the necessary information with the `
 
 The features of the `tidbcloud_cluster` resource include the following:
 
-- Create TiDB Cloud Serverless clusters.
-- Delete TiDB Cloud Serverless clusters.
+- Create TiDB Cloud Starter clusters.
+- Delete TiDB Cloud Starter clusters.
 
 ## Prerequisites
 
@@ -275,7 +275,7 @@ You can create a cluster using the `tidbcloud_cluster` resource.
 The following example shows how to create a TiDB Cloud Dedicated cluster.
 
 <!--TBD, ToDo-->
-<!--All configuration examples in this section should be updated for TiDB Cloud Serverless.-->
+<!--All configuration examples in this section should be updated for TiDB Cloud Starter.-->
 
 1. Create a directory for the cluster and enter it.
 

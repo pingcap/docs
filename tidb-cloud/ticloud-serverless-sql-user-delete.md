@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless sql-user delete`.
 
 # ticloud serverless sql-user delete
 
-Delete a TiDB Cloud Serverless SQL user:
+Delete a TiDB Cloud Starter SQL user:
 
 ```shell
 ticloud serverless sql-user delete [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user delete [flags]
 
 ## Examples
 
-Delete a TiDB Cloud Serverless SQL user in interactive mode:
+Delete a TiDB Cloud Starter SQL user in interactive mode:
 
 ```shell
 ticloud serverless sql-user delete
 ```
 
-Delete a TiDB Cloud Serverless SQL user in non-interactive mode:
+Delete a TiDB Cloud Starter SQL user in non-interactive mode:
 
 ```shell
 ticloud serverless sql-user delete -c <cluster-id> --user <user-name>

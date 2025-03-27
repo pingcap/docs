@@ -1,18 +1,18 @@
 ---
-title: Import Local Files to TiDB Cloud Serverless
-summary: Learn how to import local files to TiDB Cloud Serverless.
+title: Import Local Files to TiDB Cloud Starter
+summary: Learn how to import local files to TiDB Cloud Starter.
 ---
 
-# Import Local Files to TiDB Cloud Serverless
+# Import Local Files to TiDB Cloud Starter
 
-You can import local files to TiDB Cloud Serverless directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
+You can import local files to TiDB Cloud Starter directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
 
 Currently, this method supports importing one CSV file for one task into either an existing empty table or a new table.
 
 ## Limitations
 
 - Currently, TiDB Cloud only supports importing a local file in CSV format within 250 MiB for one task.
-- Importing local files is supported only for TiDB Cloud Serverless clusters.
+- Importing local files is supported only for TiDB Cloud Starter clusters.
 - You cannot run more than one import task at the same time.
 
 ## Import local files

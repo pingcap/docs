@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless list`.
 
 # ticloud serverless list
 
-List all TiDB Cloud Serverless clusters in a project:
+List all TiDB Cloud Starter clusters in a project:
 
 ```shell
 ticloud serverless list [flags]
@@ -19,19 +19,19 @@ ticloud serverless ls [flags]
 
 ## Examples
 
-List all TiDB Cloud Serverless clusters in interactive mode:
+List all TiDB Cloud Starter clusters in interactive mode:
 
 ```shell
 ticloud serverless list
 ```
 
-List all TiDB Cloud Serverless clusters in a specified project in non-interactive mode:
+List all TiDB Cloud Starter clusters in a specified project in non-interactive mode:
 
 ```shell
 ticloud serverless list -p <project-id>
 ```
 
-List all TiDB Cloud Serverless clusters in a specified project with the JSON format in non-interactive mode:
+List all TiDB Cloud Starter clusters in a specified project with the JSON format in non-interactive mode:
 
 ```shell
 ticloud serverless list -p <project-id> -o json

@@ -35,7 +35,7 @@ If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can
 
 - Import CSV files from Amazon S3 or GCS into TiDB Cloud
 
-    You can import CSV files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md).
+    You can import CSV files from Amazon S3 or GCS into TiDB Cloud. For more information, see [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter](/tidb-cloud/import-csv-files-serverless.md).
 
 - Import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud
 

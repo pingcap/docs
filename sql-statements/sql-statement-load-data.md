@@ -39,7 +39,7 @@ You can use `LOCAL` to specify data files on the client to be imported, where th
 
 If you are using TiDB Cloud, to use the `LOAD DATA` statement to load local data files, you need to add the `--local-infile` option to the connection string when you connect to TiDB Cloud. 
 
-The following is an example connection string for TiDB Cloud Serverless:
+The following is an example connection string for TiDB Cloud Starter:
 
 ```
 mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile

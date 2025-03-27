@@ -9,7 +9,7 @@ summary: The usage of SHOW PLACEMENT in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters.
 
 The statement returns a result set in which the `Scheduling_State` field indicates the current progress that the Placement Driver (PD) has made in scheduling the placement:
 

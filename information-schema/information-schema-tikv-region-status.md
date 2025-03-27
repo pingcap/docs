@@ -9,7 +9,7 @@ The `TIKV_REGION_STATUS` table shows some basic information of TiKV Regions via 
 
 > **Note:**
 >
-> This table is not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This table is not available on [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters.
 
 ```sql
 USE INFORMATION_SCHEMA;

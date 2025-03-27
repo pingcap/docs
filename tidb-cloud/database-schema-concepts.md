@@ -121,7 +121,7 @@ In TiDB, you can either [add a secondary index to an existing table](/develop/de
 
 For the following TiDB deployment options, TiDB supports vector data types and vector search indexes.
 
-- TiDB Cloud Serverless
+- TiDB Cloud Starter
 
 - TiDB Self-Managed v8.4.0 or later versions
 

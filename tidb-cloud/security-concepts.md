@@ -164,7 +164,7 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 ### Private endpoints
 
-- Enables secure connectivity for SQL clients within your Virtual Private Cloud (VPC) to TiDB Cloud Serverless clusters. For more information, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+- Enables secure connectivity for SQL clients within your Virtual Private Cloud (VPC) to TiDB Cloud Starter clusters. For more information, see [Connect to TiDB Cloud Starter via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 **Best practices:** Use private endpoints in production to minimize public exposure and review configurations regularly.
 
@@ -172,7 +172,7 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 - Encrypts communication between clients and servers to secure data transmission.
 
-- Setup guides available for [Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md) and clusters.
+- Setup guides available for [TiDB Cloud Starter clusters](/tidb-cloud/secure-connections-to-serverless-clusters.md).
 
 **Best practices:** Ensure TLS certificates are current and rotate them periodically.
 
@@ -180,7 +180,7 @@ TiDB Cloud ensures secure cluster connectivity and data transmission through rob
 
 - Acts as a firewall to restrict cluster access to trusted IP addresses.
 
-- For more information, see [Configure TiDB Cloud Serverless Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
+- For more information, see [Configure TiDB Cloud Starter Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
 
 **Best practices:** Regularly audit and update the access list to maintain security.
 
