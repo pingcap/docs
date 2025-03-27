@@ -9,7 +9,7 @@ The workload repository is a system for collecting and storing historical worklo
 
 ## Enabling the Workload Repository
 
-To enable the Workload Repository, set the [`tidb_workload_repository_dest`](/system-variables.md/tidb_workload_repository_dest-new-in-v9.0.0) system variable:
+To enable the Workload Repository, set the [`tidb_workload_repository_dest`](/system-variables.md#tidb_workload_repository_dest-new-in-v9.0.0) system variable:
 
 ```sql
 SET GLOBAL tidb_workload_repository_dest = 'table';
