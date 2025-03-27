@@ -5,13 +5,13 @@ summary: An overview of the usage of SHOW TRAFFIC JOBS for the TiDB database.
 
 # SHOW TRAFFIC JOBS
 
-TiDB v9.0.0 introduces the `SHOW TRAFFIC JOBS` syntax, which is used to show all traffic capture or replay jobs executed by TiProxy in the cluster. Each row represents a job of a TiProxy instance. Each TiProxy instance saves at most the 10 most recent jobs.
+TiDB v9.0.0 introduces the `SHOW TRAFFIC JOBS` syntax, which is used to show all traffic capture or replay jobs executed by [TiProxy](/tiproxy/tiproxy-overview.md) in the cluster. Each row represents a job of a TiProxy instance. Each TiProxy instance saves at most the 10 most recent jobs.
 
 The shown results vary depending on the privileges the current user has.
 
-- If the user has the [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege, this statement shows traffic capture jobs.
-- If the user has the [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege, this statement shows traffic replay jobs.
-- If the user has the `SUPER` privilege or both preceding privileges, this statement shows both traffic capture and traffic replay jobs.
+- A user with the [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege can view traffic capture jobs.
+- A user with the [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege can view traffic replay jobs.
+- A user with the `SUPER` privilege or both preceding privileges can view both traffic capture and traffic replay jobs at the same time.
 
 The `SHOW TRAFFIC JOBS` statement returns the following columns:
 
@@ -38,7 +38,7 @@ TrafficStmt ::=
 Show the traffic capture or replay jobs:
 
 ```sql
-SHOW TRAFFIC JOBS
+SHOW TRAFFIC JOBS;
 ```
 
 The following output example shows that two TiProxy instances are capturing traffic, and the progress is 45% for both:

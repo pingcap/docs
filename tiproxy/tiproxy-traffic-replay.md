@@ -5,7 +5,7 @@ summary: Introduce the use cases and steps for the TiProxy traffic replay featur
 
 # TiProxy Traffic Replay
 
-Starting from TiProxy v1.4.0, you can use TiProxy to capture access traffic in a TiDB production cluster and replay it in a test cluster at a specified rate. This feature enables you to reproduce actual workloads from the production cluster in a test environment, verifying SQL statement execution results and performance.
+Starting from TiProxy v1.3.0, you can use TiProxy to capture access traffic in a TiDB production cluster and replay it in a test cluster at a specified rate. This feature enables you to reproduce actual workloads from the production cluster in a test environment, verifying SQL statement execution results and performance. Starting from v1.4.0, TiProxy becomes generally available (GA).
 
 <img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-traffic-replay.png" alt="TiProxy traffic replay" width="800" />
 

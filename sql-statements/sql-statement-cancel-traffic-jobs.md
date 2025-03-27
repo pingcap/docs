@@ -5,7 +5,7 @@ summary: An overview of the usage of CANCEL TRAFFIC JOBS for the TiDB database.
 
 # CANCEL TRAFFIC JOBS
 
-TiDB v9.0.0 introduces the `CANCEL TRAFFIC JOBS` syntax, which is used to cancel all traffic capture or replay jobs being executed by TiProxy in the cluster. This operation requires the following privileges:
+TiDB v9.0.0 introduces the `CANCEL TRAFFIC JOBS` syntax, which is used to cancel all traffic capture or replay jobs being executed by [TiProxy](/tiproxy/tiproxy-overview.md) in the cluster. This operation requires the following privileges:
 
 - To cancel traffic capture jobs, you need the `SUPER` or [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
 - To cancel traffic replay jobs, you need the `SUPER` or [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
@@ -22,7 +22,7 @@ TrafficStmt ::=
 Assume that there are currently 2 TiProxy instances capturing traffic:
 
 ```sql
-SHOW TRAFFIC JOBS
+SHOW TRAFFIC JOBS;
 ```
 
 ```
@@ -38,7 +38,7 @@ SHOW TRAFFIC JOBS
 Cancel the current jobs:
 
 ```sql
-CANCEL TRAFFIC JOBS
+CANCEL TRAFFIC JOBS;
 ```
 
 ```
@@ -48,7 +48,7 @@ Query OK, 0 rows affected (0.13 sec)
 Check the jobs again and it shows that the jobs have been canceled:
 
 ```sql
-SHOW TRAFFIC JOBS
+SHOW TRAFFIC JOBS;
 ```
 
 ```
