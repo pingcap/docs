@@ -21,7 +21,7 @@ To disable it:
 SET GLOBAL tidb_workload_repository_dest = '';
 ```
 
-## Data Collection
+## Data collection
 
 The Workload Repository stores data in tables under the `WORKLOAD_SCHEMA` database. It collects data via two different methods:
 
