@@ -27,7 +27,7 @@ Before you start, you need:
 
 - A [Zapier account](https://zapier.com/app/login).
 - A [GitHub account](https://github.com/login).
-- A [TiDB Cloud account](https://tidbcloud.com/signup) and a TiDB Cloud Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](https://docs.tidb.io/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
+- A [TiDB Cloud account](https://console.tidb.io/signup) and a TiDB Cloud Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](https://docs.tidb.io/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
 
 ### Step 1: Get the template
 

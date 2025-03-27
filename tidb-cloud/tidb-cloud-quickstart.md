@@ -16,11 +16,11 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) is the best way to get started with TiDB Cloud. To create a TiDB Cloud Serverless cluster, follow these steps:
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up.
+1. If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/free-trial) to sign up.
 
     You can sign up with your email and password to manage your password using TiDB Cloud, or choose to sign in with your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
+2. [Log in](https://console.tidb.io/) to your TiDB Cloud account.
 
     The [**Clusters**](https://console.tidb.io/clusters) page is displayed by default.
 
