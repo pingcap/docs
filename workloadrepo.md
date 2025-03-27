@@ -33,7 +33,7 @@ The Workload Repository stores data in tables under the `WORKLOAD_SCHEMA` databa
 The snapshot sampling process, which runs every 15 minutes to 2 hours, samples data from various monitoring tables. Snapshots are initiated from one of the TiDB nodes at the specified intervals, and process is as follows:
 
  1. From the initiating node a row is inserted into `HIST_SNAPSHOTS`, capturing the snapshot ID, start and end timestamps, and server version details.
- 2. On each TiDB node, all rows from the source tables are copied to the corresponding history tables with the 'HIST_' prefix. The copied data includes the original columns from the source tables plus additional columns for the timestamp, instance ID, and snapshot ID.
+ 2. On each TiDB node, all rows from the source tables are copied to the corresponding history tables with the `HIST_` prefix. The copied data includes the original columns from the source tables plus additional columns for the timestamp, instance ID, and snapshot ID.
 
 Note that the sampled tables return data specific to the TiDB node from which they are queried.
 
