@@ -65,7 +65,7 @@ ADMIN WORKLOAD REPOSITORY TAKE SNAPSHOT;
 
 The time-based sampling process, which runs every 1 to 600 seconds, samples data from various monitoring tables.
 
-When the time-base sampling process runs, all rows from the source tables are copied to the corresponding history tables with the 'HIST_' prefix. The copied data includes the original columns from the source tables plus additional columns for the timestamp and instance ID.
+When the time-base sampling process runs, all rows from the source tables are copied to the corresponding history tables with the `HIST_` prefix. The copied data includes the original columns from the source tables plus additional columns for the timestamp and instance ID.
 
 Unlike the snapshot sampling process, a row will not be added to the `HIST_SNAPSHOTS` table.
 
