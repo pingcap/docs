@@ -65,8 +65,8 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `worker-count` | The concurrency level of SQL statements executed to the downstream (optional, the default value is `16`, and the maximum value is `1024`). |
 | `cache-prep-stmts` | Controls whether to use prepared statements when executing SQL in the downstream and enable prepared statement cache on the client side (optional, `true` by default). |
 | `max-txn-row` | The batch size of SQL statements executed to the downstream (optional, the default value is `256`, and the maximum value is `2048`). |
-| `max-multi-update-row` | When batch write is enabled, the batch size of update rows SQL statements executed to the downstream, which is always less than `max-txn-row` (optional, the default value is `40`, and the maximum value is `256`). |
-| `max-multi-update-row-size` | When batch write is enabled, the size limit of update rows SQL statements executed to the downstream. If this size is exceeded, each row will be executed as a separate SQL statement (optional, the default value is `1024`, and the maximum value is `8192`). |
+| `max-multi-update-row` | When batch write is enabled, the batch size of `UPDATE ROWS` SQL statements executed to the downstream, which is always less than `max-txn-row` (optional, the default value is `40`, and the maximum value is `256`). |
+| `max-multi-update-row-size` | When batch write is enabled, the size limit of `UPDATE ROWS` SQL statements executed to the downstream. If this size is exceeded, each row will be executed as a separate SQL statement (optional, the default value is `1024`, and the maximum value is `8192`). |
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional).  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional). |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
