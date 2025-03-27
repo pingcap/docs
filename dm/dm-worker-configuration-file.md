@@ -19,6 +19,7 @@ name = "worker1"
 # Log configuration.
 log-level = "info"
 log-file = "dm-worker.log"
+redact-info-log = false
 
 # DM-worker listen address.
 worker-addr = ":8262"
@@ -52,6 +53,10 @@ cert-allowed-cn = ["dm"]
 #### `log-file`
 
 - Specifies the log file directory. If this parameter is not specified, the logs are printed onto the standard output.
+
+### `redact-info-log` <span class="version-mark">New in v9.0</span>
+
+- Determines whether to log DM query arguments details in logs.
 
 #### `worker-addr`
 
