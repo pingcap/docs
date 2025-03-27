@@ -39,7 +39,7 @@ The cluster overview page provides general metrics of a cluster, including Reque
 
 To view metrics on the cluster overview page, take the following steps:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page.
 
 2. Choose the target project and click the name of a cluster to go to its cluster overview page.
 
@@ -49,7 +49,7 @@ The cluster metrics page provides a full set of standard metrics of a cluster. B
 
 To view metrics on the cluster monitoring page, take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of the target project, click the name of the target cluster. The cluster overview page is displayed.
+1. On the [**Clusters**](https://console.tidb.io/clusters) page of the target project, click the name of the target cluster. The cluster overview page is displayed.
 2. Click **Metrics** in the left navigation pane.
 
 For more information, see [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md).

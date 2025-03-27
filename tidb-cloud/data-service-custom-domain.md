@@ -25,7 +25,7 @@ The following sections describe how to create, edit, and remove a custom domain 
 
 To create a custom domain for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://console.tidb.io/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Manage Custom Domain** area, click **Add Custom Domain**.
 4. In the **Add Custom Domain** dialog box, do the following:
@@ -51,7 +51,7 @@ After your custom domain status is set to **Success**, you can use it to access 
 
 To edit a custom domain for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://console.tidb.io/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Manage Custom Domain** area, locate the **Action** column, and then click <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M11 4H6.8c-1.68 0-2.52 0-3.162.327a3 3 0 0 0-1.311 1.311C2 6.28 2 7.12 2 8.8v8.4c0 1.68 0 2.52.327 3.162a3 3 0 0 0 1.311 1.311C4.28 22 5.12 22 6.8 22h8.4c1.68 0 2.52 0 3.162-.327a3 3 0 0 0 1.311-1.311C20 19.72 20 18.88 20 17.2V13M8 16h1.675c.489 0 .733 0 .963-.055.204-.05.4-.13.579-.24.201-.123.374-.296.72-.642L21.5 5.5a2.121 2.121 0 0 0-3-3l-9.563 9.563c-.346.346-.519.519-.642.72a2 2 0 0 0-.24.579c-.055.23-.055.474-.055.963V16Z" stroke-width="inherit"></path></svg> **Edit** in the custom domain row that you want to edit.
 4. In the displayed dialog box, update the custom domain or custom path.
@@ -66,7 +66,7 @@ To edit a custom domain for a Data App, perform the following steps:
 
 To remove a custom domain for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+1. Navigate to the [**Data Service**](https://console.tidb.io/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Manage Custom Domain** area, locate the **Action** column, and then click <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 6v-.8c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C14.48 2 13.92 2 12.8 2h-1.6c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C8 3.52 8 4.08 8 5.2V6m2 5.5v5m4-5v5M3 6h18m-2 0v11.2c0 1.68 0 2.52-.327 3.162a3 3 0 0 1-1.311 1.311C16.72 22 15.88 22 14.2 22H9.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.311-1.311C5 19.72 5 18.88 5 17.2V6" stroke-width="inherit"></path></svg> **Delete** in the custom domain row that you want to delete.
 4. In the displayed dialog box, confirm the deletion.

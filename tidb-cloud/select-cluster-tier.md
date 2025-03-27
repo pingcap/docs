@@ -81,7 +81,7 @@ Whenever you use or set a database user name, you must include the prefix in the
 
 To get the prefix for your cluster, take the following steps:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page.
 2. Click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the dialog, get the prefix from the connection string.
 

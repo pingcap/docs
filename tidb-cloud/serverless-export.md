@@ -161,7 +161,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project. 
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project. 
 
    > **Tip:**
    >
@@ -212,7 +212,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
    > **Tip:**
    >
@@ -256,7 +256,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
    > **Tip:**
    >
@@ -294,7 +294,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
    > **Tip:**
    >
@@ -334,7 +334,7 @@ To cancel an ongoing export task, take the following steps:
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
    > **Tip:**
    >

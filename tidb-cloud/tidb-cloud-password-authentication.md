@@ -5,18 +5,18 @@ summary: Learn how to manage passwords and enable multi-factor authentication (M
 
 # Password Authentication
 
-This document describes how to manage passwords and enable multi-factor authentication (MFA) in the TiDB Cloud console. The document is only applicable to users who [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords.
+This document describes how to manage passwords and enable multi-factor authentication (MFA) in the TiDB Cloud console. The document is only applicable to users who [sign up](https://console.tidb.io/free-trial) for TiDB Cloud with emails and passwords.
 
 ## Sign up
 
-You can either [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with email and password, or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
+You can either [sign up](https://console.tidb.io/free-trial) for TiDB Cloud with email and password, or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 - If you sign up for TiDB Cloud with email and password, you can manage your password according to this document.
 - If you choose Google, GitHub, or Microsoft SSO to TiDB Cloud, your password is managed by your chosen platform and you cannot change it using the TiDB Cloud console.
 
 To sign up for a TiDB Cloud account with email and password, take the following steps:
 
-1. Go to the TiDB Cloud [sign up](https://tidbcloud.com/free-trial) page and fill in the registration information.
+1. Go to the TiDB Cloud [sign up](https://console.tidb.io/free-trial) page and fill in the registration information.
 
 2. Read Privacy Policy and Services Agreement, and then select **I agree to the Privacy Policy and Services Agreement**.
 
@@ -30,7 +30,7 @@ You will receive a verification email for TiDB Cloud. To complete the whole regi
 
 To log into TiDB Cloud using email and password, take the following steps:
 
-1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
+1. Go to the TiDB Cloud [login](https://console.tidb.io/) page.
 
 2. Fill in your email and password.
 
@@ -62,7 +62,7 @@ The default password policy is as follows:
 
 If you forget your password, you can reset it by email as follows:
 
-1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
+1. Go to the TiDB Cloud [login](https://console.tidb.io/) page.
 
 2. Click **Forgot password**, and then check your email for the link to reset the password.
 
@@ -82,7 +82,7 @@ If you forget your password, you can reset it by email as follows:
 
 > **Note:**
 >
-> This section applies only when you [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords. If you sign up for TiDB Cloud with Google, GitHub, or Microsoft SSO, you can enable MFA on your chosen identity management platform.
+> This section applies only when you [sign up](https://console.tidb.io/free-trial) for TiDB Cloud with emails and passwords. If you sign up for TiDB Cloud with Google, GitHub, or Microsoft SSO, you can enable MFA on your chosen identity management platform.
 
 After logging in to TiDB Cloud, you can enable MFA in accordance with laws and regulations.
 

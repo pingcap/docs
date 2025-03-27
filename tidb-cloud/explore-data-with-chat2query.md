@@ -5,7 +5,7 @@ summary: Learn how to use AI-assisted SQL Editor in the TiDB Cloud console, to m
 
 # Explore Your Data with AI-Assisted SQL Editor
 
-You can use the built-in AI-assisted SQL Editor in the [TiDB Cloud console](https://tidbcloud.com/) to maximize your data value.
+You can use the built-in AI-assisted SQL Editor in the [TiDB Cloud console](https://console.tidb.io/) to maximize your data value.
 
 In SQL Editor, you can either write SQL queries manually or simply press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
 
@@ -25,7 +25,7 @@ The recommended use cases of SQL Editor are as follows:
 
 ## Access SQL Editor
 
-1. Go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. Go to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
     > **Tip:**
     >
@@ -45,7 +45,7 @@ When you access Chat2Query for the first time, you will be prompted with a dialo
 After the first-time access, you can still change the AI setting as follows:
 
 - To enable AI, click **Enable AI power for data exploration** in the upper-right corner of Chat2Query.
-- To disable AI, click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click **Account Settings**, click the **Privacy** tab, and then disable the **AI-powered Data Exploration** option.
+- To disable AI, click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the [TiDB Cloud console](https://console.tidb.io/), click **Account Settings**, click the **Privacy** tab, and then disable the **AI-powered Data Exploration** option.
 
 ## Write and run SQL queries
 

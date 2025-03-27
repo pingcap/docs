@@ -49,7 +49,7 @@ To get started with Data Service, you can also create your own Data App, and the
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
 
-2. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
+2. On the [**Data Service**](https://console.tidb.io/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
 
     > **Tip:**
     >
@@ -72,7 +72,7 @@ To get started with Data Service, you can also create your own Data App, and the
     > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
     > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
 
-5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
+5. Click **Create Data App**. The [**Data Service**](https://console.tidb.io/data-service) details page is displayed.
 
 6. If you have configured to connect your Data App to GitHub, check your specified GitHub directory. You will find that the [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully.
 
@@ -185,7 +185,7 @@ You can call the endpoint by sending an HTTPS request. Before calling an endpoin
 
 #### 1. Create an API key
 
-1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your Data App to view its details.
+1. In the left pane of the [**Data Service**](https://console.tidb.io/data-service) page, click the name of your Data App to view its details.
 2. In the **Authentication** area, click **Create API Key**.
 3. In the **Create API Key** dialog box, do the following:
 
@@ -211,7 +211,7 @@ For more information about API keys, see [API Keys in Data Service](/tidb-cloud/
 
 TiDB Cloud generates code examples to help you call an endpoint. To get the code example, perform the following steps:
 
-1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
+1. In the left pane of the [**Data Service**](https://console.tidb.io/data-service) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
 
 2. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
 
