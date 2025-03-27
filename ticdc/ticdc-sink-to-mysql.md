@@ -61,7 +61,7 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `root`        | The username of the downstream database. To replicate data to TiDB or other MySQL-compatible databases, make sure that the downstream database user has [certain permissions](#permissions-required-for-the-downstream-database-user).                             |
 | `12345678`       | The password of the downstream database (can be encoded using Base64).                                      |
 | `127.0.0.1`    | The IP address of the downstream database.                               |
-| `3306`         | The port for the downstream data.                                 |
+| `3306`         | The port for the downstream database.                                 |
 | `worker-count` | The concurrency level of SQL statements executed to the downstream (optional, the default value is `16`, and the maximum value is `1024`). |
 | `cache-prep-stmts` | Controls whether to use prepared statements when executing SQL in the downstream and enable prepared statement cache on the client side (optional, `true` by default). |
 | `max-txn-row` | The batch size of SQL statements executed to the downstream (optional, the default value is `256`, and the maximum value is `2048`). |
