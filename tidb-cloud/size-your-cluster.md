@@ -167,7 +167,7 @@ Therefore, 7 TiKV nodes (8 vCPU, 32 GiB) are recommended for you according to yo
 
 Next, you can compare the TiKV node number calculated according to data volume with the number calculated according to your expected performance, and take the larger one as a recommended number of your TiKV nodes.
 
-### TiKV node storage
+### TiKV node storage size
 
 The supported node storage of different TiKV vCPUs is as follows:
 
@@ -181,6 +181,33 @@ The supported node storage of different TiKV vCPUs is as follows:
 > **Note:**
 >
 > You cannot decrease the TiKV node storage after the cluster creation.
+
+### TiKV node storage type
+
+The following TiKV storage types are provided for TiDB Cloud Dedicated clusters:
+
+#### Basic Type
+
+A general-purpose storage type which provides lower performance than the Standard Type.
+
+Usage： 
+- Clusters created before 2025/4/1 used Basic Type. 
+- New Clusters created with version < 7.5.5, 8.1.2, or 8.5.0 will use Basic Type. 
+
+#### Standard Type
+
+Well-suited for the majority of workloads due to its balanced performance and cost ratio.
+Standard storage type can improve the overall performance comparing to Basic type. It reserves sufficient disk resources for raft logs, reducing the performance impact between raft I/O and data disk I/O, thereby improving both the read and write performance of TiKV.
+
+Usage ：
+- New Clusters created with version >= 7.5.5, 8.1.2, or 8.5.0 will use Standard Type. 
+
+#### Performance Type（Coming soon）
+
+Offers greater performance and stability, reducing P99 Duration by up to 20% compared to the Basic type.
+The Performance storage type provisions a dedicated high-performance disk for Raft logs, significantly improving both performance and stability.
+
+This storage type will be released soon. 
 
 ## Size TiFlash
 
