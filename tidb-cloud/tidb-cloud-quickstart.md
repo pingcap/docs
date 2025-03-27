@@ -8,7 +8,7 @@ category: quick start
 
 *Estimated completion time: 20 minutes*
 
-This tutorial guides you through an easy way to get started with TiDB Cloud. You can also follow the step-by-step tutorials on the [**Getting Started**](https://tidbcloud.com/console/getting-started) page in the TiDB Cloud console.
+This tutorial guides you through an easy way to get started with TiDB Cloud. You can also follow the step-by-step tutorials on the [**Getting Started**](https://console.tidb.io/getting-started) page in the TiDB Cloud console.
 
 Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
@@ -16,13 +16,13 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) is the best way to get started with TiDB Cloud. To create a TiDB Cloud Serverless cluster, follow these steps:
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up.
+1. If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/free-trial) to sign up.
 
     You can sign up with your email and password to manage your password using TiDB Cloud, or choose to sign in with your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
+2. [Log in](https://console.tidb.io/) to your TiDB Cloud account.
 
-    The [**Clusters**](https://tidbcloud.com/console/clusters) page is displayed by default.
+    The [**Clusters**](https://console.tidb.io/clusters) page is displayed by default.
 
 3. For new sign-up users, TiDB Cloud automatically creates a default TiDB Cloud Serverless cluster named `Cluster0` for you.
 
@@ -36,7 +36,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
 You can use the built-in AI-assisted SQL Editor in the TiDB Cloud console to maximize your data value. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click on a cluster name to go to its overview page, and then click **SQL Editor** in the left navigation pane.
+1. On the [**Clusters**](https://console.tidb.io/clusters) page, click on a cluster name to go to its overview page, and then click **SQL Editor** in the left navigation pane.
 
 2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and OpenAI to use your code snippets for research and service improvement, and then click **Save and Get Started**.
 

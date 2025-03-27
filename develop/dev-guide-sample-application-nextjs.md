@@ -71,7 +71,7 @@ npm install
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
-1. Navigate to the [**Clusters** page](https://tidbcloud.com/console/clusters), and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters** page](https://console.tidb.io/clusters), and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper right corner. A connection dialog is displayed.
 

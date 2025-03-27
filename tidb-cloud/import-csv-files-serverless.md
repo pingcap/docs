@@ -89,7 +89,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 1. Open the **Import** page for your target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
         > **Tip:**
         >
@@ -141,7 +141,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 1. Open the **Import** page for your target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
         > **Tip:**
         >
@@ -191,7 +191,7 @@ To import the CSV files to TiDB Cloud Serverless, take the following steps:
 
 1. Open the **Import** page for your target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
         > **Tip:**
         >

@@ -47,7 +47,7 @@ To help you get started quickly, TiDB Cloud provides a fullstack example app in 
 
 ### Get the TiDB Cloud connection string
 
-For a TiDB Cloud Serverless cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/).
+For a TiDB Cloud Serverless cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://console.tidb.io/).
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">
@@ -92,7 +92,7 @@ For a TiDB Cloud Serverless cluster, you can get the connection string either fr
 </div>
 <div label="TiDB Cloud console">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
+1. In the [TiDB Cloud console](https://console.tidb.io/), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
 
     - `${host}`
     - `${port}`
@@ -239,7 +239,7 @@ To use the edge function, take the following steps:
     export const config = { path: "/api/hello" };
     ```
 
-3. Set the `DATABASE_URL` environment variables. You can get the connection information from the [TiDB Cloud console](https://tidbcloud.com/).
+3. Set the `DATABASE_URL` environment variables. You can get the connection information from the [TiDB Cloud console](https://console.tidb.io/).
 
     ```shell
     netlify env:set DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'

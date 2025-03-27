@@ -31,7 +31,7 @@ Before the integration, make sure that you have the following:
 
 To integrate TiDB Cloud Serverless branching with your GitHub repository, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
+1. In the [TiDB Cloud console](https://console.tidb.io/), navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project, and then click the name of your target TiDB Cloud Serverless cluster to go to its overview page.
 
 2. Click **Branches** in the left navigation pane.
 

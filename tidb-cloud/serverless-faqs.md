@@ -149,4 +149,4 @@ The serverless technology is designed for multi-tenancy and the resources used b
 
 ### Can I upgrade the version of TiDB that my cluster is running on?
 
-No. TiDB Cloud Serverless clusters are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud console](https://tidbcloud.com/console/clusters) or in the latest [release note](https://docs.tidb.io/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
+No. TiDB Cloud Serverless clusters are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud console](https://console.tidb.io/clusters) or in the latest [release note](/tidb-cloud/tidb-cloud-release-notes.md). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
