@@ -52,6 +52,16 @@ Check the values of the following kernel parameters:
 
 Check whether THP is enabled on the target machine. It is recommended to disable THP.
 
+To check if THP is enabled you can run this:
+
+```
+cat /sys/kernel/mm/transparent_hugepage/enabled
+```
+
+If it is not set to `never`, you can change it with `grubby --update-kernel=ALL --args="transparent_hugepage=never"`.
+
+To change the running configuration, either reboot or run `echo never > /sys/kernel/mm/transparent_hugepage/enabled`.
+
 ### System limits
 
 Check the limit values in the `/etc/security/limits.conf` file:
@@ -66,7 +76,11 @@ Check the limit values in the `/etc/security/limits.conf` file:
 
 ### SELinux
 
-Check whether SELinux is enabled. It is required to disable SELinux.
+SELinux must be disabled or set to permissive mode. To check the current status, use the [getenforce(8)](https://linux.die.net/man/8/getenforce) utility.
+
+If SELinux is not disabled, open the `/etc/selinux/config` file, locate the line starting with `SELINUX=`, and change it to `SELINUX=disabled`. After making this change, you need to reboot the system because switching from `enforcing` or `permissive` to `disabled` does not take effect without a reboot.
+
+On some systems (such as Ubuntu), the `/etc/selinux/config` file might not exist, and the getenforce utility might not be installed. In that case, you can skip this step.
 
 ### Firewall
 

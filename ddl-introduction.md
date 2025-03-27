@@ -13,11 +13,9 @@ TiDB uses an online and asynchronous approach to execute DDL statements. This me
 
 ### Types of DDL statements
 
-Based on whether DDL statements block the user application during execution, DDL statements can be divided into the following types:
+TiDB supports online DDL, which means that when a DDL statement is executed in the database, a specific method is used to ensure that the statement does not block the user application. You can submit data modifications during the execution of DDL, and the database guarantees data consistency and correctness.
 
-- **Offline DDL statements**: When the database receives a DDL statement from the user, it first locks the database object to be modified and then changes the metadata. During the DDL execution, the database blocks the user application from modifying data.
-
-- **Online DDL statements**: When a DDL statement is executed in the database, a specific method is used to ensure that the statement does not block the user application. This allows the user to submit modifications during the DDL execution. The method also ensures the correctness and consistency of the corresponding database object during the execution process.
+By contrast, offline DDL locks database objects and blocks user modifications until the DDL operation is completed. TiDB does not support offline DDL.
 
 Based on whether to operate the data included in the target DDL object, DDL statements can be divided into the following types:
 

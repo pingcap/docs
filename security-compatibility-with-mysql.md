@@ -11,7 +11,7 @@ TiDB supports security features similar to MySQL 5.7, and also supports some sec
 ## Unsupported security features
 
 - Column level permissions.
-- These permission attributes: `max_questions`, `max_updated`, and `max_user_connections`.
+- These permission attributes: `max_questions` and `max_updated`.
 - Password verification policy, which requires you to verify the current password when you change it.
 - Dual password policy.
 - Random password generation.

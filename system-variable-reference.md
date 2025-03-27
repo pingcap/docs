@@ -1206,7 +1206,7 @@ Referenced in:
 
 - [ADMIN ALTER DDL JOBS](/sql-statements/sql-statement-admin-alter-ddl.md)
 - [ADMIN SHOW DDL [JOBS|JOB QUERIES]](/sql-statements/sql-statement-admin-show-ddl.md)
-- [System Variables](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v755-and-v850)
+- [System Variables](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850)
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 7.5.5 Release Notes](/releases/release-7.5.5.md)
 
@@ -1895,7 +1895,7 @@ Referenced in:
 - [SET RESOURCE GROUP](/sql-statements/sql-statement-set-resource-group.md)
 - [System Variables](/system-variables.md#tidb_enable_resource_control-new-in-v660)
 - [TiKV Configuration File](/tikv-configuration-file.md)
-- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
+- [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
 - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 - [TiDB 7.0.0 Release Notes](/releases/release-7.0.0.md)
@@ -2479,7 +2479,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md#tidb_last_query_info-new-in-v4014)
-- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
+- [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 - [TiDB 7.5.1 Release Notes](/releases/release-7.5.1.md)
 
@@ -3353,7 +3353,7 @@ Referenced in:
 Referenced in:
 
 - [System Variables](/system-variables.md#tidb_request_source_type-new-in-v740)
-- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
+- [Use Resource Control to Manage Background Tasks](/tidb-resource-control-background-tasks.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
 
 ### tidb_resource_control_strict_mode
@@ -3364,7 +3364,7 @@ Referenced in:
 - [Privilege Management](/privilege-management.md)
 - [SET RESOURCE GROUP](/sql-statements/sql-statement-set-resource-group.md)
 - [System Variables](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)
-- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
+- [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
 - [TiDB 8.2.0 Release Notes](/releases/release-8.2.0.md)
 
 ### tidb_restricted_read_only
@@ -4152,7 +4152,7 @@ Referenced in:
 - [Limited SQL features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [System Variables](/system-variables.md#txn_scope)
 - [TiDB Configuration File](/tidb-configuration-file.md)
-- [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md)
+- [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
 
 ### validate_password.check_user_name
 
