@@ -73,4 +73,4 @@ To enable log redaction in the TiFlash side, set both the [`security.redact_info
 
 ## Log redaction in DM-worker side
 
-To enable log redaction in the DM-worker, set the value of [`log.redact-info-log`](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v90) to `true`. This configuration value defaults to `false`, which means that log redaction is disabled.
+To enable log redaction in the DM-worker side, set the value of [`log.redact-info-log`](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v90) to `true`. This configuration value defaults to `false`, which means that log redaction is disabled.
