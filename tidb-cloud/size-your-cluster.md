@@ -188,24 +188,22 @@ The following TiKV storage types are provided for TiDB Cloud Dedicated clusters:
 
 #### Basic Type
 
-A general-purpose storage type which provides lower performance than the Standard Type.
+The Basic Type is a general-purpose storage type that provides lower performance than the Standard Type.
 
-Usage： 
-- Clusters created before 2025/4/1 used Basic Type. 
-- New Clusters created with version < 7.5.5, 8.1.2, or 8.5.0 will use Basic Type. 
+The Basic Type applies to the following clusters:
+- Existing clusters that are created before April 1, 2025. 
+- New clusters that are created with the version earlier than v7.5.5, v8.1.2, or v8.5.0
 
 #### Standard Type
 
-Well-suited for the majority of workloads due to its balanced performance and cost ratio.
-Standard storage type can improve the overall performance comparing to Basic type. It reserves sufficient disk resources for raft logs, reducing the performance impact between raft I/O and data disk I/O, thereby improving both the read and write performance of TiKV.
+The Standard Type is well-suited for the majority of workloads due to its balanced performance and cost ratio. It can improve the overall performance comparing to the Basic Type. It reserves sufficient disk resources for raft logs, reducing the performance impact between raft I/O and data disk I/O, thereby improving both the read and write performance of TiKV.
 
-Usage ：
-- New Clusters created with version >= 7.5.5, 8.1.2, or 8.5.0 will use Standard Type. 
+The Standard Type applies to the following clusters:
+- New clusters that are created with the version v7.5.5, v8.1.2, or v8.5.0 or later 
 
 #### Performance Type（Coming soon）
 
-Offers greater performance and stability, reducing P99 Duration by up to 20% compared to the Basic type.
-The Performance storage type provisions a dedicated high-performance disk for Raft logs, significantly improving both performance and stability.
+The Performance Type offers greater performance and stability, reducing P99 duration by up to 20% compared to the Basic Type. It provisions a dedicated high-performance disk for Raft logs, significantly improving both performance and stability.
 
 This storage type will be released soon. 
 
