@@ -193,7 +193,7 @@ The Basic Type is a general-purpose storage type that provides lower performance
 The Basic Type is available for the following clusters:
 
 - Existing clusters that are created before April 1, 2025. 
-- New clusters that are created with the version earlier than v7.5.5, v8.1.2, or v8.5.0
+- New clusters that are created with versions earlier than v7.5.5, v8.1.2, or v8.5.0
 
 #### Standard Type
 
