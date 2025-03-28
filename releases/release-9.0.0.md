@@ -176,9 +176,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](/dm/dm-worker-configuration-file.md).
 
-* Ensure TiDB Lightning compatibility with TiDB `sql_require_primary_key=ON` [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716] **tw@Oreoxmt** <!--2026-->
+* TiDB Lightning supports compatibility with `sql_require_primary_key=ON` in TiDB [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716](https://github.com/lance6716) **tw@Oreoxmt** <!--2026-->
 
-    When `sql_require_primary_key=ON` is enabled in TiDB, tables must have a primary key. TiDB Lightning now adds a default primary key to its internal error-logging and conflict-detection tables (`conflict_error_v4`, `type_error_v2`, and `conflict_records_v2`), preventing table-creation failures. If you rely on these internal tables for automation, confirm the new naming and schema changes (primary key added), as scripts referencing older table names might need updates.
+    When you enable the system variable [`sql_require_primary_key`](/system-variables.md#sql_require_primary_key-new-in-v630) in TiDB, tables must have a primary key. To prevent table creation failures, TiDB Lightning adds a default primary key to its internal error-logging and conflict-detection tables (`conflict_error_v4`, `type_error_v2`, and `conflict_records_v2`). If you have automation scripts that use these internal tables, update them to accommodate the new schema, which includes the primary key.
 
 * Migrate sync-diff-inspector from `pingcap/tidb-tools` to `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh) **tw@Oreoxmt** <!--2070-->
 
