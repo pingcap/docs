@@ -4035,6 +4035,26 @@ Referenced in:
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [System Variables](/system-variables.md#tidb_window_concurrency-new-in-v40)
 
+### tidb_workload_repository_dest
+
+- [TiDB Workload Repository](/workloadrepo.md#enabling-the-workload-repository)
+- [System Variables](/system-variables.md#tidb_workload_repository_dest-new-in-v900)
+
+### tidb_workload_repository_active_sampling_interval
+
+- [TiDB Workload Repository](/workloadrepo.md#time-based-sampling-process-every-5-seconds-by-default)
+- [System Variables](/system-variables.md#tidb_workload_repository_active_sampling_interval-new-in-v900)
+
+### tidb_workload_repository_retention_days
+
+- [TiDB Workload Repository](/workloadrepo.md#data-retention)
+- [System Variables](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900)
+
+### tidb_workload_repository_snapshot_interval
+
+- [TiDB Workload Repository](/workloadrepo.md#snapshot-sampling-process-hourly-by-default)
+- [System Variables](/system-variables.md#tidb_workload_repository_snapshot_interval-new-in-v900)
+
 ### tiflash_fastscan
 
 Referenced in:
