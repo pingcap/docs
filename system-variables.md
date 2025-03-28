@@ -699,12 +699,13 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `UNSPECIFIED`
-- Value options: `UNSPECIFIED`, `0`, `1`, `2`
+- Value options: `UNSPECIFIED`, `0`, `1`, `2`, `3`
 - This variable is used to specify different versions of the MPP execution plan. After a version is specified, TiDB selects the specified version of the MPP execution plan. The meanings of the variable values are as follows:
-    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `2`.
+    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `3`.
     - `0`: compatible with all TiDB cluster versions. Features with the MPP version greater than `0` do not take effect in this mode.
     - `1`: new in v6.6.0, used to enable data exchange with compression on TiFlash. For details, see [MPP version and exchange data compression](/explain-mpp.md#mpp-version-and-exchange-data-compression).
     - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash.
+    - `3`: new in v9.0.0, used to enable the new string data exchange format of TiFlash to improve string serialization and deserialization efficiency, thereby improving query performance.
 
 ### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
 
@@ -793,8 +794,10 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the Active PD Follower feature (currently only applicable to requests for Region information). When the value is `OFF`, TiDB only obtains Region information from the PD leader. When the value is `ON`, TiDB evenly distributes requests for Region information to all PD servers, and PD followers can also handle Region requests, thereby reducing the CPU pressure on the PD leader.
+- Default value: `ON`. Before v9.0.0, the default value is `OFF`.
+- This variable controls whether to enable the [Active PD Follower](https://docs.pingcap.com/tidb/stable/tune-region-performance#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service) feature, which currently only applicable to requests for Region information.
+    - When it is `OFF`, TiDB only obtains Region information from the PD leader.
+    - When it is `ON`, TiDB evenly distributes Region information requests to all PD servers, so PD followers can also handle Region requests, reducing the CPU pressure on the PD leader. Starting from v9.0.0, Region information requests from TiDB Lightning are also evenly sent to all PD nodes when the value is `ON`.
 - Scenarios for enabling Active PD Follower:
     * In a cluster with a large number of Regions, the PD leader experiences high CPU pressure due to the increased overhead of handling heartbeats and scheduling tasks.
     * In a TiDB cluster with many TiDB instances, the PD leader experiences high CPU pressure due to a high concurrency of requests for Region information.
@@ -1013,6 +1016,21 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
+
+### tidb_accelerate_user_creation_update <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- When the number of SQL users in TiDB is very large (for example, more than 100,000), operations such as creating users, modifying passwords, and setting permissions might experience significant performance degradation. This occurs because each user update operation triggers the reloading of all user data into memory.
+- To optimize performance in environments with a large number of users, it is recommended to set this variable to `ON`.
+- `OFF` or `0`: every time an operation such as user creation, password modification, or permission setting is performed, TiDB reloads all user data into memory. In scenarios with many users, this setting might cause significant performance degradation.
+- `ON` or `1`: TiDB uses a more efficient user data loading strategy as follows:
+    - When you create users or perform operations such as modifying passwords and setting permissions for **non-logged-in** users, TiDB **does not** reload all user data into memory.
+    - When you perform operations on **logged-in** users, TiDB only reloads the updated data for those specific users into memory.
+    - In scenarios with many users, this setting can significantly improve performance.
 
 ### tidb_adaptive_closest_read_threshold <span class="version-mark">New in v6.3.0</span>
 
@@ -2029,7 +2047,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`. Before v8.3.0, the default value is `OFF`.
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
 
 ### tidb_enable_enhanced_security
@@ -3153,7 +3171,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
 
+- If the [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800) configuration item is specified, the general log is written to the specified file separately. 
+
+- The [`log.format`](/tidb-configuration-file.md#format) configuration item enables you to configure the log message format, whether the general log is in a separate file or combined with other logs.
+
+- The [`tidb_redact_log`](#tidb_redact_log) variable enables you to redact SQL statements recorded in the general log.
+
+- Only successfully executed statements are logged in the general log. Failed statements are not recorded in the general log but are instead logged in the TiDB log with a `command dispatched failed` message.
+
 - To see all records of this feature in the log, you need to set the TiDB configuration item [`log.level`](/tidb-configuration-file.md#level) to `"info"` or `"debug"` and then query the `"GENERAL_LOG"` string. The following information is recorded:
+    - `time`: The time of the event.
     - `conn`: The ID of the current session.
     - `user`: The current session user.
     - `schemaVersion`: The current schema version.
@@ -3281,21 +3308,17 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_hash_join_version <span class="version-mark">New in v8.4.0</span>
 
-> **Warning:**
->
-> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Enumeration
-- Default value: `legacy`
+- Default value: `optimized`. Before v9.0.0, the default value is `legacy`.
 - Possible values: `legacy`, `optimized`
-- This variable is used to control whether TiDB uses an optimized version of hash join. The value is `legacy` by default, which means the optimized version is not used. If it is set to `optimized`, TiDB uses the optimized version to execute hash join for better performance.
+- This variable is used to control whether TiDB uses the [optimized version of hash join](/sql-statements/sql-statement-explain-analyze.md#hashjoinv2). If it is set to `optimized`, TiDB uses the optimized version to execute hash join for better performance.
 
 > **Note:**
 >
-> Currently, the optimized hash join only supports inner join and outer join, so for other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the legacy hash join.
+> Currently, the optimized hash join only supports inner join, outer join, semi join, and anti semi join. For other joins, even if `tidb_hash_join_version` is set to `optimized`, TiDB still uses the `legacy` hash join.
 
 ### tidb_hashagg_final_concurrency
 

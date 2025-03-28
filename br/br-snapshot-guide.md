@@ -148,6 +148,8 @@ tiup br restore full \
 
 ### Restore tables in the `mysql` schema
 
+When you perform a snapshot backup, BR backs up system tables as tables with the `__TiDB_BR_Temporary_` prefix added to the database name. For example, BR backs up the `mysql.user` table as `__TiDB_BR_Temporary_mysql.user`. During the snapshot restore, BR first restores these tables with the `__TiDB_BR_Temporary_` prefix to avoid conflicts with existing system table data in the target cluster. While restoring system tables, BR writes the data from the tables with the `__TiDB_BR_Temporary_` prefix into the corresponding system tables using the `REPLACE INTO` statement.
+
 - Starting from BR v5.1.0, when you back up snapshots, BR automatically backs up the **system tables** in the `mysql` schema, but does not restore these system tables by default.
 - Starting from v6.2.0, BR lets you specify `--with-sys-table` to restore **data in some system tables**.
 - Starting from v7.6.0, BR enables `--with-sys-table` by default, which means that BR restores **data in some system tables** by default.
@@ -172,15 +174,24 @@ tiup br restore full \
 
 - Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/snap_client/systable_restore.go#L31)
+- Other system tables
 
 ```
 +-----------------------------------------------------+
+| advisory_locks                                      |
+| analyze_jobs                                        |
+| analyze_options                                     |
 | capture_plan_baselines_blacklist                    |
 | column_stats_usage                                  |
+| dist_framework_meta                                 |
 | gc_delete_range                                     |
 | gc_delete_range_done                                |
 | global_variables                                    |
+| help_topic                                          |
+| index_advisor_results                               |
+| plan_replayer_status                                |
+| plan_replayer_task                                  |
+| request_unit_by_group                               |
 | stats_buckets                                       |
 | stats_extended                                      |
 | stats_feedback                                      |
@@ -191,7 +202,27 @@ tiup br restore full \
 | stats_meta_history                                  |
 | stats_table_locked                                  |
 | stats_top_n                                         |
+| table_cache_meta                                    |
 | tidb                                                |
+| tidb_background_subtask                             |
+| tidb_background_subtask_history                     |
+| tidb_ddl_history                                    |
+| tidb_ddl_job                                        |
+| tidb_ddl_notifier                                   |
+| tidb_ddl_reorg                                      |
+| tidb_global_task                                    |
+| tidb_global_task_history                            |
+| tidb_import_jobs                                    |
+| tidb_mdl_info                                       |
+| tidb_mdl_view                                       |
+| tidb_pitr_id_map                                    |
+| tidb_runaway_queries                                |
+| tidb_runaway_watch                                  |
+| tidb_runaway_watch_done                             |
+| tidb_timers                                         |
+| tidb_ttl_job_history                                |
+| tidb_ttl_table_status                               |
+| tidb_ttl_task                                       |
 +-----------------------------------------------------+
 ```
 
