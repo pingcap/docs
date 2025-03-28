@@ -4936,7 +4936,7 @@ SHOW WARNINGS;
 > - This option only takes effect on statements that need to lock a single key. If a statement needs to lock multiple rows at the same time, this option will not take effect on such statements.
 > - This feature is introduced in v6.6.0 by the [`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) variable, which is disabled by default.
 
-### `tidb_pipelined_dml_resource_policy` <span class="version-mark">New in v9.0.0</span>
+### tidb_pipelined_dml_resource_policy <span class="version-mark">New in v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
