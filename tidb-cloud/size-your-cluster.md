@@ -190,22 +190,22 @@ TiDB Cloud provides the following TiKV storage types for [TiDB Cloud Dedicated](
 
 The Basic Type is a general-purpose storage type that provides lower performance than the Standard Type.
 
-The Basic Type applies to the following clusters:
+The Basic Type is available for the following clusters:
 
 - Existing clusters that are created before April 1, 2025. 
 - New clusters that are created with the version earlier than v7.5.5, v8.1.2, or v8.5.0
 
 #### Standard Type
 
-The Standard Type is well-suited for the majority of workloads due to its balanced performance and cost ratio. It can improve the overall performance comparing to the Basic Type. It reserves sufficient disk resources for raft logs, reducing the performance impact between raft I/O and data disk I/O, thereby improving both the read and write performance of TiKV.
+The Standard Type is ideal for most workloads due to its balanced performance and cost efficiency. It offers better performance compared to the Basic Type by reserving ample disk resources for Raft logs. This reduces the impact of Raft I/O on data disk I/O, resulting in improved read and write performance for TiKV.
 
-The Standard Type applies to new clusters that are created with the version v7.5.5, v8.1.2, or v8.5.0 or later.
+The Standard Type is available for new clusters created with versions v7.5.5, v8.1.2, or v8.5.0 or later.
 
 #### Performance Type（Coming soon）
 
-The Performance Type offers greater performance and stability, reducing P99 duration by up to 20% compared to the Basic Type. It provisions a dedicated high-performance disk for Raft logs, significantly improving both performance and stability.
+The Performance Type provides enhanced performance and stability, reducing P99 latency by up to 20% compared to the Basic Type. It allocates a dedicated high-performance disk for Raft logs, significantly boosting both performance and stability.
 
-This storage type will be released soon. 
+This storage type will be available soon. 
 
 ## Size TiFlash
 
