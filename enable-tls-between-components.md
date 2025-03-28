@@ -128,11 +128,23 @@ Currently, it is not supported to only enable encrypted transmission of some spe
         cdc server --pd=https://127.0.0.1:2379 --log-file=ticdc.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301 --ca=/path/to/ca.pem --cert=/path/to/ticdc-cert.pem --key=/path/to/ticdc-key.pem
         ```
 
+    - TiProxy
+
+        Configure in the configuration file, and set the corresponding URL to `https`:
+
+        ```toml
+        [security]
+            [server-http-tls]
+            ca = "/path/to/ca.pem"
+            cert = "/path/to/tiproxy-server.pem"
+            key = "/path/to/tiproxy-server-key.pem"
+        ```
+
         Now, encrypted transmission among TiDB components is enabled.
 
     > **Note:**
     >
-    > After enabling encrypted transmission in a TiDB cluster, if you need to connect to the cluster using tidb-ctl, tikv-ctl, or pd-ctl, specify the client certificate. For example:
+    > After enabling encrypted transmission in a TiDB cluster, if you need to connect to the cluster using tidb-ctl, tikv-ctl, pd-ctl, or tiproxyctl, specify the client certificate. For example:
 
     {{< copyable "shell-regular" >}}
 
@@ -169,7 +181,7 @@ To verify the caller's identity for a component, you need to mark the certificat
 
     ```toml
     [security]
-    cluster-verify-cn = ["tidb", "test-client", "prometheus"]
+    cluster-verify-cn = ["tidb", "tiproxy", "test-client", "prometheus"]
     ```
 
 - TiKV
@@ -187,7 +199,7 @@ To verify the caller's identity for a component, you need to mark the certificat
 
     ```toml
     [security]
-    cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "test-client", "prometheus"]
+    cert-allowed-cn = ["tidb", "pd", "tikv", "tiflash", "tiproxy", "test-client", "prometheus"]
     ```
 
 - TiFlash (New in v4.0.5)
@@ -206,11 +218,21 @@ To verify the caller's identity for a component, you need to mark the certificat
     cert-allowed-cn = ["tidb", "tikv", "tiflash", "prometheus"]
     ```
 
+- TiProxy (New in v1.4.0)
+
+    Configure in the configuration file:
+
+    ```toml
+    [security]
+        [server-http-tls]
+        cert-allowed-cn = ["tiproxy", "tidb", "test-client", "prometheus"]
+    ```
+
 ## Reload certificates
 
-- If your TiDB cluster is deployed in a local data center, to reload the certificates and keys, TiDB, PD, TiKV, TiFlash, TiCDC, and all kinds of clients reread the current certificates and key files each time a new connection is created, without restarting the TiDB cluster.
+- If your TiDB cluster is deployed in a local data center, to reload the certificates and keys, TiDB, PD, TiKV, TiFlash, TiCDC, TiProxy, and all kinds of clients reread the current certificates and key files each time a new connection is created, without restarting the TiDB cluster.
 
-- If your TiDB cluster is deployed on your own managed cloud, make sure that the issuance of TLS certificates is integrated with the certificate management service of the cloud provider. The TLS certificates of the TiDB, PD, TiKV, TiFlash, and TiCDC components can be automatically rotated without restarting the TiDB cluster.
+- If your TiDB cluster is deployed on your own managed cloud, make sure that the issuance of TLS certificates is integrated with the certificate management service of the cloud provider. The TLS certificates of the TiDB, PD, TiKV, TiFlash, TiCDC, and TiProxy components can be automatically rotated without restarting the TiDB cluster.
 
 ## Certificate validity
 
