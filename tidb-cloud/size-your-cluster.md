@@ -182,9 +182,9 @@ The supported node storage of different TiKV vCPUs is as follows:
 >
 > You cannot decrease the TiKV node storage after the cluster creation.
 
-### TiKV node storage type
+### TiKV node storage types
 
-The following TiKV storage types are provided for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters:
+TiDB Cloud provides the following TiKV storage types for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters:
 
 #### Basic Type
 
