@@ -231,7 +231,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * For Dedicated Tier clusters, the minimum storage size of a TiKV or TiFlash node is changed from 500 GiB to 200 GiB. This will be more cost-effective for users whose workloads are in small data volumes.
 
-    For more details, see [TiKV node storage](/tidb-cloud/size-your-cluster.md#tikv-node-storage) and [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
+    For more details, see [TiKV node storage](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size) and [TiFlash node storage](/tidb-cloud/size-your-cluster.md#tiflash-node-storage).
 
 * Introduce online contracts to customize TiDB Cloud subscriptions and meet compliance requirements.
 
@@ -488,7 +488,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## June 23, 2022
 
-* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-node-storage) on TiDB Cloud.
+* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size) on TiDB Cloud.
 
     * 8 vCPU or 16 vCPU TiKV: support up to 4 TiB storage capacity.
     * 4 vCPU TiKV: support up to 2 TiB storage capacity.
