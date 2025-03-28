@@ -4944,7 +4944,7 @@ SHOW WARNINGS;
 - Type: String
 - Default value: `"standard"`
 - Possible values: `"standard"`, `"conservative"`, and `"custom{...}"`
-- This variable controls the resource usage policy for [Pipelined DML](/pipelined-dml.md). It takes effect only when [`tidb_dml_type`](#tidb_dml_type-new-in-v800) is set to `bulk`. The meaning of the possible values is as follows:
+- This variable controls the resource usage policy for [Pipelined DML](/pipelined-dml.md). It takes effect only when [`tidb_dml_type`](#tidb_dml_type-new-in-v800) is set to `bulk`. The meaning of each possible value is as follows:
     - `"standard"`: the default resource usage policy.
     - `"conservative"`: Pipelined DML uses fewer resources, but its execution speed is slower than the default policy, suitable for scenarios with sensitive resource usage.
     - `"custom{option1=value1,option2=value2,...}"`: a custom resource usage policy. You can specify only the required options. For example, `"custom{concurrency=8,write_throttle_ratio=0.5}"`. Make sure that the value is enclosed in double quotes. The supported custom options include the following:
