@@ -184,13 +184,14 @@ The supported node storage of different TiKV vCPUs is as follows:
 
 ### TiKV node storage type
 
-The following TiKV storage types are provided for TiDB Cloud Dedicated clusters:
+The following TiKV storage types are provided for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters:
 
 #### Basic Type
 
 The Basic Type is a general-purpose storage type that provides lower performance than the Standard Type.
 
 The Basic Type applies to the following clusters:
+
 - Existing clusters that are created before April 1, 2025. 
 - New clusters that are created with the version earlier than v7.5.5, v8.1.2, or v8.5.0
 
@@ -198,8 +199,7 @@ The Basic Type applies to the following clusters:
 
 The Standard Type is well-suited for the majority of workloads due to its balanced performance and cost ratio. It can improve the overall performance comparing to the Basic Type. It reserves sufficient disk resources for raft logs, reducing the performance impact between raft I/O and data disk I/O, thereby improving both the read and write performance of TiKV.
 
-The Standard Type applies to the following clusters:
-- New clusters that are created with the version v7.5.5, v8.1.2, or v8.5.0 or later 
+The Standard Type applies to new clusters that are created with the version v7.5.5, v8.1.2, or v8.5.0 or later.
 
 #### Performance Type（Coming soon）
 
