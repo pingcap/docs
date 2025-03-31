@@ -12,7 +12,7 @@ summary: TiDB Documentation provides how-to guides and references for using TiDB
 
 TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, letting you focus on your applications instead of the complexities of your database.
 
-**The current TiDB Cloud support for Alibaba Cloud is in preview. If you are looking for support for other cloud providers, check [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud).**
+**TiDB Cloud support for Alibaba Cloud is currently in preview. If you are looking for support for other cloud providers, check [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud).**
 
 <DocHomeCardContainer>
 
