@@ -17,7 +17,7 @@ TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.co
 
 ## Before you begin
 
-- Have a TiDB Cloud account. If you do not have one, [sign up for a free trial](https://console.tidb.io/free-trial).
+- Have a TiDB Cloud account. If you do not have one, [sign up for a free trial](https://console.tidb.io/free-trial?provider_source=alicloud).
 
 ## Installation
 

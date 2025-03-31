@@ -9,7 +9,7 @@ This document describes how to create a TiDB Cloud Starter cluster in the [TiDB 
 
 ## Before you begin
 
-If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/signup) to sign up for an account.
+If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/signup?provider_source=alicloud) to sign up for an account.
 
 - You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
 - For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
