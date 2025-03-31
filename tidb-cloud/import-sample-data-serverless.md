@@ -7,9 +7,6 @@ summary: Learn how to import sample data into TiDB Cloud Serverless via the UI.
 
 This document describes how to import the sample data into TiDB Cloud Serverless via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
-<SimpleTab>
-<div label="Amazon S3">
-
 1. Open the **Import** page for your target cluster.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
@@ -35,10 +32,6 @@ This document describes how to import the sample data into TiDB Cloud Serverless
         - **AWS Access Key**: skip this option for the sample data.
 
 4. Click **Connect** > **Start Import**.
-
-</div>
-
-</SimpleTab>
 
 When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud Serverless.
 
