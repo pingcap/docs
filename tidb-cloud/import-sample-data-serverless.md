@@ -7,8 +7,9 @@ summary: Learn how to import sample data into TiDB Cloud Starter via the UI.
 
 This document describes how to import the sample data into TiDB Cloud Starter via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
-<SimpleTab>
-<div label="Amazon S3">
+> **Note:**
+>
+> TiDB Cloud Serverless currently only supports importing sample data from Amazon S3.
 
 1. Open the **Import** page for your target cluster.
 
@@ -36,6 +37,7 @@ This document describes how to import the sample data into TiDB Cloud Starter vi
 
 4. Click **Connect** > **Start Import**.
 
+<<<<<<< HEAD
 </div>
 <div label="Google Cloud">
 
@@ -69,6 +71,9 @@ This document describes how to import the sample data into TiDB Cloud Starter vi
 </SimpleTab>
 
 When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud Starter.
+=======
+When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud Serverless.
+>>>>>>> b3eb701c1b (cloud: remove SimpleTab for import-sample-data-serverless.md (#20677))
 
 After connecting to the cluster, you can run some queries in your terminal to check the result, for example:
 
