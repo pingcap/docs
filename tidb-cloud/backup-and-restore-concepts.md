@@ -21,4 +21,4 @@ Point-in-time Restore is a feature that enables you to restore data of any point
 - Resolve cases of data write errors by restoring point-in-time that is before the error event.
 - Audit the historical data of the business.
 
-Note that Point-in-time Restore is available only for TiDB Cloud Essential clusters and not available for free clusters. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
+Note that Point-in-time Restore is available only for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#tidb-cloud-essential) clusters and not available for free clusters. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
