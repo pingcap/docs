@@ -1,5 +1,5 @@
 ---
-title: Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service into TiDB Cloud Starter
+title: Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Starter
 summary: Learn how to import CSV files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Starter.
 ---
 
