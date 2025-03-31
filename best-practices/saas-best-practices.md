@@ -13,7 +13,7 @@ This document introduces best practices for TiDB in SaaS (Software as a Service)
 
 ## TiDB hardware requirements
 
-It is recommended to use high-memory TiDB instances. For example, 32 GiB or more memory for 1 million tables, and 64 GiB or more memory for 3 million tables. High-memory TiDB instances can allocate more cache space for Infoschema, Statistics, and execution plan caches, achieving a higher cache hit rate to improve business performance. Additionally, they can effectively mitigate stability issues caused by TiDB GC.
+It is recommended to use high-memory TiDB instances. For example, 32 GiB or more memory for 1 million tables, and 64 GiB or more memory for 3 million tables. High-memory TiDB instances can allocate more cache space for Infoschema, Statistics, and execution plan caches, achieving a higher cache hit rate to improve business performance. Additionally, large memory can effectively mitigate fluctuation and stability issues caused by TiDB GC.
 
 The following are recommended hardware configurations for TiKV and PD:
 
@@ -22,7 +22,7 @@ The following are recommended hardware configurations for TiKV and PD:
 
 ## Control the number of Regions
 
-If you need to create a large number of tables (for example, more than 100,000), it is recommended to set the TiDB configuration item [`split-table`](/tidb-configuration-file.md#split-table) to `false` to reduce the number of Regions and alleviate memory pressure on TiKV.
+If you need to create a large number of tables (for example, more than 100,000), it is recommended to set the TiDB configuration item [`split-table`](/tidb-configuration-file.md#split-table) to `false` to reduce the number of cluster Regions, thus alleviating memory pressure on TiKV.
 
 ## Configure caches
 
@@ -35,7 +35,7 @@ If you need to create a large number of tables (for example, more than 100,000),
 * [`tidb_auto_build_stats_concurrency`](/system-variables.md#tidb_auto_build_stats_concurrency-new-in-v650) and [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) affect the concurrency of TiDB statistics construction and should be adjusted based on the scenario:
     - For scenarios with many partitioned tables, prioritize increasing the value of `tidb_auto_build_stats_concurrency`.
     - For scenarios with many columns, prioritize increasing the value of `tidb_build_sampling_stats_concurrency`.
-* The product of these three values should not exceed the number of TiDB CPU cores to avoid excessive resource usage.
+* The product of the three values of `tidb_auto_analyze_concurrency`, `tidb_auto_build_stats_concurrency` and `tidb_build_sampling_stats_concurrency` should not exceed the number of TiDB CPU cores to avoid excessive resource usage.
 
 ## Query system tables efficiently
 
@@ -50,7 +50,7 @@ By adding the suggested query conditions to the above SQL statements, memory con
 
 ## Handle high connection scenarios
 
-In SaaS multi-tenant scenarios, each user connects to TiDB to operate data in their own tenant (database). To save costs, users want TiDB nodes to support as many connections as possible.
+In SaaS multi-tenant scenarios, each user usually connects to TiDB to operate data in their own tenant (database). To save costs, users want TiDB nodes to support as many connections as possible.
 
 * Increase the TiDB configuration item [`token-limit`](/tidb-configuration-file.md#token-limit) (`1000` by default) to support more concurrent requests.
 * The memory usage of TiDB is roughly linear with the number of connections. In actual tests, 200,000 idle connections increase TiDB process memory by about 30 GiB. It is recommended to increase TiDB memory specifications.
