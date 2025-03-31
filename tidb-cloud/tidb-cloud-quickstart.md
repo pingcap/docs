@@ -36,7 +36,6 @@ After your TiDB Cloud Starter cluster is created, you can connect to it using di
 
 2. In the displayed dialog, choose a connection option from the **Connect With** drop-down list. Then, follow the tutorials in [Developer Guide](/develop/dev-guide-overview.md) to connect to your cluster.
 
-
 ## What's next
 
 - To learn how to connect to your cluster using different methods, see [Connect to a TiDB Cloud Starter cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).

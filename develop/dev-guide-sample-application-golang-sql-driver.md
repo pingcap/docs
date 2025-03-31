@@ -13,7 +13,6 @@ In this tutorial, you can learn how to use TiDB and Go-MySQL-Driver to accomplis
 - Connect to your TiDB cluster using Go-MySQL-Driver.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
-
 ## Prerequisites
 
 To complete this tutorial, you need:
