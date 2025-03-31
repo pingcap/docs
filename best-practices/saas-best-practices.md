@@ -11,7 +11,7 @@ This document introduces best practices for TiDB in SaaS (Software as a Service)
 >
 > It is recommended to use TiDB v8.5.0 or later.
 
-## Configure hardware
+## TiDB hardware requirements
 
 It is recommended to use high-memory TiDB instances. For example, 32 GiB or more memory for 1 million tables, and 64 GiB or more memory for 3 million tables. High-memory TiDB instances can allocate more cache space for Infoschema, Statistics, and execution plan caches, achieving a higher cache hit rate to improve business performance. Additionally, they can effectively mitigate stability issues caused by TiDB GC.
 
@@ -26,8 +26,8 @@ If you need to create a large number of tables (for example, more than 100,000),
 
 ## Configure caches
 
-* Starting from TiDB v8.4.0, TiDB loads table information involved in SQL statements into the Infoschema cache on demand during SQL execution. You can monitor the **Schema Load** panel in TiDB monitoring, specifically the **Infoschema v2 Cache Size** and **Infoschema v2 Cache Operation** sub-panels, to view the size and hit rate of the Infoschema cache. Use the system variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) to adjust the memory limit of the Infoschema cache to meet business needs. The size of the Infoschema cache is linearly related to the number of different tables involved in SQL execution. In actual tests, fully caching metadata for 1 million tables (4 columns, 1 primary key, and 1 index) requires about 2.4 GiB of cache.
-* TiDB loads table statistics involved in SQL statements into the Statistics cache on demand during SQL execution. You can monitor the **Statistics & Plan Management** panel in TiDB monitoring, specifically the **Stats Cache Cost** and **Stats Cache OPS** sub-panels, to view the size and hit rate of the Statistics cache. Use the system variable [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610) to adjust the memory limit of the Statistics cache to meet business needs. In actual tests, executing simple SQL (using the IndexRangeScan operator) on 100,000 tables results in a Stats cache cost of about 3.96 GiB.
+* Starting from TiDB v8.4.0, TiDB loads table information involved in SQL statements into the Infoschema cache on demand during SQL execution. You can monitor the **Schema Load** panel in TiDB monitoring, specifically the **Infoschema v2 Cache Size** and **Infoschema v2 Cache Operation** sub-panels, to view the size and hit rate of the Infoschema cache. Use the system variable [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) to adjust the memory limit of the Infoschema cache to meet business needs. The size of the Infoschema cache is linearly related to the number of different tables involved in SQL execution. In actual tests, fully caching metadata for 1 million tables (4 columns, 1 primary key, and 1 index) requires about 2.4 GiB memory.
+* TiDB loads table statistics involved in SQL statements into the Statistics cache on demand during SQL execution. You can monitor the **Statistics & Plan Management** panel in TiDB monitoring, specifically the **Stats Cache Cost** and **Stats Cache OPS** sub-panels, to view the size and hit rate of the Statistics cache. Use the system variable [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610) to adjust the memory limit of the Statistics cache to meet business needs. In actual tests, executing simple SQL (using the IndexRangeScan operator) on 100,000 tables results in a Stats cache cost of about 3.96 GiB memory.
 
 ## Collect statistics
 
@@ -54,7 +54,7 @@ In SaaS multi-tenant scenarios, each user connects to TiDB to operate data in th
 
 * Increase the TiDB configuration item [`token-limit`](/tidb-configuration-file.md#token-limit) (`1000` by default) to support more concurrent requests.
 * The memory usage of TiDB is roughly linear with the number of connections. In actual tests, 200,000 idle connections increase TiDB process memory by about 30 GiB. It is recommended to increase TiDB memory specifications.
-* If you use PREPARED statements, each connection maintains a session-level Prepared Plan Cache. In practice, you might not execute the DEALLOCATE statement for a long time, which can result in a high number of plans in the cache even if the QPS of Execute statements is low. The memory usage of the plan cache is linearly related to the number of plans in the cache. In actual tests, 400,000 execution plans involving IndexRangeScan consume about 5 GiB of TiDB memory. It is recommended to increase TiDB memory specifications.
+* If you use PREPARED statements, each connection maintains a session-level Prepared Plan Cache. In practice, you might not execute the DEALLOCATE statement for a long time, which can result in a high number of plans in the cache even if the QPS of Execute statements is low. The memory usage of the plan cache is linearly related to the number of plans in the cache. In actual tests, 400,000 execution plans involving IndexRangeScan consume about 5 GiB memory. It is recommended to increase TiDB memory specifications.
 
 ## Use stale read carefully
 
