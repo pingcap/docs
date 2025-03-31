@@ -17,8 +17,8 @@ This tutorial walks you through the steps to connect to your TiDB Cloud cluster 
 To connect to your TiDB Cloud Starter cluster via a private endpoint, follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
-2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
-3. [Connect to your TiDB cluster](#step-3-connect-to-your-tidb-cluster)
+2. [Create a VOC endpoint on Alibaba Cloud](#step-2-create-a-voc-endpoint-on-alibaba-cloud)
+3. [Connect to your TiDB cluster using the private endpoint](#step-3-connect-to-your-tidb-cluster-using-the-private-endpoint)
 
 ### Step 1. Choose a TiDB cluster
 
