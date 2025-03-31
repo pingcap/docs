@@ -6,8 +6,8 @@ on:
     - cron: "30 1 * * 1-5"
 
 jobs:
-  if: github.repository == 'pingcap/docs'
   pr_reminder:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
     steps:
       - name: Run PR reminder
