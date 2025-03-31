@@ -249,7 +249,6 @@
     - [Vector Index](/tidb-cloud/vector-search-index.md)
   - [Improve Performance](/tidb-cloud/vector-search-improve-performance.md)
   - [Limitations](/tidb-cloud/vector-search-limitations.md)
-  - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)

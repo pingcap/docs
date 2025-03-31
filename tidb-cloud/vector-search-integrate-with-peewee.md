@@ -9,7 +9,7 @@ This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/
 
 > **Note**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter).
+> TiDB Vector Search is available for TiDB Self-Managed (TiDB >= v8.4), TiDB Cloud Starter, and TiDB Cloud Essential.
 
 ## Prerequisites
 
