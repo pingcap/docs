@@ -7,8 +7,8 @@ on:
     - cron: "0 0 * * 1"
 
 jobs:
-  if: github.repository == 'pingcap/docs'
   linkChecker:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
