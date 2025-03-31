@@ -103,9 +103,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Reliability
 
-* Introduce a new system variable `MAX_USER_CONNECTIONS` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) tw@hfxsd<!--2017-->
+* Introduce a new system variable `max_user_connections` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) tw@hfxsd<!--2017-->
 
-    Starting from v9.0.0, you can use the `MAX_USER_CONNECTIONS` system variable to limit the number of connections a single user can establish to a single TiDB node. This helps prevent issues where excessive [token](/tidb-configuration-file.md/#token-limit) consumption by one user causes delays in responding to requests from other users.
+    Starting from v9.0.0, you can use the `max_user_connections` system variable to limit the number of connections a single user can establish to a single TiDB node. This helps prevent issues where excessive [token](/tidb-configuration-file.md/#token-limit) consumption by one user causes delays in responding to requests from other users.
     
     For more information, see [documentation](/system-variables.md/#max_user_connections-new-in-v900)
 
@@ -208,7 +208,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-|  |  |  |
+| `txn_scope` | Deleted | Starting from v9.0.0, this variable is removed. |
+| [`max_user_connections`](/system-variables.md/#max_user_connections-new-in-v900) | Newly added | Controls the number of connections a single user can establish to a single TiDB node, preventing excessive [token](/tidb-configuration-file.md/#token-limit) consumption by one user from delaying responses to other users' requests. |
+| [`tidb_accelerate_user_creation_update`](/system-variables.md/#tidb_accelerate_user_creation_update-new-in-v900)| Newly added | Improves the performance of creating and modifying users in scenarios with hundreds of thousands to millions of users. |
+| [`tidb_max_dist_task_nodes`](/system-variables.md/#tidb_max_dist_task_nodes-new-in-v900)| Newly added | Controls the maximum number of TiDB nodes available for distributed framework tasks. The default value is `-1`, which enables automatic mode. In this mode, the system automatically selects an appropriate number of nodes. |
+| [`tidb_workload_repository_active_sampling_interval`](/system-variables.md#tidb_workload_repository_active_sampling_interval-new-in-v900) | Newly added | Controls the sampling interval for the [Workload Repository](/workloadrepo.md)'s Time-based Sampling Process. |
+| [`tidb_workload_repository_dest`](/system-variables.md#tidb_workload_repository_dest-new-in-v900)| Newly added | Controls the destination of the [Workload Repository](/workloadrepo.md. The default value is `''`, which means to disable the workload repository. The value `'table'` enables the workload repository to write data into TiKV.| 
+| [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900) | Newly added | Controls the number of days that [Workload Repository](/workloadrepo.md) data is retained. |
+| [`tidb_workload_repository_snapshot_interval`](/system-variables.md#tidb_workload_repository_snapshot_interval-new-in-v900) | Newly added | Controls the sampling interval for the [Workload Repository](/workloadrepo.md)'s Snapshot Sampling Process. |
 |  |  |  |
 |  |  |  |
 |  |  |  |
@@ -218,6 +225,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
 | DM | [--redact-info-log](/dm/dm-command-line-flags/#--redact-info-log) | Newly added | Controls whether DM replaces sensitive query arguments with ? placeholders in logs. The default value is false. When set to true, query arguments in DM logs are redacted. This parameter only redacts query arguments (not entire SQL statements), and requires a DM-worker restart to take effect. |
+| BR | [`--checkpoint-storage`](br/br-checkpoint-restore.md#implementation-details-store-checkpoint-data-in-the-external-storage) | Newly added | Specifies the external storage for BR to store checkpoint data. |
 |  |  |  | |
 
 ### Offline package changes
