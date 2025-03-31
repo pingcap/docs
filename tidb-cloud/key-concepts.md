@@ -27,10 +27,6 @@ TiDB is highly compatible with the MySQL protocol and the common features and sy
 
 The AI features in TiDB Cloud enable you to fully leverage advanced technologies for data exploration, search, and integration. [Learn more about AI features](/tidb-cloud/ai-feature-concepts.md).
 
-## Data Service (Beta)
-
-Data Service enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint. [Learn more about Data Service](/tidb-cloud/data-service-concepts.md).
-
 ## Scalability
 
 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) scales automatically based on your application's workload changes. [Learn more about scalability](/tidb-cloud/scalability-concepts.md).

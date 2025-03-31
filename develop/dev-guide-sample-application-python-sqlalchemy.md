@@ -13,10 +13,6 @@ In this tutorial, you can learn how to use TiDB and SQLAlchemy to accomplish the
 - Connect to your TiDB cluster using SQLAlchemy.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
-> **Note:**
->
-> This tutorial works with TiDB Cloud Starter clusters.
-
 ## Prerequisites
 
 To complete this tutorial, you need:

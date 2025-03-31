@@ -80,7 +80,7 @@ Because Parquet files do not contain schema information, before importing data f
 
 To allow TiDB Cloud Starter to access the Parquet files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
 
-- If your Parquet files are located in Amazon S3, [configure external storage access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+- If your Parquet files are located in Amazon S3, [configure external storage access for TiDB Cloud](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud-starter).
 

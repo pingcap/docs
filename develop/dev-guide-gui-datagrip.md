@@ -7,10 +7,6 @@ summary: Learn how to connect to TiDB using JetBrains DataGrip. This tutorial al
 
 TiDB is a MySQL-compatible database, and [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html) is a powerful integrated development environment (IDE) for database and SQL. This tutorial walks you through the process of connecting to your TiDB cluster using DataGrip.
 
-> **Note:**
->
-> This tutorial is compatible with TiDB Cloud Starter.
-
 You can use DataGrip in two ways:
 
 - As the [DataGrip IDE](https://www.jetbrains.com/datagrip/download) standalone tool.

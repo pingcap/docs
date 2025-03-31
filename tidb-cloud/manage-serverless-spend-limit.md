@@ -7,7 +7,7 @@ summary: Learn how to manage spending limit for your TiDB Cloud Starter scalable
 
 > **Note:**
 >
-> The spending limit is only applicable to TiDB Cloud Starter [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan).
+> The spending limit is only applicable to [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) clusters.
 
 Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your TiDB Cloud Starter scalable clusters.
 

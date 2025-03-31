@@ -38,12 +38,6 @@ Explore native support of Vector Search in TiDB Cloud to build your AI applicati
 
 </DocHomeCard>
 
-<DocHomeCard href="/tidbcloud/tidb-cloud-roadmap" label="TiDB Cloud Roadmap" icon="cloud-roadmap-mauve">
-
-Planned features and releases for TiDB Cloud.
-
-</DocHomeCard>
-
 </DocHomeCardContainer>
 
 </DocHomeSection>
