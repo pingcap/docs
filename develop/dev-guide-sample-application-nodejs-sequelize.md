@@ -13,10 +13,6 @@ In this tutorial, you can learn how to use TiDB and Sequelize to accomplish the 
 - Connect to your TiDB cluster using Sequelize.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
-> **Note**
->
-> This tutorial works with TiDB Cloud Starter.
-
 ## Prerequisites
 
 To complete this tutorial, you need:

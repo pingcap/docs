@@ -152,7 +152,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 > **Note:**
 >
 > - When you connect to a TiDB Cloud Starter cluster, you must [use the TLS connection](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-> - If you encounter problems when connecting to a TiDB Cloud Starter cluster, you can read [Secure Connections to TiDB Cloud Starter Clusters](/tidb-cloud/secure-connections-to-serverless-clusters.md) for more information.
+> - If you encounter problems when connecting to a TiDB Cloud Starter cluster, you can read [Secure Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md) for more information.
 
 </CustomContent>
 

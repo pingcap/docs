@@ -9,10 +9,6 @@ TiDB is a MySQL-compatible database, and [Navicat](https://www.navicat.com) is a
 
 In this tutorial, you can learn how to connect to your TiDB cluster using Navicat.
 
-> **Note:**
->
-> This tutorial is compatible with TiDB Cloud Starter.
-
 ## Prerequisites
 
 To complete this tutorial, you need:

@@ -23,8 +23,7 @@ If you require the features listed in this document, [contact us](https://www.pi
 
 ### Encryption
 
-- Data persisted in your TiDB Cloud Starter cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), an optional second layer of encryption is available during the cluster creation process, providing an additional level of security beyond the default encryption at rest.
-- Using customer-managed encryption keys (CMEK) is currently unavailable.
+- Data persisted in your TiDB Cloud Starter cluster is encrypted using the encryption tool provided by the cloud provider that manages your cluster. <!--TBD, ToDo: For [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan), the spending limit must be set to a minimum of $0.01. Also, the scalable cluster can have a free quota if it meets the qualifications. The scalable cluster with a free quota will consume the free quota first.-->
 
 ### Maintenance window
 
@@ -57,7 +56,7 @@ If you require the features listed in this document, [contact us](https://www.pi
 
 ## Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Starter clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Starter clusters, you need to add a credit card and specify a spending limit.
 
 For the first five TiDB Cloud Starter clusters in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
 

@@ -13,10 +13,6 @@ In this tutorial, you can learn how to use TiDB and MySQL Connector/Python to ac
 - Connect to your TiDB cluster using MySQL Connector/Python.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
-> **Note:**
->
-> This tutorial works with TiDB Cloud Starter clusters.
-
 ## Prerequisites
 
 To complete this tutorial, you need:

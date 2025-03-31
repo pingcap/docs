@@ -1,39 +1,45 @@
 ---
-title: Create a TiDB Cloud Starter Cluster
-summary: Learn how to create your TiDB Cloud Starter cluster.
+title: Create a TiDB Cloud Cluster
+summary: Learn how to create your TiDB Cloud cluster.
 ---
 
-# Create a TiDB Cloud Starter Cluster
+# Create a TiDB Cloud Cluster
 
-This document describes how to create a TiDB Cloud Starter cluster in the [TiDB Cloud console](https://console.tidb.io/).
+This document describes how to create a TiDB Cloud cluster in the [TiDB Cloud console](https://console.tidb.io/).
 
 ## Before you begin
 
 If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/signup) to sign up for an account.
 
 - You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
-- For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-- For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
 ## Steps
 
-If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud Starter cluster as follows:
+If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud cluster as follows:
 
 1. Log in to the [TiDB Cloud console](https://console.tidb.io/), and then navigate to the [**Clusters**](https://console.tidb.io/clusters) page.
 
 2. Click **Create Cluster**.
 
-3. On the **Create Cluster** page, **Starter** is selected by default.
+3. Select a cluster plan. TiDB Cloud provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Starter** and **Essential**. You can start with a Starter cluster and later upgrade to an Essential cluster as your needs grow.
 
-4. The cloud provider of TiDB Cloud Starter is AWS. You can select an AWS region where you want to host your cluster.
+4. The cloud provider is Alibaba Cloud. You can select an Alibaba Cloud region where you want to host your cluster.
 
 5. Update the default cluster name if necessary.
 
-6. Select a cluster plan. TiDB Cloud Starter provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Free Cluster** and **Scalable Cluster**. You can start with a free cluster and later upgrade to a scalable cluster as your needs grow. To create a scalable cluster, you need to specify a **Monthly Spending Limit** and add a credit card.
+6. Update the capacity of the cluster.
 
-    > **Note:**
-    >
-    > For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Starter clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+    - Starter plan:
+
+        - You can update the spending limit for your cluster. If the spending limit is set to 0, the cluster remains in the free tier. If the spending limit is greater than 0, you need to add a credit card before creating the cluster.
+
+        - By default, each organization can create up to five [free Starter clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create additional Starter clusters, you must add a credit card and specify a spending limit.
+
+    - Essential plan:
+
+        - You must specify both a minimum and maximum number of Request Capacity Units (RCUs) for your cluster.
+
+        - RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your cluster within this range based on demand.
 
 7. Click **Create**.
 
@@ -41,7 +47,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 ## What's next
 
-After your cluster is created, follow the instructions in [Connect to TiDB Cloud Starter via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
+After your cluster is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
 
 > **Note:**
 >

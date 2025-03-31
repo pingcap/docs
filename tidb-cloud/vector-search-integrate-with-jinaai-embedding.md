@@ -9,7 +9,7 @@ This tutorial walks you through how to use [Jina AI](https://jina.ai/) to genera
 
 > **Note**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter).
+> TiDB Vector Search is available for TiDB Self-Managed (TiDB >= v8.4), TiDB Cloud Starter, and TiDB Cloud Essential.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ To complete this tutorial, you need:
 
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Starter cluster. Follow [creating a TiDB Cloud Starter cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB Cloud Starter cluster. Follow [creating a TiDB Cloud cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Run the sample app
 
