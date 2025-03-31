@@ -1,11 +1,11 @@
 ---
-title: Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless 
-summary: Learn how to import CSV files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless.
+title: Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service into TiDB Cloud Serverless
+summary: Learn how to import CSV files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service into TiDB Cloud Serverless.
 ---
 
-# Import CSV Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless
+# Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service into TiDB Cloud Serverless
 
-This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Serverless.
+This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service into TiDB Cloud Serverless.
 
 ## Limitations
 
@@ -35,7 +35,7 @@ Because CSV files do not contain schema information, before importing data from 
 
 - Method 1: In TiDB Cloud Serverless, create the target databases and tables for your source data.
 
-- Method 2: In the Amazon S3, GCS, or Azure Blob Storage directory where the CSV files are located, create the target table schema files for your source data as follows:
+- Method 2: In the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the CSV files are located, create the target table schema files for your source data as follows:
 
     1. Create database schema files for your source data.
 
@@ -51,7 +51,7 @@ Because CSV files do not contain schema information, before importing data from 
 
     2. Create table schema files for your source data.
 
-        If you do not include the table schema files in the Amazon S3, GCS, or Azure Blob Storage directory where the CSV files are located, TiDB Cloud Serverless will not create the corresponding tables for you when you import the data.
+        If you do not include the table schema files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the CSV files are located, TiDB Cloud Serverless will not create the corresponding tables for you when you import the data.
 
         Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Serverless will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
@@ -70,7 +70,7 @@ Because CSV files do not contain schema information, before importing data from 
 
 ## Step 3. Configure cross-account access
 
-To allow TiDB Cloud Serverless to access the CSV files in the Amazon S3, GCS, or Azure Blob Storage bucket, do one of the following:
+To allow TiDB Cloud Serverless to access the CSV files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
 
 - If your CSV files are located in Amazon S3, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
