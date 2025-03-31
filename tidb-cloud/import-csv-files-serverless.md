@@ -267,21 +267,21 @@ To import the CSV files to TiDB Cloud Starter, take the following steps:
 
 5. In the **Destination** section, select the target database and table.
 
-   When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
-   When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
+    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
 
-   You can also use wildcards to match the source files. For example:
+    You can also use wildcards to match the source files. For example:
 
     - `oss://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
 
     - `oss://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
 
-   Note that only `?` and `*` are supported.
+    Note that only `?` and `*` are supported.
 
-   > **Note:**
-   >
-   > The URI must contain the data source folder.
+    > **Note:**
+    >
+    > The URI must contain the data source folder.
 
 6. Click **Start Import**.
 
