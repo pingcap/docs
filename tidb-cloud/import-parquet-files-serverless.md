@@ -1,11 +1,11 @@
 ---
-title: Import Apache Parquet Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter
-summary: Learn how to import Apache Parquet files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter.
+title: Import Apache Parquet Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service into TiDB Cloud Starter
+summary: Learn how to import Apache Parquet files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service into TiDB Cloud Starter.
 ---
 
-# Import Apache Parquet Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Starter
+# Import Apache Parquet Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service into TiDB Cloud Starter
 
-You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to TiDB Cloud Starter. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), or Azure Blob Storage into TiDB Cloud Starter.
+You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to TiDB Cloud Starter. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service into TiDB Cloud Starter.
 
 > **Note:**
 >
@@ -43,7 +43,7 @@ Because Parquet files do not contain schema information, before importing data f
 
 - Method 1: In TiDB Cloud Starter, create the target databases and tables for your source data.
 
-- Method 2: In the Amazon S3, GCS, or Azure Blob Storage directory where the Parquet files are located, create the target table schema files for your source data as follows:
+- Method 2: In the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the Parquet files are located, create the target table schema files for your source data as follows:
 
     1. Create database schema files for your source data.
 
@@ -59,7 +59,7 @@ Because Parquet files do not contain schema information, before importing data f
 
     2. Create table schema files for your source data.
 
-        If you do not include the table schema files in the Amazon S3, GCS, or Azure Blob Storage directory where the Parquet files are located, TiDB Cloud Starter will not create the corresponding tables for you when you import the data.
+        If you do not include the table schema files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service directory where the Parquet files are located, TiDB Cloud Starter will not create the corresponding tables for you when you import the data.
 
         Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud Starter will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
@@ -78,7 +78,7 @@ Because Parquet files do not contain schema information, before importing data f
 
 ## Step 3. Configure cross-account access
 
-To allow TiDB Cloud Starter to access the Parquet files in the Amazon S3, GCS, or Azure Blob Storage bucket, do one of the following:
+To allow TiDB Cloud Starter to access the Parquet files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
 
 - If your Parquet files are located in Amazon S3, [configure external storage access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
