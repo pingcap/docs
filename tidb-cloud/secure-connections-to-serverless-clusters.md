@@ -14,7 +14,7 @@ Establishing a secure TLS connection between your client and your TiDB Cloud Sta
 
 ## TLS connection to a TiDB Cloud cluster
 
-In the [TiDB Cloud console](https://console.tidb.io/), you can get examples of different connection methods and connect to your TiDB Cloud cluster as follows:
+In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), you can get examples of different connection methods and connect to your TiDB Cloud cluster as follows:
 
 1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project, and then click the name of your cluster to go to its overview page.
 

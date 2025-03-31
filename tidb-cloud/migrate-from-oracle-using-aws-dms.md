@@ -36,7 +36,7 @@ The following diagram illustrates the high-level architecture.
 Read the following prerequisites before you get started:
 
 - [AWS Cloud Account](https://aws.amazon.com)
-- [TiDB Cloud Account](https://console.tidb.io/)
+- [TiDB Cloud Account](https://console.tidb.io/signup?provider_source=alicloud)
 - [DBeaver](https://dbeaver.io/)
 
 Next, you will learn how to use AWS DMS to migrate data from Amazon RDS for Oracle into TiDB Cloud.

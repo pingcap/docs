@@ -5,11 +5,11 @@ summary: Learn how to create your TiDB Cloud cluster.
 
 # Create a TiDB Cloud Cluster
 
-This document describes how to create a TiDB Cloud cluster in the [TiDB Cloud console](https://console.tidb.io/).
+This document describes how to create a TiDB Cloud cluster in the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud).
 
 ## Before you begin
 
-If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/signup) to sign up for an account.
+If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/free-trial?provider_source=alicloud) to sign up for an account.
 
 - You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
 
@@ -17,7 +17,7 @@ If you do not have a TiDB Cloud account, click [here](https://console.tidb.io/si
 
 If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Cloud cluster as follows:
 
-1. Log in to the [TiDB Cloud console](https://console.tidb.io/), and then navigate to the [**Clusters**](https://console.tidb.io/clusters) page.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), and then navigate to the [**Clusters**](https://console.tidb.io/clusters) page.
 
 2. Click **Create Cluster**.
 
