@@ -253,9 +253,9 @@ To import the Parquet files to TiDB Cloud Starter, take the following steps:
 
     1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
-       > **Tip:**
-       >
-       > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > **Tip:**
+        >
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
@@ -275,21 +275,21 @@ To import the Parquet files to TiDB Cloud Starter, take the following steps:
 
 5. In the **Destination** section, select the target database and table.
 
-   When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding Parquet file. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
-   When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `oss://sampledata/ingest/TableName.01.parquet`.
+    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `oss://sampledata/ingest/TableName.01.parquet`.
 
-   You can also use wildcards to match the source files. For example:
+    You can also use wildcards to match the source files. For example:
 
     - `oss://[bucket_name]/[data_source_folder]/my-data?.parquet`: all Parquet files starting with `my-data` followed by one character (such as `my-data1.parquet` and `my-data2.parquet`) in that folder will be imported into the same target table.
 
     - `oss://[bucket_name]/[data_source_folder]/my-data*.parquet`: all Parquet files in the folder starting with `my-data` will be imported into the same target table.
 
-   Note that only `?` and `*` are supported.
+    Note that only `?` and `*` are supported.
 
-   > **Note:**
-   >
-   > The URI must contain the data source folder.
+    > **Note:**
+    >
+    > The URI must contain the data source folder.
 
 6. Click **Start Import**.
 
