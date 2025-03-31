@@ -114,8 +114,9 @@ To restore your TiDB Cloud cluster, follow these steps:
     1. Click **Restore to a New Cluster**.
     2. Enter a name for the new cluster.
     3. Choose the cluster plan for the new cluster.
-       - If you choose a Starter cluster, set a monthly spending limit.
-       - If you choose an Essential cluster, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
+
+        - If you choose a Starter cluster, set a monthly spending limit.
+        - If you choose an Essential cluster, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
 
     </div>
     <div label="Restore in-place">
