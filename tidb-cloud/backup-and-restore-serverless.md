@@ -1,21 +1,21 @@
 ---
-title: Back Up and Restore TiDB Cloud Starter Data
-summary: Learn how to back up and restore your TiDB Cloud Starter cluster.
+title: Back Up and Restore TiDB Cloud Data
+summary: Learn how to back up and restore your TiDB Cloud cluster.
 ---
 
-# Back Up and Restore TiDB Cloud Starter Data
+# Back Up and Restore TiDB Cloud Data
 
-This document describes how to back up and restore your TiDB Cloud Starter cluster data on TiDB Cloud.
+This document describes how to back up and restore your TiDB Cloud cluster data on TiDB Cloud.
 
 ## Automatic backups
 
-TiDB Cloud Starter automatically backs up your cluster data, allowing you to restore data from a backup snapshot to minimize data loss in the event of a disaster.
+TiDB Cloud automatically backs up your cluster data, allowing you to restore data from a backup snapshot to minimize data loss in the event of a disaster.
 
 ### Learn about the backup setting
 
-Automatic backup settings vary between free clusters and scalable clusters, as shown in the following table:
+Automatic backup settings vary between Starter clusters and Essential clusters, as shown in the following table:
 
-| Backup setting   | Free clusters | Scalable clusters |
+| Backup setting   | Starter clusters | Essential clusters |
 |------------------|--------------|------------------|
 | Backup Cycle     | Daily        | Daily            |
 | Backup Retention | 1 day        | 14 days          |
@@ -27,14 +27,14 @@ Automatic backup settings vary between free clusters and scalable clusters, as s
 
 - **Backup Time** is the time when the backup starts to be scheduled. Note that the final backup time might fall behind the configured backup time.
 
-    - Free clusters: the backup time is a randomly fixed time.
-    - Scalable clusters: you can configure the backup time to every half an hour. The default value is a randomly fixed time.
+    - Starter clusters: the backup time is a randomly fixed time.
+    - Essential clusters: you can configure the backup time to every half an hour. The default value is a randomly fixed time.
 
 ### Configure the backup setting
 
-To set the backup time for a scalable cluster, perform the following steps:
+To set the backup time for an Essential cluster, perform the following steps:
 
-1. Navigate to the **Backup** page of a TiDB Cloud Starter cluster.
+1. Navigate to the **Backup** page of a TiDB Cloud cluster.
 
 2. Click **Backup Settings**. This will open the **Backup Settings** window, where you can configure the automatic backup settings according to your requirements.
 
@@ -44,22 +44,22 @@ To set the backup time for a scalable cluster, perform the following steps:
 
 ## Restore
 
-TiDB Cloud Starter clusters offer restore functionality to help recover data in case of accidental loss or corruption.
+TiDB Cloud clusters offer restore functionality to help recover data in case of accidental loss or corruption.
 
 ### Restore mode
 
-TiDB Cloud Starter supports snapshot restore and point-in-time restore for your cluster.
+TiDB Cloud supports snapshot restore and point-in-time restore for your cluster.
 
 - **Snapshot Restore**: restores your cluster from a specific backup snapshot.
 
 - **Point-in-Time Restore (beta)**: restores your cluster to a specific time.
 
-    - Free clusters: not supported.
-    - Scalable clusters: restores to any time within the last 14 days, but not before the cluster creation time or after the current time minus one minute.
+    - Starter clusters: not supported.
+    - Essential clusters: restores to any time within the last 14 days, but not before the cluster creation time or after the current time minus one minute.
 
 ### Restore destination
 
-TiDB Cloud Starter supports restoring in-place and restoring to a new cluster.
+TiDB Cloud supports restoring in-place and restoring to a new cluster.
 
 **In-place restore**
 
@@ -77,7 +77,7 @@ Create and restore to the new cluster. Note the following:
 
 ### Perform the restore
 
-To restore your TiDB Cloud Starter cluster, follow these steps:
+To restore your TiDB Cloud cluster, follow these steps:
 
 1. Navigate to the **Backup** page of a cluster.
 
@@ -96,7 +96,7 @@ To restore your TiDB Cloud Starter cluster, follow these steps:
     </div>
     <div label="Point-in-Time Restore">
 
-    To restore to a specific point in time for a scalable cluster, take the following steps:
+    To restore to a specific point in time for an Essential cluster, take the following steps:
 
     1. Click **Point-in-Time Restore**.
     2. Select the date and time you want to restore to.
@@ -114,7 +114,9 @@ To restore your TiDB Cloud Starter cluster, follow these steps:
     1. Click **Restore to a New Cluster**.
     2. Enter a name for the new cluster.
     3. Choose the cluster plan for the new cluster.
-    4. If you choose a scalable cluster, set a monthly spending limit, and then configure advanced settings as needed. Otherwise, skip this step.
+
+        - If you choose a Starter cluster, set a monthly spending limit.
+        - If you choose an Essential cluster, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
 
     </div>
     <div label="Restore in-place">
@@ -131,4 +133,4 @@ Once the restore process begins, the cluster status changes to **Restoring**. Th
 ## Limitations
 
 - If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because data needs to be rebuilt in TiFlash.
-- Manual backups are not supported for TiDB Cloud Starter clusters.
+- Manual backups are not supported for TiDB Cloud clusters.
