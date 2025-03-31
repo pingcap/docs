@@ -57,7 +57,7 @@ For example, in a scenario with 3 million tables:
 
 By adding the suggested query conditions to the above SQL statements, memory consumption becomes negligible, and query time is reduced to milliseconds.
 
-## Handle high connection scenarios
+## Handle connection-intensive scenarios
 
 In SaaS multi-tenant scenarios, each user usually connects to TiDB to operate data in their own tenant (database). To save costs, users want TiDB nodes to support as many connections as possible.
 
@@ -67,7 +67,7 @@ In SaaS multi-tenant scenarios, each user usually connects to TiDB to operate da
 
 ## Use stale read carefully
 
-When you use [Stale Read](/stale-read.md), if the schema version used is too outdated, it might trigger a full load of historical schemas, significantly impacting performance. You can mitigate this issue by increasing the value of [`tidb_schema_version_cache_limit`](/system-variables.md#tidb_schema_version_cache_limit-new-in-v740) (for example, to `255`).
+When you use [Stale Read](/stale-read.md), if the schema version used is too outdated, it might trigger a full load of historical schemas, significantly impacting performance. You can mitigate this issue by increasing the value of [`tidb_schema_version_cache_limit`](/system-variables.md#tidb_schema_version_cache_limit-new-in-v740), for example, change it to `255`.
 
 ## Optimize BR backup and restore
 
