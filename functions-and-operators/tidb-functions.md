@@ -54,7 +54,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 
 > **Note:**
 >
-> This feature is not available on [TiDB Cloud Serverless](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [TiDB Cloud Starter](https://docs.tidb.io/tidbcloud/select-cluster-tier#tidb-cloud-starter) clusters.
 
 The `CURRENT_RESOURCE_GROUP()` function is used to show the resource group name that the current session is bound to. When the Resource control feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
 

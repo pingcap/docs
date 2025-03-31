@@ -9,7 +9,7 @@ This tutorial walks you through how to use [Jina AI](https://jina.ai/) to genera
 
 > **Note**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4) and [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless).
+> TiDB Vector Search is available for TiDB Self-Managed (TiDB >= v8.4), TiDB Cloud Starter, and TiDB Cloud Essential.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ To complete this tutorial, you need:
 
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Serverless cluster. Follow [creating a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB Cloud Starter cluster. Follow [creating a TiDB Cloud cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Run the sample app
 
@@ -53,7 +53,7 @@ pip install -r requirements.txt
 
 Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page. Then, obtain the cluster connection string and configure environment variables as follows:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

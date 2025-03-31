@@ -9,10 +9,6 @@ TiDB is a MySQL-compatible database, and [DBeaver Community](https://dbeaver.io/
 
 In this tutorial, you can learn how to connect to your TiDB cluster using DBeaver Community.
 
-> **Note:**
->
-> This tutorial is compatible with TiDB Cloud Serverless.
-
 ## Prerequisites
 
 To complete this tutorial, you need:
@@ -24,7 +20,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
@@ -32,7 +28,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
@@ -41,7 +37,7 @@ To complete this tutorial, you need:
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -66,9 +62,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 7. In the **Authentication (Database Native)** section, enter your **Username** and **Password**. An example is as follows:
 
-    ![Configure connection settings for TiDB Cloud Serverless](/media/develop/dbeaver-connection-settings-serverless.jpg)
+    ![Configure connection settings for TiDB Cloud Starter](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8. Click **Test Connection** to validate the connection to the TiDB Cloud Serverless cluster.
+8. Click **Test Connection** to validate the connection to the TiDB Cloud Starter cluster.
 
     If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 

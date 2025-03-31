@@ -1,25 +1,25 @@
 ---
-title: Import Local Files to TiDB Cloud Serverless
-summary: Learn how to import local files to TiDB Cloud Serverless.
+title: Import Local Files to TiDB Cloud Starter
+summary: Learn how to import local files to TiDB Cloud Starter.
 ---
 
-# Import Local Files to TiDB Cloud Serverless
+# Import Local Files to TiDB Cloud Starter
 
-You can import local files to TiDB Cloud Serverless directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
+You can import local files to TiDB Cloud Starter directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
 
 Currently, this method supports importing one CSV file for one task into either an existing empty table or a new table.
 
 ## Limitations
 
 - Currently, TiDB Cloud only supports importing a local file in CSV format within 250 MiB for one task.
-- Importing local files is supported only for TiDB Cloud Serverless clusters.
+- Importing local files is supported only for TiDB Cloud Starter clusters.
 - You cannot run more than one import task at the same time.
 
 ## Import local files
 
 1. Open the **Import** page for your target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
         > **Tip:**
         >
@@ -77,9 +77,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
     You can view the import progress on the **Import Task Detail** page. If there are warnings or failed tasks, you can check to view the details and solve them.
 
-9. After the import task is completed, you can click **Explore your data by SQL Editor** to query your imported data. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
-
-10. On the **Import** page, you can click **...** > **View** in the **Action** column to check the import task detail.
+9. On the **Import** page, you can click **...** > **View** in the **Action** column to check the import task detail.
 
 ## FAQ
 

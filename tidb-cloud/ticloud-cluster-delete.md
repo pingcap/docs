@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless delete`.
 
 # ticloud serverless delete
 
-Delete a TiDB Cloud Serverless cluster from your project:
+Delete a TiDB Cloud Starter cluster from your project:
 
 ```shell
 ticloud serverless delete [flags]
@@ -19,13 +19,13 @@ ticloud serverless rm [flags]
 
 ## Examples
 
-Delete a TiDB Cloud Serverless cluster in interactive mode:
+Delete a TiDB Cloud Starter cluster in interactive mode:
 
 ```shell
 ticloud serverless delete
 ```
 
-Delete a TiDB Cloud Serverless cluster in non-interactive mode:
+Delete a TiDB Cloud Starter cluster in non-interactive mode:
 
 ```shell
 ticloud serverless delete --cluster-id <cluster-id>

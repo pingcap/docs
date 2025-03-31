@@ -13,7 +13,7 @@ This document describes how to view the events for TiDB Cloud clusters using the
 
 To view the events on the Events page, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1. In the [TiDB Cloud console](https://console.tidb.io/), navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
     > **Tip:**
     >
@@ -42,8 +42,8 @@ TiDB Cloud logs the following types of cluster events:
 | ScaleChangefeed |   Scale the specification of a changefeed |  
 | FailedChangefeed |   Changefeed failures |  
 | ImportData |   Import data to a cluster |  
-| UpdateSpendingLimit |   Update spending limit of a TiDB Cloud Serverless scalable cluster |  
-| ResourceLimitation |   Update resource limitation of a TiDB Cloud Serverless cluster |  
+| UpdateSpendingLimit |   Update spending limit of a TiDB Cloud Starter scalable cluster |  
+| ResourceLimitation |   Update resource limitation of a TiDB Cloud Starter cluster |  
 
 For each event, the following information is logged:
 

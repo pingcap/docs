@@ -7,7 +7,7 @@ summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
 
 [Netlify](https://netlify.com/) is an all-in-one platform for automating modern web projects. It replaces your hosting infrastructure, continuous integration, and deployment pipeline with a single workflow and integrates dynamic functionality like serverless functions, user authentication, and form handling as your projects grow.
 
-This document describes how to deploy a fullstack app on Netlify with TiDB Cloud as the database backend. You can also learn how to use Netlify edge function with our TiDB Cloud serverless driver.
+This document describes how to deploy a fullstack app on Netlify with TiDB Cloud as the database backend. You can also learn how to use Netlify edge function with our TiDB Cloud Serverless Driver.
 
 ## Prerequisites
 
@@ -22,13 +22,13 @@ You are expected to have a Netlify account and CLI. If you do not have any, refe
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB Cloud Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB Cloud Starter cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
 
 One TiDB Cloud cluster can connect to multiple Netlify sites.
 
 ### All IP addresses allowed for traffic filter in TiDB Cloud
 
-TiDB Cloud Serverless clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
+TiDB Cloud Starter clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
 
 ## Step 1. Get the example project and the connection string
 
@@ -47,7 +47,7 @@ To help you get started quickly, TiDB Cloud provides a fullstack example app in 
 
 ### Get the TiDB Cloud connection string
 
-For a TiDB Cloud Serverless cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/).
+For a TiDB Cloud Starter cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://console.tidb.io/).
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">
@@ -92,7 +92,7 @@ For a TiDB Cloud Serverless cluster, you can get the connection string either fr
 </div>
 <div label="TiDB Cloud console">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
+1. In the [TiDB Cloud console](https://console.tidb.io/), go to the [**Clusters**](https://console.tidb.io/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
 
     - `${host}`
     - `${port}`
@@ -219,7 +219,7 @@ For a TiDB Cloud Serverless cluster, you can get the connection string either fr
 
 ## Use the edge function
 
-The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
+The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
 
 To use the edge function, take the following steps:
 
@@ -239,7 +239,7 @@ To use the edge function, take the following steps:
     export const config = { path: "/api/hello" };
     ```
 
-3. Set the `DATABASE_URL` environment variables. You can get the connection information from the [TiDB Cloud console](https://tidbcloud.com/).
+3. Set the `DATABASE_URL` environment variables. You can get the connection information from the [TiDB Cloud console](https://console.tidb.io/).
 
     ```shell
     netlify env:set DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'

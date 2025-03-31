@@ -11,7 +11,7 @@ In TiFlash, the columnar replicas are asynchronously replicated according to the
 
 <CustomContent platform="tidb-cloud">
 
-When you create a TiDB Cloud Serverless cluster, TiFlash is included in the cluster for columnar storage by default. 
+When you create a TiDB Cloud Starter cluster, TiFlash is included in the cluster for columnar storage by default. 
 
 </CustomContent>
 

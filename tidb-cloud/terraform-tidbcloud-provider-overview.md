@@ -19,7 +19,7 @@ If you are looking for a simple way to automate resource provisioning and your i
 
 ## Requirements
 
-- [A TiDB Cloud account](https://tidbcloud.com/free-trial)
+- [A TiDB Cloud account](https://console.tidb.io/free-trial)
 - [Terraform version](https://www.terraform.io/downloads.html) >= 1.0
 - [Go version](https://golang.org/doc/install) >= 1.18 (required only if you want to build [TiDB Cloud Terraform Provider](https://github.com/tidbcloud/terraform-provider-tidbcloud) locally)
 

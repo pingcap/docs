@@ -13,10 +13,6 @@ In this tutorial, you can learn how to use TiDB and GORM to accomplish the follo
 - Connect to your TiDB cluster using GORM.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
-> **Note:**
->
-> This tutorial works with TiDB Cloud Serverless.
-
 ## Prerequisites
 
 To complete this tutorial, you need:
@@ -29,7 +25,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
@@ -37,7 +33,7 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- (Recommended) Follow [Creating a TiDB Cloud Starter cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
@@ -59,7 +55,7 @@ cd tidb-golang-gorm-quickstart
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://console.tidb.io/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -99,7 +95,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-    TiDB Cloud Serverless requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
+    TiDB Cloud Starter requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
 
 7. Save the `.env` file.
 
@@ -137,7 +133,7 @@ func createDB() *gorm.DB {
 }
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster. TiDB Cloud Serverless requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster. TiDB Cloud Starter requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
 
 ### Insert data
 
