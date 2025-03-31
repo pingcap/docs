@@ -169,7 +169,7 @@ Next, you can compare the TiKV node number calculated according to data volume w
 
 ### TiKV node storage size
 
-The supported node storage of different TiKV vCPUs is as follows:
+The supported node storage sizes of different TiKV vCPUs are as follows:
 
 | TiKV vCPU | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
@@ -180,32 +180,26 @@ The supported node storage of different TiKV vCPUs is as follows:
 
 > **Note:**
 >
-> You cannot decrease the TiKV node storage after the cluster creation.
+> You cannot decrease the TiKV node storage size after the cluster creation.
 
 ### TiKV node storage types
 
 TiDB Cloud provides the following TiKV storage types for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters:
 
-#### Basic Type
+#### Basic storage
 
-The Basic Type is a general-purpose storage type that provides lower performance than the Standard Type.
+The Basic storage is a general-purpose storage type that provides lower performance than the Standard storage.
 
-The Basic Type is available for the following clusters:
+The Basic storage is available for the following clusters:
 
 - Existing clusters that are created before April 1, 2025. 
-- New clusters that are created with versions earlier than v7.5.5, v8.1.2, or v8.5.0.
+- New clusters that are created with TiDB versions earlier than v7.5.5, v8.1.2, or v8.5.0.
 
-#### Standard Type
+#### Standard storage
 
-The Standard Type is ideal for most workloads due to its balanced performance and cost efficiency. It offers better performance compared to the Basic Type by reserving ample disk resources for Raft logs. This reduces the impact of Raft I/O on data disk I/O, resulting in improved read and write performance for TiKV.
+The Standard storage is ideal for most workloads, providing a balance between performance and cost efficiency. Compared with the Basic storage, it offers better performance by reserving ample disk resources for Raft logs. This reduces the impact of Raft I/O on data disk I/O, improving read and write performance for TiKV.
 
-The Standard Type is available for new clusters created with versions v7.5.5, v8.1.2, or v8.5.0 or later.
-
-#### Performance Type（Coming soon）
-
-The Performance Type provides enhanced performance and stability, reducing P99 latency by up to 20% compared to the Basic Type. It allocates a dedicated high-performance disk for Raft logs, significantly boosting both performance and stability.
-
-This storage type will be available soon. 
+The Standard storage is available for new clusters created with TiDB versions v7.5.5, v8.1.2, or v8.5.0 or later.
 
 ## Size TiFlash
 
