@@ -138,7 +138,7 @@ The serverless technology is designed for multi-tenancy and the resources used b
 
 ### How does TiDB Cloud Starter ensure security?
 
-- Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to TiDB Cloud Starter, see [TLS Connection to TiDB Cloud Starter](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+- Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to TiDB Cloud Starter, see [TLS Connection to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md).
 - All persisted data on TiDB Cloud Starter is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
 
 ## Maintenance FAQ

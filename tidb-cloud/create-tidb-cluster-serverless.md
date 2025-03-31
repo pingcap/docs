@@ -48,7 +48,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 ## What's next
 
-After your cluster is created, follow the instructions in [Connect to TiDB Cloud Starter via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
+After your cluster is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
 
 > **Note:**
 >

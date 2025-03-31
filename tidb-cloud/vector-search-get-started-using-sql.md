@@ -23,7 +23,7 @@ This tutorial demonstrates how to get started with TiDB Vector Search just using
 To complete this tutorial, you need:
 
 - [MySQL command-line client](https://dev.mysql.com/doc/refman/8.4/en/mysql.html) (MySQL CLI) installed on your machine.
-- A TiDB Cloud Starter cluster. Follow [creating a TiDB Cloud Starter cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB Cloud Starter cluster. Follow [creating a TiDB Cloud cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Get started
 

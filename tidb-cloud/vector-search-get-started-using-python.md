@@ -19,7 +19,7 @@ To complete this tutorial, you need:
 
 - [Python 3.8 or higher](https://www.python.org/downloads/) installed.
 - [Git](https://git-scm.com/downloads) installed.
-- A TiDB Cloud Starter cluster. Follow [creating a TiDB Cloud Starter cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB Cloud Starter cluster. Follow [creating a TiDB Cloud cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Get started
 
