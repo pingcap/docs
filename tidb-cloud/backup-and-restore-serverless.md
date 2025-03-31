@@ -32,7 +32,7 @@ Automatic backup settings vary between Starter clusters and Essential clusters, 
 
 ### Configure the backup setting
 
-To set the backup time for a essential cluster, perform the following steps:
+To set the backup time for an Essential cluster, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Cloud cluster.
 
@@ -96,10 +96,10 @@ To restore your TiDB Cloud cluster, follow these steps:
     </div>
     <div label="Point-in-Time Restore">
 
-    To restore to a specific point in time for a essential cluster, take the following steps:
+    To restore to a specific point in time for an Essential cluster, take the following steps:
 
-    3. Click **Point-in-Time Restore**.
-    4. Select the date and time you want to restore to.
+    1. Click **Point-in-Time Restore**.
+    2. Select the date and time you want to restore to.
 
     </div>
     </SimpleTab>
@@ -114,8 +114,8 @@ To restore your TiDB Cloud cluster, follow these steps:
     1. Click **Restore to a New Cluster**.
     2. Enter a name for the new cluster.
     3. Choose the cluster plan for the new cluster.
-       1. If you choose a Starter cluster, set a monthly spending limit, and then configure advanced settings as needed.
-       2. If you choose a Essential cluster, set the min rcu and max rcu, and then configure advanced settings as needed.
+       - If you choose a Starter cluster, set a monthly spending limit.
+       - If you choose an Essential cluster, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
 
     </div>
     <div label="Restore in-place">
