@@ -13,10 +13,6 @@ In this tutorial, you can learn how to use TiDB and PyMySQL to accomplish the fo
 - Connect to your TiDB cluster using PyMySQL.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
-> **Note:**
->
-> This tutorial works with TiDB Cloud Starter clusters.
-
 ## Prerequisites
 
 To complete this tutorial, you need:

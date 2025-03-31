@@ -7,7 +7,7 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [TiDB Cloud Starter clusters](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
+> [TiDB Cloud](/tidb-cloud/select-cluster-tier.md#tidb-cloud-starter) are free until April 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
 
 TiDB Cloud charges according to the resources that you consume. You can visit the [TiDB Cloud Starter Pricing Details](https://www.pingcap.com/tidb-serverless-pricing-details/) pages to get more information about the pricing.
 
@@ -19,7 +19,7 @@ After you set up the payment method, TiDB Cloud will generate an invoice once yo
 
 > **Note:**
 >
-> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+> If you sign up for TiDB Cloud through [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your Alibaba cloud account, AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
 After you contact our sales for receiving an invoice on a monthly basis, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
 

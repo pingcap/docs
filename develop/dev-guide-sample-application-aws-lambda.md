@@ -14,10 +14,6 @@ In this tutorial, you can learn how to use TiDB and mysql2 in AWS Lambda Functio
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 - Deploy your AWS Lambda Function.
 
-> **Note**
->
-> This tutorial works with TiDB Cloud Starter.
-
 ## Prerequisites
 
 To complete this tutorial, you need:

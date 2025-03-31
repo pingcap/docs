@@ -9,10 +9,6 @@ TiDB is a MySQL-compatible database, and [DBeaver Community](https://dbeaver.io/
 
 In this tutorial, you can learn how to connect to your TiDB cluster using DBeaver Community.
 
-> **Note:**
->
-> This tutorial is compatible with TiDB Cloud Starter.
-
 ## Prerequisites
 
 To complete this tutorial, you need:

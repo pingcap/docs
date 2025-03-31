@@ -9,19 +9,19 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flex
 
 TiDB is MySQL-compatible, making it easy to migrate and work with existing applications, while offering seamless scalability to handle everything from small workloads to massive, high-performance clusters. It supports both transactional (OLTP) and analytical (OLAP) workloads in one system, simplifying operations and enabling real-time insights.
 
-TiDB Cloud provides **TiDB Cloud Starter** for auto-scaling, cost-efficient workloads. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
+TiDB Cloud provides **TiDB Cloud Starter** for auto-scaling, cost-efficient workloads and **TiDB Cloud Essential** for production ready workloads with provisoned capacity. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
 
-## TiDB Cloud Starter
+## TiDB Cloud
 
-TiDB Cloud Starter is a fully managed serverless solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. TiDB Cloud Starter offers two types of high availability to address varying operational requirements.
+TiDB Cloud is a fully managed solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. TiDB Cloud Essential offers two types of high availability to address varying operational requirements.
 
 By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
 
-![TiDB Cloud Starter zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+![TiDB Cloud Essential zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
 
 For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
 
-![TiDB Cloud Starter regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+![TiDB Cloud Essential regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
 
 ## TiDB Cloud console
 
