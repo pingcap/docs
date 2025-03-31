@@ -11,7 +11,7 @@ TiDB Cloud collects and displays a full set of standard metrics of your cluster 
 
 To view the metrics on the Metrics page, take the following steps:
 
-1. In the [TiDB Cloud console](https://console.tidb.io/), navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
     > **Tip:**
     >

@@ -30,7 +30,7 @@ You will receive a verification email for TiDB Cloud. To complete the whole regi
 
 To log into TiDB Cloud using email and password, take the following steps:
 
-1. Go to the TiDB Cloud [login](https://console.tidb.io/) page.
+1. Go to the TiDB Cloud [login](https://console.tidb.io/signup?provider_source=alicloud) page.
 
 2. Fill in your email and password.
 
@@ -62,7 +62,7 @@ The default password policy is as follows:
 
 If you forget your password, you can reset it by email as follows:
 
-1. Go to the TiDB Cloud [login](https://console.tidb.io/) page.
+1. Go to the TiDB Cloud [login](https://console.tidb.io/signup?provider_source=alicloud) page.
 
 2. Click **Forgot password**, and then check your email for the link to reset the password.
 

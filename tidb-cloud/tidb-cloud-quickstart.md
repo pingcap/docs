@@ -20,7 +20,7 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
     You can sign up with your email and password to manage your password using TiDB Cloud, or choose to sign in with your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
-2. [Log in](https://console.tidb.io/) to your TiDB Cloud account.
+2. [Log in](https://console.tidb.io/signup?provider_source=alicloud) to your TiDB Cloud account.
 
     The [**Clusters**](https://console.tidb.io/clusters) page is displayed by default.
 

@@ -19,7 +19,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 1. Open the **Import** page for your target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
         > **Tip:**
         >

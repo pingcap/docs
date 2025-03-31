@@ -35,7 +35,7 @@ TiDB Cloud regularly updates this list and uses the reserved IP address **169.25
 
 This section describes how to manage firewall rules for a TiDB Cloud Starter cluster. With a public endpoint, the connections to the TiDB Cloud Starter cluster are restricted to the IP addresses specified in the firewall rules.
 
-1. In the [TiDB Cloud console](https://console.tidb.io/), select the TiDB Cloud Starter cluster on which you want to add firewall rules.
+1. In the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud), select the TiDB Cloud Starter cluster on which you want to add firewall rules.
 
 2. In the left navigation pane, click **Networking** to open the Networking page for the TiDB Cloud Starter cluster.
 
