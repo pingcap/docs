@@ -37,35 +37,7 @@ This document describes how to import the sample data into TiDB Cloud Serverless
 4. Click **Connect** > **Start Import**.
 
 </div>
-<div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
-
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
-
-        > **Tip:**
-        >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
-
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
-
-2. Click **Import Data** in the upper-right corner.
-
-    If this is your first time importing data into this cluster, select **Import From GCS**.
-
-3. On the **Import Data from Google Cloud Storage** page, configure the following source data information:
-
-    - **Import File Count**: for the sample data, select **Multiple files**.
-    - **Included Schema Files**: for the sample data, select **Yes**.
-    - **Data Format**: select **SQL**.
-    - **Folder URI** or **File URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
-    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
-
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region.
-
-4. Click **Connect** > **Start Import**.
-
-</div>
 </SimpleTab>
 
 When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud Serverless.
