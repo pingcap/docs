@@ -5,7 +5,7 @@ summary: Learn best practices for TiDB in SaaS multi-tenant scenarios.
 
 # Best Practices for SaaS Multi-Tenant Scenarios
 
-This document introduces best practices for TiDB in SaaS (Software as a Service) multi-tenant environments, especially in scenarios where the **number of tables in a single cluster exceeds one million**. By making reasonable configurations and choices, you can ensure efficient and stable operation of TiDB in SaaS scenarios while reducing resource consumption and costs.
+This document introduces best practices for TiDB in SaaS (Software as a Service) multi-tenant environments, especially in scenarios where the **number of tables in a single cluster exceeds one million**. By making reasonable configurations and choices, you can enable TiDB to run efficiently and stably in SaaS scenarios while reducing resource consumption and costs.
 
 > **Note:**
 >
@@ -13,7 +13,7 @@ This document introduces best practices for TiDB in SaaS (Software as a Service)
 
 ## TiDB hardware requirements
 
-It is recommended to use high-memory TiDB instances. For example, 32 GiB or more memory for 1 million tables, and 64 GiB or more memory for 3 million tables. High-memory TiDB instances can allocate more cache space for Infoschema, Statistics, and execution plan caches, achieving a higher cache hit rate to improve business performance. Additionally, larger memory can effectively mitigate fluctuation and stability issues caused by TiDB GC.
+It is recommended to use high-memory TiDB instances. For example, 32 GiB or more memory for 1 million tables, and 64 GiB or more memory for 3 million tables. High-memory TiDB instances can allocate more cache space for Infoschema, Statistics, and execution plan caches, thereby improving cache hit rates and consequently enhancing business performance. Additionally, larger memory can effectively mitigate fluctuation and stability issues caused by TiDB GC.
 
 The following are recommended hardware configurations for TiKV and PD:
 
