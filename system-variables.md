@@ -5254,6 +5254,7 @@ SHOW WARNINGS;
 - Controls the type of predicate used by the generated Filter operator. Currently, only one type is supported: `IN`. For more information, see [Runtime Filter type](/runtime-filter.md#runtime-filter-type).
 
 ### tidb_enable_point_get_cache
+
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): YES
 - Type: Boolean
