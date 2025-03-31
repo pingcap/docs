@@ -54,7 +54,7 @@ The fields are explained as follows:
 - `start`: the start timestamp of the log backup task.
 - `end`: the end timestamp of the log backup task. Currently, this field does not take effect.
 - `storage`: the URI of the external storage for the log backup.
-- `speed(est.)`: the current data transfer rate of the log backup. This value is estimated based on recent samples over a few seconds. For more accurate traffic statistics, you can check the `Log Backup` row in the `tikv-details` dashboard at Grafana.
+- `speed(est.)`: the current data transfer rate of the log backup. This value is estimated based on traffic samples taken in the past few seconds. For more accurate traffic statistics, you can check the `Log Backup` row in the **[TiKV-Details](/grafana-tikv-dashboard.md#tikv-details-dashboard)** dashboard at Grafana.
 - `checkpoint[global]`: the current progress of the log backup. You can use PITR to restore to a point in time before this timestamp.
 
 If the log backup task is paused, the `log status` command outputs additional fields to display the details of the pause. For example:
@@ -78,11 +78,11 @@ The meanings of these additional fields are as follows:
 - `pause-operator-pid`: the PID of the process that executes the pause operation.
 - `pause-payload`: additional information attached when the task is paused.
 
-If the error occurs on TiKV, you might also see additional error reports from TiKV:
+If the pause is due to an error in TiKV, you might also see additional error reports from TiKV:
 
-- `error[store=*]`: the error code of the error that occurs on TiKV.
+- `error[store=*]`: the error code on TiKV.
 - `error-happen-at[store=*]`: the time when the error occurs on TiKV.
-- `error-message[store=*]`: the message of the error that occurs on TiKV.
+- `error-message[store=*]`: the error message on TiKV.
 
 ### Run full backup regularly
 
