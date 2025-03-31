@@ -21,23 +21,23 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 2. Click **Create Cluster**.
 
-3. Select a cluster plan. TiDB Cloud provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Starter** and **Essential**. You can start with a Starter cluster and later upgrade to a Essential cluster as your needs grow. To create a scalable cluster
+3. Select a cluster plan. TiDB Cloud provides two [cluster plans](/tidb-cloud/select-cluster-tier.md#cluster-plans): **Starter** and **Essential**. You can start with a Starter cluster and later upgrade to an Essential cluster as your needs grow.
 
 4. The cloud provider is Alibaba Cloud. You can select an Alibaba Cloud region where you want to host your cluster.
 
 5. Update the default cluster name if necessary.
 
-6. Update the Capacity of the cluster. 
+6. Update the capacity of the cluster. 
 
-    - Starter Plan:
+    - Starter plan:
     
-        - You can update the spending limit for your cluster. If the spending limit is set to 0, the cluster remains in the free tier. If the spending limit is greater than 0, you’ll need to add a credit card before creating the cluster.
+        - You can update the spending limit for your cluster. If the spending limit is set to 0, the cluster remains in the free tier. If the spending limit is greater than 0, you need to add a credit card before creating the cluster.
     
         - By default, each organization can create up to five [free Starter clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create additional Starter clusters, you must add a credit card and specify a spending limit.
 
-    - Essential Plan:
+    - Essential plan:
 
-        - You must define both a minimum and maximum number of Request Capacity Units (RCUs) for your cluster.
+        - You must specify both a minimum and maximum number of Request Capacity Units (RCUs) for your cluster.
 
         - RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your cluster within this range based on demand.
 

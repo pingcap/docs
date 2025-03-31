@@ -5,7 +5,7 @@ summary: Learn about the high availability architecture of TiDB Cloud. Discover 
 
 # High Availability in TiDB Cloud
 
-TiDB Cloud  is designed with robust mechanisms to maintain high availability and data durability by default, preventing single points of failure and ensuring continuous service even in the face of disruptions. As a fully managed service based on the battle-tested TiDB Open Source product, it inherits TiDB's core high availability (HA) features and augments them with additional cloud-native capabilities.
+TiDB Cloud is designed with robust mechanisms to maintain high availability and data durability by default, preventing single points of failure and ensuring continuous service even in the face of disruptions. As a fully managed service based on the battle-tested TiDB Open Source product, it inherits TiDB's core high availability (HA) features and augments them with additional cloud-native capabilities.
 
 ## Overview
 

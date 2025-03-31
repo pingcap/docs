@@ -28,13 +28,13 @@ This tutorial guides you through an easy way to get started with TiDB Cloud. You
         1. Click **Create Cluster**.
         2. On the **Create Cluster** page, **Starter** is selected by default. Select the target region for your cluster, update the default cluster name if necessary, select your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans), and then click **Create**. Your TiDB Cloud Starter cluster will be created in approximately 30 seconds.
 
-## Step 2: Connect your TiDB cluster
+## Step 2: Connect to your TiDB cluster
 
 After your TiDB Cloud Starter cluster is created, you can connect to it using different methods depending on your preference:
 
-1. On the cluster overview page, click **Connect** in the top right corner.
+1. On the cluster overview page, click **Connect** in the upper-right corner.
 
-2. Choose connection options from **Connect With** drop down list. And follow the tutorials in [Developer Guide Overview](/develop/dev-guide-overview.md) to connect your cluster.
+2. In the displayed dialog, choose a connection option from the **Connect With** drop-down list. Then, follow the tutorials in [Developer Guide](/develop/dev-guide-overview.md) to connect to your cluster.
 
 
 ## What's next

@@ -19,7 +19,7 @@ After you set up the payment method, TiDB Cloud will generate an invoice once yo
 
 > **Note:**
 >
-> If you sign up for TiDB Cloud through [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your Alibaba cloud account, AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+> If you sign up for TiDB Cloud through [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your Alibaba cloud account, AWS account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
 After you contact our sales for receiving an invoice on a monthly basis, TiDB Cloud will generate the invoice for the previous month at the beginning of each month.
 

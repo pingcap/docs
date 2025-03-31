@@ -9,7 +9,7 @@ TiDB Cloud Backup & Restore features are designed to safeguard your data and ens
 
 ## Automatic backup
 
-For TiDB Cloud Starter clusters, snapshot backups are taken automatically by default and stored according to your backup retention policy.
+For TiDB Cloud clusters, snapshot backups are taken automatically by default and stored according to your backup retention policy.
 
 For more information, see [Automatic backups for TiDB Cloud clusters](/tidb-cloud/backup-and-restore-serverless.md#automatic-backups).
 

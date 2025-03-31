@@ -11,7 +11,7 @@ Throughout this tutorial, you will develop this AI application using [TiDB Vecto
 
 > **Note**
 >
-> TiDB Vector Search is only available for TiDB Self-Managed (TiDB >= v8.4), TiDB Cloud Starterand TiDB Cloud Essential.
+> TiDB Vector Search is available for TiDB Self-Managed (TiDB >= v8.4), TiDB Cloud Starter, and TiDB Cloud Essential.
 
 ## Prerequisites
 
