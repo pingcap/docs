@@ -40,5 +40,4 @@ After your TiDB Cloud Starter cluster is created, you can connect to it using di
 ## What's next
 
 - To learn how to connect to your cluster using different methods, see [Connect to a TiDB Cloud Starter cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
-- For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
