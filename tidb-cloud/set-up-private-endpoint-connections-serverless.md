@@ -54,5 +54,7 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
+
     For the host, go to the **Endpoint Details** page in Alibaba Cloud, and copy the **Domain Name of Endpoint Service** as your host.
+
 5. Connect to your cluster with the connection string.
