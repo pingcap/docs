@@ -52,7 +52,7 @@ For example, in a scenario with 3 million tables:
 - Executing the following SQL statement takes about 20 minutes.
 
     ```sql
-    SELECT COUNT(*) FROM information_schema.views
+    SELECT COUNT(*) FROM information_schema.views;
     ```
 
 By adding the suggested query conditions to the above SQL statements, memory consumption becomes negligible, and query time is reduced to milliseconds.
