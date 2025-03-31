@@ -13,7 +13,7 @@ This document introduces best practices for TiDB in SaaS (Software as a Service)
 
 ## TiDB hardware requirements
 
-It is recommended to use high-memory TiDB instances. For example, 32 GiB or more memory for 1 million tables, and 64 GiB or more memory for 3 million tables. High-memory TiDB instances can allocate more cache space for Infoschema, Statistics, and execution plan caches, achieving a higher cache hit rate to improve business performance. Additionally, large memory can effectively mitigate fluctuation and stability issues caused by TiDB GC.
+It is recommended to use high-memory TiDB instances. For example, 32 GiB or more memory for 1 million tables, and 64 GiB or more memory for 3 million tables. High-memory TiDB instances can allocate more cache space for Infoschema, Statistics, and execution plan caches, achieving a higher cache hit rate to improve business performance. Additionally, larger memory can effectively mitigate fluctuation and stability issues caused by TiDB GC.
 
 The following are recommended hardware configurations for TiKV and PD:
 
@@ -43,8 +43,17 @@ When querying system tables, add conditions such as `TABLE_SCHEMA`, `TABLE_NAME`
 
 For example, in a scenario with 3 million tables:
 
-- Executing `select count(*) from information_schema.tables` consumes about 8 GiB of memory.
-- Executing `select count(*) from information_schema.views` takes about 20 minutes.
+- Executing the following SQL statement consumes about 8 GiB of memory.
+
+    ```sql
+    SELECT COUNT(*) FROM information_schema.tables;
+    ```
+
+- Executing the following SQL statement takes about 20 minutes.
+
+    ```sql
+    SELECT COUNT(*) FROM information_schema.views
+    ```
 
 By adding the suggested query conditions to the above SQL statements, memory consumption becomes negligible, and query time is reduced to milliseconds.
 
