@@ -184,13 +184,16 @@ The supported node storage sizes of different TiKV vCPUs are as follows:
 
 ### TiKV node storage types
 
-TiDB Cloud provides the following TiKV storage types for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters:
+TiDB Cloud provides the following TiKV storage types for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS:
+
+- [Basic storage](#basic-storage)
+- [Standard storage](#standard-storage)
 
 #### Basic storage
 
 The Basic storage is a general-purpose storage type that provides lower performance than the Standard storage.
 
-The Basic storage is available for the following clusters:
+The Basic storage type is applied automatically to the following clusters hosted on AWS:
 
 - Existing clusters that are created before April 1, 2025. 
 - New clusters that are created with TiDB versions earlier than v7.5.5, v8.1.2, or v8.5.0.
@@ -199,7 +202,7 @@ The Basic storage is available for the following clusters:
 
 The Standard storage is ideal for most workloads, providing a balance between performance and cost efficiency. Compared with the Basic storage, it offers better performance by reserving ample disk resources for Raft logs. This reduces the impact of Raft I/O on data disk I/O, improving read and write performance for TiKV.
 
-The Standard storage is available for new clusters created with TiDB versions v7.5.5, v8.1.2, or v8.5.0 or later.
+The Standard storage type is applied automatically to new clusters hosted on AWS and created with TiDB versions v7.5.5, v8.1.2, v8.5.0, or later.
 
 ## Size TiFlash
 
