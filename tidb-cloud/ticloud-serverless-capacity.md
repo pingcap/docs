@@ -13,13 +13,13 @@ ticloud serverless capacity [flags]
 
 ## Examples
 
-Set capacity for a TiDB Cloud Serverless cluster in interactive mode:
+Set capacity for a TiDB Cloud Starter cluster in interactive mode:
 
 ```shell
  ticloud serverless capacity
 ```
 
-Set capacity for a TiDB Cloud Serverless cluster in non-interactive mode:
+Set capacity for a TiDB Cloud Starter cluster in non-interactive mode:
 
 ```shell
 ticloud serverless capacity -c <cluster-id> --max-rcu <maximum-rcu> --min-rcu <minimum-rcu>
