@@ -53,6 +53,11 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 * In v5.1 and later versions, setting the replicas for the system tables is no longer supported. Before upgrading the cluster, you need to clear the replicas of the relevant system tables. Otherwise, you cannot modify the replica settings of the system tables after you upgrade the cluster to a later version.
 
+* Currently, when you use TiCDC to replicate tables to a downstream TiDB cluster, creating TiFlash replicas for the tables is not supported, which means that TiCDC does not support replicating TiFlash-related DDL statements, such as:
+
+    * `ALTER TABLE table_name SET TIFLASH REPLICA count;`
+    * `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
+
 ### Check replication progress
 
 You can check the status of the TiFlash replicas of a specific table using the following statement. The table is specified using the `WHERE` clause. If you remove the `WHERE` clause, you will check the replica status of all tables.
@@ -102,6 +107,8 @@ Examples:
 > - If you create tables in this database **after** the completion of the statement execution, TiFlash replicas are not created automatically for these new tables.
 >
 > - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
+
+> - You can control the number of tables allowed to remain unavailable during execution by setting the [`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60) system variable. Lowering this value helps reduce the pressure on the cluster during replication. Note that this limit is not real-time, so it is still possible for the number of unavailable tables to exceed the limit after the setting is applied.
 
 ### Check replication progress
 
