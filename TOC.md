@@ -165,13 +165,8 @@
   - Upgrade
     - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
-<<<<<<< HEAD
-    - [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md)
-=======
-    - [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md)
     - [Migrate and Upgrade a TiDB Cluster](/tidb-upgrade-migration-guide.md)
-    - [TiFlash Upgrade Guide](/tiflash-upgrade-guide.md)
->>>>>>> 4986a975b2 (add tidb-upgrade-migration-guide (#20688))
+    - [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
