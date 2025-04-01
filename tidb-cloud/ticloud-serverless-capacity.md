@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless capacity`.
 
 # ticloud serverless capacity
 
-Set capacity for a TiDB Cloud Serverless cluster
+Set the capacity, in terms of maximum and minimum Request Capacity Units (RCUs), for a TiDB Cloud Starter cluster.
 
 ```shell
 ticloud serverless capacity [flags]
@@ -32,8 +32,8 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                    | Description                                  | Required | Note                                                 |
 |-------------------------|----------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Specifies the ID of the cluster.             | Yes      | Only works in non-interactive mode.                  |
-| --max-rcu int32         | Maximum RCU for the cluster, at most 100000. | No       | Only works in non-interactive mode.                  |
-| --min-rcu int32         | Minimum RCU for the cluster, at least 2000.  | No       | Only works in non-interactive mode.                  |
+| --max-rcu int32         | Specifies the maximum Request Capacity Units (RCUs) for the cluster, up to 100000. | No       | Only works in non-interactive mode.                  |
+| --min-rcu int32         | Specifies the minimum Request Capacity Units (RCUs) for the cluster, at least 2000.  | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Shows help information for this command.     | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
