@@ -167,9 +167,9 @@ Therefore, 7 TiKV nodes (8 vCPU, 32 GiB) are recommended for you according to yo
 
 Next, you can compare the TiKV node number calculated according to data volume with the number calculated according to your expected performance, and take the larger one as a recommended number of your TiKV nodes.
 
-### TiKV node storage
+### TiKV node storage size
 
-The supported node storage of different TiKV vCPUs is as follows:
+The supported node storage sizes of different TiKV vCPUs are as follows:
 
 | TiKV vCPU | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
@@ -180,7 +180,29 @@ The supported node storage of different TiKV vCPUs is as follows:
 
 > **Note:**
 >
-> You cannot decrease the TiKV node storage after the cluster creation.
+> You cannot decrease the TiKV node storage size after the cluster creation.
+
+### TiKV node storage types
+
+TiDB Cloud provides the following TiKV storage types for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS:
+
+- [Basic storage](#basic-storage)
+- [Standard storage](#standard-storage)
+
+#### Basic storage
+
+The Basic storage is a general-purpose storage type that provides lower performance than the Standard storage.
+
+The Basic storage type is applied automatically to the following clusters hosted on AWS:
+
+- Existing clusters that are created before April 1, 2025. 
+- New clusters that are created with TiDB versions earlier than v7.5.5, v8.1.2, or v8.5.0.
+
+#### Standard storage
+
+The Standard storage is ideal for most workloads, providing a balance between performance and cost efficiency. Compared with the Basic storage, it offers better performance by reserving ample disk resources for Raft logs. This reduces the impact of Raft I/O on data disk I/O, improving read and write performance for TiKV.
+
+The Standard storage type is applied automatically to new clusters hosted on AWS and created with TiDB versions v7.5.5, v8.1.2, v8.5.0, or later.
 
 ## Size TiFlash
 
