@@ -374,7 +374,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.1.0](https://docs-archive.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0).
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs-archive.pingcap.com/tidb/v6.2/release-6.2.0).
 
 **API changes**
 
