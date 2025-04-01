@@ -560,6 +560,7 @@
     - [logout](/tidb-cloud/ticloud-auth-logout.md)
     - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
   - serverless
+    - [capacity](/tidb-cloud/ticloud-serverless-capacity.md)
     - [create](/tidb-cloud/ticloud-cluster-create.md)
     - [delete](/tidb-cloud/ticloud-cluster-delete.md)
     - [describe](/tidb-cloud/ticloud-cluster-describe.md)
@@ -568,7 +569,6 @@
     - [spending-limit](/tidb-cloud/ticloud-serverless-spending-limit.md)
     - [region](/tidb-cloud/ticloud-serverless-region.md)
     - [shell](/tidb-cloud/ticloud-serverless-shell.md)
-    - [capacity](/tidb-cloud/ticloud-serverless-capacity.md)
     - branch
       - [create](/tidb-cloud/ticloud-branch-create.md)
       - [delete](/tidb-cloud/ticloud-branch-delete.md)
