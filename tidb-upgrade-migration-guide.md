@@ -13,11 +13,11 @@ This document describes how to migrate and upgrade a TiDB cluster (also known as
 
 The core workflow for migration and upgrade is as follows:
 
-1. **Pre-upgrade check**: verify cluster status and assess feasibility.
+1. **Pre-check risks**: verify cluster status and assess feasibility.
 2. **Prepare the new cluster**: create a new cluster from a full backup of the old cluster and upgrade it to the target version.
-3. **Incremental replication**: establish a forward data replication channel using TiCDC.
-4. **Switchover and validation**: perform multi-dimensional verification, switch business traffic to the new cluster, and set up a TiCDC rollback channel.
-5. **Post-upgrade monitoring**: maintain the rollback channel. After the observation period, clean up the environment.
+3. **Replicate incremental data**: establish a forward data replication channel using TiCDC.
+4. **Switch and verify**: perform multi-dimensional verification, switch business traffic to the new cluster, and set up a TiCDC rollback channel.
+5. **Observe status**: maintain the rollback channel. After the observation period, clean up the environment.
 
 **Rollback plan**: if the new cluster encounters issues during the migration and upgrade process, you can switch business traffic back to the original cluster at any time.
 
