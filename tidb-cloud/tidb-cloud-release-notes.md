@@ -21,13 +21,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - **Resource isolation**:
 
         - Group TiDB nodes into logically isolated units, ensuring workloads in one group do not affect other groups.
-
         - Prevent resource contention between applications or business units.
 
     - **Simplified management**:
 
         - Manage all node groups within a single cluster, reducing operational overhead.
-
         - Scale groups independently based on demand.
 
   For more information about the benefits, see [the technical blog](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/). To get started, see [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md).
