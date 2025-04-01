@@ -108,7 +108,7 @@ Examples:
 >
 > - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
 
-> - You can control the number of tables allowed to remain unavailable during execution by setting the [`tidb_batch_pending_tiflash_count`](/system-variables.md/#tidb_batch_pending_tiflash_count-new-in-v60) system variable. Lowering this value helps reduce the pressure on the cluster during replication. Note that this limit is not real-time, so it is still possible for the number of unavailable tables to exceed the limit after the setting is applied.
+> - You can control the number of tables allowed to remain unavailable during execution by setting the [`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60) system variable. Lowering this value helps reduce the pressure on the cluster during replication. Note that this limit is not real-time, so it is still possible for the number of unavailable tables to exceed the limit after the setting is applied.
 
 ### Check replication progress
 
