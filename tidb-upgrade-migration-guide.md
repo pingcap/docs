@@ -7,17 +7,17 @@ summary: Learn how to migrate and upgrade a TiDB cluster using BR for full backu
 
 This document describes how to migrate and upgrade a TiDB cluster (also known as a blue-green upgrade) using [BR](/br/backup-and-restore-overview.md) for full backup and restore, along with [TiCDC](/ticdc/ticdc-overview.md) for incremental data replication. This solution uses dual-cluster redundancy and incremental replication to enable smooth traffic switchover and fast rollback, providing a reliable and low-risk upgrade path for critical systems. It is recommended to regularly upgrade the database version to continuously benefit from performance improvements and new features, helping you maintain a secure and efficient database system. The key advantages of this solution include:
 
-- **Controllable risk**: supports rollback to the old version cluster within minutes, ensuring business continuity.
+- **Controllable risk**: supports rollback to the original cluster within minutes, ensuring business continuity.
 - **Data integrity**: uses a multi-stage verification mechanism to prevent data loss.
 - **Minimal business impact**: requires only a brief maintenance window for the final switchover.
 
 The core workflow for migration and upgrade is as follows:
 
-1. **Pre-check risks**: verify cluster status and assess feasibility.
+1. **Pre-check risks**: verify cluster status and solution feasibility.
 2. **Prepare the new cluster**: create a new cluster from a full backup of the old cluster and upgrade it to the target version.
 3. **Replicate incremental data**: establish a forward data replication channel using TiCDC.
-4. **Switch and verify**: perform multi-dimensional verification, switch business traffic to the new cluster, and set up a TiCDC rollback channel.
-5. **Observe status**: maintain the rollback channel. After the observation period, clean up the environment.
+4. **Switch and verify**: perform multi-dimensional verification, switch business traffic to the new cluster, and set up a TiCDC reverse replication channel.
+5. **Observe status**: maintain the reverse replication channel. After the observation period, clean up the environment.
 
 **Rollback plan**: if the new cluster encounters issues during the migration and upgrade process, you can switch business traffic back to the original cluster at any time.
 
@@ -102,7 +102,7 @@ To migrate full data to the new cluster, take the following steps:
     tiup br:${cluster_version} restore full --pd ${pd_host}:${pd_port} -s ${backup_location} --with-sys-table
     ```
 
-### 3. Upgrade the new cluster to target version
+### 3. Upgrade the new cluster to the target version
 
 To save time, you can perform an offline upgrade using the following commands. For more upgrade methods, see [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md).
 
@@ -291,13 +291,13 @@ Additionally, you can scale out the new cluster to handle expected workloads and
 
 At this point, business traffic has successfully switched to the new cluster, and the TiCDC reverse replication channel is established.
 
-### 3. Emergency rollback
+### 3. Execute emergency rollback
 
 The rollback plan is as follows:
 
 - Check data consistency between the new and old clusters regularly to ensure the reverse replication link is operating properly.
 - Monitor the system for a specified period, such as one week. If issues occur, switch back to the old cluster.
-- After the monitoring period, remove the reverse replication link and delete the old cluster.
+- After the observation period, remove the reverse replication link and delete the old cluster.
 
 The following introduces the usage scenario and steps for an emergency rollback, which redirects traffic back to the old cluster:
 
