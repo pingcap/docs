@@ -568,6 +568,7 @@
     - [spending-limit](/tidb-cloud/ticloud-serverless-spending-limit.md)
     - [region](/tidb-cloud/ticloud-serverless-region.md)
     - [shell](/tidb-cloud/ticloud-serverless-shell.md)
+    - [capacity](/tidb-cloud/ticloud-serverless-capacity.md)
     - branch
       - [create](/tidb-cloud/ticloud-branch-create.md)
       - [delete](/tidb-cloud/ticloud-branch-delete.md)
