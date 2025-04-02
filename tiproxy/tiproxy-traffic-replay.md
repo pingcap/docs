@@ -5,7 +5,7 @@ summary: Introduce the use cases and steps for the TiProxy traffic replay featur
 
 # TiProxy Traffic Replay
 
-Starting from TiProxy v1.3.0, you can use TiProxy to capture access traffic in a TiDB production cluster and replay it in a test cluster at a specified rate. This feature enables you to reproduce actual workloads from the production cluster in a test environment, verifying SQL statement execution results and performance. Starting from v1.4.0, TiProxy becomes generally available (GA).
+Starting from TiProxy v1.3.0, you can use TiProxy to capture access traffic in a TiDB production cluster and replay it in a test cluster at a specified rate. This feature enables you to reproduce actual workloads from the production cluster in a test environment, verifying SQL statement execution results and performance. Starting from v1.4.0, the TiProxy traffic replay feature becomes generally available (GA).
 
 <img src="https://download.pingcap.com/images/docs/tiproxy/tiproxy-traffic-replay.png" alt="TiProxy traffic replay" width="800" />
 
@@ -25,7 +25,7 @@ Traffic replay is not suitable for the following scenarios:
 
 ## Usage
 
-Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for traffic capture and replay. Starting from TiDB v9.0.0, it is recommended to use SQL to capture and replay traffic.
+Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for traffic capture and replay. Starting from TiDB v9.0.0, it is recommended to use SQL statements to capture and replay traffic.
 
 <SimpleTab>
 <div label="Use SQL">
@@ -38,9 +38,9 @@ Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for tra
 
 2. Use the [`TRAFFIC CAPTURE`](/sql-statements/sql-statement-traffic-capture.md) statement to capture traffic.
 
-    TiProxy supports capturing traffic to local and external storage. When capturing traffic to local, you need to manually copy the traffic file to the TiProxy cluster for replay after capturing the traffic, but when using external storage, there is no need to manually copy. TiProxy supports external storage including Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, or other file storage services that implement the S3 protocol. For more information about external storage, see [URI formats of external storage services](/external-storage-uri.md).
+    TiProxy supports capturing traffic to local and external storage. When capturing traffic to local, you need to manually copy the traffic file to the TiProxy cluster for replay after capturing the traffic, but when using external storage, there is no need to manually copy. TiProxy supports external storage including Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, or other S3-compatible file storage services. For more information about external storage, see [URI formats of external storage services](/external-storage-uri.md).
 
-    Capturing traffic requires the current user to have the `SUPER` or [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
+    To capture traffic, the current user must have the `SUPER` or [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
 
     > **Note:**
     >

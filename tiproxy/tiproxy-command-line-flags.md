@@ -205,11 +205,11 @@ The `tiproxyctl traffic cancel` command is used to cancel the current capture or
 The `tiproxyctl traffic show` command is used to display historical capture and replay jobs. It outputs an array of objects, and each object represents a job. Each job has the following fields:
 
 - `type`: the job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job
-- `status`: the current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job fails.
+- `status`: the current status of the job. `running` indicates in progress, `done` indicates normal completion, and `canceled` indicates job failure..
 - `start_time`: the start time of the job
-- `end_time`: the end time if the job has finished. Otherwise it is empty.
+- `end_time`: the end time if the job has completed. Otherwise, it is empty.
 - `progress`: the completion percentage of the job
-- `error`: if the job fails, this column contains the reason for the failure. Otherwise it is empty. For example, `manually stopped` means the user manually cancels the job by executing `CANCEL TRAFFIC JOBS`.
+- `error`: if the job fails, this column contains the reason for the failure. Otherwise, it is empty. For example, `manually stopped` means the user manually cancels the job by executing `CANCEL TRAFFIC JOBS`.
 - `output`: the output traffic file path of the capture job
 - `duration`: the duration of the traffic capture job
 - `compress`: whether the traffic files are compressed

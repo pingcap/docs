@@ -238,7 +238,7 @@ TLS object fields:
 + `ca`: specifies the CA
 + `cert`: specifies the certificate
 + `key`: specifies the private key
-+ `cert-allowed-cn`: when other components connect to TiProxy with TLS, TiProxy can prevent invalid access by verifying the `Common Name` in the caller's certificate. This item specifies a list of `Common Name` of legal callers. After setting this item, this TLS object must enable TLS; otherwise the item will not take effect. For more information on verifying component caller's identity, see [verify component caller's identity](/enable-tls-between-components.md#verify-component-callers-identity).
++ `cert-allowed-cn`: when other components connect to TiProxy with TLS, TiProxy can prevent unauthorized access by verifying the `Common Name` in the caller's certificate. This item specifies a list of `Common Name` of valid callers. After setting this item, this TLS object must enable TLS; otherwise, the item does not take effect. For more information on verifying component caller's identity, see [verify component caller's identity](/enable-tls-between-components.md#verify-component-callers-identity).
 + `auto-certs`: mostly used for tests. It generates certificates if no certificate or key is specified.
 + `skip-ca`: skips verifying certificates using CA on client object or skips server-side verification on server object.
 + `min-tls-version`: sets the minimum TLS version. Possible values are `1.0`、`1.1`、`1.2`, and `1.3`. The default value is `1.2`, which allows v1.2 or higher TLS versions.
@@ -266,7 +266,7 @@ A client TLS object. It is used to access TiDB or PD.
 
 + Default value: `""`
 + Support hot-reload: yes
-+ Specifies the file path of the key used to encrypt the traffic files when capturing traffic. The TiProxy instance used for replay needs to be configured with the same key file. The file must contain a 256 bits (or 32 bytes) key encoded as hex string and contain nothing else. Example of the file content:
++ Specifies the file path of the key used to encrypt the traffic files during traffic capture. The TiProxy instance used for replay needs to be configured with the same key file. The file must contain a 256-bit (32-byte) hexadecimal string with no additional content. An example of the file content is as follows:
 
 ```
 3b5896b5be691006e0f71c3040a2949

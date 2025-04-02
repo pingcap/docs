@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW TRAFFIC JOBS for the TiDB database.
 
 # SHOW TRAFFIC JOBS
 
-TiDB v9.0.0 introduces the `SHOW TRAFFIC JOBS` syntax, which is used to show all traffic capture or replay jobs executed by [TiProxy](/tiproxy/tiproxy-overview.md) in the cluster. Each row represents a job of a TiProxy instance. Each TiProxy instance saves at most the 10 most recent jobs.
+TiDB v9.0.0 introduces the `SHOW TRAFFIC JOBS` syntax, which is used to show all traffic capture or replay jobs executed by [TiProxy](/tiproxy/tiproxy-overview.md) in the cluster. In the output, each row represents a job of a TiProxy instance. Each TiProxy instance stores up to 10 most recent jobs.
 
 The shown results vary depending on the privileges the current user has.
 
@@ -18,12 +18,12 @@ The `SHOW TRAFFIC JOBS` statement returns the following columns:
 | Column name | Description   |
 | :-------- | :------------- |
 | `START_TIME` | The start time of the job |
-| `END_TIME` | The end time if the job has finished. Otherwise it is empty. |
+| `END_TIME` | The end time if the job has completed. Otherwise, it is empty. |
 | `INSTANCE` | The address of the TiProxy instance |
 | `TYPE` | The job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job |
 | `PROGRESS` | The completion percentage of the job |
-| `STATUS` | The current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job fails. |
-| `FAIL_REASON` | If the job fails, this column contains the reason for the failure. Otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS`. |
+| `STATUS` | The current status of the job. `running` indicates in progress, `done` indicates normal completion, and `canceled` indicates job failure. |
+| `FAIL_REASON` | If the job fails, this column contains the reason for the failure. Otherwise, it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS`. |
 | `PARAMS` | The parameters of the job |
 
 ## Synopsis
