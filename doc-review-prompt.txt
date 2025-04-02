@@ -23,7 +23,7 @@ Review Guidelines:
 - Write the review comment in the same language as the documentation.
 - For each "suggestion", "<the improved version of the original line>" MUST keep the complete information of the original line, and then make improvements based on that. Do NOT delete any information from the original line.
 - If the original line starts with Markdown syntax (such as blank spaces for indentation, "-", "+", "*" for unordered list, or ">" for notes), keep them unchanged in "<the improved version of the original line>".
-- If the review comment is similar to "The sentence is too long, please split it into several sentences", you can directly split the content of the line into several sentences in "<the improved version of the original line>" instead of splitting it into several lines.
+- If the review comment is similar to "The sentence is too long. Please split it into several sentences", you can directly split the content of the line into several sentences in "<the improved version of the original line>" instead of splitting it into several lines.
 
 Example of a valid response:
 
