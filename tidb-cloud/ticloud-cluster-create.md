@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless create`.
 
 # ticloud serverless create
 
-Create a TiDB Cloud Starter cluster:
+Create a TiDB Cloud cluster:
 
 ```shell
 ticloud serverless create [flags]
@@ -13,13 +13,13 @@ ticloud serverless create [flags]
 
 ## Examples
 
-Create a TiDB Cloud Starter cluster in interactive mode:
+Create a TiDB Cloud cluster in interactive mode:
 
 ```shell
 ticloud serverless create
 ```
 
-Create a TiDB Cloud Starter cluster in non-interactive mode:
+Create a TiDB Cloud cluster in non-interactive mode:
 
 ```shell
 ticloud serverless create --display-name <display-name> --region <region>
@@ -30,6 +30,12 @@ Create a TiDB Cloud Starter cluster with a spending limit in non-interactive mod
 ```shell
 ticloud serverless create --display-name <display-name> --region <region> --spending-limit-monthly <spending-limit-monthly>
 ``` 
+
+Create a TiDB Cloud Essential cluster in non-interactive mode:
+
+```shell
+ticloud serverless create --display-name <display-name> --region <region> --max-rcu <maximum-rcu> --min-rcu <minimum-rcu>
+```
 
 ## Flags
 

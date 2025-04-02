@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless branch list`.
 
 # ticloud serverless branch list
 
-List all branches for a TiDB Cloud Starter cluster:
+List all branches for a TiDB Cloud cluster:
 
 ```shell
 ticloud serverless branch list <cluster-id> [flags]
@@ -19,19 +19,19 @@ ticloud serverless branch ls <cluster-id> [flags]
 
 ## Examples
 
-List all branches for a TiDB Cloud Starter cluster in interactive mode:
+List all branches for a TiDB Cloud cluster in interactive mode:
 
 ```shell
 ticloud serverless branch list
 ```
 
-List all branches for a specific TiDB Cloud Starter cluster in non-interactive mode:
+List all branches for a specific TiDB Cloud cluster in non-interactive mode:
 
 ```shell
 ticloud serverless branch list -c <cluster-id>
 ```
 
-List all branches for a specific TiDB Cloud Starter cluster in the JSON format:
+List all branches for a specific TiDB Cloud cluster in the JSON format:
 
 ```shell
 ticloud serverless branch list <cluster-id> -o json
