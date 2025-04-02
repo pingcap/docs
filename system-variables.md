@@ -3056,7 +3056,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
 
+- If the [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800) configuration item is specified, the general log is written to the specified file separately. 
+
+- The [`log.format`](/tidb-configuration-file.md#format) configuration item enables you to configure the log message format, whether the general log is in a separate file or combined with other logs.
+
+- The [`tidb_redact_log`](#tidb_redact_log) variable enables you to redact SQL statements recorded in the general log.
+
+- Only successfully executed statements are logged in the general log. Failed statements are not recorded in the general log but are instead logged in the TiDB log with a `command dispatched failed` message.
+
 - To see all records of this feature in the log, you need to set the TiDB configuration item [`log.level`](/tidb-configuration-file.md#level) to `"info"` or `"debug"` and then query the `"GENERAL_LOG"` string. The following information is recorded:
+    - `time`: The time of the event.
     - `conn`: The ID of the current session.
     - `user`: The current session user.
     - `schemaVersion`: The current schema version.
