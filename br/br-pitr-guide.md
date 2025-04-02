@@ -57,21 +57,7 @@ The fields are explained as follows:
 - `speed(est.)`: the current data transfer rate of the log backup. This value is estimated based on traffic samples taken in the past few seconds. For more accurate traffic statistics, you can check the `Log Backup` row in the **[TiKV-Details](/grafana-tikv-dashboard.md#tikv-details-dashboard)** dashboard at Grafana.
 - `checkpoint[global]`: the current progress of the log backup. You can use PITR to restore to a point in time before this timestamp.
 
-If the log backup task is paused, the `log status` command outputs additional fields to display the details of the pause. For example:
-
-```
-● Total 1 Tasks.
-> #1 <
-              name: pitr
-            status: ○ ERROR
-               <......>
-        pause-time: 2025-03-14T14:35:06+08:00
-    pause-operator: atelier.local
-pause-operator-pid: 64618
-     pause-payload: The checkpoint is at 2025-03-14T14:34:54+08:00, now it is 2025-03-14T14:35:06+08:00, the lag is too huge (11.956113s) hence pause the task to avoid impaction to the cluster
-```
-
-The meanings of these additional fields are as follows:
+If the log backup task is paused, the `log status` command outputs additional fields to display the details of the pause. They are:
 
 - `pause-time`: the time when the pause operation is executed.
 - `pause-operator`: the hostname of the machine that executes the pause operation.
