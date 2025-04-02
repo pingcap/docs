@@ -8,6 +8,44 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2025.
 
+## April 1, 2025
+
+**General changes**
+
+- The [TiDB Node Groups](/tidb-cloud/tidb-node-group-overview.md) feature is now generally available (GA) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS and Google Cloud.
+
+    This feature enables **fine-grained computing resource isolation** within a single cluster, helping you optimize performance and resource allocation for multi-tenant or multi-workload scenarios.
+
+    **Key benefits:**
+
+    - **Resource isolation**:
+
+        - Group TiDB nodes into logically isolated units, ensuring workloads in one group do not affect other groups.
+        - Prevent resource contention between applications or business units.
+
+    - **Simplified management**:
+
+        - Manage all node groups within a single cluster, reducing operational overhead.
+        - Scale groups independently based on demand.
+
+  For more information about the benefits, see [the technical blog](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/). To get started, see [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md).
+
+- Introduce the [Standard storage](/tidb-cloud/size-your-cluster.md#standard-storage) type for TiKV nodes in [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
+
+    The Standard storage type is ideal for most workloads, providing a balance between performance and cost efficiency.
+
+    **Key benefits:**
+
+    - **Improved performance**: Reserves sufficient disk resources for Raft logs, reducing I/O contention between Raft and data storage, thereby improving both the read and write performance of TiKV.
+    - **Enhanced stability**: Isolates critical Raft operations from data workloads, ensuring more predictable performance.
+    - **Cost efficiency**: Delivers higher performance at a competitive price compared with the previous storage type.
+
+    **Availability:**
+
+    The Standard storage type is automatically applied to new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters created on or after April 1, 2025, hosted on AWS, with supported versions (versions >= 7.5.5, 8.1.2, or 8.5.0). Existing clusters still use the previous [Basic storage](/tidb-cloud/size-your-cluster.md#basic-storage) type, and no migration is needed.
+
+    The price of the Standard storage differs from that of the Basic storage. For more information, see [Pricing](https://www.pingcap.com/tidb-dedicated-pricing-details/).
+
 ## March 25, 2025
 
 **Console changes**
@@ -23,7 +61,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 **General changes**
 
 - Support creating TiDB node groups for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on Google Cloud to enhance resource management flexibility.
-    
+
     For more information, see [Overview of TiDB Node Group](/tidb-cloud/tidb-node-group-overview.md).
 
 - Support storing database audit log files in TiDB Cloud for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters deployed on AWS.
