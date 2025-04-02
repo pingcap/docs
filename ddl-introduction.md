@@ -184,6 +184,11 @@ When TiDB is adding an index, the phase of backfilling data will cause read and 
 
     You can only resume a paused DDL task. Otherwise, the `Job 3 can't be resumed` error is shown in the `RESULT` column.
 
+## DDL-related tables
+
+- [`information_schema.DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md): Information about currently running and finished DDL jobs.
+- [`mysql.tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md): Information about [metadata lock](/metadata-lock.md) views. It can help identify what query is blocking the DDL from making progress.
+
 ## Common questions
 
 For common questions about DDL execution, see [SQL FAQ - DDL execution](https://docs.pingcap.com/tidb/stable/sql-faq).

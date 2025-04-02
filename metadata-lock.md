@@ -77,29 +77,33 @@ TiDB v6.3.0 introduces the `mysql.tidb_mdl_view` view to help you obtain the inf
 The following takes adding an index for table `t` as an example. Assume that there is a DDL statement `ALTER TABLE t ADD INDEX idx(a)`:
 
 ```sql
-SELECT * FROM mysql.tidb_mdl_view\G
-*************************** 1. row ***************************
-    JOB_ID: 141
-   DB_NAME: test
-TABLE_NAME: t
-     QUERY: ALTER TABLE t ADD INDEX idx(a)
-SESSION ID: 2199023255957
-  TxnStart: 08-30 16:35:41.313(435643624013955072)
-SQL_DIGESTS: ["begin","select * from `t`"]
-1 row in set (0.02 sec)
+TABLE mysql.tidb_mdl_view\G
 ```
 
-From the preceding output, you can see that the transaction whose `SESSION ID` is `2199023255957` blocks the `ADD INDEX` DDL. `SQL_DIGEST` shows the SQL statements executed by this transaction, which is ``["begin","select * from `t`"]``. To make the blocked DDL continue to execute, you can use the following global `KILL` statement to kill the `2199023255957` transaction:
+```
+*************************** 1. row ***************************
+     job_id: 118
+    db_name: test
+ table_name: t
+      query: ALTER TABLE t ADD COLUMN c INT
+ session_id: 1547698182
+ start_time: 2025-03-19 09:52:36.509000
+SQL_DIGESTS: ["begin","select * from `t`"]
+1 row in set (0.00 sec)
+
+```
+
+From the preceding output, you can see that the transaction whose `SESSION ID` is `1547698182` blocks the `ADD COLUMN` DDL. `SQL_DIGEST` shows the SQL statements executed by this transaction, which is ``["begin","select * from `t`"]``. To make the blocked DDL continue to execute, you can use the following global `KILL` statement to kill the `1547698182` transaction:
 
 ```sql
-mysql> KILL 2199023255957;
+mysql> KILL 1547698182;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
 After killing the transaction, you can select the `mysql.tidb_mdl_view` view again. At this time, the preceding transaction is not shown in the output, which means the DDL is not blocked.
 
 ```sql
-SELECT * FROM mysql.tidb_mdl_view\G
+TABLE mysql.tidb_mdl_view\G
 Empty set (0.01 sec)
 ```
 
