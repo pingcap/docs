@@ -30,7 +30,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information about the benefits, see [the technical blog](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/). To get started, see [Manage TiDB Node Groups](/tidb-cloud/tidb-node-group-management.md).
 
-- Introduce the [Standard storage](/size-your-cluster.md#standard-storage) type for TiKV nodes in [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
+- Introduce the [Standard storage](/tidb-cloud/size-your-cluster.md#standard-storage) type for TiKV nodes in [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
 
     The Standard storage type is ideal for most workloads, providing a balance between performance and cost efficiency.
 
@@ -42,9 +42,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     **Availability:**
 
-    The Standard storage type is automatically applied to new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters created on or after April 1, 2025, hosted on AWS, with supported versions (versions >= 7.5.5, 8.1.2, or 8.5.0). Existing clusters still use the previous [Basic storage](/size-your-cluster.md#basic-storage) type, and no migration is needed.
+    The Standard storage type is automatically applied to new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters created on or after April 1, 2025, hosted on AWS, with supported versions (versions >= 7.5.5, 8.1.2, or 8.5.0). Existing clusters still use the previous [Basic storage](/tidb-cloud/size-your-cluster.md#basic-storage) type, and no migration is needed.
 
-    The price of the Standard storage differs from that of the Basic storage. For more information, see [Pricing](/tidb-cloud/tidb-cloud-pricing.md).
+    The price of the Standard storage differs from that of the Basic storage. For more information, see [Pricing](https://www.pingcap.com/tidb-dedicated-pricing-details/).
 
 ## March 25, 2025
 
