@@ -11,14 +11,6 @@ This document describes how to manage TiDB node groups and their endpoints to is
 >
 > The TiDB Node Group feature is **NOT** available for TiDB Cloud Serverless clusters.
 
-Currently, the TiDB Node Group feature is only available upon request. To request this feature, perform the following steps:
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click **?** in the lower-right corner.
-3. Click **Request Support**. 
-4. In the **Subject** field, fill in **Apply for TiDB Node Group feature**.
-5. Click **Submit**.
-
 ## Terms
 
 - TiDB Node Group: A TiDB node group manages the grouping of TiDB nodes and maintains the mapping between endpoints and TiDB nodes.
