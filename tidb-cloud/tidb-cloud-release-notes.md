@@ -8,6 +8,44 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
 
+## 2025年4月1日 {#april-1-2025}
+
+**一般的な変更**
+
+-   [TiDB ノード グループ](/tidb-cloud/tidb-node-group-overview.md)機能が、AWS と Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで一般提供 (GA) されました。
+
+    この機能により、単一クラスター内で**きめ細かいコンピューティング リソースの分離**が可能になり、マルチテナントまたはマルチワークロードのシナリオでパフォーマンスとリソースの割り当てを最適化できます。
+
+    **主な利点:**
+
+    -   **リソースの分離**:
+
+        -   TiDB ノードを論理的に分離されたユニットにグループ化し、1 つのグループのワークロードが他のグループに影響を与えないようにします。
+        -   アプリケーションまたはビジネス ユニット間のリソース競合を防止します。
+
+    -   **簡素化された管理**:
+
+        -   すべてのノード グループを単一のクラスター内で管理し、運用オーバーヘッドを削減します。
+        -   需要に応じてグループを個別に拡張します。
+
+    メリットの詳細については[技術ブログ](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/)参照してください。開始するには[TiDBノードグループの管理](/tidb-cloud/tidb-node-group-management.md)参照してください。
+
+-   AWS でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター内の TiKV ノードに[標準storage](/tidb-cloud/size-your-cluster.md#standard-storage)タイプを導入します。
+
+    標準storageタイプは、パフォーマンスとコスト効率のバランスが取れているため、ほとんどのワークロードに最適です。
+
+    **主な利点:**
+
+    -   **パフォーマンスの向上**: Raftログに十分なディスク リソースを予約し、 Raftとデータstorage間の I/O 競合を減らして、TiKV の読み取りと書き込みのパフォーマンスを向上させます。
+    -   **強化された安定性**: 重要なRaft操作をデータ ワークロードから分離し、より予測可能なパフォーマンスを確保します。
+    -   **コスト効率**: 従来のstorageタイプと比較して、競争力のある価格でより高いパフォーマンスを実現します。
+
+    **可用性：**
+
+    標準storageタイプは、2025 年 4 月 1 日以降に作成され、AWS でホストされ、サポートされているバージョン (バージョン &gt;= 7.5.5、8.1.2、または 8.5.0) の新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに自動的に適用されます。既存のクラスターは引き続き以前の[基本storage](/tidb-cloud/size-your-cluster.md#basic-storage)タイプを使用するため、移行は必要ありません。
+
+    スタンダードstorageの価格はベーシックstorageの価格とは異なります。詳細については[価格](https://www.pingcap.com/tidb-dedicated-pricing-details/)参照してください。
+
 ## 2025年3月25日 {#march-25-2025}
 
 **コンソールの変更**
@@ -57,7 +95,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     TiDB Cloud Serverless は、Google Cloud Storage (GCS) および Azure Blob Storage からのデータのインポートをサポートするようになりました。認証には、Google Cloud サービス アカウント キーまたは Azure 共有アクセス署名 (SAS) トークンを使用できます。この機能により、 TiDB Cloud Serverless へのデータ移行が簡素化されます。
 
-    For more information, see [Amazon S3、GCS、または Azure Blob ストレージから CSV ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-csv-files-serverless.md) and [Amazon S3、GCS、または Azure Blob ストレージから Apache Parquet ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-parquet-files-serverless.md).
+    詳細については[Amazon S3、GCS、または Azure Blob ストレージから CSV ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-csv-files-serverless.md)および[Amazon S3、GCS、または Azure Blob ストレージから Apache Parquet ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-parquet-files-serverless.md)参照してください。
 
 ## 2025年1月21日 {#january-21-2025}
 
@@ -99,7 +137,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   Kafka の変更フィードに追加の構成可能なオプションを導入します。
 
-    -   Support using the Debezium protocol. Debezium is a tool for capturing database changes. It converts each captured database change into a message called an event, and sends these events to Kafka. For more information, see [TiCDC デベジウム プロトコル](https://docs.pingcap.com/tidb/v8.1/ticdc-debezium).
+    -   Debezium プロトコルの使用をサポートします。Debezium はデータベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更をイベントと呼ばれるメッセージに変換し、これらのイベントを Kafka に送信します。詳細については、 [TiCDC デベジウム プロトコル](https://docs.pingcap.com/tidb/v8.1/ticdc-debezium)参照してください。
 
     -   すべてのテーブルに対して単一のパーティション ディスパッチャーを定義することも、テーブルごとに異なるパーティション ディスパッチャーを定義することもサポートします。
 
@@ -133,7 +171,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.1.1](https://docs.pingcap.com/tidb/v8.1/release-8.1.1)から[バージョン8.1.2](https://docs.pingcap.com/tidb/v8.1/release-8.1.2)にアップグレードします。
 
-**Console changes**
+**コンソールの変更**
 
 -   データエクスポートサービスの強化:
 

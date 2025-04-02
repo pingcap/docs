@@ -9,7 +9,7 @@ summary: 機密データを保護するために保存時の暗号化を有効�
 >
 > クラスターが AWS にデプロイされ、EBSstorageを使用している場合は、EBS 暗号化を使用することをお勧めします。 [AWS ドキュメント - EBS 暗号化](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)参照してください。ローカル NVMestorageなど、AWS で非 EBSstorageを使用している場合は、このドキュメントで紹介されている保存時の暗号化を使用することをお勧めします。
 
-保存時の暗号化とは、データが保存時に暗号化されることを意味します。データベースの場合、この機能は TDE (透過的データ暗号化) とも呼ばれます。これは、転送中の暗号化 (TLS) または使用中の暗号化 (めったに使用されません) とは対照的です。保存時の暗号化はさまざまなもの (SSD ドライブ、ファイル システム、クラウド ベンダーなど) で実行できますが、TiKV でstorage前に暗号化を実行することで、攻撃者がデータにアクセスするにはデータベースで認証する必要があることが保証されます。たとえば、攻撃者が物理マシンにアクセスした場合、ディスク上のファイルをコピーしてもデータにアクセスすることはできません。
+保存時の暗号化とは、データが保存時に暗号化されることを意味します。データベースの場合、この機能は TDE (透過的データ暗号化) とも呼ばれます。これは、転送中の暗号化 (TLS) または使用中の暗号化 (めったに使用されません) とは対照的です。保存時の暗号化はさまざまなもの (SSD ドライブ、ファイル システム、クラウド ベンダーなど) で実行できますが、TiKV がstorage前に暗号化を実行することで、攻撃者がデータにアクセスするにはデータベースで認証する必要があることが保証されます。たとえば、攻撃者が物理マシンにアクセスした場合、ディスク上のファイルをコピーしてもデータにアクセスすることはできません。
 
 ## さまざまな TiDB コンポーネントでの暗号化サポート {#encryption-support-in-different-tidb-components}
 
@@ -27,13 +27,13 @@ TiKV は現在、コア ダンプから暗号化キーとユーザー データ�
 
 TiKV は、ファイルの絶対パスを使用して暗号化されたデータ ファイルを追跡します。そのため、TiKV ノードで暗号化がオンになると、ユーザーは`storage.data-dir` 、 `raftstore.raftdb-path` 、 `rocksdb.wal-dir` 、 `raftdb.wal-dir`などのデータ ファイル パス構成を変更してはなりません。
 
-SM4 暗号化は、TiKV の v6.3.0 以降のバージョンでのみサポートされます。v6.3.0 より前のバージョンの TiKV では、AES 暗号化のみがサポートされます。SM4 暗号化により、スループットが 50% ～ 80% 低下する可能性があります。
+SM4 暗号化は、TiKV の v6.3.0 以降のバージョンでのみサポートされています。v6.3.0 より前のバージョンの TiKV では、AES 暗号化のみがサポートされています。SM4 暗号化はパフォーマンスに影響します。最悪の場合、スループットが 50% ～ 80% 低下する可能性があります。ただし、 [`storage.block-cache`](/tikv-configuration-file.md#storageblock-cache)を十分に大きくすると、この影響を大幅に軽減でき、スループットの低下を約 10% に抑えることができます。
 
 ### TiFlash {#tiflash}
 
-TiFlash は保存時の暗号化をサポートします。データ キーはTiFlashによって生成されます。TiFlash ( TiFlash Proxy を含む) に書き込まれるTiFlashのファイル (データ ファイル、スキーマ ファイル、一時ファイルを含む) は、現在のデータ キーを使用して暗号化されます。暗号化アルゴリズム、暗号化構成 ( TiFlashでサポートされる[`tiflash-learner.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)内)、および監視メトリックの意味は、TiKV のものと一致しています。
+TiFlash は保存時の暗号化をサポートします。データ キーはTiFlashによって生成されます。TiFlash ( TiFlash Proxy を含む)に書き込まれるすべてのファイル (データ ファイル、スキーマ ファイル、一時ファイルを含む) は、現在のデータ キーを使用して暗号化されます。暗号化アルゴリズム、暗号化構成 ( TiFlashでサポートされる[`tiflash-learner.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)内)、および監視メトリックの意味は、TiKV のものと一致しています。
 
-Grafana を使用してTiFlash をデプロイした場合は、 **TiFlash-Proxy-Details** -&gt; **Encryption**パネルを確認できます。
+TiFlashを Grafana でデプロイした場合は、 **TiFlash-Proxy-Details** -&gt; **Encryption**パネルを確認できます。
 
 SM4 暗号化は、 TiFlashの v6.4.0 以降のバージョンでのみサポートされます。TiFlashのv6.4.0 より前のバージョンでは、AES 暗号化のみがサポートされます。
 
@@ -47,22 +47,22 @@ BR は、S3 にデータをバックアップするときに S3 サーバー側�
 
 ### ログ記録 {#logging}
 
-TiKV、TiDB、および PD 情報ログには、デバッグ目的のユーザー データが含まれている場合があります。情報ログとその中のデータは暗号化されません[ログ編集](/log-redaction.md)有効にすることをお勧めします。
+TiKV、TiDB、および PD 情報ログには、デバッグ目的のユーザー データが含まれる場合があります。情報ログとその中のデータは暗号化されません。1 [ログ編集](/log-redaction.md)有効にすることをお勧めします。
 
 ## 保存時の TiKV 暗号化 {#tikv-encryption-at-rest}
 
 ### 概要 {#overview}
 
-TiKV は現在、 CTRモードで AES128、AES192、AES256、または SM4 (v6.3.0 以降のバージョンのみ) を使用してデータを暗号化することをサポートしています。TiKV はエンベロープ暗号化を使用します。その結果、暗号化が有効になっている場合、TiKV では 2 種類のキーが使用されます。
+TiKV は現在、 CTRモードで AES128、AES192、AES256、または SM4 (v6.3.0 以降のバージョンのみ) を使用したデータの暗号化をサポートしています。TiKV はエンベロープ暗号化を使用します。その結果、暗号化が有効になっている場合、TiKV では 2 種類のキーが使用されます。
 
 -   マスター キー。マスター キーはユーザーによって提供され、TiKV が生成するデータ キーを暗号化するために使用されます。マスター キーの管理は TiKV の外部で行われます。
 -   データ キー。データ キーは TiKV によって生成され、実際にデータの暗号化に使用されるキーです。
 
-同じマスター キーを TiKV の複数のインスタンスで共有できます。本番でマスター キーを提供するための推奨方法は、KMS 経由です。現在、TiKV は[アマゾン](https://docs.aws.amazon.com/kms/index.html) 、 [Googleクラウド](https://cloud.google.com/security/products/security-key-management?hl=en) 、 [アズール](https://learn.microsoft.com/en-us/azure/key-vault/)で KMS 暗号化をサポートしています。KMS 暗号化を有効にするには、KMS を通じてカスタマー マスター キー (CMK) を作成し、構成ファイルを使用して CMK キー ID を TiKV に提供する必要があります。TiKV が KMS CMK にアクセスできない場合、起動または再起動に失敗します。
+同じマスター キーを TiKV の複数のインスタンスで共有できます。本番でマスター キーを提供する推奨方法は、KMS 経由です。現在、TiKV は[アマゾン](https://docs.aws.amazon.com/kms/index.html) 、 [Googleクラウド](https://cloud.google.com/security/products/security-key-management?hl=en) 、 [アズール](https://learn.microsoft.com/en-us/azure/key-vault/)で KMS 暗号化をサポートしています。KMS 暗号化を有効にするには、KMS を通じてカスタマー マスター キー (CMK) を作成し、構成ファイルを使用して CMK キー ID を TiKV に提供する必要があります。TiKV が KMS CMK にアクセスできない場合、起動または再起動に失敗します。
 
-あるいは、カスタム キーを使用する必要がある場合は、ファイル経由でマスター キーを提供することもできます。ファイルには、16 進文字列としてエンコードされた 256 ビット (または 32 バイト) のキーが含まれ、改行 (つまり`\n` ) で終了し、他には何も含まれていない必要があります。ただし、キーをディスク上に保持するとキーが漏洩するため、キー ファイルは RAM の`tempfs`に保存するのに適しています。
+あるいは、カスタム キーを使用する必要がある場合は、ファイル経由でマスター キーを提供することもできます。ファイルには、16 進文字列としてエンコードされた 256 ビット (または 32 バイト) のキーが含まれ、改行 (つまり、 `\n` ) で終了し、他に何も含まれていない必要があります。ただし、キーをディスク上に保持するとキーが漏洩するため、キー ファイルは RAM の`tempfs`に保存するのに適しています。
 
-データ キーは、基盤となるstorageエンジン (つまり、RocksDB) に渡されます。SST ファイル、WAL ファイル、MANIFEST ファイルなど、RocksDB によって書き込まれるすべてのファイルは、現在のデータ キーで暗号化されます。TiKV によって使用されるその他の一時ファイル (ユーザー データが含まれる場合があります) も、同じデータ キーを使用して暗号化されます。データ キーは、デフォルトでは毎週 TiKV によって自動的にローテーションされますが、期間は設定可能です。キーのローテーションでは、TiKV は既存のすべてのファイルを書き換えてキーを置き換えることはありませんが、クラスターに一定の書き込みワークロードがある場合、RocksDB の圧縮によって、最新のデータ キーを使用して古いデータが新しいデータ ファイルに書き換えられることが予想されます。TiKV は、各ファイルの暗号化に使用されたキーと暗号化方法を追跡し、その情報を使用して読み取り時にコンテンツを復号化します。
+データ キーは、基盤となるstorageエンジン (つまり、RocksDB) に渡されます。SST ファイル、WAL ファイル、MANIFEST ファイルなど、RocksDB によって書き込まれるすべてのファイルは、現在のデータ キーで暗号化されます。TiKV によって使用される、ユーザー データが含まれる可能性のあるその他の一時ファイルも、同じデータ キーを使用して暗号化されます。データ キーは、デフォルトでは毎週 TiKV によって自動的にローテーションされますが、期間は構成可能です。キーのローテーションでは、TiKV は既存のすべてのファイルを書き換えてキーを置き換えることはありませんが、クラスターに一定の書き込みワークロードがある場合、RocksDB の圧縮によって、最新のデータ キーを使用して古いデータが新しいデータ ファイルに書き換えられることが予想されます。TiKV は、各ファイルの暗号化に使用されたキーと暗号化方法を追跡し、読み取り時にその情報を使用してコンテンツを復号化します。
 
 データ暗号化方法に関係なく、データ キーは追加の認証のために GCM モードで AES256 を使用して暗号化されます。これにより、KMS ではなくファイルから渡す場合、マスター キーが 256 ビット (32 バイト) である必要がありました。
 
@@ -74,13 +74,13 @@ TiKV は現在、 CTRモードで AES128、AES192、AES256、または SM4 (v6.3
     data-encryption-method = "aes128-ctr"
     data-key-rotation-period = "168h" # 7 days
 
--   `data-encryption-method`暗号化アルゴリズムを指定します。指定できる値は`"aes128-ctr"` 、 `"aes192-ctr"` 、 `"aes256-ctr"` 、 `"sm4-ctr"` (v6.3.0 以降のバージョンのみ)、および`"plaintext"`です。デフォルト値は`"plaintext"`で、これは暗号化がデフォルトで無効になっていることを意味します。
+-   `data-encryption-method`暗号化アルゴリズムを指定します。指定できる値は`"aes128-ctr"` 、 `"aes192-ctr"` 、 `"aes256-ctr"` 、 `"sm4-ctr"` (v6.3.0 以降のバージョンのみ)、および`"plaintext"` 。デフォルト値は`"plaintext"`で、暗号化がデフォルトで無効になっていることを意味します。
 
     -   新しい TiKV クラスターまたは既存の TiKV クラスターの場合、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。
     -   暗号化を有効にした後に無効にするには、構成ファイルから`data-encryption-method`削除するか、その値を`"plaintext"`に設定して、TiKV を再起動します。
     -   暗号化アルゴリズムを変更するには、値`data-encryption-method`をサポートされている暗号化アルゴリズムに置き換えてから、TiKV を再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムによって生成された暗号化ファイルは、新しい暗号化アルゴリズムによって生成されたファイルに徐々に書き換えられます。
 
--   `data-key-rotation-period` TiKV がキーをローテーションする頻度を指定します。
+-   `data-key-rotation-period` 、TiKV がキーをローテーションする頻度を指定します。
 
 暗号化が有効になっている場合（つまり、 `data-encryption-method`の値が`"plaintext"`ではない場合）、次のいずれかの方法でマスター キーを指定する必要があります。
 
@@ -93,7 +93,7 @@ TiKV は、AWS、Google Cloud、Azure の 3 つのプラットフォームで KM
 
 > **警告：**
 >
-> 現在、Google Cloud KMS を使用したマスターキーの指定は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
+> 現在、Google Cloud KMS を使用したマスターキーの指定は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告できます。
 
 <SimpleTab>
 
@@ -115,7 +115,7 @@ aws --region us-west-2 kms create-key
 aws --region us-west-2 kms create-alias --alias-name "alias/tidb-tde" --target-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
 ```
 
-2 番目のコマンドに入力する`--target-key-id`は、最初のコマンドの出力にあります。
+2 番目のコマンドに入力する`--target-key-id` 、最初のコマンドの出力にあります。
 
 **ステップ2. マスターキーを設定する**
 
@@ -127,7 +127,7 @@ AWS KMS を使用してマスターキーを指定するには、TiKV 設定フ�
     region = "us-west-2"
     endpoint = "https://kms.us-west-2.amazonaws.com"
 
-`key-id`は KMS CMK のキー ID を指定します。 `region`は KMS CMK の AWS リージョン名です。 `endpoint`はオプションであり、AWS 以外のベンダーの AWS KMS 互換サービスを使用している場合や[KMS の VPC エンドポイント](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html)を使用する必要がない限り、通常は指定する必要はありません。
+`key-id` KMS CMK のキー ID を指定します。 `region` KMS CMK の AWS リージョン名です。 `endpoint`はオプションであり、AWS 以外のベンダーの AWS KMS 互換サービスを使用している場合や[KMS の VPC エンドポイント](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html)を使用する必要がない限り、通常は指定する必要はありません。
 
 AWS では[マルチリージョンキー](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)使用することもできます。そのためには、特定のリージョンにプライマリキーを設定し、必要なリージョンにレプリカキーを追加する必要があります。
 
@@ -252,12 +252,12 @@ KMS CMK をローテーションするための構成例を次に示します。
 
 TiKV が暗号化メタデータを管理するときに I/O とミューテックスの競合によって発生するオーバーヘッドを削減するために、TiKV v4.0.9 で最適化が導入され、TiKV 構成ファイルの`security.encryption.enable-file-dictionary-log`によって制御されます。この構成パラメータは、TiKV v4.0.9 以降のバージョンでのみ有効です。
 
-有効になっている場合 (デフォルト)、暗号化メタデータのデータ形式は TiKV v4.0.8 以前のバージョンでは認識されません。たとえば、保存時の暗号化とデフォルトの`enable-file-dictionary-log`構成で TiKV v4.0.9 以降を使用しているとします。クラスターを TiKV v4.0.8 以前にダウングレードすると、TiKV は起動に失敗し、情報ログに次のようなエラーが記録されます。
+有効になっている場合 (デフォルト)、暗号化メタデータのデータ形式は TiKV v4.0.8 以前のバージョンでは認識されません。たとえば、保存時の暗号化とデフォルトの`enable-file-dictionary-log`構成で TiKV v4.0.9 以降を使用するとします。クラスターを TiKV v4.0.8 以前にダウングレードすると、TiKV は起動に失敗し、情報ログに次のようなエラーが記録されます。
 
     [2020/12/07 07:26:31.106 +08:00] [ERROR] [mod.rs:110] ["encryption: failed to load file dictionary."]
     [2020/12/07 07:26:33.598 +08:00] [FATAL] [lib.rs:483] ["called `Result::unwrap()` on an `Err` value: Other(\"[components/encryption/src/encrypted_file/header.rs:18]: unknown version 2\")"]
 
-上記のエラーを回避するには、まず`security.encryption.enable-file-dictionary-log` `false`に設定し、TiKV を v4.0.9 以降で起動します。TiKV が正常に起動すると、暗号化メタデータのデータ形式が、以前の TiKV バージョンで認識できるバージョンにダウングレードされます。この時点で、TiKV クラスターを以前のバージョンにダウングレードできます。
+上記のエラーを回避するには、まず`security.encryption.enable-file-dictionary-log`を`false`に設定し、TiKV を v4.0.9 以降で起動します。TiKV が正常に起動すると、暗号化メタデータのデータ形式が、以前の TiKV バージョンで認識できるバージョンにダウングレードされます。この時点で、TiKV クラスターを以前のバージョンにダウングレードできます。
 
 ## 保存時のTiFlash暗号化 {#tiflash-encryption-at-rest}
 
@@ -265,7 +265,7 @@ TiKV が暗号化メタデータを管理するときに I/O とミューテッ�
 
 現在TiFlashでサポートされている暗号化アルゴリズムは、 CTRモードの AES128、AES192、AES256、および SM4 (v6.4.0 以降のバージョンのみ) を含む、TiKV でサポートされているアルゴリズムと一致しています。TiFlashはエンベロープ暗号化も使用します。したがって、暗号化が有効になっている場合、 TiFlashでは 2 種類のキーが使用されます。
 
--   マスター キー。マスター キーはユーザーによって提供され、 TiFlash が生成するデータ キーを暗号化するために使用されます。マスター キーの管理はTiFlashの外部で行われます。
+-   マスター キー。マスター キーはユーザーによって提供され、 TiFlashが生成するデータ キーを暗号化するために使用されます。マスター キーの管理はTiFlashの外部で行われます。
 -   データ キー。データ キーはTiFlashによって生成され、実際にデータの暗号化に使用されるキーです。
 
 同じマスターキーをTiFlashの複数のインスタンスで共有できます。また、 TiFlashと TiKV 間で共有することもできます。本番でマスターキーを提供する場合は、AWS KMS を使用することをお勧めします。また、カスタムキーを使用する場合は、ファイル経由でマスターキーを提供することもできます。マスターキーを生成する具体的な方法とマスターキーの形式は、TiKV と同じです。
@@ -291,7 +291,7 @@ AWS でキーを作成するには、TiKV のキーを作成する手順を参�
         security.encryption.data-encryption-method: "aes128-ctr"
         security.encryption.data-key-rotation-period: "168h" # 7 days
 
-`data-encryption-method`に指定できる値は、「aes128-ctr」、「aes192-ctr」、「aes256-ctr」、「sm4-ctr」（v6.4.0 以降のバージョンのみ）および「plaintext」です。デフォルト値は「plaintext」で、暗号化はオンになっていません。3 `data-key-rotation-period` TiFlash がデータ キーをローテーションする頻度を定義します。暗号化は、新しいTiFlashクラスターまたは既存のTiFlashクラスターに対してオンにできますが、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。暗号化を無効にするには、構成ファイルで`data-encryption-method`削除するか、「plaintext」にリセットして、 TiFlash を再起動します。暗号化方式を変更するには、構成ファイルで`data-encryption-method`更新して、 TiFlashを再起動します。暗号化アルゴリズムを変更するには、サポートされている暗号化アルゴリズムで`data-encryption-method`置き換えてから、 TiFlash を再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムによって生成された暗号化ファイルは、新しい暗号化アルゴリズムによって生成されたファイルに徐々に書き換えられます。
+`data-encryption-method`に指定できる値は、「aes128-ctr」、「aes192-ctr」、「aes256-ctr」、「sm4-ctr」（v6.4.0 以降のバージョンのみ）および「plaintext」です。デフォルト値は「plaintext」で、暗号化はオンになっていません。3 `data-key-rotation-period` 、 TiFlash がデータ キーをローテーションする頻度を定義します。暗号化は、新しいTiFlashクラスターまたは既存のTiFlashクラスターに対してオンにできますが、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。暗号化を無効にするには、構成ファイルで`data-encryption-method`削除するか、「plaintext」にリセットして、 TiFlash を再起動します。暗号化方式を変更するには、構成ファイルで`data-encryption-method`更新して、 TiFlash を再起動します。暗号化アルゴリズムを変更するには、サポートされている暗号化アルゴリズムで`data-encryption-method`置き換えてから、 TiFlash を再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムによって生成された暗号化ファイルは、新しい暗号化アルゴリズムによって生成されたファイルに徐々に書き換えられます。
 
 暗号化が有効になっている場合は、マスターキーを指定する必要があります (つまり、 `data-encryption-method` 「プレーンテキスト」ではありません)。AWS KMS CMK をマスターキーとして指定するには、 `tiflash-learner.toml`構成ファイルの`encryption`セクションの後に`encryption.master-key`セクションを追加します。
 
@@ -392,13 +392,13 @@ BRを使用して Azure Blob Storage にデータをバックアップする場�
     tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-scope scope1
     ```
 
--   URI に`encryption-scope`含め、スコープ名に設定します。
+-   URI に`encryption-scope`を含め、スコープ名に設定します。
 
     ```shell
     tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-scope=scope1"
     ```
 
-詳細については、Azure のドキュメント[暗号化スコープ付きのBLOBをアップロードする](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope)を参照してください。
+詳細については、Azure のドキュメント[暗号化スコープ付きのBLOBをアップロードする](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope)参照してください。
 
 バックアップを復元するときに、暗号化の範囲を指定する必要はありません。Azure Blob Storage はデータを自動的に復号化します。例:
 
@@ -429,7 +429,7 @@ tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
     tiup br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
     ```
 
-詳細については、Azure のドキュメント[Blobstorageへのリクエストに暗号化キーを提供する](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys)を参照してください。
+詳細については、Azure のドキュメント[Blobstorageへのリクエストに暗号化キーを提供する](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys)参照してください。
 
 バックアップを復元するときは、暗号化キーを指定する必要があります。例:
 
@@ -439,7 +439,7 @@ tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
     tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-key <aes256-key>
     ```
 
--   URIに`encryption-key`含めます:
+-   URIに`encryption-key`を含めます:
 
     ```shell
     tiup br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-key=<aes256-key>"

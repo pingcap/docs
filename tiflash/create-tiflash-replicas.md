@@ -21,7 +21,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 > **注記：**
 >
-> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、 TiFlashレプリカの`count`は`2`までしか設定できません。 `1`に設定すると、実行時に自動的に`2`に調整されます。 2 より大きい数値に設定すると、レプリカ数に関するエラーが発生します。
+> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。 `1`に設定すると、実行時に自動的に`2`に調整されます。 2 より大きい数値に設定すると、レプリカ数に関するエラーが発生します。
 
 同じテーブルに対して複数の DDL ステートメントを実行する場合、最後のステートメントのみが有効になります。次の例では、テーブル`tpch50`に対して 2 つの DDL ステートメントが実行されていますが、2 番目のステートメント (レプリカを削除する) のみが有効になります。
 
@@ -39,23 +39,28 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 **注:**
 
--   上記の DDL ステートメントを通じてテーブル`t`がTiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
+-   上記の DDL ステートメントを通じてテーブル`t` TiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
 
     ```sql
     CREATE TABLE table_name like t;
     ```
 
--   v4.0.6 より前のバージョンでは、 TiDB Lightning を使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートは失敗します。テーブルのTiFlashレプリカを作成する前に、テーブルにデータをインポートする必要があります。
+-   v4.0.6 より前のバージョンでは、 TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートは失敗します。テーブルのTiFlashレプリカを作成する前に、テーブルにデータをインポートする必要があります。
 
--   TiDB とTiDB Lightning の両方が v4.0.6 以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightning を使用してそのテーブルにデータをインポートできます。ただし、これにより、 TiDB Lightning の手順が遅くなる場合があります。これは、Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスクの負荷、およびTiFlashレプリカの数によって異なります。
+-   TiDB とTiDB Lightning の両方が v4.0.6 以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。ただし、これにより、 TiDB Lightning の手順が遅くなる場合があります。これは、Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスクの負荷、およびTiFlashレプリカの数によって異なります。
 
 -   PD スケジューリングのパフォーマンスが低下するため、1,000 を超えるテーブルをレプリケートしないことをお勧めします。この制限は、今後のバージョンでは削除される予定です。
 
 -   v5.1 以降のバージョンでは、システム テーブルのレプリカの設定はサポートされなくなりました。クラスターをアップグレードする前に、関連するシステム テーブルのレプリカをクリアする必要があります。そうしないと、クラスターを新しいバージョンにアップグレードした後に、システム テーブルのレプリカ設定を変更できなくなります。
 
+-   現在、TiCDC を使用してテーブルをダウンストリーム TiDB クラスターにレプリケートする場合、テーブルのTiFlashレプリカの作成はサポートされていません。つまり、TiCDC は次のようなTiFlash関連の DDL ステートメントのレプリケートをサポートしていません。
+
+    -   `ALTER TABLE table_name SET TIFLASH REPLICA count;`
+    -   `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
+
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
-次のステートメントを使用して、特定のテーブルのTiFlashレプリカのステータスを確認できます。テーブルは`WHERE`句を使用して指定されます`WHERE`句を削除すると、すべてのテーブルのレプリカ ステータスがチェックされます。
+次のステートメントを使用して、特定のテーブルのTiFlashレプリカのステータスを確認できます。テーブルは`WHERE`句を使用して指定されます。3 句を削除すると、 `WHERE`のテーブルのレプリカ ステータスがチェックされます。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
@@ -63,7 +68,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 
 上記のステートメントの結果:
 
--   `AVAILABLE`このテーブルのTiFlashレプリカが使用可能かどうかを示します。2 `1`使用可能、 `0`使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスが再計算されます。
+-   `AVAILABLE` 、このテーブルのTiFlashレプリカが使用可能かどうかを示します。2 `1`使用可能、 `0`使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスが再計算されます。
 -   `PROGRESS`レプリケーションの進行状況を意味します。値は`0.0`から`1.0`間です。6 `1`少なくとも 1 つのレプリカがレプリケートされていることを意味します。
 
 ## データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
@@ -102,6 +107,8 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 > -   ステートメントの実行が完了した**後に**このデータベースにテーブルを作成した場合、これらの新しいテーブルに対してTiFlashレプリカは自動的に作成されません。
 >
 > -   このステートメントは、システム テーブル、ビュー、一時テーブル、およびTiFlashでサポートされていない文字セットを持つテーブルをスキップします。
+
+> -   [`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)システム変数を設定することで、実行中に使用不可のままにできるテーブルの数を制御できます。この値を下げると、レプリケーション中のクラスターへの負荷を軽減できます。この制限はリアルタイムではないため、設定を適用した後でも使用不可のテーブルの数が制限を超える可能性があることに注意してください。
 
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
@@ -153,7 +160,7 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスは完�
     > tiup ctl:v8.1.2 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
-    数分以内に、 TiFlashノードの CPU とディスク IO リソースの使用率が大幅に増加し、 TiFlashレプリカの作成速度が速くなります。同時に、TiKV ノードの CPU とディスク IO リソースの使用率も増加します。
+    数分以内に、 TiFlashノードの CPU とディスク IO リソースの使用率が大幅に増加し、 TiFlashによるレプリカの作成速度が速くなります。同時に、TiKV ノードの CPU とディスク IO リソースの使用率も増加します。
 
     この時点で TiKV ノードとTiFlashノードにまだ余分なリソースがあり、オンライン サービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和して、たとえば元の速度を 3 倍にすることができます。
 

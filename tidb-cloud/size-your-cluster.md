@@ -42,7 +42,7 @@ TiDB のノード番号、vCPU、RAM を構成できます。
 
 ### TiDBノード番号 {#tidb-node-number}
 
-高可用性を実現するには、 TiDB Cloudクラスターごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。
+高可用性を確保するには、 TiDB Cloudクラスターごとに少なくとも 2 つの TiDB ノードを構成することをお勧めします。
 
 一般的に、TiDB のパフォーマンスは TiDB ノードの数に応じて直線的に増加します。ただし、TiDB ノードの数が 8 を超えると、パフォーマンスの増加は直線的な比例よりわずかに小さくなります。8 ノード追加するごとに、パフォーマンス偏差係数は約 5% になります。
 
@@ -106,7 +106,7 @@ TiKV のノード数、vCPU と RAM、storageを構成できます。
 
 ### TiKVノード番号 {#tikv-node-number}
 
-TiKV ノードの数は**少なくとも 1 セット (3 つの異なる使用可能ゾーン内の 3 つのノード)**である必要があります。
+TiKV ノードの数は**少なくとも 1 セット (3 つの異なる使用可能ゾーン内の 3 つのノード) で**ある必要があります。
 
 TiDB Cloud は、耐久性と高可用性を実現するために、選択したリージョン内のすべてのアベイラビリティ ゾーン (少なくとも 3 つ) に TiKV ノードを均等にデプロイします。一般的な 3 つのレプリカのセットアップでは、データはすべてのアベイラビリティ ゾーンの TiKV ノードに均等に分散され、各 TiKV ノードのディスクに保存されます。
 
@@ -114,19 +114,19 @@ TiDB Cloud は、耐久性と高可用性を実現するために、選択した
 >
 > TiDB クラスターをスケールすると、3 つのアベイラビリティーゾーンのノードが同時に増加または減少します。ニーズに応じて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)参照してください。
 
-TiKV は主にデータstorageに使用されますが、TiKV ノードのパフォーマンスはワークロードによって異なります。したがって、TiKV ノードの数を計画するときは、 [**データ量**](#estimate-tikv-node-number-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-number-according-to-expected-performance)両方に応じて見積もり、2 つの見積もりの​​うち大きい方を推奨ノード数とする必要があります。
+TiKV は主にデータstorageに使用されますが、TiKV ノードのパフォーマンスはワークロードによっても異なります。したがって、TiKV ノードの数を計画するときは、 [**データ量**](#estimate-tikv-node-number-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-number-according-to-expected-performance)両方に基づいて見積もり、2 つの見積もりの​​うち大きい方を推奨ノード数とする必要があります。
 
-#### データ量に応じてTiKVノード数を見積もる {#estimate-tikv-node-number-according-to-data-volume}
+#### データ量に応じてTiKVノード数を推定する {#estimate-tikv-node-number-according-to-data-volume}
 
 次のように、データ量に応じて TiKV ノードの推奨数を計算できます。
 
 `node num = ceil(size of your data * TiKV compression ratio * the number of replicas ÷ TiKV storage usage ratio ÷ one TiKV capacity ÷ 3) * 3`
 
-一般的に、TiKVstorageの使用率は 80% 未満に保つことが推奨されます。TiDB TiDB Cloudのレプリカ数はデフォルトで 3 です。8 vCPU、64 GiB TiKV ノードの最大storage容量は 4096 GiB です。
+一般的に、TiKVstorageの使用率は 80% 未満に保つことをお勧めします。TiDB TiDB Cloudのレプリカ数はデフォルトで 3 です。8 vCPU、64 GiB TiKV ノードの最大storage容量は 4096 GiB です。
 
 過去のデータに基づくと、TiKV の平均圧縮率は約 40% です。
 
-MySQL ダンプ ファイルのサイズが 20 TB で、TiKV 圧縮率が 40% であるとします。この場合、データ量に応じて、推奨される TiKV ノード数を次のように計算できます。
+MySQL ダンプ ファイルのサイズが 20 TB で、TiKV 圧縮率が 40% であるとします。この場合、データ量に応じて、次のように TiKV ノードの推奨数を計算できます。
 
 `node num = ceil(20 TB * 40% * 3 ÷ 0.8 ÷ 4096 GiB ÷ 3) * 3 = 9`
 
@@ -157,19 +157,19 @@ TiKV ノードの数が 8 未満の場合、パフォーマンス偏差係数は
 
 式では、まず`node num = ceil(overall expected performance ÷ performance per node)`計算して大まかなノード番号を取得し、対応するパフォーマンス偏差係数を使用してノード番号の最終結果を取得する必要があります。
 
-たとえば、混合ワークロードでの全体的な予想パフォーマンスが 110,000 QPS で、P95レイテンシーが約 100 ミリ秒で、8 vCPU、32 GiB TiKV ノードを使用するとします。この場合、前の表から 8 vCPU、32 GiB TiKV ノードの推定 TiKV パフォーマンス ( `17,800` ) を取得し、次のように TiKV ノードのおおよその数を計算できます。
+たとえば、混合ワークロードでの全体的な予想パフォーマンスが 110,000 QPS で、P95レイテンシーが約 100 ms で、8 vCPU、32 GiB TiKV ノードを使用するとします。この場合、前の表から 8 vCPU、32 GiB TiKV ノードの推定 TiKV パフォーマンス ( `17,800` ) を取得し、次のように TiKV ノードのおおよその数を計算できます。
 
 `node num = ceil(110,000 / 17,800 ) = 7`
 
 7 は 8 未満なので、7 ノードのパフォーマンス偏差係数は 0 です。推定 TiKV パフォーマンスは`7 * 17,800 * (1 - 0) = 124,600`であり、期待されるパフォーマンス 110,000 QPS を満たすことができます。
 
-したがって、期待されるパフォーマンスに応じて、7 つの TiKV ノード (8 vCPU、32 GiB) が推奨されます。
+したがって、予想されるパフォーマンスに応じて、7 つの TiKV ノード (8 vCPU、32 GiB) が推奨されます。
 
 次に、データ量に応じて計算された TiKV ノード数と、予想されるパフォーマンスに応じて計算された数を比較し、大きい方を TiKV ノードの推奨数とします。
 
-### TiKV ノードstorage {#tikv-node-storage}
+### TiKVノードのstorageサイズ {#tikv-node-storage-size}
 
-さまざまな TiKV vCPU でサポートされているノードstorageは次のとおりです。
+さまざまな TiKV vCPU でサポートされているノードstorageサイズは次のとおりです。
 
 | TiKV vCPU | 最小ノードstorage | 最大ノードstorage | デフォルトのノードstorage |
 | :-------: | :----------: | :----------: | :--------------: |
@@ -180,11 +180,33 @@ TiKV ノードの数が 8 未満の場合、パフォーマンス偏差係数は
 
 > **注記：**
 >
-> クラスターの作成後に TiKV ノードのstorageを減らすことはできません。
+> クラスターの作成後に TiKV ノードのstorageサイズを減らすことはできません。
+
+### TiKVノードstorageタイプ {#tikv-node-storage-types}
+
+TiDB Cloud は、 AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次の TiKVstorageタイプを提供します。
+
+-   [基本storage](#basic-storage)
+-   [標準storage](#standard-storage)
+
+#### 基本storage {#basic-storage}
+
+ベーシックstorageは、スタンダードstorageよりもパフォーマンスが低い汎用storageタイプです。
+
+ベーシックstorageタイプは、AWS でホストされている次のクラスターに自動的に適用されます。
+
+-   2025 年 4 月 1 日より前に作成された既存のクラスター。
+-   v7.5.5、v8.1.2、または v8.5.0 より前のバージョンの TiDB を使用して作成された新しいクラスター。
+
+#### 標準storage {#standard-storage}
+
+標準storageは、パフォーマンスとコスト効率のバランスが取れており、ほとんどのワークロードに最適です。基本storageと比較して、 Raftログ用に十分なディスク リソースを予約することで、パフォーマンスが向上します。これにより、 Raft I/O がデータ ディスク I/O に与える影響が軽減され、TiKV の読み取りおよび書き込みパフォーマンスが向上します。
+
+標準storageタイプは、AWS でホストされ、TiDB バージョン v7.5.5、v8.1.2、v8.5.0 以降で作成された新しいクラスターに自動的に適用されます。
 
 ## サイズTiFlash {#size-tiflash}
 
-TiFlash は、 TiKV からのデータをリアルタイムで同期し、すぐにリアルタイム分析ワークロードをサポートします。水平方向に拡張可能です。
+TiFlash は、TiKV からのデータをリアルタイムで同期し、すぐにリアルタイム分析ワークロードをサポートします。水平方向に拡張可能です。
 
 TiFlashのノード数、vCPU と RAM、storageを構成できます。
 
@@ -207,7 +229,7 @@ TiFlashノードの最小数は、特定のテーブルのTiFlashレプリカ数
 
 TiFlashノードの最小数: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-たとえば、AWS 上の各TiFlashノードのノードstorageを1024 GiB に設定し、テーブル A に 2 つのレプリカ (圧縮サイズは 800 GiB)、テーブル B に 1 つのレプリカ (圧縮サイズは 100 GiB) を設定する場合、必要なTiFlashノードの数は次のようになります。
+たとえば、AWS 上の各TiFlashノードのノードstorageを 1024 GiB に設定し、テーブル A に 2 つのレプリカ (圧縮サイズは 800 GiB)、テーブル B に 1 つのレプリカ (圧縮サイズは 100 GiB) を設定する場合、必要なTiFlashノードの数は次のようになります。
 
 TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2, 1)) ≈ 2`
 
