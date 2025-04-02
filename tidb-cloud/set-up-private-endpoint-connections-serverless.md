@@ -12,7 +12,7 @@ This tutorial walks you through the steps to connect to your TiDB Cloud cluster 
 - Currently, TiDB Cloud Starter and TiDB Cloud Essential support private endpoint connections when the endpoint service is hosted on Alibaba Cloud. If the service is hosted on AWS, Google Cloud, or another cloud provider, the private endpoint is not applicable.
 - Private endpoint connection across regions is not supported.
 
-## Set up a private endpoint with AWS
+## Set up a private endpoint with Alibaba Cloud
 
 To connect to your TiDB Cloud Starter cluster via a private endpoint, follow these steps:
 
