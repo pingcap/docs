@@ -228,6 +228,7 @@
     - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
     - [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md)
+    - [Migrate and Upgrade a TiDB Cluster](/tidb-upgrade-migration-guide.md)
     - [TiFlash Upgrade Guide](/tiflash-upgrade-guide.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
@@ -242,6 +243,7 @@
       - [Use Overview](/br/br-use-overview.md)
       - [Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
       - [Log Backup and PITR Guide](/br/br-pitr-guide.md)
+      - [Compact Log Backup](/br/br-compact-log-backup.md)
       - [Use Cases](/br/backup-and-restore-use-cases.md)
       - [Backup Storages](/br/backup-and-restore-storages.md)
     - BR CLI Manuals
@@ -311,11 +313,13 @@
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Configure TiDB for Optimal Performance](/tidb-performance-tuning-config.md)
-    - [Performance Analysis and Tuning](/performance-tuning-methods.md)
-    - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
-    - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
-    - [TiCDC Performance Analysis Methods](/ticdc-performance-tuning-methods.md)
-    - [Latency Breakdown](/latency-breakdown.md)
+    - [A Practical Guide for SQL Tuning](/sql-tuning-best-practice.md)
+    - Tuning by Metrics
+      - [Performance Analysis and Tuning](/performance-tuning-methods.md)
+      - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+      - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
+      - [TiCDC Performance Analysis Methods](/ticdc-performance-tuning-methods.md)
+      - [Latency Breakdown](/latency-breakdown.md)
     - [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
   - Configuration Tuning
     - [Tune Operating System Performance](/tune-operating-system.md)
@@ -957,6 +961,7 @@
     - System Tables
       - `mysql` Schema
         - [Overview](/mysql-schema/mysql-schema.md)
+        - [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)
         - [`user`](/mysql-schema/mysql-schema-user.md)
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
@@ -1101,6 +1106,7 @@
   - v7.6
     - [7.6.0-DMR](/releases/release-7.6.0.md)
   - v7.5
+    - [7.5.6](/releases/release-7.5.6.md)
     - [7.5.5](/releases/release-7.5.5.md)
     - [7.5.4](/releases/release-7.5.4.md)
     - [7.5.3](/releases/release-7.5.3.md)
@@ -1126,6 +1132,7 @@
   - v6.6
     - [6.6.0-DMR](/releases/release-6.6.0.md)
   - v6.5
+    - [6.5.12](/releases/release-6.5.12.md)
     - [6.5.11](/releases/release-6.5.11.md)
     - [6.5.10](/releases/release-6.5.10.md)
     - [6.5.9](/releases/release-6.5.9.md)

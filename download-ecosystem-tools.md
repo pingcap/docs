@@ -8,11 +8,11 @@ aliases: ['/docs/dev/download-ecosystem-tools/','/docs/dev/reference/tools/downl
 
 This document describes how to download the TiDB Toolkit.
 
-TiDB Toolkit contains frequently used TiDB tools, such as data export tool Dumpling, data import tool TiDB Lightning, and backup and restore tool BR.
+TiDB Toolkit contains frequently used TiDB tools, such as data export tool Dumpling, data import tool TiDB Lightning, backup and restore tool BR, and data consistency checker sync-diff-inspector.
 
 > **Tip:**
 >
-> - If your deployment environment has internet access, you can deploy a TiDB tool using a single [TiUP command](/tiup/tiup-component-management.md), so there is no need to download the TiDB Toolkit separately.
+> - For TiDB v9.0.0 and later versions, most tools, including sync-diff-inspector, are directly available through TiUP. If your deployment environment has internet access, you can deploy a TiDB tool using a single [TiUP command](/tiup/tiup-component-management.md), so there is no need to download the TiDB Toolkit separately.
 > - If you need to deploy and maintain TiDB on Kubernetes, instead of downloading the TiDB Toolkit, follow the steps in [TiDB Operator offline installation](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator#offline-installation).
 
 ## Environment requirements
@@ -46,7 +46,7 @@ Depending on which tools you want to use, you can install the corresponding offl
 | [TiDB Data Migration (DM)](/dm/dm-overview.md)  | `dm-worker-{version}-linux-{arch}.tar.gz` <br/>`dm-master-{version}-linux-{arch}.tar.gz` <br/>`dmctl-{version}-linux-{arch}.tar.gz`  |
 | [TiCDC](/ticdc/ticdc-overview.md)  | `cdc-{version}-linux-{arch}.tar.gz`  |
 | [Backup & Restore (BR)](/br/backup-and-restore-overview.md)  | `br-{version}-linux-{arch}.tar.gz`  |
-| [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)  | `sync_diff_inspector`  |
+| [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)  | For TiDB v9.0.0 and later versions: `tiflow-{version}-linux-{arch}.tar.gz` <br/>For TiDB versions before v9.0.0: `sync_diff_inspector`  |
 | [PD Recover](/pd-recover.md)  | `pd-recover-{version}-linux-{arch}.tar` |
 
 > **Note:**
