@@ -150,12 +150,12 @@ Before performing backup and restore, BR compares and checks the TiDB cluster ve
 
 Note that skipping the version check might introduce incompatibility. The version compatibility information between BR and TiDB versions are as follows:
 
-| Backup version (vertical) \ Restore version (horizontal) | Use BR nightly to restore TiDB nightly | Use BR v5.0 to restore TiDB v5.0| Use BR v4.0 to restore TiDB v4.0 |
+| Backup version (vertical) \ Restore version (horizontal) | Use BR v5.4 to restore TiDB v5.4 | Use BR v5.0 to restore TiDB v5.0| Use BR v4.0 to restore TiDB v4.0 |
 |  ----  |  ----  | ---- | ---- |
-| Use BR nightly to back up TiDB nightly | ✅ | ✅ | ❌ (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.)  |
+| Use BR v5.4 to back up TiDB v5.4 | ✅ | ✅ | ❌ (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.)  |
 | Use BR v5.0 to back up TiDB v5.0 | ✅ | ✅ | ❌  (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.) 
 | Use BR v4.0 to back up TiDB v4.0 | ✅ | ✅ | ✅ (If TiKV >= v4.0.0-rc.1, and if BR contains the [#233](https://github.com/pingcap/br/pull/233) bug fix and TiKV does not contain the [#7241](https://github.com/tikv/tikv/pull/7241) bug fix, BR will cause the TiKV node to restart.) |
-| Use BR nightly or v5.0 to back up TiDB v4.0 | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) |
+| Use BR v5.4 or v5.0 to back up TiDB v4.0 | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) |
 
 ### Back up and restore table data in the `mysql` system schema (experimental feature)
 
