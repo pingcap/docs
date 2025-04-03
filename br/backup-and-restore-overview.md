@@ -87,12 +87,12 @@ Before performing backup and restoration, BR compares and checks the TiDB cluste
 
 Note that skipping the version check might introduce incompatibility. The version compatibility mapping between BR and TiDB versions are as follows:
 
-| Backup version (vertical) \ Restoration version (horizontal) | Use BR nightly to restore TiDB nightly | Use BR v5.0 to restore TiDB v5.0 | Use BR v4.0 to restore TiDB v4.0 |
+| Backup version (vertical) \ Restoration version (horizontal) | Use BR v6.1 to restore TiDB v6.1 | Use BR v5.0 to restore TiDB v5.0 | Use BR v4.0 to restore TiDB v4.0 |
 |  ----  |  ----  | ---- | ---- |
-| Use BR nightly to back up TiDB nightly | ✅ | ✅ | ❌ (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.) |
+| Use BR v6.1 to back up TiDB v6.1 | ✅ | ✅ | ❌ (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.) |
 | Use BR v5.0 to back up TiDB v5.0 | ✅ | ✅ | ❌ (If a table with the primary key of the non-integer clustered index type is restored to a TiDB v4.0 cluster, BR will cause data error without warning.) |
 | Use BR v4.0 to back up TiDB v4.0 | ✅ | ✅  | ✅ (If TiKV >= v4.0.0-rc.1, and if BR contains the [#233](https://github.com/pingcap/br/pull/233) bug fix and TiKV does not contain the [#7241](https://github.com/tikv/tikv/pull/7241) bug fix, BR will cause the TiKV node to restart.)|
-| Use BR nightly or v5.0 to back up TiDB v4.0 | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.)| ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.)| ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) |
+| Use BR v6.1 or v5.0 to back up TiDB v4.0 | ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.)| ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.)| ❌ (If the TiDB version is earlier than v4.0.9, the [#609](https://github.com/pingcap/br/issues/609) issue might occur.) |
 
 #### Some tips
 
