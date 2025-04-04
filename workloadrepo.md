@@ -9,7 +9,7 @@ The workload repository is a system for collecting and storing historical worklo
 
 ## Enabling the Workload Repository
 
-To enable the Workload Repository, set the [`tidb_workload_repository_dest`](/system-variables.md#tidb_workload_repository_dest-new-in-v9.0.0) system variable:
+To enable the Workload Repository, set the [`tidb_workload_repository_dest`](/system-variables.md#tidb_workload_repository_dest-new-in-v900) system variable:
 
 ```sql
 SET GLOBAL tidb_workload_repository_dest = 'table';
@@ -47,7 +47,7 @@ Data is sampled from the following tables:
 | `CLIENT_ERRORS_SUMMARY_BY_USER` | `HIST_CLIENT_ERRORS_SUMMARY_BY_USER` | Client error summaries by user |
 | `CLIENT_ERRORS_SUMMARY_GLOBAL` | `HIST_CLIENT_ERRORS_SUMMARY_GLOBAL` | Client error summaries by global |
 
-The snapshot sampling interval can be controlled with [`tidb_workload_repository_snapshot_interval`](/system-variables.md#tidb_workload_repository_snapshot_interval-new-in-v9.0.0):
+The snapshot sampling interval can be controlled with [`tidb_workload_repository_snapshot_interval`](/system-variables.md#tidb_workload_repository_snapshot_interval-new-in-v900):
 
 ```sql
 SET GLOBAL tidb_workload_repository_snapshot_interval = 900; -- set the interval to 15 minutes
@@ -83,7 +83,7 @@ Data is sampled from the following tables:
 | `MEMORY_USAGE` | `HIST_MEMORY_USAGE` | Memory usage |
 | `DEADLOCKS` | `HIST_DEADLOCKS` | Deadlock information |
 
-The time-based sampling interval can be controlled with [`tidb_workload_repository_active_sampling_interval`](/system-variables.md#tidb_workload_repository_active_sampling_interval-new-in-v9.0.0):
+The time-based sampling interval can be controlled with [`tidb_workload_repository_active_sampling_interval`](/system-variables.md#tidb_workload_repository_active_sampling_interval-new-in-v900):
 
 ```sql
 SET GLOBAL tidb_workload_repository_active_sampling_interval = 20; -- set the interval to 20 seconds
@@ -95,7 +95,7 @@ Setting this global variable to `0` disables the time-based sampling process.
 
 The system automatically purges data based on the retention period setting, using partitions for efficient data management.
 
-The [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_workload_repository_retention_days-new-in-v9.0.0) variable controls the retention period for historical data in the Workload Repository. For example, to keep data for 30 days, run the following:
+The [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900) variable controls the retention period for historical data in the Workload Repository. For example, to keep data for 30 days, run the following:
 
 ```sql
 SET GLOBAL tidb_workload_repository_retention_days = 30;
