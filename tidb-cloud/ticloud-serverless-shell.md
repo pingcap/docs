@@ -32,6 +32,8 @@ ticloud serverless shell -c <cluster-id> --password <password>
 ```
 
 Connect to a TiDB Cloud cluster with a specific user and password in non-interactive mode:
+
+```shell
 ticloud serverless shell -c <cluster-id> -u <user-name> --password <password>
 ```
 
