@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless branch create`.
 
 # ticloud serverless branch create
 
-Create a [branch](/tidb-cloud/branch-overview.md) for a TiDB Cloud Starter cluster:
+Create a [branch](/tidb-cloud/branch-overview.md) for a TiDB Cloud cluster:
 
 ```shell
 ticloud serverless branch create [flags]
@@ -13,13 +13,13 @@ ticloud serverless branch create [flags]
 
 ## Examples
 
-Create a branch for a TiDB Cloud Starter cluster in interactive mode:
+Create a branch for a TiDB Cloud cluster in interactive mode:
 
 ```shell
 ticloud serverless branch create
 ```
 
-Create a branch for a TiDB Cloud Starter cluster in non-interactive mode:
+Create a branch for a TiDB Cloud cluster in non-interactive mode:
 
 ```shell
 ticloud serverless branch create --cluster-id <cluster-id> --display-name <branch-name>
