@@ -30,7 +30,7 @@ The Workload Repository stores data in tables under the `WORKLOAD_SCHEMA` databa
 
 ## Snapshot sampling process (hourly by default)
 
-The snapshot sampling process, which runs every 15 minutes to 2 hours, samples data from various monitoring tables. Snapshots are initiated from one of the TiDB nodes at the specified intervals, and process is as follows:
+The snapshot sampling process, which runs every 15 minutes to 2 hours, samples data from various cumulative metrics tables. Snapshots are initiated from one of the TiDB nodes at the specified intervals, and process is as follows:
 
  1. From the initiating node a row is inserted into `HIST_SNAPSHOTS`, capturing the snapshot ID, start and end timestamps, and server version details.
  2. On each TiDB node, all rows from the source tables are copied to the corresponding history tables with the `HIST_` prefix. The copied data includes the original columns from the source tables plus additional columns for the timestamp, instance ID, and snapshot ID.
@@ -61,9 +61,11 @@ Note that while the snapshot sampling process runs automatically based on the co
 ADMIN WORKLOAD REPOSITORY TAKE SNAPSHOT;
 ```
 
+Manually triggering snapshots does not change the interval or timing of automatic snapshots.
+
 ## Time-based sampling process (every 5 seconds by default)
 
-The time-based sampling process, which runs every 1 to 600 seconds, samples data from various monitoring tables.
+The time-based sampling process samples data from various non-cumulative metrics tables at intervals ranging from 1 to 600 seconds.
 
 When the time-base sampling process runs, all rows from the source tables are copied to the corresponding history tables with the `HIST_` prefix. The copied data includes the original columns from the source tables plus additional columns for the timestamp and instance ID.
 
@@ -86,6 +88,9 @@ The time-based sampling interval can be controlled with [`tidb_workload_reposito
 ```sql
 SET GLOBAL tidb_workload_repository_active_sampling_interval = 20; -- set the interval to 20 seconds
 ```
+
+
+Setting this global variable to `0` disables the time-based sampling process.
 
 ## Data retention
 
