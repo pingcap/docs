@@ -89,7 +89,6 @@ The time-based sampling interval can be controlled with [`tidb_workload_reposito
 SET GLOBAL tidb_workload_repository_active_sampling_interval = 20; -- set the interval to 20 seconds
 ```
 
-
 Setting this global variable to `0` disables the time-based sampling process.
 
 ## Data retention
