@@ -3542,7 +3542,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
-    - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
     - `start_ts`: The start timestamp of the transaction.
     - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
     - `error`: The error message, if any.
@@ -6406,19 +6405,6 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
-- This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
-
-### txn_scope
-
-> **Note:**
->
-> This variable is read-only for [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless).
-
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `global`
-- Value options: `global` and `local`
-- This variable is used to set whether the current session transaction is a global transaction or a local transaction.
 - This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
 
 ### validate_password.check_user_name <span class="version-mark">New in v6.5.0</span>
