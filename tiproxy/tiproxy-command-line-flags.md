@@ -165,6 +165,8 @@ Options:
 
 - `--output`: (required) specifies the directory to store traffic files.
 - `--duration`: (required) specifies the duration of capture. The unit is one of `m` (minutes), `h` (hours), or `d` (days). For example, `--duration=1h` captures traffic for one hour.
+- `--compress`: (optional) specifies whether to compress traffic files. `true` means compression, and the compression format is gzip. `false` means no compression. The default value is `true`.
+- `--encryption-method`: (optional) specifies the algorithm for encrypting traffic files. Only `""`, `plaintext`, and `aes256-ctr` are supported. `""` and `plaintext` indicate no encryption, and `aes256-ctr` indicates encryption using the `AES256-CTR` algorithm. When specifying encryption, you also need to configure [`encryption-key-path`](/tiproxy/tiproxy-configuration.md#encryption-key-path). The default value is `""`.
 
 Example:
 
@@ -181,9 +183,10 @@ The `tiproxyctl traffic replay` command is used to replay captured traffic.
 Options:
 
 - `--username`: (required) specifies the database username for replay.
-- `--password`: (optional) specifies the password for the username. The default value is an empty string `""`.
+- `--password`: (optional) specifies the password for the username. If not specified, you need to enter the password in an interactive mode.
 - `--input`: (required) specifies the directory containing traffic files.
 - `--speed`: (optional) specifies the replay speed multiplier. The range is `[0.1, 10]`. The default value is `1`, indicating replay at the original speed.
+- `--read-only`: (optional) specifies whether to replay only read-only SQL statements. `true` means to replay only read-only SQL statements, and `false` means to replay all SQL statements. The default value is `false`.
 
 Example:
 
@@ -195,17 +198,26 @@ tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --passwor
 
 #### `traffic cancel`
 
-The `tiproxyctl traffic cancel` command is used to cancel the current capture or replay task.
+The `tiproxyctl traffic cancel` command is used to cancel the current capture or replay job.
 
 #### `traffic show`
 
-The `tiproxyctl traffic show` command is used to display historical capture and replay tasks.
+The `tiproxyctl traffic show` command is used to display historical capture and replay jobs. It outputs an array of objects, and each object represents a job. Each job has the following fields:
 
-The `status` field in the output indicates the task status, with the following possible values:
-
-- `done`: the task completed normally.
-- `canceled`: the task was canceled. You can check the `error` field for the reason.
-- `running`: the task is running. You can check the `progress` field for the completion percentage.
+- `type`: the job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job
+- `status`: the current status of the job. `running` indicates in progress, `done` indicates normal completion, and `canceled` indicates job failure..
+- `start_time`: the start time of the job
+- `end_time`: the end time if the job has completed. Otherwise, it is empty.
+- `progress`: the completion percentage of the job
+- `error`: if the job fails, this column contains the reason for the failure. Otherwise, it is empty. For example, `manually stopped` means the user manually cancels the job by executing `CANCEL TRAFFIC JOBS`.
+- `output`: the output traffic file path of the capture job
+- `duration`: the duration of the traffic capture job
+- `compress`: whether the traffic files are compressed
+- `encryption_method`: the encryption method of the traffic file
+- `input`: the input traffic file path of the replay job
+- `username`: the database username for traffic replay
+- `speed`: the replay speed multiplier
+- `read_only`: whether only replays read-only statements
 
 Example output:
 
@@ -213,30 +225,31 @@ Example output:
 [
   {
     "type": "capture",
+    "status": "done",
     "start_time": "2024-09-01T14:30:40.99096+08:00",
     "end_time": "2024-09-01T16:30:40.99096+08:00",
-    "duration": "2h",
-    "output": "/tmp/traffic",
     "progress": "100%",
-    "status": "done"
+    "output": "/tmp/traffic",
+    "duration": "2h",
+    "compress": true
   },
   {
     "type": "capture",
+    "status": "canceled",
     "start_time": "2024-09-02T18:30:40.99096+08:00",
     "end_time": "2024-09-02T19:00:40.99096+08:00",
-    "duration": "2h",
-    "output": "/tmp/traffic",
     "progress": "25%",
-    "status": "canceled",
-    "error": "canceled manually"
+    "error": "manually stopped",
+    "output": "/tmp/traffic",
+    "duration": "2h"
   },
   {
     "type": "capture",
+    "status": "running",
     "start_time": "2024-09-03T13:31:40.99096+08:00",
-    "duration": "2h",
-    "output": "/tmp/traffic",
     "progress": "45%",
-    "status": "running"
+    "output": "/tmp/traffic",
+    "duration": "2h"
   }
 ]
 ```
