@@ -28,7 +28,7 @@ TiKV currently does not exclude encryption keys and user data from core dumps. I
 
 TiKV tracks encrypted data files using the absolute path of the files. As a result, once encryption is turned on for a TiKV node, the user should not change data file paths configuration such as `storage.data-dir`, `raftstore.raftdb-path`, `rocksdb.wal-dir` and `raftdb.wal-dir`.
 
-SM4 encryption is only supported in v6.3.0 and later versions of TiKV. TiKV versions earlier than v6.3.0 only support AES encryption. SM4 encryption might lead to 50% to 80% degradation on throughput. 
+SM4 encryption is only supported in v6.3.0 and later versions of TiKV. TiKV versions earlier than v6.3.0 only support AES encryption. SM4 encryption affects performance. In the worst-case scenario, it might cause a ​50% to 80% throughput degradation. However, a sufficiently large [`storage.block-cache`](/tikv-configuration-file.md#storageblock-cache) can significantly mitigate this impact, reducing the throughput degradation to around 10%.
 
 ### TiFlash
 

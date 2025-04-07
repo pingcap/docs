@@ -1,0 +1,28 @@
+name: Trigger docs.tidb.io update
+
+on:
+  push:
+    paths-ignore:
+      - ".github/**"
+    branches:
+      - release-cloud
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Extract sha
+        id: extract
+        shell: bash
+        run: |
+          echo "sha=$(sha=${{ github.sha }}; echo ${sha:0:6})" >> $GITHUB_OUTPUT
+
+      - name: trigger docs-staging workflow
+        run: |
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token ${{ secrets.DOCS_STAGING }}" \
+          https://api.github.com/repos/pingcap/docs-staging/actions/workflows/update-cloud.yml/dispatches \
+          -d '{"ref":"tidb-cloud","inputs":{"full": "false", "repo":"${{ github.repository }}","branch":"${{ github.ref_name }}"}}'

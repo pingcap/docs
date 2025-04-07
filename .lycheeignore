@@ -31,3 +31,5 @@ https://jwt\.io/
 https://typeorm\.io/.*
 https://dash\.cloudflare\.com/.*
 https://centminmod\.com/mydumper\.html
+https://docs\.pingcap\.com/tidb/v6\.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660
+https://docs\.pingcap\.com/tidb/v7\.6/system-variables#tidb_ddl_version-new-in-v760

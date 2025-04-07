@@ -50,6 +50,8 @@ Query OK, 0 rows affected (0.08 sec)
 
 Starting from v7.5.3 and v7.6.0, TiDB provides a full list of keywords in the [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
 
+You can use the [`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function) system variable to control whether the keywords in the [window function](/functions-and-operators/window-functions.md) take effect in the syntax tree. If you set `tidb_enable_window_function` to `OFF`, the words in the window function will no longer be treated as keywords.
+
 ## Keyword list
 
 The following list shows the keywords in TiDB. Reserved keywords are marked with `(R)`. Reserved keywords for [Window Functions](/functions-and-operators/window-functions.md) are marked with `(R-Window)`. Special non-reserved keywords that need to be escaped with backticks `` ` `` are marked with `(S)`.

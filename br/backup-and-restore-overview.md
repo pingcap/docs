@@ -17,7 +17,7 @@ BR satisfies the following requirements:
 
 ## Before you use
 
-This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues.
+This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues. For more information about the compatibility of the BR tool with other features or versions, see [Compatibility](#compatibility).
 
 ### Restrictions
 
@@ -139,7 +139,7 @@ The compatibility information for BR before TiDB v6.6.0 is as follows:
 | TiDB v6.0, v6.1, v6.2, v6.3, v6.4, or v6.5 snapshot backup | Compatible (known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible (BR must be v6.6) |
 | TiDB v6.3, v6.4, v6.5, or v6.6 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
 
-#### BR version compatibility matrix between TiDB v6.5.0 and v8.5.0 
+#### BR version compatibility matrix between TiDB v6.5.0 and v8.5.0
 
 This section introduces the BR compatibility information for all [Long-Term Support (LTS)](/releases/versioning.md#long-term-support-releases) versions between TiDB v6.5.0 and v8.5.0 (including v6.5.0, v7.1.0, v7.5.0, v8.1.0, and v8.5.0):
 
