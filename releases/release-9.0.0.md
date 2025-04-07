@@ -203,6 +203,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 ### Behavior changes
 
 * TiDB Lightning internal error-logging and conflict-detection tables names changed to `conflict_error_v4`, `type_error_v2`, and `conflict_records_v2`, and now have primary keys. If you rely on these internal tables for automation, confirm the new naming and schema changes [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716]
+* Starting from v9.0.0, TiFlash changes the storage format of string data to optimize the string read and write performance. Therefore, after TiFlash is upgraded to v9.0.0 or a later version, in-place downgrading to the original version is not supported. For more information, see [TiFlash upgrade guide](/tiflash-upgrade-guide.md).
+* Starting from v9.0.0, TiCDC introduces a [security mechanism](/ticdc/ticdc-manage-changefeed.md#security-mechanism) to prevent users from accidentally configuring the same TiDB cluster as both the upstream and downstream for data replication, which could lead to circular replication and data anomalies. When creating, updating, or resuming a replication task, TiCDC automatically checks whether the upstream and downstream TiDB clusters have the same `cluster_id`. If TiCDC detects the same `cluster_id` for both the upstream and downstream, it will reject the task.
 
 ### System variables
 
@@ -210,6 +212,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 |--------|------------------------------|------|
 | `txn_scope` | Deleted | Starting from v9.0.0, this variable is removed. |
 | [`max_user_connections`](/system-variables.md/#max_user_connections-new-in-v900) | Newly added | Controls the number of connections a single user can establish to a single TiDB node, preventing excessive [token](/tidb-configuration-file.md/#token-limit) consumption by one user from delaying responses to other users' requests. |
+| [`mpp_version`](/system-variables.md#mpp_version-new-in-v660) | Newly added | Adds the `3` option, which enables the new string data exchange format for TiFlash. When this variable is not specified, TiDB automatically selects the latest version `3` of the MPP execution plan to improve the serialization and deserialization efficiency of strings, thereby enhancing query performance. |
+| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) | Newly added | Changes the default value from `OFF` to `ON`. When it is `ON`, TiDB evenly distributes Region information requests to all PD servers, so PD followers can also handle Region requests, reducing the CPU pressure on the PD leader. Starting from v9.0.0, Region information requests from TiDB Lightning are also evenly sent to all PD nodes when the value is `ON`. |
+| [`tidb_pipelined_dml_resource_policy`](/system-variables.md#tidb_pipelined_dml_resource_policy-new-in-v900) | Newly added | Controls the resource usage policy for [Pipelined DML](/pipelined-dml.md). It takes effect only when [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `bulk`. |
 | [`tidb_accelerate_user_creation_update`](/system-variables.md/#tidb_accelerate_user_creation_update-new-in-v900)| Newly added | Improves the performance of creating and modifying users in scenarios with hundreds of thousands to millions of users. |
 | [`tidb_max_dist_task_nodes`](/system-variables.md/#tidb_max_dist_task_nodes-new-in-v900)| Newly added | Controls the maximum number of TiDB nodes available for distributed framework tasks. The default value is `-1`, which enables automatic mode. In this mode, the system automatically selects an appropriate number of nodes. |
 | [`tidb_workload_repository_active_sampling_interval`](/system-variables.md#tidb_workload_repository_active_sampling_interval-new-in-v900) | Newly added | Controls the sampling interval for the [Workload Repository](/workloadrepo.md)'s Time-based Sampling Process. |
@@ -224,6 +229,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
+| TiKV | [`storage.max-ts.action-on-invalid-update`](/tikv-configuration-file.md#action-on-invalid-update-new-in-v900) | Newly added | Determines how TiKV handles invalid `max-ts` update requests. The default value is `"panic"`, which means that TiKV panics when it detects invalid `max-ts` update requests. |
+| TiKV | [`storage.max-ts.cache-sync-interval`](/tikv-configuration-file.md#cache-sync-interval-new-in-v900) | Newly added | Controls the interval at which TiKV updates its local PD TSO cache. The default value is `"15s"`. |
+| TiKV | [`storage.max-ts.max-drift`](/tikv-configuration-file.md#max-drift-new-in-v900) | Newly added | Specifies the maximum time by which the timestamp of a read or write request can exceed the PD TSO cached in TiKV. The default value is `"60s"`. |
+| TiFlash| [`format_version`](/tiflash/tiflash-configuration.md#format_version) | Modified | Changes the default value from `7` to `8`, which means the default DTFile file format for v9.0.0 or a later version is `8`. This new format supports a new string serialization scheme that improves string read and write performance. |
+| TiCDC | [`newarch`](/ticdc/ticdc-server-config.md#newarch) | Newly added | Controls whether to enable the [TiCDC new architecture](/ticdc/ticdc-new-arch.md). By default, `newarch` is not specified, indicating that the old architecture is used. `newarch` applies only to the new architecture. If `newarch` is added to the configuration file of the TiCDC old architecture, it might cause parsing failures. |
 | DM | [--redact-info-log](/dm/dm-command-line-flags/#--redact-info-log) | Newly added | Controls whether DM replaces sensitive query arguments with ? placeholders in logs. The default value is false. When set to true, query arguments in DM logs are redacted. This parameter only redacts query arguments (not entire SQL statements), and requires a DM-worker restart to take effect. |
 | BR | [`--checkpoint-storage`](br/br-checkpoint-restore.md#implementation-details-store-checkpoint-data-in-the-external-storage) | Newly added | Specifies the external storage for BR to store checkpoint data. |
 | TiProxy | [`enable-traffic-replay`](/tiproxy/tiproxy-configuration.md#enable-traffic-replay)  | Newly added | Specifies whether to enable [traffic replay](/tiproxy/tiproxy-traffic-replay.md). If it is set to `false`, traffic capture and replay operations will result in errors. |
@@ -233,6 +243,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 ### Offline package changes
 
 Starting from v9.0.0, the offline package location of the [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) tool in the `TiDB-community-toolkit` [binary package](/binary-package.md) is changed from `sync_diff_inspector` to `tiflow-{version}-linux-{arch}.tar.gz`.
+
+### System table changes
+
+| System table | Change type | Description |
+| -------- | -------- | -------- |
+| [`mysql.tidb`](/mysql-schema/mysql-schema.md#cluster-status-system-tables) | Modified | Adds the `cluster_id` field, which represents the unique identifier of a TiDB cluster. Note that `cluster_id` is read-only and cannot be modified. |
 
 ### Operating system and platform requirement changes
 
