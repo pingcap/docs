@@ -132,8 +132,7 @@ Take the following steps to create the Kafka VPC.
    - **Subnet name**: `bastion`
    - **IPv4 subnet CIDR block**: `10.0.192.0/18`
 
-4. Click **Create subnet**. The **Subnets Listing** page is displayed.
-5. Configure the bastion subnet to the Public subnet.
+4. Configure the bastion subnet to the Public subnet.
 
     1. Go to [VPC dashboard > Internet gateways](https://console.aws.amazon.com/vpcconsole/home#igws:). Create an Internet Gateway with the name `kafka-vpc-igw`.
     2. On the **Internet gateways Detail** page, in **Actions**, click **Attach to VPC** to attach the Internet Gateway to the Kafka VPC.
