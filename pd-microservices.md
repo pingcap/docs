@@ -12,10 +12,6 @@ Starting from v8.0.0, PD supports the microservice mode, which splits the timest
 
 Each microservice is deployed as an independent process. If you configure more than one replica for a microservice, the microservice automatically implements a primary-secondary fault-tolerant mode to ensure high availability and reliability of the service.
 
-> **Warning:**
->
-> Currently, the PD microservices feature is experimental. It is not recommended that you use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/tikv/pd/issues) on GitHub.
-
 ## Usage scenarios
 
 PD microservices are typically used to address performance bottlenecks in PD and improve PD service quality. With this feature, you can avoid the following issues:
