@@ -960,6 +960,7 @@
     - System Tables
       - `mysql` Schema
         - [Overview](/mysql-schema/mysql-schema.md)
+        - [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md)
         - [`user`](/mysql-schema/mysql-schema-user.md)
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
