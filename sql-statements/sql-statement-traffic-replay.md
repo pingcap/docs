@@ -5,11 +5,11 @@ summary: An overview of the usage of TRAFFIC REPLAY for the TiDB database.
 
 # TRAFFIC REPLAY
 
-TiDB v9.0.0 introduces the `TRAFFIC REPLAY` syntax, which is used to send requests to all TiProxy instances in the cluster, allowing TiProxy to replay traffic from the traffic file to TiDB.
+TiDB v9.0.0 introduces the `TRAFFIC REPLAY` syntax, which is used to send requests to all [TiProxy](/tiproxy/tiproxy-overview.md) instances in the cluster, allowing TiProxy to replay traffic from the traffic file to TiDB.
 
-Replaying traffic requires the current user to have the `SUPER` or [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
+To replay traffic, the current user must have the `SUPER` or [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
 
-`TRAFFIC REPLAY` has the following options:
+`TRAFFIC REPLAY` supports the following options:
 
 - `USER`: (required) specifies the database username for replay.
 - `PASSWORD`: (optional) specifies the password for the username. The default value is an empty string `""`.
@@ -38,30 +38,30 @@ TrafficReplayOpt ::=
 Replay traffic from the local `/tmp/traffic` directory of the TiProxy instance, using the TiDB user `u1`, whose password is `"123456"`:
 
 ```sql
-TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456"
+TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456";
 ```
 
 Replay traffic from the traffic files stored in the S3 storage:
 
 ```sql
-TRAFFIC REPLAY FROM "s3://external/traffic?access-key=${access-key}&secret-access-key=${secret-access-key}" USER="u1" PASSWORD="123456"
+TRAFFIC REPLAY FROM "s3://external/traffic?access-key=${access-key}&secret-access-key=${secret-access-key}" USER="u1" PASSWORD="123456";
 ```
 
-Replay traffic with double speed:
+Replay traffic at double speed:
 
 ```sql
-TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456" SPEED=2
+TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456" SPEED=2;
 ```
 
 Replay only read-only statements, not write statements:
 
 ```sql
-TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456" READ_ONLY=true
+TRAFFIC REPLAY FROM "/tmp/traffic" USER="u1" PASSWORD="123456" READ_ONLY=true;
 ```
 
 ## MySQL compatibility
 
-The `TRAFFIC REPLAY` syntax is TiDB-specific and not compatible with MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

@@ -5,7 +5,7 @@ summary: Introduce the use cases and steps for the TiProxy traffic replay featur
 
 # TiProxy Traffic Replay
 
-Starting from TiProxy v1.4.0, you can use TiProxy to capture access traffic in a TiDB production cluster and replay it in a test cluster at a specified rate. This feature enables you to reproduce actual workloads from the production cluster in a test environment, verifying SQL statement execution results and performance.
+Starting from TiProxy v1.3.0, you can use TiProxy to capture access traffic in a TiDB production cluster and replay it in a test cluster at a specified rate. This feature enables you to reproduce actual workloads from the production cluster in a test environment, verifying SQL statement execution results and performance. Starting from v1.4.0, the TiProxy traffic replay feature becomes generally available (GA).
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-traffic-replay.png" alt="TiProxy traffic replay" width="800" />
 
@@ -25,7 +25,7 @@ Traffic replay is not suitable for the following scenarios:
 
 ## Usage
 
-Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for traffic capture and replay. Starting from TiDB v9.0.0, it is recommended to use SQL to capture and replay traffic.
+Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for traffic capture and replay. Starting from TiDB v9.0.0, it is recommended to use SQL statements to capture and replay traffic.
 
 <SimpleTab>
 <div label="Use SQL">
@@ -38,9 +38,9 @@ Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for tra
 
 2. Use the [`TRAFFIC CAPTURE`](/sql-statements/sql-statement-traffic-capture.md) statement to capture traffic.
 
-    TiProxy supports capturing traffic to local and external storage. When capturing traffic to local, you need to manually copy the traffic file to the TiProxy cluster for replay after capturing the traffic, but when using external storage, there is no need to manually copy. TiProxy supports external storage including Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, or other file storage services that implement the S3 protocol. For more information about external storage, see [URI formats of external storage services](/external-storage-uri.md).
+    TiProxy supports capturing traffic to local and external storage. When capturing traffic to local, you need to manually copy the traffic file to the TiProxy cluster for replay after capturing the traffic, but when using external storage, there is no need to manually copy. TiProxy supports external storage including Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, or other S3-compatible file storage services. For more information about external storage, see [URI formats of external storage services](/external-storage-uri.md).
 
-    Capturing traffic requires the current user to have the `SUPER` or [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
+    To capture traffic, the current user must have the `SUPER` or [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
 
     > **Note:**
     >
@@ -118,7 +118,7 @@ Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for tra
 
     Because all traffic runs under user `u1`, ensure `u1` can access all databases and tables. If no such user exists, create one. If the production cluster has a [resource group](/tidb-resource-control-ru-groups.md#manage-resource-groups), TiProxy automatically sets the resource group of each session to the same as when it was captured. Therefore, configure the [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) [privilege](/sql-statements/sql-statement-set-resource-group.md#privilege) for `u1`.
 
-    If you replay all statements, before replaying again, you may need to restore the data to before the last replay to avoid errors caused by data duplication. You can also add the `--read-only=true` option to replay only read-only statements to avoid restoring data before each replay.
+    If you replay all statements, before replaying again, you might need to restore the data to before the last replay to avoid errors caused by data duplication. You can also add the `--read-only=true` option to replay only read-only statements to avoid restoring data before each replay.
 
     For more information, see [`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay).
 
@@ -237,12 +237,12 @@ The shown results vary depending on the privileges the current user has.
 For example, the following output indicates that 2 TiProxy instances are capturing traffic:
 
 ```
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
-| START_TIME                 | END_TIME | INSTANCE       | TYPE    | PROGRESS | STATUS  | FAIL_REASON |
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
-| 2024-12-17 10:54:41.000000 |          | 10.1.0.10:3080 | capture | 45%      | running |             |
-| 2024-12-17 10:54:41.000000 |          | 10.1.0.11:3080 | capture | 45%      | running |             |
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
+| START_TIME                 | END_TIME | INSTANCE       | TYPE    | PROGRESS | STATUS  | FAIL_REASON | PARAMS                                                                     |
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
+| 2024-12-17 10:54:41.000000 |          | 10.1.0.10:3080 | capture | 45%      | running |             | OUTPUT="/tmp/traffic", DURATION="90m", COMPRESS=true, ENCRYPTION_METHOD="" |
+| 2024-12-17 10:54:41.000000 |          | 10.1.0.11:3080 | capture | 45%      | running |             | OUTPUT="/tmp/traffic", DURATION="90m", COMPRESS=true, ENCRYPTION_METHOD="" |
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
 2 rows in set (0.01 sec)
 ```
 
@@ -273,11 +273,11 @@ For example, the following output indicates a running capture job:
 [
    {
       "type": "capture",
+      "status": "running",
       "start_time": "2024-09-03T09:10:58.220644+08:00",
-      "duration": "2h",
-      "output": "/tmp/traffic",
       "progress": "45%",
-      "status": "running"
+      "output": "/tmp/traffic",
+      "duration": "2h"
    }
 ]
 ```
@@ -298,6 +298,7 @@ For more information, see [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command
 ## Limitations
 
 - TiProxy only supports replaying traffic files captured by TiProxy and does not support other file formats. Therefore, make sure to capture traffic from the production cluster using TiProxy first.
+- TiProxy does not support replaying [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statements.
 - For security reasons, the following statements will not be captured and replayed:
 
     - `CREATE USER` statement

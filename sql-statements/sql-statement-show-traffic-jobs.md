@@ -5,25 +5,26 @@ summary: An overview of the usage of SHOW TRAFFIC JOBS for the TiDB database.
 
 # SHOW TRAFFIC JOBS
 
-TiDB v9.0.0 introduces the `SHOW TRAFFIC JOBS` syntax, which is used to show all traffic capture or replay jobs executed by TiProxy in the cluster. Each row represents a job of a TiProxy instance. Each TiProxy instance saves at most the 10 most recent jobs.
+TiDB v9.0.0 introduces the `SHOW TRAFFIC JOBS` syntax, which is used to show all traffic capture or replay jobs executed by [TiProxy](/tiproxy/tiproxy-overview.md) in the cluster. In the output, each row represents a job of a TiProxy instance. Each TiProxy instance stores up to 10 most recent jobs.
 
 The shown results vary depending on the privileges the current user has.
 
-- If the user has the [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege, this statement shows traffic capture jobs.
-- If the user has the [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege, this statement shows traffic replay jobs.
-- If the user has the `SUPER` privilege or both above privileges, this statement shows both traffic capture and traffic replay jobs.
+- A user with the [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege can view traffic capture jobs.
+- A user with the [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege can view traffic replay jobs.
+- A user with the `SUPER` privilege or both preceding privileges can view both traffic capture and traffic replay jobs at the same time.
 
 The `SHOW TRAFFIC JOBS` statement returns the following columns:
 
 | Column name | Description   |
 | :-------- | :------------- |
 | `START_TIME` | The start time of the job |
-| `END_TIME` | The end time if the job has finished, otherwise it is empty |
+| `END_TIME` | The end time if the job has completed. Otherwise, it is empty. |
 | `INSTANCE` | The address of the TiProxy instance |
 | `TYPE` | The job type. `capture` indicates a traffic capture job, `replay` indicates a traffic replay job |
 | `PROGRESS` | The completion percentage of the job |
-| `STATUS` | The current status of the job. `running` means it is running, `done` means it is completed normally, and `canceled` means the job failed |
-| `FAIL_REASON` | If the job fails, this column contains the reason for the failure, otherwise it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS` |
+| `STATUS` | The current status of the job. `running` indicates in progress, `done` indicates normal completion, and `canceled` indicates job failure. |
+| `FAIL_REASON` | If the job fails, this column contains the reason for the failure. Otherwise, it is empty. For example, `manually stopped` means the user manually canceled the job by executing `CANCEL TRAFFIC JOBS`. |
+| `PARAMS` | The parameters of the job |
 
 ## Synopsis
 
@@ -37,36 +38,36 @@ TrafficStmt ::=
 Show the traffic capture or replay jobs:
 
 ```sql
-SHOW TRAFFIC JOBS
+SHOW TRAFFIC JOBS;
 ```
 
 The following output example shows that two TiProxy instances are capturing traffic, and the progress is 45% for both:
 
 ```
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
-| START_TIME                 | END_TIME | INSTANCE       | TYPE    | PROGRESS | STATUS  | FAIL_REASON |
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
-| 2024-12-17 10:54:41.000000 |          | 10.1.0.10:3080 | capture | 45%      | running |             |
-| 2024-12-17 10:54:41.000000 |          | 10.1.0.11:3080 | capture | 45%      | running |             |
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
+| START_TIME                 | END_TIME | INSTANCE       | TYPE    | PROGRESS | STATUS  | FAIL_REASON | PARAMS                                                                     |
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
+| 2024-12-17 10:54:41.000000 |          | 10.1.0.10:3080 | capture | 45%      | running |             | OUTPUT="/tmp/traffic", DURATION="90m", COMPRESS=true, ENCRYPTION_METHOD="" |
+| 2024-12-17 10:54:41.000000 |          | 10.1.0.11:3080 | capture | 45%      | running |             | OUTPUT="/tmp/traffic", DURATION="90m", COMPRESS=true, ENCRYPTION_METHOD="" |
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
 2 rows in set (0.01 sec)
 ```
 
-The following output example shows that the traffic replay jobs of two TiProxy instances were manually canceled:
+The following output example shows that the traffic replay jobs of two TiProxy instances are manually canceled:
 
 ```
-+----------------------------+----------------------------+----------------+--------+----------+----------+------------------+
-| START_TIME                 | END_TIME                   | INSTANCE       | TYPE   | PROGRESS | STATUS   | FAIL_REASON      |
-+----------------------------+----------------------------+----------------+--------+----------+----------+------------------+
-| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:42.000000 | 10.1.0.10:3080 | replay | 70%      | canceled | manually stopped |
-| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:43.000000 | 10.1.0.11:3080 | replay | 69%      | canceled | manually stopped |
-+----------------------------+----------------------------+----------------+--------+----------+----------+------------------+
++----------------------------+----------------------------+----------------+--------+----------+----------+------------------+--------------------------------------------------------------------+
+| START_TIME                 | END_TIME                   | INSTANCE       | TYPE   | PROGRESS | STATUS   | FAIL_REASON      | PARAMS                                                             |
++----------------------------+----------------------------+----------------+--------+----------+----------+------------------+--------------------------------------------------------------------+
+| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:42.000000 | 10.1.0.10:3080 | replay | 70%      | canceled | manually stopped | INPUT="/tmp/traffic", USER="root", SPEED=0.000000, READ_ONLY=false |
+| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:43.000000 | 10.1.0.11:3080 | replay | 69%      | canceled | manually stopped | INPUT="/tmp/traffic", USER="root", SPEED=0.000000, READ_ONLY=false |
++----------------------------+----------------------------+----------------+--------+----------+----------+------------------+--------------------------------------------------------------------+
 2 rows in set (0.01 sec)
 ```
 
 ## MySQL compatibility
 
-The `SHOW TRAFFIC JOBS` syntax is TiDB-specific and not compatible with MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 

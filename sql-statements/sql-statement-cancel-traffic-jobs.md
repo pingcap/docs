@@ -5,7 +5,7 @@ summary: An overview of the usage of CANCEL TRAFFIC JOBS for the TiDB database.
 
 # CANCEL TRAFFIC JOBS
 
-TiDB v9.0.0 introduces the `CANCEL TRAFFIC JOBS` syntax, which is used to cancel all traffic capture or replay jobs being executed by TiProxy in the cluster. This operation requires the following privileges:
+TiDB v9.0.0 introduces the `CANCEL TRAFFIC JOBS` syntax, which is used to cancel all traffic capture or replay jobs being executed by [TiProxy](/tiproxy/tiproxy-overview.md) in the cluster. This operation requires the following privileges:
 
 - To cancel traffic capture jobs, you need the `SUPER` or [`TRAFFIC_CAPTURE_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
 - To cancel traffic replay jobs, you need the `SUPER` or [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
@@ -19,26 +19,26 @@ TrafficStmt ::=
 
 ## Examples
 
-Assume that there are currently 2 TiProxy instances capturing traffic:
+Assume that there are currently two TiProxy instances capturing traffic:
 
 ```sql
-SHOW TRAFFIC JOBS
+SHOW TRAFFIC JOBS;
 ```
 
 ```
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
-| START_TIME                 | END_TIME | INSTANCE       | TYPE    | PROGRESS | STATUS  | FAIL_REASON |
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
-| 2024-12-17 10:54:41.000000 |          | 10.1.0.10:3080 | capture | 45%      | running |             |
-| 2024-12-17 10:54:41.000000 |          | 10.1.0.11:3080 | capture | 45%      | running |             |
-+----------------------------+----------+----------------+---------+----------+---------+-------------+
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
+| START_TIME                 | END_TIME | INSTANCE       | TYPE    | PROGRESS | STATUS  | FAIL_REASON | PARAMS                                                                     |
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
+| 2024-12-17 10:54:41.000000 |          | 10.1.0.10:3080 | capture | 45%      | running |             | OUTPUT="/tmp/traffic", DURATION="90m", COMPRESS=true, ENCRYPTION_METHOD="" |
+| 2024-12-17 10:54:41.000000 |          | 10.1.0.11:3080 | capture | 45%      | running |             | OUTPUT="/tmp/traffic", DURATION="90m", COMPRESS=true, ENCRYPTION_METHOD="" |
++----------------------------+----------+----------------+---------+----------+---------+-------------+----------------------------------------------------------------------------+
 2 rows in set (0.01 sec)
 ```
 
 Cancel the current jobs:
 
 ```sql
-CANCEL TRAFFIC JOBS
+CANCEL TRAFFIC JOBS;
 ```
 
 ```
@@ -48,22 +48,22 @@ Query OK, 0 rows affected (0.13 sec)
 Check the jobs again and it shows that the jobs have been canceled:
 
 ```sql
-SHOW TRAFFIC JOBS
+SHOW TRAFFIC JOBS;
 ```
 
 ```
-+----------------------------+----------------------------+----------------+--------+----------+----------+------------------+
-| START_TIME                 | END_TIME                   | INSTANCE       | TYPE   | PROGRESS | STATUS   | FAIL_REASON      |
-+----------------------------+----------------------------+----------------+--------+----------+----------+------------------+
-| 2024-12-17 10:54:41.000000 | 2024-12-17 11:20:42.000000 | 10.1.0.10:3080 | replay | 45%      | canceled | manually stopped |
-| 2024-12-17 10:54:41.000000 | 2024-12-17 11:20:42.000000 | 10.1.0.11:3080 | replay | 45%      | canceled | manually stopped |
-+----------------------------+----------------------------+----------------+--------+----------+----------+------------------+
++----------------------------+----------------------------+----------------+---------+----------+----------+------------------+----------------------------------------------------------------------------+
+| START_TIME                 | END_TIME                   | INSTANCE       | TYPE    | PROGRESS | STATUS   | FAIL_REASON      | PARAMS                                                                     |
++----------------------------+----------------------------+----------------+---------+----------+----------+------------------+----------------------------------------------------------------------------+
+| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:42.000000 | 10.1.0.10:3080 | capture | 45%      | canceled | manually stopped | OUTPUT="/tmp/traffic", DURATION="90m", COMPRESS=true, ENCRYPTION_METHOD="" |
+| 2024-12-17 10:54:41.000000 | 2024-12-17 11:34:42.000000 | 10.1.0.11:3080 | capture | 45%      | canceled | manually stopped | OUTPUT="/tmp/traffic", DURATION="90m", COMPRESS=true, ENCRYPTION_METHOD="" |
++----------------------------+----------------------------+----------------+---------+----------+----------+------------------+----------------------------------------------------------------------------+
 2 rows in set (0.01 sec)
 ```
 
 ## MySQL compatibility
 
-The `CANCEL TRAFFIC JOBS` syntax is TiDB-specific and not compatible with MySQL.
+This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
