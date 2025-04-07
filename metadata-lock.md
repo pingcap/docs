@@ -74,7 +74,7 @@ TiDB v6.3.0 introduces the `mysql.tidb_mdl_view` view to help you obtain the inf
 >
 > To select the `mysql.tidb_mdl_view` view, the [`PROCESS` privilege](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) is required.
 
-The following takes adding an index for table `t` as an example. Assume that there is a DDL statement `ALTER TABLE t ADD INDEX idx(a)`:
+The following takes adding a column for table `t` as an example. Assume that there is a DDL statement `ALTER TABLE t ADD COLUMN c INT`:
 
 ```sql
 TABLE mysql.tidb_mdl_view\G
