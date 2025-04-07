@@ -133,7 +133,7 @@ Configurations for the load balancing policy of TiProxy.
 + Default value: `true`
 + Support hot-reload: yes
 + Possible values: `true`, `false`
-+ Specifies whether enabling [traffic replay](/tiproxy/tiproxy-traffic-replay.md). If it is `false`, capturing and replaying traffic will report errors.
++ Specifies whether to enable [traffic replay](/tiproxy/tiproxy-traffic-replay.md). If it is set to `false`, traffic capture and replay operations will result in errors.
 
 ### ha
 
