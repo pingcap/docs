@@ -5259,7 +5259,7 @@ SHOW WARNINGS;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): YES
 - Type: Boolean
 - Default value: `OFF`
-- This variable can benefit the performance when table lock is enabled for type of "READ" and "READ ONLY" with this variable set to `ON`.
+- When the table lock type is set to `READ` or `READ ONLY`, enabling this variable (set it to `ON`) can improve the performance of point queries.
 
 ### tidb_scatter_region
 
