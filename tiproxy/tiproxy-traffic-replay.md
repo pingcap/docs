@@ -58,7 +58,7 @@ Before TiDB v9.0.0, only `tiproxyctl` is supported to connect to TiProxy for tra
 
 3. If the traffic files are captured to the TiProxy local storage, copy the traffic file directory to the TiProxy instances in the test cluster.
 
-4. Use [`TRAFFIC REPLAY`](/sql-statements/sql-statement-traffic-replay.md) statement to replay traffic.
+4. Use the [`TRAFFIC REPLAY`](/sql-statements/sql-statement-traffic-replay.md) statement to replay traffic.
 
     Replaying traffic requires the current user to have the `SUPER` or [`TRAFFIC_REPLAY_ADMIN`](/privilege-management.md#dynamic-privileges) privilege.
 
