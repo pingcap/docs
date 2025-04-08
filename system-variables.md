@@ -3790,7 +3790,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 > 
-> If you explicitly set the [`tidb_service_scope`](/system-variables.md#tidb_service_scope) system variable for some TiDB nodes, the distributed execution framework will only schedule tasks to these nodes. In this case, even if `tidb_max_dist_task_nodes` is set to a larger value, the actual number of TiDB nodes used will not exceed the number of nodes explicitly set by `tidb_service_scope`.
+> If you explicitly set the [`tidb_service_scope`](#tidb_service_scope-new-in-v740) system variable for some TiDB nodes, the distributed execution framework will only schedule tasks to these nodes. In this case, even if `tidb_max_dist_task_nodes` is set to a larger value, the actual number of TiDB nodes used will not exceed the number of nodes explicitly set by `tidb_service_scope`.
 > For example, in a cluster with 10 TiDB nodes, if 4 nodes have the same `tidb_service_scope` value set to `group1`, and you also set `tidb_max_dist_task_nodes = 5`, the actual number of TiDB nodes participating in task execution will be `4`, instead of `5`.
 
 ### tidb_max_paging_size <span class="version-mark">New in v6.3.0</span>
