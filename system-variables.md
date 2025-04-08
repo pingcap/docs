@@ -3786,11 +3786,11 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Integer
 - Default value: `-1`
 - Range: `-1` or `[1, 128]`
-- This variable defines the maximum number of TiDB nodes that can be used by the Distributed eXecution Framework (DXF). The default value is `-1`, which indicates automatic mode. In automatic mode, the system dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.
+- This variable defines the maximum number of TiDB nodes that can be used by the Distributed eXecution Framework (DXF). The default value is `-1`, which indicates automatic mode. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.
 
 > **Note:**
 > 
-> If you explicitly set the [`tidb_service_scope`](#tidb_service_scope-new-in-v740) system variable for some TiDB nodes, the distributed execution framework will only schedule tasks to these nodes. In this case, even if `tidb_max_dist_task_nodes` is set to a larger value, the actual number of TiDB nodes used will not exceed the number of nodes explicitly set by `tidb_service_scope`.
+> If you explicitly set the [`tidb_service_scope`](#tidb_service_scope-new-in-v740) system variable for some TiDB nodes, the Distributed eXecution Framework will only schedule tasks to these nodes. In this case, even if `tidb_max_dist_task_nodes` is set to a larger value, the actual number of TiDB nodes used will not exceed the number of nodes explicitly set by `tidb_service_scope`.
 > For example, in a cluster with 10 TiDB nodes, if 4 nodes have the same `tidb_service_scope` value set to `group1`, and you also set `tidb_max_dist_task_nodes = 5`, the actual number of TiDB nodes participating in task execution will be `4`, instead of `5`.
 
 ### tidb_max_paging_size <span class="version-mark">New in v6.3.0</span>
