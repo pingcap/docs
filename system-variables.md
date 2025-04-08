@@ -3780,7 +3780,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_max_dist_task_nodes <span class="version-mark">New in v9.0.0</span>
 
-- Scope:SESSION | GLOBAL
+- Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
