@@ -54,7 +54,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_auto_analyze_concurrency-new-in-v840">Concurrent automatic statistics collection</a></td>
-    <td>Introduced a system variable to control the number of concurrent auto-analyze operations within a TiDB cluster. <code>tidb_auto_analyze_concurrency</code>. TiDB automatically determines the concurrency of scanning tasks based on node scale and hardware specifications. This improves statistics collection efficiency by fully utilizing system resources, reduces manual tuning, and ensures stable cluster performance.</td>
+    <td>Introduce the system variable <code>tidb_auto_analyze_concurrency</code> to control the number of concurrent auto-analyze operations within a TiDB cluster. TiDB automatically determines the concurrency of scanning tasks based on node scale and hardware specifications. This improves statistics collection efficiency by fully utilizing system resources, reduces manual tuning, and ensures stable cluster performance.</td>
   </tr>
   <tr>
     <td rowspan="1">SQL</td>
