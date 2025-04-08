@@ -3786,7 +3786,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Integer
 - Default value: `-1`
 - Range: `-1` or `[1, 128]`
-- This variable defines the maximum number of TiDB nodes that can be used by the Distributed eXecution Framework (DXF). The default value is `-1`, which indicates automatic mode. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.
+- This variable defines the maximum number of TiDB nodes that can be used by the Distributed eXecution Framework (DXF). The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster.
 
 > **Note:**
 > 
