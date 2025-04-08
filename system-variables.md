@@ -2578,6 +2578,14 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 </CustomContent>
 
+### tidb_enable_point_get_cache
+
+- Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): YES
+- Type: Boolean
+- Default value: `OFF`
+- When the table lock type of [`LOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) is set to `READ`, setting this variable to `ON` enables caching of point query results, reducing the overhead of repeated queries and improving point query performance.
+
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -5252,14 +5260,6 @@ SHOW WARNINGS;
 - Default value: `IN`
 - Possible values: `IN`
 - Controls the type of predicate used by the generated Filter operator. Currently, only one type is supported: `IN`. For more information, see [Runtime Filter type](/runtime-filter.md#runtime-filter-type).
-
-### tidb_enable_point_get_cache
-
-- Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): YES
-- Type: Boolean
-- Default value: `OFF`
-- When the table lock type of [`LOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) is set to `READ`, setting this variable to `ON` enables caching of point query results, reducing the overhead of repeated queries and improving point query performance.
 
 ### tidb_scatter_region
 
