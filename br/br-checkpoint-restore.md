@@ -15,7 +15,7 @@ If your TiDB cluster is large and cannot afford to restore again after a failure
 
 ## Implementation principles
 
-The implementation of checkpoint restore is divided into two parts: snapshot restore and log restore. For more information, see [Implementation details](#implementation-details).
+The implementation of checkpoint restore is divided into two parts: snapshot restore and log restore. For more information, see [Implementation details: store checkpoint data in the downstream cluster](#implementation-details-store-checkpoint-data-in-the-downstream-cluster) and [Implementation details: store checkpoint data in the external storage](#implementation-details-store-checkpoint-data-in-the-external-storage).
 
 ### Snapshot restore
 
