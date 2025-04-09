@@ -130,7 +130,7 @@ Starting from v8.4, the underlying storage format of TiFlash is updated to suppo
 
 ## From v8.x to v9.0 or a later version
 
-Starting from v9.0, TiFlash optimizes the storage format of string data to improve the string read and write performance. Therefore, after TiFlash is upgraded to v9.0 or a later version, in-place downgrading to the original version is not supported.
+Starting from v9.0.0, TiFlash optimizes the storage format of string data to improve the string read and write performance. Therefore, after TiFlash is upgraded to v9.0.0 or a later version, in-place downgrading to the original version is not supported.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
