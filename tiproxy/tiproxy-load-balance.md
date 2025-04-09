@@ -38,10 +38,11 @@ After configuration, TiProxy uses the label name specified in `balance.label-nam
 Consider an application that handles both transaction and BI workloads. To prevent these workloads from interfering with each other, configure your cluster as follows:
 
 1. Set [`balance.label-name`](/tiproxy/tiproxy-configuration.md#label-name) to `"app"` in TiProxy, indicating that TiDB servers will be matched by the label name `"app"`, and connections will be routed to TiDB servers with matching label values.
-2. Configure two TiProxy instances, adding `"app"="Order"` and `"app"="BI"` to their respective [`labels`](/tiproxy/tiproxy-configuration.md#labels) configuration items.
-3. Divide TiDB instances into two groups, adding `"app"="Order"` and `"app"="BI"` to their respective [`labels`](/tidb-configuration-file.md#labels) configuration items.
-4. Optional: For storage layer isolation, configure [Placement Rules](/configure-placement-rules.md) or [Resource Control](/tidb-resource-control-ru-groups.md).
-5. Direct transaction and BI clients to connect to their respective TiProxy instance addresses.
+2. Deploy at least two TiProxy instances. Configure the TiProxy instance used for transaction business with [`labels`](/tiproxy/tiproxy-configuration.md#labels) as `{"app"="Order"}`, and the instance used for BI business with [`labels`](/tiproxy/tiproxy-configuration.md#labels) as `{"app"="BI"}`.
+3. If high availability of TiProxy is required, deploy at least four TiProxy instances, and configure different virtual IP addresses for different businesses. For example, configure two TiProxy instances used for transaction business with virtual IP `10.0.1.10/24`, and two TiProxy instances used for BI business with virtual IP `10.0.1.20/24`.
+4. Divide TiDB instances into two groups, adding `"app"="Order"` and `"app"="BI"` to their respective [`labels`](/tidb-configuration-file.md#labels) configuration items.
+5. Optional: For storage layer isolation, configure [Placement Rules](/configure-placement-rules.md) or [Resource Control](/tidb-resource-control-ru-groups.md).
+6. Direct transaction and BI clients to connect to their respective virtual IP addresses.
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label.png" alt="Label-based Load Balancing" width="600" />
 
@@ -50,35 +51,54 @@ Example configuration for this topology:
 ```yaml
 component_versions:
   tiproxy: "v1.1.0"
+
 server_configs:
   tiproxy:
     balance.label-name: "app"
   tidb:
     graceful-wait-before-shutdown: 15
+
 tiproxy_servers:
   - host: tiproxy-host-1
     config:
-      labels: {app: "Order"}
+      labels: {"app": "Order"}
+      ha.virtual-ip: "10.0.1.10/24"
+      ha.interface: "eth0"
   - host: tiproxy-host-2
     config:
-      labels: {app: "BI"}
+      labels: {"app": "Order"}
+      ha.virtual-ip: "10.0.1.10/24"
+      ha.interface: "eth0"
+  - host: tiproxy-host-3
+    config:
+      labels: {"app": "BI"}
+      ha.virtual-ip: "10.0.1.20/24"
+      ha.interface: "eth0"
+  - host: tiproxy-host-4
+    config:
+      labels: {"app": "BI"}
+      ha.virtual-ip: "10.0.1.20/24"
+      ha.interface: "eth0"
+
 tidb_servers:
   - host: tidb-host-1
     config:
-      labels: {app: "Order"}
+      labels: {"app": "Order"}
   - host: tidb-host-2
     config:
-      labels: {app: "Order"}
+      labels: {"app": "Order"}
   - host: tidb-host-3
     config:
-      labels: {app: "BI"}
+      labels: {"app": "BI"}
   - host: tidb-host-4
     config:
-      labels: {app: "BI"}
+      labels: {"app": "BI"}
+
 tikv_servers:
   - host: tikv-host-1
   - host: tikv-host-2
   - host: tikv-host-3
+
 pd_servers:
   - host: pd-host-1
   - host: pd-host-2
