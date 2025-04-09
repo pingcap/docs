@@ -505,7 +505,7 @@ Starting from v9.0.0, when a log backup task is running, if all of the following
 
 - The node performing backup and restore operations has necessary permissions: read access to the external storage containing the backup source for snapshot restore, and write access to the target external storage used by the log backup.
 - The target external storage for the log backup is Amazon S3 (`s3://`), Google Cloud Storage (`gcs://`), or Azure Blob Storage (`azblob://`).
-- Storage of the data to be restored and the log backup target storage have the same external storage type.
+- The data to be restored uses the same type of external storage as the target storage for the log backup.
 - Neither the data to be restored nor the log backup has enabled local encryption. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
 
 If any of the above conditions are not met, or if you need to perform a point-in-time recovery, while a log backup task is running, BR refuses to proceed with the data recovery. In this case, you can complete the recovery by following these steps:
