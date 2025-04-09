@@ -88,7 +88,7 @@ To improve the user experience of DDL execution, starting from v6.2.0, TiDB enab
 + DDL statements to be performed on the same table are mutually blocked.
 + `DROP DATABASE` and DDL statements that affect all objects in the database are mutually blocked.
 + Adding indexes and column type changes on different tables can be executed concurrently.
-+ A logical DDL statement must wait for the previous logical DDL statement to be executed before it can be executed.
++ Starting from v8.2.0, [logical DDL statements](/ddl-introduction.md#types-of-ddl-statements) for different tables can be executed in parallel.
 + In other cases, DDL can be executed based on the level of availability for concurrent DDL execution.
 
 Specifically, TiDB 6.2.0 has enhanced the DDL execution framework in the following aspects:
