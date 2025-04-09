@@ -1224,7 +1224,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 2147483647]`
-- This variable is used to set the concurrency within a single automatic statistics collection task. Before v8.4.0, this concurrency is fixed at `1`. To speed up statistics collection tasks, you can increase this concurrency based on your cluster's available resources.
+- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. Before v8.4.0, this concurrency is fixed at 1. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
 
 ### tidb_auto_analyze_end_time
 
@@ -1742,7 +1742,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `0`
 - Range: `[0, 1PiB]`
 - This variable limits the write bandwidth for each TiKV node and only takes effect when index creation acceleration is enabled (controlled by the [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) variable). When the data size in your cluster is quite large (such as billions of rows), limiting the write bandwidth for index creation can effectively reduce the impact on application workloads.
-- The default value `0` means no write bandwidth limit. 
+- The default value `0` means no write bandwidth limit.
 - You can specify the value of this variable either with a unit or without a unit.
     - When you specify the value without a unit, the default unit is bytes per second. For example, `67108864` represents `64MiB` per second.
     - When you specify the value with a unit, supported units include KiB, MiB, GiB, and TiB. For example, `'1GiB`' represents 1 GiB per second, and `'256MiB'` represents 256 MiB per second.
@@ -3179,7 +3179,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
 
-- If the [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800) configuration item is specified, the general log is written to the specified file separately. 
+- If the [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800) configuration item is specified, the general log is written to the specified file separately.
 
 - The [`log.format`](/tidb-configuration-file.md#format) configuration item enables you to configure the log message format, whether the general log is in a separate file or combined with other logs.
 
