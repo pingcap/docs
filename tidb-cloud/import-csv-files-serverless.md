@@ -80,7 +80,7 @@ To allow TiDB Cloud Serverless to access the CSV files in the Amazon S3, GCS, Az
 
 - If your CSV files are located in Azure Blob Storage, [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
 
-- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure external storage access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure external storage access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
 ## Step 4. Import CSV files to TiDB Cloud Serverless
 
