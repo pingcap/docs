@@ -499,17 +499,22 @@ tiup br restore point --pd="${PD_IP}:2379"
 --master-key "local:///path/to/master.key"
 ```
 
-### Compatibility between Ongoing Log Backup and Restore <span class="version-mark">Introduced in v9.0.0</span>
+### Compatibility between ongoing log backup and snapshot restore
 
-Starting from v9.0.0, when a log backup task exists, if the following conditions are met, snapshot restore (`br restore [full|database|table]`) can be performed normally, and the restored content can be properly recorded by the ongoing log backup:
+Starting from v9.0.0, when a log backup task is running, if all of the following conditions are met, you can still perform snapshot restore (`br restore [full|database|table]`) and allow the restored data to be properly recorded by the ongoing log backup (hereinafter referred to as "log backup"):
 
-- The node executing BR, in addition to having the necessary permissions to access the external storage for snapshot restore, also needs to have write permissions to the log backup target external storage.
-- The log backup target external storage type is S3 (`s3://`), GCS (`gcs://`), or Azure Blob Storage (`azblob://`).
+- The node performing backup and restore operations has necessary permissions: read access to the external storage containing the backup source for snapshot restore, and write access to the target external storage used by the log backup.
+- The target external storage for the log backup is Amazon S3 (`s3://`), Google Cloud Storage (`gcs://`), or Azure Blob Storage (`azblob://`).
 - Storage of the data to be restored and the log backup target storage have the same external storage type.
-- Neither the data to be restored nor the log backup has enabled local encryption: refer to [Log Backup Encryption](#encrypt-the-log-backup-data) and [Snapshot Backup Encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
+- Neither the data to be restored nor the log backup has enabled local encryption. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
 
-If these conditions are not met or if you want to do a point in time restore (`br restore point`), BR will refuse to restore when a log backup task exists. In this case, you can [stop the backup task](#stop-a-log-backup-task) and after restoration is complete, perform a new snapshot backup and [restart the backup task](#restart-a-log-backup-task) to complete the restoration.
+If any of the above conditions are not met, or if you need to perform a point-in-time recovery, while a log backup task is running, BR refuses to proceed with the data recovery. In this case, you can complete the recovery by following these steps:
+
+1. [Stop the log backup task](#stop-a-log-backup-task).
+2. Perform the data restore.
+3. After the restore is complete, perform a new snapshot backup.
+4. [Restart the log backup task](#restart-a-log-backup-task).
 
 > **Note:**
 >
-> When restoring log backups that have recorded full restores, you also need to use BR version `v9.0.0` or higher. Otherwise, the recorded full restoration may not be restored.
+> When restoring a log backup that contains records of snapshot (full) restore data, you must use BR v9.0.0 or later. Otherwise, restoring the recorded full restore data might fail.
