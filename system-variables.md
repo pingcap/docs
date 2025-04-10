@@ -6341,7 +6341,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     - `force_streaming`: TiFlash directly sends data to the next stage of HashAgg without pre-aggregation.
     - `auto`: TiFlash automatically chooses whether to perform pre-aggregation based on the current workload's aggregation degree.
 
-### tiflash_hash_join_version <span class="version-mark">New in v9.1.0</span>
+### tiflash_hash_join_version <span class="version-mark">New in v9.0.0</span>
 
 > **Warning:**
 >
