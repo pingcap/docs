@@ -173,8 +173,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 ### Behavior changes
 
 - When processing update event, TiCDC splits an event into delete and insert events if the primary key or non-null unique index value is modified in the event. For more information, see [documentation](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change).
-
-- The default value of [`tidb_remove_orderby_in_subquery`](/system-variables.md#tidb_remove_orderby_in_subquery-new-in-v610) has been changed from `OFF` to `ON` to avoid unnecessary sorting operations. This change may result in a different order of query results. The ISO/IEC SQL standard does not require query results to follow the ORDER BY sorting of subqueries. To strictly guarantee the final result order, sorting should be explicitly included in the outer query. Applications that rely on subquery sorting can set this variable to `OFF`. Clusters upgraded from older versions will retain the previous behavior by default.
+- The default value of [`tidb_remove_orderby_in_subquery`](/system-variables.md#tidb_remove_orderby_in_subquery-new-in-v610) has been changed from `OFF` to `ON` to avoid unnecessary sorting operations, which improves query performance in many cases. This change may result in a different order of query results. The ISO/IEC SQL standard does not require query results to follow the ORDER BY sorting of subqueries. To strictly guarantee the final result order, sorting should be explicitly included in the outer query. Applications that rely on subquery sorting can set this variable to `OFF`. Clusters upgraded from older versions will retain the previous behavior by default.
 
 ### System variables
 
