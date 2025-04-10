@@ -69,7 +69,7 @@ Cross-major-version checkpoint recovery is not recommended. For clusters where `
 
 > **Note:**
 >
-> Starting from v9.0.0, BR stores checkpoint data in the downstream cluster by default. You can configure the parameter `--checkpoint-storage` to make BR store checkpoint data in the external storage.
+> Starting from v9.0.0, BR stores checkpoint data in the downstream cluster by default. You can specify an external storage for checkpoint data using the `--checkpoint-storage` parameter.
 
 Checkpoint restore operations are divided into two parts: snapshot restore and PITR restore.
 
@@ -95,13 +95,15 @@ Before entering the log restore phase during the initial restore, `br` construct
 
 > **Note:**
 >
-> Starting from v9.0.0, BR stores checkpoint data in the downstream cluster by default. You can configure the parameter `--checkpoint-storage` to make BR store checkpoint data in the external storage.
+> Starting from v9.0.0, BR stores checkpoint data in the downstream cluster by default. You can specify an external storage for checkpoint data using the `--checkpoint-storage` parameter. For example:
 >
-> For example: `./br restore full -s "s3://backup-bucket/backup-prefix" --checkpoint-storage "s3://temp-bucket/checkpoints"`
+> ```shell
+> ./br restore full -s "s3://backup-bucket/backup-prefix" --checkpoint-storage "s3://temp-bucket/checkpoints"
+> ```
 
-The checkpoint data stored in the external storage has the following directory formats:
+In the external storage, the directory structure of the checkpoint data is as follows:
 
-- Root path `restore-{downstream-cluster-ID}` uses the downstream cluster ID `{downstream-cluster-ID}` to distinguish different restore clusters.
+- Root path `restore-{downstream-cluster-ID}` uses the downstream cluster ID `{downstream-cluster-ID}` to distinguish between different restore clusters.
 - Path `restore-{downstream-cluster-ID}/log` stores log file checkpoint data during the log restore phase.
 - Path `restore-{downstream-cluster-ID}/sst` stores checkpoint data of the SST files that are not backed up by log backup during the log restore phase.
 - Path `restore-{downstream-cluster-ID}/snapshot` stores checkpoint data during the snapshot restore phase.
