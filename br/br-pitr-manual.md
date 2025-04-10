@@ -503,7 +503,9 @@ tiup br restore point --pd="${PD_IP}:2379"
 
 Starting from v9.0.0, when a log backup task is running, if all of the following conditions are met, you can still perform snapshot restore (`br restore [full|database|table]`) and allow the restored data to be properly recorded by the ongoing log backup (hereinafter referred to as "log backup"):
 
-- The node performing backup and restore operations has necessary permissions: read access to the external storage containing the backup source for snapshot restore, and write access to the target external storage used by the log backup.
+- The node performing backup and restore operations has the following necessary permissions: 
+    - Read access to the external storage containing the backup source, for snapshot restore
+    - Write access to the target external storage used by the log backup
 - The target external storage for the log backup is Amazon S3 (`s3://`), Google Cloud Storage (`gcs://`), or Azure Blob Storage (`azblob://`).
 - The data to be restored uses the same type of external storage as the target storage for the log backup.
 - Neither the data to be restored nor the log backup has enabled local encryption. For details, see [log backup encryption](#encrypt-the-log-backup-data) and [snapshot backup encryption](/br/br-snapshot-manual.md#encrypt-the-backup-data).
