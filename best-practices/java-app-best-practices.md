@@ -214,7 +214,7 @@ However, in an actual production environment, idle connections and SQL statement
 Combining the preceding parameter values, the JDBC connection string configuration is as follows:
 
 ```
-JDBC:mysql://<IP>:<PORT>/<DBNAME>?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true
+jdbc:mysql://<IP_ADDRESS>:<PORT_NUMBER>/<DATABASE_NAME>?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true
 ```
 
 > **Note:**
