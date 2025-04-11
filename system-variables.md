@@ -4959,6 +4959,22 @@ SHOW WARNINGS;
 > - This option only takes effect on statements that need to lock a single key. If a statement needs to lock multiple rows at the same time, this option will not take effect on such statements.
 > - This feature is introduced in v6.6.0 by the [`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) variable, which is disabled by default.
 
+### tidb_pipelined_dml_resource_policy <span class="version-mark">New in v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: String
+- Default value: `"standard"`
+- Possible values: `"standard"`, `"conservative"`, and `"custom{...}"`
+- This variable controls the resource usage policy for [Pipelined DML](/pipelined-dml.md). It takes effect only when [`tidb_dml_type`](#tidb_dml_type-new-in-v800) is set to `bulk`. The meaning of each possible value is as follows:
+    - `"standard"`: the default resource usage policy.
+    - `"conservative"`: Pipelined DML uses fewer resources, but its execution speed is slower than the default policy, suitable for scenarios with sensitive resource usage.
+    - `"custom{option1=value1,option2=value2,...}"`: a custom resource usage policy. You can specify only the required options. For example, `"custom{concurrency=8,write_throttle_ratio=0.5}"`. Make sure that the value is enclosed in double quotes. The supported custom options include the following:
+        - `concurrency`: specifies the concurrency of the flush operation, which affects the execution speed and resource usage of Pipelined DML. The value range is `[1, 8192]`.
+        - `resolve_concurrency`: specifies the concurrency of the asynchronous resolve lock operations. It affects the resource usage of Pipelined DML but not its execution speed. The value range is `[1, 8192]`.
+        - `write_throttle_ratio`: specifies the ratio of the active throttle time to the total time. The larger the value, the higher the ratio of throttle time in total time, and the more resources are saved. `0` means no throttle. The value range is `[0, 1)`.
+
 ### tidb_placement_mode <span class="version-mark">New in v6.0.0</span>
 
 > **Note:**
