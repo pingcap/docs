@@ -128,6 +128,10 @@ Starting from v7.4, to reduce the read and write amplification generated during 
 
 Starting from v8.4, the underlying storage format of TiFlash is updated to support [vector search](/vector-search/vector-search-overview.md). Therefore, after TiFlash is upgraded to v8.4 or a later version, in-place downgrading to the original version is not supported.
 
+## From v8.x to v9.0 or a later version
+
+Starting from v9.0.0, TiFlash optimizes the storage format of string data to improve the string read and write performance. Therefore, after TiFlash is upgraded to v9.0.0 or a later version, in-place downgrading to the original version is not supported.
+
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
 To downgrade TiFlash in testing or other special scenarios, you can forcibly scale in the target TiFlash node and then replicate data from TiKV again. For detailed steps, see [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster).
