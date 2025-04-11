@@ -166,30 +166,31 @@ TiDB implicitly allocates values to `AUTO_RANDOM` columns similarly to `AUTO_INC
 
 ## Clear the auto-increment ID cache
 
-Explicitly inserting data into an `AUTO_RANDOM` column behaves the same as with an `AUTO_INCREMENT` column, so you also need to clear the auto-increment ID cache. For more details, see [Clear the auto-increment ID cache](/auto-increment.md#clear-the-auto-increment-id-cache).
+When you insert data with explicit values into an `AUTO_RANDOM` column, it works similarly to an `AUTO_INCREMENT` column regarding potential ID collisions. If explicit inserts happen to use ID values that conflict with the internal counter TiDB uses for automatic generation, this can lead to errors.
 
-You can run the `ALTER TABLE` statement to set `AUTO_RANDOM_BASE=0` to clear the auto-increment ID cache on all TiDB nodes in the cluster. For example:
+Here's how the collision can happen: each `AUTO_RANDOM` ID contains an auto-incrementing part alongside random bits. TiDB uses an internal counter for this auto-incrementing part. If you explicitly insert an ID where this part matches the counter's next value, TiDB might later try to generate the same ID automatically, leading to a duplicate key error.
+
+Although `AUTO_RANDOM` doesn't keep track of a single specific "next ID" like `AUTO_INCREMENT` does, frequent explicit inserts that cause such conflicts might still require you to adjust the starting point (`AUTO_RANDOM_BASE`) for the auto-incrementing part of future automatically generated IDs to avoid these potential errors.
+
+To change the base value (`AUTO_RANDOM_BASE`) used for the auto-increment part of future ID generations on an existing table, you must use the `FORCE` keyword.
+
+> **Note:**
+>
+> * If you try to alter `AUTO_RANDOM_BASE` without the `FORCE` keyword, the value will not change. The command completes, but the base value stays unchanged. A subsequent `SHOW WARNINGS` reveals the specific warning `Can't reset AUTO_INCREMENT to 0 without FORCE option, using 1 instead`.
+> * You cannot set `AUTO_RANDOM_BASE` to `0`, even with the `FORCE` keyword. Attempting this results in an error `Cannot force rebase the next global ID to '0'`.
+> * You must use a non-zero positive integer value when using `FORCE`.
+
+To set a new base value (for example, `1000`) for the auto-increment part of future implicitly generated IDs for table `t`, use the following statement:
 
 ```sql
-ALTER TABLE t AUTO_RANDOM_BASE=0;
+ALTER TABLE t FORCE AUTO_RANDOM_BASE = 1000;
 ```
 
 ```
-Query OK, 0 rows affected, 1 warning (0.52 sec)
+Query OK, 0 rows affected (0.XX sec)
 ```
 
-```sql
-SHOW WARNINGS;
-```
-
-```
-+---------+------+-------------------------------------------------------------------------+
-| Level   | Code | Message                                                                 |
-+---------+------+-------------------------------------------------------------------------+
-| Warning | 1105 | Can't reset AUTO_INCREMENT to 0 without FORCE option, using 101 instead |
-+---------+------+-------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+This command modifies the starting point for the auto-increment bits used in subsequent `AUTO_RANDOM` value generations across all TiDB nodes. It does not affect already allocated IDs.
 
 ## Restrictions
 
