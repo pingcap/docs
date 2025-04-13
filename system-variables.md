@@ -4797,7 +4797,7 @@ SHOW WARNINGS;
 - Default value: `1`
 - This variable is internally used in the Cost Model, and it is NOT recommended to modify its value unless directed by TiDB Optimizer Engineering.
 
-### tidb_opt_table_fulL_scan_cost_factor <span class="version-mark">New in v9.0.0</span>
+### tidb_opt_table_full_scan_cost_factor <span class="version-mark">New in v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
