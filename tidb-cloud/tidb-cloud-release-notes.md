@@ -18,8 +18,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see the following documentation:
 
-    - [Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless/)
-    - [Import Apache Parquet Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Serverless](/tidb-cloud/import-parquet-files-serverless/)
+    - [Import CSV Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Serverless](/tidb-cloud/import-csv-files-serverless.md)
+    - [Import Apache Parquet Files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Serverless](/tidb-cloud/import-parquet-files-serverless.md)
 
 ## April 1, 2025
 
