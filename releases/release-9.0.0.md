@@ -117,6 +117,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](/partitioned-table.md#global-index).
 
+### DB operations
+
+* TiDB Index Advisor [#12303](https://github.com/pingcap/tidb/issues/12303) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--2081-->
+
+    Index design is essential for database performance optimization. Starting from v8.5.0, TiDB introduces the Index Advisor feature and continues to improve and enhance it. This feature analyzes high-frequency query patterns, recommends optimal indexing strategies, helps you tune performance more efficiently, and lowers the barrier to entry.
+
+    You can use the [`RECOMMEND INDEX`](/index-advisor.md#recommend-indexes-using-the-recommend-index-statement) SQL statement to generate index recommendations for a single query or automatically analyze high-frequency SQL statements from historical workloads for batch recommendations. The recommendation results are stored in the `mysql.index_advisor_results` table. You can query this table to view the recommended indexes.
+
+    For more information, see [documentation](/index-advisor.md).
+
 ### Observability
 
 * Add the TiDB Workload Repository feature to support persisting historical workload data into TiKV [#58247](https://github.com/pingcap/tidb/issues/58247) @[xhebox](https://github.com/xhebox) @[henrybw](https://github.com/henrybw) @[wddevries](https://github.com/wddevries) **tw@lilin90**<!--1953-->
