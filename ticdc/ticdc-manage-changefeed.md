@@ -171,7 +171,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 ```
 
 - `--changefeed-id=uuid` represents the ID of the changefeed that corresponds to the replication task you want to resume.
-- `--overwrite-checkpoint-ts`: starting from v6.2.0, you can specify the starting TSO of resuming the replication task. TiCDC starts pulling data from the specified TSO. The argument accepts `now` or a specific TSO (such as 434873584621453313). The specified TSO must be in the range of (GC safe point, CurrentTSO]. If this argument is not specified, TiCDC replicates data from the current `checkpoint-ts` by default.
+- `--overwrite-checkpoint-ts`: starting from v6.2.0, you can specify the starting TSO of resuming the replication task. TiCDC starts pulling data from the specified TSO. The argument accepts `now` or a specific TSO (such as 434873584621453313). The specified TSO must be in the range of (GC safe point, CurrentTSO]. If this argument is not specified, TiCDC replicates data from the current `checkpoint-ts` by default. You can use the `cdc cli changefeed list` command to check the current value of `checkpoint-ts`.
 - `--no-confirm`: when the replication is resumed, you do not need to confirm the related information. Defaults to `false`.
 
 > **Note:**
