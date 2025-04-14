@@ -6226,8 +6226,8 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `5`
 - Range: `[0, 600]`
 - Unit: Seconds
-- Sets the sampling interval for the [Workload Repository](/workloadrepo.md)'s Time-based Sampling Process.
-- Setting the value to `0` disables the Time-based Sampling Process.
+- Sets the sampling interval for the [Workload Repository](/workloadrepo.md)'s time-based sampling process.
+- Setting the value to `0` disables the time-based sampling process.
 
 ### tidb_workload_repository_retention_days <span class="version-mark">New in v9.0.0</span>
 
@@ -6250,7 +6250,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `3600`
 - Range: `[900, 7200]`
 - Unit: Seconds
-- Sets the sampling interval for the [Workload Repository](/workloadrepo.md)'s Snapshot Sampling Process.
+- Sets the sampling interval for the [Workload Repository](/workloadrepo.md)'s snapshot sampling process.
 
 ### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
