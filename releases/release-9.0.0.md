@@ -180,11 +180,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Data migration
 
-* Support query argument redaction in DM logs [#11489](https://github.com/pingcap/tiflow/issues/11489) @[db-will] **tw@Oreoxmt** <!--2030-->
+* Support query argument redaction in DM logs [#11489](https://github.com/pingcap/tiflow/issues/11489) @[db-will](https://github.com/db-will) **tw@Oreoxmt** <!--2030-->
 
-    Introduces a new `redact-info-log` parameter, allowing DM to replace sensitive query arguments with `?` placeholders in DM logs. You can enable this feature by setting `redact-info-log = true` in the DM-worker configuration file or passing `--redact-info-log=true` at startup. This change only redacts query arguments (not entire SQL statements) and requires a DM-worker restart to take effect.
+    Starting from v9.0.0, you can use the `redact-info-log` configuration item to enable the DM log redaction feature. When enabled, query arguments that contain sensitive data in DM logs are replaced with the `?` placeholder. To enable this feature, set `redact-info-log` to `true` in the DM-worker configuration file or pass `--redact-info-log=true` when starting DM. This feature only desensitizes query arguments, not the entire SQL statement, and requires a DM-worker restart to take effect.
 
-    For more information, see [documentation](/dm/dm-worker-configuration-file.md).
+    For more information, see [documentation](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v900).
 
 * TiDB Lightning supports compatibility with `sql_require_primary_key=ON` in TiDB [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716](https://github.com/lance6716) **tw@Oreoxmt** <!--2026-->
 
