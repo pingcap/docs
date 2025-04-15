@@ -58,7 +58,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](/system-variables.md/#tidb_accelerate_user_creation_update-new-in-v900).
 
-* Support pushing down the following functions to TiFlash [#59317](https://github.com/pingcap/tidb/issues/59317) @[guo-shaoge](https://github.com/guo-shaoge) **tw@Oreoxmt** <!--1918-->
+* Support pushing down the following function to TiFlash [#59317](https://github.com/pingcap/tidb/issues/59317) @[guo-shaoge](https://github.com/guo-shaoge) **tw@Oreoxmt** <!--1918-->
 
     * `TRUNCATE()`
 
@@ -121,7 +121,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * TiDB Index Advisor [#12303](https://github.com/pingcap/tidb/issues/12303) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--2081-->
 
-    Index design is essential for database performance optimization. Starting from v8.5.0, TiDB introduces the Index Advisor feature and continues to improve and enhance it. This feature analyzes high-frequency query patterns, recommends optimal indexing strategies, helps you tune performance more efficiently, and lowers the barrier to entry.
+    Index design is essential for database performance optimization. Starting from v8.5.0, TiDB introduces the Index Advisor feature and continues to improve and enhance it. This feature analyzes high-frequency query patterns, recommends optimal indexing strategies, helps you tune performance more efficiently, and lowers the barrier to index design.
 
     You can use the [`RECOMMEND INDEX`](/index-advisor.md#recommend-indexes-using-the-recommend-index-statement) SQL statement to generate index recommendations for a single query or automatically analyze high-frequency SQL statements from historical workloads for batch recommendations. The recommendation results are stored in the `mysql.index_advisor_results` table. You can query this table to view the recommended indexes.
 
@@ -164,7 +164,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     Starting from v9.0.0, TiDB records the network traffic generated during SQL processing and distinguishes cross-AZ traffic. TiDB writes this data to the [`statements_summary` table](/statement-summary-tables.md) and [slow query logs](/identify-slow-queries.md). This feature helps you track major data transmission paths within TiDB clusters, analyze the sources of cross-AZ traffic, and better understand and control related costs.
 
-    Note that the current version includes only **query** traffic **within the cluster** (between TiDB, TiKV, and TiFlash) and does not include DML or DDL operations. Additionally, the recorded traffic data represents unpacked bytes, which differs from the actual physical bytes transmitted and cannot be used for billing purpose.
+    Note that the current version includes only **query** traffic **within the cluster** (between TiDB, TiKV, and TiFlash) and does not include traffic caused by DML or DDL operations. Additionally, the recorded traffic data reflects unpacked bytes rather than the actual physical bytes transmitted, so it cannot be used for billing purposes.
 
     For more information, see [documentation](/statement-summary-tables.md#statements_summary-fields-description).
 
@@ -180,19 +180,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Data migration
 
-* Support query argument redaction in DM logs [#11489](https://github.com/pingcap/tiflow/issues/11489) @[db-will](https://github.com/db-will) **tw@Oreoxmt** <!--2030-->
+* Support query argument redaction in Data Migration (DM) logs [#11489](https://github.com/pingcap/tiflow/issues/11489) @[db-will](https://github.com/db-will) **tw@Oreoxmt** <!--2030-->
 
-    Starting from v9.0.0, you can use the `redact-info-log` configuration item to enable the DM log redaction feature. When enabled, query arguments that contain sensitive data in DM logs are replaced with the `?` placeholder. To enable this feature, set `redact-info-log` to `true` in the DM-worker configuration file or pass `--redact-info-log=true` when starting DM. This feature only desensitizes query arguments, not the entire SQL statement, and requires a DM-worker restart to take effect.
+    Starting from v9.0.0, you can use the `redact-info-log` configuration item to enable the DM log redaction feature. When enabled, query arguments that contain sensitive data in DM logs are replaced with the `?` placeholder. To enable this feature, set `redact-info-log` to `true` in the DM-worker configuration file or pass `--redact-info-log=true` when starting DM. This feature only redacts query arguments, not the entire SQL statement, and requires a DM-worker restart to take effect.
 
     For more information, see [documentation](/dm/dm-worker-configuration-file.md#redact-info-log-new-in-v900).
 
 * TiDB Lightning supports compatibility with `sql_require_primary_key=ON` in TiDB [#57479](https://github.com/pingcap/tidb/issues/57479) @[lance6716](https://github.com/lance6716) **tw@Oreoxmt** <!--2026-->
 
-    When you enable the system variable [`sql_require_primary_key`](/system-variables.md#sql_require_primary_key-new-in-v630) in TiDB, tables must have a primary key. To prevent table creation failures, TiDB Lightning adds a default primary key to its internal error-logging and conflict-detection tables (`conflict_error_v4`, `type_error_v2`, and `conflict_records_v2`). If you have automation scripts that use these internal tables, update them to accommodate the new schema, which includes the primary key.
+    When the system variable [`sql_require_primary_key`](/system-variables.md#sql_require_primary_key-new-in-v630) is enabled in TiDB, tables are required to have a primary key. To avoid table creation failures, TiDB Lightning adds a default primary key to its internal error-logging and conflict-detection tables (`conflict_error_v4`, `type_error_v2`, and `conflict_records_v2`). If you have automation scripts that depend on these internal tables, update them to accommodate the new schema, which now includes a primary key.
 
 * Migrate sync-diff-inspector from `pingcap/tidb-tools` to `pingcap/tiflow` repository [#11672](https://github.com/pingcap/tiflow/issues/11672) @[joechenrh](https://github.com/joechenrh) **tw@Oreoxmt** <!--2070-->
 
-    Starting from v9.0.0, the sync-diff-inspector tool is moved from the [`pingcap/tidb-tools`](https://github.com/pingcap/tidb-tools) repository to [`pingcap/tiflow`](https://github.com/pingcap/tiflow). This change unifies replication and migration tools ([DM](/dm/dm-overview.md), [TiCDC](/ticdc/ticdc-overview.md), and [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)) into a single repository.
+    Starting from v9.0.0, the sync-diff-inspector tool is moved from the [`pingcap/tidb-tools`](https://github.com/pingcap/tidb-tools) repository to [`pingcap/tiflow`](https://github.com/pingcap/tiflow). With this change, sync-diff-inspector is now maintained in the same repository as [DM](/dm/dm-overview.md) and [TiCDC](/ticdc/ticdc-overview.md), which unifies the management of these replication and migration tools.
 
     For TiDB v9.0.0 and later versions, you can install sync-diff-inspector using one of the following methods:
 
