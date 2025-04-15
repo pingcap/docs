@@ -167,7 +167,7 @@ TiDB implicitly allocates values to `AUTO_RANDOM` columns similarly to `AUTO_INC
 
 When you insert data with explicit values into an `AUTO_RANDOM` column in a deployment with multiple TiDB server instances, potential ID collisions can occur, similar to an `AUTO_INCREMENT` column. If explicit inserts happen to use ID values that conflict with the internal counter TiDB uses for automatic generation, this can lead to errors. 
 
-Here's how the collision can happen: each `AUTO_RANDOM` ID contains an auto-incrementing part alongside random bits. TiDB uses an internal counter for this auto-incrementing part. If you explicitly insert an ID where this part matches the counter's next value, TiDB might later try to generate the same ID automatically, leading to a duplicate key error. See [AUTO_INCREMENT Uniqueness](/auto-increment.md/#uniqueness) for details.
+Here's how the collision can happen: each `AUTO_RANDOM` ID contains an auto-incrementing part alongside random bits. TiDB uses an internal counter for this auto-incrementing part. If you explicitly insert an ID where this part matches the counter's next value, TiDB might later try to generate the same ID automatically, leading to a duplicate key error. See [AUTO_INCREMENT Uniqueness](/auto-increment.md#uniqueness) for details.
 
 With a single TiDB instance, this issue doesn't occur because the node automatically adjusts its internal counter when processing explicit insertions, preventing any future collisions. In contrast, with multiple TiDB nodes, each node maintains its own cache of IDs, which needs to be cleared to prevent collisions after explicit insertions. To clear these unallocated cached IDs and avoid potential collisions, you have two options: 
 
