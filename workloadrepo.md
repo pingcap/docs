@@ -58,7 +58,7 @@ SET GLOBAL tidb_workload_repository_snapshot_interval = 900; -- set the interval
 Note that while the snapshot sampling process runs automatically based on the configured interval, you can also trigger a manual snapshot using the following SQL statement:
 
 ```sql
-ADMIN WORKLOAD REPOSITORY TAKE SNAPSHOT;
+ADMIN CREATE WORKLOAD SNAPSHOT
 ```
 
 Manually triggering snapshots does not change the interval or timing of automatic snapshots.
@@ -95,7 +95,7 @@ Setting this global variable to `0` disables the time-based sampling process.
 
 The system automatically purges data based on the retention period setting, using partitions for efficient data management.
 
-You can use the [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900) variable to control the retention period for historical data in the Workload Repository. For example, to keep data for 30 days, run the following:
+By default the Workload Repository retains historical data for seven days, but the [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900) variable can be used to control the length of this period. For example, to keep data for 30 days, run the following:
 
 ```sql
 SET GLOBAL tidb_workload_repository_retention_days = 30;

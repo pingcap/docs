@@ -14,6 +14,7 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 - [`ADMIN REPAIR`](#admin-repair-statement)
 - [`ADMIN SHOW NEXT_ROW_ID`](#admin-show-next_row_id-statement)
 - [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
+- [`ADMIN CREATE WORKLOAD SNAPSHOT`](#admin-create-workload-snapshot-statement)
 
 ## DDL related statement
 
@@ -149,6 +150,16 @@ For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admi
 
 </CustomContent>
 
+## `ADMIN CREATE WORKLOAD SNAPSHOT` statement
+
+The following SQL statement will trigger a manual snapshot in the [Workload Repository](/workloadrepo.md):
+
+```sql
+ADMIN CREATE WORKLOAD SNAPSHOT;
+```
+
+Please note that the Workload Repository must be enabled for this statement to have effect.  Otherwise, it will generate an error.
+
 ## Synopsis
 
 ```ebnf+diagram
@@ -186,6 +197,7 @@ AdminStmt ::=
         | 'FLUSH' ('SESSION' | 'INSTANCE') 'PLAN_CACHE'
         | 'SET' 'BDR' 'ROLE' ( 'PRIMARY' | 'SECONDARY' )
         | 'UNSET' 'BDR' 'ROLE'
+        | 'CREATE' 'WORKLOAD' 'SNAPSHOT'
     )
 
 NumList ::=
