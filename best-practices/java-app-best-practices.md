@@ -205,7 +205,7 @@ After it is configured, you can check the monitoring to see a decreased number o
 
 > **Note:**
 >
-> Enabling `useConfigs = maxPerformance` requires MySQL Connector/J version 8.0.33 or later. For more details, see [MySQL JDBC Bug](/develop/dev-guide-third-party-tools-compatibility.md#mysql-jdbc-bugs).
+> Enabling `useConfigs=maxPerformance` requires MySQL Connector/J version 8.0.33 or later. For more details, see [MySQL JDBC Bug](/develop/dev-guide-third-party-tools-compatibility.md#mysql-jdbc-bugs).
 
 #### Timeout-related parameters
 
@@ -237,11 +237,11 @@ TiDB supports the following Java connection pools:
 - [c3p0](https://www.mchange.com/projects/c3p0/)
 - [dbcp](https://commons.apache.org/proper/commons-dbcp/)
 
-In practice, it has been observed that some connection pools tend to use certain active sessions persistently. This can lead to an imbalance in active connections across TiDB's compute nodes, even if the total number of connections is evenly distributed. To avoid this issue in distributed scenarios, it is recommended to use HikariCP, which provides effective connection lifecycle management and prevents active connections from being fixed on specific nodes, ensuring balanced load distribution.
+In practice, some connection pools might persistently use specific active sessions. Although the total number of connections appears evenly distributed across TiDB compute nodes, uneven distribution of active connections can lead to actual load imbalance. In distributed scenarios, it is recommended to use HikariCP, which manages connection lifecycles effectively and helps prevent active connections from being fixed on certain nodes, achieving balanced load distribution.
 
 ### Typical connection pool configuration
 
-Here is an example configuration for HikariCP:
+The following is an example configuration for HikariCP:
 
 ```yaml
 hikari:
@@ -252,13 +252,13 @@ hikari:
   keepaliveTime: 120000
 ```
 
-According to the [HikariCP official documentation](https://github.com/brettwooldridge/HikariCP/blob/dev/README.md), the following are parameter explanations:
+The parameter explanations are as follows. For more details, refer to the [official HikariCP documentation](https://github.com/brettwooldridge/HikariCP/blob/dev/README.md).
 
 - `maximumPoolSize`: the maximum number of connections in the pool. The default value is `10`. In containerized environments, it is recommended to set this to 4–10 times the number of CPU cores available to the Java application. Setting this value too high can lead to resource wastage, while setting it too low can slow down connection acquisition. See [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) for more details.
-- `minimumIdle`: HikariCP recommends not setting this parameter. By default, it equals to the value of `maximumPoolSize`, which disables connection pool scaling. This prevents delays in acquiring connections during traffic spikes.
-- `connectionTimeout`: the maximum time (in milliseconds) an application waits to acquire a connection from the pool. The default value is `30000` milliseconds (30 seconds). If no connection is available within this time, a `SQLException` error occurs.
+- `minimumIdle`: HikariCP recommends not setting this parameter. The default value is equal to the value of `maximumPoolSize`, which disables connection pool scaling. This ensures that connections are readily available during traffic spikes and avoids delays caused by connection creation.
+- `connectionTimeout`: the maximum time (in milliseconds) that an application waits to acquire a connection from the pool. The default value is `30000` milliseconds (30 seconds). If no available connection is obtained within this time, a `SQLException` exception occurs.
 - `maxLifetime`: the maximum lifetime (in milliseconds) of a connection in the pool. The default value is `1800000` milliseconds (30 minutes). Connections in use are not affected. After the connection is closed, it will be removed according to this setting. Setting this value too low can cause frequent reconnections. If you are using [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50), ensure this value is less than the wait time.
-- `keepaliveTime`: the interval (in milliseconds) for connection keep-alive operations to prevent timeouts. The default value is `120000` milliseconds (2 minutes). Idle connections are validated using JDBC4's `isValid()` method.
+- `keepaliveTime`: the interval (in milliseconds) between keepalive operations on connections in the pool. This setting helps prevent disconnections caused by database or network idle timeouts. The default value is `120000` milliseconds (2 minutes). The pool prefers using the JDBC4 `isValid()` method to keep idle connections alive.
 
 ### Probe configuration
 
