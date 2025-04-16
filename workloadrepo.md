@@ -93,7 +93,7 @@ Setting this global variable to `0` disables the time-based sampling process.
 
 ## Data retention
 
-The system automatically purges data based on the retention period setting, using partitions for efficient data management.
+Historical data in the Workload Repository is retained for seven days by default. The system automatically purges data based on the retention period setting, using partitions for efficient data management.
 
 By default the Workload Repository retains historical data for seven days, but the [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900) variable can be used to control the length of this period. For example, to keep data for 30 days, run the following:
 
