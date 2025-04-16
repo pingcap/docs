@@ -4,17 +4,30 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 ---
 
-# 2025 年のTiDB Cloudリリース ノート {#tidb-cloud-release-notes-in-2025}
+# 2025年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2025}
 
 このページには、2025 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートが記載されています。
+
+## 2025年4月15日 {#april-15-2025}
+
+**一般的な変更**
+
+-   [Alibaba Cloud オブジェクト ストレージ サービス (OSS)](https://www.alibabacloud.com/en/product/object-storage-service)クラスターから[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターへのデータのインポートをサポートします。
+
+    この機能により、 TiDB Cloud Serverlessへのデータ移行が簡素化されます。認証にはAccessKeyペアを使用できます。
+
+    詳細については、次のドキュメントを参照してください。
+
+    -   [Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud OSS から CSV ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-csv-files-serverless.md)
+    -   [Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud OSS から Apache Parquet ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-parquet-files-serverless.md)
 
 ## 2025年4月1日 {#april-1-2025}
 
 **一般的な変更**
 
--   [TiDB ノード グループ](/tidb-cloud/tidb-node-group-overview.md)機能が、AWS と Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで一般提供 (GA) されました。
+-   [TiDB ノードグループ](/tidb-cloud/tidb-node-group-overview.md)機能が、AWS と Google Cloud でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで一般提供 (GA) されました。
 
-    この機能により、単一クラスター内で**きめ細かいコンピューティング リソースの分離**が可能になり、マルチテナントまたはマルチワークロードのシナリオでパフォーマンスとリソースの割り当てを最適化できます。
+    この機能により、単一クラスター内での**きめ細かなコンピューティング リソースの分離**が可能になり、マルチテナントまたはマルチワークロードのシナリオでパフォーマンスとリソース割り当てを最適化できます。
 
     **主な利点:**
 
@@ -23,12 +36,12 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
         -   TiDB ノードを論理的に分離されたユニットにグループ化し、1 つのグループのワークロードが他のグループに影響を与えないようにします。
         -   アプリケーションまたはビジネス ユニット間のリソース競合を防止します。
 
-    -   **簡素化された管理**:
+    -   **簡素化された管理**：
 
         -   すべてのノード グループを単一のクラスター内で管理し、運用オーバーヘッドを削減します。
-        -   需要に応じてグループを個別に拡張します。
+        -   需要に応じてグループを個別にスケールします。
 
-    メリットの詳細については[技術ブログ](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/)参照してください。開始するには[TiDBノードグループの管理](/tidb-cloud/tidb-node-group-management.md)参照してください。
+    メリットの詳細については[技術ブログ](https://www.pingcap.com/blog/tidb-cloud-node-groups-scaling-workloads-predictable-performance/)ご覧ください。開始するには[TiDBノードグループの管理](/tidb-cloud/tidb-node-group-management.md)ご覧ください。
 
 -   AWS でホストされている[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター内の TiKV ノードに[標準storage](/tidb-cloud/size-your-cluster.md#standard-storage)タイプを導入します。
 
@@ -42,9 +55,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     **可用性：**
 
-    標準storageタイプは、2025 年 4 月 1 日以降に作成され、AWS でホストされ、サポートされているバージョン (バージョン &gt;= 7.5.5、8.1.2、または 8.5.0) の新しい[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに自動的に適用されます。既存のクラスターは引き続き以前の[基本storage](/tidb-cloud/size-your-cluster.md#basic-storage)タイプを使用するため、移行は必要ありません。
+    標準storageタイプは、2025年4月1日以降に作成され、AWSでホストされ、サポート対象バージョン（バージョン7.5.5、8.1.2、または8.5.0以上）の新規クラスター[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)に自動的に適用されます。既存のクラスターは引き続き以前の[基本的なstorage](/tidb-cloud/size-your-cluster.md#basic-storage)タイプを使用しているため、移行は不要です。
 
-    スタンダードstorageの価格はベーシックstorageの価格とは異なります。詳細については[価格](https://www.pingcap.com/tidb-dedicated-pricing-details/)参照してください。
+    スタンダードstorageの料金はベーシックstorageの料金と異なります。詳しくは[価格](https://www.pingcap.com/tidb-dedicated-pricing-details/)ご覧ください。
 
 ## 2025年3月25日 {#march-25-2025}
 
@@ -52,7 +65,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスター内のパブリック エンドポイントのファイアウォール ルールをサポートします。
 
-    TiDB Cloud Serverless クラスターのファイアウォール ルールを構成して、パブリック エンドポイント経由のアクセスを制御できるようになりました。セキュリティを強化するために、許可された IP アドレスまたは範囲を[TiDB Cloudコンソール](https://tidbcloud.com/)で直接指定します。
+    TiDB Cloud Serverless クラスターのファイアウォールルールを設定して、パブリックエンドポイント経由のアクセスを制御できるようになりました[TiDB Cloudコンソール](https://tidbcloud.com/)で許可する IP アドレスまたは範囲を直接指定することで、セキュリティを強化できます。
 
     詳細については[パブリックエンドポイント用のTiDB Cloudサーバーレス ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)参照してください。
 
@@ -64,13 +77,13 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については[TiDBノードグループの概要](/tidb-cloud/tidb-node-group-overview.md)参照してください。
 
--   AWS にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータベース監査ログ ファイルをTiDB Cloudに保存することをサポートします。
+-   AWS にデプロイされた[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのTiDB Cloudにデータベース監査ログ ファイルを保存することをサポートします。
 
-    これらの監査ログ ファイルは、TiDB Cloudから直接ダウンロードできます。この機能はリクエストに応じてのみ利用可能であることに注意してください。
+    これらの監査ログファイルはTiDB Cloudから直接ダウンロードできます。この機能はリクエストに応じてのみ利用可能であることにご注意ください。
 
     詳細については[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)参照してください。
 
--   多要素認証 (MFA) の管理を改善することで、 TiDB Cloudアカウントのセキュリティを強化します。この機能は、 TiDB Cloudのパスワードベースのログインに適用されます。
+-   多要素認証（MFA）の管理を改善することで、 TiDB Cloudアカウントのセキュリティを強化します。この機能は、 TiDB Cloudのパスワードベースのログインに適用されます。
 
     詳細については[パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)参照してください。
 
@@ -93,9 +106,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   GCS および Azure Blob Storage から[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)クラスターへのデータのインポートをサポートします。
 
-    TiDB Cloud Serverless は、Google Cloud Storage (GCS) および Azure Blob Storage からのデータのインポートをサポートするようになりました。認証には、Google Cloud サービス アカウント キーまたは Azure 共有アクセス署名 (SAS) トークンを使用できます。この機能により、 TiDB Cloud Serverless へのデータ移行が簡素化されます。
+    TiDB Cloud Serverless は、Google Cloud Storage (GCS) および Azure Blob Storage からのデータのインポートをサポートするようになりました。認証には、Google Cloud サービス アカウント キーまたは Azure Shared Access Signature (SAS) トークンを使用できます。この機能により、 TiDB Cloud Serverless へのデータ移行が簡素化されます。
 
-    詳細については[Amazon S3、GCS、または Azure Blob ストレージから CSV ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-csv-files-serverless.md)および[Amazon S3、GCS、または Azure Blob ストレージから Apache Parquet ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-parquet-files-serverless.md)参照してください。
+    詳細については、 [Amazon S3、GCS、Azure Blob Storage から CSV ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-csv-files-serverless.md)および[Amazon S3、GCS、または Azure Blob Storage から Apache Parquet ファイルをTiDB Cloud Serverless にインポートする](/tidb-cloud/import-parquet-files-serverless.md)参照してください。
 
 ## 2025年1月21日 {#january-21-2025}
 
@@ -111,7 +124,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して新しい AWS リージョンをサポートします: `Jakarta (ap-southeast-3)` 。
 
--   [通知](https://tidbcloud.com/console/notifications)機能を導入すると、 [TiDB Cloudコンソール](https://tidbcloud.com/)を通じてTiDB Cloud の更新とアラートを即座に把握できるようになります。
+-   [通知](https://tidbcloud.com/console/notifications)機能を導入すると、 [TiDB Cloudコンソール](https://tidbcloud.com/)を通じてTiDB Cloud の更新とアラートに関する最新情報を即座に入手できます。
 
     詳細については[通知](/tidb-cloud/notifications.md)参照してください。
 
@@ -125,7 +138,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   Private Connect (ベータ版) を介して[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを AWS および Google Cloud の汎用 Kafka に接続することをサポートします。
 
-    Private Connect は、クラウド プロバイダーの Private Link または Private Service Connect テクノロジーを活用して、 TiDB Cloud VPC 内の変更フィードがプライベート IP アドレスを使用して顧客の VPC 内の Kafka に接続できるようにします。これにより、それらの Kafka がTiDB Cloud VPC 内で直接ホストされているかのようになります。この機能は、VPC CIDR の競合を防ぎ、セキュリティ コンプライアンス要件を満たすのに役立ちます。
+    Private Connect は、クラウドプロバイダーの Private Link または Private Service Connect テクノロジーを活用し、 TiDB Cloud VPC 内の変更フィードがプライベート IP アドレスを使用してお客様の VPC 内の Kafka に接続できるようにします。これにより、Kafka がTiDB Cloud VPC 内で直接ホストされているかのように扱われます。この機能は、VPC CIDR の競合を防ぎ、セキュリティコンプライアンス要件を満たすのに役立ちます。
 
     -   AWS の Apache Kafka の場合は、 [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](/tidb-cloud/setup-self-hosted-kafka-private-link-service.md)手順に従ってネットワーク接続を構成します。
 
@@ -137,9 +150,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   Kafka の変更フィードに追加の構成可能なオプションを導入します。
 
-    -   Debezium プロトコルの使用をサポートします。Debezium はデータベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更をイベントと呼ばれるメッセージに変換し、これらのイベントを Kafka に送信します。詳細については、 [TiCDC デベジウム プロトコル](https://docs.pingcap.com/tidb/v8.1/ticdc-debezium)参照してください。
+    -   Debeziumプロトコルの使用をサポートします。Debeziumはデータベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更はイベントと呼ばれるメッセージに変換され、Kafkaに送信されます。詳細については、 [TiCDC デベジウムプロトコル](https://docs.pingcap.com/tidb/v8.1/ticdc-debezium)ご覧ください。
 
-    -   すべてのテーブルに対して単一のパーティション ディスパッチャーを定義することも、テーブルごとに異なるパーティション ディスパッチャーを定義することもサポートします。
+    -   すべてのテーブルに対して単一のパーティション ディスパッチャーを定義することも、異なるテーブルに対して異なるパーティション ディスパッチャーを定義することもサポートします。
 
     -   Kafka メッセージのパーティション分散用に、タイムスタンプと列値という 2 つの新しいディスパッチャ タイプを導入しました。
 
@@ -161,9 +174,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     この機能は、最大限のインフラストラクチャ冗長性とビジネス継続性を必要とするワークロード向けに設計されています。主な関数は次のとおりです。
 
-    -   ゾーン障害が発生した場合でも高可用性を確保するために、ノードは複数の可用性ゾーンに分散されます。
+    -   ノードは複数の可用性ゾーンに分散され、ゾーン障害が発生した場合でも高可用性が確保されます。
     -   PD や TiKV などの重要な OLTP (オンライン トランザクション処理) コンポーネントは、冗長性を確保するために可用性ゾーン全体に複製されます。
-    -   自動フェイルオーバーにより、プライマリ ゾーンの障害発生時のサービス中断が最小限に抑えられます。
+    -   自動フェイルオーバーにより、プライマリ ゾーンの障害時のサービス中断が最小限に抑えられます。
 
     この機能は現在、AWS 東京 (ap-northeast-1) リージョンでのみ利用可能で、クラスターの作成時にのみ有効にできます。
 
@@ -179,4 +192,4 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     -   [TiDB Cloudコンソール](https://tidbcloud.com/)を介して Parquet ファイルでのデータのエクスポートをサポートします。
 
-    詳細については[TiDB Cloud Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Cloud Serverless の外部ストレージ アクセスを構成する](/tidb-cloud/serverless-external-storage.md)参照してください。
+    詳細については、 [TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md)および[TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/serverless-external-storage.md)参照してください。

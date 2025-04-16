@@ -3,9 +3,9 @@ title: Configure TiDB Cloud Serverless External Storage Access
 summary: Amazon Simple Storage Service (Amazon S3) アクセスを構成する方法を学習します。
 ---
 
-# TiDB Cloud Serverless の外部ストレージ アクセスを構成する {#configure-external-storage-access-for-tidb-cloud-serverless}
+# TiDB Cloud Serverless の外部ストレージアクセスを構成する {#configure-external-storage-access-for-tidb-cloud-serverless}
 
-TiDB Cloud Serverless クラスターの外部storageからデータをインポートしたり、外部ストレージにデータをエクスポートしたりする場合は、クロスアカウント アクセスを構成する必要があります。このドキュメントでは、TiDB Cloud Serverless クラスターの外部storageへのアクセスを構成する方法について説明します。
+TiDB Cloud Serverless クラスター内の外部storageからデータをインポートまたはエクスポートする場合は、クロスアカウントアクセスを設定する必要があります。このドキュメントでは、 TiDB Cloud Serverless クラスターの外部storageへのアクセスを設定する方法について説明します。
 
 TiDB Cloud Dedicated クラスター用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md)参照してください。
 
@@ -18,7 +18,11 @@ TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソース�
 
 ### ロール ARN を使用して Amazon S3 アクセスを構成する {#configure-amazon-s3-access-using-a-role-arn}
 
-ロール ARN を作成するには、 [AWS クラウドフォーメーション](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)使用することをお勧めします。作成するには、次の手順を実行します。
+ロールARNを作成するには、 [AWS クラウドフォーメーション](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)使用することをお勧めします。作成するには、以下の手順に従ってください。
+
+> **注記：**
+>
+> Amazon S3へのロールARNアクセスは、クラウドプロバイダーとしてAWSを使用しているクラスターでのみサポートされます。別のクラウドプロバイダーを使用している場合は、代わりにAWSアクセスキーを使用してください。詳細については、 [AWS アクセスキーを使用して Amazon S3 アクセスを構成する](#configure-amazon-s3-access-using-an-aws-access-key)ご覧ください。
 
 1.  ターゲット クラスターの**インポート**ページを開きます。
 
@@ -28,21 +32,21 @@ TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソース�
 
 2.  **新しい ARN の追加**ダイアログを開きます。
 
-    -   Amazon S3 からデータをインポートする場合は、次のようにして**「新しい ARN の追加」**ダイアログを開きます。
+    -   Amazon S3 からデータをインポートする場合は、次のようにして**[新しい ARN の追加]**ダイアログを開きます。
 
         1.  **S3 からインポート**をクリックします。
         2.  **ファイル URI**フィールドに入力します。
         3.  **AWS ロール ARN**を選択し、[**ここをクリックして AWS CloudFormation で新規作成] を**クリックします。
 
-    -   データを Amazon S3 にエクスポートする場合は、次のようにして**「新しい ARN の追加」**ダイアログを開きます。
+    -   データを Amazon S3 にエクスポートする場合は、次のようにして**[新しい ARN の追加]**ダイアログを開きます。
 
-        1.  **[データをエクスポート...]** &gt; **[Amazon S3]**をクリックします。クラスターでこれまでにデータをインポートまたはエクスポートしたことがない場合は、ページの下部にある**[データをエクスポートするには、ここをクリックします...]** &gt; **[Amazon S3]**をクリックします。
+        1.  **「データをエクスポート...」** &gt; **「Amazon S3」**をクリックします。クラスターでこれまでデータのインポートもエクスポートもしたことがない場合は、ページ下部の**「データをエクスポートするにはここをクリック...** 」 &gt; **「Amazon S3」**をクリックします。
         2.  **フォルダー URI**フィールドに入力します。
         3.  **AWS ロール ARN**を選択し、[**ここをクリックして AWS CloudFormation で新規作成] を**クリックします。
 
 3.  AWS CloudFormation テンプレートを使用してロール ARN を作成します。
 
-    1.  **[新しい ARN の追加**] ダイアログで、 **[CloudFormation テンプレートを使用した AWS コンソール] を**クリックします。
+    1.  [**新しい ARN の追加]**ダイアログで、 **[AWS コンソールと CloudFormation テンプレート]**をクリックします。
 
     2.  [AWS マネジメントコンソール](https://console.aws.amazon.com)にログインすると、AWS CloudFormation の**クイック作成スタック**ページにリダイレクトされます。
 
@@ -54,17 +58,17 @@ TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソース�
 
         ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
 
-AWS CloudFormation でロール ARN を作成する際に問題が発生した場合は、次の手順に従って手動で作成できます。
+AWS CloudFormation でロール ARN を作成するときに問題が発生した場合は、次の手順に従って手動で作成できます。
 
 <details><summary>詳細はこちらをクリック</summary>
 
-1.  前の手順で説明した**「新しい ARN の追加」**ダイアログで、 **「問題が発生した場合は、ロール ARN を手動で作成します」**をクリックします。TiDB **TiDB Cloudアカウント ID**と**TiDB Cloud外部 ID**が取得されます。
+1.  前の手順で説明した**「新しいARNを追加」**ダイアログで、 **「問題が発生した場合は、ロールARNを手動で作成してください」**をクリックします。TiDB **TiDB CloudアカウントID**と**TiDB Cloud外部ID**が表示されます。
 
 2.  AWS マネジメントコンソールで、Amazon S3 バケットの管理ポリシーを作成します。
 
     1.  [AWS マネジメントコンソール](https://console.aws.amazon.com/)にサインインして[Amazon S3 コンソール](https://console.aws.amazon.com/s3/)開きます。
 
-    2.  **[バケット]**リストで、ソース データがあるバケットの名前を選択し、 **[ARN のコピー]**をクリックして S3 バケット ARN (例: `arn:aws:s3:::tidb-cloud-source-data` ) を取得します。後で使用するために、バケット ARN をメモしておきます。
+    2.  **「バケット」**リストで、ソースデータがあるバケットの名前を選択し、 **「ARNをコピー」**をクリックしてS3バケットのARN（例： `arn:aws:s3:::tidb-cloud-source-data` ）を取得します。後で使用するために、バケットのARNをメモしておいてください。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
@@ -74,7 +78,7 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
     4.  **[ポリシーの作成]**ページで、 **[JSON]**タブをクリックします。
 
-    5.  必要に応じて、ポリシー テキスト フィールドでポリシーを構成します。以下は、TiDB Cloud Serverless クラスターからデータをエクスポートしたり、 TiDB Cloud Serverless クラスターにデータをインポートしたりするために使用できる例です。
+    5.  必要に応じて、ポリシーテキストフィールドでポリシーを設定します。以下は、 TiDB Cloud Serverless クラスターとの間でデータのエクスポートとインポートを行う例です。
 
         -   TiDB Cloud Serverless クラスターからデータをエクスポートするには**、s3:PutObject**および**s3:ListBucket**権限が必要です。
         -   TiDB Cloud Serverless クラスターにデータをインポートするには**、 s3:GetObject** 、 **s3:GetObjectVersion** 、および**s3:ListBucket**権限が必要です。
@@ -116,7 +120,7 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
         -   `"Resource": "<Your S3 bucket ARN>"` 、たとえば`"Resource": "arn:aws:s3:::tidb-cloud-source-data"` 。
 
-        -   カスタマー管理のキー暗号化で AWS Key Management Service キー (SSE-KMS) を有効にしている場合は、ポリシーに次の設定が含まれていることを確認してください。1 `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`バケットのサンプル KMS キーです。
+        -   カスタマー管理のキー暗号化で AWS Key Management Service キー (SSE-KMS) を有効にしている場合は、次の設定がポリシーに含まれていることを確認してください。1 `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`バケットのサンプル KMS キーです。
 
                 {
                     "Sid": "AllowKMSkey",
@@ -127,7 +131,7 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
                     "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
                 }
 
-        -   バケット内のオブジェクトが別の暗号化されたバケットからコピーされた場合、KMS キー値には両方のバケットのキーを含める必要があります。たとえば、 `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]` 。
+        -   バケット内のオブジェクトが別の暗号化バケットからコピーされた場合、KMSキーの値には両方のバケットのキーを含める必要があります。例： `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]` 。
 
     6.  **「次へ」**をクリックします。
 
@@ -135,7 +139,7 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
 3.  AWS マネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロール ARN を取得します。
 
-    1.  [IAMコンソール](https://console.aws.amazon.com/iam/)で、左側のナビゲーション ペインで**[ロール]**をクリックし、 **[ロールの作成] を**クリックします。
+    1.  [IAMコンソール](https://console.aws.amazon.com/iam/)で、左側のナビゲーション ペインの**[ロール]**をクリックし、 **[ロールの作成] を**クリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
@@ -143,11 +147,11 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
         -   **信頼されたエンティティタイプ**で、 **AWS アカウント**を選択します。
         -   **「AWS アカウント」**で**「別の AWS アカウント」**を選択し、 TiDB Cloudアカウント ID を**「アカウント ID」**フィールドに貼り付けます。
-        -   **オプション**で、**外部 ID が必要 (サードパーティがこのロールを引き受ける場合のベストプラクティス)**をクリックし、 TiDB Cloud外部 ID を**外部 ID**フィールドに貼り付けます。外部 ID が必要 なしでロールを作成した場合、プロジェクト内の 1 つの TiDB クラスターの設定が完了すると、そのプロジェクト内のすべての TiDB クラスターが同じロール ARN を使用して Amazon S3 バケットにアクセスできます。アカウント ID と外部 ID を使用してロールを作成した場合、対応する TiDB クラスターのみがバケットにアクセスできます。
+        -   **オプション**で、 **「外部IDが必要（サードパーティがこのロールを引き受ける場合のベストプラクティス）」**をクリックし、 TiDB Cloudの外部IDを**「外部ID」**フィールドに貼り付けます。「外部IDが必要」を指定せずにロールを作成した場合、プロジェクト内の1つのTiDBクラスターの設定が完了すると、そのプロジェクト内のすべてのTiDBクラスターが同じロールARNを使用してAmazon S3バケットにアクセスできるようになります。アカウントIDと外部IDを指定してロールを作成した場合、対応するTiDBクラスターのみがバケットにアクセスできます。
 
     3.  **[次へ]**をクリックしてポリシー リストを開き、作成したポリシーを選択して、 **[次へ]**をクリックします。
 
-    4.  **ロールの詳細**で、ロールの名前を設定し、右下隅の**ロールの作成を**クリックします。ロールが作成されると、ロールのリストが表示されます。
+    4.  **ロールの詳細**でロールの名前を設定し、右下にある**「ロールの作成」**をクリックします。ロールが作成されると、ロールのリストが表示されます。
 
     5.  ロールのリストで、作成したロールの名前をクリックして概要ページに移動し、ロール ARN を取得できます。
 
@@ -163,32 +167,32 @@ AWS CloudFormation でロール ARN を作成する際に問題が発生した�
 
 1.  IAMユーザーを作成します。詳細については、 [IAMユーザーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)参照してください。
 
-2.  AWS アカウント ID またはアカウントエイリアスと、 IAMユーザー名とパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam)にサインインします。
+2.  AWS アカウント ID またはアカウントエイリアス、 IAMユーザー名とパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam)にサインインします。
 
-3.  アクセスキーを作成します。詳細については、 [IAMユーザーのアクセスキーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)参照してください。
+3.  アクセスキーを作成します。詳細については、 [IAMユーザーのアクセスキーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)参照してください。
 
 > **注記：**
 >
-> TiDB Cloud はアクセス キーを保存しません。インポートまたはエクスポートが完了したら、 [アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)実行することをお勧めします。
+> TiDB Cloudはアクセスキーを保存しません。インポートまたはエクスポートが完了したら、 [アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)実行することをお勧めします。
 
 ## GCS アクセスを構成する {#configure-gcs-access}
 
-TiDB Cloud Serverless クラスターが GCS バケットにアクセスできるようにするには、バケットの GCS アクセスを構成する必要があります。サービス アカウント キーを使用してバケット アクセスを構成できます。
+TiDB Cloud Serverless クラスタが GCS バケットにアクセスできるようにするには、バケットの GCS アクセスを設定する必要があります。バケットアクセスの設定には、サービスアカウントキーを使用できます。
 
 サービス アカウント キーを構成するには、次の手順を実行します。
 
-1.  Google Cloud [サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)で、 **[サービス アカウントの作成]**をクリックしてサービス アカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)参照してください。
+1.  Google Cloud [サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)で、 **「サービスアカウントを作成」**をクリックしてサービスアカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)ご覧ください。
 
     1.  サービス アカウント名を入力します。
 
     2.  オプション: サービス アカウントの説明を入力します。
 
-    3.  サービス アカウントを作成するには**、[作成して続行]**をクリックします。
+    3.  **[作成して続行]**をクリックして、サービス アカウントを作成します。
 
     4.  `Grant this service account access to project`で、必要な権限を持つ[IAMロール](https://cloud.google.com/iam/docs/understanding-roles)選択します。
 
         -   TiDB Cloud Serverless クラスターからデータをエクスポートするには、 `storage.objects.create`権限を持つロールが必要です。
-        -   TiDB Cloud Serverless クラスターにデータをインポートするには、 `storage.buckets.get` 、 `storage.objects.get` 、および`storage.objects.list`権限を持つロールが必要です。
+        -   TiDB Cloud Serverless クラスターにデータをインポートするには、 `storage.buckets.get` 、 `storage.objects.get` 、 `storage.objects.list`権限を持つロールが必要です。
 
     5.  **「続行」**をクリックして次のステップに進みます。
 
@@ -202,7 +206,7 @@ TiDB Cloud Serverless クラスターが GCS バケットにアクセスでき�
 
     ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3.  デフォルトのキータイプ`JSON`を選択し、 **[作成]**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud Serverless クラスタの GCS アクセスを構成するときに使用する必要があるサービス アカウント キーが含まれています。
+3.  デフォルトのキータイプ`JSON`を選択し、 **「作成」**をクリックしてGoogle Cloud認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud ServerlessクラスタのGCSアクセスを構成する際に必要なサービスアカウントキーが含まれています。
 
 ## Azure Blob Storage アクセスを構成する {#configure-azure-blob-storage-access}
 
@@ -220,35 +224,35 @@ Azure ARM テンプレートを使用して SAS トークンを作成するに�
 
 2.  **ARM テンプレートの展開による新しい SAS トークンの生成**ダイアログを開きます。
 
-    1.  **[データをエクスポート...]** &gt; **[Azure Blob Storage]**をクリックします。クラスターでこれまでにデータをインポートもエクスポートしたことがない場合は、ページの下部にある**[データをエクスポートするには、ここをクリックします...]** &gt; **[Azure Blob Storage]**をクリックします。
+    1.  **「データのエクスポート先...」** &gt; **「Azure Blob Storage」**をクリックします。クラスターでこれまでにデータのインポートもエクスポートもしたことがない場合は、ページの下部にある**「データのエクスポート先...」** &gt; **「Azure Blob Storage」**をクリックします。
 
     2.  **Azure Blob Storage 設定**領域まで下にスクロールし、SAS トークン フィールドの下に**ある Azure ARM テンプレートを使用して新規作成するには、ここをクリック**します。をクリックします。
 
 3.  Azure ARM テンプレートを使用して SAS トークンを作成します。
 
-    1.  **[ARM テンプレートの展開による新しい SAS トークンの生成]**ダイアログで、[クリックして**、事前構成された ARM テンプレートを含む Azure ポータルを開く] をクリックします**。
+    1.  **[ARM テンプレートのデプロイによる新しい SAS トークンの生成]**ダイアログで、[クリックして**、事前構成された ARM テンプレートを含む Azure Portal を開く] をクリックします**。
 
     2.  Azure にログインすると、Azure**カスタム デプロイメント**ページにリダイレクトされます。
 
-    3.  **カスタム デプロイ**ページで、**リソース グループ**と**ストレージ アカウント名**を入力します。コンテナーが配置されているstorageアカウントの概要ページからすべての情報を取得できます。
+    3.  **カスタムデプロイ**ページで、**リソースグループ**と**ストレージアカウント名**を入力します。コンテナが配置されているstorageアカウントの概要ページからすべての情報を取得できます。
 
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
-    4.  **[確認 + 作成]**または**[次へ**] をクリックして、展開を確認します。 **[作成]**をクリックして、展開を開始します。
+    4.  **「確認と作成」**または**「次へ」**をクリックして、デプロイ内容を確認します。 **「作成」**をクリックしてデプロイを開始します。
 
-    5.  完了すると、デプロイの概要ページにリダイレクトされます。**出力**セクションに移動して、SAS トークンを取得します。
+    5.  完了すると、デプロイの概要ページにリダイレクトされます。 **「出力」**セクションに移動して、SAS トークンを取得してください。
 
-Azure ARM テンプレートを使用して SAS トークンを作成する際に問題が発生した場合は、次の手順に従って手動で作成してください。
+Azure ARM テンプレートを使用して SAS トークンを作成するときに問題が発生した場合は、次の手順に従って手動で作成してください。
 
 <details><summary>詳細はこちらをクリック</summary>
 
 1.  [Azure ストレージ アカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するstorageアカウントをクリックします。
 
-2.  **ストレージ アカウント**ページで、[**Security+ ネットワーク]**をクリックし、 **[共有アクセス署名] を**クリックします。
+2.  **ストレージ アカウント**ページで、[**Security+ ネットワーク]**をクリックし、 **[Shared access signature]**をクリックします。
 
     ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
 
-3.  **Shared Access Signature**ページで、次のように必要なアクセス許可を持つサービス SAS トークンを作成します。詳細については、 [サービスSASトークンを作成する](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)参照してください。
+3.  **Shared Access Signature**ページで、必要な権限を持つサービスSASトークンを以下のように作成します。詳細については、 [サービスSASトークンを作成する](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)参照してください。
 
     1.  **[許可されたサービス]**セクションで、 **Blob**サービスを選択します。
 
@@ -265,6 +269,30 @@ Azure ARM テンプレートを使用して SAS トークンを作成する際�
 
     ![sas-create](/media/tidb-cloud/serverless-external-storage/azure-sas-create.png)
 
-4.  SAS トークンを生成するには、 **[SAS と接続文字列の生成] を**クリックします。
+4.  SAS トークンを生成するには、 **「SAS と接続文字列の生成」を**クリックします。
 
 </details>
+
+## Alibaba Cloud Object Storage Service (OSS) アクセスを構成する {#configure-alibaba-cloud-object-storage-service-oss-access}
+
+TiDB Cloud Serverless が Alibaba Cloud OSS バケットにアクセスできるようにするには、バケットの AccessKey ペアを作成する必要があります。
+
+AccessKey ペアを構成するには、次の手順を実行します。
+
+1.  RAMユーザーを作成し、AccessKeyペアを取得します。詳細については、 [RAMユーザーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user)参照してください。
+
+    **[アクセス モード]**セクションで、 **[永続的な AccessKey を使用してアクセスする] を**選択します。
+
+2.  必要な権限を持つカスタムポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)参照してください。
+
+    -   **[効果]**セクションで、 **[許可]**を選択します。
+
+    -   **[サービス]**セクションで、 **[オブジェクト ストレージ サービス]**を選択します。
+
+    -   **「アクション」**セクションで、必要に応じて権限を選択します。
+
+        TiDB Cloud Serverless クラスターにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjects**権限を付与します。
+
+    -   **リソース**セクションで、バケットとバケット内のオブジェクトを選択します。
+
+3.  カスタムポリシーをRAMユーザーにアタッチします。詳細については、 [RAMユーザーに権限を付与する](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user)参照してください。
