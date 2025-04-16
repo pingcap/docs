@@ -20,6 +20,10 @@ To allow a TiDB Cloud Serverless cluster to access the source data in your Amazo
 
 It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html) to create a role ARN. Take the following steps to create one:
 
+> **Note:**
+>
+> Role ARN access to Amazon S3 is only supported for clusters with AWS as the cloud provider. If you use a different cloud provider, use an AWS access key instead. For more information, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
+
 1. Open the **Import** page for your target cluster.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
@@ -264,3 +268,25 @@ If you have any trouble creating a SAS token with the Azure ARM template, take t
 4. Click **Generate SAS and connection string** to generate the SAS token.
 
 </details>
+
+## Configure Alibaba Cloud Object Storage Service (OSS) access
+
+To allow TiDB Cloud Serverless to access your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
+
+Take the following steps to configure an AccessKey pair:
+
+1. Create a RAM user and get the AccessKey pair. For more information, see [Create a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user).
+    
+    In the **Access Mode** section, select **Using permanent AccessKey to access**.
+
+2. Create a custom policy with the required permissions. For more information, see [Create custom policies](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy).
+    
+    - In the **Effect** section, select **Allow**.
+    - In the **Service** section, select **Object Storage Service**.
+    - In the **Action** section, select the permissions as needed.
+   
+        To import data into a TiDB Cloud Serverless cluster, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
+      
+    - In the **Resource** section, select the bucket and the objects in the bucket.
+
+3. Attach the custom policies to the RAM user. For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).
