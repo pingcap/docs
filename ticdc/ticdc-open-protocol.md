@@ -308,6 +308,7 @@ Currently, TiCDC does not provide the standard parsing library for TiCDC Open Pr
 | LONGTEXT/LONGBLOB     | 251  | {"t":251,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
 | TEXT/BLOB             | 252  | {"t":252,"v":"5rWL6K+VdGV4dA=="} | The value is encoded in Base64. |
 | CHAR/BINARY           | 254  | {"t":254,"v":"test"} / {"t":254,"v":"\\\\x89PNG\\\\r\\\\n\\\\x1a\\\\n"} | The value is encoded in UTF-8. When the upstream type is BINARY, invisible characters are escaped. |
+| TiDBVectorFloat32              | 225  | {"t":225,"v":"[1.23, -0.4]"} |  |
 | GEOMETRY              | 255  |  | Unsupported |
 
 ## DDL Type Code
