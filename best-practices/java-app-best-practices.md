@@ -199,26 +199,62 @@ Through monitoring, you might notice that although the application only performs
 
 After it is configured, you can check the monitoring to see a decreased number of `SELECT` statements.
 
+> **Note:**
+>
+> Enabling `useConfigs=maxPerformance` requires MySQL Connector/J version 8.0.33 or later. For more details, see [MySQL JDBC Bug](/develop/dev-guide-third-party-tools-compatibility.md#mysql-jdbc-bugs).
+
 #### Timeout-related parameters
 
 TiDB provides two MySQL-compatible parameters that controls the timeout: `wait_timeout` and `max_execution_time`. These two parameters respectively control the connection idle timeout with the Java application and the timeout of the SQL execution in the connection; that is to say, these parameters control the longest idle time and the longest busy time for the connection between TiDB and the Java application. The default value of both parameters is `0`, which by default allows the connection to be infinitely idle and infinitely busy (an infinite duration for one SQL statement to execute).
 
 However, in an actual production environment, idle connections and SQL statements with excessively long execution time negatively affect databases and applications. To avoid idle connections and SQL statements that are executed for too long, you can configure these two parameters in your application's connection string. For example, set `sessionVariables=wait_timeout=3600` (1 hour) and `sessionVariables=max_execution_time=300000` (5 minutes).
 
+#### Typical JDBC connection string parameters
+
+Combining the preceding parameter values, the JDBC connection string configuration is as follows:
+
+```
+jdbc:mysql://<IP_ADDRESS>:<PORT_NUMBER>/<DATABASE_NAME>?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true
+```
+
+> **Note:**
+>
+> If you are connecting over a public network, you need to set `useSSL=true` and [enable TLS between TiDB clients and servers](/enable-tls-between-clients-and-servers.md).
+
 ## Connection pool
 
 Building TiDB (MySQL) connections is relatively expensive (for OLTP scenarios at least), because in addition to building a TCP connection, connection authentication is also required. Therefore, the client usually saves the TiDB (MySQL) connections to the connection pool for reuse.
 
-Java has many connection pool implementations such as [HikariCP](https://github.com/brettwooldridge/HikariCP), [tomcat-jdbc](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html), [druid](https://github.com/alibaba/druid), [c3p0](https://www.mchange.com/projects/c3p0/), and [dbcp](https://commons.apache.org/proper/commons-dbcp/). TiDB does not limit which connection pool you use, so you can choose whichever you like for your application.
+TiDB supports the following Java connection pools:
 
-### Configure the number of connections
+- [HikariCP](https://github.com/brettwooldridge/HikariCP)
+- [tomcat-jdbc](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool)
+- [druid](https://github.com/alibaba/druid)
+- [c3p0](https://www.mchange.com/projects/c3p0/)
+- [dbcp](https://commons.apache.org/proper/commons-dbcp/)
 
-It is a common practice that the connection pool size is well adjusted according to the application's own needs. Take HikariCP as an example:
+In practice, some connection pools might persistently use specific active sessions. Although the total number of connections appears evenly distributed across TiDB compute nodes, uneven distribution of active connections can lead to actual load imbalance. In distributed scenarios, it is recommended to use HikariCP, which manages connection lifecycles effectively and helps prevent active connections from being fixed on certain nodes, achieving balanced load distribution.
 
-- `maximumPoolSize`: The maximum number of connections in the connection pool. If this value is too large, TiDB consumes resources to maintain useless connections. If this value is too small, the application gets slow connections. So configure this value for your own good. For details, see [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
-- `minimumIdle`: The minimum number of idle connections in the connection pool. It is mainly used to reserve some connections to respond to sudden requests when the application is idle. You can also configure it according to your application needs.
+### Typical connection pool configuration
 
-The application needs to return the connection after finishing using it. It is also recommended that the application use the corresponding connection pool monitoring (such as `metricRegistry`) to locate the connection pool issue in time.
+The following is an example configuration for HikariCP:
+
+```yaml
+hikari:
+  maximumPoolSize: 20
+  poolName: hikariCP
+  connectionTimeout: 30000 
+  maxLifetime: 1200000
+  keepaliveTime: 120000
+```
+
+The parameter explanations are as follows. For more details, refer to the [official HikariCP documentation](https://github.com/brettwooldridge/HikariCP/blob/dev/README.md).
+
+- `maximumPoolSize`: the maximum number of connections in the pool. The default value is `10`. In containerized environments, it is recommended to set this to 4–10 times the number of CPU cores available to the Java application. Setting this value too high can lead to resource wastage, while setting it too low can slow down connection acquisition. See [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) for more details.
+- `minimumIdle`: HikariCP recommends not setting this parameter. The default value is equal to the value of `maximumPoolSize`, which disables connection pool scaling. This ensures that connections are readily available during traffic spikes and avoids delays caused by connection creation.
+- `connectionTimeout`: the maximum time (in milliseconds) that an application waits to acquire a connection from the pool. The default value is `30000` milliseconds (30 seconds). If no available connection is obtained within this time, a `SQLException` exception occurs.
+- `maxLifetime`: the maximum lifetime (in milliseconds) of a connection in the pool. The default value is `1800000` milliseconds (30 minutes). Connections in use are not affected. After the connection is closed, it will be removed according to this setting. Setting this value too low can cause frequent reconnections. If you are using [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50), ensure this value is less than the wait time.
+- `keepaliveTime`: the interval (in milliseconds) between keepalive operations on connections in the pool. This setting helps prevent disconnections caused by database or network idle timeouts. The default value is `120000` milliseconds (2 minutes). The pool prefers using the JDBC4 `isValid()` method to keep idle connections alive.
 
 ### Probe configuration
 
