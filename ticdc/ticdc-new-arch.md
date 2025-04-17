@@ -10,7 +10,7 @@ Starting from v9.0.0, TiCDC introduces a new architecture that improves real-tim
 - **Higher single-node performance**: a single node can replicate up to 500,000 tables, achieving replication throughput of up to 200 MiB/s in wide table scenarios.
 - **Enhanced scalability**: cluster replication capability scales almost linearly. A single cluster can expand to over 100 nodes, support more than 10,000 changefeeds, and replicate millions of tables within a single changefeed.
 - **Improved stability**: changefeed latency is reduced and performance is more stable in scenarios with high traffic, frequent DDL operations, and cluster scaling events. Resource isolation and priority scheduling reduce interference between multiple changefeed tasks.
-- **Lower resource costs**: with improved resource utilization and reduced redundancy, CPU and memory resource usage efficiency improves by up to an order of magnitude in typical scenarios.
+- **Lower resource costs**: with improved resource utilization and reduced redundancy, CPU and memory resource usage efficiency improves by up to ten times in typical scenarios.
 
 > **Warning:**
 >
