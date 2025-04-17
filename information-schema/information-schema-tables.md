@@ -106,7 +106,7 @@ The description of columns in the `TABLES` table is as follows:
 * `MAX_DATA_LENGTH`: The maximum data length. The value is currently `0`, which means the data length has no upper limit.
 * `INDEX_LENGTH`: The index length. `INDEX_LENGTH` = `TABLE_ROWS` \* the sum of lengths of the columns in the index tuple. The replicas of TiKV are not taken into account.
 * `DATA_FREE`: Data fragment. The value is currently `0`.
-* `AUTO_INCREMENT`: The current step of the auto- increment primary key.
+* `AUTO_INCREMENT`: The current step of the auto-increment primary key.
 * `CREATE_TIME`: The time at which the table is created.
 * `UPDATE_TIME`: The time at which the table is updated.
 * `CHECK_TIME`: The time at which the table is checked.

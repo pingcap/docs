@@ -39,7 +39,7 @@ tiup dm [command] [flags]
 
 - Specifies the maximum waiting time (in seconds) for each step in the operation process. The operation process consists of many steps, such as specifying systemctl to start or stop services, and waiting for ports to be online or offline. Each step may take several seconds. If the execution time of a step exceeds the specified timeout, the step exits with an error.
 - Data type: `UINT`
-- If this option is not specified in the command, the maximum waiting time for each steps is `120` seconds.
+- If this option is not specified in the command, the maximum waiting time for each step is `120` seconds.
 
 ### -y, --yes
 
