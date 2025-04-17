@@ -152,7 +152,19 @@ For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admi
 
 ## `ADMIN CREATE WORKLOAD SNAPSHOT` statement
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB statement is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
 The following SQL statement will trigger a manual snapshot in the [Workload Repository](/workload-repository.md):
+
+</CustomContent>
 
 ```sql
 ADMIN CREATE WORKLOAD SNAPSHOT;
