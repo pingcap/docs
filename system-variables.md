@@ -6214,8 +6214,20 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: `''`
+
+<CustomContent platform="tidb">
+
 - This variable is used to set the destination of the [Workload Repository](/workload-repository.md).
 - The value can be either `'table'` (enabling the workload repository) or `''` (disabling the workload repository).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to set the destination of the [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository).
+- The value can be either `'table'` (enabling the workload repository) or `''` (disabling the workload repository).
+
+</CustomContent>
 
 ### tidb_workload_repository_active_sampling_interval <span class="version-mark">New in v9.0.0</span>
 
@@ -6226,8 +6238,20 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `5`
 - Range: `[0, 600]`
 - Unit: Seconds
+
+<CustomContent platform="tidb">
+
 - Sets the sampling interval for the [Workload Repository](/workload-repository.md)'s time-based sampling process.
 - Setting the value to `0` disables the time-based sampling process.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Sets the sampling interval for the [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository)'s time-based sampling process.
+- Setting the value to `0` disables the time-based sampling process.
+
+</CustomContent>
 
 ### tidb_workload_repository_retention_days <span class="version-mark">New in v9.0.0</span>
 
@@ -6238,8 +6262,20 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `7`
 - Range: `[0, 365]`
 - Unit: Days
+
+<CustomContent platform="tidb">
+
 - Sets the number of days that [Workload Repository](/workload-repository.md) data is retained.
 - Setting the value to `0` disables automatic purging of old data.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Sets the number of days that [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository) data is retained.
+- Setting the value to `0` disables automatic purging of old data.
+
+</CustomContent>
 
 ### tidb_workload_repository_snapshot_interval <span class="version-mark">New in v9.0.0</span>
 
@@ -6250,7 +6286,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `3600`
 - Range: `[900, 7200]`
 - Unit: Seconds
+
+<CustomContent platform="tidb">
+
 - Sets the sampling interval for the [Workload Repository](/workload-repository.md)'s snapshot sampling process.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Sets the sampling interval for the [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository)'s snapshot sampling process.
+
+</CustomContent>
 
 ### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
