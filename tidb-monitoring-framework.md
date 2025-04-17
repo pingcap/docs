@@ -54,4 +54,4 @@ Each group has multiple panel labels of monitoring metrics, and each panel conta
 
 ## TiDB Dashboard
 
-TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB cluster, which is introduced in v4.0. It is built into the PD component and does not require an independent deployment. For more information, see [TiDB Dashboard introduction](/dashboard/dashboard-intro.md).
+TiDB Dashboard is a web UI for monitoring, diagnosing, and managing the TiDB cluster, which is introduced in v4.0. It is built into the PD component and does not require an independent deployment. For more information, see [TiDB Dashboard introduction](/dashboard/dashboard-intro.md).
