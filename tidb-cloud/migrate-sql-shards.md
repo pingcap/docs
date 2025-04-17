@@ -138,7 +138,7 @@ For more information about the solutions to solve such conflicts, see [Remove th
 
 ### Step 4. Configure Amazon S3 access
 
-Follow the instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) to get the role ARN to access the source data.
+Follow the instructions in [Configure Amazon S3 access](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access) to get the role ARN to access the source data.
 
 The following example only lists key policy configurations. Replace the Amazon S3 path with your own values.
 

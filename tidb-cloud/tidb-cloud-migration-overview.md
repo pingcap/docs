@@ -55,7 +55,7 @@ If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can
 
 ### Configure Amazon S3 access and GCS access
 
-If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/config-s3-and-gcs-access.md).
+If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets, before importing or migrating the data to TiDB Cloud, you need to configure access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/dedicated-external-storage.md).
 
 ### Naming conventions for data import
 
