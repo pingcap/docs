@@ -158,7 +158,7 @@ The following SQL statement will trigger a manual snapshot in the [Workload Repo
 ADMIN CREATE WORKLOAD SNAPSHOT;
 ```
 
-Please note that the Workload Repository must be enabled for this statement to have effect.  Otherwise, it will generate an error.
+Note that the Workload Repository must be enabled for this statement to take effect. Otherwise, it will generate an error.
 
 ## Synopsis
 

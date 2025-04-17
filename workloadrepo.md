@@ -58,7 +58,7 @@ SET GLOBAL tidb_workload_repository_snapshot_interval = 900; -- set the interval
 Note that while the snapshot sampling process runs automatically based on the configured interval, you can also trigger a manual snapshot using the following SQL statement:
 
 ```sql
-ADMIN CREATE WORKLOAD SNAPSHOT
+ADMIN CREATE WORKLOAD SNAPSHOT;
 ```
 
 Manually triggering snapshots does not change the interval or timing of automatic snapshots.
