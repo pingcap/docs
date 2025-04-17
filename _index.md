@@ -81,7 +81,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/v8.3/tidb-monitoring-framework)
+[Use Prometheus, Grafana, and TiDB Dashboard](https://docs.pingcap.com/tidb/v8.3/tidb-monitoring-framework)
 
 [Monitoring API](https://docs.pingcap.com/tidb/v8.3/tidb-monitoring-api)
 
