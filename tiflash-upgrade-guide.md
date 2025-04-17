@@ -65,7 +65,7 @@ When you upgrade TiFlash from v5.x or v6.0 to v6.1, pay attention to the functio
 
 TiFlash Proxy is upgraded in v6.1.0 (aligned with TiKV v6.0.0). The new version has upgraded the RocksDB version. After you upgrade TiFlash to v6.1, the data format is converted to the new version automatically.
 
-In regular upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1 to any earlier version in special scenarios (for example, testing or verification scenarios), the earlier version might fail to parse the new RocksDB configuration. As as result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
+In regular upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1 to any earlier version in special scenarios (for example, testing or verification scenarios), the earlier version might fail to parse the new RocksDB configuration. As result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
