@@ -6,11 +6,13 @@ hide_leftNav: true
 summary: TiDB Documentation provides how-to guides and references for using TiDB Cloud, including data migration and application building. TiDB Cloud is a fully-managed Database-as-a-Service, offering easy access to the power of a cloud-native, distributed SQL database. TiDB is an open-source distributed SQL database with MySQL compatibility, horizontal scalability, and high availability. Developers can access documentation for application development and explore additional resources such as Learning Center, Playground, and community engagement opportunities.
 ---
 
-<DocHomeContainer title="TiDB Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud, migrate data, and build your applications on the database." ctaLabel="Try TiDB Cloud Starter for Free" ctaLink="https://console.tidb.io/free-trial">
+<DocHomeContainer title="TiDB Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud, migrate data, and build your applications on the database." ctaLabel="Try TiDB Cloud Starter for Free" ctaLink="https://console.tidb.io/free-trial?provider_source=alicloud">
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
 TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, letting you focus on your applications instead of the complexities of your database.
+
+**TiDB Cloud support for Alibaba Cloud is currently in preview. If you are looking for support for other cloud providers, check [TiDB Cloud documentation](https://docs.pingcap.com/tidbcloud).**
 
 <DocHomeCardContainer>
 
@@ -35,12 +37,6 @@ Connect your application with the languages and frameworks you prefer.
 <DocHomeCard href="/tidbcloud/vector-search-overview" label="Vector Search (Beta) in TiDB Cloud" icon="cloud-vector-mauve">
 
 Explore native support of Vector Search in TiDB Cloud to build your AI application.
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidbcloud/tidb-cloud-roadmap" label="TiDB Cloud Roadmap" icon="cloud-roadmap-mauve">
-
-Planned features and releases for TiDB Cloud.
 
 </DocHomeCard>
 

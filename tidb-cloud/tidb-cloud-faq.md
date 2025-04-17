@@ -57,7 +57,7 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 
 - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
-- [Create a TiDB Cloud Starter Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
 
@@ -101,7 +101,7 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 ### Does TiDB Cloud support incremental backups?
 
-No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Cloud Starter cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
+No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Cloud Essential cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 ## HTAP FAQs
 

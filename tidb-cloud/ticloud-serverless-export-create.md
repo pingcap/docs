@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export create`.
 
 # ticloud serverless export create
 
-Export data from a TiDB Cloud Starter cluster:
+Export data from a TiDB Cloud cluster:
 
 ```shell
 ticloud serverless export create [flags]
@@ -13,31 +13,31 @@ ticloud serverless export create [flags]
 
 ## Examples
 
-Export data from a TiDB Cloud Starter cluster in interactive mode:
+Export data from a TiDB Cloud cluster in interactive mode:
 
 ```shell
 ticloud serverless export create
 ```
 
-Export data from a TiDB Cloud Starter cluster to a local file in non-interactive mode:
+Export data from a TiDB Cloud cluster to a local file in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --filter <database.table>
 ```
 
-Export data from a TiDB Cloud Starter cluster to Amazon S3 in non-interactive mode:
+Export data from a TiDB Cloud cluster to Amazon S3 in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --s3.uri <uri> --s3.access-key-id <access-key-id> --s3.secret-access-key <secret-access-key> --filter <database.table>
 ```
 
-Export data from a TiDB Cloud Starter cluster to Google Cloud Storage in non-interactive mode:
+Export data from a TiDB Cloud cluster to Google Cloud Storage in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --gcs.uri <uri> --gcs.service-account-key <service-account-key> --filter <database.table>
 ```
 
-Export data from a TiDB Cloud Starter cluster to Azure Blob Storage in non-interactive mode:
+Export data from a TiDB Cloud cluster to Azure Blob Storage in non-interactive mode:
 
 ```shell
 ticloud serverless export create -c <cluster-id> --azblob.uri <uri> --azblob.sas-token <sas-token> --filter <database.table>

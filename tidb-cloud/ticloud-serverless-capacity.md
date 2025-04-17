@@ -1,34 +1,28 @@
 ---
-title: ticloud serverless export describe
-summary: The reference of `ticloud serverless export describe`.
+title: ticloud serverless capacity
+summary: The reference of `ticloud serverless capacity`.
 ---
 
-# ticloud serverless export describe
+# ticloud serverless capacity
 
-Get the export information of a TiDB Cloud cluster:
-
-```shell
-ticloud serverless export describe [flags]
-```
-
-Or use the following alias command:
+Set the capacity, in terms of maximum and minimum Request Capacity Units (RCUs), for a TiDB Cloud cluster.
 
 ```shell
-ticloud serverless export get [flags]
+ticloud serverless capacity [flags]
 ```
 
 ## Examples
 
-Get the export information in interactive mode:
+Set capacity for a TiDB Cloud cluster in interactive mode:
 
 ```shell
-ticloud serverless export describe
+ ticloud serverless capacity
 ```
 
-Get the export information in non-interactive mode:
+Set capacity for a TiDB Cloud cluster in non-interactive mode:
 
 ```shell
-ticloud serverless export describe -c <cluster-id> -e <export-id>
+ticloud serverless capacity -c <cluster-id> --max-rcu <maximum-rcu> --min-rcu <minimum-rcu>
 ```
 
 ## Flags
@@ -37,9 +31,10 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                    | Description                                  | Required | Note                                                 |
 |-------------------------|----------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Specifies the ID of the cluster. | Yes      | Only works in non-interactive mode.                  |
-| -e, --export-id string  | Specifies the ID of the export task.         | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Shows help information for this command.           | No       | Works in both non-interactive and interactive modes. |
+| -c, --cluster-id string | Specifies the ID of the cluster.             | Yes      | Only works in non-interactive mode.                  |
+| --max-rcu int32         | Specifies the maximum Request Capacity Units (RCUs) for the cluster, up to 100000. | No       | Only works in non-interactive mode.                  |
+| --min-rcu int32         | Specifies the minimum Request Capacity Units (RCUs) for the cluster, at least 2000.  | No       | Only works in non-interactive mode.                  |
+| -h, --help              | Shows help information for this command.     | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
@@ -47,7 +42,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |----------------------|------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
 | --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                             |
-| -D, --debug          | Enables debug mode.                                                                                   | No       | Works in both non-interactive and interactive modes.                                                             |
+| -D, --debug          | Enables debug mode.                                                                                  | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 

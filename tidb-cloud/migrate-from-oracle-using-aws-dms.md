@@ -36,7 +36,7 @@ The following diagram illustrates the high-level architecture.
 Read the following prerequisites before you get started:
 
 - [AWS Cloud Account](https://aws.amazon.com)
-- [TiDB Cloud Account](https://console.tidb.io/)
+- [TiDB Cloud Account](https://console.tidb.io/signup?provider_source=alicloud)
 - [DBeaver](https://dbeaver.io/)
 
 Next, you will learn how to use AWS DMS to migrate data from Amazon RDS for Oracle into TiDB Cloud.
@@ -88,9 +88,11 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
     ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
+<!--
 > **Note:**
 >
 > For detailed steps on creating an AWS DMS replication instance to work with TiDB Cloud Starter, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
+-->
 
 ## Step 6. Create DMS endpoints
 
@@ -106,9 +108,11 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
     ![Create AWS DMS Target endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
 
+<!--
 > **Note:**
 >
 > For detailed steps on creating a TiDB Cloud Starter DMS endpoint, see [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md).
+-->
 
 ## Step 7. Migrate the schema
 

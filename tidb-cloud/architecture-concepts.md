@@ -5,27 +5,27 @@ summary: Learn about architecture concepts for TiDB Cloud.
 
 # Architecture
 
-TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to Google Cloud and AWS.
+TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings the flexibility and power of [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source HTAP (Hybrid Transactional and Analytical Processing) database, to Amazon Web Services (AWS), Google Cloud, and Alibaba Cloud.
 
 TiDB is MySQL-compatible, making it easy to migrate and work with existing applications, while offering seamless scalability to handle everything from small workloads to massive, high-performance clusters. It supports both transactional (OLTP) and analytical (OLAP) workloads in one system, simplifying operations and enabling real-time insights.
 
-TiDB Cloud provides **TiDB Cloud Starter** for auto-scaling, cost-efficient workloads. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
+TiDB Cloud provides **TiDB Cloud Starter** for auto-scaling, cost-efficient workloads and **TiDB Cloud Essential** for production ready workloads with provisoned capacity. TiDB Cloud makes it easy to scale your database, handle complex management tasks, and stay focused on developing reliable, high-performing applications.
 
-## TiDB Cloud Starter
+## TiDB Cloud
 
-TiDB Cloud Starter is a fully managed serverless solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. TiDB Cloud Starter offers two types of high availability to address varying operational requirements.
+TiDB Cloud is a fully managed solution that provides HTAP capabilities similar to traditional TiDB, while offering auto-scaling to alleviate users' burdens related to capacity planning and management complexities. It includes a free tier for basic usage, with consumption-based billing for any usage that exceeds the free limits. TiDB Cloud Essential offers two types of high availability to address varying operational requirements.
 
 By default, clusters utilizing the Zonal High Availability option have all components located within the same availability zone, which results in lower network latency.
 
-![TiDB Cloud Starter zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
+![TiDB Cloud Essential zonal high availability](/media/tidb-cloud/serverless-zonal-high-avaliability-aws.png)
 
 For applications that require maximum infrastructure isolation and redundancy, the Regional High Availability option distributes nodes across multiple availability zones.
 
-![TiDB Cloud Starter regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
+![TiDB Cloud Essential regional high availability](/media/tidb-cloud/serverless-regional-high-avaliability-aws.png)
 
 ## TiDB Cloud console
 
-The [TiDB Cloud console](https://console.tidb.io/) is the web-based management interface for TiDB Cloud clusters. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
+The [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) is the web-based management interface for TiDB Cloud clusters. It provides tools to manage clusters, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
 
 ## TiDB Cloud CLI (Beta)
 
@@ -39,7 +39,7 @@ For more information, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.m
 
 ## TiDB Cloud API (Beta)
 
-The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across TiDB Cloud Starter clusters. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, billing, and other resources in [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md).
+The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across TiDB Cloud Starter clusters. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, and billing.
 
 For more information, see [TiDB Cloud API Overview](/tidb-cloud/api-overview.md).
 

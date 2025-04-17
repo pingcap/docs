@@ -13,10 +13,6 @@ In this tutorial, you can learn how to use TiDB and JDBC to accomplish the follo
 - Connect to your TiDB cluster using JDBC.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
-> **Note:**
->
-> This tutorial works with TiDB Cloud Starter.
-
 ## Prerequisites
 
 To complete this tutorial, you need:

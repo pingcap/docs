@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless branch shell`.
 
 # ticloud serverless branch shell
 
-Connect to a branch of a TiDB Cloud Starter cluster:
+Connect to a branch of a TiDB Cloud cluster:
 
 ```shell
 ticloud serverless branch shell [flags]
@@ -13,25 +13,25 @@ ticloud serverless branch shell [flags]
 
 ## Examples
 
-Connect to a TiDB Cloud Starter branch in interactive mode:
+Connect to a TiDB Cloud branch in interactive mode:
 
 ```shell
 ticloud serverless branch shell
 ```
 
-Connect to a TiDB Cloud Starter branch with the default user in non-interactive mode:
+Connect to a TiDB Cloud branch with the default user in non-interactive mode:
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id>
 ```
 
-Connect to a TiDB Cloud Starter branch with the default user and password in non-interactive mode:
+Connect to a TiDB Cloud branch with the default user and password in non-interactive mode:
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id> --password <password>
 ```
 
-Connect to a TiDB Cloud Starter branch with a specific user and password in non-interactive mode:
+Connect to a TiDB Cloud branch with a specific user and password in non-interactive mode:
 
 ```shell
 ticloud serverless branch shell -c <cluster-id> -b <branch-id> -u <user-name> --password <password>

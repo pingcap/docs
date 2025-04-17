@@ -16,10 +16,7 @@ This guide describes how to connect your TiDB Cloud clusters to Vercel projects 
 * [Connect via the TiDB Cloud Vercel integration](#connect-via-the-tidb-cloud-vercel-integration)
 * [Connect via manually configuring environment variables](#connect-via-manually-setting-environment-variables)
 
-For both of the preceding methods, TiDB Cloud provides the following options for programmatically connecting to your database:
-
-- Cluster: connect your TiDB Cloud cluster to your Vercel project with direct connections or [serverless driver](/tidb-cloud/serverless-driver.md).
-- [Data App](/tidb-cloud/data-service-manage-data-app.md): access data of your TiDB Cloud cluster through a collection of HTTP endpoints.
+For both of the preceding methods, you can connect your TiDB Cloud cluster to your Vercel project with direct connections or [serverless driver](/tidb-cloud/serverless-driver.md).
 
 ## Prerequisites
 
@@ -45,17 +42,6 @@ You are expected to have an account and a cluster in TiDB Cloud. If you do not h
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project in TiDB Cloud. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
 One TiDB Cloud cluster can connect to multiple Vercel projects.
-
-### A Data App and endpoints
-
-If you want to connect to your TiDB Cloud cluster via a [Data App](/tidb-cloud/data-service-manage-data-app.md), you are expected to have the target Data App and endpoints in TiDB Cloud in advance. If you do not have any, refer to the following to create one:
-
-1. In the [TiDB Cloud console](https://console.tidb.io/), go to the [**Data Service**](https://console.tidb.io/data-service) page of your project.
-2. [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) for your project.
-3. [Link the Data App](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources) to the target TiDB Cloud cluster.
-4. [Manage endpoints](/tidb-cloud/data-service-manage-endpoint.md) so that you can customize them to execute SQL statements.
-
-One Vercel project can only connect to one TiDB Cloud Data App. To change the Data App for your Vercel project, you need to first disconnect the current App and then connect to a new App.
 
 ## Connect via the TiDB Cloud Vercel integration
 
@@ -207,9 +193,6 @@ After you push changes to the Git repository, Vercel will trigger a preview depl
 
 ## Connect via manually setting environment variables
 
-<SimpleTab>
-<div label="Cluster">
-
 1. Get the connection information of your TiDB cluster.
 
     You can get the connection information from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://console.tidb.io/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
@@ -233,26 +216,3 @@ In Vercel, you can declare the environment variables as follows:
 - **Value** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
 
 You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, and `<Database>` in the TiDB Cloud console.
-
-</div>
-<div label="Data App">
-
-1. Follow the steps in [Manage a Data APP](/tidb-cloud/data-service-manage-data-app.md) and [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md) to create a Data App and its endpoints if you have not done that.
-
-2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your Data App.
-
-    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
-
-    In Vercel, you can declare the environment variables as follows.
-
-    - **Key** = `DATA_APP_BASE_URL`
-    - **Value** = `<DATA_APP_BASE_URL>`
-    - **Key** = `DATA_APP_PUBLIC_KEY`
-    - **Value** = `<DATA_APP_PUBLIC_KEY>`
-    - **Key** = `DATA_APP_PRIVATE_KEY`
-    - **Value** = `<DATA_APP_PRIVATE_KEY>`
-
-    You can get the information of `<DATA_APP_BASE_URL>`, `<DATA_APP_PUBLIC_KEY>`, `<DATA_APP_PRIVATE_KEY>` from your [Data Service](https://console.tidb.io/data-service) page of the TiDB Cloud console.
-
-</div>
-</SimpleTab>

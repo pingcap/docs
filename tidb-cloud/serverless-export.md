@@ -171,7 +171,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project. 
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project. 
 
    > **Tip:**
    >
@@ -222,7 +222,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
    > **Tip:**
    >
@@ -238,7 +238,7 @@ When exporting data to the Parquet format, the data conversion between TiDB Clou
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
     - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
     - **Bucket Access**: choose one of the following access credentials and then fill in the credential information:
-        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [Configure External Storage Access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+        - **AWS Role ARN**: enter the role ARN that has the permission to access the bucket. It is recommended to create the role ARN with AWS CloudFormation. For more information, see [configure external storage access for TiDB Cloud](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
         - **AWS Access Key**: enter the access key ID and access key secret that have the permission to access the bucket.
 
 4. Click **Export**.
@@ -266,7 +266,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
    > **Tip:**
    >
@@ -304,7 +304,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
    > **Tip:**
    >
@@ -383,7 +383,7 @@ To cancel an ongoing export task, take the following steps:
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
    > **Tip:**
    >

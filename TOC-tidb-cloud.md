@@ -8,7 +8,6 @@
 - Why TiDB Cloud
   - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
-  - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
@@ -21,7 +20,6 @@
   - [Transactions](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
   - [AI Features](/tidb-cloud/ai-feature-concepts.md)
-  - [Data Service](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Scalability](/tidb-cloud/scalability-concepts.md)
   - [High Availability](/tidb-cloud/serverless-high-availability.md)
   - [Monitoring](/tidb-cloud/monitoring-concepts.md)
@@ -68,7 +66,6 @@
     - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
     - [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
     - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
-    - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
   - Ruby
     - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
     - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
@@ -132,9 +129,9 @@
 
 - Manage Cluster
   - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
-  - Manage TiDB Cloud Starter Clusters
-    - [Create a TiDB Cloud Starter Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - Connect to Your TiDB Cloud Starter Cluster
+  - Manage TiDB Cloud Clusters
+    - [Create a TiDB Cloud Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - Connect to Your TiDB Cloud Cluster
       - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
@@ -143,8 +140,8 @@
       - [Manage Branches](/tidb-cloud/branch-manage.md)
       - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
     - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
-    - [Back Up and Restore TiDB Cloud Starter Data](/tidb-cloud/backup-and-restore-serverless.md)
-    - [Export Data from TiDB Cloud Starter](/tidb-cloud/serverless-export.md)
+    - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
+    - [Export Data from TiDB Cloud](/tidb-cloud/serverless-export.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
@@ -222,18 +219,14 @@
   - Import Data into TiDB Cloud
     - [Import Sample Data](/tidb-cloud/import-sample-data-serverless.md)
     - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
-    - [Import CSV Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-csv-files-serverless.md)
-    - [Import Parquet Files from Amazon S3, GCS, or Azure Blob Storage](/tidb-cloud/import-parquet-files-serverless.md)
+    - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files-serverless.md)
+    - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference
-    - [Configure External Storage Access for TiDB Cloud Starter](/tidb-cloud/serverless-external-storage.md)
+    - [Configure External Storage Access for TiDB Cloud](/tidb-cloud/serverless-external-storage.md)
     - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-    - [Connect AWS DMS to TiDB Cloud clusters](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
-- Explore Data
-  - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
 - Vector Search ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/vector-search-overview.md)
   - Get Started
@@ -256,24 +249,6 @@
     - [Vector Index](/tidb-cloud/vector-search-index.md)
   - [Improve Performance](/tidb-cloud/vector-search-improve-performance.md)
   - [Limitations](/tidb-cloud/vector-search-limitations.md)
-  - [Changelogs](/tidb-cloud/vector-search-changelogs.md)
-- Data Service ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](/tidb-cloud/data-service-overview.md)
-  - [Get Started](/tidb-cloud/data-service-get-started.md)
-  - Chat2Query API
-    - [Get Started](/tidb-cloud/use-chat2query-api.md)
-    - [Start Multi-round Chat2Query](/tidb-cloud/use-chat2query-sessions.md)
-    - [Use Knowledge Bases](/tidb-cloud/use-chat2query-knowledge.md)
-  - [Manage Data App](/tidb-cloud/data-service-manage-data-app.md)
-  - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
-  - [API Key](/tidb-cloud/data-service-api-key.md)
-  - [Custom Domain](/tidb-cloud/data-service-custom-domain.md)
-  - [Integrations](/tidb-cloud/data-service-integrations.md)
-  - [Run in Postman](/tidb-cloud/data-service-postman-integration.md)
-  - [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md)
-  - [Use OpenAPI Specification with Next.js](/tidb-cloud/data-service-oas-with-nextjs.md)
-  - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
-  - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
@@ -282,10 +257,9 @@
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - Network Access Control
-    - TiDB Cloud Starter
-      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
-      - [TLS Connections to TiDB Cloud Starter](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    - [Configure Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)
+    - [TLS Connections to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - Audit Management
     - [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md)
 - Billing
@@ -295,12 +269,9 @@
   - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [Billing from AWS or GCP Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
   - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
-  - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
-  - [AWS Lambda](/tidb-cloud/integrate-tidbcloud-with-aws-lambda.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
@@ -579,7 +550,6 @@
   - [Overview](/tidb-cloud/api-overview.md)
   - v1beta1
     - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
-    - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
     - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
     - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
   - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
@@ -590,6 +560,7 @@
     - [logout](/tidb-cloud/ticloud-auth-logout.md)
     - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
   - serverless
+    - [capacity](/tidb-cloud/ticloud-serverless-capacity.md)
     - [create](/tidb-cloud/ticloud-cluster-create.md)
     - [delete](/tidb-cloud/ticloud-cluster-delete.md)
     - [describe](/tidb-cloud/ticloud-cluster-describe.md)
@@ -678,8 +649,3 @@
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [TiDB Cloud Starter FAQs](/tidb-cloud/serverless-faqs.md)
-
-## RELEASES
-
-- Release Notes
-  - [2025](/tidb-cloud/tidb-cloud-release-notes.md)

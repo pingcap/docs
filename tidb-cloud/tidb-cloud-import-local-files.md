@@ -19,7 +19,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 1. Open the **Import** page for your target cluster.
 
-    1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://console.tidb.io/signup?provider_source=alicloud) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
 
         > **Tip:**
         >
@@ -77,9 +77,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
     You can view the import progress on the **Import Task Detail** page. If there are warnings or failed tasks, you can check to view the details and solve them.
 
-9. After the import task is completed, you can click **Explore your data by SQL Editor** to query your imported data. For more information about how to use SQL Editor, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
-
-10. On the **Import** page, you can click **...** > **View** in the **Action** column to check the import task detail.
+9. On the **Import** page, you can click **...** > **View** in the **Action** column to check the import task detail.
 
 ## FAQ
 

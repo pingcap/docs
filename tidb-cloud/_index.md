@@ -137,8 +137,6 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [System Variables](https://docs.tidb.io/tidbcloud/system-variables)
 
-[Release Notes](https://docs.tidb.io/tidbcloud/tidb-cloud-release-notes)
-
 </LearningPath>
 
 </LearningPathContainer>

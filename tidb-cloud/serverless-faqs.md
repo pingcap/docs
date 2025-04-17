@@ -21,19 +21,15 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### How many TiDB Cloud Starter clusters can I create in TiDB Cloud?
 
-For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default. To create more TiDB Cloud Starter clusters, you need to add a credit card and create [scalable clusters](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five [free clusters](/tidb-cloud/select-cluster-tier.md#free-cluster-plan) by default.
 
 ### Are all TiDB Cloud features fully supported on TiDB Cloud Starter?
 
 Some of TiDB Cloud features are partially supported or not supported on TiDB Cloud Starter. For more information, see [TiDB Cloud Starter Limitations and Quotas](/tidb-cloud/serverless-limitations.md).
 
-### When will TiDB Cloud Starter be available on cloud platforms other than AWS, such as Google Cloud or Azure?
+### When will TiDB Cloud Starter be available on cloud platforms other than Alibaba Cloud, such as Google Cloud or AWS?
 
-We are actively working on expanding TiDB Cloud Starter to other cloud platforms, including Google Cloud and Azure. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Cloud Starter available on more cloud platforms, and we will keep our community updated as we progress.
-
-### I created a Developer Tier cluster before TiDB Cloud Starter was available. Can I still use my cluster?
-
-Yes, your Developer Tier cluster has been automatically migrated to the TiDB Cloud Starter cluster, providing you with an improved user experience without any disruptions to your prior usage.
+We are actively working on expanding TiDB Cloud Starter to other cloud platforms, including Google Cloud and AWS. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Cloud Starter available on more cloud platforms, and we will keep our community updated as we progress.
 
 ### What is columnar storage in TiDB Cloud Starter?
 
@@ -78,19 +74,19 @@ For the first five TiDB Cloud Starter clusters in your organization, TiDB Cloud 
 - Columnar storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
-If you are using a scalable cluster, usage beyond the free quota will be charged. For a free cluster, once the free quota is reached, the read and write operations on this cluster will be throttled until you upgrade to a scalable cluster or the usage is reset upon the start of a new month.
+For a free cluster, once the free quota is reached, the read and write operations on this cluster will be throttled until you add a spending limit or the usage is reset upon the start of a new month.
 
 For more information, see [TiDB Cloud Starter usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
 ### What are the limitations of the free plan?
 
-Under the free plan, cluster performance is limited due to non-scalable resources. This results in a restriction on memory allocation per query to 256 MiB and might cause observable bottlenecks in request units (RUs) per second. To maximize cluster performance and avoid these limitations, you can upgrade to a [scalable cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan).
+Under the free plan, cluster performance is limited due to non-scalable compute resources. This results in a restriction on memory allocation per query to 256 MiB and might cause observable bottlenecks in request units (RUs) per second. To maximize cluster performance and avoid these limitations, you can add a spending limit.
 
 ### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
 
 To get the RU consumption of individual SQL statements, you can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) SQL statement. However, it is important to note that the RUs usage returned in `EXPLAIN ANALYZE` does not incorporate egress RUs, as egress usage is measured separately in the gateway, which is unknown to the TiDB server.
 
-To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can upgrade to a [scalable cluster](/tidb-cloud/select-cluster-tier.md#scalable-cluster-plan) and edit the spending limit. For more information, see [TiDB Cloud Starter usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
+To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirements, you can edit the spending limit. For more information, see [TiDB Cloud Starter usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
 ### How can I optimize my workload to minimize the number of RUs consumed?
 
@@ -142,11 +138,11 @@ The serverless technology is designed for multi-tenancy and the resources used b
 
 ### How does TiDB Cloud Starter ensure security?
 
-- Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to TiDB Cloud Starter, see [TLS Connection to TiDB Cloud Starter](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+- Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to TiDB Cloud Starter, see [TLS Connection to TiDB Cloud](/tidb-cloud/secure-connections-to-serverless-clusters.md).
 - All persisted data on TiDB Cloud Starter is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
 
 ## Maintenance FAQ
 
 ### Can I upgrade the version of TiDB that my cluster is running on?
 
-No. TiDB Cloud Starter clusters are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud console](https://console.tidb.io/clusters) or in the latest [release note](https://docs.tidb.io/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
+No. TiDB Cloud Starter clusters are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud console](https://console.tidb.io/clusters). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.

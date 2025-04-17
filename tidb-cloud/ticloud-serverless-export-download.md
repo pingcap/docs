@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless export download`.
 
 # ticloud serverless export download
 
-Download the exported data from a TiDB Cloud Starter cluster to your local storage:
+Download the exported data from a TiDB Cloud cluster to your local storage:
 
 ```shell
 ticloud serverless export download [flags]
