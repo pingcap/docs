@@ -176,5 +176,5 @@ cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
 In this command:
 
 - `tmp-dir`: Specifies the temporary directory for downloading TiCDC incremental data backup files.
-- `storage`: Specifies the address for storing the TiCDC incremental data backup files, either an URI of object storage or an NFS directory.
+- `storage`: Specifies the address for storing the TiCDC incremental data backup files, either a URI of object storage or an NFS directory.
 - `sink-uri`: Specifies the secondary cluster address to restore the data to. Scheme can only be `mysql`.
