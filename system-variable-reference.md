@@ -4037,7 +4037,7 @@ Referenced in:
 
 ### tidb_workload_repository_dest
 
-- [TiDB Workload Repository](/workload-repository.md#enabling-the-workload-repository)
+- [TiDB Workload Repository](/workload-repository.md#enable-the-workload-repository)
 - [System Variables](/system-variables.md#tidb_workload_repository_dest-new-in-v900)
 
 ### tidb_workload_repository_active_sampling_interval
