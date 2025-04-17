@@ -370,8 +370,8 @@ ticloud serverless export create -c <cluster-id> --target-type OSS --oss.uri <ur
 ```
 
 - `oss.uri`: the Alibaba Cloud OSS URI with the `oss://<bucket-name>/<folder-path>/` format.
-- `oss.access-key-id`: the access key ID of the user who has the permission to access the bucket.
-- `oss.access-key-secret`: the access key secret of the user who has the permission to access the bucket.
+- `oss.access-key-id`: the AccessKey ID of the user who has the permission to access the bucket.
+- `oss.access-key-secret`: the AccessKey secret of the user who has the permission to access the bucket.
 
 </div>
 </SimpleTab>
