@@ -152,7 +152,7 @@ For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admi
 
 ## `ADMIN CREATE WORKLOAD SNAPSHOT` statement
 
-The following SQL statement will trigger a manual snapshot in the [Workload Repository](/workloadrepo.md):
+The following SQL statement will trigger a manual snapshot in the [Workload Repository](/workload-repository.md):
 
 ```sql
 ADMIN CREATE WORKLOAD SNAPSHOT;
