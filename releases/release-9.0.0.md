@@ -156,7 +156,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
   Data in the Workload Repository is automatically cleaned up, with a default retention period of 7 days. You can modify the retention period by setting the [`tidb_workload_repository_retention_days`](/system-variables.md#tidb_workload_repository_retention_days-new-in-v900) system variable.
 
-      For more information, see [documentation](/workloadrepo.md).
+      For more information, see [documentation](/workload-repository.md).
 
  * SQL cross-AZ traffic monitoring [#57543](https://github.com/pingcap/tidb/issues/57543) @[nolouch](https://github.com/nolouch) @[yibin87](https://github.com/yibin87) **tw@Oreoxmt** <!--2021-->
 
