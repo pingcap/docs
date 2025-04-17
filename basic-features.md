@@ -21,6 +21,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Data types, functions, and operators
 
+<<<<<<< HEAD
 | Data types, functions, and operators | 8.4 | 8.3 | 8.2 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Numeric types](/data-type-numeric.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -44,6 +45,31 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Operators](/functions-and-operators/operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Character sets and collations](/character-set-and-collation.md) [^1] | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [User-level lock](/functions-and-operators/locking-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | N | N | N | N |
+=======
+| Data types, functions, and operators | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| [Numeric types](/data-type-numeric.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Date and time types](/data-type-date-and-time.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [String types](/data-type-string.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [JSON type](/data-type-json.md) | Y | Y | Y | Y | Y | E | E | E | E | E |
+| [Vector types](/vector-search/vector-search-data-types.md) | E | N | N | N | N | N | N | N | N | N |
+| [Control flow functions](/functions-and-operators/control-flow-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [String functions](/functions-and-operators/string-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Date and time functions](/functions-and-operators/date-and-time-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Bit functions and operators](/functions-and-operators/bit-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Cast functions and operators](/functions-and-operators/cast-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Encryption and compression functions](/functions-and-operators/encryption-and-compression-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Vector functions and operators](/vector-search/vector-search-functions-and-operators.md) | E | N | N | N | N | N | N | N | N | N |
+| [Information functions](/functions-and-operators/information-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [JSON functions](/functions-and-operators/json-functions.md) | Y | Y | Y | Y | Y | E | E | E | E | E |
+| [Aggregation functions](/functions-and-operators/aggregate-group-by-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Window functions](/functions-and-operators/window-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Operators](/functions-and-operators/operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Character sets and collations](/character-set-and-collation.md) [^1] | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [User-level lock](/functions-and-operators/locking-functions.md) | Y | Y | Y | Y | Y | Y | N | N | N | N |
+>>>>>>> 5fb78403f5 (fix typo "Vectort types" (#20779))
 
 ## Indexing and constraints
 
