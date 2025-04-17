@@ -115,6 +115,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 <a id="C" class="letter" href="#C">C</a>
 
 - CACHE
+- CALL (R)
 - CANCEL (R)
 - CAPTURE
 - CASCADE (R)
@@ -241,6 +242,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 - FALSE (R)
 - FAULTS
+- FETCH (R)
 - FIELDS
 - FILE
 - FIRST
@@ -304,6 +306,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - INT4 (R)
 - INT8 (R)
 - INTEGER (R)
+- INTERSECT (R)
 - INTERVAL (R)
 - INTO (R)
 - INVISIBLE
@@ -418,6 +421,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 <a id="O" class="letter" href="#O">O</a>
 
+- OF (R)
 - OFFSET
 - ON (R)
 - ONLINE
@@ -479,6 +483,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - REAL (R)
 - REBUILD
 - RECOVER
+- RECURSIVE (R)
 - REDUNDANT
 - REFERENCES (R)
 - REGEXP (R)
@@ -569,6 +574,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - STATS (R)
 - STATS_AUTO_RECALC
 - STATS_BUCKETS (R)
+- STATS_EXTENDED (R)
 - STATS_HEALTHY (R)
 - STATS_HISTOGRAMS (R)
 - STATS_META (R)
@@ -591,6 +597,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 - TABLE (R)
 - TABLES
+- TABLESAMPLE (R)
 - TABLESPACE
 - TABLE_CHECKSUM
 - TEMPORARY
@@ -600,6 +607,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - THAN
 - THEN (R)
 - TIDB (R)
+- TiDB_CURRENT_TSO (R)
 - TIFLASH (R)
 - TIKV_IMPORTER
 - TIME
