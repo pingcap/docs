@@ -133,7 +133,7 @@ SELECT CustomerName, BIT_LENGTH(CustomerName) AS BitLengthOfName FROM Customers;
 
 ### [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)
 
-The `CHAR()` function is used to get the corresponding character of a specific ASCII value. It performs the opposite operation of `ASCII()`, which returns the ASCII value of a specific character. If multiple arguments are supplied, the function works on all arguments and are then concaternated together.
+The `CHAR()` function is used to get the corresponding character of a specific ASCII value. It performs the opposite operation of `ASCII()`, which returns the ASCII value of a specific character. If multiple arguments are supplied, the function works on all arguments and are then concatenated together.
 
 Examples:
 

@@ -74,7 +74,7 @@ The following are the basics of Dumpling:
 
 > **Note:**
 >
-> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. Starting from v7.5.0, [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of mydumper.
+> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. Starting from v7.5.0, [Mydumper](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview/) is deprecated and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of mydumper.
 
 ### Full data import - TiDB Lightning
 
@@ -134,4 +134,4 @@ The following are the basics of sync-diff-inspector:
 
 ## OLAP Query tool - TiSpark
 
-[TiSpark](/tispark-overview.md) is a product developed by PingCAP to address the complexiy of OLAP queries. It combines strengths of Spark, and the features of distributed TiKV clusters and TiDB to provide a one-stop Hybrid Transactional and Analytical Processing (HTAP) solution.
+[TiSpark](/tispark-overview.md) is a product developed by PingCAP to address the complexity of OLAP queries. It combines strengths of Spark, and the features of distributed TiKV clusters and TiDB to provide a one-stop Hybrid Transactional and Analytical Processing (HTAP) solution.

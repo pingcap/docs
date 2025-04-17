@@ -130,7 +130,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables"]}',@j);
 1 row in set (0.00 sec)
 ```
 
-In the preceding output, you can see that see that validation of the presence of the `fruits` and `vegetables` attributes succeeds.
+In the preceding output, you can see that the validation of the presence of the `fruits` and `vegetables` attributes succeeds.
 
 ```sql
 SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
@@ -145,7 +145,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
 1 row in set (0.00 sec)
 ```
 
-In the preceding output, you can see that see that validation of the presence of the `fruits`, `vegetables` and `grains` attributes fails because `grains` is not present.
+In the preceding output, you can see that the validation of the presence of the `fruits`, `vegetables` and `grains` attributes fails because `grains` is not present.
 
 Now validate that `fruits` is an array.
 

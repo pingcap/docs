@@ -282,7 +282,7 @@ The lifecycle of continuous data validation is as follows:
 The detailed implementation of continuous data validation is as follows:
 
 1. The validator pulls a binlog event from the upstream and gets the changed rows:
-    - The validator only checks a event that has been incrementally migrated by the syncer. If the event has not been processed by the syncer, the validator pauses and waits for the syncer to complete processing.
+    - The validator only checks an event that has been incrementally migrated by the syncer. If the event has not been processed by the syncer, the validator pauses and waits for the syncer to complete processing.
     - If the event has been processed by the syncer, the validator moves on to the following steps.
 2. The validator parses the binlog event and filters out the rows based on the block and allow lists, the table filters, and table routing. After that, the validator submits the changed rows to the validation worker that runs in the background.
 3. The validation worker merges the changed rows that affect the same table and the same primary key to avoid validating "expired" data. The changed rows are cached in memory.
