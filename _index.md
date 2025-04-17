@@ -80,7 +80,7 @@ hide_commit: true
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/v7.1/tidb-monitoring-framework)
+[Use Prometheus, Grafana, and TiDB Dashboard](https://docs.pingcap.com/tidb/v7.1/tidb-monitoring-framework)
 
 [Monitoring API](https://docs.pingcap.com/tidb/v7.1/tidb-monitoring-api)
 
