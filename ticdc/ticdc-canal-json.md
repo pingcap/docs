@@ -213,6 +213,7 @@ In the `sqlType` field, the Canal-JSON format records Java SQL Type of each colu
 | Set        | -7                 |
 | Bit        | -7                 |
 | JSON       | 12                 |
+| TiDBVectorFloat32 | 12          |
 
 ## Integer types
 

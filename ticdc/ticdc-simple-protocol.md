@@ -708,6 +708,7 @@ The following table describes the value range of the `mysqlType` field in the Ti
 | bit | / | uint64 | long |
 | json | / | string | string |
 | bool | / | int64 | long |
+| TiDBVectorFloat32 | / | string | string |
 
 ### Avro schema definition
 
