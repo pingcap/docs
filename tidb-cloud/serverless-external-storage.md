@@ -286,7 +286,9 @@ Take the following steps to configure an AccessKey pair:
     - In the **Action** section, select the permissions as needed.
    
         To import data into a TiDB Cloud Serverless cluster, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
-      
+
+        To export data from a TiDB Cloud Serverless cluster, grant **oss:PutObject**, **oss:GetBucketInfo**, and **oss:ListBuckets** permissions.
+        
     - In the **Resource** section, select the bucket and the objects in the bucket.
 
 3. Attach the custom policies to the RAM user. For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).
