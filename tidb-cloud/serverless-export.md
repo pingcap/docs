@@ -342,7 +342,7 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 <SimpleTab>
 <div label="Console">
 
-1. Log in to the [TiDB Cloud console](https://console.tidb.io/) and navigate to the [**Clusters**](https://console.tidb.io/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
    > **Tip:**
    >
