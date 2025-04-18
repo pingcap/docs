@@ -61,7 +61,7 @@ It is recommended that you use TiProxy for the scenarios that TiProxy is suitabl
 
 ## Installation and usage
 
-This section describes how to deploy and change TiProxy using TiUP. You can [create a new cluster with TiProxy](#create-a-cluster-with-tiproxy), or [enable TiProxy for an existing cluster](#enable-tiproxy-for-an-existing-cluster) by scaling out TiProxy.
+This section describes how to deploy and change TiProxy using TiUP. You can either [create a new cluster with TiProxy](#create-a-cluster-with-tiproxy) or [enable TiProxy for an existing cluster](#enable-tiproxy-for-an-existing-cluster) by scaling out TiProxy.
 
 > **Note:**
 >
@@ -78,7 +78,7 @@ The following steps describe how to deploy TiProxy when creating a new cluster.
 
 1. Configure the TiDB instances.
 
-    When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value should be greater than the duration of the longest transaction of the application to avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [TiProxy usage limitations](#limitations).
+    When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value should be greater than the duration of the longest transaction of the application. This configuration helps avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [TiProxy usage limitations](#limitations).
 
     A configuration example is as follows:
 
