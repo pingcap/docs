@@ -8,7 +8,6 @@
 - Why TiDB Cloud
   - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
-  - [Roadmap](/tidb-cloud/tidb-cloud-roadmap.md)
 - Get Started with TiDB Cloud
   - [Try Out TiDB Cloud Serverless](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out TiDB + AI](/tidb-cloud/vector-search-get-started-using-python.md)
