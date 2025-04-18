@@ -36,7 +36,11 @@ Connect your application with the languages and frameworks you prefer.
 
 <DocHomeCard href="/tidbcloud/vector-search-overview" label="Vector Search (Beta) in TiDB Cloud" icon="cloud-vector-mauve">
 
+<<<<<<< HEAD
 Explore native support of Vector Search in TiDB Cloud to build your AI application.
+=======
+Explore native support of Vector Search in TiDB Cloud Serverless to build your AI application.
+>>>>>>> 4df40e614a (cloud: remove outdated cloud roadmap (#20797))
 
 </DocHomeCard>
 
