@@ -56,7 +56,7 @@ const adapter = new PrismaTiDBCloud(connection);
 const prisma = new PrismaClient({ adapter });
 ```
 
-For `@tidbcloud/prisma-adapter` >= v6.6.0 : 
+For `@tidbcloud/prisma-adapter` v6.6.0 or a later version: 
 
 ```js
 import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
