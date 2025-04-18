@@ -43,7 +43,7 @@ datasource db {
 
 Before using Prisma Client, you need to initialize it with `@tidbcloud/prisma-adapter`. 
 
-For `@tidbcloud/prisma-adapter` < v6.6.0 : 
+For `@tidbcloud/prisma-adapter` earlier than v6.6.0: 
 
 ```js
 import { connect } from '@tidbcloud/serverless';
