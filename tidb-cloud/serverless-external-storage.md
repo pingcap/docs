@@ -284,6 +284,8 @@ Take the following steps to configure an AccessKey pair:
     - In the **Action** section, select the permissions as needed.
    
         To import data into a TiDB Cloud Starter cluster, grant **oss:GetObject**, **oss:GetBucketInfo**, and **oss:ListObjects** permissions.
+
+        To export data from a TiDB Cloud Starter cluster, grant **oss:PutObject**, **oss:GetBucketInfo**, and **oss:ListBuckets** permissions.
       
     - In the **Resource** section, select the bucket and the objects in the bucket.
 
