@@ -129,6 +129,74 @@ MySQL [test]> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
+## Instance Plan Cache
+
+> **Warning:**
+>
+> Instance Plan Cache is experimental feature.
+
+TiDB supports both Session Plan Cache and Instance Plan Cache. Session Plan Cache maintains cache for each session, while Instance Plan Cache maintains one single cache in each instance which can be shared across all sessions in this instance.
+
+Setting `tidb_enable_instance_plan_cache` to true to enable Instance Plan Cache and plans can be shared across different sessions with this feature:
+
+```sql
+-- execute below SQLs in session-1
+mysql> set global tidb_enable_instance_plan_cache=1;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> prepare st from "select a from t";
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> execute st;
+Empty set (0.00 sec)
+
+-- execute below SQLs in session-2
+mysql> prepare st from "select a from t";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute st;
+Empty set (0.00 sec)
+
+mysql> select @@last_plan_from_cache;
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      1 |
++------------------------+
+```
+
+
+In v8.5.0 and higher, two system tables were introduced to observe the entries in Instance Plan Cache: 
+* `information_schema.tidb_plan_cache`: The entries of instance plan cache in this particular TiDB instance.
+* `information_schema.cluster_tidb_plan_cache`:  The entries of instance plan cache from all available TiDB instances. 
+
+```sql
+mysql> select *, tidb_decode_binary_plan(binary_plan) from information_schema.tidb_plan_cache\G;
+*************************** 1. row ***************************
+                          SQL_DIGEST: 3689d7f367e2fdaf53c962c378efdf47799143b9af12f47e13ec247332269eac
+                            SQL_TEXT: select a from t where a<?
+                           STMT_TYPE: Select
+                          PARSE_USER: root
+                         PLAN_DIGEST: 6285ba7cabe7b19459668d62ec201ecbea63ac5f23e5b9166f02fbb86cdf4807
+                         BINARY_PLAN: iQKYCoYCCg1UYWJsZVJlYWRlcl83ErYBCgtTZWxlY3Rpb25fNhJqCg9UASFMRnVsbFNjYW5fNSEAAAAAiKFSQSkBCeAAiMNAOAJAAkoLCgkKBHRlc3QSAXRSHmtlZXAgb3JkZXI6ZmFsc2UsIHN0YXRzOnBzZXVkb3D///8JAgQBeAkIDP///wEFWSzWiFRBKauqqqqq9qkFWRBSD2x0KAFYHC50LmEsIDEpWj0AGE8b6LShwhYdPSQBQAFSEGRhdGE6HdFWPgA=
+                             BINDING: 
+                             OPT_ENV: f20c20a72b2a33c5c44e805dbea0fa97028e6f047320928cf367f74c8c94737b
+                        PARSE_VALUES: 1
+                            MEM_SIZE: 13322
+                          EXECUTIONS: 1
+                      PROCESSED_KEYS: 0
+                          TOTAL_KEYS: 0
+                         SUM_LATENCY: 5919417
+                           LOAD_TIME: 2024-12-05 15:41:43
+                    LAST_ACTIVE_TIME: 2024-12-05 15:41:43
+tidb_decode_binary_plan(binary_plan): 
+| id                  | estRows  | estCost    | task      | access object | operator info                   |
+| TableReader_7       | 3323.33  | 372904.43  | root      |               | data:Selection_6                |
+| └─Selection_6       | 3323.33  | 5383000.00 | cop[tikv] |               | lt(test.t.a, 1)                 |
+|   └─TableFullScan_5 | 10000.00 | 4884000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo  |
+
+```
+
 ## Diagnostics of Prepared Plan Cache
 
 ### Use `SHOW WARNINGS` to diagnose
