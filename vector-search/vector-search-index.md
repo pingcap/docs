@@ -261,3 +261,7 @@ See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/
 
 - [Improve Vector Search Performance](/vector-search/vector-search-improve-performance.md)
 - [Vector Data Types](/vector-search/vector-search-data-types.md)
+
+## References
+This explanation of KNN search is adapted from the ClickHouse documentation, licensed under the Apache License 2.0.
+
