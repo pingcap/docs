@@ -265,4 +265,3 @@ See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/
 ## Reference
 
 The explanation of KNN search is adapted from the ClickHouse documentation, licensed under the Apache License 2.0.
-
