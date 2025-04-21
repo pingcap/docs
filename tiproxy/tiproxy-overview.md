@@ -65,7 +65,7 @@ This section describes how to deploy and change TiProxy using TiUP. You can eith
 
 > **Note:**
 >
-> Please make sure that TiUP is v1.16.1 or later.
+> Make sure that TiUP is v1.16.1 or later.
 
 For other deployment methods, refer to the following documents:
 
@@ -78,7 +78,7 @@ The following steps describe how to deploy TiProxy when creating a new cluster.
 
 1. Configure the TiDB instances.
 
-    When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value should be greater than the duration of the longest transaction of the application. This configuration helps avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [TiProxy usage limitations](#limitations).
+    When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value must be greater than the duration of the longest transaction of the application, which can avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [Limitations](#limitations).
 
     A configuration example is as follows:
 
@@ -96,7 +96,7 @@ The following steps describe how to deploy TiProxy when creating a new cluster.
 
     - Select the model and number of TiProxy instances based on the load type and maximum QPS. For details, see [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
     - Since there are usually fewer TiProxy instances than TiDB server instances, the network bandwidth of TiProxy is more likely to become a bottleneck. For example, on AWS, the baseline network bandwidth of the same series of EC2 is not proportional to the number of CPU cores. When network bandwidth becomes a bottleneck, you can split the TiProxy instance into more and smaller instances to increase QPS. For details, see [Network specifications](https://docs.aws.amazon.com/ec2/latest/instancetypes/co.html#co_network).
-    - It is recommended to specify the TiProxy version number in the topology configuration. This will prevent TiProxy from being upgraded when you execute [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md) to upgrade the TiDB cluster, thus preventing client connections from being disconnected due to the TiProxy upgrade.
+    - It is recommended to specify the TiProxy version in the topology configuration. This will prevent TiProxy from being upgraded when you execute [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md) to upgrade the TiDB cluster, thus preventing client connections from being disconnected due to the TiProxy upgrade.
 
     For more information about the template for TiProxy, see [A simple template for the TiProxy topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml).
 
@@ -132,7 +132,7 @@ The following steps describe how to deploy TiProxy when creating a new cluster.
 
 For clusters that do not have TiProxy deployed, you can enable TiProxy by scaling out TiProxy instances.
 
-1. Configure the TiProxy instances.
+1. Configure the TiProxy instance.
 
     Configure TiProxy in a separate topology file, such as `tiproxy.toml`:
 
@@ -162,11 +162,11 @@ For clusters that do not have TiProxy deployed, you can enable TiProxy by scalin
     tiup cluster scale-out <cluster-name> tiproxy.toml
     ```
 
-    When you scale out TiProxy, TiUP automatically configures a self-signed certificate [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) for TiDB. The certificate is used for migration connections.
+    When you scale out TiProxy, TiUP automatically configures a self-signed certificate [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) for TiDB. The certificate is used for migrating connections.
 
-3. Modify TiDB configuration.
+3. Modify the TiDB configurations.
 
-   When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value should be greater than the duration of the longest transaction of the application to avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [TiProxy usage limitations](#limitations).
+   When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value must be greater than the duration of the longest transaction of the application to avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [Limitations](#limitations).
 
    A configuration example is as follows:
 
@@ -186,7 +186,7 @@ For clusters that do not have TiProxy deployed, you can enable TiProxy by scalin
 
 5. Connect to TiProxy.
 
-    After enabling TiProxy, the client should connect to the TiProxy port instead of the TiDB server port.
+    After you enable TiProxy, the client should connect to the TiProxy port instead of the TiDB server port.
 
 ### Modify TiProxy configuration
 
