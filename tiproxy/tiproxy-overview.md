@@ -92,11 +92,11 @@ The following steps describe how to deploy TiProxy when creating a new cluster.
 
     To ensure the high availability of TiProxy, it is recommended to deploy at least two TiProxy instances and configure a virtual IP by setting [`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip) and [`ha.interface`](/tiproxy/tiproxy-configuration.md#interface) to route the traffic to the available TiProxy instance.
 
-    Note:
+    Note the following:
 
-    - Select the model and number of TiProxy instances based on the load type and maximum QPS. For details, see [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
-    - Since there are usually fewer TiProxy instances than TiDB server instances, the network bandwidth of TiProxy is more likely to become a bottleneck. For example, on AWS, the baseline network bandwidth of the same series of EC2 is not proportional to the number of CPU cores. When network bandwidth becomes a bottleneck, you can split the TiProxy instance into more and smaller instances to increase QPS. For details, see [Network specifications](https://docs.aws.amazon.com/ec2/latest/instancetypes/co.html#co_network).
-    - It is recommended to specify the TiProxy version in the topology configuration. This will prevent TiProxy from being upgraded when you execute [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md) to upgrade the TiDB cluster, thus preventing client connections from being disconnected due to the TiProxy upgrade.
+    - Select the model and number of TiProxy instances based on the workload type and maximum QPS. For details, see [TiProxy Performance Test Report](/tiproxy/tiproxy-performance-test.md).
+    - Because there are usually fewer TiProxy instances than TiDB server instances, the network bandwidth of TiProxy is more likely to become a bottleneck. For example, on AWS, the baseline network bandwidth EC2 instances in the same series is not proportional to the number of CPU cores. When network bandwidth becomes a bottleneck, you can split the TiProxy instance into more and smaller instances to increase QPS. For details, see [Network specifications](https://docs.aws.amazon.com/ec2/latest/instancetypes/co.html#co_network).
+    - It is recommended to specify the TiProxy version in the topology configuration file. This will prevent TiProxy from being upgraded automatically when you execute [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md) to upgrade the TiDB cluster, thus preventing client connections from being disconnected due to the TiProxy upgrade.
 
     For more information about the template for TiProxy, see [A simple template for the TiProxy topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml).
 
@@ -162,9 +162,9 @@ For clusters that do not have TiProxy deployed, you can enable TiProxy by scalin
     tiup cluster scale-out <cluster-name> tiproxy.toml
     ```
 
-    When you scale out TiProxy, TiUP automatically configures a self-signed certificate [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) for TiDB. The certificate is used for migrating connections.
+    When you scale out TiProxy, TiUP automatically configures a self-signed certificate [`security.session-token-signing-cert`](/tidb-configuration-file.md#session-token-signing-cert-new-in-v640) and [`security.session-token-signing-key`](/tidb-configuration-file.md#session-token-signing-key-new-in-v640) for TiDB. The certificate is used for connection migration.
 
-3. Modify the TiDB configurations.
+3. Modify the TiDB configuration.
 
    When using TiProxy, you need to configure [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) for TiDB. This value must be greater than the duration of the longest transaction of the application to avoid client connection interruption when the TiDB server goes offline. You can view the transaction duration through the [Transaction metrics on the TiDB monitoring dashboard](/grafana-tidb-dashboard.md#transaction). For details, see [Limitations](#limitations).
 
