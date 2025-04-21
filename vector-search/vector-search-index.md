@@ -264,4 +264,4 @@ See [`EXPLAIN`](/sql-statements/sql-statement-explain.md), [`EXPLAIN ANALYZE`](/
 
 ## Reference
 
-The explanation of KNN search is adapted from the ClickHouse documentation, licensed under the Apache License 2.0.
+The explanation of KNN search is adapted from the [Approximate Nearest Neighbor Search Indexes](https://github.com/ClickHouse/ClickHouse/pull/50661/files#diff-7ebd9e71df96e74230c9a7e604fa7cb443be69ba5e23bf733fcecd4cc51b7576) document authored by [rschu1ze](https://github.com/rschu1ze) in ClickHouse documentation, licensed under the Apache License 2.0.
