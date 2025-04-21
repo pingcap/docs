@@ -6,3 +6,7 @@ have_fun: false  # Disables fun features like poems in PR summaries
 
 code_review:
   disable: false  # Enables code reviews
+  comment_severity_threshold: LOW ## Allows low severity comments such as grammar and spelling mistakes to be added to the PR
+  help: false ## Disables the help message on pull request open
+  summary: true ## Posts a pull request summary on the pull request open.
+  code_review: true ## Posts a code review on pull request open.
