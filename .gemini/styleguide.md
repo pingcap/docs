@@ -43,7 +43,7 @@ Note that if the PR author is ti-chi-bot, you only correct English grammar, spel
 
 - Inconsistent use of technical terms
 
-    _"cloud cluster" vs. "serverless cluster"_ – pick one.
+    _"TiDB Cloud Serverless clusters" vs. "TiDB Serverless clusters"_ – pick one.
 
 - Unclear step instructions
 
