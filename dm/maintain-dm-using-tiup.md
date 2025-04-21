@@ -389,7 +389,7 @@ tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml
 
 All operations above performed on the cluster machine use the SSH client embedded in TiUP to connect to the cluster and execute commands. However, in some scenarios, you might also need to use the SSH client native to the control machine system to perform such cluster operations. For example:
 
-- To use a SSH plug-in for authentication
+- To use an SSH plug-in for authentication
 - To use a customized SSH client
 
 Then you can use the `--native-ssh` command-line flag to enable the system-native command-line tool:

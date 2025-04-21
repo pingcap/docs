@@ -5,9 +5,9 @@ summary: Learn how to build and use the vector search index to accelerate K-Near
 
 # Vector Search Index
 
-K-nearest neighbors (KNN) search is the method for finding the K closest points to a given point in a vector space. The most straightforward approach to perform KNN search is a brute force search, which calculates the distance between the given vector and all other vectors in the space. This approach guarantees perfect accuracy, but it is usually too slow for real-world use. Therefore, approximate algorithms are commonly used in KNN search to enhance speed and efficiency.
+As described in the [Vector Search](/vector-search/vector-search-overview.md) document, vector search identifies the Top K-Nearest Neighbors (KNN) to a given vector by calculating the distance between the given vector and all vectors stored in the database. While this approach provides accurate results, it can be slow when the table contains a large number of vectors because it involves a full table scan.
 
-In TiDB, you can create and use vector search indexes for such approximate nearest neighbor (ANN) searches over columns with [vector data types](/vector-search/vector-search-data-types.md). By using vector search indexes, vector search queries could be finished in milliseconds.
+To improve search efficiency, you can create vector search indexes in TiDB for approximate KNN (ANN) search. When using vector indexes for vector search, TiDB can greatly improve query performance with only a slight reduction in accuracy, generally maintaining a search recall rate above 90%.
 
 <CustomContent platform="tidb">
 
