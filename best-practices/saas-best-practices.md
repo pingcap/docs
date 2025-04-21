@@ -31,7 +31,7 @@ If you need to create a large number of tables (for example, more than 100,000),
 
 ## Configure caches
 
-* Starting from TiDB v8.4.0, TiDB loads table information involved in SQL statements into the Infoschema cache on demand during SQL execution. 
+* Starting from TiDB v8.4.0, TiDB loads table information involved in SQL statements into the Infoschema cache on demand during SQL execution.
 
     - You can monitor the size and hit rate of the Infoschema cache by observing the **Infoschema v2 Cache Size** and **Infoschema v2 Cache Operation** sub-panels under the **Schema Load** panel in TiDB Dashboard.
     - You can use the [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800) system variable to adjust the memory limit of the Infoschema cache to meet business needs. The size of the Infoschema cache is linearly related to the number of different tables involved in SQL execution. In actual tests, fully caching metadata for one million tables (each with four columns, one primary key, and one index) requires about 2.4 GiB of memory.
