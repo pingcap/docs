@@ -205,6 +205,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_txn_mode` | No limitation | Read-only [^10] |
 | `tidb_wait_split_region_finish` | No limitation | Read-only [^10] |
 | `tidb_wait_split_region_timeout` | No limitation | Read-only [^10] |
+| `txn_scope` | No limitation | Read-only [^10] |
 | `validate_password.enable` | No limitation | Always enabled [^9] |
 | `validate_password.length` | No limitation | At least `8` [^9] |
 | `validate_password.mixed_case_count` | No limitation | At least `1` [^9] |

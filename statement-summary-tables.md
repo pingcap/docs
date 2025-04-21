@@ -415,17 +415,6 @@ Fields related to Resource Control:
 - `MAX_QUEUED_RC_TIME`: the maximum waiting time for available RU when executing SQL statements.
 - `RESOURCE_GROUP`: the resource group bound to SQL statements.
 
-Fields related to network traffic:
-
-- `SUM_UNPACKED_BYTES_SENT_TIKV_TOTAL`: total bytes sent from SQL statements to TiKV.
-- `SUM_UNPACKED_BYTES_RECEIVED_TIKV_TOTAL`: total bytes received by SQL statements from TiKV.
-- `SUM_UNPACKED_BYTES_SENT_TIKV_CROSS_ZONE`: bytes sent from SQL statements to TiKV across availability zones.
-- `SUM_UNPACKED_BYTES_RECEIVED_TIKV_CROSS_ZONE`: bytes received by SQL statements from TiKV across availability zones.
-- `SUM_UNPACKED_BYTES_SENT_TIFLASH_TOTAL`: total bytes sent from SQL statements to TiFlash, including bytes sent between TiFlash nodes.
-- `SUM_UNPACKED_BYTES_RECEIVED_TIFLASH_TOTAL`: total bytes received by SQL statements from TiFlash, including bytes received between TiFlash nodes.
-- `SUM_UNPACKED_BYTES_SENT_TIFLASH_CROSS_ZONE`: bytes sent from SQL statements to TiFlash across availability zones, including bytes sent between TiFlash nodes across availability zones.
-- `SUM_UNPACKED_BYTES_RECEIVED_TIFLASH_CROSS_ZONE`: bytes received by SQL statements from TiFlash across availability zones, including bytes received between TiFlash nodes across availability zones.
-
 ### `statements_summary_evicted` fields description
 
 - `BEGIN_TIME`: Records the starting time.
