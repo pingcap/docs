@@ -160,11 +160,7 @@ The supported options are described as follows:
 
 ## `IMPORT INTO ... FROM FILE` usage
 
-> **Note:**
->
-> `IMPORT INTO ... FROM FILE` is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
-
-For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS.
+For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage. For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and GCS. For [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless), `IMPORT INTO ... FROM FILE` supports importing data from files stored in Amazon S3 and Alibaba Cloud OSS.
 
 - For data files stored in Amazon S3 or GCS, `IMPORT INTO ... FROM FILE` supports running in the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md).
 
@@ -211,6 +207,7 @@ SET GLOBAL tidb_server_memory_limit='75%';
 >
 > - If the KV range overlap in a source data file is low, enabling Global Sort might decrease import performance. This is because when Global Sort is enabled, TiDB needs to wait for the completion of local sorting in all sub-jobs before proceeding with the Global Sort operations and subsequent import.
 > - After an import job using Global Sort completes, the files stored in the cloud storage for Global Sort are cleaned up asynchronously in a background thread.
+> - Global Sort is not available on TiDB Cloud Serverless clusters.
 
 ### Output
 
