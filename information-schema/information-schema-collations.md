@@ -52,7 +52,7 @@ The description of columns in the `COLLATIONS` table is as follows:
 * `IS_DEFAULT`: Whether this collation is the default collation of the character set it belongs to.
 * `IS_COMPILED`: Whether the character set is compiled into the server.
 * `SORTLEN`: The minimum length of memory allocated when the collation sorts characters.
-* `PAD_ATTRIBUTE`: This indicates if trailing spaces are significant for comparisons (`PAD SPACE`) or not (`NO PAD`).
+* `PAD_ATTRIBUTE`: Whether trailing spaces are ignored during string comparison. `PAD SPACE` means that trailing spaces are ignored (for example, `'abc'` equals `'abc   '`), while `NO PAD` means that trailing spaces are significant (for example, `'abc'` does not equal `'abc   '`).
 
 ## See also
 
