@@ -7,7 +7,7 @@ summary: This document provides details about the TiDB support of the GBK charac
 
 Starting from v5.4.0, TiDB supports the GBK character set. This document provides the TiDB support and compatibility information of the GBK character set.
 
-Starting from v6.0.0, TiDB enables [New framework for collations](/character-set-and-collation.md#new-framework-for-collations) by default. The default collation for TiDB GBK character set is `gbk_chinese_ci`, which is consistent with MySQL.
+Starting from v6.0.0, TiDB enables the [new framework for collations](/character-set-and-collation.md#new-framework-for-collations) by default. The default collation for TiDB GBK character set is `gbk_chinese_ci`, which is consistent with MySQL.
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
