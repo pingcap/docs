@@ -46,7 +46,7 @@ To export data to Amazon S3, you need to provide the following information:
 - URI: `s3://<bucket-name>/<folder-path>/`
 - One of the following access credentials:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. Note that only clusters hosted on AWS support role ARN.
+    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. Note that only clusters hosted on AWS support the role ARN.
 
 For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
@@ -75,7 +75,7 @@ To export data to Alibaba Cloud OSS, you need to provide the following informati
 - URI: `oss://<bucket-name>/<folder-path>/`
 - Access credential: An [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) for your Alibaba Cloud account. Make sure the AccessKey pair has the `oss:PutObject`, `oss:ListBuckets` and `oss:GetBucketInfo` permissions to allow data export to the OSS bucket.
 
-For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
+For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
 ## Export options
 
@@ -337,7 +337,7 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 </div>
 </SimpleTab>
 
-### Export data to Alibaba Cloud Object Storage Service
+### Export data to Alibaba Cloud OSS
 
 <SimpleTab>
 <div label="Console">
