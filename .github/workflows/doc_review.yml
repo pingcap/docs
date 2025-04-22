@@ -76,7 +76,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           API_PROVIDER: "openai"  # or "openai" if you want to use OpenAI
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_API_MODEL: "gpt-4"
+          OPENAI_API_MODEL: "gpt-4o"
           exclude: "**/*.json"  # Optional: exclude patterns separated by commas
           REVIEW_MODE: ${{ steps.extract.outputs.REVIEW_MODE || 'default' }}
           COMMIT_SHA: ${{ steps.extract.outputs.COMMIT_SHA || '' }}

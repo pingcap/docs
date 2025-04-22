@@ -4959,6 +4959,22 @@ SHOW WARNINGS;
 > - This option only takes effect on statements that need to lock a single key. If a statement needs to lock multiple rows at the same time, this option will not take effect on such statements.
 > - This feature is introduced in v6.6.0 by the [`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) variable, which is disabled by default.
 
+### tidb_pipelined_dml_resource_policy <span class="version-mark">New in v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: String
+- Default value: `"standard"`
+- Possible values: `"standard"`, `"conservative"`, and `"custom{...}"`
+- This variable controls the resource usage policy for [Pipelined DML](/pipelined-dml.md). It takes effect only when [`tidb_dml_type`](#tidb_dml_type-new-in-v800) is set to `bulk`. The meaning of each possible value is as follows:
+    - `"standard"`: the default resource usage policy.
+    - `"conservative"`: Pipelined DML uses fewer resources, but its execution speed is slower than the default policy, suitable for scenarios with sensitive resource usage.
+    - `"custom{option1=value1,option2=value2,...}"`: a custom resource usage policy. You can specify only the required options. For example, `"custom{concurrency=8,write_throttle_ratio=0.5}"`. Make sure that the value is enclosed in double quotes. The supported custom options include the following:
+        - `concurrency`: specifies the concurrency of the flush operation, which affects the execution speed and resource usage of Pipelined DML. The value range is `[1, 8192]`.
+        - `resolve_concurrency`: specifies the concurrency of the asynchronous resolve lock operations. It affects the resource usage of Pipelined DML but not its execution speed. The value range is `[1, 8192]`.
+        - `write_throttle_ratio`: specifies the ratio of the active throttle time to the total time. The larger the value, the higher the ratio of throttle time in total time, and the more resources are saved. `0` means no throttle. The value range is `[0, 1)`.
+
 ### tidb_placement_mode <span class="version-mark">New in v6.0.0</span>
 
 > **Note:**
@@ -6268,6 +6284,98 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### tidb_workload_repository_dest <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `''`
+
+<CustomContent platform="tidb">
+
+- This variable is used to set the destination of the [Workload Repository](/workload-repository.md).
+- The value can be either `'table'` (enabling the workload repository) or `''` (disabling the workload repository).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to set the destination of the [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository).
+- The value can be either `'table'` (enabling the workload repository) or `''` (disabling the workload repository).
+
+</CustomContent>
+
+### tidb_workload_repository_active_sampling_interval <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `5`
+- Range: `[0, 600]`
+- Unit: Seconds
+
+<CustomContent platform="tidb">
+
+- Sets the sampling interval for the [Workload Repository](/workload-repository.md)'s time-based sampling process.
+- Setting the value to `0` disables the time-based sampling process.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Sets the sampling interval for the [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository)'s time-based sampling process.
+- Setting the value to `0` disables the time-based sampling process.
+
+</CustomContent>
+
+### tidb_workload_repository_retention_days <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `7`
+- Range: `[0, 365]`
+- Unit: Days
+
+<CustomContent platform="tidb">
+
+- Sets the number of days that [Workload Repository](/workload-repository.md) data is retained.
+- Setting the value to `0` disables automatic purging of old data.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Sets the number of days that [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository) data is retained.
+- Setting the value to `0` disables automatic purging of old data.
+
+</CustomContent>
+
+### tidb_workload_repository_snapshot_interval <span class="version-mark">New in v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `3600`
+- Range: `[900, 7200]`
+- Unit: Seconds
+
+<CustomContent platform="tidb">
+
+- Sets the sampling interval for the [Workload Repository](/workload-repository.md)'s snapshot sampling process.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Sets the sampling interval for the [Workload Repository](https://docs.pingcap.com/tidb/dev/workload-repository)'s snapshot sampling process.
+
+</CustomContent>
+
 ### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -6283,7 +6391,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `8192`
 - Range: `[1, 18446744073709551615]`
 - When Fine Grained Shuffle is enabled, the window function pushed down to TiFlash can be executed in parallel. This variable controls the batch size of the data sent by the sender.
-- Impact on performance: set a reasonable size according to your business requirements. Improper setting affects the performance. If the value is set too small, for example `1`, it causes one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it causes the receiving end to spend most of the time waiting for data, and the piplelined computation cannot work. To set a proper value, you can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
+- Impact on performance: set a reasonable size according to your business requirements. Improper setting affects the performance. If the value is set too small, for example `1`, it causes one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it causes the receiving end to spend most of the time waiting for data, and the pipelined computation cannot work. To set a proper value, you can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
 
 ### tiflash_fine_grained_shuffle_stream_count <span class="version-mark">New in v6.2.0</span>
 

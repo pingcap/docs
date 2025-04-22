@@ -28,7 +28,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Date and time types](/data-type-date-and-time.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [String types](/data-type-string.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [JSON type](/data-type-json.md) | Y | Y | Y | Y | Y | E | E | E | E | E |
-| [Vectort types](/vector-search/vector-search-data-types.md) | E | N | N | N | N | N | N | N | N | N |
+| [Vector types](/vector-search/vector-search-data-types.md) | E | N | N | N | N | N | N | N | N | N |
 | [Control flow functions](/functions-and-operators/control-flow-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [String functions](/functions-and-operators/string-functions.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
