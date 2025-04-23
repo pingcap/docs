@@ -59,7 +59,6 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
         > - If you signed up for TiDB Cloud through [Azure Marketplace](https://azuremarketplace.microsoft.com), the cloud provider is Azure Cloud, and you cannot change it in TiDB Cloud.
         > - If you signed up for TiDB Cloud through [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), the cloud provider is Google Cloud, and you cannot change it in TiDB Cloud.
 
-
     2. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively.
     3. Update the default cluster name and port number if necessary.
     4. If CIDR has not been configured for this region, you need to set the CIDR. If you do not see the **Project CIDR** field, it means that CIDR has already been configured for this region.
@@ -75,7 +74,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     > **Note:**
     >
-    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Azure Marketplace](https://azuremarketplace.microsoft.com) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Azure account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
+    > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), [Azure Marketplace](https://azuremarketplace.microsoft.com), or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account, Azure account, or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
 6. Click **Create**.
 
