@@ -111,7 +111,7 @@ For detailed instructions, see [Deploy a new TiDB cluster that includes TiCDC us
         wget https://tiup-mirrors.pingcap.com/cdc-v9.0.0-beta.1-linux-amd64.tar.gz
         ```
 
-    2. Patch the downloaded TiCDC binary file to your TiDB cluster:
+    2. Patch the downloaded TiCDC binary file to your TiDB cluster using the [`tiup cluster patch`](/tiup/tiup-component-cluster-patch.md) command:
 
         ```shell
         tiup cluster patch <cluster-name> ./cdc-v9.0.0-beta.1-linux-amd64.tar.gz -R cdc
