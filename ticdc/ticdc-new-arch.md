@@ -1,6 +1,6 @@
 ---
 title: TiCDC New Architecture Introduction
-summary: Introduces the features, architectural characteristics, deployment guide, and notes of the TiCDC new architecture.
+summary: Introduces the features, architectural design, deployment guide, and notes of the TiCDC new architecture.
 ---
 
 # TiCDC New Architecture Introduction
@@ -47,7 +47,7 @@ The new architecture is designed to address common issues during continuous syst
 
 ## Limitations
 
-As an experimental feature, the TiCDC new architecture does not yet include all the functionalities of the old architecture. The following features will be available when the new architecture becomes generally available (GA) in future versions:
+As an experimental feature, the TiCDC new architecture does not yet support all the functionalities available in the old architecture. The following features will be available when the new architecture becomes generally available (GA) in future versions:
 
 - [Split Update Events](/ticdc/ticdc-split-update-behavior.md)
 - [Eventually Consistent Replication for Disaster Scenarios](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)
@@ -103,13 +103,13 @@ For detailed instructions, see [Deploy a new TiDB cluster that includes TiCDC us
 
     1. Download the TiCDC binary file of v9.0.0 or later.
 
-        The download link follows this format: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz`, where `{version}` is the TiCDC version, `${os}` is your operating system, and `{arch}` is the platform the component runs on (`amd64` or `arm64`).
+        The download link follows this format: `https://tiup-mirrors.pingcap.com/cdc-${version}-${os}-${arch}.tar.gz`, where `${version}` is the TiCDC version, `${os}` is your operating system, and `${arch}` is the platform the component runs on (`amd64` or `arm64`).
 
         For example, to download the binary file of TiCDC v9.0.0-beta.1 for Linux (x86-64), run the following command:
 
-       ```shell
-       wget https://tiup-mirrors.pingcap.com/cdc-v9.0.0-beta.1-linux-amd64.tar.gz
-       ```
+        ```shell
+        wget https://tiup-mirrors.pingcap.com/cdc-v9.0.0-beta.1-linux-amd64.tar.gz
+        ```
 
     2. Patch the downloaded TiCDC binary file to your TiDB cluster:
 
