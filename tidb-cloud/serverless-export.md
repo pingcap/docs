@@ -23,6 +23,7 @@ You can export data to the following locations:
     - [Amazon S3](https://aws.amazon.com/s3/)
     - [Google Cloud Storage](https://cloud.google.com/storage)
     - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
+    - [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/product/oss)
 
 > **Note:**
 >
@@ -45,9 +46,9 @@ To export data to Amazon S3, you need to provide the following information:
 - URI: `s3://<bucket-name>/<folder-path>/`
 - One of the following access credentials:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` and `s3:ListBucket` permissions.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. 
+    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` and `s3:ListBucket` permissions. Note that only clusters hosted on AWS support the role ARN.
 
-For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
+For more information, see [Configure Amazon S3 access](/tidb-cloud/serverless-external-storage.md#configure-amazon-s3-access).
 
 ### Google Cloud Storage
 
@@ -56,7 +57,7 @@ To export data to Google Cloud Storage, you need to provide the following inform
 - URI: `gs://<bucket-name>/<folder-path>/`
 - Access credential: a **base64 encoded** [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your bucket. Make sure the service account key has the `storage.objects.create` permission.
 
-For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
+For more information, see [Configure GCS access](/tidb-cloud/serverless-external-storage.md#configure-gcs-access).
 
 ### Azure Blob Storage
 
@@ -65,7 +66,16 @@ To export data to Azure Blob Storage, you need to provide the following informat
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` or `https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
 - Access credential: a [shared access signature (SAS) token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) for your Azure Blob Storage container. Make sure the SAS token has the `Read` and `Write` permissions on the `Container` and `Object` resources.
 
-For more information, see [Configure External Storage Access for TiDB Cloud Serverless](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+For more information, see [Configure Azure Blob Storage access](/tidb-cloud/serverless-external-storage.md#configure-azure-blob-storage-access).
+
+### Alibaba Cloud OSS
+
+To export data to Alibaba Cloud OSS, you need to provide the following information:
+
+- URI: `oss://<bucket-name>/<folder-path>/`
+- Access credential: An [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) for your Alibaba Cloud account. Make sure the AccessKey pair has the `oss:PutObject`, `oss:ListBuckets` and `oss:GetBucketInfo` permissions to allow data export to the OSS bucket.
+
+For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/serverless-external-storage.md#configure-alibaba-cloud-object-storage-service-oss-access).
 
 ## Export options
 
@@ -323,6 +333,47 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 
 - `azblob.uri`: the URI of the Azure Blob Storage in the `(azure|https)://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
 - `azblob.sas-token`: the account SAS token of the Azure Blob Storage.
+
+</div>
+</SimpleTab>
+
+### Export data to Alibaba Cloud OSS
+
+<SimpleTab>
+<div label="Console">
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+   > **Tip:**
+   >
+   > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+
+2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+
+3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Alibaba Cloud OSS** from the drop-down list. 
+
+4. Fill in the following parameters:
+
+    - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
+    - **Exported Data**: choose the databases and tables you want to export.
+    - **Data Format**: choose **SQL**, **CSV**, or **Parquet**.
+    - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
+    - **Folder URI**: enter the Alibaba Cloud OSS URI where you want to export the data, in the `oss://<bucket-name>/<folder-path>/` format.
+    - **AccessKey ID** and **AccessKey Secret**: enter the AccessKey ID and AccessKey Secret that have the permission to access the bucket.
+
+5. Click **Export**.
+
+</div>
+
+<div label="CLI">
+
+```shell
+ticloud serverless export create -c <cluster-id> --target-type OSS --oss.uri <uri> --oss.access-key-id <access-key-id> --oss.access-key-secret <access-key-secret> --filter "database.table"
+```
+
+- `oss.uri`: the Alibaba Cloud OSS URI where you want to export the data, in the `oss://<bucket-name>/<folder-path>/` format.
+- `oss.access-key-id`: the AccessKey ID of the user who has the permission to access the bucket.
+- `oss.access-key-secret`: the AccessKey secret of the user who has the permission to access the bucket.
 
 </div>
 </SimpleTab>
