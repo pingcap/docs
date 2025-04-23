@@ -66,11 +66,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Support pushing down window functions that contain the following aggregation functions to TiFlash [#7376](https://github.com/pingcap/tiflash/issues/7376) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**<!--1382-->
 
-    * `MAX`
-    * `MIN`
-    * `COUNT`
-    * `SUM`
-    * `AVG`
+    * `MAX()`
+    * `MIN()`
+    * `COUNT()`
+    * `SUM()`
+    * `AVG()`
 
     For more information, see [documentation](/tiflash/tiflash-supported-pushdown-calculations.md).
 
@@ -89,7 +89,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - For newly deployed TiDB clusters with v9.0.0 or a later version, TiFlash uses the new storage format by default.
     - For TiDB clusters upgraded to v9.0.0 or a later version, it is recommended to read [TiFlash upgrade guide](/tiflash-upgrade-guide.md) before the upgrade.
         - If [`format_version`](/tiflash/tiflash-configuration.md#format_version) is not specified for TiFlash before the upgrade, TiFlash uses the new storage format by default after the upgrade.
-        - If [`format_version`](/tiflash/tiflash-configuration.md#format_version) is specified for TiFlash before the upgrade, the value of `format_version` remains unchanged after the upgrade, and TiFlash continues to use the storage format specified by `format_version`. To enable the new storage format in this case, set the `format_version` parameter to `8` in the TiFlash configuration file. After the configuration takes effect, new data written to TiFlash will use the new storage format, while the storage format of existing data will remain unchanged.
+        - If [`format_version`](/tiflash/tiflash-configuration.md#format_version) is specified for TiFlash before the upgrade, the value of `format_version` remains unchanged after the upgrade, and TiFlash continues to use the storage format specified by `format_version`. To enable the new storage format in this case, set the `format_version` configuration item to `8` in the TiFlash configuration file. After the configuration takes effect, new data written to TiFlash will use the new storage format, while the storage format of existing data will remain unchanged.
 
   For more information, see [user documentation](/tiflash/tiflash-configuration.md#format_version).
 
