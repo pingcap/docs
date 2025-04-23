@@ -277,13 +277,17 @@ To link your TiDB Cloud account to an AWS billing account, take the following st
 
 To link your TiDB Cloud account to an Azure billing account, take the following steps:
 
-1. Open the [Azure Marketplace page](https://azuremarketplace.microsoft.com), search for `TiDB Cloud` and select **TiDB Cloud** in the search results. The TiDB Cloud product page is displayed.
+1. Open the [Azure Marketplace page](https://azuremarketplace.microsoft.com), search for `TiDB Cloud` and select **TiDB Cloud on Azure (Preview)** in the search results. The TiDB Cloud product page is displayed.
 
-2. On the TiDB Cloud product page, click **Get It Now**. An order page is displayed.
+2. On the TiDB Cloud product page, click **Get It Now**, accept the terms of use, and then click **Continue** to go to the order page.
 
-3. On the order page, click **Subscribe**, and fill required info in **Basics** tab, and then click **Review + subscribe**. If everything looks good, then click **Subscribe**, and then waiting for couple of seconds to complete the subcription.
+> **Note:**
+>
+>  If you have not added your country and region information for your Microsoft account, you also need to enter that information before clicking **Continue**.
 
-4. Click **Configure account now** after the subscription is done, and you will be lead to the TiDB Cloud sign-up page.
+3. On the order page, click **Subscribe**, fill in the required information on the **Basics** tab, and then click **Review + subscribe**. If everything looks good, click **Subscribe**, and then wait for a few seconds for the subscription to complete.
+
+4. When the subscription is done, click **Configure account now**. You will be directed to the TiDB Cloud sign-up page.
 
 5. Check the notification in the upper part of the sign-up page and click **Sign in**.
 
