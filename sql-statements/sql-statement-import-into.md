@@ -186,6 +186,10 @@ For TiDB Self-Managed, `IMPORT INTO ... FROM FILE` supports importing data from 
 
 ### Global Sort
 
+> **Note:**
+>
+> Global Sort is not available on [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+
 `IMPORT INTO ... FROM FILE` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
 
 In the following scenarios, there can be significant overlap in KV ranges:
@@ -207,7 +211,6 @@ SET GLOBAL tidb_server_memory_limit='75%';
 >
 > - If the KV range overlap in a source data file is low, enabling Global Sort might decrease import performance. This is because when Global Sort is enabled, TiDB needs to wait for the completion of local sorting in all sub-jobs before proceeding with the Global Sort operations and subsequent import.
 > - After an import job using Global Sort completes, the files stored in the cloud storage for Global Sort are cleaned up asynchronously in a background thread.
-> - Global Sort is not available on TiDB Cloud Serverless clusters.
 
 ### Output
 
