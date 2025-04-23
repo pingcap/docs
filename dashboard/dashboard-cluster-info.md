@@ -20,7 +20,7 @@ You can use one of the following two methods to access the cluster information p
 
 Click **Instances** to view the list of instances:
 
-![Instance list](/media/dashboard/dashboard-cluster-info-instances-v650.png)
+![Instance list](./media/dashboard/dashboard-cluster-info-instances-v650.png)
 
 This instance list shows the overview information of all instances of TiDB, TiKV, PD, and TiFlash components in the cluster.
 
@@ -54,7 +54,7 @@ Instance status derives from the PD scheduling information. For more details, se
 
 Click **Hosts** to view the list of hosts:
 
-![Host list](/media/dashboard/dashboard-cluster-info-hosts-v650.png)
+![Host list](./media/dashboard/dashboard-cluster-info-hosts-v650.png)
 
 This host list shows the running status of hosts that correspond to all instances of TiDB, TiKV, PD, and TiFlash components in the cluster.
 
@@ -74,7 +74,7 @@ The list includes the following information:
 
 Click **Disks** to view the list of disks:
 
-![Disk list](/media/dashboard/dashboard-cluster-info-disks-v650.png)
+![Disk list](./media/dashboard/dashboard-cluster-info-disks-v650.png)
 
 This disk list shows the status of disks on which the TiDB, TiKV, PD, and TiFlash instances run.
 

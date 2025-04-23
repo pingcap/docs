@@ -18,7 +18,7 @@ You can use one of the following methods to access the cluster diagnostics page:
 
 * After logging in to TiDB Dashboard, click **Cluster Diagnostics** in the left navigation menu.
 
-  ![Access Cluster Diagnostics page](/media/dashboard/dashboard-diagnostics-access-v650.png)
+  ![Access Cluster Diagnostics page](./media/dashboard/dashboard-diagnostics-access-v650.png)
 
 * Visit `http://127.0.0.1:2379/dashboard/#/diagnose` in your browser. Replace `127.0.0.1:2379` with the actual PD address and port number.
 
@@ -30,7 +30,7 @@ To diagnose a cluster within a specified time range and check the cluster load, 
 2. Set the **Range Duration**, such as `10 min`.
 3. Click **Start**.
 
-![Generate diagnostic report](/media/dashboard/dashboard-diagnostics-gen-report-v650.png)
+![Generate diagnostic report](./media/dashboard/dashboard-diagnostics-gen-report-v650.png)
 
 > **Note:**
 >
@@ -38,7 +38,7 @@ To diagnose a cluster within a specified time range and check the cluster load, 
 
 The preceding steps generate a diagnostic report for the time range from `2022-05-21 14:40:00` to `2022-05-21 14:50:00`. After clicking **Start**, you can see the interface below. **Progress** is the progress bar of the diagnostic report. After the report is generated, click **View Full Report**.
 
-![Report progress](/media/dashboard/dashboard-diagnostics-gen-process-v650.png)
+![Report progress](./media/dashboard/dashboard-diagnostics-gen-process-v650.png)
 
 ## Generate comparison report
 
@@ -55,7 +55,7 @@ You can take the following steps to generate a comparison report for the precedi
 4. Set the **Baseline Range Start Time**, which is the start time of the range (to be compared with) in which the system is normal, such as `2022-05-21 14:30:00`.
 5. Click **Start**.
 
-![Generate comparison report](/media/dashboard/dashboard-diagnostics-gen-compare-report-v650.png)
+![Generate comparison report](./media/dashboard/dashboard-diagnostics-gen-compare-report-v650.png)
 
 Then wait for the report to be generated and click **View Full Report**.
 

@@ -30,13 +30,13 @@ In the TiDB Grafana panel, check the following monitoring metrics under **KV Err
 
 * **KV Backoff OPS** indicates the count of error messages per second returned by TiKV.
 
-    ![kv-backoff-ops](/media/troubleshooting-write-conflict-kv-backoff-ops.png)
+    ![kv-backoff-ops](./media/troubleshooting-write-conflict-kv-backoff-ops.png)
 
     The `txnlock` metric indicates the write-write conflict. The `txnLockFast` metric indicates the read-write conflict.
 
 * **Lock Resolve OPS** indicates the count of items related to transaction conflicts per second:
 
-    ![lock-resolve-ops](/media/troubleshooting-write-conflict-lock-resolve-ops.png)
+    ![lock-resolve-ops](./media/troubleshooting-write-conflict-lock-resolve-ops.png)
 
     - `not_expired` indicates the TTL of the lock was not expired. The conflict transaction cannot resolve locks until the TTL is expired.
     - `wait_expired` indicates that the transaction needs to wait the lock to expire.
@@ -44,7 +44,7 @@ In the TiDB Grafana panel, check the following monitoring metrics under **KV Err
 
 * **KV Retry Duration** indicates the duration of re-sends the KV request:
 
-     ![kv-retry-duration](/media/troubleshooting-write-conflict-kv-retry-duration.png)
+     ![kv-retry-duration](./media/troubleshooting-write-conflict-kv-retry-duration.png)
 
 You can also use `[kv:9007]Write conflict` as the keywords to search in the TiDB log. The keywords also indicate the write conflict exists in the cluster.
 

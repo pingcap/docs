@@ -12,7 +12,7 @@ When you [deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md
 
 [Prometheus](https://prometheus.io/) is a time series database with a multi-dimensional data model and a flexible query language. [Grafana](https://grafana.com/) is an open source monitoring system for analyzing and visualizing metrics.
 
-![The monitoring architecture in the TiDB cluster](/media/prometheus-in-tidb.png)
+![The monitoring architecture in the TiDB cluster](./media/prometheus-in-tidb.png)
 
 For TiDB 2.1.3 or later versions, TiDB monitoring supports the pull method. It is a good adjustment with the following benefits:
 
@@ -51,7 +51,7 @@ tidb_executor_statement_total{type="Use"} 466016
 
 The data above is stored in Prometheus and displayed on Grafana. Right-click the panel and then click the **Edit** button (or directly press the <kbd>E</kbd> key) shown in the following figure:
 
-![The Edit entry for the Metrics tab](/media/best-practices/metric-board-edit-entry.png)
+![The Edit entry for the Metrics tab](./media/best-practices/metric-board-edit-entry.png)
 
 After clicking the **Edit** button, you can see the query expression with the `tidb_executor_statement_total` metric name on the Metrics tab. The meanings of some items on the panel are as follows:
 
@@ -63,7 +63,7 @@ After clicking the **Edit** button, you can see the query expression with the `t
 
 The query expression on the **Metrics** tab is as follows:
 
-![The query expression on the Metrics tab](/media/best-practices/metric-board-expression.jpeg)
+![The query expression on the Metrics tab](./media/best-practices/metric-board-expression.jpeg)
 
 Prometheus supports many query expressions and functions. For more details, refer to [Prometheus official website](https://prometheus.io/docs/prometheus/latest/querying).
 
@@ -75,11 +75,11 @@ This section introduces seven tips for efficiently using Grafana to monitor and 
 
 In the example shown in the [source and display of monitoring data](#source-and-display-of-monitoring-data) section, the data is grouped by type. If you want to know whether you can group by other dimensions and quickly check which dimensions are available, you can use the following method: **Only keep the metric name on the query expression, no calculation, and leave the `Legend format` field blank**. In this way, the original metrics are displayed. For example, the following figure shows that there are three dimensions (`instance`, `job` and `type`):
 
-![Edit query expression and check all dimensions](/media/best-practices/edit-expression-check-dimensions.jpg)
+![Edit query expression and check all dimensions](./media/best-practices/edit-expression-check-dimensions.jpg)
 
 Then you can modify the query expression by adding the `instance` dimension after `type`, and adding `{{instance}}` to the `Legend format` field. In this way, you can check the QPS of different types of SQL statements that are executed on each TiDB server:
 
-![Add an instance dimension to the query expression](/media/best-practices/add-instance-dimension.jpeg)
+![Add an instance dimension to the query expression](./media/best-practices/add-instance-dimension.jpeg)
 
 ### Tip 2: Switch the scale of the Y-axis
 
@@ -89,11 +89,11 @@ Of course, a linear scale is not suitable for all situations. For example, if yo
 
 The Y-axis uses a binary logarithmic scale by default:
 
-![The Y-axis uses a binary logarithmic scale](/media/best-practices/default-axes-scale.jpg)
+![The Y-axis uses a binary logarithmic scale](./media/best-practices/default-axes-scale.jpg)
 
 Switch the Y-axis to a linear scale:
 
-![Switch to a linear scale](/media/best-practices/axes-scale-linear.jpg)
+![Switch to a linear scale](./media/best-practices/axes-scale-linear.jpg)
 
 > **Tip:**
 >
@@ -105,33 +105,33 @@ You might still cannot see the trend after switching to the linear scale. For ex
 
 The baseline defaults to `0`:
 
-![Baseline defaults to 0](/media/best-practices/default-y-min.jpeg)
+![Baseline defaults to 0](./media/best-practices/default-y-min.jpeg)
 
 Change the baseline to `auto`:
 
-![Change the baseline to auto](/media/best-practices/y-min-auto.jpg)
+![Change the baseline to auto](./media/best-practices/y-min-auto.jpg)
 
 ### Tip 4: Use Shared crosshair or Tooltip
 
 In the **Settings** panel, there is a **Graph Tooltip** panel option which defaults to **Default**.
 
-![Graphic presentation tools](/media/best-practices/graph-tooltip.jpeg)
+![Graphic presentation tools](./media/best-practices/graph-tooltip.jpeg)
 
 You can use **Shared crosshair** and **Shared Tooltip** respectively to test the effect as shown in the following figures. Then, the scales are displayed in linkage, which is convenient to confirm the correlation of two metrics when diagnosing problems.
 
 Set the graphic presentation tool to **Shared crosshair**:
 
-![Set the graphical presentation tool to Shared crosshair](/media/best-practices/graph-tooltip-shared-crosshair.jpeg)
+![Set the graphical presentation tool to Shared crosshair](./media/best-practices/graph-tooltip-shared-crosshair.jpeg)
 
 Set the graphical presentation tool to **Shared Tooltip**:
 
-![Set the graphic presentation tool to Shared Tooltip](/media/best-practices/graph-tooltip-shared-tooltip.jpg)
+![Set the graphic presentation tool to Shared Tooltip](./media/best-practices/graph-tooltip-shared-tooltip.jpg)
 
 ### Tip 5: Enter `IP address:port number` to check the metrics in history
 
 PD's dashboard only shows the metrics of the current leader. If you want to check the status of a PD leader in history and it no longer exists in the drop-down list of the `instance` field, you can manually enter `IP address:2379` to check the data of the leader.
 
-![Check the metrics in history](/media/best-practices/manually-input-check-metric.jpeg)
+![Check the metrics in history](./media/best-practices/manually-input-check-metric.jpeg)
 
 ### Tip 6: Use the `Avg` function
 
@@ -139,11 +139,11 @@ Generally, only `Max` and `Current` functions are available in the legend by def
 
 Add summary functions such as the `Avg` function:
 
-![Add summary functions such as Avg](/media/best-practices/add-avg-function.jpeg)
+![Add summary functions such as Avg](./media/best-practices/add-avg-function.jpeg)
 
 Then check the overall trend:
 
-![Add Avg function to check the overall trend](/media/best-practices/add-avg-function-check-trend.jpg)
+![Add Avg function to check the overall trend](./media/best-practices/add-avg-function-check-trend.jpg)
 
 ### Tip 7: Use the API of Prometheus to obtain the result of query expressions
 
@@ -155,7 +155,7 @@ Grafana obtains data through the API of Prometheus and you can use this API to o
 
 The API of Prometheus is shown as follows:
 
-![The API of Prometheus](/media/best-practices/prometheus-api-interface.jpg)
+![The API of Prometheus](./media/best-practices/prometheus-api-interface.jpg)
 
 {{< copyable "shell-regular" >}}
 

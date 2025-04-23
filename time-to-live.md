@@ -278,7 +278,7 @@ Currently, the TTL feature has the following limitations:
 
     In the [Grafana `TiDB` dashboard](/grafana-tidb-dashboard.md), the panel `TTL Insert Rows Per Hour` records the total number of rows inserted in the previous hour. The corresponding `TTL Delete Rows Per Hour` records the total number of rows deleted by the TTL task in the previous hour. If `TTL Insert Rows Per Hour` is higher than `TTL Delete Rows Per Hour` for a long time, it means that the rate of insertion is higher than the rate of deletion and the total amount of data will increase. For example:
 
-    ![insert fast example](/media/ttl/insert-fast.png)
+    ![insert fast example](./media/ttl/insert-fast.png)
 
     It is worth noting that since TTL does not guarantee that the expired rows will be deleted immediately, and the rows currently inserted will be deleted in a future TTL task, even if the speed of TTL deletion is lower than the speed of insertion in a short period of time, it does not necessarily mean that the speed of TTL is too slow. You need to consider the situation in its context.
 
@@ -286,11 +286,11 @@ Currently, the TTL feature has the following limitations:
 
     Look at the `TTL Scan Worker Time By Phase` and `TTL Delete Worker Time By Phase` panels. If the scan worker is in the `dispatch` phase for a large percentage of time and the delete worker is rarely in the `idle` phase, then the scan worker is waiting for the delete worker to finish the deletion. If the cluster resources are still free at this point, you can consider increasing `tidb_ttl_ delete_worker_count` to increase the number of delete workers. For example:
 
-    ![scan fast example](/media/ttl/scan-fast.png)
+    ![scan fast example](./media/ttl/scan-fast.png)
 
     In contrast, if the scan worker is rarely in the `dispatch` phase and the delete worker is in the `idle` phase for a long time, then the scan worker is relatively busy. For example:
 
-    ![delete fast example](/media/ttl/delete-fast.png)
+    ![delete fast example](./media/ttl/delete-fast.png)
 
     The percentage of scan and delete in TTL jobs is related to the machine configuration and data distribution, so the monitoring data at each moment is only representative of the TTL Jobs being executed. You can read the table `mysql.tidb_ttl_job_history` to determine which TTL job is running at a certain moment and the corresponding table of the job.
 

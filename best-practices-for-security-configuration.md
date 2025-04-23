@@ -34,11 +34,11 @@ It is recommended to immediately change the Grafana password to a strong one dur
 
 - Upon first login to Grafana, follow the prompts to change the password.
 
-    ![Grafana Password Reset Guide](/media/grafana-password-reset1.png)
+    ![Grafana Password Reset Guide](./media/grafana-password-reset1.png)
 
 - Access the Grafana personal configuration center to change the password.
 
-    ![Grafana Password Reset Guide](/media/grafana-password-reset2.png)
+    ![Grafana Password Reset Guide](./media/grafana-password-reset2.png)
 
 ## Enhance TiDB Dashboard security
 

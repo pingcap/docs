@@ -44,7 +44,7 @@ As shown in the following diagram, because the upstream QPS is excessively high 
 - Add more TiCDC nodes: scale out the TiCDC cluster to multiple nodes to increase processing capacity.
 - Optimize TiCDC node resources: increase CPU and memory configurations of the TiCDC node to improve performance.
 
-![TiCDC overview](/media/performance/cdc/cdc-slow.png)
+![TiCDC overview](./media/performance/cdc/cdc-slow.png)
 
 ### Data flow throughput metrics and downstream latency
 
@@ -66,6 +66,6 @@ As shown in the following diagram, both upstream and downstream are TiDB cluster
 - During the first workload, because the downstream TiDB cluster writes data slowly, TiCDC consumes data at a speed that falls behind the upstream QPS, leading to a continuous increase in `Changefeed checkpoint lag`. However, `Changefeed resolved ts lag` remains within 300 milliseconds, indicating that replication lag and throughput bottlenecks are not caused by the puller and sorter modules but caused by the downstream sink module.
 - During the second workload, because the downstream TiDB cluster writes data faster, TiCDC replicates data at a speed that completely catches up with the upstream, the `Changefeed checkpoint lag` and `Changefeed resolved ts lag` remain within 500 milliseconds, which is a relatively ideal replication speed for TiCDC.
 
-![TiCDC overview](/media/performance/cdc/cdc-fast-1.png)
+![TiCDC overview](./media/performance/cdc/cdc-fast-1.png)
 
-![data flow and txn latency](/media/performance/cdc/cdc-fast-2.png)
+![data flow and txn latency](./media/performance/cdc/cdc-fast-2.png)

@@ -214,7 +214,7 @@ Once your application for the PoC is approved, you will receive credits in your 
 
 To check the credits left for your PoC, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your target project, as shown in the following screenshot.
 
-![TiDB Cloud PoC Credits](/media/tidb-cloud/poc-points.png)
+![TiDB Cloud PoC Credits](./media/tidb-cloud/poc-points.png)
 
 Alternatively, you can also click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console, click **Billing**, and click **Credits** to see the credit details page.
 

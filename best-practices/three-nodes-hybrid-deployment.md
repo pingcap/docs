@@ -19,11 +19,11 @@ In this example, the TPC-C 5000 Warehouse data is used in TiUP bench and the tes
 
 The image below shows the QPS monitor of the cluster within 12 hours with the default parameter configuration. From the image, you can see an obvious performance jitter.
 
-![QPS with default config](/media/best-practices/three-nodes-default-config-qps.png)
+![QPS with default config](./media/best-practices/three-nodes-default-config-qps.png)
 
 After the parameter adjustment, the performance is improved.
 
-![QPS with modified config](/media/best-practices/three-nodes-final-config-qps.png)
+![QPS with modified config](./media/best-practices/three-nodes-final-config-qps.png)
 
 ## Parameter adjustment
 
@@ -65,7 +65,7 @@ This parameter defaults to `4`. Because in the existing deployment plan, the CPU
 
 In this test, the value of this parameter is set to `2`. Observe the **gRPC poll CPU** panel and you can see that the usage rate is just around 80%.
 
-![gRPC Pool CPU](/media/best-practices/three-nodes-grpc-pool-usage.png)
+![gRPC Pool CPU](./media/best-practices/three-nodes-grpc-pool-usage.png)
 
 #### `storage.scheduler-worker-pool-size`
 
@@ -73,7 +73,7 @@ When TiKV detects that the CPU core number of the machine is greater than or equ
 
 Ideally, the usage rate of the scheduler thread pool is kept between 50% and 75%. Similar to the gRPC thread pool, the `storage.scheduler-worker-pool-size` parameter defaults to a larger value during the hybrid deployment, which makes resource usage insufficient. In this test, the value of this parameter is set to `2`, which is in line with the best practices, a conclusion drawn by observing the corresponding metrics in the **Scheduler worker CPU** panel.
 
-![Scheduler Worker CPU](/media/best-practices/three-nodes-scheduler-pool-usage.png)
+![Scheduler Worker CPU](./media/best-practices/three-nodes-scheduler-pool-usage.png)
 
 ### Resource configuration for TiKV background tasks
 
@@ -102,7 +102,7 @@ The method of optimizing the RocksDB thread pool is similar to that of optimizin
 
 Because TiDB uses the multi-version concurrency control (MVCC) model, TiKV periodically cleans old version data in the background. When the available resources are limited, this operation causes periodical performance jitter. You can use the `gc.max_write_bytes_per_sec` parameter to limit the resource usage of such an operation.
 
-![GC Impact](/media/best-practices/three-nodes-gc-impact.png)
+![GC Impact](./media/best-practices/three-nodes-gc-impact.png)
 
 In addition to setting this parameter value in the configuration file, you can also dynamically adjust this value in tikv-ctl.
 

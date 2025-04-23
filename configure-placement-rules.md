@@ -22,7 +22,7 @@ The key ranges of multiple rules can have overlapping parts, which means that a 
 
 In addition, to meet the requirement that rules from different sources are isolated from each other, these rules can be organized in a more flexible way. Therefore, the concept of "Group" is introduced. Generally, users can place rules in different groups according to different sources.
 
-![Placement rules overview](/media/placement-rules-1.png)
+![Placement rules overview](./media/placement-rules-1.png)
 
 ### Rule fields
 

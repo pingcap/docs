@@ -19,7 +19,7 @@ To improve TiFlash's processing capability in high concurrency scenarios, an MPP
 
 As mentioned in the [background](#background), the initial purpose of introducing the TiFlash task scheduler is to control the number of threads used during MPP query execution. A simple scheduling strategy is to specify the maximum number of threads TiFlash can request. For each MPP task, the scheduler decides whether the MPP task can be scheduled based on the current number of threads used by the system and the expected number of threads the MPP task will use:
 
-![TiFlash MinTSO Scheduler v1](/media/tiflash/tiflash_mintso_v1.png)
+![TiFlash MinTSO Scheduler v1](./media/tiflash/tiflash_mintso_v1.png)
 
 Although the preceding scheduling strategy can effectively control the number of system threads, an MPP task is not the smallest independent execution unit, and dependencies exist between different MPP tasks:
 
@@ -59,7 +59,7 @@ The goal of the MinTSO scheduler is to control the number of system threads whil
 
 The scheduling process of the MinTSO Scheduler is as follows:
 
-![TiFlash MinTSO Scheduler v2](/media/tiflash/tiflash_mintso_v2.png)
+![TiFlash MinTSO Scheduler v2](./media/tiflash/tiflash_mintso_v2.png)
 
 By introducing soft limit and hard limit, the MinTSO scheduler effectively avoids system deadlock while controlling the number of system threads. In high concurrency scenarios, however, most queries might only have part of their MPP tasks scheduled. Queries with only part of MPP tasks scheduled cannot execute normally, leading to low system execution efficiency. To avoid this situation, TiFlash introduces a query-level limit for the MinTSO scheduler, called active_set_soft_limit. This limit allows only MPP tasks of up to active_set_soft_limit queries to participate in scheduling; MPP tasks of other queries do not participate in scheduling, and only after the current queries finish can new queries participate in scheduling. This limit is only a soft limit because for the MinTSO query, all its MPP tasks can be scheduled directly as long as the number of system threads does not exceed the hard limit.
 

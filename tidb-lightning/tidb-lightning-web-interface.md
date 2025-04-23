@@ -28,7 +28,7 @@ In server mode, TiDB Lightning does not start running immediately. Rather, users
 
 ## Front page
 
-![Front page of the web interface](/media/lightning-web-frontpage.png)
+![Front page of the web interface](./media/lightning-web-frontpage.png)
 
 Functions of the title bar, from left to right:
 
@@ -53,7 +53,7 @@ Each panel contains cards describing the status of the table.
 
 Click the **+** button on the title bar to submit a task.
 
-![Submit task dialog](/media/lightning-web-submit.png)
+![Submit task dialog](./media/lightning-web-submit.png)
 
 Tasks are TOML files described as [task configurations](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). One could also open a local TOML file by clicking **UPLOAD**.
 
@@ -63,7 +63,7 @@ Click **SUBMIT** to run the task. If a task is already running, the new task wil
 
 Click the **>** button of a table card on the front page to view the detailed progress of a table.
 
-![Table progress](/media/lightning-web-table.png)
+![Table progress](./media/lightning-web-table.png)
 
 The page shows the import progress of every engine and data files associated with the table.
 
@@ -73,7 +73,7 @@ Click **TiDB Lightning** on the title bar to go back to the front page.
 
 Click the **ⓘ** button on the title bar to manage the current and queued tasks.
 
-![Task management page](/media/lightning-web-queue.png)
+![Task management page](./media/lightning-web-queue.png)
 
 Each task is labeled by the time it was submitted. Clicking the task would show the configuration formatted as JSON.
 

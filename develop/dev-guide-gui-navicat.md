@@ -64,7 +64,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 5. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Vendor Filter** list, and double-click **TiDB** in the right panel.
 
-    ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
+    ![Navicat: add new connection](./media/develop/navicat-premium-add-new-connection.png)
 
 6. In the **New Connection (TiDB)** dialog, configure the following connection parameters:
 
@@ -74,11 +74,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
     - **Password**: enter the password of the TiDB Cloud Serverless cluster.
 
-    ![Navicat: configure connection general panel for TiDB Cloud Serverless](/media/develop/navicat-premium-connection-config-serverless-general.png)
+    ![Navicat: configure connection general panel for TiDB Cloud Serverless](./media/develop/navicat-premium-connection-config-serverless-general.png)
 
 7. Click the **SSL** tab and select **Use SSL**, **Use authentication**, and **Verify server certificate against CA** checkboxes. Then, select the `CA` file from the TiDB Cloud connection dialog into the **CA Certificate** field.
 
-    ![Navicat: configure connection SSL panel for TiDB Cloud Serverless](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
+    ![Navicat: configure connection SSL panel for TiDB Cloud Serverless](./media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
 8. Click **Test Connection** to validate the connection to the TiDB Cloud Serverless cluster.
 
@@ -101,7 +101,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 5. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Vendor Filter** list, and double-click **TiDB** in the right panel.
 
-    ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
+    ![Navicat: add new connection](./media/develop/navicat-premium-add-new-connection.png)
 
 6. In the **New Connection (TiDB)** dialog, configure the following connection parameters:
 
@@ -111,11 +111,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **User Name**: enter the `USERNAME` parameter from the TiDB Cloud connection dialog.
     - **Password**: enter the password of the TiDB Cloud Dedicated cluster.
 
-    ![Navicat: configure connection general panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-general.png)
+    ![Navicat: configure connection general panel for TiDB Cloud Dedicated](./media/develop/navicat-premium-connection-config-dedicated-general.png)
 
 7. Click the **SSL** tab and select **Use SSL**, **Use authentication**, and **Verify server certificate against CA** checkboxes. Then, select the CA file downloaded in step 4 into the **CA Certificate** field.
 
-    ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](/media/develop/navicat-premium-connection-config-dedicated-ssl.png)
+    ![Navicat: configure connection SSL panel for TiDB Cloud Dedicated](./media/develop/navicat-premium-connection-config-dedicated-ssl.png)
 
 8. **Test Connection** to validate the connection to the TiDB Cloud Dedicated cluster.
 
@@ -126,7 +126,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 1. Launch Navicat Premium, click **Connection** in the upper-left corner, select **PingCAP** from the **Vendor Filter** list, and double-click **TiDB** in the right panel.
 
-    ![Navicat: add new connection](/media/develop/navicat-premium-add-new-connection.png)
+    ![Navicat: add new connection](./media/develop/navicat-premium-add-new-connection.png)
 
 2. In the **New Connection (TiDB)** dialog, configure the following connection parameters:
 
@@ -136,7 +136,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **User Name**: enter the username to use to connect to your TiDB.
     - **Password**: enter the password to use to connect to your TiDB.
 
-    ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-premium-connection-config-self-hosted-general.png)
+    ![Navicat: configure connection general panel for self-hosted TiDB](./media/develop/navicat-premium-connection-config-self-hosted-general.png)
 
 3. Click **Test Connection** to validate the connection to the TiDB Self-Managed cluster.
 

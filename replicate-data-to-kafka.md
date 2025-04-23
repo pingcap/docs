@@ -162,6 +162,6 @@ At this time, incremental data of the TiDB database is successfully replicated t
 
     After this command is executed, you can see that there is new data in the table, as shown in the following figure.
 
-    ![SQL query result](/media/integrate/sql-query-result.png)
+    ![SQL query result](./media/integrate/sql-query-result.png)
 
 Data integration with Kafka is done.

@@ -15,7 +15,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 
 The TiCDC dashboard contains four monitoring panels. See the following screenshot:
 
-![TiCDC Dashboard - Overview](/media/ticdc/ticdc-dashboard-overview.png)
+![TiCDC Dashboard - Overview](./media/ticdc/ticdc-dashboard-overview.png)
 
 The description of each panel is as follows:
 
@@ -28,7 +28,7 @@ The description of each panel is as follows:
 
 The following is an example of the **Server** panel:
 
-![TiCDC Dashboard - Server metrics](/media/ticdc/ticdc-dashboard-server.png)
+![TiCDC Dashboard - Server metrics](./media/ticdc/ticdc-dashboard-server.png)
 
 The description of each metric in the **Server** panel is as follows:
 
@@ -44,7 +44,7 @@ The description of each metric in the **Server** panel is as follows:
 
 The following is an example of the **Changefeed** panel:
 
-![TiCDC Dashboard - Changefeed metrics 1](/media/ticdc/ticdc-dashboard-changefeed-1.png)
+![TiCDC Dashboard - Changefeed metrics 1](./media/ticdc/ticdc-dashboard-changefeed-1.png)
 
 - Changefeed table count: The number of tables that each TiCDC node needs to replicate in the replication task
 - Processor resolved ts: The timestamps that have been resolved in the TiCDC cluster
@@ -55,20 +55,20 @@ The following is an example of the **Changefeed** panel:
 - Changefeed checkpoint lag: The progress lag of data replication (the unit is second) between the upstream and the downstream
 - Processor resolved ts lag: The progress lag of data replication (the unit is second) between the upstream and TiCDC nodes
 
-![TiCDC Dashboard - Changefeed metrics 2](/media/ticdc/ticdc-dashboard-changefeed-2.png)
+![TiCDC Dashboard - Changefeed metrics 2](./media/ticdc/ticdc-dashboard-changefeed-2.png)
 
 - Sink write duration: The histogram of the time spent by TiCDC writing a transaction change to the downstream
 - Sink write duration percentile: The time (P95, P99, and P999) spent by TiCDC writing a transaction change to the downstream within one second
 - Flush sink duration: The histogram of the time spent by TiCDC asynchronously flushing data to the downstream
 - Flush sink duration percentile: The time (P95, P99, and P999) spent by TiCDC asynchronously flushing data to the downstream within one second
 
-![TiCDC Dashboard - Changefeed metrics 3](/media/ticdc/ticdc-dashboard-changefeed-3.png)
+![TiCDC Dashboard - Changefeed metrics 3](./media/ticdc/ticdc-dashboard-changefeed-3.png)
 
 - MySQL sink conflict detect duration: The histogram of the time spent on detecting MySQL sink conflicts
 - MySQL sink conflict detect duration percentile: The time (P95, P99, and P999) spent on detecting MySQL sink conflicts within one second
 - MySQL sink worker load: The workload of MySQL sink workers of TiCDC nodes
 
-![TiCDC Dashboard - Changefeed metrics 4](/media/ticdc/ticdc-dashboard-changefeed-4.png)
+![TiCDC Dashboard - Changefeed metrics 4](./media/ticdc/ticdc-dashboard-changefeed-4.png)
 
 - Changefeed catch-up ETA: The estimated time needed for the replication task to catch up with the upstream cluster data. When the upstream write speed is faster than the TiCDC replication speed, the metric might be extremely large. Because TiCDC replication speed is subject to many factors, this metric is for reference only and might not be the actual replication time.
 
@@ -76,9 +76,9 @@ The following is an example of the **Changefeed** panel:
 
 The following is an example of the **Events** panel:
 
-![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-1.png)
-![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-2.png)
-![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-3.png)
+![TiCDC Dashboard - Events metrics 2](./media/ticdc/ticdc-dashboard-events-1.png)
+![TiCDC Dashboard - Events metrics 2](./media/ticdc/ticdc-dashboard-events-2.png)
+![TiCDC Dashboard - Events metrics 2](./media/ticdc/ticdc-dashboard-events-3.png)
 
 The description of each metric in the **Events** panel is as follows:
 
@@ -106,8 +106,8 @@ The description of each metric in the **Events** panel is as follows:
 
 The following is an example of the **TiKV** panel:
 
-![TiCDC Dashboard - TiKV metrics 1](/media/ticdc/ticdc-dashboard-tikv-1.png)
-![TiCDC Dashboard - TiKV metrics 2](/media/ticdc/ticdc-dashboard-tikv-2.png)
+![TiCDC Dashboard - TiKV metrics 1](./media/ticdc/ticdc-dashboard-tikv-1.png)
+![TiCDC Dashboard - TiKV metrics 2](./media/ticdc/ticdc-dashboard-tikv-2.png)
 
 The description of each metric in the **TiKV** panel is as follows:
 

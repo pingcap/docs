@@ -37,7 +37,7 @@ Before you start the migration, make sure you have read the following:
 
 2. Click **Create replication instance**.
 
-    ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-instance.png)
+    ![Create replication instance](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-instance.png)
 
 3. Fill in an instance name, ARN, and description.
 
@@ -60,19 +60,19 @@ Before you start the migration, make sure you have read the following:
 
 1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screenshot.
 
-    ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
+    ![Copy the public and private network IP addresses](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
 2. Configure the security group rules for Amazon RDS. In this example, add the public and private IP addresses of the AWS DMS instance to the security group.
 
-    ![Configure the security group rules](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-rules.png)
+    ![Configure the security group rules](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-rules.png)
 
 3. Click **Create endpoint** to create the source database endpoint.
 
-    ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint.png)
+    ![Click Create endpoint](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint.png)
 
 4. In this example, click **Select RDS DB instance** and then select the source RDS instance. If the source database is a self-hosted MySQL, you can skip this step and fill in the information in the following steps.
 
-    ![Select RDS DB instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-select-rds.png)
+    ![Select RDS DB instance](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-select-rds.png)
 
 5. Configure the following information:
    - **Endpoint identifier**: create a label for the source endpoint to help you identify it in the subsequent task configuration.
@@ -83,19 +83,19 @@ Before you start the migration, make sure you have read the following:
    - Fill in the source database **Port**, **Username**, and **Password**.
    - **Secure Socket Layer (SSL) mode**: you can enable SSL mode as needed.
 
-    ![Fill in the endpoint configurations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint-config.png)
+    ![Fill in the endpoint configurations](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint-config.png)
 
 6. Use default values for **Endpoint settings**, **KMS key**, and **Tags**. In the **Test endpoint connection (optional)** section, it is recommended to select the same VPC as the source database to simplify the network configuration. Select the corresponding replication instance, and then click **Run test**. The status needs to be **successful**.
 
 7. Click **Create endpoint**.
 
-    ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-connection.png)
+    ![Click Create endpoint](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-connection.png)
 
 ## Step 3. Create the target database endpoint
 
 1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screenshot.
 
-    ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
+    ![Copy the public and private network IP addresses](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
 2. In the TiDB Cloud console, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster, and then click **Connect** in the upper-right corner to get the TiDB Cloud database connection information.
 
@@ -113,7 +113,7 @@ Before you start the migration, make sure you have read the following:
     - **Descriptive Amazon Resource Name (ARN) - optional**: create a friendly name for the default DMS ARN.
     - **Target engine**: select **MySQL**.
 
-    ![Configure the target endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint.png)
+    ![Configure the target endpoint](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint.png)
 
 8. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click **Create endpoint** to create the target database endpoint, and then configure the following information:
     - **Server name**: fill in the hostname of your TiDB cluster, which is the `-h` information you have recorded.
@@ -123,23 +123,23 @@ Before you start the migration, make sure you have read the following:
     - **Secure Socket Layer (SSL) mode**: select **Verify-ca**.
     - Click **Add new CA certificate** to import the CA file downloaded from the TiDB Cloud console in the previous steps.
 
-    ![Fill in the target endpoint information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint2.png)
+    ![Fill in the target endpoint information](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint2.png)
 
 9. Import the CA file.
 
-    ![Upload CA](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-upload-ca.png)
+    ![Upload CA](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-upload-ca.png)
 
 10. Use the default values for **Endpoint settings**, **KMS key**, and **Tags**. In the **Test endpoint connection (optional)** section, select the same VPC as the source database. Select the corresponding replication instance, and then click **Run test**. The status needs to be **successful**.
 
 11. Click **Create endpoint**.
 
-    ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint3.png)
+    ![Click Create endpoint](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint3.png)
 
 ## Step 4. Create a database migration task
 
 1. In the AWS DMS console, go to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. Then click **Create task** in the upper-right corner of the window.
 
-    ![Create task](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
+    ![Create task](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
 2. Configure the following information:
     - **Task identifier**: fill in a name for the task. It is recommended to use a name that is easy to remember.
@@ -149,7 +149,7 @@ Before you start the migration, make sure you have read the following:
     - **Target database endpoint**: select the target database endpoint that you just created.
     - **Migration type**: select a migration type as needed. In this example, select **Migrate existing data and replicate ongoing changes**.
 
-    ![Task configurations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-config.png)
+    ![Task configurations](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-config.png)
 
 3. Configure the following information:
     - **Editing mode**: select **Wizard**.
@@ -161,23 +161,23 @@ Before you start the migration, make sure you have read the following:
     - **Turn on validation**: select it according to your needs.
     - **Task logs**: select **Turn on CloudWatch logs** for troubleshooting in future. Use the default settings for the related configurations.
 
-    ![Task settings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-settings.png)
+    ![Task settings](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-settings.png)
 
 4. In the **Table mappings** section, specify the database to be migrated.
 
     The schema name is the database name in the Amazon RDS instance. The default value of the **Source name** is "%", which means that all databases in the Amazon RDS will be migrated to TiDB. It will cause the system databases such as `mysql` and `sys` in Amazon RDS to be migrated to the TiDB cluster, and result in task failure. Therefore, it is recommended to fill in the specific database name, or filter out all system databases. For example, according to the settings in the following screenshot, only the database named `franktest` and all the tables in that database will be migrated.
 
-    ![Table mappings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
+    ![Table mappings](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
 
 5. Click **Create task** in the lower-right corner.
 
 6. Go back to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. You can see the status and progress of the task.
 
-    ![Tasks status](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-status.png)
+    ![Tasks status](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-status.png)
 
 If you encounter any issues or failures during the migration, you can check the log information in [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
 
-![Troubleshooting](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
+![Troubleshooting](./media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
 
 ## See also
 

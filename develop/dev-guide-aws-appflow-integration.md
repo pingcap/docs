@@ -77,17 +77,17 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 4. Go to the [AWS Lambda console](https://console.aws.amazon.com/lambda/home), and you can see the Lambda that you just uploaded. Note that you need to select the correct region in the upper-right corner of the window.
 
-    ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
+    ![lambda dashboard](./media/develop/aws-appflow-step-lambda-dashboard.png)
 
 ### Use Lambda to register a connector
 
 1. In the [AWS Management Console](https://console.aws.amazon.com), navigate to [Amazon AppFlow > Connectors](https://console.aws.amazon.com/appflow/home#/gallery) and click **Register new connector**.
 
-    ![register connector](/media/develop/aws-appflow-step-register-connector.png)
+    ![register connector](./media/develop/aws-appflow-step-register-connector.png)
 
 2. In the **Register a new connector** dialog, choose the Lambda function you uploaded and specify the connector label using the connector name.
 
-    ![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
+    ![register connector dialog](./media/develop/aws-appflow-step-register-connector-dialog.png)
 
 3. Click **Register**. Then, a TiDB connector is registered successfully.
 
@@ -95,13 +95,13 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 Navigate to [Amazon AppFlow > Flows](https://console.aws.amazon.com/appflow/home#/list) and click **Create flow**.
 
-![create flow](/media/develop/aws-appflow-step-create-flow.png)
+![create flow](./media/develop/aws-appflow-step-create-flow.png)
 
 ### Set the flow name
 
 Enter the flow name, and then click **Next**.
 
-![name flow](/media/develop/aws-appflow-step-name-flow.png)
+![name flow](./media/develop/aws-appflow-step-name-flow.png)
 
 ### Set the source and destination tables
 
@@ -109,21 +109,21 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
 
 1. Choose the source name. This document uses **Salesforce** as an example source.
 
-    ![salesforce source](/media/develop/aws-appflow-step-salesforce-source.png)
+    ![salesforce source](./media/develop/aws-appflow-step-salesforce-source.png)
 
     After you register to Salesforce, Salesforce will add some example data to your platform. The following steps will use the **Account** object as an example source object.
 
-    ![salesforce data](/media/develop/aws-appflow-step-salesforce-data.png)
+    ![salesforce data](./media/develop/aws-appflow-step-salesforce-data.png)
 
 2. Click **Connect**.
 
     1. In the **Connect to Salesforce** dialog, specify the name of this connection, and then click **Continue**.
 
-        ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
+        ![connect to salesforce](./media/develop/aws-appflow-step-connect-to-salesforce.png)
 
     2. Click **Allow** to confirm that AWS can read your Salesforce data.
 
-        ![allow salesforce](/media/develop/aws-appflow-step-allow-salesforce.png)
+        ![allow salesforce](./media/develop/aws-appflow-step-allow-salesforce.png)
 
     > **Note:**
     >
@@ -131,7 +131,7 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
 
 3. In the **Destination details** area, choose **TiDB-Connector** as the destination. The **Connect** button is displayed.
 
-    ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
+    ![tidb dest](./media/develop/aws-appflow-step-tidb-dest.png)
 
 4. Before clicking **Connect**, you need to create a `sf_account` table in TiDB for the Salesforce **Account** object. Note that this table schema is different from the sample data in [Tutorial of Amazon AppFlow](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html).
 
@@ -150,19 +150,19 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
 5. After the `sf_account` table is created, click **Connect**. A connection dialog is displayed.
 6. In the **Connect to TiDB-Connector** dialog, enter the connection properties of the TiDB cluster. If you use a TiDB Cloud Serverless cluster, you need to set the **TLS** option to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
 
-    ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
+    ![tidb connection message](./media/develop/aws-appflow-step-tidb-connection-message.png)
 
 7. Now you can get all tables in the database that you specified for connection. Choose the **sf_account** table from the drop-down list.
 
-    ![database](/media/develop/aws-appflow-step-database.png)
+    ![database](./media/develop/aws-appflow-step-database.png)
 
     The following screenshot shows the configurations to transfer data from the Salesforce **Account** object to the `sf_account` table in TiDB:
 
-    ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
+    ![complete flow](./media/develop/aws-appflow-step-complete-flow.png)
 
 8. In the **Error handling** area, choose **Stop the current flow run**. In the **Flow trigger** area, choose the **Run on demand** trigger type, which means you need to run the flow manually. Then, click **Next**.
 
-    ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
+    ![complete step1](./media/develop/aws-appflow-step-complete-step1.png)
 
 ### Set mapping rules
 
@@ -180,7 +180,7 @@ Map the fields of the **Account** object in Salesforce to the `sf_account` table
 
 - To set a mapping rule, you can select a source field name on the left, and select a destination field name on the right. Then, click **Map fields**, and a rule is set.
 
-    ![add mapping rule](/media/develop/aws-appflow-step-add-mapping-rule.png)
+    ![add mapping rule](./media/develop/aws-appflow-step-add-mapping-rule.png)
 
 - The following mapping rules (Source field name -> Destination field name) are needed in this document:
 
@@ -191,31 +191,31 @@ Map the fields of the **Account** object in Salesforce to the `sf_account` table
     - Account Rating -> rating
     - Industry -> industry
 
-    ![mapping a rule](/media/develop/aws-appflow-step-mapping-a-rule.png)
+    ![mapping a rule](./media/develop/aws-appflow-step-mapping-a-rule.png)
 
-    ![show all mapping rules](/media/develop/aws-appflow-step-show-all-mapping-rules.png)
+    ![show all mapping rules](./media/develop/aws-appflow-step-show-all-mapping-rules.png)
 
 ### (Optional) Set filters
 
 If you want to add some filters to your data fields, you can set them here. Otherwise, skip this step and click **Next**.
 
-![filters](/media/develop/aws-appflow-step-filters.png)
+![filters](./media/develop/aws-appflow-step-filters.png)
 
 ### Confirm and create the flow
 
 Confirm the information of the flow to be created. If everything looks fine, click **Create flow**.
 
-![review](/media/develop/aws-appflow-step-review.png)
+![review](./media/develop/aws-appflow-step-review.png)
 
 ## Step 3. Run the flow
 
 On the page of the newly created flow, click **Run flow** in the upper-right corner.
 
-![run flow](/media/develop/aws-appflow-step-run-flow.png)
+![run flow](./media/develop/aws-appflow-step-run-flow.png)
 
 The following screenshot shows an example that the flow runs successfully:
 
-![run success](/media/develop/aws-appflow-step-run-success.png)
+![run success](./media/develop/aws-appflow-step-run-success.png)
 
 Query the `sf_account` table, and you can see that the records from the Salesforce **Account** object have been written to it:
 

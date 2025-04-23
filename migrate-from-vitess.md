@@ -28,14 +28,14 @@ The following two examples show how Dumpling and TiDB Lightning work together to
 
 - In this example, TiDB Lightning uses the [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md), which first encodes data into SQL statements and then runs the SQL statements to import data.
 
-    ![Vitess to TiDB Migration with TiDB backend](/media/vitess_to_tidb.png)
+    ![Vitess to TiDB Migration with TiDB backend](./media/vitess_to_tidb.png)
 
 - In this example, TiDB Lightning uses the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) to directly ingest data into TiKV.
 
-    ![Vitess to TiDB Migration with local backend](/media/vitess_to_tidb_dumpling_local.png)
+    ![Vitess to TiDB Migration with local backend](./media/vitess_to_tidb_dumpling_local.png)
 
 ### DM
 
 The following example shows how [DM](/dm/dm-overview.md) migrates data from Vitess to TiDB.
 
-![Vitess to TiDB with DM](/media/vitess_to_tidb_dm.png)
+![Vitess to TiDB with DM](./media/vitess_to_tidb_dm.png)
