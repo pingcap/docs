@@ -2,7 +2,7 @@
 title: TiDB Introduction
 hide_sidebar: true
 hide_commit: true
-summary: TiDB は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープン ソースの分散 SQL データベースです。このガイドでは、機能、 TiFlash、開発、展開、移行、保守、監視、チューニング、ツール、リファレンスに関する情報を提供します。クイック スタートから TiDB の高度な構成やツールまで、すべてを網羅しています。
+summary: TiDBは、ハイブリッドトランザクションおよび分析処理（HTAP）ワークロードをサポートするオープンソースの分散SQLデータベースです。このガイドでは、機能、 TiFlash、開発、導入、移行、保守、監視、チューニング、ツール、リファレンスに関する情報を提供します。クイックスタートから高度な設定やツールまで、TiDBのあらゆる情報を網羅しています。
 ---
 
 <LearningPathContainer platform="tidb" title="TiDBセルフマネージド" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
@@ -47,9 +47,9 @@ summary: TiDB は、ハイブリッド トランザクションおよび分析�
 
 <LearningPath label="Deploy" icon="deploy">
 
-[ソフトウェアおよびハードウェアの要件](https://docs.pingcap.com/tidb/v8.1/hardware-and-software-requirements)
+[ソフトウェアおよびハードウェア要件](https://docs.pingcap.com/tidb/v8.1/hardware-and-software-requirements)
 
-[TiUP を使用して TiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/v8.1/production-deployment-using-tiup)
+[TiUPを使用して TiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/v8.1/production-deployment-using-tiup)
 
 [Kubernetes に TiDBクラスタをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
@@ -75,13 +75,13 @@ summary: TiDB は、ハイブリッド トランザクションおよび分析�
 
 [毎日のチェック](https://docs.pingcap.com/tidb/v8.1/daily-check)
 
-[TiUP を使用して TiDB を管理](https://docs.pingcap.com/tidb/v8.1/maintain-tidb-using-tiup)
+[TiUPを使用して TiDBを管理](https://docs.pingcap.com/tidb/v8.1/maintain-tidb-using-tiup)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[PrometheusとGrafanaを使用する](https://docs.pingcap.com/tidb/v8.1/tidb-monitoring-framework)
+[Prometheus、Grafana、TiDBダッシュボードを使用する](https://docs.pingcap.com/tidb/v8.1/tidb-monitoring-framework)
 
 [監視API](https://docs.pingcap.com/tidb/v8.1/tidb-monitoring-api)
 
@@ -95,7 +95,7 @@ summary: TiDB は、ハイブリッド トランザクションおよび分析�
 
 [チューニング方法](https://docs.pingcap.com/tidb/v8.1/performance-tuning-methods)
 
-[OLTPパフォーマンスの調整](https://docs.pingcap.com/tidb/v8.1/performance-tuning-practices)
+[OLTPパフォーマンスのチューニング](https://docs.pingcap.com/tidb/v8.1/performance-tuning-practices)
 
 [オペレーティングシステムの調整](https://docs.pingcap.com/tidb/v8.1/tune-operating-system)
 
@@ -117,7 +117,7 @@ summary: TiDB は、ハイブリッド トランザクションおよび分析�
 
 [Dumpling](https://docs.pingcap.com/tidb/v8.1/dumpling-overview)
 
-[ティCDC](https://docs.pingcap.com/tidb/v8.1/ticdc-overview)
+[TiCDC](https://docs.pingcap.com/tidb/v8.1/ticdc-overview)
 
 [バックアップと復元 (BR)](https://docs.pingcap.com/tidb/v8.1/backup-and-restore-overview)
 
@@ -133,7 +133,7 @@ summary: TiDB は、ハイブリッド トランザクションおよび分析�
 
 [TiDB コマンドラインフラグ](https://docs.pingcap.com/tidb/v8.1/command-line-flags-for-tidb-configuration)
 
-[TiDB コントロール](https://docs.pingcap.com/tidb/v8.1/tidb-control)
+[TiDBコントロール](https://docs.pingcap.com/tidb/v8.1/tidb-control)
 
 [システム変数](https://docs.pingcap.com/tidb/v8.1/system-variables)
 

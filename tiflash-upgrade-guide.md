@@ -1,35 +1,35 @@
 ---
 title: TiFlash Upgrade Guide
-summary: TiFlash をアップグレードする際の注意事項を説明します。
+summary: TiFlashをアップグレードする際の注意事項を説明します。
 ---
 
-# TiFlashアップグレード ガイド {#tiflash-upgrade-guide}
+# TiFlashアップグレードガイド {#tiflash-upgrade-guide}
 
 このドキュメントでは、 TiFlash をアップグレードするときに知っておく必要のある機能の変更と推奨されるアクションについて説明します。
 
 標準的なアップグレード プロセスについては、次のドキュメントを参照してください。
 
--   [TiUP を使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)
+-   [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)
 -   [Kubernetes 上の TiDB をアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
 
 > **注記：**
 >
-> -   [高速スキャン](/tiflash/use-fastscan.md) 、v6.2.0 で実験的機能として導入され、v7.0.0 で一般提供 (GA) されます。強力なデータ一貫性を犠牲にして、より効率的なクエリ パフォーマンスを提供します。
+> -   [ファストスキャン](/tiflash/use-fastscan.md)はv6.2.0で実験的機能として導入され、v7.0.0で一般提供（GA）されます。強力なデータ整合性を犠牲にして、より効率的なクエリパフォーマンスを実現します。
 >
-> -   TiFlashを含む TiDB をメジャー バージョン間でアップグレードすることはお勧めしません (たとえば、v4.x から v6.x へ)。代わりに、最初に v4.x から v5.x にアップグレードし、次に v6.x にアップグレードする必要があります。
+> -   TiFlashを含む TiDB をメジャーバージョン間でアップグレードすることは推奨されません（例：v4.x から v6.x）。代わりに、まず v4.x から v5.x にアップグレードし、その後 v6.x にアップグレードする必要があります。
 >
-> -   v4.x はライフサイクルの終了が近づいています。できるだけ早く v5.x 以降にアップグレードすることをお勧めします。詳細については、 [TiDB リリース サポート ポリシー](https://www.pingcap.com/tidb-release-support-policy/)参照してください。
+> -   v4.x のライフサイクルは終了に近づいています。できるだけ早く v5.x 以降にアップグレードすることをお勧めします。詳細については、 [TiDB リリース サポート ポリシー](https://www.pingcap.com/tidb-release-support-policy/)ご覧ください。
 >
-> -   PingCAP は、v6.0 などの非 LTS バージョンに対するバグ修正を提供しません。可能な場合は、v6.1 以降の LTS バージョンにアップグレードすることをお勧めします。
+> -   PingCAPは、v6.0などのLTS以外のバージョンに対するバグ修正を提供していません。可能な限り、v6.1以降のLTSバージョンにアップグレードすることをお勧めします。
 
 ## TiUPを使用してTiFlashをアップグレードする {#upgrade-tiflash-using-tiup}
 
-TiFlash をv5.3.0 より前のバージョンから v5.3.0 以降にアップグレードするには、 TiFlash を停止してからアップグレードする必要があります。TiUPを使用してTiFlash をアップグレードする場合は、次の点に注意してください。
+TiFlashをv5.3.0より前のバージョンからv5.3.0以降にアップグレードするには、 TiFlashを停止してからアップグレードする必要があります。TiUPを使用してTiFlashをアップグレードする際は、以下の点にご注意ください。
 
--   TiUPクラスターのバージョンが v1.12.0 以降の場合、 TiFlash を停止してからアップグレードすることはできません。ターゲット バージョンでTiUPクラスターのバージョンが v1.12.0 以降が必要な場合は、まず`tiup cluster:v1.11.3 <subcommand>`使用してTiFlashを中間バージョンにアップグレードし、TiDB クラスターのオンライン アップグレードを実行してから、 TiUPバージョンをアップグレードし、その後 TiDB クラスターを停止せずにターゲット バージョンに直接アップグレードすることをお勧めします。
--   TiUPクラスターのバージョンが v1.12.0 より前の場合は、次の手順を実行してTiFlash をアップグレードします。
+-   TiUPクラスタのバージョンがv1.12.0以降の場合、 TiFlashを停止してからアップグレードすることはできません。アップグレード先のバージョンでTiUPクラスタのバージョンがv1.12.0以降が必要な場合は、まず`tiup cluster:v1.11.3 <subcommand>`使用してTiFlashを中間バージョンにアップグレードし、TiDBクラスタのオンラインアップグレードを実行した後、 TiUPバージョンをアップグレードし、その後TiDBクラスタを停止せずに直接アップグレード先のバージョンにアップグレードすることをお勧めします。
+-   TiUPクラスターのバージョンが v1.12.0 より前の場合は、次の手順を実行してTiFlashをアップグレードします。
 
-次の手順に従うと、 TiUP を使用して他のコンポーネントを中断せずにTiFlash をアップグレードできます。
+次の手順に従うと、 TiUPを使用して他のコンポーネントを中断せずにTiFlashをアップグレードできます。
 
 1.  TiFlashインスタンスを停止します。
 
@@ -37,7 +37,7 @@ TiFlash をv5.3.0 より前のバージョンから v5.3.0 以降にアップグ
     tiup cluster stop <cluster-name> -R tiflash
     ```
 
-2.  TiDB クラスターを再起動せずにアップグレードします (ファイルのみを更新します)。
+2.  TiDB クラスターを再起動せずにアップグレードします (ファイルの更新のみ)。
 
     ```shell
     tiup cluster upgrade <cluster-name> <version> --offline 
@@ -49,7 +49,7 @@ TiFlash をv5.3.0 より前のバージョンから v5.3.0 以降にアップグ
     tiup cluster upgrade <cluster-name> v5.3.0 --offline
     ```
 
-3.  TiDB クラスターを再ロードします。再ロード後、 TiFlashインスタンスが起動されるため、手動で起動する必要はありません。
+3.  TiDB クラスターをリロードします。リロード後、 TiFlashインスタンスが起動するので、手動で起動する必要はありません。
 
     ```shell
     tiup cluster reload <cluster-name>
@@ -61,13 +61,13 @@ TiFlash をv5.x または v6.0 から v6.1 にアップグレードする場合�
 
 ### TiFlashプロキシ {#tiflash-proxy}
 
-TiFlash Proxy は v6.1.0 にアップグレードされました (TiKV v6.0.0 と連動)。新しいバージョンでは、RocksDB バージョンがアップグレードされました。TiFlashをv6.1 にアップグレードすると、データ形式は自動的に新しいバージョンに変換されます。
+TiFlash Proxyはv6.1.0（TiKV v6.0.0と連動）にアップグレードされました。この新バージョンではRocksDBのバージョンもアップグレードされています。TiFlashをv6.1にアップグレードすると、データ形式は自動的に新しいバージョンに変換されます。
 
-通常のアップグレードでは、データ変換にリスクはありません。ただし、特別なシナリオ (テストや検証のシナリオなど) でTiFlash をv6.1 から以前のバージョンにダウングレードする必要がある場合、以前のバージョンでは新しい RocksDB 構成を解析できない可能性があります。その結果、 TiFlash は再起動に失敗します。アップグレード プロセスを完全にテストおよび検証し、緊急時の計画を準備することをお勧めします。
+通常のアップグレードでは、データ変換にリスクは伴いません。ただし、特別なシナリオ（テストや検証など）でTiFlashをv6.1から以前のバージョンにダウングレードする必要がある場合、以前のバージョンでは新しいRocksDB構成の解析に失敗する可能性があります。その結果、 TiFlashの再起動に失敗する可能性があります。アップグレードプロセスを十分にテストおよび検証し、緊急時の対応策を準備することをお勧めします。
 
-**テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
+**テストやその他の特別なシナリオでTiFlashをダウングレードするための回避策**
 
-ターゲットTiFlashノードを強制的にスケールインし、TiKV からデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。
+対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。
 
 ### 動的剪定 {#dynamic-pruning}
 
@@ -75,20 +75,20 @@ TiFlash Proxy は v6.1.0 にアップグレードされました (TiKV v6.0.0 �
 
 -   新しくインストールされた TiDB v6.1.0: 動的プルーニングはデフォルトで有効になっています。
 
--   TiDB v6.0 以前: 動的プルーニングはデフォルトで無効になっています。アップグレード後の動的プルーニングの設定は、以前のバージョンの設定を継承します。つまり、アップグレード後に動的プルーニングが自動的に有効化 (または無効化) されることはありません。
+-   TiDB v6.0以前：動的プルーニングはデフォルトで無効になっています。アップグレード後の動的プルーニングの設定は、以前のバージョンの設定を継承します。つまり、アップグレード後も動的プルーニングは自動的に有効化（または無効化）されません。
 
-    アップグレード後、動的プルーニングを有効にするには、 `tidb_partition_prune_mode` `dynamic`に設定し、パーティション化されたテーブルの GlobalStats を手動で更新します。詳細については、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)参照してください。
+    アップグレード後、動的プルーニングを有効にするには、 `tidb_partition_prune_mode`を`dynamic`に設定し、パーティションテーブルのGlobalStatsを手動で更新してください。詳細は[動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)参照してください。
 
 ## v5.x または v6.0 から v6.2 へ {#from-v5-x-or-v6-0-to-v6-2}
 
-TiDB v6.2 では、 TiFlash はデータstorage形式を V3 バージョンにアップグレードします。そのため、 TiFlash をv5.x または v6.0 から v6.2 にアップグレードする場合は、 [TiFlashプロキシ](#tiflash-proxy)と[動的剪定](#dynamic-pruning)の機能変更に加えて、PageStorage の機能変更にも注意する必要があります。
+TiDB v6.2では、 TiFlashのデータstorage形式がV3バージョンにアップグレードされます。そのため、 TiFlashをv5.xまたはv6.0からv6.2にアップグレードする場合は、 [TiFlashプロキシ](#tiflash-proxy)と[動的剪定](#dynamic-pruning)の機能変更に加えて、PageStorageの機能変更にも注意する必要があります。
 
 ### ページストレージ {#pagestorage}
 
-デフォルトでは、 TiFlash v6.2.0 は PageStorage V3 バージョン[`format_version = 4`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を使用します。この新しいデータ形式により、ピーク書き込み I/O トラフィックが大幅に削減されます。更新トラフィックが多く、同時実行性やクエリ量が多いシナリオでは、 TiFlashデータ GC による過剰な CPU 使用率を効果的に軽減します。一方、以前のstorage形式と比較して、V3 バージョンではスペース増幅とリソース消費が大幅に削減されます。
+TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version = 4`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)使用します。この新しいデータフォーマットは、ピーク時の書き込みI/Oトラフィックを大幅に削減します。更新トラフィックが多く、同時実行性やクエリ負荷が高いシナリオでは、 TiFlashデータGCによる過剰なCPU使用率を効果的に軽減します。また、以前のstorageフォーマットと比較して、V3バージョンはスペース増幅とリソース消費を大幅に削減します。
 
--   v6.2.0 にアップグレードすると、新しいデータが既存のTiFlashノードに書き込まれるにつれて、以前のデータは徐々に新しい形式に変換されます。
--   ただし、変換によって一定量のシステム オーバーヘッドが発生するため、アップグレード中に以前のデータを完全に新しい形式に変換することはできません (サービスには影響しませんが、注意が必要です)。アップグレード後、 [`Compact`コマンド](/sql-statements/sql-statement-alter-table-compact.md)を実行してデータを新しい形式に変換することをお勧めします。手順は次のとおりです。
+-   v6.2.0 にアップグレードすると、新しいデータが既存のTiFlashノードに書き込まれると同時に、以前のデータは徐々に新しい形式に変換されます。
+-   ただし、アップグレード中に以前のデータを完全に新しい形式に変換することはできません。これは、変換によってある程度のシステムオーバーヘッドが発生するためです（サービスには影響はありませんが、注意が必要です）。アップグレード後、 [`Compact`コマンド](/sql-statements/sql-statement-alter-table-compact.md)実行してデータを新しい形式に変換することをお勧めします。手順は次のとおりです。
 
     1.  TiFlashレプリカを含む各テーブルに対して次のコマンドを実行します。
 
@@ -98,30 +98,30 @@ TiDB v6.2 では、 TiFlash はデータstorage形式を V3 バージョンに�
 
     2.  TiFlashノードを再起動します。
 
-テーブルがまだ古いデータ形式を使用しているかどうかは、Grafana で確認できます: **TiFlash-Summary** &gt; **Storage Pool** &gt; **Storage Pool Run Mode** 。
+テーブルがまだ古いデータ形式を使用しているかどうかを Grafana で確認できます: **TiFlash-Summary** &gt; **Storage Pool** &gt; **Storage Pool Run Mode** 。
 
 -   V2のみ: PageStorage V2を使用しているテーブルの数（パーティションを含む）
 -   V3のみ: PageStorage V3を使用しているテーブルの数（パーティションを含む）
--   ミックスモード: PageStorage V2 から PageStorage V3 に変換されたデータ形式を持つテーブルの数 (パーティションを含む)
+-   混合モード: PageStorage V2 から PageStorage V3 に変換されたデータ形式を持つテーブルの数 (パーティションを含む)
 
-**テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
+**テストやその他の特別なシナリオでTiFlashをダウングレードするための回避策**
 
-ターゲットTiFlashノードを強制的にスケールインし、TiKV からデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。
+対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。
 
-## v6.1 から v6.2 へ {#from-v6-1-to-v6-2}
+## v6.1からv6.2へ {#from-v6-1-to-v6-2}
 
-TiFlashをv6.1からv6.2にアップグレードする場合は、データstorage形式の変更に注意してください。詳細については[ページストレージ](#pagestorage)参照してください。
+TiFlashをv6.1からv6.2にアップグレードする際は、データstorage形式の変更にご注意ください。詳細は[ページストレージ](#pagestorage)ご覧ください。
 
 ## v6.x または v7.x から<code>storage.format_version = 5</code>が設定された v7.3 へ {#from-v6-x-or-v7-x-to-v7-3-with-code-storage-format-version-5-code-configured}
 
-v7.3 以降、 TiFlash は新しい DTFile バージョン DTFile V3 (実験的) を導入します。この新しい DTFile バージョンでは、複数の小さなファイルを 1 つの大きなファイルに結合して、ファイルの合計数を減らすことができます。v7.3 では、デフォルトの DTFile バージョンは引き続き V2 です。V3 を使用するには、 [TiFlash構成パラメータ](/tiflash/tiflash-configuration.md) `storage.format_version = 5`設定できます。設定後、 TiFlash は引き続き V2 DTFile を読み取ることができ、その後のデータ圧縮中に既存の V2 DTFile を徐々に V3 DTFile に書き換えます。
+TiFlash v7.3 以降、新しい DTFile バージョン DTFile V3 (実験的) が導入されました。この新しい DTFile バージョンでは、複数の小さなファイルを 1 つの大きなファイルに結合することで、ファイル総数を削減できます。v7.3 では、デフォルトの DTFile バージョンは引き続き V2 です。V3 を使用するには、 [TiFlash構成パラメータ](/tiflash/tiflash-configuration.md) `storage.format_version = 5`を設定します。設定後もTiFlash はV2 DTFile を読み取り可能で、その後のデータ圧縮時に既存の V2 DTFile を徐々に V3 DTFile に書き換えます。
 
-TiFlashを v7.3 にアップグレードし、 TiFlash がV3 DTFiles を使用するように構成した後、 TiFlash を以前のバージョンに戻す必要がある場合は、DTTool をオフラインで使用して V3 DTFiles を V2 DTFiles に書き換えることができます。詳細については、 [DTTool 移行ツール](/tiflash/tiflash-command-line-flags.md#dttool-migrate)参照してください。
+TiFlashをv7.3にアップグレードし、V3 DTFilesを使用するように設定した後、 TiFlashを以前のバージョンに戻す必要がある場合は、DTToolをオフラインで使用してV3 DTFilesをV2 DTFilesに書き換えることができます。詳細については、 [DTTool 移行ツール](/tiflash/tiflash-command-line-flags.md#dttool-migrate)参照してください。
 
 ## v6.x または v7.x から v7.4 以降のバージョンへ {#from-v6-x-or-v7-x-to-v7-4-or-a-later-version}
 
-v7.4 以降では、データ圧縮中に生成される読み取りおよび書き込み増幅を削減するために、 TiFlash はPageStorage V3 のデータ圧縮ロジックを最適化します。これにより、基盤となるstorageファイル名の一部が変更されます。そのため、v7.4 以降のバージョンにアップグレードした後は、元のバージョンへのインプレース ダウングレードはサポートされません。
+v7.4以降、データコンパクション中に発生するリードアンプリフィケーションとライトアンプリフィケーションを削減するため、 TiFlashはPageStorage V3のデータコンパクションロジックを最適化します。これにより、基盤となるstorageファイル名の一部が変更されます。そのため、v7.4以降へのアップグレード後、元のバージョンへのインプレースダウングレードはサポートされません。
 
-**テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
+**テストやその他の特別なシナリオでTiFlashをダウングレードするための回避策**
 
-テストやその他の特別なシナリオでTiFlash をダウングレードするには、ターゲットTiFlashノードを強制的にスケールインし、TiKV からデータを再度複製します。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。
+テストやその他の特殊なシナリオでTiFlashをダウングレードするには、対象のTiFlashノードを強制的にスケールインし、その後TiKVからデータを再度複製します。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。

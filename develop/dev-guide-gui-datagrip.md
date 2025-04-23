@@ -1,11 +1,11 @@
 ---
 title: Connect to TiDB with JetBrains DataGrip
-summary: JetBrains DataGrip を使用して TiDB に接続する方法を学びます。このチュートリアルは、IntelliJ、PhpStorm、PyCharm などの他の JetBrains IDE で利用可能なデータベース ツールと SQL プラグインにも適用されます。
+summary: JetBrains DataGripを使用してTiDBに接続する方法を学びます。このチュートリアルは、IntelliJ、PhpStorm、PyCharmなどの他のJetBrains IDEで利用可能なデータベースツールとSQLプラグインにも適用されます。
 ---
 
 # JetBrains DataGrip で TiDB に接続する {#connect-to-tidb-with-jetbrains-datagrip}
 
-TiDB は MySQL 互換のデータベースであり、 [ジェットブレインズ データグリップ](https://www.jetbrains.com/help/datagrip/getting-started.html)データベースと SQL 用の強力な統合開発環境 (IDE) です。このチュートリアルでは、DataGrip を使用して TiDB クラスターに接続するプロセスについて説明します。
+TiDBはMySQL互換のデータベースであり、データベースとSQLのため[ジェットブレインズ データグリップ](https://www.jetbrains.com/help/datagrip/getting-started.html)強力な統合開発環境（IDE）です。このチュートリアルでは、DataGripを使用してTiDBクラスターに接続する手順を詳しく説明します。
 
 > **注記：**
 >
@@ -16,7 +16,7 @@ DataGrip は次の 2 つの方法で使用できます。
 -   [データグリップ IDE](https://www.jetbrains.com/datagrip/download)スタンドアロン ツールとして。
 -   IntelliJ、PhpStorm、PyCharm などの JetBrains IDE の[データベースツールとSQLプラグイン](https://www.jetbrains.com/help/idea/relational-databases.html)として。
 
-このチュートリアルでは、主にスタンドアロンの DataGrip IDE に焦点を当てています。JetBrains IDE の JetBrains データベース ツールと SQL プラグインを使用して TiDB に接続する手順は同様です。また、任意の JetBrains IDE から TiDB に接続する場合は、このドキュメントの手順を参考にすることもできます。
+このチュートリアルは主にスタンドアロンのDataGrip IDEに焦点を当てています。JetBrains IDEのJetBrains Database Tools and SQLプラグインを使用してTiDBに接続する手順は同様です。また、他のJetBrains IDEからTiDBに接続する場合も、このドキュメントの手順を参考にしてください。
 
 ## 前提条件 {#prerequisites}
 
@@ -57,7 +57,7 @@ DataGrip は次の 2 つの方法で使用できます。
 
     -   **接続タイプ**は`Public`に設定されています
     -   **ブランチ**は`main`に設定されています
-    -   **接続先は**`DataGrip`に設定されています
+    -   **接続先が**`DataGrip`に設定されています
     -   **オペレーティング システムは**環境に適合します。
 
 4.  ランダムなパスワードを作成するには、 **「パスワードの生成」を**クリックします。
@@ -70,19 +70,19 @@ DataGrip は次の 2 つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-6.  新しく作成したプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB**を選択します。
+6.  新しく作成されたプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-7.  TiDB Cloud接続ダイアログから接続文字列をコピーします。次に、それを**URL**フィールドに貼り付けると、残りのパラメータが自動的に入力されます。結果の例は次のとおりです。
+7.  TiDB Cloud接続ダイアログから接続文字列をコピーします。それを**URL**フィールドに貼り付けると、残りのパラメータが自動的に入力されます。結果の例は次のとおりです。
 
     ![Configure the URL field for TiDB Cloud Serverless](/media/develop/datagrip-url-paste.jpg)
 
-    **不足しているドライバー ファイルをダウンロードする**警告が表示された場合は、 **[ダウンロード]**をクリックしてドライバー ファイルを取得します。
+    **不足しているドライバー ファイルをダウンロードするという**警告が表示された場合は、 **[ダウンロード]**をクリックしてドライバー ファイルを取得します。
 
 8.  **「テスト接続」**をクリックして、 TiDB Cloud Serverless クラスターへの接続を検証します。
 
-    ![Test the connection to a TiDB Cloud Serverless clustser](/media/develop/datagrip-test-connection.jpg)
+    ![Test the connection to a TiDB Cloud Serverless cluster](/media/develop/datagrip-test-connection.jpg)
 
 9.  **[OK]**をクリックして接続構成を保存します。
 
@@ -95,28 +95,28 @@ DataGrip は次の 2 つの方法で使用できます。
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択し、 **[CA 証明書]**をクリックして CA 証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを構成する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って最初の接続の前に設定してください。
+    IP アクセス リストをまだ設定していない場合は、 **「IP アクセス リストの設定」を**クリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicatedは、**パブリック**接続タイプに加えて、**プライベートエンドポイント**と**VPCピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud専用クラスタに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ご覧ください。
 
 4.  DataGrip を起動し、接続を管理するためのプロジェクトを作成します。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-5.  新しく作成したプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB**を選択します。
+5.  新しく作成されたプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-6.  適切な接続文字列をコピーして、DataGrip の [**データ ソースとドライバー]**ウィンドウに貼り付けます。DataGrip フィールドとTiDB Cloud Dedicated 接続文字列間のマッピングは次のとおりです。
+6.  適切な接続文字列をコピーし、DataGrip の**データソースとドライバー**ウィンドウに貼り付けます。DataGrip のフィールドとTiDB Cloud Dedicated の接続文字列のマッピングは次のとおりです。
 
-    | DataGrip フィールド | TiDB Cloud専用接続文字列 |
-    | -------------- | ----------------- |
-    | ホスト            | `{host}`          |
-    | ポート            | `{port}`          |
-    | ユーザー           | `{user}`          |
-    | パスワード          | `{password}`      |
+    | DataGripフィールド | TiDB Cloud専用接続文字列 |
+    | ------------- | ----------------- |
+    | ホスト           | `{host}`          |
+    | ポート           | `{port}`          |
+    | ユーザー          | `{user}`          |
+    | パスワード         | `{password}`      |
 
-    例は以下のとおりです。
+    次に例を示します。
 
     ![Configure the connection parameters for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-connect.jpg)
 
@@ -124,7 +124,7 @@ DataGrip は次の 2 つの方法で使用できます。
 
     ![Configure the CA for TiDB Cloud Dedicated](/media/develop/datagrip-dedicated-ssl.jpg)
 
-    **不足しているドライバー ファイルをダウンロードする**警告が表示された場合は、 **[ダウンロード]**をクリックしてドライバー ファイルを取得します。
+    **不足しているドライバー ファイルをダウンロードするという**警告が表示された場合は、 **[ダウンロード]**をクリックしてドライバー ファイルを取得します。
 
 8.  **[詳細設定]**タブをクリックし、スクロールして**enabledTLSProtocols**パラメータを見つけ、その値を`TLSv1.2,TLSv1.3`に設定します。
 
@@ -143,7 +143,7 @@ DataGrip は次の 2 つの方法で使用できます。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-2.  新しく作成したプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB**を選択します。
+2.  新しく作成されたプロジェクトで、**データベース エクスプローラー**パネルの左上隅にある**+**をクリックし、**データ ソース**&gt;**その他**&gt; **TiDB**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
@@ -154,11 +154,11 @@ DataGrip は次の 2 つの方法で使用できます。
     -   **ユーザー**: TiDB セルフマネージド クラスターに接続するために使用するユーザー名。
     -   **パスワード**: ユーザー名のパスワード。
 
-    例は以下のとおりです。
+    次に例を示します。
 
     ![Configure the connection parameters for TiDB Self-Managed](/media/develop/datagrip-self-hosted-connect.jpg)
 
-    **不足しているドライバー ファイルをダウンロードする**警告が表示された場合は、 **[ダウンロード]**をクリックしてドライバー ファイルを取得します。
+    **不足しているドライバー ファイルをダウンロードするという**警告が表示された場合は、 **[ダウンロード]**をクリックしてドライバー ファイルを取得します。
 
 4.  **「テスト接続」**をクリックして、TiDB セルフマネージド クラスターへの接続を検証します。
 
@@ -172,19 +172,19 @@ DataGrip は次の 2 つの方法で使用できます。
 ## 次のステップ {#next-steps}
 
 -   [DataGripのドキュメント](https://www.jetbrains.com/help/datagrip/getting-started.html)から DataGrip の使い方を詳しく学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入](/develop/dev-guide-insert-data.md) 、 [データの更新](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブル読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
--   プロフェッショナル[TiDB 開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   [開発者ガイド](/develop/dev-guide-overview.md)の[データを挿入する](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データを削除する](/develop/dev-guide-delete-data.md) 、 [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)などの章で、 TiDB アプリケーション開発のベスト プラクティスを学習します。
+-   プロフェッショナル[TiDB開発者コース](https://www.pingcap.com/education/)を通じて学び、試験に合格すると[TiDB認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## ヘルプが必要ですか? {#need-help}
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

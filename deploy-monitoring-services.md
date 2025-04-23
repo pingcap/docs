@@ -1,13 +1,11 @@
 ---
 title: Deploy Monitoring Services for the TiDB Cluster
-summary: TiDB クラスターの監視サービスをデプロイする方法を学習します。
+summary: TiDB クラスターの監視サービスを展開する方法を学習します。
 ---
 
 # TiDBクラスタの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
 
-このドキュメントは、TiDB 監視およびアラート サービスを手動で展開するユーザーを対象としています。
-
-TiUPを使用して TiDB クラスターをデプロイする場合、監視およびアラート サービスは自動的にデプロイされるため、手動でのデプロイは必要ありません。
+このドキュメントは、TiDB 監視およびアラートサービスを手動で導入したいユーザーを対象としています。TiUPを使用して TiDB クラスターをデプロイする場合、監視およびアラートサービスは自動的にデプロイされるため、手動でのデプロイは不要です。1 [TiDBダッシュボード](/dashboard/dashboard-intro.md) PDコンポーネントに組み込まれているため、別途デプロイする必要はありません。
 
 ## PrometheusとGrafanaをデプロイ {#deploy-prometheus-and-grafana}
 
@@ -107,12 +105,12 @@ scrape_configs:
 
 TiDB、PD、TiKV などのコンポーネントのアラーム ルールを有効にするには、対応するコンポーネントのアラーム ルール ファイルを個別にダウンロードし、アラーム ルール ファイルの構成を Prometheus 構成ファイルに追加します。
 
--   ティDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/master/pkg/metrics/alertmanager/tidb.rules.yml)
+-   TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/master/pkg/metrics/alertmanager/tidb.rules.yml)
 -   PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/master/metrics/alertmanager/pd.rules.yml)
--   投票数: [`tikv.rules.yml`](https://github.com/tikv/tikv/blob/master/metrics/alertmanager/tikv.rules.yml)
--   TiFlash: [`tiflash.rules.yml`](https://github.com/pingcap/tiflash/blob/master/metrics/alertmanager/tiflash.rules.yml)
--   ティCDC: [`ticdc.rules.yml`](https://github.com/pingcap/tiflow/blob/master/metrics/alertmanager/ticdc.rules.yml)
--   TiDB Lightning: [`lightning.rules.yml`](https://github.com/pingcap/tidb/blob/master/br/metrics/alertmanager/lightning.rules.yml)
+-   ティクヴァ: [`tikv.rules.yml`](https://github.com/tikv/tikv/blob/master/metrics/alertmanager/tikv.rules.yml)
+-   TiFlash： [`tiflash.rules.yml`](https://github.com/pingcap/tiflash/blob/master/metrics/alertmanager/tiflash.rules.yml)
+-   TiCDC: [`ticdc.rules.yml`](https://github.com/pingcap/tiflow/blob/master/metrics/alertmanager/ticdc.rules.yml)
+-   TiDB Lightning： [`lightning.rules.yml`](https://github.com/pingcap/tidb/blob/master/br/metrics/alertmanager/lightning.rules.yml)
 
 ```ini
 rule_files:
@@ -202,7 +200,7 @@ Grafana サービスを開始します。
 
 1.  Grafana Web インターフェースにログインします。
 
-    -   デフォルトアドレス: [http://ローカルホスト:3000](http://localhost:3000)
+    -   デフォルトアドレス: [http://localhost:3000](http://localhost:3000)
 
     -   デフォルトアカウント: admin
 
@@ -210,16 +208,16 @@ Grafana サービスを開始します。
 
     > **注記：**
     >
-    > **パスワードの変更**手順では、 **「スキップ」を**選択できます。
+    > **パスワードの変更**手順では、 **「スキップ」**を選択できます。
 
 2.  Grafana サイドバー メニューで、**コンフィグレーション**内の**データ ソース**をクリックします。
 
-3.  **データ ソースの追加を**クリックします。
+3.  **[データ ソースの追加]を**クリックします。
 
 4.  データ ソース情報を指定します。
 
     -   データ ソースの**名前**を指定します。
-    -   **タイプ**には**Prometheus を**選択します。
+    -   **タイプ**には**Prometheus**を選択します。
     -   **URL**には、Prometheus アドレスを指定します。
     -   必要に応じて他のフィールドを指定します。
 
@@ -233,7 +231,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 2.  サイドバー メニューで、 **[ダッシュボード]** -&gt; **[インポート]**をクリックして、 **[ダッシュボードのインポート]**ウィンドウを開きます。
 
-3.  [tikv/pd](https://github.com/tikv/pd/tree/release-8.1/metrics/grafana) **.json ファイルのアップロード」**をクリックして JSON ファイルをアップロードします ( [ピンキャップ/tidb](https://github.com/pingcap/tidb/tree/release-8.1/pkg/metrics/grafana) 、および[ティック/ティック](https://github.com/tikv/tikv/tree/release-8.1/metrics/grafana)から TiDB Grafana 構成ファイルをダウンロードします)。
+3.  **「.json ファイルのアップロード」**をクリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.1/pkg/metrics/grafana) 、および[tikv/pd](https://github.com/tikv/pd/tree/release-8.1/metrics/grafana) [ティックブ/ティックブ](https://github.com/tikv/tikv/tree/release-8.1/metrics/grafana) TiDB Grafana 構成ファイルをダウンロードします)。
 
     > **注記：**
     >
@@ -243,7 +241,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 5.  Prometheus データ ソースを選択します。
 
-6.  **「インポート」**をクリックします。Prometheus ダッシュボードがインポートされます。
+6.  **「インポート」**をクリックします。Prometheusダッシュボードがインポートされます。
 
 ## コンポーネントメトリックをビュー {#view-component-metrics}
 
@@ -270,10 +268,10 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 -   **TiKVサーバー:**
 
-    -   ガベージコレクション (GC) の監視
+    -   ガベージコレクション（GC）監視
     -   TiKVコマンドが実行される合計回数
     -   スケジューラがコマンドを実行する期間
-    -   Raftの提案コマンドの総回数
+    -   Raftのproposeコマンドの実行回数
     -   Raftがコマンドを実行する期間
-    -   Raftコマンドが失敗した合計回数
+    -   Raftコマンドが失敗した回数の合計
     -   Raftが準備完了状態を処理する合計回数

@@ -89,18 +89,18 @@ SHOW TABLES
 
 `TABLES`表の列の説明は次のとおりです。
 
--   `TABLE_CATALOG` : テーブルが属するカタログの名前。値は常に`def`です。
+-   `TABLE_CATALOG` : テーブルが属するカタログの名前。値は常に`def` 。
 -   `TABLE_SCHEMA` : テーブルが属するスキーマの名前。
 -   `TABLE_NAME` : テーブルの名前。
 -   `TABLE_TYPE` : テーブルのタイプ。
--   `ENGINE` :storageエンジンのタイプ。現在の値は`InnoDB`です。
+-   `ENGINE` :storageエンジンの種類。現在の値は`InnoDB` 。
 -   `VERSION` : バージョン。デフォルトの値は`10`です。
--   `ROW_FORMAT` : 行形式。現在の値は`Compact`です。
--   `TABLE_ROWS` : 統計のテーブル内の行数。
+-   `ROW_FORMAT` : 行フォーマット。現在の値は`Compact` 。
+-   `TABLE_ROWS` : 統計におけるテーブル内の行数。
 -   `AVG_ROW_LENGTH` : テーブルの平均行の長さ`AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS` 。
--   `DATA_LENGTH` : データ長`DATA_LENGTH` = `TABLE_ROWS` * タプル内の列のstorage長の合計。TiKV のレプリカは考慮されません。
--   `MAX_DATA_LENGTH` : 最大データ長。現在の値は`0`で、データ長に上限がないことを意味します。
--   `INDEX_LENGTH` : インデックスの長さ`INDEX_LENGTH` = `TABLE_ROWS` * インデックスタプル内の列の長さの合計。TiKV のレプリカは考慮されません。
+-   `DATA_LENGTH` : データ長。2 = `DATA_LENGTH` * タプル内の列のstorage長の合計。TiKVのレプリカ`TABLE_ROWS`考慮されません。
+-   `MAX_DATA_LENGTH` : 最大データ長。現在の値は`0` 、データ長に上限がないことを意味します。
+-   `INDEX_LENGTH` : インデックス`TABLE_ROWS` `INDEX_LENGTH`インデックスタプル内の列の長さの合計。TiKVのレプリカは考慮されません。
 -   `DATA_FREE` : データフラグメント。現在の値は`0`です。
 -   `AUTO_INCREMENT` : 自動インクリメント主キーの現在のステップ。
 -   `CREATE_TIME` : テーブルが作成された時刻。
@@ -111,12 +111,12 @@ SHOW TABLES
 -   `CREATE_OPTIONS` : オプションを作成します。
 -   `TABLE_COMMENT` : 表のコメントとメモ。
 
-テーブル内のほとんどの情報は MySQL と同じです。TiDB によって新たに定義されるのは 2 つの列だけです。
+テーブル内の情報の大部分はMySQLと同じです。TiDBでは2つの列のみが新たに定義されています。
 
--   `TIDB_TABLE_ID` : テーブルの内部 ID を示します。この ID は TiDB クラスター内で一意です。
--   `TIDB_ROW_ID_SHARDING_INFO` : テーブルのシャーディング タイプを示します。可能な値は次のとおりです。
+-   `TIDB_TABLE_ID` : テーブルの内部IDを示します。このIDはTiDBクラスタ内で一意です。
+-   `TIDB_ROW_ID_SHARDING_INFO` : テーブルのシャーディングタイプを示します。可能な値は次のとおりです。
     -   `"NOT_SHARDED"` : テーブルはシャード化されていません。
     -   `"NOT_SHARDED(PK_IS_HANDLE)"` : 行 ID として整数の主キーを定義するテーブルはシャード化されません。
     -   `"PK_AUTO_RANDOM_BITS={bit_number}"` : 行 ID として整数の主キーを定義するテーブルは、主キーに`AUTO_RANDOM`属性が割り当てられているため、シャード化されます。
-    -   `"SHARD_BITS={bit_number}"` : テーブルは`SHARD_ROW_ID_BITS={bit_number}`使用してシャーディングされます。
+    -   `"SHARD_BITS={bit_number}"` : テーブルは`SHARD_ROW_ID_BITS={bit_number}`を使用してシャーディングされます。
     -   NULL: テーブルはシステム テーブルまたはビューであるため、シャード化できません。

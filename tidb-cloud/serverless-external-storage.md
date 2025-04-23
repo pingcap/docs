@@ -54,7 +54,7 @@ TiDB Cloud Serverless クラスターが Amazon S3 バケット内のソース�
 
     4.  新しいロールを作成することを確認し、 **「スタックの作成」**をクリックしてロール ARN を作成します。
 
-    5.  CloudFormation スタックが実行された後、 **[出力]**タブをクリックし、 **[値]**列でロール ARN 値を見つけることができます。
+    5.  CloudFormation スタックが実行された後、 **[出力]**タブをクリックし、[**値]**列でロール ARN 値を見つけることができます。
 
         ![img.png](/media/tidb-cloud/serverless-external-storage/serverless-role-arn.png)
 
@@ -292,6 +292,8 @@ AccessKey ペアを構成するには、次の手順を実行します。
     -   **「アクション」**セクションで、必要に応じて権限を選択します。
 
         TiDB Cloud Serverless クラスターにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjects**権限を付与します。
+
+        TiDB Cloud Serverless クラスターからデータをエクスポートするには、 **oss:PutObject** 、 **oss:GetBucketInfo** 、および**oss:ListBuckets**権限を付与します。
 
     -   **リソース**セクションで、バケットとバケット内のオブジェクトを選択します。
 

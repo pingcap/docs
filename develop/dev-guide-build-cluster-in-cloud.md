@@ -5,11 +5,11 @@ summary: TiDB CloudでTiDB Cloud Serverless クラスターを構築し、それ
 
 <!-- markdownlint-disable MD029 -->
 
-# TiDB Cloudサーバーレスクラスタを構築する {#build-a-tidb-cloud-serverless-cluster}
+# TiDB Cloudサーバーレスクラスタの構築 {#build-a-tidb-cloud-serverless-cluster}
 
 <CustomContent platform="tidb">
 
-このドキュメントでは、TiDB を使い始めるための最も簡単な方法を説明します。1 [TiDB Cloud](https://www.pingcap.com/tidb-cloud)使用してTiDB Cloud Serverless クラスターを作成し、それに接続し、その上でサンプル アプリケーションを実行します。
+このドキュメントでは、TiDB を使い始めるための最も簡単な方法を解説します。1 [TiDB Cloud](https://www.pingcap.com/tidb-cloud)使用してTiDB Cloud Serverless クラスターを作成し、接続し、サンプルアプリケーションを実行します。
 
 ローカルマシンで TiDB を実行する必要がある場合は、 [ローカルで TiDB を起動する](/quick-start-with-tidb.md)参照してください。
 
@@ -17,7 +17,7 @@ summary: TiDB CloudでTiDB Cloud Serverless クラスターを構築し、それ
 
 <CustomContent platform="tidb-cloud">
 
-このドキュメントでは、 TiDB Cloudを使い始めるための最も簡単な方法を説明します。TiDB クラスターを作成し、それに接続し、その上でサンプル アプリケーションを実行します。
+このドキュメントでは、 TiDB Cloudを使い始めるための最も簡単な方法を解説します。TiDB クラスターを作成し、接続し、サンプルアプリケーションを実行します。
 
 </CustomContent>
 
@@ -27,25 +27,25 @@ summary: TiDB CloudでTiDB Cloud Serverless クラスターを構築し、それ
 
 2.  [ログイン](https://tidbcloud.com/) TiDB Cloudアカウントに追加します。
 
-3.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、 **[クラスタの作成]**をクリックします。
+3.  [**クラスター**](https://tidbcloud.com/console/clusters)ページで、 **[クラスタの作成] を**クリックします。
 
-4.  **[クラスタの作成]**ページでは、デフォルトで**Serverless**が選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターを作成するリージョンを選択します。
+4.  **「クラスタの作成」**ページでは、デフォルトで**「Serverless」**が選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターを作成するリージョンを選択してください。
 
 5.  **「作成」**をクリックして、 TiDB Cloud Serverless クラスターを作成します。
 
     TiDB Cloudクラスターは約 30 秒で作成されます。
 
-6.  TiDB Cloudクラスターが作成されたら、クラスター名をクリックしてクラスターの概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログ ボックスが表示されます。
+6.  TiDB Cloudクラスターが作成されたら、クラスター名をクリックしてクラスターの概要ページに移動し、右上隅の**「接続」**をクリックします。接続ダイアログボックスが表示されます。
 
-7.  ダイアログで、希望する接続方法とオペレーティング システムを選択して、対応する接続文字列を取得します。このドキュメントでは、例として MySQL クライアントを使用します。
+7.  ダイアログで、希望する接続方法とオペレーティングシステムを選択して、対応する接続文字列を取得します。このドキュメントでは、MySQLクライアントを例として使用します。
 
-8.  「**パスワードの生成」**をクリックすると、ランダムなパスワードが生成されます。生成されたパスワードは再度表示されないため、パスワードは安全な場所に保存してください。ルート パスワードを設定しないと、クラスターに接続できません。
+8.  **「パスワード生成」をクリックすると、ランダムなパスワード**が生成されます。生成されたパスワードは再度表示されないため、安全な場所に保管してください。ルートパスワードを設定しないと、クラスターに接続できません。
 
 <CustomContent platform="tidb">
 
 > **注記：**
 >
-> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、クラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名プレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)参照してください。
+> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、クラスターに接続する際には、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)参照してください。
 
 </CustomContent>
 
@@ -53,7 +53,7 @@ summary: TiDB CloudでTiDB Cloud Serverless クラスターを構築し、それ
 
 > **注記：**
 >
-> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、クラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名プレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
+> [TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターの場合、クラスターに接続する際には、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
 
 </CustomContent>
 
@@ -65,7 +65,7 @@ summary: TiDB CloudでTiDB Cloud Serverless クラスターを構築し、それ
 
 <div label="macOS">
 
-macOS の場合、まだインストールしていない場合は[Homebrew](https://brew.sh/index)インストールし、次のコマンドを実行して MySQL クライアントをインストールします。
+macOS の場合、 [Homebrew](https://brew.sh/index)インストールされていない場合はインストールし、次のコマンドを実行して MySQL クライアントをインストールします。
 
 ```shell
 brew install mysql-client
@@ -174,12 +174,12 @@ SELECT 'Hello TiDB Cloud!';
 
 <CustomContent platform="tidb">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](/support.md)についてコミュニティに質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、または[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs) 、あるいは[サポートチケットを送信する](https://tidb.support.pingcap.com/)についてコミュニティに質問してください。
 
 </CustomContent>

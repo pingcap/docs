@@ -3,7 +3,7 @@ title: PingCAP Documentation
 hide_sidebar: true
 hide_commit: true
 hide_leftNav: true
-summary: TiDB ドキュメントには、データ移行やアプリケーション構築など、 TiDB Cloudと TiDB Self-Managed の使用方法ガイドとリファレンスが用意されています。TiDB TiDB Cloud は、クラウドネイティブの分散 SQL データベースのパワーに簡単にアクセスできる、完全に管理された Database-as-a-Service です。TiDB は、MySQL 互換性、水平スケーラビリティ、高可用性を備えたオープンソースの分散 SQL データベースです。開発者は、アプリケーション開発に関するドキュメントにアクセスし、TiDB Playground、PingCAP Education、コミュニティ参加の機会などの追加リソースを調べることができます。
+summary: TiDBドキュメントでは、データ移行やアプリケーション構築など、 TiDB CloudとTiDB Self-Managedの使用方法に関するガイドとリファレンスを提供しています。TiDB TiDB Cloudは、クラウドネイティブな分散SQLデータベースのパワーに簡単にアクセスできる、フルマネージドのDatabase-as-a-Service（データベース・アズ・ア・サービス）です。TiDBは、MySQLとの互換性、水平スケーラビリティ、高可用性を備えたオープンソースの分散SQLデータベースです。開発者は、アプリケーション開発に関するドキュメントにアクセスしたり、TiDB Playground、PingCAP Education、コミュニティ参加の機会などの追加リソースを活用したりできます。
 ---
 
 <DocHomeContainer title="TiDB ドキュメント" subTitle="Explore the how-to guides and references you need to use TiDB Cloud Serverless, TiDB Cloud Dedicated and TiDB Self-Managed, migrate data, and build your applications on the database." ctaLabel="Start TiDB Cloud Serverless for Free" ctaLink="https://tidbcloud.com/free-trial">
@@ -34,13 +34,7 @@ TiDB Cloudを簡単に使い始めるためのガイド。
 
 <DocHomeCard href="/tidbcloud/vector-search-overview" label="Vector Search in TiDB Cloud Serverless (Beta)" icon="cloud-vector-mauve">
 
-TiDB Cloud Serverless の Vector Search のネイティブ サポートを調べて、AI アプリケーションを構築します。
-
-</DocHomeCard>
-
-<DocHomeCard href="/tidbcloud/tidb-cloud-roadmap" label="TiDB Cloud Roadmap" icon="cloud-roadmap-mauve">
-
-TiDB Cloudの計画されている機能とリリース。
+AI アプリケーションを構築するには、 TiDB Cloud Serverless の Vector Search のネイティブ サポートを検討してください。
 
 </DocHomeCard>
 
@@ -58,13 +52,13 @@ TiDB Cloudの計画されている機能とリリース。
 
 -->
 
-TiDB は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープン ソースの分散 SQL データベースです。MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。TiDB は、セルフホスト環境またはクラウドにデプロイできます。
+TiDBは、ハイブリッドトランザクションおよび分析処理（HTAP）ワークロードをサポートするオープンソースの分散SQLデータベースです。MySQLと互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。TiDBは、セルフホスト環境またはクラウド上に導入できます。
 
 <DocHomeCardContainer>
 
 <DocHomeCard href="/tidb/stable/overview" label="What is TiDB Self-Managed" icon="oss-product-blue">
 
-TiDB Self-Managed とその主な機能について学びます。
+TiDB Self-Managed とその主な機能について説明します。
 
 </DocHomeCard>
 

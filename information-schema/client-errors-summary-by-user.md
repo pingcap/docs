@@ -3,9 +3,9 @@ title: CLIENT_ERRORS_SUMMARY_BY_USER
 summary: CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# クライアントエラーの概要 {#client-errors-summary-by-user}
+# クライアントエラー概要（ユーザー別） {#client-errors-summary-by-user}
 
-表`CLIENT_ERRORS_SUMMARY_BY_USER`は、TiDBサーバーに接続するクライアントに返された SQL エラーと警告の概要を示しています。これには次のものが含まれます。
+表`CLIENT_ERRORS_SUMMARY_BY_USER` 、TiDBサーバーに接続したクライアントに返されたSQLエラーと警告の概要を示しています。これには以下が含まれます。
 
 -   不正な SQL ステートメント。
 -   ゼロ除算エラー。
@@ -13,15 +13,15 @@ summary: CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA テーブルについ
 -   権限エラー。
 -   存在しないテーブル。
 
-クライアント エラーは MySQLサーバープロトコルを介してクライアントに返され、アプリケーションは適切なアクションを実行することが期待されます。1 `INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_USER`表は、アプリケーションが TiDBサーバーから返されたエラーを正しく処理 (またはログに記録) していないシナリオでエラーを検査するための便利な方法を提供します。
+クライアントエラーはMySQLサーバープロトコルを介してクライアントに返され、アプリケーションは適切なアクションを実行することが期待されます。1 `INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_USER`表は、アプリケーションがTiDBサーバーから返されたエラーを適切に処理（またはログに記録）していないシナリオにおいて、エラーを検査するための便利な方法を提供します。
 
-`CLIENT_ERRORS_SUMMARY_BY_USER`ユーザーごとにエラーを要約するため、1 つのユーザーサーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオは次のとおりです。
+`CLIENT_ERRORS_SUMMARY_BY_USER`ユーザーごとにエラーを要約するため、あるユーザーサーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオには以下が含まれます。
 
 -   権限エラー。
 -   テーブルまたはリレーショナル オブジェクトが見つかりません。
 -   SQL 構文が正しくないか、アプリケーションと TiDB のバージョン間に互換性がありません。
 
-要約されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。要約は各 TiDBサーバーにローカルであり、メモリ内にのみ保持されます。要約は、TiDBサーバーを再起動すると失われます。
+集計されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。集計は各 TiDBサーバーにローカルであり、メモリ内にのみ保持されます。TiDBサーバーが再起動すると、集計は失われます。
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -49,13 +49,13 @@ DESC CLIENT_ERRORS_SUMMARY_BY_USER;
 
 -   `USER` : 認証されたユーザー。
 -   `ERROR_NUMBER` : 返された MySQL 互換エラー番号。
--   `ERROR_MESSAGE` : エラー番号と一致するエラー メッセージ (プリペアドステートメント形式)。
+-   `ERROR_MESSAGE` : エラー番号に一致するエラー メッセージ (プリペアドステートメント形式)。
 -   `ERROR_COUNT` : このエラーがユーザーに返された回数。
 -   `WARNING_COUNT` : この警告がユーザーに返された回数。
 -   `FIRST_SEEN` : このエラー (または警告) がユーザーに初めて送信されたとき。
 -   `LAST_SEEN` : このエラー (または警告) がユーザーに最後に送信された時刻。
 
-次の例は、クライアントがローカル TiDBサーバーに接続したときに生成される警告を示しています。 `FLUSH CLIENT_ERRORS_SUMMARY`実行すると、サマリーがリセットされます。
+以下の例は、クライアントがローカルTiDBサーバーに接続する際に生成される警告を示しています。1 `FLUSH CLIENT_ERRORS_SUMMARY`実行するとサマリーはリセットされます。
 
 ```sql
 SELECT 0/0;

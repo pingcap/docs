@@ -1,29 +1,29 @@
 ---
 title: TiDB Monitoring Framework Overview
-summary: Prometheus と Grafana を使用して、TiDB 監視フレームワークを構築します。
+summary: Prometheus、Grafana、TiDB ダッシュボードを使用して、TiDB 監視フレームワークを構築します。
 ---
 
 # TiDB 監視フレームワークの概要 {#tidb-monitoring-framework-overview}
 
-TiDB 監視フレームワークは、Prometheus と Grafana という 2 つのオープン ソース プロジェクトを採用しています。TiDB は、 [プロメテウス](https://prometheus.io)使用して監視とパフォーマンス メトリックを保存し、 [グラファナ](https://grafana.com/grafana)使用してこれらのメトリックを視覚化します。
+TiDB監視フレームワークは、PrometheusとGrafanaという2つのオープンソースプロジェクトを採用しています。TiDBは、監視およびパフォーマンスメトリクスの保存に[プロメテウス](https://prometheus.io)使用し、これらのメトリクスの可視化に[グラファナ](https://grafana.com/grafana)使用します。また、TiDBは、TiDBクラスターの監視と診断のための組み込みの[TiDBダッシュボード](/dashboard/dashboard-intro.md)提供しています。
 
-## TiDB の Prometheus について {#about-prometheus-in-tidb}
+## TiDBにおけるPrometheusについて {#about-prometheus-in-tidb}
 
-時系列データベースである Prometheus には、多次元データ モデルと柔軟なクエリ言語があります。最も人気のあるオープン ソース プロジェクトの 1 つである Prometheus は、多くの企業や組織に採用されており、非常に活発なコミュニティがあります。PingCAP は、TiDB、TiKV、PD での監視とアラートに Prometheus を積極的に開発および採用している企業の 1 つです。
+時系列データベースであるPrometheusは、多次元データモデルと柔軟なクエリ言語を備えています。最も人気のあるオープンソースプロジェクトの一つであるPrometheusは、多くの企業や組織に採用されており、非常に活発なコミュニティを擁しています。PingCAPは、TiDB、TiKV、PDにおける監視とアラート機能にPrometheusを積極的に開発・導入している企業の一つです。
 
-Prometheus は複数のコンポーネントで構成されています。現在、TiDB では以下のコンポーネントが使用されています。
+Prometheusは複数のコンポーネントで構成されています。現在、TiDBは以下のコンポーネントを使用しています。
 
--   時系列データをスクレイピングして保存するPrometheusサーバー
+-   時系列データをスクレイピングして保存するためのPrometheusサーバー
 -   アプリケーションで必要なメトリックをカスタマイズするためのクライアントライブラリ
--   アラートメカニズム用のAlertmanager
+-   アラートメカニズムのためのAlertmanager
 
-図は以下のとおりです。
+図は次のとおりです。
 
 ![diagram](/media/prometheus-in-tidb.png)
 
-## TiDB の Grafana について {#about-grafana-in-tidb}
+## TiDBにおけるGrafanaについて {#about-grafana-in-tidb}
 
-Grafana は、メトリックを分析および視覚化するためのオープンソース プロジェクトです。TiDB は Grafana を使用して、次のようにパフォーマンス メトリックを表示します。
+Grafanaは、メトリクスを分析および視覚化するためのオープンソースプロジェクトです。TiDBはGrafanaを使用して、次のようにパフォーマンスメトリクスを表示します。
 
 ![Grafana monitored\_groups](/media/grafana-monitored-groups.png)
 
@@ -48,6 +48,10 @@ Grafana は、メトリックを分析および視覚化するためのオープ
 -   {TiDB_Cluster_name}-TiCDC: TiCDC に関連する詳細な監視メトリック。
 -   {TiDB_Cluster_name}-TiProxy-Summary: TiProxy に関連する監視の概要。
 
-各グループには監視メトリックの複数のパネル ラベルがあり、各パネルには複数の監視メトリックの詳細情報が含まれています。たとえば、**概要**監視グループには 5 つのパネル ラベルがあり、各ラベルは監視パネルに対応しています。次の UI を参照してください。
+各グループには監視指標の複数のパネルラベルがあり、各パネルには複数の監視指標の詳細情報が表示されます。例えば、 **「概要」**監視グループには5つのパネルラベルがあり、各ラベルは1つの監視パネルに対応しています。以下のUIをご覧ください。
 
 ![Grafana Overview](/media/grafana-monitor-overview.png)
+
+## TiDBダッシュボード {#tidb-dashboard}
+
+TiDBダッシュボードは、TiDBクラスタの監視、診断、管理のためのWeb UIで、v4.0で導入されました。PDコンポーネントに組み込まれているため、別途導入する必要はありません。詳細については、 [TiDBダッシュボードの紹介](/dashboard/dashboard-intro.md)ご覧ください。

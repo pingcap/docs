@@ -3,34 +3,34 @@ title: Integrate Vector Search with LlamaIndex
 summary: TiDB Vector Search を LlamaIndex と統合する方法を学びます。
 ---
 
-# ベクトル検索をLlamaIndexと統合する {#integrate-vector-search-with-llamaindex}
+# ベクトル検索とLlamaIndexの統合 {#integrate-vector-search-with-llamaindex}
 
 このチュートリアルでは、TiDB の[ベクトル検索](/tidb-cloud/vector-search-overview.md)機能を[ラマインデックス](https://www.llamaindex.ai)と統合する方法を説明します。
 
 > **注記**
 >
-> TiDB Vector Search は、TiDB Self-Managed (TiDB &gt;= v8.4) および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)でのみ使用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では使用できません。
+> TiDB Vector Searchは、TiDB Self-Managed (TiDB &gt;= v8.4)および[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-cloud-serverless)のみ利用できます。 [TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では利用できません。
 
 > **ヒント**
 >
-> 完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) Jupyter Notebook で表示したり、サンプル コードを[コラボ](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行したりできます。
+> 完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) Jupyter Notebook で表示することも、サンプル コードを[コラボ](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行することもできます。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   [Python 3.8以上](https://www.python.org/downloads/)インストールされました。
--   [ジュピターノートブック](https://jupyter.org/install)インストールされました。
--   [ギット](https://git-scm.com/downloads)インストールされました。
--   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
+-   [Python 3.8以上](https://www.python.org/downloads/)個インストールされました。
+-   [Jupyterノートブック](https://jupyter.org/install)個インストールされました。
+-   [ギット](https://git-scm.com/downloads)個インストールされました。
+-   TiDB Cloud Serverless クラスター。TiDB Cloud クラスターがまだない場合は、 [TiDB Cloud Serverless クラスターの作成](/tidb-cloud/create-tidb-cluster-serverless.md)に従って独自のTiDB Cloudクラスターを作成してください。
 
-## 始める {#get-started}
+## 始めましょう {#get-started}
 
 このセクションでは、TiDB Vector Search を LlamaIndex と統合してセマンティック検索を実行する手順を段階的に説明します。
 
 ### ステップ1. 新しいJupyter Notebookファイルを作成する {#step-1-create-a-new-jupyter-notebook-file}
 
-ルート ディレクトリに、 `integrate_with_llamaindex.ipynb`という名前の新しい Jupyter Notebook ファイルを作成します。
+ルート ディレクトリに、 `integrate_with_llamaindex.ipynb`名前の新しい Jupyter Notebook ファイルを作成します。
 
 ```shell
 touch integrate_with_llamaindex.ipynb
@@ -55,7 +55,7 @@ from llama_index.core import VectorStoreIndex
 from llama_index.vector_stores.tidbvector import TiDBVectorStore
 ```
 
-### ステップ3. 環境変数を設定する {#step-3-configure-environment-variables}
+### ステップ3.環境変数を設定する {#step-3-configure-environment-variables}
 
 クラスター接続文字列を取得し、環境変数を構成するには、次の手順を実行します。
 
@@ -65,22 +65,22 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
 3.  接続ダイアログの構成が動作環境と一致していることを確認します。
 
-    -   **接続タイプは**`Public`に設定されています。
-    -   **ブランチは**`main`に設定されています。
-    -   **Connect With は**`SQLAlchemy`に設定されています。
+    -   **接続タイプ**は`Public`に設定されています。
+    -   **ブランチ**は`main`に設定されています。
+    -   **Connect With が**`SQLAlchemy`に設定されています。
     -   **オペレーティング システムは**環境に適合します。
 
 4.  **PyMySQL**タブをクリックし、接続文字列をコピーします。
 
     > **ヒント：**
     >
-    > まだパスワードを設定していない場合は、「**パスワードの生成」**をクリックしてランダムなパスワードを生成します。
+    > まだパスワードを設定していない場合は、 **「パスワードの生成」**をクリックしてランダムなパスワードを生成します。
 
 5.  環境変数を設定します。
 
-    このドキュメントでは、埋め込みモデル プロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、前の手順で取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)指定する必要があります。
+    このドキュメントでは、埋め込みモデルプロバイダーとして[オープンAI](https://platform.openai.com/docs/introduction)使用します。この手順では、前の手順で取得した接続文字列と[OpenAI APIキー](https://platform.openai.com/docs/quickstart/step-2-set-up-your-api-key)指定する必要があります。
 
-    環境変数を設定するには、次のコードを実行します。接続文字列と OpenAI API キーを入力するよう求められます。
+    環境変数を設定するには、以下のコードを実行します。接続文字列とOpenAI APIキーの入力を求められます。
 
     ```python
     # Use getpass to securely prompt for environment variables in your terminal.
@@ -116,11 +116,11 @@ for index, document in enumerate(documents):
    document.metadata = {"book": "paul_graham"}
 ```
 
-### ステップ5. ドキュメントベクターを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
+### ステップ5. ドキュメントベクトルを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
 
-#### ステップ5.1 TiDBベクターストアを初期化する {#step-5-1-initialize-the-tidb-vector-store}
+#### ステップ5.1 TiDBベクトルストアを初期化する {#step-5-1-initialize-the-tidb-vector-store}
 
-次のコードは、ベクトル検索に最適化された`paul_graham_test`という名前のテーブルを TiDB に作成します。
+次のコードは、ベクトル検索に最適化された`paul_graham_test`名前のテーブルを TiDB に作成します。
 
 ```python
 tidbvec = TiDBVectorStore(
@@ -134,9 +134,9 @@ tidbvec = TiDBVectorStore(
 
 実行が成功すると、TiDB データベース内の`paul_graham_test`テーブルを直接表示してアクセスできるようになります。
 
-#### ステップ5.2 埋め込みを生成して保存する {#step-5-2-generate-and-store-embeddings}
+#### ステップ5.2 埋め込みの生成と保存 {#step-5-2-generate-and-store-embeddings}
 
-次のコードは、ドキュメントを解析し、埋め込みを生成し、それを TiDB ベクトル ストアに保存します。
+次のコードは、ドキュメントを解析し、埋め込みを生成し、TiDB ベクトル ストアに保存します。
 
 ```python
 storage_context = StorageContext.from_defaults(vector_store=tidbvec)
@@ -174,13 +174,13 @@ publishing essays online, developing spam filters, painting, hosting dinner part
 a building for office use.
 ```
 
-### ステップ7. メタデータフィルターを使用して検索する {#step-7-search-with-metadata-filters}
+### ステップ7. メタデータフィルターを使って検索する {#step-7-search-with-metadata-filters}
 
 検索を絞り込むには、メタデータ フィルターを使用して、適用したフィルターに一致する特定の最も近い結果を取得できます。
 
 #### <code>book != &quot;paul_graham&quot;</code>フィルターを使用したクエリ {#query-with-code-book-paul-graham-code-filter}
 
-次の例では、 `book`メタデータ フィールドが`"paul_graham"`である結果を除外します。
+次の例では、 `book`メタデータ フィールドが`"paul_graham"`ある結果を除外します。
 
 ```python
 from llama_index.core.vector_stores.types import (
@@ -208,7 +208,7 @@ Empty Response
 
 #### <code>book == &quot;paul_graham&quot;</code>フィルターを使用したクエリ {#query-with-code-book-paul-graham-code-filter}
 
-次の例では、 `book`メタデータ フィールドが`"paul_graham"`あるドキュメントのみが含まれるように結果をフィルタリングします。
+次の例では、 `book`データ フィールドが`"paul_graham"`あるドキュメントのみを含むように結果をフィルタリングします。
 
 ```python
 from llama_index.core.vector_stores.types import (

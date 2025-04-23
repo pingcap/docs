@@ -1,11 +1,11 @@
 ---
 title: ROLLBACK | TiDB SQL Statement Reference
-summary: TiDB データベースでの ROLLBACK の使用法の概要。
+summary: TiDB データベースの ROLLBACK の使用法の概要。
 ---
 
 # ロールバック {#rollback}
 
-このステートメントは、TIDB 内の現在のトランザクションのすべての変更を元に戻します。これは、 `COMMIT`ステートメントの逆です。
+このステートメントは、TiDB内の現在のトランザクション内のすべての変更を元に戻します。これは`COMMIT`ステートメントの逆の動作です。
 
 ## 概要 {#synopsis}
 
@@ -37,10 +37,10 @@ mysql> SELECT * FROM t1;
 Empty set (0.01 sec)
 ```
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
--   TiDB は構文`ROLLBACK AND [NO] RELEASE`を解析しますが無視します。この機能は、トランザクションをロールバックした直後にクライアント セッションを切断するために MySQL で使用されます。TiDB では、代わりにクライアント ドライバーの`mysql_close()`機能を使用することをお勧めします。
--   TiDB は構文`ROLLBACK AND [NO] CHAIN`を解析しますが無視します。この機能は、現在のトランザクションがロールバックされている間に、同じ分離レベルで新しいトランザクションをすぐに開始するために MySQL で使用されます。TiDB では、代わりに新しいトランザクションを開始することをお勧めします。
+-   TiDBは構文`ROLLBACK AND [NO] RELEASE`を解析しますが、無視します。この機能はMySQLでトランザクションのロールバック直後にクライアントセッションを切断するために使用されます。TiDBでは、代わりにクライアントドライバの`mysql_close()`機能を使用することをお勧めします。
+-   TiDBは構文`ROLLBACK AND [NO] CHAIN`を解析しますが、無視します。この機能はMySQLで使用され、現在のトランザクションがロールバックされている間に、同じ分離レベルで新しいトランザクションを即座に開始します。TiDBでは、代わりに新しいトランザクションを開始することが推奨されます。
 
 ## 参照 {#see-also}
 

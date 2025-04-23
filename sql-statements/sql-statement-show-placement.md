@@ -5,15 +5,15 @@ summary: TiDB での SHOW PLACEMENT の使用法。
 
 # 表示配置 {#show-placement}
 
-`SHOW PLACEMENT`配置ポリシーからのすべての配置オプションを要約し、標準形式で提示します。
+`SHOW PLACEMENT` 、配置ポリシーからのすべての配置オプションを要約し、標準形式で提示します。
 
 > **注記：**
 >
-> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは使用できません。
+> この機能は[TiDB Cloudサーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless)クラスターでは利用できません。
 
 このステートメントは、配置Driver(PD) が配置のスケジュールで行った現在の進行状況を示す`Scheduling_State`フィールドを含む結果セットを返します。
 
--   `PENDING` : PD はまだ配置のスケジュールを開始していません。これは、配置ルールが意味的には正しいが、現在クラスターによって満たされていないことを示している可能性があります。たとえば、 `FOLLOWERS=4`の場合、フォロワーの候補となる TiKV ストアは 3 つしかありません。
+-   `PENDING` : PDはまだ配置のスケジュールを開始していません。これは、配置ルールは意味的には正しいものの、クラスターが現在満たすことができないことを示している可能性があります。例えば、配置ルールが`FOLLOWERS=4`あるにもかかわらず、フォロワー候補となるTiKVストアが3つしかない場合などです。
 -   `INPROGRESS` : PD が現在配置をスケジュール中です。
 -   `SCHEDULED` : PD は配置を正常にスケジュールしました。
 
@@ -45,12 +45,12 @@ SHOW PLACEMENT;
     +---------------+----------------------------------------------------------------------+------------------+
     4 rows in set (0.00 sec)
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
 ## 参照 {#see-also}
 
--   [SQL の配置ルール](/placement-rules-in-sql.md)
+-   [SQLの配置ルール](/placement-rules-in-sql.md)
 -   [表示配置](/sql-statements/sql-statement-show-placement-for.md)
 -   [配置ポリシーの作成](/sql-statements/sql-statement-create-placement-policy.md)

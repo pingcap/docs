@@ -9,7 +9,6 @@
 -   TiDB Cloudを選ぶ理由
     -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
     -   [MySQLの互換性](/mysql-compatibility.md)
-    -   [ロードマップ](/tidb-cloud/tidb-cloud-roadmap.md)
 -   TiDB Cloudを使い始める
     -   [TiDB Cloud Serverless を試してみる](/tidb-cloud/tidb-cloud-quickstart.md)
     -   [TiDB + AIを試す](/tidb-cloud/vector-search-get-started-using-python.md)
@@ -159,7 +158,7 @@
             -   [パブリック接続経由で接続](/tidb-cloud/connect-via-standard-connection.md)
             -   [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
             -   [プライベートエンドポイント（プライベートサービス接続）経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-            -   [VPCピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
+            -   [VPC ピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
             -   [SQL シェル経由で接続する](/tidb-cloud/connect-via-sql-shell.md)
         -   [TiDB Cloud専用クラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)
         -   [TiDB Cloud専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)
@@ -776,7 +775,7 @@
     -   ベンチマーク
         -   TiDB v8.5
             -   [パフォーマンスのハイライト](/tidb-cloud/v8.5-performance-highlights.md)
-            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v8.5-performance-benchmarking-with-tpcc.md)
+            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v8.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v8.5-performance-benchmarking-with-sysbench.md)
         -   TiDB v8.1
             -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v8.1-performance-benchmarking-with-tpcc.md)
@@ -785,10 +784,10 @@
             -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.5-performance-benchmarking-with-sysbench.md)
         -   TiDB v7.1
-            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
+            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v7.1-performance-benchmarking-with-sysbench.md)
         -   TiDB v6.5
-            -   [TPC-C パフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
+            -   [TPC-Cパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-tpcc.md)
             -   [Sysbenchパフォーマンステストレポート](/tidb-cloud/v6.5-performance-benchmarking-with-sysbench.md)
     -   [システム変数](/system-variables.md)
     -   [サーバーステータス変数](/status-variables.md)
@@ -816,7 +815,7 @@
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続: サポートチケットのIMインタラクション
+        -   接続: サポートチケットの IM 対話
             -   [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)

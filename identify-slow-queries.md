@@ -1,13 +1,13 @@
 ---
 title: Identify Slow Queries
-summary: 問題のある SQL ステートメントを特定するには、スロー クエリ ログを使用します。
+summary: 問題のある SQL ステートメントを識別するには、スロー クエリ ログを使用します。
 ---
 
 # 遅いクエリを特定する {#identify-slow-queries}
 
-ユーザーが遅いクエリを識別し、SQL 実行のパフォーマンスを分析および改善できるように、TiDB は実行時間が[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (デフォルト値は 300 ミリ秒) から[遅いクエリファイル](/tidb-configuration-file.md#slow-query-file) (デフォルト値は「tidb-slow.log」) を超えるステートメントを出力します。
+ユーザーが遅いクエリを識別し、SQL 実行のパフォーマンスを分析および改善できるように、TiDB は実行時間が[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (デフォルト値は 300 ミリ秒) ～ [遅いクエリファイル](/tidb-configuration-file.md#slow-query-file) (デフォルト値は「tidb-slow.log」) を超えるステートメントを出力します。
 
-TiDB はデフォルトでスロー クエリ ログを有効にします。システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を変更することで、この機能を有効または無効にすることができます。
+TiDBはデフォルトでスロークエリログを有効にします。この機能は、システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)変更することで有効または無効にできます。
 
 ## 使用例 {#usage-example}
 
@@ -58,56 +58,56 @@ insert into t select * from t;
 -   `Compile_time` : クエリ最適化の期間。
 -   `Optimize_time` : 実行プランの最適化に費やされた時間。
 -   `Wait_TS` : トランザクションのタイムスタンプを取得するためのステートメントの待機時間。
--   `Query` : SQL ステートメント。2 `Query`スロー ログに出力されませんが、スロー ログがメモリテーブルにマップされた後、対応するフィールドは`Query`と呼ばれます。
+-   `Query` : SQL ステートメント。2 `Query`スロー ログに出力されませんが、スロー ログがメモリテーブルにマップされた後、対応するフィールドが`Query`呼ばれます。
 -   `Digest` : SQL ステートメントのフィンガープリント。
--   `Txn_start_ts` : トランザクションの開始タイムスタンプと一意の ID。この値を使用して、トランザクション関連のログを検索できます。
--   `Is_internal` : SQL ステートメントが TiDB 内部であるかどうか。2 `true` SQL ステートメントが TiDB 内で内部的に実行されることを示し、 `false` SQL ステートメントがユーザーによって実行されることを示します。
+-   `Txn_start_ts` : トランザクションの開始タイムスタンプと一意のID。この値を使用して、トランザクション関連のログを検索できます。
+-   `Is_internal` : SQL 文が TiDB 内部であるかどうか。2 `true` SQL 文が TiDB 内部で実行されることを示し、 `false` SQL 文がユーザーによって実行されることを示します。
 -   `Index_names` : ステートメントで使用されるインデックス名。
--   `Stats` : このクエリ中に使用される統計の正常性状態、内部バージョン、合計行数、変更された行数、およびロード状態`pseudo` 、統計情報が正常でないことを示します。オプティマイザーが完全にロードされていない統計を使用しようとすると、内部状態も出力されます。たとえば、 `t1:439478225786634241[105000;5000][col1:allEvicted][idx1:allEvicted]`の意味は次のように理解できます。
+-   `Stats` : このクエリ中に使用される統計情報のヘルス状態、内部バージョン、合計行数、変更行数、およびロード状態。2 `pseudo` 、統計情報が正常でないことを示します。オプティマイザーが完全にロードされていない統計情報を使用しようとした場合、内部状態も出力されます。例えば、 `t1:439478225786634241[105000;5000][col1:allEvicted][idx1:allEvicted]`の意味は次のように理解できます。
     -   `t1` : クエリの最適化中にテーブル`t1`の統計が使用されます。
     -   `439478225786634241` : 内部バージョン。
     -   `105000` : 統計の合計行数。
     -   `5000` : 最後の統計収集以降に変更された行数。
-    -   `col1:allEvicted` : 列`col1`の統計が完全にロードされていません。
+    -   `col1:allEvicted` : 列`col1`の統計が完全にはロードされていません。
     -   `idx1:allEvicted` : インデックス`idx1`の統計が完全にロードされていません。
 -   `Succ` : ステートメントが正常に実行されたかどうか。
--   `Backoff_time` : ステートメントで再試行を必要とするエラーが発生した場合の再試行までの待機時間。一般的なエラーには、 `lock occurs` 、 `Region split` 、 `tikv server is busy`などがあります。
+-   `Backoff_time` : ステートメントで再試行を必要とするエラーが発生した場合の、再試行までの待機時間。一般的なエラーには、 `lock occurs` 、 `Region split` 、 `tikv server is busy`があります。
 -   `Plan` : ステートメントの実行プラン。特定の実行プランを解析するには、 `SELECT tidb_decode_plan('xxx...')`ステートメントを実行します。
--   `Binary_plan` : バイナリエンコードされたステートメントの実行プラン。特定の実行プランを解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)番目のステートメントを実行します。4 `Plan`と`Binary_plan`フィールドには同じ情報が含まれます。ただし、2 つのフィールドから解析された実行プランの形式は異なります。
+-   `Binary_plan` : バイナリエンコードされた文の実行計画。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)の文を実行してください。4 `Plan`と`Binary_plan`フィールドには同じ情報が格納されます。ただし、2つのフィールドから解析される実行計画の形式は異なります。
 -   `Prepared` : このステートメントが`Prepare`要求か`Execute`要求かを示します。
 -   `Plan_from_cache` : このステートメントが実行プラン キャッシュにヒットするかどうか。
 -   `Plan_from_binding` : このステートメントがバインドされた実行プランを使用するかどうか。
--   `Has_more_results` : このステートメントにユーザーが取得する結果がさらにあるかどうか。
--   `Rewrite_time` : このステートメントのクエリを書き換えるのにかかった時間。
--   `Preproc_subqueries` : 事前に実行されるサブクエリの数 (ステートメント内)。たとえば、 `where id in (select if from t)`サブクエリが事前に実行される可能性があります。
+-   `Has_more_results` : このステートメントにユーザーが取得できる結果がさらにあるかどうか。
+-   `Rewrite_time` : このステートメントのクエリの書き換えに要した時間。
+-   `Preproc_subqueries` : ステートメント内の事前に実行されるサブクエリの数。例えば、 `where id in (select if from t)`サブクエリが事前に実行される可能性があります。
 -   `Preproc_subqueries_time` : このステートメントのサブクエリを事前に実行するのに費やされた時間。
--   `Exec_retry_count` : このステートメントの再試行回数。このフィールドは通常、ロックが失敗したときにステートメントが再試行される悲観的トランザクション用です。
--   `Exec_retry_time` : このステートメントの実行再試行期間。たとえば、ステートメントが合計 3 回実行された場合 (最初の 2 回は失敗)、 `Exec_retry_time`最初の 2 回の実行の合計期間を意味します。最後の実行の期間は`Query_time`から`Exec_retry_time`引いた値です。
--   `KV_total` : このステートメントによって TiKV またはTiFlash上のすべての RPC 要求に費やされた時間。
+-   `Exec_retry_count` : このステートメントの再試行回数。このフィールドは通常、ロックが失敗した場合にステートメントが再試行される悲観的トランザクション用です。
+-   `Exec_retry_time` : このステートメントの実行再試行時間。例えば、ステートメントが合計3回実行された場合（最初の2回は失敗）、 `Exec_retry_time`最初の2回の実行の合計時間を意味します。最後の実行時間は`Query_time`から`Exec_retry_time`引いた値です。
+-   `KV_total` : このステートメントによる TiKV またはTiFlash上のすべての RPC 要求に費やされた時間。
 -   `PD_total` : このステートメントによって PD 上のすべての RPC 要求に費やされた時間。
 -   `Backoff_total` : このステートメントの実行中にすべてのバックオフに費やされた時間。
--   `Write_sql_response_total` : このステートメントによって結果をクライアントに送り返すのにかかる時間。
+-   `Write_sql_response_total` : このステートメントによって結果をクライアントに送り返すのに要した時間。
 -   `Result_rows` : クエリ結果の行数。
--   `IsExplicitTxn` : このステートメントが明示的なトランザクション内にあるかどうか。値が`false`の場合、トランザクションは`autocommit=1`であり、ステートメントは実行後に自動的にコミットされます。
--   `Warnings` : このステートメントの実行中に生成される JSON 形式の警告。これらの警告は、通常、 [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)ステートメントの出力と一致しますが、より多くの診断情報を提供する追加の警告が含まれる場合があります。これらの追加の警告は`IsExtra: true`としてマークされます。
+-   `IsExplicitTxn` : この文が明示的なトランザクション内にあるかどうか。値が`false`の場合、トランザクションは`autocommit=1`であり、文は実行後に自動的にコミットされます。
+-   `Warnings` : この文の実行中に生成されるJSON形式の警告。これらの警告は、 [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)文の出力と概ね一致しますが、より詳細な診断情報を提供する追加の警告が含まれる場合があります。これらの追加の警告は`IsExtra: true`としてマークされます。
 
-次のフィールドはトランザクションの実行に関連しています。
+次のフィールドはトランザクション実行に関連しています。
 
 -   `Prewrite_time` : 2 フェーズ トランザクション コミットの最初のフェーズ (事前書き込み) の期間。
 -   `Commit_time` : 2 フェーズ トランザクション コミットの 2 番目のフェーズ (コミット) の期間。
--   `Get_commit_ts_time` : 2 フェーズ トランザクション コミットの第 2 フェーズ (コミット) 中に`commit_ts`取得するのに費やされた時間。
--   `Local_latch_wait_time` : 2 フェーズ トランザクション コミットの 2 番目のフェーズ (コミット) の前に、TiDB がロックを待機するのに費やす時間。
--   `Write_keys` : トランザクションが TiKV の書き込み CF に書き込むキーの数。
+-   `Get_commit_ts_time` : 2 フェーズ トランザクション コミットの 2 番目のフェーズ (コミット) 中に`commit_ts`取得するのに費やされた時間。
+-   `Local_latch_wait_time` : 2 フェーズ トランザクション コミットの 2 番目のフェーズ (コミット) の前に、TiDB がロックを待機するのにかかる時間。
+-   `Write_keys` : トランザクションが TiKV 内の書き込み CF に書き込むキーの数。
 -   `Write_size` : トランザクションがコミットされたときに書き込まれるキーまたは値の合計サイズ。
--   `Prewrite_region` : 2 フェーズ トランザクション コミットの最初のフェーズ (事前書き込み) に関係する TiKV 領域の数。各リージョンはリモート プロシージャ コールをトリガーします。
+-   `Prewrite_region` ：2フェーズトランザクションコミットの最初のフェーズ（事前書き込み）に関与するTiKVリージョンの数。各リージョンはリモートプロシージャコールをトリガーします。
 -   `Wait_prewrite_binlog_time` : トランザクションがコミットされたときにバイナリログを書き込むために使用される時間。
 -   `Resolve_lock_time` : トランザクションのコミット中にロックが発生した後、ロックを解決するか期限が切れるまで待機する時間。
 
 メモリ使用量フィールド:
 
--   `Mem_max` : SQL 文の実行期間中に使用される最大メモリ領域 (単位はバイト)。
+-   `Mem_max` : SQL文の実行期間中に使用される最大メモリ空間(単位はバイト)。
 
-ハードディスクフィールド:
+ハードディスクのフィールド:
 
 -   `Disk_max` : SQL 文の実行期間中に使用される最大ディスク容量 (単位はバイト)。
 
@@ -115,24 +115,24 @@ insert into t select * from t;
 
 -   `User` : このステートメントを実行するユーザーの名前。
 -   `Host` : このステートメントのホスト名。
--   `Conn_ID` : 接続 ID (セッション ID)。たとえば、キーワード`con:3`を使用して、セッション ID が`3`のログを検索できます。
+-   `Conn_ID` : 接続ID（セッションID）。例えば、キーワード`con:3`を使用すると、セッションIDが`3`ログを検索できます。
 -   `DB` : 現在のデータベース。
 
 TiKVコプロセッサータスク フィールド:
 
 -   `Request_count` : ステートメントが送信するコプロセッサー要求の数。
 -   `Total_keys` :コプロセッサーがスキャンしたキーの数。
--   `Process_time` : TiKV での SQL ステートメントの合計処理時間。データは同時に TiKV に送信されるため、この値は`Query_time`超える場合があります。
--   `Wait_time` : TiKV 内のステートメントの合計待機時間。TiKV のコプロセッサーは限られた数のスレッドを実行するため、コプロセッサーのすべてのスレッドが動作しているときにリクエストがキューに入れられることがあります。キュー内のリクエストの処理に時間がかかる場合、後続のリクエストの待機時間が増加します。
--   `Process_keys` :コプロセッサーが処理したキーの数。 `total_keys`と比較すると、 `processed_keys`には MVCC の古いバージョンが含まれていません。 `processed_keys`と`total_keys`の大きな差は、多くの古いバージョンが存在することを示しています。
+-   `Process_time` : TiKVにおけるSQL文の合計処理時間。データはTiKVに同時に送信されるため、この値は`Query_time`超える場合があります。
+-   `Wait_time` : TiKVにおけるステートメントの合計待機時間。TiKVのコプロセッサーは限られた数のスレッドを実行するため、コプロセッサーのすべてのスレッドが動作している場合でも、リクエストがキューイングされる可能性があります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待機時間が増加します。
+-   `Process_keys` :コプロセッサーが処理したキーの数。2 と比較すると、 `total_keys` `processed_keys`古いバージョンの MVCC は含まれません。6 と`processed_keys` `total_keys`差が大きいことから、古いバージョンが多数存在することがわかります。
 -   `Num_cop_tasks` : このステートメントによって送信されたコプロセッサータスクの数。
 -   `Cop_proc_avg` : RocksDB のミューテックスなど、カウントできない待機時間を含む、cop タスクの平均実行時間。
--   `Cop_proc_p90` : copタスクのP90実行時間。
--   `Cop_proc_max` : cop-tasks の最大実行時間。
--   `Cop_proc_addr` : 実行時間が最も長い cop-task のアドレス。
+-   `Cop_proc_p90` : cop タスクの P90 実行時間。
+-   `Cop_proc_max` : cop タスクの最大実行時間。
+-   `Cop_proc_addr` : 実行時間が最も長い cop タスクのアドレス。
 -   `Cop_wait_avg` : リクエストのキューイングとスナップショットの取得の時間を含む、cop タスクの平均待機時間。
 -   `Cop_wait_p90` : copタスクのP90待機時間。
--   `Cop_wait_max` : cop-tasks の最大待機時間。
+-   `Cop_wait_max` : cop タスクの最大待機時間。
 -   `Cop_wait_addr` : 待機時間が最も長い cop-task のアドレス。
 -   `Rocksdb_delete_skipped_count` : RocksDB 読み取り中に削除されたキーをスキャンする回数。
 -   `Rocksdb_key_skipped_count` : RocksDB がデータをスキャンするときに検出する削除された (tombstone) キーの数。
@@ -143,17 +143,17 @@ TiKVコプロセッサータスク フィールド:
 -   `Cop_backoff_{backoff-type}_total_times` : エラーによって発生したバックオフの合計回数。
 -   `Cop_backoff_{backoff-type}_total_time` : エラーによって発生したバックオフの合計時間。
 -   `Cop_backoff_{backoff-type}_max_time` : エラーによって発生したバックオフの最長時間。
--   `Cop_backoff_{backoff-type}_max_addr` : エラーによって最も長いバックオフ時間が発生した cop-task のアドレス。
+-   `Cop_backoff_{backoff-type}_max_addr` : エラーによって発生したバックオフ時間が最も長い cop-task のアドレス。
 -   `Cop_backoff_{backoff-type}_avg_time` : エラーによって発生したバックオフの平均時間。
 -   `Cop_backoff_{backoff-type}_p90_time` : エラーによって発生した P90 パーセンタイル バックオフ時間。
 
-`backoff-type`には通常、次のタイプが含まれます。
+`backoff-type`は、一般的に次のタイプが含まれます。
 
 -   `tikvRPC` : RPC 要求を TiKV に送信できなかったために発生したバックオフ。
 -   `tiflashRPC` : TiFlashへの RPC 要求の送信に失敗したために発生したバックオフ。
 -   `pdRPC` : RPC 要求を PD に送信できなかったために発生したバックオフ。
 -   `txnLock` : ロックの競合によって発生したバックオフ。
--   `regionMiss` : リージョンが分割またはマージされた後に TiDBリージョンキャッシュ情報が古くなると、その処理要求によって発生するバックオフは失敗します。
+-   `regionMiss` : リージョンが分割または結合された後に TiDBリージョンキャッシュ情報が古くなると、その処理要求によって発生するバックオフは失敗します。
 -   `regionScheduling` : リージョンがスケジュールされていてLeaderが選択されていない場合、TiDB がリクエストを処理できないために発生するバックオフ。
 -   `tikvServerBusy` : TiKV 負荷が高すぎて新しいリクエストを処理できないために発生するバックオフ。
 -   `tiflashServerBusy` : TiFlash の負荷が高すぎて新しい要求を処理できないために発生するバックオフ。
@@ -169,10 +169,10 @@ TiKVコプロセッサータスク フィールド:
 
 ## 関連するシステム変数 {#related-system-variables}
 
--   [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) : スローログのしきい値を設定します。実行時間がこのしきい値を超えるSQL文はスローログに記録されます。デフォルト値は300(ミリ秒)です。
--   [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len) : スロー ログに記録される SQL ステートメントの最大長を設定します。デフォルト値は 4096 (バイト) です。
--   [tidb_redact_log](/system-variables.md#tidb_redact_log) : スロー ログに記録される SQL ステートメントで`?`使用してユーザー データを非感度化するかどうかを決定します。デフォルト値は`0`で、この機能を無効にすることを意味します。
--   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) : 実行プラン内の各演算子の物理的な実行情報を記録するかどうかを決定します。デフォルト値は`1`です。この機能はパフォーマンスに約 3% 影響します。この機能を有効にすると、次の`Plan`の情報を表示できます。
+-   [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) : スローログの閾値を設定します。実行時間がこの閾値を超えたSQL文はスローログに記録されます。デフォルト値は300（ミリ秒）です。
+-   [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len) : スローログに記録されるSQL文の最大長を設定します。デフォルト値は4096（バイト）です。
+-   [tidb_redact_log](/system-variables.md#tidb_redact_log) : スローログに記録されるSQL文で、 `?`使用してユーザーデータを非センシティブ化するかどうかを決定します。デフォルト値は`0`で、この機能は無効です。
+-   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) : 実行プランに各演算子の物理実行情報を記録するかどうかを指定します。デフォルト値は`1`です。この機能はパフォーマンスに約3%の影響を与えます。この機能を有効にすると、以下の`Plan`情報を表示できます。
 
     ```sql
     > select tidb_decode_plan('jAOIMAk1XzE3CTAJMQlmdW5jczpjb3VudChDb2x1bW4jNyktPkMJC/BMNQkxCXRpbWU6MTAuOTMxNTA1bXMsIGxvb3BzOjIJMzcyIEJ5dGVzCU4vQQoxCTMyXzE4CTAJMQlpbmRleDpTdHJlYW1BZ2dfOQkxCXQRSAwyNzY4LkgALCwgcnBjIG51bTogMQkMEXMQODg0MzUFK0hwcm9jIGtleXM6MjUwMDcJMjA2HXsIMgk1BWM2zwAAMRnIADcVyAAxHcEQNQlOL0EBBPBbCjMJMTNfMTYJMQkzMTI4MS44NTc4MTk5MDUyMTcJdGFibGU6dCwgaW5kZXg6aWR4KGEpLCByYW5nZTpbLWluZiw1MDAwMCksIGtlZXAgb3JkZXI6ZmFsc2UJMjUBrgnQVnsA');
@@ -193,19 +193,19 @@ TiKVコプロセッサータスク フィールド:
 set @@tidb_enable_collect_execution_info=0;
 ```
 
-`Plan`フィールドの返される結果は、 `EXPLAIN`または`EXPLAIN ANALYZE`の結果とほぼ同じ形式になります。実行プランの詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)参照してください。
+`Plan`フィールドに返される結果は、 `EXPLAIN`または`EXPLAIN ANALYZE`結果とほぼ同じ形式になります。実行プランの詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)参照してください。
 
 詳細については[TiDB固有の変数と構文](/system-variables.md)参照してください。
 
 ## スローログのメモリマッピング {#memory-mapping-in-slow-log}
 
-`INFORMATION_SCHEMA.SLOW_QUERY`テーブルをクエリすることで、スロー クエリ ログの内容をクエリできます。テーブル内の各列名は、スロー ログ内の 1 つのフィールド名に対応します。テーブル構造については、 [情報スキーマ](/information-schema/information-schema-slow-query.md)の`SLOW_QUERY`テーブルの概要を参照してください。
+スロークエリログの内容は、 `INFORMATION_SCHEMA.SLOW_QUERY`テーブルをクエリすることで照会できます。テーブル内の各列名は、スローログ内の1つのフィールド名に対応しています。テーブル構造については、 [情報スキーマ](/information-schema/information-schema-slow-query.md)の`SLOW_QUERY`テーブルの概要を参照してください。
 
 > **注記：**
 >
 > `SLOW_QUERY`テーブルをクエリするたびに、TiDB は現在のスロー クエリ ログを読み取って解析します。
 
-TiDB 4.0 の場合、 `SLOW_QUERY`ローテーションされたスロー ログ ファイルを含む任意の期間のスロー ログのクエリをサポートします。解析する必要があるスロー ログ ファイルを見つけるには、 `TIME`範囲を指定する必要があります`TIME`範囲を指定しないと、TiDB は現在のスロー ログ ファイルのみを解析します。例:
+TiDB 4.0では、 `SLOW_QUERY`ローテーションされたスローログファイルを含む任意の期間のスローログのクエリをサポートします。解析が必要なスローログファイルを特定するには、 `TIME`範囲を指定する必要があります。5 `TIME`範囲を指定しない場合、TiDBは現在のスローログファイルのみを解析します。例：
 
 -   時間範囲を指定しない場合、TiDB はスロー ログ ファイルに書き込むスロー クエリ データのみを解析します。
 
@@ -222,7 +222,7 @@ TiDB 4.0 の場合、 `SLOW_QUERY`ローテーションされたスロー ログ
         | 122492   | 2020-03-11 23:35:20.908574 | 2020-03-25 19:16:38.229035 |
         +----------+----------------------------+----------------------------+
 
--   たとえば、 `2020-03-10 00:00:00`から`2020-03-11 00:00:00`までの時間範囲を指定すると、TiDB は最初に指定された時間範囲のスロー ログ ファイルを検索し、次にスロー クエリ情報を解析します。
+-   たとえば、 `2020-03-10 00:00:00`から`2020-03-11 00:00:00`まで時間範囲を指定すると、TiDB は最初に指定された時間範囲のスロー ログ ファイルを見つけて、次にスロー クエリ情報を解析します。
 
     ```sql
     select count(*),
@@ -243,7 +243,7 @@ TiDB 4.0 の場合、 `SLOW_QUERY`ローテーションされたスロー ログ
 >
 > 指定された時間範囲のスロー ログ ファイルが削除された場合、またはスロー クエリがない場合、クエリは NULL を返します。
 
-TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報を照会するための[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システム テーブルが追加されました。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルのテーブル スキーマと異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように`CLUSTER_SLOW_QUERY`使用できます。
+TiDB 4.0では、すべてのTiDBノードのスロークエリ情報を照会するためのシステムテーブル[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)が追加されました。テーブル`CLUSTER_SLOW_QUERY`のスキーマは、テーブル`SLOW_QUERY`とは異なり、列`CLUSTER_SLOW_QUERY`に列`INSTANCE`が追加されています。列`INSTANCE`は、スロークエリの行情報のTiDBノードアドレスを表します。列`CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように使用できます。
 
 `CLUSTER_SLOW_QUERY`テーブルをクエリする場合、TiDB は、他のノードからすべての低速クエリ情報を取得して 1 つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 
@@ -270,9 +270,9 @@ limit 2;
     |  0.734982725 | select t0.c0, t1.c1 from t_slim t0, t_wide t1 where t0.c0=t1.c0; |
     +--------------+------------------------------------------------------------------+
 
-### <code>test</code>ユーザーの上位N個の遅いクエリを照会する {#query-the-top-n-slow-queries-of-the-code-test-code-user}
+### <code>test</code>ユーザーの上位Nの遅いクエリを照会する {#query-the-top-n-slow-queries-of-the-code-test-code-user}
 
-次の例では、 `test`のユーザーによって実行された遅いクエリが照会され、最初の 2 つの結果が実行時間の逆順に表示されます。
+次の例では、 `test`ユーザーによって実行された遅いクエリが照会され、最初の 2 つの結果が実行時間の逆順に表示されます。
 
 ```sql
 select query_time, query, user
@@ -313,7 +313,7 @@ Top-N SQL ステートメントをクエリした後、同じフィンガープ�
         | 0.302558006 | select * from t1 where a=1; | 4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa |
         +-------------+-----------------------------+------------------------------------------------------------------+
 
-2.  フィンガープリントを使用して同様の低速クエリをクエリします。
+2.  指紋を使用して同様の遅いクエリをクエリします。
 
     ```sql
     select query, query_time
@@ -330,7 +330,7 @@ Top-N SQL ステートメントをクエリした後、同じフィンガープ�
         | select * from t1 where a=2; | 0.401313532 |
         +-----------------------------+-------------+
 
-## 疑似<code>stats</code>を使用して遅いクエリをクエリする {#query-slow-queries-with-pseudo-code-stats-code}
+## 疑似<code>stats</code>で遅いクエリをクエリする {#query-slow-queries-with-pseudo-code-stats-code}
 
 ```sql
 select query, query_time, stats
@@ -353,7 +353,7 @@ where is_internal = false
 
 ### 実行プランが変更された遅いクエリをクエリする {#query-slow-queries-whose-execution-plan-is-changed}
 
-同じカテゴリの SQL ステートメントの実行プランが変更されると、統計が古くなったり、統計が実際のデータ分布を反映するほど正確でなくなったりするため、実行速度が低下します。次の SQL ステートメントを使用して、異なる実行プランを持つ SQL ステートメントをクエリできます。
+同じカテゴリのSQL文の実行プランが変更されると、統計情報が古くなっているか、統計情報が実際のデータ分布を反映するほど正確でないため、実行速度が低下します。次のSQL文を使用して、異なる実行プランを持つSQL文を照会できます。
 
 ```sql
 select count(distinct plan_digest) as count,
@@ -422,7 +422,7 @@ select instance, count(*) from information_schema.cluster_slow_query where time 
 
 ### 異常な時間帯にのみ発生するクエリスローログ {#query-slow-logs-occurring-only-in-abnormal-time-period}
 
-`2020-03-10 13:24:00`から`2020-03-10 13:27:00`期間に QPS の低下やレイテンシーの増加などの問題が見つかった場合、大きなクエリが発生したことが原因である可能性があります。次の SQL ステートメントを実行して、異常な期間にのみ発生するスロー ログをクエリします。5 から`2020-03-10 13:20:00` `2020-03-10 13:23:00`時間範囲は通常の期間を指します。
+`2020-03-10 13:24:00`から`2020-03-10 13:27:00`期間にQPSの低下やレイテンシーの増加などの問題が見られる場合、大規模なクエリの発生が原因の可能性があります。次のSQL文を実行して、異常な期間にのみ発生するスローログを検索してください。5から`2020-03-10 13:20:00` `2020-03-10 13:23:00`期間は通常の期間を指します。
 
 ```sql
 SELECT * FROM
@@ -471,13 +471,13 @@ ORDER BY  t1.sum_query_time DESC limit 10\G
 
 ### 他の TiDB スローログファイルを解析する {#parse-other-tidb-slow-log-files}
 
-TiDB はセッション変数`tidb_slow_query_file`使用して、クエリ`INFORMATION_SCHEMA.SLOW_QUERY`の実行時に読み取って解析するファイルを制御します。セッション変数の値を変更することで、他のスロー クエリ ログ ファイルの内容をクエリできます。
+TiDBは、セッション変数`tidb_slow_query_file`使用して、クエリ`INFORMATION_SCHEMA.SLOW_QUERY`実行する際に読み取りおよび解析するファイルを制御します。セッション変数の値を変更することで、他のスロークエリログファイルの内容をクエリできます。
 
 ```sql
 set tidb_slow_query_file = "/path-to-log/tidb-slow.log"
 ```
 
-### <code>pt-query-digest</code>を使用して TiDB のスロー ログを解析する {#parse-tidb-slow-logs-with-code-pt-query-digest-code}
+### <code>pt-query-digest</code>で TiDB のスローログを解析する {#parse-tidb-slow-logs-with-code-pt-query-digest-code}
 
 TiDB スロー ログを解析するには`pt-query-digest`使用します。
 
@@ -517,9 +517,9 @@ pt-query-digest --report tidb-slow.log
 
 ## 問題のあるSQL文を特定する {#identify-problematic-sql-statements}
 
-`SLOW_QUERY`記述すべてが問題になるわけではありません。3 が非常に大きい`process_time`のみが、クラスター全体への圧力を高めます。
+`SLOW_QUERY` `process_time`すべてが問題となるわけではありません。3 が非常に大きいものだけが、クラスター全体への負荷を高めます。
 
-`wait_time`が非常に大きく、 `process_time`が非常に小さいステートメントは通常は問題になりません。これは、ステートメントが実際に問題のあるステートメントによってブロックされ、実行キューで待機する必要があり、応答時間が大幅に長くなるためです。
+`wait_time`が非常に大きく、 `process_time`が非常に小さいステートメントは、通常は問題になりません。これは、実際に問題のあるステートメントによってブロックされ、実行キューで待機する必要があるため、応答時間が大幅に長くなるためです。
 
 ### <code>ADMIN SHOW SLOW</code>コマンド {#code-admin-show-slow-code-command}
 
@@ -536,7 +536,7 @@ ADMIN SHOW SLOW TOP [internal | all] N
 ADMIN SHOW SLOW recent 10
 ```
 
-`top N` 、最近 (数日以内) の最も遅い`internal`個のクエリ レコードを表示します。2 オプションが指定されている場合、返される結果はシステムによって実行された内部 SQL になります。4 `all`が指定されている場合、返される結果は内部 SQL と組み合わせたユーザーの SQL になります。それ以外の場合、このコマンドはユーザーの SQL からの遅いクエリ レコードのみを返します。
+`top N` 、最近（数日以内）の最も遅い N 件のクエリレコードを表示します。2 `internal`を指定した場合、返される結果はシステムによって実行された内部 SQL になります。4 オプション`all`指定した場合、返される結果はユーザーの SQL と内部 SQL を組み合わせたものになります。それ以外の場合、このコマンドはユーザーの SQL から取得した遅いクエリレコードのみを返します。
 
 ```sql
 ADMIN SHOW SLOW top 3
@@ -544,22 +544,22 @@ ADMIN SHOW SLOW top internal 3
 ADMIN SHOW SLOW top all 5
 ```
 
-TiDB はメモリが限られているため、限られた数の低速クエリ レコードのみを保存します。クエリ コマンドの`N`の値がレコード数より大きい場合、返されるレコード数は`N`より少なくなります。
+TiDBはメモリメモリが限られているため、低速クエリのレコードを限られた数だけしか保存しません。 `N`コマンドの値がレコード数よりも大きい場合、返されるレコード数は`N`未満になります。
 
 次の表に出力の詳細を示します。
 
-| カラム名        | 説明                                             |
-| :---------- | :--------------------------------------------- |
-| 始める         | SQL実行の開始時刻                                     |
-| 間隔          | SQL実行の継続時間                                     |
-| 詳細          | SQL実行の詳細                                       |
-| 成功          | SQL ステートメントが正常に実行されたかどうか。1 `1`成功、 `0`失敗を意味します。 |
-| 接続ID        | セッションの接続ID                                     |
-| トランザクション_ts | 取引の`start ts`                                  |
-| ユーザー        | ステートメントを実行するユーザー名                              |
-| デシベル        | ステートメントの実行時に関係するデータベース                         |
-| テーブルID      | SQL文の実行時に関係するテーブルのID                           |
-| インデックスID    | SQL文の実行時に関係するインデックスのID                         |
-| 内部          | これはTiDBの内部SQL文です                               |
-| ダイジェスト      | SQL文の指紋                                        |
-| SQL文        | 実行中または実行されたSQL文                                |
+| カラム名       | 説明                                             |
+| :--------- | :--------------------------------------------- |
+| 始める        | SQL実行の開始時刻                                     |
+| 間隔         | SQL実行の期間                                       |
+| 詳細         | SQL実行の詳細                                       |
+| 成功         | SQL ステートメントが正常に実行されたかどうか。1 `1`成功、 `0`失敗を意味します。 |
+| 接続ID       | セッションの接続ID                                     |
+| トランザクションts | 取引の`start ts`                                  |
+| ユーザー       | ステートメントを実行するユーザー名                              |
+| デシベル       | ステートメント実行時に関係するデータベース                          |
+| テーブルID     | SQL文の実行時に関係するテーブルのID                           |
+| インデックスID   | SQL文の実行時に関係するインデックスのID                         |
+| 内部         | これはTiDBの内部SQL文です                               |
+| ダイジェスト     | SQL文の指紋                                        |
+| SQL        | 実行中または実行されたSQL文                                |

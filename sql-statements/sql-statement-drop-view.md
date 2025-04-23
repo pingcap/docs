@@ -5,7 +5,7 @@ summary: TiDB データベースの DROP VIEW の使用法の概要。
 
 # ドロップビュー {#drop-view}
 
-このステートメントは、現在選択されているデータベースからビュー オブジェクトを削除します。ビューが参照する基本テーブルには影響しません。
+この文は、現在選択されているデータベースからビューオブジェクトを削除します。ビューが参照するベーステーブルには影響しません。
 
 ## 概要 {#synopsis}
 
@@ -71,9 +71,9 @@ mysql> SELECT * FROM t1;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL 互換性 {#mysql-compatibility}
+## MySQLの互換性 {#mysql-compatibility}
 
-TiDB の`DROP VIEW`ステートメントは MySQL と完全に互換性があります。互換性の違いが見つかった場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support) 。
+TiDBの`DROP VIEW`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
 ## 参照 {#see-also}
 
