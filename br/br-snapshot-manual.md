@@ -178,7 +178,7 @@ In the preceding command:
 - `--ratelimit`: The maximum speed **per TiKV** performing restore tasks. The unit is in MiB/s.
 - `--log-file`: The target file where the `br` log is written.
 
-During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. After the restoration is complete, if table-level checksum is enabled (see [Checksum](#checksum)), the BR tool will perform table data verification to ensure the logical integrity of the data. File-level checksums are always performed, ensuring the basic integrity of the restored files.
+During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. After the restoration is complete, if table-level checksum is enabled (see [Checksum](#checksum)), the BR tool performs table data verification to ensure the logical integrity of the data. File-level checksums are always performed to ensure the basic integrity of the restored files.
 
 ```shell
 Split&Scatter Region <--------------------------------------------------------------------> 100.00%
