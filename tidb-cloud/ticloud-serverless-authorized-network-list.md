@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless authorized-network list`.
 
 # ticloud serverless authorized-network list
 
-List all authorized networks
+List all authorized networks:
 
 ```shell
 ticloud serverless authorized-network list [flags]

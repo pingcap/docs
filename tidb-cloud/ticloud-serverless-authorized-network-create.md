@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless authorized-network create`.
 
 # ticloud serverless authorized-network create
 
-Create an authorized network
+Create an authorized network:
 
 ```shell
 ticloud serverless authorized-network create [flags]
