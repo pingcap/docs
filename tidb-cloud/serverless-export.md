@@ -417,8 +417,6 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 ## Export Speed
 
-### Export Speed
-
 The export speed varies depending on your cluster plan. Refer to the table below for details:
 
 | Plan               | Export Speed       |
