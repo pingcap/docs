@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless authorized-network delete`.
 
 # ticloud serverless authorized-network delete
 
-Delete an authorized network
+Delete an authorized network:
 
 ```shell
 ticloud serverless authorized-network delete [flags]
