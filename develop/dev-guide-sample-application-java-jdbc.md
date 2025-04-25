@@ -16,7 +16,8 @@ In this tutorial, you can learn how to use TiDB and JDBC to accomplish the follo
 
 > **Note:**
 >
-> This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - This tutorial works with TiDB Cloud Serverless, TiDB Cloud Dedicated, and TiDB Self-Managed.
+> - Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `utf8` in the JDBC URL, the collation used in a JDBC connection depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](/faq/sql-faq.md#collation-used-in-jdbc-connections).
 
 ## Prerequisites
 
