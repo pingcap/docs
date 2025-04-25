@@ -388,7 +388,7 @@ For example:
 -- utf8mb4_bin is case-sensitive
 SELECT 'apple' = 'Apple' COLLATE utf8mb4_bin;  -- Returns 0 (FALSE)
 
--- utf8mb4_0900_ai_ci is not case-sensitive
+-- utf8mb4_0900_ai_ci is case-insensitive
 SELECT 'apple' = 'Apple' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
 
 -- utf8mb4_bin ignores trailing spaces
