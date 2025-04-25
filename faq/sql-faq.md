@@ -377,7 +377,7 @@ spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncodin
 
 ### What are the differences between the `utf8mb4_bin` and `utf8mb4_0900_ai_ci` collations?
 
-| Collation             | Case-sensitive | Ignore trailing spaces | Ignore diacritics | Comparison method               |
+| Collation             | Case-sensitive | Ignore trailing spaces | Accent-sensitive | Comparison method               |
 |----------------------|----------------|------------------|--------------|------------------------|
 | `utf8mb4_bin`        | Yes           | Yes             | Yes          | Compare binary values     |
 | `utf8mb4_0900_ai_ci` | No            | No              | No           | Use Unicode sorting algorithm |
