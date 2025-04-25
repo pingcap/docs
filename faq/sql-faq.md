@@ -339,7 +339,7 @@ Whether your cluster is a new cluster or an upgraded cluster from an earlier ver
 
 ## Collation used in JDBC connections
 
-This section describes the collation behavior of JDBC connections and provides solutions for collation changes after TiDB upgrades. For information about character sets and collations supported by TiDB, see [Character Set and Collation](/character-set-and-collation.md).
+This section lists questions related to collations used in JDBC connections. For information about character sets and collations supported by TiDB, see [Character Set and Collation](/character-set-and-collation.md).
 
 ### What collation is used in a JDBC connection when `connectionCollation` is not configured in the JDBC URL?
 
@@ -355,7 +355,7 @@ When `connectionCollation` is not configured in the JDBC URL, there are two scen
 
 **Scenario 2**: `characterEncoding=utf8` is configured in the JDBC URL but `connectionCollation` is not configured. The JDBC driver uses the `utf8mb4` character set according to the mapping rules. The collation is determined according to the rules described in Scenario 1.
 
-### How to solve collation changes after TiDB upgrade?
+### How to handle collation changes after upgrading TiDB?
 
 In TiDB v7.4 and earlier versions, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `utf8` in the JDBC URL, the TiDB [`collation_connection`](/system-variable-reference.md#collation_connection) variable defaults to the `utf8mb4_bin` collation.
 
