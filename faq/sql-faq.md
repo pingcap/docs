@@ -353,7 +353,7 @@ When `connectionCollation` is not configured in the JDBC URL, there are two scen
     - When the return value is less than `8.0.1`, the driver uses `utf8mb4_general_ci` as the connection collation. TiDB follows the driver and uses `utf8mb4_general_ci` as the collation.
     - When the return value is greater than or equal to `8.0.1`, the driver uses `utf8mb4_0900_ai_ci` as the connection collation. TiDB v7.4.0 and later versions follow the driver and use `utf8mb4_0900_ai_ci` as the collation, while TiDB versions earlier than v7.4.0 fall back to using the default collation `utf8mb4_bin` because the `utf8mb4_0900_ai_ci` collation is not supported in these versions.
 
-**Scenario 2**: `characterEncoding=utf8` is configured in the JDBC URL but `connectionCollation` is not configured. The JDBC driver uses the `utf8mb4` character set according to the mapping rules. The collation is determined according to the rules described in Scenario 1.
+**Scenario 2**: `characterEncoding=utf8` is configured in the JDBC URL but `connectionCollation` is not configured. The JDBC driver uses the `utf8mb4` character set according to the mapping rules. The collation is determined according to the rules described in scenario 1.
 
 ### How to handle collation changes after upgrading TiDB?
 
@@ -397,10 +397,10 @@ SELECT 'Apple ' = 'Apple' COLLATE utf8mb4_bin; -- Returns 1 (TRUE)
 -- utf8mb4_0900_ai_ci does not ignore trailing spaces
 SELECT 'Apple ' = 'Apple' COLLATE utf8mb4_0900_ai_ci; -- Returns 0 (FALSE)
 
--- utf8mb4_bin distinguishes diacritics
+-- utf8mb4_bin is accent-sensitive
 SELECT 'café' = 'cafe' COLLATE utf8mb4_bin;  -- Returns 0 (FALSE)
 
--- utf8mb4_0900_ai_ci does not distinguish diacritics
+-- utf8mb4_0900_ai_ci is accent-insensitive
 SELECT 'café' = 'cafe' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
 ```
 
