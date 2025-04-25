@@ -67,7 +67,7 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL;
 
 Inserting data into a table with a full-text index is identical to inserting data into any other tables.
 
-In this example we will insert data in multiple languages, like Japanese, English, and Chinese. This can be naturally handled by TiDB's multilingual text analyzer:
+As in the following example, you can insert data in multiple languages, such as Japanese, English, and Chinese. This can be naturally handled by the multilingual text analyzer of TiDB:
 
 ```sql
 INSERT INTO stock_items VALUES (1, "イヤホン bluetooth ワイヤレスイヤホン ");
