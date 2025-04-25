@@ -256,6 +256,9 @@
       - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
       - [Django ORM](/vector-search/vector-search-integrate-with-django-orm.md)
+  - Text Search
+    - [Full Text Search](/vector-search/vector-search-search-full-text-search.md)
+    - [Hybrid Search](/vector-search/vector-search-search-hybrid-search.md)
   - Reference
     - [Vector Data Types](/vector-search/vector-search-data-types.md)
     - [Vector Functions and Operators](/vector-search/vector-search-functions-and-operators.md)
