@@ -26,12 +26,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 <tbody>
   <tr>
     <td>Scalability and Performance</td>
+    <td>Disaggregation of PD to improve scalability (General Availability)</td>
+    <td>The Placement Driver (PD) provides multiple critical modules to ensure the normal operation of TiDB clusters. Now Generally Available in v9.0.0, PD's Microservices mode supports deploying the TSO and scheduling modules as independent microservices. This can significantly reduce resource conflicts for these services as the cluster scales. With this architecture, much larger clusters with much larger workloads are now possible.</td>
+  </tr>
+  <tr>
+    <td>Scalability and Performance</td>
     <td>Point-In-Time-Recovery (PITR) Now Supports Recovery from Compacted Log Backups for Faster Restores</td>
     <td>Starting from v9.0.0, the log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. These SST files can now recovered into the cluster much more quickly than reapplying the original logs, delivering improved recovery performance.</td>
   </tr>
   <tr>
     <td>Data Migration</td>
-    <td>TiCDC perforance, scalability, and stability improvements with new architecture (Preview)</td>
+    <td>TiCDC performance, scalability, and stability improvements with new architecture (Preview)</td>
     <td>TiCDC introduces a new architecture design that improves replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.</td>
   </tr>
   <tr>
@@ -56,7 +61,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Scalability
 
+* PD supports the microservice mode (GA) [#5766](https://github.com/tikv/pd/issues/5766) @[binshi-bing](https://github.com/binshi-bing)
 
+    Starting from v9.0.0, the PD microservice mode is now Generally Available. This mode splits the timestamp allocation and cluster scheduling functions of PD into separate microservices that can be deployed independently, thereby enhancing performance scalability for PD and addressing performance bottlenecks of PD in large-scale clusters.
+
+    - `tso` microservice: provides monotonically increasing timestamp allocation for the entire cluster.
+    - `scheduling` microservice: provides scheduling functions for the entire cluster, including but not limited to load balancing, hot spot handling, replica repair, and replica placement.
+
+    Each microservice is deployed as an independent process. If you configure more than one replica for a microservice, the microservice automatically implements a primary-secondary fault-tolerant mode to ensure high availability and reliability of the service.
+
+    For more information, see [documentation](/pd-microservices.md).
 
 ### Performance
 
