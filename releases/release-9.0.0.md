@@ -25,6 +25,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 </thead>
 <tbody>
   <tr>
+    <td>Scalability and Performance</td>
+    <td>Point-In-Time-Recovery (PITR) Now Supports Recovery from Compacted Log Backups for Faster Restores</td>
+    <td>Starting from v9.0.0, the log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. These SST files can now recovered into the cluster much more quickly than reapplying the original logs, delivering improved recovery performance.</td>
+  </tr>
+  <tr>
     <td>Data Migration</td>
     <td>TiCDC perforance, scalability, and stability improvements with new architecture (Preview)</td>
     <td>TiCDC introduces a new architecture design that improves replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.</td>
@@ -98,6 +103,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
   For more information, see [user documentation](/tiflash/tiflash-configuration.md#format_version).
 
+* Point-In-Time-Recovery (PITR) Now Supports Recovery from Compacted Log Backups for Faster Restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen) **tw@Oreoxmt** <!--2001-->
+
+  Starting from v9.0.0, the compact log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
+
+  - SST files can be quickly imported into the cluster, **improving recovery performance**.
+  - Redundant data is removed during compaction, **reducing storage space consumption**.
+  - You can set longer full backup intervals while ensuring the Recovery Time Objective (RTO), **reducing the impact on applications**.
+
+  For more information, see [documentation](/br/br-compact-log-backup.md).
+
 ### Availability
 
 * TiProxy officially supports the traffic replay feature (GA) [#642](https://github.com/pingcap/tiproxy/issues/642) @[djshow832](https://github.com/djshow832) tw@hfxsd<!--2062-->
@@ -131,6 +146,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     You can use the [`RECOMMEND INDEX`](/index-advisor.md#recommend-indexes-using-the-recommend-index-statement) SQL statement to generate index recommendations for a single query or automatically analyze high-frequency SQL statements from historical workloads for batch recommendations. The recommendation results are stored in the `mysql.index_advisor_results` table. You can query this table to view the recommended indexes.
 
     For more information, see [documentation](/index-advisor.md).
+
+* Improved Log Backup Compatibility during Snapshot Restores [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@Oreoxmt** <!--2000-->
+
+    Starting in v9.0.0, Log Backups can now continue to backup data during a snapshot restore in many conditions. This enables ongoing log backups to procede without having to stop them during the restore procedure.
+
+    For more information, see [documentation](/br/br-pitr-manual.md#compatibility-between-ongoing-log-backup-and-snapshot-restore).
 
 ### Observability
 
