@@ -160,12 +160,19 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
     > tiup ctl:v8.5.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
+    If there are already a significant number of Regions exist in the old TiFlash nodes in the cluster, and these Regions need to be rebalanced from the old TiFlash nodes to the new ones, the `remove-peer` restriction must also be adjusted accordingly.
+
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 remove-peer
+    ```
+
     Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.
 
     If the TiKV and TiFlash nodes still have spare resources at this point and the latency of your online service does not increase significantly, you can further ease the limit, for example, triple the original speed:
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 remove-peer
     ```
 
 3. After the TiFlash replication is complete, revert to the default configuration to reduce the impact on online services.
@@ -174,6 +181,7 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 remove-peer
     ```
 
     Execute the following SQL statements to restore the default snapshot write speed limit:
