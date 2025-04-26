@@ -26,6 +26,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 <tbody>
   <tr>
     <td>Data Migration</td>
+    <td>TiCDC perforance, scalability, and stability improvements with new architecture (Preview)</td>
+    <td>TiCDC introduces a new architecture design that improves replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.</td>
+  </tr>
+  <tr>
+    <td>Data Migration</td>
     <td>Support query argument redaction in DM logs</td>
     <td>Introduces an optional <code>redact-info-log</code> parameter to mask query arguments in DM logs, preventing sensitive data from appearing in logs.</td>
   </tr>
@@ -179,6 +184,26 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 ### Security
 
 ### Data migration
+
+* TiCDC perforance, scalability, and stability improvements with new architecture (Preview) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@Oreoxmt** <!--2027-->
+
+    TiCDC introduces a new architecture (in preview) that improves real-time data replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.
+
+    TiCDC can now scale the TiCDC cluster linearly and replicate millions of tables with improved resource utilization. Changefeed latency is reduced and performance is more stable in scenarios with high traffic, frequent DDL operations, and during cluster scaling events.
+
+    For more information, see [documentation](/ticdc/ticdc-architecture.md).
+
+* TiCDC Adds DDL and Watermark Event Support to Debezium Protocol [#11566](https://github.com/pingcap/tiflow/issues/11566) @[wk989898](https://github.com/wk989898) **tw@Oreoxmt** <!--2009-->
+
+    TiCDC's support for Debezium Style events adds support for DDL and Watermark event types. After an upstream DDL is successfully executed, TiCDC now encodes the DDL event into a Kafka message with the key and message in a Debezium-style format. The Watermark event is a TiCDC extension (generated when [`enable-tidb-extension`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) is set on the Kafka sink) that represents a special time point indicating that the events received before this Watermark are complete.
+
+    For more information, see [documentation](/ticdc/ticdc-debezium.md).
+
+* TiCDC Adds Guards Against Replicating to Itself [#12062](https://github.com/pingcap/tiflow/issues/12062) @[wlwilliamx](https://github.com/wlwilliamx) **tw@Oreoxmt** <!--2063-->
+
+    TiCDC supports replicating from a source TiDB system to multiple other downstream systems, including other TiDB instances. Prior to v9.0.0, If TiCDC was misconfigured to replicate from one TiDB to the same TiDB system as both source and target, the TiDB instance may experience unexpected data consistency issues due to the cyclical replication loop. With v9.0.0, TiCDC now checks that a downstream TiDB cluster is different from the source TiDB cluster, to guard against this misconfiguration causing issues.
+
+    For more information, see [documentation](/ticdc/ticdc-manage-changefeed.md#security-mechanism).
 
 * Support query argument redaction in Data Migration (DM) logs [#11489](https://github.com/pingcap/tiflow/issues/11489) @[db-will](https://github.com/db-will) **tw@Oreoxmt** <!--2030-->
 
