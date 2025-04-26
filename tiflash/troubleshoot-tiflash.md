@@ -32,9 +32,9 @@ The issue might occur due to different reasons. It is recommended that you troub
 
 3. Use the PD Control tool to check whether there is any TiFlash instance that failed to go offline on the node (same IP and Port) and force the instance(s) to go offline. For detailed steps, refer to [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster).
 
-4. Check whether the system CPU supports vector extension instruction sets  
+4. Check whether the CPU supports SIMD instructions
 
-    Starting from v6.3, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `grep avx2 /proc/cpuinfo` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `grep 'crc32' /proc/cpuinfo | grep 'asimd'` has output.
+    Starting with v6.3, deploying TiFlash on Linux AMD64 architecture requires a CPU that supports the AVX2 instruction set. Verify this by ensuring `grep avx2 /proc/cpuinfo` produces output. For Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Verify this by ensuring `grep 'crc32' /proc/cpuinfo | grep 'asimd'` produces output.
 
     If deploying on a virtual machine, change the virtual machine's CPU architecture to "Haswell".  
 
@@ -142,7 +142,7 @@ In this example, the warning message shows that TiDB does not select the MPP mod
 
 If TiFlash replicas consistently fail to be created since the TiDB cluster is deployed, or if the TiFlash replicas were initially created normally but then all or some tables fails to be created after a period of time, you can diagnose and resolve the issue by performing the following steps:
 
-1. Check whether PD enables the `Placement Rules` feature. This feature is enabled by default since v6.5.0:
+1. Check whether PD enables the `Placement Rules` feature. This feature is enabled by default since v5.0:
 
     {{< copyable "shell-regular" >}}
 
@@ -194,7 +194,7 @@ If TiFlash replicas consistently fail to be created since the TiDB cluster is de
 
 5. Check whether the remaining disk space percentage on the machine where TiFlash nodes reside is higher than the [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio) value. The default value is 0.8, meaning when a node's used space exceeds 80% of its capacity, PD will avoid migrating Regions to that node to prevent disk space exhaustion. If all TiFlash nodes have insufficient remaining space, PD will stop scheduling new Region peers to TiFlash, causing replicas to remain in an unavailable state (progress < 1).
 
-    - If the disk usage reaches or exceeds `low-space-ratio`, it indicates insufficient disk space. In this case, please delete unnecessary files such as the `space_placeholder_file` under the `${data}/flash/` directory. If necessary, after deleting files, you may temporarily set `storage.reserve-space` to 0MB in the tiflash-learner.toml configuration file to restore TiFlash service.
+    - If the disk usage reaches or exceeds `low-space-ratio`, it indicates insufficient disk space. In this case, please delete unnecessary files such as the `space_placeholder_file` under the `${data}/flash/` directory. If necessary, after deleting files, you may temporarily set `storage.reserve-space` to `0MB` in the tiflash-learner.toml configuration file to restore TiFlash service.
     - If the disk usage is below `low-space-ratio`, it indicates normal disk space availability. Proceed to the next step.
 
 6. Check whether there is any `down peer`. Any `down peer` might cause the replication to get stuck.
