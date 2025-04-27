@@ -57,8 +57,8 @@ duplicate-resolution = 'none'
 # The directory of local KV sorting.
 sorted-kv-dir = "./some-dir"
 
-# Limits the bandwidth in which TiDB Lightning writes data into each TiKV
-# node in the physical import mode. 0 by default, which means no limit.
+# Limits the per-table bandwidth to write data into TiKV for each
+# TiDB Lightning instance in the physical import mode.
 # store-write-bwlimit = "128MiB"
 
 # Specifies whether Physical Import Mode adds indexes via SQL. The default value is `false`, which means that TiDB Lightning will encode both row data and index data into KV pairs and import them into TiKV together. This mechanism is consistent with that of the historical versions. If you set it to `true`, it means that TiDB Lightning adds indexes via SQL after importing the row data.
@@ -206,7 +206,7 @@ By default, TiDB Lightning pauses the cluster scheduling for the minimum range p
 
 ```toml
 [tikv-importer]
-# Limits the bandwidth in which TiDB Lightning writes data into each TiKV node in the physical import mode.
+# Limits the per-table bandwidth to write data into TiKV for each TiDB Lightning instance in the physical import mode.
 store-write-bwlimit = "128MiB"
 
 [tidb]
