@@ -357,22 +357,22 @@ When `connectionCollation` is not configured in the JDBC URL, there are two scen
 
 ### How to handle collation changes after upgrading TiDB?
 
-In TiDB v7.4 and earlier versions, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `utf8` in the JDBC URL, the TiDB [`collation_connection`](/system-variable-reference.md#collation_connection) variable defaults to the `utf8mb4_bin` collation.
+In TiDB v7.4 and earlier versions, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the TiDB [`collation_connection`](/system-variable-reference.md#collation_connection) variable defaults to the `utf8mb4_bin` collation.
 
-Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `utf8` in the JDBC URL, the value of the [`collation_connection`](/system-variable-reference.md#collation_connection) variable depends on the JDBC driver version. For example, for Connector/J 8.0.26 and later versions, the JDBC driver defaults to the `utf8mb4` character set and uses `utf8mb4_general_ci` as the connection collation. TiDB follows the driver, and the [`collation_connection`](/system-variable-reference.md#collation_connection) variable uses the `utf8mb4_0900_ai_ci` collation. For more information, see [Collation used in JDBC connections](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url).
+Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the value of the [`collation_connection`](/system-variable-reference.md#collation_connection) variable depends on the JDBC driver version. For example, for Connector/J 8.0.26 and later versions, the JDBC driver defaults to the `utf8mb4` character set and uses `utf8mb4_general_ci` as the connection collation. TiDB follows the driver, and the [`collation_connection`](/system-variable-reference.md#collation_connection) variable uses the `utf8mb4_0900_ai_ci` collation. For more information, see [Collation used in JDBC connections](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url).
 
 When upgrading from an earlier version to v7.4 or later (for example, from v6.5 to v7.5), if you need to maintain the `collation_connection` as `utf8mb4_bin` for JDBC connections, it is recommended to configure the `connectionCollation` parameter in the JDBC URL.
 
 The following is a common JDBC URL configuration in TiDB v6.5:
 
 ```
-spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=utf8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultfetchsize=-2147483648&allowMultiQueries=true
+spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultfetchsize=-2147483648&allowMultiQueries=true
 ```
 
 After upgrading to TiDB v7.5 or a later version, it is recommended to configure the `connectionCollation` parameter in the JDBC URL:
 
 ```
-spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=utf8&connectionCollation=utf8mb4_bin&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
+spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
 ```
 
 ### What are the differences between the `utf8mb4_bin` and `utf8mb4_0900_ai_ci` collations?
