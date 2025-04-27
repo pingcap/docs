@@ -283,7 +283,7 @@ To link your TiDB Cloud account to an Azure billing account, take the following 
 
     > **Note:**
     >
-    >  If you have not added your country and region information for your Microsoft account, you also need to enter that information before clicking **Continue**.
+    > If you have not added your country and region information for your Microsoft account, you also need to enter that information before clicking **Continue**.
 
 3. On the order page, click **Subscribe**, fill in the required information on the **Basics** tab, and then click **Review + subscribe**. If everything looks good, click **Subscribe**, and then wait for a few seconds for the subscription to complete.
 
