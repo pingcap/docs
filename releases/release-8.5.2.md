@@ -17,11 +17,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ## Improvements
 
-+ TiDB
++ TiDB <!--tw@Oreoxmt: 1 note--> 
 
     - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - (dup): release-7.5.6.md > 改进提升> TiDB - 将 TTL 表的 GC 及相关统计信息收集任务限定在 owner 节点执行，从而降低开销 [#59357](https://github.com/pingcap/tidb/issues/59357) @[lcwangchao](https://github.com/lcwangchao)
+    - TiDB supports compilation and building on the Loongson loong64 architecture [#59051](https://github.com/pingcap/tidb/issues/59051) @[D3Hunter](https://github.com/D3Hunter)
 
 + TiKV
 
@@ -88,6 +89,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - (dup): release-7.5.6.md > 错误修复> TiDB - 修复 exchange partition 错误判断导致执行失败的问题 [#59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
     - (dup): release-7.5.6.md > 错误修复> TiDB - 修复对统计信息的异常处理不当导致后台任务超时的时候，内存内的统计信息被误删除的问题 [#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.5.5.md > 错误修复> TiDB - 修复 Grafana 中 **Stats Healthy Distribution** 面板的数据可能错误的问题 [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
+    <!--tw@Oreoxmt: the following 9 notes-->
+    - Fix the issue that the value of the `LABELS` column is incorrectly displayed in the `BINLOG_STATUS` column when querying `INFORMATION_SCHEMA.TIDB_SERVERS_INFO` [#59245](https://github.com/pingcap/tidb/issues/59245) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that injecting a kill PD Leader fault during index creation might cause data inconsistency [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that TiDB runs out of memory (OOM) after creating approximately 6.5 million tables [#58368](https://github.com/pingcap/tidb/issues/58368) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that adding a unique key might fail when importing a large amount of data with the Global Sort feature enabled [#59725](https://github.com/pingcap/tidb/issues/59725) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Fix the issue that TiDB returns unreadable error messages after failing to access S3 external storage [#59326](https://github.com/pingcap/tidb/issues/59326) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that querying `infoschema.tables` returns mismatched `table_schema` and `table_name` values [#60593](https://github.com/pingcap/tidb/issues/60593) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that the DDL notifier might fail to deliver notifications when internal SQL commits fail [#59055](https://github.com/pingcap/tidb/issues/59055) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that `ADD INDEX` DDL operations still split SST files by 96 MiB when the Global Sort feature is enabled, despite the Region size is 256 MiB [#59962](https://github.com/pingcap/tidb/issues/59962) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that TiDB servers run out of memory (OOM) when memory usage exceeds 80% during data import with the Global Sort feature enabled [#59508](https://github.com/pingcap/tidb/issues/59508) @[D3Hunter](https://github.com/D3Hunter)
 
 + TiKV
 
