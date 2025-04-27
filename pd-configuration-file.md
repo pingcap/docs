@@ -461,6 +461,12 @@ Configuration items related to labels, which only support the `reject-leader` ty
 
 Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.md) built in PD.
 
+### `disable-custom-prom-addr`
+
++ Whether to disable configuring a custom Prometheus data source address in [TiDB Dashboard](/dashboard/dashboard-intro.md).
++ Default value: `false`
++ When it is set to `true`, if you configure a custom Prometheus data source address in TiDB Dashboard, TiDB Dashboard reports an error.
+
 ### `tidb-cacert-path`
 
 + The path of the root CA certificate file. You can configure this path when you connect to TiDB's SQL services using TLS.
