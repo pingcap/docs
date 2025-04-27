@@ -238,7 +238,7 @@ If you have agreed with our sales on a contract and received an email to review 
 
 To learn more about contracts, feel free to [contact our sales](https://www.pingcap.com/contact-us/).
 
-## Billing from AWS Marketplace, Azure Marketplace, or Google Cloud Marketplace 
+## Billing from AWS Marketplace, Azure Marketplace, or Google Cloud Marketplace
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can link your TiDB Cloud account to an AWS billing account, an Azure billing account, or a Google Cloud billing account. Otherwise, skip this section.
 
@@ -283,7 +283,7 @@ To link your TiDB Cloud account to an Azure billing account, take the following 
 
     > **Note:**
     >
-    >  If you have not added your country and region information for your Microsoft account, you also need to enter that information before clicking **Continue**.
+    > If you have not added your country and region information for your Microsoft account, you also need to enter that information before clicking **Continue**.
 
 3. On the order page, click **Subscribe**, fill in the required information on the **Basics** tab, and then click **Review + subscribe**. If everything looks good, click **Subscribe**, and then wait for a few seconds for the subscription to complete.
 
