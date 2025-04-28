@@ -3393,6 +3393,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set whether to ignore the commands for closing prepared statement cache.
 - When this variable is set to `ON`, the `COM_STMT_CLOSE` command of the Binary protocol and the [`DEALLOCATE PREPARE`](/sql-statements/sql-statement-deallocate.md) statement of the text protocol are ignored. For details, see [Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement).
 
+### `tidb_ignore_inlist_plan_digest` <span class="version-mark">从 v7.6.0 版本开始引入</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether TiDB ignores the element differences in the `IN` list across different queries when generating Plan Digests.
+
+    - When it is the default value `OFF`, TiDB ignores the element differences in the `IN` list (including the difference in the number of element) when generating Plan Digests.
+    - When it is set to `ON`, TiDB includes the elements (as well as the number of elements) in the `IN` list as part of Plan Digests. The element differences in the `IN` list result in different Plan Digests.
+
 ### tidb_index_join_batch_size
 
 - Scope: SESSION | GLOBAL
