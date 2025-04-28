@@ -40,7 +40,7 @@ This section lists some FAQs and their solutions after you upgrade TiDB.
 
 When upgrading from an earlier version to v7.4 or later, if the `connectionCollation` is not configured, and the `characterEncoding` is either not configured or configured as `UTF-8` in the JDBC URL, the default collation in your JDBC connections might change from `utf8mb4_bin` to `utf8mb4_0900_ai_ci` after upgrading. If you need to maintain the collation as `utf8mb4_bin`, configure `connectionCollation=utf8mb4_bin` in the JDBC URL.
 
-For more information, see [Collation used in JDBC connections](/faq/sql-faq.md#the-collation-used-in-jdbc-connections).
+For more information, see [Collation used in JDBC connections](/faq/sql-faq.md#collation-used-in-jdbc-connections).
 
 ### The character set (charset) errors when executing DDL operations
 
