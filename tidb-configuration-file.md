@@ -79,7 +79,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `tikv-worker-url` <span class="version-mark">New in v9.0.0-xxxx</span>
 
-+ Specifies the url of tikv-worker. We added in the code, but it's not used in this version. Please don't use it, this config might be deleted without notifications.
++ Specifies the url of tikv-worker. This option is added but currently unused and may be removed in a future release without notice.
 
 ### `lease`
 
