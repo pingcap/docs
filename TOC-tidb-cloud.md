@@ -590,6 +590,7 @@
       - [Sequence Functions](/functions-and-operators/sequence-functions.md)
       - [List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md)
       - [TiDB Specific Functions](/functions-and-operators/tidb-functions.md)
+      - [Utility Functions](/functions-and-operators/utility-functions.md)
     - [Clustered Indexes](/clustered-indexes.md)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)
