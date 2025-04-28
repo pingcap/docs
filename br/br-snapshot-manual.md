@@ -305,7 +305,7 @@ Calculating table-level checksums can verify data integrity during backup but in
 
 ### Restore Checksum
 
-Starting from v9.5.0, the BR tool does not perform table-level checksum verification (`--checksum=false`) by default during restore operations to improve restore performance. If you need to perform table-level checksum verification, you can explicitly specify `--checksum=true`. File-level checksum verification is always performed to ensure the basic integrity of restored data.
+Starting from v9.0.0, the BR tool does not perform table-level checksum verification (`--checksum=false`) by default during restore operations to improve restore performance. If you need to perform table-level checksum verification, you can explicitly specify `--checksum=true`. File-level checksum verification is always performed to ensure the basic integrity of restored data.
 
 After restoration, data validation is usually performed to ensure data security. When table-level checksums are disabled, the comprehensive validation step for table data is skipped, thereby accelerating the restore process. For scenarios with strict data integrity requirements, you may choose to enable table-level checksums.
 
