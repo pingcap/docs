@@ -17,81 +17,8 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 ## OS and platform requirements
 
-<<<<<<< HEAD
 <SimpleTab>
 <div label="For v6.1.1 and later v6.1.x versions">
-=======
-<table>
-<thead>
-  <tr>
-    <th>Operating systems</th>
-    <th>Supported CPU architectures</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Amazon Linux 2</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Amazon Linux 2023</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Rocky Linux 9.1 or later</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Kylin V10 SP1/SP2/SP3 (SP3 is supported starting from v7.5.5)</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>UnionTech OS (UOS) V20</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>openEuler 22.03 LTS SP1/SP3</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>macOS 13 (Ventura) or later</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Oracle Enterprise Linux 8 or a later</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>Ubuntu LTS 22.04 or later</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>CentOS 9 Stream</td>
-    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
-  </tr>
-  <tr>
-    <td>Debian 11 (Bullseye) or later</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>Fedora 40 or later</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>openSUSE Leap later than v15.6 (not including Tumbleweed)</td>
-    <td>x86_64</td>
-  </tr>
-  <tr>
-    <td>SUSE Linux Enterprise Server 15.6</td>
-    <td>x86_64</td>
-  </tr>
-</tbody>
-</table>
->>>>>>> 36dfd3bc59 (hardware-and-software-requirements: update Kylin Euler to Kylin (#20874))
 
 Starting from v6.1.1, TiDB provides multi-level support for different quality standards on the combination of operating systems and CPU architectures.
 
@@ -102,7 +29,7 @@ Starting from v6.1.1, TiDB provides multi-level support for different quality st
     | Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
     | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
-    | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+    | Kylin V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | UnionTech OS (UOS) V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
 
     > **Note:**
