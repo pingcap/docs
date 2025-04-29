@@ -114,9 +114,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - (dup): release-6.5.12.md > 错误修复> TiKV - 修复 Region Split 后可能无法快速选出 Leader 的问题 [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     - (dup): release-6.5.12.md > 错误修复> TiKV - 修复在仅启用一阶段提交 (1PC) 而未启用异步提交 (Async Commit) 时，可能无法读取最新写入数据的问题 [#18117](https://github.com/tikv/tikv/issues/18117) @[zyguan](https://github.com/zyguan)
 
-+ PD
++ PD <!--tw@lilin90: 5 notes-->
 
-    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - Fix the concurrency issue that might arise when forwarding TSO in microservice scenarios [#9091](https://github.com/tikv/pd/issues/9091) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that the result returned by `BatchScanRegions` was not properly limited [#9216](https://github.com/tikv/pd/issues/9216) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that an unexpected election occurs when one follower experiences a network partition from the leader [#9020](https://github.com/tikv/pd/issues/9020) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that `COOLDOWN` or `SWITCH_GROUP` cannot be triggered when `QUERY_LIMIT` is set in resource control [#60404](https://github.com/pingcap/tidb/issues/60404) @[JmPotato](https://github.com/JmPotato)
+    - Fix the issue that `StoreInfo` might be incorrectly overridden [#9185](https://github.com/tikv/pd/issues/9185) @[okJiang](https://github.com/okJiang)
     - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - (dup): release-7.5.6.md > 错误修复> PD - 修复在导入或添加索引场景中，因 PD 网络不稳定可能导致操作失败的问题 [#8962](https://github.com/tikv/pd/issues/8962) @[okJiang](https://github.com/okJiang)
     - (dup): release-7.5.6.md > 错误修复> PD - 修复单个日志文件 `max-size` 默认值未被正确设置的问题 [#9037](https://github.com/tikv/pd/issues/9037) @[rleungx](https://github.com/rleungx)
@@ -146,7 +150,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + Tools
 
-    + Backup & Restore (BR)
+    + Backup & Restore (BR) <!--tw@lilin90: 1 note-->
 
         - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
@@ -171,13 +175,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
         - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - (dup): release-6.5.12.md > 错误修复> Tools> TiDB Data Migration (DM) - 修复当同时配置 TLS 和 `shard-mode` 时，`start-task` 会在前置检查中报错的问题 [#11842](https://github.com/pingcap/tiflow/issues/11842) @[sunxiaoguang](https://github.com/sunxiaoguang)
 
-    + TiDB Lightning
+    + TiDB Lightning <!--tw@lilin90: 4 notes-->
 
         - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - (dup): release-6.5.12.md > 错误修复> Tools> TiDB Lightning - 修复在高并发场景下，从云存储导入数据时性能下降的问题 [#57413](https://github.com/pingcap/tidb/issues/57413) @[xuanyu66](https://github.com/xuanyu66)
         - (dup): release-6.5.12.md > 错误修复> Tools> TiDB Lightning - 修复使用 TiDB Lightning 导入数据时，错误报告输出被截断的问题 [#58085](https://github.com/pingcap/tidb/issues/58085) @[lance6716](https://github.com/lance6716)
         - (dup): release-6.5.12.md > 错误修复> Tools> TiDB Lightning - 修复日志没有正确脱敏的问题 [#59086](https://github.com/pingcap/tidb/issues/59086) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Fix the issue that authentication would fail with an `context canceled` error when using an external account to perform any GCS storage operation [#60155](https://github.com/pingcap/tidb/issues/60155) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that TiDB Lightning can get stuck for several hours when importing Parquet files from cloud storage into TiDB [#60224](https://github.com/pingcap/tidb/issues/60224) @[joechenrh](https://github.com/joechenrh)
+        - Fix the issue that TiDB Lightning could run out of memory (OOM) during writing or ingesting SST files into the TiKV cluster when importing large volumes of data [#59947](https://github.com/pingcap/tidb/issues/59947) @[OliverS929](https://github.com/OliverS929)
+        - Fix the issue that low maximum QPS during table creation and slow access to `information_schema.tables` cause TiDB Lightning to dispatch schema jobs slower in scenarios with millions of tables [#58141](https://github.com/pingcap/tidb/issues/58141) @[D3Hunter](https://github.com/D3Hunter)
 
     + Dumpling
 
