@@ -17,7 +17,80 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 ## OS and platform requirements
 
+<<<<<<< HEAD
 In v6.5 LTS, TiDB provides multi-level support for different quality standards on the combination of operating systems and CPU architectures.
+=======
+<table>
+<thead>
+  <tr>
+    <th>Operating systems</th>
+    <th>Supported CPU architectures</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Amazon Linux 2</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Amazon Linux 2023</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Rocky Linux 9.1 or later</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Kylin V10 SP1/SP2/SP3 (SP3 is supported starting from v7.5.5)</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>UnionTech OS (UOS) V20</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>openEuler 22.03 LTS SP1/SP3</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>macOS 13 (Ventura) or later</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Oracle Enterprise Linux 8 or a later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>Ubuntu LTS 22.04 or later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>CentOS 9 Stream</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Debian 11 (Bullseye) or later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>Fedora 40 or later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>openSUSE Leap later than v15.6 (not including Tumbleweed)</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>SUSE Linux Enterprise Server 15.6</td>
+    <td>x86_64</td>
+  </tr>
+</tbody>
+</table>
+>>>>>>> 36dfd3bc59 (hardware-and-software-requirements: update Kylin Euler to Kylin (#20874))
 
 + For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
 
