@@ -26,7 +26,7 @@ In v6.5 LTS, TiDB provides multi-level support for different quality standards o
     | Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
     | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version (TiDB ends support for it starting from 8.4 DMR)</li></ul> |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
-    | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+    | Kylin V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | UnionTech OS (UOS) V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
     | openEuler 22.03 LTS SP3/SP4 (supported starting from v6.5.12) | <ul><li>x86_64</li><li>ARM 64</li></ul> |
 
