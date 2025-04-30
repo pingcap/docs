@@ -424,12 +424,12 @@ Configuration items related to scheduling
 
 ### `enable-heartbeat-breakdown-metrics` <span class="version-mark">Introduced in v8.0.0</span>
 
-+ Controls whether to enable breakdown metrics for Region heartbeats. It is used to collect statistics on the time consumed in each stage of Region heartbeat processing, facilitating analysis through monitoring.
++ Controls whether to enable breakdown metrics for Region heartbeats. These metrics measure the time consumed in each stage of Region heartbeat processing, facilitating analysis through monitoring.
 + Default value: `true`
 
-### `enable-heartbeat-concurrent-runner` <span class="version-mark">Introduced in v8.0.0</span>
+### `enable-heartbeat-concurrent-runner` <span class="version-mark">New in v8.0.0</span>
 
-+ Controls whether to enable asynchronous concurrent processing for Region heartbeats. When enabled, it uses an independent executor to handle Region heartbeat requests concurrently, which can improve heartbeat processing throughput and reduce latency.
++ Controls whether to enable asynchronous concurrent processing for Region heartbeats. When enabled, an independent executor handles Region heartbeat requests asynchronously and concurrently, which can improve heartbeat processing throughput and reduce latency.
 + Default value: `true`
 
 ## `replication`
