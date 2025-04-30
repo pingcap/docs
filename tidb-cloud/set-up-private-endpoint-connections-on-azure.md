@@ -1,5 +1,5 @@
 ---
-title: Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with Azure
+title: Connect to a TiDB Dedicated Cluster via Azure Private Endpoint
 summary: Learn how to connect to your TiDB Cloud cluster via Azure Private Endpoint.
 ---
 
