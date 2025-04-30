@@ -2355,9 +2355,9 @@ Configuration items related to TiCDC.
 
 ### `incremental-scan-concurrency-limit` <span class="version-mark">New in v7.6.0</span>
 
-+ The maximum queue length for the tasks of incrementally scanning historical data waiting to be executed. When the number of tasks waiting to be executed exceeds this limit, new tasks are rejected.
++ The maximum queue length for the tasks of incrementally scanning historical data waiting to be executed. When the number of tasks waiting to be executed exceeds this limit, new tasks will be rejected.
 + Default value: `10000`, which means that at most 10000 tasks can be queued for execution.
-+ Note: `incremental-scan-concurrency-limit` must be greater than or equal to `incremental-scan-concurrency`; otherwise, TiKV uses `incremental-scan-concurrency` to override this configuration.
++ Note: `incremental-scan-concurrency-limit` must be greater than or equal to [`incremental-scan-concurrency`](#incremental-scan-concurrency); otherwise, TiKV uses `incremental-scan-concurrency` to override this configuration.
 
 ## resolved-ts
 
