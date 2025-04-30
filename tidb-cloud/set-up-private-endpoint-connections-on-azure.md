@@ -119,4 +119,4 @@ The endpoint service is created automatically after you open the **Create Azure 
 
 ### If I cancel the action during setup, what should I do before accepting the private endpoint?
 
-Azure private endpoint connection feature can automatically detect your private endpoints. This means if you cancel your action during the setup of a private endpoint connection, you can still view your created endpoint on the networking page. If the cancellation is unintentional, you can continue to edit it to complete the setup. If the cancellation is deliberate, you can delete it directly in TiDB Cloud side.
+The Azure private endpoint connection feature can automatically detect your private endpoints. This means if you cancel your action during the setup of a private endpoint connection, you can still view your created endpoint on the networking page. If the cancellation is unintentional, you can continue to edit it to complete the setup. If the cancellation is deliberate, you can delete the endpoint directly in the TiDB Cloud console.
