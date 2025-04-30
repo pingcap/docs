@@ -117,6 +117,6 @@ The possible statuses of a private endpoint service are explained as follows:
 The endpoint service is created automatically after you open the **Create Azure Private Endpoint** page and choose the TiDB cluster. If it shows as failed or remains in the **Creating** state for a long time, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 
-### If I cancel the action during set up, what should I do before accepting private endpoint?
+### If I cancel the action during setup, what should I do before accepting the private endpoint?
 
 Azure private endpoint connection feature can automatically detect your private endpoints. This means if you cancel your action during the setup of a private endpoint connection, you can still view your created endpoint on the networking page. If the cancellation is unintentional, you can continue to edit it to complete the setup. If the cancellation is deliberate, you can delete it directly in TiDB Cloud side.
