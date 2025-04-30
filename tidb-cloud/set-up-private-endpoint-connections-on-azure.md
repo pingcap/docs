@@ -90,7 +90,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 After you have accepted the endpoint connection, you are redirected back to the connection dialog.
 
 1. Wait for the private endpoint connection status to become Active (approximately 5 minutes).
-2. In the Connect With drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
+2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
 3. Connect to your cluster with the connection string.
 
 ### Private endpoint status reference
