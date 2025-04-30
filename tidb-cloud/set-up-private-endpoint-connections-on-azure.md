@@ -61,7 +61,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 >
 > For each TiDB Cloud Dedicated cluster, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
-2. Log in Azure Console and create a new private endpoint for your cluster using the copied Resource ID. For details, please refer to [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip) in Azure documentation.
+2. Log in to the [Azure portal](https://portal.azure.com/), and then create a private endpoint for your cluster using the copied TiDB Cloud resource ID as follows:
     1. Set the **connection method** to "Connect to an Azure resource by resource ID or alias" in **Resource** step.
     2. Paste the copied Resource ID to the field of "**Resource ID or alias**".
     ![Create Azure private endpoint using service resource id](/media/tidb-cloud/azure-create-private-endpoint-service-resource-id.png)
