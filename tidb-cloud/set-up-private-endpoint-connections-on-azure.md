@@ -47,7 +47,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target TiDB cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection**].
+3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection** to open the **Create Azure Private Endpoint Connection** dialog.
 
 > **Note:**
 >
