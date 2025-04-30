@@ -2531,9 +2531,3 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 
 + Controls whether to display the memory allocation status at the TiKV thread level to track the memory usage of each TiKV thread.
 + Default value: `true`
-
-### `mvcc-amplification-threshold` <span class="version-mark">New in v8.5.0</span>
-
-+ Controls the threshold for MVCC read amplification when the in-memory engine selects and loads Regions. The default value is `10`, indicating that if reading a single row in a Region requires processing more than 10 MVCC versions, this Region might be loaded into the in-memory engine.
-+ Default value: `10`
->>>>>>> a5b3f19d33 (tikv: recorrect the settings of some configs and supplement missing annotations for several configs. (#20871))
