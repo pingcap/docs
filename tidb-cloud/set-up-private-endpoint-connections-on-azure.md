@@ -95,7 +95,7 @@ After you have accepted the endpoint connection, you are redirected back to the 
 
 ### Private endpoint status reference
 
-When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed.
+You can view the statuses of private endpoints or private endpoint services on the **Networking** page of your cluster.
 
 The possible statuses of a private endpoint are explained as follows:
 
