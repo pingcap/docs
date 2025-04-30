@@ -107,7 +107,7 @@ The possible statuses of a private endpoint service are explained as follows:
 
 ### TiDB Cloud fails to create an endpoint service. What should I do?
 
-The endpoint service is created automatically after you open the **Create Google Cloud Private Endpoint** page and choose the TiDB cluster. If it shows as failed or remains in the **Creating** state for a long time, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
+The endpoint service is created automatically after you open the **Create Azure Private Endpoint** page and choose the TiDB cluster. If it shows as failed or remains in the **Creating** state for a long time, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 
 ### If I cancel the action during set up, what should I do before accepting private endpoint?
