@@ -423,7 +423,7 @@ Configuration items related to scheduling
 + Specifies how many days the hot Region information is retained.
 + Default value: `7`
 
-### `enable-heartbeat-breakdown-metrics` <span class="version-mark">Introduced in v8.0.0</span>
+### `enable-heartbeat-breakdown-metrics` <span class="version-mark">New in v8.0.0</span>
 
 + Controls whether to enable breakdown metrics for Region heartbeats. These metrics measure the time consumed in each stage of Region heartbeat processing, facilitating analysis through monitoring.
 + Default value: `true`
