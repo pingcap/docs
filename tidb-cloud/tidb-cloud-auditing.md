@@ -176,49 +176,74 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 
 ### Enable audit logging for Azure
 
-#### Step 1. Create an Azure Blob
+To enable audit logging for Azure, take the following steps:
 
-Specify Blob Storage in your corporate-owned Azure account as a destination to which TiDB Cloud writes the audit logs.
+#### Step 1. Create an Azure storage account
 
-For more information, see [Create an Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) in the Azure User Guide.
+Create an Azure storage account in your organization's Azure subscription as the destination to which TiDB Cloud writes the database audit logs.
+
+For more information, see [Create an Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) in Azure documentation.
 
 #### Step 2. Configure Azure Blob access
 
-1. In the Azure Management Console, go to **Storage Accounts**, select a **Storage Account** that you want to prepare for the database audit log, and enter the **Storage Account** management panel.
-2. In the management panel, go to **Data storage > Containers**, click ** + Container ** to create a storage container for the audit log.
-3. Select the Container you want to access, click **...**, and select **Container properties**. Get the access URL of the Blob in the **Container** properties panel for later use.
-4. Select the Container you want to access, click **...**, and select Generate SAS to enter the operation panel.
+1. In the [Azure portal](https://portal.azure.com/), create a container used for storing database audit logs as follows:
 
-    1. For the option **Signing method**, click **Account key**.
-    2. For the option **Permissions**, select **Write**, **Read**, **Create** to ensure that the audit log file can be written to the Blob normally based on SAS token.
-    3. For the option **Start and expiry date/time**, set the validity period of SAS token.
-    4. For the option **Allowed protocols**, select **HTTPS only** to ensure the security of access.
-    5. Click **Generate SAS token and URL**.
-    6. Get the **Blob SAS token** in the panel for later use.
+    1. In the left navigation pane of the Azure portal, click **Storage Accounts**, and then select the storage account for storing database audit logs.
 
-> **Note:**
->
-> - Audit log is a long-term active function. You need to set a longer-term SAS token. However, a long-term token may bring the risk of information leakage. Therefore, considering security considerations, it is recommended that you replace your SAS token every six months or every year.
-> - You need to generate and replace a new SAS token for the database audit log before the SAS token expires to ensure the availability of the audit log function.
-> - SAS token cannot be revoked. Please set the validity period of SAS token reasonably.
+        >**Tip:**
+        >
+        > If the left navigation pane is hidden, click the menu button in the upper-left corner to toggle its visibility.
+
+    2. In the navigation pane for the selected storage account, click **Data storage > Containers**, and then click **+ Container** to open the **New container** pane.
+    3. In the **New container** pane, enter a name for your new container, set the anonymous access level (the recommended level is **Private**, which means no anonymous access), and then click **Create**. The new container will be created and displayed in the container list in a few seconds.
+
+2. Get the URL of the target container:
+
+    1. In the container list, select the target container, click **...** for the container, and then select **Container properties**.
+    2. On the displayed properties page, copy the **URL** value for later use, and then return to the container list.
+
+3. Generate a SAS token for the target container:
+
+    1. In the container list, select the target container, click **...** for the container, and then select **Generate SAS**.
+    2. In the displayed **Generate SAS** pane, select **Account key** for **Signing method**.
+    3. In the **Permissions** drop-down list, select **Read**, **Write**, and **Create** to allow writing audit log files.
+    4. In the **Start** and **Expiry** fields, specify a validity period for the SAS token.
+
+        > **Note:**
+        >
+        > - Audit logging is a long-term feature that requires a SAS token with a sufficiently long validity period. However, longer validity increases the risk of token leakage. For security, it is recommended to replace your SAS token every six to twelve months.
+        > - The generated SAS token cannot be revoked, so you need to set its validity period carefully.
+        > - Make sure to re-generate and update the SAS token before it expires to ensure continuous availability of audit logs.
+
+    5. For **Allowed protocols**, select **HTTPS only** to ensure secure access.
+    6. Click **Generate SAS token and URL**, and then copy the displayed **Blob SAS token** for later use.
 
 #### Step 3. Enable audit logging
 
-In the TiDB Cloud console, enter the Enable Database Audit Logging dialog box and perform the following steps:
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-1. Enter the URL of the storage container where the audit log files are to be written in the Blob URL field.
-2. Enter the SAS token associated with the audit log storage container in the SAS Token field.
-3. Click Test Connection to verify whether TiDB Cloud can access and write to the container.
+    > **Tip:**
+    >
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
-If it is successful, The connection is successfully is displayed. Otherwise, check your access configuration.
+2. Click the name of your target cluster to go to its overview page, and then click **DB Audit Logging** in the left navigation pane.
+3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
+4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-access):
 
-4. Click Enable to enable audit logging for the cluster.
+    - In the **Blob URL** field, enter the URL of the container where audit logs will be stored.
+    - In the **SAS Token** field, enter the SAS token for accessing the container.
 
-TiDB Cloud is ready to write audit logs for the specified cluster to your Azure Blob.
+5. Click **Test Connection** to verify whether TiDB Cloud can access and write to the container.
+
+    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+
+6. Click **Enable** to enable audit logging for the cluster.
+
+    TiDB Cloud is ready to write audit logs for the specified cluster to your Azure blob container.
 
 > **Note:**
 >
-> After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click Test Connection again to verify that TiDB Cloud can connect to the bucket. Then, click Enable to apply the changes.
+> After enabling audit logging, if you make new changes to the **Blob URL** or **SAS Token** fields, you must click **Test Connection** again to verify that TiDB Cloud can connect to the container. Then, click **Enable** to apply the changes.
 
 ## Specify auditing filter rules
 
