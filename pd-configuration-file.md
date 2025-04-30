@@ -96,6 +96,22 @@ This document only describes parameters that are not included in command-line pa
 + The time interval for automatic compaction of the meta-information database when `auto-compaction-retention` is `periodic`. When the compaction mode is set to `revision`, this parameter indicates the version number for the automatic compaction.
 + Default value: 1h
 
+### `tick-interval`
+
++ Equivalent to the `heartbeat-interval` configuration item of etcd. It controls the Raft heartbeat interval between embedded etcd instances in different PD nodes. A smaller value accelerates failure detection but increases network load.
++ Default value: `500ms`
+
+### `election-interval`
+
++ Equivalent to the `election-timeout` configuration item of etcd. It controls the election timeout for embedded etcd instances in PD nodes. If an etcd instance does not receive a valid heartbeat from other etcd instances within this period, it initiates a Raft election.
++ Default value: `3000ms`
++ This value must be at least five times the [`tick-interval`](#tick-interval). For example, if `tick-interval` is `500ms`, `election-interval` must be greater than or equal to `2500ms`.
+
+### `enable-prevote`
+
++ Equivalent to the `pre-vote` configuration item of etcd. It controls whether the embedded etcd in the PD node enables Raft pre-vote. When enabled, etcd performs an additional election phase to check whether enough votes can be obtained to win the election, minimizing service disruption.
++ Default value: `true`
+
 ### `force-new-cluster`
 
 + Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
@@ -411,6 +427,16 @@ Configuration items related to scheduling
 
 + Specifies how many days the hot Region information is retained.
 + Default value: `7`
+
+### `enable-heartbeat-breakdown-metrics` <span class="version-mark">New in v8.0.0</span>
+
++ Controls whether to enable breakdown metrics for Region heartbeats. These metrics measure the time consumed in each stage of Region heartbeat processing, facilitating analysis through monitoring.
++ Default value: `true`
+
+### `enable-heartbeat-concurrent-runner` <span class="version-mark">New in v8.0.0</span>
+
++ Controls whether to enable asynchronous concurrent processing for Region heartbeats. When enabled, an independent executor handles Region heartbeat requests asynchronously and concurrently, which can improve heartbeat processing throughput and reduce latency.
++ Default value: `true`
 
 ## `replication`
 
