@@ -1,11 +1,11 @@
 ---
-title: Connect to a TiDB Dedicated Cluster via Azure Private Endpoint
+title: Connect to a TiDB Cloud Dedicated Cluster via Azure Private Endpoint
 summary: Learn how to connect to your TiDB Cloud cluster via Azure Private Endpoint.
 ---
 
-# Connect to a TiDB Dedicated Cluster via Azure Private Endpoint
+# Connect to a TiDB Cloud Dedicated Cluster via Azure Private Endpoint
 
-This document describes how to connect to your TiDB Dedicated cluster via Azure Private Endpoint.
+This document describes how to connect to your TiDB Cloud Dedicated cluster via Azure Private Endpoint.
 
 > **Tip:**
 >
@@ -70,13 +70,15 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 3. After the private endpoint is created, click **Go to resource**, and then do the following:
 
-        - Click **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
+     - Click **Properties** in the left navigation pane, and copy its **Resource ID** for later use.
 
-        ![Azure private endpoint dns ip](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+     ![Azure private endpoint resource id](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
 
-        - Click **Properties** in the left navigation pane, and copy its **Resource ID** for later use. 
-        
-        ![Azure private endpoint resource id](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
+     - Click **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
+
+     ![Azure private endpoint dns ip](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+
+       
   
 
 ### Step 3. Accept endpoint
