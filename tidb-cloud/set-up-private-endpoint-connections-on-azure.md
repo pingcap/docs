@@ -81,7 +81,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 ### Step 3. Accept endpoint
 
-1. Return to the TiDB Cloud console, and paste the copied **Resource ID** and **IP address** to the corresponding field.
+1. Return to the **Create Azure Private Endpoint Connection** dialog in the TiDB Cloud console, and then paste the copied **Resource ID** and **IP address** into the corresponding fields.
 2. Click **Verify Endpoint** to validate the private endpoint's information. If you meet the error, please check the information and try it again.
 3. Once verification passes, click **Accept Endpoint** to approve the connection from your private endpoint.
 
