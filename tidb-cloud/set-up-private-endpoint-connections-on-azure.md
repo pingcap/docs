@@ -29,7 +29,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Only the `Organization Owner` and `Project Owner` roles can create Google Cloud Private Service Connect endpoints.
+- Only the `Organization Owner` and `Project Owner` roles can create Private Endpoints.
 - The private endpoint and the TiDB cluster to be connected must be located in the same region.
 
 ## Set up a private endpoint with Azure Private Link
