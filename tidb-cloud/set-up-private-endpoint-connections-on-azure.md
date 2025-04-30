@@ -55,7 +55,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 ### Step 2. Create Azure private endpoint
 
-1. In **Create Azure Private Endpoint Connection** page, copy the value provided for **Resource ID** of private link service. Do not close the window for later use.
+1. In the **Create Azure Private Endpoint Connection** dialog, copy the TiDB Cloud resource ID of the private link service and leave the dialog open for later use.
 
 > **Note:**
 >
