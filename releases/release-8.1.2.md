@@ -1,6 +1,6 @@
 ---
 title: TiDB 8.1.2 Release Notes
-summary: Learn about the improvements and bug fixes in TiDB 8.1.2.
+summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 8.1.2.
 ---
 
 # TiDB 8.1.2 Release Notes
@@ -10,6 +10,13 @@ Release date: December 26, 2024
 TiDB version: 8.1.2
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.1/production-deployment-using-tiup)
+
+## Compatibility changes
+
+- Add the TiKV configuration item [`server.snap-min-ingest-size`](/tikv-configuration-file.md#snap-min-ingest-size-new-in-v812), which specifies the minimum threshold for whether TiKV adopts the ingest method when processing snapshots. The default value is `2MiB`.
+
+    - When the snapshot size exceeds this threshold, TiKV adopts the ingest method, which imports SST files from the snapshot into RocksDB. This method is faster for large files.
+    - When the snapshot size does not exceed this threshold, TiKV adopts the direct write method, which writes each piece of data into RocksDB individually. This method is more efficient for small files.
 
 ## Improvements
 
