@@ -12,16 +12,17 @@ If you need to configure these external storages for TiDB Cloud Serverless clust
 
 ## Configure Amazon S3 access
 
-To allow a TiDB Cloud Dedicated cluster to access the source data in your Amazon S3 bucket, configure the bucket access for the cluster using either of the following methods:
+To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need to configure the bucket access for TiDB Cloud. You can use either of the following methods to configure the bucket access:
 
-- [Use a Role ARN](#configure-amazon-s3-access-using-a-role-arn): use a Role ARN to access your Amazon S3 bucket.
-- [Use an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key): use the access key of an IAM user to access your Amazon S3 bucket.
+- Use an AWS access key: use the access key of an IAM user to access your Amazon S3 bucket.
+- Use a Role ARN: use a Role ARN to access your Amazon S3 bucket.
 
-### Configure Amazon S3 access using a Role ARN
+<SimpleTab>
+<div label="Role ARN">
 
 Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), get the corresponding TiDB Cloud account ID and external ID of the target TiDB cluster.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), get the TiDB Cloud account ID and external ID of the target TiDB cluster.
 
     1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
@@ -51,7 +52,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
     4. On the **Create policy** page, click the **JSON** tab.
     5. Copy the following access policy template and paste it to the policy text field.
 
-        ```
+        ```json
         {
             "Version": "2012-10-17",
             "Statement": [
@@ -115,7 +116,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
         - Under **Trusted entity type**, select **AWS account**.
         - Under **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
-        - Under **Options**, click **Require external ID** to avoid the [confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html), and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without "Require external ID", anyone with your S3 bucket URI and IAM role ARN might be able to access your Amazon S3 bucket. If the role is created with both the account ID and external ID, only TiDB clusters running in the same project and the same region can access the bucket.
+        - Under **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field. If the role is created without "Require external ID", once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role ARN to access your Amazon S3 bucket. If the role is created with the account ID and external ID, only the corresponding TiDB cluster can access the bucket.
 
     3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
     4. Under **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
@@ -125,7 +126,8 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
 4. In the TiDB Cloud console, go to the **Data Import** page where you get the TiDB Cloud account ID and external ID, and then paste the role ARN to the **Role ARN** field.
 
-### Configure Amazon S3 access using an AWS access key
+</div>
+<div label="Access Key">
 
 It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
 
@@ -147,6 +149,9 @@ Take the following steps to configure an access key:
 > **Note:**
 >
 > TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import is complete.
+
+</div>
+</SimpleTab>
 
 ## Configure GCS access
 
@@ -216,23 +221,23 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
 ## Configure Azure Blob Storage access
 
-To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use an account SAS token to configure the container access:
+To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to configure the Azure Blob access for the container. You can use a service SAS token to configure the container access:
 
 1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
 
-2. In the navigation pane for your storage account, click **Security + networking** > **Shared access signature**.
+2. On your **Storage account** page, click **Security+network** in the left navigation pane, and then click **Shared access signature**.
 
-    ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
+   ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
 
-3. On the **Shared access signature** page, create an [account SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) with the necessary permissions as follows:
+3. On the **Shared access signature** page, create a service SAS token with the necessary permissions as follows. For more information, see [Create a service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview).
 
-    1. Under **Allowed services**, select **Blob**.
-    2. Under **Allowed resource types**, select **Container** and **Object**.
-    3. Under **Allowed permissions**, select the required permissions. For example, importing data to TiDB Cloud Dedicated requires **Read** and **List**.
+    1. In the **Allowed services** section, choose the **Blob** service.
+    2. In the **Allowed Resource types** section, choose **Container** and **Object**.
+    3. In the **Allowed permissions** section, choose the permissions as needed. For example, importing data to a TiDB Cloud Dedicated cluster needs the **Read** and **List** permissions.
     4. Adjust **Start and expiry date/time** as needed. For security reasons, it is recommended to set an expiration date that aligns with your data import timeline.
-    5. Keep the default values for other settings.
+    5. You can keep the default values for other settings.
 
-    ![sas-create](/media/tidb-cloud/dedicated-external-storage/azure-sas-create.png)
+   ![sas-create](/media/tidb-cloud/dedicated-external-storage/azure-sas-create.png)
 
 4. Click **Generate SAS and connection string** to generate the SAS token.
 
