@@ -61,6 +61,7 @@ Data Migration supports the following data sources and versions:
 - Amazon Aurora (MySQL 5.6 and 5.7)
 - Amazon RDS (MySQL 5.7)
 - Google Cloud SQL for MySQL 5.6 and 5.7
+- Azure Database for MySQL 5.7
 
 ### Grant required privileges to the upstream database
 
@@ -108,7 +109,7 @@ Before creating a migration job, set up the network connection according to your
 
 - If you use public IP (this is, public connection) for network connection, make sure that the upstream database can be connected through the public network.
 
-- If you use AWS VPC Peering or Google Cloud VPC Network Peering, see the following instructions to configure the network.
+- If you use AWS VPC Peering, Google Cloud VPC Network Peering, or Azure VNet Peering, see the following instructions to configure the network.
 
 <details>
 <summary> Set up AWS VPC Peering</summary>
@@ -140,6 +141,25 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
     You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
+
+</details>
+
+<details>
+<summary> Set up Azure VNet Peering </summary>
+
+If your MySQL service is in an Azure Virtual Network (VNet), take the following steps:
+
+1. Establish a VNet peering connection between the VNet of your MySQL service and the VNet of your TiDB Cloud cluster. Follow the steps in the Azure documentation for creating a virtual network peering.
+
+2. Modify the inbound rules of the NSG associated with your MySQL service to allow traffic from your TiDB Cloud cluster.
+    - Add the CIDR of the region where your TiDB Cloud cluster is located to the inbound rules of the NSG.
+    - Specify the port number used by your MySQL service (e.g., 3306) to ensure connectivity.
+
+3. If the MySQL URL contains a DNS hostname, you need to configure Azure to allow your TiDB Cloud cluster to resolve the hostname of your MySQL service.
+    - In the peering settings, enable Allow forwarded traffic and Use remote gateways options on the VNet hosting your MySQL service.
+    - Ensure Allow gateway transit is enabled on the VNet where your TiDB Cloud cluster is deployed.
+
+4. Verify connectivity by testing the connection from your TiDB Cloud cluster to the MySQL service to ensure that the peering and security rules are correctly configured. You can use network testing tools or run a sample query from TiDB Cloud.
 
 </details>
 
@@ -176,7 +196,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
    - **Data source**: the data source type.
    - **Region**: the region of the data source, which is required for cloud databases only.
-   - **Connectivity method**: the connection method for the data source. Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.
+   - **Connectivity method**: the connection method for the data source. Currently, you can choose public IP, VPC Peering, Private Link, or Azure Private Endpoint according to your connection method.
    - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
    - **Service Name** (for Private Link): the endpoint service name.
    - **Port**: the port of the data source.
