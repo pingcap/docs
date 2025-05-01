@@ -17,9 +17,9 @@ TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service h
 
 Powered by Azure Private Link, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
 
-The architecture of Azure private endpoint is as follows:
+The architecture of Azure private link is as follows, based on the [official Azure documentation](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview):
 
-![Azure Private Endpoint architecture](/media/tidb-cloud/azure-private-endpoint-arch.png)
+![Azure Private Link architecture](/media/tidb-cloud/azure-private-endpoint-arch.png)
 
 For more detailed definitions of the private endpoint and endpoint service, see the following Azure documents:
 
