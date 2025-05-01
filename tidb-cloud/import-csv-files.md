@@ -220,8 +220,8 @@ To import the CSV files to TiDB Cloud, take the following steps:
     - **Included Schema Files**: this field is only visible when importing multiple files. If the source folder contains the target table schemas, select **Yes**. Otherwise, select **No**.
     - **Data Format**: select **CSV**.
     - **File URI** or **Folder URI**:
-        - When importing one file, enter the source file URI and name in the following format `azure://[container_name]/[data_source_folder]/[file_name].csv`. For example, `azure://sampledata/ingest/TableName.01.csv`.
-        - When importing multiple files, enter the source file URI and name in the following format `azure://[container_name]/[data_source_folder]/`. For example, `azure://sampledata/ingest/`.
+        - When importing one file, enter the source file URI and name in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].csv`. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/TableName.01.csv`.
+        - When importing multiple files, enter the source folder URI in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/`. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/`.
     - **Container Access**: you can use either a SAS token or a Managed Identity to access your container. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
 4. Click **Connect**.
@@ -230,13 +230,13 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     When importing multiple files, you can use **Advanced Settings** > **Mapping Settings** to define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
-    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `azure://[container_name]/[data_source_folder]/[file_name].csv`. For example, `azure://sampledata/ingest/TableName.01.csv`.
+    When you enter the source file URI and name in **Source File URIs and Names**, make sure it is in the following format `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/[file_name].csv`. For example, `https://myaccount.blob.core.windows.net/mycontainer/data-ingestion/TableName.01.csv`.
 
     You can also use wildcards to match the source files. For example:
 
-    - `azure://[container_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
+    - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
 
-    - `azure://[container_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
+    - `https://[account_name].blob.core.windows.net/[container_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
 
     Note that only `?` and `*` are supported.
 
