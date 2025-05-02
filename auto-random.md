@@ -168,7 +168,7 @@ TiDB implicitly allocates values to `AUTO_RANDOM` columns similarly to `AUTO_INC
 
 When you insert data with explicit values into an `AUTO_RANDOM` column in a deployment with multiple TiDB server instances, potential ID collisions can occur, similar to an `AUTO_INCREMENT` column. If explicit inserts happen to use ID values that conflict with the internal counter TiDB uses for automatic generation, this can lead to errors. 
 
-Here's how the collision can happen: each `AUTO_RANDOM` ID contains an auto-incrementing part alongside random bits. TiDB uses an internal counter for this auto-incrementing part. If you explicitly insert an ID where this part matches the counter's next value, TiDB might later try to generate the same ID automatically, leading to a duplicate key error. See [AUTO_INCREMENT Uniqueness](/auto-increment.md#uniqueness) for details.
+Here's how the collision can happen: each `AUTO_RANDOM` ID consists of random bits and an auto-incrementing part. TiDB uses an internal counter for this auto-incrementing part. If you explicitly insert an ID where the auto-incrementing part matches the counter's next value, a duplicate key error might occur when TiDB later attempts to generate the same ID automatically. For more details, see [AUTO_INCREMENT Uniqueness](/auto-increment.md#uniqueness).
 
 With a single TiDB instance, this issue doesn't occur because the node automatically adjusts its internal counter when processing explicit insertions, preventing any future collisions. In contrast, with multiple TiDB nodes, each node maintains its own cache of IDs, which needs to be cleared to prevent collisions after explicit insertions. To clear these unallocated cached IDs and avoid potential collisions, you have two options: 
 
@@ -178,7 +178,7 @@ With a single TiDB instance, this issue doesn't occur because the node automatic
 ALTER TABLE t AUTO_RANDOM_BASE=0;
 ```
 
-This command will automatically determine an appropriate base value. Although it produces a warning message like `Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`, the value **will** change and you can safely ignore this warning.
+This statement automatically determines an appropriate base value. Although it produces a warning message similar to `Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`, the base value **will** change and you can safely ignore this warning.
 
 > **Note:**
 >
@@ -192,11 +192,11 @@ If you need to set a specific base value (for example, `1000`), use the `FORCE` 
 ALTER TABLE t FORCE AUTO_RANDOM_BASE = 1000;
 ```
 
-This approach is less convenient as it requires you to determine an appropriate value yourself.
+This approach is less convenient because it requires you to determine an appropriate base value yourself.
 
 > **Note:**
 >
-> * You must use a non-zero positive integer value when using `FORCE`.
+> * When using `FORCE`, you must specify a non-zero positive integer.
 
 Both commands modify the starting point for the auto-increment bits used in subsequent `AUTO_RANDOM` value generations across all TiDB nodes. They do not affect already allocated IDs.
 
