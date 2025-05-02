@@ -241,7 +241,9 @@ To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to c
     4. Adjust **Start and expiry date/time** as needed. For security reasons, it is recommended to set an expiration date that aligns with your data import timeline.
     5. You can keep the default values for other settings.
 
+
    ![sas-create](/media/tidb-cloud/dedicated-external-storage/azure-sas-create.png)
+
 
 4. Click **Generate SAS and connection string** to generate the SAS token.
 
@@ -249,5 +251,5 @@ To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to c
 
 > **Note:**
 >
-> - Before starting your data import, it is recommended that you test the connection and permissions to ensure that TiDB Cloud Dedicated can access the specified Azure Blob container and files.
+> - Test the connection and permissions before starting data import to ensure that TiDB Cloud Dedicated can access the specified Azure Blob container and files.
 > - TiDB Cloud does not store your SAS token. After the import is complete, it is recommended that you revoke or delete the SAS token to ensure the security of your Azure Blob Storage.
