@@ -186,7 +186,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 
 #### Step 2. Configure Azure Blob access
 
-1. In the [Azure portal](https://portal.azure.com/), create a container used for storing database audit logs as follows:
+1. In the [Azure portal](https://portal.azure.com/), create a container used for storing database audit logs.
 
     1. In the left navigation pane of the Azure portal, click **Storage Accounts**, and then select the storage account for storing database audit logs.
 
@@ -195,14 +195,15 @@ For more information, see [Create an Azure storage account](https://learn.micros
         > If the left navigation pane is hidden, click the menu button in the upper-left corner to toggle its visibility.
 
     2. In the navigation pane for the selected storage account, click **Data storage > Containers**, and then click **+ Container** to open the **New container** pane.
+
     3. In the **New container** pane, enter a name for your new container, set the anonymous access level (the recommended level is **Private**, which means no anonymous access), and then click **Create**. The new container will be created and displayed in the container list in a few seconds.
 
-2. Get the URL of the target container:
+2. Get the URL of the target container.
 
     1. In the container list, select the target container, click **...** for the container, and then select **Container properties**.
     2. On the displayed properties page, copy the **URL** value for later use, and then return to the container list.
 
-3. Generate a SAS token for the target container:
+3. Generate a SAS token for the target container.
 
     1. In the container list, select the target container, click **...** for the container, and then select **Generate SAS**.
     2. In the displayed **Generate SAS** pane, select **Account key** for **Signing method**.
