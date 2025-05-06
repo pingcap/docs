@@ -184,7 +184,7 @@ Create an Azure storage account in your organization's Azure subscription as the
 
 For more information, see [Create an Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal) in Azure documentation.
 
-#### Step 2. Configure Azure Blob access
+#### Step 2. Configure Azure Blob Storage access
 
 1. In the [Azure portal](https://portal.azure.com/), create a container used for storing database audit logs.
 
