@@ -78,8 +78,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB
 
-    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - Fix the issue that obtaining TSO fails during timestamp verification after setting the `zone` label [#59402](https://github.com/pingcap/tidb/issues/59402) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that Hash Join returns incorrect results without reporting an error when execution fails [#59377](https://github.com/pingcap/tidb/issues/59377) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that TiFlash might crash or return incorrect results [#60517](https://github.com/pingcap/tidb/issues/60517) @[wintalker](https://github.com/wintalker)
+    - Fix the issue that execution hangs during parallel sorting with ORDER BY [#59655](https://github.com/pingcap/tidb/issues/59655) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - (dup): release-7.5.6.md > 错误修复> TiDB - 修复在查询包含生成列的分区表时报错的问题 [#58475](https://github.com/pingcap/tidb/issues/58475) @[joechenrh](https://github.com/joechenrh)
     - (dup): release-6.5.12.md > 错误修复> TiDB - 修复创建两个相同名称的视图而没有报错的问题 [#58769](https://github.com/pingcap/tidb/issues/58769) @[tiancaiamao](https://github.com/tiancaiamao)
     - (dup): release-7.5.6.md > 错误修复> TiDB - 修复 Join 的等值条件两边数据类型不同，可能导致 TiFlash 产生错误结果的问题 [#59877](https://github.com/pingcap/tidb/issues/59877) @[yibin87](https://github.com/yibin87)
@@ -90,6 +92,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - (dup): release-7.5.6.md > 错误修复> TiDB - 修复 exchange partition 错误判断导致执行失败的问题 [#59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
     - (dup): release-7.5.6.md > 错误修复> TiDB - 修复对统计信息的异常处理不当导致后台任务超时的时候，内存内的统计信息被误删除的问题 [#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.5.5.md > 错误修复> TiDB - 修复 Grafana 中 **Stats Healthy Distribution** 面板的数据可能错误的问题 [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that a canceled TTL task might put a not-committed session to the global session pool [#58900](https://github.com/pingcap/tidb/issues/58900) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that enabling Redact log does not take effect in certain scenarios [#59279](https://github.com/pingcap/tidb/issues/59279) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that `rowContainer` might cause TiDB to panic [#59976](https://github.com/pingcap/tidb/issues/59976) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that partition pruning might be incorrect for partitioned tables in `Point_Get` scenarios [#59827](https://github.com/pingcap/tidb/issues/59827) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that updating records in partitioned tables during DDL execution might lead to data inconsistency [#57588](https://github.com/pingcap/tidb/issues/57588) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that affects the performance and stability of `information_schema` in certain scenarios [#58142](https://github.com/pingcap/tidb/issues/58142) [#58363](https://github.com/pingcap/tidb/issues/58363) [#58712](https://github.com/pingcap/tidb/issues/58712) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that `tidb_txn_entry_size_limit` cannot be dynamically adjusted in internal TiDB sessions when the Distributed eXecution Framework (DXF) is enabled [#59506](https://github.com/pingcap/tidb/issues/59506)@[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that the `IMPORT INTO` feature fails to properly handle unique key conflicts when global sorting is enabled [#59650](https://github.com/pingcap/tidb/issues/59650) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that network latency failure in the global sorting data path causes IMPORT INTO to fail  [#50451](https://github.com/pingcap/tidb/issues/50451) @[D3Hunter](https://github.com/D3Hunter) 
+    - Fix the issue that executing `ADD UNIQUE INDEX` might cause data inconsistency [#60339](https://github.com/pingcap/tidb/issues/60339) @[tangenta](https://github.com/tangenta)     
     <!--tw@Oreoxmt: the following 9 notes-->
     - Fix the issue that the value of the `LABELS` column is incorrectly displayed in the `BINLOG_STATUS` column when querying `INFORMATION_SCHEMA.TIDB_SERVERS_INFO` [#59245](https://github.com/pingcap/tidb/issues/59245) @[lance6716](https://github.com/lance6716)
     - Fix the issue that injecting a kill PD Leader fault during index creation might cause data inconsistency [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)
@@ -195,4 +207,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     + TiUP
 
         - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
-        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+
+    + NG Monitoring <!--tw@hfxsd: 2 notes-->
+
+        - Fix the issue that DocDB consumes too much memory under high workloads, and use SQLite as an optional backend for DocDB [#267](https://github.com/pingcap/ng-monitoring/issues/267) @[mornyx](https://github.com/mornyx)
+        - Fix the issue that TSDB consumes too much memory under high cardinality of time series, and privode a memory configuration option for TSDB [#295](https://github.com/pingcap/ng-monitoring/issues/295) @[mornyx](https://github.com/mornyx)
