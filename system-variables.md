@@ -1746,7 +1746,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - You can specify the value of this variable either with a unit or without a unit.
     - When you specify the value without a unit, the default unit is bytes per second. For example, `67108864` represents `64MiB` per second.
     - When you specify the value with a unit, supported units include KiB, MiB, GiB, and TiB. For example, `'1GiB`' represents 1 GiB per second, and `'256MiB'` represents 256 MiB per second.
-- When the Distributed eXecution Framework (DXF) is enabled, this write limit applies to each TiDB node seperately. For example, if you add index with 4 TiDB nodes, setting this variable to `64MiB` means the maximum write speed to one TiKV is `256MiB/s`.
+- When the Distributed eXecution Framework (DXF) is enabled, this write limit applies to each TiDB node seperately. For example, if you add index with 4 TiDB nodes, setting this variable to `64MiB` means the maximum write speed to one TiKV is `256MiB/s`. You can refer to the document of [IMPORT INTO](https://docs.pingcap.com/tidb/stable/sql-statement-import-into/#limit-the-write-speed-to-tikv) for how to set this variable.
 
 ### tidb_ddl_reorg_worker_cnt
 

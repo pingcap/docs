@@ -335,7 +335,7 @@ IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-acces
 
 Importing data may impact the performance of foreground workloads. To mitigate this impact, it is recommended to configure `MAX_WRITE_SPEED` as follows:
 
-1. Import a small dataset without speed restrictions. And you can monitor the import speed in Grafana: TiDB -> Import Into -> Total encode/deliver/import-kv speed -> Import KV.
+1. Import a small dataset without speed restrictions. And you can monitor the import speed in Grafana: TiDB > Import Into > Total encode/deliver/import-kv speed > Import KV.
 2. Use this import speed to determine the upper limit of `MAX_WRITE_SPEED` with this formula:
     - (Import Speed) × (Number of Replicas) / (Number of TiDB Nodes) / min(Number of TiKV Nodes, THREAD)
 3. Set `MAX_WRITE_SPEED` to a lower value than the upper limit. For example, reduce the result from Step 2 by 4–8X to reduce the impact on workload performance.
