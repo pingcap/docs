@@ -61,7 +61,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Scalability
 
-* PD supports the microservice mode (GA) [#5766](https://github.com/tikv/pd/issues/5766) @[binshi-bing](https://github.com/binshi-bing)
+* PD supports the microservice mode (GA) [#5766](https://github.com/tikv/pd/issues/5766) @[binshi-bing](https://github.com/binshi-bing) tw@hfxsd <!--2052-->
 
     Starting from v9.0.0, the PD microservice mode is now Generally Available. This mode splits the timestamp allocation and cluster scheduling functions of PD into separate microservices that can be deployed independently, thereby enhancing performance scalability for PD and addressing performance bottlenecks of PD in large-scale clusters.
 
@@ -74,7 +74,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Performance
 
-* In scenarios with hundreds of thousands to millions of users, the performance of creating and modifying users has improved by 77 times [#55563](https://github.com/pingcap/tidb/issues/55563) @[tiancaiamao](https://github.com/tiancaiamao) tw@hfxsd<!--1941-->
+* In scenarios with hundreds of thousands to millions of users, the performance of creating and modifying users has improved by 77 times [#55563](https://github.com/pingcap/tidb/issues/55563) @[tiancaiamao](https://github.com/tiancaiamao) tw@hfxsd <!--1941-->
 
     In previous versions, when the number of users in a cluster exceeded 200,000, the QPS for creating and modifying users drops to 1. In certain SaaS environments, if there is a need to create millions of users and periodically update user passwords in bulk, it can take up to 2 days or more, which is unacceptable for some SaaS businesses.
 
@@ -117,7 +117,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
   For more information, see [user documentation](/tiflash/tiflash-configuration.md#format_version).
 
-* Point-In-Time-Recovery (PITR) Now Supports Recovery from Compacted Log Backups for Faster Restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen) **tw@Oreoxmt** <!--2001-->
+* Point-In-Time-Recovery (PITR) Now Supports Recovery from Compacted Log Backups for Faster Restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen) **tw@lilin90** <!--2001-->
 
   Starting from v9.0.0, the compact log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
 
@@ -161,7 +161,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/index-advisor.md).
 
-* Improved Log Backup Compatibility during Snapshot Restores [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@Oreoxmt** <!--2000-->
+* Improved Log Backup Compatibility during Snapshot Restores [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
 
     Starting in v9.0.0, Log Backups can now continue to backup data during a snapshot restore in many conditions. This enables ongoing log backups to procede without having to stop them during the restore procedure.
 
@@ -220,7 +220,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Data migration
 
-* TiCDC perforance, scalability, and stability improvements with new architecture (Preview) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@Oreoxmt** <!--2027-->
+* TiCDC perforance, scalability, and stability improvements with new architecture (Preview) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@qiancai** <!--2027-->
 
     TiCDC introduces a new architecture (in preview) that improves real-time data replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.
 
@@ -228,13 +228,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/ticdc/ticdc-architecture.md).
 
-* TiCDC Adds DDL and Watermark Event Support to Debezium Protocol [#11566](https://github.com/pingcap/tiflow/issues/11566) @[wk989898](https://github.com/wk989898) **tw@Oreoxmt** <!--2009-->
+* TiCDC Adds DDL and Watermark Event Support to Debezium Protocol [#11566](https://github.com/pingcap/tiflow/issues/11566) @[wk989898](https://github.com/wk989898) **tw@lilin90** <!--2009-->
 
     TiCDC's support for Debezium Style events adds support for DDL and Watermark event types. After an upstream DDL is successfully executed, TiCDC now encodes the DDL event into a Kafka message with the key and message in a Debezium-style format. The Watermark event is a TiCDC extension (generated when [`enable-tidb-extension`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) is set on the Kafka sink) that represents a special time point indicating that the events received before this Watermark are complete.
 
     For more information, see [documentation](/ticdc/ticdc-debezium.md).
 
-* TiCDC Adds Guards Against Replicating to Itself [#12062](https://github.com/pingcap/tiflow/issues/12062) @[wlwilliamx](https://github.com/wlwilliamx) **tw@Oreoxmt** <!--2063-->
+* TiCDC Adds Guards Against Replicating to Itself [#12062](https://github.com/pingcap/tiflow/issues/12062) @[wlwilliamx](https://github.com/wlwilliamx) **tw@qiancai** <!--2063-->
 
     TiCDC supports replicating from a source TiDB system to multiple other downstream systems, including other TiDB instances. Prior to v9.0.0, If TiCDC was misconfigured to replicate from one TiDB to the same TiDB system as both source and target, the TiDB instance may experience unexpected data consistency issues due to the cyclical replication loop. With v9.0.0, TiCDC now checks that a downstream TiDB cluster is different from the source TiDB cluster, to guard against this misconfiguration causing issues.
 
@@ -329,7 +329,6 @@ Before upgrading TiDB, ensure that your operating system version meets the [OS a
 ## Removed features
 
 * The following feature has been removed:
-
 
 
 * The following features are planned for removal in future versions:
