@@ -224,7 +224,7 @@ To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to c
 
 1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
 
-2. On your **Storage account** page, click **Security+network** in the left navigation pane, and then click **Shared access signature**.
+2. In the navigation pane for your storage account, click **Security + network** > **Shared access signature**.
 
    ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
 
