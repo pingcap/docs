@@ -129,7 +129,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 + PD <!--tw@lilin90: 5 notes-->
 
     - Fix the concurrency issue that might arise when forwarding TSO in microservice scenarios [#9091](https://github.com/tikv/pd/issues/9091) @[lhy1024](https://github.com/lhy1024)
-    - Fix the issue that the result returned by `BatchScanRegions` was not properly limited [#9216](https://github.com/tikv/pd/issues/9216) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that the result returned by `BatchScanRegions` is not properly limited [#9216](https://github.com/tikv/pd/issues/9216) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that an unexpected election occurs when one follower experiences a network partition from the leader [#9020](https://github.com/tikv/pd/issues/9020) @[lhy1024](https://github.com/lhy1024)
     - Fix the issue that `COOLDOWN` or `SWITCH_GROUP` cannot be triggered when `QUERY_LIMIT` is set in resource control [#60404](https://github.com/pingcap/tidb/issues/60404) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that `StoreInfo` might be incorrectly overridden [#9185](https://github.com/tikv/pd/issues/9185) @[okJiang](https://github.com/okJiang)
