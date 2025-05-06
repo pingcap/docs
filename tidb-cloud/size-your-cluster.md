@@ -244,9 +244,9 @@ The supported node storage of different TiFlash vCPUs is as follows:
 
 | TiFlash vCPU | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
-| 8 vCPU    | 200 GiB          | 2048 GiB         | 500 GiB              |
+| 8 vCPU    | 200 GiB          | 4096 GiB         | 500 GiB              |
 | 16 vCPU   | 200 GiB          | 4096 GiB         | 500 GiB              |
-| 32 vCPU   | 200 GiB          | 4096 GiB         | 500 GiB              |
+| 32 vCPU   | 200 GiB          | 8192 GiB         | 500 GiB              |
 
 > **Note:**
 >
