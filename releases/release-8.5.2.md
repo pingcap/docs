@@ -36,7 +36,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB
 
-    - Fix the issue that obtaining TSO fails during timestamp verification after setting the `zone` label [#59402](https://github.com/pingcap/tidb/issues/59402) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that TiDB fails to obtain TSO during timestamp verification after setting the `zone` label [#59402](https://github.com/pingcap/tidb/issues/59402) @[ekexium](https://github.com/ekexium)
     - Fix the issue that Hash Join returns incorrect results without reporting an error when execution fails [#59377](https://github.com/pingcap/tidb/issues/59377) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Fix the issue that TiFlash might crash or return incorrect results [#60517](https://github.com/pingcap/tidb/issues/60517) @[wintalker](https://github.com/wintalker)
     - Fix the issue that execution hangs during parallel sorting with `ORDER BY` [#59655](https://github.com/pingcap/tidb/issues/59655) @[xzhangxian1008](https://github.com/xzhangxian1008)
