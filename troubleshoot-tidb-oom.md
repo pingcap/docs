@@ -122,7 +122,7 @@ For more information, see [Introduction to Statistics](/statistics.md).
 
 #### Prepared statements are overused
 
-The client side keeps creating prepared statements but does not execute [`deallocate prepare stmt`](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), which causes memory consumption to continue to rise and eventually triggers TiDB OOM. The reason is that the memory occupied by a prepared statement is not released until the session is closed. This is especially important for long-time connection sessions.
+The client side keeps creating prepared statements but does not execute [`deallocate prepare stmt`](/sql-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement), which causes memory consumption to continue to rise and eventually triggers TiDB OOM. The reason is that the memory occupied by a prepared statement is not released until the session is closed. This is especially important for long-time connection sessions.
 
 To solve the problem, consider the following measures:
 
