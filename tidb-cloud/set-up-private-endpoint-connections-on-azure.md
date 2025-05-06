@@ -13,32 +13,32 @@ This document describes how to connect to your TiDB Cloud Dedicated cluster via 
 > - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Google Cloud, see [Connect to TiDB Cloud Dedicated via Private Service Connect with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
 > - To learn how to connect to a TiDB Cloud Serverless cluster via private endpoint, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
-TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an Azure virtual network via [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview), as if the service were in your own virtual network. You can create a private endpoint in your virtual network, and then connect to the TiDB Cloud service via the endpoint with permission. 
+TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an Azure virtual network via [Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview), as if the service were in your own virtual network. You can create a private endpoint in your virtual network, and then connect to the TiDB Cloud service via the endpoint with permission.
 
 Powered by Azure Private Link, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
 
-The architecture of Azure private link is as follows, based on the [official Azure documentation](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview):
+The architecture of Azure Private Link is as follows, based on the [Azure documentation](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview):
 
 ![Azure Private Link architecture](/media/tidb-cloud/azure-private-endpoint-arch.png)
 
 For more detailed definitions of the private endpoint and endpoint service, see the following Azure documents:
 
-- [What is Azure Private Link?](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview)
-- [What is a private endpoint?](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
+- [What is Azure Private Link](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview)
+- [What is a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
 - [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip)
 
 ## Restrictions
 
-- Only the `Organization Owner` and `Project Owner` roles can create Private Endpoints.
+- Only the `Organization Owner` and `Project Owner` roles can create private endpoints.
 - The private endpoint and the TiDB cluster to be connected must be located in the same region.
 
 ## Set up a private endpoint with Azure Private Link
 
-To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the follow these steps:
+To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the following steps:
 
 1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
-2. [Create Azure private endpoint](#step-2-create-Azure-private-endpoint)
-3. [Accept endpoint](#step-3-accept-endpoint)
+2. [Create an Azure private endpoint](#step-2-create-an-azure-private-endpoint)
+3. [Accept the endpoint](#step-3-accept-the-endpoint)
 4. [Connect to your TiDB cluster](#step-4-connect-to-your-tidb-cluster)
 
 If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using Azure Private Link.
@@ -53,18 +53,19 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 >
 > If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page in the left navigation pane.
 
-### Step 2. Create Azure private endpoint
+### Step 2. Create an Azure private endpoint
 
 1. In the **Create Azure Private Endpoint Connection** dialog, copy the TiDB Cloud resource ID of the private link service and leave the dialog open for later use.
 
-> **Note:**
->
-> For each TiDB Cloud Dedicated cluster, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
+    > **Note:**
+    >
+    > For each TiDB Cloud Dedicated cluster, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
 2. Log in to the [Azure portal](https://portal.azure.com/), and then create a private endpoint for your cluster using the copied TiDB Cloud resource ID as follows:
-    1. In the Azure portal, search for **Private endpoint**, and then select **Private endpoint** in the reresult. 
+
+    1. In the Azure portal, search for **Private endpoint**, and then select **Private endpoint** in the result.
     2. On the **Private endpoint** page, click **+ Create**.
-    3. In the **Basics** tab, fill in the project and instance information, and then click **Next: Resource**. 
+    3. In the **Basics** tab, fill in the project and instance information, and then click **Next: Resource**.
     4. In the **Resource** tab, choose **Connect to an Azure resource by resource ID or alias** as the **connection method**, paste the TiDB Cloud resource ID to the **Resource ID or alias** field, and then click **Next: Virtual Network**.
     5. Complete the rest of the configurations of this private endpoint, and then click **Create**. For more information, see [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint) in Azure documentation.
 
@@ -72,16 +73,13 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
      - Click **Properties** in the left navigation pane, and copy its **Resource ID** for later use.
 
-     ![Azure private endpoint resource id](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
+         ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
 
      - Click **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
 
-     ![Azure private endpoint dns ip](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+         ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
 
-       
-  
-
-### Step 3. Accept endpoint
+### Step 3. Accept the endpoint
 
 1. Return to the **Create Azure Private Endpoint Connection** dialog in the TiDB Cloud console, and then paste the copied **Resource ID** and **IP address** into the corresponding fields.
 2. Click **Verify Endpoint** to validate the private endpoint access. If you encounter any error, follow the error message for troubleshooting, and then try again.
@@ -91,7 +89,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 After you have accepted the endpoint connection, you are redirected back to the connection dialog.
 
-1. Wait for the private endpoint connection status to become Active (approximately 5 minutes). You can go to **Networking** page to check its status.
+1. Wait for the private endpoint connection status to become **Active** (approximately 5 minutes). You can go to the **Networking** page of the cluster to check its status.
 2. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
 3. Connect to your cluster with the connection string.
 
@@ -117,7 +115,6 @@ The possible statuses of a private endpoint service are explained as follows:
 ### TiDB Cloud fails to create an endpoint service. What should I do?
 
 The endpoint service is created automatically after you open the **Create Azure Private Endpoint** page and choose the TiDB cluster. If it shows as failed or remains in the **Creating** state for a long time, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
-
 
 ### If I cancel the action during setup, what should I do before accepting the private endpoint?
 
