@@ -230,11 +230,11 @@ To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to c
 
 3. On the **Shared access signature** page, create a [service SAS token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview) with the necessary permissions as follows:
 
-    1. In the **Allowed services** section, choose the **Blob** service.
-    2. In the **Allowed Resource types** section, choose **Container** and **Object**.
-    3. In the **Allowed permissions** section, choose the permissions as needed. For example, importing data to a TiDB Cloud Dedicated cluster needs the **Read** and **List** permissions.
+    1. Under **Allowed services**, select **Blob**.
+    2. Under **Allowed resource types**, select **Container** and **Object**.
+    3. Under **Allowed permissions**, select the required permissions. For example, importing data to TiDB Cloud Dedicated requires **Read** and **List**.
     4. Adjust **Start and expiry date/time** as needed. For security reasons, it is recommended to set an expiration date that aligns with your data import timeline.
-    5. You can keep the default values for other settings.
+    5. Keep the default values for other settings.
 
 
    ![sas-create](/media/tidb-cloud/dedicated-external-storage/azure-sas-create.png)
