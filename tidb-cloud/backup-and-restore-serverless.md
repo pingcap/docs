@@ -87,7 +87,7 @@ Create and restore to the new cluster. Note the following:
 
 ### Restore Timeout
 
-The restore process typically completes within a few minutes. However, if it exceeds 3 hours, it will be automatically canceled. The outcome of a canceled restore depends on the destination:
+The restore process typically completes within a few minutes. However, it will be automatically canceled when restore exceeds 3 hours. The outcome of a canceled restore depends on the destination:
 
 - **Restore to a New Cluster**: The target cluster will be deleted and the source cluster will remain unchanged.
 - **Restore In-Place**: The cluster status will be changed to **Available** from **Restoring**, and it will become accessible again. 
