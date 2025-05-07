@@ -333,12 +333,12 @@ To limit the write speed to a TiKV node to 10 MiB/s, execute the following SQL s
 IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
 ```
 
-Importing data may impact the performance of foreground workloads. To mitigate this impact, it is recommended to configure `MAX_WRITE_SPEED` as follows:
+Importing data may impact the performance of foreground workloads. To mitigate this, it is recommended to configure `MAX_WRITE_SPEED` as follows:
 
-1. Import a small dataset without speed restrictions. And you can monitor the import speed in Grafana: TiDB > Import Into > Total encode/deliver/import-kv speed > Import KV.
-2. Use this import speed to determine the upper limit of `MAX_WRITE_SPEED` with this formula:
-    - (Import Speed) × (Number of Replicas) / (Number of TiDB Nodes) / min(Number of TiKV Nodes, THREAD)
-3. Set `MAX_WRITE_SPEED` to a lower value than the upper limit. For example, reduce the result from Step 2 by 4–8X to reduce the impact on workload performance.
+1. Import a small dataset with no speed restrictions. And you can estimate the average import speed via Grafana: TiDB > Import Into > Total encode/deliver/import-kv speed > Import KV.
+2. Determine the upper limit of `MAX_WRITE_SPEED` using the speed from step 1 with this formula:
+    - (Import Speed) x (Number of Replicas) / (Number of TiDB Nodes) / min(Number of TiKV Nodes, THREAD)
+3. Set `MAX_WRITE_SPEED` to a lower value, for example, reduce the speed by 4–8X to mitigate the impact on workload performance.
 
 ## `IMPORT INTO ... FROM SELECT` usage
 
