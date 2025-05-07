@@ -157,12 +157,12 @@ In the above example, `x'2c'` is the hexadecimal representation of the `,` chara
 The following example shows how to import data into a TiDB Cloud Dedicated cluster from Amazon S3 using the `LOAD DATA INFILE` statement:
 
 ```sql
-mysql> LOAD DATA INFILE 's3://<your-bucket-name>/your-file.csv?role_arn=arn:aws:iam::<your-account-id>:role/<your-role-name>&external_id=<your-external-id>'
-    -> INTO TABLE <your-db-name>.<your-table-name>
-    -> FIELDS TERMINATED BY ','
-    -> ENCLOSED BY '"'
-    -> LINES TERMINATED BY '\n'
-    -> IGNORE 1 LINES;
+LOAD DATA INFILE 's3://<your-bucket-name>/your-file.csv?role_arn=arn:aws:iam::<your-account-id>:role/<your-role-name>&external_id=<your-external-id>'
+INTO TABLE <your-db-name>.<your-table-name>
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
 ```
 
 </CustomContent>
