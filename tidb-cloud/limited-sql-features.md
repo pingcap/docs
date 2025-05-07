@@ -48,7 +48,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `ADMIN PLUGINS ENABLE` | Supported | Not supported [^8] |
 | `ADMIN PLUGINS DISABLE` | Supported | Not supported [^8] |
 | `ALTER INSTANCE RELOAD TLS` | Supported | TiDB Cloud Serverless automatically refreshes the TLS certificate. |
-| `LOAD DATA INFILE` | Only supports `LOAD DATA LOCAL INFILE` | Only supports `LOAD DATA LOCAL INFILE` |
+| `LOAD DATA INFILE` | Supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage | Only supports `LOAD DATA LOCAL INFILE` |
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
 | `FLASHBACK CLUSTER` | Supported | Not supported [^3] |
