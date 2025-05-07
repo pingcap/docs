@@ -39,7 +39,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that TiDB fails to obtain TSO during timestamp verification after setting the `zone` label [#59402](https://github.com/pingcap/tidb/issues/59402) @[ekexium](https://github.com/ekexium)
     - Fix the issue that Hash Join returns incorrect results without reporting an error when execution fails [#59377](https://github.com/pingcap/tidb/issues/59377) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - Fix the issue that TiFlash might crash or return incorrect results [#60517](https://github.com/pingcap/tidb/issues/60517) @[wintalker](https://github.com/wintalker)
-    - Fix the issue that execution hangs during parallel sorting with `ORDER BY` [#59655](https://github.com/pingcap/tidb/issues/59655) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that execution hangs when parallel sorting with `ORDER BY` encounters an error or the query is canceled [#59655](https://github.com/pingcap/tidb/issues/59655) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - (dup): release-7.5.6.md > Bug fixes> TiDB - Fix the issue that an error occurs when querying partitioned tables that contain generated columns [#58475](https://github.com/pingcap/tidb/issues/58475) @[joechenrh](https://github.com/joechenrh)
     - (dup): release-6.5.12.md > Bug fixes> TiDB - Fix the issue that creating two views with the same name does not report an error [#58769](https://github.com/pingcap/tidb/issues/58769) @[tiancaiamao](https://github.com/tiancaiamao)
     - (dup): release-7.5.6.md > Bug fixes> TiDB - Fix the issue that different data types on both sides of the equality condition in Join might cause incorrect results in TiFlash [#59877](https://github.com/pingcap/tidb/issues/59877) @[yibin87](https://github.com/yibin87)
@@ -72,6 +72,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiKV
 
+    - Fix the issue that a potential deadlock might occur in `txn_status_cache` [#18384](https://github.com/tikv/tikv/issues/18384) @[ekexium](https://github.com/ekexium)
     - (dup): release-7.5.6.md > Bug fixes> TiKV - Fix the issue that Resolved-TS monitoring and logs might be abnormal [#17989](https://github.com/tikv/tikv/issues/17989) @[ekexium](https://github.com/ekexium)
     - (dup): release-7.5.6.md > Bug fixes> TiKV - Fix the issue that Region merge might lead to TiKV abnormal exit due to Raft index mismatch [#18129](https://github.com/tikv/tikv/issues/18129) @[glorv](https://github.com/glorv)
     - (dup): release-8.1.2.md > Bug fixes> TiKV - Fix the issue that TiKV cannot report heartbeats to PD when the disk is stuck [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)
