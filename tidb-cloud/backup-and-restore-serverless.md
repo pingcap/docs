@@ -87,7 +87,7 @@ The restore process typically completes within a few minutes. However, it will b
 - **Restore to a New Cluster**: The target cluster will be deleted and the source cluster will remain unchanged.
 - **Restore In-Place**: The cluster status will be changed to **Available** from **Restoring**, and it will become accessible again. 
 
-If the data is corrupted after a canceled restore and cannot be recovered, contact [TiDB Cloud Support](https://support.pingcap.com/hc/en-us) for assistance.
+If the data is corrupted after a canceled restore and cannot be recovered, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 ### Perform the restore
 
