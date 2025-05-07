@@ -54,7 +54,7 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 
 -   ログに関するコンフィグレーション項目。
 
--   バージョン5.4.0以降、TiKVとTiDBのログ設定項目の整合性`log-file`保つため、TiKVは以前の設定項目`log-rotation-timespan`廃止し、 `log-level` `log-format`以下の設定項目に変更`log-rotation-size`ました。古い設定項目のみを設定し、その値をデフォルト以外の値に設定した場合、古い設定項目と新しい設定項目の互換性は維持されます。古い設定項目と新しい設定項目の両方を設定した場合、新しい設定項目が有効になります。
+-   バージョン5.4.0以降、TiKVとTiDBのログ設定項目の整合性を保つため、TiKVは以前の設定項目`log-rotation-timespan`廃止し、 `log-level` `log-file`以下の設定`log-format`に変更`log-rotation-size`ました。古い設定項目のみを設定し、その値をデフォルト以外の値に設定した場合、古い設定項目と新しい設定項目の互換性は維持されます。古い設定項目と新しい設定項目の両方を設定した場合、新しい設定項目が有効になります。
 
 ### <code>level</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-level-code-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -223,6 +223,19 @@ TiKV設定ファイルは、コマンドラインパラメータよりも多く�
 -   デフォルト値: `"100MiB"`
 -   単位: KiB|MiB|GiB
 -   最小値: `"1KiB"`
+
+### <code>snap-min-ingest-size</code> <span class="version-mark">v8.1.2 の新機能</span> {#code-snap-min-ingest-size-code-span-class-version-mark-new-in-v8-1-2-span}
+
+-   TiKV がスナップショットを処理するときに取り込み方式を採用するかどうかの最小しきい値を指定します。
+
+    -   スナップショットのサイズがこのしきい値を超えると、TiKVはスナップショットからSSTファイルをRocksDBにインポートする取り込み方式を採用します。この方式は、大きなファイルの場合、より高速です。
+    -   スナップショットのサイズがこのしきい値を超えない場合、TiKVは直接書き込み方式を採用し、各データをRocksDBに個別に書き込みます。この方式は、小さなファイルの場合により効率的です。
+
+-   デフォルト値: `"2MiB"`
+
+-   単位: KiB|MiB|GiB
+
+-   最小値: `0`
 
 ### <code>enable-request-batch</code> {#code-enable-request-batch-code}
 
@@ -521,6 +534,11 @@ storageに関するコンフィグレーション項目。
     -   `storage.engine="partitioned-raft-kv"`場合、デフォルト値はシステムメモリの合計サイズの 30% になります。
 
 -   単位: KiB|MiB|GiB
+
+### <code>low-pri-pool-ratio</code> <span class="version-mark">v8.0.0 の新機能</span> {#code-low-pri-pool-ratio-code-span-class-version-mark-new-in-v8-0-0-span}
+
+-   Titanコンポーネントが使用できるブロックキャッシュ全体の割合を制御します。
+-   デフォルト値: `0.2`
 
 ## storage.フロー制御 {#storage-flow-control}
 
@@ -830,6 +848,17 @@ Raftstoreに関連するコンフィグレーション項目。
 -   デフォルト値: `"10s"`
 -   最小値: `0`
 
+### <code>pd-report-min-resolved-ts-interval</code><span class="version-mark">バージョン7.6.0の新機能</span> {#code-pd-report-min-resolved-ts-interval-code-span-class-version-mark-new-in-v7-6-0-span}
+
+> **注記：**
+>
+> この設定項目の名前は[`report-min-resolved-ts-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#report-min-resolved-ts-interval-new-in-v600)から変更されました。v7.6.0以降、 `report-min-resolved-ts-interval`無効になりました。
+
+-   TiKVがPDリーダーに解決済みTSを報告する最小間隔を指定します`0`に設定すると、報告は無効になります。
+-   デフォルト値： `"1s"` （正の最小値）。v6.3.0より前のバージョンでは、デフォルト値は`"0s"`です。
+-   最小値: `0`
+-   単位：秒
+
 ### <code>snap-mgr-gc-tick-interval</code> {#code-snap-mgr-gc-tick-interval-code}
 
 -   期限切れのスナップショット ファイルのリサイクルがトリガーされる時間間隔。1 `0` 、この機能が無効であることを意味します。
@@ -1029,13 +1058,6 @@ Raftstoreに関連するコンフィグレーション項目。
 -   Raftデータがディスクに書き込まれるしきい値を決定します。データサイズがこの設定項目の値より大きい場合、データはディスクに書き込まれます。1の値が`store-io-pool-size` `0`場合、この設定項目は有効になりません。
 -   デフォルト値: `1MiB`
 -   最小値: `0`
-
-### <code>report-min-resolved-ts-interval</code><span class="version-mark">バージョン6.0.0の新機能</span> {#code-report-min-resolved-ts-interval-code-span-class-version-mark-new-in-v6-0-0-span}
-
--   PDリーダーに最小解決タイムスタンプを報告する間隔を決定します。この値が`0`に設定されている場合、報告は無効になります。
--   デフォルト値: v6.3.0 より前のバージョンでは、デフォルト値は`"0s"`です。v6.3.0 以降では、デフォルト値は`"1s"` （最小の正の値）です。
--   最小値: `0`
--   単位：秒
 
 ### <code>evict-cache-on-memory-ratio</code><span class="version-mark">バージョン 7.5.0 の新機能</span> {#code-evict-cache-on-memory-ratio-code-span-class-version-mark-new-in-v7-5-0-span}
 
@@ -1433,7 +1455,7 @@ Titan に関連するコンフィグレーション項目。
 ### <code>max-background-gc</code> {#code-max-background-gc-code}
 
 -   Titan の GC スレッドの最大数。TiKV**の「詳細」** &gt; **「スレッド CPU」** &gt; **「RocksDB CPU」**パネルで、Titan GC スレッドが長時間にわたって満杯になっていることが確認された場合は、Titan GC スレッドプールのサイズを増やすことを検討してください。
--   デフォルト値: `4`
+-   デフォルト値: `1` 。v8.0.0 より前では、デフォルト値は`4`です。
 -   最小値: `1`
 
 ## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf {#rocksdb-defaultcf-rocksdb-writecf-rocksdb-lockcf-rocksdb-raftcf}
@@ -2220,7 +2242,7 @@ BRバックアップに関連するコンフィグレーション項目。
 
 > **注記：**
 >
-> この設定は、S3 のレート制限によるバックアップ失敗に対処するために導入されました。この問題は[バックアップデータのstorage構造の改善](/br/br-snapshot-architecture.md#structure-of-backup-files)で修正されました。そのため、この設定はバージョン 6.1.1 以降では非推奨となり、推奨されなくなりました。
+> この設定は、S3 のレート制限によるバックアップ失敗に対処するために導入されました。この問題は[バックアップデータのstorage構造の改善](/br/br-snapshot-architecture.md#structure-of-backup-files)で修正されました。そのため、この設定はバージョン 6.1.1 以降は非推奨となり、推奨されなくなりました。
 
 -   バックアップ中にS3へのマルチパートアップロードを実行する際に使用するパートサイズ。この設定値を調整することで、S3に送信されるリクエストの数を制御できます。
 -   S3にデータをバックアップし、バックアップファイルがこの設定項目の値より大きい場合、 [マルチパートアップロード](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)自動的に有効になります。圧縮率に基づくと、96MiBのリージョンで生成されるバックアップファイルは約10MiB～30MiBになります。
@@ -2319,6 +2341,12 @@ TiCDC に関連するコンフィグレーション項目。
 -   履歴データを増分スキャンするタスクの同時実行の最大数。
 -   デフォルト値: `6` 。最大 6 つのタスクを同時に実行できることを意味します。
 -   注意: `incremental-scan-concurrency`の値は`incremental-scan-threads`の値以上である必要があります。そうでない場合、TiKV は起動時にエラーを報告します。
+
+### <code>incremental-scan-concurrency-limit</code> <span class="version-mark">v7.6.0 の新機能</span> {#code-incremental-scan-concurrency-limit-code-span-class-version-mark-new-in-v7-6-0-span}
+
+-   実行待ちの履歴データの増分スキャンタスクの最大キュー長。実行待ちのタスク数がこの制限を超えると、新しいタスクは拒否されます。
+-   デフォルト値: `10000` 。これは、最大 10000 個のタスクを実行キューに入れることができることを意味します。
+-   注意: `incremental-scan-concurrency-limit` [`incremental-scan-concurrency`](#incremental-scan-concurrency)である必要があります。そうでない場合、TiKV は`incremental-scan-concurrency`使用してこの構成を上書きします。
 
 ## resolved-ts {#resolved-ts}
 
@@ -2452,7 +2480,7 @@ TiKV API V2が有効な場合にタイムスタンプの取得に関連するコ
 -   TiKV がこの設定項目で指定された期間に基づいて TSO キャッシュを事前割り当てすることを示します。TiKV は前回の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`満たす TSO をローカルに要求してキャッシュします。
 -   この設定項目は、TiKV API V2が有効になっている場合にPD障害に対する許容度を高めるためによく使用されます（ `storage.api-version = 2` ）。
 -   この設定項目の値を大きくすると、TSO消費量とTiKVのメモリオーバーヘッドが増加する可能性があります。十分なTSOを確保するには、PDの[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)設定項目を減らすことをお勧めします。
--   テストによると、デフォルト値が`alloc-ahead-buffer`場合、PD リーダーが失敗して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
+-   テストによると、 `alloc-ahead-buffer`がデフォルト値のときに PD リーダーが失敗して別のノードに切り替わると、書き込み要求のレイテンシーが短期的に増加し、QPS が減少 (約 15%) します。
 -   業務への影響を回避するには、PD で`tso-update-physical-interval = "1ms"`設定し、TiKV で次の設定項目を設定します。
     -   `causal-ts.alloc-ahead-buffer = "6s"`
     -   `causal-ts.renew-batch-max-size = 65536`
@@ -2527,3 +2555,8 @@ TiKVstorageレイヤーのリソース制御に関するコンフィグレーシ
 
 -   ヒープ プロファイリングによって毎回サンプリングされるデータの量を、最も近い 2 の累乗に切り上げて指定します。
 -   デフォルト値: `512KiB`
+
+### <code>enable-thread-exclusive-arena</code> <span class="version-mark">v8.1.0 の新機能</span> {#code-enable-thread-exclusive-arena-code-span-class-version-mark-new-in-v8-1-0-span}
+
+-   各 TiKV スレッドのメモリ使用量を追跡するために、TiKV スレッド レベルでメモリ割り当てステータスを表示するかどうかを制御します。
+-   デフォルト値: `true`

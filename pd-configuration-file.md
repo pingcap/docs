@@ -94,6 +94,22 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 -   `auto-compaction-retention`が`periodic`場合、メタ情報データベースの自動圧縮間隔。圧縮モードが`revision`に設定されている場合、このパラメータは自動圧縮のバージョン番号を示します。
 -   デフォルト値: 1時間
 
+### <code>tick-interval</code> {#code-tick-interval-code}
+
+-   etcdの設定項目`heartbeat-interval`に相当します。異なるPDノードに埋め込まれたetcdインスタンス間のRaftハートビート間隔を制御します。値を小さくすると障害検出が高速化されますが、ネットワーク負荷が増加します。
+-   デフォルト値: `500ms`
+
+### <code>election-interval</code> {#code-election-interval-code}
+
+-   etcdの`election-timeout`設定項目に相当します。PDノードに組み込まれたetcdインスタンスの選出タイムアウトを制御します。etcdインスタンスがこの期間内に他のetcdインスタンスから有効なハートビートを受信しない場合、 Raft選出を開始します。
+-   デフォルト値: `3000ms`
+-   この値は[`tick-interval`](#tick-interval) 5倍以上でなければなりません。例えば、 `tick-interval`が`500ms`場合、 `election-interval` `2500ms`以上でなければなりません。
+
+### <code>enable-prevote</code> {#code-enable-prevote-code}
+
+-   etcdの`pre-vote`設定項目に相当します。PDノードに組み込まれたetcdがRaft事前投票を有効にするかどうかを制御します。有効にすると、etcdは追加の選挙フェーズを実行し、選挙に勝つのに十分な票数を得られるかどうかを確認します。これにより、サービスの中断を最小限に抑えることができます。
+-   デフォルト値: `true`
+
 ### <code>force-new-cluster</code> {#code-force-new-cluster-code}
 
 -   PDを強制的に新しいクラスタとして起動し、 Raftメンバーの数を`1`に変更するかどうかを決定します。
@@ -300,7 +316,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>max-store-preparing-time</code><span class="version-mark">バージョン6.1.0の新機能</span> {#code-max-store-preparing-time-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   ストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン段階にある間、PDはストアのオンライン進行状況を照会できます。指定された時間を超えると、PDはストアがオンラインになったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行できなくなるわけではありません。ほとんどの場合、このパラメータを調整する必要はありません。
+-   ストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン段階にある間、PDはストアのオンライン化の進行状況を照会できます。指定された時間を超えると、PDはストアがオンラインになったとみなし、再度ストアのオンライン化の進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行できなくなるわけではありません。ほとんどの場合、このパラメータを調整する必要はありません。
 -   デフォルト値: `48h`
 
 ### <code>leader-schedule-limit</code> {#code-leader-schedule-limit-code}
@@ -403,6 +419,16 @@ pd-server関連のコンフィグレーション項目
 
 -   ホットリージョン情報を保持する日数を指定します。
 -   デフォルト値: `7`
+
+### <code>enable-heartbeat-breakdown-metrics</code> <span class="version-mark">v8.0.0 の新機能</span> {#code-enable-heartbeat-breakdown-metrics-code-span-class-version-mark-new-in-v8-0-0-span}
+
+-   リージョンハートビートの内訳メトリクスを有効にするかどうかを制御します。これらのメトリクスは、リージョンハートビート処理の各段階で消費された時間を測定し、監視による分析を容易にします。
+-   デフォルト値: `true`
+
+### <code>enable-heartbeat-concurrent-runner</code><span class="version-mark">バージョン8.0.0の新機能</span> {#code-enable-heartbeat-concurrent-runner-code-span-class-version-mark-new-in-v8-0-0-span}
+
+-   リージョンハートビートの非同期同時処理を有効にするかどうかを制御します。有効にすると、独立したエグゼキューターがリージョンハートビートリクエストを非同期かつ同時に処理するため、ハートビート処理のスループットが向上し、レイテンシーが短縮されます。
+-   デフォルト値: `true`
 
 ## <code>replication</code> {#code-replication-code}
 
@@ -526,7 +552,7 @@ pd-server関連のコンフィグレーション項目
 
 -   読み取りフローからRUへの変換の基礎係数
 -   デフォルト値: 1/(64 * 1024)
--   1 RU = 64 KiB の読み取りバイト
+-   1 RU = 64 KiB 読み取りバイト
 
 #### <code>write-cost-per-byte</code> {#code-write-cost-per-byte-code}
 
