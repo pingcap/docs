@@ -19,7 +19,7 @@ Starting from TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following 
 
 > **Note:**
 >
-> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3, while TiDB Cloud Serverless only supports `LOAD DATA LOCAL INFILE`.
+> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or  Google Cloud Storage, while TiDB Cloud Serverless only supports `LOAD DATA LOCAL INFILE`.
 
 ## Synopsis
 
