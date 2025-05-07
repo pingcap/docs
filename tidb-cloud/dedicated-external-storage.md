@@ -1,6 +1,6 @@
 ---
 title: Configure External Storage Access for TiDB Cloud Dedicated
-summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access and Google Cloud Storage (GCS) access.
+summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access, Azure Blob Storage access, and Google Cloud Storage (GCS) access.
 aliases: ['/tidb-cloud/config-s3-and-gcs-access']
 ---
 
@@ -224,7 +224,7 @@ To allow TiDB Cloud Dedicated to access your Azure Blob container, you need to c
 
 1. On the [Azure Storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts) page, click your storage account to which the container belongs.
 
-2. In the navigation pane for your storage account, click **Security + network** > **Shared access signature**.
+2. In the navigation pane for your storage account, click **Security + networking** > **Shared access signature**.
 
     ![sas-position](/media/tidb-cloud/dedicated-external-storage/azure-sas-position.png)
 
