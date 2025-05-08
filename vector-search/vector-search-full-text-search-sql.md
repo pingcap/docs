@@ -19,25 +19,25 @@ The full-text search feature in TiDB provides the following capabilities:
 
 > **Tip:**
 >
-> This document covers details about the full-text search feature using SQL. For Python developers, please refer to [Full-Text Search with Python](/vector-search/vector-search-full-text-search-python.md).
+> For Python usages, see [Full-Text Search with Python](/vector-search/vector-search-full-text-search-python.md).
 >
-> Additionally, for guidelines of using full-text search and vector search together in your AI application, you may further refer to [Hybrid Search](/vector-search/vector-search-hybrid-search.md).
+> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/vector-search/vector-search-hybrid-search.md).
 
-## Getting Started
+## Get started
 
-Full-Text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-Text Search is only available for the following service and regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following service and regions:
 
 - TiDB Serverless (Europe Region)
 
 Make sure you have a TiDB Serverless cluster in the supported regions above, then follow these steps:
 
-1. [**Create Full-Text Index**](#create-full-text-index): Create a table with a full-text index, or add a full-text index to an existing table.
+1. [**Create full-text index**](#create-full-text-index): Create a table with a full-text index, or add a full-text index to an existing table.
 
-2. [**Insert Text Data**](#insert-text-data): Insert text data into the table.
+2. [**Insert text data**](#insert-text-data): Insert text data into the table.
 
-3. [**Perform Full-Text Search**](#perform-full-text-search): Perform a full-text search using text queries and full-text search functions.
+3. [**Perform full-text search**](#perform-full-text-search): Perform a full-text search using text queries and full-text search functions.
 
-### Create Full-Text Index
+### Create full-text index
 
 A full-text index is required to perform full-text search, as it provides the necessary data structure for efficient searching and ranking. Full-text indexes can be created on new tables or added to existing tables.
 
@@ -60,7 +60,7 @@ CREATE TABLE stock_items(
 );
 
 -- You may insert some data here.
--- The Full-Text index can be created even if data is already in the table.
+-- The full-text index can be created even if data is already in the table.
 
 ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_COLUMNAR_REPLICA_ON_DEMAND;
 ```
@@ -71,7 +71,7 @@ The following parsers are accepted in `WITH PARSER <PARSER_NAME>` clause:
 
 - `MULTILINGUAL`: Supports multiple languages, including English, Chinese, Japanese, Korean.
 
-### Insert Text Data
+### Insert text data
 
 Inserting data into a table with a full-text index is identical to inserting data into any other tables.
 
@@ -95,7 +95,7 @@ INSERT INTO stock_items VALUES (14, "无线蓝牙耳机超长续航42小时快�
 INSERT INTO stock_items VALUES (15, "皎月银 国家补贴 心率血氧监测 蓝牙通话 智能手表 男女表");
 ```
 
-### Perform Full-Text Search
+### Perform full-text search
 
 Use the `FTS_MATCH_WORD()` function to perform a full-text search.
 
@@ -149,7 +149,7 @@ SELECT COUNT(*) FROM stock_items
 +----------+
 ```
 
-## Advanced Example: Join search results with other tables
+## Advanced example: Join search results with other tables
 
 Full-text search can be used in combination with other SQL features naturally.
 
@@ -199,7 +199,7 @@ WHERE t.author_id IN
 
 - [Hybrid Search](/vector-search/vector-search-hybrid-search.md)
 
-## Feedback & Help
+## Feedback & help
 
 Full-text search is still in the early stages with limited accessibility. If you would like to try full-text search in a region that is not yet available, or if you have feedback or need help, feel free to reach out to us:
 

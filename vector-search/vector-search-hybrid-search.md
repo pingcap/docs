@@ -18,13 +18,13 @@ A general workflow of hybrid search in TiDB is as follows:
 
 ## Prerequisites
 
-Hybrid search relies on both [full-text search](/vector-search/vector-search-full-text-search-python.md) and vector search. Full-Text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-Text Search is only available for the following service and regions:
+Hybrid search relies on both [full-text search](/vector-search/vector-search-full-text-search-python.md) and vector search. Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following service and regions:
 
 - TiDB Serverless (Europe Region)
 
 Thus, to complete this tutorial, make sure you have a TiDB Serverless cluster in the supported regions above. If you don't have a TiDB Serverless cluster, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own one.
 
-## Getting Started
+## Get started
 
 ### Step1. Install [pytidb](https://github.com/pingcap/pytidb) Python SDK
 
@@ -84,7 +84,7 @@ The parameters above can be obtained from TiDB Cloud console:
 
    Notice that the example code above are only for demonstration purposes. You should fill in the parameters with your own values, and well protect your credentials.
 
-## Step3. Create Table
+## Step3. Create table
 
 As an example, we will create a table named `chunks` with the following schema:
 
@@ -112,7 +112,7 @@ class Chunk(TableModel, table=True):
 table = db.create_table(schema=Chunk)
 ```
 
-### Step4. Insert Data
+### Step4. Insert data
 
 ```python
 table.bulk_insert(
@@ -124,7 +124,7 @@ table.bulk_insert(
 )
 ```
 
-### Step5. Perform Hybrid Search
+### Step5. Perform hybrid search
 
 In this example, we use [jina-reranker](https://huggingface.co/jinaai/jina-reranker-m0) model to rerank the query result.
 
@@ -141,7 +141,7 @@ df = (
 )
 ```
 
-See [PyTiDB Hybrid Search demo](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search) for a more complete example.
+See [PyTiDB hybrid search demo](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search) for a more complete example.
 
 ## See also
 
@@ -149,7 +149,7 @@ See [PyTiDB Hybrid Search demo](https://github.com/pingcap/pytidb/tree/main/exam
 
 - [Full-Text Search with Python](/vector-search/vector-search-full-text-search-python.md)
 
-## Feedback & Help
+## Feedback & help
 
 Full-text search is still in the early stages with limited accessibility. If you would like to try full-text search in a region that is not yet available, or if you have feedback or need help, feel free to reach out to us:
 

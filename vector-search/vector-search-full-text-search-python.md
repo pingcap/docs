@@ -19,21 +19,21 @@ The full-text search feature in TiDB provides the following capabilities:
 
 > **Tip:**
 >
-> This document covers details about the full-text search feature using Python. For SQL usages, please refer to [Full-Text Search with SQL](/vector-search/vector-search-full-text-search-sql.md).
+> For SQL usages, see [Full-Text Search with SQL](/vector-search/vector-search-full-text-search-sql.md).
 >
-> Additionally, for guidelines of using full-text search and vector search together in your AI application, you may further refer to [Hybrid Search](/vector-search/vector-search-hybrid-search.md).
+> To use full-text search and vector search together in your AI apps, see [Hybrid Search](/vector-search/vector-search-hybrid-search.md).
 
 ## Prerequisites
 
-Full-Text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-Text Search is only available for the following service and regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text Search is only available for the following service and regions:
 
 - TiDB Serverless (Europe Region)
 
 To complete this tutorial, make sure you have a TiDB Serverless cluster in the supported regions above. If you don't have a TiDB Serverless cluster, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own one.
 
-## Getting Started
+## Get started
 
-### Step1. Install Python SDK
+### Step1. Install [pytidb](https://github.com/pingcap/pytidb) Python SDK
 
 [pytidb](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB developers to build AI applications efficiently, which has built-in support for vector search and full-text search.
 
@@ -95,7 +95,7 @@ The parameters above can be obtained from TiDB Cloud console:
 
    Notice that the example code above are only for demonstration purposes. You should fill in the parameters with your own values, and well protect your credentials.
 
-### Step3. Create Table and Full Text Index
+### Step3. Create table and full-text index
 
 As an example, we will create a table named `chunks` with the following schema:
 
@@ -131,7 +131,7 @@ table.bulk_insert(
 )
 ```
 
-### Step5. Perform Full-Text Search
+### Step5. Perform full-text search
 
 After data is inserted, a full-text search can be performed as follows:
 
@@ -143,7 +143,7 @@ df = (
 )
 ```
 
-See [PyTiDB Fulltext Search demo](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search) for a more complete example.
+See [PyTiDB full-text search demo](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search) for a more complete example.
 
 ## See also
 
