@@ -327,18 +327,20 @@ IMPORT INTO t FROM '/path/to/file.sql' FORMAT 'sql';
 
 #### Limit the write speed to TiKV
 
-To limit the write speed to a TiKV node to 10 MiB/s, execute the following SQL statement:
+Importing data may impact the performance of foreground workloads. In such scenario, it is recommended to limit the write speed to TiKV with `MAX_WRITE_SPEED`.
+
+For example, the following SQL statement limits the write speed to a TiKV node to 10 MiB/s for each TiDB node:
 
 ```sql
 IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
 ```
 
-Importing data may impact the performance of foreground workloads. To mitigate this, it is recommended to configure `MAX_WRITE_SPEED` as follows:
+To mitigate such impact, you can configure `MAX_WRITE_SPEED` as follows:
 
-1. Import a small dataset with no speed restrictions. And you can estimate the average import speed via Grafana: TiDB > Import Into > Total encode/deliver/import-kv speed > Import KV.
-2. Determine the upper limit of `MAX_WRITE_SPEED` using the speed from step 1 with this formula:
+1. Import a small dataset with unlimited speed. And you can monitor the average import speed through Grafana: TiDB > Import Into > Total encode/deliver/import-kv speed > Import KV.
+2. Determine the upper limit of `MAX_WRITE_SPEED` using this formula:
     - (Import Speed) x (Number of Replicas) / (Number of TiDB Nodes) / min(Number of TiKV Nodes, THREAD)
-3. Set `MAX_WRITE_SPEED` to a lower value, for example, reduce the speed by 4–8X to mitigate the impact on workload performance.
+3. Set `MAX_WRITE_SPEED` to a lower value than the calculated to ensure workload performance, for example, 4-8× lower.
 
 ## `IMPORT INTO ... FROM SELECT` usage
 
