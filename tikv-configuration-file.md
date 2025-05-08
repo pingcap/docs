@@ -228,6 +228,17 @@ This document only describes the parameters that are not included in command-lin
 + Unit: KiB|MiB|GiB
 + Minimum value: `"1KiB"`
 
+### `snap-min-ingest-size` <span class="version-mark">New in v8.1.2</span>
+
++ Specifies the minimum threshold for whether TiKV adopts the ingest method when processing snapshots.
+
+    + When the snapshot size exceeds this threshold, TiKV adopts the ingest method, which imports SST files from the snapshot into RocksDB. This method is faster for large files.
+    + When the snapshot size does not exceed this threshold, TiKV adopts the direct write method, which writes each piece of data into RocksDB individually. This method is more efficient for small files.
+
++ Default value: `"2MiB"`
++ Unit: KiB|MiB|GiB
++ Minimum value: `0`
+
 ### `enable-request-batch`
 
 + Determines whether to process requests in batches
@@ -524,6 +535,11 @@ Configuration items related to the sharing of block cache among multiple RocksDB
     + When `storage.engine="partitioned-raft-kv"`, the default value is 30% of the size of total system memory.
 
 + Unit: KiB|MiB|GiB
+
+### `low-pri-pool-ratio` <span class="version-mark">New in v8.0.0</span>
+
++ Controls the proportion of the entire block cache that the Titan component can use.
++ Default value: `0.2`
 
 ## storage.flow-control
 
@@ -828,6 +844,17 @@ Configuration items related to Raftstore.
 + Default value: `"10s"`
 + Minimum value: `0`
 
+### `pd-report-min-resolved-ts-interval` <span class="version-mark">New in v7.6.0</span>
+
+> **Note:**
+>
+> This configuration item is renamed from [`report-min-resolved-ts-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#report-min-resolved-ts-interval-new-in-v600). Starting from v7.6.0, `report-min-resolved-ts-interval` is no longer effective.
+
++ Specifies the minimum interval for TiKV to report Resolved TS to the PD leader. Setting it to `0` disables the reporting.
++ Default value: `"1s"`, which is the minimum positive value. Before v6.3.0, the default value is `"0s"`.
++ Minimum value: `0`
++ Unit: second
+
 ### `snap-mgr-gc-tick-interval`
 
 + The time interval at which the recycle of expired snapshot files is triggered. `0` means that this feature is disabled.
@@ -1027,13 +1054,6 @@ Configuration items related to Raftstore.
 + Determines the threshold at which Raft data is written into the disk. If the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
 + Default value: `1MiB`
 + Minimum value: `0`
-
-### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.0.0</span>
-
-+ Determines the interval at which the minimum resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
-+ Default value: Before v6.3.0, the default value is `"0s"`. Starting from v6.3.0, the default value is `"1s"`, which is the smallest positive value.
-+ Minimum value: `0`
-+ Unit: second
 
 ### `evict-cache-on-memory-ratio` <span class="version-mark">New in v7.5.0</span>
 
@@ -1430,7 +1450,7 @@ Configuration items related to Titan.
 ### `max-background-gc`
 
 + The maximum number of GC threads in Titan. From the **TiKV Details** > **Thread CPU** > **RocksDB CPU** panel, if you observe that the Titan GC threads are at full capacity for a long time, consider increasing the size of the Titan GC thread pool.
-+ Default value: `4`
++ Default value: `1`. Before v8.0.0, the default value is `4`.
 + Minimum value: `1`
 
 ## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf
@@ -2333,6 +2353,12 @@ Configuration items related to TiCDC.
 + Default value: `6`, which means 6 tasks can be concurrent executed at most.
 + Note: The value of `incremental-scan-concurrency` must be greater than or equal to that of `incremental-scan-threads`; otherwise, TiKV will report an error at startup.
 
+### `incremental-scan-concurrency-limit` <span class="version-mark">New in v7.6.0</span>
+
++ The maximum queue length for the tasks of incrementally scanning historical data waiting to be executed. When the number of tasks waiting to be executed exceeds this limit, new tasks will be rejected.
++ Default value: `10000`, which means that at most 10000 tasks can be queued for execution.
++ Note: `incremental-scan-concurrency-limit` must be greater than or equal to [`incremental-scan-concurrency`](#incremental-scan-concurrency); otherwise, TiKV uses `incremental-scan-concurrency` to override this configuration.
+
 ## resolved-ts
 
 Configuration items related to maintaining the Resolved TS to serve Stale Read requests.
@@ -2562,6 +2588,11 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 
 + Specifies the amount of data sampled by Heap Profiling each time, rounding up to the nearest power of 2.
 + Default value: `512KiB`
+
+### `enable-thread-exclusive-arena` <span class="version-mark">New in v8.1.0</span>
+
++ Controls whether to display the memory allocation status at the TiKV thread level to track the memory usage of each TiKV thread.
++ Default value: `true`
 
 ## in-memory-engine <span class="version-mark">New in v8.5.0</span>
 

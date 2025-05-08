@@ -16,6 +16,14 @@ Starting from TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following 
 >
 > The new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS are experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For the `LOAD DATA INFILE` statement, TiDB Cloud Dedicated supports `LOAD DATA LOCAL INFILE`, and `LOAD DATA INFILE` from Amazon S3 or Google Cloud Storage, while TiDB Cloud Serverless only supports `LOAD DATA LOCAL INFILE`.
+
+</CustomContent>
+
 ## Synopsis
 
 ```ebnf+diagram
@@ -143,6 +151,21 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 ```
 
 In the above example, `x'2c'` is the hexadecimal representation of the `,` character, and `b'100010'` is the binary representation of the `"` character.
+
+<CustomContent platform="tidb-cloud">
+
+The following example shows how to import data into a TiDB Cloud Dedicated cluster from Amazon S3 using the `LOAD DATA INFILE` statement:
+
+```sql
+LOAD DATA INFILE 's3://<your-bucket-name>/your-file.csv?role_arn=arn:aws:iam::<your-account-id>:role/<your-role-name>&external_id=<your-external-id>'
+INTO TABLE <your-db-name>.<your-table-name>
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+```
+
+</CustomContent>
 
 ## MySQL compatibility
 
