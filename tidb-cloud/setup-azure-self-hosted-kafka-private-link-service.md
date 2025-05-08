@@ -436,7 +436,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     - **Assignment**: `Dynamic`
     - **Availability zone**: `Zone-redundant`
 
-4. In **Backend pools**, add 3 backend pools
+4. In the **Backend pools** tab, add three backend pools as follows, and then click **Next : Inbound rules**.
 
     - Name: `pool1`; Backend Pool Configuration: `NIC`; IP configurations: `broker-node-1`
     - Name: `pool2`; Backend Pool Configuration: `NIC`; IP configurations: `broker-node-2`
