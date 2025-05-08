@@ -409,7 +409,7 @@ export JAVA_HOME=~/jdk-22.0.2
 
 # Expected output for the last 3 lines (the actual order might be different)
 # There will be some exceptions or errors because advertised listeners cannot be resolved in your Kafka network. 
-# TiDB Cloud will make them resolvable and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link Sservice. 
+# TiDB Cloud will make them resolvable and make it route to the right broker when you create a changefeed connect to this Kafka cluster by Private Link service. 
 b1.abc.eastus.azure.3199745.tidbcloud.com:9093 (id: 1 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b2.abc.eastus.azure.3199745.tidbcloud.com:9094 (id: 2 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
 b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
