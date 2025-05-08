@@ -495,7 +495,8 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 2. In the **Basic** tab, select your **Subscription**, **Resource group**, and **Region**, fill in `kafka-pls` in the **Name** field, and then click **Next : Outbound settings >**.
 
-3. In the **Outbound settings** tab, fill in the parameters as follows:
+3. In the **Outbound settings** tab, fill in the parameters as follows, and then click **Next : Access security >**.
+
     - **Load balancer**: `kafka-lb`
     - **Load balancer frontend IP address**: `kafka-lb-ip`
     - **Source NAT subnet**: `kafka-pls-vnet/brokers-subnet`
