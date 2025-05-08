@@ -1,11 +1,11 @@
 ---
-title: Full-Text Search
+title: Full-Text Search with SQL
 summary: Full-text search allows you to retrieve documents for exact keywords. In RAG (Retrieval-Augmented Generation) scenarios, you can use full-text search along with vector search together to improve the retrieval quality.
 ---
 
-# Full-Text Search
+# Full-Text Search with SQL
 
-Unlike Vector Search, which focuses on semantic similarity, full-text search allows you to retrieve documents for exact keywords. In RAG (Retrieval-Augmented Generation) scenarios, you can use full-text search along with vector search together to improve the retrieval quality.
+Unlike [Vector Search](/vector-search/vector-search-overview.md), which focuses on semantic similarity, full-text search allows you to retrieve documents for exact keywords. In RAG (Retrieval-Augmented Generation) scenarios, you can use full-text search along with vector search together to improve the retrieval quality.
 
 The full-text search feature in TiDB provides the following capabilities:
 
@@ -19,7 +19,9 @@ The full-text search feature in TiDB provides the following capabilities:
 
 > **Tip:**
 >
-> This document covers details about the full-text search feature itself using SQL. For guidelines of using full-text search and vector search together in your AI application, you may further refer to [Hybrid Search](/vector-search/vector-search-search-hybrid-search.md).
+> This document covers details about the full-text search feature using SQL. For Python developers, please refer to [Full-Text Search with Python](/vector-search/vector-search-full-text-search-python.md).
+>
+> Additionally, for guidelines of using full-text search and vector search together in your AI application, you may further refer to [Hybrid Search](/vector-search/vector-search-hybrid-search.md).
 
 ## Getting Started
 
@@ -28,10 +30,6 @@ Full-Text search is still in the early stages, and we are continuously rolling i
 - TiDB Serverless (Europe Region)
 
 Make sure you have a TiDB Serverless cluster in the supported regions above, then follow these steps:
-
-<SimpleTab>
-
-<div label="SQL">
 
 1. [**Create Full-Text Index**](#create-full-text-index): Create a table with a full-text index, or add a full-text index to an existing table.
 
@@ -151,15 +149,7 @@ SELECT COUNT(*) FROM stock_items
 +----------+
 ```
 
-</div>
-
-<div label="Python">
-
-</div>
-
-</SimpleTab>
-
-## Example: Join search results with other tables
+## Advanced Example: Join search results with other tables
 
 Full-text search can be used in combination with other SQL features naturally.
 
@@ -205,6 +195,10 @@ WHERE t.author_id IN
 +--------------+-----------+-------------+
 ```
 
+## See also
+
+- [Hybrid Search](/vector-search/vector-search-hybrid-search.md)
+
 ## Feedback & Help
 
 Full-text search is still in the early stages with limited accessibility. If you would like to try full-text search in a region that is not yet available, or if you have feedback or need help, feel free to reach out to us:
@@ -221,7 +215,3 @@ Full-text search is still in the early stages with limited accessibility. If you
 - [Visit our Support Portal](https://tidb.support.pingcap.com/)
 
 </CustomContent>
-
-## See also
-
-- [Hybrid Search](/vector-search/vector-search-search-hybrid-search.md)
