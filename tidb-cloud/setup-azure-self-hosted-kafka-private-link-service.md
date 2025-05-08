@@ -121,7 +121,7 @@ If you need to expose an existing cluster, follow the instructions in [Reconfigu
     - **Local File**: select the private key downloaded by browser before
     - Click "Open in new browser tab".
     
-3. Click **Connect**. A new browser tab with Linux termial is displayed. You need to open three Linux termials for the three broker nodes.
+3. Click **Connect**. A new browser tab with a Linux terminal is displayed. You need to open three Linux terminals for the three broker nodes.
 
 4. Download binaries in each broker node.
 
