@@ -53,7 +53,8 @@ Regular maintenance ensures that essential updates are performed to safeguard Ti
 
 > **Note:**
 >
-> For the default project automatically created when you first sign up TiDB Cloud, the default start time of the window is 03:00 AM every Wednesday, based on the time zone of your TiDB Cloud organization. For any new projects that you initiate, you have the option to customize the start time of the window during the project setup process.
+> - For the default project automatically created when you first sign up for TiDB Cloud, the maintenance window starts at 03:00 AM every Wednesday (based on the time zone of your TiDB Cloud organization).
+> - For new projects that you create, you can set a custom start time for the maintenance window during project setup.
 
 You can modify the start time to your preferred time or reschedule maintenance tasks until the deadline as follows:
 
