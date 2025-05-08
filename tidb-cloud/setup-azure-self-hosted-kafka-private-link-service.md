@@ -501,9 +501,10 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     - **Load balancer frontend IP address**: `kafka-lb-ip`
     - **Source NAT subnet**: `kafka-pls-vnet/brokers-subnet`
 
-4. In the **Access security** tab
-    - For "Visibility", select "Restricted by subscription" or "Anyone with your alias".
-    - For "Auto-approval", add "Subscription of TiDB Cloud Azure Account" you got before.
+4. In the **Access security** tab, do the following:
+
+    - For **Visibility**, select **Restricted by subscription** or **Anyone with your alias**.
+    - For **Subscription-level access and auto-approval**, click **Add subscriptions** to add the subscription of TiDB Cloud Azure account you got in [Prerequisites](#prerequisites).
 
 5. Click **Next : Tags >**, and then click **Next : Review + create >** to verify the information.
 
