@@ -513,7 +513,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 2. When you proceed to **Configure the changefeed target > Connectivity Method > Private Link**, fill in the following fields with corresponding values and other fields as needed.
 
-    - **Kafka Advertised Listener Pattern**: `abc`. It is the same as the unique random string you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
+    - **Kafka Advertised Listener Pattern**: the unique random string that you use to generate **Kafka Advertised Listener Pattern** in [Prerequisites](#prerequisites).
     - **Alias of the Private Link Service**: the alias of the Private Link service that you got in [2. Set up Private Link Service](#2-set-up-private-link-service).
     - **Bootstrap Ports**: `9093,9094,9095`. 
 
