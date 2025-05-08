@@ -453,7 +453,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         - **Protocol**: `TCP`
         - **Port**: `9093`
         - **Backend port**: `39092`
-        - **Health probe**:
+        - **Health probe**: click **Create New** and fill in the probe information.
             - **Name**: `kafka-lb-hp`
             - **Protocol**: `TCP`
             - **Port**: `39092`
