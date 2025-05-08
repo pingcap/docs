@@ -504,8 +504,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 5. Click **Review + create**. Verify the information.
 
-6. Click **Create**. When the operation is done, note down the Alias of the Private Link service.
-
+6. Click **Create**. When the operation is done, note down the alias of the Private Link service for later use.
 
 ## Step 3. Connect from TiDB Cloud
 
