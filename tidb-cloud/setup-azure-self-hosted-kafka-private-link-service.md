@@ -491,7 +491,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 ### 2. Set up Private Link Service
 
-1. Go to [Azure Portal > Home > Private Link Center > Private link services](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices), click **Create** to create a Private Link service for the Kafka load balancer.
+1. Log in to the [Azure portal](https://portal.azure.com/), go to the [Private link services](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices) page, and then click **+ Create** to create a Private Link service for the Kafka load balancer.
 
 2. In the **Basic** tab, fill in the parameters as follows:
     - Select your "Subscription", "Resource group" and "Region".
