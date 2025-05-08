@@ -531,7 +531,7 @@ If you have already followed this document to successfully set up the connection
 
 2. When you proceed to [Step 1. Set up a Kafka cluster](#step-1-set-up-a-kafka-cluster), follow [Reconfigure a running Kafka cluster](#reconfigure-a-running-kafka-cluster) to create another group of EXTERNAL listeners and advertised listeners. You can name it as **EXTERNAL2**. Note that the port range of **EXTERNAL2** can overlap with the **EXTERNAL**.
 
-3. After reconfiguring brokers, create a new load balancer and a new Private Link service 
+3. After reconfiguring brokers, create a new load balancer and a new Private Link service.
 
 4. Configure the TiDB Cloud connection with the following information:
 
