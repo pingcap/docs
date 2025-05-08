@@ -12,7 +12,7 @@ A general workflow of hybrid search in TiDB is as follows:
 - **TiDB database** provides capabilities of both **full-text search** and **vector search**.
 - Use a **reranker** to combine the results from both searches.
 
-![Hybrid Search](/media/vector-search/hybrid-search-overview.png)
+![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
 [pytidb Python SDK](https://github.com/pingcap/pytidb) has built-in embedding and reranking features and can be a good starting point. Note that using pytidb is fully optional. For example, you can perform search using SQL directly and use your own reranking model as you like.
 
