@@ -213,9 +213,12 @@ The steps vary depending on the connectivity method you select.
     - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
     - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
 
-3. Customize **Column Selector** to select columns from events and send only the data changes related to those columns to the downstream. Learn more details [here](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors)
-    - **Tables matching**: you can set which tables the column selector will be applied to. For tables that do not match any rule, all columns are sent.
-    - **Columns Selector**: you can set which columns of the tables will be sent to the downstream.
+3. Customize **Column Selector** to select columns from events and send only the data changes related to those columns to the downstream.
+
+    - **Tables matching**: specify which tables the column selector applies to. For tables that do not match any rule, all columns are sent.
+    - **Column Selector**: specify which columns of the matched tables will be sent to the downstream.
+
+    For more information about the matching rules, see [Column selectors](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors).
 
 4. In the **Data Format** area, select your desired format of Kafka messages.
 
