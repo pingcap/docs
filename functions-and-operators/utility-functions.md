@@ -1,0 +1,43 @@
+---
+title: Utility Functions
+summary: This document introduces utility functions supported in TiDB.
+aliases: ['/docs/dev/functions-and-operators/utility-functions/','/docs/dev/reference/sql/functions-and-operators/utility-functions/']
+---
+
+# Utility Functions
+
+## Supported functions
+
+### `FORMAT_BYTES()`
+
+The `FORMAT_BYTES()` function formats a number of bytes as human readable number.
+
+```sql
+SELECT FORMAT_BYTES(10*1024*1024);
+```
+
+```
++----------------------------+
+| FORMAT_BYTES(10*1024*1024) |
++----------------------------+
+| 10.00 MiB                  |
++----------------------------+
+1 row in set (0.001 sec)
+```
+
+### `FORMAT_NANO_TIME()`
+
+The `FORMAT_NANO_TIME()` function formats a number of nanoseconds as a human readable number.
+
+```sql
+SELECT FORMAT_NANO_TIME(1000000);
+```
+
+```
++---------------------------+
+| FORMAT_NANO_TIME(1000000) |
++---------------------------+
+| 1.00 ms                   |
++---------------------------+
+1 row in set (0.001 sec)
+```
