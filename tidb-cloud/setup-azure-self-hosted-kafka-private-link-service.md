@@ -501,7 +501,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     - For "Visibility", select "Restricted by subscription" or "Anyone with your alias".
     - For "Auto-approval", add "Subscription of TiDB Cloud Azure Account" you got before.
 
-5. Click **Review + create**. Verify the information.
+5. Click **Next : Tags >**, and then click **Next : Review + create >** to verify the information.
 
 6. Click **Create**. When the operation is done, note down the alias of the Private Link service for later use.
 
