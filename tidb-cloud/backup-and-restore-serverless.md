@@ -80,6 +80,15 @@ Create and restore to the new cluster. Note the following:
 
 - User credentials and permissions from the source cluster will not be restored to the new cluster.
 
+### Restore timeout
+
+The restore process typically completes within a few minutes. If the restore takes longer than three hours, it is automatically canceled. The outcome of a canceled restore depends on the destination:
+
+- **In-place restore**: the cluster status changes from **Restoring** to **Available**, and the cluster becomes accessible.
+- **Restore to a new cluster**: the new cluster is deleted and the source cluster remains unchanged.
+
+If the data is corrupted after a canceled restore and cannot be recovered, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
+
 ### Perform the restore
 
 To restore your TiDB Cloud Serverless cluster, follow these steps:
