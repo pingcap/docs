@@ -110,8 +110,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Fix the issue that TiFlash might fail to restart after inserting a single row of data larger than 16 MiB [#10052](https://github.com/pingcap/tiflash/issues/10052) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that TiFlash might not clean some disk data correctly after new data is inserted to tables with vector indexes, causing abnormal disk space consumption [#9946](https://github.com/pingcap/tiflash/issues/9946) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that TiFlash might delete previously created vector indexes unexpectedly after multiple vector indexes are created on the same table, causing performance degradation [#9971](https://github.com/pingcap/tiflash/issues/9971) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - Fix the issue that TiFlash might fail to use vector indexes to accelerate vector search queries in a disaggregated storage and compute architecture [#9847](https://github.com/pingcap/tiflash/issues/9847) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - Fix the issue that TiFlash might print a large number of `tag=EnumParseOverflowContainer` logs in a disaggregated storage and compute architecture [#9955](https://github.com/pingcap/tiflash/issues/9955) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that TiFlash might fail to use vector indexes to accelerate vector search queries in the disaggregated storage and compute architecture [#9847](https://github.com/pingcap/tiflash/issues/9847) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - Fix the issue that TiFlash might print a large number of `tag=EnumParseOverflowContainer` logs in the disaggregated storage and compute architecture [#9955](https://github.com/pingcap/tiflash/issues/9955) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that TiFlash does not skip Learner Read as expected when executing `SELECT ... AS OF TIMESTAMP` queries [#10046](https://github.com/pingcap/tiflash/issues/10046) @[CalvinNeo](https://github.com/CalvinNeo)
 
 + Tools
