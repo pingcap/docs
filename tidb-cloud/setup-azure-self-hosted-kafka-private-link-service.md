@@ -419,7 +419,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 ### 1. Set up the load balancer
 
-1. Go to [Azure Portal > Home > Load balancing](https://portal.azure.com/#view/Microsoft_Azure_Network/LoadBalancingHubMenuBlade/~/loadBalancers), click **Create**.
+1. Log in to the [Azure portal](https://portal.azure.com/), go to the [Load balancing](https://portal.azure.com/#view/Microsoft_Azure_Network/LoadBalancingHubMenuBlade/~/loadBalancers) page, and then click **+ Create** to create a load balancer.
 2. In **Basic** tab, fill parameters as following:
 
     - Select your "Subscription", "Resource group" and "Region".
