@@ -9,9 +9,9 @@ This document describes how to set up Private Link service for self-hosted Kafka
 
 The mechanism works as follows:
 
-1. The TiDB Cloud Vnet connects to the Kafka Vnet through private endpoints.
+1. The TiDB Cloud virtual network connects to the Kafka virtual network through private endpoints.
 2. Kafka clients need to communicate directly to all Kafka brokers.
-3. Each Kafka broker is mapped to a unique port of endpoints within the TiDB Cloud Vnet.
+3. Each Kafka broker is mapped to a unique port of endpoints within the TiDB Cloud virtual network.
 4. Leverage the Kafka bootstrap mechanism and Azure resources to achieve the mapping.
 
 The following diagram shows the mechanism. 
