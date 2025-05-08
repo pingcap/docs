@@ -438,9 +438,9 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 4. In **Backend pools**, add 3 backend pools
 
-    - Name: pool1; Backend Pool Configuration: NIC; IP configurations: broker-node-1
-    - Name: pool2; Backend Pool Configuration: NIC; IP configurations: broker-node-2
-    - Name: pool3; Backend Pool Configuration: NIC; IP configurations: broker-node-3
+    - Name: `pool1`; Backend Pool Configuration: `NIC`; IP configurations: `broker-node-1`
+    - Name: `pool2`; Backend Pool Configuration: `NIC`; IP configurations: `broker-node-2`
+    - Name: `pool3`; Backend Pool Configuration: `NIC`; IP configurations: `broker-node-3`
 
 5. In **Inbound rules**, add three load balancing rules, and create a health probe for these three rules.
 
