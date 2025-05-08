@@ -335,7 +335,7 @@ For example, the following SQL statement limits the write speed to a TiKV node t
 IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
 ```
 
-To mitigate such impact, you can configure `MAX_WRITE_SPEED` as follows:
+If you are importing data with DXF and global sort enabled, you can configure `MAX_WRITE_SPEED` as follows to mitigate the impact:
 
 1. Import a small dataset with unlimited speed. And you can monitor the average import speed through Grafana: TiDB > Import Into > Total encode/deliver/import-kv speed > Import KV.
 2. Determine the upper limit of `MAX_WRITE_SPEED` using this formula:
