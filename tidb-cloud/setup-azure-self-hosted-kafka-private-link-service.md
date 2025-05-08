@@ -427,7 +427,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     - **Type**: `Internal`
     - **Tier**: `Regional`
 
-3. In **Frontend IP configuration** tab, add frontend IP configuration
+3. In the **Frontend IP configuration** tab, click **+ Add a frontend IP configuration**, fill in the following information, click **Save**, and then click **Next : Backend pools >**.
 
     - **Name**: `kafka-lb-ip`
     - **IP version**: `IPv4`
