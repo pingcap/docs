@@ -483,8 +483,8 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
             - **Name**: `kafka-lb-hp`
             - **Protocol**: `TCP`
             - **Port**: `39092`
-    
-6. Click **Review + create**. Verify the information.
+
+6. Click **Next : Outbound rule**, click **Next : Tags >**, and then click **Next : Review + create** to verify the information.
 
 7. Click **Create**.
 
