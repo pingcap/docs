@@ -1,6 +1,6 @@
 ---
 title: TiDB 8.5.2 Release Notes
-summary: Learn about the operating system and platform requirement changes, improvements, and bug fixes in TiDB 8.5.2.
+summary: Learn about the improvements and bug fixes in TiDB 8.5.2.
 ---
 
 # TiDB 8.5.2 Release Notes
@@ -9,7 +9,7 @@ Release date: xx xx, 2025
 
 TiDB version: 8.5.2
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.1/production-deployment-using-tiup)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
 ## Improvements
 
@@ -50,7 +50,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - (dup): release-7.5.6.md > Bug fixes> TiDB - Fix the issue that incorrect judgment in exchange partition causes execution failure [#59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
     - (dup): release-7.5.6.md > Bug fixes> TiDB - Fix the issue that improper exception handling for statistics causes in-memory statistics to be mistakenly deleted when background tasks time out [#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.5.5.md > Bug fixes> TiDB - Fix the issue that the data in the **Stats Healthy Distribution** panel of Grafana might be incorrect [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue that a canceled TTL task might put a uncommitted session to the global session pool [#58900](https://github.com/pingcap/tidb/issues/58900) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that a canceled TTL task might put an uncommitted session to the global session pool [#58900](https://github.com/pingcap/tidb/issues/58900) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that enabling Redact log does not take effect in certain scenarios [#59279](https://github.com/pingcap/tidb/issues/59279) @[tangenta](https://github.com/tangenta)
     - Fix the issue that `rowContainer` might cause TiDB to panic in certain scenarios [#59976](https://github.com/pingcap/tidb/issues/59976) @[YangKeao](https://github.com/YangKeao)
     - Fix the issue that partition pruning might be incorrect in the `Point_Get` scenario for partitioned tables [#59827](https://github.com/pingcap/tidb/issues/59827) @[mjonss](https://github.com/mjonss)
