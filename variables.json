@@ -1,3 +1,6 @@
 {
-  "tidb-release-version": "v7.0.0"
+  "tidb-release-version": "v7.0.0",
+  "test": {
+    "foo": "bar"
+  }
 }
