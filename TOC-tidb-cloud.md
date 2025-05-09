@@ -591,6 +591,11 @@
       - [delete](/tidb-cloud/ticloud-serverless-sql-user-delete.md)
       - [list](/tidb-cloud/ticloud-serverless-sql-user-list.md)
       - [update](/tidb-cloud/ticloud-serverless-sql-user-update.md)
+    - authorized-network
+      - [create](/tidb-cloud/ticloud-serverless-authorized-network-create.md)
+      - [delete](/tidb-cloud/ticloud-serverless-authorized-network-delete.md)
+      - [list](/tidb-cloud/ticloud-serverless-authorized-network-list.md)
+      - [update](/tidb-cloud/ticloud-serverless-authorized-network-update.md)
   - [ai](/tidb-cloud/ticloud-ai.md)
   - [completion](/tidb-cloud/ticloud-completion.md)
   - config
