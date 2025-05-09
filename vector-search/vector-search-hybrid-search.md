@@ -83,7 +83,7 @@ You can get these connection parameters from the [TiDB Cloud console](https://ti
 
    Note that the preceding example is for demonstration purposes only. You need to fill in the parameters with your own values and keep them secure.
 
-## Step 3. Create a table
+### Step 3. Create a table
 
 As an example, create a table named `chunks` with the following columns:
 
