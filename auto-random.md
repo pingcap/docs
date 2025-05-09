@@ -195,7 +195,7 @@ This approach is less convenient because it requires you to determine an appropr
 
 > **Note:**
 >
-> * When using `FORCE`, you must specify a non-zero positive integer.
+> When using `FORCE`, you must specify a non-zero positive integer.
 
 Both commands modify the starting point for the auto-increment bits used in subsequent `AUTO_RANDOM` value generations across all TiDB nodes. They do not affect already allocated IDs.
 
