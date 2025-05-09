@@ -5,40 +5,41 @@ summary: Use full-text search and vector search together to improve the retrieva
 
 # Hybrid Search
 
-By using full-text search, you can retrieve documents based on exact keywords. By using vector search, you can retrieve documents based on semantic similarity. So can we combine these two search methods together to improve the retrieval quality and cover more scenarios? The answer is yes! In fact, this is a common practice in AI applications, which is called hybrid search.
+By using full-text search, you can retrieve documents based on exact keywords. By using vector search, you can retrieve documents based on semantic similarity. Can we combine these two search methods to improve the retrieval quality and handle more scenarios? Yes, this approach is known as hybrid search and is commonly used in AI applications.
 
 A general workflow of hybrid search in TiDB is as follows:
 
-- **TiDB database** provides capabilities of both **full-text search** and **vector search**.
-- Use a **reranker** to combine the results from both searches.
+1. Use the **TiDB database** for **full-text search** and **vector search**.
+2. Use a **reranker** to combine the results from both searches.
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
-[pytidb Python SDK](https://github.com/pingcap/pytidb) has built-in embedding and reranking features and can be a good starting point. Note that using pytidb is fully optional. For example, you can perform search using SQL directly and use your own reranking model as you like.
 
 ## Prerequisites
 
-Hybrid search relies on both [full-text search](/vector-search/vector-search-full-text-search-python.md) and vector search. Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following service and regions:
+Hybrid search relies on both [full-text search](/vector-search/vector-search-full-text-search-python.md) and vector search. Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and region:
 
-- TiDB Serverless (Europe Region)
+- TiDB Cloud Serverless (Europe Region)
 
-Thus, to complete this tutorial, make sure you have a TiDB Serverless cluster in the supported regions above. If you don't have a TiDB Serverless cluster, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own one.
+To complete this tutorial, make sure you have a TiDB Cloud Serverless cluster in the supported region. If you don't have one, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 
 ## Get started
 
-### Step1. Install [pytidb](https://github.com/pingcap/pytidb) Python SDK
+To make it easier to get started with hybrid search, you can use the [pytidb](https://github.com/pingcap/pytidb) Python SDK, which provides built-in support for embedding and reranking. Note that using pytidb is completely optional — you can perform a search using SQL directly and use your own reranking model as you like.
+
+### Step 1. Install the [pytidb](https://github.com/pingcap/pytidb) Python SDK
 
 ```shell
 pip install "pytidb[models]"
 
-# If you don't want to use built-in embedding function and rerankers.
+# If you don't want to use built-in embedding functions and rerankers:
 # pip install pytidb
 
-# If you want to convert query result to pandas DataFrame.
+# To convert query results to pandas DataFrame:
 # pip install pandas
 ```
 
-### Step2. Connect to TiDB
+### Step 2. Connect to TiDB
 
 ```python
 from pytidb import TiDBClient
@@ -52,13 +53,13 @@ db = TiDBClient.connect(
 )
 ```
 
-The parameters above can be obtained from TiDB Cloud console:
+You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com):
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 
-   As an example, for parameters displayed like this:
+   For example, if the connection parameters are displayed as follows:
 
    ```text
    HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
@@ -69,7 +70,7 @@ The parameters above can be obtained from TiDB Cloud console:
    CA:       /etc/ssl/cert.pem
    ```
 
-   The Python code to connect to the cluster would be:
+   The corresponding Python code to connect to the TiDB Cloud Serverless cluster would be as follows:
 
    ```python
    db = TiDBClient.connect(
@@ -81,16 +82,16 @@ The parameters above can be obtained from TiDB Cloud console:
    )
    ```
 
-   Notice that the example code above are only for demonstration purposes. You should fill in the parameters with your own values, and well protect your credentials.
+   Note that the preceding example is for demonstration purposes only. You need to fill in the parameters with your own values and keep them secure.
 
-## Step3. Create table
+## Step 3. Create a table
 
-As an example, we will create a table named `chunks` with the following schema:
+As an example, create a table named `chunks` with the following columns:
 
-- `id` (int): The ID of the chunk.
-- `text` (text): The text content of the chunk.
-- `text_vec` (vector): The vector representation of the text content. Vector is automatically generated by the embedding model via PyTiDB.
-- `user_id` (int): The ID of the user who created the chunk.
+- `id` (int): the ID of the chunk.
+- `text` (text): the text content of the chunk.
+- `text_vec` (vector): the vector representation of the text, automatically generated by the embedding model in PyTiDB.
+- `user_id` (int): the ID of the user who created the chunk.
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -111,21 +112,21 @@ class Chunk(TableModel, table=True):
 table = db.create_table(schema=Chunk)
 ```
 
-### Step4. Insert data
+### Step 4. Insert data
 
 ```python
 table.bulk_insert(
     [
         Chunk(id=2, text="bar", user_id=2),   # 👈 The text field will be embedded to a
-        Chunk(id=3, text="baz", user_id=3),   # vector and save to the text_vec field
+        Chunk(id=3, text="baz", user_id=3),   # vector and stored in the "text_vec" field
         Chunk(id=4, text="qux", user_id=4),   # automatically.
     ]
 )
 ```
 
-### Step5. Perform hybrid search
+### Step 5. Perform a hybrid search
 
-In this example, we use [jina-reranker](https://huggingface.co/jinaai/jina-reranker-m0) model to rerank the query result.
+In this example, use the [jina-reranker](https://huggingface.co/jinaai/jina-reranker-m0) model to rerank the search results.
 
 ```python
 from pytidb.rerankers import Reranker
@@ -134,13 +135,13 @@ jinaai = Reranker(model_name="jina_ai/jina-reranker-m0")
 
 df = (
   table.search("<query>", search_type="hybrid")
-    .rerank(jinaai, "text")  # 👈 Rerank the query result with the jinaai model.
+    .rerank(jinaai, "text")  # 👈 Rerank the query result using the jinaai model.
     .limit(2)
     .to_pandas()
 )
 ```
 
-See [PyTiDB hybrid search demo](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search) for a more complete example.
+For a complete example, see [PyTiDB hybrid search demo](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search).
 
 ## See also
 

@@ -1,45 +1,47 @@
 ---
 title: Full-Text Search with SQL
-summary: Full-text search allows you to retrieve documents for exact keywords. In RAG (Retrieval-Augmented Generation) scenarios, you can use full-text search along with vector search together to improve the retrieval quality.
+summary: Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 ---
 
 # Full-Text Search with SQL
 
-Unlike [Vector Search](/vector-search/vector-search-overview.md), which focuses on semantic similarity, full-text search allows you to retrieve documents for exact keywords. In RAG (Retrieval-Augmented Generation) scenarios, you can use full-text search along with vector search together to improve the retrieval quality.
+Unlike [Vector Search](/vector-search/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 
 The full-text search feature in TiDB provides the following capabilities:
 
-- **Operate on Text Data**: You can search over any string columns directly without embedding process.
+- **Query text data directly**: you can search any string columns directly without the embedding process.
 
-- **Support Hybrid-Languages**: No need to specify the language for high quality search. TiDB's text analyzer supports documents of multiple languages mixed in the same table and chooses the best analyzer for each document.
+- **Support for multiple languages**: no need to specify the language for high-quality search. The text analyzer in TiDB supports documents in multiple languages mixed in the same table and automatically chooses the best analyzer for each document.
 
-- **Order by Relevance**: The search result can be ordered by relevance using the widely used [BM25 ranking](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm.
+- **Order by relevance**: The search result can be ordered by relevance using the widely adopted [BM25 ranking](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm.
 
-- **Support Full SQL Features**: All SQL features, such as pre-filtering, post-filtering, grouping, joining, can be used with full-text search.
+- **Fully compatible with SQL**: all SQL features, such as pre-filtering, post-filtering, grouping, and joining, can be used with full-text search.
 
 > **Tip:**
 >
-> For Python usages, see [Full-Text Search with Python](/vector-search/vector-search-full-text-search-python.md).
+> For Python usage, see [Full-Text Search with Python](/vector-search/vector-search-full-text-search-python.md).
 >
 > To use full-text search and vector search together in your AI apps, see [Hybrid Search](/vector-search/vector-search-hybrid-search.md).
 
 ## Get started
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following service and regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and region:
 
-- TiDB Serverless (Europe Region)
+- TiDB Cloud Serverless (Europe Region)
 
-Make sure you have a TiDB Serverless cluster in the supported regions above, then follow these steps:
+Before using full-text search, make sure your TiDB Cloud Serverless cluster is created in the supported region. If you don't have one, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 
-1. [**Create full-text index**](#create-full-text-index): Create a table with a full-text index, or add a full-text index to an existing table.
+To perform a full-text search, follow these steps:
 
-2. [**Insert text data**](#insert-text-data): Insert text data into the table.
+1. [**Create a full-text index**](#create-a-full-text-index): create a table with a full-text index, or add a full-text index to an existing table.
 
-3. [**Perform full-text search**](#perform-full-text-search): Perform a full-text search using text queries and full-text search functions.
+2. [**Insert text data**](#insert-text-data): insert text data into the table.
 
-### Create full-text index
+3. [**Perform a full-text search**](#perform-a-full-text-search): perform a full-text search using text queries and full-text search functions.
 
-A full-text index is required to perform full-text search, as it provides the necessary data structure for efficient searching and ranking. Full-text indexes can be created on new tables or added to existing tables.
+### Create a full-text index
+
+To perform full-text search, a full-text index is required as it provides the necessary data structure for efficient searching and ranking. Full-text indexes can be created on new tables or added to existing tables.
 
 Create a table with a full-text index:
 
@@ -59,23 +61,23 @@ CREATE TABLE stock_items(
     title TEXT
 );
 
--- You may insert some data here.
+-- You might insert some data here.
 -- The full-text index can be created even if data is already in the table.
 
 ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_COLUMNAR_REPLICA_ON_DEMAND;
 ```
 
-The following parsers are accepted in `WITH PARSER <PARSER_NAME>` clause:
+The following parsers are accepted in the `WITH PARSER <PARSER_NAME>` clause:
 
-- `STANDARD`: Fast, works for English contents, separating words by spaces and punctuation.
+- `STANDARD`: fast, works for English contents, splitting words by spaces and punctuation.
 
-- `MULTILINGUAL`: Supports multiple languages, including English, Chinese, Japanese, Korean.
+- `MULTILINGUAL`: supports multiple languages, including English, Chinese, Japanese, and Korean.
 
 ### Insert text data
 
 Inserting data into a table with a full-text index is identical to inserting data into any other tables.
 
-In this example we will insert data in multiple languages. This can be naturally handled by TiDB's multilingual text parser:
+For example, you can execute the following SQL statements to insert data in multiple languages. The multilingual parser in TiDB automatically processes the text.
 
 ```sql
 INSERT INTO stock_items VALUES (1, "イヤホン bluetooth ワイヤレスイヤホン ");
@@ -95,9 +97,9 @@ INSERT INTO stock_items VALUES (14, "无线蓝牙耳机超长续航42小时快�
 INSERT INTO stock_items VALUES (15, "皎月银 国家补贴 心率血氧监测 蓝牙通话 智能手表 男女表");
 ```
 
-### Perform full-text search
+### Perform a full-text search
 
-Use the `FTS_MATCH_WORD()` function to perform a full-text search.
+To perform a full-text search, you can use the `FTS_MATCH_WORD()` function.
 
 **Search for most relevant 10 documents:**
 
@@ -107,7 +109,7 @@ SELECT * FROM stock_items
     ORDER BY fts_match_word("bluetoothイヤホン", title)
     DESC LIMIT 10;
 
--- Results are ordered by relevance, with the most relevant documents appearing first.
+-- Results are ordered by relevance, with the most relevant documents first.
 
 +------+-----------------------------------------------------------------------------------------------------------+
 | id   | title                                                                                                     |
@@ -119,13 +121,13 @@ SELECT * FROM stock_items
 |    5 | ワイヤレスイヤホン ハイブリッドANC搭載 40dBまでアクティブノイズキャンセル                                            |
 +------+-----------------------------------------------------------------------------------------------------------+
 
--- Try with another language:
+-- Try searching in another language:
 SELECT * FROM stock_items
     WHERE fts_match_word("蓝牙耳机", title)
     ORDER BY fts_match_word("蓝牙耳机", title)
     DESC LIMIT 10;
 
--- Results are ordered by relevance, with the most relevant documents appearing first.
+-- Results are ordered by relevance, with the most relevant documents first.
 
 +------+---------------------------------------------------------------------------------------------------------------+
 | id   | title                                                                                                         |
@@ -151,9 +153,9 @@ SELECT COUNT(*) FROM stock_items
 
 ## Advanced example: Join search results with other tables
 
-Full-text search can be used in combination with other SQL features naturally.
+You can combine full-text search with other SQL features such as joins and subqueries.
 
-Suppose there is a user table and a ticket table, and you want to search tickets opened by the author's name:
+Assume you have a `users` table and a `tickets` table, and want to find tickets created by authors based on a full-text search of their names:
 
 ```sql
 CREATE TABLE users(
@@ -176,7 +178,7 @@ INSERT INTO tickets VALUES (2, "Ticket 2", 1);
 INSERT INTO tickets VALUES (3, "Ticket 3", 2);
 ```
 
-You can use subquery to achieve this. The inner query searches for the author name, and the outer query uses the result to filter the tickets, and join other tables if needed:
+You can use a subquery to find matching user IDs based on the author's name, and then use these IDs in the outer query to retrieve and join related ticket information:
 
 ```sql
 SELECT t.title AS TICKET_TITLE, u.id AS AUTHOR_ID, u.name AS AUTHOR_NAME FROM tickets t

@@ -1,55 +1,55 @@
 ---
 title: Full-Text Search with Python
-summary: Full-text search allows you to retrieve documents for exact keywords. In RAG (Retrieval-Augmented Generation) scenarios, you can use full-text search along with vector search together to improve the retrieval quality.
+summary: Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 ---
 
 # Full-Text Search with Python
 
-Unlike [Vector Search](/vector-search/vector-search-overview.md), which focuses on semantic similarity, full-text search allows you to retrieve documents for exact keywords. In RAG (Retrieval-Augmented Generation) scenarios, you can use full-text search along with vector search together to improve the retrieval quality.
+Unlike [Vector Search](/vector-search/vector-search-overview.md), which focuses on semantic similarity, full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
 
 The full-text search feature in TiDB provides the following capabilities:
 
-- **Operate on Text Data**: You can search over any string columns directly without embedding process.
+- **Query text data directly**: you can search any string columns directly without the embedding process.
 
-- **Support Hybrid-Languages**: No need to specify the language for high quality search. TiDB's text analyzer supports documents of multiple languages mixed in the same table and chooses the best analyzer for each document.
+- **Support for multiple languages**: no need to specify the language for high-quality search. The text analyzer in TiDB supports documents in multiple languages mixed in the same table and automatically chooses the best analyzer for each document.
 
-- **Order by Relevance**: The search result can be ordered by relevance using the widely used [BM25 ranking](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm.
+- **Order by relevance**: The search result can be ordered by relevance using the widely adopted [BM25 ranking](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm.
 
-- **Support Full SQL Features**: All SQL features, such as pre-filtering, post-filtering, grouping, joining, can be used with full-text search.
+- **Fully compatible with SQL**: all SQL features, such as pre-filtering, post-filtering, grouping, and joining, can be used with full-text search.
 
 > **Tip:**
 >
-> For SQL usages, see [Full-Text Search with SQL](/vector-search/vector-search-full-text-search-sql.md).
+> For SQL usage, see [Full-Text Search with SQL](/vector-search/vector-search-full-text-search-sql.md).
 >
 > To use full-text search and vector search together in your AI apps, see [Hybrid Search](/vector-search/vector-search-hybrid-search.md).
 
 ## Prerequisites
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text Search is only available for the following service and regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and region:
 
-- TiDB Serverless (Europe Region)
+- TiDB Cloud Serverless (Europe Region)
 
-To complete this tutorial, make sure you have a TiDB Serverless cluster in the supported regions above. If you don't have a TiDB Serverless cluster, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own one.
+To complete this tutorial, make sure you have a TiDB Cloud Serverless cluster in the supported region. If you don't have one, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 
 ## Get started
 
-### Step1. Install [pytidb](https://github.com/pingcap/pytidb) Python SDK
+### Step 1. Install [pytidb](https://github.com/pingcap/pytidb) Python SDK
 
-[pytidb](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB developers to build AI applications efficiently, which has built-in support for vector search and full-text search.
+[pytidb](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently. It includes built-in support for vector search and full-text search.
 
 To install the SDK, run the following command:
 
 ```shell
 pip install pytidb
 
-# If you want to use built-in embedding function and rerankers.
+# To use the built-in embedding functions and rerankers:
 # pip install "pytidb[models]"
 
-# If you want to convert query result to pandas DataFrame.
+# To convert query results into pandas DataFrames:
 # pip install pandas
 ```
 
-### Step2. Connect to TiDB
+### Step 2. Connect to TiDB
 
 ```python
 from pytidb import TiDBClient
@@ -63,13 +63,13 @@ db = TiDBClient.connect(
 )
 ```
 
-The parameters above can be obtained from TiDB Cloud console:
+You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com):
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 
-   As an example, for parameters displayed like this:
+   For example, if the connection parameters are displayed as follows:
 
    ```text
    HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
@@ -80,7 +80,7 @@ The parameters above can be obtained from TiDB Cloud console:
    CA:       /etc/ssl/cert.pem
    ```
 
-   The Python code to connect to the cluster would be:
+   The corresponding Python code to connect to the TiDB Cloud Serverless cluster would be as follows:
 
    ```python
    db = TiDBClient.connect(
@@ -92,15 +92,15 @@ The parameters above can be obtained from TiDB Cloud console:
    )
    ```
 
-   Notice that the example code above are only for demonstration purposes. You should fill in the parameters with your own values, and well protect your credentials.
+   Note that the preceding example is for demonstration purposes only. You need to fill in the parameters with your own values and keep them secure.
 
-### Step3. Create table and full-text index
+### Step 3. Create a table and a full-text index
 
-As an example, we will create a table named `chunks` with the following schema:
+As an example, create a table named `chunks` with the following columns:
 
-- `id` (int): The ID of the chunk.
-- `text` (text): The text content of the chunk.
-- `user_id` (int): The ID of the user who created the chunk.
+- `id` (int): the ID of the chunk.
+- `text` (text): the text content of the chunk.
+- `user_id` (int): the ID of the user who created the chunk.
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -118,7 +118,7 @@ if not table.has_fts_index("text"):
     table.create_fts_index("text")   # 👈 Create a fulltext index on the text column.
 ```
 
-### Step4. Insert Data
+### Step 4. Insert data
 
 ```python
 table.bulk_insert(
@@ -130,9 +130,9 @@ table.bulk_insert(
 )
 ```
 
-### Step5. Perform full-text search
+Step 5. Perform a full-text search
 
-After data is inserted, a full-text search can be performed as follows:
+After inserting data, you can perform a full-text search as follows:
 
 ```python
 df = (
@@ -146,7 +146,7 @@ df = (
 # 1   2  the quick brown        2
 ```
 
-See [PyTiDB full-text search demo](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search) for a more complete example.
+For a complete example, see [PyTiDB full-text search demo](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search).
 
 ## See also
 
