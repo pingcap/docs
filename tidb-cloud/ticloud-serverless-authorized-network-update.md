@@ -35,8 +35,8 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | --start-ip-address string          | Specifies the starting IP address of the authorized network.             | Yes       | Only works in non-interactive mode.                  |
 | --end-ip-address string          | Specifies the ending IP address of the authorized network.             | Yes       | Only works in non-interactive mode.   |
 | --new-display-name string       | Specifies the new name of the authorized network.            | No       | Only works in non-interactive mode.                  |
-| --new-start-ip-address string          | Specifies the new starting IP address of the authorized network.             | No       | Only works in non-interactive mode.                  |
-| --new-end-ip-address string          | Specifies the new ending IP address of the authorized network.             | No       | Only works in non-interactive mode.   |
+| --new-start-ip-address string          | Specifies the new start IP address of the authorized network.             | No       | Only works in non-interactive mode.                  |
+| --new-end-ip-address string          | Specifies the new end IP address of the authorized network.             | No       | Only works in non-interactive mode.   |
 | -h, --help              | Shows help information for this command. | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
