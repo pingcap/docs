@@ -58,7 +58,7 @@ Planned features and releases for TiDB Cloud.
 
 -->
 
-TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB in a self-hosted environment or on the cloud.
+TiDB ({{ .tidb-release-version }}) is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB in a self-hosted environment or on the cloud.
 
 <DocHomeCardContainer>
 
