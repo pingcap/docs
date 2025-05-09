@@ -41,7 +41,6 @@ pip install "pytidb[models]"
 ### Step2. Connect to TiDB
 
 ```python
-import os
 from pytidb import TiDBClient
 
 db = TiDBClient.connect(

@@ -52,7 +52,6 @@ pip install pytidb
 ### Step2. Connect to TiDB
 
 ```python
-import os
 from pytidb import TiDBClient
 
 db = TiDBClient.connect(
@@ -124,9 +123,9 @@ if not table.has_fts_index("text"):
 ```python
 table.bulk_insert(
     [
-        Chunk(id=2, text="bar", user_id=2),
-        Chunk(id=3, text="baz", user_id=3),
-        Chunk(id=4, text="qux", user_id=4),
+        Chunk(id=2, text="the quick brown", user_id=2),
+        Chunk(id=3, text="fox jumps", user_id=3),
+        Chunk(id=4, text="over the lazy dog", user_id=4),
     ]
 )
 ```
@@ -137,10 +136,14 @@ After data is inserted, a full-text search can be performed as follows:
 
 ```python
 df = (
-  table.search("<query>", search_type="fulltext")
+  table.search("brown fox", search_type="fulltext")
     .limit(2)
-    .to_pandas()
+    .to_pandas() # optional
 )
+
+#    id             text  user_id
+# 0   3        fox jumps        3
+# 1   2  the quick brown        2
 ```
 
 See [PyTiDB full-text search demo](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search) for a more complete example.
