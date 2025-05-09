@@ -26,7 +26,7 @@ Meanwhile, this document also describes how to query business data on the second
 
 ### Architecture
 
-![TiCDC secondary cluster architecture](/media/dr/dr-ticdc-secondary-cluster.png)
+![TiCDC secondary cluster architecture](./media/dr/dr-ticdc-secondary-cluster.png)
 
 The preceding architecture includes two TiDB clusters: a primary cluster and a secondary cluster.
 
@@ -412,7 +412,7 @@ storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=ht
 
 In this DR scenario, the TiDB clusters in two regions can act as each other's disaster recovery clusters: the business traffic is written to the corresponding TiDB cluster based on the region configuration, and the two TiDB clusters back up each other's data.
 
-![TiCDC bidirectional replication](/media/dr/bdr-ticdc.png)
+![TiCDC bidirectional replication](./media/dr/bdr-ticdc.png)
 
 With the bidirectional replication feature, the TiDB clusters in two regions can replicate each other's data. This DR solution guarantees data security and reliability, and also ensures the write performance of the database. In a planned DR switchover, you do not need to stop the running changefeeds before starting a new changefeed, which simplifies the operation and maintenance.
 

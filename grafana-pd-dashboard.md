@@ -23,7 +23,7 @@ The following is the description of PD Dashboard metrics items:
 - Abnormal stores: The count of unhealthy stores. The normal value is `0`. If the number is bigger than `0`, it means at least one instance is abnormal.
 - Region health: The health status of Regions indicated via the count of unusual Regions including pending peers, down peers, extra peers, offline peers, missing peers, learner peers and incorrect namespaces. Generally, the number of pending peers should be less than `100`. The missing peers should not be persistently greater than `0`. If many empty Regions exist, enable Region Merge in time.
 - Current peer count: The current count of all cluster peers
-![PD Dashboard - Header](/media/pd-dashboard-header-v4.png)
+![PD Dashboard - Header](./media/pd-dashboard-header-v4.png)
 
 ## Key metrics description
 
@@ -37,7 +37,7 @@ The following is the description of PD Dashboard metrics items:
 - Label distribution: The distribution status of the labels in the cluster
 - Store Limit: The flow control limitation of scheduling on the Store
 
-![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v4.png)
+![PD Dashboard - Cluster metrics](./media/pd-dashboard-cluster-v4.png)
 
 ## Operator
 
@@ -50,7 +50,7 @@ The following is the description of PD Dashboard metrics items:
 - Operator finish duration: The maximum duration of finished operators
 - Operator step duration: The maximum duration of finished operator steps
 
-![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v4.png)
+![PD Dashboard - Operator metrics](./media/pd-dashboard-operator-v4.png)
 
 ## Statistics - Balance
 
@@ -66,7 +66,7 @@ The following is the description of PD Dashboard metrics items:
 - Store leader count: The leader count per TiKV instance
 - Store Region count: The Region count per TiKV instance
 
-![PD Dashboard - Balance metrics](/media/pd-dashboard-balance-v4.png)
+![PD Dashboard - Balance metrics](./media/pd-dashboard-balance-v4.png)
 
 ## Statistics - hot write
 
@@ -81,7 +81,7 @@ The following is the description of PD Dashboard metrics items:
 - Direction of hotspot move leader: The direction of leader movement in the hotspot scheduling. The positive number means scheduling into the instance. The negative number means scheduling out of the instance
 - Direction of hotspot move peer: The direction of peer movement in the hotspot scheduling. The positive number means scheduling into the instance. The negative number means scheduling out of the instance
 
-![PD Dashboard - Hot write metrics](/media/pd-dashboard-hotwrite-v4.png)
+![PD Dashboard - Hot write metrics](./media/pd-dashboard-hotwrite-v4.png)
 
 ## Statistics - hot read
 
@@ -91,7 +91,7 @@ The following is the description of PD Dashboard metrics items:
 - Store read rate keys: The total read keys of each TiKV instance
 - Hot cache read entry number: The number of peers that are in the read hotspot statistics module on each TiKV instance
 
-![PD Dashboard - Hot read metrics](/media/pd-dashboard-hotread-v4.png)
+![PD Dashboard - Hot read metrics](./media/pd-dashboard-hotread-v4.png)
 
 ## Scheduler
 
@@ -109,14 +109,14 @@ The following is the description of PD Dashboard metrics items:
 - Filter source: The number of attempts that the store is selected as the scheduling source but failed to pass the filter
 - Balance Direction: The number of times that the Store is selected as the target or source of scheduling
 
-![PD Dashboard - Scheduler metrics](/media/pd-dashboard-scheduler-v4.png)
+![PD Dashboard - Scheduler metrics](./media/pd-dashboard-scheduler-v4.png)
 
 ## gRPC
 
 - Completed commands rate: The rate per command type at which gRPC commands are completed
 - 99% Completed commands duration: The rate per command type at which gRPC commands are completed (P99)
 
-![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc-v2.png)
+![PD Dashboard - gRPC metrics](./media/pd-dashboard-grpc-v2.png)
 
 ## etcd
 
@@ -129,7 +129,7 @@ The following is the description of PD Dashboard metrics items:
 - Raft committed index: The last committed index of Raft
 - Raft applied index: The last applied index of Raft
 
-![PD Dashboard - etcd metrics](/media/pd-dashboard-etcd-v2.png)
+![PD Dashboard - etcd metrics](./media/pd-dashboard-etcd-v2.png)
 
 ## TiDB
 
@@ -137,7 +137,7 @@ The following is the description of PD Dashboard metrics items:
 - Handle requests count: The count of TiDB requests
 - Handle requests duration: The time consumed for handling TiDB requests. It should be less than `100ms` (P99)
 
-![PD Dashboard - TiDB metrics](/media/pd-dashboard-tidb-v4.png)
+![PD Dashboard - TiDB metrics](./media/pd-dashboard-tidb-v4.png)
 
 ## Heartbeat
 
@@ -148,11 +148,11 @@ The following is the description of PD Dashboard metrics items:
 - Region schedule push: The count of corresponding schedule commands sent from PD per TiKV instance
 - 99% Region heartbeat latency: The heartbeat latency per TiKV instance (P99)
 
-![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat-v4.png)
+![PD Dashboard - Heartbeat metrics](./media/pd-dashboard-heartbeat-v4.png)
 
 ## Region storage
 
 - Syncer Index: The maximum index in the Region change history recorded by the leader
 - history last index: The last index where the Region change history is synchronized successfully with the follower
 
-![PD Dashboard - Region storage](/media/pd-dashboard-region-storage.png)
+![PD Dashboard - Region storage](./media/pd-dashboard-region-storage.png)

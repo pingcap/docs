@@ -159,8 +159,8 @@ If the `unknown field` error appears on the **Slow Queries** page after the clus
 
     In the following example, Chrome is used.
 
-    ![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
+    ![Opening DevTools from Chrome's main menu](./media/dashboard/dashboard-faq-devtools.png)
 
 3. Select the **Application** panel, expand the **Local Storage** menu and select the **TiDB Dashboard page domain**. Click the **Clear All** button.
 
-    ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)
+    ![Clear the Local Storage](./media/dashboard/dashboard-faq-devtools-application.png)

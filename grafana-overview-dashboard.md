@@ -71,4 +71,4 @@ To understand the key metrics displayed on the Overview dashboard, check the fol
 
 ## Interface of the Overview dashboard
 
-![overview](/media/grafana-monitor-overview.png)
+![overview](./media/grafana-monitor-overview.png)

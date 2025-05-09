@@ -27,7 +27,7 @@ The Sync unit processes DML statements as follows:
 4. Execute the DML to the downstream.
 5. Periodically save the binlog position or GTID to the checkpoint.
 
-![DML processing logic](/media/dm/dm-dml-replication-logic.png)
+![DML processing logic](./media/dm/dm-dml-replication-logic.png)
 
 ## DML optimization logic
 

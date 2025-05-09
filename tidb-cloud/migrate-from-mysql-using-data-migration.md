@@ -252,8 +252,8 @@ For detailed instructions about incremental data migration, see [Migrate Only In
 
     <!--
     - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
-        ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
-        ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
+        ![Select Databases and Deselect Some Tables](./media/tidb-cloud/migration-job-select-db-blacklist1.png)
+        ![Select Databases and Deselect Some Tables](./media/tidb-cloud/migration-job-select-db-blacklist2.png)
     -->
 
 2. Click **Next**.
