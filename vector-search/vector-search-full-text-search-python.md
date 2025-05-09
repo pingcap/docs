@@ -42,10 +42,10 @@ To install the SDK, run the following command:
 ```shell
 pip install pytidb
 
-# To use the built-in embedding functions and rerankers:
+# (Alternative) To use the built-in embedding functions and rerankers:
 # pip install "pytidb[models]"
 
-# To convert query results into pandas DataFrames:
+# (Optional) To convert query results into pandas DataFrames:
 # pip install pandas
 ```
 

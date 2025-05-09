@@ -31,10 +31,10 @@ To complete this tutorial, make sure you have a TiDB Cloud Serverless cluster in
 ```shell
 pip install "pytidb[models]"
 
-# If you don't want to use built-in embedding functions and rerankers:
+# (Alternative) If you don't want to use built-in embedding functions and rerankers:
 # pip install pytidb
 
-# To convert query results to pandas DataFrame:
+# (Optional) To convert query results to pandas DataFrame:
 # pip install pandas
 ```
 
