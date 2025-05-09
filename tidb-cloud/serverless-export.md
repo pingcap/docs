@@ -13,6 +13,10 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
+> **Note:**
+>
+> The maximum export size is currently 1 TiB. To export more data or request a higher export speed, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
 ## Export locations
 
 You can export data to the following locations:
@@ -409,6 +413,15 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 </div>
 </SimpleTab>
+
+## Export speed
+
+The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans). For details, see the following table:
+
+| Plan               | Export speed       |
+|:-------------------|:-------------------|
+| Free cluster plan      | Up to 25 MiB/s      |
+| Scalable cluster plan  | Up to 100 MiB/s     |
 
 ## Pricing
 
