@@ -294,9 +294,19 @@
     - Embedding Models/Services
       - [Jina AI](/tidb-cloud/vector-search-integrate-with-jinaai-embedding.md)
     - ORM Libraries
+<<<<<<< HEAD
       - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
       - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+=======
+      - [SQLAlchemy](/vector-search/vector-search-integrate-with-sqlalchemy.md)
+      - [peewee](/vector-search/vector-search-integrate-with-peewee.md)
+      - [Django ORM](/vector-search/vector-search-integrate-with-django-orm.md)
+  - Text Search
+    - [Full-Text Search with SQL](/vector-search/vector-search-full-text-search-sql.md)
+    - [Full-Text Search with Python](/vector-search/vector-search-full-text-search-python.md)
+    - [Hybrid Search](/vector-search/vector-search-hybrid-search.md)
+>>>>>>> e9f0398010 (cloud: Add FullText Search docs (#20849))
   - Reference
     - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
     - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
