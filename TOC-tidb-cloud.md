@@ -297,6 +297,10 @@
       - [SQLAlchemy](/tidb-cloud/vector-search-integrate-with-sqlalchemy.md)
       - [peewee](/tidb-cloud/vector-search-integrate-with-peewee.md)
       - [Django ORM](/tidb-cloud/vector-search-integrate-with-django-orm.md)
+  - Text Search
+    - [Full-Text Search with SQL](/tidb-cloud/vector-search-full-text-search-sql.md)
+    - [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
+    - [Hybrid Search](/tidb-cloud/vector-search-hybrid-search.md)
   - Reference
     - [Vector Data Types](/tidb-cloud/vector-search-data-types.md)
     - [Vector Functions and Operators](/tidb-cloud/vector-search-functions-and-operators.md)
