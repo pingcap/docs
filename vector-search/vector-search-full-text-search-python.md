@@ -33,7 +33,7 @@ To complete this tutorial, make sure you have a TiDB Cloud Serverless cluster in
 
 ## Get started
 
-### Step 1. Install [pytidb](https://github.com/pingcap/pytidb) Python SDK
+### Step 1. Install the [pytidb](https://github.com/pingcap/pytidb) Python SDK
 
 [pytidb](https://github.com/pingcap/pytidb) is the official Python SDK for TiDB, designed to help developers build AI applications efficiently. It includes built-in support for vector search and full-text search.
 
