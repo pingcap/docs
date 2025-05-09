@@ -9,17 +9,16 @@ By using full-text search, you can retrieve documents based on exact keywords. B
 
 A general workflow of hybrid search in TiDB is as follows:
 
-1. Use the **TiDB database** for **full-text search** and **vector search**.
+1. Use the TiDB for **full-text search** and **vector search**.
 2. Use a **reranker** to combine the results from both searches.
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
-
 
 ## Prerequisites
 
 Hybrid search relies on both [full-text search](/vector-search/vector-search-full-text-search-python.md) and vector search. Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and region:
 
-- TiDB Cloud Serverless (Europe Region)
+- TiDB Cloud Serverless: Frankfurt (eu-central-1)
 
 To complete this tutorial, make sure you have a TiDB Cloud Serverless cluster in the supported region. If you don't have one, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 

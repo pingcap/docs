@@ -27,7 +27,7 @@ The full-text search feature in TiDB provides the following capabilities:
 
 Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and region:
 
-- TiDB Cloud Serverless (Europe Region)
+- TiDB Cloud Serverless: Frankfurt (eu-central-1)
 
 Before using full-text search, make sure your TiDB Cloud Serverless cluster is created in the supported region. If you don't have one, follow [Creating a TiDB Cloud Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create it.
 
@@ -101,7 +101,7 @@ INSERT INTO stock_items VALUES (15, "皎月银 国家补贴 心率血氧监测 �
 
 To perform a full-text search, you can use the `FTS_MATCH_WORD()` function.
 
-**Search for most relevant 10 documents:**
+**Example: search for most relevant 10 documents**
 
 ```sql
 SELECT * FROM stock_items
@@ -138,7 +138,7 @@ SELECT * FROM stock_items
 +------+---------------------------------------------------------------------------------------------------------------+
 ```
 
-**Count the number of documents matching the user query:**
+**Example: count the number of documents matching the user query**
 
 ```sql
 SELECT COUNT(*) FROM stock_items
