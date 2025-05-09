@@ -18,7 +18,7 @@ This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](ht
 
 ## Prerequisites
 
-Hybrid search relies on both [full-text search](/vector-search/vector-search-full-text-search-python.md) and vector search. Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and region:
+Hybrid search relies on both [full-text search](/tidb-cloud/vector-search-full-text-search-python.md) and vector search. Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, Full-text search is only available for the following product option and region:
 
 - TiDB Cloud Serverless: Frankfurt (eu-central-1)
 
@@ -146,7 +146,7 @@ For a complete example, see [pytidb hybrid search demo](https://github.com/pingc
 
 - [pytidb Python SDK Documentation](https://github.com/pingcap/pytidb)
 
-- [Full-Text Search with Python](/vector-search/vector-search-full-text-search-python.md)
+- [Full-Text Search with Python](/tidb-cloud/vector-search-full-text-search-python.md)
 
 ## Feedback & help
 
