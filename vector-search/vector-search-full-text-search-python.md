@@ -146,7 +146,7 @@ df = (
 # 1   2  the quick brown        2
 ```
 
-For a complete example, see [PyTiDB full-text search demo](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search).
+For a complete example, see [pytidb full-text search demo](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search).
 
 ## See also
 
