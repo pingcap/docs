@@ -15,7 +15,7 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 > **Note:**
 >
-> The maximum export size is currently 1TiB. For larger exports or to request faster export speeds, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> The maximum export size is currently 1 TiB. To export more data or request a higher export speed, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Export locations
 
@@ -414,14 +414,14 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 </div>
 </SimpleTab>
 
-## Export Speed
+## Export speed
 
-The export speed varies depending on your cluster plan. Refer to the table below for details:
+The export speed depends on your [cluster plan](/tidb-cloud/select-cluster-tier.md#cluster-plans). For details, see the following table:
 
-| Plan               | Export Speed       |
+| Plan               | Export speed       |
 |:-------------------|:-------------------|
-| Free Clusters      | Up to 25 MiB/s      |
-| Scalable Clusters  | Up to 100 MiB/s     |
+| Free cluster plan      | Up to 25 MiB/s      |
+| Scalable cluster plan  | Up to 100 MiB/s     |
 
 ## Pricing
 
