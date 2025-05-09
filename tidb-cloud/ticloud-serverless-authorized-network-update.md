@@ -32,8 +32,8 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                    | Description                              | Required | Note                                                 |
 |-------------------------|------------------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Specifies the ID of the cluster.         | Yes      | Only works in non-interactive mode.                  |
-| --start-ip-address string          | Specifies the starting IP address of the authorized network.             | Yes       | Only works in non-interactive mode.                  |
-| --end-ip-address string          | Specifies the ending IP address of the authorized network.             | Yes       | Only works in non-interactive mode.   |
+| --start-ip-address string | Specifies the start IP address of the authorized network.             | Yes       | Only works in non-interactive mode.                  |
+| --end-ip-address string | Specifies the end IP address of the authorized network.             | Yes       | Only works in non-interactive mode.   |
 | --new-display-name string       | Specifies the new name of the authorized network.            | No       | Only works in non-interactive mode.                  |
 | --new-start-ip-address string          | Specifies the new start IP address of the authorized network.             | No       | Only works in non-interactive mode.                  |
 | --new-end-ip-address string          | Specifies the new end IP address of the authorized network.             | No       | Only works in non-interactive mode.   |
