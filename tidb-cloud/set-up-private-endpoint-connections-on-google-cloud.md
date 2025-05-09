@@ -10,6 +10,7 @@ This document describes how to connect to your TiDB Cloud Dedicated cluster via 
 > **Tip:**
 >
 > - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with AWS, see [Connect to TiDB Cloud Dedicated via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
+> - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Azure, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with Azure](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md).
 > - To learn how to connect to a TiDB Cloud Serverless cluster via private endpoint, see [Connect to TiDB Cloud Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in a Google Cloud VPC via the [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect). You can create an endpoint and use it to connect to the TiDB Cloud service .
