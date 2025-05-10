@@ -11,7 +11,7 @@ The full-text search feature in TiDB provides the following capabilities:
 
 - **Query text data directly**: you can search any string columns directly without the embedding process.
 
-- **Support for multiple languages**: no need to specify the language for high-quality search. The text analyzer in TiDB supports documents in multiple languages mixed in the same table and automatically chooses the best analyzer for each document.
+- **Support for multiple languages**: no need to specify the language for high-quality search. TiDB supports documents in multiple languages stored in the same table and automatically chooses the best text analyzer for each document.
 
 - **Order by relevance**: the search result can be ordered by relevance using the widely adopted [BM25 ranking](https://en.wikipedia.org/wiki/Okapi_BM25) algorithm.
 
@@ -130,7 +130,7 @@ table.bulk_insert(
 )
 ```
 
-Step 5. Perform a full-text search
+### Step 5. Perform a full-text search
 
 After inserting data, you can perform a full-text search as follows:
 
