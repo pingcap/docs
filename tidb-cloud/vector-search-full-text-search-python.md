@@ -130,7 +130,7 @@ table.bulk_insert(
 )
 ```
 
-Step 5. Perform a full-text search
+### Step 5. Perform a full-text search
 
 After inserting data, you can perform a full-text search as follows:
 
