@@ -9,7 +9,7 @@ By using full-text search, you can retrieve documents based on exact keywords. B
 
 A general workflow of hybrid search in TiDB is as follows:
 
-1. Use the TiDB for **full-text search** and **vector search**.
+1. Use TiDB for **full-text search** and **vector search**.
 2. Use a **reranker** to combine the results from both searches.
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
