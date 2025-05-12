@@ -1,0 +1,10 @@
+{
+  "tidb": {
+    "name": "TiDB",
+    "version": "v8.5.0"
+  },
+  "tidb-cloud": {
+    "serverless": "TiDB Cloud Serverless",
+    "dedicated": "TiDB Cloud Dedicated"
+  }
+}
