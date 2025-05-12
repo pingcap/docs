@@ -56,7 +56,7 @@ cert-allowed-cn = ["dm"]
 
 ### `redact-info-log` <span class="version-mark">New in v9.0.0</span>
 
-- Controls whether to enable log redaction. When this configuration item is set to `true`, DM-worker logs are redacted to hide detailed DM query arguments. For more information, see [DM-worker Log Redaction](/log-redaction.md#log-redaction-in-DM-worker-side).
+- Controls whether to enable log redaction. When this configuration item is set to `true`, DM-worker logs are redacted to hide detailed DM query arguments. For more information, see [Log redaction in DM-worker side](/log-redaction.md#log-redaction-in-DM-worker-side).
 - Default value: `false`
 - Value options: `false`, `true`
 
