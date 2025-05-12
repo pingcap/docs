@@ -84,20 +84,20 @@ This document provides detailed information about the [Connected Care](/tidb-clo
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM subscription for TiDB Cloud alerts (<a href="/tidbcloud/monitor-alert-slack">Slack</a>, <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>)</td>
-    <td>Connected: IM subscription for TiDB Cloud alerts (<a href="/tidbcloud/monitor-alert-slack">Slack</a>, <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>)</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a> or <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>)</td>
+    <td>Connected: IM subscription for TiDB Cloud alerts (via <a href="/tidbcloud/monitor-alert-slack">Slack</a> or <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>)</td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM ticket creation and update subscription (<a href="/tidbcloud/connected-slack-ticket-creation">Slack</a>, <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>)</td>
-    <td>Connected: IM ticket creation and update subscription (<a href="/tidbcloud/connected-slack-ticket-creation">Slack</a>, <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>)</td>
+    <td>Connected: IM ticket creation and update subscription (via <a href="/tidbcloud/connected-slack-ticket-creation">Slack</a> or <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>)</td>
+    <td>Connected: IM ticket creation and update subscription (via <a href="/tidbcloud/connected-slack-ticket-creation">Slack</a> or <a href="/tidbcloud/connected-lark-ticket-creation">Lark</a>)</td>
   </tr>
   <tr>
     <td>-</td>
     <td>-</td>
     <td>-</td>
-    <td>Connected: IM interaction for support tickets (<a href="/tidbcloud/connected-slack-ticket-interaction">Slack</a>, <a href="/tidbcloud/connected-lark-ticket-interaction">Lark</a>)</td>
+    <td>Connected: IM interaction for support tickets (via <a href="/tidbcloud/connected-slack-ticket-interaction">Slack</a> or <a href="/tidbcloud/connected-lark-ticket-interaction">Lark</a>)</td>
   </tr>
   <tr>
     <td>-</td>
