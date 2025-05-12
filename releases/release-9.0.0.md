@@ -220,11 +220,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
 ### Data migration
 
-* TiCDC perforance, scalability, and stability improvements with new architecture (Preview) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@qiancai** <!--2027-->
+* TiCDC introduces a new architecture for improved performance, scalability, and stability (experimental) [#442](https://github.com/pingcap/ticdc/issues/442) @[CharlesCheung96](https://github.com/CharlesCheung96) **tw@qiancai** <!--2027-->
 
-    TiCDC introduces a new architecture (in preview) that improves real-time data replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.
+    In v9.0.0, TiCDC introduces a new architecture (experimental) that improves real-time data replication performance, scalability, and stability while reducing resource costs. This new architecture redesigns TiCDC core components and optimizes its data processing workflows.
 
-    TiCDC can now scale the TiCDC cluster linearly and replicate millions of tables with improved resource utilization. Changefeed latency is reduced and performance is more stable in scenarios with high traffic, frequent DDL operations, and during cluster scaling events.
+    With this new architecture, TiCDC can now scale nearly linearly and replicate millions of tables with improved resource utilization. It also reduces changefeed latency and improves performance stability in scenarios with high traffic, frequent DDL operations, and during cluster scaling events.
 
     For more information, see [documentation](/ticdc/ticdc-architecture.md).
 
@@ -234,9 +234,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/ticdc/ticdc-debezium.md).
 
-* TiCDC Adds Guards Against Replicating to Itself [#12062](https://github.com/pingcap/tiflow/issues/12062) @[wlwilliamx](https://github.com/wlwilliamx) **tw@qiancai** <!--2063-->
+* TiCDC adds safeguards to avoid replicating back to the source TiDB cluster [#12062](https://github.com/pingcap/tiflow/issues/12062) @[wlwilliamx](https://github.com/wlwilliamx) **tw@qiancai** <!--2063-->
 
-    TiCDC supports replicating from a source TiDB system to multiple other downstream systems, including other TiDB instances. Prior to v9.0.0, If TiCDC was misconfigured to replicate from one TiDB to the same TiDB system as both source and target, the TiDB instance may experience unexpected data consistency issues due to the cyclical replication loop. With v9.0.0, TiCDC now checks that a downstream TiDB cluster is different from the source TiDB cluster, to guard against this misconfiguration causing issues.
+    TiCDC supports replicating data from a source TiDB cluster to multiple other downstream systems, including other TiDB clusters. In versions before v9.0.0, if TiCDC is misconfigured to use the same TiDB cluster as both the source and the target, it could create a replication loop and cause data consistency issues. Starting from v9.0.0, TiCDC automatically checks whether the source and target TiDB clusters are the same, preventing this misconfiguration issue.
 
     For more information, see [documentation](/ticdc/ticdc-manage-changefeed.md#security-mechanism).
 
