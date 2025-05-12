@@ -117,13 +117,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
   For more information, see [user documentation](/tiflash/tiflash-configuration.md#format_version).
 
-* Point-In-Time-Recovery (PITR) Now Supports Recovery from Compacted Log Backups for Faster Restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen) **tw@lilin90** <!--2001-->
+* Point-in-time recovery (PITR) supports recovery from compacted log backups for faster restores [#56522](https://github.com/pingcap/tidb/issues/56522) @[YuJuncen](https://github.com/YuJuncen) **tw@lilin90** <!--2001-->
 
-  Starting from v9.0.0, the compact log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
+    Starting from v9.0.0, the compact log backup feature provides offline compaction capabilities, converting unstructured log backup data into structured SST files. This results in the following improvements:
 
-  - SST files can be quickly imported into the cluster, **improving recovery performance**.
-  - Redundant data is removed during compaction, **reducing storage space consumption**.
-  - You can set longer full backup intervals while ensuring the Recovery Time Objective (RTO), **reducing the impact on applications**.
+    - SST files can be quickly imported into the cluster, **improving recovery performance**.
+    - Redundant data is removed during compaction, **reducing storage space consumption**.
+    - You can set longer full backup intervals while ensuring the Recovery Time Objective (RTO), **reducing the impact on applications**.
 
   For more information, see [documentation](/br/br-compact-log-backup.md).
 
