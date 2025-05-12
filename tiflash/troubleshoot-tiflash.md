@@ -174,7 +174,7 @@ If TiFlash replicas consistently fail to be created since the TiDB cluster is de
 
     > **Note:**
     >
-    > `count` is defaulted to 3. In production environments, the value is usually fewer than the number of TiKV nodes. In test environments, the value can be 1.
+    > `count` is defaulted to 3. In production environments, the value is usually fewer than the number of TiKV nodes. In test environments, when you allow there is only 1 Region replica, the value can be 1.
 
     {{< copyable "shell-regular" >}}
 
@@ -192,19 +192,19 @@ If TiFlash replicas consistently fail to be created since the TiDB cluster is de
         }' <http://172.16.x.xxx:2379/pd/api/v1/config/rule>
     ```
 
-5. Check whether the remaining disk space percentage on the machine where TiFlash nodes reside is higher than the [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio) value. The default value is 0.8, meaning when a node's used space exceeds 80% of its capacity, PD will avoid migrating Regions to that node to prevent disk space exhaustion. If all TiFlash nodes have insufficient remaining space, PD will stop scheduling new Region peers to TiFlash, causing replicas to remain in an unavailable state (progress < 1).
+5. Check the remaining disk space percentage on the TiFlash nodes. The default value of [`low-space-ratio`](/pd-configuration-file.md#low-space-ratio) is 0.8, meaning when a node's used space exceeds 80% of its capacity, PD will avoid migrating Regions to that node to prevent disk space exhaustion. If all TiFlash nodes have insufficient remaining space, PD will stop scheduling new Region peers to TiFlash, causing replicas to remain in an unavailable state (progress < 1).
 
     - If the disk usage reaches or exceeds `low-space-ratio`, it indicates insufficient disk space. In this case, one or more of the following actions can be taken:
 
-        - Modify the value of `low-space-ratio` to allow the PD to resume scheduling Regions to the TiFlash node. 
+        - Modify the value of `low-space-ratio` to allow the PD to resume scheduling Regions to the TiFlash node until it reach the new threshold. 
 
             ```
             tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} config set low-space-ratio 0.9
             ```
 
-        - Scale-out new TiFlash nodes, PD will balance Regions across TiFlash nodes and resumes scheduling Regions to TiFlash nodes with enough disk space.
+        - Scale-out new TiFlash nodes, PD will automatically balance Regions across TiFlash nodes and resumes scheduling Regions to TiFlash nodes with enough disk space.
 
-        - Remove unnecessary files from the TiFlash node disk, such as the `space_placeholder_file` file in the `${data}/flash/` directory. If necessary, set `storage.reserve-space` in tiflash-learner.toml to `0MB` at the same time to temporarily bring TiFlash back into service.
+        - Remove unnecessary files from the TiFlash node disk, such as the logging files, the `space_placeholder_file` file in the `${data}/flash/` directory. If necessary, set `storage.reserve-space` in tiflash-learner.toml to `0MB` at the same time to temporarily bring TiFlash back into service.
 
     - If the disk usage is below `low-space-ratio`, it indicates normal disk space availability. Proceed to the next step.
 
@@ -220,18 +220,17 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
 
 1. Check whether the replication is successful by running the `ALTER table <tbl_name> set tiflash replica <num>` command and check the output.
 
-    - If there is output, go to the next step.
-    - If there is no output, run the `SELECT * FROM information_schema.tiflash_replica` command to check whether TiFlash replicas have been created. If not, run the `ALTER table ${tbl_name} set tiflash replica ${num}` command again
+    - If the query is blocked, run the `SELECT * FROM information_schema.tiflash_replica` command to check whether TiFlash replicas have been created.
         - Check whether the DDL statement is executed as expected through [ADMIN SHOW DDL](/sql-statements/sql-statement-admin-show-ddl.md). Or there are any other DDL statement that block altering TiFlash replica statement being executed.
         - Check whether any DML statement is executed on the same table through [SHOW PROCESSLIST](/sql-statements/sql-statement-show-processlist.md) that blocks altering TiFlash replica statement being executed.
-        - If nothing is blocking the `ALTER TABLE ... SET TIFLASH REPLICA ...` being executed, go to the next step.
+    - You can wait until those queries or DDL finish or cancel them. If nothing is blocking the `ALTER TABLE ... SET TIFLASH REPLICA ...` being executed, go to the next step.
 
 2. Check whether TiFlash Region replication runs correctly.
 
-   Check whether there is any change in `progress`:
+   Check whether there is any change in `progress` of `information_schema.tiflash_replica`. Or you can check the `progress` field with keyword `Tiflash replica is not available` in TiDB logging:
 
    - If changes are detected, it indicates TiFlash replication is functioning normally (though potentially at a slower pace). Please refer to the "Data replication is slow" section for optimization configurations.
-   - If no, TiFlash replication is abnormal. In `tidb.log`, search the log saying `Tiflash replica is not available`. Check whether `progress` of the corresponding table is updated. If not, go to the next step.
+   - If no, TiFlash replication is abnormal, go to the next step.
 
 3. Check whether TiDB has created any placement rule for the table.
 
@@ -249,10 +248,10 @@ After deploying a TiFlash node and starting replication by executing `ALTER TABL
 
 5. Check whether the PD schedules properly.
 
-    Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`. Or check whether there are `add-rule-peer` operator on the "Operator/Schedule operator create" of PD Dashboard on Grafana.
+    Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`. Or check whether there are `add-rule-peer` operator on the "Operator/Schedule operator create" of PD Dashboard on Grafana. You can also check the value "Scheduler/Patrol Region time" of PD Dashboard on Grafana. "Patrol Region time" reflects the duration for PD to scan all Regions and generate scheduling operations. A high value may cause delays in scheduling.
 
     - If the keyword is found, the PD schedules properly.
-    - If not, the PD does not schedule properly.
+    - If no scheduling operations is generated, or the "Patrol Region time" is more than 30 minutes, the PD does not schedule properly or is scheduling slowly.
 
 If the above methods cannot resolve your issue, collect the TiDB, PD, TiFlash log files and [get support](/support.md) from PingCAP or the community.
 

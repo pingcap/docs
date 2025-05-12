@@ -134,7 +134,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 </CustomContent>
 
-Before TiFlash replicas are added, each TiKV instance performs a full table scan and sends the scanned data to TiFlash as a "snapshot" to create replicas. By default, TiFlash replicas are added slowly with fewer resources usage in order to minimize the impact on the online service. If there are spare CPU and disk IO resources in your TiKV and TiFlash nodes, you can accelerate TiFlash replication by performing the following steps.
+When TiFlash replicas for a table are added, or the Regions' TiFlash replicas being move to another TiFlash instance, the TiKV instance performs a table scan and sends the scanned data to TiFlash as a "snapshot" to create replicas. By default, TiFlash replicas are added slowly with fewer resources usage in order to minimize the impact on the online service. If there are spare CPU and disk IO resources in your TiKV and TiFlash nodes, you can accelerate TiFlash replication by performing the following steps.
 
 1. Temporarily increase the snapshot write speed limit for each TiKV and TiFlash instance by using the [Dynamic Config SQL statement](https://docs.pingcap.com/tidb/stable/dynamic-config):
 
@@ -146,9 +146,9 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
 
     After executing these SQL statements, the configuration changes take effect immediately without restarting the cluster. However, since the replication speed is still restricted by the PD limit globally, you cannot observe the acceleration for now.
 
-2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the new replica speed limit.
+2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the replica scheduling speed limit.
 
-    The default new replica speed limit is 30, which means, approximately 30 Regions add TiFlash replicas every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
+    The default new replica speed limit is 30, which means, approximately 30 Regions add or remove TiFlash replicas on 1 TiFlash store every minute. Executing the following command will adjust the limit to 60 for all TiFlash instances, which doubles the original speed:
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
@@ -177,7 +177,7 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
 
 3. After the TiFlash replication is complete, revert to the default configuration to reduce the impact on online services.
 
-    Execute the following PD Control command to restore the default new replica speed limit:
+    Execute the following PD Control command to restore the default replica scheduling speed limit:
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
