@@ -3,7 +3,8 @@
     "name": "TiDB",
     "version": "v8.5.0"
   },
-  "tidb-cloud": {
+  "product": {
+    "self-managed": "TiDB Self-Managed",
     "serverless": "TiDB Cloud Serverless",
     "dedicated": "TiDB Cloud Dedicated"
   }

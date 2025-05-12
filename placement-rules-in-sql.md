@@ -15,7 +15,7 @@ This feature can fulfill the following use cases:
 
 > **Note:**
 >
-> This feature is not available on [{{ .tidb-cloud.serverless }}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
+> This feature is not available on [{{ .product.serverless }}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) clusters.
 
 ## Overview
 
@@ -60,7 +60,7 @@ For detailed configuration methods, see the following examples:
 
 > **Note:**
 >
-> For {{ .tidb-cloud.dedicated }} clusters, you can skip these label configuration steps because the labels on TiKV nodes in {{ .tidb-cloud.dedicated }} clusters are configured automatically.
+> For {{ .product.dedicated }} clusters, you can skip these label configuration steps because the labels on TiKV nodes in {{ .product.dedicated }} clusters are configured automatically.
 
 </CustomContent>
 
