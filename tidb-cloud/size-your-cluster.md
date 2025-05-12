@@ -207,7 +207,7 @@ The Standard storage type is applied automatically to new clusters hosted on AWS
 
 #### Performance and Plus storage
 
-The Performance and Plus storage offer greater performance and stability,with corresponding price differentiation to match value delivered. Currently, these 2 types are only available upon request for AWS clusters. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiKV storage type" in the **Description** field and click **Submit**.
+The Performance and Plus storage offer greater performance and stability, with corresponding price differentiation to match value delivered. Currently, these 2 types are only available upon request for AWS clusters. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiKV storage type" in the **Description** field and click **Submit**.
 
 ## Size TiFlash
 
@@ -252,7 +252,7 @@ The supported node storage of different TiFlash vCPUs is as follows:
 >
 > You cannot decrease the TiFlash node storage after the cluster creation.
 
-### Tiflash node storage types
+### TiFlash node storage types
 
 TiDB Cloud provides the following TiFlash storage types for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS:
 
@@ -265,4 +265,4 @@ The Basic storage is ideal for most workloads, providing a balance between perfo
 
 #### Plus storage
 
-Plus storage offer greater performance and stability,with corresponding price differentiation to match value delivered. Currently, this type is only available upon request for AWS clusters. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiFlash storage type" in the **Description** field and click **Submit**.
+Plus storage offers greater performance and stability, with corresponding price differentiation to match value delivered. Currently, this type is only available upon request for AWS clusters. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for TiFlash storage type" in the **Description** field and click **Submit**.
