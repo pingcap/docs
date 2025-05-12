@@ -140,6 +140,11 @@ This document only describes the parameters that are not included in command-lin
 
 + The compression algorithm for gRPC messages
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
+
+    > **Warning:**
+    >
+    > TiDB supports `"none"` and `"gzip"` only
+
 + Default value: `"none"`
 
 ### `grpc-concurrency`
