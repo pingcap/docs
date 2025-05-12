@@ -141,6 +141,11 @@ This document only describes the parameters that are not included in command-lin
 
 + The compression algorithm for gRPC messages, which affects gRPC messages between TiKV nodes and gRPC response messages sent from TiKV to TiDB
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
+
+    > **Warning:**
+    >
+    > TiDB supports `"none"` and `"gzip"` only
+
 + Default value: `"none"`
 
 ### `grpc-concurrency`
