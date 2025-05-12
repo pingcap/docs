@@ -161,9 +161,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/index-advisor.md).
 
-* Improved Log Backup Compatibility during Snapshot Restores [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
+* Improve log backup compatibility during snapshot restores [#58685](https://github.com/pingcap/tidb/issues/58685) @[BornChanger](https://github.com/BornChanger) **tw@lilin90** <!--2000-->
 
-    Starting in v9.0.0, Log Backups can now continue to backup data during a snapshot restore in many conditions. This enables ongoing log backups to procede without having to stop them during the restore procedure.
+    Starting from v9.0.0, when a log backup task is running, if the conditions are met, you can still perform snapshot restore and allow the restored data to be properly recorded by the ongoing log backup. This enables ongoing log backups to proceed without having to stop them during the restore procedure.
 
     For more information, see [documentation](/br/br-pitr-manual.md#compatibility-between-ongoing-log-backup-and-snapshot-restore).
 
@@ -228,9 +228,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v9.0/quick-start-with-
 
     For more information, see [documentation](/ticdc/ticdc-architecture.md).
 
-* TiCDC Adds DDL and Watermark Event Support to Debezium Protocol [#11566](https://github.com/pingcap/tiflow/issues/11566) @[wk989898](https://github.com/wk989898) **tw@lilin90** <!--2009-->
+* TiCDC supports DDL events and WATERMARK events for the Debezium Protocol [#11566](https://github.com/pingcap/tiflow/issues/11566) @[wk989898](https://github.com/wk989898) **tw@lilin90** <!--2009-->
 
-    TiCDC's support for Debezium Style events adds support for DDL and Watermark event types. After an upstream DDL is successfully executed, TiCDC now encodes the DDL event into a Kafka message with the key and message in a Debezium-style format. The Watermark event is a TiCDC extension (generated when [`enable-tidb-extension`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) is set on the Kafka sink) that represents a special time point indicating that the events received before this Watermark are complete.
+    TiCDC now supports DDL and WATERMARK event types in Debezium style output. After an upstream DDL operation is successfully executed, TiCDC encodes the DDL event into a Kafka message with the key and message in a Debezium style format. The WATERMARK event, a TiCDC extension (available when [`enable-tidb-extension`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) is enabled in the Kafka sink), represents a special point in time and indicates that the events received before this point are complete.
 
     For more information, see [documentation](/ticdc/ticdc-debezium.md).
 
