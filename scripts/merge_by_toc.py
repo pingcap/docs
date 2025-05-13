@@ -10,6 +10,7 @@ from __future__ import print_function, unicode_literals
 import re
 import os
 import sys
+import json
 
 followups = []
 in_toc = False
@@ -91,6 +92,40 @@ for tp, lv, f in followups:
         tag = tag[3:]
     file_link_name[f] = tag.lower().replace(" ", "-")
 
+def load_variables():
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    variables_path = os.path.join(current_dir, "../variables.json")
+    try:
+        with open(variables_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        return {}
+variable_pattern = re.compile(r"{{\s*\.(.+?)\s*}}")
+
+def get_value_by_path(obj, path):
+    keys = path.split(".")
+    for key in keys:
+        if isinstance(obj, dict) and key in obj:
+            obj = obj[key]
+        else:
+            return ""
+    return str(obj)
+
+def replace_variables(text, variables):
+    return variable_pattern.sub(lambda m: get_value_by_path(variables, m.group(1).strip()), text)
+
+custom_id_heading_pattern = re.compile(
+    r"^(#+)\s+(.+?)\s*\{#([a-zA-Z0-9\-_]+)\}\s*$", re.MULTILINE
+)
+
+def insert_anchor_and_clean_heading(text):
+    def replace(match):
+        hashes = match.group(1)
+        title = match.group(2)
+        custom_id = match.group(3)
+        anchor = f'<a id="{custom_id}" name="{custom_id}"></a>'
+        return f"{anchor}\n{hashes} {title}"
+    return custom_id_heading_pattern.sub(replace, text)
 
 def replace_link_wrap(chapter, name):
 
@@ -140,6 +175,7 @@ def replace_heading_func(diff_level=0):
 def remove_copyable(match):
     return ""
 
+variables = load_variables()
 
 # stage 3, concat files
 for type_, level, name in followups:
@@ -151,6 +187,8 @@ for type_, level, name in followups:
         try:
             with open(name) as fp:
                 chapter = fp.read()
+                chapter = replace_variables(chapter, variables)
+                chapter = insert_anchor_and_clean_heading(chapter)
                 chapter = replace_link_wrap(chapter, name)
                 chapter = copyable_snippet_pattern.sub(remove_copyable, chapter)
 
